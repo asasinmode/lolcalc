@@ -103,7 +103,6 @@ export default defineComponent({
       calculateDamage(mainStats, mainItems, mainLevel, targetLevel){
          const attackDamageModifier = this.champion(true).id === "Kalista" ? 0.9 : 1
          const targetHealth = this.targetStats.health[targetLevel - 1]
-         // const targetHealth = 1000 // dummy
          const basicAttackDamageModifier = this.selectedItems(false).includes("3047") ? 0.88 : 1
 
          const healthDifference = ((targetHealth - mainStats.health[mainLevel - 1]) / 100) > 20 ? 20 : ((targetHealth - mainStats.health[mainLevel - 1]) / 100) < 0 ? 0 : ((targetHealth - mainStats.health[mainLevel - 1]) / 100)
@@ -131,9 +130,6 @@ export default defineComponent({
          }
          var effectiveArmor = (this.targetStats.armor[targetLevel - 1] - (mainStats.armorPenetration[0] * (0.6 + (0.4 * mainLevel / 18)))) * (1 - (mainStats.armorPenetration[1] / 100))
          var effectiveMagicResists = (this.targetStats.magicResists[targetLevel - 1] - mainStats.magicPenetration[0]) * (1 -(mainStats.magicPenetration[1] / 100))
-
-         // effectiveArmor = (0 - (mainStats.armorPenetration[0] * (0.6 + (0.4 * mainLevel / 18)))) * (1 - (mainStats.armorPenetration[1] / 100)) // dummy
-         // effectiveMagicResists = (0 - mainStats.magicPenetration[0]) * (1 -(mainStats.magicPenetration[1] / 100))   // dummy
 
          effectiveArmor = effectiveArmor < 0 ? 0 : effectiveArmor
          effectiveMagicResists = effectiveMagicResists < 0 ? 0 : effectiveMagicResists
@@ -233,7 +229,9 @@ export default defineComponent({
    watch: {
       watchables: {
          handler(){
-            this.updateChart()
+            if(this.chart != undefined){
+               this.updateChart()
+            }
          },
          deep: true
       }

@@ -4,6 +4,7 @@
          <div class="searchbarContainer centered">
             <input type="text" class="searchbar" v-model="textFilter" placeholder="search for champion..." />
          </div>
+         <img v-if="showDummy" :src="dummyURL" @click="selectChampion('targetDummy', true)" loading="lazy" :class="{'target': target === 'targetDummy'}">
          <img v-for="champion in filteredChampions" :key="champion.key" @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)" :class="{'main': main?.id === champion.id, 'target': target?.id === champion.id}" :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
       </div>
    </div>
@@ -13,13 +14,15 @@
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores";
+import dummyURL from "../assets/targetDummy icon.webp"
 
 export default defineComponent({
    name: "championOverlay",
-   emits: ['closeMe', 'selectChampion'],
+   props: ['showDummy'],
    data(){
       return {
-         textFilter: ""
+         textFilter: "",
+         dummyURL
       }
    },
    methods: {
@@ -54,7 +57,6 @@ export default defineComponent({
 
 <style scoped>
 .modalContainer{
-   max-height: 30em;
    overflow-y: auto;
    overflow-x: hidden;
 }
@@ -102,7 +104,6 @@ img.main.target{
    }
    .modalContainer{
       width: 40em;
-      height: 30em;
    }
 }
 </style>

@@ -47,6 +47,9 @@ export default defineComponent({
          return this.getSelectedItems(isMain)
       },
       selectItem(itemName, isForMe){
+         if(this.isMain && this.getTargetChampion === "targetDummy" && !isForMe){
+            return
+         }
          let tempCopy = [...this.selectedItems(isForMe)]
          if(tempCopy.includes(itemName)){
             tempCopy = tempCopy.filter(item => item != itemName)
@@ -58,7 +61,7 @@ export default defineComponent({
                   tempCopy.some(item => {
                      if(group.includes(item)){
                         tempCopy = tempCopy.filter(element => element !== item);
-                        return true
+                        return
                      }
                   })
                }
@@ -72,7 +75,7 @@ export default defineComponent({
       },
    },
    computed: {
-      ...mapState(useMainStore, ["patch", "mythics", "allItems", "itemGroupsCheck", "getSelectedItems"]),
+      ...mapState(useMainStore, ["patch", "mythics", "allItems", "itemGroupsCheck", "getSelectedItems", "getTargetChampion"]),
       sortedItems(){
          return Object.keys(this.allItems).map(key => {return {id: key, ...this.allItems[key]}}).sort((a, b) => a.gold.total - b.gold.total)
       },
@@ -93,7 +96,6 @@ export default defineComponent({
 
 <style scoped>
 .modalContainer{
-   max-height: 30em;
    overflow-y: auto;
    overflow-x: hidden;
 }
@@ -126,7 +128,6 @@ img.selected{
    }
    .modalContainer{
       width: 40em;
-      height: 30em;
    }
 }
 </style>

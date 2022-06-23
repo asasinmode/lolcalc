@@ -134,6 +134,9 @@ export const useMainStore = defineStore({
          return this.champions[this.mainChampion]
       },
       getTargetChampion(){
+         if(this.targetChampion === 'targetDummy'){
+            return 'targetDummy'
+         }
          return this.champions[this.targetChampion]
       },
       getSelectedItems: (state) => (isMain) => {

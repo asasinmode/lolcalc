@@ -334,27 +334,9 @@ main h3{
 .baseStatContainer label.tooltipAvailable{
    cursor: help;
 }
-.baseStatContainer label img{
-   width: 17px;
-   height: 17px;
-   margin-right: 0.5em;
-   filter: saturate(0) brightness(10);
-}
 @media (min-width: 768px) {
    .baseStats{
       flex-direction: row;
    }
-   .baseStatContainer{
-      /* width: calc(50% - 2em); */
-      margin-inline: 1em;
-   }
 }
-/* @media (min-width: 1152px){
-   .baseStatContainer{
-      width: calc(33% - 2em);
-   }
-   .baseStats{
-      padding-inline: 9%;
-   }
-} */
 </style>

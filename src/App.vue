@@ -30,7 +30,7 @@ export default defineComponent({
    computed: {
       ...mapState(useMainStore, ["getMainChampion", "getTargetChampion", "getCalculatedStats", "showModeTooltips", "patch"]),
       showResults(){
-         return this.getMainChampion != undefined && this.getTargetChampion != undefined && this.getCalculatedStats(true)[0].stats.attackDamage != undefined && this.getCalculatedStats(false).armor != undefined
+         return this.getMainChampion != undefined && this.getTargetChampion != undefined && this.getCalculatedStats(true)[0]?.stats.attackDamage != undefined && this.getCalculatedStats(false).armor != undefined
       }
    }
 })
@@ -119,14 +119,15 @@ p.indent{
 .modalContainer{
    position: fixed;
    left: 50%;
-   top: 5rem;
+   top: 3rem;
    transform: translateX(-50%);
    background: var(--bg1);
    box-shadow: 0 0 0.25em 0 var(--highlight1), 0 0 0.75em 0 var(--highlight2);
    padding: 1em;
    min-width: 20rem;
    max-width: 40rem;
-   max-height: 30em;
+   height: 30rem;
+   max-height: 80vh;
    overflow-y: auto;
    overflow-x: hidden;
 }
@@ -207,10 +208,59 @@ p.indent{
    border-color: var(--main1);
    outline: 0.25px solid var(--main1);
 }
-@media (max-height: 512px) {
-   .modalContainer{
-      top: 1rem;
-      max-height: 15em !important;
+.baseChampionInfoContainer{
+   width: 100%;
+}
+.baseChampionInfoContainer header{
+   flex-direction: column;
+   margin-bottom: 1em;
+}
+.baseChampionInfoContainer h1, h3{
+   text-align: center;
+}
+.baseChampionInfoContainer header img{
+   width: 100%;
+   height: auto;
+   border-radius: 4px;
+}
+.baseChampionInfoContainer main{
+   flex-direction: column;
+   padding-bottom: 1em;
+}
+.baseChampionInfoContainer main h3{
+   margin-bottom: 0.25em;
+}
+.baseChampionInfoContainer .baseStats{
+   display: flex;
+   flex-direction: column;
+}
+.baseChampionInfoContainer .baseStatContainer{
+   flex-direction: column;
+   padding-bottom: 0.5em;
+}
+.baseChampionInfoContainer .baseStatContainer label, .statInputContainer label{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-weight: bold;
+   color: var(--accent1);
+   padding-bottom: 0.2em;
+}
+.baseStatContainer label img, .statInputContainer label img{
+   width: 17px;
+   height: 17px;
+   margin-right: 0.5em;
+   filter: saturate(0) brightness(10);
+}
+@media (min-width: 768px) {
+   .baseChampionInfoContainer header img{
+      width: 50%;
+   }
+   .baseChampionInfoContainer .baseStats{
+      flex-direction: row;
+   }
+   .baseStatContainer{
+      margin-inline: 1em;
    }
 }
 </style>

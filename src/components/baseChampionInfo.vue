@@ -1,10 +1,10 @@
 <template>
-   <div class="baseChampionInfoContainer line">
+   <div class="baseChampionInfoContainer">
       <header class="centered">
          <h1>{{champion.name}}</h1>
          <img :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`" >
       </header>
-      <main class="centered">
+      <main class="centered line">
          <h3>base stats</h3>
          <section class="baseStats">
             <div class="baseStatContainer centered" v-for="(stat, name) in filteredStats" :key="stat.id">
@@ -24,19 +24,19 @@ import { useMainStore } from "@/stores";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-   name: 'baseChampionInfo',
-   props: ['target', 'isMain'],
+   name: "baseChampionInfo",
+   props: ["target", "isMain"],
    methods: {
-      iconURL(icon){
-         return new URL(`../assets/statIcons/${icon}.webp`, import.meta.url).href
+      iconURL(icon) {
+         return new URL(`../assets/statIcons/${icon}.webp`, import.meta.url).href;
       }
    },
-   computed:{
+   computed: {
       ...mapState(useMainStore, ["getChampion"]),
-      champion(){
-         return this.getChampion(this.target)
+      champion() {
+         return this.getChampion(this.target);
       },
-      baseStats(){
+      baseStats() {
          return {
             attackDamage: this.isMain ? {
                value: this.champion.stats.attackdamage,
@@ -58,70 +58,16 @@ export default defineComponent({
                value: this.champion.stats.attackspeed,
                growth: this.champion.id === "Jhin" ? 3 : this.champion.stats.attackspeedperlevel
             } : undefined
-         }
+         };
       },
-      filteredStats(){
+      filteredStats() {
          return Object.keys(this.baseStats).filter(key => {
-               return this.baseStats[key] != undefined
-         }).reduce((obj, key) => {return {...obj, [key]: this.baseStats[key]}}, {})
+            return this.baseStats[key] != undefined;
+         }).reduce((obj, key) => { return { ...obj, [key]: this.baseStats[key] }; }, {});
       }
    }
 })
 </script>
 
 <style scoped>
-.baseChampionInfoContainer{
-   width: 100%;
-   flex-direction: column;
-   padding-bottom: 1em;
-}
-header{
-   flex-direction: column;
-   margin-bottom: 1em;
-}
-h1, h3{
-   text-align: center;
-}
-header img{
-   width: 100%;
-   height: auto;
-   border-radius: 4px;
-}
-main{
-   flex-direction: column;
-}
-main h3{
-   margin-bottom: 0.25em;
-}
-.baseStats{
-   display: flex;
-   flex-direction: column;
-}
-.baseStatContainer{
-   flex-direction: column;
-   width: 10em;
-   padding-bottom: 0.5em;
-}
-.baseStatContainer label{
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   font-weight: bold;
-   color: var(--accent1);
-   padding-bottom: 0.2em;
-}
-.baseStatContainer label img{
-   width: 17px;
-   height: 17px;
-   margin-right: 0.5em;
-   filter: saturate(0);
-}
-@media (min-width: 768px) {
-   header img{
-      width: 50%;
-   }
-   .baseStats{
-      flex-direction: row;
-   }
-}
 </style>

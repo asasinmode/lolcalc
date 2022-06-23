@@ -11,7 +11,7 @@
          </div>
          <calculatedChampionInfo :isMain="true" />
       </div>
-      <div class="championContainer target" v-if="target !== undefined">
+      <div class="championContainer target" v-if="target !== undefined && target !== 'targetDummy'">
          <baseChampionInfo :target="target.id" :isMain="false" />
          <championILSelector :isMain="false" />
          <div class="itemsPreviewContainer" v-if="targetItems.length">
@@ -22,6 +22,7 @@
          </div>
          <calculatedChampionInfo :isMain="false" />
       </div>
+      <targetDummyInfo v-if="target === 'targetDummy'" />
    </div>
 </template>
 
@@ -29,12 +30,12 @@
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores";
+import baseChampionInfo from '@/components/baseChampionInfo.vue'; import championILSelector from '@/components/championILSelector.vue'; import calculatedChampionInfo from '@/components/calculatedChampionInfo.vue'; import targetDummyInfo from "@/components/targetDummyInfo.vue";
 
-import baseChampionInfo from '@/components/baseChampionInfo.vue'; import championILSelector from '@/components/championILSelector.vue'; import calculatedChampionInfo from '@/components/calculatedChampionInfo.vue'
 export default defineComponent({
    name: 'championComparison',
    components: {
-      baseChampionInfo, championILSelector, calculatedChampionInfo
+      baseChampionInfo, championILSelector, calculatedChampionInfo, targetDummyInfo
    },
    data(){
       return{

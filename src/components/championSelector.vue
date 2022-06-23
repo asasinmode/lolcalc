@@ -22,10 +22,11 @@
             <p>It calculates stats of selected champions and items, then displays the graph that shows the damage you can expect (see the <b>disclaimers</b> tab) to see in game when you auto attack target champion.</p><br/>
             <p>The graph has 2 settings. If you want to learn more about it visit the <b>graph</b> tab.</p>
             <p class="indent">If you have either <b>Lord Dominik's Regards</b> or <b>The Collector</b> selected on your main champion the graph will automatically show both of their their respective damage outputs.</p><br/>
-            <p>At the moment there is no way of manually setting champions' statistics. However if you want to request this or any other feature visit the <b>about</b> tab to see where you can contact me.</p><br/>
+            <p>To manually set stats of the <b>target</b> champion click the <b>select target</b> button then choose <b>Target Dummy's</b> icon.</p><br/>
+            <p>If you want to request a feature visit the <b>about</b> tab to see where you can contact me.</p><br/>
             <p>Visit the <b>toggles</b> tab to toggle tooltips on graph settings or item groups.</p><br/>
             <div class="centered">
-               <strong style="color: hsl(0, 100%, 45%);">There are no major updates planned for the site unless it's actually used by people.</strong></div><br/>
+               <strong style="color: hsl(0, 100%, 45%);">There are no major updates planned.</strong></div><br/>
             <div class="centered">
                Current patch:<b style="margin-left: 0.5em;">{{patch}}</b>
             </div>
@@ -132,7 +133,7 @@
          </div>
       </div>
    </div>
-   <championOverlay v-show="showChampionOverlay" @closeMe="showChampionOverlay = false" @selectChampion="selectChampion" />
+   <championOverlay v-show="showChampionOverlay" @closeMe="showChampionOverlay = false" @selectChampion="selectChampion" :showDummy="!ownChampion" />
 </template>
 
 <script>
@@ -157,7 +158,11 @@ export default defineComponent({
    methods: {
       ...mapActions(useMainStore, ["setShowModeTooltips", "setItemGroupsCheck", "setApVisibility", "setMainChampion", "setTargetChampion"]),
       selectChampion(champion, isMain){
-         this[this.ownChampion ? isMain ? 'setMainChampion' : 'setTargetChampion' : isMain ? 'setTargetChampion' : 'setMainChampion']({champion: champion})
+         if(champion === 'targetDummy'){
+            this.setTargetChampion({champion: 'targetDummy'})
+         } else{
+            this[this.ownChampion ? isMain ? 'setMainChampion' : 'setTargetChampion' : isMain ? 'setTargetChampion' : 'setMainChampion']({champion: champion})
+         }
       },
       openChampionOverlay(own){
          this.showChampionOverlay = true
