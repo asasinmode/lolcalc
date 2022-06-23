@@ -7,7 +7,7 @@ Ornnaments.forEach(id => {delete itemData.data[id]})
 export const useMainStore = defineStore({
    id: 'counter',
    state: () => ({
-      patch: '12.11.1',
+      patch: '12.12.1',
       champions: championData.data,
       allItems: itemData.data,
       mythics: ["6693", "6692", "6691", "6673", "6672", "6671", "6664", "6662", "6656", "6655", "6653", "6632", "6631", "6630", "6617", "6616", "4644", "4636", "4633", "4005", "3190", "3152", "3078", "3068", "3001", "2065"],
@@ -29,7 +29,8 @@ export const useMainStore = defineStore({
          {id: "6692", percentage: 0, lethality: 18},  // eclipse
          {id: "6693", percentage: 0, lethality: 18},  // prowler's claw
          {id: "6694", percentage: 0.3, lethality: 0}, // serylda's grudge
-         {id: "6695", percentage: 0, lethality: 12}   // serpent's fang
+         {id: "6695", percentage: 0, lethality: 12},   // serpent's fang
+         {id: "6696", percentage: 0, lethality: 10}   // axiom arc
       ],
       magicPenItems: [
          {id: "3020", percentage: 0, flat: 18},  // sorcerer's shoes
@@ -58,7 +59,7 @@ export const useMainStore = defineStore({
          {id: "3119", description: "bonus health equal to 8% maximum mana."}, // winter's approach
          {id: "3121", description: "bonus health equal to 8% maximum mana."}, // fimbul winter
          {id: "3124", description: "40 bonus physical damage on-hit per 20% critical strike chance."}, // guinsoo's rageblade
-         {id: "3748", description: "bonus attack damage equal to 2% bonus health."}, // titanic hydra
+         {id: "3748", description: "bonus attack damage equal to 2% bonus health. Deal bonus physical damage on hit based on maximum hp."}, // titanic hydra
          {id: "4005", description: "+15 ability power per other legendary item."}, // imperial mandate
          {id: "4633", description: "+8 ability power per other legendary item."}, // riftmaker
          {id: "4637", description: "bonus ability power equal to 2% bonus health."}, // demonic embrace
