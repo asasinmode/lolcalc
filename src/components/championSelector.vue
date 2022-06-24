@@ -51,6 +51,7 @@
                <p class="fakeList">Pyke</p>
                <p class="fakeList">Ryze</p>
                <p class="fakeList">Vladimir</p>
+               <p class="fakeList">Warwick</p>
                <p class="fakeList">Yasuo/Yone</p><br/>
             <p><strong>Item/mythic passives</strong>. If the item displays little black square in it's top right corner with letter "P" inside, it means it's passive is included in calculations.</p>
             <p class="indent">General idea is simple passives, like <i>Plated Steelcaps'</i> 12% damage reduction or passives with major impact, like <i>Infinity Edge's</i> are accounted for.</p>
