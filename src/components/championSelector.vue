@@ -21,7 +21,7 @@
             <p class="indent">It's best experienced on desktop but I tried to make it look presentable on phone as well.</p><br/>
             <p>It calculates stats of selected champions and items, then displays the graph that shows the damage you can expect (see the <b>disclaimers</b> tab) to see in game when you auto attack target champion.</p><br/>
             <p>The graph has 2 settings. If you want to learn more about it visit the <b>graph</b> tab.</p>
-            <p class="indent">If you have either <b>Lord Dominik's Regards</b> or <b>The Collector</b> selected on your main champion the graph will automatically show both of their their respective damage outputs.</p><br/>
+            <p class="indent">If you have either <b>Lord Dominik's Regards</b> or <b>The Collector</b> selected on your main champion the graph will automatically show both of their their respective damage outputs. To compare other builds with each other I recommend opening this app in multiple browser tabs.</p><br/>
             <p>To manually set stats of the <b>target</b> champion click the <b>select target</b> button then choose <b>Target Dummy's</b> icon.</p><br/>
             <p>If you want to request a feature visit the <b>about</b> tab to see where you can contact me.</p><br/>
             <p>Visit the <b>toggles</b> tab to toggle tooltips on graph settings or item groups.</p><br/>
@@ -93,7 +93,7 @@
             <p><i>That being said you can look around the source code <a href="https://github.com/asasinmode/collector/" target="_blank">here</a>.</i></p>
          </div>
          <div class="infoContent" v-else-if="infoIndex === 4">
-            <div class="infoToggleContainer">
+            <div class="infoToggleContainer line">
                <h3 class="centered">toggle item groups</h3>
                <div class="infoToggleButtonContainer centered">
                   <button class="button infoToggleButton" @click="setItemGroupsCheck">
@@ -104,7 +104,7 @@
                </div>
                <p>Makes item selection ignore <a href="https://leagueoflegends.fandom.com/wiki/Item_group#Item_restrictions_and_groups" target="_blank">item group</a> limitations normally present in-game. Calculations for items that aren't designed to be shipped together are most likely <b>incorrect</b>.</p>
             </div>
-            <div class="infoToggleContainer">
+            <div class="infoToggleContainer line">
                <h3 class="centered">toggle graph settings tooltips</h3>
                <div class="infoToggleButtonContainer centered">
                   <button class="button infoToggleButton" @click="toggleShowModeTooltips">
@@ -224,7 +224,7 @@ export default defineComponent({
    padding-bottom: 1em;
 }
 .infoToggleContainer:not(:last-child){
-   padding-bottom: 1em;
+   padding-bottom: 1.5em;
 }
 .infoToggleButton{
    width: 100%;
@@ -261,5 +261,11 @@ export default defineComponent({
 }
 .infoToggleButton:hover .showcaseTooltip{
    visibility: visible
+}
+.infoToggleContainer.line::after{
+   bottom: 1em;
+   left: 0;
+   right: 0;
+   background: var(--highlight2);
 }
 </style>
