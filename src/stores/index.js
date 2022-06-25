@@ -1,6 +1,36 @@
 import { defineStore } from 'pinia'; import * as championData from '@/assets/champion.json'; import * as itemData from '@/assets/item.json'
 const uselessItems = [1035, 1039, 1040, 1500, 1501, 1502, 1503, 1504, 1505, 1506, 1507, 1508, 1509, 1510, 1511, 1512, 1513, 1514, 1515, 1516, 1517, 1518, 1519, 2003, 2010, 2031, 2033, 2052, 2055, 2138, 2139, 2140, 2403, 2419, 2420, 2421, 2423, 2424, 3330, 3340, 3363, 3364, 3400, 3513, 3599, 3600, 3901, 3902, 3903, 4403, 4638, 4643, 7050]
 const Ornnaments = [7000, 7001, 7002, 7003, 7004, 7005, 7006, 7007, 7008, 7009, 7010, 7011, 7012, 7013, 7014, 7015, 7016, 7017, 7018, 7019, 7020, 7021, 7022, 7023, 7024]
+const armorPenItems = [
+   {id: "3035", percentage: 0.18, lethality: 0}, // last whisper
+   {id: "3036", percentage: 0.3, lethality: 0},// lord dominik's regards
+   {id: "3134", percentage: 0, lethality: 10},  // serrated dirk
+   {id: "3142", percentage: 0, lethality: 18},  // youmuu's ghostblade
+   {id: "3179", percentage: 0, lethality: 10},  // umbral glaive
+   {id: "3814", percentage: 0, lethality: 10},  // edge of night
+   {id: "6676", percentage: 0, lethality: 12},  // collector
+   {id: "6691", percentage: 0, lethality: 18},  // duskblade of draktharr
+   {id: "6692", percentage: 0, lethality: 18},  // eclipse
+   {id: "6693", percentage: 0, lethality: 18},  // prowler's claw
+   {id: "6694", percentage: 0.3, lethality: 0}, // serylda's grudge
+   {id: "6695", percentage: 0, lethality: 12},   // serpent's fang
+   {id: "6696", percentage: 0, lethality: 10}   // axiom arc
+]
+const magicPenItems = [
+   {id: "3020", percentage: 0, flat: 18},  // sorcerer's shoes
+   {id: "3135", percentage: 0.4, flat: 0},  // void staff
+   {id: "3152", percentage: 0, flat: 6},  // hextech rocketbelt
+   {id: "4630", percentage: 0.13, flat: 0},  // blighting jewel
+   {id: "6655", percentage: 0, flat: 6},  // luden's tempest
+]
+armorPenItems.forEach(item => {
+   const newKey = item.percentage != 0 ? "PercentageArmorPenetrationMod" : "FlatArmorPenetrationMod"
+   itemData.data[item.id].stats[newKey] = item.percentage != 0 ? item.percentage : item.lethality
+})
+magicPenItems.forEach(item => {
+   const newKey = item.percentage != 0 ? "PercentageMagicPenetrationMod" : "FlatMagicPenetrationMod"
+   itemData.data[item.id].stats[newKey] = item.percentage != 0 ? item.percentage : item.flat
+})
 uselessItems.forEach(id => {delete itemData.data[id]})
 Ornnaments.forEach(id => {delete itemData.data[id]})
 
@@ -70,7 +100,6 @@ export const useMainStore = defineStore({
          {id: "6664", description: "+50 health per other legendary item."},   // turbo chemtank
          {id: "6672", description: "+10% bonus attack speed per other legendary item."},  // kraken slayer
          {id: "6673", description: "+5 attack damage, +70 health per other legendary item."},   // immortal shieldbow
-         // {id: "6676", description: "reduces target health by 5%."},   // collector
          {id: "6677", description: "35 bonus physical damage on-hit per 20% critical strike chance."},   // rageclaw
          {id: "6692", description: "+4% armor penetration per other legendary item."}, // eclipse
          {id: "6693", description: "+5 lethality per other legendary item."}, // prowler's claw
@@ -119,7 +148,8 @@ export const useMainStore = defineStore({
       },
       showModeTooltips: true,
       itemGroupsCheck: true,
-      apVisibility: false
+      apVisibility: false,
+      itemStatsVisibility: true
    }),
    getters: {
       filterArmorPenItems: (state) => (items) => {
@@ -190,6 +220,9 @@ export const useMainStore = defineStore({
       },
       setApVisibility(){
          this.apVisibility = !this.apVisibility
+      },
+      setItemStatsVisibility(){
+         this.itemStatsVisibility = !this.itemStatsVisibility
       }
    }
 })

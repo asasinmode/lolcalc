@@ -89,8 +89,16 @@ export default defineComponent({
          const itemsHealth = this.sumValuesOf(items, "FlatHPPoolMod") + mythicPassiveHealth
          const itemsMana = this.champion.partype === "Mana" ? this.sumValuesOf(items, "FlatMPPoolMod") : 0
 
-         const [finalLethality, finalPercentPhysicalPenetration] = this.calculateArmorPen(this.filterArmorPenItems(items))
-         const [finalFlatMagicPenetration, finalPercentMagicalPenetration] = this.calculateMagicPen(this.filterMagicPenItems(items))
+         const mythicPassiveLethality = this.legendaries(this.isMain).length * (items.includes("6693") ? 5 : 0)
+         const finalLethality = this.sumValuesOf(items, "FlatArmorPenetrationMod") + mythicPassiveLethality
+         const mythicPassiveArmorPenetration = (this.legendaries(this.isMain).length * (items.includes("6692") ? 4 : 0)) + (this.legendaries(this.isMain).length * (items.includes("6632") ? 5 : 0))
+         const finalPercentPhysicalPenetration = (this.sumValuesOf(items, "PercentageArmorPenetrationMod") * 100) + mythicPassiveArmorPenetration
+
+         const mythicPassiveFlatMagicPenetration = this.legendaries(true).length * ((items.includes("3152") || items.includes("6655")) ? 5 : 0)
+         const finalFlatMagicPenetration = this.sumValuesOf(items, "FlatMagicPenetrationMod") + mythicPassiveFlatMagicPenetration
+         const mythicPassivePercentageMagicPenetration = this.legendaries(true).length * (items.includes("6632") ? 5 : 0)
+         const finalPercentMagicPenetration = (this.sumValuesOf(items, "PercentageMagicPenetrationMod") * 100) + mythicPassivePercentageMagicPenetration
+
          const finalCritChance = this.critChance(items)[0]
          const finalCritDamage = this.critDamage(items)
 
@@ -222,7 +230,7 @@ export default defineComponent({
          calculated.attackSpeed = finalAttackSpeedArray
          calculated.criticalStrike = [finalCritChance, finalCritDamage]
          calculated.armorPenetration = [finalLethality, finalPercentPhysicalPenetration]
-         calculated.magicPenetration = [finalFlatMagicPenetration, finalPercentMagicalPenetration]
+         calculated.magicPenetration = [finalFlatMagicPenetration, finalPercentMagicPenetration]
 
          return calculated
       },
@@ -231,7 +239,7 @@ export default defineComponent({
       }
    },
    computed:{
-      ...mapState(useMainStore, ["getSelectedItems", "allItems", "mythics", "adaptiveForceBias", "armorPenItems", "getLevel", "getMainChampion", "getTargetChampion", "apVisibility", "getItem", "getSelectedItems", "filterArmorPenItems", "filterMagicPenItems", "asRatioChampions"]),
+      ...mapState(useMainStore, ["getSelectedItems", "allItems", "mythics", "adaptiveForceBias", "getLevel", "getMainChampion", "getTargetChampion", "apVisibility", "getItem", "getSelectedItems", "filterArmorPenItems", "filterMagicPenItems", "asRatioChampions"]),
       selectedItems(){
          return this.getSelectedItems(this.isMain)
       },

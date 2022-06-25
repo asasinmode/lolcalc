@@ -4,8 +4,14 @@
          <div class="searchbarContainer centered">
             <input type="text" class="searchbar" v-model="textFilter" placeholder="search for champion..." />
          </div>
-         <img v-if="showDummy" :src="dummyURL" @click="selectChampion('targetDummy', true)" loading="lazy" :class="{'target': target === 'targetDummy'}">
-         <img v-for="champion in filteredChampions" :key="champion.key" @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)" :class="{'main': main?.id === champion.id, 'target': target?.id === champion.id}" :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
+         <div class="imagesContainer">
+            <button v-if="showDummy" @click="selectChampion('targetDummy', true)" :class="{'target': target === 'targetDummy'}">
+               <img :src="dummyURL" loading="lazy">
+            </button>
+            <button v-for="champion in filteredChampions" :key="champion.key" @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)" :class="{'main': main?.id === champion.id, 'target': target?.id === champion.id}" >
+               <img :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
+            </button>
+         </div>
       </div>
    </div>
 </template>
@@ -56,38 +62,49 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.modalContainer{
-   overflow-y: auto;
-   overflow-x: hidden;
-}
 .searchbar{
    width: 100%;
 }
-img{
-   cursor: pointer;
-   display: inline-block;
-   width: calc((100% / 6));
-   height: auto;
-   padding-bottom: 0;
-   margin-top: -0.25em;
+.modalContainer{
+   display: flex;
+   flex-direction: column;
+   padding: 1em;
+}
+.imagesContainer{
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+}
+button{
+   border: none;
+   background: transparent;
+   position: relative;
+   display: flex;
+   vertical-align: middle;
+   min-width: 3em;
+   width: calc(100% / 6);
+   aspect-ratio: 1;
    border-radius: 4px;
+   padding: 0;
+}
+img{
+   width: 100%;
+   height: 100%;
    filter:brightness(0.6);
 }
-img:hover{
+button:hover img, button.main img, button.target img{
    filter: brightness(1);
 }
-img.main, img.target{
+button.main, button.target{
    z-index: 1;
-   position: relative;
-   filter: brightness(1);
 }
-img.main{
+button.main{
    box-shadow: 0 0 0.75em 0.05em hsl(120, 100%, 50%);
 }
-img.target{
+button.target{
    box-shadow: 0 0 0.75em 0.05em hsl(0, 100%, 50%);
 }
-img.main.target{
+button.main.target{
    animation: both 750ms ease infinite alternate;
 }
 @keyframes both{
@@ -99,11 +116,8 @@ img.main.target{
    }
 }
 @media (min-width: 768px) {
-   img{
-      width: calc((100% / 8));
-   }
-   .modalContainer{
-      width: 40em;
+   button {
+      width: calc(100% / 8);
    }
 }
 </style>

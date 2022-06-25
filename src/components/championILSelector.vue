@@ -1,7 +1,7 @@
 <template>
    <div class="ILSelectorcontainer">
       <div class="ilButtonContainer">
-         <button class="button flexCentered" @click="showItemOverlay = true">select items</button>
+         <button class="button flexCentered" @click="$emit('openOverlay', isMain)">select items</button>
       </div>
       <div class="ilButtonContainer levelSelect">
          <label for="levelSelect" >level</label>
@@ -10,24 +10,18 @@
          </select>
       </div>
    </div>
-   <itemOverlay v-show="showItemOverlay" :isMain="isMain" @closeMe="showItemOverlay = false" />
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { mapActions } from "pinia";
 import { useMainStore } from "@/stores";
-import itemOverlay from '@/components/itemOverlay.vue'
 
 export default defineComponent({
    name: 'championILSelector',
    props: ['isMain'],
-   components: {
-      itemOverlay
-   },
    data(){
       return {
-         showItemOverlay: false,
          selectedLevel: 1,
       }
    },

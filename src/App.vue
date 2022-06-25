@@ -1,9 +1,7 @@
 <template>
-   <div id="app">
-      <championSelector />
-      <championComparison />
-      <results v-if="showResults" />
-   </div>
+   <championSelector />
+   <championComparison />
+   <results v-if="showResults" />
 </template>
 
 <script>
@@ -56,6 +54,7 @@ export default defineComponent({
    padding: 0;
    transition: all 100ms ease;
    color: var(--main1);
+   -webkit-tap-highlight-color: transparent;
 }
 html, body{
    width: 100%;
@@ -95,10 +94,12 @@ p.indent{
 .button{
    background: transparent;
    border: none;
-   cursor: pointer;
    padding: 0.7em;
    font-weight: bold;
    font-size: 1em;
+}
+button{
+   cursor: pointer;
 }
 .button:hover{
    background: var(--highlight1);
@@ -119,20 +120,18 @@ p.indent{
 .modalContainer{
    position: fixed;
    left: 50%;
-   top: 3rem;
+   top: 2.5rem;
    transform: translateX(-50%);
    background: var(--bg1);
-   box-shadow: 0 0 0.25em 0 var(--highlight1), 0 0 0.75em 0 var(--highlight2);
-   padding: 1em;
-   min-width: 20rem;
-   max-width: 40rem;
-   height: 30rem;
-   max-height: 80vh;
-   overflow-y: auto;
+   width: 100%;
+   max-width: calc(100% - 4rem);
+   height: 100%;
+   max-height: calc(100% - 6rem);
    overflow-x: hidden;
+   overflow-y: scroll;
 }
-.modalContainer > *{
-   padding-bottom: 0.7rem;
+.itemTooltip, .modalContainer{
+   box-shadow: 0 0 0.25em 0 var(--highlight1), 0 0 0.75em 0 var(--highlight2);
 }
 .modalContainer h1{
    text-align: center;
@@ -246,13 +245,18 @@ p.indent{
    color: var(--accent1);
    padding-bottom: 0.2em;
 }
-.baseStatContainer label img, .statInputContainer label img{
+.baseStatContainer label img, .statInputContainer label img, .itemTooltip img{
    width: 17px;
    height: 17px;
-   margin-right: 0.5em;
-   filter: saturate(0) brightness(10);
+}
+.baseStatContainer label img, .statInputContainer label img{
+margin-right: 0.5em;
 }
 @media (min-width: 768px) {
+   .modalContainer{
+      max-width: 40rem;
+      max-height: 30rem;
+   }
    .baseChampionInfoContainer header img{
       width: 50%;
    }

@@ -2,7 +2,7 @@
    <div class="container">
       <div class="championContainer main" v-if="main !== undefined">
          <baseChampionInfo :target="main.id" :isMain="true" />
-         <championILSelector :isMain="true" />
+         <championILSelector :isMain="true" @openOverlay="handleItemOverlay" />
          <div class="itemsPreviewContainer" v-if="mainItems.length">
             <div class="itemPreview" v-for="itemName in mainItems" :key="itemName.id" :class="{passive: passives.find(passive => passive.id === itemName)}">
                <img :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item(itemName).image.full}`" :title="item(itemName).name"/>
@@ -13,7 +13,7 @@
       </div>
       <div class="championContainer target" v-if="target !== undefined && target !== 'targetDummy'">
          <baseChampionInfo :target="target.id" :isMain="false" />
-         <championILSelector :isMain="false" />
+         <championILSelector :isMain="false" @openOverlay="handleItemOverlay" />
          <div class="itemsPreviewContainer" v-if="targetItems.length">
             <div class="itemPreview" v-for="itemName in targetItems" :key="itemName.id" :class="{passive: passives.find(passive => passive.id === itemName)}">
                <img :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item(itemName).image.full}`" :title="item(itemName).name"/>
@@ -24,22 +24,29 @@
       </div>
       <targetDummyInfo v-if="target === 'targetDummy'" />
    </div>
+   <itemOverlay v-show="showItemOverlay" :isMain="isMainItemOverlay" @closeMe="showItemOverlay = false" />
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores";
-import baseChampionInfo from '@/components/baseChampionInfo.vue'; import championILSelector from '@/components/championILSelector.vue'; import calculatedChampionInfo from '@/components/calculatedChampionInfo.vue'; import targetDummyInfo from "@/components/targetDummyInfo.vue";
+import baseChampionInfo from '@/components/baseChampionInfo.vue';
+import championILSelector from '@/components/championILSelector.vue';
+import calculatedChampionInfo from '@/components/calculatedChampionInfo.vue';
+import targetDummyInfo from "@/components/targetDummyInfo.vue";
+import itemOverlay from "@/components/itemOverlay.vue";
 
 export default defineComponent({
    name: 'championComparison',
    components: {
-      baseChampionInfo, championILSelector, calculatedChampionInfo, targetDummyInfo
+      baseChampionInfo, championILSelector, calculatedChampionInfo, targetDummyInfo, itemOverlay
    },
    data(){
       return{
          hoveredItem: undefined,
+         showItemOverlay: false,
+         isMainItemOverlay: true
       }
    },
    methods:{
@@ -49,6 +56,10 @@ export default defineComponent({
       passive(item){
          return this.passives.find(passive => passive.id === item)
       },
+      handleItemOverlay(isMain){
+         this.showItemOverlay = true
+         this.isMainItemOverlay = isMain
+      }
    },
    computed:{
       ...mapState(useMainStore, ["patch", "getMainChampion", "getTargetChampion", "getSelectedItems", "passives", "getItem"]),

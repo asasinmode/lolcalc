@@ -70,11 +70,12 @@
                <p class="fakeList">Aphelios</p>
                <p class="fakeList">Fizz</p>
                <p class="fakeList">Graves</p>
+               <p class="fakeList">Hecarim</p>
                <p class="fakeList">Kassadin</p>
                <p class="fakeList">Master Yi</p>
                <p class="fakeList">Sett</p><br/>
             <p><strong>Item/mythic passives</strong> that are complex, stacking, or proc occasionally (energized/spellblade effects). Examples being <i>Trinity Force</i>, <i>Black Cleaver</i>, <i>Force of Nature</i>, <i>Phantom Dancer</i>, <i>Warden's Mail</i>, <i>Stormrazor</i>, <i>Rapid Firecannon</i>.</p><br/>
-            <p><strong>On-hit</strong>. 3 item exceptions listed above in <strong>what is accounted for</strong> section and champion innate passive on-hit effects like Orianna's <i>Clockwork Windup</i> or Tahm Kench's <i>An Acquired Taste</i> <strong>are not</strong> accounted for.</p><br/>
+            <p><strong>On-hit</strong>. 3 item exceptions listed above in <strong>what is accounted for</strong> section and champion innate passive on-hit effects like Orianna's <i>Clockwork Windup</i> or Tahm Kench's <i>An Acquired Taste</i> <strong>are not</strong> accounted for.</p>
          </div>
          <div class="infoContent" v-else-if="infoIndex === 2">
             <p>The graph shows a point for levels 1-18, each point representing the total (physical + magical with target's resists taken into account) damage your selected champions is going to deal (see the <b>disclaimers</b> tab) to the target at specific level.</p>
@@ -94,16 +95,27 @@
             <p><i>That being said you can look around the source code <a href="https://github.com/asasinmode/collector/" target="_blank">here</a>.</i></p>
          </div>
          <div class="infoContent" v-else-if="infoIndex === 4">
-            <div class="infoToggleContainer line">
-               <h3 class="centered">toggle item groups</h3>
+         <div class="infoToggleContainer line">
+               <h3 class="centered">toggle ap/magic penetration/mana visibility</h3>
                <div class="infoToggleButtonContainer centered">
-                  <button class="button infoToggleButton" @click="setItemGroupsCheck">
+                  <button class="button infoToggleButton" @click="setApVisibility">
                      <div>on</div>
                      <div>off</div>
-                     <div class="infoToggleButtonHighlight" :class="{on: itemGroupsCheck}" />
+                     <div class="infoToggleButtonHighlight" :class="{on: apVisibility}" />
                   </button>
                </div>
-               <p>Makes item selection ignore <a href="https://leagueoflegends.fandom.com/wiki/Item_group#Item_restrictions_and_groups" target="_blank">item group</a> limitations normally present in-game. Calculations for items that aren't designed to be shipped together are most likely <b>incorrect</b>.</p>
+               <p>Toggles the visibility of ability power and magic penetration on main champion and mana on target champion.</p>
+            </div>
+            <div class="infoToggleContainer line">
+               <h3 class="centered">toggle item stats visibility</h3>
+               <div class="infoToggleButtonContainer centered">
+                  <button class="button infoToggleButton" @click="setItemStatsVisibility">
+                     <div>on</div>
+                     <div>off</div>
+                     <div class="infoToggleButtonHighlight" :class="{on: itemStatsVisibility}" />
+                  </button>
+               </div>
+               <p>Toggles the visibility of item stats in item overlay.</p>
             </div>
             <div class="infoToggleContainer line">
                <h3 class="centered">toggle graph settings tooltips</h3>
@@ -118,15 +130,15 @@
                <p>Toggles the visibility of graph settings tooltips.</p>
             </div>
             <div class="infoToggleContainer">
-               <h3 class="centered">toggle ap/magic penetration/mana visibility</h3>
+               <h3 class="centered">toggle item groups</h3>
                <div class="infoToggleButtonContainer centered">
-                  <button class="button infoToggleButton" @click="setApVisibility">
+                  <button class="button infoToggleButton" @click="setItemGroupsCheck">
                      <div>on</div>
                      <div>off</div>
-                     <div class="infoToggleButtonHighlight" :class="{on: apVisibility}" />
+                     <div class="infoToggleButtonHighlight" :class="{on: itemGroupsCheck}" />
                   </button>
                </div>
-               <p>Toggles the visibility of ability power and magic penetration on main champion and mana on target champion.</p>
+               <p>Makes item selection ignore <a href="https://leagueoflegends.fandom.com/wiki/Item_group#Item_restrictions_and_groups" target="_blank">item group</a> limitations normally present in-game. Calculations for items that aren't designed to be shipped together are most likely <b>incorrect</b>.</p>
             </div>
          </div>
          <div class="infoContent" v-else-if="infoIndex === 5">
@@ -158,7 +170,7 @@ export default defineComponent({
       }
    },
    methods: {
-      ...mapActions(useMainStore, ["setShowModeTooltips", "setItemGroupsCheck", "setApVisibility", "setMainChampion", "setTargetChampion"]),
+      ...mapActions(useMainStore, ["setShowModeTooltips", "setItemGroupsCheck", "setApVisibility", "setMainChampion", "setTargetChampion", "setItemStatsVisibility"]),
       selectChampion(champion, isMain){
          if(champion === 'targetDummy'){
             this.setTargetChampion({champion: 'targetDummy'})
@@ -175,7 +187,7 @@ export default defineComponent({
       }
    },
    computed:{
-      ...mapState(useMainStore, ["itemGroupsCheck", "showModeTooltips", "apVisibility", "patch"])
+      ...mapState(useMainStore, ["itemGroupsCheck", "showModeTooltips", "apVisibility", "patch", "itemStatsVisibility"])
    }
 })
 </script>
@@ -200,9 +212,6 @@ export default defineComponent({
    justify-content: center;
    align-items: center;
    padding: 0 !important;
-}
-.modalContainer{
-   padding: 0;
 }
 .infoButtonsContainer{
    display: flex;
