@@ -183,7 +183,7 @@ export default defineComponent({
          this.ownChampion = own
       },
       toggleShowModeTooltips(){
-         this.setShowModeTooltips('setShowModeTooltips', !this.showModeTooltips)
+         this.setShowModeTooltips(!this.showModeTooltips)
       }
    },
    computed:{
