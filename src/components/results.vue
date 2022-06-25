@@ -172,7 +172,9 @@ export default defineComponent({
       },
       onHitDamage(stats, level, items){ // [physical, magic]
          const bonusAttackDamage = stats.attackDamage[level - 1] - this.calculateStat(this.getMainChampion.stats.attackdamage, level, this.getMainChampion.stats.attackdamageperlevel)
+
          const championPassiveWarwickOnHit = this.getMainChampion.id === "Warwick" ? (10 + (2 * level)) + (bonusAttackDamage * 0.15) + (stats.abilityPower[level - 1] * 0.1) : 0  // warwick passive bonus magical damage on hit
+         const championPassiveRammusOnHit = this.getMainChampion.id === "Rammus" ? (10 + (0.1 * stats.armor[level - 1])) : 0
 
          const onHitGuinsoo = Math.floor(stats.criticalStrike[0] / 5) * (items.includes("3124") ? 40 : items.includes("6677") ? 35 : 0) / 4
 
@@ -182,7 +184,7 @@ export default defineComponent({
          const onHitMuramana = items.includes("3042") ? (stats.mana[level - 1] * 0.015) : 0
 
          const physicalDamage = onHitGuinsoo + onHitTitanic + (items.includes("1043") ? 15 : 0) + onHitMuramana
-         const magicDamage = onHitWitsEnd + onHitNashorsTooth + championPassiveWarwickOnHit
+         const magicDamage = onHitWitsEnd + onHitNashorsTooth + championPassiveWarwickOnHit + championPassiveRammusOnHit
          return [physicalDamage, magicDamage]
       },
    },

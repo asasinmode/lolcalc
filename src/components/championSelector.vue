@@ -33,7 +33,7 @@
          </div>
          <div class="infoContent" v-else-if="infoIndex === 1">
             <div class="centered"><strong style="color: hsl(0, 100%, 45%);">Not everything that's present in the game is accounted for in calculations.</strong></div><br/>
-            <p>I'm a busy student and at the moment I can't afford to put in the time and work that's required to make this an accurate simulation of the game as complicated as League.</p>
+            <p>I'm a student and at the moment I can't afford to put in the time and work that's required to make this an accurate simulation of the game as complicated as League.</p>
             <p class="indent">Besides that, the site wasn't made with the intention of being a 100% accurate simulation. First and foremost I wanted it to visualize the damage difference between the same build with <b>The Collector</b> and <b>Lord's Dominik Regards</b>.</p><br/>
             <p>That being said, the numbers you see on the graph are <b>99.9% accurate</b> in situations where all variables are accounted for.</p><br/>
             <p><i>If you have any questions that aren't answered below visit the <b>about</b> tab to see where you can contact me.</i></p><br/>
@@ -49,6 +49,7 @@
                <p class="fakeList">Ornn</p>
                <p class="fakeList">Orianna</p>
                <p class="fakeList">Pyke</p>
+               <p class="fakeList">Rammus (without W active)</p>
                <p class="fakeList">Ryze</p>
                <p class="fakeList">Vladimir</p>
                <p class="fakeList">Warwick</p>
