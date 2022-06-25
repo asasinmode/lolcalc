@@ -72,8 +72,7 @@ export default defineComponent({
          ["3003", "3004", "3040", "3042", "3070", "3119", "3121"], // mana charge
          ["3139", "3140", "6035"],  // quicksilver
          ["3135", "4630"]  // void pen
-      ],
-      this.hoveredItem = this.getItem(3802)
+      ]
    },
    methods: {
       ...mapActions(useMainStore, ["setItems"]),
