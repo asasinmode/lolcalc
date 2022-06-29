@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 :root{
    --bg1: hsl(0, 0%, 0%);
    --main1: hsl(0, 0%, 100%);
@@ -95,7 +95,7 @@ p.indent{
    background: transparent;
    border: none;
    padding: 0.7em;
-   font-weight: bold;
+   font-weight: 700;
    font-size: 1em;
 }
 button{
@@ -241,7 +241,7 @@ button{
    display: flex;
    align-items: center;
    justify-content: center;
-   font-weight: bold;
+   font-weight: 700;
    color: var(--accent1);
    padding-bottom: 0.2em;
 }

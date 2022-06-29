@@ -20,11 +20,6 @@ import { useMainStore } from "@/stores";
 export default defineComponent({
    name: 'championILSelector',
    props: ['isMain'],
-   data(){
-      return {
-         selectedLevel: 1,
-      }
-   },
    methods: {
       ...mapActions(useMainStore, ["setLevel"]),
       changeLevel(){
@@ -68,7 +63,6 @@ export default defineComponent({
 }
 .levelSelect:hover > select{
    background: var(--highlight1);
-   border-color: var(--border-active);
 }
 .levelSelect:active > select{
    background: var(--highlight2);

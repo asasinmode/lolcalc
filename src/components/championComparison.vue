@@ -106,7 +106,7 @@ export default defineComponent({
 .itemPreview.passive::after{
    content: 'P';
    font-size: 12px;
-   font-weight: bold;
+   font-weight: 700;
    justify-content: center;
    align-items: center;
    display: flex;

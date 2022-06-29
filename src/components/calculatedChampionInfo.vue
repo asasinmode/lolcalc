@@ -335,7 +335,7 @@ main h3{
    display: flex;
    align-items: center;
    justify-content: center;
-   font-weight: bold;
+   font-weight: 700;
    color: var(--accent1);
    padding-bottom: 0.2em;
 }

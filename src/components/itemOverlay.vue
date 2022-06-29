@@ -206,7 +206,7 @@ button.selected img{
 }
 .itemGoldCostContainer span{
    color: hsl(60, 90%, 50%);
-   font-weight: bold;
+   font-weight: 700;
 }
 .itemStatContainer .statName{
    color: var(--main2);
