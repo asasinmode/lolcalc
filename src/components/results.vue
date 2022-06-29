@@ -30,7 +30,8 @@ import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores";
 import Chart from 'chart.js/auto';
-Chart.defaults.elements.point.hoverRadius = 5;
+Chart.defaults.elements.point.radius = 4
+Chart.defaults.elements.point.hoverRadius = 5.5;
 const chartGridLineColor = 'hsla(0, 0%, 100%, 0.1)';
 const chartGridTextColor = 'hsla(0, 0%, 100%, 0.6)';
 
@@ -40,7 +41,8 @@ export default defineComponent({
       return {
          strikeType: "nonCriticalStrike",
          levelSetting: "Equal",
-         graphColors: [265, 120, 0]
+         graphColors: ["265, 100%, 65%", "120, 100%, 50%",  "0, 100%, 50%"],
+         graphDPSColors: ["180, 100%, 50%", "60, 100%, 50%", "30, 100%, 50%"]
       }
    },
    mounted(){
@@ -71,6 +73,9 @@ export default defineComponent({
                   boxWidth: 15,
                   boxHeight: 15,
                   color: chartGridTextColor,
+                  font: {
+                     size: 14
+                  },
                },
             },
             tooltip: {
@@ -217,15 +222,36 @@ export default defineComponent({
             })
          })
       },
-      datasetsToDisplay(){
+      adequateLevel(){  // main champion's level based on selected graph setting
+         return this.levelSetting === "SelectedChanging" ? this.level(true) : undefined
+      },
+      dpsDatasets(){ // array of dps datasets based on damage datasets
          return this.mainStats.map((infoSet, index) => {
             return {
+               label: this.mainStats.length === 1 ? 'dps' : `${infoSet.title} dps`,
+               backgroundColor: `hsla(${this.graphDPSColors[index]}, 1)`,
+               borderColor: `hsla(${this.graphDPSColors[index]}, 0.8)`,
+               pointStyle: 'rectRot',
+               borderCapStyle: 'round',
+               borderWidth: 4,
+               pointBorderWidth: 3,
+               pointHoverBorderWidth: 4.5,
+               pointBorderColor: `hsla(${this.graphDPSColors[index]}, 1)`,
+               borderDash: [2, 6],
+               data: this[`damage${this.levelSetting}`][index].map((value, valueIndex) => value * infoSet.stats.attackSpeed[this.adequateLevel !== undefined ? (this.adequateLevel - 1) : valueIndex])
+            }
+         })
+      },
+      datasetsToDisplay(){
+         const damageDatasets = this.mainStats.map((infoSet, index) => {
+            return {
                label: infoSet.title,
-               backgroundColor: `hsla(${this.graphColors[index]}, 100%, 65%, 1)`,
-               borderColor: `hsla(${this.graphColors[index]}, 100%, 65%, 0.8)`,
+               backgroundColor: `hsla(${this.graphColors[index]}, 1)`,
+               borderColor: `hsla(${this.graphColors[index]}, 0.8)`,
                data: this[`damage${this.levelSetting}`][index]
             }
          })
+         return damageDatasets.reduce((previous, current, currentIndex) => [...previous, current, this.dpsDatasets[currentIndex]], [])
       },
       watchables(){
          return [this.strikeType, this.levelSetting, ...this.damageEqual[0], ...this.damageChangingSelected[0], ...this.damageSelectedChanging[0]]
