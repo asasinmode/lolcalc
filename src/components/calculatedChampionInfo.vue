@@ -91,13 +91,13 @@ export default defineComponent({
 
          const mythicPassiveLethality = this.legendaries(this.isMain).length * (items.includes("6693") ? 5 : 0)
          const finalLethality = this.sumValuesOf(items, "FlatArmorPenetrationMod") + mythicPassiveLethality
-         const mythicPassiveArmorPenetration = (this.legendaries(this.isMain).length * (items.includes("6692") ? 4 : 0)) + (this.legendaries(this.isMain).length * (items.includes("6632") ? 5 : 0))
-         const finalPercentPhysicalPenetration = (this.sumValuesOf(items, "PercentageArmorPenetrationMod") * 100) + mythicPassiveArmorPenetration
+         const mythicPassiveArmorPenetration = (this.legendaries(this.isMain).length * (items.includes("6692") ? 4 : 0)) + (this.legendaries(this.isMain).length * (items.includes("6632") ? 5 : 0)) / 100
+         const finalPercentPhysicalPenetration = ((1 - ((1 - this.sumValuesOf(items, "PercentageArmorPenetrationMod")) * (1 - mythicPassiveArmorPenetration)))* 100).toFixed(1)
 
          const mythicPassiveFlatMagicPenetration = this.legendaries(true).length * ((items.includes("3152") || items.includes("6655")) ? 5 : 0)
          const finalFlatMagicPenetration = this.sumValuesOf(items, "FlatMagicPenetrationMod") + mythicPassiveFlatMagicPenetration
-         const mythicPassivePercentageMagicPenetration = this.legendaries(true).length * (items.includes("6632") ? 5 : 0)
-         const finalPercentMagicPenetration = (this.sumValuesOf(items, "PercentageMagicPenetrationMod") * 100) + mythicPassivePercentageMagicPenetration
+         const mythicPassivePercentageMagicPenetration = this.legendaries(true).length * (items.includes("6632") ? 5 : 0) / 100
+         const finalPercentMagicPenetration = ((1 - ((1 - this.sumValuesOf(items, "PercentageMagicPenetrationMod")) * (1 - mythicPassivePercentageMagicPenetration))) * 100).toFixed(1)
 
          const finalCritChance = this.critChance(items)[0]
          const finalCritDamage = this.critDamage(items)
