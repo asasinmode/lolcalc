@@ -1,7 +1,7 @@
 <template>
    <div class="container centered">
       <button class="button selectButton" @click="openChampionOverlay(true)">select champion</button>
-      <button class="button infoIcon" @click="showInfoModal = true">
+      <button class="button infoIcon" @click="showInfoModal = true" title="info">
          <FontAwesomeIcon icon="info-circle" size="2xl" />
       </button>
       <button class="button selectButton" @click="openChampionOverlay(false)">select target</button>

@@ -4,24 +4,29 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width,initial-scale=1.0">
-      <link rel="icon" href="/favicon.ico">
-      <meta name="title" content="Collector - Basic attack damage calculator for League of Legends">
-      <meta name="description" content="Select 2 champions, their items and levels and then see how much damage you are going to deal.">
+      <link rel="icon" href="/favicon.webp">
+      <meta name="title" content="Collector - LoL damage calculator">
+      <meta name="description" content="Damage calculator for League of Legends. Calculate the damage of any champion with any build vs any target.">
       <meta name="robots" content="index, follow">
       <!-- Open Graph / Facebook -->
       <meta property="og:type" content="website">
       <meta property="og:url" content="https://asasinmode.github.io/collector/">
-      <meta property="og:title" content="Collector - Basic attack damage calculator for League of Legends">
-      <meta property="og:description" content="Select 2 champions, their items and levels and then see how much damage you are going to deal.">
+      <meta property="og:title" content="Collector - LoL damage calculator">
+      <meta property="og:description" content="Damage calculator for League of Legends. Calculate the damage of any champion with any build vs any target.">
       <meta property="og:image" content="https://asasinmode.github.io/collector/thumbnail.jpg">
 
       <!-- Twitter -->
       <meta property="twitter:card" content="summary">
       <meta property="twitter:url" content="https://asasinmode.github.io/collector/">
-      <meta property="twitter:title" content="Collector - Basic attack damage calculator for League of Legends">
-      <meta property="twitter:description" content="Select 2 champions, their items and levels and then see how much damage you are going to deal.">
+      <meta property="twitter:title" content="Collector - LoL damage calculator">
+      <meta property="twitter:description" content="Damage calculator for League of Legends. Calculate the damage of any champion with any build vs any target.">
       <meta property="twitter:image" content="https://asasinmode.github.io/collector/thumbnail.jpg">
-      <title>Collector - damage calculator</title>
+      <title>Collector - LoL damage calculator</title>
+
+      <link rel="manifest" href="/manifest.json">
+      <link rel="apple-touch-icon" href="/apple.png">
+      <link rel="canonical" href="https://asasinmode.github.io/collector/">
+      <meta name="theme-color" content="#fff">
    </head>
    <body lang="en">
       <noscript>
@@ -29,5 +34,10 @@
       </noscript>
       <div id="app"></div>
       <script type="module" src="/src/main.js"></script>
+      <script>
+         if('serviceWorker' in navigator){
+            navigator.serviceWorker.register('/collector/service-worker.js', {scope: '/collector/'})
+         }
+      </script>
    </body>
 </html>
