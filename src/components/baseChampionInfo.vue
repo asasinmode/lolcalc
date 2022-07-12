@@ -2,7 +2,7 @@
    <div class="baseChampionInfoContainer">
       <header class="centered">
          <h1>{{champion.name}}</h1>
-         <img :src="`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`" >
+         <img :src="`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`" >
       </header>
       <main class="centered line">
          <h3>base stats</h3>

@@ -9,7 +9,7 @@
                <img :src="dummyURL" loading="lazy">
             </button>
             <button v-for="champion in filteredChampions" :key="champion.key" @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)" :class="{'main': main?.id === champion.id, 'target': target?.id === champion.id}" >
-               <img :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
+               <img :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
             </button>
          </div>
       </div>

@@ -5,7 +5,7 @@
          <championILSelector :isMain="true" @openOverlay="handleItemOverlay" />
          <div class="itemsPreviewContainer" v-if="mainItems.length">
             <div class="itemPreview" v-for="itemName in mainItems" :key="itemName.id" :class="{passive: passives.find(passive => passive.id === itemName)}">
-               <img :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item(itemName).image.full}`" :title="item(itemName).name"/>
+               <img :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item(itemName).image.full}`" :title="item(itemName).name"/>
                <span v-if="passives.find(passive => passive.id === itemName)">{{passive(itemName).description}}</span>
             </div>
          </div>
@@ -16,7 +16,7 @@
          <championILSelector :isMain="false" @openOverlay="handleItemOverlay" />
          <div class="itemsPreviewContainer" v-if="targetItems.length">
             <div class="itemPreview" v-for="itemName in targetItems" :key="itemName.id" :class="{passive: passives.find(passive => passive.id === itemName)}">
-               <img :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item(itemName).image.full}`" :title="item(itemName).name"/>
+               <img :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item(itemName).image.full}`" :title="item(itemName).name"/>
                <span v-if="passives.find(passive => passive.id === itemName)">{{passive(itemName).description}}</span>
             </div>
          </div>

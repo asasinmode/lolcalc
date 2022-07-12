@@ -6,7 +6,7 @@
          </div>
          <div class="imagesContainer">
             <button class="itemImageContainer" v-for="item in filteredItems" :key="item.id" @click="selectItem(item.id, isMain)" @click.right.prevent="selectItem(item.id, !isMain)" :class="{selected: selectedItems(isMain).includes(item.id)}"  @mouseover="hoveredItem = item" @mouseout="hoveredItem = undefined">
-               <img :title="item.name" :src="`http://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item.image.full}`" loading="lazy">
+               <img :title="item.name" :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item.image.full}`" loading="lazy">
             </button>
          </div>
       </div>
