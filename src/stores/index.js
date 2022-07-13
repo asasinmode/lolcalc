@@ -21,7 +21,7 @@ const magicPenItems = [
    {id: "3135", percentage: 0.4, flat: 0},  // void staff
    {id: "3152", percentage: 0, flat: 6},  // hextech rocketbelt
    {id: "4630", percentage: 0.13, flat: 0},  // blighting jewel
-   {id: "6655", percentage: 0, flat: 6},  // luden's tempest
+   {id: "6655", percentage: 0, flat: 6},  // luden's echo
 ]
 armorPenItems.forEach(item => {
    const newKey = item.percentage != 0 ? "PercentageArmorPenetrationMod" : "FlatArmorPenetrationMod"
@@ -45,30 +45,6 @@ export const useMainStore = defineStore({
          attackDamage: ["Aatrox", "Akshan", "Aphelios", "Ashe", "Belveth", "Blitzcrank", "Braum", "Caitlyn", "Camille", "Corki", "Darius", "Draven", "DrMundo", "Ezreal", "Fiora", "Gangplank", "Garen", "Gnar", "Graves", "Hecarim", "Illaoi", "Irelia", "JarvanIV", "Jax", "Jayce", "Jhin", "Jinx", "Kaisa", "Kalista", "Kayle", "Kayn", "Khazix", "Kindred", "Kled", "KogMaw", "LeeSin", "Leona", "Lucian", "MasterYi", "MissFortune", "MonkeyKing", "Nasus", "Nocturne", "Olaf", "Ornn", "Pantheon", "Poppy", "Pyke", "Qiyana", "Quinn", "Rammus", "RekSai", "Rell", "Renekton", "Rengar", "Riven", "Samira", "Senna", "Sett", "Shaco", "Shen", "Shyvana", "Sion", "Sivir", "Skarner", "TahmKench", "Talon", "Taric", "Thresh", "Tristana", "Trundle", "Tryndamere", "Twitch", "Udyr", "Urgot", "Varus", "Vayne", "Vi", "Viego", "Volibear", "Warwick", "Xayah", "XinZhao", "Yasuo", "Yone", "Yorick", "Zed", "Zeri"],
          abilityPower: ["Ahri", "Akali", "Alistar", "Amumu", "Anivia", "Annie", "AurelionSol", "Azir", "Bard", "Brand", "Cassiopeia", "Chogath", "Diana", "Ekko", "Elise", "Evelynn", "Fiddlesticks", "Fizz", "Galio", "Gragas", "Gwen", "Heimerdinger", "Ivern", "Janna", "Karma", "Karthus", "Kassadin", "Katarina", "Kennen", "Leblanc", "Lillia", "Lissandra", "Lulu", "Lux", "Malphite", "Malzahar", "Maokai", "Mordekaiser", "Morgana", "Nami", "Nautilus", "Neeko", "Nidalee", "Nunu", "Orianna", "Rakan", "Renata", "Rumble", "Ryze", "Sejuani", "Seraphine", "Singed", "Sona", "Soraka", "Swain", "Sylas", "Syndra", "Taliyah", "Teemo", "TwistedFate", "Veigar", "Velkoz", "Vex", "Viktor", "Vladimir", "Xerath", "Yuumi", "Zac", "Ziggs", "Zilean", "Zoe", "Zyra"]
       },
-      armorPenItems: [
-         {id: "3035", percentage: 0.18, lethality: 0}, // last whisper
-         {id: "3036", percentage: 0.3, lethality: 0},// lord dominik's regards
-         {id: "3042", percentage: 0, lethality: 0},   // muramana
-         {id: "3134", percentage: 0, lethality: 10},  // serrated dirk
-         {id: "3142", percentage: 0, lethality: 18},  // youmuu's ghostblade
-         {id: "3179", percentage: 0, lethality: 10},  // umbral glaive
-         {id: "3814", percentage: 0, lethality: 10},  // edge of night
-         {id: "6632", percentage: 0, lethality: 0}, // sunderer
-         {id: "6676", percentage: 0, lethality: 12},  // collector
-         {id: "6691", percentage: 0, lethality: 18},  // duskblade of draktharr
-         {id: "6692", percentage: 0, lethality: 18},  // eclipse
-         {id: "6693", percentage: 0, lethality: 18},  // prowler's claw
-         {id: "6694", percentage: 0.3, lethality: 0}, // serylda's grudge
-         {id: "6695", percentage: 0, lethality: 12},   // serpent's fang
-         {id: "6696", percentage: 0, lethality: 10}   // axiom arc
-      ],
-      magicPenItems: [
-         {id: "3020", percentage: 0, flat: 18},  // sorcerer's shoes
-         {id: "3135", percentage: 0.4, flat: 0},  // void staff
-         {id: "3152", percentage: 0, flat: 6},  // hextech rocketbelt
-         {id: "4630", percentage: 0.13, flat: 0},  // blighting jewel
-         {id: "6655", percentage: 0, flat: 6},  // luden's tempest
-      ],
       passives: [
          {id: "1043", description: "15 bonus physical damage on-hit."}, // recurve bow
          {id: "3001", description: "5 bonus armor and 5 bonus magic resists per other legendary item."}, // evenshroud
@@ -94,7 +70,7 @@ export const useMainStore = defineStore({
          {id: "4633", description: "+8 ability power per other legendary item."}, // riftmaker
          {id: "4637", description: "bonus ability power equal to 2% bonus health."}, // demonic embrace
          {id: "4644", description: "+8 ability power per other legendary item."}, // crown of the shattered queen
-         {id: "6632", description: "+5% armor penetration and magic penetration per other legendary item."}, // divine sunderer
+         {id: "6632", description: "+3% armor penetration and magic penetration per other legendary item."}, // divine sunderer
          {id: "6656", description: "+10 ability power per other legendary item."}, // everfrost
          {id: "6662", description: "+100 health per other legendary item."},   // frostfire gauntlet
          {id: "6664", description: "+50 health per other legendary item."},   // turbo chemtank
@@ -152,12 +128,6 @@ export const useMainStore = defineStore({
       itemStatsVisibility: true
    }),
    getters: {
-      filterArmorPenItems: (state) => (items) => {
-         return state.armorPenItems.filter(item => items.includes(item.id))
-      },
-      filterMagicPenItems: (state) => (items) => {
-         return state.magicPenItems.filter(item => items.includes(item.id))
-      },
       getChampion: (state) => (champion) => {
          return state.champions[champion]
       },

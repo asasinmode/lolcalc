@@ -105,7 +105,7 @@ export default defineComponent({
       }
    },
    computed: {
-      ...mapState(useMainStore, ["patch", "mythics", "allItems", "itemGroupsCheck", "itemStatsVisibility", "getSelectedItems", "getTargetChampion", "getItem", "filterArmorPenItems"]),
+      ...mapState(useMainStore, ["patch", "mythics", "allItems", "itemGroupsCheck", "itemStatsVisibility", "getSelectedItems", "getTargetChampion", "getItem"]),
       sortedItems(){
          return Object.keys(this.allItems).map(key => {return {id: key, ...this.allItems[key]}}).sort((a, b) => a.gold.total - b.gold.total)
       },

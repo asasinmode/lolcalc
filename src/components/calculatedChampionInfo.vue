@@ -89,20 +89,20 @@ export default defineComponent({
          const itemsHealth = this.sumValuesOf(items, "FlatHPPoolMod") + mythicPassiveHealth
          const itemsMana = this.champion.partype === "Mana" ? this.sumValuesOf(items, "FlatMPPoolMod") : 0
 
-         const mythicPassiveLethality = this.legendaries(this.isMain).length * (items.includes("6693") ? 5 : 0)
+         const mythicPassiveLethality = this.legendaries(this.isMain).length * (items.includes("6693") ? 5 : 0)   // prowler's claw bonus lethality mythic passive
          const finalLethality = this.sumValuesOf(items, "FlatArmorPenetrationMod") + mythicPassiveLethality
-         const mythicPassiveArmorPenetration = (this.legendaries(this.isMain).length * (items.includes("6692") ? 4 : 0)) + (this.legendaries(this.isMain).length * (items.includes("6632") ? 5 : 0)) / 100
+         const mythicPassiveArmorPenetration = (this.legendaries(this.isMain).length * (items.includes("6692") ? 4 : items.includes("6632") ? 3 : 0)) / 100  // eclipse / divine sunderer bonus % armor penetration mythic passive
          const finalPercentPhysicalPenetration = ((1 - ((1 - this.sumValuesOf(items, "PercentageArmorPenetrationMod")) * (1 - mythicPassiveArmorPenetration)))* 100).toFixed(1)
 
-         const mythicPassiveFlatMagicPenetration = this.legendaries(true).length * ((items.includes("3152") || items.includes("6655")) ? 5 : 0)
+         const mythicPassiveFlatMagicPenetration = this.legendaries(this.isMain).length * ((items.includes("3152") || items.includes("6655")) ? 5 : 0) // hextech rocketbelt / luden's echo bonus flat magic penetration mythic passive
          const finalFlatMagicPenetration = this.sumValuesOf(items, "FlatMagicPenetrationMod") + mythicPassiveFlatMagicPenetration
-         const mythicPassivePercentageMagicPenetration = this.legendaries(true).length * (items.includes("6632") ? 5 : 0) / 100
+         const mythicPassivePercentageMagicPenetration = this.legendaries(this.isMain).length * (items.includes("6632") ? 3 : 0) / 100  // sunderer bonus % magic penetration mythic passive
          const finalPercentMagicPenetration = ((1 - ((1 - this.sumValuesOf(items, "PercentageMagicPenetrationMod")) * (1 - mythicPassivePercentageMagicPenetration))) * 100).toFixed(1)
 
          const finalCritChance = this.critChance(items)[0]
          const finalCritDamage = this.critDamage(items)
 
-         const itemsAttackSpeed = this.sumValuesOf(items, "PercentAttackSpeedMod") + this.legendaries(true).length * (items.includes("6672") ? 0.1 : 0)  // all items + kraken slayer mythic passive
+         const itemsAttackSpeed = this.sumValuesOf(items, "PercentAttackSpeedMod") + this.legendaries(this.isMain).length * (items.includes("6672") ? 0.1 : 0)  // all items + kraken slayer mythic passive
          const attackSpeedRatio = (this.asRatioChampions.find(champion => champion[0] == this.champion.id) ? this.asRatioChampions.find(champion => champion[0] == this.champion.id)[1] : 1)
          const finalAttackSpeedArray = this.champion.id === "Jhin" ? Array.from({length: 18}, (_, level) => {return parseFloat((((3 / 100) * level * (0.7025 + (0.0175 * level)) + 1) * this.champion.stats.attackspeed).toFixed(3))}) // jhin is a special cookie
             : Array.from({length: 18}, (_, level) => {
@@ -110,16 +110,16 @@ export default defineComponent({
                return parseFloat((this.champion.stats.attackspeed * ((attackSpeedFromLevel + itemsAttackSpeed + miniRuneAttackSpeed) * attackSpeedRatio + 1)).toFixed(3))
             }).map(attackSpeed => (attackSpeed > 2.5 && this.champion.id !== "Belveth") ? 2.5 : attackSpeed)
          
-         const mythicPassiveAttackDamage = this.legendaries(true).length * (items.includes("6673") ? 5 : 0) + this.legendaries(true).length * (items.includes("3078") ? 3 : 0) // ad from shieldbow/trinity mythic passive
+         const mythicPassiveAttackDamage = this.legendaries(this.isMain).length * (items.includes("6673") ? 5 : 0) + this.legendaries(this.isMain).length * (items.includes("3078") ? 3 : 0) // ad from shieldbow/trinity mythic passive
          const itemsAttackDamage = this.sumValuesOf(items, "FlatPhysicalDamageMod") + mythicPassiveAttackDamage
          
          const dreadAbilityPower = items.includes("3041") ? 125 : 0
          const mythicPassiveAbilityPower = this.legendaries(this.isMain).length * (items.includes("4005") ? 15 : 0) + this.legendaries(this.isMain).length * (items.includes("6656") ? 10 : 0) + this.legendaries(this.isMain).length * (items.includes("4633") ? 8 : 0) // ad from imperial mandate/everfrost/riftmaker mythic passive
          const itemsAbilityPower = this.sumValuesOf(items, "FlatMagicDamageMod") + mythicPassiveAbilityPower + dreadAbilityPower
 
-         const mythicPassiveArmor = this.legendaries(false).length * (items.includes("3001") ? 5 : 0)
+         const mythicPassiveArmor = this.legendaries(this.isMain).length * (items.includes("3001") ? 5 : 0)
          const itemsArmor = this.sumValuesOf(items, "FlatArmorMod") + mythicPassiveArmor
-         const mythicPassiveMagicResists = this.legendaries(false).length * (items.includes("3001") ? 5 : 0)
+         const mythicPassiveMagicResists = this.legendaries(this.isMain).length * (items.includes("3001") ? 5 : 0)
          const itemsMagicResists = this.sumValuesOf(items, "FlatSpellBlockMod") + mythicPassiveMagicResists
 
          const itemPassiveRabadon = items.includes("3089") ? 1.35 : 1
@@ -239,7 +239,7 @@ export default defineComponent({
       }
    },
    computed:{
-      ...mapState(useMainStore, ["getSelectedItems", "allItems", "mythics", "adaptiveForceBias", "getLevel", "getMainChampion", "getTargetChampion", "apVisibility", "getItem", "getSelectedItems", "filterArmorPenItems", "filterMagicPenItems", "asRatioChampions"]),
+      ...mapState(useMainStore, ["getSelectedItems", "allItems", "mythics", "adaptiveForceBias", "getLevel", "getMainChampion", "getTargetChampion", "apVisibility", "getItem", "getSelectedItems", "asRatioChampions"]),
       selectedItems(){
          return this.getSelectedItems(this.isMain)
       },
