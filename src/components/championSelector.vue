@@ -19,7 +19,8 @@
          <div class="infoContent" v-if="infoIndex === 0">
             <p>This site was made to help visualize damage difference between <b>Lord Dominik's Regards</b> and <b>The Collector</b>.</p>
             <p class="indent">It's best experienced on desktop but I tried to make it look presentable on phone as well.</p><br/>
-            <p>It calculates stats of selected champions and items, then displays the graph that shows the damage you can expect (see the <b>disclaimers</b> tab) to see in game when you auto attack target champion.</p><br/>
+            <p>After selecting main and target champions and (optionally) their items, you can see the stats calculated for chosen build below the <strong>select item</strong> and <strong>level</strong> buttons.</p>
+            <p class="indent">Below the calculated stats you can see a graph that shows the damage you can expect (see the <b>disclaimers</b> tab) to see in game when you auto attack the target champion.</p><br/>
             <p>The graph has 2 settings. If you want to learn more about it visit the <b>graph</b> tab.</p>
             <p class="indent">If you have either <b>Lord Dominik's Regards</b> or <b>The Collector</b> selected on your main champion the graph will automatically show both of their their respective damage outputs. To compare other builds with each other I recommend opening this app in multiple browser tabs.</p><br/>
             <p>To manually set stats of the <b>target</b> champion click the <b>select target</b> button then choose <b>Target Dummy's</b> icon.</p><br/>
@@ -33,7 +34,7 @@
          </div>
          <div class="infoContent" v-else-if="infoIndex === 1">
             <div class="centered"><strong style="color: hsl(0, 100%, 45%);">Not everything that's present in the game is accounted for in calculations.</strong></div><br/>
-            <p>I'm a student and at the moment I can't afford to put in the time and work that's required to make this an accurate simulation of the game as complicated as League.</p>
+            <p>I'm a student and at the moment I can't afford to put in the time and work that's required to make this a 100% accurate simulation of a game as complicated as League.</p>
             <p class="indent">Besides that, the site wasn't made with the intention of being a 100% accurate simulation. First and foremost I wanted it to visualize the damage difference between the same build with <b>The Collector</b> and <b>Lord's Dominik Regards</b>.</p><br/>
             <p>That being said, the numbers you see on the graph are <b>99.9% accurate</b> in situations where all variables are accounted for.</p><br/>
             <p><i>If you have any questions that aren't answered below visit the <b>about</b> tab to see where you can contact me.</i></p><br/>
@@ -144,8 +145,7 @@
             </div>
          </div>
          <div class="infoContent" v-else-if="infoIndex === 5">
-            <p>If you notice something's not working correctly, have any feedback, feature requests or questions contact me on discord <b>asasinmode#0058</b>.</p><br/>
-            <p>Also if you enjoy the app consider following me on <a href="https://twitter.com/asasinmode" target="_blank">Twitter</a> or <a href="https://www.twitch.tv/asasinmode" target="_blank">Twitch</a>.</p>
+            <p>If you notice something's not working correctly, have any feedback, feature requests or questions contact me on discord <b>asasinmode#0058</b> or <a href="https://twitter.com/asasinmode" target="_blank">Twitter</a>.</p><br/>
          </div>
       </div>
    </div>

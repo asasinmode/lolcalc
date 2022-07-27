@@ -6,17 +6,17 @@
          </div>
          <div class="imagesContainer">
             <button class="itemImageContainer" v-for="item in filteredItems" :key="item.id" @click="selectItem(item.id, isMain)" @click.right.prevent="selectItem(item.id, !isMain)" :class="{selected: selectedItems(isMain).includes(item.id)}"  @mouseover="hoveredItem = item" @mouseout="hoveredItem = undefined">
-               <img :title="item.name" :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item.image.full}`" loading="lazy">
+               <img :alt="`${ item.name } icon`" :title="item.name" :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/item/${item.image.full}`" loading="lazy">
             </button>
          </div>
       </div>
       <div class="itemTooltip" v-if="hoveredItem && itemStatsVisibility">
          <h3>{{prettifiedHoveredItem.name}}</h3>
          <div class="itemGoldCostContainer">
-            <img :src="goldIconURL"><span class="goldCost">{{prettifiedHoveredItem.gold}}</span>
+            <img alt="gold icon" title="gold" :src="goldIconURL"><span class="goldCost">{{ prettifiedHoveredItem.gold }}</span>
          </div>
          <div class="itemStatContainer" v-for="(stat, name) in prettifiedHoveredItem.stats">
-            <img :src="iconURL(stat.icon)"><span class="statValue">{{stat.value}}</span> <span class="statName">{{name}}</span>
+            <img :alt="`${ name } icon`" :title="name" :src="iconURL(stat.icon)"><span class="statValue">{{stat.value}}</span> <span class="statName">{{ name }}</span>
          </div>
       </div>
    </div>
