@@ -1,7 +1,16 @@
 # collector
 
-This is a damage calculator for game League of Legends.
+A damage calculator for game [League of Legends](https://www.leagueoflegends.com) made with [Vue 3](https://vuejs.org/).
 
-Currently it is a passion project of mine and since it's not being used by anybody other than me, readme isn't very useful. If this ever changes, I'll update it.
+You can visit the working site [here](https://asasinmode.github.io/collector/).
 
-At the moment you can visit the working site at https://asasinmode.github.io/collector/
+# [how to use](https://github.com/asasinmode/collector/wiki)
+
+#### install dependencies
+```
+npm install
+```
+#### run
+```
+npm run dev
+```
