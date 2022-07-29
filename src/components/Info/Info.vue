@@ -1,12 +1,12 @@
 <template>
    <Modal @closeMe="$emit('closeMe')" >
       <div class="infoButtonsContainer">
-         <button class="button infoButton" :class="{selected: infoIndex === 0}" @click="infoIndex = 0">general</button>
-         <button class="button infoButton" :class="{selected: infoIndex === 1}" @click="infoIndex = 1">disclaimers</button>
-         <button class="button infoButton" :class="{selected: infoIndex === 2}" @click="infoIndex = 2">graph</button>
-         <button class="button infoButton" :class="{selected: infoIndex === 3}" @click="infoIndex = 3">formulas</button>
-         <button class="button infoButton" :class="{selected: infoIndex === 4}" @click="infoIndex = 4">toggles</button>
-         <button class="button infoButton" :class="{selected: infoIndex === 5}" @click="infoIndex = 5">about</button>
+         <button class="button infoButton" :class="{ selected: infoIndex === 0 }" @click="infoIndex = 0">general</button>
+         <button class="button infoButton" :class="{ selected: infoIndex === 1 }" @click="infoIndex = 1">disclaimers</button>
+         <button class="button infoButton" :class="{ selected: infoIndex === 2 }" @click="infoIndex = 2">graph</button>
+         <button class="button infoButton" :class="{ selected: infoIndex === 3 }" @click="infoIndex = 3">formulas</button>
+         <button class="button infoButton" :class="{ selected: infoIndex === 4 }" @click="infoIndex = 4">toggles</button>
+         <button class="button infoButton" :class="{ selected: infoIndex === 5 }" @click="infoIndex = 5">about</button>
       </div>
       <General v-if="infoIndex === 0" />
       <Disclaimers v-else-if="infoIndex === 1" />
@@ -19,7 +19,7 @@
    </Modal>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from "vue";
 import General from "./Tabs/General.vue";
 import Disclaimers from "./Tabs/Disclaimers.vue";

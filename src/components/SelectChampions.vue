@@ -5,18 +5,18 @@
          <FontAwesomeIcon icon="info-circle" size="2xl" />
       </button>
       <button class="button selectButton" @click="openChampionOverlay(false)">select target</button>
-      <Teleport to="body">
-         <Info v-show="showInfo" @closeMe="showInfo = false" />
-         <ChampionOverlay v-show="showChampionOverlay" @closeMe="showChampionOverlay = false" @selectChampion="selectChampion" :showDummy="!ownChampion" />
-      </Teleport>
    </header>
+   <Teleport to="body">
+      <Info v-show="showInfo" @closeMe="showInfo = false" />
+      <ChampionOverlay v-show="showChampionOverlay" @closeMe="showChampionOverlay = false" @selectChampion="selectChampion" :showDummy="!ownChampion" />
+   </Teleport>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { useMainStore } from "../stores";
 import { mapActions } from "pinia";
-import ChampionOverlay from "@/components/ChampionOverlay.vue";
+import ChampionOverlay from "@/components/Overlays/Champion.vue";
 import Info from "@/components/Info/Info.vue";
 
 export default defineComponent({
@@ -33,9 +33,9 @@ export default defineComponent({
       ...mapActions(useMainStore, ["setMainChampion", "setTargetChampion"]),
       selectChampion(champion, isMain){
          if(champion === 'targetDummy'){
-            this.setTargetChampion({champion: 'targetDummy'})
+            this.setTargetChampion({ champion: 'targetDummy' })
          } else{
-            this[this.ownChampion ? isMain ? 'setMainChampion' : 'setTargetChampion' : isMain ? 'setTargetChampion' : 'setMainChampion']({champion: champion})
+            this[this.ownChampion ? isMain ? 'setMainChampion' : 'setTargetChampion' : isMain ? 'setTargetChampion' : 'setMainChampion']({ champion: champion })
          }
       },
       openChampionOverlay(own){

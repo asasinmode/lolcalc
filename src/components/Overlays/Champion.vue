@@ -1,14 +1,16 @@
 <template>
    <Modal @closeMe="$emit('closeMe')" >
       <div class="searchbarContainer centered">
-         <input type="text" class="searchbar" v-model="textFilter" placeholder="search for champion..." />
+         <input type="text" class="searchbar" v-model="textFilter" placeholder="search for champion...">
       </div>
       <div class="imagesContainer">
-         <button v-if="showDummy" @click="selectChampion('targetDummy', true)" :class="{'target': target === 'targetDummy'}">
+         <button v-if="showDummy" @click="selectChampion('targetDummy', true)" :class="{ 'target': target === 'targetDummy' }">
             <img :src="dummyURL" loading="lazy">
          </button>
-         <button v-for="champion in filteredChampions" :key="champion.key" @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)" :class="{'main': main?.id === champion.id, 'target': target?.id === champion.id}" >
-            <img :alt="`${ champion.name } icon`" :title="champion.name" :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
+         <button v-for="champion in filteredChampions" :key="champion.key" :class="{ 'main': main?.id === champion.id, 'target': target?.id === champion.id }"
+            @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)"
+         >
+            <img :alt="`${ champion.name } icon`" :title="champion.name" :src="`https://ddragon.leagueoflegends.com/cdn/${ patch }/img/champion/${ champion.image.full }`" loading="lazy">
          </button>
       </div>
    </Modal>
@@ -18,7 +20,7 @@
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores";
-import dummyURL from "../assets/targetDummy icon.webp";
+import dummyURL from "@/assets/targetDummy icon.webp";
 import Modal from "@/components/Misc/Modal.vue";
 
 export default defineComponent({
@@ -39,7 +41,7 @@ export default defineComponent({
    computed: {
       ...mapState(useMainStore, ["patch", "champions", "getMainChampion", "getTargetChampion"]),
       sortedChampions(){
-         return Object.keys(this.champions).map(key => {return {key: key, ...this.champions[key]}}).sort((a, b) => a.name > b.name ? 1 : -1)
+         return Object.keys(this.champions).map(key => ({ key: key, ...this.champions[key] })).sort((a, b) => a.name > b.name ? 1 : -1)
       },
       main(){
          return this.getMainChampion

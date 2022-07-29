@@ -1,6 +1,6 @@
 <template>
    <SelectChampions />
-   <championComparison />
+   <ChampionsShowcase />
    <results v-if="showResults" />
 </template>
 
@@ -8,12 +8,12 @@
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { useMainStore } from "@/stores";
-import SelectChampions from "@/components/SelectChampions.vue"; import championComparison from '@/components/championComparison.vue'; import results from '@/components/results.vue'
+import SelectChampions from "@/components/SelectChampions.vue"; import ChampionsShowcase from '@/components/ChampionsShowcase.vue'; import results from '@/components/results.vue'
 
 export default defineComponent({
    name: 'App',
    components: {
-      SelectChampions, championComparison, results
+      SelectChampions, ChampionsShowcase, results
    },
    mounted(){
       if(localStorage.getItem('tooltipsVisibility') != "null"){
@@ -28,7 +28,13 @@ export default defineComponent({
    computed: {
       ...mapState(useMainStore, ["getMainChampion", "getTargetChampion", "getCalculatedStats", "showModeTooltips", "patch"]),
       showResults(){
-         return this.getMainChampion != undefined && this.getTargetChampion != undefined && this.getCalculatedStats(true)[0]?.stats.attackDamage != undefined && this.getCalculatedStats(false).armor != undefined
+         return this.areChampionsDefined && this.areStatsCalculated
+      },
+      areChampionsDefined(){
+         return this.getMainChampion !== undefined && this.getTargetChampion !== undefined
+      },
+      areStatsCalculated(){
+         return this.getCalculatedStats(true)[0]?.stats.attackDamage !== undefined && this.getCalculatedStats(false).armor !== undefined
       }
    }
 })
