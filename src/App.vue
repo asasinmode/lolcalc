@@ -1,5 +1,5 @@
 <template>
-   <championSelector />
+   <SelectChampions />
    <championComparison />
    <results v-if="showResults" />
 </template>
@@ -8,12 +8,12 @@
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { useMainStore } from "@/stores";
-import championSelector from "@/components/championSelector.vue"; import championComparison from '@/components/championComparison.vue'; import results from '@/components/results.vue'
+import SelectChampions from "@/components/SelectChampions.vue"; import championComparison from '@/components/championComparison.vue'; import results from '@/components/results.vue'
 
 export default defineComponent({
    name: 'App',
    components: {
-      championSelector, championComparison, results
+      SelectChampions, championComparison, results
    },
    mounted(){
       if(localStorage.getItem('tooltipsVisibility') != "null"){
@@ -108,36 +108,8 @@ button{
 .button:active{
    background: var(--highlight2);
 }
-.modalOverlay{
-   position: fixed;
-   inset: 0;
-   z-index: 10;
-   background: var(--lowlight1);
-   display: flex;
-   justify-content: center;
-   padding-bottom: 5em;
-}
-.modalContainer{
-   position: fixed;
-   left: 50%;
-   top: 2.5rem;
-   transform: translateX(-50%);
-   background: var(--bg1);
-   width: 100%;
-   max-width: calc(100% - 4rem);
-   height: 100%;
-   max-height: calc(100% - 6rem);
-   overflow-x: hidden;
-   overflow-y: scroll;
-}
 .itemTooltip, .modalContainer{
    box-shadow: 0 0 0.25em 0 var(--highlight1), 0 0 0.75em 0 var(--highlight2);
-}
-.modalContainer h1{
-   text-align: center;
-}
-.modalContainer b{
-   color: var(--accent1);
 }
 .line{
    position: relative;
@@ -191,7 +163,7 @@ button{
    background: var(--accent1);
 }
 .searchbarContainer{
-   padding-bottom: 1em;
+   padding: 1em;
 }
 .searchbar{
    background: transparent;

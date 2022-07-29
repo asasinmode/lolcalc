@@ -1,30 +1,30 @@
 <template>
-   <div class="modalOverlay" @click.self="$emit('closeMe')">
-      <div class="modalContainer" @keydown.esc="$emit('closeMe')">
-         <div class="searchbarContainer centered">
-            <input type="text" class="searchbar" v-model="textFilter" placeholder="search for champion..." />
-         </div>
-         <div class="imagesContainer">
-            <button v-if="showDummy" @click="selectChampion('targetDummy', true)" :class="{'target': target === 'targetDummy'}">
-               <img :src="dummyURL" loading="lazy">
-            </button>
-            <button v-for="champion in filteredChampions" :key="champion.key" @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)" :class="{'main': main?.id === champion.id, 'target': target?.id === champion.id}" >
-               <img :alt="`${ champion.name } icon`" :title="champion.name" :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
-            </button>
-         </div>
+   <Modal @closeMe="$emit('closeMe')" >
+      <div class="searchbarContainer centered">
+         <input type="text" class="searchbar" v-model="textFilter" placeholder="search for champion..." />
       </div>
-   </div>
+      <div class="imagesContainer">
+         <button v-if="showDummy" @click="selectChampion('targetDummy', true)" :class="{'target': target === 'targetDummy'}">
+            <img :src="dummyURL" loading="lazy">
+         </button>
+         <button v-for="champion in filteredChampions" :key="champion.key" @click="selectChampion(champion.id, true)" @click.right.prevent="selectChampion(champion.id, false)" :class="{'main': main?.id === champion.id, 'target': target?.id === champion.id}" >
+            <img :alt="`${ champion.name } icon`" :title="champion.name" :src="`https://ddragon.leagueoflegends.com/cdn/${patch}/img/champion/${champion.image.full}`" loading="lazy">
+         </button>
+      </div>
+   </Modal>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { mapState } from "pinia";
 import { useMainStore } from "@/stores";
-import dummyURL from "../assets/targetDummy icon.webp"
+import dummyURL from "../assets/targetDummy icon.webp";
+import Modal from "@/components/Misc/Modal.vue";
 
 export default defineComponent({
    name: "championOverlay",
    props: ['showDummy'],
+   components: { Modal },
    data(){
       return {
          textFilter: "",
@@ -65,15 +65,11 @@ export default defineComponent({
 .searchbar{
    width: 100%;
 }
-.modalContainer{
-   display: flex;
-   flex-direction: column;
-   padding: 1em;
-}
 .imagesContainer{
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
+   padding-inline: 1em;
 }
 button{
    border: none;

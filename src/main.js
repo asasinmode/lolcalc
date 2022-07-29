@@ -8,4 +8,4 @@ const app = createApp(App)
 app.use(createPinia())
 app.component("FontAwesomeIcon", FontAwesomeIcon)
 
-app.mount('#app')
+app.mount('body')
