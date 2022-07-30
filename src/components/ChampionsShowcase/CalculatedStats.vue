@@ -3,9 +3,9 @@
    <h3>calculated stats</h3>
    <div class="baseStats centered">
       <div class="baseStatContainer centered" v-for="(stat, name) in filteredStats" :title="tooltipTitles[name] ? tooltipTitles[name] : ''" :key="stat.id">
-         <label :class="{tooltipAvailable: tooltipTitles[name]}"><img :src="iconURL(name)">{{name}}</label>
+         <label :class="{ tooltipAvailable: tooltipTitles[name] }"><img :src="iconURL(name)">{{ name }}</label>
          <div class="baseStat">
-            {{stat}}
+            {{ stat }}
          </div>
       </div>
    </div>
@@ -18,7 +18,7 @@ import { mapState, mapActions } from "pinia";
 import { useMainStore } from "@/stores";
 
 export default defineComponent({
-   name: 'calculatedChampionInfo',
+   name: 'CalculatedStats',
    props: ['isMain'],
    data(){
       return {
@@ -122,12 +122,19 @@ export default defineComponent({
          const mythicPassiveMagicResists = this.legendaries(this.isMain).length * (items.includes("3001") ? 5 : 0)
          const itemsMagicResists = this.sumValuesOf(items, "FlatSpellBlockMod") + mythicPassiveMagicResists
 
+         const itemPassiveDemonic = items.includes("4637") ? 0.02 : 0   // demonic embrace % bonus health converted to ability power
+         const itemPassiveFimbulwinter = (items.includes("3119") || items.includes("3121")) ? 0.08 : 0   // winter's approach/fimbulwinter passive max mana % converted to health
+         const itemPassiveMuramana = (items.includes("3004") || items.includes("3042")) ? 0.025 : 0 // manamune/muramana passive max mana % converted to attack damage
          const itemPassiveRabadon = items.includes("3089") ? 1.35 : 1
+         const itemPassiveSterak = items.includes("3053") ? levelAttackDamage *  0.45 : 0 // sterak's gage bonus attack damage
+         const itemPassiveTitanic = items.includes("3748") ? 0.02 : 0   // titanic hydra's health % converted to attack damage
          
-         const championPassiveWindBrothers = (this.champion.id === "Yasuo" || this.champion.id === "Yone") ? this.critChance(items)[1] * 0.4 : 0   // yone/yasuo passive bonus attack damage
+         const championPassivePyke = this.champion.id === "Pyke" ? 1 / 14 : 0   // pyke passive health to ad ratio
+         const championPassiveRyze = this.champion.id === "Ryze" ? 0.001 : 0   // ryze passive bonus mana %
          const championPassiveVladimirHealthToAPRatio = this.champion.id === "Vladimir" ? (1 / 30) : 0  // vladimir passive health to ability power ratio
          const championPassiveVladimirAPToHealthRatio = this.champion.id === "Vladimir" ? 1.6 : 0  // vladimir passive ability power to health ratio
          const championPassiveVladimirBonusHealthToApRatio = (this.champion.id === "Vladimir" && items.includes("3089")) ? 0.0188 : 0   // slightly higher number from https://leagueoflegends.fandom.com/wiki/Vladimir/LoL#Details_
+         const championPassiveWindBrothers = (this.champion.id === "Yasuo" || this.champion.id === "Yone") ? this.critChance(items)[1] * 0.4 : 0   // yone/yasuo passive bonus attack damage
 
          const finalHealthArray = [], finalManaArray = [], finalAttackDamageArray = [], finalAbilityPowerArray = [], finalArmorArray = [], finalMagicResistsArray = []
          for(let level = 1; level <= 18; level++){
@@ -139,13 +146,6 @@ export default defineComponent({
 
             const championPassiveJhin = this.champion.id === "Jhin" ? 1 + (this.jhinPassiveValues[level - 1] + (0.25 * (itemsAttackSpeed + miniRuneAttackSpeed)) + (finalCritChance * (items.includes("3124") ? 0 : 0.003))) : 1   // jhin passive attack damage modifier
             const championPassiveOrnnModifier = this.champion.id === "Ornn" ? (items.find(item => this.mythics.includes(item)) && level >= 13) ? 1.14 : 1.1 : 1  // ornn passive health, armor, magic resists modifier
-            const championPassivePyke = this.champion.id === "Pyke" ? 1 / 14 : 0   // pyke passive health to ad ratio
-            const championPassiveRyze = this.champion.id === "Ryze" ? 0.001 : 0   // ryze passive bonus mana %
-            const itemPassiveDemonic = items.includes("4637") ? 0.02 : 0   // demonic embrace % bonus health converted to ability power
-            const itemPassiveSterak = items.includes("3053") ? levelAttackDamage *  0.45 : 0 // sterak's gage bonus attack damage
-            const itemPassiveTitanic = items.includes("3748") ? 0.02 : 0   // titanic hydra's health % converted to attack damage
-            const itemPassiveFimbulwinter = (items.includes("3119") || items.includes("3121")) ? 0.08 : 0   // winter's approach/fimbulwinter passive max mana % converted to health
-            const itemPassiveMuramana = (items.includes("3004") || items.includes("3042")) ? 0.025 : 0 // manamune/muramana passive max mana % converted to attack damage
 
             const finalArmor = levelArmor + ((itemsArmor + miniRuneArmor) * championPassiveOrnnModifier)
             const finalMagicResists = levelMagicResists + (itemsMagicResists * championPassiveOrnnModifier)
@@ -235,7 +235,7 @@ export default defineComponent({
          return calculated
       },
       iconURL(icon){
-         return new URL(`../assets/statIcons/${icon}.webp`, import.meta.url).href
+         return new URL(`../../assets/statIcons/${ icon }.webp`, import.meta.url).href
       }
    },
    computed:{
@@ -250,7 +250,7 @@ export default defineComponent({
          return this.isMain ? this.getMainChampion : this.getTargetChampion
       },
       baseStats(){
-         let calculated = {...this.calculateStats(this.selectedItems)}
+         let calculated = { ...this.calculateStats(this.selectedItems) }
 
          if(this.isMain){  // multiple item sets to compare
             var secondItemset = ((this.selectedItems.includes("3036") || this.selectedItems.includes("6676")) && !(this.selectedItems.includes("3036") && this.selectedItems.includes("6676"))) ?
@@ -258,20 +258,20 @@ export default defineComponent({
                : undefined
             if(secondItemset != undefined){
                secondItemset.push(this.selectedItems.includes("3036") ? "6676" : "3036")
-               this.setCalculatedStats({stats: [{stats: {...calculated}, items: this.selectedItems, title: this.selectedItems.includes("3036") ? "ldr" : "collector"}, {stats: {...this.calculateStats(secondItemset)}, items: secondItemset, title: this.selectedItems.includes("3036") ? "collector" : "ldr"}], isMain: this.isMain})
+               this.setCalculatedStats({ stats: [{ stats: { ...calculated }, items: this.selectedItems, title: this.selectedItems.includes("3036") ? "ldr" : "collector" }, { stats: { ...this.calculateStats(secondItemset) }, items: secondItemset, title: this.selectedItems.includes("3036") ? "collector" : "ldr" }], isMain: this.isMain })
             } else{
-               this.setCalculatedStats({stats: [{stats: {...calculated}, items: this.selectedItems, title: "damage"}], isMain: this.isMain})
+               this.setCalculatedStats({ stats: [{ stats: { ...calculated }, items: this.selectedItems, title: "damage" }], isMain: this.isMain })
             }
          } else{
-            this.setCalculatedStats({stats: {...calculated}, isMain: this.isMain})
+            this.setCalculatedStats({ stats: { ...calculated }, isMain: this.isMain })
          }
          
          if(this.isMain){
             calculated.attackDamage = Math.round(calculated.attackDamage[this.level - 1])
-            calculated.armorPenetration = `${calculated.armorPenetration[0]} | ${calculated.armorPenetration[1]}%`
+            calculated.armorPenetration = `${ calculated.armorPenetration[0] } | ${ calculated.armorPenetration[1] }%`
             if(this.apVisibility){
                calculated.abilityPower = Math.round(calculated.abilityPower[this.level - 1])
-               calculated.magicPenetration = `${calculated.magicPenetration[0]} | ${calculated.magicPenetration[1]}%`
+               calculated.magicPenetration = `${ calculated.magicPenetration[0] } | ${ calculated.magicPenetration[1] }%`
             } else{
                delete calculated.abilityPower
                delete calculated.magicPenetration
@@ -280,7 +280,7 @@ export default defineComponent({
             delete calculated.mana
             delete calculated.armor
             delete calculated.magicResists
-            calculated.criticalStrike = `${calculated.criticalStrike[0]}% | ${calculated.criticalStrike[1]}%`
+            calculated.criticalStrike = `${ calculated.criticalStrike[0] }% | ${ calculated.criticalStrike[1] }%`
             calculated.attackSpeed = calculated.attackSpeed[this.level - 1]
          } else{
             if(this.apVisibility && this.champion.partype === "Mana"){
@@ -311,7 +311,7 @@ export default defineComponent({
       filteredStats(){
          return Object.keys(this.baseStats).filter(key => {
                return this.baseStats[key] != undefined
-         }).reduce((obj, key) => {return {...obj, [key]: this.baseStats[key]}}, {})
+         }).reduce((obj, key) => ({ ...obj, [key]: this.baseStats[key] }), {})
       }
    }
 })

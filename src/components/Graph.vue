@@ -4,18 +4,23 @@
       <div class="centered chart">
          <div class="graphSettingsContainer">
             <div class="modeButtonsContainer">
-               <button class="button modeButton centered" @click="strikeType = 'averageStrike'" :class="{selected: strikeType === 'averageStrike'}">average</button>
-               <button class="button modeButton centered" @click="strikeType = 'nonCriticalStrike'" :class="{selected: strikeType === 'nonCriticalStrike'}">non-critical</button>
-               <button class="button modeButton centered" @click="strikeType = 'criticalStrike'" :class="{selected: strikeType === 'criticalStrike'}">critical</button>
+               <button class="button modeButton centered" @click="strikeType = 'averageStrike'" :class="{ selected: strikeType === 'averageStrike' }">average</button>
+               <button class="button modeButton centered" @click="strikeType = 'nonCriticalStrike'" :class="{ selected: strikeType === 'nonCriticalStrike' }">non-critical</button>
+               <button class="button modeButton centered" @click="strikeType = 'criticalStrike'" :class="{ selected: strikeType === 'criticalStrike' }">critical</button>
                <div class="modeButtonHighlight" :class="strikeType"/>
                <span class="strikeTooltip" v-if="showModeTooltips">choose the strike type, meaning graph will display damage of regular/critical/averaged strike</span>
             </div>
             <div class="modeButtonsContainer">
-               <button class="button modeButton centered" @click="levelSetting = 'Equal'" :class="{selected: levelSetting === 'Equal'}">equal</button>
-               <button class="button modeButton centered" @click="levelSetting = 'SelectedChanging'" :class="{selected: levelSetting === 'SelectedChanging'}">selected/changing</button>
-               <button class="button modeButton centered" @click="levelSetting = 'ChangingSelected'" :class="{selected: levelSetting === 'ChangingSelected'}">changing/selected</button>
+               <button class="button modeButton centered" @click="levelSetting = 'Equal'" :class="{ selected: levelSetting === 'Equal' }">equal</button>
+               <button class="button modeButton centered" @click="levelSetting = 'SelectedChanging'" :class="{ selected: levelSetting === 'SelectedChanging' }">selected/changing</button>
+               <button class="button modeButton centered" @click="levelSetting = 'ChangingSelected'" :class="{ selected: levelSetting === 'ChangingSelected' }">changing/selected</button>
                <div class="modeButtonHighlight" :class="levelSetting"/>
-               <span class="levelTooltip" v-if="showModeTooltips">choose the level setting the strike damage is shown for.<br/>equal means 1-18 vs 1-18<br/>selected vs changing means {{level(true)}} vs 1-18<br/>changing vs selected means 1-18 vs {{level(false)}}</span>
+               <span class="levelTooltip" v-if="showModeTooltips">
+                  choose the level setting the strike damage is shown for.<br/>
+                  equal means 1-18 vs 1-18<br/>
+                  selected vs changing means {{ level(true) }} vs 1-18<br/>
+                  changing vs selected means 1-18 vs {{ level(false) }}
+               </span>
             </div>
          </div>
          <div class="chartContainer">
@@ -36,7 +41,7 @@ const chartGridLineColor = 'hsla(0, 0%, 100%, 0.1)';
 const chartGridTextColor = 'hsla(0, 0%, 100%, 0.6)';
 
 export default defineComponent({
-   name: 'results',
+   name: 'Graph',
    data(){
       return {
          strikeType: "nonCriticalStrike",
@@ -46,12 +51,12 @@ export default defineComponent({
       }
    },
    mounted(){
-      const labels = Array.from({length: 18}, (_, index) => index + 1)
+      const labels = Array.from({ length: 18 }, (_, index) => index + 1)
       const data = {
          labels: labels,
          datasets: JSON.parse(JSON.stringify(this.datasetsToDisplay))
       }
-      this.chart = new Chart(this.$refs.canvas, {type: 'line', data: data, options: {
+      this.chart = new Chart(this.$refs.canvas, { type: 'line', data: data, options: {
          aspectRatio: (1 + Math.sqrt(5)) / 2,
          interaction: {
             mode: 'index',
@@ -59,12 +64,12 @@ export default defineComponent({
          },
          scales: {
             x: {
-               grid: {color: chartGridLineColor},
-               ticks: {color: chartGridTextColor}
+               grid: { color: chartGridLineColor },
+               ticks: { color: chartGridTextColor }
             },
             y: {
-               grid: {color: chartGridLineColor},
-               ticks: {color: chartGridTextColor}
+               grid: { color: chartGridLineColor },
+               ticks: { color: chartGridTextColor }
             }
          },
          plugins: {
@@ -87,12 +92,14 @@ export default defineComponent({
                bodyFont: {size: 12},
                callbacks: {
                   title: (context) => {
-                     return this.levelSetting === "Equal" ? `${context[0].label} lvl vs ${context[0].label} lvl` : this.levelSetting === "SelectedChanging" ? `${this.level(true)} lvl vs ${context[0].label} lvl` : `${context[0].label} lvl vs ${this.level(false)} lvl`
+                     return this.levelSetting === "Equal" ? `${ context[0].label } lvl vs ${ context[0].label } lvl`
+                     : this.levelSetting === "SelectedChanging" ? `${ this.level(true) } lvl vs ${ context[0].label } lvl`
+                     : `${ context[0].label } lvl vs ${ this.level(false) } lvl`
                   }
                },
             }
          },
-      }})
+      } })
    },
    methods: {
       updateChart(){
@@ -161,7 +168,7 @@ export default defineComponent({
          return this.getSelectedItems(isMain)
       },
       legendaries(isMain){
-         return this.getSelectedItems(isMain).filter(item => (!this.mythics.includes(item) && this.getItem(item).gold.total >= 1600) || item === "3112" || item === "2051" || item === "3184" || item === "3177")
+         return this.getSelectedItems(isMain).filter(item => ((!this.mythics.includes(item) && this.getItem(item).gold.total >= 1600)) || item === "3112" || item === "2051" || item === "3184" || item === "3177")
       },
       calculateStat(base, level, growth){
          return base + (growth * (level - 1) * (0.7025 + (0.0175 * (level - 1))))
@@ -228,9 +235,9 @@ export default defineComponent({
       dpsDatasets(){ // array of dps datasets based on damage datasets
          return this.mainStats.map((infoSet, index) => {
             return {
-               label: this.mainStats.length === 1 ? 'dps' : `${infoSet.title} dps`,
-               backgroundColor: `hsla(${this.graphDPSColors[index]}, 1)`,
-               borderColor: `hsla(${this.graphDPSColors[index]}, 0.8)`,
+               label: this.mainStats.length === 1 ? 'dps' : `${ infoSet.title } dps`,
+               backgroundColor: `hsla(${ this.graphDPSColors[index] }, 1)`,
+               borderColor: `hsla(${ this.graphDPSColors[index] }, 0.8)`,
                pointStyle: 'rectRot',
                borderCapStyle: 'round',
                borderWidth: 4,
@@ -246,9 +253,9 @@ export default defineComponent({
          const damageDatasets = this.mainStats.map((infoSet, index) => {
             return {
                label: infoSet.title,
-               backgroundColor: `hsla(${this.graphColors[index]}, 1)`,
-               borderColor: `hsla(${this.graphColors[index]}, 0.8)`,
-               data: this[`damage${this.levelSetting}`][index]
+               backgroundColor: `hsla(${ this.graphColors[index] }, 1)`,
+               borderColor: `hsla(${ this.graphColors[index] }, 0.8)`,
+               data: this[`damage${ this.levelSetting }`][index]
             }
          })
          return damageDatasets.reduce((previous, current, currentIndex) => [...previous, current, this.dpsDatasets[currentIndex]], [])

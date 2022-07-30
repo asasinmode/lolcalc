@@ -9,9 +9,9 @@
          <h3>base stats</h3>
          <section class="baseStats">
             <div class="baseStatContainer centered" v-for="(stat, name) in defaultStats" :key="stat.id">
-               <label><img :src="iconURL(name)">{{name}}</label>
+               <label><img :src="iconURL(name)">{{ name }}</label>
                <div class="baseStat">
-                  {{stat.value}}
+                  {{ stat.value }}
                </div>
             </div>
          </section>
@@ -36,12 +36,12 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useMainStore } from "../stores";
+import { useMainStore } from "@/stores";
 import { mapActions } from "pinia";
-import dummyURL from "../assets/targetDummy splash.webp"
+import dummyURL from "@/assets/targetDummy splash.webp"
 
 export default defineComponent({
-   name: "targetDummyInfo",
+   name: "TargetDummyShowcase",
    data(){
       return {
          dummyURL,
@@ -69,7 +69,7 @@ export default defineComponent({
    methods: {
       ...mapActions(useMainStore, ["setCalculatedStats", "setItems"]),
       iconURL(icon) {
-         return new URL(`../assets/statIcons/${icon}.webp`, import.meta.url).href;
+         return new URL(`../../assets/statIcons/${ icon }.webp`, import.meta.url).href;
       },
       handleStatsChange(){
          const transformedHealth = this.customStats.health.length === 0 ? 0 : this.customStats.health
@@ -79,7 +79,7 @@ export default defineComponent({
          const armorArray = Array(18).fill(transformedArmor)
          const magicResistsArray = Array(18).fill(transformedMagicResists)
          this.setItems({isMain: false, items: []})
-         this.setCalculatedStats({stats: {health: healthArray, armor: armorArray, magicResists: magicResistsArray}, isMain: false})
+         this.setCalculatedStats({ stats: { health: healthArray, armor: armorArray, magicResists: magicResistsArray }, isMain: false })
       }
    }
 })

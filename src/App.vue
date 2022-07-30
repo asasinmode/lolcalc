@@ -1,19 +1,21 @@
 <template>
    <SelectChampions />
-   <ChampionsShowcase />
-   <results v-if="showResults" />
+   <Showcase />
+   <Graph v-if="showResults" />
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { useMainStore } from "@/stores";
-import SelectChampions from "@/components/SelectChampions.vue"; import ChampionsShowcase from '@/components/ChampionsShowcase.vue'; import results from '@/components/results.vue'
+import SelectChampions from "@/components/SelectChampions.vue";
+import Showcase from '@/components/ChampionsShowcase/Showcase.vue';
+import Graph from '@/components/results.vue';
 
 export default defineComponent({
    name: 'App',
    components: {
-      SelectChampions, ChampionsShowcase, results
+      SelectChampions, Showcase, Graph
    },
    mounted(){
       if(localStorage.getItem('tooltipsVisibility') != "null"){
@@ -46,7 +48,7 @@ export default defineComponent({
    --bg1: hsl(0, 0%, 0%);
    --main1: hsl(0, 0%, 100%);
    --main2: hsl(0, 0%, 80%);
-   --accent1: hsla(265, 100%, 65%, 1);
+   --accent1: hsla(265, 100%, 70%, 1);
    --highlight1: hsla(0, 100%, 100%, 0.1);
    --highlight2: hsla(0, 100%, 100%, 0.25);
    --lowlight1: hsla(0, 0%, 0%, 0.3);

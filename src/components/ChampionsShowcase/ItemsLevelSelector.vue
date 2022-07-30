@@ -6,7 +6,7 @@
       <div class="ilButtonContainer levelSelect">
          <label for="levelSelect" >level</label>
          <select id="levelSelect" ref="levelSelect" @change="changeLevel">
-            <option v-for="i in 18" :value="i" :key="`levelOption${i}`">{{i}}</option>
+            <option v-for="i in 18" :value="i" :key="`levelOption${ i }`">{{ i }}</option>
          </select>
       </div>
    </div>
@@ -18,12 +18,12 @@ import { mapActions } from "pinia";
 import { useMainStore } from "@/stores";
 
 export default defineComponent({
-   name: 'championILSelector',
+   name: 'ItemsLevelSelector',
    props: ['isMain'],
    methods: {
       ...mapActions(useMainStore, ["setLevel"]),
       changeLevel(){
-         this.setLevel({isMain: this.isMain, level: parseInt(this.$refs.levelSelect.value)})
+         this.setLevel({ isMain: this.isMain, level: parseInt(this.$refs.levelSelect.value) })
       }
    }
 })

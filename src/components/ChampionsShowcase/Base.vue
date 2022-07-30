@@ -1,16 +1,16 @@
 <template>
    <div class="baseChampionInfoContainer">
       <header class="centered">
-         <h1>{{champion.name}}</h1>
-         <img :src="`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.id}_0.jpg`" >
+         <h1>{{ champion.name }}</h1>
+         <img :src="`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${ champion.id }_0.jpg`" >
       </header>
       <main class="centered line">
          <h3>base stats</h3>
          <section class="baseStats">
             <div class="baseStatContainer centered" v-for="(stat, name) in filteredStats" :key="stat.id">
-               <label><img :src="iconURL(name)">{{name}}</label>
+               <label><img :src="iconURL(name)">{{ name }}</label>
                <div class="baseStat">
-                  {{stat.value}} (+{{stat.growth}})
+                  {{ stat.value }} (+{{ stat.growth }})
                </div>
             </div>
          </section>
@@ -24,11 +24,11 @@ import { useMainStore } from "@/stores";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-   name: "baseChampionInfo",
+   name: "Base",
    props: ["target", "isMain"],
    methods: {
       iconURL(icon) {
-         return new URL(`../assets/statIcons/${icon}.webp`, import.meta.url).href;
+         return new URL(`../../assets/statIcons/${ icon }.webp`, import.meta.url).href;
       }
    },
    computed: {
@@ -63,7 +63,7 @@ export default defineComponent({
       filteredStats() {
          return Object.keys(this.baseStats).filter(key => {
             return this.baseStats[key] != undefined;
-         }).reduce((obj, key) => { return { ...obj, [key]: this.baseStats[key] }; }, {});
+         }).reduce((obj, key) => ({ ...obj, [key]: this.baseStats[key] }), {});
       }
    }
 })
