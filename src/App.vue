@@ -10,7 +10,7 @@ import { mapActions, mapState } from "pinia";
 import { useMainStore } from "@/stores";
 import SelectChampions from "@/components/SelectChampions.vue";
 import Showcase from '@/components/ChampionsShowcase/Showcase.vue';
-import Graph from '@/components/results.vue';
+import Graph from '@/components/Graph.vue';
 
 export default defineComponent({
    name: 'App',
