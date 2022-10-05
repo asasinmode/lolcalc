@@ -10,7 +10,7 @@ const armorPenItems = [
    {id: "3814", percentage: 0, lethality: 10},  // edge of night
    {id: "6676", percentage: 0, lethality: 12},  // collector
    {id: "6691", percentage: 0, lethality: 18},  // duskblade of draktharr
-   {id: "6692", percentage: 0, lethality: 18},  // eclipse
+   {id: "6692", percentage: 0, lethality: 12},  // eclipse
    {id: "6693", percentage: 0, lethality: 18},  // prowler's claw
    {id: "6694", percentage: 0.3, lethality: 0}, // serylda's grudge
    {id: "6695", percentage: 0, lethality: 12},   // serpent's fang
