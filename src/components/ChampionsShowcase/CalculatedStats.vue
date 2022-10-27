@@ -126,7 +126,7 @@ export default defineComponent({
          const itemPassiveFimbulwinter = (items.includes("3119") || items.includes("3121")) ? 0.08 : 0   // winter's approach/fimbulwinter passive max mana % converted to health
          const itemPassiveMuramana = (items.includes("3004") || items.includes("3042")) ? 0.025 : 0 // manamune/muramana passive max mana % converted to attack damage
          const itemPassiveRabadon = items.includes("3089") ? 1.35 : 1
-         const itemPassiveSterak = items.includes("3053") ? levelAttackDamage *  0.45 : 0 // sterak's gage bonus attack damage
+         const itemPassiveSterak = items.includes("3053") ? levelAttackDamage *  0.5 : 0 // sterak's gage bonus attack damage
          const itemPassiveTitanic = items.includes("3748") ? 0.02 : 0   // titanic hydra's health % converted to attack damage
          
          const championPassivePyke = this.champion.id === "Pyke" ? 1 / 14 : 0   // pyke passive health to ad ratio

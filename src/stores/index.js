@@ -37,7 +37,7 @@ Ornnaments.forEach(id => {delete itemData.data[id]})
 export const useMainStore = defineStore({
    id: 'counter',
    state: () => ({
-      patch: '12.19.1',
+      patch: '12.20.1',
       champions: championData.data,
       allItems: itemData.data,
       mythics: ["6693", "6692", "6691", "6673", "6672", "6671", "6664", "6662", "6656", "6655", "6653", "6632", "6631", "6630", "6617", "6616", "4644", "4636", "4633", "4005", "3190", "3152", "3078", "3068", "3001", "2065"],
@@ -56,7 +56,7 @@ export const useMainStore = defineStore({
          {id: "3041", description: "+125 ability power (fully stacked)."}, // mejai
          {id: "3042", description: "bonus attack damage equal to 2.5% maximum mana. Basic attacks deal 1.5% maximum mana bonus physical damage on-hit."}, // muramana
          {id: "3047", description: "reduces damage from basic attacks by 12%."}, // plated steelcaps
-         {id: "3053", description: "+45% base attack damage as bonus attack damage."}, // sterak's gage
+         {id: "3053", description: "+50% base attack damage as bonus attack damage."}, // sterak's gage
          {id: "3068", description: "+50 health per other legendary item."},   // sunfire aegis
          {id: "3078", description: "3 bonus attack damage per other legendary item."}, // trinity force
          {id: "3089", description: "increases ability power by 35%."}, // rabadon's deathcap
