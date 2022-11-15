@@ -85,8 +85,9 @@ export default defineComponent({
          }
          const miniRuneAttackSpeed = 0.1, miniRuneArmor = 6
 
-         const mythicPassiveHealth = this.legendaries(this.isMain).length * (items.includes("6662") ? 100 : 0) + this.legendaries(this.isMain).length * ((items.includes("6664") || items.includes("3068")) ? 50 : items.includes("6673") ? 70 : 0)  // frostfire gauntlet / sunfire aegis and turbochemtank / immortal shieldbow mythic passives
-         const itemsHealth = this.sumValuesOf(items, "FlatHPPoolMod") + mythicPassiveHealth
+         const mythicPassiveHealth = this.legendaries(this.isMain).length * (items.includes("6662") ? 100 : 0) + this.legendaries(this.isMain).length * (items.includes("6662") ? 50 : items.includes("6673") ? 70 : items.includes("6667") ? 100 : 0)  // iceborn gauntlet, immortal shieldbow and radiant virtue mythic passives
+         const mythicPassiveLegendaryItemsHealthModifier = ((items.includes("3084") ? 0.01 : 0) * this.legendaries(this.isMain).length) + 1
+         const itemsHealth = (this.sumValuesOf(items, "FlatHPPoolMod") * mythicPassiveLegendaryItemsHealthModifier) + mythicPassiveHealth
          const itemsMana = this.champion.partype === "Mana" ? this.sumValuesOf(items, "FlatMPPoolMod") : 0
 
          const mythicPassiveLethality = this.legendaries(this.isMain).length * (items.includes("6693") ? 5 : 0)   // prowler's claw bonus lethality mythic passive
@@ -117,9 +118,9 @@ export default defineComponent({
          const mythicPassiveAbilityPower = this.legendaries(this.isMain).length * (items.includes("4005") ? 15 : 0) + this.legendaries(this.isMain).length * (items.includes("6656") ? 10 : 0) + this.legendaries(this.isMain).length * (items.includes("4633") ? 8 : 0) // ad from imperial mandate/everfrost/riftmaker mythic passive
          const itemsAbilityPower = this.sumValuesOf(items, "FlatMagicDamageMod") + mythicPassiveAbilityPower + dreadAbilityPower
 
-         const mythicPassiveArmor = this.legendaries(this.isMain).length * (items.includes("3001") ? 5 : 0)
+         const mythicPassiveArmor = this.legendaries(this.isMain).length * ((items.includes("3001") || items.includes("6665")) ? 5 : 0)  // armor from evenshroud/jak'sho mythic passive
          const itemsArmor = this.sumValuesOf(items, "FlatArmorMod") + mythicPassiveArmor
-         const mythicPassiveMagicResists = this.legendaries(this.isMain).length * (items.includes("3001") ? 5 : 0)
+         const mythicPassiveMagicResists = this.legendaries(this.isMain).length * ((items.includes("3001") || items.includes("6665")) ? 5 : 0) // magic resists from evenshroud/jak'sho mythic passive
          const itemsMagicResists = this.sumValuesOf(items, "FlatSpellBlockMod") + mythicPassiveMagicResists
 
          const itemPassiveDemonic = items.includes("4637") ? 0.02 : 0   // demonic embrace % bonus health converted to ability power
@@ -239,7 +240,7 @@ export default defineComponent({
       }
    },
    computed:{
-      ...mapState(useMainStore, ["getSelectedItems", "allItems", "mythics", "adaptiveForceBias", "getLevel", "getMainChampion", "getTargetChampion", "apVisibility", "getItem", "getSelectedItems", "asRatioChampions"]),
+      ...mapState(useMainStore, ["getSelectedItems", "allItems", "mythics", "adaptiveForceBias", "getLevel", "getMainChampion", "getTargetChampion", "apVisibility", "getItem", "asRatioChampions"]),
       selectedItems(){
          return this.getSelectedItems(this.isMain)
       },

@@ -177,7 +177,7 @@ export default defineComponent({
          return isMain ? this.getMainChampion : this.getTargetChampion
       },
       isRanged(isMain){
-         return this.champion(isMain).stats.attackrange >= 300
+         return this.champion(isMain).stats.attackrange > 325
       },
       level(isMain){
          return this.getLevel(isMain)

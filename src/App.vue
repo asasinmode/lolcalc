@@ -43,7 +43,14 @@ export default defineComponent({
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@font-face {
+   font-family: 'Hubot Sans';
+   src:
+      url('Hubot-Sans.woff2') format('woff2 supports variations'),
+      url('Hubot-Sans.woff2') format('woff2-variations');
+   font-weight: 200 900;
+   font-stretch: 75% 125%;
+}
 :root{
    --bg1: hsl(0, 0%, 0%);
    --main1: hsl(0, 0%, 100%);
@@ -56,7 +63,7 @@ export default defineComponent({
    --border-active: hsl(0, 0%, 100%);
 }
 *, *::before, *::after{
-   font-family: 'Roboto', sans-serif;
+   font-family: 'Hubot Sans';
    box-sizing: border-box;
    margin: 0;
    padding: 0;
@@ -135,7 +142,7 @@ button{
 .levelTooltip, .strikeTooltip, .itemPreview span, .showcaseTooltip{
    position: absolute;
    visibility: hidden;
-   padding-block: 0.2em;
+   padding-block: 0.3em;
    padding-inline: 0.35em;
    z-index: 1;
    background: var(--bg1);

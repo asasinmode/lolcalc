@@ -58,10 +58,16 @@ export default defineComponent({
    position: absolute;
 }
 .itemPreview span{
-   width: 140px;
-   margin-left: -70px;
+   width: 9rem;
+   margin-left: -4.5rem;
 }
 .itemPreview:hover span{
    visibility: visible;
+}
+@media (min-width: 768px) {
+   .itemPreview span{
+      width: 14rem;
+      margin-left: -7rem;
+   }
 }
 </style>
