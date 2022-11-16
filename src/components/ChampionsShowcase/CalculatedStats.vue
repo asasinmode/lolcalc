@@ -86,8 +86,7 @@ export default defineComponent({
          const miniRuneAttackSpeed = 0.1, miniRuneArmor = 6
 
          const mythicPassiveHealth = this.legendaries(this.isMain).length * (items.includes("6662") ? 100 : 0) + this.legendaries(this.isMain).length * (items.includes("6662") ? 50 : items.includes("6673") ? 70 : items.includes("6667") ? 100 : 0)  // iceborn gauntlet, immortal shieldbow and radiant virtue mythic passives
-         const mythicPassiveLegendaryItemsHealthModifier = ((items.includes("3084") ? 0.01 : 0) * this.legendaries(this.isMain).length) + 1
-         const itemsHealth = (this.sumValuesOf(items, "FlatHPPoolMod") * mythicPassiveLegendaryItemsHealthModifier) + mythicPassiveHealth
+         const itemsHealth = this.sumValuesOf(items, "FlatHPPoolMod") + mythicPassiveHealth
          const itemsMana = this.champion.partype === "Mana" ? this.sumValuesOf(items, "FlatMPPoolMod") : 0
 
          const mythicPassiveLethality = this.legendaries(this.isMain).length * (items.includes("6693") ? 5 : 0)   // prowler's claw bonus lethality mythic passive
@@ -125,6 +124,7 @@ export default defineComponent({
 
          const itemPassiveDemonic = items.includes("4637") ? 0.02 : 0   // demonic embrace % bonus health converted to ability power
          const itemPassiveFimbulwinter = (items.includes("3119") || items.includes("3121")) ? 0.08 : 0   // winter's approach/fimbulwinter passive max mana % converted to health
+         const itemPassiveHeartsteel = ((items.includes("3084") ? 0.01 : 0) * this.legendaries(this.isMain).length) + 1 // heartsteel's mythic passive health modifier
          const itemPassiveMuramana = (items.includes("3004") || items.includes("3042")) ? 0.025 : 0 // manamune/muramana passive max mana % converted to attack damage
          const itemPassiveRabadon = items.includes("3089") ? 1.35 : 1
          const itemPassiveSterak = items.includes("3053") ? levelAttackDamage *  0.5 : 0 // sterak's gage bonus attack damage
@@ -151,9 +151,11 @@ export default defineComponent({
             const finalArmor = levelArmor + ((itemsArmor + miniRuneArmor) * championPassiveOrnnModifier)
             const finalMagicResists = levelMagicResists + (itemsMagicResists * championPassiveOrnnModifier)
 
+            const itemPassiveHeartsteelBonusHealth = (itemsHealth + levelHealth) * (itemPassiveHeartsteel - 1)
+
             let bonusAttackDamage = itemsAttackDamage + itemPassiveSterak
             let abilityPower = itemsAbilityPower * itemPassiveRabadon
-            let bonusHealth = itemsHealth * championPassiveOrnnModifier
+            let bonusHealth = (itemsHealth + itemPassiveHeartsteelBonusHealth) * championPassiveOrnnModifier
             let totalMana = levelMana + itemsMana
 
             const {attackDamage: runeAttackDamage, abilityPower: runeAbilityPower} = this.miniRuneAdaptiveForce(this.champion.id, bonusAttackDamage, abilityPower)
@@ -164,7 +166,7 @@ export default defineComponent({
 
             totalMana *= (1 + (abilityPower * championPassiveRyze))
 
-            const itemPassiveAweBonusHealth = (totalMana * itemPassiveFimbulwinter) * championPassiveOrnnModifier
+            const itemPassiveAweBonusHealth = (totalMana * itemPassiveFimbulwinter) * itemPassiveHeartsteel * championPassiveOrnnModifier
             bonusHealth += itemPassiveAweBonusHealth
 
             bonusAttackDamage += championPassiveWindBrothers
@@ -175,7 +177,7 @@ export default defineComponent({
             bonusHealth = this.champion.id === "Pyke" ? 0 : bonusHealth
 
             const championPassiveVladimirBonusAbilityPower = bonusHealth * championPassiveVladimirHealthToAPRatio * itemPassiveRabadon
-            const championPassiveVladimirBonusHealth = (abilityPower * championPassiveVladimirAPToHealthRatio) + (bonusHealth * championPassiveVladimirBonusHealthToApRatio)
+            const championPassiveVladimirBonusHealth = ((abilityPower * championPassiveVladimirAPToHealthRatio) + (bonusHealth * championPassiveVladimirBonusHealthToApRatio)) * itemPassiveHeartsteel
             abilityPower += championPassiveVladimirBonusAbilityPower
             bonusHealth += championPassiveVladimirBonusHealth
 
@@ -197,7 +199,7 @@ export default defineComponent({
                totalMana += itemPassiveDemonicChampionPassiveRyzeBonusMana
             }
             if(this.champion.id === "Vladimir"){
-               const itemPassiveDemonicChampionPassiveVladimirBonusHealth = itemPassiveDemonicBonusAbilityPower * itemPassiveRabadon * championPassiveVladimirAPToHealthRatio
+               const itemPassiveDemonicChampionPassiveVladimirBonusHealth = itemPassiveDemonicBonusAbilityPower * itemPassiveRabadon * championPassiveVladimirAPToHealthRatio * itemPassiveHeartsteel
                bonusHealth += itemPassiveDemonicChampionPassiveVladimirBonusHealth
 
                const championPassiveVladimirItemPassiveDemonicAbilityPower = itemPassiveDemonicChampionPassiveVladimirBonusHealth * championPassiveVladimirHealthToAPRatio
