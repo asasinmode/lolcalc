@@ -54,18 +54,18 @@ export default defineComponent({
    },
    mounted() {
       this.itemGroups = [
-         [...this.mythics, 3802, 4635, 6029, 6660, 6670],  // mythics and their components
-         [1001, 2422, 3006, 3009, 3020, 3047, 3111, 3117, 3158],  // boots
-         [3031, 3124, 6677],  // crit modifiers
-         [1082, 3041], // dark seal and mejai
-         [2051, 3112, 3177, 3184],  // aram starting items
-         [3074, 3077, 3748],  // tiamat
-         [3850, 3851, 3853, 3854, 3855, 3857, 3858, 3859, 3860, 3862, 3863, 3864],  // support items
-         [3035, 3036, 6694],  // armor pen
-         [3053, 3155, 3156, 6673],  //lifeline
-         [3003, 3004, 3040, 3042, 3070, 3119, 3121],   // tear items
-         [3139, 3140, 6035],  // qss
-         [3135, 4630] // magic pen
+         [...this.mythics, "3802", "4635", "6029", "6660", "6670"],  // mythics and their components
+         ["1001", "2422", "3006", "3009", "3020", "3047", "3111", "3117", "3158"],  // boots
+         ["3031", "3124", "6677"],  // crit modifiers
+         ["1082", "3041"], // dark seal and mejai
+         ["2051", "3112", "3177", "3184"],  // aram starting items
+         ["3074", "3077", "3748"],  // tiamat
+         ["3850", "3851", "3853", "3854", "3855", "3857", "3858", "3859", "3860", "3862", "3863", "3864"],  // support items
+         ["3035", "3036", "6694"],  // armor pen
+         ["3053", "3155", "3156", "6673"],  // lifeline
+         ["3003", "3004", "3040", "3042", "3070", "3119", "3121"],   // tear items
+         ["3139", "3140", "6035"],  // qss
+         ["3135", "4630"] // magic pen
       ];
    },
    methods: {
@@ -73,27 +73,25 @@ export default defineComponent({
       selectedItems(isMain) {
          return this.getSelectedItems(isMain);
       },
-      selectItem(itemId, isForMe) {
-         const id = parseInt(itemId)
-         
+      selectItem(itemId, isForMe) {         
          if (this.isMain && this.getTargetChampion === "targetDummy" && !isForMe) {
             return;
          }
 
          let tempCopy = [...this.selectedItems(isForMe)];
 
-         if (tempCopy.includes(id)) {
-            tempCopy = tempCopy.filter(item => item != id);
+         if (tempCopy.includes(itemId)) {
+            tempCopy = tempCopy.filter(item => item != itemId);
          } else {
             if (this.itemGroupsCheck) {
                this.itemGroups.forEach(group => {
-                  if (group.includes(id) && tempCopy.some(item => group.includes(item))) {
+                  if (group.includes(itemId) && tempCopy.some(item => group.includes(item))) {
                         tempCopy = tempCopy.filter(item => !group.includes(item));
                   }
                });
             }
 
-            tempCopy.push(id);
+            tempCopy.push(itemId);
 
             if (tempCopy.length > 6) {
                tempCopy.shift();

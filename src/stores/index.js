@@ -55,63 +55,63 @@ export const useMainStore = defineStore({
       champions: championData.data,
       allItems: itemData.data,
       mythics: [
-         2065,
-         3001, 3078, 3084, 3152, 3190,
-         4005, 4633, 4636, 4644,
-         6616, 6617,
-         6630, 6631, 6632,
-         6653, 6655, 6656, 6657,
-         6662, 6665, 6667,
-         6671, 6672, 6673,
-         6691, 6692, 6693
+         "2065",
+         "3001", "3078", "3084", "3152", "3190",
+         "4005", "4633", "4636", "4644",
+         "6616", "6617",
+         "6630", "6631", "6632",
+         "6653", "6655", "6656", "6657",
+         "6662", "6665", "6667",
+         "6671", "6672", "6673",
+         "6691", "6692", "6693"
       ],
       adaptiveForceBias: {
          attackDamage: ["Aatrox", "Akshan", "Aphelios", "Ashe", "Belveth", "Blitzcrank", "Braum", "Caitlyn", "Camille", "Corki", "Darius", "Draven", "DrMundo", "Ezreal", "Fiora", "Gangplank", "Garen", "Gnar", "Graves", "Hecarim", "Illaoi", "Irelia", "JarvanIV", "Jax", "Jayce", "Jhin", "Jinx", "Kaisa", "Kalista", "Kayle", "Kayn", "Khazix", "Kindred", "Kled", "KogMaw", "KSante", "LeeSin", "Leona", "Lucian", "MasterYi", "MissFortune", "MonkeyKing", "Nasus", "Nilah", "Nocturne", "Olaf", "Ornn", "Pantheon", "Poppy", "Pyke", "Qiyana", "Quinn", "Rammus", "RekSai", "Rell", "Renekton", "Rengar", "Riven", "Samira", "Senna", "Sett", "Shaco", "Shen", "Shyvana", "Sion", "Sivir", "Skarner", "TahmKench", "Talon", "Taric", "Thresh", "Tristana", "Trundle", "Tryndamere", "Twitch", "Udyr", "Urgot", "Varus", "Vayne", "Vi", "Viego", "Volibear", "Warwick", "Xayah", "XinZhao", "Yasuo", "Yone", "Yorick", "Zed", "Zeri"],
          abilityPower: ["Ahri", "Akali", "Alistar", "Amumu", "Anivia", "Annie", "AurelionSol", "Azir", "Bard", "Brand", "Cassiopeia", "Chogath", "Diana", "Ekko", "Elise", "Evelynn", "Fiddlesticks", "Fizz", "Galio", "Gragas", "Gwen", "Heimerdinger", "Ivern", "Janna", "Karma", "Karthus", "Kassadin", "Katarina", "Kennen", "Leblanc", "Lillia", "Lissandra", "Lulu", "Lux", "Malphite", "Malzahar", "Maokai", "Mordekaiser", "Morgana", "Nami", "Nautilus", "Neeko", "Nidalee", "Nunu", "Orianna", "Rakan", "Renata", "Rumble", "Ryze", "Sejuani", "Seraphine", "Singed", "Sona", "Soraka", "Swain", "Sylas", "Syndra", "Taliyah", "Teemo", "TwistedFate", "Veigar", "Velkoz", "Vex", "Viktor", "Vladimir", "Xerath", "Yuumi", "Zac", "Ziggs", "Zilean", "Zoe", "Zyra"]
       },
       passives: [
-         {id: 1043, description: "15 bonus physical damage on-hit."}, // recurve bow
-         {id: 2065, description: "+5 ability haste per other legendary item."}, // shurelya's battlesong
-         {id: 3001, description: "+5 armor and magic resists per other legendary item."}, // evenshroud
-         // {id: "3003", description: "bonus ability power equal to 3% maximum mana."}, // archangel's staff
-         {id: 3004, description: "bonus attack damage equal to 2.5% maximum mana."}, // manamune
-         {id: 3031, description: "bonus 35% critical strike damage if you have at least 60% crit chance."}, // infinity edge
-         {id: 3036, description: "deal 0-15% bonus attack damage depending on maximum health difference."},  // lord dominik's regards
-         // {id: "3040", description: "bonus ability power equal to 5% maximum mana."}, // seraph's embrace
-         {id: 3041, description: "+125 ability power (fully stacked)."}, // mejai
-         {id: 3042, description: "bonus attack damage equal to 2.5% maximum mana. Basic attacks deal 1.5% maximum mana bonus physical damage on-hit."}, // muramana
-         {id: 3047, description: "reduces damage from basic attacks by 12%."}, // plated steelcaps
-         {id: 3053, description: "+50% base attack damage as bonus attack damage."}, // sterak's gage
-         {id: 3078, description: "+3 attack damage, ability haste and movement speed per other legendary item."}, // trinity force
-         {id: 3084, description: "+1% bonus health per other legendary item."}, // heartsteel
-         {id: 3089, description: "increases ability power by 35%."}, // rabadon's deathcap
-         {id: 3091, description: "15-80 bonus magic damage on hit based on level."}, // wit's end
-         {id: 3115, description: "15 + 20% ap bonus magic damage on hit."}, // nashor's tooth
-         {id: 3119, description: "bonus health equal to 8% maximum mana."}, // winter's approach
-         {id: 3121, description: "bonus health equal to 8% maximum mana."}, // fimbul winter
-         {id: 3124, description: "40 bonus physical damage on-hit per 20% critical strike chance."}, // guinsoo's rageblade
-         {id: 3748, description: "bonus attack damage equal to 2% bonus health. Deal bonus physical damage on hit based on maximum hp."}, // titanic hydra
-         {id: 4005, description: "+15 ability power per other legendary item."}, // imperial mandate
-         {id: 4633, description: "+8 ability power per other legendary item."}, // riftmaker
-         {id: 4636, description: "+5 ability haste per other legendary item."}, // night harvester
-         {id: 4637, description: "bonus ability power equal to 2% bonus health."}, // demonic embrace
-         {id: 4644, description: "+8 ability power per other legendary item."}, // crown of the shattered queen
-         {id: 6630, description: "+5 ability haste per other legendary item."},   // goredrinker
-         {id: 6631, description: "+2% movement speed per other legendary item."},   // stridebreaker
-         {id: 6632, description: "+3% armor penetration and magic penetration per other legendary item."}, // divine sunderer
-         {id: 6653, description: "+5 ability haste per other legendary item.."}, // liandry's anguish
-         {id: 6656, description: "+10 ability power per other legendary item."}, // everfrost
-         {id: 6657, description: "+5 ability haste per other legendary item."}, // rod of ages
-         {id: 6662, description: "+50 health, 5% tenacity and slow resist per other legendary item."},   // iceborn gauntlet
-         {id: 6665, description: "+5 armor and magic resists per other legendary item."},   // Jak'Sho, The Protean
-         {id: 6667, description: "+100 health per other legendary item."},   // radiant virtue
-         {id: 6671, description: "+2% movement speed per other legendary item."},   // galeforce
-         {id: 6672, description: "+10% bonus attack speed per other legendary item."},  // kraken slayer
-         {id: 6673, description: "+5 attack damage, +70 health per other legendary item."},   // immortal shieldbow
-         {id: 6677, description: "35 bonus physical damage on-hit per 20% critical strike chance."},   // rageclaw
-         {id: 6691, description: "+5 ability haste and movement speed per other legendary item."}, // duskblade of draktharr
-         {id: 6692, description: "+4% armor penetration and +5 movement speed per other legendary item."}, // eclipse
-         {id: 6693, description: "+5 lethality and +5 movement speed per other legendary item."}, // prowler's claw
+         {id: "1043", description: "15 bonus physical damage on-hit."}, // recurve bow
+         {id: "2065", description: "+5 ability haste per other legendary item."}, // shurelya's battlesong
+         {id: "3001", description: "+5 armor and magic resists per other legendary item."}, // evenshroud
+         // {id: ""3003"", description: "bonus ability power equal to 3% maximum mana."}, // archangel's staff
+         {id: "3004", description: "bonus attack damage equal to 2.5% maximum mana."}, // manamune
+         {id: "3031", description: "bonus 35% critical strike damage if you have at least 60% crit chance."}, // infinity edge
+         {id: "3036", description: "deal 0-15% bonus attack damage depending on maximum health difference."},  // lord dominik's regards
+         // {id: ""3040"", description: "bonus ability power equal to 5% maximum mana."}, // seraph's embrace
+         {id: "3041", description: "+125 ability power (fully stacked)."}, // mejai
+         {id: "3042", description: "bonus attack damage equal to 2.5% maximum mana. Basic attacks deal 1.5% maximum mana bonus physical damage on-hit."}, // muramana
+         {id: "3047", description: "reduces damage from basic attacks by 12%."}, // plated steelcaps
+         {id: "3053", description: "+50% base attack damage as bonus attack damage."}, // sterak's gage
+         {id: "3078", description: "+3 attack damage, ability haste and movement speed per other legendary item."}, // trinity force
+         {id: "3084", description: "+1% bonus health per other legendary item."}, // heartsteel
+         {id: "3089", description: "increases ability power by 35%."}, // rabadon's deathcap
+         {id: "3091", description: "15-80 bonus magic damage on hit based on level."}, // wit's end
+         {id: "3115", description: "15 + 20% ap bonus magic damage on hit."}, // nashor's tooth
+         {id: "3119", description: "bonus health equal to 8% maximum mana."}, // winter's approach
+         {id: "3121", description: "bonus health equal to 8% maximum mana."}, // fimbul winter
+         {id: "3124", description: "40 bonus physical damage on-hit per 20% critical strike chance."}, // guinsoo's rageblade
+         {id: "3748", description: "bonus attack damage equal to 2% bonus health. Deal bonus physical damage on hit based on maximum hp."}, // titanic hydra
+         {id: "4005", description: "+15 ability power per other legendary item."}, // imperial mandate
+         {id: "4633", description: "+8 ability power per other legendary item."}, // riftmaker
+         {id: "4636", description: "+5 ability haste per other legendary item."}, // night harvester
+         {id: "4637", description: "bonus ability power equal to 2% bonus health."}, // demonic embrace
+         {id: "4644", description: "+8 ability power per other legendary item."}, // crown of the shattered queen
+         {id: "6630", description: "+5 ability haste per other legendary item."},   // goredrinker
+         {id: "6631", description: "+2% movement speed per other legendary item."},   // stridebreaker
+         {id: "6632", description: "+3% armor penetration and magic penetration per other legendary item."}, // divine sunderer
+         {id: "6653", description: "+5 ability haste per other legendary item.."}, // liandry's anguish
+         {id: "6656", description: "+10 ability power per other legendary item."}, // everfrost
+         {id: "6657", description: "+5 ability haste per other legendary item."}, // rod of ages
+         {id: "6662", description: "+50 health, 5% tenacity and slow resist per other legendary item."},   // iceborn gauntlet
+         {id: "6665", description: "+5 armor and magic resists per other legendary item."},   // Jak'Sho, The Protean
+         {id: "6667", description: "+100 health per other legendary item."},   // radiant virtue
+         {id: "6671", description: "+2% movement speed per other legendary item."},   // galeforce
+         {id: "6672", description: "+10% bonus attack speed per other legendary item."},  // kraken slayer
+         {id: "6673", description: "+5 attack damage, +70 health per other legendary item."},   // immortal shieldbow
+         {id: "6677", description: "35 bonus physical damage on-hit per 20% critical strike chance."},   // rageclaw
+         {id: "6691", description: "+5 ability haste and movement speed per other legendary item."}, // duskblade of draktharr
+         {id: "6692", description: "+4% armor penetration and +5 movement speed per other legendary item."}, // eclipse
+         {id: "6693", description: "+5 lethality and +5 movement speed per other legendary item."}, // prowler's claw
       ],
       asRatioChampions: [  // https://leagueoflegends.fandom.com/wiki/List_of_champions/Attack_speed | AS Ratio / Base
          ["Akshan", 0.6269592476489028],
@@ -175,9 +175,7 @@ export const useMainStore = defineStore({
          return this.champions[this.targetChampion]
       },
       getSelectedItems: (state) => (isMain) => {
-         const items = isMain ? state.mainItems : state.targetItems
-
-         return items.map(id => parseInt(id))
+         return isMain ? state.mainItems : state.targetItems
       },
       getLevel: (state) => (isMain) => {
          return isMain ? state.mainLevel : state.targetLevel
