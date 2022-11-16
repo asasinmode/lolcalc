@@ -43,14 +43,7 @@ export default defineComponent({
 </script>
 
 <style>
-@font-face {
-   font-family: 'Hubot Sans';
-   src:
-      url('Hubot-Sans.woff2') format('woff2 supports variations'),
-      url('Hubot-Sans.woff2') format('woff2-variations');
-   font-weight: 200 900;
-   font-stretch: 75% 125%;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 :root{
    --bg1: hsl(0, 0%, 0%);
    --main1: hsl(0, 0%, 100%);
@@ -63,7 +56,7 @@ export default defineComponent({
    --border-active: hsl(0, 0%, 100%);
 }
 *, *::before, *::after{
-   font-family: 'Hubot Sans';
+   font-family: 'Roboto', sans-serif;
    box-sizing: border-box;
    margin: 0;
    padding: 0;
