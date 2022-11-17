@@ -114,29 +114,21 @@ export default defineComponent({
       },
       calculateDamage(mainStats, mainLevel, targetLevel){
          const mainItems = this.selectedItems(true)
-         const targetItems = this.selectedItems(false)
-
-         const omenDamageModifier = targetItems.includes("3143") ? 0.8 : 1
-
-         const attackDamageModifier = this.champion(true).id === "Kalista" ? 0.9 : 1
-         const targetHealth = this.targetStats.health[targetLevel - 1]
-         const basicAttackDamageModifier = targetItems.includes("3047") ? 0.88 : 1
-
-         const healthDifference = ((targetHealth - mainStats.health[mainLevel - 1]) / 100) > 20 ? 20 : ((targetHealth - mainStats.health[mainLevel - 1]) / 100) < 0 ? 0 : ((targetHealth - mainStats.health[mainLevel - 1]) / 100)
-         const physicalDamageModifier = (mainItems.includes("3036") ? ((healthDifference * 0.0075) + 1) : 1)
+         const modifiers = this.levelIndependentModifiers
          const [physicalOnHitDamage, magicalOnHitDamage] = this.onHitDamage(mainStats, mainLevel, mainItems)
 
-         let criticalStrikeDamageModifier = mainItems.includes("3124") ? 1 : mainStats.criticalStrike[1] / 100
-         criticalStrikeDamageModifier *= omenDamageModifier
+         const mainHealth = mainStats.health[mainLevel - 1]
+         const targetHealth = this.targetStats.health[targetLevel - 1]
+         let percentageHealthDifference = (targetHealth - mainHealth) / 100
+         percentageHealthDifference = percentageHealthDifference > 20 ? 20 : percentageHealthDifference < 0 ? 0 : percentageHealthDifference
 
-         const magicDamageModifier = 1
+         const physicalDamageModifier = mainItems.includes("3036") ? ((percentageHealthDifference * 0.0075) + 1) : 1
+
+         let criticalStrikeDamageModifier = mainItems.includes("3124") ? 1 : mainStats.criticalStrike[1] / 100
+         criticalStrikeDamageModifier *= modifiers.omen
 
          // count in randuin's omen
          const averageModifier = (1 + ((mainStats.criticalStrike[0] / 100) * (criticalStrikeDamageModifier - 1)))
-
-         const corkiPhysicalModifier = this.champion(true).id === "Corki" ? 0.2 : 1
-         const corkiMagicalModifier = this.champion(true).id === "Corki" ? 0.8 : 0
-         const belVethModifier = this.champion(true).id === "Belveth" ? 0.75 : 1
 
          const strikes = {
             nonCritical: {
@@ -154,14 +146,14 @@ export default defineComponent({
          }
 
          for(const type in strikes){
-            strikes[type].physicalDamage *= attackDamageModifier * corkiPhysicalModifier * basicAttackDamageModifier
-            strikes[type].magicDamage *= basicAttackDamageModifier * corkiMagicalModifier
+            strikes[type].physicalDamage *= modifiers.kalista * modifiers.corkiPhysical * modifiers.steelcaps
+            strikes[type].magicDamage *= modifiers.corkiMagical * modifiers.steelcaps
 
             strikes[type].physicalDamage += physicalOnHitDamage
             strikes[type].magicDamage += magicalOnHitDamage
 
-            strikes[type].physicalDamage *= physicalDamageModifier * belVethModifier
-            strikes[type].magicDamage *= magicDamageModifier * belVethModifier
+            strikes[type].physicalDamage *= physicalDamageModifier * modifiers.belVeth
+            strikes[type].magicDamage *= modifiers.belVeth
          }
 
          let effectiveArmor = (this.targetStats.armor[targetLevel - 1] - (mainStats.armorPenetration[0] * (0.6 + (0.4 * mainLevel / 18)))) * (1 - (mainStats.armorPenetration[1] / 100))
@@ -282,6 +274,19 @@ export default defineComponent({
       watchables(){
          return [this.strikeType, this.levelSetting, ...this.damageEqual[0], ...this.damageChangingSelected[0], ...this.damageSelectedChanging[0]]
       },
+      levelIndependentModifiers(){
+         const mainChampionId = this.champion(true).id
+         const targetItems = this.selectedItems(false)
+   
+         return {
+            omen: targetItems.includes("3143") ? 0.8 : 1,
+            steelcaps: targetItems.includes("3047") ? 0.88 : 1,
+            kalista: mainChampionId === "Kalista" ? 0.9 : 1,
+            corkiPhysical: mainChampionId === "Corki" ? 0.2 : 1,
+            corkiMagical: mainChampionId === "Corki" ? 0.8 : 0,
+            belVeth: mainChampionId === "Belveth" ? 0.75 : 1,
+         }
+      }
    },
    watch: {
       watchables: {
