@@ -4,9 +4,9 @@
       <div class="centered chart">
          <div class="graphSettingsContainer">
             <div class="modeButtonsContainer">
-               <button class="button modeButton centered" @click="strikeType = 'averageStrike'" :class="{ selected: strikeType === 'averageStrike' }">average</button>
-               <button class="button modeButton centered" @click="strikeType = 'nonCriticalStrike'" :class="{ selected: strikeType === 'nonCriticalStrike' }">non-critical</button>
-               <button class="button modeButton centered" @click="strikeType = 'criticalStrike'" :class="{ selected: strikeType === 'criticalStrike' }">critical</button>
+               <button class="button modeButton centered" @click="strikeType = 'average'" :class="{ selected: strikeType === 'average' }">average</button>
+               <button class="button modeButton centered" @click="strikeType = 'nonCritical'" :class="{ selected: strikeType === 'nonCritical' }">non-critical</button>
+               <button class="button modeButton centered" @click="strikeType = 'critical'" :class="{ selected: strikeType === 'critical' }">critical</button>
                <div class="modeButtonHighlight" :class="strikeType"/>
                <span class="strikeTooltip" v-if="showModeTooltips">choose the strike type, meaning graph will display damage of regular/critical/averaged strike</span>
             </div>
@@ -44,7 +44,7 @@ export default defineComponent({
    name: 'Graph',
    data(){
       return {
-         strikeType: "nonCriticalStrike",
+         strikeType: "nonCritical",
          levelSetting: "Equal",
          graphColors: ["265, 100%, 65%", "120, 100%, 50%",  "0, 100%, 50%"],
          graphDPSColors: ["180, 100%, 50%", "60, 100%, 50%", "30, 100%, 50%"]
@@ -112,63 +112,82 @@ export default defineComponent({
          }
          this.chart.update()
       },
-      calculateDamage(mainStats, mainItems, mainLevel, targetLevel){
+      calculateDamage(mainStats, mainLevel, targetLevel){
+         const mainItems = this.selectedItems(true)
+         const targetItems = this.selectedItems(false)
+
+         const omenDamageModifier = targetItems.includes("3143") ? 0.8 : 1
+
          const attackDamageModifier = this.champion(true).id === "Kalista" ? 0.9 : 1
          const targetHealth = this.targetStats.health[targetLevel - 1]
-         const basicAttackDamageModifier = this.selectedItems(false).includes("3047") ? 0.88 : 1
+         const basicAttackDamageModifier = targetItems.includes("3047") ? 0.88 : 1
 
          const healthDifference = ((targetHealth - mainStats.health[mainLevel - 1]) / 100) > 20 ? 20 : ((targetHealth - mainStats.health[mainLevel - 1]) / 100) < 0 ? 0 : ((targetHealth - mainStats.health[mainLevel - 1]) / 100)
          const physicalDamageModifier = (mainItems.includes("3036") ? ((healthDifference * 0.0075) + 1) : 1)
          const [physicalOnHitDamage, magicalOnHitDamage] = this.onHitDamage(mainStats, mainLevel, mainItems)
 
-         const criticalStrikeDamageModifier = mainItems.includes("3124") ? 1 : mainStats.criticalStrike[1] / 100
+         let criticalStrikeDamageModifier = mainItems.includes("3124") ? 1 : mainStats.criticalStrike[1] / 100
+         criticalStrikeDamageModifier *= omenDamageModifier
+
          const magicDamageModifier = 1
+
+         // count in randuin's omen
+         const averageModifier = (1 + ((mainStats.criticalStrike[0] / 100) * (criticalStrikeDamageModifier - 1)))
 
          const corkiPhysicalModifier = this.champion(true).id === "Corki" ? 0.2 : 1
          const corkiMagicalModifier = this.champion(true).id === "Corki" ? 0.8 : 0
          const belVethModifier = this.champion(true).id === "Belveth" ? 0.75 : 1
 
-         const nonCriticalStrike = {
-            physicalDamage: ((mainStats.attackDamage[mainLevel - 1] * attackDamageModifier * corkiPhysicalModifier * basicAttackDamageModifier) + physicalOnHitDamage) * physicalDamageModifier * belVethModifier,
-            magicDamage: (magicalOnHitDamage + (mainStats.attackDamage[mainLevel - 1] * corkiMagicalModifier * basicAttackDamageModifier)) * magicDamageModifier * belVethModifier
+         const strikes = {
+            nonCritical: {
+               physicalDamage: mainStats.attackDamage[mainLevel - 1],
+               magicDamage: mainStats.attackDamage[mainLevel - 1]
+            },
+            critical: {
+               physicalDamage: mainStats.attackDamage[mainLevel - 1] * criticalStrikeDamageModifier,
+               magicDamage: mainStats.attackDamage[mainLevel - 1] * criticalStrikeDamageModifier
+            },
+            average: {
+               physicalDamage: mainStats.attackDamage[mainLevel - 1] * averageModifier,
+               magicDamage: mainStats.attackDamage[mainLevel - 1] * averageModifier
+            }
          }
-         const criticalStrike = {
-            physicalDamage: ((mainStats.attackDamage[mainLevel - 1] * attackDamageModifier * corkiPhysicalModifier * criticalStrikeDamageModifier * basicAttackDamageModifier) + physicalOnHitDamage) * physicalDamageModifier * belVethModifier,
-            magicDamage: (magicalOnHitDamage + (mainStats.attackDamage[mainLevel - 1] * criticalStrikeDamageModifier * corkiMagicalModifier * basicAttackDamageModifier)) * magicDamageModifier * belVethModifier
+
+         for(const type in strikes){
+            strikes[type].physicalDamage *= attackDamageModifier * corkiPhysicalModifier * basicAttackDamageModifier
+            strikes[type].magicDamage *= basicAttackDamageModifier * corkiMagicalModifier
+
+            strikes[type].physicalDamage += physicalOnHitDamage
+            strikes[type].magicDamage += magicalOnHitDamage
+
+            strikes[type].physicalDamage *= physicalDamageModifier * belVethModifier
+            strikes[type].magicDamage *= magicDamageModifier * belVethModifier
          }
-         const averageStrike = {
-            physicalDamage: ((mainStats.attackDamage[mainLevel - 1] * attackDamageModifier * basicAttackDamageModifier * corkiPhysicalModifier * (1 + ((mainStats.criticalStrike[0] / 100) * (criticalStrikeDamageModifier - 1)))) + physicalOnHitDamage) * physicalDamageModifier * belVethModifier,
-            magicDamage: (magicalOnHitDamage + (mainStats.attackDamage[mainLevel - 1] * (1 + ((mainStats.criticalStrike[0] / 100) * (criticalStrikeDamageModifier - 1))) * basicAttackDamageModifier * corkiMagicalModifier)) * magicDamageModifier * belVethModifier
-         }
-         var effectiveArmor = (this.targetStats.armor[targetLevel - 1] - (mainStats.armorPenetration[0] * (0.6 + (0.4 * mainLevel / 18)))) * (1 - (mainStats.armorPenetration[1] / 100))
-         var effectiveMagicResists = (this.targetStats.magicResists[targetLevel - 1] - mainStats.magicPenetration[0]) * (1 -(mainStats.magicPenetration[1] / 100))
+
+         let effectiveArmor = (this.targetStats.armor[targetLevel - 1] - (mainStats.armorPenetration[0] * (0.6 + (0.4 * mainLevel / 18)))) * (1 - (mainStats.armorPenetration[1] / 100))
+         let effectiveMagicResists = (this.targetStats.magicResists[targetLevel - 1] - mainStats.magicPenetration[0]) * (1 -(mainStats.magicPenetration[1] / 100))
 
          effectiveArmor = effectiveArmor < 0 ? 0 : effectiveArmor
          effectiveMagicResists = effectiveMagicResists < 0 ? 0 : effectiveMagicResists
 
-         return {
-            nonCriticalStrike: {
-               physicalDamage: nonCriticalStrike.physicalDamage * (100 / (100 + effectiveArmor)),
-               magicDamage: nonCriticalStrike.magicDamage * (100 / (100 + effectiveMagicResists)),
-               totalDamage: (nonCriticalStrike.physicalDamage * (100 / (100 + effectiveArmor))) + (nonCriticalStrike.magicDamage * (100 / (100 + effectiveMagicResists)))
-            },
-            criticalStrike: {
-               physicalDamage: criticalStrike.physicalDamage * (100 / (100 + effectiveArmor)),
-               magicDamage: criticalStrike.magicDamage * (100 / (100 + effectiveMagicResists)),
-               totalDamage: (criticalStrike.physicalDamage * (100 / (100 + effectiveArmor))) + (criticalStrike.magicDamage * (100 / (100 + effectiveMagicResists)))
-            },
-            averageStrike: {
-               physicalDamage: averageStrike.physicalDamage * (100 / (100 + effectiveArmor)),
-               magicDamage: averageStrike.magicDamage * (100 / (100 + effectiveMagicResists)),
-               totalDamage: (averageStrike.physicalDamage * (100 / (100 + effectiveArmor))) + (averageStrike.magicDamage * (100 / (100 + effectiveMagicResists)))
-            }
-         }
+         return Object.keys(strikes).reduce((p, c) => {
+            const { physicalDamage: preResistsPhysical, magicDamage: preResistsMagic } = strikes[c]
+
+            const physicalDamage = preResistsPhysical * (100 / (100 + effectiveArmor))
+            const magicDamage = preResistsMagic * (100 / (100 + effectiveMagicResists))
+            const totalDamage = physicalDamage + magicDamage
+
+            return Object.assign(p, {
+               [c]: {
+                  physicalDamage,
+                  magicDamage,
+                  totalDamage
+               }
+            })
+         }, {})
       },
       selectedItems(isMain){
          return this.getSelectedItems(isMain)
-      },
-      legendaries(isMain){
-         return this.getSelectedItems(isMain).filter(item => ((!this.mythics.includes(item) && this.getItem(item).gold.total >= 1600)) || item === "3112" || item === "2051" || item === "3184" || item === "3177")
       },
       calculateStat(base, level, growth){
          return base + (growth * (level - 1) * (0.7025 + (0.0175 * (level - 1))))
@@ -211,21 +230,21 @@ export default defineComponent({
       damageEqual(){ // damage at equal levels
          return this.mainStats.map(infoSet => {
             return Array.from({length: 18}, (_, level) => {
-               return this.calculateDamage(infoSet.stats, infoSet.items, level + 1, level + 1)[this.strikeType].totalDamage
+               return this.calculateDamage(infoSet.stats, level + 1, level + 1)[this.strikeType].totalDamage
             })
          })
       },
       damageSelectedChanging(){ // damage selected level vs changing
          return this.mainStats.map(infoSet => {
             return Array.from({length: 18}, (_, level) => {
-               return this.calculateDamage(infoSet.stats, infoSet.items, this.level(true), level + 1)[this.strikeType].totalDamage
+               return this.calculateDamage(infoSet.stats, this.level(true), level + 1)[this.strikeType].totalDamage
             })
          })
       },
       damageChangingSelected(){ // damage changing level vs selected
          return this.mainStats.map(infoSet => {
             return Array.from({length: 18}, (_, level) => {
-               return this.calculateDamage(infoSet.stats, infoSet.items, level + 1, this.level(false))[this.strikeType].totalDamage
+               return this.calculateDamage(infoSet.stats, level + 1, this.level(false))[this.strikeType].totalDamage
             })
          })
       },
@@ -320,13 +339,13 @@ export default defineComponent({
    background: var(--highlight1);
    z-index: 0;
 }
-.modeButtonHighlight.averageStrike, .modeButtonHighlight.Equal{
+.modeButtonHighlight.average, .modeButtonHighlight.Equal{
    left: 0;
 }
-.modeButtonHighlight.nonCriticalStrike, .modeButtonHighlight.SelectedChanging{
+.modeButtonHighlight.nonCritical, .modeButtonHighlight.SelectedChanging{
    left: calc(100% / 3);
 }
-.modeButtonHighlight.criticalStrike, .modeButtonHighlight.ChangingSelected{
+.modeButtonHighlight.critical, .modeButtonHighlight.ChangingSelected{
    left: calc(100% / 3 * 2);
 }
 .levelTooltip, .strikeTooltip{

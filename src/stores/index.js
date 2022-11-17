@@ -90,6 +90,7 @@ export const useMainStore = defineStore({
          {id: "3119", description: "bonus health equal to 8% maximum mana."}, // winter's approach
          {id: "3121", description: "bonus health equal to 8% maximum mana."}, // fimbul winter
          {id: "3124", description: "40 bonus physical damage on-hit per 20% critical strike chance."}, // guinsoo's rageblade
+         {id: "3143", description: "reduces incoming critical strikes damage by 20%."}, // randuin's omen
          {id: "3748", description: "bonus attack damage equal to 2% bonus health. Deal bonus physical damage on hit based on maximum hp."}, // titanic hydra
          {id: "4005", description: "+15 ability power per other legendary item."}, // imperial mandate
          {id: "4633", description: "+8 ability power per other legendary item."}, // riftmaker
