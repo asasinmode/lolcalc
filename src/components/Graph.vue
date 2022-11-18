@@ -124,11 +124,9 @@ export default defineComponent({
 
          const physicalDamageModifier = mainItems.includes("3036") ? ((percentageHealthDifference * 0.0075) + 1) : 1
 
-         let criticalStrikeDamageModifier = mainItems.includes("3124") ? 1 : mainStats.criticalStrike[1] / 100
-         criticalStrikeDamageModifier *= modifiers.omen
-
-         // count in randuin's omen
-         const averageModifier = (1 + ((mainStats.criticalStrike[0] / 100) * (criticalStrikeDamageModifier - 1)))
+         const criticalDamageModifier = mainItems.includes("3124") ? 1 : mainStats.criticalStrike[1] / 100
+         const criticalStrikeChance = mainStats.criticalStrike[0] / 100
+         const averageDamageModifier = 1 + (criticalStrikeChance * criticalDamageModifier * modifiers.omen) - criticalStrikeChance
 
          const strikes = {
             nonCritical: {
@@ -136,12 +134,12 @@ export default defineComponent({
                magicDamage: mainStats.attackDamage[mainLevel - 1]
             },
             critical: {
-               physicalDamage: mainStats.attackDamage[mainLevel - 1] * criticalStrikeDamageModifier,
-               magicDamage: mainStats.attackDamage[mainLevel - 1] * criticalStrikeDamageModifier
+               physicalDamage: mainStats.attackDamage[mainLevel - 1] * criticalDamageModifier * modifiers.omen,
+               magicDamage: mainStats.attackDamage[mainLevel - 1] * criticalDamageModifier * modifiers.omen
             },
             average: {
-               physicalDamage: mainStats.attackDamage[mainLevel - 1] * averageModifier,
-               magicDamage: mainStats.attackDamage[mainLevel - 1] * averageModifier
+               physicalDamage: mainStats.attackDamage[mainLevel - 1] * averageDamageModifier,
+               magicDamage: mainStats.attackDamage[mainLevel - 1] * averageDamageModifier
             }
          }
 
@@ -157,7 +155,7 @@ export default defineComponent({
          }
 
          let effectiveArmor = (this.targetStats.armor[targetLevel - 1] - (mainStats.armorPenetration[0] * (0.6 + (0.4 * mainLevel / 18)))) * (1 - (mainStats.armorPenetration[1] / 100))
-         let effectiveMagicResists = (this.targetStats.magicResists[targetLevel - 1] - mainStats.magicPenetration[0]) * (1 -(mainStats.magicPenetration[1] / 100))
+         let effectiveMagicResists = (this.targetStats.magicResists[targetLevel - 1] - mainStats.magicPenetration[0]) * (1 - (mainStats.magicPenetration[1] / 100))
 
          effectiveArmor = effectiveArmor < 0 ? 0 : effectiveArmor
          effectiveMagicResists = effectiveMagicResists < 0 ? 0 : effectiveMagicResists
