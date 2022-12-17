@@ -51,7 +51,7 @@ Ornnaments.forEach(id => delete itemData.data[id])
 export const useMainStore = defineStore({
    id: 'main',
    state: () => ({
-      patch: '12.22.1',
+      patch: '12.23.1',
       champions: championData.data,
       allItems: itemData.data,
       mythics: [
@@ -83,14 +83,16 @@ export const useMainStore = defineStore({
          {id: "3047", description: "reduces damage from basic attacks by 12%."}, // plated steelcaps
          {id: "3053", description: "+50% base attack damage as bonus attack damage."}, // sterak's gage
          {id: "3078", description: "+3 attack damage, ability haste and movement speed per other legendary item."}, // trinity force
+         {id: "3082", description: "reduces incoming basic attak damage by 5 (+3.5 per 1000 maximum health), capped at 40% of attack's damage."}, // warden's mail
          {id: "3084", description: "+1% bonus health per other legendary item."}, // heartsteel
          {id: "3089", description: "increases ability power by 35%."}, // rabadon's deathcap
          {id: "3091", description: "15-80 bonus magic damage on hit based on level."}, // wit's end
+         {id: "3110", description: "reduces incoming basic attak damage by 5 (+3.5 per 1000 maximum health), capped at 40% of attack's damage."}, // frozen's heart
          {id: "3115", description: "15 + 20% ap bonus magic damage on hit."}, // nashor's tooth
          {id: "3119", description: "bonus health equal to 8% maximum mana."}, // winter's approach
          {id: "3121", description: "bonus health equal to 8% maximum mana."}, // fimbul winter
          {id: "3124", description: "40 bonus physical damage on-hit per 20% critical strike chance."}, // guinsoo's rageblade
-         {id: "3143", description: "reduces incoming critical strikes damage by 20%."}, // randuin's omen
+         {id: "3143", description: "reduces incoming critical strikes damage by 20% and reduces incoming basic attak damage by 5 (+3.5 per 1000 maximum health), capped at 40% of attack's damage."}, // randuin's omen
          {id: "3748", description: "bonus attack damage equal to 2% bonus health. Deal bonus physical damage on hit based on maximum hp."}, // titanic hydra
          {id: "4005", description: "+15 ability power per other legendary item."}, // imperial mandate
          {id: "4633", description: "+8 ability power per other legendary item."}, // riftmaker
