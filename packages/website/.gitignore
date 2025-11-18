@@ -14,21 +14,19 @@ dist-ssr
 coverage
 *.local
 
-# local env files
-.env.local
-.env.*.local
-
-/cypress/videos/
-/cypress/screenshots/
-
 # Editor directories and files
-/.vscode
+.vscode/*
+!.vscode/extensions.json
 .idea
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-*.bat
 
-package-lock.json
+*.tsbuildinfo
+
+.eslintcache
+
+# Vitest
+__screenshots__/
