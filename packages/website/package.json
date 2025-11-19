@@ -27,12 +27,14 @@
 		"npm-run-all2": "^8.0.4",
 		"nuxt": "^4.2.1",
 		"oxlint": "^1.29.0",
+		"typescript": "^5.9.3",
 		"unocss": "^66.5.7",
 		"vue": "^3.5.24",
 		"vue-router": "^4.6.3",
 		"vue-tsc": "^3.1.4"
 	},
 	"overrides": {
+		"@nuxt/vite-builder": "https://pkg.pr.new/@nuxt/vite-builder@33682",
 		"vite": "npm:rolldown-vite@latest"
 	}
 }

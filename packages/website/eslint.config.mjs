@@ -16,6 +16,7 @@ export default withNuxt(
 			'curly': ['error', 'all'],
 			'no-labels': 'off',
 			'no-undef': 'off',
+			'vue/component-name-in-template-casing': ['warn', 'PascalCase', { registeredComponentsOnly: false }],
 		},
 		formatters: true,
 	}, unocss, oxlint.configs['flat/recommended']),

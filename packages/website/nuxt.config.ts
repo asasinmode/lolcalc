@@ -3,6 +3,7 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 	experimental: {
 		typedPages: true,
+		typescriptPlugin: true,
 	},
 	features: {
 		inlineStyles: false,
