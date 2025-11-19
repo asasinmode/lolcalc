@@ -1,27 +1,23 @@
-# website
+# todo
 
-TODO some stuff may be here
+## setup
 
-## Project Setup
+install dependencies
 
-```sh
-pnpm install
+```bash
+bun install
 ```
 
-### Compile and Hot-Reload for Development
+## dev server
 
-```sh
-pnpm dev
+start the dev server on `http://localhost:3000`
+
+```bash
+bun dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## build
 
-```sh
-pnpm build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
+```bash
+bun generate
 ```
