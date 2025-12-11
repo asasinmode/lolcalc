@@ -14,9 +14,12 @@ A damage calculator for game [League of Legends](https://www.leagueoflegends.com
 - [ ] some cool graphs
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] misc pages - ornnaments stats + gold value, senna souls, wave gold/xp at minute
-- [ ] github actions
+- [ ] scorch damage calculator
+- [ ] github actions ci for deploying/releasing
 - [ ] any cool useful scripts
 - [ ] champion & build guess recaptcha
+- [ ] chess like puzzles, guess from screenshot what to do, choose option
+- [ ] per patch versions = see stats/features from older patches
 
 ## how to dev
 

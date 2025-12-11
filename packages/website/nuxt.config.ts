@@ -14,6 +14,6 @@ export default defineNuxtConfig({
 		},
 	},
 	modules: ['@nuxt/eslint', '@nuxt/hints', '@nuxt/icon', '@unocss/nuxt'],
-	css: ['~/assets/reset.css', '~/assets/index.css'],
+	css: ['~/assets/index.css', '~/assets/reset.css'],
 	icon: { cssLayer: 'base'	},
 });

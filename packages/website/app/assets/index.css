@@ -5,6 +5,15 @@
 		font-family: 'Atkinson Hyperlegible Next';
 		src: url('/fonts/AtkinsonHyperlegibleNext-Regular.ttf') format('truetype');
 		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Atkinson Hyperlegible Next';
+		src: url('/fonts/AtkinsonHyperlegibleNext-Medium.ttf') format('truetype');
+		font-weight: 500;
+		font-style: normal;
 		font-display: swap;
 	}
 
@@ -12,6 +21,15 @@
 		font-family: 'Atkinson Hyperlegible Next';
 		src: url('/fonts/AtkinsonHyperlegibleNext-Bold.ttf') format('truetype');
 		font-weight: 700;
+		font-style: normal;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: 'Atkinson Hyperlegible Next Variable';
+		src: url('/fonts/AtkinsonHyperlegibleNext-VariableFont_wght.ttf') format('truetype');
+		font-weight: 100-900;
+		font-style: normal;
 		font-display: swap;
 	}
 
@@ -25,22 +43,33 @@
 		z-index: 101;
 	}
 
+	:root {
+		color-scheme: dark;
+		--size-page-max-w: 90rem;
+		--size-page-px: var(--fluid-8-24);
+		--size-page-computed-px: calc(
+			var(--size-page-px) + max(0px, calc((100vw - var(--size-page-max-w)) / 2) - var(--size-page-px))
+		);
+
+		&[data-color-scheme='light'] {
+			color-scheme: light;
+		}
+
+		&[data-color-scheme='dark'] {
+			color-scheme: dark;
+		}
+	}
+
 	body {
-		font-family:
-			'Atkinson Hyperlegible Next',
-			system-ui,
-			-apple-system,
-			BlinkMacSystemFont,
-			'Segoe UI',
-			Roboto,
-			Oxygen,
-			Ubuntu,
-			Cantarell,
-			'Open Sans',
-			'Helvetica Neue',
-			sans-serif;
+		font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
 		min-height: 100vh;
-		display: flex;
-		flex-direction: column;
+
+		@supports (font-variation-settings: 'wdth' 800) {
+			font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;
+		}
+	}
+
+	#__nuxt {
+		min-height: 100vh;
 	}
 }

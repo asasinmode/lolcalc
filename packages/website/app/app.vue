@@ -1,5 +1,5 @@
 <template>
-	<div class="flex-center text-orange">
+	<div class="grid-center text-([length:--fluid-12-20] orange)">
 		my website
 	</div>
 </template>
