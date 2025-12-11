@@ -45,19 +45,11 @@
 
 	:root {
 		color-scheme: dark;
-		--size-page-max-w: 90rem;
+		--size-page-max-w: 120rem;
 		--size-page-px: var(--fluid-8-24);
 		--size-page-computed-px: calc(
 			var(--size-page-px) + max(0px, calc((100vw - var(--size-page-max-w)) / 2) - var(--size-page-px))
 		);
-
-		&[data-color-scheme='light'] {
-			color-scheme: light;
-		}
-
-		&[data-color-scheme='dark'] {
-			color-scheme: dark;
-		}
 	}
 
 	body {
@@ -71,5 +63,15 @@
 
 	#__nuxt {
 		min-height: 100vh;
+		display: grid;
+		grid-template-columns:
+			[page-start] minmax(var(--size-page-px), 1fr)
+			[content-start] minmax(min(calc(100vw - 2 * var(--size-page-px)), var(--size-page-max-w)), 1fr)
+			[content-end] minmax(var(--size-page-px), 1fr)
+			[page-end];
+
+		& > * {
+			grid-column: content;
+		}
 	}
 }

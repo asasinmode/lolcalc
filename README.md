@@ -20,6 +20,7 @@ A damage calculator for game [League of Legends](https://www.leagueoflegends.com
 - [ ] champion & build guess recaptcha
 - [ ] chess like puzzles, guess from screenshot what to do, choose option
 - [ ] per patch versions = see stats/features from older patches
+- [ ] disclaimer not endorsed by riot
 
 ## how to dev
 
