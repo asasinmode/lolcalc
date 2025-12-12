@@ -1,11 +1,22 @@
 <script setup lang="ts">
+import { data as champions, version } from '~/assets/champion.json';
+
 useSeoMeta({
 	title: 'Collector - League of Legends Damage Calculator',
 });
 </script>
 
 <template>
-	<div class="text-([length:--fluid-12-20] orange) grid-center">
-		my website
-	</div>
+	<main>
+		current patch: {{ version }}
+
+		<section>
+			<button
+				v-for="champion in champions"
+				:key="champion.id"
+			>
+				{{ champion.name }}
+			</button>
+		</section>
+	</main>
 </template>

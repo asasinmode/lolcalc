@@ -1,23 +1,21 @@
-# todo
+# The Collector - League of Legends calculator website
 
 ## setup
 
-install dependencies
-
 ```bash
+# install dependencies
 bun install
-```
 
-## dev server
+# fetch game data
+bun ./scripts/updateGameData.ts
 
-start the dev server on `http://localhost:3000`
-
-```bash
+# start dev server
 bun dev
-```
 
-## build
-
-```bash
+# build
 bun generate
 ```
+
+## todo
+
+[stats icons](https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/)
