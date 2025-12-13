@@ -23,11 +23,12 @@ if (!championData || championData?.version !== latestVersion) {
 		version,
 		data: Object.fromEntries(
 			Object.entries(data).map(([championId, championData]) => {
-				const { id, key, image, partype, stats } = championData as any;
+				const { id, key, name, image, partype, stats } = championData as any;
 
 				return [championId, {
 					id,
 					key,
+					name,
 					partype,
 					stats,
 					image,
@@ -59,7 +60,7 @@ if (await itemFile.exists()) {
 	itemData = await itemFile.json();
 }
 
-if (true || !itemData || itemData?.version !== latestVersion) {
+if (!itemData || itemData?.version !== latestVersion) {
 	console.log('Item data not present or outdated, fetching...');
 
 	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`).then(r => r.json());

@@ -4,6 +4,7 @@
 		"Aatrox": {
 			"id": "Aatrox",
 			"key": "266",
+			"name": "Aatrox",
 			"partype": "Blood Well",
 			"stats": {
 				"hp": 650,
@@ -44,6 +45,7 @@
 		"Ahri": {
 			"id": "Ahri",
 			"key": "103",
+			"name": "Ahri",
 			"partype": "Mana",
 			"stats": {
 				"hp": 590,
@@ -83,6 +85,7 @@
 		"Akali": {
 			"id": "Akali",
 			"key": "84",
+			"name": "Akali",
 			"partype": "Energy",
 			"stats": {
 				"hp": 600,
@@ -122,6 +125,7 @@
 		"Akshan": {
 			"id": "Akshan",
 			"key": "166",
+			"name": "Akshan",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -161,6 +165,7 @@
 		"Alistar": {
 			"id": "Alistar",
 			"key": "12",
+			"name": "Alistar",
 			"partype": "Mana",
 			"stats": {
 				"hp": 685,
@@ -200,6 +205,7 @@
 		"Ambessa": {
 			"id": "Ambessa",
 			"key": "799",
+			"name": "Ambessa",
 			"partype": "Energy",
 			"stats": {
 				"hp": 630,
@@ -239,6 +245,7 @@
 		"Amumu": {
 			"id": "Amumu",
 			"key": "32",
+			"name": "Amumu",
 			"partype": "Mana",
 			"stats": {
 				"hp": 685,
@@ -278,6 +285,7 @@
 		"Anivia": {
 			"id": "Anivia",
 			"key": "34",
+			"name": "Anivia",
 			"partype": "Mana",
 			"stats": {
 				"hp": 550,
@@ -317,6 +325,7 @@
 		"Annie": {
 			"id": "Annie",
 			"key": "1",
+			"name": "Annie",
 			"partype": "Mana",
 			"stats": {
 				"hp": 560,
@@ -356,6 +365,7 @@
 		"Aphelios": {
 			"id": "Aphelios",
 			"key": "523",
+			"name": "Aphelios",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -395,6 +405,7 @@
 		"Ashe": {
 			"id": "Ashe",
 			"key": "22",
+			"name": "Ashe",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -434,6 +445,7 @@
 		"AurelionSol": {
 			"id": "AurelionSol",
 			"key": "136",
+			"name": "Aurelion Sol",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -473,6 +485,7 @@
 		"Aurora": {
 			"id": "Aurora",
 			"key": "893",
+			"name": "Aurora",
 			"partype": "Mana",
 			"stats": {
 				"hp": 607,
@@ -512,6 +525,7 @@
 		"Azir": {
 			"id": "Azir",
 			"key": "268",
+			"name": "Azir",
 			"partype": "Mana",
 			"stats": {
 				"hp": 575,
@@ -551,6 +565,7 @@
 		"Bard": {
 			"id": "Bard",
 			"key": "432",
+			"name": "Bard",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -590,6 +605,7 @@
 		"Belveth": {
 			"id": "Belveth",
 			"key": "200",
+			"name": "Bel'Veth",
 			"partype": "",
 			"stats": {
 				"hp": 610,
@@ -629,6 +645,7 @@
 		"Blitzcrank": {
 			"id": "Blitzcrank",
 			"key": "53",
+			"name": "Blitzcrank",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -668,6 +685,7 @@
 		"Brand": {
 			"id": "Brand",
 			"key": "63",
+			"name": "Brand",
 			"partype": "Mana",
 			"stats": {
 				"hp": 570,
@@ -707,6 +725,7 @@
 		"Braum": {
 			"id": "Braum",
 			"key": "201",
+			"name": "Braum",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -746,6 +765,7 @@
 		"Briar": {
 			"id": "Briar",
 			"key": "233",
+			"name": "Briar",
 			"partype": "Fury",
 			"stats": {
 				"hp": 625,
@@ -785,6 +805,7 @@
 		"Caitlyn": {
 			"id": "Caitlyn",
 			"key": "51",
+			"name": "Caitlyn",
 			"partype": "Mana",
 			"stats": {
 				"hp": 580,
@@ -824,6 +845,7 @@
 		"Camille": {
 			"id": "Camille",
 			"key": "164",
+			"name": "Camille",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -863,6 +885,7 @@
 		"Cassiopeia": {
 			"id": "Cassiopeia",
 			"key": "69",
+			"name": "Cassiopeia",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -902,6 +925,7 @@
 		"Chogath": {
 			"id": "Chogath",
 			"key": "31",
+			"name": "Cho'Gath",
 			"partype": "Mana",
 			"stats": {
 				"hp": 644,
@@ -941,6 +965,7 @@
 		"Corki": {
 			"id": "Corki",
 			"key": "42",
+			"name": "Corki",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -980,6 +1005,7 @@
 		"Darius": {
 			"id": "Darius",
 			"key": "122",
+			"name": "Darius",
 			"partype": "Mana",
 			"stats": {
 				"hp": 652,
@@ -1019,6 +1045,7 @@
 		"Diana": {
 			"id": "Diana",
 			"key": "131",
+			"name": "Diana",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -1059,6 +1086,7 @@
 		"Draven": {
 			"id": "Draven",
 			"key": "119",
+			"name": "Draven",
 			"partype": "Mana",
 			"stats": {
 				"hp": 675,
@@ -1098,6 +1126,7 @@
 		"DrMundo": {
 			"id": "DrMundo",
 			"key": "36",
+			"name": "Dr. Mundo",
 			"partype": "None",
 			"stats": {
 				"hp": 640,
@@ -1138,6 +1167,7 @@
 		"Ekko": {
 			"id": "Ekko",
 			"key": "245",
+			"name": "Ekko",
 			"partype": "Mana",
 			"stats": {
 				"hp": 655,
@@ -1178,6 +1208,7 @@
 		"Elise": {
 			"id": "Elise",
 			"key": "60",
+			"name": "Elise",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -1217,6 +1248,7 @@
 		"Evelynn": {
 			"id": "Evelynn",
 			"key": "28",
+			"name": "Evelynn",
 			"partype": "Mana",
 			"stats": {
 				"hp": 642,
@@ -1256,6 +1288,7 @@
 		"Ezreal": {
 			"id": "Ezreal",
 			"key": "81",
+			"name": "Ezreal",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -1295,6 +1328,7 @@
 		"Fiddlesticks": {
 			"id": "Fiddlesticks",
 			"key": "9",
+			"name": "Fiddlesticks",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -1334,6 +1368,7 @@
 		"Fiora": {
 			"id": "Fiora",
 			"key": "114",
+			"name": "Fiora",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -1373,6 +1408,7 @@
 		"Fizz": {
 			"id": "Fizz",
 			"key": "105",
+			"name": "Fizz",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -1412,6 +1448,7 @@
 		"Galio": {
 			"id": "Galio",
 			"key": "3",
+			"name": "Galio",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -1451,6 +1488,7 @@
 		"Gangplank": {
 			"id": "Gangplank",
 			"key": "41",
+			"name": "Gangplank",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -1490,6 +1528,7 @@
 		"Garen": {
 			"id": "Garen",
 			"key": "86",
+			"name": "Garen",
 			"partype": "None",
 			"stats": {
 				"hp": 690,
@@ -1529,6 +1568,7 @@
 		"Gnar": {
 			"id": "Gnar",
 			"key": "150",
+			"name": "Gnar",
 			"partype": "Rage",
 			"stats": {
 				"hp": 540,
@@ -1568,6 +1608,7 @@
 		"Gragas": {
 			"id": "Gragas",
 			"key": "79",
+			"name": "Gragas",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -1607,6 +1648,7 @@
 		"Graves": {
 			"id": "Graves",
 			"key": "104",
+			"name": "Graves",
 			"partype": "Mana",
 			"stats": {
 				"hp": 625,
@@ -1646,6 +1688,7 @@
 		"Gwen": {
 			"id": "Gwen",
 			"key": "887",
+			"name": "Gwen",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -1685,6 +1728,7 @@
 		"Hecarim": {
 			"id": "Hecarim",
 			"key": "120",
+			"name": "Hecarim",
 			"partype": "Mana",
 			"stats": {
 				"hp": 625,
@@ -1724,6 +1768,7 @@
 		"Heimerdinger": {
 			"id": "Heimerdinger",
 			"key": "74",
+			"name": "Heimerdinger",
 			"partype": "Mana",
 			"stats": {
 				"hp": 558,
@@ -1763,6 +1808,7 @@
 		"Hwei": {
 			"id": "Hwei",
 			"key": "910",
+			"name": "Hwei",
 			"partype": "Mana",
 			"stats": {
 				"hp": 580,
@@ -1802,6 +1848,7 @@
 		"Illaoi": {
 			"id": "Illaoi",
 			"key": "420",
+			"name": "Illaoi",
 			"partype": "Mana",
 			"stats": {
 				"hp": 656,
@@ -1841,6 +1888,7 @@
 		"Irelia": {
 			"id": "Irelia",
 			"key": "39",
+			"name": "Irelia",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -1881,6 +1929,7 @@
 		"Ivern": {
 			"id": "Ivern",
 			"key": "427",
+			"name": "Ivern",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -1920,6 +1969,7 @@
 		"Janna": {
 			"id": "Janna",
 			"key": "40",
+			"name": "Janna",
 			"partype": "Mana",
 			"stats": {
 				"hp": 570,
@@ -1959,6 +2009,7 @@
 		"JarvanIV": {
 			"id": "JarvanIV",
 			"key": "59",
+			"name": "Jarvan IV",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -1998,6 +2049,7 @@
 		"Jax": {
 			"id": "Jax",
 			"key": "24",
+			"name": "Jax",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -2038,6 +2090,7 @@
 		"Jayce": {
 			"id": "Jayce",
 			"key": "126",
+			"name": "Jayce",
 			"partype": "Mana",
 			"stats": {
 				"hp": 590,
@@ -2077,6 +2130,7 @@
 		"Jhin": {
 			"id": "Jhin",
 			"key": "202",
+			"name": "Jhin",
 			"partype": "Mana",
 			"stats": {
 				"hp": 655,
@@ -2116,6 +2170,7 @@
 		"Jinx": {
 			"id": "Jinx",
 			"key": "222",
+			"name": "Jinx",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -2155,6 +2210,7 @@
 		"Kaisa": {
 			"id": "Kaisa",
 			"key": "145",
+			"name": "Kai'Sa",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -2194,6 +2250,7 @@
 		"Kalista": {
 			"id": "Kalista",
 			"key": "429",
+			"name": "Kalista",
 			"partype": "Mana",
 			"stats": {
 				"hp": 560,
@@ -2233,6 +2290,7 @@
 		"Karma": {
 			"id": "Karma",
 			"key": "43",
+			"name": "Karma",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -2272,6 +2330,7 @@
 		"Karthus": {
 			"id": "Karthus",
 			"key": "30",
+			"name": "Karthus",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -2311,6 +2370,7 @@
 		"Kassadin": {
 			"id": "Kassadin",
 			"key": "38",
+			"name": "Kassadin",
 			"partype": "Mana",
 			"stats": {
 				"hp": 646,
@@ -2350,6 +2410,7 @@
 		"Katarina": {
 			"id": "Katarina",
 			"key": "55",
+			"name": "Katarina",
 			"partype": "None",
 			"stats": {
 				"hp": 672,
@@ -2389,6 +2450,7 @@
 		"Kayle": {
 			"id": "Kayle",
 			"key": "10",
+			"name": "Kayle",
 			"partype": "Mana",
 			"stats": {
 				"hp": 670,
@@ -2428,6 +2490,7 @@
 		"Kayn": {
 			"id": "Kayn",
 			"key": "141",
+			"name": "Kayn",
 			"partype": "Mana",
 			"stats": {
 				"hp": 655,
@@ -2467,6 +2530,7 @@
 		"Kennen": {
 			"id": "Kennen",
 			"key": "85",
+			"name": "Kennen",
 			"partype": "Energy",
 			"stats": {
 				"hp": 580,
@@ -2506,6 +2570,7 @@
 		"Khazix": {
 			"id": "Khazix",
 			"key": "121",
+			"name": "Kha'Zix",
 			"partype": "Mana",
 			"stats": {
 				"hp": 643,
@@ -2545,6 +2610,7 @@
 		"Kindred": {
 			"id": "Kindred",
 			"key": "203",
+			"name": "Kindred",
 			"partype": "Mana",
 			"stats": {
 				"hp": 595,
@@ -2584,6 +2650,7 @@
 		"Kled": {
 			"id": "Kled",
 			"key": "240",
+			"name": "Kled",
 			"partype": "Courage",
 			"stats": {
 				"hp": 410,
@@ -2623,6 +2690,7 @@
 		"KogMaw": {
 			"id": "KogMaw",
 			"key": "96",
+			"name": "Kog'Maw",
 			"partype": "Mana",
 			"stats": {
 				"hp": 635,
@@ -2662,6 +2730,7 @@
 		"KSante": {
 			"id": "KSante",
 			"key": "897",
+			"name": "K'Sante",
 			"partype": "Mana",
 			"stats": {
 				"hp": 625,
@@ -2701,6 +2770,7 @@
 		"Leblanc": {
 			"id": "Leblanc",
 			"key": "7",
+			"name": "LeBlanc",
 			"partype": "Mana",
 			"stats": {
 				"hp": 598,
@@ -2740,6 +2810,7 @@
 		"LeeSin": {
 			"id": "LeeSin",
 			"key": "64",
+			"name": "Lee Sin",
 			"partype": "Energy",
 			"stats": {
 				"hp": 645,
@@ -2779,6 +2850,7 @@
 		"Leona": {
 			"id": "Leona",
 			"key": "89",
+			"name": "Leona",
 			"partype": "Mana",
 			"stats": {
 				"hp": 646,
@@ -2818,6 +2890,7 @@
 		"Lillia": {
 			"id": "Lillia",
 			"key": "876",
+			"name": "Lillia",
 			"partype": "Mana",
 			"stats": {
 				"hp": 605,
@@ -2857,6 +2930,7 @@
 		"Lissandra": {
 			"id": "Lissandra",
 			"key": "127",
+			"name": "Lissandra",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -2896,6 +2970,7 @@
 		"Lucian": {
 			"id": "Lucian",
 			"key": "236",
+			"name": "Lucian",
 			"partype": "Mana",
 			"stats": {
 				"hp": 641,
@@ -2935,6 +3010,7 @@
 		"Lulu": {
 			"id": "Lulu",
 			"key": "117",
+			"name": "Lulu",
 			"partype": "Mana",
 			"stats": {
 				"hp": 565,
@@ -2974,6 +3050,7 @@
 		"Lux": {
 			"id": "Lux",
 			"key": "99",
+			"name": "Lux",
 			"partype": "Mana",
 			"stats": {
 				"hp": 580,
@@ -3014,6 +3091,7 @@
 		"Malphite": {
 			"id": "Malphite",
 			"key": "54",
+			"name": "Malphite",
 			"partype": "Mana",
 			"stats": {
 				"hp": 665,
@@ -3054,6 +3132,7 @@
 		"Malzahar": {
 			"id": "Malzahar",
 			"key": "90",
+			"name": "Malzahar",
 			"partype": "Mana",
 			"stats": {
 				"hp": 580,
@@ -3093,6 +3172,7 @@
 		"Maokai": {
 			"id": "Maokai",
 			"key": "57",
+			"name": "Maokai",
 			"partype": "Mana",
 			"stats": {
 				"hp": 665,
@@ -3132,6 +3212,7 @@
 		"MasterYi": {
 			"id": "MasterYi",
 			"key": "11",
+			"name": "Master Yi",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -3171,6 +3252,7 @@
 		"Mel": {
 			"id": "Mel",
 			"key": "800",
+			"name": "Mel",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -3211,6 +3293,7 @@
 		"Milio": {
 			"id": "Milio",
 			"key": "902",
+			"name": "Milio",
 			"partype": "Mana",
 			"stats": {
 				"hp": 560,
@@ -3250,6 +3333,7 @@
 		"MissFortune": {
 			"id": "MissFortune",
 			"key": "21",
+			"name": "Miss Fortune",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -3289,6 +3373,7 @@
 		"MonkeyKing": {
 			"id": "MonkeyKing",
 			"key": "62",
+			"name": "Wukong",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -3328,6 +3413,7 @@
 		"Mordekaiser": {
 			"id": "Mordekaiser",
 			"key": "82",
+			"name": "Mordekaiser",
 			"partype": "Shield",
 			"stats": {
 				"hp": 645,
@@ -3367,6 +3453,7 @@
 		"Morgana": {
 			"id": "Morgana",
 			"key": "25",
+			"name": "Morgana",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -3407,6 +3494,7 @@
 		"Naafiri": {
 			"id": "Naafiri",
 			"key": "950",
+			"name": "Naafiri",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -3446,6 +3534,7 @@
 		"Nami": {
 			"id": "Nami",
 			"key": "267",
+			"name": "Nami",
 			"partype": "Mana",
 			"stats": {
 				"hp": 560,
@@ -3485,6 +3574,7 @@
 		"Nasus": {
 			"id": "Nasus",
 			"key": "75",
+			"name": "Nasus",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -3524,6 +3614,7 @@
 		"Nautilus": {
 			"id": "Nautilus",
 			"key": "111",
+			"name": "Nautilus",
 			"partype": "Mana",
 			"stats": {
 				"hp": 646,
@@ -3563,6 +3654,7 @@
 		"Neeko": {
 			"id": "Neeko",
 			"key": "518",
+			"name": "Neeko",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -3602,6 +3694,7 @@
 		"Nidalee": {
 			"id": "Nidalee",
 			"key": "76",
+			"name": "Nidalee",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -3641,6 +3734,7 @@
 		"Nilah": {
 			"id": "Nilah",
 			"key": "895",
+			"name": "Nilah",
 			"partype": "Mana",
 			"stats": {
 				"hp": 570,
@@ -3680,6 +3774,7 @@
 		"Nocturne": {
 			"id": "Nocturne",
 			"key": "56",
+			"name": "Nocturne",
 			"partype": "Mana",
 			"stats": {
 				"hp": 655,
@@ -3719,6 +3814,7 @@
 		"Nunu": {
 			"id": "Nunu",
 			"key": "20",
+			"name": "Nunu & Willump",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -3758,6 +3854,7 @@
 		"Olaf": {
 			"id": "Olaf",
 			"key": "2",
+			"name": "Olaf",
 			"partype": "Mana",
 			"stats": {
 				"hp": 645,
@@ -3797,6 +3894,7 @@
 		"Orianna": {
 			"id": "Orianna",
 			"key": "61",
+			"name": "Orianna",
 			"partype": "Mana",
 			"stats": {
 				"hp": 585,
@@ -3836,6 +3934,7 @@
 		"Ornn": {
 			"id": "Ornn",
 			"key": "516",
+			"name": "Ornn",
 			"partype": "Mana",
 			"stats": {
 				"hp": 660,
@@ -3875,6 +3974,7 @@
 		"Pantheon": {
 			"id": "Pantheon",
 			"key": "80",
+			"name": "Pantheon",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -3916,6 +4016,7 @@
 		"Poppy": {
 			"id": "Poppy",
 			"key": "78",
+			"name": "Poppy",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -3955,6 +4056,7 @@
 		"Pyke": {
 			"id": "Pyke",
 			"key": "555",
+			"name": "Pyke",
 			"partype": "Mana",
 			"stats": {
 				"hp": 670,
@@ -3994,6 +4096,7 @@
 		"Qiyana": {
 			"id": "Qiyana",
 			"key": "246",
+			"name": "Qiyana",
 			"partype": "Mana",
 			"stats": {
 				"hp": 590,
@@ -4034,6 +4137,7 @@
 		"Quinn": {
 			"id": "Quinn",
 			"key": "133",
+			"name": "Quinn",
 			"partype": "Mana",
 			"stats": {
 				"hp": 565,
@@ -4073,6 +4177,7 @@
 		"Rakan": {
 			"id": "Rakan",
 			"key": "497",
+			"name": "Rakan",
 			"partype": "Mana",
 			"stats": {
 				"hp": 610,
@@ -4112,6 +4217,7 @@
 		"Rammus": {
 			"id": "Rammus",
 			"key": "33",
+			"name": "Rammus",
 			"partype": "Mana",
 			"stats": {
 				"hp": 675,
@@ -4151,6 +4257,7 @@
 		"RekSai": {
 			"id": "RekSai",
 			"key": "421",
+			"name": "Rek'Sai",
 			"partype": "Rage",
 			"stats": {
 				"hp": 600,
@@ -4190,6 +4297,7 @@
 		"Rell": {
 			"id": "Rell",
 			"key": "526",
+			"name": "Rell",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -4229,6 +4337,7 @@
 		"Renata": {
 			"id": "Renata",
 			"key": "888",
+			"name": "Renata Glasc",
 			"partype": "Mana",
 			"stats": {
 				"hp": 545,
@@ -4268,6 +4377,7 @@
 		"Renekton": {
 			"id": "Renekton",
 			"key": "58",
+			"name": "Renekton",
 			"partype": "Fury",
 			"stats": {
 				"hp": 660,
@@ -4307,6 +4417,7 @@
 		"Rengar": {
 			"id": "Rengar",
 			"key": "107",
+			"name": "Rengar",
 			"partype": "Ferocity",
 			"stats": {
 				"hp": 590,
@@ -4346,6 +4457,7 @@
 		"Riven": {
 			"id": "Riven",
 			"key": "92",
+			"name": "Riven",
 			"partype": "None",
 			"stats": {
 				"hp": 630,
@@ -4385,6 +4497,7 @@
 		"Rumble": {
 			"id": "Rumble",
 			"key": "68",
+			"name": "Rumble",
 			"partype": "Heat",
 			"stats": {
 				"hp": 655,
@@ -4424,6 +4537,7 @@
 		"Ryze": {
 			"id": "Ryze",
 			"key": "13",
+			"name": "Ryze",
 			"partype": "Mana",
 			"stats": {
 				"hp": 645,
@@ -4463,6 +4577,7 @@
 		"Samira": {
 			"id": "Samira",
 			"key": "360",
+			"name": "Samira",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -4502,6 +4617,7 @@
 		"Sejuani": {
 			"id": "Sejuani",
 			"key": "113",
+			"name": "Sejuani",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -4541,6 +4657,7 @@
 		"Senna": {
 			"id": "Senna",
 			"key": "235",
+			"name": "Senna",
 			"partype": "Mana",
 			"stats": {
 				"hp": 530,
@@ -4580,6 +4697,7 @@
 		"Seraphine": {
 			"id": "Seraphine",
 			"key": "147",
+			"name": "Seraphine",
 			"partype": "Mana",
 			"stats": {
 				"hp": 570,
@@ -4619,6 +4737,7 @@
 		"Sett": {
 			"id": "Sett",
 			"key": "875",
+			"name": "Sett",
 			"partype": "Grit",
 			"stats": {
 				"hp": 670,
@@ -4658,6 +4777,7 @@
 		"Shaco": {
 			"id": "Shaco",
 			"key": "35",
+			"name": "Shaco",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -4697,6 +4817,7 @@
 		"Shen": {
 			"id": "Shen",
 			"key": "98",
+			"name": "Shen",
 			"partype": "Energy",
 			"stats": {
 				"hp": 610,
@@ -4736,6 +4857,7 @@
 		"Shyvana": {
 			"id": "Shyvana",
 			"key": "102",
+			"name": "Shyvana",
 			"partype": "Fury",
 			"stats": {
 				"hp": 665,
@@ -4775,6 +4897,7 @@
 		"Singed": {
 			"id": "Singed",
 			"key": "27",
+			"name": "Singed",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -4814,6 +4937,7 @@
 		"Sion": {
 			"id": "Sion",
 			"key": "14",
+			"name": "Sion",
 			"partype": "Mana",
 			"stats": {
 				"hp": 655,
@@ -4853,6 +4977,7 @@
 		"Sivir": {
 			"id": "Sivir",
 			"key": "15",
+			"name": "Sivir",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -4892,6 +5017,7 @@
 		"Skarner": {
 			"id": "Skarner",
 			"key": "72",
+			"name": "Skarner",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -4931,6 +5057,7 @@
 		"Smolder": {
 			"id": "Smolder",
 			"key": "901",
+			"name": "Smolder",
 			"partype": "Mana",
 			"stats": {
 				"hp": 575,
@@ -4970,6 +5097,7 @@
 		"Sona": {
 			"id": "Sona",
 			"key": "37",
+			"name": "Sona",
 			"partype": "Mana",
 			"stats": {
 				"hp": 550,
@@ -5009,6 +5137,7 @@
 		"Soraka": {
 			"id": "Soraka",
 			"key": "16",
+			"name": "Soraka",
 			"partype": "Mana",
 			"stats": {
 				"hp": 605,
@@ -5048,6 +5177,7 @@
 		"Swain": {
 			"id": "Swain",
 			"key": "50",
+			"name": "Swain",
 			"partype": "Mana",
 			"stats": {
 				"hp": 595,
@@ -5087,6 +5217,7 @@
 		"Sylas": {
 			"id": "Sylas",
 			"key": "517",
+			"name": "Sylas",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -5127,6 +5258,7 @@
 		"Syndra": {
 			"id": "Syndra",
 			"key": "134",
+			"name": "Syndra",
 			"partype": "Mana",
 			"stats": {
 				"hp": 563,
@@ -5166,6 +5298,7 @@
 		"TahmKench": {
 			"id": "TahmKench",
 			"key": "223",
+			"name": "Tahm Kench",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -5205,6 +5338,7 @@
 		"Taliyah": {
 			"id": "Taliyah",
 			"key": "163",
+			"name": "Taliyah",
 			"partype": "Mana",
 			"stats": {
 				"hp": 550,
@@ -5244,6 +5378,7 @@
 		"Talon": {
 			"id": "Talon",
 			"key": "91",
+			"name": "Talon",
 			"partype": "Mana",
 			"stats": {
 				"hp": 658,
@@ -5283,6 +5418,7 @@
 		"Taric": {
 			"id": "Taric",
 			"key": "44",
+			"name": "Taric",
 			"partype": "Mana",
 			"stats": {
 				"hp": 645,
@@ -5322,6 +5458,7 @@
 		"Teemo": {
 			"id": "Teemo",
 			"key": "17",
+			"name": "Teemo",
 			"partype": "Mana",
 			"stats": {
 				"hp": 615,
@@ -5361,6 +5498,7 @@
 		"Thresh": {
 			"id": "Thresh",
 			"key": "412",
+			"name": "Thresh",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -5400,6 +5538,7 @@
 		"Tristana": {
 			"id": "Tristana",
 			"key": "18",
+			"name": "Tristana",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -5439,6 +5578,7 @@
 		"Trundle": {
 			"id": "Trundle",
 			"key": "48",
+			"name": "Trundle",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -5478,6 +5618,7 @@
 		"Tryndamere": {
 			"id": "Tryndamere",
 			"key": "23",
+			"name": "Tryndamere",
 			"partype": "Fury",
 			"stats": {
 				"hp": 696,
@@ -5517,6 +5658,7 @@
 		"TwistedFate": {
 			"id": "TwistedFate",
 			"key": "4",
+			"name": "Twisted Fate",
 			"partype": "Mana",
 			"stats": {
 				"hp": 604,
@@ -5556,6 +5698,7 @@
 		"Twitch": {
 			"id": "Twitch",
 			"key": "29",
+			"name": "Twitch",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -5595,6 +5738,7 @@
 		"Udyr": {
 			"id": "Udyr",
 			"key": "77",
+			"name": "Udyr",
 			"partype": "Mana",
 			"stats": {
 				"hp": 664,
@@ -5634,6 +5778,7 @@
 		"Urgot": {
 			"id": "Urgot",
 			"key": "6",
+			"name": "Urgot",
 			"partype": "Mana",
 			"stats": {
 				"hp": 655,
@@ -5673,6 +5818,7 @@
 		"Varus": {
 			"id": "Varus",
 			"key": "110",
+			"name": "Varus",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -5712,6 +5858,7 @@
 		"Vayne": {
 			"id": "Vayne",
 			"key": "67",
+			"name": "Vayne",
 			"partype": "Mana",
 			"stats": {
 				"hp": 550,
@@ -5751,6 +5898,7 @@
 		"Veigar": {
 			"id": "Veigar",
 			"key": "45",
+			"name": "Veigar",
 			"partype": "Mana",
 			"stats": {
 				"hp": 580,
@@ -5790,6 +5938,7 @@
 		"Velkoz": {
 			"id": "Velkoz",
 			"key": "161",
+			"name": "Vel'Koz",
 			"partype": "Mana",
 			"stats": {
 				"hp": 590,
@@ -5829,6 +5978,7 @@
 		"Vex": {
 			"id": "Vex",
 			"key": "711",
+			"name": "Vex",
 			"partype": "Mana",
 			"stats": {
 				"hp": 590,
@@ -5868,6 +6018,7 @@
 		"Vi": {
 			"id": "Vi",
 			"key": "254",
+			"name": "Vi",
 			"partype": "Mana",
 			"stats": {
 				"hp": 655,
@@ -5907,6 +6058,7 @@
 		"Viego": {
 			"id": "Viego",
 			"key": "234",
+			"name": "Viego",
 			"partype": "None",
 			"stats": {
 				"hp": 630,
@@ -5946,6 +6098,7 @@
 		"Viktor": {
 			"id": "Viktor",
 			"key": "112",
+			"name": "Viktor",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -5985,6 +6138,7 @@
 		"Vladimir": {
 			"id": "Vladimir",
 			"key": "8",
+			"name": "Vladimir",
 			"partype": "Crimson Rush",
 			"stats": {
 				"hp": 600,
@@ -6025,6 +6179,7 @@
 		"Volibear": {
 			"id": "Volibear",
 			"key": "106",
+			"name": "Volibear",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -6065,6 +6220,7 @@
 		"Warwick": {
 			"id": "Warwick",
 			"key": "19",
+			"name": "Warwick",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -6104,6 +6260,7 @@
 		"Xayah": {
 			"id": "Xayah",
 			"key": "498",
+			"name": "Xayah",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -6143,6 +6300,7 @@
 		"Xerath": {
 			"id": "Xerath",
 			"key": "101",
+			"name": "Xerath",
 			"partype": "Mana",
 			"stats": {
 				"hp": 596,
@@ -6183,6 +6341,7 @@
 		"XinZhao": {
 			"id": "XinZhao",
 			"key": "5",
+			"name": "Xin Zhao",
 			"partype": "Mana",
 			"stats": {
 				"hp": 620,
@@ -6222,6 +6381,7 @@
 		"Yasuo": {
 			"id": "Yasuo",
 			"key": "157",
+			"name": "Yasuo",
 			"partype": "Flow",
 			"stats": {
 				"hp": 590,
@@ -6262,6 +6422,7 @@
 		"Yone": {
 			"id": "Yone",
 			"key": "777",
+			"name": "Yone",
 			"partype": "Flow",
 			"stats": {
 				"hp": 620,
@@ -6302,6 +6463,7 @@
 		"Yorick": {
 			"id": "Yorick",
 			"key": "83",
+			"name": "Yorick",
 			"partype": "Mana",
 			"stats": {
 				"hp": 650,
@@ -6341,6 +6503,7 @@
 		"Yunara": {
 			"id": "Yunara",
 			"key": "804",
+			"name": "Yunara",
 			"partype": "Mana",
 			"stats": {
 				"hp": 590,
@@ -6380,6 +6543,7 @@
 		"Yuumi": {
 			"id": "Yuumi",
 			"key": "350",
+			"name": "Yuumi",
 			"partype": "Mana",
 			"stats": {
 				"hp": 500,
@@ -6419,6 +6583,7 @@
 		"Zaahen": {
 			"id": "Zaahen",
 			"key": "904",
+			"name": "Zaahen",
 			"partype": "Mana",
 			"stats": {
 				"hp": 640,
@@ -6459,6 +6624,7 @@
 		"Zac": {
 			"id": "Zac",
 			"key": "154",
+			"name": "Zac",
 			"partype": "None",
 			"stats": {
 				"hp": 685,
@@ -6498,6 +6664,7 @@
 		"Zed": {
 			"id": "Zed",
 			"key": "238",
+			"name": "Zed",
 			"partype": "Energy",
 			"stats": {
 				"hp": 654,
@@ -6538,6 +6705,7 @@
 		"Zeri": {
 			"id": "Zeri",
 			"key": "221",
+			"name": "Zeri",
 			"partype": "Mana",
 			"stats": {
 				"hp": 600,
@@ -6577,6 +6745,7 @@
 		"Ziggs": {
 			"id": "Ziggs",
 			"key": "115",
+			"name": "Ziggs",
 			"partype": "Mana",
 			"stats": {
 				"hp": 606,
@@ -6616,6 +6785,7 @@
 		"Zilean": {
 			"id": "Zilean",
 			"key": "26",
+			"name": "Zilean",
 			"partype": "Mana",
 			"stats": {
 				"hp": 574,
@@ -6655,6 +6825,7 @@
 		"Zoe": {
 			"id": "Zoe",
 			"key": "142",
+			"name": "Zoe",
 			"partype": "Mana",
 			"stats": {
 				"hp": 630,
@@ -6694,6 +6865,7 @@
 		"Zyra": {
 			"id": "Zyra",
 			"key": "143",
+			"name": "Zyra",
 			"partype": "Mana",
 			"stats": {
 				"hp": 574,
