@@ -3,6 +3,7 @@ export {};
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
 const [latestVersion] = versions;
+const minorVersion = latestVersion.slice(0, latestVersion.lastIndexOf('.'));
 
 console.log('Latest version', latestVersion);
 
@@ -14,9 +15,39 @@ if (await championFile.exists()) {
 }
 
 if (!championData || championData?.version !== latestVersion) {
-	console.log('No champion data or outdated, fetching...');
+	console.log('Champion data not present or outdated, fetching...');
 
-	championData = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`).then(r => r.json());
+	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`).then(r => r.json());
+
+	championData = {
+		version,
+		data: Object.fromEntries(
+			Object.entries(data).map(([championId, championData]) => {
+				const { id, key, image, partype, stats } = championData as any;
+
+				return [championId, {
+					id,
+					key,
+					partype,
+					stats,
+					image,
+					roles: {},
+				}];
+			}),
+		) as NonNullable<typeof championData>['data'],
+	};
+
+	const roleScript = await fetch(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`).then(r => r.text());
+	const roleScriptData: Record<'TOP' | 'JUNGLE' | 'MIDDLE' | 'BOTTOM' | 'SUPPORT', Record<string, number>> = JSON.parse(roleScript.match(/JSON\.parse\('([^']+)'/)?.[1] || '{}');
+
+	const allChampions = Object.values(championData!.data);
+
+	for (const [role, playrates] of Object.entries(roleScriptData)) {
+		for (const championKey of Object.keys(playrates)) {
+			const champion = allChampions.find(champion => champion.key === championKey);
+			champion!.roles[role.toLowerCase()] = true;
+		}
+	}
 
 	await championFile.write(JSON.stringify(championData, null, '\t'));
 }
@@ -28,43 +59,117 @@ if (await itemFile.exists()) {
 	itemData = await itemFile.json();
 }
 
-if (!itemData || itemData?.version !== latestVersion) {
-	console.log('No item data or outdated, fetching...');
+if (true || !itemData || itemData?.version !== latestVersion) {
+	console.log('Item data not present or outdated, fetching...');
 
-	itemData = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`).then(r => r.json());
+	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`).then(r => r.json());
 
-	await itemFile.write(JSON.stringify(itemData, null, '\t'));
-}
+	const UNPURCHASABLES_TO_KEEP = [
+		'2422', // slightly magical footwear
+		'3040',	// seraph's embrace
+		'3042',	// muramana
+		'3121', // mobility boots
+	];
 
-const roleFile = Bun.file('app/assets/role.json');
-let roleData: typeof import('../app/assets/role.json') | undefined;
+	itemData = {
+		version,
+		data: Object.fromEntries(
+			Object.entries(data)
+				.filter(([itemId, itemData]) => {
+					const { maps: { 11: sr, 12: ha }, gold } = itemData as {
+						maps: Record<number, boolean>;
+						gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
+					};
 
-if (!roleData || roleData?.version !== latestVersion) {
-	console.log('No role data or outdated, fetching...');
-
-	const roleScript = await fetch(`https://raw.communitydragon.org/${latestVersion.slice(0, latestVersion.lastIndexOf('.'))}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`).then(r => r.text());
-	const rawData = roleScript.match(/JSON\.parse\('([^']+)'/)?.[1];
-	let scriptData: Record<'TOP' | 'JUNGLE' | 'MIDDLE' | 'BOTTOM' | 'SUPPORT', Record<string, number>> = {
-		TOP: {},
-		JUNGLE: {},
-		MIDDLE: {},
-		BOTTOM: {},
-		SUPPORT: {},
+					return (sr || ha)
+						&& itemId.length <= 4
+						&& gold.inStore !== false
+						&& gold.hideFromAll !== false
+						&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
+				})
+				.map(([itemId, itemData]) => {
+					const { name, stats, gold, image, tags } = itemData as any;
+					return [itemId, {
+						id: itemId,
+						name,
+						stats,
+						gold,
+						image,
+						tags,
+					}];
+				}),
+		) as NonNullable<typeof itemData>['data'],
 	};
 
-	if (rawData) {
-		scriptData = JSON.parse(rawData);
-	} else {
-		console.error('Failed to get role data', roleScript);
+	const moreItemData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`).then(r => r.json());
+
+	for (const [itemId, item] of Object.entries(itemData.data)) {
+		const itemMoreData = moreItemData[`Items/${itemId}`];
+
+		if (!itemMoreData) {
+			console.warn(`Haven't found more data for ${item.name} (${itemId})`);
+			continue;
+		}
+
+		const {
+			mItemAttributes,
+			mPercentArmorPenetrationMod: PercentArmorPenetrationMod,
+			PhysicalLethality: PhysicalLethality,
+			mPercentMagicPenetrationMod: PercentMagicPenetrationMod,
+			mFlatMagicPenetrationMod: FlatMagicPenetrationMod,
+		} = itemMoreData;
+
+		const stats = item.stats as Record<string, number>;
+
+		if (PercentArmorPenetrationMod) {
+			stats.PercentArmorPenetrationMod = Number.parseFloat(PercentArmorPenetrationMod.toFixed(2));
+		}
+		if (PhysicalLethality) {
+			stats.PhysicalLethality = PhysicalLethality;
+		}
+		if (PercentMagicPenetrationMod) {
+			stats.PercentMagicPenetrationMod = Number.parseFloat(PercentMagicPenetrationMod.toFixed(2));
+		}
+		if (FlatMagicPenetrationMod) {
+			stats.FlatMagicPenetrationMod = FlatMagicPenetrationMod;
+		}
+
+		const KNOWN_CATEGORYLESS_ITEMS = [
+			'3170',	// swiftmarch
+			'3171',	// crimson lucidity
+			'3172',	// gunmetal greaves
+			'3173',	// chainlaced crushers
+			'3174',	// armored advance
+			'3175',	// spellslinger's shoes
+			'3176',	// forever forward
+			'3869',	// celestial opposition
+			'3870',	// dream maker
+			'3871',	// zaz'zak's realmspike
+			'3876',	// solstice sleigh
+			'3877',	// bloodsong
+		];
+
+		if (!mItemAttributes) {
+			if (!KNOWN_CATEGORYLESS_ITEMS.includes(itemId)) {
+				console.warn(`Haven't found category data for ${item.name} (${itemId})`);
+			}
+			continue;
+		}
+
+		const CATEGORY_NUMBER_TO_NAME = {
+			1: 'fighter',
+			2: 'marksman',
+			4: 'assassin',
+			8: 'tank',
+			16: 'mage',
+			32: 'support',
+		};
+
+		item.categories = mItemAttributes.reduce((acc, categoryNumber) => ({
+			...acc,
+			[CATEGORY_NUMBER_TO_NAME[categoryNumber]]: true,
+		}), {});
 	}
 
-	const champions = Object.values(championData!.data);
-	roleData = Object.fromEntries(
-		Object.entries(scriptData).map(([role, playratesByKey]) => (
-			[role, Object.keys(playratesByKey).map(
-				key => champions.find(champion => champion.key === key)?.id,
-			)])),
-	);
-
-	await roleFile.write(JSON.stringify(roleData, null, '\t'));
+	await itemFile.write(JSON.stringify(itemData, null, '\t'));
 }
