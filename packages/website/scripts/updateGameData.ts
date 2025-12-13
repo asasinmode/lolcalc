@@ -113,6 +113,7 @@ if (true || !itemData || itemData?.version !== latestVersion) {
 
 		const {
 			mItemAttributes,
+			mAbilityHasteMod: AbilityHasteMod,
 			mPercentArmorPenetrationMod: PercentArmorPenetrationMod,
 			PhysicalLethality: PhysicalLethality,
 			mPercentMagicPenetrationMod: PercentMagicPenetrationMod,
@@ -121,6 +122,9 @@ if (true || !itemData || itemData?.version !== latestVersion) {
 
 		const stats = item.stats as Record<string, number>;
 
+		if (AbilityHasteMod) {
+			stats.AbilityHasteMod = AbilityHasteMod;
+		}
 		if (PercentArmorPenetrationMod) {
 			stats.PercentArmorPenetrationMod = Number.parseFloat(PercentArmorPenetrationMod.toFixed(2));
 		}
@@ -163,12 +167,12 @@ if (true || !itemData || itemData?.version !== latestVersion) {
 			8: 'tank',
 			16: 'mage',
 			32: 'support',
-		};
+		} as const;
 
-		item.categories = mItemAttributes.reduce((acc, categoryNumber) => ({
+		(item as { categories?: Record<string, boolean> }).categories = (mItemAttributes as number[]).reduce((acc, categoryNumber) => ({
 			...acc,
 			[CATEGORY_NUMBER_TO_NAME[categoryNumber]]: true,
-		}), {});
+		}), {} as Partial<Record<typeof CATEGORY_NUMBER_TO_NAME[keyof typeof CATEGORY_NUMBER_TO_NAME], boolean>>);
 	}
 
 	await itemFile.write(JSON.stringify(itemData, null, '\t'));
