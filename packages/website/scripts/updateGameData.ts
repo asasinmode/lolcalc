@@ -75,6 +75,29 @@ if (!itemData || itemData?.version !== latestVersion) {
 		'3121', // mobility boots
 	];
 
+	const UNINTERESTING_ITEMS = [
+		'3330',	// scarecrow effigy
+		'3340',	// stealth ward
+		'3363',	// farsight alteration
+		'3364',	// oracle lens
+		'3599',	// kalista's black spear
+		'3600',	// kalista's black spear
+		'2003',	// health potion
+		'2055',	// control ward
+		'2031',	// refillable potion
+		'2141',	// cappa juice
+		'1101',	// scorchclaw pup
+		'1102',	// gustwalker hatchling
+		'1103',	// mosstomper seedling
+		'1105',	// mosstomper seedling
+		'1106',	// gustwalker hatchling
+		'1107',	// scorchclaw pup
+		'2138',	// elixir of iron
+		'2139',	// elixir of sorcery
+		'2140',	// elixir of wrath
+		'6032',	// stat bonus
+	];
+
 	itemData = {
 		version,
 		data: Object.fromEntries(
@@ -85,7 +108,8 @@ if (!itemData || itemData?.version !== latestVersion) {
 						gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
 					};
 
-					return (sr || ha)
+					return !UNINTERESTING_ITEMS.includes(itemId)
+						&& (sr || ha)
 						&& itemId.length <= 4
 						&& gold.inStore !== false
 						&& gold.hideFromAll !== false
