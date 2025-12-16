@@ -1,20 +1,22 @@
 <script setup lang="ts">
 // TODO top right map select, sr/aram
-const vDialog = useTemplateRef('vDialog');
+defineEmits<{
+	selectItem: [item: IItem];
+}>();
 
 const { version, items } = useItems();
 
+const vDialog = useTemplateRef('vDialog');
 const search = ref('');
 
 const sortedByPrice = computed(() => Object.values(items).sort((a, b) => a.gold.total - b.gold.total));
 const computedItems = computed(() => {
-	const splitSearch = search.value.split(' ');
-	return sortedByPrice.value.filter(item => splitSearch.some(word => item.name.toLocaleLowerCase().includes(word)));
-});
+	const splitSearch = search.value.split(' ').filter(v => v);
 
-function selectItem(item: IItem) {
-	navigator.clipboard.writeText(`'${item.id}',\t// ${item.name.toLocaleLowerCase()}`);
-}
+	return search.value
+		? sortedByPrice.value.filter(item => splitSearch.every(word => item.name.toLocaleLowerCase().includes(word)))
+		: sortedByPrice.value;
+});
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -22,16 +24,21 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog ref="vDialog" class="px-3 pb-2 bg-cyan-950 grid grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))] max-h-[80vh] w-xl shadow-lg of-y-auto">
-		<div class="py-2 pb-2 bg-inherit col-span-full top-0 sticky">
+	<VDialog ref="vDialog" class="px-3 pb-2 bg-cyan-950 grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))] max-h-[80vh] w-xl shadow-lg of-y-auto [&[open]]-grid">
+		<header class="py-2 pb-2 bg-inherit flex col-span-full items-center top-0 sticky">
 			<label for="item-shop-search">Search</label>
 			<input id="item-shop-search" v-model="search" class="ml-2 bg-black">
-		</div>
+			<form method="dialog" class="ml-auto">
+				<button autofocus value="cancel">
+					close
+				</button>
+			</form>
+		</header>
 		<button
 			v-for="item in computedItems"
 			:key="item.id"
 			class="leading-tight text-center min-w-0 block hyphens-auto"
-			@click="selectItem(item)"
+			@click="$emit('selectItem', item)"
 		>
 			<img
 				:title="item.name"

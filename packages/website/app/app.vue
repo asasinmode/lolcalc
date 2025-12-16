@@ -9,12 +9,19 @@ const { version, champions } = useChampions();
 const itemShopDialog = useTemplateRef('itemShopDialog');
 
 const selectedChampionId = ref<IChampionId>();
-const selectedChampion = computed(() => selectedChampionId.value ? champions[selectedChampionId.value] : undefined);
-
 const selectedChampionLevel = ref(1);
-const selectedChampionItems = shallowRef<IItem[]>([]);
+const selectedChampionItems = ref<IItem[]>([]);
 
-const stats = computed(() => selectedChampion.value ? useChampionStats(selectedChampion.value, selectedChampionLevel.value, selectedChampionItems.value) : undefined);
+const selectedChampion = computed(() => selectedChampionId.value ? champions[selectedChampionId.value] : undefined);
+const stats = computed(() => selectedChampion.value
+	? useChampionStats(selectedChampion.value, selectedChampionLevel.value, selectedChampionItems.value)
+	: undefined);
+
+function addItem(item: IItem) {
+	if (selectedChampionItems.value.length < 6) {
+		selectedChampionItems.value.push(markRaw(item));
+	}
+}
 </script>
 
 <template>
@@ -38,7 +45,7 @@ const stats = computed(() => selectedChampion.value ? useChampionStats(selectedC
 		<button @click="itemShopDialog?.open()">
 			item shop
 		</button>
-		<DialogItemShop ref="itemShopDialog" />
+		<DialogItemShop ref="itemShopDialog" @select-item="addItem" />
 		<button
 			v-for="i in 6"
 			:key="i"
@@ -46,9 +53,9 @@ const stats = computed(() => selectedChampion.value ? useChampionStats(selectedC
 			@click.right.prevent="selectedChampionItems.splice(i - 1, 1)"
 		>
 			<img
-				v-if="selectedChampionItems[i]"
-				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${selectedChampionItems[i].image.full}`"
-				:title="selectedChampionItems[i].name"
+				v-if="selectedChampionItems[i - 1]"
+				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${selectedChampionItems[i - 1]!.image.full}`"
+				:title="selectedChampionItems[i - 1]!.name"
 				width="64"
 				height="64"
 			>

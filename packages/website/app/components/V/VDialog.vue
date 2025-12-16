@@ -6,19 +6,16 @@ const emit = defineEmits<{
 const dialogEl = useTemplateRef('dialogEl');
 
 function closeDialog() {
-	if (dialogEl.value) {
-		emit('close', dialogEl.value.returnValue === 'cancel');
-	} else {
-		console.warn('dialog closed without ref value');
-		emit('close', false);
-	}
+	const { returnValue } = dialogEl.value!;
+	emit('close', !returnValue || returnValue === 'cancel');
+	dialogEl.value!.returnValue = '';
 }
 
 defineExpose({
 	open() {
 		dialogEl.value?.showModal();
 	},
-	close(returnValue?: 'save' | 'cancel') {
+	close(returnValue?: string) {
 		dialogEl.value?.close(returnValue);
 	},
 });
