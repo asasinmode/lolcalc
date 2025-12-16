@@ -89,14 +89,13 @@ if (!itemData || itemData?.version !== latestVersion) {
 						&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
 				})
 				.map(([itemId, itemData]) => {
-					const { name, stats, gold, image, tags } = itemData as any;
+					const { name, stats, gold, image } = itemData as any;
 					return [itemId, {
 						id: itemId,
 						name,
 						stats,
 						gold,
 						image,
-						tags,
 					}];
 				}),
 		) as NonNullable<typeof itemData>['data'],
@@ -115,6 +114,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 		const {
 			mItemAttributes,
 			mAbilityHasteMod: AbilityHasteMod,
+			mPercentTenacityItemMod: PercentTenacityMod,
 			mPercentArmorPenetrationMod: PercentArmorPenetrationMod,
 			PhysicalLethality: PhysicalLethality,
 			mPercentMagicPenetrationMod: PercentMagicPenetrationMod,
@@ -137,6 +137,9 @@ if (!itemData || itemData?.version !== latestVersion) {
 		}
 		if (FlatMagicPenetrationMod) {
 			stats.FlatMagicPenetrationMod = FlatMagicPenetrationMod;
+		}
+		if (PercentTenacityMod) {
+			stats.PercentTenacityMod = Number.parseFloat(PercentTenacityMod.toFixed(2));
 		}
 
 		const KNOWN_CATEGORYLESS_ITEMS = [

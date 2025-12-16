@@ -22,9 +22,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Boots"
-			],
 			"categories": {
 				"support": true
 			}
@@ -48,9 +45,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"ManaRegen"
-			],
 			"categories": {
 				"support": true
 			}
@@ -74,9 +68,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"HealthRegen"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -102,9 +93,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health"
-			],
 			"categories": {
 				"tank": true,
 				"mage": true,
@@ -132,9 +120,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CriticalStrike"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -160,9 +145,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -188,9 +170,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Mana"
-			],
 			"categories": {
 				"mage": true,
 				"tank": true
@@ -217,9 +196,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health"
-			],
 			"categories": {
 				"fighter": true,
 				"tank": true,
@@ -250,9 +226,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -283,9 +256,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -312,9 +282,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock"
-			],
 			"categories": {
 				"tank": true,
 				"mage": true,
@@ -345,10 +312,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Lane"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -376,9 +339,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage"
-			],
 			"categories": {
 				"marksman": true,
 				"fighter": true,
@@ -406,9 +366,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -436,9 +393,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"AttackSpeed"
-			],
 			"categories": {
 				"marksman": true,
 				"fighter": true,
@@ -466,10 +420,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"AttackSpeed",
-				"OnHit"
-			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -496,9 +446,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -526,10 +473,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"LifeSteal"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -557,11 +500,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"Lane"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -592,12 +530,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"SpellVamp",
-				"Lane"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -626,12 +558,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Lane",
-				"ManaRegen",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -657,9 +583,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -687,9 +610,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -716,11 +636,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"Lane"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -746,11 +661,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"OnHit",
-				"Lane"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -776,9 +686,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Jungle"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -807,9 +714,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Jungle"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -838,9 +742,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Jungle"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -869,9 +770,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Jungle"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -900,9 +798,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Jungle"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -931,9 +826,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Jungle"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -962,12 +854,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"HealthRegen",
-				"Consumable",
-				"Lane",
-				"Jungle"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -994,10 +880,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"Damage"
-			],
 			"categories": {
 				"assassin": true,
 				"fighter": true,
@@ -1027,11 +909,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CooldownReduction",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -1058,10 +935,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage"
-			],
 			"categories": {
 				"assassin": true,
 				"fighter": true,
@@ -1089,9 +962,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CooldownReduction"
-			],
 			"categories": {
 				"assassin": true,
 				"fighter": true,
@@ -1120,13 +990,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"HealthRegen",
-				"Consumable",
-				"Active",
-				"Lane",
-				"Jungle"
-			],
 			"categories": {
 				"support": true
 			}
@@ -1153,11 +1016,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"Lane"
-			],
 			"categories": {
 				"tank": true,
 				"support": true,
@@ -1183,12 +1041,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Consumable",
-				"Lane",
-				"Stealth",
-				"Vision"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -1216,14 +1068,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"ManaRegen",
-				"Active",
-				"CooldownReduction",
-				"NonbootsMovement",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -1247,12 +1091,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Consumable",
-				"NonbootsMovement",
-				"Tenacity"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -1276,11 +1114,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Consumable",
-				"ManaRegen",
-				"SpellDamage"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -1304,12 +1137,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Consumable",
-				"Damage",
-				"LifeSteal",
-				"SpellVamp"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -1333,10 +1160,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Consumable"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -1363,11 +1186,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"SpellDamage",
-				"Active"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -1394,7 +1212,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [],
 			"categories": {
 				"fighter": true
 			}
@@ -1420,9 +1237,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Boots"
-			],
 			"categories": {
 				"support": true
 			}
@@ -1449,10 +1263,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage"
-			],
 			"categories": {
 				"fighter": true,
 				"tank": true
@@ -1482,13 +1292,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"Armor",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -1516,12 +1319,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"Mana",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -1548,11 +1345,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"HealthRegen"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -1578,9 +1370,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -1608,11 +1397,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Armor",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -1641,11 +1425,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"Mana",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -1673,13 +1452,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Mana",
-				"CooldownReduction",
-				"OnHit",
-				"AbilityHaste"
-			],
 			"categories": {
 				"marksman": true,
 				"fighter": true,
@@ -1708,10 +1480,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"AttackSpeed",
-				"Boots"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -1738,9 +1506,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Boots"
-			],
 			"categories": {
 				"support": true,
 				"marksman": true,
@@ -1768,9 +1533,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Boots"
-			],
 			"categories": {
 				"support": true
 			}
@@ -1797,10 +1559,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Boots",
-				"MagicPenetration"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -1828,12 +1586,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"Mana",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -1861,10 +1613,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"Damage"
-			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -1893,10 +1641,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CriticalStrike",
-				"Damage"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -1923,11 +1667,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike",
-				"AttackSpeed"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -1955,11 +1694,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -1986,10 +1720,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"ArmorPenetration",
-				"Damage"
-			],
 			"categories": {
 				"marksman": true,
 				"assassin": true
@@ -2018,11 +1748,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -2050,10 +1775,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"CriticalStrike"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -2082,11 +1803,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"Mana",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -2113,11 +1829,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -2145,13 +1856,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Mana",
-				"CooldownReduction",
-				"OnHit",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -2180,11 +1884,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -2212,11 +1911,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CriticalStrike",
-				"AttackSpeed",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -2243,10 +1937,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"Boots"
-			],
 			"categories": {
 				"tank": true,
 				"assassin": true,
@@ -2277,12 +1967,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"Armor",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -2310,10 +1994,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"AttackSpeed"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -2323,7 +2003,8 @@
 			"id": "3053",
 			"name": "Sterak's Gage",
 			"stats": {
-				"FlatHPPoolMod": 400
+				"FlatHPPoolMod": 400,
+				"PercentTenacityMod": 0.2
 			},
 			"gold": {
 				"base": 775,
@@ -2340,11 +2021,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"Tenacity"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -2370,10 +2046,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"OnHit",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true,
 				"mage": true,
@@ -2404,13 +2076,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"HealthRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -2437,10 +2102,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"tank": true,
 				"support": true,
@@ -2469,11 +2130,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true,
 				"tank": true,
@@ -2504,12 +2160,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Armor",
-				"Aura",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -2535,10 +2185,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Mana",
-				"ManaRegen"
-			],
 			"categories": {
 				"mage": true,
 				"marksman": true,
@@ -2570,15 +2216,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"CooldownReduction",
-				"OnHit",
-				"NonbootsMovement",
-				"ArmorPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -2605,10 +2242,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"LifeSteal"
-			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -2637,14 +2270,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"AttackSpeed",
-				"CooldownReduction",
-				"NonbootsMovement",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -2672,13 +2297,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"LifeSteal",
-				"CooldownReduction",
-				"OnHit",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -2705,10 +2323,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Armor"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2735,9 +2349,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2764,10 +2375,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"OnHit"
-			],
 			"categories": {
 				"fighter": true,
 				"tank": true,
@@ -2798,15 +2405,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"AttackSpeed",
-				"CooldownReduction",
-				"OnHit",
-				"NonbootsMovement",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -2832,9 +2430,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2861,10 +2456,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -2890,10 +2481,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -2921,12 +2508,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CriticalStrike",
-				"AttackSpeed",
-				"OnHit",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -2954,11 +2535,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CriticalStrike",
-				"AttackSpeed",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -2986,12 +2562,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"AttackSpeed",
-				"OnHit",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -3017,9 +2587,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -3029,7 +2596,8 @@
 			"name": "Wit's End",
 			"stats": {
 				"FlatSpellBlockMod": 45,
-				"PercentAttackSpeedMod": 0.5
+				"PercentAttackSpeedMod": 0.5,
+				"PercentTenacityMod": 0.2
 			},
 			"gold": {
 				"base": 550,
@@ -3046,12 +2614,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock",
-				"AttackSpeed",
-				"OnHit",
-				"Tenacity"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -3080,11 +2642,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CriticalStrike",
-				"AttackSpeed",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -3112,11 +2669,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike",
-				"AttackSpeed"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -3144,12 +2696,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"OnHit",
-				"NonbootsMovement",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -3176,10 +2722,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -3207,12 +2749,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock",
-				"Armor",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -3240,12 +2776,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"ManaRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -3272,11 +2802,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -3305,15 +2830,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"Armor",
-				"Aura",
-				"Active",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -3342,13 +2858,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"Mana",
-				"Aura",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -3359,7 +2868,8 @@
 			"name": "Mercury's Treads",
 			"stats": {
 				"FlatSpellBlockMod": 20,
-				"FlatMovementSpeedMod": 45
+				"FlatMovementSpeedMod": 45,
+				"PercentTenacityMod": 0.3
 			},
 			"gold": {
 				"base": 550,
@@ -3376,11 +2886,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Boots",
-				"SpellBlock",
-				"Tenacity"
-			],
 			"categories": {
 				"tank": true,
 				"assassin": true,
@@ -3409,12 +2914,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"ManaRegen",
-				"Lane"
-			],
 			"categories": {
 				"mage": true,
 				"support": true,
@@ -3443,10 +2942,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"NonbootsMovement",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -3471,9 +2966,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"ManaRegen"
-			],
 			"categories": {
 				"support": true
 			}
@@ -3501,12 +2993,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"AttackSpeed",
-				"SpellDamage",
-				"OnHit",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true,
 				"marksman": true
@@ -3534,11 +3020,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"Slow"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -3566,11 +3047,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"Mana",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -3598,11 +3074,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Mana",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -3630,11 +3101,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Mana",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -3660,9 +3126,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -3692,12 +3155,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"AttackSpeed",
-				"SpellDamage",
-				"OnHit"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -3724,11 +3181,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -3757,10 +3209,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true,
 				"marksman": true
@@ -3788,10 +3236,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"MagicPenetration",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -3819,11 +3263,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"MagicPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -3851,14 +3290,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock",
-				"Damage",
-				"LifeSteal",
-				"Active",
-				"NonbootsMovement",
-				"Tenacity"
-			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -3885,10 +3316,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Active",
-				"SpellBlock"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -3916,12 +3343,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Active",
-				"NonbootsMovement",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -3948,12 +3369,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Armor",
-				"Active",
-				"Slow"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -3979,9 +3394,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"AttackSpeed"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -4007,9 +3419,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -4036,13 +3445,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"LifeSteal",
-				"SpellDamage",
-				"Active",
-				"SpellVamp"
-			],
 			"categories": {
 				"mage": true,
 				"assassin": true
@@ -4070,10 +3472,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -4101,14 +3499,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"Active",
-				"CooldownReduction",
-				"NonbootsMovement",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -4136,13 +3526,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"AttackSpeed",
-				"LifeSteal",
-				"Slow",
-				"OnHit"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -4170,10 +3553,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"SpellBlock"
-			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -4203,13 +3582,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock",
-				"Damage",
-				"LifeSteal",
-				"SpellVamp",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -4238,11 +3610,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"SpellDamage",
-				"Active"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -4269,10 +3636,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Boots",
-				"CooldownReduction"
-			],
 			"categories": {
 				"support": true,
 				"mage": true,
@@ -4301,11 +3664,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -4333,12 +3691,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -4364,10 +3716,7 @@
 				"y": 240,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Boots"
-			]
+			}
 		},
 		"3171": {
 			"id": "3171",
@@ -4390,11 +3739,7 @@
 				"y": 240,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"CooldownReduction",
-				"Boots"
-			]
+			}
 		},
 		"3172": {
 			"id": "3172",
@@ -4417,18 +3762,15 @@
 				"y": 240,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"AttackSpeed",
-				"NonbootsMovement"
-			]
+			}
 		},
 		"3173": {
 			"id": "3173",
 			"name": "Chainlaced Crushers",
 			"stats": {
 				"FlatSpellBlockMod": 35,
-				"FlatMovementSpeedMod": 50
+				"FlatMovementSpeedMod": 50,
+				"PercentTenacityMod": 0.3
 			},
 			"gold": {
 				"base": 500,
@@ -4444,13 +3786,7 @@
 				"y": 240,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"SpellBlock",
-				"Boots",
-				"Tenacity",
-				"MagicResist"
-			]
+			}
 		},
 		"3174": {
 			"id": "3174",
@@ -4473,11 +3809,7 @@
 				"y": 240,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Armor",
-				"Boots"
-			]
+			}
 		},
 		"3175": {
 			"id": "3175",
@@ -4501,11 +3833,7 @@
 				"y": 288,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Boots",
-				"MagicPenetration"
-			]
+			}
 		},
 		"3176": {
 			"id": "3176",
@@ -4527,10 +3855,7 @@
 				"y": 288,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Boots"
-			]
+			}
 		},
 		"3177": {
 			"id": "3177",
@@ -4555,12 +3880,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"Lane",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -4591,13 +3910,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Vision",
-				"CooldownReduction",
-				"ArmorPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -4625,11 +3937,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -4657,12 +3964,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"LifeSteal",
-				"Lane"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -4693,15 +3994,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"Armor",
-				"Aura",
-				"Active",
-				"MagicResist",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -4729,11 +4021,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"SpellBlock"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -4760,14 +4047,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"ManaRegen",
-				"Active",
-				"CooldownReduction",
-				"Tenacity",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -4794,13 +4073,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"AttackSpeed",
-				"OnHit",
-				"MagicPenetration",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -4825,13 +4097,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Active",
-				"Jungle",
-				"Lane",
-				"Trinket",
-				"Vision"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -4855,13 +4120,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Active",
-				"Jungle",
-				"Lane",
-				"Trinket",
-				"Vision"
-			],
 			"categories": {
 				"support": true
 			}
@@ -4885,11 +4143,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Active",
-				"Trinket",
-				"Vision"
-			],
 			"categories": {
 				"support": true
 			}
@@ -4913,11 +4166,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Active",
-				"Trinket",
-				"Vision"
-			],
 			"categories": {
 				"support": true
 			}
@@ -4944,12 +4192,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"AttackSpeed",
-				"SpellDamage",
-				"ManaRegen",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"support": true
 			}
@@ -4977,14 +4219,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike",
-				"ManaRegen",
-				"CooldownReduction",
-				"OnHit",
-				"AbilityHaste"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -5008,9 +4242,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Consumable"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -5034,9 +4265,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Consumable"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -5064,12 +4292,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Armor",
-				"Slow",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -5097,12 +4319,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"Damage",
-				"OnHit"
-			],
 			"categories": {
 				"fighter": true,
 				"tank": true
@@ -5129,10 +4345,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -5160,13 +4372,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"Mana",
-				"ManaRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5193,12 +4398,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"Mana",
-				"ManaRegen"
-			],
 			"categories": {
 				"tank": true,
 				"mage": true
@@ -5227,11 +4426,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -5257,13 +4451,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"ManaRegen",
-				"Vision",
-				"GoldPer",
-				"Lane"
-			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -5289,15 +4476,7 @@
 				"y": 144,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"ManaRegen",
-				"Vision",
-				"GoldPer",
-				"Lane"
-			]
+			}
 		},
 		"3870": {
 			"id": "3870",
@@ -5319,15 +4498,7 @@
 				"y": 144,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"ManaRegen",
-				"Vision",
-				"GoldPer",
-				"Lane"
-			]
+			}
 		},
 		"3871": {
 			"id": "3871",
@@ -5349,15 +4520,7 @@
 				"y": 144,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"ManaRegen",
-				"Vision",
-				"GoldPer",
-				"Lane"
-			]
+			}
 		},
 		"3876": {
 			"id": "3876",
@@ -5379,15 +4542,7 @@
 				"y": 144,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"ManaRegen",
-				"Vision",
-				"GoldPer",
-				"Lane"
-			]
+			}
 		},
 		"3877": {
 			"id": "3877",
@@ -5409,15 +4564,7 @@
 				"y": 144,
 				"w": 48,
 				"h": 48
-			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"ManaRegen",
-				"Vision",
-				"GoldPer",
-				"Lane"
-			]
+			}
 		},
 		"3916": {
 			"id": "3916",
@@ -5440,9 +4587,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -5470,11 +4614,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"NonbootsMovement",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -5502,11 +4641,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"NonbootsMovement",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -5533,12 +4667,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"ManaRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -5566,11 +4694,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -5597,10 +4720,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5629,12 +4748,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"NonbootsMovement",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5661,10 +4774,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"MagicPenetration",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5691,10 +4800,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellBlock",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5722,12 +4827,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"CooldownReduction",
-				"SpellVamp"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5756,15 +4855,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"Armor",
-				"Vision",
-				"Active",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -5791,12 +4881,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"ManaRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -5825,15 +4909,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"Armor",
-				"Vision",
-				"Active",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -5860,10 +4935,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"MagicPenetration"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5891,12 +4962,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"GoldPer",
-				"NonbootsMovement",
-				"MagicPenetration"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -5920,25 +4985,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"Armor",
-				"Damage",
-				"CriticalStrike",
-				"AttackSpeed",
-				"SpellDamage",
-				"Mana",
-				"Consumable",
-				"CooldownReduction",
-				"SpellVamp",
-				"NonbootsMovement",
-				"Tenacity",
-				"MagicPenetration",
-				"ArmorPenetration",
-				"MagicResist",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -5971,11 +5017,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Armor",
-				"Damage",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -6003,12 +5044,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true,
 				"assassin": true
@@ -6037,12 +5072,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -6069,12 +5098,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"ManaRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -6102,13 +5125,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"ManaRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -6136,13 +5152,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"ManaRegen",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"support": true
 			}
@@ -6168,10 +5177,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"ManaRegen"
-			],
 			"categories": {
 				"support": true
 			}
@@ -6199,12 +5204,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Damage",
-				"AttackSpeed",
-				"Slow"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -6231,10 +5230,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -6262,12 +5257,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"SpellDamage",
-				"Mana",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -6295,13 +5284,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"HealthRegen",
-				"SpellDamage",
-				"Mana",
-				"ManaRegen"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -6328,10 +5310,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -6359,14 +5337,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"Armor",
-				"CooldownReduction",
-				"Slow",
-				"OnHit",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -6395,14 +5365,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"HealthRegen",
-				"Aura",
-				"MagicResist",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -6430,12 +5392,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"Armor",
-				"MagicResist"
-			],
 			"categories": {
 				"tank": true
 			}
@@ -6462,10 +5418,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -6493,12 +5445,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"AttackSpeed",
-				"OnHit",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -6525,10 +5471,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -6556,11 +5498,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"CriticalStrike",
-				"AttackSpeed",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -6588,11 +5525,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CriticalStrike",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"marksman": true,
 				"assassin": true
@@ -6620,10 +5552,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"NonbootsMovement"
-			],
 			"categories": {
 				"assassin": true,
 				"fighter": true,
@@ -6652,11 +5580,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CooldownReduction",
-				"AbilityHaste"
-			],
 			"categories": {
 				"fighter": true
 			}
@@ -6684,12 +5607,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"CooldownReduction",
-				"ArmorPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -6716,10 +5633,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -6747,11 +5660,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"ArmorPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -6779,13 +5687,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Active",
-				"CooldownReduction",
-				"ArmorPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -6813,13 +5714,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Active",
-				"CooldownReduction",
-				"ArmorPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -6847,13 +5741,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Active",
-				"CooldownReduction",
-				"ArmorPenetration",
-				"AbilityHaste"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -6880,12 +5767,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Damage",
-				"Active",
-				"NonbootsMovement",
-				"ArmorPenetration"
-			],
 			"categories": {
 				"assassin": true
 			}
@@ -6913,12 +5794,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellDamage",
-				"CooldownReduction",
-				"MagicPenetration"
-			],
 			"categories": {
 				"mage": true
 			}
@@ -6946,13 +5821,6 @@
 				"w": 48,
 				"h": 48
 			},
-			"tags": [
-				"Health",
-				"SpellBlock",
-				"CooldownReduction",
-				"MagicResist",
-				"AbilityHaste"
-			],
 			"categories": {
 				"tank": true,
 				"support": true
