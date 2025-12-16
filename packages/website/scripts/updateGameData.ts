@@ -1,4 +1,4 @@
-export {};
+import type { IChampion } from '../app/composables/useChampions';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -22,19 +22,21 @@ if (!championData || championData?.version !== latestVersion) {
 	championData = {
 		version,
 		data: Object.fromEntries(
-			Object.entries(data).map(([championId, championData]) => {
-				const { id, key, name, image, partype, stats } = championData as any;
+			(Object.entries(data) as [string, IChampion][])
+				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
+				.map(([championId, championData]) => {
+					const { id, key, name, image, partype, stats } = championData;
 
-				return [championId, {
-					id,
-					key,
-					name,
-					partype,
-					stats,
-					image,
-					roles: {},
-				}];
-			}),
+					return [championId, {
+						id,
+						key,
+						name,
+						partype,
+						stats,
+						image,
+						roles: {},
+					}];
+				}),
 		) as NonNullable<typeof championData>['data'],
 	};
 
