@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { data as champions } from '~/assets/champion.json';
-
 useSeoMeta({
 	title: 'Collector - League of Legends Damage Calculator',
 });
 
-const version = usePatchVersion();
+const { version, champions } = useChampions();
 
-const selectedChampionId = ref<keyof typeof champions>();
+const selectedChampionId = ref<IChampionId>();
 const selectedChampion = computed(() => selectedChampionId.value ? champions[selectedChampionId.value] : undefined);
 const selectedChampionLevel = ref(1);
+
+const stats = computed(() => selectedChampion.value ? useChampionStats(selectedChampion.value) : undefined);
 </script>
 
 <template>
@@ -40,7 +40,7 @@ const selectedChampionLevel = ref(1);
 				height="128"
 			>
 			<code class="whitespace-pre">
-				{{ JSON.stringify(selectedChampion, null, 2) }}
+				{{ JSON.stringify(stats, null, 2) }}
 			</code>
 		</div>
 	</main>
