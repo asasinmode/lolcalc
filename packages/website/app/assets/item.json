@@ -29,7 +29,9 @@
 		"1004": {
 			"id": "1004",
 			"name": "Faerie Charm",
-			"stats": {},
+			"stats": {
+				"PercentBaseMPRegenMod": 0.5
+			},
 			"gold": {
 				"base": 200,
 				"purchasable": true,
@@ -52,7 +54,9 @@
 		"1006": {
 			"id": "1006",
 			"name": "Rejuvenation Bead",
-			"stats": {},
+			"stats": {
+				"PercentBaseHPRegenMod": 1
+			},
 			"gold": {
 				"base": 300,
 				"purchasable": true,
@@ -1051,7 +1055,8 @@
 			"stats": {
 				"FlatMagicDamageMod": 50,
 				"PercentMovementSpeedMod": 0.04,
-				"AbilityHasteMod": 15
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
 				"base": 400,
@@ -1328,7 +1333,8 @@
 			"name": "Kaenic Rookern",
 			"stats": {
 				"FlatSpellBlockMod": 80,
-				"FlatHPPoolMod": 400
+				"FlatHPPoolMod": 400,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 800,
@@ -2059,7 +2065,8 @@
 			"stats": {
 				"FlatSpellBlockMod": 50,
 				"FlatHPPoolMod": 400,
-				"AbilityHasteMod": 10
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 650,
@@ -2439,7 +2446,8 @@
 			"id": "3083",
 			"name": "Warmog's Armor",
 			"stats": {
-				"FlatHPPoolMod": 1000
+				"FlatHPPoolMod": 1000,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 500,
@@ -2464,7 +2472,8 @@
 			"id": "3084",
 			"name": "Heartsteel",
 			"stats": {
-				"FlatHPPoolMod": 900
+				"FlatHPPoolMod": 900,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 400,
@@ -2759,7 +2768,8 @@
 			"name": "Redemption",
 			"stats": {
 				"FlatHPPoolMod": 200,
-				"AbilityHasteMod": 15
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1
 			},
 			"gold": {
 				"base": 900,
@@ -2813,7 +2823,8 @@
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"FlatArmorMod": 40,
-				"AbilityHasteMod": 10
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 400,
@@ -2950,7 +2961,9 @@
 		"3114": {
 			"id": "3114",
 			"name": "Forbidden Idol",
-			"stats": {},
+			"stats": {
+				"PercentBaseMPRegenMod": 0.5
+			},
 			"gold": {
 				"base": 400,
 				"purchasable": true,
@@ -3816,8 +3829,8 @@
 			"name": "Spellslinger's Shoes",
 			"stats": {
 				"FlatMovementSpeedMod": 50,
-				"PercentMagicPenetrationMod": 0.07,
-				"FlatMagicPenetrationMod": 18
+				"FlatMagicPenetrationMod": 18,
+				"PercentMagicPenetrationMod": 0.07
 			},
 			"gold": {
 				"base": 500,
@@ -4004,7 +4017,8 @@
 			"name": "Spectre's Cowl",
 			"stats": {
 				"FlatSpellBlockMod": 35,
-				"FlatHPPoolMod": 200
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 150,
@@ -4030,7 +4044,8 @@
 			"name": "Mikael's Blessing",
 			"stats": {
 				"FlatHPPoolMod": 250,
-				"AbilityHasteMod": 15
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1
 			},
 			"gold": {
 				"base": 900,
@@ -4175,7 +4190,8 @@
 			"name": "Ardent Censer",
 			"stats": {
 				"FlatMagicDamageMod": 45,
-				"PercentMovementSpeedMod": 0.04
+				"PercentMovementSpeedMod": 0.04,
+				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
 				"base": 700,
@@ -4328,7 +4344,8 @@
 			"id": "3801",
 			"name": "Crystalline Bracer",
 			"stats": {
-				"FlatHPPoolMod": 200
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 100,
@@ -4434,7 +4451,9 @@
 			"id": "3865",
 			"name": "World Atlas",
 			"stats": {
-				"FlatHPPoolMod": 30
+				"FlatHPPoolMod": 30,
+				"PercentBaseHPRegenMod": 0.25,
+				"PercentBaseMPRegenMod": 0.25
 			},
 			"gold": {
 				"base": 400,
@@ -4460,7 +4479,9 @@
 			"id": "3869",
 			"name": "Celestial Opposition",
 			"stats": {
-				"FlatHPPoolMod": 200
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
 				"base": 0,
@@ -4482,7 +4503,9 @@
 			"id": "3870",
 			"name": "Dream Maker",
 			"stats": {
-				"FlatHPPoolMod": 200
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
 				"base": 0,
@@ -4504,7 +4527,9 @@
 			"id": "3871",
 			"name": "Zaz'Zak's Realmspike",
 			"stats": {
-				"FlatHPPoolMod": 200
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
 				"base": 0,
@@ -4526,7 +4551,9 @@
 			"id": "3876",
 			"name": "Solstice Sleigh",
 			"stats": {
-				"FlatHPPoolMod": 200
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
 				"base": 0,
@@ -4548,7 +4575,9 @@
 			"id": "3877",
 			"name": "Bloodsong",
 			"stats": {
-				"FlatHPPoolMod": 200
+				"FlatHPPoolMod": 200,
+				"PercentBaseHPRegenMod": 0.75,
+				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
 				"base": 0,
@@ -4650,7 +4679,8 @@
 			"name": "Imperial Mandate",
 			"stats": {
 				"FlatMagicDamageMod": 60,
-				"AbilityHasteMod": 20
+				"AbilityHasteMod": 20,
+				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
 				"base": 500,
@@ -4864,7 +4894,8 @@
 			"name": "Bandleglass Mirror",
 			"stats": {
 				"FlatMagicDamageMod": 20,
-				"AbilityHasteMod": 10
+				"AbilityHasteMod": 10,
+				"PercentBaseMPRegenMod": 1
 			},
 			"gold": {
 				"base": 50,
@@ -5081,7 +5112,8 @@
 			"name": "Staff of Flowing Water",
 			"stats": {
 				"FlatMagicDamageMod": 35,
-				"AbilityHasteMod": 15
+				"AbilityHasteMod": 15,
+				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
 				"base": 800,
@@ -5108,7 +5140,8 @@
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"FlatMagicDamageMod": 25,
-				"AbilityHasteMod": 20
+				"AbilityHasteMod": 20,
+				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
 				"base": 500,
@@ -5135,7 +5168,8 @@
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"FlatMagicDamageMod": 35,
-				"AbilityHasteMod": 20
+				"AbilityHasteMod": 20,
+				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
 				"base": 500,
@@ -5160,7 +5194,8 @@
 			"id": "6621",
 			"name": "Dawncore",
 			"stats": {
-				"FlatMagicDamageMod": 45
+				"FlatMagicDamageMod": 45,
+				"PercentBaseMPRegenMod": 1
 			},
 			"gold": {
 				"base": 450,
@@ -5348,7 +5383,8 @@
 			"stats": {
 				"FlatSpellBlockMod": 40,
 				"FlatHPPoolMod": 400,
-				"AbilityHasteMod": 10
+				"AbilityHasteMod": 10,
+				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
 				"base": 650,

@@ -1,4 +1,5 @@
 import type { IChampion } from '../app/composables/useChampions';
+import type { IItemCategory } from '../app/composables/useItems';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -113,35 +114,23 @@ if (!itemData || itemData?.version !== latestVersion) {
 			continue;
 		}
 
-		const {
-			mItemAttributes,
-			mAbilityHasteMod: AbilityHasteMod,
-			mPercentTenacityItemMod: PercentTenacityMod,
-			mPercentArmorPenetrationMod: PercentArmorPenetrationMod,
-			PhysicalLethality: PhysicalLethality,
-			mPercentMagicPenetrationMod: PercentMagicPenetrationMod,
-			mFlatMagicPenetrationMod: FlatMagicPenetrationMod,
-		} = itemMoreData;
+		const statsToAdd: ([string, string, true] | [string, string])[] = [
+			['AbilityHasteMod', 'mAbilityHasteMod'],
+			['FlatMagicPenetrationMod', 'mFlatMagicPenetrationMod'],
+			['PercentArmorPenetrationMod', 'mPercentArmorPenetrationMod', true],
+			['PercentBaseHPRegenMod', 'mPercentBaseHPRegenMod'],
+			['PercentBaseMPRegenMod', 'percentBaseMPRegenMod'],
+			['PercentMagicPenetrationMod', 'mPercentMagicPenetrationMod', true],
+			['PercentTenacityMod', 'mPercentTenacityItemMod', true],
+			['PhysicalLethality', 'PhysicalLethality'],
+		];
 
 		const stats = item.stats as Record<string, number>;
 
-		if (AbilityHasteMod) {
-			stats.AbilityHasteMod = AbilityHasteMod;
-		}
-		if (PercentArmorPenetrationMod) {
-			stats.PercentArmorPenetrationMod = Number.parseFloat(PercentArmorPenetrationMod.toFixed(2));
-		}
-		if (PhysicalLethality) {
-			stats.PhysicalLethality = PhysicalLethality;
-		}
-		if (PercentMagicPenetrationMod) {
-			stats.PercentMagicPenetrationMod = Number.parseFloat(PercentMagicPenetrationMod.toFixed(2));
-		}
-		if (FlatMagicPenetrationMod) {
-			stats.FlatMagicPenetrationMod = FlatMagicPenetrationMod;
-		}
-		if (PercentTenacityMod) {
-			stats.PercentTenacityMod = Number.parseFloat(PercentTenacityMod.toFixed(2));
+		for (const [statKey, key, makeFloat] of statsToAdd) {
+			if (itemMoreData[key]) {
+				stats[statKey] = makeFloat ? Number.parseFloat(itemMoreData[key].toFixed(2)) : itemMoreData[key];
+			}
 		}
 
 		const KNOWN_CATEGORYLESS_ITEMS = [
@@ -159,14 +148,14 @@ if (!itemData || itemData?.version !== latestVersion) {
 			'3877',	// bloodsong
 		];
 
-		if (!mItemAttributes) {
+		if (!itemMoreData.mItemAttributes) {
 			if (!KNOWN_CATEGORYLESS_ITEMS.includes(itemId)) {
 				console.warn(`Haven't found category data for ${item.name} (${itemId})`);
 			}
 			continue;
 		}
 
-		const CATEGORY_NUMBER_TO_NAME = {
+		const CATEGORY_NUMBER_TO_NAME: Record<number, IItemCategory> = {
 			1: 'fighter',
 			2: 'marksman',
 			4: 'assassin',
@@ -175,10 +164,11 @@ if (!itemData || itemData?.version !== latestVersion) {
 			32: 'support',
 		} as const;
 
-		(item as { categories?: Record<string, boolean> }).categories = (mItemAttributes as number[]).reduce((acc, categoryNumber) => ({
-			...acc,
-			[CATEGORY_NUMBER_TO_NAME[categoryNumber]]: true,
-		}), {} as Partial<Record<typeof CATEGORY_NUMBER_TO_NAME[keyof typeof CATEGORY_NUMBER_TO_NAME], boolean>>);
+		(item as { categories?: Record<string, boolean> }).categories = (itemMoreData.mItemAttributes as number[])
+			.reduce((acc, categoryNumber) => ({
+				...acc,
+				[CATEGORY_NUMBER_TO_NAME[categoryNumber]]: true,
+			}), {} as Partial<Record<IItemCategory, boolean>>);
 	}
 
 	await itemFile.write(JSON.stringify(itemData, null, '\t'));
