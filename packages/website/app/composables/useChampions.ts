@@ -16,33 +16,14 @@ export interface IChampionData {
 
 export type IChampionRole = 'top' | 'jungle' | 'middle' | 'bottom' | 'support';
 
+export type IChampionStat = keyof (typeof data)[keyof typeof data]['stats'];
+
 export interface IChampion {
 	id: string;
 	key: string;
 	name: string;
 	partype: string;
-	stats: {
-		hp: number;
-		hpperlevel: number;
-		mp: number;
-		mpperlevel: number;
-		movespeed: number;
-		armor: number;
-		armorperlevel: number;
-		spellblock: number;
-		spellblockperlevel: number;
-		attackrange: number;
-		hpregen: number;
-		hpregenperlevel: number;
-		mpregen: number;
-		mpregenperlevel: number;
-		crit: number;
-		critperlevel: number;
-		attackdamage: number;
-		attackdamageperlevel: number;
-		attackspeedperlevel: number;
-		attackspeed: number;
-	};
+	stats: Record<IChampionStat, number>;
 	image: {
 		full: string;
 		sprite: string;
