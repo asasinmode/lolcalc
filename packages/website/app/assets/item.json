@@ -2440,7 +2440,8 @@
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"AbilityHasteMod": 15,
-				"PercentBaseMPRegenMod": 1
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.1
 			},
 			"gold": {
 				"base": 900,
@@ -2633,7 +2634,8 @@
 			"id": "3114",
 			"name": "Forbidden Idol",
 			"stats": {
-				"PercentBaseMPRegenMod": 0.5
+				"PercentBaseMPRegenMod": 0.5,
+				"PercentHealingAmountMod": 0.08
 			},
 			"gold": {
 				"base": 400,
@@ -3716,7 +3718,8 @@
 			"stats": {
 				"FlatHPPoolMod": 250,
 				"AbilityHasteMod": 15,
-				"PercentBaseMPRegenMod": 1
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.12
 			},
 			"gold": {
 				"base": 900,
@@ -3770,7 +3773,8 @@
 			"stats": {
 				"FlatMagicDamageMod": 45,
 				"PercentMovementSpeedMod": 0.04,
-				"PercentBaseMPRegenMod": 1.25
+				"PercentBaseMPRegenMod": 1.25,
+				"PercentHealingAmountMod": 0.1
 			},
 			"gold": {
 				"base": 700,
@@ -4618,7 +4622,8 @@
 			"stats": {
 				"FlatMagicDamageMod": 35,
 				"AbilityHasteMod": 15,
-				"PercentBaseMPRegenMod": 1.25
+				"PercentBaseMPRegenMod": 1.25,
+				"PercentHealingAmountMod": 0.1
 			},
 			"gold": {
 				"base": 800,
@@ -4700,7 +4705,8 @@
 			"name": "Dawncore",
 			"stats": {
 				"FlatMagicDamageMod": 45,
-				"PercentBaseMPRegenMod": 1
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.16
 			},
 			"gold": {
 				"base": 450,

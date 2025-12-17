@@ -144,6 +144,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 			['PercentArmorPenetrationMod', 'mPercentArmorPenetrationMod', true],
 			['PercentBaseHPRegenMod', 'mPercentBaseHPRegenMod'],
 			['PercentBaseMPRegenMod', 'percentBaseMPRegenMod'],
+			['PercentHealingAmountMod', 'mPercentHealingAmountMod', true],
 			['PercentMagicPenetrationMod', 'mPercentMagicPenetrationMod', true],
 			['PercentTenacityMod', 'mPercentTenacityItemMod', true],
 			['PhysicalLethality', 'PhysicalLethality'],

@@ -1,4 +1,4 @@
-# The Collector - League of Legends calculator website
+# Colectormode - League of Legends calculator website
 
 domain: colectormode.com
 
@@ -22,15 +22,17 @@ bun generate
 
 - [x] script for downloading/updating latest patch data
 - [ ] calculating stats
-- [ ] champion passives
+- [ ] item rarity for shop
 - [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues`
 - [ ] item groups, only one from group
+- [ ] champion skill levels (for stuff like malph W)
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] useful assets https://raw.communitydragon.org/latest/
 - [ ] multiple builds/champions you can switch between
 - [ ] sharing, saving/reading data in query
 - [ ] creating a screenshot?
 - [ ] some cool graphs
+- [ ] champion passives and abilities
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] misc pages - ornnaments stats + gold value, senna souls, wave gold/xp at minute
 - [ ] scorch damage calculator
