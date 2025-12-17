@@ -61,17 +61,29 @@ function addItem(item: IItem) {
 			>
 		</button>
 
-		<br>
-
-		<div v-if="selectedChampion">
+		<div>
 			<img
+				v-if="selectedChampion"
 				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${selectedChampion.image.full}`"
 				width="128"
 				height="128"
+				class="size-32"
 			>
-			<code class="whitespace-pre">
-				{{ JSON.stringify(stats, null, 2) }}
-			</code>
+			<img
+				v-else
+				src="https://cdn.communitydragon.org/latest/champion/generic/square"
+				width="256"
+				height="256"
+				class="size-32"
+			>
+			<template v-if="stats">
+				<a :href="`https://wiki.leagueoflegends.com/en-us/${selectedChampion!.name.replaceAll(' ', '_')}`" target="_blank" class="text-blue">
+					wiki
+				</a>
+				<code class="whitespace-pre">
+					{{ JSON.stringify(stats, null, 2) }}
+				</code>
+			</template>
 		</div>
 	</main>
 </template>

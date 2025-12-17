@@ -1,4 +1,4 @@
-type IDisplayedStat = 'hpRegen' | 'mpRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'health' | 'mana';
+type IDisplayedStat = 'hpRegen' | 'mpRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'health' | 'mana';
 
 export function useChampionStats(champion: IChampion, level: number, items: IItem[]) {
 	const baseStats: Record<IDisplayedStat, number> = {
@@ -18,6 +18,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		armor: champion.stats.armor,
 		magicResists: champion.stats.spellblock,
 		attackSpeed: champion.stats.attackspeed,
+		attackSpeedRatio: champion.stats.attackspeedratio,
 		abilityHaste: 0,
 		critChance: champion.stats.crit,
 		critDamageMultiplier: 1.75,
@@ -32,18 +33,18 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		attackDamage: champion.stats.attackdamageperlevel,
 		armor: champion.stats.armorperlevel,
 		magicResists: champion.stats.spellblockperlevel,
-		attackRange: champion.stats.attackspeedperlevel,
+		attackSpeed: champion.stats.attackspeedperlevel,
 		critChance: champion.stats.critperlevel,
 		health: champion.stats.hpperlevel,
 		mana: champion.stats.mpperlevel,
 	} satisfies Partial<Record<IDisplayedStat, number>>;
 
 	for (const stat in levelStats) {
-		levelStats[stat as keyof typeof levelStats] *= level;
+		levelStats[stat as keyof typeof levelStats] *= level - 1;
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(baseStats).map(
-		([statName, statValue]) => [statName, statValue + levelStats[statName as keyof typeof levelStats] || 0],
+		([statName, statValue]) => [statName, statValue + (levelStats[statName as keyof typeof levelStats] || 0)],
 	));
 
 	return {

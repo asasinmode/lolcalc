@@ -6,7 +6,7 @@ const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/
 const [latestVersion] = versions;
 const minorVersion = latestVersion.slice(0, latestVersion.lastIndexOf('.'));
 
-console.log('Latest version', latestVersion);
+console.log('latest version', latestVersion);
 
 const championFile = Bun.file('app/assets/champion.json');
 let championData: typeof import('../app/assets/champion.json') | undefined;
@@ -16,17 +16,29 @@ if (await championFile.exists()) {
 }
 
 if (!championData || championData?.version !== latestVersion) {
-	console.log('Champion data not present or outdated, fetching...');
+	console.log('champion data not present or outdated, fetching...');
 
 	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`).then(r => r.json());
 
 	championData = {
 		version,
 		data: Object.fromEntries(
-			(Object.entries(data) as [string, IChampion][])
+			await Promise.all((Object.entries(data) as [string, IChampion][])
 				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
-				.map(([championId, championData]) => {
+				.map(async ([championId, championData]) => {
 					const { id, key, name, image, partype, stats } = championData;
+
+					const additionalData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`).then(r => r.json());
+
+					const characterRecordsKey = id === 'Fiddlesticks' ? 'FiddleSticks' : id;
+					if (additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`]) {
+						stats.attackspeedratio = Number.parseFloat(
+							additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`].attackSpeedRatio.toFixed(3),
+						);
+					} else {
+						console.error('no additional stat data for', name);
+						console.log(Object.keys(additionalData));
+					}
 
 					return [championId, {
 						id,
@@ -38,6 +50,7 @@ if (!championData || championData?.version !== latestVersion) {
 						roles: {},
 					}];
 				}),
+			),
 		) as NonNullable<typeof championData>['data'],
 	};
 
@@ -64,7 +77,7 @@ if (await itemFile.exists()) {
 }
 
 if (!itemData || itemData?.version !== latestVersion) {
-	console.log('Item data not present or outdated, fetching...');
+	console.log('item data not present or outdated, fetching...');
 
 	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`).then(r => r.json());
 
@@ -134,7 +147,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 		const itemMoreData = moreItemData[`Items/${itemId}`];
 
 		if (!itemMoreData) {
-			console.warn(`Haven't found more data for ${item.name} (${itemId})`);
+			console.warn(`haven't found more data for ${item.name} (${itemId})`);
 			continue;
 		}
 
@@ -175,7 +188,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 		if (!itemMoreData.mItemAttributes) {
 			if (!KNOWN_CATEGORYLESS_ITEMS.includes(itemId)) {
-				console.warn(`Haven't found category data for ${item.name} (${itemId})`);
+				console.warn(`haven't found category data for ${item.name} (${itemId})`);
 			}
 			continue;
 		}
