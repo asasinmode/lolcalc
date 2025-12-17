@@ -1,4 +1,4 @@
-type IDisplayedStat = 'hpRegen' | 'mpRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'health' | 'mana';
+type IDisplayedStat = 'hpRegen' | 'mpRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'health' | 'mana' | 'bonusAttackSpeedPercent';
 
 export function useChampionStats(champion: IChampion, level: number, items: IItem[]) {
 	const baseStats: Record<IDisplayedStat, number> = {
@@ -19,6 +19,8 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		magicResists: champion.stats.spellblock,
 		attackSpeed: champion.stats.attackspeed,
 		attackSpeedRatio: champion.stats.attackspeedratio,
+		/** in percentage points, same as in game when hovering over attack speed */
+		bonusAttackSpeedPercent: 0,
 		abilityHaste: 0,
 		critChance: champion.stats.crit,
 		critDamageMultiplier: 1.75,
@@ -27,20 +29,24 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		mana: champion.stats.mp,
 	};
 
-	const levelStats = {
+	/** [statistics growth formula modifier](https://wiki.leagueoflegends.com/en-us/Champion_statistic#Growth_statistic_calculations) */
+	const STAT_GFM = 0.7025 + 0.0175 * (level - 1);
+
+	const levelStats: Partial<Record<IDisplayedStat, number>> = {
 		hpRegen: champion.stats.hpregenperlevel,
 		mpRegen: champion.stats.mpregenperlevel,
 		attackDamage: champion.stats.attackdamageperlevel,
 		armor: champion.stats.armorperlevel,
 		magicResists: champion.stats.spellblockperlevel,
-		attackSpeed: champion.stats.attackspeedperlevel,
+		attackSpeed: champion.stats.attackspeedperlevel * 0.01 * champion.stats.attackspeedratio,
+		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel,
 		critChance: champion.stats.critperlevel,
 		health: champion.stats.hpperlevel,
 		mana: champion.stats.mpperlevel,
-	} satisfies Partial<Record<IDisplayedStat, number>>;
+	};
 
 	for (const stat in levelStats) {
-		levelStats[stat as keyof typeof levelStats] *= level - 1;
+		levelStats[stat as keyof typeof levelStats]! *= (level - 1) * STAT_GFM;
 	}
 
 	const totalStats = Object.fromEntries(Object.entries(baseStats).map(
