@@ -3,10 +3,8 @@ type IDisplayedStat = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower
 export function useChampionStats(champion: IChampion, level: number, items: IItem[]) {
 	const baseStats: Record<IDisplayedStat, number> = {
 		hp: champion.stats.hp,
-		/** per 5 seconds */
 		hpRegen: champion.stats.hpregen,
 		mana: champion.stats.mp,
-		/** per 5 seconds */
 		manaRegen: champion.stats.mpregen,
 		healShieldPower: 0,
 		lethality: 0,
@@ -51,71 +49,41 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		levelStats[stat as keyof typeof levelStats]! *= (level - 1) * STAT_GFM;
 	}
 
-	const itemStats: Record<IDisplayedStat, number> = {
-		hp: 0,
-		hpRegen: 0,
-		mana: 0,
-		manaRegen: 0,
-		healShieldPower: 0,
-		lethality: 0,
-		percentArmorPen: 0,
-		flatMagicPen: 0,
-		percentMagicPen: 0,
-		lifeSteal: 0,
-		omnivamp: 0,
-		attackRange: 0,
-		tenacity: 0,
-		attackDamage: 0,
-		abilityPower: 0,
-		armor: 0,
-		magicResists: 0,
-		attackSpeed: 0,
-		attackSpeedRatio: 0,
-		bonusAttackSpeedPercent: 0,
-		abilityHaste: 0,
-		critChance: 0,
-		critDamageMultiplier: 0,
-		moveSpeed: 0,
-	};
+	const baseWithLevelStats = Object.fromEntries(Object.entries(baseStats).map(
+		([statName, statValue]) => [statName, statValue
+		+ (levelStats[statName as keyof typeof levelStats] || 0)],
+	)) as Record<IDisplayedStat, number>;
 
-	// AATROX lvl 1 doran shield
-	// 7 (3 base + 4 bonus)
+	const itemStats = Object.keys(baseStats).reduce((acc, statName) => ({
+		...acc,
+		[statName]: 0,
+	}), {} as Record<IDisplayedStat, number>);
 
-	// -||- crystalline bracer
-	// 10 (3 base + 7 bonus)
-
-	// AATROX lvl 2
-	// 3 (4 base + 0 bonus)
-
-	// AATROX lvl 3
-	// 4 (4 base + 0 bonus)
-
-	// AATROX lvl 6
-	// 5 (5 base + 0 bonus)
-
-	// AATROX lvl 6 crystalline bracer + rejuv bead
-	// 15 (5 base + 10 bonus)
-
-	// -||- doran's shield
-	// 19 (5 base + 14 bonus)
-
+	// TODO move speed, %move speed, attack speed
 	for (const item of items) {
-		for (const [statName, statValue] of itemToChampionStats(item)) {
-			itemStats[statName] += statValue;
+		const stats = itemToChampionStats(item);
+		for (const [statName, statValue] of stats) {
+			// it's stored in per second in item but per 5 seconds in champion/displayed
+			itemStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
+		}
+
+		if (item.stats.PercentBaseHPRegenMod) {
+			itemStats.hpRegen += baseWithLevelStats.hpRegen * item.stats.PercentBaseHPRegenMod;
+		}
+		if (item.stats.PercentBaseMPRegenMod) {
+			itemStats.manaRegen += baseWithLevelStats.manaRegen * item.stats.PercentBaseMPRegenMod;
 		}
 	}
-	// it's stored in per 5 seconds
-	itemStats.hpRegen *= 5;
 
-	const totalStats = Object.fromEntries(Object.entries(baseStats).map(
+	const totalStats = Object.fromEntries(Object.entries(baseWithLevelStats).map(
 		([statName, statValue]) => [statName, statValue
-		+ (levelStats[statName as keyof typeof levelStats] || 0)
 		+ (itemStats[statName as keyof typeof itemStats] || 0)],
 	));
 
 	return {
 		totalStats,
 		itemStats,
+		baseWithLevelStats,
 		levelStats,
 		baseStats,
 		hasMana: champion.partype === 'mana',
@@ -124,7 +92,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 
 const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	IItemStat,
-'PercentBaseMPRegenMod' | 'PercentBaseHPRegenMod' | 'PercentMovementSpeedMod'
+'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
 >, IDisplayedStat> = {
 	AbilityHasteMod: 'abilityHaste',
 	FlatArmorMod: 'armor',

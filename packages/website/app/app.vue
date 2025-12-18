@@ -88,6 +88,9 @@ function addItem(item: IItem) {
 						item: {{ JSON.stringify(stats.itemStats, null, 2) }}
 					</code>
 					<code class="whitespace-pre">
+						base + level: {{ JSON.stringify(stats.baseWithLevelStats, null, 2) }}
+					</code>
+					<code class="whitespace-pre">
 						level: {{ JSON.stringify(stats.levelStats, null, 2) }}
 					</code>
 					<code class="whitespace-pre">

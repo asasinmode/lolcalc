@@ -21,21 +21,20 @@ bun generate
 ## todo
 
 - [x] script for downloading/updating latest patch data
-- [ ] calculating stats
+- [ ] calculating stats (no item/champ passives)
 - [ ] item rarity for shop
 - [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues`
 - [ ] item groups, only one from group
-- [ ] champion skill levels (for stuff like malph W)
+- [ ] champion passives, abilities, ability levels (`additionalData` in each champion's map)
+- [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] useful assets https://raw.communitydragon.org/latest/
 - [ ] multiple builds/champions you can switch between
 - [ ] sharing, saving/reading data in query
 - [ ] creating a screenshot?
 - [ ] some cool graphs
-- [ ] champion passives and abilities
-- [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] misc pages - ornnaments stats + gold value, senna souls, wave gold/xp at minute
-- [ ] scorch damage calculator
+- [ ] scorch vs gathering storm damage shower, pick champion, show 10, 20, 30... minutes
 - [ ] any cool useful scripts
 - [ ] champion & build guess recaptcha
 - [ ] chess like puzzles, guess from screenshot what to do, choose option

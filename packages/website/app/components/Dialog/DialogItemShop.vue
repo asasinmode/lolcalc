@@ -18,18 +18,22 @@ const computedItems = computed(() => {
 		: sortedByPrice.value;
 });
 
+function closeCleanup() {
+	search.value = '';
+}
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
 </script>
 
 <template>
-	<VDialog ref="vDialog" class="px-3 pb-2 bg-cyan-950 grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))] max-h-[80vh] w-xl shadow-lg of-y-auto [&[open]]-grid">
+	<VDialog ref="vDialog" class="px-3 pb-2 bg-cyan-950 grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))] max-h-[80vh] w-xl shadow-lg of-y-auto [&[open]]-grid" @close="closeCleanup">
 		<header class="py-2 pb-2 bg-inherit flex col-span-full items-center top-0 sticky">
 			<label for="item-shop-search">Search</label>
-			<input id="item-shop-search" v-model="search" class="ml-2 bg-black">
+			<input id="item-shop-search" v-model="search" autofocus class="ml-2 bg-black">
 			<form method="dialog" class="ml-auto">
-				<button autofocus value="cancel">
+				<button value="cancel">
 					close
 				</button>
 			</form>
