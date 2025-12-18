@@ -29,9 +29,6 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		moveSpeed: champion.stats.movespeed,
 	};
 
-	/** [statistics growth formula modifier](https://wiki.leagueoflegends.com/en-us/Champion_statistic#Growth_statistic_calculations) */
-	const STAT_GFM = 0.7025 + 0.0175 * (level - 1);
-
 	const levelStats: Partial<Record<IDisplayedStat, number>> = {
 		hp: champion.stats.hpperlevel,
 		hpRegen: champion.stats.hpregenperlevel,
@@ -45,11 +42,13 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		critChance: champion.stats.critperlevel,
 	};
 
+	/** [statistics growth formula modifier](https://wiki.leagueoflegends.com/en-us/Champion_statistic#Growth_statistic_calculations) */
+	const STAT_GFM = 0.7025 + 0.0175 * (level - 1);
 	for (const stat in levelStats) {
 		levelStats[stat as keyof typeof levelStats]! *= (level - 1) * STAT_GFM;
 	}
 
-	const baseWithLevelStats = Object.fromEntries(Object.entries(baseStats).map(
+	const baseOnLevelStats = Object.fromEntries(Object.entries(baseStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
 	)) as Record<IDisplayedStat, number>;
@@ -61,21 +60,20 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 
 	// TODO move speed, %move speed, attack speed
 	for (const item of items) {
-		const stats = itemToChampionStats(item);
-		for (const [statName, statValue] of stats) {
-			// it's stored in per second in item but per 5 seconds in champion/displayed
+		for (const [statName, statValue] of itemToChampionStats(item)) {
+			// hpRegen is stored in per second in item but per 5 seconds in champion/displayed
 			itemStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
 		}
 
 		if (item.stats.PercentBaseHPRegenMod) {
-			itemStats.hpRegen += baseWithLevelStats.hpRegen * item.stats.PercentBaseHPRegenMod;
+			itemStats.hpRegen += baseOnLevelStats.hpRegen * item.stats.PercentBaseHPRegenMod;
 		}
 		if (item.stats.PercentBaseMPRegenMod) {
-			itemStats.manaRegen += baseWithLevelStats.manaRegen * item.stats.PercentBaseMPRegenMod;
+			itemStats.manaRegen += baseOnLevelStats.manaRegen * item.stats.PercentBaseMPRegenMod;
 		}
 	}
 
-	const totalStats = Object.fromEntries(Object.entries(baseWithLevelStats).map(
+	const totalStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (itemStats[statName as keyof typeof itemStats] || 0)],
 	));
@@ -83,7 +81,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	return {
 		totalStats,
 		itemStats,
-		baseWithLevelStats,
+		baseOnLevelStats,
 		levelStats,
 		baseStats,
 		hasMana: champion.partype === 'mana',

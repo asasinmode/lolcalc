@@ -74,4 +74,8 @@
 			grid-column: content;
 		}
 	}
+
+	select > option {
+		color: black;
+	}
 }

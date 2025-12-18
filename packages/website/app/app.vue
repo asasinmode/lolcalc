@@ -7,10 +7,16 @@ useSeoMeta({
 const { version, champions } = useChampions();
 
 const itemShopDialog = useTemplateRef('itemShopDialog');
+const runeDialog = useTemplateRef('runeDialog');
 
 const selectedChampionId = ref<IChampionId>();
 const selectedChampionLevel = ref(1);
 const selectedChampionItems = ref<IItem[]>([]);
+const selectedChampionMiniRunes = ref<IMiniRunes>({
+	slot1: 'adaptive',
+	slot2: 'adaptive',
+	slot3: 'instantHealth',
+});
 
 const selectedChampion = computed(() => selectedChampionId.value ? champions[selectedChampionId.value] : undefined);
 const stats = computed(() => selectedChampion.value
@@ -31,13 +37,13 @@ function addItem(item: IItem) {
 		</p>
 
 		<label for="selected-champion">Selected champion: </label>
-		<select id="selected-champion" v-model="selectedChampionId" class="*:text-black *:hover:text-black">
+		<select id="selected-champion" v-model="selectedChampionId">
 			<option v-for="champion in champions" :key="champion.id" :value="champion.id">
 				{{ champion.name }}
 			</option>
 		</select>
 		<label for="selected-champion-level">Level: </label>
-		<select id="selected-champion-level" v-model="selectedChampionLevel" class="*:text-black *:hover:text-black">
+		<select id="selected-champion-level" v-model="selectedChampionLevel">
 			<option v-for="i in 18" :key="i" :value="i">
 				{{ i }}
 			</option>
@@ -60,6 +66,10 @@ function addItem(item: IItem) {
 				height="64"
 			>
 		</button>
+		<button @click="runeDialog?.open()">
+			runes {{ Object.values(selectedChampionMiniRunes) }}
+		</button>
+		<DialogRunes ref="runeDialog" v-model="selectedChampionMiniRunes" />
 
 		<div>
 			<img
@@ -88,7 +98,7 @@ function addItem(item: IItem) {
 						item: {{ JSON.stringify(stats.itemStats, null, 2) }}
 					</code>
 					<code class="whitespace-pre">
-						base + level: {{ JSON.stringify(stats.baseWithLevelStats, null, 2) }}
+						base + level: {{ JSON.stringify(stats.baseOnLevelStats, null, 2) }}
 					</code>
 					<code class="whitespace-pre">
 						level: {{ JSON.stringify(stats.levelStats, null, 2) }}
