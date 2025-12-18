@@ -211,3 +211,46 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 	await itemFile.write(JSON.stringify(itemData, null, '\t'));
 }
+
+const runeFile = Bun.file('app/assets/runes.json');
+let runeData: typeof import('../app/assets/runes.json') | undefined;
+
+if (await runeFile.exists()) {
+	runeData = await runeFile.json();
+}
+
+if (!runeData || runeData?.version !== latestVersion) {
+	console.log('rune data not present or outdated, fetching...');
+
+	const data = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/perks.cdtb.bin.json`).then(r => r.json());
+
+	const shardAdaptiveForce = data['Perks/StatMods/Adaptive'].mScript.mSpellScriptData.mEffectAmount.StatGain2;
+	const shardScalingHealth = data['Perks/StatMods/HealthScaling'].mScript.mSpellScriptData.mEffectAmount.StatGainMin;
+	const shardDefensiveInstantHealthKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[0];
+	const shardDefensiveInstantTenacityKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[1];
+
+	runeData = {
+		version: latestVersion,
+		data: {
+			shards: {
+				offensive: {
+					adaptiveForce: shardAdaptiveForce,
+					percentAttackSpeed: Number.parseFloat((data['Perks/StatMods/AttackSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain / 100).toFixed(2)),
+					abilityHaste: data['Perks/StatMods/CDRScaling'].mScript.mSpellScriptData.mEffectAmount.HasteGain,
+				},
+				flex: {
+					adaptiveForce: shardAdaptiveForce,
+					percentMoveSpeed: Number.parseFloat((data['Perks/StatMods/MovementSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain1 / 100).toFixed(3)),
+					scalingHealth: shardScalingHealth,
+				},
+				defensive: {
+					instantHealth: data[shardDefensiveInstantHealthKey].mScript.mSpellScriptData.mEffectAmount.StatGain,
+					percentTenacityMod: Number.parseFloat((data[shardDefensiveInstantTenacityKey].mScript.mSpellScriptData.mEffectAmount.StatGain / 100).toFixed(2)),
+					scalingHealth: shardScalingHealth,
+				},
+			},
+		},
+	};
+
+	await runeFile.write(JSON.stringify(runeData, null, '\t'));
+}

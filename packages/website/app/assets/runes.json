@@ -1,0 +1,22 @@
+{
+	"version": "15.24.1",
+	"data": {
+		"shards": {
+			"offensive": {
+				"adaptiveForce": 9,
+				"percentAttackSpeed": 0.1,
+				"abilityHaste": 8
+			},
+			"flex": {
+				"adaptiveForce": 9,
+				"percentMoveSpeed": 0.025,
+				"scalingHealth": 10
+			},
+			"defensive": {
+				"instantHealth": 65,
+				"percentTenacityMod": 0.15,
+				"scalingHealth": 10
+			}
+		}
+	}
+}
