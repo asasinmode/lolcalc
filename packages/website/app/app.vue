@@ -80,9 +80,20 @@ function addItem(item: IItem) {
 				<a :href="`https://wiki.leagueoflegends.com/en-us/${selectedChampion!.name.replaceAll(' ', '_')}`" target="_blank" class="text-blue">
 					wiki
 				</a>
-				<code class="whitespace-pre">
-					{{ JSON.stringify(stats, null, 2) }}
-				</code>
+				<div class="flex gap-3 *:pr-2 *:border-r *:border-r-gray last:*:pr-0 last:*:border-r-0">
+					<code class="whitespace-pre">
+						total: {{ JSON.stringify(stats.totalStats, null, 2) }}
+					</code>
+					<code class="whitespace-pre">
+						item: {{ JSON.stringify(stats.itemStats, null, 2) }}
+					</code>
+					<code class="whitespace-pre">
+						level: {{ JSON.stringify(stats.levelStats, null, 2) }}
+					</code>
+					<code class="whitespace-pre">
+						base: {{ JSON.stringify(stats.baseStats, null, 2) }}
+					</code>
+				</div>
 			</template>
 		</div>
 	</main>
