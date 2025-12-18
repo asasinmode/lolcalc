@@ -12,11 +12,11 @@ const runeDialog = useTemplateRef('runeDialog');
 const selectedChampionId = ref<IChampionId>();
 const selectedChampionLevel = ref(1);
 const selectedChampionItems = ref<IItem[]>([]);
-const selectedChampionRunes = ref<IRunes>({
+const selectedChampionRunes = ref<IChampionRunes>({
 	shards: {
-		slot1: 'adaptive',
-		slot2: 'adaptive',
-		slot3: 'instantHealth',
+		offensive: 'adaptiveForce',
+		flex: 'adaptiveForce',
+		defensive: 'flatHealth',
 	},
 });
 

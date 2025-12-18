@@ -4,7 +4,7 @@ type IDisplayedStats = Record<IDisplayedStatName, number>;
 
 type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
 
-export function useChampionStats(champion: IChampion, level: number, items: IItem[], runes: IRunes) {
+export function useChampionStats(champion: IChampion, level: number, items: IItem[], runes: IChampionRunes) {
 	const baseStats: IDisplayedStats = {
 		hp: champion.stats.hp,
 		hpRegen: champion.stats.hpregen,
@@ -150,6 +150,8 @@ function getAdaptiveForceStat(attackDamage: number, abilityPower: number): [IAda
 }
 
 function getRuneShardStats(shards: IRuneShards, level: number) {
+	const { runes } = useRunes();
+
 	const stats = {
 		hp: 0,
 		adaptiveForce: 0,
@@ -159,24 +161,25 @@ function getRuneShardStats(shards: IRuneShards, level: number) {
 		moveSpeedPercent: 0,
 	} satisfies Partial<Record<IDisplayedStatName | 'adaptiveForce' | 'moveSpeedPercent', number>>;
 
-	const scalingHealthValue = level * 10;
+	const adaptiveForceValue = runes.shards.offensive.adaptiveForce;
+	const scalingHealthValue = level * runes.shards.defensive.scalingHealth;
 
 	const slotStats: Record<keyof IRuneShards, Record<string, [keyof typeof stats, number]>> = {
-		slot1: {
-			adaptive: ['adaptiveForce', 9],
-			attackSpeed: ['attackSpeed', 0.1],
-			abilityHaste: ['abilityHaste', 8],
-		} satisfies Record<IRuneShards['slot1'], [keyof typeof stats, number]>,
-		slot2: {
-			adaptive: ['adaptiveForce', 9],
-			moveSpeed: ['moveSpeedPercent', 0.025],
+		offensive: {
+			adaptiveForce: ['adaptiveForce', adaptiveForceValue],
+			percentAttackSpeed: ['attackSpeed', runes.shards.offensive.percentAttackSpeed],
+			abilityHaste: ['abilityHaste', runes.shards.offensive.abilityHaste],
+		} satisfies Record<IRuneShards['offensive'], [keyof typeof stats, number]>,
+		flex: {
+			adaptiveForce: ['adaptiveForce', adaptiveForceValue],
+			percentMoveSpeed: ['moveSpeedPercent', runes.shards.flex.percentMoveSpeed],
 			scalingHealth: ['hp', scalingHealthValue],
-		} satisfies Record<IRuneShards['slot2'], [keyof typeof stats, number]>,
-		slot3: {
-			instantHealth: ['hp', 65],
-			tenacity: ['tenacity', 0.1],
+		} satisfies Record<IRuneShards['flex'], [keyof typeof stats, number]>,
+		defensive: {
+			flatHealth: ['hp', runes.shards.defensive.flatHealth],
+			percentTenacityMod: ['tenacity', runes.shards.defensive.percentTenacityMod],
 			scalingHealth: ['hp', scalingHealthValue],
-		} satisfies Record<IRuneShards['slot3'], [keyof typeof stats, number]>,
+		} satisfies Record<IRuneShards['defensive'], [keyof typeof stats, number]>,
 	};
 
 	for (const [slotKey, slotValue] of Object.entries(shards)) {

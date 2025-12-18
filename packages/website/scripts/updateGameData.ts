@@ -226,8 +226,8 @@ if (!runeData || runeData?.version !== latestVersion) {
 
 	const shardAdaptiveForce = data['Perks/StatMods/Adaptive'].mScript.mSpellScriptData.mEffectAmount.StatGain2;
 	const shardScalingHealth = data['Perks/StatMods/HealthScaling'].mScript.mSpellScriptData.mEffectAmount.StatGainMin;
-	const shardDefensiveInstantHealthKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[0];
-	const shardDefensiveInstantTenacityKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[1];
+	const shardDefensiveFlatHealthKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[0];
+	const shardDefensiveTenacityKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[1];
 
 	runeData = {
 		version: latestVersion,
@@ -244,8 +244,8 @@ if (!runeData || runeData?.version !== latestVersion) {
 					scalingHealth: shardScalingHealth,
 				},
 				defensive: {
-					instantHealth: data[shardDefensiveInstantHealthKey].mScript.mSpellScriptData.mEffectAmount.StatGain,
-					percentTenacityMod: Number.parseFloat((data[shardDefensiveInstantTenacityKey].mScript.mSpellScriptData.mEffectAmount.StatGain / 100).toFixed(2)),
+					flatHealth: data[shardDefensiveFlatHealthKey].mScript.mSpellScriptData.mEffectAmount.StatGain,
+					percentTenacityMod: Number.parseFloat((data[shardDefensiveTenacityKey].mScript.mSpellScriptData.mEffectAmount.StatGain / 100).toFixed(2)),
 					scalingHealth: shardScalingHealth,
 				},
 			},

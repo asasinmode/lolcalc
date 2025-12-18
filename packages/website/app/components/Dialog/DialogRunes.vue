@@ -1,7 +1,9 @@
 <script setup lang="ts">
-const runes = defineModel<IRunes>({ required: true });
+const value = defineModel<IChampionRunes>({ required: true });
 
 const vDialog = useTemplateRef('vDialog');
+
+const { runes } = useRunes();
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -17,37 +19,19 @@ defineExpose({
 				</button>
 			</form>
 		</header>
-		<select v-model="runes.shards.slot1" class="block">
-			<option value="adaptive">
-				adaptive force
-			</option>
-			<option value="attackSpeed">
-				attack speed
-			</option>
-			<option value="abilityHaste">
-				ability haste
+		<select v-model="value.shards.offensive" class="block">
+			<option v-for="(_, runeValue) in runes.shards.offensive" :key="runeValue" :value="runeValue">
+				{{ value }}
 			</option>
 		</select>
-		<select v-model="runes.shards.slot2" class="block">
-			<option value="adaptive">
-				adaptive force
-			</option>
-			<option value="moveSpeed">
-				moveSpeed
-			</option>
-			<option value="scalingHealth">
-				scaling health
+		<select v-model="value.shards.flex" class="block">
+			<option v-for="(_, runeValue) in runes.shards.flex" :key="runeValue" :value="runeValue">
+				{{ runeValue }}
 			</option>
 		</select>
-		<select v-model="runes.shards.slot3" class="block">
-			<option value="instantHealth">
-				instant health
-			</option>
-			<option value="tenacity">
-				teancity
-			</option>
-			<option value="scalingHealth">
-				scaling health
+		<select v-model="value.shards.defensive" class="block">
+			<option v-for="(_, runeValue) in runes.shards.defensive" :key="runeValue" :value="runeValue">
+				{{ runeValue }}
 			</option>
 		</select>
 	</VDialog>

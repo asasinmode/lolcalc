@@ -13,7 +13,7 @@
 				"scalingHealth": 10
 			},
 			"defensive": {
-				"instantHealth": 65,
+				"flatHealth": 65,
 				"percentTenacityMod": 0.15,
 				"scalingHealth": 10
 			}
