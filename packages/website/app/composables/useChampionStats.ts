@@ -1,7 +1,11 @@
-type IDisplayedStat = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';
+type IDisplayedStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';
 
-export function useChampionStats(champion: IChampion, level: number, items: IItem[]) {
-	const baseStats: Record<IDisplayedStat, number> = {
+type IDisplayedStats = Record<IDisplayedStatName, number>;
+
+type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
+
+export function useChampionStats(champion: IChampion, level: number, items: IItem[], runes: IRunes) {
+	const baseStats: IDisplayedStats = {
 		hp: champion.stats.hp,
 		hpRegen: champion.stats.hpregen,
 		mana: champion.stats.mp,
@@ -29,7 +33,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		moveSpeed: champion.stats.movespeed,
 	};
 
-	const levelStats: Partial<Record<IDisplayedStat, number>> = {
+	const levelStats: Partial<IDisplayedStats> = {
 		hp: champion.stats.hpperlevel,
 		hpRegen: champion.stats.hpregenperlevel,
 		mana: champion.stats.mpperlevel,
@@ -51,14 +55,14 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	const baseOnLevelStats = Object.fromEntries(Object.entries(baseStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
-	)) as Record<IDisplayedStat, number>;
+	)) as IDisplayedStats;
 
 	const itemStats = Object.keys(baseStats).reduce((acc, statName) => ({
 		...acc,
 		[statName]: 0,
-	}), {} as Record<IDisplayedStat, number>);
+	}), {} as IDisplayedStats);
 
-	// TODO move speed, %move speed, attack speed
+	// TODO attack speed
 	for (const item of items) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
 			// hpRegen is stored in per second in item but per 5 seconds in champion/displayed
@@ -71,9 +75,26 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		if (item.stats.PercentBaseMPRegenMod) {
 			itemStats.manaRegen += baseOnLevelStats.manaRegen * item.stats.PercentBaseMPRegenMod;
 		}
+		if (item.stats.PercentMovementSpeedMod) {
+			console.log('TODO');
+		}
 	}
 
-	const totalStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
+	const [adaptiveForceTargetStat, adaptiveForceStatMultiplier] = getAdaptiveForceStat(itemStats.attackDamage, itemStats.abilityPower);
+
+	const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);
+	const runeShardStats = {
+		...preAdaptiveRuneShardStats,
+		[adaptiveForceTargetStat]: runeShardsAdaptiveForce * adaptiveForceStatMultiplier,
+	};
+
+	// TODO %move speed, attack speed
+	const levelAndRunesStats = Object.fromEntries(Object.entries(baseStats).map(
+		([statName, statValue]) => [statName, statValue
+		+ (runeShardStats[statName as keyof typeof runeShardStats] || 0)],
+	)) as IDisplayedStats;
+
+	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (itemStats[statName as keyof typeof itemStats] || 0)],
 	));
@@ -81,9 +102,10 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	return {
 		totalStats,
 		itemStats,
-		baseOnLevelStats,
+		levelAndRunesStats,
 		levelStats,
 		baseStats,
+		runeShardStats,
 		hasMana: champion.partype === 'mana',
 	};
 }
@@ -91,7 +113,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	IItemStat,
 'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
->, IDisplayedStat> = {
+>, IDisplayedStatName> = {
 	AbilityHasteMod: 'abilityHaste',
 	FlatArmorMod: 'armor',
 	FlatCritChanceMod: 'critChance',
@@ -112,7 +134,7 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	PhysicalLethality: 'lethality',
 };
 
-function itemToChampionStats(item: IItem): [IDisplayedStat, number][] {
+function itemToChampionStats(item: IItem): [IDisplayedStatName, number][] {
 	return Object.entries(item.stats)
 		.filter(([itemStatName]) => itemStatName in ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES)
 		.map(([itemStatName, itemStatValue]) => {
@@ -121,4 +143,46 @@ function itemToChampionStats(item: IItem): [IDisplayedStat, number][] {
 				itemStatValue,
 			];
 		});
+}
+
+function getAdaptiveForceStat(attackDamage: number, abilityPower: number): [IAdaptiveForceStat, multiplier: number] {
+	return attackDamage > abilityPower ? ['attackDamage', 0.6] : ['abilityPower', 1];
+}
+
+function getRuneShardStats(shards: IRuneShards, level: number) {
+	const stats = {
+		hp: 0,
+		adaptiveForce: 0,
+		abilityHaste: 0,
+		attackSpeed: 0,
+		tenacity: 0,
+		moveSpeedPercent: 0,
+	} satisfies Partial<Record<IDisplayedStatName | 'adaptiveForce' | 'moveSpeedPercent', number>>;
+
+	const scalingHealthValue = level * 10;
+
+	const slotStats: Record<keyof IRuneShards, Record<string, [keyof typeof stats, number]>> = {
+		slot1: {
+			adaptive: ['adaptiveForce', 9],
+			attackSpeed: ['attackSpeed', 0.1],
+			abilityHaste: ['abilityHaste', 8],
+		} satisfies Record<IRuneShards['slot1'], [keyof typeof stats, number]>,
+		slot2: {
+			adaptive: ['adaptiveForce', 9],
+			moveSpeed: ['moveSpeedPercent', 0.025],
+			scalingHealth: ['hp', scalingHealthValue],
+		} satisfies Record<IRuneShards['slot2'], [keyof typeof stats, number]>,
+		slot3: {
+			instantHealth: ['hp', 65],
+			tenacity: ['tenacity', 0.1],
+			scalingHealth: ['hp', scalingHealthValue],
+		} satisfies Record<IRuneShards['slot3'], [keyof typeof stats, number]>,
+	};
+
+	for (const [slotKey, slotValue] of Object.entries(shards)) {
+		const [slotStat, slotStatValue] = slotStats[slotKey as keyof IRuneShards][slotValue]!;
+		stats[slotStat] += slotStatValue;
+	}
+
+	return stats;
 }

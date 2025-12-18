@@ -12,15 +12,17 @@ const runeDialog = useTemplateRef('runeDialog');
 const selectedChampionId = ref<IChampionId>();
 const selectedChampionLevel = ref(1);
 const selectedChampionItems = ref<IItem[]>([]);
-const selectedChampionMiniRunes = ref<IMiniRunes>({
-	slot1: 'adaptive',
-	slot2: 'adaptive',
-	slot3: 'instantHealth',
+const selectedChampionRunes = ref<IRunes>({
+	shards: {
+		slot1: 'adaptive',
+		slot2: 'adaptive',
+		slot3: 'instantHealth',
+	},
 });
 
 const selectedChampion = computed(() => selectedChampionId.value ? champions[selectedChampionId.value] : undefined);
 const stats = computed(() => selectedChampion.value
-	? useChampionStats(selectedChampion.value, selectedChampionLevel.value, selectedChampionItems.value)
+	? useChampionStats(selectedChampion.value, selectedChampionLevel.value, selectedChampionItems.value, selectedChampionRunes.value)
 	: undefined);
 
 function addItem(item: IItem) {
@@ -67,9 +69,9 @@ function addItem(item: IItem) {
 			>
 		</button>
 		<button @click="runeDialog?.open()">
-			runes {{ Object.values(selectedChampionMiniRunes) }}
+			runes {{ Object.values(selectedChampionRunes.shards) }}
 		</button>
-		<DialogRunes ref="runeDialog" v-model="selectedChampionMiniRunes" />
+		<DialogRunes ref="runeDialog" v-model="selectedChampionRunes" />
 
 		<div>
 			<img
@@ -98,13 +100,16 @@ function addItem(item: IItem) {
 						item: {{ JSON.stringify(stats.itemStats, null, 2) }}
 					</code>
 					<code class="whitespace-pre">
-						base + level: {{ JSON.stringify(stats.baseOnLevelStats, null, 2) }}
+						base,level,runes: {{ JSON.stringify(stats.levelAndRunesStats, null, 2) }}
+					</code>
+					<code class="whitespace-pre">
+						base: {{ JSON.stringify(stats.baseStats, null, 2) }}
 					</code>
 					<code class="whitespace-pre">
 						level: {{ JSON.stringify(stats.levelStats, null, 2) }}
 					</code>
 					<code class="whitespace-pre">
-						base: {{ JSON.stringify(stats.baseStats, null, 2) }}
+						rune shards: {{ JSON.stringify(stats.runeShardStats, null, 2) }}
 					</code>
 				</div>
 			</template>

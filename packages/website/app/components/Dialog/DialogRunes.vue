@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const miniRunes = defineModel<IMiniRunes>({ required: true });
+const runes = defineModel<IRunes>({ required: true });
 
 const vDialog = useTemplateRef('vDialog');
 
@@ -17,7 +17,7 @@ defineExpose({
 				</button>
 			</form>
 		</header>
-		<select v-model="miniRunes.slot1" class="block">
+		<select v-model="runes.shards.slot1" class="block">
 			<option value="adaptive">
 				adaptive force
 			</option>
@@ -28,7 +28,7 @@ defineExpose({
 				ability haste
 			</option>
 		</select>
-		<select v-model="miniRunes.slot2" class="block">
+		<select v-model="runes.shards.slot2" class="block">
 			<option value="adaptive">
 				adaptive force
 			</option>
@@ -39,7 +39,7 @@ defineExpose({
 				scaling health
 			</option>
 		</select>
-		<select v-model="miniRunes.slot3" class="block">
+		<select v-model="runes.shards.slot3" class="block">
 			<option value="instantHealth">
 				instant health
 			</option>
