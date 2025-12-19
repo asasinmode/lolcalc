@@ -15,7 +15,7 @@ const selectedChampionLevel = ref(1);
 const selectedChampionItems = ref<IItem[]>([]);
 const selectedChampionRunes = ref<IChampionRunes>({
 	shards: {
-		offensive: 'percentAttackSpeed',
+		offensive: 'adaptiveForce',
 		flex: 'adaptiveForce',
 		defensive: 'flatHealth',
 	},
