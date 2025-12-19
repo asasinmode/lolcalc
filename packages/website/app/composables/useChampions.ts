@@ -1,10 +1,7 @@
-import { data, version } from '~/assets/champion.json';
+import { data } from '~/assets/champion.json';
 
-export function useChampions(): IChampionData {
-	return {
-		version,
-		champions: data satisfies Record<IChampionId, IChampion>,
-	};
+export function useChampions(): Record<IChampionId, IChampion> {
+	return data satisfies Record<IChampionId, IChampion>;
 }
 
 export type IChampionId = keyof typeof data;

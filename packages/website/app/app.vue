@@ -4,7 +4,8 @@ useSeoMeta({
 	title: 'Collector - League of Legends Damage Calculator',
 });
 
-const { version, champions } = useChampions();
+const champions = useChampions();
+const version = usePatchVersion();
 
 const itemShopDialog = useTemplateRef('itemShopDialog');
 const runeDialog = useTemplateRef('runeDialog');
@@ -14,16 +15,13 @@ const selectedChampionLevel = ref(1);
 const selectedChampionItems = ref<IItem[]>([]);
 const selectedChampionRunes = ref<IChampionRunes>({
 	shards: {
-		offensive: 'adaptiveForce',
+		offensive: 'percentAttackSpeed',
 		flex: 'adaptiveForce',
 		defensive: 'flatHealth',
 	},
 });
 
 const selectedChampion = computed(() => selectedChampionId.value ? champions[selectedChampionId.value] : undefined);
-const stats = computed(() => selectedChampion.value
-	? useChampionStats(selectedChampion.value, selectedChampionLevel.value, selectedChampionItems.value, selectedChampionRunes.value)
-	: undefined);
 
 function addItem(item: IItem) {
 	if (selectedChampionItems.value.length < 6) {
@@ -73,46 +71,11 @@ function addItem(item: IItem) {
 		</button>
 		<DialogRunes ref="runeDialog" v-model="selectedChampionRunes" />
 
-		<div>
-			<img
-				v-if="selectedChampion"
-				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${selectedChampion.image.full}`"
-				width="128"
-				height="128"
-				class="size-32"
-			>
-			<img
-				v-else
-				src="https://cdn.communitydragon.org/latest/champion/generic/square"
-				width="256"
-				height="256"
-				class="size-32"
-			>
-			<template v-if="stats">
-				<a :href="`https://wiki.leagueoflegends.com/en-us/${selectedChampion!.name.replaceAll(' ', '_')}`" target="_blank" class="text-blue">
-					wiki
-				</a>
-				<div class="flex gap-3 *:pr-2 *:border-r *:border-r-gray last:*:pr-0 last:*:border-r-0">
-					<code class="whitespace-pre">
-						total: {{ JSON.stringify(stats.totalStats, null, 2) }}
-					</code>
-					<code class="whitespace-pre">
-						item: {{ JSON.stringify(stats.itemStats, null, 2) }}
-					</code>
-					<code class="whitespace-pre">
-						base,level,runes: {{ JSON.stringify(stats.levelAndRunesStats, null, 2) }}
-					</code>
-					<code class="whitespace-pre">
-						base: {{ JSON.stringify(stats.baseStats, null, 2) }}
-					</code>
-					<code class="whitespace-pre">
-						level: {{ JSON.stringify(stats.levelStats, null, 2) }}
-					</code>
-					<code class="whitespace-pre">
-						rune shards: {{ JSON.stringify(stats.runeShardStats, null, 2) }}
-					</code>
-				</div>
-			</template>
-		</div>
+		<ChampionStats
+			:champion="selectedChampion"
+			:level="selectedChampionLevel"
+			:items="selectedChampionItems"
+			:runes="selectedChampionRunes"
+		/>
 	</main>
 </template>

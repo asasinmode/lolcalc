@@ -1,10 +1,7 @@
-import { data, version } from '~/assets/runes.json';
+import { data } from '~/assets/runes.json';
 
-export function useRunes(): IRuneData {
-	return {
-		version,
-		runes: data,
-	};
+export function useRunes() {
+	return data;
 }
 
 export interface IRuneData {

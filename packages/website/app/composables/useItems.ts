@@ -1,10 +1,7 @@
-import { data, version } from '~/assets/item.json';
+import { data } from '~/assets/item.json';
 
-export function useItems(): IItemData {
-	return {
-		version,
-		items: data satisfies Record<string, IItem>,
-	};
+export function useItems(): Record<string, IItem> {
+	return data satisfies Record<string, IItem>;
 }
 
 export type IItemId = keyof typeof data;

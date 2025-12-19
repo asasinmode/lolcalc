@@ -62,7 +62,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		[statName]: 0,
 	}), {} as IDisplayedStats);
 
-	// TODO attack speed
+	let itemsTotalPercentMovementSpeed = 0;
 	for (const item of items) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
 			// hpRegen is stored in per second in item but per 5 seconds in champion/displayed
@@ -76,20 +76,31 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 			itemStats.manaRegen += baseOnLevelStats.manaRegen * item.stats.PercentBaseMPRegenMod;
 		}
 		if (item.stats.PercentMovementSpeedMod) {
-			console.log('TODO');
+			itemsTotalPercentMovementSpeed += item.stats.PercentMovementSpeedMod;
 		}
 	}
 
-	const [adaptiveForceTargetStat, adaptiveForceStatMultiplier] = getAdaptiveForceStat(itemStats.attackDamage, itemStats.abilityPower);
+	const baseWithFlatFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemStats.moveSpeed);
+
+	itemStats.moveSpeed += baseWithFlatFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
+	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio;
+
+	// TODO fix
+	const [adaptiveForceTargetStat, adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
 
 	const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);
-	const runeShardStats = {
+	const runeShardStats: Partial<IDisplayedStats> = {
 		...preAdaptiveRuneShardStats,
+		moveSpeed: baseWithFlatFlatItemMoveSpeed * preAdaptiveRuneShardStats.percentMoveSpeedMod,
+		attackSpeed: preAdaptiveRuneShardStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio,
 		[adaptiveForceTargetStat]: runeShardsAdaptiveForce * adaptiveForceStatMultiplier,
 	};
 
-	// TODO %move speed, attack speed
-	const levelAndRunesStats = Object.fromEntries(Object.entries(baseStats).map(
+	// to keep it consistent with the way it's displayed stored on `champion.stats.attackspeedperlevel`
+	itemStats.bonusAttackSpeedPercent *= 100;
+	runeShardStats.bonusAttackSpeedPercent! *= 100;
+
+	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (runeShardStats[statName as keyof typeof runeShardStats] || 0)],
 	)) as IDisplayedStats;
@@ -126,7 +137,7 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	FlatPhysicalDamageMod: 'attackDamage',
 	FlatSpellBlockMod: 'magicResists',
 	PercentArmorPenetrationMod: 'percentArmorPen',
-	PercentAttackSpeedMod: 'attackSpeed',
+	PercentAttackSpeedMod: 'bonusAttackSpeedPercent',
 	PercentHealingAmountMod: 'healShieldPower',
 	PercentLifeStealMod: 'lifeSteal',
 	PercentMagicPenetrationMod: 'percentMagicPen',
@@ -145,21 +156,30 @@ function itemToChampionStats(item: IItem): [IDisplayedStatName, number][] {
 		});
 }
 
-function getAdaptiveForceStat(attackDamage: number, abilityPower: number): [IAdaptiveForceStat, multiplier: number] {
-	return attackDamage > abilityPower ? ['attackDamage', 0.6] : ['abilityPower', 1];
+// TODO maybe better way exists
+const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Ambessa', 'Aphelios', 'Ashe', 'Belveth', 'Blitzcrank', 'Braum', 'Briar', 'Caitlyn', 'Camille', 'Corki', 'Darius', 'Draven', 'DrMundo', 'Ezreal', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Graves', 'Hecarim', 'Illaoi', 'Irelia', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'Kayle', 'Kayn', 'Khazix', 'Kindred', 'Kled', 'KogMaw', 'KSante', 'LeeSin', 'Leona', 'Lucian', 'MasterYi', 'MissFortune', 'MonkeyKing', 'Naafiri', 'Nasus', 'Nilah', 'Nocturne', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rammus', 'RekSai', 'Rell', 'Renekton', 'Rengar', 'Riven', 'Samira', 'Senna', 'Sett', 'Shaco', 'Shen', 'Shyvana', 'Sion', 'Sivir', 'Skarner', 'Smolder', 'TahmKench', 'Talon', 'Taric', 'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'Twitch', 'Udyr', 'Urgot', 'Varus', 'Vayne', 'Vi', 'Viego', 'Volibear', 'Warwick', 'Xayah', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yunara', 'Zaahen', 'Zed', 'Zeri'];
+
+type IAdaptiveForceStatRv = [IAdaptiveForceStat, multiplier: number];
+function getAdaptiveForceStat(championId: string, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
+	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0.6];
+	return attackDamage > abilityPower
+		? adRv
+		: (attackDamage === abilityPower && ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS.includes(championId as IChampionId))
+				? adRv
+				: ['abilityPower', 1];
 }
 
 function getRuneShardStats(shards: IRuneShards, level: number) {
-	const { runes } = useRunes();
+	const runes = useRunes();
 
 	const stats = {
 		hp: 0,
 		adaptiveForce: 0,
 		abilityHaste: 0,
-		attackSpeed: 0,
+		bonusAttackSpeedPercent: 0,
 		tenacity: 0,
-		moveSpeedPercent: 0,
-	} satisfies Partial<Record<IDisplayedStatName | 'adaptiveForce' | 'moveSpeedPercent', number>>;
+		percentMoveSpeedMod: 0,
+	} satisfies Partial<Record<IDisplayedStatName | 'adaptiveForce' | 'percentMoveSpeedMod', number>>;
 
 	const adaptiveForceValue = runes.shards.offensive.adaptiveForce;
 	const scalingHealthValue = level * runes.shards.defensive.scalingHealth;
@@ -167,12 +187,12 @@ function getRuneShardStats(shards: IRuneShards, level: number) {
 	const slotStats: Record<keyof IRuneShards, Record<string, [keyof typeof stats, number]>> = {
 		offensive: {
 			adaptiveForce: ['adaptiveForce', adaptiveForceValue],
-			percentAttackSpeed: ['attackSpeed', runes.shards.offensive.percentAttackSpeed],
+			percentAttackSpeed: ['bonusAttackSpeedPercent', runes.shards.offensive.percentAttackSpeed],
 			abilityHaste: ['abilityHaste', runes.shards.offensive.abilityHaste],
 		} satisfies Record<IRuneShards['offensive'], [keyof typeof stats, number]>,
 		flex: {
 			adaptiveForce: ['adaptiveForce', adaptiveForceValue],
-			percentMoveSpeed: ['moveSpeedPercent', runes.shards.flex.percentMoveSpeed],
+			percentMoveSpeed: ['percentMoveSpeedMod', runes.shards.flex.percentMoveSpeed],
 			scalingHealth: ['hp', scalingHealthValue],
 		} satisfies Record<IRuneShards['flex'], [keyof typeof stats, number]>,
 		defensive: {

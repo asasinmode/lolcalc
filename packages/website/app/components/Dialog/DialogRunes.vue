@@ -1,9 +1,8 @@
 <script setup lang="ts">
+const runes = useRunes();
+
 const value = defineModel<IChampionRunes>({ required: true });
-
 const vDialog = useTemplateRef('vDialog');
-
-const { runes } = useRunes();
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -20,18 +19,18 @@ defineExpose({
 			</form>
 		</header>
 		<select v-model="value.shards.offensive" class="block">
-			<option v-for="(_, runeValue) in runes.shards.offensive" :key="runeValue" :value="runeValue">
-				{{ value }}
+			<option v-for="(_, shardName) in runes.shards.offensive" :key="shardName" :value="shardName">
+				{{ shardName }}
 			</option>
 		</select>
 		<select v-model="value.shards.flex" class="block">
-			<option v-for="(_, runeValue) in runes.shards.flex" :key="runeValue" :value="runeValue">
-				{{ runeValue }}
+			<option v-for="(_, shardName) in runes.shards.flex" :key="shardName" :value="shardName">
+				{{ shardName }}
 			</option>
 		</select>
 		<select v-model="value.shards.defensive" class="block">
-			<option v-for="(_, runeValue) in runes.shards.defensive" :key="runeValue" :value="runeValue">
-				{{ runeValue }}
+			<option v-for="(_, shardName) in runes.shards.defensive" :key="shardName" :value="shardName">
+				{{ shardName }}
 			</option>
 		</select>
 	</VDialog>

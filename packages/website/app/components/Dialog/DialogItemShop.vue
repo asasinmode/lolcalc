@@ -4,7 +4,8 @@ defineEmits<{
 	selectItem: [item: IItem];
 }>();
 
-const { version, items } = useItems();
+const items = useItems();
+const version = usePatchVersion();
 
 const vDialog = useTemplateRef('vDialog');
 const search = ref('');
@@ -14,7 +15,7 @@ const computedItems = computed(() => {
 	const splitSearch = search.value.split(' ').filter(v => v);
 
 	return search.value
-		? sortedByPrice.value.filter(item => splitSearch.every(word => item.name.toLocaleLowerCase().includes(word)))
+		? sortedByPrice.value.filter(item => splitSearch.every(word => item.name.replaceAll('\'', '').toLocaleLowerCase().includes(word)))
 		: sortedByPrice.value;
 });
 
