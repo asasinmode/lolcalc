@@ -50,6 +50,20 @@ const targetDummy = ref<ITargetDummy>({
 					{{ champion.name }}
 				</option>
 			</select>
+			<img
+				v-if="sourceChampion"
+				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${sourceChampion.image.full}`"
+				width="128"
+				height="128"
+				class="size-5 inline-block"
+			>
+			<img
+				v-else
+				src="https://cdn.communitydragon.org/latest/champion/generic/square"
+				width="256"
+				height="256"
+				class="size-5 inline-block"
+			>
 			<label for="source-champion-level">Level: </label>
 			<select id="source-champion-level" v-model="sourceChampionLevel">
 				<option v-for="i in 18" :key="i" :value="i">
