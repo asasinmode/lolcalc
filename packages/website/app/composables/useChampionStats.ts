@@ -104,7 +104,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (itemStats[statName as keyof typeof itemStats] || 0)],
-	));
+	)) as IDisplayedStats;
 
 	return {
 		totalStats,

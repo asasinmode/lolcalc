@@ -11,6 +11,7 @@ const version = usePatchVersion();
 
 const itemShopDialog = useTemplateRef('itemShopDialog');
 const runeDialog = useTemplateRef('runeDialog');
+const sourceChampionStats = useTemplateRef('sourceChampionStats');
 
 const sourceChampionId = ref<IChampionId>();
 const sourceChampionLevel = ref(1);
@@ -82,11 +83,19 @@ const targetDummy = ref<ITargetDummy>({
 		<TargetDummy v-model="targetDummy" />
 
 		<ChampionStats
+			ref="sourceChampionStats"
 			class="col-span-full"
 			:champion="sourceChampion"
 			:level="sourceChampionLevel"
 			:items="sourceChampionItems"
 			:runes="sourceChampionRunes"
+		/>
+
+		<AADamage
+			v-if="sourceChampionStats?.value"
+			class="mt-3 col-span-full"
+			:source="{ stats: sourceChampionStats!.value!.totalStats }"
+			:target="targetDummy"
 		/>
 	</main>
 </template>

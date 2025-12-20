@@ -9,6 +9,8 @@ const props = defineProps<{
 
 const version = usePatchVersion();
 const stats = computed(() => props.champion ? useChampionStats(props.champion, props.level, props.items, props.runes) : undefined);
+
+defineExpose({ value: stats });
 </script>
 
 <template>
