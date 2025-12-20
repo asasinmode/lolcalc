@@ -31,23 +31,23 @@ const stats = computed(() => props.champion ? useChampionStats(props.champion, p
 			<a :href="`https://wiki.leagueoflegends.com/en-us/${champion!.name.replaceAll(' ', '_')}`" target="_blank" class="text-blue">
 				wiki
 			</a>
-			<div class="flex gap-3 *:pr-2 *:border-r *:border-r-gray last:*:pr-0 last:*:border-r-0">
-				<code class="whitespace-pre">
+			<div class="flex gap-3 *:pr-2 *:border-r *:border-r-gray *:whitespace-pre last:*:pr-0 last:*:border-r-0">
+				<code>
 					total: {{ JSON.stringify(stats.totalStats, null, 2) }}
 				</code>
-				<code class="whitespace-pre">
+				<code>
 					item: {{ JSON.stringify(stats.itemStats, null, 2) }}
 				</code>
-				<code class="whitespace-pre">
+				<code>
 					base,level,runes: {{ JSON.stringify(stats.levelAndRunesStats, null, 2) }}
 				</code>
-				<code class="whitespace-pre">
+				<code>
 					base: {{ JSON.stringify(stats.baseStats, null, 2) }}
 				</code>
-				<code class="whitespace-pre">
+				<code>
 					level: {{ JSON.stringify(stats.levelStats, null, 2) }}
 				</code>
-				<code class="whitespace-pre">
+				<code>
 					rune shards: {{ JSON.stringify(stats.runeShardStats, null, 2) }}
 				</code>
 			</div>

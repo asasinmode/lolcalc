@@ -1,8 +1,4 @@
-type IDisplayedStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';
-
-type IDisplayedStats = Record<IDisplayedStatName, number>;
-
-type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
+import type { IAdaptiveForceStat, IDisplayedStatName, IDisplayedStats } from '~/util/types';
 
 export function useChampionStats(champion: IChampion, level: number, items: IItem[], runes: IChampionRunes) {
 	const baseStats: IDisplayedStats = {
@@ -85,7 +81,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	itemStats.moveSpeed += baseWithFlatFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
 	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio;
 
-	// TODO fix
+	// TODO make sure it works
 	const [adaptiveForceTargetStat, adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
 
 	const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);

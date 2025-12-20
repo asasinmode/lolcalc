@@ -1,6 +1,6 @@
-@layer reset, base, utilities, component;
+@layer base, page, utilities, component;
 
-@layer base {
+@layer page {
 	@font-face {
 		font-family: 'Atkinson Hyperlegible Next';
 		src: url('/fonts/AtkinsonHyperlegibleNext-Regular.ttf') format('truetype');
@@ -31,12 +31,6 @@
 		font-weight: 100-900;
 		font-style: normal;
 		font-display: swap;
-	}
-
-	*,
-	*::before,
-	*::after {
-		-webkit-tap-highlight-color: transparent;
 	}
 
 	*:focus-visible {
@@ -75,7 +69,8 @@
 		}
 	}
 
-	select > option {
-		color: black;
+	select,
+	input {
+		background-color: black;
 	}
 }
