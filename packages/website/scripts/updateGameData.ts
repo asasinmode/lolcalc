@@ -153,6 +153,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 		const statsToAdd: ([string, string, true] | [string, string])[] = [
 			['AbilityHasteMod', 'mAbilityHasteMod'],
+			['FlatCritDamageMod', 'mFlatCritDamageMod', true],
 			['FlatMagicPenetrationMod', 'mFlatMagicPenetrationMod'],
 			['PercentArmorPenetrationMod', 'mPercentArmorPenetrationMod', true],
 			['PercentBaseHPRegenMod', 'mPercentBaseHPRegenMod'],

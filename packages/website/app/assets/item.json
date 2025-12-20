@@ -1301,7 +1301,8 @@
 			"name": "Infinity Edge",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 65
+				"FlatPhysicalDamageMod": 65,
+				"FlatCritDamageMod": 0.4
 			},
 			"gold": {
 				"base": 675,

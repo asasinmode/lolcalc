@@ -127,6 +127,7 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	FlatHPPoolMod: 'hp',
 	FlatHPRegenMod: 'hpRegen',
 	FlatMPPoolMod: 'mana',
+	FlatCritDamageMod: 'critDamageMultiplier',
 	FlatMagicDamageMod: 'abilityPower',
 	FlatMagicPenetrationMod: 'flatMagicPen',
 	FlatMovementSpeedMod: 'moveSpeed',
