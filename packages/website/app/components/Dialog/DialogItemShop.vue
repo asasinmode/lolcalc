@@ -15,7 +15,7 @@ const computedItems = computed(() => {
 	const splitSearch = search.value.split(' ').filter(v => v);
 
 	return search.value
-		? sortedByPrice.value.filter(item => splitSearch.every(word => item.name.replaceAll('\'', '').toLocaleLowerCase().includes(word)))
+		? sortedByPrice.value.filter(item => splitSearch.every(word => item.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word)))
 		: sortedByPrice.value;
 });
 
