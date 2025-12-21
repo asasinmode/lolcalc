@@ -7,8 +7,7 @@ const props = defineProps<{
 	level: number;
 }>();
 
-const version = usePatchVersion();
-const stats = computed(() => props.champion ? useChampionStats(props.champion, props.level, props.items, props.runes) : undefined);
+const stats = computed(() => props.champion && calculateChampionStats(props.champion, props.level, props.items, props.runes));
 
 defineExpose({ value: stats });
 </script>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { ITargetDummy } from '~/util/types';
-
 useHead({ htmlAttrs: { lang: 'en' } });
 useSeoMeta({
 	title: 'Collector - League of Legends Damage Calculator',
@@ -32,7 +30,7 @@ function addItem(item: IItem) {
 	}
 }
 
-const targetDummy = ref<ITargetDummy>({
+const targetDummy = ref<IDamageTarget>({
 	stats: { hp: 1000,	armor: 0,	magicResists: 0 },
 });
 </script>

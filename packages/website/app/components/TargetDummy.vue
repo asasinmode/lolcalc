@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import type { ITargetDummy } from '~/util/types';
-
-const value = defineModel<ITargetDummy>({ required: true });
+const value = defineModel<IDamageTarget>({ required: true });
 </script>
 
 <template>

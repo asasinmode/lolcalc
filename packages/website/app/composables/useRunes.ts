@@ -4,11 +4,6 @@ export function useRunes() {
 	return data;
 }
 
-export interface IRuneData {
-	version: string;
-	runes: typeof data;
-}
-
 type IDataShards = typeof data.shards;
 
 export type IRuneShards = {

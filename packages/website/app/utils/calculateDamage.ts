@@ -1,10 +1,8 @@
-import type { IDisplayedStats, ITargetDummy } from '~/util/types';
-
-export function useDamage(
+export function calculateDamage(
 	rawDamage: number,
 	type: IDamageType,
-	target: ITargetDummy,
-	penetration: Pick<IDisplayedStats, 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>,
+	target: IDamageTarget,
+	penetration: Pick<IChampionStats, 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>,
 ): IDamageResults {
 	if (type === 'true') {
 		return { postMitigationDamage: rawDamage, effectiveResists: 0 };
@@ -29,3 +27,7 @@ interface IDamageResults {
 }
 
 type IDamageType = 'physical' | 'magical' | 'true';
+
+export interface IDamageTarget {
+	stats: Pick<IChampionStats, 'hp' | 'armor' | 'magicResists'>;
+}

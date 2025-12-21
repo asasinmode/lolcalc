@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import type { IDisplayedStats, ITargetDummy } from '~/util/types';
-
 const props = defineProps<{
 	source: {
-		stats: Pick<IDisplayedStats, 'attackDamage' | 'attackSpeed' | 'abilityPower' | 'critChance' | 'critDamageMultiplier' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>;
+		stats: Pick<IChampionStats, 'attackDamage' | 'attackSpeed' | 'abilityPower' | 'critChance' | 'critDamageMultiplier' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen'>;
 	};
-	target: ITargetDummy;
+	target: IDamageTarget;
 }>();
 
-const aaDamage = computed(() => useDamage(props.source.stats.attackDamage, 'physical', props.target, props.source.stats));
-const critDamage = computed(() => useDamage(props.source.stats.attackDamage * props.source.stats.critDamageMultiplier, 'physical', props.target, props.source.stats));
+const aaDamage = computed(() => calculateDamage(props.source.stats.attackDamage, 'physical', props.target, props.source.stats));
+const critDamage = computed(() => calculateDamage(props.source.stats.attackDamage * props.source.stats.critDamageMultiplier, 'physical', props.target, props.source.stats));
 </script>
 
 <template>

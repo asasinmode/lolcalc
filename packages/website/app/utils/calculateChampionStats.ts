@@ -1,7 +1,7 @@
-import type { IAdaptiveForceStat, IDisplayedStatName, IDisplayedStats } from '~/util/types';
+import { data as runes } from '~/assets/runes.json';
 
-export function useChampionStats(champion: IChampion, level: number, items: IItem[], runes: IChampionRunes) {
-	const baseStats: IDisplayedStats = {
+export function calculateChampionStats(champion: IChampion, level: number, items: IItem[], runes: IChampionRunes) {
+	const baseStats: IChampionStats = {
 		hp: champion.stats.hp,
 		hpRegen: champion.stats.hpregen,
 		mana: champion.stats.mp,
@@ -29,7 +29,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 		moveSpeed: champion.stats.movespeed,
 	};
 
-	const levelStats: Partial<IDisplayedStats> = {
+	const levelStats: Partial<IChampionStats> = {
 		hp: champion.stats.hpperlevel,
 		hpRegen: champion.stats.hpregenperlevel,
 		mana: champion.stats.mpperlevel,
@@ -51,12 +51,12 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	const baseOnLevelStats = Object.fromEntries(Object.entries(baseStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (levelStats[statName as keyof typeof levelStats] || 0)],
-	)) as IDisplayedStats;
+	)) as IChampionStats;
 
 	const itemStats = Object.keys(baseStats).reduce((acc, statName) => ({
 		...acc,
 		[statName]: 0,
-	}), {} as IDisplayedStats);
+	}), {} as IChampionStats);
 
 	let itemsTotalPercentMovementSpeed = 0;
 	for (const item of items) {
@@ -85,7 +85,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	const [adaptiveForceTargetStat, adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
 
 	const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);
-	const runeShardStats: Partial<IDisplayedStats> = {
+	const runeShardStats: Partial<IChampionStats> = {
 		...preAdaptiveRuneShardStats,
 		moveSpeed: baseWithFlatFlatItemMoveSpeed * preAdaptiveRuneShardStats.percentMoveSpeedMod,
 		attackSpeed: preAdaptiveRuneShardStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio,
@@ -99,12 +99,12 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (runeShardStats[statName as keyof typeof runeShardStats] || 0)],
-	)) as IDisplayedStats;
+	)) as IChampionStats;
 
 	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (itemStats[statName as keyof typeof itemStats] || 0)],
-	)) as IDisplayedStats;
+	)) as IChampionStats;
 
 	return {
 		totalStats,
@@ -120,7 +120,7 @@ export function useChampionStats(champion: IChampion, level: number, items: IIte
 const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	IItemStat,
 'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
->, IDisplayedStatName> = {
+>, IChampionStatName> = {
 	AbilityHasteMod: 'abilityHaste',
 	FlatArmorMod: 'armor',
 	FlatCritChanceMod: 'critChance',
@@ -142,7 +142,7 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	PhysicalLethality: 'lethality',
 };
 
-function itemToChampionStats(item: IItem): [IDisplayedStatName, number][] {
+function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
 	return Object.entries(item.stats)
 		.filter(([itemStatName]) => itemStatName in ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES)
 		.map(([itemStatName, itemStatValue]) => {
@@ -156,7 +156,9 @@ function itemToChampionStats(item: IItem): [IDisplayedStatName, number][] {
 // TODO maybe better way exists
 const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Ambessa', 'Aphelios', 'Ashe', 'Belveth', 'Blitzcrank', 'Braum', 'Briar', 'Caitlyn', 'Camille', 'Corki', 'Darius', 'Draven', 'DrMundo', 'Ezreal', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Graves', 'Hecarim', 'Illaoi', 'Irelia', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'Kayle', 'Kayn', 'Khazix', 'Kindred', 'Kled', 'KogMaw', 'KSante', 'LeeSin', 'Leona', 'Lucian', 'MasterYi', 'MissFortune', 'MonkeyKing', 'Naafiri', 'Nasus', 'Nilah', 'Nocturne', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rammus', 'RekSai', 'Rell', 'Renekton', 'Rengar', 'Riven', 'Samira', 'Senna', 'Sett', 'Shaco', 'Shen', 'Shyvana', 'Sion', 'Sivir', 'Skarner', 'Smolder', 'TahmKench', 'Talon', 'Taric', 'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'Twitch', 'Udyr', 'Urgot', 'Varus', 'Vayne', 'Vi', 'Viego', 'Volibear', 'Warwick', 'Xayah', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yunara', 'Zaahen', 'Zed', 'Zeri'];
 
+type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
 type IAdaptiveForceStatRv = [IAdaptiveForceStat, multiplier: number];
+
 function getAdaptiveForceStat(championId: string, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
 	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0.6];
 	return attackDamage > abilityPower
@@ -167,8 +169,6 @@ function getAdaptiveForceStat(championId: string, attackDamage: number, abilityP
 }
 
 function getRuneShardStats(shards: IRuneShards, level: number) {
-	const runes = useRunes();
-
 	const stats = {
 		hp: 0,
 		adaptiveForce: 0,
@@ -176,7 +176,7 @@ function getRuneShardStats(shards: IRuneShards, level: number) {
 		bonusAttackSpeedPercent: 0,
 		tenacity: 0,
 		percentMoveSpeedMod: 0,
-	} satisfies Partial<Record<IDisplayedStatName | 'adaptiveForce' | 'percentMoveSpeedMod', number>>;
+	} satisfies Partial<Record<IChampionStatName | 'adaptiveForce' | 'percentMoveSpeedMod', number>>;
 
 	const adaptiveForceValue = runes.shards.offensive.adaptiveForce;
 	const scalingHealthValue = level * runes.shards.defensive.scalingHealth;
@@ -206,3 +206,7 @@ function getRuneShardStats(shards: IRuneShards, level: number) {
 
 	return stats;
 }
+
+export type IChampionStats = Record<IChampionStatName, number>;
+
+export type IChampionStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';
