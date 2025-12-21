@@ -19,5 +19,6 @@ export default withNuxt(
 			'vue/component-name-in-template-casing': ['warn', 'PascalCase', { registeredComponentsOnly: false }],
 		},
 		formatters: true,
+		ignores: ['app/assets/*.json'],
 	}, unocss, oxlint.configs['flat/recommended']),
 );

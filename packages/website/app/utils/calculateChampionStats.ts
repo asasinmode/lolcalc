@@ -1,4 +1,4 @@
-import { data as runes } from '~/assets/runes.json';
+import { data as runes } from '../assets/runes.json';
 
 export function calculateChampionStats(champion: IChampion, level: number, items: IItem[], runes: IChampionRunes) {
 	const baseStats: IChampionStats = {

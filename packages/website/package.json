@@ -13,7 +13,10 @@
 		"lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
 		"lint:eslint": "eslint . --fix --cache",
 		"lint": "run-s lint:*",
-		"test": "vitest"
+		"test": "vitest run"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
 	},
 	"dependencies": {
 		"@antfu/eslint-config": "^6.2.0",
@@ -35,8 +38,7 @@
 		"vue-tsc": "^3.1.4"
 	},
 	"devDependencies": {
-		"@types/bun": "^1.3.4",
-		"vitest": "^4.0.16"
+		"@types/bun": "^1.3.4"
 	},
 	"overrides": {
 		"@nuxt/vite-builder": "https://pkg.pr.new/@nuxt/vite-builder@33682",
