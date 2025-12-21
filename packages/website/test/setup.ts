@@ -5,15 +5,19 @@ const green = '\x1B[32m';
 const yellow = '\x1B[33m';
 const reset = '\x1B[0m';
 
+const LITERAL_STATS: IChampionStatName[] = ['healShieldPower', 'lifeSteal', 'critChance', 'critDamageMultiplier', 'percentArmorPen', 'percentMagicPen', 'attackSpeed'];
+
 expect.extend({
 	toBeDisplayedStats(received: any, expected: Partial<IChampionStats>) {
 		let pass = true;
-		const wrongStats: [stat: string, received: number, rounded: number][] = [];
+		const wrongStats: [stat: string, received: number, rounded: number, isLiteral: boolean][] = [];
 
-		for (const [stat, value] of Object.entries(expected)) {
-			if (Math.round(received[stat]) !== value) {
+		for (const [stat, value] of Object.entries(expected) as [IChampionStatName, number][]) {
+			const isLiteral = LITERAL_STATS.includes(stat);
+			const isEqual = isLiteral ? (Math.abs(value - received[stat]) < 0.005) : (Math.round(received[stat]) === value);
+			if (!isEqual) {
 				pass = false;
-				wrongStats.push([stat, received[stat], value]);
+				wrongStats.push([stat, received[stat], value, isLiteral]);
 			}
 		}
 
@@ -21,8 +25,8 @@ expect.extend({
 			pass,
 			message: () => {
 				const to = pass ? 'not to' : 'to';
-				return wrongStats.map(([stat, received, rounded]) =>
-					`Expected stat ${yellow}${stat}${reset} ${red}${received}${reset} ${to} round to ${green}${rounded}${reset}`,
+				return wrongStats.map(([stat, received, rounded, isLiteral]) =>
+					`Expected stat ${yellow}${stat}${reset} ${red}${received}${reset} ${to} ${isLiteral ? 'be' : 'round to'} ${green}${rounded}${reset}`,
 				).join('\n');
 			},
 		};
@@ -37,7 +41,7 @@ interface CustomMatchers {
 	 * expect(stats).toBeDisplayedStats({
 	 *   health: 740,
 	 *   hpRegen: 4,
-	 *   manaRegen: 8,
+	 *   attackDamage: 73,
 	 * })
 	 * ```
 	 */

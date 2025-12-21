@@ -12,7 +12,7 @@ const search = ref('');
 
 const sortedByPrice = computed(() => Object.values(items).sort((a, b) => a.gold.total - b.gold.total));
 const computedItems = computed(() => {
-	const splitSearch = search.value.split(' ').filter(v => v);
+	const splitSearch = search.value.toLocaleLowerCase().split(' ').filter(v => v);
 
 	return search.value
 		? sortedByPrice.value.filter(item => splitSearch.every(word => item.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word)))

@@ -1,3 +1,7 @@
+import { data as items } from '../app/assets/item.json';
+
+const allItems = Object.values(items) as IItem[];
+
 const NUMBER_TO_RUNE_SHARD = {
 	offensive: ['adaptiveForce', 'percentAttackSpeed', 'abilityHaste'] satisfies IRuneShards['offensive'][],
 	flex: ['adaptiveForce', 'percentMoveSpeed', 'scalingHealth'] satisfies IRuneShards['flex'][],
@@ -10,4 +14,12 @@ export function numberRuneShards(offensive: number, flex: number, defensive: num
 		flex: NUMBER_TO_RUNE_SHARD.flex[flex - 1]!,
 		defensive: NUMBER_TO_RUNE_SHARD.defensive[defensive - 1]!,
 	};
+}
+
+export function buildItems(names: string[]) {
+	return names.map(name => allItems.find(item =>
+		name.toLocaleLowerCase().split(' ').every(word =>
+			item.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word),
+		),
+	)!);
 }
