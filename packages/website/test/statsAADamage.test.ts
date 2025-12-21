@@ -3,9 +3,10 @@ import { calculateChampionStats } from '../app/utils/calculateChampionStats';
 import draven_15_24_1 from './fixtures/15-24-1_draven.json';
 import { buildItems, numberRuneShards } from './util';
 
-describe('[15-24-1_draven] no passives', () => {
-	it('level 1, shards 111, no items', () => {
-		const { totalStats } = calculateChampionStats(draven_15_24_1, 1, [], { shards: numberRuneShards(1, 1, 1) });
+describe('15.24.1 draven shards 111', () => {
+	const shards = numberRuneShards(1, 1, 1);
+	it('level 1, no items', () => {
+		const { totalStats } = calculateChampionStats(draven_15_24_1, 1, [], { shards });
 
 		expect(totalStats).toBeDisplayedStats({
 			hp: 740,
@@ -13,12 +14,12 @@ describe('[15-24-1_draven] no passives', () => {
 		});
 	});
 
-	it('shards 111, items 1', () => {
+	it('misc items', () => {
 		const { totalStats } = calculateChampionStats(
 			draven_15_24_1,
 			1,
 			buildItems(['bloodthirster', 'cosmic drive', 'knights vow', 'mikael', 'axiom arc', 'unending despair']),
-			{ shards: numberRuneShards(1, 1, 1) },
+			{ shards },
 		);
 
 		expect(totalStats).toBeDisplayedStats({
@@ -37,14 +38,14 @@ describe('[15-24-1_draven] no passives', () => {
 		});
 	});
 
-	it('shards 111, items 2', () => {
+	it('crit items', () => {
 		const items = ['infinity edge', 'phantom dancer', 'berserker greaves', 'lord dominik', 'axiom arc'];
 
 		const { totalStats: stats1 } = calculateChampionStats(
 			draven_15_24_1,
 			1,
 			buildItems(items),
-			{ shards: numberRuneShards(1, 1, 1) },
+			{ shards },
 		);
 
 		expect(stats1).toBeDisplayedStats({
