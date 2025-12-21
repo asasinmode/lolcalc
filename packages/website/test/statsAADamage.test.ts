@@ -1,5 +1,7 @@
+import type { IDamageTarget } from '../app/utils/calculateDamage';
 import { describe, expect, it } from 'bun:test';
 import { calculateChampionStats } from '../app/utils/calculateChampionStats';
+import { calculateDamage } from '../app/utils/calculateDamage';
 import draven_15_24_1 from './fixtures/15-24-1_draven.json';
 import { buildItems, numberRuneShards } from './util';
 
@@ -41,14 +43,14 @@ describe('15.24.1 draven shards 111', () => {
 	it('crit items', () => {
 		const items = ['infinity edge', 'phantom dancer', 'berserker greaves', 'lord dominik', 'axiom arc'];
 
-		const { totalStats: stats1 } = calculateChampionStats(
+		const { totalStats: statsLvl1 } = calculateChampionStats(
 			draven_15_24_1,
 			1,
 			buildItems(items),
 			{ shards },
 		);
 
-		expect(stats1).toBeDisplayedStats({
+		expect(statsLvl1).toBeDisplayedStats({
 			hp: 740,
 			lethality: 18,
 			attackDamage: 228,
@@ -58,14 +60,14 @@ describe('15.24.1 draven shards 111', () => {
 			critDamageMultiplier: 2.15,
 		});
 
-		const { totalStats: stats2 } = calculateChampionStats(
+		const { totalStats: statsLvl12 } = calculateChampionStats(
 			draven_15_24_1,
 			12,
 			buildItems(items),
 			{ shards: numberRuneShards(1, 1, 1) },
 		);
 
-		expect(stats2).toBeDisplayedStats({
+		expect(statsLvl12).toBeDisplayedStats({
 			hp: 1764,
 			lethality: 18,
 			attackDamage: 263,
@@ -75,6 +77,27 @@ describe('15.24.1 draven shards 111', () => {
 			abilityHaste: 20,
 			critChance: 0.75,
 			critDamageMultiplier: 2.15,
+			moveSpeed: 413,
 		});
+
+		const dummy: IDamageTarget = { stats: { hp: 1000, armor: 100, magicResists: 100 } };
+
+		const aaDamage = calculateDamage(
+			statsLvl12.attackDamage,
+			'physical',
+			dummy,
+			statsLvl12,
+		);
+
+		expect(Math.round(aaDamage.postMitigationDamage)).toBe(185);
+
+		const critDamage = calculateDamage(
+			statsLvl12.attackDamage * statsLvl12.critDamageMultiplier,
+			'physical',
+			dummy,
+			statsLvl12,
+		);
+
+		expect(Math.round(critDamage.postMitigationDamage)).toBe(399);
 	});
 });
