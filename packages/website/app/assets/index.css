@@ -1,5 +1,15 @@
 @layer base, page, utilities, component;
 
+@layer base {
+	button {
+		cursor: pointer;
+
+		&:disabled {
+			cursor: default;
+		}
+	}
+}
+
 @layer page {
 	@font-face {
 		font-family: 'Atkinson Hyperlegible Next';

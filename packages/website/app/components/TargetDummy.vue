@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const value = defineModel<IDamageTarget>({ required: true });
+const { minorVersion } = usePatchVersion();
 </script>
 
 <template>
@@ -7,7 +8,7 @@ const value = defineModel<IDamageTarget>({ required: true });
 		target:
 		<img
 			class="row-span-full inline-block"
-			src="https://raw.communitydragon.org/latest/game/assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png"
+			:src="`https://raw.communitydragon.org/${minorVersion}/game/assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png`"
 			width="64"
 			height="64"
 		>

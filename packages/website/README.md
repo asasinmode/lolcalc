@@ -1,6 +1,6 @@
-# Colectormode - League of Legends calculator website
+# Colector - League of Legends calculator website
 
-domain: colectormode.com
+domain: colector.lol
 
 ## setup
 
@@ -19,17 +19,24 @@ bun generate
 
 # run tests
 bun test
+
+# TMP
+tar --exclude='.DS_Store' --exclude='node_modules' --exclude '.nuxt' --exclude 'public' -cf "colector.tar" -C "./colectormode/packages/website" .
 ```
 
 ## todo
 
 - [x] script for downloading/updating latest patch data
 - [x] calculating stats (no item/champ passives)
+- [x] item rarity for shop
+- [ ] change `champion/item.image` to just string if no need for object or find the spritesheet
+- [ ] remove dialog/champ dialog search placeholders, only label
+- [ ] check if can use cdragon cdn instead of raw
 - [ ] champ select dialog
+- [ ] item shop sorting + look when searched (+ aliases) + when stat filtered + filters hover names
 - [ ] item shop dialog
-- [ ] item rarity for shop
 - [ ] item groups, only one from group
-- [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues`
+- [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues` and map overrides `DataValuesModeOverride`
 - [ ] champion passives, abilities, ability levels (`additionalData` in each champion's map)
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] multiple builds/champions you can switch between
@@ -54,13 +61,14 @@ bun test
 - [ ] migrate senna souls
 - [ ] wave gold/xp at minute
 - [ ] champion & build guess recaptcha
+- [ ] aram
 - [ ] scorch vs gathering storm damage shower, pick champion, show 10, 20, 30... minutes
 - [ ] chess like puzzles, guess from screenshot what to do, choose option
 
 ## misc
 
 [useful assets](https://raw.communitydragon.org/latest/)
-[stats icons](https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/)
+[stat icons](https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/)
 [or](https://raw.communitydragon.org/latest/game/assets/perks/statmods/)
 https://hextechdocs.dev/resolving-variables-in-spell-textsa/
 

@@ -1,5 +1,7 @@
 import type { IChampion } from '../app/composables/useChampions';
-import type { IItemCategory } from '../app/composables/useItems';
+import type { IItem, IItemCategory } from '../app/composables/useItems';
+import type { IItemShopStatFilter, ITexture } from '../app/composables/useUi';
+import { useMaps } from '../app/composables/useMaps';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -8,7 +10,7 @@ const minorVersion = latestVersion.slice(0, latestVersion.lastIndexOf('.'));
 
 console.log('latest version', latestVersion);
 
-const championFile = Bun.file('app/assets/champion.json');
+const championFile = Bun.file(`${import.meta.dir}/../app/assets/champion.json`);
 let championData: typeof import('../app/assets/champion.json') | undefined;
 
 if (await championFile.exists()) {
@@ -69,7 +71,7 @@ if (!championData || championData?.version !== latestVersion) {
 	await championFile.write(JSON.stringify(championData, null, '\t'));
 }
 
-const itemFile = Bun.file('app/assets/item.json');
+const itemFile = Bun.file(`${import.meta.dir}/../app/assets/item.json`);
 let itemData: typeof import('../app/assets/item.json') | undefined;
 
 if (await itemFile.exists()) {
@@ -85,7 +87,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 		'2422', // slightly magical footwear
 		'3040',	// seraph's embrace
 		'3042',	// muramana
-		'3121', // mobility boots
+		'3121', // fimbulwinter
 	];
 
 	const UNINTERESTING_ITEMS = [
@@ -111,6 +113,8 @@ if (!itemData || itemData?.version !== latestVersion) {
 		'6032',	// stat bonus
 	];
 
+	const MAPS = useMaps();
+
 	itemData = {
 		version,
 		data: Object.fromEntries(
@@ -129,13 +133,25 @@ if (!itemData || itemData?.version !== latestVersion) {
 						&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
 				})
 				.map(([itemId, itemData]) => {
-					const { name, stats, gold, image } = itemData as any;
+					const { name, stats, gold, image, maps: { 11: sr, 12: ha }, tags } = itemData as any;
+
+					let mapMask = 0;
+					if (sr) {
+						mapMask |= MAPS.sr.mask;
+					}
+					if (ha) {
+						mapMask |= MAPS.ha.mask;
+					}
+
 					return [itemId, {
 						id: itemId,
 						name,
 						stats,
 						gold,
 						image,
+						mapMask,
+						...(tags.includes('Boots') ? { isBoots: true } : undefined),
+						...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
 					}];
 				}),
 		) as NonNullable<typeof itemData>['data'],
@@ -143,12 +159,26 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 	const moreItemData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`).then(r => r.json());
 
-	for (const [itemId, item] of Object.entries(itemData.data)) {
+	const SPECIAL_EPICNESS_ITEMS: Record<string, number> = {
+		3869: 7,	// celestial opposition
+		3870: 7,	// dream maker
+		3871: 7,	// zaz'zak's realmspike
+		3876: 7,	// solstice sleigh
+		3877: 7,	// bloodsong
+	};
+
+	for (const [itemId, item] of Object.entries(itemData.data as Record<string, IItem>)) {
 		const itemMoreData = moreItemData[`Items/${itemId}`];
 
 		if (!itemMoreData) {
 			console.warn(`haven't found more data for ${item.name} (${itemId})`);
 			continue;
+		}
+
+		if (SPECIAL_EPICNESS_ITEMS[itemId]) {
+			item.epicness = SPECIAL_EPICNESS_ITEMS[itemId];
+		} else if (itemMoreData.epicness) {
+			item.epicness = itemMoreData.epicness;
 		}
 
 		const statsToAdd: ([string, string, true] | [string, string])[] = [
@@ -160,6 +190,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 			['PercentBaseMPRegenMod', 'percentBaseMPRegenMod'],
 			['PercentHealingAmountMod', 'mPercentHealingAmountMod', true],
 			['PercentMagicPenetrationMod', 'mPercentMagicPenetrationMod', true],
+			['PercentOmnivampMod', 'PercentOmnivampMod', true],
 			['PercentTenacityMod', 'mPercentTenacityItemMod', true],
 			['PhysicalLethality', 'PhysicalLethality'],
 		];
@@ -172,6 +203,22 @@ if (!itemData || itemData?.version !== latestVersion) {
 			}
 		}
 
+		const SPECIAL_CATEGORY_ITEMS: Record<string, IItemCategory[]> = {
+			3869: ['support'],	// celestial opposition
+			3870: ['support'],	// dream maker
+			3871: ['support'],	// zaz'zak's realmspike
+			3876: ['support'],	// solstice sleigh
+			3877: ['support'],	// bloodsong
+		};
+
+		if (SPECIAL_CATEGORY_ITEMS[itemId]) {
+			item.categories = SPECIAL_CATEGORY_ITEMS[itemId].reduce((acc, curr) => ({
+				...acc,
+				[curr]: true,
+			}), {});
+			continue;
+		}
+
 		const KNOWN_CATEGORYLESS_ITEMS = [
 			'3170',	// swiftmarch
 			'3171',	// crimson lucidity
@@ -180,11 +227,6 @@ if (!itemData || itemData?.version !== latestVersion) {
 			'3174',	// armored advance
 			'3175',	// spellslinger's shoes
 			'3176',	// forever forward
-			'3869',	// celestial opposition
-			'3870',	// dream maker
-			'3871',	// zaz'zak's realmspike
-			'3876',	// solstice sleigh
-			'3877',	// bloodsong
 		];
 
 		if (!itemMoreData.mItemAttributes) {
@@ -203,7 +245,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 			32: 'support',
 		} as const;
 
-		(item as { categories?: Record<string, boolean> }).categories = (itemMoreData.mItemAttributes as number[])
+		item.categories = (itemMoreData.mItemAttributes as number[])
 			.reduce((acc, categoryNumber) => ({
 				...acc,
 				[CATEGORY_NUMBER_TO_NAME[categoryNumber]]: true,
@@ -213,7 +255,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 	await itemFile.write(JSON.stringify(itemData, null, '\t'));
 }
 
-const runeFile = Bun.file('app/assets/runes.json');
+const runeFile = Bun.file(`${import.meta.dir}/../app/assets/runes.json`);
 let runeData: typeof import('../app/assets/runes.json') | undefined;
 
 if (await runeFile.exists()) {
@@ -254,4 +296,80 @@ if (!runeData || runeData?.version !== latestVersion) {
 	};
 
 	await runeFile.write(JSON.stringify(runeData, null, '\t'));
+}
+
+const uiFile = Bun.file(`${import.meta.dir}/../app/assets/ui.json`);
+let uiData: typeof import('../app/assets/ui.json') | undefined;
+
+if (await uiFile.exists()) {
+	uiData = await uiFile.json();
+}
+
+if (!uiData || uiData?.version !== latestVersion) {
+	console.log('ui data not present or outdated, fetching...');
+
+	const data = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json`).then(r => r.json());
+
+	function getTexture(data: any, debug: string) {
+		const { TextureData } = data || {};
+		if (!TextureData) {
+			throw new Error(`Haven't found texture data for: ${debug}`);
+		}
+		return {
+			spriteSheet: TextureData.mTextureName.toLowerCase().replace('.tex', '.png'),
+			resWidth: TextureData.mTextureSourceResolutionWidth,
+			resHeight: TextureData.mTextureSourceResolutionHeight,
+			uv: TextureData.mTextureUV,
+		} as ITexture;
+	}
+
+	uiData = {
+		version: latestVersion,
+		data: {
+			shop: {
+				categories: Object.fromEntries(([
+					['all', 'All', 'All'],
+					['fighter', 'Attack', 'Atk'],
+					['marksman', 'Marksman', 'Mark'],
+					['assassin', 'Assassin', 'Ass'],
+					['mage', 'Magic', 'Mag'],
+					['tank', 'Defense', 'Def'],
+					['support', 'Utility', 'Util'],
+				] satisfies ([IItemCategory | 'all', string, string])[]).map(
+					([itemCategory, dataPath1, dataPath2]) => {
+						return [
+							itemCategory,
+							getTexture(data[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/filter/ItemShop_${dataPath1}Button/ItemShop_${dataPath2}Btn_IconDefault`], `category | ${itemCategory} | ${dataPath1} | ${dataPath2}`),
+						];
+					},
+				)),
+				stats: Object.fromEntries(([
+					['attackDamage', 'PhysicalDmg', 'PhysicalDamage'],
+					['crit', 'CritStrike', 'CriticalStrike'],
+					['attackSpeed', 'AttackSpeed'],
+					['onHit', 'OnHit'],
+					['armorPen', 'ArmorPenetration', 'ArmorPen'],
+					['abilityPower', 'AbilityPower'],
+					['mana', 'Mana'],
+					['magicPen', 'MagicPenetration', 'MagicPen'],
+					['health', 'Health'],
+					['magicResists', 'MagicResist'],
+					['armor', 'Armor'],
+					['abilityHaste', 'AbilityHaste'],
+					['movement', 'Movespeed'],
+					['vamp', 'Vamp'],
+				] satisfies ([IItemShopStatFilter, string] | [IItemShopStatFilter, string, string])[]).map(
+					([itemCategory, dataPath1, dataPath2]) => {
+						return [
+							itemCategory,
+							getTexture(data[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Default`], `stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1}`),
+						];
+					},
+				)),
+				clearFilters: getTexture(data['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/DisableBtn/Disable_Default'], 'clear filters'),
+			},
+		} as unknown as NonNullable<(typeof uiData)>['data'],
+	};
+
+	await uiFile.write(JSON.stringify(uiData, null, '\t'));
 }

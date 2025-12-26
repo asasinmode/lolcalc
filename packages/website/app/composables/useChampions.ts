@@ -1,4 +1,4 @@
-import { data } from '~/assets/champion.json';
+import { data } from '../assets/champion.json';
 
 export function useChampions(): Record<IChampionId, IChampion> {
 	return data satisfies Record<IChampionId, IChampion>;

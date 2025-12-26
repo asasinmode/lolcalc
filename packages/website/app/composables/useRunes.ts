@@ -1,4 +1,4 @@
-import { data } from '~/assets/runes.json';
+import { data } from '../assets/runes.json';
 
 export function useRunes() {
 	return data;

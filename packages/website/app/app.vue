@@ -5,9 +5,10 @@ useSeoMeta({
 });
 
 const champions = useChampions();
-const version = usePatchVersion();
+const { version, minorVersion } = usePatchVersion();
 
 const itemShopDialog = useTemplateRef('itemShopDialog');
+const champSelectDialog = useTemplateRef('champSelectDialog');
 const runeDialog = useTemplateRef('runeDialog');
 const sourceChampionStats = useTemplateRef('sourceChampionStats');
 
@@ -22,7 +23,9 @@ const sourceChampionRunes = ref<IChampionRunes>({
 	},
 });
 
-const sourceChampion = computed(() => sourceChampionId.value ? champions[sourceChampionId.value] : undefined);
+const sourceChampion = computed(() =>
+	sourceChampionId.value ? champions[sourceChampionId.value] : undefined,
+);
 
 function addItem(item: IItem) {
 	if (sourceChampionItems.value.length < 6) {
@@ -31,7 +34,7 @@ function addItem(item: IItem) {
 }
 
 const targetDummy = ref<IDamageTarget>({
-	stats: { hp: 1000,	armor: 0,	magicResists: 0 },
+	stats: { hp: 1000, armor: 0, magicResists: 0 },
 });
 </script>
 
@@ -42,26 +45,27 @@ const targetDummy = ref<IDamageTarget>({
 		</p>
 
 		<div>
-			<label for="source-champion">source champion: </label>
-			<select id="source-champion" v-model="sourceChampionId">
-				<option v-for="champion in champions" :key="champion.id" :value="champion.id">
-					{{ champion.name }}
-				</option>
-			</select>
-			<img
-				v-if="sourceChampion"
-				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${sourceChampion.image.full}`"
-				width="128"
-				height="128"
-				class="size-5 inline-block"
-			>
-			<img
-				v-else
-				src="https://cdn.communitydragon.org/latest/champion/generic/square"
-				width="256"
-				height="256"
-				class="size-5 inline-block"
-			>
+			<button @click="champSelectDialog?.open()">
+				<img
+					v-if="sourceChampion"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${sourceChampion.image.full}`"
+					loading="lazy"
+					width="128"
+					height="128"
+					class="size-10 inline-block"
+				>
+				<img
+					v-else
+					:src="`https://cdn.communitydragon.org/${minorVersion}/champion/generic/square`"
+					width="256"
+					height="256"
+					class="size-10 inline-block"
+				>
+			</button>
+			<DialogChampionSelect
+				ref="champSelectDialog"
+				v-model="sourceChampionId"
+			/>
 			<label for="source-champion-level">Level: </label>
 			<select id="source-champion-level" v-model="sourceChampionLevel">
 				<option v-for="i in 18" :key="i" :value="i">
