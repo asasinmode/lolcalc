@@ -388,7 +388,7 @@
 					575
 				]
 			},
-			"swapSortOrder": {
+			"swapItemOrder": {
 				"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas_2.png",
 				"resWidth": 1024,
 				"resHeight": 1024,

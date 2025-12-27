@@ -66,7 +66,7 @@ const searchedItems = computed(() => {
 const availableStatFilters = computed(() => Object.fromEntries(
 	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [
 		filter,
-		filteredByStats.value.some(filterFunction),
+		appliedStatFilters.value[filter as IItemShopStatFilter] || filteredByStats.value.some(filterFunction),
 	]),
 ) as Record<IItemShopStatFilter, boolean>);
 const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
@@ -102,7 +102,7 @@ defineExpose({
 
 <template>
 	<VDialog id="dialog-item-shop" ref="vDialog" class="bg-cyan-950 auto-rows-min grid-cols-[auto_1fr] max-h-[80vh] shadow-lg of-y-auto [&[open]]-grid" @close="closeCleanup">
-		<header class="bg-inherit grid col-span-full grid-cols-[1fr_auto_auto] grid-rows-[min-content_min-content] items-center top-0 sticky">
+		<header class="bg-inherit grid col-span-full grid-cols-[1fr_auto_auto] grid-rows-[min-content_min-content] items-center top-0 sticky z-10">
 			<form method="dialog" class="col-start-3 row-start-1">
 				<button value="cancel">
 					close
@@ -154,11 +154,11 @@ defineExpose({
 					<span class="sr-only">{{ option.name }}</span>
 				</template>
 			</VButtonRadiogroup>
-			<button id="item-shop-swap-sort-order" title="Swap sort order" @click="sortOrderSwapped = !sortOrderSwapped">
+			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
 				<img
-					v-bind="textureBgImageAttrs(ui.shop.swapSortOrder)"
+					v-bind="textureBgImageAttrs(ui.shop.swapItemOrder, '--fluid-32-32')"
 				>
-				<span class="sr-only">Swap sort order</span>
+				<span class="sr-only">Swap item order</span>
 			</button>
 		</header>
 		<aside :style="`grid-row: 2 / span ${Object.keys(groupedByEpicness).length}`">
@@ -218,6 +218,10 @@ defineExpose({
 	@apply object-none bg-no-repeat;
 	object-position: var(--txt-width) var(--txt-height);
 	background-position: var(--txt-uv-start-x) var(--txt-uv-start-y);
+	margin: calc(-0.5 * (var(--txt-width) - var(--target-size, var(--txt-width))))
+		calc(-0.5 * (var(--txt-height) - var(--target-size, var(--txt-width))));
+	scale: calc(var(--target-size, var(--txt-width)) / var(--txt-width))
+		calc(var(--target-size, var(--txt-height)) / var(--txt-height));
 }
 
 #item-shop-stat-filters {

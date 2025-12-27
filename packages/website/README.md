@@ -31,9 +31,9 @@ bun test
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] champ select dialog
 - [ ] item shop dialog
-  - [ ] sorting
+  - [x] sorting
   - [ ] searching
-  - [ ] stat filters
+  - [x] stat filters
   - [ ] item hover tooltip
 - [ ] item groups, only one from group
 - [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues` and map overrides `DataValuesModeOverride`

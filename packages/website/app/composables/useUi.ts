@@ -4,7 +4,13 @@ export function useUi() {
 	return data satisfies IUiData;
 }
 
-export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture): { src: string; width: number; height: number; style: string; ['data-sprite-image']: string } {
+export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: string): {
+	src: string;
+	width: number;
+	height: number;
+	style: string;
+	['data-sprite-image']: string;
+} {
 	const { minorVersion } = usePatchVersion();
 	const width = endX! - startX!;
 	const height = endY! - startY!;
@@ -13,7 +19,7 @@ export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [sta
 		src,
 		'width': resWidth,
 		'height': resHeight,
-		'style': `background-image: url(${src}); background-size: ${resWidth}px ${resHeight}px; width: ${endX! - startX!}px; height: ${endY! - startY!}px; --txt-width: ${width}px; --txt-height: ${height}px; --txt-uv-start-x: -${startX}px; --txt-uv-start-y: -${startY}px`,
+		'style': `background-image: url(${src}); background-size: ${resWidth}px ${resHeight}px; width: ${endX! - startX!}px; height: ${endY! - startY!}px; --txt-width: ${width}px; --txt-height: ${height}px; --txt-uv-start-x: -${startX}px; --txt-uv-start-y: -${startY}px; --target-size: var(${targetSize})`,
 		'data-sprite-image': '',
 	};
 }
@@ -92,6 +98,6 @@ interface IUiData {
 		categories: Record<IItemCategory | 'all', ITexture>;
 		stats: Partial<Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>>;
 		clearFilters: ITexture;
-		swapSortOrder: ITexture;
+		swapItemOrder: ITexture;
 	};
 }
