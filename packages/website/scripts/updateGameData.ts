@@ -134,7 +134,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 						&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
 				})
 				.map(([itemId, itemData]) => {
-					const { name, stats, gold, image, maps: { 11: sr, 12: ha }, tags } = itemData as any;
+					const { name, stats, gold, image, into, from, maps: { 11: sr, 12: ha }, tags } = itemData as any;
 
 					let mapMask = 0;
 					if (sr) {
@@ -151,11 +151,13 @@ if (!itemData || itemData?.version !== latestVersion) {
 						gold,
 						image,
 						mapMask,
+						into: into?.filter((id: string) => id.length <= 4),
+						from: from?.filter((id: string) => id.length <= 4),
 						...(tags.includes('Boots') ? { isBoots: true } : undefined),
 						...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
 					}];
 				}),
-		) as NonNullable<typeof itemData>['data'],
+		) as unknown as NonNullable<typeof itemData>['data'],
 	};
 
 	const moreItemData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`).then(r => r.json());

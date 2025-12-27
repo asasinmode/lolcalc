@@ -14,6 +14,7 @@ const selectedRole = ref<IChampionRole>();
 const computedChampions = computed(() => {
 	const splitSearch = search.value
 		.toLocaleLowerCase()
+		.replaceAll(/[^a-z]/g, '')
 		.split(' ')
 		.filter(v => v);
 

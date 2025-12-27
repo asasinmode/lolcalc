@@ -23,6 +23,17 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3005",
+				"3047",
+				"3006",
+				"3009",
+				"3010",
+				"3020",
+				"3111",
+				"3117",
+				"3158"
+			],
 			"isBoots": true,
 			"categories": {
 				"support": true
@@ -50,6 +61,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3114",
+				"3012",
+				"4642"
+			],
 			"categories": {
 				"support": true
 			}
@@ -76,6 +92,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3109",
+				"3211",
+				"3801"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -102,6 +123,24 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"4637",
+				"3084",
+				"2502",
+				"3039",
+				"3083",
+				"3116",
+				"3119",
+				"3143",
+				"3748",
+				"6665",
+				"6609",
+				"6667",
+				"8001"
+			],
+			"from": [
+				"1028"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -131,6 +170,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3031",
+				"3086",
+				"6670",
+				"3033",
+				"3039",
+				"3508",
+				"3095",
+				"6676"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -157,6 +206,18 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"4637",
+				"4628",
+				"3135",
+				"3115",
+				"3100",
+				"3116",
+				"3118",
+				"3165",
+				"6621",
+				"6657"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -183,6 +244,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3024",
+				"3802",
+				"3803"
+			],
 			"categories": {
 				"mage": true,
 				"tank": true
@@ -210,6 +276,30 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3742",
+				"1011",
+				"2021",
+				"3012",
+				"3147",
+				"3023",
+				"3044",
+				"3053",
+				"3066",
+				"3067",
+				"3075",
+				"3211",
+				"3152",
+				"3161",
+				"3801",
+				"3803",
+				"4401",
+				"4635",
+				"6035",
+				"6610",
+				"6660",
+				"6662"
+			],
 			"categories": {
 				"fighter": true,
 				"tank": true,
@@ -241,6 +331,21 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2421",
+				"2420",
+				"1031",
+				"2019",
+				"3193",
+				"3047",
+				"3024",
+				"3050",
+				"3023",
+				"3076",
+				"3082",
+				"3105",
+				"3190"
+			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -272,6 +377,18 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3742",
+				"3068",
+				"3109",
+				"3002",
+				"3075",
+				"6665",
+				"6662"
+			],
+			"from": [
+				"1029"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -300,6 +417,19 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"1057",
+				"3140",
+				"3193",
+				"3050",
+				"3001",
+				"3155",
+				"3211",
+				"3105",
+				"3111",
+				"3190",
+				"4632"
+			],
 			"categories": {
 				"tank": true,
 				"mage": true,
@@ -331,6 +461,30 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"1053",
+				"6701",
+				"2015",
+				"2019",
+				"2021",
+				"3077",
+				"6670",
+				"3133",
+				"3142",
+				"3004",
+				"3032",
+				"3035",
+				"3044",
+				"3051",
+				"3155",
+				"4003",
+				"6690",
+				"3123",
+				"3134",
+				"6699",
+				"6671",
+				"6692"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -359,6 +513,28 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3071",
+				"6333",
+				"3031",
+				"3153",
+				"6701",
+				"2020",
+				"3053",
+				"3508",
+				"3072",
+				"3087",
+				"3124",
+				"3181",
+				"3139",
+				"3161",
+				"6029",
+				"6035",
+				"6673",
+				"6676",
+				"6692",
+				"6695"
+			],
 			"categories": {
 				"marksman": true,
 				"fighter": true,
@@ -387,6 +563,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3031",
+				"3146",
+				"3026",
+				"3032",
+				"3072",
+				"3095",
+				"4403",
+				"6671"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -415,6 +601,19 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"1043",
+				"3086",
+				"3006",
+				"3046",
+				"3051",
+				"3073",
+				"3131",
+				"3144",
+				"6631",
+				"6675",
+				"6677"
+			],
 			"categories": {
 				"marksman": true,
 				"fighter": true,
@@ -443,6 +642,17 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3153",
+				"3115",
+				"6672",
+				"3091",
+				"3124",
+				"3302"
+			],
+			"from": [
+				"1042"
+			],
 			"isOnHit": true,
 			"epicness": 4,
 			"categories": {
@@ -472,6 +682,26 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2421",
+				"2420",
+				"3145",
+				"4637",
+				"3916",
+				"6656",
+				"3113",
+				"3147",
+				"3802",
+				"2508",
+				"3108",
+				"3116",
+				"3124",
+				"4630",
+				"4635",
+				"4632",
+				"4642",
+				"4644"
+			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -500,6 +730,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3153",
+				"3072",
+				"3074",
+				"3139",
+				"4403"
+			],
+			"from": [
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"fighter": true,
@@ -618,6 +858,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3091",
+				"2504",
+				"6665",
+				"4401",
+				"8020"
+			],
+			"from": [
+				"1033"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -647,6 +897,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3157",
+				"3146",
+				"3102",
+				"3089",
+				"3128",
+				"4403",
+				"4645"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -674,6 +933,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"into": [
+				"3041"
+			],
 			"epicness": 1,
 			"categories": {
 				"mage": true
@@ -732,6 +994,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"6333",
+				"6700",
+				"3026"
+			],
+			"from": [
+				"1029",
+				"1036",
+				"1029"
+			],
 			"epicness": 4,
 			"categories": {
 				"assassin": true,
@@ -763,6 +1035,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"6698",
+				"6699",
+				"6696"
+			],
+			"from": [
+				"2022",
+				"1037"
+			],
 			"epicness": 4,
 			"categories": {
 				"assassin": true
@@ -791,6 +1072,20 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2501",
+				"3053",
+				"3073",
+				"3814",
+				"3181",
+				"3161",
+				"3748",
+				"6610"
+			],
+			"from": [
+				"1036",
+				"1028"
+			],
 			"epicness": 4,
 			"categories": {
 				"assassin": true,
@@ -820,6 +1115,18 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2020",
+				"3024",
+				"3133",
+				"3802",
+				"3057",
+				"3067",
+				"3108",
+				"3158",
+				"4642",
+				"6660"
+			],
 			"categories": {
 				"assassin": true,
 				"fighter": true,
@@ -884,6 +1191,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3113",
+				"4642"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -912,6 +1223,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3157"
+			],
+			"from": [
+				"1052",
+				"1029",
+				"1052"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true
@@ -939,6 +1258,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3006",
+				"3047",
+				"3020",
+				"3158",
+				"3111",
+				"3117",
+				"3009"
+			],
 			"isBoots": true,
 			"categories": {
 				"support": true
@@ -967,6 +1295,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"2021",
+				"2021"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true,
@@ -998,6 +1330,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3105",
+				"1011"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -1027,6 +1363,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3802",
+				"2508"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -1056,6 +1396,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3211",
+				"1057"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -1083,6 +1427,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2503",
+				"6653"
+			],
+			"from": [
+				"1052"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true
@@ -1112,6 +1463,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3066",
+				"1031"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true,
@@ -1142,6 +1497,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3070",
+				"3802",
+				"3108"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -1171,6 +1531,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3070",
+				"3133",
+				"1036"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -1202,6 +1567,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3172"
+			],
+			"from": [
+				"1001",
+				"1042",
+				"1042"
+			],
 			"isBoots": true,
 			"epicness": 4,
 			"categories": {
@@ -1231,6 +1604,12 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3170"
+			],
+			"from": [
+				"1001"
+			],
 			"isBoots": true,
 			"epicness": 4,
 			"categories": {
@@ -1261,6 +1640,12 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"into": [
+				"3013"
+			],
+			"from": [
+				"1001"
+			],
 			"isBoots": true,
 			"epicness": 4,
 			"categories": {
@@ -1290,6 +1675,12 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3175"
+			],
+			"from": [
+				"1001"
+			],
 			"isBoots": true,
 			"epicness": 4,
 			"categories": {
@@ -1320,6 +1711,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3110"
+			],
+			"from": [
+				"1029",
+				"1027",
+				"2022"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -1349,6 +1748,10 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"2019",
+				"1038"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true,
@@ -1380,6 +1783,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1038",
+				"1037",
+				"1018"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -1408,6 +1816,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1038",
+				"3144",
+				"1036"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -1437,6 +1850,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3123",
+				"3035",
+				"1018"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -1465,6 +1883,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3033",
+				"3036",
+				"6694"
+			],
+			"from": [
+				"1036",
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"marksman": true,
@@ -1495,6 +1922,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3035",
+				"6670"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -1524,6 +1955,11 @@
 				"h": 48
 			},
 			"mapMask": 2,
+			"from": [
+				"1011",
+				"1018",
+				"1011"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true,
@@ -1582,6 +2018,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"1082"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -1642,6 +2081,17 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3071",
+				"3078",
+				"3073",
+				"6630",
+				"6631"
+			],
+			"from": [
+				"1028",
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"fighter": true
@@ -1671,6 +2121,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1042",
+				"3086",
+				"1042"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -1699,6 +2154,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3174"
+			],
+			"from": [
+				"1001",
+				"1029"
+			],
 			"isBoots": true,
 			"epicness": 4,
 			"categories": {
@@ -1732,6 +2194,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"1029",
+				"1033"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true,
@@ -1761,6 +2228,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3078",
+				"6672",
+				"3302"
+			],
+			"from": [
+				"1036",
+				"1042",
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"fighter": true,
@@ -1790,6 +2267,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1037",
+				"2021",
+				"1028"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -1817,6 +2299,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3078",
+				"3100",
+				"6632",
+				"6662"
+			],
+			"from": [
+				"2022"
+			],
 			"isOnHit": true,
 			"epicness": 4,
 			"categories": {
@@ -1851,6 +2342,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3211",
+				"3067"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -1879,6 +2374,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3742",
+				"3002",
+				"3181",
+				"4401"
+			],
+			"from": [
+				"1028"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -1909,6 +2413,31 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3071",
+				"6620",
+				"3050",
+				"3109",
+				"6656",
+				"4629",
+				"6617",
+				"3065",
+				"3107",
+				"3119",
+				"3165",
+				"3190",
+				"3222",
+				"4403",
+				"4644",
+				"6630",
+				"6632",
+				"8001",
+				"8020"
+			],
+			"from": [
+				"1028",
+				"2022"
+			],
 			"epicness": 4,
 			"categories": {
 				"fighter": true,
@@ -1941,6 +2470,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"6660",
+				"1031"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -1968,6 +2501,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3003",
+				"3004",
+				"3119"
+			],
 			"epicness": 1,
 			"categories": {
 				"mage": true,
@@ -2001,6 +2539,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3044",
+				"3067",
+				"1037"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2030,6 +2573,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1038",
+				"1037",
+				"1053"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true,
@@ -2060,6 +2608,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"2021",
+				"3044",
+				"1042"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -2089,6 +2642,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3077",
+				"1053",
+				"3133"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2118,6 +2676,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3076",
+				"1031",
+				"1028"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true,
@@ -2146,6 +2709,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3075"
+			],
+			"from": [
+				"1029",
+				"1029"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -2174,6 +2744,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3074",
+				"3748",
+				"6698",
+				"6631"
+			],
+			"from": [
+				"1036",
+				"1036"
+			],
 			"isOnHit": true,
 			"epicness": 4,
 			"categories": {
@@ -2207,6 +2787,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3057",
+				"3044",
+				"3051"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2235,6 +2820,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3110",
+				"3143"
+			],
+			"from": [
+				"1029",
+				"1029"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -2264,6 +2857,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1011",
+				"1011",
+				"3801"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -2292,6 +2890,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1011",
+				"3801",
+				"1011"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -2321,6 +2924,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3086",
+				"3144"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2351,6 +2958,18 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3094",
+				"3046",
+				"3085",
+				"4403",
+				"6671",
+				"6675"
+			],
+			"from": [
+				"1018",
+				"1042"
+			],
 			"epicness": 4,
 			"categories": {
 				"marksman": true
@@ -2380,6 +2999,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3144",
+				"6690",
+				"1037"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2408,6 +3032,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1058",
+				"1058"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -2437,6 +3065,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1043",
+				"1057",
+				"1043"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2468,6 +3101,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3086",
+				"3144"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -2497,6 +3134,11 @@
 				"h": 48
 			},
 			"mapMask": 2,
+			"from": [
+				"1038",
+				"1018",
+				"3144"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -2526,6 +3168,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3057",
+				"3113",
+				"1026"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2555,6 +3202,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1058",
+				"4632"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -2584,6 +3235,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3193",
+				"2502",
+				"4403",
+				"6667"
+			],
+			"from": [
+				"1033",
+				"1029"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -2615,6 +3276,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"3114"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -2643,6 +3308,24 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"4633",
+				"4636",
+				"4628",
+				"3115",
+				"4629",
+				"4005",
+				"3003",
+				"6616",
+				"3152",
+				"3128",
+				"3137",
+				"8010"
+			],
+			"from": [
+				"1052",
+				"2022"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true,
@@ -2674,6 +3357,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"1031",
+				"1006"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true,
@@ -2704,6 +3392,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3082",
+				"3024"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true,
@@ -2734,6 +3426,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3173"
+			],
+			"from": [
+				"1001",
+				"1033"
+			],
 			"isBoots": true,
 			"epicness": 4,
 			"categories": {
@@ -2795,6 +3494,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2065",
+				"4629",
+				"3100",
+				"3504",
+				"4646"
+			],
+			"from": [
+				"1052"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true,
@@ -2824,6 +3533,17 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3011",
+				"6616",
+				"3107",
+				"3222",
+				"3504",
+				"6621"
+			],
+			"from": [
+				"1004"
+			],
 			"epicness": 4,
 			"categories": {
 				"support": true
@@ -2853,6 +3573,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1043",
+				"1026",
+				"3108"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -2883,6 +3608,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1026",
+				"1011",
+				"1052"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -2912,6 +3642,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3802",
+				"1026"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -2941,6 +3675,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3070",
+				"1011",
+				"3067"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -2997,6 +3736,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3033",
+				"6609"
+			],
+			"from": [
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"fighter": true,
@@ -3028,6 +3774,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1052",
+				"1043",
+				"1037"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -3057,6 +3808,29 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"6333",
+				"3156",
+				"6693",
+				"6697",
+				"4402",
+				"3004",
+				"3508",
+				"3074",
+				"3179",
+				"6691",
+				"6609",
+				"6610",
+				"6632",
+				"6692",
+				"6694",
+				"6696"
+			],
+			"from": [
+				"1036",
+				"2022",
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"fighter": true,
@@ -3087,6 +3861,23 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3142",
+				"6701",
+				"6693",
+				"6697",
+				"4004",
+				"3814",
+				"3131",
+				"3179",
+				"6691",
+				"6676",
+				"6695"
+			],
+			"from": [
+				"1036",
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"assassin": true,
@@ -3116,6 +3907,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"4630",
+				"1026"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -3145,6 +3940,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"4630",
+				"3108",
+				"3108"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -3174,6 +3974,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3140",
+				"1037",
+				"1053"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true,
@@ -3202,6 +4007,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3139",
+				"6035"
+			],
+			"from": [
+				"1033"
+			],
 			"epicness": 4,
 			"categories": {
 				"marksman": true
@@ -3231,6 +4043,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3134",
+				"6690",
+				"1036"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -3259,6 +4076,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3082",
+				"1011"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -3286,6 +4107,17 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3094",
+				"3032",
+				"3085",
+				"3087",
+				"3095"
+			],
+			"from": [
+				"1042",
+				"1042"
+			],
 			"epicness": 4,
 			"categories": {
 				"marksman": true
@@ -3313,6 +4145,17 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"4636",
+				"6655",
+				"3152",
+				"4645",
+				"4646"
+			],
+			"from": [
+				"1052",
+				"1052"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true
@@ -3342,6 +4185,10 @@
 				"h": 48
 			},
 			"mapMask": 2,
+			"from": [
+				"1038",
+				"1058"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true,
@@ -3371,6 +4218,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"4633",
+				"8010",
+				"6653"
+			],
+			"from": [
+				"1052",
+				"1028"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true
@@ -3400,6 +4256,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3145",
+				"3108",
+				"1028"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -3429,6 +4290,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1053",
+				"1043",
+				"1037"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -3459,6 +4325,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3156"
+			],
+			"from": [
+				"1036",
+				"1033",
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"fighter": true,
@@ -3490,6 +4364,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3155",
+				"3133"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true,
@@ -3520,6 +4398,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1058",
+				"2420"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -3548,6 +4430,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3171"
+			],
+			"from": [
+				"1001",
+				"2022"
+			],
 			"isBoots": true,
 			"epicness": 4,
 			"categories": {
@@ -3579,6 +4468,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1037",
+				"2021",
+				"1028"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -3608,6 +4502,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3916",
+				"1026",
+				"3067"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true,
@@ -3636,6 +4535,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3009"
+			],
 			"isBoots": true,
 			"epicness": 7
 		},
@@ -3662,6 +4564,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3158"
+			],
 			"isBoots": true,
 			"epicness": 7
 		},
@@ -3688,6 +4593,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3006"
+			],
 			"epicness": 7
 		},
 		"3173": {
@@ -3714,6 +4622,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3111"
+			],
 			"isBoots": true,
 			"epicness": 7
 		},
@@ -3740,6 +4651,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3047"
+			],
 			"isBoots": true,
 			"epicness": 7
 		},
@@ -3767,6 +4681,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3020"
+			],
 			"isBoots": true,
 			"epicness": 7
 		},
@@ -3792,6 +4709,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3013"
+			],
 			"isBoots": true,
 			"epicness": 7
 		},
@@ -3851,6 +4771,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3134",
+				"3133"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -3880,6 +4804,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"2021",
+				"3066",
+				"1037"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -3941,6 +4870,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"1029",
+				"1033"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true,
@@ -3971,6 +4905,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2504",
+				"3065",
+				"6664"
+			],
+			"from": [
+				"1028",
+				"1033",
+				"1006"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true
@@ -4001,6 +4945,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"3114"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -4029,6 +4977,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3051",
+				"1043"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -4061,6 +5013,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3113",
+				"3114"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -4090,6 +5046,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1037",
+				"3133",
+				"1018"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -4120,6 +5081,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3066",
+				"1028",
+				"1031"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true,
@@ -4149,6 +5115,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3077",
+				"2021",
+				"1011"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -4179,6 +5150,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3084",
+				"3083"
+			],
+			"from": [
+				"1028",
+				"1006"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true
@@ -4208,6 +5187,19 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"6656",
+				"3003",
+				"6655",
+				"2503",
+				"3118",
+				"4644"
+			],
+			"from": [
+				"1052",
+				"1027",
+				"2022"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true
@@ -4236,6 +5228,15 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"4402",
+				"6657"
+			],
+			"from": [
+				"1028",
+				"1028",
+				"1027"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true,
@@ -4266,6 +5267,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3134",
+				"2021"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -4325,6 +5330,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3867"
+			],
 			"epicness": 7,
 			"categories": {
 				"support": true
@@ -4354,6 +5362,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3867"
+			],
 			"epicness": 7,
 			"categories": {
 				"support": true
@@ -4383,6 +5394,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3867"
+			],
 			"epicness": 7,
 			"categories": {
 				"support": true
@@ -4412,6 +5426,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3867"
+			],
 			"epicness": 7,
 			"categories": {
 				"support": true
@@ -4441,6 +5458,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3867"
+			],
 			"epicness": 7,
 			"categories": {
 				"support": true
@@ -4468,6 +5488,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3011",
+				"3165"
+			],
+			"from": [
+				"1052"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true,
@@ -4497,6 +5524,13 @@
 				"h": 48
 			},
 			"mapMask": 2,
+			"into": [
+				"4004"
+			],
+			"from": [
+				"6690",
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"assassin": true
@@ -4526,6 +5560,10 @@
 				"h": 48
 			},
 			"mapMask": 2,
+			"from": [
+				"4003",
+				"3134"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -4555,6 +5593,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3108",
+				"4642"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -4584,6 +5626,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1057",
+				"1028",
+				"3066"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -4612,6 +5659,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3108",
+				"3108",
+				"1026"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -4642,6 +5694,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"3113",
+				"3108"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -4670,6 +5727,13 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3135",
+				"3137"
+			],
+			"from": [
+				"1052"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true
@@ -4698,6 +5762,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3102"
+			],
+			"from": [
+				"1052",
+				"1033",
+				"1052"
+			],
 			"epicness": 4,
 			"categories": {
 				"mage": true
@@ -4727,6 +5799,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3147",
+				"3108"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -4757,6 +5833,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"into": [
+				"4643"
+			],
 			"epicness": 4,
 			"categories": {
 				"support": true
@@ -4786,6 +5865,17 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"2065",
+				"6620",
+				"4005",
+				"6617"
+			],
+			"from": [
+				"1004",
+				"1052",
+				"2022"
+			],
 			"epicness": 4,
 			"categories": {
 				"support": true
@@ -4816,6 +5906,9 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"4638"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -4844,6 +5937,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3145",
+				"1058"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -4873,6 +5970,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3145",
+				"3113"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -4902,6 +6003,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"2019",
+				"1037",
+				"3133"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -4931,6 +6037,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3123",
+				"1011",
+				"3133"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true,
@@ -4961,6 +6072,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"2021",
+				"3133",
+				"1028"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -4991,6 +6107,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3108",
+				"3114"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -5021,6 +6141,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"4642"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -5051,6 +6175,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"4642"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -5080,6 +6208,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1026",
+				"3114",
+				"3114"
+			],
 			"epicness": 5,
 			"categories": {
 				"support": true
@@ -5109,6 +6242,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3077",
+				"3044",
+				"1042"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -5137,6 +6275,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3147",
+				"2508"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -5166,6 +6308,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3802",
+				"3145"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -5195,6 +6341,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1026",
+				"3803"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -5223,6 +6373,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3068",
+				"6664"
+			],
+			"from": [
+				"1028",
+				"2022"
+			],
 			"epicness": 4,
 			"categories": {
 				"tank": true
@@ -5252,6 +6410,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3057",
+				"1028",
+				"1031"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -5284,6 +6447,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"6660",
+				"3211"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -5313,6 +6480,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1011",
+				"1031",
+				"1057"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true
@@ -5341,6 +6513,14 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"3036",
+				"6673"
+			],
+			"from": [
+				"1036",
+				"1018"
+			],
 			"epicness": 4,
 			"categories": {
 				"marksman": true
@@ -5370,6 +6550,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"6690",
+				"3051",
+				"1043"
+			],
 			"isOnHit": true,
 			"epicness": 5,
 			"categories": {
@@ -5399,6 +6584,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1037",
+				"6670"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -5428,6 +6617,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1042",
+				"3086",
+				"1042"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true
@@ -5457,6 +6651,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1037",
+				"3134",
+				"1018"
+			],
 			"epicness": 5,
 			"categories": {
 				"marksman": true,
@@ -5486,6 +6685,16 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"into": [
+				"6700",
+				"6672",
+				"3142",
+				"4003",
+				"3087"
+			],
+			"from": [
+				"1036"
+			],
 			"epicness": 4,
 			"categories": {
 				"assassin": true,
@@ -5516,6 +6725,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3133",
+				"1037",
+				"1036"
+			],
 			"epicness": 5,
 			"categories": {
 				"fighter": true
@@ -5545,6 +6759,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3133",
+				"3035"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -5573,6 +6791,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3134",
+				"1037"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -5602,6 +6824,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"2020",
+				"3133"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -5631,6 +6857,10 @@
 				"h": 48
 			},
 			"mapMask": 1,
+			"from": [
+				"3134",
+				"3133"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -5660,6 +6890,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3077",
+				"2020"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -5689,6 +6923,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"2020",
+				"1036",
+				"1036"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -5717,6 +6956,11 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"1037",
+				"3134",
+				"1036"
+			],
 			"epicness": 5,
 			"categories": {
 				"assassin": true
@@ -5746,6 +6990,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3147",
+				"3108"
+			],
 			"epicness": 5,
 			"categories": {
 				"mage": true
@@ -5775,6 +7023,10 @@
 				"h": 48
 			},
 			"mapMask": 3,
+			"from": [
+				"3067",
+				"1057"
+			],
 			"epicness": 5,
 			"categories": {
 				"tank": true,

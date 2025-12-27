@@ -30,6 +30,8 @@ export interface IItem {
 		h: number;
 	};
 	mapMask: number;
+	into?: string[];
+	from?: string[];
 	epicness?: number;
 	categories?: Partial<Record<IItemCategory, boolean>>;
 	/** has 'Boots' in `tags` */
