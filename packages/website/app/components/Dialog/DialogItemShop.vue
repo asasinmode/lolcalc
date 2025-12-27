@@ -75,7 +75,7 @@ const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITE
 
 	return [filter, {
 		name,
-		texture: textureBgImageAttrs(texture),
+		texture: textureBgImageAttrs(texture, 18),
 		selectedUvStartX,
 		selectedUvStartY,
 	}];
@@ -101,8 +101,8 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-item-shop" ref="vDialog" class="bg-cyan-950 auto-rows-min grid-cols-[auto_1fr] max-h-[80vh] shadow-lg of-y-auto [&[open]]-grid" @close="closeCleanup">
-		<header class="bg-inherit grid col-span-full grid-cols-[1fr_auto_auto] grid-rows-[min-content_min-content] items-center top-0 sticky z-10">
+	<VDialog id="dialog-item-shop" ref="vDialog" class="bg-cyan-950 grid-cols-[auto_1fr] grid-rows-[auto_1fr] max-h-[80vh] shadow-lg of-y-auto [&[open]]-grid" @close="closeCleanup">
+		<header class="bg-inherit grid col-span-full grid-cols-[1fr_auto_auto] grid-rows-[min-content_min-content] items-center">
 			<form method="dialog" class="col-start-3 row-start-1">
 				<button value="cancel">
 					close
@@ -129,7 +129,7 @@ defineExpose({
 			>
 				<template #default="{ option: { category, texture }, isSelected }">
 					<img
-						v-bind="textureBgImageAttrs(texture)"
+						v-bind="textureBgImageAttrs(texture, 20)"
 						:class="{ 'bg-pink': isSelected }"
 					>
 					<span class="sr-only">{{ category }}</span>
@@ -155,17 +155,13 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
-				<img
-					v-bind="textureBgImageAttrs(ui.shop.swapItemOrder, '--fluid-32-32')"
-				>
+				<img v-bind="textureBgImageAttrs(ui.shop.swapItemOrder, 32)">
 				<span class="sr-only">Swap item order</span>
 			</button>
 		</header>
-		<aside :style="`grid-row: 2 / span ${Object.keys(groupedByEpicness).length}`">
+		<aside>
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
-				<img
-					v-bind="textureBgImageAttrs(ui.shop.clearFilters)"
-				>
+				<img v-bind="textureBgImageAttrs(ui.shop.clearFilters, 28)">
 				<span class="sr-only">Clear stat filters</span>
 			</button>
 			<fieldset id="item-shop-stat-filters">
@@ -180,48 +176,44 @@ defineExpose({
 							v-bind="texture"
 							:style="`--txt-selected-uv-start-x: -${selectedUvStartX}px; --txt-selected-uv-start-y: -${selectedUvStartY}px`"
 						>
-
 					</label>
 				</template>
 			</fieldset>
 		</aside>
-		<section
-			v-for="[epicness, epicnessName] in computedEpicnesses"
-			:key="epicness"
-			class="grid auto-rows-min grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))]"
-		>
-			<h2 class="col-span-full">
-				{{ epicnessName }}
-			</h2>
-			<button
-				v-for="item in groupedByEpicness[epicness]"
-				:key="item.id"
-				class="leading-tight text-center min-w-0 block hyphens-auto"
-				@click="$emit('selectItem', item)"
+		<div class="overflow-y-auto">
+			<section
+				v-for="[epicness, epicnessName] in computedEpicnesses"
+				:key="epicness"
+				class="grid auto-rows-min grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))]"
 			>
-				<img
-					:title="item.name"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`"
-					class="w-full"
-					width="64"
-					height="64"
-					loading="lazy"
+				<h2 class="col-span-full">
+					{{ epicnessName }}
+				</h2>
+				<button
+					v-for="item in groupedByEpicness[epicness]"
+					:key="item.id"
+					class="leading-tight text-center min-w-0 block hyphens-auto"
+					@click="$emit('selectItem', item)"
 				>
-				{{ item.gold.total }}
-			</button>
-		</section>
+					<img
+						:title="item.name"
+						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`"
+						class="w-full"
+						width="64"
+						height="64"
+						loading="lazy"
+					>
+					{{ item.gold.total }}
+				</button>
+			</section>
+		</div>
 	</VDialog>
 </template>
 
 <style>
 [data-sprite-image] {
 	@apply object-none bg-no-repeat;
-	object-position: var(--txt-width) var(--txt-height);
-	background-position: var(--txt-uv-start-x) var(--txt-uv-start-y);
-	margin: calc(-0.5 * (var(--txt-width) - var(--target-size, var(--txt-width))))
-		calc(-0.5 * (var(--txt-height) - var(--target-size, var(--txt-width))));
-	scale: calc(var(--target-size, var(--txt-width)) / var(--txt-width))
-		calc(var(--target-size, var(--txt-height)) / var(--txt-height));
+	background-position: calc(var(--txt-uv-start-x) * var(--txt-scale)) calc(var(--txt-uv-start-y) * var(--txt-scale));
 }
 
 #item-shop-stat-filters {
@@ -235,7 +227,8 @@ defineExpose({
 	}
 
 	input {
-		&:disabled + label {
+		&:disabled + label,
+		&:checked + label {
 			@apply hover:brightness-100;
 		}
 
