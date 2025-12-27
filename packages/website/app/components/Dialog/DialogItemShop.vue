@@ -211,42 +211,45 @@ defineExpose({
 </template>
 
 <style>
-[data-sprite-image] {
-	@apply object-none bg-no-repeat;
-	background-position: calc(var(--txt-uv-start-x) * var(--txt-scale)) calc(var(--txt-uv-start-y) * var(--txt-scale));
-}
-
-#item-shop-stat-filters {
-	label {
-		@apply cursor-pointer hover:brightness-200;
+@layer components {
+	[data-sprite-image] {
+		@apply object-none bg-no-repeat;
+		background-position: calc(var(--txt-uv-start-x) * var(--txt-scale)) calc(var(--txt-uv-start-y) * var(--txt-scale));
 	}
 
-	input,
-	label > span {
-		@apply sr-only;
-	}
-
-	input {
-		&:disabled + label,
-		&:checked + label {
-			@apply hover:brightness-100;
+	#item-shop-stat-filters {
+		label {
+			@apply cursor-pointer hover:brightness-200;
 		}
 
-		&:focus-visible + label {
-			@apply brightness-200;
-			outline: auto;
+		input,
+		label > span {
+			@apply sr-only;
 		}
 
-		&:disabled + label {
-			@apply cursor-default;
-
-			img {
-				@apply brightness-50;
+		input {
+			&:disabled + label,
+			&:checked + label {
+				@apply hover:brightness-100;
 			}
-		}
 
-		&:checked + label img {
-			background-position: var(--txt-selected-uv-start-x) var(--txt-selected-uv-start-y);
+			&:focus-visible + label {
+				@apply brightness-200;
+				outline: auto;
+			}
+
+			&:disabled + label {
+				@apply cursor-default;
+
+				img {
+					@apply brightness-50;
+				}
+			}
+
+			&:checked + label img {
+				--txt-uv-start-x: var(--txt-selected-uv-start-x) !important;
+				--txt-uv-start-y: var(--txt-selected-uv-start-y) !important;
+			}
 		}
 	}
 }

@@ -102,11 +102,13 @@ defineExpose({
 </template>
 
 <style>
-#dialog-champion-select > button img {
-	object-fit: none;
-	object-position: 100px 100px;
-	background-repeat: no-repeat;
-	background-size: 108%;
-	background-position: center;
+@layer components {
+	#dialog-champion-select > button img {
+		object-fit: none;
+		object-position: 100px 100px;
+		background-repeat: no-repeat;
+		background-size: 108%;
+		background-position: center;
+	}
 }
 </style>
