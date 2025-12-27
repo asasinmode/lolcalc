@@ -70,7 +70,7 @@ defineExpose({
 					type="text"
 					placeholder=" "
 					class="py-0.5 pl-8 pr-2 b bg-black"
-					:data-value="search"
+					:data-empty="!search"
 					@update:model-value="selectedRole = undefined"
 				>
 				<label for="item-shop-search" class="px-2 py-0.5 b b-transparent">

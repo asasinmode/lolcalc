@@ -93,7 +93,7 @@
 			@apply absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis;
 		}
 
-		input:is(:focus, :focus-visible, :not([data-value=''])) + label span:nth-child(2) {
+		input:is(:focus, :focus-visible, :not([data-empty='true'])) + label span:nth-child(2) {
 			opacity: 0;
 		}
 	}

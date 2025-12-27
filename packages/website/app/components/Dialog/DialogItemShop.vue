@@ -116,7 +116,7 @@ defineExpose({
 					type="text"
 					placeholder=" "
 					class="py-0.5 pl-8 pr-2 b bg-black"
-					:data-value="search"
+					:data-empty="!search"
 				>
 				<label for="item-shop-search" class="px-2 py-0.5 b b-transparent">
 					<Icon name="ph:magnifying-glass-bold" class="mr-2 size-4" />
