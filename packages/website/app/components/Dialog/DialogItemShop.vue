@@ -1,6 +1,6 @@
 <script setup lang="ts">
-defineEmits<{
-	selectItem: [item: IItem];
+const emit = defineEmits<{
+	buyItem: [item: IItem];
 }>();
 
 type IAllItemCategory = IItemCategory | 'all';
@@ -12,7 +12,6 @@ const ui = useUi();
 
 const vDialog = useTemplateRef('vDialog');
 const mapMask = ref<number>(maps.sr.mask);
-const selectedItem = shallowRef<IItem>();
 const selectedCategory = ref<IAllItemCategory>('all');
 const sortOrderSwapped = ref(false);
 const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(
@@ -72,7 +71,7 @@ const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITE
 		selectedUvStartX,
 		selectedUvStartY,
 	}];
-})) as unknown as Record<IItemShopStatFilter, { name: string; texture: ITexture; selectedUvStartX: number; selectedUvStartY: number }>);
+})) as unknown as Record<IItemShopStatFilter, { name: string; texture: ReturnType<typeof textureBgImageAttrs>; selectedUvStartX: number; selectedUvStartY: number }>);
 
 const computedEpicnesses = computed(() => (sortOrderSwapped.value
 	? ITEM_EPICNESSES.toReversed()
@@ -84,10 +83,26 @@ function clearStatFilters() {
 	}
 }
 
+const selectedItem = shallowRef<IItem>();
+const displayedItem = shallowRef<IItem>();
+
+function selectItem(item: IItem, overwriteDisplayed: boolean) {
+	selectedItem.value = item;
+	if (overwriteDisplayed) {
+		displayedItem.value = item;
+	}
+}
+
+function buyItem(item: IItem) {
+	emit('buyItem', item);
+}
+
 const search = ref('');
-const searchListbox = useTemplateRef('searchListbox');
+const searchInput = useTemplateRef('searchInput');
+const searchResultsContainer = useTemplateRef('searchResultsContainer');
 const searchExpanded = ref(false);
 const searchCursoredOverIndex = ref<number>();
+const searchSelectedIndex = ref<number>();
 
 const searchResults = computed(() => {
 	if (!search.value) {
@@ -98,14 +113,95 @@ const searchResults = computed(() => {
 	return sortedByPriceForMap.value.filter(item => splitSearch.every(word => item.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word)));
 });
 
+const searchCursoredOverItem = computed(() => searchCursoredOverIndex.value !== undefined ? searchResults.value[searchCursoredOverIndex.value] : undefined);
+
 function closeSearch() {
 	search.value = '';
 	searchExpanded.value = false;
-	searchCursoredOverIndex.value = 0;
+	searchCursoredOverIndex.value = undefined;
+	searchSelectedIndex.value = undefined;
 }
 
-function closeCleanup() {
-	search.value = '';
+function selectSearchResult(event: MouseEvent, index: number) {
+	const item = searchResults.value[index]!;
+	if (event.button === 2) {
+		selectedItem.value = item;
+		searchCursoredOverIndex.value = undefined;
+		buyItem(item);
+		closeSearch();
+		searchInput.value?.blur();
+	} else {
+		searchCursoredOverIndex.value = index;
+		searchSelectedIndex.value = index;
+		displayedItem.value = item;
+		selectedItem.value = item;
+	}
+}
+
+function searchCursorOver(index?: number) {
+	searchCursoredOverIndex.value = index;
+}
+
+function closeSearchIfOutside(event: FocusEvent) {
+	const target = event.relatedTarget as HTMLElement | null;
+	if (!target || !searchResultsContainer.value?.contains(target)) {
+		closeSearch();
+	}
+}
+
+function onSearchKeydown(event: KeyboardEvent) {
+	const resultsLength = searchResults.value.length;
+	switch (event.key) {
+		case 'Enter': {
+			if (searchCursoredOverItem.value) {
+				buyItem(searchCursoredOverItem.value);
+				closeSearch();
+			} else {
+				closeSearch();
+			}
+			break;
+		}
+		case 'Escape': {
+			if (search.value) {
+				search.value = '';
+				searchCursoredOverIndex.value = undefined;
+			} else {
+				closeSearch();
+			}
+			break;
+		}
+		case 'Down':
+		case 'ArrowDown': {
+			searchExpanded.value = true;
+			if (resultsLength) {
+				searchCursoredOverIndex.value = (
+					(searchCursoredOverIndex.value === undefined ? -1 : searchCursoredOverIndex.value) + 1
+				) % resultsLength;
+				scrollSearchResultIntoView(searchCursoredOverIndex.value);
+			}
+			break;
+		}
+		case 'Up':
+		case 'ArrowUp': {
+			searchExpanded.value = true;
+			if (resultsLength) {
+				searchCursoredOverIndex.value = (
+					(searchCursoredOverIndex.value === undefined ? (resultsLength + 1) : searchCursoredOverIndex.value) - 1 + resultsLength
+				) % resultsLength;
+				scrollSearchResultIntoView(searchCursoredOverIndex.value);
+			}
+			break;
+		}
+		default: {
+			searchExpanded.value = true;
+			return;
+		}
+	}
+	event.preventDefault();
+}
+
+function scrollSearchResultIntoView(index: number) {
+	document.getElementById(`item-shop-search-result-${index}`)?.scrollIntoView({ block: 'nearest' });
 }
 
 defineExpose({
@@ -114,30 +210,41 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-item-shop" ref="vDialog" class="bg-cyan-950 max-h-[80vh] shadow-lg relative of-visible [&[open]]-grid" @close="closeCleanup">
+	<VDialog
+		id="dialog-item-shop"
+		ref="vDialog"
+		class="bg-cyan-950 max-h-[80vh] w-[min(60vw,64rem)] shadow-lg relative of-visible [&[open]]-grid"
+		@close="closeSearch"
+		@contextmenu.prevent=""
+	>
 		<header style="grid-area: header;" class="bg-inherit grid col-span-2 auto-rows-min grid-cols-[1fr_auto_auto] items-center">
 			<h1 class="col-span-full">
 				Item shop
 			</h1>
-			<form method="dialog" class="right-0 top-0 absolute">
-				<button value="cancel">
-					close
+			<form method="dialog" class="right-0 top-0 absolute" autofocus>
+				<button value="cancel" title="Close">
+					<Icon name="ph:x" class="size-6" />
+					<span class="sr-only">
+						close
+					</span>
 				</button>
 			</form>
-			<div class="col-span-full" data-inline-search-label="">
+			<div class="col-span-full" data-inline-search-label="" @focusout="closeSearchIfOutside">
 				<input
 					id="item-shop-search"
+					ref="searchInput"
 					v-model="search"
-					autofocus
 					type="text"
-					class="py-0.5 pl-8 pr-2 b bg-black"
+					class="py-0.5 pl-8 pr-2 b bg-black w-full"
 					role="combobox"
 					autocomplete="list"
 					:aria-expanded="searchExpanded"
 					aria-controls="item-shop-search-listbox"
+					:aria-activedescendant="searchCursoredOverIndex !== undefined ? `item-shop-search-result-${searchCursoredOverIndex}` : undefined"
 					:data-empty="!search"
 					@focus="searchExpanded = true"
-					@focusout="closeSearch"
+					@update:model-value="searchCursorOver(searchResults.length ? 0 : undefined)"
+					@keydown="onSearchKeydown"
 				>
 				<label id="item-shop-search-lbl" for="item-shop-search" class="px-2 py-0.5 b b-transparent">
 					<Icon name="ph:magnifying-glass-bold" class="mr-2 size-4" />
@@ -147,25 +254,69 @@ defineExpose({
 				</label>
 				<div
 					v-show="searchExpanded"
-					class="bg-blue-950 absolute"
+					ref="searchResultsContainer"
+					class="bg-blue-950 grid grid-flow-col grid-cols-[auto_1fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full bottom-0 left-0 absolute"
+					@mousedown.prevent=""
 				>
 					<p id="item-shop-results-lbl">
 						Results
 					</p>
 					<ul
 						id="item-shop-search-listbox"
-						ref="searchListbox"
 						role="listbox"
 						aria-labelledby="item-shop-results-lbl"
-						class="bg-blue-950 absolute"
+						class="bg-blue-950 h-full of-y-auto *:grid *:grid-cols-[auto_1fr] *:grid-rows-2"
 					>
 						<li
-							v-for="item in searchResults"
+							v-for="(item, index) in searchResults"
+							:id="`item-shop-search-result-${index}`"
 							:key="item.id"
+							role="option"
+							class="hover:bg-white/10"
+							:class="{
+								'bg-white/10': searchSelectedIndex === index,
+							}"
+							@mousedown.stop.prevent="selectSearchResult($event, index)"
 						>
+							<img
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`"
+								:alt="`${item.name} icon`"
+								width="64"
+								height="64"
+								:class="{ b: searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false }"
+								class="row-span-full"
+								aria-hidden="true"
+								loading="lazy"
+							>
 							{{ item.name }}
+							<span>{{ item.gold.total }}</span>
 						</li>
 					</ul>
+					<section
+						aria-live="polite"
+						aria-atomic="true"
+						class="bg-pink-950 row-span-full"
+					>
+						<div v-if="searchCursoredOverItem" class="grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2 order-5">
+							<img
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${searchCursoredOverItem.image.full}`"
+								:alt="`${searchCursoredOverItem.name} icon`"
+								width="64"
+								height="64"
+								class="row-span-full"
+								aria-hidden="true"
+								loading="lazy"
+							>
+							{{ searchCursoredOverItem?.name }}
+							<span>{{ searchCursoredOverItem?.gold.total }}</span>
+						</div>
+						<p v-if="searchCursoredOverItem" class="order-6">
+							<template v-for="(statValue, statName) in searchCursoredOverItem.stats" :key="statName">
+								<span>{{ statName }}: {{ statValue }}</span>
+								<br>
+							</template>
+						</p>
+					</section>
 				</div>
 			</div>
 			<VButtonRadiogroup
@@ -199,6 +350,7 @@ defineExpose({
 						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/${option.iconDirUrl}/img/${isSelected ? 'game-select-icon-active' : 'icon-empty'}.png`"
 						:width="isSelected ? 100 : 200"
 						:height="isSelected ? 100 : 200"
+						aria-hidden="true"
 						class="size-5"
 					>
 					<span class="sr-only">{{ option.name }}</span>
@@ -246,8 +398,10 @@ defineExpose({
 					v-for="item in groupedByEpicness[epicness]"
 					:key="item.id"
 					class="leading-tight text-center min-w-0 block hyphens-auto"
-					@click.left="selectedItem = item"
-					@click.right="$emit('selectItem', item)"
+					@mousedown.left="selectItem(item, true)"
+					@mousedown.right="buyItem(item)"
+					@keydown.space="selectItem(item, true)"
+					@keydown.enter="buyItem(item)"
 				>
 					<img
 						:title="item.name"
@@ -256,6 +410,7 @@ defineExpose({
 						class="w-full"
 						width="64"
 						height="64"
+						aria-hidden="true"
 						loading="lazy"
 					>
 					{{ item.gold.total }}
@@ -271,11 +426,13 @@ defineExpose({
 					width="64"
 					height="64"
 					class="row-span-full"
+					aria-hidden="true"
+					loading="lazy"
 				>
 				{{ selectedItem?.name }}
 				<span>{{ selectedItem?.gold.total }}</span>
 			</h2>
-			<button :disabled="!selectedItem" class="order-4" @click="$emit('selectItem', selectedItem!)">
+			<button :disabled="!selectedItem" class="order-4" @click="buyItem(selectedItem!)">
 				Purchase
 			</button>
 			<h3 class="order-1">
@@ -299,6 +456,7 @@ defineExpose({
 		</section>
 		<footer style="grid-area: footer">
 			<button>Sell</button>
+			<button>Undo</button>
 		</footer>
 	</VDialog>
 </template>

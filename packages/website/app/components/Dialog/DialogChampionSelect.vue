@@ -56,6 +56,7 @@ defineExpose({
 				<template #default="{ option: { role }, isSelected }">
 					<img
 						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${role === 'support' ? 'utility' : role}${isSelected ? '' : '-light'}.svg`"
+						aria-hidden="true"
 						width="34"
 						height="34"
 						class="size-5"
@@ -101,6 +102,7 @@ defineExpose({
 					class="b aspect-1"
 					width="128"
 					height="128"
+					aria-hidden="true"
 					loading="lazy"
 				>
 				{{ champion.name }}

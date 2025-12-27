@@ -5,7 +5,7 @@ useSeoMeta({
 });
 
 const champions = useChampions();
-const { version, minorVersion } = usePatchVersion();
+const { version } = usePatchVersion();
 
 const itemShopDialog = useTemplateRef('itemShopDialog');
 const champSelectDialog = useTemplateRef('champSelectDialog');
@@ -76,7 +76,7 @@ const targetDummy = ref<IDamageTarget>({
 			<button @click="itemShopDialog?.open()">
 				item shop
 			</button>
-			<DialogItemShop ref="itemShopDialog" @select-item="addItem" />
+			<DialogItemShop ref="itemShopDialog" @buy-item="addItem" />
 			<button
 				v-for="i in 6"
 				:key="i"

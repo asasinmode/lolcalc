@@ -8,6 +8,7 @@ export function useUi() {
 export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: number): {
 	src: string;
 	style: StyleValue;
+	['aria-hidden']: boolean;
 	['data-sprite-image']: string;
 } {
 	const { minorVersion } = usePatchVersion();
@@ -21,6 +22,7 @@ export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [sta
 
 	return {
 		src,
+		'aria-hidden': true,
 		'data-sprite-image': '',
 		'style': {
 			'background-image': `url(${src})`,
