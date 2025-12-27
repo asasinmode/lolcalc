@@ -83,158 +83,298 @@
 			},
 			"stats": {
 				"attackDamage": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						2,
-						2,
-						20,
-						20
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							2,
+							2,
+							20,
+							20
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							3,
+							72,
+							21
+						]
+					}
 				},
 				"crit": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						5,
-						30,
-						21,
-						46
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							5,
+							30,
+							21,
+							46
+						]
+					},
+					"selected": {
+						"uv": [
+							56,
+							30,
+							72,
+							46
+						]
+					}
 				},
 				"attackSpeed": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						55,
-						21,
-						73
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							55,
+							21,
+							73
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							55,
+							72,
+							73
+						]
+					}
 				},
 				"onHit": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						2,
-						83,
-						23,
-						101
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							2,
+							83,
+							23,
+							101
+						]
+					},
+					"selected": {
+						"uv": [
+							53,
+							83,
+							74,
+							101
+						]
+					}
 				},
 				"armorPen": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						110,
-						21,
-						128
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							110,
+							21,
+							128
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							110,
+							72,
+							128
+						]
+					}
 				},
 				"abilityPower": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						2,
-						138,
-						22,
-						158
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							2,
+							138,
+							22,
+							158
+						]
+					},
+					"selected": {
+						"uv": [
+							53,
+							138,
+							73,
+							158
+						]
+					}
 				},
 				"mana": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						5,
-						168,
-						19,
-						186
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							5,
+							168,
+							19,
+							186
+						]
+					},
+					"selected": {
+						"uv": [
+							56,
+							168,
+							70,
+							186
+						]
+					}
 				},
 				"magicPen": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						195,
-						21,
-						213
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							195,
+							21,
+							213
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							195,
+							72,
+							213
+						]
+					}
 				},
 				"health": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						2,
-						223,
-						22,
-						241
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							2,
+							223,
+							22,
+							241
+						]
+					},
+					"selected": {
+						"uv": [
+							53,
+							223,
+							73,
+							241
+						]
+					}
 				},
 				"magicResists": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						278,
-						21,
-						296
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							278,
+							21,
+							296
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							278,
+							72,
+							296
+						]
+					}
 				},
 				"armor": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						251,
-						21,
-						269
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							251,
+							21,
+							269
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							251,
+							72,
+							269
+						]
+					}
 				},
 				"abilityHaste": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						306,
-						21,
-						324
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							306,
+							21,
+							324
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							306,
+							72,
+							324
+						]
+					}
 				},
 				"movement": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						333,
-						21,
-						351
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							333,
+							21,
+							351
+						]
+					},
+					"selected": {
+						"uv": [
+							54,
+							333,
+							72,
+							351
+						]
+					}
 				},
 				"vamp": {
-					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
-					"resWidth": 1024,
-					"resHeight": 1024,
-					"uv": [
-						3,
-						364,
-						23,
-						379
-					]
+					"default": {
+						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
+						"resWidth": 1024,
+						"resHeight": 1024,
+						"uv": [
+							3,
+							364,
+							23,
+							379
+						]
+					},
+					"selected": {
+						"uv": [
+							56,
+							364,
+							76,
+							379
+						]
+					}
 				}
 			},
 			"clearFilters": {

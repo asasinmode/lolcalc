@@ -54,9 +54,10 @@ const targetDummy = ref<IDamageTarget>({
 					height="128"
 					class="size-10 inline-block"
 				>
+				<!-- TODO use patch version, cdn seems to be down atm -->
 				<img
 					v-else
-					:src="`https://cdn.communitydragon.org/${minorVersion}/champion/generic/square`"
+					src="https://cdn.communitydragon.org/latest/champion/generic/square"
 					width="256"
 					height="256"
 					class="size-10 inline-block"

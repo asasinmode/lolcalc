@@ -11,7 +11,7 @@ export function textureBgImageAttrs({ resWidth, resHeight, uv: [startX, startY, 
 		src,
 		width: resWidth,
 		height: resHeight,
-		style: `background-image: url(${src}); background-size: ${resWidth}px ${resHeight}px; background-position: -${startX}px -${startY}px; width: ${endX! - startX!}px; height: ${endY! - startY!}px; --txt-width: ${width}px; --txt-height: ${height}px`,
+		style: `background-image: url(${src}); background-size: ${resWidth}px ${resHeight}px; width: ${endX! - startX!}px; height: ${endY! - startY!}px; --txt-width: ${width}px; --txt-height: ${height}px; --txt-uv-start-x: -${startX}px; --txt-uv-start-y: -${startY}px`,
 	};
 }
 
@@ -29,7 +29,7 @@ export const ITEM_SHOP_STAT_FILTERS = {
 		filter: item => !!item.stats.PercentAttackSpeedMod,
 	},
 	onHit: {
-		name: 'On hit',
+		name: 'On-hit effects',
 		filter: item => !!item.isOnHit,
 	},
 	armorPen: {
@@ -41,23 +41,23 @@ export const ITEM_SHOP_STAT_FILTERS = {
 		filter: item => !!item.stats.FlatMagicDamageMod,
 	},
 	mana: {
-		name: 'Mana',
-		filter: item => !!item.stats.FlatMPPoolMod,
+		name: 'Mana & regeneration',
+		filter: item => !!(item.stats.FlatMPPoolMod || item.stats.PercentBaseMPRegenMod),
 	},
 	magicPen: {
 		name: 'Magic penetration',
 		filter: item => !!(item.stats.FlatMagicPenetrationMod || item.stats.PercentMagicPenetrationMod),
 	},
 	health: {
-		name: 'Health',
-		filter: item => !!item.stats.FlatHPPoolMod,
+		name: 'Health & regeneration',
+		filter: item => !!(item.stats.FlatHPPoolMod || item.stats.FlatHPRegenMod || item.stats.PercentBaseHPRegenMod),
 	},
 	armor: {
 		name: 'Armor',
 		filter: item => !!item.stats.FlatArmorMod,
 	},
 	magicResists: {
-		name: 'Magic reists',
+		name: 'Magic reistance',
 		filter: item => !!item.stats.FlatSpellBlockMod,
 	},
 	abilityHaste: {
@@ -70,7 +70,7 @@ export const ITEM_SHOP_STAT_FILTERS = {
 		filter: item => !!(item.stats.FlatMovementSpeedMod || item.stats.PercentMovementSpeedMod || item.stats.PercentTenacityMod),
 	},
 	vamp: {
-		name: 'Lifesteal and omnivamp',
+		name: 'Life Steal & omnivamp',
 		filter: item => !!(item.stats.PercentLifeStealMod || item.stats.PercentOmnivampMod),
 	},
 } satisfies Record<string, { name: string; filter: (item: IItem) => boolean }>;
@@ -80,7 +80,7 @@ export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 interface IUiData {
 	shop: {
 		categories: Record<IItemCategory | 'all', ITexture>;
-		stats: Partial<Record<IItemShopStatFilter, ITexture>>;
+		stats: Partial<Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>>;
 		clearFilters: ITexture;
 	};
 }

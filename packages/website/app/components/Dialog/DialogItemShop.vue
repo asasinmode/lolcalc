@@ -57,6 +57,24 @@ const searchedItems = computed(() => {
 		: sortedByPriceForMap.value;
 });
 
+const availableStatFilters = computed(() => Object.fromEntries(
+	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [
+		filter,
+		filteredByCategory.value.some(filterFunction),
+	]),
+) as Record<IItemShopStatFilter, boolean>);
+const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
+	const texture = ui.shop.stats[filter as IItemShopStatFilter].default;
+	const [selectedUvStartX, selectedUvStartY] = ui.shop.stats[filter as IItemShopStatFilter].selected.uv;
+
+	return [filter, {
+		name,
+		texture: textureBgImageAttrs(texture, `https://raw.communitydragon.org/${minorVersion}/game/${texture.spriteSheet}`),
+		selectedUvStartX,
+		selectedUvStartY,
+	}];
+})) as unknown as Record<IItemShopStatFilter, { name: string; texture: ITexture; selectedUvStartX: number; selectedUvStartY: number }>);
+
 function clearStatFilters() {
 	for (const key in ITEM_SHOP_STAT_FILTERS) {
 		appliedStatFilters.value[key as IItemShopStatFilter] = false;
@@ -86,7 +104,6 @@ defineExpose({
 				<template #default="{ option: { category, texture }, isSelected }">
 					<img
 						v-bind="textureBgImageAttrs(texture, `https://raw.communitydragon.org/${minorVersion}/game/${texture.spriteSheet}`)"
-						class="object-none"
 						:class="{ 'bg-pink': isSelected }"
 					>
 					<span class="sr-only">{{ category }}</span>
@@ -128,11 +145,9 @@ defineExpose({
 			</form>
 		</header>
 		<aside :style="`grid-row: 2 / span ${Object.keys(groupedByEpicness).length}`">
-			<!-- TODO clear stat filters -->
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
 				<img
 					v-bind="textureBgImageAttrs(ui.shop.clearFilters, `https://raw.communitydragon.org/${minorVersion}/game/${ui.shop.clearFilters.spriteSheet}`)"
-					class="object-none"
 				>
 				<span class="sr-only">Clear stat filters</span>
 			</button>
@@ -140,13 +155,13 @@ defineExpose({
 				<legend class="sr-only">
 					Stat filters
 				</legend>
-				<template v-for="({ name }, filter) in ITEM_SHOP_STAT_FILTERS" :key="filter">
-					<input :id="`item-shop-stat-${filter}`" v-model="appliedStatFilters[filter]" type="checkbox">
+				<template v-for="({ name, texture, selectedUvStartX, selectedUvStartY }, filter) in computedStatFilters" :key="filter">
+					<input :id="`item-shop-stat-${filter}`" v-model="appliedStatFilters[filter]" type="checkbox" :disabled="!availableStatFilters[filter]">
 					<label :for="`item-shop-stat-${filter}`" :title="name">
 						<span>{{ name }}</span>
 						<img
-							v-bind="textureBgImageAttrs(ui.shop.stats[filter], `https://raw.communitydragon.org/${minorVersion}/game/${ui.shop.stats[filter].spriteSheet}`)"
-							class="object-none"
+							v-bind="texture"
+							:style="`--txt-selected-uv-start-x: -${selectedUvStartX}px; --txt-selected-uv-start-y: -${selectedUvStartY}px`"
 						>
 
 					</label>
@@ -185,7 +200,42 @@ defineExpose({
 #item-shop-category-filter img,
 #item-shop-clear-stat-filters img,
 #item-shop-stat-filters img {
-	background-repeat: no-repeat;
+	@apply object-none bg-no-repeat;
 	object-position: var(--txt-width, 64px) var(--txt-height, 64px);
+	background-position: var(--txt-uv-start-x) var(--txt-uv-start-y);
+}
+
+#item-shop-stat-filters {
+	label {
+		@apply cursor-pointer hover:brightness-200;
+	}
+
+	input,
+	label > span {
+		@apply sr-only;
+	}
+
+	input {
+		&:disabled + label {
+			@apply hover:brightness-100;
+		}
+
+		&:focus-visible + label {
+			@apply brightness-200;
+			outline: auto;
+		}
+
+		&:disabled + label {
+			@apply cursor-default;
+
+			img {
+				@apply brightness-50;
+			}
+		}
+
+		&:checked + label img {
+			background-position: var(--txt-selected-uv-start-x) var(--txt-selected-uv-start-y);
+		}
+	}
 }
 </style>

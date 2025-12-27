@@ -19,9 +19,6 @@ bun generate
 
 # run tests
 bun test
-
-# TMP
-tar --exclude='.DS_Store' --exclude='node_modules' --exclude '.nuxt' --exclude 'public' -cf "colector.tar" -C "./colectormode/packages/website" .
 ```
 
 ## todo
@@ -33,8 +30,11 @@ tar --exclude='.DS_Store' --exclude='node_modules' --exclude '.nuxt' --exclude '
 - [ ] remove dialog/champ dialog search placeholders, only label
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] champ select dialog
-- [ ] item shop sorting + look when searched (+ aliases) + when stat filtered + filters hover names
 - [ ] item shop dialog
+  - [ ] sorting
+  - [ ] searching
+  - [ ] stat filters
+  - [ ] item hover tooltip
 - [ ] item groups, only one from group
 - [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues` and map overrides `DataValuesModeOverride`
 - [ ] champion passives, abilities, ability levels (`additionalData` in each champion's map)
@@ -61,6 +61,7 @@ tar --exclude='.DS_Store' --exclude='node_modules' --exclude '.nuxt' --exclude '
 - [ ] migrate senna souls
 - [ ] wave gold/xp at minute
 - [ ] champion & build guess recaptcha
+- [ ] extracting champions and items from screenshots
 - [ ] aram
 - [ ] scorch vs gathering storm damage shower, pick champion, show 10, 20, 30... minutes
 - [ ] chess like puzzles, guess from screenshot what to do, choose option

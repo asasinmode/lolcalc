@@ -917,33 +917,6 @@
 				"mage": true
 			}
 		},
-		"2421": {
-			"id": "2421",
-			"name": "Shattered Armguard",
-			"stats": {
-				"FlatMagicDamageMod": 40,
-				"FlatArmorMod": 25
-			},
-			"gold": {
-				"base": 500,
-				"purchasable": true,
-				"total": 1600,
-				"sell": 640
-			},
-			"image": {
-				"full": "2421.png",
-				"sprite": "item2.png",
-				"group": "item",
-				"x": 144,
-				"y": 240,
-				"w": 48,
-				"h": 48
-			},
-			"mapMask": 3,
-			"categories": {
-				"fighter": true
-			}
-		},
 		"2422": {
 			"id": "2422",
 			"name": "Slightly Magical Footwear",

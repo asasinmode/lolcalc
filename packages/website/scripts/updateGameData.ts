@@ -111,6 +111,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 		'2139',	// elixir of sorcery
 		'2140',	// elixir of wrath
 		'6032',	// stat bonus
+		'2421', // shattered armguard
 	];
 
 	const MAPS = useMaps();
@@ -360,9 +361,14 @@ if (!uiData || uiData?.version !== latestVersion) {
 					['vamp', 'Vamp'],
 				] satisfies ([IItemShopStatFilter, string] | [IItemShopStatFilter, string, string])[]).map(
 					([itemCategory, dataPath1, dataPath2]) => {
+						const { uv: selectedUv } = getTexture(data[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Selected`], `stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1} selected`);
+
 						return [
 							itemCategory,
-							getTexture(data[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Default`], `stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1}`),
+							{
+								default: getTexture(data[`ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/${dataPath1}Btn/${dataPath2 || dataPath1}_Default`], `stat | ${itemCategory} | ${dataPath1} | ${dataPath2 || dataPath1} default`),
+								selected: { uv: selectedUv },
+							},
 						];
 					},
 				)),
