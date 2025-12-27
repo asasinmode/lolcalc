@@ -373,6 +373,7 @@ if (!uiData || uiData?.version !== latestVersion) {
 					},
 				)),
 				clearFilters: getTexture(data['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/statfilters/DisableBtn/Disable_Default'], 'clear filters'),
+				swapSortOrder: getTexture(data['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_TabView_AllItems/filter/ItemShop_InvertButton/ItemShop_InvertButton_Default'], 'swap sort order'),
 			},
 		} as unknown as NonNullable<(typeof uiData)>['data'],
 	};

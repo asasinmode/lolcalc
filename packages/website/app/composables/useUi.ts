@@ -4,14 +4,17 @@ export function useUi() {
 	return data satisfies IUiData;
 }
 
-export function textureBgImageAttrs({ resWidth, resHeight, uv: [startX, startY, endX, endY] }: ITexture, src: string): { src: string; width: number; height: number; style: string } {
+export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture): { src: string; width: number; height: number; style: string; ['data-sprite-image']: string } {
+	const { minorVersion } = usePatchVersion();
 	const width = endX! - startX!;
 	const height = endY! - startY!;
+	const src = `https://raw.communitydragon.org/${minorVersion}/game/${spriteSheet}`;
 	return {
 		src,
-		width: resWidth,
-		height: resHeight,
-		style: `background-image: url(${src}); background-size: ${resWidth}px ${resHeight}px; width: ${endX! - startX!}px; height: ${endY! - startY!}px; --txt-width: ${width}px; --txt-height: ${height}px; --txt-uv-start-x: -${startX}px; --txt-uv-start-y: -${startY}px`,
+		'width': resWidth,
+		'height': resHeight,
+		'style': `background-image: url(${src}); background-size: ${resWidth}px ${resHeight}px; width: ${endX! - startX!}px; height: ${endY! - startY!}px; --txt-width: ${width}px; --txt-height: ${height}px; --txt-uv-start-x: -${startX}px; --txt-uv-start-y: -${startY}px`,
+		'data-sprite-image': '',
 	};
 }
 
@@ -77,17 +80,18 @@ export const ITEM_SHOP_STAT_FILTERS = {
 
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 
-interface IUiData {
-	shop: {
-		categories: Record<IItemCategory | 'all', ITexture>;
-		stats: Partial<Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>>;
-		clearFilters: ITexture;
-	};
-}
-
 export interface ITexture {
 	spriteSheet: string;
 	resWidth: number;
 	resHeight: number;
 	uv: number[];
+}
+
+interface IUiData {
+	shop: {
+		categories: Record<IItemCategory | 'all', ITexture>;
+		stats: Partial<Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>>;
+		clearFilters: ITexture;
+		swapSortOrder: ITexture;
+	};
 }

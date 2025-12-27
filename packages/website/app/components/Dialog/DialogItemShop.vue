@@ -13,6 +13,7 @@ const { version, minorVersion } = usePatchVersion();
 const vDialog = useTemplateRef('vDialog');
 const mapMask = ref<number>(maps.sr.mask);
 const selectedCategory = ref<IAllItemCategory>('all');
+const sortOrderSwapped = ref(false);
 const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(
 	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([name]) => [name, false]),
 ) as Record<IItemShopStatFilter, boolean>);
@@ -35,7 +36,12 @@ const filteredByCategory = computed(() =>
 		? sortedByPriceForMap.value
 		: sortedByPriceForMap.value.filter(item => item.categories?.[selectedCategory.value as IItemCategory]),
 );
-const groupedByEpicness = computed(() => filteredByCategory.value.reduce((acc, item) => {
+const filteredByStats = computed(() => {
+	const filterFunctions = Object.entries(appliedStatFilters.value).filter(([, isEnabled]) => isEnabled).map(([filter]) => ITEM_SHOP_STAT_FILTERS[filter as IItemShopStatFilter].filter);
+
+	return filterFunctions.length ? filteredByCategory.value.filter(item => filterFunctions.every(f => f(item))) : filteredByCategory.value;
+});
+const groupedByEpicness = computed(() => filteredByStats.value.reduce((acc, item) => {
 	const { epicness = 0 } = item;
 
 	if (item.isBoots && epicness !== 7) {
@@ -60,7 +66,7 @@ const searchedItems = computed(() => {
 const availableStatFilters = computed(() => Object.fromEntries(
 	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [
 		filter,
-		filteredByCategory.value.some(filterFunction),
+		filteredByStats.value.some(filterFunction),
 	]),
 ) as Record<IItemShopStatFilter, boolean>);
 const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
@@ -69,11 +75,15 @@ const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITE
 
 	return [filter, {
 		name,
-		texture: textureBgImageAttrs(texture, `https://raw.communitydragon.org/${minorVersion}/game/${texture.spriteSheet}`),
+		texture: textureBgImageAttrs(texture),
 		selectedUvStartX,
 		selectedUvStartY,
 	}];
 })) as unknown as Record<IItemShopStatFilter, { name: string; texture: ITexture; selectedUvStartX: number; selectedUvStartY: number }>);
+
+const computedEpicnesses = computed(() => (sortOrderSwapped.value
+	? ITEM_EPICNESSES.toReversed()
+	: ITEM_EPICNESSES).filter(([epicness]) => groupedByEpicness.value[epicness]?.length));
 
 function clearStatFilters() {
 	for (const key in ITEM_SHOP_STAT_FILTERS) {
@@ -92,24 +102,13 @@ defineExpose({
 
 <template>
 	<VDialog id="dialog-item-shop" ref="vDialog" class="bg-cyan-950 auto-rows-min grid-cols-[auto_1fr] max-h-[80vh] shadow-lg of-y-auto [&[open]]-grid" @close="closeCleanup">
-		<header class="bg-inherit flex col-span-full items-center top-0 sticky">
-			<VButtonRadiogroup
-				id="item-shop-category-filter"
-				v-model="selectedCategory"
-				label="Category"
-				:options="['all', ...ALL_ITEM_CATEGORIES].map((category) => ({ category: category as IAllItemCategory, texture: ui.shop.categories[category as IAllItemCategory] }))"
-				value-key="category"
-				required
-			>
-				<template #default="{ option: { category, texture }, isSelected }">
-					<img
-						v-bind="textureBgImageAttrs(texture, `https://raw.communitydragon.org/${minorVersion}/game/${texture.spriteSheet}`)"
-						:class="{ 'bg-pink': isSelected }"
-					>
-					<span class="sr-only">{{ category }}</span>
-				</template>
-			</VButtonRadiogroup>
-			<div class="relative">
+		<header class="bg-inherit grid col-span-full grid-cols-[1fr_auto_auto] grid-rows-[min-content_min-content] items-center top-0 sticky">
+			<form method="dialog" class="col-start-3 row-start-1">
+				<button value="cancel">
+					close
+				</button>
+			</form>
+			<div class="col-span-2 col-start-1 row-start-1 relative">
 				<label for="item-shop-search">Click Here to Search</label>
 				<input
 					id="item-shop-search"
@@ -119,6 +118,23 @@ defineExpose({
 					placeholder="Click Here to Search"
 				>
 			</div>
+			<VButtonRadiogroup
+				id="item-shop-category-filter"
+				v-model="selectedCategory"
+				class="row-start-2"
+				label="Category"
+				:options="['all', ...ALL_ITEM_CATEGORIES].map((category) => ({ category: category as IAllItemCategory, texture: ui.shop.categories[category as IAllItemCategory] }))"
+				value-key="category"
+				required
+			>
+				<template #default="{ option: { category, texture }, isSelected }">
+					<img
+						v-bind="textureBgImageAttrs(texture)"
+						:class="{ 'bg-pink': isSelected }"
+					>
+					<span class="sr-only">{{ category }}</span>
+				</template>
+			</VButtonRadiogroup>
 			<VButtonRadiogroup
 				id="item-shop-map-filter"
 				v-model="mapMask"
@@ -138,16 +154,17 @@ defineExpose({
 					<span class="sr-only">{{ option.name }}</span>
 				</template>
 			</VButtonRadiogroup>
-			<form method="dialog" class="ml-auto">
-				<button value="cancel">
-					close
-				</button>
-			</form>
+			<button id="item-shop-swap-sort-order" title="Swap sort order" @click="sortOrderSwapped = !sortOrderSwapped">
+				<img
+					v-bind="textureBgImageAttrs(ui.shop.swapSortOrder)"
+				>
+				<span class="sr-only">Swap sort order</span>
+			</button>
 		</header>
 		<aside :style="`grid-row: 2 / span ${Object.keys(groupedByEpicness).length}`">
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
 				<img
-					v-bind="textureBgImageAttrs(ui.shop.clearFilters, `https://raw.communitydragon.org/${minorVersion}/game/${ui.shop.clearFilters.spriteSheet}`)"
+					v-bind="textureBgImageAttrs(ui.shop.clearFilters)"
 				>
 				<span class="sr-only">Clear stat filters</span>
 			</button>
@@ -169,9 +186,9 @@ defineExpose({
 			</fieldset>
 		</aside>
 		<section
-			v-for="[epicness, epicnessName] in ITEM_EPICNESSES.filter(([epicness]) => groupedByEpicness[epicness]?.length)"
+			v-for="[epicness, epicnessName] in computedEpicnesses"
 			:key="epicness"
-			class="grid grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))]"
+			class="grid auto-rows-min grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))]"
 		>
 			<h2 class="col-span-full">
 				{{ epicnessName }}
@@ -197,11 +214,9 @@ defineExpose({
 </template>
 
 <style>
-#item-shop-category-filter img,
-#item-shop-clear-stat-filters img,
-#item-shop-stat-filters img {
+[data-sprite-image] {
 	@apply object-none bg-no-repeat;
-	object-position: var(--txt-width, 64px) var(--txt-height, 64px);
+	object-position: var(--txt-width) var(--txt-height);
 	background-position: var(--txt-uv-start-x) var(--txt-uv-start-y);
 }
 
