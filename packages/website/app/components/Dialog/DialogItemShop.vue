@@ -262,21 +262,8 @@ defineExpose({
 				</button>
 			</section>
 		</section>
-		<section style="grid-area: builds-into">
-			<h2>Builds into</h2>
-			<div class="flex gap-3">
-				<button v-for="i in 7" :key="i" class="bg-black size-9 truncate">
-					{{ selectedItem?.into?.[i - 1] || '' }}
-				</button>
-			</div>
-			<div class="whitespace-pre">
-				{{ selectedItem?.image.full }}
-				{{ selectedItem?.from ? JSON.stringify(selectedItem.from, null, 2) : '' }}
-			</div>
-			<button :disabled="!selectedItem" @click="$emit('selectItem', selectedItem!)">
-				Purchase
-			</button>
-			<h3 class="grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2">
+		<section style="grid-area: builds-into" class="flex flex-col">
+			<h2 class="grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2 order-5">
 				<img
 					v-if="selectedItem"
 					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${selectedItem.image.full}`"
@@ -287,8 +274,23 @@ defineExpose({
 				>
 				{{ selectedItem?.name }}
 				<span>{{ selectedItem?.gold.total }}</span>
+			</h2>
+			<button :disabled="!selectedItem" class="order-4" @click="$emit('selectItem', selectedItem!)">
+				Purchase
+			</button>
+			<h3 class="order-1">
+				Builds into
 			</h3>
-			<p>
+			<div class="flex gap-3 order-2">
+				<button v-for="i in 7" :key="i" class="bg-black size-9 truncate">
+					{{ selectedItem?.into?.[i - 1] || '' }}
+				</button>
+			</div>
+			<div class="whitespace-pre order-3">
+				{{ selectedItem?.image.full }}
+				{{ selectedItem?.from ? JSON.stringify(selectedItem.from, null, 2) : '' }}
+			</div>
+			<p class="order-6">
 				<template v-for="(statValue, statName) in selectedItem?.stats" :key="statName">
 					<span>{{ statName }}: {{ statValue }}</span>
 					<br>
