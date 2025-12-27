@@ -13,8 +13,9 @@ const { version, minorVersion } = usePatchVersion();
 const vDialog = useTemplateRef('vDialog');
 const mapMask = ref<number>(maps.sr.mask);
 const selectedCategory = ref<IAllItemCategory>('all');
-// TODO make array
-const selectedStat = ref<IItemShopStatFilter>();
+const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(
+	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([name]) => [name, false]),
+) as Record<IItemShopStatFilter, boolean>);
 const search = ref('');
 
 const ITEM_EPICNESSES: [number, string][] = [
@@ -55,6 +56,12 @@ const searchedItems = computed(() => {
 		? sortedByPriceForMap.value.filter(item => splitSearch.every(word => item.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word)))
 		: sortedByPriceForMap.value;
 });
+
+function clearStatFilters() {
+	for (const key in ITEM_SHOP_STAT_FILTERS) {
+		appliedStatFilters.value[key as IItemShopStatFilter] = false;
+	}
+}
 
 function closeCleanup() {
 	search.value = '';
@@ -122,31 +129,29 @@ defineExpose({
 		</header>
 		<aside :style="`grid-row: 2 / span ${Object.keys(groupedByEpicness).length}`">
 			<!-- TODO clear stat filters -->
-			<button id="item-shop-clear-stat-filters" title="Clear stat filters">
+			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
 				<img
 					v-bind="textureBgImageAttrs(ui.shop.clearFilters, `https://raw.communitydragon.org/${minorVersion}/game/${ui.shop.clearFilters.spriteSheet}`)"
 					class="object-none"
 				>
 				<span class="sr-only">Clear stat filters</span>
 			</button>
-			<VButtonRadiogroup
-				id="item-shop-stat-filter"
-				v-model="selectedStat"
-				label="Stats"
-				:options="Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => ({ filter: filter as IItemShopStatFilter, name, texture: ui.shop.stats[filter as IItemShopStatFilter] }))"
-				value-key="filter"
-				title-key="name"
-				class="flex flex-col"
-			>
-				<template #default="{ option: { name, texture }, isSelected }">
-					<img
-						v-bind="textureBgImageAttrs(texture, `https://raw.communitydragon.org/${minorVersion}/game/${texture.spriteSheet}`)"
-						class="object-none"
-						:class="{ 'bg-pink': isSelected }"
-					>
-					<span class="sr-only">{{ name }}</span>
+			<fieldset id="item-shop-stat-filters">
+				<legend class="sr-only">
+					Stat filters
+				</legend>
+				<template v-for="({ name }, filter) in ITEM_SHOP_STAT_FILTERS" :key="filter">
+					<input :id="`item-shop-stat-${filter}`" v-model="appliedStatFilters[filter]" type="checkbox">
+					<label :for="`item-shop-stat-${filter}`" :title="name">
+						<span>{{ name }}</span>
+						<img
+							v-bind="textureBgImageAttrs(ui.shop.stats[filter], `https://raw.communitydragon.org/${minorVersion}/game/${ui.shop.stats[filter].spriteSheet}`)"
+							class="object-none"
+						>
+
+					</label>
 				</template>
-			</VButtonRadiogroup>
+			</fieldset>
 		</aside>
 		<section
 			v-for="[epicness, epicnessName] in ITEM_EPICNESSES.filter(([epicness]) => groupedByEpicness[epicness]?.length)"
@@ -179,7 +184,7 @@ defineExpose({
 <style>
 #item-shop-category-filter img,
 #item-shop-clear-stat-filters img,
-#item-shop-stat-filter img {
+#item-shop-stat-filters img {
 	background-repeat: no-repeat;
 	object-position: var(--txt-width, 64px) var(--txt-height, 64px);
 }
