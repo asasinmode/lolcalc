@@ -41,12 +41,10 @@ defineExpose({
 	<VDialog
 		id="dialog-champion-select"
 		ref="vDialog"
-		class="bg-cyan-950 grid-cols-[repeat(auto-fit,_minmax(var(--fluid-48-90),_1fr))] max-h-[80vh] w-[min(90vw,_600px)] shadow-lg of-y-auto [&[open]]-grid"
+		class="bg-cyan-950 grid-rows-[auto_1fr] max-h-[80vh] w-[min(90vw,_600px)] shadow-lg of-visible [&[open]]-grid"
 		@close="closeCleanup"
 	>
-		<header
-			class="bg-inherit flex col-span-full items-center top-0 sticky"
-		>
+		<header class="bg-inherit flex col-span-full items-center">
 			<VButtonRadiogroup
 				id="champ-select-role"
 				v-model="selectedRole"
@@ -64,16 +62,23 @@ defineExpose({
 					<span class="sr-only">{{ role }}</span>
 				</template>
 			</VButtonRadiogroup>
-			<div class="relative">
+			<div data-inline-search-label="">
 				<input
 					id="champ-select-search"
 					v-model="search"
 					autofocus
-					class="ml-2 bg-black"
-					placeholder="Search"
+					type="text"
+					placeholder=" "
+					class="py-0.5 pl-8 pr-2 b bg-black"
+					:data-value="search"
 					@update:model-value="selectedRole = undefined"
 				>
-				<label for="champ-select-search">Search</label>
+				<label for="item-shop-search" class="px-2 py-0.5 b b-transparent">
+					<Icon name="ph:magnifying-glass-bold" class="mr-2 size-4" />
+					<span>
+						Search
+					</span>
+				</label>
 			</div>
 			<form method="dialog" class="ml-auto">
 				<button value="cancel">
@@ -81,23 +86,25 @@ defineExpose({
 				</button>
 			</form>
 		</header>
-		<button
-			v-for="champion in computedChampions"
-			:key="champion.id"
-			class="leading-tight text-center min-w-0 block hyphens-auto"
-			@click="value = champion.id"
-		>
-			<img
-				:title="champion.name"
-				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`"
-				:style="`background-image: url(https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full})`"
-				class="b aspect-1"
-				width="128"
-				height="128"
-				loading="lazy"
+		<section class="grid grid-cols-[repeat(auto-fit,_minmax(var(--fluid-48-90),_1fr))] of-y-auto">
+			<button
+				v-for="champion in computedChampions"
+				:key="champion.id"
+				class="leading-tight text-center min-w-0 block hyphens-auto"
+				@click="value = champion.id"
 			>
-			{{ champion.name }}
-		</button>
+				<img
+					:title="champion.name"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`"
+					:style="`background-image: url(https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full})`"
+					class="b aspect-1"
+					width="128"
+					height="128"
+					loading="lazy"
+				>
+				{{ champion.name }}
+			</button>
+		</section>
 	</VDialog>
 </template>
 

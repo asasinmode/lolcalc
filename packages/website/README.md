@@ -27,7 +27,7 @@ bun test
 - [x] calculating stats (no item/champ passives)
 - [x] item rarity for shop
 - [ ] change `champion/item.image` to just string if no need for object or find the spritesheet
-- [ ] remove dialog/champ dialog search placeholders, only label
+- [x] remove dialog/champ dialog search placeholders, only label
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] champ select dialog
 - [ ] item shop dialog

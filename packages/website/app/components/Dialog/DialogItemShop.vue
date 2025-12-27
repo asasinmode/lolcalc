@@ -5,10 +5,10 @@ defineEmits<{
 
 type IAllItemCategory = IItemCategory | 'all';
 
+const { version, minorVersion } = usePatchVersion();
 const items = useItems();
 const maps = useMaps();
 const ui = useUi();
-const { version, minorVersion } = usePatchVersion();
 
 const vDialog = useTemplateRef('vDialog');
 const mapMask = ref<number>(maps.sr.mask);
@@ -101,22 +101,29 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-item-shop" ref="vDialog" class="bg-cyan-950 grid-cols-[auto_1fr] grid-rows-[auto_1fr] max-h-[80vh] shadow-lg of-y-auto [&[open]]-grid" @close="closeCleanup">
+	<VDialog id="dialog-item-shop" ref="vDialog" class="bg-cyan-950 grid-cols-[auto_1fr] grid-rows-[auto_1fr] max-h-[80vh] shadow-lg of-visible [&[open]]-grid" @close="closeCleanup">
 		<header class="bg-inherit grid col-span-full grid-cols-[1fr_auto_auto] grid-rows-[min-content_min-content] items-center">
 			<form method="dialog" class="col-start-3 row-start-1">
 				<button value="cancel">
 					close
 				</button>
 			</form>
-			<div class="col-span-2 col-start-1 row-start-1 relative">
-				<label for="item-shop-search">Click Here to Search</label>
+			<div class="col-span-2 col-start-1 row-start-1" data-inline-search-label="">
 				<input
 					id="item-shop-search"
 					v-model="search"
 					autofocus
-					class="ml-2 bg-black"
-					placeholder="Click Here to Search"
+					type="text"
+					placeholder=" "
+					class="py-0.5 pl-8 pr-2 b bg-black"
+					:data-value="search"
 				>
+				<label for="item-shop-search" class="px-2 py-0.5 b b-transparent">
+					<Icon name="ph:magnifying-glass-bold" class="mr-2 size-4" />
+					<span>
+						Click Here to Search
+					</span>
+				</label>
 			</div>
 			<VButtonRadiogroup
 				id="item-shop-category-filter"
