@@ -35,18 +35,16 @@ bun test
   - [ ] searching (TODO search string)
   - [x] stat filters
   - [ ] item hover tooltip
-- [ ] item groups, only one from group
-- [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues` and map overrides `DataValuesModeOverride`
-- [ ] champion passives, abilities, ability levels (`additionalData` in each champion's map)
-- [ ] elixir effects (bring back in updateGameData)
+  - [ ] buying mechanism, components into item and so on
+  - [ ] item groups, only one from group
 - [ ] multiple builds/champions you can switch between
 - [ ] some cool graphs
 - [ ] sharing, saving/reading data in query
-- [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
-- [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
+- [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues` and map overrides `DataValuesModeOverride`
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
 - [ ] [wiki](https://github.com/asasinmode/colectormode/wiki)
+- [ ] check with screenreader
 - [ ] github issue template
   - champion stats/damage is off (make sure to check no passives, runes, and so on...)
 - [ ] submit feedback on page
@@ -57,6 +55,10 @@ bun test
 
 ### future features
 
+- [ ] champion passives, abilities, ability levels (`additionalData` in each champion's map)
+- [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
+- [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
+- [ ] elixir effects (bring back in updateGameData)
 - [ ] ornnaments stats + gold value
 - [ ] migrate senna souls
 - [ ] wave gold/xp at minute
