@@ -32,7 +32,7 @@ bun test
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
-  - [ ] searching
+  - [ ] searching (TODO search string)
   - [x] stat filters
   - [ ] item hover tooltip
 - [ ] item groups, only one from group

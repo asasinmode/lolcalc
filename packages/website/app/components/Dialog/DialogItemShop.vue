@@ -116,8 +116,12 @@ const searchResults = computed(() => {
 const searchCursoredOverItem = computed(() => searchCursoredOverIndex.value !== undefined ? searchResults.value[searchCursoredOverIndex.value] : undefined);
 
 function closeSearch() {
-	search.value = '';
 	searchExpanded.value = false;
+	clearSearch();
+}
+
+function clearSearch() {
+	search.value = '';
 	searchCursoredOverIndex.value = undefined;
 	searchSelectedIndex.value = undefined;
 }
@@ -252,6 +256,12 @@ defineExpose({
 						Click Here to Search
 					</span>
 				</label>
+				<button class="px-2 grid h-full right-0 top-0 place-items-center absolute" @mousedown.prevent="clearSearch">
+					<span class="sr-only">
+						Clear
+					</span>
+					<Icon name="ph:x" class="size-4" />
+				</button>
 				<div
 					v-show="searchExpanded"
 					ref="searchResultsContainer"
@@ -439,7 +449,7 @@ defineExpose({
 				Builds into
 			</h3>
 			<div class="flex gap-3 order-2">
-				<button v-for="i in 7" :key="i" class="bg-black size-9 truncate">
+				<button v-for="i in 7" :key="i" class="bg-black size-9 truncate" :disabled="!selectedItem?.into?.[i - 1]">
 					{{ selectedItem?.into?.[i - 1] || '' }}
 				</button>
 			</div>
@@ -511,6 +521,10 @@ defineExpose({
 				--txt-uv-start-y: var(--txt-selected-uv-start-y) !important;
 			}
 		}
+	}
+
+	#item-shop-search[data-empty='true'] ~ button {
+		display: none;
 	}
 }
 </style>
