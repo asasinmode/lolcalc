@@ -307,7 +307,7 @@ defineExpose({
 						aria-atomic="true"
 						class="bg-pink-950 row-span-full"
 					>
-						<ItemDescription v-if="searchCursoredOverItem" :item="searchCursoredOverItem" />
+						<ItemDescription :item="searchCursoredOverItem" />
 					</section>
 				</div>
 			</div>
@@ -375,7 +375,7 @@ defineExpose({
 			</fieldset>
 		</aside>
 		<section style="grid-area: items;" class="overflow-y-auto">
-			<h2 class="sr-only">
+			<h2 class="sr-only" aria-live="polite">
 				{{ selectedCategory }} items
 			</h2>
 			<section
@@ -410,7 +410,7 @@ defineExpose({
 			</section>
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
-			<ItemDescription v-if="selectedItem" :item="selectedItem" header-class="order-5" description-class="order-6" />
+			<ItemDescription :item="selectedItem" header-class="order-5" description-class="order-6" />
 			<button :disabled="!selectedItem" class="order-4" @click="buyItem(selectedItem!)">
 				Purchase
 			</button>

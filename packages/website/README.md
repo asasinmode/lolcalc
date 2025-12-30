@@ -32,9 +32,9 @@ bun test
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
-  - [ ] searching (TODO search string)
+  - [ ] searching (TODO search string, aliases)
   - [x] stat filters
-  - [ ] item hover tooltip
+  - [ ] item hover tooltip `Items/{{id}}.mItemDataClient`
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
 - [ ] multiple builds/champions you can switch between
@@ -70,12 +70,15 @@ bun test
 
 ## misc
 
+[translations](https://raw.communitydragon.org/15.24/game/en_us/data/menu/en_us/)
 [useful assets](https://raw.communitydragon.org/latest/)
 [stat icons](https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/)
 [or](https://raw.communitydragon.org/latest/game/assets/perks/statmods/)
 https://hextechdocs.dev/resolving-variables-in-spell-textsa/
 
 ## tests
+
+TODO probably cant have tests
 
 In the `test` folder there are the `calculateChampionStats.test.ts` and `calculateDamage.test.ts` files. Alongside the files inside `test/fixtures`, these are intended to be a snapshot of the numbers seen in game at X point (like patch 15.24.1).
 

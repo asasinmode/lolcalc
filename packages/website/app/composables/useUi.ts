@@ -1,14 +1,11 @@
-import type { StyleValue } from 'vue';
+import type { ImgHTMLAttributes } from 'vue';
 import { data } from '../assets/ui.json';
 
 export function useUi() {
 	return data satisfies IUiData;
 }
 
-export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: number): {
-	src: string;
-	style: StyleValue;
-	['aria-hidden']: boolean;
+export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [startX, startY, endX, endY] }: ITexture, targetSize?: number): ImgHTMLAttributes & {
 	['data-sprite-image']: string;
 } {
 	const { minorVersion } = usePatchVersion();
@@ -22,6 +19,7 @@ export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [sta
 
 	return {
 		src,
+		'loading': 'lazy',
 		'aria-hidden': true,
 		'data-sprite-image': '',
 		'style': {
