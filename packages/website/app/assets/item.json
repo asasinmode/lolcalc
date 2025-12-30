@@ -1567,34 +1567,6 @@
 				"marksman": true
 			}
 		},
-		"3039": {
-			"id": "3039",
-			"name": "Atma's Reckoning",
-			"searchString": "atmasreckoning;health;criticalstrike",
-			"stats": {
-				"FlatHPPoolMod": 700,
-				"FlatCritChanceMod": 0.2,
-				"AbilityHasteMod": 10
-			},
-			"gold": {
-				"base": 500,
-				"purchasable": true,
-				"total": 2900,
-				"sell": 2030
-			},
-			"image": "3039.png",
-			"mapMask": 2,
-			"from": [
-				"1011",
-				"1018",
-				"1011"
-			],
-			"epicness": 5,
-			"categories": {
-				"tank": true,
-				"fighter": true
-			}
-		},
 		"3040": {
 			"id": "3040",
 			"name": "Seraph's Embrace",
@@ -2508,33 +2480,6 @@
 			"mapMask": 3,
 			"from": [
 				"3086",
-				"3144"
-			],
-			"epicness": 5,
-			"categories": {
-				"marksman": true
-			}
-		},
-		"3095": {
-			"id": "3095",
-			"name": "Stormrazor",
-			"searchString": "stormrazor;damage;criticalstrike;attackspeed",
-			"stats": {
-				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 50,
-				"PercentAttackSpeedMod": 0.2
-			},
-			"gold": {
-				"base": 500,
-				"purchasable": true,
-				"total": 3000,
-				"sell": 2100
-			},
-			"image": "3095.png",
-			"mapMask": 2,
-			"from": [
-				"1038",
-				"1018",
 				"3144"
 			],
 			"epicness": 5,

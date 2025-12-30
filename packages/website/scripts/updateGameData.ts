@@ -92,7 +92,6 @@ if (!itemData || itemData?.version !== latestVersion) {
 	];
 
 	const UNINTERESTING_ITEMS = [
-		'3146',	// hextech gunblade, not sure why it says enabled in aram when its not?
 		'3340',	// stealth ward
 		'3363',	// farsight alteration
 		'3364',	// oracle lens
@@ -111,6 +110,9 @@ if (!itemData || itemData?.version !== latestVersion) {
 		'2140',	// elixir of wrath
 		'6032',	// stat bonus
 		'2421', // shattered armguard
+		'3146',	// hextech gunblade, not sure why these and below say they are in aram
+		'3039',	// atma's reckoning
+		'3095', // stormrazor
 	];
 
 	const MAPS = useMaps();

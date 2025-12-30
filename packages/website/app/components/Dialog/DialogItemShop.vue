@@ -11,7 +11,7 @@ const maps = useMaps();
 const ui = useUi();
 
 const vDialog = useTemplateRef('vDialog');
-const mapMask = ref<number>(maps.sr.mask);
+const mapMask = ref<number>(maps.ha.mask);
 const selectedCategory = ref<IAllItemCategory>('all');
 const sortOrderSwapped = ref(false);
 const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(
