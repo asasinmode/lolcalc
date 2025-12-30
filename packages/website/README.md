@@ -36,6 +36,7 @@ bun test
   - [x] stat filters
   - [x] double click to buy
   - [ ] item hover tooltip `Items/{{id}}.mItemDataClient`
+  - [ ] builds into displayed item tree
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
 - [ ] multiple builds/champions you can switch between

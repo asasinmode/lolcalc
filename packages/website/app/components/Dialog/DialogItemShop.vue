@@ -241,7 +241,7 @@ const hoveredItem = shallowRef<IItem>();
 
 function enterTooltipableElement(event: MouseEvent, item: IItem) {
 	const { target } = event as unknown as { target: HTMLElement };
-	itemTooltip.value?.removeAttribute('hidden');
+	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
 	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true });
 	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
@@ -250,7 +250,7 @@ function enterTooltipableElement(event: MouseEvent, item: IItem) {
 }
 
 function leaveTooltipableElement() {
-	itemTooltip.value?.setAttribute('hidden', '');
+	itemTooltip.value?.hidePopover();
 	itemTooltipAnchor?.removeEventListener('mouseleave', leaveTooltipableElement);
 	itemTooltipAnchor?.removeEventListener('mousemove', updateTooltipPosition);
 	itemTooltipAnchor = undefined;
@@ -262,9 +262,50 @@ function updateTooltipPosition(event: MouseEvent) {
 	itemTooltip.value!.style.top = `${clientY + 10}px`;
 }
 
-const buildsIntoItems = computed(() => selectedItem.value?.into?.filter((id) => {
-	return id in items && ((items[id]!.mapMask & mapMask.value) !== 0);
-}).map(id => items[id]!) || []);
+const buildsIntoMoreButton = useTemplateRef('buildsIntoMoreButton');
+const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
+
+function updateBuildsIntoMorePosition() {
+	if (!buildsIntoMoreButton.value || !buildsIntoMoreList.value) {
+		return;
+	}
+	const { left, top, width, height } = buildsIntoMoreButton.value.getBoundingClientRect();
+	buildsIntoMoreList.value.style.left = `${left + width}px`;
+	buildsIntoMoreList.value.style.top = `${top + height}px`;
+}
+
+const buildsIntoItems = computed(() => selectedItem.value?.into
+	?.filter(id => id in items && ((items[id]!.mapMask & mapMask.value) !== 0))
+	.map(id => items[id]!)
+	.sort((a, b) => a.gold.total - b.gold.total) || []);
+
+function onBuildsIntoMoreToggle(event: ToggleEvent) {
+	if (event.newState === 'open') {
+		updateBuildsIntoMorePosition();
+		window.addEventListener('resize', updateBuildsIntoMorePosition, { passive: true });
+		window.addEventListener('scroll', updateBuildsIntoMorePosition, { passive: true });
+	} else {
+		window.removeEventListener('resize', updateBuildsIntoMorePosition);
+		window.removeEventListener('scroll', updateBuildsIntoMorePosition);
+	}
+}
+
+function closeBuildsIntoMoreListIfOutside(event: FocusEvent) {
+	const target = event.relatedTarget as HTMLElement | null;
+	if (!target || !buildsIntoMoreList.value?.contains(target)) {
+		buildsIntoMoreList.value?.hidePopover();
+	}
+}
+
+function selectBuildsIntoMoreItem(item: IItem) {
+	selectOrBuyIfDouble(item, true);
+	leaveTooltipableElement();
+}
+
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updateBuildsIntoMorePosition);
+	window.removeEventListener('scroll', updateBuildsIntoMorePosition);
+});
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -481,40 +522,85 @@ defineExpose({
 			<h3 class="order-1">
 				Builds into
 			</h3>
-			<div class="flex gap-3 order-2 *:bg-black *:size-9">
-				<button v-for="i in 6" :key="i" :disabled="!buildsIntoItems[i - 1]" @mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)">
-					<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.name }}</span>
-					<img
-						v-if="buildsIntoItems[i - 1]"
-						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]!.image}`"
-						width="64"
-						height="64"
-						aria-hidden="true"
-						loading="lazy"
+			<ul class="flex gap-3 order-2 relative *:bg-black *:size-9">
+				<li v-for="i in 6" :key="i">
+					<button
+						class="size-full"
+						:disabled="!buildsIntoItems[i - 1]"
+						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
+						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
+						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!)"
 					>
-				</button>
-				<button class="bg-black size-9 truncate" :disabled="!buildsIntoItems[7]">
-					<span v-if="buildsIntoItems[7]" class="sr-only">{{ buildsIntoItems[7].name }}</span>
-					<img
-						v-if="buildsIntoItems[7]"
-						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[7].image}`"
-						width="64"
-						height="64"
-						aria-hidden="true"
-						loading="lazy"
+						<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.name }}</span>
+						<img
+							v-if="buildsIntoItems[i - 1]"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]!.image}`"
+							width="64"
+							height="64"
+							aria-hidden="true"
+							loading="lazy"
+						>
+					</button>
+				</li>
+				<li>
+					<button
+						v-if="buildsIntoItems.length <= 7"
+						class="size-full"
+						:disabled="!buildsIntoItems[6]"
+						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
+						@click.right="rightClickItem($event, buildsIntoItems[6]!)"
 					>
-				</button>
-			</div>
+						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6].name }}</span>
+						<img
+							v-if="buildsIntoItems[6]"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[6].image}`"
+							width="64"
+							height="64"
+							aria-hidden="true"
+							loading="lazy"
+						>
+					</button>
+					<button v-else ref="buildsIntoMoreButton" popovertarget="builds-into-more-list" class="size-full" @focusout="closeBuildsIntoMoreListIfOutside">
+						+{{ buildsIntoItems.length - 6 }}
+					</button>
+					<ul
+						id="builds-into-more-list"
+						ref="buildsIntoMoreList"
+						class="h-max max-h-[60vh] w-max of-y-auto -translate-x-full"
+						popover
+						@focusout="closeBuildsIntoMoreListIfOutside"
+						@toggle="onBuildsIntoMoreToggle"
+					>
+						<li v-for="item in buildsIntoItems.slice(6)" :key="item.id">
+							<button
+								class="hoverable:bg-white/10 flex w-full items-center"
+								@mouseenter="enterTooltipableElement($event, item)"
+								@click="selectBuildsIntoMoreItem(item)"
+								@click.right="rightClickItem($event, item)"
+							>
+								<img
+									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+									width="64"
+									height="64"
+									aria-hidden="true"
+									loading="lazy"
+								>
+								<span>{{ item.name }}</span>
+							</button>
+						</li>
+					</ul>
+				</li>
+			</ul>
 			<div class="whitespace-pre order-3">
-				{{ selectedItem?.image }}
-				{{ selectedItem?.from ? JSON.stringify(selectedItem.from, null, 2) : '' }}
+				{{ displayedItem?.image }}
+				{{ displayedItem?.from ? JSON.stringify(displayedItem.from, null, 2) : '' }}
 			</div>
 		</section>
 		<footer style="grid-area: footer">
 			<button>Sell</button>
 			<button>Undo</button>
 		</footer>
-		<div ref="itemTooltip" class="bg-neutral-950 w-fit pointer-events-none fixed">
+		<div ref="itemTooltip" popover="hint" class="bg-neutral-950 w-fit pointer-events-none fixed">
 			<ItemDescription :item="hoveredItem" />
 		</div>
 	</VDialog>

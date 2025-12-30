@@ -91,7 +91,7 @@ export const ITEM_SHOP_STAT_FILTERS = {
 	},
 	vamp: {
 		name: 'Life Steal & omnivamp',
-		filter: item => !!(item.stats.PercentLifeStealMod || item.stats.PercentOmnivampMod),
+		filter: item => !!(item.stats.PercentLifeStealMod || (item.stats as Record<string, number>).PercentOmnivampMod),
 	},
 } satisfies Record<string, { name: string; filter: (item: IItem) => boolean }>;
 

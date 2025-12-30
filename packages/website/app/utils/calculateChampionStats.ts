@@ -138,7 +138,6 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	PercentHealingAmountMod: 'healShieldPower',
 	PercentLifeStealMod: 'lifeSteal',
 	PercentMagicPenetrationMod: 'percentMagicPen',
-	PercentOmnivampMod: 'omnivamp',
 	PercentTenacityMod: 'tenacity',
 	PhysicalLethality: 'lethality',
 };
