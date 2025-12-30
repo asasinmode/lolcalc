@@ -40,7 +40,7 @@ bun test
 - [ ] multiple builds/champions you can switch between
 - [ ] some cool graphs
 - [ ] sharing, saving/reading data in query
-- [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues` and map overrides `DataValuesModeOverride`
+- [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues`
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
 - [ ] [wiki](https://github.com/asasinmode/colectormode/wiki)
@@ -65,6 +65,7 @@ bun test
 - [ ] champion & build guess recaptcha
 - [ ] extracting champions and items from screenshots
 - [ ] aram
+  - item overrides - `DataValuesModeOverride`
 - [ ] scorch vs gathering storm damage shower, pick champion, show 10, 20, 30... minutes
 - [ ] chess like puzzles, guess from screenshot what to do, choose option
 

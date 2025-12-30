@@ -225,7 +225,7 @@ defineExpose({
 		@close="closeSearch"
 		@contextmenu.prevent=""
 	>
-		<header style="grid-area: header;" class="bg-inherit grid col-span-2 auto-rows-min grid-cols-[1fr_auto_auto] items-center">
+		<header style="grid-area: header;" class="bg-inherit grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center">
 			<h1 class="col-span-full">
 				Item shop
 			</h1>
@@ -332,26 +332,26 @@ defineExpose({
 					<span class="sr-only">{{ category }}</span>
 				</template>
 			</VButtonRadiogroup>
-			<VButtonRadiogroup
-				id="item-shop-map-filter"
-				v-model="mapMask"
-				:options="Object.values(maps)"
-				value-key="mask"
-				title-key="name"
-				label="Map"
-				required
-			>
-				<template #default="{ option, isSelected }">
-					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/${option.iconDirUrl}/img/${isSelected ? 'game-select-icon-active' : 'icon-empty'}.png`"
-						:width="isSelected ? 100 : 200"
-						:height="isSelected ? 100 : 200"
-						aria-hidden="true"
-						class="size-5"
-					>
-					<span class="sr-only">{{ option.name }}</span>
-				</template>
-			</VButtonRadiogroup>
+			<!-- <VButtonRadiogroup -->
+			<!-- 	id="item-shop-map-filter" -->
+			<!-- 	v-model="mapMask" -->
+			<!-- 	:options="Object.values(maps)" -->
+			<!-- 	value-key="mask" -->
+			<!-- 	title-key="name" -->
+			<!-- 	label="Map" -->
+			<!-- 	required -->
+			<!-- > -->
+			<!-- 	<template #default="{ option, isSelected }"> -->
+			<!-- 		<img -->
+			<!-- 			:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/${option.iconDirUrl}/img/${isSelected ? 'game-select-icon-active' : 'icon-empty'}.png`" -->
+			<!-- 			:width="isSelected ? 100 : 200" -->
+			<!-- 			:height="isSelected ? 100 : 200" -->
+			<!-- 			aria-hidden="true" -->
+			<!-- 			class="size-5" -->
+			<!-- 		> -->
+			<!-- 		<span class="sr-only">{{ option.name }}</span> -->
+			<!-- 	</template> -->
+			<!-- </VButtonRadiogroup> -->
 			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
 				<img v-bind="textureBgImageAttrs(ui.shop.swapItemOrder, 32)">
 				<span class="sr-only">Swap item order</span>

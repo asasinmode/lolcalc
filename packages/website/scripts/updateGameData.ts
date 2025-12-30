@@ -92,6 +92,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 	];
 
 	const UNINTERESTING_ITEMS = [
+		'3146',	// hextech gunblade, not sure why it says enabled in aram when its not?
 		'3340',	// stealth ward
 		'3363',	// farsight alteration
 		'3364',	// oracle lens

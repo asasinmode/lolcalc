@@ -3363,33 +3363,6 @@
 				"mage": true
 			}
 		},
-		"3146": {
-			"id": "3146",
-			"name": "Hextech Gunblade",
-			"searchString": "hextechgunblade;damage;lifesteal;spelldamage;active;spellvamp",
-			"stats": {
-				"FlatMagicDamageMod": 80,
-				"FlatPhysicalDamageMod": 40,
-				"PercentOmnivampMod": 0.15
-			},
-			"gold": {
-				"base": 750,
-				"purchasable": true,
-				"total": 3250,
-				"sell": 2275
-			},
-			"image": "3146.png",
-			"mapMask": 2,
-			"from": [
-				"1038",
-				"1058"
-			],
-			"epicness": 5,
-			"categories": {
-				"mage": true,
-				"assassin": true
-			}
-		},
 		"3147": {
 			"id": "3147",
 			"name": "Haunting Guise",
