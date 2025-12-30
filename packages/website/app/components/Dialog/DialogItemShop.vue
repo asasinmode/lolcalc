@@ -235,6 +235,33 @@ function selectOrBuyIfDouble(item: IItem, overwriteDisplayed: boolean): boolean 
 	return false;
 }
 
+let itemTooltipAnchor: undefined | HTMLElement;
+const itemTooltip = useTemplateRef('itemTooltip');
+const hoveredItem = shallowRef<IItem>();
+
+function enterTooltipableElement(event: MouseEvent, item: IItem) {
+	const { target } = event as unknown as { target: HTMLElement };
+	itemTooltip.value?.removeAttribute('hidden');
+	itemTooltipAnchor = target;
+	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true });
+	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
+	hoveredItem.value = item;
+	updateTooltipPosition(event);
+}
+
+function leaveTooltipableElement() {
+	itemTooltip.value?.setAttribute('hidden', '');
+	itemTooltipAnchor?.removeEventListener('mouseleave', leaveTooltipableElement);
+	itemTooltipAnchor?.removeEventListener('mousemove', updateTooltipPosition);
+	itemTooltipAnchor = undefined;
+}
+
+function updateTooltipPosition(event: MouseEvent) {
+	const { clientX, clientY } = event;
+	itemTooltip.value!.style.left = `${clientX + 10}px`;
+	itemTooltip.value!.style.top = `${clientY + 10}px`;
+}
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -313,6 +340,7 @@ defineExpose({
 							:class="{
 								'bg-white/10': searchSelectedIndex === index,
 							}"
+							@mouseenter="enterTooltipableElement($event, item)"
 							@mousedown.stop.prevent="selectSearchResult($event, index)"
 						>
 							<img
@@ -423,6 +451,7 @@ defineExpose({
 					v-for="item in groupedByEpicness[epicness]"
 					:key="item.id"
 					class="leading-tight text-center min-w-0 block hyphens-auto"
+					@mouseenter="enterTooltipableElement($event, item)"
 					@mousedown.left="selectOrBuyIfDouble(item, true)"
 					@mousedown.right="rightClickItem($event, item)"
 					@keydown.space="selectItem(item, true)"
@@ -465,6 +494,9 @@ defineExpose({
 			<button>Sell</button>
 			<button>Undo</button>
 		</footer>
+		<div ref="itemTooltip" class="bg-neutral-950 w-fit pointer-events-none fixed">
+			<ItemDescription :item="hoveredItem" />
+		</div>
 	</VDialog>
 </template>
 
