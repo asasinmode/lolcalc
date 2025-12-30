@@ -26,15 +26,7 @@
 		"attackspeed": 0.679,
 		"attackspeedratio": 0.679
 	},
-	"image": {
-		"full": "Draven.png",
-		"sprite": "champion0.png",
-		"group": "champion",
-		"x": 336,
-		"y": 96,
-		"w": 48,
-		"h": 48
-	},
+	"image": "Draven.png",
 	"roles": {
 		"bottom": true
 	}

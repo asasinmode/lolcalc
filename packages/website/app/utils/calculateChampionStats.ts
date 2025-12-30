@@ -18,7 +18,7 @@ export function calculateChampionStats(champion: IChampion, level: number, items
 		attackDamage: champion.stats.attackdamage,
 		abilityPower: 0,
 		armor: champion.stats.armor,
-		magicResists: champion.stats.spellblock,
+		magicResist: champion.stats.spellblock,
 		attackSpeed: champion.stats.attackspeed,
 		attackSpeedRatio: champion.stats.attackspeedratio,
 		/** in percentage points, same as in game when hovering over attack speed */
@@ -36,7 +36,7 @@ export function calculateChampionStats(champion: IChampion, level: number, items
 		manaRegen: champion.stats.mpregenperlevel,
 		attackDamage: champion.stats.attackdamageperlevel,
 		armor: champion.stats.armorperlevel,
-		magicResists: champion.stats.spellblockperlevel,
+		magicResist: champion.stats.spellblockperlevel,
 		attackSpeed: champion.stats.attackspeedperlevel * 0.01 * champion.stats.attackspeedratio,
 		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel,
 		critChance: champion.stats.critperlevel,
@@ -132,12 +132,13 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	FlatMagicPenetrationMod: 'flatMagicPen',
 	FlatMovementSpeedMod: 'moveSpeed',
 	FlatPhysicalDamageMod: 'attackDamage',
-	FlatSpellBlockMod: 'magicResists',
+	FlatSpellBlockMod: 'magicResist',
 	PercentArmorPenetrationMod: 'percentArmorPen',
 	PercentAttackSpeedMod: 'bonusAttackSpeedPercent',
 	PercentHealingAmountMod: 'healShieldPower',
 	PercentLifeStealMod: 'lifeSteal',
 	PercentMagicPenetrationMod: 'percentMagicPen',
+	PercentOmnivampMod: 'omnivamp',
 	PercentTenacityMod: 'tenacity',
 	PhysicalLethality: 'lethality',
 };
@@ -209,4 +210,4 @@ function getRuneShardStats(shards: IRuneShards, level: number) {
 
 export type IChampionStats = Record<IChampionStatName, number>;
 
-export type IChampionStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResists' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';
+export type IChampionStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResist' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';

@@ -32,7 +32,7 @@ bun test
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
-  - [ ] searching (TODO search string, aliases)
+  - [x] searching (search string, aliases)
   - [x] stat filters
   - [ ] item hover tooltip `Items/{{id}}.mItemDataClient`
   - [ ] buying mechanism, components into item and so on

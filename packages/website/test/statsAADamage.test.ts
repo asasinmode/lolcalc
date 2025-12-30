@@ -34,7 +34,7 @@ describe('15.24.1 draven shards 111', () => {
 			attackDamage: 208,
 			abilityPower: 70,
 			armor: 94,
-			magicResists: 55,
+			magicResist: 55,
 			abilityHaste: 80,
 			moveSpeed: 343,
 		});
@@ -72,7 +72,7 @@ describe('15.24.1 draven shards 111', () => {
 			lethality: 18,
 			attackDamage: 263,
 			armor: 73,
-			magicResists: 43,
+			magicResist: 43,
 			attackSpeed: 1.47,
 			abilityHaste: 20,
 			critChance: 0.75,
@@ -80,7 +80,7 @@ describe('15.24.1 draven shards 111', () => {
 			moveSpeed: 413,
 		});
 
-		const dummy: IDamageTarget = { stats: { hp: 1000, armor: 100, magicResists: 100 } };
+		const dummy: IDamageTarget = { stats: { hp: 1000, armor: 100, magicResist: 100 } };
 
 		const aaDamage = calculateDamage(
 			statsLvl12.attackDamage,

@@ -13,6 +13,7 @@ export type IItemStat = UnionKeys<(typeof data)[keyof typeof data]['stats']>;
 export interface IItem {
 	id: string;
 	name: string;
+	searchString: string;
 	stats: Partial<Record<IItemStat, number>>;
 	gold: {
 		base: number;

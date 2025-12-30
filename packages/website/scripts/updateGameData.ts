@@ -81,6 +81,7 @@ if (await itemFile.exists()) {
 if (!itemData || itemData?.version !== latestVersion) {
 	console.log('item data not present or outdated, fetching...');
 
+	const { entries: translations } = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`).then(r => r.json());
 	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`).then(r => r.json());
 
 	const UNPURCHASABLES_TO_KEEP = [
@@ -133,7 +134,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 						&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
 				})
 				.map(([itemId, itemData]) => {
-					const { name, stats, gold, image, into, from, maps: { 11: sr, 12: ha }, tags } = itemData as any;
+					const { name, stats, gold, image, into, from, tags, maps: { 11: sr, 12: ha } } = itemData as any;
 
 					let mapMask = 0;
 					if (sr) {
@@ -143,9 +144,18 @@ if (!itemData || itemData?.version !== latestVersion) {
 						mapMask |= MAPS.ha.mask;
 					}
 
+					const searchTerms = Array.from(
+						new Set(`${name};${(translations[`generatedtip_item_${itemId}_colloquialism`] || ';')};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')}`
+							.toLocaleLowerCase()
+							.replaceAll(/[^a-z;]/g, '')
+							.split(';')
+							.filter(v => v)),
+					);
+
 					return [itemId, {
 						id: itemId,
 						name,
+						searchString: searchTerms.join(';'),
 						stats,
 						gold,
 						image: image.full,
@@ -355,7 +365,7 @@ if (!uiData || uiData?.version !== latestVersion) {
 					['mana', 'Mana'],
 					['magicPen', 'MagicPenetration', 'MagicPen'],
 					['health', 'Health'],
-					['magicResists', 'MagicResist'],
+					['magicResist', 'MagicResist'],
 					['armor', 'Armor'],
 					['abilityHaste', 'AbilityHaste'],
 					['movement', 'Movespeed'],

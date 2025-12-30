@@ -34,7 +34,7 @@ function addItem(item: IItem) {
 }
 
 const targetDummy = ref<IDamageTarget>({
-	stats: { hp: 1000, armor: 0, magicResists: 0 },
+	stats: { hp: 1000, armor: 0, magicResist: 0 },
 });
 </script>
 

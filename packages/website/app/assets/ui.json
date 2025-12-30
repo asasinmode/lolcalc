@@ -271,7 +271,7 @@
 						]
 					}
 				},
-				"magicResists": {
+				"magicResist": {
 					"default": {
 						"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas4.png",
 						"resWidth": 1024,

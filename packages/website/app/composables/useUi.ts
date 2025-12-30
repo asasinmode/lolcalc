@@ -76,7 +76,7 @@ export const ITEM_SHOP_STAT_FILTERS = {
 		name: 'Armor',
 		filter: item => !!item.stats.FlatArmorMod,
 	},
-	magicResists: {
+	magicResist: {
 		name: 'Magic reistance',
 		filter: item => !!item.stats.FlatSpellBlockMod,
 	},

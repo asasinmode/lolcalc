@@ -10,7 +10,7 @@ export function calculateDamage(
 
 	const [resists, flatPen, percentPen] = type === 'physical'
 		? [target.stats.armor, penetration.lethality, penetration.percentArmorPen]
-		: [target.stats.magicResists, penetration.flatMagicPen, penetration.percentMagicPen];
+		: [target.stats.magicResist, penetration.flatMagicPen, penetration.percentMagicPen];
 
 	const effectiveResists = Math.max(0, (resists * (1 - percentPen)) - flatPen);
 	const postMitigationDamage = rawDamage / (1 + effectiveResists / 100);
@@ -29,5 +29,5 @@ interface IDamageResults {
 type IDamageType = 'physical' | 'magical' | 'true';
 
 export interface IDamageTarget {
-	stats: Pick<IChampionStats, 'hp' | 'armor' | 'magicResists'>;
+	stats: Pick<IChampionStats, 'hp' | 'armor' | 'magicResist'>;
 }

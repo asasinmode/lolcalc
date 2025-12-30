@@ -113,8 +113,8 @@ const searchResults = computed(() => {
 		return [];
 	}
 
-	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z]/g, '').split(' ').filter(v => v);
-	return sortedByPriceForMap.value.filter(item => splitSearch.every(word => item.name.replaceAll(/['. ]/g, '').toLocaleLowerCase().includes(word)));
+	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v);
+	return sortedByPriceForMap.value.filter(item => splitSearch.every(word => item.searchString.includes(word)));
 });
 
 const searchCursoredOverItem = computed(() => searchCursoredOverIndex.value !== undefined ? searchResults.value[searchCursoredOverIndex.value] : undefined);

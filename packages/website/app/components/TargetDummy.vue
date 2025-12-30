@@ -20,9 +20,9 @@ const { minorVersion } = usePatchVersion();
 			armor:
 			<input id="target-dummy-armor" v-model.number="value.stats.armor">
 		</label>
-		<label for="target-dummy-magicResists">
+		<label for="target-dummy-magicResist">
 			magicResists:
-			<input id="target-dummy-magicResists" v-model.number="value.stats.magicResists">
+			<input id="target-dummy-magicResist" v-model.number="value.stats.magicResist">
 		</label>
 	</div>
 </template>
