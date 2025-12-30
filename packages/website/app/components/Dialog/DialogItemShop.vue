@@ -307,25 +307,7 @@ defineExpose({
 						aria-atomic="true"
 						class="bg-pink-950 row-span-full"
 					>
-						<div v-if="searchCursoredOverItem" class="grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2 order-5">
-							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${searchCursoredOverItem.image.full}`"
-								:alt="`${searchCursoredOverItem.name} icon`"
-								width="64"
-								height="64"
-								class="row-span-full"
-								aria-hidden="true"
-								loading="lazy"
-							>
-							{{ searchCursoredOverItem?.name }}
-							<span>{{ searchCursoredOverItem?.gold.total }}</span>
-						</div>
-						<p v-if="searchCursoredOverItem" class="order-6">
-							<template v-for="(statValue, statName) in searchCursoredOverItem.stats" :key="statName">
-								<span>{{ statName }}: {{ statValue }}</span>
-								<br>
-							</template>
-						</p>
+						<ItemDescription v-if="searchCursoredOverItem" :item="searchCursoredOverItem" />
 					</section>
 				</div>
 			</div>
@@ -428,20 +410,7 @@ defineExpose({
 			</section>
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
-			<h2 class="grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2 order-5">
-				<img
-					v-if="selectedItem"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${selectedItem.image.full}`"
-					:alt="`${selectedItem.name} icon`"
-					width="64"
-					height="64"
-					class="row-span-full"
-					aria-hidden="true"
-					loading="lazy"
-				>
-				{{ selectedItem?.name }}
-				<span>{{ selectedItem?.gold.total }}</span>
-			</h2>
+			<ItemDescription v-if="selectedItem" :item="selectedItem" header-class="order-5" description-class="order-6" />
 			<button :disabled="!selectedItem" class="order-4" @click="buyItem(selectedItem!)">
 				Purchase
 			</button>
@@ -457,12 +426,6 @@ defineExpose({
 				{{ selectedItem?.image.full }}
 				{{ selectedItem?.from ? JSON.stringify(selectedItem.from, null, 2) : '' }}
 			</div>
-			<p class="order-6">
-				<template v-for="(statValue, statName) in selectedItem?.stats" :key="statName">
-					<span>{{ statName }}: {{ statValue }}</span>
-					<br>
-				</template>
-			</p>
 		</section>
 		<footer style="grid-area: footer">
 			<button>Sell</button>
