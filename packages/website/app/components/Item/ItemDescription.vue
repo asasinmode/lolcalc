@@ -7,18 +7,23 @@ defineProps<{
 }>();
 
 defineEmits<{
-	headerClick: [MouseEvent];
+	headerClick: [isRightClick: boolean];
 }>();
 
+const header = useTemplateRef<HTMLButtonElement>('header');
 const { version } = usePatchVersion();
+
+defineExpose({ header });
 </script>
 
 <template>
 	<component
 		:is="headerButton ? 'button' : 'div'"
+		ref="header"
 		class="text-start grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2 w-full"
 		:class="headerClass"
-		@click="$emit('headerClick', $event)"
+		@click="$emit('headerClick', false)"
+		@click.right="$emit('headerClick', true)"
 	>
 		<img
 			v-if="item"

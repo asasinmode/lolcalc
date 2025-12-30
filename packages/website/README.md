@@ -32,9 +32,9 @@ bun test
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
-  - [x] searching (search string, aliases)
+  - [x] searching
   - [x] stat filters
-  - [ ] double click to buy (check delay, check if when bought its set as selected)
+  - [x] double click to buy
   - [ ] item hover tooltip `Items/{{id}}.mItemDataClient`
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group

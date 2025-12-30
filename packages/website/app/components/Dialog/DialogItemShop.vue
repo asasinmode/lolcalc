@@ -104,6 +104,7 @@ function rightClickItem(event: MouseEvent, item: IItem) {
 const search = ref('');
 const searchInput = useTemplateRef('searchInput');
 const searchResultsContainer = useTemplateRef('searchResultsContainer');
+const searchItemDescription = useTemplateRef('searchItemDescription');
 const searchExpanded = ref(false);
 const searchCursoredOverIndex = ref<number>();
 const searchSelectedIndex = ref<number>();
@@ -135,14 +136,17 @@ function selectSearchResult(event: MouseEvent, index: number) {
 	if (event.button === 2) {
 		selectedItem.value = item;
 		searchCursoredOverIndex.value = undefined;
+		selectItem(item, true);
 		buyItem(item);
 		closeSearch();
 		searchInput.value?.blur();
 	} else {
 		searchCursoredOverIndex.value = index;
 		searchSelectedIndex.value = index;
-		displayedItem.value = item;
-		selectedItem.value = item;
+		if (selectOrBuyIfDouble(item, true)) {
+			closeSearch();
+			searchInput.value?.blur();
+		}
 	}
 }
 
@@ -152,8 +156,8 @@ function searchCursorOver(index?: number) {
 
 function closeSearchIfOutside(event: FocusEvent) {
 	const target = event.relatedTarget as HTMLElement | null;
-	if (!target || !searchResultsContainer.value?.contains(target)) {
-		// closeSearch();
+	if (!target || (target === searchItemDescription.value?.header) || !searchResultsContainer.value?.contains(target)) {
+		closeSearch();
 	}
 }
 
@@ -185,7 +189,7 @@ function onSearchKeydown(event: KeyboardEvent) {
 				searchCursoredOverIndex.value = (
 					(searchCursoredOverIndex.value === undefined ? -1 : searchCursoredOverIndex.value) + 1
 				) % resultsLength;
-				scrollSearchResultIntoView(searchCursoredOverIndex.value);
+				document.getElementById(`item-shop-search-result-${searchCursoredOverIndex.value}`)?.scrollIntoView({ block: 'nearest' });
 			}
 			break;
 		}
@@ -196,7 +200,7 @@ function onSearchKeydown(event: KeyboardEvent) {
 				searchCursoredOverIndex.value = (
 					(searchCursoredOverIndex.value === undefined ? (resultsLength + 1) : searchCursoredOverIndex.value) - 1 + resultsLength
 				) % resultsLength;
-				scrollSearchResultIntoView(searchCursoredOverIndex.value);
+				document.getElementById(`item-shop-search-result-${searchCursoredOverIndex.value}`)?.scrollIntoView({ block: 'nearest' });
 			}
 			break;
 		}
@@ -208,8 +212,27 @@ function onSearchKeydown(event: KeyboardEvent) {
 	event.preventDefault();
 }
 
-function scrollSearchResultIntoView(index: number) {
-	document.getElementById(`item-shop-search-result-${index}`)?.scrollIntoView({ block: 'nearest' });
+function onSearchHeaderClick(isRightClick: boolean) {
+	if (isRightClick) {
+		buyItem(searchCursoredOverItem.value!);
+	} else {
+		selectOrBuyIfDouble(searchCursoredOverItem.value!, true);
+	}
+}
+
+let lastLeftClicked: [time: number, itemId: string] | undefined;
+
+function selectOrBuyIfDouble(item: IItem, overwriteDisplayed: boolean): boolean {
+	const now = Date.now();
+	if (lastLeftClicked && item.id === lastLeftClicked[1] && ((now - lastLeftClicked[0]) < 500)) {
+		buyItem(item);
+		lastLeftClicked = undefined;
+		return true;
+	}
+
+	lastLeftClicked = [now, item.id];
+	selectItem(item, overwriteDisplayed);
+	return false;
 }
 
 defineExpose({
@@ -312,10 +335,11 @@ defineExpose({
 						class="bg-pink-950 row-span-full"
 					>
 						<ItemDescription
+							ref="searchItemDescription"
 							:item="searchCursoredOverItem"
 							header-class="hoverable:bg-white/10"
 							header-button
-							@header-click="selectItem(searchCursoredOverItem!, true)"
+							@header-click="onSearchHeaderClick"
 						/>
 					</section>
 				</div>
@@ -399,7 +423,7 @@ defineExpose({
 					v-for="item in groupedByEpicness[epicness]"
 					:key="item.id"
 					class="leading-tight text-center min-w-0 block hyphens-auto"
-					@mousedown.left="selectItem(item, true)"
+					@mousedown.left="selectOrBuyIfDouble(item, true)"
 					@mousedown.right="rightClickItem($event, item)"
 					@keydown.space="selectItem(item, true)"
 					@keydown.enter="buyItem(item)"
