@@ -5,7 +5,7 @@ const emit = defineEmits<{
 
 type IAllItemCategory = IItemCategory | 'all';
 
-const { version, minorVersion } = usePatchVersion();
+const { version } = usePatchVersion();
 const items = useItems();
 const maps = useMaps();
 const ui = useUi();
@@ -153,7 +153,7 @@ function searchCursorOver(index?: number) {
 function closeSearchIfOutside(event: FocusEvent) {
 	const target = event.relatedTarget as HTMLElement | null;
 	if (!target || !searchResultsContainer.value?.contains(target)) {
-		closeSearch();
+		// closeSearch();
 	}
 }
 
@@ -311,7 +311,12 @@ defineExpose({
 						aria-atomic="true"
 						class="bg-pink-950 row-span-full"
 					>
-						<ItemDescription :item="searchCursoredOverItem" />
+						<ItemDescription
+							:item="searchCursoredOverItem"
+							header-class="hoverable:bg-white/10"
+							header-button
+							@header-click="selectItem(searchCursoredOverItem!, true)"
+						/>
 					</section>
 				</div>
 			</div>
@@ -399,6 +404,7 @@ defineExpose({
 					@keydown.space="selectItem(item, true)"
 					@keydown.enter="buyItem(item)"
 				>
+					<span class="sr-only">{{ item.name }}</span>
 					<img
 						:title="item.name"
 						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
