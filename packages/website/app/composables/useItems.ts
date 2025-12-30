@@ -20,15 +20,7 @@ export interface IItem {
 		total: number;
 		sell: number;
 	};
-	image: {
-		full: string;
-		sprite: string;
-		group: string;
-		x: number;
-		y: number;
-		w: number;
-		h: number;
-	};
+	image: string;
 	mapMask: number;
 	into?: string[];
 	from?: string[];

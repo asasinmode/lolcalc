@@ -48,7 +48,7 @@ const targetDummy = ref<IDamageTarget>({
 			<button @click="champSelectDialog?.open()">
 				<img
 					v-if="sourceChampion"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${sourceChampion.image.full}`"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${sourceChampion.image}`"
 					loading="lazy"
 					width="128"
 					height="128"
@@ -85,7 +85,7 @@ const targetDummy = ref<IDamageTarget>({
 			>
 				<img
 					v-if="sourceChampionItems[i - 1]"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${sourceChampionItems[i - 1]!.image.full}`"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${sourceChampionItems[i - 1]!.image}`"
 					:title="sourceChampionItems[i - 1]!.name"
 					width="64"
 					height="64"

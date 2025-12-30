@@ -21,14 +21,6 @@ export interface IChampion {
 	name: string;
 	partype: string;
 	stats: Record<IChampionStat, number>;
-	image: {
-		full: string;
-		sprite: string;
-		group: string;
-		x: number;
-		y: number;
-		w: number;
-		h: number;
-	};
+	image: string;
 	roles: Partial<Record<IChampionRole, boolean>>;
 }

@@ -48,7 +48,7 @@ if (!championData || championData?.version !== latestVersion) {
 						name,
 						partype,
 						stats,
-						image,
+						image: (image as unknown as { full: string }).full,
 						roles: {},
 					}];
 				}),
@@ -148,7 +148,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 						name,
 						stats,
 						gold,
-						image,
+						image: image.full,
 						mapMask,
 						into: into?.filter((id: string) => id.length <= 4),
 						from: from?.filter((id: string) => id.length <= 4),

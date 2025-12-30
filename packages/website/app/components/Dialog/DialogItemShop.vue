@@ -97,6 +97,10 @@ function buyItem(item: IItem) {
 	emit('buyItem', item);
 }
 
+function rightClickItem(event: MouseEvent, item: IItem) {
+	!event.shiftKey && buyItem(item);
+}
+
 const search = ref('');
 const searchInput = useTemplateRef('searchInput');
 const searchResultsContainer = useTemplateRef('searchResultsContainer');
@@ -289,7 +293,7 @@ defineExpose({
 							@mousedown.stop.prevent="selectSearchResult($event, index)"
 						>
 							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 								:alt="`${item.name} icon`"
 								width="64"
 								height="64"
@@ -391,13 +395,13 @@ defineExpose({
 					:key="item.id"
 					class="leading-tight text-center min-w-0 block hyphens-auto"
 					@mousedown.left="selectItem(item, true)"
-					@mousedown.right="buyItem(item)"
+					@mousedown.right="rightClickItem($event, item)"
 					@keydown.space="selectItem(item, true)"
 					@keydown.enter="buyItem(item)"
 				>
 					<img
 						:title="item.name"
-						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`"
+						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 						:alt="`${item.name} icon`"
 						class="w-full"
 						width="64"
@@ -423,7 +427,7 @@ defineExpose({
 				</button>
 			</div>
 			<div class="whitespace-pre order-3">
-				{{ selectedItem?.image.full }}
+				{{ selectedItem?.image }}
 				{{ selectedItem?.from ? JSON.stringify(selectedItem.from, null, 2) : '' }}
 			</div>
 		</section>

@@ -97,8 +97,8 @@ defineExpose({
 			>
 				<img
 					:title="champion.name"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full}`"
-					:style="`background-image: url(https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image.full})`"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image}`"
+					:style="`background-image: url(https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image})`"
 					class="b aspect-1"
 					width="128"
 					height="128"
@@ -113,7 +113,7 @@ defineExpose({
 
 <style>
 @layer components {
-	#dialog-champion-select > button img {
+	#dialog-champion-select > section button img {
 		object-fit: none;
 		object-position: 100px 100px;
 		background-repeat: no-repeat;

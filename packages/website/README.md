@@ -26,7 +26,7 @@ bun test
 - [x] script for downloading/updating latest patch data
 - [x] calculating stats (no item/champ passives)
 - [x] item rarity for shop
-- [ ] change `champion/item.image` to just string if no need for object or find the spritesheet
+- [x] change `champion/item.image` to just string if no need for object or find the spritesheet
 - [x] remove dialog/champ dialog search placeholders, only label
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] champ select dialog

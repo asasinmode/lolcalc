@@ -12,7 +12,7 @@ const { version } = usePatchVersion();
 	<div class="grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2" :class="headerClass">
 		<img
 			v-if="item"
-			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image.full}`"
+			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 			width="64"
 			height="64"
 			class="row-span-full"
