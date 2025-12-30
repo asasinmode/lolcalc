@@ -83,12 +83,13 @@ const targetDummy = ref<IDamageTarget>({
 				class="border-gray-7 border size-8 inline-block"
 				@click.right.prevent="sourceChampionItems.splice(i - 1, 1)"
 			>
+				<span class="sr-only">{{ sourceChampionItems[i - 1]!.name }}</span>
 				<img
 					v-if="sourceChampionItems[i - 1]"
 					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${sourceChampionItems[i - 1]!.image}`"
-					:title="sourceChampionItems[i - 1]!.name"
 					width="64"
 					height="64"
+					loading="lazy"
 				>
 			</button>
 			<button @click="runeDialog?.open()">

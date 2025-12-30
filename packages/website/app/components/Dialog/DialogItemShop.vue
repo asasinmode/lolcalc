@@ -262,6 +262,10 @@ function updateTooltipPosition(event: MouseEvent) {
 	itemTooltip.value!.style.top = `${clientY + 10}px`;
 }
 
+const buildsIntoItems = computed(() => selectedItem.value?.into?.filter((id) => {
+	return id in items && ((items[id]!.mapMask & mapMask.value) !== 0);
+}).map(id => items[id]!) || []);
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -345,7 +349,6 @@ defineExpose({
 						>
 							<img
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
-								:alt="`${item.name} icon`"
 								width="64"
 								height="64"
 								:class="{ b: searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false }"
@@ -459,9 +462,7 @@ defineExpose({
 				>
 					<span class="sr-only">{{ item.name }}</span>
 					<img
-						:title="item.name"
 						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
-						:alt="`${item.name} icon`"
 						class="w-full"
 						width="64"
 						height="64"
@@ -480,9 +481,28 @@ defineExpose({
 			<h3 class="order-1">
 				Builds into
 			</h3>
-			<div class="flex gap-3 order-2">
-				<button v-for="i in 7" :key="i" class="bg-black size-9 truncate" :disabled="!selectedItem?.into?.[i - 1]">
-					{{ selectedItem?.into?.[i - 1] || '' }}
+			<div class="flex gap-3 order-2 *:bg-black *:size-9">
+				<button v-for="i in 6" :key="i" :disabled="!buildsIntoItems[i - 1]" @mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)">
+					<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.name }}</span>
+					<img
+						v-if="buildsIntoItems[i - 1]"
+						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]!.image}`"
+						width="64"
+						height="64"
+						aria-hidden="true"
+						loading="lazy"
+					>
+				</button>
+				<button class="bg-black size-9 truncate" :disabled="!buildsIntoItems[7]">
+					<span v-if="buildsIntoItems[7]" class="sr-only">{{ buildsIntoItems[7].name }}</span>
+					<img
+						v-if="buildsIntoItems[7]"
+						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[7].image}`"
+						width="64"
+						height="64"
+						aria-hidden="true"
+						loading="lazy"
+					>
 				</button>
 			</div>
 			<div class="whitespace-pre order-3">
