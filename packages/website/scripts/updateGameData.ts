@@ -91,12 +91,9 @@ if (!itemData || itemData?.version !== latestVersion) {
 	];
 
 	const UNINTERESTING_ITEMS = [
-		'3330',	// scarecrow effigy
 		'3340',	// stealth ward
 		'3363',	// farsight alteration
 		'3364',	// oracle lens
-		'3599',	// kalista's black spear
-		'3600',	// kalista's black spear
 		'2003',	// health potion
 		'2055',	// control ward
 		'2031',	// refillable potion
@@ -121,8 +118,9 @@ if (!itemData || itemData?.version !== latestVersion) {
 		data: Object.fromEntries(
 			Object.entries(data)
 				.filter(([itemId, itemData]) => {
-					const { maps: { 11: sr, 12: ha }, gold } = itemData as {
+					const { maps: { 11: sr, 12: ha }, requiredChampion, gold } = itemData as {
 						maps: Record<number, boolean>;
+						requiredChampion?: boolean;
 						gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
 					};
 
@@ -131,6 +129,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 						&& itemId.length <= 4
 						&& gold.inStore !== false
 						&& gold.hideFromAll !== false
+						&& !requiredChampion
 						&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
 				})
 				.map(([itemId, itemData]) => {
