@@ -610,43 +610,46 @@ defineExpose({
 			<h3 v-show="displayedItem" class="sr-only">
 				{{ displayedItem?.name }} build path
 			</h3>
-			<ul class="text-center basis-[40%] grid order-3 place-items-center">
-				<li v-if="displayedItem" class="w-full">
-					<ItemBuildPathButton
-						:item="displayedItem"
-						:is-selected="selectedItem?.id === displayedItem.id"
-						@click="selectItem(displayedItem, false)"
-						@click.right="rightClickItem($event, displayedItem)"
-						@mouseenter="enterTooltipableElement($event, displayedItem)"
-					/>
-					<ul
-						v-if="displayedItem.from?.length"
-						class="grid grid-flow-col w-full"
-						:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
-					>
-						<li v-for="secondLevelItemId in displayedItem.from" :key="`${displayedItem.id}-${secondLevelItemId}`">
-							<ItemBuildPathButton
-								:item="items[secondLevelItemId]!"
-								:is-selected="selectedItem?.id === secondLevelItemId"
-								@click="selectItem(items[secondLevelItemId]!, false)"
-								@click.right="rightClickItem($event, items[secondLevelItemId]!)"
-								@mouseenter="enterTooltipableElement($event, items[secondLevelItemId]!)"
-							/>
-							<ul v-if="items[secondLevelItemId]?.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
-								<li v-for="thirdLevelItemId in items[secondLevelItemId].from" :key="`${displayedItem.id}-${secondLevelItemId}-${thirdLevelItemId}`">
-									<ItemBuildPathButton
-										:item="items[thirdLevelItemId]!"
-										:is-selected="selectedItem?.id === thirdLevelItemId"
-										@click="selectItem(items[thirdLevelItemId]!, false)"
-										@click.right="rightClickItem($event, items[thirdLevelItemId]!)"
-										@mouseenter="enterTooltipableElement($event, items[thirdLevelItemId]!)"
-									/>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
+			<div
+				id="item-shop-build-path"
+				:data-levels="displayedItem?.from?.some(id => items[id]?.from?.length) ? 3 : displayedItem?.from?.length ? 2 : 1"
+				class="text-center flex basis-[40%] flex-col items-center justify-center order-3"
+			>
+				<ItemBuildPathButton
+					v-if="displayedItem"
+					:item="displayedItem"
+					:is-selected="selectedItem?.id === displayedItem.id"
+					@click="selectItem(displayedItem, false)"
+					@click.right="rightClickItem($event, displayedItem)"
+					@mouseenter="enterTooltipableElement($event, displayedItem)"
+				/>
+				<ul
+					v-if="displayedItem?.from?.length"
+					class="grid grid-flow-col w-full"
+					:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
+				>
+					<li v-for="secondLevelItemId in displayedItem.from" :key="`${displayedItem.id}-${secondLevelItemId}`">
+						<ItemBuildPathButton
+							:item="items[secondLevelItemId]!"
+							:is-selected="selectedItem?.id === secondLevelItemId"
+							@click="selectItem(items[secondLevelItemId]!, false)"
+							@click.right="rightClickItem($event, items[secondLevelItemId]!)"
+							@mouseenter="enterTooltipableElement($event, items[secondLevelItemId]!)"
+						/>
+						<ul v-if="items[secondLevelItemId]?.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
+							<li v-for="thirdLevelItemId in items[secondLevelItemId].from" :key="`${displayedItem.id}-${secondLevelItemId}-${thirdLevelItemId}`">
+								<ItemBuildPathButton
+									:item="items[thirdLevelItemId]!"
+									:is-selected="selectedItem?.id === thirdLevelItemId"
+									@click="selectItem(items[thirdLevelItemId]!, false)"
+									@click.right="rightClickItem($event, items[thirdLevelItemId]!)"
+									@mouseenter="enterTooltipableElement($event, items[thirdLevelItemId]!)"
+								/>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</section>
 		<footer style="grid-area: footer">
 			<button>Sell</button>
