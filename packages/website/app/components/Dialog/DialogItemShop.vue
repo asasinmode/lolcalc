@@ -468,13 +468,19 @@ defineExpose({
 			<!-- 	</template> -->
 			<!-- </VButtonRadiogroup> -->
 			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
-				<img v-bind="textureBgImageAttrs(ui.shop.swapItemOrder, 32)">
+				<img
+					v-bind="textureBgImageAttrs(ui.shop.swapItemOrder.default, 32)"
+					:style="`--txt-hover-uv-start-x: -${ui.shop.swapItemOrder.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.swapItemOrder.hover.uv[1]}px`"
+				>
 				<span class="sr-only">Swap item order</span>
 			</button>
 		</header>
 		<aside style="grid-area: aside;" class="row-start-2">
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
-				<img v-bind="textureBgImageAttrs(ui.shop.clearFilters, 28)">
+				<img
+					v-bind="textureBgImageAttrs(ui.shop.clearFilters.default, 28)"
+					:style="`--txt-hover-uv-start-x: -${ui.shop.clearFilters.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.clearFilters.hover.uv[1]}px`"
+				>
 				<span class="sr-only">Clear stat filters</span>
 			</button>
 			<fieldset id="item-shop-stat-filters">
@@ -530,7 +536,11 @@ defineExpose({
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
 			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" />
-			<button :disabled="!selectedItem" class="order-4" @click="buyItem(selectedItem!)">
+			<button
+				:disabled="!selectedItem"
+				class="py-1 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-gray-950"
+				@click="buyItem(selectedItem!)"
+			>
 				Purchase
 			</button>
 			<h3 class="order-1">
@@ -676,6 +686,16 @@ defineExpose({
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns: auto 1fr max-content;
 		--item-img-size: 3.5rem;
+	}
+
+	#item-shop-swap-sort-order:hover,
+	#item-shop-swap-sort-order:focus-visible,
+	#item-shop-clear-stat-filters:hover,
+	#item-shop-clear-stat-filters:focus-visible {
+		img {
+			--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
+			--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
+		}
 	}
 
 	#item-shop-stat-filters {

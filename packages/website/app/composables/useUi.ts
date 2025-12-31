@@ -108,7 +108,13 @@ interface IUiData {
 	shop: {
 		categories: Record<IItemCategory | 'all', ITexture>;
 		stats: Partial<Record<IItemShopStatFilter, { default: ITexture; selected: Pick<ITexture, 'uv'> }>>;
-		clearFilters: ITexture;
-		swapItemOrder: ITexture;
+		clearFilters: {
+			default: ITexture;
+			hover: Pick<ITexture, 'uv'>;
+		};
+		swapItemOrder: {
+			default: ITexture;
+			hover: Pick<ITexture, 'uv'>;
+		};
 	};
 }
