@@ -31,7 +31,7 @@ defineExpose({ header });
 			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 			width="64"
 			height="64"
-			class="row-span-full"
+			class="row-span-full size-(--item-img-size)"
 			aria-hidden="true"
 			loading="lazy"
 		>

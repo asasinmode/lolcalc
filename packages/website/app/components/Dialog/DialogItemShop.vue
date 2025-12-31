@@ -302,6 +302,20 @@ function selectBuildsIntoMoreItem(item: IItem) {
 	leaveTooltipableElement();
 }
 
+const displayedItemBuildPath2ndLevelItemCount = computed(() => displayedItem.value?.from?.length || 0);
+const displayedItemBuildPath3rdLevelHasTwo3Items = computed(() => {
+	let has3Components = false;
+	for (const itemId of displayedItem.value?.from || []) {
+		const currentHas3Components = (items[itemId]?.from?.length || 0) >= 3;
+		if (has3Components && currentHas3Components) {
+			return true;
+		}
+		has3Components ||= currentHas3Components;
+	}
+
+	return false;
+});
+
 onBeforeUnmount(() => {
 	window.removeEventListener('resize', updateBuildsIntoMorePosition);
 	window.removeEventListener('scroll', updateBuildsIntoMorePosition);
@@ -316,7 +330,7 @@ defineExpose({
 	<VDialog
 		id="dialog-item-shop"
 		ref="vDialog"
-		class="bg-cyan-950 max-h-[80vh] w-[min(60vw,64rem)] shadow-lg relative of-visible [&[open]]-grid"
+		class="bg-cyan-950 max-h-[80vh] max-w-[90vw] shadow-lg relative of-visible [&[open]]-grid"
 		@close="closeSearch"
 		@contextmenu.prevent=""
 	>
@@ -364,7 +378,7 @@ defineExpose({
 				<div
 					v-show="searchExpanded"
 					ref="searchResultsContainer"
-					class="bg-blue-950 grid grid-flow-col grid-cols-[auto_1fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full bottom-0 left-0 absolute"
+					class="bg-blue-950 grid grid-flow-col grid-cols-[auto_1fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full bottom-0 left-0 absolute z-10"
 					@mousedown.prevent=""
 				>
 					<p id="item-shop-results-lbl">
@@ -384,6 +398,7 @@ defineExpose({
 							class="hover:bg-white/10"
 							:class="{
 								'bg-white/10': searchSelectedIndex === index,
+								'selected': searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
 							}"
 							@mouseenter="enterTooltipableElement($event, item)"
 							@mousedown.stop.prevent="selectSearchResult($event, index)"
@@ -392,8 +407,7 @@ defineExpose({
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 								width="64"
 								height="64"
-								:class="{ b: searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false }"
-								class="row-span-full"
+								class="item-shop-item-img row-span-full"
 								aria-hidden="true"
 								loading="lazy"
 							>
@@ -486,7 +500,7 @@ defineExpose({
 			<section
 				v-for="[epicness, epicnessName] in computedEpicnesses"
 				:key="epicness"
-				class="grid auto-rows-min grid-cols-[repeat(auto-fit,_minmax(4rem,_1fr))]"
+				class="gap-3 grid grid-cols-10"
 			>
 				<h3 class="col-span-full">
 					{{ epicnessName }}
@@ -494,8 +508,8 @@ defineExpose({
 				<button
 					v-for="item in groupedByEpicness[epicness]"
 					:key="item.id"
-					class="leading-tight text-center min-w-0 block hyphens-auto"
-					:class="{ b: selectedItem?.id === item.id }"
+					class="item-shop-item-btn text-center w-fit"
+					:class="{ selected: selectedItem?.id === item.id }"
 					@mouseenter="enterTooltipableElement($event, item)"
 					@mousedown.left="selectOrBuyIfDouble(item, true)"
 					@mousedown.right="rightClickItem($event, item)"
@@ -505,7 +519,6 @@ defineExpose({
 					<span class="sr-only">{{ item.name }}</span>
 					<img
 						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
-						class="w-full"
 						width="64"
 						height="64"
 						aria-hidden="true"
@@ -523,10 +536,9 @@ defineExpose({
 			<h3 class="order-1">
 				Builds into
 			</h3>
-			<ul class="flex gap-3 justify-around order-2 relative *:bg-black *:size-9">
+			<ul id="item-shop-builds-into-list" class="flex gap-3 h-(--item-img-size) justify-around order-2 relative *:shrink-0">
 				<li v-for="i in 6" :key="i">
 					<button
-						class="size-full"
 						:disabled="!buildsIntoItems[i - 1]"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
@@ -536,6 +548,7 @@ defineExpose({
 						<img
 							v-if="buildsIntoItems[i - 1]"
 							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]!.image}`"
+							class="item-shop-item-img"
 							width="64"
 							height="64"
 							aria-hidden="true"
@@ -546,7 +559,6 @@ defineExpose({
 				<li>
 					<button
 						v-if="buildsIntoItems.length <= 7"
-						class="size-full"
 						:disabled="!buildsIntoItems[6]"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[6]!)"
@@ -556,13 +568,14 @@ defineExpose({
 						<img
 							v-if="buildsIntoItems[6]"
 							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[6].image}`"
+							class="item-shop-item-img"
 							width="64"
 							height="64"
 							aria-hidden="true"
 							loading="lazy"
 						>
 					</button>
-					<button v-else ref="buildsIntoMoreButton" popovertarget="builds-into-more-list" class="size-full" @focusout="closeBuildsIntoMoreListIfOutside">
+					<button v-else ref="buildsIntoMoreButton" popovertarget="builds-into-more-list" class="size-(--item-img-size)" @focusout="closeBuildsIntoMoreListIfOutside">
 						+{{ buildsIntoItems.length - 6 }}
 					</button>
 					<ul
@@ -582,6 +595,7 @@ defineExpose({
 							>
 								<img
 									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+									class="item-shop-item-img"
 									width="64"
 									height="64"
 									aria-hidden="true"
@@ -596,8 +610,8 @@ defineExpose({
 			<h3 v-show="displayedItem" class="sr-only">
 				{{ displayedItem?.name }} build path
 			</h3>
-			<ul class="text-center basis-[50%] grid order-3 place-items-center">
-				<li v-if="displayedItem">
+			<ul class="text-center basis-[40%] grid order-3 place-items-center">
+				<li v-if="displayedItem" class="w-full">
 					<ItemBuildPathButton
 						:item="displayedItem"
 						:is-selected="selectedItem?.id === displayedItem.id"
@@ -605,7 +619,11 @@ defineExpose({
 						@click.right="rightClickItem($event, displayedItem)"
 						@mouseenter="enterTooltipableElement($event, displayedItem)"
 					/>
-					<ul v-if="displayedItem.from?.length" class="flex">
+					<ul
+						v-if="displayedItem.from?.length"
+						class="grid grid-flow-col w-full"
+						:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
+					>
 						<li v-for="secondLevelItemId in displayedItem.from" :key="`${displayedItem.id}-${secondLevelItemId}`">
 							<ItemBuildPathButton
 								:item="items[secondLevelItemId]!"
@@ -614,7 +632,7 @@ defineExpose({
 								@click.right="rightClickItem($event, items[secondLevelItemId]!)"
 								@mouseenter="enterTooltipableElement($event, items[secondLevelItemId]!)"
 							/>
-							<ul v-if="items[secondLevelItemId]?.from?.length" class="flex">
+							<ul v-if="items[secondLevelItemId]?.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
 								<li v-for="thirdLevelItemId in items[secondLevelItemId].from" :key="`${displayedItem.id}-${secondLevelItemId}-${thirdLevelItemId}`">
 									<ItemBuildPathButton
 										:item="items[thirdLevelItemId]!"
@@ -653,7 +671,8 @@ defineExpose({
 			'aside items builds-into'
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
-		grid-template-columns: auto 1fr auto;
+		grid-template-columns: auto 1fr max-content;
+		--item-img-size: 3.5rem;
 	}
 
 	#item-shop-stat-filters {
@@ -694,6 +713,46 @@ defineExpose({
 
 	#item-shop-search[data-empty='true'] ~ button {
 		display: none;
+	}
+
+	.item-shop-item-btn {
+		@apply relative;
+
+		&:hover:before,
+		&.selected:before {
+			@apply 'content-empty -inset-1 absolute -z-1';
+		}
+
+		&:hover:before {
+			@apply 'bg-blue/10';
+		}
+
+		&.selected:before {
+			@apply 'b b-blue';
+			background-image: linear-gradient(0deg, theme('colors.blue/0.1'), transparent);
+		}
+	}
+
+	.item-shop-item-btn img,
+	.item-shop-item-img {
+		@apply 'size-[3.125rem] m-[0.1875rem]';
+
+		--inner-border: gray;
+		box-shadow:
+			0 0 0 2px var(--inner-border),
+			0 0 0 3px black;
+	}
+
+	.item-shop-item-btn:hover img,
+	.item-shop-item-btn.selected img,
+	#item-shop-search-listbox > li.selected img,
+	#item-shop-search-listbox > li:hover img,
+	.item-shop-item-img:hover {
+		--inner-border: white;
+	}
+
+	#item-shop-builds-into-list > li > button {
+		@apply 'bg-black size-(--item-img-size)';
 	}
 }
 </style>

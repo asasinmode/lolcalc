@@ -8,10 +8,7 @@ const { version } = usePatchVersion();
 </script>
 
 <template>
-	<button
-		class="p-1"
-		:class="{ b: isSelected }"
-	>
+	<button class="item-shop-item-btn" :class="{ selected: isSelected }">
 		<span class="sr-only">{{ item.name }}</span>
 		<img
 			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
