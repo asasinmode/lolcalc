@@ -9,7 +9,7 @@ const { version } = usePatchVersion();
 
 <template>
 	<button class="item-shop-item-btn" :class="{ selected: isSelected }" :data-has-components="item.from?.length ? '' : undefined">
-		<span class="sr-only">{{ item.name }}</span>
+		<span>{{ item.name }}</span>
 		<img
 			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 			width="64"

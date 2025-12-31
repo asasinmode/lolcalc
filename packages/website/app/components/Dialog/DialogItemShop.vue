@@ -524,27 +524,30 @@ defineExpose({
 					:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
 				>
 			</button>
-			<ul>
-				<li v-for="(item, index) in bootItems" :key="item.id" :style="`--index: ${index}`">
-					<button
-						class="item-shop-item-btn"
-						:class="{ selected: selectedItem?.id === item.id }"
-						@mouseenter="enterTooltipableElement($event, item)"
-						@click="selectOrBuyIfDouble(item, true)"
-						@click.right="rightClickItem($event, item)"
-					>
-						<span class="sr-only">{{ item.name }}</span>
-						<img
-							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
-							width="64"
-							height="64"
-							aria-hidden="true"
-							loading="lazy"
+			<Icon id="panel-boots-caret-icon" name="ph:caret-left-bold" />
+			<div>
+				<ul>
+					<li v-for="item in bootItems" :key="item.id">
+						<button
+							class="item-shop-item-btn"
+							:class="{ selected: selectedItem?.id === item.id }"
+							@mouseenter="enterTooltipableElement($event, item)"
+							@click="selectOrBuyIfDouble(item, true)"
+							@click.right="rightClickItem($event, item)"
 						>
-						{{ item.gold.total }}
-					</button>
-				</li>
-			</ul>
+							<span>{{ item.name }}</span>
+							<img
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+								width="64"
+								height="64"
+								aria-hidden="true"
+								loading="lazy"
+							>
+							{{ item.gold.total }}
+						</button>
+					</li>
+				</ul>
+			</div>
 		</section>
 		<section style="grid-area: items;" class="px-3 py-2 overflow-y-auto">
 			<h2 class="sr-only" aria-live="polite">
@@ -568,7 +571,7 @@ defineExpose({
 							@keydown.space="selectItem(item, true)"
 							@keydown.enter="buyItem(item)"
 						>
-							<span class="sr-only">{{ item.name }}</span>
+							<span>{{ item.name }}</span>
 							<img
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 								width="64"
@@ -783,34 +786,43 @@ defineExpose({
 	}
 
 	#item-shop-panel-boots {
-		@apply 'bg-inherit left-0 top-1/2 absolute z-10 -translate-x-full';
+		@apply 'bg-inherit p-4 pl-6 left-0 top-1/2 absolute z-10 -translate-x-full';
 
-		ul {
-			@apply 'p-(--padding) relative of-hidden w-(--desktop-w) h-(--desktop-h)';
+		> div {
+			@apply 'relative w-(--desktop-w) h-(--desktop-h) box-content of-hidden';
 
-			--padding: calc(var(--spacing) * 4);
-			--gap: calc(var(--spacing) * 3);
-			--cols: 3;
-			--rows: 3;
-			--row-height: calc(var(--item-img-size) + 1.5rem + var(--gap));
-			--desktop-w: calc(var(--item-img-size) + 2 * var(--padding));
-			--desktop-h: calc(var(--row-height) * var(--rows) - 1.5rem + 2 * var(--padding));
+			--gap: var(--spacing) * 3;
+			--row-h: calc(var(--item-img-size) + 1.5rem);
+			--inner-p: var(--spacing) * 1.25;
+			--desktop-w: calc(var(--item-img-size) + 2 * var(--inner-p));
+			--desktop-h: calc(var(--row-h) * 3 + 2 * var(--gap) + 2 * var(--inner-p));
 
-			li {
-				@apply 'absolute top-0 right-0 -translate-x-(--x-translate) translate-y-(--y-translate)';
+			ul {
+				@apply 'absolute right-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
 
-				--row: mod(var(--index), var(--rows));
-				--col: round(down, calc(var(--index) / var(--rows)));
-				--x-translate: calc(var(--col) * (var(--item-img-size) + var(--gap)) + var(--padding));
-				--y-translate: calc(var(--row) * (var(--item-img-size) + 1.25rem + var(--gap)) + var(--padding));
+				direction: rtl;
 			}
+		}
+
+		#panel-boots-caret-icon {
+			@apply 'size-5 left-1 top-1/2 absolute -translate-y-full';
 		}
 
 		&[data-pinned],
 		&:hover,
 		&:has(li > button:focus-visible) {
-			ul {
-				@apply 'w-[calc(var(--item-img-size)_*_var(--cols)_+_var(--gap)_*_(var(--cols)_-_1)_+_var(--padding)_*_2)]';
+			@apply 'pl-4';
+
+			#panel-boots-caret-icon {
+				@apply 'hidden';
+			}
+
+			> div {
+				@apply 'w-auto of-visible';
+
+				ul {
+					@apply 'static w-auto';
+				}
 			}
 		}
 
@@ -840,6 +852,10 @@ defineExpose({
 	.item-shop-item-btn {
 		@apply 'p-1 -m-1';
 
+		> span:first-child {
+			@apply 'sr-only';
+		}
+
 		&:hover,
 		&:focus-visible {
 			@apply 'bg-blue/10';
@@ -853,7 +869,7 @@ defineExpose({
 
 	.item-shop-item-btn img,
 	.item-shop-item-img {
-		@apply 'size-[3.125rem] m-[0.1875rem]';
+		@apply 'size-12.5 min-w-12.5 m-0.75';
 
 		--inner-border: gray;
 		box-shadow:
