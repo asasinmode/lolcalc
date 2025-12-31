@@ -25,13 +25,11 @@ const { version } = usePatchVersion();
 #item-shop-build-path {
 	--build-path-clr: theme('colors.amber.100');
 
-	&[data-levels='2'] > button,
-	&[data-levels='3'] > button,
-	> ul > li > button[data-has-components] {
-		@apply 'mb-2.5';
+	button[data-has-components] {
+		@apply 'mb-1.5 relative';
 
-		> span:last-child:after {
-			@apply 'pointer-events-none content-empty block absolute w-px h-1.25 -bottom-1.5 z-100 translate-y-full -translate-x-1/2 left-1/2 bg-[var(--build-path-clr)]';
+		&:before {
+			@apply 'pointer-events-none content-empty block absolute w-px h-1.25 -bottom-0.5 z-100 translate-y-full -translate-x-1/2 left-1/2 bg-[var(--build-path-clr)]';
 		}
 	}
 
@@ -39,10 +37,10 @@ const { version } = usePatchVersion();
 		@apply 'relative';
 
 		button {
-			@apply 'mt-5 relative';
+			@apply 'mt-4 relative';
 
 			&:after {
-				@apply 'pointer-events-none content-empty block absolute w-px h-5 top-0 -translate-y-full -translate-x-1/2 left-1/2 bg-[var(--build-path-clr)]';
+				@apply 'pointer-events-none content-empty block absolute w-px h-5 top-1 -translate-y-full -translate-x-1/2 left-1/2 bg-[var(--build-path-clr)]';
 			}
 		}
 

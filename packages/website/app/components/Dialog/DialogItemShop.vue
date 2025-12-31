@@ -323,9 +323,9 @@ onBeforeUnmount(() => {
 
 /* eslint-disable antfu/consistent-list-newline */
 const bootItems = [
-	'3006', '3047', '3111', // first col: berserker's greaves, plated steelcaps, mercury's treads
-	'3158', '3009', '3020', // 2nd col: ionian boots of lucidity, boots of swiftness, sorcerer's shoes
-	'1001', '3010', // 3rd col: boots, symbiotic soles
+	'1001', '3047', '3111', // first col: boots, plated steelcaps, mercury's treads
+	'3006', '3009', '3020', // 2nd col: berserker's greaves, boots of swiftness, sorcerer's shoes
+	'3158', '3010', // 3rd col: ionian boots of lucidity, symbiotic soles
 ].map(id => items[id]!);
 /* eslint-enable antfu/consistent-list-newline */
 
@@ -546,40 +546,41 @@ defineExpose({
 				</li>
 			</ul>
 		</section>
-		<section style="grid-area: items;" class="overflow-y-auto">
+		<section style="grid-area: items;" class="px-3 py-2 overflow-y-auto">
 			<h2 class="sr-only" aria-live="polite">
 				{{ selectedCategory }} items
 			</h2>
-			<section
+			<template
 				v-for="[epicness, epicnessName] in computedEpicnesses"
 				:key="epicness"
-				class="gap-3 grid grid-cols-10"
 			>
-				<h3 class="col-span-full">
+				<h3 class="font-700 mb-1 uppercase">
 					{{ epicnessName }}
 				</h3>
-				<button
-					v-for="item in groupedByEpicness[epicness]"
-					:key="item.id"
-					class="item-shop-item-btn"
-					:class="{ selected: selectedItem?.id === item.id }"
-					@mouseenter="enterTooltipableElement($event, item)"
-					@mousedown.left="selectOrBuyIfDouble(item, true)"
-					@mousedown.right="rightClickItem($event, item)"
-					@keydown.space="selectItem(item, true)"
-					@keydown.enter="buyItem(item)"
-				>
-					<span class="sr-only">{{ item.name }}</span>
-					<img
-						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
-						width="64"
-						height="64"
-						aria-hidden="true"
-						loading="lazy"
-					>
-					{{ item.gold.total }}
-				</button>
-			</section>
+				<ul class="mb-5 gap-3 grid grid-cols-10 last:mb-0">
+					<li v-for="item in groupedByEpicness[epicness]" :key="item.id">
+						<button
+							class="item-shop-item-btn"
+							:class="{ selected: selectedItem?.id === item.id }"
+							@mouseenter="enterTooltipableElement($event, item)"
+							@mousedown.left="selectOrBuyIfDouble(item, true)"
+							@mousedown.right="rightClickItem($event, item)"
+							@keydown.space="selectItem(item, true)"
+							@keydown.enter="buyItem(item)"
+						>
+							<span class="sr-only">{{ item.name }}</span>
+							<img
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+								width="64"
+								height="64"
+								aria-hidden="true"
+								loading="lazy"
+							>
+							{{ item.gold.total }}
+						</button>
+					</li>
+				</ul>
+			</template>
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
 			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" />
@@ -667,11 +668,7 @@ defineExpose({
 			<h3 v-show="displayedItem" class="sr-only">
 				{{ displayedItem?.name }} build path
 			</h3>
-			<div
-				id="item-shop-build-path"
-				:data-levels="displayedItem?.from?.some(id => items[id]?.from?.length) ? 3 : displayedItem?.from?.length ? 2 : 1"
-				class="text-center flex basis-[40%] flex-col items-center justify-center order-3"
-			>
+			<div id="item-shop-build-path" class="text-center flex basis-[40%] flex-col items-center justify-center order-3">
 				<ItemBuildPathButton
 					v-if="displayedItem"
 					:item="displayedItem"
@@ -792,7 +789,7 @@ defineExpose({
 			@apply 'p-(--padding) relative of-hidden w-(--desktop-w) h-(--desktop-h)';
 
 			--padding: calc(var(--spacing) * 4);
-			--gap: calc(var(--spacing) * 4);
+			--gap: calc(var(--spacing) * 3);
 			--cols: 3;
 			--rows: 3;
 			--row-height: calc(var(--item-img-size) + 1.5rem + var(--gap));
@@ -841,19 +838,15 @@ defineExpose({
 	}
 
 	.item-shop-item-btn {
-		@apply relative;
+		@apply 'p-1 -m-1';
 
-		&:hover:before,
-		&.selected:before {
-			@apply 'content-empty -inset-1 absolute -z-1';
-		}
-
-		&:hover:before {
+		&:hover,
+		&:focus-visible {
 			@apply 'bg-blue/10';
 		}
 
-		&.selected:before {
-			@apply 'b b-blue';
+		&.selected {
+			box-shadow: 0 0 0 1px theme('colors.blue');
 			background-image: linear-gradient(0deg, theme('colors.blue/0.1'), transparent);
 		}
 	}
