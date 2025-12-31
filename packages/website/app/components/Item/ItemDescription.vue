@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
 	item?: IItem;
+	headerTag?: string;
 	headerButton?: boolean;
 	headerClass?: string;
 	descriptionClass?: string;
@@ -18,7 +19,7 @@ defineExpose({ header });
 
 <template>
 	<component
-		:is="headerButton ? 'button' : 'div'"
+		:is="headerTag || 'div'"
 		ref="header"
 		class="text-start grid grid-flow-col grid-cols-[auto_1fr] grid-rows-2 w-full"
 		:class="headerClass"

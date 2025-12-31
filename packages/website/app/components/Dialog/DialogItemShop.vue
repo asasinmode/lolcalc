@@ -11,7 +11,7 @@ const maps = useMaps();
 const ui = useUi();
 
 const vDialog = useTemplateRef('vDialog');
-const mapMask = ref<number>(maps.ha.mask);
+const mapMask = ref<number>(maps.sr.mask);
 const selectedCategory = ref<IAllItemCategory>('all');
 const sortOrderSwapped = ref(false);
 const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.fromEntries(
@@ -275,7 +275,7 @@ function updateBuildsIntoMorePosition() {
 }
 
 const buildsIntoItems = computed(() => selectedItem.value?.into
-	?.filter(id => id in items && ((items[id]!.mapMask & mapMask.value) !== 0))
+	?.filter(id => (items[id]!.mapMask & mapMask.value) !== 0)
 	.map(id => items[id]!)
 	.sort((a, b) => a.gold.total - b.gold.total) || []);
 
@@ -410,7 +410,7 @@ defineExpose({
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem"
 							header-class="hoverable:bg-white/10"
-							header-button
+							header-tag="button"
 							@header-click="onSearchHeaderClick"
 						/>
 					</section>
@@ -495,6 +495,7 @@ defineExpose({
 					v-for="item in groupedByEpicness[epicness]"
 					:key="item.id"
 					class="leading-tight text-center min-w-0 block hyphens-auto"
+					:class="{ b: selectedItem?.id === item.id }"
 					@mouseenter="enterTooltipableElement($event, item)"
 					@mousedown.left="selectOrBuyIfDouble(item, true)"
 					@mousedown.right="rightClickItem($event, item)"
@@ -515,14 +516,14 @@ defineExpose({
 			</section>
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
-			<ItemDescription :item="selectedItem" header-class="order-5" description-class="order-6" />
+			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" />
 			<button :disabled="!selectedItem" class="order-4" @click="buyItem(selectedItem!)">
 				Purchase
 			</button>
 			<h3 class="order-1">
 				Builds into
 			</h3>
-			<ul class="flex gap-3 order-2 relative *:bg-black *:size-9">
+			<ul class="flex gap-3 justify-around order-2 relative *:bg-black *:size-9">
 				<li v-for="i in 6" :key="i">
 					<button
 						class="size-full"
@@ -549,6 +550,7 @@ defineExpose({
 						:disabled="!buildsIntoItems[6]"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[6]!)"
+						@mouseenter="enterTooltipableElement($event, buildsIntoItems[6]!)"
 					>
 						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6].name }}</span>
 						<img
@@ -591,10 +593,42 @@ defineExpose({
 					</ul>
 				</li>
 			</ul>
-			<div class="whitespace-pre order-3">
-				{{ displayedItem?.image }}
-				{{ displayedItem?.from ? JSON.stringify(displayedItem.from, null, 2) : '' }}
-			</div>
+			<h3 v-show="displayedItem" class="sr-only">
+				{{ displayedItem?.name }} build path
+			</h3>
+			<ul class="text-center basis-[50%] grid order-3 place-items-center">
+				<li v-if="displayedItem">
+					<ItemBuildPathButton
+						:item="displayedItem"
+						:is-selected="selectedItem?.id === displayedItem.id"
+						@click="selectItem(displayedItem, false)"
+						@click.right="rightClickItem($event, displayedItem)"
+						@mouseenter="enterTooltipableElement($event, displayedItem)"
+					/>
+					<ul v-if="displayedItem.from?.length" class="flex">
+						<li v-for="secondLevelItemId in displayedItem.from" :key="`${displayedItem.id}-${secondLevelItemId}`">
+							<ItemBuildPathButton
+								:item="items[secondLevelItemId]!"
+								:is-selected="selectedItem?.id === secondLevelItemId"
+								@click="selectItem(items[secondLevelItemId]!, false)"
+								@click.right="rightClickItem($event, items[secondLevelItemId]!)"
+								@mouseenter="enterTooltipableElement($event, items[secondLevelItemId]!)"
+							/>
+							<ul v-if="items[secondLevelItemId]?.from?.length" class="flex">
+								<li v-for="thirdLevelItemId in items[secondLevelItemId].from" :key="`${displayedItem.id}-${secondLevelItemId}-${thirdLevelItemId}`">
+									<ItemBuildPathButton
+										:item="items[thirdLevelItemId]!"
+										:is-selected="selectedItem?.id === thirdLevelItemId"
+										@click="selectItem(items[thirdLevelItemId]!, false)"
+										@click.right="rightClickItem($event, items[thirdLevelItemId]!)"
+										@mouseenter="enterTooltipableElement($event, items[thirdLevelItemId]!)"
+									/>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</section>
 		<footer style="grid-area: footer">
 			<button>Sell</button>
