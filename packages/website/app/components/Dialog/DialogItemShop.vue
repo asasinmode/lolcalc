@@ -321,6 +321,16 @@ onBeforeUnmount(() => {
 	window.removeEventListener('scroll', updateBuildsIntoMorePosition);
 });
 
+/* eslint-disable antfu/consistent-list-newline */
+const bootItems = [
+	'3006', '3047', '3111', // first col: berserker's greaves, plated steelcaps, mercury's treads
+	'3158', '3009', '3020', // 2nd col: ionian boots of lucidity, boots of swiftness, sorcerer's shoes
+	'1001', '3010', // 3rd col: boots, symbiotic soles
+].map(id => items[id]!);
+/* eslint-enable antfu/consistent-list-newline */
+
+const bootsPanelPinned = ref(false);
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -468,20 +478,20 @@ defineExpose({
 			<!-- 	</template> -->
 			<!-- </VButtonRadiogroup> -->
 			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
+				<span class="sr-only">Swap item order</span>
 				<img
 					v-bind="textureBgImageAttrs(ui.shop.swapItemOrder.default, 32)"
 					:style="`--txt-hover-uv-start-x: -${ui.shop.swapItemOrder.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.swapItemOrder.hover.uv[1]}px`"
 				>
-				<span class="sr-only">Swap item order</span>
 			</button>
 		</header>
 		<aside style="grid-area: aside;" class="row-start-2">
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
+				<span class="sr-only">Clear stat filters</span>
 				<img
 					v-bind="textureBgImageAttrs(ui.shop.clearFilters.default, 28)"
 					:style="`--txt-hover-uv-start-x: -${ui.shop.clearFilters.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.clearFilters.hover.uv[1]}px`"
 				>
-				<span class="sr-only">Clear stat filters</span>
 			</button>
 			<fieldset id="item-shop-stat-filters">
 				<legend class="sr-only">
@@ -499,6 +509,43 @@ defineExpose({
 				</template>
 			</fieldset>
 		</aside>
+		<section id="item-shop-panel-boots" :data-pinned="bootsPanelPinned || undefined">
+			<h2 class="col-span-full sr-only">
+				boots
+			</h2>
+			<button
+				id="item-shop-pin-panel-boots"
+				class="op-0 left-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5"
+				@click="bootsPanelPinned = !bootsPanelPinned"
+			>
+				<span class="sr-only">Pin boots panel</span>
+				<img
+					v-bind="textureBgImageAttrs(ui.shop.pin.default, 28)"
+					:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
+				>
+			</button>
+			<ul>
+				<li v-for="(item, index) in bootItems" :key="item.id" :style="`--index: ${index}`">
+					<button
+						class="item-shop-item-btn"
+						:class="{ selected: selectedItem?.id === item.id }"
+						@mouseenter="enterTooltipableElement($event, item)"
+						@click="selectOrBuyIfDouble(item, true)"
+						@click.right="rightClickItem($event, item)"
+					>
+						<span class="sr-only">{{ item.name }}</span>
+						<img
+							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+							width="64"
+							height="64"
+							aria-hidden="true"
+							loading="lazy"
+						>
+						{{ item.gold.total }}
+					</button>
+				</li>
+			</ul>
+		</section>
 		<section style="grid-area: items;" class="overflow-y-auto">
 			<h2 class="sr-only" aria-live="polite">
 				{{ selectedCategory }} items
@@ -514,7 +561,7 @@ defineExpose({
 				<button
 					v-for="item in groupedByEpicness[epicness]"
 					:key="item.id"
-					class="item-shop-item-btn text-center w-fit"
+					class="item-shop-item-btn"
 					:class="{ selected: selectedItem?.id === item.id }"
 					@mouseenter="enterTooltipableElement($event, item)"
 					@mousedown.left="selectOrBuyIfDouble(item, true)"
@@ -538,7 +585,7 @@ defineExpose({
 			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" />
 			<button
 				:disabled="!selectedItem"
-				class="py-1 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-gray-950"
+				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-gray-950"
 				@click="buyItem(selectedItem!)"
 			>
 				Purchase
@@ -736,6 +783,61 @@ defineExpose({
 
 	#item-shop-search[data-empty='true'] ~ button {
 		display: none;
+	}
+
+	#item-shop-panel-boots {
+		@apply 'bg-inherit left-0 top-1/2 absolute z-10 -translate-x-full';
+
+		ul {
+			@apply 'p-(--padding) relative of-hidden w-(--desktop-w) h-(--desktop-h)';
+
+			--padding: calc(var(--spacing) * 4);
+			--gap: calc(var(--spacing) * 4);
+			--cols: 3;
+			--rows: 3;
+			--row-height: calc(var(--item-img-size) + 1.5rem + var(--gap));
+			--desktop-w: calc(var(--item-img-size) + 2 * var(--padding));
+			--desktop-h: calc(var(--row-height) * var(--rows) - 1.5rem + 2 * var(--padding));
+
+			li {
+				@apply 'absolute top-0 right-0 -translate-x-(--x-translate) translate-y-(--y-translate)';
+
+				--row: mod(var(--index), var(--rows));
+				--col: round(down, calc(var(--index) / var(--rows)));
+				--x-translate: calc(var(--col) * (var(--item-img-size) + var(--gap)) + var(--padding));
+				--y-translate: calc(var(--row) * (var(--item-img-size) + 1.25rem + var(--gap)) + var(--padding));
+			}
+		}
+
+		&[data-pinned],
+		&:hover,
+		&:has(li > button:focus-visible) {
+			ul {
+				@apply 'w-[calc(var(--item-img-size)_*_var(--cols)_+_var(--gap)_*_(var(--cols)_-_1)_+_var(--padding)_*_2)]';
+			}
+		}
+
+		&[data-pinned],
+		&:hover,
+		&:focus-within {
+			#item-shop-pin-panel-boots {
+				@apply 'op-100';
+			}
+		}
+	}
+
+	:where(#item-shop-panel-boots[data-pinned]) {
+		#item-shop-pin-panel-boots img,
+		#item-shop-pin-panel-boots img {
+			--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
+			--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
+		}
+	}
+
+	#item-shop-pin-panel-boots:hover img,
+	#item-shop-pin-panel-boots:focus-visible img {
+		--txt-uv-start-x: var(--txt-slcHover-uv-start-x) !important;
+		--txt-uv-start-y: var(--txt-slcHover-uv-start-y) !important;
 	}
 
 	.item-shop-item-btn {

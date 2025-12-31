@@ -116,5 +116,10 @@ interface IUiData {
 			default: ITexture;
 			hover: Pick<ITexture, 'uv'>;
 		};
+		pin: {
+			default: ITexture;
+			hover: Pick<ITexture, 'uv'>;
+			slcHover: Pick<ITexture, 'uv'>;
+		};
 	};
 }

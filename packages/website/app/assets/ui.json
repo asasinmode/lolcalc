@@ -418,6 +418,35 @@
 						219
 					]
 				}
+			},
+			"pin": {
+				"default": {
+					"spriteSheet": "assets/ux/itemshop/itemshop_texture_atlas_2.png",
+					"resWidth": 1024,
+					"resHeight": 1024,
+					"uv": [
+						542,
+						83,
+						598,
+						139
+					]
+				},
+				"hover": {
+					"uv": [
+						542,
+						15,
+						598,
+						71
+					]
+				},
+				"slcHover": {
+					"uv": [
+						542,
+						219,
+						598,
+						275
+					]
+				}
 			}
 		}
 	}
