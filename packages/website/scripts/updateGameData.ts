@@ -117,58 +117,64 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 	const MAPS = useMaps();
 
+	const filteredItems = Object.entries(data)
+		.filter(([itemId, itemData]) => {
+			const { maps: { 11: sr, 12: ha }, requiredChampion, gold } = itemData as {
+				maps: Record<number, boolean>;
+				requiredChampion?: boolean;
+				gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
+			};
+
+			return !UNINTERESTING_ITEMS.includes(itemId)
+				&& (sr || ha)
+				&& itemId.length <= 4
+				&& gold.inStore !== false
+				&& gold.hideFromAll !== false
+				&& !requiredChampion
+				&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
+		});
+
+	const filteredItemIds = filteredItems.map(([itemId]) => itemId);
+
 	itemData = {
 		version,
 		data: Object.fromEntries(
-			Object.entries(data)
-				.filter(([itemId, itemData]) => {
-					const { maps: { 11: sr, 12: ha }, requiredChampion, gold } = itemData as {
-						maps: Record<number, boolean>;
-						requiredChampion?: boolean;
-						gold: { purchasable: boolean; inStore?: boolean; hideFromAll?: boolean };
-					};
+			filteredItems.map(([itemId, itemData]) => {
+				const { name, stats, gold, image, into: rawInto, from: rawFrom, tags, maps: { 11: sr, 12: ha } } = itemData as any;
 
-					return !UNINTERESTING_ITEMS.includes(itemId)
-						&& (sr || ha)
-						&& itemId.length <= 4
-						&& gold.inStore !== false
-						&& gold.hideFromAll !== false
-						&& !requiredChampion
-						&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
-				})
-				.map(([itemId, itemData]) => {
-					const { name, stats, gold, image, into, from, tags, maps: { 11: sr, 12: ha } } = itemData as any;
+				let mapMask = 0;
+				if (sr) {
+					mapMask |= MAPS.sr.mask;
+				}
+				if (ha) {
+					mapMask |= MAPS.ha.mask;
+				}
 
-					let mapMask = 0;
-					if (sr) {
-						mapMask |= MAPS.sr.mask;
-					}
-					if (ha) {
-						mapMask |= MAPS.ha.mask;
-					}
+				const searchTerms = Array.from(
+					new Set(`${name};${(translations[`generatedtip_item_${itemId}_colloquialism`] || ';')};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')}`
+						.toLocaleLowerCase()
+						.replaceAll(/[^a-z;]/g, '')
+						.split(';')
+						.filter(v => v)),
+				);
 
-					const searchTerms = Array.from(
-						new Set(`${name};${(translations[`generatedtip_item_${itemId}_colloquialism`] || ';')};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')}`
-							.toLocaleLowerCase()
-							.replaceAll(/[^a-z;]/g, '')
-							.split(';')
-							.filter(v => v)),
-					);
+				const into = rawInto?.filter((id: string) => filteredItemIds.includes(id));
+				const from = rawFrom?.filter((id: string) => filteredItemIds.includes(id));
 
-					return [itemId, {
-						id: itemId,
-						name,
-						searchString: searchTerms.join(';'),
-						stats,
-						gold,
-						image: image.full,
-						mapMask,
-						into: into?.filter((id: string) => id.length <= 4),
-						from: from?.filter((id: string) => id.length <= 4),
-						...(tags.includes('Boots') ? { isBoots: true } : undefined),
-						...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
-					}];
-				}),
+				return [itemId, {
+					id: itemId,
+					name,
+					searchString: searchTerms.join(';'),
+					stats,
+					gold,
+					image: image.full,
+					mapMask,
+					into,
+					from,
+					...(tags.includes('Boots') ? { isBoots: true } : undefined),
+					...(tags.includes('OnHit') ? { isOnHit: true } : undefined),
+				}];
+			}),
 		) as unknown as NonNullable<typeof itemData>['data'],
 	};
 
