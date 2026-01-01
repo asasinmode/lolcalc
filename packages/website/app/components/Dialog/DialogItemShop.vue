@@ -258,8 +258,8 @@ function leaveTooltipableElement() {
 
 function updateTooltipPosition(event: MouseEvent) {
 	const { clientX, clientY } = event;
-	itemTooltip.value!.style.left = `${clientX + 10}px`;
-	itemTooltip.value!.style.top = `${clientY + 10}px`;
+	itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
+	itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
 }
 
 const buildsIntoMoreButton = useTemplateRef('buildsIntoMoreButton');
@@ -712,7 +712,7 @@ defineExpose({
 			<button>Sell</button>
 			<button>Undo</button>
 		</footer>
-		<div ref="itemTooltip" popover="hint" class="bg-neutral-950 w-fit pointer-events-none fixed">
+		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint">
 			<ItemDescription :item="hoveredItem" />
 		</div>
 	</VDialog>
@@ -887,6 +887,14 @@ defineExpose({
 
 	#item-shop-builds-into-list > li > button {
 		@apply 'bg-black size-(--item-img-size)';
+	}
+
+	#item-shop-hover-tooltip {
+		@apply 'bg-neutral-950 max-w-screen w-(--width) pointer-events-none fixed';
+
+		--width: 45rem;
+		left: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
+		top: var(--top);
 	}
 }
 </style>
