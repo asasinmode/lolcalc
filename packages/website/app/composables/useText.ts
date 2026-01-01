@@ -6,6 +6,6 @@ export function useText() {
 
 interface ITextData {
 	items: Record<string, {
-		description: string;
+		tooltipShop: string;
 	}>;
 }

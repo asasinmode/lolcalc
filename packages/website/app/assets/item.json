@@ -514,6 +514,9 @@
 			],
 			"isOnHit": true,
 			"epicness": 4,
+			"dataValues": {
+				"OnHitDamage": 15
+			},
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -602,6 +605,20 @@
 			"image": "1054.png",
 			"mapMask": 3,
 			"epicness": 1,
+			"dataValues": {
+				"RegenDuration": 8,
+				"BonusDamageToMinions": 5,
+				"MaxRegenAmount": 40,
+				"RangeRegenMult": 0.66,
+				"MaxRangeRegenAmount": 30
+			},
+			"stringCalculations": {
+				"MeleeRangeSplitRegen": {
+					"MeleeResult": "@MaxRegenAmount@",
+					"RangedResult": "@MaxRangeRegenAmount@",
+					"DefaultResult": "@MaxRegenAmount@"
+				}
+			},
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -627,6 +644,10 @@
 			"image": "1055.png",
 			"mapMask": 3,
 			"epicness": 1,
+			"dataValues": {
+				"HealMultiplier": 0.03,
+				"HealingReduction": 0.33
+			},
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -650,6 +671,14 @@
 			"image": "1056.png",
 			"mapMask": 3,
 			"epicness": 1,
+			"dataValues": {
+				"BonusDamage": 5,
+				"ManaRestorePerSecond": 1,
+				"ManaToHealthConversion": 0.45,
+				"HealthRestorePerSecond": 0.55,
+				"ManaRestorePerSecondUpgraded": 2,
+				"UpgradeDuration": 5
+			},
 			"categories": {
 				"mage": true
 			}
@@ -731,6 +760,23 @@
 				"3041"
 			],
 			"epicness": 1,
+			"dataValues": {
+				"MaxGloryStacks": 10,
+				"APPerGlory": 4,
+				"GloryOnKill": 2,
+				"GloryOnAssist": 1,
+				"GloryLossOnDeath": 5
+			},
+			"itemCalculations": {
+				"CurrentGloryAP": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{22eeba1f}",
+							"mDataValue": "APPerGlory"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -752,6 +798,12 @@
 			"mapMask": 1,
 			"isOnHit": true,
 			"epicness": 1,
+			"dataValues": {
+				"MinionKillGold": 1,
+				"CompleteGold": 350,
+				"MinionKillThreshold": 100,
+				"OnHitHeal": 3
+			},
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -784,6 +836,9 @@
 				"1029"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"FlatDR": 3
+			},
 			"categories": {
 				"assassin": true,
 				"fighter": true,
@@ -817,6 +872,9 @@
 				"1037"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"LethalityAmount": 5
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -940,6 +998,14 @@
 				"4642"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ActiveMoveSpeed": 0.3,
+				"BuffDuration": 4,
+				"ActiveCooldown": 75,
+				"ItemRange": 1000,
+				"PerChampCD": 4,
+				"Cooldown": 75
+			},
 			"categories": {
 				"support": true
 			}
@@ -969,6 +1035,9 @@
 				"1052"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"Duration": 2.5
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1022,6 +1091,28 @@
 				"2021"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"HPToADPercentage": 0.03,
+				"MissingHealthAD": 0.12,
+				"MissingHealthThreshold": 0.7
+			},
+			"itemCalculations": {
+				"RemainingHealthThreshold": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": -1
+						},
+						{
+							"mDataValue": "MissingHealthThreshold"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"tank": true
@@ -1050,6 +1141,33 @@
 				"1011"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"DrainRange": 650,
+				"Cooldown": 4,
+				"BonusHealthDrainPercentage": 0.03,
+				"HealMultiplier": 2.5
+			},
+			"itemCalculations": {
+				"DrainCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "BonusHealthDrainPercentage"
+						}
+					]
+				},
+				"HealCalc": {
+					"mMultiplier": {
+						"mDataValue": "HealMultiplier"
+					},
+					"mFormulaParts": [
+						{
+							"mSpellCalculationKey": "DrainCalc"
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -1076,6 +1194,50 @@
 				"2508"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BurnFlatDamagePerSecond": 20,
+				"APRatio": 0.02,
+				"BurnDuration": 3,
+				"MonsterDamageBonus": 20,
+				"TickFrequency": 0.5,
+				"APPerStack": 0.04,
+				"MinionDPS": 20,
+				"MinionAP": 0.02,
+				"MonsterDPS": 40,
+				"MonsterAP": 0.02
+			},
+			"itemCalculations": {
+				"BurnDamagePerSecondCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BurnFlatDamagePerSecond"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				},
+				"MinionBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{9adc0c64}"
+						},
+						{
+							"mDataValue": "MinionAP"
+						}
+					]
+				},
+				"MonsterBurnCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{afd69c5a}"
+						},
+						{
+							"mDataValue": "{434396e0}"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1102,6 +1264,20 @@
 				"1057"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ShieldAmount": 0.15,
+				"OutOfCombatDuration": 15
+			},
+			"itemCalculations": {
+				"ShieldCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ShieldAmount"
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -1129,6 +1305,12 @@
 				"1052"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"BurnFlatDamagePerSecond": 5,
+				"BurnDuration": 3,
+				"MonsterDamageBonus": 15,
+				"TickFrequency": 0.5
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1155,6 +1337,14 @@
 				"1031"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MaxMovementSpeed": 20,
+				"MaxStacks": 100,
+				"DurationToMaxStack": 4,
+				"MaxStackSlowAmount": 0.5,
+				"MaxStackSlowDuration": 1,
+				"MovespeedDonation": 0.15
+			},
 			"categories": {
 				"tank": true,
 				"support": true
@@ -1183,6 +1373,14 @@
 				"3108"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ManaPerCharge": 5,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 5,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5,
+				"APFromMana": 0.01
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1211,6 +1409,22 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"ManaPerCharge": 3,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 4,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"BonusADFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02
+						}
+					]
+				}
+			},
 			"categories": {
 				"marksman": true,
 				"fighter": true,
@@ -1243,6 +1457,9 @@
 			],
 			"isBoots": true,
 			"epicness": 4,
+			"dataValues": {
+				"FeatsAS": 0.05
+			},
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -1271,6 +1488,10 @@
 			],
 			"isBoots": true,
 			"epicness": 4,
+			"dataValues": {
+				"SlowResistTooltip": 25,
+				"FeatsMS": 5
+			},
 			"categories": {
 				"support": true,
 				"marksman": true,
@@ -1298,6 +1519,12 @@
 			],
 			"isBoots": true,
 			"epicness": 4,
+			"dataValues": {
+				"MaxCharge": 150,
+				"MaxDistance": 150000,
+				"MSBonus": 10,
+				"DistanceCap": 500
+			},
 			"categories": {
 				"support": true
 			}
@@ -1326,6 +1553,9 @@
 			],
 			"isBoots": true,
 			"epicness": 4,
+			"dataValues": {
+				"FeatsMPen": 2
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1382,6 +1612,9 @@
 				"1038"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 300
+			},
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -1411,6 +1644,9 @@
 				"1018"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MythicStatAmount": 5
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -1437,6 +1673,30 @@
 				"1036"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ASDuration": 6,
+				"CritPerStack": 0.2,
+				"CritMax": 25,
+				"Cooldown": 30,
+				"AACDR": 1,
+				"CritCDR": 2,
+				"ASMod": 0.3,
+				"CritPerStackMelee": 0.4,
+				"StackRangedMultiplier": 0.5
+			},
+			"itemCalculations": {
+				"CritPerStackCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{52d90ad0}"
+						}
+					],
+					"mPrecision": 1,
+					"mRangedMultiplier": {
+						"mDataValue": "{1eea3407}"
+					}
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -1464,6 +1724,10 @@
 				"1018"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"GrievousDuration": 3,
+				"GrievousAmount": 0.4
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -1521,6 +1785,10 @@
 				"6670"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MaxBonusDamagePercent": 0.15,
+				"MaxHealthDifference": 2000
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -1543,6 +1811,31 @@
 			"image": "3040.png",
 			"mapMask": 3,
 			"epicness": 5,
+			"dataValues": {
+				"APFromMana": 0.02,
+				"HealthThreshold": 0.3,
+				"ShieldDuration": 3,
+				"LifelineCooldown": 90,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"ShieldValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.18
+						}
+					]
+				},
+				"BonusAPCalc": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02,
+							"mStatFormula": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1567,6 +1860,25 @@
 				"1082"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MaxGloryStacks": 25,
+				"APPerGlory": 5,
+				"GloryOnKill": 4,
+				"GloryOnAssist": 2,
+				"GloryLossOnDeath": 10,
+				"GloryThreshold": 10,
+				"MoveSpeedMod": 0.1
+			},
+			"itemCalculations": {
+				"CurrentGloryAP": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{22eeba1f}",
+							"mDataValue": "APPerGlory"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -1590,6 +1902,64 @@
 			"mapMask": 3,
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"BonusADManaRatioTOOLTIPONLY": 0.02,
+				"OnHitManaRatioTOOLTIPONLY": 0.01,
+				"AbilityManaRatioRangedTOOLTIPONLY": 0.03,
+				"PerCastIDLockout": 6.5,
+				"AbilityManaRatioMeleeTOOLTIPONLY": 0.04
+			},
+			"itemCalculations": {
+				"BonusADFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.02
+						}
+					]
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.01
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.04
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.03
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -1623,6 +1993,24 @@
 				"1036"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"MoveSpeedBonus": 20,
+				"MoveSpeedDuration": 2,
+				"RangedMod": 0.5
+			},
+			"itemCalculations": {
+				"MSBonusSplit": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedBonus"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedMod"
+					}
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -1679,6 +2067,9 @@
 			],
 			"isBoots": true,
 			"epicness": 4,
+			"dataValues": {
+				"FeatsArmor": 5
+			},
 			"categories": {
 				"tank": true,
 				"assassin": true,
@@ -1709,6 +2100,13 @@
 				"1033"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Duration": 5,
+				"Cooldown": 45,
+				"SlowAmount": 0.3,
+				"DamagePerSecond": 30,
+				"StormRadius": 350
+			},
 			"categories": {
 				"support": true,
 				"tank": true
@@ -1768,6 +2166,101 @@
 				"1028"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"ShieldDuration": 4.5,
+				"HealthPercent": 0.1,
+				"HealPercent": 0.02,
+				"RangedEffectiveness": 0.6,
+				"ReductionAmount": 0.5,
+				"BaseShieldRatio": 0.6,
+				"HealDuration": 5,
+				"ADtoAD": 0.45,
+				"TimeBeforeDecay": 0.75,
+				"TenacityDuration": 8,
+				"SizeIncrease": 0.1,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "HealPercent"
+						}
+					]
+				},
+				"BonusShield": {
+					"mMultiplier": {
+						"mBuffName": "{6faa06b7}",
+						"mCoefficient": 1
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+				},
+				"MeleeItemCalcValueB": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthPercent"
+						}
+					]
+				},
+				"RangedItemCalcValueB": {
+					"mMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "MeleeItemCalcValueB"
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mCeiling": 3,
+							"mFloor": 2,
+							"mSubparts": [
+								{
+									"mStat": 31,
+									"mStatFormula": 1,
+									"mSubpart": {
+										"mNumber": 0.01
+									}
+								}
+							]
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				},
+				"ShieldSize": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "BaseShieldRatio"
+						}
+					]
+				},
+				"BonusAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "ADtoAD"
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -1797,6 +2290,21 @@
 			],
 			"isOnHit": true,
 			"epicness": 4,
+			"dataValues": {
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mCoefficient": 1
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"mage": true,
@@ -1827,6 +2335,10 @@
 				"3067"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"HealingIncrease": 0.25,
+				"ShieldIncrease": 0.25
+			},
 			"categories": {
 				"tank": true
 			}
@@ -1928,6 +2440,43 @@
 				"1031"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Range": 325,
+				"MinionMod": 0.6,
+				"MaxStacks": 1,
+				"StackDuration": 1,
+				"MonsterMod": 1,
+				"AuraDuration": 3,
+				"TicksPerSecond": 1,
+				"BaseDamagePerTickTOOLTIPONLY": 20,
+				"HPRatioPerTickTOOLTIPONLY": 1
+			},
+			"itemCalculations": {
+				"DamagePerTick": {
+					"mFormulaParts": [
+						{
+							"mNumber": 20
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.01
+						}
+					]
+				},
+				"DPS": {
+					"mMultiplier": {
+						"mDataValue": "TicksPerSecond"
+					},
+					"mModifiedGameCalculation": "DamagePerTick"
+				},
+				"{049cea52}": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mModifiedGameCalculation": "DPS"
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -1953,6 +2502,14 @@
 				"3119"
 			],
 			"epicness": 1,
+			"dataValues": {
+				"ManaPerCharge": 3,
+				"ManaChargeAmmoCD": 8,
+				"BonusMinionDamage": 5,
+				"MaxMana": 360,
+				"ManaChargeMaxAmmo": 4,
+				"InternalCDPerCastID": 6.5
+			},
 			"categories": {
 				"mage": true,
 				"marksman": true,
@@ -1985,6 +2542,11 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"DebuffDuration": 6,
+				"MoveSpeedBonus": 20,
+				"MoveSpeedDuration": 2
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -2011,6 +2573,25 @@
 				"1053"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Threshold": 0.7,
+				"DecayTime": 25
+			},
+			"itemCalculations": {
+				"OvershieldCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 165,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -2039,6 +2620,13 @@
 				"1042"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"UltimateHaste": 30,
+				"AttackSpeedProc": 0.5,
+				"MovementSpeedBonus": 0.2,
+				"HasteDuration": 8,
+				"Cooldown": 30
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -2067,6 +2655,63 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"CleaveRadius": 350,
+				"Cooldown": 10,
+				"Radius": 450,
+				"ActiveADRatio": 0.8,
+				"VampAmp": 1,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2
+						}
+					]
+				},
+				"PrimaryDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "ActiveADRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -2093,6 +2738,27 @@
 				"1028"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BaseDamage": 20,
+				"BonusArmorDamageRatio": 0.1,
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3,
+				"EnhancedGrievousAmount": 0.4
+			},
+			"itemCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mDataValue": "BonusArmorDamageRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2121,6 +2787,20 @@
 				"1029"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3,
+				"BaseDamage": 10
+			},
+			"itemCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2153,6 +2833,64 @@
 			],
 			"isOnHit": true,
 			"epicness": 4,
+			"dataValues": {
+				"CleaveRadius": 350,
+				"Cooldown": 10,
+				"Radius": 450,
+				"ActiveADRatio": 0.75,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"PrimaryDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "ActiveADRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"tank": true,
@@ -2184,6 +2922,31 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"SpellbladeMultiplier": 2,
+				"MoveSpeedBonus": 20,
+				"MSDuration": 2,
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SpellbladeMultiplier"
+						}
+					]
+				},
+				"{6e4cefdc}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 20
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -2212,6 +2975,11 @@
 				"1029"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"MaxHPRatio": 0,
+				"WardenDamageMax": 0.2,
+				"BlockBase": 15
+			},
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2239,6 +3007,30 @@
 				"3801"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MaxHealthRatio": 0.01,
+				"SecondsPerHeal": 0.5,
+				"HealthThreshold": 2000,
+				"OOCTimerChampion": 8,
+				"OOCTimer": 3,
+				"HPAmp": 0.12
+			},
+			"itemCalculations": {
+				"TotalHealing": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "MaxHealthRatio"
+						}
+					]
+				},
+				"TotalHealingTooltip": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"mModifiedGameCalculation": "TotalHealing"
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -2265,6 +3057,63 @@
 				"1011"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"PerTargetCooldown": 30,
+				"BaseDamage": 70,
+				"HPRatio": 0.06,
+				"DamageToMaxHealthRatio": 0.08,
+				"DistanceToChampion": 700,
+				"NumTicksToTrigger": 6,
+				"RangeTrackingBuffDuration": 5,
+				"TrackerTickRate": 0.5,
+				"MaxHPRatio": 0.06,
+				"HealthSizeThreshold": 1000,
+				"SizeAmount": 0.03,
+				"SizeCap": 0.3,
+				"Cooldown": 30
+			},
+			"itemCalculations": {
+				"DamageProcCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "HPRatio"
+						}
+					]
+				},
+				"ProcHealthGain": {
+					"mMultiplier": {
+						"mDataValue": "DamageToMaxHealthRatio"
+					},
+					"mModifiedGameCalculation": "DamageProcCalc"
+				},
+				"TotalDemolishTime": {
+					"mMultiplier": {
+						"mDataValue": "NumTicksToTrigger"
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "TrackerTickRate"
+						}
+					]
+				},
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "MaxHPRatio"
+						},
+						{
+							"mDataValue": "BaseDamage"
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -2292,6 +3141,51 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"BoltMinPercent": 40,
+				"BoltMaxPercent": 40,
+				"ExtraRangeOnBoltCheck": 65
+			},
+			"itemCalculations": {
+				"BoltDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mNumber": 0.55
+							}
+						}
+					]
+				},
+				"{232dac8a}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.55
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -2352,6 +3246,55 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"BounceRangeMinion": 500,
+				"BounceRangeChampion": 650,
+				"BounceDelay": 0.05,
+				"CooldownMaxTT": 25,
+				"MinionChainBounces": 6,
+				"ChampionChainBounces": 186,
+				"ChainDamageMinion": 120,
+				"ChainDamageChampion": 270,
+				"CooldownMinTT": 10,
+				"ChainCount": 3,
+				"ChainDamage": 60,
+				"BounceRange": 500,
+				"BounceCount": 5,
+				"TakedownWindow": 3,
+				"NonChampChainDamage": 85,
+				"Duration": 8
+			},
+			"itemCalculations": {
+				"Cooldown": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 25,
+							"mBreakpoints": [
+								{
+									"mLevel": 8,
+									"mAdditionalBonusAtThisLevel": -3
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": -3
+								},
+								{
+									"mLevel": 10,
+									"mAdditionalBonusAtThisLevel": -3
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -3
+								},
+								{
+									"mLevel": 12,
+									"mAdditionalBonusAtThisLevel": -3
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -2376,6 +3319,9 @@
 				"1058"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"APAmp": 0.3
+			},
 			"categories": {
 				"mage": true
 			}
@@ -2404,6 +3350,15 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"itemCalculations": {
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mNumber": 45
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -2431,6 +3386,11 @@
 				"3144"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"RangePercentIncrease": 0.35,
+				"MaxRangeIncrease": 150,
+				"BonusDamage": 40
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -2459,6 +3419,28 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"SpellbladeCooldown": 1.5,
+				"LichBaneAPValue": 0.4,
+				"SpellbladeADRatio": 0.75,
+				"SheenASBuff": 0.5,
+				"Cooldown": 1.5,
+				"SpellBladeDuration": 10
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SpellbladeADRatio"
+						},
+						{
+							"mDataValue": "LichBaneAPValue"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -2484,6 +3466,9 @@
 				"4632"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 40
+			},
 			"categories": {
 				"mage": true
 			}
@@ -2541,6 +3526,55 @@
 				"3114"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"HealMin": 150,
+				"HealMax": 350,
+				"DamageToChampions": 0.1,
+				"Cooldown": 90,
+				"AOESize": 550,
+				"CastRange": 5500,
+				"DiminishedEffect": 0.5,
+				"DiminishedTimer": 8,
+				"HPRegenIncrease": 0.25,
+				"BaseManaRegen": 0.25
+			},
+			"itemCalculations": {
+				"HealAmount": {
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mDataValue": "HealMin"
+								},
+								{
+									"mPart1": {
+										"mEndValue": 1
+									},
+									"mPart2": {
+										"mSubparts": [
+											{
+												"mSubparts": [
+													{
+														"mPart1": {
+															"mDataValue": "HealMin"
+														},
+														"mPart2": {
+															"mNumber": -1
+														}
+													},
+													{
+														"mDataValue": "HealMax"
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -2607,6 +3641,14 @@
 				"1006"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"DamageRedirection": 0.12,
+				"DamageRedirectionThreshold": 0.3,
+				"ActiveCooldown": 60,
+				"TetherRange": 1250,
+				"AllyHealingConversion": 0.1,
+				"Cooldown": 60
+			},
 			"categories": {
 				"support": true,
 				"tank": true
@@ -2634,6 +3676,10 @@
 				"3024"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ASPDSlow": -0.2,
+				"AuraRadius": 700
+			},
 			"categories": {
 				"tank": true,
 				"support": true
@@ -2665,6 +3711,9 @@
 			],
 			"isBoots": true,
 			"epicness": 4,
+			"dataValues": {
+				"FeatsMR": 5
+			},
 			"categories": {
 				"tank": true,
 				"assassin": true,
@@ -2781,6 +3830,22 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"NashorsBaseValue": 15,
+				"NashorsAPValue": 0.15
+			},
+			"itemCalculations": {
+				"TotalOnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "NashorsBaseValue"
+						},
+						{
+							"mDataValue": "NashorsAPValue"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true,
 				"marksman": true
@@ -2808,6 +3873,10 @@
 				"1052"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"SlowAmount": 0.3,
+				"SlowDuration": 1
+			},
 			"categories": {
 				"mage": true
 			}
@@ -2834,6 +3903,48 @@
 				"1026"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"AOESize": 250,
+				"UltimateHaste": 20,
+				"GroundDuration": 3,
+				"BaseDamage": 60,
+				"APRatio": 0.05,
+				"MaxRadius": 550
+			},
+			"itemCalculations": {
+				"{8e8f7a34}": {
+					"mMultiplier": {
+						"mNumber": 0.25
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				},
+				"MagicResistanceShred": {
+					"mFormulaParts": [
+						{
+							"mNumber": 10
+						}
+					]
+				},
+				"GroundBurnDamagePerTickTooltipOnly": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -2861,6 +3972,23 @@
 				"3067"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ManaPerCharge": 3,
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 4,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"BonusHPFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.15,
+							"mStatFormula": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -2883,6 +4011,29 @@
 			"image": "3121.png",
 			"mapMask": 3,
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 8,
+				"ShieldDuration": 3,
+				"CurrentManaShieldRatio": 0.05,
+				"Multiplier": 0.8
+			},
+			"itemCalculations": {
+				"BonusHPFromMana": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.15,
+							"mStatFormula": 2
+						}
+					]
+				},
+				"ShieldBase": {
+					"mFormulaParts": [
+						{
+							"mNumber": 100
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -2910,6 +4061,10 @@
 				"1036"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"GrievousDuration": 3,
+				"GrievousAmount": 0.4
+			},
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -2940,6 +4095,50 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"OnHitDamage": 30,
+				"AttackSpeedPerStack": 0.08,
+				"MaxStacks": 4,
+				"BuffDuration": 3
+			},
+			"itemCalculations": {
+				"MaxAttackSpeedCalc": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "AttackSpeedPerStack"
+							},
+							"mPart2": {
+								"mDataValue": "MaxStacks"
+							}
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalMagicPen": {
+					"mMultiplier": {
+						"mDataValue": "MythicMagicPen"
+					},
+					"mFormulaParts": [
+						{
+							"epicness": 5
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalArmorPen": {
+					"mMultiplier": {
+						"mDataValue": "MythicArmorPen"
+					},
+					"mFormulaParts": [
+						{
+							"epicness": 5
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -3017,6 +4216,9 @@
 				"1036"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"LethalityAmount": 10
+			},
 			"categories": {
 				"assassin": true,
 				"marksman": true
@@ -3070,6 +4272,25 @@
 				"3108"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BaseHeal": 100,
+				"HealAPRatio": 0.2,
+				"ItemCooldown": 60,
+				"TakedownWindow": 3,
+				"Cooldown": 60
+			},
+			"itemCalculations": {
+				"TotalHealAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHeal"
+						},
+						{
+							"mDataValue": "HealAPRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -3097,6 +4318,11 @@
 				"1053"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 90,
+				"MSDuration": 2,
+				"MoveSpeed": 0.5
+			},
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -3124,6 +4350,9 @@
 				"1033"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"Cooldown": 90
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -3151,6 +4380,59 @@
 				"1036"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 18,
+				"CombatTimer": 3,
+				"Cooldown": 45,
+				"MeleeItemCalcValueB": 20,
+				"RangedItemCalcValueB": 15,
+				"DurationNDV": 6,
+				"OOCMSndv": 20,
+				"BaseOOCMS": 20
+			},
+			"itemCalculations": {
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"Duration": {
+					"mFormulaParts": [
+						{
+							"mNumber": 6
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.67
+					}
+				},
+				"OOCMS": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{74ac7847}"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -3176,6 +4458,13 @@
 				"1011"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"PercentCritDamageReduction": 0.3,
+				"SlowAmount": 0.7,
+				"SlowDuration": 2,
+				"Radius": 500,
+				"Cooldown": 90
+			},
 			"categories": {
 				"tank": true
 			}
@@ -3206,6 +4495,18 @@
 				"1042"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"Cooldown": 40
+			},
+			"itemCalculations": {
+				"DamageAmount": {
+					"mFormulaParts": [
+						{
+							"mNumber": 40
+						}
+					]
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -3236,6 +4537,18 @@
 				"1052"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"Cooldown": 40
+			},
+			"itemCalculations": {
+				"DamageAmount": {
+					"mFormulaParts": [
+						{
+							"mNumber": 65
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -3266,6 +4579,12 @@
 				"1028"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"BuffCounterDuration": 3,
+				"SecondsInCombat": 3,
+				"DamageIncreasePerSecond": 0.02,
+				"DamageIncreaseMax": 0.06
+			},
 			"categories": {
 				"mage": true
 			}
@@ -3293,6 +4612,23 @@
 				"1028"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 40,
+				"BaseDamage": 100,
+				"APRatio": 0.1
+			},
+			"itemCalculations": {
+				"FireboltDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -3321,6 +4657,104 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"MoveSpeedMod": -0.3,
+				"MoveSpeedDuration": 1,
+				"Cooldown": 15,
+				"RangedValue": 0.06,
+				"MeleeValue": 0.09,
+				"MonsterDamageCap": 100,
+				"AttackCounterDuration": 6,
+				"RangedMoveSpeedMod": -0.15
+			},
+			"itemCalculations": {
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"SiphonDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 40,
+							"mBreakpoints": [
+								{
+									"mLevel": 10,
+									"mBonusPerLevelAtAndAfter": 7
+								}
+							]
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeValue"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedValue"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"{c0b34d7a}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedMod"
+						}
+					]
+				},
+				"{fe7dca43}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedMoveSpeedMod"
+						}
+					]
+				},
+				"MeleeItemCalcValueB": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeedMod"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValueB": {
+					"mMultiplier": {
+						"mNumber": -1
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedMoveSpeedMod"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -3351,6 +4785,34 @@
 				"1036"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"ShieldLifetime": 2.5,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 110,
+							"mEndValue": 280
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mNumber": 0.75
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				}
+			},
+			"stringCalculations": {
+				"MeleeRangedSplit": {
+					"MeleeResult": "@MeleeItemCalcValue@",
+					"RangedResult": "@RangedItemCalcValue@",
+					"DefaultResult": "@MeleeItemCalcValue@"
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -3379,6 +4841,58 @@
 				"3133"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ShieldSize": 200,
+				"LowHealthThreshold": 0.3,
+				"ShieldDuration": 3,
+				"ShieldADScaling": 1.5,
+				"BuffDuration": 5,
+				"BuffExtension": 3,
+				"BuffVamp": 0.1,
+				"RangedShieldMod": 0.75,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldSize"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ShieldADScaling"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedShieldMod"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -3406,6 +4920,10 @@
 				"2420"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 120,
+				"Duration": 2.5
+			},
 			"categories": {
 				"mage": true
 			}
@@ -3435,6 +4953,10 @@
 			],
 			"isBoots": true,
 			"epicness": 4,
+			"dataValues": {
+				"SummonerHaste": 10,
+				"FeatsHaste": 5
+			},
 			"categories": {
 				"support": true,
 				"mage": true,
@@ -3463,6 +4985,51 @@
 				"1028"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"SpellDamageIncrease": 0.03,
+				"AHBase": 25,
+				"StackDuration": 6,
+				"StackCount": 4,
+				"RangedMod": 0.5,
+				"TooltipValue": 3,
+				"CastIDLockout": 1
+			},
+			"itemCalculations": {
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "TooltipValue"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedMod"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -3490,6 +5057,10 @@
 				"3067"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3
+			},
 			"categories": {
 				"mage": true,
 				"support": true
@@ -3514,7 +5085,30 @@
 				"3009"
 			],
 			"isBoots": true,
-			"epicness": 7
+			"epicness": 7,
+			"dataValues": {
+				"MoveSpeedMultiplier": 0.04,
+				"SlowResistTooltip": 0.25,
+				"MSAdaptiveRatio": 0.05
+			},
+			"itemCalculations": {
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1
+						}
+					]
+				},
+				"MSToAdaptiveCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 7,
+							"mDataValue": "MSAdaptiveRatio"
+						}
+					]
+				}
+			}
 		},
 		"3171": {
 			"id": "3171",
@@ -3536,7 +5130,34 @@
 				"3158"
 			],
 			"isBoots": true,
-			"epicness": 7
+			"epicness": 7,
+			"dataValues": {
+				"SummonerHaste": 10,
+				"MeleeMS": 0.1,
+				"Duration": 4,
+				"RangedMSMultiplier": 0.8
+			},
+			"itemCalculations": {
+				"MSAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeMS"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "RangedMSMultiplier"
+					}
+				},
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1
+						}
+					]
+				}
+			}
 		},
 		"3172": {
 			"id": "3172",
@@ -3557,7 +5178,33 @@
 			"from": [
 				"3006"
 			],
-			"epicness": 7
+			"epicness": 7,
+			"dataValues": {
+				"MeleeMS": 0.15,
+				"RangedMSMultiplier": 0.67,
+				"Duration": 2
+			},
+			"itemCalculations": {
+				"MSAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeMS"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "RangedMSMultiplier"
+					}
+				},
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1
+						}
+					]
+				}
+			}
 		},
 		"3173": {
 			"id": "3173",
@@ -3580,7 +5227,34 @@
 				"3111"
 			],
 			"isBoots": true,
-			"epicness": 7
+			"epicness": 7,
+			"dataValues": {
+				"Cooldown": 15,
+				"ShieldAmount": 0.04,
+				"ShieldDuration": 4
+			},
+			"itemCalculations": {
+				"ShieldAmountCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 120
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "ShieldAmount"
+						}
+					]
+				},
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1
+						}
+					]
+				}
+			}
 		},
 		"3174": {
 			"id": "3174",
@@ -3602,7 +5276,35 @@
 				"3047"
 			],
 			"isBoots": true,
-			"epicness": 7
+			"epicness": 7,
+			"dataValues": {
+				"DamageReduction": 0.1,
+				"Cooldown": 15,
+				"ShieldAmount": 0.04,
+				"ShieldDuration": 4
+			},
+			"itemCalculations": {
+				"ShieldAmountCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 120
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "ShieldAmount"
+						}
+					]
+				},
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1
+						}
+					]
+				}
+			}
 		},
 		"3175": {
 			"id": "3175",
@@ -3625,7 +5327,17 @@
 				"3020"
 			],
 			"isBoots": true,
-			"epicness": 7
+			"epicness": 7,
+			"itemCalculations": {
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1
+						}
+					]
+				}
+			}
 		},
 		"3176": {
 			"id": "3176",
@@ -3644,7 +5356,21 @@
 			"mapMask": 1,
 			"from": [],
 			"isBoots": true,
-			"epicness": 7
+			"epicness": 7,
+			"dataValues": {
+				"MSBonus": 45,
+				"MoveSpeedMultiplier": 0.08
+			},
+			"itemCalculations": {
+				"{5e4a31e2}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{35c412b6}",
+							"mCoefficient": 1
+						}
+					]
+				}
+			}
 		},
 		"3177": {
 			"id": "3177",
@@ -3693,6 +5419,53 @@
 				"3133"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 15,
+				"MeleeDamage": 3,
+				"RangedDamage": 2,
+				"Cooldown": 90
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeDamage"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedDamage"
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -3720,6 +5493,82 @@
 				"1037"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"SkipperADRatio": 1.2,
+				"SkipperADRatioVSStructures": 3,
+				"MaxStackDamageHPRatio": 0.05,
+				"MaxStackDamageVSStructuresHPRatio": 0.1,
+				"SkipperStackDuration": 10,
+				"RangedSkipperADRatio": 0.7,
+				"RangedSkipperADRatioVSStructures": 2
+			},
+			"itemCalculations": {
+				"MaxStackDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SkipperADRatio"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "MaxStackDamageHPRatio"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.7
+					}
+				},
+				"MaxStackDamageVSStructures": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SkipperADRatioVSStructures"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "MaxStackDamageVSStructuresHPRatio"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.7
+					}
+				},
+				"BonusMinionResists": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 70,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 6
+								}
+							]
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
+			},
+			"stringCalculations": {
+				"ProcDamageMeleeRangedSplit": {
+					"MeleeResult": "@MaxStackDamage@",
+					"RangedResult": "@RangedMaxStackDamage@",
+					"DefaultResult": "@MaxStackDamage@"
+				},
+				"StructureDamageMeleeRangedSplit": {
+					"MeleeResult": "@MaxStackDamageVSStructures@",
+					"RangedResult": "@RangedMaxStackDamageVSStructures@",
+					"DefaultResult": "@MaxStackDamageVSStructures@"
+				},
+				"MinionResistMeleeRangedSplit": {
+					"MeleeResult": "@MeleeBonusMinionResists@",
+					"RangedResult": "@RangedBonusMinionResists@",
+					"DefaultResult": "@MeleeBonusMinionResists@"
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -3772,6 +5621,41 @@
 				"1033"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ShieldDuration": 2.5,
+				"DiminishedEffectMulitplier": 0.25,
+				"DiminishedTimer": 20,
+				"Cooldown": 90,
+				"ShieldRange": 850,
+				"ShieldMinTOOLTIP": 200,
+				"ShieldMaxTOOLTIP": 360
+			},
+			"itemCalculations": {
+				"MythicPassiveBonus": {
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"epicness": 5
+							},
+							"mPart2": {
+								"mDataValue": "AllyAuraMythicPassive"
+							}
+						}
+					]
+				},
+				"ShieldAmount": {
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mStartValue": 200,
+									"mEndValue": 360
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true,
 				"tank": true
@@ -3805,6 +5689,10 @@
 				"1006"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"HealthRegenDuration": 10,
+				"DamageToRegenDurationRatio": 0.33
+			},
 			"categories": {
 				"tank": true
 			}
@@ -3832,6 +5720,49 @@
 				"3114"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"CleanseCooldown": 120,
+				"HealAmountMin": 100,
+				"HealAmountMax": 250,
+				"Cooldown": 120
+			},
+			"itemCalculations": {
+				"{85d56c32}": {
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mDataValue": "HealAmountMin"
+								},
+								{
+									"mPart1": {
+										"mEndValue": 1
+									},
+									"mPart2": {
+										"mSubparts": [
+											{
+												"mSubparts": [
+													{
+														"mPart1": {
+															"mDataValue": "HealAmountMin"
+														},
+														"mPart2": {
+															"mNumber": -1
+														}
+													},
+													{
+														"mDataValue": "HealAmountMax"
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -3858,6 +5789,38 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"OnHitDamage": 30,
+				"BuffDuration": 5,
+				"DebuffDuration": 5,
+				"PenMax": 0.3,
+				"PenPerHit": 0.1
+			},
+			"itemCalculations": {
+				"ARMRPerHitScaling": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 6,
+							"mBreakpoints": [
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 14,
+									"mAdditionalBonusAtThisLevel": 1
+								}
+							]
+						}
+					]
+				},
+				"ARMRMaxScaling": {
+					"mMultiplier": {
+						"mNumber": 3
+					},
+					"mModifiedGameCalculation": "ARMRPerHitScaling"
+				}
+			},
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -3886,6 +5849,11 @@
 				"3114"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"AttackSpeedMin": 0.25,
+				"Duration": 6,
+				"OnHitMin": 20
+			},
 			"categories": {
 				"support": true
 			}
@@ -3914,6 +5882,59 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"MaxStacks": 3,
+				"StackDuration": 6,
+				"ManaRefund": 0.02,
+				"FlatManaRefund": 15,
+				"ManaRefundRatio": 0.1
+			},
+			"itemCalculations": {
+				"{c46604e3}": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.04
+						}
+					]
+				},
+				"{4dd9d0a3}": {
+					"mMultiplier": {
+						"mDataValue": "MaxStacks"
+					},
+					"mModifiedGameCalculation": "{c46604e3}"
+				},
+				"ADPerLevel": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 2,
+							"mEndValue": 15
+						}
+					]
+				},
+				"{24eb8de7}": {
+					"mMultiplier": {
+						"mDataValue": "MaxStacks"
+					},
+					"mFormulaParts": [
+						{
+							"mSpellCalculationKey": "ADPerLevel"
+						}
+					]
+				},
+				"TotalManaRefund": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "FlatManaRefund"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ManaRefundRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -3941,6 +5962,33 @@
 				"1031"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MaxMovementSpeed": 20,
+				"MaxStacks": 100,
+				"BonusDamagePerStack": 0.4,
+				"MaxStacksADRatio": 1,
+				"DurationToMaxStack": 4,
+				"SlowResistTooltip": 0.15
+			},
+			"itemCalculations": {
+				"MaxDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "MaxStacksADRatio"
+						},
+						{
+							"mPart1": {
+								"mDataValue": "BonusDamagePerStack"
+							},
+							"mPart2": {
+								"mNumber": 100
+							}
+						}
+					]
+				}
+			},
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -3969,6 +6017,87 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"PrimaryTargetHPRatio": 0.01,
+				"SplashHPRatio": 0.03,
+				"RangedEffectiveness": 0.5,
+				"ActivePrimaryTargetHPRatio": 0.04,
+				"ActiveSplashHPRatio": 0.09,
+				"Cooldown": 10,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"CalcValueB": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "SplashHPRatio"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValue": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "PrimaryTargetHPRatio"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValueC": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ActivePrimaryTargetHPRatio"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"CalcValueD": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "ActiveSplashHPRatio"
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedEffectiveness"
+					}
+				},
+				"OnHitDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.01
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				},
+				"ConeDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.03
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
+			},
 			"categories": {
 				"fighter": true,
 				"tank": true
@@ -4032,6 +6161,10 @@
 				"2022"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"ManaRestorePercent": 0.2,
+				"RestorationDuration": 3
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4061,6 +6194,12 @@
 				"1027"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"EternityManaRestore": 0.1,
+				"EternityHealthRestore": 0.25,
+				"EternityMaxHealPerCast": 20,
+				"EternityCDPerCast": 1
+			},
 			"categories": {
 				"tank": true,
 				"mage": true
@@ -4088,6 +6227,10 @@
 				"2021"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 15,
+				"Cooldown": 40
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -4110,6 +6253,60 @@
 			"image": "3865.png",
 			"mapMask": 1,
 			"epicness": 1,
+			"dataValues": {
+				"GP10": 3,
+				"QuestGoldRequirement": 400,
+				"ChargeCooldown": 20,
+				"MaxCharges": 3,
+				"AllyChampNearbyRadius": 2000,
+				"GoldOnHit": 20,
+				"GoldOnHitMelee": 22,
+				"ExecuteMinionGold": 15,
+				"MeleeExecutePerc": 0.5,
+				"RangedExecutePerc": 0.33,
+				"ExecuteCannonGold": 20,
+				"AllyChampNearbyRadiusMinion": 1300,
+				"FirstChargeOffset": 20
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "GoldOnHitMelee"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "GoldOnHit"
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true,
 				"tank": true
@@ -4134,6 +6331,18 @@
 			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 5,
+				"Cooldown": 18,
+				"MeleeShieldDRPercentage": 0.35,
+				"RangedShieldDRPercentage": 0.25,
+				"ShieldLingerAfterInitiallyPopped": 2,
+				"Radius": 500,
+				"SlowDuration": 1.5,
+				"SlowAmount": 0.5
+			},
 			"categories": {
 				"support": true
 			}
@@ -4157,6 +6366,47 @@
 			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 5,
+				"RechargeTime": 8,
+				"BubbleBlueDmgRed": 140,
+				"BubblePurpleMagicDmg": 90,
+				"MaxStack": 2,
+				"BubbleDuration": 3,
+				"PurpleBubbleAoEModifier": 0.33,
+				"MinHealAmount": 20,
+				"Cooldown": 8
+			},
+			"itemCalculations": {
+				"DamageBlockCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 75,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							]
+						}
+					]
+				},
+				"BonusDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 50,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -4180,6 +6430,41 @@
 			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 5,
+				"APRatio": 0.15,
+				"PercentHPDamage": 0.03,
+				"MonsterDamageCap": 300,
+				"BaseDamage": 10
+			},
+			"itemCalculations": {
+				"Cooldown": {
+					"mFormulaParts": [
+						{
+							"mNumber": 10
+						}
+					]
+				},
+				"{425b6f6e}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				},
+				"TooltipDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -4203,6 +6488,31 @@
 			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 5,
+				"Cooldown": 30,
+				"BuffDuration": 2.5,
+				"MoveSpeedBuff": 0.2,
+				"MoveSpeedRange": 1500,
+				"BonusHealthBuffRatio": 0.07
+			},
+			"itemCalculations": {
+				"BonusHealthBuff": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 50,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -4226,6 +6536,59 @@
 			"mapMask": 1,
 			"from": [],
 			"epicness": 7,
+			"dataValues": {
+				"StealthWardCap": 4,
+				"IncreasedWardRange": 300,
+				"GP10": 5,
+				"BaseADRatio": 0.1,
+				"SheenMult": 1,
+				"SpellbladeCooldown": 1.5,
+				"DebuffDuration": 4,
+				"MeleeDamageAmp": 0.08,
+				"RangedDamageAmp": 0.05,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"{ce8aadac}": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "BaseADRatio"
+						}
+					]
+				},
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SheenMult"
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -4252,6 +6615,10 @@
 				"1052"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3
+			},
 			"categories": {
 				"mage": true,
 				"support": true
@@ -4281,6 +6648,11 @@
 				"1036"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"Duration": 4,
+				"Cooldown": 45,
+				"LethalityAmount": 5
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -4307,6 +6679,11 @@
 				"3134"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Duration": 4,
+				"Cooldown": 45,
+				"LethalityAmount": 15
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -4333,6 +6710,14 @@
 				"4642"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BuffDuration": 5,
+				"MoveSpeedDuration": 0.01,
+				"PerTargetCooldown": 9,
+				"AllyDamageUnused": 80,
+				"AllyDamagePerc": 0.1,
+				"Cooldown": 9
+			},
 			"categories": {
 				"support": true
 			}
@@ -4360,6 +6745,14 @@
 				"3066"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BuffDuration": 7,
+				"MoveSpeed": 0.06,
+				"MaxStacks": 8,
+				"ImmobilizeStacks": 2,
+				"StackRefreshTimer": 1,
+				"BonusMagicResist": 70
+			},
 			"categories": {
 				"tank": true
 			}
@@ -4386,6 +6779,15 @@
 				"1026"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BuffDuration": 6,
+				"SnipeRange": 600,
+				"ItemCooldown": 30,
+				"VisionRadius": 1400,
+				"VisionDuration": 2,
+				"SecondaryBuffDuration": 3,
+				"Cooldown": 30
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4414,6 +6816,22 @@
 				"3108"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"StackDuration": 4,
+				"MaxStacks": 3,
+				"MovespeedToGrant": 40,
+				"MaxMovespeedTooltip": 0.15,
+				"ItemCooldown": 10
+			},
+			"itemCalculations": {
+				"MoveSpeedAmount": {
+					"mFormulaParts": [
+						{
+							"mNumber": 20
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4471,6 +6889,14 @@
 				"1052"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"MagicResistPerStack": 0.3,
+				"Period": 60,
+				"MaxMR": 9,
+				"CooldownReductionAmount": 0.05,
+				"SpellShieldCooldown": 60,
+				"Cooldown": 60
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4497,6 +6923,64 @@
 				"3108"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"SecondsInCombat": 4,
+				"EternityDamageIncreasePerSecond": 0.02,
+				"EternityDamageIncreaseMax": 0.08,
+				"BuffCounterDuration": 4,
+				"HealthToAPConversionPercent": 0.02,
+				"MaxAPMultiplier": 0.05,
+				"VampAmountMelee": 0.1,
+				"VampAmountRanged": 0.06
+			},
+			"itemCalculations": {
+				"{1247259a}": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "HealthToAPConversionPercent"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountMelee"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VampAmountRanged"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4523,6 +7007,10 @@
 				"4643"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"MaxJammerCharges": 3,
+				"NewWardMax": 3
+			},
 			"categories": {
 				"support": true
 			}
@@ -4582,6 +7070,13 @@
 				"4638"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MaxJammerCharges": 3,
+				"WardIncrease": 1,
+				"NewWardMax": 4,
+				"BonusStatMod": 0.2,
+				"BaseWardMax": 3
+			},
 			"categories": {
 				"support": true
 			}
@@ -4607,6 +7102,11 @@
 				"1058"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"HealthThreshold": 0.4,
+				"SpellItemDamageAmp": 0.2,
+				"DamageOverTimeAmp": 0.2
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4633,6 +7133,65 @@
 				"3113"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"WindowDuration": 2.5,
+				"Cooldown": 30,
+				"DelayDuration": 2,
+				"APRatio": 0.1,
+				"DamageThreshold": 0.25,
+				"ProcMoveSpeedDuration": 1.5,
+				"RangedProcDamageMod": 1,
+				"BaseDamage": 125
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedProcDamageMod"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"SquallDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4660,6 +7219,61 @@
 				"3133"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BleedDurationWorst": 3,
+				"HealDuration": 2,
+				"MS": 0.4,
+				"TakedownWindow": 3,
+				"BonusADRatio": 0.75
+			},
+			"itemCalculations": {
+				"HealTotal": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio"
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.3
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.1
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -4687,6 +7301,10 @@
 				"3133"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"GrievousAmount": 0.4,
+				"GrievousDuration": 3
+			},
 			"categories": {
 				"fighter": true,
 				"assassin": true
@@ -4715,6 +7333,61 @@
 				"1028"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"CritModifier": 1,
+				"HealAmount": 0.2,
+				"Cooldown": 8,
+				"HealRatio": 1,
+				"MissingHealthHeal": 0.06,
+				"RangedHealMod": 0.5
+			},
+			"itemCalculations": {
+				"HealProc": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "HealRatio"
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "HealRatio"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mDataValue": "RangedHealMod"
+					},
+					"mModifiedGameCalculation": "MeleeItemCalcValue"
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -4742,6 +7415,13 @@
 				"3114"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BuffDuration": 6,
+				"MSDecayThreshold": 2,
+				"MSDecayPercentage": 0.75,
+				"MSDecayPercentageThresholdUnused": 0.01,
+				"AbilityPowerMin": 45
+			},
 			"categories": {
 				"support": true
 			}
@@ -4769,6 +7449,51 @@
 				"4642"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"HealRange": 800,
+				"ChainHealMinTOOLTIPunused": 0.2,
+				"ChainHealMaxTOOLTIPunused": 0.4,
+				"SingleHealMinTOOLTIPunused": 0.15,
+				"SingleHealMaxTOOLTIPunused": 0.3,
+				"SingleShieldMinTOOLTIPunused": 0.2,
+				"SingleShieldMaxTOOLTIPunused": 0.3,
+				"ChainShieldMinTOOLTIPunused": 0.3,
+				"ChainShieldMaxTOOLTIPunused": 0.4,
+				"ChainHeal": 0.3,
+				"ChainShield": 0.35,
+				"SingleHeal": 0.3,
+				"SingleShield": 0.35
+			},
+			"itemCalculations": {
+				"{b389d204}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ChainHeal"
+						}
+					]
+				},
+				"{b5d7f85b}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SingleHeal"
+						}
+					]
+				},
+				"{288eb5c0}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SingleShield"
+						}
+					]
+				},
+				"{3e41fb6f}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ChainShield"
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -4796,6 +7521,56 @@
 				"4642"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MaxCounter": 2,
+				"HealShieldAmpPerStack": 5,
+				"PendantOfVitalityBuffDuration": 6,
+				"DamageRange": 1000,
+				"EnemiesToHit": 1,
+				"ShardHeal": 65,
+				"ShardDamage": 50
+			},
+			"itemCalculations": {
+				"{041fa779}": {
+					"mMultiplier": {
+						"mDataValue": "MaxCounter"
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "HealShieldAmpPerStack"
+						}
+					]
+				},
+				"{1df02915}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 20,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 4
+								}
+							]
+						}
+					]
+				},
+				"{df7fba06}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							]
+						}
+					]
+				}
+			},
 			"categories": {
 				"support": true
 			}
@@ -4823,6 +7598,10 @@
 				"3114"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"APPerManaRegen": 10,
+				"HSPowerPerManaRegen": 0.02
+			},
 			"categories": {
 				"support": true
 			}
@@ -4850,6 +7629,69 @@
 				"1042"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 15,
+				"ADRatio": 0.8,
+				"MSSlow": -0.35,
+				"Duration": 3,
+				"CleaveRadius": 450,
+				"ActiveMS": 0.35,
+				"PassiveRadius": 350,
+				"MoveSpeedDuration": 2,
+				"DecayRate": 0.8,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"SlashDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "ADRatio"
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -4875,6 +7717,17 @@
 				"2508"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BurnDuration": 3,
+				"BurnPercentHealthDamage": 0.02,
+				"DamageIncreasePerSecond": 0.02,
+				"DamageIncreaseMax": 0.06,
+				"TickFrequency": 0.5,
+				"MonsterDamageCap": 40,
+				"MaxDamageHPThreshold": 1250,
+				"BuffCounterDuration": 3,
+				"MaxStackNumber": 3
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4901,6 +7754,32 @@
 				"3145"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 12,
+				"BaseDamage": 75,
+				"APRatio": 0.05,
+				"MaxCharges": 6,
+				"RepeatDamageReduction": 0.2,
+				"MissileRange": 650
+			},
+			"itemCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage"
+						},
+						{
+							"mDataValue": "APRatio"
+						}
+					]
+				},
+				"SingleTargetMax": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"mModifiedGameCalculation": "Damage"
+				}
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4927,6 +7806,17 @@
 				"3803"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"HealthPerStack": 10,
+				"ManaPerStack": 30,
+				"APPerStack": 3,
+				"MaxStacks": 10,
+				"EternityManaRestore": 0.1,
+				"EternityHealthRestore": 0.25,
+				"EternityMaxHealPerCast": 20,
+				"EternityCDPerCast": 1,
+				"SecondsPerStack": 60
+			},
 			"categories": {
 				"mage": true
 			}
@@ -4956,6 +7846,29 @@
 				"2022"
 			],
 			"epicness": 4,
+			"dataValues": {
+				"Range": 325,
+				"MinionMod": 0.5,
+				"Cooldown": 12,
+				"MonsterMod": 1,
+				"AuraDuration": 3,
+				"TicksPerSecond": 1
+			},
+			"itemCalculations": {
+				"DamagePerTick": {
+					"mFormulaParts": [
+						{
+							"mNumber": 15
+						}
+					]
+				},
+				"DPS": {
+					"mMultiplier": {
+						"mDataValue": "TicksPerSecond"
+					},
+					"mModifiedGameCalculation": "DamagePerTick"
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -4984,6 +7897,51 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"SlowAmount": 0.25,
+				"SlowFieldDuration": 2,
+				"AoERadius": 300,
+				"MonsterMod": 1.5,
+				"AuraDuration": 3,
+				"RangedSlowAmount": 0.13,
+				"SpellbladeMultiplier": 1.5,
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlowAmount"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedSlowAmount"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mDataValue": "SpellbladeMultiplier"
+						}
+					]
+				}
+			},
+			"stringCalculations": {
+				"SlowAmountMeleeRangedSplit": {
+					"MeleeResult": "@MeleeItemCalcValue@",
+					"RangedResult": "@RangedItemCalcValue@",
+					"DefaultResult": "@MeleeItemCalcValue@"
+				}
+			},
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -5012,6 +7970,60 @@
 				"3211"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MinionMod": 0.25,
+				"MonsterMod": 0.25,
+				"Range": 325,
+				"AuraDuration": 3,
+				"TicksPerSecond": 1,
+				"BaseDamagePerTickTOOLTIPONLY": 10,
+				"HPRatioPerTickTOOLTIPONLY": 1.75,
+				"Cooldown": 12,
+				"ProcAoE": 350,
+				"ProcDPSMultiplier": 2,
+				"ChampProcDPSMultiplier": 4,
+				"TakedownWindow": 3,
+				"ChampProcAoE": 500
+			},
+			"itemCalculations": {
+				"DamagePerTick": {
+					"mFormulaParts": [
+						{
+							"mNumber": 15
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.01
+						}
+					]
+				},
+				"DPS": {
+					"mMultiplier": {
+						"mDataValue": "TicksPerSecond"
+					},
+					"mModifiedGameCalculation": "DamagePerTick"
+				},
+				"{049cea52}": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mModifiedGameCalculation": "DPS"
+				},
+				"ProcDamageTOOLTIPONLY": {
+					"mMultiplier": {
+						"mDataValue": "ProcDPSMultiplier"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "DamagePerTick"
+				},
+				"{f002950e}": {
+					"mMultiplier": {
+						"mDataValue": "ChampProcDPSMultiplier"
+					},
+					"mModifiedGameCalculation": "DamagePerTick"
+				}
+			},
 			"categories": {
 				"tank": true
 			}
@@ -5039,6 +8051,10 @@
 				"1057"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"BonusResistPercentage": 0.3,
+				"MaxStacks": 5
+			},
 			"categories": {
 				"tank": true
 			}
@@ -5096,6 +8112,36 @@
 			],
 			"isOnHit": true,
 			"epicness": 5,
+			"dataValues": {
+				"AttackCount": 3,
+				"BuffDuration": 4,
+				"MaxAmpNumber": 1.75,
+				"RangedDamageMultiplier": 0.8
+			},
+			"itemCalculations": {
+				"DamageAmount": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 150,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 5
+								}
+							]
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedDamageMultiplier"
+					}
+				},
+				"MaximumDamage": {
+					"mMultiplier": {
+						"mDataValue": "MaxAmpNumber"
+					},
+					"mModifiedGameCalculation": "DamageAmount"
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -5121,6 +8167,30 @@
 				"6670"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"ShieldDuration": 3,
+				"Cooldown": 90,
+				"BuffDuration": 8,
+				"HealthThreshold": 0.3
+			},
+			"itemCalculations": {
+				"ShieldAmount": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 400,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 30
+								}
+							]
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.8
+					}
+				}
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -5148,6 +8218,9 @@
 				"1042"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"CDRAmount": 0.15
+			},
 			"categories": {
 				"marksman": true
 			}
@@ -5175,6 +8248,11 @@
 				"1018"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 10,
+				"ExecuteThreshold": 0.05,
+				"GoldAmount": 25
+			},
 			"categories": {
 				"marksman": true,
 				"assassin": true
@@ -5234,6 +8312,81 @@
 				"1036"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"WindowDuration": 2,
+				"MeleeItemCalcValueB": 6,
+				"RangedItemCalcValueB": 4,
+				"Cooldown": 6,
+				"ShieldDuration": 2,
+				"MeleeBaseShield": 160,
+				"RangedBaseShield": 80,
+				"MeleeShieldADRatio": 0.4,
+				"RangedShieldADRatio": 0.2
+			},
+			"itemCalculations": {
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MeleeBaseShield"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "MeleeShieldADRatio"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RangedBaseShield"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "RangedShieldADRatio"
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"MaxHealthDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mNumber": 6
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.67
+					}
+				}
+			},
+			"stringCalculations": {
+				"{4217e5fd}": {
+					"MeleeResult": "@MaxHealthPercent@",
+					"RangedResult": "@RangedMaxHealthPercent@",
+					"DefaultResult": "@MaxHealthPercent@"
+				}
+			},
 			"categories": {
 				"fighter": true
 			}
@@ -5260,6 +8413,23 @@
 				"3035"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"SlowAmount": 0.3,
+				"SlowDuration": 1,
+				"LethalityAmount": 15,
+				"SlowThreshold": 0.5
+			},
+			"itemCalculations": {
+				"PenCalc": {
+					"mFormulaParts": [
+						{},
+						{
+							"mStat": 29
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -5285,6 +8455,26 @@
 				"1037"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 15,
+				"ShieldShred": 50,
+				"ShieldWounds": 50,
+				"DebuffDuration": 3,
+				"ShieldWoundsRange": 35,
+				"ShieldShredRange": 35
+			},
+			"stringCalculations": {
+				"ShieldWoundMeleeRangedSplit": {
+					"MeleeResult": "@ShieldWounds@",
+					"RangedResult": "@ShieldWoundsRange@",
+					"DefaultResult": "@ShieldWounds@"
+				},
+				"ShieldShredMeleeRangedSplit": {
+					"MeleeResult": "@ShieldShred@",
+					"RangedResult": "@ShieldShredRange@",
+					"DefaultResult": "@ShieldShred@"
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -5311,6 +8501,24 @@
 				"3133"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"UltimateRefundBase": 15,
+				"LethalityAmount": 18,
+				"ResetWindow": 3
+			},
+			"itemCalculations": {
+				"UltimateRefund": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "UltimateRefundBase"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 0.15
+						}
+					]
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -5337,6 +8545,27 @@
 				"3133"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 18,
+				"MSDuration": 3,
+				"MinHealthThreshold": 0.3,
+				"TakedownWindow": 3,
+				"SpeedAmount": 0.3,
+				"BonusLethality": 15,
+				"ADPerStatue": 2,
+				"BuffDuration": 90,
+				"BaseADBonus": 15
+			},
+			"itemCalculations": {
+				"{5974e68a}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{10f4da91}",
+							"mCoefficient": 1
+						}
+					]
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -5363,6 +8592,84 @@
 				"2020"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 18,
+				"Cooldown": 10,
+				"CleaveRadius": 350,
+				"ActiveRadius": 450,
+				"HealthThreshold": 0.5,
+				"MaxProcPerAuto": 10
+			},
+			"itemCalculations": {
+				"SlashDamageBase": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.8
+						}
+					]
+				},
+				"SlashDamageMax": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.8
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2
+						}
+					]
+				},
+				"CleaveDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -5390,6 +8697,63 @@
 				"1036"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 18,
+				"DashBonus": 0.75,
+				"SlowAmount": 0.99,
+				"SlowDuration": 0.75,
+				"SlowAmountRangeMod": 0.2
+			},
+			"itemCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mNumber": 100
+						}
+					]
+				},
+				"MeleeItemCalcValue": {
+					"mMultiplier": {
+						"mNumber": 100
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlowAmount"
+						}
+					]
+				},
+				"RangedItemCalcValue": {
+					"mMultiplier": {
+						"mNumber": 100
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlowAmountRangeMod"
+						}
+					]
+				},
+				"ChampRange": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mDefaultGameCalculation": "{792cf56b}",
+					"mConditionalGameCalculation": "{06387172}",
+					"mConditionalCalculationRequirements": {}
+				},
+				"{792cf56b}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1
+						}
+					]
+				},
+				"{06387172}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 2
+						}
+					]
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -5416,6 +8780,28 @@
 				"1036"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 18,
+				"SpeedBaseline": 50,
+				"SpeedKill": 200,
+				"MSDuration": 1.5,
+				"CombatTimer": 8,
+				"DamageWindowDuration": 3,
+				"RangedLethalityMultiplier": 0.46
+			},
+			"itemCalculations": {
+				"BonusLethalityCalc": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 11
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "RangedLethalityMultiplier"
+					}
+				}
+			},
 			"categories": {
 				"assassin": true
 			}
@@ -5442,6 +8828,13 @@
 				"3108"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"MRPerStack": 0.08,
+				"Duration": 6,
+				"MaxMRReduction": 0.3,
+				"StaleCastTime": 0.3,
+				"MaxStacks": 4
+			},
 			"categories": {
 				"mage": true
 			}
@@ -5468,6 +8861,10 @@
 				"1057"
 			],
 			"epicness": 5,
+			"dataValues": {
+				"Radius": 700,
+				"DamageAmp": 0.12
+			},
 			"categories": {
 				"tank": true,
 				"support": true

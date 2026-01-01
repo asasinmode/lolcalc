@@ -81,7 +81,7 @@ if (await itemFile.exists()) {
 	itemData = await itemFile.json();
 }
 
-if (!itemData || itemData?.version !== latestVersion) {
+if (true || !itemData || itemData?.version !== latestVersion) {
 	console.log('item data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -191,7 +191,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 		3877: 7,	// bloodsong
 	};
 
-	for (const [itemId, item] of Object.entries(itemData.data as Record<string, IItem>)) {
+	for (const [itemId, item] of Object.entries(itemData.data as unknown as Record<string, IItem>)) {
 		const itemMoreData = moreItemData[`Items/${itemId}`];
 
 		if (!itemMoreData) {
@@ -203,6 +203,20 @@ if (!itemData || itemData?.version !== latestVersion) {
 			item.epicness = SPECIAL_EPICNESS_ITEMS[itemId];
 		} else if (itemMoreData.epicness) {
 			item.epicness = itemMoreData.epicness;
+		}
+
+		item.dataValues = itemMoreData.mDataValues?.length
+			? Object.fromEntries(itemMoreData.mDataValues.map(({ mName, mValue }: Record<string, number>) =>
+					[mName, mValue !== undefined ? formatNumber(mValue) : undefined],
+				))
+			: undefined;
+		item.itemCalculations = cleanupObject(itemMoreData.mItemCalculations);
+		item.stringCalculations = cleanupObject(itemMoreData.StringCalculations);
+
+		for (const value of itemMoreData.mDataValues || []) {
+			if (Object.keys(value).some(key => !['mName', 'mValue', '__type'].includes(key))) {
+				console.log('unknown key in', itemId, itemMoreData.mDataValues);
+			}
 		}
 
 		const statsToAdd: ([string, string, true] | [string, string])[] = [
@@ -432,13 +446,13 @@ if (!textData || textData?.version !== latestVersion) {
 		data: {
 			items: Object.fromEntries(
 				Object.entries(itemData.data).map(([itemId]) => {
-					const description = stringtable[`generatedtip_item_${itemId}_tooltipshop`];
+					const tooltipShop = stringtable[`generatedtip_item_${itemId}_tooltipshop`];
 
-					if (!description) {
+					if (!tooltipShop) {
 						console.warn(`string "generatedtip_item_${itemId}_tooltipshop" not found in the stringtable`);
 					}
 
-					return [itemId, { description }];
+					return [itemId, { tooltipShop }];
 				}),
 			),
 		} as unknown as NonNullable<(typeof textData)>['data'],
@@ -455,4 +469,14 @@ async function loadStringTable() {
 
 function formatNumber(n: number, precision = 2): number {
 	return Number.isInteger(n) ? n : Number(n.toFixed(precision));
+}
+
+function cleanupObject(obj?: Object) {
+	return obj && Object.fromEntries(Object.entries(obj).filter(([key]) => key !== '__type').map(([key, value]) =>
+		[key, typeof value === 'object'
+			? Array.isArray(value) ? value.map(cleanupObject) : cleanupObject(value)
+			: typeof value === 'number'
+				? formatNumber(value)
+				: value]),
+	);
 }

@@ -31,6 +31,13 @@ export interface IItem {
 	isBoots?: boolean;
 	/** has 'OnHit' in `tags` */
 	isOnHit?: boolean;
+	dataValues?: Record<string, number>;
+	stringCalculations?: Record<string, Record<'MeleeResult' | 'RangedResult' | 'DefaultResult', string>>;
+	itemCalculations?: Record<string, {
+		mFormulaParts?: any[];
+		mDisplayAsPercent?: boolean;
+		[key: string]: any;
+	}>;
 }
 
 type UnionKeys<T> = T extends T ? keyof T : never;
