@@ -10,6 +10,8 @@ const minorVersion = latestVersion.slice(0, latestVersion.lastIndexOf('.'));
 
 console.log('latest version', latestVersion);
 
+let stringtable: Record<string, string>;
+
 const championFile = Bun.file(`${import.meta.dir}/../app/assets/champion.json`);
 let championData: typeof import('../app/assets/champion.json') | undefined;
 
@@ -34,8 +36,9 @@ if (!championData || championData?.version !== latestVersion) {
 
 					const characterRecordsKey = id === 'Fiddlesticks' ? 'FiddleSticks' : id;
 					if (additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`]) {
-						stats.attackspeedratio = Number.parseFloat(
-							additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`].attackSpeedRatio.toFixed(3),
+						stats.attackspeedratio = formatNumber(
+							additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`].attackSpeedRatio,
+							3,
 						);
 					} else {
 						console.error('no additional stat data for', name);
@@ -81,7 +84,7 @@ if (await itemFile.exists()) {
 if (!itemData || itemData?.version !== latestVersion) {
 	console.log('item data not present or outdated, fetching...');
 
-	const { entries: translations } = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`).then(r => r.json());
+	await loadStringTable();
 	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`).then(r => r.json());
 
 	const UNPURCHASABLES_TO_KEEP = [
@@ -151,7 +154,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 				}
 
 				const searchTerms = Array.from(
-					new Set(`${name};${(translations[`generatedtip_item_${itemId}_colloquialism`] || ';')};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')}`
+					new Set(`${name};${(stringtable[`generatedtip_item_${itemId}_colloquialism`] || ';')};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')}`
 						.toLocaleLowerCase()
 						.replaceAll(/[^a-z;]/g, '')
 						.split(';')
@@ -218,9 +221,9 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 		const stats = item.stats as Record<string, number>;
 
-		for (const [statKey, key, makeFloat] of statsToAdd) {
+		for (const [statKey, key] of statsToAdd) {
 			if (itemMoreData[key]) {
-				stats[statKey] = makeFloat ? Number.parseFloat(itemMoreData[key].toFixed(2)) : itemMoreData[key];
+				stats[statKey] = formatNumber(itemMoreData[key]);
 			}
 		}
 
@@ -299,17 +302,17 @@ if (!runeData || runeData?.version !== latestVersion) {
 			shards: {
 				offensive: {
 					adaptiveForce: shardAdaptiveForce,
-					percentAttackSpeed: Number.parseFloat((data['Perks/StatMods/AttackSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain / 100).toFixed(2)),
+					percentAttackSpeed: formatNumber((data['Perks/StatMods/AttackSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain / 100), 2),
 					abilityHaste: data['Perks/StatMods/CDRScaling'].mScript.mSpellScriptData.mEffectAmount.HasteGain,
 				},
 				flex: {
 					adaptiveForce: shardAdaptiveForce,
-					percentMoveSpeed: Number.parseFloat((data['Perks/StatMods/MovementSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain1 / 100).toFixed(3)),
+					percentMoveSpeed: formatNumber((data['Perks/StatMods/MovementSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain1 / 100), 3),
 					scalingHealth: shardScalingHealth,
 				},
 				defensive: {
 					flatHealth: data[shardDefensiveFlatHealthKey].mScript.mSpellScriptData.mEffectAmount.StatGain,
-					percentTenacityMod: Number.parseFloat((data[shardDefensiveTenacityKey].mScript.mSpellScriptData.mEffectAmount.StatGain / 100).toFixed(2)),
+					percentTenacityMod: formatNumber((data[shardDefensiveTenacityKey].mScript.mSpellScriptData.mEffectAmount.StatGain / 100), 2),
 					scalingHealth: shardScalingHealth,
 				},
 			},
@@ -410,4 +413,46 @@ if (!uiData || uiData?.version !== latestVersion) {
 	};
 
 	await uiFile.write(JSON.stringify(uiData, null, '\t'));
+}
+
+const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
+let textData: typeof import('../app/assets/text.json') | undefined;
+
+if (await textFile.exists()) {
+	textData = await textFile.json();
+}
+
+if (!textData || textData?.version !== latestVersion) {
+	console.log('text data not present or outdated, fetching...');
+
+	await loadStringTable();
+
+	textData = {
+		version: latestVersion,
+		data: {
+			items: Object.fromEntries(
+				Object.entries(itemData.data).map(([itemId]) => {
+					const description = stringtable[`generatedtip_item_${itemId}_tooltipshop`];
+
+					if (!description) {
+						console.warn(`string "generatedtip_item_${itemId}_tooltipshop" not found in the stringtable`);
+					}
+
+					return [itemId, { description }];
+				}),
+			),
+		} as unknown as NonNullable<(typeof textData)>['data'],
+	};
+
+	await textFile.write(JSON.stringify(textData, null, '\t'));
+}
+
+async function loadStringTable() {
+	if (!stringtable) {
+		({ entries: stringtable } = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`).then(r => r.json()));
+	}
+}
+
+function formatNumber(n: number, precision = 2): number {
+	return Number.isInteger(n) ? n : Number(n.toFixed(precision));
 }
