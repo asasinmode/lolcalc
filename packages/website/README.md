@@ -42,7 +42,11 @@ bun test
 - [ ] multiple builds/champions you can switch between
 - [ ] some cool graphs
 - [ ] sharing, saving/reading data in query
-- [ ] item passives [bin](https://raw.communitydragon.org/pbe/game/items.cdtb.bin.json) `mDataValues`
+- [ ] calculations
+  - [ ] item passives
+  - [ ] champion passives
+  - [ ] runes
+  - [ ] s16 quest toggles
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
 - [ ] [wiki](https://github.com/asasinmode/colectormode/wiki)
@@ -73,10 +77,7 @@ bun test
 
 ## misc
 
-[translations](https://raw.communitydragon.org/15.24/game/en_us/data/menu/en_us/)
 [useful assets](https://raw.communitydragon.org/latest/)
-[stat icons](https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/statmods/)
-[or](https://raw.communitydragon.org/latest/game/assets/perks/statmods/)
 https://hextechdocs.dev/resolving-variables-in-spell-textsa/
 
 ## tests

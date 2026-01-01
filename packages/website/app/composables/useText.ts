@@ -1,7 +1,7 @@
 import { data } from '../assets/text.json';
 
-export function useText() {
-	return data satisfies ITextData;
+export function useText(): ITextData {
+	return data;
 }
 
 interface ITextData {
