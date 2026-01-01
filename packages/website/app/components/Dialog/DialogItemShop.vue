@@ -398,7 +398,7 @@ defineExpose({
 						id="item-shop-search-listbox"
 						role="listbox"
 						aria-labelledby="item-shop-results-lbl"
-						class="bg-blue-950 h-full of-y-auto *:grid *:grid-cols-[auto_1fr] *:grid-rows-2"
+						class="h-full of-y-auto *:grid *:grid-cols-[auto_1fr] *:grid-rows-2"
 					>
 						<li
 							v-for="(item, index) in searchResults"
@@ -428,7 +428,7 @@ defineExpose({
 					<section
 						aria-live="polite"
 						aria-atomic="true"
-						class="bg-pink-950 row-span-full"
+						class="row-span-full"
 					>
 						<ItemDescription
 							ref="searchItemDescription"

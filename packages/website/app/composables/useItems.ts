@@ -72,6 +72,46 @@ export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 
 export type IItemStat = UnionKeys<(typeof data)[keyof typeof data]['stats']> | 'PercentOmnivampMod';
 
+export const ITEM_STAT_META: Record<IItemStat, {
+	name: string;
+	order: number;
+	displayMultiplier?: number;
+	isPercentage?: boolean;
+}> = {
+	FlatPhysicalDamageMod: { name: 'Attack damage', order: 95 },
+	FlatMagicDamageMod: { name: 'Ability power', order: 90 },
+
+	PercentAttackSpeedMod: { name: 'Attack speed', order: 80, isPercentage: true },
+
+	FlatHPPoolMod: { name: 'Health', order: 75 },
+	FlatMPPoolMod: { name: 'Mana', order: 70 },
+
+	FlatArmorMod: { name: 'Armor', order: 65 },
+	FlatSpellBlockMod: { name: 'Magic resist', order: 60 },
+
+	PhysicalLethality: { name: 'Lethality', order: 59 },
+	PercentArmorPenetrationMod: { name: 'Armor penetration', order: 56, isPercentage: true },
+	FlatMagicPenetrationMod: { name: 'Magic penetration', order: 53 },
+	PercentMagicPenetrationMod: { name: 'Magic penetration', order: 50 },
+
+	FlatCritChanceMod: { name: 'Critical strike chance', order: 45, isPercentage: true },
+	FlatCritDamageMod: { name: 'Critical strike damage', order: 40, isPercentage: true },
+
+	AbilityHasteMod: { name: 'Ability haste', order: 39 },
+	FlatMovementSpeedMod: { name: 'Move speed', order: 36 },
+	PercentMovementSpeedMod: { name: 'Move speed', order: 33, isPercentage: true },
+	PercentTenacityMod: { name: 'Tenacity', order: 30, isPercentage: true },
+
+	FlatHPRegenMod: { name: 'Health every 5 seconds', order: 28, displayMultiplier: 5 },
+	PercentBaseHPRegenMod: { name: 'Base health regen', order: 24, isPercentage: true },
+	PercentBaseMPRegenMod: { name: 'Base mana regen', order: 20, isPercentage: true },
+
+	PercentHealingAmountMod: { name: 'Heal and shield power', order: 10, isPercentage: true },
+
+	PercentLifeStealMod: { name: 'Life steal', order: 5, isPercentage: true },
+	PercentOmnivampMod: { name: 'Omnivamp', order: 0, isPercentage: true },
+};
+
 export interface IItem {
 	id: string;
 	name: string;
@@ -100,6 +140,7 @@ export interface IItem {
 		mDisplayAsPercent?: boolean;
 		[key: string]: any;
 	}>;
+	effectAmount?: number[];
 }
 
 type UnionKeys<T> = T extends T ? keyof T : never;

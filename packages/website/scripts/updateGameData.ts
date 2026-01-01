@@ -1,6 +1,7 @@
 import type { IChampion } from '../app/composables/useChampions';
-import type { IItem, IItemCategory } from '../app/composables/useItems';
-import type { IItemShopStatFilter, ITexture } from '../app/composables/useUi';
+import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
+import type { ITextData } from '../app/composables/useText';
+import type { ITexture } from '../app/composables/useUi';
 import { useMaps } from '../app/composables/useMaps';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
@@ -212,6 +213,7 @@ if (true || !itemData || itemData?.version !== latestVersion) {
 			: undefined;
 		item.itemCalculations = cleanupObject(itemMoreData.mItemCalculations);
 		item.stringCalculations = cleanupObject(itemMoreData.StringCalculations);
+		item.effectAmount = itemMoreData.mEffectAmount?.some((amount: number) => amount !== 0) ? itemMoreData.mEffectAmount?.map((amount: number) => formatNumber(amount)) : undefined;
 
 		for (const value of itemMoreData.mDataValues || []) {
 			if (Object.keys(value).some(key => !['mName', 'mValue', '__type'].includes(key))) {
@@ -446,16 +448,36 @@ if (!textData || textData?.version !== latestVersion) {
 		data: {
 			items: Object.fromEntries(
 				Object.entries(itemData.data).map(([itemId]) => {
-					const tooltipShop = stringtable[`generatedtip_item_${itemId}_tooltipshop`];
+					const text = stringtable[`generatedtip_item_${itemId}_tooltipshop`];
 
-					if (!tooltipShop) {
+					if (!text) {
 						console.warn(`string "generatedtip_item_${itemId}_tooltipshop" not found in the stringtable`);
 					}
 
-					return [itemId, { tooltipShop }];
+					const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
+					const subtitleLeftEndIndex = text.indexOf('</subtitleLeft>');
+					// move start by tag length + unused {{ Item_BriefIcon... }}
+					const subtitleLeft = text.slice(subtitleLeftStartIndex + 51, subtitleLeftEndIndex);
+
+					const subtitleRightStartIndex = text.indexOf('<subtitleRight>');
+					const subtitleRightEndIndex = text.indexOf('</subtitleRight>');
+					const subtitleRight = text.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
+
+					const statsStartIndex = text.indexOf('</section><section>');
+					const statsToEnd = text.slice(statsStartIndex + 19);
+					const statsEndIndex = statsToEnd.indexOf('</section>');
+					const extraToEnd = statsToEnd.slice(statsEndIndex + 19);
+					const extraEndIndex = extraToEnd.indexOf('</section>');
+					const extra = extraToEnd.slice(0, extraEndIndex);
+
+					return [itemId, { tooltipShop: {
+						subtitleLeft: subtitleLeft || undefined,
+						subtitleRight: subtitleRight || undefined,
+						extra: extra ? extra.split('<br><br>').map(text => text.split('<br>')) : undefined,
+					} }];
 				}),
 			),
-		} as unknown as NonNullable<(typeof textData)>['data'],
+		} satisfies ITextData as unknown as NonNullable<(typeof textData)>['data'],
 	};
 
 	await textFile.write(JSON.stringify(textData, null, '\t'));
