@@ -47,11 +47,20 @@ export function replaceItemDescriptionVariables(text: string, item: IItem): {
 	return { replaced, variables, unknownVariables };
 }
 
+const STAT_ICON_NAMES = Object.values(ITEM_STAT_ICON_NAMES);
+
+export function replaceItemDescriptionIcons(text: string) {
+	return text.replace(/%i:(\w+)%/g, (_, name: string) => {
+		name = name.toLocaleLowerCase();
+		return `<img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${STAT_ICON_NAMES.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
+	});
+}
+
 /**
  * tags that appear in tooltip shop item hover description
  * they should have appropriate styles (like font color) set in `ItemDescription.vue`
  */
-export const KNOWN_TOOLTIP_SHOP_EXTRA_TAGS = ['passive', 'scalemana', 'healing', 'physicaldamage', 'status', 'gold'];
+export const KNOWN_TOOLTIP_SHOP_EXTRA_TAGS = ['passive', 'scalemana', 'healing', 'physicaldamage', 'status', 'gold', 'onhit'];
 
 // TODO handle tags
 // "physicalDamage",

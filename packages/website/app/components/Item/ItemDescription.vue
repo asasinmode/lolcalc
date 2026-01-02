@@ -18,7 +18,7 @@ const { version, minorVersion } = usePatchVersion();
 const header = useTemplateRef<HTMLButtonElement>('header');
 
 const cooldownIcon = '<img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">';
-const onHitIcon = `<img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${ITEM_STAT_ICON_NAMES.onHit}.png" width="20" height="20" aria-hidden="true">`;
+const onHitIcon = `<img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${ITEM_STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 const contents = computed<{
 	subtitleLeft?: string;
@@ -49,11 +49,14 @@ const contents = computed<{
 
 	let anyUnknownExtraVariables = false;
 	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
-		const headingCooldown = itemDescriptionVariableValue('Cooldown', item) || '<unknown>UNKNOWN</unknown>';
+		const headingCooldown = itemDescriptionVariableValue('Cooldown', item);
+		if (!headingCooldown) {
+			anyUnknownExtraVariables ||= true;
+		}
+
 		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceItemDescriptionVariables(
-			heading!
-				.replace('{{ Item_Cooldown }}', `${cooldownIcon}(${headingCooldown}s<span> cooldown</span>)`)
-				.replace('%i:cooldown%', cooldownIcon)
+			replaceItemDescriptionIcons(heading!)
+				.replace(/\{\{( )?Item_Cooldown( )?\}\}/g, `${cooldownIcon}(${headingCooldown || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`)
 				.replace('(', '<span>(')
 				.replace(')', ')</span>'),
 			item,
@@ -64,7 +67,8 @@ const contents = computed<{
 			replacedHeading,
 			...paragraphs.map((paragraph) => {
 				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceItemDescriptionVariables(
-					paragraph!.replace('{{ Item_Keyword_OnHit }}', `${onHitIcon} <onhit>On-Hit</onhit>`),
+					replaceItemDescriptionIcons(paragraph!)
+						.replace('{{ Item_Keyword_OnHit }}', `${onHitIcon} <onhit>On-Hit</onhit>`),
 					item,
 				);
 

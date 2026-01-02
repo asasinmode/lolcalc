@@ -35,8 +35,8 @@ export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [sta
 	};
 }
 
-export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'onHit' | 'level' | 'range', string> = {
-	onHit: 'onhit',
+export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' | 'level' | 'range', string> = {
+	OnHit: 'onhit',
 	FlatPhysicalDamageMod: 'scalead',
 	adaptiveForce: 'adaptiveforce',
 	AbilityHasteMod: 'scaleah',

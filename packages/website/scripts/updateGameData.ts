@@ -482,7 +482,7 @@ if (!textData || textData?.version !== latestVersion) {
 					}
 
 					const tags = extra.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
-					const unknownTags = Array.from(tags, m => m[1]).filter(tag => !KNOWN_TOOLTIP_SHOP_EXTRA_TAGS.includes(tag));
+					const unknownTags = Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_TOOLTIP_SHOP_EXTRA_TAGS.includes(tag));
 					if (unknownTags.length) {
 						unknownItemTooltipShopExtra.tags[0].push(item.name);
 						for (const tag of unknownTags) {
