@@ -1,3 +1,5 @@
+import { ITEM_STAT_ICON_NAMES } from '../composables/useUi';
+
 // TODO add item.stringCalculations and item.itemCalculations handling
 export function itemDescriptionVariableValue(variable: string, item: IItem): number | undefined {
 	if (item.stats[variable as IItemStat] !== undefined) {
@@ -60,31 +62,33 @@ export function replaceItemDescriptionIcons(text: string) {
  * tags that appear in tooltip shop item hover description
  * they should have appropriate styles (like font color) set in `ItemDescription.vue`
  */
-export const KNOWN_TOOLTIP_SHOP_EXTRA_TAGS = ['passive', 'scalemana', 'healing', 'physicaldamage', 'status', 'gold', 'onhit'];
-
-// TODO handle tags
-// "physicalDamage",
-// "scaleMana",
-// "keyword",
-// "scaleAP",
-// "li",
-// "speed",
-// "scaleAD",
-// "magicDamage",
-// "shield",
-// "rarityLegendary",
-// "attackSpeed",
-// "scaleArmor",
-// "scaleHealth",
-// "OnHit",
-// "attention",
-// "scaleMR",
-// "lifeSteal",
-// "rules",
-// "keywordMajor",
-// "rarityGeneric",
-// "keywordStealth",
-// "trueDamage",
-// "omnivamp",
-// "slow",
-// "scaleLethality"
+export const KNOWN_TOOLTIP_SHOP_EXTRA_TAGS = [
+	'passive',	// heading
+	'scalead', // bloodmail, sterak
+	'scaleap',	// rabadon, riftmaker
+	'scalehealth', // roa, heartsteel
+	'scalemana',	// manamune, archangel
+	'scalearmor',	// hullbreaker, terminus
+	'scalemr',	// malignance, force of nature
+	'scalelethality',	// opportunity
+	'attackspeed',	// yuntal, experimental hexplate
+	'onhit',	// iceborn, statik
+	'physicaldamage',	// heartsteel, titanic
+	'magicdamage',	// bami, thornmail
+	'truedamage',	// cosmic drive, shadowflame
+	'healing',	// guardian angel, warmog
+	'shield',	// fimbulwinter, hexdrinker
+	'lifesteal', // maw of malmortius
+	'omnivamp',	// riftmaker
+	'speed',	// opportunity, slightly magical footwear
+	'gold',	// world atlas, collector
+	'status',	// botrk, iceborn
+	'attention',	// statikk, knight's vow
+	'raritygeneric',	// world atlas
+	'raritylegendary',	// archangel, manamune
+	'rules',	// crimson lucidity
+	'keyword',	// phantom dancer, zeke's convergence
+	'keywordmajor',	// terminus
+	'keywordstealth',	// horizon focus
+	'slow',	// voltaic cyclosword, seems to be same color as text
+];

@@ -56,7 +56,7 @@ const contents = computed<{
 
 		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceItemDescriptionVariables(
 			replaceItemDescriptionIcons(heading!)
-				.replace(/\{\{( )?Item_Cooldown( )?\}\}/g, `${cooldownIcon}(${headingCooldown || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`)
+				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, `${cooldownIcon}(${headingCooldown || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`)
 				.replace('(', '<span>(')
 				.replace(')', ')</span>'),
 			item,
@@ -89,7 +89,6 @@ const contents = computed<{
 });
 
 defineExpose({ header });
-// TODO extra elements style colors, any unknown style
 </script>
 
 <template>
@@ -207,16 +206,11 @@ defineExpose({ header });
 		}
 	}
 
-	unknown {
-		color: #ff00ff;
-		font-weight: 700;
-	}
-
 	h4 {
-		@apply 'flex items-center gap-[0.5ch]';
+		@apply 'text-neutral-300';
 
-		passive {
-			@apply 'font-700';
+		&:has(img) {
+			@apply 'flex items-center gap-[0.5ch]';
 		}
 
 		img {
@@ -224,8 +218,6 @@ defineExpose({ header });
 		}
 
 		span {
-			@apply 'text-neutral-300';
-
 			> span {
 				@apply 'sr-only';
 			}
@@ -235,33 +227,119 @@ defineExpose({ header });
 	p {
 		@apply 'text-neutral-300';
 
-		scalemana {
-			@apply 'text-blue';
-		}
-
-		healing {
-			@apply 'text-green';
-		}
-
-		physicaldamage {
-			@apply 'text-orange';
-		}
-
-		onhit {
-			@apply 'text-white';
-		}
-
-		status {
-			@apply 'text-purple';
-		}
-
-		gold {
-			@apply 'text-amber';
-		}
-
 		img {
 			@apply 'inline-block size-4 align-text-middle';
 		}
+	}
+
+	unknown {
+		color: #ff00ff;
+		font-weight: 700;
+	}
+
+	passive {
+		@apply 'font-700 text-white';
+	}
+
+	scaleap {
+		@apply 'text-indigo-400';
+	}
+
+	scalead {
+		@apply 'text-orange';
+	}
+
+	scalehealth {
+		@apply 'text-emerald-600';
+	}
+
+	scalemana {
+		@apply 'text-blue';
+	}
+
+	scalearmor {
+		@apply 'text-orange-300';
+	}
+
+	scalemr {
+		@apply 'text-cyan-300';
+	}
+
+	scalelethality {
+		@apply 'text-red';
+	}
+
+	attackspeed {
+		@apply 'text-yellow-200';
+	}
+
+	onhit {
+		@apply 'text-white';
+	}
+
+	physicaldamage {
+		@apply 'text-orange-600';
+	}
+
+	magicdamage {
+		@apply 'text-cyan';
+	}
+
+	truedamage {
+		@apply 'text-cyan-50';
+	}
+
+	healing {
+		@apply 'text-green-300';
+	}
+
+	shield {
+		@apply 'text-sky-400';
+	}
+
+	lifesteal,
+	omnivamp {
+		@apply 'text-red-700';
+	}
+
+	speed {
+		@apply 'text-white';
+	}
+
+	gold {
+		@apply 'text-amber';
+	}
+
+	status {
+		@apply 'text-purple';
+	}
+
+	attention {
+		@apply 'text-neutral-50';
+	}
+
+	raritygeneric {
+		@apply 'text-neutral-100';
+	}
+
+	raritylegendary {
+		@apply 'text-white';
+	}
+
+	rules {
+		@apply 'text-neutral-400';
+	}
+
+	keyword {
+		@apply 'text-pink-300';
+	}
+
+	keywordmajor {
+		@apply 'text-yellow-100';
+	}
+
+	keywordstealth {
+		@apply 'text-pink-300';
 	}
 
 	.unknown-variables-alert {
