@@ -474,14 +474,14 @@ if (!textData || textData?.version !== latestVersion) {
 					const statsEndIndex = statsToEnd.indexOf('</section>');
 					const extraToEnd = statsToEnd.slice(statsEndIndex + 19);
 					const extraEndIndex = extraToEnd.indexOf('</section>');
-					const extra = extraToEnd.slice(0, extraEndIndex);
+					const rawExtra = extraToEnd.slice(0, extraEndIndex).replace(/\{\{ ?Item_Passive_List ?\}\}/g, '').replaceAll(':</passive>', '</passive>');
 
-					const { unknownVariables } = replaceItemDescriptionVariables(extra, item);
+					const { unknownVariables } = replaceItemDescriptionVariables(rawExtra, item);
 					if (unknownVariables.length) {
 						unknownItemTooltipShopExtra.variables.set(item.name, unknownVariables);
 					}
 
-					const tags = extra.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
+					const tags = rawExtra.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
 					const unknownTags = Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_TOOLTIP_SHOP_EXTRA_TAGS.includes(tag));
 					if (unknownTags.length) {
 						unknownItemTooltipShopExtra.tags[0].push(item.name);
@@ -490,10 +490,32 @@ if (!textData || textData?.version !== latestVersion) {
 						}
 					}
 
+					const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')) : undefined;
+					for (let i = 0; i < (extra?.length || 0); i++) {
+						const replaced: string[] = [];
+						let [heading] = extra![i];
+						let liStartIndex = heading.indexOf('<li>');
+						while (~liStartIndex) {
+							const headingEndIndex = heading.indexOf('</passive>');
+							const newHeading = heading.slice(4, headingEndIndex + 10);
+
+							heading = heading.slice(headingEndIndex + 11);
+							liStartIndex = heading.indexOf('<li>');
+
+							const paragraphEndIndex = ~liStartIndex ? liStartIndex : undefined;
+							replaced.push(newHeading, heading.slice(0, paragraphEndIndex));
+							heading = heading.slice(paragraphEndIndex);
+						}
+
+						if (replaced.length) {
+							extra![i] = replaced;
+						}
+					}
+
 					return [itemId, { tooltipShop: {
 						subtitleLeft: subtitleLeft || undefined,
 						subtitleRight: subtitleRight || undefined,
-						extra: extra ? extra.split('<br><br>').map(text => text.split('<br>')) : undefined,
+						extra,
 					} }];
 				}),
 			),

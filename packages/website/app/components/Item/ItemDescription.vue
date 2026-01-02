@@ -213,14 +213,18 @@ defineExpose({ header });
 	}
 
 	h4 {
-		@apply 'flex items-center gap-[0.5ch] font-700';
+		@apply 'flex items-center gap-[0.5ch]';
+
+		passive {
+			@apply 'font-700';
+		}
 
 		img {
 			@apply 'size-4';
 		}
 
 		span {
-			@apply 'text-neutral-300 font-400';
+			@apply 'text-neutral-300';
 
 			> span {
 				@apply 'sr-only';

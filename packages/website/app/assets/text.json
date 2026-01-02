@@ -156,8 +156,10 @@
 				"tooltipShop": {
 					"extra": [
 						[
-							"{{ Item_Passive_List }}<li><passive>Recovery:</passive> Restores <healing>@FlatHPRegenMod*5@ Health</healing> every 5 seconds.<li><passive>Undaunted:</passive> Blocks @Effect1Amount@ damage from attacks and spells from champions (@Effect2Amount*100@% effectiveness vs. damage over time abilities).",
-							""
+							"<passive>Recovery</passive>",
+							"Restores <healing>@FlatHPRegenMod*5@ Health</healing> every 5 seconds.",
+							"<passive>Undaunted</passive>",
+							"Blocks @Effect1Amount@ damage from attacks and spells from champions (@Effect2Amount*100@% effectiveness vs. damage over time abilities)."
 						]
 					]
 				}
@@ -829,8 +831,8 @@
 				"tooltipShop": {
 					"extra": [
 						[
-							"{{ Item_Passive_List }}<li><passive>Recovery:</passive> Restores <scaleMana>@FlatMPRegenMod*5@ Mana</scaleMana> every 5 seconds. If you can't gain mana, restores <healing>@Effect1Amount*5@ Health</healing> instead.",
-							""
+							"<passive>Recovery</passive>",
+							"Restores <scaleMana>@FlatMPRegenMod*5@ Mana</scaleMana> every 5 seconds. If you can't gain mana, restores <healing>@Effect1Amount*5@ Health</healing> instead."
 						]
 					]
 				}
