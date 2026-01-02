@@ -121,7 +121,11 @@ defineExpose({ header });
 		<span>{{ contents.subtitleLeft }}</span>
 		<span>{{ contents.subtitleRight }}</span>
 	</component>
-	<div class="item-description-content" :class="[descriptionClass, { 'b b-red': contents.anyUnknownExtraVariables }]">
+	<div class="item-description-content" :class="descriptionClass">
+		<p v-if="contents.anyUnknownExtraVariables" class="unknown-variables-alert">
+			<Icon name="ph:warning-light" />
+			Some variables weren't resolved correctly. Please <b>report this issue</b>
+		</p>
 		<ul>
 			<li v-for="[icon, value, name] in contents.stats" :key="icon">
 				<img
@@ -174,6 +178,8 @@ defineExpose({ header });
 		@apply 'grid-cols-[auto_1fr_auto]';
 	}
 
+	/* unocss failes to parse these if they are nested above, maybe if this merged can override css-tree */
+	/* https://github.com/eslint/csstree/pull/104 */
 	&[data-show-subtitles] span:nth-of-type(2) {
 		@apply 'text-xl text-end justify-end';
 	}
@@ -247,6 +253,18 @@ defineExpose({ header });
 
 		img {
 			@apply 'inline-block size-4 align-text-middle';
+		}
+	}
+
+	.unknown-variables-alert {
+		@apply 'b b-amber-600 relative pl-9.5 rounded-md bg-amber-900/10 p-2 text-amber-400';
+
+		&:before {
+			@apply 'absolute content-empty left-2 top-1/2 -translate-y-1/2 z-0 bg-amber-400 size-6 rounded-full';
+		}
+
+		.iconify {
+			@apply 'size-4.5 z-10 absolute left-2.75 top-1/2 -translate-y-1/2 align-middle text-amber-950';
 		}
 	}
 }

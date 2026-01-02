@@ -53,7 +53,7 @@ bun test
 - [ ] check with screenreader
 - [ ] github issue template
   - champion stats/damage is off (make sure to check no passives, runes, and so on...)
-- [ ] submit feedback on page
+- [ ] submit feedback on page / report issues
 - [ ] build github actions CI/CD
 - [ ] per patch versions = see stats/features from older patches
 
