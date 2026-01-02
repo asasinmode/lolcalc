@@ -48,7 +48,7 @@ const contents = computed<{
 
 	let anyUnknownExtraVariables = false;
 	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
-		const { replaced: replacedHeading, anyUnknown: headingUnknown } = replaceExtraVariables(
+		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceItemDescriptionVariables(
 			heading!
 				.replace('{{ Item_Cooldown }}', `${cooldownIcon}<span>(${item.dataValues?.Cooldown}s<span> cooldown</span>)</span>`)
 				.replace('%i:cooldown%', cooldownIcon)
@@ -56,19 +56,18 @@ const contents = computed<{
 				.replace(')', ')</span>'),
 			item,
 		);
-		anyUnknownExtraVariables ||= headingUnknown;
+		anyUnknownExtraVariables ||= !!headingUnknown.length;
 
 		return [
 			replacedHeading,
 			...paragraphs.map((paragraph) => {
-				const { replaced: replacedParagraph, anyUnknown: paragraphUnknown } = replaceExtraVariables(
+				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceItemDescriptionVariables(
 					paragraph!.replace('{{ Item_Keyword_OnHit }}', `${onHitIcon} <onhit>On-Hit</onhit>`),
 					item,
 				);
 
-				anyUnknownExtraVariables ||= paragraphUnknown;
-				return replacedParagraph
-				;
+				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
+				return replacedParagraph;
 			},
 			),
 		];
@@ -83,35 +82,8 @@ const contents = computed<{
 	};
 });
 
-// TODO add item.stringCalculations and item.itemCalculations handling
-function replaceExtraVariables(text: string, item: IItem): { replaced: string; anyUnknown: boolean } {
-	let anyUnknown = false;
-
-	const replaced = text.replace(/@([\w*]+)@/g, (_, name) => {
-		const multiplierIndex = name.indexOf('*');
-		const multiplier = ~multiplierIndex ? Number.parseInt(name.slice(multiplierIndex + 1)) : 1;
-
-		const dataValue = item.dataValues?.[name];
-		if (dataValue) {
-			return Math.round((dataValue * multiplier)).toString();
-		}
-
-		if (name.startsWith('Effect')) {
-			const index = name.slice(6);
-			const effectAmount = item.effectAmount?.[index];
-			if (effectAmount !== undefined) {
-				return Math.round(effectAmount * multiplier).toString();
-			}
-		}
-
-		anyUnknown ||= true;
-		return `<unknown>@${name}@</unknown>`;
-	});
-
-	return { replaced, anyUnknown };
-}
-
 defineExpose({ header });
+// TODO add gold icon https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png
 // TODO extra elements style colors, any unknown style
 </script>
 

@@ -3,6 +3,7 @@ import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composabl
 import type { ITextData } from '../app/composables/useText';
 import type { ITexture } from '../app/composables/useUi';
 import { useMaps } from '../app/composables/useMaps';
+import { KNOWN_TOOLTIP_SHOP_EXTRA_TAGS, replaceItemDescriptionVariables } from '../app/utils/item';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -82,7 +83,7 @@ if (await itemFile.exists()) {
 	itemData = await itemFile.json();
 }
 
-if (true || !itemData || itemData?.version !== latestVersion) {
+if (!itemData || itemData?.version !== latestVersion) {
 	console.log('item data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -443,11 +444,16 @@ if (!textData || textData?.version !== latestVersion) {
 
 	await loadStringTable();
 
+	const unknownItemTooltipShopExtra = {
+		variables: new Map<string, string[]>(),
+		tags: [[], new Set<string>()] as [items: string[], tags: Set<string>],
+	};
+
 	textData = {
 		version: latestVersion,
 		data: {
 			items: Object.fromEntries(
-				Object.entries(itemData.data).map(([itemId]) => {
+				Object.entries(itemData.data).map(([itemId, item]) => {
 					const text = stringtable[`generatedtip_item_${itemId}_tooltipshop`];
 
 					if (!text) {
@@ -470,6 +476,20 @@ if (!textData || textData?.version !== latestVersion) {
 					const extraEndIndex = extraToEnd.indexOf('</section>');
 					const extra = extraToEnd.slice(0, extraEndIndex);
 
+					const { unknownVariables } = replaceItemDescriptionVariables(extra, item);
+					if (unknownVariables.length) {
+						unknownItemTooltipShopExtra.variables.set(item.name, unknownVariables);
+					}
+
+					const tags = extra.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
+					const unknownTags = Array.from(tags, m => m[1]).filter(tag => !KNOWN_TOOLTIP_SHOP_EXTRA_TAGS.includes(tag));
+					if (unknownTags.length) {
+						unknownItemTooltipShopExtra.tags[0].push(item.name);
+						for (const tag of unknownTags) {
+							unknownItemTooltipShopExtra.tags[1].add(tag);
+						}
+					}
+
 					return [itemId, { tooltipShop: {
 						subtitleLeft: subtitleLeft || undefined,
 						subtitleRight: subtitleRight || undefined,
@@ -479,6 +499,13 @@ if (!textData || textData?.version !== latestVersion) {
 			),
 		} satisfies ITextData as unknown as NonNullable<(typeof textData)>['data'],
 	};
+
+	if (unknownItemTooltipShopExtra.variables.size) {
+		console.warn('Unknown tooltip shop extra variables', unknownItemTooltipShopExtra.variables);
+	}
+	if (unknownItemTooltipShopExtra.tags[0].length) {
+		console.warn('Unknown tooltip shop extra tags', unknownItemTooltipShopExtra.tags[1], '\nfound in', unknownItemTooltipShopExtra.tags[0]);
+	}
 
 	await textFile.write(JSON.stringify(textData, null, '\t'));
 }
