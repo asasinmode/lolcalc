@@ -425,11 +425,7 @@ defineExpose({
 							<span>{{ item.gold.total }}</span>
 						</li>
 					</ul>
-					<section
-						aria-live="polite"
-						aria-atomic="true"
-						class="row-span-full"
-					>
+					<section aria-live="polite" aria-atomic="true" class="row-span-full">
 						<ItemDescription
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem"

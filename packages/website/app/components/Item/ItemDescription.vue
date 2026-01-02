@@ -5,6 +5,7 @@ const props = defineProps<{
 	headerButton?: boolean;
 	headerClass?: string;
 	descriptionClass?: string;
+	headerSubtitles?: boolean;
 }>();
 
 defineEmits<{
@@ -12,7 +13,7 @@ defineEmits<{
 }>();
 
 const text = useText();
-const { version } = usePatchVersion();
+const { version, minorVersion } = usePatchVersion();
 
 const header = useTemplateRef<HTMLButtonElement>('header');
 
@@ -48,9 +49,10 @@ const contents = computed<{
 
 	let anyUnknownExtraVariables = false;
 	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
+		const headingCooldown = itemDescriptionVariableValue('Cooldown', item) || '<unknown>UNKNOWN</unknown>';
 		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceItemDescriptionVariables(
 			heading!
-				.replace('{{ Item_Cooldown }}', `${cooldownIcon}<span>(${item.dataValues?.Cooldown}s<span> cooldown</span>)</span>`)
+				.replace('{{ Item_Cooldown }}', `${cooldownIcon}(${headingCooldown}s<span> cooldown</span>)`)
 				.replace('%i:cooldown%', cooldownIcon)
 				.replace('(', '<span>(')
 				.replace(')', ')</span>'),
@@ -83,8 +85,8 @@ const contents = computed<{
 });
 
 defineExpose({ header });
-// TODO add gold icon https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png
 // TODO extra elements style colors, any unknown style
+// TODO lean style, no subtitile left and right, just gold below name in shop right section + search right panel details
 </script>
 
 <template>
@@ -93,6 +95,7 @@ defineExpose({ header });
 		ref="header"
 		class="item-description-header"
 		:class="headerClass"
+		:data-show-subtitles="headerSubtitles || undefined"
 		@click="$emit('headerClick', false)"
 		@click.right="$emit('headerClick', true)"
 	>
@@ -105,7 +108,17 @@ defineExpose({ header });
 			loading="lazy"
 		>
 		<span>{{ item?.name }}</span>
-		<span>{{ item?.gold.total }} <span class="sr-only">gold</span></span>
+		<span>
+			<img
+				v-show="item"
+				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
+				width="32"
+				height="28"
+				aria-hidden="true"
+				loading="lazy"
+			>
+			{{ item?.gold.total }} <span class="sr-only">gold</span>
+		</span>
 		<span>{{ contents.subtitleLeft }}</span>
 		<span>{{ contents.subtitleRight }}</span>
 	</component>
@@ -131,19 +144,39 @@ defineExpose({ header });
 
 <style>
 .item-description-header {
-	@apply 'grid grid-rows-2 grid-cols-[auto_1fr_auto] w-full';
+	@apply 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr_auto] w-full';
 
-	img {
+	> img {
 		@apply 'row-span-full size-(--item-img-size)';
 	}
 
-	span {
-		@apply 'text-start';
+	span:first-of-type {
+		@apply 'text-xl';
 	}
 
-	span:nth-of-type(2),
+	span:nth-of-type(2) {
+		@apply 'text-amber text-end flex items-center justify-end gap-[0.5ch]';
+
+		img {
+			@apply 'h-4 w-auto';
+		}
+	}
+
 	span:nth-of-type(4) {
-		@apply 'text-end';
+		@apply 'text-end text-neutral-300';
+	}
+
+	span:nth-of-type(3),
+	span:nth-of-type(4) {
+		@apply 'text-lg';
+	}
+
+	&[data-show-subtitles] {
+		@apply 'grid-cols-[auto_1fr]';
+
+		span:nth-of-type(2) {
+			@apply 'text-lg';
+		}
 	}
 }
 
@@ -160,6 +193,11 @@ defineExpose({ header });
 		}
 	}
 
+	unknown {
+		color: #ff00ff;
+		font-weight: 700;
+	}
+
 	h4 {
 		@apply 'flex items-center gap-[0.5ch] font-700';
 
@@ -170,7 +208,7 @@ defineExpose({ header });
 		span {
 			@apply 'text-neutral-300 font-400';
 
-			span {
+			> span {
 				@apply 'sr-only';
 			}
 		}
@@ -178,11 +216,6 @@ defineExpose({ header });
 
 	p {
 		@apply 'text-neutral-300';
-
-		unknown {
-			color: #ff00ff;
-			font-weight: 700;
-		}
 
 		scalemana {
 			@apply 'text-blue';

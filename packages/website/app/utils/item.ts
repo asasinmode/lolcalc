@@ -1,4 +1,19 @@
 // TODO add item.stringCalculations and item.itemCalculations handling
+export function itemDescriptionVariableValue(variable: string, item: IItem): number | undefined {
+	if (item.stats[variable as IItemStat] !== undefined) {
+		return item.stats[variable as IItemStat];
+	}
+
+	if (item.dataValues?.[variable] !== undefined) {
+		return item.dataValues[variable];
+	}
+
+	if (variable.startsWith('Effect')) {
+		return item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
+	}
+
+	return undefined;
+}
 export function replaceItemDescriptionVariables(text: string, item: IItem): {
 	replaced: string;
 	variables: Record<string, number>;
@@ -10,7 +25,6 @@ export function replaceItemDescriptionVariables(text: string, item: IItem): {
 	const replaced = text.replace(/@([\w*]+)@/g, (_, name) => {
 		let variableName = name;
 		let multiplier = 1;
-		let variable: number | undefined;
 
 		const multiplierIndex = name.indexOf('*');
 		if (~multiplierIndex) {
@@ -18,18 +32,14 @@ export function replaceItemDescriptionVariables(text: string, item: IItem): {
 			variableName = name.slice(0, name.indexOf(multiplierIndex));
 		}
 
-		const dataValue = item.dataValues?.[name];
-		if (dataValue) {
-			variable = Math.round((dataValue * multiplier));
-		} else if (variableName.startsWith('Effect')) {
-			variable = item.effectAmount?.[Number.parseInt(variableName.slice(6)) - 1];
-		}
+		let variable = itemDescriptionVariableValue(variableName, item);
 
 		if (variable === undefined) {
 			unknownVariables.push(name);
 			return `<unknown>@${name}@</unknown>`;
 		}
 
+		variable = Math.round(variable * multiplier);
 		variables[variableName] = variable;
 		return variable.toString();
 	});
