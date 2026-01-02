@@ -69,7 +69,7 @@ if (!championData || championData?.version !== latestVersion) {
 	for (const [role, playrates] of Object.entries(roleScriptData)) {
 		for (const championKey of Object.keys(playrates)) {
 			const champion = allChampions.find(champion => champion.key === championKey);
-			champion!.roles[role.toLowerCase()] = true;
+			(champion!.roles as Record<string, boolean>)[role.toLowerCase()] = true;
 		}
 	}
 
@@ -520,7 +520,7 @@ function formatNumber(n: number, precision = 2): number {
 	return Number.isInteger(n) ? n : Number(n.toFixed(precision));
 }
 
-function cleanupObject(obj?: Object) {
+function cleanupObject(obj?: object): any {
 	return obj && Object.fromEntries(Object.entries(obj).filter(([key]) => key !== '__type').map(([key, value]) =>
 		[key, typeof value === 'object'
 			? Array.isArray(value) ? value.map(cleanupObject) : cleanupObject(value)
