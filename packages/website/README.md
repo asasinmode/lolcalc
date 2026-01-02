@@ -36,7 +36,7 @@ bun test
   - [x] stat filters
   - [x] double click to buy
   - [x] builds into displayed item tree
-  - [ ] item hover tooltip `Items/{{id}}.mItemDataClient`
+  - [ ] item hover tooltip `Items/{{id}}.mItemDataClient` TODO terminus list style
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
 - [ ] multiple builds/champions you can switch between

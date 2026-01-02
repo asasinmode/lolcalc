@@ -1,4 +1,20 @@
+import { useItems } from '../composables/useItems';
 import { ITEM_STAT_ICON_NAMES } from '../composables/useUi';
+
+export interface IDamageSource {
+	isRanged?: boolean;
+	stats?: IChampionStats;
+}
+
+export const ITEM_CALCULATIONS: Record<string, Record<string, (source: IDamageSource) => number>> = {
+	3004: {	// manamune
+		BonusADFromMana(source) {
+			const { itemCalculations: { BonusADFromMana: { mFormulaParts } } } = useItems()['3004']!;
+			console.log('calculating manamune thing', mFormulaParts, source);
+			return 0;
+		},
+	},
+};
 
 interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
@@ -6,7 +22,7 @@ interface IVariableValueResult {
 	isMeleeRanged?: boolean;
 }
 
-export function itemDescriptionVariableValue(variable: string, item: IItem, isRanged?: boolean): IVariableValueResult {
+export function itemVariableValue(variable: string, item: IItem, target?: IDamageSource): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
 
@@ -16,15 +32,26 @@ export function itemDescriptionVariableValue(variable: string, item: IItem, isRa
 		value = item.dataValues[variable];
 	} else if (item.stringCalculations?.[variable]) {
 		isMeleeRanged = true;
-		if (isRanged === undefined) {
+		if (target?.isRanged === undefined) {
 			value = [
-				itemDescriptionVariableValue(item.stringCalculations[variable].MeleeResult.slice(1, -1), item, false).value as number | undefined,
-				itemDescriptionVariableValue(item.stringCalculations[variable].RangedResult.slice(1, -1), item, true).value as number | undefined,
+				itemVariableValue(
+					item.stringCalculations[variable].MeleeResult.slice(1, -1),
+					item,
+					Object.assign(target ? structuredClone(target) : {}, { isRanged: false }),
+				).value as number | undefined,
+				itemVariableValue(
+					item.stringCalculations[variable].RangedResult.slice(1, -1),
+					item,
+					Object.assign(target ? structuredClone(target) : {}, { isRanged: true }),
+				).value as number | undefined,
 			];
 		} else {
-			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
-			value = itemDescriptionVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, isRanged).value;
+			const key: keyof NonNullable<IItem['stringCalculations']>[string] = target.isRanged ? 'RangedResult' : 'MeleeResult';
+			value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, target).value;
 		}
+	} else if (item.itemCalculations?.[variable]) {
+		const result = ITEM_CALCULATIONS[item.id]?.[variable]?.(target);
+		value = result;
 	} else if (variable.startsWith('Effect')) {
 		value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	}
@@ -32,7 +59,7 @@ export function itemDescriptionVariableValue(variable: string, item: IItem, isRa
 	return { value, isMeleeRanged };
 }
 
-export function replaceItemDescriptionVariables(text: string, item: IItem, isRanged?: boolean): {
+export function replaceItemDescriptionVariables(text: string, item: IItem, target?: IDamageSource): {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
 	unknownVariables: string[];
@@ -47,10 +74,10 @@ export function replaceItemDescriptionVariables(text: string, item: IItem, isRan
 		const multiplierIndex = name.indexOf('*');
 		if (~multiplierIndex) {
 			multiplier = Number.parseInt(name.slice(multiplierIndex + 1));
-			variableName = name.slice(0, name.indexOf(multiplierIndex) - 1);
+			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged } = itemDescriptionVariableValue(variableName, item, isRanged);
+		let { value: variable, isMeleeRanged } = itemVariableValue(variableName, item, target);
 
 		if (variable === undefined) {
 			unknownVariables.push(name);
@@ -72,7 +99,7 @@ export function replaceItemDescriptionVariables(text: string, item: IItem, isRan
 
 		variable = Math.round(variable * multiplier);
 		variables.set(variableName, variable);
-		return isMeleeRanged ? `%i:${isRanged ? 'ranged' : 'melee'}active% ${variable}` : variable.toString();
+		return isMeleeRanged ? `%i:${target?.isRanged ? 'ranged' : 'melee'}active% ${variable}` : variable.toString();
 	});
 
 	return { replaced, variables, unknownVariables };
