@@ -1,28 +1,44 @@
 import { ITEM_STAT_ICON_NAMES } from '../composables/useUi';
 
-// TODO add item.stringCalculations and item.itemCalculations handling
-export function itemDescriptionVariableValue(variable: string, item: IItem): number | undefined {
-	if (item.stats[variable as IItemStat] !== undefined) {
-		return item.stats[variable as IItemStat];
-	}
-
-	if (item.dataValues?.[variable] !== undefined) {
-		return item.dataValues[variable];
-	}
-
-	if (variable.startsWith('Effect')) {
-		return item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
-	}
-
-	return undefined;
+interface IVariableValueResult {
+	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
+	value: number | [number | undefined, number | undefined] | undefined;
+	isMeleeRanged?: boolean;
 }
-export function replaceItemDescriptionVariables(text: string, item: IItem): {
+
+export function itemDescriptionVariableValue(variable: string, item: IItem, isRanged?: boolean): IVariableValueResult {
+	let value: IVariableValueResult['value'];
+	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
+
+	if (item.stats[variable as IItemStat] !== undefined) {
+		value = item.stats[variable as IItemStat];
+	} else if (item.dataValues?.[variable] !== undefined) {
+		value = item.dataValues[variable];
+	} else if (item.stringCalculations?.[variable]) {
+		isMeleeRanged = true;
+		if (isRanged === undefined) {
+			value = [
+				itemDescriptionVariableValue(item.stringCalculations[variable].MeleeResult.slice(1, -1), item, false).value as number | undefined,
+				itemDescriptionVariableValue(item.stringCalculations[variable].RangedResult.slice(1, -1), item, true).value as number | undefined,
+			];
+		} else {
+			const key: keyof NonNullable<IItem['stringCalculations']>[string] = isRanged ? 'RangedResult' : 'MeleeResult';
+			value = itemDescriptionVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, isRanged).value;
+		}
+	} else if (variable.startsWith('Effect')) {
+		value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
+	}
+
+	return { value, isMeleeRanged };
+}
+
+export function replaceItemDescriptionVariables(text: string, item: IItem, isRanged?: boolean): {
 	replaced: string;
-	variables: Record<string, number>;
+	variables: Map<string, number | [number, number]>;
 	unknownVariables: string[];
 } {
 	const unknownVariables: string[] = [];
-	const variables: Record<string, number> = {};
+	const variables = new Map<string, number | [number, number]>();
 
 	const replaced = text.replace(/@([\w*]+)@/g, (_, name) => {
 		let variableName = name;
@@ -31,19 +47,32 @@ export function replaceItemDescriptionVariables(text: string, item: IItem): {
 		const multiplierIndex = name.indexOf('*');
 		if (~multiplierIndex) {
 			multiplier = Number.parseInt(name.slice(multiplierIndex + 1));
-			variableName = name.slice(0, name.indexOf(multiplierIndex));
+			variableName = name.slice(0, name.indexOf(multiplierIndex) - 1);
 		}
 
-		let variable = itemDescriptionVariableValue(variableName, item);
+		let { value: variable, isMeleeRanged } = itemDescriptionVariableValue(variableName, item, isRanged);
 
 		if (variable === undefined) {
 			unknownVariables.push(name);
 			return `<unknown>@${name}@</unknown>`;
 		}
 
+		if (Array.isArray(variable)) {
+			if (variable[0] === undefined || variable[1] === undefined) {
+				unknownVariables.push(name);
+				return `<unknown>@${name}@</unknown>`;
+			}
+
+			variable[0] = Math.round(variable[0] * multiplier);
+			variable[1] = Math.round(variable[1] * multiplier);
+			variables.set(variableName, variable as [number, number]);
+
+			return `%i:meleeactive%${variable[0]} | %i:rangedactive%${variable[1]}`;
+		}
+
 		variable = Math.round(variable * multiplier);
-		variables[variableName] = variable;
-		return variable.toString();
+		variables.set(variableName, variable);
+		return isMeleeRanged ? `%i:${isRanged ? 'ranged' : 'melee'}active% ${variable}` : variable.toString();
 	});
 
 	return { replaced, variables, unknownVariables };

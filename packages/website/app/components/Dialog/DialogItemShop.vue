@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineProps<{
+	isTargetRanged?: boolean;
+}>();
+
 const emit = defineEmits<{
 	buyItem: [item: IItem];
 }>();
@@ -431,6 +435,7 @@ defineExpose({
 							:item="searchCursoredOverItem"
 							header-class="hoverable:bg-white/10"
 							header-tag="button"
+							:is-target-ranged
 							@header-click="onSearchHeaderClick"
 						/>
 					</section>
@@ -582,7 +587,7 @@ defineExpose({
 			</template>
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
-			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" />
+			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" :is-target-ranged />
 			<button
 				:disabled="!selectedItem"
 				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-gray-950"
@@ -709,7 +714,7 @@ defineExpose({
 			<button>Undo</button>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint">
-			<ItemDescription :item="hoveredItem" header-subtitles />
+			<ItemDescription :item="hoveredItem" :is-target-ranged header-subtitles />
 		</div>
 	</VDialog>
 </template>

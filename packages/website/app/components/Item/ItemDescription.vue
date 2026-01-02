@@ -6,6 +6,7 @@ const props = defineProps<{
 	headerClass?: string;
 	descriptionClass?: string;
 	headerSubtitles?: boolean;
+	isTargetRanged?: boolean;
 }>();
 
 defineEmits<{
@@ -49,31 +50,32 @@ const contents = computed<{
 
 	let anyUnknownExtraVariables = false;
 	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
-		const headingCooldown = itemDescriptionVariableValue('Cooldown', item);
-		if (!headingCooldown) {
-			anyUnknownExtraVariables ||= true;
-		}
+		const headingCooldown = itemDescriptionVariableValue('Cooldown', item, props.isTargetRanged);
 
 		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceItemDescriptionVariables(
-			replaceItemDescriptionIcons(heading!)
-				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, `${cooldownIcon}(${headingCooldown || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`)
+			heading!
+				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
+					anyUnknownExtraVariables ||= !headingCooldown;
+					return `${cooldownIcon}(${headingCooldown || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+				})
 				.replace('(', '<span>(')
 				.replace(')', ')</span>'),
 			item,
+			props.isTargetRanged,
 		);
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
 
 		return [
-			replacedHeading,
+			replaceItemDescriptionIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
 				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceItemDescriptionVariables(
-					replaceItemDescriptionIcons(paragraph!)
-						.replace('{{ Item_Keyword_OnHit }}', `${onHitIcon} <onhit>On-Hit</onhit>`),
+					paragraph!.replace('{{ Item_Keyword_OnHit }}', `${onHitIcon} <onhit>On-Hit</onhit>`),
 					item,
+					props.isTargetRanged,
 				);
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
-				return replacedParagraph;
+				return replaceItemDescriptionIcons(replacedParagraph);
 			},
 			),
 		];

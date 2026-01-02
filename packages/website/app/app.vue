@@ -26,6 +26,7 @@ const sourceChampionRunes = ref<IChampionRunes>({
 const sourceChampion = computed(() =>
 	sourceChampionId.value ? champions[sourceChampionId.value] : undefined,
 );
+const sourceChampionIsRanged = computed(() => sourceChampion.value ? (sourceChampion.value.stats.attackrange || 0) > 325 : undefined);
 
 function addItem(item: IItem) {
 	if (sourceChampionItems.value.length < 6) {
@@ -76,7 +77,7 @@ const targetDummy = ref<IDamageTarget>({
 			<button @click="itemShopDialog?.open()">
 				item shop
 			</button>
-			<DialogItemShop ref="itemShopDialog" @buy-item="addItem" />
+			<DialogItemShop ref="itemShopDialog" :is-target-ranged="sourceChampionIsRanged" @buy-item="addItem" />
 			<button
 				v-for="i in 6"
 				:key="i"
