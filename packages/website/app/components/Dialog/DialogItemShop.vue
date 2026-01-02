@@ -709,13 +709,17 @@ defineExpose({
 			<button>Undo</button>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint">
-			<ItemDescription :item="hoveredItem" />
+			<ItemDescription :item="hoveredItem" header-subtitles />
 		</div>
 	</VDialog>
 </template>
 
 <style>
 @layer components {
+	:root {
+		--item-img-size: 3.5rem;
+	}
+
 	[data-sprite-image] {
 		@apply object-none bg-no-repeat;
 		background-position: calc(var(--txt-uv-start-x) * var(--txt-scale)) calc(var(--txt-uv-start-y) * var(--txt-scale));
@@ -728,7 +732,6 @@ defineExpose({
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns: auto 1fr max-content;
-		--item-img-size: 3.5rem;
 	}
 
 	#item-shop-swap-sort-order:hover,

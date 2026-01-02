@@ -86,7 +86,6 @@ const contents = computed<{
 
 defineExpose({ header });
 // TODO extra elements style colors, any unknown style
-// TODO lean style, no subtitile left and right, just gold below name in shop right section + search right panel details
 </script>
 
 <template>
@@ -144,7 +143,7 @@ defineExpose({ header });
 
 <style>
 .item-description-header {
-	@apply 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr_auto] w-full';
+	@apply 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full';
 
 	> img {
 		@apply 'row-span-full size-(--item-img-size)';
@@ -155,28 +154,33 @@ defineExpose({ header });
 	}
 
 	span:nth-of-type(2) {
-		@apply 'text-amber text-end flex items-center justify-end gap-[0.5ch]';
+		@apply 'text-amber text-start flex items-center justify-start text-lg gap-[0.5ch]';
 
 		img {
 			@apply 'h-4 w-auto';
 		}
 	}
 
+	span:nth-of-type(3),
+	span:nth-of-type(4) {
+		@apply 'hidden text-lg';
+	}
+
 	span:nth-of-type(4) {
 		@apply 'text-end text-neutral-300';
 	}
 
-	span:nth-of-type(3),
-	span:nth-of-type(4) {
-		@apply 'text-lg';
+	&[data-show-subtitles] {
+		@apply 'grid-cols-[auto_1fr_auto]';
 	}
 
-	&[data-show-subtitles] {
-		@apply 'grid-cols-[auto_1fr]';
+	&[data-show-subtitles] span:nth-of-type(2) {
+		@apply 'text-xl text-end justify-end';
+	}
 
-		span:nth-of-type(2) {
-			@apply 'text-lg';
-		}
+	&[data-show-subtitles] span:nth-of-type(3),
+	&[data-show-subtitles] span:nth-of-type(4) {
+		@apply 'inline';
 	}
 }
 

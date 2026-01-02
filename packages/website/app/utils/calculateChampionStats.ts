@@ -140,6 +140,7 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 	PercentMagicPenetrationMod: 'percentMagicPen',
 	PercentTenacityMod: 'tenacity',
 	PhysicalLethality: 'lethality',
+	PercentOmnivampMod: 'omnivamp',
 };
 
 function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
