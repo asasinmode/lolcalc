@@ -9,8 +9,8 @@ export interface IDamageSource {
 export const ITEM_CALCULATIONS: Record<string, Record<string, (source: IDamageSource) => number>> = {
 	3004: {	// manamune
 		BonusADFromMana(source) {
-			const { itemCalculations: { BonusADFromMana: { mFormulaParts } } } = useItems()['3004']!;
-			console.log('calculating manamune thing', mFormulaParts, source);
+			const { mFormulaParts } = useItems()['3004']!.itemCalculations!.BonusADFromMana!;
+			console.log('TODO', mFormulaParts, source);
 			return 0;
 		},
 	},
@@ -22,6 +22,7 @@ interface IVariableValueResult {
 	isMeleeRanged?: boolean;
 }
 
+// TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
 export function itemVariableValue(variable: string, item: IItem, target?: IDamageSource): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];

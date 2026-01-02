@@ -27,7 +27,7 @@ const sourceChampion = computed(() =>
 	sourceChampionId.value ? champions[sourceChampionId.value] : undefined,
 );
 
-const damageSource: ComputedRef<IDamageSource> = computed(() => ({
+const damageSource = computed((): IDamageSource => ({
 	stats: sourceChampionStats.value?.value?.totalStats,
 	isRanged: sourceChampion.value ? (sourceChampion.value.stats.attackrange || 0) > 325 : undefined,
 }));
