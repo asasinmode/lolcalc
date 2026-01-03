@@ -264,6 +264,7 @@ function updateTooltipPosition(event: MouseEvent) {
 	const { clientX, clientY } = event;
 	itemTooltip.value!.style.setProperty('--left', `${clientX + 10}px`);
 	itemTooltip.value!.style.setProperty('--top', `${clientY + 10}px`);
+	itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
 }
 
 const buildsIntoMoreButton = useTemplateRef('buildsIntoMoreButton');
@@ -898,7 +899,7 @@ defineExpose({
 
 		--width: 45rem;
 		left: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
-		top: var(--top);
+		top: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 	}
 }
 </style>
