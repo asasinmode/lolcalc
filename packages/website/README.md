@@ -43,7 +43,7 @@ bun test
 - [ ] some cool graphs
 - [ ] sharing, saving/reading data in query
 - [ ] calculations
-  - [ ] item passives
+  - [ ] item passives (+ displaying values in tooltips)
   - [ ] champion passives
   - [ ] runes
   - [ ] s16 quest toggles

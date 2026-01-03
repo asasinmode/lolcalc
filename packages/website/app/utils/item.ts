@@ -1,4 +1,3 @@
-import { useItems } from '../composables/useItems';
 import { ITEM_STAT_ICON_NAMES } from '../composables/useUi';
 
 export interface IDamageSource {
@@ -6,13 +5,13 @@ export interface IDamageSource {
 	stats?: IChampionStats;
 }
 
-export const ITEM_CALCULATIONS: Record<string, Record<string, (source: IDamageSource) => number>> = {
+export const ITEM_CALCULATIONS: Record<string, Record<string, (source?: IDamageSource) => number>> = {
 	3004: {	// manamune
-		BonusADFromMana(source) {
-			const { mFormulaParts } = useItems()['3004']!.itemCalculations!.BonusADFromMana!;
-			console.log('TODO', mFormulaParts, source);
-			return 0;
-		},
+		// TODO
+		// BonusADFromMana(_source) {
+		// 	const { mFormulaParts } = useItems()['3004']!.itemCalculations!.BonusADFromMana!;
+		// 	return mFormulaParts![0].mCoefficient;
+		// },
 	},
 };
 

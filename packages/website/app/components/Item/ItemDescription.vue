@@ -231,6 +231,10 @@ defineExpose({ header });
 		img {
 			@apply 'inline-block size-4 align-text-middle';
 		}
+
+		li {
+			@apply 'ml-5';
+		}
 	}
 
 	unknown {
