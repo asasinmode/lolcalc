@@ -1,11 +1,26 @@
 import { data as runes } from '../assets/runes.json';
 
-export function calculateChampionStats(champion: IChampion, level: number, items: IItem[], runes: IChampionRunes) {
+interface IStatsCalculationResult {
+	stats: {
+		base: IChampionStats;
+		level: Partial<IChampionStats>;
+		item: IChampionStats;
+		total: IChampionStats;
+	};
+	hasMana: boolean;
+}
+
+export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
+	const { level } = source;
+	const champion = toValue(source.champion);
+	const items = toValue(source.items);
+	const runes = toValue(source.runes);
+
 	const baseStats: IChampionStats = {
-		hp: champion.stats.hp,
-		hpRegen: champion.stats.hpregen,
-		mana: champion.stats.mp,
-		manaRegen: champion.stats.mpregen,
+		hp: champion?.stats.hp ?? 0,
+		hpRegen: champion?.stats.hpregen ?? 0,
+		mana: champion?.stats.mp ?? 0,
+		manaRegen: champion?.stats.mpregen ?? 0,
 		healShieldPower: 0,
 		lethality: 0,
 		percentArmorPen: 0,
@@ -13,21 +28,32 @@ export function calculateChampionStats(champion: IChampion, level: number, items
 		percentMagicPen: 0,
 		lifeSteal: 0,
 		omnivamp: 0,
-		attackRange: champion.stats.attackrange,
+		attackRange: champion?.stats.attackrange ?? 0,
 		tenacity: 0,
-		attackDamage: champion.stats.attackdamage,
+		attackDamage: champion?.stats.attackdamage ?? 0,
 		abilityPower: 0,
-		armor: champion.stats.armor,
-		magicResist: champion.stats.spellblock,
-		attackSpeed: champion.stats.attackspeed,
-		attackSpeedRatio: champion.stats.attackspeedratio,
-		/** in percentage points, same as in game when hovering over attack speed */
+		armor: champion?.stats.armor ?? 0,
+		magicResist: champion?.stats.spellblock ?? 0,
+		attackSpeed: champion?.stats.attackspeed ?? 0,
+		attackSpeedRatio: champion?.stats.attackspeedratio ?? 0,
 		bonusAttackSpeedPercent: 0,
 		abilityHaste: 0,
-		critChance: champion.stats.crit,
+		critChance: champion?.stats.crit ?? 0,
 		critDamageMultiplier: 1.75,
-		moveSpeed: champion.stats.movespeed,
+		moveSpeed: champion?.stats.movespeed ?? 0,
 	};
+
+	if (!champion) {
+		return {
+			hasMana: false,
+			stats: {
+				base: baseStats,
+				item: baseStats,
+				level: baseStats,
+				total: baseStats,
+			},
+		};
+	}
 
 	const levelStats: Partial<IChampionStats> = {
 		hp: champion.stats.hpperlevel,
@@ -107,17 +133,17 @@ export function calculateChampionStats(champion: IChampion, level: number, items
 	)) as IChampionStats;
 
 	return {
-		totalStats,
-		itemStats,
-		levelAndRunesStats,
-		levelStats,
-		baseStats,
-		runeShardStats,
 		hasMana: champion.partype === 'mana',
+		stats: {
+			base: baseStats,
+			total: totalStats,
+			item: itemStats,
+			level: levelStats,
+		},
 	};
 }
 
-const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
+const ITEM_TO_CHAMPION_STATS: Record<Exclude<
 	IItemStat,
 'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
 >, IChampionStatName> = {
@@ -145,16 +171,16 @@ const ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES: Record<Exclude<
 
 function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
 	return Object.entries(item.stats)
-		.filter(([itemStatName]) => itemStatName in ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES)
+		.filter(([itemStatName]) => itemStatName in ITEM_TO_CHAMPION_STATS)
 		.map(([itemStatName, itemStatValue]) => {
 			return [
-				ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES[itemStatName as keyof typeof ITEM_STAT_NAMES_TO_DISPLAYED_STAT_NAMES],
+				ITEM_TO_CHAMPION_STATS[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS],
 				itemStatValue,
 			];
 		});
 }
 
-// TODO maybe better way exists
+// TODO maybe a better way exists
 const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Ambessa', 'Aphelios', 'Ashe', 'Belveth', 'Blitzcrank', 'Braum', 'Briar', 'Caitlyn', 'Camille', 'Corki', 'Darius', 'Draven', 'DrMundo', 'Ezreal', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Graves', 'Hecarim', 'Illaoi', 'Irelia', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'Kayle', 'Kayn', 'Khazix', 'Kindred', 'Kled', 'KogMaw', 'KSante', 'LeeSin', 'Leona', 'Lucian', 'MasterYi', 'MissFortune', 'MonkeyKing', 'Naafiri', 'Nasus', 'Nilah', 'Nocturne', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rammus', 'RekSai', 'Rell', 'Renekton', 'Rengar', 'Riven', 'Samira', 'Senna', 'Sett', 'Shaco', 'Shen', 'Shyvana', 'Sion', 'Sivir', 'Skarner', 'Smolder', 'TahmKench', 'Talon', 'Taric', 'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'Twitch', 'Udyr', 'Urgot', 'Varus', 'Vayne', 'Vi', 'Viego', 'Volibear', 'Warwick', 'Xayah', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yunara', 'Zaahen', 'Zed', 'Zeri'];
 
 type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
@@ -208,6 +234,9 @@ function getRuneShardStats(shards: IRuneShards, level: number) {
 	return stats;
 }
 
-export type IChampionStats = Record<IChampionStatName, number>;
+export type IChampionStats = Record<IChampionStatName, number> & {
+	/** in percentage points, same as in game when hovering over attack speed */
+	bonusAttackSpeedPercent: number;
+};
 
 export type IChampionStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResist' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';

@@ -17,7 +17,8 @@ export const ITEM_CALCULATIONS: Record<string, Record<string, (source?: IDamageS
 
 interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
-	value: number | [number | undefined, number | undefined] | undefined;
+	value?: number | [number | undefined, number | undefined];
+	/** if `true`, the variable is different for melee and ranged champions */
 	isMeleeRanged?: boolean;
 }
 

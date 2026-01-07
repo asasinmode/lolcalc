@@ -39,6 +39,8 @@ bun test
   - [ ] item hover tooltip `Items/{{id}}.mItemDataClient` TODO terminus list style
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
+- [ ] button tooltips over `:title` where appropriate
+  - [ ] LolScoreboardItem buttons
 - [ ] multiple builds/champions you can switch between
 - [ ] some cool graphs
 - [ ] sharing, saving/reading data in query
@@ -59,6 +61,11 @@ bun test
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others
 
+// NEXT TODO
+rewrite <style> to just put classes on the element
+add champion, item, rune dialog to composables with 1 global element
+finish scoreboard ui
+
 ### future features
 
 - [ ] champion passives, abilities, ability levels (`additionalData` in each champion's map)
@@ -74,6 +81,7 @@ bun test
   - item overrides - `DataValuesModeOverride`
 - [ ] scorch vs gathering storm damage shower, pick champion, show 10, 20, 30... minutes
 - [ ] chess like puzzles, guess from screenshot what to do, choose option
+- [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
 
 ## misc
 

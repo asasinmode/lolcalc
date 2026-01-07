@@ -10,115 +10,72 @@ const { version } = usePatchVersion();
 const itemShopDialog = useTemplateRef('itemShopDialog');
 const champSelectDialog = useTemplateRef('champSelectDialog');
 const runeDialog = useTemplateRef('runeDialog');
-const sourceChampionStats = useTemplateRef('sourceChampionStats');
 
-const sourceChampionId = ref<IChampionId>();
-const sourceChampionLevel = ref(1);
-const sourceChampionItems = ref<IItem[]>([]);
-const sourceChampionRunes = ref<IChampionRunes>({
-	shards: {
-		offensive: 'adaptiveForce',
-		flex: 'adaptiveForce',
-		defensive: 'flatHealth',
-	},
-});
+const damageSources = shallowRef<DamageSource[]>([new DamageSource()]);
+const damageTargets = shallowRef<DamageSource[]>([new DamageSource()]);
 
-const sourceChampion = computed(() =>
-	sourceChampionId.value ? champions[sourceChampionId.value] : undefined,
-);
-
-const damageSource = computed((): IDamageSource => ({
-	stats: sourceChampionStats.value?.value?.totalStats,
-	isRanged: sourceChampion.value ? (sourceChampion.value.stats.attackrange || 0) > 325 : undefined,
-}));
-
-function addItem(item: IItem) {
-	if (sourceChampionItems.value.length < 6) {
-		sourceChampionItems.value.push(markRaw(item));
-	}
-}
-
-const targetDummy = ref<IDamageTarget>({
-	stats: { hp: 1000, armor: 0, magicResist: 0 },
-});
+const canAddDamageSource = computed(() => !!damageSources.value[0]?.champion.value);
+const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.value);
 </script>
 
 <template>
-	<main class="grid auto-rows-min grid-cols-2">
-		<p class="col-span-full">
-			current patch: {{ version }}
-		</p>
-
-		<div>
-			<button @click="champSelectDialog?.open()">
-				<img
-					v-if="sourceChampion"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${sourceChampion.image}`"
-					loading="lazy"
-					width="128"
-					height="128"
-					class="size-10 inline-block"
-				>
-				<!-- TODO use patch version, cdn seems to be down atm -->
-				<img
-					v-else
-					src="https://cdn.communitydragon.org/latest/champion/generic/square"
-					width="256"
-					height="256"
-					class="size-10 inline-block"
-				>
-			</button>
-			<DialogChampionSelect
-				ref="champSelectDialog"
-				v-model="sourceChampionId"
-			/>
-			<label for="source-champion-level">Level: </label>
-			<select id="source-champion-level" v-model="sourceChampionLevel">
-				<option v-for="i in 18" :key="i" :value="i">
-					{{ i }}
-				</option>
-			</select>
-			<button @click="itemShopDialog?.open()">
-				item shop
-			</button>
-			<DialogItemShop ref="itemShopDialog" :target="damageSource" @buy-item="addItem" />
-			<button
-				v-for="i in 6"
-				:key="i"
-				class="border-gray-7 border size-8 inline-block"
-				@click.right.prevent="sourceChampionItems.splice(i - 1, 1)"
-			>
-				<span v-if="sourceChampionItems[i - 1]" class="sr-only">{{ sourceChampionItems[i - 1]!.name }}</span>
-				<img
-					v-if="sourceChampionItems[i - 1]"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${sourceChampionItems[i - 1]!.image}`"
-					width="64"
-					height="64"
-					loading="lazy"
-				>
-			</button>
-			<button @click="runeDialog?.open()">
-				runes {{ Object.values(sourceChampionRunes.shards) }}
-			</button>
-			<DialogRunes ref="runeDialog" v-model="sourceChampionRunes" />
-		</div>
-
-		<TargetDummy v-model="targetDummy" />
-
-		<ChampionStats
-			ref="sourceChampionStats"
-			class="col-span-full"
-			:champion="sourceChampion"
-			:level="sourceChampionLevel"
-			:items="sourceChampionItems"
-			:runes="sourceChampionRunes"
-		/>
-
-		<AADamage
-			v-if="sourceChampionStats?.value"
-			class="mt-3 col-span-full"
-			:source="{ stats: sourceChampionStats!.value!.totalStats }"
-			:target="targetDummy"
-		/>
+	<header>
+		current patch: {{ version }}
+	</header>
+	<main>
+		<article id="calculator-scoreboard" class="b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 relative after:(bg-white w-px content-empty bottom-0 left-1/2 top-12 absolute -translate-x-1/2)">
+			<header class="text-center b-b col-span-full">
+				<h1>&gt;&gt;placeholder title&lt;&lt;</h1>
+				<h2>LoL damage calculator</h2>
+			</header>
+			<h3>
+				damage sources
+			</h3>
+			<ul>
+				<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index />
+				<li>
+					<button :disabled="!canAddDamageSource">
+						<Icon name="ph:plus-bold" />
+						add damage source
+					</button>
+				</li>
+			</ul>
+			<h3>
+				damage targets
+			</h3>
+			<ul>
+				<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index is-right />
+				<li>
+					<button :disabled="!canAddDamageTarget">
+						<Icon name="ph:plus-bold" />
+						add damage target
+					</button>
+				</li>
+			</ul>
+		</article>
 	</main>
 </template>
+
+<style>
+#calculator-scoreboard {
+	> h3 {
+		@apply 'text-center';
+	}
+
+	> ul > li:last-child {
+		@apply 'grid-center';
+
+		> button {
+			@apply 'p-1 bg-black';
+
+			&:disabled {
+				@apply 'op-50';
+			}
+
+			.iconify {
+				@apply 'align-sub size-4';
+			}
+		}
+	}
+}
+</style>

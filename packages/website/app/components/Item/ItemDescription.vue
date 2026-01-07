@@ -182,8 +182,6 @@ defineExpose({ header });
 		@apply 'grid-cols-[auto_1fr_auto]';
 	}
 
-	/* unocss failes to parse these if they are nested above, maybe if this merged can override css-tree */
-	/* https://github.com/eslint/csstree/pull/104 */
 	&[data-show-subtitles] span:nth-of-type(2) {
 		@apply 'text-xl text-end justify-end';
 	}
