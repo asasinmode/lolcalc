@@ -144,7 +144,7 @@ defineExpose({ header });
 		</ul>
 		<template v-for="([heading, ...paragraphs], i) in contents.extra" :key="i">
 			<h4 v-html="heading" />
-			<p v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
+			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
 	</div>
 </template>
@@ -225,7 +225,7 @@ defineExpose({ header });
 		}
 	}
 
-	p {
+	div {
 		@apply 'text-neutral-300';
 
 		img {
