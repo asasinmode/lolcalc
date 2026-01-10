@@ -36,7 +36,7 @@ bun test
   - [x] stat filters
   - [x] double click to buy
   - [x] builds into displayed item tree
-  - [ ] item hover tooltip `Items/{{id}}.mItemDataClient` TODO terminus list style
+  - [ ] item hover tooltip `Items/{{id}}.mItemDataClient`
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
 - [ ] button tooltips over `:title` where appropriate
@@ -45,7 +45,7 @@ bun test
 - [ ] some cool graphs
 - [ ] sharing, saving/reading data in query
 - [ ] calculations
-  - [ ] item passives (+ displaying values in tooltips)
+  - [ ] item passives (+ displaying values in tooltips, check if we know to display level scaling icon like on kraken slayer)
   - [ ] champion passives
   - [ ] runes
   - [ ] s16 quest toggles
@@ -61,11 +61,6 @@ bun test
 - [ ] per patch versions = see stats/features from older patches
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
-
-// NEXT TODO
-rewrite <style> to just put classes on the element
-add champion, item, rune dialog to composables with 1 global element
-finish scoreboard ui
 
 ### future features
 

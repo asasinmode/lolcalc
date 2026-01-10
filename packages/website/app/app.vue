@@ -4,12 +4,10 @@ useSeoMeta({
 	title: 'Collector - League of Legends Damage Calculator',
 });
 
-const champions = useChampions();
 const { version } = usePatchVersion();
-
-const itemShopDialog = useTemplateRef('itemShopDialog');
-const champSelectDialog = useTemplateRef('champSelectDialog');
-const runeDialog = useTemplateRef('runeDialog');
+const { _component: ChampSelect } = useChampSelect();
+const { _component: ItemShop } = useItemShop();
+const { _component: RuneSelectDialog } = useRuneSelectDialog();
 
 const damageSources = shallowRef<DamageSource[]>([new DamageSource()]);
 const damageTargets = shallowRef<DamageSource[]>([new DamageSource()]);
@@ -27,6 +25,10 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 			<header class="text-center b-b col-span-full">
 				<h1>&gt;&gt;placeholder title&lt;&lt;</h1>
 				<h2>LoL damage calculator</h2>
+				<label for="calculator-scoreboard-mirror" class="right-0 top-0 absolute">
+					TODO mirror layout
+					<input id="calculator-scoreboard-mirror" type="checkbox">
+				</label>
 			</header>
 			<h3>
 				damage sources
@@ -54,6 +56,9 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 			</ul>
 		</article>
 	</main>
+	<ChampSelect />
+	<ItemShop />
+	<RuneSelectDialog />
 </template>
 
 <style>

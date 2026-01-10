@@ -1,11 +1,6 @@
 import { ITEM_STAT_ICON_NAMES } from '../composables/useUi';
 
-export interface IDamageSource {
-	isRanged?: boolean;
-	stats?: IChampionStats;
-}
-
-export const ITEM_CALCULATIONS: Record<string, Record<string, (source?: IDamageSource) => number>> = {
+export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IItemVariableCalculationTarget) => number>> = {
 	3004: {	// manamune
 		// TODO
 		// BonusADFromMana(_source) {
@@ -15,6 +10,11 @@ export const ITEM_CALCULATIONS: Record<string, Record<string, (source?: IDamageS
 	},
 };
 
+export interface IItemVariableCalculationTarget {
+	isRanged?: boolean;
+	stats?: IChampionStats;
+}
+
 interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
 	value?: number | [number | undefined, number | undefined];
@@ -23,7 +23,7 @@ interface IVariableValueResult {
 }
 
 // TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
-export function itemVariableValue(variable: string, item: IItem, target?: IDamageSource): IVariableValueResult {
+export function itemVariableValue(variable: string, item: IItem, target?: IItemVariableCalculationTarget): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
 
@@ -60,7 +60,7 @@ export function itemVariableValue(variable: string, item: IItem, target?: IDamag
 	return { value, isMeleeRanged };
 }
 
-export function replaceItemDescriptionVariables(text: string, item: IItem, target?: IDamageSource): {
+export function replaceItemDescriptionVariables(text: string, item: IItem, target?: IItemVariableCalculationTarget): {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
 	unknownVariables: string[];

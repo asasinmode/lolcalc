@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const value = defineModel<string>();
-
+const value = defineModel<IChampion>();
 const champions = useChampions();
 const { version, minorVersion } = usePatchVersion();
 
@@ -93,7 +92,7 @@ defineExpose({
 				v-for="champion in computedChampions"
 				:key="champion.id"
 				class="leading-tight text-center min-w-0 block hyphens-auto"
-				@click="value = champion.id"
+				@click="value = champion"
 			>
 				<img
 					:title="champion.name"

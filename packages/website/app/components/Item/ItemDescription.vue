@@ -6,7 +6,7 @@ const props = defineProps<{
 	headerClass?: string;
 	descriptionClass?: string;
 	headerSubtitles?: boolean;
-	target?: IDamageSource;
+	target?: IItemVariableCalculationTarget;
 }>();
 
 defineEmits<{
@@ -43,7 +43,7 @@ const contents = computed<{
 			const { name, displayMultiplier, isPercentage } = ITEM_STAT_META[statName as IItemStat];
 			return [
 				ITEM_STAT_ICON_NAMES[statName as IItemStat],
-				displayMultiplier ? value * displayMultiplier : isPercentage ? `${Math.round(value * 100)}%` : value,
+				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
 				name,
 			] as [string, number, string];
 		});
@@ -68,7 +68,7 @@ const contents = computed<{
 			replaceItemDescriptionIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
 				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceItemDescriptionVariables(
-					paragraph!.replace('{{ Item_Keyword_OnHit }}', `${onHitIcon} <onhit>On-Hit</onhit>`),
+					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
 					item,
 					props.target,
 				);
@@ -131,7 +131,7 @@ defineExpose({ header });
 			Some variables weren't resolved correctly. Please <b>report this issue</b>
 		</p>
 		<ul>
-			<li v-for="[icon, value, name] in contents.stats" :key="icon">
+			<li v-for="([icon, value, name], i) in contents.stats" :key="i">
 				<img
 					:src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
 					width="20"

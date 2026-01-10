@@ -1,11 +1,9 @@
 <script setup lang="ts">
 defineProps<{
-	target?: IDamageSource;
+	target?: IItemVariableCalculationTarget;
 }>();
 
-const emit = defineEmits<{
-	buyItem: [item: IItem];
-}>();
+const inventory = defineModel<IItem[]>();
 
 type IAllItemCategory = IItemCategory | 'all';
 
@@ -98,7 +96,9 @@ function selectItem(item: IItem, overwriteDisplayed: boolean) {
 }
 
 function buyItem(item: IItem) {
-	emit('buyItem', item);
+	if (inventory.value && inventory.value.length < 6) {
+		inventory.value.push(item);
+	}
 }
 
 function rightClickItem(event: MouseEvent, item: IItem) {

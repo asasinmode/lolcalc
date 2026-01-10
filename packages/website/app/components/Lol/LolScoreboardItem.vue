@@ -62,7 +62,7 @@ const group = computed(() => props.isRight ? 'targets' : 'sources');
 				</option>
 			</select>
 		</div>
-		<button @click="selectItems(value.items)">
+		<button @click="selectItems(value.items, value.itemDamageCalculationTarget.value)">
 			item shop TODO gold icon
 		</button>
 		<ul class="flex">
@@ -82,5 +82,13 @@ const group = computed(() => props.isRight ? 'targets' : 'sources');
 				</button>
 			</li>
 		</ul>
+		<button class="grid-center !row-span-1" title="remove">
+			<Icon name="ph-x" class="size-5" />
+			<span class="sr-only">remove</span>
+		</button>
+		<button class="grid-center !row-span-1" title="expand">
+			<Icon name="ph-caret-down" class="size-5" />
+			<span class="sr-only">expand</span>
+		</button>
 	</li>
 </template>

@@ -11,7 +11,7 @@ interface IStatsCalculationResult {
 }
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
-	const { level } = source;
+	const level = toValue(source.level);
 	const champion = toValue(source.champion);
 	const items = toValue(source.items);
 	const runes = toValue(source.runes);

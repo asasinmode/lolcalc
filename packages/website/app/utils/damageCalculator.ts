@@ -1,3 +1,14 @@
+import type { UnwrapRef } from 'vue';
+
+type IDamageSource = InstanceType<typeof DamageSource>;
+
+interface IOverrides {
+	champion: UnwrapRef<IDamageSource['champion']>;
+	level: UnwrapRef<IDamageSource['level']>;
+	items: UnwrapRef<IDamageSource['items']>;
+	runes: UnwrapRef<IDamageSource['runes']>;
+}
+
 export class DamageSource {
 	champion: Ref<IChampion | undefined>;
 	level: Ref<number>;
@@ -6,17 +17,33 @@ export class DamageSource {
 
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => this.champion.value && calculateChampionStats(this));
+	itemDamageCalculationTarget = computed((): IItemVariableCalculationTarget => ({
+		isRanged: this.isRanged.value,
+		stats: this.stats.value?.stats.total,
+	}));
 
-	constructor() {
-		this.champion = ref();
-		this.level = ref(1);
-		this.items = ref([]);
-		this.runes = ref<IChampionRunes>({
-			shards: {
-				offensive: 'adaptiveForce',
-				flex: 'adaptiveForce',
-				defensive: 'flatHealth',
-			},
+	constructor(overrides: Partial<IOverrides> = {}) {
+		this.champion = ref(overrides.champion);
+		this.level = ref(overrides.level ?? 1);
+		this.items = ref(overrides.items ? structuredClone(overrides.items) : []);
+		this.runes = ref<IChampionRunes>(overrides.runes
+			? structuredClone(overrides.runes)
+			: {
+					shards: {
+						offensive: 'adaptiveForce',
+						flex: 'adaptiveForce',
+						defensive: 'flatHealth',
+					},
+				});
+	}
+
+	clone(overrides: Partial<IOverrides> = {}) {
+		return new DamageSource({
+			champion: this.champion.value,
+			level: this.level.value,
+			items: this.items.value,
+			runes: this.runes.value,
+			...overrides,
 		});
 	}
 }

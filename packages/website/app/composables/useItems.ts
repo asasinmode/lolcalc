@@ -59,7 +59,7 @@ export const ITEM_SHOP_STAT_FILTERS = {
 	},
 	movement: {
 		name: 'Movement',
-		// TODO check if tenacity counts
+		// TODO check if tenacity counts + check other filters
 		filter: item => !!(item.stats.FlatMovementSpeedMod || item.stats.PercentMovementSpeedMod || item.stats.PercentTenacityMod),
 	},
 	vamp: {
@@ -92,7 +92,7 @@ export const ITEM_STAT_META: Record<IItemStat, {
 	PhysicalLethality: { name: 'Lethality', order: 59 },
 	PercentArmorPenetrationMod: { name: 'Armor penetration', order: 56, isPercentage: true },
 	FlatMagicPenetrationMod: { name: 'Magic penetration', order: 53 },
-	PercentMagicPenetrationMod: { name: 'Magic penetration', order: 50 },
+	PercentMagicPenetrationMod: { name: 'Magic penetration', order: 50, isPercentage: true },
 
 	FlatCritChanceMod: { name: 'Critical strike chance', order: 45, isPercentage: true },
 	FlatCritDamageMod: { name: 'Critical strike damage', order: 40, isPercentage: true },
