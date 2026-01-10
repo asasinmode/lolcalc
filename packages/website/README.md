@@ -52,6 +52,7 @@ bun test
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
 - [ ] [wiki](https://github.com/asasinmode/colectormode/wiki)
+- [ ] mobile version
 - [ ] check with screenreader
 - [ ] github issue template
   - champion stats/damage is off (make sure to check no passives, runes, and so on...)
@@ -59,7 +60,7 @@ bun test
 - [ ] build github actions CI/CD
 - [ ] per patch versions = see stats/features from older patches
 
-`extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others
+`extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
 // NEXT TODO
 rewrite <style> to just put classes on the element
@@ -87,17 +88,3 @@ finish scoreboard ui
 
 [useful assets](https://raw.communitydragon.org/latest/)
 https://hextechdocs.dev/resolving-variables-in-spell-textsa/
-
-## tests
-
-TODO probably cant have tests
-
-In the `test` folder there are the `calculateChampionStats.test.ts` and `calculateDamage.test.ts` files. Alongside the files inside `test/fixtures`, these are intended to be a snapshot of the numbers seen in game at X point (like patch 15.24.1).
-
-The methodology for making these was
-
-1. Record a video of a champion in practice tool
-2. Test various item setups, hovering over the expanded champion stats
-3. Create a test with numbers seen in the video. Numbers are concrete, just what the video showed. No calculations in `expect`
-
-Videos were not saved because it would be a lot of work. Fixtures are the `champion.json` stats for that champion on specified patch

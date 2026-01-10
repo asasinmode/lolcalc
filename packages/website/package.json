@@ -12,8 +12,7 @@
 		"type-check": "nuxt typecheck",
 		"lint:oxlint": "oxlint . --fix -D correctness --ignore-path .gitignore",
 		"lint:eslint": "eslint . --fix --cache",
-		"lint": "run-s lint:*",
-		"test": "vitest run"
+		"lint": "run-s lint:*"
 	},
 	"peerDependencies": {
 		"typescript": "^5"

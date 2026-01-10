@@ -462,7 +462,7 @@ if (!textData || textData?.version !== latestVersion) {
 
 					const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
 					const subtitleLeftEndIndex = text.indexOf('</subtitleLeft>');
-					// move start by tag length + unused {{ Item_BriefIcon... }}
+					/* move start by tag length + unused {{ Item_BriefIcon... }} */
 					const subtitleLeft = text.slice(subtitleLeftStartIndex + 51, subtitleLeftEndIndex);
 
 					const subtitleRightStartIndex = text.indexOf('<subtitleRight>');
