@@ -557,12 +557,13 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug:
 }
 
 function createRuneSlotData(data: any) {
-	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey } = data;
+	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mTooltipNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey } = data;
 
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
 		tooltipShort: getStringtableValue(mShortDescLocalizationKey, 'rune slot'),
 		tooltipLong: getStringtableValue(mLongDescLocalizationKey, 'rune slot'),
+		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
 	};
 
 	return {

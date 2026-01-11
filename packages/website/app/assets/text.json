@@ -2154,307 +2154,368 @@
 				"PressTheAttack": {
 					"name": "Press the Attack",
 					"tooltipShort": "Hitting an enemy champion @HitsRequired@ consecutive times deals bonus damage and amplifies your damage until you leave combat with champions.",
-					"tooltipLong": "Hitting an enemy champion with @HitsRequired@ consecutive basic attacks deals @MinDamage@ - @MaxDamage@ bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword> (based on level) and amplifies your damage dealt by @BonusPercentDamage*100@% until you leave combat with champions."
+					"tooltipLong": "Hitting an enemy champion with @HitsRequired@ consecutive basic attacks deals @MinDamage@ - @MaxDamage@ bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword> (based on level) and amplifies your damage dealt by @BonusPercentDamage*100@% until you leave combat with champions.",
+					"tooltipStats": "Hitting an enemy champion with @HitsRequired@ consecutive basic attacks deals <scaleLevel>@f4@</scaleLevel> bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword> (based on level) and amplifies your damage dealt by @BonusPercentDamage*100@% until you leave combat with champions.<br><hr><br>Bonus Damage Dealt: <scaleAD>@f2@</scaleAD><br>3-Hit Cooldown: @Cooldown@s"
 				},
 				"LethalTempo": {
 					"name": "Lethal Tempo",
 					"tooltipShort": "Attacking an enemy champion grants you Attack Speed, up to @MaxStacks@ stacks. At max stacks, deal <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>bonus adaptive damage</font></lol-uikit-tooltipped-keyword> On-Attack.",
-					"tooltipLong": "Attacking an enemy champion grants you [@TTASPerStackMelee*100@% Melee || @TTASPerStackRanged*100@% Ranged] Attack Speed for @Duration@ seconds, up to @MaxStacks@. At max stacks, deal [@TTMinNoteDamageMelee@ - @TTMaxNoteDamageMelee@ Melee || @TTMinNoteDamageRanged@ - @TTMaxNoteDamageRanged@ Ranged] <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>bonus adaptive damage On-Attack, increased by 1% per 1% Bonus Attack Speed</lol-uikit-tooltipped-keyword>."
+					"tooltipLong": "Attacking an enemy champion grants you [@TTASPerStackMelee*100@% Melee || @TTASPerStackRanged*100@% Ranged] Attack Speed for @Duration@ seconds, up to @MaxStacks@. At max stacks, deal [@TTMinNoteDamageMelee@ - @TTMaxNoteDamageMelee@ Melee || @TTMinNoteDamageRanged@ - @TTMaxNoteDamageRanged@ Ranged] <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>bonus adaptive damage On-Attack, increased by 1% per 1% Bonus Attack Speed</lol-uikit-tooltipped-keyword>.",
+					"tooltipStats": "Attacking an enemy champion grants you %i:scaleAS%@ASPerStack@ Attack Speed for @Duration@ seconds, up to @MaxStacks@. At max stacks, deal @NoteDamage@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>bonus adaptive damage</font></lol-uikit-tooltipped-keyword> %i:OnHit% <OnHit>On-Attack</OnHit>.<br><br>Max Stack Uptime: @f1@s<br>Damage Dealt: @f2@<br><br>This rune also tracks the percent of your basic attacks against champions that are launched within @PerfectlyTimedForgivance.2@ seconds of when your attack is ready after previously attacking a champion: @f3@% (@f4@ of @f5@)"
 				},
 				"FleetFootwork": {
 					"name": "Fleet Footwork",
 					"tooltipShort": "Attacking and moving builds Energy stacks. At 100 stacks, your next attack heals you and grants increased <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>MS</lol-uikit-tooltipped-keyword>.",
-					"tooltipLong": "Attacking and moving builds Energy stacks. At 100 stacks, your next attack is Energized<br><br>Energized attacks heal you for @HealBase@ - @HealMax@ (+@HealBonusADRatio.-1@ Bonus AD, +@HealAPRatio.-1@ AP) and grant <speed>@MSBuff*100@% Move Speed</speed> for @MSDuration.0@s.<br><br>For Ranged Champions, Healing is @RangedHealMod*100@% effective and Move Speed is @RangedMSMod*100@% effective. All healing is @MinionHealMod*100@% effective against Minions."
+					"tooltipLong": "Attacking and moving builds Energy stacks. At 100 stacks, your next attack is Energized<br><br>Energized attacks heal you for @HealBase@ - @HealMax@ (+@HealBonusADRatio.-1@ Bonus AD, +@HealAPRatio.-1@ AP) and grant <speed>@MSBuff*100@% Move Speed</speed> for @MSDuration.0@s.<br><br>For Ranged Champions, Healing is @RangedHealMod*100@% effective and Move Speed is @RangedMSMod*100@% effective. All healing is @MinionHealMod*100@% effective against Minions.",
+					"tooltipStats": "Attacking and moving builds Energy stacks. At 100 stacks, your next attack is Energized.<br><br>Energized attacks heal you for <healing>@HealAmount@ Health</healing> and grant <speed>@MoveSpeedCalc@ Move Speed</speed> for @MSDuration@s.<br><rules><br>Healing from minions is @MinionHealMod*100@% effective<br></rules><hr><br>Total Healing: @f1@"
 				},
 				"Conqueror": {
 					"name": "Conqueror",
 					"tooltipShort": "Gain stacks of adaptive force when attacking enemy champions. After reaching @MaxStacks@ stacks, heal for a portion of damage you deal to champions.",
-					"tooltipLong": "Basic attacks or spells that deal damage to an enemy champion grant 2 stacks of Conqueror for @BuffDuration@s, gaining @MinAdaptivePerStack@-@MaxAdaptivePerStack@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>Adaptive Force</font></lol-uikit-tooltipped-keyword> per stack. Stacks up to @MaxStacks@ times. Ranged champions gain only 1 stack per basic attack.<br><br>When fully stacked, heal for @HealingPercent*100@% of the damage you deal to champions (@RangedHealingPercent*100@% for ranged champions)."
+					"tooltipLong": "Basic attacks or spells that deal damage to an enemy champion grant 2 stacks of Conqueror for @BuffDuration@s, gaining @MinAdaptivePerStack@-@MaxAdaptivePerStack@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>Adaptive Force</font></lol-uikit-tooltipped-keyword> per stack. Stacks up to @MaxStacks@ times. Ranged champions gain only 1 stack per basic attack.<br><br>When fully stacked, heal for @HealingPercent*100@% of the damage you deal to champions (@RangedHealingPercent*100@% for ranged champions).",
+					"tooltipStats": "Basic attacks or spells that deal damage to an enemy champion grant 2 stacks of Conqueror for @BuffDuration@s, gaining {{perk_substring_ConquerorAdaptive_@f4@}} per stack. Stacks up to @MaxStacks@ times. Ranged champions gain only 1 stack per basic attack.<br><br>When fully stacked, heal for @HealingPercent*100@% of the damage you deal to champions (@RangedHealingPercent*100@% for ranged champions).<br><br>Total Healing: @f1@"
 				},
 				"AbsorbLife": {
 					"name": "Absorb Life",
 					"tooltipShort": "Killing a target heals you.",
-					"tooltipLong": "Killing a target heals you for @HealAmount@."
+					"tooltipLong": "Killing a target heals you for @HealAmount@.",
+					"tooltipStats": "Killing a target heals you for @HealAmount@.<br><br><b>Total healing: <scaleAD>@f1@</scaleAD></b>"
 				},
 				"Triumph": {
 					"name": "Triumph",
 					"tooltipShort": "<lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>Takedowns</lol-uikit-tooltipped-keyword> restore @MissingHealthRestored.0*100@% of your missing health and grant an additional @BonusGold@ gold. ",
-					"tooltipLong": "Takedowns restore @MissingHealthRestored*100@% of your missing health, @TriumphMaxHealthRestored*100@% of your max health, and grant an additional @BonusGold@ gold. <br><br><hr><br><i>'The most dangerous game brings the greatest glory.' <br>—Noxian Reckoner</i>"
+					"tooltipLong": "Takedowns restore @MissingHealthRestored*100@% of your missing health, @TriumphMaxHealthRestored*100@% of your max health, and grant an additional @BonusGold@ gold. <br><br><hr><br><i>'The most dangerous game brings the greatest glory.' <br>—Noxian Reckoner</i>",
+					"tooltipStats": "Takedowns <healing>restore @MaxHealthCalc@ plus @MissingHealthRestored*100@% of your missing health</healing> and grant an additional <gold>@BonusGold@ gold</gold>. <br><br>Total health restored: <healing>@f1@</healing><br>Total bonus gold granted: <gold>@f2@</gold>"
 				},
 				"PresenceOfMind": {
 					"name": "Presence of Mind",
 					"tooltipShort": "Restore a small amount of mana or energy when damaging an enemy champion. Takedowns restore mana or energy.",
-					"tooltipLong": "Damaging an enemy champion restores @MinFlatRestore@-@MaxFlatRestore@ (80% for ranged) mana or @EnergyRestore@ energy.<br><br>Takedowns restore @PercentManaRestore*100@% of your maximum mana or energy. <br><br>Cooldown for damage restoration: @CooldownDuration@s"
+					"tooltipLong": "Damaging an enemy champion restores @MinFlatRestore@-@MaxFlatRestore@ (80% for ranged) mana or @EnergyRestore@ energy.<br><br>Takedowns restore @PercentManaRestore*100@% of your maximum mana or energy. <br><br>Cooldown for damage restoration: @CooldownDuration@s",
+					"tooltipStats": "{{perk_long_desc_PresenceOfMind}}<br><hr><br>Resource Restored: @f1@<br>"
 				},
 				"LegendAlacrity": {
 					"name": "Legend: Alacrity",
 					"tooltipShort": "<lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>Takedowns</lol-uikit-tooltipped-keyword> on enemies grant permanent <b>Attack Speed</b>. ",
-					"tooltipLong": "Gain @AttackSpeedBase*100@% attack speed plus an additional @AttackSpeedPerStack*100@% for every <i>Legend</i> stack (<statGood>max @MaxLegendStacks@ stacks</statGood>).<br><br>Earn progress toward <i>Legend</i> stacks for every champion takedown, epic monster takedown, large monster kill, and minion kill."
+					"tooltipLong": "Gain @AttackSpeedBase*100@% attack speed plus an additional @AttackSpeedPerStack*100@% for every <i>Legend</i> stack (<statGood>max @MaxLegendStacks@ stacks</statGood>).<br><br>Earn progress toward <i>Legend</i> stacks for every champion takedown, epic monster takedown, large monster kill, and minion kill.",
+					"tooltipStats": "{{perk_long_desc_LegendHeroism}}<br><hr><br>Total Attack Speed added: <scaleAD>@f1*100@%</scaleAD> (<statGood>@f3@ of @MaxLegendStacks@</statGood>){{ perk_legend_next_stack_@f4@ }}"
 				},
 				"LegendHaste": {
 					"name": "Legend: Haste",
 					"tooltipShort": "<lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>Takedowns</lol-uikit-tooltipped-keyword> on enemies grant permanent Basic Ability <b>Haste</b>. ",
-					"tooltipLong": "Gain 1.5 basic ability haste for every <i>Legend</i> stack (<statGood>max @MaxLegendStacks@ stacks</statGood>).<br><br>Earn progress toward <i>Legend</i> stacks for every champion takedown, epic monster takedown, large monster kill, and minion kill."
+					"tooltipLong": "Gain 1.5 basic ability haste for every <i>Legend</i> stack (<statGood>max @MaxLegendStacks@ stacks</statGood>).<br><br>Earn progress toward <i>Legend</i> stacks for every champion takedown, epic monster takedown, large monster kill, and minion kill.",
+					"tooltipStats": "{{perk_long_desc_LegendHaste}}<br><hr><br>Total Basic Ability Haste granted: <scaleAD>@f1.1@</scaleAD> (<statGood>@f3@ of @MaxLegendStacks@</statGood>){{ perk_legend_next_stack_@f4@ }}"
 				},
 				"LegendBloodline": {
 					"name": "Legend: Bloodline",
 					"tooltipShort": "<lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>Takedowns</lol-uikit-tooltipped-keyword> on enemies grant permanent<b> Life Steal</b>, up to a cap. Once the cap is reached, increase your max health. Weaker earlier but stronger later game than other Legend Runes.",
-					"tooltipLong": "Gain <scaleAD>@LifeStealPerStack.2@% Life Steal</scaleAD> for every <i>Legend</i> stack (<statGood>max @MaxLegendStacks@ stacks</statGood>). At maximum <i>Legend</i> stacks, gain <scaleHealth>@BonusHealth@ max health</scaleHealth>.<br><br>Earn progress toward <i>Legend</i> stacks for every champion takedown, epic monster takedown, large monster kill, and minion kill."
+					"tooltipLong": "Gain <scaleAD>@LifeStealPerStack.2@% Life Steal</scaleAD> for every <i>Legend</i> stack (<statGood>max @MaxLegendStacks@ stacks</statGood>). At maximum <i>Legend</i> stacks, gain <scaleHealth>@BonusHealth@ max health</scaleHealth>.<br><br>Earn progress toward <i>Legend</i> stacks for every champion takedown, epic monster takedown, large monster kill, and minion kill.",
+					"tooltipStats": "{{perk_long_desc_LegendBloodline}}<br><hr><br>Total Life Steal Granted: <scaleAD>@f1*100@%</scaleAD> (<statGood>@f3@ of @MaxLegendStacks@</statGood>){{ perk_legend_next_stack_@f4@ }}<br>"
 				},
 				"CoupDeGrace": {
 					"name": "Coup de Grace",
 					"tooltipShort": "Deal more damage to low health enemy champions.",
-					"tooltipLong": "Deal @BonusPercentDamage.0 *100@% more damage to champions who have less than @EnemyHealthPercentageThreshold*100@% health."
+					"tooltipLong": "Deal @BonusPercentDamage.0 *100@% more damage to champions who have less than @EnemyHealthPercentageThreshold*100@% health.",
+					"tooltipStats": "{{perk_long_desc_CoupDeGrace}}<br><hr><br>Total bonus damage dealt: <scaleAD>@f1@</scaleAD>"
 				},
 				"CutDown": {
 					"name": "Cut Down",
 					"tooltipShort": "Deal more damage to high health enemy champions.",
-					"tooltipLong": "Deal @BonusPercentDamage*100@% more damage to champions who have more than @EnemyHealthPercentageThreshold*100@% health."
+					"tooltipLong": "Deal @BonusPercentDamage*100@% more damage to champions who have more than @EnemyHealthPercentageThreshold*100@% health.",
+					"tooltipStats": "{{perk_long_desc_CutDown}}<br><hr><br>Total bonus damage: <scaleAD>@f1@</scaleAD>"
 				},
 				"LastStand": {
 					"name": "Last Stand",
 					"tooltipShort": "Deal more damage to champions while you are low on health.",
-					"tooltipLong": "Deal @MinBonusDamagePercent.0*100@% - @MaxBonusDamagePercent.0*100@% increased damage to champions while you are below @HealthThresholdStart.0*100@% health. Max damage gained at @HealthThresholdEnd.0*100@% health."
+					"tooltipLong": "Deal @MinBonusDamagePercent.0*100@% - @MaxBonusDamagePercent.0*100@% increased damage to champions while you are below @HealthThresholdStart.0*100@% health. Max damage gained at @HealthThresholdEnd.0*100@% health.",
+					"tooltipStats": "{{perk_long_desc_8234}}<br><br><rules>Minimum bonus is @MinBonusDamagePercent*100@%.<br>Maximum bonus is granted while below @HealthThresholdEnd*100@% health.</rules><br><hr><br>Total bonus damage: <scaleAD>@f1@</scaleAD>"
 				},
 				"Electrocute": {
 					"name": "Electrocute",
 					"tooltipShort": "Hitting a champion with 3 <b>separate</b> attacks or abilities in @WindowDuration@s deals bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>adaptive damage</lol-uikit-tooltipped-keyword>.",
-					"tooltipLong": "Hitting a champion with 3 <b>separate</b> attacks or abilities within @WindowDuration@s deals bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword>.<br><br>Damage: @DamageBase@ - @DamageMax@ (+@BonusADRatio.-1@ bonus AD, +@APRatio.-1@ AP) damage.<br>Cooldown: @Cooldown@s<br><br><i>'We called them the Thunderlords, for to speak of their lightning was to invite disaster.'</i>"
+					"tooltipLong": "Hitting a champion with 3 <b>separate</b> attacks or abilities within @WindowDuration@s deals bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword>.<br><br>Damage: @DamageBase@ - @DamageMax@ (+@BonusADRatio.-1@ bonus AD, +@APRatio.-1@ AP) damage.<br>Cooldown: @Cooldown@s<br><br><i>'We called them the Thunderlords, for to speak of their lightning was to invite disaster.'</i>",
+					"tooltipStats": "Hitting a champion with 3 <b>separate</b> attacks or abilities within @WindowDuration@s deals <font color='#48C4B7'>@TotalDamage@</font> bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword>.<br>Cooldown: @Cooldown@s<br><hr><br>Total Damage Dealt: <scaleAD>@f1@</scaleAD>"
 				},
 				"DarkHarvest": {
 					"name": "Dark Harvest",
 					"tooltipShort": "Damaging a low health champion inflicts <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>adaptive damage</lol-uikit-tooltipped-keyword> and harvests a soul from the victim.",
-					"tooltipLong": "Damaging a Champion below @HarvestThreshold*100@% health deals <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>adaptive damage</lol-uikit-tooltipped-keyword> and harvests their soul, permanently increasing {{perk_displayname_DarkHarvest}}'s damage by @DamagePerSoulEssence@.<br><br>{{perk_displayname_DarkHarvest}} damage: @BaseDamage@ (+@DamagePerSoulEssence@ damage per soul) (+@ADRatio.-1@ bonus AD) (+@APRatio.-1@ AP)<br>Cooldown: @Cooldown@s (resets to @CooldownResetValue.01@s on takedown)"
+					"tooltipLong": "Damaging a Champion below @HarvestThreshold*100@% health deals <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>adaptive damage</lol-uikit-tooltipped-keyword> and harvests their soul, permanently increasing {{perk_displayname_DarkHarvest}}'s damage by @DamagePerSoulEssence@.<br><br>{{perk_displayname_DarkHarvest}} damage: @BaseDamage@ (+@DamagePerSoulEssence@ damage per soul) (+@ADRatio.-1@ bonus AD) (+@APRatio.-1@ AP)<br>Cooldown: @Cooldown@s (resets to @CooldownResetValue.01@s on takedown)",
+					"tooltipStats": "Damaging a champion below @HarvestThreshold*100@% health deals {{perk_substring_DarkHarvestadaptive_@f2@}} and harvests their soul, permanently increasing {{perk_displayname_DarkHarvest}}'s damage by <font color='#fc314e'>@DamagePerSoulEssence@</font>. Cooldown: @Cooldown@s (resets to @CooldownResetValue.01@s on takedown)<br><br>Souls harvested: <font color='#fc314e'>@f5@</font><br>Current damage: @TotalDamage@ <font color='#fc314e'>(+@f6@)</font><br>Total damage dealt: @f9@"
 				},
 				"HailOfBlades": {
 					"name": "Hail of Blades",
 					"tooltipShort": "Gain a large amount of Attack Speed for the first @NumHits@ attacks made against enemy champions.",
-					"tooltipLong": "Gain @ASBoostMin*100@% (@ASBoostRanged*100@% for ranged champions) Attack Speed when you attack an enemy champion for up to @NumHits@ attacks.<br><br>No more than @Duration@s can elapse between attacks or this effect will end.<br><br>Cooldown: @Cooldown@s.<br><br><rules>Attack resets increase the attack limit by 1.<br>Allows you to temporarily exceed the Attack Speed limit.</rules>"
+					"tooltipLong": "Gain @ASBoostMin*100@% (@ASBoostRanged*100@% for ranged champions) Attack Speed when you attack an enemy champion for up to @NumHits@ attacks.<br><br>No more than @Duration@s can elapse between attacks or this effect will end.<br><br>Cooldown: @Cooldown@s.<br><br><rules>Attack resets increase the attack limit by 1.<br>Allows you to temporarily exceed the Attack Speed limit.</rules>",
+					"tooltipStats": "Gain {{ Item_Melee_Ranged_Split }}% Attack Speed when you attack an enemy champion for up to @NumHits@ attacks. <br><br>Cooldown: @Cooldown@s.<br><hr><br>Hail of Blades attacks: @f1@<br>Percentage of Hail attacks landed: @f2@%<br><br><rules>Basic Attack resets increase the attack limit by 1.<br>Allows you to temporarily exceed the Attack Speed limit.</rules>"
 				},
 				"CheapShot": {
 					"name": "Cheap Shot",
 					"tooltipShort": "Deal bonus true damage to enemy champions with <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_ImpairAct'>impaired movement or actions</lol-uikit-tooltipped-keyword>. ",
-					"tooltipLong": "Damaging champions with <b>impaired movement or actions</b> deals @DamageIncMin@ - @DamageIncMax@ bonus true damage (based on level).<br><br>Cooldown: @Cooldown@s<br><rules>Activates on damage occurring after the impairment.</rules>"
+					"tooltipLong": "Damaging champions with <b>impaired movement or actions</b> deals @DamageIncMin@ - @DamageIncMax@ bonus true damage (based on level).<br><br>Cooldown: @Cooldown@s<br><rules>Activates on damage occurring after the impairment.</rules>",
+					"tooltipStats": "Damaging champions with <b>impaired movement or actions</b> deals <trueDamage>@DamageCalc@ bonus true damage</trueDamage>.<br>Cooldown: @Cooldown@s<br><rules>Activates on damage occurring after the impairment.</rules><br><br>Total bonus damage dealt: @f1@"
 				},
 				"TasteOfBlood": {
 					"name": "Taste of Blood",
 					"tooltipShort": "Heal when you damage an enemy champion.",
-					"tooltipLong": "Heal when you damage an enemy champion.<br><br>Healing: @HealAmount@-@HealAmountMax@ (+@ADRatio.-1@ bonus AD, +@APRatio.-1@ AP) health (based on level)<br><br>Cooldown: @Cooldown@s"
+					"tooltipLong": "Heal when you damage an enemy champion.<br><br>Healing: @HealAmount@-@HealAmountMax@ (+@ADRatio.-1@ bonus AD, +@APRatio.-1@ AP) health (based on level)<br><br>Cooldown: @Cooldown@s",
+					"tooltipStats": "Heals <healing>@HealCalc@ Health</healing> when you damage an enemy champion.<br>Cooldown: @Cooldown@s<br><br>Total Healing: @f1@"
 				},
 				"SuddenImpact": {
 					"name": "Sudden Impact",
 					"tooltipShort": "Damaging basic attacks and abilities deal bonus true damage to enemy champions after using a dash, leap, blink, teleport, or when leaving stealth.",
-					"tooltipLong": "Damaging basic attacks and abilities deal a bonus <trueDamage>@MinDamageTooltip@ - @MaxDamageTooltip@ True Damage</trueDamage> based on level to enemy champions after using a dash, leap, blink, teleport, or when leaving stealth for @ArmedDuration@s.<br><br>Cooldown: @Cooldown@s"
+					"tooltipLong": "Damaging basic attacks and abilities deal a bonus <trueDamage>@MinDamageTooltip@ - @MaxDamageTooltip@ True Damage</trueDamage> based on level to enemy champions after using a dash, leap, blink, teleport, or when leaving stealth for @ArmedDuration@s.<br><br>Cooldown: @Cooldown@s",
+					"tooltipStats": "Damaging basic attacks and abilities deal a bonus <trueDamage>@BaseDamage@ True Damage</trueDamage> to enemy champions after using a dash, leap, blink, teleport, or when leaving stealth.<br>Must be used within @ArmedDuration@s<br>Cooldown: @Cooldown@s<br><br>Total Damage Dealt: <trueDamage>@f1@</trueDamage>"
 				},
 				"SixthSense": {
 					"name": "Sixth Sense",
 					"tooltipShort": "On a long Cooldown, automatically sense a nearby untracked and unseen ward, tracking it for the team. <br><br>Level @LevelThreshold@: Also reveal the ward for @RevealDuration@s.",
-					"tooltipLong": "Automatically sense a nearby untracked and unseen ward, tracking it for the team. <br><br>Level @LevelThreshold@: Also reveal the ward for @RevealDuration@s.<br><br>This effect has a @MeleeItemCalcValue@ second Cooldown."
+					"tooltipLong": "Automatically sense a nearby untracked and unseen ward, tracking it for the team. <br><br>Level @LevelThreshold@: Also reveal the ward for @RevealDuration@s.<br><br>This effect has a @MeleeItemCalcValue@ second Cooldown.",
+					"tooltipStats": "Automatically sense a nearby untracked and unseen ward, tracking it for the team. <br><br>Level @LevelThreshold@: Also reveal the ward for @RevealDuration@s.<br><br>This effect has a @MeleeItemCalcValue@ second Cooldown.<br><hr><br>Wards sensed: @f1@"
 				},
 				"GrislyMementos": {
 					"name": "Grisly Mementos",
 					"tooltipShort": "Collect @StacksPerTakedown@ memento on champion <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>takedowns</lol-uikit-tooltipped-keyword>, up to @MaxStacks@ total.<br><br>Gain @TrinketAH@ Trinket Haste for each collected.",
-					"tooltipLong": "Collect @StacksPerTakedown@ memento on champion <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>takedowns</lol-uikit-tooltipped-keyword>, up to @MaxStacks@ total.<br><br>Gain @TrinketAH@ Trinket Haste for each collected. In game modes where vision Trinkets do not exist, instead gain @SummonerAH@ Summoner Spell Haste."
+					"tooltipLong": "Collect @StacksPerTakedown@ memento on champion <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>takedowns</lol-uikit-tooltipped-keyword>, up to @MaxStacks@ total.<br><br>Gain @TrinketAH@ Trinket Haste for each collected. In game modes where vision Trinkets do not exist, instead gain @SummonerAH@ Summoner Spell Haste.",
+					"tooltipStats": "{{perk_long_desc_GrislyMementos}}<br><hr><br>Mementos Collected: @f1@ (max @MaxStacks@)"
 				},
 				"DeepWard": {
 					"name": "Deep Ward",
 					"tooltipShort": "Your wards in the enemy jungle are <keywordMajor>Deep</keywordMajor>, gaining Health and Duration.<br><br>Level @LevelThreshold@: Wards in the river are also <keywordMajor>Deep</keywordMajor>.",
-					"tooltipLong": "Your wards in the enemy jungle are <keywordMajor>Deep</keywordMajor>. <keywordMajor>Deep</keywordMajor> wards gain +@ExtraHealth@ extra Health and +[@TTDurationIncreaseMin@ - @TTDurationIncreaseMax@]s increased duration (+[@TTTrinketDurationIncreaseMin@ - @TTTrinketDurationIncreaseMax@]s for Trinket stealth wards).<br><br>Level @LevelThreshold@: Wards in the river are also <keywordMajor>Deep</keywordMajor>."
+					"tooltipLong": "Your wards in the enemy jungle are <keywordMajor>Deep</keywordMajor>. <keywordMajor>Deep</keywordMajor> wards gain +@ExtraHealth@ extra Health and +[@TTDurationIncreaseMin@ - @TTDurationIncreaseMax@]s increased duration (+[@TTTrinketDurationIncreaseMin@ - @TTTrinketDurationIncreaseMax@]s for Trinket stealth wards).<br><br>Level @LevelThreshold@: Wards in the river are also <keywordMajor>Deep</keywordMajor>.",
+					"tooltipStats": "Your wards in the enemy jungle are <keywordMajor>Deep</keywordMajor>. <keywordMajor>Deep</keywordMajor> wards gain +@ExtraHealth@ extra Health and +@DurationIncrease@s increased duration (+@TrinketDurationIncrease@s for Trinket stealth wards).<br><br>Level @LevelThreshold@: Wards in the river are also <keywordMajor>Deep</keywordMajor>.<br><hr><br>Deep Wards: @f1@"
 				},
 				"TreasureHunter": {
 					"name": "Treasure Hunter",
 					"tooltipShort": "<b>Unique</b> <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>takedowns</lol-uikit-tooltipped-keyword> grant additional gold the first time they are collected. ",
-					"tooltipLong": "Gain an additional <gold>@BaseGoldAmount@ gold</gold> the next time you collect a <i>Bounty Hunter</i> stack. Increase the gold gained by <gold>@GoldGrowth@ gold</gold> for each <i>Bounty Hunter</i> stack, up to <gold>@TOOLTIPMaxGoldAmount@ gold</gold>.<br><br><i>Bounty Hunter</i> stacks are earned the first time you get a takedown on each enemy champion."
+					"tooltipLong": "Gain an additional <gold>@BaseGoldAmount@ gold</gold> the next time you collect a <i>Bounty Hunter</i> stack. Increase the gold gained by <gold>@GoldGrowth@ gold</gold> for each <i>Bounty Hunter</i> stack, up to <gold>@TOOLTIPMaxGoldAmount@ gold</gold>.<br><br><i>Bounty Hunter</i> stacks are earned the first time you get a takedown on each enemy champion.",
+					"tooltipStats": "{{perk_long_desc_TreasureHunter}}<br><br>Current Bounty Available: <gold>@f15@ gold</gold><br>Bonus Gold Collected: <gold>@f3@ gold</gold><br><hr><br>{{ bountyHunter_bountyBoard }}"
 				},
 				"RelentlessHunter": {
 					"name": "Relentless Hunter",
 					"tooltipShort": "<b>Unique</b> <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>takedowns</lol-uikit-tooltipped-keyword> grant permanent <b>out of combat <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>MS</lol-uikit-tooltipped-keyword></b>. ",
-					"tooltipLong": "Gain <speed>@OOCMS.0@ Move Speed</speed> out of combat per <i>Bounty Hunter</i> stack. <i>Bounty Hunter</i> stacks are earned the first time you get a takedown on each enemy champion."
+					"tooltipLong": "Gain <speed>@OOCMS.0@ Move Speed</speed> out of combat per <i>Bounty Hunter</i> stack. <i>Bounty Hunter</i> stacks are earned the first time you get a takedown on each enemy champion.",
+					"tooltipStats": "{{perk_long_desc_8105}}<br><br>Current Relentless Hunter increase: <speed>@f3@ Move Speed</speed><br><br>{{ bountyHunter_bountyBoard }}"
 				},
 				"UltimateHunter": {
 					"name": "Ultimate Hunter",
 					"tooltipShort": "<b>Unique</b> <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>takedowns</lol-uikit-tooltipped-keyword> grant permanent cooldown reduction on your Ultimate. ",
-					"tooltipLong": "Your ultimate gains <attention>@StartingUltAH@</attention> Ability Haste, plus an additional <attention>@AdditionalUltAH.0@</attention> Ability Haste per <i>Bounty Hunter</i> stack. <i>Bounty Hunter</i> stacks are earned the first time you get a takedown on each enemy champion."
+					"tooltipLong": "Your ultimate gains <attention>@StartingUltAH@</attention> Ability Haste, plus an additional <attention>@AdditionalUltAH.0@</attention> Ability Haste per <i>Bounty Hunter</i> stack. <i>Bounty Hunter</i> stacks are earned the first time you get a takedown on each enemy champion.",
+					"tooltipStats": "{{perk_long_desc_UltimateHunter}}<br><br>Current Ultimate Hunter increase: <attention>@f3@ Ultimate Haste</attention><br><br>{{ bountyHunter_bountyBoard }}"
 				},
 				"SummonAery": {
 					"name": "Summon Aery",
 					"tooltipShort": "Your attacks and abilities send Aery to a target, damaging enemies or shielding allies.",
-					"tooltipLong": "Damaging enemy champions with basic attacks or abilities sends Aery to them, dealing @DamageBase@ - @DamageMax@ based on level (+<scaleAP>@DamageAPRatio.-1@ AP</scaleAP>) (+<scaleAD>@DamageADRatio.-1@ bonus AD</scaleAD>).<br><br>Empowering or protecting allies with abilities sends Aery to them, shielding them for @ShieldBase@ - @ShieldMax@ based on level (+<scaleAP>@ShieldRatio.-1@ AP</scaleAP>) (+<scaleAD>@ShieldRatioAD.-1@ bonus AD</scaleAD>).<br><br>Aery cannot be sent out again until she returns to you."
+					"tooltipLong": "Damaging enemy champions with basic attacks or abilities sends Aery to them, dealing @DamageBase@ - @DamageMax@ based on level (+<scaleAP>@DamageAPRatio.-1@ AP</scaleAP>) (+<scaleAD>@DamageADRatio.-1@ bonus AD</scaleAD>).<br><br>Empowering or protecting allies with abilities sends Aery to them, shielding them for @ShieldBase@ - @ShieldMax@ based on level (+<scaleAP>@ShieldRatio.-1@ AP</scaleAP>) (+<scaleAD>@ShieldRatioAD.-1@ bonus AD</scaleAD>).<br><br>Aery cannot be sent out again until she returns to you.",
+					"tooltipStats": "Damaging enemy champions with basic attacks or abilities sends Aery to them, dealing <font color='#48C4B7'>@DamageCalc@</font> bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>adaptive damage</font></lol-uikit-tooltipped-keyword>.<br><br>Empowering or protecting allies with abilities sends Aery to them, granting them <shield>@ShieldCalc@ Shield</shield>.<br><br>Aery cannot be sent out again until she returns to you.<br><br>Aery has attacked enemies <font color='#FFFFFF'>@f1@</font> times for a total of <font color='#FFFFFF'>@f3@</font> damage.<br>Aery has helped allies <font color='#FFFFFF'>@f2@</font> times, shielding a total of <font color='#FFFFFF'>@f4@</font> damage."
 				},
 				"ArcaneComet": {
 					"name": "Arcane Comet",
 					"tooltipShort": "Damaging a champion with an ability hurls a damaging comet at their location.",
-					"tooltipLong": "Damaging a champion with an ability hurls a comet at their location, or, if Arcane Comet is on cooldown, reduces its remaining cooldown.<br><br><lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>Adaptive Damage</font></lol-uikit-tooltipped-keyword>: @DamageBase@ - @DamageMax@ based on level (<scaleAP>+@APRatio.-1@ AP</scaleAP> and <scaleAD>+@ADRatio.-1@ bonus AD</scaleAD>)<br>Cooldown: @RechargeTime@ - @RechargeTimeMin@s<br><rules><br>Cooldown Reduction:<br>Single Target: @PercentRefund*100@%.<br>Area of Effect: @AoEPercentRefund*100@%.<br>Damage over Time: @DotPercentRefund*100@%.<br></rules>"
+					"tooltipLong": "Damaging a champion with an ability hurls a comet at their location, or, if Arcane Comet is on cooldown, reduces its remaining cooldown.<br><br><lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'><font color='#48C4B7'>Adaptive Damage</font></lol-uikit-tooltipped-keyword>: @DamageBase@ - @DamageMax@ based on level (<scaleAP>+@APRatio.-1@ AP</scaleAP> and <scaleAD>+@ADRatio.-1@ bonus AD</scaleAD>)<br>Cooldown: @RechargeTime@ - @RechargeTimeMin@s<br><rules><br>Cooldown Reduction:<br>Single Target: @PercentRefund*100@%.<br>Area of Effect: @AoEPercentRefund*100@%.<br>Damage over Time: @DotPercentRefund*100@%.<br></rules>",
+					"tooltipStats": "Damaging a champion with an ability hurls a comet at their location, or, if Arcane Comet is on cooldown, reduces its remaining cooldown.<br><br>Damage: @DamageCalc@<br>Cooldown: @CooldownCalc@s<br><rules><br>Cooldown Reduction:<br>Single Target: @PercentRefund*100@%.<br>Area of Effect: @AoEPercentRefund*100@%.<br>Damage over Time: @DotPercentRefund*100@%.<br></rules><br>You have hit with @f3@% of comets fired, for a total of @f1@ damage to champions."
 				},
 				"PhaseRush": {
 					"name": "Phase Rush",
 					"tooltipShort": "Hitting an enemy champion with @NumberToProc@ <b>separate</b> attacks or abilities grants a burst of <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>MS</lol-uikit-tooltipped-keyword> and Slow Resist. ",
-					"tooltipLong": "Hitting an enemy champion with @NumberToProc@ attacks or <b>separate</b> abilities within @Window@s grants <speed>@HasteBase*100@ - @HasteMax*100@% Move Speed</speed> based on level and <status>@SlowResist*100@% Slow Resistance</status> for @Duration@s. Move Speed is @RangedEffectiveness*100@% effective for ranged champions.<br>Cooldown: @MaxCooldown@s - @MinCooldown@s"
+					"tooltipLong": "Hitting an enemy champion with @NumberToProc@ attacks or <b>separate</b> abilities within @Window@s grants <speed>@HasteBase*100@ - @HasteMax*100@% Move Speed</speed> based on level and <status>@SlowResist*100@% Slow Resistance</status> for @Duration@s. Move Speed is @RangedEffectiveness*100@% effective for ranged champions.<br>Cooldown: @MaxCooldown@s - @MinCooldown@s",
+					"tooltipStats": "Hitting an enemy champion with @NumberToProc@ attacks or <b>separate</b> abilities within @Window@s grants <speed>@MoveSpeedCalc@ Move Speed</speed> and <status>@SlowResist*100@% Slow Resistance</status> for @Duration@s.<br><br>Cooldown: <attention>@CooldownCalc@s</attention><br><br>Total Activations: <attention>@f1@</attention>"
 				},
 				"NullifyingOrb": {
 					"name": "Axiom Arcanist",
 					"tooltipShort": "Your Ultimate has increased damage, healing, and shielding. Scoring a takedown on an enemy champion reduces your Ultimate's current cooldown.",
-					"tooltipLong": "Your Ultimate has @DamageAmp*100@% increased damage, healing, and shielding. <br>(AoE damage is reduced to a @AOEAmp*100@% increase)<br><br>Scoring a takedown on an enemy champion reduces your Ultimate's current cooldown by @UltimateRefundBase@%."
+					"tooltipLong": "Your Ultimate has @DamageAmp*100@% increased damage, healing, and shielding. <br>(AoE damage is reduced to a @AOEAmp*100@% increase)<br><br>Scoring a takedown on an enemy champion reduces your Ultimate's current cooldown by @UltimateRefundBase@%.",
+					"tooltipStats": "Your Ultimate has @DamageAmp*100@% increased damage, healing, and shielding.<br>(AoE damage is reduced to a @AOEAmp*100@% increase)<br><br>Scoring a takedown on an enemy champion reduces your Ultimate's current cooldown by @UltimateRefundBase@%.<br><br>Ultimate Cooldown Reduced: @f1@ Seconds<br>Bonus Ultimate Damage/Healing/Shielding To Champions: @f2@"
 				},
 				"ManaflowBand": {
 					"name": "Manaflow Band",
 					"tooltipShort": "Hitting an enemy champion with an ability permanently increases your maximum mana by @ManaIncrease@, up to @MaxManaIncrease@ mana.<br><br>After reaching @MaxManaIncrease@ bonus mana, restore @PercentManaRestore*100@% of your missing mana every @PercentManaRestoreCooldown@ seconds.",
-					"tooltipLong": "Hitting an enemy champion with an ability permanently increases your maximum mana by @ManaIncrease@, up to @MaxManaIncrease@ mana.<br><br>After reaching @MaxManaIncrease@ bonus mana, restore @PercentManaRestore*100@% of your missing mana every @PercentManaRestoreCooldown@ seconds.<br><br>Cooldown: @Cooldown.0@ seconds"
+					"tooltipLong": "Hitting an enemy champion with an ability permanently increases your maximum mana by @ManaIncrease@, up to @MaxManaIncrease@ mana.<br><br>After reaching @MaxManaIncrease@ bonus mana, restore @PercentManaRestore*100@% of your missing mana every @PercentManaRestoreCooldown@ seconds.<br><br>Cooldown: @Cooldown.0@ seconds",
+					"tooltipStats": "{{perk_long_desc_8226}}<br><hr><br>Total bonus mana: @f1@<br>Total mana restored: @f2@"
 				},
 				"NimbusCloak": {
 					"name": "Nimbus Cloak",
 					"tooltipShort": "After casting a Summoner Spell, gain a short <speed>Move Speed</speed> increase that allows you to pass through units.",
-					"tooltipLong": "After casting a Summoner Spell, gain a <speed>Move Speed</speed> increase that lasts for @Duration@s and allows you to pass through units.<br><br>Increase: <speed>@LowCDMSBoost*100@% - @HighCDMSBoost*100@% Move Speed</speed> based on the Summoner Spell's cooldown. (Higher cooldown Summoner Spells grant more <speed>Move Speed</speed>). "
+					"tooltipLong": "After casting a Summoner Spell, gain a <speed>Move Speed</speed> increase that lasts for @Duration@s and allows you to pass through units.<br><br>Increase: <speed>@LowCDMSBoost*100@% - @HighCDMSBoost*100@% Move Speed</speed> based on the Summoner Spell's cooldown. (Higher cooldown Summoner Spells grant more <speed>Move Speed</speed>). ",
+					"tooltipStats": "After casting a Summoner Spell, gain a <speed>Move Speed</speed> increase that lasts for @Duration@s and allows you to pass through units.<br><hr><br>Increase: <speed>@LowCDMSBoost*100@% - @HighCDMSBoost*100@% Move Speed</speed> based on the Summoner Spell's cooldown. (Higher cooldown Summoner Spells grant more <speed>Move Speed</speed>). <br><hr><br>Times activated: @f1@"
 				},
 				"Transcendence": {
 					"name": "Transcendence",
 					"tooltipShort": "Gain bonuses upon reaching the following levels:<br>Level @LevelToTurnOn@: +@HasteBonus1*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn2@: +@HasteBonus2*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn3@: On Champion takedown, reduce the remaining cooldown of basic abilities by @KillCooldownRefund*100@%.",
-					"tooltipLong": "Gain bonuses upon reaching the following levels:<br>Level @LevelToTurnOn@: +@HasteBonus1*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn2@: +@HasteBonus2*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn3@: On Champion takedown, reduce the remaining cooldown of basic abilities by @KillCooldownRefund*100@%."
+					"tooltipLong": "Gain bonuses upon reaching the following levels:<br>Level @LevelToTurnOn@: +@HasteBonus1*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn2@: +@HasteBonus2*100@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> <br>Level @LevelToTurnOn3@: On Champion takedown, reduce the remaining cooldown of basic abilities by @KillCooldownRefund*100@%.",
+					"tooltipStats": "{{ perk_long_desc_Transcendence }}<br><hr><br>Bonus Ability Haste: +@f4*100@<br>Seconds Refunded: @f3@"
 				},
 				"Celerity": {
 					"name": "Celerity",
 					"tooltipShort": "All <speed>Move Speed</speed> bonuses are @PercentHasteMod*100@% more effective on you and gain <speed>@PercentMS*100@% Move Speed</speed>.",
-					"tooltipLong": "All movement bonuses are @PercentHasteMod*100@% more effective on you and gain <speed>@PercentMS*100@% Move Speed</speed>."
+					"tooltipLong": "All movement bonuses are @PercentHasteMod*100@% more effective on you and gain <speed>@PercentMS*100@% Move Speed</speed>.",
+					"tooltipStats": "{{perk_long_desc_Celerity}}<br><br>Currently Granted: <speed>@f1@ Move Speed</speed><br>Extra Distance Traveled: @f2@"
 				},
 				"AbsoluteFocus": {
 					"name": "Absolute Focus",
 					"tooltipShort": "While above @HealthPercent*100@% health, gain extra <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>adaptive damage</lol-uikit-tooltipped-keyword>.",
-					"tooltipLong": "While above @HealthPercent*100@% health, gain {{ perk_subtext_AdaptiveForce_Max }} (based on level). <br><br>Grants @MinAdaptive.-1*0.6@ Attack Damage or @MinAdaptive@ Ability Power at level 1. "
+					"tooltipLong": "While above @HealthPercent*100@% health, gain {{ perk_subtext_AdaptiveForce_Max }} (based on level). <br><br>Grants @MinAdaptive.-1*0.6@ Attack Damage or @MinAdaptive@ Ability Power at level 1. ",
+					"tooltipStats": "While above @HealthPercent*100@% health, gain <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>@AdaptiveForceCalc@ Adaptive Force</font></lol-uikit-tooltipped-keyword>.<br><br>{{ adaptive_force_tip_bonus_@f2@ }}"
 				},
 				"Scorch": {
 					"name": "Scorch",
 					"tooltipShort": "Your first damaging ability hit every @BurnlockoutDuration@s burns champions.",
-					"tooltipLong": "Your next damaging ability hit sets champions on fire dealing @damage@ - @damagemax@ bonus magic damage based on level after @dotduration@s.<br><br>Cooldown: @BurnlockoutDuration@s"
+					"tooltipLong": "Your next damaging ability hit sets champions on fire dealing @damage@ - @damagemax@ bonus magic damage based on level after @dotduration@s.<br><br>Cooldown: @BurnlockoutDuration@s",
+					"tooltipStats": "Your next damaging ability hit sets champions on fire dealing <magicDamage>@DamageCalc@ bonus magic damage</magicDamage> after @dotduration@s.<br>Cooldown: @BurnlockoutDuration@s<br><br>Total Damage Dealt: @f1@"
 				},
 				"Waterwalking": {
 					"name": "Waterwalking",
 					"tooltipShort": "Gain <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>MS</lol-uikit-tooltipped-keyword> and AP or AD, <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>adaptive</lol-uikit-tooltipped-keyword> in the river.",
-					"tooltipLong": "Gain <speed>@MovementSpeed@ Move Speed</speed> and <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>@MinAdaptive@ - @MaxAdaptive@ Adaptive Force</font></lol-uikit-tooltipped-keyword> (based on level) when in the river.<br><br><i>May you be as swift as the rushing river and agile as a startled Rift Scuttler.</i>"
+					"tooltipLong": "Gain <speed>@MovementSpeed@ Move Speed</speed> and <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>@MinAdaptive@ - @MaxAdaptive@ Adaptive Force</font></lol-uikit-tooltipped-keyword> (based on level) when in the river.<br><br><i>May you be as swift as the rushing river and agile as a startled Rift Scuttler.</i>",
+					"tooltipStats": "While in the river, gain <speed>@MovementSpeed@ Move Speed</speed> and <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>@AdaptiveForceCalc@ Adaptive Force</font></lol-uikit-tooltipped-keyword>.<br><br>{{ adaptive_force_tip_bonus_@f2@ }}"
 				},
 				"GatheringStorm": {
 					"name": "Gathering Storm",
 					"tooltipShort": "Gain increasing amounts of AD or AP, <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>adaptive</lol-uikit-tooltipped-keyword> over the course of the game.",
-					"tooltipLong": "Every @UpdateAfterMinutes@ min gain AP or AD, <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword>.<br><br><i>@UpdateAfterMinutes@ min</i>: + 8 AP or 5 AD <br><i>@UpdateAfterMinutes*2@ min</i>: + 24 AP or 14 AD<br><i>@UpdateAfterMinutes*3@ min</i>: + 48 AP or 29 AD<br><i>@UpdateAfterMinutes*4@ min</i>: + 80 AP or 48 AD<br><i>@UpdateAfterMinutes*5@ min</i>: + 120 AP or 72 AD<br><i>@UpdateAfterMinutes*6@ min</i>: + 168 AP or 101 AD<br>etc..."
+					"tooltipLong": "Every @UpdateAfterMinutes@ min gain AP or AD, <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword>.<br><br><i>@UpdateAfterMinutes@ min</i>: + 8 AP or 5 AD <br><i>@UpdateAfterMinutes*2@ min</i>: + 24 AP or 14 AD<br><i>@UpdateAfterMinutes*3@ min</i>: + 48 AP or 29 AD<br><i>@UpdateAfterMinutes*4@ min</i>: + 80 AP or 48 AD<br><i>@UpdateAfterMinutes*5@ min</i>: + 120 AP or 72 AD<br><i>@UpdateAfterMinutes*6@ min</i>: + 168 AP or 101 AD<br>etc...",
+					"tooltipStats": "{{perk_long_desc_GatheringStorm}}<br><hr><br>{{ adaptive_force_tip_bonus_@f2@ }}"
 				},
 				"GraspOfTheUndying": {
 					"name": "Grasp of the Undying",
 					"tooltipShort": "Every @TriggerTime@s your next attack on a champion deals bonus magic damage, heals you, and permanently increases your health.",
-					"tooltipLong": "Every @TriggerTime@s in combat, your next basic attack on a champion will:<li>Deal bonus magic damage equal to @PercentHealthDamage.1*100@% of your max health<li>Heal you for @PercentHealthHeal.1*100@% of your max health<li>Permanently increase your health by @MaxHealthPerProc@<br><rules><i>Ranged Champions:</i> Damage, healing, and permanent health gained are @RangedPenaltyMod*100@% effective.</rules>"
+					"tooltipLong": "Every @TriggerTime@s in combat, your next basic attack on a champion will:<li>Deal bonus magic damage equal to @PercentHealthDamage.1*100@% of your max health<li>Heal you for @PercentHealthHeal.1*100@% of your max health<li>Permanently increase your health by @MaxHealthPerProc@<br><rules><i>Ranged Champions:</i> Damage, healing, and permanent health gained are @RangedPenaltyMod*100@% effective.</rules>",
+					"tooltipStats": "Every @TriggerTime@s in combat, your next basic attack on a champion will:<li>Deal <magicDamage>@DamageCalc@ bonus magic damage</magicDamage>.<li>Heal you for <healing>@HealCalc@ Health</healing>.<li>Permanently increase your health by <healing>@MaxHealthPerProc@</healing> for melee Attacks and <healing>@RangedHealthPerProc@</healing> for ranged ones.<br><br>Max Health gained: <scaleHealth>@f4@</scaleHealth><br>Damage to Champions: <scaleHealth>@f1@</scaleHealth><br>Total Healing: <scaleHealth>@f2@</scaleHealth><br>Times Used: @f3@"
 				},
 				"Aftershock": {
 					"name": "Aftershock",
 					"tooltipShort": "After <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Immobilize'>immobilizing</lol-uikit-tooltipped-keyword> an enemy champion gain defenses and later deal a burst of magic damage around you.",
-					"tooltipLong": "After immobilizing an enemy champion, increase your Armor and Magic Resist by @FlatResists@ + @PercentBonusResist*100@% of your Bonus Resists for @DelayBeforeBurst.1@s. Then explode, dealing magic damage to nearby enemies.<br><br>Damage: @StartingBaseDamage@ - @MaxBaseDamage@ (+@HealthRatio*100@% of your bonus health)<br>Cooldown: @Cooldown@s<br><br>Resistance bonus from Aftershock capped at: @BonusResistMin@-@BonusResistMax@ (based on level)<br>"
+					"tooltipLong": "After immobilizing an enemy champion, increase your Armor and Magic Resist by @FlatResists@ + @PercentBonusResist*100@% of your Bonus Resists for @DelayBeforeBurst.1@s. Then explode, dealing magic damage to nearby enemies.<br><br>Damage: @StartingBaseDamage@ - @MaxBaseDamage@ (+@HealthRatio*100@% of your bonus health)<br>Cooldown: @Cooldown@s<br><br>Resistance bonus from Aftershock capped at: @BonusResistMin@-@BonusResistMax@ (based on level)<br>",
+					"tooltipStats": "After immobilizing an enemy champion, gain <scaleArmor>@ArmorBuff@ Armor</scaleArmor> and <scaleMR>@MagicResistBuff@ Magic Resist</scaleMR> for @DelayBeforeBurst.1@s. Then explode, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to nearby enemies.<br>Cooldown: @Cooldown@s<br><rules><i>Resist gains are capped at @MaxResistCalc@</i></rules><br><br>Total damage dealt: <magicDamage>@f1@</magicDamage><br>Total damage mitigated: <scaleHealth>@f9@</scaleHealth>"
 				},
 				"Guardian": {
 					"name": "Guardian",
 					"tooltipShort": "Guard allies you cast spells on and those that are very nearby. If you or a guarded ally would take damage based on level, you're both granted a shield.",
-					"tooltipLong": "{{ perk_shared_desc_Guardian }}<br><br>Cooldown: <scaleLevel>@Cooldown@ - @CooldownMaxLevel@</scaleLevel> seconds<br>Shield: <scaleLevel>@ShieldBase@ - @ShieldMax@</scaleLevel> + <scaleAP>@APRatio*100@%</scaleAP> of your ability power + <scalehealth>@HPRatio.0*100@%</scalehealth> of your bonus health<br>Proc Threshold: <scaleLevel>@ThresholdMin@ - @ThresholdMax@</scaleLevel> postmitigation damage"
+					"tooltipLong": "{{ perk_shared_desc_Guardian }}<br><br>Cooldown: <scaleLevel>@Cooldown@ - @CooldownMaxLevel@</scaleLevel> seconds<br>Shield: <scaleLevel>@ShieldBase@ - @ShieldMax@</scaleLevel> + <scaleAP>@APRatio*100@%</scaleAP> of your ability power + <scalehealth>@HPRatio.0*100@%</scalehealth> of your bonus health<br>Proc Threshold: <scaleLevel>@ThresholdMin@ - @ThresholdMax@</scaleLevel> postmitigation damage",
+					"tooltipStats": "{{ perk_shared_desc_Guardian }}<br><br>Strength: <shield>@ShieldCalc@ Shield</shield>.<br>Damage Threshold: <scaleAD>@ThresholdCalc@</scaleAD> postmitigation damage.<br>Cooldown: @CooldownCalc@ seconds.<br>Total damage blocked: <healing>@f1@</healing>."
 				},
 				"Demolish": {
 					"name": "Demolish",
 					"tooltipShort": "Your third attack against turrets deals HP-based bonus damage.",
-					"tooltipLong": "Your third attack against towers deals [@BaseDamageMelee@ (+@HPRatioMelee.0 * 100@% max Health) Melee || @BaseDamageRanged@ (+@HPRatioRanged.0 * 100@% max Health) Ranged] bonus physical damage.<br><br>Cooldown: @CooldownSeconds@s"
+					"tooltipLong": "Your third attack against towers deals [@BaseDamageMelee@ (+@HPRatioMelee.0 * 100@% max Health) Melee || @BaseDamageRanged@ (+@HPRatioRanged.0 * 100@% max Health) Ranged] bonus physical damage.<br><br>Cooldown: @CooldownSeconds@s",
+					"tooltipStats": "Your third attack against towers deals <scaleAD>@DamageCalc@</scaleAD> bonus physical damage.<br><br>Total bonus damage: <scaleAD>@f1@</scaleAD><br>Total triggers: <scaleAD>@f2@</scaleAD><br>Cooldown: @CooldownSeconds@s"
 				},
 				"FontOfLife": {
 					"name": "Font of Life",
 					"tooltipShort": "<lol-uikit-tooltipped-keyword key='LinkTooltip_Description_ImpairMov'>Impairing</lol-uikit-tooltipped-keyword> the movement of an enemy champion heals nearby allied champions. ",
-					"tooltipLong": "Impairing the movement of an enemy champion restores <healing>@BaseHeal@ Health</healing> to you and the lowest health nearby allied champion.<br><br>@RangedMod*100@% effect for Ranged Users.<br><br>Cooldown: @Cooldown@s"
+					"tooltipLong": "Impairing the movement of an enemy champion restores <healing>@BaseHeal@ Health</healing> to you and the lowest health nearby allied champion.<br><br>@RangedMod*100@% effect for Ranged Users.<br><br>Cooldown: @Cooldown@s",
+					"tooltipStats": "Impairing the movement of an enemy champion restores <healing>@BaseHeal@ Health</healing> to you and the lowest health nearby allied champion.<br>Cooldown: @Cooldown@s<br><br>Total heal: <healing>@f1@</healing>"
 				},
 				"ShieldBash": {
 					"name": "Shield Bash",
 					"tooltipShort": "Whenever you gain a shield, your next basic attack against a champion deals bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword> damage.",
-					"tooltipLong": "Whenever you gain a new shield,  your next basic attack against a champion deals <scaleLevel>@ProcBaseMin@ - @ProcBaseMax@</scaleLevel> <scaleHealth>(+@BonusHealthRatio.1@% Bonus Health)</scaleHealth> <scaleMana>(+@ShieldRatio.1@% New Shield Amount)</scaleMana> bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword> damage.<br><br>You have up to @ProcDuration@s after the shield expires to use this effect."
+					"tooltipLong": "Whenever you gain a new shield,  your next basic attack against a champion deals <scaleLevel>@ProcBaseMin@ - @ProcBaseMax@</scaleLevel> <scaleHealth>(+@BonusHealthRatio.1@% Bonus Health)</scaleHealth> <scaleMana>(+@ShieldRatio.1@% New Shield Amount)</scaleMana> bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword> damage.<br><br>You have up to @ProcDuration@s after the shield expires to use this effect.",
+					"tooltipStats": "Whenever you gain a new shield, your next basic attack against a champion deals <scaleLevel>@f4@</scaleLevel> <scaleHealth>(+@f2@)</scaleHealth> <scaleMana>(+@ShieldRatio.1@% New Shield Amount)</scaleMana> bonus {{perk_substring_shieldbashadaptive_@f5@}}.<br><br>You have up to @ProcDuration@s after the shield expires to use this effect.<br><hr><br>Total Damage Dealt: @f1@"
 				},
 				"Conditioning": {
 					"name": "Conditioning",
 					"tooltipShort": "After @MinutesRequired@ min gain +@ArmorBase@ Armor and +@MRBase@ Magic Resist and increase your Armor and Magic Resist by @ExtraResist*100@%.",
-					"tooltipLong": "{{ perk_short_desc_Conditioning }}"
+					"tooltipLong": "{{ perk_short_desc_Conditioning }}",
+					"tooltipStats": "After @MinutesRequired@ minutes gain <scaleArmor>@ArmorCalcTooltip@ Armor</scaleArmor> and <scaleMR>@MagicResistCalcTooltip@ Magic Resist</scaleMR>."
 				},
 				"SecondWind": {
 					"name": "Second Wind",
 					"tooltipShort": "After taking damage from an enemy champion heal back some missing health over time. ",
-					"tooltipLong": "After taking damage from an enemy champion, heal for @RegenPercentMax.0*100@% of your missing health over @RegenSeconds@s."
+					"tooltipLong": "After taking damage from an enemy champion, heal for @RegenPercentMax.0*100@% of your missing health over @RegenSeconds@s.",
+					"tooltipStats": "{{perk_long_desc_SecondWind}}<br><hr><br><scaleAD>Total healing: @f1@</scaleAD>"
 				},
 				"BonePlating": {
 					"name": "Bone Plating",
 					"tooltipShort": "{{perk_long_desc_BonePlating}}",
-					"tooltipLong": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockBase@-@BlockMax@ (based on level) less damage.<br><br>Duration: @BlockDuration@s<br>Cooldown: @Cooldown@s"
+					"tooltipLong": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockBase@-@BlockMax@ (based on level) less damage.<br><br>Duration: @BlockDuration@s<br>Cooldown: @Cooldown@s",
+					"tooltipStats": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockCalc@ less damage.<br>Duration: @BlockDuration.1@s<br>Cooldown: @Cooldown@s<br><br>Total Damage Reduced: <scaleLevel>@f1@</scaleLevel>"
 				},
 				"Overgrowth": {
 					"name": "Overgrowth",
 					"tooltipShort": "Gain permanent max health when minions or monsters die near you.",
-					"tooltipLong": "Absorb life essence from monsters or enemy minions that die near you, permanently gaining @FlatHealthPerTier@ maximum health for every @UnitsPerTier@.<br><br>When you've absorbed @ThresholdUnits@ monsters or enemy minions, gain an additional @ThresholdMaxHealthRatio*100@% maximum health."
+					"tooltipLong": "Absorb life essence from monsters or enemy minions that die near you, permanently gaining @FlatHealthPerTier@ maximum health for every @UnitsPerTier@.<br><br>When you've absorbed @ThresholdUnits@ monsters or enemy minions, gain an additional @ThresholdMaxHealthRatio*100@% maximum health.",
+					"tooltipStats": "{{perk_long_desc_Overgrowth}}<br><hr><br>Total Max Health Earned: <scaleHealth>@f1@</scaleHealth><br>Enemies Absorbed: <passiveText>@f2@</passiveText>"
 				},
 				"Revitalize": {
 					"name": "Revitalize",
 					"tooltipShort": "Gain @HealShieldPower*100@% Heal and Shield Power.<br><br>Heals and shields you cast or receive are @ExtraAmp.0@% stronger on targets below @HealthCutoff.0@% health.",
-					"tooltipLong": "Gain @HealShieldPower*100@% Heal and Shield Power.<br><br>Heals and shields you cast or receive are @ExtraAmp.0@% stronger on targets below @HealthCutoff.0@% health."
+					"tooltipLong": "Gain @HealShieldPower*100@% Heal and Shield Power.<br><br>Heals and shields you cast or receive are @ExtraAmp.0@% stronger on targets below @HealthCutoff.0@% health.",
+					"tooltipStats": "{{perk_long_desc_Revitalize}}<br><hr><br><scaleAD>Bonus healing</scaleAD>: @f1@<br><scaleAD>Bonus shielding</scaleAD>: @f2@<br><scaleAD>Total Heal and Shield power</scaleAD>: @f4@%"
 				},
 				"Unflinching": {
 					"name": "Unflinching",
 					"tooltipShort": "Gain Armor and Magic Resist when receiving crowd control.",
-					"tooltipLong": "Gain @ResistMax@ Armor and Magic Resist when crowd controlled and for @Duration@ seconds after."
+					"tooltipLong": "Gain @ResistMax@ Armor and Magic Resist when crowd controlled and for @Duration@ seconds after.",
+					"tooltipStats": "Gain <scaleLevel>@f1@</scaleLevel> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> while crowd controlled and for @Duration@s after.<br><br>Total combat time with increased resistances: @f6@s."
 				},
 				"GlacialAugment": {
 					"name": "Glacial Augment",
 					"tooltipShort": "Immobilizing an enemy champion will cause @RayCount@ glacial rays that slow nearby enemies and reduce their damage to your allies.",
-					"tooltipLong": "Immobilizing an enemy champion will cause @RayCount@ glacial rays to emanate from them towards you and other nearby champions, creating frozen zones for @SlowZoneDuration@ (+ the immobilizing effect's duration) seconds that slow enemies for @SlowZoneSlowBase@% (+@SlowZoneSlowHealShieldRatio@% per 100% Heal and Shield Power) (+@SlowZoneSlowAPRatio*100@% per 100 Ability Power) (+@SlowZoneSlowbADRatio*100@% per 100 bonus Attack Damage) and reduce their damage by @DmgReduction*100@% against your allies (not including yourself). <br><br>Cooldown: @Cooldown@s"
+					"tooltipLong": "Immobilizing an enemy champion will cause @RayCount@ glacial rays to emanate from them towards you and other nearby champions, creating frozen zones for @SlowZoneDuration@ (+ the immobilizing effect's duration) seconds that slow enemies for @SlowZoneSlowBase@% (+@SlowZoneSlowHealShieldRatio@% per 100% Heal and Shield Power) (+@SlowZoneSlowAPRatio*100@% per 100 Ability Power) (+@SlowZoneSlowbADRatio*100@% per 100 bonus Attack Damage) and reduce their damage by @DmgReduction*100@% against your allies (not including yourself). <br><br>Cooldown: @Cooldown@s",
+					"tooltipStats": "Immobilizing an enemy champion will cause @RayCount@ glacial rays to emanate from them towards you and other nearby champions, creating frozen zones for @SlowZoneDuration@ (+ the immobilizing effect's duration) seconds<br><br>Frozen zones <status>Slow</status> enemies by <status>@SlowZoneCalc@</status> and reduce their damage by @DmgReduction*100@% against your allies (not including yourself).<br>Cooldown: @Cooldown@s<br><br>Duration Enemy Champs Slowed: @f1@s<br>Damage Reduced: @f2@"
 				},
 				"UnsealedSpellbook": {
 					"name": "Unsealed Spellbook",
 					"tooltipShort": "Swap Summoner Spells while out of combat. Swapping to unique Summoner Spells will increase the rate at which you can make future swaps.",
-					"tooltipLong": "Swap one of your equipped Summoner Spells to a new, single use Summoner Spell. Each unique Summoner Spell you swap to permanently decreases your swap cooldown by @ShardRechargeReductionSeconds@s (initial swap cooldown is @f3@ seconds). <br><br>Your first swap becomes available at @ShardFirstMinutes@ mins. <br><rules><br>Summoner Spells can only be swapped while out of combat. <br>After using a swapped Summoner Spell you must swap @NumSummonersBeforeRepeat@ more times before the first can be selected again.<br>Smite damage increases after two Summoner Spell swaps. </rules>"
+					"tooltipLong": "Swap one of your equipped Summoner Spells to a new, single use Summoner Spell. Each unique Summoner Spell you swap to permanently decreases your swap cooldown by @ShardRechargeReductionSeconds@s (initial swap cooldown is @f3@ seconds). <br><br>Your first swap becomes available at @ShardFirstMinutes@ mins. <br><rules><br>Summoner Spells can only be swapped while out of combat. <br>After using a swapped Summoner Spell you must swap @NumSummonersBeforeRepeat@ more times before the first can be selected again.<br>Smite damage increases after two Summoner Spell swaps. </rules>",
+					"tooltipStats": "{{ perk_long_desc_UnsealedSpellbook }}<hr><br>Unique Summoner Spells Used: @f4@/@f8@<br>Current Swap Cooldown: @f3@ seconds"
 				},
 				"FirstStrike": {
 					"name": "First Strike",
 					"tooltipShort": "When you initiate champion combat, deal @DamageAmp*100@% extra damage for @Duration@ seconds and gain gold based on damage dealt.",
-					"tooltipLong": "Attacks or abilities against an enemy champion within @GraceWindow@s of entering champion combat grant @GoldProcBonus@ gold and <b>First Strike</b> for @Duration@ seconds, causing you to deal <truedamage>@DamageAmp*100@%</truedamage> extra <truedamage> damage</truedamage> against champions, and granting <gold>@GoldPercentBonus*100@% (@GoldPercentBonusRanged*100@% for ranged champions)</gold> of bonus damage dealt as <gold>gold</gold>.<br><br>Cooldown: <scaleLevel>@TooltipOnlyCooldownStartAmount@ - @TooltipOnlyCooldownEndAmount@</scaleLevel>s"
+					"tooltipLong": "Attacks or abilities against an enemy champion within @GraceWindow@s of entering champion combat grant @GoldProcBonus@ gold and <b>First Strike</b> for @Duration@ seconds, causing you to deal <truedamage>@DamageAmp*100@%</truedamage> extra <truedamage> damage</truedamage> against champions, and granting <gold>@GoldPercentBonus*100@% (@GoldPercentBonusRanged*100@% for ranged champions)</gold> of bonus damage dealt as <gold>gold</gold>.<br><br>Cooldown: <scaleLevel>@TooltipOnlyCooldownStartAmount@ - @TooltipOnlyCooldownEndAmount@</scaleLevel>s",
+					"tooltipStats": "Attacks or abilities against an enemy champion within @GraceWindow.2@s of entering champion combat grant @GoldProcBonus@ gold and <b>First Strike</b> for @Duration@ seconds, causing you to deal <truedamage>@DamageAmp*100@%</truedamage> extra <truedamage>damage</truedamage> against champions, and granting <gold>{{ Item_Melee_Ranged_Split }}</gold> of that damage dealt as <gold>gold</gold>.<br><br>Cooldown: <scaleLevel>@Cooldown@</scaleLevel>s<br><hr><br>Damage Dealt: @f1@<br>Gold Gained: @f2@"
 				},
 				"HextechFlashtraption": {
 					"name": "Hextech Flashtraption",
 					"tooltipShort": "While Flash is on cooldown it is replaced by <i>Hexflash</i>.<br><br><i>Hexflash</i>: Channel, then blink to a new location.",
-					"tooltipLong": "While Flash is on cooldown it is replaced by <i>Hexflash</i>.<br><br><i>Hexflash</i>: Channel for @ChannelDuration@s to blink to a new location.<br><br>Cooldown: @CooldownTime@s. Goes on a @ChampionCombatCooldown@s cooldown when you enter champion combat."
+					"tooltipLong": "While Flash is on cooldown it is replaced by <i>Hexflash</i>.<br><br><i>Hexflash</i>: Channel for @ChannelDuration@s to blink to a new location.<br><br>Cooldown: @CooldownTime@s. Goes on a @ChampionCombatCooldown@s cooldown when you enter champion combat.",
+					"tooltipStats": "{{perk_long_desc_8306}}"
 				},
 				"MagicalFootwear": {
 					"name": "Magical Footwear",
 					"tooltipShort": "You get free boots at @GiveBootsAtMinute@ min but you cannot buy boots before then. Each <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Takedown'>takedown</lol-uikit-tooltipped-keyword> you get makes your boots come @SecondsSoonerPerTakedown@s sooner.",
-					"tooltipLong": "You get free {{ Item_2422_Name }} at @GiveBootsAtMinute@ min, but you cannot buy boots before then. For each takedown you acquire the boots @SecondsSoonerPerTakedown@s sooner.<br><br>{{ Item_2422_Name }} grants you an additional <speed>@AdditionalMovementSpeed@ Move Speed</speed>."
+					"tooltipLong": "You get free {{ Item_2422_Name }} at @GiveBootsAtMinute@ min, but you cannot buy boots before then. For each takedown you acquire the boots @SecondsSoonerPerTakedown@s sooner.<br><br>{{ Item_2422_Name }} grants you an additional <speed>@AdditionalMovementSpeed@ Move Speed</speed>.",
+					"tooltipStats": "{{ perk_long_desc_8304 }}<br><hr><br><scaleAD>Boots arrival time:</scaleAD> @f1@:@f2@@f3@"
 				},
 				"CashBack": {
 					"name": "Cash Back",
 					"tooltipShort": "Get some gold back when you purchase Legendary Items.",
-					"tooltipLong": "Get @PercentRefund*100@% Gold back when you purchase Legendary Items."
+					"tooltipLong": "Get @PercentRefund*100@% Gold back when you purchase Legendary Items.",
+					"tooltipStats": "{{perk_long_desc_FuturesMarket}}"
 				},
 				"PerfectTiming": {
 					"name": "Triple Tonic",
 					"tooltipShort": "Upon reaching level @FirstElixirLevel@, gain an Elixir of Avarice.<br>Upon reaching level @SecondElixirLevel@, gain an Elixir of Force.<br>Upon reaching level @ThirdElixirLevel@, gain an Elixir of Skill. ",
-					"tooltipLong": "Upon reaching level @FirstElixirLevel@, gain an Elixir of Avarice.<br>Upon reaching level @SecondElixirLevel@, gain an Elixir of Force.<br>Upon reaching level @ThirdElixirLevel@, gain an Elixir of Skill. "
+					"tooltipLong": "Upon reaching level @FirstElixirLevel@, gain an Elixir of Avarice.<br>Upon reaching level @SecondElixirLevel@, gain an Elixir of Force.<br>Upon reaching level @ThirdElixirLevel@, gain an Elixir of Skill. ",
+					"tooltipStats": "{{perk_long_desc_8313}}<br><br>Items Gained: @f1@"
 				},
 				"TimeWarpTonic": {
 					"name": "Time Warp Tonic",
 					"tooltipShort": "Potions grant some restoration immediately.",
-					"tooltipLong": "Consuming a potion grants @RestorationPercentage*100@% of its health restoration immediately."
+					"tooltipLong": "Consuming a potion grants @RestorationPercentage*100@% of its health restoration immediately.",
+					"tooltipStats": "{{perk_long_desc_TimeWarpTonic}}<br><hr><br>Total health instantly restored: @f2@"
 				},
 				"BiscuitDelivery": {
 					"name": "Biscuit Delivery",
 					"tooltipShort": "Gain a free Biscuit every @BiscuitMinuteInterval@ min, until @SwapOverMinute@ min. Consuming or selling a Biscuit permanently increases your max health and restores health.",
-					"tooltipLong": "Biscuit Delivery: Gain a {{game_item_displayname_2010}} every @BiscuitMinuteInterval@ mins, until @SwapOverMinute@ min.<br><br>Biscuits restore @FlatHeal@ + @HealthHealPercent.0*100@% of your maximum health, increased by up to @MaximumHealIncrease*100@% based on missing Health. Consuming or selling a Biscuit permanently increases your max health by @PermanentHP@. "
+					"tooltipLong": "Biscuit Delivery: Gain a {{game_item_displayname_2010}} every @BiscuitMinuteInterval@ mins, until @SwapOverMinute@ min.<br><br>Biscuits restore @FlatHeal@ + @HealthHealPercent.0*100@% of your maximum health, increased by up to @MaximumHealIncrease*100@% based on missing Health. Consuming or selling a Biscuit permanently increases your max health by @PermanentHP@. ",
+					"tooltipStats": "{{ perk_long_desc_BiscuitDelivery }}<br><hr><br>Biscuits Gained: @f1@/@f2@<br>Biscuit Healing: @f3@"
 				},
 				"CosmicInsight": {
 					"name": "Cosmic Insight",
 					"tooltipShort": "+<attention>@SummonerHaste@</attention> Summoner Spell Haste<br>+<attention>@ItemHaste@</attention> Item Haste",
-					"tooltipLong": "+<attention>@SummonerHaste@</attention> Summoner Spell Haste<br>+<attention>@ItemHaste@</attention> Item Haste"
+					"tooltipLong": "+<attention>@SummonerHaste@</attention> Summoner Spell Haste<br>+<attention>@ItemHaste@</attention> Item Haste",
+					"tooltipStats": "{{ perk_long_desc_CosmicInsight }}"
 				},
 				"ApproachVelocity": {
 					"name": "Approach Velocity",
 					"tooltipShort": "Bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>MS</lol-uikit-tooltipped-keyword> towards nearby enemy champions that are <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_ImpairMov'>movement impaired</lol-uikit-tooltipped-keyword>, increased for enemy champions that you impair.",
-					"tooltipLong": "Gain <speed>@MovementSpeedPercentBonus*50@% Move Speed</speed> towards nearby enemy champions that are movement impaired. This bonus is increased to <speed>@MovementSpeedPercentBonus.0*100@% Move Speed</speed> for any enemy champion that you impair. <br><br>Activation Range for CC from allies: @ActivationDistance@"
+					"tooltipLong": "Gain <speed>@MovementSpeedPercentBonus*50@% Move Speed</speed> towards nearby enemy champions that are movement impaired. This bonus is increased to <speed>@MovementSpeedPercentBonus.0*100@% Move Speed</speed> for any enemy champion that you impair. <br><br>Activation Range for CC from allies: @ActivationDistance@",
+					"tooltipStats": "{{perk_long_desc_ApproachVelocity}}<br><hr><br>Time Spent Hasted: @f1@s"
 				},
 				"JackOfAllTrades": {
 					"name": "Jack Of All Trades",
 					"tooltipShort": "For each different stat gained from items, gain one Jack stack. Each stack grants you <speed>@HasteperStack@ Ability Haste</speed>.<br><br>Gain bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>Adaptive Force</lol-uikit-tooltipped-keyword> at 5 and 10 stacks.",
-					"tooltipLong": "For each different stat gained from items, gain one Jack stack. Each stack grants you <speed>@HasteperStack@ Ability Haste</speed>.<br><br>Gain 10 or 25 bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>Adaptive Force</lol-uikit-tooltipped-keyword> at 5 and 10 stacks, respectively."
+					"tooltipLong": "For each different stat gained from items, gain one Jack stack. Each stack grants you <speed>@HasteperStack@ Ability Haste</speed>.<br><br>Gain 10 or 25 bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>Adaptive Force</lol-uikit-tooltipped-keyword> at 5 and 10 stacks, respectively.",
+					"tooltipStats": "{{perk_long_desc_MinionDematerializer}}<br><hr><br>Different Stats: @f1@<br>Bonus Adaptive Force: +@f2@"
 				}
 			}
 		}

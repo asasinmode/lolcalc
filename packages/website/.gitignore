@@ -24,3 +24,4 @@ logs
 !.env.example
 
 .eslintcache
+reference_images

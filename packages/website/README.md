@@ -38,6 +38,7 @@ bun test
   - [ ] some cool graphs
   - [ ] choose damage for: passive, aa, abilities (grayed out with "coming in a future update" tooltip); columns
 - [ ] damage compare mode, no mirror mode, both sources and targets available, check which ones to use, check which ability to compare the damage of
+- [ ] rune dialog (major runes grayed out for now)
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
@@ -49,7 +50,6 @@ bun test
   - [ ] inventory panel or list in the footer
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
-- [ ] rune dialog (major runes grayed out for now)
 - [ ] button tooltips over `:title` where appropriate
   - [ ] LolScoreboardItem buttons
 - [ ] sharing, saving/reading data in query
