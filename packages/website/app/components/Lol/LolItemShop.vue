@@ -336,7 +336,7 @@ const bootItems = [
 	if (!item) {
 		console.warn(`boot item not found ${id}`);
 	}
-	return item;
+	return item!;
 });
 /* eslint-enable antfu/consistent-list-newline */
 
@@ -546,6 +546,7 @@ defineExpose({
 							<span>{{ item.name }}</span>
 							<img
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+								:alt="item.name"
 								width="64"
 								height="64"
 								aria-hidden="true"
@@ -582,6 +583,7 @@ defineExpose({
 							<span>{{ item.name }}</span>
 							<img
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+								:alt="item.name"
 								width="64"
 								height="64"
 								aria-hidden="true"
@@ -617,6 +619,7 @@ defineExpose({
 						<img
 							v-if="buildsIntoItems[i - 1]"
 							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]!.image}`"
+							:alt="buildsIntoItems[i - 1]!.name"
 							class="item-shop-item-img"
 							width="64"
 							height="64"
@@ -637,6 +640,7 @@ defineExpose({
 						<img
 							v-if="buildsIntoItems[6]"
 							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[6].image}`"
+							:alt="buildsIntoItems[6].name"
 							class="item-shop-item-img"
 							width="64"
 							height="64"
@@ -664,6 +668,7 @@ defineExpose({
 							>
 								<img
 									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+									:alt="item.name"
 									class="item-shop-item-img"
 									width="64"
 									height="64"
@@ -880,7 +885,7 @@ defineExpose({
 
 	.item-shop-item-btn img,
 	.item-shop-item-img {
-		@apply 'size-12.5 min-w-12.5 m-0.75';
+		@apply 'size-12.5 min-w-12.5 m-0.75 text-xs text-center break-words';
 
 		--inner-border: gray;
 		box-shadow:
@@ -897,7 +902,7 @@ defineExpose({
 	}
 
 	#item-shop-builds-into-list > li > button {
-		@apply 'bg-black size-(--item-img-size)';
+		@apply 'bg-black size-(--item-img-size) block';
 	}
 
 	#item-shop-hover-tooltip {
