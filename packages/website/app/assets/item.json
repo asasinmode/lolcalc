@@ -1,5 +1,5 @@
 {
-	"version": "15.24.1",
+	"version": "16.1.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -20,7 +20,6 @@
 				"3047",
 				"3006",
 				"3009",
-				"3010",
 				"3020",
 				"3111",
 				"3158"
@@ -94,7 +93,7 @@
 			"mapMask": 3,
 			"into": [
 				"3084",
-				"2502",
+				"2525",
 				"3083",
 				"3116",
 				"3119",
@@ -134,6 +133,8 @@
 				"6670",
 				"3033",
 				"3508",
+				"3095",
+				"3097",
 				"6676"
 			],
 			"categories": {
@@ -156,13 +157,14 @@
 			"image": "1026.png",
 			"mapMask": 3,
 			"into": [
-				"4628",
-				"3135",
-				"3115",
+				"2522",
 				"3100",
+				"3135",
+				"3165",
+				"3115",
+				"2510",
 				"3116",
 				"3118",
-				"3165",
 				"6621",
 				"6657"
 			],
@@ -215,12 +217,14 @@
 				"1011",
 				"2021",
 				"3147",
+				"3211",
+				"2502",
+				"2526",
 				"3044",
 				"3053",
 				"3066",
 				"3067",
 				"3075",
-				"3211",
 				"3152",
 				"3161",
 				"3801",
@@ -257,14 +261,14 @@
 			"into": [
 				"2420",
 				"1031",
+				"3190",
 				"2019",
 				"3047",
 				"3024",
 				"3050",
+				"2524",
 				"3076",
-				"3082",
-				"3105",
-				"3190"
+				"3082"
 			],
 			"categories": {
 				"tank": true,
@@ -294,6 +298,7 @@
 				"3742",
 				"3068",
 				"3109",
+				"2502",
 				"3002",
 				"3075",
 				"6665",
@@ -326,12 +331,12 @@
 			"into": [
 				"1057",
 				"3140",
-				"3050",
-				"3155",
-				"3211",
-				"3105",
-				"3111",
 				"3190",
+				"3050",
+				"3211",
+				"2524",
+				"3155",
+				"3111",
 				"4632"
 			],
 			"categories": {
@@ -360,6 +365,7 @@
 			"mapMask": 3,
 			"into": [
 				"1053",
+				"4003",
 				"6701",
 				"2019",
 				"2021",
@@ -368,12 +374,12 @@
 				"3133",
 				"3142",
 				"3004",
+				"2523",
 				"3032",
 				"3035",
 				"3044",
 				"3051",
 				"3155",
-				"4003",
 				"6690",
 				"3123",
 				"3134",
@@ -408,8 +414,10 @@
 				"3153",
 				"6701",
 				"2020",
+				"2517",
+				"6695",
+				"2523",
 				"3053",
-				"3508",
 				"3072",
 				"3087",
 				"3124",
@@ -418,8 +426,7 @@
 				"3161",
 				"6673",
 				"6676",
-				"6692",
-				"6695"
+				"6692"
 			],
 			"categories": {
 				"marksman": true,
@@ -446,7 +453,9 @@
 				"3031",
 				"3026",
 				"3032",
-				"3072"
+				"3072",
+				"3095",
+				"3097"
 			],
 			"categories": {
 				"fighter": true,
@@ -472,6 +481,7 @@
 			"into": [
 				"1043",
 				"3086",
+				"2510",
 				"3006",
 				"3046",
 				"3051",
@@ -502,12 +512,12 @@
 			"image": "1043.png",
 			"mapMask": 3,
 			"into": [
+				"3302",
 				"3153",
 				"3115",
 				"6672",
 				"3091",
-				"3124",
-				"3302"
+				"3124"
 			],
 			"from": [
 				"1042"
@@ -538,17 +548,19 @@
 			"image": "1052.png",
 			"mapMask": 3,
 			"into": [
+				"3113",
 				"2420",
 				"3145",
 				"3916",
-				"3113",
 				"3147",
+				"3146",
 				"3802",
 				"2508",
 				"3108",
 				"3116",
 				"3124",
 				"4630",
+				"4628",
 				"4632",
 				"4642"
 			],
@@ -575,6 +587,7 @@
 			"mapMask": 3,
 			"into": [
 				"3153",
+				"3146",
 				"3072",
 				"3074",
 				"3139"
@@ -636,10 +649,11 @@
 		"1055": {
 			"id": "1055",
 			"name": "Doran's Blade",
-			"searchString": "doransblade;dblade;health;damage;spellvamp",
+			"searchString": "doransblade;dblade;health;damage;lifesteal;spellvamp",
 			"stats": {
 				"FlatHPPoolMod": 80,
-				"FlatPhysicalDamageMod": 10
+				"FlatPhysicalDamageMod": 10,
+				"PercentOmnivampMod": 0.03
 			},
 			"gold": {
 				"base": 450,
@@ -650,10 +664,6 @@
 			"image": "1055.png",
 			"mapMask": 3,
 			"epicness": 1,
-			"dataValues": {
-				"HealMultiplier": 0.03,
-				"HealingReduction": 0.33
-			},
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -705,11 +715,11 @@
 			"image": "1057.png",
 			"mapMask": 3,
 			"into": [
-				"3091",
 				"2504",
+				"8020",
+				"3091",
 				"6665",
-				"4401",
-				"8020"
+				"4401"
 			],
 			"from": [
 				"1033"
@@ -738,9 +748,9 @@
 			"mapMask": 3,
 			"into": [
 				"3157",
-				"3102",
+				"4645",
 				"3089",
-				"4645"
+				"3102"
 			],
 			"categories": {
 				"mage": true
@@ -870,6 +880,7 @@
 			"mapMask": 3,
 			"into": [
 				"6698",
+				"2520",
 				"6699",
 				"6696"
 			],
@@ -973,7 +984,7 @@
 				"sell": 665
 			},
 			"image": "2051.png",
-			"mapMask": 2,
+			"mapMask": 3,
 			"epicness": 1,
 			"effectAmount": [
 				15,
@@ -1135,12 +1146,11 @@
 		"2502": {
 			"id": "2502",
 			"name": "Unending Despair",
-			"searchString": "unendingdespair;health;magicresist;armor;cooldownreduction;abilityhaste",
+			"searchString": "unendingdespair;health;armor;cooldownreduction;abilityhaste",
 			"stats": {
-				"FlatSpellBlockMod": 25,
 				"FlatHPPoolMod": 400,
-				"FlatArmorMod": 25,
-				"AbilityHasteMod": 10
+				"FlatArmorMod": 50,
+				"AbilityHasteMod": 15
 			},
 			"gold": {
 				"base": 800,
@@ -1151,8 +1161,9 @@
 			"image": "2502.png",
 			"mapMask": 3,
 			"from": [
-				"3105",
-				"1011"
+				"1031",
+				"3067",
+				"1028"
 			],
 			"epicness": 5,
 			"dataValues": {
@@ -1327,6 +1338,464 @@
 			},
 			"categories": {
 				"mage": true
+			}
+		},
+		"2510": {
+			"id": "2510",
+			"name": "Dusk and Dawn",
+			"searchString": "duskanddawn;spellblade;bonking;health;attackspeed;spelldamage;onhit;abilityhaste",
+			"stats": {
+				"FlatHPPoolMod": 300,
+				"FlatMagicDamageMod": 70,
+				"PercentAttackSpeedMod": 0.25,
+				"AbilityHasteMod": 20
+			},
+			"gold": {
+				"base": 300,
+				"purchasable": true,
+				"total": 3100,
+				"sell": 2170
+			},
+			"image": "2510.png",
+			"mapMask": 3,
+			"from": [
+				"3057",
+				"1026",
+				"3067",
+				"1042"
+			],
+			"isOnHit": true,
+			"epicness": 5,
+			"dataValues": {
+				"SpellbladeCooldown": 1.5,
+				"DebuffDuration": 4,
+				"SpeedAmount": 0.1,
+				"SpeedDuration": 1.5,
+				"Cooldown": 1.5,
+				"ExplosionAoE": 350
+			},
+			"itemCalculations": {
+				"SpellbladeDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 1,
+							"mCoefficient": 1
+						},
+						{
+							"mCoefficient": 0.1
+						}
+					]
+				},
+				"{eb4b84c6}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 40,
+							"mEndValue": 80
+						},
+						{
+							"mCoefficient": 0.1
+						}
+					]
+				}
+			},
+			"categories": {
+				"mage": true
+			}
+		},
+		"2512": {
+			"id": "2512",
+			"name": "Fiendhunter Bolts",
+			"searchString": "fiendhunterbolts;criticalstrike;attackspeed;movement;abilityhaste",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentMovementSpeedMod": 0.04
+			},
+			"gold": {
+				"base": 850,
+				"purchasable": true,
+				"total": 2650,
+				"sell": 1855
+			},
+			"image": "2512.png",
+			"mapMask": 3,
+			"from": [
+				"3086",
+				"3144"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"UltimateHaste": 30,
+				"Cooldown": 45,
+				"Duration": 8,
+				"BonusTrueDamage": 0.1,
+				"BonusAS": 0.5,
+				"NumberOfAttacks": 3,
+				"CritModifier": 0.75
+			},
+			"categories": {
+				"marksman": true
+			}
+		},
+		"2517": {
+			"id": "2517",
+			"name": "Endless Hunger",
+			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste",
+			"stats": {
+				"FlatPhysicalDamageMod": 60,
+				"PercentOmnivampMod": 0.05,
+				"PercentTenacityMod": 0.2
+			},
+			"gold": {
+				"base": 1075,
+				"purchasable": true,
+				"total": 3000,
+				"sell": 2100
+			},
+			"image": "2517.png",
+			"mapMask": 3,
+			"from": [
+				"3133",
+				"1037"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"OmnivampOnTakedown": 0.15,
+				"OmnivampDuration": 8,
+				"TakedownWindow": 3
+			},
+			"itemCalculations": {
+				"HasteFromAD": {
+					"mFormulaParts": [
+						{
+							"mNumber": 5
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1
+						}
+					]
+				}
+			},
+			"categories": {
+				"fighter": true
+			}
+		},
+		"2520": {
+			"id": "2520",
+			"name": "Bastionbreaker",
+			"searchString": "bastionbreaker;damage;armorpenetration;abilityhaste",
+			"stats": {
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 15,
+				"PhysicalLethality": 22
+			},
+			"gold": {
+				"base": 863,
+				"purchasable": true,
+				"total": 3200,
+				"sell": 2240
+			},
+			"image": "2520.png",
+			"mapMask": 3,
+			"from": [
+				"2020",
+				"3134"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"LethalityAmount": 22,
+				"Cooldown": 20,
+				"TakedownWindow": 3,
+				"BuffDuration": 90,
+				"RangeModifier": 0.8,
+				"DoTDuration": 3,
+				"AbilityDamageRangeMod": 0.5
+			},
+			"itemCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mNumber": 300
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 25
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "{a99340ef}"
+					}
+				},
+				"AbilityDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mNumber": 30
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 1.5
+						}
+					],
+					"mRangedMultiplier": {
+						"mDataValue": "{d62bdfef}"
+					}
+				}
+			},
+			"categories": {
+				"assassin": true
+			}
+		},
+		"2522": {
+			"id": "2522",
+			"name": "Actualizer",
+			"searchString": "actualizer;spelldamage;mana;abilityhaste",
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatMagicDamageMod": 90,
+				"AbilityHasteMod": 10
+			},
+			"gold": {
+				"base": 1050,
+				"purchasable": true,
+				"total": 3100,
+				"sell": 2170
+			},
+			"image": "2522.png",
+			"mapMask": 3,
+			"from": [
+				"3802",
+				"1026"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"Cooldown": 60,
+				"Duration": 8,
+				"ManaCostIncrease": 1,
+				"CooldownTick": 0.3
+			},
+			"itemCalculations": {
+				"ManaCalc": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mNumber": 15
+						},
+						{
+							"mCoefficient": 0,
+							"mStatFormula": 2
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			},
+			"categories": {
+				"mage": true
+			}
+		},
+		"2523": {
+			"id": "2523",
+			"name": "Hexoptics C44",
+			"searchString": "hexopticsc;damage;criticalstrike",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50
+			},
+			"gold": {
+				"base": 275,
+				"purchasable": true,
+				"total": 2800,
+				"sell": 1960
+			},
+			"image": "2523.png",
+			"mapMask": 3,
+			"from": [
+				"1037",
+				"6670",
+				"1036"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"ExtraRange": 100,
+				"TakedownWindow": 3,
+				"Duration": 6,
+				"MaxRange": 700,
+				"MaxDamageAmp": 0.1
+			},
+			"categories": {
+				"marksman": true
+			}
+		},
+		"2524": {
+			"id": "2524",
+			"name": "Bandlepipes",
+			"searchString": "bandlepipes;health;magicresist;armor;attackspeed;movement;abilityhaste",
+			"stats": {
+				"FlatSpellBlockMod": 20,
+				"FlatHPPoolMod": 200,
+				"FlatArmorMod": 20,
+				"AbilityHasteMod": 15
+			},
+			"gold": {
+				"base": 500,
+				"purchasable": true,
+				"total": 2000,
+				"sell": 1400
+			},
+			"image": "2524.png",
+			"mapMask": 3,
+			"from": [
+				"3067",
+				"1029",
+				"1033"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"EnemyDetectRange": 400,
+				"Duration": 8,
+				"MeleeAuraAttackSpeed": 0.3,
+				"AuraRange": 900,
+				"ASDuration": 1,
+				"MoveSpeed": 20,
+				"RangedAttackSpeedMultiplier": 0.67
+			},
+			"itemCalculations": {
+				"BuffDuration": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Duration"
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.5
+					}
+				},
+				"AuraAttackSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{eb8d750f}"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mRangedMultiplier": {
+						"mDataValue": "{ca6deae2}"
+					}
+				}
+			},
+			"categories": {
+				"tank": true,
+				"support": true
+			}
+		},
+		"2525": {
+			"id": "2525",
+			"name": "Protoplasm Harness",
+			"searchString": "protoplasmharness;health;movement;tenacity;abilityhaste",
+			"stats": {
+				"FlatHPPoolMod": 600,
+				"AbilityHasteMod": 15
+			},
+			"gold": {
+				"base": 800,
+				"purchasable": true,
+				"total": 2500,
+				"sell": 1750
+			},
+			"image": "2525.png",
+			"mapMask": 3,
+			"from": [
+				"3067",
+				"1011"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"LowHealthThreshold": 0.3,
+				"Duration": 5,
+				"MSAmount": 0.1,
+				"TenacityAmount": 0.25,
+				"Cooldown": 90,
+				"SizeIncrease": 0.15
+			},
+			"itemCalculations": {
+				"TotalHealthRegen": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 200,
+							"mEndValue": 400
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mCoefficient": 2.5
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mCoefficient": 2.5
+						}
+					]
+				},
+				"MaxHealthGain": {
+					"mFormulaParts": [
+						{
+							"mNumber": 200
+						}
+					]
+				}
+			},
+			"categories": {
+				"tank": true
+			}
+		},
+		"2526": {
+			"id": "2526",
+			"name": "Whispering Circlet",
+			"searchString": "whisperingcirclet;superbell;tear;diadem;songs;health;mana;manaregen",
+			"stats": {
+				"FlatMPPoolMod": 300,
+				"FlatHPPoolMod": 200,
+				"PercentBaseMPRegenMod": 0.75,
+				"PercentHealingAmountMod": 0.08
+			},
+			"gold": {
+				"base": 850,
+				"purchasable": true,
+				"total": 2250,
+				"sell": 1575
+			},
+			"image": "2526.png",
+			"mapMask": 3,
+			"into": [],
+			"from": [
+				"3114",
+				"1028",
+				"3070"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"ManaChargeAmmoCD": 8,
+				"ManaChargeMaxAmmo": 5,
+				"ManaPerCharge": 4,
+				"MaxMana": 360,
+				"InternalCDPerCastID": 6.5
+			},
+			"itemCalculations": {
+				"BonusHSPCalc": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0,
+							"mStatFormula": 2
+						}
+					]
+				}
+			},
+			"categories": {
+				"support": true
 			}
 		},
 		"3002": {
@@ -1512,37 +1981,6 @@
 				"fighter": true
 			}
 		},
-		"3010": {
-			"id": "3010",
-			"name": "Symbiotic Soles",
-			"searchString": "symbioticsoles;synchronizedsouls;boots",
-			"stats": {
-				"FlatMovementSpeedMod": 40
-			},
-			"gold": {
-				"base": 600,
-				"purchasable": true,
-				"total": 900,
-				"sell": 630
-			},
-			"image": "3010.png",
-			"mapMask": 1,
-			"into": [],
-			"from": [
-				"1001"
-			],
-			"isBoots": true,
-			"epicness": 4,
-			"dataValues": {
-				"MaxCharge": 150,
-				"MaxDistance": 150000,
-				"MSBonus": 10,
-				"DistanceCap": 500
-			},
-			"categories": {
-				"support": true
-			}
-		},
 		"3020": {
 			"id": "3020",
 			"name": "Sorcerer's Shoes",
@@ -1648,14 +2086,14 @@
 			"searchString": "infinityedge;ie;criticalstrike;damage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 65,
-				"FlatCritDamageMod": 0.4
+				"FlatPhysicalDamageMod": 75,
+				"FlatCritDamageMod": 0.3
 			},
 			"gold": {
-				"base": 675,
+				"base": 725,
 				"purchasable": true,
-				"total": 3450,
-				"sell": 2415
+				"total": 3500,
+				"sell": 2450
 			},
 			"image": "3031.png",
 			"mapMask": 3,
@@ -1665,9 +2103,6 @@
 				"1018"
 			],
 			"epicness": 5,
-			"dataValues": {
-				"MythicStatAmount": 5
-			},
 			"categories": {
 				"marksman": true
 			}
@@ -1677,14 +2112,14 @@
 			"name": "Yun Tal Wildarrows",
 			"searchString": "yuntalwildarrows;yuntal;arrow;damage;criticalstrike;attackspeed",
 			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"PercentAttackSpeedMod": 0.35
+				"FlatPhysicalDamageMod": 50,
+				"PercentAttackSpeedMod": 0.4
 			},
 			"gold": {
-				"base": 750,
+				"base": 850,
 				"purchasable": true,
-				"total": 3000,
-				"sell": 2100
+				"total": 3100,
+				"sell": 2170
 			},
 			"image": "3032.png",
 			"mapMask": 3,
@@ -1696,7 +2131,6 @@
 			"epicness": 5,
 			"dataValues": {
 				"ASDuration": 6,
-				"CritPerStack": 0.2,
 				"CritMax": 25,
 				"Cooldown": 30,
 				"AACDR": 1,
@@ -1729,13 +2163,13 @@
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 35,
-				"PercentArmorPenetrationMod": 0.35
+				"PercentArmorPenetrationMod": 0.3
 			},
 			"gold": {
-				"base": 450,
+				"base": 150,
 				"purchasable": true,
-				"total": 3300,
-				"sell": 2310
+				"total": 3000,
+				"sell": 2100
 			},
 			"image": "3033.png",
 			"mapMask": 3,
@@ -1791,13 +2225,13 @@
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 35,
-				"PercentArmorPenetrationMod": 0.4
+				"PercentArmorPenetrationMod": 0.35
 			},
 			"gold": {
-				"base": 350,
+				"base": 550,
 				"purchasable": true,
-				"total": 3100,
-				"sell": 2170
+				"total": 3300,
+				"sell": 2310
 			},
 			"image": "3036.png",
 			"mapMask": 3,
@@ -1808,17 +2242,8 @@
 			"epicness": 5,
 			"dataValues": {
 				"MaxBonusDamagePercent": 0.15,
-				"MaxHealthDifference": 2000
+				"MaxBonusHealth": 1500
 			},
-			"effectAmount": [
-				0.2,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
 			"categories": {
 				"marksman": true
 			}
@@ -1918,7 +2343,7 @@
 			"name": "Muramana",
 			"searchString": "muramana;damage;mana;cooldownreduction;onhit;armorpenetration",
 			"stats": {
-				"FlatMPPoolMod": 860,
+				"FlatMPPoolMod": 1000,
 				"FlatPhysicalDamageMod": 35,
 				"AbilityHasteMod": 15
 			},
@@ -2148,7 +2573,8 @@
 				"Cooldown": 45,
 				"SlowAmount": 0.3,
 				"DamagePerSecond": 30,
-				"StormRadius": 350
+				"StormRadius": 350,
+				"UltimateHaste": 15
 			},
 			"categories": {
 				"support": true,
@@ -2173,8 +2599,8 @@
 			"mapMask": 3,
 			"into": [
 				"3078",
-				"6672",
-				"3302"
+				"3302",
+				"6672"
 			],
 			"from": [
 				"1036",
@@ -2326,6 +2752,8 @@
 			"into": [
 				"3078",
 				"3100",
+				"2510",
+				"3508",
 				"6662"
 			],
 			"from": [
@@ -2436,18 +2864,21 @@
 			"mapMask": 3,
 			"into": [
 				"3071",
+				"8020",
+				"3190",
+				"3165",
 				"6620",
 				"3050",
 				"3109",
-				"4629",
+				"2502",
+				"2510",
+				"2524",
+				"2525",
 				"6617",
 				"3065",
-				"3107",
 				"3119",
-				"3165",
-				"3190",
 				"3222",
-				"8020"
+				"4629"
 			],
 			"from": [
 				"1028",
@@ -2527,7 +2958,7 @@
 		"3070": {
 			"id": "3070",
 			"name": "Tear of the Goddess",
-			"searchString": "tearofthegoddess;archangelsstaff;seraphsembrace;wintersapproach;fimbulwinter;muramana;manamune;mana;manaregen",
+			"searchString": "tearofthegoddess;archangelsstaff;seraphsembrace;wintersapproach;fimbulwinter;muramana;manamune;whisperingcirclet;diademofsongs;mana;manaregen",
 			"stats": {
 				"FlatMPPoolMod": 240
 			},
@@ -2542,6 +2973,7 @@
 			"into": [
 				"3003",
 				"3004",
+				"2526",
 				"3119"
 			],
 			"epicness": 1,
@@ -2558,7 +2990,8 @@
 				"marksman": true,
 				"fighter": true,
 				"assassin": true,
-				"tank": true
+				"tank": true,
+				"support": true
 			}
 		},
 		"3071": {
@@ -3278,6 +3711,7 @@
 			"image": "3086.png",
 			"mapMask": 3,
 			"into": [
+				"2512",
 				"3094",
 				"3046",
 				"3085",
@@ -3465,6 +3899,46 @@
 				"marksman": true
 			}
 		},
+		"3097": {
+			"id": "3097",
+			"name": "Stormrazor",
+			"searchString": "stormrazor;damage;criticalstrike;attackspeed;movement",
+			"stats": {
+				"FlatCritChanceMod": 0.25,
+				"FlatPhysicalDamageMod": 50,
+				"PercentAttackSpeedMod": 0.2
+			},
+			"gold": {
+				"base": 700,
+				"purchasable": true,
+				"total": 3200,
+				"sell": 2240
+			},
+			"image": "3097.png",
+			"mapMask": 3,
+			"from": [
+				"1038",
+				"1018",
+				"3144"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"BuffStrength": 0.45,
+				"BuffDuration": 1.5
+			},
+			"itemCalculations": {
+				"TotalProcDamage": {
+					"mFormulaParts": [
+						{
+							"mNumber": 100
+						}
+					]
+				}
+			},
+			"categories": {
+				"marksman": true
+			}
+		},
 		"3100": {
 			"id": "3100",
 			"name": "Lich Bane",
@@ -3553,48 +4027,18 @@
 				"mage": true
 			}
 		},
-		"3105": {
-			"id": "3105",
-			"name": "Aegis of the Legion",
-			"searchString": "aegisofthelegion;magicresist;armor;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 25,
-				"FlatArmorMod": 25,
-				"AbilityHasteMod": 10
-			},
-			"gold": {
-				"base": 400,
-				"purchasable": true,
-				"total": 1100,
-				"sell": 770
-			},
-			"image": "3105.png",
-			"mapMask": 3,
-			"into": [
-				"2502"
-			],
-			"from": [
-				"1033",
-				"1029"
-			],
-			"epicness": 4,
-			"categories": {
-				"tank": true,
-				"support": true
-			}
-		},
 		"3107": {
 			"id": "3107",
 			"name": "Redemption",
-			"searchString": "redemption;health;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "redemption;spelldamage;manaregen;cooldownreduction;abilityhaste",
 			"stats": {
-				"FlatHPPoolMod": 200,
+				"FlatMagicDamageMod": 30,
 				"AbilityHasteMod": 15,
 				"PercentBaseMPRegenMod": 1,
 				"PercentHealingAmountMod": 0.1
 			},
 			"gold": {
-				"base": 900,
+				"base": 850,
 				"purchasable": true,
 				"total": 2300,
 				"sell": 1610
@@ -3602,7 +4046,7 @@
 			"image": "3107.png",
 			"mapMask": 3,
 			"from": [
-				"3067",
+				"3108",
 				"3114"
 			],
 			"epicness": 5,
@@ -3676,16 +4120,17 @@
 			"image": "3108.png",
 			"mapMask": 3,
 			"into": [
-				"4633",
-				"4628",
 				"3115",
-				"4629",
 				"4005",
 				"3003",
-				"6616",
+				"3107",
 				"3152",
 				"3137",
-				"8010"
+				"8010",
+				"6616",
+				"4628",
+				"4629",
+				"4633"
 			],
 			"from": [
 				"1052",
@@ -3825,7 +4270,7 @@
 				"sell": 665
 			},
 			"image": "3112.png",
-			"mapMask": 2,
+			"mapMask": 3,
 			"epicness": 1,
 			"effectAmount": [
 				3
@@ -3853,10 +4298,10 @@
 			"image": "3113.png",
 			"mapMask": 3,
 			"into": [
-				"2065",
-				"4629",
 				"3100",
+				"2065",
 				"3504",
+				"4629",
 				"4646"
 			],
 			"from": [
@@ -3885,10 +4330,11 @@
 			"image": "3114.png",
 			"mapMask": 3,
 			"into": [
-				"6616",
+				"2526",
 				"3107",
 				"3222",
 				"3504",
+				"6616",
 				"6621"
 			],
 			"from": [
@@ -4099,7 +4545,7 @@
 			"name": "Fimbulwinter",
 			"searchString": "fimbulwinter;health;mana;abilityhaste",
 			"stats": {
-				"FlatMPPoolMod": 860,
+				"FlatMPPoolMod": 1000,
 				"FlatHPPoolMod": 550,
 				"AbilityHasteMod": 15
 			},
@@ -4280,8 +4726,9 @@
 			"mapMask": 3,
 			"into": [
 				"6333",
-				"3156",
 				"6697",
+				"3156",
+				"2517",
 				"3004",
 				"3508",
 				"3074",
@@ -4322,13 +4769,14 @@
 			"mapMask": 3,
 			"into": [
 				"3142",
-				"6701",
 				"6697",
+				"6701",
+				"2520",
 				"4004",
+				"6695",
 				"3814",
 				"3179",
-				"6676",
-				"6695"
+				"6676"
 			],
 			"from": [
 				"1036",
@@ -4614,10 +5062,13 @@
 			"image": "3144.png",
 			"mapMask": 3,
 			"into": [
+				"2512",
 				"3094",
 				"3032",
 				"3085",
-				"3087"
+				"3087",
+				"3095",
+				"3097"
 			],
 			"from": [
 				"1042",
@@ -4656,9 +5107,10 @@
 			"image": "3145.png",
 			"mapMask": 3,
 			"into": [
+				"4645",
+				"3146",
 				"6655",
 				"3152",
-				"4645",
 				"4646"
 			],
 			"from": [
@@ -4682,6 +5134,52 @@
 				"mage": true
 			}
 		},
+		"3146": {
+			"id": "3146",
+			"name": "Hextech Gunblade",
+			"searchString": "hextechgunblade;damage;lifesteal;spelldamage;active;spellvamp",
+			"stats": {
+				"FlatMagicDamageMod": 80,
+				"FlatPhysicalDamageMod": 40,
+				"PercentOmnivampMod": 0.1
+			},
+			"gold": {
+				"base": 600,
+				"purchasable": true,
+				"total": 3000,
+				"sell": 2100
+			},
+			"image": "3146.png",
+			"mapMask": 3,
+			"from": [
+				"1053",
+				"3145",
+				"1052"
+			],
+			"epicness": 5,
+			"dataValues": {
+				"SlowAmount": 0.25,
+				"SlowDuration": 1.5,
+				"Cooldown": 60
+			},
+			"itemCalculations": {
+				"ActiveDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 175,
+							"mEndValue": 253
+						},
+						{
+							"mCoefficient": 0.3
+						}
+					]
+				}
+			},
+			"categories": {
+				"mage": true,
+				"assassin": true
+			}
+		},
 		"3147": {
 			"id": "3147",
 			"name": "Haunting Guise",
@@ -4699,8 +5197,8 @@
 			"image": "3147.png",
 			"mapMask": 3,
 			"into": [
-				"4633",
 				"8010",
+				"4633",
 				"6653"
 			],
 			"from": [
@@ -5208,10 +5706,10 @@
 				"FlatMovementSpeedMod": 65
 			},
 			"gold": {
-				"base": 500,
+				"base": 0,
 				"purchasable": true,
-				"total": 1500,
-				"sell": 1050
+				"total": 1000,
+				"sell": 700
 			},
 			"image": "3170.png",
 			"mapMask": 1,
@@ -5222,7 +5720,7 @@
 			"epicness": 7,
 			"dataValues": {
 				"MoveSpeedMultiplier": 0.04,
-				"SlowResistTooltip": 0.25,
+				"SlowResistTooltip": 0.4,
 				"MSAdaptiveRatio": 0.05
 			},
 			"itemCalculations": {
@@ -5249,14 +5747,14 @@
 			"name": "Crimson Lucidity",
 			"searchString": "crimsonlucidity;cooldownreduction;boots",
 			"stats": {
-				"FlatMovementSpeedMod": 50,
-				"AbilityHasteMod": 25
+				"FlatMovementSpeedMod": 45,
+				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 500,
+				"base": 0,
 				"purchasable": true,
-				"total": 1400,
-				"sell": 980
+				"total": 900,
+				"sell": 630
 			},
 			"image": "3171.png",
 			"mapMask": 1,
@@ -5266,7 +5764,7 @@
 			"isBoots": true,
 			"epicness": 7,
 			"dataValues": {
-				"SummonerHaste": 10,
+				"SummonerHaste": 20,
 				"MeleeMS": 0.1,
 				"Duration": 4,
 				"RangedMSMultiplier": 0.8
@@ -5296,16 +5794,17 @@
 		"3172": {
 			"id": "3172",
 			"name": "Gunmetal Greaves",
-			"searchString": "gunmetalgreaves;attackspeed;movement",
+			"searchString": "gunmetalgreaves;attackspeed;lifesteal;movement",
 			"stats": {
-				"FlatMovementSpeedMod": 50,
-				"PercentAttackSpeedMod": 0.4
+				"FlatMovementSpeedMod": 45,
+				"PercentAttackSpeedMod": 0.4,
+				"PercentLifeStealMod": 0.05
 			},
 			"gold": {
-				"base": 500,
+				"base": 0,
 				"purchasable": true,
-				"total": 1600,
-				"sell": 1120
+				"total": 1100,
+				"sell": 770
 			},
 			"image": "3172.png",
 			"mapMask": 1,
@@ -5345,15 +5844,15 @@
 			"name": "Chainlaced Crushers",
 			"searchString": "chainlacedcrushers;magicresist;boots;tenacity",
 			"stats": {
-				"FlatSpellBlockMod": 35,
-				"FlatMovementSpeedMod": 50,
+				"FlatSpellBlockMod": 30,
+				"FlatMovementSpeedMod": 45,
 				"PercentTenacityMod": 0.3
 			},
 			"gold": {
-				"base": 500,
+				"base": 0,
 				"purchasable": true,
-				"total": 1750,
-				"sell": 1225
+				"total": 1250,
+				"sell": 875
 			},
 			"image": "3173.png",
 			"mapMask": 1,
@@ -5364,8 +5863,8 @@
 			"epicness": 7,
 			"dataValues": {
 				"Cooldown": 15,
-				"ShieldAmount": 0.04,
-				"ShieldDuration": 4
+				"ShieldAmount": 0.07,
+				"ShieldDuration": 5
 			},
 			"itemCalculations": {
 				"ShieldAmountCalc": {
@@ -5395,14 +5894,14 @@
 			"name": "Armored Advance",
 			"searchString": "armoredadvance;armor;boots",
 			"stats": {
-				"FlatMovementSpeedMod": 50,
-				"FlatArmorMod": 40
+				"FlatMovementSpeedMod": 45,
+				"FlatArmorMod": 35
 			},
 			"gold": {
-				"base": 500,
+				"base": 0,
 				"purchasable": true,
-				"total": 1700,
-				"sell": 1190
+				"total": 1200,
+				"sell": 840
 			},
 			"image": "3174.png",
 			"mapMask": 1,
@@ -5414,8 +5913,8 @@
 			"dataValues": {
 				"DamageReduction": 0.1,
 				"Cooldown": 15,
-				"ShieldAmount": 0.04,
-				"ShieldDuration": 4
+				"ShieldAmount": 0.07,
+				"ShieldDuration": 5
 			},
 			"itemCalculations": {
 				"ShieldAmountCalc": {
@@ -5445,15 +5944,15 @@
 			"name": "Spellslinger's Shoes",
 			"searchString": "spellslingersshoes;boots;magicpenetration",
 			"stats": {
-				"FlatMovementSpeedMod": 50,
+				"FlatMovementSpeedMod": 45,
 				"FlatMagicPenetrationMod": 18,
-				"PercentMagicPenetrationMod": 0.07
+				"PercentMagicPenetrationMod": 0.08
 			},
 			"gold": {
-				"base": 500,
+				"base": 0,
 				"purchasable": true,
-				"total": 1600,
-				"sell": 1120
+				"total": 1100,
+				"sell": 770
 			},
 			"image": "3175.png",
 			"mapMask": 1,
@@ -5462,39 +5961,6 @@
 			],
 			"isBoots": true,
 			"epicness": 7,
-			"itemCalculations": {
-				"{5e4a31e2}": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1
-						}
-					]
-				}
-			}
-		},
-		"3176": {
-			"id": "3176",
-			"name": "Forever Forward",
-			"searchString": "foreverforward;boots",
-			"stats": {
-				"FlatMovementSpeedMod": 55
-			},
-			"gold": {
-				"base": 500,
-				"purchasable": true,
-				"total": 1400,
-				"sell": 980
-			},
-			"image": "3176.png",
-			"mapMask": 1,
-			"from": [],
-			"isBoots": true,
-			"epicness": 7,
-			"dataValues": {
-				"MSBonus": 45,
-				"MoveSpeedMultiplier": 0.08
-			},
 			"itemCalculations": {
 				"{5e4a31e2}": {
 					"mFormulaParts": [
@@ -5522,7 +5988,7 @@
 				"sell": 665
 			},
 			"image": "3177.png",
-			"mapMask": 2,
+			"mapMask": 3,
 			"epicness": 1,
 			"effectAmount": [
 				10
@@ -5539,15 +6005,15 @@
 			"name": "Umbral Glaive",
 			"searchString": "umbralglaive;lethality;damage;vision;cooldownreduction;armorpenetration;abilityhaste",
 			"stats": {
-				"FlatPhysicalDamageMod": 55,
-				"AbilityHasteMod": 10,
-				"PhysicalLethality": 15
+				"FlatPhysicalDamageMod": 60,
+				"AbilityHasteMod": 15,
+				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 450,
+				"base": 750,
 				"purchasable": true,
-				"total": 2500,
-				"sell": 1750
+				"total": 2800,
+				"sell": 1960
 			},
 			"image": "3179.png",
 			"mapMask": 3,
@@ -5557,10 +6023,12 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"LethalityAmount": 15,
+				"LethalityAmount": 18,
 				"MeleeDamage": 3,
 				"RangedDamage": 2,
-				"Cooldown": 90
+				"Cooldown": 90,
+				"OutOfVisionDuration": 1,
+				"AttackReadyDuration": 4
 			},
 			"itemCalculations": {
 				"MeleeItemCalcValue": {
@@ -5601,6 +6069,27 @@
 							"mNumber": 2
 						}
 					]
+				},
+				"ProcDamage": {
+					"mFormulaParts": [
+						{
+							"mNumber": 50
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 1.5
+						}
+					]
+				},
+				"TotalWardDamage": {
+					"mFormulaParts": [
+						{
+							"mNumber": 3
+						}
+					],
+					"mRangedMultiplier": {
+						"mNumber": 0.67
+					}
 				}
 			},
 			"effectAmount": [
@@ -5731,7 +6220,7 @@
 				"sell": 665
 			},
 			"image": "3184.png",
-			"mapMask": 2,
+			"mapMask": 3,
 			"epicness": 1,
 			"categories": {
 				"fighter": true,
@@ -6003,14 +6492,14 @@
 		"3508": {
 			"id": "3508",
 			"name": "Essence Reaver",
-			"searchString": "essencereaver;damage;criticalstrike;manaregen;cooldownreduction;onhit;abilityhaste",
+			"searchString": "essencereaver;er;spellblade;damage;criticalstrike;manaregen;cooldownreduction;onhit;abilityhaste",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 60,
-				"AbilityHasteMod": 15
+				"FlatPhysicalDamageMod": 55,
+				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 375,
+				"base": 350,
 				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
@@ -6018,61 +6507,39 @@
 			"image": "3508.png",
 			"mapMask": 3,
 			"from": [
-				"1037",
+				"3057",
 				"3133",
 				"1018"
 			],
 			"isOnHit": true,
 			"epicness": 5,
 			"dataValues": {
-				"MaxStacks": 3,
-				"StackDuration": 6,
-				"ManaRefund": 0.02,
 				"FlatManaRefund": 15,
-				"ManaRefundRatio": 0.1
+				"ManaRefundRatio": 0.15,
+				"BaseADRatio": 1.25,
+				"CritChanceMultiplier": 50,
+				"SpellbladeCooldown": 1.5,
+				"Cooldown": 1.5
 			},
 			"itemCalculations": {
-				"{c46604e3}": {
+				"TotalManaRefund": {
+					"mMultiplier": {
+						"mNumber": 0.5
+					},
+					"mExpandedTooltipCalculationDisplay": 0,
+					"mModifiedGameCalculation": "SpellbladeDamage"
+				},
+				"SpellbladeDamage": {
+					"mExpandedTooltipCalculationDisplay": 0,
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.04
-						}
-					]
-				},
-				"{4dd9d0a3}": {
-					"mMultiplier": {
-						"mDataValue": "MaxStacks"
-					},
-					"mModifiedGameCalculation": "{c46604e3}"
-				},
-				"ADPerLevel": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 2,
-							"mEndValue": 15
-						}
-					]
-				},
-				"{24eb8de7}": {
-					"mMultiplier": {
-						"mDataValue": "MaxStacks"
-					},
-					"mFormulaParts": [
-						{
-							"mSpellCalculationKey": "ADPerLevel"
-						}
-					]
-				},
-				"TotalManaRefund": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "FlatManaRefund"
+							"mStatFormula": 1,
+							"mDataValue": "BaseADRatio"
 						},
 						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ManaRefundRatio"
+							"mStat": 8,
+							"mDataValue": "CritChanceMultiplier"
 						}
 					]
 				}
@@ -6292,6 +6759,7 @@
 			"image": "3802.png",
 			"mapMask": 3,
 			"into": [
+				"2522",
 				"3003",
 				"6655",
 				"2503",
@@ -6485,7 +6953,7 @@
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
-				"GP10": 5,
+				"GP10": 9,
 				"Cooldown": 18,
 				"MeleeShieldDRPercentage": 0.35,
 				"RangedShieldDRPercentage": 0.25,
@@ -6495,7 +6963,7 @@
 				"SlowAmount": 0.5
 			},
 			"effectAmount": [
-				5
+				9
 			],
 			"categories": {
 				"support": true
@@ -6523,7 +6991,7 @@
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
-				"GP10": 5,
+				"GP10": 9,
 				"RechargeTime": 8,
 				"BubbleBlueDmgRed": 140,
 				"BubblePurpleMagicDmg": 90,
@@ -6562,7 +7030,7 @@
 				}
 			},
 			"effectAmount": [
-				5
+				9
 			],
 			"categories": {
 				"support": true
@@ -6590,7 +7058,7 @@
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
-				"GP10": 5,
+				"GP10": 9,
 				"APRatio": 0.15,
 				"PercentHPDamage": 0.03,
 				"MonsterDamageCap": 300,
@@ -6623,7 +7091,7 @@
 				}
 			},
 			"effectAmount": [
-				5
+				9
 			],
 			"categories": {
 				"support": true
@@ -6651,7 +7119,7 @@
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
-				"GP10": 5,
+				"GP10": 9,
 				"Cooldown": 30,
 				"BuffDuration": 2.5,
 				"MoveSpeedBuff": 0.2,
@@ -6674,7 +7142,7 @@
 				}
 			},
 			"effectAmount": [
-				5
+				9
 			],
 			"categories": {
 				"support": true
@@ -6702,7 +7170,7 @@
 			"dataValues": {
 				"StealthWardCap": 4,
 				"IncreasedWardRange": 300,
-				"GP10": 5,
+				"GP10": 9,
 				"BaseADRatio": 0.1,
 				"SheenMult": 1,
 				"SpellbladeCooldown": 1.5,
@@ -6753,7 +7221,7 @@
 				}
 			},
 			"effectAmount": [
-				5
+				9
 			],
 			"categories": {
 				"support": true
@@ -6928,21 +7396,21 @@
 			"name": "Horizon Focus",
 			"searchString": "horizonfocus;snipe;lockon;spelldamage;abilityhaste",
 			"stats": {
-				"FlatMagicDamageMod": 125,
+				"FlatMagicDamageMod": 75,
 				"AbilityHasteMod": 25
 			},
 			"gold": {
-				"base": 200,
+				"base": 600,
 				"purchasable": true,
-				"total": 2750,
-				"sell": 1925
+				"total": 2700,
+				"sell": 1890
 			},
 			"image": "4628.png",
 			"mapMask": 3,
 			"from": [
 				"3108",
 				"3108",
-				"1026"
+				"1052"
 			],
 			"epicness": 5,
 			"dataValues": {
@@ -6952,7 +7420,8 @@
 				"VisionRadius": 1400,
 				"VisionDuration": 2,
 				"SecondaryBuffDuration": 3,
-				"Cooldown": 30
+				"Cooldown": 30,
+				"DamageAmp": 0.1
 			},
 			"categories": {
 				"mage": true
@@ -7151,36 +7620,6 @@
 				"mage": true
 			}
 		},
-		"4638": {
-			"id": "4638",
-			"name": "Watchful Wardstone",
-			"searchString": "watchfulwardstone;sightstone;ward;health;magicresist;armor;vision;active;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 15,
-				"FlatHPPoolMod": 150,
-				"FlatArmorMod": 10,
-				"AbilityHasteMod": 10
-			},
-			"gold": {
-				"base": 1100,
-				"purchasable": true,
-				"total": 1100,
-				"sell": 770
-			},
-			"image": "4638.png",
-			"mapMask": 1,
-			"into": [
-				"4643"
-			],
-			"epicness": 4,
-			"dataValues": {
-				"MaxJammerCharges": 3,
-				"NewWardMax": 3
-			},
-			"categories": {
-				"support": true
-			}
-		},
 		"4642": {
 			"id": "4642",
 			"name": "Bandleglass Mirror",
@@ -7210,39 +7649,6 @@
 				"2022"
 			],
 			"epicness": 4,
-			"categories": {
-				"support": true
-			}
-		},
-		"4643": {
-			"id": "4643",
-			"name": "Vigilant Wardstone",
-			"searchString": "vigilantwardstone;sightstone;health;magicresist;armor;vision;active;cooldownreduction;abilityhaste",
-			"stats": {
-				"FlatSpellBlockMod": 30,
-				"FlatHPPoolMod": 250,
-				"FlatArmorMod": 25,
-				"AbilityHasteMod": 20
-			},
-			"gold": {
-				"base": 1200,
-				"purchasable": true,
-				"total": 2300,
-				"sell": 1610
-			},
-			"image": "4643.png",
-			"mapMask": 1,
-			"from": [
-				"4638"
-			],
-			"epicness": 5,
-			"dataValues": {
-				"MaxJammerCharges": 3,
-				"WardIncrease": 1,
-				"NewWardMax": 4,
-				"BonusStatMod": 0.2,
-				"BaseWardMax": 3
-			},
 			"categories": {
 				"support": true
 			}
@@ -7482,7 +7888,7 @@
 			"searchString": "sunderedsky;health;damage;cooldownreduction;abilityhaste",
 			"stats": {
 				"FlatHPPoolMod": 400,
-				"FlatPhysicalDamageMod": 40,
+				"FlatPhysicalDamageMod": 45,
 				"AbilityHasteMod": 10
 			},
 			"gold": {
@@ -7500,9 +7906,9 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"CritModifier": 1,
+				"CritModifier": 0.8,
 				"HealAmount": 0.2,
-				"Cooldown": 8,
+				"Cooldown": 10,
 				"HealRatio": 1,
 				"MissingHealthHeal": 0.06,
 				"RangedHealMod": 0.5
@@ -7688,51 +8094,16 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"MaxCounter": 2,
-				"HealShieldAmpPerStack": 5,
-				"PendantOfVitalityBuffDuration": 6,
-				"DamageRange": 1000,
-				"EnemiesToHit": 1,
-				"ShardHeal": 65,
-				"ShardDamage": 50
+				"DamageStorageRate": 0.35,
+				"ChargeToHealConversion": 1,
+				"MinimumHealToTrigger": 10
 			},
 			"itemCalculations": {
-				"{041fa779}": {
-					"mMultiplier": {
-						"mDataValue": "MaxCounter"
-					},
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"tooltipOnly": true,
+				"MaxCharges": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "HealShieldAmpPerStack"
-						}
-					]
-				},
-				"{1df02915}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 20,
-							"mBreakpoints": [
-								{
-									"mLevel": 9,
-									"mBonusPerLevelAtAndAfter": 4
-								}
-							]
-						}
-					]
-				},
-				"{df7fba06}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 30,
-							"mBreakpoints": [
-								{
-									"mLevel": 9,
-									"mBonusPerLevelAtAndAfter": 10
-								}
-							]
+							"mLevel1Value": 80,
+							"mInitialBonusPerLevel": 10
 						}
 					]
 				}
@@ -7900,8 +8271,8 @@
 		},
 		"6655": {
 			"id": "6655",
-			"name": "Luden's Companion",
-			"searchString": "ludenscompanion;boomstick;gun;spelldamage;mana;cooldownreduction;abilityhaste",
+			"name": "Luden's Echo",
+			"searchString": "ludensecho;spelldamage;mana;cooldownreduction;abilityhaste",
 			"stats": {
 				"FlatMPPoolMod": 600,
 				"FlatMagicDamageMod": 100,
@@ -8242,6 +8613,7 @@
 			"image": "6670.png",
 			"mapMask": 3,
 			"into": [
+				"2523",
 				"3036",
 				"6673"
 			],
@@ -8451,9 +8823,9 @@
 			"image": "6690.png",
 			"mapMask": 3,
 			"into": [
+				"4003",
 				"6672",
 				"3142",
-				"4003",
 				"3087"
 			],
 			"from": [

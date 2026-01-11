@@ -1,5 +1,5 @@
 {
-	"version": "15.24.1",
+	"version": "16.1.1",
 	"data": {
 		"Aatrox": {
 			"id": "Aatrox",
@@ -31,8 +31,8 @@
 			},
 			"image": "Aatrox.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Ahri": {
@@ -197,7 +197,8 @@
 			},
 			"image": "Ambessa.png",
 			"roles": {
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Amumu": {
@@ -355,8 +356,8 @@
 				"crit": 0,
 				"critperlevel": 0,
 				"attackdamage": 59,
-				"attackdamageperlevel": 3.45,
-				"attackspeedperlevel": 3.33,
+				"attackdamageperlevel": 3,
+				"attackspeedperlevel": 3,
 				"attackspeed": 0.658,
 				"attackspeedratio": 0.658
 			},
@@ -738,7 +739,7 @@
 				"hpperlevel": 104,
 				"mp": 450,
 				"mpperlevel": 40,
-				"movespeed": 328,
+				"movespeed": 335,
 				"armor": 18,
 				"armorperlevel": 4.7,
 				"spellblock": 32,
@@ -890,8 +891,8 @@
 			},
 			"image": "Diana.png",
 			"roles": {
-				"jungle": true,
-				"middle": true
+				"middle": true,
+				"jungle": true
 			}
 		},
 		"DrMundo": {
@@ -924,8 +925,8 @@
 			},
 			"image": "DrMundo.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Draven": {
@@ -951,7 +952,7 @@
 				"crit": 0,
 				"critperlevel": 0,
 				"attackdamage": 62,
-				"attackdamageperlevel": 3.6,
+				"attackdamageperlevel": 3,
 				"attackspeedperlevel": 2.7,
 				"attackspeed": 0.679,
 				"attackspeedratio": 0.679
@@ -991,8 +992,8 @@
 			},
 			"image": "Ekko.png",
 			"roles": {
-				"jungle": true,
-				"middle": true
+				"middle": true,
+				"jungle": true
 			}
 		},
 		"Elise": {
@@ -1025,6 +1026,7 @@
 			},
 			"image": "Elise.png",
 			"roles": {
+				"support": true,
 				"jungle": true
 			}
 		},
@@ -1586,8 +1588,8 @@
 			},
 			"image": "Irelia.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Ivern": {
@@ -1719,8 +1721,8 @@
 			},
 			"image": "Jax.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Jayce": {
@@ -1753,7 +1755,8 @@
 			},
 			"image": "Jayce.png",
 			"roles": {
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Jhin": {
@@ -1813,7 +1816,7 @@
 				"critperlevel": 0,
 				"attackdamage": 59,
 				"attackdamageperlevel": 3.25,
-				"attackspeedperlevel": 1.4,
+				"attackspeedperlevel": 1,
 				"attackspeed": 0.625,
 				"attackspeedratio": 0.625
 			},
@@ -2472,8 +2475,8 @@
 				"crit": 0,
 				"critperlevel": 0,
 				"attackdamage": 60,
-				"attackdamageperlevel": 2.9,
-				"attackspeedperlevel": 3.3,
+				"attackdamageperlevel": 2.5,
+				"attackspeedperlevel": 2.5,
 				"attackspeed": 0.638,
 				"attackspeedratio": 0.638
 			},
@@ -2545,8 +2548,8 @@
 			},
 			"image": "Lux.png",
 			"roles": {
-				"support": true,
-				"middle": true
+				"middle": true,
+				"support": true
 			}
 		},
 		"Malphite": {
@@ -2579,8 +2582,8 @@
 			},
 			"image": "Malphite.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Malzahar": {
@@ -2712,8 +2715,8 @@
 			},
 			"image": "Mel.png",
 			"roles": {
-				"support": true,
-				"middle": true
+				"middle": true,
+				"support": true
 			}
 		},
 		"Milio": {
@@ -2755,8 +2758,8 @@
 			"name": "Miss Fortune",
 			"partype": "Mana",
 			"stats": {
-				"hp": 640,
-				"hpperlevel": 103,
+				"hp": 625,
+				"hpperlevel": 100,
 				"mp": 300,
 				"mpperlevel": 40,
 				"movespeed": 325,
@@ -2845,8 +2848,7 @@
 			},
 			"image": "Morgana.png",
 			"roles": {
-				"support": true,
-				"middle": true
+				"support": true
 			}
 		},
 		"Naafiri": {
@@ -2879,6 +2881,7 @@
 			},
 			"image": "Naafiri.png",
 			"roles": {
+				"middle": true,
 				"jungle": true
 			}
 		},
@@ -3071,7 +3074,7 @@
 				"critperlevel": 0,
 				"attackdamage": 60,
 				"attackdamageperlevel": 2,
-				"attackspeedperlevel": 2.25,
+				"attackspeedperlevel": 2,
 				"attackspeed": 0.697,
 				"attackspeedratio": 0.67
 			},
@@ -3275,8 +3278,6 @@
 			},
 			"image": "Pantheon.png",
 			"roles": {
-				"jungle": true,
-				"top": true,
 				"support": true
 			}
 		},
@@ -3376,8 +3377,8 @@
 			},
 			"image": "Qiyana.png",
 			"roles": {
-				"jungle": true,
-				"middle": true
+				"middle": true,
+				"jungle": true
 			}
 		},
 		"Quinn": {
@@ -4301,8 +4302,8 @@
 			},
 			"image": "Sylas.png",
 			"roles": {
-				"jungle": true,
-				"middle": true
+				"middle": true,
+				"jungle": true
 			}
 		},
 		"Syndra": {
@@ -4691,8 +4692,8 @@
 				"crit": 0,
 				"critperlevel": 0,
 				"attackdamage": 59,
-				"attackdamageperlevel": 3.1,
-				"attackspeedperlevel": 3.38,
+				"attackdamageperlevel": 3,
+				"attackspeedperlevel": 3,
 				"attackspeed": 0.679,
 				"attackspeedratio": 0.679
 			},
@@ -5061,8 +5062,8 @@
 			},
 			"image": "Vladimir.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Volibear": {
@@ -5095,8 +5096,8 @@
 			},
 			"image": "Volibear.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Warwick": {
@@ -5228,8 +5229,8 @@
 			},
 			"image": "Xerath.png",
 			"roles": {
-				"support": true,
-				"middle": true
+				"middle": true,
+				"support": true
 			}
 		},
 		"XinZhao": {
@@ -5295,8 +5296,8 @@
 			},
 			"image": "Yasuo.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Yone": {
@@ -5329,8 +5330,8 @@
 			},
 			"image": "Yone.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Yorick": {
@@ -5462,8 +5463,8 @@
 			},
 			"image": "Zaahen.png",
 			"roles": {
-				"jungle": true,
-				"top": true
+				"top": true,
+				"jungle": true
 			}
 		},
 		"Zac": {
@@ -5529,8 +5530,8 @@
 			},
 			"image": "Zed.png",
 			"roles": {
-				"jungle": true,
-				"middle": true
+				"middle": true,
+				"jungle": true
 			}
 		},
 		"Zeri": {

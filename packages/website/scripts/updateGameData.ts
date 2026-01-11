@@ -115,7 +115,6 @@ if (!itemData || itemData?.version !== latestVersion) {
 		'2140',	// elixir of wrath
 		'6032',	// stat bonus
 		'2421', // shattered armguard
-		'3146',	// hextech gunblade, not sure why these and below say they are in aram
 		'3039',	// atma's reckoning
 		'3095', // stormrazor
 	];

@@ -1,5 +1,5 @@
 {
-	"version": "15.24.1",
+	"version": "16.1.1",
 	"data": {
 		"items": {
 			"1001": {
@@ -83,13 +83,7 @@
 			"1055": {
 				"tooltipShop": {
 					"subtitleLeft": "Physical Offense",
-					"subtitleRight": "Unique: Starter",
-					"extra": [
-						[
-							"<passive>Life Draining</passive>",
-							"Return @HealMultiplier*100@% of damage dealt as <healing>Health</healing>. Reduced to @HealingReduction*100@% effectiveness for area of effect spells and pet damage."
-						]
-					]
+					"subtitleRight": "Unique: Starter"
 				}
 			},
 			"1056": {
@@ -154,6 +148,7 @@
 			},
 			"2051": {
 				"tooltipShop": {
+					"subtitleRight": "Unique: Starter",
 					"extra": [
 						[
 							"<passive>Recovery</passive>",
@@ -250,6 +245,115 @@
 					]
 				}
 			},
+			"2510": {
+				"tooltipShop": {
+					"subtitleRight": "Unique: Spellblade",
+					"extra": [
+						[
+							"<passive>Spellblade</passive> {{ Item_Cooldown }}",
+							"After using an Ability, your next Attack deals <magicDamage>@SpellbladeDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and applies {{ Item_Keyword_OnHit }} effects an additional time."
+						]
+					]
+				}
+			},
+			"2512": {
+				"tooltipShop": {
+					"extra": [
+						[
+							"<passive>Night Vigil</passive>",
+							"Gain @UltimateHaste@ Ultimate Ability Haste."
+						],
+						[
+							"<passive>Opening Barrage</passive> {{Item_Cooldown}}",
+							"After casting your Ultimate, your next @NumberOfAttacks@ basic attacks within @Duration@ seconds gain <attackSpeed>@BonusAS*100@% Attack Speed</attackSpeed> and Critically Strike for @CritModifier*100@% of your normal Critical Strike damage. If an attack would already Critically Strike, it deals normal Critical Strike damage and also deals <trueDamage>@BonusTrueDamage*100@% bonus true damage</trueDamage>."
+						]
+					]
+				}
+			},
+			"2517": {
+				"tooltipShop": {
+					"extra": [
+						[
+							"<passive>Famine</passive>",
+							"Gain @HasteFromAD@ Ability Haste."
+						],
+						[
+							"<passive>Feast</passive>",
+							"When a champion that you damaged within @TakedownWindow@ seconds dies, gain <omnivamp>@OmnivampOnTakedown*100@% Omnivamp</omnivamp> for @OmnivampDuration@ seconds. "
+						]
+					]
+				}
+			},
+			"2520": {
+				"tooltipShop": {
+					"extra": [
+						[
+							"<passive>Shaped Charge</passive> {{Item_Cooldown}}",
+							"Dealing Ability damage to a Champion or Epic Monster deals an additional <trueDamage>@AbilityDamageCalc@ true damage</trueDamage>."
+						],
+						[
+							"<passive>Sabotage</passive>",
+							"Taking down a champion within @TakedownWindow@ seconds of damaging them grants Sabotage for @BuffDuration@ seconds. While you have Sabotage, your next Attack against an Epic Monster or Turret deals an additional <trueDamage>@DamageCalc@ true damage</trueDamage> over @DoTDuration@ seconds. "
+						]
+					]
+				}
+			},
+			"2522": {
+				"tooltipShop": {
+					"subtitleLeft": "Mana Empowerment"
+				}
+			},
+			"2523": {
+				"tooltipShop": {
+					"extra": [
+						[
+							"<passive>Magnification</passive>",
+							"Deal up to @MaxDamageAmp*100@% increased damage with Attacks, based on how far away the enemy is (max damage at @MaxRange@ range)."
+						],
+						[
+							"<passive>Arcane Aim</passive>",
+							"When a champion that you damaged within @TakedownWindow@ seconds dies, gain @ExtraRange@ additional attack range for @Duration@ seconds. "
+						]
+					]
+				}
+			},
+			"2524": {
+				"tooltipShop": {
+					"extra": [
+						[
+							"<passive>Fanfare</passive>",
+							"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion grants Fanfare for @BuffDuration@ seconds. Fanfare grants you <speed>@MoveSpeed@ Move Speed</speed>. While you have Fanfare, nearby allies, including yourself, gain <attackSpeed>@AuraAttackSpeed@ Attack Speed</attackSpeed>."
+						]
+					]
+				}
+			},
+			"2525": {
+				"tooltipShop": {
+					"subtitleRight": "Unique: Lifeline",
+					"extra": [
+						[
+							"<passive>Lifeline</passive> {{ Item_Cooldown }}",
+							"Taking damage that would reduce your Health below @LowHealthThreshold*100@% causes you to gain <health>@MaxHealthGain@ maximum Health</health> for @Duration@ seconds, then heal <health>@TotalHealthRegen@ Health</health> over the duration. While regenerating Health, you gain @SizeIncrease*100@% increased Size, @MSAmount*100@% Move Speed, and @TenacityAmount*100@% Tenacity. "
+						]
+					]
+				}
+			},
+			"2526": {
+				"tooltipShop": {
+					"subtitleRight": "Semi-Unique: Manaflow",
+					"extra": [
+						[
+							"<passive>Harmony</passive>",
+							"Gain @BonusHSPCalc@% Heal and Shield Power."
+						],
+						[
+							"<passive>Manaflow</passive> %i:cooldown% (@ManaChargeAmmoCD@s, max @ManaChargeMaxAmmo@ charges)",
+							"Landing Abilities grants <scaleMana>@ManaPerCharge@ max Mana</scaleMana> (doubled vs. champions).",
+							"Transforms into <rarityLegendary>Diadem of Songs</rarityLegendary> at <scaleMana>@MaxMana@ max Mana</scaleMana>."
+						]
+					]
+				}
+			},
 			"3002": {
 				"tooltipShop": {
 					"subtitleLeft": "Team Mobility",
@@ -269,7 +373,7 @@
 			"3003": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Scaling",
-					"subtitleRight": "Unique: Manaflow",
+					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
 							"<passive>Awe</passive>",
@@ -286,7 +390,7 @@
 			"3004": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Scaling",
-					"subtitleRight": "Unique: Manaflow",
+					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
 							"<passive>Awe</passive>",
@@ -312,21 +416,6 @@
 						[
 							"<passive>Fleetfooted</passive>",
 							"Reduce the effectiveness of <keyword>Slows</keyword> by @SlowResistTooltip@%."
-						]
-					]
-				}
-			},
-			"3010": {
-				"tooltipShop": {
-					"subtitleLeft": "Map Mobility",
-					"extra": [
-						[
-							"<passive>Synchrony</passive>",
-							"Gain <speed>@MSBonus@ Move Speed</speed> when out of combat."
-						],
-						[
-							"<passive>Symbiosis</passive>",
-							"After traveling @MaxDistance@ units of distance, transform into <rarityLegendary>Synchronized Souls</rarityLegendary>."
 						]
 					]
 				}
@@ -357,7 +446,7 @@
 			},
 			"3032": {
 				"tooltipShop": {
-					"subtitleLeft": "Crit Amp",
+					"subtitleLeft": "Crit Stacking",
 					"extra": [
 						[
 							"<passive>Practice Makes Lethal</passive>",
@@ -391,13 +480,19 @@
 			"3036": {
 				"tooltipShop": {
 					"subtitleLeft": "Anti-Armor",
-					"subtitleRight": "Unique: Fatality"
+					"subtitleRight": "Unique: Fatality",
+					"extra": [
+						[
+							"<passive>Giant Slayer</passive>",
+							"Deal up to @MaxBonusDamagePercent*100@% bonus damage against champions based on their bonus Health. Maximum damage bonus reached at @MaxBonusHealth@ bonus Health."
+						]
+					]
 				}
 			},
 			"3040": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Scaling",
-					"subtitleRight": "Unique: Manaflow",
+					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
 							"<passive>Awe</passive>",
@@ -426,7 +521,7 @@
 			"3042": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Scaling",
-					"subtitleRight": "Unique: Manaflow",
+					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
 							"<passive>Awe</passive>",
@@ -476,6 +571,10 @@
 				"tooltipShop": {
 					"subtitleLeft": "Enhance Ultimate",
 					"extra": [
+						[
+							"<passive>Cryocombustion</passive>",
+							"Gain @UltimateHaste@ Ultimate Ability Haste."
+						],
 						[
 							"<passive>Frostfire Tempest</passive> {{ Item_Cooldown }}",
 							"Casting your Ultimate summons a storm around you for @Duration@ seconds. The storm deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second to enemy champions and <keyword>Slows</keyword> them by @SlowAmount*100@%."
@@ -546,7 +645,7 @@
 			"3070": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Scaling",
-					"subtitleRight": "Unique: Manaflow",
+					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
 							"<passive>Manaflow</passive> %i:cooldown% (@ManaChargeAmmoCD@s, max @ManaChargeMaxAmmo@ charges)",
@@ -765,6 +864,21 @@
 					]
 				}
 			},
+			"3097": {
+				"tooltipShop": {
+					"subtitleLeft": "Burst Enemies",
+					"extra": [
+						[
+							"{{ Item_Energized }}"
+						],
+						[
+							"<passive>Bolt</passive>",
+							"Your <keyword>Energized Attack</keyword> applies <magicDamage>@TotalProcDamage@ bonus magic damage</magicDamage> and grants <speed>@BuffStrength*100@% Move Speed</speed> for @BuffDuration@s.",
+							""
+						]
+					]
+				}
+			},
 			"3100": {
 				"tooltipShop": {
 					"subtitleLeft": "Burst Damage",
@@ -788,9 +902,6 @@
 						]
 					]
 				}
-			},
-			"3105": {
-				"tooltipShop": {}
 			},
 			"3107": {
 				"tooltipShop": {
@@ -829,6 +940,7 @@
 			},
 			"3112": {
 				"tooltipShop": {
+					"subtitleRight": "Unique: Starter",
 					"extra": [
 						[
 							"<passive>Recovery</passive>",
@@ -884,7 +996,7 @@
 			"3119": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Scaling",
-					"subtitleRight": "Unique: Manaflow",
+					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
 							"<passive>Awe</passive>",
@@ -901,7 +1013,7 @@
 			"3121": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Scaling",
-					"subtitleRight": "Unique: Manaflow",
+					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
 							"<passive>Awe</passive>",
@@ -1135,7 +1247,7 @@
 						],
 						[
 							"<passive>Noxian Fervor</passive>",
-							"Gain @MSAdaptiveRatio*100@% of your <speed>Move Speed</speed> as Adaptive Force. "
+							"Gain @MSAdaptiveRatio*100@% of your <speed>Move Speed</speed> as Adaptive Force."
 						]
 					]
 				}
@@ -1159,13 +1271,7 @@
 			},
 			"3172": {
 				"tooltipShop": {
-					"subtitleLeft": "Boots Upgrade",
-					"extra": [
-						[
-							"<passive>Noxian Gait</passive>",
-							"Attacks against Champions grant <speed>@MSAmount@ Move Speed</speed> {{ Item_Keyword_OnHit }} decaying over @Duration@ seconds."
-						]
-					]
+					"subtitleLeft": "Boots Upgrade"
 				}
 			},
 			"3173": {
@@ -1195,34 +1301,22 @@
 			"3175": {
 				"tooltipShop": {}
 			},
-			"3176": {
-				"tooltipShop": {
-					"extra": [
-						[
-							"<passive>Voidborn</passive>",
-							"Gain Empowered Recall."
-						],
-						[
-							"<passive>Noxian Synchrony</passive>",
-							"Gain <speed>@MSBonus@ Move Speed</speed> and <speed>@MoveSpeedMultiplier*100@% total Move Speed</speed> when out of combat."
-						]
-					]
-				}
-			},
 			"3177": {
-				"tooltipShop": {}
+				"tooltipShop": {
+					"subtitleRight": "Unique: Starter"
+				}
 			},
 			"3179": {
 				"tooltipShop": {
 					"subtitleLeft": "Anti-Vision",
 					"extra": [
 						[
-							"<passive>Blackout</passive> {{ Item_Cooldown}}",
-							"When you are near enemy Stealth Wards and traps, reveal them for @Effect2Amount@ seconds."
+							"<passive>Nightstalker</passive>",
+							"After being unseen by enemies for @OutOfVisionDuration@ second(s), your next attack against a champion deals an additional <trueDamage>@ProcDamage@ true damage</trueDamage>."
 						],
 						[
-							"<passive>Extinguish</passive>",
-							"Attacks do {{ Item_Melee_Ranged_Split_Dynamic }} damage to Wards."
+							"<passive>Blackout</passive> {{ Item_Cooldown}}",
+							"When you are near enemy Stealth Wards and traps, reveal them for @Effect2Amount@ seconds. While revealing wards, your attacks deal @TotalWardDamage@ damage to them."
 						]
 					]
 				}
@@ -1243,7 +1337,9 @@
 				}
 			},
 			"3184": {
-				"tooltipShop": {}
+				"tooltipShop": {
+					"subtitleRight": "Unique: Starter"
+				}
 			},
 			"3190": {
 				"tooltipShop": {
@@ -1288,10 +1384,11 @@
 			"3508": {
 				"tooltipShop": {
 					"subtitleLeft": "Mana Restoration",
+					"subtitleRight": "Unique: Spellblade",
 					"extra": [
 						[
-							"<passive>Essence Drain</passive>",
-							"Attacks grant <scaleMana>@TotalManaRefund@ Mana</scaleMana> {{ Item_Keyword_OnHit }}.",
+							"<passive>Spellblade</passive> {{ Item_Cooldown }}",
+							"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> and grants <scaleMana>@TotalManaRefund@ Mana</scaleMana> {{ Item_Keyword_OnHit }}.",
 							""
 						]
 					]
@@ -1487,7 +1584,7 @@
 					"extra": [
 						[
 							"<passive>Hypershot</passive>",
-							"Dealing Ability damage to champions at @SnipeRange@ range or greater <keywordStealth>Reveals</keywordStealth> them for @BuffDuration@ seconds. "
+							"Dealing Ability damage to champions at @SnipeRange@ range or greater <keywordStealth>Reveals</keywordStealth> them for @BuffDuration@ seconds. Deal @DamageAmp*100@% increased damage to enemies <keywordStealth>Revealed</keywordStealth> by <passive>Hypershot</passive>."
 						],
 						[
 							"<passive>Focus</passive> {{ Item_Cooldown }}",
@@ -1539,34 +1636,8 @@
 					]
 				}
 			},
-			"4638": {
-				"tooltipShop": {
-					"subtitleLeft": "Control Wards",
-					"extra": [
-						[
-							"<passive>Arcane Cache</passive>",
-							"This item can store up to @MaxJammerCharges@ purchased Control Wards."
-						]
-					]
-				}
-			},
 			"4642": {
 				"tooltipShop": {}
-			},
-			"4643": {
-				"tooltipShop": {
-					"subtitleLeft": "Control Wards",
-					"extra": [
-						[
-							"<passive>Arcane Cache</passive>",
-							"This item can store up to @MaxJammerCharges@ purchased Control Wards."
-						],
-						[
-							"<passive>Behold</passive>",
-							"Increase your Stealth Ward and Control Ward placement caps by @WardIncrease@."
-						]
-					]
-				}
 			},
 			"4645": {
 				"tooltipShop": {
@@ -1626,7 +1697,7 @@
 					"extra": [
 						[
 							"<passive>Lightshield Strike</passive> {{ Item_Cooldown }} per target",
-							"Your first Attack against a champion <attention>Critically Strikes</attention> and <healing>restores {{ Item_Melee_Ranged_Split_Dynamic }} plus @MissingHealthHeal*100@%</healing> of missing Health."
+							"Your first Attack against a champion <attention>Critically Strikes</attention> for @CritModifier*100@% of your normal Critical Strike damage and <healing>restores {{ Item_Melee_Ranged_Split_Dynamic }} plus @MissingHealthHeal*100@%</healing> of missing Health."
 						]
 					]
 				}
@@ -1659,10 +1730,7 @@
 					"extra": [
 						[
 							"<passive>Soul Siphon</passive>",
-							"Damaging a champion grants a <passive>Soul Shard</passive>, up to @MaxCounter@. ",
-							"Healing or Shielding an ally consumes all <passive>Soul Shards</passive> to restore <healing>@ShardHeal@ Health</healing> and deal <magicDamage>@ShardDamage@ magic damage</magicDamage> to the nearest enemy champion per Shard."
-						],
-						[
+							"Gain @DamageStorageRate*100@% of pre-mitigation damage dealt to champions as Soul Charges, up to @MaxCharges@ Charges. Healing or Shielding an ally consumes all <passive>Soul Charges</passive> to restore @ChargeToHealConversion*100@% of that value as <healing>Health</healing>.",
 							""
 						]
 					]
@@ -1711,8 +1779,8 @@
 					"subtitleLeft": "Burst Damage",
 					"extra": [
 						[
-							"<passive>Fire</passive> {{ Item_Cooldown }}",
-							"Damaging Abilities fire @MaxCharges@ Shots that deal <magicDamage>@Damage@ bonus magic damage</magicDamage> to the target and nearby enemies. Remaining Shots fire on the primary target, dealing @RepeatDamageReduction*100@% damage. (Maximum: <magicDamage>@SingleTargetMax@</magicDamage>)",
+							"<passive>Echo</passive> {{ Item_Cooldown }}",
+							"Damaging Abilities fire @MaxCharges@ Echoes that deal <magicDamage>@Damage@ bonus magic damage</magicDamage> to the target and nearby enemies. Remaining Echoes fire on the primary target, dealing @RepeatDamageReduction*100@% damage. (Maximum: <magicDamage>@SingleTargetMax@</magicDamage>)",
 							""
 						]
 					]

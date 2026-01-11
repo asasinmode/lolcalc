@@ -133,6 +133,7 @@ export const KNOWN_TOOLTIP_SHOP_EXTRA_TAGS = [
 	'physicaldamage',	// heartsteel, titanic
 	'magicdamage',	// bami, thornmail
 	'truedamage',	// cosmic drive, shadowflame
+	'health',	// protoplasm harness, no styles
 	'healing',	// guardian angel, warmog
 	'shield',	// fimbulwinter, hexdrinker
 	'lifesteal', // maw of malmortius
@@ -147,5 +148,6 @@ export const KNOWN_TOOLTIP_SHOP_EXTRA_TAGS = [
 	'keyword',	// phantom dancer, zeke's convergence
 	'keywordmajor',	// terminus
 	'keywordstealth',	// horizon focus
-	'slow',	// voltaic cyclosword, seems to be same color as text
+	'slow',	// voltaic cyclosword, no styles
+	'li',
 ];

@@ -330,8 +330,14 @@ onBeforeUnmount(() => {
 const bootItems = [
 	'1001', '3047', '3111', // first col: boots, plated steelcaps, mercury's treads
 	'3006', '3009', '3020', // 2nd col: berserker's greaves, boots of swiftness, sorcerer's shoes
-	'3158', '3010', // 3rd col: ionian boots of lucidity, symbiotic soles
-].map(id => items[id]!);
+	'3158', // 3rd col: ionian boots of lucidity
+].map((id) => {
+	const item = items[id];
+	if (!item) {
+		console.warn(`boot item not found ${id}`);
+	}
+	return item;
+});
 /* eslint-enable antfu/consistent-list-newline */
 
 const bootsPanelPinned = ref(false);
