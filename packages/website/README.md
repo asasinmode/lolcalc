@@ -30,7 +30,7 @@ bun test
 - [x] remove dialog/champ dialog search placeholders, only label
 - [ ] scoreboard ui
   - [ ] buttons functionality
-  - [ ] expand for stats
+  - [ ] expand for stats (runes icon `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/runesicon.png`)
   - [ ] mirror layout
   - [ ] first source/target what's used in damage results
 - [ ] results ui

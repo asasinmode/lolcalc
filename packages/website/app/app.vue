@@ -34,7 +34,7 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 				damage sources
 			</h3>
 			<ul>
-				<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index />
+				<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index :can-remove="damageSources.length > 1" />
 				<li>
 					<button :disabled="!canAddDamageSource">
 						<Icon name="ph:plus-bold" />
@@ -46,7 +46,7 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 				damage targets
 			</h3>
 			<ul>
-				<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index is-right />
+				<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index :can-remove="damageTargets.length > 1" is-right />
 				<li>
 					<button :disabled="!canAddDamageTarget">
 						<Icon name="ph:plus-bold" />
