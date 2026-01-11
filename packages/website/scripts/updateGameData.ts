@@ -14,6 +14,18 @@ console.log('latest version', latestVersion);
 
 let stringtable: Record<string, string>;
 
+const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
+let textData = {
+	version: latestVersion,
+	data: {
+		items: {},
+	},
+} as typeof import('../app/assets/text.json');
+
+if (await textFile.exists()) {
+	textData = await textFile.json();
+}
+
 const championFile = Bun.file(`${import.meta.dir}/../app/assets/champion.json`);
 let championData: typeof import('../app/assets/champion.json') | undefined;
 
@@ -159,7 +171,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 						.toLocaleLowerCase()
 						.replaceAll(/[^a-z;]/g, '')
 						.split(';')
-						.filter(v => v)),
+						.filter(Boolean)),
 				);
 
 				const into = rawInto?.filter((id: string) => filteredItemIds.includes(id));
@@ -184,6 +196,11 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 	const moreItemData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`).then(r => r.json());
 
+	const itemShopItemTooltipDebugData: IItemShopItemTooltipDebugData = {
+		variables: new Map(),
+		tags: [[], new Set()],
+	};
+
 	const SPECIAL_EPICNESS_ITEMS: Record<string, number> = {
 		3869: 7,	// celestial opposition
 		3870: 7,	// dream maker
@@ -199,6 +216,8 @@ if (!itemData || itemData?.version !== latestVersion) {
 			console.warn(`haven't found more data for ${item.name} (${itemId})`);
 			continue;
 		}
+
+		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemShopItemTooltipDebugData);
 
 		if (SPECIAL_EPICNESS_ITEMS[itemId]) {
 			item.epicness = SPECIAL_EPICNESS_ITEMS[itemId];
@@ -293,6 +312,16 @@ if (!itemData || itemData?.version !== latestVersion) {
 	}
 
 	await itemFile.write(JSON.stringify(itemData, null, '\t'));
+
+	// TODO make these known
+	// if (itemShopItemTooltipDebugData.variables.size) {
+	// 	console.warn('Unknown tooltip shop item tooltip variables', itemShopItemTooltipDebugData.variables);
+	// }
+	// if (itemShopItemTooltipDebugData.tags[0].length) {
+	// 	console.warn('Unknown tooltip shop item tooltip tags', itemShopItemTooltipDebugData.tags[1], '\nfound in', itemShopItemTooltipDebugData.tags[0]);
+	// }
+
+	await textFile.write(JSON.stringify(textData, null, '\t'));
 }
 
 const runeFile = Bun.file(`${import.meta.dir}/../app/assets/runes.json`);
@@ -431,108 +460,84 @@ if (!uiData || uiData?.version !== latestVersion) {
 	await uiFile.write(JSON.stringify(uiData, null, '\t'));
 }
 
-const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
-let textData: typeof import('../app/assets/text.json') | undefined;
-
-if (await textFile.exists()) {
-	textData = await textFile.json();
+interface IItemShopItemTooltipDebugData {
+	variables: Map<string, string[]>;
+	tags: [items: string[], tags: Set<string>];
 }
 
-if (!textData || textData?.version !== latestVersion) {
-	console.log('text data not present or outdated, fetching...');
-
-	await loadStringTable();
-
-	const unknownItemTooltipShopExtra = {
-		variables: new Map<string, string[]>(),
-		tags: [[], new Set<string>()] as [items: string[], tags: Set<string>],
-	};
-
-	textData = {
-		version: latestVersion,
-		data: {
-			items: Object.fromEntries(
-				Object.entries(itemData.data).map(([itemId, item]) => {
-					const text = stringtable[`generatedtip_item_${itemId}_tooltipshop`];
-
-					if (!text) {
-						console.warn(`string "generatedtip_item_${itemId}_tooltipshop" not found in the stringtable`);
-					}
-
-					const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
-					const subtitleLeftEndIndex = text.indexOf('</subtitleLeft>');
-					/* move start by tag length + unused {{ Item_BriefIcon... }} */
-					const subtitleLeft = text.slice(subtitleLeftStartIndex + 51, subtitleLeftEndIndex);
-
-					const subtitleRightStartIndex = text.indexOf('<subtitleRight>');
-					const subtitleRightEndIndex = text.indexOf('</subtitleRight>');
-					const subtitleRight = text.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
-
-					const statsStartIndex = text.indexOf('</section><section>');
-					const statsToEnd = text.slice(statsStartIndex + 19);
-					const statsEndIndex = statsToEnd.indexOf('</section>');
-					const extraToEnd = statsToEnd.slice(statsEndIndex + 19);
-					const extraEndIndex = extraToEnd.indexOf('</section>');
-					const rawExtra = extraToEnd.slice(0, extraEndIndex).replace(/\{\{ ?Item_Passive_List ?\}\}/g, '').replaceAll(':</passive>', '</passive>');
-
-					const { unknownVariables } = replaceItemDescriptionVariables(rawExtra, item);
-					if (unknownVariables.length) {
-						unknownItemTooltipShopExtra.variables.set(item.name, unknownVariables);
-					}
-
-					const tags = rawExtra.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
-					const unknownTags = Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_TOOLTIP_SHOP_EXTRA_TAGS.includes(tag));
-					if (unknownTags.length) {
-						unknownItemTooltipShopExtra.tags[0].push(item.name);
-						for (const tag of unknownTags) {
-							unknownItemTooltipShopExtra.tags[1].add(tag);
-						}
-					}
-
-					const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')) : undefined;
-					for (let i = 0; i < (extra?.length || 0); i++) {
-						const replaced: string[] = [];
-						let [heading] = extra![i];
-						let liStartIndex = heading.indexOf('<li>');
-						while (~liStartIndex) {
-							const headingEndIndex = heading.indexOf('</passive>');
-							const newHeading = heading.slice(4, headingEndIndex + 10);
-
-							heading = heading.slice(headingEndIndex + 11);
-							liStartIndex = heading.indexOf('<li>');
-
-							const paragraphEndIndex = ~liStartIndex ? liStartIndex : undefined;
-							replaced.push(newHeading, heading.slice(0, paragraphEndIndex));
-							heading = heading.slice(paragraphEndIndex);
-						}
-
-						if (replaced.length) {
-							extra![i] = replaced;
-						}
-					}
-
-					return [itemId, { tooltipShop: {
-						subtitleLeft: subtitleLeft || undefined,
-						subtitleRight: subtitleRight || undefined,
-						extra,
-					} }];
-				}),
-			),
-		} satisfies ITextData as unknown as NonNullable<(typeof textData)>['data'],
-	};
-
-	if (unknownItemTooltipShopExtra.variables.size) {
-		console.warn('Unknown tooltip shop extra variables', unknownItemTooltipShopExtra.variables);
-	}
-	if (unknownItemTooltipShopExtra.tags[0].length) {
-		console.warn('Unknown tooltip shop extra tags', unknownItemTooltipShopExtra.tags[1], '\nfound in', unknownItemTooltipShopExtra.tags[0]);
+function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug: IItemShopItemTooltipDebugData) {
+	const text = stringtable[mShopTooltip.toLowerCase()];
+	if (!text) {
+		console.warn(`string "${mShopTooltip.toLowerCase()}" not found in the stringtable`);
 	}
 
-	await textFile.write(JSON.stringify(textData, null, '\t'));
+	const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
+	const subtitleLeftEndIndex = text.indexOf('</subtitleLeft>');
+	/* move start by tag length + unused {{ Item_BriefIcon... }} */
+	const subtitleLeft = text.slice(subtitleLeftStartIndex + 51, subtitleLeftEndIndex);
+
+	const subtitleRightStartIndex = text.indexOf('<subtitleRight>');
+	const subtitleRightEndIndex = text.indexOf('</subtitleRight>');
+	const subtitleRight = text.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
+
+	const statsStartIndex = text.indexOf('</section><section>');
+	const statsToEnd = text.slice(statsStartIndex + 19);
+	const statsEndIndex = statsToEnd.indexOf('</section>');
+	let extraToEnd = statsToEnd.slice(statsEndIndex + 19);
+	let extraEndIndex = extraToEnd.indexOf('</section>');
+	/** some items have an empty `<section></section>` between stats and passive, some don't */
+	if (!extraEndIndex) {
+		extraToEnd = extraToEnd.slice(19);
+		extraEndIndex = extraToEnd.indexOf('</section>');
+	}
+	const rawExtra = extraToEnd.slice(0, extraEndIndex).replace(/\{\{ ?Item_Passive_List ?\}\}/g, '').replaceAll(':</passive>', '</passive>');
+
+	const { unknownVariables } = replaceItemDescriptionVariables(rawExtra, item);
+	if (unknownVariables.length) {
+		debug.variables.set(item.name, unknownVariables);
+	}
+
+	const tags = rawExtra.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
+	const unknownTags = Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_TOOLTIP_SHOP_EXTRA_TAGS.includes(tag));
+	if (unknownTags.length) {
+		debug.tags[0].push(item.name);
+		for (const tag of unknownTags) {
+			debug.tags[1].add(tag);
+		}
+	}
+
+	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')) : undefined;
+	for (let i = 0; i < (extra?.length || 0); i++) {
+		const replaced: string[] = [];
+		let [heading] = extra![i];
+		let liStartIndex = heading.indexOf('<li>');
+		while (~liStartIndex) {
+			const headingEndIndex = heading.indexOf('</passive>');
+			const newHeading = heading.slice(4, headingEndIndex + 10);
+
+			heading = heading.slice(headingEndIndex + 11);
+			liStartIndex = heading.indexOf('<li>');
+
+			const paragraphEndIndex = ~liStartIndex ? liStartIndex : undefined;
+			replaced.push(newHeading, heading.slice(0, paragraphEndIndex));
+			heading = heading.slice(paragraphEndIndex);
+		}
+
+		if (replaced.length) {
+			extra![i] = replaced;
+		}
+	}
+
+	(textData.data.items as any)[item.id] = { tooltipShop: {
+		subtitleLeft: subtitleLeft || undefined,
+		subtitleRight: subtitleRight || undefined,
+		extra,
+	} };
 }
 
 async function loadStringTable() {
 	if (!stringtable) {
+		console.log('fetching stringtable...');
 		({ entries: stringtable } = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`).then(r => r.json()));
 	}
 }

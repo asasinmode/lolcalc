@@ -11,9 +11,6 @@ const { _component: RuneSelectDialog } = useRuneSelectDialog();
 
 const damageSources = shallowRef<DamageSource[]>([new DamageSource()]);
 const damageTargets = shallowRef<DamageSource[]>([new DamageSource()]);
-
-const canAddDamageSource = computed(() => !!damageSources.value[0]?.champion.value);
-const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.value);
 </script>
 
 <template>

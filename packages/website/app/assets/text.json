@@ -161,13 +161,25 @@
 			},
 			"2065": {
 				"tooltipShop": {
-					"subtitleLeft": "Team Mobility"
+					"subtitleLeft": "Team Mobility",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Inspiring Speech</active> {{ Item_Cooldown }}",
+							"Grant nearby allies <speed>@ActiveMoveSpeed*100@% Move Speed</speed> for @BuffDuration@ seconds."
+						]
+					]
 				}
 			},
 			"2420": {
 				"tooltipShop": {
 					"subtitleLeft": "Invulnerability",
-					"subtitleRight": "Unique: Stasis"
+					"subtitleRight": "Unique: Stasis",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Time Stop</active> (Single use)",
+							"Enter <keyword>Stasis</keyword> for @Duration@ seconds."
+						]
+					]
 				}
 			},
 			"2422": {
@@ -300,7 +312,13 @@
 			},
 			"2522": {
 				"tooltipShop": {
-					"subtitleLeft": "Mana Empowerment"
+					"subtitleLeft": "Mana Empowerment",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Mana Made Real</active> {{ Item_Cooldown }}",
+							"For @Duration@ seconds, your mana is Empowered. While Empowered, your spells cost @ManaCostIncrease*100@% more Mana, you gain @ManaCalc@ increased Ability damage, Shielding, and Healing, and your basic ability cooldowns progress @CooldownTick*100@% faster."
+						]
+					]
 				}
 			},
 			"2523": {
@@ -905,7 +923,13 @@
 			},
 			"3107": {
 				"tooltipShop": {
-					"subtitleLeft": "Team Heal"
+					"subtitleLeft": "Team Heal",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Intervention</active> {{ Item_Cooldown }}",
+							"Restore <healing>@HealMin@ - @HealMax@ (ally %i:scaleLevel%) Health</healing> to allied units and deal <trueDamage>@DamageToChampions*100@% max Health true damage</trueDamage> to enemy champions after 2.5 seconds."
+						]
+					]
 				}
 			},
 			"3108": {
@@ -1086,12 +1110,24 @@
 			"3139": {
 				"tooltipShop": {
 					"subtitleLeft": "Remove Disables",
-					"subtitleRight": "Unique: Quicksilver"
+					"subtitleRight": "Unique: Quicksilver",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Quicksilver</active> {{ Item_Cooldown }}",
+							"<active>Activate</active> to remove all crowd control debuffs (excluding <keyword>Airborne</keyword>) and gain <speed>@MoveSpeed*100@% Move Speed</speed> for @MSDuration@ seconds."
+						]
+					]
 				}
 			},
 			"3140": {
 				"tooltipShop": {
-					"subtitleRight": "Unique: Quicksilver"
+					"subtitleRight": "Unique: Quicksilver",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Quicksilver</active> {{ Item_Cooldown }}",
+							"Remove all crowd control debuffs (excluding <keyword>Airborne</keyword>)."
+						]
+					]
 				}
 			},
 			"3142": {
@@ -1138,6 +1174,17 @@
 					]
 				}
 			},
+			"3146": {
+				"tooltipShop": {
+					"extra": [
+						[
+							"{{ Item_OnActivation }} {{ Item_Cooldown }}",
+							"<active>Lightning Bolt</active>",
+							"Shocks the target enemy champion, dealing @ActiveDamage@ magic damage and slowing them by @SlowAmount*100@% for @SlowDuration@ seconds."
+						]
+					]
+				}
+			},
 			"3147": {
 				"tooltipShop": {
 					"extra": [
@@ -1150,7 +1197,13 @@
 			},
 			"3152": {
 				"tooltipShop": {
-					"subtitleLeft": "Dash"
+					"subtitleLeft": "Dash",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Supersonic</active> {{ Item_Cooldown }}",
+							"Dash in target direction, unleashing missiles that deal <magicDamage>@FireboltDamage@ magic damage</magicDamage>."
+						]
+					]
 				}
 			},
 			"3153": {
@@ -1195,7 +1248,13 @@
 			"3157": {
 				"tooltipShop": {
 					"subtitleLeft": "Invulnerability",
-					"subtitleRight": "Unique: Stasis"
+					"subtitleRight": "Unique: Stasis",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Time Stop</active> {{ Item_Cooldown }}",
+							"Enter <keyword>Stasis</keyword> for @Duration@ seconds."
+						]
+					]
 				}
 			},
 			"3158": {
@@ -1343,7 +1402,13 @@
 			},
 			"3190": {
 				"tooltipShop": {
-					"subtitleLeft": "Team Shield"
+					"subtitleLeft": "Team Shield",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Devotion</active> {{ Item_Cooldown }}",
+							"Grant nearby allies a <shield>@ShieldMinTOOLTIP@ - @ShieldMaxTOOLTIP@ (ally %i:scaleLevel%) Shield</shield> that decays over @ShieldDuration@ seconds. "
+						]
+					]
 				}
 			},
 			"3211": {
@@ -1351,7 +1416,13 @@
 			},
 			"3222": {
 				"tooltipShop": {
-					"subtitleLeft": "Remove Disables"
+					"subtitleLeft": "Remove Disables",
+					"extra": [
+						[
+							"%i:activeEffect% <active>Purify</active> {{ Item_Cooldown }}",
+							"Remove all crowd control debuffs (excluding <keyword>Airborne</keyword> and <keyword>Suppression</keyword>) from an ally champion and restore <healing>@HealAmountMin@ - @HealAmountMax@ (ally %i:scaleLevel%) Health</healing>."
+						]
+					]
 				}
 			},
 			"3302": {
@@ -1551,10 +1622,24 @@
 				}
 			},
 			"4003": {
-				"tooltipShop": {}
+				"tooltipShop": {
+					"extra": [
+						[
+							"{{ Item_Active_Named }} <active>Soul Anchor</active> {{ Item_Cooldown }}",
+							"Mark your current location. After @Duration@ seconds, return to that location. You may recast at any point during <active>Soul Anchor's</active> duration to return to your marked location early."
+						]
+					]
+				}
 			},
 			"4004": {
-				"tooltipShop": {}
+				"tooltipShop": {
+					"extra": [
+						[
+							"{{ Item_Active_Named }} <active>Soul Anchor</active> {{ Item_Cooldown }}",
+							"Mark your current location. After @Duration@ seconds, return to that location. You may recast at any point during <active>Soul Anchor's</active> duration to return to your marked location early."
+						]
+					]
+				}
 			},
 			"4005": {
 				"tooltipShop": {
