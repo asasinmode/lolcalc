@@ -13,4 +13,12 @@ export interface ITextData {
 			extra?: string[][];
 		};
 	}>;
+	runes: {
+		paths: Record<string, { name: string; tooltip: string }>;
+		slots: Record<string, {
+			name: string;
+			tooltipShort: string;
+			tooltipLong: string;
+		}>;
+	};
 }

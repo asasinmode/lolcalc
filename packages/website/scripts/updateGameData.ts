@@ -1,6 +1,5 @@
 import type { IChampion } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
-import type { ITextData } from '../app/composables/useText';
 import type { ITexture } from '../app/composables/useUi';
 import { useMaps } from '../app/composables/useMaps';
 import { KNOWN_TOOLTIP_SHOP_EXTRA_TAGS, replaceItemDescriptionVariables } from '../app/utils/item';
@@ -19,6 +18,9 @@ let textData = {
 	version: latestVersion,
 	data: {
 		items: {},
+		runes: {
+			paths: {},
+		},
 	},
 } as typeof import('../app/assets/text.json');
 
@@ -209,6 +211,8 @@ if (!itemData || itemData?.version !== latestVersion) {
 		3877: 7,	// bloodsong
 	};
 
+	textData.data.items ||= {} as any;
+
 	for (const [itemId, item] of Object.entries(itemData.data as unknown as Record<string, IItem>)) {
 		const itemMoreData = moreItemData[`Items/${itemId}`];
 
@@ -324,8 +328,8 @@ if (!itemData || itemData?.version !== latestVersion) {
 	await textFile.write(JSON.stringify(textData, null, '\t'));
 }
 
-const runeFile = Bun.file(`${import.meta.dir}/../app/assets/runes.json`);
-let runeData: typeof import('../app/assets/runes.json') | undefined;
+const runeFile = Bun.file(`${import.meta.dir}/../app/assets/rune.json`);
+let runeData: typeof import('../app/assets/rune.json') | undefined;
 
 if (await runeFile.exists()) {
 	runeData = await runeFile.json();
@@ -334,6 +338,7 @@ if (await runeFile.exists()) {
 if (!runeData || runeData?.version !== latestVersion) {
 	console.log('rune data not present or outdated, fetching...');
 
+	await loadStringTable();
 	const data = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/perks.cdtb.bin.json`).then(r => r.json());
 
 	const shardAdaptiveForce = data['Perks/StatMods/Adaptive'].mScript.mSpellScriptData.mEffectAmount.StatGain2;
@@ -341,9 +346,27 @@ if (!runeData || runeData?.version !== latestVersion) {
 	const shardDefensiveFlatHealthKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[0];
 	const shardDefensiveTenacityKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[1];
 
+	textData.data.runes ||= {} as any;
+	textData.data.runes.paths ||= {} as any;
+	textData.data.runes.slots ||= {} as any;
+
 	runeData = {
 		version: latestVersion,
 		data: {
+			paths: Object.fromEntries(['Precision', 'Domination', 'Sorcery', 'Resolve', 'Inspiration'].map((path) => {
+				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots } = data[`Perks/Styles/${path}`];
+
+				(textData.data.runes.paths as any)[path] = {
+					name: getStringtableValue(mDisplayNameLocalizationKey, 'rune paths'),
+					tooltip: getStringtableValue(mTooltipNameLocalizationKey, 'rune paths'),
+				};
+
+				return [path, {
+					id: mPerkStyleId,
+					name: mPerkStyleName,
+					slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => mPerks.map(perk => createRuneSlotData(data[perk]))),
+				}];
+			})),
 			shards: {
 				offensive: {
 					adaptiveForce: shardAdaptiveForce,
@@ -361,10 +384,11 @@ if (!runeData || runeData?.version !== latestVersion) {
 					scalingHealth: shardScalingHealth,
 				},
 			},
-		},
+		} as unknown as NonNullable<(typeof runeData)>['data'],
 	};
 
 	await runeFile.write(JSON.stringify(runeData, null, '\t'));
+	await textFile.write(JSON.stringify(textData, null, '\t'));
 }
 
 const uiFile = Bun.file(`${import.meta.dir}/../app/assets/ui.json`);
@@ -466,10 +490,7 @@ interface IItemShopItemTooltipDebugData {
 }
 
 function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug: IItemShopItemTooltipDebugData) {
-	const text = stringtable[mShopTooltip.toLowerCase()];
-	if (!text) {
-		console.warn(`string "${mShopTooltip.toLowerCase()}" not found in the stringtable`);
-	}
+	const text = getStringtableValue(mShopTooltip, 'item shop tooltip');
 
 	const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
 	const subtitleLeftEndIndex = text.indexOf('</subtitleLeft>');
@@ -535,11 +556,36 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug:
 	} };
 }
 
+function createRuneSlotData(data: any) {
+	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey } = data;
+
+	(textData.data.runes.slots as any)[mPerkName] = {
+		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
+		tooltipShort: getStringtableValue(mShortDescLocalizationKey, 'rune slot'),
+		tooltipLong: getStringtableValue(mLongDescLocalizationKey, 'rune slot'),
+	};
+
+	return {
+		id: mPerkId,
+		name: mPerkName,
+		calculations: cleanupObject(mSpellScriptData.mCalculations),
+		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
+	};
+}
+
 async function loadStringTable() {
 	if (!stringtable) {
 		console.log('fetching stringtable...');
 		({ entries: stringtable } = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`).then(r => r.json()));
 	}
+}
+
+function getStringtableValue(path: string, debugPrefix: string) {
+	const value = stringtable[path.toLowerCase()];
+	if (!value) {
+		console.warn(`[${debugPrefix}] string "${path.toLowerCase()}" not found in the stringtable`);
+	}
+	return value;
 }
 
 function formatNumber(n: number, precision = 2): number {

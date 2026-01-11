@@ -1,0 +1,1541 @@
+{
+	"version": "16.1.1",
+	"data": {
+		"paths": {
+			"Precision": {
+				"id": 8000,
+				"name": "Precision",
+				"slots": [
+					[
+						{
+							"id": 8005,
+							"name": "PressTheAttack",
+							"effectAmount": {
+								"MinDamage": 40,
+								"MaxDamage": 160,
+								"BonusADRatio": 0,
+								"APRatio": 0,
+								"LethalityRatio": 0,
+								"HitsRequired": 3,
+								"{a38bdcc6}": 4,
+								"{ae481e05}": 0.08,
+								"AmpDuration": 5,
+								"{f0adfe0c}": 0.08,
+								"{75ba08eb}": 0.08,
+								"{d9ac2d86}": 0.08,
+								"BonusPercentDamage": 0.08,
+								"OutOfCombatTimer": 5,
+								"Cooldown": 6
+							}
+						},
+						{
+							"id": 8008,
+							"name": "LethalTempo",
+							"calculations": {
+								"NoteDamage": {
+									"mMultiplier": {
+										"mSubparts": [
+											{
+												"mNumber": 1
+											},
+											{
+												"mStat": 4,
+												"mStatFormula": 2,
+												"mCoefficient": 1
+											}
+										]
+									},
+									"mFormulaParts": [
+										{
+											"mStartValue": 9,
+											"mEndValue": 30
+										}
+									],
+									"mPrecision": 1,
+									"mRangedMultiplier": {
+										"mNumber": 0.67
+									}
+								},
+								"ASPerStack": {
+									"mFormulaParts": [
+										{
+											"mNumber": 0.06
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 1,
+									"mRangedMultiplier": {
+										"mNumber": 0.8
+									}
+								}
+							},
+							"effectAmount": {
+								"Duration": 6,
+								"MaxStacks": 6,
+								"TTASPerStackMelee": 0.06,
+								"{303fd190}": 0.25,
+								"TTASPerStackRanged": 0.04,
+								"TTMinNoteDamageMelee": 9,
+								"TTMaxNoteDamageMelee": 30,
+								"TTMinNoteDamageRanged": 6,
+								"TTMaxNoteDamageRanged": 24
+							}
+						},
+						{
+							"id": 8021,
+							"name": "FleetFootwork",
+							"calculations": {
+								"HealAmount": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 130,
+											"mScaleByStatProgressionMultiplier": true
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "HealBonusADRatio"
+										},
+										{
+											"mDataValue": "HealAPRatio"
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedHealMod"
+									}
+								},
+								"{ad820ad4}": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 5,
+											"mEndValue": 100,
+											"mScaleByStatProgressionMultiplier": true
+										}
+									]
+								},
+								"MoveSpeedCalc": {
+									"mFormulaParts": [
+										{
+											"mDataValue": "MSBuff"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mRangedMultiplier": {
+										"mDataValue": "RangedMSMod"
+									}
+								}
+							},
+							"effectAmount": {
+								"HealBonusADRatio": 0.1,
+								"HealAPRatio": 0.05,
+								"HealBase": 10,
+								"HealMax": 130,
+								"MSBuff": 0.2,
+								"MSDuration": 1,
+								"RangedMSMod": 0.75,
+								"RangedHealMod": 0.6,
+								"MinionHealMod": 0.15
+							}
+						},
+						{
+							"id": 8010,
+							"name": "Conqueror",
+							"effectAmount": {
+								"MinAdaptivePerStack": 1.8,
+								"MaxAdaptivePerStack": 4,
+								"MaxStacks": 12,
+								"BuffDuration": 5,
+								"TimeUntilNextStackFromSameSpell": 4,
+								"HealingPercent": 0.08,
+								"RangedHealingPercent": 0.05
+							}
+						}
+					],
+					[
+						{
+							"id": 9101,
+							"name": "AbsorbLife",
+							"calculations": {
+								"HealAmount": {
+									"mFormulaParts": [
+										{
+											"mLevel1Value": 1,
+											"mInitialBonusPerLevel": 0.25,
+											"mBreakpoints": [
+												{
+													"mLevel": 6,
+													"mBonusPerLevelAtAndAfter": 1
+												},
+												{
+													"mLevel": 11,
+													"mBonusPerLevelAtAndAfter": 2
+												}
+											]
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"TooltipMinHeal": 1,
+								"TooltipMaxHeal": 23
+							}
+						},
+						{
+							"id": 9111,
+							"name": "Triumph",
+							"calculations": {
+								"MaxHealthCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStat": 12,
+											"mDataValue": "TriumphMaxHealthRestored"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"MissingHealthRestored": 0.05,
+								"BonusGold": 20,
+								"TriumphMaxHealthRestored": 0.03
+							}
+						},
+						{
+							"id": 8009,
+							"name": "PresenceOfMind",
+							"calculations": {
+								"RegenAmount": {
+									"mFormulaParts": [
+										{
+											"mValues": [
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{},
+												{}
+											]
+										}
+									],
+									"mPrecision": 1
+								}
+							},
+							"effectAmount": {
+								"PercentManaRestore": 0.15,
+								"CooldownDuration": 8,
+								"MinFlatRestore": 6,
+								"MaxFlatRestore": 50,
+								"EnergyRestore": 6
+							}
+						}
+					],
+					[
+						{
+							"id": 9104,
+							"name": "LegendAlacrity",
+							"effectAmount": {
+								"AttackSpeedPerStack": 0.01,
+								"AttackSpeedBase": 0.03,
+								"MaxLegendStacks": 10,
+								"{3e1fdd4a}": 100,
+								"{8fb410e2}": 100,
+								"{f6570baa}": 100,
+								"LargeMonsterKillValue": 25,
+								"MinionKillValue": 4
+							}
+						},
+						{
+							"id": 9105,
+							"name": "LegendHaste",
+							"effectAmount": {
+								"HastePerStack": 1.5,
+								"HasteBase": 0,
+								"MaxLegendStacks": 10,
+								"{3e1fdd4a}": 100,
+								"{8fb410e2}": 100,
+								"{f6570baa}": 100,
+								"LargeMonsterKillValue": 25,
+								"MinionKillValue": 4
+							}
+						},
+						{
+							"id": 9103,
+							"name": "LegendBloodline",
+							"effectAmount": {
+								"LifeStealPerStack": 0.45,
+								"LifeStealBase": 0,
+								"MaxLegendStacks": 15,
+								"{3e1fdd4a}": 100,
+								"{8fb410e2}": 100,
+								"{f6570baa}": 100,
+								"LargeMonsterKillValue": 25,
+								"MinionKillValue": 4,
+								"BonusHealth": 85
+							}
+						}
+					],
+					[
+						{
+							"id": 8014,
+							"name": "CoupDeGrace",
+							"effectAmount": {
+								"EnemyHealthPercentageThreshold": 0.4,
+								"BonusPercentDamage": 0.08
+							}
+						},
+						{
+							"id": 8017,
+							"name": "CutDown",
+							"effectAmount": {
+								"MinBonusDamagePercent": 0.05,
+								"MaxBonusDamagePercent": 0.15,
+								"MinHealthDifference": 0.1,
+								"MaxHealthDifference": 1,
+								"EnemyHealthPercentageThreshold": 0.6,
+								"BonusPercentDamage": 0.08
+							}
+						},
+						{
+							"id": 8299,
+							"name": "LastStand",
+							"effectAmount": {
+								"MinBonusDamagePercent": 0.05,
+								"MaxBonusDamagePercent": 0.11,
+								"HealthThresholdStart": 0.6,
+								"HealthThresholdEnd": 0.3
+							}
+						}
+					]
+				]
+			},
+			"Domination": {
+				"id": 8100,
+				"name": "Domination",
+				"slots": [
+					[
+						{
+							"id": 8112,
+							"name": "Electrocute",
+							"calculations": {
+								"TotalDamage": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 70,
+											"mEndValue": 240
+										},
+										{
+											"mDataValue": "APRatio"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "BonusADRatio"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"Cooldown": 20,
+								"DamageBase": 70,
+								"DamageMax": 240,
+								"BonusADRatio": 0.1,
+								"WindowDuration": 3,
+								"APRatio": 0.05,
+								"CooldownMin": 20
+							}
+						},
+						{
+							"id": 8128,
+							"name": "DarkHarvest",
+							"calculations": {
+								"TotalDamage": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamage"
+										},
+										{
+											"mDataValue": "APRatio"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"HarvestThreshold": 0.5,
+								"Cooldown": 35,
+								"BaseDamage": 30,
+								"ADRatio": 0.1,
+								"APRatio": 0.05,
+								"DamagePerSoulEssence": 11,
+								"CooldownResetValue": 1
+							}
+						},
+						{
+							"id": 9923,
+							"name": "HailOfBlades",
+							"calculations": {
+								"MeleeItemCalcValue": {
+									"mMultiplier": {
+										"mNumber": 100
+									},
+									"mFormulaParts": [
+										{
+											"mDataValue": "ASBoostMax"
+										}
+									]
+								},
+								"RangedItemCalcValue": {
+									"mMultiplier": {
+										"mNumber": 100
+									},
+									"mFormulaParts": [
+										{
+											"mDataValue": "ASBoostRanged"
+										}
+									]
+								},
+								"ChampRange": {
+									"mDefaultGameCalculation": "{792cf56b}",
+									"mConditionalGameCalculation": "{06387172}",
+									"mConditionalCalculationRequirements": {}
+								},
+								"{792cf56b}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 1
+										}
+									]
+								},
+								"{06387172}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 2
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"NumHits": 3,
+								"Duration": 3,
+								"ASBoostMin": 1.6,
+								"ASBoostMax": 1.6,
+								"Cooldown": 10,
+								"ASBoostRanged": 0.8
+							}
+						}
+					],
+					[
+						{
+							"id": 8126,
+							"name": "CheapShot",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 45
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"DamageIncMin": 10,
+								"DamageIncMax": 45,
+								"Cooldown": 4
+							}
+						},
+						{
+							"id": 8139,
+							"name": "TasteOfBlood",
+							"calculations": {
+								"HealCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 16,
+											"mEndValue": 40
+										},
+										{
+											"mDataValue": "APRatio"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"HealAmount": 16,
+								"Cooldown": 20,
+								"HealAmountMax": 40,
+								"RegenDuration": 4,
+								"ADRatio": 0.1,
+								"APRatio": 0.05
+							}
+						},
+						{
+							"id": 8143,
+							"name": "SuddenImpact",
+							"calculations": {
+								"BaseDamage": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 20,
+											"mEndValue": 80
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ArmedDuration": 4,
+								"Cooldown": 10,
+								"MinDamageTooltip": 20,
+								"MaxDamageTooltip": 80
+							}
+						}
+					],
+					[
+						{
+							"id": 8137,
+							"name": "SixthSense",
+							"calculations": {
+								"ChampRange": {
+									"mSimpleTooltipCalculationDisplay": 5,
+									"mExpandedTooltipCalculationDisplay": 5,
+									"mDefaultGameCalculation": "{792cf56b}",
+									"mConditionalGameCalculation": "{06387172}",
+									"mConditionalCalculationRequirements": {}
+								},
+								"{792cf56b}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 1
+										}
+									]
+								},
+								"{06387172}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 2
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"{d3bd04a2}": 900,
+								"MeleeItemCalcValue": 250,
+								"RangedItemCalcValue": 250,
+								"LevelThreshold": 11,
+								"RevealDuration": 10
+							}
+						},
+						{
+							"id": 8140,
+							"name": "GrislyMementos",
+							"effectAmount": {
+								"TrinketAH": 6,
+								"StacksPerTakedown": 1,
+								"SummonerAH": 3,
+								"MaxStacks": 18
+							}
+						},
+						{
+							"id": 8141,
+							"name": "DeepWard",
+							"calculations": {
+								"DurationIncrease": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 45
+										}
+									]
+								},
+								"TrinketDurationIncrease": {
+									"mFormulaParts": [
+										{
+											"mStartValue": 45,
+											"mEndValue": 150
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ExtraHealth": 1,
+								"LevelThreshold": 9,
+								"TTDurationIncreaseMin": 30,
+								"TTDurationIncreaseMax": 45,
+								"TTTrinketDurationIncreaseMin": 45,
+								"TTTrinketDurationIncreaseMax": 150
+							}
+						}
+					],
+					[
+						{
+							"id": 8135,
+							"name": "TreasureHunter",
+							"effectAmount": {
+								"BaseGoldAmount": 50,
+								"GoldGrowth": 20,
+								"TOOLTIPMaxGoldAmount": 130
+							}
+						},
+						{
+							"id": 8105,
+							"name": "RelentlessHunter",
+							"effectAmount": {
+								"OOCMS": 8,
+								"StartingOOCMS": 0
+							}
+						},
+						{
+							"id": 8106,
+							"name": "UltimateHunter",
+							"effectAmount": {
+								"{89cb3caa}": 5,
+								"StartingUltAH": 6
+							}
+						}
+					]
+				]
+			},
+			"Sorcery": {
+				"id": 8200,
+				"name": "Sorcery",
+				"slots": [
+					[
+						{
+							"id": 8214,
+							"name": "SummonAery",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 50
+										},
+										{
+											"mDataValue": "DamageAPRatio"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "DamageADRatio"
+										}
+									]
+								},
+								"ShieldCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 100
+										},
+										{
+											"mDataValue": "ShieldRatio"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ShieldRatioAD"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ShieldBase": 30,
+								"ShieldMax": 100,
+								"ShieldRatio": 0.05,
+								"DamageMax": 50,
+								"DamageBase": 10,
+								"DamageAPRatio": 0.05,
+								"DamageADRatio": 0.1,
+								"ShieldRatioAD": 0.1,
+								"ShieldDuration": 2.5
+							}
+						},
+						{
+							"id": 8229,
+							"name": "ArcaneComet",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 130
+										},
+										{
+											"mDataValue": "APRatio"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "ADRatio"
+										}
+									]
+								},
+								"CooldownCalc": {
+									"mFormulaParts": [
+										{
+											"mCeiling": 20,
+											"mFloor": 0.3,
+											"mSubparts": [
+												{
+													"mStartValue": 20,
+													"mEndValue": 8
+												}
+											]
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"RechargeTime": 20,
+								"DamageBase": 30,
+								"DamageMax": 130,
+								"APRatio": 0.05,
+								"ADRatio": 0.1,
+								"RechargeTimeMin": 8,
+								"PercentRefund": 0.2,
+								"DotPercentRefund": 0.05,
+								"AoEPercentRefund": 0.1
+							}
+						},
+						{
+							"id": 8230,
+							"name": "PhaseRush",
+							"calculations": {
+								"CooldownCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 10
+										}
+									]
+								},
+								"MoveSpeedCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 0.25,
+											"mEndValue": 0.5
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mRangedMultiplier": {
+										"mDataValue": "RangedEffectiveness"
+									}
+								}
+							},
+							"effectAmount": {
+								"HasteBase": 0.25,
+								"HasteMax": 0.5,
+								"SlowResist": 0.5,
+								"Duration": 3,
+								"Window": 4,
+								"MaxBonusSeconds": 4,
+								"{f9adb0b2}": 1,
+								"MinCooldown": 10,
+								"MaxCooldown": 30,
+								"NumberToProc": 3,
+								"RangedEffectiveness": 0.75
+							}
+						}
+					],
+					[
+						{
+							"id": 8224,
+							"name": "NullifyingOrb",
+							"effectAmount": {
+								"UltimateRefundBase": 7,
+								"DamageAmp": 0.12,
+								"AOEAmp": 0.08
+							}
+						},
+						{
+							"id": 8226,
+							"name": "ManaflowBand",
+							"effectAmount": {
+								"{2f748280}": 0.1,
+								"Cooldown": 15,
+								"{2cde474e}": 0.4,
+								"ManaIncrease": 25,
+								"MaxManaIncrease": 250,
+								"PercentManaRestore": 0.01,
+								"PercentManaRestoreCooldown": 5
+							}
+						},
+						{
+							"id": 8275,
+							"name": "NimbusCloak",
+							"effectAmount": {
+								"Duration": 2,
+								"LowCDMSBoost": 0.15,
+								"{1c32110c}": 0.35,
+								"HighCDMSBoost": 0.45,
+								"{2fd68801}": 100,
+								"{b0d06764}": 250
+							}
+						}
+					],
+					[
+						{
+							"id": 8210,
+							"name": "Transcendence",
+							"effectAmount": {
+								"HasteBonus1": 0.05,
+								"LevelToTurnOn": 5,
+								"LevelToTurnOn2": 8,
+								"HasteBonus2": 0.05,
+								"KillCooldownRefund": 0.2,
+								"LevelToTurnOn3": 11
+							}
+						},
+						{
+							"id": 8234,
+							"name": "Celerity",
+							"effectAmount": {
+								"PercentHasteMod": 0.07,
+								"PercentMS": 0.01
+							}
+						},
+						{
+							"id": 8233,
+							"name": "AbsoluteFocus",
+							"calculations": {
+								"AdaptiveForceCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 3,
+											"mEndValue": 30
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"HealthPercent": 0.7,
+								"MinAdaptive": 3,
+								"MaxAdaptive": 30
+							}
+						}
+					],
+					[
+						{
+							"id": 8237,
+							"name": "Scorch",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 20,
+											"mEndValue": 40
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"BurnlockoutDuration": 10,
+								"Damage": 20,
+								"DamageMax": 40,
+								"DotDuration": 1,
+								"OOCTimer": 0,
+								"{89367404}": 0.1
+							}
+						},
+						{
+							"id": 8232,
+							"name": "Waterwalking",
+							"calculations": {
+								"AdaptiveForceCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 13,
+											"mEndValue": 30
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"MovementSpeed": 10,
+								"{6f2f0d30}": 1,
+								"MinAdaptive": 13,
+								"MaxAdaptive": 30
+							}
+						},
+						{
+							"id": 8236,
+							"name": "GatheringStorm",
+							"effectAmount": {
+								"UpdateAfterMinutes": 10,
+								"AdaptiveAP": 8,
+								"AdaptiveAD": 6,
+								"{c5d14564}": 8
+							}
+						}
+					]
+				]
+			},
+			"Resolve": {
+				"id": 8400,
+				"name": "Resolve",
+				"slots": [
+					[
+						{
+							"id": 8437,
+							"name": "GraspOfTheUndying",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStat": 12,
+											"mDataValue": "PercentHealthDamage"
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedPenaltyMod"
+									}
+								},
+								"HealCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStat": 12,
+											"mDataValue": "PercentHealthHeal"
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedPenaltyMod"
+									}
+								}
+							},
+							"effectAmount": {
+								"PercentHealthDamage": 0.04,
+								"Window": 5,
+								"TriggerTime": 4,
+								"PercentHealthHeal": 0.01,
+								"MaxHealthPerProc": 5,
+								"RangedPenaltyMod": 0.4,
+								"RangedHealthPerProc": 2,
+								"MeleeFlatHeal": 0
+							}
+						},
+						{
+							"id": 8439,
+							"name": "Aftershock",
+							"calculations": {
+								"MaxResistCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 80,
+											"mEndValue": 150
+										}
+									]
+								},
+								"ArmorBuff": {
+									"mSimpleTooltipCalculationDisplay": 2,
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatResists"
+										},
+										{
+											"mStat": 1,
+											"mStatFormula": 2,
+											"mDataValue": "PercentBonusResist"
+										}
+									]
+								},
+								"MagicResistBuff": {
+									"mSimpleTooltipCalculationDisplay": 2,
+									"mFormulaParts": [
+										{
+											"mDataValue": "FlatResists"
+										},
+										{
+											"mStat": 6,
+											"mStatFormula": 2,
+											"mDataValue": "PercentBonusResist"
+										}
+									]
+								},
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 25,
+											"mEndValue": 120
+										},
+										{
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mDataValue": "HealthRatio"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"DamageRadius": 350,
+								"Cooldown": 20,
+								"StartingBaseDamage": 25,
+								"MaxBaseDamage": 120,
+								"DelayBeforeBurst": 2.5,
+								"HealthRatio": 0.08,
+								"FlatResists": 35,
+								"BonusResistMin": 80,
+								"BonusResistMax": 150,
+								"PercentBonusResist": 0.8
+							}
+						},
+						{
+							"id": 8465,
+							"name": "Guardian",
+							"calculations": {
+								"ThresholdCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 50,
+											"mEndValue": 165
+										}
+									]
+								},
+								"ShieldCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 45,
+											"mEndValue": 180
+										},
+										{
+											"mStatFormula": 2,
+											"mDataValue": "APRatio"
+										},
+										{
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mDataValue": "HPRatio"
+										}
+									]
+								},
+								"CooldownCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 90,
+											"mEndValue": 40
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"SnuggleRange": 350,
+								"ShieldBase": 45,
+								"ShieldMax": 180,
+								"APRatio": 0.25,
+								"HPRatio": 0.05,
+								"ShieldDuration": 1.5,
+								"Cooldown": 90,
+								"GuardDuration": 2.5,
+								"CooldownMaxLevel": 40,
+								"ThresholdMin": 50,
+								"ThresholdMax": 165
+							}
+						}
+					],
+					[
+						{
+							"id": 8446,
+							"name": "Demolish",
+							"calculations": {
+								"DamageCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mDefaultGameCalculation": "{4e3f20aa}",
+									"mConditionalGameCalculation": "{5fecac03}",
+									"mConditionalCalculationRequirements": {}
+								},
+								"{4e3f20aa}": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"{72c5c2a8}": 0,
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamageRanged"
+										},
+										{
+											"mStat": 12,
+											"mDataValue": "{ffe97357}"
+										}
+									]
+								},
+								"{5fecac03}": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"{72c5c2a8}": 0,
+									"mFormulaParts": [
+										{
+											"mDataValue": "BaseDamageMelee"
+										},
+										{
+											"mStat": 12,
+											"mDataValue": "{36a8d610}"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"CooldownSeconds": 30,
+								"{8d810998}": 8,
+								"{97664ba4}": 3,
+								"BaseDamageMelee": 85,
+								"BaseDamageRanged": 50,
+								"{36a8d610}": 0.28,
+								"{ffe97357}": 0.2
+							}
+						},
+						{
+							"id": 8463,
+							"name": "FontOfLife",
+							"calculations": {
+								"BaseHeal": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 10,
+											"mEndValue": 50
+										}
+									],
+									"mRangedMultiplier": {
+										"mDataValue": "RangedMod"
+									}
+								}
+							},
+							"effectAmount": {
+								"Cooldown": 20,
+								"RangedMod": 0.7
+							}
+						},
+						{
+							"id": 8401,
+							"name": "ShieldBash",
+							"effectAmount": {
+								"ProcDuration": 2,
+								"ShieldRatio": 15,
+								"BonusHealthRatio": 2.5,
+								"BonusShieldMult": 0.1,
+								"ProcBaseMin": 5,
+								"ProcBaseMax": 30
+							}
+						}
+					],
+					[
+						{
+							"id": 8429,
+							"name": "Conditioning",
+							"calculations": {
+								"ArmorCalcTooltip": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "ArmorBase"
+										},
+										{
+											"mStat": 1,
+											"mDataValue": "ExtraResist"
+										}
+									]
+								},
+								"MagicResistCalcTooltip": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "MRBase"
+										},
+										{
+											"mStat": 6,
+											"mDataValue": "ExtraResist"
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"ArmorBase": 8,
+								"MRBase": 8,
+								"ExtraResist": 0.03,
+								"Range": 800,
+								"MinutesRequired": 12
+							}
+						},
+						{
+							"id": 8444,
+							"name": "SecondWind",
+							"effectAmount": {
+								"RegenSeconds": 10,
+								"RegenPercentMax": 0.04,
+								"RegenFlat": 0
+							}
+						},
+						{
+							"id": 8473,
+							"name": "BonePlating",
+							"calculations": {
+								"BlockCalc": {
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mStartValue": 30,
+											"mEndValue": 60
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"BlockBase": 30,
+								"BlockMax": 60,
+								"BlockCount": 3,
+								"BlockDuration": 1.5,
+								"Cooldown": 55
+							}
+						}
+					],
+					[
+						{
+							"id": 8451,
+							"name": "Overgrowth",
+							"effectAmount": {
+								"{1663f8e7}": 0.75,
+								"Range": 1400,
+								"UnitsPerTier": 8,
+								"{ca029a2b}": 2,
+								"FlatHealthPerTier": 3,
+								"ThresholdUnits": 120,
+								"ThresholdMaxHealthRatio": 0.04
+							}
+						},
+						{
+							"id": 8453,
+							"name": "Revitalize",
+							"effectAmount": {
+								"HealShieldPower": 0.05,
+								"HealthCutOff": 40,
+								"{9df5828d}": 10
+							}
+						},
+						{
+							"id": 8242,
+							"name": "Unflinching",
+							"effectAmount": {
+								"ResistMin": 10,
+								"ResistMax": 10,
+								"Duration": 2
+							}
+						}
+					]
+				]
+			},
+			"Inspiration": {
+				"id": 8300,
+				"name": "Inspiration",
+				"slots": [
+					[
+						{
+							"id": 8351,
+							"name": "GlacialAugment",
+							"calculations": {
+								"SlowZoneCalc": {
+									"mMultiplier": {
+										"mNumber": 0.01
+									},
+									"mSimpleTooltipCalculationDisplay": 4,
+									"mFormulaParts": [
+										{
+											"mDataValue": "SlowZoneSlowBase"
+										},
+										{
+											"mDataValue": "SlowZoneSlowAPRatio"
+										},
+										{
+											"mStat": 2,
+											"mStatFormula": 2,
+											"mDataValue": "SlowZoneSlowbADRatio"
+										},
+										{
+											"mStat": 34,
+											"mDataValue": "SlowZoneSlowHealShieldRatio"
+										}
+									],
+									"mDisplayAsPercent": true,
+									"mPrecision": 1
+								}
+							},
+							"effectAmount": {
+								"SlowZoneDuration": 3,
+								"SlowZoneSlowBase": 20,
+								"SlowZoneLength": 700,
+								"SlowZoneWidth": 80,
+								"RayCount": 3,
+								"Cooldown": 25,
+								"BeamPosIndent": 100,
+								"CCCarryOverRatio": 100,
+								"DmgReduction": 0.15,
+								"SlowZoneSlowAPRatio": 0.06,
+								"SlowZoneSlowbADRatio": 0.07,
+								"SlowZoneSlowHealShieldRatio": 90
+							}
+						},
+						{
+							"id": 8360,
+							"name": "UnsealedSpellbook",
+							"effectAmount": {
+								"{ea768132}": 1,
+								"{9a847429}": 0,
+								"{0f920874}": 1,
+								"ShardRechargeMinutes": 4.5,
+								"ShardFirstMinutes": 6,
+								"{9d01feeb}": 5,
+								"{b7e0131f}": 5,
+								"NumSummonersBeforeRepeat": 3,
+								"ShardRechargeReductionSeconds": 25,
+								"{a8402a49}": 10,
+								"{0bb7b933}": 6
+							}
+						},
+						{
+							"id": 8369,
+							"name": "FirstStrike",
+							"calculations": {
+								"Cooldown": {
+									"mFormulaParts": [
+										{
+											"mPart1": {
+												"mStartValue": 25,
+												"mEndValue": 15,
+												"mScalePastDefaultMaxLevel": false
+											},
+											"mPart2": {
+												"mDataValue": "ModesCooldownReduction"
+											}
+										}
+									]
+								},
+								"ChampRange": {
+									"mSimpleTooltipCalculationDisplay": 5,
+									"mExpandedTooltipCalculationDisplay": 5,
+									"mDefaultGameCalculation": "{792cf56b}",
+									"mConditionalGameCalculation": "{06387172}",
+									"mConditionalCalculationRequirements": {}
+								},
+								"MeleeItemCalcValue": {
+									"mSimpleTooltipCalculationDisplay": 6,
+									"mExpandedTooltipCalculationDisplay": 6,
+									"mFormulaParts": [
+										{
+											"mDataValue": "{b50bc5ec}"
+										}
+									],
+									"mDisplayAsPercent": true
+								},
+								"RangedItemCalcValue": {
+									"mMultiplier": {
+										"mDataValue": "{7563bf99}"
+									},
+									"mModifiedGameCalculation": "MeleeItemCalcValue"
+								},
+								"{792cf56b}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 1
+										}
+									]
+								},
+								"{06387172}": {
+									"mFormulaParts": [
+										{
+											"mNumber": 2
+										}
+									]
+								}
+							},
+							"effectAmount": {
+								"Duration": 3,
+								"DamageAmp": 0.07,
+								"OOCTimer": 10,
+								"GoldProcBonus": 10,
+								"GoldPercentBonus": 0.5,
+								"GoldPercentBonusRanged": 0.35,
+								"GraceWindow": 0.25,
+								"TooltipOnlyCooldownStartAmount": 25,
+								"TooltipOnlyCooldownEndAmount": 15,
+								"MissileNoiseNumberLimiter": 3,
+								"MissileNoiseRangeLimiter": 1500,
+								"ModesCooldownReduction": 1,
+								"{b50bc5ec}": 0.5,
+								"{7563bf99}": 0.7
+							}
+						}
+					],
+					[
+						{
+							"id": 8306,
+							"name": "HextechFlashtraption",
+							"effectAmount": {
+								"ChannelDuration": 2,
+								"{c85ef93c}": 10,
+								"CooldownTime": 20,
+								"ChampionCombatCooldown": 10,
+								"MinimumChannelDuration": 1,
+								"{d6487c09}": 0.5
+							}
+						},
+						{
+							"id": 8304,
+							"name": "MagicalFootwear",
+							"effectAmount": {
+								"GiveBootsAtMinute": 12,
+								"{c07791e4}": 300,
+								"SecondsSoonerPerTakedown": 45,
+								"AdditionalMovementSpeed": 10
+							}
+						},
+						{
+							"id": 8321,
+							"name": "CashBack",
+							"effectAmount": {
+								"{d856a8af}": 0,
+								"GoldLowerBoundPerMinute": 8,
+								"{c0de5a7f}": 8,
+								"DebtAccumulationStartsAtMinute": 2,
+								"{7957e8a3}": 20,
+								"{8d08b1b5}": 0,
+								"ExcessCostPenaltyFlat": 50,
+								"GoldLowerBoundInitial": 100,
+								"{fa03b4f1}": 150,
+								"{ebbc116e}": -150,
+								"PercentRefund": 0.08
+							}
+						}
+					],
+					[
+						{
+							"id": 8313,
+							"name": "PerfectTiming",
+							"effectAmount": {
+								"FirstElixirLevel": 3,
+								"SecondElixirLevel": 6,
+								"ThirdElixirLevel": 9
+							}
+						},
+						{
+							"id": 8352,
+							"name": "TimeWarpTonic",
+							"effectAmount": {
+								"BonusMS": 0,
+								"RestorationPercentage": 0.4,
+								"Cooldown": 20
+							}
+						},
+						{
+							"id": 8345,
+							"name": "BiscuitDelivery",
+							"effectAmount": {
+								"BiscuitMinuteInterval": 2,
+								"SwapOverMinute": 6,
+								"PermanentHP": 30,
+								"HealthHealPercent": 0.01,
+								"DurationOfEffect": 5,
+								"FlatHeal": 20,
+								"{936e8fc2}": 0.3,
+								"MaximumHealIncrease": 1
+							}
+						}
+					],
+					[
+						{
+							"id": 8347,
+							"name": "CosmicInsight",
+							"effectAmount": {
+								"ItemHaste": 10,
+								"SummonerHaste": 18
+							}
+						},
+						{
+							"id": 8410,
+							"name": "ApproachVelocity",
+							"effectAmount": {
+								"MovementSpeedPercentBonus": 0.15,
+								"ActivationDistance": 1000
+							}
+						},
+						{
+							"id": 8316,
+							"name": "JackOfAllTrades",
+							"effectAmount": {
+								"{1b48f5ea}": 10,
+								"{55d14eea}": 25,
+								"HastePerStack": 1
+							}
+						}
+					]
+				]
+			}
+		},
+		"shards": {
+			"offensive": {
+				"adaptiveForce": 9,
+				"percentAttackSpeed": 0.1,
+				"abilityHaste": 8
+			},
+			"flex": {
+				"adaptiveForce": 9,
+				"percentMoveSpeed": 0.025,
+				"scalingHealth": 10
+			},
+			"defensive": {
+				"flatHealth": 65,
+				"percentTenacityMod": 0.15,
+				"scalingHealth": 10
+			}
+		}
+	}
+}
