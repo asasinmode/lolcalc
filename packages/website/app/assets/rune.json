@@ -6,6 +6,7 @@
 				"id": 8000,
 				"name": "Precision",
 				"icon": "assets/perks/styles/7201_precision.png",
+				"iconColor": "#c8aa6e",
 				"slots": [
 					{
 						"PressTheAttack": {
@@ -353,6 +354,7 @@
 				"id": 8100,
 				"name": "Domination",
 				"icon": "assets/perks/styles/7200_domination.png",
+				"iconColor": "#dc4747",
 				"slots": [
 					{
 						"Electrocute": {
@@ -667,6 +669,7 @@
 				"id": 8200,
 				"name": "Sorcery",
 				"icon": "assets/perks/styles/7202_sorcery.png",
+				"iconColor": "#6c75f5",
 				"slots": [
 					{
 						"SummonAery": {
@@ -962,6 +965,7 @@
 				"id": 8400,
 				"name": "Resolve",
 				"icon": "assets/perks/styles/7204_resolve.png",
+				"iconColor": "#a4d08d",
 				"slots": [
 					{
 						"GraspOfTheUndying": {
@@ -1331,6 +1335,7 @@
 				"id": 8300,
 				"name": "Inspiration",
 				"icon": "assets/perks/styles/7203_whimsy.png",
+				"iconColor": "#48b4be",
 				"slots": [
 					{
 						"GlacialAugment": {

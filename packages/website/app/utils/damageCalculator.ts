@@ -29,6 +29,12 @@ export class DamageSource {
 		this.runes = ref<IChampionRunes>(overrides.runes
 			? structuredClone(overrides.runes)
 			: {
+					paths: {
+						primary: undefined,
+						primarySlots: [],
+						secondary: undefined,
+						secondarySlots: [],
+					},
 					shards: {
 						offensive: 'adaptiveForce',
 						flex: 'adaptiveForce',

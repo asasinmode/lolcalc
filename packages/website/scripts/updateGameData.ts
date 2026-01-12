@@ -3,6 +3,7 @@ import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composabl
 import type { ITexture } from '../app/composables/useUi';
 import { useMaps } from '../app/composables/useMaps';
 import { KNOWN_TOOLTIP_SHOP_EXTRA_TAGS, replaceItemDescriptionVariables } from '../app/utils/item';
+import { RUNE_PATHS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -12,6 +13,7 @@ const minorVersion = latestVersion.slice(0, latestVersion.lastIndexOf('.'));
 console.log('latest version', latestVersion);
 
 let stringtable: Record<string, string>;
+let rcpFeLolCollectionsCss: string;
 
 const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
 let textData = {
@@ -339,6 +341,7 @@ if (!runeData || runeData?.version !== latestVersion) {
 	console.log('rune data not present or outdated, fetching...');
 
 	await loadStringTable();
+	await loadRcpFeLolCollectionsCss();
 	const data = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/perks.cdtb.bin.json`).then(r => r.json());
 
 	const shardAdaptiveForce = data['Perks/StatMods/Adaptive'].mScript.mSpellScriptData.mEffectAmount.StatGain2;
@@ -350,11 +353,24 @@ if (!runeData || runeData?.version !== latestVersion) {
 	textData.data.runes.paths ||= {} as any;
 	textData.data.runes.slots ||= {} as any;
 
+	const pathStyleCssStartIndex = rcpFeLolCollectionsCss!.indexOf('.primary-perk-selector.keystone.');
+	let pathStyleCssSlice = '';
+	if (~pathStyleCssStartIndex) {
+		pathStyleCssSlice = rcpFeLolCollectionsCss!.slice(pathStyleCssStartIndex, pathStyleCssStartIndex + 350);
+	} else {
+		console.warn('rune path colors css slice start index not found');
+	}
+
 	runeData = {
 		version: latestVersion,
 		data: {
-			paths: Object.fromEntries(['Precision', 'Domination', 'Sorcery', 'Resolve', 'Inspiration'].map((path) => {
+			paths: Object.fromEntries(RUNE_PATHS.map((path) => {
 				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[`Perks/Styles/${path}`];
+
+				const cssSliceSelector = `.primary-perk-selector.keystone.${mPerkStyleName.toLowerCase()}`;
+				/** these selectors are expected to contain `{--middle-color:#dc4747}` hence the slice values */
+				const iconColorSliceStartIndex = pathStyleCssSlice.indexOf(cssSliceSelector) + cssSliceSelector.length + 16;
+				const iconColor = pathStyleCssSlice.slice(iconColorSliceStartIndex, iconColorSliceStartIndex + 7);
 
 				(textData.data.runes.paths as any)[path] = {
 					name: getStringtableValue(mDisplayNameLocalizationKey, 'rune paths'),
@@ -365,6 +381,7 @@ if (!runeData || runeData?.version !== latestVersion) {
 					id: mPerkStyleId,
 					name: mPerkStyleName,
 					icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
+					iconColor,
 					slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => Object.fromEntries(
 						mPerks.map(perk => createRuneSlotData(data[perk])),
 					)),
@@ -582,6 +599,14 @@ async function loadStringTable() {
 	if (!stringtable) {
 		console.log('fetching stringtable...');
 		({ entries: stringtable } = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`).then(r => r.json()));
+	}
+}
+
+async function loadRcpFeLolCollectionsCss() {
+	if (!rcpFeLolCollectionsCss) {
+		await fetch(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/rcp-fe-lol-collections.css`).then(r => r.text()).then((text) => {
+			rcpFeLolCollectionsCss = text;
+		});
 	}
 }
 

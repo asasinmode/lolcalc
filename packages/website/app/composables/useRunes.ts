@@ -17,8 +17,9 @@ export type IRuneSlotName = UnionKeys<IDataPaths[IRunePathName]['slots'][number]
 
 interface IRunePath {
 	id: number;
-	name: string;
+	name: IRunePathName;
 	icon: string;
+	iconColor: string;
 	slots: [Partial<Record<IRuneSlotName, {
 		id: number;
 		name: IRuneSlotName;
@@ -35,7 +36,7 @@ export interface IRunes {
 
 export interface IChampionRunes {
 	paths: {
-		primary: IRunePathName;
+		primary: IRunePathName | undefined;
 		primarySlots: (IRuneSlotName | undefined)[];
 		secondary: IRunePathName | undefined;
 		secondarySlots: (IRuneSlotName | undefined)[];
