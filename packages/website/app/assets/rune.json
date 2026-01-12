@@ -5,11 +5,13 @@
 			"Precision": {
 				"id": 8000,
 				"name": "Precision",
+				"icon": "assets/perks/styles/7201_precision.png",
 				"slots": [
 					{
 						"PressTheAttack": {
 							"id": 8005,
 							"name": "PressTheAttack",
+							"icon": "assets/perks/styles/precision/presstheattack/presstheattack.png",
 							"effectAmount": {
 								"MinDamage": 40,
 								"MaxDamage": 160,
@@ -31,6 +33,7 @@
 						"LethalTempo": {
 							"id": 8008,
 							"name": "LethalTempo",
+							"icon": "assets/perks/styles/precision/lethaltempo/lethaltempotemp.png",
 							"calculations": {
 								"NoteDamage": {
 									"mMultiplier": {
@@ -84,6 +87,7 @@
 						"FleetFootwork": {
 							"id": 8021,
 							"name": "FleetFootwork",
+							"icon": "assets/perks/styles/precision/fleetfootwork/fleetfootwork.png",
 							"calculations": {
 								"HealAmount": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -142,6 +146,7 @@
 						"Conqueror": {
 							"id": 8010,
 							"name": "Conqueror",
+							"icon": "assets/perks/styles/precision/conqueror/conqueror.png",
 							"effectAmount": {
 								"MinAdaptivePerStack": 1.8,
 								"MaxAdaptivePerStack": 4,
@@ -157,6 +162,7 @@
 						"AbsorbLife": {
 							"id": 9101,
 							"name": "AbsorbLife",
+							"icon": "assets/perks/styles/precision/absorblife/absorblife.png",
 							"calculations": {
 								"HealAmount": {
 									"mFormulaParts": [
@@ -185,6 +191,7 @@
 						"Triumph": {
 							"id": 9111,
 							"name": "Triumph",
+							"icon": "assets/perks/styles/precision/triumph.png",
 							"calculations": {
 								"MaxHealthCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -205,6 +212,7 @@
 						"PresenceOfMind": {
 							"id": 8009,
 							"name": "PresenceOfMind",
+							"icon": "assets/perks/styles/precision/presenceofmind/presenceofmind.png",
 							"calculations": {
 								"RegenAmount": {
 									"mFormulaParts": [
@@ -260,6 +268,7 @@
 						"LegendAlacrity": {
 							"id": 9104,
 							"name": "LegendAlacrity",
+							"icon": "assets/perks/styles/precision/legendalacrity/legendalacrity.png",
 							"effectAmount": {
 								"AttackSpeedPerStack": 0.01,
 								"AttackSpeedBase": 0.03,
@@ -274,6 +283,7 @@
 						"LegendHaste": {
 							"id": 9105,
 							"name": "LegendHaste",
+							"icon": "assets/perks/styles/precision/legendhaste/legendhaste.png",
 							"effectAmount": {
 								"HastePerStack": 1.5,
 								"HasteBase": 0,
@@ -288,6 +298,7 @@
 						"LegendBloodline": {
 							"id": 9103,
 							"name": "LegendBloodline",
+							"icon": "assets/perks/styles/precision/legendbloodline/legendbloodline.png",
 							"effectAmount": {
 								"LifeStealPerStack": 0.45,
 								"LifeStealBase": 0,
@@ -305,6 +316,7 @@
 						"CoupDeGrace": {
 							"id": 8014,
 							"name": "CoupDeGrace",
+							"icon": "assets/perks/styles/precision/coupdegrace/coupdegrace.png",
 							"effectAmount": {
 								"EnemyHealthPercentageThreshold": 0.4,
 								"BonusPercentDamage": 0.08
@@ -313,6 +325,7 @@
 						"CutDown": {
 							"id": 8017,
 							"name": "CutDown",
+							"icon": "assets/perks/styles/precision/cutdown/cutdown.png",
 							"effectAmount": {
 								"MinBonusDamagePercent": 0.05,
 								"MaxBonusDamagePercent": 0.15,
@@ -325,6 +338,7 @@
 						"LastStand": {
 							"id": 8299,
 							"name": "LastStand",
+							"icon": "assets/perks/styles/sorcery/laststand/laststand.png",
 							"effectAmount": {
 								"MinBonusDamagePercent": 0.05,
 								"MaxBonusDamagePercent": 0.11,
@@ -338,11 +352,13 @@
 			"Domination": {
 				"id": 8100,
 				"name": "Domination",
+				"icon": "assets/perks/styles/7200_domination.png",
 				"slots": [
 					{
 						"Electrocute": {
 							"id": 8112,
 							"name": "Electrocute",
+							"icon": "assets/perks/styles/domination/electrocute/electrocute.png",
 							"calculations": {
 								"TotalDamage": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -375,6 +391,7 @@
 						"DarkHarvest": {
 							"id": 8128,
 							"name": "DarkHarvest",
+							"icon": "assets/perks/styles/domination/darkharvest/darkharvest.png",
 							"calculations": {
 								"TotalDamage": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -406,6 +423,7 @@
 						"HailOfBlades": {
 							"id": 9923,
 							"name": "HailOfBlades",
+							"icon": "assets/perks/styles/domination/hailofblades/hailofblades.png",
 							"calculations": {
 								"MeleeItemCalcValue": {
 									"mMultiplier": {
@@ -461,6 +479,7 @@
 						"CheapShot": {
 							"id": 8126,
 							"name": "CheapShot",
+							"icon": "assets/perks/styles/domination/cheapshot/cheapshot.png",
 							"calculations": {
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -481,6 +500,7 @@
 						"TasteOfBlood": {
 							"id": 8139,
 							"name": "TasteOfBlood",
+							"icon": "assets/perks/styles/domination/tasteofblood/greenterror_tasteofblood.png",
 							"calculations": {
 								"HealCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -512,6 +532,7 @@
 						"SuddenImpact": {
 							"id": 8143,
 							"name": "SuddenImpact",
+							"icon": "assets/perks/styles/domination/suddenimpact/suddenimpact.png",
 							"calculations": {
 								"BaseDamage": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -535,6 +556,7 @@
 						"SixthSense": {
 							"id": 8137,
 							"name": "SixthSense",
+							"icon": "assets/perks/styles/domination/sixthsense/sixthsense.png",
 							"calculations": {
 								"ChampRange": {
 									"mSimpleTooltipCalculationDisplay": 5,
@@ -569,6 +591,7 @@
 						"GrislyMementos": {
 							"id": 8140,
 							"name": "GrislyMementos",
+							"icon": "assets/perks/styles/domination/grislymementos/grislymementos.png",
 							"effectAmount": {
 								"TrinketAH": 6,
 								"StacksPerTakedown": 1,
@@ -579,6 +602,7 @@
 						"DeepWard": {
 							"id": 8141,
 							"name": "DeepWard",
+							"icon": "assets/perks/styles/domination/deepward/deepward.png",
 							"calculations": {
 								"DurationIncrease": {
 									"mFormulaParts": [
@@ -611,6 +635,7 @@
 						"TreasureHunter": {
 							"id": 8135,
 							"name": "TreasureHunter",
+							"icon": "assets/perks/styles/domination/treasurehunter/treasurehunter.png",
 							"effectAmount": {
 								"BaseGoldAmount": 50,
 								"GoldGrowth": 20,
@@ -620,6 +645,7 @@
 						"RelentlessHunter": {
 							"id": 8105,
 							"name": "RelentlessHunter",
+							"icon": "assets/perks/styles/domination/relentlesshunter/relentlesshunter.png",
 							"effectAmount": {
 								"OOCMS": 8,
 								"StartingOOCMS": 0
@@ -628,6 +654,7 @@
 						"UltimateHunter": {
 							"id": 8106,
 							"name": "UltimateHunter",
+							"icon": "assets/perks/styles/domination/ultimatehunter/ultimatehunter.png",
 							"effectAmount": {
 								"{89cb3caa}": 5,
 								"StartingUltAH": 6
@@ -639,11 +666,13 @@
 			"Sorcery": {
 				"id": 8200,
 				"name": "Sorcery",
+				"icon": "assets/perks/styles/7202_sorcery.png",
 				"slots": [
 					{
 						"SummonAery": {
 							"id": 8214,
 							"name": "SummonAery",
+							"icon": "assets/perks/styles/sorcery/summonaery/summonaery.png",
 							"calculations": {
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -695,6 +724,7 @@
 						"ArcaneComet": {
 							"id": 8229,
 							"name": "ArcaneComet",
+							"icon": "assets/perks/styles/sorcery/arcanecomet/arcanecomet.png",
 							"calculations": {
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -743,6 +773,7 @@
 						"PhaseRush": {
 							"id": 8230,
 							"name": "PhaseRush",
+							"icon": "assets/perks/styles/sorcery/phaserush/phaserush.png",
 							"calculations": {
 								"CooldownCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -786,6 +817,7 @@
 						"NullifyingOrb": {
 							"id": 8224,
 							"name": "NullifyingOrb",
+							"icon": "assets/perks/styles/sorcery/nullifyingorb/axiom_arcanist.png",
 							"effectAmount": {
 								"UltimateRefundBase": 7,
 								"DamageAmp": 0.12,
@@ -795,6 +827,7 @@
 						"ManaflowBand": {
 							"id": 8226,
 							"name": "ManaflowBand",
+							"icon": "assets/perks/styles/sorcery/manaflowband/manaflowband.png",
 							"effectAmount": {
 								"{2f748280}": 0.1,
 								"Cooldown": 15,
@@ -808,6 +841,7 @@
 						"NimbusCloak": {
 							"id": 8275,
 							"name": "NimbusCloak",
+							"icon": "assets/perks/styles/sorcery/nimbuscloak/6361.png",
 							"effectAmount": {
 								"Duration": 2,
 								"LowCDMSBoost": 0.15,
@@ -822,6 +856,7 @@
 						"Transcendence": {
 							"id": 8210,
 							"name": "Transcendence",
+							"icon": "assets/perks/styles/sorcery/transcendence/transcendence.png",
 							"effectAmount": {
 								"HasteBonus1": 0.05,
 								"LevelToTurnOn": 5,
@@ -834,6 +869,7 @@
 						"Celerity": {
 							"id": 8234,
 							"name": "Celerity",
+							"icon": "assets/perks/styles/sorcery/celerity/celeritytemp.png",
 							"effectAmount": {
 								"PercentHasteMod": 0.07,
 								"PercentMS": 0.01
@@ -842,6 +878,7 @@
 						"AbsoluteFocus": {
 							"id": 8233,
 							"name": "AbsoluteFocus",
+							"icon": "assets/perks/styles/sorcery/absolutefocus/absolutefocus.png",
 							"calculations": {
 								"AdaptiveForceCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -864,6 +901,7 @@
 						"Scorch": {
 							"id": 8237,
 							"name": "Scorch",
+							"icon": "assets/perks/styles/sorcery/scorch/scorch.png",
 							"calculations": {
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -887,6 +925,7 @@
 						"Waterwalking": {
 							"id": 8232,
 							"name": "Waterwalking",
+							"icon": "assets/perks/styles/sorcery/waterwalking/waterwalking.png",
 							"calculations": {
 								"AdaptiveForceCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -908,6 +947,7 @@
 						"GatheringStorm": {
 							"id": 8236,
 							"name": "GatheringStorm",
+							"icon": "assets/perks/styles/sorcery/gatheringstorm/gatheringstorm.png",
 							"effectAmount": {
 								"UpdateAfterMinutes": 10,
 								"AdaptiveAP": 8,
@@ -921,11 +961,13 @@
 			"Resolve": {
 				"id": 8400,
 				"name": "Resolve",
+				"icon": "assets/perks/styles/7204_resolve.png",
 				"slots": [
 					{
 						"GraspOfTheUndying": {
 							"id": 8437,
 							"name": "GraspOfTheUndying",
+							"icon": "assets/perks/styles/resolve/graspoftheundying/graspoftheundying.png",
 							"calculations": {
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -966,6 +1008,7 @@
 						"Aftershock": {
 							"id": 8439,
 							"name": "Aftershock",
+							"icon": "assets/perks/styles/resolve/veteranaftershock/veteranaftershock.png",
 							"calculations": {
 								"MaxResistCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -1033,6 +1076,7 @@
 						"Guardian": {
 							"id": 8465,
 							"name": "Guardian",
+							"icon": "assets/perks/styles/resolve/guardian/guardian.png",
 							"calculations": {
 								"ThresholdCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -1090,6 +1134,7 @@
 						"Demolish": {
 							"id": 8446,
 							"name": "Demolish",
+							"icon": "assets/perks/styles/resolve/demolish/demolish.png",
 							"calculations": {
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -1137,6 +1182,7 @@
 						"FontOfLife": {
 							"id": 8463,
 							"name": "FontOfLife",
+							"icon": "assets/perks/styles/resolve/fontoflife/fontoflife.png",
 							"calculations": {
 								"BaseHeal": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -1159,6 +1205,7 @@
 						"ShieldBash": {
 							"id": 8401,
 							"name": "ShieldBash",
+							"icon": "assets/perks/styles/resolve/mirrorshell/mirrorshell.png",
 							"effectAmount": {
 								"ProcDuration": 2,
 								"ShieldRatio": 15,
@@ -1173,6 +1220,7 @@
 						"Conditioning": {
 							"id": 8429,
 							"name": "Conditioning",
+							"icon": "assets/perks/styles/resolve/conditioning/conditioning.png",
 							"calculations": {
 								"ArmorCalcTooltip": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -1210,6 +1258,7 @@
 						"SecondWind": {
 							"id": 8444,
 							"name": "SecondWind",
+							"icon": "assets/perks/styles/resolve/secondwind/secondwind.png",
 							"effectAmount": {
 								"RegenSeconds": 10,
 								"RegenPercentMax": 0.04,
@@ -1219,6 +1268,7 @@
 						"BonePlating": {
 							"id": 8473,
 							"name": "BonePlating",
+							"icon": "assets/perks/styles/resolve/boneplating/boneplating.png",
 							"calculations": {
 								"BlockCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
@@ -1243,6 +1293,7 @@
 						"Overgrowth": {
 							"id": 8451,
 							"name": "Overgrowth",
+							"icon": "assets/perks/styles/resolve/overgrowth/overgrowth.png",
 							"effectAmount": {
 								"{1663f8e7}": 0.75,
 								"Range": 1400,
@@ -1256,6 +1307,7 @@
 						"Revitalize": {
 							"id": 8453,
 							"name": "Revitalize",
+							"icon": "assets/perks/styles/resolve/revitalize/revitalize.png",
 							"effectAmount": {
 								"HealShieldPower": 0.05,
 								"HealthCutOff": 40,
@@ -1265,6 +1317,7 @@
 						"Unflinching": {
 							"id": 8242,
 							"name": "Unflinching",
+							"icon": "assets/perks/styles/sorcery/unflinching/unflinching.png",
 							"effectAmount": {
 								"ResistMin": 10,
 								"ResistMax": 10,
@@ -1277,11 +1330,13 @@
 			"Inspiration": {
 				"id": 8300,
 				"name": "Inspiration",
+				"icon": "assets/perks/styles/7203_whimsy.png",
 				"slots": [
 					{
 						"GlacialAugment": {
 							"id": 8351,
 							"name": "GlacialAugment",
+							"icon": "assets/perks/styles/inspiration/glacialaugment/glacialaugment.png",
 							"calculations": {
 								"SlowZoneCalc": {
 									"mMultiplier": {
@@ -1327,6 +1382,7 @@
 						"UnsealedSpellbook": {
 							"id": 8360,
 							"name": "UnsealedSpellbook",
+							"icon": "assets/perks/styles/inspiration/unsealedspellbook/unsealedspellbook.png",
 							"effectAmount": {
 								"{ea768132}": 1,
 								"{9a847429}": 0,
@@ -1344,6 +1400,7 @@
 						"FirstStrike": {
 							"id": 8369,
 							"name": "FirstStrike",
+							"icon": "assets/perks/styles/inspiration/firststrike/firststrike.png",
 							"calculations": {
 								"Cooldown": {
 									"mFormulaParts": [
@@ -1419,6 +1476,7 @@
 						"HextechFlashtraption": {
 							"id": 8306,
 							"name": "HextechFlashtraption",
+							"icon": "assets/perks/styles/inspiration/hextechflashtraption/hextechflashtraption.png",
 							"effectAmount": {
 								"ChannelDuration": 2,
 								"{c85ef93c}": 10,
@@ -1431,6 +1489,7 @@
 						"MagicalFootwear": {
 							"id": 8304,
 							"name": "MagicalFootwear",
+							"icon": "assets/perks/styles/inspiration/magicalfootwear/magicalfootwear.png",
 							"effectAmount": {
 								"GiveBootsAtMinute": 12,
 								"{c07791e4}": 300,
@@ -1441,6 +1500,7 @@
 						"CashBack": {
 							"id": 8321,
 							"name": "CashBack",
+							"icon": "assets/perks/styles/inspiration/cashback/cashback2.png",
 							"effectAmount": {
 								"{d856a8af}": 0,
 								"GoldLowerBoundPerMinute": 8,
@@ -1460,6 +1520,7 @@
 						"PerfectTiming": {
 							"id": 8313,
 							"name": "PerfectTiming",
+							"icon": "assets/perks/styles/inspiration/perfecttiming/alchemistcabinet.png",
 							"effectAmount": {
 								"FirstElixirLevel": 3,
 								"SecondElixirLevel": 6,
@@ -1469,6 +1530,7 @@
 						"TimeWarpTonic": {
 							"id": 8352,
 							"name": "TimeWarpTonic",
+							"icon": "assets/perks/styles/inspiration/timewarptonic/timewarptonic.png",
 							"effectAmount": {
 								"BonusMS": 0,
 								"RestorationPercentage": 0.4,
@@ -1478,6 +1540,7 @@
 						"BiscuitDelivery": {
 							"id": 8345,
 							"name": "BiscuitDelivery",
+							"icon": "assets/perks/styles/inspiration/biscuitdelivery/biscuitdelivery.png",
 							"effectAmount": {
 								"BiscuitMinuteInterval": 2,
 								"SwapOverMinute": 6,
@@ -1494,6 +1557,7 @@
 						"CosmicInsight": {
 							"id": 8347,
 							"name": "CosmicInsight",
+							"icon": "assets/perks/styles/inspiration/cosmicinsight/cosmicinsight.png",
 							"effectAmount": {
 								"ItemHaste": 10,
 								"SummonerHaste": 18
@@ -1502,6 +1566,7 @@
 						"ApproachVelocity": {
 							"id": 8410,
 							"name": "ApproachVelocity",
+							"icon": "assets/perks/styles/resolve/approachvelocity/approachvelocity.png",
 							"effectAmount": {
 								"MovementSpeedPercentBonus": 0.15,
 								"ActivationDistance": 1000
@@ -1510,6 +1575,7 @@
 						"JackOfAllTrades": {
 							"id": 8316,
 							"name": "JackOfAllTrades",
+							"icon": "assets/perks/styles/inspiration/jackofalltrades/jackofalltrades2.png",
 							"effectAmount": {
 								"{1b48f5ea}": 10,
 								"{55d14eea}": 25,

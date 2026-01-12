@@ -354,7 +354,7 @@ if (!runeData || runeData?.version !== latestVersion) {
 		version: latestVersion,
 		data: {
 			paths: Object.fromEntries(['Precision', 'Domination', 'Sorcery', 'Resolve', 'Inspiration'].map((path) => {
-				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots } = data[`Perks/Styles/${path}`];
+				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[`Perks/Styles/${path}`];
 
 				(textData.data.runes.paths as any)[path] = {
 					name: getStringtableValue(mDisplayNameLocalizationKey, 'rune paths'),
@@ -364,6 +364,7 @@ if (!runeData || runeData?.version !== latestVersion) {
 				return [path, {
 					id: mPerkStyleId,
 					name: mPerkStyleName,
+					icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
 					slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => Object.fromEntries(
 						mPerks.map(perk => createRuneSlotData(data[perk])),
 					)),
@@ -559,7 +560,7 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug:
 }
 
 function createRuneSlotData(data: any) {
-	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mTooltipNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey } = data;
+	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mTooltipNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey, mIconTextureName } = data;
 
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
@@ -571,6 +572,7 @@ function createRuneSlotData(data: any) {
 	return [mPerkName, {
 		id: mPerkId,
 		name: mPerkName,
+		icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
 		calculations: cleanupObject(mSpellScriptData.mCalculations),
 		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
 	}];
