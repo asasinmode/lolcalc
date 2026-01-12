@@ -364,7 +364,9 @@ if (!runeData || runeData?.version !== latestVersion) {
 				return [path, {
 					id: mPerkStyleId,
 					name: mPerkStyleName,
-					slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => mPerks.map(perk => createRuneSlotData(data[perk]))),
+					slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => Object.fromEntries(
+						mPerks.map(perk => createRuneSlotData(data[perk])),
+					)),
 				}];
 			})),
 			shards: {
@@ -566,12 +568,12 @@ function createRuneSlotData(data: any) {
 		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
 	};
 
-	return {
+	return [mPerkName, {
 		id: mPerkId,
 		name: mPerkName,
 		calculations: cleanupObject(mSpellScriptData.mCalculations),
 		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
-	};
+	}];
 }
 
 async function loadStringTable() {

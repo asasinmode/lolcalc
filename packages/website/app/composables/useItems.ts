@@ -1,3 +1,4 @@
+import type { UnionKeys } from '~/utils/types';
 import { data } from '../assets/item.json';
 
 export function useItems(): Record<string, IItem> {
@@ -142,5 +143,3 @@ export interface IItem {
 	}>;
 	effectAmount?: number[];
 }
-
-type UnionKeys<T> = T extends T ? keyof T : never;

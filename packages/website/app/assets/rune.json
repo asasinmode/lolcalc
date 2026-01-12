@@ -6,8 +6,8 @@
 				"id": 8000,
 				"name": "Precision",
 				"slots": [
-					[
-						{
+					{
+						"PressTheAttack": {
 							"id": 8005,
 							"name": "PressTheAttack",
 							"effectAmount": {
@@ -28,7 +28,7 @@
 								"Cooldown": 6
 							}
 						},
-						{
+						"LethalTempo": {
 							"id": 8008,
 							"name": "LethalTempo",
 							"calculations": {
@@ -81,7 +81,7 @@
 								"TTMaxNoteDamageRanged": 24
 							}
 						},
-						{
+						"FleetFootwork": {
 							"id": 8021,
 							"name": "FleetFootwork",
 							"calculations": {
@@ -139,7 +139,7 @@
 								"MinionHealMod": 0.15
 							}
 						},
-						{
+						"Conqueror": {
 							"id": 8010,
 							"name": "Conqueror",
 							"effectAmount": {
@@ -152,9 +152,9 @@
 								"RangedHealingPercent": 0.05
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"AbsorbLife": {
 							"id": 9101,
 							"name": "AbsorbLife",
 							"calculations": {
@@ -182,7 +182,7 @@
 								"TooltipMaxHeal": 23
 							}
 						},
-						{
+						"Triumph": {
 							"id": 9111,
 							"name": "Triumph",
 							"calculations": {
@@ -202,7 +202,7 @@
 								"TriumphMaxHealthRestored": 0.03
 							}
 						},
-						{
+						"PresenceOfMind": {
 							"id": 8009,
 							"name": "PresenceOfMind",
 							"calculations": {
@@ -255,9 +255,9 @@
 								"EnergyRestore": 6
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"LegendAlacrity": {
 							"id": 9104,
 							"name": "LegendAlacrity",
 							"effectAmount": {
@@ -271,7 +271,7 @@
 								"MinionKillValue": 4
 							}
 						},
-						{
+						"LegendHaste": {
 							"id": 9105,
 							"name": "LegendHaste",
 							"effectAmount": {
@@ -285,7 +285,7 @@
 								"MinionKillValue": 4
 							}
 						},
-						{
+						"LegendBloodline": {
 							"id": 9103,
 							"name": "LegendBloodline",
 							"effectAmount": {
@@ -300,9 +300,9 @@
 								"BonusHealth": 85
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"CoupDeGrace": {
 							"id": 8014,
 							"name": "CoupDeGrace",
 							"effectAmount": {
@@ -310,7 +310,7 @@
 								"BonusPercentDamage": 0.08
 							}
 						},
-						{
+						"CutDown": {
 							"id": 8017,
 							"name": "CutDown",
 							"effectAmount": {
@@ -322,7 +322,7 @@
 								"BonusPercentDamage": 0.08
 							}
 						},
-						{
+						"LastStand": {
 							"id": 8299,
 							"name": "LastStand",
 							"effectAmount": {
@@ -332,15 +332,15 @@
 								"HealthThresholdEnd": 0.3
 							}
 						}
-					]
+					}
 				]
 			},
 			"Domination": {
 				"id": 8100,
 				"name": "Domination",
 				"slots": [
-					[
-						{
+					{
+						"Electrocute": {
 							"id": 8112,
 							"name": "Electrocute",
 							"calculations": {
@@ -372,7 +372,7 @@
 								"CooldownMin": 20
 							}
 						},
-						{
+						"DarkHarvest": {
 							"id": 8128,
 							"name": "DarkHarvest",
 							"calculations": {
@@ -403,7 +403,7 @@
 								"CooldownResetValue": 1
 							}
 						},
-						{
+						"HailOfBlades": {
 							"id": 9923,
 							"name": "HailOfBlades",
 							"calculations": {
@@ -456,9 +456,9 @@
 								"ASBoostRanged": 0.8
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"CheapShot": {
 							"id": 8126,
 							"name": "CheapShot",
 							"calculations": {
@@ -478,7 +478,7 @@
 								"Cooldown": 4
 							}
 						},
-						{
+						"TasteOfBlood": {
 							"id": 8139,
 							"name": "TasteOfBlood",
 							"calculations": {
@@ -509,7 +509,7 @@
 								"APRatio": 0.05
 							}
 						},
-						{
+						"SuddenImpact": {
 							"id": 8143,
 							"name": "SuddenImpact",
 							"calculations": {
@@ -530,9 +530,9 @@
 								"MaxDamageTooltip": 80
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"SixthSense": {
 							"id": 8137,
 							"name": "SixthSense",
 							"calculations": {
@@ -566,7 +566,7 @@
 								"RevealDuration": 10
 							}
 						},
-						{
+						"GrislyMementos": {
 							"id": 8140,
 							"name": "GrislyMementos",
 							"effectAmount": {
@@ -576,7 +576,7 @@
 								"MaxStacks": 18
 							}
 						},
-						{
+						"DeepWard": {
 							"id": 8141,
 							"name": "DeepWard",
 							"calculations": {
@@ -606,9 +606,9 @@
 								"TTTrinketDurationIncreaseMax": 150
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"TreasureHunter": {
 							"id": 8135,
 							"name": "TreasureHunter",
 							"effectAmount": {
@@ -617,7 +617,7 @@
 								"TOOLTIPMaxGoldAmount": 130
 							}
 						},
-						{
+						"RelentlessHunter": {
 							"id": 8105,
 							"name": "RelentlessHunter",
 							"effectAmount": {
@@ -625,7 +625,7 @@
 								"StartingOOCMS": 0
 							}
 						},
-						{
+						"UltimateHunter": {
 							"id": 8106,
 							"name": "UltimateHunter",
 							"effectAmount": {
@@ -633,15 +633,15 @@
 								"StartingUltAH": 6
 							}
 						}
-					]
+					}
 				]
 			},
 			"Sorcery": {
 				"id": 8200,
 				"name": "Sorcery",
 				"slots": [
-					[
-						{
+					{
+						"SummonAery": {
 							"id": 8214,
 							"name": "SummonAery",
 							"calculations": {
@@ -692,7 +692,7 @@
 								"ShieldDuration": 2.5
 							}
 						},
-						{
+						"ArcaneComet": {
 							"id": 8229,
 							"name": "ArcaneComet",
 							"calculations": {
@@ -740,7 +740,7 @@
 								"AoEPercentRefund": 0.1
 							}
 						},
-						{
+						"PhaseRush": {
 							"id": 8230,
 							"name": "PhaseRush",
 							"calculations": {
@@ -781,9 +781,9 @@
 								"RangedEffectiveness": 0.75
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"NullifyingOrb": {
 							"id": 8224,
 							"name": "NullifyingOrb",
 							"effectAmount": {
@@ -792,7 +792,7 @@
 								"AOEAmp": 0.08
 							}
 						},
-						{
+						"ManaflowBand": {
 							"id": 8226,
 							"name": "ManaflowBand",
 							"effectAmount": {
@@ -805,7 +805,7 @@
 								"PercentManaRestoreCooldown": 5
 							}
 						},
-						{
+						"NimbusCloak": {
 							"id": 8275,
 							"name": "NimbusCloak",
 							"effectAmount": {
@@ -817,9 +817,9 @@
 								"{b0d06764}": 250
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"Transcendence": {
 							"id": 8210,
 							"name": "Transcendence",
 							"effectAmount": {
@@ -831,7 +831,7 @@
 								"LevelToTurnOn3": 11
 							}
 						},
-						{
+						"Celerity": {
 							"id": 8234,
 							"name": "Celerity",
 							"effectAmount": {
@@ -839,7 +839,7 @@
 								"PercentMS": 0.01
 							}
 						},
-						{
+						"AbsoluteFocus": {
 							"id": 8233,
 							"name": "AbsoluteFocus",
 							"calculations": {
@@ -859,9 +859,9 @@
 								"MaxAdaptive": 30
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"Scorch": {
 							"id": 8237,
 							"name": "Scorch",
 							"calculations": {
@@ -884,7 +884,7 @@
 								"{89367404}": 0.1
 							}
 						},
-						{
+						"Waterwalking": {
 							"id": 8232,
 							"name": "Waterwalking",
 							"calculations": {
@@ -905,7 +905,7 @@
 								"MaxAdaptive": 30
 							}
 						},
-						{
+						"GatheringStorm": {
 							"id": 8236,
 							"name": "GatheringStorm",
 							"effectAmount": {
@@ -915,15 +915,15 @@
 								"{c5d14564}": 8
 							}
 						}
-					]
+					}
 				]
 			},
 			"Resolve": {
 				"id": 8400,
 				"name": "Resolve",
 				"slots": [
-					[
-						{
+					{
+						"GraspOfTheUndying": {
 							"id": 8437,
 							"name": "GraspOfTheUndying",
 							"calculations": {
@@ -963,7 +963,7 @@
 								"MeleeFlatHeal": 0
 							}
 						},
-						{
+						"Aftershock": {
 							"id": 8439,
 							"name": "Aftershock",
 							"calculations": {
@@ -1030,7 +1030,7 @@
 								"PercentBonusResist": 0.8
 							}
 						},
-						{
+						"Guardian": {
 							"id": 8465,
 							"name": "Guardian",
 							"calculations": {
@@ -1085,9 +1085,9 @@
 								"ThresholdMax": 165
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"Demolish": {
 							"id": 8446,
 							"name": "Demolish",
 							"calculations": {
@@ -1134,7 +1134,7 @@
 								"{ffe97357}": 0.2
 							}
 						},
-						{
+						"FontOfLife": {
 							"id": 8463,
 							"name": "FontOfLife",
 							"calculations": {
@@ -1156,7 +1156,7 @@
 								"RangedMod": 0.7
 							}
 						},
-						{
+						"ShieldBash": {
 							"id": 8401,
 							"name": "ShieldBash",
 							"effectAmount": {
@@ -1168,9 +1168,9 @@
 								"ProcBaseMax": 30
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"Conditioning": {
 							"id": 8429,
 							"name": "Conditioning",
 							"calculations": {
@@ -1207,7 +1207,7 @@
 								"MinutesRequired": 12
 							}
 						},
-						{
+						"SecondWind": {
 							"id": 8444,
 							"name": "SecondWind",
 							"effectAmount": {
@@ -1216,7 +1216,7 @@
 								"RegenFlat": 0
 							}
 						},
-						{
+						"BonePlating": {
 							"id": 8473,
 							"name": "BonePlating",
 							"calculations": {
@@ -1238,9 +1238,9 @@
 								"Cooldown": 55
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"Overgrowth": {
 							"id": 8451,
 							"name": "Overgrowth",
 							"effectAmount": {
@@ -1253,7 +1253,7 @@
 								"ThresholdMaxHealthRatio": 0.04
 							}
 						},
-						{
+						"Revitalize": {
 							"id": 8453,
 							"name": "Revitalize",
 							"effectAmount": {
@@ -1262,7 +1262,7 @@
 								"{9df5828d}": 10
 							}
 						},
-						{
+						"Unflinching": {
 							"id": 8242,
 							"name": "Unflinching",
 							"effectAmount": {
@@ -1271,15 +1271,15 @@
 								"Duration": 2
 							}
 						}
-					]
+					}
 				]
 			},
 			"Inspiration": {
 				"id": 8300,
 				"name": "Inspiration",
 				"slots": [
-					[
-						{
+					{
+						"GlacialAugment": {
 							"id": 8351,
 							"name": "GlacialAugment",
 							"calculations": {
@@ -1324,7 +1324,7 @@
 								"SlowZoneSlowHealShieldRatio": 90
 							}
 						},
-						{
+						"UnsealedSpellbook": {
 							"id": 8360,
 							"name": "UnsealedSpellbook",
 							"effectAmount": {
@@ -1341,7 +1341,7 @@
 								"{0bb7b933}": 6
 							}
 						},
-						{
+						"FirstStrike": {
 							"id": 8369,
 							"name": "FirstStrike",
 							"calculations": {
@@ -1414,9 +1414,9 @@
 								"{7563bf99}": 0.7
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"HextechFlashtraption": {
 							"id": 8306,
 							"name": "HextechFlashtraption",
 							"effectAmount": {
@@ -1428,7 +1428,7 @@
 								"{d6487c09}": 0.5
 							}
 						},
-						{
+						"MagicalFootwear": {
 							"id": 8304,
 							"name": "MagicalFootwear",
 							"effectAmount": {
@@ -1438,7 +1438,7 @@
 								"AdditionalMovementSpeed": 10
 							}
 						},
-						{
+						"CashBack": {
 							"id": 8321,
 							"name": "CashBack",
 							"effectAmount": {
@@ -1455,9 +1455,9 @@
 								"PercentRefund": 0.08
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"PerfectTiming": {
 							"id": 8313,
 							"name": "PerfectTiming",
 							"effectAmount": {
@@ -1466,7 +1466,7 @@
 								"ThirdElixirLevel": 9
 							}
 						},
-						{
+						"TimeWarpTonic": {
 							"id": 8352,
 							"name": "TimeWarpTonic",
 							"effectAmount": {
@@ -1475,7 +1475,7 @@
 								"Cooldown": 20
 							}
 						},
-						{
+						"BiscuitDelivery": {
 							"id": 8345,
 							"name": "BiscuitDelivery",
 							"effectAmount": {
@@ -1489,9 +1489,9 @@
 								"MaximumHealIncrease": 1
 							}
 						}
-					],
-					[
-						{
+					},
+					{
+						"CosmicInsight": {
 							"id": 8347,
 							"name": "CosmicInsight",
 							"effectAmount": {
@@ -1499,7 +1499,7 @@
 								"SummonerHaste": 18
 							}
 						},
-						{
+						"ApproachVelocity": {
 							"id": 8410,
 							"name": "ApproachVelocity",
 							"effectAmount": {
@@ -1507,7 +1507,7 @@
 								"ActivationDistance": 1000
 							}
 						},
-						{
+						"JackOfAllTrades": {
 							"id": 8316,
 							"name": "JackOfAllTrades",
 							"effectAmount": {
@@ -1516,7 +1516,7 @@
 								"HastePerStack": 1
 							}
 						}
-					]
+					}
 				]
 			}
 		},
