@@ -222,7 +222,7 @@ defineExpose({
 					@apply 'relative bg-[--slot-bg] size-[--slot-row-button-size] block rounded-full b b-[--path-icon-color] b-2';
 
 					&:before {
-						@apply 'absolute content-empty rounded-full inset-0 outline-transparent outline-3 outline-offset-8 op-0';
+						@apply 'absolute content-empty rounded-full inset-0 outline-3 outline-offset-8 op-0';
 						outline-color: var(--path-icon-color);
 						transition-property: outline-offset, opacity;
 						transition-duration: 150ms;
@@ -281,13 +281,21 @@ defineExpose({
 		}
 
 		&:after {
-			@apply 'content-empty left-8 translate-center size-10';
+			@apply 'content-empty left-8 translate-center size-10 shadow-none';
 			background-color: var(--path-icon-color);
 			mask: var(--path-icon) no-repeat center;
 		}
 
 		button {
-			@apply 'rounded-full b-2 b-transparent grid-center size-12';
+			@apply 'rounded-full b-2 b-transparent grid-center size-12 relative';
+
+			&:before {
+				@apply 'absolute content-empty rounded-full inset-0 outline-2 outline-offset-1 op-0';
+				outline-color: theme('colors.yellow.600');
+				transition-property: outline-offset, opacity;
+				transition-duration: 150ms;
+				transition-timing-function: ease-in-out;
+			}
 
 			span {
 				@apply 'brightness-80';
@@ -302,7 +310,9 @@ defineExpose({
 		}
 
 		button[aria-checked='true'] {
-			@apply 'b-amber';
+			&:before {
+				@apply 'op-100 -outline-offset-2';
+			}
 
 			span {
 				@apply 'brightness-100';
