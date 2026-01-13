@@ -599,7 +599,7 @@ defineExpose({
 			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" :target />
 			<button
 				:disabled="!selectedItem"
-				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-gray-950"
+				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-neutral-950"
 				@click="buyItem(selectedItem!)"
 			>
 				Purchase

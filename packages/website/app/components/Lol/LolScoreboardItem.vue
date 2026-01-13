@@ -84,7 +84,7 @@ const group = computed(() => props.isRight ? 'targets' : 'sources');
 		<ul class="flex">
 			<li v-for="i in 6" :key="i">
 				<button
-					class="border-gray-7 border size-8 inline-block"
+					class="border-neutral-7 border size-8 inline-block"
 					@click.right.prevent="value.items.value.splice(i - 1, 1)"
 				>
 					<span v-if="value.items.value[i - 1]" class="sr-only">{{ value.items.value[i - 1]!.name }}</span>
