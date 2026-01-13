@@ -9,17 +9,19 @@ const props = defineProps<{
 }>();
 
 const value = defineModel<T[ValueKey]>();
-const tabButtons = useTemplateRef('tabButton');
+// TODO could use ref on `v-for` but the order isn't guaranteed https://github.com/vuejs/core/issues/4010
+const container = useTemplateRef('container');
 
 function onKeydown(e: KeyboardEvent) {
 	const currentOption = e.target;
-	const currentIndex = tabButtons.value!.indexOf(currentOption as HTMLButtonElement);
+	const tabButtons = Array.from(container.value!.querySelectorAll('button'));
+	const currentIndex = tabButtons.indexOf(currentOption as HTMLButtonElement);
 
 	if (currentIndex === -1) {
 		return;
 	}
 
-	const tabLength = tabButtons.value!.length;
+	const tabLength = tabButtons!.length;
 	let newIndex = 0;
 	switch (e.key) {
 		case 'ArrowDown':
@@ -37,7 +39,7 @@ function onKeydown(e: KeyboardEvent) {
 	e.preventDefault();
 	e.stopPropagation();
 	value.value = props.options[newIndex]![props.valueKey];
-	tabButtons.value![newIndex]?.focus();
+	tabButtons![newIndex]?.focus();
 }
 
 function selectOption(tab: T[ValueKey]) {
@@ -46,12 +48,11 @@ function selectOption(tab: T[ValueKey]) {
 </script>
 
 <template>
-	<div :id role="radiogroup" :aria-labelledby="`${id}-lbl`" @keydown="onKeydown">
+	<div :id ref="container" role="radiogroup" :aria-labelledby="`${id}-lbl`" @keydown="onKeydown">
 		<span :id="`${id}-lbl`" class="sr-only">{{ label }}</span>
 		<button
 			v-for="(option, index) in options"
 			:key="option[valueKey] as string"
-			ref="tabButton"
 			role="radio"
 			:title="option[titleKey || valueKey] as string"
 			:tabindex="(!value && index === 0) || value === option[valueKey] ? 0 : -1"
