@@ -165,7 +165,7 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-rune-select" ref="vDialog" class="px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[1fr_auto] grid-rows-[auto_1fr_auto] shadow-lg [&[open]]:grid">
+	<VDialog id="dialog-rune-select" ref="vDialog" class="px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_1fr_auto] shadow-lg [&[open]]:grid">
 		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky">
 			<h1>Runes</h1>
 			<form method="dialog" class="ml-auto">
@@ -381,7 +381,7 @@ defineExpose({
 				--selected-slot-checked-width: calc(var(--spacing) * 2.5);
 
 				> button {
-					@apply 'size-12';
+					@apply 'size-[--keystone-row-button-size]';
 
 					> img {
 						@apply 'size-21 pointer-events-none';
@@ -453,6 +453,9 @@ defineExpose({
 		--selected-keystone-width: calc(var(--spacing) * 5.5);
 		--selected-slot-width: calc(var(--spacing) * 4.5);
 		--path-row-py: calc(var(--spacing) * 2);
+		--keystone-row-py: calc(var(--spacing) * 8);
+		--keystone-row-button-size: calc(var(--spacing) * 12);
+		--keystone-row-height: calc(var(--keystone-row-button-size) + 2 * var(--keystone-row-py));
 		--slot-row-button-size: calc(var(--spacing) * 11);
 		--slot-row-py: calc(var(--spacing) * 4);
 		--slot-row-height: calc(var(--slot-row-button-size) + 2 * var(--slot-row-py));
@@ -473,7 +476,7 @@ defineExpose({
 
 		:where([role='radiogroup']) {
 			&[data-keystone] {
-				@apply 'py-8 b-y b-[--path-icon-clr]';
+				@apply 'py-[--keystone-row-py] b-y b-[--path-icon-clr]';
 				border-image: linear-gradient(
 						90deg,
 						transparent 0%,
@@ -492,13 +495,69 @@ defineExpose({
 	}
 
 	#rune-select-secondary {
-		&[data-slots-filled='2'] {
-			[role='radiogroup']:nth-of-type(n + 2):not(:has(button[aria-checked='true'])) {
-				> button:not(:hover):not(:focus-visible) {
-					@apply 'b-[--slot-border-clr]';
+		@apply 'h-min';
 
-					img {
-						@apply 'grayscale';
+		&:before {
+			@apply 'bottom-[calc(var(--slot-row-height))]';
+		}
+
+		[role='radiogroup'] {
+			&:nth-of-type(4) {
+				&:before,
+				&:after {
+					@apply 'op-0';
+				}
+			}
+
+			&:nth-of-type(n + 2) {
+				--selected-dot-translate-y: calc((var(--keystone-row-height) - var(--slot-row-height)) / 2);
+
+				&:before {
+					@apply 'translate-y-[--selected-dot-translate-y]';
+				}
+
+				&:after {
+					@apply 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
+				}
+			}
+
+			&:nth-of-type(3) {
+				--selected-dot-translate-y: calc(var(--keystone-row-height) - var(--slot-row-height) + 1px);
+
+				&:before {
+					@apply 'translate-y-[--selected-dot-translate-y]';
+				}
+
+				&:after {
+					@apply 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
+				}
+			}
+
+			&:nth-of-type(n + 2):after {
+				@apply 'hidden';
+			}
+		}
+
+		&[data-slots-filled='1'],
+		&[data-slots-filled='2'] {
+			[role='radiogroup']:nth-of-type(2):after {
+				@apply 'content-empty block';
+			}
+		}
+
+		&[data-slots-filled='2'] {
+			[role='radiogroup'] {
+				&:nth-of-type(3):after {
+					@apply 'content-empty block';
+				}
+
+				&:nth-of-type(n + 2):not(:has(button[aria-checked='true'])) {
+					> button:not(:hover):not(:focus-visible) {
+						@apply 'b-[--slot-border-clr]';
+
+						img {
+							@apply 'grayscale';
+						}
 					}
 				}
 			}
