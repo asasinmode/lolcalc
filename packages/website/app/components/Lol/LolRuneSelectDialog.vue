@@ -221,6 +221,19 @@ defineExpose({
 				> button {
 					@apply 'relative bg-[--slot-bg] size-[--slot-row-button-size] block rounded-full b b-[--path-icon-color] b-2';
 
+					&:before {
+						@apply 'absolute content-empty rounded-full inset-0 outline-transparent outline-3 outline-offset-8 op-0';
+						outline-color: var(--path-icon-color);
+						transition-property: outline-offset, opacity;
+						transition-duration: 150ms;
+						transition-timing-function: ease-in-out;
+					}
+
+					&:hover:before,
+					&:focus-visible:before {
+						@apply 'outline-offset-6 op-50';
+					}
+
 					> img {
 						@apply 'block size-10 absolute max-w-unset translate-center left-1/2 top-1/2';
 					}
@@ -249,7 +262,7 @@ defineExpose({
 					@apply 'size-12';
 
 					> img {
-						@apply 'size-21';
+						@apply 'size-21 pointer-events-none';
 					}
 				}
 
