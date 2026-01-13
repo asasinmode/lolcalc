@@ -3,7 +3,7 @@ import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composabl
 import type { ITexture } from '../app/composables/useUi';
 import { useMaps } from '../app/composables/useMaps';
 import { KNOWN_TOOLTIP_SHOP_EXTRA_TAGS, replaceItemDescriptionVariables } from '../app/utils/item';
-import { RUNE_PATHS } from '../app/utils/rune';
+import { ALL_RUNE_PATHS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -364,7 +364,7 @@ if (!runeData || runeData?.version !== latestVersion) {
 	runeData = {
 		version: latestVersion,
 		data: {
-			paths: Object.fromEntries(RUNE_PATHS.map((path) => {
+			paths: Object.fromEntries(ALL_RUNE_PATHS.map((path) => {
 				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[`Perks/Styles/${path}`];
 
 				const cssSliceSelector = `.primary-perk-selector.keystone.${mPerkStyleName.toLowerCase()}`;
