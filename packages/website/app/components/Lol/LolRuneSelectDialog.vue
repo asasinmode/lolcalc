@@ -467,11 +467,15 @@ defineExpose({
 
 		&:before {
 			--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
+			--selected-dots-column-lining-clr: hsl(0 100% 100% / 0.6);
+			--selected-dots-column-lining-clr: hsl(
+				from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
+			);
 			@apply 'content-empty absolute left-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
 			box-shadow:
 				0 0 6px 0 var(--path-icon-clr),
-				inset 1px 0 0 hsl(0 100% 100% / 0.6),
-				inset -1px 0 0 hsl(0 100% 100% / 0.6);
+				inset 1px 0 0 var(--selected-dots-column-lining-clr),
+				inset -1px 0 0 var(--selected-dots-column-lining-clr);
 		}
 
 		:where([role='radiogroup']) {
