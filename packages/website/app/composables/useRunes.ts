@@ -8,10 +8,7 @@ export function useRunes() {
 type IDataShards = typeof data.shards;
 type IDataPaths = typeof data.paths;
 
-type IRuneShards = {
-	[K in keyof IDataShards]: keyof IDataShards[K];
-};
-
+export type IRuneShardSlotName = keyof IDataShards;
 export type IRunePathName = keyof IDataPaths;
 export type IRuneSlotName = UnionKeys<IDataPaths[IRunePathName]['slots'][number]>;
 
@@ -31,7 +28,15 @@ interface IRunePath {
 
 export interface IRunes {
 	paths: Record<IRunePathName, IRunePath>;
-	shards: IRuneShards;
+	shards: {
+		[S in IRuneShardSlotName]: {
+			[V in keyof IDataShards[S]]: {
+				id: number;
+				icon: string;
+				effectAmount: Record<string, number>;
+			}
+		}
+	};
 }
 
 export interface IChampionRunes {
@@ -41,5 +46,7 @@ export interface IChampionRunes {
 		secondary: IRunePathName | undefined;
 		secondarySlots: (IRuneSlotName | undefined)[];
 	};
-	shards: IRuneShards;
+	shards: {
+		[K in IRuneShardSlotName]: keyof IDataShards[K];
+	};
 }

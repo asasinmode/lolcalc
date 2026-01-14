@@ -17,8 +17,20 @@ export interface ITextData {
 		paths: Record<string, { name: string; tooltip: string }>;
 		slots: Record<string, {
 			name: string;
+			/** champ select rune dialog hover */
 			tooltipShort: string;
+			/** champ select rune dialog hover + shift */
 			tooltipLong: string;
+			/** the tooltip displayed when hovering over the in game stats panel */
+			tooltipStats: string;
 		}>;
+		shards: {
+			slotNames: Record<string, { name: string }>;
+			slotValues: Record<string, {
+				name: string;
+				/** champ select rune dialog hover */
+				tooltip: string;
+			}>;
+		};
 	};
 }

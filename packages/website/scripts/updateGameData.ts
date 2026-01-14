@@ -213,7 +213,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 		3877: 7,	// bloodsong
 	};
 
-	textData.data.items ||= {} as any;
+	textData.data.items = {} as any;
 
 	for (const [itemId, item] of Object.entries(itemData.data as unknown as Record<string, IItem>)) {
 		const itemMoreData = moreItemData[`Items/${itemId}`];
@@ -344,14 +344,14 @@ if (!runeData || runeData?.version !== latestVersion) {
 	await loadRcpFeLolCollectionsCss();
 	const data = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/perks.cdtb.bin.json`).then(r => r.json());
 
-	const shardAdaptiveForce = data['Perks/StatMods/Adaptive'].mScript.mSpellScriptData.mEffectAmount.StatGain2;
-	const shardScalingHealth = data['Perks/StatMods/HealthScaling'].mScript.mSpellScriptData.mEffectAmount.StatGainMin;
-	const shardDefensiveFlatHealthKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[0];
-	const shardDefensiveTenacityKey = data['Perks/StatMods/Slots/DefensiveStats'].mPerks[1];
-
-	textData.data.runes ||= {} as any;
-	textData.data.runes.paths ||= {} as any;
-	textData.data.runes.slots ||= {} as any;
+	textData.data.runes = {
+		paths: {},
+		slots: {},
+		shards: {
+			slotNames: {},
+			slotValues: {},
+		},
+	} as any;
 
 	const pathStyleCssStartIndex = rcpFeLolCollectionsCss!.indexOf('.primary-perk-selector.keystone.');
 	let pathStyleCssSlice = '';
@@ -387,23 +387,29 @@ if (!runeData || runeData?.version !== latestVersion) {
 					)),
 				}];
 			})),
-			shards: {
-				offensive: {
-					adaptiveForce: shardAdaptiveForce,
-					percentAttackSpeed: formatNumber((data['Perks/StatMods/AttackSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain / 100), 2),
-					abilityHaste: data['Perks/StatMods/CDRScaling'].mScript.mSpellScriptData.mEffectAmount.HasteGain,
-				},
-				flex: {
-					adaptiveForce: shardAdaptiveForce,
-					percentMoveSpeed: formatNumber((data['Perks/StatMods/MovementSpeed'].mScript.mSpellScriptData.mEffectAmount.StatGain1 / 100), 3),
-					scalingHealth: shardScalingHealth,
-				},
-				defensive: {
-					flatHealth: data[shardDefensiveFlatHealthKey].mScript.mSpellScriptData.mEffectAmount.StatGain,
-					percentTenacityMod: formatNumber((data[shardDefensiveTenacityKey].mScript.mSpellScriptData.mEffectAmount.StatGain / 100), 2),
-					scalingHealth: shardScalingHealth,
-				},
-			},
+			shards: Object.fromEntries(['OffensiveStats', 'FlexStats', 'DefensiveStats'].map((slotKey) => {
+				const { mPerks, mSlotLabelKey } = data[`Perks/StatMods/Slots/${slotKey}`];
+				slotKey = slotKey.slice(0, -5).toLowerCase();
+
+				(textData.data.runes.shards.slotNames as any)[slotKey] = {
+					name: getStringtableValue(mSlotLabelKey, 'rune shards'),
+				};
+
+				return [slotKey, Object.fromEntries(mPerks.map((perkKey: string) => {
+					const { mPerkId, mPerkName, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mIconTextureName, mScript } = data[perkKey];
+
+					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
+						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards'),
+					};
+
+					return [mPerkName.toLowerCase(), {
+						id: mPerkId,
+						icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
+						effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount),
+					}];
+				}))];
+			})),
 		} as unknown as NonNullable<(typeof runeData)>['data'],
 	};
 

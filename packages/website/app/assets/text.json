@@ -2517,6 +2517,49 @@
 					"tooltipLong": "For each different stat gained from items, gain one Jack stack. Each stack grants you <speed>@HasteperStack@ Ability Haste</speed>.<br><br>Gain 10 or 25 bonus <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'>Adaptive Force</lol-uikit-tooltipped-keyword> at 5 and 10 stacks, respectively.",
 					"tooltipStats": "{{perk_long_desc_MinionDematerializer}}<br><hr><br>Different Stats: @f1@<br>Bonus Adaptive Force: +@f2@"
 				}
+			},
+			"shards": {
+				"slotNames": {
+					"offensive": {
+						"name": "Offense"
+					},
+					"flex": {
+						"name": "Flex"
+					},
+					"defensive": {
+						"name": "Defense"
+					}
+				},
+				"slotValues": {
+					"adaptive": {
+						"name": "Adaptive Force",
+						"tooltip": "+@StatGain2@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>Adaptive Force</font></lol-uikit-tooltipped-keyword>"
+					},
+					"attackspeed": {
+						"name": "Attack Speed",
+						"tooltip": "+@StatGain@% Attack Speed"
+					},
+					"cdrscaling": {
+						"name": "Ability Haste",
+						"tooltip": "+@HasteGain@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> "
+					},
+					"movementspeed": {
+						"name": "Move Speed",
+						"tooltip": "+@StatGain1@% <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>Move Speed</lol-uikit-tooltipped-keyword>"
+					},
+					"healthscaling": {
+						"name": "Health Scaling",
+						"tooltip": "+@StatGainMin@-@StatGainMax@ Health (based on level)"
+					},
+					"health": {
+						"name": "Health",
+						"tooltip": "+@StatGain@ Health"
+					},
+					"tenacity": {
+						"name": "Tenacity and Slow Resist",
+						"tooltip": "+@StatGain@% Tenacity and Slow Resist"
+					}
+				}
 			}
 		}
 	}

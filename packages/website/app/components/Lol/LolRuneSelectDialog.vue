@@ -8,20 +8,6 @@ const { minorVersion } = usePatchVersion();
 const value = defineModel<IChampionRunes>();
 const vDialog = useTemplateRef('vDialog');
 
-const defaultRunes: IChampionRunes = {
-	paths: {
-		primary: undefined,
-		primarySlots: [],
-		secondary: undefined,
-		secondarySlots: [],
-	},
-	shards: {
-		offensive: 'adaptiveForce',
-		flex: 'adaptiveForce',
-		defensive: 'flatHealth',
-	},
-};
-
 const pathOptions = Object.values(runes.paths).map((path) => {
 	const { name, tooltip } = text.runes.paths[path.name]!;
 	return {
@@ -113,6 +99,19 @@ function secondarySlotValue(options: NonNullable<UnwrapRef<typeof secondaryRuneP
 	return undefined;
 };
 
+const shardSlots = computed(() => {
+	return Object.fromEntries(Object.entries(runes.shards).map(([shardName, shardSlots]) =>
+		[shardName, Object.keys(shardSlots).map((value) => {
+			return {
+				name: value,
+				title: value,
+				tooltipShort: 'some desc',
+				icon: 'some icon',
+			};
+		})],
+	)) as Record<IRuneShardSlotName, { name: string; title: string; tooltipShort: string; icon: string }[]>;
+});
+
 type PathTuple<T, K extends keyof T = keyof T>
 	= | [K]
 		| (K extends any ? (T[K] extends object ? [K, ...PathTuple<T[K]>] : [K]) : never);
@@ -131,8 +130,7 @@ function updateValue<P extends PathTuple<IChampionRunes>>(
 			reference = reference[key];
 		}
 		if (path[0] === 'paths' && path[1] === 'secondarySlots') {
-			const newValueSlotOptions = secondaryRunePathSlots.value!.find(slots => slots.some(slot => slot.name === newValue))!;
-			const sameSlotOptionIndex = value.value.paths.secondarySlots.findIndex(slot => newValueSlotOptions.some(option => option.name === slot));
+			const sameSlotOptionIndex = value.value.paths.secondarySlots.findIndex(slot => secondaryRunePathSlots.value![lastKey as number]!.some(option => option.name === slot));
 			if (~sameSlotOptionIndex) {
 				value.value.paths.secondarySlots[sameSlotOptionIndex] = newValue as IRuneSlotName;
 			} else {

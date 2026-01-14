@@ -1593,19 +1593,77 @@
 		},
 		"shards": {
 			"offensive": {
-				"adaptiveForce": 9,
-				"percentAttackSpeed": 0.1,
-				"abilityHaste": 8
+				"adaptive": {
+					"id": 5008,
+					"icon": "assets/perks/statmods/statmodsadaptiveforceicon.png",
+					"effectAmount": {
+						"StatGain2": 9,
+						"StatGain1": 5.4
+					}
+				},
+				"attackspeed": {
+					"id": 5005,
+					"icon": "assets/perks/statmods/statmodsattackspeedicon.png",
+					"effectAmount": {
+						"StatGain": 10
+					}
+				},
+				"cdrscaling": {
+					"id": 5007,
+					"icon": "assets/perks/statmods/statmodscdrscalingicon.png",
+					"effectAmount": {
+						"HasteGain": 8
+					}
+				}
 			},
 			"flex": {
-				"adaptiveForce": 9,
-				"percentMoveSpeed": 0.025,
-				"scalingHealth": 10
+				"adaptive": {
+					"id": 5008,
+					"icon": "assets/perks/statmods/statmodsadaptiveforceicon.png",
+					"effectAmount": {
+						"StatGain2": 9,
+						"StatGain1": 5.4
+					}
+				},
+				"movementspeed": {
+					"id": 5010,
+					"icon": "assets/perks/statmods/statmodsmovementspeedicon.png",
+					"effectAmount": {
+						"StatGain1": 2.5
+					}
+				},
+				"healthscaling": {
+					"id": 5001,
+					"icon": "assets/perks/statmods/statmodshealthplusicon.png",
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
 			},
 			"defensive": {
-				"flatHealth": 65,
-				"percentTenacityMod": 0.15,
-				"scalingHealth": 10
+				"health": {
+					"id": 5011,
+					"icon": "assets/perks/statmods/statmodshealthscalingicon.png",
+					"effectAmount": {
+						"StatGain": 65
+					}
+				},
+				"tenacity": {
+					"id": 5013,
+					"icon": "assets/perks/statmods/statmodstenacityicon.png",
+					"effectAmount": {
+						"StatGain": 15
+					}
+				},
+				"healthscaling": {
+					"id": 5001,
+					"icon": "assets/perks/statmods/statmodshealthplusicon.png",
+					"effectAmount": {
+						"StatGainMin": 10,
+						"StatGainMax": 180
+					}
+				}
 			}
 		}
 	}
