@@ -479,11 +479,15 @@ defineExpose({
 			--selected-dots-column-lining-clr: hsl(
 				from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
 			);
-			@apply 'content-empty absolute left-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
+			@apply 'absolute left-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
 			box-shadow:
 				0 0 6px 0 var(--path-icon-clr),
 				inset 1px 0 0 var(--selected-dots-column-lining-clr),
 				inset -1px 0 0 var(--selected-dots-column-lining-clr);
+		}
+
+		&[style]:not([style='']):before {
+			@apply 'content-empty';
 		}
 
 		:where([role='radiogroup']) {
@@ -515,6 +519,8 @@ defineExpose({
 		--path-row-mb: var(--secondary-path-row-mb);
 		--slot-row-py: var(--secondary-slot-row-py);
 		--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb));
+
+		@apply 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
 
 		&:before {
 			@apply 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
@@ -594,9 +600,8 @@ defineExpose({
 		--padding-size-share: 0.35;
 		--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
 		--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
-		--mb: calc(var(--primary-slot-row-height) / 2 - var(--slot-row-height) / 2);
 
-		@apply 'mt-auto mb-[--mb]';
+		@apply 'mt-auto mb-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
 
 		&:before {
 			@apply 'top-[calc(var(--slot-row-height)_/_2)]';

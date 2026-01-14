@@ -30,15 +30,15 @@ export class DamageSource {
 			? structuredClone(overrides.runes)
 			: {
 					paths: {
-						primary: undefined,
+						primary: 'Precision',
 						primarySlots: [],
 						secondary: undefined,
 						secondarySlots: [],
 					},
 					shards: {
-						offensive: 'adaptiveForce',
-						flex: 'adaptiveForce',
-						defensive: 'flatHealth',
+						offensive: 'adaptive',
+						flex: 'adaptive',
+						defensive: 'health',
 					},
 				});
 	}

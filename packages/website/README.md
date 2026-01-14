@@ -40,9 +40,9 @@ bun test
 - [ ] damage compare mode, no mirror mode, both sources and targets available, check which ones to use, check which ability to compare the damage of
 - [ ] rune dialog
   - [x] layout
-  - [ ] secondary path layout when empty
-  - [ ] rune paths not implemented
+  - [ ] secondary path unset layout
   - [ ] hover tooltips
+  - [ ] rune paths not implemented
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
