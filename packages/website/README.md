@@ -38,7 +38,11 @@ bun test
   - [ ] some cool graphs
   - [ ] choose damage for: passive, aa, abilities (grayed out with "coming in a future update" tooltip); columns
 - [ ] damage compare mode, no mirror mode, both sources and targets available, check which ones to use, check which ability to compare the damage of
-- [ ] rune dialog (major runes grayed out for now)
+- [ ] rune dialog
+  - [x] layout
+  - [ ] secondary path layout when empty
+  - [ ] rune paths not implemented
+  - [ ] hover tooltips
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting

@@ -99,18 +99,19 @@ function secondarySlotValue(options: NonNullable<UnwrapRef<typeof secondaryRuneP
 	return undefined;
 };
 
-const shardSlots = computed(() => {
-	return Object.fromEntries(Object.entries(runes.shards).map(([shardName, shardSlots]) =>
-		[shardName, Object.keys(shardSlots).map((value) => {
+const shardSlots = computed(() =>
+	Object.fromEntries(Object.entries(runes.shards).map(([shardName, shardSlots]) =>
+		[shardName, Object.entries(shardSlots).map(([name, shardValue]) => {
+			const { name: title, tooltip } = text.runes.shards.slotValues[name]!;
 			return {
-				name: value,
-				title: value,
-				tooltipShort: 'some desc',
-				icon: 'some icon',
+				name,
+				title,
+				tooltip,
+				icon: shardValue.icon,
 			};
 		})],
-	)) as Record<IRuneShardSlotName, { name: string; title: string; tooltipShort: string; icon: string }[]>;
-});
+	)) as Record<IRuneShardSlotName, { name: string; title: string; tooltip: string; icon: string }[]>,
+);
 
 type PathTuple<T, K extends keyof T = keyof T>
 	= | [K]
@@ -163,8 +164,8 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-rune-select" ref="vDialog" class="px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_1fr_auto] shadow-lg [&[open]]:grid">
-		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky">
+	<VDialog id="dialog-rune-select" ref="vDialog" class="px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg [&[open]]:grid">
+		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20">
 			<h1>Runes</h1>
 			<form method="dialog" class="ml-auto">
 				<button autofocus value="cancel">
@@ -183,6 +184,7 @@ defineExpose({
 				:options="pathOptions"
 				value-key="name"
 				title-key="title"
+				data-path=""
 				@update:model-value="updateValue(['paths', 'primary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -230,6 +232,7 @@ defineExpose({
 				:options="secondaryPathOptions"
 				value-key="name"
 				title-key="title"
+				data-path=""
 				@update:model-value="updateValue(['paths', 'secondary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -265,35 +268,31 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<section>
-			<h2>Shards</h2>
-			<select
-				:value="value?.shards.offensive ?? defaultRunes.shards.offensive"
-				class="block"
-				@change="updateValue(['shards', 'offensive'], ($event.target as HTMLSelectElement).value)"
+		<section id="rune-select-shards" :style="`--path-icon-clr: hsl(from ${runes.paths.Precision.iconColor} h calc(s * 1.3) l); --path-options-length: ${secondaryPathOptions.length}`">
+			<h2 class="sr-only">
+				Shards
+			</h2>
+			<VButtonRadiogroup
+				v-for="(slots, slotName) in shardSlots"
+				:id="`rune-select-shards-slot-${slotName}`"
+				:key="slotName"
+				:model-value="value?.shards[slotName]"
+				:label="`Slot ${slotName}`"
+				:options="slots"
+				value-key="name"
+				title-key="title"
+				@update:model-value="updateValue(['shards', slotName], $event)"
 			>
-				<option v-for="(_, shardName) in runes.shards.offensive" :key="shardName" :value="shardName">
-					{{ shardName }}
-				</option>
-			</select>
-			<select
-				:value="value?.shards.flex ?? defaultRunes.shards.flex"
-				class="block"
-				@change="updateValue(['shards', 'flex'], ($event.target as HTMLSelectElement).value)"
-			>
-				<option v-for="(_, shardName) in runes.shards.flex" :key="shardName" :value="shardName">
-					{{ shardName }}
-				</option>
-			</select>
-			<select
-				:value="value?.shards.defensive ?? defaultRunes.shards.defensive"
-				class="block"
-				@change="updateValue(['shards', 'defensive'], ($event.target as HTMLSelectElement).value)"
-			>
-				<option v-for="(_, shardName) in runes.shards.defensive" :key="shardName" :value="shardName">
-					{{ shardName }}
-				</option>
-			</select>
+				<template #default="{ option: { title, icon } }">
+					<img
+						:src="`https://raw.communitydragon.org/${minorVersion}/game/${icon}`"
+						aria-hidden="true"
+						width="64"
+						height="64"
+					>
+					<span class="sr-only">{{ title }}</span>
+				</template>
+			</VButtonRadiogroup>
 		</section>
 	</VDialog>
 </template>
@@ -301,14 +300,15 @@ defineExpose({
 <style>
 @layer components {
 	#rune-select-primary,
-	#rune-select-secondary {
+	#rune-select-secondary,
+	#rune-select-shards {
 		:where([role='radiogroup']) {
 			@apply 'flex items-center relative';
 			--selected-indicator-width: var(--selected-slot-width);
 			--selected-slot-checked-width: calc(var(--spacing) * 2);
 
-			&:first-of-type {
-				@apply 'py-[--path-row-py] mb-6';
+			&[data-path] {
+				@apply 'py-[--path-row-py] mb-[--path-row-mb]';
 			}
 
 			> button {
@@ -328,7 +328,7 @@ defineExpose({
 					inset -2px 3px 5px hsl(0 100% 100% / 0.6);
 			}
 
-			&:nth-of-type(n + 2) {
+			&:not([data-path]) {
 				@apply 'py-[--slot-row-py]';
 
 				> button {
@@ -348,7 +348,7 @@ defineExpose({
 					}
 
 					> img {
-						@apply 'block size-10 absolute max-w-unset translate-center left-1/2 top-1/2';
+						@apply 'block size-[calc(var(--slot-row-button-size)_-_4px)] absolute max-w-unset translate-center left-1/2 top-1/2';
 						transition: filter var(--transition-duration) var(--transition-timing-function);
 					}
 				}
@@ -370,7 +370,7 @@ defineExpose({
 
 			&:nth-last-of-type(-n + 2) {
 				> button:last-child:after {
-					@apply 'absolute content-empty h-px w-[--path-options-width] bg-yellow-700 right-0 -top-[--slot-row-py]';
+					@apply 'absolute pointer-events-none content-empty h-px -translate-y-[0.5px] w-[--path-options-width] bg-yellow-700 right-0 -top-[--slot-row-py]';
 				}
 			}
 
@@ -442,26 +442,36 @@ defineExpose({
 	}
 
 	#rune-select-primary,
-	#rune-select-secondary {
+	#rune-select-secondary,
+	#rune-select-shards {
 		--transition-duration: 150ms;
 		--transition-timing-function: ease-in-out;
 		--path-button-size: calc(var(--spacing) * 12);
+		--path-options-width: calc(var(--path-button-size) * var(--path-options-length));
+		--path-row-py: calc(var(--spacing) * 2);
 		--selected-path-width: calc(var(--spacing) * 16);
 		--selected-to-options-gap: calc(var(--spacing) * 8);
 		--selected-keystone-width: calc(var(--spacing) * 5.5);
 		--selected-slot-width: calc(var(--spacing) * 4.5);
-		--path-row-py: calc(var(--spacing) * 2);
-		--keystone-row-py: calc(var(--spacing) * 8);
+		--keystone-row-py: calc(var(--spacing) * 9.5);
 		--keystone-row-button-size: calc(var(--spacing) * 12);
 		--keystone-row-height: calc(var(--keystone-row-button-size) + 2 * var(--keystone-row-py));
-		--slot-row-button-size: calc(var(--spacing) * 11);
-		--slot-row-py: calc(var(--spacing) * 4);
-		--slot-row-height: calc(var(--slot-row-button-size) + 2 * var(--slot-row-py));
 		--slot-bg: theme('colors.neutral.900');
 		--slot-border-clr: theme('colors.neutral.500');
-		--path-options-width: calc(var(--path-button-size) * var(--path-options-length));
+		--slot-row-button-size: calc(var(--spacing) * 11);
+		--slot-row-height: calc(var(--slot-row-button-size) + 2 * var(--slot-row-py));
 
-		@apply 'relative';
+		--primary-slot-row-button-size: calc(var(--spacing) * 11);
+		--primary-path-row-mb: calc(var(--spacing) * 12);
+		--primary-slot-row-py: calc(var(--spacing) * 6);
+		--primary-slot-row-height: calc(var(--primary-slot-row-button-size) + 2 * var(--primary-slot-row-py));
+
+		--secondary-slot-row-button-size: calc(var(--spacing) * 11);
+		--secondary-path-row-mb: calc(var(--spacing) * 8.5);
+		--secondary-slot-row-py: calc(var(--spacing) * 5);
+		--secondary-slot-row-height: calc(var(--secondary-slot-row-button-size) + 2 * var(--secondary-slot-row-py));
+
+		@apply 'relative h-max';
 
 		&:before {
 			--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
@@ -489,18 +499,25 @@ defineExpose({
 					1;
 
 				> span {
-					@apply 'absolute size-auto m-unset text-xs tracking-widest uppercase text-[--path-icon-clr] left-[calc(var(--selected-path-width)_+_var(--selected-to-options-gap))] -top-1 -translate-y-full';
+					@apply 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] left-[calc(var(--selected-path-width)_+_var(--selected-to-options-gap))] -top-1 -translate-y-full';
 					clip: unset;
 				}
 			}
 		}
 	}
 
+	#rune-select-primary {
+		--path-row-mb: var(--primary-path-row-mb);
+		--slot-row-py: var(--primary-slot-row-py);
+	}
+
 	#rune-select-secondary {
-		@apply 'h-min';
+		--path-row-mb: var(--secondary-path-row-mb);
+		--slot-row-py: var(--secondary-slot-row-py);
+		--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb));
 
 		&:before {
-			@apply 'bottom-[calc(var(--slot-row-height))]';
+			@apply 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
 		}
 
 		[role='radiogroup'] {
@@ -512,7 +529,9 @@ defineExpose({
 			}
 
 			&:nth-of-type(n + 2) {
-				--selected-dot-translate-y: calc((var(--keystone-row-height) - var(--slot-row-height)) / 2);
+				--selected-dot-translate-y: calc(
+					(var(--keystone-row-height) - var(--slot-row-height)) / 2 + var(--selected-dot-mt-translate)
+				);
 
 				&:before {
 					@apply 'translate-y-[--selected-dot-translate-y]';
@@ -524,7 +543,11 @@ defineExpose({
 			}
 
 			&:nth-of-type(3) {
-				--selected-dot-translate-y: calc(var(--keystone-row-height) - var(--slot-row-height) + 1px);
+				--selected-dot-translate-y: calc(
+					var(--keystone-row-height) - var(--secondary-slot-row-height) +
+						(var(--primary-slot-row-height) - var(--secondary-slot-row-height)) / 2 + var(--selected-dot-mt-translate) +
+						1px
+				);
 
 				&:before {
 					@apply 'translate-y-[--selected-dot-translate-y]';
@@ -563,6 +586,20 @@ defineExpose({
 					}
 				}
 			}
+		}
+	}
+
+	#rune-select-shards {
+		--button-size-share: 0.65;
+		--padding-size-share: 0.35;
+		--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
+		--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
+		--mb: calc(var(--primary-slot-row-height) / 2 - var(--slot-row-height) / 2);
+
+		@apply 'mt-auto mb-[--mb]';
+
+		&:before {
+			@apply 'top-[calc(var(--slot-row-height)_/_2)]';
 		}
 	}
 }
