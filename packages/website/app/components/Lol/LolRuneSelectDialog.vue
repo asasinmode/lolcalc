@@ -60,7 +60,7 @@ const secondaryPathOptions = computed(() => {
 
 const secondaryRunePathStyle = computed((): StyleValue => {
 	if (!value.value?.paths.secondary) {
-		return;
+		return { '--path-options-length': pathOptions.length - 1 };
 	}
 
 	const { icon, iconColor } = pathOptions.find(path => path.name === value.value?.paths.secondary!)!;
@@ -246,6 +246,12 @@ defineExpose({
 					<span class="sr-only">{{ title }}</span>
 				</template>
 			</VButtonRadiogroup>
+			<template v-if="!secondaryRunePathSlots?.length">
+				<div v-for="i in 2" :key="i" data-placeholder-secondary-slot-row="">
+					<h3>Secondary</h3>
+					<p>Select your secondary rune path above to choose runes</p>
+				</div>
+			</template>
 			<VButtonRadiogroup
 				v-for="(slots, slotIndex) in secondaryRunePathSlots"
 				:id="`rune-select-secondary-slot-${slotIndex}`"
@@ -302,13 +308,14 @@ defineExpose({
 	#rune-select-primary,
 	#rune-select-secondary,
 	#rune-select-shards {
-		:where([role='radiogroup']) {
+		:where([role='radiogroup']),
+		:where([data-placeholder-secondary-slot-row]) {
 			@apply 'flex items-center relative';
 			--selected-indicator-width: var(--selected-slot-width);
 			--selected-slot-checked-width: calc(var(--spacing) * 2);
 
 			&[data-path] {
-				@apply 'py-[--path-row-py] mb-[--path-row-mb]';
+				@apply 'py-[--path-row-py] mb-[--path-row-mb] gap-x-[--path-options-gap-x]';
 			}
 
 			> button {
@@ -316,7 +323,7 @@ defineExpose({
 			}
 
 			&:before {
-				@apply 'content-empty z-10 bg-[--slot-bg] block size-[--selected-slot-width] b b-2 rounded-full ml-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2)] mr-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2_+_var(--selected-to-options-gap))]';
+				@apply 'content-empty z-10 bg-[--slot-bg] block size-[--selected-slot-width] b b-2 rounded-full ml-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2)] mr-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2_+_var(--selected-path-to-options-gap))]';
 				border-color: var(--path-icon-clr, var(--slot-border-clr));
 			}
 
@@ -328,38 +335,41 @@ defineExpose({
 					inset -2px 3px 5px hsl(0 100% 100% / 0.6);
 			}
 
+			&:not([data-path]):not([data-keystone]) > button > img,
+			&[data-keystone] > button {
+				@apply 'b b-[--path-icon-clr] b-2 rounded-full';
+			}
+
 			&:not([data-path]) {
 				@apply 'py-[--slot-row-py]';
 
 				> button {
-					@apply 'relative bg-[--slot-bg] size-[--slot-row-button-size] block rounded-full b b-[--path-icon-clr] b-2';
+					@apply 'bg-[--slot-bg] rounded-full outline-3 outline-offset-8';
+					--outline-op: 0;
+					outline-color: hsl(from var(--path-icon-clr) h s l / var(--outline-op));
+					transition-property: outline-offset, outline-color, border-color;
+					transition-duration: var(--transition-duration);
+					transition-timing-function: var(--transition-timing-function);
 
-					&:before {
-						@apply 'absolute content-empty rounded-full inset-0 outline-3 outline-offset-8 op-0';
-						outline-color: var(--path-icon-clr);
-						transition-property: outline-offset, opacity;
-						transition-duration: var(--transition-duration);
-						transition-timing-function: var(--transition-timing-function);
-					}
-
-					&:hover:before,
-					&:focus-visible:before {
-						@apply 'outline-offset-6 op-50';
+					&:hover,
+					&:focus-visible {
+						@apply 'outline-offset-5';
+						--outline-op: 0.5;
 					}
 
 					> img {
-						@apply 'block size-[calc(var(--slot-row-button-size)_-_4px)] absolute max-w-unset translate-center left-1/2 top-1/2';
+						@apply 'block size-[--slot-row-button-size] max-w-unset';
 						transition: filter var(--transition-duration) var(--transition-timing-function);
 					}
 				}
 
 				&:has(button[aria-checked='true']) {
-					> button[aria-checked='false']:not(:hover) {
+					&[data-keystone] > button[aria-checked='false']:not(:hover) {
 						@apply 'b-[--slot-border-clr]';
+					}
 
-						> img {
-							@apply 'grayscale';
-						}
+					> button[aria-checked='false']:not(:hover) > img {
+						@apply 'grayscale';
 					}
 
 					&:after {
@@ -368,9 +378,17 @@ defineExpose({
 				}
 			}
 
+			&[data-keystone] > button {
+				@apply 'relative';
+
+				> img {
+					@apply 'absolute translate-center left-1/2 top-1/2';
+				}
+			}
+
 			&:nth-last-of-type(-n + 2) {
 				> button:last-child:after {
-					@apply 'absolute pointer-events-none content-empty h-px -translate-y-[0.5px] w-[--path-options-width] bg-yellow-700 right-0 -top-[--slot-row-py]';
+					@apply 'absolute pointer-events-none content-empty h-px left-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] right-0 top-0 -translate-y-1/2 bg-yellow-800/60';
 				}
 			}
 
@@ -398,13 +416,13 @@ defineExpose({
 		--selected-slot-width: var(--selected-path-width);
 
 		&:before {
-			@apply 'mr-[--selected-to-options-gap] ml-0 bg-transparent';
+			@apply 'mr-[calc(var(--selected-path-to-options-gap)_-_var(--path-options-gap-x))] ml-0 bg-transparent';
 		}
 
 		&:after {
-			@apply 'content-empty left-8 translate-center size-10 shadow-none';
+			@apply 'content-empty left-8 translate-center size-9 shadow-none';
 			background-color: var(--path-icon-clr);
-			mask: var(--path-icon) no-repeat center;
+			mask: var(--path-icon, linear-gradient(transparent 0 0)) no-repeat center;
 		}
 
 		button {
@@ -432,7 +450,7 @@ defineExpose({
 
 		button[aria-checked='true'] {
 			&:before {
-				@apply 'op-100 -outline-offset-2';
+				@apply 'op-60 -outline-offset-2';
 			}
 
 			span {
@@ -446,11 +464,12 @@ defineExpose({
 	#rune-select-shards {
 		--transition-duration: 150ms;
 		--transition-timing-function: ease-in-out;
-		--path-button-size: calc(var(--spacing) * 12);
+		--path-button-size: calc(var(--spacing) * 13);
 		--path-options-width: calc(var(--path-button-size) * var(--path-options-length));
 		--path-row-py: calc(var(--spacing) * 2);
+		--path-options-gap-x: calc(var(--spacing) * 1);
 		--selected-path-width: calc(var(--spacing) * 16);
-		--selected-to-options-gap: calc(var(--spacing) * 8);
+		--selected-path-to-options-gap: calc(var(--spacing) * 6);
 		--selected-keystone-width: calc(var(--spacing) * 5.5);
 		--selected-slot-width: calc(var(--spacing) * 4.5);
 		--keystone-row-py: calc(var(--spacing) * 9.5);
@@ -471,14 +490,15 @@ defineExpose({
 		--secondary-slot-row-py: calc(var(--spacing) * 5);
 		--secondary-slot-row-height: calc(var(--secondary-slot-row-button-size) + 2 * var(--secondary-slot-row-py));
 
+		--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
+		--selected-dots-column-lining-clr: hsl(0 100% 100% / 0.6);
+		--selected-dots-column-lining-clr: hsl(
+			from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
+		);
+
 		@apply 'relative h-max';
 
 		&:before {
-			--selected-dots-column-clr: var(--path-icon-clr, var(--slot-border-clr));
-			--selected-dots-column-lining-clr: hsl(0 100% 100% / 0.6);
-			--selected-dots-column-lining-clr: hsl(
-				from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
-			);
 			@apply 'absolute left-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
 			box-shadow:
 				0 0 6px 0 var(--path-icon-clr),
@@ -486,11 +506,12 @@ defineExpose({
 				inset -1px 0 0 var(--selected-dots-column-lining-clr);
 		}
 
-		&[style]:not([style='']):before {
+		&:before {
 			@apply 'content-empty';
 		}
 
-		:where([role='radiogroup']) {
+		:where([role='radiogroup']),
+		:where([data-placeholder-secondary-slot-row]) {
 			&[data-keystone] {
 				@apply 'py-[--keystone-row-py] b-y b-[--path-icon-clr]';
 				border-image: linear-gradient(
@@ -503,7 +524,7 @@ defineExpose({
 					1;
 
 				> span {
-					@apply 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] left-[calc(var(--selected-path-width)_+_var(--selected-to-options-gap))] -top-1 -translate-y-full';
+					@apply 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] left-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] -top-1 -translate-y-full';
 					clip: unset;
 				}
 			}
@@ -526,18 +547,27 @@ defineExpose({
 			@apply 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
 		}
 
-		[role='radiogroup'] {
+		--path-icon-clr: var(--slot-border-clr);
+
+		[role='radiogroup'],
+		[data-placeholder-secondary-slot-row] {
 			&:nth-of-type(4) {
 				&:before,
 				&:after {
 					@apply 'op-0';
 				}
 			}
+			--secondary-slot-first-dot-translate-y: calc(
+				(var(--keystone-row-height) - var(--slot-row-height)) / 2 + var(--selected-dot-mt-translate)
+			);
+			--secondary-slot-second-dot-translate-y: calc(
+				var(--keystone-row-height) - var(--secondary-slot-row-height) +
+					(var(--primary-slot-row-height) - var(--secondary-slot-row-height)) / 2 + var(--selected-dot-mt-translate) +
+					1px
+			);
 
 			&:nth-of-type(n + 2) {
-				--selected-dot-translate-y: calc(
-					(var(--keystone-row-height) - var(--slot-row-height)) / 2 + var(--selected-dot-mt-translate)
-				);
+				--selected-dot-translate-y: var(--secondary-slot-first-dot-translate-y);
 
 				&:before {
 					@apply 'translate-y-[--selected-dot-translate-y]';
@@ -549,11 +579,7 @@ defineExpose({
 			}
 
 			&:nth-of-type(3) {
-				--selected-dot-translate-y: calc(
-					var(--keystone-row-height) - var(--secondary-slot-row-height) +
-						(var(--primary-slot-row-height) - var(--secondary-slot-row-height)) / 2 + var(--selected-dot-mt-translate) +
-						1px
-				);
+				--selected-dot-translate-y: var(--secondary-slot-second-dot-translate-y);
 
 				&:before {
 					@apply 'translate-y-[--selected-dot-translate-y]';
@@ -593,11 +619,36 @@ defineExpose({
 				}
 			}
 		}
+
+		[data-placeholder-secondary-slot-row] {
+			@apply 'box-content h-[calc(var(--secondary-slot-row-button-size)_+_2_*_var(--slot-row-py))] py-0 grid grid-cols-[auto_1fr] grid-rows-[auto_auto]';
+
+			&:nth-of-type(2) {
+				@apply 'pt-[--selected-dot-translate-y]';
+			}
+
+			&:nth-of-type(3) {
+				@apply 'pt-[calc(var(--secondary-slot-second-dot-translate-y)_-_var(--secondary-slot-first-dot-translate-y))]';
+			}
+
+			&:before {
+				@apply 'row-span-full';
+				--selected-dot-translate-y: 0px;
+			}
+
+			h3 {
+				@apply 'uppercase tracking-wider self-end text-sm';
+			}
+
+			p {
+				@apply 'text-neutral-400 text-xs max-w-[--path-options-width] leading-4.25 self-start';
+			}
+		}
 	}
 
 	#rune-select-shards {
-		--button-size-share: 0.65;
-		--padding-size-share: 0.35;
+		--button-size-share: 0.6;
+		--padding-size-share: 0.4;
 		--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
 		--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
 
