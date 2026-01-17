@@ -22,6 +22,18 @@ export class DamageSource {
 		stats: this.stats.value?.stats.total,
 	}));
 
+	runePathsEmpty = computed(() => {
+		const { primary, primarySlots, secondary, secondarySlots } = this.runes.value.paths;
+		return primary === 'Precision' && !primarySlots.length && !secondary && !secondarySlots.length;
+	});
+
+	runesInvalid = computed(() => {
+		const { primarySlots, secondary, secondarySlots } = this.runes.value.paths;
+		return !this.runePathsEmpty.value && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
+	});
+
+	anythingFilled = computed(() => this.champion.value || this.items.value.length || !this.runePathsEmpty.value);
+
 	constructor(overrides: Partial<IOverrides> = {}) {
 		this.champion = ref(overrides.champion);
 		this.level = ref(overrides.level ?? 1);

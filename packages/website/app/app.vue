@@ -26,24 +26,17 @@ const damageTargets = shallowRef<DamageSource[]>([new DamageSource()]);
 </template>
 
 <style>
-#calculator-scoreboard {
-	> h3 {
-		@apply 'text-center';
+@layer components {
+	:root {
+		--ui-button-border-clr: hsl(40 59% 61%);
+		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
 	}
 
-	> ul > li:last-child {
-		@apply 'grid-center';
+	[data-pretend-ui-button] {
+		@apply 'b b-[--ui-button-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
 
-		> button {
-			@apply 'p-1 bg-black';
-
-			&:disabled {
-				@apply 'op-50';
-			}
-
-			.iconify {
-				@apply 'align-sub size-4';
-			}
+		.iconify {
+			@apply 'text-[--ui-pretend-button-icon-clr]';
 		}
 	}
 }

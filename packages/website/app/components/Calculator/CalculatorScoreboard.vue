@@ -1,9 +1,8 @@
 <script setup lang="ts">
+const enableUnimplementedUi = useEnableUnimplementedUi();
+
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
-
-const canAddDamageSource = computed(() => !!damageSources.value[0]?.champion.value);
-const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.value);
 </script>
 
 <template>
@@ -11,6 +10,10 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 		<header class="text-center b-b col-span-full">
 			<h1>&gt;&gt;placeholder title&lt;&lt;</h1>
 			<h2>LoL damage calculator</h2>
+			<label for="calculator-scoreboard-enable-unimplemented-ui" class="left-0 top-0 absolute">
+				TMP enable unimplemented ui
+				<input id="calculator-scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
+			</label>
 			<label for="calculator-scoreboard-mirror" class="right-0 top-0 absolute">
 				TODO mirror layout
 				<input id="calculator-scoreboard-mirror" type="checkbox">
@@ -20,9 +23,9 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 			damage sources
 		</h3>
 		<ul>
-			<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index :can-remove="damageSources.length > 1" />
+			<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index :can-remove="damageSources.length > 1" :can-move-down="index !== damageSources.length - 1" />
 			<li>
-				<button :disabled="!canAddDamageSource">
+				<button :disabled="!damageSources[0]?.anythingFilled">
 					<Icon name="ph:plus-bold" />
 					add damage source
 				</button>
@@ -32,9 +35,9 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 			damage targets
 		</h3>
 		<ul>
-			<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index :can-remove="damageTargets.length > 1" is-right />
+			<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index :can-remove="damageTargets.length > 1" :can-move-down="index !== damageSources.length - 1" is-right />
 			<li>
-				<button :disabled="!canAddDamageTarget">
+				<button :disabled="!damageTargets[0]?.anythingFilled">
 					<Icon name="ph:plus-bold" />
 					add damage target
 				</button>
@@ -42,3 +45,31 @@ const canAddDamageTarget = computed(() => !!damageTargets.value[0]?.champion.val
 		</ul>
 	</article>
 </template>
+
+<style>
+@layer components {
+	#calculator-scoreboard {
+		> h3 {
+			@apply 'text-center';
+		}
+
+		> ul {
+			> li:last-child {
+				@apply 'grid-center';
+
+				> button {
+					@apply 'p-1 bg-black';
+
+					&:disabled {
+						@apply 'op-50';
+					}
+
+					.iconify {
+						@apply 'align-sub size-4';
+					}
+				}
+			}
+		}
+	}
+}
+</style>
