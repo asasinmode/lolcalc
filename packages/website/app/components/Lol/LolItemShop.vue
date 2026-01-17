@@ -698,7 +698,7 @@ defineExpose({
 					class="grid grid-flow-col w-full"
 					:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
 				>
-					<li v-for="secondLevelItemId in displayedItem.from" :key="`${displayedItem.id}-${secondLevelItemId}`">
+					<li v-for="(secondLevelItemId, index) in displayedItem.from" :key="`${displayedItem.id}-${secondLevelItemId}-${index}`">
 						<ItemBuildPathButton
 							:item="items[secondLevelItemId]!"
 							:is-selected="selectedItem?.id === secondLevelItemId"
@@ -748,7 +748,7 @@ defineExpose({
 			'aside items builds-into'
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
-		grid-template-columns: auto 1fr max-content;
+		grid-template-columns: auto 1fr 32rem;
 	}
 
 	#item-shop-swap-sort-order:hover,

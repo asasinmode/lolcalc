@@ -52,7 +52,7 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 	? {
 			title: 'clear',
 			disabled: !props.value.anythingFilled.value,
-			icon: 'ph-eraser',
+			icon: 'ph-eraser-duotone',
 		}
 	: {
 			title: 'remove, shift+click to clear',
@@ -169,7 +169,7 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 					:disabled="!value.items.value[i - 1]"
 					@click.right.prevent="value.items.value.splice(i - 1, 1)"
 				>
-					<span v-if="value.items.value[i - 1]" class="sr-only">{{ value.items.value[i - 1]!.name }}</span>
+					<span class="sr-only">{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
 					<img
 						v-if="value.items.value[i - 1]"
 						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${value.items.value[i - 1]!.image}`"
