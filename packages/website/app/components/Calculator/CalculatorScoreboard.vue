@@ -8,8 +8,12 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 <template>
 	<article id="calculator-scoreboard" class="b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 relative after:(bg-white w-px content-empty bottom-0 left-1/2 top-12 absolute -translate-x-1/2)">
 		<header class="text-center b-b col-span-full">
-			<h1>&gt;&gt;placeholder title&lt;&lt;</h1>
-			<h2>LoL damage calculator</h2>
+			<h1 class="text-xl font-500">
+				colector.lol
+			</h1>
+			<h2 class="text-sm">
+				League of Legends damage calculator
+			</h2>
 			<label for="calculator-scoreboard-enable-unimplemented-ui" class="left-0 top-0 absolute">
 				TMP enable unimplemented ui
 				<input id="calculator-scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">

@@ -16,6 +16,7 @@ const { selectItems } = useItemShop();
 const text = useText();
 
 const group = computed(() => props.isRight ? 'targets' : 'sources');
+const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
 
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
@@ -46,21 +47,36 @@ const runePathSecondary = computed(() => {
 });
 
 const isFirstAndOnly = computed(() => props.index === 0 && !props.canMoveDown);
+
+const removeButtonAttrs = computed(() => (isFirstAndOnly.value
+	? {
+			title: 'clear',
+			disabled: !props.value.anythingFilled.value,
+			icon: 'ph-eraser',
+		}
+	: {
+			title: 'remove, shift+click to clear',
+			disabled: !props.canRemove,
+			icon: 'ph-x',
+		}));
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<li data-lol-scoreboard-item="">
-		<button title="move up, alt+click to move and duplicate" :disabled="index === 0" data-pretend-ui-button="">
-			<span class="sr-only">move up</span>
+		<h3 class="sr-only">
+			{{ group.slice(0, -1) }} {{ index + 1 }}
+		</h3>
+		<button title="move up, alt+click to duplicate above" :disabled="index === 0" data-pretend-ui-button="">
+			<span class="sr-only">move up, alt+click to create a copy above</span>
 			<Icon name="ph-arrow-up" />
 		</button>
-		<button title="move down, alt+click to move and duplicate" :disabled="!canMoveDown" data-pretend-ui-button="">
-			<span class="sr-only">move down</span>
+		<button title="move down, alt+click to duplicate below" :disabled="!canMoveDown" data-pretend-ui-button="">
+			<span class="sr-only">move down, alt+click to create a copy below</span>
 			<Icon name="ph-arrow-down" />
 		</button>
-		<button :title="`move to ${group}, alt+click to move and duplicate`" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
-			<span class="sr-only">move to {{ isRight ? 'sources' : 'targets' }}</span>
+		<button :title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
+			<span class="sr-only">move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
 			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
 		</button>
 		<button title="duplicate" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
@@ -164,9 +180,9 @@ const isFirstAndOnly = computed(() => props.index === 0 && !props.canMoveDown);
 				</button>
 			</li>
 		</ul>
-		<button :title="isFirstAndOnly ? 'clear' : 'remove, shift+click to clear instead'" :disabled="isFirstAndOnly ? !value.anythingFilled.value : !canRemove" data-pretend-ui-button="">
-			<span class="sr-only">{{ isFirstAndOnly ? 'clear' : 'remove, shift+click to clear instead' }}</span>
-			<Icon :name="isFirstAndOnly ? 'ph-eraser' : 'ph-x'" class="size-5" />
+		<button :title="removeButtonAttrs.title" :disabled="removeButtonAttrs.disabled" data-pretend-ui-button="">
+			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
+			<Icon :name="removeButtonAttrs.icon" class="size-5" />
 		</button>
 		<button title="expand" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
 			<span class="sr-only">expand</span>
