@@ -33,9 +33,9 @@ bun test
   - [ ] buttons functionality
     - [ ] alt + move = duplicate
     - [ ] shift + click remove = clear
-  - [ ] expand for stats (runes icon `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/runesicon.png`)
+  - [ ] expand for stats
   - [ ] mirror layout
-  - [ ] first source/target what's used in damage results
+  - [ ] first source/target is what's used in damage results
 - [ ] results ui
   - [ ] multiple builds/champions you can switch between
   - [ ] some cool graphs
@@ -57,18 +57,16 @@ bun test
   - [ ] inventory panel or list in the footer
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
-- [ ] button tooltips over `:title` where appropriate
-  - [ ] LolScoreboardItem buttons
 - [ ] sharing, saving/reading data in query
 - [ ] calculations
-  - [ ] item passives (+ displaying values in tooltips, check if we know to display level scaling icon like on kraken slayer)
+  - [ ] item passives (+ displaying values in tooltips)
   - [ ] champion passives
   - [ ] role quests
 - [ ] mobile version
 - [ ] check with screenreader
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
-- [ ] favicon 🇱🖩
+- [x] favicon 🇱🖩
 - [ ] [wiki](https://github.com/asasinmode/colectormode/wiki)
   - [ ] any other FAQ on page
   - [ ] github readme

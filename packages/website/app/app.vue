@@ -1,5 +1,11 @@
 <script setup lang="ts">
-useHead({ htmlAttrs: { lang: 'en' } });
+useHead({
+	htmlAttrs: { lang: 'en' },
+	link: [
+		{ rel: 'icon', href: 'favicon.png' },
+		{ rel: 'icon', href: 'favicon_dark.png', media: 'prefers-color-scheme: dark' },
+	],
+});
 useSeoMeta({
 	title: 'Colector.lol - League of Legends Damage Calculator',
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
