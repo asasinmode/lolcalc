@@ -4,8 +4,10 @@ const props = defineProps<{
 	label: string;
 	options: T[];
 	valueKey: ValueKey;
-	titleKey?: keyof T;
+	titleKey?: keyof T | '';
 	required?: boolean;
+	onOptionMouseenter?: (event: MouseEvent, option: T) => void;
+	onOptionFocus?: (event: FocusEvent, option: T) => void;
 }>();
 
 const value = defineModel<T[ValueKey]>();
@@ -54,9 +56,11 @@ function selectOption(tab: T[ValueKey]) {
 			v-for="(option, index) in options"
 			:key="option[valueKey] as string"
 			role="radio"
-			:title="option[titleKey || valueKey] as string"
+			:title="titleKey !== '' ? option[titleKey || valueKey] as string : undefined"
 			:tabindex="(!value && index === 0) || value === option[valueKey] ? 0 : -1"
 			:aria-checked="value === option[valueKey]"
+			@mouseenter="onOptionMouseenter?.($event, option)"
+			@focus="onOptionFocus?.($event, option)"
 			@click="selectOption(option[valueKey])"
 		>
 			<slot :option :is-selected="value === option[valueKey]" />

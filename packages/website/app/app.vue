@@ -7,7 +7,7 @@ useHead({
 	],
 });
 useSeoMeta({
-	title: 'Colector.lol - League of Legends Damage Calculator',
+	title: 'Damage Calculator for League of Legends - Colector.lol',
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
 

@@ -63,7 +63,7 @@ bun test
   - [ ] champion passives
   - [ ] role quests
 - [ ] mobile version
-- [ ] check with screenreader
+- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
 - [x] favicon 🇱🖩

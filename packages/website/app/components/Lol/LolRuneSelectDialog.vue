@@ -158,6 +158,64 @@ function updateValue<P extends PathTuple<IChampionRunes>>(
 	}
 }
 
+let runeDescriptionTooltipAnchor: undefined | HTMLElement;
+const runeDescriptionTooltip = useTemplateRef('runeDescriptionTooltip');
+const isHoldingShift = ref(false);
+const hoveredRune = ref<{
+	title: string;
+	description: string;
+	expandedDescription?: string;
+}>();
+
+type IHoveredRuneOption = (typeof pathOptions)[number] | NonNullable<UnwrapRef<typeof primaryRunePathSlots>>[number][number] | NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number] | UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
+
+function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredRuneOption) {
+	const { target } = event as unknown as { target: HTMLElement };
+	runeDescriptionTooltip.value?.showPopover();
+	runeDescriptionTooltipAnchor = target;
+	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true });
+	window.addEventListener('resize', updateTooltipPosition, { passive: true });
+	hoveredRune.value = 'tooltipLong' in rune ? { title: rune.title, description: rune.tooltipShort, expandedDescription: rune.tooltipLong } : { title: rune.title, description: rune.tooltip };
+	nextTick(() => updateTooltipPosition());
+}
+
+function leaveTooltipableElement() {
+	runeDescriptionTooltip.value?.hidePopover();
+	runeDescriptionTooltipAnchor?.removeEventListener('mouseleave', leaveTooltipableElement);
+	runeDescriptionTooltipAnchor = undefined;
+}
+
+function updateTooltipPosition() {
+	const { left, top, width } = runeDescriptionTooltipAnchor!.getBoundingClientRect();
+	runeDescriptionTooltip.value!.style.setProperty('--left', `${left + width / 2}px`);
+	runeDescriptionTooltip.value!.style.setProperty('--top', `${top}px`);
+	runeDescriptionTooltip.value!.style.setProperty('--height', `${runeDescriptionTooltip.value!.clientHeight}px`);
+}
+
+function holdShift(event: KeyboardEvent) {
+	if (event.key === 'Shift') {
+		isHoldingShift.value = true;
+		nextTick(() => {
+			runeDescriptionTooltipAnchor && updateTooltipPosition();
+		});
+	}
+}
+
+function releaseShift() {
+	isHoldingShift.value = false;
+}
+
+onMounted(() => {
+	window.addEventListener('keydown', holdShift, { passive: true });
+	window.addEventListener('keyup', releaseShift, { passive: true });
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updateTooltipPosition);
+	window.removeEventListener('keydown', holdShift);
+	window.removeEventListener('keyup', releaseShift);
+});
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -183,8 +241,10 @@ defineExpose({
 				label="Primary path"
 				:options="pathOptions"
 				value-key="name"
-				title-key="title"
+				title-key=""
 				data-path=""
+				:on-option-mouseenter="enterTooltipableElement"
+				:on-option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'primary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -207,7 +267,9 @@ defineExpose({
 				:options="Object.values(slots)"
 				:data-keystone="slotIndex === 0 ? '' : undefined"
 				value-key="name"
-				title-key="title"
+				title-key=""
+				:on-option-mouseenter="enterTooltipableElement"
+				:on-option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'primarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -231,8 +293,10 @@ defineExpose({
 				label="Secondary path"
 				:options="secondaryPathOptions"
 				value-key="name"
-				title-key="title"
+				title-key=""
 				data-path=""
+				:on-option-mouseenter="enterTooltipableElement"
+				:on-option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'secondary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -260,7 +324,9 @@ defineExpose({
 				:label="`Slot ${slotIndex + 1}`"
 				:options="Object.values(slots)"
 				value-key="name"
-				title-key="title"
+				title-key=""
+				:on-option-mouseenter="enterTooltipableElement"
+				:on-option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'secondarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -286,7 +352,9 @@ defineExpose({
 				:label="`Slot ${slotName}`"
 				:options="slots"
 				value-key="name"
-				title-key="title"
+				title-key=""
+				:on-option-mouseenter="enterTooltipableElement"
+				:on-option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['shards', slotName], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -300,6 +368,10 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
+		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint">
+			<h4>{{ hoveredRune?.title }}</h4>
+			<div v-html="isHoldingShift && hoveredRune?.expandedDescription || hoveredRune?.description" />
+		</div>
 	</VDialog>
 </template>
 
@@ -656,6 +728,26 @@ defineExpose({
 
 		&:before {
 			@apply 'top-[calc(var(--slot-row-height)_/_2)]';
+		}
+	}
+
+	#rune-select-dialog-hover-tooltip {
+		@apply 'bg-neutral-950 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(100%_+_1rem)] p-7';
+
+		--width: 20rem;
+		left: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
+		top: clamp(var(--height), var(--top), 100vh);
+
+		h4 {
+			@apply 'font-600 uppercase mb-1 tracking-wide';
+		}
+
+		> div {
+			@apply 'text-neutral-400';
+
+			lol-uikit-tooltipped-keyword font {
+				@apply 'text-inherit';
+			}
 		}
 	}
 }

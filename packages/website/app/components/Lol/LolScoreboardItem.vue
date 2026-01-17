@@ -221,7 +221,7 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 		}
 
 		button[data-select-runes] {
-			@apply 'b b-[--ui-button-border-clr] rounded-full bg-neutral-900 hoverable:bg-neutral-700 grid-center size-8 relative';
+			@apply 'b b-[--ui-button-border-clr] rounded-full bg-neutral-[#020a13] hoverable:bg-neutral-700 grid-center size-8 relative';
 			--secondary-path-icon-size: calc(var(--spacing) * 3);
 
 			[data-secondary-path-icon] {
