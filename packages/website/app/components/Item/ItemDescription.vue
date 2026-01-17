@@ -150,210 +150,215 @@ defineExpose({ header });
 </template>
 
 <style>
-.item-description-header {
-	@apply 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full';
+@layer components {
+	.item-description-header {
+		@apply 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full';
 
-	> img {
-		@apply 'row-span-full size-(--item-img-size)';
-	}
+		> img {
+			@apply 'row-span-full size-(--item-img-size)';
+		}
 
-	span:first-of-type {
-		@apply 'text-xl';
-	}
+		span:first-of-type {
+			@apply 'text-xl';
+		}
 
-	span:nth-of-type(2) {
-		@apply 'text-amber text-start flex items-center justify-start text-lg gap-[0.5ch]';
+		span:nth-of-type(2) {
+			@apply 'text-amber text-start flex items-center justify-start text-lg gap-[0.5ch]';
 
-		img {
-			@apply 'h-4 w-auto';
+			img {
+				@apply 'h-4 w-auto';
+			}
+		}
+
+		span:nth-of-type(3),
+		span:nth-of-type(4) {
+			@apply 'hidden text-lg';
+		}
+
+		span:nth-of-type(4) {
+			@apply 'text-end text-neutral-300';
+		}
+
+		&[data-show-subtitles] {
+			@apply 'grid-cols-[auto_1fr_auto]';
+		}
+
+		&[data-show-subtitles] span:nth-of-type(2) {
+			@apply 'text-xl text-end justify-end';
+		}
+
+		&[data-show-subtitles] span:nth-of-type(3),
+		&[data-show-subtitles] span:nth-of-type(4) {
+			@apply 'inline';
 		}
 	}
 
-	span:nth-of-type(3),
-	span:nth-of-type(4) {
-		@apply 'hidden text-lg';
-	}
-
-	span:nth-of-type(4) {
-		@apply 'text-end text-neutral-300';
-	}
-
-	&[data-show-subtitles] {
-		@apply 'grid-cols-[auto_1fr_auto]';
-	}
-
-	&[data-show-subtitles] span:nth-of-type(2) {
-		@apply 'text-xl text-end justify-end';
-	}
-
-	&[data-show-subtitles] span:nth-of-type(3),
-	&[data-show-subtitles] span:nth-of-type(4) {
-		@apply 'inline';
-	}
-}
-
-.item-description-content {
-	ul li {
-		@apply 'flex items-center gap-[0.5ch]';
-
-		img {
-			@apply 'size-4.5';
-		}
-
-		span:last-child {
-			@apply 'capitalize text-neutral-300';
-		}
-	}
-
-	h4 {
-		@apply 'text-neutral-300';
-
-		&:has(img) {
+	.item-description-content {
+		ul li {
 			@apply 'flex items-center gap-[0.5ch]';
+
+			img {
+				@apply 'size-4.5';
+			}
+
+			span:last-child {
+				@apply 'capitalize text-neutral-300';
+			}
 		}
 
-		img {
-			@apply 'size-4';
+		h4 {
+			@apply 'text-neutral-300';
+
+			&:has(img) {
+				@apply 'flex items-center gap-[0.5ch]';
+			}
+
+			img {
+				@apply 'size-4';
+			}
+
+			span {
+				> span {
+					@apply 'sr-only';
+				}
+			}
 		}
 
-		span {
-			> span {
-				@apply 'sr-only';
+		div {
+			@apply 'text-neutral-300';
+
+			img {
+				@apply 'inline-block size-4 align-text-middle';
+			}
+
+			li {
+				@apply 'ml-5';
+			}
+		}
+
+		.unknown-variables-alert {
+			@apply 'b b-amber-600 relative pl-9.5 rounded-md bg-amber-900/10 p-2 text-amber-400';
+
+			&:before {
+				@apply 'absolute content-empty left-2 top-1/2 -translate-y-1/2 z-0 bg-amber-400 size-6 rounded-full';
+			}
+
+			.iconify {
+				@apply 'size-4.5 z-10 absolute left-2.75 top-1/2 -translate-y-1/2 align-middle text-amber-950';
 			}
 		}
 	}
 
-	div {
-		@apply 'text-neutral-300';
-
-		img {
-			@apply 'inline-block size-4 align-text-middle';
+	.item-description-content,
+	[data-game-description] {
+		unknown {
+			color: #ff00ff;
+			font-weight: 700;
 		}
 
-		li {
-			@apply 'ml-5';
-		}
-	}
-
-	unknown {
-		color: #ff00ff;
-		font-weight: 700;
-	}
-
-	passive {
-		@apply 'font-700 text-white';
-	}
-
-	scaleap {
-		@apply 'text-indigo-400';
-	}
-
-	scalead {
-		@apply 'text-orange';
-	}
-
-	scalehealth {
-		@apply 'text-emerald-600';
-	}
-
-	scalemana {
-		@apply 'text-blue';
-	}
-
-	scalearmor {
-		@apply 'text-orange-300';
-	}
-
-	scalemr {
-		@apply 'text-cyan-300';
-	}
-
-	scalelethality {
-		@apply 'text-red';
-	}
-
-	attackspeed {
-		@apply 'text-yellow-200';
-	}
-
-	onhit {
-		@apply 'text-white';
-	}
-
-	physicaldamage {
-		@apply 'text-orange-600';
-	}
-
-	magicdamage {
-		@apply 'text-cyan';
-	}
-
-	truedamage {
-		@apply 'text-cyan-50';
-	}
-
-	healing {
-		@apply 'text-green-300';
-	}
-
-	shield {
-		@apply 'text-sky-400';
-	}
-
-	lifesteal,
-	omnivamp {
-		@apply 'text-red-700';
-	}
-
-	speed {
-		@apply 'text-white';
-	}
-
-	gold {
-		@apply 'text-amber';
-	}
-
-	status {
-		@apply 'text-purple';
-	}
-
-	attention {
-		@apply 'text-neutral-50';
-	}
-
-	raritygeneric {
-		@apply 'text-neutral-100';
-	}
-
-	raritylegendary {
-		@apply 'text-white';
-	}
-
-	rules {
-		@apply 'text-neutral-400';
-	}
-
-	keyword {
-		@apply 'text-pink-300';
-	}
-
-	keywordmajor {
-		@apply 'text-yellow-100';
-	}
-
-	keywordstealth {
-		@apply 'text-pink-300';
-	}
-
-	.unknown-variables-alert {
-		@apply 'b b-amber-600 relative pl-9.5 rounded-md bg-amber-900/10 p-2 text-amber-400';
-
-		&:before {
-			@apply 'absolute content-empty left-2 top-1/2 -translate-y-1/2 z-0 bg-amber-400 size-6 rounded-full';
+		passive {
+			@apply 'font-700 text-white';
 		}
 
-		.iconify {
-			@apply 'size-4.5 z-10 absolute left-2.75 top-1/2 -translate-y-1/2 align-middle text-amber-950';
+		scaleap {
+			@apply 'text-indigo-400';
+		}
+
+		scalead {
+			@apply 'text-orange';
+		}
+
+		scalehealth {
+			@apply 'text-emerald-600';
+		}
+
+		scalemana {
+			@apply 'text-blue';
+		}
+
+		scalearmor {
+			@apply 'text-orange-300';
+		}
+
+		scalemr {
+			@apply 'text-cyan-300';
+		}
+
+		scalelethality {
+			@apply 'text-red';
+		}
+
+		attackspeed {
+			@apply 'text-yellow-200';
+		}
+
+		onhit {
+			@apply 'text-white';
+		}
+
+		physicaldamage {
+			@apply 'text-orange-600';
+		}
+
+		magicdamage {
+			@apply 'text-cyan';
+		}
+
+		truedamage {
+			@apply 'text-cyan-50';
+		}
+
+		healing {
+			@apply 'text-green-300';
+		}
+
+		shield {
+			@apply 'text-sky-400';
+		}
+
+		lifesteal,
+		omnivamp {
+			@apply 'text-red-700';
+		}
+
+		speed {
+			@apply 'text-white';
+		}
+
+		gold {
+			@apply 'text-amber';
+		}
+
+		status {
+			@apply 'text-purple';
+		}
+
+		attention {
+			@apply 'text-neutral-50';
+		}
+
+		raritygeneric {
+			@apply 'text-neutral-100';
+		}
+
+		raritylegendary {
+			@apply 'text-white';
+		}
+
+		rules {
+			@apply 'text-neutral-400';
+		}
+
+		keyword {
+			@apply 'text-pink-300';
+		}
+
+		keywordmajor {
+			@apply 'text-yellow-100';
+		}
+
+		keywordstealth {
+			@apply 'text-pink-300';
 		}
 	}
 }

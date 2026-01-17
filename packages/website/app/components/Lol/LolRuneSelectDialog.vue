@@ -203,6 +203,9 @@ function holdShift(event: KeyboardEvent) {
 
 function releaseShift() {
 	isHoldingShift.value = false;
+	nextTick(() => {
+		runeDescriptionTooltipAnchor && updateTooltipPosition();
+	});
 }
 
 onMounted(() => {
@@ -368,7 +371,7 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint">
+		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" data-game-description="">
 			<h4>{{ hoveredRune?.title }}</h4>
 			<div v-html="isHoldingShift && hoveredRune?.expandedDescription || hoveredRune?.description" />
 		</div>
@@ -745,8 +748,9 @@ defineExpose({
 		> div {
 			@apply 'text-neutral-400';
 
+			lol-uikit-tooltipped-keyword,
 			lol-uikit-tooltipped-keyword font {
-				@apply 'text-inherit';
+				@apply 'text-white';
 			}
 		}
 	}
