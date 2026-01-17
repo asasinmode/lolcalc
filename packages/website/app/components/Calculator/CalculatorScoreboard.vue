@@ -25,7 +25,7 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 		<ul>
 			<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index :can-remove="damageSources.length > 1" :can-move-down="index !== damageSources.length - 1" />
 			<li>
-				<button :disabled="!damageSources[0]?.anythingFilled">
+				<button data-pretend-ui-button="" :disabled="!damageSources[0]?.anythingFilled.value">
 					<Icon name="ph:plus-bold" />
 					add damage source
 				</button>
@@ -37,7 +37,7 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 		<ul>
 			<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index :can-remove="damageTargets.length > 1" :can-move-down="index !== damageSources.length - 1" is-right />
 			<li>
-				<button :disabled="!damageTargets[0]?.anythingFilled">
+				<button data-pretend-ui-button="" :disabled="!damageTargets[0]?.anythingFilled.value">
 					<Icon name="ph:plus-bold" />
 					add damage target
 				</button>
@@ -58,14 +58,10 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 				@apply 'grid-center';
 
 				> button {
-					@apply 'p-1 bg-black';
-
-					&:disabled {
-						@apply 'op-50';
-					}
+					@apply 'p-1';
 
 					.iconify {
-						@apply 'align-sub size-4';
+						@apply 'align-sub size-4 mr-0.5';
 					}
 				}
 			}

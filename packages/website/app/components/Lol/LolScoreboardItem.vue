@@ -18,8 +18,8 @@ const text = useText();
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 
 const runePathPrimary = computed(() => {
-	const { primary } = props.value.runes.value.paths;
-	if (primary) {
+	const { primary, primarySlots } = props.value.runes.value.paths;
+	if (primarySlots[0]) {
 		const { iconColor } = runes.paths[primary]!;
 		const { name } = text.runes.paths[primary]!;
 		return {
@@ -65,16 +65,11 @@ const runePathSecondary = computed(() => {
 			<span class="sr-only">duplicate</span>
 			<Icon name="ph-copy" />
 		</button>
-		<button
-			class=""
-			title="runes"
-			data-select-runes=""
-			@click="selectRunes(value.runes)"
-		>
+		<button title="runes" data-select-runes="" @click="selectRunes(value.runes)">
 			<span class="sr-only">{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
 			<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -right-0.5 -top-0.5">
 				<span class="sr-only">(invalid)</span>
-				<Icon name="ph-exclamation-mark-bold" class="size-3" />
+				<Icon name="ph-exclamation-mark-bold" class="size-2.5" />
 			</span>
 			<template v-if="runePathPrimary">
 				<span class="sr-only">
@@ -83,14 +78,13 @@ const runePathSecondary = computed(() => {
 				<span
 					:style="`background-color: ${runePathPrimary.iconColor}; mask: url(${runePathPrimary.icon}) no-repeat center;`"
 					aria-hidden="true"
-					width="32"
-					height="32"
-					class="size-5 block"
+					class="size-5.5 block"
 				/>
 			</template>
 			<img
 				v-else
 				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`"
+				aria-hidden="true"
 				width="32"
 				height="32"
 				loading="lazy"
@@ -103,15 +97,12 @@ const runePathSecondary = computed(() => {
 				<span
 					:style="`background-color: ${runePathSecondary.iconColor}; mask: url(${runePathSecondary.icon}) no-repeat center;`"
 					aria-hidden="true"
-					width="32"
-					height="32"
-					class="size-3 block bottom-0 right-0 absolute"
+					data-secondary-path-icon=""
 				/>
 			</template>
 		</button>
 		<div class="size-14 relative">
 			<button
-				class="group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden *:size-full"
 				:title="value.champion.value ? value.champion.value.name : 'champion'"
 				data-select-champion=""
 				@click="selectChampion(value.champion)"
@@ -136,7 +127,7 @@ const runePathSecondary = computed(() => {
 				>
 			</button>
 			<label :for="`${group}-${index}-level-select`" class="sr-only">Level</label>
-			<select :id="`${group}-${index}-level-select`" v-model="value.level.value" class="bottom-0 right-0 absolute">
+			<select :id="`${group}-${index}-level-select`" v-model="value.level.value" class="absolute -bottom-1 -right-2">
 				<option v-for="i in 18" :key="i" :value="i">
 					{{ i }}
 				</option>
@@ -157,7 +148,7 @@ const runePathSecondary = computed(() => {
 			<li v-for="i in 6" :key="i" class="group mr-1">
 				<button
 					class="bg-black size-8 inline-block group-last:mr-0"
-					:disabled="!value.items.value[i]"
+					:disabled="!value.items.value[i - 1]"
 					@click.right.prevent="value.items.value.splice(i - 1, 1)"
 				>
 					<span v-if="value.items.value[i - 1]" class="sr-only">{{ value.items.value[i - 1]!.name }}</span>
@@ -213,9 +204,24 @@ const runePathSecondary = computed(() => {
 
 		button[data-select-runes] {
 			@apply 'b b-[--ui-button-border-clr] rounded-full bg-neutral-900 hoverable:bg-neutral-700 grid-center size-8 relative';
+			--secondary-path-icon-size: calc(var(--spacing) * 3);
+
+			[data-secondary-path-icon] {
+				@apply 'size-[--secondary-path-icon-size] block -bottom-0.5 -right-0.5 absolute';
+			}
+
+			&:has([data-secondary-path-icon]):before {
+				@apply 'content-empty absolute -right-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
+			}
 		}
 
 		button[data-select-champion] {
+			@apply 'group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden';
+
+			img {
+				@apply 'max-w-none size-[calc(100%_+_var(--spacing)_*_2)] -ml-1 -mt-1';
+			}
+
 			&:hover,
 			&:focus-visible {
 				img {

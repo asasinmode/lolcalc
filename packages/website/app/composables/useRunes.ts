@@ -41,7 +41,7 @@ export interface IRunes {
 
 export interface IChampionRunes {
 	paths: {
-		primary: IRunePathName | undefined;
+		primary: IRunePathName;
 		primarySlots: (IRuneSlotName | undefined)[];
 		secondary: IRunePathName | undefined;
 		secondarySlots: (IRuneSlotName | undefined)[];

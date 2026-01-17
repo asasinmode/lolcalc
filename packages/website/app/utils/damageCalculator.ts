@@ -23,8 +23,8 @@ export class DamageSource {
 	}));
 
 	runePathsEmpty = computed(() => {
-		const { primary, primarySlots, secondary, secondarySlots } = this.runes.value.paths;
-		return primary === 'Precision' && !primarySlots.length && !secondary && !secondarySlots.length;
+		const { primarySlots, secondary, secondarySlots } = this.runes.value.paths;
+		return !(primarySlots.length || secondary || secondarySlots.length);
 	});
 
 	runesInvalid = computed(() => {
@@ -32,7 +32,9 @@ export class DamageSource {
 		return !this.runePathsEmpty.value && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
 	});
 
-	anythingFilled = computed(() => this.champion.value || this.items.value.length || !this.runePathsEmpty.value);
+	anythingFilled = computed(() => {
+		return Boolean(this.champion.value || this.items.value.length || !this.runePathsEmpty.value);
+	});
 
 	constructor(overrides: Partial<IOverrides> = {}) {
 		this.champion = ref(overrides.champion);
