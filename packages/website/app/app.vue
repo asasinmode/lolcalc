@@ -1,7 +1,8 @@
 <script setup lang="ts">
 useHead({ htmlAttrs: { lang: 'en' } });
 useSeoMeta({
-	title: 'Collector - League of Legends Damage Calculator',
+	title: 'Colector.lol - League of Legends Damage Calculator',
+	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
 
 const { version } = usePatchVersion();

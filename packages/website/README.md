@@ -29,8 +29,10 @@ bun test
 - [x] change `champion/item.image` to just string if no need for object or find the spritesheet
 - [x] remove dialog/champ dialog search placeholders, only label
 - [ ] scoreboard ui
+  - [x] red exclamation mark next to runes when incorrect
   - [ ] buttons functionality
-  - [ ] red exclamation mark next to runes when incorrect
+    - [ ] alt + move = duplicate
+    - [ ] shift + click remove = clear
   - [ ] expand for stats (runes icon `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/perk-images/styles/runesicon.png`)
   - [ ] mirror layout
   - [ ] first source/target what's used in damage results
@@ -38,7 +40,7 @@ bun test
   - [ ] multiple builds/champions you can switch between
   - [ ] some cool graphs
   - [ ] choose damage for: passive, aa, abilities (grayed out with "coming in a future update" tooltip); columns
-- [ ] damage compare mode, no mirror mode, both sources and targets available, check which ones to use, check which ability to compare the damage of
+- [ ] damage compare mode, no mirror mode = both sources and targets available, check which ones to use, check which ability to compare the damage of
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout

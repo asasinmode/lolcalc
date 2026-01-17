@@ -44,20 +44,22 @@ const runePathSecondary = computed(() => {
 	}
 	return undefined;
 });
+
+const isFirstAndOnly = computed(() => props.index === 0 && !props.canMoveDown);
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<li data-lol-scoreboard-item="">
-		<button title="move up" :disabled="index === 0" data-pretend-ui-button="">
+		<button title="move up, alt+click to move and duplicate" :disabled="index === 0" data-pretend-ui-button="">
 			<span class="sr-only">move up</span>
 			<Icon name="ph-arrow-up" />
 		</button>
-		<button title="move down" :disabled="!canMoveDown" data-pretend-ui-button="">
+		<button title="move down, alt+click to move and duplicate" :disabled="!canMoveDown" data-pretend-ui-button="">
 			<span class="sr-only">move down</span>
 			<Icon name="ph-arrow-down" />
 		</button>
-		<button :title="`move to ${group}`" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
+		<button :title="`move to ${group}, alt+click to move and duplicate`" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
 			<span class="sr-only">move to {{ isRight ? 'sources' : 'targets' }}</span>
 			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
 		</button>
@@ -103,7 +105,7 @@ const runePathSecondary = computed(() => {
 		</button>
 		<div class="size-14 relative">
 			<button
-				:title="value.champion.value ? value.champion.value.name : 'champion'"
+				title="select champion"
 				data-select-champion=""
 				@click="selectChampion(value.champion)"
 			>
@@ -162,11 +164,11 @@ const runePathSecondary = computed(() => {
 				</button>
 			</li>
 		</ul>
-		<button class="grid-center !row-span-1" title="remove" :disabled="!canRemove" data-pretend-ui-button="">
-			<span class="sr-only">remove</span>
-			<Icon name="ph-x" class="size-5" />
+		<button :title="isFirstAndOnly ? 'clear' : 'remove, shift+click to clear instead'" :disabled="isFirstAndOnly ? !value.anythingFilled.value : !canRemove" data-pretend-ui-button="">
+			<span class="sr-only">{{ isFirstAndOnly ? 'clear' : 'remove, shift+click to clear instead' }}</span>
+			<Icon :name="isFirstAndOnly ? 'ph-eraser' : 'ph-x'" class="size-5" />
 		</button>
-		<button class="grid-center !row-span-1" title="expand" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
+		<button title="expand" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
 			<span class="sr-only">expand</span>
 			<Icon name="ph-caret-down" class="size-5" />
 		</button>
