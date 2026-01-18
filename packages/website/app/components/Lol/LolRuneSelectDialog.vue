@@ -16,6 +16,7 @@ const pathOptions = Object.values(runes.paths).map((path) => {
 		icon: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`,
 		iconColor: path.iconColor,
 		tooltip,
+		rune: path,
 	};
 });
 
@@ -46,6 +47,7 @@ const primaryRunePathSlots = computed(() => {
 				title: name,
 				tooltipShort,
 				tooltipLong,
+				rune: slot,
 			};
 		}));
 	}
@@ -85,6 +87,7 @@ const secondaryRunePathSlots = computed(() => {
 				title: name,
 				tooltipShort,
 				tooltipLong,
+				rune: slot,
 			};
 		}));
 	}
@@ -108,9 +111,10 @@ const shardSlots = computed(() =>
 				title,
 				tooltip,
 				icon: shardValue.icon,
+				rune: shardValue,
 			};
 		})],
-	)) as Record<IRuneShardSlotName, { name: string; title: string; tooltip: string; icon: string }[]>,
+	)) as Record<IRuneShardSlotName, { name: string; title: string; tooltip: string; icon: string; rune: IRuneShard }[]>,
 );
 
 type PathTuple<T, K extends keyof T = keyof T>
@@ -161,11 +165,19 @@ function updateValue<P extends PathTuple<IChampionRunes>>(
 let runeDescriptionTooltipAnchor: undefined | HTMLElement;
 const runeDescriptionTooltip = useTemplateRef('runeDescriptionTooltip');
 const isHoldingShift = ref(false);
-const hoveredRune = ref<{
+const hoveredRune = shallowRef<{
 	title: string;
 	description: string;
 	expandedDescription?: string;
+	rune: IRune;
 }>();
+const hoveredRuneTooltip = computed(() => hoveredRune.value
+	? replaceGameDescriptionVariables(
+			(isHoldingShift.value && hoveredRune.value.expandedDescription) || hoveredRune.value.description,
+			'rune',
+			hoveredRune.value.rune,
+		)
+	: undefined);
 
 type IHoveredRuneOption = (typeof pathOptions)[number] | NonNullable<UnwrapRef<typeof primaryRunePathSlots>>[number][number] | NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number] | UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
 
@@ -175,7 +187,9 @@ function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredR
 	runeDescriptionTooltipAnchor = target;
 	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true });
 	window.addEventListener('resize', updateTooltipPosition, { passive: true });
-	hoveredRune.value = 'tooltipLong' in rune ? { title: rune.title, description: rune.tooltipShort, expandedDescription: rune.tooltipLong } : { title: rune.title, description: rune.tooltip };
+	hoveredRune.value = 'tooltipLong' in rune
+		? { title: rune.title, description: rune.tooltipShort, expandedDescription: rune.tooltipLong, rune: rune.rune }
+		: { title: rune.title, description: rune.tooltip, rune: rune.rune };
 	nextTick(() => updateTooltipPosition());
 }
 
@@ -373,7 +387,8 @@ defineExpose({
 		</section>
 		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" data-game-description="">
 			<h4>{{ hoveredRune?.title }}</h4>
-			<div v-html="isHoldingShift && hoveredRune?.expandedDescription || hoveredRune?.description" />
+			<div v-html="hoveredRuneTooltip?.replaced || ''" />
+			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.unknownVariables.length" />
 		</div>
 	</VDialog>
 </template>

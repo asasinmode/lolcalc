@@ -35,7 +35,7 @@ export interface IRuneShard {
 	effectAmount?: Record<string, number>;
 }
 
-export type IRune = IRunePathSlot | IRuneShard;
+export type IRune = IRunePath | IRunePathSlot | IRuneShard;
 
 export interface IRunes {
 	paths: Record<IRunePathName, IRunePath>;

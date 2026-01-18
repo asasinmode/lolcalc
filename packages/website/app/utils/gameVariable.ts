@@ -53,9 +53,9 @@ export function itemVariableValue(variable: string, item: IItem, target?: IGameV
 export function runeVariableValue(variable: string, rune: IRune): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 
-	if ((rune as IRunePathSlot).calculations?.[variable]) {
-		value = (rune as IRunePathSlot).calculations![variable];
-	} else {
+	if ('calculations' in rune && rune.calculations?.[variable]) {
+		value = rune.calculations![variable];
+	} else if ('effectAmount' in rune) {
 		value = rune.effectAmount?.[variable];
 	}
 
@@ -83,7 +83,7 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 	const unknownVariables: string[] = [];
 	const variables = new Map<string, number | [number, number]>();
 
-	const replaced = text.replace(/@([\w*]+)@/g, (_, name) => {
+	const replaced = text.replace(/@(.+?)@/g, (_, name) => {
 		let variableName = name;
 		let multiplier = 1;
 
