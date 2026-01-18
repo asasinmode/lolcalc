@@ -17,24 +17,31 @@ interface IRunePath {
 	name: IRunePathName;
 	icon: string;
 	iconColor: string;
-	slots: [Partial<Record<IRuneSlotName, {
-		id: number;
-		name: IRuneSlotName;
-		icon: string;
-		effectAmount?: Record<string, number>;
-		calculations?: Record<string, any>;
-	}>>];
+	slots: [Partial<Record<IRuneSlotName, IRunePathSlot>>];
 }
+
+export interface IRunePathSlot {
+	id: number;
+	name: IRuneSlotName;
+	icon: string;
+	effectAmount?: Record<string, number>;
+	/** mCalculations from rune data, maybe should be kept as just calculations */
+	calculations?: Record<string, any>;
+}
+
+export interface IRuneShard {
+	id: number;
+	icon: string;
+	effectAmount?: Record<string, number>;
+}
+
+export type IRune = IRunePathSlot | IRuneShard;
 
 export interface IRunes {
 	paths: Record<IRunePathName, IRunePath>;
 	shards: {
 		[S in IRuneShardSlotName]: {
-			[V in keyof IDataShards[S]]: {
-				id: number;
-				icon: string;
-				effectAmount: Record<string, number>;
-			}
+			[V in keyof IDataShards[S]]: IRuneShard
 		}
 	};
 }

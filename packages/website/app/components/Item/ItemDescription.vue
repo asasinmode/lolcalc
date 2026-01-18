@@ -6,7 +6,7 @@ const props = defineProps<{
 	headerClass?: string;
 	descriptionClass?: string;
 	headerSubtitles?: boolean;
-	target?: IItemVariableCalculationTarget;
+	target?: IGameVariableCalculationTarget;
 }>();
 
 defineEmits<{
@@ -35,7 +35,7 @@ const contents = computed<{
 		};
 	}
 
-	const { subtitleLeft, subtitleRight, extra } = text.items[item.id]!.tooltipShop;
+	const { subtitleLeft = '', subtitleRight = '', extra = [] } = text.items[item.id]?.tooltipShop || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -50,7 +50,7 @@ const contents = computed<{
 
 	let anyUnknownExtraVariables = false;
 	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
-		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceItemDescriptionVariables(
+		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
 			heading!
 				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
 					const { value } = itemVariableValue('Cooldown', item, props.target);
@@ -59,22 +59,24 @@ const contents = computed<{
 				})
 				.replace('(', '<span>(')
 				.replace(')', ')</span>'),
+			'item',
 			item,
 			props.target,
 		);
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
 
 		return [
-			replaceItemDescriptionIcons(replacedHeading),
+			replaceGameDescriptionIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
-				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceItemDescriptionVariables(
+				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
 					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
+					'item',
 					item,
 					props.target,
 				);
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
-				return replaceItemDescriptionIcons(replacedParagraph);
+				return replaceGameDescriptionIcons(replacedParagraph);
 			},
 			),
 		];
@@ -322,7 +324,7 @@ defineExpose({ header });
 		}
 
 		speed {
-			@apply 'text-white';
+			@apply 'text-yellow-50';
 		}
 
 		gold {
@@ -359,6 +361,10 @@ defineExpose({ header });
 
 		keywordstealth {
 			@apply 'text-pink-300';
+		}
+
+		active {
+			@apply 'font-500 text-orange-200';
 		}
 	}
 }

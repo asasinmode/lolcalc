@@ -1,8 +1,10 @@
 import type { IChampion } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { ITexture } from '../app/composables/useUi';
+import type { IGameVariableType } from '../app/utils/gameVariable';
 import { useMaps } from '../app/composables/useMaps';
-import { KNOWN_TOOLTIP_SHOP_EXTRA_TAGS, replaceItemDescriptionVariables } from '../app/utils/item';
+import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionVariables } from '../app/utils/gameVariable';
+
 import { ALL_RUNE_PATHS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
@@ -14,6 +16,16 @@ console.log('latest version', latestVersion);
 
 let stringtable: Record<string, string>;
 let rcpFeLolCollectionsCss: string;
+
+interface IDebugCategory {
+	variables: Map<string, string[]>;
+	tags: [string[], Set<string>];
+}
+
+const debug = {
+	item: { variables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+	rune: { variables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+};
 
 const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
 let textData = {
@@ -99,7 +111,7 @@ if (await itemFile.exists()) {
 	itemData = await itemFile.json();
 }
 
-if (!itemData || itemData?.version !== latestVersion) {
+if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	console.log('item data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -200,11 +212,6 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 	const moreItemData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`).then(r => r.json());
 
-	const itemShopItemTooltipDebugData: IItemShopItemTooltipDebugData = {
-		variables: new Map(),
-		tags: [[], new Set()],
-	};
-
 	const SPECIAL_EPICNESS_ITEMS: Record<string, number> = {
 		3869: 7,	// celestial opposition
 		3870: 7,	// dream maker
@@ -223,7 +230,7 @@ if (!itemData || itemData?.version !== latestVersion) {
 			continue;
 		}
 
-		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemShopItemTooltipDebugData);
+		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip);
 
 		if (SPECIAL_EPICNESS_ITEMS[itemId]) {
 			item.epicness = SPECIAL_EPICNESS_ITEMS[itemId];
@@ -319,14 +326,6 @@ if (!itemData || itemData?.version !== latestVersion) {
 
 	await itemFile.write(JSON.stringify(itemData, null, '\t'));
 
-	// TODO make these known
-	// if (itemShopItemTooltipDebugData.variables.size) {
-	// 	console.warn('Unknown tooltip shop item tooltip variables', itemShopItemTooltipDebugData.variables);
-	// }
-	// if (itemShopItemTooltipDebugData.tags[0].length) {
-	// 	console.warn('Unknown tooltip shop item tooltip tags', itemShopItemTooltipDebugData.tags[1], '\nfound in', itemShopItemTooltipDebugData.tags[0]);
-	// }
-
 	await textFile.write(JSON.stringify(textData, null, '\t'));
 }
 
@@ -337,7 +336,7 @@ if (await runeFile.exists()) {
 	runeData = await runeFile.json();
 }
 
-if (!runeData || runeData?.version !== latestVersion) {
+if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 	console.log('rune data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -398,16 +397,18 @@ if (!runeData || runeData?.version !== latestVersion) {
 				return [slotKey, Object.fromEntries(mPerks.map((perkKey: string) => {
 					const { mPerkId, mPerkName, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mIconTextureName, mScript } = data[perkKey];
 
-					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
-						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards'),
-					};
-
-					return [mPerkName.toLowerCase(), {
+					const slotValue = {
 						id: mPerkId,
 						icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
 						effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount),
-					}];
+					} as any;
+
+					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
+						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards', { category: 'rune', key: slotKey, variableType: 'rune', variableStatSource: slotValue }),
+					};
+
+					return [mPerkName.toLowerCase(), slotValue];
 				}))];
 			})),
 		} as unknown as NonNullable<(typeof runeData)>['data'],
@@ -510,12 +511,17 @@ if (!uiData || uiData?.version !== latestVersion) {
 	await uiFile.write(JSON.stringify(uiData, null, '\t'));
 }
 
-interface IItemShopItemTooltipDebugData {
-	variables: Map<string, string[]>;
-	tags: [items: string[], tags: Set<string>];
+for (const category in debug) {
+	const { variables, tags } = debug[category as keyof typeof debug];
+	if (variables.size) {
+		console.warn(`[${category}] unknown game variables`, variables);
+	}
+	if (tags[0].length) {
+		console.warn(`[${category}] unknown tags`, tags[1], '\nfound in', tags[0]);
+	}
 }
 
-function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug: IItemShopItemTooltipDebugData) {
+function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
 	const text = getStringtableValue(mShopTooltip, 'item shop tooltip');
 
 	const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
@@ -539,19 +545,16 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug:
 	}
 	const rawExtra = extraToEnd.slice(0, extraEndIndex).replace(/\{\{ ?Item_Passive_List ?\}\}/g, '').replaceAll(':</passive>', '</passive>');
 
-	const { unknownVariables } = replaceItemDescriptionVariables(rawExtra, item);
-	if (unknownVariables.length) {
-		debug.variables.set(item.name, unknownVariables);
-	}
-
-	const tags = rawExtra.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
-	const unknownTags = Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_TOOLTIP_SHOP_EXTRA_TAGS.includes(tag));
-	if (unknownTags.length) {
-		debug.tags[0].push(item.name);
-		for (const tag of unknownTags) {
-			debug.tags[1].add(tag);
-		}
-	}
+	// TODO uncomment
+	// const { unknownVariables } = replaceGameDescriptionVariables(rawExtra, 'item', item);
+	// if (unknownVariables.length) {
+	// 	debug.item.variables.set(item.name, unknownVariables);
+	// }
+	// const unknownTags = getUnknownTags(rawExtra);
+	// if (unknownTags.size) {
+	// 	debug.item.tags[0].push(item.name);
+	// 	debug.item.tags[1] = debug.item.tags[1].union(unknownTags);
+	// }
 
 	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')) : undefined;
 	for (let i = 0; i < (extra?.length || 0); i++) {
@@ -575,30 +578,37 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, debug:
 		}
 	}
 
-	(textData.data.items as any)[item.id] = { tooltipShop: {
-		subtitleLeft: subtitleLeft || undefined,
-		subtitleRight: subtitleRight || undefined,
-		extra,
-	} };
+	if (subtitleLeft.length || subtitleRight.length || extra?.length) {
+		(textData.data.items as any)[item.id] = { tooltipShop: {
+			subtitleLeft: subtitleLeft || undefined,
+			subtitleRight: subtitleRight || undefined,
+			extra,
+		} };
+	}
 }
 
 function createRuneSlotData(data: any) {
 	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mTooltipNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey, mIconTextureName } = data;
 
-	(textData.data.runes.slots as any)[mPerkName] = {
-		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
-		tooltipShort: getStringtableValue(mShortDescLocalizationKey, 'rune slot'),
-		tooltipLong: getStringtableValue(mLongDescLocalizationKey, 'rune slot'),
-		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
-	};
-
-	return [mPerkName, {
+	const value = {
 		id: mPerkId,
 		name: mPerkName,
 		icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
 		calculations: cleanupObject(mSpellScriptData.mCalculations),
 		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
-	}];
+	};
+
+	const variableDebug: Omit<IStringtableVariableDebug, 'key'> = { category: 'rune' as const, variableType: 'rune', variableStatSource: value };
+
+	(textData.data.runes.slots as any)[mPerkName] = {
+		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
+		tooltipShort: getStringtableValue(mShortDescLocalizationKey, 'rune slot', { ...variableDebug, key: `${mPerkName}-tooltipShort` }),
+		tooltipLong: getStringtableValue(mLongDescLocalizationKey, 'rune slot', { ...variableDebug, key: `${mPerkName}-tooltipLong` }),
+		// TODO add debug when implementing
+		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
+	};
+
+	return [mPerkName, value];
 }
 
 async function loadStringTable() {
@@ -616,12 +626,35 @@ async function loadRcpFeLolCollectionsCss() {
 	}
 }
 
-function getStringtableValue(path: string, debugPrefix: string) {
+interface IStringtableVariableDebug {
+	category: keyof typeof debug;
+	key: string;
+	variableType: IGameVariableType;
+	variableStatSource: any;
+}
+
+function getStringtableValue(path: string, debugPrefix: string, variableDebug?: IStringtableVariableDebug) {
 	const value = stringtable[path.toLowerCase()];
 	if (!value) {
 		console.warn(`[${debugPrefix}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
+	if (variableDebug) {
+		const { unknownVariables } = replaceGameDescriptionVariables(value, variableDebug.variableType, variableDebug.variableStatSource);
+		if (unknownVariables.length) {
+			debug[variableDebug.category].variables.set(variableDebug.key, unknownVariables);
+		}
+		const unknownTags = getUnknownTags(value);
+		if (unknownTags.size) {
+			debug[variableDebug.category].tags[0].push(variableDebug.key);
+			debug[variableDebug.category].tags[1] = debug[variableDebug.category].tags[1].union(unknownTags);
+		}
+	}
 	return value;
+}
+
+function getUnknownTags(text: string): Set<string> {
+	const tags = text.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
+	return new Set(Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_GAME_DESCRIPTION_TAGS.includes(tag)));
 }
 
 function formatNumber(n: number, precision = 2): number {

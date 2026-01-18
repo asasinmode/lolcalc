@@ -2,51 +2,6 @@
 	"version": "16.1.1",
 	"data": {
 		"items": {
-			"1001": {
-				"tooltipShop": {}
-			},
-			"1004": {
-				"tooltipShop": {}
-			},
-			"1006": {
-				"tooltipShop": {}
-			},
-			"1011": {
-				"tooltipShop": {}
-			},
-			"1018": {
-				"tooltipShop": {}
-			},
-			"1026": {
-				"tooltipShop": {}
-			},
-			"1027": {
-				"tooltipShop": {}
-			},
-			"1028": {
-				"tooltipShop": {}
-			},
-			"1029": {
-				"tooltipShop": {}
-			},
-			"1031": {
-				"tooltipShop": {}
-			},
-			"1033": {
-				"tooltipShop": {}
-			},
-			"1036": {
-				"tooltipShop": {}
-			},
-			"1037": {
-				"tooltipShop": {}
-			},
-			"1038": {
-				"tooltipShop": {}
-			},
-			"1042": {
-				"tooltipShop": {}
-			},
 			"1043": {
 				"tooltipShop": {
 					"extra": [
@@ -56,12 +11,6 @@
 						]
 					]
 				}
-			},
-			"1052": {
-				"tooltipShop": {}
-			},
-			"1053": {
-				"tooltipShop": {}
 			},
 			"1054": {
 				"tooltipShop": {
@@ -102,12 +51,6 @@
 					]
 				}
 			},
-			"1057": {
-				"tooltipShop": {}
-			},
-			"1058": {
-				"tooltipShop": {}
-			},
 			"1082": {
 				"tooltipShop": {
 					"subtitleLeft": "Risky Gambit",
@@ -133,18 +76,6 @@
 						]
 					]
 				}
-			},
-			"2019": {
-				"tooltipShop": {}
-			},
-			"2020": {
-				"tooltipShop": {}
-			},
-			"2021": {
-				"tooltipShop": {}
-			},
-			"2022": {
-				"tooltipShop": {}
 			},
 			"2051": {
 				"tooltipShop": {
@@ -443,9 +374,6 @@
 					"subtitleLeft": "Magic Penetration"
 				}
 			},
-			"3024": {
-				"tooltipShop": {}
-			},
 			"3026": {
 				"tooltipShop": {
 					"subtitleLeft": "Revive",
@@ -600,9 +528,6 @@
 					]
 				}
 			},
-			"3051": {
-				"tooltipShop": {}
-			},
 			"3053": {
 				"tooltipShop": {
 					"subtitleLeft": "Anti-Burst",
@@ -641,12 +566,6 @@
 						]
 					]
 				}
-			},
-			"3066": {
-				"tooltipShop": {}
-			},
-			"3067": {
-				"tooltipShop": {}
 			},
 			"3068": {
 				"tooltipShop": {
@@ -831,9 +750,6 @@
 					]
 				}
 			},
-			"3086": {
-				"tooltipShop": {}
-			},
 			"3087": {
 				"tooltipShop": {
 					"subtitleLeft": "Waveclear",
@@ -932,9 +848,6 @@
 					]
 				}
 			},
-			"3108": {
-				"tooltipShop": {}
-			},
 			"3109": {
 				"tooltipShop": {
 					"subtitleLeft": "Protect Ally",
@@ -972,12 +885,6 @@
 						]
 					]
 				}
-			},
-			"3113": {
-				"tooltipShop": {}
-			},
-			"3114": {
-				"tooltipShop": {}
 			},
 			"3115": {
 				"tooltipShop": {
@@ -1077,9 +984,6 @@
 						]
 					]
 				}
-			},
-			"3133": {
-				"tooltipShop": {}
 			},
 			"3134": {
 				"tooltipShop": {
@@ -1357,9 +1261,6 @@
 					]
 				}
 			},
-			"3175": {
-				"tooltipShop": {}
-			},
 			"3177": {
 				"tooltipShop": {
 					"subtitleRight": "Unique: Starter"
@@ -1410,9 +1311,6 @@
 						]
 					]
 				}
-			},
-			"3211": {
-				"tooltipShop": {}
 			},
 			"3222": {
 				"tooltipShop": {
@@ -1495,9 +1393,6 @@
 						]
 					]
 				}
-			},
-			"3801": {
-				"tooltipShop": {}
 			},
 			"3802": {
 				"tooltipShop": {
@@ -1721,9 +1616,6 @@
 					]
 				}
 			},
-			"4642": {
-				"tooltipShop": {}
-			},
 			"4645": {
 				"tooltipShop": {
 					"subtitleLeft": "Ability Crit",
@@ -1946,9 +1838,6 @@
 					]
 				}
 			},
-			"6670": {
-				"tooltipShop": {}
-			},
 			"6672": {
 				"tooltipShop": {
 					"subtitleLeft": "Sustained Damage",
@@ -1997,9 +1886,6 @@
 						]
 					]
 				}
-			},
-			"6690": {
-				"tooltipShop": {}
 			},
 			"6692": {
 				"tooltipShop": {
