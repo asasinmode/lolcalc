@@ -642,16 +642,34 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 	}
 	if (variableDebug) {
 		const { unknownVariables } = replaceGameDescriptionVariables(value, variableDebug.variableType, variableDebug.variableStatSource);
-		for (let i = unknownVariables.length - 1; i >= 0; i--) {
+		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
 			const hash = hashRuneVariable(variableName);
 			for (const sourceKey of variableDebug.variableSourceKeys) {
+				let rename: [from: string, to: string] | undefined;
+
 				if (variableDebug.variableStatSource[sourceKey]?.[hash]) {
-					variableDebug.variableStatSource[sourceKey][variableName] = variableDebug.variableStatSource[sourceKey]?.[hash];
-					variableDebug.variableStatSource[sourceKey].__mappedHashes ||= {};
-					variableDebug.variableStatSource[sourceKey].__mappedHashes[hash] = variableName;
-					variableDebug.variableStatSource[sourceKey][hash] = undefined;
+					rename = [hash, variableName];
+				}
+
+				// TODO not sure if legal for variables other than the rune ones
+				if (!rename) {
+					const lowercaseKeys = Object.keys(variableDebug.variableStatSource[sourceKey] || {});
+					for (const key of lowercaseKeys) {
+						if (variableName.toLowerCase() === key.toLowerCase()) {
+							rename = [key, variableName];
+						}
+					}
+				}
+
+				if (rename) {
+					const [from, to] = rename;
+					variableDebug.variableStatSource[sourceKey][to] = variableDebug.variableStatSource[sourceKey][from];
+					variableDebug.variableStatSource[sourceKey].__renamedVariables ||= {};
+					variableDebug.variableStatSource[sourceKey].__renamedVariables[from] = to;
+					variableDebug.variableStatSource[sourceKey][from] = undefined;
 					unknownVariables.splice(i, 1);
+					continue outer;
 				}
 			}
 		}

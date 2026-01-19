@@ -660,7 +660,7 @@
 							"effectAmount": {
 								"StartingUltAH": 6,
 								"AdditionalUltAH": 5,
-								"__mappedHashes": {
+								"__renamedVariables": {
 									"{89cb3caa}": "AdditionalUltAH"
 								}
 							}
@@ -921,11 +921,16 @@
 							},
 							"effectAmount": {
 								"BurnlockoutDuration": 10,
-								"Damage": 20,
-								"DamageMax": 40,
-								"DotDuration": 1,
 								"OOCTimer": 0,
-								"{89367404}": 0.1
+								"{89367404}": 0.1,
+								"dotduration": 1,
+								"__renamedVariables": {
+									"DotDuration": "dotduration",
+									"DamageMax": "damagemax",
+									"Damage": "damage"
+								},
+								"damagemax": 40,
+								"damage": 20
 							}
 						},
 						"Waterwalking": {
@@ -1183,7 +1188,7 @@
 								"BaseDamageMelee": 85,
 								"BaseDamageRanged": 50,
 								"HPRatioRanged": 0.2,
-								"__mappedHashes": {
+								"__renamedVariables": {
 									"{ffe97357}": "HPRatioRanged",
 									"{36a8d610}": "HPRatioMelee"
 								},
@@ -1321,11 +1326,12 @@
 							"icon": "assets/perks/styles/resolve/revitalize/revitalize.png",
 							"effectAmount": {
 								"HealShieldPower": 0.05,
-								"HealthCutOff": 40,
-								"ExtraAmp": 10,
-								"__mappedHashes": {
+								"HealthCutoff": 40,
+								"__renamedVariables": {
+									"HealthCutOff": "HealthCutoff",
 									"{9df5828d}": "ExtraAmp"
-								}
+								},
+								"ExtraAmp": 10
 							}
 						},
 						"Unflinching": {
@@ -1594,7 +1600,10 @@
 							"effectAmount": {
 								"{1b48f5ea}": 10,
 								"{55d14eea}": 25,
-								"HastePerStack": 1
+								"HasteperStack": 1,
+								"__renamedVariables": {
+									"HastePerStack": "HasteperStack"
+								}
 							}
 						}
 					}
