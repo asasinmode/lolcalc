@@ -761,7 +761,7 @@ defineExpose({
 		}
 
 		> div {
-			@apply 'text-neutral-400';
+			@apply 'text-neutral-300';
 
 			lol-uikit-tooltipped-keyword,
 			lol-uikit-tooltipped-keyword font {

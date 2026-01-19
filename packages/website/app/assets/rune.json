@@ -658,8 +658,11 @@
 							"name": "UltimateHunter",
 							"icon": "assets/perks/styles/domination/ultimatehunter/ultimatehunter.png",
 							"effectAmount": {
-								"{89cb3caa}": 5,
-								"StartingUltAH": 6
+								"StartingUltAH": 6,
+								"AdditionalUltAH": 5,
+								"__mappedHashes": {
+									"{89cb3caa}": "AdditionalUltAH"
+								}
 							}
 						}
 					}
@@ -1179,8 +1182,12 @@
 								"{97664ba4}": 3,
 								"BaseDamageMelee": 85,
 								"BaseDamageRanged": 50,
-								"{36a8d610}": 0.28,
-								"{ffe97357}": 0.2
+								"HPRatioRanged": 0.2,
+								"__mappedHashes": {
+									"{ffe97357}": "HPRatioRanged",
+									"{36a8d610}": "HPRatioMelee"
+								},
+								"HPRatioMelee": 0.28
 							}
 						},
 						"FontOfLife": {
@@ -1315,7 +1322,10 @@
 							"effectAmount": {
 								"HealShieldPower": 0.05,
 								"HealthCutOff": 40,
-								"{9df5828d}": 10
+								"ExtraAmp": 10,
+								"__mappedHashes": {
+									"{9df5828d}": "ExtraAmp"
+								}
 							}
 						},
 						"Unflinching": {

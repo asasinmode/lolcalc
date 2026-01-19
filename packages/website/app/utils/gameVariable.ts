@@ -10,6 +10,8 @@ interface IVariableValueResult {
 	value?: number | [number | undefined, number | undefined];
 	/** if `true`, the variable is different for melee and ranged champions */
 	isMeleeRanged?: boolean;
+	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
+	actualVariableName?: string;
 }
 
 // TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
@@ -52,14 +54,34 @@ export function itemVariableValue(variable: string, item: IItem, target?: IGameV
 
 export function runeVariableValue(variable: string, rune: IRune): IVariableValueResult {
 	let value: IVariableValueResult['value'];
+	let actualVariableName: IVariableValueResult['actualVariableName'];
 
-	if ('calculations' in rune && rune.calculations?.[variable]) {
-		value = rune.calculations![variable];
-	} else if ('effectAmount' in rune) {
-		value = rune.effectAmount?.[variable];
+	const [variableName, ...dotPath] = variable.split('.');
+	const sources = ['calculations' in rune && rune.calculations, 'effectAmount' in rune && rune.effectAmount];
+
+	if (dotPath.length) {
+		actualVariableName = variableName;
 	}
 
-	return { value };
+	for (const source of sources) {
+		if (!source) {
+			continue;
+		}
+
+		value = source[variableName!];
+		if (value !== undefined) {
+			for (const path in dotPath) {
+				if (path !== '0') {
+					value = (value as any)[path];
+				}
+			}
+		}
+		if (value !== undefined) {
+			break;
+		}
+	}
+
+	return { value, actualVariableName };
 }
 
 export type IGameVariableType = 'item' | 'rune';
@@ -69,7 +91,6 @@ interface IVariableTypeValueFunctions {
 	rune: typeof runeVariableValue;
 }
 
-// TODO replace `IItem` with anything that has calculation thingies
 export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 	text: string,
 	variableType: T,
@@ -78,9 +99,9 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 ): {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
-	unknownVariables: string[];
+	unknownVariables: [rawName: string, actualName: string | undefined][];
 } {
-	const unknownVariables: string[] = [];
+	const unknownVariables: [string, string | undefined][] = [];
 	const variables = new Map<string, number | [number, number]>();
 
 	const replaced = text.replace(/@(.+?)@/g, (_, name) => {
@@ -93,16 +114,16 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged } = (variableType === 'item' ? itemVariableValue : runeVariableValue)(variableName, item as any, target);
+		let { value: variable, isMeleeRanged, actualVariableName } = (variableType === 'item' ? itemVariableValue : runeVariableValue)(variableName, item as any, target);
 
 		if (variable === undefined) {
-			unknownVariables.push(name);
+			unknownVariables.push([name, actualVariableName]);
 			return `<unknown>@${name}@</unknown>`;
 		}
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
-				unknownVariables.push(name);
+				unknownVariables.push([name, actualVariableName]);
 				return `<unknown>@${name}@</unknown>`;
 			}
 

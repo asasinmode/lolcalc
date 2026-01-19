@@ -23,6 +23,7 @@
 		"@nuxt/eslint": "1.10.0",
 		"@nuxt/hints": "1.0.0-alpha.1",
 		"@nuxt/icon": "2.1.0",
+		"@sindresorhus/fnv1a": "^3.1.0",
 		"@unocss/eslint-config": "^66.5.12",
 		"@unocss/nuxt": "66.5.7",
 		"eslint": "^9.39.2",

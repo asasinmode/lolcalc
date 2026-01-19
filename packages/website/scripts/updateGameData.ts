@@ -2,6 +2,7 @@ import type { IChampion } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { ITexture } from '../app/composables/useUi';
 import type { IGameVariableType } from '../app/utils/gameVariable';
+import fnv1a from '@sindresorhus/fnv1a';
 import { useMaps } from '../app/composables/useMaps';
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionVariables } from '../app/utils/gameVariable';
 
@@ -405,7 +406,7 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 
 					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
 						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards', { category: 'rune', key: slotKey, variableType: 'rune', variableStatSource: slotValue }),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards', { category: 'rune', key: slotKey, variableType: 'rune', variableStatSource: slotValue, variableSourceKeys: ['effectAmount'] }),
 					};
 
 					return [mPerkName.toLowerCase(), slotValue];
@@ -598,7 +599,7 @@ function createRuneSlotData(data: any) {
 		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
 	};
 
-	const variableDebug: Omit<IStringtableVariableDebug, 'key'> = { category: 'rune' as const, variableType: 'rune', variableStatSource: value };
+	const variableDebug: Omit<IStringtableVariableDebug, 'key'> = { category: 'rune' as const, variableType: 'rune', variableStatSource: value, variableSourceKeys: ['calculations', 'effectAmount'] };
 
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
@@ -631,6 +632,7 @@ interface IStringtableVariableDebug {
 	key: string;
 	variableType: IGameVariableType;
 	variableStatSource: any;
+	variableSourceKeys: string[];
 }
 
 function getStringtableValue(path: string, debugPrefix: string, variableDebug?: IStringtableVariableDebug) {
@@ -640,8 +642,21 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 	}
 	if (variableDebug) {
 		const { unknownVariables } = replaceGameDescriptionVariables(value, variableDebug.variableType, variableDebug.variableStatSource);
+		for (let i = unknownVariables.length - 1; i >= 0; i--) {
+			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
+			const hash = hashRuneVariable(variableName);
+			for (const sourceKey of variableDebug.variableSourceKeys) {
+				if (variableDebug.variableStatSource[sourceKey]?.[hash]) {
+					variableDebug.variableStatSource[sourceKey][variableName] = variableDebug.variableStatSource[sourceKey]?.[hash];
+					variableDebug.variableStatSource[sourceKey].__mappedHashes ||= {};
+					variableDebug.variableStatSource[sourceKey].__mappedHashes[hash] = variableName;
+					variableDebug.variableStatSource[sourceKey][hash] = undefined;
+					unknownVariables.splice(i, 1);
+				}
+			}
+		}
 		if (unknownVariables.length) {
-			debug[variableDebug.category].variables.set(variableDebug.key, unknownVariables);
+			debug[variableDebug.category].variables.set(variableDebug.key, unknownVariables.map(v => v[0]));
 		}
 		const unknownTags = getUnknownTags(value);
 		if (unknownTags.size) {
@@ -662,11 +677,30 @@ function formatNumber(n: number, precision = 2): number {
 }
 
 function cleanupObject(obj?: object): any {
-	return obj && Object.fromEntries(Object.entries(obj).filter(([key]) => key !== '__type').map(([key, value]) =>
-		[key, typeof value === 'object'
+	return obj && Object.fromEntries(Object.entries(obj).filter(([key]) => key !== '__type').map(([key, value]) => {
+		return [key, typeof value === 'object'
 			? Array.isArray(value) ? value.map(cleanupObject) : cleanupObject(value)
 			: typeof value === 'number'
 				? formatNumber(value)
-				: value]),
+				: value];
+	},
+	),
 	);
 }
+
+function hashRuneVariable(variable: string) {
+	const value = fnv1a(variable.toLowerCase(), { size: 32 });
+	return `{${value.toString(16)}}`;
+}
+
+// TODO champion variables hash resolving possibly
+// import { xxh3 } from '@node-rs/xxhash';
+// function hashVariableName(variable: string, bits = 32) {
+// 	const hash = xxh3.Xxh3.withSeed(0n).update(variable.toLowerCase()).digest();
+//
+// 	const mask = (1n << BigInt(bits)) - 1n;
+// 	const value = hash & mask;
+//
+// 	const hexLen = bits / 4;
+// 	return `{${value.toString(16).padStart(hexLen, '0')}}`;
+// }

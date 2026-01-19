@@ -12,7 +12,7 @@ export type IRuneShardSlotName = keyof IDataShards;
 export type IRunePathName = keyof IDataPaths;
 export type IRuneSlotName = UnionKeys<IDataPaths[IRunePathName]['slots'][number]>;
 
-interface IRunePath {
+export interface IRunePath {
 	id: number;
 	name: IRunePathName;
 	icon: string;

@@ -44,7 +44,7 @@ bun test
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
-  - [ ] hover tooltips
+  - [ ] hover tooltips, check styles with reference_images/rune hovers.mp4
   - [ ] rune paths not implemented alert
 - [ ] champ select dialog
 - [ ] item shop dialog
