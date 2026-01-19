@@ -1,4 +1,4 @@
-import { ITEM_STAT_ICON_NAMES } from '../composables/useUi';
+import { ITEM_STAT_ICON_NAMES } from './item';
 
 export interface IGameVariableCalculationTarget {
 	isRanged?: boolean;

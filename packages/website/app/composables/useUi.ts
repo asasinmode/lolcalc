@@ -1,4 +1,5 @@
 import type { ImgHTMLAttributes } from 'vue';
+import type { ITexture } from '~/utils/types';
 import { data } from '../assets/ui.json';
 
 export function useUi() {
@@ -33,43 +34,6 @@ export function textureBgImageAttrs({ resWidth, resHeight, spriteSheet, uv: [sta
 			'--txt-uv-start-y': `-${startY}px`,
 		},
 	};
-}
-
-export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' | 'level' | 'range', string> = {
-	OnHit: 'onhit',
-	FlatPhysicalDamageMod: 'scalead',
-	adaptiveForce: 'adaptiveforce',
-	AbilityHasteMod: 'scaleah',
-	FlatMagicDamageMod: 'scaleap',
-	PhysicalLethality: 'scaleapen',
-	PercentArmorPenetrationMod: 'scaleapen',
-	FlatArmorMod: 'scalearmor',
-	PercentAttackSpeedMod: 'scaleas',
-	FlatCritChanceMod: 'scalecrit',
-	FlatCritDamageMod: 'scalecritmult',
-	PercentHealingAmountMod: 'scalehealshield',
-	FlatHPPoolMod: 'scalehealth',
-	FlatHPRegenMod: 'scalehpregen',
-	PercentBaseHPRegenMod: 'scalehpregen',
-	level: 'scalelevel',
-	PercentLifeStealMod: 'scalels',
-	FlatMPPoolMod: 'scalemana',
-	PercentBaseMPRegenMod: 'scalemanaregen',
-	FlatMagicPenetrationMod: 'scalempen',
-	PercentMagicPenetrationMod: 'scalempen',
-	FlatSpellBlockMod: 'scalemr',
-	FlatMovementSpeedMod: 'scalems',
-	PercentMovementSpeedMod: 'scalems',
-	range: 'scalerange',
-	PercentOmnivampMod: 'scalesv',
-	PercentTenacityMod: 'scaletenacity',
-};
-
-export interface ITexture {
-	spriteSheet: string;
-	resWidth: number;
-	resHeight: number;
-	uv: number[];
 }
 
 interface IUiData {

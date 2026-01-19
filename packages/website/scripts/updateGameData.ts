@@ -1,7 +1,7 @@
 import type { IChampion } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
-import type { ITexture } from '../app/composables/useUi';
 import type { IGameVariableType } from '../app/utils/gameVariable';
+import type { ITexture } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
 import { useMaps } from '../app/composables/useMaps';
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionVariables } from '../app/utils/gameVariable';
@@ -53,7 +53,7 @@ if (await championFile.exists()) {
 if (!championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
 
-	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`).then(r => r.json());
+	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, 'champion.json');
 
 	championData = {
 		version,
@@ -63,7 +63,7 @@ if (!championData || championData?.version !== latestVersion) {
 				.map(async ([championId, championData]) => {
 					const { id, key, name, image, partype, stats } = championData;
 
-					const additionalData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`).then(r => r.json());
+					const additionalData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `characters/${id.toLowerCase()}.bin.json`);
 
 					const characterRecordsKey = id === 'Fiddlesticks' ? 'FiddleSticks' : id;
 					if (additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`]) {
@@ -90,7 +90,7 @@ if (!championData || championData?.version !== latestVersion) {
 		) as NonNullable<typeof championData>['data'],
 	};
 
-	const roleScript = await fetch(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`).then(r => r.text());
+	const roleScript = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`, 'rcp-fe-lol-champion-statistics.js', 'text');
 	const roleScriptData: Record<'TOP' | 'JUNGLE' | 'MIDDLE' | 'BOTTOM' | 'SUPPORT', Record<string, number>> = JSON.parse(roleScript.match(/JSON\.parse\('([^']+)'/)?.[1] || '{}');
 
 	const allChampions = Object.values(championData!.data);
@@ -116,7 +116,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	console.log('item data not present or outdated, fetching...');
 
 	await loadStringTable();
-	const { version, data } = await fetch(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`).then(r => r.json());
+	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`, 'item.json');
 
 	const UNPURCHASABLES_TO_KEEP = [
 		'2422', // slightly magical footwear
@@ -211,7 +211,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		) as unknown as NonNullable<typeof itemData>['data'],
 	};
 
-	const moreItemData = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`).then(r => r.json());
+	const moreItemData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`, 'items.cdtb.bin.json');
 
 	const SPECIAL_EPICNESS_ITEMS: Record<string, number> = {
 		3869: 7,	// celestial opposition
@@ -342,7 +342,7 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 
 	await loadStringTable();
 	await loadRcpFeLolCollectionsCss();
-	const data = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/perks.cdtb.bin.json`).then(r => r.json());
+	const data = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/perks.cdtb.bin.json`, 'perks.cdtb.bin.json');
 
 	textData.data.runes = {
 		paths: {},
@@ -429,7 +429,7 @@ if (await uiFile.exists()) {
 if (!uiData || uiData?.version !== latestVersion) {
 	console.log('ui data not present or outdated, fetching...');
 
-	const data = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json`).then(r => r.json());
+	const data = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json`, 'uibase.cdtb.bin.json');
 
 	function getTexture(data: any, debug: string) {
 		const { TextureData } = data || {};
@@ -615,13 +615,13 @@ function createRuneSlotData(data: any) {
 async function loadStringTable() {
 	if (!stringtable) {
 		console.log('fetching stringtable...');
-		({ entries: stringtable } = await fetch(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`).then(r => r.json()));
+		({ entries: stringtable } = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/en_us/data/menu/en_us/lol.stringtable.json`, 'lol.stringtable.json'));
 	}
 }
 
 async function loadRcpFeLolCollectionsCss() {
 	if (!rcpFeLolCollectionsCss) {
-		await fetch(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/rcp-fe-lol-collections.css`).then(r => r.text()).then((text) => {
+		await fetchCached(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/rcp-fe-lol-collections.css`, 'rcp-fe-lol-collections.css', 'text').then((text) => {
 			rcpFeLolCollectionsCss = text;
 		});
 	}
@@ -686,6 +686,22 @@ function cleanupObject(obj?: object): any {
 	},
 	),
 	);
+}
+
+async function fetchCached(url: string, filename: string, responseMethod: 'text' | 'json' = 'json') {
+	const cacheFile = Bun.file(`${import.meta.dir}/.cache/${filename}`);
+	let data;
+	if (await cacheFile.exists()) {
+		data = await cacheFile.json();
+		if (data.version !== latestVersion) {
+			data = undefined;
+		}
+	}
+	if (!data) {
+		data = await fetch(url).then(r => r[responseMethod]());
+		await cacheFile.write(JSON.stringify(data, null, '\t'));
+	}
+	return data;
 }
 
 function hashRuneVariable(variable: string) {
