@@ -2447,6 +2447,15 @@
 					}
 				}
 			}
+		},
+		"stringtable": {
+			"perk_displayname_darkharvest": "Dark Harvest",
+			"perk_subtext_adaptiveforce_max": "an <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>adaptive</font></lol-uikit-tooltipped-keyword> bonus of up to @MaxAdaptive.-1*0.6@ Attack Damage or @MaxAdaptive@ Ability Power",
+			"perk_shared_desc_guardian": "<i>Guard</i> allies within @SnuggleRange@ units of you, and allies you target with spells for @GuardDuration@s. While <i>Guarding</i>, if you or the ally take more than a small amount of damage over the duration of the <i>Guard</i>, both of you gain a shield for @ShieldDuration@s.",
+			"perk_short_desc_conditioning": "After @MinutesRequired@ min gain +@ArmorBase@ Armor and +@MRBase@ Magic Resist and increase your Armor and Magic Resist by @ExtraResist*100@%.",
+			"perk_long_desc_boneplating": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockBase@-@BlockMax@ (based on level) less damage.<br><br>Duration: @BlockDuration@s<br>Cooldown: @Cooldown@s",
+			"item_2422_name": "Slightly Magical Footwear",
+			"game_item_displayname_2010": "Total Biscuit of Everlasting Will"
 		}
 	}
 }

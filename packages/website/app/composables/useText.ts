@@ -33,4 +33,5 @@ export interface ITextData {
 			}>;
 		};
 	};
+	stringtable: Record<string, string>;
 }

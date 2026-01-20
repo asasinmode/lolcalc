@@ -4,8 +4,9 @@ import type { IGameVariableType } from '../app/utils/gameVariable';
 import type { ITexture } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
 import { useMaps } from '../app/composables/useMaps';
-import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionVariables } from '../app/utils/gameVariable';
+import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
 
+import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionVariables } from '../app/utils/gameVariable';
 import { ALL_RUNE_PATHS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
@@ -20,12 +21,13 @@ let rcpFeLolCollectionsCss: string;
 
 interface IDebugCategory {
 	variables: Map<string, string[]>;
+	stringtableVariables: Map<string, string[]>;
 	tags: [string[], Set<string>];
 }
 
 const debug = {
-	item: { variables: new Map(), tags: [[], new Set()] } as IDebugCategory,
-	rune: { variables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+	item: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+	rune: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 };
 
 const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
@@ -36,11 +38,13 @@ let textData = {
 		runes: {
 			paths: {},
 		},
+		stringtable: {},
 	},
 } as typeof import('../app/assets/text.json');
 
 if (await textFile.exists()) {
 	textData = await textFile.json();
+	textData.data.stringtable ||= {};
 }
 
 const championFile = Bun.file(`${import.meta.dir}/../app/assets/champion.json`);
@@ -513,9 +517,12 @@ if (!uiData || uiData?.version !== latestVersion) {
 }
 
 for (const category in debug) {
-	const { variables, tags } = debug[category as keyof typeof debug];
+	const { variables, stringtableVariables, tags } = debug[category as keyof typeof debug];
 	if (variables.size) {
 		console.warn(`[${category}] unknown game variables`, variables);
+	}
+	if (stringtableVariables.size) {
+		console.warn(`[${category}] unknown stringtable variables`, stringtableVariables);
 	}
 	if (tags[0].length) {
 		console.warn(`[${category}] unknown tags`, tags[1], '\nfound in', tags[0]);
@@ -641,7 +648,15 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 		console.warn(`[${debugPrefix}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
 	if (variableDebug) {
-		const { unknownVariables } = replaceGameDescriptionVariables(value, variableDebug.variableType, variableDebug.variableStatSource);
+		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable);
+		for (const [stringtableKey, value] of stringtableVariables.entries()) {
+			(textData.data.stringtable as any)[stringtableKey] = value;
+		}
+		if (unknownStringtableVariables.length) {
+			debug[variableDebug.category].stringtableVariables.set(variableDebug.key, unknownStringtableVariables.map(v => v[0]));
+		}
+
+		const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableDebug.variableType, variableDebug.variableStatSource);
 		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
 			const hash = hashRuneVariable(variableName);

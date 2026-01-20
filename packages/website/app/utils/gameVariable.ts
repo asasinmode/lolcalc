@@ -71,7 +71,9 @@ export function runeVariableValue(variable: string, rune: IRune): IVariableValue
 		value = source[variableName!];
 		if (value !== undefined) {
 			for (const path in dotPath) {
-				if (path !== '0') {
+				// TODO figure this out, some paths seem to have .0 or .-1
+				const number = Number(path);
+				if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
 					value = (value as any)[path];
 				}
 			}

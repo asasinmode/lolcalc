@@ -171,13 +171,21 @@ const hoveredRune = shallowRef<{
 	expandedDescription?: string;
 	rune: IRune;
 }>();
-const hoveredRuneTooltip = computed(() => hoveredRune.value
-	? replaceGameDescriptionVariables(
-			(isHoldingShift.value && hoveredRune.value.expandedDescription) || hoveredRune.value.description,
-			'rune',
-			hoveredRune.value.rune,
-		)
-	: undefined);
+const hoveredRuneTooltip = computed(() => {
+	if (!hoveredRune.value) {
+		return undefined;
+	}
+
+	const { replaced: stringtableVariableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables((isHoldingShift.value && hoveredRune.value.expandedDescription) || hoveredRune.value.description, text.stringtable);
+
+	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
+		stringtableVariableReplaced,
+		'rune',
+		hoveredRune.value.rune,
+	);
+
+	return { replaced, unknownVariables: unknownVariables.concat(unknownStringtableVariables) };
+});
 
 type IHoveredRuneOption = (typeof pathOptions)[number] | NonNullable<UnwrapRef<typeof primaryRunePathSlots>>[number][number] | NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number] | UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
 
