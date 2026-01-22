@@ -218,17 +218,11 @@ function updateTooltipPosition() {
 function holdShift(event: KeyboardEvent) {
 	if (event.key === 'Shift') {
 		isHoldingShift.value = true;
-		nextTick(() => {
-			runeDescriptionTooltipAnchor && updateTooltipPosition();
-		});
 	}
 }
 
 function releaseShift() {
 	isHoldingShift.value = false;
-	nextTick(() => {
-		runeDescriptionTooltipAnchor && updateTooltipPosition();
-	});
 }
 
 onMounted(() => {
@@ -792,7 +786,7 @@ defineExpose({
 	}
 
 	#rune-select-dialog-hover-tooltip {
-		@apply 'bg-neutral-900 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(100%_+_1rem)] p-7 leading-5.5';
+		@apply 'bg-neutral-900 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
 
 		--width: 21.5rem;
 		left: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
