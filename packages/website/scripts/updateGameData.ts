@@ -671,7 +671,7 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 				if (!rename) {
 					const lowercaseKeys = Object.keys(variableDebug.variableStatSource[sourceKey] || {});
 					for (const key of lowercaseKeys) {
-						if (variableName.toLowerCase() === key.toLowerCase()) {
+						if (variableName !== key && variableName.toLowerCase() === key.toLowerCase()) {
 							rename = [key, variableName];
 						}
 					}
@@ -705,7 +705,7 @@ function getUnknownTags(text: string): Set<string> {
 	return new Set(Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_GAME_DESCRIPTION_TAGS.includes(tag)));
 }
 
-function formatNumber(n: number, precision = 2): number {
+function formatNumber(n: number, precision = 3): number {
 	return Number.isInteger(n) ? n : Number(n.toFixed(precision));
 }
 

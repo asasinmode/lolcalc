@@ -118,6 +118,10 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 
 		let { value: variable, isMeleeRanged, actualVariableName } = (variableType === 'item' ? itemVariableValue : runeVariableValue)(variableName, item as any, target);
 
+		if (Array.isArray(variable) ? variable.some(v => typeof v !== 'number' || Number.isNaN(v)) : (typeof variable !== 'number' || Number.isNaN(variable))) {
+			variable = Array.isArray(variable) ? variable.map(v => (typeof v !== 'number' || Number.isNaN(v)) ? undefined : v) as typeof variable : undefined;
+		}
+
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
 			return `<unknown>@${name}@</unknown>`;

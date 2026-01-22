@@ -1,5 +1,5 @@
 {
-	"version": "16.1.1",
+	"version": "16.2.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -651,7 +651,7 @@
 			"stats": {
 				"FlatHPPoolMod": 80,
 				"FlatPhysicalDamageMod": 10,
-				"PercentOmnivampMod": 0.03
+				"PercentOmnivampMod": 0.025
 			},
 			"gold": {
 				"base": 450,
@@ -1115,7 +1115,7 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"HPToADPercentage": 0.03,
+				"HPToADPercentage": 0.025,
 				"MissingHealthAD": 0.12,
 				"MissingHealthThreshold": 0.7
 			},
@@ -1407,7 +1407,7 @@
 			"searchString": "fiendhunterbolts;criticalstrike;attackspeed;movement;abilityhaste",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
-				"PercentAttackSpeedMod": 0.4,
+				"PercentAttackSpeedMod": 0.45,
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
@@ -1427,10 +1427,10 @@
 				"UltimateHaste": 30,
 				"Cooldown": 45,
 				"Duration": 8,
-				"BonusTrueDamage": 0.1,
+				"BonusTrueDamage": 0.15,
 				"BonusAS": 0.5,
 				"NumberOfAttacks": 3,
-				"CritModifier": 0.75
+				"CritModifier": 0.8
 			},
 			"categories": {
 				"marksman": true
@@ -1497,7 +1497,7 @@
 				"sell": 2240
 			},
 			"image": "2520.png",
-			"mapMask": 3,
+			"mapMask": 1,
 			"from": [
 				"2020",
 				"3134"
@@ -1584,7 +1584,7 @@
 							"mNumber": 15
 						},
 						{
-							"mCoefficient": 0,
+							"mCoefficient": 0.005,
 							"mStatFormula": 2
 						}
 					],
@@ -1602,7 +1602,7 @@
 			"searchString": "hexopticsc;damage;criticalstrike",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 50
+				"FlatPhysicalDamageMod": 55
 			},
 			"gold": {
 				"base": 275,
@@ -1622,7 +1622,7 @@
 				"ExtraRange": 100,
 				"TakedownWindow": 3,
 				"Duration": 6,
-				"MaxRange": 700,
+				"MaxRange": 600,
 				"MaxDamageAmp": 0.1
 			},
 			"categories": {
@@ -1640,10 +1640,10 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 500,
+				"base": 800,
 				"purchasable": true,
-				"total": 2000,
-				"sell": 1400
+				"total": 2300,
+				"sell": 1610
 			},
 			"image": "2524.png",
 			"mapMask": 3,
@@ -1660,7 +1660,7 @@
 				"AuraRange": 900,
 				"ASDuration": 1,
 				"MoveSpeed": 20,
-				"RangedAttackSpeedMultiplier": 0.67
+				"RangedAttackSpeedMultiplier": 0.667
 			},
 			"itemCalculations": {
 				"BuffDuration": {
@@ -1786,7 +1786,7 @@
 				"BonusHSPCalc": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0,
+							"mCoefficient": 0.005,
 							"mStatFormula": 2
 						}
 					]
@@ -2357,7 +2357,7 @@
 			"epicness": 5,
 			"dataValues": {
 				"BonusADManaRatioTOOLTIPONLY": 0.02,
-				"OnHitManaRatioTOOLTIPONLY": 0.01,
+				"OnHitManaRatioTOOLTIPONLY": 0.012,
 				"AbilityManaRatioRangedTOOLTIPONLY": 0.03,
 				"PerCastIDLockout": 6.5,
 				"AbilityManaRatioMeleeTOOLTIPONLY": 0.04
@@ -2373,7 +2373,7 @@
 				"OnHitDamage": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0.01
+							"mCoefficient": 0.012
 						}
 					]
 				},
@@ -3469,7 +3469,7 @@
 			],
 			"epicness": 4,
 			"dataValues": {
-				"MaxHPRatio": 0,
+				"MaxHPRatio": 0.005,
 				"WardenDamageMax": 0.2,
 				"BlockBase": 15
 			},
@@ -3501,7 +3501,7 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"MaxHealthRatio": 0.01,
+				"MaxHealthRatio": 0.015,
 				"SecondsPerHeal": 0.5,
 				"HealthThreshold": 2000,
 				"OOCTimerChampion": 8,
@@ -4559,7 +4559,7 @@
 			"dataValues": {
 				"Cooldown": 8,
 				"ShieldDuration": 3,
-				"CurrentManaShieldRatio": 0.05,
+				"CurrentManaShieldRatio": 0.045,
 				"Multiplier": 0.8
 			},
 			"itemCalculations": {
@@ -4994,7 +4994,7 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.67
+						"mNumber": 0.667
 					}
 				},
 				"OOCMS": {
@@ -5811,7 +5811,7 @@
 			"epicness": 7,
 			"dataValues": {
 				"MeleeMS": 0.15,
-				"RangedMSMultiplier": 0.67,
+				"RangedMSMultiplier": 0.667,
 				"Duration": 2
 			},
 			"itemCalculations": {
@@ -6085,7 +6085,7 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.67
+						"mNumber": 0.667
 					}
 				}
 			},
@@ -6319,7 +6319,7 @@
 			"epicness": 4,
 			"dataValues": {
 				"HealthRegenDuration": 10,
-				"DamageToRegenDurationRatio": 0.33
+				"DamageToRegenDurationRatio": 0.333
 			},
 			"categories": {
 				"tank": true
@@ -6492,14 +6492,14 @@
 			"searchString": "essencereaver;er;spellblade;damage;criticalstrike;manaregen;cooldownreduction;onhit;abilityhaste",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
-				"FlatPhysicalDamageMod": 55,
+				"FlatPhysicalDamageMod": 50,
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 350,
+				"base": 500,
 				"purchasable": true,
-				"total": 2900,
-				"sell": 2030
+				"total": 3050,
+				"sell": 2135
 			},
 			"image": "3508.png",
 			"mapMask": 3,
@@ -6876,7 +6876,7 @@
 				"GoldOnHitMelee": 22,
 				"ExecuteMinionGold": 15,
 				"MeleeExecutePerc": 0.5,
-				"RangedExecutePerc": 0.33,
+				"RangedExecutePerc": 0.333,
 				"ExecuteCannonGold": 20,
 				"AllyChampNearbyRadiusMinion": 1300,
 				"FirstChargeOffset": 20
@@ -6994,7 +6994,7 @@
 				"BubblePurpleMagicDmg": 90,
 				"MaxStack": 2,
 				"BubbleDuration": 3,
-				"PurpleBubbleAoEModifier": 0.33,
+				"PurpleBubbleAoEModifier": 0.333,
 				"MinHealAmount": 20,
 				"Cooldown": 8
 			},
@@ -7988,7 +7988,7 @@
 				"BuffDuration": 6,
 				"MSDecayThreshold": 2,
 				"MSDecayPercentage": 0.75,
-				"MSDecayPercentageThresholdUnused": 0.01,
+				"MSDecayPercentageThresholdUnused": 0.015,
 				"AbilityPowerMin": 45
 			},
 			"categories": {
@@ -8437,7 +8437,7 @@
 				"AoERadius": 300,
 				"MonsterMod": 1.5,
 				"AuraDuration": 3,
-				"RangedSlowAmount": 0.13,
+				"RangedSlowAmount": 0.125,
 				"SpellbladeMultiplier": 1.5,
 				"SpellbladeCooldown": 1.5,
 				"Cooldown": 1.5
@@ -8921,7 +8921,7 @@
 						}
 					],
 					"mRangedMultiplier": {
-						"mNumber": 0.67
+						"mNumber": 0.667
 					}
 				}
 			},
@@ -9332,7 +9332,7 @@
 				"MSDuration": 1.5,
 				"CombatTimer": 8,
 				"DamageWindowDuration": 3,
-				"RangedLethalityMultiplier": 0.46
+				"RangedLethalityMultiplier": 0.455
 			},
 			"itemCalculations": {
 				"BonusLethalityCalc": {
@@ -9374,7 +9374,7 @@
 			],
 			"epicness": 5,
 			"dataValues": {
-				"MRPerStack": 0.08,
+				"MRPerStack": 0.075,
 				"Duration": 6,
 				"MaxMRReduction": 0.3,
 				"StaleCastTime": 0.3,

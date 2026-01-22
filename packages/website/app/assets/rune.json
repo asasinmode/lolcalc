@@ -1,5 +1,5 @@
 {
-	"version": "16.1.1",
+	"version": "16.2.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -57,7 +57,7 @@
 									],
 									"mPrecision": 1,
 									"mRangedMultiplier": {
-										"mNumber": 0.67
+										"mNumber": 0.667
 									}
 								},
 								"ASPerStack": {
@@ -207,7 +207,7 @@
 							"effectAmount": {
 								"MissingHealthRestored": 0.05,
 								"BonusGold": 20,
-								"TriumphMaxHealthRestored": 0.03
+								"TriumphMaxHealthRestored": 0.025
 							}
 						},
 						"PresenceOfMind": {
@@ -271,7 +271,7 @@
 							"name": "LegendAlacrity",
 							"icon": "assets/perks/styles/precision/legendalacrity/legendalacrity.png",
 							"effectAmount": {
-								"AttackSpeedPerStack": 0.01,
+								"AttackSpeedPerStack": 0.015,
 								"AttackSpeedBase": 0.03,
 								"MaxLegendStacks": 10,
 								"{3e1fdd4a}": 100,
@@ -1007,10 +1007,10 @@
 								}
 							},
 							"effectAmount": {
-								"PercentHealthDamage": 0.04,
+								"PercentHealthDamage": 0.035,
 								"Window": 5,
 								"TriggerTime": 4,
-								"PercentHealthHeal": 0.01,
+								"PercentHealthHeal": 0.013,
 								"MaxHealthPerProc": 5,
 								"RangedPenaltyMod": 0.4,
 								"RangedHealthPerProc": 2,
@@ -1317,7 +1317,7 @@
 								"{ca029a2b}": 2,
 								"FlatHealthPerTier": 3,
 								"ThresholdUnits": 120,
-								"ThresholdMaxHealthRatio": 0.04
+								"ThresholdMaxHealthRatio": 0.035
 							}
 						},
 						"Revitalize": {
@@ -1566,7 +1566,7 @@
 								"BiscuitMinuteInterval": 2,
 								"SwapOverMinute": 6,
 								"PermanentHP": 30,
-								"HealthHealPercent": 0.01,
+								"HealthHealPercent": 0.015,
 								"DurationOfEffect": 5,
 								"FlatHeal": 20,
 								"{936e8fc2}": 0.3,

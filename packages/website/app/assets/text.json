@@ -190,6 +190,7 @@
 			},
 			"2510": {
 				"tooltipShop": {
+					"subtitleLeft": "On-Hit Dueling",
 					"subtitleRight": "Unique: Spellblade",
 					"extra": [
 						[
@@ -201,6 +202,7 @@
 			},
 			"2512": {
 				"tooltipShop": {
+					"subtitleLeft": "Ultimate All-In",
 					"extra": [
 						[
 							"<passive>Night Vigil</passive>",
@@ -215,6 +217,7 @@
 			},
 			"2517": {
 				"tooltipShop": {
+					"subtitleLeft": "Teamfight Vamp",
 					"extra": [
 						[
 							"<passive>Famine</passive>",
@@ -229,6 +232,7 @@
 			},
 			"2520": {
 				"tooltipShop": {
+					"subtitleLeft": "Slay Objectives",
 					"extra": [
 						[
 							"<passive>Shaped Charge</passive> {{Item_Cooldown}}",
@@ -254,6 +258,7 @@
 			},
 			"2523": {
 				"tooltipShop": {
+					"subtitleLeft": "Long Range Attacks",
 					"extra": [
 						[
 							"<passive>Magnification</passive>",
@@ -268,6 +273,7 @@
 			},
 			"2524": {
 				"tooltipShop": {
+					"subtitleLeft": "Team Attack Speed Buff",
 					"extra": [
 						[
 							"<passive>Fanfare</passive>",
@@ -278,6 +284,7 @@
 			},
 			"2525": {
 				"tooltipShop": {
+					"subtitleLeft": "Burst Self-Healing",
 					"subtitleRight": "Unique: Lifeline",
 					"extra": [
 						[
@@ -289,6 +296,7 @@
 			},
 			"2526": {
 				"tooltipShop": {
+					"subtitleLeft": "Mana Scaling",
 					"subtitleRight": "Semi-Unique: Manaflow",
 					"extra": [
 						[
@@ -1080,6 +1088,7 @@
 			},
 			"3146": {
 				"tooltipShop": {
+					"subtitleLeft": "Hybrid Burst",
 					"extra": [
 						[
 							"{{ Item_OnActivation }} {{ Item_Cooldown }}",
