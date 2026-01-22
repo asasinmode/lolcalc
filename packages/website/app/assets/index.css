@@ -11,6 +11,9 @@
 }
 
 @layer page {
+	/* Atkinson Hyperlegible Next licensed under */
+	/* SIL Open Font License, Version 1.1 */
+	/* that can be found at /fonts/ofl.txt */
 	@font-face {
 		font-family: 'Atkinson Hyperlegible Next';
 		src: url('/fonts/AtkinsonHyperlegibleNext-Regular.ttf') format('truetype');

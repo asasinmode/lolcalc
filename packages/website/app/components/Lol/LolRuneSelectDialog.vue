@@ -3,6 +3,7 @@ import type { StyleValue, UnwrapRef } from 'vue';
 
 const text = useText();
 const runes = useRunes();
+const enableUnimplementedUi = useEnableUnimplementedUi();
 const { minorVersion } = usePatchVersion();
 
 const value = defineModel<IChampionRunes>();
@@ -247,7 +248,7 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-rune-select" ref="vDialog" class="px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg [&[open]]:grid">
+	<VDialog id="dialog-rune-select" ref="vDialog">
 		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20">
 			<h1>Runes</h1>
 			<form method="dialog" class="ml-auto">
@@ -256,7 +257,8 @@ defineExpose({
 				</button>
 			</form>
 		</header>
-		<section id="rune-select-primary" class="row-span-2" :style="primaryRunePathStyle">
+		<ComingSoonCover v-if="!enableUnimplementedUi" style="grid-area: primary" feature="Primary path" />
+		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableUnimplementedUi">
 			<h2 class="sr-only">
 				Primary
 			</h2>
@@ -308,7 +310,8 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<section id="rune-select-secondary" :style="secondaryRunePathStyle" :data-slots-filled="value?.paths.secondarySlots.length">
+		<ComingSoonCover v-if="!enableUnimplementedUi" style="grid-area: secondary" feature="Secondary path" />
+		<section id="rune-select-secondary" :style="secondaryRunePathStyle" :data-slots-filled="value?.paths.secondarySlots.length" :inert="!enableUnimplementedUi">
 			<h2 class="sr-only">
 				Secondary
 			</h2>
@@ -403,6 +406,37 @@ defineExpose({
 
 <style>
 @layer components {
+	#dialog-rune-select {
+		@apply 'px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg [&[open]]:grid';
+		grid-template-areas:
+			'header header'
+			'primary secondary'
+			'primary shards';
+
+		header {
+			grid-area: header;
+		}
+	}
+
+	#rune-select-primary {
+		grid-area: primary;
+	}
+
+	#rune-select-secondary {
+		grid-area: secondary;
+	}
+
+	#rune-select-primary,
+	#rune-select-secondary {
+		&[inert] {
+			@apply 'op-50';
+		}
+	}
+
+	#rune-select-shards {
+		grid-area: shards;
+	}
+
 	#rune-select-primary,
 	#rune-select-secondary,
 	#rune-select-shards {

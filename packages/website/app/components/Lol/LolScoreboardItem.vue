@@ -221,15 +221,16 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 		}
 
 		button[data-select-runes] {
-			@apply 'b b-[--ui-button-border-clr] rounded-full bg-neutral-[#020a13] hoverable:bg-neutral-700 grid-center size-8 relative';
+			@apply 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative';
 			--secondary-path-icon-size: calc(var(--spacing) * 3);
+			background: #020a13;
 
 			[data-secondary-path-icon] {
-				@apply 'size-[--secondary-path-icon-size] block -bottom-0.5 -right-0.5 absolute';
+				@apply 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 -right-0.5 absolute';
 			}
 
 			&:has([data-secondary-path-icon]):before {
-				@apply 'content-empty absolute -right-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
+				@apply 'content-empty z-10 absolute -right-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
 			}
 		}
 

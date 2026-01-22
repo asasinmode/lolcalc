@@ -14,9 +14,6 @@ bun dev
 
 # build
 bun generate
-
-# run tests
-bun test
 ```
 
 ## todo
@@ -42,7 +39,7 @@ bun test
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
-  - [ ] hover tooltips, check styles with reference_images/rune hovers.mp4
+  - [x] hover tooltips, check styles with reference_images/rune hovers.mp4
   - [ ] rune paths not implemented alert
 - [ ] champ select dialog
 - [ ] item shop dialog
