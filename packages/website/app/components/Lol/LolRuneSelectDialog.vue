@@ -792,9 +792,9 @@ defineExpose({
 	}
 
 	#rune-select-dialog-hover-tooltip {
-		@apply 'bg-neutral-950 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(100%_+_1rem)] p-7';
+		@apply 'bg-neutral-900 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(100%_+_1rem)] p-7 leading-5.5';
 
-		--width: 20rem;
+		--width: 21.5rem;
 		left: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
 		top: clamp(var(--height), var(--top), 100vh);
 
@@ -808,6 +808,19 @@ defineExpose({
 			lol-uikit-tooltipped-keyword,
 			lol-uikit-tooltipped-keyword font {
 				@apply 'text-white';
+			}
+
+			rules {
+				color: inherit;
+			}
+
+			li {
+				@apply 'ml-5';
+
+				/* IMPORTANT workaround for grasph of undying that has nested <rules>, maybe need to parse it properly if more things do it */
+				rules {
+					@apply '-ml-5 block';
+				}
 			}
 		}
 	}

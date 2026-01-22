@@ -97,7 +97,7 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 	text: string,
 	variableType: T,
 	item: Parameters<IVariableTypeValueFunctions[T]>[1],
-	target?: IGameVariableCalculationTarget,
+	{ target }: Partial<{ target: IGameVariableCalculationTarget }> = {},
 ): {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
@@ -112,7 +112,7 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 
 		const multiplierIndex = name.indexOf('*');
 		if (~multiplierIndex) {
-			multiplier = Number.parseInt(name.slice(multiplierIndex + 1));
+			multiplier = Number.parseFloat(name.slice(multiplierIndex + 1));
 			variableName = name.slice(0, multiplierIndex);
 		}
 
@@ -133,19 +133,27 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 				return `<unknown>@${name}@</unknown>`;
 			}
 
-			variable[0] = Math.round(variable[0] * multiplier);
-			variable[1] = Math.round(variable[1] * multiplier);
+			variable[0] = roundVariable(variable[0] * multiplier);
+			variable[1] = roundVariable(variable[1] * multiplier);
 			variables.set(variableName, variable as [number, number]);
 
 			return `%i:meleeactive%${variable[0]} | %i:rangedactive%${variable[1]}`;
 		}
 
-		variable = Math.round(variable * multiplier);
+		variable = roundVariable(variable * multiplier);
 		variables.set(variableName, variable);
 		return isMeleeRanged ? `%i:${target?.isRanged ? 'ranged' : 'melee'}active% ${variable}` : variable.toString();
 	});
 
 	return { replaced, variables, unknownVariables };
+}
+
+function roundVariable(value: number, epsilon = 1e-9, precision = 12) {
+	const int = Math.round(value);
+	if (Math.abs(value - int) < epsilon) {
+		return int;
+	}
+	return Number(value.toPrecision(precision));
 }
 
 const STAT_ICON_NAMES = Object.values(ITEM_STAT_ICON_NAMES);

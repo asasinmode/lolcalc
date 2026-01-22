@@ -61,7 +61,7 @@ const contents = computed<{
 				.replace(')', ')</span>'),
 			'item',
 			item,
-			props.target,
+			{ target: props.target },
 		);
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
 
@@ -72,7 +72,7 @@ const contents = computed<{
 					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
 					'item',
 					item,
-					props.target,
+					{ target: props.target },
 				);
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
