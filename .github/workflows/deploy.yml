@@ -12,7 +12,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
         working-directory: ./packages/website
-      - run: NUXT_APP_BASE_URL=/colector.lol/ bunx nuxt build --preset github_pages
+      - run: NUXT_APP_BASE_URL=/lolcalc/ bunx nuxt build --preset github_pages
         working-directory: ./packages/website
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

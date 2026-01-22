@@ -1,6 +1,4 @@
-# Colector - League of Legends calculator website
-
-domain: colector.lol
+# lolcalc - League of Legends calculator website
 
 ## setup
 
@@ -67,7 +65,7 @@ bun test
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
 - [x] favicon 🇱🖩
-- [ ] [wiki](https://github.com/asasinmode/colectormode/wiki)
+- [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] any other FAQ on page
   - [ ] github readme
 - [ ] submit feedback on page / report issues

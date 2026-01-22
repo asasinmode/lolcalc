@@ -1,4 +1,4 @@
-# colectormode
+# lolcalc
 
 TODO update readme
 
