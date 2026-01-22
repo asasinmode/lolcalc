@@ -1,7 +1,11 @@
 # lolcalc
 
-TODO update readme
+Monorepository for all of the tools and applications related to lolcalc, damage calculator for League of Legends.
 
-A damage calculator for game [League of Legends](https://www.leagueoflegends.com) made with [Vue 3](https://vuejs.org/).
+## packages
+
+- [lolcalc.app website](packages/website)
 
 ###### original, outdated version can be found on the [v0 branch](https://github.com/asasinmode/collector/tree/v0)
+
+lolcalc isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends.

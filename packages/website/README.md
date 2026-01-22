@@ -1,4 +1,4 @@
-# lolcalc - League of Legends calculator website
+# lolcalc.app - League of Legends damage calculator website
 
 ## setup
 
