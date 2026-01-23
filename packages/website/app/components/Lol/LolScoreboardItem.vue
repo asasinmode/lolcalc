@@ -59,6 +59,16 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 			disabled: !props.canRemove,
 			icon: 'ph-x',
 		}));
+
+const detailsContainer = useTemplateRef('details');
+
+function toggleExpanded() {
+	if (detailsContainer.value!.getAttribute('open') === null) {
+		detailsContainer.value!.setAttribute('open', '');
+	} else {
+		detailsContainer.value!.removeAttribute('open');
+	}
+}
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
@@ -67,19 +77,19 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 		<h3 class="sr-only">
 			{{ group.slice(0, -1) }} {{ index + 1 }}
 		</h3>
-		<button title="move up, alt+click to duplicate above" :disabled="index === 0" data-pretend-ui-button="">
+		<button title="move up, alt+click to duplicate above" class="data-pretend-ui-button" :disabled="index === 0">
 			<span class="sr-only">move up, alt+click to create a copy above</span>
 			<Icon name="ph-arrow-up" />
 		</button>
-		<button title="move down, alt+click to duplicate below" :disabled="!canMoveDown" data-pretend-ui-button="">
+		<button title="move down, alt+click to duplicate below" class="data-pretend-ui-button" :disabled="!canMoveDown">
 			<span class="sr-only">move down, alt+click to create a copy below</span>
 			<Icon name="ph-arrow-down" />
 		</button>
-		<button :title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
+		<button :title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`" class="data-pretend-ui-button" :disabled="!value.anythingFilled.value">
 			<span class="sr-only">move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
 			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
 		</button>
-		<button title="duplicate" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
+		<button title="duplicate" class="data-pretend-ui-button" :disabled="!value.anythingFilled.value">
 			<span class="sr-only">duplicate</span>
 			<Icon name="ph-copy" />
 		</button>
@@ -119,10 +129,9 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 				/>
 			</template>
 		</button>
-		<div class="size-14 relative">
+		<div data-select-champion="">
 			<button
 				title="select champion"
-				data-select-champion=""
 				@click="selectChampion(value.champion)"
 			>
 				<span class="sr-only">
@@ -151,7 +160,11 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 				</option>
 			</select>
 		</div>
-		<button class="px-1 flex gap-x-1 items-center" data-pretend-ui-button="" @click="selectItems(value.items, value.itemDamageCalculationTarget.value)">
+		<button
+			class="data-pretend-ui-button px-1 flex gap-x-1 items-center"
+			data-select-items=""
+			@click="selectItems(value.items, value.itemDamageCalculationTarget.value)"
+		>
 			items
 			<img
 				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
@@ -180,50 +193,96 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 				</button>
 			</li>
 		</ul>
-		<button :title="removeButtonAttrs.title" :disabled="removeButtonAttrs.disabled" data-pretend-ui-button="">
+		<button :title="removeButtonAttrs.title" class="data-pretend-ui-button" :disabled="removeButtonAttrs.disabled">
 			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
 			<Icon :name="removeButtonAttrs.icon" class="size-5" />
 		</button>
-		<button title="expand" data-pretend-ui-button="" :disabled="!value.anythingFilled.value">
+		<button title="expand" class="data-pretend-ui-button" :disabled="!value.anythingFilled.value" @click="toggleExpanded">
 			<span class="sr-only">expand</span>
 			<Icon name="ph-caret-down" class="size-5" />
 		</button>
+		<details ref="details">
+			<summary>
+				details
+			</summary>
+			<div>
+				expanded info goes here
+			</div>
+		</details>
 	</li>
 </template>
 
 <style>
 @layer components {
 	[data-lol-scoreboard-item] {
-		@apply 'gap-x-2 gap-y-1 grid auto-cols-max grid-flow-col grid-rows-2 items-center *:row-span-full';
+		@apply 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
+
+		--select-champion-size: calc(var(--spacing) * 14);
+		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
+		--transition-duration: 150ms;
+		grid-template-areas:
+			'move-up		move-column	select-runes	select-champion select-items	items			clear'
+			'move-down	duplicate		select-runes	select-champion select-items	items			expand'
+			'expanded		expanded		expanded			expanded				expanded			expanded	expanded';
+		grid-template-columns: repeat(5, max-content) 1fr max-content;
+		transition-duration: var(--transition-duration);
+		transition-timing-function: ease-in-out;
+		transition-property: grid-template-rows;
+
+		&:has(> details[open]) {
+			@apply 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
+
+			> button:nth-last-of-type(1) {
+				@apply 'rotate-180';
+			}
+		}
 
 		> button {
+			&:nth-of-type(1) {
+				@apply 'self-end mb-0.5 mr-0.5';
+				grid-area: move-up;
+			}
+
+			&:nth-of-type(2) {
+				@apply 'self-end mb-0.5 ml-0.5';
+				grid-area: move-column;
+			}
+
+			&:nth-of-type(3) {
+				@apply 'self-start mt-0.5 mr-0.5';
+				grid-area: move-down;
+			}
+
+			&:nth-of-type(4) {
+				@apply 'self-start mt-0.5 ml-0.5';
+				grid-area: duplicate;
+			}
+
+			&:nth-last-of-type(1) {
+				@apply 'self-start mt-0.5';
+				grid-area: expand;
+			}
+
+			&:nth-last-of-type(2) {
+				@apply 'self-end mb-0.5';
+				grid-area: clear;
+			}
+
 			&:nth-of-type(-n + 4),
 			&:nth-last-of-type(-n + 2) {
-				@apply 'size-5 grid-center row-span-1';
+				@apply 'size-5 grid-center';
 
 				.iconify {
 					@apply 'size-4';
 				}
-
-				&:nth-of-type(odd) {
-					@apply 'self-end';
-				}
-
-				&:nth-of-type(even) {
-					@apply 'self-start';
-				}
-			}
-
-			&:nth-of-type(3),
-			&:nth-of-type(4) {
-				@apply '-ml-1';
 			}
 		}
 
-		button[data-select-runes] {
-			@apply 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative';
+		> [data-select-runes] {
+			@apply 'b b-[--ui-button-border-clr] mx-3 rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
 			--secondary-path-icon-size: calc(var(--spacing) * 3);
 			background: #020a13;
+			grid-area: select-runes;
 
 			[data-secondary-path-icon] {
 				@apply 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 -right-0.5 absolute';
@@ -234,18 +293,49 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 			}
 		}
 
-		button[data-select-champion] {
-			@apply 'group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden';
+		> [data-select-items] {
+			@apply 'self-center ml-5 mr-3';
+			grid-area: select-items;
+		}
 
-			img {
-				@apply 'max-w-none size-[calc(100%_+_var(--spacing)_*_2)] -ml-1 -mt-1';
+		> ul {
+			@apply 'self-center mr-3';
+			grid-area: items;
+		}
+
+		> [data-select-champion] {
+			@apply 'size-[--select-champion-size] relative';
+			grid-area: select-champion;
+
+			> button {
+				@apply 'group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden';
+
+				img {
+					@apply 'max-w-none size-[calc(100%_+_var(--spacing)_*_2)] -ml-1 -mt-1';
+				}
+
+				&:hover,
+				&:focus-visible {
+					img {
+						@apply 'brightness-[--focus-brightness]';
+					}
+				}
+			}
+		}
+
+		> details {
+			grid-area: expanded;
+
+			summary {
+				@apply 'list-none invisible pointer-events-none';
+
+				&::-webkit-details-marker {
+					@apply 'hidden';
+				}
 			}
 
-			&:hover,
-			&:focus-visible {
-				img {
-					@apply 'brightness-[--focus-brightness]';
-				}
+			> :not(summary) {
+				@apply '-mt-6';
 			}
 		}
 	}

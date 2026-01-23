@@ -6,7 +6,7 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 </script>
 
 <template>
-	<article id="calculator-scoreboard" class="b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 relative after:(bg-white w-px content-empty bottom-0 left-1/2 top-12 absolute -translate-x-1/2)">
+	<article id="calculator-scoreboard" class="mx-auto b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty bottom-0 left-1/2 top-12 absolute -translate-x-1/2)">
 		<header class="text-center b-b col-span-full">
 			<h1 class="text-xl font-500">
 				lolcalc
@@ -29,7 +29,7 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 		<ul>
 			<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index :can-remove="damageSources.length > 1" :can-move-down="index !== damageSources.length - 1" />
 			<li>
-				<button data-pretend-ui-button="" :disabled="!damageSources[0]?.anythingFilled.value">
+				<button class="data-pretend-ui-button" :disabled="!damageSources[0]?.anythingFilled.value">
 					<Icon name="ph:plus-bold" />
 					add damage source
 				</button>
@@ -41,7 +41,7 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 		<ul>
 			<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index :can-remove="damageTargets.length > 1" :can-move-down="index !== damageSources.length - 1" is-right />
 			<li>
-				<button data-pretend-ui-button="" :disabled="!damageTargets[0]?.anythingFilled.value">
+				<button class="data-pretend-ui-button" :disabled="!damageTargets[0]?.anythingFilled.value">
 					<Icon name="ph:plus-bold" />
 					add damage target
 				</button>

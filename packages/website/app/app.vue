@@ -39,7 +39,7 @@ const damageTargets = shallowRef<DamageSource[]>([new DamageSource()]);
 		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
 	}
 
-	[data-pretend-ui-button] {
+	.data-pretend-ui-button {
 		@apply 'b b-[--ui-button-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
 
 		.iconify {

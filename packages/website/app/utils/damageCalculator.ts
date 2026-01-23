@@ -17,7 +17,7 @@ export class DamageSource {
 
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => this.champion.value && calculateChampionStats(this));
-	itemDamageCalculationTarget = computed((): IItemVariableCalculationTarget => ({
+	itemDamageCalculationTarget = computed((): IGameVariableCalculationTarget => ({
 		isRanged: this.isRanged.value,
 		stats: this.stats.value?.stats.total,
 	}));
