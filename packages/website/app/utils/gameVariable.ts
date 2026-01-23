@@ -148,14 +148,6 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 	return { replaced, variables, unknownVariables };
 }
 
-function roundVariable(value: number, epsilon = 1e-9, precision = 12) {
-	const int = Math.round(value);
-	if (Math.abs(value - int) < epsilon) {
-		return int;
-	}
-	return Number(value.toPrecision(precision));
-}
-
 const STAT_ICON_NAMES = Object.values(ITEM_STAT_ICON_NAMES);
 
 export function replaceGameDescriptionIcons(text: string) {

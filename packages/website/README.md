@@ -40,7 +40,7 @@ bun generate
   - [x] layout
   - [x] secondary path unset layout
   - [x] hover tooltips, check styles with reference_images/rune hovers.mp4
-  - [ ] rune paths not implemented alert
+  - [x] rune paths not implemented alert
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
