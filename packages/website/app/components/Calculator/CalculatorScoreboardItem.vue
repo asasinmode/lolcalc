@@ -202,7 +202,6 @@ function toggleExpanded() {
 			</template>
 		</button>
 		<button
-			class="data-pretend-ui-button px-1 flex gap-x-1 items-center"
 			data-select-items=""
 			@click="selectItems(value.items, value.itemDamageCalculationTarget.value)"
 		>
@@ -213,13 +212,13 @@ function toggleExpanded() {
 				height="28"
 				aria-hidden="true"
 				loading="lazy"
-				class="align-middle w-4 inline-block"
+				class="w-4"
 			>
 		</button>
 		<ul class="flex h-8">
-			<li v-for="i in 6" :key="i" class="group mr-1">
+			<li v-for="i in 6" :key="i" class="mr-0.5 last:mr-0">
 				<button
-					class="bg-black size-8 inline-block group-last:mr-0"
+					class="bg-black size-8 inline-block"
 					:disabled="!value.items.value[i - 1]"
 					@click.right.prevent="value.items.value.splice(i - 1, 1)"
 				>
@@ -269,6 +268,7 @@ function toggleExpanded() {
 		@apply 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);
+		--placeholder-champion-bg-clr: #020a13;
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
 		grid-template-areas:
@@ -352,7 +352,7 @@ function toggleExpanded() {
 		> [data-select-runes] {
 			@apply 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
 			--secondary-path-icon-size: calc(var(--spacing) * 3);
-			background: #020a13;
+			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-runes;
 
 			[data-secondary-path-icon] {
@@ -365,8 +365,13 @@ function toggleExpanded() {
 		}
 
 		> [data-select-items] {
-			@apply 'self-center mx-3';
+			@apply 'mx-2 b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 pl-2.5 pr-2 self-center';
+			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-items;
+
+			img {
+				@apply 'inline-block align-middle -mt-0.5';
+			}
 		}
 
 		> ul {

@@ -26,12 +26,17 @@ bun generate
 - [ ] scoreboard ui
   - [x] red exclamation mark next to runes when incorrect
   - [ ] buttons functionality
-    - [ ] alt + move = duplicate
-    - [ ] shift + click remove = clear
+    - [x] alt + move = duplicate
+    - [x] shift + click remove = clear
     - [ ] dragging
-  - [ ] expand for stats
+  - [ ] drag items
+    - [ ] in current inventory
+    - [ ] between inventories
   - [ ] mirror layout
   - [ ] first source/target is what's used in damage results
+  - [ ] expanded stats
+    - [ ] dragons/souls
+    - [ ] activate quest
 - [ ] results ui
   - [ ] multiple builds/champions you can switch between
   - [ ] some cool graphs
