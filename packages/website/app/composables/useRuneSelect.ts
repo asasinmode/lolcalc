@@ -1,8 +1,8 @@
-import LolRuneSelectDialog from '~/components/Lol/LolRuneSelectDialog.vue';
+import LolRuneSelect from '~/components/Lol/LolRuneSelect.vue';
 
 let resolve: (() => void) | undefined;
 const valueRef = ref<Ref<IChampionRunes>>();
-const dialogRef = ref<InstanceType<typeof LolRuneSelectDialog>>();
+const dialogRef = ref<InstanceType<typeof LolRuneSelect>>();
 
 async function selectRunes(targetRef: Ref<IChampionRunes>): Promise<void> {
 	valueRef.value = targetRef;
@@ -16,7 +16,7 @@ async function selectRunes(targetRef: Ref<IChampionRunes>): Promise<void> {
 }
 
 const _component = defineComponent(() =>
-	() => h(LolRuneSelectDialog, {
+	() => h(LolRuneSelect, {
 		'ref': dialogRef,
 		'modelValue': valueRef.value?.value,
 		'onUpdate:modelValue': function (value) {
@@ -27,7 +27,7 @@ const _component = defineComponent(() =>
 		},
 	}));
 
-export function useRuneSelectDialog() {
+export function useRuneSelect() {
 	return {
 		_component,
 		selectRunes,

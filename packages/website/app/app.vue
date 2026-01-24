@@ -14,10 +14,10 @@ useSeoMeta({
 const { version } = usePatchVersion();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
-const { _component: RuneSelectDialog } = useRuneSelectDialog();
+const { _component: RuneSelect } = useRuneSelect();
 
-const damageSources = shallowRef<DamageSource[]>([new DamageSource()]);
-const damageTargets = shallowRef<DamageSource[]>([new DamageSource()]);
+const damageSources = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]);
+const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]);
 </script>
 
 <template>
@@ -25,11 +25,14 @@ const damageTargets = shallowRef<DamageSource[]>([new DamageSource()]);
 		current patch: {{ version }}
 	</header>
 	<main>
-		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
+		<CalculatorScoreboard
+			v-model:sources="damageSources as unknown as DamageSource[]"
+			v-model:targets="damageTargets as unknown as DamageSource[]"
+		/>
 	</main>
 	<ChampSelect />
 	<ItemShop />
-	<RuneSelectDialog />
+	<RuneSelect />
 </template>
 
 <style>

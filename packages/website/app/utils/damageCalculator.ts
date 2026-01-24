@@ -10,6 +10,7 @@ interface IOverrides {
 }
 
 export class DamageSource {
+	id: string;
 	champion: Ref<IChampion | undefined>;
 	level: Ref<number>;
 	items: Ref<IItem[]>;
@@ -36,7 +37,8 @@ export class DamageSource {
 		return Boolean(this.champion.value || this.items.value.length || !this.runePathsEmpty.value);
 	});
 
-	constructor(overrides: Partial<IOverrides> = {}) {
+	constructor(id: string, overrides: Partial<IOverrides> = {}) {
+		this.id = id;
 		this.champion = ref(overrides.champion);
 		this.level = ref(overrides.level ?? 1);
 		this.items = ref(overrides.items ? structuredClone(overrides.items) : []);
@@ -57,8 +59,8 @@ export class DamageSource {
 				});
 	}
 
-	clone(overrides: Partial<IOverrides> = {}) {
-		return new DamageSource({
+	clone(id: string, overrides: Partial<IOverrides> = {}) {
+		return new DamageSource(id, {
 			champion: this.champion.value,
 			level: this.level.value,
 			items: this.items.value,

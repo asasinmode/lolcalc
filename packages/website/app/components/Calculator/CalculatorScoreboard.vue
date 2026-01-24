@@ -3,6 +3,14 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
+
+function clear(index: number, target: DamageSource[]) {
+	target[index] = markRaw(new DamageSource(crypto.randomUUID()));
+}
+
+function remove(index: number, target: DamageSource[]) {
+	target.splice(index, 1);
+}
 </script>
 
 <template>
@@ -27,7 +35,16 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 			damage sources
 		</h3>
 		<ul>
-			<LolScoreboardItem v-for="(value, index) in damageSources" :key="index" :value :index :can-remove="damageSources.length > 1" :can-move-down="index !== damageSources.length - 1" />
+			<CalculatorScoreboardItem
+				v-for="(value, index) in damageSources"
+				:key="value.id"
+				:value
+				:index
+				:can-remove="damageSources.length > 1"
+				:can-move-down="index !== damageSources.length - 1"
+				@clear="clear(index, damageSources)"
+				@remove="remove(index, damageSources)"
+			/>
 			<li>
 				<button class="data-pretend-ui-button" :disabled="!damageSources[0]?.anythingFilled.value">
 					<Icon name="ph:plus-bold" />
@@ -39,7 +56,17 @@ const damageTargets = defineModel<DamageSource[]>('targets', { required: true })
 			damage targets
 		</h3>
 		<ul>
-			<LolScoreboardItem v-for="(value, index) in damageTargets" :key="index" :value :index :can-remove="damageTargets.length > 1" :can-move-down="index !== damageSources.length - 1" is-right />
+			<CalculatorScoreboardItem
+				v-for="(value, index) in damageTargets"
+				:key="value.id"
+				:value
+				:index
+				:can-remove="damageTargets.length > 1"
+				:can-move-down="index !== damageSources.length - 1"
+				is-right
+				@clear="clear(index, damageTargets)"
+				@remove="remove(index, damageTargets)"
+			/>
 			<li>
 				<button class="data-pretend-ui-button" :disabled="!damageTargets[0]?.anythingFilled.value">
 					<Icon name="ph:plus-bold" />

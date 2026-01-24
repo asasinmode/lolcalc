@@ -8,10 +8,15 @@ const props = defineProps<{
 	canMoveDown?: boolean;
 }>();
 
+const emit = defineEmits<{
+	clear: [];
+	remove: [];
+}>();
+
 const runes = useRunes();
 const { version, minorVersion } = usePatchVersion();
 const { selectChampion } = useChampSelect();
-const { selectRunes } = useRuneSelectDialog();
+const { selectRunes } = useRuneSelect();
 const { selectItems } = useItemShop();
 const text = useText();
 
@@ -53,11 +58,13 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 			title: 'clear',
 			disabled: !props.value.anythingFilled.value,
 			icon: 'ph-eraser-duotone',
+			emit: () => emit('clear'),
 		}
 	: {
 			title: 'remove, shift+click to clear',
 			disabled: !props.canRemove,
 			icon: 'ph-x',
+			emit: () => emit('remove'),
 		}));
 
 const detailsContainer = useTemplateRef('details');
@@ -193,7 +200,7 @@ function toggleExpanded() {
 				</button>
 			</li>
 		</ul>
-		<button :title="removeButtonAttrs.title" class="data-pretend-ui-button" :disabled="removeButtonAttrs.disabled">
+		<button :title="removeButtonAttrs.title" class="data-pretend-ui-button" :disabled="removeButtonAttrs.disabled" @click="removeButtonAttrs.emit">
 			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
 			<Icon :name="removeButtonAttrs.icon" class="size-5" />
 		</button>
