@@ -2,7 +2,7 @@
 const props = defineProps<{
 	index: number;
 	value: DamageSource;
-	/** side of the scoreboard it's on, left by default */
+	/** side of the scoreboard it's on, left (damage sources) by default */
 	isRight?: boolean;
 	canRemove?: boolean;
 	canMoveDown?: boolean;
@@ -100,6 +100,37 @@ function toggleExpanded() {
 			<span class="sr-only">duplicate</span>
 			<Icon name="ph-copy" />
 		</button>
+		<div data-select-champion="">
+			<button
+				title="select champion"
+				@click="selectChampion(value.champion)"
+			>
+				<span class="sr-only">
+					{{ value.champion.value ? `selected champion: ${value.champion.value.name}` : 'select champion' }}
+				</span>
+				<img
+					v-if="value.champion.value"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${value.champion.value.image}`"
+					loading="lazy"
+					width="128"
+					height="128"
+					style="--focus-brightness: 1.2"
+				>
+				<img
+					v-else
+					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+					width="256"
+					height="256"
+					style="--focus-brightness: 1.5"
+				>
+			</button>
+			<label :for="`${group}-${index}-level-select`" class="sr-only">Level</label>
+			<select :id="`${group}-${index}-level-select`" v-model="value.level.value" class="absolute -bottom-1 -right-2">
+				<option v-for="i in 18" :key="i" :value="i">
+					{{ i }}
+				</option>
+			</select>
+		</div>
 		<button title="runes" data-select-runes="" @click="selectRunes(value.runes)">
 			<span class="sr-only">{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
 			<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -right-0.5 -top-0.5">
@@ -136,37 +167,6 @@ function toggleExpanded() {
 				/>
 			</template>
 		</button>
-		<div data-select-champion="">
-			<button
-				title="select champion"
-				@click="selectChampion(value.champion)"
-			>
-				<span class="sr-only">
-					{{ value.champion.value ? `selected champion: ${value.champion.value.name}` : 'select champion' }}
-				</span>
-				<img
-					v-if="value.champion.value"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${value.champion.value.image}`"
-					loading="lazy"
-					width="128"
-					height="128"
-					style="--focus-brightness: 1.2"
-				>
-				<img
-					v-else
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-					width="256"
-					height="256"
-					style="--focus-brightness: 1.5"
-				>
-			</button>
-			<label :for="`${group}-${index}-level-select`" class="sr-only">Level</label>
-			<select :id="`${group}-${index}-level-select`" v-model="value.level.value" class="absolute -bottom-1 -right-2">
-				<option v-for="i in 18" :key="i" :value="i">
-					{{ i }}
-				</option>
-			</select>
-		</div>
 		<button
 			class="data-pretend-ui-button px-1 flex gap-x-1 items-center"
 			data-select-items=""
@@ -228,9 +228,9 @@ function toggleExpanded() {
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
 		grid-template-areas:
-			'move-up		move-column	select-runes	select-champion select-items	items			clear'
-			'move-down	duplicate		select-runes	select-champion select-items	items			expand'
-			'expanded		expanded		expanded			expanded				expanded			expanded	expanded';
+			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
+			'move-down	duplicate		select-champion	select-runes	select-items	items			expand'
+			'expanded		expanded		expanded				expanded			expanded			expanded	expanded';
 		grid-template-columns: repeat(5, max-content) 1fr max-content;
 		transition-duration: var(--transition-duration);
 		transition-timing-function: ease-in-out;
@@ -285,33 +285,8 @@ function toggleExpanded() {
 			}
 		}
 
-		> [data-select-runes] {
-			@apply 'b b-[--ui-button-border-clr] mx-3 rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
-			--secondary-path-icon-size: calc(var(--spacing) * 3);
-			background: #020a13;
-			grid-area: select-runes;
-
-			[data-secondary-path-icon] {
-				@apply 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 -right-0.5 absolute';
-			}
-
-			&:has([data-secondary-path-icon]):before {
-				@apply 'content-empty z-10 absolute -right-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
-			}
-		}
-
-		> [data-select-items] {
-			@apply 'self-center ml-5 mr-3';
-			grid-area: select-items;
-		}
-
-		> ul {
-			@apply 'self-center mr-3';
-			grid-area: items;
-		}
-
 		> [data-select-champion] {
-			@apply 'size-[--select-champion-size] relative';
+			@apply 'size-[--select-champion-size] mx-3 relative';
 			grid-area: select-champion;
 
 			> button {
@@ -328,6 +303,31 @@ function toggleExpanded() {
 					}
 				}
 			}
+		}
+
+		> [data-select-runes] {
+			@apply 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
+			--secondary-path-icon-size: calc(var(--spacing) * 3);
+			background: #020a13;
+			grid-area: select-runes;
+
+			[data-secondary-path-icon] {
+				@apply 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 -right-0.5 absolute';
+			}
+
+			&:has([data-secondary-path-icon]):before {
+				@apply 'content-empty z-10 absolute -right-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
+			}
+		}
+
+		> [data-select-items] {
+			@apply 'self-center mx-3';
+			grid-area: select-items;
+		}
+
+		> ul {
+			@apply 'self-center mr-3';
+			grid-area: items;
 		}
 
 		> details {

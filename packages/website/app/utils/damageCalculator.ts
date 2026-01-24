@@ -1,4 +1,4 @@
-import type { UnwrapRef } from 'vue';
+import type { ShallowRef, UnwrapRef } from 'vue';
 
 type IDamageSource = InstanceType<typeof DamageSource>;
 
@@ -11,7 +11,7 @@ interface IOverrides {
 
 export class DamageSource {
 	id: string;
-	champion: Ref<IChampion | undefined>;
+	champion: ShallowRef<IChampion | undefined>;
 	level: Ref<number>;
 	items: Ref<IItem[]>;
 	runes: Ref<IChampionRunes>;
@@ -39,7 +39,7 @@ export class DamageSource {
 
 	constructor(id: string, overrides: Partial<IOverrides> = {}) {
 		this.id = id;
-		this.champion = ref(overrides.champion);
+		this.champion = shallowRef(overrides.champion);
 		this.level = ref(overrides.level ?? 1);
 		this.items = ref(overrides.items ? structuredClone(overrides.items) : []);
 		this.runes = ref<IChampionRunes>(overrides.runes
