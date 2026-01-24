@@ -29,6 +29,22 @@ function duplicate(index: number, target: DamageSource[], shift: boolean) {
 		target.splice(index + 1, 0, newItem);
 	}
 }
+
+function changeGroup(index: number, target: DamageSource[], alt: boolean) {
+	const into = target === damageSources.value ? damageTargets.value : damageSources.value;
+	let newItem: DamageSource;
+	if (alt) {
+		newItem = markRaw(target[index]!.clone(crypto.randomUUID()));
+	} else {
+		newItem = target.splice(index, 1)[0]!;
+		!target.length && target.push(markRaw(new DamageSource(crypto.randomUUID())));
+	}
+	if (into[0]?.anythingFilled.value) {
+		into.push(newItem);
+	} else {
+		into[0] = newItem;
+	}
+}
 </script>
 
 <template>
@@ -63,6 +79,7 @@ function duplicate(index: number, target: DamageSource[], shift: boolean) {
 				@clear="clear(index, damageSources)"
 				@remove="remove(index, damageSources)"
 				@duplicate="duplicate(index, damageSources, $event)"
+				@change-group="changeGroup(index, damageSources, $event)"
 			/>
 			<li>
 				<button
@@ -90,6 +107,7 @@ function duplicate(index: number, target: DamageSource[], shift: boolean) {
 				@clear="clear(index, damageTargets)"
 				@remove="remove(index, damageTargets)"
 				@duplicate="duplicate(index, damageTargets, $event)"
+				@change-group="changeGroup(index, damageTargets, $event)"
 			/>
 			<li>
 				<button

@@ -12,6 +12,7 @@ const emit = defineEmits<{
 	clear: [];
 	remove: [];
 	duplicate: [shift: boolean];
+	changeGroup: [alt: boolean];
 }>();
 
 const runes = useRunes();
@@ -116,6 +117,7 @@ function toggleExpanded() {
 			:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
 			class="data-pretend-ui-button"
 			:disabled="!value.anythingFilled.value"
+			@click="$emit('changeGroup', globalKeyModifiers.alt)"
 		>
 			<span class="sr-only">move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
 			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
