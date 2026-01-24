@@ -10,15 +10,20 @@ export function useGlobalKeyModifiers() {
 export function _setupGlobalKeyModifiers() {
 	const globalKeyModifiers = useGlobalKeyModifiers();
 
-	function pressShift(event: KeyboardEvent) {
-		if (event.key === 'Shift') {
+	function mouseDownUpdateModifiers(event: MouseEvent) {
+		globalKeyModifiers.value.shift = event.shiftKey;
+		globalKeyModifiers.value.alt = event.altKey;
+	}
+
+	function pressModifier(event: KeyboardEvent) {
+		if (event.key === 'Shift' || event.shiftKey) {
 			globalKeyModifiers.value.shift = true;
-		} else if (event.key === 'Alt') {
+		} else if (event.key === 'Alt' || event.altKey) {
 			globalKeyModifiers.value.alt = true;
 		}
 	}
 
-	function releaseShift(event: KeyboardEvent) {
+	function releaseModifier(event: KeyboardEvent) {
 		if (event.key === 'Shift') {
 			globalKeyModifiers.value.shift = false;
 		} else if (event.key === 'Alt') {
@@ -27,12 +32,16 @@ export function _setupGlobalKeyModifiers() {
 	}
 
 	onMounted(() => {
-		window.addEventListener('keydown', pressShift, { passive: true });
-		window.addEventListener('keyup', releaseShift, { passive: true });
+		globalKeyModifiers.value.shift = false;
+		globalKeyModifiers.value.alt = false;
+		window.addEventListener('keydown', pressModifier, { passive: true });
+		window.addEventListener('keyup', releaseModifier, { passive: true });
+		window.addEventListener('mousedown', mouseDownUpdateModifiers, { passive: true });
 	});
 
 	onBeforeUnmount(() => {
-		window.removeEventListener('keydown', pressShift);
-		window.removeEventListener('keyup', releaseShift);
+		window.removeEventListener('keydown', pressModifier);
+		window.removeEventListener('keyup', releaseModifier);
+		window.removeEventListener('mousedown', mouseDownUpdateModifiers);
 	});
 }
