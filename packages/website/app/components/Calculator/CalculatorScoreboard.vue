@@ -11,6 +11,10 @@ function clear(index: number, target: DamageSource[]) {
 function remove(index: number, target: DamageSource[]) {
 	target.splice(index, 1);
 }
+
+function add(target: DamageSource[]) {
+	target.push(markRaw(new DamageSource(crypto.randomUUID())));
+}
 </script>
 
 <template>
@@ -46,7 +50,11 @@ function remove(index: number, target: DamageSource[]) {
 				@remove="remove(index, damageSources)"
 			/>
 			<li>
-				<button class="data-pretend-ui-button" :disabled="!damageSources[0]?.anythingFilled.value">
+				<button
+					class="data-pretend-ui-button"
+					:disabled="!damageSources[0]?.anythingFilled.value"
+					@click="add(damageSources)"
+				>
 					<Icon name="ph:plus-bold" />
 					add damage source
 				</button>
@@ -68,7 +76,11 @@ function remove(index: number, target: DamageSource[]) {
 				@remove="remove(index, damageTargets)"
 			/>
 			<li>
-				<button class="data-pretend-ui-button" :disabled="!damageTargets[0]?.anythingFilled.value">
+				<button
+					class="data-pretend-ui-button"
+					:disabled="!damageTargets[0]?.anythingFilled.value"
+					@click="add(damageTargets)"
+				>
 					<Icon name="ph:plus-bold" />
 					add damage target
 				</button>
