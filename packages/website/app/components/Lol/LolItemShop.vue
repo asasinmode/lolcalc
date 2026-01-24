@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-	target?: IItemVariableCalculationTarget;
+	target?: IGameVariableCalculationTarget;
 }>();
 
 const inventory = defineModel<IItem[]>();
@@ -97,7 +97,7 @@ function selectItem(item: IItem, overwriteDisplayed: boolean) {
 
 function buyItem(item: IItem) {
 	if (inventory.value && inventory.value.length < 6) {
-		inventory.value.push(item);
+		inventory.value.push(markRaw(item));
 	}
 }
 

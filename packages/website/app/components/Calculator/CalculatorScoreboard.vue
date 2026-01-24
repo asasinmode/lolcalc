@@ -15,6 +15,10 @@ function remove(index: number, target: DamageSource[]) {
 function add(target: DamageSource[]) {
 	target.push(markRaw(new DamageSource(crypto.randomUUID())));
 }
+
+function duplicate(index: number, target: DamageSource[]) {
+	target.splice(index + 1, 0, markRaw(target[index]!.clone(crypto.randomUUID())));
+}
 </script>
 
 <template>
@@ -48,6 +52,7 @@ function add(target: DamageSource[]) {
 				:can-move-down="index !== damageSources.length - 1"
 				@clear="clear(index, damageSources)"
 				@remove="remove(index, damageSources)"
+				@duplicate="duplicate(index, damageSources)"
 			/>
 			<li>
 				<button
@@ -70,10 +75,11 @@ function add(target: DamageSource[]) {
 				:value
 				:index
 				:can-remove="damageTargets.length > 1"
-				:can-move-down="index !== damageSources.length - 1"
+				:can-move-down="index !== damageTargets.length - 1"
 				is-right
 				@clear="clear(index, damageTargets)"
 				@remove="remove(index, damageTargets)"
+				@duplicate="duplicate(index, damageTargets)"
 			/>
 			<li>
 				<button

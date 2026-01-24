@@ -41,9 +41,9 @@ export class DamageSource {
 		this.id = id;
 		this.champion = shallowRef(overrides.champion);
 		this.level = ref(overrides.level ?? 1);
-		this.items = ref(overrides.items ? structuredClone(overrides.items) : []);
+		this.items = ref(overrides.items ? structuredClone(toRaw(overrides.items)) : []);
 		this.runes = ref<IChampionRunes>(overrides.runes
-			? structuredClone(overrides.runes)
+			? structuredClone(toRaw(overrides.runes))
 			: {
 					paths: {
 						primary: 'Precision',

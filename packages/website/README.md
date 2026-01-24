@@ -28,6 +28,7 @@ bun generate
   - [ ] buttons functionality
     - [ ] alt + move = duplicate
     - [ ] shift + click remove = clear
+    - [ ] dragging
   - [ ] expand for stats
   - [ ] mirror layout
   - [ ] first source/target is what's used in damage results

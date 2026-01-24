@@ -11,6 +11,7 @@ const props = defineProps<{
 const emit = defineEmits<{
 	clear: [];
 	remove: [];
+	duplicate: [];
 }>();
 
 const runes = useRunes();
@@ -84,19 +85,36 @@ function toggleExpanded() {
 		<h3 class="sr-only">
 			{{ group.slice(0, -1) }} {{ index + 1 }}
 		</h3>
-		<button title="move up, alt+click to duplicate above" class="data-pretend-ui-button" :disabled="index === 0">
+		<button
+			title="move up, alt+click to duplicate above"
+			class="data-pretend-ui-button"
+			:disabled="index === 0"
+		>
 			<span class="sr-only">move up, alt+click to create a copy above</span>
 			<Icon name="ph-arrow-up" />
 		</button>
-		<button title="move down, alt+click to duplicate below" class="data-pretend-ui-button" :disabled="!canMoveDown">
+		<button
+			title="move down, alt+click to duplicate below"
+			class="data-pretend-ui-button"
+			:disabled="!canMoveDown"
+		>
 			<span class="sr-only">move down, alt+click to create a copy below</span>
 			<Icon name="ph-arrow-down" />
 		</button>
-		<button :title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`" class="data-pretend-ui-button" :disabled="!value.anythingFilled.value">
+		<button
+			:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
+			class="data-pretend-ui-button"
+			:disabled="!value.anythingFilled.value"
+		>
 			<span class="sr-only">move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
 			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
 		</button>
-		<button title="duplicate" class="data-pretend-ui-button" :disabled="!value.anythingFilled.value">
+		<button
+			:title="`duplicate, alt+click to duplicate into ${otherGroup}`"
+			class="data-pretend-ui-button"
+			:disabled="!value.anythingFilled.value"
+			@click="$emit('duplicate')"
+		>
 			<span class="sr-only">duplicate</span>
 			<Icon name="ph-copy" />
 		</button>
@@ -200,11 +218,21 @@ function toggleExpanded() {
 				</button>
 			</li>
 		</ul>
-		<button :title="removeButtonAttrs.title" class="data-pretend-ui-button" :disabled="removeButtonAttrs.disabled" @click="removeButtonAttrs.emit">
+		<button
+			:title="removeButtonAttrs.title"
+			class="data-pretend-ui-button"
+			:disabled="removeButtonAttrs.disabled"
+			@click="removeButtonAttrs.emit"
+		>
 			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
 			<Icon :name="removeButtonAttrs.icon" class="size-5" />
 		</button>
-		<button title="expand" class="data-pretend-ui-button" :disabled="!value.anythingFilled.value" @click="toggleExpanded">
+		<button
+			title="expand"
+			class="data-pretend-ui-button"
+			:disabled="!value.anythingFilled.value"
+			@click="toggleExpanded"
+		>
 			<span class="sr-only">expand</span>
 			<Icon name="ph-caret-down" class="size-5" />
 		</button>
