@@ -16,8 +16,18 @@ function add(target: DamageSource[]) {
 	target.push(markRaw(new DamageSource(crypto.randomUUID())));
 }
 
-function duplicate(index: number, target: DamageSource[]) {
-	target.splice(index + 1, 0, markRaw(target[index]!.clone(crypto.randomUUID())));
+function duplicate(index: number, target: DamageSource[], shift: boolean) {
+	const newItem = markRaw(target[index]!.clone(crypto.randomUUID()));
+	if (shift) {
+		const into = target === damageSources.value ? damageTargets.value : damageSources.value;
+		if (into[0]?.anythingFilled.value) {
+			into.push(newItem);
+		} else {
+			into[0] = newItem;
+		}
+	} else {
+		target.splice(index + 1, 0, newItem);
+	}
 }
 </script>
 
@@ -52,7 +62,7 @@ function duplicate(index: number, target: DamageSource[]) {
 				:can-move-down="index !== damageSources.length - 1"
 				@clear="clear(index, damageSources)"
 				@remove="remove(index, damageSources)"
-				@duplicate="duplicate(index, damageSources)"
+				@duplicate="duplicate(index, damageSources, $event)"
 			/>
 			<li>
 				<button
@@ -79,7 +89,7 @@ function duplicate(index: number, target: DamageSource[]) {
 				is-right
 				@clear="clear(index, damageTargets)"
 				@remove="remove(index, damageTargets)"
-				@duplicate="duplicate(index, damageTargets)"
+				@duplicate="duplicate(index, damageTargets, $event)"
 			/>
 			<li>
 				<button

@@ -11,7 +11,7 @@ const props = defineProps<{
 const emit = defineEmits<{
 	clear: [];
 	remove: [];
-	duplicate: [];
+	duplicate: [shift: boolean];
 }>();
 
 const runes = useRunes();
@@ -71,13 +71,11 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 	? {
 			title: 'clear',
 			disabled: !props.value.anythingFilled.value,
-			icon: 'ph-eraser-duotone',
 			emit: emitClear,
 		}
 	: {
 			title: 'remove, shift+click to clear',
 			disabled: !props.canRemove,
-			icon: 'ph-x',
 			emit: emitRemove,
 		}));
 
@@ -126,7 +124,7 @@ function toggleExpanded() {
 			:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
 			class="data-pretend-ui-button"
 			:disabled="!value.anythingFilled.value"
-			@click="$emit('duplicate')"
+			@click="$emit('duplicate', globalKeyModifiers.shift)"
 		>
 			<span class="sr-only">duplicate, shift+click to duplicate into {{ otherGroup }}</span>
 			<Icon name="ph-copy" />
@@ -238,7 +236,7 @@ function toggleExpanded() {
 			@click="removeButtonAttrs.emit"
 		>
 			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
-			<Icon :name="removeButtonAttrs.icon" class="size-5" />
+			<Icon name="ph-x" class="size-5" />
 		</button>
 		<button
 			title="expand"
