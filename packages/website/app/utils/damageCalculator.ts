@@ -37,7 +37,7 @@ export class DamageSource {
 		return Boolean(this.champion.value || this.items.value.length || !this.runePathsEmpty.value);
 	});
 
-	constructor(id: string, overrides: Partial<IOverrides> = {}) {
+	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
 		this.id = id;
 		this.champion = shallowRef(overrides.champion);
 		this.level = ref(overrides.level ?? 1);
@@ -59,7 +59,7 @@ export class DamageSource {
 				});
 	}
 
-	clone(id: string, overrides: Partial<IOverrides> = {}) {
+	clone(id?: string, overrides: Partial<IOverrides> = {}) {
 		return new DamageSource(id, {
 			champion: this.champion.value,
 			level: this.level.value,

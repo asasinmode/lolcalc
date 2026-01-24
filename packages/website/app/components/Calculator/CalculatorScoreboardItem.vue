@@ -13,6 +13,7 @@ const emit = defineEmits<{
 	remove: [];
 	duplicate: [shift: boolean];
 	changeGroup: [alt: boolean];
+	move: [toIndex: number, alt: boolean];
 }>();
 
 const runes = useRunes();
@@ -101,6 +102,7 @@ function toggleExpanded() {
 			title="move up, alt+click to duplicate above"
 			class="data-pretend-ui-button"
 			:disabled="index === 0"
+			@click="emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
 		>
 			<span class="sr-only">move up, alt+click to duplicate above</span>
 			<Icon name="ph-arrow-up" />
@@ -109,6 +111,7 @@ function toggleExpanded() {
 			title="move down, alt+click to duplicate below"
 			class="data-pretend-ui-button"
 			:disabled="!canMoveDown"
+			@click="emit('move', index + 1, globalKeyModifiers.alt)"
 		>
 			<span class="sr-only">move down, alt+click to duplicate below</span>
 			<Icon name="ph-arrow-down" />

@@ -5,7 +5,7 @@ const damageSources = defineModel<DamageSource[]>('sources', { required: true })
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
 
 function clear(index: number, target: DamageSource[]) {
-	target[index] = markRaw(new DamageSource(crypto.randomUUID()));
+	target[index] = markRaw(new DamageSource());
 }
 
 function remove(index: number, target: DamageSource[]) {
@@ -13,11 +13,11 @@ function remove(index: number, target: DamageSource[]) {
 }
 
 function add(target: DamageSource[]) {
-	target.push(markRaw(new DamageSource(crypto.randomUUID())));
+	target.push(markRaw(new DamageSource()));
 }
 
 function duplicate(index: number, target: DamageSource[], shift: boolean) {
-	const newItem = markRaw(target[index]!.clone(crypto.randomUUID()));
+	const newItem = markRaw(target[index]!.clone());
 	if (shift) {
 		const into = target === damageSources.value ? damageTargets.value : damageSources.value;
 		if (into[0]?.anythingFilled.value) {
@@ -34,16 +34,21 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 	const into = target === damageSources.value ? damageTargets.value : damageSources.value;
 	let newItem: DamageSource;
 	if (alt) {
-		newItem = markRaw(target[index]!.clone(crypto.randomUUID()));
+		newItem = markRaw(target[index]!.clone());
 	} else {
 		newItem = target.splice(index, 1)[0]!;
-		!target.length && target.push(markRaw(new DamageSource(crypto.randomUUID())));
+		!target.length && target.push(markRaw(new DamageSource()));
 	}
 	if (into[0]?.anythingFilled.value) {
 		into.push(newItem);
 	} else {
 		into[0] = newItem;
 	}
+}
+
+function move(index: number, target: DamageSource[], toIndex: number, alt: boolean) {
+	const newItem = alt ? markRaw(target[index]!.clone()) : target.splice(index, 1)[0]!;
+	target.splice(toIndex, 0, newItem);
 }
 </script>
 
@@ -80,6 +85,7 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 				@remove="remove(index, damageSources)"
 				@duplicate="duplicate(index, damageSources, $event)"
 				@change-group="changeGroup(index, damageSources, $event)"
+				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
 			/>
 			<li>
 				<button
@@ -108,6 +114,7 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 				@remove="remove(index, damageTargets)"
 				@duplicate="duplicate(index, damageTargets, $event)"
 				@change-group="changeGroup(index, damageTargets, $event)"
+				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
 			/>
 			<li>
 				<button
