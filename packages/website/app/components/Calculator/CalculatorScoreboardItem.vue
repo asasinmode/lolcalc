@@ -90,6 +90,38 @@ function toggleExpanded() {
 		detailsContainer.value!.removeAttribute('open');
 	}
 }
+
+let isDragging = false;
+let dragTimeout: ReturnType<typeof setTimeout> | undefined;
+
+function startDrag() {
+	isDragging = false;
+	dragTimeout && clearTimeout(dragTimeout);
+	dragTimeout = setTimeout(() => {
+		isDragging = true;
+		dragTimeout = undefined;
+	}, 500);
+
+	window.addEventListener('mouseup', finishDrag, { once: true });
+}
+
+function finishDrag() {
+	dragTimeout && clearTimeout(dragTimeout);
+	dragTimeout = undefined;
+}
+
+const emitIfNotDragging: typeof emit = (...args) => {
+	if (isDragging) {
+		isDragging = false;
+	} else {
+		// @ts-expect-error type of args is fine
+		emit(...args);
+	}
+};
+
+onBeforeUnmount(() => {
+	window.removeEventListener('mouseup', finishDrag);
+});
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
@@ -102,7 +134,8 @@ function toggleExpanded() {
 			title="move up, alt+click to duplicate above"
 			class="data-pretend-ui-button"
 			:disabled="index === 0"
-			@click="emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+			@click="emitIfNotDragging('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+			@mousedown.left="startDrag"
 		>
 			<span class="sr-only">move up, alt+click to duplicate above</span>
 			<Icon name="ph-arrow-up" />
@@ -111,7 +144,8 @@ function toggleExpanded() {
 			title="move down, alt+click to duplicate below"
 			class="data-pretend-ui-button"
 			:disabled="!canMoveDown"
-			@click="emit('move', index + 1, globalKeyModifiers.alt)"
+			@click="emitIfNotDragging('move', index + 1, globalKeyModifiers.alt)"
+			@mousedown.left="startDrag"
 		>
 			<span class="sr-only">move down, alt+click to duplicate below</span>
 			<Icon name="ph-arrow-down" />
@@ -120,7 +154,8 @@ function toggleExpanded() {
 			:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
 			class="data-pretend-ui-button"
 			:disabled="!value.anythingFilled.value"
-			@click="$emit('changeGroup', globalKeyModifiers.alt)"
+			@click="emitIfNotDragging('changeGroup', globalKeyModifiers.alt)"
+			@mousedown.left="startDrag"
 		>
 			<span class="sr-only">move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
 			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
@@ -129,7 +164,8 @@ function toggleExpanded() {
 			:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
 			class="data-pretend-ui-button"
 			:disabled="!value.anythingFilled.value"
-			@click="$emit('duplicate', globalKeyModifiers.shift)"
+			@click="emitIfNotDragging('duplicate', globalKeyModifiers.shift)"
+			@mousedown.left="startDrag"
 		>
 			<span class="sr-only">duplicate, shift+click to duplicate into {{ otherGroup }}</span>
 			<Icon name="ph-copy" />
