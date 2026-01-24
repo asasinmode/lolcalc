@@ -251,13 +251,13 @@ function toggleExpanded() {
 			}
 
 			&:nth-of-type(2) {
-				@apply 'self-end mb-0.5 ml-0.5';
-				grid-area: move-column;
+				@apply 'self-start mt-0.5 mr-0.5';
+				grid-area: move-down;
 			}
 
 			&:nth-of-type(3) {
-				@apply 'self-start mt-0.5 mr-0.5';
-				grid-area: move-down;
+				@apply 'self-end mb-0.5 ml-0.5';
+				grid-area: move-column;
 			}
 
 			&:nth-of-type(4) {
