@@ -20,6 +20,7 @@ const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
 const { selectItems } = useItemShop();
 const text = useText();
+const globalKeyModifiers = useGlobalKeyModifiers();
 
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
@@ -54,18 +55,30 @@ const runePathSecondary = computed(() => {
 
 const isFirstAndOnly = computed(() => props.index === 0 && !props.canMoveDown);
 
+function emitClear() {
+	emit('clear');
+}
+
+function emitRemove() {
+	if (globalKeyModifiers.value.shift) {
+		emit('clear');
+	} else {
+		emit('remove');
+	}
+}
+
 const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 	? {
 			title: 'clear',
 			disabled: !props.value.anythingFilled.value,
 			icon: 'ph-eraser-duotone',
-			emit: () => emit('clear'),
+			emit: emitClear,
 		}
 	: {
 			title: 'remove, shift+click to clear',
 			disabled: !props.canRemove,
 			icon: 'ph-x',
-			emit: () => emit('remove'),
+			emit: emitRemove,
 		}));
 
 const detailsContainer = useTemplateRef('details');
@@ -90,7 +103,7 @@ function toggleExpanded() {
 			class="data-pretend-ui-button"
 			:disabled="index === 0"
 		>
-			<span class="sr-only">move up, alt+click to create a copy above</span>
+			<span class="sr-only">move up, alt+click to duplicate above</span>
 			<Icon name="ph-arrow-up" />
 		</button>
 		<button
@@ -98,7 +111,7 @@ function toggleExpanded() {
 			class="data-pretend-ui-button"
 			:disabled="!canMoveDown"
 		>
-			<span class="sr-only">move down, alt+click to create a copy below</span>
+			<span class="sr-only">move down, alt+click to duplicate below</span>
 			<Icon name="ph-arrow-down" />
 		</button>
 		<button
@@ -110,12 +123,12 @@ function toggleExpanded() {
 			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
 		</button>
 		<button
-			:title="`duplicate, alt+click to duplicate into ${otherGroup}`"
+			:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
 			class="data-pretend-ui-button"
 			:disabled="!value.anythingFilled.value"
 			@click="$emit('duplicate')"
 		>
-			<span class="sr-only">duplicate</span>
+			<span class="sr-only">duplicate, shift+click to duplicate into {{ otherGroup }}</span>
 			<Icon name="ph-copy" />
 		</button>
 		<div data-select-champion="">
