@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IGlobalKeyModifiers } from '~/types';
+import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 
 useHead({
 	htmlAttrs: { lang: 'en' },
@@ -19,41 +19,10 @@ const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
 
+_setupGlobalKeyModifiers();
+
 const damageSources = ref<DamageSource[]>([markRaw(new DamageSource(useId(), { champion: champions.Aatrox }))]);
 const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]);
-
-const globalKeyModifiers: IGlobalKeyModifiers = ref({
-	shift: false,
-	alt: false,
-});
-
-provide('globalKeyModifiers', globalKeyModifiers);
-
-function pressShift(event: KeyboardEvent) {
-	if (event.key === 'Shift') {
-		globalKeyModifiers.value.shift = true;
-	} else if (event.key === 'Alt') {
-		globalKeyModifiers.value.alt = true;
-	}
-}
-
-function releaseShift(event: KeyboardEvent) {
-	if (event.key === 'Shift') {
-		globalKeyModifiers.value.shift = false;
-	} else if (event.key === 'Alt') {
-		globalKeyModifiers.value.alt = false;
-	}
-}
-
-onMounted(() => {
-	window.addEventListener('keydown', pressShift, { passive: true });
-	window.addEventListener('keyup', releaseShift, { passive: true });
-});
-
-onBeforeUnmount(() => {
-	window.removeEventListener('keydown', pressShift);
-	window.removeEventListener('keyup', releaseShift);
-});
 </script>
 
 <template>

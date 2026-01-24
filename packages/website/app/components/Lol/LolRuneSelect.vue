@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import type { StyleValue, UnwrapRef } from 'vue';
-import type { IGlobalKeyModifiers } from '~/types';
 
 const text = useText();
 const runes = useRunes();
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { minorVersion } = usePatchVersion();
-
-const globalKeyModifiers = inject<IGlobalKeyModifiers>('globalKeyModifiers')!;
+const globalKeyModifiers = useGlobalKeyModifiers();
 
 const value = defineModel<IChampionRunes>();
 const vDialog = useTemplateRef('vDialog');
