@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import type { StyleValue, UnwrapRef } from 'vue';
+import type { IGlobalKeyModifiers } from '~/types';
 
 const text = useText();
 const runes = useRunes();
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { minorVersion } = usePatchVersion();
+
+const globalKeyModifiers = inject<IGlobalKeyModifiers>('globalKeyModifiers')!;
 
 const value = defineModel<IChampionRunes>();
 const vDialog = useTemplateRef('vDialog');
@@ -165,7 +168,6 @@ function updateValue<P extends PathTuple<IChampionRunes>>(
 
 let runeDescriptionTooltipAnchor: undefined | HTMLElement;
 const runeDescriptionTooltip = useTemplateRef('runeDescriptionTooltip');
-const isHoldingShift = ref(false);
 const hoveredRune = shallowRef<{
 	title: string;
 	description: string;
@@ -177,7 +179,7 @@ const hoveredRuneTooltip = computed(() => {
 		return undefined;
 	}
 
-	const { replaced: stringtableVariableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables((isHoldingShift.value && hoveredRune.value.expandedDescription) || hoveredRune.value.description, text.stringtable);
+	const { replaced: stringtableVariableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables((globalKeyModifiers.value.shift && hoveredRune.value.expandedDescription) || hoveredRune.value.description, text.stringtable);
 
 	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
 		stringtableVariableReplaced,
@@ -215,25 +217,8 @@ function updateTooltipPosition() {
 	runeDescriptionTooltip.value!.style.setProperty('--height', `${runeDescriptionTooltip.value!.clientHeight}px`);
 }
 
-function holdShift(event: KeyboardEvent) {
-	if (event.key === 'Shift') {
-		isHoldingShift.value = true;
-	}
-}
-
-function releaseShift() {
-	isHoldingShift.value = false;
-}
-
-onMounted(() => {
-	window.addEventListener('keydown', holdShift, { passive: true });
-	window.addEventListener('keyup', releaseShift, { passive: true });
-});
-
 onBeforeUnmount(() => {
 	window.removeEventListener('resize', updateTooltipPosition);
-	window.removeEventListener('keydown', holdShift);
-	window.removeEventListener('keyup', releaseShift);
 });
 
 defineExpose({
