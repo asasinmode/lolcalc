@@ -64,20 +64,23 @@ bun generate
   - [ ] champion passives
   - [ ] role quests
 - [ ] mobile version
-- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
 - [x] favicon 🇱🖩
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
-  - [ ] any other FAQ on page
+  - [ ] help/faq page
   - [ ] github readme
+- [ ] alerts and info texts for stuff not implemented yet
+- [ ] tutorial popups with helpful info
+  - [ ] dragging scoreboard elements
+- [ ] update browser to make sure everything works properly info
 - [ ] submit feedback on page / report issues
   - [ ] probably a rust server
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
+- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
-- [ ] alerts and info texts for stuff not implemented yet
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 

@@ -20,9 +20,7 @@ let isDragging = false;
 let dragTimeout: ReturnType<typeof setTimeout> | undefined;
 
 function startDrag(event: MouseEvent, index: number, source: DamageSource[], duplicate?: boolean) {
-	console.log('dragging', event, duplicate, index, source);
 	const value = source[index]!;
-
 	let runePathPrimaryKeystone;
 	let runePathSecondary;
 	const { primary, primarySlots, secondary } = value.runes.value.paths;
@@ -47,19 +45,43 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 		runePathPrimaryKeystone,
 		runePathSecondary,
 	};
-	// isDragging = false;
-	// dragTimeout && clearTimeout(dragTimeout);
-	// dragTimeout = setTimeout(() => {
-	// 	isDragging = true;
-	// 	dragTimeout = undefined;
-	// }, 500);
+	isDragging = false;
+	dragTimeout && clearTimeout(dragTimeout);
+	dragTimeout = setTimeout(() => {
+		isDragging = true;
+		dragTimeout = undefined;
+		draggingPopover.value!.showPopover();
+		document.addEventListener('mousemove', updateDragPreviewPosition, { passive: true });
+		updateDragPreviewPosition(event);
+	}, 500);
 
-	// window.addEventListener('mouseup', finishDrag, { once: true });
+	window.addEventListener('mouseup', finishDrag, { once: true });
 }
 
 function finishDrag() {
-	// dragTimeout && clearTimeout(dragTimeout);
-	// dragTimeout = undefined;
+	dragTimeout && clearTimeout(dragTimeout);
+	dragTimeout = undefined;
+	dragging.value = undefined;
+	draggingPopover.value!.hidePopover();
+	document.removeEventListener('mousemove', updateDragPreviewPosition);
+}
+
+function updateDragPreviewPosition(event: MouseEvent) {
+	draggingPopover.value!.style.setProperty('--left', `${event.clientX}px`);
+	draggingPopover.value!.style.setProperty('--top', `${event.clientY}px`);
+}
+
+onBeforeUnmount(() => {
+	window.removeEventListener('mouseup', finishDrag);
+	document.removeEventListener('mousemove', finishDrag);
+});
+
+function callIfNotDragging(callback: () => void) {
+	if (isDragging) {
+		isDragging = false;
+	} else {
+		callback();
+	}
 }
 
 function clear(index: number, target: DamageSource[]) {
@@ -108,10 +130,6 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 	const newItem = alt ? markRaw(target[index]!.clone()) : target.splice(index, 1)[0]!;
 	target.splice(toIndex, 0, newItem);
 }
-
-onBeforeUnmount(() => {
-	window.removeEventListener('mouseup', finishDrag);
-});
 </script>
 
 <template>
@@ -143,11 +161,11 @@ onBeforeUnmount(() => {
 				:index
 				:can-remove="damageSources.length > 1"
 				:can-move-down="index !== damageSources.length - 1"
-				@clear="clear(index, damageSources)"
-				@remove="remove(index, damageSources)"
-				@duplicate="duplicate(index, damageSources, $event)"
-				@change-group="changeGroup(index, damageSources, $event)"
-				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
+				@clear="callIfNotDragging(() => clear(index, damageSources))"
+				@remove="callIfNotDragging(() => remove(index, damageSources))"
+				@duplicate="(shift) => callIfNotDragging(() => duplicate(index, damageSources, shift))"
+				@change-group="(alt) => callIfNotDragging(() => changeGroup(index, damageSources, alt))"
+				@move="(toIndex, alt) => callIfNotDragging(() => move(index, damageSources, toIndex, alt))"
 				@start-drag="(event, duplicate) => startDrag(event, index, damageSources, duplicate)"
 			/>
 			<li>
@@ -173,11 +191,11 @@ onBeforeUnmount(() => {
 				:can-remove="damageTargets.length > 1"
 				:can-move-down="index !== damageTargets.length - 1"
 				is-right
-				@clear="clear(index, damageTargets)"
-				@remove="remove(index, damageTargets)"
-				@duplicate="duplicate(index, damageTargets, $event)"
-				@change-group="changeGroup(index, damageTargets, $event)"
-				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
+				@clear="callIfNotDragging(() => clear(index, damageTargets))"
+				@remove="callIfNotDragging(() => remove(index, damageTargets))"
+				@duplicate="(shift) => callIfNotDragging(() => duplicate(index, damageTargets, shift))"
+				@change-group="(alt) => callIfNotDragging(() => changeGroup(index, damageTargets, alt))"
+				@move="(toIndex, alt) => callIfNotDragging(() => move(index, damageTargets, toIndex, alt))"
 				@start-drag="(event, duplicate) => startDrag(event, index, damageTargets, duplicate)"
 			/>
 			<li>
@@ -191,7 +209,7 @@ onBeforeUnmount(() => {
 				</button>
 			</li>
 		</ul>
-		<li ref="draggingPopover" data-drag-preview="" popover="hint" inert>
+		<div ref="draggingPopover" data-drag-preview="" popover="hint" inert>
 			<img
 				v-if="dragging?.value.champion.value"
 				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.champion.value.image}`"
@@ -232,7 +250,7 @@ onBeforeUnmount(() => {
 					>
 				</li>
 			</ul>
-		</li>
+		</div>
 	</article>
 </template>
 
@@ -258,7 +276,11 @@ onBeforeUnmount(() => {
 		}
 
 		> [data-drag-preview] {
-			@apply 'bg-cyan-950 flex items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute';
+			@apply 'bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute left-[--left] top-[--top]';
+
+			&:popover-open {
+				@apply 'flex';
+			}
 
 			> :nth-child(1) {
 				@apply 'size-12 rounded-full b b-[--ui-button-border-clr]';
