@@ -192,22 +192,20 @@ onBeforeUnmount(() => {
 			</li>
 		</ul>
 		<li ref="draggingPopover" data-drag-preview="" popover="hint" inert>
-			<div>
-				<img
-					v-if="dragging?.value.champion.value"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.champion.value.image}`"
-					loading="lazy"
-					width="128"
-					height="128"
-				>
-				<img
-					v-else
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-					width="256"
-					height="256"
-				>
-				<span>{{ dragging?.value.level.value }}</span>
-			</div>
+			<img
+				v-if="dragging?.value.champion.value"
+				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.champion.value.image}`"
+				loading="lazy"
+				width="128"
+				height="128"
+			>
+			<img
+				v-else
+				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+				width="256"
+				height="256"
+			>
+			<span>{{ dragging?.value.level.value }}</span>
 			<div>
 				<img
 					:src="dragging?.runePathPrimaryKeystone || `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`"
@@ -260,29 +258,33 @@ onBeforeUnmount(() => {
 		}
 
 		> [data-drag-preview] {
-			@apply 'bg-cyan-950 flex p-1 b b-[--ui-button-border-clr] gap-1';
+			@apply 'bg-cyan-950 flex items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute';
 
 			> :nth-child(1) {
-				@apply 'row-span-full size-10 rounded-full overflow-hidden b b-[--ui-button-border-clr]';
+				@apply 'size-12 rounded-full b b-[--ui-button-border-clr]';
 			}
 
 			> :nth-child(2) {
-				@apply 'flex flex-col items-center self-center gap-1';
-
-				[data-primary-path-keystone] {
-					@apply 'size-4.5';
-				}
-
-				[data-secondary-path] {
-					@apply 'size-3.5';
-				}
+				@apply 'absolute bg-black rounded-full top-11 left-11 translate-center text-xs size-5 text-center grid-center b b-[--ui-button-border-clr]';
 			}
 
 			> :nth-child(3) {
-				@apply 'row-span-full grid grid-cols-3 grid-rows-2 gap-0.5';
+				@apply 'flex flex-col items-center self-center gap-1';
+
+				[data-primary-path-keystone] {
+					@apply 'size-5';
+				}
+
+				[data-secondary-path] {
+					@apply 'size-4';
+				}
+			}
+
+			> :nth-child(4) {
+				@apply 'grid grid-cols-3 grid-rows-2 gap-0.5';
 
 				li {
-					@apply 'size-5 bg-black';
+					@apply 'size-5.5 bg-black';
 				}
 			}
 		}
