@@ -17,7 +17,7 @@ export interface IRunePath {
 	name: IRunePathName;
 	icon: string;
 	iconColor: string;
-	slots: [Partial<Record<IRuneSlotName, IRunePathSlot>>];
+	slots: Partial<Record<IRuneSlotName, IRunePathSlot>>[];
 }
 
 export interface IRunePathSlot {
