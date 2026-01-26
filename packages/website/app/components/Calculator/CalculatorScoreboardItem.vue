@@ -91,11 +91,15 @@ function toggleExpanded() {
 		detailsContainer.value!.removeAttribute('open');
 	}
 }
+
+const el = useTemplateRef('el');
+
+defineExpose({ el });
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-	<li data-lol-scoreboard-item="">
+	<li ref="el" data-lol-scoreboard-item="">
 		<h3 class="sr-only">
 			{{ group.slice(0, -1) }} {{ index + 1 }}
 		</h3>

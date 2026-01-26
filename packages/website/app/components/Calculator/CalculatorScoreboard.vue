@@ -7,6 +7,9 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
 
+const sourceElements = useTemplateRef('sourceElements');
+const targetElements = useTemplateRef('targetElements');
+
 const draggingPopover = useTemplateRef('draggingPopover');
 const dragging = shallowRef<{
 	index: number;
@@ -16,7 +19,7 @@ const dragging = shallowRef<{
 	runePathPrimaryKeystone?: string;
 	runePathSecondary?: { icon: string; iconColor: string };
 }>();
-let isDragging = false;
+let dragStartedAt: number | null = null;
 let dragTimeout: ReturnType<typeof setTimeout> | undefined;
 
 function startDrag(event: MouseEvent, index: number, source: DamageSource[], duplicate?: boolean) {
@@ -45,30 +48,47 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 		runePathPrimaryKeystone,
 		runePathSecondary,
 	};
-	isDragging = false;
+	dragStartedAt = Date.now();
 	dragTimeout && clearTimeout(dragTimeout);
 	dragTimeout = setTimeout(() => {
-		isDragging = true;
-		dragTimeout = undefined;
 		draggingPopover.value!.showPopover();
-		document.addEventListener('mousemove', updateDragPreviewPosition, { passive: true });
 		updateDragPreviewPosition(event);
-	}, 500);
+		document.addEventListener('mousemove', updateDragPreviewPosition, { passive: true });
+
+		for (const el of (sourceElements.value || []).concat(targetElements.value)) {
+			el?.el?.addEventListener('mouseenter', setCurrentDropTarget);
+			el?.el?.addEventListener('mouseleave', cleanupCurrentDropTarget);
+		}
+	}, 150);
 
 	window.addEventListener('mouseup', finishDrag, { once: true });
 }
 
-function finishDrag() {
+function finishDrag(event: MouseEvent) {
+	console.log('mouseup detected', event.target);
 	dragTimeout && clearTimeout(dragTimeout);
 	dragTimeout = undefined;
 	dragging.value = undefined;
 	draggingPopover.value!.hidePopover();
 	document.removeEventListener('mousemove', updateDragPreviewPosition);
+
+	for (const el of (sourceElements.value || []).concat(targetElements.value)) {
+		el?.el?.removeEventListener('mouseenter', setCurrentDropTarget);
+		el?.el?.removeEventListener('mouseleave', cleanupCurrentDropTarget);
+	}
 }
 
 function updateDragPreviewPosition(event: MouseEvent) {
 	draggingPopover.value!.style.setProperty('--left', `${event.clientX}px`);
 	draggingPopover.value!.style.setProperty('--top', `${event.clientY}px`);
+}
+
+function setCurrentDropTarget(event: MouseEvent) {
+	console.log('mouse enter', event.target);
+}
+
+function cleanupCurrentDropTarget(event: MouseEvent) {
+	console.log('mouse leave', event.target);
 }
 
 onBeforeUnmount(() => {
@@ -77,10 +97,10 @@ onBeforeUnmount(() => {
 });
 
 function callIfNotDragging(callback: () => void) {
-	if (isDragging) {
-		isDragging = false;
-	} else {
+	if (dragStartedAt && (Date.now() - dragStartedAt) < 300) {
 		callback();
+	} else {
+		dragStartedAt = null;
 	}
 }
 
@@ -156,11 +176,14 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 		<ul>
 			<CalculatorScoreboardItem
 				v-for="(value, index) in damageSources"
+				ref="sourceElements"
 				:key="value.id"
 				:value
 				:index
 				:can-remove="damageSources.length > 1"
 				:can-move-down="index !== damageSources.length - 1"
+				:data-index="index"
+				data-group="sources"
 				@clear="callIfNotDragging(() => clear(index, damageSources))"
 				@remove="callIfNotDragging(() => remove(index, damageSources))"
 				@duplicate="(shift) => callIfNotDragging(() => duplicate(index, damageSources, shift))"
@@ -185,11 +208,14 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 		<ul>
 			<CalculatorScoreboardItem
 				v-for="(value, index) in damageTargets"
+				ref="targetElements"
 				:key="value.id"
 				:value
 				:index
 				:can-remove="damageTargets.length > 1"
 				:can-move-down="index !== damageTargets.length - 1"
+				:data-index="index"
+				data-group="targets"
 				is-right
 				@clear="callIfNotDragging(() => clear(index, damageTargets))"
 				@remove="callIfNotDragging(() => remove(index, damageTargets))"
@@ -276,7 +302,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 		}
 
 		> [data-drag-preview] {
-			@apply 'bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute left-[--left] top-[--top]';
+			@apply 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute left-[--left] top-[--top]';
 
 			&:popover-open {
 				@apply 'flex';
