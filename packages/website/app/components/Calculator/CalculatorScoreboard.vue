@@ -21,6 +21,7 @@ const dragging = shallowRef<{
 }>();
 let dragStartedAt: number | null = null;
 let dragTimeout: ReturnType<typeof setTimeout> | undefined;
+let droppedAt: { target: DamageSource[]; index: number } | undefined;
 
 function startDrag(event: MouseEvent, index: number, source: DamageSource[], duplicate?: boolean) {
 	const value = source[index]!;
@@ -55,6 +56,8 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 		updateDragPreviewPosition(event);
 		document.addEventListener('mousemove', updateDragPreviewPosition, { passive: true });
 
+		((event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement)?.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
+
 		for (const el of (sourceElements.value || []).concat(targetElements.value)) {
 			el?.el?.addEventListener('mouseenter', setCurrentDropTarget);
 			el?.el?.addEventListener('mouseleave', cleanupCurrentDropTarget);
@@ -65,7 +68,6 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 }
 
 function finishDrag(event: MouseEvent) {
-	console.log('mouseup detected', event.target);
 	dragTimeout && clearTimeout(dragTimeout);
 	dragTimeout = undefined;
 	dragging.value = undefined;
@@ -75,6 +77,16 @@ function finishDrag(event: MouseEvent) {
 	for (const el of (sourceElements.value || []).concat(targetElements.value)) {
 		el?.el?.removeEventListener('mouseenter', setCurrentDropTarget);
 		el?.el?.removeEventListener('mouseleave', cleanupCurrentDropTarget);
+		el?.el?.removeEventListener('mousemove', updateCurrentDropTarget);
+	}
+
+	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement;
+	if (element) {
+		delete element.dataset.dropTarget;
+	}
+
+	if (droppedAt) {
+		console.log('dropped at', droppedAt);
 	}
 }
 
@@ -84,11 +96,54 @@ function updateDragPreviewPosition(event: MouseEvent) {
 }
 
 function setCurrentDropTarget(event: MouseEvent) {
-	console.log('mouse enter', event.target);
+	const target = event.target as HTMLElement;
+	target.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
+	updateCurrentDropTarget(event);
 }
 
 function cleanupCurrentDropTarget(event: MouseEvent) {
-	console.log('mouse leave', event.target);
+	const target = event.target as HTMLElement;
+	target.removeEventListener('mousemove', updateCurrentDropTarget);
+	delete target.dataset.dropTarget;
+	droppedAt = undefined;
+}
+
+function updateCurrentDropTarget(event: MouseEvent) {
+	if (!dragging.value) {
+		console.warn('updateCurrentDropTarget called without anything being dragged');
+		return;
+	}
+
+	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement;
+	if (!element) {
+		console.warn('updateCurrentDropTarget event no target', event);
+		return;
+	}
+
+	let index = Number.parseInt(element.dataset.index!);
+	if (index === dragging.value.index) {
+		return;
+	}
+
+	const rect = element.getBoundingClientRect();
+	let dropTarget = event.clientY < (rect.y + rect.height / 2) ? 'above' : 'below';
+	const target = element.dataset.group === 'sources' ? damageSources.value : damageTargets.value;
+
+	console.log({ sameList: target === dragging.value.source, index, draggingIndex: dragging.value.index, dropTarget });
+
+	if (target === dragging.value.source) {
+		if (index === dragging.value.index - 1) {
+			dropTarget = 'above';
+		} else if (index === dragging.value.index + 1) {
+			dropTarget = 'below';
+		}
+	}
+
+	element.dataset.dropTarget = dropTarget;
+	droppedAt = {
+		index,
+		target,
+	};
 }
 
 onBeforeUnmount(() => {
@@ -334,6 +389,38 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				li {
 					@apply 'size-5.5 bg-black';
 				}
+			}
+		}
+
+		[data-drop-target] {
+			@apply 'relative';
+			--drop-indicator-bg-direction: 180deg;
+
+			&::before,
+			&::after {
+				@apply 'content-empty absolute z-10';
+			}
+
+			&::before {
+				@apply 'inset-0';
+				background-image: linear-gradient(
+					var(--drop-indicator-bg-direction),
+					hsl(0 100% 100% / 0.7) 0%,
+					transparent 30%
+				);
+			}
+
+			&::after {
+				@apply 'top-0.5 left-1/2 -translate-x-1/2 size-4 bg-white';
+				mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
+			}
+		}
+
+		[data-drop-target='below'] {
+			--drop-indicator-bg-direction: 0deg;
+
+			&::after {
+				@apply 'bottom-0.5 top-auto rotate-180';
 			}
 		}
 	}
