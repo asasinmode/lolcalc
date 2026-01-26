@@ -1,6 +1,6 @@
 <template>
 	<p data-unknown-variables-alert="">
-		<Icon name="ph:warning-light" />
+		<Icon class="i-ph:warning-light" />
 		Some variables weren't resolved correctly. Please <a href="#">TODO report this issue</a>
 	</p>
 </template>
@@ -18,7 +18,7 @@
 			@apply 'absolute top-0 right-0 content-empty z-0 bg-amber-400 size-4 rounded-bl-md';
 		}
 
-		.iconify {
+		.icon {
 			@apply 'size-3.5 z-10 absolute right-0.125 top-0.125 text-amber-950';
 		}
 	}

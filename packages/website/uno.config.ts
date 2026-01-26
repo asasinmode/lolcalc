@@ -1,12 +1,13 @@
 import {
 	defineConfig,
+	presetIcons,
 	presetWind4,
 	transformerDirectives,
 	transformerVariantGroup,
 } from 'unocss';
 
 export default defineConfig({
-	presets: [presetWind4({ preflights: { property: { parent: false } } })],
+	presets: [presetWind4({ preflights: { property: { parent: false } } }), presetIcons()],
 	transformers: [
 		transformerDirectives(),
 		transformerVariantGroup(),

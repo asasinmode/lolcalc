@@ -75,7 +75,7 @@ defineExpose({
 					@update:model-value="selectedRole = undefined"
 				>
 				<label for="item-shop-search" class="px-2 py-0.5 b b-transparent">
-					<Icon name="ph:magnifying-glass-bold" class="mr-2 size-4" />
+					<Icon class="i-ph:magnifying-glass-bold mr-2 size-4" />
 					<span>
 						Search
 					</span>

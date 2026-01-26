@@ -99,7 +99,7 @@ defineExpose({ el });
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-	<li ref="el" data-lol-scoreboard-item="">
+	<li ref="el" data-scoreboard-item="">
 		<h3 class="sr-only">
 			{{ group.slice(0, -1) }} {{ index + 1 }}
 		</h3>
@@ -111,7 +111,7 @@ defineExpose({ el });
 			@mousedown.left="$emit('startDrag', $event)"
 		>
 			<span class="sr-only">move up, alt+click to duplicate above</span>
-			<Icon name="ph-arrow-up" />
+			<Icon class="i-ph:arrow-up" />
 		</button>
 		<button
 			title="move down, alt+click to duplicate below"
@@ -121,7 +121,7 @@ defineExpose({ el });
 			@mousedown.left="$emit('startDrag', $event)"
 		>
 			<span class="sr-only">move down, alt+click to duplicate below</span>
-			<Icon name="ph-arrow-down" />
+			<Icon class="i-ph:arrow-down" />
 		</button>
 		<button
 			:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
@@ -131,7 +131,7 @@ defineExpose({ el });
 			@mousedown.left="$emit('startDrag', $event)"
 		>
 			<span class="sr-only">move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
-			<Icon :name="isRight ? 'ph-arrow-left' : 'ph-arrow-right'" />
+			<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
 		</button>
 		<button
 			:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
@@ -141,7 +141,7 @@ defineExpose({ el });
 			@mousedown.left="$emit('startDrag', $event, true)"
 		>
 			<span class="sr-only">duplicate, shift+click to duplicate into {{ otherGroup }}</span>
-			<Icon name="ph-copy" />
+			<Icon class="i-ph:copy" />
 		</button>
 		<div data-select-champion="">
 			<button
@@ -178,7 +178,7 @@ defineExpose({ el });
 			<span class="sr-only">{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
 			<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -right-0.5 -top-0.5">
 				<span class="sr-only">(invalid)</span>
-				<Icon name="ph-exclamation-mark-bold" class="size-2.5" />
+				<Icon class="i-ph:exclamation-mark-bold size-2.5" />
 			</span>
 			<template v-if="runePathPrimary">
 				<span class="sr-only">
@@ -249,7 +249,7 @@ defineExpose({ el });
 			@click="removeButtonAttrs.emit"
 		>
 			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
-			<Icon name="ph-x" class="size-5" />
+			<Icon class="i-ph:x size-5" />
 		</button>
 		<button
 			title="expand"
@@ -258,7 +258,7 @@ defineExpose({ el });
 			@click="toggleExpanded"
 		>
 			<span class="sr-only">expand</span>
-			<Icon name="ph-caret-down" class="size-5" />
+			<Icon class="i-ph:caret-down size-5" />
 		</button>
 		<details ref="details">
 			<summary>
@@ -273,7 +273,7 @@ defineExpose({ el });
 
 <style>
 @layer components {
-	[data-lol-scoreboard-item] {
+	#calculator-scoreboard [data-scoreboard-item] {
 		@apply 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);
@@ -332,7 +332,7 @@ defineExpose({ el });
 			&:nth-last-of-type(-n + 2) {
 				@apply 'size-5 grid-center';
 
-				.iconify {
+				.icon {
 					@apply 'size-4';
 				}
 			}

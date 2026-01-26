@@ -361,7 +361,7 @@ defineExpose({
 			</h1>
 			<form method="dialog" class="right-0 top-0 absolute" autofocus>
 				<button value="cancel" title="Close">
-					<Icon name="ph:x" class="size-6" />
+					<Icon class="i-ph:x size-6" />
 					<span class="sr-only">
 						close
 					</span>
@@ -385,7 +385,7 @@ defineExpose({
 					@keydown="onSearchKeydown"
 				>
 				<label id="item-shop-search-lbl" for="item-shop-search" class="px-2 py-0.5 b b-transparent">
-					<Icon name="ph:magnifying-glass-bold" class="mr-2 size-4" />
+					<Icon class="i-ph:magnifying-glass-bold mr-2 size-4" />
 					<span>
 						Click Here to Search
 					</span>
@@ -394,7 +394,7 @@ defineExpose({
 					<span class="sr-only">
 						Clear
 					</span>
-					<Icon name="ph:x" class="size-4" />
+					<Icon class="i-ph:x size-4" />
 				</button>
 				<div
 					v-show="searchExpanded"
@@ -532,7 +532,7 @@ defineExpose({
 					:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
 				>
 			</button>
-			<Icon id="panel-boots-caret-icon" name="ph:caret-left-bold" />
+			<Icon id="panel-boots-caret-icon" class="i-ph:caret-left-bold" />
 			<div>
 				<ul>
 					<li v-for="item in bootItems" :key="item.id">

@@ -197,7 +197,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 					:disabled="!damageSources[0]?.anythingFilled.value"
 					@click="add(damageSources)"
 				>
-					<Icon name="ph:plus-bold" />
+					<Icon class="i-ph:plus-bold" />
 					add damage source
 				</button>
 			</li>
@@ -230,7 +230,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 					:disabled="!damageTargets[0]?.anythingFilled.value"
 					@click="add(damageTargets)"
 				>
-					<Icon name="ph:plus-bold" />
+					<Icon class="i-ph:plus-bold" />
 					add damage target
 				</button>
 			</li>
@@ -294,7 +294,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				> button {
 					@apply 'p-1';
 
-					.iconify {
+					.icon {
 						@apply 'align-sub size-4 mr-0.5';
 					}
 				}
