@@ -50,7 +50,7 @@ const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]);
 	.pretend-ui-button {
 		@apply 'b b-[--ui-button-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
 
-		.iconify {
+		.icon {
 			@apply 'text-[--ui-pretend-button-icon-clr]';
 		}
 	}

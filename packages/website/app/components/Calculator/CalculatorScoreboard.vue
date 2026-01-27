@@ -21,7 +21,7 @@ const dragging = shallowRef<{
 }>();
 let dragStartedAt: number | null = null;
 let dragTimeout: ReturnType<typeof setTimeout> | undefined;
-let droppedAt: { target: DamageSource[]; index: number } | undefined;
+let droppedAt: { target: DamageSource[]; index: number; dropDirection: 'above' | 'below' } | undefined;
 
 function startDrag(event: MouseEvent, index: number, source: DamageSource[], duplicate?: boolean) {
 	const value = source[index]!;
@@ -55,22 +55,20 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 		draggingPopover.value!.showPopover();
 		updateDragPreviewPosition(event);
 		document.addEventListener('mousemove', updateDragPreviewPosition, { passive: true });
-
-		((event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement)?.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
-
-		for (const el of (sourceElements.value || []).concat(targetElements.value)) {
-			el?.el?.addEventListener('mouseenter', setCurrentDropTarget);
-			el?.el?.addEventListener('mouseleave', cleanupCurrentDropTarget);
-		}
 	}, 150);
 
 	window.addEventListener('mouseup', finishDrag, { once: true });
+
+	((event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement)?.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
+
+	for (const el of (sourceElements.value || []).concat(targetElements.value)) {
+		el?.el?.addEventListener('mouseenter', setCurrentDropTarget);
+		el?.el?.addEventListener('mouseleave', cleanupCurrentDropTarget);
+	}
 }
 
 function finishDrag(event: MouseEvent) {
 	dragTimeout && clearTimeout(dragTimeout);
-	dragTimeout = undefined;
-	dragging.value = undefined;
 	draggingPopover.value!.hidePopover();
 	document.removeEventListener('mousemove', updateDragPreviewPosition);
 
@@ -82,12 +80,22 @@ function finishDrag(event: MouseEvent) {
 
 	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement;
 	if (element) {
-		delete element.dataset.dropTarget;
+		delete element.dataset.dropDirection;
 	}
 
-	if (droppedAt) {
-		console.log('dropped at', droppedAt);
+	if (droppedAt && dragging.value) {
+		const sameGroup = droppedAt.target === dragging.value.source;
+		console.log('dropped at', droppedAt.index, 'from', dragging.value.index);
+		if (droppedAt.index === 0 && !droppedAt.target[droppedAt.index]?.anythingFilled.value) {
+			droppedAt.target[droppedAt.index] = dragging.value.source.splice(dragging.value.index, 1)[0]!;
+		} else {
+			console.log('figure smth out', droppedAt);
+		}
 	}
+
+	dragTimeout = undefined;
+	dragging.value = undefined;
+	droppedAt = undefined;
 }
 
 function updateDragPreviewPosition(event: MouseEvent) {
@@ -104,7 +112,7 @@ function setCurrentDropTarget(event: MouseEvent) {
 function cleanupCurrentDropTarget(event: MouseEvent) {
 	const target = event.target as HTMLElement;
 	target.removeEventListener('mousemove', updateCurrentDropTarget);
-	delete target.dataset.dropTarget;
+	delete target.dataset.dropDirection;
 	droppedAt = undefined;
 }
 
@@ -121,28 +129,27 @@ function updateCurrentDropTarget(event: MouseEvent) {
 	}
 
 	let index = Number.parseInt(element.dataset.index!);
-	if (index === dragging.value.index) {
+	const target = element.dataset.group === 'sources' ? damageSources.value : damageTargets.value;
+	if (dragging.value.source === target && index === dragging.value.index) {
 		return;
 	}
 
 	const rect = element.getBoundingClientRect();
-	let dropTarget = event.clientY < (rect.y + rect.height / 2) ? 'above' : 'below';
-	const target = element.dataset.group === 'sources' ? damageSources.value : damageTargets.value;
-
-	console.log({ sameList: target === dragging.value.source, index, draggingIndex: dragging.value.index, dropTarget });
+	let dropDirection = event.clientY < (rect.y + rect.height / 2) ? 'above' : 'below';
 
 	if (target === dragging.value.source) {
 		if (index === dragging.value.index - 1) {
-			dropTarget = 'above';
+			dropDirection = 'above';
 		} else if (index === dragging.value.index + 1) {
-			dropTarget = 'below';
+			dropDirection = 'below';
 		}
 	}
 
-	element.dataset.dropTarget = dropTarget;
+	element.dataset.dropDirection = dropDirection;
 	droppedAt = {
 		index,
 		target,
+		dropDirection,
 	};
 }
 
@@ -152,11 +159,10 @@ onBeforeUnmount(() => {
 });
 
 function callIfNotDragging(callback: () => void) {
-	if (dragStartedAt && (Date.now() - dragStartedAt) < 300) {
+	if (!dragStartedAt || (Date.now() - dragStartedAt) <= 300) {
 		callback();
-	} else {
-		dragStartedAt = null;
 	}
+	dragStartedAt = null;
 }
 
 function clear(index: number, target: DamageSource[]) {
@@ -249,7 +255,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 			<li>
 				<button
 					class="pretend-ui-button"
-					:disabled="!damageSources[0]?.anythingFilled.value"
+					:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
 					@click="add(damageSources)"
 				>
 					<Icon class="i-ph:plus-bold" />
@@ -282,7 +288,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 			<li>
 				<button
 					class="pretend-ui-button"
-					:disabled="!damageTargets[0]?.anythingFilled.value"
+					:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
 					@click="add(damageTargets)"
 				>
 					<Icon class="i-ph:plus-bold" />
@@ -392,7 +398,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 			}
 		}
 
-		[data-drop-target] {
+		[data-drop-direction] {
 			@apply 'relative';
 			--drop-indicator-bg-direction: 180deg;
 
@@ -416,7 +422,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 			}
 		}
 
-		[data-drop-target='below'] {
+		[data-drop-direction='below'] {
 			--drop-indicator-bg-direction: 0deg;
 
 			&::after {
