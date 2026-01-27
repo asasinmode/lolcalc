@@ -71,7 +71,6 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 	}, 300);
 
 	window.addEventListener('mouseup', finishDrag, { once: true });
-	element?.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
 
 	for (const el of (sourceElements.value || []).concat(targetElements.value)) {
 		el?.el?.addEventListener('mouseenter', setCurrentDropTarget);
@@ -100,8 +99,9 @@ function finishDrag(event: MouseEvent) {
 	}
 
 	if (droppedAt && dragging.value) {
-		const item = event.altKey || globalKeyModifiers.value.alt ? markRaw(dragging.value.source[dragging.value.index]!.clone()) : dragging.value.source.splice(dragging.value.index, 1)[0]!;
-		console.log('moving', event.altKey || globalKeyModifiers.value.alt, item);
+		const item = dragging.value.duplicate || event.altKey || globalKeyModifiers.value.alt
+			? markRaw(dragging.value.source[dragging.value.index]!.clone())
+			: dragging.value.source.splice(dragging.value.index, 1)[0]!;
 		if (droppedAt.index === 0 && !droppedAt.target[droppedAt.index]?.anythingFilled.value) {
 			droppedAt.target[droppedAt.index] = item;
 		} else if (droppedAt.target === dragging.value.source) {
