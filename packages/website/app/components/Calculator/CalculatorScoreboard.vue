@@ -19,9 +19,10 @@ const dragging = shallowRef<{
 	duplicate?: boolean;
 	runePathPrimaryKeystone?: string;
 	runePathSecondary?: { icon: string; iconColor: string };
+	element: HTMLElement | null;
 }>();
-let dragStartedAt: number | null = null;
 let dragTimeout: ReturnType<typeof setTimeout> | undefined;
+let disableDragTargetPointerEventsTimeout: ReturnType<typeof setTimeout> | undefined;
 let droppedAt: { target: DamageSource[]; index: number; dropDirection: 'above' | 'below' } | undefined;
 
 function startDrag(event: MouseEvent, index: number, source: DamageSource[], duplicate?: boolean) {
@@ -42,6 +43,12 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 		};
 	}
 
+	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement | null;
+
+	if (!element) {
+		console.warn('startDrag called but no scoreboard item found in event.target parents');
+	}
+
 	dragging.value = {
 		index,
 		source,
@@ -49,18 +56,22 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 		value,
 		runePathPrimaryKeystone,
 		runePathSecondary,
+		element,
 	};
-	dragStartedAt = Date.now();
 	dragTimeout && clearTimeout(dragTimeout);
 	dragTimeout = setTimeout(() => {
 		draggingPopover.value!.showPopover();
 		updateDragPreviewPosition(event);
 		document.addEventListener('mousemove', updateDragPreviewPosition, { passive: true });
 	}, 150);
+	disableDragTargetPointerEventsTimeout = setTimeout(() => {
+		if (element) {
+			element.style.pointerEvents = 'none';
+		}
+	}, 300);
 
 	window.addEventListener('mouseup', finishDrag, { once: true });
-
-	((event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement)?.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
+	element?.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
 
 	for (const el of (sourceElements.value || []).concat(targetElements.value)) {
 		el?.el?.addEventListener('mouseenter', setCurrentDropTarget);
@@ -70,6 +81,7 @@ function startDrag(event: MouseEvent, index: number, source: DamageSource[], dup
 
 function finishDrag(event: MouseEvent) {
 	dragTimeout && clearTimeout(dragTimeout);
+	disableDragTargetPointerEventsTimeout && clearTimeout(disableDragTargetPointerEventsTimeout);
 	draggingPopover.value!.hidePopover();
 	document.removeEventListener('mousemove', updateDragPreviewPosition);
 
@@ -83,6 +95,9 @@ function finishDrag(event: MouseEvent) {
 	if (element) {
 		delete element.dataset.dropDirection;
 	}
+	if (dragging.value?.element) {
+		dragging.value.element.style.pointerEvents = '';
+	}
 
 	if (droppedAt && dragging.value) {
 		const item = event.altKey || globalKeyModifiers.value.alt ? markRaw(dragging.value.source[dragging.value.index]!.clone()) : dragging.value.source.splice(dragging.value.index, 1)[0]!;
@@ -93,13 +108,15 @@ function finishDrag(event: MouseEvent) {
 			console.log('same group figure smth out', droppedAt);
 		} else {
 			console.log('change group', event.altKey);
+			const index = droppedAt.index + (droppedAt.dropDirection === 'above' ? 0 : 1);
+			droppedAt.target.splice(index, 0, item);
 		}
 	}
 
 	dragTimeout = undefined;
+	disableDragTargetPointerEventsTimeout = undefined;
 	dragging.value = undefined;
 	droppedAt = undefined;
-	dragStartedAt = null;
 }
 
 function updateDragPreviewPosition(event: MouseEvent) {
@@ -161,13 +178,6 @@ onBeforeUnmount(() => {
 	window.removeEventListener('mouseup', finishDrag);
 	document.removeEventListener('mousemove', finishDrag);
 });
-
-function callIfNotDragging(callback: () => void) {
-	if (!dragStartedAt || (Date.now() - dragStartedAt) <= 300) {
-		callback();
-	}
-	dragStartedAt = null;
-}
 
 function clear(index: number, target: DamageSource[]) {
 	target[index] = markRaw(new DamageSource());
@@ -249,11 +259,11 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				:can-move-down="index !== damageSources.length - 1"
 				:data-index="index"
 				data-group="sources"
-				@clear="callIfNotDragging(() => clear(index, damageSources))"
-				@remove="callIfNotDragging(() => remove(index, damageSources))"
-				@duplicate="(shift) => callIfNotDragging(() => duplicate(index, damageSources, shift))"
-				@change-group="(alt) => callIfNotDragging(() => changeGroup(index, damageSources, alt))"
-				@move="(toIndex, alt) => callIfNotDragging(() => move(index, damageSources, toIndex, alt))"
+				@clear="clear(index, damageSources)"
+				@remove="remove(index, damageSources)"
+				@duplicate="duplicate(index, damageSources, $event)"
+				@change-group="changeGroup(index, damageSources, $event)"
+				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, index, damageSources, duplicate)"
 			/>
 			<li>
@@ -282,11 +292,11 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				:data-index="index"
 				data-group="targets"
 				is-right
-				@clear="callIfNotDragging(() => clear(index, damageTargets))"
-				@remove="callIfNotDragging(() => remove(index, damageTargets))"
-				@duplicate="(shift) => callIfNotDragging(() => duplicate(index, damageTargets, shift))"
-				@change-group="(alt) => callIfNotDragging(() => changeGroup(index, damageTargets, alt))"
-				@move="(toIndex, alt) => callIfNotDragging(() => move(index, damageTargets, toIndex, alt))"
+				@clear="clear(index, damageTargets)"
+				@remove="remove(index, damageTargets)"
+				@duplicate="duplicate(index, damageTargets, $event)"
+				@change-group="changeGroup(index, damageTargets, $event)"
+				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, index, damageTargets, duplicate)"
 			/>
 			<li>
