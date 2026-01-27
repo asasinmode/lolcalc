@@ -116,6 +116,10 @@ function finishDrag(event: MouseEvent) {
 			const index = droppedAt.index + (droppedAt.dropDirection === 'above' ? 0 : 1);
 			droppedAt.target.splice(index, 0, item);
 		}
+
+		if (!dragging.value.source.length) {
+			add(dragging.value.source);
+		}
 	}
 
 	dragTimeout = undefined;
