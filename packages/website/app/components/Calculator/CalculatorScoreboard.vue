@@ -3,6 +3,7 @@ const runes = useRunes();
 const text = useText();
 const { version, minorVersion } = usePatchVersion();
 const enableUnimplementedUi = useEnableUnimplementedUi();
+const globalKeyModifiers = useGlobalKeyModifiers();
 
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
@@ -84,18 +85,21 @@ function finishDrag(event: MouseEvent) {
 	}
 
 	if (droppedAt && dragging.value) {
-		const sameGroup = droppedAt.target === dragging.value.source;
-		console.log('dropped at', droppedAt.index, 'from', dragging.value.index);
+		const item = event.altKey || globalKeyModifiers.value.alt ? markRaw(dragging.value.source[dragging.value.index]!.clone()) : dragging.value.source.splice(dragging.value.index, 1)[0]!;
+		console.log('moving', event.altKey || globalKeyModifiers.value.alt, item);
 		if (droppedAt.index === 0 && !droppedAt.target[droppedAt.index]?.anythingFilled.value) {
-			droppedAt.target[droppedAt.index] = dragging.value.source.splice(dragging.value.index, 1)[0]!;
+			droppedAt.target[droppedAt.index] = item;
+		} else if (droppedAt.target === dragging.value.source) {
+			console.log('same group figure smth out', droppedAt);
 		} else {
-			console.log('figure smth out', droppedAt);
+			console.log('change group', event.altKey);
 		}
 	}
 
 	dragTimeout = undefined;
 	dragging.value = undefined;
 	droppedAt = undefined;
+	dragStartedAt = null;
 }
 
 function updateDragPreviewPosition(event: MouseEvent) {
@@ -128,14 +132,14 @@ function updateCurrentDropTarget(event: MouseEvent) {
 		return;
 	}
 
-	let index = Number.parseInt(element.dataset.index!);
+	const index = Number.parseInt(element.dataset.index!);
 	const target = element.dataset.group === 'sources' ? damageSources.value : damageTargets.value;
 	if (dragging.value.source === target && index === dragging.value.index) {
 		return;
 	}
 
 	const rect = element.getBoundingClientRect();
-	let dropDirection = event.clientY < (rect.y + rect.height / 2) ? 'above' : 'below';
+	let dropDirection: 'above' | 'below' = event.clientY < (rect.y + rect.height / 2) ? 'above' : 'below';
 
 	if (target === dragging.value.source) {
 		if (index === dragging.value.index - 1) {
