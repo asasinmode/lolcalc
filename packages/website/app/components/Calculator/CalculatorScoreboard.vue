@@ -99,15 +99,20 @@ function finishDrag(event: MouseEvent) {
 	}
 
 	if (droppedAt && dragging.value) {
-		const item = dragging.value.duplicate || event.altKey || globalKeyModifiers.value.alt
+		const duplicate = dragging.value.duplicate || event.altKey || globalKeyModifiers.value.alt;
+		const item = duplicate
 			? markRaw(dragging.value.source[dragging.value.index]!.clone())
 			: dragging.value.source.splice(dragging.value.index, 1)[0]!;
+
 		if (droppedAt.index === 0 && !droppedAt.target[droppedAt.index]?.anythingFilled.value) {
 			droppedAt.target[droppedAt.index] = item;
 		} else if (droppedAt.target === dragging.value.source) {
-			console.log('same group figure smth out', droppedAt);
+			let index = droppedAt.index + (droppedAt.dropDirection === 'above' ? 0 : 1);
+			if (!duplicate && index > dragging.value.index) {
+				index -= 1;
+			}
+			droppedAt.target.splice(index, 0, item);
 		} else {
-			console.log('change group', event.altKey);
 			const index = droppedAt.index + (droppedAt.dropDirection === 'above' ? 0 : 1);
 			droppedAt.target.splice(index, 0, item);
 		}
