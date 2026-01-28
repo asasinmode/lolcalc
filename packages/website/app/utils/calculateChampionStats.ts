@@ -5,6 +5,7 @@ interface IStatsCalculationResult {
 		base: IChampionStats;
 		level: Partial<IChampionStats>;
 		item: IChampionStats;
+		bonus: IChampionStats;
 		total: IChampionStats;
 	};
 	hasMana: boolean;
@@ -43,11 +44,14 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		moveSpeed: champion?.stats.movespeed ?? 0,
 	};
 
+	const bonusStats = Object.fromEntries(Object.entries(baseStats).map(([key]) => [key, 0])) as IChampionStats;
+
 	if (!champion) {
 		return {
 			hasMana: false,
 			stats: {
 				base: baseStats,
+				bonus: bonusStats,
 				item: baseStats,
 				level: baseStats,
 				total: baseStats,
@@ -127,6 +131,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		// + (runeShardStats[statName as keyof typeof runeShardStats] || 0)],
 	)) as IChampionStats;
 
+	for (const stat in bonusStats) {
+		// TODO add runes
+		bonusStats[stat as keyof typeof bonusStats]! += itemStats[stat as keyof typeof itemStats];
+	}
+
 	const totalStats = Object.fromEntries(Object.entries(levelAndRunesStats).map(
 		([statName, statValue]) => [statName, statValue
 		+ (itemStats[statName as keyof typeof itemStats] || 0)],
@@ -137,6 +146,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		stats: {
 			base: baseStats,
 			total: totalStats,
+			bonus: bonusStats,
 			item: itemStats,
 			level: levelStats,
 		},

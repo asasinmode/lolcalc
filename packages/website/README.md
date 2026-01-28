@@ -25,16 +25,18 @@ bun generate
 - [x] remove dialog/champ dialog search placeholders, only label
 - [ ] scoreboard ui
   - [x] red exclamation mark next to runes when incorrect
-  - [ ] buttons functionality
+  - [x] buttons functionality
     - [x] alt + move = duplicate
     - [x] shift + click remove = clear
-    - [ ] dragging
+    - [x] dragging
   - [ ] drag items
     - [ ] in current inventory
     - [ ] between inventories
   - [ ] mirror layout
   - [ ] first source/target is what's used in damage results
-  - [ ] expanded stats
+  - [ ] expanded
+    - [ ] stats
+    - [ ] current health/mana
     - [ ] dragons/souls
     - [ ] activate quest
 - [ ] results ui
@@ -62,7 +64,7 @@ bun generate
 - [ ] calculations
   - [ ] item passives (+ displaying values in tooltips)
   - [ ] champion passives
-  - [ ] role quests
+  - [ ] role quests [icon](https://raw.communitydragon.org/16.1/game/assets/ux/lol/)
 - [ ] mobile version
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
@@ -74,6 +76,16 @@ bun generate
 - [ ] tutorial popups with helpful info
   - [ ] dragging scoreboard elements
 - [ ] update browser to make sure everything works properly info
+  - chrome 125
+  - edge 125
+  - firefox 147
+  - opera 111
+  - safari 26
+  - chrome android 125
+  - firefox android 147
+  - opera android 83
+  - safari ios 26
+  - samsung internet 27
 - [ ] submit feedback on page / report issues
   - [ ] probably a rust server
   - [ ] github issue template

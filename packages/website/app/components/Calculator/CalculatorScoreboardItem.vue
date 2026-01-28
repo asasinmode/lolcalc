@@ -92,6 +92,47 @@ function toggleExpanded() {
 	}
 }
 
+onMounted(() => props.index === 0 && props.value && toggleExpanded());
+
+const championStats = computed(() => calculateChampionStats(props.value));
+
+const minorStats = computed<{
+	name: string;
+	icon: string;
+	description: string;
+	isPercentage?: boolean;
+	values: {
+		name: string;
+		base?: number;
+		bonus?: number;
+		total: number;
+	}[];
+	bottomText?: string;
+}[]>(() => {
+	const { stats } = championStats.value;
+	return [
+		{
+			name: 'Health | resource regeneration',
+			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <energy>Energy</energy>)',
+			icon: CHAMPION_STAT_ICON_NAMES.healthResourceRegen,
+			values: [
+				{
+					name: 'Health regen',
+					base: stats.base.hpRegen,
+					bonus: stats.bonus.hpRegen,
+					total: stats.total.hpRegen,
+				},
+				{
+					name: 'Resource regen',
+					base: stats.base.manaRegen,
+					bonus: stats.bonus.manaRegen,
+					total: stats.total.manaRegen,
+				},
+			],
+		},
+	];
+});
+
 const el = useTemplateRef('el');
 
 defineExpose({ el });
@@ -264,9 +305,35 @@ defineExpose({ el });
 			<summary>
 				details
 			</summary>
-			<div>
-				expanded info goes here
-			</div>
+			<dl>
+				<template v-for="(stat, statIndex) in minorStats" :key="statIndex">
+					<dt>
+						<span>{{ stat.name }}</span>
+						<img
+							v-bind="textureBgImageAttrs({ resWidth: 512, resHeight: 512, spriteSheet: 'assets/ux/lol/statspanel_atlas.png', uv: [258, 461, 282, 485] }, 20)"
+						>
+					</dt>
+					<dd :data-has-many="stat.values.length > 1" :data-has-bonus="stat.values.some(value => value.bonus)">
+						{{ stat.values.map(value => value.total).join(' | ') }}{{ stat.isPercentage ? '%' : '' }}
+					</dd>
+					<div popover="hint">
+						<h4>{{ stat.name }}</h4>
+						<p data-game-description="" v-html="stat.description" />
+						<dl>
+							<template v-for="(statValue, valueIndex) in stat.values" :key="`${statIndex}-${valueIndex}`">
+								<dt>{{ statValue.name }}:</dt>
+								<dd>
+									<span data-total="">{{ statValue.total }}</span>
+									<template v-if="'base' in statValue && 'bonus' in statValue">
+										(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
+									</template>
+								</dd>
+							</template>
+						</dl>
+						<p v-if="stat.bottomText" v-html="stat.bottomText" />
+					</div>
+				</template>
+			</dl>
 		</details>
 	</li>
 </template>
