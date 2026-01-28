@@ -448,6 +448,41 @@
 					]
 				}
 			}
+		},
+		"playerStats": {
+			"healthResourceRegen": {
+				"spriteSheet": "uiautoatlas/clientstates/gameplay/ux/lol/playerstats/atlas_0.png",
+				"resWidth": 12,
+				"resHeight": 12,
+				"uv": [
+					0.46875,
+					0.0625,
+					0.84375,
+					0.8125
+				]
+			},
+			"healShieldPower": {
+				"spriteSheet": "uiautoatlas/clientstates/gameplay/ux/lol/playerstats/atlas_0.png",
+				"resWidth": 12,
+				"resHeight": 12,
+				"uv": [
+					0.03125,
+					0.0625,
+					0.40625,
+					0.8125
+				]
+			},
+			"lethalityArmorPen": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					231,
+					435,
+					255,
+					459
+				]
+			}
 		}
 	}
 }
