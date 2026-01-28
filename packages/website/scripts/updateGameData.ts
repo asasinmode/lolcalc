@@ -764,22 +764,21 @@ function cleanupObject(obj?: object): any {
 	);
 }
 
-async function fetchCached(url: string, filename: string, responseMethod: 'text' | 'json' = 'json') {
+// TODO add image handling
+// TODO refetch all without cache, add flag --no-cache
+async function fetchCached(url: string, filename: string, responseMethod: 'text' | 'json' | 'arrayBuffer' = 'json') {
 	if (cacheHits[filename]) {
 		return cacheHits[filename];
 	}
 
-	const cacheFile = Bun.file(`${import.meta.dir}/.cache/${filename}`);
+	const cacheFile = Bun.file(`${import.meta.dir}/.cache/${minorVersion}/${filename}`);
 	let data;
 	if (await cacheFile.exists()) {
-		data = await cacheFile.json();
-		if (data.version !== latestVersion) {
-			data = undefined;
-		}
+		data = await cacheFile[responseMethod]();
 	}
 	if (!data) {
 		data = await fetch(url).then(r => r[responseMethod]());
-		await cacheFile.write(JSON.stringify(data, null, '\t'));
+		await cacheFile.write(responseMethod === 'json' ? JSON.stringify(data, null, '\t') : data);
 	}
 	cacheHits[filename] = data;
 	return data;
