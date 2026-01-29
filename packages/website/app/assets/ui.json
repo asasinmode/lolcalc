@@ -482,6 +482,149 @@
 					255,
 					459
 				]
+			},
+			"magicPen": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					258,
+					435,
+					282,
+					459
+				]
+			},
+			"lifeSteal": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					285,
+					461,
+					309,
+					485
+				]
+			},
+			"omnivamp": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					258,
+					461,
+					282,
+					485
+				]
+			},
+			"attackRange": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					312,
+					487,
+					336,
+					511
+				]
+			},
+			"tenacity": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					258,
+					487,
+					282,
+					511
+				]
+			},
+			"attackDamage": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					285,
+					409,
+					309,
+					433
+				]
+			},
+			"abilityPower": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					312,
+					409,
+					336,
+					433
+				]
+			},
+			"armor": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					285,
+					435,
+					309,
+					459
+				]
+			},
+			"magicResist": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					312,
+					435,
+					336,
+					459
+				]
+			},
+			"attackSpeed": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					231,
+					461,
+					255,
+					485
+				]
+			},
+			"abilityHaste": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					312,
+					461,
+					336,
+					485
+				]
+			},
+			"crit": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					231,
+					487,
+					255,
+					511
+				]
+			},
+			"moveSpeed": {
+				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
+				"resWidth": 512,
+				"resHeight": 512,
+				"uv": [
+					285,
+					487,
+					309,
+					511
+				]
 			}
 		}
 	}

@@ -545,11 +545,23 @@ if (true || !uiData || uiData?.version !== latestVersion) {
 					slcHover: { uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_BootsPanel/ItemShop_BootsPanel_PinButton/BootsPanel_PinButton_SlcHover'], 'slc hover pin')).uv },
 				},
 			},
-			// TODO add rest of stats
 			playerStats: Object.fromEntries(await Promise.all([
 				['healthResourceRegen', 'Player_AdvancedStats/Stats_HPR_Icon'],
 				['healShieldPower', 'Player_AdvancedStats/Stats_HSP_Icon'],
 				['lethalityArmorPen', 'Player_AdvancedStats/Stats_APen_Icon'],
+				['magicPen', 'Player_AdvancedStats/Stats_MPen_Icon'],
+				['lifeSteal', 'Player_AdvancedStats/Stats_LS_Icon'],
+				['omnivamp', 'Player_AdvancedStats/Stats_SV_Icon'],
+				['attackRange', 'Player_AdvancedStats/Stats_AR_Icon'],
+				['tenacity', 'Player_AdvancedStats/Stats_Ten_Icon'],
+				['attackDamage', 'Player_Stats/Stats_AD_Icon'],
+				['abilityPower', 'Player_Stats/Stats_AP_Icon'],
+				['armor', 'Player_Stats/Stats_Armor_Icon'],
+				['magicResist', 'Player_Stats/Stats_MR_Icon'],
+				['attackSpeed', 'Player_Stats/Stats_AS_Icon'],
+				['abilityHaste', 'Player_Stats/Stats_AH_Icon'],
+				['crit', 'Player_Stats/Stats_Crit_Icon'],
+				['moveSpeed', 'Player_Stats/Stats_MS_Icon'],
 			].map(async ([name, key]) => {
 				return [name, await getTexture(
 					playerstatsUiBase[`ClientStates/Gameplay/UX/LoL/PlayerStats/UIBase/${key}`],
