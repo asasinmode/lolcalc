@@ -3,6 +3,7 @@ import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composabl
 import type { IGameVariableType } from '../app/utils/gameVariable';
 import type { ITexture } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
+import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps';
 import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
 
@@ -433,7 +434,6 @@ if (await uiFile.exists()) {
 
 const uiAutoAtlasData: Record<string, any> = {};
 const autoAtlasImages: Record<string, {
-	url: string;
 	width: number;
 	height: number;
 }> = {};
@@ -462,17 +462,20 @@ if (true || !uiData || uiData?.version !== latestVersion) {
 
 			const { atlasPath, startX, startY, endX, endY } = uiAutoAtlasData[autoAtlasCdtbUrl][TextureData.TextureName];
 
-			// const autoAtlasImage = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/${atlasPath}`, `game/${atlasPath}`);
+			let resWidth, resHeight;
+			if (autoAtlasImages[atlasPath]) {
+				({ width: resWidth, height: resHeight } = autoAtlasImages[atlasPath]);
+			} else {
+				const image: ArrayBuffer = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/${atlasPath}`, `game/${atlasPath}`, 'arrayBuffer');
 
-			// autoAtlasImages[atlasPath] = {
-			// 	url: '',
-			// 	width: 123,
-			// 	height: 123,
-			// };
+				({ width: resWidth, height: resHeight } = imageSize(new Uint8Array(image)));
+				autoAtlasImages[atlasPath] = { width: resWidth, height: resHeight };
+			}
+
 			return {
 				spriteSheet: atlasPath,
-				resWidth: 12,
-				resHeight: 12,
+				resWidth,
+				resHeight,
 				uv: [startX, startY, endX, endY],
 			} as ITexture;
 		}
@@ -542,6 +545,7 @@ if (true || !uiData || uiData?.version !== latestVersion) {
 					slcHover: { uv: (await getTexture(itemshopUiBase['ClientStates/Gameplay/UX/ItemShop/UIBase/ItemShop/ItemShop_BootsPanel/ItemShop_BootsPanel_PinButton/BootsPanel_PinButton_SlcHover'], 'slc hover pin')).uv },
 				},
 			},
+			// TODO add rest of stats
 			playerStats: Object.fromEntries(await Promise.all([
 				['healthResourceRegen', 'Player_AdvancedStats/Stats_HPR_Icon'],
 				['healShieldPower', 'Player_AdvancedStats/Stats_HSP_Icon'],
@@ -764,8 +768,6 @@ function cleanupObject(obj?: object): any {
 	);
 }
 
-// TODO add image handling
-// TODO refetch all without cache, add flag --no-cache
 async function fetchCached(url: string, filename: string, responseMethod: 'text' | 'json' | 'arrayBuffer' = 'json') {
 	if (cacheHits[filename]) {
 		return cacheHits[filename];

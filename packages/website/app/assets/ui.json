@@ -452,8 +452,8 @@
 		"playerStats": {
 			"healthResourceRegen": {
 				"spriteSheet": "uiautoatlas/clientstates/gameplay/ux/lol/playerstats/atlas_0.png",
-				"resWidth": 12,
-				"resHeight": 12,
+				"resWidth": 64,
+				"resHeight": 32,
 				"uv": [
 					0.46875,
 					0.0625,
@@ -463,8 +463,8 @@
 			},
 			"healShieldPower": {
 				"spriteSheet": "uiautoatlas/clientstates/gameplay/ux/lol/playerstats/atlas_0.png",
-				"resWidth": 12,
-				"resHeight": 12,
+				"resWidth": 64,
+				"resHeight": 32,
 				"uv": [
 					0.03125,
 					0.0625,
