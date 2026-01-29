@@ -18,6 +18,7 @@ const emit = defineEmits<{
 }>();
 
 const runes = useRunes();
+const ui = useUi();
 const { version, minorVersion } = usePatchVersion();
 const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
@@ -98,11 +99,12 @@ const championStats = computed(() => calculateChampionStats(props.value));
 
 const minorStats = computed<{
 	name: string;
-	icon: string;
+	iconTextureKey: keyof (typeof ui)['playerStats'];
 	description: string;
 	isPercentage?: boolean;
 	values: {
 		name: string;
+		decimal?: boolean;
 		base?: number;
 		bonus?: number;
 		total: number;
@@ -114,7 +116,7 @@ const minorStats = computed<{
 		{
 			name: 'Health | resource regeneration',
 			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <energy>Energy</energy>)',
-			icon: CHAMPION_STAT_ICON_NAMES.healthResourceRegen,
+			iconTextureKey: 'healthResourceRegen',
 			values: [
 				{
 					name: 'Health regen',
@@ -305,16 +307,14 @@ defineExpose({ el });
 			<summary>
 				details
 			</summary>
-			<dl>
+			<dl data-player-stats="">
 				<template v-for="(stat, statIndex) in minorStats" :key="statIndex">
 					<dt>
 						<span>{{ stat.name }}</span>
-						<img
-							v-bind="textureBgImageAttrs({ resWidth: 512, resHeight: 512, spriteSheet: 'assets/ux/lol/statspanel_atlas.png', uv: [258, 461, 282, 485] }, 20)"
-						>
+						<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
 					</dt>
 					<dd :data-has-many="stat.values.length > 1" :data-has-bonus="stat.values.some(value => value.bonus)">
-						{{ stat.values.map(value => value.total).join(' | ') }}{{ stat.isPercentage ? '%' : '' }}
+						{{ stat.values.map(value => value.decimal ? roundVariable(value.total, 2) : Math.round(value.total)).join(' | ') }}{{ stat.isPercentage ? '%' : '' }}
 					</dd>
 					<div popover="hint">
 						<h4>{{ stat.name }}</h4>
@@ -460,6 +460,7 @@ defineExpose({ el });
 		}
 
 		> details {
+			@apply 'pt-4';
 			grid-area: expanded;
 
 			summary {
@@ -472,6 +473,25 @@ defineExpose({ el });
 
 			> :not(summary) {
 				@apply '-mt-6';
+			}
+
+			> [data-player-stats] {
+				@apply 'grid grid-rows-4 items-center gap-x-1 bg-cyan-950 b b-[--ui-button-border-clr] p-1.5';
+				grid-template-columns: max-content 1fr max-content 1fr;
+
+				> dt {
+					> :first-child {
+						@apply 'sr-only';
+					}
+
+					> img {
+						@apply '';
+					}
+				}
+
+				> dd {
+					@apply 'leading-[1]';
+				}
 			}
 		}
 	}

@@ -54,4 +54,5 @@ interface IUiData {
 			slcHover: Pick<ITexture, 'uv'>;
 		};
 	};
+	playerStats: Record<string, ITexture>;
 }
