@@ -1,3 +1,3 @@
-export const CHAMPION_STAT_ICON_NAMES = {
-	healthResourceRegen: '',
-};
+export function cooldownReductionPercentageFromHaste(haste: number) {
+	return haste / (haste + 100) * 100;
+}

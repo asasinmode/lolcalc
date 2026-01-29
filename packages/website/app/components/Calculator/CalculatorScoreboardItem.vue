@@ -97,22 +97,25 @@ onMounted(() => props.index === 0 && props.value && toggleExpanded());
 
 const championStats = computed(() => calculateChampionStats(props.value));
 
-const minorStats = computed<{
+interface IChampionStat {
 	name: string;
 	iconTextureKey: keyof (typeof ui)['playerStats'];
 	description: string;
-	isPercentage?: boolean;
 	values: {
 		name: string;
 		decimal?: boolean;
+		isPercentage?: boolean;
 		base?: number;
-		bonus?: number;
+		bonus: number;
 		total: number;
 	}[];
+	displayedValue: string;
 	bottomText?: string;
-}[]>(() => {
+}
+
+const minorStats = computed<IChampionStat[]>(() => {
 	const { stats } = championStats.value;
-	return [
+	const minorStats = [
 		{
 			name: 'Health | Resource Regeneration',
 			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <energy>Energy</energy>).',
@@ -136,13 +139,12 @@ const minorStats = computed<{
 			name: 'Heal and Shield Power',
 			description: 'Increases the effectiveness of <healing>Heals</healing> and <shields>Shields</shields>.',
 			iconTextureKey: 'healShieldPower',
-			isPercentage: true,
 			values: [
 				{
 					name: 'Heal and Shield Power',
-					base: stats.base.healShieldPower,
-					bonus: stats.bonus.healShieldPower,
 					total: stats.total.healShieldPower,
+					bonus: stats.total.healShieldPower,
+					isPercentage: true,
 				},
 			],
 		},
@@ -150,20 +152,18 @@ const minorStats = computed<{
 			name: 'Lethality | Armor Penetration',
 			description: 'Ignores an amount of your target\'s <scalearmor>Armor</scalearmor> when applying <physicaldamage>physical damage</physicaldamage>.<br><br><scalelethality>Lethality</scalelethality> ignores a flat amount, <scalelethality>Armor Penetration</scalelethality> ignores a percentage amount',
 			iconTextureKey: 'armorPen',
-			isPercentage: true,
 			values: [
 				{
 					name: 'Lethality',
-					base: stats.base.lethality,
 					bonus: stats.bonus.lethality,
 					total: stats.total.lethality,
 				},
 				{
 					name: 'Armor Penetration',
 					decimal: true,
-					base: stats.base.percentArmorPen,
 					bonus: stats.bonus.percentArmorPen,
 					total: stats.total.percentArmorPen,
+					isPercentage: true,
 				},
 			],
 		},
@@ -171,20 +171,18 @@ const minorStats = computed<{
 			name: 'Magic Penetration',
 			description: 'Ignores an amount of your target\'s <scalemr>Magic Resist</scalemr> when applying <magicdamage>magic damage</magicdamage>.',
 			iconTextureKey: 'magicPen',
-			isPercentage: true,
 			values: [
 				{
 					name: 'Flat Magic Penetration',
-					base: stats.base.flatMagicPen,
 					bonus: stats.bonus.flatMagicPen,
 					total: stats.total.flatMagicPen,
 				},
 				{
 					name: 'Magic Penetration',
 					decimal: true,
-					base: stats.base.percentMagicPen,
 					bonus: stats.bonus.percentMagicPen,
 					total: stats.total.percentMagicPen,
+					isPercentage: true,
 				},
 			],
 		},
@@ -192,13 +190,12 @@ const minorStats = computed<{
 			name: 'Life Steal',
 			description: 'Returns a portion of the damage you deal with Attacks as <scalehealth>Health</scalehealth>.',
 			iconTextureKey: 'lifeSteal',
-			isPercentage: true,
 			values: [
 				{
 					name: 'Life Steal',
-					base: stats.base.lifeSteal,
 					bonus: stats.bonus.lifeSteal,
 					total: stats.total.lifeSteal,
+					isPercentage: true,
 				},
 			],
 		},
@@ -206,13 +203,12 @@ const minorStats = computed<{
 			name: 'Omnivamp',
 			description: 'Returns a portion of all damage you deal as <scalehealth>Health</scalehealth>.<br><br>Reduced to 20% effectiveness when dealing damage to minions or monsters.',
 			iconTextureKey: 'omnivamp',
-			isPercentage: true,
 			values: [
 				{
 					name: 'Omnivamp',
-					base: stats.base.omnivamp,
 					bonus: stats.bonus.omnivamp,
 					total: stats.total.omnivamp,
+					isPercentage: true,
 				},
 			],
 		},
@@ -233,17 +229,160 @@ const minorStats = computed<{
 			name: 'Tenacity',
 			description: 'Reduces the duration of crowd control debuffs, such as <keyword>Slows</keyword> and <keyword>Stuns</keyword>.<br><br>Does not affect <keyword>Airborne</keyword> and <keyword>Suppression</keyword>.',
 			iconTextureKey: 'tenacity',
-			isPercentage: true,
 			values: [
 				{
 					name: 'Tenacity',
-					base: stats.base.tenacity,
 					bonus: stats.bonus.tenacity,
 					total: stats.total.tenacity,
+					isPercentage: true,
 				},
 			],
 		},
-	];
+	] as IChampionStat[];
+
+	for (const stat of minorStats) {
+		stat.displayedValue = stat.values.map(
+			(value) => {
+				const multiplier = value.isPercentage ? 100 : 1;
+				return `${value.decimal
+					? roundVariable(value.total * multiplier, 2)
+					: Math.round(value.total * multiplier)}${value.isPercentage ? '%' : ''}`;
+			},
+		)
+			.join(' | ');
+	}
+
+	return minorStats;
+});
+
+const majorStats = computed<IChampionStat[]>(() => {
+	const { stats } = championStats.value;
+	const majorStats = [
+		{
+			name: 'Attack Damage',
+			description: 'The amount of <physicaldamage>physical damage</physicaldamage> your Attack deal.<br><br>Also increases the amount of damage you deal with certain Abilities.',
+			iconTextureKey: 'attackDamage',
+			values: [
+				{
+					name: 'Attack Damage',
+					base: stats.base.attackDamage,
+					bonus: stats.bonus.attackDamage,
+					total: stats.total.attackDamage,
+				},
+			],
+		},
+		{
+			name: 'Ability Power',
+			description: 'Increases the amount of damage you deal with most Abilities.',
+			iconTextureKey: 'abilityPower',
+			values: [
+				{
+					name: 'Ability Power',
+					bonus: stats.bonus.abilityPower,
+					total: stats.total.abilityPower,
+				},
+			],
+		},
+		{
+			name: 'Armor',
+			description: 'Reduces the amount of <physicaldamage>magic damage</physicaldamage> you take.',
+			iconTextureKey: 'armor',
+			values: [
+				{
+					name: 'Armor',
+					base: stats.base.armor,
+					bonus: stats.bonus.armor,
+					total: stats.total.armor,
+				},
+			],
+			bottomText: `You take <span data-base="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced physical damage`,
+		},
+		{
+			name: 'Magic Resist',
+			description: 'Reduces the amount of <magicdamage>magic damage</magicdamage> you take.',
+			iconTextureKey: 'magicResist',
+			values: [
+				{
+					name: 'Magic Resist',
+					base: stats.base.magicResist,
+					bonus: stats.bonus.magicResist,
+					total: stats.total.magicResist,
+				},
+			],
+			bottomText: `You take <span data-base="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced magic damage`,
+		},
+		{
+			name: 'Attack Speed',
+			description: 'Increases the rate at which you can Attack.<br><br>Ratio determines the effectiveness of bonus Attack Speed.',
+			iconTextureKey: 'attackSpeed',
+			values: [
+				{
+					name: 'Bonus Attack Speed',
+					bonus: stats.bonus.bonusAttackSpeedPercent,
+					total: stats.total.bonusAttackSpeedPercent,
+					isPercentage: true,
+				},
+				{
+					name: 'Attacks per second',
+					total: stats.total.attackSpeed,
+				},
+				{
+					name: 'Ratio',
+					total: stats.total.attackSpeedRatio,
+					isPercentage: true,
+				},
+			],
+			displayedValue: stats.total.attackSpeed.toFixed(2),
+		},
+		{
+			name: 'Ability Haste',
+			description: 'Allows you to cast your Abilities more often',
+			iconTextureKey: 'abilityHaste',
+			values: [
+				{
+					name: 'Current Ability Haste',
+					bonus: stats.bonus.abilityHaste,
+					total: stats.total.abilityHaste,
+				},
+			],
+			bottomText: `Equivalent to reducing your Ability cooldowns by <span data-total="">${Math.round(cooldownReductionPercentageFromHaste(stats.total.abilityHaste))}</span>%`,
+		},
+		{
+			name: 'Critical Strike Chance',
+			description: 'Grants a change to deal 100% increased damage on each Attack.',
+			iconTextureKey: 'crit',
+			values: [
+				{
+					name: 'Critical Strike Chance',
+					bonus: stats.bonus.critChance,
+					total: stats.total.critChance,
+					isPercentage: true,
+				},
+			],
+		},
+		{
+			name: 'Move Speed',
+			description: 'The speed at which you travel.',
+			iconTextureKey: 'moveSpeed',
+			values: [
+				{
+					name: 'Move Speed',
+					base: stats.base.moveSpeed,
+					bonus: stats.bonus.moveSpeed,
+					total: stats.total.moveSpeed,
+				},
+			],
+		},
+	] as IChampionStat[];
+
+	for (const stat of majorStats) {
+		stat.displayedValue ||= stat.values.map(
+			value => value.decimal ? roundVariable(value.total * (value.isPercentage ? 100 : 1), 2) : Math.round(value.total * (value.isPercentage ? 100 : 1)) + (value.isPercentage ? '%' : ''),
+		)
+			.join(' | ');
+	}
+
+	return majorStats;
 });
 
 const el = useTemplateRef('el');
@@ -418,24 +557,24 @@ defineExpose({ el });
 			<summary>
 				details
 			</summary>
-			<dl data-player-stats="">
-				<template v-for="(stat, statIndex) in minorStats" :key="statIndex">
+			<dl v-for="(stats, statKindIndex) in [minorStats, majorStats]" :key="statKindIndex" data-player-stats="">
+				<template v-for="(stat, statIndex) in stats" :key="`${statKindIndex}-${statIndex}`">
 					<dt>
 						<span>{{ stat.name }}</span>
 						<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
 					</dt>
 					<dd :data-has-bonus="stat.values.some(value => value.bonus) || undefined">
-						{{ stat.values.map(value => value.decimal ? roundVariable(value.total, 2) : Math.round(value.total)).join(' | ') }}{{ stat.isPercentage ? '%' : '' }}
+						{{ stat.displayedValue }}
 					</dd>
 					<div popover="hint">
 						<h4>{{ stat.name }}</h4>
 						<p data-game-description="" v-html="stat.description" />
 						<dl>
-							<template v-for="(statValue, valueIndex) in stat.values" :key="`${statIndex}-${valueIndex}`">
+							<template v-for="(statValue, valueIndex) in stat.values" :key="`${statKindIndex}-${statIndex}-${valueIndex}`">
 								<dt>{{ statValue.name }}:</dt>
 								<dd>
 									<span data-total="">{{ statValue.total }}</span>
-									<template v-if="'base' in statValue && 'bonus' in statValue">
+									<template v-if="'base' in statValue">
 										(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
 									</template>
 								</dd>
@@ -599,7 +738,12 @@ defineExpose({ el });
 
 			> [data-player-stats] {
 				@apply 'grid grid-rows-4 items-center whitespace-nowrap gap-y-1 gap-x-1 bg-cyan-950 b b-[--ui-button-border-clr] p-1.5 w-fit';
-				grid-template-columns: max-content 5rem max-content 5rem;
+
+				grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
+
+				&:nth-of-type(2) {
+					@apply 'b-t-0';
+				}
 
 				> dt {
 					> :first-child {
