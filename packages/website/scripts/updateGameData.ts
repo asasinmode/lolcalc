@@ -548,7 +548,7 @@ if (true || !uiData || uiData?.version !== latestVersion) {
 			playerStats: Object.fromEntries(await Promise.all([
 				['healthResourceRegen', 'Player_AdvancedStats/Stats_HPR_Icon'],
 				['healShieldPower', 'Player_AdvancedStats/Stats_HSP_Icon'],
-				['lethalityArmorPen', 'Player_AdvancedStats/Stats_APen_Icon'],
+				['armorPen', 'Player_AdvancedStats/Stats_APen_Icon'],
 				['magicPen', 'Player_AdvancedStats/Stats_MPen_Icon'],
 				['lifeSteal', 'Player_AdvancedStats/Stats_LS_Icon'],
 				['omnivamp', 'Player_AdvancedStats/Stats_SV_Icon'],

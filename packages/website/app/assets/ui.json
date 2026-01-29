@@ -472,7 +472,7 @@
 					26
 				]
 			},
-			"lethalityArmorPen": {
+			"armorPen": {
 				"spriteSheet": "assets/ux/lol/statspanel_atlas.png",
 				"resWidth": 512,
 				"resHeight": 512,

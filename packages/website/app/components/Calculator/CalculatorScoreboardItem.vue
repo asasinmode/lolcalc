@@ -114,21 +114,132 @@ const minorStats = computed<{
 	const { stats } = championStats.value;
 	return [
 		{
-			name: 'Health | resource regeneration',
-			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <energy>Energy</energy>)',
+			name: 'Health | Resource Regeneration',
+			description: 'The amount of <scalehealth>Health</scalehealth> you regenerate over 5 seconds.<br/><br/>The amount of Ability resource you regenerate over 5 seconds (usually <scalemana>Mana</scalemana> or <energy>Energy</energy>).',
 			iconTextureKey: 'healthResourceRegen',
 			values: [
 				{
-					name: 'Health regen',
+					name: 'Health Regen',
 					base: stats.base.hpRegen,
 					bonus: stats.bonus.hpRegen,
 					total: stats.total.hpRegen,
 				},
 				{
-					name: 'Resource regen',
+					name: 'Resource Regen',
 					base: stats.base.manaRegen,
 					bonus: stats.bonus.manaRegen,
 					total: stats.total.manaRegen,
+				},
+			],
+		},
+		{
+			name: 'Heal and Shield Power',
+			description: 'Increases the effectiveness of <healing>Heals</healing> and <shields>Shields</shields>.',
+			iconTextureKey: 'healShieldPower',
+			isPercentage: true,
+			values: [
+				{
+					name: 'Heal and Shield Power',
+					base: stats.base.healShieldPower,
+					bonus: stats.bonus.healShieldPower,
+					total: stats.total.healShieldPower,
+				},
+			],
+		},
+		{
+			name: 'Lethality | Armor Penetration',
+			description: 'Ignores an amount of your target\'s <scalearmor>Armor</scalearmor> when applying <physicaldamage>physical damage</physicaldamage>.<br><br><scalelethality>Lethality</scalelethality> ignores a flat amount, <scalelethality>Armor Penetration</scalelethality> ignores a percentage amount',
+			iconTextureKey: 'armorPen',
+			isPercentage: true,
+			values: [
+				{
+					name: 'Lethality',
+					base: stats.base.lethality,
+					bonus: stats.bonus.lethality,
+					total: stats.total.lethality,
+				},
+				{
+					name: 'Armor Penetration',
+					decimal: true,
+					base: stats.base.percentArmorPen,
+					bonus: stats.bonus.percentArmorPen,
+					total: stats.total.percentArmorPen,
+				},
+			],
+		},
+		{
+			name: 'Magic Penetration',
+			description: 'Ignores an amount of your target\'s <scalemr>Magic Resist</scalemr> when applying <magicdamage>magic damage</magicdamage>.',
+			iconTextureKey: 'magicPen',
+			isPercentage: true,
+			values: [
+				{
+					name: 'Flat Magic Penetration',
+					base: stats.base.flatMagicPen,
+					bonus: stats.bonus.flatMagicPen,
+					total: stats.total.flatMagicPen,
+				},
+				{
+					name: 'Magic Penetration',
+					decimal: true,
+					base: stats.base.percentMagicPen,
+					bonus: stats.bonus.percentMagicPen,
+					total: stats.total.percentMagicPen,
+				},
+			],
+		},
+		{
+			name: 'Life Steal',
+			description: 'Returns a portion of the damage you deal with Attacks as <scalehealth>Health</scalehealth>.',
+			iconTextureKey: 'lifeSteal',
+			isPercentage: true,
+			values: [
+				{
+					name: 'Life Steal',
+					base: stats.base.lifeSteal,
+					bonus: stats.bonus.lifeSteal,
+					total: stats.total.lifeSteal,
+				},
+			],
+		},
+		{
+			name: 'Omnivamp',
+			description: 'Returns a portion of all damage you deal as <scalehealth>Health</scalehealth>.<br><br>Reduced to 20% effectiveness when dealing damage to minions or monsters.',
+			iconTextureKey: 'omnivamp',
+			isPercentage: true,
+			values: [
+				{
+					name: 'Omnivamp',
+					base: stats.base.omnivamp,
+					bonus: stats.bonus.omnivamp,
+					total: stats.total.omnivamp,
+				},
+			],
+		},
+		{
+			name: 'Attack Range',
+			description: 'The distance at which you can Attack.',
+			iconTextureKey: 'attackRange',
+			values: [
+				{
+					name: 'Attack Range',
+					base: stats.base.attackRange,
+					bonus: stats.bonus.attackRange,
+					total: stats.total.attackRange,
+				},
+			],
+		},
+		{
+			name: 'Tenacity',
+			description: 'Reduces the duration of crowd control debuffs, such as <keyword>Slows</keyword> and <keyword>Stuns</keyword>.<br><br>Does not affect <keyword>Airborne</keyword> and <keyword>Suppression</keyword>.',
+			iconTextureKey: 'tenacity',
+			isPercentage: true,
+			values: [
+				{
+					name: 'Tenacity',
+					base: stats.base.tenacity,
+					bonus: stats.bonus.tenacity,
+					total: stats.total.tenacity,
 				},
 			],
 		},
@@ -313,7 +424,7 @@ defineExpose({ el });
 						<span>{{ stat.name }}</span>
 						<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
 					</dt>
-					<dd :data-has-many="stat.values.length > 1" :data-has-bonus="stat.values.some(value => value.bonus)">
+					<dd :data-has-bonus="stat.values.some(value => value.bonus) || undefined">
 						{{ stat.values.map(value => value.decimal ? roundVariable(value.total, 2) : Math.round(value.total)).join(' | ') }}{{ stat.isPercentage ? '%' : '' }}
 					</dd>
 					<div popover="hint">
@@ -459,38 +570,49 @@ defineExpose({ el });
 			grid-area: items;
 		}
 
+		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */
+		/* > ::details-content { */
+		/* 	@apply '-mt-6'; */
+		/* 	interpolate-size: allow-keywords; */
+		/* 	height: 0; */
+		/* 	overflow: clip; */
+		/* 	transition-duration: 2s; */
+		/* 	transition-timing-function: ease-in-out; */
+		/* 	transition-property: height, content-visibility; */
+		/* 	transition-behavior: allow-discrete; */
+		/* } */
+
+		/* > [open]::details-content { */
+		/* 	height: auto; */
+		/* } */
+
 		> details {
-			@apply 'pt-4';
 			grid-area: expanded;
+
+			&::details-content {
+				@apply 'pt-4 -mt-6';
+			}
 
 			summary {
 				@apply 'list-none invisible pointer-events-none';
-
-				&::-webkit-details-marker {
-					@apply 'hidden';
-				}
-			}
-
-			> :not(summary) {
-				@apply '-mt-6';
 			}
 
 			> [data-player-stats] {
-				@apply 'grid grid-rows-4 items-center gap-x-1 bg-cyan-950 b b-[--ui-button-border-clr] p-1.5';
-				grid-template-columns: max-content 1fr max-content 1fr;
+				@apply 'grid grid-rows-4 items-center whitespace-nowrap gap-y-1 gap-x-1 bg-cyan-950 b b-[--ui-button-border-clr] p-1.5 w-fit';
+				grid-template-columns: max-content 5rem max-content 5rem;
 
 				> dt {
 					> :first-child {
 						@apply 'sr-only';
 					}
-
-					> img {
-						@apply '';
-					}
 				}
 
 				> dd {
 					@apply 'leading-[1]';
+
+					&[data-has-bonus] {
+						@apply 'text-yellow-200';
+					}
 				}
 			}
 		}
