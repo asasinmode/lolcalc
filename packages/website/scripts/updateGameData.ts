@@ -476,7 +476,7 @@ if (true || !uiData || uiData?.version !== latestVersion) {
 				spriteSheet: atlasPath,
 				resWidth,
 				resHeight,
-				uv: [startX, startY, endX, endY],
+				uv: [startX * resWidth, startY * resHeight, endX * resWidth, endY * resHeight],
 			} as ITexture;
 		}
 
