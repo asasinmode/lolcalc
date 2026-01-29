@@ -151,7 +151,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		'6032',	// stat bonus
 		'2421', // shattered armguard
 		'3039',	// atma's reckoning
-		'3095', // stormrazor
+		'3095', // stormrazor, there are 2 for some reason
 	];
 
 	const MAPS = useMaps();
@@ -182,7 +182,8 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				const { name, stats, gold, image, into: rawInto, from: rawFrom, tags, maps: { 11: sr, 12: ha } } = itemData as any;
 
 				let mapMask = 0;
-				if (sr) {
+				// aram guardian items, seem to have been added to sr with swiftplay
+				if (sr && !['2051', '3112', '3177', '3184'].includes(itemId)) {
 					mapMask |= MAPS.sr.mask;
 				}
 				if (ha) {
@@ -438,7 +439,7 @@ const autoAtlasImages: Record<string, {
 	height: number;
 }> = {};
 
-if (true || !uiData || uiData?.version !== latestVersion) {
+if (!uiData || uiData?.version !== latestVersion) {
 	console.log('ui data not present or outdated, fetching...');
 
 	const itemshopUiBase = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json');

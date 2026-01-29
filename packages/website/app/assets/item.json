@@ -982,7 +982,7 @@
 				"sell": 665
 			},
 			"image": "2051.png",
-			"mapMask": 3,
+			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [
 				15,
@@ -4268,7 +4268,7 @@
 				"sell": 665
 			},
 			"image": "3112.png",
-			"mapMask": 3,
+			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [
 				3
@@ -5985,7 +5985,7 @@
 				"sell": 665
 			},
 			"image": "3177.png",
-			"mapMask": 3,
+			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [
 				10
@@ -6217,7 +6217,7 @@
 				"sell": 665
 			},
 			"image": "3184.png",
-			"mapMask": 3,
+			"mapMask": 2,
 			"epicness": 1,
 			"categories": {
 				"fighter": true,
