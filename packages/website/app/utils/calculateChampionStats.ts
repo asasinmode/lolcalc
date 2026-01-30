@@ -70,7 +70,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		armor: champion.stats.armorperlevel,
 		magicResist: champion.stats.spellblockperlevel,
 		attackSpeed: champion.stats.attackspeedperlevel * 0.01 * champion.stats.attackspeedratio,
-		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel,
+		bonusAttackSpeedPercent: champion.stats.attackspeedperlevel / 100,
 		critChance: champion.stats.critperlevel,
 	};
 
@@ -111,7 +111,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	const baseWithFlatFlatItemMoveSpeed = (baseOnLevelStats.moveSpeed + itemStats.moveSpeed);
 
 	itemStats.moveSpeed += baseWithFlatFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
-	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio;
+	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio * 100;
 
 	// TODO make sure it works, calculate runes
 	// const [adaptiveForceTargetStat, adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
@@ -120,12 +120,13 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	// const runeShardStats: Partial<IChampionStats> = {
 	// 	...preAdaptiveRuneShardStats,
 	// 	moveSpeed: baseWithFlatFlatItemMoveSpeed * preAdaptiveRuneShardStats.percentMoveSpeedMod,
-	// 	attackSpeed: preAdaptiveRuneShardStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio,
+	// 	attackSpeed: preAdaptiveRuneShardStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio * 100,
 	// 	[adaptiveForceTargetStat]: runeShardsAdaptiveForce * adaptiveForceStatMultiplier,
 	// };
 
+	// TODO changed attack speed on champion to be kept as % (0.25 instead 25), make sure everything ok, the multipcation below can be removed
 	// to keep it consistent with the way it's displayed stored on `champion.stats.attackspeedperlevel`
-	itemStats.bonusAttackSpeedPercent *= 100;
+	// itemStats.bonusAttackSpeedPercent *= 100;
 	// runeShardStats.bonusAttackSpeedPercent! *= 100;
 
 	const levelAndRunesStats = Object.fromEntries(Object.entries(baseOnLevelStats).map(
@@ -133,6 +134,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		// + (runeShardStats[statName as keyof typeof runeShardStats] || 0)],
 	)) as IChampionStats;
 
+	bonusStats.bonusAttackSpeedPercent += baseOnLevelStats.bonusAttackSpeedPercent;
 	for (const stat in bonusStats) {
 		// TODO add runes
 		bonusStats[stat as keyof typeof bonusStats]! += itemStats[stat as keyof typeof itemStats];
@@ -247,9 +249,6 @@ function getAdaptiveForceStat(championId: string, attackDamage: number, abilityP
 // 	return stats;
 // }
 
-export type IChampionStats = Record<IChampionStatName, number> & {
-	/** in percentage points, same as in game when hovering over attack speed */
-	bonusAttackSpeedPercent: number;
-};
+export type IChampionStats = Record<IChampionStatName, number>;
 
 export type IChampionStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResist' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';

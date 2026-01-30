@@ -311,6 +311,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 					bonus: stats.bonus.bonusAttackSpeedPercent,
 					total: stats.total.bonusAttackSpeedPercent,
 					isPercentage: true,
+					decimal: 5,
 				},
 				{
 					name: 'Attacks per second',
@@ -397,9 +398,9 @@ function updateComputedStats(stats: IChampionStat[]) {
 }
 
 function formatStatValue(multiplier: number, value: IChampionStat['values'][number], key: 'total' | 'base' | 'bonus') {
-	return `${value.decimal
+	return value.decimal
 		? roundVariable(value[key] as number * multiplier, value.decimal)
-		: Math.round(value[key] as number * multiplier)}`;
+		: Math.round(value[key] as number * multiplier);
 }
 
 const hoveredStat = shallowRef<IChampionStat>();
