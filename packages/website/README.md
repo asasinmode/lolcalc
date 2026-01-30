@@ -37,8 +37,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] mirror layout
   - [ ] first source/target is what's used in damage results
   - [ ] expanded
-    - [ ] stats
+    - [x] stats
     - [ ] current health/mana
+    - [ ] passive/abilities (not implemented, coming soon)
+    - [ ] runes
     - [ ] dragons/souls
     - [ ] activate quest
 - [ ] results ui

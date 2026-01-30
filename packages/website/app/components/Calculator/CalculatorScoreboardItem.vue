@@ -413,7 +413,7 @@ function showStatTooltip(event: MouseEvent, stat: IChampionStat) {
 }
 
 function hideStatTooltip() {
-	// hoveredStatTooltip.value?.hidePopover();
+	hoveredStatTooltip.value?.hidePopover();
 }
 
 const el = useTemplateRef('el');
@@ -588,42 +588,46 @@ defineExpose({ el });
 			<summary>
 				details
 			</summary>
-			<dl
-				v-for="(stats, statKindIndex) in [minorStats, majorStats]"
-				:key="statKindIndex"
-				data-champion-stats=""
-			>
-				<template v-for="(stat, statIndex) in stats" :key="`${statKindIndex}-${statIndex}`">
-					<dt @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
-						<span>{{ stat.name }}</span>
-						<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
-					</dt>
-					<dd
-						:data-has-bonus="stat.values.some(value => value.bonus) || undefined"
-						@mouseenter="showStatTooltip($event, stat)"
-						@mouseleave="hideStatTooltip"
-					>
-						{{ stat.displayedValue }}
-					</dd>
-				</template>
-			</dl>
-			<div id="champion-stat-hover-tooltip" ref="championStatTooltip" popover="hint">
-				<h4>{{ hoveredStat?.name }}</h4>
-				<p data-game-description="" v-html="hoveredStat?.description" />
-				<dl>
-					<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
-						<dt>{{ statValue.name }}:</dt>
-						<dd :data-has-bonus="statValue.bonus || undefined">
-							<span data-total="">{{ statValue.total }}</span>{{ statValue.isPercentage ? '%' : '' }}
-							<template v-if="'base' in statValue">
-								(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
-							</template>
+			<section data-champion-stats="">
+				<dl
+					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
+					:key="statKindIndex"
+				>
+					<template v-for="(stat, statIndex) in stats" :key="`${statKindIndex}-${statIndex}`">
+						<dt @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
+							<span>{{ stat.name }}</span>
+							<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
+						</dt>
+						<dd
+							:data-has-bonus="stat.values.some(value => value.bonus) || undefined"
+							@mouseenter="showStatTooltip($event, stat)"
+							@mouseleave="hideStatTooltip"
+						>
+							{{ stat.displayedValue }}
 						</dd>
-						<br v-if="valueIndex !== ((hoveredStat?.values.length || 1) - 1)">
 					</template>
 				</dl>
-				<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
-			</div>
+				<div id="champion-stat-hover-tooltip" ref="championStatTooltip" popover="hint">
+					<h4>{{ hoveredStat?.name }}</h4>
+					<p data-game-description="" v-html="hoveredStat?.description" />
+					<dl>
+						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
+							<dt>{{ statValue.name }}:</dt>
+							<dd :data-has-bonus="statValue.bonus || undefined">
+								<span data-total="">{{ statValue.total }}</span>{{ statValue.isPercentage ? '%' : '' }}
+								<template v-if="'base' in statValue">
+									(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
+								</template>
+							</dd>
+							<br v-if="valueIndex !== ((hoveredStat?.values.length || 1) - 1)">
+						</template>
+					</dl>
+					<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
+				</div>
+			</section>
+			<section data-champion-abilities="">
+				here go abilities
+			</section>
 		</details>
 	</li>
 </template>
@@ -770,7 +774,7 @@ defineExpose({ el });
 			grid-area: expanded;
 
 			&::details-content {
-				--at-apply: 'pt-4 -mt-6';
+				--at-apply: 'pt-4 -mt-6 flex';
 			}
 
 			summary {
@@ -778,31 +782,33 @@ defineExpose({ el });
 			}
 
 			> [data-champion-stats] {
-				--at-apply: 'grid grid-rows-4 items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
+				> dl {
+					--at-apply: 'grid grid-rows-4 items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
 
-				&:first-of-type {
-					anchor-name: --champion-stats-minor;
-				}
-
-				grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
-
-				&:nth-of-type(2) {
-					--at-apply: 'b-t-0';
-				}
-
-				> dt {
-					--at-apply: 'py-0.5 ps-0.5';
-
-					> :first-child {
-						--at-apply: 'sr-only';
+					&:first-of-type {
+						anchor-name: --champion-stats-minor;
 					}
-				}
 
-				> dd {
-					--at-apply: 'leading-5 h-full w-max ps-1.5 py-0.5 pe-0.5';
+					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
 
-					&[data-has-bonus] {
-						--at-apply: 'text-yellow-200';
+					&:nth-of-type(2) {
+						--at-apply: 'b-t-0';
+					}
+
+					> dt {
+						--at-apply: 'py-0.5 ps-0.5';
+
+						> :first-child {
+							--at-apply: 'sr-only';
+						}
+					}
+
+					> dd {
+						--at-apply: 'leading-5 h-full w-max ps-1.5 py-0.5 pe-0.5';
+
+						&[data-has-bonus] {
+							--at-apply: 'text-yellow-200';
+						}
 					}
 				}
 			}
@@ -853,6 +859,10 @@ defineExpose({ el });
 				p:last-child {
 					--at-apply: 'mt-1';
 				}
+			}
+
+			> [data-champion-abilities] {
+				@apply 'bg-pink-950';
 			}
 		}
 	}
