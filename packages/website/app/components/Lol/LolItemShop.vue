@@ -359,7 +359,7 @@ defineExpose({
 			<h1 class="col-span-full">
 				Item shop
 			</h1>
-			<form method="dialog" class="right-0 top-0 absolute" autofocus>
+			<form method="dialog" class="end-0 top-0 absolute" autofocus>
 				<button value="cancel" title="Close">
 					<Icon class="i-ph:x size-6" />
 					<span class="sr-only">
@@ -373,7 +373,7 @@ defineExpose({
 					ref="searchInput"
 					v-model="search"
 					type="text"
-					class="py-0.5 pl-8 pr-2 b bg-black w-full"
+					class="py-0.5 pe-2 ps-8 b bg-black w-full"
 					role="combobox"
 					autocomplete="list"
 					:aria-expanded="searchExpanded"
@@ -385,12 +385,12 @@ defineExpose({
 					@keydown="onSearchKeydown"
 				>
 				<label id="item-shop-search-lbl" for="item-shop-search" class="px-2 py-0.5 b b-transparent">
-					<Icon class="i-ph:magnifying-glass-bold mr-2 size-4" />
+					<Icon class="i-ph:magnifying-glass-bold me-2 size-4" />
 					<span>
 						Click Here to Search
 					</span>
 				</label>
-				<button class="px-2 grid h-full right-0 top-0 place-items-center absolute" @mousedown.prevent="clearSearch">
+				<button class="px-2 grid h-full end-0 top-0 place-items-center absolute" @mousedown.prevent="clearSearch">
 					<span class="sr-only">
 						Clear
 					</span>
@@ -399,7 +399,7 @@ defineExpose({
 				<div
 					v-show="searchExpanded"
 					ref="searchResultsContainer"
-					class="bg-blue-950 grid grid-flow-col grid-cols-[auto_1fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full bottom-0 left-0 absolute z-10"
+					class="bg-blue-950 grid grid-flow-col grid-cols-[auto_1fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10"
 					@mousedown.prevent=""
 				>
 					<p id="item-shop-results-lbl">
@@ -523,7 +523,7 @@ defineExpose({
 			</h2>
 			<button
 				id="item-shop-pin-panel-boots"
-				class="op-0 left-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5"
+				class="op-0 start-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5"
 				@click="bootsPanelPinned = !bootsPanelPinned"
 			>
 				<span class="sr-only">Pin boots panel</span>
@@ -738,7 +738,7 @@ defineExpose({
 	}
 
 	[data-sprite-image] {
-		@apply object-none bg-no-repeat;
+		--at-apply: object-none bg-no-repeat;
 		background-position: calc(var(--txt-uv-start-x) * var(--txt-scale)) calc(var(--txt-uv-start-y) * var(--txt-scale));
 	}
 
@@ -763,30 +763,30 @@ defineExpose({
 
 	#item-shop-stat-filters {
 		label {
-			@apply cursor-pointer hover:brightness-200;
+			--at-apply: cursor-pointer hover: brightness-200;
 		}
 
 		input,
 		label > span {
-			@apply sr-only;
+			--at-apply: sr-only;
 		}
 
 		input {
 			&:disabled + label,
 			&:checked + label {
-				@apply hover:brightness-100;
+				--at-apply: hover: brightness-100;
 			}
 
 			&:focus-visible + label {
-				@apply brightness-200;
+				--at-apply: brightness-200;
 				outline: auto;
 			}
 
 			&:disabled + label {
-				@apply cursor-default;
+				--at-apply: cursor-default;
 
 				img {
-					@apply brightness-50;
+					--at-apply: brightness-50;
 				}
 			}
 
@@ -802,10 +802,10 @@ defineExpose({
 	}
 
 	#item-shop-panel-boots {
-		@apply 'bg-inherit p-4 pl-6 left-0 top-1/2 absolute z-10 -translate-x-full';
+		--at-apply: 'bg-inherit p-4 ps-6 start-0 top-1/2 absolute z-10 -translate-x-full';
 
 		> div {
-			@apply 'relative w-(--desktop-w) h-(--desktop-h) box-content of-hidden';
+			--at-apply: 'relative w-(--desktop-w) h-(--desktop-h) box-content of-hidden';
 
 			--gap: var(--spacing) * 3;
 			--row-h: calc(var(--item-img-size) + 1.5rem);
@@ -814,30 +814,30 @@ defineExpose({
 			--desktop-h: calc(var(--row-h) * 3 + 2 * var(--gap) + 2 * var(--inner-p));
 
 			ul {
-				@apply 'absolute right-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
+				--at-apply: 'absolute end-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
 
 				direction: rtl;
 			}
 		}
 
 		#panel-boots-caret-icon {
-			@apply 'size-5 left-1 top-1/2 absolute -translate-y-full';
+			--at-apply: 'size-5 start-1 top-1/2 absolute -translate-y-full';
 		}
 
 		&[data-pinned],
 		&:hover,
 		&:has(li > button:focus-visible) {
-			@apply 'pl-4';
+			--at-apply: 'ps-4';
 
 			#panel-boots-caret-icon {
-				@apply 'hidden';
+				--at-apply: 'hidden';
 			}
 
 			> div {
-				@apply 'w-auto of-visible';
+				--at-apply: 'w-auto of-visible';
 
 				ul {
-					@apply 'static w-auto';
+					--at-apply: 'static w-auto';
 				}
 			}
 		}
@@ -846,7 +846,7 @@ defineExpose({
 		&:hover,
 		&:focus-within {
 			#item-shop-pin-panel-boots {
-				@apply 'op-100';
+				--at-apply: 'op-100';
 			}
 		}
 	}
@@ -866,15 +866,15 @@ defineExpose({
 	}
 
 	.item-shop-item-btn {
-		@apply 'p-1 -m-1';
+		--at-apply: 'p-1 -m-1';
 
 		> span:first-child {
-			@apply 'sr-only';
+			--at-apply: 'sr-only';
 		}
 
 		&:hover,
 		&:focus-visible {
-			@apply 'bg-blue/10';
+			--at-apply: 'bg-blue/10';
 		}
 
 		&.selected {
@@ -885,7 +885,7 @@ defineExpose({
 
 	.item-shop-item-btn img,
 	.item-shop-item-img {
-		@apply 'size-12.5 min-w-12.5 m-0.75 text-xs text-center break-words';
+		--at-apply: 'size-12.5 min-w-12.5 m-0.75 text-xs text-center break-words';
 
 		--inner-border: gray;
 		box-shadow:
@@ -902,14 +902,14 @@ defineExpose({
 	}
 
 	#item-shop-builds-into-list > li > button {
-		@apply 'bg-black size-(--item-img-size) block';
+		--at-apply: 'bg-black size-(--item-img-size) block';
 	}
 
 	#item-shop-hover-tooltip {
-		@apply 'bg-neutral-950 max-w-screen w-(--width) pointer-events-none fixed';
+		--at-apply: 'bg-neutral-950 max-w-screen w-(--width) pointer-events-none fixed';
 
 		--width: 45rem;
-		left: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
+		inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 		top: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 	}
 }

@@ -48,10 +48,10 @@ const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]);
 	}
 
 	.pretend-ui-button {
-		@apply 'b b-[--ui-button-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
+		--at-apply: 'b b-[--ui-button-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
 
 		.icon {
-			@apply 'text-[--ui-pretend-button-icon-clr]';
+			--at-apply: 'text-[--ui-pretend-button-icon-clr]';
 		}
 	}
 }

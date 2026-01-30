@@ -91,10 +91,10 @@
 
 @layer component {
 	[data-inline-search-label] {
-		@apply relative;
+		--at-apply: relative;
 
 		label {
-			@apply absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis;
+			--at-apply: absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis;
 		}
 
 		input:is(:focus, :focus-visible, :not([data-empty='true'])) + label span:nth-child(2) {

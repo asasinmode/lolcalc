@@ -4,6 +4,6 @@
 
 <style>
 .icon {
-	@apply 'inline-block';
+	--at-apply: 'inline-block';
 }
 </style>

@@ -228,7 +228,7 @@ defineExpose({
 	<VDialog id="dialog-rune-select" ref="vDialog">
 		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20">
 			<h1>Runes</h1>
-			<form method="dialog" class="ml-auto">
+			<form method="dialog" class="ms-auto">
 				<button autofocus value="cancel">
 					close
 				</button>
@@ -384,7 +384,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-rune-select {
-		@apply 'px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg [&[open]]:grid';
+		--at-apply: 'px-3 pb-2 bg-cyan-950 gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg [&[open]]:grid';
 		grid-template-areas:
 			'header header'
 			'primary secondary'
@@ -406,7 +406,7 @@ defineExpose({
 	#rune-select-primary,
 	#rune-select-secondary {
 		&[inert] {
-			@apply 'op-50';
+			--at-apply: 'op-50';
 		}
 	}
 
@@ -419,25 +419,25 @@ defineExpose({
 	#rune-select-shards {
 		:where([role='radiogroup']),
 		:where([data-placeholder-secondary-slot-row]) {
-			@apply 'flex items-center relative';
+			--at-apply: 'flex items-center relative';
 			--selected-indicator-width: var(--selected-slot-width);
 			--selected-slot-checked-width: calc(var(--spacing) * 2);
 
 			&[data-path] {
-				@apply 'py-[--path-row-py] mb-[--path-row-mb] gap-x-[--path-options-gap-x]';
+				--at-apply: 'py-[--path-row-py] mb-[--path-row-mb] gap-x-[--path-options-gap-x]';
 			}
 
 			> button {
-				@apply 'mx-auto';
+				--at-apply: 'mx-auto';
 			}
 
 			&:before {
-				@apply 'content-empty z-10 bg-[--slot-bg] block size-[--selected-slot-width] b b-2 rounded-full ml-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2)] mr-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2_+_var(--selected-path-to-options-gap))]';
+				--at-apply: 'content-empty z-10 bg-[--slot-bg] block size-[--selected-slot-width] b b-2 rounded-full ms-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2)] me-[calc((var(--selected-path-width)_-_var(--selected-indicator-width))_/_2_+_var(--selected-path-to-options-gap))]';
 				border-color: var(--path-icon-clr, var(--slot-border-clr));
 			}
 
 			&:after {
-				@apply 'absolute z-10 block size-[--selected-slot-checked-width] rounded-full top-1/2 -translate-y-1/2 left-[calc((var(--selected-path-width)_-_var(--selected-slot-checked-width))_/_2)] bg-[--path-icon-clr]';
+				--at-apply: 'absolute z-10 block size-[--selected-slot-checked-width] rounded-full top-1/2 -translate-y-1/2 start-[calc((var(--selected-path-width)_-_var(--selected-slot-checked-width))_/_2)] bg-[--path-icon-clr]';
 				box-shadow:
 					0 0 6px 1px hsl(0 100% 100% / 0.8),
 					inset 2px 3px 5px hsl(0 100% 100% / 0.6),
@@ -446,14 +446,14 @@ defineExpose({
 
 			&:not([data-path]):not([data-keystone]) > button > img,
 			&[data-keystone] > button {
-				@apply 'b b-[--path-icon-clr] b-2 rounded-full';
+				--at-apply: 'b b-[--path-icon-clr] b-2 rounded-full';
 			}
 
 			&:not([data-path]) {
-				@apply 'py-[--slot-row-py]';
+				--at-apply: 'py-[--slot-row-py]';
 
 				> button {
-					@apply 'bg-[--slot-bg] rounded-full outline-3 outline-offset-8';
+					--at-apply: 'bg-[--slot-bg] rounded-full outline-3 outline-offset-8';
 					--outline-op: 0;
 					outline-color: hsl(from var(--path-icon-clr) h s l / var(--outline-op));
 					transition-property: outline-offset, outline-color, border-color;
@@ -462,42 +462,42 @@ defineExpose({
 
 					&:hover,
 					&:focus-visible {
-						@apply 'outline-offset-5';
+						--at-apply: 'outline-offset-5';
 						--outline-op: 0.5;
 					}
 
 					> img {
-						@apply 'block size-[--slot-row-button-size] max-w-unset';
+						--at-apply: 'block size-[--slot-row-button-size] max-w-unset';
 						transition: filter var(--transition-duration) var(--transition-timing-function);
 					}
 				}
 
 				&:has(button[aria-checked='true']) {
 					&[data-keystone] > button[aria-checked='false']:not(:hover) {
-						@apply 'b-[--slot-border-clr]';
+						--at-apply: 'b-[--slot-border-clr]';
 					}
 
 					> button[aria-checked='false']:not(:hover) > img {
-						@apply 'grayscale';
+						--at-apply: 'grayscale';
 					}
 
 					&:after {
-						@apply 'content-empty';
+						--at-apply: 'content-empty';
 					}
 				}
 			}
 
 			&[data-keystone] > button {
-				@apply 'relative';
+				--at-apply: 'relative';
 
 				> img {
-					@apply 'absolute translate-center left-1/2 top-1/2';
+					--at-apply: 'absolute translate-center start-1/2 top-1/2';
 				}
 			}
 
 			&:nth-last-of-type(-n + 2) {
 				> button:last-child:after {
-					@apply 'absolute pointer-events-none content-empty h-px left-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] right-0 top-0 -translate-y-1/2 bg-yellow-800/60';
+					--at-apply: 'absolute pointer-events-none content-empty h-px start-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] end-0 top-0 -translate-y-1/2 bg-yellow-800/60';
 				}
 			}
 
@@ -506,15 +506,15 @@ defineExpose({
 				--selected-slot-checked-width: calc(var(--spacing) * 2.5);
 
 				> button {
-					@apply 'size-[--keystone-row-button-size]';
+					--at-apply: 'size-[--keystone-row-button-size]';
 
 					> img {
-						@apply 'size-21 pointer-events-none';
+						--at-apply: 'size-21 pointer-events-none';
 					}
 				}
 
 				&:before {
-					@apply 'size-[--selected-keystone-width]';
+					--at-apply: 'size-[--selected-keystone-width]';
 				}
 			}
 		}
@@ -525,20 +525,20 @@ defineExpose({
 		--selected-slot-width: var(--selected-path-width);
 
 		&:before {
-			@apply 'mr-[calc(var(--selected-path-to-options-gap)_-_var(--path-options-gap-x))] ml-0 bg-transparent';
+			--at-apply: 'me-[calc(var(--selected-path-to-options-gap)_-_var(--path-options-gap-x))] ms-0 bg-transparent';
 		}
 
 		&:after {
-			@apply 'content-empty left-8 translate-center size-9 shadow-none';
+			--at-apply: 'content-empty start-8 translate-center size-9 shadow-none';
 			background-color: var(--path-icon-clr);
 			mask: var(--path-icon, linear-gradient(transparent 0 0)) no-repeat center;
 		}
 
 		button {
-			@apply 'rounded-full b-2 b-transparent grid-center size-[--path-button-size] relative';
+			--at-apply: 'rounded-full b-2 b-transparent grid-center size-[--path-button-size] relative';
 
 			&:before {
-				@apply 'absolute content-empty rounded-full inset-0 outline-2 outline-offset-1 op-0';
+				--at-apply: 'absolute content-empty rounded-full inset-0 outline-2 outline-offset-1 op-0';
 				outline-color: theme('colors.yellow.600');
 				transition-property: outline-offset, opacity;
 				transition-duration: var(--transition-duration);
@@ -546,24 +546,24 @@ defineExpose({
 			}
 
 			span {
-				@apply 'brightness-80';
+				--at-apply: 'brightness-80';
 			}
 
 			&:hover,
 			&:focus-visible {
 				span {
-					@apply 'brightness-100';
+					--at-apply: 'brightness-100';
 				}
 			}
 		}
 
 		button[aria-checked='true'] {
 			&:before {
-				@apply 'op-60 -outline-offset-2';
+				--at-apply: 'op-60 -outline-offset-2';
 			}
 
 			span {
-				@apply 'brightness-100';
+				--at-apply: 'brightness-100';
 			}
 		}
 	}
@@ -605,10 +605,10 @@ defineExpose({
 			from var(--path-icon-clr, var(--slot-border-clr)) h calc(s * 1.4) calc(l * 1.2)
 		);
 
-		@apply 'relative h-max';
+		--at-apply: 'relative h-max';
 
 		&:before {
-			@apply 'absolute left-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
+			--at-apply: 'absolute start-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
 			box-shadow:
 				0 0 6px 0 var(--path-icon-clr),
 				inset 1px 0 0 var(--selected-dots-column-lining-clr),
@@ -616,13 +616,13 @@ defineExpose({
 		}
 
 		&:before {
-			@apply 'content-empty';
+			--at-apply: 'content-empty';
 		}
 
 		:where([role='radiogroup']),
 		:where([data-placeholder-secondary-slot-row]) {
 			&[data-keystone] {
-				@apply 'py-[--keystone-row-py] b-y b-[--path-icon-clr]';
+				--at-apply: 'py-[--keystone-row-py] b-y b-[--path-icon-clr]';
 				border-image: linear-gradient(
 						90deg,
 						transparent 0%,
@@ -633,7 +633,7 @@ defineExpose({
 					1;
 
 				> span {
-					@apply 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] left-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] -top-1 -translate-y-full';
+					--at-apply: 'absolute size-auto m-unset text-xs tracking-widest font-300 uppercase text-[--path-icon-clr] start-[calc(var(--selected-path-width)_+_var(--selected-path-to-options-gap))] -top-1 -translate-y-full';
 					clip: unset;
 				}
 			}
@@ -650,10 +650,10 @@ defineExpose({
 		--slot-row-py: var(--secondary-slot-row-py);
 		--selected-dot-mt-translate: calc(var(--primary-path-row-mb) - var(--secondary-path-row-mb));
 
-		@apply 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
+		--at-apply: 'min-h-[calc(var(--selected-path-width)_+_2_*_var(--path-row-py)_+_var(--path-row-mb)_+_3_*_var(--slot-row-height))]';
 
 		&:before {
-			@apply 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
+			--at-apply: 'bottom-[calc(var(--slot-row-height)_-_var(--selected-dot-mt-translate))]';
 		}
 
 		--path-icon-clr: var(--slot-border-clr);
@@ -663,7 +663,7 @@ defineExpose({
 			&:nth-of-type(4) {
 				&:before,
 				&:after {
-					@apply 'op-0';
+					--at-apply: 'op-0';
 				}
 			}
 			--secondary-slot-first-dot-translate-y: calc(
@@ -679,11 +679,11 @@ defineExpose({
 				--selected-dot-translate-y: var(--secondary-slot-first-dot-translate-y);
 
 				&:before {
-					@apply 'translate-y-[--selected-dot-translate-y]';
+					--at-apply: 'translate-y-[--selected-dot-translate-y]';
 				}
 
 				&:after {
-					@apply 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
+					--at-apply: 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
 				}
 			}
 
@@ -691,38 +691,38 @@ defineExpose({
 				--selected-dot-translate-y: var(--secondary-slot-second-dot-translate-y);
 
 				&:before {
-					@apply 'translate-y-[--selected-dot-translate-y]';
+					--at-apply: 'translate-y-[--selected-dot-translate-y]';
 				}
 
 				&:after {
-					@apply 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
+					--at-apply: 'translate-y-[calc(-50%_+_var(--selected-dot-translate-y))]';
 				}
 			}
 
 			&:nth-of-type(n + 2):after {
-				@apply 'hidden';
+				--at-apply: 'hidden';
 			}
 		}
 
 		&[data-slots-filled='1'],
 		&[data-slots-filled='2'] {
 			[role='radiogroup']:nth-of-type(2):after {
-				@apply 'content-empty block';
+				--at-apply: 'content-empty block';
 			}
 		}
 
 		&[data-slots-filled='2'] {
 			[role='radiogroup'] {
 				&:nth-of-type(3):after {
-					@apply 'content-empty block';
+					--at-apply: 'content-empty block';
 				}
 
 				&:nth-of-type(n + 2):not(:has(button[aria-checked='true'])) {
 					> button:not(:hover):not(:focus-visible) {
-						@apply 'b-[--slot-border-clr]';
+						--at-apply: 'b-[--slot-border-clr]';
 
 						img {
-							@apply 'grayscale';
+							--at-apply: 'grayscale';
 						}
 					}
 				}
@@ -730,27 +730,27 @@ defineExpose({
 		}
 
 		[data-placeholder-secondary-slot-row] {
-			@apply 'box-content h-[calc(var(--secondary-slot-row-button-size)_+_2_*_var(--slot-row-py))] py-0 grid grid-cols-[auto_1fr] grid-rows-[auto_auto]';
+			--at-apply: 'box-content h-[calc(var(--secondary-slot-row-button-size)_+_2_*_var(--slot-row-py))] py-0 grid grid-cols-[auto_1fr] grid-rows-[auto_auto]';
 
 			&:nth-of-type(2) {
-				@apply 'pt-[--selected-dot-translate-y]';
+				--at-apply: 'pt-[--selected-dot-translate-y]';
 			}
 
 			&:nth-of-type(3) {
-				@apply 'pt-[calc(var(--secondary-slot-second-dot-translate-y)_-_var(--secondary-slot-first-dot-translate-y))]';
+				--at-apply: 'pt-[calc(var(--secondary-slot-second-dot-translate-y)_-_var(--secondary-slot-first-dot-translate-y))]';
 			}
 
 			&:before {
-				@apply 'row-span-full';
+				--at-apply: 'row-span-full';
 				--selected-dot-translate-y: 0px;
 			}
 
 			h3 {
-				@apply 'uppercase tracking-wider self-end text-sm';
+				--at-apply: 'uppercase tracking-wider self-end text-sm';
 			}
 
 			p {
-				@apply 'text-neutral-400 text-xs max-w-[--path-options-width] leading-4.25 self-start';
+				--at-apply: 'text-neutral-400 text-xs max-w-[--path-options-width] leading-4.25 self-start';
 			}
 		}
 	}
@@ -761,30 +761,30 @@ defineExpose({
 		--slot-row-button-size: calc(var(--primary-slot-row-height) * var(--button-size-share) / 2);
 		--slot-row-py: calc(var(--primary-slot-row-height) * var(--padding-size-share) / 4);
 
-		@apply 'mt-auto mb-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
+		--at-apply: 'mt-auto mb-[calc(var(--primary-slot-row-height)_/_2_-_var(--slot-row-height)_/_2)]';
 
 		&:before {
-			@apply 'top-[calc(var(--slot-row-height)_/_2)]';
+			--at-apply: 'top-[calc(var(--slot-row-height)_/_2)]';
 		}
 	}
 
 	#rune-select-dialog-hover-tooltip {
-		@apply 'bg-neutral-900 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
+		--at-apply: 'bg-neutral-900 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
 
 		--width: 21.5rem;
-		left: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
+		inset-inline-start: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
 		top: clamp(var(--height), var(--top), 100vh);
 
 		h4 {
-			@apply 'font-600 uppercase mb-1 tracking-wide';
+			--at-apply: 'font-600 uppercase mb-1 tracking-wide';
 		}
 
 		> div {
-			@apply 'text-neutral-300';
+			--at-apply: 'text-neutral-300';
 
 			lol-uikit-tooltipped-keyword,
 			lol-uikit-tooltipped-keyword font {
-				@apply 'text-white';
+				--at-apply: 'text-white';
 			}
 
 			rules {
@@ -792,11 +792,11 @@ defineExpose({
 			}
 
 			li {
-				@apply 'ml-5';
+				--at-apply: 'ms-5';
 
-				/* IMPORTANT workaround for grasph of undying that has nested <rules>, maybe need to parse it properly if more things do it */
+				/* IMPORTANT workaround for grasp of undying that has nested <rules>, maybe need to parse it properly if more things do it */
 				rules {
-					@apply '-ml-5 block';
+					--at-apply: '-ms-5 block';
 				}
 			}
 		}

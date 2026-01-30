@@ -237,7 +237,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 </script>
 
 <template>
-	<article id="calculator-scoreboard" class="mx-auto b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty bottom-0 left-1/2 top-12 absolute -translate-x-1/2)">
+	<article id="calculator-scoreboard" class="mx-auto b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty start-1/2 bottom-0 top-12 absolute -translate-x-1/2)">
 		<header class="text-center b-b col-span-full">
 			<h1 class="text-xl font-500">
 				lolcalc
@@ -245,11 +245,11 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 			<h2 class="text-sm">
 				League of Legends damage calculator
 			</h2>
-			<label for="calculator-scoreboard-enable-unimplemented-ui" class="left-0 top-0 absolute">
+			<label for="calculator-scoreboard-enable-unimplemented-ui" class="start-0 top-0 absolute">
 				TMP enable unimplemented ui
 				<input id="calculator-scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
 			</label>
-			<label for="calculator-scoreboard-mirror" class="right-0 top-0 absolute">
+			<label for="calculator-scoreboard-mirror" class="end-0 top-0 absolute">
 				TODO mirror layout
 				<input id="calculator-scoreboard-mirror" type="checkbox">
 			</label>
@@ -368,70 +368,70 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 @layer components {
 	#calculator-scoreboard {
 		> h3 {
-			@apply 'text-center';
+			--at-apply: 'text-center';
 		}
 
 		> ul {
 			> li:last-child {
-				@apply 'grid-center';
+				--at-apply: 'grid-center';
 
 				> button {
-					@apply 'p-1';
+					--at-apply: 'p-1';
 
 					.icon {
-						@apply 'align-sub size-4 mr-0.5';
+						--at-apply: 'align-sub size-4 me-0.5';
 					}
 				}
 			}
 		}
 
 		> [data-drag-preview] {
-			@apply 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute left-[--left] top-[--top]';
+			--at-apply: 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute start-[--left] top-[--top]';
 
 			&:popover-open {
-				@apply 'flex';
+				--at-apply: 'flex';
 			}
 
 			> :nth-child(1) {
-				@apply 'size-12 rounded-full b b-[--ui-button-border-clr]';
+				--at-apply: 'size-12 rounded-full b b-[--ui-button-border-clr]';
 			}
 
 			> :nth-child(2) {
-				@apply 'absolute bg-black rounded-full top-11 left-11 translate-center text-xs size-5 text-center grid-center b b-[--ui-button-border-clr]';
+				--at-apply: 'absolute bg-black rounded-full top-11 start-11 translate-center text-xs size-5 text-center grid-center b b-[--ui-button-border-clr]';
 			}
 
 			> :nth-child(3) {
-				@apply 'flex flex-col items-center self-center gap-1';
+				--at-apply: 'flex flex-col items-center self-center gap-1';
 
 				[data-primary-path-keystone] {
-					@apply 'size-5';
+					--at-apply: 'size-5';
 				}
 
 				[data-secondary-path] {
-					@apply 'size-4';
+					--at-apply: 'size-4';
 				}
 			}
 
 			> :nth-child(4) {
-				@apply 'grid grid-cols-3 grid-rows-2 gap-0.5';
+				--at-apply: 'grid grid-cols-3 grid-rows-2 gap-0.5';
 
 				li {
-					@apply 'size-5.5 bg-black';
+					--at-apply: 'size-5.5 bg-black';
 				}
 			}
 		}
 
 		[data-drop-direction] {
-			@apply 'relative';
+			--at-apply: 'relative';
 			--drop-indicator-bg-direction: 180deg;
 
 			&::before,
 			&::after {
-				@apply 'content-empty absolute z-10';
+				--at-apply: 'content-empty absolute z-10';
 			}
 
 			&::before {
-				@apply 'inset-0';
+				--at-apply: 'inset-0';
 				background-image: linear-gradient(
 					var(--drop-indicator-bg-direction),
 					hsl(0 100% 100% / 0.7) 0%,
@@ -440,7 +440,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 			}
 
 			&::after {
-				@apply 'top-0.5 left-1/2 -translate-x-1/2 size-4 bg-white';
+				--at-apply: 'top-0.5 start-1/2 -translate-x-1/2 size-4 bg-white';
 				mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 			}
 		}
@@ -449,7 +449,7 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 			--drop-indicator-bg-direction: 0deg;
 
 			&::after {
-				@apply 'bottom-0.5 top-auto rotate-180';
+				--at-apply: 'bottom-0.5 top-auto rotate-180';
 			}
 		}
 	}

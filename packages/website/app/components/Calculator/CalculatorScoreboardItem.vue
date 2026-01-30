@@ -385,6 +385,19 @@ const majorStats = computed<IChampionStat[]>(() => {
 	return majorStats;
 });
 
+const hoveredStat = shallowRef<IChampionStat>();
+const hoveredStatTooltip = useTemplateRef('championStatTooltip');
+
+function showStatTooltip(event: MouseEvent, stat: IChampionStat) {
+	hoveredStat.value = stat;
+	// @ts-expect-error source is ok
+	hoveredStatTooltip.value?.showPopover({ source: event.target });
+}
+
+function hideStatTooltip() {
+	hoveredStatTooltip.value?.hidePopover();
+}
+
 const el = useTemplateRef('el');
 
 defineExpose({ el });
@@ -469,7 +482,7 @@ defineExpose({ el });
 		</div>
 		<button title="runes" data-select-runes="" @click="selectRunes(value.runes)">
 			<span class="sr-only">{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
-			<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -right-0.5 -top-0.5">
+			<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5">
 				<span class="sr-only">(invalid)</span>
 				<Icon class="i-ph:exclamation-mark-bold size-2.5" />
 			</span>
@@ -518,7 +531,7 @@ defineExpose({ el });
 			>
 		</button>
 		<ul class="flex h-8">
-			<li v-for="i in 6" :key="i" class="mr-0.5 last:mr-0">
+			<li v-for="i in 6" :key="i" class="me-0.5 last:me-0">
 				<button
 					class="bg-black size-8 inline-block"
 					:disabled="!value.items.value[i - 1]"
@@ -557,33 +570,42 @@ defineExpose({ el });
 			<summary>
 				details
 			</summary>
-			<dl v-for="(stats, statKindIndex) in [minorStats, majorStats]" :key="statKindIndex" data-player-stats="">
+			<dl
+				v-for="(stats, statKindIndex) in [minorStats, majorStats]"
+				:key="statKindIndex"
+				data-champion-stats=""
+			>
 				<template v-for="(stat, statIndex) in stats" :key="`${statKindIndex}-${statIndex}`">
-					<dt>
+					<dt @mouseenter="showStatTooltip($event, stat)" @mouseleave="hideStatTooltip">
 						<span>{{ stat.name }}</span>
 						<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
 					</dt>
-					<dd :data-has-bonus="stat.values.some(value => value.bonus) || undefined">
+					<dd
+						:data-has-bonus="stat.values.some(value => value.bonus) || undefined"
+						@mouseenter="showStatTooltip($event, stat)"
+						@mouseleave="hideStatTooltip"
+					>
 						{{ stat.displayedValue }}
 					</dd>
-					<div popover="hint">
-						<h4>{{ stat.name }}</h4>
-						<p data-game-description="" v-html="stat.description" />
-						<dl>
-							<template v-for="(statValue, valueIndex) in stat.values" :key="`${statKindIndex}-${statIndex}-${valueIndex}`">
-								<dt>{{ statValue.name }}:</dt>
-								<dd>
-									<span data-total="">{{ statValue.total }}</span>
-									<template v-if="'base' in statValue">
-										(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
-									</template>
-								</dd>
-							</template>
-						</dl>
-						<p v-if="stat.bottomText" v-html="stat.bottomText" />
-					</div>
 				</template>
 			</dl>
+			<div id="champion-stat-hover-tooltip" ref="championStatTooltip" popover="hint">
+				<h4>{{ hoveredStat?.name }}</h4>
+				<p data-game-description="" v-html="hoveredStat?.description" />
+				<dl>
+					<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
+						<dt>{{ statValue.name }}:</dt>
+						<dd>
+							<span data-total="">{{ statValue.total }}</span>
+							<template v-if="'base' in statValue">
+								(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
+							</template>
+						</dd>
+						<br v-if="valueIndex !== ((hoveredStat?.values.length || 1) - 1)">
+					</template>
+				</dl>
+				<p v-if="hoveredStat?.bottomText" v-html="hoveredStat?.bottomText" />
+			</div>
 		</details>
 	</li>
 </template>
@@ -591,7 +613,7 @@ defineExpose({ el });
 <style>
 @layer components {
 	#calculator-scoreboard [data-scoreboard-item] {
-		@apply 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
+		--at-apply: 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);
 		--placeholder-champion-bg-clr: #020a13;
@@ -607,111 +629,111 @@ defineExpose({ el });
 		transition-property: grid-template-rows;
 
 		&:has(> details[open]) {
-			@apply 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
+			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
 
 			> button:nth-last-of-type(1) {
-				@apply 'rotate-180';
+				--at-apply: 'rotate-180';
 			}
 		}
 
 		> button {
 			&:nth-of-type(1) {
-				@apply 'self-end mb-0.5 mr-0.5';
+				--at-apply: 'self-end mb-0.5 me-0.5';
 				grid-area: move-up;
 			}
 
 			&:nth-of-type(2) {
-				@apply 'self-start mt-0.5 mr-0.5';
+				--at-apply: 'self-start mt-0.5 me-0.5';
 				grid-area: move-down;
 			}
 
 			&:nth-of-type(3) {
-				@apply 'self-end mb-0.5 ml-0.5';
+				--at-apply: 'self-end mb-0.5 ms-0.5';
 				grid-area: move-column;
 			}
 
 			&:nth-of-type(4) {
-				@apply 'self-start mt-0.5 ml-0.5';
+				--at-apply: 'self-start mt-0.5 ms-0.5';
 				grid-area: duplicate;
 			}
 
 			&:nth-last-of-type(1) {
-				@apply 'self-start mt-0.5';
+				--at-apply: 'self-start mt-0.5';
 				grid-area: expand;
 			}
 
 			&:nth-last-of-type(2) {
-				@apply 'self-end mb-0.5';
+				--at-apply: 'self-end mb-0.5';
 				grid-area: clear;
 			}
 
 			&:nth-of-type(-n + 4),
 			&:nth-last-of-type(-n + 2) {
-				@apply 'size-5 grid-center';
+				--at-apply: 'size-5 grid-center';
 
 				.icon {
-					@apply 'size-4';
+					--at-apply: 'size-4';
 				}
 			}
 		}
 
 		> [data-select-champion] {
-			@apply 'size-[--select-champion-size] mx-3 relative';
+			--at-apply: 'size-[--select-champion-size] mx-3 relative';
 			grid-area: select-champion;
 
 			> button {
-				@apply 'group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden';
+				--at-apply: 'group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden';
 
 				img {
-					@apply 'max-w-none size-[calc(100%_+_var(--spacing)_*_2)] -ml-1 -mt-1';
+					--at-apply: 'max-w-none size-[calc(100%_+_var(--spacing)_*_2)] -ms-1 -mt-1';
 				}
 
 				&:hover,
 				&:focus-visible {
 					img {
-						@apply 'brightness-[--focus-brightness]';
+						--at-apply: 'brightness-[--focus-brightness]';
 					}
 				}
 			}
 
 			> [data-select-champion-level] {
-				@apply 'absolute -bottom-1 -right-2';
+				--at-apply: 'absolute -bottom-1 -end-2';
 			}
 		}
 
 		> [data-select-runes] {
-			@apply 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
+			--at-apply: 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
 			--secondary-path-icon-size: calc(var(--spacing) * 3);
 			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-runes;
 
 			[data-secondary-path-icon] {
-				@apply 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 -right-0.5 absolute';
+				--at-apply: 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 -end-0.5 absolute';
 			}
 
 			&:has([data-secondary-path-icon]):before {
-				@apply 'content-empty z-10 absolute -right-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
+				--at-apply: 'content-empty z-10 absolute -end-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
 			}
 		}
 
 		> [data-select-items] {
-			@apply 'mx-2 b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 pl-2.5 pr-2 self-center';
+			--at-apply: 'mx-2 b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 self-center';
 			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-items;
 
 			img {
-				@apply 'inline-block align-middle -mt-0.5';
+				--at-apply: 'inline-block align-middle -mt-0.5';
 			}
 		}
 
 		> ul {
-			@apply 'self-center mr-3';
+			--at-apply: 'self-center me-3';
 			grid-area: items;
 		}
 
 		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */
 		/* > ::details-content { */
-		/* 	@apply '-mt-6'; */
+		/* 	--at-apply: '-mt-6'; */
 		/* 	interpolate-size: allow-keywords; */
 		/* 	height: 0; */
 		/* 	overflow: clip; */
@@ -726,37 +748,62 @@ defineExpose({ el });
 		/* } */
 
 		> details {
+			/* anchor-name: --scoreboard-item-details; */
+			anchor-scope: --champion-stats-minor;
 			grid-area: expanded;
 
 			&::details-content {
-				@apply 'pt-4 -mt-6';
+				--at-apply: 'pt-4 -mt-6';
 			}
 
 			summary {
-				@apply 'list-none invisible pointer-events-none';
+				--at-apply: 'list-none invisible pointer-events-none';
 			}
 
-			> [data-player-stats] {
-				@apply 'grid grid-rows-4 items-center whitespace-nowrap gap-y-1 gap-x-1 bg-cyan-950 b b-[--ui-button-border-clr] p-1.5 w-fit';
+			> [data-champion-stats] {
+				--at-apply: 'grid grid-rows-4 items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
+
+				&:first-of-type {
+					anchor-name: --champion-stats-minor;
+				}
 
 				grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
 
 				&:nth-of-type(2) {
-					@apply 'b-t-0';
+					--at-apply: 'b-t-0';
 				}
 
 				> dt {
+					--at-apply: 'py-0.5 ps-0.5';
+
 					> :first-child {
-						@apply 'sr-only';
+						--at-apply: 'sr-only';
 					}
 				}
 
 				> dd {
-					@apply 'leading-[1]';
+					--at-apply: 'leading-5 h-full w-max ps-1.5 py-0.5 pe-0.5';
 
 					&[data-has-bonus] {
-						@apply 'text-yellow-200';
+						--at-apply: 'text-yellow-200';
 					}
+				}
+			}
+
+			#champion-stat-hover-tooltip {
+				--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none absolute p-1 b b-[--ui-button-border-clr]';
+				inset: unset;
+				position-anchor: --champion-stats-minor;
+				bottom: calc(anchor(top) - 1px);
+				justify-self: anchor-center;
+
+				dt,
+				dd {
+					--at-apply: 'inline';
+				}
+
+				dd {
+					--at-apply: 'ms-[0.5ch]';
 				}
 			}
 		}

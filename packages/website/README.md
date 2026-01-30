@@ -18,6 +18,8 @@ bun generate
 
 ## todo
 
+lightningcss getting mad at unocss @property inside of a layer should be resolved when a release with https://github.com/parcel-bundler/lightningcss/issues/968 is out
+
 - [x] script for downloading/updating latest patch data
 - [x] calculating stats (no item/champ passives)
 - [x] item rarity for shop

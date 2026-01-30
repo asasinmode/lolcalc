@@ -13,6 +13,14 @@ export default defineNuxtConfig({
 			standalone: false,
 		},
 	},
+	vite: {
+		build: {
+			target: 'esnext',
+		},
+		css: {
+			transformer: 'lightningcss',
+		},
+	},
 	typescript: {
 		tsConfig: {
 			include: [

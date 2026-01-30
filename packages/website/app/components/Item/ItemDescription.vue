@@ -151,87 +151,87 @@ defineExpose({ header });
 <style>
 @layer components {
 	.item-description-header {
-		@apply 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full';
+		--at-apply: 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full';
 
 		> img {
-			@apply 'row-span-full size-(--item-img-size)';
+			--at-apply: 'row-span-full size-(--item-img-size)';
 		}
 
 		span:first-of-type {
-			@apply 'text-xl';
+			--at-apply: 'text-xl';
 		}
 
 		span:nth-of-type(2) {
-			@apply 'text-amber text-start flex items-center justify-start text-lg gap-[0.5ch]';
+			--at-apply: 'text-amber text-start flex items-center justify-start text-lg gap-[0.5ch]';
 
 			img {
-				@apply 'h-4 w-auto';
+				--at-apply: 'h-4 w-auto';
 			}
 		}
 
 		span:nth-of-type(3),
 		span:nth-of-type(4) {
-			@apply 'hidden text-lg';
+			--at-apply: 'hidden text-lg';
 		}
 
 		span:nth-of-type(4) {
-			@apply 'text-end text-neutral-300';
+			--at-apply: 'text-end text-neutral-300';
 		}
 
 		&[data-show-subtitles] {
-			@apply 'grid-cols-[auto_1fr_auto]';
+			--at-apply: 'grid-cols-[auto_1fr_auto]';
 		}
 
 		&[data-show-subtitles] span:nth-of-type(2) {
-			@apply 'text-xl text-end justify-end';
+			--at-apply: 'text-xl text-end justify-end';
 		}
 
 		&[data-show-subtitles] span:nth-of-type(3),
 		&[data-show-subtitles] span:nth-of-type(4) {
-			@apply 'inline';
+			--at-apply: 'inline';
 		}
 	}
 
 	.item-description-content {
 		ul li {
-			@apply 'flex items-center gap-[0.5ch]';
+			--at-apply: 'flex items-center gap-[0.5ch]';
 
 			img {
-				@apply 'size-4.5';
+				--at-apply: 'size-4.5';
 			}
 
 			span:last-child {
-				@apply 'capitalize text-neutral-300';
+				--at-apply: 'capitalize text-neutral-300';
 			}
 		}
 
 		h4 {
-			@apply 'text-neutral-300';
+			--at-apply: 'text-neutral-300';
 
 			&:has(img) {
-				@apply 'flex items-center gap-[0.5ch]';
+				--at-apply: 'flex items-center gap-[0.5ch]';
 			}
 
 			img {
-				@apply 'size-4';
+				--at-apply: 'size-4';
 			}
 
 			span {
 				> span {
-					@apply 'sr-only';
+					--at-apply: 'sr-only';
 				}
 			}
 		}
 
 		div {
-			@apply 'text-neutral-300';
+			--at-apply: 'text-neutral-300';
 
 			img {
-				@apply 'inline-block size-4 align-text-middle';
+				--at-apply: 'inline-block size-4 align-text-middle';
 			}
 
 			li {
-				@apply 'ml-5';
+				--at-apply: 'ms-5';
 			}
 		}
 	}
@@ -244,112 +244,112 @@ defineExpose({ header });
 		}
 
 		passive {
-			@apply 'font-700 text-white';
+			--at-apply: 'font-700 text-white';
 		}
 
 		scaleap {
-			@apply 'text-indigo-400';
+			--at-apply: 'text-indigo-400';
 		}
 
 		scalead {
-			@apply 'text-orange';
+			--at-apply: 'text-orange';
 		}
 
 		scalehealth {
-			@apply 'text-emerald-600';
+			--at-apply: 'text-emerald-600';
 		}
 
 		scalemana {
-			@apply 'text-blue';
+			--at-apply: 'text-blue';
 		}
 
 		scalearmor {
-			@apply 'text-orange-300';
+			--at-apply: 'text-orange-300';
 		}
 
 		scalemr {
-			@apply 'text-cyan-300';
+			--at-apply: 'text-cyan-300';
 		}
 
 		scalelethality {
-			@apply 'text-red';
+			--at-apply: 'text-red';
 		}
 
 		attackspeed {
-			@apply 'text-yellow-200';
+			--at-apply: 'text-yellow-200';
 		}
 
 		onhit {
-			@apply 'text-white';
+			--at-apply: 'text-white';
 		}
 
 		physicaldamage {
-			@apply 'text-orange-600';
+			--at-apply: 'text-orange-600';
 		}
 
 		magicdamage {
-			@apply 'text-cyan';
+			--at-apply: 'text-cyan';
 		}
 
 		truedamage {
-			@apply 'text-cyan-50';
+			--at-apply: 'text-cyan-50';
 		}
 
 		healing {
-			@apply 'text-green-300';
+			--at-apply: 'text-green-300';
 		}
 
 		shield {
-			@apply 'text-sky-400';
+			--at-apply: 'text-sky-400';
 		}
 
 		lifesteal,
 		omnivamp {
-			@apply 'text-red-700';
+			--at-apply: 'text-red-700';
 		}
 
 		speed {
-			@apply 'text-yellow-50';
+			--at-apply: 'text-yellow-50';
 		}
 
 		gold {
-			@apply 'text-amber';
+			--at-apply: 'text-amber';
 		}
 
 		status {
-			@apply 'text-purple';
+			--at-apply: 'text-purple';
 		}
 
 		attention {
-			@apply 'text-neutral-50';
+			--at-apply: 'text-neutral-50';
 		}
 
 		raritygeneric {
-			@apply 'text-neutral-100';
+			--at-apply: 'text-neutral-100';
 		}
 
 		raritylegendary {
-			@apply 'text-white';
+			--at-apply: 'text-white';
 		}
 
 		rules {
-			@apply 'text-neutral-400';
+			--at-apply: 'text-neutral-400';
 		}
 
 		keyword {
-			@apply 'text-pink-300';
+			--at-apply: 'text-pink-300';
 		}
 
 		keywordmajor {
-			@apply 'text-yellow-100';
+			--at-apply: 'text-yellow-100';
 		}
 
 		keywordstealth {
-			@apply 'text-pink-300';
+			--at-apply: 'text-pink-300';
 		}
 
 		active {
-			@apply 'font-500 text-orange-200';
+			--at-apply: 'font-500 text-orange-200';
 		}
 	}
 }
