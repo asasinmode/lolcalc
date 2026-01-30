@@ -4,6 +4,7 @@ interface IStatsCalculationResult {
 	stats: {
 		base: IChampionStats;
 		level: Partial<IChampionStats>;
+		baseOnLevel: IChampionStats;
 		item: IChampionStats;
 		bonus: IChampionStats;
 		total: IChampionStats;
@@ -51,9 +52,10 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			hasMana: false,
 			stats: {
 				base: baseStats,
-				bonus: bonusStats,
-				item: baseStats,
 				level: baseStats,
+				baseOnLevel: baseStats,
+				item: baseStats,
+				bonus: bonusStats,
 				total: baseStats,
 			},
 		};
@@ -145,10 +147,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		hasMana: champion.partype === 'mana',
 		stats: {
 			base: baseStats,
-			total: totalStats,
-			bonus: bonusStats,
-			item: itemStats,
 			level: levelStats,
+			baseOnLevel: baseOnLevelStats,
+			item: itemStats,
+			bonus: bonusStats,
+			total: totalStats,
 		},
 	};
 }

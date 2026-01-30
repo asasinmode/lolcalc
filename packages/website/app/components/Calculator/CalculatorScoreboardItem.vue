@@ -103,11 +103,11 @@ interface IChampionStat {
 	description: string;
 	values: {
 		name: string;
-		decimal?: boolean;
+		decimal?: number;
 		isPercentage?: boolean;
-		base?: number;
-		bonus: number;
-		total: number;
+		base?: number | string;
+		bonus: number | string;
+		total: number | string;
 	}[];
 	displayedValue: string;
 	bottomText?: string;
@@ -123,13 +123,13 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Health Regen',
-					base: stats.base.hpRegen,
+					base: stats.baseOnLevel.hpRegen,
 					bonus: stats.bonus.hpRegen,
 					total: stats.total.hpRegen,
 				},
 				{
 					name: 'Resource Regen',
-					base: stats.base.manaRegen,
+					base: stats.baseOnLevel.manaRegen,
 					bonus: stats.bonus.manaRegen,
 					total: stats.total.manaRegen,
 				},
@@ -160,7 +160,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 				},
 				{
 					name: 'Armor Penetration',
-					decimal: true,
+					decimal: 2,
 					bonus: stats.bonus.percentArmorPen,
 					total: stats.total.percentArmorPen,
 					isPercentage: true,
@@ -179,7 +179,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 				},
 				{
 					name: 'Magic Penetration',
-					decimal: true,
+					decimal: 2,
 					bonus: stats.bonus.percentMagicPen,
 					total: stats.total.percentMagicPen,
 					isPercentage: true,
@@ -219,7 +219,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Attack Range',
-					base: stats.base.attackRange,
+					base: stats.baseOnLevel.attackRange,
 					bonus: stats.bonus.attackRange,
 					total: stats.total.attackRange,
 				},
@@ -240,17 +240,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 		},
 	] as IChampionStat[];
 
-	for (const stat of minorStats) {
-		stat.displayedValue = stat.values.map(
-			(value) => {
-				const multiplier = value.isPercentage ? 100 : 1;
-				return `${value.decimal
-					? roundVariable(value.total * multiplier, 2)
-					: Math.round(value.total * multiplier)}${value.isPercentage ? '%' : ''}`;
-			},
-		)
-			.join(' | ');
-	}
+	updateComputedStats(minorStats);
 
 	return minorStats;
 });
@@ -265,7 +255,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Attack Damage',
-					base: stats.base.attackDamage,
+					base: stats.baseOnLevel.attackDamage,
 					bonus: stats.bonus.attackDamage,
 					total: stats.total.attackDamage,
 				},
@@ -290,12 +280,12 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Armor',
-					base: stats.base.armor,
+					base: stats.baseOnLevel.armor,
 					bonus: stats.bonus.armor,
 					total: stats.total.armor,
 				},
 			],
-			bottomText: `You take <span data-base="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced physical damage`,
+			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced physical damage.`,
 		},
 		{
 			name: 'Magic Resist',
@@ -304,12 +294,12 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Magic Resist',
-					base: stats.base.magicResist,
+					base: stats.baseOnLevel.magicResist,
 					bonus: stats.bonus.magicResist,
 					total: stats.total.magicResist,
 				},
 			],
-			bottomText: `You take <span data-base="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced magic damage`,
+			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced magic damage.`,
 		},
 		{
 			name: 'Attack Speed',
@@ -325,11 +315,12 @@ const majorStats = computed<IChampionStat[]>(() => {
 				{
 					name: 'Attacks per second',
 					total: stats.total.attackSpeed,
+					decimal: 3,
 				},
 				{
 					name: 'Ratio',
 					total: stats.total.attackSpeedRatio,
-					isPercentage: true,
+					decimal: 3,
 				},
 			],
 			displayedValue: stats.total.attackSpeed.toFixed(2),
@@ -367,7 +358,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Move Speed',
-					base: stats.base.moveSpeed,
+					base: stats.baseOnLevel.moveSpeed,
 					bonus: stats.bonus.moveSpeed,
 					total: stats.total.moveSpeed,
 				},
@@ -375,15 +366,41 @@ const majorStats = computed<IChampionStat[]>(() => {
 		},
 	] as IChampionStat[];
 
-	for (const stat of majorStats) {
-		stat.displayedValue ||= stat.values.map(
-			value => value.decimal ? roundVariable(value.total * (value.isPercentage ? 100 : 1), 2) : Math.round(value.total * (value.isPercentage ? 100 : 1)) + (value.isPercentage ? '%' : ''),
-		)
-			.join(' | ');
-	}
+	updateComputedStats(majorStats);
 
 	return majorStats;
 });
+
+function updateComputedStats(stats: IChampionStat[]) {
+	for (const stat of stats) {
+		const displayedValue: string[] = [];
+
+		for (let i = 0; i <= stat.values.length - 1; i++) {
+			const value = stat.values[i]!;
+			const multiplier = value.isPercentage ? 100 : 1;
+
+			displayedValue.push(`${formatStatValue(multiplier, value, 'total')}${value.isPercentage ? '%' : ''}`);
+
+			value.total = formatStatValue(multiplier, value, 'total');
+
+			if (value.bonus) {
+				value.bonus = formatStatValue(multiplier, value, 'bonus');
+			}
+
+			if ('base' in value) {
+				value.base = formatStatValue(multiplier, value, 'base');
+			}
+		}
+
+		stat.displayedValue ||= displayedValue.join(' | ');
+	}
+}
+
+function formatStatValue(multiplier: number, value: IChampionStat['values'][number], key: 'total' | 'base' | 'bonus') {
+	return `${value.decimal
+		? roundVariable(value[key] as number * multiplier, value.decimal)
+		: Math.round(value[key] as number * multiplier)}`;
+}
 
 const hoveredStat = shallowRef<IChampionStat>();
 const hoveredStatTooltip = useTemplateRef('championStatTooltip');
@@ -395,7 +412,7 @@ function showStatTooltip(event: MouseEvent, stat: IChampionStat) {
 }
 
 function hideStatTooltip() {
-	hoveredStatTooltip.value?.hidePopover();
+	// hoveredStatTooltip.value?.hidePopover();
 }
 
 const el = useTemplateRef('el');
@@ -595,8 +612,8 @@ defineExpose({ el });
 				<dl>
 					<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 						<dt>{{ statValue.name }}:</dt>
-						<dd>
-							<span data-total="">{{ statValue.total }}</span>
+						<dd :data-has-bonus="statValue.bonus || undefined">
+							<span data-total="">{{ statValue.total }}</span>{{ statValue.isPercentage ? '%' : '' }}
 							<template v-if="'base' in statValue">
 								(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
 							</template>
@@ -604,7 +621,7 @@ defineExpose({ el });
 						<br v-if="valueIndex !== ((hoveredStat?.values.length || 1) - 1)">
 					</template>
 				</dl>
-				<p v-if="hoveredStat?.bottomText" v-html="hoveredStat?.bottomText" />
+				<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
 			</div>
 		</details>
 	</li>
@@ -748,7 +765,6 @@ defineExpose({ el });
 		/* } */
 
 		> details {
-			/* anchor-name: --scoreboard-item-details; */
 			anchor-scope: --champion-stats-minor;
 			grid-area: expanded;
 
@@ -791,19 +807,50 @@ defineExpose({ el });
 			}
 
 			#champion-stat-hover-tooltip {
-				--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none absolute p-1 b b-[--ui-button-border-clr]';
+				--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none absolute py-1 px-1.5 b b-[--ui-button-border-clr] text-neutral-300';
 				inset: unset;
 				position-anchor: --champion-stats-minor;
 				bottom: calc(anchor(top) - 1px);
 				justify-self: anchor-center;
 
-				dt,
-				dd {
-					--at-apply: 'inline';
+				h4 {
+					--at-apply: 'text-lg/6 font-500 pb-0.5 b-b b-[--ui-button-border-clr] text-white';
 				}
 
-				dd {
-					--at-apply: 'ms-[0.5ch]';
+				p:first-of-type {
+					--at-apply: 'b-b b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+				}
+
+				dl {
+					--at-apply: 'leading-5.5';
+
+					dt,
+					dd {
+						--at-apply: 'inline';
+					}
+
+					dd {
+						--at-apply: 'ms-[0.5ch]';
+					}
+				}
+
+				[data-total],
+				[data-base] {
+					--at-apply: 'text-cyan-300 font-500';
+				}
+
+				[data-bonus] {
+					--at-apply: 'text-[#0f0] font-500';
+				}
+
+				[data-has-bonus] {
+					[data-total] {
+						--at-apply: 'text-[#0f0]';
+					}
+				}
+
+				p:last-child {
+					--at-apply: 'mt-1';
 				}
 			}
 		}
