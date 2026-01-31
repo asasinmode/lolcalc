@@ -92,7 +92,7 @@ function finishDrag(event: MouseEvent) {
 
 	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement;
 	if (element) {
-		delete element.dataset.dropDirection;
+		removeDropIndicator(element);
 	}
 	if (dragging.value?.element) {
 		dragging.value.element.style.pointerEvents = '';
@@ -142,8 +142,19 @@ function setCurrentDropTarget(event: MouseEvent) {
 function cleanupCurrentDropTarget(event: MouseEvent) {
 	const target = event.target as HTMLElement;
 	target.removeEventListener('mousemove', updateCurrentDropTarget);
-	delete target.dataset.dropDirection;
+	removeDropIndicator(target);
 	droppedAt = undefined;
+}
+
+function removeDropIndicator(element: HTMLElement) {
+	const currentDropDirection = element.dataset.dropDirection;
+	const secondIndicator = currentDropDirection === 'above'
+		? element.previousElementSibling
+		: currentDropDirection === 'below' ? element.nextElementSibling : null;
+	delete element.dataset.dropDirection;
+	if (secondIndicator) {
+		delete (secondIndicator as HTMLElement).dataset.dropDirection;
+	}
 }
 
 function updateCurrentDropTarget(event: MouseEvent) {
@@ -165,7 +176,17 @@ function updateCurrentDropTarget(event: MouseEvent) {
 	}
 
 	const rect = element.getBoundingClientRect();
+	const currentDropDirection = element.dataset.dropDirection;
 	let dropDirection: 'above' | 'below' = event.clientY < (rect.y + rect.height / 2) ? 'above' : 'below';
+
+	if (currentDropDirection && currentDropDirection !== dropDirection) {
+		const previousSecondIndicator = currentDropDirection === 'above'
+			? element.previousElementSibling
+			: currentDropDirection === 'below' ? element.nextElementSibling : null;
+		if (previousSecondIndicator) {
+			delete (previousSecondIndicator as HTMLElement).dataset.dropDirection;
+		}
+	}
 
 	if (target === dragging.value.source) {
 		if (index === dragging.value.index - 1) {
@@ -175,7 +196,14 @@ function updateCurrentDropTarget(event: MouseEvent) {
 		}
 	}
 
+	const secondIndicator = dropDirection === 'above'
+		? element.previousElementSibling
+		: dropDirection === 'below' ? element.nextElementSibling : null;
+
 	element.dataset.dropDirection = dropDirection;
+	if ((secondIndicator as HTMLElement) && 'scoreboardItem' in (secondIndicator as HTMLElement)?.dataset) {
+		(secondIndicator as HTMLElement).dataset.dropDirection = dropDirection === 'below' ? 'above' : 'below';
+	}
 	droppedAt = {
 		index,
 		target,
@@ -434,8 +462,8 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				--at-apply: 'inset-0';
 				background-image: linear-gradient(
 					var(--drop-indicator-bg-direction),
-					hsl(0 100% 100% / 0.7) 0%,
-					transparent 30%
+					hsl(0 100% 100% / 0.6) 0%,
+					transparent 1.5rem
 				);
 			}
 
