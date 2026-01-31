@@ -32,12 +32,13 @@ const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
 	if (primarySlots[0]) {
-		const { iconColor } = runes.paths[primary]!;
-		const { name } = text.runes.paths[primary]!;
+		const { icon } = runes.paths[primary].slots[0]![primarySlots[0]]!;
+		const { name } = text.runes.slots[primarySlots[0]!]!;
+		const { name: pathName } = text.runes.paths[primary]!;
 		return {
-			icon: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`,
-			iconColor,
+			icon: `https://raw.communitydragon.org/${minorVersion}/game/${icon}`,
 			name,
+			pathName,
 		};
 	}
 	return undefined;
@@ -506,13 +507,17 @@ defineExpose({ el });
 			</span>
 			<template v-if="runePathPrimary">
 				<span class="sr-only">
-					primary: {{ runePathPrimary.name }}
+					primary: {{ runePathPrimary.pathName }} - {{ runePathPrimary.name }}
 				</span>
-				<span
-					:style="`background-color: ${runePathPrimary.iconColor}; mask: url(${runePathPrimary.icon}) no-repeat center;`"
+				<img
+					:src="runePathPrimary.icon"
 					aria-hidden="true"
-					class="size-5.5 block"
-				/>
+					width="32"
+					height="32"
+					loading="lazy"
+					data-primary-path-keystone=""
+					class="size-5.5"
+				>
 			</template>
 			<img
 				v-else
@@ -862,7 +867,7 @@ defineExpose({ el });
 			}
 
 			> [data-champion-abilities] {
-				@apply 'bg-pink-950';
+				--at-apply: 'bg-pink-950';
 			}
 		}
 	}
