@@ -462,13 +462,15 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				--at-apply: 'inset-0';
 				background-image: linear-gradient(
 					var(--drop-indicator-bg-direction),
-					hsl(0 100% 100% / 0.6) 0%,
+					hsl(0 100% 100%) 0px,
+					hsl(0 100% 100%) 0.5px,
+					hsl(0 100% 100% / 0.2) 0.5px,
 					transparent 1.5rem
 				);
 			}
 
 			&::after {
-				--at-apply: 'top-0.5 start-1/2 -translate-x-1/2 size-4 bg-white';
+				--at-apply: 'top-0.5 start-1/2 -translate-x-1/2 size-4 bg-neutral-300';
 				mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 			}
 		}
