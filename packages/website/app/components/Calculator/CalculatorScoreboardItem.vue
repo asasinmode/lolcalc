@@ -417,8 +417,10 @@ function hideStatTooltip() {
 	hoveredStatTooltip.value?.hidePopover();
 }
 
-const updateChampionHealth = useNumberInput(props.value.currentHealth);
-const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource);
+const maxHealth = computed(() => Math.round(props.value.stats.value?.stats.total.hp || 1));
+
+const updateChampionHealth = useNumberInput(props.value.currentHealth, true, maxHealth);
+const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource);
 
 const hoveredAbility = shallowRef<string>();
 const hoveredAbilityTooltip = useTemplateRef('championAbilityTooltip');
@@ -647,33 +649,37 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-abilities="">
-				<div data-current-health="">
-					<label :for="`${group}-${index}-current-ability-health`">
-						health:
-					</label>
-					<input
-						:id="`${group}-${index}-current-ability-health`"
-						:value="value.currentHealth.value"
-						min="0"
-						:max="value.stats.value?.stats.total.hp || 0"
-						type="number"
-						@input="updateChampionHealth"
-					>
-					<span>/ {{ value.stats.value?.stats.total.hp || 0 }}</span>
+				<div data-current-health="" :style="`--fill-percentage: ${value.champion.value ? (value.currentHealth.value / maxHealth) : 1}`">
+					<template v-if="value.champion.value">
+						<label :for="`${group}-${index}-current-ability-health`">
+							health
+						</label>
+						<input
+							:id="`${group}-${index}-current-ability-health`"
+							:value="Math.round(value.currentHealth.value)"
+							min="0"
+							:max="maxHealth"
+							type="number"
+							@input="updateChampionHealth"
+						>
+						<span>/ {{ maxHealth }}</span>
+					</template>
 				</div>
-				<div data-current-ability-resource="">
-					<label :for="`${group}-${index}-current-ability-resource`">
-						{{ value.abilityResourceName.value }}:
-					</label>
-					<input
-						:id="`${group}-${index}-current-ability-resource`"
-						:value="value.currentAbilityResource.value"
-						min="0"
-						:max="value.maxAbilityResource.value"
-						type="number"
-						@input="updateChampionAbilityResource"
-					>
-					<span>/ {{ value.maxAbilityResource.value }}</span>
+				<div data-current-ability-resource="" :style="value.maxAbilityResource.value ? `--fill-percentage: ${value.currentHealth.value / maxHealth}` : undefined">
+					<template v-if="value.maxAbilityResource.value">
+						<label :for="`${group}-${index}-current-ability-resource`">
+							{{ value.abilityResourceName.value }}
+						</label>
+						<input
+							:id="`${group}-${index}-current-ability-resource`"
+							:value="Math.round(value.currentAbilityResource.value)"
+							min="0"
+							:max="value.maxAbilityResource.value"
+							type="number"
+							@input="updateChampionAbilityResource"
+						>
+						<span>/ {{ value.maxAbilityResource.value }}</span>
+					</template>
 				</div>
 				<div data-passive="">
 					<img
@@ -1016,16 +1022,20 @@ defineExpose({ el });
 				[data-current-ability-resource] {
 					--at-apply: 'relative bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
 
+					&:before {
+						--at-apply: 'content-empty block absolute z-0 inset-0 origin-left bg-[--fill-bg] scale-x-[var(--fill-percentage,0)]';
+					}
+
 					> label {
-						--at-apply: 'pointer-events-none select-none';
+						--at-apply: 'z-1 sr-only';
 					}
 
 					> span {
-						--at-apply: 'pointer-events-none select-none';
+						--at-apply: 'z-1 pointer-events-none select-none';
 					}
 
 					> input {
-						--at-apply: 'w-12 bg-white text-black text-center leading-[1] px-1';
+						--at-apply: 'z-1 w-12 bg-white text-black text-center leading-[1] px-1';
 						-webkit-appearance: textfield;
 						-moz-appearance: textfield;
 						appearance: textfield;
@@ -1033,10 +1043,13 @@ defineExpose({ el });
 				}
 
 				[data-current-health] {
+					--at-apply: 'mt-2';
+					--fill-bg: theme('colors.green.500');
 					grid-area: health;
 				}
 
 				[data-current-ability-resource] {
+					--fill-bg: theme('colors.red.500');
 					grid-area: resource;
 				}
 			}

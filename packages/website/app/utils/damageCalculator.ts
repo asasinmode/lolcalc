@@ -41,7 +41,7 @@ export class DamageSource {
 	});
 
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
-	maxAbilityResource = computed(() => this.champion.value?.partype === 'mana' ? this.stats.value?.stats.total.mana : 0);
+	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'mana' ? this.stats.value?.stats.total.mana! : 0));
 
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
 		this.id = id;
