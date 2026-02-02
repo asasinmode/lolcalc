@@ -665,7 +665,7 @@ defineExpose({ el });
 						<span>/ {{ maxHealth }}</span>
 					</template>
 				</div>
-				<div data-current-ability-resource="" :style="value.maxAbilityResource.value ? `--fill-percentage: ${value.currentHealth.value / maxHealth}` : undefined">
+				<div data-current-ability-resource="" :style="value.maxAbilityResource.value ? `--fill-percentage: ${value.currentAbilityResource.value / value.maxAbilityResource.value}` : undefined">
 					<template v-if="value.maxAbilityResource.value">
 						<label :for="`${group}-${index}-current-ability-resource`">
 							{{ value.abilityResourceName.value }}
@@ -1049,7 +1049,7 @@ defineExpose({ el });
 				}
 
 				[data-current-ability-resource] {
-					--fill-bg: theme('colors.red.500');
+					--fill-bg: theme('colors.blue.500');
 					grid-area: resource;
 				}
 			}

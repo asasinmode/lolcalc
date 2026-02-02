@@ -41,7 +41,7 @@ export class DamageSource {
 	});
 
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
-	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'mana' ? this.stats.value?.stats.total.mana! : 0));
+	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
 		this.id = id;
@@ -65,6 +65,16 @@ export class DamageSource {
 				});
 		this.currentHealth = ref(this.stats.value?.stats.total.hp || 0);
 		this.currentAbilityResource = ref(this.stats.value?.stats.total.mana || 0);
+
+		watch(this.champion, () => {
+			this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
+			this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
+		}, { flush: 'post' });
+
+		watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], () => {
+			this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.stats.total.hp || 0);
+			this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
+		}, { flush: 'post' });
 	}
 
 	clone(id?: string, overrides: Partial<IOverrides> = {}) {
