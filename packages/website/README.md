@@ -67,7 +67,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] sharing, saving/reading data in query
 - [ ] calculations
   - [ ] item passives (+ displaying values in tooltips)
-  - [ ] champion passives
+  - [ ] champion passives (+ level breakpoints)
   - [ ] role quests [icon](https://raw.communitydragon.org/16.1/game/assets/ux/lol/)
 - [ ] mobile version
 - [ ] creating a screenshot?
@@ -95,6 +95,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
+  - [ ] tabindex for champion stats/abilities and show tooltip
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
 

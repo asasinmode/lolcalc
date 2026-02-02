@@ -417,6 +417,22 @@ function hideStatTooltip() {
 	hoveredStatTooltip.value?.hidePopover();
 }
 
+const updateChampionHealth = useNumberInput(props.value.currentHealth);
+const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource);
+
+const hoveredAbility = shallowRef<string>();
+const hoveredAbilityTooltip = useTemplateRef('championAbilityTooltip');
+
+function showAbilityTooltip(event: MouseEvent, ability: string) {
+	hoveredAbility.value = ability;
+	// @ts-expect-error source is ok
+	hoveredAbilityTooltip.value?.showPopover({ source: event.target });
+}
+
+function hideAbilityTooltip() {
+	hoveredAbilityTooltip.value?.hidePopover();
+}
+
 const el = useTemplateRef('el');
 
 defineExpose({ el });
@@ -631,7 +647,72 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-abilities="">
-				here go abilities
+				<div data-current-health="">
+					<label :for="`${group}-${index}-current-ability-health`">current health</label>
+					<input
+						:id="`${group}-${index}-current-ability-health`"
+						:value="value.currentHealth.value"
+						type="number"
+						@input="updateChampionHealth"
+					>
+				</div>
+				<div data-current-ability-resource="">
+					<label :for="`${group}-${index}-current-ability-resource`">current {{ value.abilityResourceName.value }}</label>
+					<input
+						:id="`${group}-${index}-current-ability-resource`"
+						:value="value.currentAbilityResource.value"
+						type="number"
+						@input="updateChampionAbilityResource"
+					>
+				</div>
+				<div data-passive="">
+					<img
+						src="https://placecats.com/200/200"
+						width="200"
+						height="200"
+						aria-hidden="true"
+					>
+					<span>passive</span>
+				</div>
+				<div data-q="">
+					<img
+						src="https://placecats.com/202/202"
+						width="202"
+						height="202"
+						aria-hidden="true"
+					>
+					<span>Q</span>
+				</div>
+				<div data-w="">
+					<img
+						src="https://placecats.com/203/203"
+						width="203"
+						height="203"
+						aria-hidden="true"
+					>
+					<span>W</span>
+				</div>
+				<div data-e="">
+					<img
+						src="https://placecats.com/204/204"
+						width="204"
+						height="204"
+						aria-hidden="true"
+					>
+					<span>E</span>
+				</div>
+				<div data-r="">
+					<img
+						src="https://placecats.com/205/205"
+						width="205"
+						height="205"
+						aria-hidden="true"
+					>
+					<span>R</span>
+				</div>
+				<div id="champion-ability-hover-tooltip" ref="championAbilityTooltip" popover="hint">
+					here goes hovered ability description {{ hoveredAbility }}
+				</div>
 			</section>
 		</details>
 	</li>

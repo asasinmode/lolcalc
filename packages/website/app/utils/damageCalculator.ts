@@ -16,6 +16,9 @@ export class DamageSource {
 	items: Ref<IItem[]>;
 	runes: Ref<IChampionRunes>;
 
+	currentHealth: Ref<number>;
+	currentAbilityResource: Ref<number>;
+
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => this.champion.value && calculateChampionStats(this));
 	itemDamageCalculationTarget = computed((): IGameVariableCalculationTarget => ({
@@ -37,6 +40,8 @@ export class DamageSource {
 		return Boolean(this.champion.value || this.items.value.length || !this.runePathsEmpty.value);
 	});
 
+	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
+
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
 		this.id = id;
 		this.champion = shallowRef(overrides.champion);
@@ -57,6 +62,8 @@ export class DamageSource {
 						defensive: 'health',
 					},
 				});
+		this.currentHealth = ref(this.stats.value?.stats.total.hp || 0);
+		this.currentAbilityResource = ref(this.stats.value?.stats.total.mana || 0);
 	}
 
 	clone(id?: string, overrides: Partial<IOverrides> = {}) {
