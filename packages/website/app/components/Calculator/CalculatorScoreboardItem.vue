@@ -648,22 +648,32 @@ defineExpose({ el });
 			</section>
 			<section data-champion-abilities="">
 				<div data-current-health="">
-					<label :for="`${group}-${index}-current-ability-health`">current health</label>
+					<label :for="`${group}-${index}-current-ability-health`">
+						health:
+					</label>
 					<input
 						:id="`${group}-${index}-current-ability-health`"
 						:value="value.currentHealth.value"
+						min="0"
+						:max="value.stats.value?.stats.total.hp || 0"
 						type="number"
 						@input="updateChampionHealth"
 					>
+					<span>/ {{ value.stats.value?.stats.total.hp || 0 }}</span>
 				</div>
 				<div data-current-ability-resource="">
-					<label :for="`${group}-${index}-current-ability-resource`">current {{ value.abilityResourceName.value }}</label>
+					<label :for="`${group}-${index}-current-ability-resource`">
+						{{ value.abilityResourceName.value }}:
+					</label>
 					<input
 						:id="`${group}-${index}-current-ability-resource`"
 						:value="value.currentAbilityResource.value"
+						min="0"
+						:max="value.maxAbilityResource.value"
 						type="number"
 						@input="updateChampionAbilityResource"
 					>
+					<span>/ {{ value.maxAbilityResource.value }}</span>
 				</div>
 				<div data-passive="">
 					<img
@@ -948,7 +958,87 @@ defineExpose({ el });
 			}
 
 			> [data-champion-abilities] {
-				--at-apply: 'bg-pink-950';
+				--at-apply: 'grid gap-x-2 auto-rows-min';
+				grid-template-areas:
+					'passive	q					w					e					r'
+					'health		health		health		health		health'
+					'resource	resource	resource	resource	resource';
+
+				> * {
+					--at-apply: 'relative';
+				}
+
+				[data-passive],
+				[data-q],
+				[data-w],
+				[data-e],
+				[data-r] {
+					--at-apply: 'size-14 b b-neutral-300';
+
+					> img {
+						--at-apply: '';
+					}
+
+					> span {
+						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/2';
+
+						-webkit-text-stroke: black 0.1em;
+						paint-order: stroke fill;
+					}
+				}
+
+				[data-passive] {
+					--at-apply: 'size-10';
+					grid-area: passive;
+
+					> span {
+						--at-apply: 'sr-only';
+					}
+				}
+
+				[data-q] {
+					grid-area: q;
+				}
+
+				[data-w] {
+					grid-area: w;
+				}
+
+				[data-e] {
+					grid-area: e;
+				}
+
+				[data-r] {
+					grid-area: r;
+				}
+
+				[data-current-health],
+				[data-current-ability-resource] {
+					--at-apply: 'relative bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
+
+					> label {
+						--at-apply: 'pointer-events-none select-none';
+					}
+
+					> span {
+						--at-apply: 'pointer-events-none select-none';
+					}
+
+					> input {
+						--at-apply: 'w-12 bg-white text-black text-center leading-[1] px-1';
+						-webkit-appearance: textfield;
+						-moz-appearance: textfield;
+						appearance: textfield;
+					}
+				}
+
+				[data-current-health] {
+					grid-area: health;
+				}
+
+				[data-current-ability-resource] {
+					grid-area: resource;
+				}
 			}
 		}
 	}
