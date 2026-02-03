@@ -267,33 +267,12 @@ function updateTooltipPosition(event: MouseEvent) {
 	itemTooltip.value!.style.setProperty('--height', `${itemTooltip.value!.clientHeight}px`);
 }
 
-const buildsIntoMoreButton = useTemplateRef('buildsIntoMoreButton');
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
-
-function updateBuildsIntoMorePosition() {
-	if (!buildsIntoMoreButton.value || !buildsIntoMoreList.value) {
-		return;
-	}
-	const { left, top, width, height } = buildsIntoMoreButton.value.getBoundingClientRect();
-	buildsIntoMoreList.value.style.left = `${left + width}px`;
-	buildsIntoMoreList.value.style.top = `${top + height}px`;
-}
 
 const buildsIntoItems = computed(() => selectedItem.value?.into
 	?.filter(id => (items[id]!.mapMask & mapMask.value) !== 0)
 	.map(id => items[id]!)
 	.sort((a, b) => a.gold.total - b.gold.total) || []);
-
-function onBuildsIntoMoreToggle(event: ToggleEvent) {
-	if (event.newState === 'open') {
-		updateBuildsIntoMorePosition();
-		window.addEventListener('resize', updateBuildsIntoMorePosition, { passive: true });
-		window.addEventListener('scroll', updateBuildsIntoMorePosition, { passive: true });
-	} else {
-		window.removeEventListener('resize', updateBuildsIntoMorePosition);
-		window.removeEventListener('scroll', updateBuildsIntoMorePosition);
-	}
-}
 
 function closeBuildsIntoMoreListIfOutside(event: FocusEvent) {
 	const target = event.relatedTarget as HTMLElement | null;
@@ -319,11 +298,6 @@ const displayedItemBuildPath3rdLevelHasTwo3Items = computed(() => {
 	}
 
 	return false;
-});
-
-onBeforeUnmount(() => {
-	window.removeEventListener('resize', updateBuildsIntoMorePosition);
-	window.removeEventListener('scroll', updateBuildsIntoMorePosition);
 });
 
 /* eslint-disable antfu/consistent-list-newline */
@@ -648,16 +622,14 @@ defineExpose({
 							loading="lazy"
 						>
 					</button>
-					<button v-else ref="buildsIntoMoreButton" popovertarget="builds-into-more-list" class="size-(--item-img-size)" @focusout="closeBuildsIntoMoreListIfOutside">
+					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside">
 						+{{ buildsIntoItems.length - 6 }}
 					</button>
 					<ul
 						id="builds-into-more-list"
 						ref="buildsIntoMoreList"
-						class="h-max max-h-[60vh] w-max of-y-auto -translate-x-full"
 						popover
 						@focusout="closeBuildsIntoMoreListIfOutside"
-						@toggle="onBuildsIntoMoreToggle"
 					>
 						<li v-for="item in buildsIntoItems.slice(6)" :key="item.id">
 							<button
@@ -886,7 +858,6 @@ defineExpose({
 	.item-shop-item-btn img,
 	.item-shop-item-img {
 		--at-apply: 'size-12.5 min-w-12.5 m-0.75 text-xs text-center break-words';
-
 		--inner-border: gray;
 		box-shadow:
 			0 0 0 2px var(--inner-border),
@@ -905,12 +876,24 @@ defineExpose({
 		--at-apply: 'bg-black size-(--item-img-size) block';
 	}
 
+	#item-shop-builds-into-list > li:last-child {
+		--at-apply: 'relative';
+		anchor-name: --last-builds-into-button;
+	}
+
+	#builds-into-more-list {
+		--at-apply: 'h-max max-h-[60vh] w-max of-y-auto z-10';
+		position-anchor: --last-builds-into-button;
+		inset: unset;
+		inset-block-start: calc(anchor(bottom) + 2px);
+		inset-inline-end: anchor(right);
+	}
+
 	#item-shop-hover-tooltip {
 		--at-apply: 'bg-neutral-950 max-w-screen w-(--width) pointer-events-none fixed';
-
-		--width: 45rem;
+		--width: 36rem;
 		inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
-		top: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
+		inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 	}
 }
 </style>
