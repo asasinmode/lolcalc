@@ -1,0 +1,29 @@
+{
+	"id": "KSante",
+	"key": "897",
+	"name": "K'Sante",
+	"partype": "Mana",
+	"stats": {
+		"hp": 625,
+		"hpperlevel": 120,
+		"mp": 320,
+		"mpperlevel": 60,
+		"movespeed": 330,
+		"armor": 36,
+		"armorperlevel": 5.2,
+		"spellblock": 30,
+		"spellblockperlevel": 2.1,
+		"attackrange": 150,
+		"hpregen": 9.5,
+		"hpregenperlevel": 1,
+		"mpregen": 7,
+		"mpregenperlevel": 1,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 64,
+		"attackdamageperlevel": 3.5,
+		"attackspeedperlevel": 2.5,
+		"attackspeed": 0.688,
+		"attackspeedratio": 0.625
+	}
+}

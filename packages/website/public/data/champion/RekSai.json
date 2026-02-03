@@ -1,0 +1,29 @@
+{
+	"id": "RekSai",
+	"key": "421",
+	"name": "Rek'Sai",
+	"partype": "Rage",
+	"stats": {
+		"hp": 600,
+		"hpperlevel": 99,
+		"mp": 100,
+		"mpperlevel": 0,
+		"movespeed": 340,
+		"armor": 35,
+		"armorperlevel": 4.5,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 2.5,
+		"hpregenperlevel": 0.5,
+		"mpregen": 0,
+		"mpregenperlevel": 0,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 62,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 2,
+		"attackspeed": 0.667,
+		"attackspeedratio": 0.667
+	}
+}

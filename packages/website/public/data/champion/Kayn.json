@@ -1,0 +1,29 @@
+{
+	"id": "Kayn",
+	"key": "141",
+	"name": "Kayn",
+	"partype": "Mana",
+	"stats": {
+		"hp": 655,
+		"hpperlevel": 103,
+		"mp": 410,
+		"mpperlevel": 50,
+		"movespeed": 340,
+		"armor": 38,
+		"armorperlevel": 4.5,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 8,
+		"hpregenperlevel": 0.75,
+		"mpregen": 11.5,
+		"mpregenperlevel": 0.95,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 68,
+		"attackdamageperlevel": 3.3,
+		"attackspeedperlevel": 2.7,
+		"attackspeed": 0.669,
+		"attackspeedratio": 0.669
+	}
+}

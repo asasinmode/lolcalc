@@ -1,0 +1,29 @@
+{
+	"id": "Garen",
+	"key": "86",
+	"name": "Garen",
+	"partype": "None",
+	"stats": {
+		"hp": 690,
+		"hpperlevel": 98,
+		"mp": 0,
+		"mpperlevel": 0,
+		"movespeed": 340,
+		"armor": 38,
+		"armorperlevel": 4.2,
+		"spellblock": 32,
+		"spellblockperlevel": 1.55,
+		"attackrange": 175,
+		"hpregen": 8,
+		"hpregenperlevel": 0.5,
+		"mpregen": 0,
+		"mpregenperlevel": 0,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 69,
+		"attackdamageperlevel": 4.5,
+		"attackspeedperlevel": 3.65,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	}
+}

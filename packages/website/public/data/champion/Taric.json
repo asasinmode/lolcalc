@@ -1,0 +1,29 @@
+{
+	"id": "Taric",
+	"key": "44",
+	"name": "Taric",
+	"partype": "Mana",
+	"stats": {
+		"hp": 645,
+		"hpperlevel": 99,
+		"mp": 300,
+		"mpperlevel": 60,
+		"movespeed": 340,
+		"armor": 40,
+		"armorperlevel": 4.3,
+		"spellblock": 28,
+		"spellblockperlevel": 2.05,
+		"attackrange": 150,
+		"hpregen": 6,
+		"hpregenperlevel": 0.5,
+		"mpregen": 8.5,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 55,
+		"attackdamageperlevel": 3.5,
+		"attackspeedperlevel": 2,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	}
+}

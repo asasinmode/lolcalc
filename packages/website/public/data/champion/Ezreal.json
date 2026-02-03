@@ -1,0 +1,29 @@
+{
+	"id": "Ezreal",
+	"key": "81",
+	"name": "Ezreal",
+	"partype": "Mana",
+	"stats": {
+		"hp": 600,
+		"hpperlevel": 102,
+		"mp": 375,
+		"mpperlevel": 70,
+		"movespeed": 325,
+		"armor": 24,
+		"armorperlevel": 4.2,
+		"spellblock": 30,
+		"spellblockperlevel": 1.3,
+		"attackrange": 550,
+		"hpregen": 4,
+		"hpregenperlevel": 0.65,
+		"mpregen": 8.5,
+		"mpregenperlevel": 1,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 60,
+		"attackdamageperlevel": 3.25,
+		"attackspeedperlevel": 2.5,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	}
+}

@@ -1,0 +1,29 @@
+{
+	"id": "Naafiri",
+	"key": "950",
+	"name": "Naafiri",
+	"partype": "Mana",
+	"stats": {
+		"hp": 610,
+		"hpperlevel": 105,
+		"mp": 400,
+		"mpperlevel": 55,
+		"movespeed": 340,
+		"armor": 28,
+		"armorperlevel": 4.2,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 125,
+		"hpregen": 7.5,
+		"hpregenperlevel": 0.7,
+		"mpregen": 7.5,
+		"mpregenperlevel": 1,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 55,
+		"attackdamageperlevel": 2,
+		"attackspeedperlevel": 2.1,
+		"attackspeed": 0.663,
+		"attackspeedratio": 0.625
+	}
+}

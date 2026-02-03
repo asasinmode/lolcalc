@@ -1,0 +1,29 @@
+{
+	"id": "Orianna",
+	"key": "61",
+	"name": "Orianna",
+	"partype": "Mana",
+	"stats": {
+		"hp": 585,
+		"hpperlevel": 110,
+		"mp": 418,
+		"mpperlevel": 25,
+		"movespeed": 325,
+		"armor": 20,
+		"armorperlevel": 4.2,
+		"spellblock": 26,
+		"spellblockperlevel": 1.3,
+		"attackrange": 525,
+		"hpregen": 7,
+		"hpregenperlevel": 0.55,
+		"mpregen": 8,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 44,
+		"attackdamageperlevel": 2.6,
+		"attackspeedperlevel": 3.5,
+		"attackspeed": 0.658,
+		"attackspeedratio": 0.658
+	}
+}

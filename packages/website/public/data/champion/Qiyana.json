@@ -1,0 +1,29 @@
+{
+	"id": "Qiyana",
+	"key": "246",
+	"name": "Qiyana",
+	"partype": "Mana",
+	"stats": {
+		"hp": 590,
+		"hpperlevel": 121,
+		"mp": 375,
+		"mpperlevel": 60,
+		"movespeed": 335,
+		"armor": 31,
+		"armorperlevel": 4.5,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 150,
+		"hpregen": 8,
+		"hpregenperlevel": 0.9,
+		"mpregen": 8,
+		"mpregenperlevel": 0.7,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 64,
+		"attackdamageperlevel": 3.1,
+		"attackspeedperlevel": 2.1,
+		"attackspeed": 0.688,
+		"attackspeedratio": 0.625
+	}
+}

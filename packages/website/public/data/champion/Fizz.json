@@ -1,0 +1,29 @@
+{
+	"id": "Fizz",
+	"key": "105",
+	"name": "Fizz",
+	"partype": "Mana",
+	"stats": {
+		"hp": 640,
+		"hpperlevel": 106,
+		"mp": 317,
+		"mpperlevel": 52,
+		"movespeed": 335,
+		"armor": 26,
+		"armorperlevel": 4.6,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 8,
+		"hpregenperlevel": 0.7,
+		"mpregen": 6,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 58,
+		"attackdamageperlevel": 3,
+		"attackspeedperlevel": 3.1,
+		"attackspeed": 0.658,
+		"attackspeedratio": 0.658
+	}
+}

@@ -1,0 +1,29 @@
+{
+	"id": "Lillia",
+	"key": "876",
+	"name": "Lillia",
+	"partype": "Mana",
+	"stats": {
+		"hp": 605,
+		"hpperlevel": 105,
+		"mp": 410,
+		"mpperlevel": 50,
+		"movespeed": 330,
+		"armor": 22,
+		"armorperlevel": 4.5,
+		"spellblock": 32,
+		"spellblockperlevel": 1.55,
+		"attackrange": 325,
+		"hpregen": 2.5,
+		"hpregenperlevel": 0.55,
+		"mpregen": 11.5,
+		"mpregenperlevel": 0.95,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 61,
+		"attackdamageperlevel": 3.1,
+		"attackspeedperlevel": 2.7,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	}
+}

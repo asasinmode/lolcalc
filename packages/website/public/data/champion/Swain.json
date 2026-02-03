@@ -1,0 +1,29 @@
+{
+	"id": "Swain",
+	"key": "50",
+	"name": "Swain",
+	"partype": "Mana",
+	"stats": {
+		"hp": 595,
+		"hpperlevel": 99,
+		"mp": 400,
+		"mpperlevel": 29,
+		"movespeed": 330,
+		"armor": 25,
+		"armorperlevel": 4.7,
+		"spellblock": 31,
+		"spellblockperlevel": 1.55,
+		"attackrange": 525,
+		"hpregen": 3,
+		"hpregenperlevel": 0.5,
+		"mpregen": 10,
+		"mpregenperlevel": 0.8,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 58,
+		"attackdamageperlevel": 2.7,
+		"attackspeedperlevel": 2.11,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	}
+}

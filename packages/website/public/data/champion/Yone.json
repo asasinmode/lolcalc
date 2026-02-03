@@ -1,0 +1,29 @@
+{
+	"id": "Yone",
+	"key": "777",
+	"name": "Yone",
+	"partype": "Flow",
+	"stats": {
+		"hp": 620,
+		"hpperlevel": 105,
+		"mp": 500,
+		"mpperlevel": 0,
+		"movespeed": 345,
+		"armor": 33,
+		"armorperlevel": 4.6,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 7.5,
+		"hpregenperlevel": 0.75,
+		"mpregen": 0,
+		"mpregenperlevel": 0,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 62,
+		"attackdamageperlevel": 2,
+		"attackspeedperlevel": 3.5,
+		"attackspeed": 0.625,
+		"attackspeedratio": 0.625
+	}
+}

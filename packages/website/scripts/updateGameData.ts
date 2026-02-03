@@ -82,12 +82,19 @@ if (!championData || championData?.version !== latestVersion) {
 						console.log(Object.keys(additionalData));
 					}
 
-					return [championId, {
+					const championFile = Bun.file(`${import.meta.dir}/../public/data/champion/${id}.json`);
+					const championFileData = {
 						id,
 						key,
 						name,
 						partype,
 						stats,
+					};
+					await championFile.write(JSON.stringify(championFileData, null, '\t'));
+
+					return [championId, {
+						key,
+						name,
 						image: (image as unknown as { full: string }).full,
 						roles: {},
 					}];

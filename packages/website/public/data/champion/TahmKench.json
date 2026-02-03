@@ -1,0 +1,29 @@
+{
+	"id": "TahmKench",
+	"key": "223",
+	"name": "Tahm Kench",
+	"partype": "Mana",
+	"stats": {
+		"hp": 640,
+		"hpperlevel": 103,
+		"mp": 325,
+		"mpperlevel": 50,
+		"movespeed": 335,
+		"armor": 39,
+		"armorperlevel": 4.7,
+		"spellblock": 32,
+		"spellblockperlevel": 2.05,
+		"attackrange": 175,
+		"hpregen": 6.5,
+		"hpregenperlevel": 0.55,
+		"mpregen": 8,
+		"mpregenperlevel": 1,
+		"crit": 0,
+		"critperlevel": 0,
+		"attackdamage": 56,
+		"attackdamageperlevel": 3.2,
+		"attackspeedperlevel": 2.5,
+		"attackspeed": 0.658,
+		"attackspeedratio": 0.658
+	}
+}
