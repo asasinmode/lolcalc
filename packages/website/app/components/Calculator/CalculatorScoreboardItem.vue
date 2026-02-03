@@ -649,7 +649,7 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-abilities="">
-				<div data-current-health="" :style="`--fill-percentage: ${value.champion.value ? (value.currentHealth.value / maxHealth) : 1}`">
+				<div data-current-health="" :style="`--fill-percentage: ${value.champion.value ? Math.min(value.currentHealth.value / maxHealth, 1) : 1}`">
 					<template v-if="value.champion.value">
 						<label :for="`${group}-${index}-current-ability-health`">
 							health
@@ -665,7 +665,7 @@ defineExpose({ el });
 						<span>/ {{ maxHealth }}</span>
 					</template>
 				</div>
-				<div data-current-ability-resource="" :style="value.maxAbilityResource.value ? `--fill-percentage: ${value.currentAbilityResource.value / value.maxAbilityResource.value}` : undefined">
+				<div data-current-ability-resource="" :style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(value.currentAbilityResource.value / value.maxAbilityResource.value, 1)}` : undefined">
 					<template v-if="value.maxAbilityResource.value">
 						<label :for="`${group}-${index}-current-ability-resource`">
 							{{ value.abilityResourceName.value }}
@@ -698,6 +698,17 @@ defineExpose({ el });
 						aria-hidden="true"
 					>
 					<span>Q</span>
+					<VButtonRadiogroup
+						:id="`${group}-${index}-ability-q`"
+						v-model="value.abilityLevels.value.q"
+						label="Q level"
+						:options="Array.from({ length: 5 }, (_, index) => ({ level: index + 1 }))"
+						value-key="level"
+					>
+						<template #default="{ option }">
+							<span>{{ option.level }}</span>
+						</template>
+					</VButtonRadiogroup>
 				</div>
 				<div data-w="">
 					<img
@@ -964,7 +975,7 @@ defineExpose({ el });
 			}
 
 			> [data-champion-abilities] {
-				--at-apply: 'grid gap-x-2 auto-rows-min';
+				--at-apply: 'grid gap-x-2 auto-rows-max';
 				grid-template-areas:
 					'passive	q					w					e					r'
 					'health		health		health		health		health'
@@ -986,10 +997,41 @@ defineExpose({ el });
 					}
 
 					> span {
-						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/2';
+						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-2/5 pointer-events-none';
 
 						-webkit-text-stroke: black 0.1em;
 						paint-order: stroke fill;
+					}
+				}
+
+				[data-q],
+				[data-w],
+				[data-e],
+				[data-r] {
+					> [role='radiogroup'] {
+						--at-apply: 'flex';
+
+						> button {
+							--at-apply: 'grow py-1';
+
+							&::before {
+								--at-apply: 'content-empty block b b-[--ui-button-border-clr] size-2 rounded-full bg-black mx-auto';
+							}
+
+							&[aria-checked='true']::before,
+							&:has(~ [aria-checked='true'])::before {
+								--at-apply: 'bg-[--ui-button-border-clr]';
+							}
+
+							&:hover::before,
+							&:focus-visible::before {
+								--at-apply: 'bg-white';
+							}
+
+							> span {
+								--at-apply: 'sr-only';
+							}
+						}
 					}
 				}
 

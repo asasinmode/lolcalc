@@ -7,6 +7,9 @@ interface IOverrides {
 	level: UnwrapRef<IDamageSource['level']>;
 	items: UnwrapRef<IDamageSource['items']>;
 	runes: UnwrapRef<IDamageSource['runes']>;
+	abilityLevels: Partial<UnwrapRef<IDamageSource['abilityLevels']>>;
+	currentHealth: UnwrapRef<IDamageSource['currentHealth']>;
+	currentAbilityResource: UnwrapRef<IDamageSource['currentAbilityResource']>;
 }
 
 export class DamageSource {
@@ -15,6 +18,12 @@ export class DamageSource {
 	level: Ref<number>;
 	items: Ref<IItem[]>;
 	runes: Ref<IChampionRunes>;
+	abilityLevels: Ref<{
+		q: number;
+		w: number;
+		e: number;
+		r: number;
+	}>;
 
 	currentHealth: Ref<number>;
 	currentAbilityResource: Ref<number>;
@@ -63,8 +72,9 @@ export class DamageSource {
 						defensive: 'health',
 					},
 				});
-		this.currentHealth = ref(this.stats.value?.stats.total.hp || 0);
-		this.currentAbilityResource = ref(this.stats.value?.stats.total.mana || 0);
+		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.stats.total.hp || 0));
+		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.stats.total.mana || 0));
+		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...(overrides.abilityLevels || {}) });
 
 		watch(this.champion, () => {
 			this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
@@ -83,6 +93,9 @@ export class DamageSource {
 			level: this.level.value,
 			items: this.items.value,
 			runes: this.runes.value,
+			currentHealth: this.currentHealth.value,
+			currentAbilityResource: this.currentAbilityResource.value,
+			abilityLevels: structuredClone(toRaw(this.abilityLevels.value)),
 			...overrides,
 		});
 	}
