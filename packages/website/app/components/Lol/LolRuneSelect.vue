@@ -391,7 +391,7 @@ defineExpose({
 		</section>
 		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" data-game-description="">
 			<h4>{{ hoveredRune?.title }}</h4>
-			<div v-html="(globalKeyModifiers.shift ? hoveredRuneTooltip?.longReplaced : hoveredRuneTooltip?.shortReplaced) || ''" />
+			<div v-html="globalKeyModifiers.shift && hoveredRuneTooltip?.longReplaced || hoveredRuneTooltip?.shortReplaced" />
 			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />
 		</div>
 	</VDialog>
