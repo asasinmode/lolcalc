@@ -177,15 +177,31 @@ const hoveredRuneTooltip = computed(() => {
 		return undefined;
 	}
 
-	const { replaced: stringtableVariableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables((globalKeyModifiers.value.shift && hoveredRune.value.expandedDescription) || hoveredRune.value.description, text.stringtable);
+	const { replaced: shortStringtableVariableReplaced, unknownStringtableVariables: shortUnknownSV } = replaceGameDescriptionStringtableVariables(
+		(globalKeyModifiers.value.shift && hoveredRune.value.expandedDescription) || hoveredRune.value.description,
+		text.stringtable,
+	);
 
-	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
-		stringtableVariableReplaced,
+	const { replaced: shortReplaced, unknownVariables: shortUnknownV } = replaceGameDescriptionVariables(
+		shortStringtableVariableReplaced,
 		'rune',
 		hoveredRune.value.rune,
 	);
 
-	return { replaced, unknownVariables: unknownVariables.concat(unknownStringtableVariables) };
+	const { replaced: longStringtableVariableReplaced, unknownStringtableVariables: longUnknownSV } = replaceGameDescriptionStringtableVariables(
+		hoveredRune.value.expandedDescription || '',
+		text.stringtable,
+	);
+
+	const { replaced: longReplaced, unknownVariables: longUnknownV } = replaceGameDescriptionVariables(
+		longStringtableVariableReplaced,
+		'rune',
+		hoveredRune.value.rune,
+	);
+
+	const anyUnknownVariables = shortUnknownSV.length || shortUnknownV.length || longUnknownSV.length || longUnknownV.length;
+
+	return { shortReplaced, longReplaced, anyUnknownVariables };
 });
 
 type IHoveredRuneOption = (typeof pathOptions)[number] | NonNullable<UnwrapRef<typeof primaryRunePathSlots>>[number][number] | NonNullable<UnwrapRef<typeof secondaryRunePathSlots>>[number][number] | UnwrapRef<typeof shardSlots>[IRuneShardSlotName][number];
@@ -375,8 +391,8 @@ defineExpose({
 		</section>
 		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" data-game-description="">
 			<h4>{{ hoveredRune?.title }}</h4>
-			<div v-html="hoveredRuneTooltip?.replaced || ''" />
-			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.unknownVariables.length" />
+			<div v-html="(globalKeyModifiers.shift ? hoveredRuneTooltip?.longReplaced : hoveredRuneTooltip?.shortReplaced) || ''" />
+			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />
 		</div>
 	</VDialog>
 </template>
