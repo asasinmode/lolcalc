@@ -64,7 +64,7 @@ if (!championData || championData?.version !== latestVersion) {
 	championData = {
 		version,
 		data: Object.fromEntries(
-			await Promise.all((Object.entries(data) as [string, IChampion][])
+			await Promise.all((Object.entries(data) as [string, (IChampion & { image: string })][])
 				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
 				.map(async ([championId, championData]) => {
 					const { id, key, name, image, partype, stats } = championData;
@@ -93,6 +93,7 @@ if (!championData || championData?.version !== latestVersion) {
 					await championFile.write(JSON.stringify(championFileData, null, '\t'));
 
 					return [championId, {
+						id,
 						key,
 						name,
 						image: (image as unknown as { full: string }).full,

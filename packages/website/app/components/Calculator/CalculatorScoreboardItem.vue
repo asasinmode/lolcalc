@@ -28,6 +28,7 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
+const isLoading = computed(() => !props.value.champion.value && props.value.listedChampion.value);
 
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
@@ -489,14 +490,14 @@ defineExpose({ el });
 		<div data-select-champion="">
 			<button
 				title="select champion"
-				@click="selectChampion(value.champion)"
+				@click="selectChampion(value.listedChampion)"
 			>
 				<span class="sr-only">
-					{{ value.champion.value ? `selected champion: ${value.champion.value.name}` : 'select champion' }}
+					{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
 				</span>
 				<img
-					v-if="value.champion.value"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${value.champion.value.image}`"
+					v-if="value.listedChampion.value"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${value.listedChampion.value.image}`"
 					loading="lazy"
 					width="128"
 					height="128"
@@ -997,7 +998,7 @@ defineExpose({ el });
 					}
 
 					> span {
-						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-2/5 pointer-events-none';
+						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none';
 
 						-webkit-text-stroke: black 0.1em;
 						paint-order: stroke fill;
@@ -1008,14 +1009,18 @@ defineExpose({ el });
 				[data-w],
 				[data-e],
 				[data-r] {
+					--at-apply: 'mb-[calc(var(--button-indicator-size)+2*var(--button-py))]';
+					--button-indicator-size: calc(2 * var(--spacing));
+					--button-py: calc(1 * var(--spacing));
+
 					> [role='radiogroup'] {
 						--at-apply: 'flex';
 
 						> button {
-							--at-apply: 'grow py-1';
+							--at-apply: 'grow py-[--button-py]';
 
 							&::before {
-								--at-apply: 'content-empty block b b-[--ui-button-border-clr] size-2 rounded-full bg-black mx-auto';
+								--at-apply: 'content-empty block b b-[--ui-button-border-clr] size-[--button-indicator-size] rounded-full bg-black mx-auto';
 							}
 
 							&[aria-checked='true']::before,

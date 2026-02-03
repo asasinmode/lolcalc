@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const value = defineModel<IChampion>();
+const value = defineModel<IListedChampion>();
 const champions = useChampions();
 const { version, minorVersion } = usePatchVersion();
 
