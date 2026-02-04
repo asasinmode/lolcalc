@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.4,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ivern/hud/icons2d/ivernp.png"
+		},
+		"q": {
+			"image": "assets/characters/ivern/hud/icons2d/ivernq.png"
+		},
+		"w": {
+			"image": "assets/characters/ivern/hud/icons2d/ivernw.png"
+		},
+		"e": {
+			"image": "assets/characters/ivern/hud/icons2d/iverne.png"
+		},
+		"r": {
+			"image": "assets/characters/ivern/hud/icons2d/ivernr.png"
+		}
 	}
 }

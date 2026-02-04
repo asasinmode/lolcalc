@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.75,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/viego/hud/icons2d/viego_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/viego/hud/icons2d/viego_q.png"
+		},
+		"w": {
+			"image": "assets/characters/viego/hud/icons2d/viego_w.png"
+		},
+		"e": {
+			"image": "assets/characters/viego/hud/icons2d/viego_e.png"
+		},
+		"r": {
+			"image": "assets/characters/viego/hud/icons2d/viego_r.png"
+		}
 	}
 }

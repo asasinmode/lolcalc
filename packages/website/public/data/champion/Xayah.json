@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.9,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/xayah/hud/icons2d/xayahpassive.png"
+		},
+		"q": {
+			"image": "assets/characters/xayah/hud/icons2d/xayahq.png"
+		},
+		"w": {
+			"image": "assets/characters/xayah/hud/icons2d/xayahw.png"
+		},
+		"e": {
+			"image": "assets/characters/xayah/hud/icons2d/xayahe.png"
+		},
+		"r": {
+			"image": "assets/characters/xayah/hud/icons2d/xayahr.png"
+		}
 	}
 }

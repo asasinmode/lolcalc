@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 4,
 		"attackspeed": 0.638,
 		"attackspeedratio": 0.4
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/akshan/hud/icons2d/akshan_p.png"
+		},
+		"q": {
+			"image": "assets/characters/akshan/hud/icons2d/akshan_q.png"
+		},
+		"w": {
+			"image": "assets/characters/akshan/hud/icons2d/akshan_w.png"
+		},
+		"e": {
+			"image": "assets/characters/akshan/hud/icons2d/akshan_e.png"
+		},
+		"r": {
+			"image": "assets/characters/akshan/hud/icons2d/akshan_r.png"
+		}
 	}
 }

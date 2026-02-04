@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png"
+		},
+		"q": {
+			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserq.png"
+		},
+		"w": {
+			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png"
+		},
+		"e": {
+			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png"
+		},
+		"r": {
+			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png"
+		}
 	}
 }

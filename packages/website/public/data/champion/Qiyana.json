@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.1,
 		"attackspeed": 0.688,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/qiyana/hud/icons2d/qiyana_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/qiyana/hud/icons2d/qiyana_q2_red.png"
+		},
+		"w": {
+			"image": "assets/characters/qiyana/hud/icons2d/qiyana_w.png"
+		},
+		"e": {
+			"image": "assets/characters/qiyana/hud/icons2d/qiyana_e.png"
+		},
+		"r": {
+			"image": "assets/characters/qiyana/hud/icons2d/qiyana_r.png"
+		}
 	}
 }

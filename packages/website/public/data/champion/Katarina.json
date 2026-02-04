@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.74,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/katarina/hud/icons2d/katarina_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/katarina/hud/icons2d/katarina_q.png"
+		},
+		"w": {
+			"image": "assets/characters/katarina/hud/icons2d/katarina_w.png"
+		},
+		"e": {
+			"image": "assets/characters/katarina/hud/icons2d/katarina_e.png"
+		},
+		"r": {
+			"image": "assets/characters/katarina/hud/icons2d/katarina_r.png"
+		}
 	}
 }

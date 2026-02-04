@@ -21,9 +21,26 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 62,
-		"attackdamageperlevel": 3,
+		"attackdamageperlevel": 3.4,
 		"attackspeedperlevel": 2.7,
 		"attackspeed": 0.679,
 		"attackspeedratio": 0.679
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/draven/hud/icons2d/draven_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/draven/hud/icons2d/draven_spinningaxe.png"
+		},
+		"w": {
+			"image": "assets/characters/draven/hud/icons2d/draven_bloodrage.png"
+		},
+		"e": {
+			"image": "assets/characters/draven/hud/icons2d/draven_twinaxe.png"
+		},
+		"r": {
+			"image": "assets/characters/draven/hud/icons2d/draven_whirlingdeath.png"
+		}
 	}
 }

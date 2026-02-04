@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/jayce/hud/icons2d/jaycep_melee.png"
+		},
+		"q": {
+			"image": "assets/characters/jayce/hud/icons2d/jayceq_melee.png"
+		},
+		"w": {
+			"image": "assets/characters/jayce/hud/icons2d/jaycew_melee.png"
+		},
+		"e": {
+			"image": "assets/characters/jayce/hud/icons2d/jaycee_melee.png"
+		},
+		"r": {
+			"image": "assets/characters/jayce/hud/icons2d/jaycer_ranged.png"
+		}
 	}
 }

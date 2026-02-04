@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.67,
 		"attackspeedratio": 0.67
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png"
+		},
+		"w": {
+			"image": "assets/characters/hecarim/hud/icons2d/hecarim_spiritofdread.png"
+		},
+		"e": {
+			"image": "assets/characters/hecarim/hud/icons2d/hecarim_devastingcharge.png"
+		},
+		"r": {
+			"image": "assets/characters/hecarim/hud/icons2d/hecarim_onslaughtofshadows.png"
+		}
 	}
 }

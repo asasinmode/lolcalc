@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/milio/hud/icons2d/milio_p.png"
+		},
+		"q": {
+			"image": "assets/characters/milio/hud/icons2d/milio_q.png"
+		},
+		"w": {
+			"image": "assets/characters/milio/hud/icons2d/milio_w.png"
+		},
+		"e": {
+			"image": "assets/characters/milio/hud/icons2d/milio_e.png"
+		},
+		"r": {
+			"image": "assets/characters/milio/hud/icons2d/milio_r.png"
+		}
 	}
 }

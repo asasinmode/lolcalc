@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.3,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/vayne/hud/icons2d/vayne_p.png"
+		},
+		"q": {
+			"image": "assets/characters/vayne/hud/icons2d/vayne_q.png"
+		},
+		"w": {
+			"image": "assets/characters/vayne/hud/icons2d/vayne_w.png"
+		},
+		"e": {
+			"image": "assets/characters/vayne/hud/icons2d/vayne_e.png"
+		},
+		"r": {
+			"image": "assets/characters/vayne/hud/icons2d/vayne_r.png"
+		}
 	}
 }

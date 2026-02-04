@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.35,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.4
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png"
+		},
+		"q": {
+			"image": "assets/characters/leblanc/hud/icons2d/leblancq.leblanc_rework.png"
+		},
+		"w": {
+			"image": "assets/characters/leblanc/hud/icons2d/leblancw.leblanc_rework.png"
+		},
+		"e": {
+			"image": "assets/characters/leblanc/hud/icons2d/leblance.leblanc_rework.png"
+		},
+		"r": {
+			"image": "assets/characters/leblanc/hud/icons2d/leblancr.leblanc_rework.png"
+		}
 	}
 }

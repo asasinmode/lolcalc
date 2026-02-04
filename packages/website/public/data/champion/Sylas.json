@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.645,
 		"attackspeedratio": 0.645
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/sylas/hud/icons2d/sylasp.png"
+		},
+		"q": {
+			"image": "assets/characters/sylas/hud/icons2d/sylasq.png"
+		},
+		"w": {
+			"image": "assets/characters/sylas/hud/icons2d/sylasw.png"
+		},
+		"e": {
+			"image": "assets/characters/sylas/hud/icons2d/sylase.png"
+		},
+		"r": {
+			"image": "assets/characters/sylas/hud/icons2d/sylasr.png"
+		}
 	}
 }

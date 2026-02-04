@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 6,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/gnar/hud/icons2d/gnar_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/gnar/hud/icons2d/gnar_q.png"
+		},
+		"w": {
+			"image": "assets/characters/gnar/hud/icons2d/gnar_w.png"
+		},
+		"e": {
+			"image": "assets/characters/gnar/hud/icons2d/gnar_e.png"
+		},
+		"r": {
+			"image": "assets/characters/gnar/hud/icons2d/gnarbig_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.68,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/anivia/hud/icons2d/anivia_p.png"
+		},
+		"q": {
+			"image": "assets/characters/anivia/hud/icons2d/anivia_q.png"
+		},
+		"w": {
+			"image": "assets/characters/anivia/hud/icons2d/anivia_w.png"
+		},
+		"e": {
+			"image": "assets/characters/anivia/hud/icons2d/anivia_e.png"
+		},
+		"r": {
+			"image": "assets/characters/anivia/hud/icons2d/anivia_r.png"
+		}
 	}
 }

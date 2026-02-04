@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolp.png"
+		},
+		"q": {
+			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolq.png"
+		},
+		"w": {
+			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolw1.png"
+		},
+		"e": {
+			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsole.png"
+		},
+		"r": {
+			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolr1.png"
+		}
 	}
 }

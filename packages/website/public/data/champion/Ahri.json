@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.2,
 		"attackspeed": 0.668,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_q.png"
+		},
+		"w": {
+			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_w.png"
+		},
+		"e": {
+			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_e.png"
+		},
+		"r": {
+			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_r.png"
+		}
 	}
 }

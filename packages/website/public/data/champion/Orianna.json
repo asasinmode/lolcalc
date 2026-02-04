@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/orianna/hud/icons2d/oriannap.png"
+		},
+		"q": {
+			"image": "assets/characters/orianna/hud/icons2d/oriannaq.png"
+		},
+		"w": {
+			"image": "assets/characters/orianna/hud/icons2d/oriannaw.png"
+		},
+		"e": {
+			"image": "assets/characters/orianna/hud/icons2d/oriannae.png"
+		},
+		"r": {
+			"image": "assets/characters/orianna/hud/icons2d/oriannar.png"
+		}
 	}
 }

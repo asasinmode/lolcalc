@@ -1,5 +1,5 @@
 {
-	"version": "16.2.1",
+	"version": "16.3.1",
 	"data": {
 		"1001": {
 			"id": "1001",
@@ -260,14 +260,14 @@
 			"into": [
 				"2420",
 				"1031",
-				"3190",
 				"2019",
 				"3047",
 				"3024",
 				"3050",
 				"2524",
 				"3076",
-				"3082"
+				"3082",
+				"3190"
 			],
 			"categories": {
 				"tank": true,
@@ -330,12 +330,12 @@
 			"into": [
 				"1057",
 				"3140",
-				"3190",
 				"3050",
 				"3211",
 				"2524",
 				"3155",
 				"3111",
+				"3190",
 				"4632"
 			],
 			"categories": {
@@ -371,6 +371,7 @@
 				"3077",
 				"6670",
 				"3133",
+				"2517",
 				"3142",
 				"3004",
 				"2523",
@@ -1343,7 +1344,7 @@
 			"name": "Dusk and Dawn",
 			"searchString": "duskanddawn;spellblade;bonking;health;attackspeed;spelldamage;onhit;abilityhaste",
 			"stats": {
-				"FlatHPPoolMod": 300,
+				"FlatHPPoolMod": 350,
 				"FlatMagicDamageMod": 70,
 				"PercentAttackSpeedMod": 0.25,
 				"AbilityHasteMod": 20
@@ -1378,7 +1379,7 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mCoefficient": 1
+							"mCoefficient": 0.75
 						},
 						{
 							"mCoefficient": 0.1
@@ -1441,21 +1442,22 @@
 			"name": "Endless Hunger",
 			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste",
 			"stats": {
-				"FlatPhysicalDamageMod": 60,
+				"FlatPhysicalDamageMod": 65,
 				"PercentOmnivampMod": 0.05,
 				"PercentTenacityMod": 0.2
 			},
 			"gold": {
-				"base": 1075,
+				"base": 825,
 				"purchasable": true,
-				"total": 3000,
-				"sell": 2100
+				"total": 3100,
+				"sell": 2170
 			},
 			"image": "2517.png",
 			"mapMask": 3,
 			"from": [
 				"3133",
-				"1037"
+				"1037",
+				"1036"
 			],
 			"epicness": 5,
 			"dataValues": {
@@ -1556,10 +1558,10 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 1050,
+				"base": 750,
 				"purchasable": true,
-				"total": 3100,
-				"sell": 2170
+				"total": 2800,
+				"sell": 1960
 			},
 			"image": "2522.png",
 			"mapMask": 3,
@@ -1572,7 +1574,9 @@
 				"Cooldown": 60,
 				"Duration": 8,
 				"ManaCostIncrease": 1,
-				"CooldownTick": 0.3
+				"CooldownTick": 0.3,
+				"OverflowAddition": 3,
+				"OverflowRevert": 1
 			},
 			"itemCalculations": {
 				"ManaCalc": {
@@ -1696,7 +1700,7 @@
 			"searchString": "protoplasmharness;health;movement;tenacity;abilityhaste",
 			"stats": {
 				"FlatHPPoolMod": 600,
-				"AbilityHasteMod": 15
+				"AbilityHasteMod": 20
 			},
 			"gold": {
 				"base": 800,
@@ -1729,19 +1733,20 @@
 						{
 							"mStat": 1,
 							"mStatFormula": 2,
-							"mCoefficient": 2.5
+							"mCoefficient": 1.75
 						},
 						{
 							"mStat": 6,
 							"mStatFormula": 2,
-							"mCoefficient": 2.5
+							"mCoefficient": 1.75
 						}
 					]
 				},
 				"MaxHealthGain": {
 					"mFormulaParts": [
 						{
-							"mNumber": 200
+							"mStartValue": 200,
+							"mEndValue": 300
 						}
 					]
 				}
@@ -2863,7 +2868,6 @@
 			"into": [
 				"3071",
 				"8020",
-				"3190",
 				"3165",
 				"6620",
 				"3050",
@@ -2875,6 +2879,7 @@
 				"6617",
 				"3065",
 				"3119",
+				"3190",
 				"3222",
 				"4629"
 			],
@@ -4724,9 +4729,9 @@
 			"mapMask": 3,
 			"into": [
 				"6333",
-				"6697",
 				"3156",
 				"2517",
+				"6697",
 				"3004",
 				"3508",
 				"3074",
@@ -4767,9 +4772,9 @@
 			"mapMask": 3,
 			"into": [
 				"3142",
-				"6697",
 				"6701",
 				"2520",
+				"6697",
 				"4004",
 				"6695",
 				"3814",
@@ -5860,18 +5865,24 @@
 			"epicness": 7,
 			"dataValues": {
 				"Cooldown": 15,
-				"ShieldAmount": 0.07,
+				"ShieldAmount": 0.08,
 				"ShieldDuration": 5
 			},
 			"itemCalculations": {
 				"ShieldAmountCalc": {
 					"mFormulaParts": [
 						{
-							"mStartValue": 10,
-							"mEndValue": 120
+							"mLevel1Value": 90,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							]
 						},
 						{
 							"mStat": 12,
+							"mStatFormula": 2,
 							"mDataValue": "ShieldAmount"
 						}
 					]
@@ -5910,18 +5921,24 @@
 			"dataValues": {
 				"DamageReduction": 0.1,
 				"Cooldown": 15,
-				"ShieldAmount": 0.07,
+				"ShieldAmount": 0.08,
 				"ShieldDuration": 5
 			},
 			"itemCalculations": {
 				"ShieldAmountCalc": {
 					"mFormulaParts": [
 						{
-							"mStartValue": 10,
-							"mEndValue": 120
+							"mLevel1Value": 90,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							]
 						},
 						{
 							"mStat": 12,
+							"mStatFormula": 2,
 							"mDataValue": "ShieldAmount"
 						}
 					]

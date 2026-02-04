@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.638,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/lucian/hud/icons2d/lucian_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/lucian/hud/icons2d/lucian_q.png"
+		},
+		"w": {
+			"image": "assets/characters/lucian/hud/icons2d/lucian_w.png"
+		},
+		"e": {
+			"image": "assets/characters/lucian/hud/icons2d/lucian_e.png"
+		},
+		"r": {
+			"image": "assets/characters/lucian/hud/icons2d/lucian_r.png"
+		}
 	}
 }

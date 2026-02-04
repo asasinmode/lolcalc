@@ -72,23 +72,37 @@ if (!championData || championData?.version !== latestVersion) {
 					const additionalData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`);
 
 					const characterRecordsKey = id === 'Fiddlesticks' ? 'FiddleSticks' : id;
-					if (additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`]) {
-						stats.attackspeedratio = formatNumber(
-							additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`].attackSpeedRatio,
-							3,
-						);
-					} else {
-						console.error('no additional stat data for', name);
+					const rootData = additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`];
+					if (!rootData) {
 						console.log(Object.keys(additionalData));
+						throw new Error(`no root character data for ${name}`);
 					}
+
+					const { attackSpeedRatio, spells, mCharacterPassiveSpell } = rootData;
+
+					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
 
 					const championFile = Bun.file(`${import.meta.dir}/../public/data/champion/${id}.json`);
 					const championFileData = {
+						version: latestVersion,
 						id,
 						key,
 						name,
 						partype,
 						stats,
+						abilities: Object.fromEntries(['passive', 'q', 'w', 'e', 'r'].map((abilityName, index) => {
+							const abilityDataKey = index === 0 ? mCharacterPassiveSpell : spells[index - 1];
+							const abilityData = additionalData[abilityDataKey]?.mSpell;
+							if (!abilityData) {
+								throw new Error(`${name} no ability key ${abilityDataKey}`);
+							}
+
+							const { mImgIconName } = abilityData;
+
+							return [abilityName, {
+								image: mImgIconName[0].toLowerCase().replace('dds', 'png'),
+							}];
+						})),
 					};
 					await championFile.write(JSON.stringify(championFileData, null, '\t'));
 

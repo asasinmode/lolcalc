@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.3,
 		"attackspeed": 0.688,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ekko/hud/icons2d/ekko_p.png"
+		},
+		"q": {
+			"image": "assets/characters/ekko/hud/icons2d/ekko_q.png"
+		},
+		"w": {
+			"image": "assets/characters/ekko/hud/icons2d/ekko_w.png"
+		},
+		"e": {
+			"image": "assets/characters/ekko/hud/icons2d/ekko_e.png"
+		},
+		"r": {
+			"image": "assets/characters/ekko/hud/icons2d/ekko_r.png"
+		}
 	}
 }

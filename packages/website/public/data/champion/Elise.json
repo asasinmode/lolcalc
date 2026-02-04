@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.75,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/elise/hud/icons2d/elisepassive.png"
+		},
+		"q": {
+			"image": "assets/characters/elise/hud/icons2d/elisehumanq.png"
+		},
+		"w": {
+			"image": "assets/characters/elise/hud/icons2d/elisehumanw.png"
+		},
+		"e": {
+			"image": "assets/characters/elise/hud/icons2d/elisehumane.png"
+		},
+		"r": {
+			"image": "assets/characters/elise/hud/icons2d/eliser.png"
+		}
 	}
 }

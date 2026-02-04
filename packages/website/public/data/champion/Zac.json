@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.6,
 		"attackspeed": 0.736,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/zac/hud/icons2d/zacpassive.png"
+		},
+		"q": {
+			"image": "assets/characters/zac/hud/icons2d/zacq.png"
+		},
+		"w": {
+			"image": "assets/characters/zac/hud/icons2d/zacw.png"
+		},
+		"e": {
+			"image": "assets/characters/zac/hud/icons2d/zace.png"
+		},
+		"r": {
+			"image": "assets/characters/zac/hud/icons2d/zacr.png"
+		}
 	}
 }

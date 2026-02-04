@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/skarner/hud/icons2d/skarner_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/skarner/hud/icons2d/skarner_q.png"
+		},
+		"w": {
+			"image": "assets/characters/skarner/hud/icons2d/skarner_w.png"
+		},
+		"e": {
+			"image": "assets/characters/skarner/hud/icons2d/skarner_e.png"
+		},
+		"r": {
+			"image": "assets/characters/skarner/hud/icons2d/skarner_r.png"
+		}
 	}
 }

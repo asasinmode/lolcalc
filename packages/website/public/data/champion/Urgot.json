@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.75,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/urgot/hud/icons2d/urgot_q.png"
+		},
+		"w": {
+			"image": "assets/characters/urgot/hud/icons2d/urgot_w.png"
+		},
+		"e": {
+			"image": "assets/characters/urgot/hud/icons2d/urgot_e.png"
+		},
+		"r": {
+			"image": "assets/characters/urgot/hud/icons2d/urgot_r.png"
+		}
 	}
 }

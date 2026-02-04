@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.3,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/karma/hud/icons2d/karma_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/karma/hud/icons2d/karma_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/karma/hud/icons2d/karma_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/karma/hud/icons2d/karma_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/karma/hud/icons2d/karma_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.65,
 		"attackspeedratio": 0.65
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/udyr/hud/icons2d/udyr_p.png"
+		},
+		"q": {
+			"image": "assets/characters/udyr/hud/icons2d/udyr_q.png"
+		},
+		"w": {
+			"image": "assets/characters/udyr/hud/icons2d/udyr_w.png"
+		},
+		"e": {
+			"image": "assets/characters/udyr/hud/icons2d/udyr_e.png"
+		},
+		"r": {
+			"image": "assets/characters/udyr/hud/icons2d/udyr_r.png"
+		}
 	}
 }

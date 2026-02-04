@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.13,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/zilean/hud/icons2d/zilean_q.png"
+		},
+		"w": {
+			"image": "assets/characters/zilean/hud/icons2d/zilean_w.png"
+		},
+		"e": {
+			"image": "assets/characters/zilean/hud/icons2d/zilean_e.png"
+		},
+		"r": {
+			"image": "assets/characters/zilean/hud/icons2d/zilean_r.png"
+		}
 	}
 }

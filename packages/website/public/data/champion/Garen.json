@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.65,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/garen/hud/icons2d/garen_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/garen/hud/icons2d/garen_q.png"
+		},
+		"w": {
+			"image": "assets/characters/garen/hud/icons2d/garen_w.png"
+		},
+		"e": {
+			"image": "assets/characters/garen/hud/icons2d/garen_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/garen/hud/icons2d/garen_r.png"
+		}
 	}
 }

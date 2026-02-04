@@ -4,7 +4,7 @@
 	"name": "Braum",
 	"partype": "Mana",
 	"stats": {
-		"hp": 630,
+		"hp": 610,
 		"hpperlevel": 112,
 		"mp": 311,
 		"mpperlevel": 45,
@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/braum/hud/icons2d/braum_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/braum/hud/icons2d/braum_q.png"
+		},
+		"w": {
+			"image": "assets/characters/braum/hud/icons2d/braum_w.png"
+		},
+		"e": {
+			"image": "assets/characters/braum/hud/icons2d/braum_e.png"
+		},
+		"r": {
+			"image": "assets/characters/braum/hud/icons2d/braum_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/zoe/hud/icons2d/zoe_p.png"
+		},
+		"q": {
+			"image": "assets/characters/zoe/hud/icons2d/zoe_q.png"
+		},
+		"w": {
+			"image": "assets/characters/zoe/hud/icons2d/zoe_w.png"
+		},
+		"e": {
+			"image": "assets/characters/zoe/hud/icons2d/zoe_e.png"
+		},
+		"r": {
+			"image": "assets/characters/zoe/hud/icons2d/zoe_r.png"
+		}
 	}
 }

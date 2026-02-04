@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.635,
 		"attackspeedratio": 0.635
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/rakan/hud/icons2d/rakan_p.png"
+		},
+		"q": {
+			"image": "assets/characters/rakan/hud/icons2d/rakan_q.png"
+		},
+		"w": {
+			"image": "assets/characters/rakan/hud/icons2d/rakan_w.png"
+		},
+		"e": {
+			"image": "assets/characters/rakan/hud/icons2d/rakan_e.png"
+		},
+		"r": {
+			"image": "assets/characters/rakan/hud/icons2d/rakan_r.png"
+		}
 	}
 }

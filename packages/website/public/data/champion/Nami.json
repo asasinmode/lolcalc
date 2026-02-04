@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.61,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/nami/hud/icons2d/namipassive.png"
+		},
+		"q": {
+			"image": "assets/characters/nami/hud/icons2d/namiq.png"
+		},
+		"w": {
+			"image": "assets/characters/nami/hud/icons2d/namiw.png"
+		},
+		"e": {
+			"image": "assets/characters/nami/hud/icons2d/namie.png"
+		},
+		"r": {
+			"image": "assets/characters/nami/hud/icons2d/namir.png"
+		}
 	}
 }

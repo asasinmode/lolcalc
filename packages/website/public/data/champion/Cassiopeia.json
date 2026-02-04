@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.5,
 		"attackspeed": 0.647,
 		"attackspeedratio": 0.647
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_q.png"
+		},
+		"w": {
+			"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_w.png"
+		},
+		"e": {
+			"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_e.png"
+		},
+		"r": {
+			"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_r.png"
+		}
 	}
 }

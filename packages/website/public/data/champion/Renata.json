@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.11,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/renata/hud/icons2d/renata_p.png"
+		},
+		"q": {
+			"image": "assets/characters/renata/hud/icons2d/renata_q.png"
+		},
+		"w": {
+			"image": "assets/characters/renata/hud/icons2d/renata_w.png"
+		},
+		"e": {
+			"image": "assets/characters/renata/hud/icons2d/renata_e.png"
+		},
+		"r": {
+			"image": "assets/characters/renata/hud/icons2d/renata_r.png"
+		}
 	}
 }

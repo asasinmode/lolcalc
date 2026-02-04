@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.656,
 		"attackspeedratio": 0.656
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ziggs/hud/icons2d/ziggspassiveready.png"
+		},
+		"q": {
+			"image": "assets/characters/ziggs/hud/icons2d/ziggsq.png"
+		},
+		"w": {
+			"image": "assets/characters/ziggs/hud/icons2d/ziggsw.png"
+		},
+		"e": {
+			"image": "assets/characters/ziggs/hud/icons2d/ziggse.png"
+		},
+		"r": {
+			"image": "assets/characters/ziggs/hud/icons2d/ziggsr.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.751,
 		"attackspeedratio": 0.651
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/shen/hud/icons2d/shen_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/shen/hud/icons2d/shen_q.png"
+		},
+		"w": {
+			"image": "assets/characters/shen/hud/icons2d/shen_w.png"
+		},
+		"e": {
+			"image": "assets/characters/shen/hud/icons2d/shen_e.png"
+		},
+		"r": {
+			"image": "assets/characters/shen/hud/icons2d/shen_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.2,
 		"attackspeed": 0.69,
 		"attackspeedratio": 0.69
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/fiora/hud/icons2d/fiora_p.png"
+		},
+		"q": {
+			"image": "assets/characters/fiora/hud/icons2d/fiora_q.png"
+		},
+		"w": {
+			"image": "assets/characters/fiora/hud/icons2d/fiora_w.png"
+		},
+		"e": {
+			"image": "assets/characters/fiora/hud/icons2d/fiora_e.png"
+		},
+		"r": {
+			"image": "assets/characters/fiora/hud/icons2d/fiora_r.png"
+		}
 	}
 }

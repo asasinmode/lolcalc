@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.8,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/kaisa/hud/icons2d/kaisa_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/kaisa/hud/icons2d/kaisa_q.png"
+		},
+		"w": {
+			"image": "assets/characters/kaisa/hud/icons2d/kaisa_w.png"
+		},
+		"e": {
+			"image": "assets/characters/kaisa/hud/icons2d/kaisa_e.png"
+		},
+		"r": {
+			"image": "assets/characters/kaisa/hud/icons2d/kaisa_r.png"
+		}
 	}
 }

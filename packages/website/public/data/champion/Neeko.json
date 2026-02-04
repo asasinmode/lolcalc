@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.67
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/neeko/hud/icons2d/neeko_p.png"
+		},
+		"q": {
+			"image": "assets/characters/neeko/hud/icons2d/neeko_q.png"
+		},
+		"w": {
+			"image": "assets/characters/neeko/hud/icons2d/neeko_w.png"
+		},
+		"e": {
+			"image": "assets/characters/neeko/hud/icons2d/neeko_e.png"
+		},
+		"r": {
+			"image": "assets/characters/neeko/hud/icons2d/neeko_r.png"
+		}
 	}
 }

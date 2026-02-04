@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.6,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.4
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/senna/hud/icons2d/senna_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/senna/hud/icons2d/senna_q.png"
+		},
+		"w": {
+			"image": "assets/characters/senna/hud/icons2d/senna_w.png"
+		},
+		"e": {
+			"image": "assets/characters/senna/hud/icons2d/senna_e.png"
+		},
+		"r": {
+			"image": "assets/characters/senna/hud/icons2d/senna_r.png"
+		}
 	}
 }

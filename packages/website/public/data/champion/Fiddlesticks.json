@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.11,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksp.png"
+		},
+		"q": {
+			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksq.png"
+		},
+		"w": {
+			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksw.png"
+		},
+		"e": {
+			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlestickse.png"
+		},
+		"r": {
+			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksr.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 0,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/jhin/hud/icons2d/jhin_p.png"
+		},
+		"q": {
+			"image": "assets/characters/jhin/hud/icons2d/jhin_q.png"
+		},
+		"w": {
+			"image": "assets/characters/jhin/hud/icons2d/jhin_w.png"
+		},
+		"e": {
+			"image": "assets/characters/jhin/hud/icons2d/jhin_e.png"
+		},
+		"r": {
+			"image": "assets/characters/jhin/hud/icons2d/jhin_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.638,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/warwick/hud/icons2d/warwickp.png"
+		},
+		"q": {
+			"image": "assets/characters/warwick/hud/icons2d/warwickq.png"
+		},
+		"w": {
+			"image": "assets/characters/warwick/hud/icons2d/warwickw.png"
+		},
+		"e": {
+			"image": "assets/characters/warwick/hud/icons2d/warwicke.png"
+		},
+		"r": {
+			"image": "assets/characters/warwick/hud/icons2d/warwickr.png"
+		}
 	}
 }

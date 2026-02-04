@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/rell/hud/icons2d/rellp.png"
+		},
+		"q": {
+			"image": "assets/characters/rell/hud/icons2d/rellq.png"
+		},
+		"w": {
+			"image": "assets/characters/rell/hud/icons2d/rellw.png"
+		},
+		"e": {
+			"image": "assets/characters/rell/hud/icons2d/relle.png"
+		},
+		"r": {
+			"image": "assets/characters/rell/hud/icons2d/rellr.png"
+		}
 	}
 }

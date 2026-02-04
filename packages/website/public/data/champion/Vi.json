@@ -5,7 +5,7 @@
 	"partype": "Mana",
 	"stats": {
 		"hp": 655,
-		"hpperlevel": 99,
+		"hpperlevel": 105,
 		"mp": 295,
 		"mpperlevel": 65,
 		"movespeed": 340,
@@ -21,9 +21,26 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 63,
-		"attackdamageperlevel": 3,
+		"attackdamageperlevel": 3.5,
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/vi/hud/icons2d/vipassive.png"
+		},
+		"q": {
+			"image": "assets/characters/vi/hud/icons2d/viq.png"
+		},
+		"w": {
+			"image": "assets/characters/vi/hud/icons2d/viw.png"
+		},
+		"e": {
+			"image": "assets/characters/vi/hud/icons2d/vie.png"
+		},
+		"r": {
+			"image": "assets/characters/vi/hud/icons2d/vir.png"
+		}
 	}
 }

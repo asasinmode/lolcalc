@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.656,
 		"attackspeedratio": 0.656
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png"
+		},
+		"q": {
+			"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png"
+		},
+		"w": {
+			"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png"
+		},
+		"e": {
+			"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png"
+		},
+		"r": {
+			"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png"
+		}
 	}
 }

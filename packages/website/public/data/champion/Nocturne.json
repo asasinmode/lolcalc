@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.7,
 		"attackspeed": 0.721,
 		"attackspeedratio": 0.721
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/nocturne/hud/icons2d/nocturne_umbrablades.png"
+		},
+		"q": {
+			"image": "assets/characters/nocturne/hud/icons2d/nocturne_duskbringer.png"
+		},
+		"w": {
+			"image": "assets/characters/nocturne/hud/icons2d/nocturne_shroudofdarkness.png"
+		},
+		"e": {
+			"image": "assets/characters/nocturne/hud/icons2d/nocturne_unspeakablehorror.png"
+		},
+		"r": {
+			"image": "assets/characters/nocturne/hud/icons2d/nocturne_paranoia.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.697,
 		"attackspeedratio": 0.67
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png"
+		},
+		"e": {
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png"
+		},
+		"r": {
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png"
+		}
 	}
 }

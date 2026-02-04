@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.679,
 		"attackspeedratio": 0.679
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/masteryi/hud/icons2d/masteryi_passive1.png"
+		},
+		"q": {
+			"image": "assets/characters/masteryi/hud/icons2d/masteryi_q.png"
+		},
+		"w": {
+			"image": "assets/characters/masteryi/hud/icons2d/masteryi_w.png"
+		},
+		"e": {
+			"image": "assets/characters/masteryi/hud/icons2d/masteryi_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/masteryi/hud/icons2d/masteryi_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/shyvana/hud/icons2d/shyvanareinforcedscales.png"
+		},
+		"q": {
+			"image": "assets/characters/shyvana/hud/icons2d/shyvanatwinbite.png"
+		},
+		"w": {
+			"image": "assets/characters/shyvana/hud/icons2d/shyvanascorchedearth.png"
+		},
+		"e": {
+			"image": "assets/characters/shyvana/hud/icons2d/shyvanaflamebreath.png"
+		},
+		"r": {
+			"image": "assets/characters/shyvana/hud/icons2d/shyvanadragonsdescent.png"
+		}
 	}
 }

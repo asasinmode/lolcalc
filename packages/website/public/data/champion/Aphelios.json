@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.1,
 		"attackspeed": 0.665,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/aphelios/hud/icons2d/apheliosp.png"
+		},
+		"q": {
+			"image": "assets/characters/aphelios/hud/icons2d/apheliosq.png"
+		},
+		"w": {
+			"image": "assets/characters/aphelios/hud/icons2d/apheliosw.png"
+		},
+		"e": {
+			"image": "assets/characters/aphelios/hud/icons2d/calibrum_l.png"
+		},
+		"r": {
+			"image": "assets/characters/aphelios/hud/icons2d/apheliosr.png"
+		}
 	}
 }

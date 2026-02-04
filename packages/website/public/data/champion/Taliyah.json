@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.36,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/taliyah/hud/icons2d/taliyah_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/taliyah/hud/icons2d/taliyah_q.png"
+		},
+		"w": {
+			"image": "assets/characters/taliyah/hud/icons2d/taliyah_w.png"
+		},
+		"e": {
+			"image": "assets/characters/taliyah/hud/icons2d/taliyah_e.png"
+		},
+		"r": {
+			"image": "assets/characters/taliyah/hud/icons2d/taliyah_r.png"
+		}
 	}
 }

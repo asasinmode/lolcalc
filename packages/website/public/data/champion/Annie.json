@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.36,
 		"attackspeed": 0.61,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/annie/hud/icons2d/annie_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/annie/hud/icons2d/annie_q.png"
+		},
+		"w": {
+			"image": "assets/characters/annie/hud/icons2d/annie_w.png"
+		},
+		"e": {
+			"image": "assets/characters/annie/hud/icons2d/annie_e.png"
+		},
+		"r": {
+			"image": "assets/characters/annie/hud/icons2d/annie_r1.png"
+		}
 	}
 }

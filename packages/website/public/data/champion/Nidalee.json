@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.22,
 		"attackspeed": 0.638,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/nidalee/hud/icons2d/nidalee_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/nidalee/hud/icons2d/nidalee_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/nidalee/hud/icons2d/nidalee_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/nidalee/hud/icons2d/nidalee_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png"
+		}
 	}
 }

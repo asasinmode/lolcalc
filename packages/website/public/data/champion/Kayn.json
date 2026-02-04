@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.7,
 		"attackspeed": 0.669,
 		"attackspeedratio": 0.669
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/kayn/hud/icons2d/kayn_passive_primary.png"
+		},
+		"q": {
+			"image": "assets/characters/kayn/hud/icons2d/kayn_q_primary.png"
+		},
+		"w": {
+			"image": "assets/characters/kayn/hud/icons2d/kayn_w_primary.png"
+		},
+		"e": {
+			"image": "assets/characters/kayn/hud/icons2d/kayn_e_primary.png"
+		},
+		"r": {
+			"image": "assets/characters/kayn/hud/icons2d/kayn_r1_primary.png"
+		}
 	}
 }

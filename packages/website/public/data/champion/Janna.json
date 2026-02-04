@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/janna/hud/icons2d/jannap.png"
+		},
+		"q": {
+			"image": "assets/characters/janna/hud/icons2d/jannaq.png"
+		},
+		"w": {
+			"image": "assets/characters/janna/hud/icons2d/jannaw.png"
+		},
+		"e": {
+			"image": "assets/characters/janna/hud/icons2d/jannae.png"
+		},
+		"r": {
+			"image": "assets/characters/janna/hud/icons2d/jannar.png"
+		}
 	}
 }

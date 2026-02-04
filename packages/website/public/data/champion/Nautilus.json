@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1,
 		"attackspeed": 0.706,
 		"attackspeedratio": 0.612
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png"
+		},
+		"q": {
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_anchorchain.png"
+		},
+		"w": {
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_wrath.png"
+		},
+		"e": {
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_rippleeffect.png"
+		},
+		"r": {
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_grandline.png"
+		}
 	}
 }

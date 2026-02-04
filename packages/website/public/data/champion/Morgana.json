@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.53,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_empathize.png"
+		},
+		"q": {
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png"
+		},
+		"w": {
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png"
+		},
+		"e": {
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png"
+		},
+		"r": {
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png"
+		}
 	}
 }

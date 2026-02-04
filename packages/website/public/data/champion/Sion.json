@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.3,
 		"attackspeed": 0.679,
 		"attackspeedratio": 0.679
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/sion/hud/icons2d/sion_passive1.png"
+		},
+		"q": {
+			"image": "assets/characters/sion/hud/icons2d/sion_q.png"
+		},
+		"w": {
+			"image": "assets/characters/sion/hud/icons2d/sion_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/sion/hud/icons2d/sion_e.png"
+		},
+		"r": {
+			"image": "assets/characters/sion/hud/icons2d/sion_r1.png"
+		}
 	}
 }

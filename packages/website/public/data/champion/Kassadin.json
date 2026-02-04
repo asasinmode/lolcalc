@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.7,
 		"attackspeed": 0.64,
 		"attackspeedratio": 0.64
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png"
+		},
+		"w": {
+			"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png"
+		},
+		"e": {
+			"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png"
+		},
+		"r": {
+			"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.11,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/viktor/hud/icons2d/viktor_passive.viktorvgu.png"
+		},
+		"q": {
+			"image": "assets/characters/viktor/hud/icons2d/viktor_q1.viktorvgu.png"
+		},
+		"w": {
+			"image": "assets/characters/viktor/hud/icons2d/viktor_w1.viktorvgu.png"
+		},
+		"e": {
+			"image": "assets/characters/viktor/hud/icons2d/viktor_e1.viktorvgu.png"
+		},
+		"r": {
+			"image": "assets/characters/viktor/hud/icons2d/viktor_r1.viktorvgu.png"
+		}
 	}
 }

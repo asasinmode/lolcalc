@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.651,
 		"attackspeedratio": 0.651
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/aatrox/hud/icons2d/aatrox_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/aatrox/hud/icons2d/aatrox_q.png"
+		},
+		"w": {
+			"image": "assets/characters/aatrox/hud/icons2d/aatrox_w.png"
+		},
+		"e": {
+			"image": "assets/characters/aatrox/hud/icons2d/aatrox_e.png"
+		},
+		"r": {
+			"image": "assets/characters/aatrox/hud/icons2d/aatrox_r.png"
+		}
 	}
 }

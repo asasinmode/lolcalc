@@ -1,4 +1,5 @@
 import { ITEM_STAT_ICON_NAMES } from './item';
+import { roundVariable } from './misc';
 
 export interface IGameVariableCalculationTarget {
 	isRanged?: boolean;

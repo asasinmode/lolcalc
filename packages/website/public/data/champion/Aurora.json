@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.668,
 		"attackspeedratio": 0.668
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/aurora/hud/icons2d/aurorapassive.aurora.png"
+		},
+		"q": {
+			"image": "assets/characters/aurora/hud/icons2d/auroraq.aurora.png"
+		},
+		"w": {
+			"image": "assets/characters/aurora/hud/icons2d/auroraw.aurora.png"
+		},
+		"e": {
+			"image": "assets/characters/aurora/hud/icons2d/aurorae.aurora.png"
+		},
+		"r": {
+			"image": "assets/characters/aurora/hud/icons2d/aurorar.aurora.png"
+		}
 	}
 }

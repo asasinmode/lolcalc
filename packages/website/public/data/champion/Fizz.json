@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.1,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/fizz/hud/icons2d/fizz_p.png"
+		},
+		"q": {
+			"image": "assets/characters/fizz/hud/icons2d/fizz_q.png"
+		},
+		"w": {
+			"image": "assets/characters/fizz/hud/icons2d/fizz_w.png"
+		},
+		"e": {
+			"image": "assets/characters/fizz/hud/icons2d/fizz_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/fizz/hud/icons2d/fizz_r.png"
+		}
 	}
 }

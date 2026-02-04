@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1,
 		"attackspeed": 0.669,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/vex/hud/icons2d/icons_vex_q01.png"
+		},
+		"w": {
+			"image": "assets/characters/vex/hud/icons2d/icons_vex_w01.png"
+		},
+		"e": {
+			"image": "assets/characters/vex/hud/icons2d/icons_vex_e01.png"
+		},
+		"r": {
+			"image": "assets/characters/vex/hud/icons2d/icons_vex_r01.png"
+		}
 	}
 }

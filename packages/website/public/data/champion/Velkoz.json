@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.59,
 		"attackspeed": 0.643,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/velkoz/hud/icons2d/velkoz_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/velkoz/hud/icons2d/velkoz_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/velkoz/hud/icons2d/velkoz_w.png"
+		},
+		"e": {
+			"image": "assets/characters/velkoz/hud/icons2d/velkoz_e.png"
+		},
+		"r": {
+			"image": "assets/characters/velkoz/hud/icons2d/velkoz_r.png"
+		}
 	}
 }

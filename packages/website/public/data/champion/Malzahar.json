@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/malzahar/hud/icons2d/malzahar_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/malzahar/hud/icons2d/malzahar_q.png"
+		},
+		"w": {
+			"image": "assets/characters/malzahar/hud/icons2d/malzahar_w.png"
+		},
+		"e": {
+			"image": "assets/characters/malzahar/hud/icons2d/malzahar_e.png"
+		},
+		"r": {
+			"image": "assets/characters/malzahar/hud/icons2d/malzahar_r.png"
+		}
 	}
 }

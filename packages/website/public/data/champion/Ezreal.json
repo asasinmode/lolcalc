@@ -21,9 +21,26 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 60,
-		"attackdamageperlevel": 3.25,
+		"attackdamageperlevel": 3.75,
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ezreal/hud/icons2d/ezreal_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/ezreal/hud/icons2d/ezreal_q.png"
+		},
+		"w": {
+			"image": "assets/characters/ezreal/hud/icons2d/ezreal_w.png"
+		},
+		"e": {
+			"image": "assets/characters/ezreal/hud/icons2d/ezreal_e.png"
+		},
+		"r": {
+			"image": "assets/characters/ezreal/hud/icons2d/ezreal_r.png"
+		}
 	}
 }

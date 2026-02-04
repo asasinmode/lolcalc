@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.7,
 		"attackspeed": 0.668,
 		"attackspeedratio": 0.668
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/khazix/hud/icons2d/khazix_p.png"
+		},
+		"q": {
+			"image": "assets/characters/khazix/hud/icons2d/khazix_q.png"
+		},
+		"w": {
+			"image": "assets/characters/khazix/hud/icons2d/khazix_w.png"
+		},
+		"e": {
+			"image": "assets/characters/khazix/hud/icons2d/khazix_e.png"
+		},
+		"r": {
+			"image": "assets/characters/khazix/hud/icons2d/khazix_r.png"
+		}
 	}
 }

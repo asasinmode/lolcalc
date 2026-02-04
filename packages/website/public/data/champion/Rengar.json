@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.667,
 		"attackspeedratio": 0.667
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/rengar/hud/icons2d/rengar_p.png"
+		},
+		"q": {
+			"image": "assets/characters/rengar/hud/icons2d/rengarq.png"
+		},
+		"w": {
+			"image": "assets/characters/rengar/hud/icons2d/rengar_w.png"
+		},
+		"e": {
+			"image": "assets/characters/rengar/hud/icons2d/rengar_e.png"
+		},
+		"r": {
+			"image": "assets/characters/rengar/hud/icons2d/rengar_r.png"
+		}
 	}
 }

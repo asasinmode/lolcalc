@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ornn/hud/icons2d/ornnp.png"
+		},
+		"q": {
+			"image": "assets/characters/ornn/hud/icons2d/ornnq.png"
+		},
+		"w": {
+			"image": "assets/characters/ornn/hud/icons2d/ornnw.png"
+		},
+		"e": {
+			"image": "assets/characters/ornn/hud/icons2d/ornne.png"
+		},
+		"r": {
+			"image": "assets/characters/ornn/hud/icons2d/ornnr1.png"
+		}
 	}
 }

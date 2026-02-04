@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.05,
 		"attackspeed": 0.675,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png"
+		},
+		"q": {
+			"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png"
+		},
+		"w": {
+			"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png"
+		},
+		"e": {
+			"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png"
+		},
+		"r": {
+			"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png"
+		}
 	}
 }

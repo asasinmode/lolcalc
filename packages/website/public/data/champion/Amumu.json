@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.18,
 		"attackspeed": 0.736,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/amumu/hud/icons2d/amumu_q.png"
+		},
+		"w": {
+			"image": "assets/characters/amumu/hud/icons2d/amumu_w.png"
+		},
+		"e": {
+			"image": "assets/characters/amumu/hud/icons2d/amumu_e.png"
+		},
+		"r": {
+			"image": "assets/characters/amumu/hud/icons2d/amumu_r.png"
+		}
 	}
 }

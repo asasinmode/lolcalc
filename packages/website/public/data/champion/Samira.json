@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.3,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/samira/hud/icons2d/samirap.png"
+		},
+		"q": {
+			"image": "assets/characters/samira/hud/icons2d/samiraq.png"
+		},
+		"w": {
+			"image": "assets/characters/samira/hud/icons2d/samiraw.png"
+		},
+		"e": {
+			"image": "assets/characters/samira/hud/icons2d/samirae.png"
+		},
+		"r": {
+			"image": "assets/characters/samira/hud/icons2d/samirar1.png"
+		}
 	}
 }

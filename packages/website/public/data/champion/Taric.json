@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/taric/hud/icons2d/taric_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/taric/hud/icons2d/taric_q.png"
+		},
+		"w": {
+			"image": "assets/characters/taric/hud/icons2d/taric_w.png"
+		},
+		"e": {
+			"image": "assets/characters/taric/hud/icons2d/taric_e.png"
+		},
+		"r": {
+			"image": "assets/characters/taric/hud/icons2d/taric_r.png"
+		}
 	}
 }

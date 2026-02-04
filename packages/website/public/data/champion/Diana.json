@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png"
+		},
+		"q": {
+			"image": "assets/characters/diana/hud/icons2d/diana_q_moonsedge.png"
+		},
+		"w": {
+			"image": "assets/characters/diana/hud/icons2d/diana_w_lunarshower.png"
+		},
+		"e": {
+			"image": "assets/characters/diana/hud/icons2d/diana_e_fasterthanlight.png"
+		},
+		"r": {
+			"image": "assets/characters/diana/hud/icons2d/diana_r_moonfall.png"
+		}
 	}
 }

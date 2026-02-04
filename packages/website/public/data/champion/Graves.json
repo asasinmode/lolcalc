@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.475,
 		"attackspeedratio": 0.49
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/graves/hud/icons2d/gravesp.png"
+		},
+		"q": {
+			"image": "assets/characters/graves/hud/icons2d/gravesq.png"
+		},
+		"w": {
+			"image": "assets/characters/graves/hud/icons2d/gravesw.png"
+		},
+		"e": {
+			"image": "assets/characters/graves/hud/icons2d/gravese.png"
+		},
+		"r": {
+			"image": "assets/characters/graves/hud/icons2d/gravesr.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/camille/hud/icons2d/camille_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/camille/hud/icons2d/camille_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/camille/hud/icons2d/camille_w.png"
+		},
+		"e": {
+			"image": "assets/characters/camille/hud/icons2d/camille_e.png"
+		},
+		"r": {
+			"image": "assets/characters/camille/hud/icons2d/camille_r.png"
+		}
 	}
 }

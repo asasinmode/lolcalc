@@ -10,7 +10,7 @@
 		"mpperlevel": 45,
 		"movespeed": 350,
 		"armor": 37,
-		"armorperlevel": 3.9,
+		"armorperlevel": 4.5,
 		"spellblock": 32,
 		"spellblockperlevel": 2.05,
 		"attackrange": 175,
@@ -21,9 +21,26 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 68,
-		"attackdamageperlevel": 4,
+		"attackdamageperlevel": 4.5,
 		"attackspeedperlevel": 2.9,
 		"attackspeed": 0.67,
 		"attackspeedratio": 0.67
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/trundle/hud/icons2d/trundle_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/trundle/hud/icons2d/trundle_q.png"
+		},
+		"w": {
+			"image": "assets/characters/trundle/hud/icons2d/trundle_w.png"
+		},
+		"e": {
+			"image": "assets/characters/trundle/hud/icons2d/trundle_e.png"
+		},
+		"r": {
+			"image": "assets/characters/trundle/hud/icons2d/trundle_r.png"
+		}
 	}
 }

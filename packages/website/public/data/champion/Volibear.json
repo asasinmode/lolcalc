@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.7
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_p.png"
+		},
+		"q": {
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_q.png"
+		},
+		"w": {
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_w.png"
+		},
+		"e": {
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_e.png"
+		},
+		"r": {
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/thresh/hud/icons2d/thresh_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/thresh/hud/icons2d/thresh_q.png"
+		},
+		"w": {
+			"image": "assets/characters/thresh/hud/icons2d/thresh_w.png"
+		},
+		"e": {
+			"image": "assets/characters/thresh/hud/icons2d/thresh_e.png"
+		},
+		"r": {
+			"image": "assets/characters/thresh/hud/icons2d/thresh_r.png"
+		}
 	}
 }

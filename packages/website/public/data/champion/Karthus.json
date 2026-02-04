@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.11,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/karthus/hud/icons2d/karthus_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/karthus/hud/icons2d/karthus_q.png"
+		},
+		"w": {
+			"image": "assets/characters/karthus/hud/icons2d/karthus_w.png"
+		},
+		"e": {
+			"image": "assets/characters/karthus/hud/icons2d/karthus_e.png"
+		},
+		"r": {
+			"image": "assets/characters/karthus/hud/icons2d/karthus_r.png"
+		}
 	}
 }

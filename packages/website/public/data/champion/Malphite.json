@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.4,
 		"attackspeed": 0.736,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/malphite/hud/icons2d/malphite_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/malphite/hud/icons2d/malphite_q.png"
+		},
+		"w": {
+			"image": "assets/characters/malphite/hud/icons2d/malphite_w.png"
+		},
+		"e": {
+			"image": "assets/characters/malphite/hud/icons2d/malphite_e.png"
+		},
+		"r": {
+			"image": "assets/characters/malphite/hud/icons2d/malphite_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.669,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/lux/hud/icons2d/luxilluminatingfraulein.png"
+		},
+		"q": {
+			"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png"
+		},
+		"w": {
+			"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png"
+		},
+		"e": {
+			"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png"
+		},
+		"r": {
+			"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png"
+		}
 	}
 }

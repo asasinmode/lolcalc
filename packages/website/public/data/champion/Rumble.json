@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.85,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/rumble/hud/icons2d/rumble_junkyardtitan1.png"
+		},
+		"q": {
+			"image": "assets/characters/rumble/hud/icons2d/rumble_flamespitter.png"
+		},
+		"w": {
+			"image": "assets/characters/rumble/hud/icons2d/rumble_scrapshield.png"
+		},
+		"e": {
+			"image": "assets/characters/rumble/hud/icons2d/rumble_electroharpoon.png"
+		},
+		"r": {
+			"image": "assets/characters/rumble/hud/icons2d/rumble_r.png"
+		}
 	}
 }

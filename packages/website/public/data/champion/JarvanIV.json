@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivp.png"
+		},
+		"q": {
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivq.png"
+		},
+		"w": {
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivw.png"
+		},
+		"e": {
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanive.png"
+		},
+		"r": {
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivr.png"
+		}
 	}
 }

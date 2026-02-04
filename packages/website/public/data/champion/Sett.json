@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.75,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/sett/hud/icons2d/sett_p.png"
+		},
+		"q": {
+			"image": "assets/characters/sett/hud/icons2d/sett_q.png"
+		},
+		"w": {
+			"image": "assets/characters/sett/hud/icons2d/sett_w.png"
+		},
+		"e": {
+			"image": "assets/characters/sett/hud/icons2d/sett_e.png"
+		},
+		"r": {
+			"image": "assets/characters/sett/hud/icons2d/sett_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.1,
 		"attackspeed": 0.667,
 		"attackspeedratio": 0.667
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/evelynn/hud/icons2d/evelynn_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/evelynn/hud/icons2d/evelynn_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/evelynn/hud/icons2d/evelynn_w.png"
+		},
+		"e": {
+			"image": "assets/characters/evelynn/hud/icons2d/evelynn_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/evelynn/hud/icons2d/evelynn_r.png"
+		}
 	}
 }

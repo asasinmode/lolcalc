@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.651,
 		"attackspeedratio": 0.651
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/leesin/hud/icons2d/leesinp.png"
+		},
+		"q": {
+			"image": "assets/characters/leesin/hud/icons2d/leesinq1.png"
+		},
+		"w": {
+			"image": "assets/characters/leesin/hud/icons2d/leesinw1.png"
+		},
+		"e": {
+			"image": "assets/characters/leesin/hud/icons2d/leesine1.png"
+		},
+		"r": {
+			"image": "assets/characters/leesin/hud/icons2d/leesinr.png"
+		}
 	}
 }

@@ -5,7 +5,7 @@
 	"partype": "Mana",
 	"stats": {
 		"hp": 558,
-		"hpperlevel": 101,
+		"hpperlevel": 105,
 		"mp": 385,
 		"mpperlevel": 20,
 		"movespeed": 340,
@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.36,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_r.png"
+		}
 	}
 }

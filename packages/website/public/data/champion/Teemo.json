@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.38,
 		"attackspeed": 0.69,
 		"attackspeedratio": 0.69
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/teemo/hud/icons2d/teemopassive.asu_teemo.png"
+		},
+		"q": {
+			"image": "assets/characters/teemo/hud/icons2d/teemoq.asu_teemo.png"
+		},
+		"w": {
+			"image": "assets/characters/teemo/hud/icons2d/teemow.asu_teemo.png"
+		},
+		"e": {
+			"image": "assets/characters/teemo/hud/icons2d/teemoe.asu_teemo.png"
+		},
+		"r": {
+			"image": "assets/characters/teemo/hud/icons2d/teemor.asu_teemo.png"
+		}
 	}
 }

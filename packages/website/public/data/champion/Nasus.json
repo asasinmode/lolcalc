@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.48,
 		"attackspeed": 0.638,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/nasus/hud/icons2d/nasus_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/nasus/hud/icons2d/nasus_q.png"
+		},
+		"w": {
+			"image": "assets/characters/nasus/hud/icons2d/nasus_w.png"
+		},
+		"e": {
+			"image": "assets/characters/nasus/hud/icons2d/nasus_e.png"
+		},
+		"r": {
+			"image": "assets/characters/nasus/hud/icons2d/nasus_r.png"
+		}
 	}
 }

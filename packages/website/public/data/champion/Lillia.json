@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.7,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/lillia/hud/icons2d/lillia_icon_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/lillia/hud/icons2d/lillia_icon_q.png"
+		},
+		"w": {
+			"image": "assets/characters/lillia/hud/icons2d/lillia_icon_w.png"
+		},
+		"e": {
+			"image": "assets/characters/lillia/hud/icons2d/lillia_icon_e.png"
+		},
+		"r": {
+			"image": "assets/characters/lillia/hud/icons2d/lillia_icon_r.png"
+		}
 	}
 }

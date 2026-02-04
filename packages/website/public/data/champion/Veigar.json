@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.24,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/veigar/hud/icons2d/veigar_entropy.png"
+		},
+		"q": {
+			"image": "assets/characters/veigar/hud/icons2d/veigarbalefulstrike.png"
+		},
+		"w": {
+			"image": "assets/characters/veigar/hud/icons2d/veigardarkmatter.png"
+		},
+		"e": {
+			"image": "assets/characters/veigar/hud/icons2d/veigareventhorizon.png"
+		},
+		"r": {
+			"image": "assets/characters/veigar/hud/icons2d/veigarprimordialburst.png"
+		}
 	}
 }

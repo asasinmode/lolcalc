@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.667,
 		"attackspeedratio": 0.667
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/pyke/hud/icons2d/pykepassive.png"
+		},
+		"q": {
+			"image": "assets/characters/pyke/hud/icons2d/pykeq.png"
+		},
+		"w": {
+			"image": "assets/characters/pyke/hud/icons2d/pykew.png"
+		},
+		"e": {
+			"image": "assets/characters/pyke/hud/icons2d/pykee.png"
+		},
+		"r": {
+			"image": "assets/characters/pyke/hud/icons2d/pyker.png"
+		}
 	}
 }

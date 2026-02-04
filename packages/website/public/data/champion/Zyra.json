@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.11,
 		"attackspeed": 0.681,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/zyra/hud/icons2d/zyrap.png"
+		},
+		"q": {
+			"image": "assets/characters/zyra/hud/icons2d/zyraq.png"
+		},
+		"w": {
+			"image": "assets/characters/zyra/hud/icons2d/zyraw.png"
+		},
+		"e": {
+			"image": "assets/characters/zyra/hud/icons2d/zyrae.png"
+		},
+		"r": {
+			"image": "assets/characters/zyra/hud/icons2d/zyrar.png"
+		}
 	}
 }

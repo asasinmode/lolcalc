@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.65,
 		"attackspeedratio": 0.65
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/yunara/hud/icons2d/yunara_passive.yunara.png"
+		},
+		"q": {
+			"image": "assets/characters/yunara/hud/icons2d/yunara_q.yunara.png"
+		},
+		"w": {
+			"image": "assets/characters/yunara/hud/icons2d/yunara_w.yunara.png"
+		},
+		"e": {
+			"image": "assets/characters/yunara/hud/icons2d/yunara_e.yunara.png"
+		},
+		"r": {
+			"image": "assets/characters/yunara/hud/icons2d/yunara_r.yunara.png"
+		}
 	}
 }

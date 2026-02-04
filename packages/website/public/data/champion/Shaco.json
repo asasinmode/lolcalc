@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.694,
 		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/shaco/hud/icons2d/jester_carefulstrikes.png"
+		},
+		"q": {
+			"image": "assets/characters/shaco/hud/icons2d/jester_maniacalcloak2.png"
+		},
+		"w": {
+			"image": "assets/characters/shaco/hud/icons2d/jester_deathward.png"
+		},
+		"e": {
+			"image": "assets/characters/shaco/hud/icons2d/jester_incrediblyprecise.png"
+		},
+		"r": {
+			"image": "assets/characters/shaco/hud/icons2d/jester_hallucinogenbomb.png"
+		}
 	}
 }

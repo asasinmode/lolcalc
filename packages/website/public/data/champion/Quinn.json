@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.1,
 		"attackspeed": 0.668,
 		"attackspeedratio": 0.668
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/quinn/hud/icons2d/quinn_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/quinn/hud/icons2d/quinn_q.png"
+		},
+		"w": {
+			"image": "assets/characters/quinn/hud/icons2d/quinn_w.png"
+		},
+		"e": {
+			"image": "assets/characters/quinn/hud/icons2d/quinn_e.png"
+		},
+		"r": {
+			"image": "assets/characters/quinn/hud/icons2d/quinn_r1.png"
+		}
 	}
 }

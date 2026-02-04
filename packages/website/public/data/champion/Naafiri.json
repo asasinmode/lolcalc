@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.1,
 		"attackspeed": 0.663,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_p.png"
+		},
+		"q": {
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_q.png"
+		},
+		"w": {
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_r.png"
+		},
+		"e": {
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_e.png"
+		},
+		"r": {
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_w.png"
+		}
 	}
 }

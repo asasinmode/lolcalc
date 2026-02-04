@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ashe/hud/icons2d/ashe_p.png"
+		},
+		"q": {
+			"image": "assets/characters/ashe/hud/icons2d/ashe_q.png"
+		},
+		"w": {
+			"image": "assets/characters/ashe/hud/icons2d/ashe_w.png"
+		},
+		"e": {
+			"image": "assets/characters/ashe/hud/icons2d/ashe_e.png"
+		},
+		"r": {
+			"image": "assets/characters/ashe/hud/icons2d/ashe_r.png"
+		}
 	}
 }

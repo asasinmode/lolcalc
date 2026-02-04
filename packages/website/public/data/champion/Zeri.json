@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/zeri/hud/icons2d/zeriqpassivecharged.png"
+		},
+		"q": {
+			"image": "assets/characters/zeri/hud/icons2d/zeriq.png"
+		},
+		"w": {
+			"image": "assets/characters/zeri/hud/icons2d/zeriw.png"
+		},
+		"e": {
+			"image": "assets/characters/zeri/hud/icons2d/zerie.png"
+		},
+		"r": {
+			"image": "assets/characters/zeri/hud/icons2d/zerir.png"
+		}
 	}
 }

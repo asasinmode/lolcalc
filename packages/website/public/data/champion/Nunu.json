@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.25,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/nunu/hud/icons2d/nunupassive.png"
+		},
+		"q": {
+			"image": "assets/characters/nunu/hud/icons2d/nunuq.png"
+		},
+		"w": {
+			"image": "assets/characters/nunu/hud/icons2d/nunuw1.png"
+		},
+		"e": {
+			"image": "assets/characters/nunu/hud/icons2d/nunue.png"
+		},
+		"r": {
+			"image": "assets/characters/nunu/hud/icons2d/nunu_r.png"
+		}
 	}
 }

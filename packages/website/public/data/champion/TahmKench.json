@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchp.png"
+		},
+		"q": {
+			"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchq.png"
+		},
+		"w": {
+			"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchw.png"
+		},
+		"e": {
+			"image": "assets/characters/tahmkench/hud/icons2d/tahmkenche.png"
+		},
+		"r": {
+			"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchrwrapper.png"
+		}
 	}
 }

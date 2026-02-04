@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.667,
 		"attackspeedratio": 0.667
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/reksai/hud/icons2d/reksai_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/reksai/hud/icons2d/reksai_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/reksai/hud/icons2d/reksai_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/reksai/hud/icons2d/reksai_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/reksai/hud/icons2d/reksai_r.png"
+		}
 	}
 }

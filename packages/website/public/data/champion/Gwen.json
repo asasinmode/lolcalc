@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.25,
 		"attackspeed": 0.69,
 		"attackspeedratio": 0.69
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/gwen/hud/icons2d/gwen_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/gwen/hud/icons2d/gwen_q.png"
+		},
+		"w": {
+			"image": "assets/characters/gwen/hud/icons2d/gwen_w.png"
+		},
+		"e": {
+			"image": "assets/characters/gwen/hud/icons2d/gwen_e.png"
+		},
+		"r": {
+			"image": "assets/characters/gwen/hud/icons2d/gwen_r.png"
+		}
 	}
 }

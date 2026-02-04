@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.5,
 		"attackspeed": 0.656,
 		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/tristana/hud/icons2d/tristana_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/tristana/hud/icons2d/tristana_q.png"
+		},
+		"w": {
+			"image": "assets/characters/tristana/hud/icons2d/tristana_w.png"
+		},
+		"e": {
+			"image": "assets/characters/tristana/hud/icons2d/tristana_e.png"
+		},
+		"r": {
+			"image": "assets/characters/tristana/hud/icons2d/tristana_r.png"
+		}
 	}
 }

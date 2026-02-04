@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/riven/hud/icons2d/rivenrunicblades.png"
+		},
+		"q": {
+			"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png"
+		},
+		"w": {
+			"image": "assets/characters/riven/hud/icons2d/rivenkishout.png"
+		},
+		"e": {
+			"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png"
+		},
+		"r": {
+			"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png"
+		}
 	}
 }

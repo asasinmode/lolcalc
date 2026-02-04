@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/poppy/hud/icons2d/poppy_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/poppy/hud/icons2d/poppy_q.png"
+		},
+		"w": {
+			"image": "assets/characters/poppy/hud/icons2d/poppy_w.png"
+		},
+		"e": {
+			"image": "assets/characters/poppy/hud/icons2d/poppy_e.png"
+		},
+		"r": {
+			"image": "assets/characters/poppy/hud/icons2d/poppy_r.png"
+		}
 	}
 }

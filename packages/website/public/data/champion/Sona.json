@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.3,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/sona/hud/icons2d/sona_passive_charged.png"
+		},
+		"q": {
+			"image": "assets/characters/sona/hud/icons2d/sona_q.png"
+		},
+		"w": {
+			"image": "assets/characters/sona/hud/icons2d/sona_w.png"
+		},
+		"e": {
+			"image": "assets/characters/sona/hud/icons2d/sona_e.png"
+		},
+		"r": {
+			"image": "assets/characters/sona/hud/icons2d/sona_r.png"
+		}
 	}
 }

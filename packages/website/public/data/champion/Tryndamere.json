@@ -21,9 +21,26 @@
 		"crit": 0,
 		"critperlevel": 0,
 		"attackdamage": 66,
-		"attackdamageperlevel": 4,
+		"attackdamageperlevel": 4.5,
 		"attackspeedperlevel": 3.4,
 		"attackspeed": 0.67,
 		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_q.png"
+		},
+		"w": {
+			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_w.png"
+		},
+		"e": {
+			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_e.png"
+		},
+		"r": {
+			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_r.png"
+		}
 	}
 }

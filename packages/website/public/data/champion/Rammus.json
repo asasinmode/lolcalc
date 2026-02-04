@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.215,
 		"attackspeed": 0.7,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png"
+		},
+		"q": {
+			"image": "assets/characters/rammus/hud/icons2d/armordillo_powerball.png"
+		},
+		"w": {
+			"image": "assets/characters/rammus/hud/icons2d/armordillo_shellbash.png"
+		},
+		"e": {
+			"image": "assets/characters/rammus/hud/icons2d/armordillo_scaledplating.png"
+		},
+		"r": {
+			"image": "assets/characters/rammus/hud/icons2d/armordillo_recklesscharge.png"
+		}
 	}
 }

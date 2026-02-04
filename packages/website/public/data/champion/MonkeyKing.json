@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3,
 		"attackspeed": 0.69,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png"
+		},
+		"q": {
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcrushingblow.png"
+		},
+		"w": {
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingdecoy.png"
+		},
+		"e": {
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingnimbusstrike.png"
+		},
+		"r": {
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcyclone.png"
+		}
 	}
 }

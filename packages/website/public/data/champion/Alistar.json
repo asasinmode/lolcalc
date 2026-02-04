@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.125,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/alistar/hud/icons2d/alistar_e.png"
+		},
+		"q": {
+			"image": "assets/characters/alistar/hud/icons2d/alistar_q.png"
+		},
+		"w": {
+			"image": "assets/characters/alistar/hud/icons2d/alistar_w.png"
+		},
+		"e": {
+			"image": "assets/characters/alistar/hud/icons2d/alistar_passive.png"
+		},
+		"r": {
+			"image": "assets/characters/alistar/hud/icons2d/alistar_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.44,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png"
+		},
+		"q": {
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png"
+		},
+		"w": {
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png"
+		},
+		"e": {
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png"
+		},
+		"r": {
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png"
+		}
 	}
 }

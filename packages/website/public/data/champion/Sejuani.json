@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.688,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/sejuani/hud/icons2d/sejuani_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/sejuani/hud/icons2d/sejuani_q.png"
+		},
+		"w": {
+			"image": "assets/characters/sejuani/hud/icons2d/sejuani_w.png"
+		},
+		"e": {
+			"image": "assets/characters/sejuani/hud/icons2d/sejuani_e.png"
+		},
+		"r": {
+			"image": "assets/characters/sejuani/hud/icons2d/sejuani_r.png"
+		}
 	}
 }

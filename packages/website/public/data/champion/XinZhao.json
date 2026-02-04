@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.645,
 		"attackspeedratio": 0.645
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkp.xinzhaorework.png"
+		},
+		"q": {
+			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkq.xinzhaorework.png"
+		},
+		"w": {
+			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkw.xinzhaorework.png"
+		},
+		"e": {
+			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworke.xinzhaorework.png"
+		},
+		"r": {
+			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkr.xinzhaorework.png"
+		}
 	}
 }

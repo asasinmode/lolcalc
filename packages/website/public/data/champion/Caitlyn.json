@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 4,
 		"attackspeed": 0.681,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png"
+		},
+		"q": {
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynq.png"
+		},
+		"w": {
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynw.png"
+		},
+		"e": {
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlyne.png"
+		},
+		"r": {
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynr.png"
+		}
 	}
 }

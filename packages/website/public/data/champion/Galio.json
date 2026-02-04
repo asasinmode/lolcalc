@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/galio/hud/icons2d/galio_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/galio/hud/icons2d/galio_q.png"
+		},
+		"w": {
+			"image": "assets/characters/galio/hud/icons2d/galio_w.png"
+		},
+		"e": {
+			"image": "assets/characters/galio/hud/icons2d/galio_e.png"
+		},
+		"r": {
+			"image": "assets/characters/galio/hud/icons2d/galio_r.png"
+		}
 	}
 }

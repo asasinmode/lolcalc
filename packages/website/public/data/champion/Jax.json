@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.4,
 		"attackspeed": 0.638,
 		"attackspeedratio": 0.638
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/jax/hud/icons2d/jaxp.png"
+		},
+		"q": {
+			"image": "assets/characters/jax/hud/icons2d/jaxq.png"
+		},
+		"w": {
+			"image": "assets/characters/jax/hud/icons2d/jaxw.png"
+		},
+		"e": {
+			"image": "assets/characters/jax/hud/icons2d/jaxe.png"
+		},
+		"r": {
+			"image": "assets/characters/jax/hud/icons2d/jaxr.png"
+		}
 	}
 }

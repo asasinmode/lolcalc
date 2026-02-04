@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.5,
 		"attackspeed": 0.656,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/lissandra/hud/icons2d/lissandra_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png"
+		},
+		"w": {
+			"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png"
+		},
+		"e": {
+			"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png"
+		},
+		"r": {
+			"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png"
+		}
 	}
 }

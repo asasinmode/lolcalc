@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.11,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/swain/hud/icons2d/swain_p.png"
+		},
+		"q": {
+			"image": "assets/characters/swain/hud/icons2d/swain_q.png"
+		},
+		"w": {
+			"image": "assets/characters/swain/hud/icons2d/swain_w.png"
+		},
+		"e": {
+			"image": "assets/characters/swain/hud/icons2d/swain_e.png"
+		},
+		"r": {
+			"image": "assets/characters/swain/hud/icons2d/swain_r.png"
+		}
 	}
 }

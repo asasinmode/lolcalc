@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.9,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/leona/hud/icons2d/leonap.png"
+		},
+		"q": {
+			"image": "assets/characters/leona/hud/icons2d/leonaq.png"
+		},
+		"w": {
+			"image": "assets/characters/leona/hud/icons2d/leonaw.png"
+		},
+		"e": {
+			"image": "assets/characters/leona/hud/icons2d/leonae.png"
+		},
+		"r": {
+			"image": "assets/characters/leona/hud/icons2d/leonar.png"
+		}
 	}
 }

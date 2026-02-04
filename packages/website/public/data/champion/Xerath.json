@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.36,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png"
+		},
+		"q": {
+			"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png"
+		}
 	}
 }

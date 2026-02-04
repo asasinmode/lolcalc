@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.9,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/talon/hud/icons2d/talonp.png"
+		},
+		"q": {
+			"image": "assets/characters/talon/hud/icons2d/talonq.png"
+		},
+		"w": {
+			"image": "assets/characters/talon/hud/icons2d/talonw.png"
+		},
+		"e": {
+			"image": "assets/characters/talon/hud/icons2d/talone.png"
+		},
+		"r": {
+			"image": "assets/characters/talon/hud/icons2d/talonr.png"
+		}
 	}
 }

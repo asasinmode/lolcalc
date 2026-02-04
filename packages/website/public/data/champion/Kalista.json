@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 4.5,
 		"attackspeed": 0.694,
 		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/kalista/hud/icons2d/kalista_q.png"
+		},
+		"w": {
+			"image": "assets/characters/kalista/hud/icons2d/kalista_w.png"
+		},
+		"e": {
+			"image": "assets/characters/kalista/hud/icons2d/kalista_e.png"
+		},
+		"r": {
+			"image": "assets/characters/kalista/hud/icons2d/kalista_r.png"
+		}
 	}
 }

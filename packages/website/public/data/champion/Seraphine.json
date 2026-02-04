@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.669,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/seraphine/hud/icons2d/seraphine_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/seraphine/hud/icons2d/seraphine_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/seraphine/hud/icons2d/seraphine_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/seraphine/hud/icons2d/seraphine_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/seraphine/hud/icons2d/seraphine_r.png"
+		}
 	}
 }

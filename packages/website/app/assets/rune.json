@@ -1,5 +1,5 @@
 {
-	"version": "16.2.1",
+	"version": "16.3.1",
 	"data": {
 		"paths": {
 			"Precision": {
@@ -77,7 +77,7 @@
 								"Duration": 6,
 								"MaxStacks": 6,
 								"TTASPerStackMelee": 0.06,
-								"{303fd190}": 0.25,
+								"PerfectlyTimedForgivance": 0.25,
 								"TTASPerStackRanged": 0.04,
 								"TTMinNoteDamageMelee": 9,
 								"TTMaxNoteDamageMelee": 30,
@@ -658,11 +658,8 @@
 							"name": "UltimateHunter",
 							"icon": "assets/perks/styles/domination/ultimatehunter/ultimatehunter.png",
 							"effectAmount": {
-								"StartingUltAH": 6,
 								"AdditionalUltAH": 5,
-								"__renamedVariables": {
-									"{89cb3caa}": "AdditionalUltAH"
-								}
+								"StartingUltAH": 6
 							}
 						}
 					}
@@ -815,7 +812,7 @@
 								"MinCooldown": 10,
 								"MaxCooldown": 30,
 								"NumberToProc": 3,
-								"RangedEffectiveness": 0.75
+								"RangedEffectiveness": 0.5
 							}
 						}
 					},
@@ -1163,7 +1160,7 @@
 										},
 										{
 											"mStat": 12,
-											"mDataValue": "{ffe97357}"
+											"mDataValue": "HPRatioRanged"
 										}
 									]
 								},
@@ -1176,7 +1173,7 @@
 										},
 										{
 											"mStat": 12,
-											"mDataValue": "{36a8d610}"
+											"mDataValue": "HPRatioMelee"
 										}
 									]
 								}
@@ -1187,12 +1184,8 @@
 								"{97664ba4}": 3,
 								"BaseDamageMelee": 85,
 								"BaseDamageRanged": 50,
-								"HPRatioRanged": 0.2,
-								"__renamedVariables": {
-									"{ffe97357}": "HPRatioRanged",
-									"{36a8d610}": "HPRatioMelee"
-								},
-								"HPRatioMelee": 0.28
+								"HPRatioMelee": 0.28,
+								"HPRatioRanged": 0.2
 							}
 						},
 						"FontOfLife": {
@@ -1326,12 +1319,11 @@
 							"icon": "assets/perks/styles/resolve/revitalize/revitalize.png",
 							"effectAmount": {
 								"HealShieldPower": 0.05,
+								"ExtraAmp": 10,
 								"HealthCutoff": 40,
 								"__renamedVariables": {
-									"HealthCutOff": "HealthCutoff",
-									"{9df5828d}": "ExtraAmp"
-								},
-								"ExtraAmp": 10
+									"HealthCutOff": "HealthCutoff"
+								}
 							}
 						},
 						"Unflinching": {
@@ -1533,7 +1525,7 @@
 								"GoldLowerBoundInitial": 100,
 								"{fa03b4f1}": 150,
 								"{ebbc116e}": -150,
-								"PercentRefund": 0.08
+								"PercentRefund": 0.075
 							}
 						}
 					},

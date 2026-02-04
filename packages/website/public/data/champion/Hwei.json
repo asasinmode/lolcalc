@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.69,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/hwei/hud/icons2d/hweipassive.png"
+		},
+		"q": {
+			"image": "assets/characters/hwei/hud/icons2d/hweiq.png"
+		},
+		"w": {
+			"image": "assets/characters/hwei/hud/icons2d/hweiw.png"
+		},
+		"e": {
+			"image": "assets/characters/hwei/hud/icons2d/hweie.png"
+		},
+		"r": {
+			"image": "assets/characters/hwei/hud/icons2d/hweir.png"
+		}
 	}
 }

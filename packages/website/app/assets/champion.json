@@ -1,5 +1,5 @@
 {
-	"version": "16.2.1",
+	"version": "16.3.1",
 	"data": {
 		"Aatrox": {
 			"id": "Aatrox",
@@ -25,7 +25,8 @@
 			"name": "Akali",
 			"image": "Akali.png",
 			"roles": {
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Akshan": {
@@ -52,6 +53,7 @@
 			"name": "Ambessa",
 			"image": "Ambessa.png",
 			"roles": {
+				"jungle": true,
 				"top": true
 			}
 		},
@@ -241,8 +243,8 @@
 			"name": "Diana",
 			"image": "Diana.png",
 			"roles": {
-				"middle": true,
-				"jungle": true
+				"jungle": true,
+				"middle": true
 			}
 		},
 		"DrMundo": {
@@ -251,8 +253,8 @@
 			"name": "Dr. Mundo",
 			"image": "DrMundo.png",
 			"roles": {
-				"top": true,
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Draven": {
@@ -270,8 +272,8 @@
 			"name": "Ekko",
 			"image": "Ekko.png",
 			"roles": {
-				"middle": true,
-				"jungle": true
+				"jungle": true,
+				"middle": true
 			}
 		},
 		"Elise": {
@@ -388,8 +390,8 @@
 			"name": "Gwen",
 			"image": "Gwen.png",
 			"roles": {
-				"top": true,
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Hecarim": {
@@ -434,8 +436,8 @@
 			"name": "Irelia",
 			"image": "Irelia.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Ivern": {
@@ -471,8 +473,8 @@
 			"name": "Jax",
 			"image": "Jax.png",
 			"roles": {
-				"top": true,
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Jayce": {
@@ -481,8 +483,8 @@
 			"name": "Jayce",
 			"image": "Jayce.png",
 			"roles": {
-				"top": true,
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Jhin": {
@@ -708,8 +710,8 @@
 			"name": "Malphite",
 			"image": "Malphite.png",
 			"roles": {
-				"top": true,
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Malzahar": {
@@ -791,8 +793,7 @@
 			"name": "Naafiri",
 			"image": "Naafiri.png",
 			"roles": {
-				"middle": true,
-				"jungle": true
+				"middle": true
 			}
 		},
 		"Nami": {
@@ -927,8 +928,8 @@
 			"name": "Qiyana",
 			"image": "Qiyana.png",
 			"roles": {
-				"middle": true,
-				"jungle": true
+				"jungle": true,
+				"middle": true
 			}
 		},
 		"Quinn": {
@@ -1180,8 +1181,8 @@
 			"name": "Sylas",
 			"image": "Sylas.png",
 			"roles": {
-				"middle": true,
-				"jungle": true
+				"jungle": true,
+				"middle": true
 			}
 		},
 		"Syndra": {
@@ -1199,7 +1200,8 @@
 			"name": "Tahm Kench",
 			"image": "TahmKench.png",
 			"roles": {
-				"support": true
+				"support": true,
+				"top": true
 			}
 		},
 		"Taliyah": {
@@ -1262,8 +1264,8 @@
 			"name": "Trundle",
 			"image": "Trundle.png",
 			"roles": {
-				"top": true,
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Tryndamere": {
@@ -1317,7 +1319,8 @@
 			"name": "Varus",
 			"image": "Varus.png",
 			"roles": {
-				"bottom": true
+				"bottom": true,
+				"top": true
 			}
 		},
 		"Vayne": {
@@ -1326,8 +1329,8 @@
 			"name": "Vayne",
 			"image": "Vayne.png",
 			"roles": {
-				"top": true,
-				"bottom": true
+				"bottom": true,
+				"top": true
 			}
 		},
 		"Veigar": {
@@ -1390,8 +1393,8 @@
 			"name": "Vladimir",
 			"image": "Vladimir.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Volibear": {
@@ -1400,8 +1403,8 @@
 			"name": "Volibear",
 			"image": "Volibear.png",
 			"roles": {
-				"top": true,
-				"jungle": true
+				"jungle": true,
+				"top": true
 			}
 		},
 		"Warwick": {
@@ -1456,8 +1459,8 @@
 			"name": "Yasuo",
 			"image": "Yasuo.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Yone": {
@@ -1466,8 +1469,8 @@
 			"name": "Yone",
 			"image": "Yone.png",
 			"roles": {
-				"top": true,
-				"middle": true
+				"middle": true,
+				"top": true
 			}
 		},
 		"Yorick": {
@@ -1521,8 +1524,8 @@
 			"name": "Zed",
 			"image": "Zed.png",
 			"roles": {
-				"middle": true,
-				"jungle": true
+				"jungle": true,
+				"middle": true
 			}
 		},
 		"Zeri": {

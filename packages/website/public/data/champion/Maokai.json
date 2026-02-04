@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.125,
 		"attackspeed": 0.8,
 		"attackspeedratio": 0.695
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/maokai/hud/icons2d/maokai_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/maokai/hud/icons2d/maokai_q.png"
+		},
+		"w": {
+			"image": "assets/characters/maokai/hud/icons2d/maokai_w.png"
+		},
+		"e": {
+			"image": "assets/characters/maokai/hud/icons2d/maokai_e.png"
+		},
+		"r": {
+			"image": "assets/characters/maokai/hud/icons2d/maokai_r.png"
+		}
 	}
 }

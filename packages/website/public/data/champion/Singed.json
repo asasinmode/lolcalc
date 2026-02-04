@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1.9,
 		"attackspeed": 0.7,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/singed/hud/icons2d/singed_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/singed/hud/icons2d/singed_q.png"
+		},
+		"w": {
+			"image": "assets/characters/singed/hud/icons2d/singed_w.png"
+		},
+		"e": {
+			"image": "assets/characters/singed/hud/icons2d/singed_e.png"
+		},
+		"r": {
+			"image": "assets/characters/singed/hud/icons2d/singed_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 1,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/yuumi/hud/icons2d/yuumip2.png"
+		},
+		"q": {
+			"image": "assets/characters/yuumi/hud/icons2d/yuumiq.png"
+		},
+		"w": {
+			"image": "assets/characters/yuumi/hud/icons2d/yuumiw.png"
+		},
+		"e": {
+			"image": "assets/characters/yuumi/hud/icons2d/yuumip.png"
+		},
+		"r": {
+			"image": "assets/characters/yuumi/hud/icons2d/yuumir.png"
+		}
 	}
 }

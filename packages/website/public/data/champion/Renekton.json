@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.75,
 		"attackspeed": 0.665,
 		"attackspeedratio": 0.665
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/renekton/hud/icons2d/renekton_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/renekton/hud/icons2d/renekton_q.png"
+		},
+		"w": {
+			"image": "assets/characters/renekton/hud/icons2d/renekton_w.png"
+		},
+		"e": {
+			"image": "assets/characters/renekton/hud/icons2d/renekton_e.png"
+		},
+		"r": {
+			"image": "assets/characters/renekton/hud/icons2d/renekton_r.png"
+		}
 	}
 }

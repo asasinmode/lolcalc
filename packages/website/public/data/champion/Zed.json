@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.3,
 		"attackspeed": 0.651,
 		"attackspeedratio": 0.651
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/zed/hud/icons2d/zedp.png"
+		},
+		"q": {
+			"image": "assets/characters/zed/hud/icons2d/zedq.png"
+		},
+		"w": {
+			"image": "assets/characters/zed/hud/icons2d/zedw.png"
+		},
+		"e": {
+			"image": "assets/characters/zed/hud/icons2d/zede.png"
+		},
+		"r": {
+			"image": "assets/characters/zed/hud/icons2d/zedr.png"
+		}
 	}
 }

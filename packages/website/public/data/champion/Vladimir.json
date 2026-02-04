@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/vladimir/hud/icons2d/vladimirp.png"
+		},
+		"q": {
+			"image": "assets/characters/vladimir/hud/icons2d/vladimirq.png"
+		},
+		"w": {
+			"image": "assets/characters/vladimir/hud/icons2d/vladimirw.png"
+		},
+		"e": {
+			"image": "assets/characters/vladimir/hud/icons2d/vladimire.png"
+		},
+		"r": {
+			"image": "assets/characters/vladimir/hud/icons2d/vladimirr.png"
+		}
 	}
 }

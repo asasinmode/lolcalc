@@ -5,12 +5,12 @@
 	"partype": "Fury",
 	"stats": {
 		"hp": 625,
-		"hpperlevel": 95,
+		"hpperlevel": 100,
 		"mp": 0,
 		"mpperlevel": 0,
 		"movespeed": 340,
 		"armor": 30,
-		"armorperlevel": 4.2,
+		"armorperlevel": 4.5,
 		"spellblock": 32,
 		"spellblockperlevel": 2.05,
 		"attackrange": 125,
@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.669
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/briar/hud/icons2d/briarp.png"
+		},
+		"q": {
+			"image": "assets/characters/briar/hud/icons2d/briarq.png"
+		},
+		"w": {
+			"image": "assets/characters/briar/hud/icons2d/briarw.png"
+		},
+		"e": {
+			"image": "assets/characters/briar/hud/icons2d/briare.png"
+		},
+		"r": {
+			"image": "assets/characters/briar/hud/icons2d/briarr.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.2,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/akali/hud/icons2d/akali_p.png"
+		},
+		"q": {
+			"image": "assets/characters/akali/hud/icons2d/akali_q.png"
+		},
+		"w": {
+			"image": "assets/characters/akali/hud/icons2d/akali_w.png"
+		},
+		"e": {
+			"image": "assets/characters/akali/hud/icons2d/akali_e.png"
+		},
+		"r": {
+			"image": "assets/characters/akali/hud/icons2d/akali_r.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 3.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/yone/hud/icons2d/yonepassive.png"
+		},
+		"q": {
+			"image": "assets/characters/yone/hud/icons2d/yoneq.png"
+		},
+		"w": {
+			"image": "assets/characters/yone/hud/icons2d/yonew.png"
+		},
+		"e": {
+			"image": "assets/characters/yone/hud/icons2d/yonee.png"
+		},
+		"r": {
+			"image": "assets/characters/yone/hud/icons2d/yoner.png"
+		}
 	}
 }

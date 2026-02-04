@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.7,
 		"attackspeed": 0.694,
 		"attackspeedratio": 0.694
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/olaf/hud/icons2d/olafp.png"
+		},
+		"q": {
+			"image": "assets/characters/olaf/hud/icons2d/olafq.png"
+		},
+		"w": {
+			"image": "assets/characters/olaf/hud/icons2d/olafw.png"
+		},
+		"e": {
+			"image": "assets/characters/olaf/hud/icons2d/olafe.png"
+		},
+		"r": {
+			"image": "assets/characters/olaf/hud/icons2d/olafr.png"
+		}
 	}
 }

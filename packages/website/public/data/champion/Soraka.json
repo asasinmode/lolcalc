@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.14,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/soraka/hud/icons2d/soraka_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/soraka/hud/icons2d/soraka_q.png"
+		},
+		"w": {
+			"image": "assets/characters/soraka/hud/icons2d/soraka_w.png"
+		},
+		"e": {
+			"image": "assets/characters/soraka/hud/icons2d/soraka_e.png"
+		},
+		"r": {
+			"image": "assets/characters/soraka/hud/icons2d/soraka_r.png"
+		}
 	}
 }

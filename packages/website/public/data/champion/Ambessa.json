@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.5,
 		"attackspeed": 0.625,
 		"attackspeedratio": 0.625
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.domina.png"
+		},
+		"q": {
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_q1.domina.png"
+		},
+		"w": {
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_w.domina.png"
+		},
+		"e": {
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_e.domina.png"
+		},
+		"r": {
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_r.domina.png"
+		}
 	}
 }

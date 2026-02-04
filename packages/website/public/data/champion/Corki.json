@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.8,
 		"attackspeed": 0.644,
 		"attackspeedratio": 0.644
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/corki/hud/icons2d/corki_rapidreload.png"
+		},
+		"q": {
+			"image": "assets/characters/corki/hud/icons2d/corki_phosphorusbomb.png"
+		},
+		"w": {
+			"image": "assets/characters/corki/hud/icons2d/corki_valkyrie.png"
+		},
+		"e": {
+			"image": "assets/characters/corki/hud/icons2d/corki_gatlinggun.png"
+		},
+		"r": {
+			"image": "assets/characters/corki/hud/icons2d/corki_missilebarrage.png"
+		}
 	}
 }

@@ -25,5 +25,22 @@
 		"attackspeedperlevel": 2.95,
 		"attackspeed": 0.658,
 		"attackspeedratio": 0.658
+	},
+	"abilities": {
+		"passive": {
+			"image": "assets/characters/pantheon/hud/icons2d/pantheon_passive.png"
+		},
+		"q": {
+			"image": "assets/characters/pantheon/hud/icons2d/pantheon_q1.png"
+		},
+		"w": {
+			"image": "assets/characters/pantheon/hud/icons2d/pantheon_w1.png"
+		},
+		"e": {
+			"image": "assets/characters/pantheon/hud/icons2d/pantheon_e1.png"
+		},
+		"r": {
+			"image": "assets/characters/pantheon/hud/icons2d/pantheon_r.png"
+		}
 	}
 }

@@ -815,7 +815,7 @@
 						],
 						[
 							"<passive>Bolt</passive>",
-							"Your <keyword>Energized Attack</keyword> applies <magicDamage>@TotalProcDamage@ bonus magic damage</magicDamage> and grants <speed>@BuffStrength*100@% Move Speed</speed> for @BuffDuration@s.",
+							"Your <keyword>Energized Attack</keyword> applies <magicDamage>@TotalProcDamage@ bonus magic damage</magicDamage> and grants <speed>@BuffStrength*100@% Movement Speed</speed> for @BuffDuration@ seconds.",
 							""
 						]
 					]
@@ -2288,7 +2288,7 @@
 				},
 				"Demolish": {
 					"name": "Demolish",
-					"tooltipShort": "Your third attack against turrets deals HP-based bonus damage.",
+					"tooltipShort": "Your third attack against turrets deals bonus damage.",
 					"tooltipLong": "Your third attack against towers deals [@BaseDamageMelee@ (+@HPRatioMelee.0 * 100@% max Health) Melee || @BaseDamageRanged@ (+@HPRatioRanged.0 * 100@% max Health) Ranged] bonus physical damage.<br><br>Cooldown: @CooldownSeconds@s",
 					"tooltipStats": "Your third attack against towers deals <scaleAD>@DamageCalc@</scaleAD> bonus physical damage.<br><br>Total bonus damage: <scaleAD>@f1@</scaleAD><br>Total triggers: <scaleAD>@f2@</scaleAD><br>Cooldown: @CooldownSeconds@s"
 				},
