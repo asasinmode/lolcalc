@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Teemo",
 	"key": "17",
 	"name": "Teemo",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/teemo/hud/icons2d/teemopassive.asu_teemo.png"
+			"image": "assets/characters/teemo/hud/icons2d/teemopassive.asu_teemo.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/teemo/hud/icons2d/teemoq.asu_teemo.png"
+			"image": "assets/characters/teemo/hud/icons2d/teemoq.asu_teemo.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/teemo/hud/icons2d/teemow.asu_teemo.png"
+			"image": "assets/characters/teemo/hud/icons2d/teemow.asu_teemo.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/teemo/hud/icons2d/teemoe.asu_teemo.png"
+			"image": "assets/characters/teemo/hud/icons2d/teemoe.asu_teemo.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/teemo/hud/icons2d/teemor.asu_teemo.png"
+			"image": "assets/characters/teemo/hud/icons2d/teemor.asu_teemo.png",
+			"maxLevel": 3
 		}
 	}
 }

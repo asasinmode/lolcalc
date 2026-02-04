@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Janna",
 	"key": "40",
 	"name": "Janna",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/janna/hud/icons2d/jannap.png"
+			"image": "assets/characters/janna/hud/icons2d/jannap.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/janna/hud/icons2d/jannaq.png"
+			"image": "assets/characters/janna/hud/icons2d/jannaq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/janna/hud/icons2d/jannaw.png"
+			"image": "assets/characters/janna/hud/icons2d/jannaw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/janna/hud/icons2d/jannae.png"
+			"image": "assets/characters/janna/hud/icons2d/jannae.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/janna/hud/icons2d/jannar.png"
+			"image": "assets/characters/janna/hud/icons2d/jannar.png",
+			"maxLevel": 3
 		}
 	}
 }

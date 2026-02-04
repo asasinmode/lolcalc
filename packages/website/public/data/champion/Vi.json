@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Vi",
 	"key": "254",
 	"name": "Vi",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/vi/hud/icons2d/vipassive.png"
+			"image": "assets/characters/vi/hud/icons2d/vipassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/vi/hud/icons2d/viq.png"
+			"image": "assets/characters/vi/hud/icons2d/viq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/vi/hud/icons2d/viw.png"
+			"image": "assets/characters/vi/hud/icons2d/viw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/vi/hud/icons2d/vie.png"
+			"image": "assets/characters/vi/hud/icons2d/vie.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/vi/hud/icons2d/vir.png"
+			"image": "assets/characters/vi/hud/icons2d/vir.png",
+			"maxLevel": 3
 		}
 	}
 }

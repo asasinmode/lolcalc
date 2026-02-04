@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Rell",
 	"key": "526",
 	"name": "Rell",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/rell/hud/icons2d/rellp.png"
+			"image": "assets/characters/rell/hud/icons2d/rellp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/rell/hud/icons2d/rellq.png"
+			"image": "assets/characters/rell/hud/icons2d/rellq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/rell/hud/icons2d/rellw.png"
+			"image": "assets/characters/rell/hud/icons2d/rellw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/rell/hud/icons2d/relle.png"
+			"image": "assets/characters/rell/hud/icons2d/relle.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/rell/hud/icons2d/rellr.png"
+			"image": "assets/characters/rell/hud/icons2d/rellr.png",
+			"maxLevel": 3
 		}
 	}
 }

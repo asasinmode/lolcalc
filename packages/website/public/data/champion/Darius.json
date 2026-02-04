@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Darius",
 	"key": "122",
 	"name": "Darius",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/darius/hud/icons2d/darius_icon_hemorrhage.png"
+			"image": "assets/characters/darius/hud/icons2d/darius_icon_hemorrhage.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png"
+			"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png"
+			"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png"
+			"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/darius/hud/icons2d/darius_icon_sudden_death.png"
+			"image": "assets/characters/darius/hud/icons2d/darius_icon_sudden_death.png",
+			"maxLevel": 3
 		}
 	}
 }

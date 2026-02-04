@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Yone",
 	"key": "777",
 	"name": "Yone",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/yone/hud/icons2d/yonepassive.png"
+			"image": "assets/characters/yone/hud/icons2d/yonepassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/yone/hud/icons2d/yoneq.png"
+			"image": "assets/characters/yone/hud/icons2d/yoneq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/yone/hud/icons2d/yonew.png"
+			"image": "assets/characters/yone/hud/icons2d/yonew.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/yone/hud/icons2d/yonee.png"
+			"image": "assets/characters/yone/hud/icons2d/yonee.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/yone/hud/icons2d/yoner.png"
+			"image": "assets/characters/yone/hud/icons2d/yoner.png",
+			"maxLevel": 3
 		}
 	}
 }

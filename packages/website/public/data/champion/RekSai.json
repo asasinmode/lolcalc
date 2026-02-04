@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "RekSai",
 	"key": "421",
 	"name": "Rek'Sai",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/reksai/hud/icons2d/reksai_passive.png"
+			"image": "assets/characters/reksai/hud/icons2d/reksai_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/reksai/hud/icons2d/reksai_q1.png"
+			"image": "assets/characters/reksai/hud/icons2d/reksai_q1.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/reksai/hud/icons2d/reksai_w1.png"
+			"image": "assets/characters/reksai/hud/icons2d/reksai_w1.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/reksai/hud/icons2d/reksai_e1.png"
+			"image": "assets/characters/reksai/hud/icons2d/reksai_e1.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/reksai/hud/icons2d/reksai_r.png"
+			"image": "assets/characters/reksai/hud/icons2d/reksai_r.png",
+			"maxLevel": 3
 		}
 	}
 }

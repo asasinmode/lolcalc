@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Yasuo",
 	"key": "157",
 	"name": "Yasuo",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png"
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png"
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png"
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png"
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png"
+			"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png",
+			"maxLevel": 3
 		}
 	}
 }

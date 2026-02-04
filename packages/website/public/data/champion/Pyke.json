@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Pyke",
 	"key": "555",
 	"name": "Pyke",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/pyke/hud/icons2d/pykepassive.png"
+			"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/pyke/hud/icons2d/pykeq.png"
+			"image": "assets/characters/pyke/hud/icons2d/pykeq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/pyke/hud/icons2d/pykew.png"
+			"image": "assets/characters/pyke/hud/icons2d/pykew.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/pyke/hud/icons2d/pykee.png"
+			"image": "assets/characters/pyke/hud/icons2d/pykee.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/pyke/hud/icons2d/pyker.png"
+			"image": "assets/characters/pyke/hud/icons2d/pyker.png",
+			"maxLevel": 3
 		}
 	}
 }

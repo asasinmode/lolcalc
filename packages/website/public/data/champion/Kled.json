@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Kled",
 	"key": "240",
 	"name": "Kled",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/kled/hud/icons2d/kled_p.png"
+			"image": "assets/characters/kled/hud/icons2d/kled_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/kled/hud/icons2d/kled_q1.png"
+			"image": "assets/characters/kled/hud/icons2d/kled_q1.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/kled/hud/icons2d/kled_w.png"
+			"image": "assets/characters/kled/hud/icons2d/kled_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/kled/hud/icons2d/kled_e1.png"
+			"image": "assets/characters/kled/hud/icons2d/kled_e1.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/kled/hud/icons2d/kled_r.png"
+			"image": "assets/characters/kled/hud/icons2d/kled_r.png",
+			"maxLevel": 3
 		}
 	}
 }

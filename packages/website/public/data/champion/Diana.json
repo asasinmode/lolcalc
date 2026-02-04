@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Diana",
 	"key": "131",
 	"name": "Diana",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png"
+			"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/diana/hud/icons2d/diana_q_moonsedge.png"
+			"image": "assets/characters/diana/hud/icons2d/diana_q_moonsedge.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/diana/hud/icons2d/diana_w_lunarshower.png"
+			"image": "assets/characters/diana/hud/icons2d/diana_w_lunarshower.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/diana/hud/icons2d/diana_e_fasterthanlight.png"
+			"image": "assets/characters/diana/hud/icons2d/diana_e_fasterthanlight.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/diana/hud/icons2d/diana_r_moonfall.png"
+			"image": "assets/characters/diana/hud/icons2d/diana_r_moonfall.png",
+			"maxLevel": 3
 		}
 	}
 }

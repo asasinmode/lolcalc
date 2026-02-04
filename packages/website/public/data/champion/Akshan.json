@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Akshan",
 	"key": "166",
 	"name": "Akshan",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/akshan/hud/icons2d/akshan_p.png"
+			"image": "assets/characters/akshan/hud/icons2d/akshan_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/akshan/hud/icons2d/akshan_q.png"
+			"image": "assets/characters/akshan/hud/icons2d/akshan_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/akshan/hud/icons2d/akshan_w.png"
+			"image": "assets/characters/akshan/hud/icons2d/akshan_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/akshan/hud/icons2d/akshan_e.png"
+			"image": "assets/characters/akshan/hud/icons2d/akshan_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/akshan/hud/icons2d/akshan_r.png"
+			"image": "assets/characters/akshan/hud/icons2d/akshan_r.png",
+			"maxLevel": 3
 		}
 	}
 }

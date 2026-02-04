@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Karma",
 	"key": "43",
 	"name": "Karma",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/karma/hud/icons2d/karma_passive.png"
+			"image": "assets/characters/karma/hud/icons2d/karma_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/karma/hud/icons2d/karma_q1.png"
+			"image": "assets/characters/karma/hud/icons2d/karma_q1.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/karma/hud/icons2d/karma_w1.png"
+			"image": "assets/characters/karma/hud/icons2d/karma_w1.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/karma/hud/icons2d/karma_e1.png"
+			"image": "assets/characters/karma/hud/icons2d/karma_e1.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/karma/hud/icons2d/karma_r.png"
+			"image": "assets/characters/karma/hud/icons2d/karma_r.png",
+			"maxLevel": 4
 		}
 	}
 }

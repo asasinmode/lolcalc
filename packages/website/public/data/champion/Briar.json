@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Briar",
 	"key": "233",
 	"name": "Briar",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/briar/hud/icons2d/briarp.png"
+			"image": "assets/characters/briar/hud/icons2d/briarp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/briar/hud/icons2d/briarq.png"
+			"image": "assets/characters/briar/hud/icons2d/briarq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/briar/hud/icons2d/briarw.png"
+			"image": "assets/characters/briar/hud/icons2d/briarw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/briar/hud/icons2d/briare.png"
+			"image": "assets/characters/briar/hud/icons2d/briare.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/briar/hud/icons2d/briarr.png"
+			"image": "assets/characters/briar/hud/icons2d/briarr.png",
+			"maxLevel": 3
 		}
 	}
 }

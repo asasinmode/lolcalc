@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Nami",
 	"key": "267",
 	"name": "Nami",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/nami/hud/icons2d/namipassive.png"
+			"image": "assets/characters/nami/hud/icons2d/namipassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/nami/hud/icons2d/namiq.png"
+			"image": "assets/characters/nami/hud/icons2d/namiq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/nami/hud/icons2d/namiw.png"
+			"image": "assets/characters/nami/hud/icons2d/namiw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/nami/hud/icons2d/namie.png"
+			"image": "assets/characters/nami/hud/icons2d/namie.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/nami/hud/icons2d/namir.png"
+			"image": "assets/characters/nami/hud/icons2d/namir.png",
+			"maxLevel": 3
 		}
 	}
 }

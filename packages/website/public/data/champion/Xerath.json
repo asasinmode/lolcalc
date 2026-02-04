@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Xerath",
 	"key": "101",
 	"name": "Xerath",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png"
+			"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png"
+			"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png"
+			"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png"
+			"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png"
+			"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Yorick",
 	"key": "83",
 	"name": "Yorick",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/yorick/hud/icons2d/yorick_p.png"
+			"image": "assets/characters/yorick/hud/icons2d/yorick_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/yorick/hud/icons2d/yorick_q.png"
+			"image": "assets/characters/yorick/hud/icons2d/yorick_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/yorick/hud/icons2d/yorick_w.png"
+			"image": "assets/characters/yorick/hud/icons2d/yorick_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/yorick/hud/icons2d/yorick_e.png"
+			"image": "assets/characters/yorick/hud/icons2d/yorick_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/yorick/hud/icons2d/yorick_r.png"
+			"image": "assets/characters/yorick/hud/icons2d/yorick_r.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Samira",
 	"key": "360",
 	"name": "Samira",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/samira/hud/icons2d/samirap.png"
+			"image": "assets/characters/samira/hud/icons2d/samirap.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/samira/hud/icons2d/samiraq.png"
+			"image": "assets/characters/samira/hud/icons2d/samiraq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/samira/hud/icons2d/samiraw.png"
+			"image": "assets/characters/samira/hud/icons2d/samiraw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/samira/hud/icons2d/samirae.png"
+			"image": "assets/characters/samira/hud/icons2d/samirae.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/samira/hud/icons2d/samirar1.png"
+			"image": "assets/characters/samira/hud/icons2d/samirar1.png",
+			"maxLevel": 3
 		}
 	}
 }

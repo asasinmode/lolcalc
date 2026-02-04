@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Lulu",
 	"key": "117",
 	"name": "Lulu",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png"
+			"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_glitterbolt.png"
+			"image": "assets/characters/lulu/hud/icons2d/lulu_glitterbolt.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_whimsy.png"
+			"image": "assets/characters/lulu/hud/icons2d/lulu_whimsy.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_commandpix.png"
+			"image": "assets/characters/lulu/hud/icons2d/lulu_commandpix.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_giantgrowth.png"
+			"image": "assets/characters/lulu/hud/icons2d/lulu_giantgrowth.png",
+			"maxLevel": 3
 		}
 	}
 }

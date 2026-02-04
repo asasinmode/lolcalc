@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Lux",
 	"key": "99",
 	"name": "Lux",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/lux/hud/icons2d/luxilluminatingfraulein.png"
+			"image": "assets/characters/lux/hud/icons2d/luxilluminatingfraulein.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png"
+			"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png"
+			"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png"
+			"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png"
+			"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png",
+			"maxLevel": 3
 		}
 	}
 }

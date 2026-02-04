@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Chogath",
 	"key": "31",
 	"name": "Cho'Gath",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png"
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png"
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png"
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png"
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png"
+			"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png",
+			"maxLevel": 3
 		}
 	}
 }

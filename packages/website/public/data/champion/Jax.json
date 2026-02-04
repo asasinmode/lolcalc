@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Jax",
 	"key": "24",
 	"name": "Jax",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/jax/hud/icons2d/jaxp.png"
+			"image": "assets/characters/jax/hud/icons2d/jaxp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/jax/hud/icons2d/jaxq.png"
+			"image": "assets/characters/jax/hud/icons2d/jaxq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/jax/hud/icons2d/jaxw.png"
+			"image": "assets/characters/jax/hud/icons2d/jaxw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/jax/hud/icons2d/jaxe.png"
+			"image": "assets/characters/jax/hud/icons2d/jaxe.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/jax/hud/icons2d/jaxr.png"
+			"image": "assets/characters/jax/hud/icons2d/jaxr.png",
+			"maxLevel": 3
 		}
 	}
 }

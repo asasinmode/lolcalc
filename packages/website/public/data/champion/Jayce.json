@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Jayce",
 	"key": "126",
 	"name": "Jayce",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/jayce/hud/icons2d/jaycep_melee.png"
+			"image": "assets/characters/jayce/hud/icons2d/jaycep_melee.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/jayce/hud/icons2d/jayceq_melee.png"
+			"image": "assets/characters/jayce/hud/icons2d/jayceq_melee.png",
+			"maxLevel": 6
 		},
 		"w": {
-			"image": "assets/characters/jayce/hud/icons2d/jaycew_melee.png"
+			"image": "assets/characters/jayce/hud/icons2d/jaycew_melee.png",
+			"maxLevel": 6
 		},
 		"e": {
-			"image": "assets/characters/jayce/hud/icons2d/jaycee_melee.png"
+			"image": "assets/characters/jayce/hud/icons2d/jaycee_melee.png",
+			"maxLevel": 6
 		},
 		"r": {
-			"image": "assets/characters/jayce/hud/icons2d/jaycer_ranged.png"
+			"image": "assets/characters/jayce/hud/icons2d/jaycer_ranged.png",
+			"maxLevel": 1
 		}
 	}
 }

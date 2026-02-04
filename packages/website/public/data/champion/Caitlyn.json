@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Caitlyn",
 	"key": "51",
 	"name": "Caitlyn",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png"
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynq.png"
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynw.png"
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlyne.png"
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlyne.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynr.png"
+			"image": "assets/characters/caitlyn/hud/icons2d/caitlynr.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Corki",
 	"key": "42",
 	"name": "Corki",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/corki/hud/icons2d/corki_rapidreload.png"
+			"image": "assets/characters/corki/hud/icons2d/corki_rapidreload.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/corki/hud/icons2d/corki_phosphorusbomb.png"
+			"image": "assets/characters/corki/hud/icons2d/corki_phosphorusbomb.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/corki/hud/icons2d/corki_valkyrie.png"
+			"image": "assets/characters/corki/hud/icons2d/corki_valkyrie.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/corki/hud/icons2d/corki_gatlinggun.png"
+			"image": "assets/characters/corki/hud/icons2d/corki_gatlinggun.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/corki/hud/icons2d/corki_missilebarrage.png"
+			"image": "assets/characters/corki/hud/icons2d/corki_missilebarrage.png",
+			"maxLevel": 3
 		}
 	}
 }

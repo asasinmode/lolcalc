@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Rengar",
 	"key": "107",
 	"name": "Rengar",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/rengar/hud/icons2d/rengar_p.png"
+			"image": "assets/characters/rengar/hud/icons2d/rengar_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/rengar/hud/icons2d/rengarq.png"
+			"image": "assets/characters/rengar/hud/icons2d/rengarq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/rengar/hud/icons2d/rengar_w.png"
+			"image": "assets/characters/rengar/hud/icons2d/rengar_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/rengar/hud/icons2d/rengar_e.png"
+			"image": "assets/characters/rengar/hud/icons2d/rengar_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/rengar/hud/icons2d/rengar_r.png"
+			"image": "assets/characters/rengar/hud/icons2d/rengar_r.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Zed",
 	"key": "238",
 	"name": "Zed",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/zed/hud/icons2d/zedp.png"
+			"image": "assets/characters/zed/hud/icons2d/zedp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/zed/hud/icons2d/zedq.png"
+			"image": "assets/characters/zed/hud/icons2d/zedq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/zed/hud/icons2d/zedw.png"
+			"image": "assets/characters/zed/hud/icons2d/zedw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/zed/hud/icons2d/zede.png"
+			"image": "assets/characters/zed/hud/icons2d/zede.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/zed/hud/icons2d/zedr.png"
+			"image": "assets/characters/zed/hud/icons2d/zedr.png",
+			"maxLevel": 3
 		}
 	}
 }

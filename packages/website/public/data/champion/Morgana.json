@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Morgana",
 	"key": "25",
 	"name": "Morgana",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/morgana/hud/icons2d/fallenangel_empathize.png"
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_empathize.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png"
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png"
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png"
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png"
+			"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png",
+			"maxLevel": 3
 		}
 	}
 }

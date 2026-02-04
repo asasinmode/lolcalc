@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Blitzcrank",
 	"key": "53",
 	"name": "Blitzcrank",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankp.png"
+			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankq.png"
+			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankw.png"
+			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcranke.png"
+			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcranke.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankr.png"
+			"image": "assets/characters/blitzcrank/hud/icons2d/blitzcrankr.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Elise",
 	"key": "60",
 	"name": "Elise",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/elise/hud/icons2d/elisepassive.png"
+			"image": "assets/characters/elise/hud/icons2d/elisepassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/elise/hud/icons2d/elisehumanq.png"
+			"image": "assets/characters/elise/hud/icons2d/elisehumanq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/elise/hud/icons2d/elisehumanw.png"
+			"image": "assets/characters/elise/hud/icons2d/elisehumanw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/elise/hud/icons2d/elisehumane.png"
+			"image": "assets/characters/elise/hud/icons2d/elisehumane.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/elise/hud/icons2d/eliser.png"
+			"image": "assets/characters/elise/hud/icons2d/eliser.png",
+			"maxLevel": 4
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Zac",
 	"key": "154",
 	"name": "Zac",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/zac/hud/icons2d/zacpassive.png"
+			"image": "assets/characters/zac/hud/icons2d/zacpassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/zac/hud/icons2d/zacq.png"
+			"image": "assets/characters/zac/hud/icons2d/zacq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/zac/hud/icons2d/zacw.png"
+			"image": "assets/characters/zac/hud/icons2d/zacw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/zac/hud/icons2d/zace.png"
+			"image": "assets/characters/zac/hud/icons2d/zace.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/zac/hud/icons2d/zacr.png"
+			"image": "assets/characters/zac/hud/icons2d/zacr.png",
+			"maxLevel": 3
 		}
 	}
 }

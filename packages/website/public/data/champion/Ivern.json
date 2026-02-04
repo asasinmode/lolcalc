@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Ivern",
 	"key": "427",
 	"name": "Ivern",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernp.png"
+			"image": "assets/characters/ivern/hud/icons2d/ivernp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernq.png"
+			"image": "assets/characters/ivern/hud/icons2d/ivernq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernw.png"
+			"image": "assets/characters/ivern/hud/icons2d/ivernw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/ivern/hud/icons2d/iverne.png"
+			"image": "assets/characters/ivern/hud/icons2d/iverne.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernr.png"
+			"image": "assets/characters/ivern/hud/icons2d/ivernr.png",
+			"maxLevel": 3
 		}
 	}
 }

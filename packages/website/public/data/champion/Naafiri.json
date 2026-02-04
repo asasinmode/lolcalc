@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Naafiri",
 	"key": "950",
 	"name": "Naafiri",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_p.png"
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_q.png"
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_r.png"
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_r.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_e.png"
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_w.png"
+			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_w.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Udyr",
 	"key": "77",
 	"name": "Udyr",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/udyr/hud/icons2d/udyr_p.png"
+			"image": "assets/characters/udyr/hud/icons2d/udyr_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/udyr/hud/icons2d/udyr_q.png"
+			"image": "assets/characters/udyr/hud/icons2d/udyr_q.png",
+			"maxLevel": 6
 		},
 		"w": {
-			"image": "assets/characters/udyr/hud/icons2d/udyr_w.png"
+			"image": "assets/characters/udyr/hud/icons2d/udyr_w.png",
+			"maxLevel": 6
 		},
 		"e": {
-			"image": "assets/characters/udyr/hud/icons2d/udyr_e.png"
+			"image": "assets/characters/udyr/hud/icons2d/udyr_e.png",
+			"maxLevel": 6
 		},
 		"r": {
-			"image": "assets/characters/udyr/hud/icons2d/udyr_r.png"
+			"image": "assets/characters/udyr/hud/icons2d/udyr_r.png",
+			"maxLevel": 6
 		}
 	}
 }

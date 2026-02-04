@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Olaf",
 	"key": "2",
 	"name": "Olaf",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/olaf/hud/icons2d/olafp.png"
+			"image": "assets/characters/olaf/hud/icons2d/olafp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/olaf/hud/icons2d/olafq.png"
+			"image": "assets/characters/olaf/hud/icons2d/olafq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/olaf/hud/icons2d/olafw.png"
+			"image": "assets/characters/olaf/hud/icons2d/olafw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/olaf/hud/icons2d/olafe.png"
+			"image": "assets/characters/olaf/hud/icons2d/olafe.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/olaf/hud/icons2d/olafr.png"
+			"image": "assets/characters/olaf/hud/icons2d/olafr.png",
+			"maxLevel": 3
 		}
 	}
 }

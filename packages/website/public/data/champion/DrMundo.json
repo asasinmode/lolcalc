@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "DrMundo",
 	"key": "36",
 	"name": "Dr. Mundo",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/drmundo/hud/icons2d/drmundo_p.png"
+			"image": "assets/characters/drmundo/hud/icons2d/drmundo_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/drmundo/hud/icons2d/drmundo_q.png"
+			"image": "assets/characters/drmundo/hud/icons2d/drmundo_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/drmundo/hud/icons2d/drmundo_w.png"
+			"image": "assets/characters/drmundo/hud/icons2d/drmundo_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/drmundo/hud/icons2d/drmundo_e.png"
+			"image": "assets/characters/drmundo/hud/icons2d/drmundo_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/drmundo/hud/icons2d/drmundo_r.png"
+			"image": "assets/characters/drmundo/hud/icons2d/drmundo_r.png",
+			"maxLevel": 3
 		}
 	}
 }

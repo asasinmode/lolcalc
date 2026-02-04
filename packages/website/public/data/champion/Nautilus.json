@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Nautilus",
 	"key": "111",
 	"name": "Nautilus",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png"
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/nautilus/hud/icons2d/nautilus_anchorchain.png"
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_anchorchain.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/nautilus/hud/icons2d/nautilus_wrath.png"
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_wrath.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/nautilus/hud/icons2d/nautilus_rippleeffect.png"
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_rippleeffect.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/nautilus/hud/icons2d/nautilus_grandline.png"
+			"image": "assets/characters/nautilus/hud/icons2d/nautilus_grandline.png",
+			"maxLevel": 3
 		}
 	}
 }

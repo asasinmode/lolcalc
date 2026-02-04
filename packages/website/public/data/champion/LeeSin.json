@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "LeeSin",
 	"key": "64",
 	"name": "Lee Sin",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/leesin/hud/icons2d/leesinp.png"
+			"image": "assets/characters/leesin/hud/icons2d/leesinp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/leesin/hud/icons2d/leesinq1.png"
+			"image": "assets/characters/leesin/hud/icons2d/leesinq1.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/leesin/hud/icons2d/leesinw1.png"
+			"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/leesin/hud/icons2d/leesine1.png"
+			"image": "assets/characters/leesin/hud/icons2d/leesine1.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/leesin/hud/icons2d/leesinr.png"
+			"image": "assets/characters/leesin/hud/icons2d/leesinr.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Ekko",
 	"key": "245",
 	"name": "Ekko",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/ekko/hud/icons2d/ekko_p.png"
+			"image": "assets/characters/ekko/hud/icons2d/ekko_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/ekko/hud/icons2d/ekko_q.png"
+			"image": "assets/characters/ekko/hud/icons2d/ekko_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/ekko/hud/icons2d/ekko_w.png"
+			"image": "assets/characters/ekko/hud/icons2d/ekko_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/ekko/hud/icons2d/ekko_e.png"
+			"image": "assets/characters/ekko/hud/icons2d/ekko_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/ekko/hud/icons2d/ekko_r.png"
+			"image": "assets/characters/ekko/hud/icons2d/ekko_r.png",
+			"maxLevel": 3
 		}
 	}
 }

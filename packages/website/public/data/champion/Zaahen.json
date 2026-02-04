@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Zaahen",
 	"key": "904",
 	"name": "Zaahen",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/zaahen/hud/icons2d/zaahenp.zaahen.png"
+			"image": "assets/characters/zaahen/hud/icons2d/zaahenp.zaahen.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/zaahen/hud/icons2d/zaahenq.zaahen.png"
+			"image": "assets/characters/zaahen/hud/icons2d/zaahenq.zaahen.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/zaahen/hud/icons2d/zaahenw.zaahen.png"
+			"image": "assets/characters/zaahen/hud/icons2d/zaahenw.zaahen.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/zaahen/hud/icons2d/zaahene.zaahen.png"
+			"image": "assets/characters/zaahen/hud/icons2d/zaahene.zaahen.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/zaahen/hud/icons2d/zaahenr.zaahen.png"
+			"image": "assets/characters/zaahen/hud/icons2d/zaahenr.zaahen.png",
+			"maxLevel": 3
 		}
 	}
 }

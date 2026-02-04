@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Gragas",
 	"key": "79",
 	"name": "Gragas",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png"
+			"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png"
+			"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png"
+			"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png"
+			"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png"
+			"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png",
+			"maxLevel": 3
 		}
 	}
 }

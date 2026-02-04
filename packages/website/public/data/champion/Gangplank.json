@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Gangplank",
 	"key": "41",
 	"name": "Gangplank",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/gangplank/hud/icons2d/gangplank_passive.png"
+			"image": "assets/characters/gangplank/hud/icons2d/gangplank_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/gangplank/hud/icons2d/gangplank_q.png"
+			"image": "assets/characters/gangplank/hud/icons2d/gangplank_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/gangplank/hud/icons2d/gangplank_w.png"
+			"image": "assets/characters/gangplank/hud/icons2d/gangplank_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png"
+			"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/gangplank/hud/icons2d/gangplank_r.png"
+			"image": "assets/characters/gangplank/hud/icons2d/gangplank_r.png",
+			"maxLevel": 3
 		}
 	}
 }

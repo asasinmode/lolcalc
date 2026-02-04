@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Warwick",
 	"key": "19",
 	"name": "Warwick",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/warwick/hud/icons2d/warwickp.png"
+			"image": "assets/characters/warwick/hud/icons2d/warwickp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/warwick/hud/icons2d/warwickq.png"
+			"image": "assets/characters/warwick/hud/icons2d/warwickq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/warwick/hud/icons2d/warwickw.png"
+			"image": "assets/characters/warwick/hud/icons2d/warwickw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/warwick/hud/icons2d/warwicke.png"
+			"image": "assets/characters/warwick/hud/icons2d/warwicke.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/warwick/hud/icons2d/warwickr.png"
+			"image": "assets/characters/warwick/hud/icons2d/warwickr.png",
+			"maxLevel": 3
 		}
 	}
 }

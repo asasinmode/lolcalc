@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "JarvanIV",
 	"key": "59",
 	"name": "Jarvan IV",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivp.png"
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivq.png"
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivw.png"
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanive.png"
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanive.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivr.png"
+			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivr.png",
+			"maxLevel": 3
 		}
 	}
 }

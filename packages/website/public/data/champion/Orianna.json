@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Orianna",
 	"key": "61",
 	"name": "Orianna",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/orianna/hud/icons2d/oriannap.png"
+			"image": "assets/characters/orianna/hud/icons2d/oriannap.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/orianna/hud/icons2d/oriannaq.png"
+			"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/orianna/hud/icons2d/oriannaw.png"
+			"image": "assets/characters/orianna/hud/icons2d/oriannaw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/orianna/hud/icons2d/oriannae.png"
+			"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/orianna/hud/icons2d/oriannar.png"
+			"image": "assets/characters/orianna/hud/icons2d/oriannar.png",
+			"maxLevel": 3
 		}
 	}
 }

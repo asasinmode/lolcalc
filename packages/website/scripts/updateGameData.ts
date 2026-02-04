@@ -78,7 +78,7 @@ if (!championData || championData?.version !== latestVersion) {
 						throw new Error(`no root character data for ${name}`);
 					}
 
-					const { attackSpeedRatio, spells, mCharacterPassiveSpell } = rootData;
+					const { attackSpeedRatio, spells, mCharacterPassiveSpell, spellLevelUpInfo } = rootData;
 
 					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
 
@@ -98,9 +98,19 @@ if (!championData || championData?.version !== latestVersion) {
 							}
 
 							const { mImgIconName } = abilityData;
+							let maxLevel: number;
+
+							if (index === 0) {
+								maxLevel = 0;
+							} else if (spellLevelUpInfo) {
+								maxLevel = spellLevelUpInfo[index - 1].mRequirements.length;
+							} else {
+								maxLevel = index === 4 ? 3 : 5;
+							}
 
 							return [abilityName, {
 								image: mImgIconName[0].toLowerCase().replace('dds', 'png'),
+								maxLevel,
 							}];
 						})),
 					};

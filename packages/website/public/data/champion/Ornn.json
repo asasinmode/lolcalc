@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Ornn",
 	"key": "516",
 	"name": "Ornn",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/ornn/hud/icons2d/ornnp.png"
+			"image": "assets/characters/ornn/hud/icons2d/ornnp.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/ornn/hud/icons2d/ornnq.png"
+			"image": "assets/characters/ornn/hud/icons2d/ornnq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/ornn/hud/icons2d/ornnw.png"
+			"image": "assets/characters/ornn/hud/icons2d/ornnw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/ornn/hud/icons2d/ornne.png"
+			"image": "assets/characters/ornn/hud/icons2d/ornne.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/ornn/hud/icons2d/ornnr1.png"
+			"image": "assets/characters/ornn/hud/icons2d/ornnr1.png",
+			"maxLevel": 3
 		}
 	}
 }

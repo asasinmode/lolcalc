@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "MonkeyKing",
 	"key": "62",
 	"name": "Wukong",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png"
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcrushingblow.png"
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcrushingblow.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingdecoy.png"
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingdecoy.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingnimbusstrike.png"
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingnimbusstrike.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcyclone.png"
+			"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcyclone.png",
+			"maxLevel": 3
 		}
 	}
 }

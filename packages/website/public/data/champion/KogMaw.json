@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "KogMaw",
 	"key": "96",
 	"name": "Kog'Maw",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_icathiansurprise.png"
+			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_icathiansurprise.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_causticspittle.png"
+			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_causticspittle.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png"
+			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_voidooze.png"
+			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_voidooze.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_livingartillery.png"
+			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_livingartillery.png",
+			"maxLevel": 3
 		}
 	}
 }

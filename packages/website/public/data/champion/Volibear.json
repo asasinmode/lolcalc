@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Volibear",
 	"key": "106",
 	"name": "Volibear",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_p.png"
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_q.png"
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_w.png"
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_e.png"
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_r.png"
+			"image": "assets/characters/volibear/hud/icons2d/volibear_icon_r.png",
+			"maxLevel": 3
 		}
 	}
 }

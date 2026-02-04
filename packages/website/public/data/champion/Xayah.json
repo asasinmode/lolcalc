@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Xayah",
 	"key": "498",
 	"name": "Xayah",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/xayah/hud/icons2d/xayahpassive.png"
+			"image": "assets/characters/xayah/hud/icons2d/xayahpassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/xayah/hud/icons2d/xayahq.png"
+			"image": "assets/characters/xayah/hud/icons2d/xayahq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/xayah/hud/icons2d/xayahw.png"
+			"image": "assets/characters/xayah/hud/icons2d/xayahw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/xayah/hud/icons2d/xayahe.png"
+			"image": "assets/characters/xayah/hud/icons2d/xayahe.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/xayah/hud/icons2d/xayahr.png"
+			"image": "assets/characters/xayah/hud/icons2d/xayahr.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Gwen",
 	"key": "887",
 	"name": "Gwen",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/gwen/hud/icons2d/gwen_passive.png"
+			"image": "assets/characters/gwen/hud/icons2d/gwen_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/gwen/hud/icons2d/gwen_q.png"
+			"image": "assets/characters/gwen/hud/icons2d/gwen_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/gwen/hud/icons2d/gwen_w.png"
+			"image": "assets/characters/gwen/hud/icons2d/gwen_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/gwen/hud/icons2d/gwen_e.png"
+			"image": "assets/characters/gwen/hud/icons2d/gwen_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/gwen/hud/icons2d/gwen_r.png"
+			"image": "assets/characters/gwen/hud/icons2d/gwen_r.png",
+			"maxLevel": 3
 		}
 	}
 }

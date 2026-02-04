@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Sion",
 	"key": "14",
 	"name": "Sion",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/sion/hud/icons2d/sion_passive1.png"
+			"image": "assets/characters/sion/hud/icons2d/sion_passive1.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/sion/hud/icons2d/sion_q.png"
+			"image": "assets/characters/sion/hud/icons2d/sion_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/sion/hud/icons2d/sion_w1.png"
+			"image": "assets/characters/sion/hud/icons2d/sion_w1.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/sion/hud/icons2d/sion_e.png"
+			"image": "assets/characters/sion/hud/icons2d/sion_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/sion/hud/icons2d/sion_r1.png"
+			"image": "assets/characters/sion/hud/icons2d/sion_r1.png",
+			"maxLevel": 3
 		}
 	}
 }

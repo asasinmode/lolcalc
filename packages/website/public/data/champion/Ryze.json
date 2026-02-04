@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Ryze",
 	"key": "13",
 	"name": "Ryze",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/ryze/hud/icons2d/ryze_p.png"
+			"image": "assets/characters/ryze/hud/icons2d/ryze_p.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/ryze/hud/icons2d/ryze_q.png"
+			"image": "assets/characters/ryze/hud/icons2d/ryze_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/ryze/hud/icons2d/ryze_w.png"
+			"image": "assets/characters/ryze/hud/icons2d/ryze_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/ryze/hud/icons2d/ryze_e.png"
+			"image": "assets/characters/ryze/hud/icons2d/ryze_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/ryze/hud/icons2d/ryze_r.png"
+			"image": "assets/characters/ryze/hud/icons2d/ryze_r.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Yunara",
 	"key": "804",
 	"name": "Yunara",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/yunara/hud/icons2d/yunara_passive.yunara.png"
+			"image": "assets/characters/yunara/hud/icons2d/yunara_passive.yunara.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/yunara/hud/icons2d/yunara_q.yunara.png"
+			"image": "assets/characters/yunara/hud/icons2d/yunara_q.yunara.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/yunara/hud/icons2d/yunara_w.yunara.png"
+			"image": "assets/characters/yunara/hud/icons2d/yunara_w.yunara.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/yunara/hud/icons2d/yunara_e.yunara.png"
+			"image": "assets/characters/yunara/hud/icons2d/yunara_e.yunara.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/yunara/hud/icons2d/yunara_r.yunara.png"
+			"image": "assets/characters/yunara/hud/icons2d/yunara_r.yunara.png",
+			"maxLevel": 3
 		}
 	}
 }

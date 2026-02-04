@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Gnar",
 	"key": "150",
 	"name": "Gnar",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/gnar/hud/icons2d/gnar_passive.png"
+			"image": "assets/characters/gnar/hud/icons2d/gnar_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/gnar/hud/icons2d/gnar_q.png"
+			"image": "assets/characters/gnar/hud/icons2d/gnar_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/gnar/hud/icons2d/gnar_w.png"
+			"image": "assets/characters/gnar/hud/icons2d/gnar_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/gnar/hud/icons2d/gnar_e.png"
+			"image": "assets/characters/gnar/hud/icons2d/gnar_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/gnar/hud/icons2d/gnarbig_r.png"
+			"image": "assets/characters/gnar/hud/icons2d/gnarbig_r.png",
+			"maxLevel": 3
 		}
 	}
 }

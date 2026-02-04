@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Hwei",
 	"key": "910",
 	"name": "Hwei",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/hwei/hud/icons2d/hweipassive.png"
+			"image": "assets/characters/hwei/hud/icons2d/hweipassive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/hwei/hud/icons2d/hweiq.png"
+			"image": "assets/characters/hwei/hud/icons2d/hweiq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/hwei/hud/icons2d/hweiw.png"
+			"image": "assets/characters/hwei/hud/icons2d/hweiw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/hwei/hud/icons2d/hweie.png"
+			"image": "assets/characters/hwei/hud/icons2d/hweie.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/hwei/hud/icons2d/hweir.png"
+			"image": "assets/characters/hwei/hud/icons2d/hweir.png",
+			"maxLevel": 3
 		}
 	}
 }

@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Galio",
 	"key": "3",
 	"name": "Galio",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/galio/hud/icons2d/galio_passive.png"
+			"image": "assets/characters/galio/hud/icons2d/galio_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/galio/hud/icons2d/galio_q.png"
+			"image": "assets/characters/galio/hud/icons2d/galio_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/galio/hud/icons2d/galio_w.png"
+			"image": "assets/characters/galio/hud/icons2d/galio_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/galio/hud/icons2d/galio_e.png"
+			"image": "assets/characters/galio/hud/icons2d/galio_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/galio/hud/icons2d/galio_r.png"
+			"image": "assets/characters/galio/hud/icons2d/galio_r.png",
+			"maxLevel": 3
 		}
 	}
 }

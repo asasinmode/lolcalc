@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Bard",
 	"key": "432",
 	"name": "Bard",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/bard/hud/icons2d/bard_passive.png"
+			"image": "assets/characters/bard/hud/icons2d/bard_passive.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/bard/hud/icons2d/bard_q.png"
+			"image": "assets/characters/bard/hud/icons2d/bard_q.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/bard/hud/icons2d/bard_w.png"
+			"image": "assets/characters/bard/hud/icons2d/bard_w.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/bard/hud/icons2d/bard_e.png"
+			"image": "assets/characters/bard/hud/icons2d/bard_e.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/bard/hud/icons2d/bard_r.png"
+			"image": "assets/characters/bard/hud/icons2d/bard_r.png",
+			"maxLevel": 3
 		}
 	}
 }

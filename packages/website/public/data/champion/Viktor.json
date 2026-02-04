@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Viktor",
 	"key": "112",
 	"name": "Viktor",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/viktor/hud/icons2d/viktor_passive.viktorvgu.png"
+			"image": "assets/characters/viktor/hud/icons2d/viktor_passive.viktorvgu.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/viktor/hud/icons2d/viktor_q1.viktorvgu.png"
+			"image": "assets/characters/viktor/hud/icons2d/viktor_q1.viktorvgu.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/viktor/hud/icons2d/viktor_w1.viktorvgu.png"
+			"image": "assets/characters/viktor/hud/icons2d/viktor_w1.viktorvgu.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/viktor/hud/icons2d/viktor_e1.viktorvgu.png"
+			"image": "assets/characters/viktor/hud/icons2d/viktor_e1.viktorvgu.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/viktor/hud/icons2d/viktor_r1.viktorvgu.png"
+			"image": "assets/characters/viktor/hud/icons2d/viktor_r1.viktorvgu.png",
+			"maxLevel": 3
 		}
 	}
 }

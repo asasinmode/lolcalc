@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Ambessa",
 	"key": "799",
 	"name": "Ambessa",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.domina.png"
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.domina.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_q1.domina.png"
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_q1.domina.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_w.domina.png"
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_w.domina.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_e.domina.png"
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_e.domina.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_r.domina.png"
+			"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_r.domina.png",
+			"maxLevel": 3
 		}
 	}
 }

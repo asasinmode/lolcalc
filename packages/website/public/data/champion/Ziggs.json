@@ -1,4 +1,5 @@
 {
+	"version": "16.3.1",
 	"id": "Ziggs",
 	"key": "115",
 	"name": "Ziggs",
@@ -28,19 +29,24 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/ziggs/hud/icons2d/ziggspassiveready.png"
+			"image": "assets/characters/ziggs/hud/icons2d/ziggspassiveready.png",
+			"maxLevel": 0
 		},
 		"q": {
-			"image": "assets/characters/ziggs/hud/icons2d/ziggsq.png"
+			"image": "assets/characters/ziggs/hud/icons2d/ziggsq.png",
+			"maxLevel": 5
 		},
 		"w": {
-			"image": "assets/characters/ziggs/hud/icons2d/ziggsw.png"
+			"image": "assets/characters/ziggs/hud/icons2d/ziggsw.png",
+			"maxLevel": 5
 		},
 		"e": {
-			"image": "assets/characters/ziggs/hud/icons2d/ziggse.png"
+			"image": "assets/characters/ziggs/hud/icons2d/ziggse.png",
+			"maxLevel": 5
 		},
 		"r": {
-			"image": "assets/characters/ziggs/hud/icons2d/ziggsr.png"
+			"image": "assets/characters/ziggs/hud/icons2d/ziggsr.png",
+			"maxLevel": 3
 		}
 	}
 }
