@@ -1006,6 +1006,16 @@ defineExpose({ el });
 								--at-apply: 'bg-[--ui-button-border-clr]';
 							}
 
+							&:has(~ :hover)::before,
+							&:has(~ :focus-visible)::before {
+								--at-apply: 'bg-white/50';
+							}
+
+							&:hover ~ *::before,
+							&:focus-visible ~ *::before {
+								--at-apply: 'bg-black';
+							}
+
 							&:hover::before,
 							&:focus-visible::before {
 								--at-apply: 'bg-white';
