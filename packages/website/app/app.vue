@@ -21,8 +21,13 @@ const { _component: RuneSelect } = useRuneSelect();
 
 _setupGlobalKeyModifiers();
 
-const damageSources = ref<DamageSource[]>([markRaw(new DamageSource(useId(), { champion: champions.Aatrox }))]);
-const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]);
+// TMP as unknown as..., can't put it in v-model or it doesn't build atm
+const damageSources = ref<DamageSource[]>([
+	markRaw(new DamageSource(useId(), { champion: champions.Zaahen, level: 12, abilityLevels: { q: 2 } })),
+	markRaw(new DamageSource(useId(), { champion: champions.Aatrox })),
+	markRaw(new DamageSource(useId(), { champion: champions.Gnar })),
+]) as unknown as DamageSource[];
+const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 </script>
 
 <template>
@@ -30,10 +35,7 @@ const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]);
 		current patch: {{ version }}
 	</header>
 	<main>
-		<CalculatorScoreboard
-			v-model:sources="damageSources as unknown as DamageSource[]"
-			v-model:targets="damageTargets as unknown as DamageSource[]"
-		/>
+		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
 	</main>
 	<ChampSelect />
 	<ItemShop />
