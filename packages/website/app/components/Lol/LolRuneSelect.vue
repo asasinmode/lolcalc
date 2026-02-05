@@ -623,16 +623,12 @@ defineExpose({
 
 		--at-apply: 'relative h-max';
 
-		&:before {
-			--at-apply: 'absolute start-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
+		&::before {
+			--at-apply: 'absolute content-empty start-[calc(var(--selected-path-width)_/_2)] top-[calc(var(--selected-path-width)_+_var(--path-row-py))] bottom-[calc(var(--slot-row-height)_/_2)] bg-[--selected-dots-column-clr] w-1 -translate-x-1/2 op-60';
 			box-shadow:
 				0 0 6px 0 var(--path-icon-clr),
 				inset 1px 0 0 var(--selected-dots-column-lining-clr),
 				inset -1px 0 0 var(--selected-dots-column-lining-clr);
-		}
-
-		&:before {
-			--at-apply: 'content-empty';
 		}
 
 		:where([role='radiogroup']),
