@@ -423,6 +423,12 @@ const maxHealth = computed(() => Math.round(props.value.stats.value?.stats.total
 const updateChampionHealth = useNumberInput(props.value.currentHealth, true, maxHealth);
 const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource);
 
+function resetAbilityLevel(event: MouseEvent, ability: Exclude<keyof IChampion['abilities'], 'passive'>) {
+	event.preventDefault();
+	// eslint-disable-next-line vue/no-mutating-props
+	props.value.abilityLevels.value[ability] = 0;
+}
+
 const hoveredAbility = shallowRef<string>();
 const hoveredAbilityTooltip = useTemplateRef('championAbilityTooltip');
 
@@ -714,6 +720,7 @@ defineExpose({ el });
 						:label="`${ability} level`"
 						:options="Array.from({ length: value.champion.value!.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
 						value-key="level"
+						:on-option-right-click="(event) => resetAbilityLevel(event, ability)"
 					>
 						<template #default="{ option }">
 							<span>{{ option.level }}</span>

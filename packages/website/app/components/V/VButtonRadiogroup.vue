@@ -8,6 +8,7 @@ const props = defineProps<{
 	required?: boolean;
 	onOptionMouseenter?: (event: MouseEvent, option: T) => void;
 	onOptionFocus?: (event: FocusEvent, option: T) => void;
+	onOptionRightClick?: (event: MouseEvent, option: T) => void;
 }>();
 
 const value = defineModel<T[ValueKey]>();
@@ -62,6 +63,7 @@ function selectOption(tab: T[ValueKey]) {
 			@mouseenter="onOptionMouseenter?.($event, option)"
 			@focus="onOptionFocus?.($event, option)"
 			@click="selectOption(option[valueKey])"
+			@click.right="onOptionRightClick?.($event, option)"
 		>
 			<slot :option :is-selected="value === option[valueKey]" />
 		</button>

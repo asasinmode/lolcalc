@@ -80,6 +80,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups with helpful info
   - [ ] dragging scoreboard elements
+  - [ ] right click to sell items
+  - [ ] right click to clear ability level
 - [ ] update browser to make sure everything works properly info
   - chrome 125
   - edge 125
