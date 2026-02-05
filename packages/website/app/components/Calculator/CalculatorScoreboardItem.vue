@@ -28,7 +28,7 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
-const isLoading = computed(() => !props.value.champion.value && props.value.listedChampion.value);
+const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
 
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
@@ -614,11 +614,14 @@ defineExpose({ el });
 			<span class="sr-only">expand</span>
 			<Icon class="i-ph:caret-down size-5" />
 		</button>
-		<details ref="details">
+		<details ref="details" :aria-busy="isLoading">
 			<summary>
 				details
 			</summary>
-			<section data-champion-stats="">
+			<h3 data-loading="">
+				loading...
+			</h3>
+			<section data-champion-stats="" :inert="isLoading || undefined">
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
 					:key="statKindIndex"
@@ -655,7 +658,7 @@ defineExpose({ el });
 					<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
 				</div>
 			</section>
-			<section data-champion-abilities="">
+			<section data-champion-abilities="" :inert="isLoading || undefined">
 				<div data-current-health="" :style="`--fill-percentage: ${value.champion.value ? Math.min(value.currentHealth.value / maxHealth, 1) : 1}`">
 					<template v-if="value.champion.value">
 						<label :for="`${group}-${index}-current-ability-health`">
@@ -688,11 +691,9 @@ defineExpose({ el });
 						<span>/ {{ value.maxAbilityResource.value }}</span>
 					</template>
 				</div>
-				<div v-if="isLoading" data-loading="">
-					loading...
-				</div>
 				<div data-passive="">
 					<img
+						v-if="value.listedChampion.value"
 						v-show="!isLoading"
 						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities.passive.image}`"
 						width="64"
@@ -707,18 +708,20 @@ defineExpose({ el });
 					:key="ability"
 				>
 					<img
+						v-if="value.listedChampion.value"
 						v-show="!isLoading"
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value!.abilities[ability].image}`"
+						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities[ability].image}`"
 						width="64"
 						height="64"
 						aria-hidden="true"
 					>
 					<span>{{ ability }}</span>
 					<VButtonRadiogroup
+						v-if="value.champion.value"
 						:id="`${group}-${index}-ability-${ability}`"
 						v-model="value.abilityLevels.value[ability]"
 						:label="`${ability} level`"
-						:options="Array.from({ length: value.champion.value!.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
+						:options="Array.from({ length: value.champion.value.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
 						value-key="level"
 						:on-option-right-click="(event) => resetAbilityLevel(event, ability)"
 					>
@@ -873,11 +876,22 @@ defineExpose({ el });
 		/* } */
 
 		> details {
+			--at-apply: 'relative';
 			anchor-scope: --champion-stats-minor;
 			grid-area: expanded;
 
 			&::details-content {
 				--at-apply: 'pt-4 -mt-6 flex';
+			}
+
+			[data-loading] {
+				--at-apply: 'hidden z-10 text-center pt-10 absolute -inset-1 inset-t-3 font-600 text-2xl backdrop-blur-2';
+				-webkit-text-stroke: black 0.1em;
+				paint-order: stroke fill;
+			}
+
+			&[aria-busy='true'] [data-loading] {
+				--at-apply: 'block';
 			}
 
 			summary {
@@ -1033,6 +1047,12 @@ defineExpose({ el });
 							}
 						}
 					}
+				}
+
+				[data-loading] {
+					--at-apply: 'grid-center';
+					grid-column: 1 / -1;
+					grid-row: 1 / span 1;
 				}
 
 				[data-passive] {

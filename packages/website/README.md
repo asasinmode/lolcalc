@@ -39,9 +39,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] expanded
     - [x] stats
     - [x] current health/mana
-    - [ ] champion data loading indicator
-    - [ ] abilities ui (not implemented, coming soon)
+    - [x] champion data loading indicator
     - [ ] passive with tooltip
+    - [ ] abilities ui (not implemented, coming soon)
     - [ ] runes
     - [ ] dragons/souls
     - [ ] choose role quest [icon](https://raw.communitydragon.org/latest/game/assets/ux/lol/)
@@ -68,8 +68,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] item groups, only one from group
 - [ ] sharing, saving/reading data in query
 - [ ] calculations
-  - [ ] item passives (+ displaying values in tooltips)
-  - [ ] champion passives (+ level breakpoints)
+  - [ ] item passives (resolve tooltip values)
+  - [ ] champion passives (resolve tooltip values, level breakpoints)
 - [ ] mobile version
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot

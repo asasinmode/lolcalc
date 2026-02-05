@@ -786,7 +786,7 @@ defineExpose({
 			--desktop-h: calc(var(--row-h) * 3 + 2 * var(--gap) + 2 * var(--inner-p));
 
 			ul {
-				--at-apply: 'absolute end-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
+				--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
 
 				direction: rtl;
 			}

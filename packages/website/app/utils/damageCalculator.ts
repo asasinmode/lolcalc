@@ -47,7 +47,7 @@ export class DamageSource {
 	});
 
 	anythingFilled = computed(() => {
-		return Boolean(this.champion.value || this.items.value.length || !this.runePathsEmpty.value);
+		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value);
 	});
 
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
