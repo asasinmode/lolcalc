@@ -34,6 +34,10 @@ export interface IChampion {
 	name: string;
 	partype: string;
 	stats: Record<IChampionStat, number>;
+	abilities: Record<'passive' | 'q' | 'w' | 'e' | 'r', {
+		image: string;
+		maxLevel: number;
+	}>;
 }
 
 export interface IListedChampion extends Pick<IChampion, 'id' | 'name'> {

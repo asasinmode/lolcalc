@@ -682,61 +682,43 @@ defineExpose({ el });
 						<span>/ {{ value.maxAbilityResource.value }}</span>
 					</template>
 				</div>
+				<div v-if="isLoading" data-loading="">
+					loading...
+				</div>
 				<div data-passive="">
 					<img
-						src="https://placecats.com/200/200"
-						width="200"
-						height="200"
+						v-show="!isLoading"
+						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities.passive.image}`"
+						width="64"
+						height="64"
 						aria-hidden="true"
 					>
 					<span>passive</span>
 				</div>
-				<div data-q="">
+				<div
+					v-for="ability in ['q', 'w', 'e', 'r'] as const"
+					v-bind="{ [`data-${ability}`]: '' }"
+					:key="ability"
+				>
 					<img
-						src="https://placecats.com/202/202"
-						width="202"
-						height="202"
+						v-show="!isLoading"
+						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value!.abilities[ability].image}`"
+						width="64"
+						height="64"
 						aria-hidden="true"
 					>
-					<span>Q</span>
+					<span>{{ ability }}</span>
 					<VButtonRadiogroup
-						:id="`${group}-${index}-ability-q`"
-						v-model="value.abilityLevels.value.q"
-						label="Q level"
-						:options="Array.from({ length: 5 }, (_, index) => ({ level: index + 1 }))"
+						:id="`${group}-${index}-ability-${ability}`"
+						v-model="value.abilityLevels.value[ability]"
+						:label="`${ability} level`"
+						:options="Array.from({ length: value.champion.value!.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
 						value-key="level"
 					>
 						<template #default="{ option }">
 							<span>{{ option.level }}</span>
 						</template>
 					</VButtonRadiogroup>
-				</div>
-				<div data-w="">
-					<img
-						src="https://placecats.com/203/203"
-						width="203"
-						height="203"
-						aria-hidden="true"
-					>
-					<span>W</span>
-				</div>
-				<div data-e="">
-					<img
-						src="https://placecats.com/204/204"
-						width="204"
-						height="204"
-						aria-hidden="true"
-					>
-					<span>E</span>
-				</div>
-				<div data-r="">
-					<img
-						src="https://placecats.com/205/205"
-						width="205"
-						height="205"
-						aria-hidden="true"
-					>
-					<span>R</span>
 				</div>
 				<div id="champion-ability-hover-tooltip" ref="championAbilityTooltip" popover="hint">
 					here goes hovered ability description {{ hoveredAbility }}
@@ -993,12 +975,8 @@ defineExpose({ el });
 				[data-r] {
 					--at-apply: 'size-14 b b-neutral-300';
 
-					> img {
-						--at-apply: '';
-					}
-
 					> span {
-						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none';
+						--at-apply: 'absolute uppercase bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none';
 
 						-webkit-text-stroke: black 0.1em;
 						paint-order: stroke fill;
@@ -1014,10 +992,10 @@ defineExpose({ el });
 					--button-py: calc(1 * var(--spacing));
 
 					> [role='radiogroup'] {
-						--at-apply: 'flex';
+						--at-apply: 'flex justify-center';
 
 						> button {
-							--at-apply: 'grow py-[--button-py]';
+							--at-apply: 'py-[--button-py] px-0.25';
 
 							&::before {
 								--at-apply: 'content-empty block b b-[--ui-button-border-clr] size-[--button-indicator-size] rounded-full bg-black mx-auto';
