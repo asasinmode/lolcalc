@@ -349,8 +349,8 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 		</ul>
 		<div ref="draggingPopover" data-drag-preview="" popover="hint" inert>
 			<img
-				v-if="dragging?.value.champion.value"
-				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.champion.value.image}`"
+				v-if="dragging?.value.listedChampion.value"
+				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.listedChampion.value.image}`"
 				loading="lazy"
 				width="128"
 				height="128"
