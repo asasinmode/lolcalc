@@ -40,10 +40,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] stats
     - [x] current health/mana
     - [ ] champion data loading indicator
-    - [ ] passive/abilities (not implemented, coming soon)
+    - [ ] abilities ui (not implemented, coming soon)
+    - [ ] passive with tooltip
     - [ ] runes
     - [ ] dragons/souls
-    - [ ] activate quest
+    - [ ] choose role quest [icon](https://raw.communitydragon.org/latest/game/assets/ux/lol/)
 - [ ] results ui
   - [ ] multiple builds/champions you can switch between
   - [ ] some cool graphs
@@ -69,7 +70,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] calculations
   - [ ] item passives (+ displaying values in tooltips)
   - [ ] champion passives (+ level breakpoints)
-  - [ ] role quests [icon](https://raw.communitydragon.org/16.1/game/assets/ux/lol/)
 - [ ] mobile version
 - [ ] creating a screenshot?
 - [ ] disclaimer not endorsed by riot
@@ -99,6 +99,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] tabindex for champion stats/abilities and show tooltip
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
+- [ ] future features in github project page thingy?
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
@@ -111,7 +112,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 ### future features
 
-- [ ] champion, abilities, ability levels (`additionalData` in each champion's map)
+- [ ] champion abilities
+  - [ ] aphelios ability levels, ult levels up automatically on 6/11/16
+  - [ ] shapeshifting champions click on r to swap, jayce has 1 lvl
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
 - [ ] elixir effects (bring back in updateGameData)

@@ -97,15 +97,16 @@ if (!championData || championData?.version !== latestVersion) {
 								throw new Error(`${name} no ability key ${abilityDataKey}`);
 							}
 
-							const { mImgIconName } = abilityData;
-							let maxLevel: number;
+							const { mImgIconName, mClientData } = abilityData;
+							let maxLevel: number = index === 0 ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
 
-							if (index === 0) {
-								maxLevel = 0;
-							} else if (spellLevelUpInfo) {
+							if ((championId === 'Jayce' && abilityName === 'r')
+								|| (championId === 'Aphelios' && (abilityName === 'q' || abilityName === 'w' || abilityName === 'e'))) {
 								maxLevel = spellLevelUpInfo[index - 1].mRequirements.length;
-							} else {
-								maxLevel = index === 4 ? 3 : 5;
+							}
+
+							if (maxLevel === undefined) {
+								console.warn('max ability level not found', abilityDataKey);
 							}
 
 							return [abilityName, {
