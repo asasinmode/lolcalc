@@ -30,23 +30,572 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/elise/hud/icons2d/elisepassive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"SpiderlingBaseHP": [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				],
+				"SpiderlingMagicDamage": [
+					2,
+					8,
+					14,
+					20,
+					26,
+					32,
+					38
+				],
+				"SpiderlingAPRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"SpiderlingAoEReduction": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				]
+			},
+			"spellCalculations": {
+				"{38943004}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 5,
+							"mInitialBonusPerLevel": 10,
+							"mBreakpoints": [
+								{
+									"mLevel": 8,
+									"mBonusPerLevelAtAndAfter": 15
+								},
+								{
+									"mLevel": 11,
+									"mBonusPerLevelAtAndAfter": 20
+								},
+								{
+									"mLevel": 14,
+									"mBonusPerLevelAtAndAfter": 25
+								},
+								{
+									"mLevel": 17,
+									"mBonusPerLevelAtAndAfter": 30
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/elise/hud/icons2d/elisehumanq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					10,
+					40,
+					70,
+					100,
+					130,
+					160,
+					190
+				],
+				"MonsterCapDamage": [
+					45,
+					65,
+					85,
+					105,
+					125,
+					145,
+					165
+				],
+				"APRatio": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"TargetHPDamage": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"SpiderBaseDamage": [
+					20,
+					50,
+					80,
+					110,
+					140,
+					170,
+					200
+				]
+			},
+			"spellCalculations": {
+				"HumanPercentHealth": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "TargetHPDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"MonsterDamageCapCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterCapDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/elise/hud/icons2d/elisehumanw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					20,
+					60,
+					100,
+					140,
+					180,
+					220,
+					260
+				],
+				"APRatio": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"TimeToExplode": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ExplosionSize": [
+					275,
+					275,
+					275,
+					275,
+					275,
+					275,
+					275
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/elise/hud/icons2d/elisehumane.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"StunDuration": [
+					1.4,
+					1.6,
+					1.8,
+					2,
+					2.2,
+					2.4,
+					2.6
+				],
+				"VisionRadius": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/elise/hud/icons2d/eliser.png",
-			"maxLevel": 4
+			"maxLevel": 4,
+			"dataValues": {
+				"PassiveBonusDamage": [
+					2,
+					12,
+					22,
+					32,
+					42,
+					52,
+					62
+				],
+				"PassiveHealing": [
+					4,
+					6,
+					8,
+					10,
+					12,
+					14,
+					16
+				],
+				"PassiveMSOnHit": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"SpiderlingsStored": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7
+				],
+				"SpiderlingBaseDamage": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"SpiderlingAPRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"SpiderlingBonusResist": [
+					-20,
+					0,
+					20,
+					40,
+					60,
+					80,
+					100
+				]
+			},
+			"spellCalculations": {
+				"PassiveTotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PassiveBonusDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.15,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PassiveTotalHealing": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PassiveHealing",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.08,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SpiderlingTotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "SpiderlingBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "SpiderlingAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						0,
+						0
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						0,
+						0
+					]
+				},
+				"3": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						0,
+						0
+					]
+				},
+				"4": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						0,
+						0
+					]
+				},
+				"5": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						0,
+						0
+					]
+				},
+				"6": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						0,
+						0
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						0,
+						0
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		}
 	}
 }

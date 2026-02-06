@@ -34,19 +34,523 @@
 		},
 		"q": {
 			"image": "assets/characters/nidalee/hud/icons2d/nidalee_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"TooltipCougarMinimumDamage": [
+					-20,
+					5,
+					30,
+					55,
+					80,
+					105,
+					130
+				],
+				"SpearMinimumAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"SpearMinimumDamage": [
+					50,
+					70,
+					90,
+					110,
+					130,
+					150,
+					170
+				],
+				"SpearMaximumDamage": [
+					162.5,
+					227.5,
+					292.5,
+					357.5,
+					422.5,
+					487.5,
+					552.5
+				],
+				"DamageMulti": [
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					3.25
+				]
+			},
+			"spellCalculations": {
+				"HumanMinimumDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SpearMinimumDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "SpearMinimumAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"HumanMaximumDamage": {
+					"mMultiplier": {
+						"mDataValue": "DamageMulti"
+					},
+					"mModifiedGameCalculation": "HumanMinimumDamage"
+				},
+				"{38f95809}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "TooltipCougarMinimumDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/nidalee/hud/icons2d/nidalee_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {},
+			"spellCalculations": {
+				"MaxTraps": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 4,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 2
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 2
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 2
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mDataValue": "ModesBonusMaxTraps",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DamagePerSecond": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 5,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/nidalee/hud/icons2d/nidalee_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseHeal": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"MaxHealMult": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"MaxHealThreshold": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				],
+				"BonusAS": [
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8
+				],
+				"ASDuration": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				]
+			},
+			"spellCalculations": {
+				"TotalHealing": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxHealing": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mDataValue": "MaxHealMult"
+							}
+						]
+					},
+					"mModifiedGameCalculation": "TotalHealing"
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
-			"maxLevel": 4
+			"maxLevel": 4,
+			"dataValues": {
+				"PassivePercentMS": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"TakedownBaseDamage": [
+					-20,
+					5,
+					30,
+					55,
+					80,
+					105,
+					130
+				],
+				"TakedownADRatio": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"TakedownAPRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"TakedownDamageAmp": [
+					0.75,
+					1,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25
+				],
+				"PounceCooldown": [
+					3.5,
+					3,
+					2.5,
+					2,
+					1.5,
+					1.5,
+					1.5
+				],
+				"PounceDamage": [
+					10,
+					55,
+					100,
+					145,
+					190,
+					235,
+					280
+				],
+				"PounceADRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"PounceAPRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"SwipeDamage": [
+					10,
+					70,
+					130,
+					190,
+					250,
+					310,
+					370
+				],
+				"SwipeADRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"SwipeAPRatio": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				]
+			},
+			"spellCalculations": {
+				"TotalPounceDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PounceDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "PounceADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "PounceAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalSwipeDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SwipeDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "SwipeADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "SwipeAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalTakedownDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "TakedownBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "TakedownADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "TakedownAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

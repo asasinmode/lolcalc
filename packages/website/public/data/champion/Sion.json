@@ -30,23 +30,657 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/sion/hud/icons2d/sion_passive1.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"Lifesteal": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"PercentMaxHP": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"NonChampCap": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"StructureMod": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/sion/hud/icons2d/sion_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ADRatioMin": [
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8,
+					0.9
+				],
+				"ADRatioMax": [
+					0.9,
+					1.2,
+					1.5,
+					1.8,
+					2.1,
+					2.4,
+					2.7
+				],
+				"LowDamage": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				],
+				"HighDamage": [
+					25,
+					90,
+					155,
+					220,
+					285,
+					350,
+					415
+				],
+				"MinionRatio": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"MonsterRatio": [
+					165,
+					165,
+					165,
+					165,
+					165,
+					165,
+					165
+				],
+				"BaseStunTime": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				]
+			},
+			"spellCalculations": {
+				"MinDamageTotal": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "LowDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "ADRatioMin",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxDamageTotal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "HighDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "ADRatioMax",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/sion/hud/icons2d/sion_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ShieldPercentHealthTooltip": [
+					0.06,
+					0.08,
+					0.1,
+					0.12,
+					0.14,
+					0.16,
+					0.18
+				],
+				"DamagePercentHealthTooltip": [
+					0.09,
+					0.1,
+					0.11,
+					0.12,
+					0.13,
+					0.14,
+					0.15
+				],
+				"HPPerChampKill": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"HPPerKill": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"HPPerLargeKill": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				]
+			},
+			"spellCalculations": {
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "ShieldPercentHealthTooltip",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 2,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/sion/hud/icons2d/sion_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					65,
+					100,
+					135,
+					170,
+					205,
+					240
+				],
+				"SlowAmount": [
+					35,
+					40,
+					45,
+					50,
+					55,
+					60,
+					65
+				],
+				"ArmorShred": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"SlowDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"ArmorShredDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"APRatio": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/sion/hud/icons2d/sion_r1.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"MinDamage": [
+					0,
+					150,
+					300,
+					450,
+					600,
+					750,
+					900
+				],
+				"MaxDamage": [
+					0,
+					400,
+					800,
+					1200,
+					1600,
+					2000,
+					2400
+				],
+				"SlowAmount": [
+					35,
+					40,
+					45,
+					50,
+					55,
+					60,
+					65
+				],
+				"MinionDamagePercent": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"MinStunDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"MaxStunDuration": [
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75
+				],
+				"MoveSpeedCap": [
+					950,
+					950,
+					950,
+					950,
+					950,
+					950,
+					950
+				]
+			},
+			"spellCalculations": {
+				"MinDamageTotal": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxDamageTotal": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

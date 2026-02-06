@@ -30,23 +30,689 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/pantheon/hud/icons2d/pantheon_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"ActionsToEmpower": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"PhalanxDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"QDamageAmp": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"QDamageAmpMelee": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"OutOfCombatTimer": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"QExtraAttacks": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"CritThreshold": [
+					-1,
+					-1,
+					-1,
+					-1,
+					-1,
+					-1,
+					-1
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/pantheon/hud/icons2d/pantheon_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"HoldDamage": [
+					40,
+					70,
+					100,
+					130,
+					160,
+					190,
+					220
+				],
+				"TapDamage": [
+					40,
+					70,
+					100,
+					130,
+					160,
+					190,
+					220
+				],
+				"CritHealthThreshold": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"HoldRange": [
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200
+				],
+				"DamageFalloff": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"TapCooldownRefund": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"HoldExecuteDamage": [
+					40,
+					85,
+					130,
+					175,
+					220,
+					265,
+					310
+				],
+				"SelfSlow": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"MinTimeHoldCast": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"MinionDamageMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"ExecuteBaseDamage": [
+					80,
+					155,
+					230,
+					305,
+					380,
+					455,
+					530
+				],
+				"MonsterDamageMod": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"HoldDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "HoldDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.15,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TapDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "TapDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.15,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"EmpoweredDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 20,
+							"mEndValue": 240,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.15,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{6fc04dc0}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "HoldExecuteDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.15,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ExecuteDamageCalcModified": {
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mDataValue": "HoldDamage"
+								},
+								{
+									"mDataValue": "HoldExecuteDamage"
+								}
+							],
+							"__type": "SumOfSubPartsCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 2.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/pantheon/hud/icons2d/pantheon_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					25,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"StunDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"EmpoweredNumHits": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"EmpoweredDamageMult": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"MaxHealthDamage": [
+					0.055,
+					0.06,
+					0.065,
+					0.07,
+					0.075,
+					0.08,
+					0.085
+				],
+				"MonsterDamageCap": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"MonsterDamageMin": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"MaxHealthPer100AP": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{1b016817}": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mStartValue": 0.4,
+								"mEndValue": 0.55
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"EmpoweredDamageMultCalcModified": {
+					"mMultiplier": {
+						"mNumber": 3
+					},
+					"mModifiedGameCalculation": "{1b016817}"
+				},
+				"MaxHealthDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxHealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mDataValue": "MaxHealthPer100AP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/pantheon/hud/icons2d/pantheon_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ShieldDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"AttacksPerSecond": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"ShieldBaseDamage": [
+					5,
+					55,
+					105,
+					155,
+					205,
+					255,
+					305
+				],
+				"SpearStrikesRadius": [
+					525,
+					525,
+					525,
+					525,
+					525,
+					525,
+					525
+				],
+				"ShieldSwipeRadius": [
+					375,
+					375,
+					375,
+					375,
+					375,
+					375,
+					375
+				],
+				"MinionDamageReduction": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"RecastLockout": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"SpeedDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"SpeedAmount": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"ResistsDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ShieldDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{e62bc5e9}": {
+					"mMultiplier": {
+						"mNumber": 0.167
+					},
+					"mModifiedGameCalculation": "DamageCalc"
+				},
+				"EmpoweredDamageCalc": {
+					"mMultiplier": {
+						"mNumber": 1.67
+					},
+					"mModifiedGameCalculation": "DamageCalc"
+				},
+				"HealCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 40,
+							"mInitialBonusPerLevel": 5,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 10
+								},
+								{
+									"mLevel": 15,
+									"mBonusPerLevelAtAndAfter": 20
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ResistsCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 30,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.025,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/pantheon/hud/icons2d/pantheon_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					100,
+					300,
+					500,
+					700,
+					900,
+					1100,
+					1300
+				],
+				"EdgeDamageReduction": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"Radius": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"SweetSpotRadius": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				],
+				"CancelCooldown": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"SpearSlow": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"SpearSlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"ArmorPenetration": [
+					0,
+					0.1,
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6
+				],
+				"APRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinDamage": {
+					"mMultiplier": {
+						"mDataValue": "EdgeDamageReduction"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "DamageCalc"
+				}
+			}
 		}
 	}
 }

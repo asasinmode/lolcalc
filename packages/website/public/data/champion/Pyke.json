@@ -30,23 +30,649 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"OneEnemy": [
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09
+				],
+				"AdditionalBonus": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"DamageStorageMax": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mNumber": 80,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"OneEnemyCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "OneEnemy",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 0.002,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"AdditionalBonusCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "AdditionalBonus",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 0.004,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/pyke/hud/icons2d/pykeq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ManaRefund": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"BaseDamage": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"SlowAmount": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"MinChargeTime": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MaxChargeTime": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"SelfSlow": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"PullDistance": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"MinRangeDistance": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"MaxRangeDistance": [
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100
+				],
+				"ChargeTimeToGetMaxRange": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BonusADRatio": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/pyke/hud/icons2d/pykew.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"{601654a1}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.25,
+							"mInitialBonusPerLevel": 0.03,
+							"mBreakpoints": [
+								{
+									"mLevel": 4,
+									"mBonusPerLevelAtAndAfter": 0.02
+								},
+								{
+									"mLevel": 8,
+									"mBonusPerLevelAtAndAfter": 0.01
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MoveSpeed": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/pyke/hud/icons2d/pykee.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					100,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"BonusADRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BaseStunDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"ELethalityRatio": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				]
+			},
+			"spellCalculations": {
+				"StunDuration": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "{d5189f50}",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 0.01,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mPrecision": -1
+				},
+				"TotalDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/pyke/hud/icons2d/pyker.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RRecastDuration": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"ReducedDamage": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"DamageCap": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"RDamage": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 250,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 40
+								},
+								{
+									"mLevel": 10,
+									"mBonusPerLevelAtAndAfter": 30
+								},
+								{
+									"mLevel": 12,
+									"mBonusPerLevelAtAndAfter": 20
+								},
+								{
+									"mLevel": 17,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RADDamage": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RLethalityDamage": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mStat": 29,
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RBaseDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 250,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 40
+								},
+								{
+									"mLevel": 10,
+									"mBonusPerLevelAtAndAfter": 30
+								},
+								{
+									"mLevel": 12,
+									"mBonusPerLevelAtAndAfter": 20
+								},
+								{
+									"mLevel": 17,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"ReducedDamageFinal": {
+					"mMultiplier": {
+						"mDataValue": "ReducedDamage"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "RDamage"
+				}
+			}
 		}
 	}
 }

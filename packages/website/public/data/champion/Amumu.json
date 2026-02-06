@@ -30,23 +30,303 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"DebuffDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"DamageAmp": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/amumu/hud/icons2d/amumu_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.85,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/amumu/hud/icons2d/amumu_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"HealthDamage": [
+					0.75,
+					1,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25
+				],
+				"APRatio": [
+					0.005,
+					0.005,
+					0.005,
+					0.005,
+					0.005,
+					0.005,
+					0.005
+				]
+			},
+			"spellCalculations": {
+				"{c8e45bc3}": {
+					"mMultiplier": {
+						"mNumber": 0.5
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalHealthDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "HealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": 2
+				},
+				"{8a96509c}": {
+					"mMultiplier": {
+						"mNumber": 0.005
+					},
+					"mModifiedGameCalculation": "TotalHealthDamage"
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/amumu/hud/icons2d/amumu_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"FlatDamageReductionMax": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"DamageReduction": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TantrumDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 2,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/amumu/hud/icons2d/amumu_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RDamage": [
+					100,
+					200,
+					300,
+					400,
+					500,
+					600,
+					700
+				],
+				"RDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"RCoefficient": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"RCalculatedDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "RCoefficient",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

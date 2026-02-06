@@ -30,23 +30,300 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/jayce/hud/icons2d/jaycep_melee.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"FlatMovementSpeed": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"MovementSpeedDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/jayce/hud/icons2d/jayceq_melee.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"BaseDamage": [
+					10,
+					60,
+					110,
+					160,
+					210,
+					260,
+					310
+				],
+				"Slow": [
+					-0.3,
+					-0.35,
+					-0.4,
+					-0.45,
+					-0.5,
+					-0.55,
+					-0.6
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MonsterBonusDamage": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/jayce/hud/icons2d/jaycew_melee.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"ManaGain": [
+					13,
+					15,
+					17,
+					19,
+					21,
+					23,
+					25
+				],
+				"BaseDamage": [
+					80,
+					140,
+					200,
+					260,
+					320,
+					380,
+					440
+				],
+				"Duration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/jayce/hud/icons2d/jaycee_melee.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"MonsterCap": [
+					100,
+					200,
+					300,
+					400,
+					500,
+					600,
+					700
+				],
+				"PercHPDamage": [
+					0.052,
+					0.08,
+					0.108,
+					0.136,
+					0.164,
+					0.192,
+					0.22
+				],
+				"KnockbackDistance": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"KnockbackDuration": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				]
+			},
+			"spellCalculations": {
+				"FlatDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/jayce/hud/icons2d/jaycer_ranged.png",
-			"maxLevel": 1
+			"maxLevel": 1,
+			"dataValues": {
+				"RangedFormRangeIncrease": [
+					375,
+					375,
+					375,
+					375,
+					375,
+					375,
+					375
+				],
+				"ShredDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ADRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"RangedFormShred": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.2,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.05
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 25,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 35
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 35
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 35
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"Resists": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 5,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.075,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

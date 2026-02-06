@@ -30,23 +30,389 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_hemorrhage.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MonsterMod": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"SecondsPerTick": [
+					1.26,
+					1.26,
+					1.26,
+					1.26,
+					1.26,
+					1.26,
+					1.26
+				],
+				"BleedDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"MaxStacks": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
+			},
+			"spellCalculations": {
+				"BleedDamagePerStack": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 13,
+							"mEndValue": 30,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"NoxianMightBonusAD": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mInitialBonusPerLevel": 5,
+							"mBreakpoints": [
+								{
+									"mLevel": 11,
+									"mBonusPerLevelAtAndAfter": 10
+								},
+								{
+									"mLevel": 14,
+									"mBonusPerLevelAtAndAfter": 25
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MissingHealthHeal": [
+					17,
+					17,
+					17,
+					17,
+					17,
+					17,
+					17
+				],
+				"TotalADRatio": [
+					90,
+					100,
+					110,
+					120,
+					130,
+					140,
+					150
+				]
+			},
+			"spellCalculations": {
+				"BladeDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 2,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mPart1": {
+									"mEffectIndex": 1
+								},
+								"mPart2": {
+									"mNumber": 0.01
+								}
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"HandleDamage": {
+					"mMultiplier": {
+						"mNumber": 0.35
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "BladeDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"EmpoweredAttackDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mEffectIndex": 4
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_sudden_death.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RBaseDamage": [
+					0,
+					125,
+					250,
+					375,
+					500,
+					625,
+					750
+				],
+				"RDamagePercentPerHemoStack": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"RRecastDuration": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaximumDamage": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "Damage"
+				}
+			}
 		}
 	}
 }

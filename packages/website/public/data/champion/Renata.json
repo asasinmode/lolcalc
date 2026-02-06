@@ -30,23 +30,477 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/renata/hud/icons2d/renata_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PercentAmp": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"APToPercentRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"MonsterDamageCap": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"PassiveDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				]
+			},
+			"spellCalculations": {
+				"PercentAmpCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.01,
+							"mInitialBonusPerLevel": 0.001,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mBonusPerLevelAtAndAfter": 0.001
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 0.001
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mDataValue": "APToPercentRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"PercentAmpCalcSelf": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.01,
+							"mInitialBonusPerLevel": 0.001,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mBonusPerLevelAtAndAfter": 0.001
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 0.001
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mDataValue": "APToPercentRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/renata/hud/icons2d/renata_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					35,
+					80,
+					125,
+					170,
+					215,
+					260,
+					305
+				],
+				"RootDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"SelfSlow": [
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3
+				],
+				"StunDuration": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"PullDistance": [
+					275,
+					275,
+					275,
+					275,
+					275,
+					275,
+					275
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/renata/hud/icons2d/renata_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Duration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BonusAttackSpeed": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"BonusMoveSpeed": [
+					7.5,
+					10,
+					12.5,
+					15,
+					17.5,
+					20,
+					22.5
+				],
+				"APToPercentRatio": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"TriumphPercent": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"TicksBeforeDeath": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"MaxStatMultiplier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"TicksPerSecond": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"TagDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				]
+			},
+			"spellCalculations": {
+				"ASCalc": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusAttackSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APToPercentRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MSCalc": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusMoveSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APToPercentRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{85d7d7f0}": {
+					"mMultiplier": {
+						"mNumber": 0.25
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "TicksBeforeDeath",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"FinalASCalc": {
+					"mMultiplier": {
+						"mNumber": 0.02
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusAttackSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APToPercentRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"FinalMSCalc": {
+					"mMultiplier": {
+						"mNumber": 0.02
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusMoveSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APToPercentRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/renata/hud/icons2d/renata_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					35,
+					65,
+					95,
+					125,
+					155,
+					185,
+					215
+				],
+				"SlowPercent": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"ShieldValue": [
+					35,
+					50,
+					65,
+					80,
+					95,
+					110,
+					125
+				],
+				"ShieldDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"InitialAoE": [
+					325,
+					325,
+					325,
+					325,
+					325,
+					325,
+					325
+				],
+				"EndAoE": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				],
+				"ShieldAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.55,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{fe737c05}": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlowPercent",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"ShieldCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldValue",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ShieldAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/renata/hud/icons2d/renata_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BerserkDuration": [
+					0.75,
+					1.25,
+					1.75,
+					2.25,
+					2.75,
+					3.25,
+					3.75
+				],
+				"BonusAttackSpeed": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			}
 		}
 	}
 }

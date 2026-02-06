@@ -30,23 +30,837 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/varus/hud/icons2d/varuspassive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PassiveAS": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"PassiveASMinion": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"PassiveASRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"PassiveASRatioMinion": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"AStoADMinion": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"AStoAPMinion": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"AStoADChampion": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"AStoAPChampion": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"NewASCap": [
+					3.33,
+					3.33,
+					3.33,
+					3.33,
+					3.33,
+					3.33,
+					3.33
+				]
+			},
+			"spellCalculations": {
+				"MinionAS": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.1,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": 0.05
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"ChampionAS": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PassiveAS",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"ASDuration": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 5,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 2
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 2
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 2
+								},
+								{
+									"mLevel": 21,
+									"mAdditionalBonusAtThisLevel": 2
+								},
+								{
+									"mLevel": 26,
+									"mAdditionalBonusAtThisLevel": 2
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"MinionAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 4,
+							"mStatFormula": 2,
+							"mDataValue": "AStoADMinion",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionAP": {
+					"mFormulaParts": [
+						{
+							"mStat": 4,
+							"mStatFormula": 2,
+							"mDataValue": "AStoAPMinion",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ChampionAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 4,
+							"mStatFormula": 2,
+							"mDataValue": "AStoADChampion",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ChampionAP": {
+					"mFormulaParts": [
+						{
+							"mStat": 4,
+							"mStatFormula": 2,
+							"mDataValue": "AStoAPChampion",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/varus/hud/icons2d/varusq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamageMax": [
+					0,
+					80,
+					160,
+					240,
+					320,
+					400,
+					480
+				],
+				"ChargeMultiplierInverse": [
+					0.667,
+					0.667,
+					0.667,
+					0.667,
+					0.667,
+					0.667,
+					0.667
+				],
+				"tADRatioMax": [
+					1.2,
+					1.3,
+					1.4,
+					1.5,
+					1.6,
+					1.7,
+					1.8
+				],
+				"MaxChargeAmp": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"{b3ef3984}": {
+					"mMultiplier": {
+						"mDataValue": "ChargeMultiplierInverse"
+					},
+					"mModifiedGameCalculation": "TotalDamageMax"
+				},
+				"TotalDamageMax": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageMax",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "tADRatioMax",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamageMinTooltip": {
+					"mMultiplier": {
+						"mDataValue": "ChargeMultiplierInverse"
+					},
+					"mModifiedGameCalculation": "TotalDamageMax"
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/varus/hud/icons2d/varusw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"VarusWDebuffDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"VarusWMaxStacks": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"MaxMonsterDamage": [
+					120,
+					120,
+					120,
+					120,
+					120,
+					120,
+					120
+				],
+				"BasePercentHPPerStack": [
+					0.025,
+					0.03,
+					0.035,
+					0.04,
+					0.045,
+					0.05,
+					0.055
+				],
+				"QEmpowerMonsterCap": [
+					360,
+					360,
+					360,
+					360,
+					360,
+					360,
+					360
+				],
+				"VarusWOnHitDamage": [
+					-1,
+					8,
+					17,
+					26,
+					35,
+					44,
+					53
+				],
+				"CDRPerBlightStack": [
+					0.13,
+					0.13,
+					0.13,
+					0.13,
+					0.13,
+					0.13,
+					0.13
+				],
+				"VarusWMaxChargeHPDamage": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"OnHitRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"WQHealthDamage": [
+					0.04,
+					0.06,
+					0.08,
+					0.1,
+					0.12,
+					0.14,
+					0.16
+				]
+			},
+			"spellCalculations": {
+				"PercentHPPerStack": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BasePercentHPPerStack",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mSubpart": {
+								"mPart1": {
+									"mNumber": 0.01
+								},
+								"mPart2": {
+									"mNumber": 0.013
+								}
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"QEmpowerPercentHP": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "WQHealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "VarusWOnHitDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "OnHitRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxPercentHPPerStack": {
+					"mMultiplier": {
+						"mNumber": 3
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "PercentHPPerStack"
+				},
+				"MaxQEmpowerPercentHP": {
+					"mMultiplier": {
+						"mDataValue": "VarusWMaxChargeHPDamage"
+					},
+					"mModifiedGameCalculation": "QEmpowerPercentHP"
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/varus/hud/icons2d/varuse.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"GrievousAmount": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"GrievousDuration": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"BonusADRatio": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				],
+				"BaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"SlowPercent": [
+					-0.25,
+					-0.3,
+					-0.35,
+					-0.4,
+					-0.45,
+					-0.5,
+					-0.55
+				],
+				"AoERange": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"DebuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/varus/hud/icons2d/varusr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"RootDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"VarusRTargetAcquisitionRange": [
+					650,
+					650,
+					650,
+					650,
+					650,
+					650,
+					650
+				],
+				"PassiveStacksAdded": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"TimeBetweenStackAddition": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"VarusRTargetLeashRange": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"VarusRLeashTimer": [
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75
+				],
+				"VarusWDebuffDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"VarusWMaxStacks": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

@@ -30,23 +30,433 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"spellCalculations": {
+				"PassiveCooldown": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 8,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": -1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"TotalShield": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SpeedSteal": [
+					10,
+					15,
+					20,
+					25,
+					30,
+					35,
+					40
+				],
+				"SlowDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"BaseDamage": [
+					20,
+					70,
+					120,
+					170,
+					220,
+					270,
+					320
+				]
+			},
+			"spellCalculations": {
+				"QDamageCalc": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ThunderclapBuffDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ThunderclapBaseDamage": [
+					20,
+					30,
+					40,
+					50,
+					60,
+					70,
+					80
+				],
+				"ThunderclapSlowDamage": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"ThunderclapSplashAP": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"ThunderclapSplashArmor": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"ThunderclapBaseDamageAPRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"ThunderclapBaseDamageArmorRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"ThunderclapSplashDamage": [
+					5,
+					15,
+					25,
+					35,
+					45,
+					55,
+					65
+				],
+				"BonusArmorPassive": [
+					0.05,
+					0.1,
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35
+				],
+				"BonusArmorPassiveMultiplier": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ThunderClapSplashRange": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"MonsterDamageMod": [
+					1.8,
+					1.8,
+					1.8,
+					1.8,
+					1.8,
+					1.8,
+					1.8
+				]
+			},
+			"spellCalculations": {
+				"TotalBonusDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "ThunderclapBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ThunderclapBaseDamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mDataValue": "ThunderclapBaseDamageArmorRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{185669f9}": {
+					"mMultiplier": {
+						"mDataValue": "ThunderclapSlowDamage"
+					},
+					"mSimpleTooltipCalculationDisplay": 0,
+					"mModifiedGameCalculation": "TotalBonusDamage"
+				},
+				"ThunderclapSplash": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "ThunderclapSplashDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ThunderclapSplashAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mDataValue": "ThunderclapSplashArmor",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{71941255}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "BonusArmorPassive"
+							},
+							"mPart2": {
+								"mDataValue": "BonusArmorPassiveMultiplier"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					25,
+					60,
+					95,
+					130,
+					165,
+					200,
+					235
+				],
+				"ASReduction": [
+					25,
+					30,
+					35,
+					40,
+					45,
+					50,
+					55
+				],
+				"Duration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"EDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					100,
+					200,
+					300,
+					400,
+					500,
+					600,
+					700
+				],
+				"KnockupDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

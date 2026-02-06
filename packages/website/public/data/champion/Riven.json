@@ -30,23 +30,469 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/riven/hud/icons2d/rivenrunicblades.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"Charges": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"TowerRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MonsterBonusDamage": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mStartValue": 0.3,
+								"mEndValue": 0.45
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					15,
+					45,
+					75,
+					105,
+					135,
+					165,
+					195
+				],
+				"ADRatio": [
+					0.55,
+					0.6,
+					0.65,
+					0.7,
+					0.75,
+					0.8,
+					0.85
+				]
+			},
+			"spellCalculations": {
+				"FirstSlashDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"MinBase": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"MaxBase": [
+					150,
+					300,
+					450,
+					600,
+					750,
+					900,
+					1050
+				],
+				"Duration": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"PercentBonusAD": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"TooltipAttackRange": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				]
+			},
+			"spellCalculations": {
+				"MinDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "PercentBonusAD",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"3": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

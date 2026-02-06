@@ -30,23 +30,929 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"CooldownReduceOnKill": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"CooldownReduceOnAbilityHit": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"PackmateBaseAS": [
+					0.688,
+					0.688,
+					0.688,
+					0.688,
+					0.688,
+					0.688,
+					0.688
+				],
+				"PackmateBaseMS": [
+					340,
+					340,
+					340,
+					340,
+					340,
+					340,
+					340
+				],
+				"PackmateModifierTooltipOnly": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				],
+				"LeapSpeed": [
+					1250,
+					1250,
+					1250,
+					1250,
+					1250,
+					1250,
+					1250
+				],
+				"LeapMin": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"LeapMax": [
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200
+				],
+				"PackmateTowerModifier": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"PackmateMonsterMod": [
+					1.55,
+					1.55,
+					1.55,
+					1.55,
+					1.55,
+					1.55,
+					1.55
+				],
+				"PackmateTauntDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PackmateLastHitHelpCD": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"PackmateCSHelpRadiusMax": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"PackmateCSHelpRadiusMin": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"PackmateFrenzyDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"PackmateFrenzyMaxCounters": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"PackmateFrenzyDamageMult": [
+					1.3,
+					1.3,
+					1.3,
+					1.3,
+					1.3,
+					1.3,
+					1.3
+				],
+				"ProcDamageModifier": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"HealthRegenDelay": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"HealthRegenPercent": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"NonChampDamageModifier": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MeleeAttackDamageModifier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PackmateBonusADRatio": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				]
+			},
+			"spellCalculations": {
+				"PackmateSpawnCooldown": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 12,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 15,
+									"mAdditionalBonusAtThisLevel": -5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"PackmateCap": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 2,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 12,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 15,
+									"mAdditionalBonusAtThisLevel": 1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"PackmateTotalDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 20,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "PackmateBonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionExecuteThreshold": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 25,
+							"mInitialBonusPerLevel": 3,
+							"mBreakpoints": [
+								{
+									"mLevel": 12
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"FrenzyDamageTooltipOnly": {
+					"mMultiplier": {
+						"mDataValue": "PackmateFrenzyDamageMult"
+					},
+					"mModifiedGameCalculation": "PackmateTotalDamage"
+				},
+				"AOEDamageModifier": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.76,
+							"mInitialBonusPerLevel": -0.015,
+							"mBreakpoints": [
+								{
+									"mLevel": 16
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamageFirstCast": [
+					30,
+					35,
+					40,
+					45,
+					50,
+					55,
+					60
+				],
+				"BaseDamageSecondCast": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"BleedBaseDamage": [
+					10,
+					35,
+					60,
+					85,
+					110,
+					135,
+					160
+				],
+				"BleedInterval": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"RecastWindow": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"RecastLockout": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"BaseHealSecondCast": [
+					30,
+					45,
+					60,
+					75,
+					90,
+					105,
+					120
+				],
+				"BleedDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ExecuteMultiplier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MinionMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"FirstCastBonusADRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"SecondCastBonusADRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"BleedBonusADRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"HealBonusADRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"SecondCastMaxADRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"TotalDamageFirstCast": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageFirstCast",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "FirstCastBonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalMinDamageSecondCast": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageSecondCast",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "SecondCastBonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalHealSecondCast": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHealSecondCast",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "HealBonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalBleedDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BleedBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BleedBonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionExecuteThreshold": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mInitialBonusPerLevel": 4,
+							"mBreakpoints": [
+								{
+									"mLevel": 12
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"TotalMaxDamageSecondCast": {
+					"mMultiplier": {
+						"mDataValue": "ExecuteMultiplier"
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageSecondCast",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "SecondCastMaxADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_r.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"PackmatesToAdd": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"Duration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"MoveSpeedAmount": [
+					0.175,
+					0.2,
+					0.225,
+					0.25,
+					0.275,
+					0.3,
+					0.325
+				],
+				"MoveSpeedDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"PackmateSpawnRateIncrease": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"NaafiriADPercentBoost": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"UntargetableDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"BonusAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "NaafiriADPercentBoost",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamageFirstSlash": [
+					5,
+					15,
+					25,
+					35,
+					45,
+					55,
+					65
+				],
+				"ADRatioFirstSlash": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"BaseDamageSecondHit": [
+					35,
+					60,
+					85,
+					110,
+					135,
+					160,
+					185
+				],
+				"ADRatioSecondHit": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"RadiusSecondSlash": [
+					230,
+					230,
+					230,
+					230,
+					230,
+					230,
+					230
+				],
+				"DashDistance": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"DashSpeed": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"MaxDashCheatDistance": [
+					650,
+					650,
+					650,
+					650,
+					650,
+					650,
+					650
+				],
+				"MinDashDistance": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				]
+			},
+			"spellCalculations": {
+				"TotalDamageFirstSlash": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageFirstSlash",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatioFirstSlash",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamageSecondSlash": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageSecondHit",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatioSecondHit",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_w.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"DashSpeed": [
+					1800,
+					1800,
+					1800,
+					1800,
+					1800,
+					1800,
+					1800
+				],
+				"SlowDuration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"SlowPercent": [
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99
+				],
+				"PackmateModifier": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"FailCastCDRefund": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ShredDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"TakedownWindow": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"RecastWindow": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"ShieldDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ShieldSize": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"VisionDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"VisionPulseDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"VisionRadius": [
+					2100,
+					2100,
+					2100,
+					2100,
+					2100,
+					2100,
+					2100
+				],
+				"WRefreshOnCast": [
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PackmateDamage": {
+					"mMultiplier": {
+						"mDataValue": "PackmateModifier"
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				},
+				"ArmorShred": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 6,
+							"mInitialBonusPerLevel": 2,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"ShieldTotal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldSize",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,819 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/reksai/hud/icons2d/reksai_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"FuryFromAttacks": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"FuryFromAbilities": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"FuryMinionMod": [
+					0.16,
+					0.16,
+					0.16,
+					0.16,
+					0.16,
+					0.16,
+					0.16
+				],
+				"HealDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"PauseDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
+			},
+			"spellCalculations": {
+				"HealAmount": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mSubpart": {
+								"mStartValue": 0.09,
+								"mEndValue": 0.2
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/reksai/hud/icons2d/reksai_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BuffDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"UnburrowedBaseDamage": [
+					0,
+					5,
+					10,
+					15,
+					20,
+					25,
+					30
+				],
+				"UnburrowedADRatio": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"AoERange": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"AttackSpeed": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"BurrowedBaseDamage": [
+					20,
+					50,
+					80,
+					110,
+					140,
+					170,
+					200
+				],
+				"BurrowedBonusADRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"BurrowedAPRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"BurrowedCooldown": [
+					12.5,
+					12,
+					11.5,
+					11,
+					10.5,
+					10,
+					9.5
+				],
+				"BurrowedAoE": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"BurrowedDebuffDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "UnburrowedADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BurrowDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BurrowedBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BurrowedBonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BurrowedAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/reksai/hud/icons2d/reksai_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					5,
+					30,
+					55,
+					80,
+					105,
+					130,
+					155
+				],
+				"ADRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"KnockupDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"KnockupImmunity": [
+					11,
+					10,
+					9,
+					8,
+					7,
+					6,
+					5
+				],
+				"ChampKnockbackRange": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"OtherKnockbackRange": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"KnockbackDuration": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"Slow": [
+					-0.25,
+					-0.3,
+					-0.35,
+					-0.4,
+					-0.45,
+					-0.5,
+					-0.55
+				],
+				"SlowDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"VisionRadiusMod": [
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65
+				],
+				"KnockupRange": [
+					220,
+					220,
+					220,
+					220,
+					220,
+					220,
+					220
+				],
+				"LockoutTime": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"SearchRange": [
+					1500,
+					1500,
+					1500,
+					1500,
+					1500,
+					1500,
+					1500
+				],
+				"TremorTickTime": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"DistanceCheck": [
+					85,
+					85,
+					85,
+					85,
+					85,
+					85,
+					85
+				],
+				"BurrowedMoveSpeed": [
+					0,
+					5,
+					10,
+					15,
+					20,
+					25,
+					30
+				]
+			},
+			"spellCalculations": {
+				"UnburrowDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/reksai/hud/icons2d/reksai_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"EmpoweredBaseDamage": [
+					65,
+					100,
+					135,
+					170,
+					205,
+					240,
+					275
+				],
+				"EmpoweredADRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"UnempoweredModifier": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"DashDistance": [
+					850,
+					850,
+					850,
+					850,
+					850,
+					850,
+					850
+				],
+				"MinimumRange": [
+					850,
+					850,
+					850,
+					850,
+					850,
+					850,
+					850
+				],
+				"DashSpeedBase": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"DashSpeedMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"MaximumTunnels": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"TunnelDurationMinutes": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"TunnelReuseCooldown": [
+					7,
+					6,
+					5,
+					4,
+					3,
+					2,
+					1
+				],
+				"DashCooldown": [
+					19,
+					18,
+					17,
+					16,
+					15,
+					14,
+					13
+				],
+				"TunnelTimeRatio": [
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65
+				]
+			},
+			"spellCalculations": {
+				"BaseDamage": {
+					"mMultiplier": {
+						"mDataValue": "{42702779}"
+					},
+					"mModifiedGameCalculation": "EmpoweredDamage"
+				},
+				"EmpoweredDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EmpoweredBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "EmpoweredADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DashSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DashSpeedBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 7,
+							"mDataValue": "DashSpeedMod",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{009db1c8}": {
+					"mMultiplier": {
+						"mNumber": 60
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "TunnelDurationMinutes",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{438d87f9}": {
+					"mMultiplier": {
+						"mDataValue": "TunnelTimeRatio"
+					},
+					"mModifiedGameCalculation": "DashSpeed"
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/reksai/hud/icons2d/reksai_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"TravelDistancePercent": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"ExtraDistance": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				],
+				"LeapMovementSpeed": [
+					1400,
+					1400,
+					1400,
+					1400,
+					1400,
+					1400,
+					1400
+				],
+				"VODistance": [
+					4000,
+					4000,
+					4000,
+					4000,
+					4000,
+					4000,
+					4000
+				],
+				"DamageCheckRadius": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"PreyMarkDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"RBaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"PercentHealthDamage": [
+					10,
+					15,
+					20,
+					25,
+					30,
+					35,
+					40
+				],
+				"CastBuffDuration": [
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1
+				],
+				"ADRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"RBaseDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

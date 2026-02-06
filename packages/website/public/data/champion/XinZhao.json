@@ -30,23 +30,518 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkp.xinzhaorework.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"HealAPRatio": [
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mLevel1Value": 0.15,
+								"mBreakpoints": [
+									{
+										"mLevel": 6,
+										"mAdditionalBonusAtThisLevel": 0.15
+									},
+									{
+										"mLevel": 11,
+										"mAdditionalBonusAtThisLevel": 0.15
+									},
+									{
+										"mLevel": 16,
+										"mAdditionalBonusAtThisLevel": 0.15
+									},
+									{
+										"mLevel": 21,
+										"mAdditionalBonusAtThisLevel": 0.15
+									},
+									{
+										"mLevel": 26,
+										"mAdditionalBonusAtThisLevel": 0.15
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"TotalHealing": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mSubpart": {
+								"mLevel1Value": 0.03,
+								"mBreakpoints": [
+									{
+										"mLevel": 6,
+										"mAdditionalBonusAtThisLevel": 0.01
+									},
+									{
+										"mLevel": 11,
+										"mAdditionalBonusAtThisLevel": 0.01
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						},
+						{
+							"mDataValue": "HealAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkq.xinzhaorework.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"BonusDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkw.xinzhaorework.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SlashBaseDamage": [
+					20,
+					30,
+					40,
+					50,
+					60,
+					70,
+					80
+				],
+				"ThrustBaseDamage": [
+					15,
+					50,
+					85,
+					120,
+					155,
+					190,
+					225
+				],
+				"CritChanceAmp": [
+					0.333,
+					0.333,
+					0.333,
+					0.333,
+					0.333,
+					0.333,
+					0.333
+				],
+				"MarkDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"HitNum": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"DelayTime": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				]
+			},
+			"spellCalculations": {
+				"SlashDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlashBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ThrustDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mStat": 8,
+								"mDataValue": "CritChanceAmp"
+							}
+						]
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "ThrustBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.65,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MinionMod": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 50,
+							"mInitialBonusPerLevel": 3.333,
+							"mBreakpoints": [
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 3.34
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworke.xinzhaorework.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseSlowAmount": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"APRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
+			},
+			"spellCalculations": {
+				"ChargeDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkr.xinzhaorework.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					-25,
+					75,
+					175,
+					275,
+					375,
+					475,
+					575
+				],
+				"PercentCurrentHealthDamage": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"MissileDefenseBaseDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MissileDefenseRadius": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"MarkDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 1.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

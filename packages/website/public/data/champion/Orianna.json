@@ -30,23 +30,369 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/orianna/hud/icons2d/oriannap.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"StackMult": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"StackCount": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"StackDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"APRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 50,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"StackDamage": {
+					"mMultiplier": {
+						"mDataValue": "StackMult"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "TotalDamage"
+				},
+				"StackDamageMax": {
+					"mMultiplier": {
+						"mPart1": {
+							"mDataValue": "StackMult"
+						},
+						"mPart2": {
+							"mNumber": 2
+						}
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.55,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MinimumDamageTooltip": {
+					"mMultiplier": {
+						"mPart1": {
+							"mNumber": 0.01
+						},
+						"mPart2": {
+							"mEffectIndex": 3
+						}
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "TotalDamageTooltip"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/orianna/hud/icons2d/oriannaw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					70,
+					110,
+					150,
+					190,
+					230,
+					270
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"SlowAmount": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"HasteAmount": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"FieldDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"SlowAndHasteDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamageTooltip": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 3,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalShieldTooltip": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.45,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/orianna/hud/icons2d/oriannar.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"Damage": [
+					100,
+					250,
+					400,
+					550,
+					700,
+					850,
+					1000
+				],
+				"AoERadius": [
+					415,
+					415,
+					415,
+					415,
+					415,
+					415,
+					415
+				],
+				"StunDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.95,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

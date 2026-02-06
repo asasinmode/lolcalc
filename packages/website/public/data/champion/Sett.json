@@ -30,23 +30,992 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/sett/hud/icons2d/sett_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"NumHits": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"LockoutTimer": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"MarkerDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"GrabDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"SelfSlowPercent": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MaxHPOnHit": [
+					0.06,
+					0.06,
+					0.06,
+					0.06,
+					0.06,
+					0.06,
+					0.06
+				],
+				"MissingHealthUnit": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"AttackSpeed": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"JabDamagePercent": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"HookDamagePercentFinal": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"PassiveHealthThreshold": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"PassiveHealthThresholdAmp": [
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02
+				]
+			},
+			"spellCalculations": {
+				"HealingCalc": {
+					"mFormulaParts": [
+						{
+							"mValues": [
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{}
+							],
+							"__type": "ByCharLevelFormulaCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RightPunchBonus": {
+					"mFormulaParts": [
+						{
+							"mValues": [
+								0,
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{}
+							],
+							"__type": "ByCharLevelFormulaCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.55,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{7733e08c}": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mSimpleTooltipCalculationDisplay": 4,
+					"mExpandedTooltipCalculationDisplay": 4,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 3,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 7
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 20
+								},
+								{
+									"mLevel": 19,
+									"mBonusPerLevelAtAndAfter": 1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mPrecision": 2
+				},
+				"{a156fbdc}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 1.2,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.1
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.1
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"tooltipregenpermissinghealthcalc": {
+					"mMultiplier": {
+						"mNumber": 5
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "{7733e08c}"
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/sett/hud/icons2d/sett_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Duration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"BaseDamage": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"StackCount": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"HealthCost": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"MSAmount": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"MSDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"AdrenalineDecayLockTimer": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BaseHealthCost": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"ADRatio": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				],
+				"EnemyMaxHealthDamage": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"QMinimumDamage": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"MaxHealthTADRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"MaxHealthTADRatioTOOLTIP": [
+					0.5,
+					1,
+					1.5,
+					2,
+					2.5,
+					3,
+					3.5
+				],
+				"MonsterCap": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				]
+			},
+			"spellCalculations": {
+				"MaxHealthDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EnemyMaxHealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "MaxHealthTADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"BonusEnemyMaxHealthDamage": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "MaxHealthTADRatio"
+							},
+							"mPart2": {
+								"mNumber": 100
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/sett/hud/icons2d/sett_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					60,
+					80,
+					100,
+					120,
+					140,
+					160,
+					180
+				],
+				"DamageAmp": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Duration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"MovementSpeed": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MSDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"GreyHealthDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ShieldConversion": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"DamageStored": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"StoredHealth": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"LockTime": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"ResourceDecayRate": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"DamageConversionBase": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"EnrageDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"EnrageHealingMult": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"EnrageADMult": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"EnrageArmorPen": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ShieldMaxDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ShieldDecayDelay": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"AdrenalineStorageWindow": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DamageConversion": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamageConversionBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.002,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MaxGrit": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "{2be6bb5c}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mDataValue": "DamageConversionBase"
+							},
+							{
+								"mStat": 2,
+								"mStatFormula": 2,
+								"mCoefficient": 0.1
+							}
+						]
+					},
+					"mModifiedGameCalculation": "MaxGrit"
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/sett/hud/icons2d/sett_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Duration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"LeapDistance": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"BaseDamage": [
+					30,
+					50,
+					70,
+					90,
+					110,
+					130,
+					150
+				],
+				"MaxHealthDamage": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"SlowAmount": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"SlowDuration": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ThrowRange": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"SingleBaseDamage": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"StunDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"MonsterDamage": [
+					125,
+					150,
+					175,
+					200,
+					225,
+					250,
+					275
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"tooltipadratio_e": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MonsterBonus": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 125,
+							"mEndValue": 250,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/sett/hud/icons2d/sett_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"GrabDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MoveSpeedBonus": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"MaxHealthDamage": [
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8,
+					0.9
+				],
+				"BaseDamage": [
+					100,
+					200,
+					300,
+					400,
+					500,
+					600,
+					700
+				],
+				"DistanceToFirstHit": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"DistancePastFirstHit": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"MaxPassiveStacks": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"DelayBeforeDecay": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"CarryDistancePerStack": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"ResistDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"SlowAmount": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"CraterDuration": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"CraterRadius": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"CraterMaxHaste": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"CraterMaxSlow": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"CraterEdgeDamageReduction": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"CraterSweetSpotRadius": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxHealthDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxHealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"tooltipadratio_r": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

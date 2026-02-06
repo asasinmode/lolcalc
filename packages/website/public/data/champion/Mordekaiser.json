@@ -30,23 +30,506 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"CombatTrackingDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MaximumStacks": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"PercentAPAddedToAutos": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"FuryForQHit": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"FuryForAutoHit": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"FuryForEHit": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"DoTRadius": [
+					375,
+					375,
+					375,
+					375,
+					375,
+					375,
+					375
+				],
+				"MovementSpeed": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				]
+			},
+			"spellCalculations": {
+				"AuraDamagePerStack": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PercentHealthForAura": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 1,
+							"mEndValue": 5,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"MaxAuraMonsterDamage": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mStartValue": 40,
+							"mEndValue": 200,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"BonusAPAuto": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PassiveMovementSpeed": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.03,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.03
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.03
+								},
+								{
+									"mLevel": 19,
+									"mAdditionalBonusAtThisLevel": 0.03
+								},
+								{
+									"mLevel": 24,
+									"mAdditionalBonusAtThisLevel": 0.03
+								},
+								{
+									"mLevel": 30,
+									"mAdditionalBonusAtThisLevel": 0.03
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"QBaseDamage": [
+					45,
+					80,
+					115,
+					150,
+					185,
+					220,
+					255
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"IsolationScalar": [
+					1.25,
+					1.3,
+					1.35,
+					1.4,
+					1.45,
+					1.5,
+					1.55
+				],
+				"IsolationTooltip": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"MaceStartDistance": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"MaceLength": [
+					625,
+					625,
+					625,
+					625,
+					625,
+					625,
+					625
+				],
+				"RectangleWidth": [
+					160,
+					160,
+					160,
+					160,
+					160,
+					160,
+					160
+				],
+				"ADRatio": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				]
+			},
+			"spellCalculations": {
+				"QDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "QBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mBreakpoints": [
+								{
+									"mLevel": 10,
+									"mBonusPerLevelAtAndAfter": 5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"EmpoweredDamageTooltip": {
+					"mMultiplier": {
+						"mDataValue": "IsolationScalar"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "QDamage"
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Duration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"DamageConversion": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"BaseShield": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				],
+				"HealingPercent": [
+					0.325,
+					0.35,
+					0.375,
+					0.4,
+					0.425,
+					0.45,
+					0.475
+				],
+				"MinionPenalty": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"DamageTakenConversion": [
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075
+				],
+				"MaxHealthCap": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"TimeBeforeDecay": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"DecayPerSecond": [
+					0.005,
+					0.005,
+					0.005,
+					0.005,
+					0.005,
+					0.005,
+					0.005
+				]
+			},
+			"spellCalculations": {
+				"HealthDecay": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mStatFormula": 1,
+							"mDataValue": "DecayPerSecond",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxHealthTooltip": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MinHealthTooltip": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					45,
+					60,
+					75,
+					90,
+					105,
+					120,
+					135
+				],
+				"DelayBeforeMovement": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MaxDistance": [
+					550,
+					550,
+					550,
+					550,
+					550,
+					550,
+					550
+				],
+				"KnockTowardsDistance": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"StandAsideRange": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"MagicPen": [
+					0.025,
+					0.05,
+					0.075,
+					0.1,
+					0.125,
+					0.15,
+					0.175
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"SpiritRealmDuration": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"StatStealPercentScalar": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"ZoneRadius": [
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200
+				],
+				"GhostAPRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
+			}
 		}
 	}
 }

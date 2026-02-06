@@ -30,23 +30,526 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"ResetWindow": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ResetCDR": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"DaggerRadius": [
+					340,
+					340,
+					340,
+					340,
+					340,
+					340,
+					340
+				],
+				"DaggerDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"BonusADRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mValues": [
+								0,
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{}
+							],
+							"__type": "ByCharLevelFormulaCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mSubpart": {
+								"mLevel1Value": 0.7,
+								"mBreakpoints": [
+									{
+										"mLevel": 6,
+										"mAdditionalBonusAtThisLevel": 0.1
+									},
+									{
+										"mLevel": 11,
+										"mAdditionalBonusAtThisLevel": 0.1
+									},
+									{
+										"mLevel": 16,
+										"mAdditionalBonusAtThisLevel": 0.1
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"{e1ba6b0f}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.78,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.06
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					45,
+					80,
+					115,
+					150,
+					185,
+					220,
+					255
+				],
+				"BounceOffset": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"BounceRadius": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"MaxBounces": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"QAPRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "QAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					10,
+					20,
+					30,
+					40,
+					50,
+					60,
+					70
+				],
+				"DataCooldown": [
+					13,
+					12,
+					11,
+					10,
+					9,
+					8,
+					7
+				],
+				"EADRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"EAPRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "EAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "EADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DaggerCooldownReduction": {
+					"mMultiplier": {
+						"mPart1": {},
+						"mPart2": {
+							"mDataValue": "DataCooldown"
+						}
+					},
+					"mModifiedGameCalculation": "{016cd4b3}"
+				},
+				"{016cd4b3}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.78,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 21,
+									"mAdditionalBonusAtThisLevel": 0.04
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mPrecision": 2
+				},
+				"TooltipDaggerReduction": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.78,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.06
+								},
+								{
+									"mLevel": 21,
+									"mAdditionalBonusAtThisLevel": 0.04
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"DamagePerTick": [
+					12.5,
+					25,
+					37.5,
+					50,
+					62.5,
+					75,
+					87.5
+				],
+				"TicksPerSecond": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"Duration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"GrievousDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"GrievousAmount": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"OnHitRatio": [
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5
+				],
+				"RAPRatio": [
+					0.19,
+					0.19,
+					0.19,
+					0.19,
+					0.19,
+					0.19,
+					0.19
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamagePerTick",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "RAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamageCalc": {
+					"mMultiplier": {
+						"mPart1": {
+							"mDataValue": "TicksPerSecond"
+						},
+						"mPart2": {
+							"mDataValue": "Duration"
+						}
+					},
+					"mModifiedGameCalculation": "DamageCalc"
+				},
+				"ADDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mSubpart": {
+								"mSubparts": [
+									{
+										"mPart1": {
+											"mNumber": 0.16
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mNumber": 1
+												},
+												{
+													"mStat": 4,
+													"mStatFormula": 2,
+													"mCoefficient": 3.125
+												}
+											]
+										}
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"TotalADDamageCalc": {
+					"mMultiplier": {
+						"mPart1": {
+							"mDataValue": "TicksPerSecond"
+						},
+						"mPart2": {
+							"mDataValue": "Duration"
+						}
+					},
+					"mModifiedGameCalculation": "ADDamageCalc"
+				}
+			}
 		}
 	}
 }

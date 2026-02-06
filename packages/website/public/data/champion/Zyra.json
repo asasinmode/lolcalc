@@ -30,23 +30,430 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/zyra/hud/icons2d/zyrap.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PlantDuration": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"PlantBaseDmg": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"PlantLvlScaling": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"APRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				]
+			},
+			"spellCalculations": {
+				"SeedCooldown": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 13.6,
+							"mEndValue": 9.05,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				},
+				"PlantDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 15,
+							"mEndValue": 75,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"monstermod": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 50,
+							"mEndValue": 100,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"{c951f1e1}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 50,
+							"mInitialBonusPerLevel": -1,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/zyra/hud/icons2d/zyraq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"InitialDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.65,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/zyra/hud/icons2d/zyraw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/zyra/hud/icons2d/zyrae.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MaxSlowStacks": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PheromoneDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"RootDuration": [
+					0.75,
+					1,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25
+				],
+				"BaseDamage": [
+					25,
+					60,
+					95,
+					130,
+					165,
+					200,
+					235
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/zyra/hud/icons2d/zyrar.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"PlantDamageBonus": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 3,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

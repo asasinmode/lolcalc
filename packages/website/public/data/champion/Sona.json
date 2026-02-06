@@ -30,23 +30,526 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/sona/hud/icons2d/sona_passive_charged.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"TempoDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PowerChordPassiveCountMax": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"AccelerandoAHPerStack": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"AccelerandoCap": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"AccelerandoUltCDR": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"PowerChordDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 20,
+							"mInitialBonusPerLevel": 10,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"AccelerandoAHCurrent": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{1705b20f}",
+							"mDataValue": "AccelerandoAHPerStack",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/sona/hud/icons2d/sona_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					15,
+					50,
+					85,
+					120,
+					155,
+					190,
+					225
+				],
+				"BaseOnHitDamage": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"AuraRange": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"OnHitDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"EnemiesToHit": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"AuraDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"BaseGlobalCD": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"OnHitProcs": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"OnHitRatio": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalOnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseOnHitDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "OnHitRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalStaccatoDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mInitialBonusPerLevel": 15,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mBonusPerLevelAtAndAfter": 22.5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/sona/hud/icons2d/sona_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseHeal": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"BaseShield": [
+					5,
+					25,
+					45,
+					65,
+					85,
+					105,
+					125
+				],
+				"AuraDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"AuraRange": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"BaseGlobalCD": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"DiminuendoDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"HealRange": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"ShieldDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"AccelerandoShieldBreakpoint": [
+					5,
+					25,
+					45,
+					65,
+					85,
+					105,
+					125
+				],
+				"HealRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"ShieldRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				]
+			},
+			"spellCalculations": {
+				"TotalHeal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "HealRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ShieldRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDiminuendoWeakenPercent": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.25,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/sona/hud/icons2d/sona_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SelfBaseMovementSpeed": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"AllyBaseMovementSpeed": [
+					0.08,
+					0.1,
+					0.12,
+					0.14,
+					0.16,
+					0.18,
+					0.2
+				],
+				"SelfMovementSpeedDurationMin": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"SelfMovementSpeedDurationMax": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"AllyMovementSpeedDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"AuraRange": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"AuraDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"BaseGlobalCD": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"TempoDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"TotalSelfMovementSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SelfBaseMovementSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalAllyMovementSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "AllyBaseMovementSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalTempoMoveSpeedSlow": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/sona/hud/icons2d/sona_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"StunDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

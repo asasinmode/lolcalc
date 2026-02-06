@@ -30,23 +30,694 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/yorick/hud/icons2d/yorick_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"YorickPassiveGhoulMax": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"YorickGhoulDamageReductionVsTowers": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"YorickGhoulLeashRange": [
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600
+				],
+				"YorickGhoulSpawnDelay": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"CherryGhoulHPMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"GhoulADRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"GraveDuration": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"MinionMoveBonus": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"MeleeAttackDamageModifier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MinionDamageTakenMod": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"ProcDamageModifier": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ARAMPassiveSpawnThreshold": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"GhoulMonsterDamageMod": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"GhoulHealthRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"MonsterDamageTakenMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"YorickPassiveGhoulHealth": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 300,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "{76270a4f}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"YorickPassiveGhoulDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 15,
+							"mEndValue": 100,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "GhoulADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"YorickPassiveSpawnThreshold": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 8,
+							"mBreakpoints": [
+								{
+									"mLevel": 3,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 5,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": -1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"AOEDamageModifier": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.66,
+							"mInitialBonusPerLevel": -0.02,
+							"mBreakpoints": [
+								{
+									"mLevel": 15
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"BonusAttackSpeed": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.08,
+							"mEndValue": 0.8,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/yorick/hud/icons2d/yorick_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"CherryGhoulPassiveSpawnRate": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"BaseDamage": [
+					10,
+					30,
+					50,
+					70,
+					90,
+					110,
+					130
+				],
+				"MissingHealthRatio": [
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11
+				],
+				"BuffDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"HealReduction": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"BonusDamageAD": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"QHeal": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 10,
+							"mInitialBonusPerLevel": 2,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 3
+								},
+								{
+									"mLevel": 13,
+									"mBonusPerLevelAtAndAfter": 5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"BonusDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "BonusDamageAD",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/yorick/hud/icons2d/yorick_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"CircleDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"GhoulNumber": [
+					18,
+					18,
+					18,
+					18,
+					18,
+					18,
+					18
+				],
+				"Delay": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"HPBonus": [
+					0,
+					0,
+					0,
+					1,
+					1,
+					2,
+					2
+				],
+				"WallHealthTooltip": [
+					2,
+					2,
+					2,
+					3,
+					3,
+					4,
+					4
+				]
+			}
 		},
 		"e": {
 			"image": "assets/characters/yorick/hud/icons2d/yorick_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SlowAmount": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"SlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MarkDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MarkRange": [
+					1500,
+					1500,
+					1500,
+					1500,
+					1500,
+					1500,
+					1500
+				],
+				"HealthDamage": [
+					5.5,
+					6,
+					6.5,
+					7,
+					7.5,
+					8,
+					8.5
+				],
+				"HealthAPRatio": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"MinimumMinionDamage": [
+					35,
+					70,
+					105,
+					140,
+					175,
+					210,
+					245
+				],
+				"MonsterMaxDamage": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"ArmorShred": [
+					0.1,
+					0.13,
+					0.16,
+					0.19,
+					0.22,
+					0.25,
+					0.28
+				],
+				"HasteAmount": [
+					0.15,
+					0.18,
+					0.21,
+					0.24,
+					0.27,
+					0.3,
+					0.33
+				]
+			},
+			"spellCalculations": {
+				"Calc_MinimumDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{2540cffc}",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"Calc_HealthDamage": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "HealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{df972d75}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"Calc_Slow": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlowAmount",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"Calc_MonsterCapDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterMaxDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/yorick/hud/icons2d/yorick_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RGhoulNumbers": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7
+				],
+				"RBigGhoulBonusAD": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"RMarkDamagePercent": [
+					1.5,
+					2,
+					2.5,
+					3,
+					3.5,
+					4,
+					4.5
+				],
+				"RMarkMaxDamage": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"RRadius": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				],
+				"RSummonDelay": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RControlTime": [
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000
+				],
+				"CherryMaidenHealthMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"MinionDamageTakenModifier": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"MaidenHealthRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"MaidenADRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"YorickBigGhoulHealth": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 1050,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 100
+								},
+								{
+									"mLevel": 11,
+									"mBonusPerLevelAtAndAfter": 200
+								},
+								{
+									"mLevel": 16,
+									"mBonusPerLevelAtAndAfter": 250
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "{5cb81bea}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"YorickBigGhoulDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBigGhoulBonusAD",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "{5913ba7b}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"YorickMaidenResists": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

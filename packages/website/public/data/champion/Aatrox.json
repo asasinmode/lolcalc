@@ -30,23 +30,567 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PBonusAARange": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"PChargeRate": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PDamageTADBonusLevel1": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"PDamageTADBonusLevel18": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"PStructureCap": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"PHealShieldReduction": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"PDebuffDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"PHealingMinionMod": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"PHealingRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"PDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.04,
+							"mEndValue": 0.1,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"PCooldown": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStartValue": 22,
+							"mEndValue": 10,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"MonsterDamageCap": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 320,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"QBaseDamage": [
+					-5,
+					10,
+					25,
+					40,
+					55,
+					70,
+					85
+				],
+				"QTotalADRatio": [
+					0.525,
+					0.6,
+					0.675,
+					0.75,
+					0.825,
+					0.9,
+					0.975
+				],
+				"QSweetSpotBonus": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"QKnockupDuration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"QRampBonus": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"QMonsterBonus": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"QExtensionTime": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"QDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "QBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "QTotalADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"QMinionDamage": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.55,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 21,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 26,
+									"mAdditionalBonusAtThisLevel": 0.05
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"QEdgeDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mDataValue": "QSweetSpotBonus"
+							}
+						]
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "QDamage"
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"WBaseDamage": [
+					20,
+					30,
+					40,
+					50,
+					60,
+					70,
+					80
+				],
+				"WBonusADRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"WSlowPercentage": [
+					-0.25,
+					-0.25,
+					-0.275,
+					-0.3,
+					-0.325,
+					-0.35,
+					-0.35
+				],
+				"WSlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"WTotalADRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"WDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "WBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "WTotalADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ESpellVamp": [
+					16,
+					16,
+					16,
+					16,
+					16,
+					16,
+					16
+				],
+				"EBonusAD": [
+					5,
+					15,
+					25,
+					35,
+					45,
+					55,
+					65
+				],
+				"EResistancePerAD": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"EDashSpeed": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"EMaxRange": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"EDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"EBaseRechargeTime": [
+					30,
+					26,
+					22,
+					18,
+					14,
+					10,
+					6
+				],
+				"EMinRange": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"ESpellVampEmpowered": [
+					16,
+					16,
+					16,
+					16,
+					16,
+					16,
+					16
+				],
+				"EVampHPRatio": [
+					0.011,
+					0.011,
+					0.011,
+					0.011,
+					0.011,
+					0.011,
+					0.011
+				]
+			},
+			"spellCalculations": {
+				"TotalEVamp": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "ESpellVamp",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "EVampHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RDuration": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"RERechargeBonus": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"RMovementSpeed": [
+					0.1,
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4
+				],
+				"RMovementSpeedBonus": [
+					0.4,
+					0.6,
+					0.8,
+					1,
+					1.2,
+					1.4,
+					1.6
+				],
+				"RTotalADAmp": [
+					0.1,
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7
+				],
+				"RBonusADRange": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"RSpeedMinDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RFXExtraDuration": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"RPercentBloodWellToBoostToMax": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"RHealingAmp": [
+					0.25,
+					0.5,
+					0.75,
+					1,
+					1.25,
+					1.5,
+					1.75
+				],
+				"RExtension": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"RFearRadius": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"RMinionFearDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RChampionFearDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			}
 		}
 	}
 }

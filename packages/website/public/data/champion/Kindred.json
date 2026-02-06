@@ -30,23 +30,796 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/kindred/hud/icons2d/kindred_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"BaseHealAmount": [
+					45,
+					45,
+					45,
+					45,
+					45,
+					45,
+					45
+				],
+				"HealAmountPerLevel": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"QMarkBonus": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mBuffName": "{64290302}",
+							"mIconKey": "%i:kindredPassiveIcon%",
+							"mCoefficient": 0.05,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"WMarkBonus": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{64290302}",
+							"mIconKey": "%i:kindredPassiveIcon%",
+							"mCoefficient": 0.01,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"EMarkBonus": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{64290302}",
+							"mIconKey": "%i:kindredPassiveIcon%",
+							"mCoefficient": 0.005,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/kindred/hud/icons2d/kindred_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"DashSpeed": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"DashSpeedScaling": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"BaseASDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"CDNewValue": [
+					4.5,
+					4,
+					3.5,
+					3,
+					2.5,
+					2,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"TotalQAttackSpeed": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 7,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mBuffName": "{64290302}",
+							"mIconKey": "%i:kindredPassiveIcon%",
+							"mCoefficient": 0.05,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/kindred/hud/icons2d/kindred_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"LambToWolfAttackSpeedConversionPercent": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"RingRange": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"APRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"CloneBasePercentDamage": [
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015
+				],
+				"CloneDamageFlat": [
+					20,
+					25,
+					30,
+					35,
+					40,
+					45,
+					50
+				],
+				"CloneADRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"ClonePercentDamagePerBounty": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				]
+			},
+			"spellCalculations": {
+				"AttackHeal": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 47,
+							"mInitialBonusPerLevel": 2,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"BaseWolfDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "CloneDamageFlat",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "CloneADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"PercentWolfDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "CloneBasePercentDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mBuffName": "{64290302}",
+							"mIconKey": "%i:kindredPassiveIcon%",
+							"mDataValue": "ClonePercentDamagePerBounty",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/kindred/hud/icons2d/kindred_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MonsterCap": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"BaseDamage": [
+					50,
+					80,
+					110,
+					140,
+					170,
+					200,
+					230
+				],
+				"SlowAmount": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"TotalDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StacksToProc": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"SlowAPRatio": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				],
+				"BasePercentDamage": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				],
+				"CritMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"BonusADRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"BaseBiteDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mPart1": {
+									"mStat": 8,
+									"mDataValue": "CritMod"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mStat": 9,
+											"mCoefficient": 1
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								}
+							}
+						]
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"PercentBiteDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mPart1": {
+									"mStat": 8,
+									"mDataValue": "CritMod"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mStat": 9,
+											"mCoefficient": 1
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								}
+							}
+						]
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BasePercentDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mBuffName": "{64290302}",
+							"mIconKey": "%i:kindredPassiveIcon%",
+							"mCoefficient": 0.005,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"CritDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1.5
+							},
+							{
+								"mStat": 9,
+								"mStatFormula": 2,
+								"mCoefficient": 1
+							}
+						]
+					},
+					"mModifiedGameCalculation": "PercentBiteDamage"
+				},
+				"TotalSlow": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SlowAmount",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "SlowAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/kindred/hud/icons2d/kindred_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"HealFlat": [
+					150,
+					225,
+					300,
+					375,
+					450,
+					525,
+					600
+				],
+				"BuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"AoERadius": [
+					530,
+					530,
+					530,
+					530,
+					530,
+					530,
+					530
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

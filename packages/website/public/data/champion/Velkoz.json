@@ -30,23 +30,451 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"Duration": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"MaxStacks": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStartValue": 35,
+							"mEndValue": 180,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"PassiveStacksToAdd": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"SlowAmount": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"SlowDuration": [
+					0.6,
+					1,
+					1.4,
+					1.8,
+					2.2,
+					2.6,
+					3
+				],
+				"SplitTelegraphTime": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"ManaRefund": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"TooltipManaRefund": [
+					17.5,
+					20,
+					22.5,
+					25,
+					27.5,
+					30,
+					32.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"PassiveStacksToAdd": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BaseInitialDamage": [
+					10,
+					30,
+					50,
+					70,
+					90,
+					110,
+					130
+				],
+				"BaseSecondaryDamage": [
+					15,
+					45,
+					75,
+					105,
+					135,
+					165,
+					195
+				]
+			},
+			"spellCalculations": {
+				"InitialDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseInitialDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SecondaryDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseSecondaryDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"PassiveStacksToAdd": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BaseDamage": [
+					40,
+					70,
+					100,
+					130,
+					160,
+					190,
+					220
+				],
+				"StunDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"MoveDistance": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				],
+				"APRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"MaxDetonationTime": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				],
+				"MinDetonationTime": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"PassiveStacksToAddPerTick": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

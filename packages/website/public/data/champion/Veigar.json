@@ -30,23 +30,302 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/veigar/hud/icons2d/veigar_entropy.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"dQKillStacks": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"dAbilityStacks": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"dTakedownStacks": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"dQKillStacksLarge": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"PStacksPerDarkMatterCDR": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"DarkMatterCDRIncrement": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			},
+			"spellCalculations": {
+				"APPerStack": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/veigar/hud/icons2d/veigarbalefulstrike.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"APRatio": [
+					0.45,
+					0.5,
+					0.55,
+					0.6,
+					0.65,
+					0.7,
+					0.75
+				],
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/veigar/hud/icons2d/veigardarkmatter.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"APRatio": [
+					0.6,
+					0.7,
+					0.8,
+					0.9,
+					1,
+					1.1,
+					1.2
+				],
+				"BaseDamage": [
+					30,
+					85,
+					140,
+					195,
+					250,
+					305,
+					360
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/veigar/hud/icons2d/veigareventhorizon.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/veigar/hud/icons2d/veigarprimordialburst.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"APRatio": [
+					0.6,
+					0.65,
+					0.7,
+					0.75,
+					0.8,
+					0.85,
+					0.9
+				],
+				"BaseDamage": [
+					100,
+					175,
+					250,
+					325,
+					400,
+					475,
+					550
+				],
+				"MaxExecuteMult": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"MinDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"mModifiedGameCalculation": "MinDamage"
+				}
+			}
 		}
 	}
 }

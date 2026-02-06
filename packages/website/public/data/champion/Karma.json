@@ -30,23 +30,414 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/karma/hud/icons2d/karma_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {},
+			"spellCalculations": {
+				"SpellMantraRefund": {
+					"mFormulaParts": [
+						{
+							"mNumber": 4,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/karma/hud/icons2d/karma_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					10,
+					60,
+					110,
+					160,
+					210,
+					260,
+					310
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"SlowAmount": [
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4
+				],
+				"SlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"{087bc3ca}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"{5d5198eb}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"IsEmpowered": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mDefaultGameCalculation": "{087bc3ca}",
+					"mConditionalGameCalculation": "{5d5198eb}",
+					"mConditionalCalculationRequirements": {
+						"mBuffName": "{752d125a}"
+					}
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/karma/hud/icons2d/karma_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					15,
+					40,
+					65,
+					90,
+					115,
+					140,
+					165
+				],
+				"APRatio": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"RootDuration": [
+					1.5,
+					1.6,
+					1.7,
+					1.8,
+					1.9,
+					2,
+					2.1
+				],
+				"TetherDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"LeashBreakRange": [
+					825,
+					825,
+					825,
+					825,
+					825,
+					825,
+					825
+				]
+			},
+			"spellCalculations": {
+				"InitialDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/karma/hud/icons2d/karma_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseShield": [
+					30,
+					80,
+					130,
+					180,
+					230,
+					280,
+					330
+				],
+				"ShieldRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"ShieldDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"MoveSpeed": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"MoveSpeedDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ShieldRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/karma/hud/icons2d/karma_r.png",
-			"maxLevel": 4
+			"maxLevel": 4,
+			"dataValues": {
+				"QBonusDamage": [
+					-20,
+					40,
+					100,
+					160,
+					220,
+					280,
+					340
+				],
+				"QBonusAPRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"QDetonationDamage": [
+					-50,
+					40,
+					130,
+					220,
+					310,
+					400,
+					490
+				],
+				"QDetonationAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"RQSlow": [
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5
+				],
+				"RQSlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"RWBonusRoot": [
+					0.25,
+					0.5,
+					0.75,
+					1,
+					1.25,
+					1.5,
+					1.75
+				],
+				"RWBaseHeal": [
+					17,
+					17,
+					17,
+					17,
+					17,
+					17,
+					17
+				],
+				"RWHealRatio": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"EBonusShield": [
+					0,
+					50,
+					100,
+					150,
+					200,
+					250,
+					300
+				],
+				"EBonusShieldRatio": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"REMoveSpeed": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"RESharedRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"RQImpactDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "QBonusDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "QBonusAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RQFieldDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "QDetonationDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "QDetonationAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"REBonusShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EBonusShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "EBonusShieldRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RWHealAmount": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "RWBaseHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "RWHealRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"REBonusShieldArea": {
+					"mMultiplier": {
+						"mDataValue": "RESharedRatio"
+					},
+					"mModifiedGameCalculation": "REBonusShield"
+				}
+			}
 		}
 	}
 }

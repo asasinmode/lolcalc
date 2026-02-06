@@ -30,23 +30,553 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PassiveCooldownReduction": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"PassiveHealthThreshold": [
+					0.95,
+					0.95,
+					0.95,
+					0.95,
+					0.95,
+					0.95,
+					0.95
+				],
+				"JungPassCooldownReduction": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"PassiveCooldown": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 30,
+							"mEndValue": 20,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"PassiveHealingTotal": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mSubpart": {
+								"mLevel1Value": 0.04,
+								"mInitialBonusPerLevel": 0.002,
+								"mBreakpoints": [
+									{
+										"mLevel": 7,
+										"mBonusPerLevelAtAndAfter": 0.007
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					75,
+					120,
+					165,
+					210,
+					255,
+					300
+				],
+				"SlowAmount": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"SlowDuration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"LolipopRadius": [
+					325,
+					325,
+					325,
+					325,
+					325,
+					325,
+					325
+				],
+				"KnockbackSpeed": [
+					950,
+					950,
+					950,
+					950,
+					950,
+					950,
+					950
+				],
+				"KnockbackDistance": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"BasePercentHealth": [
+					0.015,
+					0.02,
+					0.025,
+					0.03,
+					0.035,
+					0.04,
+					0.045
+				],
+				"NonChampMax": [
+					9999,
+					9999,
+					9999,
+					9999,
+					9999,
+					9999,
+					9999
+				],
+				"BonusMonsterDamage": [
+					110,
+					120,
+					130,
+					140,
+					150,
+					160,
+					170
+				],
+				"APRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalPercentHealth": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BasePercentHealth",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					60,
+					85,
+					110,
+					135,
+					160,
+					185
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SaplingDuration": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"BaseDamage": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"GrowthDuration": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"SlowAmount": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"EmpoweredDoTDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"EmpoweredBaseDamage": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"SaplingDetectionRadius": [
+					550,
+					550,
+					550,
+					550,
+					550,
+					550,
+					550
+				],
+				"BaseEmpoweredSlowAmount": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"MaxTraps": [
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000
+				],
+				"BaseAPRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"EmpoweredAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"EmpoweredSaplingDuration": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SaplingDuration",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.015,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{b109acb8}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalEmpoweredDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EmpoweredBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "EmpoweredAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"EmpoweredSlowAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseEmpoweredSlowAmount",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mSubpart": {
+								"mPart1": {
+									"mNumber": 0.01
+								},
+								"mPart2": {
+									"mNumber": 0.01
+								}
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"SaplingMoveSpeed": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 400,
+							"mInitialBonusPerLevel": 5,
+							"mBreakpoints": [
+								{
+									"mLevel": 14
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"MinRootDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"MaxRootDuration": [
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25
+				],
+				"BaseDamage": [
+					75,
+					150,
+					225,
+					300,
+					375,
+					450,
+					525
+				],
+				"MoveHaste": [
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8,
+					0.9
+				],
+				"HasteDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

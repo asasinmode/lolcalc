@@ -30,23 +30,436 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/annie/hud/icons2d/annie_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MaxStacks": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StunBaseDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"StunDurationPerTier": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				]
+			},
+			"spellCalculations": {
+				"StunDuration": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 1.25,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.25
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mPrecision": 2
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/annie/hud/icons2d/annie_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/annie/hud/icons2d/annie_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					70,
+					110,
+					150,
+					190,
+					230,
+					270
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/annie/hud/icons2d/annie_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ShieldDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"DamageReduction": [
+					9,
+					13,
+					17,
+					21,
+					25,
+					29,
+					33
+				],
+				"DamageReflection": [
+					15,
+					25,
+					35,
+					45,
+					55,
+					65,
+					75
+				],
+				"MovementSpeed": [
+					0.1,
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4
+				],
+				"MovementSpeedDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"ShieldAmount": [
+					25,
+					60,
+					95,
+					130,
+					165,
+					200,
+					235
+				],
+				"CastRangeGenerosity": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				]
+			},
+			"spellCalculations": {
+				"DamageReturn": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamageReflection",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MoveSpeedCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.2,
+							"mEndValue": 0.5,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"ShieldBlockTotal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldAmount",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/annie/hud/icons2d/annie_r1.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"InitialDamage": [
+					25,
+					150,
+					275,
+					400,
+					525,
+					650,
+					775
+				],
+				"AuraDamage": [
+					4,
+					8,
+					12,
+					16,
+					20,
+					24,
+					28
+				],
+				"TibbersAttackDamage": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"TibbersAttackSpeedDecay": [
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1
+				],
+				"TibbersAttackAPRatio": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"MovespeedBurst": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"EnrageDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"AvengerEnrageDuration": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"TibbersLifetime": [
+					45,
+					45,
+					45,
+					45,
+					45,
+					45,
+					45
+				],
+				"TibbersBonusMS": [
+					-25,
+					0,
+					25,
+					50,
+					75,
+					100,
+					125
+				],
+				"TibbersModeSpecificHPMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RPercentPenBuff": [
+					0.05,
+					0.1,
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35
+				]
+			},
+			"spellCalculations": {
+				"InitialBurstDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "InitialDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TibbersAuraDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "AuraDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.04,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TibbersAADamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "TibbersAttackDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "TibbersAttackAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TibbersTotalHP": {
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mLevel1Value": 1150,
+								"mBreakpoints": [
+									{
+										"mLevel": 7,
+										"mBonusPerLevelAtAndAfter": 50
+									},
+									{
+										"mLevel": 11,
+										"mBonusPerLevelAtAndAfter": 250
+									},
+									{
+										"mLevel": 16,
+										"mBonusPerLevelAtAndAfter": 300
+									}
+								]
+							},
+							"mPart2": {
+								"mDataValue": "TibbersModeSpecificHPMod"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TibbersTotalResists": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

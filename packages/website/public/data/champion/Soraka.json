@@ -30,23 +30,294 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/soraka/hud/icons2d/soraka_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MovementSpeed": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				],
+				"HealthThreshold": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/soraka/hud/icons2d/soraka_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					85,
+					120,
+					155,
+					190,
+					225,
+					260
+				],
+				"BaseHoT": [
+					45,
+					60,
+					75,
+					90,
+					105,
+					120,
+					135
+				],
+				"HotDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"MoveSpeedSlow": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"SlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MoveSpeedHaste": [
+					0.175,
+					0.2,
+					0.225,
+					0.25,
+					0.275,
+					0.3,
+					0.325
+				],
+				"MoveSpeedDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"HealAPRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalHot": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHot",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "HealAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/soraka/hud/icons2d/soraka_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseHeal": [
+					70,
+					90,
+					110,
+					130,
+					150,
+					170,
+					190
+				],
+				"PercentHealthCost": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"MinimumPercentHealth": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				],
+				"PercentHealthCostRefund": [
+					0.75,
+					0.8,
+					0.85,
+					0.9,
+					0.95,
+					1,
+					1.05
+				]
+			},
+			"spellCalculations": {
+				"TotalHeal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MinimumHealth": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "MinimumPercentHealth",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/soraka/hud/icons2d/soraka_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					45,
+					70,
+					95,
+					120,
+					145,
+					170,
+					195
+				],
+				"RootDuration": [
+					0.75,
+					1,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25
+				],
+				"RootDelay": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/soraka/hud/icons2d/soraka_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseHeal": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"HealingAmpForLowHealthAllies": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"HealingCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"AmpedHealing": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mDataValue": "HealingAmpForLowHealthAllies"
+							}
+						]
+					},
+					"mModifiedGameCalculation": "HealingCalc"
+				}
+			}
 		}
 	}
 }

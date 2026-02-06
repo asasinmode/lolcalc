@@ -30,23 +30,1017 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/udyr/hud/icons2d/udyr_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"UdyrAHAmountPerCloudDragon": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"GlobalCD": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"GlobalCDEmpowered": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"SwapChargeBonus": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"MaxCharge": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"UltCDReduction": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				],
+				"AttackSpeedDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"UltCDMultiplier": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"{6a8aaac9}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 15,
+							"mEndValue": 15,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"AttackSpeed": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 0.3,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{1cfcbfbe}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.3,
+							"mEndValue": 0.8,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{1800f4cb}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.2,
+							"mEndValue": 0.3,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"UltCD": {
+					"mMultiplier": {
+						"mDataValue": "UltCDMultiplier"
+					},
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 50,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -10
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -10
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": -10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"LightningDamage": {
+					"mFormulaParts": [
+						{
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{73fab8fe}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 10,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{5e1424c3}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{01dc7936}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 40,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/udyr/hud/icons2d/udyr_q.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"AttackSpeedBase": [
+					0.08,
+					0.2,
+					0.32,
+					0.44,
+					0.56,
+					0.68,
+					0.8
+				],
+				"AttackSpeedDurationBase": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"AttackSpeedDurationEmpowered": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MaxHPOnHitBase": [
+					0.02,
+					0.03,
+					0.04,
+					0.05,
+					0.06,
+					0.07,
+					0.08
+				],
+				"RepeatBouncePenalty": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"LightningAPRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"Bounces": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"BounceRange": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"BaseDamage": [
+					-1,
+					5,
+					11,
+					17,
+					23,
+					29,
+					35
+				],
+				"MaxHPADRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"Q2MaxHPADRatio": [
+					0.001,
+					0.001,
+					0.001,
+					0.001,
+					0.001,
+					0.001,
+					0.001
+				],
+				"AttackRange": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"LightningDamageLevel1": [
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015
+				],
+				"LightningDamageLevel18": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"EmpoweredBonusASLevel1": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"EmpoweredBonusASLevel18": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"EmpoweredTotalAS": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "AttackSpeedBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"{0589a59c}": "{330ee33d}",
+							"{0b65bc23}": "{656f60df}",
+							"__type": "{ee18a47b}"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MonsterCap": {
+					"mFormulaParts": [
+						{
+							"mNumber": 15,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{af259c48}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 35,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"MaxHPOnHit1": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxHPOnHitBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "MaxHPADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"EmpoweredLightningBonus": {
+					"mFormulaParts": [
+						{
+							"{0589a59c}": "{372a5bd5}",
+							"{0b65bc23}": "{c4aeb617}",
+							"__type": "{ee18a47b}"
+						},
+						{
+							"mStatFormula": 2,
+							"mDataValue": "LightningAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"{ec11b8c6}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.5,
+							"mEndValue": 1,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{f18e2661}": {
+					"mMultiplier": {
+						"mDataValue": "RepeatBouncePenalty"
+					},
+					"mModifiedGameCalculation": "EmpoweredLightningBonus"
+				},
+				"{ba540e22}": {
+					"mMultiplier": {
+						"mDataValue": "RepeatBouncePenalty"
+					},
+					"mModifiedGameCalculation": "MonsterCap"
+				},
+				"EmpoweredLightningBonusMax": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mSubparts": [
+									{
+										"mDataValue": "LightningAPRatio"
+									},
+									{
+										"mStartValue": 0.015,
+										"mEndValue": 0.03
+									}
+								]
+							},
+							"mPart2": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mSubparts": [
+												{
+													"mDataValue": "Bounces"
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										},
+										"mPart2": {
+											"mDataValue": "RepeatBouncePenalty"
+										}
+									}
+								]
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"MonsterNukeMinRCalc": {
+					"mMultiplier": {
+						"mNumber": 8
+					},
+					"mModifiedGameCalculation": "{af259c48}"
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"Q2TotalOnHitHPDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxHPOnHitBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStartValue": 0.02,
+							"mEndValue": 0.04,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "Q2MaxHPADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"LightningDamageToMinionsMin": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 40,
+							"mEndValue": 160,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/udyr/hud/icons2d/udyr_w.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"ShieldDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"ShieldBase": [
+					30,
+					45,
+					60,
+					75,
+					90,
+					105,
+					120
+				],
+				"LifeOnHitHPRatio": [
+					0.012,
+					0.012,
+					0.012,
+					0.012,
+					0.012,
+					0.012,
+					0.012
+				],
+				"ShieldPercentHealth": [
+					0.017,
+					0.02,
+					0.023,
+					0.026,
+					0.029,
+					0.032,
+					0.035
+				],
+				"LifeSteal": [
+					0.14,
+					0.15,
+					0.16,
+					0.17,
+					0.18,
+					0.19,
+					0.2
+				],
+				"HealOnHitMinionPenalty": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"HealAttackMult": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"ShieldAPRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"OnHitHealAPRatio": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				],
+				"PercentOfShieldHealAmount": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "ShieldPercentHealth",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ShieldAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"LifeOnHit": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "LifeOnHitHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "OnHitHealAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{bbb9794b}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.1,
+							"mEndValue": 0.2,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{b038be53}": {
+					"mMultiplier": {},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mModifiedGameCalculation": "{bbb9794b}"
+				},
+				"HealPerSecond": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"Omnivamp": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.25,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"RecastShield": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 20,
+							"mEndValue": 150,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mDataValue": "ShieldBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.65,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mCoefficient": 0.08,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RecastHeal": {
+					"mMultiplier": {
+						"mDataValue": "{5a61cdc8}"
+					},
+					"mModifiedGameCalculation": "RecastShield"
+				},
+				"LifeOnHitAwakened": {
+					"mMultiplier": {
+						"mDataValue": "HealAttackMult"
+					},
+					"mModifiedGameCalculation": "LifeOnHit"
+				},
+				"{5fcd3b84}": {
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "LifeSteal"
+							},
+							"mPart2": {
+								"mDataValue": "HealAttackMult"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/udyr/hud/icons2d/udyr_e.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"ICD": [
+					6.4,
+					6,
+					5.6,
+					5.2,
+					4.8,
+					4.4,
+					4
+				],
+				"MoveSpeed": [
+					0.19,
+					0.25,
+					0.31,
+					0.37,
+					0.43,
+					0.49,
+					0.55
+				],
+				"MoveSpeedDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StunDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"EmpoweredBonusRange": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"UnstoppableDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"MoveSpeedBonus": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.3,
+							"mEndValue": 0.4,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{aedeb4cc}": {
+					"mFormulaParts": [
+						{
+							"mCeiling": 1,
+							"mFloor": 0.3,
+							"mSubparts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mPart1": {
+												"mNumber": -1
+											},
+											"mPart2": {
+												"buffName": "{c295b00e}",
+												"Coefficient": 2
+											}
+										}
+									]
+								}
+							],
+							"__type": "ClampSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/udyr/hud/icons2d/udyr_r.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"BuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"SlowPotency": [
+					0.12,
+					0.15,
+					0.18,
+					0.21,
+					0.24,
+					0.27,
+					0.3
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"StormBaseDamage": [
+					4,
+					20,
+					36,
+					52,
+					68,
+					84,
+					100
+				],
+				"StormAPRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				]
+			},
+			"spellCalculations": {
+				"PercentHPBlast": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.08,
+							"mEndValue": 0.14,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mDataValue": "StormAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"StormDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "StormBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"EmpoweredSlow": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.05,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"PulseDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 40,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{817f8a73}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": -400,
+							"mEndValue": -100,
+							"mScalePastDefaultMaxLevel": false,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"DamageToMinions_Scaling": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.5,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.1
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.1
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.1
+								},
+								{
+									"mLevel": 21,
+									"mAdditionalBonusAtThisLevel": 0.1
+								},
+								{
+									"mLevel": 26,
+									"mAdditionalBonusAtThisLevel": 0.1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{af259c48}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 35,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"MonsterCap": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 50,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,890 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"QMaxHealthTrueDamagePerStack": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"BaseExecutionThreshold": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ExecutionGrowthPerBreakpoint": [
+					0.026,
+					0.026,
+					0.026,
+					0.026,
+					0.026,
+					0.026,
+					0.026
+				]
+			},
+			"spellCalculations": {
+				"QPassiveScaling": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{c9372c6b}",
+							"mIconKey": "%i:asolStackIcon%",
+							"mDataValue": "QMaxHealthTrueDamagePerStack",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"EPassiveScalingExecute": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{c9372c6b}",
+							"mIconKey": "%i:asolStackIcon%",
+							"mDataValue": "ExecutionGrowthPerBreakpoint",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"AngularDegreesPerSec": [
+					180,
+					180,
+					180,
+					180,
+					180,
+					180,
+					180
+				],
+				"BeamWidth": [
+					140,
+					140,
+					140,
+					140,
+					140,
+					140,
+					140
+				],
+				"MaxChannelDuration": [
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					9999,
+					9999
+				],
+				"BurstAfter": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"ManaCostPerSecond": [
+					30,
+					35,
+					40,
+					45,
+					50,
+					55,
+					60
+				],
+				"RankDamagePerSecond": [
+					30,
+					45,
+					60,
+					75,
+					90,
+					105,
+					120
+				],
+				"APPerSecond": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				],
+				"RankBurstDamage": [
+					50,
+					60,
+					70,
+					80,
+					90,
+					100,
+					110
+				],
+				"BurstAPRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"BeamSegments": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"WProcCooldown": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"QMassStolen": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"DistancePerMass": [
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375
+				],
+				"QMaxHealthTrueDamagePerStack": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"MonsterDamageCap": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"AOEModifier": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"DamagePerSecond": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RankDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APPerSecond",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BurstDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RankBurstDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BurstAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BurstBonusTrueDamageToChamps": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{c9372c6b}",
+							"mIconKey": "%i:asolStackIcon%",
+							"mDataValue": "QMaxHealthTrueDamagePerStack",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"LevelBasedRangeScaling": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 750,
+							"mInitialBonusPerLevel": 10,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolw1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"TrueDamageBonus": [
+					0.07,
+					0.08,
+					0.09,
+					0.1,
+					0.11,
+					0.12,
+					0.13
+				],
+				"BaseMS": [
+					340,
+					340,
+					340,
+					340,
+					340,
+					340,
+					340
+				],
+				"BaseCruiseMS": [
+					340,
+					340,
+					340,
+					340,
+					340,
+					340,
+					340
+				],
+				"DistancePerMass": [
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5
+				],
+				"ResetWindow": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"TakedownCooldownMultiplier": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"TooltipTakedownCooldownMultiplier": [
+					90,
+					90,
+					90,
+					90,
+					90,
+					90,
+					90
+				],
+				"FakeCastTime": [
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375
+				],
+				"OverrideECastRange": [
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100
+				],
+				"CD": [
+					22,
+					22,
+					20.5,
+					19,
+					17.5,
+					16,
+					16
+				]
+			},
+			"spellCalculations": {
+				"DashSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseMS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 7,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{70212d39}": {
+					"mMultiplier": {
+						"mNumber": 0.5
+					},
+					"mModifiedGameCalculation": "{ffd78035}"
+				},
+				"{ffd78035}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseMS",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 7,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{e3ddb2ca}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.8,
+							"mEndValue": 1.2,
+							"mScalePastDefaultMaxLevel": false,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsole.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ChampionMassPerSecond": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"MinionMassDeath": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"LargeMinionCountBonus": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"LargeMonsterCountBonus": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"ChampionCountBonus": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"EpicMonsterCountBonus": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"StartingRadius": [
+					275,
+					275,
+					275,
+					275,
+					275,
+					275,
+					275
+				],
+				"StartingInnerRadius": [
+					120,
+					120,
+					120,
+					120,
+					120,
+					120,
+					120
+				],
+				"GrowthBreakPoint": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"StartingGravity": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"NonChampGravity": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"Duration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BaseDamagePerSecond": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"DamageperSecondAPRatio": [
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12
+				],
+				"BaseExecutionThreshold": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ExecutionGrowthPerBreakpoint": [
+					0.026,
+					0.026,
+					0.026,
+					0.026,
+					0.026,
+					0.026,
+					0.026
+				],
+				"OuterRadiusAreaPerStack": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"InnerRadiusAreaPerStack": [
+					180,
+					180,
+					180,
+					180,
+					180,
+					180,
+					180
+				],
+				"PI": [
+					3.142,
+					3.142,
+					3.142,
+					3.142,
+					3.142,
+					3.142,
+					3.142
+				],
+				"InversePI": [
+					0.318,
+					0.318,
+					0.318,
+					0.318,
+					0.318,
+					0.318,
+					0.318
+				]
+			},
+			"spellCalculations": {
+				"DamagePerSecond": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DamageperSecondAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{b0a79c98}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "StartingRadius",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mBuffName": "{c9372c6b}",
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				},
+				"CurrentExecutionThreshold": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseExecutionThreshold",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mBuffName": "{c9372c6b}",
+							"mIconKey": "%i:asolStackIcon%",
+							"mDataValue": "ExecutionGrowthPerBreakpoint",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				},
+				"{57c521f0}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "StartingGravity",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mBuffName": "{c9372c6b}",
+							"mDataValue": "GravityIncPerBreakpoint",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{7741d788}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 120,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 8,
+									"mAdditionalBonusAtThisLevel": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"LevelBasedRangeScaling": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 750,
+							"mInitialBonusPerLevel": 10,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"{5dfac189}": {
+					"ResultModifier": 1,
+					"mMultiplier": {
+						"mDataValue": "InversePI"
+					},
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "StartingRadius"
+							},
+							"mPart2": {
+								"mPart1": {
+									"mDataValue": "StartingRadius"
+								},
+								"mPart2": {
+									"mDataValue": "PI"
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						},
+						{
+							"mBuffName": "{c9372c6b}",
+							"mIconKey": "%i:asolStackIcon%",
+							"mDataValue": "OuterRadiusAreaPerStack",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{94f76880}": {
+					"mMultiplier": {
+						"mNumber": 0.2
+					},
+					"mModifiedGameCalculation": "{5dfac189}"
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolr1.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"CalamityStacks": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"StartingRadius": [
+					275,
+					275,
+					275,
+					275,
+					275,
+					275,
+					275
+				],
+				"SkiesDescendStartingRadius": [
+					550,
+					550,
+					550,
+					550,
+					550,
+					550,
+					550
+				],
+				"CalamitySizeBonus": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MassStolen": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"APRatio": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"StunDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"R2DamageRatio": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"ShockwaveDamageRatio": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				],
+				"ShockwaveSlow": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"AreaPerPassiveStack": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"PI": [
+					3.142,
+					3.142,
+					3.142,
+					3.142,
+					3.142,
+					3.142,
+					3.142
+				],
+				"InversePI": [
+					0.318,
+					0.318,
+					0.318,
+					0.318,
+					0.318,
+					0.318,
+					0.318
+				]
+			},
+			"spellCalculations": {
+				"MaxDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"R2Damage": {
+					"mMultiplier": {
+						"mDataValue": "R2DamageRatio"
+					},
+					"mModifiedGameCalculation": "MaxDamageTooltip"
+				},
+				"ShockwaveDamage": {
+					"mMultiplier": {
+						"mDataValue": "ShockwaveDamageRatio"
+					},
+					"mModifiedGameCalculation": "MaxDamageTooltip"
+				},
+				"{1d7ce9ef}": {
+					"ResultModifier": 1,
+					"mMultiplier": {
+						"mDataValue": "InversePI"
+					},
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "StartingRadius"
+							},
+							"mPart2": {
+								"mPart1": {
+									"mDataValue": "StartingRadius"
+								},
+								"mPart2": {
+									"mDataValue": "PI"
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						},
+						{
+							"mBuffName": "{c9372c6b}",
+							"mIconKey": "%i:asolStackIcon%",
+							"mDataValue": "AreaPerPassiveStack",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

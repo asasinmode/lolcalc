@@ -30,23 +30,293 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PassiveDuration": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MonsterMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BaseDamage": [
+					21,
+					40,
+					59,
+					78,
+					97,
+					116,
+					135
+				],
+				"APRatio": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				]
+			},
+			"spellCalculations": {
+				"QDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"QSingleTargetDamage": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "QDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"DamagePerSecond": [
+					10,
+					30,
+					50,
+					70,
+					90,
+					110,
+					130
+				],
+				"APRatioPerSecond": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"ManaRestoreOnKill": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				]
+			},
+			"spellCalculations": {
+				"TotalDPS": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatioPerSecond",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{57456bbc}": {
+					"mMultiplier": {
+						"mNumber": 0.25
+					},
+					"mModifiedGameCalculation": "TotalDPS"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					200,
+					350,
+					500,
+					650,
+					800,
+					950
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,355 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/quinn/hud/icons2d/quinn_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"RevealDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"ModesPassiveDamageMultiplier": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"ADRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"BonusDamage": {
+					"mMultiplier": {
+						"mDataValue": "ModesPassiveDamageMultiplier"
+					},
+					"mFormulaParts": [
+						{
+							"mStartValue": 15,
+							"mEndValue": 120,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/quinn/hud/icons2d/quinn_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					65,
+					100,
+					135,
+					170,
+					205,
+					240
+				],
+				"ADRatio": [
+					0.75,
+					0.8,
+					0.85,
+					0.9,
+					0.95,
+					1,
+					1.05
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/quinn/hud/icons2d/quinn_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"AttackSpeedBonus": [
+					0.15,
+					0.28,
+					0.41,
+					0.54,
+					0.67,
+					0.8,
+					0.93
+				],
+				"CherryBonusHaste": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/quinn/hud/icons2d/quinn_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 2,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/quinn/hud/icons2d/quinn_r1.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"MovementSpeedMod": [
+					0.4,
+					0.7,
+					1,
+					1.3,
+					1.6,
+					1.9,
+					2.2
+				],
+				"SlowDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"HarrierCooldown": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"RHarrierMarkDuration": [
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5
+				],
+				"ADRatio": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"BaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,521 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/bard/hud/icons2d/bard_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"TooltipMSPerStack": [
+					24,
+					24,
+					24,
+					24,
+					24,
+					24,
+					24
+				],
+				"TooltipMSMax": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"TooltipManaRestore": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"BaseMeepSpawnCD": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"BaseMeepDamage": [
+					35,
+					35,
+					35,
+					35,
+					35,
+					35,
+					35
+				],
+				"TooltipChimeDamageCheckpoint": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"DamagePerCheckpoint": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"ChimesPerUpgrade": [
+					0,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"MeepAPRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"MaxSpeedStacks": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"SpeedStackDuration": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				]
+			},
+			"spellCalculations": {
+				"MeepDamageNoChime": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseMeepDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MeepAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ChimesForSlowUpgrade": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "ChimesPerUpgrade",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ChimesForSplashDamageUpgrade": {
+					"mMultiplier": {
+						"mNumber": 3
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "ChimesPerUpgrade",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ChimesForSplashAreaUpgrade": {
+					"mMultiplier": {
+						"mNumber": 7
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "ChimesPerUpgrade",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						0,
+						0,
+						0,
+						0,
+						0
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/bard/hud/icons2d/bard_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"SlowAmountPercentage": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"SlowDuration": [
+					0.8,
+					1,
+					1.2,
+					1.4,
+					1.6,
+					1.8,
+					2
+				],
+				"StunDuration": [
+					0.8,
+					1,
+					1.2,
+					1.4,
+					1.6,
+					1.8,
+					2
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/bard/hud/icons2d/bard_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ChargeupTime": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"MaxPacks": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"HealingMult": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Ammo_Limit": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"Ammo_Cooldown": [
+					18,
+					18,
+					18,
+					18,
+					18,
+					18,
+					18
+				],
+				"MoveSpeed_Duration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MoveSpeed_Base": [
+					0.175,
+					0.2,
+					0.225,
+					0.25,
+					0.275,
+					0.3,
+					0.325
+				],
+				"MoveSpeed_Ratio": [
+					0.001,
+					0.001,
+					0.001,
+					0.001,
+					0.001,
+					0.001,
+					0.001
+				],
+				"APRatio_Min": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"APRatio_Max": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"MinimumHeal": [
+					0,
+					25,
+					50,
+					75,
+					100,
+					125,
+					150
+				],
+				"MaximumHeal": [
+					12.5,
+					50,
+					87.5,
+					125,
+					162.5,
+					200,
+					237.5
+				]
+			},
+			"spellCalculations": {
+				"InitialHeal": {
+					"mMultiplier": {
+						"mDataValue": "HealingMult"
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinimumHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{0b6da09c}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxHeal": {
+					"mMultiplier": {
+						"mDataValue": "HealingMult"
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaximumHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{f959fc8e}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"Calc_MoveSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeed_Base",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "MoveSpeed_Ratio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/bard/hud/icons2d/bard_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"FriendlyMovementBonusPercentage": [
+					33,
+					33,
+					33,
+					33,
+					33,
+					33,
+					33
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/bard/hud/icons2d/bard_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RStasisDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
+			}
 		}
 	}
 }

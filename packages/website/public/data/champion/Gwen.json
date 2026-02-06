@@ -30,23 +30,588 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/gwen/hud/icons2d/gwen_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"ExecuteThreshold": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"HealingPercent": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 0.5,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{540bce84}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.006,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 2
+				},
+				"HealCap": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 25,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.065,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PercentHealth1000Cuts": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mModifiedGameCalculation": "{540bce84}"
+				},
+				"MonsterDamageCap": {
+					"mFormulaParts": [
+						{
+							"mNumber": 3,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PassiveMaxQTooltip": {
+					"mMultiplier": {
+						"mNumber": 0.06
+					},
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "{540bce84}"
+				},
+				"PassiveMaxRTooltip": {
+					"mMultiplier": {
+						"mNumber": 0.09
+					},
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "{540bce84}"
+				},
+				"{4197830d}": {
+					"mMultiplier": {
+						"mNumber": 0.03
+					},
+					"mModifiedGameCalculation": "{540bce84}"
+				},
+				"{4097817a}": {
+					"mMultiplier": {
+						"mNumber": 0.05
+					},
+					"mModifiedGameCalculation": "{540bce84}"
+				},
+				"{5bade13c}": {
+					"mFormulaParts": [
+						{
+							"mBuffName": "{9d0c98ec}",
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ExecuteDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 8,
+							"mEndValue": 30,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/gwen/hud/icons2d/gwen_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"InitialArcLength": [
+					475,
+					475,
+					475,
+					475,
+					475,
+					475,
+					475
+				],
+				"SwipeDamageBase": [
+					35,
+					60,
+					85,
+					110,
+					135,
+					160,
+					185
+				],
+				"MiniDamageRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"APRatio": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"BuffDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"MiniSwipeBaseDamage": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"TrueDamageConversion": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ExecuteBonus": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"MinionMod": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"ExecuteThreshold": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"MiniSwipeAPRatio": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				]
+			},
+			"spellCalculations": {
+				"FinalSwipeDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SwipeDamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MiniSwipeDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MiniSwipeBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{5f3b2d80}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mSubparts": [
+										{
+											"mDataValue": "SwipeDamageBase"
+										},
+										{
+											"mDataValue": "APRatio"
+										}
+									]
+								},
+								{
+									"mPart1": {
+										"mDataValue": "{5f3b2d80}"
+									},
+									"mPart2": {
+										"mNumber": 5
+									}
+								},
+								{
+									"mPart1": {
+										"mDataValue": "MiniSwipeBaseDamage"
+									},
+									"mPart2": {
+										"mNumber": 5
+									}
+								}
+							],
+							"__type": "SumOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/gwen/hud/icons2d/gwen_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ZoneDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"ZoneRadius": [
+					370,
+					370,
+					370,
+					370,
+					370,
+					370,
+					370
+				],
+				"ZonePullSpeed": [
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000
+				],
+				"PullOffset": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"ZoneWallOffset": [
+					-100,
+					-100,
+					-100,
+					-100,
+					-100,
+					-100,
+					-100
+				],
+				"NewDashCooldown": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"RecastDelay": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"BaseResists": [
+					20,
+					22,
+					24,
+					26,
+					28,
+					30,
+					32
+				],
+				"DashTargetForgiveness": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				]
+			},
+			"spellCalculations": {
+				"TotalResists": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseResists",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.07,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/gwen/hud/icons2d/gwen_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"DashRange": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"DashSpeed": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"WallCheatDistance": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"BuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"BaseAttackSpeed": [
+					5,
+					20,
+					35,
+					50,
+					65,
+					80,
+					95
+				],
+				"CDRefund": [
+					0.15,
+					0.25,
+					0.35,
+					0.45,
+					0.55,
+					0.65,
+					0.75
+				],
+				"BonusAttackRange": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"BaseDamage": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				]
+			},
+			"spellCalculations": {
+				"BonusAttackSpeed": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseAttackSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/gwen/hud/icons2d/gwen_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"DebuffDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"SlowAmount": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"BaseDamage": [
+					5,
+					35,
+					65,
+					95,
+					125,
+					155,
+					185
+				],
+				"InitialSlow": [
+					-0.3,
+					-0.4,
+					-0.5,
+					-0.6,
+					-0.7,
+					-0.8,
+					-0.9
+				],
+				"SubsequentSlow": [
+					-0.1,
+					-0.15,
+					-0.2,
+					-0.25,
+					-0.3,
+					-0.35,
+					-0.4
+				],
+				"LockoutTime": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mMultiplier": {
+						"mNumber": 9
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				},
+				"TotalDamage3": {
+					"mMultiplier": {
+						"mNumber": 3
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				},
+				"TotalDamage5": {
+					"mMultiplier": {
+						"mNumber": 5
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			}
 		}
 	}
 }

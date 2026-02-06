@@ -30,23 +30,368 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/fiora/hud/icons2d/fiora_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PassiveDamageADRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"PassiveDamageBase": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"MovementSpeedDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"PassiveHealAmount": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 35,
+							"mEndValue": 100,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"PassiveDamageTotal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PassiveDamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "PassiveDamageADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"RDamageTotal": {
+					"mMultiplier": {
+						"mNumber": 4
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mModifiedGameCalculation": "PassiveDamageTotal"
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/fiora/hud/icons2d/fiora_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					60,
+					70,
+					80,
+					90,
+					100,
+					110,
+					120
+				],
+				"bADRatio": [
+					0.85,
+					0.9,
+					0.95,
+					1,
+					1.05,
+					1.1,
+					1.15
+				],
+				"CDRefundPercent": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mSubpart": {
+								"mDataValue": "BADRatio"
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/fiora/hud/icons2d/fiora_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					70,
+					110,
+					150,
+					190,
+					230,
+					270,
+					310
+				],
+				"ParryDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"CCDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MSSlowPercent": [
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5
+				],
+				"SmallBlockPercent": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"BigBlockPercent": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"AttackSlowPercent": [
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25
+				]
+			},
+			"spellCalculations": {
+				"StabDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/fiora/hud/icons2d/fiora_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BuffDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"SlowPercent": [
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3
+				],
+				"ASPercent": [
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8,
+					0.9,
+					1
+				],
+				"AttackOnePercentTAD": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"AttackTwoPercentTAD": [
+					1.5,
+					1.6,
+					1.7,
+					1.8,
+					1.9,
+					2,
+					2.1
+				]
+			}
 		},
 		"r": {
 			"image": "assets/characters/fiora/hud/icons2d/fiora_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"MarkDuration": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"PassiveAS": [
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8
+				],
+				"PercentMS": [
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8
+				],
+				"MSRingRadius": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"HealDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"HealPerSecond": [
+					50,
+					75,
+					100,
+					125,
+					150,
+					175,
+					200
+				],
+				"HealRingRadius": [
+					550,
+					550,
+					550,
+					550,
+					550,
+					550,
+					550
+				],
+				"HealDurationExtension": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Ratio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
+			},
+			"spellCalculations": {
+				"HealPerSecondCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "HealPerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

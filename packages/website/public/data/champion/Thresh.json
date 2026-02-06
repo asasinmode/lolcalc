@@ -30,23 +30,523 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"StatValuePerSoul": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"SoulsToGainOnPickUp": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"CurrentSoulBonus": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mBuffName": "{5fbfbf13}",
+							"mIconKey": "%i:threshScalingIcon%",
+							"mDataValue": "StatValuePerSoul",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"APRatio": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				],
+				"TauntLength": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"SlowPercent": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"HitBonusCooldown": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ShieldPerSoul": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"LanternDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"BaseShieldValue": [
+					30,
+					50,
+					70,
+					90,
+					110,
+					130,
+					150
+				],
+				"ShieldDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShieldValue",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mBuffName": "{5fbfbf13}",
+							"mIconKey": "%i:threshScalingIcon%",
+							"mDataValue": "ShieldPerSoul",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"PassiveADRatioTT": [
+					0.6,
+					0.9,
+					1.2,
+					1.5,
+					1.8,
+					2.1,
+					2.4
+				],
+				"PassiveADRatio": [
+					60,
+					90,
+					120,
+					150,
+					180,
+					210,
+					240
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"PAttackDamageMin": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mBuffName": "{5fbfbf13}",
+							"mIconKey": "%i:threshScalingIcon%",
+							"mCoefficient": 1.7,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PAttackDamageMax": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mBuffName": "{5fbfbf13}",
+							"mIconKey": "%i:threshScalingIcon%",
+							"mCoefficient": 1.7,
+							"__type": "BuffCounterByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "PassiveADRatioTT",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"ThreshRCageRadius": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"ThreshRWallThickness": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"ThreshRWallLength": [
+					470.228,
+					470.228,
+					470.228,
+					470.228,
+					470.228,
+					470.228,
+					470.228
+				],
+				"APRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						0
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

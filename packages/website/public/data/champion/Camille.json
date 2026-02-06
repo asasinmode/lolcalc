@@ -30,23 +30,479 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/camille/hud/icons2d/camille_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MaxHPCoefficient": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"ShieldDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"PassiveCooldown": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 18,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": -4
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": -4
+								},
+								{
+									"mLevel": 19,
+									"mAdditionalBonusAtThisLevel": -4
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"ShieldAmount": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "MaxHPCoefficient",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/camille/hud/icons2d/camille_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"QRampUpTime": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"BonusAARange": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"TADRatio": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"MSBonus": [
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5
+				],
+				"MSDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"QEmpoweredAmp": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"Q2Duration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"QTotalRecastTime": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				]
+			},
+			"spellCalculations": {
+				"DamageConversionPercentage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.4,
+							"mInitialBonusPerLevel": 0.04,
+							"mBreakpoints": [
+								{
+									"mLevel": 17
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"BonusDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "tADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"EmpoweredBonusDamage": {
+					"mMultiplier": {
+						"mDataValue": "QEmpoweredAmp"
+					},
+					"mModifiedGameCalculation": "BonusDamage"
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/camille/hud/icons2d/camille_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					60,
+					85,
+					110,
+					135,
+					160,
+					185
+				],
+				"BADRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"ChargeDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"SlowPercentage": [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				],
+				"OuterConeMaxHPDamage": [
+					0.055,
+					0.06,
+					0.065,
+					0.07,
+					0.075,
+					0.08,
+					0.085
+				],
+				"ADRequiredFor1PercentDamage": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"ADRequiredTooltipOnly": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"MonsterDamageReduction": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"OuterConeHealingRatio": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"BlastLength": [
+					650,
+					650,
+					650,
+					650,
+					650,
+					650,
+					650
+				],
+				"ConeAngle": [
+					35,
+					35,
+					35,
+					35,
+					35,
+					35,
+					35
+				]
+			},
+			"spellCalculations": {
+				"OuterEdgeTooltip": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "OuterConeMaxHPDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRequiredTooltipOnly",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"BaseDamageTotal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MonsterHealthDamageCap": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 300,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/camille/hud/icons2d/camille_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"EMinionMonsterGhostDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"KnockupDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"ASBuff": [
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55,
+					0.6,
+					0.65
+				],
+				"BaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"DashSpeed": [
+					1050,
+					1050,
+					1050,
+					1050,
+					1050,
+					1050,
+					1050
+				],
+				"ASDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"WallHangDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"E2LongDashRange": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"E2ShortDashRange": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"ECollisionRange": [
+					130,
+					130,
+					130,
+					130,
+					130,
+					130,
+					130
+				],
+				"BADRatio": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/camille/hud/icons2d/camille_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RPercentCurrentHPDamage": [
+					2,
+					4,
+					6,
+					8,
+					10,
+					12,
+					14
+				],
+				"RDuration": [
+					1.75,
+					2.5,
+					3.25,
+					4,
+					4.75,
+					5.5,
+					6.25
+				],
+				"RCircleRadius": [
+					425,
+					425,
+					425,
+					425,
+					425,
+					425,
+					425
+				]
+			}
 		}
 	}
 }

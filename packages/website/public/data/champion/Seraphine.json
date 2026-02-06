@@ -30,23 +30,467 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/seraphine/hud/icons2d/seraphine_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"EchoCastDelay": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"AutoAPRatio": [
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075
+				],
+				"MaxNotes": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"AllyNoteDamagePercent": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"NoteDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"BonusAARange": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"DelayBetweenNoteCasts": [
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075
+				],
+				"NoteRadius": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"DelayBetweenNoteCastsDecayRate": [
+					0.95,
+					0.95,
+					0.95,
+					0.95,
+					0.95,
+					0.95,
+					0.95
+				],
+				"MinionDamageMultiplier": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"NoteAPRatio": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				]
+			},
+			"spellCalculations": {
+				"AutoDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStartValue": 4,
+							"mEndValue": 25,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mDataValue": "NoteAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/seraphine/hud/icons2d/seraphine_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					60,
+					85,
+					110,
+					135,
+					160,
+					185
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ExecuteThreshold": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"DamageAmp": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				]
+			},
+			"spellCalculations": {
+				"ExplosionDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalEmpoweredDamage": {
+					"mMultiplier": {
+						"mNumber": 1.75
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "ExplosionDamage"
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/seraphine/hud/icons2d/seraphine_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ShieldDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"ShieldStrength": [
+					40,
+					60,
+					80,
+					100,
+					120,
+					140,
+					160
+				],
+				"ShieldAPRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"WMSBonus": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"WMSBonusAPRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				],
+				"HasteValueForAllies": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"WMissingHPBase": [
+					6,
+					8,
+					10,
+					12,
+					14,
+					16,
+					18
+				],
+				"WHealSplitDelay": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"ShieldAmpForSeraphine": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalShieldStrength": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldStrength",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ShieldAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"WMSBonusTotal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "WMSBonus",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "WMSBonusAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"WMissingHPHeal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "WMissingHPBase",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				},
+				"HasteValueAllies": {
+					"mMultiplier": {
+						"mDataValue": "HasteValueForAllies"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "WMSBonusTotal"
+				},
+				"ShieldValueSeraphine": {
+					"mMultiplier": {
+						"mDataValue": "ShieldAmpForSeraphine"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "TotalShieldStrength"
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/seraphine/hud/icons2d/seraphine_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					70,
+					100,
+					130,
+					160,
+					190,
+					220
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"SlowValue": [
+					99,
+					99,
+					99,
+					99,
+					99,
+					99,
+					99
+				],
+				"SlowDuration": [
+					1,
+					1.1,
+					1.2,
+					1.3,
+					1.4,
+					1.5,
+					1.6
+				],
+				"MinionDamageMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"FinalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/seraphine/hud/icons2d/seraphine_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RChannelDuration": [
+					1,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25,
+					2.5
+				],
+				"R1BaseDamage": [
+					100,
+					150,
+					200,
+					250,
+					300,
+					350,
+					400
+				],
+				"R1APRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"RRange": [
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200
+				],
+				"RMinSlow": [
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4
+				],
+				"RMaxSlow": [
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99,
+					-0.99
+				]
+			},
+			"spellCalculations": {
+				"R1TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "R1BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "R1APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

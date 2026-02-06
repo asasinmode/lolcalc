@@ -30,23 +30,477 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PerTargetCD": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				]
+			},
+			"spellCalculations": {
+				"BonusDamage": {
+					"mFormulaParts": [
+						{
+							"mValues": [
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{}
+							],
+							"__type": "ByCharLevelFormulaCalculationPart"
+						}
+					]
+				},
+				"TotalDamageTooltip": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mValues": [
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{}
+							],
+							"__type": "ByCharLevelFormulaCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RootDuration": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.75,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 21,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 26,
+									"mAdditionalBonusAtThisLevel": 0.25
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mPrecision": 2
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_anchorchain.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					85,
+					130,
+					175,
+					220,
+					265,
+					310
+				],
+				"TerrainCDR": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"TerrainMana": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"QDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_wrath.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ShieldBase": [
+					40,
+					50,
+					60,
+					70,
+					80,
+					90,
+					100
+				],
+				"ShieldHealthRatio": [
+					0.07,
+					0.08,
+					0.09,
+					0.1,
+					0.11,
+					0.12,
+					0.13
+				],
+				"ShieldDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"DotDamageBase": [
+					20,
+					30,
+					40,
+					50,
+					60,
+					70,
+					80
+				],
+				"DotDamageAPRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"DotDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DotDamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DotDamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ShieldCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "ShieldHealthRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_rippleeffect.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"DamageBase": [
+					20,
+					55,
+					90,
+					125,
+					160,
+					195,
+					230
+				],
+				"SlowPercent": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"SlowDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"MultiHitReduction": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"DamageMonsterMod": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"DamageAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ExtraWavePenalty": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"DamageRadius": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				],
+				"MonsterBonusDamage": [
+					85,
+					125,
+					165,
+					205,
+					245,
+					285,
+					325
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MonsterBonusCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterBonusDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_grandline.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"PrimaryDamage": [
+					25,
+					150,
+					275,
+					400,
+					525,
+					650,
+					775
+				],
+				"SecondaryDamage": [
+					75,
+					125,
+					175,
+					225,
+					275,
+					325,
+					375
+				],
+				"StunDuration": [
+					0.5,
+					1,
+					1.5,
+					2,
+					2.5,
+					3,
+					3.5
+				]
+			},
+			"spellCalculations": {
+				"PrimaryTargetDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PrimaryDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SecondaryTargetDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SecondaryDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

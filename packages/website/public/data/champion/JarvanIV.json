@@ -30,23 +30,392 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MaximumCadenceDamage": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"MinimumCadenceDamage": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"TooltipCurrentHealthDamage": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				]
+			},
+			"spellCalculations": {
+				"TooltipCooldown": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 6,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": -1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					90,
+					130,
+					170,
+					210,
+					250,
+					290
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.45,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"BaseShield": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusShield": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.013,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanive.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"EDashSpeed": [
+					1400,
+					1400,
+					1400,
+					1400,
+					1400,
+					1400,
+					1400
+				],
+				"EBehindJarvanCheck": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"EKnockUpAoE": [
+					0,
+					180,
+					180,
+					180,
+					180,
+					180,
+					180
+				],
+				"PermanentAttackSpeed": [
+					0.175,
+					0.2,
+					0.225,
+					0.25,
+					0.275,
+					0.3,
+					0.325
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 2,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					75,
+					200,
+					325,
+					450,
+					575,
+					700,
+					825
+				],
+				"WallDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

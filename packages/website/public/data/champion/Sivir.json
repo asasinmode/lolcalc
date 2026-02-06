@@ -30,23 +30,472 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"HasteDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"FlatMS": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 55,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 5
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 5
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 5
+								},
+								{
+									"mLevel": 18,
+									"mAdditionalBonusAtThisLevel": 5
+								},
+								{
+									"mLevel": 24,
+									"mAdditionalBonusAtThisLevel": 5
+								},
+								{
+									"mLevel": 30,
+									"mAdditionalBonusAtThisLevel": 5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					60,
+					85,
+					110,
+					135,
+					160,
+					185
+				],
+				"ADRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"FallOffRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"FallOffMinimum": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"QAttackSpeedCastReductionPercent": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"QBaseCastTime": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"QAttackSpeedCastReductionMax": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"CritRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mPart1": {
+									"mStat": 8,
+									"mDataValue": "CritRatio"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mStat": 9,
+											"mCoefficient": 1
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								}
+							}
+						]
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PreCritDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"CritScaling": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 8,
+							"mDataValue": "CritRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BounceADRatio": [
+					0.375,
+					0.4,
+					0.425,
+					0.45,
+					0.475,
+					0.5,
+					0.525
+				],
+				"BounceAttacks": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"BuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MaxBounces": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"RicochetAttackSpeed": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"MinionDamageMod": [
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65
+				]
+			},
+			"spellCalculations": {
+				"BounceDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "BounceADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"FirstTargetDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalMaxDamage": {
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 1
+								},
+								{
+									"mPart1": {
+										"mDataValue": "MaxBounces"
+									},
+									"mPart2": {
+										"mStat": 2,
+										"mDataValue": "BounceADRatio"
+									}
+								}
+							],
+							"__type": "SumOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"HealRatio": [
+					0.55,
+					0.6,
+					0.65,
+					0.7,
+					0.75,
+					0.8,
+					0.85
+				]
+			},
+			"spellCalculations": {
+				"TotalHeal": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "HealRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"HuntAttackSpeed": [
+					0.04,
+					0.05,
+					0.06,
+					0.07,
+					0.08,
+					0.09,
+					0.1
+				],
+				"MaxMS": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"MinMS": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"MaxMSDuration": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7
+				],
+				"UltDuration": [
+					6,
+					8,
+					10,
+					12,
+					14,
+					16,
+					18
+				],
+				"AuraRange": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"BuffExtension": [
+					6,
+					8,
+					10,
+					12,
+					14,
+					16,
+					18
+				],
+				"DamagedMarkerDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"MaxDuration": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 4,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mEffectIndex": 6,
+							"__type": "EffectValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

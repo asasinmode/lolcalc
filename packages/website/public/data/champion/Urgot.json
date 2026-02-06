@@ -30,23 +30,646 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"LegWarningTime": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
+			},
+			"spellCalculations": {
+				"PerLegCD": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -10
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": -10
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": -2.5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				},
+				"ADDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mLevel1Value": 0.4,
+								"mBreakpoints": [
+									{
+										"mLevel": 6,
+										"mAdditionalBonusAtThisLevel": 0.12
+									},
+									{
+										"mLevel": 9,
+										"mAdditionalBonusAtThisLevel": 0.12
+									},
+									{
+										"mLevel": 11,
+										"mAdditionalBonusAtThisLevel": 0.12
+									},
+									{
+										"mLevel": 13,
+										"mAdditionalBonusAtThisLevel": 0.12
+									},
+									{
+										"mLevel": 15,
+										"mAdditionalBonusAtThisLevel": 0.12
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"PercentHPRatio": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.02,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.01
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 0.01
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 0.01
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": 0.01
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MonsterCap": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 360,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"{91ffe3d8}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 650,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 31,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"CastRange": {
+					"mFormulaParts": [
+						{
+							"mNumber": 700,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 31,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/urgot/hud/icons2d/urgot_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SlowDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"SlowAmount": [
+					0.4,
+					0.45,
+					0.5,
+					0.55,
+					0.6,
+					0.65,
+					0.7
+				],
+				"BaseDamage": [
+					-20,
+					25,
+					70,
+					115,
+					160,
+					205,
+					250
+				],
+				"ExplosionDelayPostMissile": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"DelayOnMissileLaunch": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"WHalterDuration": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"AoERadius": [
+					210,
+					210,
+					210,
+					210,
+					210,
+					210,
+					210
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/urgot/hud/icons2d/urgot_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ADRatioTT": [
+					0.165,
+					0.2,
+					0.235,
+					0.27,
+					0.305,
+					0.34,
+					0.375
+				],
+				"OnHitDamageReduction": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"WAttacksPerSecond": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"BaseDamage": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"MinionMinimumDamage": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				]
+			},
+			"spellCalculations": {
+				"DamagePerShot": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "ADRatioTT",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RangeCheck": {
+					"mFormulaParts": [
+						{
+							"mNumber": 450,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 31,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/urgot/hud/icons2d/urgot_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"EShieldDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"EShieldBaseHealth": [
+					35,
+					55,
+					75,
+					95,
+					115,
+					135,
+					155
+				],
+				"EShieldbADRatio": [
+					1.5,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35
+				],
+				"EBaseDamage": [
+					60,
+					90,
+					120,
+					150,
+					180,
+					210,
+					240
+				],
+				"EShieldBonusHealthRatio": [
+					0,
+					0.135,
+					0.135,
+					0.135,
+					0.135,
+					0.135,
+					0.135
+				],
+				"StunDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"BaseDashSpeed": [
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200
+				],
+				"MinimumDashRange": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"ThrowDistance": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"WHalterDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"ETotalShieldHealth": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EShieldBaseHealth",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "EShieldbADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "EShieldBonusHealthRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"EDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/urgot/hud/icons2d/urgot_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RBaseDamage": [
+					100,
+					100,
+					225,
+					350,
+					475,
+					600,
+					725
+				],
+				"RBonusADRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"RMoveSpeedMod": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"RSlowDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"RSlowMultiplier": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RFearDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"RHealthThreshold": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"RChannelTimeReel": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RFearRadius": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				]
+			},
+			"spellCalculations": {
+				"RCalculatedDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "RBonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

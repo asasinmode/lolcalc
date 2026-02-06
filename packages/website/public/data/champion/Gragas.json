@@ -30,23 +30,456 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"ArenaCooldownMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"HealRatio": [
+					0.055,
+					0.055,
+					0.055,
+					0.055,
+					0.055,
+					0.055,
+					0.055
+				]
+			},
+			"spellCalculations": {
+				"HealAmount": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "HealRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"HealCooldown": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 12,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -2
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -2
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": -2
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				]
+			},
+			"spellCalculations": {
+				"MinDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mMultiplier": {
+						"mNumber": 1.5
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "MinDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"AttackRangeBuff": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"MaxHPPercentDamage": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"BaseDamageReduction": [
+					8,
+					10,
+					12,
+					14,
+					16,
+					18,
+					20
+				],
+				"DamageReductionAP": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				],
+				"BaseDamage": [
+					-10,
+					20,
+					50,
+					80,
+					110,
+					140,
+					170
+				],
+				"BaseDamageAP": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"MonsterDamageCap": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"DefenseDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"AttackDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"TurretDamageMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"DamageReduction": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageReduction",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DamageReductionAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BaseDamageAP",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					80,
+					125,
+					170,
+					215,
+					260,
+					305
+				],
+				"APRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"CooldownRefund": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"StunDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"DashSpeed": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"HitboxArea": [
+					180,
+					180,
+					180,
+					180,
+					180,
+					180,
+					180
+				],
+				"ForwardHitbox": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					100,
+					200,
+					300,
+					400,
+					500,
+					600,
+					700
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"KnockbackDistance": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				]
+			},
+			"spellCalculations": {
+				"DamageDone": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

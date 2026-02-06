@@ -30,23 +30,512 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"YasuoCritToAD": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"CritChanceMultiplier": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"CritDamageMod": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				]
+			},
+			"spellCalculations": {
+				"ShieldValue": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 125,
+							"mEndValue": 600,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"{74ce5438}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 55,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 19,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 25,
+									"mAdditionalBonusAtThisLevel": -5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"CurrentCritDamage": {
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStat": 9,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					-5,
+					20,
+					45,
+					70,
+					95,
+					120,
+					145
+				],
+				"StabRange": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"TornadoRange": [
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100
+				],
+				"Cooldown": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StabWidth": [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				],
+				"SpinWidth": [
+					260,
+					260,
+					260,
+					260,
+					260,
+					260,
+					260
+				],
+				"GatheringStormDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"KnockUpDurationTOOLTIPONLY": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"ADRatio": [
+					1.05,
+					1.05,
+					1.05,
+					1.05,
+					1.05,
+					1.05,
+					1.05
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamageCrit": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mStat": 9,
+								"mDataValue": "ADRatio"
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"WallLife": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"Width": [
+					250,
+					320,
+					390,
+					460,
+					530,
+					600,
+					670
+				],
+				"TravelRange": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"BubbleRadius": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"Thickness": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MaxStacks": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StackDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BaseDamage": [
+					55,
+					70,
+					85,
+					100,
+					115,
+					130,
+					145
+				],
+				"APRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"ADRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusDamagePerStack": {
+					"mMultiplier": {
+						"mNumber": 0.25
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RBaseDamage": [
+					50,
+					200,
+					350,
+					500,
+					650,
+					800,
+					950
+				],
+				"RPercentArmorPen": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"RBuffDuration": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"RKnockupDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RRadius": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"RCastSearchRadius": [
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

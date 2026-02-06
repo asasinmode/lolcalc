@@ -30,23 +30,442 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"NumberOfBolts": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 39,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"CombinedDamage": {
+					"mMultiplier": {
+						"mDataValue": "NumberOfBolts"
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/lulu/hud/icons2d/lulu_glitterbolt.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MinionMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"DoubleHitBonus": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"BaseDamage": [
+					25,
+					60,
+					95,
+					130,
+					165,
+					200,
+					235
+				],
+				"SlowAmount": [
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"SlowDecayTicks": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusMissileDamage": {
+					"mMultiplier": {
+						"mDataValue": "DoubleHitBonus"
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/lulu/hud/icons2d/lulu_whimsy.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalMS": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.001,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/lulu/hud/icons2d/lulu_commandpix.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					70,
+					110,
+					150,
+					190,
+					230,
+					270
+				],
+				"DamageAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"BaseShield": [
+					30,
+					70,
+					110,
+					150,
+					190,
+					230,
+					270
+				],
+				"ShieldAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ShieldDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "ShieldAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/lulu/hud/icons2d/lulu_giantgrowth.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BonusHealth": [
+					125,
+					275,
+					425,
+					575,
+					725,
+					875,
+					1025
+				],
+				"SlowPercent": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"BuffDuration": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"AoERadius": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"KnockbackDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"KnockbackDistance": [
+					275,
+					275,
+					275,
+					275,
+					275,
+					275,
+					275
+				]
+			},
+			"spellCalculations": {
+				"TotalBonusHealth": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusHealth",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.55,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

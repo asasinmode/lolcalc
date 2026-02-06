@@ -30,23 +30,801 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MovementSpeed": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MaxTurrets": [
+					0,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"MaxKits": [
+					0,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"KitCost": [
+					0,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"DistanceToHeimer": [
+					0,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"BaseDamage": [
+					3,
+					7,
+					11,
+					15,
+					19,
+					23,
+					27
+				],
+				"BaseDamageBeam": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				],
+				"TurretAPRatio": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"BeamAPRatio": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				],
+				"TurretHealthMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TurretHealth": {
+					"mMultiplier": {
+						"mDataValue": "TurretHealthMod"
+					},
+					"mFormulaParts": [
+						{
+							"mStartValue": 130,
+							"mEndValue": 640,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mSubpart": {
+								"mLevel1Value": 0.05,
+								"mInitialBonusPerLevel": 0.005,
+								"mBreakpoints": [
+									{
+										"mLevel": 10,
+										"mBonusPerLevelAtAndAfter": 0.04
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"{f0517331}": {
+					"mFormulaParts": [
+						{
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 5
+								},
+								{
+									"mLevel": 8,
+									"mAdditionalBonusAtThisLevel": 5
+								},
+								{
+									"mLevel": 10,
+									"mBonusPerLevelAtAndAfter": 5
+								},
+								{
+									"mLevel": 14,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"{8109ae7b}": {
+					"mFormulaParts": [
+						{
+							"mBreakpoints": [
+								{
+									"mLevel": 8,
+									"mAdditionalBonusAtThisLevel": 0.5
+								},
+								{
+									"mLevel": 10,
+									"mAdditionalBonusAtThisLevel": 0.5
+								},
+								{
+									"mLevel": 12,
+									"mBonusPerLevelAtAndAfter": 5
+								},
+								{
+									"mLevel": 18,
+									"mBonusPerLevelAtAndAfter": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"KitCooldown": {
+					"mMultiplier": {},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"BeamCooldown": {
+					"mMultiplier": {},
+					"mFormulaParts": [
+						{
+							"mNumber": 90,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "TurretAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DamageBeam": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageBeam",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BeamAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Rockets": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BaseDamage": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"ExtraHitBaseDamage": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"TotalBaseDamage": [
+					45,
+					90,
+					135,
+					180,
+					225,
+					270,
+					315
+				],
+				"InitialDamageAPRatio": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "InitialDamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ExtraHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ExtraHitBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.12,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "TotalBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ExtraHitDamageMinions": {
+					"mMultiplier": {
+						"mNumber": 3
+					},
+					"mModifiedGameCalculation": "ExtraHitDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					20,
+					60,
+					100,
+					140,
+					180,
+					220,
+					260
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"SlowPercent": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"StunDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"QUltBaseDamage": [
+					60,
+					80,
+					100,
+					120,
+					140,
+					160,
+					180
+				],
+				"QUltBaseDamageBeam": [
+					60,
+					100,
+					140,
+					180,
+					220,
+					260,
+					300
+				],
+				"WUltBaseDamage": [
+					90,
+					135,
+					180,
+					225,
+					270,
+					315,
+					360
+				],
+				"WUltExtraHitBaseDamage": [
+					19,
+					32,
+					45,
+					58,
+					71,
+					84,
+					97
+				],
+				"WUltTotalBaseDamage": [
+					0,
+					503,
+					697.5,
+					892,
+					1086.5,
+					1281,
+					1475.5
+				],
+				"EUltBaseDamage": [
+					0,
+					100,
+					200,
+					300,
+					400,
+					500,
+					600
+				]
+			},
+			"spellCalculations": {
+				"QUltTurretHealth": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 725,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 25
+								},
+								{
+									"mLevel": 11,
+									"mBonusPerLevelAtAndAfter": 50
+								},
+								{
+									"mLevel": 16,
+									"mBonusPerLevelAtAndAfter": 150
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"QUltDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "QUltBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"QUltDamageBeam": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "QUltBaseDamageBeam",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"WUltDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "WUltBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.45,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{a8af07ef}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "WUltExtraHitBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.12,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{f058914b}": {
+					"mMultiplier": {
+						"mNumber": 0.5
+					},
+					"mModifiedGameCalculation": "{a8af07ef}"
+				},
+				"WUltTotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "WUltTotalBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1.83,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"EUltDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EUltBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{0df0e2e2}": {
+					"mMultiplier": {
+						"mNumber": 20
+					},
+					"mModifiedGameCalculation": "WUltTotalDamage"
+				},
+				"RQTurretResists": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"3": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"4": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"5": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"6": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"7": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"8": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"9": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				}
+			}
 		}
 	}
 }

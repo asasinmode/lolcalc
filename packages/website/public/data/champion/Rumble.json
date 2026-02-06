@@ -30,23 +30,636 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/rumble/hud/icons2d/rumble_junkyardtitan1.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"OverheatDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"DangerZoneHeat": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"OverheatingHeat": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"OverheatPercBonusDamage": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				],
+				"MonsterCap": [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				],
+				"HeatDecayPerS": [
+					-10,
+					-10,
+					-10,
+					-10,
+					-10,
+					-10,
+					-10
+				]
+			},
+			"spellCalculations": {
+				"TotalBaseDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 40,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"OverheatAS": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.5,
+							"mEndValue": 1.3,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MonsterCapScaling": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 65,
+							"mEndValue": 150,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/rumble/hud/icons2d/rumble_flamespitter.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					60,
+					85,
+					110,
+					135,
+					160,
+					185
+				],
+				"MinionMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"HealthDamage": [
+					0.055,
+					0.06,
+					0.065,
+					0.07,
+					0.075,
+					0.08,
+					0.085
+				],
+				"APRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"OverheatMulti": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"FlamespitterDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"DebuffTicks": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"TickRate": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"TotalTicks": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"InitialHeatCost": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"BurnDuration": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
+			},
+			"spellCalculations": {
+				"FlatDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionDamage": {
+					"mMultiplier": {
+						"mDataValue": "MinionMod"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "FlatDamage"
+				},
+				"EmpoweredDamage": {
+					"mMultiplier": {
+						"mDataValue": "OverheatMulti"
+					},
+					"mModifiedGameCalculation": "FlatDamage"
+				},
+				"EmpoweredHealth": {
+					"mMultiplier": {
+						"mDataValue": "OverheatMulti"
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "HealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"MonsterCap": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 65,
+							"mEndValue": 300,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/rumble/hud/icons2d/rumble_scrapshield.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"HeatCost": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"BaseShield": [
+					-5,
+					25,
+					55,
+					85,
+					115,
+					145,
+					175
+				],
+				"HealthShield": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				],
+				"MoveSpeed": [
+					0.05,
+					0.1,
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35
+				],
+				"APRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"ShieldDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MoveSpeedDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "HealthShield",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"EmpoweredShield": {
+					"mMultiplier": {
+						"mNumber": 1.5
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "TotalShield"
+				},
+				"EmpoweredMS": {
+					"mMultiplier": {
+						"mNumber": 1.5
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/rumble/hud/icons2d/rumble_electroharpoon.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					55,
+					80,
+					105,
+					130,
+					155,
+					180
+				],
+				"FirstCastHeatCost": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"PercMagicPen": [
+					0.08,
+					0.1,
+					0.12,
+					0.14,
+					0.16,
+					0.18,
+					0.2
+				],
+				"EnhancedMagicPen": [
+					0.16,
+					0.2,
+					0.24,
+					0.28,
+					0.32,
+					0.36,
+					0.4
+				],
+				"ShredDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"BaseSlowAmount": [
+					10,
+					15,
+					20,
+					25,
+					30,
+					35,
+					40
+				],
+				"EmpoweredSlowAmount": [
+					20,
+					30,
+					40,
+					50,
+					60,
+					70,
+					80
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"EmpDamage": {
+					"mMultiplier": {
+						"mNumber": 1.5
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/rumble/hud/icons2d/rumble_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"NumMissiles": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"TrailDuration": [
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5
+				],
+				"TickRate": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"SlowAmount": [
+					35,
+					35,
+					35,
+					35,
+					35,
+					35,
+					35
+				],
+				"BaseDamagePerSecond": [
+					70,
+					140,
+					210,
+					280,
+					350,
+					420,
+					490
+				],
+				"MaxBurnSeconds": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BurnLingerTime": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"DamagePerSecond": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mMultiplier": {
+						"mDataValue": "TrailDuration"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "DamagePerSecond"
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

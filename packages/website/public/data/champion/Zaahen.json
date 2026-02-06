@@ -30,23 +30,589 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/zaahen/hud/icons2d/zaahenp.zaahen.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PercentBonusAD": [
+					0.025,
+					0.025,
+					0.025,
+					0.025,
+					0.025,
+					0.025,
+					0.025
+				],
+				"FallOffDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"RevivePercent": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"MaxStacks": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"ReviveDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"NumberOfTicks": [
+					32,
+					32,
+					32,
+					32,
+					32,
+					32,
+					32
+				],
+				"MaxStacksMultiplier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PBonusADMin": [
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015,
+					0.015
+				],
+				"PBonusADMax": [
+					0.028,
+					0.028,
+					0.028,
+					0.028,
+					0.028,
+					0.028,
+					0.028
+				],
+				"ReviveLevel1Value": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"ReviveAdditionalBonusAtThisLevel": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				]
+			},
+			"spellCalculations": {
+				"ReviveCooldownCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 300,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -60
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -60
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": -60
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"RevivePercentCalc": {
+					"mFormulaParts": [
+						{
+							"{91d404a5}": "{97d06e0a}",
+							"{bbd778a2}": "{7f4480d4}",
+							"{9823b29a}": [
+								{
+									"level": 6,
+									"{ae9b464d}": "{a51b34b5}",
+									"{b0d8b2ac}": "{c41636b0}"
+								},
+								{
+									"level": 11,
+									"{ae9b464d}": "{a51b34b5}",
+									"{b0d8b2ac}": "{c41636b0}"
+								},
+								{
+									"level": 16,
+									"{ae9b464d}": "{a51b34b5}",
+									"{b0d8b2ac}": "{c41636b0}"
+								}
+							],
+							"__type": "{4ce08984}"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"PercentBonusADCalc": {
+					"mFormulaParts": [
+						{
+							"{0589a59c}": "{ab7680c1}",
+							"{0b65bc23}": "{9d89f26f}",
+							"__type": "{ee18a47b}"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/zaahen/hud/icons2d/zaahenq.zaahen.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Q1BaseDamage": [
+					0,
+					15,
+					30,
+					45,
+					60,
+					75,
+					90
+				],
+				"KnockUpDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"RecastWindow": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"TimeBetweenAttacks": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"HealPercent": [
+					0.04,
+					0.05,
+					0.06,
+					0.07,
+					0.08,
+					0.09,
+					0.1
+				],
+				"MinionHealPercent": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"Q2BaseDamage": [
+					0,
+					25,
+					50,
+					75,
+					100,
+					125,
+					150
+				],
+				"QBonusRange": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"QCoeff": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"MonsterDamagePercent": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"InitialDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Q1BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "QCoeff",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"SecondHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Q2BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "QCoeff",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/zaahen/hud/icons2d/zaahenw.zaahen.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"InitialBaseDamage": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				],
+				"SecondaryBaseDamage": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				],
+				"MaximumPullDistance": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				],
+				"PullSpeed": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				]
+			},
+			"spellCalculations": {
+				"InitialDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "InitialBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SecondaryDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{96bfc63d}",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/zaahen/hud/icons2d/zaahene.zaahen.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage_Base": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				],
+				"DashDistance": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"DashSpeed": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"MaximumRadius": [
+					375,
+					375,
+					375,
+					375,
+					375,
+					375,
+					375
+				],
+				"MinimumRadius": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"PercentHPDamage": [
+					0.035,
+					0.04,
+					0.045,
+					0.05,
+					0.055,
+					0.06,
+					0.065
+				],
+				"MonsterDamageCap": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"MonsterDamageBonus": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"SweetSpotDamageMod": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"DamageBonusBase": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				]
+			},
+			"spellCalculations": {
+				"BaseDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage_Base",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusDamageCalc": {
+					"mMultiplier": {
+						"mDataValue": "{3ea8f78a}"
+					},
+					"mModifiedGameCalculation": "BaseDamageCalc"
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/zaahen/hud/icons2d/zaahenr.zaahen.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"DashMaxDistance": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"DashMinDistance": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"EndDamage": [
+					100,
+					250,
+					400,
+					550,
+					700,
+					850,
+					1000
+				],
+				"DashSpeed": [
+					2800,
+					2800,
+					2800,
+					2800,
+					2800,
+					2800,
+					2800
+				],
+				"HealPercent": [
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33
+				],
+				"AoESize": [
+					550,
+					550,
+					550,
+					550,
+					550,
+					550,
+					550
+				],
+				"DamageReduction": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ArmorPen": [
+					0,
+					0.1,
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6
+				],
+				"BonusADDamageRatio": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"DamageEndCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EndDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "{5d9ec667}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

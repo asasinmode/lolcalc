@@ -30,23 +30,406 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"TakedownWindow": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"MaxStacks": [
+					9,
+					9,
+					9,
+					9,
+					9,
+					9,
+					9
+				]
+			},
+			"spellCalculations": {
+				"ChampionHeal": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 75,
+							"mEndValue": 165,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MinionHeal": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 35,
+							"mEndValue": 95,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					15,
+					40,
+					65,
+					90,
+					115,
+					140,
+					165
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MovementSpeed": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"MovementSpeedDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MinionBonusDamageMultiplier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MinionBonusDamageThreshold": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"BaseDamage": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				],
+				"RepeatDamageMod": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"AcquisitionRange": [
+					550,
+					550,
+					550,
+					550,
+					550,
+					550,
+					550
+				],
+				"BonusAcquisitionRange": [
+					725,
+					725,
+					725,
+					725,
+					725,
+					725,
+					725
+				],
+				"InitialDelay": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"SecondaryDelay": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"FlameDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"OrbitRadius": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"APRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"SingleFireDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MultiFireDamage": {
+					"mMultiplier": {
+						"mDataValue": "RepeatDamageMod"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "SingleFireDamage"
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"SlowPercent": [
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65,
+					-0.65
+				],
+				"CharmDuration": [
+					1.05,
+					1.2,
+					1.35,
+					1.5,
+					1.65,
+					1.8,
+					1.95
+				],
+				"APRatio": [
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RBaseDamage": [
+					25,
+					75,
+					125,
+					175,
+					225,
+					275,
+					325
+				],
+				"RMaxTargetsPerCast": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RMaxCasts": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RDashDistance": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"RBaseDashSpeed": [
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200
+				],
+				"RRecastWindow": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"RAcquisitionRange": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"RDashCooldown": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RAPCoefficient": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"RResetCasts": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"PDurationExtension": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				]
+			},
+			"spellCalculations": {
+				"RCalculatedDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "rAPCoefficient",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

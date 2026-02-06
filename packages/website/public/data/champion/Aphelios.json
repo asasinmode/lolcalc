@@ -30,7 +30,122 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/aphelios/hud/icons2d/apheliosp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MaxRanksPerStat": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"ADPerRank": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ASPerRank": [
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09
+				],
+				"APPerRank": [
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5,
+					4.5
+				]
+			},
+			"spellCalculations": {
+				"AttackSpeed": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mBuffName": "{f6907f1b}",
+							"mDataValue": "ASPerRank",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"AttackSpeedMax": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "MaxRanksPerStat"
+							},
+							"mPart2": {
+								"mDataValue": "ASPerRank"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"AttackDamage": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mBuffName": "{eb906dca}",
+							"mDataValue": "ADPerRank",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"AttackDamageMax": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "MaxRanksPerStat"
+							},
+							"mPart2": {
+								"mDataValue": "ADPerRank"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				},
+				"ArPenBonus": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mBuffName": "{f79080ae}",
+							"mDataValue": "APPerRank",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": -1
+				},
+				"ArPenBonusMax": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "MaxRanksPerStat"
+							},
+							"mPart2": {
+								"mDataValue": "APPerRank"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/aphelios/hud/icons2d/apheliosq.png",
@@ -38,7 +153,8 @@
 		},
 		"w": {
 			"image": "assets/characters/aphelios/hud/icons2d/apheliosw.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {}
 		},
 		"e": {
 			"image": "assets/characters/aphelios/hud/icons2d/calibrum_l.png",
@@ -46,7 +162,178 @@
 		},
 		"r": {
 			"image": "assets/characters/aphelios/hud/icons2d/apheliosr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RBaseDamage": [
+					75,
+					125,
+					175,
+					225,
+					275,
+					325,
+					375
+				],
+				"SeverumRHealBonus": [
+					150,
+					250,
+					350,
+					450,
+					550,
+					650,
+					750
+				],
+				"CalibrumRMarkBonusDamage": [
+					20,
+					50,
+					80,
+					110,
+					140,
+					170,
+					200
+				],
+				"CrescendumRBonusMinis": [
+					0,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"InfernumRBonusDamageBase": [
+					0,
+					50,
+					100,
+					150,
+					200,
+					250,
+					300
+				],
+				"GravitumRBonusSlowBase": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"CritDamageMod": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"GravitumRRootDuration": [
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35
+				]
+			},
+			"spellCalculations": {
+				"MaxDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"InfernumRBonusDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "InfernumRBonusDamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"GravitumRBonusSlow": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "GravitumRBonusSlowBase",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"CritDamageModCalc": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mPart1": {
+								"mDataValue": "CritDamageMod"
+							},
+							"mPart2": {
+								"mPart1": {
+									"mStat": 8,
+									"mCoefficient": 1
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mStat": 9,
+											"mCoefficient": 1
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"InfernumRPenalty": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 0.9,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{36ebd3cf}": {
+					"mFormulaParts": [
+						{
+							"mStat": 9,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

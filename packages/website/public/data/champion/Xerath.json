@@ -30,23 +30,515 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"CooldownKillRefund": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				]
+			},
+			"spellCalculations": {
+				"MinionManaRestoreTT": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 30,
+							"mInitialBonusPerLevel": 3,
+							"mBreakpoints": [
+								{
+									"mLevel": 4,
+									"mBonusPerLevelAtAndAfter": 6
+								},
+								{
+									"mLevel": 7,
+									"mBonusPerLevelAtAndAfter": 9
+								},
+								{
+									"mLevel": 11,
+									"mBonusPerLevelAtAndAfter": 12
+								},
+								{
+									"mLevel": 16,
+									"mBonusPerLevelAtAndAfter": 15
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"ChampionManaRestoreTT": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"mModifiedGameCalculation": "MinionManaRestoreTT"
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					75,
+					115,
+					155,
+					195,
+					235,
+					275
+				]
+			},
+			"spellCalculations": {
+				"TooltipTotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					15,
+					50,
+					85,
+					120,
+					155,
+					190,
+					225
+				],
+				"SweetSpotMultiplier": [
+					1.667,
+					1.667,
+					1.667,
+					1.667,
+					1.667,
+					1.667,
+					1.667
+				],
+				"SlowAmount": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"SweetSpotSlowAmount": [
+					0.55,
+					0.6,
+					0.65,
+					0.7,
+					0.75,
+					0.8,
+					0.85
+				],
+				"MultiplicativeSlowDecayRate": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"SlowDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"DamageDelay": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.65,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SweetSpotTotalDamage": {
+					"mMultiplier": {
+						"mDataValue": "SweetSpotMultiplier"
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MinStunDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"MaxStunDuration": [
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25
+				]
+			},
+			"spellCalculations": {
+				"TooltipTotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.45,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RampBaseDamage": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				],
+				"BaseDamage": [
+					120,
+					170,
+					220,
+					270,
+					320,
+					370,
+					420
+				]
+			},
+			"spellCalculations": {
+				"TooltipTotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.45,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RampDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RampBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						0
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						0
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

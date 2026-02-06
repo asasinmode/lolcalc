@@ -30,23 +30,300 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/singed/hud/icons2d/singed_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MSPercent": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"MSDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PerTargetCD": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"TriggerArea": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/singed/hud/icons2d/singed_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamagePerSecond": [
+					10,
+					20,
+					30,
+					40,
+					50,
+					60,
+					70
+				],
+				"APRatioPerSecond": [
+					0.425,
+					0.425,
+					0.425,
+					0.425,
+					0.425,
+					0.425,
+					0.425
+				],
+				"ToggleCooldown": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"CloudDuration": [
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					3.25,
+					3.25
+				],
+				"PoisonDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"TicksPerSecond": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MaxLingerTicks": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				]
+			},
+			"spellCalculations": {
+				"DamagePerSecond": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatioPerSecond",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"ApproximateTotalDamageTooltip": {
+					"mMultiplier": {
+						"mNumber": 4.75
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "DamagePerSecond"
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/singed/hud/icons2d/singed_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SlowPercent": [
+					45,
+					50,
+					55,
+					60,
+					65,
+					70,
+					75
+				],
+				"WDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"WRadius": [
+					265,
+					265,
+					265,
+					265,
+					265,
+					265,
+					265
+				],
+				"DelayExecute": [
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375
+				]
+			}
 		},
 		"e": {
 			"image": "assets/characters/singed/hud/icons2d/singed_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"BaseDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.55,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/singed/hud/icons2d/singed_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"StatAmount": [
+					-10,
+					25,
+					60,
+					95,
+					130,
+					165,
+					200
+				],
+				"Duration": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"GrievousAmount": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"GrievousDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			}
 		}
 	}
 }

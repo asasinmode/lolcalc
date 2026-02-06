@@ -30,23 +30,577 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/taliyah/hud/icons2d/taliyah_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"FallOffTime": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"TotalMS": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.1,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 12,
+									"mAdditionalBonusAtThisLevel": 0.1
+								},
+								{
+									"mLevel": 15,
+									"mAdditionalBonusAtThisLevel": 0.15
+								},
+								{
+									"mLevel": 27,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 30,
+									"mAdditionalBonusAtThisLevel": 0.3
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/taliyah/hud/icons2d/taliyah_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"WorkedGroundCDR": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MinimumWorkedGroundCD": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"BigRockDamageMult": [
+					0,
+					1.8,
+					1.8,
+					1.8,
+					1.8,
+					1.8,
+					1.8
+				],
+				"BaseDamage": [
+					37.5,
+					55,
+					72.5,
+					90,
+					107.5,
+					125,
+					142.5
+				],
+				"ExtraMissileReducedDamagePercent": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"MonsterBonusFlatDamage": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				],
+				"SlowPercent": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"SlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MonsterStunDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"AoERadius": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"AoERadiusBig": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"RockDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": -1
+				},
+				"BigRockDamage": {
+					"mMultiplier": {
+						"mDataValue": "BigRockDamageMult"
+					},
+					"mModifiedGameCalculation": "RockDamage"
+				},
+				"MaxDamageTooltip": {
+					"mMultiplier": {
+						"mNumber": 2.6
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "RockDamage"
+				},
+				"TotalBonusFlatMonsterDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterBonusFlatDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{c363b92e}": {
+					"mMultiplier": {
+						"mDataValue": "BigRockDamageMult"
+					},
+					"mModifiedGameCalculation": "TotalBonusFlatMonsterDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/taliyah/hud/icons2d/taliyah_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/taliyah/hud/icons2d/taliyah_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					15,
+					60,
+					105,
+					150,
+					195,
+					240,
+					285
+				],
+				"BaseDetonationDamage": [
+					10,
+					25,
+					40,
+					55,
+					70,
+					85,
+					100
+				],
+				"MonsterModPercent": [
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25
+				],
+				"StunDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"MaxStunDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MineDamageFalloff": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"DelayBetweenRows": [
+					0.17,
+					0.17,
+					0.17,
+					0.17,
+					0.17,
+					0.17,
+					0.17
+				],
+				"SlowPercent": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				]
+			},
+			"spellCalculations": {
+				"ScatterDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"DetonationDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDetonationDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxDetonationDamageTooltip": {
+					"mMultiplier": {
+						"mNumber": 2.5
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "DetonationDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/taliyah/hud/icons2d/taliyah_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"DamageLockoutTime": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"MaxJumpRange": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				],
+				"MinJumpRange": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"MaxJumpRangeOverWalls": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"WallDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"WallLength": [
+					2500,
+					2500,
+					4500,
+					6500,
+					0,
+					0,
+					0
+				],
+				"DCapPassive": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"MissileSpeed": [
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000
+				],
+				"ManaCost": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

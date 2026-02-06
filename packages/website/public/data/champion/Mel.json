@@ -30,23 +30,589 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/mel/hud/icons2d/mel_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"OverwhelmDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BonusAttackDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"PassiveBonusMissiles": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"MaxPassiveBonusMissiles": [
+					9,
+					9,
+					9,
+					9,
+					9,
+					9,
+					9
+				]
+			},
+			"spellCalculations": {
+				"PassiveBonusMissileDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 8,
+							"mEndValue": 25,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/mel/hud/icons2d/mel_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ExplosionDamage": [
+					4,
+					5,
+					6,
+					7,
+					8,
+					9,
+					10
+				],
+				"ExplosionCount": [
+					5,
+					6,
+					7,
+					8,
+					9,
+					10,
+					11
+				],
+				"Spread": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"ExplosionRadius": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"ChannelDuration": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MinionMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"InitialDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				]
+			},
+			"spellCalculations": {
+				"TotalExplosionDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ExplosionDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"AllDamageHit": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mSpellCalculationKey": "{c6579b07}",
+							"__type": "{f3cbe7b2}"
+						},
+						{
+							"mPart1": {
+								"mSpellCalculationKey": "TotalExplosionDamage"
+							},
+							"mPart2": {
+								"mSubparts": [
+									{
+										"mDataValue": "ExplosionCount"
+									},
+									{
+										"mNumber": -1
+									}
+								]
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				},
+				"MonsterModTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mNumber": 1
+								},
+								{
+									"mPart1": {
+										"mNumber": -1
+									},
+									"mPart2": {
+										"mDataValue": "MinionMod"
+									}
+								}
+							],
+							"__type": "SumOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{c6579b07}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "InitialDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/mel/hud/icons2d/mel_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Duration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"ShieldRadius": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"BaseDamagePercent": [
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55,
+					0.6,
+					0.65
+				],
+				"MoveSpeed": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"PhysDamageMod": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"BaseShieldAmount": [
+					50,
+					80,
+					110,
+					140,
+					170,
+					200,
+					230
+				],
+				"MoveSpeedDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"DamagePercent": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamagePercent",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.001,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"ShieldAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShieldAmount",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/mel/hud/icons2d/mel_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"RootDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"BaseDamage": [
+					15,
+					60,
+					105,
+					150,
+					195,
+					240,
+					285
+				],
+				"BaseAreaDamage": [
+					4,
+					16,
+					28,
+					40,
+					52,
+					64,
+					76
+				],
+				"AreaAPRatio": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				],
+				"AreaSlowAmount": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"AreaSlowDuration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"MinionMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MaxAreaRadius": [
+					230,
+					230,
+					230,
+					230,
+					230,
+					230,
+					230
+				],
+				"TimeToMaxRadius": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"AreaTicksPerSecond": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"DoTDuration": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"AreaDamagePerSecond": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseAreaDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{0b76b34c}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionModTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mNumber": 1
+								},
+								{
+									"mPart1": {
+										"mNumber": -1
+									},
+									"mPart2": {
+										"mDataValue": "MinionMod"
+									}
+								}
+							],
+							"__type": "SumOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/mel/hud/icons2d/mel_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BasePassiveStackDamage": [
+					2,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8
+				],
+				"BasePassiveFlatDamage": [
+					50,
+					60,
+					70,
+					80,
+					90,
+					100,
+					110
+				],
+				"MinionMod": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"BaseUltStackDamage": [
+					1,
+					4,
+					7,
+					10,
+					13,
+					16,
+					19
+				],
+				"BaseUltFlatDamage": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"DisintegrateDelay": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				]
+			},
+			"spellCalculations": {
+				"PassiveStackDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BasePassiveStackDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.007,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PassiveFlatDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BasePassiveFlatDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"UltStackDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseUltStackDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.04,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"UltFlatDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseUltFlatDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MinionModTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mNumber": 1
+								},
+								{
+									"mPart1": {
+										"mNumber": -1
+									},
+									"mPart2": {
+										"mDataValue": "MinionMod"
+									}
+								}
+							],
+							"__type": "SumOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		}
 	}
 }

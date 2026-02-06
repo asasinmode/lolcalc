@@ -30,23 +30,433 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/ashe/hud/icons2d/ashe_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"SlowAmount": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.2,
+							"mEndValue": 0.3,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"EmpoweredSlowAmount": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.4,
+							"mEndValue": 0.6,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"DamageBonus": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 8,
+							"mSubpart": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mStat": 9,
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/ashe/hud/icons2d/ashe_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"DamagePerStrike": [
+					1.025,
+					1.1,
+					1.175,
+					1.25,
+					1.325,
+					1.4,
+					1.475
+				]
+			},
+			"spellCalculations": {
+				"EmpoweredDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "DamagePerStrike",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/ashe/hud/icons2d/ashe_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					25,
+					60,
+					95,
+					130,
+					165,
+					200,
+					235
+				],
+				"NumberOfArrowsTooltip": [
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12
+				],
+				"ADRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/ashe/hud/icons2d/ashe_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseCooldown": [
+					100,
+					90,
+					80,
+					70,
+					60,
+					50,
+					40
+				]
+			},
+			"spellCalculations": {
+				"ChargeCooldown": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mPart1": {},
+							"mPart2": {
+								"mDataValue": "BaseCooldown"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/ashe/hud/icons2d/ashe_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RBaseDamage": [
+					0,
+					200,
+					400,
+					600,
+					800,
+					1000,
+					1200
+				],
+				"MinStunDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"MaxStunDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"SlowRadius": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"AoECoefficient": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"APRatio": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				]
+			},
+			"spellCalculations": {
+				"RMainDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{6b932875}": {
+					"mMultiplier": {
+						"mDataValue": "AoeCoefficient"
+					},
+					"mModifiedGameCalculation": "RMainDamage"
+				}
+			}
 		}
 	}
 }

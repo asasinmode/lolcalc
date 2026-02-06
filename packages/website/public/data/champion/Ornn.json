@@ -30,23 +30,699 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/ornn/hud/icons2d/ornnp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MasterworkLevel": [
+					13,
+					13,
+					13,
+					13,
+					13,
+					13,
+					13
+				],
+				"BaseStatAmp": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"AdditionalMythicStatAmp": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				],
+				"GameModeInteger": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"UpgradeTotalGoldValue": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"UpgradeADEff": [
+					35,
+					35,
+					35,
+					35,
+					35,
+					35,
+					35
+				],
+				"UpgradeAPEff": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"UpgradeHPEff": [
+					2.66,
+					2.66,
+					2.66,
+					2.66,
+					2.66,
+					2.66,
+					2.66
+				],
+				"UpgradeAREff": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"UpgradeMREff": [
+					18,
+					18,
+					18,
+					18,
+					18,
+					18,
+					18
+				],
+				"UpgradeAHEff": [
+					31.25,
+					31.25,
+					31.25,
+					31.25,
+					31.25,
+					31.25,
+					31.25
+				],
+				"UpgradeASEff": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						0
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						0
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/ornn/hud/icons2d/ornnq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					-5,
+					20,
+					45,
+					70,
+					95,
+					120,
+					145
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 1.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/ornn/hud/icons2d/ornnw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MinimumDamagePerTick": [
+					6,
+					16,
+					26,
+					36,
+					46,
+					56,
+					66
+				],
+				"NumberOfTicks": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BaseDamageTooltip": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"BreathDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"RectangleWidth": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"RectangleLength": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"MovementSpeedReduction": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"FinalTickRectangleLength": [
+					560,
+					560,
+					560,
+					560,
+					560,
+					560,
+					560
+				],
+				"PercentHPPerTick": [
+					0.022,
+					0.024,
+					0.026,
+					0.028,
+					0.03,
+					0.032,
+					0.034
+				],
+				"MaxPercentHPPerTickTooltip": [
+					11,
+					12,
+					13,
+					14,
+					15,
+					16,
+					17
+				],
+				"MonsterDamagePerTickCap": [
+					40,
+					52,
+					64,
+					76,
+					88,
+					100,
+					112
+				],
+				"BrittleDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"BrittlePercentMaxHPCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.1,
+							"mEndValue": 0.18,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"TotalMinimumDamage": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "MinimumDamagePerTick"
+							},
+							"mPart2": {
+								"mDataValue": "NumberOfTicks"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				},
+				"TotalMonsterDamageCap": {
+					"mMultiplier": {
+						"mDataValue": "NumberOfTicks"
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterDamagePerTickCap",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/ornn/hud/icons2d/ornne.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					80,
+					125,
+					170,
+					215,
+					260,
+					305
+				],
+				"KnockupDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"DashRange": [
+					650,
+					650,
+					650,
+					650,
+					650,
+					650,
+					650
+				],
+				"ShockwaveRadius": [
+					360,
+					360,
+					360,
+					360,
+					360,
+					360,
+					360
+				],
+				"DashWallCheating": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"DashSpeed": [
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600
+				],
+				"DashRadius": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"ArmorRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"MRRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mDataValue": "ArmorRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mDataValue": "MRRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/ornn/hud/icons2d/ornnr1.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RCastRange": [
+					2500,
+					2500,
+					2500,
+					2500,
+					2500,
+					2500,
+					2500
+				],
+				"RBaseDamage": [
+					75,
+					125,
+					175,
+					225,
+					275,
+					325,
+					375
+				],
+				"RMissileMaxSpeed": [
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200,
+					1200
+				],
+				"RMissileAccelerationBase": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"RSlowPercentBasePreMath": [
+					30,
+					40,
+					50,
+					60,
+					70,
+					80,
+					90
+				],
+				"RSlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"RRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"BrittleDurationTOOLTIPONLY": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RStunDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RStunReduction": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"RDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "RRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinStun": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "RStunDuration"
+							},
+							"mPart2": {
+								"mDataValue": "RStunReduction"
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				}
+			}
 		}
 	}
 }

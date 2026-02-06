@@ -30,23 +30,532 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/poppy/hud/icons2d/poppy_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"BonusRange": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"ShieldDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ShieldPickUpTime": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"ActualCooldown": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 16,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": -4
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": -4
+								},
+								{
+									"mLevel": 19,
+									"mAdditionalBonusAtThisLevel": -2
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 20,
+							"mEndValue": 180,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"ShieldValue": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mSubpart": {
+								"mStartValue": 0.11,
+								"mEndValue": 0.2
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/poppy/hud/icons2d/poppy_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"HealthDamagePercent": [
+					9,
+					9,
+					9,
+					9,
+					9,
+					9,
+					9
+				]
+			},
+			"spellCalculations": {
+				"BaseDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/poppy/hud/icons2d/poppy_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"GroundingDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"SlowAmount": [
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25
+				],
+				"PassiveResistPercent": [
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12
+				],
+				"PassiveEmpoweredHealthPercent": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"BonusArmor": {
+					"mFormulaParts": [
+						{
+							"mStat": 1,
+							"mDataValue": "PassiveResistPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusMR": {
+					"mFormulaParts": [
+						{
+							"mStat": 6,
+							"mDataValue": "PassiveResistPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"InterruptDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 5,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/poppy/hud/icons2d/poppy_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TackleDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/poppy/hud/icons2d/poppy_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					200,
+					200,
+					300,
+					400,
+					500,
+					600,
+					700
+				],
+				"ChannelDistanceUpdateTick": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"ChannelMaxDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MaxKnockbackDistance": [
+					3400,
+					3400,
+					3400,
+					3400,
+					3400,
+					3400,
+					3400
+				],
+				"KnockupDurationCharged": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"KnockupDurationSnap": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"DurationUntilFullyCharged": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"SelfSlow": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"CancelCDRefund": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"SnapCastDamageRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"HalfDamage": {
+					"mMultiplier": {
+						"mDataValue": "SnapCastDamageRatio"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "Damage"
+				}
+			}
 		}
 	}
 }

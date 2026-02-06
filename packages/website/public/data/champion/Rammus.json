@@ -30,23 +30,633 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"ArmorRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"MagicResistRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"BaseDamage": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 1,
+							"mDataValue": "ArmorRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mDataValue": "{95ef2c35}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/rammus/hud/icons2d/armordillo_powerball.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"QBaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"MSMultiplier": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"APRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RollDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"StunDuration": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"KnockbackDistance": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				],
+				"HeightVariable": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"SelfStunTiming": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"SlowPercent": [
+					30,
+					40,
+					50,
+					60,
+					70,
+					80,
+					90
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"PowerBallDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "QBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinimumMoveSpeed": {
+					"mMultiplier": {
+						"mDataValue": "MSMultiplier"
+					},
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.25,
+							"mEndValue": 0.391,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MaximumMoveSpeed": {
+					"mMultiplier": {
+						"mDataValue": "RollDuration"
+					},
+					"mModifiedGameCalculation": "MinimumMoveSpeed"
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/rammus/hud/icons2d/armordillo_shellbash.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BonusArmorPercent": [
+					0.225,
+					0.3,
+					0.375,
+					0.45,
+					0.525,
+					0.6,
+					0.675
+				],
+				"BonusMRPercent": [
+					0.225,
+					0.3,
+					0.375,
+					0.45,
+					0.525,
+					0.6,
+					0.675
+				],
+				"FlatBonusArmor": [
+					22,
+					27,
+					32,
+					37,
+					42,
+					47,
+					52
+				],
+				"FlatBonusMR": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				],
+				"BuffDuration": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"DamageArmorRatio": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"DamageMRRatio": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"FlatDamageReturn": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				]
+			},
+			"spellCalculations": {
+				"ReturnDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "{91239045}",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mDataValue": "{1649dfb2}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mDataValue": "{8eaf095a}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusArmorTooltip": {
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "FlatBonusArmor"
+							},
+							"mPart2": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mDataValue": "BonusArmorPercent"
+									}
+								]
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mDataValue": "BonusArmorPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusMRTooltip": {
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "FlatBonusMR"
+							},
+							"mPart2": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mDataValue": "BonusMRPercent"
+									}
+								]
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mDataValue": "BonusMRPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RecastDamageTooltip": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "{91239045}",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mDataValue": "{1649dfb2}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mDataValue": "{8eaf095a}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/rammus/hud/icons2d/armordillo_scaledplating.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Duration": [
+					1,
+					1.2,
+					1.4,
+					1.6,
+					1.8,
+					2,
+					2.2
+				],
+				"MonsterDamage": [
+					60,
+					80,
+					100,
+					120,
+					140,
+					160,
+					180
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"MonsterDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/rammus/hud/icons2d/armordillo_recklesscharge.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"SlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"SlowAmount": [
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8
+				],
+				"TurretDamageModifier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"InitialDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"NumberOfPulses": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"BuffDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"BaseCastRange": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"TremorsAoERange": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"TremorsKnockupRange": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"KnockupDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"DashRangeGrowth": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MaxRangeForDmgGrowth": [
+					1700,
+					1700,
+					1700,
+					1700,
+					1700,
+					1700,
+					1700
+				],
+				"DashSpeedGrowth": [
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1
+				],
+				"MinDashSpeed": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"MaxDashSpeed": [
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000
+				],
+				"APRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
+			},
+			"spellCalculations": {
+				"InitialDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "InitialDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"PulseDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PulseBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TooltipMaxDamageCalc": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mDataValue": "BonusDamageMultiplier"
+							},
+							{
+								"mNumber": 1
+							}
+						]
+					},
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "InitialDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxSlow": {
+					"mMultiplier": {
+						"mDataValue": "NumberOfPulses"
+					},
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "SlowAmount"
+							},
+							"mPart2": {
+								"mNumber": 100
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

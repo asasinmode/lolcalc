@@ -30,23 +30,480 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/syndra/hud/icons2d/syndra_p1.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MarkDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"Q1UpgradeThreshold": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"WUpgradeThreshold": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"EUpgradeThreshold": [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				],
+				"RUpgradeThreshold": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"CapstoneAPPerc": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"MaxStackAmount": [
+					120,
+					120,
+					120,
+					120,
+					120,
+					120,
+					120
+				],
+				"StackPerSiege": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"PassiveMarkCooldown": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"PassiveStacksPerLevel": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
+			},
+			"spellCalculations": {
+				"StacksPerProc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 1,
+							"mBreakpoints": [
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 1
+								},
+								{
+									"mLevel": 18,
+									"mAdditionalBonusAtThisLevel": 1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"ManaPerProc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 20,
+							"mInitialBonusPerLevel": 5,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mBonusPerLevelAtAndAfter": 8
+								},
+								{
+									"mLevel": 11,
+									"mBonusPerLevelAtAndAfter": 15
+								},
+								{
+									"mLevel": 16,
+									"mBonusPerLevelAtAndAfter": 20
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/syndra/hud/icons2d/syndra_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Upgrade1MaxAmmo": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"Upgrade2MaxAmmo": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"SphereDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"BaseDamage": [
+					45,
+					80,
+					115,
+					150,
+					185,
+					220,
+					255
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.65,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/syndra/hud/icons2d/syndra_w1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseSlow": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"SlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"BaseDamage": [
+					35,
+					70,
+					105,
+					140,
+					175,
+					210,
+					245
+				],
+				"ExtraSpherePickupRadius": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				]
+			},
+			"spellCalculations": {
+				"ThrowDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.65,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PassiveBonusDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 0.12
+							},
+							{
+								"mPart1": {
+									"mCoefficient": 0.02
+								},
+								"mPart2": {
+									"mNumber": 0.01
+								}
+							}
+						]
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "ThrowDamage"
+				},
+				"TotalSlowAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseSlow",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TOOLTIPONLYPassiveBonusPercent": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mNumber": 12,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.02,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/syndra/hud/icons2d/syndra_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ConeAngle": [
+					56,
+					56,
+					56,
+					56,
+					56,
+					56,
+					56
+				],
+				"StunDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"UpgradedSlowDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"UpgradedSlowAmount": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"UpgradedConeAngle": [
+					84,
+					84,
+					84,
+					84,
+					84,
+					84,
+					84
+				],
+				"BaseDamage": [
+					25,
+					60,
+					95,
+					130,
+					165,
+					200,
+					235
+				],
+				"APRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/syndra/hud/icons2d/syndra_r1.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"DamagePerSphere": [
+					50,
+					90,
+					130,
+					170,
+					210,
+					250,
+					290
+				],
+				"MaxSpheresToUse": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"UpgradeExecuteThreshold": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"QHastePerRank": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"TOOLTIPONLYTotalQHaste": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"MinSpheresToUse": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"APRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamagePerSphere",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinDamageCalc": {
+					"mMultiplier": {
+						"mDataValue": "MinSpheresToUse"
+					},
+					"mModifiedGameCalculation": "DamageCalc"
+				},
+				"MaxDamageCalc": {
+					"mMultiplier": {
+						"mDataValue": "MaxSpheresToUse"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "DamageCalc"
+				}
+			}
 		}
 	}
 }

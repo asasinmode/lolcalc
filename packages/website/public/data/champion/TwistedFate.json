@@ -30,23 +30,549 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_sealfate.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"GoldRatioMinCherry": [
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02
+				],
+				"GoldRatioMaxCherry": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				],
+				"GameModeInteger": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_powercard.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					15,
+					60,
+					105,
+					150,
+					195,
+					240,
+					285
+				],
+				"APRatio": [
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85
+				],
+				"BonusADRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_fatesgambit.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BlueBase": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				],
+				"RedBase": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"GoldBase": [
+					7.5,
+					15,
+					22.5,
+					30,
+					37.5,
+					45,
+					52.5
+				],
+				"BlueCritMultiplier": [
+					0.575,
+					0.575,
+					0.575,
+					0.575,
+					0.575,
+					0.575,
+					0.575
+				],
+				"RedCritMultiplier": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"GoldCritMultiplier": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"ttBlueAP": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"ttRedAP": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"ttGoldAP": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ttAD": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"BlueDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BlueBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 8,
+							"mSubpart": {
+								"mPart1": {
+									"mDataValue": "BlueCritMultiplier"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mDataValue": "BlueBase"
+										},
+										{
+											"mStat": 2,
+											"mCoefficient": 1
+										},
+										{
+											"mCoefficient": 1
+										}
+									]
+								}
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"RedDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "RedBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 8,
+							"mSubpart": {
+								"mPart1": {
+									"mDataValue": "RedCritMultiplier"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mDataValue": "RedBase"
+										},
+										{
+											"mStat": 2,
+											"mCoefficient": 1
+										},
+										{
+											"mCoefficient": 0.7
+										}
+									]
+								}
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"GoldDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 0,
+					"mFormulaParts": [
+						{
+							"mDataValue": "GoldBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 8,
+							"mSubpart": {
+								"mPart1": {
+									"mDataValue": "GoldCritMultiplier"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mDataValue": "GoldBase"
+										},
+										{
+											"mStat": 2,
+											"mCoefficient": 1
+										},
+										{
+											"mCoefficient": 0.5
+										}
+									]
+								}
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"ttBlueDamage": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mModifiedGameCalculation": "BlueDamage"
+				},
+				"ttRedDamage": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mModifiedGameCalculation": "RedDamage"
+				},
+				"ttGoldDamage": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mModifiedGameCalculation": "GoldDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_rapidtoss.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"AttackSpeedBonus": [
+					5,
+					15,
+					25,
+					35,
+					45,
+					55,
+					65
+				],
+				"Damage": [
+					40,
+					65,
+					90,
+					115,
+					140,
+					165,
+					190
+				],
+				"APRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"BonusADRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"TowerEffectiveness": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"BonusDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/twistedfate/hud/icons2d/destiny_temp.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RecastDuration": [
+					6,
+					6,
+					8,
+					10,
+					12,
+					14,
+					16
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {},
+				"2": {},
+				"3": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

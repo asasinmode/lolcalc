@@ -30,23 +30,466 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"DamageReductionPercent": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					65,
+					95,
+					125,
+					155,
+					185,
+					215
+				],
+				"ShieldAmount": [
+					50,
+					80,
+					110,
+					140,
+					170,
+					200,
+					230
+				],
+				"ShieldDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"TotalShield": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldAmount",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ActiveBaseDamage": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"PassiveBaseDamage": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"MissingManaRatio": [
+					3.5,
+					4,
+					4.5,
+					5,
+					5.5,
+					6,
+					6.5
+				],
+				"ChampionMissingManaRatio": [
+					17.5,
+					20,
+					22.5,
+					25,
+					27.5,
+					30,
+					32.5
+				]
+			},
+			"spellCalculations": {
+				"ActiveDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ActiveBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PassiveBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ReductionPerSpellCast": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"BaseDamage": [
+					40,
+					70,
+					100,
+					130,
+					160,
+					190,
+					220
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseCD": [
+					5,
+					5,
+					3.5,
+					2,
+					2,
+					2,
+					2
+				],
+				"RBaseCost": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"RBaseDamage": [
+					70,
+					70,
+					90,
+					110,
+					110,
+					110,
+					110
+				],
+				"StackDamage": [
+					35,
+					35,
+					45,
+					55,
+					55,
+					55,
+					55
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"APStackRatio": [
+					0.07,
+					0.07,
+					0.07,
+					0.07,
+					0.07,
+					0.07,
+					0.07
+				],
+				"RStackDuration": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"MaxStacks": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"RManaRatio": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"RStackManaRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RiftWalkBaseDamage": [
+					70,
+					70,
+					90,
+					110,
+					110,
+					110,
+					110
+				],
+				"CastRange": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				]
+			},
+			"spellCalculations": {
+				"BaseDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "StackDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APStackRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.01,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

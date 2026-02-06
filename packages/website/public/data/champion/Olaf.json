@@ -30,23 +30,498 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/olaf/hud/icons2d/olafp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"AttackSpeedPerMissingHPPerc": [
+					0.009,
+					0.009,
+					0.009,
+					0.009,
+					0.009,
+					0.009,
+					0.009
+				],
+				"MaxStatsThreshold": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"MaxAttackSpeed": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.5,
+							"mEndValue": 1,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MaxLifeSteal": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.08,
+							"mEndValue": 0.25,
+							"mScaleByStatProgressionMultiplier": true,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/olaf/hud/icons2d/olafq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MinimumRange": [
+					425,
+					425,
+					425,
+					425,
+					425,
+					425,
+					425
+				],
+				"SlowAmount": [
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5
+				],
+				"ShredAmount": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"DebuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MinimumCooldown": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"BaseDamage": [
+					10,
+					60,
+					110,
+					160,
+					210,
+					260,
+					310
+				],
+				"MonsterDamage": [
+					-5,
+					10,
+					25,
+					40,
+					55,
+					70,
+					85
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TooltipCDRefund": {
+					"mMultiplier": {},
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinimumCooldown",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/olaf/hud/icons2d/olafw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Attackspeed": [
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8,
+					0.9
+				],
+				"Duration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ShieldPercMissingHP": [
+					0.175,
+					0.175,
+					0.175,
+					0.175,
+					0.175,
+					0.175,
+					0.175
+				],
+				"ShieldDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"BaseShield": [
+					-20,
+					10,
+					40,
+					70,
+					100,
+					130,
+					160
+				],
+				"ThresholdForMax": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"ShieldCalc": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 16,
+							"mSubpart": {
+								"mStat": 12,
+								"mDataValue": "ShieldPercMissingHP"
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"MaxShieldCalc": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShield",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mSubpart": {
+								"mPart1": {
+									"mDataValue": "ShieldPercMissingHP"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mPart1": {
+												"mNumber": -1
+											},
+											"mPart2": {
+												"mDataValue": "ThresholdForMax"
+											}
+										}
+									]
+								}
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/olaf/hud/icons2d/olafe.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Cast_Time_Base": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"Cast_Time_Min": [
+					0.175,
+					0.175,
+					0.175,
+					0.175,
+					0.175,
+					0.175,
+					0.175
+				],
+				"Cast_Time_Attack_Speed_Cap": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/olaf/hud/icons2d/olafr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"Resists": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"Duration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"FlatAD": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"PercentTotalADAmp": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"HasteDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Haste": [
+					-0.05,
+					0.2,
+					0.45,
+					0.7,
+					0.95,
+					1.2,
+					1.45
+				],
+				"DurationExtension": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
+			},
+			"spellCalculations": {
+				"AD": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "FlatAD",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "PercentTotalADAmp",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

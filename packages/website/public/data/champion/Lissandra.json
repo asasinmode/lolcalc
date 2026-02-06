@@ -30,23 +30,416 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MoveSpeedMod": [
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25
+				],
+				"ExplosionDelay": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"Range": [
+					1350,
+					1350,
+					1350,
+					1350,
+					1350,
+					1350,
+					1350
+				],
+				"Radius": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 120,
+							"mInitialBonusPerLevel": 20,
+							"mBreakpoints": [
+								{
+									"mLevel": 13,
+									"mBonusPerLevelAtAndAfter": 30
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"damage": [
+					45,
+					80,
+					115,
+					150,
+					185,
+					220,
+					255
+				],
+				"slowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"slowPercentage": [
+					-0.16,
+					-0.2,
+					-0.24,
+					-0.28,
+					-0.32,
+					-0.36,
+					-0.4
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"APRatio": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"BaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"SlowAmount": [
+					-0.3,
+					-0.45,
+					-0.6,
+					-0.75,
+					-0.9,
+					-1.05,
+					-1.2
+				],
+				"SlowDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"EnemyCastDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"SelfCastDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"SelfCastFlatHeal": [
+					50,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"SelfCastMissingHPRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"SelfCastMissingHPPerAbove": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"StartingAoESize": [
+					292,
+					292,
+					292,
+					292,
+					292,
+					292,
+					292
+				],
+				"PercentMissingHPRatio": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				]
+			},
+			"spellCalculations": {
+				"CalculatedDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"HealAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SelfCastFlatHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "PercentMissingHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,856 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/zac/hud/icons2d/zacpassive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"ReviveCooldown": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				]
+			},
+			"spellCalculations": {
+				"HealPercent": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.04,
+							"mEndValue": 0.08,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"ReviveBlobletDuration": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 8,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 10,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": -1
+								},
+								{
+									"mLevel": 17,
+									"mAdditionalBonusAtThisLevel": -1
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"TotalHeal": {
+					"mMultiplier": {
+						"mStat": 12,
+						"mCoefficient": 1
+					},
+					"mModifiedGameCalculation": "HealPercent"
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/zac/hud/icons2d/zacq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mSpellCalculationKey": "TotalDamage"
+							},
+							"mPart2": {
+								"mNumber": 2
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				},
+				"HealthCostTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mEffectIndex": 2
+							},
+							"mPart2": {
+								"mPart1": {
+									"mStat": 12,
+									"mCoefficient": 1
+								},
+								"mPart2": {
+									"mStat": 14,
+									"mCoefficient": 1
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/zac/hud/icons2d/zacw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					40,
+					50,
+					60,
+					70,
+					80,
+					90
+				],
+				"APRatioToPercentDamage": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"BaseMaxHealthDamage": [
+					0.03,
+					0.04,
+					0.05,
+					0.06,
+					0.07,
+					0.08,
+					0.09
+				],
+				"HealthPercentTooltip": [
+					3,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9
+				]
+			},
+			"spellCalculations": {
+				"DisplayPercentDamage": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "HealthPercentTooltip",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatioToPercentDamage",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"TooltipHealthCost": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mEffectIndex": 2
+							},
+							"mPart2": {
+								"mPart1": {
+									"mStat": 12,
+									"mCoefficient": 1
+								},
+								"mPart2": {
+									"mStat": 14,
+									"mCoefficient": 1
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/zac/hud/icons2d/zace.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"spellCalculations": {
+				"MaxStun": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mEffectIndex": 5
+							},
+							"mPart2": {
+								"mNumber": 2
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				},
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"HealthCostTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mEffectIndex": 2
+							},
+							"mPart2": {
+								"mPart1": {
+									"mStat": 12,
+									"mCoefficient": 1
+								},
+								"mPart2": {
+									"mStat": 14,
+									"mCoefficient": 1
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/zac/hud/icons2d/zacr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"Bounces": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"TimeBetweenBounces": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"KnockupDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BaseDamageBounce": [
+					70,
+					140,
+					210,
+					280,
+					350,
+					420,
+					490
+				],
+				"DamageReductionBounce": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"KnockbackDistance": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"KnockbackRange": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"BeginningMS": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"EndingMS": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"SlowAmount": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"BounceAPRatioTooltip": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"DamagePerBounce": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamageBounce",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BounceAPRatioTooltip",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DamagePerSubsequentBounce": {
+					"mMultiplier": {
+						"mDataValue": "DamageReductionBounce"
+					},
+					"mModifiedGameCalculation": "DamagePerBounce"
+				},
+				"DurationTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mDataValue": "TimeBetweenBounces"
+							},
+							"mPart2": {
+								"mSubparts": [
+									{
+										"mDataValue": "Bounces"
+									},
+									{
+										"mNumber": -1
+									}
+								]
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				},
+				"MaxDamageTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BounceAPRatioTooltip",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BaseDamageBounce",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mPart1": {
+								"mPart1": {
+									"mSubparts": [
+										{
+											"mDataValue": "BaseDamageBounce"
+										},
+										{
+											"mDataValue": "BounceAPRatioTooltip"
+										}
+									]
+								},
+								"mPart2": {
+									"mDataValue": "DamageReductionBounce"
+								}
+							},
+							"mPart2": {
+								"mSubparts": [
+									{
+										"mDataValue": "Bounces"
+									},
+									{
+										"mNumber": -1
+									}
+								]
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		}
 	}
 }

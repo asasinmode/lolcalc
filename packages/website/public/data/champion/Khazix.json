@@ -30,23 +30,641 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"SlowAmount": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"IsolationRange": [
+					375,
+					375,
+					375,
+					375,
+					375,
+					375,
+					375
+				],
+				"BonusADRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mValues": [
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{}
+							],
+							"__type": "ByCharLevelFormulaCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"EvolutionIsolationCDRPercentage": [
+					45,
+					45,
+					45,
+					45,
+					45,
+					45,
+					45
+				],
+				"BonusADRatio": [
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1
+				]
+			},
+			"spellCalculations": {
+				"{ba2719ef}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"{8b6fe763}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"IsEvolved": {
+					"tooltipOnly": true,
+					"mDefaultGameCalculation": "{8b6fe763}",
+					"mConditionalGameCalculation": "{ba2719ef}",
+					"mConditionalCalculationRequirements": {
+						"mBuffName": "{99a499bd}"
+					}
+				},
+				"BaseDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"IsoDamage": {
+					"mMultiplier": {
+						"mNumber": 2.1
+					},
+					"mModifiedGameCalculation": "BaseDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseHeal": [
+					35,
+					55,
+					75,
+					95,
+					115,
+					135,
+					155
+				],
+				"HealAPRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"SlowPercentage": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"IsolatedSlowPercentage": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"IsolatedSlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"{ba2719ef}": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"{8b6fe763}": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"IsEvolved": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mDefaultGameCalculation": "{8b6fe763}",
+					"mConditionalGameCalculation": "{ba2719ef}",
+					"mConditionalCalculationRequirements": {
+						"mBuffName": "{ff849683}"
+					}
+				},
+				"BaseDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"HealAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHeal",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "HealAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"EvolvedLeapRange": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"BaseDamage": [
+					30,
+					65,
+					100,
+					135,
+					170,
+					205,
+					240
+				],
+				"ADRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"{ba2719ef}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"{8b6fe763}": {
+					"mExpandedTooltipCalculationDisplay": 1,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"IsEvolved": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mDefaultGameCalculation": "{8b6fe763}",
+					"mConditionalGameCalculation": "{ba2719ef}",
+					"mConditionalCalculationRequirements": {
+						"mBuffName": "{0f374711}"
+					}
+				},
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"StealthDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"RecastWindow": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"BonusMovementSpeedPercent": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"EvolutionsAvailable": [
+					0,
+					1,
+					2,
+					3,
+					3,
+					3,
+					3
+				],
+				"EvolvedStealthDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"RecastCD": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"NumberOfCasts": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"EvolvedNumberOfCasts": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"{ba2719ef}": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"{8b6fe763}": {
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"IsEvolved": {
+					"mExpandedTooltipCalculationDisplay": 6,
+					"tooltipOnly": true,
+					"mDefaultGameCalculation": "{8b6fe763}",
+					"mConditionalGameCalculation": "{ba2719ef}",
+					"mConditionalCalculationRequirements": {
+						"mBuffName": "{7bcf22fa}"
+					}
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,426 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/zed/hud/icons2d/zedp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"CurrentHealthThreshold": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"PerUnitCD": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"MonsterDamageCap": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"MonsterDamageMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ShenZedQuestKillCount": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"ShenZedQuestBonus": [
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02
+				]
+			},
+			"spellCalculations": {
+				"{6a1a62e9}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.06,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": 0.02
+								},
+								{
+									"mLevel": 17,
+									"mAdditionalBonusAtThisLevel": 0.02
+								},
+								{
+									"mLevel": 25,
+									"mAdditionalBonusAtThisLevel": 0.02
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{ad3d785f}": {
+					"mFormulaParts": [
+						{
+							"mSpellCalculationKey": "{6a1a62e9}",
+							"__type": "{f3cbe7b2}"
+						},
+						{
+							"mDataValue": "ShenZedQuestBonus",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MaxHPDamage": {
+					"mDefaultGameCalculation": "{6a1a62e9}",
+					"mConditionalGameCalculation": "{ad3d785f}",
+					"mConditionalCalculationRequirements": {
+						"mBuffName": "{ecbd8e2e}"
+					}
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/zed/hud/icons2d/zedq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"BonusADRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"PassThroughDamage": {
+					"mMultiplier": {
+						"mNumber": 0.6
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/zed/hud/icons2d/zedw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"RecastRange": [
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000,
+					2000
+				],
+				"MimickRange": [
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000
+				]
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/zed/hud/icons2d/zede.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					45,
+					70,
+					95,
+					120,
+					145,
+					170,
+					195
+				],
+				"ADRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"MoveSpeedMod": [
+					-0.15,
+					-0.2,
+					-0.25,
+					-0.3,
+					-0.35,
+					-0.4,
+					-0.45
+				],
+				"MoveSpeedModBonus": [
+					-0.225,
+					-0.3,
+					-0.375,
+					-0.45,
+					-0.525,
+					-0.6,
+					-0.675
+				],
+				"SlowDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"ShadowHitCDR": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"ZedRadius": [
+					315,
+					315,
+					315,
+					315,
+					315,
+					315,
+					315
+				],
+				"ShadowRadius": [
+					290,
+					290,
+					290,
+					290,
+					290,
+					290,
+					290
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/zed/hud/icons2d/zedr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RDamageAmp": [
+					0.1,
+					0.25,
+					0.4,
+					0.55,
+					0.7,
+					0.85,
+					1
+				],
+				"RReactivateCD": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"RShadowDurationDisplayed": [
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5
+				],
+				"RDeathMarkDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RCanSwapBuffDuration": [
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5,
+					7.5
+				],
+				"RGhostedDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"RVisionDuration": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"{43a019eb}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RShadowDurationDisplayed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mNumber": 0.5,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"RCalculatedDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -97,8 +97,13 @@ if (!championData || championData?.version !== latestVersion) {
 								throw new Error(`${name} no ability key ${abilityDataKey}`);
 							}
 
-							const { mImgIconName, mClientData } = abilityData;
-							let maxLevel: number = index === 0 ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
+							const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData } = abilityData;
+							if (!mClientData) {
+								throw new Error(`${abilityDataKey} no mClientData`);
+							}
+
+							const { mLists, mLocKeys } = mClientData.mTooltipData;
+							let maxLevel: number = index === 0 ? 0 : mLists?.LevelUp?.levelCount;
 
 							if ((championId === 'Jayce' && abilityName === 'r')
 								|| (championId === 'Aphelios' && (abilityName === 'q' || abilityName === 'w' || abilityName === 'e'))) {
@@ -112,6 +117,13 @@ if (!championData || championData?.version !== latestVersion) {
 							return [abilityName, {
 								image: mImgIconName[0].toLowerCase().replace('dds', 'png'),
 								maxLevel,
+								dataValues: DataValues?.length
+									? Object.fromEntries(DataValues.map(({ mName, mValues }: Record<string, number[]>) =>
+											[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
+										))
+									: undefined,
+								spellCalculations: cleanupObject(mSpellCalculations),
+								effectAmount: cleanupObject(mEffectAmount),
 							}];
 						})),
 					};
@@ -802,14 +814,22 @@ function formatNumber(n: number, precision = 3): number {
 	return Number.isInteger(n) ? n : Number(n.toFixed(precision));
 }
 
-function cleanupObject(obj?: object): any {
-	return obj && Object.fromEntries(Object.entries(obj).filter(([key]) => key !== '__type').map(([key, value]) => {
-		return [key, typeof value === 'object'
-			? Array.isArray(value) ? value.map(cleanupObject) : cleanupObject(value)
+function cleanupObject(obj?: object, removeType = true): any {
+	if (!obj) {
+		return obj;
+	}
+
+	let entries = Object.entries(obj);
+	if (removeType) {
+		entries = entries.filter(([key]) => key !== '__type');
+	}
+
+	return obj && Object.fromEntries(entries.map(([key, value]) =>
+		[key, typeof value === 'object'
+			? Array.isArray(value) ? value.map(v => cleanupObject(v, key !== 'mFormulaParts')) : cleanupObject(value)
 			: typeof value === 'number'
 				? formatNumber(value)
-				: value];
-	},
+				: value],
 	),
 	);
 }

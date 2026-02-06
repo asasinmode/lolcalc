@@ -30,23 +30,627 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"spellCalculations": {
+				"BonusAD": {
+					"mFormulaParts": [
+						{
+							"mStat": 7,
+							"mStatFormula": 2,
+							"mSubpart": {
+								"mLevel1Value": 0.12,
+								"mBreakpoints": [
+									{
+										"mLevel": 3,
+										"mAdditionalBonusAtThisLevel": 0.02
+									},
+									{
+										"mLevel": 6,
+										"mAdditionalBonusAtThisLevel": 0.02
+									},
+									{
+										"mLevel": 9,
+										"mAdditionalBonusAtThisLevel": 0.02
+									},
+									{
+										"mLevel": 12,
+										"mAdditionalBonusAtThisLevel": 0.02
+									},
+									{
+										"mLevel": 15,
+										"mAdditionalBonusAtThisLevel": 0.02
+									},
+									{
+										"mLevel": 18,
+										"mAdditionalBonusAtThisLevel": 0.02
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"MinionDamageRatio": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"RampageBonusRatio": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RampageDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"RampageCooldownReduction": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"BaseDamageBonusAD": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BaseDamageBonusAD",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MinionDamage": {
+					"mMultiplier": {
+						"mDataValue": "MinionDamageRatio"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "Damage"
+				},
+				"RampageBonusDamagePerc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RampageBonusRatio",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/hecarim/hud/icons2d/hecarim_spiritofdread.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"NonSelfLeechRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"DamageLeechPerc": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"Damage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"BuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"TickTime": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MinionHealCap": [
+					90,
+					120,
+					150,
+					180,
+					210,
+					240,
+					270
+				],
+				"ResistAmount": [
+					0,
+					5,
+					10,
+					15,
+					20,
+					25,
+					30
+				],
+				"HealBonusADRatio": [
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02
+				],
+				"APRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"LeechAmount": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamageLeechPerc",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"AllyTooltipLeachValue": {
+					"mMultiplier": {
+						"mDataValue": "NonSelfLeechRatio"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "LeechAmount"
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/hecarim/hud/icons2d/hecarim_devastingcharge.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MinMoveSpeed": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"MaxMoveSpeed": [
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65
+				],
+				"MinBaseDamage": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"BonusADRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MaxBaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				]
+			},
+			"spellCalculations": {
+				"MinDamage": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "MinBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"mModifiedGameCalculation": "MinDamage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/hecarim/hud/icons2d/hecarim_onslaughtofshadows.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"FearDurationMin": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"FearDurationMax": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"APRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"DamageDone": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

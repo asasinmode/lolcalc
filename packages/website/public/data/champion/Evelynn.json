@@ -30,23 +30,790 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/evelynn/hud/icons2d/evelynn_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"DemonShadeTimer": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StealthDropTimer": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"HealingThresholdTOOLTIP": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 250,
+							"mInitialBonusPerLevel": 20,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mCoefficient": 2.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"HealPerSecondTOOLTIP": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mStartValue": 15,
+							"mEndValue": 150,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/evelynn/hud/icons2d/evelynn_q1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MissileBaseDamage": [
+					25,
+					30,
+					35,
+					40,
+					45,
+					50,
+					55
+				],
+				"BonusDamageBase": [
+					5,
+					15,
+					25,
+					35,
+					45,
+					55,
+					65
+				],
+				"CooldownRefund": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"HateSpikeBaseDamage": [
+					20,
+					25,
+					30,
+					35,
+					40,
+					45,
+					50
+				],
+				"BonusDamageAPRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"HateSpikeAPRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"QStackCount": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"MissileDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "HateSpikeBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "HateSpikeAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalBonusDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusDamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "BonusDamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/evelynn/hud/icons2d/evelynn_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"CharmDuration": [
+					1,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25,
+					2.5
+				],
+				"MonsterCharm": [
+					2.75,
+					3,
+					3.25,
+					3.5,
+					3.75,
+					4,
+					4.25
+				],
+				"MRShred": [
+					0.325,
+					0.35,
+					0.375,
+					0.4,
+					0.425,
+					0.45,
+					0.475
+				],
+				"ShredDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MonsterDamage": [
+					200,
+					250,
+					300,
+					350,
+					400,
+					450,
+					500
+				],
+				"SlowAmount": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"SlowDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				]
+			},
+			"spellCalculations": {
+				"MonsterDamageTotalTOOLTIP": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MonsterDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/evelynn/hud/icons2d/evelynn_e1.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"EmpoweredDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"BasePercentHealth": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"EmpoweredPercentHealth": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MonsterCap": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"SpeedAmount": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"SpeedDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
+			},
+			"spellCalculations": {
+				"PercentHealthBaseTOOLTIP": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 1,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BasePercentHealth",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.015,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"PercentHealthEmpoweredTOOLTIP": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 1,
+					"mFormulaParts": [
+						{
+							"mDataValue": "EmpoweredPercentHealth",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.025,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/evelynn/hud/icons2d/evelynn_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"CritMultiplier": [
+					2.4,
+					2.4,
+					2.4,
+					2.4,
+					2.4,
+					2.4,
+					2.4
+				],
+				"PassiveReset": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"CritDamage": {
+					"mMultiplier": {
+						"mDataValue": "CritMultiplier"
+					},
+					"mModifiedGameCalculation": "Damage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		}
 	}
 }

@@ -30,23 +30,538 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"GloomDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"MaxDoomCD": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"DashListenerRange": [
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600
+				],
+				"DashLockoutTime": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"GloomCDChamp": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"GloomCDNonChamp": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"FearSlowPercentMax": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"FearedMinionSpeed": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"EFearedMinionSpeed": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"FearSlowPercentMin": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"RangeOfMaxFearSlow": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"RangeOfMinFearSlow": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"APRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				]
+			},
+			"spellCalculations": {
+				"GloomProcCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 40,
+							"mEndValue": 150,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"FearDuration": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.75,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": 0.25
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mPrecision": -1
+				},
+				"{c21c264c}": {
+					"mFormulaParts": [
+						{
+							"mNumber": 25000,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"DoomCD": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 25,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -3
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -3
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": -3
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"GloomMinionMod": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.4,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": 0.05
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.05
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/vex/hud/icons2d/icons_vex_q01.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					25,
+					70,
+					115,
+					160,
+					205,
+					250,
+					295
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"QDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{7b4a4737}": {
+					"mMultiplier": {
+						"mNumber": 1.1
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/vex/hud/icons2d/icons_vex_w01.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ShieldAmount": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"BaseDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"ShieldDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"AOERadius": [
+					475,
+					475,
+					475,
+					475,
+					475,
+					475,
+					475
+				],
+				"BonusAOERadiusVsDashes": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"DamageAPRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"ShieldCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldAmount",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"WDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/vex/hud/icons2d/icons_vex_e01.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					50,
+					70,
+					90,
+					110,
+					130,
+					150
+				],
+				"SlowAmount": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"SlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"StartingRadius": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"RadiusGrowthRate": [
+					13,
+					13,
+					13,
+					13,
+					13,
+					13,
+					13
+				],
+				"APRatio": [
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55,
+					0.6,
+					0.65
+				],
+				"MaxRadius": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"GloomCDChampTooltip": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"GloomCDNonChampTooltip": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
+			},
+			"spellCalculations": {
+				"EDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/vex/hud/icons2d/icons_vex_r01.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					25,
+					75,
+					125,
+					175,
+					225,
+					275,
+					325
+				],
+				"RecastDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"R2Duration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"TakedownWindow": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"ResetWindow": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				]
+			},
+			"spellCalculations": {
+				"RDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RecastDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RecastDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

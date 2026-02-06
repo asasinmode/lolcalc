@@ -30,23 +30,624 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/skarner/hud/icons2d/skarner_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"StacksToTriggerPassive": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"Duration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"TickFrequency": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"PercentHealthDamage": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 9,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"DamageMonsterCap": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 100,
+							"mEndValue": 300,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/skarner/hud/icons2d/skarner_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"RockHoldDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"AttackRadius": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"BaseDamage": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"MaxHPPercent": [
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09,
+					0.09
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"SlowPercent": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"MonsterDamageCap": [
+					100,
+					150,
+					200,
+					250,
+					300,
+					350,
+					400
+				],
+				"AttackRange": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"AttackSpeed": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"BonusHealthRatio": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"ADRatio": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				],
+				"TurretDamageMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"AbilityDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "BonusHealthRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/skarner/hud/icons2d/skarner_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					50,
+					70,
+					90,
+					110,
+					130,
+					150
+				],
+				"DamageAPRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"InitialShieldRatio": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				],
+				"ShieldDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"SlowEffect": [
+					-0.2,
+					-0.2,
+					-0.2,
+					-0.2,
+					-0.2,
+					-0.2,
+					-0.2
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"InitialShield": {
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mDataValue": "InitialShieldRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/skarner/hud/icons2d/skarner_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"ChargeDuration": [
+					2.75,
+					2.75,
+					2.75,
+					2.75,
+					2.75,
+					2.75,
+					2.75
+				],
+				"InitialSpeed": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"Acceleration": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"MaximumSpeed": [
+					950,
+					950,
+					950,
+					950,
+					950,
+					950,
+					950
+				],
+				"GrabHitboxRadius": [
+					160,
+					160,
+					160,
+					160,
+					160,
+					160,
+					160
+				],
+				"GrabHitboxOffset": [
+					90,
+					90,
+					90,
+					90,
+					90,
+					90,
+					90
+				],
+				"WallRevealRadius": [
+					650,
+					650,
+					650,
+					650,
+					650,
+					650,
+					650
+				],
+				"WallWarningRadius": [
+					1750,
+					1750,
+					1750,
+					1750,
+					1750,
+					1750,
+					1750
+				],
+				"GrabbedMoveSpeedBonus": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"MinGrabbedSpeed": [
+					650,
+					650,
+					650,
+					650,
+					650,
+					650,
+					650
+				],
+				"DistancePostGrab": [
+					675,
+					675,
+					675,
+					675,
+					675,
+					675,
+					675
+				],
+				"StunDuration": [
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1
+				],
+				"PinBaseDamage": [
+					0,
+					30,
+					60,
+					90,
+					120,
+					150,
+					180
+				],
+				"ADRatio": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				],
+				"PinDamageRatio": [
+					0.06,
+					0.06,
+					0.06,
+					0.06,
+					0.06,
+					0.06,
+					0.06
+				],
+				"VictimOffsetIncrease": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"RefundPercent": [
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65
+				],
+				"MinimumQRenew": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"InitialHitboxRadius": [
+					160,
+					160,
+					160,
+					160,
+					160,
+					160,
+					160
+				],
+				"InitialHitboxOffset": [
+					90,
+					90,
+					90,
+					90,
+					90,
+					90,
+					90
+				],
+				"SecondHitboxDelay": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"SecondHitboxRadius": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"SecondHitboxOffset": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"FinalHitboxDelay": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"PinDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PinBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "PinDamageRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/skarner/hud/icons2d/skarner_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BackwardOffset": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"HitboxStartHalfWidth": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"HitboxEndHalfWidth": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"BaseDamage": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"Duration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"HoldDistance": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"SpeedBoostAmount": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"SpeedBoostDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"DropDistance": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,712 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/yuumi/hud/icons2d/yuumip2.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"TakedownCompanionship": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"HealDelayTime": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"MinionKillCompanionship": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"PityTimer": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				]
+			},
+			"spellCalculations": {
+				"PassiveCooldown": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 20,
+							"mInitialBonusPerLevel": -1,
+							"mBreakpoints": [
+								{
+									"mLevel": 14
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"{656dde8a}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 50,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"HealAmount": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 20,
+							"mEndValue": 110,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/yuumi/hud/icons2d/yuumiq.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"dataValues": {
+				"MissileDamage": [
+					25,
+					60,
+					95,
+					130,
+					165,
+					200,
+					235
+				],
+				"SlowAmount": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"TimeToAfterburners": [
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35
+				],
+				"MissileLifetime": [
+					1.85,
+					1.85,
+					1.85,
+					1.85,
+					1.85,
+					1.85,
+					1.85
+				],
+				"StartingSpeed": [
+					650,
+					650,
+					650,
+					650,
+					650,
+					650,
+					650
+				],
+				"AfterburnerSpeed": [
+					950,
+					950,
+					950,
+					950,
+					950,
+					950,
+					950
+				],
+				"InitialTimeDelay": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"MissileStartingOffset": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"EmpoweredSlowAmount": [
+					47,
+					50,
+					53,
+					56,
+					59,
+					62,
+					65
+				],
+				"EmpoweredSlowDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"EmpoweredMissileDamage": [
+					25,
+					80,
+					135,
+					190,
+					245,
+					300,
+					355
+				],
+				"OnHitBase": [
+					8,
+					10,
+					12,
+					14,
+					16,
+					18,
+					20
+				],
+				"AllyCritChanceMaxAmp": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"BuffDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"APRatio": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"EmpoweredAPRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"TotalMissileDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MissileDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalMissileDamageEmpowered": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "EmpoweredMissileDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "EmpoweredAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"OnHitDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mDataValue": "OnHitBase",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/yuumi/hud/icons2d/yuumiw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"DashSpeed": [
+					1250,
+					1300,
+					1350,
+					1400,
+					1450,
+					1500,
+					1550
+				],
+				"CastForgivenessRange": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"CastRange": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				],
+				"MaxBonusHealShieldPower": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"BaseHealthOnHit": [
+					2,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8
+				],
+				"HealAndShieldPower": [
+					0.03,
+					0.04,
+					0.05,
+					0.06,
+					0.07,
+					0.08,
+					0.09
+				],
+				"MinBonusHealShieldPower": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				]
+			},
+			"spellCalculations": {
+				"AttachCooldown": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 10,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -5
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -5
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"CCAttachLockout": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						}
+					]
+				},
+				"HealthOnHit": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHealthOnHit",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/yuumi/hud/icons2d/yuumip.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MSDuration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"MSAmount": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"AttackSpeedAmount": [
+					22.5,
+					25,
+					27.5,
+					30,
+					32.5,
+					35,
+					37.5
+				],
+				"BaseShielding": [
+					40,
+					65,
+					90,
+					115,
+					140,
+					165,
+					190
+				],
+				"ManaRestore": [
+					16,
+					20,
+					24,
+					28,
+					32,
+					36,
+					40
+				],
+				"MaxManaPercIncrease": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"APRatio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
+			},
+			"spellCalculations": {
+				"TotalShielding": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseShielding",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalAttackSpeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "AttackSpeedAmount",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.08,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/yuumi/hud/icons2d/yuumir.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"UltLength": [
+					1300,
+					1300,
+					1300,
+					1300,
+					1300,
+					1300,
+					1300
+				],
+				"BaseMissileDamage": [
+					25,
+					75,
+					125,
+					175,
+					225,
+					275,
+					325
+				],
+				"MultiMissileReduction": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"CCDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"UltDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"NumberOfWaves": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"WavesToRoot": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"TimeBetweenWaves": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"MissileSlowPercent": [
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4
+				],
+				"SpaceBehindWave": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"BaseHealPerWave": [
+					20,
+					30,
+					40,
+					50,
+					60,
+					70,
+					80
+				],
+				"BaseSlow": [
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1
+				],
+				"BonusSlowPerWave": [
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1
+				],
+				"OvershieldBonusDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"DegreesPerTick": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"AllyHealingPerc": [
+					1.3,
+					1.3,
+					1.3,
+					1.3,
+					1.3,
+					1.3,
+					1.3
+				]
+			},
+			"spellCalculations": {
+				"TotalMissileDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseMissileDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.25,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalSingleTargetDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mPart1": {
+									"mSubparts": [
+										{
+											"mDataValue": "NumberOfWaves"
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								},
+								"mPart2": {
+									"mDataValue": "MultiMissileReduction"
+								}
+							}
+						]
+					},
+					"mModifiedGameCalculation": "TotalMissileDamage"
+				},
+				"MultiMissileTotal": {
+					"mMultiplier": {
+						"mDataValue": "MultiMissileReduction"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "TotalMissileDamage"
+				},
+				"TotalHealPerWave": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHealPerWave",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"EnhancedHealPerWave": {
+					"mMultiplier": {
+						"mDataValue": "AllyHealingPerc"
+					},
+					"mModifiedGameCalculation": "TotalHealPerWave"
+				},
+				"{ea105dd6}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseBonusResistances",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,395 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/trundle/hud/icons2d/trundle_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"spellCalculations": {
+				"RegenPercent": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 0.018,
+							"mEndValue": 0.055,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/trundle/hud/icons2d/trundle_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"TooltipQADRatio": [
+					0.05,
+					0.15,
+					0.25,
+					0.35,
+					0.45,
+					0.55,
+					0.65
+				],
+				"BonusRange": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"ADScaling": [
+					1.05,
+					1.15,
+					1.25,
+					1.35,
+					1.45,
+					1.55,
+					1.65
+				],
+				"BonusDamage": [
+					-10,
+					10,
+					30,
+					50,
+					70,
+					90,
+					110
+				],
+				"BonusAD": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				],
+				"SappedAD": [
+					-7.5,
+					-10,
+					-12.5,
+					-15,
+					-17.5,
+					-20,
+					-22.5
+				],
+				"SapDebuffDuration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"SlowDuration": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"SlowAmount": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"PrepDuration": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "ADScaling",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/trundle/hud/icons2d/trundle_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/trundle/hud/icons2d/trundle_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/trundle/hud/icons2d/trundle_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"PercentHPDamage": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"ArmorMRShred": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"DurationOfDrainForTooltip": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"NumberOfTicks": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"ShredDuration": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"PercentOfDamageAndShredUpfront": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"ActualDurationOfDrainBuff": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ScaleModelAmount": [
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02
+				],
+				"PercentHPDamageAPRatio": [
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0
+				]
+			},
+			"spellCalculations": {
+				"TotalPercentHPDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PercentHPDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "PercentHPDamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		}
 	}
 }

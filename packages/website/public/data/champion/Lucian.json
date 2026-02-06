@@ -30,23 +30,581 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/lucian/hud/icons2d/lucian_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PassiveDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"PassiveDamageBase": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"OnhitPassiveDuration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"NumAuto": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MaxAutos": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"CCRange": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mSubpart": {
+								"mLevel1Value": 0.5,
+								"mBreakpoints": [
+									{
+										"mLevel": 7,
+										"mAdditionalBonusAtThisLevel": 0.05
+									},
+									{
+										"mLevel": 13,
+										"mAdditionalBonusAtThisLevel": 0.05
+									},
+									{
+										"mLevel": 19,
+										"mAdditionalBonusAtThisLevel": 0.1
+									},
+									{
+										"mLevel": 25,
+										"mAdditionalBonusAtThisLevel": 0.1
+									}
+								]
+							},
+							"__type": "StatBySubPartCalculationPart"
+						}
+					]
+				},
+				"CritDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1.75
+							},
+							{
+								"mStat": 9,
+								"mStatFormula": 2,
+								"mCoefficient": 1
+							}
+						]
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				},
+				"MinionDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MinionCritDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1.75
+							},
+							{
+								"mStat": 9,
+								"mStatFormula": 2,
+								"mCoefficient": 1
+							}
+						]
+					},
+					"mModifiedGameCalculation": "MinionDamage"
+				},
+				"PassiveTotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PassiveDamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/lucian/hud/icons2d/lucian_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					45,
+					80,
+					115,
+					150,
+					185,
+					220,
+					255
+				],
+				"BonusADRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Range": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"Width": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/lucian/hud/icons2d/lucian_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					75,
+					110,
+					145,
+					180,
+					215,
+					250
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.9,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/lucian/hud/icons2d/lucian_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/lucian/hud/icons2d/lucian_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					0,
+					15,
+					30,
+					45,
+					60,
+					75,
+					90
+				],
+				"DamageADRatio": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"DamageAPRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"CritValueMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"PercentDamageAmpToMinions": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"NumShots": [
+					22,
+					22,
+					22,
+					22,
+					22,
+					22,
+					22
+				],
+				"Duration": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"RecastLockout": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"RangeCheck": [
+					1050,
+					1050,
+					1050,
+					1050,
+					1050,
+					1050,
+					1050
+				]
+			},
+			"spellCalculations": {
+				"DamagePerBullet": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "DamageADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "DamageAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mDataValue": "BaseDamage"
+							},
+							{
+								"mStat": 2,
+								"mDataValue": "DamageADRatio"
+							},
+							{
+								"mDataValue": "DamageAPRatio"
+							}
+						]
+					},
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "TotalNumShots"
+				},
+				"TotalNumShots": {
+					"mMultiplier": {
+						"mDataValue": "NumShots"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mSubparts": [
+								{
+									"mNumber": 1
+								},
+								{
+									"mPart1": {
+										"mStat": 8,
+										"mDataValue": "CritValueMod"
+									},
+									"mPart2": {
+										"mSubparts": [
+											{
+												"mStat": 9,
+												"mCoefficient": 1
+											},
+											{
+												"mNumber": -1
+											}
+										]
+									}
+								}
+							],
+							"__type": "SumOfSubPartsCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

@@ -30,23 +30,497 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/nilah/hud/icons2d/nilahp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"ExperiencePercentage": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"HealDistance": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"ShieldIncrease": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"HealingIncrease": [
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075,
+					0.075
+				],
+				"ShieldMaxDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/nilah/hud/icons2d/nilahq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					-10,
+					0,
+					10,
+					20,
+					30,
+					40,
+					50
+				],
+				"CheatingThreshold": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"QADRatio": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"CastRange": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"CritHealScalar": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"CritArmorPenScalar": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"MinionMod": [
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33
+				],
+				"BuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"RangeIncrease": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				],
+				"MonsterMod": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"ShieldDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"ActiveCritScaling": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mPart1": {
+									"mStat": 8,
+									"mDataValue": "ActiveCritScaling"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mStat": 9,
+											"mCoefficient": 1
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								}
+							}
+						]
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "QADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"AttackTotalDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusAttackSpeedCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 10,
+							"mEndValue": 60,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"CritLifesteal": {
+					"mFormulaParts": [
+						{
+							"mStat": 8,
+							"mDataValue": "CritHealScalar",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"CritArmorPen": {
+					"mFormulaParts": [
+						{
+							"mStat": 8,
+							"mDataValue": "CritArmorPenScalar",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/nilah/hud/icons2d/nilahw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MoveSpeedPercent": [
+					0.125,
+					0.15,
+					0.175,
+					0.2,
+					0.225,
+					0.25,
+					0.275
+				],
+				"BaseDuration": [
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25
+				],
+				"ShareBaseDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"ExtensionBonus": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"AreaTriggerSize": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"MagicDamageReduction": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				]
+			}
 		},
 		"e": {
 			"image": "assets/characters/nilah/hud/icons2d/nilahe.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					50,
+					60,
+					70,
+					80,
+					90,
+					100,
+					110
+				],
+				"DashSpeed": [
+					2200,
+					2200,
+					2200,
+					2200,
+					2200,
+					2200,
+					2200
+				],
+				"DashTotalDistance": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				]
+			},
+			"spellCalculations": {
+				"DashDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/nilah/hud/icons2d/nilahr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"Duration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"DamageBase": [
+					25,
+					125,
+					225,
+					325,
+					425,
+					525,
+					625
+				],
+				"ShieldBase": [
+					15,
+					65,
+					115,
+					165,
+					215,
+					265,
+					315
+				],
+				"DamagePerTick": [
+					5,
+					15,
+					25,
+					35,
+					45,
+					55,
+					65
+				],
+				"OtherHealingPercent": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"Microslow": [
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1,
+					-0.1
+				],
+				"NumTicks": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"TickDelay": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ShieldCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ShieldBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"DamagePerTickCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamagePerTick",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"DamagePerTickCalcTooltip": {
+					"mMultiplier": {
+						"mNumber": 4
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "DamagePerTickCalc"
+				},
+				"ChampHealingPercent": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.2,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 8,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		}
 	}
 }

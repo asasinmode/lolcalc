@@ -30,23 +30,545 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/braum/hud/icons2d/braum_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"StackDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StackCap": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"AlreadyStunnedDamageAmp": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mValues": [
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{},
+								{}
+							],
+							"__type": "ByCharLevelFormulaCalculationPart"
+						}
+					]
+				},
+				"OnHitDamage": {
+					"mMultiplier": {
+						"mDataValue": "{9e75385b}"
+					},
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mModifiedGameCalculation": "TotalDamage"
+				},
+				"StunCD": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 8,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": -2
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": -2
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				},
+				"StunDuration": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 1.25,
+							"mBreakpoints": [
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": 0.25
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mPrecision": 2
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/braum/hud/icons2d/braum_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					75,
+					120,
+					165,
+					210,
+					255,
+					300
+				],
+				"MaxHPDamageValue": [
+					0.025,
+					0.025,
+					0.025,
+					0.025,
+					0.025,
+					0.025,
+					0.025
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mDataValue": "{9f758bbd}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/braum/hud/icons2d/braum_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"RangedDamageThreshold": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"AllyArmorPercent": [
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12,
+					0.12
+				],
+				"BraumArmorPercent": [
+					0.36,
+					0.36,
+					0.36,
+					0.36,
+					0.36,
+					0.36,
+					0.36
+				],
+				"BaseResists": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				]
+			},
+			"spellCalculations": {
+				"GrantedAllyArmor": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseResists",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mDataValue": "AllyArmorPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"GrantedAllyMR": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseResists",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mDataValue": "AllyArmorPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"GrantedBraumArmor": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseResists",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 1,
+							"mStatFormula": 2,
+							"mDataValue": "BraumArmorPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"GrantedBraumMR": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseResists",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 6,
+							"mStatFormula": 2,
+							"mDataValue": "BraumArmorPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/braum/hud/icons2d/braum_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"RangedReflect": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				]
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/braum/hud/icons2d/braum_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					0,
+					150,
+					300,
+					450,
+					600,
+					750,
+					900
+				],
+				"KnockupDuration": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"FirstKnockupDuration": [
+					0.5,
+					1,
+					1.5,
+					2,
+					2.5,
+					3,
+					3.5
+				],
+				"MoveSpeedMod": [
+					30,
+					40,
+					50,
+					60,
+					70,
+					80,
+					90
+				],
+				"SlowZoneDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"SlowDebuffDuration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"MinKnockup": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"MaxKnockup": [
+					0.5,
+					1,
+					1.5,
+					2,
+					2.5,
+					3,
+					3.5
+				],
+				"MaxKnockupRatio": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

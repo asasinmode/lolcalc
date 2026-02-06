@@ -30,23 +30,599 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/yunara/hud/icons2d/yunara_passive.yunara.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"spellCalculations": {
+				"Calc_Damage_Amp": {
+					"mFormulaParts": [
+						{
+							"mNumber": 0.1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.001,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/yunara/hud/icons2d/yunara_q.yunara.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Resource_Max": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"Resource_Champion": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"Resource_Nonchampion": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Resource_Loss": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Resource_Loss_Interval": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"Resource_Duration": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"Buff_Duration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"Spread_Radius": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"Spread_AD_Ratio": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"Spread_Lifesteal_Efficacy": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Spread_Onhit_Efficacy": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"Attack_Speed": [
+					0.1,
+					0.2,
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7
+				],
+				"Damage": [
+					0,
+					5,
+					10,
+					15,
+					20,
+					25,
+					30
+				],
+				"Damage_Passive": [
+					0,
+					5,
+					10,
+					15,
+					20,
+					25,
+					30
+				]
+			},
+			"spellCalculations": {
+				"Calc_Passive_Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage_Passive",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"Calc_Attack_Speed": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "Attack_Speed",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"Calc_Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"Calc_Damage_Spread": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "{9e3635ce}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"Calc_Minion_Execute_Threshold": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 0.3,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"Calc_Minion_Execute_Amp": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mNumber": 2.5,
+							"__type": "NumberCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/yunara/hud/icons2d/yunara_w.yunara.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Cast_Time_Base": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"Cast_Time_Min": [
+					0.225,
+					0.225,
+					0.225,
+					0.225,
+					0.225,
+					0.225,
+					0.225
+				],
+				"Cast_Time_Attack_Speed_Cap": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"Cast_Time_Base_Empowered": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"Cast_Time_Min_Empowered": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"Cast_Time_Attack_Speed_Cap_Empowered": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"Linger_Duration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"Damage": [
+					15,
+					55,
+					95,
+					135,
+					175,
+					215,
+					255
+				],
+				"ADRatio": [
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"DPS_Modifier": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"Slow_Duration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"Slow_Amount": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"Minion_Execute_Tick_Count": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				]
+			},
+			"spellCalculations": {
+				"Calc_Damage_Initial": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"Calc_Damage_Per_Second": {
+					"mMultiplier": {
+						"mDataValue": "{62fc6412}"
+					},
+					"mModifiedGameCalculation": "Calc_Damage_Initial"
+				},
+				"{669adf33}": {
+					"mMultiplier": {
+						"mSpellCalculationKey": "Calc_Minion_Damage_Mod"
+					},
+					"mModifiedGameCalculation": "Calc_Damage_Initial"
+				},
+				"Calc_Slow": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "Slow_Amount",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"Calc_Minion_Damage_Mod": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.5,
+							"mBreakpoints": [
+								{
+									"mLevel": 9,
+									"mAdditionalBonusAtThisLevel": 0.25
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": 0.25
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/yunara/hud/icons2d/yunara_e.yunara.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Buff_Duration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"Move_Speed": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"Move_Speed_Modifier": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"Calc_Move_Speed": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "Move_Speed",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"Calc_Move_Speed_Enhanced": {
+					"mMultiplier": {
+						"mDataValue": "{c5483e4c}"
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mModifiedGameCalculation": "Calc_Move_Speed"
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/yunara/hud/icons2d/yunara_r.yunara.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"Buff_Duration": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"RW_Damage_Base": [
+					160,
+					160,
+					320,
+					480,
+					640,
+					800,
+					960
+				],
+				"RW_ADRatio": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				],
+				"RW_APRatio": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"RW_Slow_Duration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"RW_Slow_Amount": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"RE_Dash_Speed": [
+					1200,
+					1350,
+					1500,
+					1650,
+					1800,
+					1950,
+					2100
+				],
+				"RW_CDR": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				]
+			},
+			"spellCalculations": {
+				"Calc_RW_Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RW_Damage_Base",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mDataValue": "{96806f45}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{7edb0429}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"Calc_RW_Slow_Amount": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "{df09786b}",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"{42964db5}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RE_Dash_Speed",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"Calc_RW_Cooldown_Reduction": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "{cc1c79e2}",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		}
 	}
 }

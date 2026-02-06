@@ -30,23 +30,653 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimirp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"spellCalculations": {
+				"ApproximateAPBonusAvoidingRecursion": {
+					"mMultiplier": {
+						"mNumber": 1.06
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mSubparts": [
+									{
+										"mStat": 12,
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									},
+									{
+										"mPart1": {
+											"mEffectIndex": 2
+										},
+										"mPart2": {
+											"mCoefficient": -1
+										}
+									}
+								]
+							},
+							"mPart2": {
+								"mPart1": {
+									"mNumber": 0.01
+								},
+								"mPart2": {
+									"mNumber": 3.333
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				},
+				"ApproximateHPBonusAvoidingRecursion": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mPart1": {
+								"mSubparts": [
+									{
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									},
+									{
+										"mPart1": {
+											"mPart1": {
+												"mNumber": 0.01
+											},
+											"mPart2": {
+												"mNumber": 3.333
+											}
+										},
+										"mPart2": {
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mCoefficient": -1
+										}
+									}
+								]
+							},
+							"mPart2": {
+								"mPart1": {
+									"mNumber": 1.06
+								},
+								"mPart2": {
+									"mEffectIndex": 2
+								}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimirq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"HealAPRatio": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				]
+			},
+			"spellCalculations": {
+				"BaseDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BaseHealTooltip": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 2,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mDataValue": "HealAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"EmpoweredDamageTooltip": {
+					"mMultiplier": {
+						"mNumber": 1.85
+					},
+					"mModifiedGameCalculation": "BaseDamageTooltip"
+				},
+				"EmpoweredHealPercentTooltip": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mModifiedGameCalculation": "EmpoweredHealPercent"
+				},
+				"{097cda4f}": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 30,
+							"mEndValue": 200,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				},
+				"EmpoweredHealTooltip": {
+					"mMultiplier": {
+						"mNumber": 1
+					},
+					"mModifiedGameCalculation": "{097cda4f}"
+				},
+				"EmpoweredHealPercent": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mCoefficient": 0.04,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MovementSpeedOnQ2": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 10,
+							"mBreakpoints": [
+								{
+									"mLevel": 6,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 11,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 21,
+									"mAdditionalBonusAtThisLevel": 10
+								},
+								{
+									"mLevel": 26,
+									"mAdditionalBonusAtThisLevel": 10
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimirw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MinionHealingMod": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"BaseDamage": [
+					25,
+					80,
+					135,
+					190,
+					245,
+					300,
+					355
+				],
+				"HealthCost": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"BonusHealthRatio": [
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15,
+					0.15
+				],
+				"MoveSpeedMod": [
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4
+				],
+				"VampPercent": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"HasteBoost": [
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375,
+					0.375
+				],
+				"HasteDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mStatFormula": 2,
+							"mDataValue": "BonusHealthRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalHeal": {
+					"mMultiplier": {
+						"mDataValue": "VampPercent"
+					},
+					"mModifiedGameCalculation": "TotalDamage"
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimire.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SlowPercent": [
+					35,
+					40,
+					45,
+					50,
+					55,
+					60,
+					65
+				]
+			},
+			"spellCalculations": {
+				"MinDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 3,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mCoefficient": 0.015,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.35,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"MaxDamageTooltip": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 10,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mStat": 12,
+							"mCoefficient": 0.06,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ChargeHealthTooltip": {
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mStat": 12,
+							"mCoefficient": 0.08,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimirr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mEffectIndex": 1,
+							"__type": "EffectValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SecondaryHealingTooltip": {
+					"mMultiplier": {
+						"mNumber": 0.4
+					},
+					"mModifiedGameCalculation": "Damage"
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

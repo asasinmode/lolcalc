@@ -30,23 +30,510 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/aurora/hud/icons2d/aurorapassive.aurora.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"DebuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"SpiritModeDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"BaseHPDamage": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"MonsterMaxDamage": [
+					90,
+					90,
+					90,
+					90,
+					90,
+					90,
+					90
+				],
+				"MSIncrease": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"BonusMsIncrease": [
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02
+				]
+			},
+			"spellCalculations": {
+				"ProcDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHPDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"MoveSpeedCalc": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.05,
+							"mBreakpoints": [
+								{
+									"mLevel": 2,
+									"mAdditionalBonusAtThisLevel": 0.002,
+									"mBonusPerLevelAtAndAfter": 0.002
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"HealCalc": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 3,
+							"mEndValue": 20,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						},
+						{
+							"mCoefficient": 0.02,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{394d1781}": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 10,
+							"mInitialBonusPerLevel": 10,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						},
+						{
+							"mDataValue": "MonsterMaxDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusMSCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BonusMsIncrease",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"CooldownDuration": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 5,
+							"mEndValue": 5,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/aurora/hud/icons2d/auroraq.aurora.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					20,
+					45,
+					70,
+					95,
+					120,
+					145,
+					170
+				],
+				"DamageReduction": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"Q2BaseDamage": [
+					20,
+					45,
+					70,
+					95,
+					120,
+					145,
+					170
+				],
+				"MarkDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"MinionDamageReduction": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"MissingHealthPercentMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"Q2MinionMod": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mSimpleTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"{f7c018c7}": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Q2BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"Q2DamageMax": {
+					"mMultiplier": {
+						"mNumber": 1.5
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "Q2BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/aurora/hud/icons2d/auroraw.aurora.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"InvisDuration": [
+					0.85,
+					1,
+					1.15,
+					1.3,
+					1.45,
+					1.6,
+					1.75
+				],
+				"DashBonusSpeed": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"JumpDistance": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"WallCheatDistance": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"MoveSpeedBonus": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				]
+			}
 		},
 		"e": {
 			"image": "assets/characters/aurora/hud/icons2d/aurorae.aurora.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					70,
+					110,
+					150,
+					190,
+					230,
+					270
+				],
+				"SlowPercent": [
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8,
+					-0.8
+				],
+				"SelfKnockBackDistance": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"AoELength": [
+					825,
+					825,
+					825,
+					825,
+					825,
+					825,
+					825
+				],
+				"AoEWidth": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"SlowDecay": [
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85
+				],
+				"SlowDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/aurora/hud/icons2d/aurorar.aurora.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"BaseDamage": [
+					75,
+					175,
+					275,
+					375,
+					475,
+					575,
+					675
+				],
+				"SlowPercent": [
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3,
+					-0.3
+				],
+				"ExitBaseDamage": [
+					0,
+					50,
+					100,
+					150,
+					200,
+					250,
+					300
+				],
+				"ExitSlowPercent": [
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5
+				],
+				"AreaDuration": [
+					1.75,
+					2.5,
+					3.25,
+					4,
+					4.75,
+					5.5,
+					6.25
+				],
+				"RBuffDuration": [
+					2.75,
+					3.5,
+					4.25,
+					5,
+					5.75,
+					6.5,
+					7.25
+				],
+				"AoESize": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				],
+				"StunDuration": [
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25,
+					2.5,
+					2.75
+				],
+				"MSMultiplier": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"JumpMaxDistance": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"JumpMinDistance": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				]
+			},
+			"spellCalculations": {
+				"DamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.7,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

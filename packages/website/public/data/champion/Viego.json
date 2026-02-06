@@ -30,23 +30,644 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/viego/hud/icons2d/viego_passive.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"MoveSpeedPercent": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"TransformDuration": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"BaseHealPercent": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"TakedownWindow": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"InvulnTimeWhileAttackingSoul": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"SoulDuration": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				]
+			},
+			"spellCalculations": {
+				"PercentHealthHeal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseHealPercent",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.025,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.02,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mStat": 4,
+							"mStatFormula": 2,
+							"mCoefficient": 5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mPrecision": 1
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/viego/hud/icons2d/viego_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					10,
+					25,
+					40,
+					55,
+					70,
+					85,
+					100
+				],
+				"ActiveADRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"ActiveCritMod": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"PercentHealthOnHit": [
+					1,
+					2,
+					3,
+					4,
+					5,
+					6,
+					7
+				],
+				"MinDamageOnHit": [
+					5,
+					10,
+					15,
+					20,
+					25,
+					30,
+					35
+				],
+				"MonsterCapOnHit": [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				],
+				"RectangleRange": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"RectangleWidth": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				],
+				"HealModVsMinions": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"HealModVsMonsters": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"HealModVsChamps": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"MarkDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"HealthCritMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mPart1": {
+									"mStat": 8,
+									"mDataValue": "ActiveCritMod"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mStat": 9,
+											"mCoefficient": 1
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								}
+							}
+						]
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mDataValue": "ActiveADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"SecondAttackDamage": {
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.15,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"TotalPercentHealthOnHit": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mFormulaParts": [
+						{
+							"mDataValue": "PercentHealthOnHit",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				},
+				"HealthCritDamage": {
+					"mMultiplier": {
+						"mPart1": {
+							"mNumber": 0.01
+						},
+						"mPart2": {
+							"mDataValue": "PercentHealthOnHit"
+						}
+					},
+					"mExpandedTooltipCalculationDisplay": 6,
+					"mFormulaParts": [
+						{
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mPart1": {
+								"mDataValue": "{26697b2d}"
+							},
+							"mPart2": {
+								"mSubparts": [
+									{
+										"mStat": 9,
+										"mCoefficient": 1
+									},
+									{
+										"mNumber": -1
+									}
+								]
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/viego/hud/icons2d/viego_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					25,
+					80,
+					135,
+					190,
+					245,
+					300,
+					355
+				],
+				"StunMultPercent": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"StunDuration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"MaxStunTT": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"DashDistance": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"DashSpeed": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"MinMissileRange": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"MaxBonusMissileRange": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"SelfSlowPercent": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"MaxChargeTime": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"CDWheninterrupted": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/viego/hud/icons2d/viego_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MistDuration": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"MoveSpeed": [
+					0.225,
+					0.25,
+					0.275,
+					0.3,
+					0.325,
+					0.35,
+					0.375
+				],
+				"AttackSpeed": [
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.55
+				],
+				"CamoRadius": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"RestealthTime": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"RestealthTimeAfterHittingLargeMonster": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"TotalMovespeed": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MoveSpeed",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/viego/hud/icons2d/viego_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"MaxHealthDamage": [
+					8,
+					12,
+					16,
+					20,
+					24,
+					28,
+					32
+				],
+				"SlowDuration": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"SlowPercent": [
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99,
+					0.99
+				],
+				"LockoutTime": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"KnockbackBonusRange": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"KnockbackSpeed": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"KnockbackGravity": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"ADRatio": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				],
+				"CritMod": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mMultiplier": {
+						"mSubparts": [
+							{
+								"mNumber": 1
+							},
+							{
+								"mPart1": {
+									"mStat": 8,
+									"mDataValue": "CritMod"
+								},
+								"mPart2": {
+									"mSubparts": [
+										{
+											"mStat": 9,
+											"mCoefficient": 1
+										},
+										{
+											"mNumber": -1
+										}
+									]
+								}
+							}
+						]
+					},
+					"mFormulaParts": [
+						{
+							"mStat": 2,
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalPercentHealth": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxHealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

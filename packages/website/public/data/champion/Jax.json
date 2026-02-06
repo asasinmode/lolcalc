@@ -30,23 +30,460 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/jax/hud/icons2d/jaxp.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"BuffDuration": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"MaxStacks": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"FallOffRate": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"BelvethVsJaxQuestRewardStacks": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
+			},
+			"spellCalculations": {
+				"AttackSpeedPerStack": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.05,
+							"mBreakpoints": [
+								{
+									"mLevel": 4,
+									"mAdditionalBonusAtThisLevel": 0.015
+								},
+								{
+									"mLevel": 7,
+									"mAdditionalBonusAtThisLevel": 0.015
+								},
+								{
+									"mLevel": 10,
+									"mAdditionalBonusAtThisLevel": 0.015
+								},
+								{
+									"mLevel": 13,
+									"mAdditionalBonusAtThisLevel": 0.015
+								},
+								{
+									"mLevel": 16,
+									"mAdditionalBonusAtThisLevel": 0.015
+								},
+								{
+									"mLevel": 19,
+									"mAdditionalBonusAtThisLevel": 0.015
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"MaxBonusAttackSpeed": {
+					"mMultiplier": {
+						"mDataValue": "MaxStacks"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "AttackSpeedPerStack"
+				},
+				"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 0.003,
+							"mInitialBonusPerLevel": 0.001,
+							"mBreakpoints": [
+								{
+									"mLevel": 14
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 2
+				},
+				"BelvethVsJaxQuestRewardAttackSpeed": {
+					"mMultiplier": {
+						"mBuffName": "{a8a3dd7a}",
+						"mCoefficient": 1
+					},
+					"mSimpleTooltipCalculationDisplay": 5,
+					"mExpandedTooltipCalculationDisplay": 5,
+					"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack"
+				}
+			}
 		},
 		"q": {
 			"image": "assets/characters/jax/hud/icons2d/jaxq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					25,
+					65,
+					105,
+					145,
+					185,
+					225,
+					265
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/jax/hud/icons2d/jaxw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"Damage": [
+					15,
+					50,
+					85,
+					120,
+					155,
+					190,
+					225
+				],
+				"StructureMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "Damage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/jax/hud/icons2d/jaxe.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					10,
+					40,
+					70,
+					100,
+					130,
+					160,
+					190
+				],
+				"StunDuration": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"PercentIncreasedPerDodge": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"MaxDodgesForDamageIncrease": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"PercentHealthDamage": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"DodgeDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"AoEDamageReduction": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"APRatio": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStatFormula": 2,
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MaxDamage": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "TotalDamage"
+				},
+				"MaxPercentHealthDamage": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"mExpandedTooltipCalculationDisplay": 5,
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "PercentHealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MonsterDamageCap": {
+					"mFormulaParts": [
+						{
+							"mStartValue": 9000,
+							"mEndValue": 9000,
+							"__type": "ByCharLevelInterpolationCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/jax/hud/icons2d/jaxr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"Duration": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"PassiveBaseDamage": [
+					20,
+					75,
+					130,
+					185,
+					240,
+					295,
+					350
+				],
+				"PassiveFallOffTime": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"BaseResists": [
+					30,
+					45,
+					60,
+					75,
+					90,
+					105,
+					120
+				],
+				"ResistsPerExtraTarget": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				],
+				"MRMult": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"SwingDamageBase": [
+					25,
+					100,
+					175,
+					250,
+					325,
+					400,
+					475
+				],
+				"AoESize": [
+					375,
+					375,
+					375,
+					375,
+					375,
+					375,
+					375
+				],
+				"StructureMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
+			},
+			"spellCalculations": {
+				"OnHitDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "PassiveBaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BaseArmor": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseResists",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BonusArmor": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "ResistsPerExtraTarget",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStat": 2,
+							"mStatFormula": 2,
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"SwingDamageTotal": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "SwingDamageBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mStatFormula": 2,
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"BaseMR": {
+					"mMultiplier": {
+						"mDataValue": "MRMult"
+					},
+					"mModifiedGameCalculation": "BaseArmor"
+				},
+				"BonusMR": {
+					"mMultiplier": {
+						"mDataValue": "MRMult"
+					},
+					"mModifiedGameCalculation": "BonusArmor"
+				}
+			}
 		}
 	}
 }

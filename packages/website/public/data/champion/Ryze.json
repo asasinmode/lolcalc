@@ -30,23 +30,594 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_p.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"PercentManaIncrease": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"APAmount": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				]
+			},
+			"spellCalculations": {
+				"{92bc0080}": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.05,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"PassiveManaCalcTooltip": {
+					"mMultiplier": {
+						"mNumber": 0.01
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "PercentManaIncrease",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					],
+					"mPrecision": -1
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						0,
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"q": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_q.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					55,
+					75,
+					95,
+					115,
+					135,
+					155,
+					175
+				],
+				"DamageAmp": [
+					30,
+					40,
+					50,
+					60,
+					70,
+					80,
+					90
+				],
+				"MovementSpeedAmount": [
+					24,
+					28,
+					32,
+					36,
+					40,
+					44,
+					48
+				],
+				"MovementSpeedDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"MaximumRunes": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"RuneDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
+			},
+			"spellCalculations": {
+				"QDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.55,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.02,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"9": {}
+			}
 		},
 		"w": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_w.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"SlowAmount": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"BaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"CCDuration": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"WDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.6,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.03,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_e.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"DebuffDuration": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"BounceRadius": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"DamageAmp": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"BounceRadiusLargeUnit": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				],
+				"BounceRadiusQSmallUnit": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"BounceRadiusQLargeUnit": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				]
+			},
+			"spellCalculations": {
+				"EDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						},
+						{
+							"mCoefficient": 0.02,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"7": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_r.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"ChargeTime": [
+					2.1,
+					2.1,
+					2.1,
+					2.1,
+					2.1,
+					2.1,
+					2.1
+				],
+				"TeleportTime": [
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65,
+					0.65
+				],
+				"AllyIndicatorBuffDuration": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"ChargeTimeTooltip": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"OverloadDamageBonus": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"OverloadHealPercent": [
+					0,
+					20,
+					25,
+					30,
+					40,
+					50,
+					60
+				],
+				"HealPercentMinionMod": [
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33,
+					0.33
+				],
+				"MinimumCastRange": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				]
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {},
+				"3": {},
+				"4": {},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }

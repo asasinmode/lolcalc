@@ -30,23 +30,469 @@
 	"abilities": {
 		"passive": {
 			"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png",
-			"maxLevel": 0
+			"maxLevel": 0,
+			"dataValues": {
+				"TooltipCooldown": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				]
+			}
 		},
 		"q": {
 			"image": "assets/characters/leblanc/hud/icons2d/leblancq.leblanc_rework.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					40,
+					65,
+					90,
+					115,
+					140,
+					165,
+					190
+				],
+				"BaseMarkDamage": [
+					40,
+					65,
+					90,
+					115,
+					140,
+					165,
+					190
+				],
+				"MarkDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"CooldownRefund": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"ManaRefund": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"APRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"MarkDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseMarkDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"BonusMinionDamage": {
+					"mFormulaParts": [
+						{
+							"mLevel1Value": 10,
+							"mInitialBonusPerLevel": 8,
+							"mBreakpoints": [
+								{
+									"mLevel": 19
+								}
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/leblanc/hud/icons2d/leblancw.leblanc_rework.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"WAPRatio": [
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8,
+					0.8
+				],
+				"BaseDamage": [
+					35,
+					75,
+					115,
+					155,
+					195,
+					235,
+					275
+				]
+			},
+			"spellCalculations": {
+				"TotalDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "WAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"e": {
 			"image": "assets/characters/leblanc/hud/icons2d/leblance.leblanc_rework.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseInitialDamage": [
+					30,
+					50,
+					70,
+					90,
+					110,
+					130,
+					150
+				],
+				"BaseDelayedDamage": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"InitialAPRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"DelayedAPRatio": [
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85,
+					0.85
+				]
+			},
+			"spellCalculations": {
+				"InitialDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseInitialDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{4db10781}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"DelayedDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDelayedDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "{16e82c6b}",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {},
+				"1": {},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"4": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"5": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		},
 		"r": {
 			"image": "assets/characters/leblanc/hud/icons2d/leblancr.leblanc_rework.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"RQ1Base": [
+					0,
+					70,
+					140,
+					210,
+					280,
+					350,
+					420
+				],
+				"RQ2Base": [
+					0,
+					140,
+					280,
+					420,
+					560,
+					700,
+					840
+				],
+				"RWBase": [
+					0,
+					150,
+					300,
+					450,
+					600,
+					750,
+					900
+				],
+				"RE1Base": [
+					0,
+					70,
+					140,
+					210,
+					280,
+					350,
+					420
+				],
+				"RE2Base": [
+					0,
+					140,
+					280,
+					420,
+					560,
+					700,
+					840
+				],
+				"RQMarkDuration": [
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5,
+					3.5
+				],
+				"RQ1RE1BaseAPRatio": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
+			},
+			"spellCalculations": {
+				"RQ1Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RQ1Base",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "RQ1RE1BaseAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RQ2Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RQ2Base",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RWDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RWBase",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				},
+				"RE1Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RE1Base",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "RQ1RE1BaseAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"RE2Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "RE2Base",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.85,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		}
 	}
 }

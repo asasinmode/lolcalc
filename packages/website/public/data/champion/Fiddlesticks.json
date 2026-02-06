@@ -34,19 +34,391 @@
 		},
 		"q": {
 			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksq.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"MaxHealthDamage": [
+					0.035,
+					0.04,
+					0.045,
+					0.05,
+					0.055,
+					0.06,
+					0.065
+				],
+				"FearDuration": [
+					1,
+					1.2,
+					1.4,
+					1.6,
+					1.8,
+					2,
+					2.2
+				],
+				"MinimumDamage": [
+					20,
+					40,
+					60,
+					80,
+					100,
+					120,
+					140
+				]
+			},
+			"spellCalculations": {
+				"TotalPercentHealthDamage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "MaxHealthDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					],
+					"mDisplayAsPercent": true,
+					"mPrecision": 1
+				},
+				"TotalPercentHealthDamageFeared": {
+					"mMultiplier": {
+						"mNumber": 2
+					},
+					"mModifiedGameCalculation": "TotalPercentHealthDamage"
+				}
+			}
 		},
 		"w": {
 			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksw.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"DamagePerSecond": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"TicksPerSecond": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"VampPercentage": [
+					17.5,
+					25,
+					32.5,
+					40,
+					47.5,
+					55,
+					62.5
+				],
+				"DrainDuration": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"DrainLeashRange": [
+					725,
+					725,
+					725,
+					725,
+					725,
+					725,
+					725
+				],
+				"PercentMultiplier": [
+					0.095,
+					0.12,
+					0.145,
+					0.17,
+					0.195,
+					0.22,
+					0.245
+				],
+				"PercentForTooltip": [
+					9.5,
+					12,
+					14.5,
+					17,
+					19.5,
+					22,
+					24.5
+				],
+				"MonsterDamageMod": [
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35,
+					1.35
+				],
+				"MonsterHealingMod": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"MinionDamageMod": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"MinionHealingMod": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"MonsterMaxDamage": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				]
+			},
+			"spellCalculations": {
+				"DrainDamageCalc": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.45,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"e": {
 			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlestickse.png",
-			"maxLevel": 5
+			"maxLevel": 5,
+			"dataValues": {
+				"BaseDamage": [
+					35,
+					70,
+					105,
+					140,
+					175,
+					210,
+					245
+				],
+				"SlowAmount": [
+					-0.25,
+					-0.3,
+					-0.35,
+					-0.4,
+					-0.45,
+					-0.5,
+					-0.55
+				],
+				"EmpoweredSlowAmount": [
+					-0.45,
+					-0.5,
+					-0.55,
+					-0.6,
+					-0.65,
+					-0.7,
+					-0.75
+				],
+				"CastRange": [
+					850,
+					850,
+					850,
+					850,
+					850,
+					850,
+					850
+				],
+				"SilenceDuration": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				]
+			},
+			"spellCalculations": {
+				"Damage": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mCoefficient": 0.5,
+							"__type": "StatByCoefficientCalculationPart"
+						}
+					]
+				}
+			}
 		},
 		"r": {
 			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksr.png",
-			"maxLevel": 3
+			"maxLevel": 3,
+			"dataValues": {
+				"DamagePerSecond": [
+					50,
+					150,
+					250,
+					350,
+					450,
+					550,
+					650
+				],
+				"APRatio": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"Duration": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"ChannelTime": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
+			},
+			"spellCalculations": {
+				"DamageDone": {
+					"mMultiplier": {
+						"mNumber": 0.25
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"TotalDamage": {
+					"mMultiplier": {
+						"mDataValue": "Duration"
+					},
+					"tooltipOnly": true,
+					"mModifiedGameCalculation": "{d0d3db7f}"
+				},
+				"APRatioFullDuration": {
+					"mMultiplier": {
+						"mDataValue": "Duration"
+					},
+					"mFormulaParts": [
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"APRatioTick": {
+					"mFormulaParts": [
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				},
+				"{d0d3db7f}": {
+					"tooltipOnly": true,
+					"mFormulaParts": [
+						{
+							"mDataValue": "DamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
+						},
+						{
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
+						}
+					]
+				}
+			},
+			"effectAmount": {
+				"0": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						0,
+						0,
+						0
+					]
+				},
+				"1": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"2": {
+					"value": [
+						{},
+						{},
+						{},
+						{},
+						{},
+						{},
+						{}
+					]
+				},
+				"3": {},
+				"4": {},
+				"5": {},
+				"6": {},
+				"7": {},
+				"8": {},
+				"9": {}
+			}
 		}
 	}
 }
