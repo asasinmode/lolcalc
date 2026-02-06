@@ -123,7 +123,19 @@
 					"tooltipOnly": true,
 					"mModifiedGameCalculation": "BonusAS"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 32,
+				"1": 28,
+				"2": 24,
+				"3": 20,
+				"4": 16,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Moonsilver Blade",
+			"tooltip": "Diana gains <attackSpeed>@BonusAS@ Attack Speed</attackSpeed>, increased to <attackSpeed>@EmpoweredAS@</attackSpeed> for @BuffDuration@ seconds after using an Ability.<br><br>Every third Attack cleaves nearby enemies for an additional <magicDamage>@CleaveDamage@ magic damage</magicDamage>. ",
+			"tooltipExtended": "{{Spell_DianaPassive_Tooltip}}<br><br><rules>Moonsilver Blade deals @Monstermod*100@% damage to monsters.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/diana/hud/icons2d/diana_q_moonsedge.png",
@@ -212,7 +224,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 7.5,
+				"3": 7,
+				"4": 6.5,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Crescent Strike",
+			"tooltip": "Diana unleashes an arc of lunar energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and marking with <keywordMajor>Moonlight</keywordMajor> for @MoonlightDuration@ seconds. <br><br><keywordMajor>Moonlight</keywordMajor> reveals enemies that are not <keywordStealth>stealthed</keywordStealth>."
 		},
 		"w": {
 			"image": "assets/characters/diana/hud/icons2d/diana_w_lunarshower.png",
@@ -352,7 +383,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				65
+			],
+			"cooldownTime": {
+				"0": 15,
+				"1": 15,
+				"2": 13.5,
+				"3": 12,
+				"4": 10.5,
+				"5": 9,
+				"6": 7.5
+			},
+			"name": "Pale Cascade",
+			"tooltip": "Diana creates three orbiting spheres for @ShieldDuration@ seconds that explode on contact, each dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, up to a max of <magicDamage>@TotalMaxDamage@ damage</magicDamage>.<br><br>Diana also gains <shield>@ShieldValue@ Shield</shield> for the same duration. When the last sphere detonates, she gains an additional <shield>@ShieldValue@ Shield</shield> and refreshes the duration."
 		},
 		"e": {
 			"image": "assets/characters/diana/hud/icons2d/diana_e_fasterthanlight.png",
@@ -441,7 +491,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 22,
+				"1": 22,
+				"2": 20,
+				"3": 18,
+				"4": 16,
+				"5": 14,
+				"6": 10
+			},
+			"name": "Lunar Rush",
+			"tooltip": "Diana becomes as the vengeful moon, dashing to an enemy and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. If the target is afflicted with <keywordMajor>Moonlight</keywordMajor>, this Ability's Cooldown is refreshed."
 		},
 		"r": {
 			"image": "assets/characters/diana/hud/icons2d/diana_r_moonfall.png",
@@ -596,7 +665,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 100,
+				"1": 100,
+				"2": 90,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "Moonfall",
+			"tooltip": "Diana <status>Pulls In</status>, <status>Slows</status> by @SlowTooltip@%, and reveals nearby enemies for @SlowDuration@ seconds.<br><br>If Diana hits at least one enemy champion, she calls to the moon, dealing <magicDamage>@RExplosionDamage@ magic damage</magicDamage> plus <magicDamage>@RMultihitAmplification@</magicDamage> for each champion pulled beyond the first, up to a max of an additional <magicDamage>@MaxDamage@ damage</magicDamage>."
 		}
 	}
 }

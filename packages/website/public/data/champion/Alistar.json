@@ -105,7 +105,18 @@
 					"mSimpleTooltipCalculationDisplay": 6,
 					"mModifiedGameCalculation": "BaseHeal"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 3,
+				"1": 3,
+				"2": 3,
+				"3": 3,
+				"4": 3,
+				"5": 3,
+				"6": 3
+			},
+			"name": "Triumphant Roar",
+			"tooltip": "Alistar gains a stack whenever he <status>Stuns</status> or <status>Knocks</status> an enemy champion, or whenever an enemy dies. At @PassiveMaxStacks@ stacks, Alistar roars, restoring <healing>@BaseHeal@ Health</healing> to himself and <healing>@AllyHeal@ Health</healing> to nearby allied champions.<br><br>Enemy champion and epic jungle monster deaths fully charge this Ability."
 		},
 		"q": {
 			"image": "assets/characters/alistar/hud/icons2d/alistar_q.png",
@@ -162,7 +173,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 15,
+				"1": 14,
+				"2": 13,
+				"3": 12,
+				"4": 11,
+				"5": 10,
+				"6": 9
+			},
+			"name": "Pulverize",
+			"tooltip": "Alistar smashes the ground, <status>Knocking Up</status> enemies for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"w": {
 			"image": "assets/characters/alistar/hud/icons2d/alistar_w.png",
@@ -260,7 +290,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 15,
+				"1": 14,
+				"2": 13,
+				"3": 12,
+				"4": 11,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Headbutt",
+			"tooltip": "Alistar rams into an enemy, <status>Knocking</status> them <status>Back</status> and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"e": {
 			"image": "assets/characters/alistar/hud/icons2d/alistar_passive.png",
@@ -403,7 +452,26 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 12.5,
+				"1": 12,
+				"2": 11.5,
+				"3": 11,
+				"4": 10.5,
+				"5": 10,
+				"6": 9.5
+			},
+			"name": "Trample",
+			"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @Effect5Amount@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @Effect6Amount@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>."
 		},
 		"r": {
 			"image": "assets/characters/alistar/hud/icons2d/alistar_r.png",
@@ -427,7 +495,26 @@
 					95,
 					105
 				]
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 120,
+				"5": 120,
+				"6": 120
+			},
+			"name": "Unbreakable Will",
+			"tooltip": "Alistar immediately cleanses all <status>Disabling</status> effects and takes @RDamageReduction@% reduced damage for @RDuration@ seconds."
 		}
 	}
 }

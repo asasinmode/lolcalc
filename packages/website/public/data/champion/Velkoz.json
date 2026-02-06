@@ -65,7 +65,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Organic Deconstruction",
+			"tooltip": "Vel'Koz's Abilities apply a stack of <keywordMajor>Deconstruction</keywordMajor> for @Duration@ seconds. Enemies with 3 stacks consume them and take <trueDamage>@TotalDamage@ true damage</trueDamage>.<br><br>Vel'Koz's Attacks refresh the duration of <keywordMajor>Deconstruction</keywordMajor>, but won't add new stacks."
 		},
 		"q": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_q1.png",
@@ -148,7 +150,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				65
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 7,
+				"3": 7,
+				"4": 7,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Plasma Fission",
+			"tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% decaying over @SlowDuration@ second(s). At the end of its range, on hitting a target, or on <recast>Recasting</recast>, the bolt splits and fires two new bolts at a 90 degree angle.<br><br>Killing a unit with this restores <scaleMana>@TooltipManaRefund@ Mana</scaleMana>."
 		},
 		"w": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_w.png",
@@ -289,7 +310,26 @@
 				},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 1.5,
+				"1": 1.5,
+				"2": 1.5,
+				"3": 1.5,
+				"4": 1.5,
+				"5": 1.5,
+				"6": 1.5
+			},
+			"name": "Void Rift",
+			"tooltip": "Vel'Koz opens a rift to the void, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. The rift then erupts, dealing <magicDamage>@SecondaryDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh)."
 		},
 		"e": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_e.png",
@@ -372,7 +412,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11.5,
+				"3": 11,
+				"4": 10.5,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Tectonic Disruption",
+			"tooltip": "Vel'Koz disrupts a nearby area, causing it to explode, <status>Knocking Up</status> for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Enemies close to Vel'Koz will be <status>Knocked Back</status> instead of <status>Knocked Up</status>."
 		},
 		"r": {
 			"image": "assets/characters/velkoz/hud/icons2d/velkoz_r.png",
@@ -474,7 +533,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 100,
+				"2": 90,
+				"3": 80,
+				"4": 10,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Life Form Disintegration Ray",
+			"tooltip": "Vel'Koz channels a ray of energy that follows the cursor, dealing a total of <magicDamage>@TotalDamage@ magic damage</magicDamage> over 2.5 seconds and <status>Slowing</status> by @Effect3Amount@%. Deals <trueDamage>true damage</trueDamage> instead to enemies recently damaged by <spellName>{{Spell_VelkozPassive_Name}}</spellName>.<br><br>Enemies gain stacks of <keywordMajor>Deconstruction</keywordMajor> periodically while in the beam."
 		}
 	}
 }

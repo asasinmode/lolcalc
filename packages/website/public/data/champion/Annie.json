@@ -80,7 +80,9 @@
 					],
 					"mPrecision": 2
 				}
-			}
+			},
+			"name": "Pyromania",
+			"tooltip": "After using 4 Abilities, Annie's next damaging Ability <status>Stuns</status> for @StunDuration@ seconds.<br><br>Annie begins the game and respawns with <spellName>Pyromania</spellName> available."
 		},
 		"q": {
 			"image": "assets/characters/annie/hud/icons2d/annie_q.png",
@@ -118,7 +120,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				85
+			],
+			"cooldownTime": {
+				"0": 4,
+				"1": 4,
+				"2": 4,
+				"3": 4,
+				"4": 4,
+				"5": 4,
+				"6": 4
+			},
+			"name": "Disintegrate",
+			"tooltip": "Annie hurls a fireball, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. If the target dies, Annie refunds the Mana cost and reduces the Cooldown by 50%."
 		},
 		"w": {
 			"image": "assets/characters/annie/hud/icons2d/annie_w.png",
@@ -156,7 +177,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				70,
+				75,
+				80,
+				85,
+				90,
+				95
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 7,
+				"3": 7,
+				"4": 7,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Incinerate",
+			"tooltip": "Annie projects a wave of fire, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"e": {
 			"image": "assets/characters/annie/hud/icons2d/annie_e.png",
@@ -262,7 +302,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				85
+			],
+			"cooldownTime": {
+				"0": 13,
+				"1": 12,
+				"2": 11.5,
+				"3": 11,
+				"4": 10.5,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Molten Shield",
+			"tooltip": "Annie grants an ally champion <shield>@ShieldBlockTotal@ Shield</shield> for @ShieldDuration@ seconds and <speed>@MoveSpeedCalc@ Decaying Move Speed</speed> for @MovementSpeedDuration@ seconds. While the shield holds, enemies who hit the shielded ally with an Attack or Ability receive <magicDamage>@DamageReturn@ magic damage</magicDamage> once per shield.<br><br>Tibbers always gains the effects of <spellName>Molten Shield</spellName> when summoned."
 		},
 		"r": {
 			"image": "assets/characters/annie/hud/icons2d/annie_r1.png",
@@ -459,7 +518,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 130,
+				"1": 130,
+				"2": 115,
+				"3": 100,
+				"4": 100,
+				"5": 100,
+				"6": 100
+			},
+			"name": "Summon: Tibbers",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Annie gains @RPercentPenBuff*100@% Magic Penetration.<br><br>Annie summons her bear Tibbers, dealing <magicDamage>@InitialBurstDamage@ magic damage</magicDamage>. For the next @TibbersLifetime@ seconds, Tibbers burns nearby enemies for <magicDamage>@TibbersAuraDamage@ magic damage per second</magicDamage>.<br><br>Tibbers becomes enraged when summoned, if Annie stuns an enemy champion, and if Annie dies. When enraged, Tibbers gains <attackSpeed>275% Attack Speed</attackSpeed> and <speed>100% Move Speed</speed> decaying over 3 seconds.<br><br><recast>Recast:</recast> Manually issue orders to Tibbers."
 		}
 	}
 }

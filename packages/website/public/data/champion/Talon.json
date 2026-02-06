@@ -117,7 +117,19 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Blade's End",
+			"tooltip": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds.",
+			"tooltipExtended": "{{game_buff_tooltip_TalonPassive}}<br><br><rules>Damage over time effect deals @monstermod*100@% damage to jungle monsters.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/talon/hud/icons2d/talonq.png",
@@ -199,7 +211,26 @@
 					},
 					"mModifiedGameCalculation": "LeapDamage"
 				}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 7.5,
+				"3": 7,
+				"4": 6.5,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Noxian Diplomacy",
+			"tooltip": "Talon leaps to a target and deals <physicalDamage>@LeapDamage@ physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.<br><br>If this Ability kills the target, Talon restores <healing>@TotalHealing@ Health</healing> and refunds @CooldownRefund*100@% of its Cooldown."
 		},
 		"w": {
 			"image": "assets/characters/talon/hud/icons2d/talonw.png",
@@ -307,7 +338,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8.5,
+				"3": 8,
+				"4": 7.5,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Rake",
+			"tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>@TotalInitialDamage@ physical damage</physicalDamage>. The blades then return to him, dealing <physicalDamage>@TotalReturnDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @MovespeedSlow*100@% for @SlowDuration@ second."
 		},
 		"e": {
 			"image": "assets/characters/talon/hud/icons2d/talone.png",
@@ -374,7 +424,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Assassin's Path",
+			"tooltip": "Talon vaults over the nearest terrain or structure. Talon cannot dash over the same terrain more than once every @WallCD@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/talon/hud/icons2d/talonr.png",
@@ -423,7 +484,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 100,
+				"1": 100,
+				"2": 80,
+				"3": 60,
+				"4": 60,
+				"5": 60,
+				"6": 60
+			},
+			"name": "Shadow Assault",
+			"tooltip": "Talon disperses a ring of blades that deal <physicalDamage>@Damage@ physical damage</physicalDamage>, gains <speed>@MoveSpeed*100@% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for @Duration@ seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> again.<br><br>If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>{{Spell_TalonQ_Name}}</spellName>, the blades return to the target instead."
 		}
 	}
 }

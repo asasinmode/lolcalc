@@ -78,7 +78,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Fleet of Foot",
+			"tooltip": "Sivir's Attacks and Abilities grant her a burst of <speed>@FlatMS@ Decaying Move Speed</speed> for @HasteDuration@ seconds when they damage enemy champions.<br>"
 		},
 		"q": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_q.png",
@@ -229,7 +231,26 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"mana": [
+				55,
+				60,
+				65,
+				70,
+				75,
+				70
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9.5,
+				"3": 9,
+				"4": 8.5,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Boomerang Blade",
+			"tooltip": "Sivir hurls her crossblade like a boomerang, dealing <physicalDamage>@TotalDamage@</physicalDamage> to all enemies it cuts through. Hitting non-champions reduces the damage to subsequent targets, down to a minimum of @FallOffMinimum*100@%."
 		},
 		"w": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_w.png",
@@ -331,7 +352,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Ricochet",
+			"tooltip": "For the next @BuffDuration@ seconds, Sivir gains <attackSpeed>@RicochetAttackSpeed*100@% Attack Speed</attackSpeed> and her auto attacks are empowered to bounce to additional surrounding enemies dealing <physicalDamage>@BounceDamage@ physical damage</physicalDamage> each bounce for up to @MaxBounces@ bounces.<br><br>These bounces critically strike if the attack generating them does."
 		},
 		"e": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_e.png",
@@ -403,7 +443,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 25,
+				"1": 24,
+				"2": 22.5,
+				"3": 21,
+				"4": 19.5,
+				"5": 18,
+				"6": 10
+			},
+			"name": "Spell Shield",
+			"tooltip": "Sivir creates a magical barrier for @Effect1Amount@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot."
 		},
 		"r": {
 			"image": "assets/characters/sivir/hud/icons2d/sivir_r.png",
@@ -495,7 +546,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 90,
+				"5": 90,
+				"6": 10
+			},
+			"name": "On The Hunt",
+			"tooltip": "Sivir rallies her nearby allies, granting them <speed>@MaxMS*100@% Move Speed</speed> for @UltDuration@ seconds.<br><br>Sivir's attacks against champions while On The Hunt reduce the cooldown of her basic abilities by 0.5 seconds.<br><br>Takedowns on recently damaged enemies refreshes the duration of the hunt."
 		}
 	}
 }

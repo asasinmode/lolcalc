@@ -339,7 +339,10 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"name": "We Are More",
+			"tooltip": "Naafiri creates a <keywordMajor>Packmate</keywordMajor> every @PackmateSpawnCooldown@ seconds that will Attack enemies that she targets for <physicalDamage>@PackmateTotalDamage@ physical damage</physicalDamage>, increased to <physicalDamage>@FrenzyDamageTooltipOnly@</physicalDamage> after she uses an Ability. <br><br>Hitting champions and large monsters with Abilities reduces this Ability's Cooldown by @CooldownReduceOnAbilityHit@ seconds. Killing enemies reduces it by @CooldownReduceOnKill@ seconds.<br><br>Max <keywordMajor>Packmates</keywordMajor>: @PackmateCap@",
+			"tooltipExtended": "{{Spell_NaafiriP_Tooltip}}<br><br><rules><keywordMajor>Packmates</keywordMajor> deal @PackmateMonsterMod*100@% damage to Monsters and @PackmateTowerModifier*100@% damage to structures.<br><keywordMajor>Packmates</keywordMajor> take @AOEDamageModifier@ damage from AOE Abilities and effects.<br><keywordMajor>Packmates</keywordMajor> take @NonChampDamageModifier*100@% damage from non-epic monsters and minions.<br><keywordMajor>Packmates</keywordMajor> take @MeleeAttackDamageModifier*100@% damage from melee champion Attacks. </rules><br>"
 		},
 		"q": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_q.png",
@@ -569,7 +572,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				55,
+				60,
+				65,
+				70,
+				75,
+				80
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8.5,
+				"3": 8,
+				"4": 7.5,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Darkin Daggers",
+			"tooltip": "Naafiri hurls Darkin-tainted blades, dealing <physicalDamage>@spell.NaafiriQ:TotalDamageFirstCast@ physical damage</physicalDamage> and inflicting a bleed, dealing <physicalDamage>@spell.NaafiriQ:TotalBleedDamage@ physical damage</physicalDamage> over @spell.NaafiriQ:BleedDuration@ seconds.<br><br>Naafiri can <recast>Recast</recast> this Ability. If enemies hit are already bleeding from this Ability, it instead deals the remaining bleed damage plus between <physicalDamage>@spell.NaafiriQ:TotalMinDamageSecondCast@</physicalDamage> and <physicalDamage>@spell.NaafiriQ:TotalMaxDamageSecondCast@ physical damage</physicalDamage>, based on their missing Health. If that target was a champion or large monster, Naafiri restores <healing>@spell.NaafiriQ:TotalHealSecondCast@ Health</healing>.<br><br><keywordMajor>Packmates</keywordMajor> will leap at the first champion or monster hit and attack them for @spell.NaafiriP:PackmateTauntDuration@ seconds. <br><br>"
 		},
 		"w": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_r.png",
@@ -649,7 +671,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 26,
+				"1": 26,
+				"2": 24,
+				"3": 22,
+				"4": 20,
+				"5": 18,
+				"6": 18
+			},
+			"name": "The Call of the Pack",
+			"tooltip": "Naafiri becomes Untargetable for @UntargetableDuration@ second and prepares to hunt, spawning <keywordMajor>@PackmatesToAdd@ additional Packmates</keywordMajor> and gaining <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @Duration@ seconds.<br><br><keywordMajor>Packmates</keywordMajor> become Untargetable and are recalled to Naafiri.<br><br>"
 		},
 		"e": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_e.png",
@@ -766,7 +807,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				35,
+				35,
+				35,
+				35,
+				35,
+				35
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Eviscerate",
+			"tooltip": "Naafiri surges forward, dealing <physicalDamage>@TotalDamageFirstSlash@ physical damage</physicalDamage>, then explodes in a flurry of blades, dealing <physicalDamage>@TotalDamageSecondSlash@ physical damage.</physicalDamage><br><br><keywordMajor>Packmates</keywordMajor> become Untargetable and are recalled to Naafiri <healing>restoring 100% Health</healing>. <br>"
 		},
 		"r": {
 			"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_w.png",
@@ -952,7 +1012,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 110,
+				"1": 110,
+				"2": 95,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "Hounds' Pursuit",
+			"tooltip": "Naafiri dashes at an enemy champion, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slowing</status> them. <keywordMajor>Packmates</keywordMajor> become Untargetable and dash alongside Naafiri, dealing <physicalDamage>@PackmateDamage@ physical damage</physicalDamage> per <keywordMajor>Packmate</keywordMajor>.<br><br>If Naafiri scores a Takedown within @TakedownWindow@ seconds she reveals nearby enemies and can recast this Ability once. The second cast grants <shield>@ShieldTotal@ Shield</shield> for @ShieldDuration@ seconds.<br><br><br>"
 		}
 	}
 }

@@ -67,7 +67,10 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
 				}
-			}
+			},
+			"name": "Perseverance",
+			"tooltip": "Garen regenerates <healing>@RegenCalc@ max Health</healing> every 5 seconds if he has not been damaged or hit with enemy Abilities in the last @DamageTimer@ seconds.",
+			"tooltipExtended": "{{Spell_GarenPassive_Tooltip}}<br><br><rules>Minion and non-epic jungle monster damage does not stop the regeneration.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/garen/hud/icons2d/garen_q.png",
@@ -142,7 +145,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 8,
+				"3": 8,
+				"4": 8,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Decisive Strike",
+			"tooltip": "Garen removes all <status>Slowing</status> effects on him and gains <speed>@MovementSpeedAmount*100@% Move Speed</speed> for @MovementSpeedDuration@ second(s).<br><br>His next Attack <status>Silences</status> for @SilenceDuration@ seconds and does <physicalDamage>@TotalDamage@ physical damage</physicalDamage>."
 		},
 		"w": {
 			"image": "assets/characters/garen/hud/icons2d/garen_w.png",
@@ -282,7 +296,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 22,
+				"1": 22,
+				"2": 19.5,
+				"3": 17,
+				"4": 14.5,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Courage",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Garen has <scaleArmor>@ResistsForTooltip@ bonus Armor</scaleArmor> and <scaleMR>@ResistsForTooltip@ bonus Magic Resist</scaleMR>. Killing units permanently grants <attention>@ResistGainOnKillTooltip@ resists</attention>, up to a max of <attention>@ResistMax@</attention>.<br><br><spellActive>Active:</spellActive> Garen steels his courage for @DRDuration@ seconds, reducing incoming damage by @DRPercent*100@%. He also gains <shield>@TotalShield@ Shield</shield> and <slow>@UpfrontTenacity*100@% Tenacity</slow> for @UpfrontDuration@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/garen/hud/icons2d/garen_e1.png",
@@ -427,7 +452,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8.25,
+				"3": 7.5,
+				"4": 6.75,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Judgment",
+			"tooltip": "Garen rapidly spins his sword for @Duration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> @f1@ times over the duration. The nearest enemy takes <physicalDamage>@NearestEnemyBonus*100@% increased damage</physicalDamage>. Champions hit by @StacksToShred@ strikes lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br><recast>Recast</recast>: Garen ends this Ability early."
 		},
 		"r": {
 			"image": "assets/characters/garen/hud/icons2d/garen_r.png",
@@ -460,7 +496,18 @@
 					1,
 					1
 				]
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 120,
+				"5": 120,
+				"6": 120
+			},
+			"name": "Demacian Justice",
+			"tooltip": "Garen calls upon the might of Demacia to slay his enemy, dealing <trueDamage>@BaseDamage@ plus @ExecuteDamage*100@% missing Health true damage</trueDamage>."
 		}
 	}
 }

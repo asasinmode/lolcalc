@@ -103,7 +103,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Determination",
+			"tooltip": "Every third Attack or strike with <spellName>Wind Becomes Lightning</spellName> deals an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing>."
 		},
 		"q": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkq.xinzhaorework.png",
@@ -156,7 +158,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				30,
+				30,
+				30,
+				30,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 6.5,
+				"3": 6,
+				"4": 5.5,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Three Talon Strike",
+			"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @Effect2Amount@ seconds.<br>"
 		},
 		"w": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkw.xinzhaorework.png",
@@ -359,7 +380,26 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				55,
+				50,
+				45,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11,
+				"3": 10,
+				"4": 9,
+				"5": 8,
+				"6": 7
+			},
+			"name": "Wind Becomes Lightning",
+			"tooltip": "Xin Zhao slashes, dealing <physicalDamage>@SlashDamage@ physical damage</physicalDamage>, then thrusts, dealing <physicalDamage>@ThrustDamage@</physicalDamage>. Enemies hit by the thrust are <status>Slowed</status> by @Effect6Amount*-100@% for @Effect7Amount@ seconds. <br><br>Champions and Large Monsters hit by the thrust are marked as <keywordMajor>Challenged</keywordMajor> for @MarkDuration@ seconds and revealed unless <keywordStealth>Stealthed</keywordStealth>."
 		},
 		"e": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworke.xinzhaorework.png",
@@ -469,7 +509,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 11,
+				"3": 11,
+				"4": 11,
+				"5": 11,
+				"6": 11
+			},
+			"name": "Audacious Charge",
+			"tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>@ChargeDamage@ magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by @BaseSlowAmount@% for @Effect6Amount@ seconds.<br><br>Xin Zhao also grants himself <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.<br><br>This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>. <br>"
 		},
 		"r": {
 			"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkr.xinzhaorework.png",
@@ -541,7 +600,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 110,
+				"3": 100,
+				"4": 100,
+				"5": 100,
+				"6": 100
+			},
+			"name": "Crescent Guard",
+			"tooltip": "<spellPassive>Passive:</spellPassive> The last champion Xin Zhao damaged with an Attack or <spellName>Audacious Charge</spellName> is <keywordMajor>Challenged</keywordMajor> for @MarkDuration@ seconds.<br><br><spellActive>Active:</spellActive> Xin Zhao unleashes a sweep around him that deals <physicalDamage>@TotalDamage@ plus @PercentCurrentHealthDamage*100@% current Health physical damage</physicalDamage> and <status>Knocks Back</status> all <keywordMajor>non-Challenged</keywordMajor> enemies. <br>  <br>Afterwards, Xin Zhao becomes immune to damage from enemies outside the sweep range for @MissileDefenseBaseDuration@ seconds. "
 		}
 	}
 }

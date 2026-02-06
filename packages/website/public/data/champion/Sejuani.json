@@ -143,7 +143,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Fury of the North",
+			"tooltip": "Sejuani becomes immune to <status>Slows</status> and gains <scaleArmor>@TotalArmorTooltip@ Armor</scaleArmor> and <scaleMR>@TotalMRTooltip@ Magic Resist</scaleMR> after not taking damage from champions or large jungle monsters for @FrostArmorOOC@ seconds.<br><br>Sejuani's first Attack against enemies she has <status>Stunned</status> deals an additional <magicDamage>@PercentHPDamage@ max Health magic damage</magicDamage>.",
+			"tooltipExtended": "{{Spell_SejuaniPassive_Tooltip}}<br><br><rules>Percent Health damage against epic jungle monsters is capped at @EpicMonsterCap@.<br>Defensive effect persists for @FrostArmorDuration@ seconds after taking damage from champions or large jungle monsters.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/sejuani/hud/icons2d/sejuani_q.png",
@@ -223,7 +226,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 18,
+				"1": 18,
+				"2": 16.5,
+				"3": 15,
+				"4": 13.5,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Arctic Assault",
+			"tooltip": "Sejuani charges, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to enemies and <status>Knocking</status> them <status>Up</status> for @Effect4Amount@ seconds. The charge ends after hitting an enemy champion."
 		},
 		"w": {
 			"image": "assets/characters/sejuani/hud/icons2d/sejuani_w.png",
@@ -359,7 +381,27 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 9,
+				"2": 8,
+				"3": 7,
+				"4": 6,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Winter's Wrath",
+			"tooltip": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage</physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>.",
+			"tooltipExtended": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage </physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>."
 		},
 		"e": {
 			"image": "assets/characters/sejuani/hud/icons2d/sejuani_e.png",
@@ -468,7 +510,26 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"mana": [
+				20,
+				20,
+				20,
+				20,
+				20,
+				20
+			],
+			"cooldownTime": {
+				"0": 1.5,
+				"1": 1.5,
+				"2": 1.5,
+				"3": 1.5,
+				"4": 1.5,
+				"5": 1.5,
+				"6": 1.5
+			},
+			"name": "Permafrost",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Nearby melee allied champions' Attacks apply a stack to champions and jungle monsters.<br><br><spellPassive>Active:</spellPassive> Sejuani deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to target enemy with 4 stacks and <status>Stuns</status> them for @Effect1Amount@ second. "
 		},
 		"r": {
 			"image": "assets/characters/sejuani/hud/icons2d/sejuani_r.png",
@@ -590,7 +651,26 @@
 				},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 105,
+				"3": 90,
+				"4": 90,
+				"5": 90,
+				"6": 90
+			},
+			"name": "Glacial Prison",
+			"tooltip": "Sejuani throws her True Ice bola, <status>Stunning</status> and revealing the first enemy champion hit for @Effect2Amount@ second and dealing <magicDamage>@MinorDamageTooltip@ magic damage</magicDamage>.<br><br>If the bola travels at least 25% of its range, it <status>Stuns</status> and reveals for @Effect6Amount@ seconds instead. It then also creates an ice storm that <status>Slows</status> surrounding enemies by @Effect4Amount@% for @Effect3Amount@ seconds. All affected enemies take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>."
 		}
 	}
 }

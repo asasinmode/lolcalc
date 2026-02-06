@@ -97,7 +97,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Prophet of an Elder God",
+			"tooltip": "Illaoi draws the presence of her god, spawning a Tentacle on nearby terrain if no other Tentacles are nearby (<scaleLevel>@SpawnCD@</scaleLevel> second cooldown). Tentacles will not attack on their own, but can be made to <keywordMajor>Slam</keywordMajor> by Illaoi's Abilities.<br><br><keywordMajor>Slam</keywordMajor> deals <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>. Hitting at least one enemy champion restores <healing>@MissingHPPercentHeal*100@% missing Health</healing> to Illaoi.",
+			"tooltipExtended": "{{Spell_IllaoiPassive_Tooltip}}<br><br><rules>Enemies hit by multiple Slams at once take 50% damage for the second and 25% damage for all additional Slams.<br>Tentacles last until killed or Illaoi is out of range for @TentacleDisabledLifetime@ seconds.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/illaoi/hud/icons2d/illaoi_q.png",
@@ -199,7 +202,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				65
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 10,
+				"2": 9,
+				"3": 8,
+				"4": 7,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Tentacle Smash",
+			"tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage> (currently <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>).<br><br><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward."
 		},
 		"w": {
 			"image": "assets/characters/illaoi/hud/icons2d/illaoi_w.png",
@@ -322,7 +344,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				30,
+				30,
+				30,
+				30,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 4,
+				"1": 4,
+				"2": 4,
+				"3": 4,
+				"4": 4,
+				"5": 4,
+				"6": 4
+			},
+			"name": "Harsh Lesson",
+			"tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>@HealthPercentTotal@ max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target."
 		},
 		"e": {
 			"image": "assets/characters/illaoi/hud/icons2d/illaoi_e.png",
@@ -464,7 +505,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				35,
+				40,
+				45,
+				50,
+				55,
+				60
+			],
+			"cooldownTime": {
+				"0": 16,
+				"1": 16,
+				"2": 15,
+				"3": 14,
+				"4": 13,
+				"5": 12,
+				"6": 11
+			},
+			"name": "Test of Spirit",
+			"tooltip": "Illaoi pulls the spirit from an enemy champion for @SpiritDuration@ seconds. The spirit can be damaged like a champion, with @EchoPercent@ of that damage echoing to its owner.<br><br>If the spirit dies or the target leaves its range, the target becomes marked for @VesselDuration@ seconds and is <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds. Marked enemies spawn Tentacles if possible.<br><br>Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every @TimeBetweenVesselTentacleSlams@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/illaoi/hud/icons2d/illaoi_r.png",
@@ -514,7 +574,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 95,
+				"3": 70,
+				"4": 70,
+				"5": 70,
+				"6": 70
+			},
+			"name": "Leap of Faith",
+			"tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br><br>For the next @Duration@ seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a @spell.IllaoiW:CooldownDuringR@ second cooldown."
 		}
 	}
 }

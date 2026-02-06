@@ -62,7 +62,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Double Strike",
+			"tooltip": "Every @AttackCount@th Attack, Master Yi strikes twice. The second Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+			"tooltipExtended": "{{Passive_MasterYiPassive_Tooltip}}<br><br><rules>The second strike counts as a normal Attack; it is able to critically strike and applies on-hit effects.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/masteryi/hud/icons2d/masteryi_q.png",
@@ -298,7 +301,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 20.5,
+				"1": 20,
+				"2": 19.5,
+				"3": 19,
+				"4": 18.5,
+				"5": 18,
+				"6": 17.5
+			},
+			"name": "Alpha Strike",
+			"tooltip": "Master Yi becomes Untargetable and teleports to rapidly strike enemies near his target, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemies hit after @AlphaStrikeBounces@ hits. <br><br>This Ability can strike the same enemy repeatedly if there are no other targets, dealing @SubsequentHitMultiplier*100@% damage for subsequent hits (<physicalDamage>@SubesquentDamage@</physicalDamage>), for a maximum single target total of <physicalDamage>@SingleTotalDamage@ physical damage</physicalDamage>."
 		},
 		"w": {
 			"image": "assets/characters/masteryi/hud/icons2d/masteryi_w.png",
@@ -434,7 +456,17 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"name": "Meditate",
+			"tooltip": "Master Yi channels, restoring <healing>@TotalHeal@ Health</healing> over @HealDuration@ seconds. This healing is increased by up to @MaxMissingHealthPercent*100@% based on Master Yi's missing Health.<br><br>While channeling and for @DRLinger@ seconds afterwards, he takes @InitialDR@ reduced damage, decreased to @DamageReduction*100@% after the first @InitialExtraDRDuration@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/masteryi/hud/icons2d/masteryi_e1.png",
@@ -493,7 +525,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 14,
+				"3": 14,
+				"4": 14,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Wuju Style",
+			"tooltip": "Master Yi's Attacks deal an additional <trueDamage>@TotalDamage@ true damage</trueDamage> for @Duration@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/masteryi/hud/icons2d/masteryi_r.png",
@@ -544,7 +587,26 @@
 					0.7,
 					0.7
 				]
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				0
+			],
+			"cooldownTime": {
+				"0": 85,
+				"1": 85,
+				"2": 85,
+				"3": 85,
+				"4": 85,
+				"5": 85,
+				"6": 85
+			},
+			"name": "Highlander",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Champion takedowns reduce the remaining Cooldown of Master Yi's basic Abilities by @RCooldownRefund*100@%.<br><br><spellActive>Active:</spellActive> Master Yi enters a trance, gaining <speed>@RMSBonus@% Move Speed</speed>, <attackSpeed>@RASBonus@% Attack Speed</attackSpeed>, and immunity to <status>Slows</status> for @RDuration@ seconds. Champion takedowns extend the duration of this Ability by @RKillAssistExtension@ seconds."
 		}
 	}
 }

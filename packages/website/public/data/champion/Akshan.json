@@ -238,7 +238,10 @@
 					},
 					"mModifiedGameCalculation": "SecondAutoDamage"
 				}
-			}
+			},
+			"name": "Dirty Fighting",
+			"tooltip": "After launching an Attack, Akshan will fire an additional shot for <physicalDamage>@SecondAutoDamage@ physical damage</physicalDamage>. He can cancel this shot to instead gain <speed>@ASModdedMS@ Move Speed</speed> decaying over @HasteDuration@ second.<br><br>Every three hits from Attacks or Abilities deals an additional <magicDamage>@PassiveProcDamage@ magic damage</magicDamage>. Against champions, Akshan also gains <shield>@TotalShieldAmount@ Shield</shield> for @ShieldDuration@ seconds (@PassiveCooldown@ second Cooldown).<br><br>",
+			"tooltipExtended": "{{Spell_AkshanPassive_Tooltip}}<br><rules>The second Attack can critically strike at @SecondAutoCritRatio*100@% effectiveness.<br>The second Attack deals 100% total attack damage to minions.<br>The first Attack <speed>Move Speed</speed> scales with <attackSpeed>100% Attack Speed.</attackSpeed></rules>"
 		},
 		"q": {
 			"image": "assets/characters/akshan/hud/icons2d/akshan_q.png",
@@ -345,7 +348,26 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8,
+				"3": 7,
+				"4": 6,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Avengerang",
+			"tooltip": "Akshan throws a boomerang that deals <physicalDamage>@FinalDamage@ physical damage</physicalDamage>, extending the range each time an enemy is hit.<br><br>Champion hits grant Akshan <speed>@TotalHaste@ Move Speed</speed> decaying over @HasteDuration@ second."
 		},
 		"w": {
 			"image": "assets/characters/akshan/hud/icons2d/akshan_w.png",
@@ -488,7 +510,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				30,
+				20,
+				10,
+				0,
+				30
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 18,
+				"2": 14,
+				"3": 10,
+				"4": 6,
+				"5": 2,
+				"6": 10
+			},
+			"name": "Going Rogue",
+			"tooltip": "{{ Spell_AkshanW_Tooltip_@GameModeInteger@ }}"
 		},
 		"e": {
 			"image": "assets/characters/akshan/hud/icons2d/akshan_e.png",
@@ -682,7 +723,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 18,
+				"2": 16.5,
+				"3": 15,
+				"4": 13.5,
+				"5": 12,
+				"6": 8
+			},
+			"name": "Heroic Swing",
+			"tooltip": "<spellActive>First Cast:</spellActive> Akshan fires a grappling hook, attaching to the first terrain hit.<br><br><spellActive>Second Cast:</spellActive> Akshan swings around the terrain, repeatedly firing at the nearest enemy for <physicalDamage>@DamageToDeal@ physical damage</physicalDamage> per shot.<br><br><spellActive>Third Cast:</spellActive> Akshan dives off the rope, firing a final shot.<br><br>Colliding with an enemy Champion or terrain ends the swing early.<br><br>Champion takedowns refresh this Ability's Cooldown."
 		},
 		"r": {
 			"image": "assets/characters/akshan/hud/icons2d/akshan_r.png",
@@ -814,7 +874,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 100,
+				"1": 100,
+				"2": 85,
+				"3": 70,
+				"4": 70,
+				"5": 70,
+				"6": 70
+			},
+			"name": "Comeuppance",
+			"tooltip": "Akshan locks onto a champion and begins overcharging his gun for up to @ChannelDuration@ seconds, storing up to @NumberOfBullets@ bullets.<br><br><recast>Recast:</recast> Akshan unleashes the stored bullets, each dealing at least <physicalDamage>@DamagePerBulletWithCrit@ physical damage</physicalDamage> to the first enemy or structure hit, increased up to <physicalDamage>@MaxDamagePerBullet@ physical damage</physicalDamage> based on missing Health."
 		}
 	}
 }

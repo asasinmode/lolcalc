@@ -68,7 +68,9 @@
 					225,
 					225
 				]
-			}
+			},
+			"name": "Noxious Slipstream",
+			"tooltip": "Singed drafts off of nearby allied or enemy champions, gaining <speed>@MSPercent*100@% Move Speed</speed> for @MSDuration@ seconds. This effect has an @PerTargetCD@ second Cooldown per champion."
 		},
 		"q": {
 			"image": "assets/characters/singed/hud/icons2d/singed_q.png",
@@ -158,7 +160,26 @@
 					"tooltipOnly": true,
 					"mModifiedGameCalculation": "DamagePerSecond"
 				}
-			}
+			},
+			"mana": [
+				13,
+				13,
+				13,
+				13,
+				13,
+				13
+			],
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Poison Trail",
+			"tooltip": "<toggle>Toggle:</toggle> Singed lays a poisonous trail that deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second."
 		},
 		"w": {
 			"image": "assets/characters/singed/hud/icons2d/singed_w.png",
@@ -200,7 +221,26 @@
 					0.375,
 					0.375
 				]
-			}
+			},
+			"mana": [
+				60,
+				70,
+				80,
+				90,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 17,
+				"1": 17,
+				"2": 16,
+				"3": 15,
+				"4": 14,
+				"5": 13,
+				"6": 13
+			},
+			"name": "Mega Adhesive",
+			"tooltip": "Singed hurls a cask of sticky liquid, <status>Grounding</status> and <status>Slowing</status> enemies in the area by @SlowPercent@% for @WDuration@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/singed/hud/icons2d/singed_e.png",
@@ -281,7 +321,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				70,
+				80,
+				90,
+				100,
+				110
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9.5,
+				"3": 9,
+				"4": 8.5,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Fling",
+			"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/singed/hud/icons2d/singed_r.png",
@@ -323,7 +382,26 @@
 					1,
 					1
 				]
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 100,
+				"1": 100,
+				"2": 100,
+				"3": 100,
+				"4": 100,
+				"5": 100,
+				"6": 100
+			},
+			"name": "Insanity Potion",
+			"tooltip": "Singed drinks a potent brew of chemicals, granting him @StatAmount@ <scaleAP>Ability Power</scaleAP>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, <speed>Move Speed</speed>, <healing>Health Regen</healing>, and <scaleMana>Mana Regen</scaleMana> for @Duration@ seconds. During this effect, Singed's <spellName>Poison Trail</spellName> also applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ second."
 		}
 	}
 }

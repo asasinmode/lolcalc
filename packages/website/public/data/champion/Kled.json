@@ -244,7 +244,19 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Skaarl, the Cowardly Lizard",
+			"tooltip": "<keywordMajor>Mounted:</keywordMajor> Kled's mount Skaarl takes damage instead of Kled. When his Health depletes, Kled dismounts.<br><br><keywordMajor>Dismounted:</keywordMajor> Kled replaces <spellName>{{spell_KledQ_Name}}</spellName>, gains <speed>@DismountedMS@ Move Speed</speed> toward enemy champions, and he gains @DismountedResistBonus@ bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, increased by @ResistBonusPerEnemy*100@% for each nearby enemy Champion, up to @DismountedResistBonusMax@. While dismounted, Kled's attacks deal @DismountedAttackPenalty@ reduced damage to Champions. <br><br>Kled gains <keywordMajor>@CourageVsChamps@ Courage</keywordMajor> by Attacking champions, <keywordMajor>@CourageVsOther@ Courage</keywordMajor> by Attacking epic monsters and structures, and <keywordMajor>@CourageLastHit@ Courage</keywordMajor> by killing minions. At max <keywordMajor>Courage</keywordMajor> Kled remounts with @SkaarlRemountHealth@ of Skaarl's Health, once every @MountCooldown@ seconds.",
+			"tooltipExtended": "{{Spell_KledPassive_Tooltip}}<br><br><rules>Skaarl has <healing>@SkaarlHealth@ Health plus 100% of Kled's bonus Health</healing>.<br>When Kled dismounts, he cleanses all crowd control and becomes briefly untargetable.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/kled/hud/icons2d/kled_q1.png",
@@ -386,7 +398,19 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 12,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 6
+			},
+			"name": "Bear Trap on a Rope",
+			"tooltip": "<keywordMajor>Mounted:</keywordMajor> Kled throws a bear trap that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and hooks onto the first enemy champion or large jungle monster hit.<br><br>If Kled stays near a hooked enemy for @TetherPopTime@ seconds, he yanks out the trap, dealing <physicalDamage>@TotalYankDamage@ physical damage</physicalDamage>, <status>Pulling</status> them, and <status>Slowing</status> by @SlowAmount*-100@% for @SlowDuration@ seconds.",
+			"tooltipExtended": "{{spell_KledQ_Tooltip}}<br><br><keywordMajor>Dismounted:</keywordMajor> Kled fires a shotgun, dealing <physicalDamage>@DismountedQDamage@ physical damage</physicalDamage> and blasting Kled backward. Pellets beyond the first deal reduced damage.<br><br>Each pellet that hits an enemy champion or epic monster restores <keywordMajor>Courage</keywordMajor>."
 		},
 		"w": {
 			"image": "assets/characters/kled/hud/icons2d/kled_w.png",
@@ -491,7 +515,18 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 2
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 14,
+				"1": 13,
+				"2": 12,
+				"3": 11,
+				"4": 10,
+				"5": 9,
+				"6": 9
+			},
+			"name": "Violent Tendencies",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Kled's next Attack grants <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for four Attacks or @ActiveDuration@ seconds.<br><br>The fourth hit deals an additional <physicalDamage>@BaseFlatDamage@ plus @PercentDamage@ max Health physical damage</physicalDamage>."
 		},
 		"e": {
 			"image": "assets/characters/kled/hud/icons2d/kled_e1.png",
@@ -576,7 +611,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 14,
+				"1": 13,
+				"2": 12,
+				"3": 11,
+				"4": 10,
+				"5": 9,
+				"6": 9
+			},
+			"name": "Jousting",
+			"tooltip": "Kled dashes, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies he passes through, pulling minions and small monsters towards him.<br><br>If this Ability hits an enemy champion or large jungle monster, Kled gains <speed>@MoveSpeed*100@% Move Speed</speed> for @MoveSpeedDuration@ second(s) and can <recast>Recast</recast> within @RecastWindow@ seconds to dash back through the same target."
 		},
 		"r": {
 			"image": "assets/characters/kled/hud/icons2d/kled_r.png",
@@ -724,7 +770,18 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 140,
+				"1": 140,
+				"2": 125,
+				"3": 110,
+				"4": 110,
+				"5": 110,
+				"6": 110
+			},
+			"name": "Chaaaaaaaarge!!!",
+			"tooltip": "Kled charges toward an area, leaving a trail that grants allies increasing <speed>Move Speed</speed>. While charging and for 2 seconds after Kled gains up to <shield>@MaximumShield@ Shield</shield>. Skaarl rams the first enemy champion encountered, dealing <magicDamage>@MinimumDamageTooltip@</magicDamage> to <magicDamage>@MaximumChargeDamage@ max Health magic damage</magicDamage> (based on distance travelled) and briefly <status>Knocking Back</status>."
 		}
 	}
 }

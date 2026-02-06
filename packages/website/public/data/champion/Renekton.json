@@ -77,7 +77,18 @@
 					50,
 					50
 				]
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Reign of Anger",
+			"tooltip": "Renekton gains <keywordMajor>@FuryPerAttack@ Fury</keywordMajor> per Attack. While above <keywordMajor>@FuryCost@ Fury</keywordMajor>, his next Ability spends it to become empowered. <keywordMajor>Fury</keywordMajor> decays while out of combat.<br><br>While below @LowHealthPercentThreshold*100@% Health, Renekton gains @FuryIncreasePercent*100@% increased <keywordMajor>Fury</keywordMajor>."
 		},
 		"q": {
 			"image": "assets/characters/renekton/hud/icons2d/renekton_q.png",
@@ -297,7 +308,18 @@
 					},
 					"mModifiedGameCalculation": "ChampHealing"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 7,
+				"3": 7,
+				"4": 7,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Cull the Meek",
+			"tooltip": "Renekton swings his blade, dealing <physicalDamage>@BasicDamage@ physical damage</physicalDamage> and restoring <healing>@NonChampHealing@ Health</healing> per non-champion and <healing>@ChampHealing@</healing> per champion hit. He also generates <keywordMajor>@MinionFuryGain@ Fury</keywordMajor> per non-champion and <keywordMajor>@ChampionFuryGain@ Fury</keywordMajor> per champion.<br><br><keywordMajor>Fury Bonus</keywordMajor>: Damage is increased to <physicalDamage>@EmpDamage@ physical damage</physicalDamage> and healing is increased to <healing>@EmpNonChampHealing@ Health</healing> against non-champions and <healing>@EmpChampHealing@ Health</healing> against champions. Does not generate any <keywordMajor>Fury</keywordMajor>."
 		},
 		"w": {
 			"image": "assets/characters/renekton/hud/icons2d/renekton_w.png",
@@ -384,7 +406,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 16,
+				"2": 14,
+				"3": 12,
+				"4": 10,
+				"5": 8,
+				"6": 0
+			},
+			"name": "Ruthless Predator",
+			"tooltip": "Renekton's next Attack strikes twice, <status>Stunning</status> for @StunDuration@ seconds and dealing a total of <physicalDamage>@BasicTotalDamage@ physical damage</physicalDamage>. Hitting a champion generates an additional <keywordMajor>@BonusFuryVsChamps@ Fury</keywordMajor>.<br><br><keywordMajor>Fury Bonus</keywordMajor>: Renekton Attacks 3 times instead, destroying <shield>Shields</shield> before dealing <physicalDamage>@EmpTotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @EnragedStunDuration@ seconds. Does not generate any <keywordMajor>Fury</keywordMajor>."
 		},
 		"e": {
 			"image": "assets/characters/renekton/hud/icons2d/renekton_e.png",
@@ -532,7 +565,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 16,
+				"1": 16,
+				"2": 14.5,
+				"3": 13,
+				"4": 11.5,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Slice and Dice",
+			"tooltip": "Renekton dashes, dealing <physicalDamage>@BasicDamage@ physical damage</physicalDamage>. He generates <keywordMajor>@MinionRageGeneration@ Fury</keywordMajor> per non-champion and <keywordMajor>@ChampionRageGeneration@ Fury</keywordMajor> per champion hit. Hitting at least one enemy allows Renekton to <recast>Recast</recast> this Ability once for @DiceTimer@ seconds. <br><br><keywordMajor>Fury Bonus</keywordMajor>: The <recast>Recast</recast> dash deals <physicalDamage>@EmpDamage@ physical damage</physicalDamage> instead and removes <scaleArmor>@EnragedArmorShred@% Armor</scaleArmor> for @ShredTimer@ seconds. Does not generate <keywordMajor>Fury</keywordMajor>."
 		},
 		"r": {
 			"image": "assets/characters/renekton/hud/icons2d/renekton_r.png",
@@ -612,7 +656,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "Dominus",
+			"tooltip": "Renekton surrounds himself with dark energies for @BuffDuration@ seconds, gaining <healing>@HealthGain@ max Health</healing> and <keywordMajor>@FuryOnCast@ Fury</keywordMajor>. While active, he deals <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> and gains <keywordMajor>@FuryPerSecond@ Fury</keywordMajor> per second."
 		}
 	}
 }

@@ -119,7 +119,19 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 13,
+				"1": 13,
+				"2": 13,
+				"3": 13,
+				"4": 13,
+				"5": 13,
+				"6": 13
+			},
+			"name": "Umbra Blades",
+			"tooltip": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.",
+			"tooltipExtended": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.<br><br><rules><spellName>Umbra Blades</spellName> deals @DamageMinionMod*100@% less damage to minions and heals @HealMinionMod*100@% less from lane minions.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/nocturne/hud/icons2d/nocturne_duskbringer.png",
@@ -220,7 +232,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				85
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 8,
+				"3": 8,
+				"4": 8,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Duskbringer",
+			"tooltip": "Nocturne throws a shadow blade, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and leaving a dusk trail for @Effect3Amount@ seconds. Enemy champions hit also leave a trail. <br><br>While on the trail, Nocturne is Ghosted and gains <speed>@MoveSpeed@% Move Speed</speed> and <physicalDamage>@BonusTrailAD@ Attack Damage</physicalDamage>."
 		},
 		"w": {
 			"image": "assets/characters/nocturne/hud/icons2d/nocturne_shroudofdarkness.png",
@@ -276,7 +307,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 22,
+				"1": 20,
+				"2": 18,
+				"3": 16,
+				"4": 14,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Shroud of Darkness",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Nocturne creates a shadow barrier for 1.5 seconds that blocks the next enemy Ability. If an Ability is blocked, this Ability's passive effect is increased to <attackSpeed>@Effect1Amount*2@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/nocturne/hud/icons2d/nocturne_unspeakablehorror.png",
@@ -357,7 +407,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				85
+			],
+			"cooldownTime": {
+				"0": 16,
+				"1": 15,
+				"2": 14,
+				"3": 13,
+				"4": 12,
+				"5": 11,
+				"6": 11
+			},
+			"name": "Unspeakable Horror",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <speed>@TooltipFearMS*100@% Move Speed</speed> toward <status>Feared</status> enemies.<br><br><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds. If the tether remains unbroken, the target is <status>Feared</status> for @Effect2Amount@ second(s)."
 		},
 		"r": {
 			"image": "assets/characters/nocturne/hud/icons2d/nocturne_paranoia.png",
@@ -415,7 +484,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 140,
+				"1": 140,
+				"2": 115,
+				"3": 90,
+				"4": 90,
+				"5": 90,
+				"6": 90
+			},
+			"name": "Paranoia",
+			"tooltip": "Nocturne darkens the map, reducing the sight radius of all enemy champions and removing their vision of allies for @ParanoiaDuration@ seconds. Nocturne can <recast>Recast</recast> this Ability during the duration to launch himself at an enemy champion dealing <physicalDamage>@Damage@ physical damage</physicalDamage>."
 		}
 	}
 }

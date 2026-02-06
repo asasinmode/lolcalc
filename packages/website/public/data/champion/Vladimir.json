@@ -141,7 +141,10 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"name": "Crimson Pact",
+			"tooltip": "Vladimir gains <scaleAP>1 Ability Power</scaleAP> for every <scaleHealth>@Effect1Amount@ bonus Health</scaleHealth>. He also gains <scaleHealth>@Effect2Amount@ max Health</scaleHealth> per <scaleAP>1 Ability Power</scaleAP>.<br><br><scaleAP>Bonus Ability Power: @ApproximateAPBonusAvoidingRecursion@</scaleAP><br><scaleHealth>Bonus Health: @ApproximateHPBonusAvoidingRecursion@</scaleHealth>",
+			"tooltipExtended": "{{Spell_VladimirP_Tooltip}}<br><br><rules>These bonuses don't count for each other.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimirq.png",
@@ -337,7 +340,18 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 10.1,
+				"1": 9,
+				"2": 7.9,
+				"3": 6.8,
+				"4": 5.7,
+				"5": 4.6,
+				"6": 3.5
+			},
+			"name": "Transfusion",
+			"tooltip": "Vladimir drains his target's lifeforce, dealing <magicDamage>@BaseDamageTooltip@ magic damage</magicDamage> and restoring <healing>@BaseHealTooltip@ Health</healing>. After using this Ability twice, Vladimir gains <speed>@MovementSpeedOnQ2@% Move Speed</speed> for 0.5 seconds and empowers the next use of this Ability for @Effect8Amount@ seconds.<br><br>The empowered version of this Ability deals <magicDamage>@EmpoweredDamageTooltip@ magic damage</magicDamage> instead and restores an additional <healing>@EmpoweredHealTooltip@ plus @EmpoweredHealPercentTooltip@ missing Health</healing>."
 		},
 		"w": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimirw.png",
@@ -437,7 +451,18 @@
 					},
 					"mModifiedGameCalculation": "TotalDamage"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 31,
+				"1": 28,
+				"2": 25,
+				"3": 22,
+				"4": 19,
+				"5": 16,
+				"6": 16
+			},
+			"name": "Sanguine Pool",
+			"tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>@HasteBoost*100@% decaying Move Speed</speed> for @HasteDuration@ second and becoming <keyword>Untargetable</keyword> and <keyword>Ghosted</keyword> while <status>Slowing</status> enemies in the pool by @MoveSpeedMod*-100@%.<br><br>Vladimir deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and restores <healing>@TotalHeal@ Health</healing> per enemy over the duration."
 		},
 		"e": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimire.png",
@@ -590,7 +615,18 @@
 						{}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 15,
+				"1": 13,
+				"2": 11,
+				"3": 9,
+				"4": 7,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Tides of Blood",
+			"tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to <font color='#CC3300'>@ChargeHealthTooltip@ Health</font>. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br><br><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>@MinDamageTooltip@</magicDamage> and <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by @SlowPercent@% for 0.5 seconds."
 		},
 		"r": {
 			"image": "assets/characters/vladimir/hud/icons2d/vladimirr.png",
@@ -676,7 +712,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 120,
+				"3": 120,
+				"4": 120,
+				"5": 120,
+				"6": 120
+			},
+			"name": "Hemoplague",
+			"tooltip": "Vladimir creates a virulent plague, causing its victims to take @Effect2Amount@% increased damage from all sources for @Effect4Amount@ seconds. After it expires, Vladimir deals <magicDamage>@Damage@ magic damage</magicDamage> to all infected targets. Vladimir restores <healing>@Damage@ Health</healing> if he hits a champion, and restores an additional <healing>@SecondaryHealingTooltip@ Health</healing> for each champion beyond the first."
 		}
 	}
 }

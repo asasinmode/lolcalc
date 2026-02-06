@@ -102,7 +102,19 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 90,
+				"1": 90,
+				"2": 90,
+				"3": 90,
+				"4": 90,
+				"5": 90,
+				"6": 90
+			},
+			"name": "Shurima's Legacy",
+			"tooltip": "Azir can summon the <keywordMajor>Sun Disc</keywordMajor> from the rubble of a turret. The <keywordMajor>Sun Disc</keywordMajor> deals <magicDamage>@TowerDamage@ magic damage</magicDamage> and has @BonusResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> but disintegrates over @TowerDisintegrationTime@ seconds.",
+			"tooltipExtended": "{{Spell_AzirPassive_Tooltip}}<br><br><rules>You may not target enemy Nexus and Inhibitor Turrets with this Ability.<br><keywordMajor>Sun Disk</keywordMajor> loses 100 <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> if you are dead or too far away.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/azir/hud/icons2d/azir_q.png",
@@ -231,7 +243,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				80,
+				90,
+				100,
+				110,
+				110
+			],
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 12,
+				"3": 10,
+				"4": 8,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Conquering Sands",
+			"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @Effect2Amount*-100@% for 1 second."
 		},
 		"w": {
 			"image": "assets/characters/azir/hud/icons2d/azir_w.png",
@@ -367,7 +398,26 @@
 						{}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				35,
+				30,
+				25,
+				20,
+				20
+			],
+			"cooldownTime": {
+				"0": 1.5,
+				"1": 1.5,
+				"2": 1.5,
+				"3": 1.5,
+				"4": 1.5,
+				"5": 1.5,
+				"6": 1.5
+			},
+			"name": "Arise!",
+			"tooltip": "Azir summons a <keywordMajor>Sand Soldier</keywordMajor> for @Effect1Amount@ seconds. When Azir Attacks an enemy near a <keywordMajor>Sand Soldier</keywordMajor>, he instead orders the soldiers to stab, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> in their direction.<br><br>This Ability has @MaxAmmo@ charges."
 		},
 		"e": {
 			"image": "assets/characters/azir/hud/icons2d/azir_e.png",
@@ -507,7 +557,26 @@
 						{}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 22,
+				"1": 22,
+				"2": 20.5,
+				"3": 19,
+				"4": 17.5,
+				"5": 16,
+				"6": 16
+			},
+			"name": "Shifting Sands",
+			"tooltip": "Azir grants himself <shield>@TotalShield@ Shield</shield> for @Effect6Amount@ seconds and dashes to one of his <keywordMajor>Sand Soldiers</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through.<br><br>If Azir hits an enemy champion, he stops and gains a <keywordMajor>Sand Soldier</keywordMajor> charge."
 		},
 		"r": {
 			"image": "assets/characters/azir/hud/icons2d/azir_r.png",
@@ -596,7 +665,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 105,
+				"3": 90,
+				"4": 90,
+				"5": 90,
+				"6": 90
+			},
+			"name": "Emperor's Divide",
+			"tooltip": "Azir summons a wall of armored soldiers that charges forward, <status>Knocking Back</status> enemies and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The soldiers remain, blocking enemy paths for @Effect4Amount@ seconds."
 		}
 	}
 }

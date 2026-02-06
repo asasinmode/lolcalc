@@ -167,7 +167,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Voracity",
+			"tooltip": "Whenever an enemy champion dies that Katarina has damaged in the last @ResetWindow@ seconds, her Ability Cooldowns are reduced by @ResetCDR@ seconds.<br><br>If Katarina picks up a <keywordMajor>Dagger</keywordMajor>, she uses it to slash through all nearby enemies, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+			"tooltipExtended": "{{Spell_KatarinaPassive_Tooltip}}<br><br><rules><keywordMajor>Dagger</keywordMajor> slashes apply On-Hit Effects to champions.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_q.png",
@@ -254,7 +257,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 12,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Bouncing Blade",
+			"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target."
 		},
 		"w": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
@@ -290,7 +304,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 16,
+				"1": 15,
+				"2": 14,
+				"3": 13,
+				"4": 12,
+				"5": 11,
+				"6": 11
+			},
+			"name": "Preparation",
+			"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
@@ -414,7 +439,18 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11,
+				"3": 10,
+				"4": 9,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Shunpo",
+			"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target."
 		},
 		"r": {
 			"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
@@ -549,7 +585,18 @@
 					},
 					"mModifiedGameCalculation": "ADDamageCalc"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 75,
+				"1": 75,
+				"2": 60,
+				"3": 45,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Death Lotus",
+			"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>."
 		}
 	}
 }

@@ -116,7 +116,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Unseen Threat",
+			"tooltip": "When Kha'Zix is not visible to the enemy team, his next Attack against a champion deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Enemies with no nearby allies become <keywordMajor>Isolated</keywordMajor>."
 		},
 		"q": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_q.png",
@@ -240,7 +251,27 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				20,
+				20,
+				20,
+				20,
+				20,
+				20
+			],
+			"cooldownTime": {
+				"0": 4,
+				"1": 4,
+				"2": 4,
+				"3": 4,
+				"4": 4,
+				"5": 4,
+				"6": 4
+			},
+			"name": "Taste Their Fear",
+			"tooltip": "{{Spell_KhazixQ_Tooltip_@IsEvolved@}}",
+			"tooltipExtended": "{{Spell_KhazixQ_Tooltip_0}}<br><br>{{Spell_KhazixQ_Tooltip_1}}"
 		},
 		"w": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_w.png",
@@ -428,7 +459,27 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				55,
+				60,
+				65,
+				70,
+				75,
+				80
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 9,
+				"3": 9,
+				"4": 9,
+				"5": 9,
+				"6": 9
+			},
+			"name": "Void Spike",
+			"tooltip": "{{Spell_KhazixW_Tooltip_@IsEvolved@}}",
+			"tooltipExtended": "{{Spell_KhazixW_Tooltip_0}}<br><br>{{Spell_KhazixW_Tooltip_1}}"
 		},
 		"e": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_e.png",
@@ -556,7 +607,27 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 22,
+				"1": 20,
+				"2": 18,
+				"3": 16,
+				"4": 14,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Leap",
+			"tooltip": "{{Spell_KhazixE_Tooltip_@IsEvolved@}}",
+			"tooltipExtended": "{{Spell_KhazixE_Tooltip_0}}<br><br>{{Spell_KhazixE_Tooltip_1}}"
 		},
 		"r": {
 			"image": "assets/characters/khazix/hud/icons2d/khazix_r.png",
@@ -664,7 +735,27 @@
 						"mBuffName": "{7bcf22fa}"
 					}
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 100,
+				"1": 100,
+				"2": 85,
+				"3": 70,
+				"4": 70,
+				"5": 70,
+				"6": 70
+			},
+			"name": "Void Assault",
+			"tooltip": "{{Spell_KhazixR_Tooltip_@IsEvolved@}}<br><br>{{Spell_KhazixR_Tooltip_P}}",
+			"tooltipExtended": "{{Spell_KhazixR_Tooltip_P}}<br><br>{{Spell_KhazixR_Tooltip_0}}<br><br>{{Spell_KhazixR_Tooltip_1}}"
 		}
 	}
 }

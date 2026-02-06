@@ -134,7 +134,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "New Destiny",
+			"tooltip": "Graves' Attacks have unique properties:<br><li>It can only fire two <keywordMajor>Shells</keywordMajor> before he must reload. <attackSpeed>Attack Speed</attackSpeed> reduces reload time slightly, but reduces time between shots dramatically.<li>Each Attack fires 4 bullets. The first bullet on a target deals <physicalDamage>@SingleBulletDamage@ physical damage</physicalDamage>, and subsequent bullets deal <physicalDamage>@MultiBulletDamage@</physicalDamage> each. Instead of normal Critical effects, Critical strikes fire 6 bullets and deal @CritDamageMult@ more damage. Structures take @StructureDamageReduction*100@% reduced damage.<li>Bullets stop on the first unit hit. Non-champions struck by multiple bullets are <status>Knocked Back</status>."
 		},
 		"q": {
 			"image": "assets/characters/graves/hud/icons2d/gravesq.png",
@@ -215,7 +217,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				80,
+				80,
+				80,
+				80,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 13,
+				"1": 13,
+				"2": 11.25,
+				"3": 9.5,
+				"4": 7.75,
+				"5": 6,
+				"6": 6
+			},
+			"name": "End of the Line",
+			"tooltip": "Graves fires a powder round dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. After 1 second or after colliding with terrain, it detonates, dealing <physicalDamage>@TotalDetonationDamage@ physical damage</physicalDamage> along the travel path again and to enemies near the blast."
 		},
 		"w": {
 			"image": "assets/characters/graves/hud/icons2d/gravesw.png",
@@ -306,7 +327,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				75,
+				80,
+				85,
+				90,
+				95
+			],
+			"cooldownTime": {
+				"0": 26,
+				"1": 26,
+				"2": 24,
+				"3": 22,
+				"4": 20,
+				"5": 18,
+				"6": 18
+			},
+			"name": "Smoke Screen",
+			"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @Effect2Amount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>."
 		},
 		"e": {
 			"image": "assets/characters/graves/hud/icons2d/gravese.png",
@@ -474,7 +514,26 @@
 						{}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 17,
+				"1": 16,
+				"2": 15,
+				"3": 14,
+				"4": 13,
+				"5": 12,
+				"6": 11
+			},
+			"name": "Quickdraw",
+			"tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for @BuffDuration@ seconds (max @MaxStacks@ stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>@ArmorPerStack@ Armor</scaleArmor> and <scaleMR>@MRGrant@ Magic Resist</scaleMR>. Stacks are refreshed when damaging a non-minion.<br><br>Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by @CooldownPerHit@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/graves/hud/icons2d/gravesr.png",
@@ -539,7 +598,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 100,
+				"1": 100,
+				"2": 80,
+				"3": 60,
+				"4": 60,
+				"5": 60,
+				"6": 60
+			},
+			"name": "Collateral Damage",
+			"tooltip": "Graves fires an explosive cartridge, blasting himself backwards. The cartridge deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After hitting an enemy champion or reaching the end of its range, the cartridge explodes outward, dealing <physicalDamage>@FalloffDamage@ physical damage</physicalDamage>."
 		}
 	}
 }

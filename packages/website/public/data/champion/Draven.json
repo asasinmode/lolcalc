@@ -119,7 +119,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "League of Draven",
+			"tooltip": "Draven gains @StackGain@ stack whenever he kills a non-champion unit or turret, catches a <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven gains @PassiveGoldBase@ gold plus @PassiveGoldPerStack@ additional gold per stack upon killing a champion. Draven loses @PercentOfStacksLost@% of stacks upon death.<br><br>Total Gold Earned: <statTracking>@DravenPassiveGoldEarned@</statTracking><br>Highest Reward: <statTracking>@DravenPassiveHighestBounty@</statTracking>"
 		},
 		"q": {
 			"image": "assets/characters/draven/hud/icons2d/draven_spinningaxe.png",
@@ -201,7 +203,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				45,
+				45,
+				45,
+				45,
+				45,
+				45
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11,
+				"3": 10,
+				"4": 9,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Spinning Axe",
+			"tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once."
 		},
 		"w": {
 			"image": "assets/characters/draven/hud/icons2d/draven_bloodrage.png",
@@ -305,7 +326,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				35,
+				30,
+				25,
+				20,
+				15
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Blood Rush",
+			"tooltip": "Draven becomes Ghosted, gains <speed>@Effect2Amount@% Move Speed</speed> decaying over @Effect3Amount@ seconds and <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's Cooldown is refreshed."
 		},
 		"e": {
 			"image": "assets/characters/draven/hud/icons2d/draven_twinaxe.png",
@@ -389,7 +429,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 19,
+				"1": 18,
+				"2": 17,
+				"3": 16,
+				"4": 15,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Stand Aside",
+			"tooltip": "Draven chucks a sideways axe that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>, <status>Knocks Back</status>, and <status>Slows</status> by @Effect2Amount@% for @Effect3Amount@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/draven/hud/icons2d/draven_whirlingdeath.png",
@@ -467,7 +526,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 100,
+				"1": 100,
+				"2": 90,
+				"3": 80,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Whirling Death",
+			"tooltip": "Draven hurls two massive axes that deal <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal @RDamageReductionPerHit*100@% less damage for each enemy hit, down to a minimum of @RMinDamagePercent@%.<br><br>If <keywordMajor>{{ Spell_DravenRCast_Name }}</keywordMajor> would leave an enemy champion with less health than @RPassiveStacksCoefficient*100@% of Draven's current <keywordMajor>{{Spell_DravenPassive_Name}}</keywordMajor> stacks (@RPassiveTrueDamage@), he will execute them."
 		}
 	}
 }

@@ -83,7 +83,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Martial Cadence",
+			"tooltip": "Jarvan's Attacks deal an additional <physicalDamage>@TooltipCurrentHealthDamage*100@% current Health physical damage</physicalDamage>. This effect has a @TooltipCooldown@ second Cooldown per target.",
+			"tooltipExtended": "{{ Spell_JarvanIVMartialCadence_Tooltip }}<br><br><rules>Deals a minimum of 20 and a maximum of 400 damage to non-champions.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivq.png",
@@ -157,7 +160,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				45,
+				50,
+				55,
+				60,
+				65,
+				70
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9,
+				"3": 8,
+				"4": 7,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Dragon Strike",
+			"tooltip": "Jarvan extends his lance, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and removing <scaleArmor>@Effect2Amount@% Armor</scaleArmor> for @Effect3Amount@ seconds.<br><br>If the lance connects with <spellName>{{Spell_JarvanIVDemacianStandard_Name}}</spellName>, Jarvan will pull himself to it, <status>Knocking Up</status> those in his path for 0.75 seconds."
 		},
 		"w": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivw.png",
@@ -258,7 +280,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				30,
+				30,
+				30,
+				30,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 9,
+				"3": 9,
+				"4": 9,
+				"5": 9,
+				"6": 9
+			},
+			"name": "Golden Aegis",
+			"tooltip": "Jarvan summons an aegis, <status>Slowing</status> nearby enemies by @Effect2Amount@% for @Effect5Amount@ seconds and granting him a <shield>@BaseShield@ Shield</shield>, increased by <shield>@BonusShield@</shield> for each enemy champion hit."
 		},
 		"e": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanive.png",
@@ -375,7 +416,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				55,
+				55,
+				55,
+				55,
+				55,
+				55
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11.5,
+				"3": 11,
+				"4": 10.5,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Demacian Standard",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Jarvan gains <attackSpeed>@PermanentAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Jarvan throws a standard into the ground, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting allies near the standard <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivr.png",
@@ -415,7 +475,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 0,
+				"1": 120,
+				"2": 105,
+				"3": 90,
+				"4": 8,
+				"5": 5,
+				"6": 0
+			},
+			"name": "Cataclysm",
+			"tooltip": "Jarvan heroically leaps to an enemy Champion, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to them and surrounding enemies and creating an arena of impassable terrain around them for @WallDuration@ seconds.<br><br>Jarvan can <recast>Recast</recast> to collapse the terrain."
 		}
 	}
 }

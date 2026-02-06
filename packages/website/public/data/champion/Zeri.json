@@ -97,7 +97,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Living Battery",
+			"tooltip": "Zeri's Attacks are treated as Abilities instead of Attacks and can be charged up by moving and casting <spellName>{{Spell_ZeriQ_Name}}</spellName>. Uncharged Attacks consume a small amount of charge, deal <magicDamage>@Spell.ZeriQ:MinDamage@ magic damage</magicDamage> and <danger>execute</danger> enemies below <attention>@Spell.ZeriQ:PassiveExecuteThreshold@ Health</attention>. A fully charged Attack deals <magicDamage>@Spell.ZeriQ:PassiveMaxDamage@ + @Spell.ZeriQ:PassiveMaxChargePercentHealth@ max Health magic damage</magicDamage> and consumes all charge.",
+			"tooltipExtended": "{{Spell_ZeriPassive_Tooltip}}<br><br><rules>Percent Health damage against jungle monsters is capped at 300.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/zeri/hud/icons2d/zeriq.png",
@@ -294,7 +297,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Burst Fire",
+			"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. "
 		},
 		"w": {
 			"image": "assets/characters/zeri/hud/icons2d/zeriw.png",
@@ -444,7 +458,26 @@
 					},
 					"mModifiedGameCalculation": "TotalDamage"
 				}
-			}
+			},
+			"mana": [
+				50,
+				60,
+				70,
+				80,
+				90,
+				100
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11,
+				"3": 10,
+				"4": 9,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Ultrashock Laser",
+			"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>."
 		},
 		"e": {
 			"image": "assets/characters/zeri/hud/icons2d/zerie.png",
@@ -655,7 +688,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				90,
+				85,
+				80,
+				75,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 22,
+				"1": 22,
+				"2": 21,
+				"3": 20,
+				"4": 19,
+				"5": 18,
+				"6": 18
+			},
+			"name": "Spark Surge",
+			"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead."
 		},
 		"r": {
 			"image": "assets/characters/zeri/hud/icons2d/zerir.png",
@@ -819,7 +871,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 80,
+				"1": 80,
+				"2": 75,
+				"3": 70,
+				"4": 70,
+				"5": 70,
+				"6": 70
+			},
+			"name": "Lightning Crash",
+			"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>"
 		}
 	}
 }

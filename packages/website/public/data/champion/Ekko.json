@@ -131,7 +131,10 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"name": "Z-Drive Resonance",
+			"tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 5 seconds.",
+			"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/ekko/hud/icons2d/ekko_q.png",
@@ -255,7 +258,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				60,
+				70,
+				80,
+				90,
+				100
+			],
+			"cooldownTime": {
+				"0": 9.5,
+				"1": 9,
+				"2": 8.5,
+				"3": 8,
+				"4": 7.5,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Timewinder",
+			"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @Effect2Amount*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>."
 		},
 		"w": {
 			"image": "assets/characters/ekko/hud/icons2d/ekko_w.png",
@@ -414,7 +436,26 @@
 						{}
 					]
 				}
-			}
+			},
+			"mana": [
+				30,
+				35,
+				40,
+				45,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 24,
+				"1": 22,
+				"2": 20,
+				"3": 18,
+				"4": 16,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Parallel Convergence",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>."
 		},
 		"e": {
 			"image": "assets/characters/ekko/hud/icons2d/ekko_e.png",
@@ -485,7 +526,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 9.5,
+				"1": 9,
+				"2": 8.5,
+				"3": 8,
+				"4": 7.5,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Phase Dive",
+			"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"r": {
 			"image": "assets/characters/ekko/hud/icons2d/ekko_r.png",
@@ -553,7 +613,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 110,
+				"1": 110,
+				"2": 80,
+				"3": 50,
+				"4": 50,
+				"5": 50,
+				"6": 50
+			},
+			"name": "Chronobreak",
+			"tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>@TotalBaseHeal@ Health</healing>, increased by @PercentHealAmpPerPercentMissingHealth@% for each 1% Health he lost in last 4 seconds."
 		}
 	}
 }

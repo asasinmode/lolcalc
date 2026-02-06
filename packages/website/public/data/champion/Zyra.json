@@ -133,7 +133,27 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 8,
+				"3": 8,
+				"4": 8,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Garden of Thorns",
+			"tooltip": "Zyra spawns <keywordMajor>Seeds</keywordMajor> around herself every @SeedCooldown@ seconds that last 30 seconds. She can have 8 <keywordMajor>Seeds</keywordMajor> planted at once. If an enemy champion steps on a <keywordMajor>Seed</keywordMajor>, it dies. Zyra will not spawn <keywordMajor>Seeds</keywordMajor> while hiding in brush.<br><br>These <keywordMajor>Seeds</keywordMajor> are used by her other Abilities to spawn plants that deal <magicDamage>@PlantDamage@ magic damage</magicDamage>.",
+			"tooltipExtended": "Zyra spawns <keywordMajor>Seeds</keywordMajor> around herself every @SeedCooldown@ seconds that last 30 seconds. She can have 8 <keywordMajor>Seeds</keywordMajor> planted at once. If an enemy champion steps on a <keywordMajor>Seed</keywordMajor>, it dies. Zyra will not spawn <keywordMajor>Seeds</keywordMajor> while hiding in brush.<br><br>These <keywordMajor>Seeds</keywordMajor> are used by her other Abilities to spawn plants that deal <magicDamage>@PlantDamage@ magic damage</magicDamage>.<br><br><rules>Zyra's plants deal <magicDamage>@MonsterMod@ bonus magic damage</magicDamage> to monsters.</rules> "
 		},
 		"q": {
 			"image": "assets/characters/zyra/hud/icons2d/zyraq.png",
@@ -175,7 +195,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				55,
+				55,
+				55,
+				55,
+				55,
+				55
+			],
+			"cooldownTime": {
+				"0": 7.5,
+				"1": 7,
+				"2": 6.5,
+				"3": 6,
+				"4": 5.5,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Deadly Spines",
+			"tooltip": "Zyra causes thick vines to spread and explode into spines, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>.<br><br>If this Ability is cast near a <keywordMajor>Seed</keywordMajor>, the <keywordMajor>Seed</keywordMajor> grows into a Thorn Spitter that deals <magicDamage>@spell.ZyraP:PlantDamage@ magic damage</magicDamage> and lasts @spell.ZyraP:PlantDuration@ seconds. Thorn Spitters have 575 range."
 		},
 		"w": {
 			"image": "assets/characters/zyra/hud/icons2d/zyraw.png",
@@ -251,7 +290,18 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Rampant Growth",
+			"tooltip": "Zyra plants a <keywordMajor>Seed</keywordMajor> that lasts @Effect6Amount@ seconds. These <keywordMajor>Seeds</keywordMajor> grant <keywordStealth>True Sight</keywordStealth> of enemy champions that step on them for @Effect3Amount@ seconds, but are still destroyed.<br><br>This Ability has 2 charges with a @AmmoRechargeTime@ second recharge time. Killing an enemy minion or monster reduces the recharge time by @Effect1Amount*100@%. Champion takedowns reduce the recharge time by @Effect2Amount*100@% instead."
 		},
 		"e": {
 			"image": "assets/characters/zyra/hud/icons2d/zyrae.png",
@@ -370,7 +420,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				75,
+				80,
+				85,
+				90,
+				95
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 11,
+				"3": 11,
+				"4": 11,
+				"5": 11,
+				"6": 11
+			},
+			"name": "Grasping Roots",
+			"tooltip": "Zyra sends vines forward, <status>Rooting</status> for @Effect5Amount@ second(s) and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. <br><br>If this Ability passes near a <keywordMajor>Seed</keywordMajor>, the <keywordMajor>Seed</keywordMajor> grows into a Vine Lasher that deals <magicDamage>@spell.ZyraP:PlantDamage@ magic damage</magicDamage> and lasts @spell.ZyraP:PlantDuration@ seconds. Vine Lashers have 400 range, and their Attacks <status>Slow</status> by @Effect2Amount@% for @Effect3Amount@ seconds. The <status>Slow</status> from multiple Vine Lashers stacks up to @MaxSlowStacks@ times."
 		},
 		"r": {
 			"image": "assets/characters/zyra/hud/icons2d/zyrar.png",
@@ -453,7 +522,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 110,
+				"1": 110,
+				"2": 100,
+				"3": 90,
+				"4": 90,
+				"5": 90,
+				"6": 90
+			},
+			"name": "Stranglethorns",
+			"tooltip": "Zyra summons the fury of nature, growing a twisted thicket that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. After 2 seconds, the vines snap upwards, <status>Knocking Up</status> for @Effect1Amount@ second.<br><br>Zyra's plants within the thicket become enraged, resetting their duration, gaining <healing>@Effect2Amount*100@% Health</healing> and Attacking for @PlantDamageBonus@% bonus damage."
 		}
 	}
 }

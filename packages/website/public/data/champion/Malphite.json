@@ -61,7 +61,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Granite Shield",
+			"tooltip": "Malphite grants himself <shield>@TotalShield@ Shield</shield> after not taking damage for @PassiveCooldown@ seconds."
 		},
 		"q": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_q.png",
@@ -151,7 +153,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				75,
+				80,
+				85,
+				90,
+				95
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 8,
+				"3": 8,
+				"4": 8,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Seismic Shard",
+			"tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> them by @Effect2Amount@% for @SlowDuration@ seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for @SlowDuration@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_w.png",
@@ -324,7 +345,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				30,
+				35,
+				40,
+				45,
+				50,
+				55
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9.5,
+				"3": 9,
+				"4": 8.5,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Thunderclap",
+			"tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>@BonusArmorPassive*100@% Armor (%i:scaleArmor%@f1@)</scaleArmor>. This effect is increased to <scaleArmor>@BonusArmorPassive*300@% (%i:scaleArmor%@f2@)</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br><br><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>@TotalBonusDamage@ physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>@ThunderclapSplash@ physical damage</physicalDamage> in their direction. His Attacks continue to create aftershocks for the next @ThunderclapBuffDuration@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_e.png",
@@ -376,7 +416,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 7,
+				"3": 7,
+				"4": 7,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Ground Slam",
+			"tooltip": "Malphite slams the ground, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and reducing <attackSpeed>Attack Speed by @ASReduction@%</attackSpeed> for @Duration@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/malphite/hud/icons2d/malphite_r.png",
@@ -456,7 +515,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 130,
+				"1": 130,
+				"2": 115,
+				"3": 100,
+				"4": 100,
+				"5": 100,
+				"6": 100
+			},
+			"name": "Unstoppable Force",
+			"tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for @KnockupDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		}
 	}
 }

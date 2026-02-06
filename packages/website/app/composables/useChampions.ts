@@ -37,6 +37,10 @@ export interface IChampion {
 	abilities: Record<'passive' | 'q' | 'w' | 'e' | 'r', {
 		image: string;
 		maxLevel: number;
+		cooldownTime?: number[];
+		mana?: number[];
+		tooltip: string;
+		tooltipExtended: string;
 	}>;
 }
 

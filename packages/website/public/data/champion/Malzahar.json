@@ -74,7 +74,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Void Shift",
+			"tooltip": "Malzahar gains @DRPercent@% damage reduction and immunity from <status>Disabling</status> and <status>Immobilizing</status> effects, lingering for @LingerDuration@ seconds after taking damage or blocking one of those effects. This effect has a @ShieldCooldown@ second Cooldown.",
+			"tooltipExtended": "{{Spell_MalzaharPassive_Tooltip}}<br><br><rules>Taking damage will restart the Cooldown. <br>Damage from minions is not reduced, but it does not trigger or restart the Cooldown.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/malzahar/hud/icons2d/malzahar_q.png",
@@ -135,7 +138,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 6,
+				"1": 6,
+				"2": 6,
+				"3": 6,
+				"4": 6,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Call of the Void",
+			"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @Effect2Amount@ second(s)."
 		},
 		"w": {
 			"image": "assets/characters/malzahar/hud/icons2d/malzahar_w.png",
@@ -282,7 +304,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 8,
+				"3": 8,
+				"4": 8,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Void Swarm",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit."
 		},
 		"e": {
 			"image": "assets/characters/malzahar/hud/icons2d/malzahar_e.png",
@@ -385,7 +426,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				70,
+				80,
+				90,
+				100,
+				110
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Malefic Visions",
+			"tooltip": "Malzahar inflicts terrible visions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds. Applying <spellName>Call of the Void</spellName> or <spellName>Nether Grasp</spellName> to the victim during this time refreshes the visions.<br><br>If the victim dies, Malzahar gains <scaleMana>@ManaRestore@ Mana</scaleMana> and the visions spread to the nearest enemy.<br><br><rules>Malefic Visions executes minions below @MinionExecuteThreshold@ Health.</rules>"
 		},
 		"r": {
 			"image": "assets/characters/malzahar/hud/icons2d/malzahar_r.png",
@@ -536,7 +596,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 140,
+				"1": 140,
+				"2": 110,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "Nether Grasp",
+			"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @Effect4Amount@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @Effect3Amount@ seconds."
 		}
 	}
 }

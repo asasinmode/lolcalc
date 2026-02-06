@@ -41,7 +41,10 @@
 					0.1,
 					0.1
 				]
-			}
+			},
+			"name": "Void Stone",
+			"tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
+			"tooltipExtended": "{{ Spell_VoidStone_Tooltip }}<br><rules>{{Reminder_Ghosted}}</rules>"
 		},
 		"q": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png",
@@ -142,7 +145,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9.5,
+				"3": 9,
+				"4": 8.5,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Null Sphere",
+			"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds."
 		},
 		"w": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png",
@@ -262,7 +284,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				1,
+				1,
+				1,
+				1,
+				1,
+				1
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 7,
+				"3": 7,
+				"4": 7,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Nether Blade",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions."
 		},
 		"e": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png",
@@ -341,7 +382,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				85
+			],
+			"cooldownTime": {
+				"0": 22,
+				"1": 21,
+				"2": 20,
+				"3": 19,
+				"4": 18,
+				"5": 17,
+				"6": 16
+			},
+			"name": "Force Pulse",
+			"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second."
 		},
 		"r": {
 			"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png",
@@ -489,7 +549,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 5,
+				"1": 5,
+				"2": 3.5,
+				"3": 2,
+				"4": 2,
+				"5": 2,
+				"6": 2
+			},
+			"name": "Riftwalk",
+			"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times."
 		}
 	}
 }

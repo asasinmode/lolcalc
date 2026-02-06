@@ -84,7 +84,19 @@
 					},
 					"mModifiedGameCalculation": "TotalDamage"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Love Tap",
+			"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
+			"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png",
@@ -253,7 +265,26 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 7,
+				"2": 6,
+				"3": 5,
+				"4": 4,
+				"5": 3,
+				"6": 3
+			},
+			"name": "Double Up",
+			"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target."
 		},
 		"w": {
 			"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png",
@@ -334,7 +365,26 @@
 					],
 					"mPrecision": 1
 				}
-			}
+			},
+			"mana": [
+				45,
+				45,
+				45,
+				45,
+				45,
+				45
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Strut",
+			"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png",
@@ -437,7 +487,26 @@
 					},
 					"mModifiedGameCalculation": "TotalDamagePerSecond"
 				}
-			}
+			},
+			"mana": [
+				80,
+				80,
+				80,
+				80,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 20,
+				"1": 18,
+				"2": 17,
+				"3": 16,
+				"4": 15,
+				"5": 14,
+				"6": 13
+			},
+			"name": "Make It Rain",
+			"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>)."
 		},
 		"r": {
 			"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png",
@@ -550,7 +619,26 @@
 					},
 					"mModifiedGameCalculation": "PhysicalDamagePerWave"
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 130,
+				"1": 120,
+				"2": 110,
+				"3": 100,
+				"4": 90,
+				"5": 80,
+				"6": 70
+			},
+			"name": "Bullet Time",
+			"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>."
 		}
 	}
 }

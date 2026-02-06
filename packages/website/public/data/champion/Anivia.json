@@ -77,7 +77,18 @@
 					"mExpandedTooltipCalculationDisplay": 1,
 					"mModifiedGameCalculation": "BonusResists"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Rebirth",
+			"tooltip": "Upon taking fatal damage, Anivia reverts to an egg, healing to full Health and receiving <Level>@BonusResists@</Level> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. If she survives for 6 seconds, she is reborn."
 		},
 		"q": {
 			"image": "assets/characters/anivia/hud/icons2d/anivia_q.png",
@@ -145,7 +156,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				80,
+				85,
+				90,
+				95,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Flash Frost",
+			"tooltip": "Anivia fires a massive chunk of ice, dealing <magicDamage>@TotalPassthroughDamage@ magic damage</magicDamage> and <keywordMajor>Chilling</keywordMajor> enemies for @SlowDuration@ seconds, <status>Slowing</status> them by @Spell.GlacialStorm:SlowAmount@%. At the end of its range, the ice detonates, <status>Stunning</status> enemies for @StunDuration@ seconds and dealing <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>.<br><br>Anivia can <recast>Recast</recast> this ability while the ice flies to detonate it early."
 		},
 		"w": {
 			"image": "assets/characters/anivia/hud/icons2d/anivia_w.png",
@@ -228,7 +258,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 17,
+				"1": 17,
+				"2": 17,
+				"3": 17,
+				"4": 17,
+				"5": 17,
+				"6": 17
+			},
+			"name": "Crystallize",
+			"tooltip": "Anivia summons a wall of ice @Effect2Amount@ units wide. The wall lasts for @Effect1Amount@ seconds before it melts."
 		},
 		"e": {
 			"image": "assets/characters/anivia/hud/icons2d/anivia_e.png",
@@ -265,7 +314,26 @@
 					"mSimpleTooltipCalculationDisplay": 6,
 					"mModifiedGameCalculation": "TotalDamage"
 				}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 4,
+				"1": 4,
+				"2": 4,
+				"3": 4,
+				"4": 4,
+				"5": 4,
+				"6": 4
+			},
+			"name": "Frostbite",
+			"tooltip": "Anivia blasts an enemy with a freezing wind, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Against <keywordMajor>Chilled</keywordMajor> enemies, Anivia deals <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> instead."
 		},
 		"r": {
 			"image": "assets/characters/anivia/hud/icons2d/anivia_r.png",
@@ -434,7 +502,26 @@
 					"tooltipOnly": true,
 					"mModifiedGameCalculation": "TotalDamagePerSecond"
 				}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 4,
+				"1": 4,
+				"2": 3,
+				"3": 2,
+				"4": 2,
+				"5": 2,
+				"6": 2
+			},
+			"name": "Glacial Storm",
+			"tooltip": "<toggle>Toggle:</toggle> Anivia calls forth a driving rain of ice and hail that <status>Slows</status> enemies by @SlowAmount@% and deals <magicDamage>@TotalDamagePerSecond@ magic damage per second</magicDamage>. The storm increases in size over @GrowthTime@ seconds.<br><br>When the storm is fully formed, it <keywordMajor>Chills</keywordMajor>, <status>Slows</status> by @SlowPercentEmpoweredTT@%, and does <magicDamage>@EmpoweredDamagePerSecondTooltipOnly@ magic damage per second</magicDamage> instead."
 		}
 	}
 }

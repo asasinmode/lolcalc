@@ -329,7 +329,10 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"name": "Absolution",
+			"tooltip": "Senna can attack souls that spawn from dead enemies to absorb their <keywordMajor>Mist</keywordMajor>. She can also siphon <keywordMajor>Mist</keywordMajor> from enemy champions she hits with Attacks or Abilities twice, dealing an additional <physicalDamage>@BonusCurentHealthDamage@% current Health physical damage</physicalDamage>.<br><br>Each stack of <keywordMajor>Mist</keywordMajor> grants <physicalDamage>@ADPerStack@ Attack Damage</physicalDamage>. Every @StacksForBonus@ stacks grant @BonusRange@ Attack Range and @BonusCritChance@% Critical Strike Chance but she only has @CriticalDamage@ Critical Strike Damage. @CritToLifestealConversionPercent*100@% of excess Critical Strike Chance is converted into Lifesteal.<br><br>Senna's Attacks take extra time to fire, deal an additional <physicalDamage>@BonusOnHitDamage@ physical damage</physicalDamage>, and briefly grant her <speed>@MSSteal@ of the target's Move Speed</speed>.",
+			"tooltipExtended": "{{Spell_SennaPassive_Tooltip}}<br><br><rules>Senna can only siphon <keywordMajor>Mist</keywordMajor> from an individual champion once every <scaleLevel>@DebuffDuration@</scaleLevel> seconds.<br>Souls are less likely to spawn from minions Senna kills. Souls always spawn from large minions Senna doesn't kill, champions, and large jungle monsters. <br>Senna does not gain Attack Damage on level up.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/senna/hud/icons2d/senna_q.png",
@@ -496,7 +499,26 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"mana": [
+				70,
+				80,
+				90,
+				100,
+				110,
+				110
+			],
+			"cooldownTime": {
+				"0": 15,
+				"1": 15,
+				"2": 15,
+				"3": 15,
+				"4": 15,
+				"5": 15,
+				"6": 15
+			},
+			"name": "Piercing Darkness",
+			"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second."
 		},
 		"w": {
 			"image": "assets/characters/senna/hud/icons2d/senna_w.png",
@@ -545,7 +567,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 11,
+				"3": 11,
+				"4": 11,
+				"5": 11,
+				"6": 11
+			},
+			"name": "Last Embrace",
+			"tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After a @DelayTime@ second delay the target and other nearby enemies are <status>Rooted</status> for @RootDuration@ second(s)."
 		},
 		"e": {
 			"image": "assets/characters/senna/hud/icons2d/senna_e.png",
@@ -647,7 +688,26 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 26,
+				"1": 26,
+				"2": 24.5,
+				"3": 23,
+				"4": 21.5,
+				"5": 20,
+				"6": 20
+			},
+			"name": "Curse of the Black Mist",
+			"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby."
 		},
 		"r": {
 			"image": "assets/characters/senna/hud/icons2d/senna_r.png",
@@ -728,7 +788,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 140,
+				"1": 140,
+				"2": 120,
+				"3": 100,
+				"4": 100,
+				"5": 100,
+				"6": 100
+			},
+			"name": "Dawning Shadow",
+			"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds."
 		}
 	}
 }

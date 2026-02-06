@@ -89,7 +89,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Iceborn Subjugation",
+			"tooltip": "When an enemy champion dies near Lissandra they become a frozen zombie that seeks out living enemies. Enemies near these zombies are <status>Slowed</status> by @MoveSpeedMod*-100@%. After @ExplosionDelay@ seconds, frozen zombies shatter, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"q": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
@@ -168,7 +170,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				55,
+				60,
+				65,
+				70,
+				75,
+				80
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 8,
+				"2": 7,
+				"3": 6,
+				"4": 5,
+				"5": 4,
+				"6": 3
+			},
+			"name": "Ice Shard",
+			"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them."
 		},
 		"w": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
@@ -238,7 +259,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9.5,
+				"3": 9,
+				"4": 8.5,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Ring of Frost",
+			"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"e": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png",
@@ -308,7 +348,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				80,
+				85,
+				90,
+				95,
+				100,
+				105
+			],
+			"cooldownTime": {
+				"0": 27,
+				"1": 24,
+				"2": 21,
+				"3": 18,
+				"4": 15,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Glacial Path",
+			"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location."
 		},
 		"r": {
 			"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png",
@@ -439,7 +498,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 10,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Frozen Tomb",
+			"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%."
 		}
 	}
 }

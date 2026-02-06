@@ -89,7 +89,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Sap Magic",
+			"tooltip": "Maokai's next Attack restores <healing>@PassiveHealingTotal@ Health</healing>.<br><br>Using an Ability or being hit by an enemy champion's Ability reduces the Cooldown by @PassiveCooldownReduction@ seconds. Being hit by large or epic monster's Attacks or Abilities reduces the Cooldown by @JungPassCooldownReduction@ second."
 		},
 		"q": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_q.png",
@@ -210,7 +212,26 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
 				}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 6.5,
+				"3": 6,
+				"4": 5.5,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Bramble Smash",
+			"tooltip": "Maokai smashes his fist into the ground, dealing <magicDamage>@TotalDamage@ plus @BasePercentHealth*100@% max Health magic damage</magicDamage> and briefly <status>Slowing</status>. Nearby enemies are also <status>Knocked Back</status>."
 		},
 		"w": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_w.png",
@@ -282,7 +303,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 13,
+				"3": 12,
+				"4": 11,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Twisted Advance",
+			"tooltip": "Maokai transforms into a moving mass of roots, becoming Untargetable and dashing to an enemy. Upon arrival, he <status>Roots</status> the enemy for @Effect2Amount@ second(s) and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. "
 		},
 		"e": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_e.png",
@@ -488,7 +528,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 18,
+				"1": 18,
+				"2": 17,
+				"3": 16,
+				"4": 15,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Sapling Toss",
+			"tooltip": "Maokai flings a sapling, which stands watch for @SaplingDuration@ seconds. Saplings chase nearby enemies, detonating on arrival to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slow</status> surrounding enemies by @SlowAmount*100@% for @SlowDuration@ seconds. <keywordMajor>Sap Magic's</keywordMajor> Cooldown is reduced by an additional 4 seconds if the sapling hits an enemy champion or epic monster.<br><br>If placed in brush, Saplings instead last for @EmpoweredSaplingDuration@ seconds and cause a larger explosion, dealing <magicDamage>@TotalEmpoweredDamage@ magic damage</magicDamage> over @EmpoweredDoTDuration@ seconds and <status>Slowing</status> enemies by @EmpoweredSlowAmount@."
 		},
 		"r": {
 			"image": "assets/characters/maokai/hud/icons2d/maokai_r.png",
@@ -576,7 +635,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 130,
+				"1": 130,
+				"2": 110,
+				"3": 90,
+				"4": 90,
+				"5": 90,
+				"6": 90
+			},
+			"name": "Nature's Grasp",
+			"tooltip": "Maokai summons a colossal wave of brambles and thorns, <status>Rooting</status> enemies for @MinRootDuration@ to @MaxRootDuration@ seconds, increasing with distance travelled, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Hitting a champion gives Maokai <speed>@MoveHaste*100@% Move Speed</speed>, decaying over @HasteDuration@ seconds. "
 		}
 	}
 }

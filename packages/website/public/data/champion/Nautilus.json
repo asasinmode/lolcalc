@@ -161,7 +161,10 @@
 					],
 					"mPrecision": 2
 				}
-			}
+			},
+			"name": "Staggering Blow",
+			"tooltip": "Nautilus' first Attack against a target deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> and <status>Roots</status> them for @RootDuration@ seconds.",
+			"tooltipExtended": "{{ Spell_NautilusPassive_Tooltip }}<br><rules>This effect cannot trigger on the same target more than once every @PerTargetCD@ seconds.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_anchorchain.png",
@@ -250,7 +253,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 13,
+				"3": 12,
+				"4": 11,
+				"5": 10,
+				"6": 9
+			},
+			"name": "Dredge Line",
+			"tooltip": "Nautilus hurls his anchor forward. If it hits an enemy, Nautilus drags himself and the target together, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Stunning</status> them briefly. If the anchor hits terrain, Nautilus will drag himself towards it."
 		},
 		"w": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_wrath.png",
@@ -328,7 +350,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Titan's Wrath",
+			"tooltip": "Nautilus gains a <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds. While the <shield>Shield</shield> persists, Nautilus' Attacks deal an additional <magicDamage>@DotDamageCalc@ magic damage</magicDamage> over 2 seconds to his target and all surrounding enemies."
 		},
 		"e": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_rippleeffect.png",
@@ -441,7 +482,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				60,
+				70,
+				80,
+				90,
+				100
+			],
+			"cooldownTime": {
+				"0": 7.5,
+				"1": 7,
+				"2": 6.5,
+				"3": 6,
+				"4": 5.5,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Riptide",
+			"tooltip": "Nautilus creates three exploding waves around himself, each dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slows</status> them by @SlowPercent*100@% decaying over @SlowDuration@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/nautilus/hud/icons2d/nautilus_grandline.png",
@@ -500,7 +560,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				0
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "Depth Charge",
+			"tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing <magicDamage>@PrimaryTargetDamage@ magic damage</magicDamage>, <status>Knocking</status> them <status>Up</status> and <status>Stunning</status> them for @StunDuration@ seconds. Other enemies hit by the shockwave are also <status>Knocked Up</status> and <status>Stunned</status> and take <magicDamage>@SecondaryTargetDamage@ magic damage</magicDamage>."
 		}
 	}
 }

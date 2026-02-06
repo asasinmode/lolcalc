@@ -90,7 +90,9 @@
 					],
 					"mPrecision": -1
 				}
-			}
+			},
+			"name": "Colossal Smash",
+			"tooltip": "Galio's Attacks have increased attack speed and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies. <br><br>This effect's cooldown is reduced by @ChargeRatePerHit@ seconds when Galio hits an enemy champion or epic monster with an ability, once per cast."
 		},
 		"q": {
 			"image": "assets/characters/galio/hud/icons2d/galio_q.png",
@@ -187,7 +189,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				70,
+				75,
+				80,
+				85,
+				90,
+				95
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Winds of War",
+			"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/galio/hud/icons2d/galio_w.png",
@@ -407,7 +428,26 @@
 						{}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 18,
+				"1": 18,
+				"2": 17,
+				"3": 16,
+				"4": 15,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Shield of Durand",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Galio gains a <shield>@TotalPassiveShield@ Magic Shield</shield> after not taking damage for @PassiveShieldOOCTimer@ seconds.<br><br><charge>Begin Charging:</charge> Galio reduces incoming magic damage by @MagicDamageReduction@ and incoming physical damage by @PhysicalDamageReduction@ and <status>Slows</status> himself by @Effect3Amount@%.<br><br><release>Release:</release> Galio <status>Taunts</status> enemy champions for between @Effect4Amount@ to @Effect7Amount@ seconds, deals between <magicDamage>@MinTotalDamage@</magicDamage> and <magicDamage>@MaxTotalDamage@ magic damage</magicDamage>, and refreshes the damage reduction for @Effect8Amount@ seconds. Taunt duration, damage, and range increase with charge time."
 		},
 		"e": {
 			"image": "assets/characters/galio/hud/icons2d/galio_e.png",
@@ -460,7 +500,26 @@
 					},
 					"mModifiedGameCalculation": "TotalDamage"
 				}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Justice Punch",
+			"tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for @KnockupDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>@PVEDamage@ magic damage</magicDamage>.<br><br>Galio's dash stops on hitting terrain."
 		},
 		"r": {
 			"image": "assets/characters/galio/hud/icons2d/galio_r.png",
@@ -507,7 +566,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 180,
+				"1": 180,
+				"2": 160,
+				"3": 140,
+				"4": 140,
+				"5": 140,
+				"6": 140
+			},
+			"name": "Hero's Entrance",
+			"tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for @TemporaryWShieldDuration@ seconds. Galio then flies to his landing zone.<br><br>When Galio lands, he <status>Knocks Up</status> for @StunDurationOuter@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		}
 	}
 }

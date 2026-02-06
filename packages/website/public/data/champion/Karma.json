@@ -41,7 +41,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				65
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 8,
+				"2": 7,
+				"3": 6,
+				"4": 5,
+				"5": 4,
+				"6": 4
+			},
+			"name": "Gathering Fire",
+			"tooltip": "Karma begins the game with a point in <spellName>{{Spell_KarmaMantra_Name}}</spellName>.<br><br>She reduces the Cooldown of <spellName>{{Spell_KarmaMantra_Name}}</spellName> by @SpellMantraRefund@ seconds when she damages a champion with an Ability."
 		},
 		"q": {
 			"image": "assets/characters/karma/hud/icons2d/karma_q1.png",
@@ -124,7 +143,27 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				50,
+				60,
+				70,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8,
+				"3": 7,
+				"4": 6,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Inner Flame",
+			"tooltip": "{{Spell_KarmaQ_Tooltip_@IsEmpowered@}}",
+			"tooltipExtended": "{{Spell_KarmaQ_Tooltip_0}}<br><br>{{Spell_KarmaQ_Tooltip_1}}"
 		},
 		"w": {
 			"image": "assets/characters/karma/hud/icons2d/karma_w1.png",
@@ -189,7 +228,27 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Focused Resolve",
+			"tooltip": "{{Spell_KarmaW_Tooltip_@spell.KarmaQ:IsEmpowered@}}",
+			"tooltipExtended": "{{Spell_KarmaW_Tooltip_0}}<br><br>{{Spell_KarmaW_Tooltip_1}}"
 		},
 		"e": {
 			"image": "assets/characters/karma/hud/icons2d/karma_e1.png",
@@ -254,7 +313,27 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9.5,
+				"3": 9,
+				"4": 8.5,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Inspire",
+			"tooltip": "{{Spell_KarmaE_Tooltip_@spell.KarmaQ:IsEmpowered@}}",
+			"tooltipExtended": "{{Spell_KarmaE_Tooltip_0}}<br><br>{{Spell_KarmaE_Tooltip_1}}"
 		},
 		"r": {
 			"image": "assets/characters/karma/hud/icons2d/karma_r.png",
@@ -437,7 +516,18 @@
 					},
 					"mModifiedGameCalculation": "REBonusShield"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 40,
+				"1": 40,
+				"2": 38,
+				"3": 36,
+				"4": 34,
+				"5": 34,
+				"6": 34
+			},
+			"name": "Mantra",
+			"tooltip": "Karma empowers her next Ability used within 8 seconds.<br><li><spellName>{{Spell_KarmaQ_Name}}</spellName>: Deals an additional <magicDamage>@RQImpactDamage@ magic damage</magicDamage> and leaves behind a circle of flame, <status>Slowing</status> enemies and dealing an additional <magicDamage>@RQFieldDamage@ magic damage</magicDamage>.<li><spellName>{{Spell_KarmaSpiritBind_Name}}</spellName>: Karma will restore <healing>@RWHealAmount@ missing Health</healing> at the beginning and end of the tether, and <status>Root</status> for @RWBonusRoot@s longer.<li><spellName>{{Spell_KarmaSolKimShield_Name}}</spellName>: Karma shields her target for <shield>@REBonusShield@ more Shield</shield>, and also shields allies near her target, granting them <shield>@REBonusShieldArea@ Shield</shield> and <speed>@REMoveSpeed*100@% Move Speed</speed>."
 		}
 	}
 }

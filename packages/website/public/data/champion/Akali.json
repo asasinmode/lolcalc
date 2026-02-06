@@ -194,7 +194,10 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"name": "Assassin's Mark",
+			"tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>.",
+			"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/akali/hud/icons2d/akali_q.png",
@@ -282,7 +285,26 @@
 					"mOverrideSpellLevel": 5,
 					"mModifiedGameCalculation": "Damage"
 				}
-			}
+			},
+			"mana": [
+				110,
+				100,
+				90,
+				80,
+				70,
+				60
+			],
+			"cooldownTime": {
+				"0": 1.5,
+				"1": 1.5,
+				"2": 1.5,
+				"3": 1.5,
+				"4": 1.5,
+				"5": 1.5,
+				"6": 1.5
+			},
+			"name": "Five Point Strike",
+			"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/akali/hud/icons2d/akali_w.png",
@@ -433,7 +455,18 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 20,
+				"1": 20,
+				"2": 19,
+				"3": 18,
+				"4": 17,
+				"5": 16,
+				"6": 16
+			},
+			"name": "Twilight Shroud",
+			"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>."
 		},
 		"e": {
 			"image": "assets/characters/akali/hud/icons2d/akali_e.png",
@@ -537,7 +570,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				30,
+				30,
+				30,
+				30,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 16,
+				"1": 16,
+				"2": 14.5,
+				"3": 13,
+				"4": 11.5,
+				"5": 10,
+				"6": 8.5
+			},
+			"name": "Shuriken Flip",
+			"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>."
 		},
 		"r": {
 			"image": "assets/characters/akali/hud/icons2d/akali_r.png",
@@ -678,7 +730,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 90,
+				"3": 60,
+				"4": 60,
+				"5": 60,
+				"6": 60
+			},
+			"name": "Perfect Execution",
+			"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health."
 		}
 	}
 }

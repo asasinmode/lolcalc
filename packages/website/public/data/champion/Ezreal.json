@@ -59,7 +59,9 @@
 					5,
 					5
 				]
-			}
+			},
+			"name": "Rising Spell Force",
+			"tooltip": "Ezreal's Ability hits grant him <attackSpeed>@AttackSpeedPerStack.0*100@% Attack Speed</attackSpeed> for @StackDuration@ seconds, stacking up to @MaxStacks@ times."
 		},
 		"q": {
 			"image": "assets/characters/ezreal/hud/icons2d/ezreal_q.png",
@@ -121,7 +123,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				28,
+				31,
+				34,
+				37,
+				40,
+				43
+			],
+			"cooldownTime": {
+				"0": 5.75,
+				"1": 5.5,
+				"2": 5.25,
+				"3": 5,
+				"4": 4.75,
+				"5": 4.5,
+				"6": 3.5
+			},
+			"name": "Mystic Shot",
+			"tooltip": "Ezreal fires a bolt of energy, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit and reducing his Ability Cooldowns by @CDRefund@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/ezreal/hud/icons2d/ezreal_w.png",
@@ -184,7 +205,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 8,
+				"3": 8,
+				"4": 8,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Essence Flux",
+			"tooltip": "Ezreal fires a magical orb that sticks to the first champion, structure, or epic jungle monster hit for @DetonationTimeout@ seconds. If Ezreal hits that target with an Attack or Ability, it detonates, dealing <magicDamage>@Damage@ magic damage</magicDamage>. Detonating with an Ability refunds the Mana cost of that Ability plus <scaleMana>@ManaReturn@ Mana</scaleMana>."
 		},
 		"e": {
 			"image": "assets/characters/ezreal/hud/icons2d/ezreal_e.png",
@@ -269,7 +309,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 26,
+				"1": 26,
+				"2": 23,
+				"3": 20,
+				"4": 17,
+				"5": 14,
+				"6": 10
+			},
+			"name": "Arcane Shift",
+			"tooltip": "Ezreal teleports then fires a bolt at the nearest enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage>. The bolt prioritizes enemies affected by <spellName>Essence Flux</spellName>."
 		},
 		"r": {
 			"image": "assets/characters/ezreal/hud/icons2d/ezreal_r.png",
@@ -341,7 +400,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 120,
+				"2": 105,
+				"3": 90,
+				"4": 10,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Trueshot Barrage",
+			"tooltip": "Ezreal fires a massive energy arc that deals <magicDamage>@Damage@ magic damage</magicDamage>. The arc deals @DamageReductionWaveclear.0*100@% damage to minions and non-epic jungle monsters."
 		}
 	}
 }

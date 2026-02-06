@@ -64,7 +64,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Battle Fury",
+			"tooltip": "Tryndamere's Attacks grant him <keywordMajor>5 Fury</keywordMajor> or <keywordMajor>10 Fury</keywordMajor> for a critical strike, and <keywordMajor>10 Fury</keywordMajor> for killing a unit. After 8 seconds of being out of combat, Tryndamere loses <keywordMajor>5 Fury</keywordMajor> every second.<br><br>Each point of <keywordMajor>Fury</keywordMajor> grants @PassiveCritConversionTooltip@% Critical Strike Chance."
 		},
 		"q": {
 			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_q.png",
@@ -182,7 +184,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Bloodlust",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining up to <scaleAD>@MaximumBonusAD@ Attack Damage</scaleAD> based on his missing Health.<br><br><spellActive>Active:</spellActive> Tryndamere consumes his <keywordMajor>Fury</keywordMajor>, restoring <healing>@BaseHeal@ plus @HealPerFury@ Health per Fury (max: @MaximumHeal@)</healing>. "
 		},
 		"w": {
 			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_w.png",
@@ -224,7 +237,18 @@
 					3.25,
 					3.25
 				]
-			}
+			},
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 14,
+				"3": 14,
+				"4": 14,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Mocking Shout",
+			"tooltip": "Tryndamere hurls insults, reducing champions' Attack Damage by @ADReduction*-1@ for @ReductionDuration@ seconds and <status>Slowing</status> by @SlowPotency*-100@% while cowering from him for @SlowDuration@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_e.png",
@@ -322,7 +346,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11,
+				"3": 10,
+				"4": 9,
+				"5": 8,
+				"6": 7
+			},
+			"name": "Spinning Slash",
+			"tooltip": "Tryndamere spins through his enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and generating <keywordMajor>@NonChampFuryGain@ Fury</keywordMajor> per enemy hit, increased to <keywordMajor>@ChampFuryGain@ Fury</keywordMajor> against enemy champions.<br><br>This Ability's Cooldown is reduced by @NonChampCDRefund@ seconds when Tryndamere critically strikes, and reduced by @ChampCDRefund@ seconds when critically striking a champion."
 		},
 		"r": {
 			"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_r.png",
@@ -397,7 +432,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "Undying Rage",
+			"tooltip": "Tryndamere becomes completely immune to death for @Effect3Amount@ seconds, refusing to be reduced below @Effect2Amount@ Health, and instantly gains <keywordMajor>@Effect1Amount@ Fury</keywordMajor>."
 		}
 	}
 }

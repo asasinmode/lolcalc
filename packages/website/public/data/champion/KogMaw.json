@@ -61,7 +61,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Icathian Surprise",
+			"tooltip": "For @TooltipPassiveDuration@ seconds after dying, Kog'Maw can continue to move, can move through units, and gains <speed>10% Move Speed</speed>, increasing to <speed>@TooltipPassiveMS*100@% Move Speed</speed> over the duration. At the end of the duration, he explodes and deals <trueDamage>@PassiveDamage@ true damage</trueDamage> to nearby enemies."
 		},
 		"q": {
 			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_causticspittle.png",
@@ -168,7 +170,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 7,
+				"3": 7,
+				"4": 7,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Caustic Spittle",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>@ShredAmount@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png",
@@ -238,7 +259,26 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 2
 				}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 17,
+				"1": 17,
+				"2": 17,
+				"3": 17,
+				"4": 17,
+				"5": 17,
+				"6": 17
+			},
+			"name": "Bio-Arcane Barrage",
+			"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> for @Duration@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_voidooze.png",
@@ -303,7 +343,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				40,
+				55,
+				70,
+				85,
+				100,
+				110
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Void Ooze",
+			"tooltip": "Kog'Maw spits bile, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and leaving a trail of ooze for @TrailDuration@ seconds. Enemies in the ooze are <status>Slowed</status> by @SlowAmount@%."
 		},
 		"r": {
 			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_livingartillery.png",
@@ -449,7 +508,26 @@
 					},
 					"mModifiedGameCalculation": "BaseDamageCalc"
 				}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 2,
+				"1": 2,
+				"2": 1.5,
+				"3": 1,
+				"4": 2,
+				"5": 2,
+				"6": 2
+			},
+			"name": "Living Artillery",
+			"tooltip": "Kog'Maw shoots acid at an area, dealing <magicDamage>@BaseDamageCalc@ plus @TooltipMissingHealthDamageAmp@% per 1% missing Health magic damage</magicDamage> and revealing enemies hit for 2 seconds. Enemies below <healing>40% Health</healing> instead take <magicDamage>@MaxDamageCalc@ magic damage</magicDamage>.<br><br>Subsequent shots within @ManaCostDuration@ seconds cost an additional <scaleMana>@BaseCost@ Mana</scaleMana> (max: <scaleMana>@ManaCostCap@ Mana</scaleMana>)."
 		}
 	}
 }

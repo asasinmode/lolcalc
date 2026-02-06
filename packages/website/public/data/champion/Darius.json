@@ -104,7 +104,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Hemorrhage",
+			"tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>{{Spell_DariusR_Name}}</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds.",
+			"tooltipExtended": "{{Spell_DariusHemoMarker_Tooltip}}<br><br><rules><keywordMajor>Hemorrhage</keywordMajor> deals @MonsterMod*100@% damage to jungle monsters.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png",
@@ -240,7 +243,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				25,
+				30,
+				35,
+				40,
+				45,
+				50
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 9,
+				"2": 8,
+				"3": 7,
+				"4": 6,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Decimate",
+			"tooltip": "Darius hefts his axe then swings it around, dealing <physicalDamage>@BladeDamage@ physical damage</physicalDamage> with the edge and <physicalDamage>@HandleDamage@ damage</physicalDamage> with the handle. Enemies hit with the handle do not take a <keywordMajor>Hemorrhage</keywordMajor> stack.<br><br>Darius restores <healing>@Effect5Amount@% missing Health</healing> per enemy champion and large jungle monster hit with the edge, up to a max of <healing>@Effect7Amount@%</healing>."
 		},
 		"w": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png",
@@ -310,7 +332,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 5,
+				"1": 5,
+				"2": 5,
+				"3": 5,
+				"4": 5,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Crippling Strike",
+			"tooltip": "Darius' next Attack deals <physicalDamage>@EmpoweredAttackDamage@ physical damage</physicalDamage> and <status>Slows</status> by @Effect2Amount@% for @Effect5Amount@ second.<br><br>This Ability refunds its Mana cost and reduces its Cooldown by @Effect3Amount@% if it kills the target.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>"
 		},
 		"e": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png",
@@ -356,7 +397,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				60,
+				50,
+				40,
+				30,
+				20
+			],
+			"cooldownTime": {
+				"0": 26,
+				"1": 26,
+				"2": 23.5,
+				"3": 21,
+				"4": 18.5,
+				"5": 16,
+				"6": 16
+			},
+			"name": "Apprehend",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Darius gains @Effect1Amount@% Armor Penetration.<br><br><spellActive>Active:</spellActive> Darius hooks with his axe, <status>Pulling</status>, and <status>Knocking Up</status> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second."
 		},
 		"r": {
 			"image": "assets/characters/darius/hud/icons2d/darius_icon_sudden_death.png",
@@ -412,7 +472,26 @@
 					"tooltipOnly": true,
 					"mModifiedGameCalculation": "Damage"
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				0,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 6,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Noxian Guillotine",
+			"tooltip": "Darius leaps to an enemy and strikes a lethal blow, dealing <trueDamage>@Damage@ true damage</trueDamage>. For each <keywordMajor>Hemorrhage</keywordMajor> on the target, this Ability deals an additional @RDamagePercentPerHemoStack*100@% damage, up to a max of <trueDamage>@MaximumDamage@ damage</trueDamage>.<br><br>If this kills the target, Darius may <recast>Recast</recast> this Ability once within @RRecastDuration@ seconds. At rank 3, this Ability has no Mana cost and kills refresh the Cooldown completely."
 		}
 	}
 }

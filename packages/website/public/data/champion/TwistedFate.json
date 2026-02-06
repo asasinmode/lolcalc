@@ -59,7 +59,10 @@
 					1,
 					1
 				]
-			}
+			},
+			"name": "Loaded Dice",
+			"tooltip": "{{ Spell_SecondSight_Tooltip_@GameModeInteger@ }}",
+			"tooltipExtended": "{{Spell_SecondSight_TooltipExtended_@GameModeInteger@}}"
 		},
 		"q": {
 			"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_powercard.png",
@@ -112,7 +115,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				70,
+				80,
+				90,
+				100,
+				110
+			],
+			"cooldownTime": {
+				"0": 6,
+				"1": 6,
+				"2": 5.75,
+				"3": 5.5,
+				"4": 5.25,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Wild Cards",
+			"tooltip": "Twisted Fate throws three cards that deal <magicDamage>@TotalDamage@ magic damage</magicDamage> each."
 		},
 		"w": {
 			"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_fatesgambit.png",
@@ -432,7 +454,27 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 6,
+				"1": 6,
+				"2": 6,
+				"3": 6,
+				"4": 6,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Pick a Card",
+			"tooltip": "Twisted Fate begins shuffling his deck, allowing him to <recast>Recast</recast> to lock in one of three cards and enhance his next Attack.<br><li>The Blue Card deals <magicDamage>@BlueDamage@ magic damage</magicDamage> and restores <scaleMana>@Effect6Amount@ Mana</scaleMana>.<li>The Red Card deals <magicDamage>@RedDamage@</magicDamage> to nearby enemies and <status>Slows</status> by @Effect2Amount@% for 2.5 seconds.<li>The Gold Card deals <magicDamage>@GoldDamage@</magicDamage> and <status>Stuns</status> for @Effect3Amount@ seconds.",
+			"tooltipExtended": "Twisted Fate begins shuffling his deck, allowing him to <recast>Recast</recast> to lock in one of three cards and enhance his next Attack.<br><li>The Blue Card deals <magicDamage>@ttBlueDamage@ = (</magicDamage><trueDamage>@BlueBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttBlueAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @BlueCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and restores <scaleMana>@Effect6Amount@ Mana</scaleMana>.<li>The Red Card deals <magicDamage>@ttRedDamage@ = (</magicDamage><trueDamage>@RedBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttRedAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @RedCritMultiplier*100@%<magicDamage> magic damage</magicDamage> to nearby enemies and <status>Slows</status> by @Effect2Amount@% for 2.5 seconds.<li>The Gold Card deals <magicDamage>@ttGoldDamage@ = (</magicDamage><trueDamage>@GoldBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttGoldAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @GoldCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and <status>Stuns</status> for @Effect3Amount@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_rapidtoss.png",
@@ -525,7 +567,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Stacked Deck",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Twisted Fate gains <attackSpeed>@AttackSpeedBonus@% Attack Speed</attackSpeed> and every 4th Attack deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>."
 		},
 		"r": {
 			"image": "assets/characters/twistedfate/hud/icons2d/destiny_temp.png",
@@ -572,7 +625,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				115,
+				130,
+				0
+			],
+			"cooldownTime": {
+				"0": 170,
+				"1": 170,
+				"2": 140,
+				"3": 110,
+				"4": 110,
+				"5": 110,
+				"6": 110
+			},
+			"name": "Destiny",
+			"tooltip": "Twisted Fate focuses on his cards, granting <keywordStealth>True Sight</keywordStealth> of all enemy champions on the map for @Effect1Amount@ seconds and allowing him to <recast>Recast</recast>.<br><br><recast>Recast</recast>: Twisted Fate teleports up to @Effect4Amount@ units away."
 		}
 	}
 }

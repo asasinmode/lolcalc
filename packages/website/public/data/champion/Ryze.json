@@ -104,7 +104,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Arcane Mastery",
+			"tooltip": "Ryze gains <scaleMana>@PassiveManaCalcTooltip@% max Mana</scaleMana>. His Abilities do additional damage based on his <scaleMana>bonus Mana</scaleMana>."
 		},
 		"q": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_q.png",
@@ -285,7 +296,26 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				38,
+				36,
+				34,
+				32,
+				32
+			],
+			"cooldownTime": {
+				"0": 5,
+				"1": 5,
+				"2": 5,
+				"3": 5,
+				"4": 5,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Overload",
+			"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_RyzeW_Name}}</spellName> and <spellName>{{Spell_RyzeE_Name}}</spellName> refresh this Ability's Cooldown and charge a rune for @RuneDuration@ seconds (max @MaximumRunes@ runes).<br><br><spellActive>Active:</spellActive> Ryze unleashes a blast, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> to the first enemy hit. If the target has <keywordMajor>Flux</keywordMajor> on it, it is consumed, causing this Ability to deal @Spell.RyzeR:OverloadDamageBonus@% increased damage and bounces to nearby enemies with <keywordMajor>Flux</keywordMajor>.<br><br>Ryze also discharges all runes, granting Ryze <speed>@MovementSpeedAmount@% Move Speed</speed> for @MovementSpeedDuration@ seconds if @MaximumRunes@ runes were charged.<br>"
 		},
 		"w": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_w.png",
@@ -337,7 +367,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				60,
+				70,
+				80,
+				90,
+				100
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10.5,
+				"3": 10,
+				"4": 9.5,
+				"5": 9,
+				"6": 8.5
+			},
+			"name": "Rune Prison",
+			"tooltip": "Ryze deals <magicDamage>@WDamageCalc@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @CCDuration@ seconds. If the target has <keywordMajor>Flux</keywordMajor>, it is consumed and this Ability <status>Roots</status> instead of <status>Slowing</status>."
 		},
 		"e": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_e.png",
@@ -517,7 +566,26 @@
 				},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				35,
+				45,
+				55,
+				65,
+				75,
+				85
+			],
+			"cooldownTime": {
+				"0": 3.75,
+				"1": 3.5,
+				"2": 3.25,
+				"3": 3,
+				"4": 2.75,
+				"5": 2.5,
+				"6": 2.5
+			},
+			"name": "Spell Flux",
+			"tooltip": "Ryze fires an orb, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and applies <keywordMajor>Flux</keywordMajor> for @DebuffDuration@ seconds to the target and nearby enemies. Enemies already afflicted with <keywordMajor>Flux</keywordMajor> will cause it to spread further."
 		},
 		"r": {
 			"image": "assets/characters/ryze/hud/icons2d/ryze_r.png",
@@ -617,7 +685,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 180,
+				"1": 180,
+				"2": 160,
+				"3": 140,
+				"4": 140,
+				"5": 140,
+				"6": 140
+			},
+			"name": "Realm Warp",
+			"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_RyzeQWrapper_Name}}</spellName> damage bonus against targets with <keywordMajor>Flux</keywordMajor> increased to @OverloadDamageBonus@%.<br><br><spellActive>Active:</spellActive> Ryze opens a portal to another location. After @ChargeTimeTooltip@ seconds, all allies near the portal are teleported to that location."
 		}
 	}
 }

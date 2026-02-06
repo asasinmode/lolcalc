@@ -291,7 +291,10 @@
 					"tooltipOnly": true,
 					"mModifiedGameCalculation": "{7733e08c}"
 				}
-			}
+			},
+			"name": "Pit Grit",
+			"tooltip": "Sett's Attacks alternate between left and right punches. Right punches follow the left quickly and deal an additional <physicalDamage>@RightPunchBonus@ physical damage</physicalDamage>.<br><br>Sett gains <healing>@TooltipRegenPerMissingHealthCalc@ Health Regeneration</healing> for each @MissingHealthUnit*500@% missing Health.",
+			"tooltipExtended": "{{Spell_SettPassive_Tooltip}}<br><br><rules>Sett will reset back to a left punch if he does not do a right punch within 2 seconds of doing a left punch. The <attackSpeed>Attack Speed</attackSpeed> of a right punch is 8 times that of a left punch.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/sett/hud/icons2d/sett_q.png",
@@ -456,7 +459,18 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8,
+				"3": 7,
+				"4": 6,
+				"5": 5,
+				"6": 9
+			},
+			"name": "Knuckle Down",
+			"tooltip": "Sett itches for a fight, gaining <speed>@MSAmount*100@% Move Speed</speed> towards enemy champions for @MSDuration@ seconds.<br><br>Additionally Sett's next two Attacks deal an additional <physicalDamage>@BaseDamage@ plus @MaxHealthDamageCalc@ max Health physical damage</physicalDamage>."
 		},
 		"w": {
 			"image": "assets/characters/sett/hud/icons2d/sett_w.png",
@@ -683,7 +697,18 @@
 					},
 					"mModifiedGameCalculation": "MaxGrit"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 18,
+				"1": 18,
+				"2": 16.5,
+				"3": 15,
+				"4": 13.5,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Haymaker",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Sett stores @DamageStored*100@% of damage taken as <keywordMajor>Grit</keywordMajor>, up to <keywordMajor>@MaxGrit@</keywordMajor>. <keywordMajor>Grit</keywordMajor> decays quickly @AdrenalineStorageWindow@ seconds after the damage was taken.<br><br><spellActive>Active:</spellActive> Sett consumes all <keywordMajor>Grit</keywordMajor>, gaining a <shield>@ShieldConversion*100@% Grit consumed Shield</shield> decaying over @ShieldMaxDuration@ seconds. Sett then delivers a massive punch, dealing <trueDamage>@DamageCalc@ plus @DamageConversion@ Grit consumed true damage</trueDamage> to enemies in the center (max <trueDamage>@f1@ damage</trueDamage>). Enemies not in the center instead take <physicalDamage>physical damage</physicalDamage>."
 		},
 		"e": {
 			"image": "assets/characters/sett/hud/icons2d/sett_e.png",
@@ -812,7 +837,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 18,
+				"1": 16,
+				"2": 14.5,
+				"3": 13,
+				"4": 11.5,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Facebreaker",
+			"tooltip": "Sett smashes enemies on either side of him into each other, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If Sett grabbed at least one enemy on each side, all enemies are <status>Stunned</status> for @StunDuration@ second."
 		},
 		"r": {
 			"image": "assets/characters/sett/hud/icons2d/sett_r.png",
@@ -1015,7 +1051,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "The Show Stopper",
+			"tooltip": "Sett grabs an enemy champion and <status>Suppresses</status> them as he carries them forward, then slams them into the ground, dealing <physicalDamage>@DamageCalc@ plus @MaxHealthDamage*100@% of the grabbed enemy's bonus Health physical damage</physicalDamage> to surrounding enemies and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ second. Enemies take less damage the further they are from where Sett lands."
 		}
 	}
 }

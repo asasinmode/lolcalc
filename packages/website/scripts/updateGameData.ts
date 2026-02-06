@@ -59,6 +59,7 @@ if (await championFile.exists()) {
 if (!championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
 
+	await loadStringTable();
 	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, 'ddragon/champion.json');
 
 	championData = {
@@ -97,7 +98,7 @@ if (!championData || championData?.version !== latestVersion) {
 								throw new Error(`${name} no ability key ${abilityDataKey}`);
 							}
 
-							const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData } = abilityData;
+							const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = abilityData;
 							if (!mClientData) {
 								throw new Error(`${abilityDataKey} no mClientData`);
 							}
@@ -114,6 +115,15 @@ if (!championData || championData?.version !== latestVersion) {
 								console.warn('max ability level not found', abilityDataKey);
 							}
 
+							let tooltip, tooltipExtended;
+							if (championId === 'Aphelios') {
+								tooltip = undefined;
+								tooltipExtended = undefined;
+							} else {
+								tooltip = getStringtableValue(mLocKeys.keyTooltip, `${abilityDataKey} tooltip`);
+								tooltipExtended = mLocKeys.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${abilityDataKey} tooltip extended`);
+							}
+
 							return [abilityName, {
 								image: mImgIconName[0].toLowerCase().replace('dds', 'png'),
 								maxLevel,
@@ -124,6 +134,11 @@ if (!championData || championData?.version !== latestVersion) {
 									: undefined,
 								spellCalculations: cleanupObject(mSpellCalculations),
 								effectAmount: cleanupObject(mEffectAmount),
+								mana,
+								cooldownTime: cleanupObject(cooldownTime),
+								name: getStringtableValue(mLocKeys.keyName, `${abilityDataKey} name`),
+								tooltip,
+								tooltipExtended,
 							}];
 						})),
 					};

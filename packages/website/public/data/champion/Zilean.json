@@ -103,7 +103,10 @@
 					},
 					"mModifiedGameCalculation": "{e359ec0d}"
 				}
-			}
+			},
+			"name": "Time In A Bottle",
+			"tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}",
+			"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
@@ -203,7 +206,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				85
+			],
+			"cooldownTime": {
+				"0": 10.5,
+				"1": 10,
+				"2": 9.5,
+				"3": 9,
+				"4": 8.5,
+				"5": 8,
+				"6": 8
+			},
+			"name": "Time Bomb",
+			"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
@@ -249,7 +271,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				35,
+				35,
+				35,
+				35,
+				35,
+				35
+			],
+			"cooldownTime": {
+				"0": 16,
+				"1": 14,
+				"2": 12,
+				"3": 10,
+				"4": 8,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Rewind",
+			"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @Effect2Amount@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
@@ -305,7 +346,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 15,
+				"1": 15,
+				"2": 15,
+				"3": 15,
+				"4": 15,
+				"5": 15,
+				"6": 15
+			},
+			"name": "Time Warp",
+			"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
@@ -362,7 +422,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				125,
+				150,
+				175,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 120,
+				"2": 90,
+				"3": 60,
+				"4": 0,
+				"5": 0,
+				"6": 10
+			},
+			"name": "Chronoshift",
+			"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>."
 		}
 	}
 }

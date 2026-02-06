@@ -144,7 +144,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Deathbringer Stance",
+			"tooltip": "Aatrox's Attacks deal an additional <magicDamage>@PDamage@ max Health magic damage</magicDamage> and restore <healing>@PHealingRatio*100@% of damage dealt as Health</healing>, reduced to @PHealingMinionMod*100@% against minions. This effect has a @PCooldown@ second cooldown.<br><br>Attack and Ability hits against champions and large jungle monsters reduce this effect's cooldown by 2 seconds. Hits with the edge of <spellName>The Darkin Blade</spellName> reduce it by 4 seconds instead.",
+			"tooltipExtended": "{{Passive_AatroxPassive_Tooltip}}<br><br><rules>Deals a max of @MonsterDamageCap@ against monsters. <br>Multi-hits with Abilities only reduce the cooldown once.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_q.png",
@@ -275,7 +278,18 @@
 					"tooltipOnly": true,
 					"mModifiedGameCalculation": "QDamage"
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 12,
+				"3": 10,
+				"4": 8,
+				"5": 6,
+				"6": 4
+			},
+			"name": "The Darkin Blade",
+			"tooltip": "Aatrox slams his greatsword, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>. If they are hit on the edge, they are briefly <status>Knocked Up</status> and they take <physicalDamage>@QEdgeDamage@</physicalDamage> instead. This Ability can be <recast>Recast</recast> twice, each one changing shape and dealing 25% more damage than the previous one."
 		},
 		"w": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_w.png",
@@ -341,7 +355,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 20,
+				"1": 20,
+				"2": 18,
+				"3": 16,
+				"4": 14,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Infernal Chains",
+			"tooltip": "Aatrox fires a chain, <status>Slowing</status> the first enemy hit by @WSlowPercentage*-100@% for @WSlowDuration@ seconds and dealing <physicalDamage>@WDamage@ physical damage</physicalDamage>. Champions and large jungle monsters have @WSlowDuration@ seconds to leave the impact area or be <status>Pulled</status> back to the center and damaged again for the same amount."
 		},
 		"e": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_e.png",
@@ -458,7 +483,18 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8,
+				"3": 7,
+				"4": 6,
+				"5": 5,
+				"6": 4
+			},
+			"name": "Umbral Dash",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Aatrox heals for <lifeSteal>@TotalEVamp@</lifeSteal> of the damage he deals to Champions.<br><br><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities."
 		},
 		"r": {
 			"image": "assets/characters/aatrox/hud/icons2d/aatrox_r.png",
@@ -590,7 +626,18 @@
 					1,
 					1
 				]
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "World Ender",
+			"tooltip": "Aatrox reveals his true demonic form, <status>Fearing</status> nearby minions for @RMinionFearDuration@ seconds and gaining <speed>@RMovementSpeedBonus*100@% Move Speed</speed> decaying over @RDuration@ seconds. He also gains <scaleAD>@RTotalADAmp*100@% Attack Damage</scaleAD> and increases <healing>self-healing by @RHealingAmp*100@%</healing> for the duration.<br><br>Champion takedowns extend the duration of this effect by @RExtension@ seconds and refresh the <speed>Move Speed</speed> effect."
 		}
 	}
 }

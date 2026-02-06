@@ -41,7 +41,18 @@
 					18,
 					18
 				]
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Soul Siphon",
+			"tooltip": "Morgana <healing>Heals for @HealPercent@%</healing> of the damage dealt by her Abilities to champions, large minions, and medium and larger jungle monsters."
 		},
 		"q": {
 			"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
@@ -80,7 +91,17 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"name": "Dark Binding",
+			"tooltip": "Morgana hurls a blast of starfire that <status>Roots</status> the first enemy hit for @RootDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"w": {
 			"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png",
@@ -177,7 +198,26 @@
 					},
 					"mModifiedGameCalculation": "TotalMinDamage"
 				}
-			}
+			},
+			"mana": [
+				70,
+				80,
+				90,
+				100,
+				110,
+				120
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Tormented Shadow",
+			"tooltip": "Morgana ignites the ground for @WDuration@ seconds, dealing <magicDamage>@TotalMinDamage@ magic damage</magicDamage> per second, increased by up to <magicDamage>@TotalMaxDamage@</magicDamage> based on the targets' missing Health.<br><br>This Ability's Cooldown is reduced by @CDRefundPercent*100@% every time Morgana is healed by <spellName>{{Spell_MorganaPassive_Name}}</spellName>."
 		},
 		"e": {
 			"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png",
@@ -216,7 +256,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				80,
+				80,
+				80,
+				80,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 26,
+				"1": 26,
+				"2": 23.5,
+				"3": 21,
+				"4": 18.5,
+				"5": 16,
+				"6": 16
+			},
+			"name": "Black Shield",
+			"tooltip": "Morgana grants an ally champion <shield>@TotalShieldStrength@ Magic Shield</shield> for @ShieldDuration@ seconds. The shield prevents <status>Disabling</status> and <status>Immobilizing</status> effects until it breaks."
 		},
 		"r": {
 			"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png",
@@ -282,7 +341,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 120,
+				"2": 110,
+				"3": 100,
+				"4": 10,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Soul Shackles",
+			"tooltip": "Morgana chains herself to nearby enemy Champions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowPercent@%. After @ChainDuration@ seconds, enemies unable to break the chains take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and are <status>Stunned</status> for @StunDuration@ seconds.<br><br>While casting this Ability, Morgana gains <speed>@HastePercent@% Move Speed</speed>."
 		}
 	}
 }

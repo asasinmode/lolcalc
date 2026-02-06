@@ -77,7 +77,10 @@
 					6,
 					6
 				]
-			}
+			},
+			"name": "Mark of the Storm",
+			"tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>.",
+			"tooltipExtended": "{{ Spell_KennenPassive_Tooltip }}<br><rules>If an enemy is <status>Stunned</status> more than once by this ability within @DiminishingReturnDuration@ seconds, they are instead <status>Stunned</status> for @ReducedStunDuration@ seconds.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/kennen/hud/icons2d/kennen_q.png",
@@ -119,7 +122,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				55,
+				50,
+				45,
+				40,
+				35
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 7,
+				"2": 6.25,
+				"3": 5.5,
+				"4": 4.75,
+				"5": 4,
+				"6": 4
+			},
+			"name": "Thundering Shuriken",
+			"tooltip": "Kennen throws a shuriken, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit."
 		},
 		"w": {
 			"image": "assets/characters/kennen/hud/icons2d/kennen_w.png",
@@ -239,7 +261,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				40,
+				40,
+				40,
+				40,
+				40
+			],
+			"cooldownTime": {
+				"0": 13,
+				"1": 13,
+				"2": 11.25,
+				"3": 9.5,
+				"4": 7.75,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Electrical Surge",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.<br>"
 		},
 		"e": {
 			"image": "assets/characters/kennen/hud/icons2d/kennen_e.png",
@@ -414,7 +455,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				80,
+				80,
+				80,
+				80,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9,
+				"3": 8,
+				"4": 7,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Lightning Rush",
+			"tooltip": "Kennen turns into a ball of lightning, gaining <speed>@MovementSpeed*100@% Move Speed</speed>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through, and becoming Ghosted for @DurationAsBall@ seconds. If Kennen damages at least one enemy, he gains @EnergyRefund@ Energy. <br><br>After this ability ends, Kennen gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @DurationAfterBall@ seconds. Kennen can <recast>Recast</recast> to end this Ability early."
 		},
 		"r": {
 			"image": "assets/characters/kennen/hud/icons2d/kennen_r.png",
@@ -489,7 +549,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "Slicing Maelstrom",
+			"tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>@PerTickDamageCalculated@ magic damage</magicDamage> to all nearby enemies every @KennenRTickRate@ seconds, and gaining <scaleArmor>@KennenRDefenses@ Armor</scaleArmor> and <scaleMR>@KennenRDefenses@ Magic Resist</scaleMR> for @KennenRDuration@ seconds. Successive hits deal @DamageAmp*100@% increased damage for each hit the enemy has already suffered."
 		}
 	}
 }

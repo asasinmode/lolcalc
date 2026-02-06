@@ -83,7 +83,9 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Sunlight",
+			"tooltip": "Leona's abilities mark enemies for @MarkDuration@ seconds. Other allied champions consume the mark when they damage the marked enemy, dealing an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. "
 		},
 		"q": {
 			"image": "assets/characters/leona/hud/icons2d/leonaq.png",
@@ -134,7 +136,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				30,
+				35,
+				40,
+				45,
+				50,
+				55
+			],
+			"cooldownTime": {
+				"0": 5,
+				"1": 5,
+				"2": 5,
+				"3": 5,
+				"4": 5,
+				"5": 5,
+				"6": 5
+			},
+			"name": "Shield of Daybreak",
+			"tooltip": "Leona's next Attack <status>Stuns</status> for @Effect1Amount@ seconds and deals an additional <magicDamage>@TotalDamageTooltip@</magicDamage> magic damage."
 		},
 		"w": {
 			"image": "assets/characters/leona/hud/icons2d/leonaw.png",
@@ -264,7 +285,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 13,
+				"3": 12,
+				"4": 11,
+				"5": 10,
+				"6": 9
+			},
+			"name": "Eclipse",
+			"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @Effect3Amount@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @Effect3Amount@ seconds.<br>"
 		},
 		"e": {
 			"image": "assets/characters/leona/hud/icons2d/leonae.png",
@@ -315,7 +355,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				65
+			],
+			"cooldownTime": {
+				"0": 13,
+				"1": 12,
+				"2": 10.5,
+				"3": 9,
+				"4": 7.5,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Zenith Blade",
+			"tooltip": "Leona thrusts with a sword of light, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>. The last champion struck will be <status>Rooted</status> for @Effect2Amount@ seconds and Leona will dash to them."
 		},
 		"r": {
 			"image": "assets/characters/leona/hud/icons2d/leonar.png",
@@ -461,7 +520,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				0,
+				0,
+				0
+			],
+			"cooldownTime": {
+				"0": 90,
+				"1": 90,
+				"2": 75,
+				"3": 60,
+				"4": 90,
+				"5": 90,
+				"6": 150
+			},
+			"name": "Solar Flare",
+			"tooltip": "Leona calls down a radiant beam of solar energy dealing <magicDamage>@ExplosionCalculatedDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowPercent@% for @CCDuration@ seconds. Enemies in the center of the flare are <status>Stunned</status> instead of <status>Slowed</status>."
 		}
 	}
 }

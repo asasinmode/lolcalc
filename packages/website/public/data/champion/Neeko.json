@@ -68,7 +68,9 @@
 					6,
 					6
 				]
-			}
+			},
+			"name": "Inherent Glamour",
+			"tooltip": "Neeko can disguise herself as other units on the map. At any time she can disguise as an allied champion, or Neeko can stand next to any allied or neutral unit to store their Sho'ma and be able to transform into it. Your disguise will break upon receiving <status>immobilizing crowd control</status>, casting a damaging spell, damaging enemy towers as a non-champion, or your disguise taking damage equal to its healthbar. <br><br><rules>Neeko gains many of the properties of the units she turns into, negative and positive.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/neeko/hud/icons2d/neeko_q.png",
@@ -154,7 +156,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				50,
+				60,
+				70,
+				80,
+				90,
+				85
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8.5,
+				"3": 8,
+				"4": 7.5,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Blooming Burst",
+			"tooltip": "Neeko throws a seed that blooms to deal <magicDamage>@ExplosionDamage@ magic damage</magicDamage>. If it kills a unit or hits a champion or large monster, it will bloom again, dealing <magicDamage>@SecondDamage@ magic damage</magicDamage>. Max 2 extra blooms."
 		},
 		"w": {
 			"image": "assets/characters/neeko/hud/icons2d/neeko_w.png",
@@ -264,7 +285,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 16,
+				"1": 16,
+				"2": 15,
+				"3": 14,
+				"4": 13,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Shapesplitter",
+			"tooltip": "<passive>Passive:</passive> Every 3rd Attack deals an additional <magicDamage>@PassiveBonusDamageCalc@ bonus magic damage</magicDamage> and increases Neeko's <speed>Move Speed by @PassiveHaste@%</speed> for @PassiveHasteDuration@ second.<br><br><active>Active:</active> Neeko becomes <keywordStealth>invisible</keywordStealth> for @StealthDuration@ seconds and projects a clone that lasts @CloneDuration@ seconds. Neeko and the clone gain <speed>@Haste@% Move Speed</speed> for @HasteDuration@ seconds. <br><br><rules>The clone can be controlled using the Move Pet Click hotkey or by <recast>Recasting</recast> this Ability.<br>The clone mirrors her spellcasts, emotes, and recall.</rules>"
 		},
 		"e": {
 			"image": "assets/characters/neeko/hud/icons2d/neeko_e.png",
@@ -347,7 +379,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				60
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 11.5,
+				"3": 11,
+				"4": 10.5,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Tangle-Barbs",
+			"tooltip": "Neeko slings a tangle that deals <magicDamage>@BaseDamage@ magic damage</magicDamage> and <status>Roots</status> for @MinRootDuration@ seconds.<br><br>The tangle becomes empowered after hitting an enemy, growing larger, moving faster, and <status>Rooting</status> for @MaxRootDuration@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/neeko/hud/icons2d/neeko_r.png",
@@ -481,7 +532,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 105,
+				"3": 90,
+				"4": 90,
+				"5": 90,
+				"6": 90
+			},
+			"name": "Pop Blossom",
+			"tooltip": "After a delay Neeko leaps into the air, <status>Knocking Up</status> all nearby enemies for @DelayUntilExplosion@ seconds. She then crashes down, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all nearby enemies and <status>Stunning</status> them for @StunDuration@ seconds.<br><br><rules>This Ability can be prepared in secret if Neeko is disguised. @DelayBeforePassiveRemoval@ seconds after casting this ability Neeko breaks her disguise.</rules>"
 		}
 	}
 }

@@ -72,7 +72,18 @@
 					],
 					"mPrecision": 1
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Fey Feathers",
+			"tooltip": "Every @ShieldCooldown@ seconds, Rakan gains <shield>@TotalShield@ Shield</shield>. Rakan's Attacks and Abilities against enemy champions reduce this Cooldown by @HitCooldown@ second.<br><br><keywordMajor>Lover's Leap</keywordMajor> - Xayah and Rakan can recall together."
 		},
 		"q": {
 			"image": "assets/characters/rakan/hud/icons2d/rakan_q.png",
@@ -161,7 +172,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				45,
+				45,
+				45,
+				45,
+				45,
+				45
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 6
+			},
+			"name": "Gleaming Quill",
+			"tooltip": "Rakan flings a magical feather that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the feather hits a champion or epic jungle monster, Rakan restores <healing>@TotalHeal@ Health</healing> to himself and nearby allies after @HealDelay@ seconds or when he touches an allied champion."
 		},
 		"w": {
 			"image": "assets/characters/rakan/hud/icons2d/rakan_w.png",
@@ -240,7 +270,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				60,
+				70,
+				80,
+				90,
+				100
+			],
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 13,
+				"3": 12,
+				"4": 11,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Grand Entrance",
+			"tooltip": "Rakan dashes, then spirals into the air, <status>Knocking Up</status> for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"e": {
 			"image": "assets/characters/rakan/hud/icons2d/rakan_e.png",
@@ -361,7 +410,26 @@
 					]
 				},
 				"9": {}
-			}
+			},
+			"mana": [
+				40,
+				45,
+				50,
+				55,
+				60,
+				65
+			],
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Battle Dance",
+			"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Effect3Amount@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @Effect2Amount@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/rakan/hud/icons2d/rakan_r.png",
@@ -471,7 +539,26 @@
 				},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 130,
+				"1": 130,
+				"2": 110,
+				"3": 90,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "The Quickness",
+			"tooltip": "Rakan gains <speed>@Effect5Amount@% Move Speed</speed> for @Effect2Amount@ seconds. Rakan deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Charms</status> enemies for @Effect3Amount@ second(s) the first time he touches them. The first champion touched grants Rakan <speed>@Effect6Amount@% decaying Move Speed</speed>."
 		}
 	}
 }

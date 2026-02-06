@@ -63,7 +63,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Damnation",
+			"tooltip": "Thresh collects the <keywordMajor>Souls</keywordMajor> of dead enemies by walking near them. Each <keywordMajor>Soul</keywordMajor> grants him <scaleArmor>@StatValuePerSoul@ Armor</scaleArmor> and <scaleAP>@StatValuePerSoul@ Ability Power</scaleAP>.",
+			"tooltipExtended": "{{Spell_ThreshPassiveSouls_Tooltip}}<br><br>Current <keywordMajor>Soul</keywordMajor> Bonuses: <statTracking>@CurrentSoulBonus@</statTracking> <scaleAP>Ability Power</scaleAP>, <statTracking>@CurrentSoulBonus@</statTracking> <scaleArmor>Armor</scaleArmor><br><br><rules>Champions and large minions always drop a <keywordMajor>Soul</keywordMajor>, while small minions and jungle monsters only sometimes drop one. Epic jungle monsters drop two <keywordMajor>Souls</keywordMajor>.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
@@ -181,7 +184,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 19,
+				"1": 19,
+				"2": 16.5,
+				"3": 14,
+				"4": 11.5,
+				"5": 9,
+				"6": 9
+			},
+			"name": "Death Sentence",
+			"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
@@ -291,7 +313,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				55,
+				60,
+				65,
+				70,
+				75
+			],
+			"cooldownTime": {
+				"0": 21,
+				"1": 21,
+				"2": 20,
+				"3": 19,
+				"4": 18,
+				"5": 17,
+				"6": 16
+			},
+			"name": "Dark Passage",
+			"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it."
 		},
 		"e": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
@@ -437,7 +478,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				65,
+				70,
+				75,
+				80,
+				85
+			],
+			"cooldownTime": {
+				"0": 13,
+				"1": 13,
+				"2": 12.25,
+				"3": 11.5,
+				"4": 10.75,
+				"5": 10,
+				"6": 9.25
+			},
+			"name": "Flay",
+			"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"r": {
 			"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
@@ -546,7 +606,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				0
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 100,
+				"3": 80,
+				"4": 80,
+				"5": 80,
+				"6": 80
+			},
+			"name": "The Box",
+			"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration."
 		}
 	}
 }

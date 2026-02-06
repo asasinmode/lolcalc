@@ -78,7 +78,18 @@
 						}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Essence Theft",
+			"tooltip": "Killing minions or monsters grants Ahri an Essence Fragment. After obtaining @MaxStacks@ Fragments, Ahri consumes them to <healing>restore @MinionHeal@ Health</healing>.<br><br>When Ahri scores a takedown against an enemy champion within @TakedownWindow@ seconds of damaging them, she feasts upon their Essence, <healing>restoring @ChampionHeal@ Health</healing>."
 		},
 		"q": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_q.png",
@@ -108,7 +119,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				55,
+				65,
+				75,
+				85,
+				95,
+				95
+			],
+			"cooldownTime": {
+				"0": 7,
+				"1": 7,
+				"2": 7,
+				"3": 7,
+				"4": 7,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Orb of Deception",
+			"tooltip": "Ahri throws then pulls back her orb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> on the way out and <trueDamage>@TotalDamage@ true damage</trueDamage> on the way back."
 		},
 		"w": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_w.png",
@@ -253,7 +283,26 @@
 					"mSimpleTooltipCalculationDisplay": 6,
 					"mModifiedGameCalculation": "SingleFireDamage"
 				}
-			}
+			},
+			"mana": [
+				30,
+				30,
+				30,
+				30,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 8,
+				"3": 7,
+				"4": 6,
+				"5": 5,
+				"6": 4
+			},
+			"name": "Fox-Fire",
+			"tooltip": "Ahri releases 3 fox-fires that seek nearby enemies and deal <magicDamage>@SingleFireDamage@ magic damage</magicDamage>, reduced to <magicDamage>@MultiFireDamage@ damage</magicDamage> beyond the first. She also gains <speed>@MovementSpeed*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_e.png",
@@ -310,7 +359,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 12,
+				"1": 12,
+				"2": 12,
+				"3": 12,
+				"4": 12,
+				"5": 12,
+				"6": 12
+			},
+			"name": "Charm",
+			"tooltip": "Ahri blows a kiss that <status>Charms</status> the first enemy hit for @CharmDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
 		"r": {
 			"image": "assets/characters/ahri/hud/icons2d/icons_ahri_r.png",
@@ -429,7 +497,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 140,
+				"1": 140,
+				"2": 120,
+				"3": 100,
+				"4": 100,
+				"5": 100,
+				"6": 100
+			},
+			"name": "Spirit Rush",
+			"tooltip": "Ahri nimbly dashes, firing @RMaxTargetsPerCast@ essence bolts at nearby enemies, prioritizing champions. These bolts deal <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> each. <spellName>Spirit Rush</spellName> can be <recast>Recast</recast> up to 2 more times within @RRecastWindow@ seconds.<br><br>Consuming a champion's Essence with <spellName>Essence Theft</spellName> during this period extends the recast window by up to @PDurationExtension@ seconds and grants an additional recast of <spellName>Spirit Rush</spellName> (up to @RMaxCasts@ stored)."
 		}
 	}
 }

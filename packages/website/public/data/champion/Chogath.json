@@ -103,7 +103,9 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"name": "Carnivore",
+			"tooltip": "Killing an enemy restores <scaleLevel>@ChogathCarnivoreHeal@</scaleLevel> Health and <scaleLevel>@ChogathCarnivoreMana@</scaleLevel> Mana."
 		},
 		"q": {
 			"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png",
@@ -194,7 +196,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				50,
+				50,
+				50,
+				50,
+				50
+			],
+			"cooldownTime": {
+				"0": 6,
+				"1": 6,
+				"2": 6,
+				"3": 6,
+				"4": 6,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Rupture",
+			"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds."
 		},
 		"w": {
 			"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png",
@@ -245,7 +266,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				75,
+				80,
+				85,
+				90,
+				95
+			],
+			"cooldownTime": {
+				"0": 11,
+				"1": 11,
+				"2": 10.5,
+				"3": 10,
+				"4": 9.5,
+				"5": 9,
+				"6": 9
+			},
+			"name": "Feral Scream",
+			"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>."
 		},
 		"e": {
 			"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png",
@@ -383,7 +423,26 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
 				}
-			}
+			},
+			"mana": [
+				30,
+				30,
+				30,
+				30,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 8,
+				"1": 8,
+				"2": 7,
+				"3": 6,
+				"4": 5,
+				"5": 4,
+				"6": 4
+			},
+			"name": "Vorpal Spikes",
+			"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png",
@@ -528,7 +587,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				60,
+				60,
+				0
+			],
+			"cooldownTime": {
+				"0": 70,
+				"1": 80,
+				"2": 70,
+				"3": 60,
+				"4": 10,
+				"5": 10,
+				"6": 70
+			},
+			"name": "Feast",
+			"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. "
 		}
 	}
 }

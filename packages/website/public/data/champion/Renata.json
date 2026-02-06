@@ -120,7 +120,18 @@
 					"mDisplayAsPercent": true,
 					"mPrecision": 1
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Leverage",
+			"tooltip": "Renata's Attacks mark enemies for @PassiveDuration@ seconds and deal an additional <magicDamage>@PercentAmpCalcSelf@ max Health magic damage</magicDamage> if they were unmarked.<br><br>Allied champions' Attacks or Abilities consume the mark, dealing <magicDamage>@PercentAmpCalc@ max Health magic damage</magicDamage>.<br><br><rules>Renata may only have one target marked at a time.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/renata/hud/icons2d/renata_q.png",
@@ -195,7 +206,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				80,
+				80,
+				80,
+				80,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 16,
+				"1": 16,
+				"2": 16,
+				"3": 16,
+				"4": 16,
+				"5": 16,
+				"6": 16
+			},
+			"name": "Handshake",
+			"tooltip": "Renata sends out a missile from her arm, <status>Rooting</status> the first enemy hit for @RootDuration@ second and dealing <magicDamage>@TotalDamage@</magicDamage> <magicDamage>magic damage</magicDamage>.<br><br><recast>Recast:</recast> Renata <status>Pulls</status> the enemy in a direction, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they are thrown into and <status>Stunning</status> for @StunDuration@ seconds if the thrown enemy is a champion."
 		},
 		"w": {
 			"image": "assets/characters/renata/hud/icons2d/renata_w.png",
@@ -359,7 +389,26 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"mana": [
+				80,
+				80,
+				80,
+				80,
+				80,
+				80
+			],
+			"cooldownTime": {
+				"0": 24,
+				"1": 28,
+				"2": 27,
+				"3": 26,
+				"4": 25,
+				"5": 24,
+				"6": 10
+			},
+			"name": "Bailout",
+			"tooltip": "Renata infuses an ally champion, granting <attackSpeed>@ASCalc@ Attack Speed</attackSpeed> and <speed>@MSCalc@ Move Speed</speed> towards enemies, increasing to <attackSpeed>@FinalASCalc@ Attack Speed</attackSpeed> and <speed>@FinalMSCalc@ Move Speed</speed> over @Duration@ seconds. Takedowns refresh the duration of the buff.<br><br>If the ally would die, they instead return to full Health, which then decays over 3 seconds.<br><br>If they get a Takedown while decaying, they will be set to <healing>@TriumphPercent@% max Health</healing> and stop decaying.<br><br><rules>The Champion's death can be delayed by healing or similar effects while in the decaying state, but cannot be prevented unless the Champion gets a Takedown. Champions can only delay their death once.</rules>"
 		},
 		"e": {
 			"image": "assets/characters/renata/hud/icons2d/renata_e.png",
@@ -476,7 +525,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				70,
+				80,
+				90,
+				100,
+				110,
+				120
+			],
+			"cooldownTime": {
+				"0": 14,
+				"1": 14,
+				"2": 13,
+				"3": 12,
+				"4": 11,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Loyalty Program",
+			"tooltip": "Renata sends out a pair of chemtech missiles, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> surrounding enemies and enemies hit by 30% for @SlowDuration@ seconds. Allies hit gain <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds."
 		},
 		"r": {
 			"image": "assets/characters/renata/hud/icons2d/renata_r.png",
@@ -500,7 +568,26 @@
 					1,
 					1
 				]
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 150,
+				"1": 150,
+				"2": 130,
+				"3": 110,
+				"4": 10,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Hostile Takeover",
+			"tooltip": "Renata sends out a wave of chemicals, <status>Berserking</status> enemies for @BerserkDuration@ seconds, causing them to Attack the nearest unit, prioritizing their allies.<br><br>While <status>Berserk</status>, enemies gain <attackSpeed>@BonusAttackSpeed*100@% Attack Speed</attackSpeed>."
 		}
 	}
 }

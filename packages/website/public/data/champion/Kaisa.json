@@ -169,7 +169,10 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"name": "Second Skin",
+			"tooltip": "Kai'Sa's Attacks stack <keywordMajor>Plasma</keywordMajor> for @PDuration@ seconds and deal an additional <magicDamage>@PBaseDamage@ plus @PCurrentPerStackDamage@ per stack magic damage</magicDamage>. Attacking an enemy with @PMaxStacks@ stacks consumes the <keywordMajor>Plasma</keywordMajor>, dealing <magicDamage>@PExecutePercentage@ missing Health magic damage</magicDamage>. Nearby allies apply @PAllyStacks@ stack to champions they <status>Immobilize</status>.<br><br>Kai'Sa's suit evolves her basic Abilities based on her stats.<br><spellName>Icathian Rain</spellName>: <physicalDamage>@f1.1@/@spell.KaisaQ:Effect6Amount@ Bonus Attack Damage</physicalDamage><br><spellName>Void Seeker</spellName>: <scaleAP>@f2.1@/@spell.KaisaW:Effect2Amount@ Ability Power</scaleAP><br><spellName>Supercharge</spellName>: <attackSpeed>@f3.1@%/@spell.KaisaE:Effect6Amount@% Bonus Attack Speed</attackSpeed>",
+			"tooltipExtended": "{{Spell_KaisaPassive_Tooltip}}<br><br><rules>Consuming <keywordMajor>Plasma</keywordMajor> deals a maximum of <magicDamage>@PDamageCap@ magic damage</magicDamage> to monsters.<br><physicalDamage>Attack Damage</physicalDamage> and <attackSpeed>Attack Speed</attackSpeed> gained from leveling up progresses the <keywordMajor>Evolution</keywordMajor> of <spellName>Icathian Rain</spellName> and <spellName>Supercharge</spellName>, respectively.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/kaisa/hud/icons2d/kaisa_q.png",
@@ -483,7 +486,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				55,
+				55,
+				55,
+				55,
+				55,
+				55
+			],
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9,
+				"3": 8,
+				"4": 7,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Icathian Rain",
+			"tooltip": "Kai'Sa launches @Effect2Amount@ missiles that split among nearby enemies, each dealing <physicalDamage>@TotalIndividualMissileDamage@ physical damage</physicalDamage>, up to a maximum of @MaxDamageDisplay@. Additional missile hits on champions or monsters deal @ExtraHitReduction*100@% damage.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead fires @Effect7Amount@ missiles.<br>Current: <physicalDamage>@f11.1@/@Effect6Amount@ Bonus Attack Damage</physicalDamage>"
 		},
 		"w": {
 			"image": "assets/characters/kaisa/hud/icons2d/kaisa_w.png",
@@ -569,7 +591,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				55,
+				60,
+				65,
+				70,
+				75,
+				85
+			],
+			"cooldownTime": {
+				"0": 26,
+				"1": 22,
+				"2": 20,
+				"3": 18,
+				"4": 16,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Void Seeker",
+			"tooltip": "Kai'Sa fires a void blast that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>, applies @Effect4Amount@ stacks of <keywordMajor>Plasma</keywordMajor>, and grants <keywordStealth>True Sight</keywordStealth> of the first enemy hit for @spell.KaisaPassive:PDuration@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead applies @Effect5Amount@ stacks of <keywordMajor>Plasma</keywordMajor> and hitting a champion reduces the Cooldown by @Effect3Amount@%.<br>Current: <scaleAP>@f2.1@/@Effect2Amount@ Ability Power</scaleAP>"
 		},
 		"e": {
 			"image": "assets/characters/kaisa/hud/icons2d/kaisa_e.png",
@@ -712,7 +753,26 @@
 				},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				30,
+				30,
+				30,
+				30,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 17,
+				"1": 16,
+				"2": 14.5,
+				"3": 13,
+				"4": 11.5,
+				"5": 10,
+				"6": 11
+			},
+			"name": "Supercharge",
+			"tooltip": "Kai'Sa supercharges her void energy, gaining <speed>@TotalMoveSpeed@ Move Speed</speed> and becoming Ghosted while charging, then gaining <attackSpeed>@Effect5Amount*100@% Attack Speed</attackSpeed> for @Effect2Amount@ seconds.<br><br>Attacks reduce this Ability's Cooldown by @Effect4Amount@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa also becomes <keywordStealth>Invisible</keywordStealth> for @Effect7Amount@ seconds.<br>Current: <attackSpeed>@f10.1@%/@Effect6Amount@% Bonus Attack Speed</attackSpeed>"
 		},
 		"r": {
 			"image": "assets/characters/kaisa/hud/icons2d/kaisa_r.png",
@@ -782,7 +842,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 130,
+				"1": 130,
+				"2": 100,
+				"3": 70,
+				"4": 70,
+				"5": 70,
+				"6": 70
+			},
+			"name": "Killer Instinct",
+			"tooltip": "Kai'Sa warps near an enemy champion affected by <keywordMajor>Plasma</keywordMajor> and gains <shield>@RCalculatedShieldValue@ Shield</shield> for @RShieldDuration@ seconds."
 		}
 	}
 }

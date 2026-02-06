@@ -41,7 +41,9 @@
 					7,
 					7
 				]
-			}
+			},
+			"name": "Death Defied",
+			"tooltip": "When Karthus dies he can use his Abilities for free for @PassiveDuration@ seconds."
 		},
 		"q": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_q.png",
@@ -117,7 +119,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				20,
+				25,
+				30,
+				35,
+				40,
+				45
+			],
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Lay Waste",
+			"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>."
 		},
 		"w": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_w.png",
@@ -183,7 +204,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				70,
+				70,
+				70,
+				70,
+				70,
+				70
+			],
+			"cooldownTime": {
+				"0": 15,
+				"1": 15,
+				"2": 15,
+				"3": 15,
+				"4": 15,
+				"5": 15,
+				"6": 15
+			},
+			"name": "Wall of Pain",
+			"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration."
 		},
 		"e": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_e.png",
@@ -278,7 +318,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				30,
+				42,
+				54,
+				66,
+				78,
+				90
+			],
+			"cooldownTime": {
+				"0": 0.5,
+				"1": 0.5,
+				"2": 0.5,
+				"3": 0.5,
+				"4": 0.5,
+				"5": 0.5,
+				"6": 0.5
+			},
+			"name": "Defile",
+			"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies."
 		},
 		"r": {
 			"image": "assets/characters/karthus/hud/icons2d/karthus_r.png",
@@ -316,7 +375,26 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 200,
+				"1": 200,
+				"2": 180,
+				"3": 160,
+				"4": 180,
+				"5": 180,
+				"6": 200
+			},
+			"name": "Requiem",
+			"tooltip": "Karthus channels for 3 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemy champions, regardless of distance."
 		}
 	}
 }

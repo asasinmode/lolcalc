@@ -105,7 +105,10 @@
 					],
 					"mDisplayAsPercent": true
 				}
-			}
+			},
+			"name": "Trial by Fire",
+			"tooltip": "Gangplank's melee Attacks ignite the target, dealing an additional <trueDamage>@TotalDamage@ true damage</trueDamage> over @DoTDuration@ seconds and granting Gangplank <speed>@MoveSpeed@ Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Destroying a <keywordMajor>Powder Keg</keywordMajor> refreshes this Cooldown and grants Gangplank the same <speed>Move Speed</speed>.",
+			"tooltipExtended": "{{Spell_GangplankPassive_Tooltip}}<br><br><rules>Deals @TurretDamageMult*100@% damage to turrets.<br><spellName>{{Spell_GangplankQWrapper_Name}}</spellName> does not apply this Ability.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/gangplank/hud/icons2d/gangplank_q.png",
@@ -249,7 +252,27 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				50,
+				45,
+				40,
+				35,
+				30,
+				30
+			],
+			"cooldownTime": {
+				"0": 4.5,
+				"1": 4.5,
+				"2": 4.5,
+				"3": 4.5,
+				"4": 4.5,
+				"5": 4.5,
+				"6": 4.5
+			},
+			"name": "Parrrley",
+			"tooltip": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}",
+			"tooltipExtended": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}<br><br>Total Gold plundered: <statTracking>@f1@ Gold</statTracking><br>Total SS plundered: <statTracking>@f3@ Silver Serpents</statTracking>"
 		},
 		"w": {
 			"image": "assets/characters/gangplank/hud/icons2d/gangplank_w.png",
@@ -330,7 +353,26 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"mana": [
+				60,
+				70,
+				80,
+				90,
+				100,
+				110
+			],
+			"cooldownTime": {
+				"0": 24,
+				"1": 22,
+				"2": 20,
+				"3": 18,
+				"4": 16,
+				"5": 14,
+				"6": 14
+			},
+			"name": "Remove Scurvy",
+			"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @Effect2Amount@% missing Health</healing>."
 		},
 		"e": {
 			"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png",
@@ -487,7 +529,18 @@
 						{}
 					]
 				}
-			}
+			},
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Powder Keg",
+			"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @Effect5Amount@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @Effect2Amount@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @Effect10Amount@% Armor. Champions take an additional <physicalDamage>@Effect3Amount@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed."
 		},
 		"r": {
 			"image": "assets/characters/gangplank/hud/icons2d/gangplank_r.png",
@@ -695,7 +748,26 @@
 						{}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 160,
+				"1": 160,
+				"2": 140,
+				"3": 120,
+				"4": 120,
+				"5": 120,
+				"6": 120
+			},
+			"name": "Cannon Barrage",
+			"tooltip": "Gangplank signals his ship to fire @TotalWavesTooltip@ waves of cannonballs anywhere on the map over @ZoneDuration@ seconds. Each wave <status>Slows</status> by @SlowPercent@% for @SlowDuration@ seconds and deals <magicDamage>@OneWaveDamage@ magic damage</magicDamage>. Maximum damage: @TotalDamageTooltip@<br><br>This Ability can be upgraded in the shop via <spellName>{{Spell_GangplankQWrapper_Name}}</spellName>.<br><br><spellName>Fire at Will</spellName>: Fires 6 additional waves of cannonballs.<br><spellName>Death's Daughter</spellName>: Fires a Mega-Cannonball that deals <trueDamage>@DeathsDaughterDamage@ true damage</trueDamage> and <status>Slows</status> by @DeathsDaughterSlow@% for @DeathsDaughterSlowDuration@ second.<br><spellName>Raise Morale</spellName>: Allies inside Cannon Barrage gain <speed>@RaiseMoraleHaste@% Move Speed</speed> for @RaiseMoraleHasteDuration@ seconds."
 		}
 	}
 }

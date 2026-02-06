@@ -145,20 +145,76 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				20,
+				20,
+				20,
+				20,
+				20,
+				20
+			],
+			"cooldownTime": {
+				"0": 2,
+				"1": 2,
+				"2": 2,
+				"3": 2,
+				"4": 2,
+				"5": 2,
+				"6": 2
+			},
+			"name": "The Hitman and the Seer"
 		},
 		"q": {
 			"image": "assets/characters/aphelios/hud/icons2d/apheliosq.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"mana": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
+			"cooldownTime": {
+				"0": 9,
+				"1": 9,
+				"2": 9,
+				"3": 9,
+				"4": 9,
+				"5": 9,
+				"6": 9
+			},
+			"name": "Weapon Abilites"
 		},
 		"w": {
 			"image": "assets/characters/aphelios/hud/icons2d/apheliosw.png",
 			"maxLevel": 6,
-			"dataValues": {}
+			"dataValues": {},
+			"cooldownTime": {
+				"0": 0.8,
+				"1": 0.8,
+				"2": 0.8,
+				"3": 0.8,
+				"4": 0.8,
+				"5": 0.8,
+				"6": 0.8
+			},
+			"name": "Phase"
 		},
 		"e": {
 			"image": "assets/characters/aphelios/hud/icons2d/calibrum_l.png",
-			"maxLevel": 6
+			"maxLevel": 6,
+			"cooldownTime": {
+				"0": 0,
+				"1": 0,
+				"2": 0,
+				"3": 0,
+				"4": 0,
+				"5": 0,
+				"6": 0
+			},
+			"name": "Weapon Queue System"
 		},
 		"r": {
 			"image": "assets/characters/aphelios/hud/icons2d/apheliosr.png",
@@ -333,7 +389,25 @@
 						}
 					]
 				}
-			}
+			},
+			"mana": [
+				100,
+				100,
+				100,
+				100,
+				100,
+				100
+			],
+			"cooldownTime": {
+				"0": 120,
+				"1": 120,
+				"2": 110,
+				"3": 100,
+				"4": 100,
+				"5": 100,
+				"6": 100
+			},
+			"name": "Moonlight Vigil"
 		}
 	}
 }

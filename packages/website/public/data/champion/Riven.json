@@ -73,7 +73,10 @@
 						}
 					]
 				}
-			}
+			},
+			"name": "Runic Blade",
+			"tooltip": "Using an Ability grants Riven a charge for 6 seconds (max @Charges@). Her Attacks spend a charge to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+			"tooltipExtended": "{{Spell_RivenPassive_Tooltip}}<br><br><rules>The bonus damage can critically strike.<br>Deals @MonsterBonusDamage@ bonus damage to monsters.</rules>"
 		},
 		"q": {
 			"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
@@ -175,7 +178,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 13,
+				"1": 13,
+				"2": 13,
+				"3": 13,
+				"4": 13,
+				"5": 13,
+				"6": 13
+			},
+			"name": "Broken Wings",
+			"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds."
 		},
 		"w": {
 			"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
@@ -258,7 +272,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 12,
+				"1": 11,
+				"2": 10,
+				"3": 9,
+				"4": 8,
+				"5": 7,
+				"6": 7
+			},
+			"name": "Ki Burst",
+			"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds."
 		},
 		"e": {
 			"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
@@ -340,7 +365,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 10,
+				"1": 10,
+				"2": 9,
+				"3": 8,
+				"4": 7,
+				"5": 6,
+				"6": 6
+			},
+			"name": "Valor",
+			"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds."
 		},
 		"r": {
 			"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
@@ -492,7 +528,18 @@
 				"7": {},
 				"8": {},
 				"9": {}
-			}
+			},
+			"cooldownTime": {
+				"0": 10,
+				"1": 120,
+				"2": 90,
+				"3": 60,
+				"4": 60,
+				"5": 10,
+				"6": 10
+			},
+			"name": "Blade of the Exile",
+			"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health."
 		}
 	}
 }
