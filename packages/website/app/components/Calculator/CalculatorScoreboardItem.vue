@@ -702,34 +702,39 @@ defineExpose({ el });
 					>
 					<span>passive</span>
 				</div>
-				<div
-					v-for="ability in ['q', 'w', 'e', 'r'] as const"
-					v-bind="{ [`data-${ability}`]: '' }"
-					:key="ability"
-				>
-					<img
-						v-if="value.listedChampion.value"
-						v-show="!isLoading"
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities[ability].image}`"
-						width="64"
-						height="64"
-						aria-hidden="true"
+				<template v-if="value.listedChampion.value?.id === 'Aphelios'">
+					aphelios catdespair
+				</template>
+				<template v-else>
+					<div
+						v-for="ability in ['q', 'w', 'e', 'r'] as const"
+						v-bind="{ [`data-${ability}`]: '' }"
+						:key="ability"
 					>
-					<span>{{ ability }}</span>
-					<VButtonRadiogroup
-						v-if="value.champion.value"
-						:id="`${group}-${index}-ability-${ability}`"
-						v-model="value.abilityLevels.value[ability]"
-						:label="`${ability} level`"
-						:options="Array.from({ length: value.champion.value.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
-						value-key="level"
-						:on-option-right-click="(event) => resetAbilityLevel(event, ability)"
-					>
-						<template #default="{ option }">
-							<span>{{ option.level }}</span>
-						</template>
-					</VButtonRadiogroup>
-				</div>
+						<img
+							v-if="value.listedChampion.value"
+							v-show="!isLoading"
+							:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities[ability].image}`"
+							width="64"
+							height="64"
+							aria-hidden="true"
+						>
+						<span>{{ ability }}</span>
+						<VButtonRadiogroup
+							v-if="value.champion.value"
+							:id="`${group}-${index}-ability-${ability}`"
+							v-model="value.abilityLevels.value[ability]"
+							:label="`${ability} level`"
+							:options="Array.from({ length: value.champion.value.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
+							value-key="level"
+							:on-option-right-click="(event) => resetAbilityLevel(event, ability)"
+						>
+							<template #default="{ option }">
+								<span>{{ option.level }}</span>
+							</template>
+						</VButtonRadiogroup>
+					</div>
+				</template>
 				<div id="champion-ability-hover-tooltip" ref="championAbilityTooltip" popover="hint">
 					here goes hovered ability description {{ hoveredAbility }}
 				</div>

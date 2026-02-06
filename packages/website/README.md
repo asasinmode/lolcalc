@@ -41,6 +41,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] current health/mana
     - [x] champion data loading indicator
     - [ ] passive with tooltip
+    - [ ] aphelios
     - [ ] abilities ui (not implemented, coming soon)
     - [ ] runes
     - [ ] dragons/souls
@@ -104,13 +105,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] future features in github project page thingy?
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
-
-0. save champion abilities/their tooltips in per champion json, fetch await load indicate it
-1. https://raw.communitydragon.org/latest/game/data/characters/aatrox/aatrox.bin.json
-2. `Characters/Aatrox/CharacterRecords/Root`
-3. .`spells`, .`mCharacterPassiveSpell`
-4. .`mImgIconName`, .`mSpell.DataValues`, .`mSpell.mSpellCalculations`, .`mSpell.mEffectAmount`
-5. .`mClientData.mTooltipData.mLocKeys.keyTooltip`
 
 ### future features
 
