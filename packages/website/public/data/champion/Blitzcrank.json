@@ -90,36 +90,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"1": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				]
 			},
 			"name": "Mana Barrier",
 			"tooltip": "When Blitzcrank falls below @HealthThreshold*100@% Health, they gain <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds."
@@ -172,26 +160,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					40,
+					90,
+					140,
+					190,
+					240,
+					290,
+					340
+				]
 			},
 			"mana": [
 				100,
@@ -201,15 +178,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 21,
-				"1": 20,
-				"2": 19,
-				"3": 18,
-				"4": 17,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				21,
+				20,
+				19,
+				18,
+				17,
+				16,
+				16
+			],
 			"name": "Rocket Grab",
 			"tooltip": "Blitzcrank fires their right hand, <status>Pulling</status> the first enemy hit towards them and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -315,15 +292,15 @@
 				75,
 				75
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 15,
-				"3": 15,
-				"4": 15,
-				"5": 15,
-				"6": 15
-			},
+			"cooldownTime": [
+				15,
+				15,
+				15,
+				15,
+				15,
+				15,
+				15
+			],
 			"name": "Overdrive",
 			"tooltip": "Blitzcrank supercharges themself, gaining <speed>@MoveSpeedMod*100@% decaying Move Speed</speed> and <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @Duration@ seconds.<br><br>Afterwards, Blitzcrank is <status>Slowed</status> by @MoveSpeedModReduction*100@% for @SlowDuration@ seconds."
 		},
@@ -378,15 +355,15 @@
 				25,
 				25
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 6.5,
-				"3": 6,
-				"4": 5.5,
-				"5": 5,
-				"6": 5
-			},
+			"cooldownTime": [
+				7,
+				7,
+				6.5,
+				6,
+				5.5,
+				5,
+				5
+			],
 			"name": "Power Fist",
 			"tooltip": "Blitzcrank charges up their fist, causing their next Attack to <status>Knock Up</status> for @CCDuration@ second(s) and deal <physicalDamage>@TotalDamage@ physical damage</physicalDamage>."
 		},
@@ -507,15 +484,15 @@
 				150,
 				0
 			],
-			"cooldownTime": {
-				"0": 0,
-				"1": 60,
-				"2": 40,
-				"3": 20,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				60,
+				40,
+				20,
+				0,
+				0,
+				0
+			],
 			"name": "Static Field",
 			"tooltip": "<spellPassive>Passive: </spellPassive>While this ability is available, lightning charges Blitzcrank's fists, marking those  Attacked. After 1 second, they are shocked for <magicDamage>@PassiveDamage@ magic damage</magicDamage>.<br><br><spellActive>Active: </spellActive>Blitzcrank overcharges, dealing <magicDamage>@ActiveDamage@ magic damage</magicDamage> and <status>Silencing</status> nearby enemies for @SilenceDuration@ seconds. Their shields are also destroyed."
 		}

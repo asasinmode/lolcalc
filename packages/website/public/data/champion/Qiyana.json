@@ -390,15 +390,15 @@
 				35,
 				35
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Elemental Wrath / Edge of Ixtal",
 			"tooltip": "If Qiyana does not have an <keywordMajor>Enchantment</keywordMajor>, she slashes, dealing <physicalDamage>@VanillaDamage@ physical damage</physicalDamage> to enemies in a small area. If she does, this Ability gains extra range and an additional effect based on the type of <keywordMajor>Enchantment</keywordMajor>:<li><keywordMajor>Ice Enchantment</keywordMajor>: Briefly <status>Roots</status>, then <status>Slows</status> by @SlowPotency*-100@% for @SlowDuration@ second.<li><keywordMajor>Rock Enchantment</keywordMajor>: Deals an additional <physicalDamage>@TremorDamage@ physical damage</physicalDamage> to units below @CritThreshold*100@% Health.<li><keywordMajor>Wild Enchantment</keywordMajor>: Leaves a trail that turns Qiyana <keywordStealth>Invisible</keywordStealth> and grants <speed>@Haste*100@% Move Speed</speed>.<br>"
 		},
@@ -554,15 +554,15 @@
 				45,
 				50
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Terrashape",
 			"tooltip": "<spellPassive>Passive:</spellPassive> While Qiyana's weapon is <keywordMajor>Enchanted</keywordMajor>, she gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> and her Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>. She also gains <speed>@PassiveMS*100@% Move Speed</speed> while out of combat near the corresponding terrain type.<br><br><spellActive>Active:</spellActive> Qiyana dashes towards a nearby brush, terrain, or river and <keywordMajor>Enchants</keywordMajor> her weapon with that particular terrain type. This refreshes <spellName>{{Spell_QiyanaQv2_Name}}</spellName>'s Cooldown."
 		},
@@ -631,15 +631,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 10,
-				"3": 9,
-				"4": 8,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				11,
+				11,
+				10,
+				9,
+				8,
+				7,
+				7
+			],
 			"name": "Audacity",
 			"tooltip": "Qiyana dashes through an enemy and deals <physicalDamage>@Damage@ physical damage</physicalDamage> to them."
 		},
@@ -786,15 +786,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 120,
-				"3": 120,
-				"4": 120,
-				"5": 120,
-				"6": 120
-			},
+			"cooldownTime": [
+				120,
+				120,
+				120,
+				120,
+				120,
+				120,
+				120
+			],
 			"name": "Supreme Display of Talent",
 			"tooltip": "Qiyana launches a shockwave that <status>Knocks Back</status> enemies and detonates when it hits terrain. The explosion follows the entire edge of the terrain, <status>Stunning</status> for between 0.5 and @StunDuration@ seconds and dealing <physicalDamage>@Damage@</physicalDamage> plus <physicalDamage>@MissingHealthDamageRock@ max Health physical damage</physicalDamage>. <status>Stun</status> duration scales down with distance the shockwave has travelled.<br><br>Any river or brush the shockwave passes through also explode after a delay for the same damage and <status>Stun</status>."
 		}

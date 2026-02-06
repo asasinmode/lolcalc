@@ -163,15 +163,15 @@
 				90,
 				95
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Blinding Dart",
 			"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>."
 		},
@@ -224,15 +224,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 14,
-				"3": 14,
-				"4": 14,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				14,
+				14,
+				14,
+				14,
+				14,
+				14,
+				14
+			],
 			"name": "Move Quick",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds."
 		},
@@ -349,15 +349,15 @@
 					"mModifiedGameCalculation": "TickCalculatedDamage"
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Toxic Shot",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds."
 		},
@@ -505,15 +505,15 @@
 				35,
 				35
 			],
-			"cooldownTime": {
-				"0": 0.25,
-				"1": 0.25,
-				"2": 0.25,
-				"3": 0.25,
-				"4": 0.25,
-				"5": 0.25,
-				"6": 0.25
-			},
+			"cooldownTime": [
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25
+			],
 			"name": "Noxious Trap",
 			"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).<br>"
 		}

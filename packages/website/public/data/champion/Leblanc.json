@@ -42,15 +42,15 @@
 					60
 				]
 			},
-			"cooldownTime": {
-				"0": 60,
-				"1": 60,
-				"2": 60,
-				"3": 60,
-				"4": 60,
-				"5": 60,
-				"6": 60
-			},
+			"cooldownTime": [
+				60,
+				60,
+				60,
+				60,
+				60,
+				60,
+				60
+			],
 			"name": "Mirror Image",
 			"tooltip": "When LeBlanc drops below 40% Health, she becomes <keywordStealth>Invisible</keywordStealth> for 1 second and creates a harmless clone for 8 seconds. LeBlanc can move the clone with the \"Alt\" key.",
 			"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>"
@@ -162,15 +162,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Sigil of Malice",
 			"tooltip": "LeBlanc projects a sigil to an enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage> and marking them for @MarkDuration@ seconds.<br><br>Damaging the marked enemy with an Ability detonates the sigil, dealing <magicDamage>@MarkDamage@ magic damage</magicDamage>.<br><br>If either part kills the target, Leblanc refunds @ManaRefund*100@% of the Mana cost and @CooldownRefund*100@% of this spell's remaining Cooldown.<br><br><rules>The initial sigil deals an additional @BonusMinionDamage@ damage to minions. </rules>"
 		},
@@ -212,66 +212,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"2": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"3": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"4": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"5": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				]
 			},
 			"mana": [
 				60,
@@ -281,15 +266,15 @@
 				100,
 				120
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 13.75,
-				"3": 12.5,
-				"4": 11.25,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				15,
+				15,
+				13.75,
+				12.5,
+				11.25,
+				10,
+				10
+			],
 			"name": "Distortion",
 			"tooltip": "LeBlanc dashes then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. For @Effect3Amount@ seconds after dashing, LeBlanc can <recast>Recast</recast>.<br><br><recast>Recast:</recast> LeBlanc returns to her starting location."
 		},
@@ -361,56 +346,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"2": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"3": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"4": [
+					865,
+					865,
+					865,
+					865,
+					865,
+					865,
+					865
+				],
+				"5": [
+					14,
+					14,
+					13.25,
+					12.5,
+					11.75,
+					11,
+					11
+				]
 			},
 			"mana": [
 				50,
@@ -420,15 +391,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 13.25,
-				"3": 12.5,
-				"4": 11.75,
-				"5": 11,
-				"6": 11
-			},
+			"cooldownTime": [
+				14,
+				14,
+				13.25,
+				12.5,
+				11.75,
+				11,
+				11
+			],
 			"name": "Ethereal Chains",
 			"tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br><br>If they remain shackled for @Effect3Amount@ seconds, LeBlanc <status>Roots</status> them for @Effect4Amount@ seconds and deals an additional <magicDamage>@DelayedDamage@ magic damage</magicDamage>."
 		},
@@ -562,15 +533,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 45,
-				"1": 45,
-				"2": 35,
-				"3": 25,
-				"4": 25,
-				"5": 25,
-				"6": 25
-			},
+			"cooldownTime": [
+				45,
+				45,
+				35,
+				25,
+				25,
+				25,
+				25
+			],
 			"name": "Mimic",
 			"tooltip": "LeBlanc mimics her most recent Ability, using it again. The mimicked Ability deals increased damage.<br><br><spellName>Mimicked Sigil of Malice</spellName> deals <magicDamage>@RQ1Damage@ magic damage</magicDamage> when applied, and <magicDamage>@RQ2Damage@ magic damage</magicDamage> when consumed.<br><spellName>Mimicked Distortion</spellName> deals <magicDamage>@RWDamage@ magic damage</magicDamage>.<br><spellName>Mimicked Ethereal Chains</spellName> deals <magicDamage>@RE1Damage@ magic damage</magicDamage> when shackled and <magicDamage>@RE2Damage@ magic damage</magicDamage> when <status>Rooting</status>."
 		}

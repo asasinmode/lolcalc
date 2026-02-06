@@ -134,56 +134,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"1": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"2": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"3": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				]
 			},
 			"mana": [
 				70,
@@ -193,15 +179,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 19,
-				"1": 19,
-				"2": 16.5,
-				"3": 14,
-				"4": 11.5,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				19,
+				19,
+				16.5,
+				14,
+				11.5,
+				9,
+				9
+			],
 			"name": "Death Sentence",
 			"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds."
 		},
@@ -263,56 +249,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"1": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"3": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"4": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
 			},
 			"mana": [
 				50,
@@ -322,15 +294,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 21,
-				"1": 21,
-				"2": 20,
-				"3": 19,
-				"4": 18,
-				"5": 17,
-				"6": 16
-			},
+			"cooldownTime": [
+				21,
+				21,
+				20,
+				19,
+				18,
+				17,
+				16
+			],
 			"name": "Dark Passage",
 			"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it."
 		},
@@ -408,76 +380,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					75,
+					75,
+					120,
+					165,
+					210,
+					255,
+					300
+				],
+				"1": [
+					20,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				],
+				"2": [
+					80,
+					80,
+					110,
+					140,
+					170,
+					200,
+					225
+				],
+				"3": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"4": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"5": [
+					1.7,
+					1.7,
+					1.7,
+					1.7,
+					1.7,
+					1.7,
+					1.7
+				]
 			},
 			"mana": [
 				60,
@@ -487,15 +443,15 @@
 				80,
 				85
 			],
-			"cooldownTime": {
-				"0": 13,
-				"1": 13,
-				"2": 12.25,
-				"3": 11.5,
-				"4": 10.75,
-				"5": 10,
-				"6": 9.25
-			},
+			"cooldownTime": [
+				13,
+				13,
+				12.25,
+				11.5,
+				10.75,
+				10,
+				9.25
+			],
 			"name": "Flay",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -556,56 +512,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						0
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0,
+					250,
+					400,
+					550,
+					175,
+					175,
+					0
+				],
+				"1": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"2": [
+					99,
+					99,
+					99,
+					99,
+					99,
+					99,
+					99
+				],
+				"3": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
 			},
 			"mana": [
 				100,
@@ -615,15 +557,15 @@
 				100,
 				0
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				120,
+				120,
+				100,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "The Box",
 			"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration."
 		}

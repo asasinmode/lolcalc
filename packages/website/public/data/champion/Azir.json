@@ -103,15 +103,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 90,
-				"1": 90,
-				"2": 90,
-				"3": 90,
-				"4": 90,
-				"5": 90,
-				"6": 90
-			},
+			"cooldownTime": [
+				90,
+				90,
+				90,
+				90,
+				90,
+				90,
+				90
+			],
 			"name": "Shurima's Legacy",
 			"tooltip": "Azir can summon the <keywordMajor>Sun Disc</keywordMajor> from the rubble of a turret. The <keywordMajor>Sun Disc</keywordMajor> deals <magicDamage>@TowerDamage@ magic damage</magicDamage> and has @BonusResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> but disintegrates over @TowerDisintegrationTime@ seconds.",
 			"tooltipExtended": "{{Spell_AzirPassive_Tooltip}}<br><br><rules>You may not target enemy Nexus and Inhibitor Turrets with this Ability.<br><keywordMajor>Sun Disk</keywordMajor> loses 100 <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> if you are dead or too far away.</rules>"
@@ -173,76 +173,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					60,
+					60,
+					80,
+					100,
+					120,
+					140,
+					160
+				],
+				"1": [
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25
+				],
+				"3": [
+					70,
+					70,
+					70,
+					70,
+					70,
+					70,
+					70
+				],
+				"4": [
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600,
+					1600
+				],
+				"5": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"6": [
+					325,
+					325,
+					325,
+					325,
+					325,
+					325,
+					325
+				]
 			},
 			"mana": [
 				70,
@@ -252,15 +236,15 @@
 				110,
 				110
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 12,
-				"3": 10,
-				"4": 8,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				14,
+				14,
+				12,
+				10,
+				8,
+				6,
+				6
+			],
 			"name": "Conquering Sands",
 			"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @Effect2Amount*-100@% for 1 second."
 		},
@@ -338,66 +322,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"5": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"7": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"8": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"9": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
 			},
 			"mana": [
 				40,
@@ -407,15 +376,15 @@
 				20,
 				20
 			],
-			"cooldownTime": {
-				"0": 1.5,
-				"1": 1.5,
-				"2": 1.5,
-				"3": 1.5,
-				"4": 1.5,
-				"5": 1.5,
-				"6": 1.5
-			},
+			"cooldownTime": [
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5
+			],
 			"name": "Arise!",
 			"tooltip": "Azir summons a <keywordMajor>Sand Soldier</keywordMajor> for @Effect1Amount@ seconds. When Azir Attacks an enemy near a <keywordMajor>Sand Soldier</keywordMajor>, he instead orders the soldiers to stab, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> in their direction.<br><br>This Ability has @MaxAmmo@ charges."
 		},
@@ -487,76 +456,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					1700,
+					1700,
+					1700,
+					1700,
+					1700,
+					1700,
+					1700
+				],
+				"4": [
+					0,
+					0.3,
+					0.5,
+					0.7,
+					0.9,
+					1.1,
+					1.3
+				],
+				"5": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"6": [
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100,
+					1100
+				],
+				"8": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"9": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				]
 			},
 			"mana": [
 				60,
@@ -566,15 +519,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 22,
-				"1": 22,
-				"2": 20.5,
-				"3": 19,
-				"4": 17.5,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				22,
+				22,
+				20.5,
+				19,
+				17.5,
+				16,
+				16
+			],
 			"name": "Shifting Sands",
 			"tooltip": "Azir grants himself <shield>@TotalShield@ Shield</shield> for @Effect6Amount@ seconds and dashes to one of his <keywordMajor>Sand Soldiers</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through.<br><br>If Azir hits an enemy champion, he stops and gains a <keywordMajor>Sand Soldier</keywordMajor> charge."
 		},
@@ -625,46 +578,33 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					200,
+					200,
+					400,
+					600,
+					0,
+					0,
+					0
+				],
+				"2": [
+					6,
+					6,
+					7,
+					8,
+					0,
+					0,
+					0
+				],
+				"3": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
 			},
 			"mana": [
 				100,
@@ -674,15 +614,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 105,
-				"3": 90,
-				"4": 90,
-				"5": 90,
-				"6": 90
-			},
+			"cooldownTime": [
+				120,
+				120,
+				105,
+				90,
+				90,
+				90,
+				90
+			],
 			"name": "Emperor's Divide",
 			"tooltip": "Azir summons a wall of armored soldiers that charges forward, <status>Knocking Back</status> enemies and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The soldiers remain, blocking enemy paths for @Effect4Amount@ seconds."
 		}

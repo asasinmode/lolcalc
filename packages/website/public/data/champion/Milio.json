@@ -103,15 +103,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Fired Up!",
 			"tooltip": "When Milio's Abilities touch ally champions, their next Attack or Ability deals <physicalDamage>@ADBurstRatio@ ally Attack Damage</physicalDamage> as additional <magicDamage>magic damage</magicDamage>, plus <magicDamage>@BurnDamage@ magic damage</magicDamage> over @BurnDuration@ seconds.",
 			"tooltipExtended": "{{Spell_MilioPassive_Tooltip}}<br><br><rules>Burn damage does not stack from multiple hits.</rules>"
@@ -360,15 +360,15 @@
 				130,
 				140
 			],
-			"cooldownTime": {
-				"0": 29,
-				"1": 29,
-				"2": 27,
-				"3": 25,
-				"4": 23,
-				"5": 21,
-				"6": 19
-			},
+			"cooldownTime": [
+				29,
+				29,
+				27,
+				25,
+				23,
+				21,
+				19
+			],
 			"name": "Cozy Campfire",
 			"tooltip": "Milio creates a hearth that follows ally champions for @ZoneDuration@ seconds. Ally champions nearby gain @RangePercent@ Attack Range and restore <healing>@HealingOverTime@ Health</healing> over the duration. The hearth also applies <spellName>{{Spell_MilioPassive_Name}}</spellName> every @HealFrequencySeconds@ seconds.<br><br><recast>Recast:</recast> Change the hearth's follow ally."
 		},
@@ -435,15 +435,15 @@
 				90,
 				100
 			],
-			"cooldownTime": {
-				"0": 0.5,
-				"1": 0.5,
-				"2": 0.5,
-				"3": 0.5,
-				"4": 0.5,
-				"5": 0.5,
-				"6": 0.5
-			},
+			"cooldownTime": [
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5,
+				0.5
+			],
 			"name": "Warm Hugs",
 			"tooltip": "Milio wraps an ally champion in protective flames, granting <shield>@ShieldCalc@ Shield</shield> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>This ability has 2 charges and the effects stack on repeat targets."
 		},
@@ -510,15 +510,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 160,
-				"1": 160,
-				"2": 145,
-				"3": 130,
-				"4": 70,
-				"5": 40,
-				"6": 10
-			},
+			"cooldownTime": [
+				160,
+				160,
+				145,
+				130,
+				70,
+				40,
+				10
+			],
 			"name": "Breath of Life",
 			"tooltip": "Milio unleashes a wave of soothing flames on nearby ally champions, cleansing <status>Disabling</status> and <status>Immobilizing</status> effects, restoring <healing>@HealCalc@ Health</healing>, and granting @TenacityAmount*100@% Tenacity for @TenacityDuration@ seconds."
 		}

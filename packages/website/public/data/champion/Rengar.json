@@ -340,15 +340,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0.25,
-				"1": 0.25,
-				"2": 0.25,
-				"3": 0.25,
-				"4": 0.25,
-				"5": 0.25,
-				"6": 0.25
-			},
+			"cooldownTime": [
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25
+			],
 			"name": "Savagery",
 			"tooltip": "Rengar's next 2 Attacks gain <attackSpeed>@ASBonus@% Attack Speed</attackSpeed>. The first Attack deals <physicalDamage>@QTotalDamage@ physical damage</physicalDamage>.<br><br><keywordMajor>Max Ferocity:</keywordMajor> The first Attack deals <physicalDamage>@EmpoweredQTotalDamage@ physical damage</physicalDamage> and grants Rengar <attackSpeed>@EmpoweredQAS@ Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 			"tooltipExtended": "Rengar's next 2 Attacks gain <attackSpeed>@ASBonus@% Attack Speed</attackSpeed>. The first Attack deals <physicalDamage>@QTotalDamage@ physical damage</physicalDamage>.<br><br><keywordMajor>Max Ferocity:</keywordMajor> The first Attack deals  <physicalDamage>@EmpoweredQTotalDamage@ physical damage</physicalDamage> and grants Rengar <attackSpeed>@EmpoweredQAS@ Attack Speed</attackSpeed> for @ASDuration@ seconds.<br><br><rules>This Ability's bonus damage is reduced to @TowerMod*100@% against structures.</rules>"
@@ -448,36 +448,36 @@
 						{
 							"mValues": [
 								0,
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{}
+								50,
+								60,
+								70,
+								80,
+								90,
+								100,
+								110,
+								120,
+								130,
+								140,
+								150,
+								160,
+								170,
+								180,
+								190,
+								200,
+								210,
+								220,
+								230,
+								240,
+								250,
+								260,
+								270,
+								280,
+								290,
+								300,
+								310,
+								320,
+								330,
+								340
 							],
 							"__type": "ByCharLevelFormulaCalculationPart"
 						},
@@ -488,15 +488,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0.25,
-				"1": 0.25,
-				"2": 0.25,
-				"3": 0.25,
-				"4": 0.25,
-				"5": 0.25,
-				"6": 0.25
-			},
+			"cooldownTime": [
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25
+			],
 			"name": "Battle Roar",
 			"tooltip": "Rengar roars, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and restoring <healing>@DamagePercentageHealed@%</healing> of the damage taken in the last @HealingWindow@ seconds as Health.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <magicDamage>@TotalDamageEmpowered@ magic damage</magicDamage> and additionally cleanses Rengar of crowd control."
 		},
@@ -581,15 +581,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0.25,
-				"1": 0.25,
-				"2": 0.25,
-				"3": 0.25,
-				"4": 0.25,
-				"5": 0.25,
-				"6": 0.25
-			},
+			"cooldownTime": [
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25
+			],
 			"name": "Bola Strike",
 			"tooltip": "Rengar throws a bola, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, revealing and <status>Slowing</status> them by @SlowAmount@% for @CCDuration@ seconds.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <physicalDamage>@TotalEmpoweredDamage@ physical damage</physicalDamage> and <status>Roots</status> for @CCDuration@ seconds."
 		},
@@ -690,15 +690,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 100,
-				"1": 100,
-				"2": 90,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				100,
+				100,
+				90,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "Thrill of the Hunt",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Rengar will also leap Attack when <keywordStealth>Camouflaged</keywordStealth>.<br><br><spellActive>Active:</spellActive> Rengar gains <speed>@StealthMS@% Move Speed</speed> and <keywordStealth>True Sight</keywordStealth> in a small area around the nearest enemy champion for @StealthDuration@ seconds.<br><br>After @FadeTime@ seconds, Rengar becomes <keywordStealth>Camouflaged</keywordStealth> and can leap without being in Brush. Leaping to the nearest champion deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage>, shreds <scaleArmor>@ArmorShred@ Armor</scaleArmor> for @ArmorShredDuration@ seconds, and ends this Ability."
 		}

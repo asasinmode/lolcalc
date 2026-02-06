@@ -104,36 +104,25 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					35,
+					80,
+					125,
+					170,
+					215,
+					260,
+					305
+				]
 			},
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 12,
-				"3": 12,
-				"4": 12,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12
+			],
 			"name": "Short Fuse",
 			"tooltip": "Every @Cooldown@ seconds, Ziggs' next Attack deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. It deals <magicDamage>@StructureDamage@ damage</magicDamage> instead to structures. <br><br>Ziggs' abilities reduce this Cooldown by @SpellCDR@ seconds."
 		},
@@ -202,76 +191,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					850,
+					850,
+					850,
+					850,
+					850,
+					850,
+					850
+				],
+				"2": [
+					325,
+					325,
+					325,
+					325,
+					325,
+					325,
+					325
+				],
+				"3": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				],
+				"4": [
+					180,
+					180,
+					180,
+					180,
+					180,
+					180,
+					180
+				],
+				"5": [
+					240,
+					240,
+					240,
+					240,
+					240,
+					240,
+					240
+				],
+				"6": [
+					70,
+					70,
+					70,
+					70,
+					70,
+					70,
+					70
+				]
 			},
 			"mana": [
 				50,
@@ -281,15 +254,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 6.5,
-				"1": 6,
-				"2": 5.5,
-				"3": 5,
-				"4": 4.5,
-				"5": 4,
-				"6": 4
-			},
+			"cooldownTime": [
+				6.5,
+				6,
+				5.5,
+				5,
+				4.5,
+				4,
+				4
+			],
 			"name": "Bouncing Bomb",
 			"tooltip": "Ziggs throws a bouncing bomb that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -412,26 +385,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0,
+					70,
+					105,
+					140,
+					175,
+					210,
+					245
+				]
 			},
 			"mana": [
 				80,
@@ -441,15 +403,15 @@
 				80,
 				80
 			],
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 18,
-				"3": 16,
-				"4": 14,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				20,
+				20,
+				18,
+				16,
+				14,
+				12,
+				12
+			],
 			"name": "Satchel Charge",
 			"tooltip": "Ziggs flings an explosive charge that detonates after @BombDuration@ seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br><br>Satchel Charge will automatically destroy towers below @TurretDestroyPercent*100@% of their Health."
 		},
@@ -518,66 +480,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {},
-				"9": {}
+				"2": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"3": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"4": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"6": [
+					135,
+					135,
+					135,
+					135,
+					135,
+					135,
+					135
+				],
+				"7": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				]
 			},
 			"mana": [
 				70,
@@ -587,15 +534,15 @@
 				110,
 				120
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 16,
-				"3": 16,
-				"4": 16,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				16,
+				16,
+				16,
+				16,
+				16,
+				16,
+				16
+			],
 			"name": "Hexplosive Minefield",
 			"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @Effect4Amount@ seconds. Mines last @MineDuration@ seconds."
 		},
@@ -677,15 +624,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 95,
-				"3": 70,
-				"4": 70,
-				"5": 70,
-				"6": 70
-			},
+			"cooldownTime": [
+				120,
+				120,
+				95,
+				70,
+				70,
+				70,
+				70
+			],
 			"name": "Mega Inferno Bomb",
 			"tooltip": "Ziggs hurls his ultimate creation, dealing <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> in the center of the blast radius, or <magicDamage>@BlastDamage@ magic damage</magicDamage> at the edge."
 		}

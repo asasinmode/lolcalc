@@ -582,15 +582,15 @@
 				20,
 				20
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Wilding Claw",
 			"tooltip": "<spellActive>Claw Stance:</spellActive> Udyr gains <attackSpeed>@AttackSpeedBase*100@% Attack Speed</attackSpeed> and his Attacks deal <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }} for @AttackSpeedDurationBase@ seconds. Additionally, Udyr's next two Attacks in this stance deal a bonus <physicalDamage>@MaxHPOnHit1@ max Health physical damage</physicalDamage> and gain @AttackRange@ range.<br><br><keywordMajor>Awaken:</keywordMajor> Increase bonus <attackSpeed>Attack Speed</attackSpeed> to <attackSpeed>@EmpoweredTotalAS@</attackSpeed> and max Health damage to <physicalDamage>@Q2TotalOnHitHPDamage@</physicalDamage>. Additionally, Udyr's next two Attacks call lightning six times, dealing a total of <magicDamage>@EmpoweredLightningBonusMax@ max Health magic damage</magicDamage> to isolated targets (strikes bounce to other nearby targets when possible).<br>"
 		},
@@ -731,7 +731,6 @@
 					"mDisplayAsPercent": true
 				},
 				"{b038be53}": {
-					"mMultiplier": {},
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mModifiedGameCalculation": "{bbb9794b}"
 				},
@@ -810,15 +809,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Iron Mantle",
 			"tooltip": "<spellPassive>Mantle Stance:</spellPassive> Udyr gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. Additionally, Udyr's next two Attacks gain @LifeSteal*100@% Life Steal and restore <healing>@LifeOnHit@ Health</healing>.<br><br><keywordMajor>Awaken:</keywordMajor> Gain <shield>@RecastShield@ Shield</shield>, restore <healing>@RecastHeal@ Health</healing> over @ShieldDuration@ seconds, and Udyr's next two Attacks instead have @LifeSteal*200@% Life Steal and restore <healing>@LifeOnHitAwakened@ Health</healing>.<br>"
 		},
@@ -928,15 +927,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Blazing Stampede",
 			"tooltip": "<spellActive>Stampede Stance:</spellActive> Udyr gains <speed>@MoveSpeed*100@% Move Speed</speed>, decaying over @MoveSpeedDuration@ seconds. Additionally, Udyr's Attacks dash him to the target and <status>Stun</status> for @StunDuration@ seconds (@ICD@ second Cooldown per target).<br><br><keywordMajor>Awaken:</keywordMajor> Grants immunity to <status>Immobilizing</status> and <status>Disabling</status> effects and an additional <speed>@MoveSpeedBonus@ Move Speed</speed> for @UnstoppableDuration@ seconds."
 		},
@@ -1108,15 +1107,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Wingborne Storm",
 			"tooltip": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for @BuffDuration@ seconds, dealing <magicDamage>@StormDamage@ magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by @SlowPotency*100@%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>@PulseDamage@ magic damage</magicDamage> to enemies in the storm.<br><br><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>@PercentHPBlast@ max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional @EmpoweredSlow@.",
 			"tooltipExtended": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for @BuffDuration@ seconds, dealing <magicDamage>@StormDamage@ magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by @SlowPotency*100@%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>@PulseDamage@ magic damage</magicDamage> to enemies in the storm <i>(or enemies around Udyr if the storm expires)</i>.<br><br><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>@PercentHPBlast@ max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional @EmpoweredSlow@."

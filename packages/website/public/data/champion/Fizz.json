@@ -96,76 +96,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"1": [
+					3,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9
+				],
+				"2": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"3": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"4": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"5": [
+					20,
+					35,
+					50,
+					65,
+					80,
+					95,
+					110
+				]
 			},
 			"mana": [
 				40,
@@ -207,86 +191,69 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {},
-				"9": {}
+				"0": [
+					0,
+					10,
+					25,
+					40,
+					55,
+					70,
+					85
+				],
+				"2": [
+					550,
+					650,
+					750,
+					850,
+					950,
+					1050,
+					1150
+				],
+				"3": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"4": [
+					600,
+					600,
+					600,
+					600,
+					600,
+					600,
+					600
+				],
+				"5": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"6": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"7": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				]
 			},
 			"mana": [
 				50,
@@ -296,15 +263,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 8.5,
-				"1": 8,
-				"2": 7.5,
-				"3": 7,
-				"4": 6.5,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				8.5,
+				8,
+				7.5,
+				7,
+				6.5,
+				6,
+				6
+			],
 			"name": "Urchin Strike",
 			"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>."
 		},
@@ -494,15 +461,15 @@
 				70,
 				80
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 6,
-				"3": 5,
-				"4": 4,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				7,
+				7,
+				6,
+				5,
+				4,
+				3,
+				3
+			],
 			"name": "Seastone Trident",
 			"tooltip": "<spellPassive>Passive</spellPassive>: Fizz's Attacks cause his enemies to bleed, dealing <magicDamage>@DoTDamage@ magic damage</magicDamage> over @BleedDuration@ seconds. <br><br><spellActive>Active</spellActive>: Fizz's next Attack deals an additional <magicDamage>@ActiveDamage@ magic damage</magicDamage>. If this Attack kills its target, Fizz refunds <scaleMana>@OnKillManaRefund@ Mana</scaleMana> and reduces the cooldown of this Ability to @OnKillNewCooldown@ second. If it does not kill, Fizz's Attacks deal an additional <magicDamage>@OnHitBuffDamage@ magic damage</magicDamage> for @OnHitBuffDuration@ seconds."
 		},
@@ -578,15 +545,15 @@
 				95,
 				100
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 14,
-				"3": 12,
-				"4": 10,
-				"5": 8,
-				"6": 6
-			},
+			"cooldownTime": [
+				16,
+				16,
+				14,
+				12,
+				10,
+				8,
+				6
+			],
 			"name": "Playful / Trickster",
 			"tooltip": "Fizz hops onto his trident, becoming Untargetable for 0.75 seconds, after which he deals <magicDamage>@EDamage@ magic damage</magicDamage> to nearby enemies and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>Fizz can <recast>Recast</recast> this Ability while Untargetable to dash again, which ends the effect early, deals damage in a smaller area, and doesn't <status>Slow</status>."
 		},
@@ -737,15 +704,15 @@
 				100,
 				0
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				120,
+				120,
+				100,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "Chum the Waters",
 			"tooltip": "Fizz launches a fish that attaches to the first champion hit. The victim is afflicted with <keywordStealth>True Sight</keywordStealth> and <status>Slowed</status> by between 40% to 80% based on how far the fish travelled before attaching. <br><br>After @DetonationTime@ seconds a shark erupts on the target, <status>Knocking Up</status> the target with the fish for 1 second, <status>Knocking Back</status> everything else, and dealing between <magicDamage>@SmallSharkDamage@ to @BigSharkDamage@ magic damage</magicDamage> based on how far the fish travelled before attaching."
 		}

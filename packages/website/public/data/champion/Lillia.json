@@ -345,15 +345,15 @@
 				65,
 				65
 			],
-			"cooldownTime": {
-				"0": 4,
-				"1": 6,
-				"2": 5.5,
-				"3": 5,
-				"4": 4.5,
-				"5": 4,
-				"6": 4
-			},
+			"cooldownTime": [
+				4,
+				6,
+				5.5,
+				5,
+				4.5,
+				4,
+				4
+			],
 			"name": "Blooming Blows",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge."
 		},
@@ -509,15 +509,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 18,
-				"1": 14,
-				"2": 13,
-				"3": 12,
-				"4": 11,
-				"5": 10,
-				"6": 9
-			},
+			"cooldownTime": [
+				18,
+				14,
+				13,
+				12,
+				11,
+				10,
+				9
+			],
 			"name": "Watch Out! Eep!",
 			"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead."
 		},
@@ -630,15 +630,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 12,
-				"3": 12,
-				"4": 12,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12
+			],
 			"name": "Swirlseed",
 			"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain."
 		},
@@ -715,15 +715,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 140,
-				"1": 140,
-				"2": 120,
-				"3": 100,
-				"4": 100,
-				"5": 100,
-				"6": 100
-			},
+			"cooldownTime": [
+				140,
+				140,
+				120,
+				100,
+				100,
+				100,
+				100
+			],
 			"name": "Lilting Lullaby",
 			"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 			"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>."

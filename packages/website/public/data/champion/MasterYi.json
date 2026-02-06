@@ -219,7 +219,6 @@
 				"BasicAttackCDR": {
 					"mFormulaParts": [
 						{
-							"mPart1": {},
 							"mPart2": {
 								"mDataValue": "BaseBasicAttackCDR"
 							},
@@ -310,15 +309,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 20.5,
-				"1": 20,
-				"2": 19.5,
-				"3": 19,
-				"4": 18.5,
-				"5": 18,
-				"6": 17.5
-			},
+			"cooldownTime": [
+				20.5,
+				20,
+				19.5,
+				19,
+				18.5,
+				18,
+				17.5
+			],
 			"name": "Alpha Strike",
 			"tooltip": "Master Yi becomes Untargetable and teleports to rapidly strike enemies near his target, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemies hit after @AlphaStrikeBounces@ hits. <br><br>This Ability can strike the same enemy repeatedly if there are no other targets, dealing @SubsequentHitMultiplier*100@% damage for subsequent hits (<physicalDamage>@SubesquentDamage@</physicalDamage>), for a maximum single target total of <physicalDamage>@SingleTotalDamage@ physical damage</physicalDamage>."
 		},
@@ -526,15 +525,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 14,
-				"3": 14,
-				"4": 14,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				14,
+				14,
+				14,
+				14,
+				14,
+				14,
+				14
+			],
 			"name": "Wuju Style",
 			"tooltip": "Master Yi's Attacks deal an additional <trueDamage>@TotalDamage@ true damage</trueDamage> for @Duration@ seconds."
 		},
@@ -596,15 +595,15 @@
 				100,
 				0
 			],
-			"cooldownTime": {
-				"0": 85,
-				"1": 85,
-				"2": 85,
-				"3": 85,
-				"4": 85,
-				"5": 85,
-				"6": 85
-			},
+			"cooldownTime": [
+				85,
+				85,
+				85,
+				85,
+				85,
+				85,
+				85
+			],
 			"name": "Highlander",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Champion takedowns reduce the remaining Cooldown of Master Yi's basic Abilities by @RCooldownRefund*100@%.<br><br><spellActive>Active:</spellActive> Master Yi enters a trance, gaining <speed>@RMSBonus@% Move Speed</speed>, <attackSpeed>@RASBonus@% Attack Speed</attackSpeed>, and immunity to <status>Slows</status> for @RDuration@ seconds. Champion takedowns extend the duration of this Ability by @RKillAssistExtension@ seconds."
 		}

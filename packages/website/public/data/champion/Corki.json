@@ -168,15 +168,15 @@
 				80,
 				80
 			],
-			"cooldownTime": {
-				"0": 8,
-				"1": 9,
-				"2": 8.5,
-				"3": 8,
-				"4": 7.5,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				8,
+				9,
+				8.5,
+				8,
+				7.5,
+				7,
+				7
+			],
 			"name": "Phosphorus Bomb",
 			"tooltip": "Corki lobs a bomb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The area and champions hit are revealed for @RevealDuration@ seconds."
 		},
@@ -325,15 +325,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 18,
-				"3": 16,
-				"4": 14,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				20,
+				20,
+				18,
+				16,
+				14,
+				12,
+				12
+			],
 			"name": "Valkyrie",
 			"tooltip": "Corki flies over and scorches a path, burning it for @TrailDuration@ seconds. Enemies in the fire take up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> over the duration."
 		},
@@ -429,15 +429,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 12,
-				"3": 12,
-				"4": 12,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12
+			],
 			"name": "Gatling Gun",
 			"tooltip": "Corki fires a gatling gun in front of him, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> over @SprayDuration@ seconds and shredding up to <scaleArmor>@ShredMax*-1@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>."
 		},
@@ -565,15 +565,15 @@
 				35,
 				35
 			],
-			"cooldownTime": {
-				"0": 2,
-				"1": 2,
-				"2": 2,
-				"3": 2,
-				"4": 2,
-				"5": 2,
-				"6": 2
-			},
+			"cooldownTime": [
+				2,
+				2,
+				2,
+				2,
+				2,
+				2,
+				2
+			],
 			"name": "Missile Barrage",
 			"tooltip": "Corki fires a missile that explodes on the first enemy hit, dealing <physicalDamage>@RSmallMissileDamage@ physical damage</physicalDamage> to surrounding enemies. Every third missile instead deals <physicalDamage>@RBigMissileDamage@ physical damage</physicalDamage>.<br><br>This Ability has up to @MaxAmmoTOOLTIP@ charges. Basic attacks against champions reduce the time between charges by <attention>@AttackRefund@</attention> seconds on hit."
 		}

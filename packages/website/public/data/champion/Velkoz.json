@@ -159,15 +159,15 @@
 				60,
 				65
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Plasma Fission",
 			"tooltip": "Vel'Koz shoots a plasma bolt that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% decaying over @SlowDuration@ second(s). At the end of its range, on hitting a target, or on <recast>Recasting</recast>, the bolt splits and fires two new bolts at a 90 degree angle.<br><br>Killing a unit with this restores <scaleMana>@TooltipManaRefund@ Mana</scaleMana>."
 		},
@@ -230,86 +230,69 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {},
-				"9": {}
+				"0": [
+					10,
+					30,
+					50,
+					70,
+					90,
+					110,
+					130
+				],
+				"1": [
+					15,
+					45,
+					75,
+					105,
+					135,
+					165,
+					195
+				],
+				"2": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"4": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"5": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"6": [
+					88,
+					88,
+					88,
+					88,
+					88,
+					88,
+					88
+				],
+				"7": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				]
 			},
 			"mana": [
 				50,
@@ -319,15 +302,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 1.5,
-				"1": 1.5,
-				"2": 1.5,
-				"3": 1.5,
-				"4": 1.5,
-				"5": 1.5,
-				"6": 1.5
-			},
+			"cooldownTime": [
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5
+			],
 			"name": "Void Rift",
 			"tooltip": "Vel'Koz opens a rift to the void, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. The rift then erupts, dealing <magicDamage>@SecondaryDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh)."
 		},
@@ -421,15 +404,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 11.5,
-				"3": 11,
-				"4": 10.5,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				12,
+				12,
+				11.5,
+				11,
+				10.5,
+				10,
+				10
+			],
 			"name": "Tectonic Disruption",
 			"tooltip": "Vel'Koz disrupts a nearby area, causing it to explode, <status>Knocking Up</status> for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Enemies close to Vel'Koz will be <status>Knocked Back</status> instead of <status>Knocked Up</status>."
 		},
@@ -463,76 +446,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0,
+					450,
+					700,
+					925,
+					0,
+					0,
+					0
+				],
+				"1": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				],
+				"2": [
+					0,
+					20,
+					20,
+					20,
+					0,
+					0,
+					0
+				],
+				"3": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"4": [
+					175,
+					175,
+					175,
+					175,
+					175,
+					175,
+					175
+				],
+				"5": [
+					7,
+					7,
+					7,
+					7,
+					7,
+					7,
+					7
+				]
 			},
 			"mana": [
 				100,
@@ -542,15 +509,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 100,
-				"2": 90,
-				"3": 80,
-				"4": 10,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				10,
+				100,
+				90,
+				80,
+				10,
+				10,
+				10
+			],
 			"name": "Life Form Disintegration Ray",
 			"tooltip": "Vel'Koz channels a ray of energy that follows the cursor, dealing a total of <magicDamage>@TotalDamage@ magic damage</magicDamage> over 2.5 seconds and <status>Slowing</status> by @Effect3Amount@%. Deals <trueDamage>true damage</trueDamage> instead to enemies recently damaged by <spellName>{{Spell_VelkozPassive_Name}}</spellName>.<br><br>Enemies gain stacks of <keywordMajor>Deconstruction</keywordMajor> periodically while in the beam."
 		}

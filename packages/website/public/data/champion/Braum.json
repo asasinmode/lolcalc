@@ -66,37 +66,37 @@
 					"mFormulaParts": [
 						{
 							"mValues": [
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{}
+								16,
+								26,
+								36,
+								46,
+								56,
+								66,
+								76,
+								86,
+								96,
+								106,
+								116,
+								126,
+								136,
+								146,
+								156,
+								166,
+								176,
+								186,
+								196,
+								206,
+								216,
+								226,
+								236,
+								246,
+								256,
+								266,
+								276,
+								286,
+								296,
+								306,
+								316
 							],
 							"__type": "ByCharLevelFormulaCalculationPart"
 						}
@@ -190,86 +190,69 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					30,
+					75,
+					120,
+					165,
+					210,
+					255,
+					300
+				],
+				"1": [
+					70,
+					70,
+					70,
+					70,
+					70,
+					70,
+					70
+				],
+				"2": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"3": [
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02,
+					0.02
+				],
+				"4": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"5": [
+					1050,
+					1050,
+					1050,
+					1050,
+					1050,
+					1050,
+					1050
+				],
+				"6": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
 			},
 			"mana": [
 				45,
@@ -279,15 +262,15 @@
 				65,
 				70
 			],
-			"cooldownTime": {
-				"0": 8.5,
-				"1": 8,
-				"2": 7.5,
-				"3": 7,
-				"4": 6.5,
-				"5": 6,
-				"6": 5.5
-			},
+			"cooldownTime": [
+				8.5,
+				8,
+				7.5,
+				7,
+				6.5,
+				6,
+				5.5
+			],
 			"name": "Winter's Bite",
 			"tooltip": "Braum propels freezing ice from his shield, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @Effect2Amount@% decaying over @Effect5Amount@ seconds.<br><br>Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. "
 		},
@@ -391,46 +374,33 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"1": [
+					750,
+					750,
+					750,
+					750,
+					750,
+					750,
+					750
+				],
+				"5": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				]
 			},
 			"mana": [
 				40,
@@ -440,15 +410,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 13,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 7
-			},
+			"cooldownTime": [
+				13,
+				12,
+				11,
+				10,
+				9,
+				8,
+				7
+			],
 			"name": "Stand Behind Me",
 			"tooltip": "Braum leaps to an allied champion or minion. On arrival, Braum grants the target <scaleArmor>@GrantedAllyArmor@ Armor</scaleArmor> and <scaleMR>@GrantedAllyMR@ Magic Resist</scaleMR> for @Effect1Amount@ seconds. Braum grants himself <scaleArmor>@GrantedBraumArmor@ Armor</scaleArmor> and <scaleMR>@GrantedBraumMR@ Magic Resist</scaleMR> for the same duration."
 		},
@@ -467,46 +437,33 @@
 				]
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					2.75,
+					3,
+					3.25,
+					3.5,
+					3.75,
+					4,
+					4.25
+				],
+				"2": [
+					30,
+					35,
+					40,
+					45,
+					50,
+					55,
+					60
+				],
+				"3": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				]
 			},
 			"mana": [
 				30,
@@ -516,15 +473,15 @@
 				50,
 				55
 			],
-			"cooldownTime": {
-				"0": 18,
-				"1": 16,
-				"2": 14,
-				"3": 12,
-				"4": 10,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				18,
+				16,
+				14,
+				12,
+				10,
+				8,
+				8
+			],
 			"name": "Unbreakable",
 			"tooltip": "Braum raises his shield for @Effect2Amount@ seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal @Effect3Amount@% reduced damage.<br><br>Braum gains <speed>@Effect4Amount@% Move Speed</speed> while his shield is raised."
 		},
@@ -636,15 +593,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 9,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				9,
+				120,
+				100,
+				80,
+				9,
+				9,
+				9
+			],
 			"name": "Glacial Fissure",
 			"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.<br>"
 		}

@@ -224,15 +224,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 8,
-				"1": 8,
-				"2": 7.5,
-				"3": 7,
-				"4": 6.5,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				8,
+				8,
+				7.5,
+				7,
+				6.5,
+				6,
+				6
+			],
 			"name": "High Note",
 			"tooltip": "Seraphine projects a pure note, dealing <magicDamage>@ExplosionDamage@ magic damage</magicDamage>, increased against champions and monsters by the target's missing Health percentage up to <magicDamage>@TotalEmpoweredDamage@ damage</magicDamage> below @ExecuteThreshold*100@% Health."
 		},
@@ -382,15 +382,15 @@
 				90,
 				90
 			],
-			"cooldownTime": {
-				"0": 22,
-				"1": 22,
-				"2": 22,
-				"3": 22,
-				"4": 22,
-				"5": 22,
-				"6": 22
-			},
+			"cooldownTime": [
+				22,
+				22,
+				22,
+				22,
+				22,
+				22,
+				22
+			],
 			"name": "Surround Sound",
 			"tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>@HasteValueAllies@ Move Speed</speed>, herself <speed>@WMSBonusTotal@ decaying Move Speed</speed> and both <shield>@ShieldValueSeraphine@ Shield</shield> for @ShieldDuration@ seconds.<br><br>If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>@WMissingHPHeal@% missing Health</healing> to them after a @WHealSplitDelay@ second delay."
 		},
@@ -466,15 +466,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 10.5,
-				"3": 10,
-				"4": 9.5,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				11,
+				11,
+				10.5,
+				10,
+				9.5,
+				9,
+				9
+			],
 			"name": "Beat Drop",
 			"tooltip": "Seraphine unleashes a heavy soundwave, dealing <magicDamage>@FinalDamage@ magic damage</magicDamage> to enemies in a line and <status>Slowing</status> them by @SlowValue@% for @SlowDuration@ seconds.<br><br>Enemies that are already <status>Slowed</status> are <status>Rooted</status> instead, and <status>Immobilized</status> enemies are <status>Stunned</status>."
 		},
@@ -559,15 +559,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 160,
-				"1": 160,
-				"2": 140,
-				"3": 120,
-				"4": 120,
-				"5": 120,
-				"6": 120
-			},
+			"cooldownTime": [
+				160,
+				160,
+				140,
+				120,
+				120,
+				120,
+				120
+			],
 			"name": "Encore",
 			"tooltip": "Seraphine takes the stage, projecting a captivating force that <status>Charms</status> for @RChannelDuration@ seconds and deals <magicDamage>@R1TotalDamage@ magic damage</magicDamage>.<br><br>Any champions struck (including allies) become part of the performance, extending the range of this Ability. Allied champions gain maximum <keywordMajor>Notes</keywordMajor>."
 		}

@@ -47,15 +47,15 @@
 					"mPrecision": 1
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Vow of the First Lands",
 			"tooltip": "Yunara's Critical Strikes deal an additional <magicDamage>@Calc_Damage_Amp@ magic damage</magicDamage>.",
 			"tooltipExtended": "{{Spell_YunaraP_Tooltip}}<br><br><rules></rules>"
@@ -267,15 +267,15 @@
 				30,
 				30
 			],
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Cultivation of Spirit",
 			"tooltip": "<spellPassive>Passive</spellPassive>: Yunara deal <magicDamage>@Calc_Passive_Damage@ magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit> and attacking grants <evolve>@Resource_Nonchampion@ Unleash</evolve> (<evolve>@Resource_Champion@ Unleash</evolve> for champions).<br><br><spellPassive>Active</spellPassive>: Yunara consumes <evolve>@Resource_Max@ Unleash</evolve> and for @Buff_Duration@ seconds gains <attackSpeed>@Calc_Attack_Speed@ Attack Speed</attackSpeed> and deals an additional <magicDamage>@Calc_Damage@ magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit>. During this time, her Attacks spread to nearby enemies dealing them <physicalDamage>@Calc_Damage_Spread@ physical damage</physicalDamage>.<br><br><keywordMajor>Transcendent State</keywordMajor>: This Ability is instantly activated for @Spell.YunaraR:Buff_Duration@ seconds.",
 			"tooltipExtended": "<spellPassive>Passive</spellPassive>:Yunara's Attacks deal an additional <magicDamage>@Calc_Passive_Damage@ magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit>. Launching an Attack grants <evolve>@Resource_Nonchampion@ Unleash</evolve> (<evolve>@Resource_Champion@ Unleash</evolve> when attacking champions) for @Resource_Duration@ seconds (max: <evolve>@Resource_Max@ Unleash</evolve>). Not attacking for @Resource_Duration@ seconds causes Yunara to lose <evolve>@Resource_Loss@ Unleash</evolve> every @Resource_Loss_Interval@ seconds.<br><br><spellPassive>Active</spellPassive>: Yunara consumes <evolve>@Resource_Max@ Unleash</evolve>, and for @Buff_Duration@ seconds gains <attackSpeed>@Calc_Attack_Speed@ Attack Speed</attackSpeed> and deals an additional <magicDamage>@Calc_Damage@ magic damage</magicDamage> <OnHit>%i:OnHit% On-Hit</OnHit>. During this time, her Attacks spread to nearby enemies dealing them <physicalDamage>@Calc_Damage_Spread@ physical damage</physicalDamage>.<br><br><keywordMajor>Transcendent State</keywordMajor>: This Ability is instantly activated for @Spell.YunaraR:Buff_Duration@ seconds."
@@ -546,15 +546,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 9,
-				"2": 9,
-				"3": 9,
-				"4": 9,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				9,
+				9,
+				9,
+				9,
+				9,
+				9,
+				9
+			],
 			"name": "Kanmei's Steps | Untouchable Shadow",
 			"tooltip": "Yunara gains <speed>@Calc_Move_Speed@ Move Speed</speed>, increased to <speed>@Calc_Move_Speed_Enhanced@ Move Speed</speed> when moving toward an enemy champion, for @Buff_Duration@ seconds.<br><br><keywordMajor>Transcendent State - {{Spell_YunaraE2_Name}}</keywordMajor>: Yunara dashes in a direction."
 		},
@@ -693,15 +693,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 100,
-				"1": 100,
-				"2": 90,
-				"3": 80,
-				"4": 70,
-				"5": 60,
-				"6": 50
-			},
+			"cooldownTime": [
+				100,
+				100,
+				90,
+				80,
+				70,
+				60,
+				50
+			],
 			"name": "Transcend One's Self",
 			"tooltip": "Yunara enters a <keywordMajor>Transcendent State</keywordMajor> for @Buff_Duration@ seconds upgrading her basic Abilities for the duration.",
 			"tooltipExtended": "Yunara enters a <keywordMajor>Transcendent State</keywordMajor> for @Buff_Duration@ seconds; <spellName>{{Spell_YunaraQ_Name}}</spellName> is instantly activated for the duration, <spellName>{{Spell_YunaraW1_Name}}</spellName> is upgraded to <keywordMajor>{{Spell_YunaraW2_Name}}</keywordMajor> and has its Cooldown reduced by @Calc_RW_Cooldown_Reduction@, and <spellName>{{Spell_YunaraE1_Name}}</spellName> is upgraded to <keywordMajor>{{Spell_YunaraE2_Name}}</keywordMajor> and has its Cooldown refreshed."

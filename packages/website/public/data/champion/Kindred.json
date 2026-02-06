@@ -88,86 +88,69 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"1": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"2": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"3": [
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05,
+					0.05
+				],
+				"4": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"5": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"6": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
 			},
 			"name": "Mark of the Kindred",
 			"tooltip": "Kindred can designate a champion to hunt by clicking their portrait above their inventory. They also designate certain jungle monsters to hunt with an icon on the minimap automatically.<br><br>Getting a takedown on a hunted target grants Kindred a <keywordMajor>Mark</keywordMajor>, empowering them. After @f2@ <keywordMajor>Marks</keywordMajor>, Kindred gains @f8@ Attack Range. Every @f7@ <keywordMajor>Marks</keywordMajor> after the fourth grants a further @f9@ Attack Range.<br><br><keywordMajor>Marks</keywordMajor> empower Kindred's basic Abilities:<li><spellName>{{Spell_KindredQ_Name}}</spellName> grants an additional <attackSpeed>@QMarkBonus@ Attack Speed</attackSpeed><li><spellName>{{Spell_KindredW_Name}}</spellName> deal an additional <magicDamage>@WMarkBonus@ current Health damage</magicDamage>.<li><spellName>{{Spell_KindredEWrapper_Name}}</spellName> deal an additional <physicalDamage>@EMarkBonus@ missing Health damage</physicalDamage>.",
@@ -247,86 +230,69 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {},
-				"9": {}
+				"0": [
+					25,
+					40,
+					65,
+					90,
+					115,
+					140,
+					175
+				],
+				"2": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"3": [
+					4.5,
+					4,
+					3.5,
+					3,
+					2.5,
+					2,
+					2
+				],
+				"4": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"5": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"6": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"7": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
 			},
 			"mana": [
 				35,
@@ -336,15 +302,15 @@
 				35,
 				35
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 9,
-				"2": 9,
-				"3": 9,
-				"4": 9,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				9,
+				9,
+				9,
+				9,
+				9,
+				9,
+				9
+			],
 			"name": "Dance of Arrows",
 			"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @Effect8Amount@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @Effect4Amount@ seconds."
 		},
@@ -463,96 +429,78 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {},
-				"9": {}
+				"0": [
+					40,
+					40,
+					45,
+					50,
+					55,
+					60,
+					65
+				],
+				"1": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"2": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"3": [
+					8.5,
+					8.5,
+					8.5,
+					8.5,
+					8.5,
+					8.5,
+					8.5
+				],
+				"4": [
+					25,
+					25,
+					30,
+					35,
+					40,
+					45,
+					50
+				],
+				"5": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"6": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"7": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
 			},
 			"mana": [
 				40,
@@ -562,15 +510,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 19,
-				"1": 18,
-				"2": 17,
-				"3": 16,
-				"4": 15,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				19,
+				18,
+				17,
+				16,
+				15,
+				14,
+				14
+			],
 			"name": "Wolf's Frenzy",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>@AttackHeal@ Health</healing> based on their missing Health.<br><br><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>@BaseWolfDamage@</magicDamage> plus <magicDamage>@PercentWolfDamage@ current Health magic damage</magicDamage>."
 		},
@@ -776,15 +724,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 12.5,
-				"3": 11,
-				"4": 9.5,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				14,
+				14,
+				12.5,
+				11,
+				9.5,
+				8,
+				8
+			],
 			"name": "Mounting Dread",
 			"tooltip": "Kindred weakens an enemy, <status>Slowing</status> them by @TotalSlow@% for @SlowDuration@ second.<br><br>Kindred's third Attack against the target within @TotalDuration@ seconds of each other directs Wolf to pounce on the enemy, dealing an additional <physicalDamage>@BaseBiteDamage@</physicalDamage> plus <physicalDamage>@PercentBiteDamage@ missing Health physical damage</physicalDamage>."
 		},
@@ -821,56 +769,42 @@
 				]
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					225,
+					225,
+					300,
+					375,
+					400,
+					400,
+					400
+				],
+				"1": [
+					4,
+					4,
+					4,
+					4,
+					0,
+					0,
+					0
+				],
+				"2": [
+					530,
+					530,
+					530,
+					530,
+					0,
+					0,
+					0
+				],
+				"3": [
+					400,
+					400,
+					400,
+					400,
+					400,
+					400,
+					400
+				]
 			},
 			"mana": [
 				100,
@@ -880,15 +814,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 160,
-				"1": 160,
-				"2": 140,
-				"3": 120,
-				"4": 120,
-				"5": 120,
-				"6": 120
-			},
+			"cooldownTime": [
+				160,
+				160,
+				140,
+				120,
+				120,
+				120,
+				120
+			],
 			"name": "Lamb's Respite",
 			"tooltip": "Kindred blesses the ground for @Effect2Amount@ seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br><br>When the blessing ends, all units inside heal for <healing>@Effect1Amount@ Health</healing>."
 		}

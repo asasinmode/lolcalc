@@ -250,15 +250,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 8,
-				"1": 8,
-				"2": 8,
-				"3": 8,
-				"4": 8,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				8,
+				8,
+				8,
+				8,
+				8,
+				8,
+				8
+			],
 			"name": "Hymn of Valor",
 			"tooltip": "Sona deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the nearest two enemies, prioritizing champions. She then begins a new <keywordMajor>Melody</keywordMajor>. Gain a stack of <keywordMajor>Accelerando</keywordMajor> for every champion you damage with this.<br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds, granting allied champions an additional <magicDamage>@TotalOnHitDamage@ magic damage</magicDamage> %i:OnHit% on their next Attack within @OnHitDuration@ seconds.<br><br><keywordMajor>Power Chord - Staccato:</keywordMajor> Power Chord bonus damage (<magicDamage>@TotalStaccatoDamage@ total magic damage</magicDamage>)."
 		},
@@ -551,15 +551,15 @@
 				65,
 				65
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 14,
-				"3": 14,
-				"4": 14,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				14,
+				14,
+				14,
+				14,
+				14,
+				14,
+				14
+			],
 			"name": "Song of Celerity",
 			"tooltip": "<spellPassive>Active:</spellPassive> She begins a new <keywordMajor>Melody</keywordMajor> and grants herself <speed>@TotalSelfMovementSpeed@ Move Speed</speed> for @SelfMovementSpeedDurationMin@ seconds, extended to up to @SelfMovementSpeedDurationMax@ seconds if she doesn't take damage. <br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds that grants allied champions <speed>@TotalAllyMovementSpeed@ Move Speed</speed> for @AllyMovementSpeedDuration@ seconds.<br><br><keywordMajor>Power Chord - Tempo:</keywordMajor> Power Chord also <status>Slows</status> the target by @TotalTempoMoveSpeedSlow@ for @TempoDuration@ seconds."
 		},
@@ -608,15 +608,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 140,
-				"1": 140,
-				"2": 120,
-				"3": 100,
-				"4": 100,
-				"5": 100,
-				"6": 100
-			},
+			"cooldownTime": [
+				140,
+				140,
+				120,
+				100,
+				100,
+				100,
+				100
+			],
 			"name": "Crescendo",
 			"tooltip": "Sona strikes an irresistible chord, <status>Stunning</status> enemy for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		}

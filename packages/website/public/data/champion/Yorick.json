@@ -366,15 +366,15 @@
 				20,
 				20
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 5.5,
-				"3": 5,
-				"4": 4.5,
-				"5": 4,
-				"6": 3.5
-			},
+			"cooldownTime": [
+				6,
+				6,
+				5.5,
+				5,
+				4.5,
+				4,
+				3.5
+			],
 			"name": "Last Rites",
 			"tooltip": "Yorick's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and restores <healing>@QHeal@ plus @MissingHealthRatio@% of his missing Health</healing>, reduced by @HealReduction@% against non-Champions. If this Attack hits a Champion or large Monster or kills the target, it leaves a grave.<br><br>When there are 3 or more graves nearby and this Ability has already been used, Yorick can <recast>Recast</recast> to raise <keywordMajor>Mist Walkers</keywordMajor> from all nearby graves."
 		},
@@ -436,15 +436,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 22,
-				"1": 20,
-				"2": 18,
-				"3": 16,
-				"4": 14,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				22,
+				20,
+				18,
+				16,
+				14,
+				12,
+				12
+			],
 			"name": "Dark Procession",
 			"tooltip": "Yorick summons a wall of spirits blocking enemies' path, but not allies'. The wall has <healing>@WallHealthTooltip@ Health</healing> and disappears after @CircleDuration@ seconds."
 		},
@@ -604,15 +604,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 13,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				13,
+				12,
+				11,
+				10,
+				9,
+				8,
+				8
+			],
 			"name": "Mourning Mist",
 			"tooltip": "Yorick throws a globule of Black Mist that deals <magicDamage>@Calc_HealthDamage@ max Health magic damage</magicDamage>, <status>Slows</status> by @Calc_Slow@ for @SlowDuration@ seconds and marks champions and monsters for @MarkDuration@ seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of @Spell.YorickPassive:YorickPassiveGhoulMax@) and suffer <scaleArmor>@ArmorShred*100@% reduced Armor</scaleArmor>.<br><br>Yorick and his summoned units gain <speed>@HasteAmount*100@% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them."
 		},
@@ -786,15 +786,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 160,
-				"1": 160,
-				"2": 130,
-				"3": 100,
-				"4": 100,
-				"5": 100,
-				"6": 100
-			},
+			"cooldownTime": [
+				160,
+				160,
+				130,
+				100,
+				100,
+				100,
+				100
+			],
 			"name": "Eulogy of the Isles",
 			"tooltip": "Yorick summons the <keywordMajor>Maiden of the Mist</keywordMajor> with <healing>@YorickBigGhoulHealth@ Health</healing> and <magicDamage>@YorickBigGhoulDamage@ Magic Attack Damage</magicDamage> plus @RGhoulNumbers@ <keywordMajor>Mist Walkers</keywordMajor>. The <keywordMajor>Maiden</keywordMajor> automatically raises <keywordMajor>Mist Walkers</keywordMajor> from nearby enemy deaths and marks enemy Champions with her attacks. When Yorick damages the <keywordMajor>Maiden's</keywordMajor> target, he deals <magicDamage>@RMarkDamagePercent@% max Health magic damage</magicDamage>.<br><br>After 10 seconds, Yorick can <recast>Recast</recast> this Ability to free the <keywordMajor>Maiden</keywordMajor>, sending her down the nearest lane."
 		}

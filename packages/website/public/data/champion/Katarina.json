@@ -84,36 +84,36 @@
 						{
 							"mValues": [
 								0,
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{}
+								68.185,
+								72.138,
+								76.862,
+								82.354,
+								88.615,
+								95.646,
+								103.446,
+								112.015,
+								121.354,
+								131.462,
+								142.338,
+								153.985,
+								166.4,
+								179.585,
+								193.538,
+								208.262,
+								223.754,
+								240.015,
+								257.046,
+								274.846,
+								293.415,
+								312.754,
+								332.862,
+								353.738,
+								375.385,
+								397.8,
+								420.985,
+								444.938,
+								469.662,
+								495.154
 							],
 							"__type": "ByCharLevelFormulaCalculationPart"
 						},
@@ -237,36 +237,25 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"3": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
 			},
-			"cooldownTime": {
-				"0": 12,
-				"1": 11,
-				"2": 10,
-				"3": 9,
-				"4": 8,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				12,
+				11,
+				10,
+				9,
+				8,
+				7,
+				7
+			],
 			"name": "Bouncing Blade",
 			"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target."
 		},
@@ -274,46 +263,34 @@
 			"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
 			"maxLevel": 5,
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"3": [
+					40,
+					50,
+					60,
+					70,
+					80,
+					90,
+					100
+				]
 			},
-			"cooldownTime": {
-				"0": 16,
-				"1": 15,
-				"2": 14,
-				"3": 13,
-				"4": 12,
-				"5": 11,
-				"6": 11
-			},
+			"cooldownTime": [
+				16,
+				15,
+				14,
+				13,
+				12,
+				11,
+				11
+			],
 			"name": "Preparation",
 			"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds."
 		},
@@ -378,7 +355,6 @@
 				},
 				"DaggerCooldownReduction": {
 					"mMultiplier": {
-						"mPart1": {},
 						"mPart2": {
 							"mDataValue": "DataCooldown"
 						}
@@ -440,15 +416,15 @@
 					"mDisplayAsPercent": true
 				}
 			},
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				12,
+				12,
+				11,
+				10,
+				9,
+				8,
+				8
+			],
 			"name": "Shunpo",
 			"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target."
 		},
@@ -586,15 +562,15 @@
 					"mModifiedGameCalculation": "ADDamageCalc"
 				}
 			},
-			"cooldownTime": {
-				"0": 75,
-				"1": 75,
-				"2": 60,
-				"3": 45,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				75,
+				75,
+				60,
+				45,
+				0,
+				0,
+				0
+			],
 			"name": "Death Lotus",
 			"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>."
 		}

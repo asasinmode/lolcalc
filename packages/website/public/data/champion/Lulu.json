@@ -171,15 +171,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Glitterlance",
 			"tooltip": "Lulu and Pix each fire a piercing bolt dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@%, decaying over @SlowDuration@ seconds.<br><br>Enemies take <magicDamage>@BonusMissileDamage@ magic damage</magicDamage> from additional bolts."
 		},
@@ -203,76 +203,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"2": [
+					1,
+					1.2,
+					1.4,
+					1.6,
+					1.8,
+					2,
+					2.2
+				],
+				"3": [
+					-60,
+					-60,
+					-60,
+					-60,
+					-60,
+					-60,
+					-60
+				],
+				"4": [
+					2.75,
+					3,
+					3.25,
+					3.5,
+					3.75,
+					4,
+					4.25
+				],
+				"5": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"6": [
+					0.2,
+					0.2,
+					0.225,
+					0.25,
+					0.275,
+					0.3,
+					0.3
+				]
 			},
 			"mana": [
 				65,
@@ -282,15 +266,15 @@
 				65,
 				65
 			],
-			"cooldownTime": {
-				"0": 18,
-				"1": 18,
-				"2": 18,
-				"3": 18,
-				"4": 18,
-				"5": 18,
-				"6": 18
-			},
+			"cooldownTime": [
+				18,
+				18,
+				18,
+				18,
+				18,
+				18,
+				18
+			],
 			"name": "Whimsy",
 			"tooltip": "When used on an ally, Lulu grants <speed>@TotalMS@ Move Speed</speed> and <attackSpeed>@Effect7Amount*100@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When used on an enemy, Lulu <status>Polymorphs</status> them for @Effect3Amount@ seconds."
 		},
@@ -371,66 +355,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"2": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"4": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"5": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"6": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
 			},
 			"mana": [
 				60,
@@ -440,15 +409,15 @@
 				80,
 				85
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 10,
-				"2": 9.5,
-				"3": 9,
-				"4": 8.5,
-				"5": 8,
-				"6": 7.5
-			},
+			"cooldownTime": [
+				10,
+				10,
+				9.5,
+				9,
+				8.5,
+				8,
+				7.5
+			],
 			"name": "Help, Pix!",
 			"tooltip": "When used on an ally, Pix jumps to them and grants <spellName>Pix, Faerie Companion</spellName> for @Effect1Amount@ seconds. If the ally is a champion, Pix also grants <shield>@TotalShield@ Shield</shield> for @Effect7Amount@ seconds.<br><br>When used on an enemy champion, Pix hampers them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth> of them for @Effect6Amount@ seconds."
 		},
@@ -533,15 +502,15 @@
 				100,
 				0
 			],
-			"cooldownTime": {
-				"0": 130,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 60,
-				"5": 40,
-				"6": 20
-			},
+			"cooldownTime": [
+				130,
+				120,
+				100,
+				80,
+				60,
+				40,
+				20
+			],
 			"name": "Wild Growth",
 			"tooltip": "Lulu enlarges an ally, <status>Knocking Up</status> surrounding enemies for @KnockbackDuration@ second. The enlarged ally gains <healing>@TotalBonusHealth@ max Health</healing> and <status>Slows</status> surrounding enemies by @SlowPercent@% for @BuffDuration@ seconds."
 		}

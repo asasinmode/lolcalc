@@ -106,15 +106,15 @@
 					"mModifiedGameCalculation": "BaseHeal"
 				}
 			},
-			"cooldownTime": {
-				"0": 3,
-				"1": 3,
-				"2": 3,
-				"3": 3,
-				"4": 3,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				3,
+				3,
+				3,
+				3,
+				3,
+				3,
+				3
+			],
 			"name": "Triumphant Roar",
 			"tooltip": "Alistar gains a stack whenever he <status>Stuns</status> or <status>Knocks</status> an enemy champion, or whenever an enemy dies. At @PassiveMaxStacks@ stacks, Alistar roars, restoring <healing>@BaseHeal@ Health</healing> to himself and <healing>@AllyHeal@ Health</healing> to nearby allied champions.<br><br>Enemy champion and epic jungle monster deaths fully charge this Ability."
 		},
@@ -182,15 +182,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 14,
-				"2": 13,
-				"3": 12,
-				"4": 11,
-				"5": 10,
-				"6": 9
-			},
+			"cooldownTime": [
+				15,
+				14,
+				13,
+				12,
+				11,
+				10,
+				9
+			],
 			"name": "Pulverize",
 			"tooltip": "Alistar smashes the ground, <status>Knocking Up</status> enemies for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -260,36 +260,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"2": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				],
+				"3": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				]
 			},
 			"mana": [
 				50,
@@ -299,15 +287,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 14,
-				"2": 13,
-				"3": 12,
-				"4": 11,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				15,
+				14,
+				13,
+				12,
+				11,
+				10,
+				10
+			],
 			"name": "Headbutt",
 			"tooltip": "Alistar rams into an enemy, <status>Knocking</status> them <status>Back</status> and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -352,106 +340,87 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {}
+				"0": [
+					80,
+					80,
+					110,
+					140,
+					170,
+					200,
+					230
+				],
+				"1": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"2": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"3": [
+					350,
+					350,
+					350,
+					350,
+					350,
+					350,
+					350
+				],
+				"4": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"5": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"6": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"7": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"8": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				]
 			},
 			"mana": [
 				50,
@@ -461,15 +430,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 12.5,
-				"1": 12,
-				"2": 11.5,
-				"3": 11,
-				"4": 10.5,
-				"5": 10,
-				"6": 9.5
-			},
+			"cooldownTime": [
+				12.5,
+				12,
+				11.5,
+				11,
+				10.5,
+				10,
+				9.5
+			],
 			"name": "Trample",
 			"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @Effect5Amount@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @Effect6Amount@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>."
 		},
@@ -504,15 +473,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 120,
-				"5": 120,
-				"6": 120
-			},
+			"cooldownTime": [
+				120,
+				120,
+				100,
+				80,
+				120,
+				120,
+				120
+			],
 			"name": "Unbreakable Will",
 			"tooltip": "Alistar immediately cleanses all <status>Disabling</status> effects and takes @RDamageReduction@% reduced damage for @RDuration@ seconds."
 		}

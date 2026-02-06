@@ -180,15 +180,15 @@
 				65,
 				65
 			],
-			"cooldownTime": {
-				"0": 8,
-				"1": 8,
-				"2": 7.5,
-				"3": 7,
-				"4": 6.5,
-				"5": 6,
-				"6": 5.5
-			},
+			"cooldownTime": [
+				8,
+				8,
+				7.5,
+				7,
+				6.5,
+				6,
+				5.5
+			],
 			"name": "Leap Strike",
 			"tooltip": "Jax leaps to a friendly or enemy unit or ward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> if it is an enemy."
 		},
@@ -237,15 +237,15 @@
 				30,
 				30
 			],
-			"cooldownTime": {
-				"0": 8,
-				"1": 7,
-				"2": 6,
-				"3": 5,
-				"4": 4,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				8,
+				7,
+				6,
+				5,
+				4,
+				3,
+				3
+			],
 			"name": "Empower",
 			"tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -378,15 +378,15 @@
 				90,
 				100
 			],
-			"cooldownTime": {
-				"0": 17,
-				"1": 17,
-				"2": 15,
-				"3": 13,
-				"4": 11,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				17,
+				17,
+				15,
+				13,
+				11,
+				9,
+				9
+			],
 			"name": "Counter Strike",
 			"tooltip": "Jax enters a defensive stance for up to @DodgeDuration@ seconds, dodging incoming Attacks and taking @AoEDamageReduction@% less damage from area of effect Abilities. After @DodgeDuration@ seconds or <recast>Recasting</recast>, Jax deals <magicDamage>@TotalDamage@ + @PercentHealthDamage@% max Health magic damage</magicDamage> and <status>Stuns</status> nearby enemies for @StunDuration@ second. <br><br>The damage is increased by @PercentIncreasedPerDodge*100@% per Attack dodged, up to a maximum of <magicDamage>@MaxDamage@ + @MaxPercentHealthDamage@% max Health</magicDamage>."
 		},
@@ -551,15 +551,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 110,
-				"1": 110,
-				"2": 100,
-				"3": 90,
-				"4": 8,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				110,
+				110,
+				100,
+				90,
+				8,
+				7,
+				7
+			],
 			"name": "Grandmaster-at-Arms",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack within @PassiveFallOffTime@ seconds deals an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Jax slams his lantern down, dealing <magicDamage>@SwingDamageTotal@ magic damage</magicDamage> to nearby enemies. If he hits a champion he gains <scaleArmor>@BaseArmor@ Armor</scaleArmor> and <scaleMR>@BaseMR@ Magic Resist</scaleMR> plus <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR> per additional champion hit for @Duration@ seconds. During this time every second Attack deals additional <magicDamage>magic damage</magicDamage> instead of every third."
 		}

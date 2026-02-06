@@ -263,15 +263,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 10,
-				"2": 9.5,
-				"3": 9,
-				"4": 8.5,
-				"5": 8,
-				"6": 7.5
-			},
+			"cooldownTime": [
+				10,
+				10,
+				9.5,
+				9,
+				8.5,
+				8,
+				7.5
+			],
 			"name": "Corrosive Charge",
 			"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds."
 		},
@@ -356,106 +356,87 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					30,
+					30,
+					60,
+					90,
+					120,
+					150,
+					180
+				],
+				"1": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"2": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					25000,
+					25000
+				],
+				"4": [
+					125,
+					125,
+					125,
+					125,
+					125,
+					125,
+					125
+				],
+				"5": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"6": [
+					20,
+					20,
+					23.5,
+					27,
+					30.5,
+					34,
+					37.5
+				],
+				"7": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"8": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				],
+				"9": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				]
 			},
 			"mana": [
 				40,
@@ -465,15 +446,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 9,
-				"3": 6,
-				"4": 3,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				12,
+				12,
+				9,
+				6,
+				3,
+				0,
+				0
+			],
 			"name": "Purge",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @Effect8Amount@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @Effect2Amount@% <status>Slow</status> resistance, but loses <speed>@Effect5Amount@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off."
 		},
@@ -616,15 +597,15 @@
 				100,
 				110
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 15.5,
-				"3": 15,
-				"4": 14.5,
-				"5": 14,
-				"6": 13.5
-			},
+			"cooldownTime": [
+				16,
+				16,
+				15.5,
+				15,
+				14.5,
+				14,
+				13.5
+			],
 			"name": "Disdain",
 			"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>."
 		},
@@ -738,15 +719,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 100,
-				"1": 100,
-				"2": 85,
-				"3": 70,
-				"4": 70,
-				"5": 70,
-				"6": 70
-			},
+			"cooldownTime": [
+				100,
+				100,
+				85,
+				70,
+				70,
+				70,
+				70
+			],
 			"name": "Fear Beyond Death",
 			"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds."
 		}

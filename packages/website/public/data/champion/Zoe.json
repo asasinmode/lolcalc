@@ -72,66 +72,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"1": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"2": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"8": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"9": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				]
 			},
 			"name": "More Sparkles!",
 			"tooltip": "After using an Ability, Zoe's next Attack deals an additional <magicDamage>@PassiveDamage@ magic damage</magicDamage>.",
@@ -212,15 +197,15 @@
 				60,
 				65
 			],
-			"cooldownTime": {
-				"0": 8.5,
-				"1": 8.5,
-				"2": 8,
-				"3": 7.5,
-				"4": 7,
-				"5": 6.5,
-				"6": 6
-			},
+			"cooldownTime": [
+				8.5,
+				8.5,
+				8,
+				7.5,
+				7,
+				6.5,
+				6
+			],
 			"name": "Paddle Star!",
 			"tooltip": "Zoe fires a star that deals increasing damage the further it travels to the first enemy hit and surrounding enemies -- between <magicDamage>@TotalDamageTooltip@ to @MaxDamageTooltip@ magic damage</magicDamage>.<br><br>Zoe can <recast>Recast</recast> this Ability to redirect the missile to a new position near Zoe."
 		},
@@ -280,106 +265,88 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"1": [
+					3000,
+					3000,
+					4500,
+					6000,
+					0,
+					0,
+					0
+				],
+				"2": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				],
+				"3": [
+					2500,
+					2500,
+					2500,
+					2500,
+					2500,
+					2500,
+					2500
+				],
+				"4": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"5": [
+					20,
+					20,
+					50,
+					80,
+					110,
+					140,
+					20
+				],
+				"6": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"8": [
+					0.3,
+					0.3,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8
+				],
+				"9": [
+					2,
+					2,
+					2.25,
+					2.5,
+					2.75,
+					3,
+					3.25
+				]
 			},
-			"cooldownTime": {
-				"0": 0.25,
-				"1": 0.25,
-				"2": 0.25,
-				"3": 0.25,
-				"4": 0.25,
-				"5": 0.25,
-				"6": 0.25
-			},
+			"cooldownTime": [
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25,
+				0.25
+			],
 			"name": "Spell Thief",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Enemies drop spell shards when casting a Summoner Spell or using an Active Item. Specific minions also drop a spell shard when Zoe or a nearby ally kills them. Zoe can pick up this shard to cast that ability once.<br><br><spellPassive>Passive:</spellPassive> When Zoe casts this Ability or any Summoner Spell, she gains <speed>@Effect9Amount*100@% Move Speed</speed> for @Effect10Amount@ seconds and tosses 3 missiles at the target she Attacked most recently. These missiles deal <magicDamage>@MissileDamageTooltip@ magic damage</magicDamage> each.<br><br><spellActive>Active:</spellActive> Cast the Ability from a spell shard Zoe has picked up."
 		},
@@ -433,116 +400,96 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					70,
+					70,
+					110,
+					150,
+					190,
+					230,
+					270
+				],
+				"1": [
+					0.1,
+					0.1,
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35
+				],
+				"2": [
+					5,
+					5,
+					15,
+					25,
+					35,
+					45,
+					55
+				],
+				"3": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"4": [
+					0.1,
+					0.1,
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35
+				],
+				"5": [
+					70,
+					70,
+					110,
+					150,
+					190,
+					230,
+					270
+				],
+				"6": [
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45,
+					0.45
+				],
+				"7": [
+					1.4,
+					1.4,
+					1.4,
+					1.4,
+					1.4,
+					1.4,
+					1.4
+				],
+				"8": [
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25,
+					2.25
+				],
+				"9": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
 			"mana": [
 				80,
@@ -552,15 +499,15 @@
 				80,
 				80
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 15,
-				"3": 14,
-				"4": 13,
-				"5": 12,
-				"6": 11
-			},
+			"cooldownTime": [
+				16,
+				16,
+				15,
+				14,
+				13,
+				12,
+				11
+			],
 			"name": "Sleepy Trouble Bubble",
 			"tooltip": "Zoe dropkicks a bubble that deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, lingering as a trap if it hits nothing. The bubble's range is extended when flying over terrain.<br><br>After a delay, the victim falls <status>Asleep</status> and have their <scaleMR>Magic Resist</scaleMR> reduced by @PercentPen*100@% for 2 seconds. Attacks and Ability hits wake them up but deal double damage, up to <trueDamage>@BreakDamageTooltip@ true damage</trueDamage>."
 		},
@@ -568,76 +515,60 @@
 			"image": "assets/characters/zoe/hud/icons2d/zoe_r.png",
 			"maxLevel": 3,
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					-0.3,
+					-0.3,
+					-0.4,
+					-0.5,
+					-0.6,
+					-0.7,
+					-0.7
+				],
+				"1": [
+					1.5,
+					1.5,
+					2,
+					2.5,
+					3,
+					3.5,
+					3.5
+				],
+				"2": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"3": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"4": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"5": [
+					100,
+					100,
+					200,
+					300,
+					300,
+					300,
+					300
+				]
 			},
 			"mana": [
 				40,
@@ -647,15 +578,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 8,
-				"3": 5,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				11,
+				11,
+				8,
+				5,
+				0,
+				0,
+				0
+			],
 			"name": "Portal Jump",
 			"tooltip": "Zoe teleports to a nearby position for 1 second. Afterwards, she teleports back. Zoe can use Abilities and Attack, but can't move during this time."
 		}

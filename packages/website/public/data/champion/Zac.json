@@ -88,15 +88,15 @@
 					"mModifiedGameCalculation": "HealPercent"
 				}
 			},
-			"cooldownTime": {
-				"0": 300,
-				"1": 300,
-				"2": 300,
-				"3": 300,
-				"4": 300,
-				"5": 300,
-				"6": 300
-			},
+			"cooldownTime": [
+				300,
+				300,
+				300,
+				300,
+				300,
+				300,
+				300
+			],
 			"name": "Cell Division",
 			"tooltip": "Each time Zac hits an enemy with an Ability, he sheds a chunk of <keywordMajor>Goo</keywordMajor> that can be reabsorbed to restore <healing>@HealPercent@ Max Health</healing>.<br><br>Upon dying, Zac splits into 4 bloblets that attempt to recombine. If any bloblets remain after <scaleLevel>@ReviveBlobletDuration@</scaleLevel> seconds, he will revive with 10-50% Health based on the surviving bloblet's Health. This has a @ReviveCooldown@ second Cooldown.",
 			"tooltipExtended": "{{Spell_ZacPassiveChunkDrop_Tooltip}}<br><br><rules>Each bloblet has 12% of Zac's max <healing>Health</healing>, and 50% of his <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.</rules>"
@@ -159,126 +159,106 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					25,
+					40,
+					55,
+					70,
+					85,
+					100,
+					100
+				],
+				"1": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				],
+				"2": [
+					800,
+					800,
+					800,
+					800,
+					800,
+					800,
+					800
+				],
+				"3": [
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4,
+					-0.4
+				],
+				"4": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"5": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"6": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"7": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				],
+				"8": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"9": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				]
 			},
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 12.5,
-				"3": 11,
-				"4": 9.5,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				14,
+				14,
+				12.5,
+				11,
+				9.5,
+				8,
+				8
+			],
 			"name": "Stretching Strikes",
 			"tooltip": "Zac stretches his arm out, attaching it to the first enemy hit to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and briefly <status>Slow</status> them. Zac's next Attack gains increased range and applies the same damage and <status>Slow</status>. <br><br>If Zac hits a <i>different</i> enemy with this Attack, he <status>Knocks Up</status> both towards each other. If they collide, they and surrounding enemies take <magicDamage>@TotalDamage@ magic damage</magicDamage> and are briefly <status>Slowed</status>."
 		},
@@ -366,76 +346,61 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					40,
+					40,
+					50,
+					60,
+					70,
+					80,
+					80
+				],
+				"1": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				],
+				"2": [
+					0.04,
+					0.04,
+					0.05,
+					0.06,
+					0.07,
+					0.08,
+					0.09
+				],
+				"3": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"4": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				]
 			},
-			"cooldownTime": {
-				"0": 5,
-				"1": 5,
-				"2": 5,
-				"3": 5,
-				"4": 5,
-				"5": 5,
-				"6": 5
-			},
+			"cooldownTime": [
+				5,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5
+			],
 			"name": "Unstable Matter",
 			"tooltip": "Zac's body erupts, dealing <magicDamage>@BaseDamage@ + @DisplayPercentDamage@ max Health magic damage</magicDamage> to nearby enemies.<br><br>Absorbing <keywordMajor>Goo</keywordMajor> reduces this Ability's Cooldown by 1 second."
 		},
@@ -493,126 +458,106 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					60,
+					60,
+					105,
+					150,
+					195,
+					240,
+					240
+				],
+				"1": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				],
+				"2": [
+					1050,
+					1200,
+					1350,
+					1500,
+					1650,
+					1800,
+					1950
+				],
+				"3": [
+					0.8,
+					0.9,
+					1,
+					1.1,
+					1.2,
+					1.3,
+					1.4
+				],
+				"4": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"5": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"6": [
+					1350,
+					1350,
+					1350,
+					1350,
+					1350,
+					1350,
+					1350
+				],
+				"7": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				],
+				"8": [
+					265,
+					265,
+					265,
+					265,
+					265,
+					265,
+					265
+				],
+				"9": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
-			"cooldownTime": {
-				"0": 25,
-				"1": 22,
-				"2": 19,
-				"3": 16,
-				"4": 13,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				25,
+				22,
+				19,
+				16,
+				13,
+				10,
+				10
+			],
 			"name": "Elastic Slingshot",
 			"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit."
 		},
@@ -814,126 +759,106 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					150,
+					150,
+					250,
+					350,
+					350,
+					350,
+					350
+				],
+				"1": [
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1,
+					1.1
+				],
+				"2": [
+					700,
+					700,
+					850,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"3": [
+					-0.3,
+					-0.3,
+					-0.4,
+					-0.5,
+					-0.5,
+					-0.5,
+					-0.5
+				],
+				"4": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"5": [
+					275,
+					275,
+					275,
+					275,
+					275,
+					275,
+					275
+				],
+				"6": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"7": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"8": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"9": [
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1
+				]
 			},
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 105,
-				"3": 90,
-				"4": 90,
-				"5": 90,
-				"6": 90
-			},
+			"cooldownTime": [
+				120,
+				120,
+				105,
+				90,
+				90,
+				90,
+				90
+			],
 			"name": "Let's Bounce!",
 			"tooltip": "Zac bounces @Bounces@ times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>@DamagePerBounce@ magic damage</magicDamage>. Subsequent bounces deal <magicDamage>@DamagePerSubsequentBounce@ magic damage</magicDamage> and <status>Slow</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>Zac gains up to <speed>@EndingMS*100@% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing."
 		}

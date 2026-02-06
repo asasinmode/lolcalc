@@ -184,15 +184,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Divine Ascent",
 			"tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>",
 			"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>"
@@ -356,15 +356,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 7
-			},
+			"cooldownTime": [
+				12,
+				12,
+				11,
+				10,
+				9,
+				8,
+				7
+			],
 			"name": "Radiant Blast",
 			"tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ seconds, and removing <scaleArmor>@ShredPercent@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds from the target and enemies behind them."
 		},
@@ -435,15 +435,15 @@
 				90,
 				90
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 15,
-				"3": 15,
-				"4": 15,
-				"5": 15,
-				"6": 15
-			},
+			"cooldownTime": [
+				15,
+				15,
+				15,
+				15,
+				15,
+				15,
+				15
+			],
 			"name": "Celestial Blessing",
 			"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds."
 		},
@@ -560,15 +560,15 @@
 					"mDisplayAsPercent": true
 				}
 			},
-			"cooldownTime": {
-				"0": 8,
-				"1": 8,
-				"2": 7.5,
-				"3": 7,
-				"4": 6.5,
-				"5": 6,
-				"6": 8
-			},
+			"cooldownTime": [
+				8,
+				8,
+				7.5,
+				7,
+				6.5,
+				6,
+				8
+			],
 			"name": "Starfire Spellblade",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies."
 		},
@@ -632,15 +632,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 160,
-				"1": 160,
-				"2": 120,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				160,
+				160,
+				120,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "Divine Judgment",
 			"tooltip": "Kayle makes an allied champion Invulnerable for @InvulnDuration@ seconds and then purifies the area around them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies."
 		}

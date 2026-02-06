@@ -111,36 +111,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"1": [
+					1.6,
+					1.6,
+					1.6,
+					1.6,
+					1.6,
+					1.6,
+					1.6
+				]
 			},
 			"name": "Crimson Pact",
 			"tooltip": "Vladimir gains <scaleAP>1 Ability Power</scaleAP> for every <scaleHealth>@Effect1Amount@ bonus Health</scaleHealth>. He also gains <scaleHealth>@Effect2Amount@ max Health</scaleHealth> per <scaleAP>1 Ability Power</scaleAP>.<br><br><scaleAP>Bonus Ability Power: @ApproximateAPBonusAvoidingRecursion@</scaleAP><br><scaleHealth>Bonus Health: @ApproximateHPBonusAvoidingRecursion@</scaleHealth>",
@@ -260,96 +248,79 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {}
+				"0": [
+					60,
+					80,
+					100,
+					120,
+					140,
+					160,
+					180
+				],
+				"1": [
+					15,
+					20,
+					25,
+					30,
+					35,
+					40,
+					45
+				],
+				"4": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"5": [
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04
+				],
+				"6": [
+					85,
+					85,
+					85,
+					85,
+					85,
+					85,
+					85
+				],
+				"7": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"8": [
+					35,
+					35,
+					35,
+					35,
+					35,
+					35,
+					35
+				]
 			},
-			"cooldownTime": {
-				"0": 10.1,
-				"1": 9,
-				"2": 7.9,
-				"3": 6.8,
-				"4": 5.7,
-				"5": 4.6,
-				"6": 3.5
-			},
+			"cooldownTime": [
+				10.1,
+				9,
+				7.9,
+				6.8,
+				5.7,
+				4.6,
+				3.5
+			],
 			"name": "Transfusion",
 			"tooltip": "Vladimir drains his target's lifeforce, dealing <magicDamage>@BaseDamageTooltip@ magic damage</magicDamage> and restoring <healing>@BaseHealTooltip@ Health</healing>. After using this Ability twice, Vladimir gains <speed>@MovementSpeedOnQ2@% Move Speed</speed> for 0.5 seconds and empowers the next use of this Ability for @Effect8Amount@ seconds.<br><br>The empowered version of this Ability deals <magicDamage>@EmpoweredDamageTooltip@ magic damage</magicDamage> instead and restores an additional <healing>@EmpoweredHealTooltip@ plus @EmpoweredHealPercentTooltip@ missing Health</healing>."
 		},
@@ -452,15 +423,15 @@
 					"mModifiedGameCalculation": "TotalDamage"
 				}
 			},
-			"cooldownTime": {
-				"0": 31,
-				"1": 28,
-				"2": 25,
-				"3": 22,
-				"4": 19,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				31,
+				28,
+				25,
+				22,
+				19,
+				16,
+				16
+			],
 			"name": "Sanguine Pool",
 			"tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>@HasteBoost*100@% decaying Move Speed</speed> for @HasteDuration@ second and becoming <keyword>Untargetable</keyword> and <keyword>Ghosted</keyword> while <status>Slowing</status> enemies in the pool by @MoveSpeedMod*-100@%.<br><br>Vladimir deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and restores <healing>@TotalHeal@ Health</healing> per enemy over the duration."
 		},
@@ -525,106 +496,88 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"1": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"2": [
+					15,
+					30,
+					45,
+					60,
+					75,
+					90,
+					105
+				],
+				"3": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"4": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"6": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"7": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"8": [
+					35,
+					40,
+					45,
+					50,
+					55,
+					60,
+					65
+				],
+				"9": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				]
 			},
-			"cooldownTime": {
-				"0": 15,
-				"1": 13,
-				"2": 11,
-				"3": 9,
-				"4": 7,
-				"5": 5,
-				"6": 5
-			},
+			"cooldownTime": [
+				15,
+				13,
+				11,
+				9,
+				7,
+				5,
+				5
+			],
 			"name": "Tides of Blood",
 			"tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to <font color='#CC3300'>@ChargeHealthTooltip@ Health</font>. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br><br><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>@MinDamageTooltip@</magicDamage> and <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by @SlowPercent@% for 0.5 seconds."
 		},
@@ -652,76 +605,61 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					150,
+					150,
+					250,
+					350,
+					0,
+					0,
+					0
+				],
+				"1": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"2": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"3": [
+					4,
+					4,
+					4,
+					4,
+					0,
+					0,
+					0
+				],
+				"4": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				]
 			},
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 120,
-				"3": 120,
-				"4": 120,
-				"5": 120,
-				"6": 120
-			},
+			"cooldownTime": [
+				120,
+				120,
+				120,
+				120,
+				120,
+				120,
+				120
+			],
 			"name": "Hemoplague",
 			"tooltip": "Vladimir creates a virulent plague, causing its victims to take @Effect2Amount@% increased damage from all sources for @Effect4Amount@ seconds. After it expires, Vladimir deals <magicDamage>@Damage@ magic damage</magicDamage> to all infected targets. Vladimir restores <healing>@Damage@ Health</healing> if he hits a champion, and restores an additional <healing>@SecondaryHealingTooltip@ Health</healing> for each champion beyond the first."
 		}

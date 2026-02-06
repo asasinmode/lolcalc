@@ -508,15 +508,15 @@
 				110,
 				110
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 15,
-				"3": 15,
-				"4": 15,
-				"5": 15,
-				"6": 15
-			},
+			"cooldownTime": [
+				15,
+				15,
+				15,
+				15,
+				15,
+				15,
+				15
+			],
 			"name": "Piercing Darkness",
 			"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second."
 		},
@@ -576,15 +576,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 11,
-				"3": 11,
-				"4": 11,
-				"5": 11,
-				"6": 11
-			},
+			"cooldownTime": [
+				11,
+				11,
+				11,
+				11,
+				11,
+				11,
+				11
+			],
 			"name": "Last Embrace",
 			"tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After a @DelayTime@ second delay the target and other nearby enemies are <status>Rooted</status> for @RootDuration@ second(s)."
 		},
@@ -697,15 +697,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 26,
-				"1": 26,
-				"2": 24.5,
-				"3": 23,
-				"4": 21.5,
-				"5": 20,
-				"6": 20
-			},
+			"cooldownTime": [
+				26,
+				26,
+				24.5,
+				23,
+				21.5,
+				20,
+				20
+			],
 			"name": "Curse of the Black Mist",
 			"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby."
 		},
@@ -797,15 +797,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 140,
-				"1": 140,
-				"2": 120,
-				"3": 100,
-				"4": 100,
-				"5": 100,
-				"6": 100
-			},
+			"cooldownTime": [
+				140,
+				140,
+				120,
+				100,
+				100,
+				100,
+				100
+			],
 			"name": "Dawning Shadow",
 			"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds."
 		}

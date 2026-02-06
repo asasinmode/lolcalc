@@ -333,15 +333,15 @@
 					"mDisplayAsPercent": true
 				}
 			},
-			"cooldownTime": {
-				"0": 1,
-				"1": 1,
-				"2": 1,
-				"3": 1,
-				"4": 1,
-				"5": 1,
-				"6": 1
-			},
+			"cooldownTime": [
+				1,
+				1,
+				1,
+				1,
+				1,
+				1,
+				1
+			],
 			"name": "Void Surge",
 			"tooltip": "Bel'Veth dashes, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to enemies she passes through.<br><br>Each direction has an unique Cooldown of @f1@ seconds that scales down based on her <attackSpeed>Attack Speed</attackSpeed>.<br>"
 		},
@@ -407,15 +407,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				12,
+				12,
+				11,
+				10,
+				9,
+				8,
+				8
+			],
 			"name": "Above and Below",
 			"tooltip": "Bel'Veth slams her tail, dealing <magicDamage>@Damage@ magic damage</magicDamage>, <status>Knocking Up</status> foes for @Duration@ seconds, and <status>Slowing</status> them by @SlowPercent*100@% for @SlowDuration@ seconds. If a champion is hit, this refreshes the Cooldown of <spellName>Void Surge</spellName> in that direction."
 		},
@@ -560,15 +560,15 @@
 					"mModifiedGameCalculation": "DamagePerStrike"
 				}
 			},
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 19,
-				"3": 18,
-				"4": 17,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				20,
+				20,
+				19,
+				18,
+				17,
+				16,
+				16
+			],
 			"name": "Royal Maelstrom",
 			"tooltip": "Bel'Veth channels and slashes around herself, gaining @DRPercent*100@% Damage Reduction, @TotalLifesteal@ Life Steal, and Attacking @f2.0@ times over @TotalDuration@ seconds with the number of Attacks increasing based on her <attackSpeed>Attack Speed</attackSpeed>. Each Attack strikes the lowest-health enemy, dealing <physicalDamage>@DamagePerStrike@</physicalDamage> to <physicalDamage>@MaxDamagePerStrikeTooltip@ physical damage</physicalDamage> based on the target's missing Health.<br><br>Using another Ability or <recast>Recasting</recast> ends this Ability early.<br>"
 		},
@@ -815,15 +815,15 @@
 					"mModifiedGameCalculation": "FinalOnHitDamage"
 				}
 			},
-			"cooldownTime": {
-				"0": 1,
-				"1": 1,
-				"2": 1,
-				"3": 1,
-				"4": 1,
-				"5": 1,
-				"6": 1
-			},
+			"cooldownTime": [
+				1,
+				1,
+				1,
+				1,
+				1,
+				1,
+				1
+			],
 			"name": "Endless Banquet",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Every second Attack against the same target deals an additional <trueDamage>@FinalOnHitDamage@ true damage</trueDamage>, stacking infinitely. Takedowns against champions and epic monsters leave behind a piece of Void Coral.<br><br><spellActive>Active:</spellActive> Consuming Void Coral grants <keywordMajor>@PassiveStacksOnDevour@ Lavender</keywordMajor> stack and activates Bel'Veth's true form for @SteroidDuration@ seconds. Void Coral from Void epic monsters increases the duration to @VoidDuration@ seconds and causes minions that die nearby to become Void Remora. While casting, Bel'Veth <status>Slows</status> nearby enemies before exploding, dealing <trueDamage>@TotalExplosionDamage@ + @MissingHealthDamage*100@% missing-Health true damage</trueDamage>.<br><br>In her true form, Bel'Veth gains <healing>@MaxHealthOnDevour@ max Health</healing>, <speed>@OOCMS@ Move Speed</speed> out of combat, @BonusAARange@ Attack range, <attackSpeed>@TotalASMod*100@% Total Attack Speed</attackSpeed>, and <spellName>Void Surge</spellName> can pass through walls.<br><br><br>"
 		}

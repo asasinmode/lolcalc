@@ -137,46 +137,33 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"1": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"2": [
+					70,
+					70,
+					70,
+					70,
+					70,
+					70,
+					70
+				]
 			},
 			"mana": [
 				35,
@@ -186,15 +173,15 @@
 				35,
 				35
 			],
-			"cooldownTime": {
-				"0": 6.75,
-				"1": 6,
-				"2": 5.25,
-				"3": 4.5,
-				"4": 3.75,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				6.75,
+				6,
+				5.25,
+				4.5,
+				3.75,
+				3,
+				3
+			],
 			"name": "Command: Attack",
 			"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first."
 		},
@@ -280,15 +267,15 @@
 				80,
 				85
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Command: Dissonance",
 			"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds."
 		},
@@ -324,66 +311,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					20,
+					55,
+					90,
+					125,
+					160,
+					195,
+					230
+				],
+				"1": [
+					0,
+					6,
+					12,
+					18,
+					24,
+					30,
+					36
+				],
+				"2": [
+					30,
+					60,
+					90,
+					120,
+					150,
+					180,
+					210
+				],
+				"3": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"4": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
 			},
 			"mana": [
 				60,
@@ -393,15 +365,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 9,
-				"2": 9,
-				"3": 9,
-				"4": 9,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				9,
+				9,
+				9,
+				9,
+				9,
+				9,
+				9
+			],
 			"name": "Command: Protect",
 			"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>."
 		},
@@ -460,15 +432,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 110,
-				"1": 110,
-				"2": 95,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				110,
+				110,
+				95,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "Command: Shockwave",
 			"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>."
 		}

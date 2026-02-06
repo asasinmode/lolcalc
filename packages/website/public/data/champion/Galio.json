@@ -81,7 +81,6 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mPart1": {},
 							"mPart2": {
 								"mDataValue": "PassiveCooldown"
 							},
@@ -198,15 +197,15 @@
 				90,
 				95
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 10,
-				"3": 9,
-				"4": 8,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				11,
+				11,
+				10,
+				9,
+				8,
+				7,
+				7
+			],
 			"name": "Winds of War",
 			"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds."
 		},
@@ -328,106 +327,87 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					25,
+					25,
+					30,
+					35,
+					40,
+					45,
+					45
+				],
+				"1": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"2": [
+					15,
+					15,
+					15,
+					15,
+					15,
+					15,
+					15
+				],
+				"3": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"5": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"6": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"7": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"8": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"9": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
 			},
 			"mana": [
 				50,
@@ -437,15 +417,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 18,
-				"1": 18,
-				"2": 17,
-				"3": 16,
-				"4": 15,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				18,
+				18,
+				17,
+				16,
+				15,
+				14,
+				14
+			],
 			"name": "Shield of Durand",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Galio gains a <shield>@TotalPassiveShield@ Magic Shield</shield> after not taking damage for @PassiveShieldOOCTimer@ seconds.<br><br><charge>Begin Charging:</charge> Galio reduces incoming magic damage by @MagicDamageReduction@ and incoming physical damage by @PhysicalDamageReduction@ and <status>Slows</status> himself by @Effect3Amount@%.<br><br><release>Release:</release> Galio <status>Taunts</status> enemy champions for between @Effect4Amount@ to @Effect7Amount@ seconds, deals between <magicDamage>@MinTotalDamage@</magicDamage> and <magicDamage>@MaxTotalDamage@ magic damage</magicDamage>, and refreshes the damage reduction for @Effect8Amount@ seconds. Taunt duration, damage, and range increase with charge time."
 		},
@@ -509,15 +489,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 10,
-				"3": 9,
-				"4": 8,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				11,
+				11,
+				10,
+				9,
+				8,
+				7,
+				7
+			],
 			"name": "Justice Punch",
 			"tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for @KnockupDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>@PVEDamage@ magic damage</magicDamage>.<br><br>Galio's dash stops on hitting terrain."
 		},
@@ -575,15 +555,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 180,
-				"1": 180,
-				"2": 160,
-				"3": 140,
-				"4": 140,
-				"5": 140,
-				"6": 140
-			},
+			"cooldownTime": [
+				180,
+				180,
+				160,
+				140,
+				140,
+				140,
+				140
+			],
 			"name": "Hero's Entrance",
 			"tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for @TemporaryWShieldDuration@ seconds. Galio then flies to his landing zone.<br><br>When Galio lands, he <status>Knocks Up</status> for @StunDurationOuter@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		}

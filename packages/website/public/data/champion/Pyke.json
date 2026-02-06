@@ -97,66 +97,52 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					14,
+					14,
+					14,
+					14,
+					14,
+					14,
+					14
+				],
+				"3": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"5": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"6": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				]
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Gift of the Drowned Ones",
 			"tooltip": "Pyke stores @OneEnemyCalc@ of damage taken from champions, increased to @AdditionalBonusCalc@ when there's more than one enemy nearby. Pyke can store up to @DamageStorageMax@ damage. While <unique>unseen</unique> by enemies, he rapidly regenerates this stored damage.<br><br>Additionally, Pyke converts all Maximum Health increases to Attack Damage instead at a rate of <healing>14 Health</healing> to <physicalDamage>1 Attack Damage</physicalDamage>. ",
 			"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>"
@@ -298,15 +284,15 @@
 				90,
 				95
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 10,
-				"2": 9.5,
-				"3": 9,
-				"4": 8.5,
-				"5": 8,
-				"6": 7.5
-			},
+			"cooldownTime": [
+				10,
+				10,
+				9.5,
+				9,
+				8.5,
+				8,
+				7.5
+			],
 			"name": "Bone Skewer",
 			"tooltip": "<tap>Tap:</tap> Pyke stabs, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, preferring champions. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit and <status>Pulling</status> them towards him. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>If Pyke successfully hits an enemy champion or the channel does not complete successfully, @ManaRefund*100@% of the Mana cost is refunded."
 		},
@@ -350,106 +336,87 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					45,
+					45,
+					45,
+					45,
+					45,
+					45,
+					45
+				],
+				"2": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"3": [
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03
+				],
+				"4": [
+					80,
+					80,
+					80,
+					80,
+					80,
+					80,
+					80
+				],
+				"5": [
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55,
+					0.55
+				],
+				"6": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"7": [
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01,
+					0.01
+				],
+				"8": [
+					1.15,
+					1.15,
+					1.15,
+					1.15,
+					1.15,
+					1.15,
+					1.15
+				],
+				"9": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
 			},
 			"mana": [
 				65,
@@ -459,15 +426,15 @@
 				65,
 				65
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 13,
-				"3": 12,
-				"4": 11,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				14,
+				14,
+				13,
+				12,
+				11,
+				10,
+				10
+			],
 			"name": "Ghostwater Dive",
 			"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @Effect10Amount@ seconds."
 		},
@@ -545,56 +512,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					100,
+					100,
+					150,
+					200,
+					250,
+					300,
+					350
+				],
+				"1": [
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25,
+					1.25
+				],
+				"2": [
+					550,
+					550,
+					550,
+					550,
+					550,
+					550,
+					550
+				],
+				"3": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
 			"mana": [
 				40,
@@ -604,15 +557,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 14,
-				"3": 13,
-				"4": 12,
-				"5": 11,
-				"6": 11
-			},
+			"cooldownTime": [
+				15,
+				15,
+				14,
+				13,
+				12,
+				11,
+				11
+			],
 			"name": "Phantom Undertow",
 			"tooltip": "Pyke dashes, leaving a drowned phantom behind him that returns to him shortly. The phantom <status>Stuns</status> for @StunDuration@ seconds and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to champions."
 		},
@@ -750,15 +703,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 115,
-				"1": 100,
-				"2": 85,
-				"3": 70,
-				"4": 55,
-				"5": 40,
-				"6": 25
-			},
+			"cooldownTime": [
+				115,
+				100,
+				85,
+				70,
+				55,
+				40,
+				25
+			],
 			"name": "Death From Below",
 			"tooltip": "Pyke strikes all enemy champions in an X, teleporting to and <danger>executing</danger> targets below <scaleAD>@RDamage@</scaleAD> Health. Champions above the threshold and non-champions instead take physical damage equal to @ReducedDamage*100@% of that amount (<physicalDamage>@ReducedDamageFinal@</physicalDamage>). <br><br>When an enemy champion dies inside the X, Pyke can <recast>Recast</recast> this Ability for free within @RRecastDuration@ seconds. If he executed that champion, the last assisting ally will also get kill gold. If he did not, he will still get kill gold as if he did.<br>"
 		}

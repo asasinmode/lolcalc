@@ -142,116 +142,97 @@
 				]
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						0
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						0
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"2": [
+					80,
+					80,
+					130,
+					180,
+					230,
+					280,
+					0
+				],
+				"3": [
+					0.03,
+					0.03,
+					0.035,
+					0.04,
+					0.045,
+					0.05,
+					0
+				],
+				"4": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"5": [
+					225,
+					225,
+					225,
+					225,
+					225,
+					225,
+					225
+				],
+				"6": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"7": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"8": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"9": [
+					15,
+					15,
+					17.5,
+					20,
+					22.5,
+					25,
+					27.5
+				]
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Living Forge",
 			"tooltip": "{{Spell_OrnnP_Tooltip_@GameModeInteger@}}",
 			"tooltipExtended": "{{Spell_OrnnP_TooltipExtended_@GameModeInteger@}}"
@@ -286,66 +267,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					20,
+					20,
+					45,
+					70,
+					95,
+					120,
+					145
+				],
+				"1": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"2": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"4": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"5": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
 			},
 			"mana": [
 				45,
@@ -355,15 +321,15 @@
 				45,
 				45
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 9,
-				"2": 8.5,
-				"3": 8,
-				"4": 7.5,
-				"5": 7,
-				"6": 6.5
-			},
+			"cooldownTime": [
+				9,
+				9,
+				8.5,
+				8,
+				7.5,
+				7,
+				6.5
+			],
 			"name": "Volcanic Rupture",
 			"tooltip": "Ornn slams the ground, creating a fissure dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @Effect5Amount@% for @Effect6Amount@ seconds. A pillar of rock forms at the fissure's end for @Effect3Amount@ seconds. "
 		},
@@ -527,15 +493,15 @@
 				65,
 				70
 			],
-			"cooldownTime": {
-				"0": 12.5,
-				"1": 12,
-				"2": 11.5,
-				"3": 11,
-				"4": 10.5,
-				"5": 10,
-				"6": 9.5
-			},
+			"cooldownTime": [
+				12.5,
+				12,
+				11.5,
+				11,
+				10.5,
+				10,
+				9.5
+			],
 			"name": "Bellows Breath",
 			"tooltip": "Ornn stomps forward Unstoppably while breathing fire, dealing <magicDamage>@MaxPercentHPPerTickTooltip@% max Health magic damage</magicDamage> over @BreathDuration@ seconds. Enemies hit by the final bout of flame become <keywordMajor>Brittle</keywordMajor> for @BrittleDuration@ seconds.<br><br><status>Immobilizing</status> effects on <keywordMajor>Brittle</keywordMajor> targets have their duration increased by 30% and deal an additional <magicDamage>@BrittlePercentMaxHPCalc@ max Health magic damage</magicDamage>. Ornn's Attacks against <keywordMajor>Brittle</keywordMajor> targets <status>Knock</status> them <status>Back</status>, dealing the additional damage."
 		},
@@ -655,15 +621,15 @@
 				55,
 				60
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 13.5,
-				"3": 13,
-				"4": 12.5,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				14,
+				14,
+				13.5,
+				13,
+				12.5,
+				12,
+				12
+			],
 			"name": "Searing Charge",
 			"tooltip": "Ornn charges, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If Ornn rams into terrain, he creates a shockwave that <status>Knocks Up</status> enemies for @KnockupDuration@ seconds and applies the same damage to those not hit by the charge.<br><br>Ornn's charge destroys magma pillars and terrain created by enemies."
 		},
@@ -800,15 +766,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 140,
-				"1": 140,
-				"2": 120,
-				"3": 100,
-				"4": 100,
-				"5": 100,
-				"6": 100
-			},
+			"cooldownTime": [
+				140,
+				140,
+				120,
+				100,
+				100,
+				100,
+				100
+			],
 			"name": "Call of the Forge God",
 			"tooltip": "Ornn summons a massive lava elemental, which stampedes towards him, dealing <magicDamage>@RDamageCalc@ magic damage</magicDamage>, applying <keywordMajor>Brittle</keywordMajor> to, and <status>Slowing</status> enemies hit by @RSlowPercentBasePreMath@% for @BrittleDurationTOOLTIPONLY@ seconds.<br><br>Ornn can <recast>Recast</recast> to dash with a headbutt. If he dashes into the elemental, he redirects and empowers it, causing it to <status>Knock Up</status> the first champion for @RStunDuration@ second and subsequent champions for @MinStun@ seconds. The elemental also deals <magicDamage>@RDamageCalc@ magic damage</magicDamage> and reapplies <keywordMajor>Brittle</keywordMajor>."
 		}

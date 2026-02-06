@@ -202,56 +202,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					10,
+					10,
+					40,
+					70,
+					100,
+					130,
+					145
+				],
+				"1": [
+					3,
+					3,
+					4,
+					5,
+					6,
+					7,
+					8
+				],
+				"3": [
+					500,
+					500,
+					500,
+					500,
+					500,
+					500,
+					500
+				],
+				"4": [
+					4,
+					4,
+					5,
+					6,
+					7,
+					8,
+					9
+				]
 			},
 			"mana": [
 				50,
@@ -261,15 +247,15 @@
 				30,
 				30
 			],
-			"cooldownTime": {
-				"0": 4.5,
-				"1": 4.5,
-				"2": 4.5,
-				"3": 4.5,
-				"4": 4.5,
-				"5": 4.5,
-				"6": 4.5
-			},
+			"cooldownTime": [
+				4.5,
+				4.5,
+				4.5,
+				4.5,
+				4.5,
+				4.5,
+				4.5
+			],
 			"name": "Parrrley",
 			"tooltip": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}",
 			"tooltipExtended": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}<br><br>Total Gold plundered: <statTracking>@f1@ Gold</statTracking><br>Total SS plundered: <statTracking>@f3@ Silver Serpents</statTracking>"
@@ -293,66 +279,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					20,
+					45,
+					70,
+					95,
+					120,
+					145,
+					170
+				],
+				"1": [
+					13,
+					13,
+					13,
+					13,
+					13,
+					13,
+					13
+				],
+				"2": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"3": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"4": [
+					20,
+					30,
+					40,
+					50,
+					60,
+					70,
+					80
+				]
 			},
 			"mana": [
 				60,
@@ -362,15 +333,15 @@
 				100,
 				110
 			],
-			"cooldownTime": {
-				"0": 24,
-				"1": 22,
-				"2": 20,
-				"3": 18,
-				"4": 16,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				24,
+				22,
+				20,
+				18,
+				16,
+				14,
+				14
+			],
 			"name": "Remove Scurvy",
 			"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @Effect2Amount@% missing Health</healing>."
 		},
@@ -419,126 +390,106 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					3,
+					3,
+					3,
+					4,
+					4,
+					5,
+					5
+				],
+				"1": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"2": [
+					75,
+					75,
+					95,
+					115,
+					135,
+					155,
+					175
+				],
+				"3": [
+					40,
+					40,
+					50,
+					60,
+					70,
+					80,
+					90
+				],
+				"4": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"5": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"6": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"7": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"8": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"9": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				]
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Powder Keg",
 			"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @Effect5Amount@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @Effect2Amount@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @Effect10Amount@% Armor. Champions take an additional <physicalDamage>@Effect3Amount@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed."
 		},
@@ -688,66 +639,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"5": {},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"4": [
+					0,
+					1.5,
+					0.5,
+					0.5,
+					0,
+					0,
+					0
+				],
+				"6": [
+					300,
+					300,
+					300,
+					300,
+					300,
+					300,
+					300
+				],
+				"7": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"8": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"9": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				]
 			},
 			"mana": [
 				100,
@@ -757,15 +693,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 160,
-				"1": 160,
-				"2": 140,
-				"3": 120,
-				"4": 120,
-				"5": 120,
-				"6": 120
-			},
+			"cooldownTime": [
+				160,
+				160,
+				140,
+				120,
+				120,
+				120,
+				120
+			],
 			"name": "Cannon Barrage",
 			"tooltip": "Gangplank signals his ship to fire @TotalWavesTooltip@ waves of cannonballs anywhere on the map over @ZoneDuration@ seconds. Each wave <status>Slows</status> by @SlowPercent@% for @SlowDuration@ seconds and deals <magicDamage>@OneWaveDamage@ magic damage</magicDamage>. Maximum damage: @TotalDamageTooltip@<br><br>This Ability can be upgraded in the shop via <spellName>{{Spell_GangplankQWrapper_Name}}</spellName>.<br><br><spellName>Fire at Will</spellName>: Fires 6 additional waves of cannonballs.<br><spellName>Death's Daughter</spellName>: Fires a Mega-Cannonball that deals <trueDamage>@DeathsDaughterDamage@ true damage</trueDamage> and <status>Slows</status> by @DeathsDaughterSlow@% for @DeathsDaughterSlowDuration@ second.<br><spellName>Raise Morale</spellName>: Allies inside Cannon Barrage gain <speed>@RaiseMoraleHaste@% Move Speed</speed> for @RaiseMoraleHasteDuration@ seconds."
 		}

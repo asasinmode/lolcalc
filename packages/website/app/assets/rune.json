@@ -52,7 +52,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 9,
-											"mEndValue": 30
+											"mEndValue": 30,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									],
 									"mPrecision": 1,
@@ -63,7 +64,8 @@
 								"ASPerStack": {
 									"mFormulaParts": [
 										{
-											"mNumber": 0.06
+											"mNumber": 0.06,
+											"__type": "NumberCalculationPart"
 										}
 									],
 									"mDisplayAsPercent": true,
@@ -96,15 +98,18 @@
 										{
 											"mStartValue": 10,
 											"mEndValue": 130,
-											"mScaleByStatProgressionMultiplier": true
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "HealBonusADRatio"
+											"mDataValue": "HealBonusADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
-											"mDataValue": "HealAPRatio"
+											"mDataValue": "HealAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									],
 									"mRangedMultiplier": {
@@ -116,14 +121,16 @@
 										{
 											"mStartValue": 5,
 											"mEndValue": 100,
-											"mScaleByStatProgressionMultiplier": true
+											"mScaleByStatProgressionMultiplier": true,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								},
 								"MoveSpeedCalc": {
 									"mFormulaParts": [
 										{
-											"mDataValue": "MSBuff"
+											"mDataValue": "MSBuff",
+											"__type": "NamedDataValueCalculationPart"
 										}
 									],
 									"mDisplayAsPercent": true,
@@ -179,7 +186,8 @@
 													"mLevel": 11,
 													"mBonusPerLevelAtAndAfter": 2
 												}
-											]
+											],
+											"__type": "ByCharLevelBreakpointsCalculationPart"
 										}
 									]
 								}
@@ -199,7 +207,8 @@
 									"mFormulaParts": [
 										{
 											"mStat": 12,
-											"mDataValue": "TriumphMaxHealthRestored"
+											"mDataValue": "TriumphMaxHealthRestored",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -219,38 +228,39 @@
 									"mFormulaParts": [
 										{
 											"mValues": [
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{},
-												{}
-											]
+												6,
+												6,
+												6.8,
+												7.6,
+												8.4,
+												9.2,
+												10,
+												12,
+												14,
+												16,
+												18,
+												20,
+												23.2,
+												26.4,
+												29.6,
+												32.8,
+												36,
+												40,
+												44,
+												52,
+												56,
+												60,
+												60,
+												60,
+												60,
+												60,
+												60,
+												60,
+												60,
+												60,
+												60
+											],
+											"__type": "ByCharLevelFormulaCalculationPart"
 										}
 									],
 									"mPrecision": 1
@@ -367,15 +377,18 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 70,
-											"mEndValue": 240
+											"mEndValue": 240,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
-											"mDataValue": "APRatio"
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "BonusADRatio"
+											"mDataValue": "BonusADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -399,15 +412,18 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mDataValue": "BaseDamage"
+											"mDataValue": "BaseDamage",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
-											"mDataValue": "APRatio"
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "ADRatio"
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -433,7 +449,8 @@
 									},
 									"mFormulaParts": [
 										{
-											"mDataValue": "ASBoostMax"
+											"mDataValue": "ASBoostMax",
+											"__type": "NamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -443,26 +460,28 @@
 									},
 									"mFormulaParts": [
 										{
-											"mDataValue": "ASBoostRanged"
+											"mDataValue": "ASBoostRanged",
+											"__type": "NamedDataValueCalculationPart"
 										}
 									]
 								},
 								"ChampRange": {
 									"mDefaultGameCalculation": "{792cf56b}",
-									"mConditionalGameCalculation": "{06387172}",
-									"mConditionalCalculationRequirements": {}
+									"mConditionalGameCalculation": "{06387172}"
 								},
 								"{792cf56b}": {
 									"mFormulaParts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										}
 									]
 								},
 								"{06387172}": {
 									"mFormulaParts": [
 										{
-											"mNumber": 2
+											"mNumber": 2,
+											"__type": "NumberCalculationPart"
 										}
 									]
 								}
@@ -488,7 +507,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 10,
-											"mEndValue": 45
+											"mEndValue": 45,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -509,15 +529,18 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 16,
-											"mEndValue": 40
+											"mEndValue": 40,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
-											"mDataValue": "APRatio"
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "ADRatio"
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -541,7 +564,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 20,
-											"mEndValue": 80
+											"mEndValue": 80,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -564,20 +588,21 @@
 									"mSimpleTooltipCalculationDisplay": 5,
 									"mExpandedTooltipCalculationDisplay": 5,
 									"mDefaultGameCalculation": "{792cf56b}",
-									"mConditionalGameCalculation": "{06387172}",
-									"mConditionalCalculationRequirements": {}
+									"mConditionalGameCalculation": "{06387172}"
 								},
 								"{792cf56b}": {
 									"mFormulaParts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										}
 									]
 								},
 								"{06387172}": {
 									"mFormulaParts": [
 										{
-											"mNumber": 2
+											"mNumber": 2,
+											"__type": "NumberCalculationPart"
 										}
 									]
 								}
@@ -610,7 +635,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 30,
-											"mEndValue": 45
+											"mEndValue": 45,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								},
@@ -618,7 +644,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 45,
-											"mEndValue": 150
+											"mEndValue": 150,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -682,15 +709,18 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 10,
-											"mEndValue": 50
+											"mEndValue": 50,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
-											"mDataValue": "DamageAPRatio"
+											"mDataValue": "DamageAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "DamageADRatio"
+											"mDataValue": "DamageADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -699,15 +729,18 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 30,
-											"mEndValue": 100
+											"mEndValue": 100,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
-											"mDataValue": "ShieldRatio"
+											"mDataValue": "ShieldRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "ShieldRatioAD"
+											"mDataValue": "ShieldRatioAD",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -734,15 +767,18 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 30,
-											"mEndValue": 130
+											"mEndValue": 130,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
-											"mDataValue": "APRatio"
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "ADRatio"
+											"mDataValue": "ADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -756,7 +792,8 @@
 													"mStartValue": 20,
 													"mEndValue": 8
 												}
-											]
+											],
+											"__type": "ClampSubPartsCalculationPart"
 										}
 									]
 								}
@@ -783,7 +820,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 30,
-											"mEndValue": 10
+											"mEndValue": 10,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								},
@@ -792,7 +830,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 0.25,
-											"mEndValue": 0.5
+											"mEndValue": 0.5,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									],
 									"mDisplayAsPercent": true,
@@ -888,7 +927,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 3,
-											"mEndValue": 30
+											"mEndValue": 30,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -911,7 +951,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 20,
-											"mEndValue": 40
+											"mEndValue": 40,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -940,7 +981,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 13,
-											"mEndValue": 30
+											"mEndValue": 30,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -983,7 +1025,8 @@
 									"mFormulaParts": [
 										{
 											"mStat": 12,
-											"mDataValue": "PercentHealthDamage"
+											"mDataValue": "PercentHealthDamage",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									],
 									"mRangedMultiplier": {
@@ -995,7 +1038,8 @@
 									"mFormulaParts": [
 										{
 											"mStat": 12,
-											"mDataValue": "PercentHealthHeal"
+											"mDataValue": "PercentHealthHeal",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									],
 									"mRangedMultiplier": {
@@ -1024,7 +1068,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 80,
-											"mEndValue": 150
+											"mEndValue": 150,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								},
@@ -1032,12 +1077,14 @@
 									"mSimpleTooltipCalculationDisplay": 2,
 									"mFormulaParts": [
 										{
-											"mDataValue": "FlatResists"
+											"mDataValue": "FlatResists",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 1,
 											"mStatFormula": 2,
-											"mDataValue": "PercentBonusResist"
+											"mDataValue": "PercentBonusResist",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -1045,12 +1092,14 @@
 									"mSimpleTooltipCalculationDisplay": 2,
 									"mFormulaParts": [
 										{
-											"mDataValue": "FlatResists"
+											"mDataValue": "FlatResists",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 6,
 											"mStatFormula": 2,
-											"mDataValue": "PercentBonusResist"
+											"mDataValue": "PercentBonusResist",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -1059,12 +1108,14 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 25,
-											"mEndValue": 120
+											"mEndValue": 120,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
 											"mStat": 12,
 											"mStatFormula": 2,
-											"mDataValue": "HealthRatio"
+											"mDataValue": "HealthRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -1092,7 +1143,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 50,
-											"mEndValue": 165
+											"mEndValue": 165,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								},
@@ -1101,16 +1153,19 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 45,
-											"mEndValue": 180
+											"mEndValue": 180,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										},
 										{
 											"mStatFormula": 2,
-											"mDataValue": "APRatio"
+											"mDataValue": "APRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 12,
 											"mStatFormula": 2,
-											"mDataValue": "HPRatio"
+											"mDataValue": "HPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -1119,7 +1174,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 90,
-											"mEndValue": 40
+											"mEndValue": 40,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -1148,19 +1204,20 @@
 								"DamageCalc": {
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mDefaultGameCalculation": "{4e3f20aa}",
-									"mConditionalGameCalculation": "{5fecac03}",
-									"mConditionalCalculationRequirements": {}
+									"mConditionalGameCalculation": "{5fecac03}"
 								},
 								"{4e3f20aa}": {
 									"mSimpleTooltipCalculationDisplay": 4,
 									"{72c5c2a8}": 0,
 									"mFormulaParts": [
 										{
-											"mDataValue": "BaseDamageRanged"
+											"mDataValue": "BaseDamageRanged",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 12,
-											"mDataValue": "HPRatioRanged"
+											"mDataValue": "HPRatioRanged",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -1169,11 +1226,13 @@
 									"{72c5c2a8}": 0,
 									"mFormulaParts": [
 										{
-											"mDataValue": "BaseDamageMelee"
+											"mDataValue": "BaseDamageMelee",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 12,
-											"mDataValue": "HPRatioMelee"
+											"mDataValue": "HPRatioMelee",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -1198,7 +1257,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 10,
-											"mEndValue": 50
+											"mEndValue": 50,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									],
 									"mRangedMultiplier": {
@@ -1235,11 +1295,13 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mDataValue": "ArmorBase"
+											"mDataValue": "ArmorBase",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 1,
-											"mDataValue": "ExtraResist"
+											"mDataValue": "ExtraResist",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								},
@@ -1247,11 +1309,13 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mDataValue": "MRBase"
+											"mDataValue": "MRBase",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 6,
-											"mDataValue": "ExtraResist"
+											"mDataValue": "ExtraResist",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									]
 								}
@@ -1284,7 +1348,8 @@
 									"mFormulaParts": [
 										{
 											"mStartValue": 30,
-											"mEndValue": 60
+											"mEndValue": 60,
+											"__type": "ByCharLevelInterpolationCalculationPart"
 										}
 									]
 								}
@@ -1358,19 +1423,23 @@
 									"mSimpleTooltipCalculationDisplay": 4,
 									"mFormulaParts": [
 										{
-											"mDataValue": "SlowZoneSlowBase"
+											"mDataValue": "SlowZoneSlowBase",
+											"__type": "NamedDataValueCalculationPart"
 										},
 										{
-											"mDataValue": "SlowZoneSlowAPRatio"
+											"mDataValue": "SlowZoneSlowAPRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 2,
 											"mStatFormula": 2,
-											"mDataValue": "SlowZoneSlowbADRatio"
+											"mDataValue": "SlowZoneSlowbADRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										},
 										{
 											"mStat": 34,
-											"mDataValue": "SlowZoneSlowHealShieldRatio"
+											"mDataValue": "SlowZoneSlowHealShieldRatio",
+											"__type": "StatByNamedDataValueCalculationPart"
 										}
 									],
 									"mDisplayAsPercent": true,
@@ -1425,7 +1494,8 @@
 											},
 											"mPart2": {
 												"mDataValue": "ModesCooldownReduction"
-											}
+											},
+											"__type": "ProductOfSubPartsCalculationPart"
 										}
 									]
 								},
@@ -1433,15 +1503,15 @@
 									"mSimpleTooltipCalculationDisplay": 5,
 									"mExpandedTooltipCalculationDisplay": 5,
 									"mDefaultGameCalculation": "{792cf56b}",
-									"mConditionalGameCalculation": "{06387172}",
-									"mConditionalCalculationRequirements": {}
+									"mConditionalGameCalculation": "{06387172}"
 								},
 								"MeleeItemCalcValue": {
 									"mSimpleTooltipCalculationDisplay": 6,
 									"mExpandedTooltipCalculationDisplay": 6,
 									"mFormulaParts": [
 										{
-											"mDataValue": "{b50bc5ec}"
+											"mDataValue": "{b50bc5ec}",
+											"__type": "NamedDataValueCalculationPart"
 										}
 									],
 									"mDisplayAsPercent": true
@@ -1455,14 +1525,16 @@
 								"{792cf56b}": {
 									"mFormulaParts": [
 										{
-											"mNumber": 1
+											"mNumber": 1,
+											"__type": "NumberCalculationPart"
 										}
 									]
 								},
 								"{06387172}": {
 									"mFormulaParts": [
 										{
-											"mNumber": 2
+											"mNumber": 2,
+											"__type": "NumberCalculationPart"
 										}
 									]
 								}

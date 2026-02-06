@@ -124,76 +124,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9,
+					0.9
+				],
+				"1": [
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7,
+					0.7
+				],
+				"2": [
+					36,
+					36,
+					36,
+					36,
+					36,
+					36,
+					36
+				],
+				"3": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"5": [
+					8,
+					8,
+					13,
+					8,
+					8,
+					8,
+					8
+				],
+				"6": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				]
 			},
 			"name": "Assassin's Mark",
 			"tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>.",
@@ -294,15 +278,15 @@
 				70,
 				60
 			],
-			"cooldownTime": {
-				"0": 1.5,
-				"1": 1.5,
-				"2": 1.5,
-				"3": 1.5,
-				"4": 1.5,
-				"5": 1.5,
-				"6": 1.5
-			},
+			"cooldownTime": [
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5,
+				1.5
+			],
 			"name": "Five Point Strike",
 			"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds."
 		},
@@ -375,96 +359,79 @@
 				]
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {}
+				"0": [
+					140,
+					140,
+					140,
+					140,
+					140,
+					140,
+					140
+				],
+				"1": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"3": [
+					250,
+					250,
+					250,
+					250,
+					250,
+					250,
+					250
+				],
+				"4": [
+					60,
+					60,
+					65,
+					70,
+					75,
+					80,
+					80
+				],
+				"5": [
+					0.2,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.45
+				],
+				"6": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"8": [
+					5,
+					5,
+					5.5,
+					6,
+					6.5,
+					7,
+					7.5
+				]
 			},
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 19,
-				"3": 18,
-				"4": 17,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				20,
+				20,
+				19,
+				18,
+				17,
+				16,
+				16
+			],
 			"name": "Twilight Shroud",
 			"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>."
 		},
@@ -579,15 +546,15 @@
 				30,
 				30
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 14.5,
-				"3": 13,
-				"4": 11.5,
-				"5": 10,
-				"6": 8.5
-			},
+			"cooldownTime": [
+				16,
+				16,
+				14.5,
+				13,
+				11.5,
+				10,
+				8.5
+			],
 			"name": "Shuriken Flip",
 			"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>."
 		},
@@ -710,36 +677,25 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"2": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 90,
-				"3": 60,
-				"4": 60,
-				"5": 60,
-				"6": 60
-			},
+			"cooldownTime": [
+				120,
+				120,
+				90,
+				60,
+				60,
+				60,
+				60
+			],
 			"name": "Perfect Execution",
 			"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health."
 		}

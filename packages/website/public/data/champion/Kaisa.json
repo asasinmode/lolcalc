@@ -406,86 +406,69 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					40,
+					40,
+					55,
+					70,
+					85,
+					100,
+					115
+				],
+				"1": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"2": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				],
+				"3": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"4": [
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35,
+					0.35
+				],
+				"5": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"6": [
+					12,
+					12,
+					12,
+					12,
+					12,
+					12,
+					12
+				]
 			},
 			"mana": [
 				55,
@@ -495,15 +478,15 @@
 				55,
 				55
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 10,
-				"2": 9,
-				"3": 8,
-				"4": 7,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				10,
+				10,
+				9,
+				8,
+				7,
+				6,
+				6
+			],
 			"name": "Icathian Rain",
 			"tooltip": "Kai'Sa launches @Effect2Amount@ missiles that split among nearby enemies, each dealing <physicalDamage>@TotalIndividualMissileDamage@ physical damage</physicalDamage>, up to a maximum of @MaxDamageDisplay@. Additional missile hits on champions or monsters deal @ExtraHitReduction*100@% damage.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead fires @Effect7Amount@ missiles.<br>Current: <physicalDamage>@f11.1@/@Effect6Amount@ Bonus Attack Damage</physicalDamage>"
 		},
@@ -531,66 +514,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					30,
+					30,
+					55,
+					80,
+					105,
+					130,
+					130
+				],
+				"1": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"2": [
+					75,
+					75,
+					75,
+					75,
+					75,
+					75,
+					75
+				],
+				"3": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"4": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
 			},
 			"mana": [
 				55,
@@ -600,15 +568,15 @@
 				75,
 				85
 			],
-			"cooldownTime": {
-				"0": 26,
-				"1": 22,
-				"2": 20,
-				"3": 18,
-				"4": 16,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				26,
+				22,
+				20,
+				18,
+				16,
+				14,
+				14
+			],
 			"name": "Void Seeker",
 			"tooltip": "Kai'Sa fires a void blast that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>, applies @Effect4Amount@ stacks of <keywordMajor>Plasma</keywordMajor>, and grants <keywordStealth>True Sight</keywordStealth> of the first enemy hit for @spell.KaisaPassive:PDuration@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead applies @Effect5Amount@ stacks of <keywordMajor>Plasma</keywordMajor> and hitting a champion reduces the Cooldown by @Effect3Amount@%.<br>Current: <scaleAP>@f2.1@/@Effect2Amount@ Ability Power</scaleAP>"
 		},
@@ -645,7 +613,6 @@
 					"tooltipOnly": true,
 					"mFormulaParts": [
 						{
-							"mCeiling": null,
 							"mFloor": 0.6,
 							"mSubparts": [
 								{
@@ -663,96 +630,78 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {},
-				"9": {}
+				"0": [
+					0.55,
+					0.55,
+					0.6,
+					0.65,
+					0.7,
+					0.75,
+					0.75
+				],
+				"1": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"2": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				],
+				"3": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"4": [
+					0.4,
+					0.4,
+					0.5,
+					0.6,
+					0.7,
+					0.8,
+					0.9
+				],
+				"5": [
+					100,
+					100,
+					100,
+					100,
+					100,
+					100,
+					100
+				],
+				"6": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"7": [
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6,
+					0.6
+				]
 			},
 			"mana": [
 				30,
@@ -762,15 +711,15 @@
 				30,
 				30
 			],
-			"cooldownTime": {
-				"0": 17,
-				"1": 16,
-				"2": 14.5,
-				"3": 13,
-				"4": 11.5,
-				"5": 10,
-				"6": 11
-			},
+			"cooldownTime": [
+				17,
+				16,
+				14.5,
+				13,
+				11.5,
+				10,
+				11
+			],
 			"name": "Supercharge",
 			"tooltip": "Kai'Sa supercharges her void energy, gaining <speed>@TotalMoveSpeed@ Move Speed</speed> and becoming Ghosted while charging, then gaining <attackSpeed>@Effect5Amount*100@% Attack Speed</attackSpeed> for @Effect2Amount@ seconds.<br><br>Attacks reduce this Ability's Cooldown by @Effect4Amount@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa also becomes <keywordStealth>Invisible</keywordStealth> for @Effect7Amount@ seconds.<br>Current: <attackSpeed>@f10.1@%/@Effect6Amount@% Bonus Attack Speed</attackSpeed>"
 		},
@@ -851,15 +800,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 130,
-				"1": 130,
-				"2": 100,
-				"3": 70,
-				"4": 70,
-				"5": 70,
-				"6": 70
-			},
+			"cooldownTime": [
+				130,
+				130,
+				100,
+				70,
+				70,
+				70,
+				70
+			],
 			"name": "Killer Instinct",
 			"tooltip": "Kai'Sa warps near an enemy champion affected by <keywordMajor>Plasma</keywordMajor> and gains <shield>@RCalculatedShieldValue@ Shield</shield> for @RShieldDuration@ seconds."
 		}

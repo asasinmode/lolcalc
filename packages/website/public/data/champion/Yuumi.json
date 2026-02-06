@@ -313,15 +313,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 6.5,
-				"1": 6.5,
-				"2": 6.5,
-				"3": 6.5,
-				"4": 6.5,
-				"5": 6.5,
-				"6": 6.5
-			},
+			"cooldownTime": [
+				6.5,
+				6.5,
+				6.5,
+				6.5,
+				6.5,
+				6.5,
+				6.5
+			],
 			"name": "Prowling Projectile",
 			"tooltip": "Yuumi summons an errant missile that deals <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> to the first enemy and <status>Slows</status> the target for @SlowAmount@%.<br><br>If cast while <keywordMajor>Attached</keywordMajor>, Yuumi can control the missile using her mouse for a short period before it accelerates in a straight line. The accelerated missile deals <magicDamage>@TotalMissileDamageEmpowered@ magic damage</magicDamage> and <status>Slows</status> the target for @EmpoweredSlowAmount@% for @EmpoweredSlowDuration@ seconds, instead.<br><br><keywordMajor>Best Friend Bonus:</keywordMajor> <spellName>Prowling Projectile's</spellName> <status>Slow</status> will always be enhanced and hitting an enemy champion also grants them <magicDamage>@OnHitDamageCalc@ magic damage</magicDamage> <OnHit>On-Hit %i:OnHit%</OnHit> for @BuffDuration@ seconds.<br><br><rules>The bonus On-Hit damage can be increased by @AllyCritChanceMaxAmp*100@% based her ally's Critical Strike Chance.</rules>"
 		},
@@ -436,15 +436,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "You and Me!",
 			"tooltip": "<spellPassive>Passive:</spellPassive> While on her <keywordMajor>Best Friend</keywordMajor>, Yuumi gains an additional <keywordMajor>@HealAndShieldPower*100@% Heal & Shield Power</keywordMajor> and her ally also restores <healing>@HealthOnHit@ health</healing> <OnHit>On-Hit %i:OnHit%</OnHit>.<br><br><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <keywordMajor>Attaches</keywordMajor> to them. While Yuumi is <keywordMajor>Attached</keywordMajor>, she follows her partner's movement and is Untargetable except from towers.<br><br><status>Immobilizing</status> effects on Yuumi place this Ability on a @CCAttachLockout@ second Cooldown."
 		},
@@ -786,15 +786,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 110,
-				"3": 100,
-				"4": 100,
-				"5": 100,
-				"6": 100
-			},
+			"cooldownTime": [
+				120,
+				120,
+				110,
+				100,
+				100,
+				100,
+				100
+			],
 			"name": "Final Chapter",
 			"tooltip": "Yuumi channels for @UltDuration@ seconds, launching @NumberOfWaves@ magical waves affecting both teams. If initially cast while <keywordMajor>Attached</keywordMajor>, Yuumi can steer the waves to follow her mouse.<br><br>Enemies struck are dealt <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and <status>Slowed</status> by @BaseSlow*-100@% for @CCDuration@ seconds, increased by @BonusSlowPerWave*-100@% per wave hit.<br><br>Ally champions are healed for <healing>@TotalHealPerWave@ health</healing> per wave. Excess healing is converted to a <shield>Shield</shield> instead.<br><br><keywordMajor>Best Friend Bonus:</keywordMajor> For her <keywordMajor>Best Friend</keywordMajor>, the heal is increased to <healing>@EnhancedHealPerWave@ health</healing>.<br><br><rules>Casting <spellName>You and Me!</spellName> will locks the waves in the current direction.<br>Yuumi can move and cast <spellName>Zoomies</spellName> while channeling.</rules><br>"
 		}

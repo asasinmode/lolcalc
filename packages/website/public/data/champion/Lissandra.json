@@ -140,36 +140,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"2": [
+					-0.16,
+					-0.2,
+					-0.24,
+					-0.28,
+					-0.32,
+					-0.36,
+					-0.4
+				]
 			},
 			"mana": [
 				55,
@@ -179,15 +167,15 @@
 				75,
 				80
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 8,
-				"2": 7,
-				"3": 6,
-				"4": 5,
-				"5": 4,
-				"6": 3
-			},
+			"cooldownTime": [
+				9,
+				8,
+				7,
+				6,
+				5,
+				4,
+				3
+			],
 			"name": "Ice Shard",
 			"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them."
 		},
@@ -209,56 +197,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					30,
+					70,
+					105,
+					140,
+					175,
+					210,
+					245
+				],
+				"1": [
+					1.25,
+					1.25,
+					1.35,
+					1.45,
+					1.55,
+					1.65,
+					1.65
+				],
+				"2": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"3": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				]
 			},
 			"mana": [
 				40,
@@ -268,15 +242,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 10,
-				"2": 9.5,
-				"3": 9,
-				"4": 8.5,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				10,
+				10,
+				9.5,
+				9,
+				8.5,
+				8,
+				8
+			],
 			"name": "Ring of Frost",
 			"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -298,56 +272,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					25,
+					70,
+					105,
+					140,
+					175,
+					210,
+					245
+				],
+				"1": [
+					15,
+					14,
+					13,
+					12,
+					11,
+					10,
+					9
+				],
+				"2": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"3": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
 			"mana": [
 				80,
@@ -357,15 +317,15 @@
 				100,
 				105
 			],
-			"cooldownTime": {
-				"0": 27,
-				"1": 24,
-				"2": 21,
-				"3": 18,
-				"4": 15,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				27,
+				24,
+				21,
+				18,
+				15,
+				12,
+				12
+			],
 			"name": "Glacial Path",
 			"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location."
 		},
@@ -507,15 +467,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 10,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				10,
+				120,
+				100,
+				80,
+				10,
+				10,
+				10
+			],
 			"name": "Frozen Tomb",
 			"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%."
 		}

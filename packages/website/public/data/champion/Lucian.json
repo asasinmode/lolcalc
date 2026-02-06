@@ -232,26 +232,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"3": [
+					0.41,
+					0.41,
+					0.41,
+					0.41,
+					0.41,
+					0.41,
+					0.41
+				]
 			},
 			"mana": [
 				48,
@@ -261,15 +250,15 @@
 				80,
 				90
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 9,
-				"2": 8,
-				"3": 7,
-				"4": 6,
-				"5": 5,
-				"6": 5
-			},
+			"cooldownTime": [
+				10,
+				9,
+				8,
+				7,
+				6,
+				5,
+				5
+			],
 			"name": "Piercing Light",
 			"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.<br>"
 		},
@@ -302,106 +291,87 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					75,
+					75,
+					110,
+					145,
+					180,
+					215,
+					215
+				],
+				"1": [
+					55,
+					60,
+					65,
+					70,
+					75,
+					80,
+					85
+				],
+				"2": [
+					900,
+					900,
+					900,
+					900,
+					900,
+					900,
+					900
+				],
+				"4": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"5": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"6": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"7": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"8": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"9": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				]
 			},
 			"mana": [
 				60,
@@ -411,15 +381,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 14,
-				"2": 13,
-				"3": 12,
-				"4": 11,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				15,
+				14,
+				13,
+				12,
+				11,
+				10,
+				10
+			],
 			"name": "Ardent Blaze",
 			"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@Effect2Amount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>."
 		},
@@ -427,66 +397,51 @@
 			"image": "assets/characters/lucian/hud/icons2d/lucian_e.png",
 			"maxLevel": 5,
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"1": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"2": [
+					425,
+					425,
+					425,
+					425,
+					425,
+					425,
+					425
+				],
+				"3": [
+					200,
+					200,
+					200,
+					200,
+					200,
+					200,
+					200
+				],
+				"4": [
+					1350,
+					1350,
+					1350,
+					1350,
+					1350,
+					1350,
+					1350
+				]
 			},
 			"mana": [
 				40,
@@ -496,15 +451,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 18,
-				"1": 18,
-				"2": 17,
-				"3": 16,
-				"4": 15,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				18,
+				18,
+				17,
+				16,
+				15,
+				14,
+				14
+			],
 			"name": "Relentless Pursuit",
 			"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @Effect1Amount@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@Effect2Amount@ seconds for champions). "
 		},
@@ -673,15 +628,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 110,
-				"2": 100,
-				"3": 90,
-				"4": 10,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				10,
+				110,
+				100,
+				90,
+				10,
+				10,
+				10
+			],
 			"name": "The Culling",
 			"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage><br>"
 		}

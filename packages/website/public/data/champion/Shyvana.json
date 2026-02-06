@@ -150,15 +150,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 8,
-				"1": 8,
-				"2": 7.5,
-				"3": 7,
-				"4": 6.5,
-				"5": 6,
-				"6": 5.5
-			},
+			"cooldownTime": [
+				8,
+				8,
+				7.5,
+				7,
+				6.5,
+				6,
+				5.5
+			],
 			"name": "Twin Bite",
 			"tooltip": "Shyvana's next Attack strikes twice, dealing <physicalDamage>@FirstHitDamageCalc@</physicalDamage> then <physicalDamage>@SecondHitDamageCalc@ physical damage</physicalDamage>. Her next 2 Attacks gain<speed> @BonusAS@% Attack Speed</speed>.<br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ seconds.<br><br><keywordMajor>Dragon Form:</keywordMajor> The empowered Attacks hit all units in front of Shyvana.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>"
 		},
@@ -318,15 +318,15 @@
 					"mDisplayAsPercent": true
 				}
 			},
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 12,
-				"3": 12,
-				"4": 12,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12
+			],
 			"name": "Burnout",
 			"tooltip": "Shyvana summons a flame storm around her, gaining <speed>@FinalMSPerc@ decaying Move Speed</speed> and dealing <magicDamage>@DamagePerTickCalc@ magic damage per second</magicDamage> for @BaseDuration@ seconds. <br><br>The flame storm also causes Shyvana's Attacks to deal an additional <magicDamage>@DamageOnHitCalc@ magic damage</magicDamage> to surrounding enemies and extend this Ability's duration by @BonusDurationOnHit@ second.<br><br><keywordMajor>Dragon Form:</keywordMajor> The size of the flame storm is increased."
 		},
@@ -532,36 +532,25 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"5": [
+					0,
+					60,
+					100,
+					140,
+					180,
+					220,
+					260
+				]
 			},
-			"cooldownTime": {
-				"0": 13,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				13,
+				12,
+				11,
+				10,
+				9,
+				8,
+				8
+			],
 			"name": "Flame Breath",
 			"tooltip": "Shyvana unleashes a fireball that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and marks for @MarkDuration@ seconds. The fireball stops on the first champion hit.<br><br>Shyvana's Attacks against marked targets deal an additional <magicDamage>@PercentHPDamageOnHit@% max Health magic damage</magicDamage>.<br><br><keywordMajor>Dragon Form:</keywordMajor> The fireball explodes once it ends, dealing an additional <magicDamage>@DragonExplosionCalc@ magic damage</magicDamage> and scorching the earth, dealing <magicDamage>@DragonDamageTotalCalc@ magic damage</magicDamage> over 4 seconds."
 		},
@@ -701,15 +690,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Dragon's Descent",
 			"tooltip": "<spellPassive>Passive: </spellPassive>Shyvana generates <keywordMajor>@FuryGainPerTick@ Fury</keywordMajor> every second, and Attacks generate an extra <keywordMajor>@FuryGainOnHit@ Fury</keywordMajor>.<br><br><spellActive>Active: </spellActive>Shyvana transforms into <keywordMajor>Dragon Form</keywordMajor>, gaining <healing>@BonusHP@ max Health</healing> and flying forward, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Knocking</status> enemies toward her target location."
 		}

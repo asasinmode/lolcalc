@@ -105,46 +105,33 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					35,
+					65,
+					95,
+					125,
+					155,
+					185,
+					215
+				],
+				"2": [
+					80,
+					80,
+					110,
+					140,
+					170,
+					200,
+					230
+				],
+				"3": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
 			},
 			"mana": [
 				60,
@@ -154,15 +141,15 @@
 				80,
 				80
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 10,
-				"2": 9.5,
-				"3": 9,
-				"4": 8.5,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				10,
+				10,
+				9.5,
+				9,
+				8.5,
+				8,
+				8
+			],
 			"name": "Null Sphere",
 			"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds."
 		},
@@ -234,56 +221,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					4,
+					4,
+					4.5,
+					5,
+					5.5,
+					6,
+					6
+				],
+				"1": [
+					20,
+					20,
+					20,
+					20,
+					20,
+					20,
+					20
+				],
+				"2": [
+					25,
+					50,
+					75,
+					100,
+					125,
+					150,
+					175
+				],
+				"3": [
+					20,
+					20,
+					22.5,
+					25,
+					27.5,
+					30,
+					30
+				]
 			},
 			"mana": [
 				1,
@@ -293,15 +266,15 @@
 				1,
 				1
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Nether Blade",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions."
 		},
@@ -352,36 +325,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					40,
+					50,
+					60,
+					70,
+					80,
+					90,
+					100
+				],
+				"2": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
 			"mana": [
 				60,
@@ -391,15 +352,15 @@
 				80,
 				85
 			],
-			"cooldownTime": {
-				"0": 22,
-				"1": 21,
-				"2": 20,
-				"3": 19,
-				"4": 18,
-				"5": 17,
-				"6": 16
-			},
+			"cooldownTime": [
+				22,
+				21,
+				20,
+				19,
+				18,
+				17,
+				16
+			],
 			"name": "Force Pulse",
 			"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second."
 		},
@@ -558,15 +519,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 5,
-				"1": 5,
-				"2": 3.5,
-				"3": 2,
-				"4": 2,
-				"5": 2,
-				"6": 2
-			},
+			"cooldownTime": [
+				5,
+				5,
+				3.5,
+				2,
+				2,
+				2,
+				2
+			],
 			"name": "Riftwalk",
 			"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times."
 		}

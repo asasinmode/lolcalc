@@ -205,15 +205,15 @@
 				25,
 				25
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 9,
-				"2": 8,
-				"3": 7,
-				"4": 6,
-				"5": 5,
-				"6": 5
-			},
+			"cooldownTime": [
+				9,
+				9,
+				8,
+				7,
+				6,
+				5,
+				5
+			],
 			"name": "Precision Protocol",
 			"tooltip": "Camille's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and grants her <speed>@MSBonus*100@% Move Speed</speed> for @MSDuration@ second. This ability can be <recast>Recast</recast> in the next @QTotalRecastTime@ seconds.<br><br>If the <recast>Recast</recast> Attack hits at least @QRampUpTime@ seconds after the first, the bonus damage is increased to <physicalDamage>@EmpoweredBonusDamage@</physicalDamage> and @DamageConversionPercentage@ of the Attack's damage is converted into <trueDamage>true damage</trueDamage>.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>"
 		},
@@ -378,15 +378,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 14,
-				"3": 13,
-				"4": 12,
-				"5": 11,
-				"6": 11
-			},
+			"cooldownTime": [
+				15,
+				15,
+				14,
+				13,
+				12,
+				11,
+				11
+			],
 			"name": "Tactical Sweep",
 			"tooltip": "Camille winds up and slices, dealing <physicalDamage>@BaseDamageTotal@ physical damage</physicalDamage>.<br><br>Enemies hit by the outer half are <status>Slowed</status> by @SlowPercentage@% decaying over @SlowDuration@ seconds, and they take an additional <physicalDamage>@OuterEdgeTooltip@ max Health physical damage</physicalDamage>. Camille restores <healing>@OuterConeHealingRatio@% of the bonus damage dealt to champions as Health</healing>."
 		},
@@ -518,15 +518,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 15,
-				"3": 14,
-				"4": 13,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				16,
+				16,
+				15,
+				14,
+				13,
+				12,
+				12
+			],
 			"name": "Hookshot",
 			"tooltip": "Camille fires a hookshot that attaches to terrain, pulling her to it for 1 second and allowing this Ability to be <recast>Recast</recast>.<br><br><recast>Recast:</recast> Camille dashes from the wall, colliding with the first enemy champion hit. Upon landing, she deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to nearby enemies and <status>Stuns</status> enemy champions for @KnockupDuration@ seconds. Dashes towards enemy champions travel twice as far and grant <attackSpeed>@ASBuff*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds on impact."
 		},
@@ -570,15 +570,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 140,
-				"1": 140,
-				"2": 115,
-				"3": 90,
-				"4": 0,
-				"5": 0,
-				"6": 70
-			},
+			"cooldownTime": [
+				140,
+				140,
+				115,
+				90,
+				0,
+				0,
+				70
+			],
 			"name": "The Hextech Ultimatum",
 			"tooltip": "Camille briefly becomes Untargetable and leaps onto an enemy champion, interrupting channels and locking them into an area they cannot escape by any means for @RDuration@ seconds. Other nearby enemies are <status>Knocked Away</status>. Her Attacks against the trapped enemy deal an additional <magicDamage>@RPercentCurrentHPDamage@% current Health magic damage</magicDamage>."
 		}

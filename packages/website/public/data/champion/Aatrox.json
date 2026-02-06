@@ -279,15 +279,15 @@
 					"mModifiedGameCalculation": "QDamage"
 				}
 			},
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 12,
-				"3": 10,
-				"4": 8,
-				"5": 6,
-				"6": 4
-			},
+			"cooldownTime": [
+				14,
+				14,
+				12,
+				10,
+				8,
+				6,
+				4
+			],
 			"name": "The Darkin Blade",
 			"tooltip": "Aatrox slams his greatsword, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>. If they are hit on the edge, they are briefly <status>Knocked Up</status> and they take <physicalDamage>@QEdgeDamage@</physicalDamage> instead. This Ability can be <recast>Recast</recast> twice, each one changing shape and dealing 25% more damage than the previous one."
 		},
@@ -356,15 +356,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 18,
-				"3": 16,
-				"4": 14,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				20,
+				20,
+				18,
+				16,
+				14,
+				12,
+				12
+			],
 			"name": "Infernal Chains",
 			"tooltip": "Aatrox fires a chain, <status>Slowing</status> the first enemy hit by @WSlowPercentage*-100@% for @WSlowDuration@ seconds and dealing <physicalDamage>@WDamage@ physical damage</physicalDamage>. Champions and large jungle monsters have @WSlowDuration@ seconds to leave the impact area or be <status>Pulled</status> back to the center and damaged again for the same amount."
 		},
@@ -484,15 +484,15 @@
 					"mPrecision": 1
 				}
 			},
-			"cooldownTime": {
-				"0": 9,
-				"1": 9,
-				"2": 8,
-				"3": 7,
-				"4": 6,
-				"5": 5,
-				"6": 4
-			},
+			"cooldownTime": [
+				9,
+				9,
+				8,
+				7,
+				6,
+				5,
+				4
+			],
 			"name": "Umbral Dash",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Aatrox heals for <lifeSteal>@TotalEVamp@</lifeSteal> of the damage he deals to Champions.<br><br><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities."
 		},
@@ -627,15 +627,15 @@
 					1
 				]
 			},
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				120,
+				120,
+				100,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "World Ender",
 			"tooltip": "Aatrox reveals his true demonic form, <status>Fearing</status> nearby minions for @RMinionFearDuration@ seconds and gaining <speed>@RMovementSpeedBonus*100@% Move Speed</speed> decaying over @RDuration@ seconds. He also gains <scaleAD>@RTotalADAmp*100@% Attack Damage</scaleAD> and increases <healing>self-healing by @RHealingAmp*100@%</healing> for the duration.<br><br>Champion takedowns extend the duration of this effect by @RExtension@ seconds and refresh the <speed>Move Speed</speed> effect."
 		}

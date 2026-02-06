@@ -74,37 +74,37 @@
 					"mFormulaParts": [
 						{
 							"mValues": [
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{},
-								{}
+								10,
+								17,
+								24,
+								31,
+								38,
+								45,
+								52,
+								59,
+								66,
+								73,
+								80,
+								87,
+								94,
+								101,
+								108,
+								115,
+								122,
+								129,
+								136,
+								143,
+								150,
+								157,
+								164,
+								171,
+								178,
+								185,
+								192,
+								199,
+								206,
+								213,
+								220
 							],
 							"__type": "ByCharLevelFormulaCalculationPart"
 						},
@@ -117,15 +117,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Unseen Threat",
 			"tooltip": "When Kha'Zix is not visible to the enemy team, his next Attack against a champion deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Enemies with no nearby allies become <keywordMajor>Isolated</keywordMajor>."
 		},
@@ -163,12 +163,7 @@
 					]
 				},
 				"{8b6fe763}": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"__type": "NumberCalculationPart"
-						}
-					]
+					"tooltipOnly": true
 				},
 				"IsEvolved": {
 					"tooltipOnly": true,
@@ -201,56 +196,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					80,
+					80,
+					105,
+					130,
+					155,
+					180,
+					180
+				],
+				"1": [
+					110,
+					110,
+					110,
+					110,
+					110,
+					110,
+					110
+				],
+				"2": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"3": [
+					45,
+					45,
+					45,
+					45,
+					45,
+					45,
+					45
+				]
 			},
 			"mana": [
 				20,
@@ -260,15 +241,15 @@
 				20,
 				20
 			],
-			"cooldownTime": {
-				"0": 4,
-				"1": 4,
-				"2": 4,
-				"3": 4,
-				"4": 4,
-				"5": 4,
-				"6": 4
-			},
+			"cooldownTime": [
+				4,
+				4,
+				4,
+				4,
+				4,
+				4,
+				4
+			],
 			"name": "Taste Their Fear",
 			"tooltip": "{{Spell_KhazixQ_Tooltip_@IsEvolved@}}",
 			"tooltipExtended": "{{Spell_KhazixQ_Tooltip_0}}<br><br>{{Spell_KhazixQ_Tooltip_1}}"
@@ -345,12 +326,7 @@
 				},
 				"{8b6fe763}": {
 					"mExpandedTooltipCalculationDisplay": 5,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"__type": "NumberCalculationPart"
-						}
-					]
+					"tooltipOnly": true
 				},
 				"IsEvolved": {
 					"mExpandedTooltipCalculationDisplay": 5,
@@ -389,76 +365,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					75,
+					75,
+					105,
+					135,
+					165,
+					195,
+					195
+				],
+				"1": [
+					35,
+					55,
+					75,
+					95,
+					115,
+					135,
+					155
+				],
+				"2": [
+					40,
+					40,
+					40,
+					40,
+					40,
+					40,
+					40
+				],
+				"3": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"5": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"6": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				]
 			},
 			"mana": [
 				55,
@@ -468,15 +428,15 @@
 				75,
 				80
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 9,
-				"2": 9,
-				"3": 9,
-				"4": 9,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				9,
+				9,
+				9,
+				9,
+				9,
+				9,
+				9
+			],
 			"name": "Void Spike",
 			"tooltip": "{{Spell_KhazixW_Tooltip_@IsEvolved@}}",
 			"tooltipExtended": "{{Spell_KhazixW_Tooltip_0}}<br><br>{{Spell_KhazixW_Tooltip_1}}"
@@ -525,12 +485,7 @@
 				},
 				"{8b6fe763}": {
 					"mExpandedTooltipCalculationDisplay": 1,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"__type": "NumberCalculationPart"
-						}
-					]
+					"tooltipOnly": true
 				},
 				"IsEvolved": {
 					"mExpandedTooltipCalculationDisplay": 5,
@@ -557,56 +512,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					30,
+					65,
+					100,
+					135,
+					170,
+					205,
+					240
+				],
+				"1": [
+					25,
+					30,
+					35,
+					40,
+					45,
+					50,
+					55
+				],
+				"2": [
+					10,
+					10,
+					10,
+					10,
+					10,
+					10,
+					10
+				],
+				"3": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
 			},
 			"mana": [
 				50,
@@ -616,15 +557,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 22,
-				"1": 20,
-				"2": 18,
-				"3": 16,
-				"4": 14,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				22,
+				20,
+				18,
+				16,
+				14,
+				12,
+				12
+			],
 			"name": "Leap",
 			"tooltip": "{{Spell_KhazixE_Tooltip_@IsEvolved@}}",
 			"tooltipExtended": "{{Spell_KhazixE_Tooltip_0}}<br><br>{{Spell_KhazixE_Tooltip_1}}"
@@ -719,12 +660,7 @@
 				},
 				"{8b6fe763}": {
 					"mExpandedTooltipCalculationDisplay": 5,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"__type": "NumberCalculationPart"
-						}
-					]
+					"tooltipOnly": true
 				},
 				"IsEvolved": {
 					"mExpandedTooltipCalculationDisplay": 6,
@@ -744,15 +680,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 100,
-				"1": 100,
-				"2": 85,
-				"3": 70,
-				"4": 70,
-				"5": 70,
-				"6": 70
-			},
+			"cooldownTime": [
+				100,
+				100,
+				85,
+				70,
+				70,
+				70,
+				70
+			],
 			"name": "Void Assault",
 			"tooltip": "{{Spell_KhazixR_Tooltip_@IsEvolved@}}<br><br>{{Spell_KhazixR_Tooltip_P}}",
 			"tooltipExtended": "{{Spell_KhazixR_Tooltip_P}}<br><br>{{Spell_KhazixR_Tooltip_0}}<br><br>{{Spell_KhazixR_Tooltip_1}}"

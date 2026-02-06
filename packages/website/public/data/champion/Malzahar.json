@@ -98,46 +98,33 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					70,
+					70,
+					105,
+					140,
+					175,
+					210,
+					245
+				],
+				"1": [
+					1,
+					1,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25
+				],
+				"2": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				]
 			},
 			"mana": [
 				60,
@@ -147,15 +134,15 @@
 				80,
 				80
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Call of the Void",
 			"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @Effect2Amount@ second(s)."
 		},
@@ -274,36 +261,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"4": [
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000,
+					25000
+				],
+				"5": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
 			},
 			"mana": [
 				40,
@@ -313,15 +288,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 8,
-				"1": 8,
-				"2": 8,
-				"3": 8,
-				"4": 8,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				8,
+				8,
+				8,
+				8,
+				8,
+				8,
+				8
+			],
 			"name": "Void Swarm",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit."
 		},
@@ -396,36 +371,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"3": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"4": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
 			},
 			"mana": [
 				60,
@@ -435,15 +398,15 @@
 				100,
 				110
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 10,
-				"3": 9,
-				"4": 8,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				11,
+				11,
+				10,
+				9,
+				8,
+				7,
+				7
+			],
 			"name": "Malefic Visions",
 			"tooltip": "Malzahar inflicts terrible visions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds. Applying <spellName>Call of the Void</spellName> or <spellName>Nether Grasp</spellName> to the victim during this time refreshes the visions.<br><br>If the victim dies, Malzahar gains <scaleMana>@ManaRestore@ Mana</scaleMana> and the visions spread to the nearest enemy.<br><br><rules>Malefic Visions executes minions below @MinionExecuteThreshold@ Health.</rules>"
 		},
@@ -566,36 +529,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"2": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"3": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				]
 			},
 			"mana": [
 				100,
@@ -605,15 +556,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 140,
-				"1": 140,
-				"2": 110,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				140,
+				140,
+				110,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "Nether Grasp",
 			"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @Effect4Amount@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @Effect3Amount@ seconds."
 		}

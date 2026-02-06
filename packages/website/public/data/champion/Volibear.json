@@ -279,15 +279,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 0,
-				"1": 14,
-				"2": 13,
-				"3": 12,
-				"4": 11,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				0,
+				14,
+				13,
+				12,
+				11,
+				10,
+				10
+			],
 			"name": "Thundering Smash",
 			"tooltip": "Volibear gains <speed>@MinSpeedCalc@ Move Speed</speed>, doubled to <speed>@MaxSpeedCalc@</speed> towards enemy champions for the next @Duration@ seconds. While active, Volibear's next Attack deals <physicalDamage>@CalculatedDamage@ physical damage</physicalDamage> and <status>Stuns</status> the target for @StunDuration@ second.<br><br>Volibear becomes enraged if an enemy <status>Immobilizes</status> him before he <status>Stuns</status> a target, ending the Ability early but refreshing its Cooldown."
 		},
@@ -421,15 +421,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 5,
-				"1": 5,
-				"2": 5,
-				"3": 5,
-				"4": 5,
-				"5": 5,
-				"6": 5
-			},
+			"cooldownTime": [
+				5,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5
+			],
 			"name": "Frenzied Maul",
 			"tooltip": "Volibear mauls an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them for @MarkDuration@ seconds.<br><br>If this Ability is used on a marked target, its damage is increased to <physicalDamage>@EmpoweredDamage@</physicalDamage> and Volibear restores <healing>@BaseHeal@ plus @PercentMissingHealthHealingRatio@ missing Health</healing>."
 		},
@@ -596,15 +596,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 16,
-				"3": 16,
-				"4": 16,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				16,
+				16,
+				16,
+				16,
+				16,
+				16,
+				16
+			],
 			"name": "Sky Splitter",
 			"tooltip": "Volibear summons a thundercloud that fires a lightning bolt, dealing <magicDamage>@TotalDamageTooltip@ plus @PercentDamage*100@% max Health magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If Volibear is inside the blast zone, he gains a <shield>@ShieldAPRatioTooltip@ plus @ShieldAmount*100@% max Health Shield</shield> for @ShieldDuration@ seconds."
 		},
@@ -786,66 +786,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"1": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						0,
-						0,
-						0
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0,
+					75,
+					115,
+					155,
+					0,
+					0,
+					0
+				],
+				"1": [
+					0,
+					9,
+					9,
+					9,
+					0,
+					0,
+					0
+				],
+				"2": [
+					12,
+					12,
+					12,
+					12,
+					0,
+					0,
+					0
+				],
+				"3": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				],
+				"4": [
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08,
+					0.08
+				]
 			},
 			"mana": [
 				100,
@@ -855,15 +840,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 160,
-				"1": 160,
-				"2": 135,
-				"3": 110,
-				"4": 110,
-				"5": 110,
-				"6": 110
-			},
+			"cooldownTime": [
+				160,
+				160,
+				135,
+				110,
+				110,
+				110,
+				110
+			],
 			"name": "Stormbringer",
 			"tooltip": "Volibear transforms and leaps, gaining <healing>@HealthAmount@ Health</healing> and @BonusAttackRange@ Attack Range for the next @TransformDuration@ seconds.<br><br>Upon landing, Volibear cracks the earth, <status>Disabling</status> nearby towers for @TowerDisableDuration@ seconds and dealing <physicalDamage>@TowerDamageTooltip@ physical damage to them</physicalDamage>. Nearby enemies are <status>Slowed</status> by @SlowAmount*100@%, decaying over 1 second. Enemies directly underneath Volibear suffer <physicalDamage>@SweetSpotDamageTooltip@ physical damage</physicalDamage>."
 		}

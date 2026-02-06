@@ -135,7 +135,7 @@ if (!championData || championData?.version !== latestVersion) {
 								spellCalculations: cleanupObject(mSpellCalculations),
 								effectAmount: cleanupObject(mEffectAmount),
 								mana,
-								cooldownTime: cleanupObject(cooldownTime),
+								cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 								name: getStringtableValue(mLocKeys.keyName, `${abilityDataKey} name`),
 								tooltip,
 								tooltipExtended,
@@ -830,23 +830,47 @@ function formatNumber(n: number, precision = 3): number {
 }
 
 function cleanupObject(obj?: object, removeType = true): any {
-	if (!obj) {
-		return obj;
+	const type = typeof obj;
+	if (!obj || type !== 'object') {
+		return type === 'number' ? formatNumber(obj as unknown as number) : obj;
 	}
 
-	let entries = Object.entries(obj);
+	let entries = Object.entries(obj).filter(([, value]) => !isEmptyObject(value));
 	if (removeType) {
 		entries = entries.filter(([key]) => key !== '__type');
 	}
 
-	return obj && Object.fromEntries(entries.map(([key, value]) =>
+	if (entries.length === 1 && entries[0][0] === 'value') {
+		return entries[0][1].map((v: unknown) => typeof v === 'number' ? formatNumber(v) : v);
+	}
+
+	return Object.fromEntries(entries.map(([key, value]) =>
 		[key, typeof value === 'object'
-			? Array.isArray(value) ? value.map(v => cleanupObject(v, key !== 'mFormulaParts')) : cleanupObject(value)
+			? Array.isArray(value)
+				? value.map(v => cleanupObject(v, key !== 'mFormulaParts'))
+				: cleanupObject(value)
 			: typeof value === 'number'
 				? formatNumber(value)
 				: value],
 	),
 	);
+}
+
+function isEmptyObject(obj: unknown): boolean {
+	if (typeof obj !== 'object') {
+		return false;
+	}
+
+	if (obj === null) {
+		return true;
+	}
+
+	if (Array.isArray(obj)) {
+		return obj.length === 0 || obj.every(v => isEmptyObject(v));
+	}
+
+	const values = Object.values(obj as Record<string, unknown>);
+	return values.length === 0 || (values.length === 1 && '__type' in obj) || values.every(v => isEmptyObject(v));
 }
 
 async function fetchCached(url: string, filename: string, responseMethod: 'text' | 'json' | 'arrayBuffer' = 'json') {

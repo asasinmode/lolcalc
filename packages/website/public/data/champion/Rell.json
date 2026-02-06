@@ -153,15 +153,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 10.5,
-				"3": 10,
-				"4": 9.5,
-				"5": 9,
-				"6": 8
-			},
+			"cooldownTime": [
+				11,
+				11,
+				10.5,
+				10,
+				9.5,
+				9,
+				8
+			],
 			"name": "Shattering Strike",
 			"tooltip": "Rell thrusts her lance, <status>Stunning</status> targets for @StunDuration@ seconds, destroying all <shield>Shields</shield>, and dealing <magicDamage>@Damage@ magic damage.</magicDamage>"
 		},
@@ -499,15 +499,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 13,
-				"3": 12,
-				"4": 11,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				14,
+				14,
+				13,
+				12,
+				11,
+				10,
+				10
+			],
 			"name": "Full Tilt",
 			"tooltip": "Rell and an ally charge, gaining <speed>@MinMS*100@% Move Speed</speed>, increased to <speed>@MaxMS*100@%</speed> when facing enemy champions or each other for @Duration@ seconds. Rell's next Attack or <spellName>{{Spell_RellQ_Name}}</spellName> explodes in an area for <magicDamage>@MaxHealthDamageCalc@ max Health magic damage</magicDamage>."
 		},
@@ -599,15 +599,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				120,
+				120,
+				100,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "Magnet Storm",
 			"tooltip": "Rell explodes in a magnetic fury, violently <status>Pulling</status> nearby enemies towards herself. Then Rell constantly <status>Drags</status> nearby enemies towards herself and deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over the next @Duration@ seconds."
 		}

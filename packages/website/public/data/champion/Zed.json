@@ -189,15 +189,15 @@
 				55,
 				50
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Razor Shuriken",
 			"tooltip": "Zed and his <keywordMajor>Shadows</keywordMajor> throw their shurikens, each dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy they pass through, and <physicalDamage>@PassThroughDamage@ physical damage</physicalDamage> to each additional enemy."
 		},
@@ -225,66 +225,51 @@
 				]
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					5.25,
+					5.25,
+					5.25,
+					5.25,
+					5.25,
+					5.25,
+					5.25
+				],
+				"1": [
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2,
+					0.2
+				],
+				"2": [
+					25,
+					30,
+					35,
+					40,
+					45,
+					50,
+					55
+				],
+				"3": [
+					5.25,
+					5.25,
+					5.25,
+					5.25,
+					5.25,
+					5.25,
+					5.25
+				],
+				"4": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				]
 			},
 			"mana": [
 				40,
@@ -294,15 +279,15 @@
 				20,
 				15
 			],
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 19,
-				"3": 18,
-				"4": 17,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				20,
+				20,
+				19,
+				18,
+				17,
+				16,
+				16
+			],
 			"name": "Living Shadow",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Zed gains <keywordMajor>@Effect3Amount@ Energy</keywordMajor> whenever he and his <keywordMajor>Shadows</keywordMajor> strike an enemy with the same Ability.<br><br><spellActive>Active:</spellActive> Zed's <keywordMajor>Shadow</keywordMajor> dashes forward, remaining in place for @Effect5Amount@ seconds. <recast>Recasting</recast> this Ability will cause Zed to switch positions with this <keywordMajor>Shadow</keywordMajor>."
 		},
@@ -407,15 +392,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 5,
-				"1": 5,
-				"2": 4.5,
-				"3": 4,
-				"4": 3.5,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				5,
+				5,
+				4.5,
+				4,
+				3.5,
+				3,
+				3
+			],
 			"name": "Shadow Slash",
 			"tooltip": "Zed and his <keywordMajor>Shadows</keywordMajor> slash, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>Each enemy champion hit by Zed's slash reduces <spellName>Living Shadow</spellName>'s Cooldown by @ShadowHitCDR@ seconds.<br><br>Enemies hit by a <keywordMajor>Shadow</keywordMajor>'s slash are <status>Slowed</status> by @MoveSpeedMod*-100@% for @SlowDuration@ seconds. Enemies hit by multiple slashes take no additional damage but are <status>Slowed</status> by @MoveSpeedModBonus*-100@% instead."
 		},
@@ -510,15 +495,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 110,
-				"3": 100,
-				"4": 100,
-				"5": 100,
-				"6": 100
-			},
+			"cooldownTime": [
+				120,
+				120,
+				110,
+				100,
+				100,
+				100,
+				100
+			],
 			"name": "Death Mark",
 			"tooltip": "Zed becomes Untargetable and dashes to an enemy champion, marking them. After @RDeathMarkDuration@ seconds, the mark triggers, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and repeating @RDamageAmp*100@% of all damage dealt to the target by Zed while the mark was active.<br><br>The dash leaves a <keywordMajor>Shadow</keywordMajor> behind for @RShadowDurationDisplayed@ seconds. Zed can <recast>Recast</recast> this Ability to switch positions with this <keywordMajor>Shadow</keywordMajor>."
 		}

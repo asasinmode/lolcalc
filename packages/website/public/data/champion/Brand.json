@@ -179,26 +179,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					20,
+					20,
+					25,
+					30,
+					35,
+					40,
+					40
+				]
 			},
 			"name": "Blaze",
 			"tooltip": "Brand's Abilities light his targets <keywordMajor>Ablaze</keywordMajor>, dealing <magicDamage>@PercentHealthDamage@% max Health magic damage</magicDamage> over 4 seconds. If Brand kills a unit that is <keywordMajor>Ablaze</keywordMajor>, he regains <scaleMana>@ManaRestore@ mana</scaleMana>. <keywordMajor>Blaze</keywordMajor> can stack up to 3 times.<br><br>When a champion or large jungle monster reaches 3 stacks, the <keywordMajor>Blaze</keywordMajor> will detonate after 2 seconds, dealing <magicDamage>@ExplosionDamage@ max Health magic damage</magicDamage> to surrounding enemies.",
@@ -242,26 +231,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					70,
+					70,
+					100,
+					130,
+					160,
+					190,
+					190
+				]
 			},
 			"mana": [
 				70,
@@ -271,15 +249,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 8.5,
-				"1": 8,
-				"2": 7.5,
-				"3": 7,
-				"4": 6.5,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				8.5,
+				8,
+				7.5,
+				7,
+				6.5,
+				6,
+				6
+			],
 			"name": "Sear",
 			"tooltip": "Brand launches a fireball that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for @StunDuration@ seconds."
 		},
@@ -329,36 +307,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					0,
+					20,
+					40,
+					60,
+					80,
+					100,
+					120
+				],
+				"2": [
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25,
+					0.25
+				]
 			},
 			"mana": [
 				60,
@@ -368,15 +334,15 @@
 				100,
 				110
 			],
-			"cooldownTime": {
-				"0": 10.5,
-				"1": 10,
-				"2": 9.5,
-				"3": 9,
-				"4": 8.5,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				10.5,
+				10,
+				9.5,
+				9,
+				8.5,
+				8,
+				8
+			],
 			"name": "Pillar of Flame",
 			"tooltip": "Brand creates a pillar of pure fire, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Units that are <keywordMajor>Ablaze</keywordMajor> take <magicDamage>@EmpoweredDamage@ damage</magicDamage> instead."
 		},
@@ -418,26 +384,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					375,
+					375,
+					375,
+					375,
+					375,
+					375,
+					375
+				]
 			},
 			"mana": [
 				70,
@@ -447,15 +402,15 @@
 				90,
 				95
 			],
-			"cooldownTime": {
-				"0": 13,
-				"1": 13,
-				"2": 12,
-				"3": 11,
-				"4": 10,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				13,
+				13,
+				12,
+				11,
+				10,
+				9,
+				9
+			],
 			"name": "Conflagration",
 			"tooltip": "Brand conjures a powerful blast at his target, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> to surrounding units.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, the spread range is doubled."
 		},
@@ -522,15 +477,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 100,
-				"1": 100,
-				"2": 90,
-				"3": 80,
-				"4": 80,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				100,
+				100,
+				90,
+				80,
+				80,
+				80,
+				80
+			],
 			"name": "Pyroclasm",
 			"tooltip": "Brand unleashes a devastating torrent of fire that can bounce to Brand or another enemy up to 5 times, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies each bounce. Bounces prioritize stacking <keywordMajor>Blaze</keywordMajor> to max on champions.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they are briefly <status>Slowed</status> by @SlowAmount@%."
 		}

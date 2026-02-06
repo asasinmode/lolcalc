@@ -274,15 +274,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 17.5,
-				"1": 16,
-				"2": 14.5,
-				"3": 13,
-				"4": 11.5,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				17.5,
+				16,
+				14.5,
+				13,
+				11.5,
+				10,
+				10
+			],
 			"name": "Boomerang Throw / Boulder Toss",
 			"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar throws a boomerang that deals <physicalDamage>@spell.GnarQ:MiniTotalDamage@ physical damage</physicalDamage> and <status>Slows</status> by @spell.GnarQ:SlowAmount*100@% for @spell.GnarQ:SlowDuration@ seconds. The boomerang returns after hitting an enemy, dealing reduced damage to subsequent targets. Each enemy can only be hit once. Catching the boomerang reduces its Cooldown by @spell.GnarQ:MiniCDRefund*100@%.",
 			"tooltipExtended": "{{spell_GnarQ_Tooltip}}<br><br>{{spell_GnarBigQ_Tooltip}}"
@@ -409,15 +409,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 7,
-				"3": 7,
-				"4": 7,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				7,
+				7,
+				7,
+				7,
+				7,
+				7,
+				7
+			],
 			"name": "Hyper / Wallop",
 			"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Every third Attack or Ability on the same enemy deals an additional <magicDamage>@spell.GnarW:MiniTotalDamage@ plus @spell.GnarW:MiniPercentHPDamage*100@% max Health magic damage</magicDamage> and grants <speed>@spell.GnarR:RHyperMovementSpeedPercent@% Move Speed</speed> decaying over @spell.GnarW:MiniHasteDuration@ seconds.",
 			"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}"
@@ -563,15 +563,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 24.5,
-				"1": 22,
-				"2": 19.5,
-				"3": 17,
-				"4": 14.5,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				24.5,
+				22,
+				19.5,
+				17,
+				14.5,
+				12,
+				12
+			],
 			"name": "Hop / Crunch",
 			"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar leaps, gaining <attackSpeed>@spell.GnarE:MinibAS*100@% Attack Speed</attackSpeed> for @spell.GnarE:MiniASDuration@ seconds. If Gnar lands on a unit he will bounce off it, traveling further. Bouncing off an enemy deals <physicalDamage>@spell.GnarE:MiniTotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @spell.GnarE:MoveSpeedMod*-100@%.",
 			"tooltipExtended": "{{spell_GnarE_Tooltip}}<br><br>{{spell_GnarBigE_Tooltip}}"
@@ -676,15 +676,15 @@
 					"mModifiedGameCalculation": "Damage"
 				}
 			},
-			"cooldownTime": {
-				"0": 0,
-				"1": 90,
-				"2": 60,
-				"3": 30,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				90,
+				60,
+				30,
+				0,
+				0,
+				0
+			],
 			"name": "GNAR!",
 			"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Increase <spellName>Hyper's</spellName> <speed>Move Speed</speed>.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gnar tosses nearby enemies, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, <status>Knocking Back</status>, and <status>Slowing</status> them by @RSlowPercent@% for @RCCDuration@ seconds. Enemies that hit a wall instead take <physicalDamage>@WallDamage@ physical damage</physicalDamage> and are <status>Stunned</status>."
 		}

@@ -84,15 +84,15 @@
 					]
 				}
 			},
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 12,
-				"3": 12,
-				"4": 12,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12
+			],
 			"name": "Happy Hour",
 			"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. "
 		},
@@ -132,86 +132,69 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					40,
+					80,
+					120,
+					160,
+					200,
+					240,
+					280
+				],
+				"1": [
+					35,
+					40,
+					45,
+					50,
+					55,
+					60,
+					65
+				],
+				"2": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"3": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"4": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"5": [
+					150,
+					150,
+					150,
+					150,
+					150,
+					150,
+					150
+				],
+				"6": [
+					70,
+					70,
+					70,
+					70,
+					70,
+					70,
+					70
+				]
 			},
 			"mana": [
 				80,
@@ -221,15 +204,15 @@
 				80,
 				80
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 10,
-				"2": 9,
-				"3": 8,
-				"4": 7,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				11,
+				10,
+				9,
+				8,
+				7,
+				6,
+				6
+			],
 			"name": "Barrel Roll",
 			"tooltip": "Gragas rolls a cask that explodes after @Effect4Amount@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @Effect2Amount@ and @Effect2Amount*1.5@% for @Effect3Amount@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early."
 		},
@@ -366,15 +349,15 @@
 				30,
 				30
 			],
-			"cooldownTime": {
-				"0": 5,
-				"1": 5,
-				"2": 5,
-				"3": 5,
-				"4": 5,
-				"5": 5,
-				"6": 5
-			},
+			"cooldownTime": [
+				5,
+				5,
+				5,
+				5,
+				5,
+				5,
+				5
+			],
 			"name": "Drunken Rage",
 			"tooltip": "Gragas samples his brew, reducing incoming damage by @DamageReduction@ for @DefenseDuration@ seconds and empowering his next Attack to deal an additional <magicDamage>@TotalDamage@</magicDamage> plus <magicDamage>@MaxHPPercentDamage@% max Health magic damage</magicDamage> to the target and surrounding enemies."
 		},
@@ -461,26 +444,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
 			"mana": [
 				50,
@@ -490,15 +462,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 14,
-				"2": 13.5,
-				"3": 13,
-				"4": 12.5,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				14,
+				14,
+				13.5,
+				13,
+				12.5,
+				12,
+				12
+			],
 			"name": "Body Slam",
 			"tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for @StunDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to them.<br><br>This Ability's Cooldown is reduced by @CooldownRefund*100@% if Gragas collides with an enemy."
 		},
@@ -556,15 +528,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 100,
-				"1": 100,
-				"2": 85,
-				"3": 70,
-				"4": 70,
-				"5": 70,
-				"6": 70
-			},
+			"cooldownTime": [
+				100,
+				100,
+				85,
+				70,
+				70,
+				70,
+				70
+			],
 			"name": "Explosive Cask",
 			"tooltip": "Gragas hurls his cask, dealing <magicDamage>@DamageDone@ magic damage</magicDamage> and <status>Knocking Away</status> enemies from the impact zone."
 		}

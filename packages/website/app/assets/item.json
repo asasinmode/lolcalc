@@ -787,7 +787,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{22eeba1f}",
-							"mDataValue": "APPerGlory"
+							"mDataValue": "APPerGlory",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -1128,10 +1129,12 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": -1
+							"mNumber": -1,
+							"__type": "NumberCalculationPart"
 						},
 						{
-							"mDataValue": "MissingHealthThreshold"
+							"mDataValue": "MissingHealthThreshold",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -1177,7 +1180,8 @@
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mDataValue": "BonusHealthDrainPercentage"
+							"mDataValue": "BonusHealthDrainPercentage",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -1187,7 +1191,8 @@
 					},
 					"mFormulaParts": [
 						{
-							"mSpellCalculationKey": "DrainCalc"
+							"mSpellCalculationKey": "DrainCalc",
+							"__type": "{f3cbe7b2}"
 						}
 					]
 				}
@@ -1234,30 +1239,36 @@
 				"BurnDamagePerSecondCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BurnFlatDamagePerSecond"
+							"mDataValue": "BurnFlatDamagePerSecond",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
 				"MinionBurnCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{9adc0c64}"
+							"mDataValue": "{9adc0c64}",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "MinionAP"
+							"mDataValue": "MinionAP",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
 				"MonsterBurnCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{afd69c5a}"
+							"mDataValue": "{afd69c5a}",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "{434396e0}"
+							"mDataValue": "{434396e0}",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -1297,7 +1308,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "ShieldAmount"
+							"mDataValue": "ShieldAmount",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -1379,10 +1391,12 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mCoefficient": 0.75
+							"mCoefficient": 0.75,
+							"__type": "StatByCoefficientCalculationPart"
 						},
 						{
-							"mCoefficient": 0.1
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -1390,10 +1404,12 @@
 					"mFormulaParts": [
 						{
 							"mStartValue": 40,
-							"mEndValue": 80
+							"mEndValue": 80,
+							"__type": "ByCharLevelInterpolationCalculationPart"
 						},
 						{
-							"mCoefficient": 0.1
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -1469,12 +1485,14 @@
 				"HasteFromAD": {
 					"mFormulaParts": [
 						{
-							"mNumber": 5
+							"mNumber": 5,
+							"__type": "NumberCalculationPart"
 						},
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mCoefficient": 0.1
+							"mCoefficient": 0.1,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -1518,11 +1536,13 @@
 				"DamageCalc": {
 					"mFormulaParts": [
 						{
-							"mNumber": 300
+							"mNumber": 300,
+							"__type": "NumberCalculationPart"
 						},
 						{
 							"mStat": 29,
-							"mCoefficient": 25
+							"mCoefficient": 25,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -1532,11 +1552,13 @@
 				"AbilityDamageCalc": {
 					"mFormulaParts": [
 						{
-							"mNumber": 30
+							"mNumber": 30,
+							"__type": "NumberCalculationPart"
 						},
 						{
 							"mStat": 29,
-							"mCoefficient": 1.5
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -1585,11 +1607,13 @@
 					},
 					"mFormulaParts": [
 						{
-							"mNumber": 15
+							"mNumber": 15,
+							"__type": "NumberCalculationPart"
 						},
 						{
 							"mCoefficient": 0.005,
-							"mStatFormula": 2
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true,
@@ -1670,7 +1694,8 @@
 				"BuffDuration": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "Duration"
+							"mDataValue": "Duration",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -1680,7 +1705,8 @@
 				"AuraAttackSpeed": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{eb8d750f}"
+							"mDataValue": "{eb8d750f}",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true,
@@ -1728,17 +1754,20 @@
 					"mFormulaParts": [
 						{
 							"mStartValue": 200,
-							"mEndValue": 400
+							"mEndValue": 400,
+							"__type": "ByCharLevelInterpolationCalculationPart"
 						},
 						{
 							"mStat": 1,
 							"mStatFormula": 2,
-							"mCoefficient": 1.75
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
 						},
 						{
 							"mStat": 6,
 							"mStatFormula": 2,
-							"mCoefficient": 1.75
+							"mCoefficient": 1.75,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -1746,7 +1775,8 @@
 					"mFormulaParts": [
 						{
 							"mStartValue": 200,
-							"mEndValue": 300
+							"mEndValue": 300,
+							"__type": "ByCharLevelInterpolationCalculationPart"
 						}
 					]
 				}
@@ -1792,7 +1822,8 @@
 					"mFormulaParts": [
 						{
 							"mCoefficient": 0.005,
-							"mStatFormula": 2
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -1906,7 +1937,8 @@
 				"BonusADFromMana": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0.02
+							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -2146,7 +2178,8 @@
 				"CritPerStackCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{52d90ad0}"
+							"mDataValue": "{52d90ad0}",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mPrecision": 1,
@@ -2280,7 +2313,8 @@
 				"ShieldValue": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0.18
+							"mCoefficient": 0.18,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -2289,7 +2323,8 @@
 					"mFormulaParts": [
 						{
 							"mCoefficient": 0.02,
-							"mStatFormula": 2
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -2332,7 +2367,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{22eeba1f}",
-							"mDataValue": "APPerGlory"
+							"mDataValue": "APPerGlory",
+							"__type": "BuffCounterByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -2371,28 +2407,32 @@
 				"BonusADFromMana": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0.02
+							"mCoefficient": 0.02,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				},
 				"OnHitDamage": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0.012
+							"mCoefficient": 0.012,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0.04
+							"mCoefficient": 0.04,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				},
 				"RangedItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mCoefficient": 0.03
+							"mCoefficient": 0.03,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -2400,20 +2440,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -2461,7 +2502,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mDataValue": "MoveSpeedBonus"
+							"mDataValue": "MoveSpeedBonus",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -2660,7 +2702,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "HealPercent"
+							"mDataValue": "HealPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -2676,7 +2719,8 @@
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mDataValue": "HealthPercent"
+							"mDataValue": "HealthPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -2704,7 +2748,8 @@
 										"mNumber": 0.01
 									}
 								}
-							]
+							],
+							"__type": "ClampSubPartsCalculationPart"
 						}
 					]
 				},
@@ -2719,7 +2764,8 @@
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mDataValue": "BaseShieldRatio"
+							"mDataValue": "BaseShieldRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -2728,7 +2774,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "ADtoAD"
+							"mDataValue": "ADtoAD",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -2774,7 +2821,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -2932,12 +2980,14 @@
 				"DamagePerTick": {
 					"mFormulaParts": [
 						{
-							"mNumber": 20
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
 						},
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mCoefficient": 0.01
+							"mCoefficient": 0.01,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -3078,7 +3128,8 @@
 									"mLevel": 9,
 									"mBonusPerLevelAtAndAfter": 15
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				}
@@ -3159,22 +3210,23 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -3182,7 +3234,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.4
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -3190,7 +3243,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.2
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -3198,7 +3252,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mDataValue": "ActiveADRatio"
+							"mDataValue": "ActiveADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -3240,12 +3295,14 @@
 				"TotalDamage": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 1,
 							"mStatFormula": 2,
-							"mDataValue": "BonusArmorDamageRatio"
+							"mDataValue": "BonusArmorDamageRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -3287,7 +3344,8 @@
 				"TotalDamage": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -3336,7 +3394,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.4
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -3344,7 +3403,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.2
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -3352,15 +3412,15 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -3369,7 +3429,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -3377,7 +3438,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mDataValue": "ActiveADRatio"
+							"mDataValue": "ActiveADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -3426,14 +3488,16 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "SpellbladeMultiplier"
+							"mDataValue": "SpellbladeMultiplier",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
 				"{6e4cefdc}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 20
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -3518,7 +3582,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "MaxHealthRatio"
+							"mDataValue": "MaxHealthRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -3574,11 +3639,13 @@
 				"DamageProcCalc": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 12,
-							"mDataValue": "HPRatio"
+							"mDataValue": "HPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -3596,7 +3663,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mDataValue": "TrackerTickRate"
+							"mDataValue": "TrackerTickRate",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -3604,10 +3672,12 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "MaxHPRatio"
+							"mDataValue": "MaxHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -3651,14 +3721,16 @@
 							"mStat": 2,
 							"mSubpart": {
 								"mNumber": 0.55
-							}
+							},
+							"__type": "StatBySubPartCalculationPart"
 						}
 					]
 				},
 				"{232dac8a}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 0.55
+							"mNumber": 0.55,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -3666,20 +3738,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -3797,7 +3870,8 @@
 									"mLevel": 12,
 									"mAdditionalBonusAtThisLevel": -3
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				}
@@ -3861,7 +3935,8 @@
 				"OnHitDamage": {
 					"mFormulaParts": [
 						{
-							"mNumber": 45
+							"mNumber": 45,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -3933,7 +4008,8 @@
 				"TotalProcDamage": {
 					"mFormulaParts": [
 						{
-							"mNumber": 100
+							"mNumber": 100,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -3980,10 +4056,12 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "SpellbladeADRatio"
+							"mDataValue": "SpellbladeADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "LichBaneAPValue"
+							"mDataValue": "LichBaneAPValue",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -4097,7 +4175,8 @@
 										]
 									}
 								}
-							]
+							],
+							"__type": "SumOfSubPartsCalculationPart"
 						}
 					]
 				}
@@ -4380,10 +4459,12 @@
 				"TotalOnHitDamage": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "NashorsBaseValue"
+							"mDataValue": "NashorsBaseValue",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "NashorsAPValue"
+							"mDataValue": "NashorsAPValue",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -4470,27 +4551,32 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
 				"MagicResistanceShred": {
 					"mFormulaParts": [
 						{
-							"mNumber": 10
+							"mNumber": 10,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"GroundBurnDamagePerTickTooltipOnly": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -4534,7 +4620,8 @@
 					"mFormulaParts": [
 						{
 							"mCoefficient": 0.15,
-							"mStatFormula": 2
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -4572,14 +4659,16 @@
 					"mFormulaParts": [
 						{
 							"mCoefficient": 0.15,
-							"mStatFormula": 2
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
 				},
 				"ShieldBase": {
 					"mFormulaParts": [
 						{
-							"mNumber": 100
+							"mNumber": 100,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -4664,7 +4753,8 @@
 							},
 							"mPart2": {
 								"mDataValue": "MaxStacks"
-							}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -4675,7 +4765,8 @@
 					},
 					"mFormulaParts": [
 						{
-							"epicness": 5
+							"epicness": 5,
+							"__type": "ByItemEpicnessCountCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -4686,7 +4777,8 @@
 					},
 					"mFormulaParts": [
 						{
-							"epicness": 5
+							"epicness": 5,
+							"__type": "ByItemEpicnessCountCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -4853,10 +4945,12 @@
 				"TotalHealAmount": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseHeal"
+							"mDataValue": "BaseHeal",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "HealAPRatio"
+							"mDataValue": "HealAPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -4974,14 +5068,16 @@
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -4989,13 +5085,13 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"Duration": {
 					"mFormulaParts": [
 						{
-							"mNumber": 6
+							"mNumber": 6,
+							"__type": "NumberCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -5005,7 +5101,8 @@
 				"OOCMS": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "{74ac7847}"
+							"mDataValue": "{74ac7847}",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -5084,7 +5181,8 @@
 				"DamageAmount": {
 					"mFormulaParts": [
 						{
-							"mNumber": 40
+							"mNumber": 40,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -5127,7 +5225,8 @@
 				"DamageAmount": {
 					"mFormulaParts": [
 						{
-							"mNumber": 65
+							"mNumber": 65,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -5169,10 +5268,12 @@
 					"mFormulaParts": [
 						{
 							"mStartValue": 175,
-							"mEndValue": 253
+							"mEndValue": 253,
+							"__type": "ByCharLevelInterpolationCalculationPart"
 						},
 						{
-							"mCoefficient": 0.3
+							"mCoefficient": 0.3,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -5250,10 +5351,12 @@
 				"FireboltDamage": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -5301,8 +5404,7 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"SiphonDamage": {
 					"mFormulaParts": [
@@ -5313,14 +5415,16 @@
 									"mLevel": 10,
 									"mBonusPerLevelAtAndAfter": 7
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "MeleeValue"
+							"mDataValue": "MeleeValue",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -5328,7 +5432,8 @@
 				"RangedItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "RangedValue"
+							"mDataValue": "RangedValue",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -5336,28 +5441,32 @@
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{c0b34d7a}": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "MoveSpeedMod"
+							"mDataValue": "MoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
 				"{fe7dca43}": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "RangedMoveSpeedMod"
+							"mDataValue": "RangedMoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -5367,7 +5476,8 @@
 					},
 					"mFormulaParts": [
 						{
-							"mDataValue": "MoveSpeedMod"
+							"mDataValue": "MoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -5378,7 +5488,8 @@
 					},
 					"mFormulaParts": [
 						{
-							"mDataValue": "RangedMoveSpeedMod"
+							"mDataValue": "RangedMoveSpeedMod",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -5424,7 +5535,8 @@
 					"mFormulaParts": [
 						{
 							"mStartValue": 110,
-							"mEndValue": 280
+							"mEndValue": 280,
+							"__type": "ByCharLevelInterpolationCalculationPart"
 						}
 					]
 				},
@@ -5485,12 +5597,14 @@
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "ShieldSize"
+							"mDataValue": "ShieldSize",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mDataValue": "ShieldADScaling"
+							"mDataValue": "ShieldADScaling",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -5504,20 +5618,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -5633,27 +5748,29 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "TooltipValue"
+							"mDataValue": "TooltipValue",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -5730,7 +5847,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -5738,7 +5856,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 7,
-							"mDataValue": "MSAdaptiveRatio"
+							"mDataValue": "MSAdaptiveRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -5775,7 +5894,8 @@
 				"MSAmount": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "MeleeMS"
+							"mDataValue": "MeleeMS",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true,
@@ -5787,7 +5907,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -5823,7 +5944,8 @@
 				"MSAmount": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "MeleeMS"
+							"mDataValue": "MeleeMS",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true,
@@ -5835,7 +5957,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -5878,12 +6001,14 @@
 									"mLevel": 9,
 									"mBonusPerLevelAtAndAfter": 10
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						},
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mDataValue": "ShieldAmount"
+							"mDataValue": "ShieldAmount",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -5891,7 +6016,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -5934,12 +6060,14 @@
 									"mLevel": 9,
 									"mBonusPerLevelAtAndAfter": 10
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						},
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mDataValue": "ShieldAmount"
+							"mDataValue": "ShieldAmount",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -5947,7 +6075,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -5980,7 +6109,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{35c412b6}",
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -6050,7 +6180,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mDataValue": "MeleeDamage"
+							"mDataValue": "MeleeDamage",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -6059,7 +6190,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mDataValue": "RangedDamage"
+							"mDataValue": "RangedDamage",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -6067,38 +6199,42 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"ProcDamage": {
 					"mFormulaParts": [
 						{
-							"mNumber": 50
+							"mNumber": 50,
+							"__type": "NumberCalculationPart"
 						},
 						{
 							"mStat": 29,
-							"mCoefficient": 1.5
+							"mCoefficient": 1.5,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
 				"TotalWardDamage": {
 					"mFormulaParts": [
 						{
-							"mNumber": 3
+							"mNumber": 3,
+							"__type": "NumberCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6153,11 +6289,13 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "SkipperADRatio"
+							"mDataValue": "SkipperADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 12,
-							"mDataValue": "MaxStackDamageHPRatio"
+							"mDataValue": "MaxStackDamageHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6169,11 +6307,13 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "SkipperADRatioVSStructures"
+							"mDataValue": "SkipperADRatioVSStructures",
+							"__type": "StatByNamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 12,
-							"mDataValue": "MaxStackDamageVSStructuresHPRatio"
+							"mDataValue": "MaxStackDamageVSStructuresHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6189,7 +6329,8 @@
 									"mLevel": 9,
 									"mBonusPerLevelAtAndAfter": 6
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6284,7 +6425,8 @@
 							},
 							"mPart2": {
 								"mDataValue": "AllyAuraMythicPassive"
-							}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
 						}
 					]
 				},
@@ -6296,7 +6438,8 @@
 									"mStartValue": 200,
 									"mEndValue": 360
 								}
-							]
+							],
+							"__type": "SumOfSubPartsCalculationPart"
 						}
 					]
 				}
@@ -6403,7 +6546,8 @@
 										]
 									}
 								}
-							]
+							],
+							"__type": "SumOfSubPartsCalculationPart"
 						}
 					]
 				}
@@ -6455,7 +6599,8 @@
 									"mLevel": 14,
 									"mAdditionalBonusAtThisLevel": 1
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				},
@@ -6549,11 +6694,13 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "BaseADRatio"
+							"mDataValue": "BaseADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 8,
-							"mDataValue": "CritChanceMultiplier"
+							"mDataValue": "CritChanceMultiplier",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -6599,7 +6746,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "MaxStacksADRatio"
+							"mDataValue": "MaxStacksADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						},
 						{
 							"mPart1": {
@@ -6607,7 +6755,8 @@
 							},
 							"mPart2": {
 								"mNumber": 100
-							}
+							},
+							"__type": "ProductOfSubPartsCalculationPart"
 						}
 					]
 				}
@@ -6655,7 +6804,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "SplashHPRatio"
+							"mDataValue": "SplashHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6667,7 +6817,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "PrimaryTargetHPRatio"
+							"mDataValue": "PrimaryTargetHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6679,7 +6830,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "ActivePrimaryTargetHPRatio"
+							"mDataValue": "ActivePrimaryTargetHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6691,7 +6843,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mDataValue": "ActiveSplashHPRatio"
+							"mDataValue": "ActiveSplashHPRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6702,7 +6855,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mCoefficient": 0.01
+							"mCoefficient": 0.01,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6713,7 +6867,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 12,
-							"mCoefficient": 0.03
+							"mCoefficient": 0.03,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -6903,7 +7058,8 @@
 					"tooltipOnly": true,
 					"mFormulaParts": [
 						{
-							"mDataValue": "GoldOnHitMelee"
+							"mDataValue": "GoldOnHitMelee",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -6911,7 +7067,8 @@
 					"tooltipOnly": true,
 					"mFormulaParts": [
 						{
-							"mDataValue": "GoldOnHit"
+							"mDataValue": "GoldOnHit",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -6919,20 +7076,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -7025,7 +7183,8 @@
 									"mLevel": 7,
 									"mBonusPerLevelAtAndAfter": 15
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				},
@@ -7038,7 +7197,8 @@
 									"mLevel": 7,
 									"mBonusPerLevelAtAndAfter": 10
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				}
@@ -7082,24 +7242,28 @@
 				"Cooldown": {
 					"mFormulaParts": [
 						{
-							"mNumber": 10
+							"mNumber": 10,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{425b6f6e}": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
 				"TooltipDamage": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -7150,7 +7314,8 @@
 									"mLevel": 7,
 									"mBonusPerLevelAtAndAfter": 15
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				}
@@ -7198,20 +7363,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -7220,7 +7386,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "BaseADRatio"
+							"mDataValue": "BaseADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -7229,7 +7396,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "SheenMult"
+							"mDataValue": "SheenMult",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -7476,7 +7644,8 @@
 				"MoveSpeedAmount": {
 					"mFormulaParts": [
 						{
-							"mNumber": 20
+							"mNumber": 20,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -7588,14 +7757,16 @@
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mDataValue": "HealthToAPConversionPercent"
+							"mDataValue": "HealthToAPConversionPercent",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "VampAmountMelee"
+							"mDataValue": "VampAmountMelee",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -7603,7 +7774,8 @@
 				"RangedItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "VampAmountRanged"
+							"mDataValue": "VampAmountRanged",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -7612,20 +7784,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -7733,10 +7906,12 @@
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -7750,30 +7925,33 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"SquallDamage": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -7818,7 +7996,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio"
+							"mDataValue": "BonusADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -7826,13 +8005,13 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mNumber": 0.3
+							"mNumber": 0.3,
+							"__type": "NumberCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -7840,7 +8019,8 @@
 				"RangedItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mNumber": 0.1
+							"mNumber": 0.1,
+							"__type": "NumberCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -7848,14 +8028,16 @@
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -7933,7 +8115,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "HealRatio"
+							"mDataValue": "HealRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -7941,20 +8124,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -7963,7 +8147,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "HealRatio"
+							"mDataValue": "HealRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -8054,28 +8239,32 @@
 				"{b389d204}": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "ChainHeal"
+							"mDataValue": "ChainHeal",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
 				"{b5d7f85b}": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "SingleHeal"
+							"mDataValue": "SingleHeal",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
 				"{288eb5c0}": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "SingleShield"
+							"mDataValue": "SingleShield",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
 				"{3e41fb6f}": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "ChainShield"
+							"mDataValue": "ChainShield",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -8117,7 +8306,8 @@
 					"mFormulaParts": [
 						{
 							"mLevel1Value": 80,
-							"mInitialBonusPerLevel": 10
+							"mInitialBonusPerLevel": 10,
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					]
 				}
@@ -8197,7 +8387,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mDataValue": "ADRatio"
+							"mDataValue": "ADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -8205,7 +8396,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.4
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -8213,7 +8405,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.2
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -8221,15 +8414,15 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -8238,7 +8431,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -8317,10 +8511,12 @@
 				"Damage": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "BaseDamage"
+							"mDataValue": "BaseDamage",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
-							"mDataValue": "APRatio"
+							"mDataValue": "APRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -8409,7 +8605,8 @@
 				"DamagePerTick": {
 					"mFormulaParts": [
 						{
-							"mNumber": 15
+							"mNumber": 15,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -8463,7 +8660,8 @@
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "SlowAmount"
+							"mDataValue": "SlowAmount",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -8471,7 +8669,8 @@
 				"RangedItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "RangedSlowAmount"
+							"mDataValue": "RangedSlowAmount",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -8481,7 +8680,8 @@
 						{
 							"mStat": 2,
 							"mStatFormula": 1,
-							"mDataValue": "SpellbladeMultiplier"
+							"mDataValue": "SpellbladeMultiplier",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				}
@@ -8540,12 +8740,14 @@
 				"DamagePerTick": {
 					"mFormulaParts": [
 						{
-							"mNumber": 15
+							"mNumber": 15,
+							"__type": "NumberCalculationPart"
 						},
 						{
 							"mStat": 12,
 							"mStatFormula": 2,
-							"mCoefficient": 0.01
+							"mCoefficient": 0.01,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -8680,7 +8882,8 @@
 									"mLevel": 9,
 									"mBonusPerLevelAtAndAfter": 5
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -8735,7 +8938,8 @@
 									"mLevel": 9,
 									"mBonusPerLevelAtAndAfter": 30
 								}
-							]
+							],
+							"__type": "ByCharLevelBreakpointsCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -8889,24 +9093,28 @@
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "MeleeBaseShield"
+							"mDataValue": "MeleeBaseShield",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mDataValue": "MeleeShieldADRatio"
+							"mDataValue": "MeleeShieldADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
 				"RangedItemCalcValue": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "RangedBaseShield"
+							"mDataValue": "RangedBaseShield",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 2,
 							"mStatFormula": 2,
-							"mDataValue": "RangedShieldADRatio"
+							"mDataValue": "RangedShieldADRatio",
+							"__type": "StatByNamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -8914,27 +9122,29 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"MaxHealthDamageCalc": {
 					"mFormulaParts": [
 						{
-							"mNumber": 6
+							"mNumber": 6,
+							"__type": "NumberCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -8984,9 +9194,12 @@
 			"itemCalculations": {
 				"PenCalc": {
 					"mFormulaParts": [
-						{},
 						{
-							"mStat": 29
+							"__type": "NumberCalculationPart"
+						},
+						{
+							"mStat": 29,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					],
 					"mDisplayAsPercent": true
@@ -9072,11 +9285,13 @@
 				"UltimateRefund": {
 					"mFormulaParts": [
 						{
-							"mDataValue": "UltimateRefundBase"
+							"mDataValue": "UltimateRefundBase",
+							"__type": "NamedDataValueCalculationPart"
 						},
 						{
 							"mStat": 29,
-							"mCoefficient": 0.15
+							"mCoefficient": 0.15,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -9123,7 +9338,8 @@
 					"mFormulaParts": [
 						{
 							"mBuffName": "{10f4da91}",
-							"mCoefficient": 1
+							"mCoefficient": 1,
+							"__type": "BuffCounterByCoefficientCalculationPart"
 						}
 					]
 				}
@@ -9167,7 +9383,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.8
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -9175,7 +9392,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.8
+							"mCoefficient": 0.8,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -9183,15 +9401,15 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -9200,7 +9418,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -9208,7 +9427,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.4
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -9216,7 +9436,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.2
+							"mCoefficient": 0.2,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					]
 				},
@@ -9224,7 +9445,8 @@
 					"mFormulaParts": [
 						{
 							"mStat": 2,
-							"mCoefficient": 0.4
+							"mCoefficient": 0.4,
+							"__type": "StatByCoefficientCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {
@@ -9270,7 +9492,8 @@
 				"DamageCalc": {
 					"mFormulaParts": [
 						{
-							"mNumber": 100
+							"mNumber": 100,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -9280,7 +9503,8 @@
 					},
 					"mFormulaParts": [
 						{
-							"mDataValue": "SlowAmount"
+							"mDataValue": "SlowAmount",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -9290,7 +9514,8 @@
 					},
 					"mFormulaParts": [
 						{
-							"mDataValue": "SlowAmountRangeMod"
+							"mDataValue": "SlowAmountRangeMod",
+							"__type": "NamedDataValueCalculationPart"
 						}
 					]
 				},
@@ -9298,20 +9523,21 @@
 					"mSimpleTooltipCalculationDisplay": 5,
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}",
-					"mConditionalCalculationRequirements": {}
+					"mConditionalGameCalculation": "{06387172}"
 				},
 				"{792cf56b}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 1
+							"mNumber": 1,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				},
 				"{06387172}": {
 					"mFormulaParts": [
 						{
-							"mNumber": 2
+							"mNumber": 2,
+							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -9356,7 +9582,8 @@
 					"mExpandedTooltipCalculationDisplay": 5,
 					"mFormulaParts": [
 						{
-							"mNumber": 11
+							"mNumber": 11,
+							"__type": "NumberCalculationPart"
 						}
 					],
 					"mRangedMultiplier": {

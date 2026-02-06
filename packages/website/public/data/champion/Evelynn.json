@@ -176,106 +176,87 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"1": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"2": [
+					60,
+					60,
+					60,
+					60,
+					60,
+					60,
+					60
+				],
+				"3": [
+					0,
+					15,
+					25,
+					35,
+					45,
+					55,
+					65
+				],
+				"4": [
+					20,
+					25,
+					30,
+					35,
+					40,
+					45,
+					50
+				],
+				"5": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				],
+				"6": [
+					30,
+					30,
+					30,
+					30,
+					30,
+					30,
+					30
+				],
+				"7": [
+					50,
+					50,
+					50,
+					50,
+					50,
+					50,
+					50
+				],
+				"8": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"9": [
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25,
+					-0.25
+				]
 			},
 			"mana": [
 				40,
@@ -285,15 +266,15 @@
 				60,
 				65
 			],
-			"cooldownTime": {
-				"0": 4,
-				"1": 4,
-				"2": 4,
-				"3": 4,
-				"4": 4,
-				"5": 4,
-				"6": 4
-			},
+			"cooldownTime": [
+				4,
+				4,
+				4,
+				4,
+				4,
+				4,
+				4
+			],
 			"name": "Hate Spike",
 			"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit."
 		},
@@ -380,116 +361,96 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"0": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"1": [
+					0.75,
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25,
+					2.5
+				],
+				"2": [
+					-0.45,
+					-0.45,
+					-0.45,
+					-0.45,
+					-0.45,
+					-0.45,
+					-0.45
+				],
+				"3": [
+					16,
+					15,
+					14,
+					13,
+					12,
+					11,
+					10
+				],
+				"4": [
+					5,
+					5,
+					5,
+					5,
+					5,
+					5,
+					5
+				],
+				"5": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"6": [
+					200,
+					250,
+					300,
+					350,
+					400,
+					450,
+					500
+				],
+				"7": [
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75,
+					0.75
+				],
+				"8": [
+					0.325,
+					0.35,
+					0.375,
+					0.4,
+					0.425,
+					0.45,
+					0.475
+				],
+				"9": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				]
 			},
 			"mana": [
 				60,
@@ -499,15 +460,15 @@
 				100,
 				110
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 14,
-				"3": 13,
-				"4": 12,
-				"5": 11,
-				"6": 11
-			},
+			"cooldownTime": [
+				15,
+				15,
+				14,
+				13,
+				12,
+				11,
+				11
+			],
 			"name": "Allure",
 			"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>."
 		},
@@ -618,96 +579,78 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				}
+				"2": [
+					0.3,
+					0.3,
+					0.35,
+					0.4,
+					0.45,
+					0.5,
+					0.5
+				],
+				"3": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"4": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"5": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"6": [
+					450,
+					450,
+					450,
+					450,
+					450,
+					450,
+					450
+				],
+				"7": [
+					0.75,
+					0.8,
+					0.85,
+					0.9,
+					0.95,
+					1,
+					1.05
+				],
+				"8": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"9": [
+					1.25,
+					1.3,
+					1.35,
+					1.4,
+					1.45,
+					1.5,
+					1.55
+				]
 			},
 			"mana": [
 				40,
@@ -717,15 +660,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 8,
-				"1": 8,
-				"2": 8,
-				"3": 8,
-				"4": 8,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				8,
+				8,
+				8,
+				8,
+				8,
+				8,
+				8
+			],
 			"name": "Whiplash",
 			"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead."
 		},
@@ -773,106 +716,87 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"8": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"9": {}
+				"0": [
+					0,
+					125,
+					250,
+					375,
+					500,
+					650,
+					775
+				],
+				"1": [
+					1.4,
+					1.4,
+					1.4,
+					1.4,
+					1.4,
+					1.4,
+					1.4
+				],
+				"2": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"3": [
+					150,
+					150,
+					225,
+					300,
+					300,
+					300,
+					300
+				],
+				"4": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				],
+				"5": [
+					5,
+					5,
+					4,
+					3,
+					3,
+					3,
+					3
+				],
+				"6": [
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3,
+					0.3
+				],
+				"7": [
+					700,
+					700,
+					700,
+					700,
+					700,
+					700,
+					700
+				],
+				"8": [
+					30,
+					30,
+					45,
+					60,
+					60,
+					60,
+					60
+				]
 			},
 			"mana": [
 				100,
@@ -882,15 +806,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 100,
-				"3": 80,
-				"4": 70,
-				"5": 80,
-				"6": 80
-			},
+			"cooldownTime": [
+				120,
+				120,
+				100,
+				80,
+				70,
+				80,
+				80
+			],
 			"name": "Last Caress",
 			"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown."
 		}

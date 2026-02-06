@@ -168,15 +168,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 7,
-				"1": 7,
-				"2": 6,
-				"3": 5,
-				"4": 4,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				7,
+				7,
+				6,
+				5,
+				4,
+				3,
+				3
+			],
 			"name": "Death's Hand",
 			"tooltip": "Swain unleashes 5 eldritch bolts, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> plus <magicDamage>@ExtraBoltDamage@ magic damage</magicDamage> per bolt past the first (max <magicDamage>@MaxDamage@ magic damage</magicDamage>)."
 		},
@@ -285,15 +285,15 @@
 				80,
 				80
 			],
-			"cooldownTime": {
-				"0": 22,
-				"1": 22,
-				"2": 21,
-				"3": 20,
-				"4": 19,
-				"5": 18,
-				"6": 18
-			},
+			"cooldownTime": [
+				22,
+				22,
+				21,
+				20,
+				19,
+				18,
+				18
+			],
 			"name": "Vision of Empire",
 			"tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds.<br><br>Champions hit grant Swain a <font color='#FF3F3F' size='18'>Soul Fragment</font> and are revealed for @RevealDuration@ seconds."
 		},
@@ -378,15 +378,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 11.5,
-				"3": 11,
-				"4": 10.5,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				12,
+				12,
+				11.5,
+				11,
+				10.5,
+				10,
+				10
+			],
 			"name": "Nevermove",
 			"tooltip": "Swain launches a wave of demonic power that returns, detonating on the first enemy hit to deal <magicDamage>@SecondaryDamage@ magic damage</magicDamage> and <status>Root</status> enemies in the area for @RootDuration@ seconds.<br><br><status>Rooting</status> a champion allows Swain to reactivate this ability to pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him, gaining a <font color='#FF3F3F' size='18'>Soul Fragment</font> for each."
 		},
@@ -624,15 +624,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 120,
-				"3": 120,
-				"4": 120,
-				"5": 120,
-				"6": 120
-			},
+			"cooldownTime": [
+				120,
+				120,
+				120,
+				120,
+				120,
+				120,
+				120
+			],
 			"name": "Demonic Ascension",
 			"tooltip": "Swain frees the demon, which deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and drains <healing>@HealingCalc@ Health</healing> per second from nearby enemies. His Demonic Energy depletes over time but can be recharged indefinitely by draining enemy Champions and is fully restored on Champion takedowns.<br><br>After @DemonflareCastDelay@ seconds and every @DemonflareCooldownTooltip@ seconds thereafter, Swain can cast <spellName>Demonflare</spellName> while transformed, which deals <magicDamage>@DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slows</status> enemies by @DemonflareSlowAmount*100@%, decaying over @DemonflareSlowDuration@s."
 		}

@@ -115,66 +115,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					50,
+					70,
+					90,
+					110,
+					130,
+					150,
+					170
+				],
+				"1": [
+					150,
+					227.5,
+					292.5,
+					357.5,
+					422.5,
+					487.5,
+					555
+				],
+				"4": [
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4,
+					0.4
+				],
+				"5": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				],
+				"6": [
+					525,
+					525,
+					525,
+					525,
+					525,
+					525,
+					525
+				]
 			},
 			"mana": [
 				50,
@@ -184,15 +169,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 6,
-				"3": 6,
-				"4": 6,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				6,
+				6,
+				6,
+				6,
+				6,
+				6,
+				6
+			],
 			"name": "Javelin Toss / Takedown",
 			"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee throws her javelin, dealing <magicDamage>@HumanMinimumDamage@ magic damage</magicDamage>, increased up to <magicDamage>@HumanMaximumDamage@ magic damage</magicDamage> based on distance flown.",
 			"tooltipExtended": "{{Spell_JavelinToss_Tooltip}}<br><br>{{Spell_Takedown_Tooltip}}"
@@ -244,66 +229,51 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {
-					"value": [
-						0,
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"2": [
+					4,
+					4,
+					4,
+					4,
+					4,
+					4,
+					4
+				],
+				"3": [
+					14,
+					13,
+					12,
+					11,
+					10,
+					9,
+					9
+				],
+				"4": [
+					0,
+					10,
+					20,
+					30,
+					40,
+					50,
+					60
+				],
+				"5": [
+					120,
+					120,
+					120,
+					120,
+					120,
+					120,
+					120
+				],
+				"6": [
+					0,
+					40,
+					80,
+					120,
+					160,
+					200,
+					240
+				]
 			},
 			"mana": [
 				30,
@@ -313,15 +283,15 @@
 				50,
 				55
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 13,
-				"2": 12,
-				"3": 11,
-				"4": 10,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				14,
+				13,
+				12,
+				11,
+				10,
+				9,
+				9
+			],
 			"name": "Bushwhack / Pounce",
 			"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee places an invisible trap for 2 minutes. When an enemy walks over it, they are dealt <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second for @Effect3Amount@ seconds.<br><br>@MaxTraps@ traps may be active at once.",
 			"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}"
@@ -411,15 +381,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 12,
-				"1": 12,
-				"2": 12,
-				"3": 12,
-				"4": 12,
-				"5": 12,
-				"6": 12
-			},
+			"cooldownTime": [
+				12,
+				12,
+				12,
+				12,
+				12,
+				12,
+				12
+			],
 			"name": "Primal Surge / Swipe",
 			"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee restores <healing>@TotalHealing@ Health</healing> increased up to <healing>@MaxHealing@</healing> based on missing Health and grants them <attackSpeed>@BonusAS*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 			"tooltipExtended": "{{Spell_PrimalSurge_Tooltip}}<br><br>{{Spell_Swipe_Tooltip}}"
@@ -593,36 +563,25 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"5": [
+					6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					6
+				]
 			},
-			"cooldownTime": {
-				"0": 3,
-				"1": 3,
-				"2": 3,
-				"3": 3,
-				"4": 3,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				3,
+				3,
+				3,
+				3,
+				3,
+				3,
+				3
+			],
 			"name": "Aspect Of The Cougar",
 			"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities."
 		}

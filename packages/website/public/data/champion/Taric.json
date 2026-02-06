@@ -95,7 +95,6 @@
 											"mNumber": 1
 										},
 										{
-											"mPart1": {},
 											"mPart2": {
 												"mNumber": -1
 											}
@@ -201,76 +200,60 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					25,
+					25,
+					25,
+					25,
+					25,
+					25,
+					25
+				],
+				"1": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"2": [
+					0.15,
+					0.15,
+					0.3,
+					0.45,
+					0.6,
+					0.75,
+					1
+				],
+				"3": [
+					0.75,
+					0.75,
+					1.5,
+					2.25,
+					3,
+					3.75,
+					6
+				],
+				"4": [
+					25,
+					25,
+					50,
+					75,
+					100,
+					125,
+					125
+				],
+				"5": [
+					1,
+					1,
+					2,
+					3,
+					4,
+					5,
+					6
+				]
 			},
 			"mana": [
 				60,
@@ -280,15 +263,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 3,
-				"1": 3,
-				"2": 3,
-				"3": 3,
-				"4": 3,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				3,
+				3,
+				3,
+				3,
+				3,
+				3,
+				3
+			],
 			"name": "Starlight's Touch",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @Effect6Amount@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @Effect6Amount@ stacks)."
 		},
@@ -318,56 +301,42 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					6,
+					7,
+					8,
+					9,
+					10,
+					11,
+					12
+				],
+				"2": [
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5,
+					2.5
+				],
+				"3": [
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000,
+					1000
+				],
+				"4": [
+					1300,
+					1300,
+					1300,
+					1300,
+					1300,
+					1300,
+					1300
+				]
 			},
 			"mana": [
 				60,
@@ -377,15 +346,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 15,
-				"1": 15,
-				"2": 15,
-				"3": 15,
-				"4": 15,
-				"5": 15,
-				"6": 15
-			},
+			"cooldownTime": [
+				15,
+				15,
+				15,
+				15,
+				15,
+				15,
+				15
+			],
 			"name": "Bastion",
 			"tooltip": "<spellPassive>Passive: </spellPassive>Taric gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and forms a tether between him and the ally bound by this Ability. As long as they are near each other, the ally gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and Taric casts all his Abilities from both himself and his linked ally.<br><br><spellPassive>Active: </spellPassive>Taric binds to an ally champion, granting a <shield>@Effect2Amount@% max Health Shield</shield> for @Effect3Amount@ seconds."
 		},
@@ -414,46 +383,33 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					50,
+					90,
+					130,
+					170,
+					210,
+					250,
+					290
+				],
+				"1": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				],
+				"2": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				]
 			},
 			"mana": [
 				40,
@@ -463,15 +419,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 17,
-				"1": 16,
-				"2": 15,
-				"3": 14,
-				"4": 13,
-				"5": 12,
-				"6": 11
-			},
+			"cooldownTime": [
+				17,
+				16,
+				15,
+				14,
+				13,
+				12,
+				11
+			],
 			"name": "Dazzle",
 			"tooltip": "Taric projects a beam of starlight, bursting after @Effect3Amount@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @Effect2Amount@ seconds."
 		},
@@ -506,15 +462,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 210,
-				"1": 180,
-				"2": 150,
-				"3": 120,
-				"4": 90,
-				"5": 60,
-				"6": 30
-			},
+			"cooldownTime": [
+				210,
+				180,
+				150,
+				120,
+				90,
+				60,
+				30
+			],
 			"name": "Cosmic Radiance",
 			"tooltip": "Taric calls down protection from the heavens. After @InitialDelay@ seconds, nearby ally champions become invulnerable for @InvulnDuration@ seconds."
 		}

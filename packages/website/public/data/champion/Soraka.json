@@ -166,15 +166,15 @@
 				65,
 				65
 			],
-			"cooldownTime": {
-				"0": 9,
-				"1": 8,
-				"2": 7,
-				"3": 6,
-				"4": 5,
-				"5": 4,
-				"6": 3
-			},
+			"cooldownTime": [
+				9,
+				8,
+				7,
+				6,
+				5,
+				4,
+				3
+			],
 			"name": "Starcall",
 			"tooltip": "Soraka calls down a star, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @MoveSpeedSlow*100@% for @SlowDuration@ seconds. <br><br>Hitting an enemy champion grants Soraka <keywordMajor>Rejuvenation</keywordMajor>, which restores <healing>@TotalHoT@ Health</healing> over @HoTDuration@ seconds and grants <speed>@MoveSpeedHaste*100@% Move Speed</speed> decaying over the same duration."
 		},
@@ -250,15 +250,15 @@
 				60,
 				60
 			],
-			"cooldownTime": {
-				"0": 6,
-				"1": 6,
-				"2": 5,
-				"3": 4,
-				"4": 3,
-				"5": 2,
-				"6": 2
-			},
+			"cooldownTime": [
+				6,
+				6,
+				5,
+				4,
+				3,
+				2,
+				2
+			],
 			"name": "Astral Infusion",
 			"tooltip": "Soraka restores <healing>@TotalHeal@ Health</healing> to another allied champion.<br><br>If Soraka is affected by <keywordMajor>Rejuvenation</keywordMajor>, the Health cost will be reduced by @PercentHealthCostRefund*100@%, and the target will gain <keywordMajor>Rejuvenation</keywordMajor> for @Spell.SorakaQ:HoTDuration@ seconds."
 		},
@@ -316,15 +316,15 @@
 				90,
 				90
 			],
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 19,
-				"3": 18,
-				"4": 17,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				20,
+				20,
+				19,
+				18,
+				17,
+				16,
+				16
+			],
 			"name": "Equinox",
 			"tooltip": "Soraka creates a starfield that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to champions. The field lingers for @RootDelay@ seconds, <status>Silencing</status> enemies inside. When the zone disappears, champions inside the zone are <status>Rooted</status> for @RootDuration@ second(s) and take <magicDamage>@TotalDamage@ magic damage</magicDamage>."
 		},
@@ -386,15 +386,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 150,
-				"1": 150,
-				"2": 135,
-				"3": 120,
-				"4": 10,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				150,
+				150,
+				135,
+				120,
+				10,
+				10,
+				10
+			],
 			"name": "Wish",
 			"tooltip": "Soraka calls upon divine powers, restoring <healing>@HealingCalc@ Health</healing> to all allied champions, regardless of distance. Healing is increased to <healing>@AmpedHealing@</healing> on targets below 40% Health."
 		}

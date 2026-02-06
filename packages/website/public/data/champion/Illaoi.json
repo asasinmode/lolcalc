@@ -211,15 +211,15 @@
 				60,
 				65
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 10,
-				"2": 9,
-				"3": 8,
-				"4": 7,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				11,
+				10,
+				9,
+				8,
+				7,
+				6,
+				6
+			],
 			"name": "Tentacle Smash",
 			"tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage> (currently <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>).<br><br><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward."
 		},
@@ -324,26 +324,15 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
 			},
 			"mana": [
 				30,
@@ -353,15 +342,15 @@
 				30,
 				30
 			],
-			"cooldownTime": {
-				"0": 4,
-				"1": 4,
-				"2": 4,
-				"3": 4,
-				"4": 4,
-				"5": 4,
-				"6": 4
-			},
+			"cooldownTime": [
+				4,
+				4,
+				4,
+				4,
+				4,
+				4,
+				4
+			],
 			"name": "Harsh Lesson",
 			"tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>@HealthPercentTotal@ max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target."
 		},
@@ -514,15 +503,15 @@
 				55,
 				60
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 15,
-				"3": 14,
-				"4": 13,
-				"5": 12,
-				"6": 11
-			},
+			"cooldownTime": [
+				16,
+				16,
+				15,
+				14,
+				13,
+				12,
+				11
+			],
 			"name": "Test of Spirit",
 			"tooltip": "Illaoi pulls the spirit from an enemy champion for @SpiritDuration@ seconds. The spirit can be damaged like a champion, with @EchoPercent@ of that damage echoing to its owner.<br><br>If the spirit dies or the target leaves its range, the target becomes marked for @VesselDuration@ seconds and is <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds. Marked enemies spawn Tentacles if possible.<br><br>Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every @TimeBetweenVesselTentacleSlams@ seconds."
 		},
@@ -583,15 +572,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 120,
-				"1": 120,
-				"2": 95,
-				"3": 70,
-				"4": 70,
-				"5": 70,
-				"6": 70
-			},
+			"cooldownTime": [
+				120,
+				120,
+				95,
+				70,
+				70,
+				70,
+				70
+			],
 			"name": "Leap of Faith",
 			"tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br><br>For the next @Duration@ seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a @spell.IllaoiW:CooldownDuringR@ second cooldown."
 		}

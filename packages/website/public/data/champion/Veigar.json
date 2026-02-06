@@ -139,36 +139,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					1,
+					1,
+					1,
+					1,
+					1,
+					1,
+					1
+				],
+				"2": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
 			},
 			"mana": [
 				30,
@@ -178,15 +166,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 6.5,
-				"1": 6,
-				"2": 5.5,
-				"3": 5,
-				"4": 4.5,
-				"5": 4,
-				"6": 3.5
-			},
+			"cooldownTime": [
+				6.5,
+				6,
+				5.5,
+				5,
+				4.5,
+				4,
+				3.5
+			],
 			"name": "Baleful Strike",
 			"tooltip": "Veigar unleashes a bolt of dark energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit.<br><br>If Veigar kills an enemy with this Ability, he gains @Spell.VeigarPassive:dQKillStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor>. Large minions and large monsters grant @Spell.VeigarPassive:dQKillStacksLarge@ stacks instead."
 		},
@@ -228,36 +216,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2,
+					1.2
+				],
+				"2": [
+					8,
+					8,
+					8,
+					8,
+					8,
+					8,
+					8
+				]
 			},
 			"mana": [
 				60,
@@ -267,15 +243,15 @@
 				80,
 				85
 			],
-			"cooldownTime": {
-				"0": 0,
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
-			},
+			"cooldownTime": [
+				0,
+				0,
+				0,
+				0,
+				0,
+				0,
+				0
+			],
 			"name": "Dark Matter",
 			"tooltip": "Veigar summons dark matter from the sky, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Every @Spell.VeigarPassive:PStacksPerDarkMatterCDR@ stacks of <keywordMajor>Phenomenal Evil</keywordMajor> reduce this Ability's Cooldown by @Spell.VeigarPassive:DarkMatterCDRIncrement*100@%.",
 			"tooltipExtended": "{{Spell_VeigarDarkMatter_Tooltip}}<br><br>Cooldown currently reduced by <statTracking>@f2.0*100@%</statTracking>."
@@ -284,36 +260,24 @@
 			"image": "assets/characters/veigar/hud/icons2d/veigareventhorizon.png",
 			"maxLevel": 5,
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					1.25,
+					1.5,
+					1.75,
+					2,
+					2.25,
+					2.5,
+					2.75
+				],
+				"1": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				]
 			},
 			"mana": [
 				70,
@@ -323,15 +287,15 @@
 				90,
 				95
 			],
-			"cooldownTime": {
-				"0": 20,
-				"1": 20,
-				"2": 18.5,
-				"3": 17,
-				"4": 15.5,
-				"5": 14,
-				"6": 14
-			},
+			"cooldownTime": [
+				20,
+				20,
+				18.5,
+				17,
+				15.5,
+				14,
+				14
+			],
 			"name": "Event Horizon",
 			"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @Effect1Amount@ seconds. The cage lasts for 3 seconds."
 		},
@@ -395,15 +359,15 @@
 				100,
 				100
 			],
-			"cooldownTime": {
-				"0": 100,
-				"1": 100,
-				"2": 80,
-				"3": 60,
-				"4": 60,
-				"5": 60,
-				"6": 60
-			},
+			"cooldownTime": [
+				100,
+				100,
+				80,
+				60,
+				60,
+				60,
+				60
+			],
 			"name": "Primordial Burst",
 			"tooltip": "Veigar blasts an enemy champion with primal magic to deal between <magicDamage>@MinDamage@ and @MaxDamage@ magic damage</magicDamage>, increasing with the target's missing Health. Damage is maximized against enemies below 33% Health."
 		}

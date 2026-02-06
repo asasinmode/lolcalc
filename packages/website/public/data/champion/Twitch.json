@@ -202,26 +202,15 @@
 				]
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {},
-				"2": {},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"7": {},
-				"8": {},
-				"9": {}
+				"6": [
+					3,
+					3,
+					3,
+					3,
+					3,
+					3,
+					3
+				]
 			},
 			"mana": [
 				40,
@@ -231,15 +220,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 16,
-				"1": 16,
-				"2": 16,
-				"3": 16,
-				"4": 16,
-				"5": 16,
-				"6": 16
-			},
+			"cooldownTime": [
+				16,
+				16,
+				16,
+				16,
+				16,
+				16,
+				16
+			],
 			"name": "Ambush",
 			"tooltip": "Twitch <keywordStealth>Camouflages</keywordStealth> and gains <speed>@MoveSpeedMod@% Move Speed</speed> for @StealthDuration@ seconds. The Move Speed increases to @HiddenSpeed@% while near an enemy champion that can't see him. After exiting <keywordStealth>Camouflage</keywordStealth>, Twitch gains <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>When an enemy champion dies while afflicted with <keywordMajor>Venom</keywordMajor>, this Ability's Cooldown is refreshed."
 		},
@@ -306,15 +295,15 @@
 				70,
 				70
 			],
-			"cooldownTime": {
-				"0": 14,
-				"1": 13,
-				"2": 12,
-				"3": 11,
-				"4": 10,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				14,
+				13,
+				12,
+				11,
+				10,
+				9,
+				9
+			],
 			"name": "Venom Cask",
 			"tooltip": "Twitch hurls a cask that adds a stack of <spellName>Deadly Venom</spellName> to all enemies struck and leaves behind a toxic cloud that persists for @Duration@ seconds.<br><br>Enemies that remain within the cloud are <status>Slowed</status> by @TotalSlowAmount@% and receive an additional stack of <spellName>Deadly Venom</spellName> each second."
 		},
@@ -436,15 +425,15 @@
 				90,
 				100
 			],
-			"cooldownTime": {
-				"0": 13,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				13,
+				12,
+				11,
+				10,
+				9,
+				8,
+				8
+			],
 			"name": "Contaminate",
 			"tooltip": "Deals <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to all nearby enemies affected by <spellName>Deadly Venom</spellName>, plus an additional <physicalDamage>@PhysicalDamagePerStack@ physical damage</physicalDamage> and <magicDamage>@MagicDamagePerStack@ magical damage</magicDamage> per stack of <spellName>Deadly Venom</spellName>.<br><br>Max Damage: <physicalDamage>@MaxPhysicalDamage@ physical damage</physicalDamage> and <magicDamage>@MaxMagicDamage@ magical damage</magicDamage>."
 		},
@@ -524,15 +513,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 90,
-				"1": 90,
-				"2": 90,
-				"3": 90,
-				"4": 90,
-				"5": 90,
-				"6": 90
-			},
+			"cooldownTime": [
+				90,
+				90,
+				90,
+				90,
+				90,
+				90,
+				90
+			],
 			"name": "Spray and Pray",
 			"tooltip": "Twitch unleashes his crossbow, gaining @BonusRange@ Attack Range and <scaleAD>@BonusAD@ Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for @Duration@ seconds. These bolts hit all enemies they pass through, but deal @FallOffDamage*100@% less damage to subsequent targets, down to a minimum of @MinimumFallOffDamage*100@% damage.<br>"
 		}

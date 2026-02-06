@@ -137,36 +137,24 @@
 				}
 			},
 			"effectAmount": {
-				"0": {},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"1": [
+					-1000,
+					-1000,
+					-1000,
+					-1000,
+					-1000,
+					-1000,
+					-1000
+				],
+				"2": [
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75,
+					1.75
+				]
 			},
 			"mana": [
 				50,
@@ -176,15 +164,15 @@
 				70,
 				75
 			],
-			"cooldownTime": {
-				"0": 11.5,
-				"1": 11,
-				"2": 10.5,
-				"3": 10,
-				"4": 9.5,
-				"5": 9,
-				"6": 9
-			},
+			"cooldownTime": [
+				11.5,
+				11,
+				10.5,
+				10,
+				9.5,
+				9,
+				9
+			],
 			"name": "Blinding Assault",
 			"tooltip": "Quinn orders Valor to dive, making the first enemy hit <keywordMajor>Vulnerable</keywordMajor>, reducing their vision radius for @Effect3Amount@ seconds and dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all surrounding enemies.<br><br>If the first enemy struck is not a champion, it is <status>Disarmed</status> for @Effect3Amount@ seconds."
 		},
@@ -212,66 +200,52 @@
 				]
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"4": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				],
+				"2": [
+					0.15,
+					0.2,
+					0.25,
+					0.3,
+					0.35,
+					0.4,
+					0.45
+				],
+				"3": [
+					2100,
+					2100,
+					2100,
+					2100,
+					2100,
+					2100,
+					2100
+				],
+				"4": [
+					2,
+					2,
+					2,
+					2,
+					2,
+					2,
+					2
+				]
 			},
-			"cooldownTime": {
-				"0": 55,
-				"1": 50,
-				"2": 45,
-				"3": 40,
-				"4": 35,
-				"5": 30,
-				"6": 30
-			},
+			"cooldownTime": [
+				55,
+				50,
+				45,
+				40,
+				35,
+				30,
+				30
+			],
 			"name": "Heightened Senses",
 			"tooltip": "<spellPassive>Passive:</spellPassive> Attacking a <keywordMajor>Vulnerable</keywordMajor> target grants Quinn <attackSpeed>@AttackSpeedBonus*100@% Attack Speed</attackSpeed> and <speed>@Effect3Amount*100@% Move Speed</speed> for @Effect1Amount@ seconds.<br><br><spellActive>Active:</spellActive> Valor reveals a large area nearby for @Effect5Amount@ seconds."
 		},
@@ -295,46 +269,33 @@
 				}
 			},
 			"effectAmount": {
-				"0": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"1": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"2": {
-					"value": [
-						{},
-						{},
-						{},
-						{},
-						{},
-						{},
-						{}
-					]
-				},
-				"3": {},
-				"4": {},
-				"5": {},
-				"6": {},
-				"7": {},
-				"8": {},
-				"9": {}
+				"0": [
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5,
+					0.5
+				],
+				"1": [
+					40,
+					40,
+					65,
+					90,
+					115,
+					140,
+					140
+				],
+				"2": [
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5,
+					1.5
+				]
 			},
 			"mana": [
 				50,
@@ -344,15 +305,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 13,
-				"1": 12,
-				"2": 11,
-				"3": 10,
-				"4": 9,
-				"5": 8,
-				"6": 8
-			},
+			"cooldownTime": [
+				13,
+				12,
+				11,
+				10,
+				9,
+				8,
+				8
+			],
 			"name": "Vault",
 			"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them <keywordMajor>Vulnerable</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @Effect1Amount*100@%, decaying over @Effect3Amount@ seconds."
 		},
@@ -439,15 +400,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 3,
-				"1": 3,
-				"2": 3,
-				"3": 3,
-				"4": 3,
-				"5": 3,
-				"6": 3
-			},
+			"cooldownTime": [
+				3,
+				3,
+				3,
+				3,
+				3,
+				3,
+				3
+			],
 			"name": "Behind Enemy Lines",
 			"tooltip": "Quinn calls to Valor, pairing up after channeling for 2 seconds gaining <speed>@MovementSpeedMod*100@% Move Speed</speed> and allowing her to <recast>Recast</recast> this Ability. Attacking or using <spellName>{{Spell_QuinnQ_Name}}</spellName> or <spellName>{{Spell_QuinnE_Name}}</spellName> automatically <recast>Recasts</recast> this Ability.<br><br><recast>Recast</recast>: Quinn and Valor perform an aerial maneuver, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, marking champions as <keywordMajor>Vulnerable</keywordMajor>, and ending this Ability."
 		}

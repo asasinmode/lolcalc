@@ -155,15 +155,15 @@
 				20,
 				20
 			],
-			"cooldownTime": {
-				"0": 13,
-				"1": 13,
-				"2": 11.25,
-				"3": 9.5,
-				"4": 7.75,
-				"5": 6,
-				"6": 6
-			},
+			"cooldownTime": [
+				13,
+				13,
+				11.25,
+				9.5,
+				7.75,
+				6,
+				6
+			],
 			"name": "Lunge",
 			"tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br><br>If Fiora strikes an enemy, this Ability's Cooldown is reduced by @CDRefundPercent*100@%."
 		},
@@ -258,15 +258,15 @@
 				50,
 				50
 			],
-			"cooldownTime": {
-				"0": 26,
-				"1": 24,
-				"2": 22,
-				"3": 20,
-				"4": 18,
-				"5": 16,
-				"6": 14
-			},
+			"cooldownTime": [
+				26,
+				24,
+				22,
+				20,
+				18,
+				16,
+				14
+			],
 			"name": "Riposte",
 			"tooltip": "Fiora parries all incoming damage, disables, and negative effects for @ParryDuration@ seconds, then stabs. The stab deals <magicDamage>@StabDamage@ magic damage</magicDamage> to the first champion hit and <status>Slows</status> <speed>Move Speed</speed> by @MSSlowPercent*-100@%<attackSpeed> and Attack Speed by @AttackSlowPercent*-100@% </attackSpeed> for @CCDuration@ seconds. If Fiora parries an <status>Immobilizing</status> effect, the stabbed enemy is <status>Stunned</status> rather than <status>Slowed</status>."
 		},
@@ -337,15 +337,15 @@
 				40,
 				40
 			],
-			"cooldownTime": {
-				"0": 11,
-				"1": 11,
-				"2": 10,
-				"3": 9,
-				"4": 8,
-				"5": 7,
-				"6": 7
-			},
+			"cooldownTime": [
+				11,
+				11,
+				10,
+				9,
+				8,
+				7,
+				7
+			],
 			"name": "Bladework",
 			"tooltip": "Fiora gains <attackSpeed>@ASPercent*100@% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by @SlowPercent*-100@% for @SlowDuration@ second. The second Attack always critically strikes for <physicalDamage>@AttackTwopercentTAD*100@% damage</physicalDamage>."
 		},
@@ -459,15 +459,15 @@
 				0,
 				0
 			],
-			"cooldownTime": {
-				"0": 10,
-				"1": 110,
-				"2": 90,
-				"3": 70,
-				"4": 10,
-				"5": 10,
-				"6": 10
-			},
+			"cooldownTime": [
+				10,
+				110,
+				90,
+				70,
+				10,
+				10,
+				10
+			],
 			"name": "Grand Challenge",
 			"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_FioraPassive_Name}}</spellName> <speed>Move Speed</speed> bonus is increased to @PercentMS*100@%.<br><br><spellActive>Active:</spellActive> Fiora reveals all four <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>@spell.FioraPassive:RDamageTotal@ max Health true damage</trueDamage> and gains <spellName>{{Spell_FioraPassive_Name}}'s</spellName> <speed>Move Speed</speed> bonus while near the target.<br><br>If Fiora strikes all four <keywordMajor>Vitals</keywordMajor> within @MarkDuration@ seconds or if the target dies after she has hit at least one, Fiora restores <healing>@HealPerSecondCalc@ Health per second</healing> to surrounding allied champions for @HealDuration@ seconds."
 		}
