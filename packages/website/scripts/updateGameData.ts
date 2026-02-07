@@ -868,8 +868,6 @@ function championAbilityData(
 				name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`);
 				tooltip = mLocKeys.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
 				tooltipExtended = mLocKeys.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
-			} else {
-				console.warn(`${abilityRootKey} ${variantDataKey} no mLocKeys`);
 			}
 		}
 
