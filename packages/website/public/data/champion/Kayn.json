@@ -29,780 +29,880 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/kayn/hud/icons2d/kayn_passive_primary.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"TransformationVariable": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"PAmpCooldownAss": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"PAmpDurationAss": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"PAmpPercentBaseAss": [
-					18.823,
-					18.823,
-					18.823,
-					18.823,
-					18.823,
-					18.823,
-					18.823
-				],
-				"PAmpPercentPerLvlAss": [
-					1.178,
-					1.178,
-					1.178,
-					1.178,
-					1.178,
-					1.178,
-					1.178
-				],
-				"BonusHealRatio": [
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0
-				],
-				"SlayerHealing": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"PassiveSecondFormDelayTooltip": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"KaynSlayerHealing": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "SlayerHealing",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "The Darkin Scythe",
+					"image": "assets/characters/kayn/hud/icons2d/kayn_passive_primary.png",
+					"tooltip": "{{ game_spell_Kayn_P_main_@f1@ }}",
+					"tooltipExtended": "{{Spell_KaynPassive_Tooltip}}<br><rules><br>@PassiveSecondFormDelayTooltip@ minutes after reaching full charge on either form, Kayn can transform into either, even if it is not at full charge. The timer is reduced by 5 seconds when gaining charge in the non-full form.<br>Kayn gains Homeguard after transforming.<br></rules>",
+					"dataValues": {
+						"TransformationVariable": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"PAmpCooldownAss": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"PAmpDurationAss": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PAmpPercentBaseAss": [
+							18.823,
+							18.823,
+							18.823,
+							18.823,
+							18.823,
+							18.823,
+							18.823
+						],
+						"PAmpPercentPerLvlAss": [
+							1.178,
+							1.178,
+							1.178,
+							1.178,
+							1.178,
+							1.178,
+							1.178
+						],
+						"BonusHealRatio": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"SlayerHealing": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"PassiveSecondFormDelayTooltip": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"KaynSlayerHealing": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlayerHealing",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "BonusHealRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mDataValue": "BonusHealRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"KaynAssBonusDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.2,
+									"mEndValue": 0.4,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"KaynAssBonusDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mStartValue": 0.2,
-							"mEndValue": 0.4,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"effectAmount": {
+						"0": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"1": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						],
+						"2": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"4": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"5": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"8": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						]
+					},
+					"dataKey": "Characters/Kayn/Spells/KaynPassiveAbility/KaynPassive"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"1": [
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5
-				],
-				"2": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"3": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"4": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"5": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"8": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				]
-			},
-			"name": "The Darkin Scythe",
-			"tooltip": "{{ game_spell_Kayn_P_main_@f1@ }}",
-			"tooltipExtended": "{{Spell_KaynPassive_Tooltip}}<br><rules><br>@PassiveSecondFormDelayTooltip@ minutes after reaching full charge on either form, Kayn can transform into either, even if it is not at full charge. The timer is reduced by 5 seconds when gaining charge in the non-full form.<br>Kayn gains Homeguard after transforming.<br></rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/kayn/hud/icons2d/kayn_q_primary.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"SlayerBaseMaxHPDamage": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"SlayerMaxHPPer100BAD": [
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5
-				],
-				"SlayerMaxHPPer100BADTOOLTIPONLY": [
-					0.035,
-					0.035,
-					0.035,
-					0.035,
-					0.035,
-					0.035,
-					0.035
-				],
-				"BonusADRatio": [
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"DarkinPercentDamage": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "SlayerBaseMaxHPDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "SlayerMaxHPPer100BADTOOLTIPONLY",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Reaping Slash",
+					"image": "assets/characters/kayn/hud/icons2d/kayn_q_primary.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"DarkinFlatDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mCoefficient": 0.65,
-							"__type": "StatByCoefficientCalculationPart"
+					"cooldownTime": [
+						7.5,
+						7,
+						6.5,
+						6,
+						5.5,
+						5,
+						4.5
+					],
+					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
+					"dataValues": {
+						"SlayerBaseMaxHPDamage": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"SlayerMaxHPPer100BAD": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						],
+						"SlayerMaxHPPer100BADTOOLTIPONLY": [
+							0.035,
+							0.035,
+							0.035,
+							0.035,
+							0.035,
+							0.035,
+							0.035
+						],
+						"BonusADRatio": [
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"DarkinPercentDamage": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlayerBaseMaxHPDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "SlayerMaxHPPer100BADTOOLTIPONLY",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"DarkinFlatDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							75,
+							75,
+							105,
+							135,
+							165,
+							195,
+							195
+						],
+						"1": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"2": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"3": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						],
+						"4": [
+							175,
+							200,
+							250,
+							300,
+							350,
+							400,
+							0
+						],
+						"5": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"6": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						]
+					},
+					"dataKey": "Characters/Kayn/Spells/KaynQAbility/KaynQ"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					75,
-					75,
-					105,
-					135,
-					165,
-					195,
-					195
-				],
-				"1": [
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65
-				],
-				"2": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"3": [
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5
-				],
-				"4": [
-					175,
-					200,
-					250,
-					300,
-					350,
-					400,
-					0
-				],
-				"5": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"6": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				7.5,
-				7,
-				6.5,
-				6,
-				5.5,
-				5,
-				4.5
-			],
-			"name": "Reaping Slash",
-			"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}"
+			]
 		},
 		"w": {
-			"image": "assets/characters/kayn/hud/icons2d/kayn_w_primary.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1.1,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Blade's Reach",
+					"image": "assets/characters/kayn/hud/icons2d/kayn_w_primary.png",
+					"mana": [
+						40,
+						45,
+						50,
+						55,
+						60,
+						65
+					],
+					"cooldownTime": [
+						13,
+						13,
+						12,
+						11,
+						10,
+						9,
+						9
+					],
+					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
+					"spellCalculations": {
+						"TotalDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							85,
+							85,
+							130,
+							175,
+							220,
+							265,
+							265
+						],
+						"1": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"2": [
+							-0.9,
+							-0.9,
+							-0.9,
+							-0.9,
+							-0.9,
+							-0.9,
+							-0.9
+						],
+						"3": [
+							160,
+							160,
+							160,
+							160,
+							160,
+							160,
+							160
+						],
+						"4": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"5": [
+							900,
+							900,
+							900,
+							900,
+							900,
+							900,
+							900
+						]
+					},
+					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynW"
+				},
+				{
+					"image": "assets/characters/kayn/hud/icons2d/kayn_w_ass.png",
+					"mana": [
+						40,
+						45,
+						50,
+						55,
+						60,
+						65
+					],
+					"cooldownTime": [
+						13,
+						13,
+						12,
+						11,
+						10,
+						9,
+						9
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							90,
+							90,
+							135,
+							180,
+							225,
+							270,
+							315
+						],
+						"1": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"2": [
+							-0.6,
+							-0.6,
+							-0.6,
+							-0.6,
+							-0.6,
+							-0.6,
+							-0.6
+						],
+						"4": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynAssW"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					85,
-					85,
-					130,
-					175,
-					220,
-					265,
-					265
-				],
-				"1": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"2": [
-					-0.9,
-					-0.9,
-					-0.9,
-					-0.9,
-					-0.9,
-					-0.9,
-					-0.9
-				],
-				"3": [
-					160,
-					160,
-					160,
-					160,
-					160,
-					160,
-					160
-				],
-				"4": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"5": [
-					900,
-					900,
-					900,
-					900,
-					900,
-					900,
-					900
-				]
-			},
-			"mana": [
-				40,
-				45,
-				50,
-				55,
-				60,
-				65
-			],
-			"cooldownTime": [
-				13,
-				13,
-				12,
-				11,
-				10,
-				9,
-				9
-			],
-			"name": "Blade's Reach",
-			"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}"
+			]
 		},
 		"e": {
-			"image": "assets/characters/kayn/hud/icons2d/kayn_e_primary.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"AssassinCDReduction": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"AssMS": [
-					70,
-					70,
-					70,
-					70,
-					70,
-					70,
-					70
-				]
-			},
-			"spellCalculations": {
-				"TotalHealing": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 7,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.45,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Shadow Step",
+					"image": "assets/characters/kayn/hud/icons2d/kayn_e_primary.png",
+					"mana": [
+						90,
+						90,
+						90,
+						90,
+						90,
+						90
+					],
+					"cooldownTime": [
+						21,
+						21,
+						19,
+						17,
+						15,
+						13,
+						11
+					],
+					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
+					"dataValues": {
+						"AssassinCDReduction": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"AssMS": [
+							70,
+							70,
+							70,
+							70,
+							70,
+							70,
+							70
+						]
+					},
+					"spellCalculations": {
+						"TotalHealing": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 7,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.45,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"1": [
+							7,
+							7,
+							7.5,
+							8,
+							8.5,
+							9,
+							9.5
+						],
+						"2": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"3": [
+							1250,
+							1250,
+							1250,
+							1250,
+							1250,
+							1250,
+							1250
+						],
+						"4": [
+							70,
+							70,
+							70,
+							70,
+							70,
+							70,
+							70
+						],
+						"5": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"6": [
+							80,
+							90,
+							100,
+							110,
+							120,
+							130,
+							140
+						],
+						"7": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						]
+					},
+					"dataKey": "Characters/Kayn/Spells/KaynEAbility/KaynE"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"1": [
-					7,
-					7,
-					7.5,
-					8,
-					8.5,
-					9,
-					9.5
-				],
-				"2": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"3": [
-					1250,
-					1250,
-					1250,
-					1250,
-					1250,
-					1250,
-					1250
-				],
-				"4": [
-					70,
-					70,
-					70,
-					70,
-					70,
-					70,
-					70
-				],
-				"5": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"6": [
-					80,
-					90,
-					100,
-					110,
-					120,
-					130,
-					140
-				],
-				"7": [
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45
-				]
-			},
-			"mana": [
-				90,
-				90,
-				90,
-				90,
-				90,
-				90
-			],
-			"cooldownTime": [
-				21,
-				21,
-				19,
-				17,
-				15,
-				13,
-				11
-			],
-			"name": "Shadow Step",
-			"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}"
+			]
 		},
 		"r": {
-			"image": "assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					50,
-					150,
-					250,
-					350,
-					450,
-					550,
-					650
-				],
-				"MinimumInfestTime": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"InfestDuration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"JumpOutDistance": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"SlayerMaxHPBaseDamage": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				],
-				"SlayerMaxHPDamagerPer100AD": [
-					0.001,
-					0.001,
-					0.001,
-					0.001,
-					0.001,
-					0.001,
-					0.001
-				],
-				"SlayerHealPercent": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"AssassinCastRange": [
-					750,
-					750,
-					750,
-					750,
-					750,
-					750,
-					750
-				],
-				"BaseCastRange": [
-					550,
-					550,
-					550,
-					550,
-					550,
-					550,
-					550
-				],
-				"AssassinJumpOutDistance": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1.5,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"SlayerDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "SlayerMaxHPBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "SlayerMaxHPDamagerPer100AD",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Umbral Trespass",
+					"image": "assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
 					],
-					"mDisplayAsPercent": true
-				},
-				"HealValue": {
-					"mMultiplier": {
-						"mDataValue": "SlayerHealPercent"
+					"cooldownTime": [
+						120,
+						120,
+						100,
+						80,
+						0,
+						0,
+						0
+					],
+					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
+					"dataValues": {
+						"BaseDamage": [
+							50,
+							150,
+							250,
+							350,
+							450,
+							550,
+							650
+						],
+						"MinimumInfestTime": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"InfestDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"JumpOutDistance": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"SlayerMaxHPBaseDamage": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"SlayerMaxHPDamagerPer100AD": [
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001
+						],
+						"SlayerHealPercent": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"AssassinCastRange": [
+							750,
+							750,
+							750,
+							750,
+							750,
+							750,
+							750
+						],
+						"BaseCastRange": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						],
+						"AssassinJumpOutDistance": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						]
 					},
-					"mModifiedGameCalculation": "SlayerDamage"
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"SlayerDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlayerMaxHPBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "SlayerMaxHPDamagerPer100AD",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"HealValue": {
+							"mMultiplier": {
+								"mDataValue": "SlayerHealPercent"
+							},
+							"mModifiedGameCalculation": "SlayerDamage"
+						}
+					},
+					"effectAmount": {
+						"1": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"3": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"4": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"8": [
+							750,
+							750,
+							750,
+							750,
+							750,
+							750,
+							750
+						],
+						"9": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						]
+					},
+					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR"
+				},
+				{
+					"name": "Umbral Trespass",
+					"image": "assets/characters/kayn/hud/icons2d/kayn_r2_primary.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "End this Ability early.",
+					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynRJumpOut"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"3": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"4": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"8": [
-					750,
-					750,
-					750,
-					750,
-					750,
-					750,
-					750
-				],
-				"9": [
-					550,
-					550,
-					550,
-					550,
-					550,
-					550,
-					550
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				120,
-				120,
-				100,
-				80,
-				0,
-				0,
-				0
-			],
-			"name": "Umbral Trespass",
-			"tooltip": "{{ spell_Kayn_R_main_@f1@ }}"
+			]
 		}
 	}
 }

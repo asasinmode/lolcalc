@@ -29,707 +29,827 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"LegWarningTime": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				]
-			},
-			"spellCalculations": {
-				"PerLegCD": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 30,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Echoing Flames",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png",
+					"tooltip": "Urgot has a cannon on each of his 6 legs. Attacks and <spellName>{{Spell_UrgotW_Name}}</spellName> will fire the leg cannon that is facing his target for <physicalDamage>@ADDamage@ plus @PercentHPRatio@ max Health physical damage</physicalDamage>. This effect has a @PerLegCD@ second Cooldown per leg.",
+					"tooltipExtended": "{{Spell_UrgotPassive_Tooltip}}<br><br><rules>Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to jungle monsters.</rules>",
+					"dataValues": {
+						"LegWarningTime": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						]
+					},
+					"spellCalculations": {
+						"PerLegCD": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": -10
-								},
-								{
-									"mLevel": 9,
-									"mAdditionalBonusAtThisLevel": -10
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": -5
-								},
-								{
-									"mLevel": 13,
-									"mAdditionalBonusAtThisLevel": -2.5
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -10
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": -10
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -2.5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mPrecision": 1
-				},
-				"ADDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mSubpart": {
-								"mLevel1Value": 0.4,
-								"mBreakpoints": [
-									{
-										"mLevel": 6,
-										"mAdditionalBonusAtThisLevel": 0.12
-									},
-									{
-										"mLevel": 9,
-										"mAdditionalBonusAtThisLevel": 0.12
-									},
-									{
-										"mLevel": 11,
-										"mAdditionalBonusAtThisLevel": 0.12
-									},
-									{
-										"mLevel": 13,
-										"mAdditionalBonusAtThisLevel": 0.12
-									},
-									{
-										"mLevel": 15,
-										"mAdditionalBonusAtThisLevel": 0.12
-									}
-								]
-							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				},
-				"PercentHPRatio": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.02,
-							"mBreakpoints": [
+							"mPrecision": 1
+						},
+						"ADDamage": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.01
-								},
+									"mStat": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.4,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 9,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 13,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 15,
+												"mAdditionalBonusAtThisLevel": 0.12
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"PercentHPRatio": {
+							"mFormulaParts": [
 								{
-									"mLevel": 9,
-									"mAdditionalBonusAtThisLevel": 0.01
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.01
-								},
-								{
-									"mLevel": 13,
-									"mAdditionalBonusAtThisLevel": 0.01
+									"mLevel1Value": 0.02,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.01
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.01
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.01
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.01
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"MonsterCap": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 100,
-							"mEndValue": 360,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				},
-				"{91ffe3d8}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 650,
-							"__type": "NumberCalculationPart"
+							"mDisplayAsPercent": true
 						},
-						{
-							"mStat": 31,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"CastRange": {
-					"mFormulaParts": [
-						{
-							"mNumber": 700,
-							"__type": "NumberCalculationPart"
+						"MonsterCap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 100,
+									"mEndValue": 360,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 31,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
+						"{91ffe3d8}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 650,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 31,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CastRange": {
+							"mFormulaParts": [
+								{
+									"mNumber": 700,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 31,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Urgot/Spells/UrgotPassiveAbility/UrgotPassive"
 				}
-			},
-			"name": "Echoing Flames",
-			"tooltip": "Urgot has a cannon on each of his 6 legs. Attacks and <spellName>{{Spell_UrgotW_Name}}</spellName> will fire the leg cannon that is facing his target for <physicalDamage>@ADDamage@ plus @PercentHPRatio@ max Health physical damage</physicalDamage>. This effect has a @PerLegCD@ second Cooldown per leg.",
-			"tooltipExtended": "{{Spell_UrgotPassive_Tooltip}}<br><br><rules>Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to jungle monsters.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/urgot/hud/icons2d/urgot_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"SlowDuration": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"SlowAmount": [
-					0.4,
-					0.45,
-					0.5,
-					0.55,
-					0.6,
-					0.65,
-					0.7
-				],
-				"BaseDamage": [
-					-20,
-					25,
-					70,
-					115,
-					160,
-					205,
-					250
-				],
-				"ExplosionDelayPostMissile": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"DelayOnMissileLaunch": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"WHalterDuration": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"AoERadius": [
-					210,
-					210,
-					210,
-					210,
-					210,
-					210,
-					210
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mCoefficient": 0.7,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Corrosive Charge",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_q.png",
+					"mana": [
+						70,
+						70,
+						70,
+						70,
+						70,
+						70
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						7.5
+					],
+					"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.",
+					"dataValues": {
+						"SlowDuration": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"SlowAmount": [
+							0.4,
+							0.45,
+							0.5,
+							0.55,
+							0.6,
+							0.65,
+							0.7
+						],
+						"BaseDamage": [
+							-20,
+							25,
+							70,
+							115,
+							160,
+							205,
+							250
+						],
+						"ExplosionDelayPostMissile": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"DelayOnMissileLaunch": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"WHalterDuration": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"AoERadius": [
+							210,
+							210,
+							210,
+							210,
+							210,
+							210,
+							210
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Urgot/Spells/UrgotQAbility/UrgotQ"
 				}
-			},
-			"mana": [
-				70,
-				70,
-				70,
-				70,
-				70,
-				70
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				7.5
-			],
-			"name": "Corrosive Charge",
-			"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/urgot/hud/icons2d/urgot_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ADRatioTT": [
-					0.165,
-					0.2,
-					0.235,
-					0.27,
-					0.305,
-					0.34,
-					0.375
-				],
-				"OnHitDamageReduction": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"WAttacksPerSecond": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"BaseDamage": [
-					12,
-					12,
-					12,
-					12,
-					12,
-					12,
-					12
-				],
-				"MinionMinimumDamage": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				]
-			},
-			"spellCalculations": {
-				"DamagePerShot": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Purge",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_w.png",
+					"mana": [
+						40,
+						30,
+						20,
+						10,
+						0,
+						0
+					],
+					"cooldownTime": [
+						12,
+						12,
+						9,
+						6,
+						3,
+						0,
+						0
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @Effect8Amount@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @Effect2Amount@% <status>Slow</status> resistance, but loses <speed>@Effect5Amount@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
+					"dataValues": {
+						"ADRatioTT": [
+							0.165,
+							0.2,
+							0.235,
+							0.27,
+							0.305,
+							0.34,
+							0.375
+						],
+						"OnHitDamageReduction": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"WAttacksPerSecond": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"BaseDamage": [
+							12,
+							12,
+							12,
+							12,
+							12,
+							12,
+							12
+						],
+						"MinionMinimumDamage": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"spellCalculations": {
+						"DamagePerShot": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatioTT",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mDataValue": "ADRatioTT",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"RangeCheck": {
+							"mFormulaParts": [
+								{
+									"mNumber": 450,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 31,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							30,
+							30,
+							60,
+							90,
+							120,
+							150,
+							180
+						],
+						"1": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"2": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							25000,
+							25000
+						],
+						"4": [
+							125,
+							125,
+							125,
+							125,
+							125,
+							125,
+							125
+						],
+						"5": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"6": [
+							20,
+							20,
+							23.5,
+							27,
+							30.5,
+							34,
+							37.5
+						],
+						"7": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"8": [
+							12,
+							12,
+							12,
+							12,
+							12,
+							12,
+							12
+						],
+						"9": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"dataKey": "Characters/Urgot/Spells/UrgotWAbility/UrgotW"
 				},
-				"RangeCheck": {
-					"mFormulaParts": [
-						{
-							"mNumber": 450,
-							"__type": "NumberCalculationPart"
-						},
-						{
-							"mStat": 31,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+				{
+					"name": "Cancel the Purge",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_wcancel.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Urgot halts this Ability prematurely.",
+					"effectAmount": {
+						"0": [
+							40,
+							40,
+							60,
+							80,
+							100,
+							120,
+							120
+						],
+						"1": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"2": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"3": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						],
+						"4": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"5": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"6": [
+							120,
+							120,
+							140,
+							160,
+							180,
+							200,
+							200
+						]
+					},
+					"dataKey": "Characters/Urgot/Spells/UrgotWAbility/UrgotWCancel"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					30,
-					30,
-					60,
-					90,
-					120,
-					150,
-					180
-				],
-				"1": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"2": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					25000,
-					25000
-				],
-				"4": [
-					125,
-					125,
-					125,
-					125,
-					125,
-					125,
-					125
-				],
-				"5": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"6": [
-					20,
-					20,
-					23.5,
-					27,
-					30.5,
-					34,
-					37.5
-				],
-				"7": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"8": [
-					12,
-					12,
-					12,
-					12,
-					12,
-					12,
-					12
-				],
-				"9": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				]
-			},
-			"mana": [
-				40,
-				30,
-				20,
-				10,
-				0,
-				0
-			],
-			"cooldownTime": [
-				12,
-				12,
-				9,
-				6,
-				3,
-				0,
-				0
-			],
-			"name": "Purge",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @Effect8Amount@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @Effect2Amount@% <status>Slow</status> resistance, but loses <speed>@Effect5Amount@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off."
+			]
 		},
 		"e": {
-			"image": "assets/characters/urgot/hud/icons2d/urgot_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"EShieldDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"EShieldBaseHealth": [
-					35,
-					55,
-					75,
-					95,
-					115,
-					135,
-					155
-				],
-				"EShieldbADRatio": [
-					1.5,
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35
-				],
-				"EBaseDamage": [
-					60,
-					90,
-					120,
-					150,
-					180,
-					210,
-					240
-				],
-				"EShieldBonusHealthRatio": [
-					0,
-					0.135,
-					0.135,
-					0.135,
-					0.135,
-					0.135,
-					0.135
-				],
-				"StunDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"BaseDashSpeed": [
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200
-				],
-				"MinimumDashRange": [
-					450,
-					450,
-					450,
-					450,
-					450,
-					450,
-					450
-				],
-				"ThrowDistance": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				],
-				"WHalterDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"ETotalShieldHealth": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "EShieldBaseHealth",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Disdain",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_e.png",
+					"mana": [
+						60,
+						70,
+						80,
+						90,
+						100,
+						110
+					],
+					"cooldownTime": [
+						16,
+						16,
+						15.5,
+						15,
+						14.5,
+						14,
+						13.5
+					],
+					"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>.",
+					"dataValues": {
+						"EShieldDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"EShieldBaseHealth": [
+							35,
+							55,
+							75,
+							95,
+							115,
+							135,
+							155
+						],
+						"EShieldbADRatio": [
+							1.5,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35
+						],
+						"EBaseDamage": [
+							60,
+							90,
+							120,
+							150,
+							180,
+							210,
+							240
+						],
+						"EShieldBonusHealthRatio": [
+							0,
+							0.135,
+							0.135,
+							0.135,
+							0.135,
+							0.135,
+							0.135
+						],
+						"StunDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"BaseDashSpeed": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"MinimumDashRange": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						],
+						"ThrowDistance": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"WHalterDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"ETotalShieldHealth": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "EShieldBaseHealth",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "EShieldbADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "EShieldBonusHealthRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "EShieldbADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mDataValue": "EShieldBonusHealthRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"EDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "EBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"EDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "EBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Urgot/Spells/UrgotEAbility/UrgotE"
 				}
-			},
-			"mana": [
-				60,
-				70,
-				80,
-				90,
-				100,
-				110
-			],
-			"cooldownTime": [
-				16,
-				16,
-				15.5,
-				15,
-				14.5,
-				14,
-				13.5
-			],
-			"name": "Disdain",
-			"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>."
+			]
 		},
 		"r": {
-			"image": "assets/characters/urgot/hud/icons2d/urgot_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RBaseDamage": [
-					100,
-					100,
-					225,
-					350,
-					475,
-					600,
-					725
-				],
-				"RBonusADRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"RMoveSpeedMod": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				],
-				"RSlowDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"RSlowMultiplier": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"RFearDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"RHealthThreshold": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"RChannelTimeReel": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"RFearRadius": [
-					600,
-					600,
-					600,
-					600,
-					600,
-					600,
-					600
-				]
-			},
-			"spellCalculations": {
-				"RCalculatedDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "RBonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Fear Beyond Death",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						100,
+						100,
+						85,
+						70,
+						70,
+						70,
+						70
+					],
+					"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds.",
+					"dataValues": {
+						"RBaseDamage": [
+							100,
+							100,
+							225,
+							350,
+							475,
+							600,
+							725
+						],
+						"RBonusADRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"RMoveSpeedMod": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"RSlowDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"RSlowMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"RFearDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"RHealthThreshold": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"RChannelTimeReel": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"RFearRadius": [
+							600,
+							600,
+							600,
+							600,
+							600,
+							600,
+							600
+						]
+					},
+					"spellCalculations": {
+						"RCalculatedDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "RBonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotR"
+				},
+				{
+					"name": "Mercy",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_rrecast.png",
+					"cooldownTime": [
+						5,
+						5,
+						5,
+						5,
+						5,
+						5,
+						5
+					],
+					"tooltip": "Execute the weak.",
+					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotRRecast"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				100,
-				100,
-				85,
-				70,
-				70,
-				70,
-				70
-			],
-			"name": "Fear Beyond Death",
-			"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds."
+			]
 		}
 	}
 }

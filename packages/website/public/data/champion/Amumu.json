@@ -29,364 +29,389 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"DebuffDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"DamageAmp": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				]
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Cursed Touch",
-			"tooltip": "Amumu's Attacks <keywordMajor>Curse</keywordMajor> his enemies for @DebuffDuration@ seconds, causing them to take an additional <trueDamage>@DamageAmp*100@% true damage</trueDamage> from all magic damage they take."
+			"variants": [
+				{
+					"name": "Cursed Touch",
+					"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Amumu's Attacks <keywordMajor>Curse</keywordMajor> his enemies for @DebuffDuration@ seconds, causing them to take an additional <trueDamage>@DamageAmp*100@% true damage</trueDamage> from all magic damage they take.",
+					"dataValues": {
+						"DebuffDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"DamageAmp": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuP"
+				}
+			]
 		},
 		"q": {
-			"image": "assets/characters/amumu/hud/icons2d/amumu_q.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.85,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Bandage Toss",
+					"image": "assets/characters/amumu/hud/icons2d/amumu_q.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						3,
+						3,
+						3,
+						3,
+						3,
+						3,
+						3
+					],
+					"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @Effect2Amount@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges.",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.85,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							45,
+							70,
+							95,
+							120,
+							145,
+							170,
+							195
+						],
+						"1": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"2": [
+							1800,
+							1800,
+							1800,
+							1800,
+							1800,
+							1800,
+							1800
+						]
+					},
+					"dataKey": "Characters/Amumu/Spells/BandageTossAbility/BandageToss"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					45,
-					70,
-					95,
-					120,
-					145,
-					170,
-					195
-				],
-				"1": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"2": [
-					1800,
-					1800,
-					1800,
-					1800,
-					1800,
-					1800,
-					1800
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				3,
-				3,
-				3,
-				3,
-				3,
-				3,
-				3
-			],
-			"name": "Bandage Toss",
-			"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @Effect2Amount@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges."
+			]
 		},
 		"w": {
-			"image": "assets/characters/amumu/hud/icons2d/amumu_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"HealthDamage": [
-					0.75,
-					1,
-					1.25,
-					1.5,
-					1.75,
-					2,
-					2.25
-				],
-				"APRatio": [
-					0.005,
-					0.005,
-					0.005,
-					0.005,
-					0.005,
-					0.005,
-					0.005
-				]
-			},
-			"spellCalculations": {
-				"{c8e45bc3}": {
-					"mMultiplier": {
-						"mNumber": 0.5
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalHealthDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "HealthDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Despair",
+					"image": "assets/characters/amumu/hud/icons2d/amumu_w.png",
+					"mana": [
+						8,
+						8,
+						8,
+						8,
+						8,
+						8
 					],
-					"mPrecision": 2
-				},
-				"{8a96509c}": {
-					"mMultiplier": {
-						"mNumber": 0.005
+					"cooldownTime": [
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1
+					],
+					"tooltip": "<toggle>Toggle:</toggle> Amumu begins crying, dealing <magicDamage>@BaseDamage@ plus @TotalHealthDamage@% max Health magic damage</magicDamage> to nearby enemies every second and refreshing <keywordMajor>Curse</keywordMajor>.",
+					"dataValues": {
+						"BaseDamage": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"HealthDamage": [
+							0.75,
+							1,
+							1.25,
+							1.5,
+							1.75,
+							2,
+							2.25
+						],
+						"APRatio": [
+							0.005,
+							0.005,
+							0.005,
+							0.005,
+							0.005,
+							0.005,
+							0.005
+						]
 					},
-					"mModifiedGameCalculation": "TotalHealthDamage"
+					"spellCalculations": {
+						"{c8e45bc3}": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalHealthDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "HealthDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						},
+						"{8a96509c}": {
+							"mMultiplier": {
+								"mNumber": 0.005
+							},
+							"mModifiedGameCalculation": "TotalHealthDamage"
+						}
+					},
+					"dataKey": "Characters/Amumu/Spells/AuraofDespairAbility/AuraofDespair"
 				}
-			},
-			"mana": [
-				8,
-				8,
-				8,
-				8,
-				8,
-				8
-			],
-			"cooldownTime": [
-				1,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1
-			],
-			"name": "Despair",
-			"tooltip": "<toggle>Toggle:</toggle> Amumu begins crying, dealing <magicDamage>@BaseDamage@ plus @TotalHealthDamage@% max Health magic damage</magicDamage> to nearby enemies every second and refreshing <keywordMajor>Curse</keywordMajor>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/amumu/hud/icons2d/amumu_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"FlatDamageReductionMax": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"DamageReduction": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
+			"variants": [
+				{
+					"name": "Tantrum",
+					"image": "assets/characters/amumu/hud/icons2d/amumu_e.png",
+					"mana": [
+						35,
+						35,
+						35,
+						35,
+						35,
+						35
+					],
+					"cooldownTime": [
+						10,
+						9,
+						8,
+						7,
+						6,
+						5,
+						4
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @Effect3Amount@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies.",
+					"dataValues": {
+						"FlatDamageReductionMax": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"DamageReduction": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 1,
-							"mStatFormula": 2,
-							"mCoefficient": 0.03,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 6,
-							"mStatFormula": 2,
-							"mCoefficient": 0.03,
-							"__type": "StatByCoefficientCalculationPart"
+						"TantrumDamage": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 2,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"TantrumDamage": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 2,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							0,
+							5,
+							7,
+							9,
+							11,
+							13,
+							15
+						],
+						"1": [
+							65,
+							65,
+							95,
+							125,
+							155,
+							185,
+							185
+						],
+						"2": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"6": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						]
+					},
+					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0,
-					5,
-					7,
-					9,
-					11,
-					13,
-					15
-				],
-				"1": [
-					65,
-					65,
-					95,
-					125,
-					155,
-					185,
-					185
-				],
-				"2": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"6": [
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03
-				]
-			},
-			"mana": [
-				35,
-				35,
-				35,
-				35,
-				35,
-				35
-			],
-			"cooldownTime": [
-				10,
-				9,
-				8,
-				7,
-				6,
-				5,
-				4
-			],
-			"name": "Tantrum",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @Effect3Amount@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies."
+			]
 		},
 		"r": {
-			"image": "assets/characters/amumu/hud/icons2d/amumu_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RDamage": [
-					100,
-					200,
-					300,
-					400,
-					500,
-					600,
-					700
-				],
-				"RDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"RCoefficient": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				]
-			},
-			"spellCalculations": {
-				"RCalculatedDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "RCoefficient",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Curse of the Sad Mummy",
+					"image": "assets/characters/amumu/hud/icons2d/amumu_r.png",
+					"mana": [
+						100,
+						150,
+						200,
+						80,
+						80,
+						0
+					],
+					"cooldownTime": [
+						150,
+						150,
+						125,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltip": "Amumu flares out his bandages, <status>Stunning</status> for @RDuration@ seconds, dealing <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> and applying <keywordMajor>Curse</keywordMajor>.",
+					"dataValues": {
+						"RDamage": [
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700
+						],
+						"RDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"RCoefficient": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						]
+					},
+					"spellCalculations": {
+						"RCalculatedDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "RCoefficient",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy"
 				}
-			},
-			"mana": [
-				100,
-				150,
-				200,
-				80,
-				80,
-				0
-			],
-			"cooldownTime": [
-				150,
-				150,
-				125,
-				100,
-				100,
-				100,
-				100
-			],
-			"name": "Curse of the Sad Mummy",
-			"tooltip": "Amumu flares out his bandages, <status>Stunning</status> for @RDuration@ seconds, dealing <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> and applying <keywordMajor>Curse</keywordMajor>."
+			]
 		}
 	}
 }

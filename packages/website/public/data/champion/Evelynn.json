@@ -29,794 +29,994 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/evelynn/hud/icons2d/evelynn_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"DemonShadeTimer": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"StealthDropTimer": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"HealingThresholdTOOLTIP": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 250,
-							"mInitialBonusPerLevel": 20,
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+			"variants": [
+				{
+					"name": "Demon Shade",
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_passive.png",
+					"tooltip": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not Attacking or using Abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or towers removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.",
+					"tooltipExtended": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not attacking or using abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or turrets removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.<br><br><rules><keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.</rules><br>",
+					"dataValues": {
+						"DemonShadeTimer": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"StealthDropTimer": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"HealingThresholdTOOLTIP": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 250,
+									"mInitialBonusPerLevel": 20,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 2.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 2.5,
-							"__type": "StatByCoefficientCalculationPart"
+						"HealPerSecondTOOLTIP": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 150,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"HealPerSecondTOOLTIP": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mStartValue": 15,
-							"mEndValue": 150,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnPassiveAbility/EvelynnPassive"
 				}
-			},
-			"name": "Demon Shade",
-			"tooltip": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not Attacking or using Abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or towers removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.",
-			"tooltipExtended": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not attacking or using abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or turrets removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.<br><br><rules><keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.</rules><br>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/evelynn/hud/icons2d/evelynn_q1.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MissileBaseDamage": [
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				],
-				"BonusDamageBase": [
-					5,
-					15,
-					25,
-					35,
-					45,
-					55,
-					65
-				],
-				"CooldownRefund": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"HateSpikeBaseDamage": [
-					20,
-					25,
-					30,
-					35,
-					40,
-					45,
-					50
-				],
-				"BonusDamageAPRatio": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"HateSpikeAPRatio": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"QStackCount": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"MissileDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "HateSpikeBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Hate Spike",
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_q1.png",
+					"mana": [
+						40,
+						45,
+						50,
+						55,
+						60,
+						65
+					],
+					"cooldownTime": [
+						4,
+						4,
+						4,
+						4,
+						4,
+						4,
+						4
+					],
+					"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit.",
+					"dataValues": {
+						"MissileBaseDamage": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"BonusDamageBase": [
+							5,
+							15,
+							25,
+							35,
+							45,
+							55,
+							65
+						],
+						"CooldownRefund": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HateSpikeBaseDamage": [
+							20,
+							25,
+							30,
+							35,
+							40,
+							45,
+							50
+						],
+						"BonusDamageAPRatio": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"HateSpikeAPRatio": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"QStackCount": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"MissileDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "HateSpikeBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "HateSpikeAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "HateSpikeAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"TotalBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "BonusDamageAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"2": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"3": [
+							0,
+							15,
+							25,
+							35,
+							45,
+							55,
+							65
+						],
+						"4": [
+							20,
+							25,
+							30,
+							35,
+							40,
+							45,
+							50
+						],
+						"5": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"6": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"7": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"8": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"9": [
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25
+						]
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnQAbility/EvelynnQ"
 				},
-				"TotalBonusDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusDamageBase",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "BonusDamageAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+				{
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_q2.png",
+					"cooldownTime": [
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"1": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"2": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"3": [
+							0,
+							10,
+							20,
+							30,
+							40,
+							50,
+							60
+						],
+						"4": [
+							20,
+							25,
+							30,
+							35,
+							40,
+							45,
+							50
+						],
+						"8": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnQAbility/EvelynnQ2"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				],
-				"2": [
-					60,
-					60,
-					60,
-					60,
-					60,
-					60,
-					60
-				],
-				"3": [
-					0,
-					15,
-					25,
-					35,
-					45,
-					55,
-					65
-				],
-				"4": [
-					20,
-					25,
-					30,
-					35,
-					40,
-					45,
-					50
-				],
-				"5": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"6": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				],
-				"7": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"8": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"9": [
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25
-				]
-			},
-			"mana": [
-				40,
-				45,
-				50,
-				55,
-				60,
-				65
-			],
-			"cooldownTime": [
-				4,
-				4,
-				4,
-				4,
-				4,
-				4,
-				4
-			],
-			"name": "Hate Spike",
-			"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit."
+			]
 		},
 		"w": {
-			"image": "assets/characters/evelynn/hud/icons2d/evelynn_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"CharmDuration": [
-					1,
-					1.25,
-					1.5,
-					1.75,
-					2,
-					2.25,
-					2.5
-				],
-				"MonsterCharm": [
-					2.75,
-					3,
-					3.25,
-					3.5,
-					3.75,
-					4,
-					4.25
-				],
-				"MRShred": [
-					0.325,
-					0.35,
-					0.375,
-					0.4,
-					0.425,
-					0.45,
-					0.475
-				],
-				"ShredDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"MonsterDamage": [
-					200,
-					250,
-					300,
-					350,
-					400,
-					450,
-					500
-				],
-				"SlowAmount": [
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45
-				],
-				"SlowDuration": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				]
-			},
-			"spellCalculations": {
-				"MonsterDamageTotalTOOLTIP": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MonsterDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Allure",
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_w.png",
+					"mana": [
+						60,
+						70,
+						80,
+						90,
+						100,
+						110
+					],
+					"cooldownTime": [
+						15,
+						15,
+						14,
+						13,
+						12,
+						11,
+						11
+					],
+					"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>.",
+					"dataValues": {
+						"CharmDuration": [
+							1,
+							1.25,
+							1.5,
+							1.75,
+							2,
+							2.25,
+							2.5
+						],
+						"MonsterCharm": [
+							2.75,
+							3,
+							3.25,
+							3.5,
+							3.75,
+							4,
+							4.25
+						],
+						"MRShred": [
+							0.325,
+							0.35,
+							0.375,
+							0.4,
+							0.425,
+							0.45,
+							0.475
+						],
+						"ShredDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"MonsterDamage": [
+							200,
+							250,
+							300,
+							350,
+							400,
+							450,
+							500
+						],
+						"SlowAmount": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						],
+						"SlowDuration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						]
+					},
+					"spellCalculations": {
+						"MonsterDamageTotalTOOLTIP": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MonsterDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"1": [
+							0.75,
+							1.25,
+							1.5,
+							1.75,
+							2,
+							2.25,
+							2.5
+						],
+						"2": [
+							-0.45,
+							-0.45,
+							-0.45,
+							-0.45,
+							-0.45,
+							-0.45,
+							-0.45
+						],
+						"3": [
+							16,
+							15,
+							14,
+							13,
+							12,
+							11,
+							10
+						],
+						"4": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"5": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"6": [
+							200,
+							250,
+							300,
+							350,
+							400,
+							450,
+							500
+						],
+						"7": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"8": [
+							0.325,
+							0.35,
+							0.375,
+							0.4,
+							0.425,
+							0.45,
+							0.475
+						],
+						"9": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnWAbility/EvelynnW"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"1": [
-					0.75,
-					1.25,
-					1.5,
-					1.75,
-					2,
-					2.25,
-					2.5
-				],
-				"2": [
-					-0.45,
-					-0.45,
-					-0.45,
-					-0.45,
-					-0.45,
-					-0.45,
-					-0.45
-				],
-				"3": [
-					16,
-					15,
-					14,
-					13,
-					12,
-					11,
-					10
-				],
-				"4": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"5": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"6": [
-					200,
-					250,
-					300,
-					350,
-					400,
-					450,
-					500
-				],
-				"7": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"8": [
-					0.325,
-					0.35,
-					0.375,
-					0.4,
-					0.425,
-					0.45,
-					0.475
-				],
-				"9": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"mana": [
-				60,
-				70,
-				80,
-				90,
-				100,
-				110
-			],
-			"cooldownTime": [
-				15,
-				15,
-				14,
-				13,
-				12,
-				11,
-				11
-			],
-			"name": "Allure",
-			"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/evelynn/hud/icons2d/evelynn_e1.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				],
-				"EmpoweredDamage": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				],
-				"BasePercentHealth": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"EmpoweredPercentHealth": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"MonsterCap": [
-					450,
-					450,
-					450,
-					450,
-					450,
-					450,
-					450
-				],
-				"SpeedAmount": [
-					0.25,
-					0.3,
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.55
-				],
-				"SpeedDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				]
-			},
-			"spellCalculations": {
-				"PercentHealthBaseTOOLTIP": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mExpandedTooltipCalculationDisplay": 1,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BasePercentHealth",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.015,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Whiplash",
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_e1.png",
+					"mana": [
+						40,
+						45,
+						50,
+						55,
+						60,
+						60
 					],
-					"mDisplayAsPercent": true
+					"cooldownTime": [
+						8,
+						8,
+						8,
+						8,
+						8,
+						8,
+						8
+					],
+					"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead.",
+					"dataValues": {
+						"BaseDamage": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						],
+						"EmpoweredDamage": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						],
+						"BasePercentHealth": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"EmpoweredPercentHealth": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"MonsterCap": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						],
+						"SpeedAmount": [
+							0.25,
+							0.3,
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.55
+						],
+						"SpeedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"PercentHealthBaseTOOLTIP": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 1,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BasePercentHealth",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.015,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"PercentHealthEmpoweredTOOLTIP": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 1,
+							"mFormulaParts": [
+								{
+									"mDataValue": "EmpoweredPercentHealth",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.025,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"effectAmount": {
+						"2": [
+							0.3,
+							0.3,
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.5
+						],
+						"3": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"4": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"5": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"6": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						],
+						"7": [
+							0.75,
+							0.8,
+							0.85,
+							0.9,
+							0.95,
+							1,
+							1.05
+						],
+						"8": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"9": [
+							1.25,
+							1.3,
+							1.35,
+							1.4,
+							1.45,
+							1.5,
+							1.55
+						]
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnEAbility/EvelynnE"
 				},
-				"PercentHealthEmpoweredTOOLTIP": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mExpandedTooltipCalculationDisplay": 1,
-					"mFormulaParts": [
-						{
-							"mDataValue": "EmpoweredPercentHealth",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.025,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+				{
+					"name": "Whiplash <font color='#FFFFFF'><i>Empowered</i></font>",
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_e2.png",
+					"mana": [
+						40,
+						45,
+						50,
+						55,
+						60,
+						0
 					],
-					"mDisplayAsPercent": true
+					"cooldownTime": [
+						8,
+						8,
+						8,
+						8,
+						8,
+						8,
+						8
+					],
+					"effectAmount": {
+						"0": [
+							40,
+							55,
+							70,
+							85,
+							100,
+							115,
+							130
+						],
+						"1": [
+							50,
+							75,
+							100,
+							125,
+							150,
+							175,
+							200
+						],
+						"2": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"3": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"4": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"5": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"6": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						],
+						"7": [
+							0.75,
+							0.8,
+							0.85,
+							0.9,
+							0.95,
+							1,
+							1.05
+						],
+						"8": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"9": [
+							1.25,
+							1.3,
+							1.35,
+							0.14,
+							1.45,
+							1.5,
+							1.55
+						]
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnEAbility/EvelynnE2"
 				}
-			},
-			"effectAmount": {
-				"2": [
-					0.3,
-					0.3,
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.5
-				],
-				"3": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"4": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"5": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"6": [
-					450,
-					450,
-					450,
-					450,
-					450,
-					450,
-					450
-				],
-				"7": [
-					0.75,
-					0.8,
-					0.85,
-					0.9,
-					0.95,
-					1,
-					1.05
-				],
-				"8": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"9": [
-					1.25,
-					1.3,
-					1.35,
-					1.4,
-					1.45,
-					1.5,
-					1.55
-				]
-			},
-			"mana": [
-				40,
-				45,
-				50,
-				55,
-				60,
-				60
-			],
-			"cooldownTime": [
-				8,
-				8,
-				8,
-				8,
-				8,
-				8,
-				8
-			],
-			"name": "Whiplash",
-			"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead."
+			]
 		},
 		"r": {
-			"image": "assets/characters/evelynn/hud/icons2d/evelynn_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"CritMultiplier": [
-					2.4,
-					2.4,
-					2.4,
-					2.4,
-					2.4,
-					2.4,
-					2.4
-				],
-				"PassiveReset": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.75,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"CritDamage": {
-					"mMultiplier": {
-						"mDataValue": "CritMultiplier"
+			"variants": [
+				{
+					"name": "Last Caress",
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						120,
+						120,
+						100,
+						80,
+						70,
+						80,
+						80
+					],
+					"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown.",
+					"dataValues": {
+						"CritMultiplier": [
+							2.4,
+							2.4,
+							2.4,
+							2.4,
+							2.4,
+							2.4,
+							2.4
+						],
+						"PassiveReset": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						]
 					},
-					"mModifiedGameCalculation": "Damage"
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.75,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CritDamage": {
+							"mMultiplier": {
+								"mDataValue": "CritMultiplier"
+							},
+							"mModifiedGameCalculation": "Damage"
+						}
+					},
+					"effectAmount": {
+						"0": [
+							0,
+							125,
+							250,
+							375,
+							500,
+							650,
+							775
+						],
+						"1": [
+							1.4,
+							1.4,
+							1.4,
+							1.4,
+							1.4,
+							1.4,
+							1.4
+						],
+						"2": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"3": [
+							150,
+							150,
+							225,
+							300,
+							300,
+							300,
+							300
+						],
+						"4": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"5": [
+							5,
+							5,
+							4,
+							3,
+							3,
+							3,
+							3
+						],
+						"6": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"7": [
+							700,
+							700,
+							700,
+							700,
+							700,
+							700,
+							700
+						],
+						"8": [
+							30,
+							30,
+							45,
+							60,
+							60,
+							60,
+							60
+						]
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnRAbility/EvelynnR"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0,
-					125,
-					250,
-					375,
-					500,
-					650,
-					775
-				],
-				"1": [
-					1.4,
-					1.4,
-					1.4,
-					1.4,
-					1.4,
-					1.4,
-					1.4
-				],
-				"2": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"3": [
-					150,
-					150,
-					225,
-					300,
-					300,
-					300,
-					300
-				],
-				"4": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"5": [
-					5,
-					5,
-					4,
-					3,
-					3,
-					3,
-					3
-				],
-				"6": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"7": [
-					700,
-					700,
-					700,
-					700,
-					700,
-					700,
-					700
-				],
-				"8": [
-					30,
-					30,
-					45,
-					60,
-					60,
-					60,
-					60
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				120,
-				120,
-				100,
-				80,
-				70,
-				80,
-				80
-			],
-			"name": "Last Caress",
-			"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown."
+			]
 		}
 	}
 }

@@ -29,378 +29,446 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"PassiveCooldown": [
-					120,
-					120,
-					120,
-					120,
-					120,
-					120,
-					120
-				],
-				"GamemodeInteger": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"{e359ec0d}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.8,
-							"mBreakpoints": [
-								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.6
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.6
-								},
-								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": 0.4
-								},
-								{
-									"mLevel": 21,
-									"mAdditionalBonusAtThisLevel": 0.6
-								},
-								{
-									"mLevel": 26,
-									"mAdditionalBonusAtThisLevel": 0.6
-								},
-								{
-									"mLevel": 31,
-									"mAdditionalBonusAtThisLevel": 0.6
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"TotalXP": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mBuffName": "{79ba1a32}",
-							"mCoefficient": 1,
-							"__type": "BuffCounterByCoefficientCalculationPart"
-						}
-					]
-				},
-				"XPPer5": {
-					"mMultiplier": {
-						"mNumber": 2.5
+			"variants": [
+				{
+					"name": "Time In A Bottle",
+					"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png",
+					"tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}",
+					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
+					"dataValues": {
+						"PassiveCooldown": [
+							120,
+							120,
+							120,
+							120,
+							120,
+							120,
+							120
+						],
+						"GamemodeInteger": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
 					},
-					"mModifiedGameCalculation": "{e359ec0d}"
+					"spellCalculations": {
+						"{e359ec0d}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.8,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.4
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 26,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 31,
+											"mAdditionalBonusAtThisLevel": 0.6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TotalXP": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{79ba1a32}",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						},
+						"XPPer5": {
+							"mMultiplier": {
+								"mNumber": 2.5
+							},
+							"mModifiedGameCalculation": "{e359ec0d}"
+						}
+					},
+					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/HeightenedLearning"
+				},
+				{
+					"name": "Time in a Bottle",
+					"image": "assets/spells/icons2d/yeti_shatter.png",
+					"cooldownTime": [
+						2,
+						2,
+						2,
+						2,
+						2,
+						2,
+						2
+					],
+					"effectAmount": {
+						"0": [
+							375,
+							625,
+							875,
+							1125,
+							0,
+							0,
+							250
+						],
+						"1": [
+							75,
+							150,
+							225,
+							300,
+							0,
+							0,
+							75
+						],
+						"2": [
+							180,
+							150,
+							120,
+							90,
+							0,
+							0,
+							0
+						]
+					},
+					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/ZileanPassiveChannel"
 				}
-			},
-			"name": "Time In A Bottle",
-			"tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}",
-			"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BombBaseDamage": [
-					30,
-					75,
-					115,
-					165,
-					230,
-					300,
-					380
-				],
-				"APRatio": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				],
-				"StunDuration": [
-					1,
-					1.1,
-					1.2,
-					1.3,
-					1.4,
-					1.5,
-					1.6
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BombBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Time Bomb",
+					"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
+					"mana": [
+						60,
+						65,
+						70,
+						75,
+						80,
+						85
+					],
+					"cooldownTime": [
+						10.5,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						8
+					],
+					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds.",
+					"dataValues": {
+						"BombBaseDamage": [
+							30,
+							75,
+							115,
+							165,
+							230,
+							300,
+							380
+						],
+						"APRatio": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"StunDuration": [
+							1,
+							1.1,
+							1.2,
+							1.3,
+							1.4,
+							1.5,
+							1.6
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BombBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							30,
+							75,
+							115,
+							165,
+							230,
+							300,
+							380
+						],
+						"1": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"2": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"3": [
+							1,
+							1.1,
+							1.2,
+							1.3,
+							1.4,
+							1.5,
+							1.6
+						]
+					},
+					"dataKey": "Characters/Zilean/Spells/ZileanQAbility/ZileanQ"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					30,
-					75,
-					115,
-					165,
-					230,
-					300,
-					380
-				],
-				"1": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"2": [
-					7,
-					7,
-					7,
-					7,
-					7,
-					7,
-					7
-				],
-				"3": [
-					1,
-					1.1,
-					1.2,
-					1.3,
-					1.4,
-					1.5,
-					1.6
-				]
-			},
-			"mana": [
-				60,
-				65,
-				70,
-				75,
-				80,
-				85
-			],
-			"cooldownTime": [
-				10.5,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				8
-			],
-			"name": "Time Bomb",
-			"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
 			"maxLevel": 5,
-			"effectAmount": {
-				"0": [
-					10,
-					20,
-					30,
-					40,
-					50,
-					60,
-					70
-				],
-				"1": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"2": [
-					35,
-					35,
-					35,
-					35,
-					35,
-					35,
-					35
-				]
-			},
-			"mana": [
-				35,
-				35,
-				35,
-				35,
-				35,
-				35
-			],
-			"cooldownTime": [
-				16,
-				14,
-				12,
-				10,
-				8,
-				6,
-				6
-			],
-			"name": "Rewind",
-			"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @Effect2Amount@ seconds."
+			"variants": [
+				{
+					"name": "Rewind",
+					"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
+					"mana": [
+						35,
+						35,
+						35,
+						35,
+						35,
+						35
+					],
+					"cooldownTime": [
+						16,
+						14,
+						12,
+						10,
+						8,
+						6,
+						6
+					],
+					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @Effect2Amount@ seconds.",
+					"effectAmount": {
+						"0": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"1": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"2": [
+							35,
+							35,
+							35,
+							35,
+							35,
+							35,
+							35
+						]
+					},
+					"dataKey": "Characters/Zilean/Spells/ZileanWAbility/ZileanW"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
 			"maxLevel": 5,
-			"effectAmount": {
-				"0": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"1": [
-					25,
-					40,
-					55,
-					70,
-					85,
-					99,
-					114
-				],
-				"2": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"3": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				15,
-				15,
-				15,
-				15,
-				15,
-				15,
-				15
-			],
-			"name": "Time Warp",
-			"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds."
+			"variants": [
+				{
+					"name": "Time Warp",
+					"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						15,
+						15,
+						15,
+						15,
+						15,
+						15,
+						15
+					],
+					"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds.",
+					"effectAmount": {
+						"0": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"1": [
+							25,
+							40,
+							55,
+							70,
+							85,
+							99,
+							114
+						],
+						"2": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"3": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						]
+					},
+					"dataKey": "Characters/Zilean/Spells/TimeWarpAbility/TimeWarp"
+				}
+			]
 		},
 		"r": {
-			"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RBaseHeal": [
-					350,
-					600,
-					850,
-					1100,
-					1350,
-					1600,
-					1850
-				],
-				"RDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"APRatio": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"ReviveStateDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"RTotalHeal": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "RBaseHeal",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Chronoshift",
+					"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
+					"mana": [
+						125,
+						150,
+						175,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						10,
+						120,
+						90,
+						60,
+						0,
+						0,
+						10
+					],
+					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
+					"dataValues": {
+						"RBaseHeal": [
+							350,
+							600,
+							850,
+							1100,
+							1350,
+							1600,
+							1850
+						],
+						"RDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"APRatio": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"ReviveStateDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"RTotalHeal": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseHeal",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Zilean/Spells/ChronoShiftAbility/ChronoShift"
 				}
-			},
-			"mana": [
-				125,
-				150,
-				175,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				10,
-				120,
-				90,
-				60,
-				0,
-				0,
-				10
-			],
-			"name": "Chronoshift",
-			"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>."
+			]
 		}
 	}
 }

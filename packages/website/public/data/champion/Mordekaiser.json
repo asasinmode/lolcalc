@@ -29,563 +29,588 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"CombatTrackingDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"MaximumStacks": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"PercentAPAddedToAutos": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"FuryForQHit": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"FuryForAutoHit": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"FuryForEHit": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"DoTRadius": [
-					375,
-					375,
-					375,
-					375,
-					375,
-					375,
-					375
-				],
-				"MovementSpeed": [
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03
-				]
-			},
-			"spellCalculations": {
-				"AuraDamagePerStack": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mNumber": 5,
-							"__type": "NumberCalculationPart"
+			"variants": [
+				{
+					"name": "Darkness Rise",
+					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>.",
+					"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>",
+					"dataValues": {
+						"CombatTrackingDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"MaximumStacks": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PercentAPAddedToAutos": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"FuryForQHit": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"FuryForAutoHit": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"FuryForEHit": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"DoTRadius": [
+							375,
+							375,
+							375,
+							375,
+							375,
+							375,
+							375
+						],
+						"MovementSpeed": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						]
+					},
+					"spellCalculations": {
+						"AuraDamagePerStack": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mNumber": 5,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.3,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PercentHealthForAura": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 1,
-							"mEndValue": 5,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				},
-				"MaxAuraMonsterDamage": {
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mStartValue": 40,
-							"mEndValue": 200,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				},
-				"BonusAPAuto": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mCoefficient": 0.4,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PassiveMovementSpeed": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.03,
-							"mBreakpoints": [
+						"PercentHealthForAura": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.03
-								},
+									"mStartValue": 1,
+									"mEndValue": 5,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"MaxAuraMonsterDamage": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
 								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.03
-								},
+									"mStartValue": 40,
+									"mEndValue": 200,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"BonusAPAuto": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
 								{
-									"mLevel": 19,
-									"mAdditionalBonusAtThisLevel": 0.03
-								},
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveMovementSpeed": {
+							"mFormulaParts": [
 								{
-									"mLevel": 24,
-									"mAdditionalBonusAtThisLevel": 0.03
-								},
-								{
-									"mLevel": 30,
-									"mAdditionalBonusAtThisLevel": 0.03
+									"mLevel1Value": 0.03,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 24,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 30,
+											"mAdditionalBonusAtThisLevel": 0.03
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserPassiveAbility/MordekaiserPassive"
 				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Darkness Rise",
-			"tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>.",
-			"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserq.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"QBaseDamage": [
-					45,
-					80,
-					115,
-					150,
-					185,
-					220,
-					255
-				],
-				"APRatio": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				],
-				"IsolationScalar": [
-					1.25,
-					1.3,
-					1.35,
-					1.4,
-					1.45,
-					1.5,
-					1.55
-				],
-				"IsolationTooltip": [
-					0.25,
-					0.3,
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.55
-				],
-				"MaceStartDistance": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				],
-				"MaceLength": [
-					625,
-					625,
-					625,
-					625,
-					625,
-					625,
-					625
-				],
-				"RectangleWidth": [
-					160,
-					160,
-					160,
-					160,
-					160,
-					160,
-					160
-				],
-				"ADRatio": [
-					1.2,
-					1.2,
-					1.2,
-					1.2,
-					1.2,
-					1.2,
-					1.2
-				]
-			},
-			"spellCalculations": {
-				"QDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "QBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mBreakpoints": [
-								{
-									"mLevel": 10,
-									"mBonusPerLevelAtAndAfter": 5
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"EmpoweredDamageTooltip": {
-					"mMultiplier": {
-						"mDataValue": "IsolationScalar"
+			"variants": [
+				{
+					"name": "Obliterate",
+					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserq.png",
+					"cooldownTime": [
+						8,
+						8,
+						7,
+						6,
+						5,
+						4,
+						4
+					],
+					"tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>@QDamage@ magic damage</magicDamage>, increased to <magicDamage>@EmpoweredDamageTooltip@</magicDamage> if it hits only a single enemy.",
+					"dataValues": {
+						"QBaseDamage": [
+							45,
+							80,
+							115,
+							150,
+							185,
+							220,
+							255
+						],
+						"APRatio": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"IsolationScalar": [
+							1.25,
+							1.3,
+							1.35,
+							1.4,
+							1.45,
+							1.5,
+							1.55
+						],
+						"IsolationTooltip": [
+							0.25,
+							0.3,
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.55
+						],
+						"MaceStartDistance": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"MaceLength": [
+							625,
+							625,
+							625,
+							625,
+							625,
+							625,
+							625
+						],
+						"RectangleWidth": [
+							160,
+							160,
+							160,
+							160,
+							160,
+							160,
+							160
+						],
+						"ADRatio": [
+							1.2,
+							1.2,
+							1.2,
+							1.2,
+							1.2,
+							1.2,
+							1.2
+						]
 					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mModifiedGameCalculation": "QDamage"
+					"spellCalculations": {
+						"QDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "QBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBreakpoints": [
+										{
+											"mLevel": 10,
+											"mBonusPerLevelAtAndAfter": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"EmpoweredDamageTooltip": {
+							"mMultiplier": {
+								"mDataValue": "IsolationScalar"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "QDamage"
+						}
+					},
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserQAbility/MordekaiserQ"
 				}
-			},
-			"cooldownTime": [
-				8,
-				8,
-				7,
-				6,
-				5,
-				4,
-				4
-			],
-			"name": "Obliterate",
-			"tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>@QDamage@ magic damage</magicDamage>, increased to <magicDamage>@EmpoweredDamageTooltip@</magicDamage> if it hits only a single enemy."
+			]
 		},
 		"w": {
-			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Duration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"DamageConversion": [
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45
-				],
-				"BaseShield": [
-					0.05,
-					0.05,
-					0.05,
-					0.05,
-					0.05,
-					0.05,
-					0.05
-				],
-				"HealingPercent": [
-					0.325,
-					0.35,
-					0.375,
-					0.4,
-					0.425,
-					0.45,
-					0.475
-				],
-				"MinionPenalty": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"DamageTakenConversion": [
-					0.075,
-					0.075,
-					0.075,
-					0.075,
-					0.075,
-					0.075,
-					0.075
-				],
-				"MaxHealthCap": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"TimeBeforeDecay": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"DecayPerSecond": [
-					0.005,
-					0.005,
-					0.005,
-					0.005,
-					0.005,
-					0.005,
-					0.005
-				]
-			},
-			"spellCalculations": {
-				"HealthDecay": {
-					"mFormulaParts": [
-						{
-							"mStat": 12,
-							"mStatFormula": 1,
-							"mDataValue": "DecayPerSecond",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Indestructible",
+					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png",
+					"cooldownTime": [
+						12,
+						12,
+						11,
+						10,
+						9,
+						8,
+						8
+					],
+					"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>",
+					"dataValues": {
+						"Duration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"DamageConversion": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						],
+						"BaseShield": [
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05
+						],
+						"HealingPercent": [
+							0.325,
+							0.35,
+							0.375,
+							0.4,
+							0.425,
+							0.45,
+							0.475
+						],
+						"MinionPenalty": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"DamageTakenConversion": [
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075
+						],
+						"MaxHealthCap": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"TimeBeforeDecay": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"DecayPerSecond": [
+							0.005,
+							0.005,
+							0.005,
+							0.005,
+							0.005,
+							0.005,
+							0.005
+						]
+					},
+					"spellCalculations": {
+						"HealthDecay": {
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mStatFormula": 1,
+									"mDataValue": "DecayPerSecond",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxHealthTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MinHealthTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"MaxHealthTooltip": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mStat": 12,
-							"mCoefficient": 0.3,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"MinHealthTooltip": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mStat": 12,
-							"mCoefficient": 0.05,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserWAbility/MordekaiserW"
 				}
-			},
-			"cooldownTime": [
-				12,
-				12,
-				11,
-				10,
-				9,
-				8,
-				8
-			],
-			"name": "Indestructible",
-			"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>"
+			]
 		},
 		"e": {
-			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Damage": [
-					45,
-					60,
-					75,
-					90,
-					105,
-					120,
-					135
-				],
-				"DelayBeforeMovement": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MaxDistance": [
-					550,
-					550,
-					550,
-					550,
-					550,
-					550,
-					550
-				],
-				"KnockTowardsDistance": [
-					250,
-					250,
-					250,
-					250,
-					250,
-					250,
-					250
-				],
-				"StandAsideRange": [
-					900,
-					900,
-					900,
-					900,
-					900,
-					900,
-					900
-				],
-				"MagicPen": [
-					0.025,
-					0.05,
-					0.075,
-					0.1,
-					0.125,
-					0.15,
-					0.175
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.4,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Death's Grasp",
+					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
+					"cooldownTime": [
+						18,
+						18,
+						16,
+						14,
+						12,
+						10,
+						10
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains @MagicPen*100@% Magic Penetration.<br><br><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
+					"dataValues": {
+						"Damage": [
+							45,
+							60,
+							75,
+							90,
+							105,
+							120,
+							135
+						],
+						"DelayBeforeMovement": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MaxDistance": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						],
+						"KnockTowardsDistance": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						],
+						"StandAsideRange": [
+							900,
+							900,
+							900,
+							900,
+							900,
+							900,
+							900
+						],
+						"MagicPen": [
+							0.025,
+							0.05,
+							0.075,
+							0.1,
+							0.125,
+							0.15,
+							0.175
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserEAbility/MordekaiserE"
 				}
-			},
-			"cooldownTime": [
-				18,
-				18,
-				16,
-				14,
-				12,
-				10,
-				10
-			],
-			"name": "Death's Grasp",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains @MagicPen*100@% Magic Penetration.<br><br><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>"
+			]
 		},
 		"r": {
-			"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"SpiritRealmDuration": [
-					7,
-					7,
-					7,
-					7,
-					7,
-					7,
-					7
-				],
-				"StatStealPercentScalar": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"ZoneRadius": [
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200
-				],
-				"GhostAPRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				]
-			},
-			"cooldownTime": [
-				140,
-				140,
-				120,
-				100,
-				90,
-				80,
-				8
-			],
-			"name": "Realm of Death",
-			"tooltip": "Mordekaiser banishes a champion to the Death Realm with him for @SpiritRealmDuration@s, stealing @StatStealPercentScalar*100@% of their core stats for the duration.<br><br>If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns."
+			"variants": [
+				{
+					"name": "Realm of Death",
+					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png",
+					"cooldownTime": [
+						140,
+						140,
+						120,
+						100,
+						90,
+						80,
+						8
+					],
+					"tooltip": "Mordekaiser banishes a champion to the Death Realm with him for @SpiritRealmDuration@s, stealing @StatStealPercentScalar*100@% of their core stats for the duration.<br><br>If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns.",
+					"dataValues": {
+						"SpiritRealmDuration": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"StatStealPercentScalar": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"ZoneRadius": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"GhostAPRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						]
+					},
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserRAbility/MordekaiserR"
+				}
+			]
 		}
 	}
 }

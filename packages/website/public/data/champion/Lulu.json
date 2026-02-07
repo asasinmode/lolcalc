@@ -29,490 +29,609 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"NumberOfBolts": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 5,
-							"mEndValue": 39,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mCoefficient": 0.05,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"CombinedDamage": {
-					"mMultiplier": {
-						"mDataValue": "NumberOfBolts"
+			"variants": [
+				{
+					"name": "Pix, Faerie Companion",
+					"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
+					"tooltip": "Lulu is assisted by Pix the faerie. When Lulu Attacks, Pix fires 3 bolts at her target, dealing <magicDamage>@CombinedDamage@ magic damage</magicDamage> to the first enemy hit.",
+					"dataValues": {
+						"NumberOfBolts": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
 					},
-					"mModifiedGameCalculation": "TotalDamage"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 39,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CombinedDamage": {
+							"mMultiplier": {
+								"mDataValue": "NumberOfBolts"
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluPassiveAbility/LuluPassive"
+				},
+				{
+					"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"effectAmount": {
+						"0": [
+							30,
+							90,
+							150,
+							245,
+							315,
+							440,
+							565
+						],
+						"1": [
+							2.25,
+							2.5,
+							2.75,
+							3,
+							3.25,
+							3.5,
+							3.75
+						]
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluPassiveAbility/LuluPassiveMissileController"
 				}
-			},
-			"name": "Pix, Faerie Companion",
-			"tooltip": "Lulu is assisted by Pix the faerie. When Lulu Attacks, Pix fires 3 bolts at her target, dealing <magicDamage>@CombinedDamage@ magic damage</magicDamage> to the first enemy hit."
+			]
 		},
 		"q": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_glitterbolt.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MinionMod": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				],
-				"DoubleHitBonus": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"APRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"BaseDamage": [
-					25,
-					60,
-					95,
-					130,
-					165,
-					200,
-					235
-				],
-				"SlowAmount": [
-					-0.8,
-					-0.8,
-					-0.8,
-					-0.8,
-					-0.8,
-					-0.8,
-					-0.8
-				],
-				"SlowDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"SlowDecayTicks": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"BonusMissileDamage": {
-					"mMultiplier": {
-						"mDataValue": "DoubleHitBonus"
+			"variants": [
+				{
+					"name": "Glitterlance",
+					"image": "assets/characters/lulu/hud/icons2d/lulu_glitterbolt.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						75
+					],
+					"cooldownTime": [
+						7,
+						7,
+						7,
+						7,
+						7,
+						7,
+						7
+					],
+					"tooltip": "Lulu and Pix each fire a piercing bolt dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@%, decaying over @SlowDuration@ seconds.<br><br>Enemies take <magicDamage>@BonusMissileDamage@ magic damage</magicDamage> from additional bolts.",
+					"dataValues": {
+						"MinionMod": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"DoubleHitBonus": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"BaseDamage": [
+							25,
+							60,
+							95,
+							130,
+							165,
+							200,
+							235
+						],
+						"SlowAmount": [
+							-0.8,
+							-0.8,
+							-0.8,
+							-0.8,
+							-0.8,
+							-0.8,
+							-0.8
+						],
+						"SlowDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"SlowDecayTicks": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						]
 					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"BonusMissileDamage": {
+							"mMultiplier": {
+								"mDataValue": "DoubleHitBonus"
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluQAbility/LuluQ"
 				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				75
-			],
-			"cooldownTime": [
-				7,
-				7,
-				7,
-				7,
-				7,
-				7,
-				7
-			],
-			"name": "Glitterlance",
-			"tooltip": "Lulu and Pix each fire a piercing bolt dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@%, decaying over @SlowDuration@ seconds.<br><br>Enemies take <magicDamage>@BonusMissileDamage@ magic damage</magicDamage> from additional bolts."
+			]
 		},
 		"w": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_whimsy.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalMS": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.001,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Whimsy",
+					"image": "assets/characters/lulu/hud/icons2d/lulu_whimsy.png",
+					"mana": [
+						65,
+						65,
+						65,
+						65,
+						65,
+						65
 					],
-					"mDisplayAsPercent": true
+					"cooldownTime": [
+						18,
+						18,
+						18,
+						18,
+						18,
+						18,
+						18
+					],
+					"tooltip": "When used on an ally, Lulu grants <speed>@TotalMS@ Move Speed</speed> and <attackSpeed>@Effect7Amount*100@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When used on an enemy, Lulu <status>Polymorphs</status> them for @Effect3Amount@ seconds.",
+					"spellCalculations": {
+						"TotalMS": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.001,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"effectAmount": {
+						"0": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"2": [
+							1,
+							1.2,
+							1.4,
+							1.6,
+							1.8,
+							2,
+							2.2
+						],
+						"3": [
+							-60,
+							-60,
+							-60,
+							-60,
+							-60,
+							-60,
+							-60
+						],
+						"4": [
+							2.75,
+							3,
+							3.25,
+							3.5,
+							3.75,
+							4,
+							4.25
+						],
+						"5": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"6": [
+							0.2,
+							0.2,
+							0.225,
+							0.25,
+							0.275,
+							0.3,
+							0.3
+						]
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluWAbility/LuluW"
+				},
+				{
+					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlestick_puppywind.png",
+					"cooldownTime": [
+						17,
+						16,
+						15,
+						14,
+						13,
+						12,
+						12
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"1": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"2": [
+							1,
+							1.25,
+							1.5,
+							1.75,
+							2,
+							2.25,
+							2.5
+						],
+						"3": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"4": [
+							12,
+							15,
+							18,
+							21,
+							24,
+							27,
+							30
+						]
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluWAbility/LuluWTwo"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"2": [
-					1,
-					1.2,
-					1.4,
-					1.6,
-					1.8,
-					2,
-					2.2
-				],
-				"3": [
-					-60,
-					-60,
-					-60,
-					-60,
-					-60,
-					-60,
-					-60
-				],
-				"4": [
-					2.75,
-					3,
-					3.25,
-					3.5,
-					3.75,
-					4,
-					4.25
-				],
-				"5": [
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01
-				],
-				"6": [
-					0.2,
-					0.2,
-					0.225,
-					0.25,
-					0.275,
-					0.3,
-					0.3
-				]
-			},
-			"mana": [
-				65,
-				65,
-				65,
-				65,
-				65,
-				65
-			],
-			"cooldownTime": [
-				18,
-				18,
-				18,
-				18,
-				18,
-				18,
-				18
-			],
-			"name": "Whimsy",
-			"tooltip": "When used on an ally, Lulu grants <speed>@TotalMS@ Move Speed</speed> and <attackSpeed>@Effect7Amount*100@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When used on an enemy, Lulu <status>Polymorphs</status> them for @Effect3Amount@ seconds."
+			]
 		},
 		"e": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_commandpix.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					30,
-					70,
-					110,
-					150,
-					190,
-					230,
-					270
-				],
-				"DamageAPRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"BaseShield": [
-					30,
-					70,
-					110,
-					150,
-					190,
-					230,
-					270
-				],
-				"ShieldAPRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"ShieldDuration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Help, Pix!",
+					"image": "assets/characters/lulu/hud/icons2d/lulu_commandpix.png",
+					"mana": [
+						60,
+						65,
+						70,
+						75,
+						80,
+						85
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						7.5
+					],
+					"tooltip": "When used on an ally, Pix jumps to them and grants <spellName>Pix, Faerie Companion</spellName> for @Effect1Amount@ seconds. If the ally is a champion, Pix also grants <shield>@TotalShield@ Shield</shield> for @Effect7Amount@ seconds.<br><br>When used on an enemy champion, Pix hampers them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth> of them for @Effect6Amount@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"DamageAPRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"BaseShield": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"ShieldAPRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"ShieldDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "DamageAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "DamageAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShield",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"TotalShield": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseShield",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "ShieldAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"2": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"4": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"5": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"6": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						]
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluEAbility/LuluE"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"2": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"4": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"5": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"6": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				]
-			},
-			"mana": [
-				60,
-				65,
-				70,
-				75,
-				80,
-				85
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				7.5
-			],
-			"name": "Help, Pix!",
-			"tooltip": "When used on an ally, Pix jumps to them and grants <spellName>Pix, Faerie Companion</spellName> for @Effect1Amount@ seconds. If the ally is a champion, Pix also grants <shield>@TotalShield@ Shield</shield> for @Effect7Amount@ seconds.<br><br>When used on an enemy champion, Pix hampers them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth> of them for @Effect6Amount@ seconds."
+			]
 		},
 		"r": {
-			"image": "assets/characters/lulu/hud/icons2d/lulu_giantgrowth.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BonusHealth": [
-					125,
-					275,
-					425,
-					575,
-					725,
-					875,
-					1025
-				],
-				"SlowPercent": [
-					15,
-					30,
-					45,
-					60,
-					75,
-					90,
-					105
-				],
-				"BuffDuration": [
-					7,
-					7,
-					7,
-					7,
-					7,
-					7,
-					7
-				],
-				"AoERadius": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				],
-				"KnockbackDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"KnockbackDistance": [
-					275,
-					275,
-					275,
-					275,
-					275,
-					275,
-					275
-				]
-			},
-			"spellCalculations": {
-				"TotalBonusHealth": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusHealth",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.55,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Wild Growth",
+					"image": "assets/characters/lulu/hud/icons2d/lulu_giantgrowth.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						0
+					],
+					"cooldownTime": [
+						130,
+						120,
+						100,
+						80,
+						60,
+						40,
+						20
+					],
+					"tooltip": "Lulu enlarges an ally, <status>Knocking Up</status> surrounding enemies for @KnockbackDuration@ second. The enlarged ally gains <healing>@TotalBonusHealth@ max Health</healing> and <status>Slows</status> surrounding enemies by @SlowPercent@% for @BuffDuration@ seconds.",
+					"dataValues": {
+						"BonusHealth": [
+							125,
+							275,
+							425,
+							575,
+							725,
+							875,
+							1025
+						],
+						"SlowPercent": [
+							15,
+							30,
+							45,
+							60,
+							75,
+							90,
+							105
+						],
+						"BuffDuration": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"AoERadius": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"KnockbackDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"KnockbackDistance": [
+							275,
+							275,
+							275,
+							275,
+							275,
+							275,
+							275
+						]
+					},
+					"spellCalculations": {
+						"TotalBonusHealth": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusHealth",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.55,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluRAbility/LuluR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				0
-			],
-			"cooldownTime": [
-				130,
-				120,
-				100,
-				80,
-				60,
-				40,
-				20
-			],
-			"name": "Wild Growth",
-			"tooltip": "Lulu enlarges an ally, <status>Knocking Up</status> surrounding enemies for @KnockbackDuration@ second. The enlarged ally gains <healing>@TotalBonusHealth@ max Health</healing> and <status>Slows</status> surrounding enemies by @SlowPercent@% for @BuffDuration@ seconds."
+			]
 		}
 	}
 }

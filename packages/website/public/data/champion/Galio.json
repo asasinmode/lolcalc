@@ -29,543 +29,568 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/galio/hud/icons2d/galio_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"ChargeRatePerHit": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"PassiveCooldown": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 15,
-							"mEndValue": 115,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mCoefficient": 0.4,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 6,
-							"mStatFormula": 2,
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PassiveCooldownModified": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mPart2": {
-								"mDataValue": "PassiveCooldown"
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
-						}
-					],
-					"mPrecision": -1
-				}
-			},
-			"name": "Colossal Smash",
-			"tooltip": "Galio's Attacks have increased attack speed and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies. <br><br>This effect's cooldown is reduced by @ChargeRatePerHit@ seconds when Galio hits an enemy champion or epic monster with an ability, once per cast."
-		},
-		"q": {
-			"image": "assets/characters/galio/hud/icons2d/galio_q.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					35,
-					70,
-					105,
-					140,
-					175,
-					210,
-					245
-				],
-				"SuperQDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"SuperQMonsterMaxDamage": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"SuperQBasePercentage": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"TornadoTicks": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"QMissileDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.7,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"{85f4c0e9}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "SuperQBasePercentage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.01,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PercentSuperQDamageTT": {
-					"mMultiplier": {
-						"mDataValue": "TornadoTicks"
+			"variants": [
+				{
+					"name": "Colossal Smash",
+					"image": "assets/characters/galio/hud/icons2d/galio_passive.png",
+					"tooltip": "Galio's Attacks have increased attack speed and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies. <br><br>This effect's cooldown is reduced by @ChargeRatePerHit@ seconds when Galio hits an enemy champion or epic monster with an ability, once per cast.",
+					"dataValues": {
+						"ChargeRatePerHit": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PassiveCooldown": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
 					},
-					"mModifiedGameCalculation": "{85f4c0e9}"
-				},
-				"SuperQMonsterMaxDamageTotal": {
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mPart1": {
-								"mDataValue": "SuperQMonsterMaxDamage"
-							},
-							"mPart2": {
-								"mDataValue": "TornadoTicks"
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				70,
-				75,
-				80,
-				85,
-				90,
-				95
-			],
-			"cooldownTime": [
-				11,
-				11,
-				10,
-				9,
-				8,
-				7,
-				7
-			],
-			"name": "Winds of War",
-			"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds."
-		},
-		"w": {
-			"image": "assets/characters/galio/hud/icons2d/galio_w.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"MinimumWBaseDamage": [
-					10,
-					20,
-					30,
-					40,
-					50,
-					60,
-					70
-				],
-				"MaximumWBaseDamage": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				],
-				"PassiveShieldHealthRatio": [
-					0.06,
-					0.075,
-					0.09,
-					0.105,
-					0.12,
-					0.135,
-					0.15
-				]
-			},
-			"spellCalculations": {
-				"TotalPassiveShield": {
-					"mFormulaParts": [
-						{
-							"mStat": 12,
-							"mDataValue": "PassiveShieldHealthRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MagicDamageReduction": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.04,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 6,
-							"mStatFormula": 2,
-							"mCoefficient": 0.08,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mCoefficient": 0.01,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"PhysicalDamageReduction": {
-					"mMultiplier": {
-						"mNumber": 0.5
-					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "MagicDamageReduction"
-				},
-				"MinTotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MinimumWBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.3,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"MaxTotalDamage": {
-					"mMultiplier": {
-						"mNumber": 3
-					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "MinTotalDamage"
-				},
-				"PassiveShieldOOCTimer": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 12,
-							"mBreakpoints": [
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": -1
+									"mStartValue": 15,
+									"mEndValue": 115,
+									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": -3
+									"mStat": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveCooldownModified": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mPart2": {
+										"mDataValue": "PassiveCooldown"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							"mPrecision": -1
 						}
-					]
+					},
+					"dataKey": "Characters/Galio/Spells/GalioPassiveAbility/GalioPassive"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					25,
-					25,
-					30,
-					35,
-					40,
-					45,
-					45
-				],
-				"1": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"2": [
-					15,
-					15,
-					15,
-					15,
-					15,
-					15,
-					15
-				],
-				"3": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"5": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"6": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"7": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"8": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"9": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				18,
-				18,
-				17,
-				16,
-				15,
-				14,
-				14
-			],
-			"name": "Shield of Durand",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Galio gains a <shield>@TotalPassiveShield@ Magic Shield</shield> after not taking damage for @PassiveShieldOOCTimer@ seconds.<br><br><charge>Begin Charging:</charge> Galio reduces incoming magic damage by @MagicDamageReduction@ and incoming physical damage by @PhysicalDamageReduction@ and <status>Slows</status> himself by @Effect3Amount@%.<br><br><release>Release:</release> Galio <status>Taunts</status> enemy champions for between @Effect4Amount@ to @Effect7Amount@ seconds, deals between <magicDamage>@MinTotalDamage@</magicDamage> and <magicDamage>@MaxTotalDamage@ magic damage</magicDamage>, and refreshes the damage reduction for @Effect8Amount@ seconds. Taunt duration, damage, and range increase with charge time."
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Winds of War",
+					"image": "assets/characters/galio/hud/icons2d/galio_q.png",
+					"mana": [
+						70,
+						75,
+						80,
+						85,
+						90,
+						95
+					],
+					"cooldownTime": [
+						11,
+						11,
+						10,
+						9,
+						8,
+						7,
+						7
+					],
+					"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							70,
+							105,
+							140,
+							175,
+							210,
+							245
+						],
+						"SuperQDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"SuperQMonsterMaxDamage": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"SuperQBasePercentage": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"TornadoTicks": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"QMissileDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{85f4c0e9}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "SuperQBasePercentage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.01,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PercentSuperQDamageTT": {
+							"mMultiplier": {
+								"mDataValue": "TornadoTicks"
+							},
+							"mModifiedGameCalculation": "{85f4c0e9}"
+						},
+						"SuperQMonsterMaxDamageTotal": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "SuperQMonsterMaxDamage"
+									},
+									"mPart2": {
+										"mDataValue": "TornadoTicks"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Galio/Spells/GalioQAbility/GalioQ"
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Shield of Durand",
+					"image": "assets/characters/galio/hud/icons2d/galio_w.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						18,
+						18,
+						17,
+						16,
+						15,
+						14,
+						14
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Galio gains a <shield>@TotalPassiveShield@ Magic Shield</shield> after not taking damage for @PassiveShieldOOCTimer@ seconds.<br><br><charge>Begin Charging:</charge> Galio reduces incoming magic damage by @MagicDamageReduction@ and incoming physical damage by @PhysicalDamageReduction@ and <status>Slows</status> himself by @Effect3Amount@%.<br><br><release>Release:</release> Galio <status>Taunts</status> enemy champions for between @Effect4Amount@ to @Effect7Amount@ seconds, deals between <magicDamage>@MinTotalDamage@</magicDamage> and <magicDamage>@MaxTotalDamage@ magic damage</magicDamage>, and refreshes the damage reduction for @Effect8Amount@ seconds. Taunt duration, damage, and range increase with charge time.",
+					"dataValues": {
+						"MinimumWBaseDamage": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"MaximumWBaseDamage": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						],
+						"PassiveShieldHealthRatio": [
+							0.06,
+							0.075,
+							0.09,
+							0.105,
+							0.12,
+							0.135,
+							0.15
+						]
+					},
+					"spellCalculations": {
+						"TotalPassiveShield": {
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mDataValue": "PassiveShieldHealthRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MagicDamageReduction": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.04,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mCoefficient": 0.08,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.01,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"PhysicalDamageReduction": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "MagicDamageReduction"
+						},
+						"MinTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MinimumWBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MaxTotalDamage": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "MinTotalDamage"
+						},
+						"PassiveShieldOOCTimer": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 12,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -3
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							25,
+							25,
+							30,
+							35,
+							40,
+							45,
+							45
+						],
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"2": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"3": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"5": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"6": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"7": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"8": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"9": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"dataKey": "Characters/Galio/Spells/GalioWAbility/GalioW"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/galio/hud/icons2d/galio_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					50,
-					90,
-					130,
-					170,
-					210,
-					250,
-					290
-				],
-				"KnockupDuration": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"MinRange": [
-					250,
-					250,
-					250,
-					250,
-					250,
-					250,
-					250
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.9,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PVEDamage": {
-					"mMultiplier": {
-						"mNumber": 0.8
+			"variants": [
+				{
+					"name": "Justice Punch",
+					"image": "assets/characters/galio/hud/icons2d/galio_e.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						11,
+						11,
+						10,
+						9,
+						8,
+						7,
+						7
+					],
+					"tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for @KnockupDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>@PVEDamage@ magic damage</magicDamage>.<br><br>Galio's dash stops on hitting terrain.",
+					"dataValues": {
+						"BaseDamage": [
+							50,
+							90,
+							130,
+							170,
+							210,
+							250,
+							290
+						],
+						"KnockupDuration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"MinRange": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						]
 					},
-					"mModifiedGameCalculation": "TotalDamage"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.9,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PVEDamage": {
+							"mMultiplier": {
+								"mNumber": 0.8
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/Galio/Spells/GalioEAbility/GalioE"
 				}
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				11,
-				11,
-				10,
-				9,
-				8,
-				7,
-				7
-			],
-			"name": "Justice Punch",
-			"tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for @KnockupDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>@PVEDamage@ magic damage</magicDamage>.<br><br>Galio's dash stops on hitting terrain."
+			]
 		},
 		"r": {
-			"image": "assets/characters/galio/hud/icons2d/galio_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					50,
-					150,
-					250,
-					350,
-					450,
-					550,
-					650
-				],
-				"StunDurationOuter": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"TemporaryWShieldDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.7,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Hero's Entrance",
+					"image": "assets/characters/galio/hud/icons2d/galio_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						180,
+						180,
+						160,
+						140,
+						140,
+						140,
+						140
+					],
+					"tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for @TemporaryWShieldDuration@ seconds. Galio then flies to his landing zone.<br><br>When Galio lands, he <status>Knocks Up</status> for @StunDurationOuter@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							50,
+							150,
+							250,
+							350,
+							450,
+							550,
+							650
+						],
+						"StunDurationOuter": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"TemporaryWShieldDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Galio/Spells/GalioRAbility/GalioR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				180,
-				180,
-				160,
-				140,
-				140,
-				140,
-				140
-			],
-			"name": "Hero's Entrance",
-			"tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for @TemporaryWShieldDuration@ seconds. Galio then flies to his landing zone.<br><br>When Galio lands, he <status>Knocks Up</status> for @StunDurationOuter@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
+			]
 		}
 	}
 }

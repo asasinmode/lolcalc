@@ -29,637 +29,662 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/janna/hud/icons2d/jannap.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"MSPercentAlly": [
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06
-				],
-				"MSBonusMagicDamage": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				]
-			},
-			"spellCalculations": {
-				"MSToOnHitConversionRate": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "{022aad62}",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Tailwind",
+					"image": "assets/characters/janna/hud/icons2d/jannap.png",
+					"tooltip": "Ally champions gain <speed>@MSPercentAlly*100@% Move Speed</speed> moving towards Janna.<br><br>Janna deals <magicDamage>@BonusDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and with <keywordMajor>Zephyr</keywordMajor>.",
+					"dataValues": {
+						"MSPercentAlly": [
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06
+						],
+						"MSBonusMagicDamage": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						]
+					},
+					"spellCalculations": {
+						"MSToOnHitConversionRate": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "{022aad62}",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"BonusDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 7,
+									"mStatFormula": 2,
+									"mDataValue": "{022aad62}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"BonusDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 7,
-							"mStatFormula": 2,
-							"mDataValue": "{022aad62}",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/TailwindSelf"
 				}
-			},
-			"name": "Tailwind",
-			"tooltip": "Ally champions gain <speed>@MSPercentAlly*100@% Move Speed</speed> moving towards Janna.<br><br>Janna deals <magicDamage>@BonusDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and with <keywordMajor>Zephyr</keywordMajor>."
+			]
 		},
 		"q": {
-			"image": "assets/characters/janna/hud/icons2d/jannaq.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MissileTravelTime": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"MinionMod": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"BaseRange": [
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100
-				],
-				"MinDamage": [
-					20,
-					55,
-					90,
-					125,
-					160,
-					195,
-					230
-				],
-				"MinimumRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"BonusDamage": [
-					5,
-					10,
-					15,
-					20,
-					25,
-					30,
-					35
-				],
-				"BonusRatio": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"ChargeDistancePercent": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				],
-				"BaseKnockup": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"ChargeKnockup": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"MaxDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"MinimumDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "MinDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "MinimumRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"ExtraDamagePerSecondCharged": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "BonusRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MaxDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mExpandedTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "MinDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "MinimumRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mPart1": {
-								"mDataValue": "MaxDuration"
-							},
-							"mPart2": {
-								"mSubparts": [
-									{
-										"mDataValue": "BonusDamage"
-									},
-									{
-										"mDataValue": "BonusRatio"
-									}
-								]
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
-						}
-					]
-				},
-				"MaxKnockup": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseKnockup",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mPart1": {
-								"mDataValue": "MaxDuration"
-							},
-							"mPart2": {
-								"mDataValue": "ChargeKnockup"
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Howling Gale",
+					"image": "assets/characters/janna/hud/icons2d/jannaq.png",
+					"mana": [
+						90,
+						95,
+						100,
+						105,
+						110,
+						110
 					],
-					"mPrecision": 2
+					"cooldownTime": [
+						14,
+						14,
+						14,
+						14,
+						14,
+						14,
+						14
+					],
+					"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early.",
+					"dataValues": {
+						"MissileTravelTime": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"MinionMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"BaseRange": [
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100
+						],
+						"MinDamage": [
+							20,
+							55,
+							90,
+							125,
+							160,
+							195,
+							230
+						],
+						"MinimumRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"BonusDamage": [
+							5,
+							10,
+							15,
+							20,
+							25,
+							30,
+							35
+						],
+						"BonusRatio": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"ChargeDistancePercent": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"BaseKnockup": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"ChargeKnockup": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MaxDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"MinimumDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "MinDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "MinimumRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ExtraDamagePerSecondCharged": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "BonusRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "MinDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "MinimumRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mPart1": {
+										"mDataValue": "MaxDuration"
+									},
+									"mPart2": {
+										"mSubparts": [
+											{
+												"mDataValue": "BonusDamage"
+											},
+											{
+												"mDataValue": "BonusRatio"
+											}
+										]
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							]
+						},
+						"MaxKnockup": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseKnockup",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mPart1": {
+										"mDataValue": "MaxDuration"
+									},
+									"mPart2": {
+										"mDataValue": "ChargeKnockup"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/Janna/Spells/HowlingGaleAbility/HowlingGale"
 				}
-			},
-			"mana": [
-				90,
-				95,
-				100,
-				105,
-				110,
-				110
-			],
-			"cooldownTime": [
-				14,
-				14,
-				14,
-				14,
-				14,
-				14,
-				14
-			],
-			"name": "Howling Gale",
-			"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early."
+			]
 		},
 		"w": {
-			"image": "assets/characters/janna/hud/icons2d/jannaw.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MSPercent": [
-					0.05,
-					0.06,
-					0.07,
-					0.08,
-					0.09,
-					0.1,
-					0.11
-				],
-				"BaseDamage": [
-					25,
-					55,
-					85,
-					115,
-					145,
-					175,
-					205
-				],
-				"APRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"SlowDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"SlowPercent": [
-					16,
-					20,
-					24,
-					28,
-					32,
-					36,
-					40
-				],
-				"MSAPRatio": [
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0
-				],
-				"SlowAPRatio": [
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06
-				]
-			},
-			"spellCalculations": {
-				"TotalMS": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MSPercent",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "MSAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Zephyr",
+					"image": "assets/characters/janna/hud/icons2d/jannaw.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalSlow": {
-					"mMultiplier": {
-						"mNumber": 0.01
+					"cooldownTime": [
+						8,
+						8,
+						7.5,
+						7,
+						6.5,
+						6,
+						6
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"MSPercent": [
+							0.05,
+							0.06,
+							0.07,
+							0.08,
+							0.09,
+							0.1,
+							0.11
+						],
+						"BaseDamage": [
+							25,
+							55,
+							85,
+							115,
+							145,
+							175,
+							205
+						],
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"SlowDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"SlowPercent": [
+							16,
+							20,
+							24,
+							28,
+							32,
+							36,
+							40
+						],
+						"MSAPRatio": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"SlowAPRatio": [
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06
+						]
 					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "SlowPercent",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"TotalMS": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MSPercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "MSAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
-						{
-							"mDataValue": "SlowAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalSlow": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlowPercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "SlowAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"dataKey": "Characters/Janna/Spells/SowTheWindAbility/SowTheWind"
 				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				70
-			],
-			"cooldownTime": [
-				8,
-				8,
-				7.5,
-				7,
-				6.5,
-				6,
-				6
-			],
-			"name": "Zephyr",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/janna/hud/icons2d/jannae.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ECDRefundforCC": [
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2
-				],
-				"EmpowerDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"DecayGracePeriod": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"BaseShield": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				],
-				"ShieldAPRatio": [
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55
-				],
-				"BonusAD": [
-					5,
-					10,
-					15,
-					20,
-					25,
-					30,
-					35
-				],
-				"ADAPRatio": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"ShieldDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"TotalShield": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseShield",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Eye Of The Storm",
+					"image": "assets/characters/janna/hud/icons2d/jannae.png",
+					"mana": [
+						70,
+						75,
+						80,
+						85,
+						90,
+						90
+					],
+					"cooldownTime": [
+						16,
+						16,
+						15,
+						14,
+						13,
+						12,
+						12
+					],
+					"tooltip": "Janna grants an ally champion or turret <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. While shielded, they gain <scaleAD>@TotalAD@ Attack Damage</scaleAD>.<br><br>Janna refunds @ECDRefundforCC*100@% of the cooldown whenever she impairs an enemy champion's movement with an Ability.",
+					"dataValues": {
+						"ECDRefundforCC": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"EmpowerDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"DecayGracePeriod": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"BaseShield": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						],
+						"ShieldAPRatio": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						],
+						"BonusAD": [
+							5,
+							10,
+							15,
+							20,
+							25,
+							30,
+							35
+						],
+						"ADAPRatio": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"ShieldDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShield",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "ShieldAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"TotalAD": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusAD",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ADAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"TotalAD": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusAD",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "ADAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Janna/Spells/EyeOfTheStormAbility/EyeOfTheStorm"
 				}
-			},
-			"mana": [
-				70,
-				75,
-				80,
-				85,
-				90,
-				90
-			],
-			"cooldownTime": [
-				16,
-				16,
-				15,
-				14,
-				13,
-				12,
-				12
-			],
-			"name": "Eye Of The Storm",
-			"tooltip": "Janna grants an ally champion or turret <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. While shielded, they gain <scaleAD>@TotalAD@ Attack Damage</scaleAD>.<br><br>Janna refunds @ECDRefundforCC*100@% of the cooldown whenever she impairs an enemy champion's movement with an Ability."
+			]
 		},
 		"r": {
-			"image": "assets/characters/janna/hud/icons2d/jannar.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"HealBasePerSecond": [
-					50,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				]
-			},
-			"spellCalculations": {
-				"HealPerSecond": {
-					"mExpandedTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "HealBasePerSecond",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"TotalHeal": {
-					"mMultiplier": {
-						"mEffectIndex": 3
+			"variants": [
+				{
+					"name": "Monsoon",
+					"image": "assets/characters/janna/hud/icons2d/jannar.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						130,
+						130,
+						115,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
+					"dataValues": {
+						"HealBasePerSecond": [
+							50,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						]
 					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "HealPerSecond"
+					"spellCalculations": {
+						"HealPerSecond": {
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "HealBasePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalHeal": {
+							"mMultiplier": {
+								"mEffectIndex": 3
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "HealPerSecond"
+						}
+					},
+					"effectAmount": {
+						"1": [
+							0,
+							300,
+							450,
+							600,
+							0,
+							0,
+							0
+						],
+						"2": [
+							0,
+							3,
+							3,
+							3,
+							0,
+							0,
+							0
+						],
+						"3": [
+							700,
+							700,
+							700,
+							700,
+							700,
+							700,
+							700
+						],
+						"4": [
+							875,
+							875,
+							875,
+							875,
+							875,
+							875,
+							875
+						],
+						"5": [
+							875,
+							875,
+							875,
+							875,
+							875,
+							875,
+							875
+						],
+						"6": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"7": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"8": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					0,
-					300,
-					450,
-					600,
-					0,
-					0,
-					0
-				],
-				"2": [
-					0,
-					3,
-					3,
-					3,
-					0,
-					0,
-					0
-				],
-				"3": [
-					700,
-					700,
-					700,
-					700,
-					700,
-					700,
-					700
-				],
-				"4": [
-					875,
-					875,
-					875,
-					875,
-					875,
-					875,
-					875
-				],
-				"5": [
-					875,
-					875,
-					875,
-					875,
-					875,
-					875,
-					875
-				],
-				"6": [
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200
-				],
-				"7": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"8": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				130,
-				130,
-				115,
-				100,
-				100,
-				100,
-				100
-			],
-			"name": "Monsoon",
-			"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early."
+			]
 		}
 	}
 }

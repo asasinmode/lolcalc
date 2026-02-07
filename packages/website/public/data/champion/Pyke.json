@@ -29,691 +29,716 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"OneEnemy": [
-					0.09,
-					0.09,
-					0.09,
-					0.09,
-					0.09,
-					0.09,
-					0.09
-				],
-				"AdditionalBonus": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				]
-			},
-			"spellCalculations": {
-				"DamageStorageMax": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mNumber": 80,
-							"__type": "NumberCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"OneEnemyCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "OneEnemy",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 29,
-							"mCoefficient": 0.002,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Gift of the Drowned Ones",
+					"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
 					],
-					"mDisplayAsPercent": true
-				},
-				"AdditionalBonusCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "AdditionalBonus",
-							"__type": "NamedDataValueCalculationPart"
+					"tooltip": "Pyke stores @OneEnemyCalc@ of damage taken from champions, increased to @AdditionalBonusCalc@ when there's more than one enemy nearby. Pyke can store up to @DamageStorageMax@ damage. While <unique>unseen</unique> by enemies, he rapidly regenerates this stored damage.<br><br>Additionally, Pyke converts all Maximum Health increases to Attack Damage instead at a rate of <healing>14 Health</healing> to <physicalDamage>1 Attack Damage</physicalDamage>. ",
+					"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>",
+					"dataValues": {
+						"OneEnemy": [
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09
+						],
+						"AdditionalBonus": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"DamageStorageMax": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mNumber": 80,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 29,
-							"mCoefficient": 0.004,
-							"__type": "StatByCoefficientCalculationPart"
+						"OneEnemyCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "OneEnemy",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 29,
+									"mCoefficient": 0.002,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"AdditionalBonusCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "AdditionalBonus",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 29,
+									"mCoefficient": 0.004,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"effectAmount": {
+						"0": [
+							14,
+							14,
+							14,
+							14,
+							14,
+							14,
+							14
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"5": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"6": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						]
+					},
+					"dataKey": "Characters/Pyke/Spells/PykePassiveAbility/PykePassive"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					14,
-					14,
-					14,
-					14,
-					14,
-					14,
-					14
-				],
-				"3": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"5": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"6": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				]
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Gift of the Drowned Ones",
-			"tooltip": "Pyke stores @OneEnemyCalc@ of damage taken from champions, increased to @AdditionalBonusCalc@ when there's more than one enemy nearby. Pyke can store up to @DamageStorageMax@ damage. While <unique>unseen</unique> by enemies, he rapidly regenerates this stored damage.<br><br>Additionally, Pyke converts all Maximum Health increases to Attack Damage instead at a rate of <healing>14 Health</healing> to <physicalDamage>1 Attack Damage</physicalDamage>. ",
-			"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/pyke/hud/icons2d/pykeq.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ManaRefund": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"BaseDamage": [
-					50,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				],
-				"SlowAmount": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				],
-				"SlowDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"MinChargeTime": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MaxChargeTime": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"SelfSlow": [
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2
-				],
-				"PullDistance": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				],
-				"MinRangeDistance": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				],
-				"MaxRangeDistance": [
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100
-				],
-				"ChargeTimeToGetMaxRange": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"BonusADRatio": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Bone Skewer",
+					"image": "assets/characters/pyke/hud/icons2d/pykeq.png",
+					"mana": [
+						70,
+						75,
+						80,
+						85,
+						90,
+						95
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						7.5
+					],
+					"tooltip": "<tap>Tap:</tap> Pyke stabs, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, preferring champions. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit and <status>Pulling</status> them towards him. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>If Pyke successfully hits an enemy champion or the channel does not complete successfully, @ManaRefund*100@% of the Mana cost is refunded.",
+					"dataValues": {
+						"ManaRefund": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"BaseDamage": [
+							50,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						],
+						"SlowAmount": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"SlowDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"MinChargeTime": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MaxChargeTime": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"SelfSlow": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"PullDistance": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"MinRangeDistance": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"MaxRangeDistance": [
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100
+						],
+						"ChargeTimeToGetMaxRange": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"BonusADRatio": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Pyke/Spells/PykeQAbility/PykeQ"
 				}
-			},
-			"mana": [
-				70,
-				75,
-				80,
-				85,
-				90,
-				95
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				7.5
-			],
-			"name": "Bone Skewer",
-			"tooltip": "<tap>Tap:</tap> Pyke stabs, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, preferring champions. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br><hold>Hold: </hold>Pyke throws his harpoon, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit and <status>Pulling</status> them towards him. They are then <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>If Pyke successfully hits an enemy champion or the channel does not complete successfully, @ManaRefund*100@% of the Mana cost is refunded."
+			]
 		},
 		"w": {
-			"image": "assets/characters/pyke/hud/icons2d/pykew.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"{601654a1}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.25,
-							"mInitialBonusPerLevel": 0.03,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Ghostwater Dive",
+					"image": "assets/characters/pyke/hud/icons2d/pykew.png",
+					"mana": [
+						65,
+						65,
+						65,
+						65,
+						65,
+						65
+					],
+					"cooldownTime": [
+						14,
+						14,
+						13,
+						12,
+						11,
+						10,
+						10
+					],
+					"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @Effect10Amount@ seconds.",
+					"spellCalculations": {
+						"{601654a1}": {
+							"mFormulaParts": [
 								{
-									"mLevel": 4,
-									"mBonusPerLevelAtAndAfter": 0.02
-								},
-								{
-									"mLevel": 8,
-									"mBonusPerLevelAtAndAfter": 0.01
+									"mLevel1Value": 0.25,
+									"mInitialBonusPerLevel": 0.03,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mBonusPerLevelAtAndAfter": 0.02
+										},
+										{
+											"mLevel": 8,
+											"mBonusPerLevelAtAndAfter": 0.01
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"MoveSpeed": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
+							"mDisplayAsPercent": true
 						},
-						{
-							"mStat": 29,
-							"mCoefficient": 2,
-							"__type": "StatByCoefficientCalculationPart"
+						"MoveSpeed": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 29,
+									"mCoefficient": 2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							45,
+							45,
+							45,
+							45,
+							45,
+							45,
+							45
+						],
+						"2": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"3": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"4": [
+							80,
+							80,
+							80,
+							80,
+							80,
+							80,
+							80
+						],
+						"5": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						],
+						"6": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"7": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"8": [
+							1.15,
+							1.15,
+							1.15,
+							1.15,
+							1.15,
+							1.15,
+							1.15
+						],
+						"9": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"dataKey": "Characters/Pyke/Spells/PykeWAbility/PykeW"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					45,
-					45,
-					45,
-					45,
-					45,
-					45,
-					45
-				],
-				"2": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"3": [
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03
-				],
-				"4": [
-					80,
-					80,
-					80,
-					80,
-					80,
-					80,
-					80
-				],
-				"5": [
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55
-				],
-				"6": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"7": [
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01
-				],
-				"8": [
-					1.15,
-					1.15,
-					1.15,
-					1.15,
-					1.15,
-					1.15,
-					1.15
-				],
-				"9": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				]
-			},
-			"mana": [
-				65,
-				65,
-				65,
-				65,
-				65,
-				65
-			],
-			"cooldownTime": [
-				14,
-				14,
-				13,
-				12,
-				11,
-				10,
-				10
-			],
-			"name": "Ghostwater Dive",
-			"tooltip": "Pyke gains <keywordStealth>Camouflage</keywordStealth> and <speed>@MoveSpeed@% Move Speed</speed> decaying over @Effect10Amount@ seconds."
+			]
 		},
 		"e": {
-			"image": "assets/characters/pyke/hud/icons2d/pykee.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					100,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				],
-				"BonusADRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"BaseStunDuration": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"ELethalityRatio": [
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01
-				]
-			},
-			"spellCalculations": {
-				"StunDuration": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "{d5189f50}",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 29,
-							"mCoefficient": 0.01,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Phantom Undertow",
+					"image": "assets/characters/pyke/hud/icons2d/pykee.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
 					],
-					"mPrecision": -1
-				},
-				"TotalDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"cooldownTime": [
+						15,
+						15,
+						14,
+						13,
+						12,
+						11,
+						11
+					],
+					"tooltip": "Pyke dashes, leaving a drowned phantom behind him that returns to him shortly. The phantom <status>Stuns</status> for @StunDuration@ seconds and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to champions.",
+					"dataValues": {
+						"BaseDamage": [
+							100,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						],
+						"BonusADRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"BaseStunDuration": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"ELethalityRatio": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						]
+					},
+					"spellCalculations": {
+						"StunDuration": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "{d5189f50}",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 29,
+									"mCoefficient": 0.01,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mPrecision": -1
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
+						"TotalDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							100,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						],
+						"1": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"2": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Pyke/Spells/PykeEAbility/PykeE"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					100,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				],
-				"1": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"2": [
-					550,
-					550,
-					550,
-					550,
-					550,
-					550,
-					550
-				],
-				"3": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				15,
-				15,
-				14,
-				13,
-				12,
-				11,
-				11
-			],
-			"name": "Phantom Undertow",
-			"tooltip": "Pyke dashes, leaving a drowned phantom behind him that returns to him shortly. The phantom <status>Stuns</status> for @StunDuration@ seconds and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to champions."
+			]
 		},
 		"r": {
-			"image": "assets/characters/pyke/hud/icons2d/pyker.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RRecastDuration": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				],
-				"ReducedDamage": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"DamageCap": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"RDamage": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 250,
-							"mBreakpoints": [
-								{
-									"mLevel": 7,
-									"mBonusPerLevelAtAndAfter": 40
-								},
-								{
-									"mLevel": 10,
-									"mBonusPerLevelAtAndAfter": 30
-								},
-								{
-									"mLevel": 12,
-									"mBonusPerLevelAtAndAfter": 20
-								},
-								{
-									"mLevel": 17,
-									"mBonusPerLevelAtAndAfter": 10
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 29,
-							"mCoefficient": 1.5,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"RADDamage": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"RLethalityDamage": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mStat": 29,
-							"mCoefficient": 1.5,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"RBaseDamage": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 250,
-							"mBreakpoints": [
-								{
-									"mLevel": 7,
-									"mBonusPerLevelAtAndAfter": 40
-								},
-								{
-									"mLevel": 10,
-									"mBonusPerLevelAtAndAfter": 30
-								},
-								{
-									"mLevel": 12,
-									"mBonusPerLevelAtAndAfter": 20
-								},
-								{
-									"mLevel": 17,
-									"mBonusPerLevelAtAndAfter": 10
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"ReducedDamageFinal": {
-					"mMultiplier": {
-						"mDataValue": "ReducedDamage"
+			"variants": [
+				{
+					"name": "Death From Below",
+					"image": "assets/characters/pyke/hud/icons2d/pyker.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						115,
+						100,
+						85,
+						70,
+						55,
+						40,
+						25
+					],
+					"tooltip": "Pyke strikes all enemy champions in an X, teleporting to and <danger>executing</danger> targets below <scaleAD>@RDamage@</scaleAD> Health. Champions above the threshold and non-champions instead take physical damage equal to @ReducedDamage*100@% of that amount (<physicalDamage>@ReducedDamageFinal@</physicalDamage>). <br><br>When an enemy champion dies inside the X, Pyke can <recast>Recast</recast> this Ability for free within @RRecastDuration@ seconds. If he executed that champion, the last assisting ally will also get kill gold. If he did not, he will still get kill gold as if he did.<br>",
+					"dataValues": {
+						"RRecastDuration": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"ReducedDamage": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"DamageCap": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
 					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "RDamage"
+					"spellCalculations": {
+						"RDamage": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 250,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 40
+										},
+										{
+											"mLevel": 10,
+											"mBonusPerLevelAtAndAfter": 30
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 20
+										},
+										{
+											"mLevel": 17,
+											"mBonusPerLevelAtAndAfter": 10
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 29,
+									"mCoefficient": 1.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"RADDamage": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"RLethalityDamage": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mStat": 29,
+									"mCoefficient": 1.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"RBaseDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 250,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 40
+										},
+										{
+											"mLevel": 10,
+											"mBonusPerLevelAtAndAfter": 30
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 20
+										},
+										{
+											"mLevel": 17,
+											"mBonusPerLevelAtAndAfter": 10
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ReducedDamageFinal": {
+							"mMultiplier": {
+								"mDataValue": "ReducedDamage"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "RDamage"
+						}
+					},
+					"dataKey": "Characters/Pyke/Spells/PykeRAbility/PykeR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				115,
-				100,
-				85,
-				70,
-				55,
-				40,
-				25
-			],
-			"name": "Death From Below",
-			"tooltip": "Pyke strikes all enemy champions in an X, teleporting to and <danger>executing</danger> targets below <scaleAD>@RDamage@</scaleAD> Health. Champions above the threshold and non-champions instead take physical damage equal to @ReducedDamage*100@% of that amount (<physicalDamage>@ReducedDamageFinal@</physicalDamage>). <br><br>When an enemy champion dies inside the X, Pyke can <recast>Recast</recast> this Ability for free within @RRecastDuration@ seconds. If he executed that champion, the last assisting ally will also get kill gold. If he did not, he will still get kill gold as if he did.<br>"
+			]
 		}
 	}
 }

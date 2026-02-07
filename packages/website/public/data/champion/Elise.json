@@ -29,598 +29,623 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/elise/hud/icons2d/elisepassive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"SpiderlingBaseHP": [
-					80,
-					80,
-					80,
-					80,
-					80,
-					80,
-					80
-				],
-				"SpiderlingMagicDamage": [
-					2,
-					8,
-					14,
-					20,
-					26,
-					32,
-					38
-				],
-				"SpiderlingAPRatio": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				],
-				"SpiderlingAoEReduction": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				]
-			},
-			"spellCalculations": {
-				"{38943004}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 5,
-							"mInitialBonusPerLevel": 10,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Spider Queen",
+					"image": "assets/characters/elise/hud/icons2d/elisepassive.png",
+					"tooltip": "Elise begins the game with a point in her Ultimate, allowing her to shapeshift between <keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor>.<br><br><keywordMajor>Human Form:</keywordMajor> Elise's Ability hits grant her a dormant <keywordMajor>Spiderling</keywordMajor> (max @spell.EliseR:SpiderlingsStored@).<br><br><keywordMajor>Spider Form:</keywordMajor> Attacks deal an additional <magicDamage>@spell.EliseR:PassiveTotalDamage@ magic damage</magicDamage> and restore <healing>@spell.EliseR:PassiveTotalHealing@ Health</healing>.",
+					"dataValues": {
+						"SpiderlingBaseHP": [
+							80,
+							80,
+							80,
+							80,
+							80,
+							80,
+							80
+						],
+						"SpiderlingMagicDamage": [
+							2,
+							8,
+							14,
+							20,
+							26,
+							32,
+							38
+						],
+						"SpiderlingAPRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"SpiderlingAoEReduction": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						]
+					},
+					"spellCalculations": {
+						"{38943004}": {
+							"mFormulaParts": [
 								{
-									"mLevel": 8,
-									"mBonusPerLevelAtAndAfter": 15
-								},
-								{
-									"mLevel": 11,
-									"mBonusPerLevelAtAndAfter": 20
-								},
-								{
-									"mLevel": 14,
-									"mBonusPerLevelAtAndAfter": 25
-								},
-								{
-									"mLevel": 17,
-									"mBonusPerLevelAtAndAfter": 30
+									"mLevel1Value": 5,
+									"mInitialBonusPerLevel": 10,
+									"mBreakpoints": [
+										{
+											"mLevel": 8,
+											"mBonusPerLevelAtAndAfter": 15
+										},
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 20
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 25
+										},
+										{
+											"mLevel": 17,
+											"mBonusPerLevelAtAndAfter": 30
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Elise/Spells/ElisePassiveAbility/ElisePassive"
 				}
-			},
-			"name": "Spider Queen",
-			"tooltip": "Elise begins the game with a point in her Ultimate, allowing her to shapeshift between <keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor>.<br><br><keywordMajor>Human Form:</keywordMajor> Elise's Ability hits grant her a dormant <keywordMajor>Spiderling</keywordMajor> (max @spell.EliseR:SpiderlingsStored@).<br><br><keywordMajor>Spider Form:</keywordMajor> Attacks deal an additional <magicDamage>@spell.EliseR:PassiveTotalDamage@ magic damage</magicDamage> and restore <healing>@spell.EliseR:PassiveTotalHealing@ Health</healing>."
+			]
 		},
 		"q": {
-			"image": "assets/characters/elise/hud/icons2d/elisehumanq.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					10,
-					40,
-					70,
-					100,
-					130,
-					160,
-					190
-				],
-				"MonsterCapDamage": [
-					45,
-					65,
-					85,
-					105,
-					125,
-					145,
-					165
-				],
-				"APRatio": [
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03
-				],
-				"TargetHPDamage": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"SpiderBaseDamage": [
-					20,
-					50,
-					80,
-					110,
-					140,
-					170,
-					200
-				]
-			},
-			"spellCalculations": {
-				"HumanPercentHealth": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "TargetHPDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Neurotoxin / Venomous Bite",
+					"image": "assets/characters/elise/hud/icons2d/elisehumanq.png",
+					"mana": [
+						80,
+						85,
+						90,
+						95,
+						100,
+						105
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"MonsterDamageCapCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MonsterCapDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"cooldownTime": [
+						6,
+						6,
+						6,
+						6,
+						6,
+						6,
+						6
+					],
+					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise injects neurotoxin, dealing <magicDamage>@BaseDamage@ plus @HumanPercentHealth@ current Health magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_EliseHumanQ_Tooltip}}<br><br>{{Spell_EliseSpiderQ_Tooltip}}",
+					"dataValues": {
+						"BaseDamage": [
+							10,
+							40,
+							70,
+							100,
+							130,
+							160,
+							190
+						],
+						"MonsterCapDamage": [
+							45,
+							65,
+							85,
+							105,
+							125,
+							145,
+							165
+						],
+						"APRatio": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"TargetHPDamage": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"SpiderBaseDamage": [
+							20,
+							50,
+							80,
+							110,
+							140,
+							170,
+							200
+						]
+					},
+					"spellCalculations": {
+						"HumanPercentHealth": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "TargetHPDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
-						{
-							"mCoefficient": 0.9,
-							"__type": "StatByCoefficientCalculationPart"
+						"MonsterDamageCapCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MonsterCapDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.9,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Elise/Spells/EliseHumanQAbility/EliseHumanQ"
 				}
-			},
-			"mana": [
-				80,
-				85,
-				90,
-				95,
-				100,
-				105
-			],
-			"cooldownTime": [
-				6,
-				6,
-				6,
-				6,
-				6,
-				6,
-				6
-			],
-			"name": "Neurotoxin / Venomous Bite",
-			"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise injects neurotoxin, dealing <magicDamage>@BaseDamage@ plus @HumanPercentHealth@ current Health magic damage</magicDamage>.",
-			"tooltipExtended": "{{Spell_EliseHumanQ_Tooltip}}<br><br>{{Spell_EliseSpiderQ_Tooltip}}"
+			]
 		},
 		"w": {
-			"image": "assets/characters/elise/hud/icons2d/elisehumanw.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					20,
-					60,
-					100,
-					140,
-					180,
-					220,
-					260
-				],
-				"APRatio": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"TimeToExplode": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"ExplosionSize": [
-					275,
-					275,
-					275,
-					275,
-					275,
-					275,
-					275
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Volatile Spiderling / Skittering Frenzy",
+					"image": "assets/characters/elise/hud/icons2d/elisehumanw.png",
+					"mana": [
+						60,
+						70,
+						80,
+						90,
+						100,
+						110
+					],
+					"cooldownTime": [
+						12,
+						12,
+						12,
+						12,
+						12,
+						12,
+						12
+					],
+					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise summons an explosive spider that moves to a location and explodes when it nears an enemy or after 3 seconds. The spider deals <magicDamage>@spell.EliseHumanW:TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_EliseHumanW_Tooltip}}<br><br>{{Spell_EliseSpiderW_Tooltip}}",
+					"dataValues": {
+						"BaseDamage": [
+							20,
+							60,
+							100,
+							140,
+							180,
+							220,
+							260
+						],
+						"APRatio": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"TimeToExplode": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"ExplosionSize": [
+							275,
+							275,
+							275,
+							275,
+							275,
+							275,
+							275
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"3": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"4": [
+							55,
+							65,
+							75,
+							85,
+							95,
+							105,
+							115
+						],
+						"5": [
+							275,
+							275,
+							275,
+							275,
+							275,
+							275,
+							275
+						]
+					},
+					"dataKey": "Characters/Elise/Spells/EliseHumanWAbility/EliseHumanW"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"3": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"4": [
-					55,
-					65,
-					75,
-					85,
-					95,
-					105,
-					115
-				],
-				"5": [
-					275,
-					275,
-					275,
-					275,
-					275,
-					275,
-					275
-				]
-			},
-			"mana": [
-				60,
-				70,
-				80,
-				90,
-				100,
-				110
-			],
-			"cooldownTime": [
-				12,
-				12,
-				12,
-				12,
-				12,
-				12,
-				12
-			],
-			"name": "Volatile Spiderling / Skittering Frenzy",
-			"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise summons an explosive spider that moves to a location and explodes when it nears an enemy or after 3 seconds. The spider deals <magicDamage>@spell.EliseHumanW:TotalDamage@ magic damage</magicDamage>.",
-			"tooltipExtended": "{{Spell_EliseHumanW_Tooltip}}<br><br>{{Spell_EliseSpiderW_Tooltip}}"
+			]
 		},
 		"e": {
-			"image": "assets/characters/elise/hud/icons2d/elisehumane.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"StunDuration": [
-					1.4,
-					1.6,
-					1.8,
-					2,
-					2.2,
-					2.4,
-					2.6
-				],
-				"VisionRadius": [
-					250,
-					250,
-					250,
-					250,
-					250,
-					250,
-					250
-				]
-			},
-			"effectAmount": {
-				"0": [
-					12,
-					12,
-					11.5,
-					11,
-					10.5,
-					10,
-					9.5
-				],
-				"1": [
-					10,
-					15,
-					20,
-					25,
-					30,
-					35,
-					40
-				],
-				"2": [
-					22,
-					22,
-					21,
-					20,
-					19,
-					18,
-					18
-				],
-				"3": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"4": [
-					1.6,
-					1.6,
-					1.8,
-					2,
-					2.2,
-					2.4,
-					2.4
-				],
-				"5": [
-					25,
-					40,
-					55,
-					70,
-					85,
-					100,
-					115
-				],
-				"6": [
-					250,
-					250,
-					250,
-					250,
-					250,
-					250,
-					250
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				12,
-				12,
-				11.5,
-				11,
-				10.5,
-				10,
-				10
-			],
-			"name": "Cocoon / Rappel",
-			"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise fires a cocoon, <status>Stunning</status> and revealing the first enemy hit for @StunDuration@ seconds.",
-			"tooltipExtended": "{{Spell_EliseHumanE_Tooltip}}<br><br>{{Spell_EliseSpiderE_Tooltip}}"
+			"variants": [
+				{
+					"name": "Cocoon / Rappel",
+					"image": "assets/characters/elise/hud/icons2d/elisehumane.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						12,
+						12,
+						11.5,
+						11,
+						10.5,
+						10,
+						10
+					],
+					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise fires a cocoon, <status>Stunning</status> and revealing the first enemy hit for @StunDuration@ seconds.",
+					"tooltipExtended": "{{Spell_EliseHumanE_Tooltip}}<br><br>{{Spell_EliseSpiderE_Tooltip}}",
+					"dataValues": {
+						"StunDuration": [
+							1.4,
+							1.6,
+							1.8,
+							2,
+							2.2,
+							2.4,
+							2.6
+						],
+						"VisionRadius": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						]
+					},
+					"effectAmount": {
+						"0": [
+							12,
+							12,
+							11.5,
+							11,
+							10.5,
+							10,
+							9.5
+						],
+						"1": [
+							10,
+							15,
+							20,
+							25,
+							30,
+							35,
+							40
+						],
+						"2": [
+							22,
+							22,
+							21,
+							20,
+							19,
+							18,
+							18
+						],
+						"3": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"4": [
+							1.6,
+							1.6,
+							1.8,
+							2,
+							2.2,
+							2.4,
+							2.4
+						],
+						"5": [
+							25,
+							40,
+							55,
+							70,
+							85,
+							100,
+							115
+						],
+						"6": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						]
+					},
+					"dataKey": "Characters/Elise/Spells/EliseHumanEAbility/EliseHumanE"
+				}
+			]
 		},
 		"r": {
-			"image": "assets/characters/elise/hud/icons2d/eliser.png",
 			"maxLevel": 4,
-			"dataValues": {
-				"PassiveBonusDamage": [
-					2,
-					12,
-					22,
-					32,
-					42,
-					52,
-					62
-				],
-				"PassiveHealing": [
-					4,
-					6,
-					8,
-					10,
-					12,
-					14,
-					16
-				],
-				"PassiveMSOnHit": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"SpiderlingsStored": [
-					1,
-					2,
-					3,
-					4,
-					5,
-					6,
-					7
-				],
-				"SpiderlingBaseDamage": [
-					0,
-					10,
-					20,
-					30,
-					40,
-					50,
-					60
-				],
-				"SpiderlingAPRatio": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				],
-				"SpiderlingBonusResist": [
-					-20,
-					0,
-					20,
-					40,
-					60,
-					80,
-					100
-				]
-			},
-			"spellCalculations": {
-				"PassiveTotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "PassiveBonusDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Spider Form",
+					"image": "assets/characters/elise/hud/icons2d/eliser.png",
+					"cooldownTime": [
+						3,
+						3,
+						3,
+						3,
+						3,
+						3,
+						3
+					],
+					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise transforms into a menacing spider, becoming melee, gaining access to <keywordMajor>Spider Form</keywordMajor> Abilities and summons all dormant <keywordMajor>Spiderlings</keywordMajor>.",
+					"tooltipExtended": "{{Spell_EliseR_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseRSpider_Tooltip}}",
+					"dataValues": {
+						"PassiveBonusDamage": [
+							2,
+							12,
+							22,
+							32,
+							42,
+							52,
+							62
+						],
+						"PassiveHealing": [
+							4,
+							6,
+							8,
+							10,
+							12,
+							14,
+							16
+						],
+						"PassiveMSOnHit": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"SpiderlingsStored": [
+							1,
+							2,
+							3,
+							4,
+							5,
+							6,
+							7
+						],
+						"SpiderlingBaseDamage": [
+							0,
+							10,
+							20,
+							30,
+							40,
+							50,
+							60
+						],
+						"SpiderlingAPRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"SpiderlingBonusResist": [
+							-20,
+							0,
+							20,
+							40,
+							60,
+							80,
+							100
+						]
+					},
+					"spellCalculations": {
+						"PassiveTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveBonusDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.15,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.15,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PassiveTotalHealing": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "PassiveHealing",
-							"__type": "NamedDataValueCalculationPart"
+						"PassiveTotalHealing": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveHealing",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.08,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.08,
-							"__type": "StatByCoefficientCalculationPart"
+						"SpiderlingTotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "SpiderlingBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "SpiderlingAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"SpiderlingTotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "SpiderlingBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "SpiderlingAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							0,
+							12,
+							22,
+							32,
+							42,
+							0,
+							0
+						],
+						"2": [
+							0,
+							25,
+							25,
+							25,
+							25,
+							0,
+							0
+						],
+						"3": [
+							0,
+							25,
+							25,
+							25,
+							25,
+							0,
+							0
+						],
+						"4": [
+							0,
+							2,
+							3,
+							4,
+							5,
+							0,
+							0
+						],
+						"5": [
+							0,
+							30,
+							50,
+							70,
+							90,
+							0,
+							0
+						],
+						"6": [
+							0,
+							50,
+							70,
+							90,
+							110,
+							0,
+							0
+						],
+						"7": [
+							4,
+							6,
+							8,
+							10,
+							12,
+							0,
+							0
+						],
+						"8": [
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08
+						]
+					},
+					"dataKey": "Characters/Elise/Spells/EliseRAbility/EliseR"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					0,
-					12,
-					22,
-					32,
-					42,
-					0,
-					0
-				],
-				"2": [
-					0,
-					25,
-					25,
-					25,
-					25,
-					0,
-					0
-				],
-				"3": [
-					0,
-					25,
-					25,
-					25,
-					25,
-					0,
-					0
-				],
-				"4": [
-					0,
-					2,
-					3,
-					4,
-					5,
-					0,
-					0
-				],
-				"5": [
-					0,
-					30,
-					50,
-					70,
-					90,
-					0,
-					0
-				],
-				"6": [
-					0,
-					50,
-					70,
-					90,
-					110,
-					0,
-					0
-				],
-				"7": [
-					4,
-					6,
-					8,
-					10,
-					12,
-					0,
-					0
-				],
-				"8": [
-					0.08,
-					0.08,
-					0.08,
-					0.08,
-					0.08,
-					0.08,
-					0.08
-				]
-			},
-			"cooldownTime": [
-				3,
-				3,
-				3,
-				3,
-				3,
-				3,
-				3
-			],
-			"name": "Spider Form",
-			"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise transforms into a menacing spider, becoming melee, gaining access to <keywordMajor>Spider Form</keywordMajor> Abilities and summons all dormant <keywordMajor>Spiderlings</keywordMajor>.",
-			"tooltipExtended": "{{Spell_EliseR_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseRSpider_Tooltip}}"
+			]
 		}
 	}
 }

@@ -29,669 +29,694 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/mel/hud/icons2d/mel_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"OverwhelmDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BonusAttackDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"PassiveBonusMissiles": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"MaxPassiveBonusMissiles": [
-					9,
-					9,
-					9,
-					9,
-					9,
-					9,
-					9
-				]
-			},
-			"spellCalculations": {
-				"PassiveBonusMissileDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 8,
-							"mEndValue": 25,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mCoefficient": 0.03,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Searing Brilliance",
+					"image": "assets/characters/mel/hud/icons2d/mel_passive.png",
+					"tooltip": "Mel's Attacks and Abilities apply and refresh stacks of <keywordMajor>Overwhelm</keywordMajor> for @OverwhelmDuration@ seconds each time they deal damage, storing <magicDamage>@spell.MelR:PassiveFlatDamage@ plus @spell.MelR:PassiveStackDamage@ damage per stack of magic damage</magicDamage>. When applied, if the stored amount exceeds the enemy's combined shields and Health, they are executed.<br><br>When an Ability is cast, Mel's next Attack fires @PassiveBonusMissiles@ extra projectiles, each dealing <magicDamage>@PassiveBonusMissileDamage@ magic damage</magicDamage>. This effect can stack up to @MaxPassiveBonusMissiles@ extra projectiles.",
+					"tooltipExtended": "{{Spell_MelPassive_Tooltip}}<br><br><rules><keywordMajor>Overwhelm</keywordMajor> deals @spell.MelR:MinionModTooltip@ reduced damage with the first stack when used against minions.</rules>",
+					"dataValues": {
+						"OverwhelmDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BonusAttackDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"PassiveBonusMissiles": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"MaxPassiveBonusMissiles": [
+							9,
+							9,
+							9,
+							9,
+							9,
+							9,
+							9
+						]
+					},
+					"spellCalculations": {
+						"PassiveBonusMissileDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 8,
+									"mEndValue": 25,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "{64e86cf4}"
 				}
-			},
-			"name": "Searing Brilliance",
-			"tooltip": "Mel's Attacks and Abilities apply and refresh stacks of <keywordMajor>Overwhelm</keywordMajor> for @OverwhelmDuration@ seconds each time they deal damage, storing <magicDamage>@spell.MelR:PassiveFlatDamage@ plus @spell.MelR:PassiveStackDamage@ damage per stack of magic damage</magicDamage>. When applied, if the stored amount exceeds the enemy's combined shields and Health, they are executed.<br><br>When an Ability is cast, Mel's next Attack fires @PassiveBonusMissiles@ extra projectiles, each dealing <magicDamage>@PassiveBonusMissileDamage@ magic damage</magicDamage>. This effect can stack up to @MaxPassiveBonusMissiles@ extra projectiles.",
-			"tooltipExtended": "{{Spell_MelPassive_Tooltip}}<br><br><rules><keywordMajor>Overwhelm</keywordMajor> deals @spell.MelR:MinionModTooltip@ reduced damage with the first stack when used against minions.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/mel/hud/icons2d/mel_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ExplosionDamage": [
-					4,
-					5,
-					6,
-					7,
-					8,
-					9,
-					10
-				],
-				"ExplosionCount": [
-					5,
-					6,
-					7,
-					8,
-					9,
-					10,
-					11
-				],
-				"Spread": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"ExplosionRadius": [
-					200,
-					200,
-					200,
-					200,
-					200,
-					200,
-					200
-				],
-				"ChannelDuration": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MinionMod": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"InitialDamage": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				]
-			},
-			"spellCalculations": {
-				"TotalExplosionDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ExplosionDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.05,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"AllDamageHit": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mSpellCalculationKey": "{c6579b07}",
-							"__type": "{f3cbe7b2}"
-						},
-						{
-							"mPart1": {
-								"mSpellCalculationKey": "TotalExplosionDamage"
-							},
-							"mPart2": {
-								"mSubparts": [
-									{
-										"mDataValue": "ExplosionCount"
-									},
-									{
-										"mNumber": -1
-									}
-								]
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
-						}
-					]
-				},
-				"MonsterModTooltip": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mSubparts": [
+			"variants": [
+				{
+					"name": "Radiant Volley",
+					"image": "assets/characters/mel/hud/icons2d/mel_q.png",
+					"mana": [
+						70,
+						75,
+						80,
+						85,
+						90,
+						90
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Mel unleashes a barrage of @ExplosionCount@ projectiles that explode in the area around a target location.<br><br>The first explosion hit deals <magicDamage>@InitialExplosionDamage@ magic damage</magicDamage> and each subsequent explosion deals <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>, adding up to <magicDamage>@AllDamageHit@ magic damage</magicDamage> total.",
+					"dataValues": {
+						"ExplosionDamage": [
+							4,
+							5,
+							6,
+							7,
+							8,
+							9,
+							10
+						],
+						"ExplosionCount": [
+							5,
+							6,
+							7,
+							8,
+							9,
+							10,
+							11
+						],
+						"Spread": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"ExplosionRadius": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"ChannelDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MinionMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"InitialDamage": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						]
+					},
+					"spellCalculations": {
+						"TotalExplosionDamage": {
+							"mFormulaParts": [
 								{
-									"mNumber": 1
+									"mDataValue": "ExplosionDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"AllDamageHit": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mSpellCalculationKey": "{c6579b07}",
+									"__type": "{f3cbe7b2}"
 								},
 								{
 									"mPart1": {
-										"mNumber": -1
+										"mSpellCalculationKey": "TotalExplosionDamage"
 									},
 									"mPart2": {
-										"mDataValue": "MinionMod"
-									}
+										"mSubparts": [
+											{
+												"mDataValue": "ExplosionCount"
+											},
+											{
+												"mNumber": -1
+											}
+										]
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							]
+						},
+						"MonsterModTooltip": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mPart1": {
+												"mNumber": -1
+											},
+											"mPart2": {
+												"mDataValue": "MinionMod"
+											}
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
 								}
 							],
-							"__type": "SumOfSubPartsCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"{c6579b07}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "InitialDamage",
-							"__type": "NamedDataValueCalculationPart"
+							"mDisplayAsPercent": true
 						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
+						"{c6579b07}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "InitialDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Mel/Spells/MelQAbility/MelQ"
 				}
-			},
-			"mana": [
-				70,
-				75,
-				80,
-				85,
-				90,
-				90
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9,
-				8,
-				7,
-				6,
-				6
-			],
-			"name": "Radiant Volley",
-			"tooltip": "Mel unleashes a barrage of @ExplosionCount@ projectiles that explode in the area around a target location.<br><br>The first explosion hit deals <magicDamage>@InitialExplosionDamage@ magic damage</magicDamage> and each subsequent explosion deals <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>, adding up to <magicDamage>@AllDamageHit@ magic damage</magicDamage> total."
+			]
 		},
 		"w": {
-			"image": "assets/characters/mel/hud/icons2d/mel_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Duration": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"ShieldRadius": [
-					175,
-					175,
-					175,
-					175,
-					175,
-					175,
-					175
-				],
-				"BaseDamagePercent": [
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.55,
-					0.6,
-					0.65
-				],
-				"MoveSpeed": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"PhysDamageMod": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"BaseShieldAmount": [
-					50,
-					80,
-					110,
-					140,
-					170,
-					200,
-					230
-				],
-				"MoveSpeedDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"DamagePercent": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamagePercent",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.001,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Rebuttal",
+					"image": "assets/characters/mel/hud/icons2d/mel_w.png",
+					"mana": [
+						80,
+						60,
+						40,
+						20,
+						0,
+						0
 					],
-					"mDisplayAsPercent": true
-				},
-				"ShieldAmount": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseShieldAmount",
-							"__type": "NamedDataValueCalculationPart"
+					"cooldownTime": [
+						35,
+						35,
+						32,
+						29,
+						26,
+						23,
+						23
+					],
+					"tooltip": "Mel forms a barrier around herself that reflects projectiles from enemy champions, gaining <shield>@ShieldAmount@ Shields</shield> for @Duration@ seconds and <speed>@MoveSpeed*100@% decaying Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Reflected projectiles deal <magicDamage>@DamagePercent@ original damage as magic damage</magicDamage>.",
+					"dataValues": {
+						"Duration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"ShieldRadius": [
+							175,
+							175,
+							175,
+							175,
+							175,
+							175,
+							175
+						],
+						"BaseDamagePercent": [
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.55,
+							0.6,
+							0.65
+						],
+						"MoveSpeed": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"PhysDamageMod": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"BaseShieldAmount": [
+							50,
+							80,
+							110,
+							140,
+							170,
+							200,
+							230
+						],
+						"MoveSpeedDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"DamagePercent": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamagePercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.001,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
+						"ShieldAmount": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShieldAmount",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Mel/Spells/MelWAbility/MelW"
 				}
-			},
-			"mana": [
-				80,
-				60,
-				40,
-				20,
-				0,
-				0
-			],
-			"cooldownTime": [
-				35,
-				35,
-				32,
-				29,
-				26,
-				23,
-				23
-			],
-			"name": "Rebuttal",
-			"tooltip": "Mel forms a barrier around herself that reflects projectiles from enemy champions, gaining <shield>@ShieldAmount@ Shields</shield> for @Duration@ seconds and <speed>@MoveSpeed*100@% decaying Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Reflected projectiles deal <magicDamage>@DamagePercent@ original damage as magic damage</magicDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/mel/hud/icons2d/mel_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"RootDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"BaseDamage": [
-					15,
-					60,
-					105,
-					150,
-					195,
-					240,
-					285
-				],
-				"BaseAreaDamage": [
-					4,
-					16,
-					28,
-					40,
-					52,
-					64,
-					76
-				],
-				"AreaAPRatio": [
-					0.08,
-					0.08,
-					0.08,
-					0.08,
-					0.08,
-					0.08,
-					0.08
-				],
-				"AreaSlowAmount": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"AreaSlowDuration": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"MinionMod": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MaxAreaRadius": [
-					230,
-					230,
-					230,
-					230,
-					230,
-					230,
-					230
-				],
-				"TimeToMaxRadius": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"AreaTicksPerSecond": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"DoTDuration": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"AreaDamagePerSecond": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseAreaDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "{0b76b34c}",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MinionModTooltip": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mSubparts": [
+			"variants": [
+				{
+					"name": "Solar Snare",
+					"image": "assets/characters/mel/hud/icons2d/mel_e.png",
+					"mana": [
+						50,
+						60,
+						70,
+						80,
+						90,
+						90
+					],
+					"cooldownTime": [
+						11,
+						11,
+						10.5,
+						10,
+						9.5,
+						9,
+						9
+					],
+					"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDuration@ seconds and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>.",
+					"dataValues": {
+						"RootDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"BaseDamage": [
+							15,
+							60,
+							105,
+							150,
+							195,
+							240,
+							285
+						],
+						"BaseAreaDamage": [
+							4,
+							16,
+							28,
+							40,
+							52,
+							64,
+							76
+						],
+						"AreaAPRatio": [
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08
+						],
+						"AreaSlowAmount": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"AreaSlowDuration": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MinionMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MaxAreaRadius": [
+							230,
+							230,
+							230,
+							230,
+							230,
+							230,
+							230
+						],
+						"TimeToMaxRadius": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"AreaTicksPerSecond": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"DoTDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
 								{
-									"mNumber": 1
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mPart1": {
-										"mNumber": -1
-									},
-									"mPart2": {
-										"mDataValue": "MinionMod"
-									}
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"AreaDamagePerSecond": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseAreaDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "{0b76b34c}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MinionModTooltip": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mPart1": {
+												"mNumber": -1
+											},
+											"mPart2": {
+												"mDataValue": "MinionMod"
+											}
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
 								}
 							],
-							"__type": "SumOfSubPartsCalculationPart"
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"dataKey": "Characters/Mel/Spells/MelEAbility/MelE"
 				}
-			},
-			"mana": [
-				50,
-				60,
-				70,
-				80,
-				90,
-				90
-			],
-			"cooldownTime": [
-				11,
-				11,
-				10.5,
-				10,
-				9.5,
-				9,
-				9
-			],
-			"name": "Solar Snare",
-			"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDuration@ seconds and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>."
+			]
 		},
 		"r": {
-			"image": "assets/characters/mel/hud/icons2d/mel_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BasePassiveStackDamage": [
-					2,
-					3,
-					4,
-					5,
-					6,
-					7,
-					8
-				],
-				"BasePassiveFlatDamage": [
-					50,
-					60,
-					70,
-					80,
-					90,
-					100,
-					110
-				],
-				"MinionMod": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"BaseUltStackDamage": [
-					1,
-					4,
-					7,
-					10,
-					13,
-					16,
-					19
-				],
-				"BaseUltFlatDamage": [
-					50,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				],
-				"DisintegrateDelay": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				]
-			},
-			"spellCalculations": {
-				"PassiveStackDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BasePassiveStackDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.007,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PassiveFlatDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BasePassiveFlatDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"UltStackDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseUltStackDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.04,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"UltFlatDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseUltFlatDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.3,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"MinionModTooltip": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mSubparts": [
+			"variants": [
+				{
+					"name": "Golden Eclipse",
+					"image": "assets/characters/mel/hud/icons2d/mel_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						120,
+						120,
+						100,
+						80,
+						80,
+						80,
+						60
+					],
+					"tooltip": "<spellPassive>Passive</spellPassive>: <keywordMajor>Overwhelm</keywordMajor> damage is increased to <magicDamage>@PassiveFlatDamage@ magic damage plus @PassiveStackDamage@ magic damage per stack</magicDamage>.<br><br><spellActive>Active</spellActive>: Mel unleashes her power on all enemies affected by <keywordMajor>Overwhelm</keywordMajor>, dealing <magicDamage>@UltFlatDamage@ magic damage plus @UltStackDamage@ magic damage per <keywordMajor>Overwhelm</keywordMajor> stack</magicDamage>.<br><br><rules>Can only be cast when an enemy champion is affected by <keywordMajor>Overwhelm</keywordMajor>.</rules>",
+					"dataValues": {
+						"BasePassiveStackDamage": [
+							2,
+							3,
+							4,
+							5,
+							6,
+							7,
+							8
+						],
+						"BasePassiveFlatDamage": [
+							50,
+							60,
+							70,
+							80,
+							90,
+							100,
+							110
+						],
+						"MinionMod": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"BaseUltStackDamage": [
+							1,
+							4,
+							7,
+							10,
+							13,
+							16,
+							19
+						],
+						"BaseUltFlatDamage": [
+							50,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						],
+						"DisintegrateDelay": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						]
+					},
+					"spellCalculations": {
+						"PassiveStackDamage": {
+							"mFormulaParts": [
 								{
-									"mNumber": 1
+									"mDataValue": "BasePassiveStackDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mPart1": {
-										"mNumber": -1
-									},
-									"mPart2": {
-										"mDataValue": "MinionMod"
-									}
+									"mCoefficient": 0.007,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveFlatDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BasePassiveFlatDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"UltStackDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseUltStackDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.04,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"UltFlatDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseUltFlatDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MinionModTooltip": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mPart1": {
+												"mNumber": -1
+											},
+											"mPart2": {
+												"mDataValue": "MinionMod"
+											}
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
 								}
 							],
-							"__type": "SumOfSubPartsCalculationPart"
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"dataKey": "Characters/Mel/Spells/MelRAbility/MelR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				120,
-				120,
-				100,
-				80,
-				80,
-				80,
-				60
-			],
-			"name": "Golden Eclipse",
-			"tooltip": "<spellPassive>Passive</spellPassive>: <keywordMajor>Overwhelm</keywordMajor> damage is increased to <magicDamage>@PassiveFlatDamage@ magic damage plus @PassiveStackDamage@ magic damage per stack</magicDamage>.<br><br><spellActive>Active</spellActive>: Mel unleashes her power on all enemies affected by <keywordMajor>Overwhelm</keywordMajor>, dealing <magicDamage>@UltFlatDamage@ magic damage plus @UltStackDamage@ magic damage per <keywordMajor>Overwhelm</keywordMajor> stack</magicDamage>.<br><br><rules>Can only be cast when an enemy champion is affected by <keywordMajor>Overwhelm</keywordMajor>.</rules>"
+			]
 		}
 	}
 }

@@ -29,455 +29,480 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/talon/hud/icons2d/talonp.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"MonsterMod": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"StackDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"BleedDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"BonusADRatio": [
-					2.1,
-					2.1,
-					2.1,
-					2.1,
-					2.1,
-					2.1,
-					2.1
-				]
-			},
-			"spellCalculations": {
-				"BleedDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 80,
-							"mEndValue": 280,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			},
-			"effectAmount": {
-				"0": [
-					25,
-					80,
-					135,
-					190,
-					245,
-					300,
-					355
-				],
-				"1": [
-					10,
-					15,
-					20,
-					25,
-					30,
-					35,
-					40
-				]
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Blade's End",
-			"tooltip": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds.",
-			"tooltipExtended": "{{game_buff_tooltip_TalonPassive}}<br><br><rules>Damage over time effect deals @monstermod*100@% damage to jungle monsters.</rules>"
-		},
-		"q": {
-			"image": "assets/characters/talon/hud/icons2d/talonq.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					45,
-					65,
-					85,
-					105,
-					125,
-					145,
-					165
-				],
-				"BonusADRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"EnhancedDamageMod": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"CooldownRefund": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"TotalHealing": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 9,
-							"mEndValue": 55,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				},
-				"LeapDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"CriticalDamage": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mDataValue": "EnhancedDamageMod"
-							},
-							{
-								"mStat": 9,
-								"mStatFormula": 2,
-								"mCoefficient": 1
-							}
+			"variants": [
+				{
+					"name": "Blade's End",
+					"image": "assets/characters/talon/hud/icons2d/talonp.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds.",
+					"tooltipExtended": "{{game_buff_tooltip_TalonPassive}}<br><br><rules>Damage over time effect deals @monstermod*100@% damage to jungle monsters.</rules>",
+					"dataValues": {
+						"MonsterMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"StackDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"BleedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"BonusADRatio": [
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1
 						]
 					},
-					"mModifiedGameCalculation": "LeapDamage"
+					"spellCalculations": {
+						"BleedDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 80,
+									"mEndValue": 280,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							25,
+							80,
+							135,
+							190,
+							245,
+							300,
+							355
+						],
+						"1": [
+							10,
+							15,
+							20,
+							25,
+							30,
+							35,
+							40
+						]
+					},
+					"dataKey": "Characters/Talon/Spells/TalonPassiveAbility/TalonPassive"
 				}
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				8,
-				8,
-				7.5,
-				7,
-				6.5,
-				6,
-				6
-			],
-			"name": "Noxian Diplomacy",
-			"tooltip": "Talon leaps to a target and deals <physicalDamage>@LeapDamage@ physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.<br><br>If this Ability kills the target, Talon restores <healing>@TotalHealing@ Health</healing> and refunds @CooldownRefund*100@% of its Cooldown."
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Noxian Diplomacy",
+					"image": "assets/characters/talon/hud/icons2d/talonq.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						8,
+						8,
+						7.5,
+						7,
+						6.5,
+						6,
+						6
+					],
+					"tooltip": "Talon leaps to a target and deals <physicalDamage>@LeapDamage@ physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.<br><br>If this Ability kills the target, Talon restores <healing>@TotalHealing@ Health</healing> and refunds @CooldownRefund*100@% of its Cooldown.",
+					"dataValues": {
+						"BaseDamage": [
+							45,
+							65,
+							85,
+							105,
+							125,
+							145,
+							165
+						],
+						"BonusADRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"EnhancedDamageMod": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"CooldownRefund": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"TotalHealing": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 9,
+									"mEndValue": 55,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"LeapDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"CriticalDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mDataValue": "EnhancedDamageMod"
+									},
+									{
+										"mStat": 9,
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									}
+								]
+							},
+							"mModifiedGameCalculation": "LeapDamage"
+						}
+					},
+					"dataKey": "Characters/Talon/Spells/TalonQAbility/TalonQ"
+				}
+			]
 		},
 		"w": {
-			"image": "assets/characters/talon/hud/icons2d/talonw.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"InitialBaseDamage": [
-					40,
-					50,
-					60,
-					70,
-					80,
-					90,
-					100
-				],
-				"ReturnBaseDamage": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				],
-				"MovespeedSlow": [
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.55,
-					0.6,
-					0.65
-				],
-				"SlowDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"ReturnDelay": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				],
-				"MonsterDamageMod": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"InitialBonusADRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"ReturnBonusADRatio": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				]
-			},
-			"spellCalculations": {
-				"TotalInitialDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "InitialBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Rake",
+					"image": "assets/characters/talon/hud/icons2d/talonw.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						75
+					],
+					"cooldownTime": [
+						9,
+						9,
+						8.5,
+						8,
+						7.5,
+						7,
+						7
+					],
+					"tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>@TotalInitialDamage@ physical damage</physicalDamage>. The blades then return to him, dealing <physicalDamage>@TotalReturnDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @MovespeedSlow*100@% for @SlowDuration@ second.",
+					"dataValues": {
+						"InitialBaseDamage": [
+							40,
+							50,
+							60,
+							70,
+							80,
+							90,
+							100
+						],
+						"ReturnBaseDamage": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						],
+						"MovespeedSlow": [
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.55,
+							0.6,
+							0.65
+						],
+						"SlowDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ReturnDelay": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"MonsterDamageMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"InitialBonusADRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"ReturnBonusADRatio": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						]
+					},
+					"spellCalculations": {
+						"TotalInitialDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "InitialBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "{0a76d866}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "{0a76d866}",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"TotalReturnDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ReturnBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "{9b8976c2}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"TotalReturnDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ReturnBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "{9b8976c2}",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Talon/Spells/TalonWAbility/TalonW"
 				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				75
-			],
-			"cooldownTime": [
-				9,
-				9,
-				8.5,
-				8,
-				7.5,
-				7,
-				7
-			],
-			"name": "Rake",
-			"tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>@TotalInitialDamage@ physical damage</physicalDamage>. The blades then return to him, dealing <physicalDamage>@TotalReturnDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @MovespeedSlow*100@% for @SlowDuration@ second."
+			]
 		},
 		"e": {
-			"image": "assets/characters/talon/hud/icons2d/talone.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"WallCD": [
-					185,
-					160,
-					135,
-					110,
-					85,
-					60,
-					35
-				]
-			},
-			"effectAmount": {
-				"2": [
-					625,
-					625,
-					625,
-					625,
-					625,
-					625,
-					625
-				],
-				"3": [
-					1250,
-					1250,
-					1250,
-					1250,
-					1250,
-					1250,
-					1250
-				],
-				"4": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"5": [
-					185,
-					160,
-					135,
-					110,
-					85,
-					60,
-					60
-				]
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Assassin's Path",
-			"tooltip": "Talon vaults over the nearest terrain or structure. Talon cannot dash over the same terrain more than once every @WallCD@ seconds."
+			"variants": [
+				{
+					"name": "Assassin's Path",
+					"image": "assets/characters/talon/hud/icons2d/talone.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Talon vaults over the nearest terrain or structure. Talon cannot dash over the same terrain more than once every @WallCD@ seconds.",
+					"dataValues": {
+						"WallCD": [
+							185,
+							160,
+							135,
+							110,
+							85,
+							60,
+							35
+						]
+					},
+					"effectAmount": {
+						"2": [
+							625,
+							625,
+							625,
+							625,
+							625,
+							625,
+							625
+						],
+						"3": [
+							1250,
+							1250,
+							1250,
+							1250,
+							1250,
+							1250,
+							1250
+						],
+						"4": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"5": [
+							185,
+							160,
+							135,
+							110,
+							85,
+							60,
+							60
+						]
+					},
+					"dataKey": "Characters/Talon/Spells/TalonEAbility/TalonE"
+				}
+			]
 		},
 		"r": {
-			"image": "assets/characters/talon/hud/icons2d/talonr.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					45,
-					90,
-					135,
-					180,
-					225,
-					270,
-					315
-				],
-				"MoveSpeed": [
-					0.25,
-					0.4,
-					0.55,
-					0.7,
-					0.85,
-					1,
-					1.15
-				],
-				"Duration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Shadow Assault",
+					"image": "assets/characters/talon/hud/icons2d/talonr.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						100,
+						100,
+						80,
+						60,
+						60,
+						60,
+						60
+					],
+					"tooltip": "Talon disperses a ring of blades that deal <physicalDamage>@Damage@ physical damage</physicalDamage>, gains <speed>@MoveSpeed*100@% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for @Duration@ seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> again.<br><br>If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>{{Spell_TalonQ_Name}}</spellName>, the blades return to the target instead.",
+					"dataValues": {
+						"BaseDamage": [
+							45,
+							90,
+							135,
+							180,
+							225,
+							270,
+							315
+						],
+						"MoveSpeed": [
+							0.25,
+							0.4,
+							0.55,
+							0.7,
+							0.85,
+							1,
+							1.15
+						],
+						"Duration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Talon/Spells/TalonRAbility/TalonR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				100,
-				100,
-				80,
-				60,
-				60,
-				60,
-				60
-			],
-			"name": "Shadow Assault",
-			"tooltip": "Talon disperses a ring of blades that deal <physicalDamage>@Damage@ physical damage</physicalDamage>, gains <speed>@MoveSpeed*100@% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for @Duration@ seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> again.<br><br>If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>{{Spell_TalonQ_Name}}</spellName>, the blades return to the target instead."
+			]
 		}
 	}
 }

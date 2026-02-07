@@ -29,388 +29,481 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/quinn/hud/icons2d/quinn_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"RevealDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"ModesPassiveDamageMultiplier": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"ADRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				]
-			},
-			"spellCalculations": {
-				"BonusDamage": {
-					"mMultiplier": {
-						"mDataValue": "ModesPassiveDamageMultiplier"
+			"variants": [
+				{
+					"name": "Harrier",
+					"image": "assets/characters/quinn/hud/icons2d/quinn_passive.png",
+					"tooltip": "Every @f1@ seconds, Valor marks a nearby enemy as <keywordMajor>Vulnerable</keywordMajor>, revealing it for @RevealDuration@ seconds and causing Quinn's next Attack against them to deal <physicalDamage>@BonusDamage@ bonus physical damage</physicalDamage>.",
+					"tooltipExtended": "{{Spell_QuinnPassive_Tooltip}}<br><br><rules>Cooldown is reduced by Critical Strike Chance.</rules>",
+					"dataValues": {
+						"RevealDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"ModesPassiveDamageMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ADRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
 					},
-					"mFormulaParts": [
-						{
-							"mStartValue": 15,
-							"mEndValue": 120,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+					"spellCalculations": {
+						"BonusDamage": {
+							"mMultiplier": {
+								"mDataValue": "ModesPassiveDamageMultiplier"
+							},
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 120,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnPassiveAbility/QuinnPassive"
 				}
-			},
-			"name": "Harrier",
-			"tooltip": "Every @f1@ seconds, Valor marks a nearby enemy as <keywordMajor>Vulnerable</keywordMajor>, revealing it for @RevealDuration@ seconds and causing Quinn's next Attack against them to deal <physicalDamage>@BonusDamage@ bonus physical damage</physicalDamage>.",
-			"tooltipExtended": "{{Spell_QuinnPassive_Tooltip}}<br><br><rules>Cooldown is reduced by Critical Strike Chance.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/quinn/hud/icons2d/quinn_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					30,
-					65,
-					100,
-					135,
-					170,
-					205,
-					240
-				],
-				"ADRatio": [
-					0.75,
-					0.8,
-					0.85,
-					0.9,
-					0.95,
-					1,
-					1.05
-				],
-				"APRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Blinding Assault",
+					"image": "assets/characters/quinn/hud/icons2d/quinn_q.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						75
+					],
+					"cooldownTime": [
+						11.5,
+						11,
+						10.5,
+						10,
+						9.5,
+						9,
+						9
+					],
+					"tooltip": "Quinn orders Valor to dive, making the first enemy hit <keywordMajor>Vulnerable</keywordMajor>, reducing their vision radius for @Effect3Amount@ seconds and dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all surrounding enemies.<br><br>If the first enemy struck is not a champion, it is <status>Disarmed</status> for @Effect3Amount@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							30,
+							65,
+							100,
+							135,
+							170,
+							205,
+							240
+						],
+						"ADRatio": [
+							0.75,
+							0.8,
+							0.85,
+							0.9,
+							0.95,
+							1,
+							1.05
+						],
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							-1000,
+							-1000,
+							-1000,
+							-1000,
+							-1000,
+							-1000,
+							-1000
+						],
+						"2": [
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75
+						]
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnQAbility/QuinnQ"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					-1000,
-					-1000,
-					-1000,
-					-1000,
-					-1000,
-					-1000,
-					-1000
-				],
-				"2": [
-					1.75,
-					1.75,
-					1.75,
-					1.75,
-					1.75,
-					1.75,
-					1.75
-				]
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				75
-			],
-			"cooldownTime": [
-				11.5,
-				11,
-				10.5,
-				10,
-				9.5,
-				9,
-				9
-			],
-			"name": "Blinding Assault",
-			"tooltip": "Quinn orders Valor to dive, making the first enemy hit <keywordMajor>Vulnerable</keywordMajor>, reducing their vision radius for @Effect3Amount@ seconds and dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all surrounding enemies.<br><br>If the first enemy struck is not a champion, it is <status>Disarmed</status> for @Effect3Amount@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/quinn/hud/icons2d/quinn_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"AttackSpeedBonus": [
-					0.15,
-					0.28,
-					0.41,
-					0.54,
-					0.67,
-					0.8,
-					0.93
-				],
-				"CherryBonusHaste": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				]
-			},
-			"effectAmount": {
-				"0": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"2": [
-					0.15,
-					0.2,
-					0.25,
-					0.3,
-					0.35,
-					0.4,
-					0.45
-				],
-				"3": [
-					2100,
-					2100,
-					2100,
-					2100,
-					2100,
-					2100,
-					2100
-				],
-				"4": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				]
-			},
-			"cooldownTime": [
-				55,
-				50,
-				45,
-				40,
-				35,
-				30,
-				30
-			],
-			"name": "Heightened Senses",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Attacking a <keywordMajor>Vulnerable</keywordMajor> target grants Quinn <attackSpeed>@AttackSpeedBonus*100@% Attack Speed</attackSpeed> and <speed>@Effect3Amount*100@% Move Speed</speed> for @Effect1Amount@ seconds.<br><br><spellActive>Active:</spellActive> Valor reveals a large area nearby for @Effect5Amount@ seconds."
+			"variants": [
+				{
+					"name": "Heightened Senses",
+					"image": "assets/characters/quinn/hud/icons2d/quinn_w.png",
+					"cooldownTime": [
+						55,
+						50,
+						45,
+						40,
+						35,
+						30,
+						30
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Attacking a <keywordMajor>Vulnerable</keywordMajor> target grants Quinn <attackSpeed>@AttackSpeedBonus*100@% Attack Speed</attackSpeed> and <speed>@Effect3Amount*100@% Move Speed</speed> for @Effect1Amount@ seconds.<br><br><spellActive>Active:</spellActive> Valor reveals a large area nearby for @Effect5Amount@ seconds.",
+					"dataValues": {
+						"AttackSpeedBonus": [
+							0.15,
+							0.28,
+							0.41,
+							0.54,
+							0.67,
+							0.8,
+							0.93
+						],
+						"CherryBonusHaste": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						]
+					},
+					"effectAmount": {
+						"0": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"2": [
+							0.15,
+							0.2,
+							0.25,
+							0.3,
+							0.35,
+							0.4,
+							0.45
+						],
+						"3": [
+							2100,
+							2100,
+							2100,
+							2100,
+							2100,
+							2100,
+							2100
+						],
+						"4": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnWAbility/QuinnW"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/quinn/hud/icons2d/quinn_e.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 2,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.2,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Vault",
+					"image": "assets/characters/quinn/hud/icons2d/quinn_e.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						13,
+						12,
+						11,
+						10,
+						9,
+						8,
+						8
+					],
+					"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them <keywordMajor>Vulnerable</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @Effect1Amount*100@%, decaying over @Effect3Amount@ seconds.",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 2,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"1": [
+							40,
+							40,
+							65,
+							90,
+							115,
+							140,
+							140
+						],
+						"2": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnEAbility/QuinnE"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"1": [
-					40,
-					40,
-					65,
-					90,
-					115,
-					140,
-					140
-				],
-				"2": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				13,
-				12,
-				11,
-				10,
-				9,
-				8,
-				8
-			],
-			"name": "Vault",
-			"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them <keywordMajor>Vulnerable</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @Effect1Amount*100@%, decaying over @Effect3Amount@ seconds."
+			]
 		},
 		"r": {
-			"image": "assets/characters/quinn/hud/icons2d/quinn_r1.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"MovementSpeedMod": [
-					0.4,
-					0.7,
-					1,
-					1.3,
-					1.6,
-					1.9,
-					2.2
-				],
-				"SlowDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"HarrierCooldown": [
-					7,
-					7,
-					7,
-					7,
-					7,
-					7,
-					7
-				],
-				"RHarrierMarkDuration": [
-					4.5,
-					4.5,
-					4.5,
-					4.5,
-					4.5,
-					4.5,
-					4.5
-				],
-				"ADRatio": [
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35
-				],
-				"BaseDamage": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Behind Enemy Lines",
+					"image": "assets/characters/quinn/hud/icons2d/quinn_r1.png",
+					"mana": [
+						100,
+						50,
+						0,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						3,
+						3,
+						3,
+						3,
+						3,
+						3,
+						3
+					],
+					"tooltip": "Quinn calls to Valor, pairing up after channeling for 2 seconds gaining <speed>@MovementSpeedMod*100@% Move Speed</speed> and allowing her to <recast>Recast</recast> this Ability. Attacking or using <spellName>{{Spell_QuinnQ_Name}}</spellName> or <spellName>{{Spell_QuinnE_Name}}</spellName> automatically <recast>Recasts</recast> this Ability.<br><br><recast>Recast</recast>: Quinn and Valor perform an aerial maneuver, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, marking champions as <keywordMajor>Vulnerable</keywordMajor>, and ending this Ability.",
+					"dataValues": {
+						"MovementSpeedMod": [
+							0.4,
+							0.7,
+							1,
+							1.3,
+							1.6,
+							1.9,
+							2.2
+						],
+						"SlowDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"HarrierCooldown": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"RHarrierMarkDuration": [
+							4.5,
+							4.5,
+							4.5,
+							4.5,
+							4.5,
+							4.5,
+							4.5
+						],
+						"ADRatio": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"BaseDamage": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnRAbility/QuinnR"
+				},
+				{
+					"image": "assets/characters/quinn/hud/icons2d/quinn_r2.png",
+					"cooldownTime": [
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"2": [
+							0.7,
+							0.7,
+							1,
+							1.3,
+							0,
+							0,
+							0
+						],
+						"6": [
+							100,
+							100,
+							50,
+							0,
+							0,
+							0,
+							0
+						]
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnRAbility/QuinnRFinale"
+				},
+				{
+					"image": "assets/characters/quinn/hud/spell_quinn_square.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"2": [
+							0.7,
+							0.7,
+							1,
+							1.3,
+							0,
+							0,
+							0
+						],
+						"6": [
+							100,
+							100,
+							50,
+							0,
+							0,
+							0,
+							0
+						]
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnRAbility/QuinnRReturnToQuinn"
 				}
-			},
-			"mana": [
-				100,
-				50,
-				0,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				3,
-				3,
-				3,
-				3,
-				3,
-				3,
-				3
-			],
-			"name": "Behind Enemy Lines",
-			"tooltip": "Quinn calls to Valor, pairing up after channeling for 2 seconds gaining <speed>@MovementSpeedMod*100@% Move Speed</speed> and allowing her to <recast>Recast</recast> this Ability. Attacking or using <spellName>{{Spell_QuinnQ_Name}}</spellName> or <spellName>{{Spell_QuinnE_Name}}</spellName> automatically <recast>Recasts</recast> this Ability.<br><br><recast>Recast</recast>: Quinn and Valor perform an aerial maneuver, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, marking champions as <keywordMajor>Vulnerable</keywordMajor>, and ending this Ability."
+			]
 		}
 	}
 }

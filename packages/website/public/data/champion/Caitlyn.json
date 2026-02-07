@@ -29,70 +29,533 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"CriticalStrikeScaling": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"TowerCap": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"AttacksPerHeadshot": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BrushStackBonus": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"HeadShotBonusDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mSubpart": {
-								"mSubparts": [
-									{
-										"mLevel1Value": 0.6,
-										"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Headshot",
+					"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png",
+					"tooltip": "Every @AttacksPerHeadshot@ Attacks, Caitlyn fires a <keywordMajor>Headshot</keywordMajor>. Attacks while in brush count as @BrushAttackTotal@ for building towards a <keywordMajor>Headshot</keywordMajor>.<br><br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotBonusDamage@ physical damage</physicalDamage>. They have double range against enemies affected by <spellName>{{Spell_CaitlynEntrapment_Name}}</spellName> and <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName>. <keywordMajor>Headshots</keywordMajor> against enemies hit by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> deal a further <physicalDamage>@spell.CaitlynW:HeadshotBonusDamage@ physical damage</physicalDamage>.",
+					"tooltipExtended": "{{Spell_CaitlynP_Tooltip}}<br><br><rules><keywordMajor>Headshot</keywordMajor> damage scales with level, Critical Strike Chance, and Critical Strike Damage.<br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotMinionBonusDamage@ physical damage</physicalDamage> to non-champions.<br>Extra damage on trapped targets scales with {{Spell_CaitlynYordleTrap_Name}} rank.</rules>",
+					"dataValues": {
+						"CriticalStrikeScaling": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"TowerCap": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"AttacksPerHeadshot": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BrushStackBonus": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"HeadShotBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mSubparts": [
 											{
-												"mLevel": 7,
-												"mAdditionalBonusAtThisLevel": 0.2
+												"mLevel1Value": 0.6,
+												"mBreakpoints": [
+													{
+														"mLevel": 7,
+														"mAdditionalBonusAtThisLevel": 0.2
+													},
+													{
+														"mLevel": 13,
+														"mAdditionalBonusAtThisLevel": 0.2
+													}
+												]
 											},
 											{
-												"mLevel": 13,
-												"mAdditionalBonusAtThisLevel": 0.2
+												"mPart1": {
+													"mStat": 8,
+													"mDataValue": "{10e05b53}"
+												},
+												"mPart2": {
+													"mSubparts": [
+														{
+															"mStat": 9,
+															"mCoefficient": 1
+														},
+														{
+															"mNumber": -1
+														}
+													]
+												}
 											}
 										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"HeadShotMinionBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mNumber": 1
+											},
+											{
+												"mPart1": {
+													"mNumber": -1
+												},
+												"mPart2": {
+													"mLevel1Value": 0.5,
+													"mBreakpoints": [
+														{
+															"mLevel": 7,
+															"mAdditionalBonusAtThisLevel": 0.2
+														},
+														{
+															"mLevel": 13,
+															"mAdditionalBonusAtThisLevel": 0.2
+														}
+													]
+												}
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"BrushAttackTotal": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mDataValue": "BrushStackBonus"
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								}
+							]
+						},
+						"{36ebd3cf}": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Caitlyn/Spells/CaitlynPassiveAbility/CaitlynPassive"
+				}
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Piltover Peacemaker",
+					"image": "assets/characters/caitlyn/hud/icons2d/caitlynq.png",
+					"mana": [
+						55,
+						60,
+						65,
+						70,
+						75,
+						80
+					],
+					"cooldownTime": [
+						11,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Caitlyn revs her rifle to fire a piercing shot dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage>. After the bolt strikes the first target, it opens into a wider shot that deals <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.<br><br>Enemies revealed by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> always take full damage.",
+					"dataValues": {
+						"BaseDamage": [
+							10,
+							50,
+							90,
+							130,
+							170,
+							210,
+							250
+						],
+						"SecondaryMult": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"tADRatio": [
+							1.05,
+							1.25,
+							1.45,
+							1.65,
+							1.85,
+							2.05,
+							2.25
+						]
+					},
+					"spellCalculations": {
+						"InitialDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mDataValue": "tADRatio"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"SecondaryDamage": {
+							"mMultiplier": {
+								"mDataValue": "SecondaryMult"
+							},
+							"mModifiedGameCalculation": "InitialDamage"
+						}
+					},
+					"effectAmount": {
+						"2": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"4": [
+							1.3,
+							1.3,
+							1.45,
+							1.6,
+							1.75,
+							1.9,
+							2.05
+						]
+					},
+					"dataKey": "Characters/Caitlyn/Spells/CaitlynQAbility/CaitlynQ"
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Yordle Snap Trap",
+					"image": "assets/characters/caitlyn/hud/icons2d/caitlynw.png",
+					"mana": [
+						20,
+						20,
+						20,
+						20,
+						20,
+						20
+					],
+					"cooldownTime": [
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5
+					],
+					"tooltip": "Caitlyn sets a trap that <status>Roots</status> the first champion that steps on it for @RootDuration@ seconds and granting <keywordStealth>True Sight</keywordStealth> of them for 3 seconds. Traps last for @TrapDuration@ seconds, and @MaximumTraps@ traps may be active at once. This Ability has @MaximumCharges@ charges (@AmmoRechargeTime@ second refresh).<br><br>Targets rooted by this Ability take an additional <physicalDamage>@HeadshotBonusDamage@ physical damage</physicalDamage> from <keywordMajor>Headshot</keywordMajor>.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							35,
+							80,
+							125,
+							170,
+							215,
+							260
+						],
+						"ADRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"TrapDuration": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"MaximumTraps": [
+							3,
+							3,
+							3,
+							4,
+							4,
+							5,
+							5
+						],
+						"RootDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"MaximumCharges": [
+							3,
+							3,
+							3,
+							4,
+							4,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"HeadShotBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"6": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						]
+					},
+					"dataKey": "Characters/Caitlyn/Spells/CaitlynWAbility/CaitlynW"
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "90 Caliber Net",
+					"image": "assets/characters/caitlyn/hud/icons2d/caitlyne.png",
+					"mana": [
+						75,
+						75,
+						75,
+						75,
+						75,
+						75
+					],
+					"cooldownTime": [
+						18,
+						16,
+						14,
+						12,
+						10,
+						8,
+						6
+					],
+					"tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by @Effect3Amount@% for @Effect2Amount@ second and deals <magicDamage>@NetDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"Damage": [
+							30,
+							80,
+							130,
+							180,
+							230,
+							280,
+							330
+						]
+					},
+					"spellCalculations": {
+						"NetDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							40,
+							80,
+							130,
+							180,
+							230,
+							280,
+							310
+						],
+						"1": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"2": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"dataKey": "Characters/Caitlyn/Spells/CaitlynEAbility/CaitlynE"
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Ace in the Hole",
+					"image": "assets/characters/caitlyn/hud/icons2d/caitlynr.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						90,
+						90,
+						90,
+						90,
+						90,
+						90,
+						90
+					],
+					"tooltip": "Caitlyn takes a moment to channel and line up the perfect shot, then she fires, dealing <physicalDamage>@RTotalDamage@ physical damage</physicalDamage>, but other enemy champions can intercept it. This Ability grants <keywordStealth>True Sight</keywordStealth> of the target during the channel.<br><br><rules>Damage scales with Caitlyn's Critical Strike chance and Critical Strike Damage.</rules>",
+					"dataValues": {
+						"RBaseDamage": [
+							125,
+							300,
+							475,
+							650,
+							825,
+							1000,
+							1175
+						],
+						"RADRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CriticalStrikeModifier": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						]
+					},
+					"spellCalculations": {
+						"RTotalDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
 									},
 									{
 										"mPart1": {
 											"mStat": 8,
-											"mDataValue": "{10e05b53}"
+											"mDataValue": "{a2a2a5ff}"
 										},
 										"mPart2": {
 											"mSubparts": [
@@ -108,461 +571,23 @@
 									}
 								]
 							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				},
-				"HeadShotMinionBonusDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mSubpart": {
-								"mSubparts": [
-									{
-										"mNumber": 1
-									},
-									{
-										"mPart1": {
-											"mNumber": -1
-										},
-										"mPart2": {
-											"mLevel1Value": 0.5,
-											"mBreakpoints": [
-												{
-													"mLevel": 7,
-													"mAdditionalBonusAtThisLevel": 0.2
-												},
-												{
-													"mLevel": 13,
-													"mAdditionalBonusAtThisLevel": 0.2
-												}
-											]
-										}
-									}
-								]
-							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				},
-				"BrushAttackTotal": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mSubparts": [
+							"mFormulaParts": [
 								{
-									"mNumber": 1
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mDataValue": "BrushStackBonus"
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "RADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							],
-							"__type": "SumOfSubPartsCalculationPart"
+							]
 						}
-					]
-				},
-				"{36ebd3cf}": {
-					"mFormulaParts": [
-						{
-							"mStat": 9,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				}
-			},
-			"name": "Headshot",
-			"tooltip": "Every @AttacksPerHeadshot@ Attacks, Caitlyn fires a <keywordMajor>Headshot</keywordMajor>. Attacks while in brush count as @BrushAttackTotal@ for building towards a <keywordMajor>Headshot</keywordMajor>.<br><br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotBonusDamage@ physical damage</physicalDamage>. They have double range against enemies affected by <spellName>{{Spell_CaitlynEntrapment_Name}}</spellName> and <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName>. <keywordMajor>Headshots</keywordMajor> against enemies hit by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> deal a further <physicalDamage>@spell.CaitlynW:HeadshotBonusDamage@ physical damage</physicalDamage>.",
-			"tooltipExtended": "{{Spell_CaitlynP_Tooltip}}<br><br><rules><keywordMajor>Headshot</keywordMajor> damage scales with level, Critical Strike Chance, and Critical Strike Damage.<br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotMinionBonusDamage@ physical damage</physicalDamage> to non-champions.<br>Extra damage on trapped targets scales with {{Spell_CaitlynYordleTrap_Name}} rank.</rules>"
-		},
-		"q": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynq.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					10,
-					50,
-					90,
-					130,
-					170,
-					210,
-					250
-				],
-				"SecondaryMult": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"tADRatio": [
-					1.05,
-					1.25,
-					1.45,
-					1.65,
-					1.85,
-					2.05,
-					2.25
-				]
-			},
-			"spellCalculations": {
-				"InitialDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mSubpart": {
-								"mDataValue": "tADRatio"
-							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				},
-				"SecondaryDamage": {
-					"mMultiplier": {
-						"mDataValue": "SecondaryMult"
 					},
-					"mModifiedGameCalculation": "InitialDamage"
+					"dataKey": "Characters/Caitlyn/Spells/CaitlynRAbility/CaitlynR"
 				}
-			},
-			"effectAmount": {
-				"2": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"3": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"4": [
-					1.3,
-					1.3,
-					1.45,
-					1.6,
-					1.75,
-					1.9,
-					2.05
-				]
-			},
-			"mana": [
-				55,
-				60,
-				65,
-				70,
-				75,
-				80
-			],
-			"cooldownTime": [
-				11,
-				10,
-				9,
-				8,
-				7,
-				6,
-				6
-			],
-			"name": "Piltover Peacemaker",
-			"tooltip": "Caitlyn revs her rifle to fire a piercing shot dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage>. After the bolt strikes the first target, it opens into a wider shot that deals <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.<br><br>Enemies revealed by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> always take full damage."
-		},
-		"w": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynw.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					35,
-					35,
-					80,
-					125,
-					170,
-					215,
-					260
-				],
-				"ADRatio": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"TrapDuration": [
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				],
-				"MaximumTraps": [
-					3,
-					3,
-					3,
-					4,
-					4,
-					5,
-					5
-				],
-				"RootDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"MaximumCharges": [
-					3,
-					3,
-					3,
-					4,
-					4,
-					5,
-					5
-				]
-			},
-			"spellCalculations": {
-				"HeadShotBonusDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			},
-			"effectAmount": {
-				"0": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"6": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				]
-			},
-			"mana": [
-				20,
-				20,
-				20,
-				20,
-				20,
-				20
-			],
-			"cooldownTime": [
-				0.5,
-				0.5,
-				0.5,
-				0.5,
-				0.5,
-				0.5,
-				0.5
-			],
-			"name": "Yordle Snap Trap",
-			"tooltip": "Caitlyn sets a trap that <status>Roots</status> the first champion that steps on it for @RootDuration@ seconds and granting <keywordStealth>True Sight</keywordStealth> of them for 3 seconds. Traps last for @TrapDuration@ seconds, and @MaximumTraps@ traps may be active at once. This Ability has @MaximumCharges@ charges (@AmmoRechargeTime@ second refresh).<br><br>Targets rooted by this Ability take an additional <physicalDamage>@HeadshotBonusDamage@ physical damage</physicalDamage> from <keywordMajor>Headshot</keywordMajor>."
-		},
-		"e": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlyne.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"Damage": [
-					30,
-					80,
-					130,
-					180,
-					230,
-					280,
-					330
-				]
-			},
-			"spellCalculations": {
-				"NetDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				}
-			},
-			"effectAmount": {
-				"0": [
-					40,
-					80,
-					130,
-					180,
-					230,
-					280,
-					310
-				],
-				"1": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"2": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				]
-			},
-			"mana": [
-				75,
-				75,
-				75,
-				75,
-				75,
-				75
-			],
-			"cooldownTime": [
-				18,
-				16,
-				14,
-				12,
-				10,
-				8,
-				6
-			],
-			"name": "90 Caliber Net",
-			"tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by @Effect3Amount@% for @Effect2Amount@ second and deals <magicDamage>@NetDamage@ magic damage</magicDamage>."
-		},
-		"r": {
-			"image": "assets/characters/caitlyn/hud/icons2d/caitlynr.png",
-			"maxLevel": 3,
-			"dataValues": {
-				"RBaseDamage": [
-					125,
-					300,
-					475,
-					650,
-					825,
-					1000,
-					1175
-				],
-				"RADRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"CriticalStrikeModifier": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				]
-			},
-			"spellCalculations": {
-				"RTotalDamage": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mPart1": {
-									"mStat": 8,
-									"mDataValue": "{a2a2a5ff}"
-								},
-								"mPart2": {
-									"mSubparts": [
-										{
-											"mStat": 9,
-											"mCoefficient": 1
-										},
-										{
-											"mNumber": -1
-										}
-									]
-								}
-							}
-						]
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "RBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "RADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				90,
-				90,
-				90,
-				90,
-				90,
-				90,
-				90
-			],
-			"name": "Ace in the Hole",
-			"tooltip": "Caitlyn takes a moment to channel and line up the perfect shot, then she fires, dealing <physicalDamage>@RTotalDamage@ physical damage</physicalDamage>, but other enemy champions can intercept it. This Ability grants <keywordStealth>True Sight</keywordStealth> of the target during the channel.<br><br><rules>Damage scales with Caitlyn's Critical Strike chance and Critical Strike Damage.</rules>"
+			]
 		}
 	}
 }

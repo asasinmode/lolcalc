@@ -29,978 +29,1365 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolp.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"QMaxHealthTrueDamagePerStack": [
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0
-				],
-				"BaseExecutionThreshold": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"ExecutionGrowthPerBreakpoint": [
-					0.026,
-					0.026,
-					0.026,
-					0.026,
-					0.026,
-					0.026,
-					0.026
-				]
-			},
-			"spellCalculations": {
-				"QPassiveScaling": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{c9372c6b}",
-							"mIconKey": "%i:asolStackIcon%",
-							"mDataValue": "QMaxHealthTrueDamagePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Cosmic Creator",
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolp.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"EPassiveScalingExecute": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{c9372c6b}",
-							"mIconKey": "%i:asolStackIcon%",
-							"mDataValue": "ExecutionGrowthPerBreakpoint",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					],
-					"mPrecision": 1
-				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Cosmic Creator",
-			"tooltip": "Aurelion Sol's damaging Abilities break down enemies into <font color='#3458eb'>Stardust</font>, which improves his Abilities.<li><spellName>{{Spell_AurelionSolQ_Name}}</spellName>: Bursts deal an additional <magicDamage>@QPassiveScaling@ max Health magic damage</magicDamage></li><li><spellName>{{Spell_AurelionSolW_Name}}</spellName>: @f2.1@% increased distance.</li><li><spellName>{{Spell_AurelionSolE_Name}}</spellName>: @f3.1@% increased area and <scaleHealth>@EPassiveScalingExecute@</scaleHealth> bonus execute threshold.</li><li><spellName>{{Spell_AurelionSolR1_Name}} and {{Spell_AurelionSolR2_Name}}</spellName>: @f4.1@% increased area.</li><br><rules>Aurelion Sol has acquired <font color='#3458eb'>Stardust</font>: <font color='#3458eb'>@f1@</font></rules>"
-		},
-		"q": {
-			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolq.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"AngularDegreesPerSec": [
-					180,
-					180,
-					180,
-					180,
-					180,
-					180,
-					180
-				],
-				"BeamWidth": [
-					140,
-					140,
-					140,
-					140,
-					140,
-					140,
-					140
-				],
-				"MaxChannelDuration": [
-					3.25,
-					3.25,
-					3.25,
-					3.25,
-					3.25,
-					9999,
-					9999
-				],
-				"BurstAfter": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"ManaCostPerSecond": [
-					30,
-					35,
-					40,
-					45,
-					50,
-					55,
-					60
-				],
-				"RankDamagePerSecond": [
-					30,
-					45,
-					60,
-					75,
-					90,
-					105,
-					120
-				],
-				"APPerSecond": [
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55
-				],
-				"RankBurstDamage": [
-					50,
-					60,
-					70,
-					80,
-					90,
-					100,
-					110
-				],
-				"BurstAPRatio": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"BeamSegments": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"WProcCooldown": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"QMassStolen": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"DistancePerMass": [
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375
-				],
-				"QMaxHealthTrueDamagePerStack": [
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0
-				],
-				"MonsterDamageCap": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"AOEModifier": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"DamagePerSecond": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RankDamagePerSecond",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APPerSecond",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"BurstDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RankBurstDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "BurstAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"BurstBonusTrueDamageToChamps": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{c9372c6b}",
-							"mIconKey": "%i:asolStackIcon%",
-							"mDataValue": "QMaxHealthTrueDamagePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"LevelBasedRangeScaling": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 750,
-							"mInitialBonusPerLevel": 10,
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				35,
-				40,
-				45,
-				50,
-				55,
-				60
-			],
-			"cooldownTime": [
-				3,
-				3,
-				3,
-				3,
-				3,
-				3,
-				3
-			],
-			"name": "Breath of Light",
-			"tooltip": "Aurelion Sol breathes starfire for up to @MaxChannelDuration@ seconds, dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second to the first enemy hit and @AOEModifier*100@% of the damage to surrounding enemies.<br><br>Each full second of breath on the same enemy deals a burst of <magicDamage>@BurstDamage@ magic damage</magicDamage> plus <magicDamage>@BurstBonusTrueDamageToChamps@ max Health magic damage</magicDamage> and absorbs <font color='#3458eb'>@QMassStolen@ Stardust</font> if they are a champion."
-		},
-		"w": {
-			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolw1.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"TrueDamageBonus": [
-					0.07,
-					0.08,
-					0.09,
-					0.1,
-					0.11,
-					0.12,
-					0.13
-				],
-				"BaseMS": [
-					340,
-					340,
-					340,
-					340,
-					340,
-					340,
-					340
-				],
-				"BaseCruiseMS": [
-					340,
-					340,
-					340,
-					340,
-					340,
-					340,
-					340
-				],
-				"DistancePerMass": [
-					7.5,
-					7.5,
-					7.5,
-					7.5,
-					7.5,
-					7.5,
-					7.5
-				],
-				"ResetWindow": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"TakedownCooldownMultiplier": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"TooltipTakedownCooldownMultiplier": [
-					90,
-					90,
-					90,
-					90,
-					90,
-					90,
-					90
-				],
-				"FakeCastTime": [
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375
-				],
-				"OverrideECastRange": [
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100
-				],
-				"CD": [
-					22,
-					22,
-					20.5,
-					19,
-					17.5,
-					16,
-					16
-				]
-			},
-			"spellCalculations": {
-				"DashSpeed": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseMS",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 7,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"{70212d39}": {
-					"mMultiplier": {
-						"mNumber": 0.5
+					"tooltip": "Aurelion Sol's damaging Abilities break down enemies into <font color='#3458eb'>Stardust</font>, which improves his Abilities.<li><spellName>{{Spell_AurelionSolQ_Name}}</spellName>: Bursts deal an additional <magicDamage>@QPassiveScaling@ max Health magic damage</magicDamage></li><li><spellName>{{Spell_AurelionSolW_Name}}</spellName>: @f2.1@% increased distance.</li><li><spellName>{{Spell_AurelionSolE_Name}}</spellName>: @f3.1@% increased area and <scaleHealth>@EPassiveScalingExecute@</scaleHealth> bonus execute threshold.</li><li><spellName>{{Spell_AurelionSolR1_Name}} and {{Spell_AurelionSolR2_Name}}</spellName>: @f4.1@% increased area.</li><br><rules>Aurelion Sol has acquired <font color='#3458eb'>Stardust</font>: <font color='#3458eb'>@f1@</font></rules>",
+					"dataValues": {
+						"QMaxHealthTrueDamagePerStack": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"BaseExecutionThreshold": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"ExecutionGrowthPerBreakpoint": [
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026
+						]
 					},
-					"mModifiedGameCalculation": "{ffd78035}"
-				},
-				"{ffd78035}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseMS",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 7,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"{e3ddb2ca}": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 0.8,
-							"mEndValue": 1.2,
-							"mScalePastDefaultMaxLevel": false,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				70
-			],
-			"cooldownTime": [
-				23.5,
-				22,
-				20.5,
-				19,
-				17.5,
-				16,
-				14.5
-			],
-			"name": "Astral Flight",
-			"tooltip": "Aurelion Sol flies in a direction. While flying, <spellName>{{Spell_AurelionSolQ_Name}}</spellName> has no Cooldown, no max channel duration, and its flat damage is increased by @TrueDamageBonus*100@%.<br><br>Takedowns on champions within @ResetWindow@ seconds of damaging them refunds @TooltipTakedownCooldownMultiplier@% of this Ability's Cooldown.<br><br><recast>Recast:</recast> End flight early."
-		},
-		"e": {
-			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsole.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"ChampionMassPerSecond": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"MinionMassDeath": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"LargeMinionCountBonus": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"LargeMonsterCountBonus": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"ChampionCountBonus": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"EpicMonsterCountBonus": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"StartingRadius": [
-					275,
-					275,
-					275,
-					275,
-					275,
-					275,
-					275
-				],
-				"StartingInnerRadius": [
-					120,
-					120,
-					120,
-					120,
-					120,
-					120,
-					120
-				],
-				"GrowthBreakPoint": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"StartingGravity": [
-					150,
-					150,
-					150,
-					150,
-					150,
-					150,
-					150
-				],
-				"NonChampGravity": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"Duration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BaseDamagePerSecond": [
-					5,
-					10,
-					15,
-					20,
-					25,
-					30,
-					35
-				],
-				"DamageperSecondAPRatio": [
-					0.12,
-					0.12,
-					0.12,
-					0.12,
-					0.12,
-					0.12,
-					0.12
-				],
-				"BaseExecutionThreshold": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"ExecutionGrowthPerBreakpoint": [
-					0.026,
-					0.026,
-					0.026,
-					0.026,
-					0.026,
-					0.026,
-					0.026
-				],
-				"OuterRadiusAreaPerStack": [
-					900,
-					900,
-					900,
-					900,
-					900,
-					900,
-					900
-				],
-				"InnerRadiusAreaPerStack": [
-					180,
-					180,
-					180,
-					180,
-					180,
-					180,
-					180
-				],
-				"PI": [
-					3.142,
-					3.142,
-					3.142,
-					3.142,
-					3.142,
-					3.142,
-					3.142
-				],
-				"InversePI": [
-					0.318,
-					0.318,
-					0.318,
-					0.318,
-					0.318,
-					0.318,
-					0.318
-				]
-			},
-			"spellCalculations": {
-				"DamagePerSecond": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamagePerSecond",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "DamageperSecondAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{b0a79c98}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "StartingRadius",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mBuffName": "{c9372c6b}",
-							"mCoefficient": 1,
-							"__type": "BuffCounterByCoefficientCalculationPart"
-						}
-					]
-				},
-				"CurrentExecutionThreshold": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseExecutionThreshold",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mBuffName": "{c9372c6b}",
-							"mIconKey": "%i:asolStackIcon%",
-							"mDataValue": "ExecutionGrowthPerBreakpoint",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					],
-					"mPrecision": 1
-				},
-				"{57c521f0}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "StartingGravity",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mBuffName": "{c9372c6b}",
-							"mDataValue": "GravityIncPerBreakpoint",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{7741d788}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 120,
-							"mBreakpoints": [
+					"spellCalculations": {
+						"QPassiveScaling": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 10
-								},
-								{
-									"mLevel": 7,
-									"mAdditionalBonusAtThisLevel": 10
-								},
-								{
-									"mLevel": 8,
-									"mAdditionalBonusAtThisLevel": 10
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "QMaxHealthTrueDamagePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"LevelBasedRangeScaling": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 750,
-							"mInitialBonusPerLevel": 10,
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"{5dfac189}": {
-					"ResultModifier": 1,
-					"mMultiplier": {
-						"mDataValue": "InversePI"
-					},
-					"mFormulaParts": [
-						{
-							"mPart1": {
-								"mDataValue": "StartingRadius"
-							},
-							"mPart2": {
-								"mPart1": {
-									"mDataValue": "StartingRadius"
-								},
-								"mPart2": {
-									"mDataValue": "PI"
-								}
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
-						{
-							"mBuffName": "{c9372c6b}",
-							"mIconKey": "%i:asolStackIcon%",
-							"mDataValue": "OuterRadiusAreaPerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						"EPassiveScalingExecute": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "ExecutionGrowthPerBreakpoint",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
 						}
-					]
-				},
-				"{94f76880}": {
-					"mMultiplier": {
-						"mNumber": 0.2
 					},
-					"mModifiedGameCalculation": "{5dfac189}"
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolPassiveAbility/AurelionSolPassive"
 				}
-			},
-			"mana": [
-				90,
-				90,
-				90,
-				90,
-				90,
-				90
-			],
-			"cooldownTime": [
-				12,
-				12,
-				12,
-				12,
-				12,
-				12,
-				12
-			],
-			"name": "Singularity",
-			"tooltip": "Aurelion Sol summons a black hole, dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second and <status>Dragging</status> enemies towards the center for @Duration@ seconds. Enemies in the center below <scaleHealth>@CurrentExecutionThreshold@% max Health</scaleHealth> die instantly.<br><br>The black hole absorbs <font color='#3458eb'>Stardust</font> when enemies die within it and each second an enemy champion is inside."
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Breath of Light",
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolq.png",
+					"mana": [
+						35,
+						40,
+						45,
+						50,
+						55,
+						60
+					],
+					"cooldownTime": [
+						3,
+						3,
+						3,
+						3,
+						3,
+						3,
+						3
+					],
+					"tooltip": "Aurelion Sol breathes starfire for up to @MaxChannelDuration@ seconds, dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second to the first enemy hit and @AOEModifier*100@% of the damage to surrounding enemies.<br><br>Each full second of breath on the same enemy deals a burst of <magicDamage>@BurstDamage@ magic damage</magicDamage> plus <magicDamage>@BurstBonusTrueDamageToChamps@ max Health magic damage</magicDamage> and absorbs <font color='#3458eb'>@QMassStolen@ Stardust</font> if they are a champion.",
+					"dataValues": {
+						"AngularDegreesPerSec": [
+							180,
+							180,
+							180,
+							180,
+							180,
+							180,
+							180
+						],
+						"BeamWidth": [
+							140,
+							140,
+							140,
+							140,
+							140,
+							140,
+							140
+						],
+						"MaxChannelDuration": [
+							3.25,
+							3.25,
+							3.25,
+							3.25,
+							3.25,
+							9999,
+							9999
+						],
+						"BurstAfter": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ManaCostPerSecond": [
+							30,
+							35,
+							40,
+							45,
+							50,
+							55,
+							60
+						],
+						"RankDamagePerSecond": [
+							30,
+							45,
+							60,
+							75,
+							90,
+							105,
+							120
+						],
+						"APPerSecond": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						],
+						"RankBurstDamage": [
+							50,
+							60,
+							70,
+							80,
+							90,
+							100,
+							110
+						],
+						"BurstAPRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"BeamSegments": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"WProcCooldown": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"QMassStolen": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"DistancePerMass": [
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375
+						],
+						"QMaxHealthTrueDamagePerStack": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"MonsterDamageCap": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"AOEModifier": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"DamagePerSecond": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RankDamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APPerSecond",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BurstDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RankBurstDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "BurstAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BurstBonusTrueDamageToChamps": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "QMaxHealthTrueDamagePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"LevelBasedRangeScaling": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 750,
+									"mInitialBonusPerLevel": 10,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolQAbility/AurelionSolQ"
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Astral Flight",
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolw1.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
+					],
+					"cooldownTime": [
+						23.5,
+						22,
+						20.5,
+						19,
+						17.5,
+						16,
+						14.5
+					],
+					"tooltip": "Aurelion Sol flies in a direction. While flying, <spellName>{{Spell_AurelionSolQ_Name}}</spellName> has no Cooldown, no max channel duration, and its flat damage is increased by @TrueDamageBonus*100@%.<br><br>Takedowns on champions within @ResetWindow@ seconds of damaging them refunds @TooltipTakedownCooldownMultiplier@% of this Ability's Cooldown.<br><br><recast>Recast:</recast> End flight early.",
+					"dataValues": {
+						"TrueDamageBonus": [
+							0.07,
+							0.08,
+							0.09,
+							0.1,
+							0.11,
+							0.12,
+							0.13
+						],
+						"BaseMS": [
+							340,
+							340,
+							340,
+							340,
+							340,
+							340,
+							340
+						],
+						"BaseCruiseMS": [
+							340,
+							340,
+							340,
+							340,
+							340,
+							340,
+							340
+						],
+						"DistancePerMass": [
+							7.5,
+							7.5,
+							7.5,
+							7.5,
+							7.5,
+							7.5,
+							7.5
+						],
+						"ResetWindow": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"TakedownCooldownMultiplier": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"TooltipTakedownCooldownMultiplier": [
+							90,
+							90,
+							90,
+							90,
+							90,
+							90,
+							90
+						],
+						"FakeCastTime": [
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375
+						],
+						"OverrideECastRange": [
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100
+						],
+						"CD": [
+							22,
+							22,
+							20.5,
+							19,
+							17.5,
+							16,
+							16
+						]
+					},
+					"spellCalculations": {
+						"DashSpeed": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMS",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{70212d39}": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"mModifiedGameCalculation": "{ffd78035}"
+						},
+						"{ffd78035}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMS",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{e3ddb2ca}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.8,
+									"mEndValue": 1.2,
+									"mScalePastDefaultMaxLevel": false,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolWAbility/AurelionSolW"
+				},
+				{
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolw2.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltipVariantIndex": 0,
+					"dataValues": {
+						"TrueDamageBonus": [
+							0.07,
+							0.08,
+							0.09,
+							0.1,
+							0.11,
+							0.12,
+							0.13
+						],
+						"BaseMS": [
+							340,
+							340,
+							340,
+							340,
+							340,
+							340,
+							340
+						],
+						"BaseCruiseMS": [
+							340,
+							340,
+							340,
+							340,
+							340,
+							340,
+							340
+						],
+						"DistancePerMass": [
+							7.5,
+							7.5,
+							7.5,
+							7.5,
+							7.5,
+							7.5,
+							7.5
+						],
+						"ResetWindow": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"TakedownCooldownMultiplier": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"TooltipTakedownCooldownMultiplier": [
+							90,
+							90,
+							90,
+							90,
+							90,
+							90,
+							90
+						],
+						"FakeCastTime": [
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375
+						],
+						"OverrideECastRange": [
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100
+						],
+						"CD": [
+							22,
+							22,
+							20.5,
+							19,
+							17.5,
+							16,
+							16
+						]
+					},
+					"spellCalculations": {
+						"DashSpeed": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMS",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{70212d39}": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"mModifiedGameCalculation": "{ffd78035}"
+						},
+						"{ffd78035}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMS",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{e3ddb2ca}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.8,
+									"mEndValue": 1.2,
+									"mScalePastDefaultMaxLevel": false,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolWAbility/AurelionSolWToggle"
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Singularity",
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsole.png",
+					"mana": [
+						90,
+						90,
+						90,
+						90,
+						90,
+						90
+					],
+					"cooldownTime": [
+						12,
+						12,
+						12,
+						12,
+						12,
+						12,
+						12
+					],
+					"tooltip": "Aurelion Sol summons a black hole, dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second and <status>Dragging</status> enemies towards the center for @Duration@ seconds. Enemies in the center below <scaleHealth>@CurrentExecutionThreshold@% max Health</scaleHealth> die instantly.<br><br>The black hole absorbs <font color='#3458eb'>Stardust</font> when enemies die within it and each second an enemy champion is inside.",
+					"dataValues": {
+						"ChampionMassPerSecond": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"MinionMassDeath": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"LargeMinionCountBonus": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"LargeMonsterCountBonus": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"ChampionCountBonus": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"EpicMonsterCountBonus": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"StartingRadius": [
+							275,
+							275,
+							275,
+							275,
+							275,
+							275,
+							275
+						],
+						"StartingInnerRadius": [
+							120,
+							120,
+							120,
+							120,
+							120,
+							120,
+							120
+						],
+						"GrowthBreakPoint": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"StartingGravity": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"NonChampGravity": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"Duration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BaseDamagePerSecond": [
+							5,
+							10,
+							15,
+							20,
+							25,
+							30,
+							35
+						],
+						"DamageperSecondAPRatio": [
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12
+						],
+						"BaseExecutionThreshold": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"ExecutionGrowthPerBreakpoint": [
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026
+						],
+						"OuterRadiusAreaPerStack": [
+							900,
+							900,
+							900,
+							900,
+							900,
+							900,
+							900
+						],
+						"InnerRadiusAreaPerStack": [
+							180,
+							180,
+							180,
+							180,
+							180,
+							180,
+							180
+						],
+						"PI": [
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142
+						],
+						"InversePI": [
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318
+						]
+					},
+					"spellCalculations": {
+						"DamagePerSecond": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "DamageperSecondAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{b0a79c98}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "StartingRadius",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBuffName": "{c9372c6b}",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CurrentExecutionThreshold": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseExecutionThreshold",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "ExecutionGrowthPerBreakpoint",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						},
+						"{57c521f0}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "StartingGravity",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBuffName": "{c9372c6b}",
+									"mDataValue": "GravityIncPerBreakpoint",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{7741d788}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 120,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 10
+										},
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 10
+										},
+										{
+											"mLevel": 8,
+											"mAdditionalBonusAtThisLevel": 10
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"LevelBasedRangeScaling": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 750,
+									"mInitialBonusPerLevel": 10,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"{5dfac189}": {
+							"ResultModifier": 1,
+							"mMultiplier": {
+								"mDataValue": "InversePI"
+							},
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "StartingRadius"
+									},
+									"mPart2": {
+										"mPart1": {
+											"mDataValue": "StartingRadius"
+										},
+										"mPart2": {
+											"mDataValue": "PI"
+										}
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								},
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "OuterRadiusAreaPerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{94f76880}": {
+							"mMultiplier": {
+								"mNumber": 0.2
+							},
+							"mModifiedGameCalculation": "{5dfac189}"
+						}
+					},
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolEAbility/AurelionSolE"
+				}
+			]
 		},
 		"r": {
-			"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolr1.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"CalamityStacks": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				],
-				"StartingRadius": [
-					275,
-					275,
-					275,
-					275,
-					275,
-					275,
-					275
-				],
-				"SkiesDescendStartingRadius": [
-					550,
-					550,
-					550,
-					550,
-					550,
-					550,
-					550
-				],
-				"CalamitySizeBonus": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"MassStolen": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BaseDamage": [
-					50,
-					150,
-					250,
-					350,
-					450,
-					550,
-					650
-				],
-				"APRatio": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"StunDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"R2DamageRatio": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"ShockwaveDamageRatio": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				],
-				"ShockwaveSlow": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"AreaPerPassiveStack": [
-					900,
-					900,
-					900,
-					900,
-					900,
-					900,
-					900
-				],
-				"PI": [
-					3.142,
-					3.142,
-					3.142,
-					3.142,
-					3.142,
-					3.142,
-					3.142
-				],
-				"InversePI": [
-					0.318,
-					0.318,
-					0.318,
-					0.318,
-					0.318,
-					0.318,
-					0.318
-				]
-			},
-			"spellCalculations": {
-				"MaxDamageTooltip": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"R2Damage": {
-					"mMultiplier": {
-						"mDataValue": "R2DamageRatio"
+			"variants": [
+				{
+					"name": "Falling Star / The Skies Descend",
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolr1.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						120,
+						120,
+						110,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltip": "Aurelion Sol plucks a star from the heavens and crashes it into the earth, dealing <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage>, <status>Stunning</status> enemies @StunDuration@ second, and absorbing <font color='#3458eb'>@MassStolen@ Stardust</font> for each champion hit.<br><br>Gathering <font color='#3458eb'>@CalamityStacks@ Stardust</font> transforms the next <spellName>{{Spell_AurelionSolR1_Name}}</spellName> into <spellName>{{Spell_AurelionSolR2_Name}}</spellName>.<br><br><spellName>{{Spell_AurelionSolR2_Name}}</spellName>: Aurelion Sol drags a constellation's worth of fury down from the cosmos, dealing <magicDamage>@R2Damage@ magic damage</magicDamage> in a larger area, <status>Knocking Up</status> enemies hit for @StunDuration@ second, and unleashing a massive shockwave that deals <magicDamage>@ShockwaveDamage@ magic damage</magicDamage> to champions and Epic Monsters and <status>Slows</status> all enemies hit by @ShockwaveSlow*100@% for 1 second.",
+					"dataValues": {
+						"CalamityStacks": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"StartingRadius": [
+							275,
+							275,
+							275,
+							275,
+							275,
+							275,
+							275
+						],
+						"SkiesDescendStartingRadius": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						],
+						"CalamitySizeBonus": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"MassStolen": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BaseDamage": [
+							50,
+							150,
+							250,
+							350,
+							450,
+							550,
+							650
+						],
+						"APRatio": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"StunDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"R2DamageRatio": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"ShockwaveDamageRatio": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"ShockwaveSlow": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"AreaPerPassiveStack": [
+							900,
+							900,
+							900,
+							900,
+							900,
+							900,
+							900
+						],
+						"PI": [
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142
+						],
+						"InversePI": [
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318
+						]
 					},
-					"mModifiedGameCalculation": "MaxDamageTooltip"
-				},
-				"ShockwaveDamage": {
-					"mMultiplier": {
-						"mDataValue": "ShockwaveDamageRatio"
-					},
-					"mModifiedGameCalculation": "MaxDamageTooltip"
-				},
-				"{1d7ce9ef}": {
-					"ResultModifier": 1,
-					"mMultiplier": {
-						"mDataValue": "InversePI"
-					},
-					"mFormulaParts": [
-						{
-							"mPart1": {
-								"mDataValue": "StartingRadius"
-							},
-							"mPart2": {
-								"mPart1": {
-									"mDataValue": "StartingRadius"
+					"spellCalculations": {
+						"MaxDamageTooltip": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
-								"mPart2": {
-									"mDataValue": "PI"
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
+							]
 						},
-						{
-							"mBuffName": "{c9372c6b}",
-							"mIconKey": "%i:asolStackIcon%",
-							"mDataValue": "AreaPerPassiveStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
+						"R2Damage": {
+							"mMultiplier": {
+								"mDataValue": "R2DamageRatio"
+							},
+							"mModifiedGameCalculation": "MaxDamageTooltip"
+						},
+						"ShockwaveDamage": {
+							"mMultiplier": {
+								"mDataValue": "ShockwaveDamageRatio"
+							},
+							"mModifiedGameCalculation": "MaxDamageTooltip"
+						},
+						"{1d7ce9ef}": {
+							"ResultModifier": 1,
+							"mMultiplier": {
+								"mDataValue": "InversePI"
+							},
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "StartingRadius"
+									},
+									"mPart2": {
+										"mPart1": {
+											"mDataValue": "StartingRadius"
+										},
+										"mPart2": {
+											"mDataValue": "PI"
+										}
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								},
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "AreaPerPassiveStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolRAbility/AurelionSolR"
+				},
+				{
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolr2.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						120,
+						120,
+						110,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltipVariantIndex": 0,
+					"dataValues": {
+						"BaseDamage": [
+							125,
+							200,
+							275,
+							350,
+							425,
+							500,
+							575
+						],
+						"APRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"BaseDamageCenter": [
+							100,
+							300,
+							500,
+							700,
+							900,
+							1100,
+							1300
+						],
+						"APRatioCenter": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"MinDamageAtEdge": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"MinStunAtEdge": [
+							0.333,
+							0.333,
+							0.333,
+							0.333,
+							0.333,
+							0.333,
+							0.333
+						],
+						"CalamityBaseDamage": [
+							150,
+							250,
+							350,
+							450,
+							550,
+							650,
+							750
+						],
+						"CalamityAPRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CalamityStacks": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"StartingRadius": [
+							275,
+							275,
+							275,
+							275,
+							275,
+							275,
+							275
+						],
+						"AreaPerPassiveStacks": [
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500
+						],
+						"PI": [
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142,
+							3.142
+						],
+						"InversePI": [
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318,
+							0.318
+						]
+					},
+					"spellCalculations": {
+						"MaxDamageTooltip": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamageCenter",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatioCenter",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MinDamageTooltip": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{047a61eb}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "CalamityBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "CalamityAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{06c03ad2}": {
+							"ResultModifier": 1,
+							"mMultiplier": {
+								"mDataValue": "InversePI"
+							},
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "StartingRadius"
+									},
+									"mPart2": {
+										"mPart1": {
+											"mDataValue": "StartingRadius"
+										},
+										"mPart2": {
+											"mPart1": {
+												"mNumber": 2
+											},
+											"mPart2": {
+												"mDataValue": "PI"
+											}
+										}
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								},
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "AreaPerPassiveStacks",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolRAbility/AurelionSolR2"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				120,
-				120,
-				110,
-				100,
-				100,
-				100,
-				100
-			],
-			"name": "Falling Star / The Skies Descend",
-			"tooltip": "Aurelion Sol plucks a star from the heavens and crashes it into the earth, dealing <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage>, <status>Stunning</status> enemies @StunDuration@ second, and absorbing <font color='#3458eb'>@MassStolen@ Stardust</font> for each champion hit.<br><br>Gathering <font color='#3458eb'>@CalamityStacks@ Stardust</font> transforms the next <spellName>{{Spell_AurelionSolR1_Name}}</spellName> into <spellName>{{Spell_AurelionSolR2_Name}}</spellName>.<br><br><spellName>{{Spell_AurelionSolR2_Name}}</spellName>: Aurelion Sol drags a constellation's worth of fury down from the cosmos, dealing <magicDamage>@R2Damage@ magic damage</magicDamage> in a larger area, <status>Knocking Up</status> enemies hit for @StunDuration@ second, and unleashing a massive shockwave that deals <magicDamage>@ShockwaveDamage@ magic damage</magicDamage> to champions and Epic Monsters and <status>Slows</status> all enemies hit by @ShockwaveSlow*100@% for 1 second."
+			]
 		}
 	}
 }

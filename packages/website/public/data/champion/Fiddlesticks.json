@@ -29,461 +29,486 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksp.png",
 			"maxLevel": 0,
-			"name": "A Harmless Scarecrow",
-			"tooltip": "Fiddlesticks' trinket is replaced by <keywordMajor>Scarecrow Effigies</keywordMajor>. When discovered by enemies, <keywordMajor>Effigies</keywordMajor> briefly impersonate Fiddlesticks. If Fiddlesticks does not move for 2 seconds, he will impersonate an <keywordMajor>Effigy</keywordMajor>. At level six <keywordMajor>Effigies</keywordMajor> reveal nearby wards for 6 seconds."
+			"variants": [
+				{
+					"name": "A Harmless Scarecrow",
+					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksp.png",
+					"tooltip": "Fiddlesticks' trinket is replaced by <keywordMajor>Scarecrow Effigies</keywordMajor>. When discovered by enemies, <keywordMajor>Effigies</keywordMajor> briefly impersonate Fiddlesticks. If Fiddlesticks does not move for 2 seconds, he will impersonate an <keywordMajor>Effigy</keywordMajor>. At level six <keywordMajor>Effigies</keywordMajor> reveal nearby wards for 6 seconds.",
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksPassiveAbility/FiddleSticksPassive"
+				}
+			]
 		},
 		"q": {
-			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksq.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MaxHealthDamage": [
-					0.035,
-					0.04,
-					0.045,
-					0.05,
-					0.055,
-					0.06,
-					0.065
-				],
-				"FearDuration": [
-					1,
-					1.2,
-					1.4,
-					1.6,
-					1.8,
-					2,
-					2.2
-				],
-				"MinimumDamage": [
-					20,
-					40,
-					60,
-					80,
-					100,
-					120,
-					140
-				]
-			},
-			"spellCalculations": {
-				"TotalPercentHealthDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MaxHealthDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Terrify",
+					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksq.png",
+					"mana": [
+						65,
+						65,
+						65,
+						65,
+						65,
+						65
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"TotalPercentHealthDamageFeared": {
-					"mMultiplier": {
-						"mNumber": 2
+					"cooldownTime": [
+						16,
+						15,
+						14.5,
+						14,
+						13.5,
+						13,
+						12.5
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> While unseen and out of combat or impersonating an <keywordMajor>Effigy</keywordMajor>, damaging an enemy with an ability <status>Fears</status> them for @FearDuration@ second(s).<br><br><spellActive>Active:</spellActive> <status>Fear</status> an enemy for @FearDuration@ second(s) and deal <magicDamage>@TotalPercentHealthDamage@ current Health magic damage</magicDamage>. If the target has recently been <status>Feared</status> by Fiddlesticks, instead deal <magicDamage>@TotalPercentHealthDamageFeared@ current Health magic damage</magicDamage>.<br>",
+					"dataValues": {
+						"MaxHealthDamage": [
+							0.035,
+							0.04,
+							0.045,
+							0.05,
+							0.055,
+							0.06,
+							0.065
+						],
+						"FearDuration": [
+							1,
+							1.2,
+							1.4,
+							1.6,
+							1.8,
+							2,
+							2.2
+						],
+						"MinimumDamage": [
+							20,
+							40,
+							60,
+							80,
+							100,
+							120,
+							140
+						]
 					},
-					"mModifiedGameCalculation": "TotalPercentHealthDamage"
+					"spellCalculations": {
+						"TotalPercentHealthDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MaxHealthDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"TotalPercentHealthDamageFeared": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"mModifiedGameCalculation": "TotalPercentHealthDamage"
+						}
+					},
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksQAbility/FiddleSticksQ"
 				}
-			},
-			"mana": [
-				65,
-				65,
-				65,
-				65,
-				65,
-				65
-			],
-			"cooldownTime": [
-				16,
-				15,
-				14.5,
-				14,
-				13.5,
-				13,
-				12.5
-			],
-			"name": "Terrify",
-			"tooltip": "<spellPassive>Passive:</spellPassive> While unseen and out of combat or impersonating an <keywordMajor>Effigy</keywordMajor>, damaging an enemy with an ability <status>Fears</status> them for @FearDuration@ second(s).<br><br><spellActive>Active:</spellActive> <status>Fear</status> an enemy for @FearDuration@ second(s) and deal <magicDamage>@TotalPercentHealthDamage@ current Health magic damage</magicDamage>. If the target has recently been <status>Feared</status> by Fiddlesticks, instead deal <magicDamage>@TotalPercentHealthDamageFeared@ current Health magic damage</magicDamage>.<br>"
+			]
 		},
 		"w": {
-			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksw.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"DamagePerSecond": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				],
-				"TicksPerSecond": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"VampPercentage": [
-					17.5,
-					25,
-					32.5,
-					40,
-					47.5,
-					55,
-					62.5
-				],
-				"DrainDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"DrainLeashRange": [
-					725,
-					725,
-					725,
-					725,
-					725,
-					725,
-					725
-				],
-				"PercentMultiplier": [
-					0.095,
-					0.12,
-					0.145,
-					0.17,
-					0.195,
-					0.22,
-					0.245
-				],
-				"PercentForTooltip": [
-					9.5,
-					12,
-					14.5,
-					17,
-					19.5,
-					22,
-					24.5
-				],
-				"MonsterDamageMod": [
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35
-				],
-				"MonsterHealingMod": [
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45
-				],
-				"MinionDamageMod": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MinionHealingMod": [
-					15,
-					15,
-					15,
-					15,
-					15,
-					15,
-					15
-				],
-				"MonsterMaxDamage": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				]
-			},
-			"spellCalculations": {
-				"DrainDamageCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "DamagePerSecond",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.45,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Bountiful Harvest",
+					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksw.png",
+					"mana": [
+						60,
+						65,
+						70,
+						75,
+						80,
+						85
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						8
+					],
+					"tooltip": "Fiddlesticks channels and drains the souls of nearby enemies, dealing <magicDamage>@DrainDamageCalc@ magic damage</magicDamage> per second for 2 seconds, plus <magicDamage>@PercentForTooltip@% missing Health magic damage</magicDamage> at the end. Fiddlesticks restores <healing>@VampPercentage@% of damage as Health</healing>.<br><br>If Fiddlesticks ends the channel without interruption, the remaining Cooldown is reduced by 60%.<br>",
+					"dataValues": {
+						"DamagePerSecond": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						],
+						"TicksPerSecond": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"VampPercentage": [
+							17.5,
+							25,
+							32.5,
+							40,
+							47.5,
+							55,
+							62.5
+						],
+						"DrainDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"DrainLeashRange": [
+							725,
+							725,
+							725,
+							725,
+							725,
+							725,
+							725
+						],
+						"PercentMultiplier": [
+							0.095,
+							0.12,
+							0.145,
+							0.17,
+							0.195,
+							0.22,
+							0.245
+						],
+						"PercentForTooltip": [
+							9.5,
+							12,
+							14.5,
+							17,
+							19.5,
+							22,
+							24.5
+						],
+						"MonsterDamageMod": [
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35
+						],
+						"MonsterHealingMod": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						],
+						"MinionDamageMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MinionHealingMod": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"MonsterMaxDamage": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						]
+					},
+					"spellCalculations": {
+						"DrainDamageCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "DamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.45,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksWAbility/FiddleSticksW"
 				}
-			},
-			"mana": [
-				60,
-				65,
-				70,
-				75,
-				80,
-				85
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				8
-			],
-			"name": "Bountiful Harvest",
-			"tooltip": "Fiddlesticks channels and drains the souls of nearby enemies, dealing <magicDamage>@DrainDamageCalc@ magic damage</magicDamage> per second for 2 seconds, plus <magicDamage>@PercentForTooltip@% missing Health magic damage</magicDamage> at the end. Fiddlesticks restores <healing>@VampPercentage@% of damage as Health</healing>.<br><br>If Fiddlesticks ends the channel without interruption, the remaining Cooldown is reduced by 60%.<br>"
+			]
 		},
 		"e": {
-			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlestickse.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					35,
-					70,
-					105,
-					140,
-					175,
-					210,
-					245
-				],
-				"SlowAmount": [
-					-0.25,
-					-0.3,
-					-0.35,
-					-0.4,
-					-0.45,
-					-0.5,
-					-0.55
-				],
-				"EmpoweredSlowAmount": [
-					-0.45,
-					-0.5,
-					-0.55,
-					-0.6,
-					-0.65,
-					-0.7,
-					-0.75
-				],
-				"CastRange": [
-					850,
-					850,
-					850,
-					850,
-					850,
-					850,
-					850
-				],
-				"SilenceDuration": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Reap",
+					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlestickse.png",
+					"mana": [
+						40,
+						45,
+						50,
+						55,
+						60,
+						65
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						5
+					],
+					"tooltip": "Fiddlesticks unleashes dark magic, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@% for @SilenceDuration@ seconds. Enemies in the center are also <status>Silenced</status> for the duration.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							70,
+							105,
+							140,
+							175,
+							210,
+							245
+						],
+						"SlowAmount": [
+							-0.25,
+							-0.3,
+							-0.35,
+							-0.4,
+							-0.45,
+							-0.5,
+							-0.55
+						],
+						"EmpoweredSlowAmount": [
+							-0.45,
+							-0.5,
+							-0.55,
+							-0.6,
+							-0.65,
+							-0.7,
+							-0.75
+						],
+						"CastRange": [
+							850,
+							850,
+							850,
+							850,
+							850,
+							850,
+							850
+						],
+						"SilenceDuration": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksEAbility/FiddleSticksE"
 				}
-			},
-			"mana": [
-				40,
-				45,
-				50,
-				55,
-				60,
-				65
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9,
-				8,
-				7,
-				6,
-				5
-			],
-			"name": "Reap",
-			"tooltip": "Fiddlesticks unleashes dark magic, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@% for @SilenceDuration@ seconds. Enemies in the center are also <status>Silenced</status> for the duration."
+			]
 		},
 		"r": {
-			"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksr.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"DamagePerSecond": [
-					50,
-					150,
-					250,
-					350,
-					450,
-					550,
-					650
-				],
-				"APRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"Duration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"ChannelTime": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"DamageDone": {
-					"mMultiplier": {
-						"mNumber": 0.25
+			"variants": [
+				{
+					"name": "Crowstorm",
+					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksr.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						140,
+						140,
+						110,
+						80,
+						80,
+						80,
+						80
+					],
+					"tooltip": "Fiddlesticks channels for @ChannelTime@ seconds, then teleports and unleashes a murder of crows, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds.",
+					"dataValues": {
+						"DamagePerSecond": [
+							50,
+							150,
+							250,
+							350,
+							450,
+							550,
+							650
+						],
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"Duration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"ChannelTime": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
 					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "DamagePerSecond",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"DamageDone": {
+							"mMultiplier": {
+								"mNumber": 0.25
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "DamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalDamage": {
-					"mMultiplier": {
-						"mDataValue": "Duration"
-					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "{d0d3db7f}"
-				},
-				"APRatioFullDuration": {
-					"mMultiplier": {
-						"mDataValue": "Duration"
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"APRatioTick": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{d0d3db7f}": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "DamagePerSecond",
-							"__type": "NamedDataValueCalculationPart"
+						"TotalDamage": {
+							"mMultiplier": {
+								"mDataValue": "Duration"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{d0d3db7f}"
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"APRatioFullDuration": {
+							"mMultiplier": {
+								"mDataValue": "Duration"
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"APRatioTick": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{d0d3db7f}": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "DamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							125,
+							125,
+							225,
+							325,
+							0,
+							0,
+							0
+						],
+						"1": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"2": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksRAbility/FiddleSticksR"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					125,
-					125,
-					225,
-					325,
-					0,
-					0,
-					0
-				],
-				"1": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"2": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				140,
-				140,
-				110,
-				80,
-				80,
-				80,
-				80
-			],
-			"name": "Crowstorm",
-			"tooltip": "Fiddlesticks channels for @ChannelTime@ seconds, then teleports and unleashes a murder of crows, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds."
+			]
 		}
 	}
 }

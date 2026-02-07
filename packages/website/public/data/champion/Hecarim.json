@@ -29,657 +29,682 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png",
 			"maxLevel": 0,
-			"spellCalculations": {
-				"BonusAD": {
-					"mFormulaParts": [
-						{
-							"mStat": 7,
-							"mStatFormula": 2,
-							"mSubpart": {
-								"mLevel1Value": 0.12,
-								"mBreakpoints": [
-									{
-										"mLevel": 3,
-										"mAdditionalBonusAtThisLevel": 0.02
+			"variants": [
+				{
+					"name": "Warpath",
+					"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png",
+					"tooltip": "Hecarim gains <scaleAD>@BonusAD@ Attack Damage</scaleAD>, increasing based on level.",
+					"tooltipExtended": "{{Spell_HecarimPassive_Tooltip}}<br><br><rules>Attack Damage scales with bonus Move speed.</rules>",
+					"spellCalculations": {
+						"BonusAD": {
+							"mFormulaParts": [
+								{
+									"mStat": 7,
+									"mStatFormula": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.12,
+										"mBreakpoints": [
+											{
+												"mLevel": 3,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 9,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 12,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 15,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 18,
+												"mAdditionalBonusAtThisLevel": 0.02
+											}
+										]
 									},
-									{
-										"mLevel": 6,
-										"mAdditionalBonusAtThisLevel": 0.02
-									},
-									{
-										"mLevel": 9,
-										"mAdditionalBonusAtThisLevel": 0.02
-									},
-									{
-										"mLevel": 12,
-										"mAdditionalBonusAtThisLevel": 0.02
-									},
-									{
-										"mLevel": 15,
-										"mAdditionalBonusAtThisLevel": 0.02
-									},
-									{
-										"mLevel": 18,
-										"mAdditionalBonusAtThisLevel": 0.02
-									}
-								]
-							},
-							"__type": "StatBySubPartCalculationPart"
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Hecarim/Spells/HecarimPassiveAbility/HecarimPassive"
 				}
-			},
-			"name": "Warpath",
-			"tooltip": "Hecarim gains <scaleAD>@BonusAD@ Attack Damage</scaleAD>, increasing based on level.",
-			"tooltipExtended": "{{Spell_HecarimPassive_Tooltip}}<br><br><rules>Attack Damage scales with bonus Move speed.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				],
-				"MinionDamageRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"RampageBonusRatio": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"RampageDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"RampageCooldownReduction": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"BaseDamageBonusAD": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BaseDamageBonusAD",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MinionDamage": {
-					"mMultiplier": {
-						"mDataValue": "MinionDamageRatio"
-					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "Damage"
-				},
-				"RampageBonusDamagePerc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RampageBonusRatio",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.03,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Rampage",
+					"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png",
+					"mana": [
+						28,
+						26,
+						24,
+						22,
+						20,
+						20
 					],
-					"mPrecision": 1
+					"cooldownTime": [
+						4,
+						4,
+						4,
+						4,
+						4,
+						4,
+						4
+					],
+					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.<br>",
+					"dataValues": {
+						"BaseDamage": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						],
+						"MinionDamageRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"RampageBonusRatio": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"RampageDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"RampageCooldownReduction": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"BaseDamageBonusAD": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BaseDamageBonusAD",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MinionDamage": {
+							"mMultiplier": {
+								"mDataValue": "MinionDamageRatio"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "Damage"
+						},
+						"RampageBonusDamagePerc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RampageBonusRatio",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"effectAmount": {
+						"1": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"2": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"3": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"4": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"5": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						]
+					},
+					"dataKey": "Characters/Hecarim/Spells/HecarimRapidSlashAbility/HecarimRapidSlash"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"2": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"3": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"4": [
-					60,
-					60,
-					60,
-					60,
-					60,
-					60,
-					60
-				],
-				"5": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				]
-			},
-			"mana": [
-				28,
-				26,
-				24,
-				22,
-				20,
-				20
-			],
-			"cooldownTime": [
-				4,
-				4,
-				4,
-				4,
-				4,
-				4,
-				4
-			],
-			"name": "Rampage",
-			"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.<br>"
+			]
 		},
 		"w": {
-			"image": "assets/characters/hecarim/hud/icons2d/hecarim_spiritofdread.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"NonSelfLeechRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"DamageLeechPerc": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"Damage": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				],
-				"BuffDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"TickTime": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MinionHealCap": [
-					90,
-					120,
-					150,
-					180,
-					210,
-					240,
-					270
-				],
-				"ResistAmount": [
-					0,
-					5,
-					10,
-					15,
-					20,
-					25,
-					30
-				],
-				"HealBonusADRatio": [
-					0.02,
-					0.02,
-					0.02,
-					0.02,
-					0.02,
-					0.02,
-					0.02
-				],
-				"APRatio": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"LeechAmount": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "DamageLeechPerc",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"AllyTooltipLeachValue": {
-					"mMultiplier": {
-						"mDataValue": "NonSelfLeechRatio"
+			"variants": [
+				{
+					"name": "Spirit of Dread",
+					"image": "assets/characters/hecarim/hud/icons2d/hecarim_spiritofdread.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
+					],
+					"cooldownTime": [
+						14,
+						14,
+						14,
+						14,
+						14,
+						14,
+						14
+					],
+					"tooltip": "Hecarim deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over @BuffDuration@ seconds to nearby enemies. <br><br>Hecarim gains <passive>@ResistAmount@</passive> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and heals for <healing>@LeechAmount@% of damage</healing> nearby enemies take from Hecarim and <healing>@AllyTooltipLeachValue@% of damage</healing> taken from his allies.",
+					"dataValues": {
+						"NonSelfLeechRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"DamageLeechPerc": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"Damage": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						],
+						"BuffDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"TickTime": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MinionHealCap": [
+							90,
+							120,
+							150,
+							180,
+							210,
+							240,
+							270
+						],
+						"ResistAmount": [
+							0,
+							5,
+							10,
+							15,
+							20,
+							25,
+							30
+						],
+						"HealBonusADRatio": [
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02
+						],
+						"APRatio": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						]
 					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "LeechAmount"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"LeechAmount": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "DamageLeechPerc",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"AllyTooltipLeachValue": {
+							"mMultiplier": {
+								"mDataValue": "NonSelfLeechRatio"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "LeechAmount"
+						}
+					},
+					"dataKey": "Characters/Hecarim/Spells/HecarimWAbility/HecarimW"
 				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				70
-			],
-			"cooldownTime": [
-				14,
-				14,
-				14,
-				14,
-				14,
-				14,
-				14
-			],
-			"name": "Spirit of Dread",
-			"tooltip": "Hecarim deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over @BuffDuration@ seconds to nearby enemies. <br><br>Hecarim gains <passive>@ResistAmount@</passive> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and heals for <healing>@LeechAmount@% of damage</healing> nearby enemies take from Hecarim and <healing>@AllyTooltipLeachValue@% of damage</healing> taken from his allies."
+			]
 		},
 		"e": {
-			"image": "assets/characters/hecarim/hud/icons2d/hecarim_devastingcharge.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MinMoveSpeed": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"MaxMoveSpeed": [
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65
-				],
-				"MinBaseDamage": [
-					15,
-					30,
-					45,
-					60,
-					75,
-					90,
-					105
-				],
-				"BonusADRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MaxBaseDamage": [
-					30,
-					60,
-					90,
-					120,
-					150,
-					180,
-					210
-				]
-			},
-			"spellCalculations": {
-				"MinDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "MinBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MaxDamage": {
-					"mMultiplier": {
-						"mNumber": 2
+			"variants": [
+				{
+					"name": "Devastating Charge",
+					"image": "assets/characters/hecarim/hud/icons2d/hecarim_devastingcharge.png",
+					"mana": [
+						60,
+						60,
+						60,
+						60,
+						60,
+						60
+					],
+					"cooldownTime": [
+						20,
+						20,
+						19,
+						18,
+						17,
+						16,
+						15
+					],
+					"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Effect5Amount@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
+					"dataValues": {
+						"MinMoveSpeed": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MaxMoveSpeed": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"MinBaseDamage": [
+							15,
+							30,
+							45,
+							60,
+							75,
+							90,
+							105
+						],
+						"BonusADRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MaxBaseDamage": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						]
 					},
-					"mModifiedGameCalculation": "MinDamage"
+					"spellCalculations": {
+						"MinDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "MinBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxDamage": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"mModifiedGameCalculation": "MinDamage"
+						}
+					},
+					"effectAmount": {
+						"0": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"1": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"2": [
+							0,
+							60,
+							90,
+							120,
+							150,
+							180,
+							180
+						],
+						"3": [
+							0,
+							30,
+							45,
+							60,
+							75,
+							90,
+							90
+						],
+						"4": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"5": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"6": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"7": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"8": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						]
+					},
+					"dataKey": "Characters/Hecarim/Spells/HecarimRampAbility/HecarimRamp"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					150,
-					150,
-					150,
-					150,
-					150,
-					150,
-					150
-				],
-				"1": [
-					350,
-					350,
-					350,
-					350,
-					350,
-					350,
-					350
-				],
-				"2": [
-					0,
-					60,
-					90,
-					120,
-					150,
-					180,
-					180
-				],
-				"3": [
-					0,
-					30,
-					45,
-					60,
-					75,
-					90,
-					90
-				],
-				"4": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"5": [
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65
-				],
-				"6": [
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200
-				],
-				"7": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"8": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				]
-			},
-			"mana": [
-				60,
-				60,
-				60,
-				60,
-				60,
-				60
-			],
-			"cooldownTime": [
-				20,
-				20,
-				19,
-				18,
-				17,
-				16,
-				15
-			],
-			"name": "Devastating Charge",
-			"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Effect5Amount@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability."
+			]
 		},
 		"r": {
-			"image": "assets/characters/hecarim/hud/icons2d/hecarim_onslaughtofshadows.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					50,
-					150,
-					250,
-					350,
-					450,
-					550,
-					650
-				],
-				"FearDurationMin": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"FearDurationMax": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"APRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"DamageDone": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Onslaught of Shadows",
+					"image": "assets/characters/hecarim/hud/icons2d/hecarim_onslaughtofshadows.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						0
+					],
+					"cooldownTime": [
+						0,
+						140,
+						120,
+						100,
+						100,
+						100,
+						0
+					],
+					"tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>@DamageDone@ magic damage</magicDamage>. Hecarim unleashes a shockwave at the end of the charge that <status>Fears</status> for between @FearDurationMin@ to @FearDurationMax@ seconds, increased by charge distance.",
+					"dataValues": {
+						"BaseDamage": [
+							50,
+							150,
+							250,
+							350,
+							450,
+							550,
+							650
+						],
+						"FearDurationMin": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"FearDurationMax": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"APRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"DamageDone": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							0,
+							150,
+							250,
+							350,
+							0,
+							0,
+							0
+						],
+						"1": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"2": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"3": [
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100,
+							1100
+						],
+						"4": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						],
+						"5": [
+							950,
+							950,
+							950,
+							950,
+							950,
+							950,
+							950
+						]
+					},
+					"dataKey": "Characters/Hecarim/Spells/HecarimUltAbility/HecarimUlt"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0,
-					150,
-					250,
-					350,
-					0,
-					0,
-					0
-				],
-				"1": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"2": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"3": [
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100,
-					1100
-				],
-				"4": [
-					1000,
-					1000,
-					1000,
-					1000,
-					1000,
-					1000,
-					1000
-				],
-				"5": [
-					950,
-					950,
-					950,
-					950,
-					950,
-					950,
-					950
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				0
-			],
-			"cooldownTime": [
-				0,
-				140,
-				120,
-				100,
-				100,
-				100,
-				0
-			],
-			"name": "Onslaught of Shadows",
-			"tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>@DamageDone@ magic damage</magicDamage>. Hecarim unleashes a shockwave at the end of the charge that <status>Fears</status> for between @FearDurationMin@ to @FearDurationMax@ seconds, increased by charge distance."
+			]
 		}
 	}
 }

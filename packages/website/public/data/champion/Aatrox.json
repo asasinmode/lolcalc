@@ -29,615 +29,708 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/aatrox/hud/icons2d/aatrox_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"PBonusAARange": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"PChargeRate": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"PDamageTADBonusLevel1": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				],
-				"PDamageTADBonusLevel18": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"PStructureCap": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				],
-				"PHealShieldReduction": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"PDebuffDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"PHealingMinionMod": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"PHealingRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"PDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 0.04,
-							"mEndValue": 0.1,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"PCooldown": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mStartValue": 22,
-							"mEndValue": 10,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				},
-				"MonsterDamageCap": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 100,
-							"mEndValue": 320,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				}
-			},
-			"name": "Deathbringer Stance",
-			"tooltip": "Aatrox's Attacks deal an additional <magicDamage>@PDamage@ max Health magic damage</magicDamage> and restore <healing>@PHealingRatio*100@% of damage dealt as Health</healing>, reduced to @PHealingMinionMod*100@% against minions. This effect has a @PCooldown@ second cooldown.<br><br>Attack and Ability hits against champions and large jungle monsters reduce this effect's cooldown by 2 seconds. Hits with the edge of <spellName>The Darkin Blade</spellName> reduce it by 4 seconds instead.",
-			"tooltipExtended": "{{Passive_AatroxPassive_Tooltip}}<br><br><rules>Deals a max of @MonsterDamageCap@ against monsters. <br>Multi-hits with Abilities only reduce the cooldown once.</rules>"
-		},
-		"q": {
-			"image": "assets/characters/aatrox/hud/icons2d/aatrox_q.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"QBaseDamage": [
-					-5,
-					10,
-					25,
-					40,
-					55,
-					70,
-					85
-				],
-				"QTotalADRatio": [
-					0.525,
-					0.6,
-					0.675,
-					0.75,
-					0.825,
-					0.9,
-					0.975
-				],
-				"QSweetSpotBonus": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				],
-				"QKnockupDuration": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"QRampBonus": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"QMonsterBonus": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"QExtensionTime": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"QDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "QBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "QTotalADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"QMinionDamage": {
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.55,
-							"mBreakpoints": [
-								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.05
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.05
-								},
-								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": 0.05
-								},
-								{
-									"mLevel": 21,
-									"mAdditionalBonusAtThisLevel": 0.05
-								},
-								{
-									"mLevel": 26,
-									"mAdditionalBonusAtThisLevel": 0.05
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"QEdgeDamage": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mDataValue": "QSweetSpotBonus"
-							}
+			"variants": [
+				{
+					"name": "Deathbringer Stance",
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_passive.png",
+					"tooltip": "Aatrox's Attacks deal an additional <magicDamage>@PDamage@ max Health magic damage</magicDamage> and restore <healing>@PHealingRatio*100@% of damage dealt as Health</healing>, reduced to @PHealingMinionMod*100@% against minions. This effect has a @PCooldown@ second cooldown.<br><br>Attack and Ability hits against champions and large jungle monsters reduce this effect's cooldown by 2 seconds. Hits with the edge of <spellName>The Darkin Blade</spellName> reduce it by 4 seconds instead.",
+					"tooltipExtended": "{{Passive_AatroxPassive_Tooltip}}<br><br><rules>Deals a max of @MonsterDamageCap@ against monsters. <br>Multi-hits with Abilities only reduce the cooldown once.</rules>",
+					"dataValues": {
+						"PBonusAARange": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"PChargeRate": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PDamageTADBonusLevel1": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"PDamageTADBonusLevel18": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"PStructureCap": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"PHealShieldReduction": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"PDebuffDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PHealingMinionMod": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"PHealingRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
 						]
 					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "QDamage"
+					"spellCalculations": {
+						"PDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.04,
+									"mEndValue": 0.1,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"PCooldown": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 22,
+									"mEndValue": 10,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"MonsterDamageCap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 100,
+									"mEndValue": 320,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxPassiveAbility/AatroxPassive"
 				}
-			},
-			"cooldownTime": [
-				14,
-				14,
-				12,
-				10,
-				8,
-				6,
-				4
-			],
-			"name": "The Darkin Blade",
-			"tooltip": "Aatrox slams his greatsword, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>. If they are hit on the edge, they are briefly <status>Knocked Up</status> and they take <physicalDamage>@QEdgeDamage@</physicalDamage> instead. This Ability can be <recast>Recast</recast> twice, each one changing shape and dealing 25% more damage than the previous one."
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "The Darkin Blade",
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_q.png",
+					"cooldownTime": [
+						14,
+						14,
+						12,
+						10,
+						8,
+						6,
+						4
+					],
+					"tooltip": "Aatrox slams his greatsword, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>. If they are hit on the edge, they are briefly <status>Knocked Up</status> and they take <physicalDamage>@QEdgeDamage@</physicalDamage> instead. This Ability can be <recast>Recast</recast> twice, each one changing shape and dealing 25% more damage than the previous one.",
+					"dataValues": {
+						"QBaseDamage": [
+							-5,
+							10,
+							25,
+							40,
+							55,
+							70,
+							85
+						],
+						"QTotalADRatio": [
+							0.525,
+							0.6,
+							0.675,
+							0.75,
+							0.825,
+							0.9,
+							0.975
+						],
+						"QSweetSpotBonus": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"QKnockupDuration": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"QRampBonus": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"QMonsterBonus": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"QExtensionTime": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"QDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "QBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "QTotalADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"QMinionDamage": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.55,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 26,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"QEdgeDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mDataValue": "QSweetSpotBonus"
+									}
+								]
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "QDamage"
+						}
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxQAbility/AatroxQ"
+				},
+				{
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_q2.png",
+					"cooldownTime": [
+						16,
+						16,
+						15,
+						14,
+						13,
+						12,
+						12
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							5,
+							5,
+							10,
+							15,
+							20,
+							25,
+							0
+						],
+						"1": [
+							0.85,
+							0.85,
+							0.975,
+							1.1,
+							1.125,
+							1.35,
+							0
+						]
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxQAbility/AatroxQ2"
+				},
+				{
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_q3.png",
+					"cooldownTime": [
+						16,
+						16,
+						15,
+						14,
+						13,
+						12,
+						12
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							5,
+							5,
+							10,
+							15,
+							20,
+							25,
+							0
+						],
+						"1": [
+							0.85,
+							0.85,
+							0.975,
+							1.1,
+							1.125,
+							1.35,
+							0
+						]
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxQAbility/AatroxQ3"
+				}
+			]
 		},
 		"w": {
-			"image": "assets/characters/aatrox/hud/icons2d/aatrox_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"WBaseDamage": [
-					20,
-					30,
-					40,
-					50,
-					60,
-					70,
-					80
-				],
-				"WBonusADRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"WSlowPercentage": [
-					-0.25,
-					-0.25,
-					-0.275,
-					-0.3,
-					-0.325,
-					-0.35,
-					-0.35
-				],
-				"WSlowDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"WTotalADRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				]
-			},
-			"spellCalculations": {
-				"WDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "WBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "WTotalADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Infernal Chains",
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_w.png",
+					"cooldownTime": [
+						20,
+						20,
+						18,
+						16,
+						14,
+						12,
+						12
+					],
+					"tooltip": "Aatrox fires a chain, <status>Slowing</status> the first enemy hit by @WSlowPercentage*-100@% for @WSlowDuration@ seconds and dealing <physicalDamage>@WDamage@ physical damage</physicalDamage>. Champions and large jungle monsters have @WSlowDuration@ seconds to leave the impact area or be <status>Pulled</status> back to the center and damaged again for the same amount.",
+					"dataValues": {
+						"WBaseDamage": [
+							20,
+							30,
+							40,
+							50,
+							60,
+							70,
+							80
+						],
+						"WBonusADRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"WSlowPercentage": [
+							-0.25,
+							-0.25,
+							-0.275,
+							-0.3,
+							-0.325,
+							-0.35,
+							-0.35
+						],
+						"WSlowDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"WTotalADRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"WDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "WBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "WTotalADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxWAbility/AatroxW"
 				}
-			},
-			"cooldownTime": [
-				20,
-				20,
-				18,
-				16,
-				14,
-				12,
-				12
-			],
-			"name": "Infernal Chains",
-			"tooltip": "Aatrox fires a chain, <status>Slowing</status> the first enemy hit by @WSlowPercentage*-100@% for @WSlowDuration@ seconds and dealing <physicalDamage>@WDamage@ physical damage</physicalDamage>. Champions and large jungle monsters have @WSlowDuration@ seconds to leave the impact area or be <status>Pulled</status> back to the center and damaged again for the same amount."
+			]
 		},
 		"e": {
-			"image": "assets/characters/aatrox/hud/icons2d/aatrox_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ESpellVamp": [
-					16,
-					16,
-					16,
-					16,
-					16,
-					16,
-					16
-				],
-				"EBonusAD": [
-					5,
-					15,
-					25,
-					35,
-					45,
-					55,
-					65
-				],
-				"EResistancePerAD": [
-					5,
-					10,
-					15,
-					20,
-					25,
-					30,
-					35
-				],
-				"EDashSpeed": [
-					800,
-					800,
-					800,
-					800,
-					800,
-					800,
-					800
-				],
-				"EMaxRange": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"EDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"EBaseRechargeTime": [
-					30,
-					26,
-					22,
-					18,
-					14,
-					10,
-					6
-				],
-				"EMinRange": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				],
-				"ESpellVampEmpowered": [
-					16,
-					16,
-					16,
-					16,
-					16,
-					16,
-					16
-				],
-				"EVampHPRatio": [
-					0.011,
-					0.011,
-					0.011,
-					0.011,
-					0.011,
-					0.011,
-					0.011
-				]
-			},
-			"spellCalculations": {
-				"TotalEVamp": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "ESpellVamp",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mDataValue": "EVampHPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Umbral Dash",
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_e.png",
+					"cooldownTime": [
+						9,
+						9,
+						8,
+						7,
+						6,
+						5,
+						4
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
+					"tooltip": "<spellPassive>Passive:</spellPassive> Aatrox heals for <lifeSteal>@TotalEVamp@</lifeSteal> of the damage he deals to Champions.<br><br><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities.",
+					"dataValues": {
+						"ESpellVamp": [
+							16,
+							16,
+							16,
+							16,
+							16,
+							16,
+							16
+						],
+						"EBonusAD": [
+							5,
+							15,
+							25,
+							35,
+							45,
+							55,
+							65
+						],
+						"EResistancePerAD": [
+							5,
+							10,
+							15,
+							20,
+							25,
+							30,
+							35
+						],
+						"EDashSpeed": [
+							800,
+							800,
+							800,
+							800,
+							800,
+							800,
+							800
+						],
+						"EMaxRange": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"EDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"EBaseRechargeTime": [
+							30,
+							26,
+							22,
+							18,
+							14,
+							10,
+							6
+						],
+						"EMinRange": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"ESpellVampEmpowered": [
+							16,
+							16,
+							16,
+							16,
+							16,
+							16,
+							16
+						],
+						"EVampHPRatio": [
+							0.011,
+							0.011,
+							0.011,
+							0.011,
+							0.011,
+							0.011,
+							0.011
+						]
+					},
+					"spellCalculations": {
+						"TotalEVamp": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "ESpellVamp",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "EVampHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxEAbility/AatroxE"
 				}
-			},
-			"cooldownTime": [
-				9,
-				9,
-				8,
-				7,
-				6,
-				5,
-				4
-			],
-			"name": "Umbral Dash",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Aatrox heals for <lifeSteal>@TotalEVamp@</lifeSteal> of the damage he deals to Champions.<br><br><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities."
+			]
 		},
 		"r": {
-			"image": "assets/characters/aatrox/hud/icons2d/aatrox_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RDuration": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"RERechargeBonus": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"RMovementSpeed": [
-					0.1,
-					0.15,
-					0.2,
-					0.25,
-					0.3,
-					0.35,
-					0.4
-				],
-				"RMovementSpeedBonus": [
-					0.4,
-					0.6,
-					0.8,
-					1,
-					1.2,
-					1.4,
-					1.6
-				],
-				"RTotalADAmp": [
-					0.1,
-					0.2,
-					0.3,
-					0.4,
-					0.5,
-					0.6,
-					0.7
-				],
-				"RBonusADRange": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				],
-				"RSpeedMinDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"RFXExtraDuration": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"RPercentBloodWellToBoostToMax": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				],
-				"RHealingAmp": [
-					0.25,
-					0.5,
-					0.75,
-					1,
-					1.25,
-					1.5,
-					1.75
-				],
-				"RExtension": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"RFearRadius": [
-					600,
-					600,
-					600,
-					600,
-					600,
-					600,
-					600
-				],
-				"RMinionFearDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"RChampionFearDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"cooldownTime": [
-				120,
-				120,
-				100,
-				80,
-				80,
-				80,
-				80
-			],
-			"name": "World Ender",
-			"tooltip": "Aatrox reveals his true demonic form, <status>Fearing</status> nearby minions for @RMinionFearDuration@ seconds and gaining <speed>@RMovementSpeedBonus*100@% Move Speed</speed> decaying over @RDuration@ seconds. He also gains <scaleAD>@RTotalADAmp*100@% Attack Damage</scaleAD> and increases <healing>self-healing by @RHealingAmp*100@%</healing> for the duration.<br><br>Champion takedowns extend the duration of this effect by @RExtension@ seconds and refresh the <speed>Move Speed</speed> effect."
+			"variants": [
+				{
+					"name": "World Ender",
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_r.png",
+					"cooldownTime": [
+						120,
+						120,
+						100,
+						80,
+						80,
+						80,
+						80
+					],
+					"tooltip": "Aatrox reveals his true demonic form, <status>Fearing</status> nearby minions for @RMinionFearDuration@ seconds and gaining <speed>@RMovementSpeedBonus*100@% Move Speed</speed> decaying over @RDuration@ seconds. He also gains <scaleAD>@RTotalADAmp*100@% Attack Damage</scaleAD> and increases <healing>self-healing by @RHealingAmp*100@%</healing> for the duration.<br><br>Champion takedowns extend the duration of this effect by @RExtension@ seconds and refresh the <speed>Move Speed</speed> effect.",
+					"dataValues": {
+						"RDuration": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"RERechargeBonus": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"RMovementSpeed": [
+							0.1,
+							0.15,
+							0.2,
+							0.25,
+							0.3,
+							0.35,
+							0.4
+						],
+						"RMovementSpeedBonus": [
+							0.4,
+							0.6,
+							0.8,
+							1,
+							1.2,
+							1.4,
+							1.6
+						],
+						"RTotalADAmp": [
+							0.1,
+							0.2,
+							0.3,
+							0.4,
+							0.5,
+							0.6,
+							0.7
+						],
+						"RBonusADRange": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"RSpeedMinDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"RFXExtraDuration": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"RPercentBloodWellToBoostToMax": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"RHealingAmp": [
+							0.25,
+							0.5,
+							0.75,
+							1,
+							1.25,
+							1.5,
+							1.75
+						],
+						"RExtension": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"RFearRadius": [
+							600,
+							600,
+							600,
+							600,
+							600,
+							600,
+							600
+						],
+						"RMinionFearDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"RChampionFearDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxRAbility/AatroxR"
+				}
+			]
 		}
 	}
 }

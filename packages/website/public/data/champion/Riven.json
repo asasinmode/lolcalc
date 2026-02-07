@@ -29,457 +29,543 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/riven/hud/icons2d/rivenrunicblades.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"Charges": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"TowerRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MonsterBonusDamage": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mSubpart": {
-								"mStartValue": 0.3,
-								"mEndValue": 0.45
-							},
-							"__type": "StatBySubPartCalculationPart"
+			"variants": [
+				{
+					"name": "Runic Blade",
+					"image": "assets/characters/riven/hud/icons2d/rivenrunicblades.png",
+					"tooltip": "Using an Ability grants Riven a charge for 6 seconds (max @Charges@). Her Attacks spend a charge to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"tooltipExtended": "{{Spell_RivenPassive_Tooltip}}<br><br><rules>The bonus damage can critically strike.<br>Deals @MonsterBonusDamage@ bonus damage to monsters.</rules>",
+					"dataValues": {
+						"Charges": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"TowerRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MonsterBonusDamage": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mStartValue": 0.3,
+										"mEndValue": 0.45
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Riven/Spells/RivenPassiveAbility/RivenPassive"
 				}
-			},
-			"name": "Runic Blade",
-			"tooltip": "Using an Ability grants Riven a charge for 6 seconds (max @Charges@). Her Attacks spend a charge to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
-			"tooltipExtended": "{{Spell_RivenPassive_Tooltip}}<br><br><rules>The bonus damage can critically strike.<br>Deals @MonsterBonusDamage@ bonus damage to monsters.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					15,
-					45,
-					75,
-					105,
-					135,
-					165,
-					195
-				],
-				"ADRatio": [
-					0.55,
-					0.6,
-					0.65,
-					0.7,
-					0.75,
-					0.8,
-					0.85
-				]
-			},
-			"spellCalculations": {
-				"FirstSlashDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Broken Wings",
+					"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
+					"cooldownTime": [
+						13,
+						13,
+						13,
+						13,
+						13,
+						13,
+						13
+					],
+					"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							15,
+							45,
+							75,
+							105,
+							135,
+							165,
+							195
+						],
+						"ADRatio": [
+							0.55,
+							0.6,
+							0.65,
+							0.7,
+							0.75,
+							0.8,
+							0.85
+						]
+					},
+					"spellCalculations": {
+						"FirstSlashDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							45,
+							45,
+							75,
+							105,
+							135,
+							165,
+							165
+						],
+						"1": [
+							5,
+							30,
+							55,
+							80,
+							105,
+							130,
+							155
+						],
+						"2": [
+							75,
+							150,
+							225,
+							300,
+							375,
+							450,
+							525
+						],
+						"3": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"4": [
+							65,
+							65,
+							70,
+							75,
+							80,
+							85,
+							85
+						]
+					},
+					"dataKey": "Characters/Riven/Spells/RivenTriCleaveAbility/RivenTriCleave"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					45,
-					45,
-					75,
-					105,
-					135,
-					165,
-					165
-				],
-				"1": [
-					5,
-					30,
-					55,
-					80,
-					105,
-					130,
-					155
-				],
-				"2": [
-					75,
-					150,
-					225,
-					300,
-					375,
-					450,
-					525
-				],
-				"3": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"4": [
-					65,
-					65,
-					70,
-					75,
-					80,
-					85,
-					85
-				]
-			},
-			"cooldownTime": [
-				13,
-				13,
-				13,
-				13,
-				13,
-				13,
-				13
-			],
-			"name": "Broken Wings",
-			"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Ki Burst",
+					"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
+					"cooldownTime": [
+						12,
+						11,
+						10,
+						9,
+						8,
+						7,
+						7
+					],
+					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
+					"spellCalculations": {
+						"TotalDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							30,
+							65,
+							95,
+							125,
+							155,
+							185,
+							215
+						],
+						"1": [
+							10,
+							40,
+							70,
+							100,
+							130,
+							160,
+							190
+						],
+						"2": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"3": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"4": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						]
+					},
+					"dataKey": "Characters/Riven/Spells/RivenMartyrAbility/RivenMartyr"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					30,
-					65,
-					95,
-					125,
-					155,
-					185,
-					215
-				],
-				"1": [
-					10,
-					40,
-					70,
-					100,
-					130,
-					160,
-					190
-				],
-				"2": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"3": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"4": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				]
-			},
-			"cooldownTime": [
-				12,
-				11,
-				10,
-				9,
-				8,
-				7,
-				7
-			],
-			"name": "Ki Burst",
-			"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds."
+			]
 		},
 		"e": {
-			"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalShield": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1.1,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Valor",
+					"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
+					"spellCalculations": {
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							50,
+							70,
+							95,
+							120,
+							145,
+							170,
+							235
+						],
+						"1": [
+							50,
+							70,
+							95,
+							120,
+							145,
+							170,
+							235
+						],
+						"2": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"3": [
+							800,
+							800,
+							800,
+							800,
+							800,
+							800,
+							800
+						],
+						"4": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"dataKey": "Characters/Riven/Spells/RivenFeintAbility/RivenFeint"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					50,
-					70,
-					95,
-					120,
-					145,
-					170,
-					235
-				],
-				"1": [
-					50,
-					70,
-					95,
-					120,
-					145,
-					170,
-					235
-				],
-				"2": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"3": [
-					800,
-					800,
-					800,
-					800,
-					800,
-					800,
-					800
-				],
-				"4": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"cooldownTime": [
-				10,
-				10,
-				9,
-				8,
-				7,
-				6,
-				6
-			],
-			"name": "Valor",
-			"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds."
+			]
 		},
 		"r": {
-			"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"MinBase": [
-					50,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				],
-				"MaxBase": [
-					150,
-					300,
-					450,
-					600,
-					750,
-					900,
-					1050
-				],
-				"Duration": [
-					15,
-					15,
-					15,
-					15,
-					15,
-					15,
-					15
-				],
-				"PercentBonusAD": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"TooltipAttackRange": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				]
-			},
-			"spellCalculations": {
-				"MinDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MinBase",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Blade of the Exile",
+					"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
+					"cooldownTime": [
+						10,
+						120,
+						90,
+						60,
+						60,
+						10,
+						10
+					],
+					"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health.",
+					"dataValues": {
+						"MinBase": [
+							50,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						],
+						"MaxBase": [
+							150,
+							300,
+							450,
+							600,
+							750,
+							900,
+							1050
+						],
+						"Duration": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"PercentBonusAD": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"TooltipAttackRange": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						]
+					},
+					"spellCalculations": {
+						"MinDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MinBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"MaxDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MaxBase",
-							"__type": "NamedDataValueCalculationPart"
+						"MaxDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MaxBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1.8,
-							"__type": "StatByCoefficientCalculationPart"
+						"BonusAD": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "PercentBonusAD",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							100,
+							100,
+							150,
+							200,
+							200,
+							200,
+							200
+						],
+						"1": [
+							300,
+							300,
+							450,
+							600,
+							600,
+							600,
+							600
+						],
+						"2": [
+							0,
+							20,
+							20,
+							20,
+							0,
+							0,
+							0
+						],
+						"3": [
+							0,
+							15,
+							15,
+							15,
+							0,
+							0,
+							0
+						],
+						"4": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						]
+					},
+					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine"
 				},
-				"BonusAD": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mDataValue": "PercentBonusAD",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+				{
+					"image": "assets/characters/riven/hud/icons2d/rivenwindscar.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							50,
+							100,
+							150,
+							200,
+							200,
+							200,
+							250
+						],
+						"1": [
+							150,
+							300,
+							450,
+							600,
+							600,
+							600,
+							750
+						],
+						"2": [
+							25,
+							40,
+							55,
+							70,
+							0,
+							0,
+							15
+						],
+						"3": [
+							15,
+							15,
+							15,
+							15,
+							0,
+							0,
+							0
+						],
+						"4": [
+							90,
+							75,
+							60,
+							45,
+							0,
+							0,
+							0
+						]
+					},
+					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenIzunaBlade"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					100,
-					100,
-					150,
-					200,
-					200,
-					200,
-					200
-				],
-				"1": [
-					300,
-					300,
-					450,
-					600,
-					600,
-					600,
-					600
-				],
-				"2": [
-					0,
-					20,
-					20,
-					20,
-					0,
-					0,
-					0
-				],
-				"3": [
-					0,
-					15,
-					15,
-					15,
-					0,
-					0,
-					0
-				],
-				"4": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				]
-			},
-			"cooldownTime": [
-				10,
-				120,
-				90,
-				60,
-				60,
-				10,
-				10
-			],
-			"name": "Blade of the Exile",
-			"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health."
+			]
 		}
 	}
 }

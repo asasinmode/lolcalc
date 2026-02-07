@@ -38,9 +38,20 @@ export interface IChampion {
 		image: string;
 		maxLevel: number;
 		cooldownTime?: number[];
-		mana?: number[];
-		tooltip: string;
-		tooltipExtended: string;
+		variants: {
+			name?: string;
+			image: string;
+			mana?: number[];
+			cooldownTime?: number[];
+			/** if present, means the variant uses the tooltip of another variant at the specified index */
+			tooltipVariantIndex?: number;
+			tooltip?: string;
+			tooltipExtended?: string;
+			dataValues: any;
+			spellCalculations: any;
+			effectAmount: any;
+			dataKey: string;
+		}[];
 	}>;
 }
 

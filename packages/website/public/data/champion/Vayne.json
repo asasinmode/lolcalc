@@ -29,332 +29,357 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/vayne/hud/icons2d/vayne_p.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"MovementSpeed": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				],
-				"Range": [
-					2000,
-					2000,
-					2000,
-					2000,
-					2000,
-					2000,
-					2000
-				]
-			},
-			"name": "Night Hunter",
-			"tooltip": "Vayne ruthlessly hunts evil-doers, gaining @MovementSpeed@ Move Speed when moving toward nearby enemy champions."
+			"variants": [
+				{
+					"name": "Night Hunter",
+					"image": "assets/characters/vayne/hud/icons2d/vayne_p.png",
+					"tooltip": "Vayne ruthlessly hunts evil-doers, gaining @MovementSpeed@ Move Speed when moving toward nearby enemy champions.",
+					"dataValues": {
+						"MovementSpeed": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"Range": [
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000
+						]
+					},
+					"dataKey": "Characters/Vayne/Spells/VaynePassiveAbility/VaynePassive"
+				}
+			]
 		},
 		"q": {
-			"image": "assets/characters/vayne/hud/icons2d/vayne_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"TotalADRatio": [
-					0.65,
-					0.75,
-					0.85,
-					0.95,
-					1.05,
-					1.15,
-					1.25
-				],
-				"Duration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"APRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"ADRatioBonus": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mDataValue": "TotalADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Tumble",
+					"image": "assets/characters/vayne/hud/icons2d/vayne_q.png",
+					"mana": [
+						30,
+						30,
+						30,
+						30,
+						30,
+						30
+					],
+					"cooldownTime": [
+						6,
+						6,
+						5,
+						4,
+						3,
+						2,
+						2
+					],
+					"tooltip": "Vayne rolls a short distance, and deals an additional <physicalDamage>@ADRatioBonus@ physical damage</physicalDamage> on her next Attack.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
+					"dataValues": {
+						"TotalADRatio": [
+							0.65,
+							0.75,
+							0.85,
+							0.95,
+							1.05,
+							1.15,
+							1.25
+						],
+						"Duration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"ADRatioBonus": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "TotalADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Vayne/Spells/VayneTumbleAbility/VayneTumble"
 				}
-			},
-			"mana": [
-				30,
-				30,
-				30,
-				30,
-				30,
-				30
-			],
-			"cooldownTime": [
-				6,
-				6,
-				5,
-				4,
-				3,
-				2,
-				2
-			],
-			"name": "Tumble",
-			"tooltip": "Vayne rolls a short distance, and deals an additional <physicalDamage>@ADRatioBonus@ physical damage</physicalDamage> on her next Attack.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>"
+			]
 		},
 		"w": {
-			"image": "assets/characters/vayne/hud/icons2d/vayne_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MaxHealthRatio": [
-					0.05,
-					0.06,
-					0.07,
-					0.08,
-					0.09,
-					0.1,
-					0.11
-				],
-				"DamageFloor": [
-					35,
-					50,
-					65,
-					80,
-					95,
-					110,
-					125
-				],
-				"DamageVsMonsters": [
-					125,
-					140,
-					155,
-					170,
-					185,
-					200,
-					215
-				],
-				"DebuffDuration": [
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MaxHealthRatio",
-							"__type": "NamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Silver Bolts",
+					"image": "assets/characters/vayne/hud/icons2d/vayne_w.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
 					],
-					"mDisplayAsPercent": true
+					"tooltip": "<spellPassive>Passive</spellPassive>: Every third consecutive Attack or Ability against an enemy deals an additional <trueDamage>@TotalDamage@ max Health true damage</trueDamage>.",
+					"dataValues": {
+						"MaxHealthRatio": [
+							0.05,
+							0.06,
+							0.07,
+							0.08,
+							0.09,
+							0.1,
+							0.11
+						],
+						"DamageFloor": [
+							35,
+							50,
+							65,
+							80,
+							95,
+							110,
+							125
+						],
+						"DamageVsMonsters": [
+							125,
+							140,
+							155,
+							170,
+							185,
+							200,
+							215
+						],
+						"DebuffDuration": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MaxHealthRatio",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Vayne/Spells/VayneSilveredBoltsAbility/VayneSilveredBolts"
 				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Silver Bolts",
-			"tooltip": "<spellPassive>Passive</spellPassive>: Every third consecutive Attack or Ability against an enemy deals an additional <trueDamage>@TotalDamage@ max Health true damage</trueDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/vayne/hud/icons2d/vayne_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Damage": [
-					15,
-					50,
-					85,
-					120,
-					155,
-					190,
-					225
-				],
-				"StunDamage": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"StunDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"KnockbackDistance": [
-					475,
-					475,
-					475,
-					475,
-					475,
-					475,
-					475
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"EmpoweredDamageTT": {
-					"mMultiplier": {
-						"mDataValue": "StunDamage"
+			"variants": [
+				{
+					"name": "Condemn",
+					"image": "assets/characters/vayne/hud/icons2d/vayne_e.png",
+					"mana": [
+						90,
+						90,
+						90,
+						90,
+						90,
+						90
+					],
+					"cooldownTime": [
+						22,
+						20,
+						18,
+						16,
+						14,
+						12,
+						12
+					],
+					"tooltip": "Vayne fires a bolt that <status>Knocks Back</status> and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If the target collides with terrain, they take <physicalDamage>@EmpoweredDamageTT@ bonus physical damage</physicalDamage> and become <status>Stunned</status> for @StunDuration@ seconds. ",
+					"dataValues": {
+						"Damage": [
+							15,
+							50,
+							85,
+							120,
+							155,
+							190,
+							225
+						],
+						"StunDamage": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"StunDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"KnockbackDistance": [
+							475,
+							475,
+							475,
+							475,
+							475,
+							475,
+							475
+						]
 					},
-					"mModifiedGameCalculation": "TotalDamage"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"EmpoweredDamageTT": {
+							"mMultiplier": {
+								"mDataValue": "StunDamage"
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/Vayne/Spells/VayneCondemnAbility/VayneCondemn"
 				}
-			},
-			"mana": [
-				90,
-				90,
-				90,
-				90,
-				90,
-				90
-			],
-			"cooldownTime": [
-				22,
-				20,
-				18,
-				16,
-				14,
-				12,
-				12
-			],
-			"name": "Condemn",
-			"tooltip": "Vayne fires a bolt that <status>Knocks Back</status> and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If the target collides with terrain, they take <physicalDamage>@EmpoweredDamageTT@ bonus physical damage</physicalDamage> and become <status>Stunned</status> for @StunDuration@ seconds. "
+			]
 		},
 		"r": {
-			"image": "assets/characters/vayne/hud/icons2d/vayne_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BonusAttackDamage": [
-					20,
-					35,
-					50,
-					65,
-					80,
-					95,
-					110
-				],
-				"BaseDuration": [
-					6,
-					8,
-					10,
-					12,
-					14,
-					16,
-					18
-				],
-				"TumbleStealthDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"MovementSpeed": [
-					90,
-					90,
-					90,
-					90,
-					90,
-					90,
-					90
-				],
-				"DurationToAdd": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"DamagedMarkerDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"TumbleCDReduction": [
-					20,
-					30,
-					40,
-					50,
-					60,
-					70,
-					80
-				]
-			},
-			"mana": [
-				80,
-				80,
-				80,
-				80,
-				80,
-				80
-			],
-			"cooldownTime": [
-				100,
-				100,
-				85,
-				70,
-				70,
-				70,
-				70
-			],
-			"name": "Final Hour",
-			"tooltip": "Vayne gains <physicalDamage>@BonusAttackDamage@ Attack Damage</physicalDamage> for @BaseDuration@ seconds, extended by @DurationToAdd@ seconds whenever a champion damaged by Vayne dies within @DamagedMarkerDuration@ seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>@MovementSpeed@ Move Speed</speed>.<li>The Cooldown of <spellName>Tumble</spellName> is reduced by @TumbleCDReduction@%, and grants <keywordStealth>Invisibility</keywordStealth> for @TumbleStealthDuration@ second."
+			"variants": [
+				{
+					"name": "Final Hour",
+					"image": "assets/characters/vayne/hud/icons2d/vayne_r.png",
+					"mana": [
+						80,
+						80,
+						80,
+						80,
+						80,
+						80
+					],
+					"cooldownTime": [
+						100,
+						100,
+						85,
+						70,
+						70,
+						70,
+						70
+					],
+					"tooltip": "Vayne gains <physicalDamage>@BonusAttackDamage@ Attack Damage</physicalDamage> for @BaseDuration@ seconds, extended by @DurationToAdd@ seconds whenever a champion damaged by Vayne dies within @DamagedMarkerDuration@ seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>@MovementSpeed@ Move Speed</speed>.<li>The Cooldown of <spellName>Tumble</spellName> is reduced by @TumbleCDReduction@%, and grants <keywordStealth>Invisibility</keywordStealth> for @TumbleStealthDuration@ second.",
+					"dataValues": {
+						"BonusAttackDamage": [
+							20,
+							35,
+							50,
+							65,
+							80,
+							95,
+							110
+						],
+						"BaseDuration": [
+							6,
+							8,
+							10,
+							12,
+							14,
+							16,
+							18
+						],
+						"TumbleStealthDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"MovementSpeed": [
+							90,
+							90,
+							90,
+							90,
+							90,
+							90,
+							90
+						],
+						"DurationToAdd": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"DamagedMarkerDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"TumbleCDReduction": [
+							20,
+							30,
+							40,
+							50,
+							60,
+							70,
+							80
+						]
+					},
+					"dataKey": "Characters/Vayne/Spells/VayneInquisitionAbility/VayneInquisition"
+				}
+			]
 		}
 	}
 }

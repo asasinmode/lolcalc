@@ -29,754 +29,793 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/yone/hud/icons2d/yonepassive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"MagicDamageSplit": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"YoneCritToAD": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"CritChanceMultiplier": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"CritDamageMod": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				]
-			},
-			"spellCalculations": {
-				"CurrentCritDamage": {
-					"mExpandedTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mStat": 9,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Way of the Hunter",
+					"image": "assets/characters/yone/hud/icons2d/yonepassive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
 					],
-					"mDisplayAsPercent": true
-				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Way of the Hunter",
-			"tooltip": "<spellPassive>Steel and Spirit:</spellPassive> Yone uses two blades, causing every second Attack to deal <magicDamage>@MagicDamageSplit*100@% magic damage</magicDamage>.<br><br><spellPassive>Intent:</spellPassive> Yone's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YoneCritToAD*.01@ Bonus AD</physicalDamage> for every 1% Critical Strike Chance above 100%.",
-			"tooltipExtended": "{{Spell_YonePassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>"
-		},
-		"q": {
-			"image": "assets/characters/yone/hud/icons2d/yoneq.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					0,
-					25,
-					50,
-					75,
-					100,
-					125,
-					150
-				],
-				"ADRatio": [
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1
-				],
-				"Width": [
-					80,
-					80,
-					80,
-					80,
-					80,
-					80,
-					80
-				],
-				"BuffDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"Q3MaxDistance": [
-					450,
-					450,
-					450,
-					450,
-					450,
-					450,
-					450
-				],
-				"Q3MinDistance": [
-					450,
-					450,
-					450,
-					450,
-					450,
-					450,
-					450
-				],
-				"Q3DashSpeed": [
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500
-				],
-				"Q3AoESize": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				],
-				"QAttackSpeedCDPercent": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"QAttackSpeedCDMax": [
-					0.667,
-					0.667,
-					0.667,
-					0.667,
-					0.667,
-					0.667,
-					0.667
-				],
-				"QAttackSpeedCastReductionPercent": [
-					0.417,
-					0.417,
-					0.417,
-					0.417,
-					0.417,
-					0.417,
-					0.417
-				],
-				"QAttackSpeedCastReductionMax": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"QBaseCastTime": [
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35
-				],
-				"Q3KnockupHeight": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"Q3KnockupDuration": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				]
-			},
-			"spellCalculations": {
-				"QDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalDamageCrit": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mSubpart": {
-								"mStat": 9,
-								"mDataValue": "ADRatio"
-							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				}
-			},
-			"cooldownTime": [
-				4,
-				4,
-				4,
-				4,
-				4,
-				4,
-				4
-			],
-			"name": "Mortal Steel",
-			"tooltip": "Yone thrusts forward, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>.<br><br>On hit, grants a stack for @BuffDuration@ seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for @Q3KnockupDuration@ seconds and deals <physicalDamage>@QDamage@ physical damage</physicalDamage>. "
-		},
-		"w": {
-			"image": "assets/characters/yone/hud/icons2d/yonew.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					0,
-					10,
-					20,
-					30,
-					40,
-					50,
-					60
-				],
-				"MinionMod": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"HealthStealMultiplier": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"ConeWidth": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"WAttackSpeedCDPercent": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"WAttackSpeedCDMax": [
-					0.571,
-					0.571,
-					0.571,
-					0.571,
-					0.571,
-					0.571,
-					0.571
-				],
-				"WAttackSpeedCastReductionPercent": [
-					0.417,
-					0.417,
-					0.417,
-					0.417,
-					0.417,
-					0.417,
-					0.417
-				],
-				"WAttackSpeedCastReductionMax": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"WBaseCastTime": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"WCritMultiplier": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				],
-				"MaxHealthDamage": [
-					0.07,
-					0.08,
-					0.09,
-					0.1,
-					0.11,
-					0.12,
-					0.13
-				],
-				"BaseShield": [
-					0,
-					10,
-					20,
-					30,
-					40,
-					50,
-					60
-				],
-				"FirstChampShieldMultiplier": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"SecondChampShieldMultiplier": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"ShieldDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"ShieldbADRatio": [
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65
-				]
-			},
-			"spellCalculations": {
-				"WDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"{8dfeb810}": {
-					"mMultiplier": {
-						"mStartValue": 0.2,
-						"mEndValue": 1
+					"tooltip": "<spellPassive>Steel and Spirit:</spellPassive> Yone uses two blades, causing every second Attack to deal <magicDamage>@MagicDamageSplit*100@% magic damage</magicDamage>.<br><br><spellPassive>Intent:</spellPassive> Yone's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YoneCritToAD*.01@ Bonus AD</physicalDamage> for every 1% Critical Strike Chance above 100%.",
+					"tooltipExtended": "{{Spell_YonePassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
+					"dataValues": {
+						"MagicDamageSplit": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"YoneCritToAD": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"CritChanceMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CritDamageMod": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						]
 					},
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"WShield": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 40,
-							"mEndValue": 90,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ShieldBADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MinimumDamageMinions": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mExpandedTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 30,
-							"mBreakpoints": [
+					"spellCalculations": {
+						"CurrentCritDamage": {
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
 								{
-									"mBonusPerLevelAtAndAfter": 10
-								},
-								{
-									"mLevel": 9,
-									"mBonusPerLevelAtAndAfter": 20
-								},
-								{
-									"mLevel": 14,
-									"mBonusPerLevelAtAndAfter": 40
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							"mDisplayAsPercent": true
 						}
-					]
-				},
-				"MonsterDamageCap": {
-					"mFormulaParts": [
-						{
-							"mValues": [
-								140,
-								150,
-								160,
-								170,
-								180,
-								190,
-								200,
-								210,
-								220,
-								230,
-								240,
-								250,
-								260,
-								270,
-								280,
-								290,
-								300,
-								310,
-								320,
-								330,
-								340,
-								350,
-								360,
-								370,
-								380,
-								390,
-								400,
-								410,
-								420,
-								430,
-								440
-							],
-							"__type": "ByCharLevelFormulaCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Yone/Spells/YonePassiveAbility/YonePassive"
 				}
-			},
-			"cooldownTime": [
-				14,
-				14,
-				14,
-				14,
-				14,
-				14,
-				14
-			],
-			"name": "Spirit Cleave",
-			"tooltip": "Yone cleaves forward, dealing <physicalDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health physical damage</physicalDamage> and <magicDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health magic damage</magicDamage>.<br><br>If Yone hits, he gains <shield>@WShield@ Shield</shield> for @ShieldDuration@ seconds. The amount of <shield>Shield</shield> increases for each champion struck. "
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Mortal Steel",
+					"image": "assets/characters/yone/hud/icons2d/yoneq.png",
+					"cooldownTime": [
+						4,
+						4,
+						4,
+						4,
+						4,
+						4,
+						4
+					],
+					"tooltip": "Yone thrusts forward, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>.<br><br>On hit, grants a stack for @BuffDuration@ seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for @Q3KnockupDuration@ seconds and deals <physicalDamage>@QDamage@ physical damage</physicalDamage>. ",
+					"dataValues": {
+						"BaseDamage": [
+							0,
+							25,
+							50,
+							75,
+							100,
+							125,
+							150
+						],
+						"ADRatio": [
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1
+						],
+						"Width": [
+							80,
+							80,
+							80,
+							80,
+							80,
+							80,
+							80
+						],
+						"BuffDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"Q3MaxDistance": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						],
+						"Q3MinDistance": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						],
+						"Q3DashSpeed": [
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500
+						],
+						"Q3AoESize": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"QAttackSpeedCDPercent": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"QAttackSpeedCDMax": [
+							0.667,
+							0.667,
+							0.667,
+							0.667,
+							0.667,
+							0.667,
+							0.667
+						],
+						"QAttackSpeedCastReductionPercent": [
+							0.417,
+							0.417,
+							0.417,
+							0.417,
+							0.417,
+							0.417,
+							0.417
+						],
+						"QAttackSpeedCastReductionMax": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"QBaseCastTime": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"Q3KnockupHeight": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"Q3KnockupDuration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						]
+					},
+					"spellCalculations": {
+						"QDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalDamageCrit": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mStat": 9,
+										"mDataValue": "ADRatio"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Yone/Spells/YoneQAbility/YoneQ"
+				},
+				{
+					"image": "assets/characters/yone/hud/icons2d/yoneq3.png",
+					"cooldownTime": [
+						4,
+						4,
+						4,
+						4,
+						4,
+						4,
+						4
+					],
+					"tooltipVariantIndex": 0,
+					"dataKey": "Characters/Yone/Spells/YoneQAbility/YoneQ3"
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Spirit Cleave",
+					"image": "assets/characters/yone/hud/icons2d/yonew.png",
+					"cooldownTime": [
+						14,
+						14,
+						14,
+						14,
+						14,
+						14,
+						14
+					],
+					"tooltip": "Yone cleaves forward, dealing <physicalDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health physical damage</physicalDamage> and <magicDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health magic damage</magicDamage>.<br><br>If Yone hits, he gains <shield>@WShield@ Shield</shield> for @ShieldDuration@ seconds. The amount of <shield>Shield</shield> increases for each champion struck. ",
+					"dataValues": {
+						"BaseDamage": [
+							0,
+							10,
+							20,
+							30,
+							40,
+							50,
+							60
+						],
+						"MinionMod": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"HealthStealMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ConeWidth": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"WAttackSpeedCDPercent": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"WAttackSpeedCDMax": [
+							0.571,
+							0.571,
+							0.571,
+							0.571,
+							0.571,
+							0.571,
+							0.571
+						],
+						"WAttackSpeedCastReductionPercent": [
+							0.417,
+							0.417,
+							0.417,
+							0.417,
+							0.417,
+							0.417,
+							0.417
+						],
+						"WAttackSpeedCastReductionMax": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"WBaseCastTime": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"WCritMultiplier": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"MaxHealthDamage": [
+							0.07,
+							0.08,
+							0.09,
+							0.1,
+							0.11,
+							0.12,
+							0.13
+						],
+						"BaseShield": [
+							0,
+							10,
+							20,
+							30,
+							40,
+							50,
+							60
+						],
+						"FirstChampShieldMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SecondChampShieldMultiplier": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"ShieldDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"ShieldbADRatio": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						]
+					},
+					"spellCalculations": {
+						"WDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{8dfeb810}": {
+							"mMultiplier": {
+								"mStartValue": 0.2,
+								"mEndValue": 1
+							},
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"WShield": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 40,
+									"mEndValue": 90,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ShieldBADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MinimumDamageMinions": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mBonusPerLevelAtAndAfter": 10
+										},
+										{
+											"mLevel": 9,
+											"mBonusPerLevelAtAndAfter": 20
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 40
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"MonsterDamageCap": {
+							"mFormulaParts": [
+								{
+									"mValues": [
+										140,
+										150,
+										160,
+										170,
+										180,
+										190,
+										200,
+										210,
+										220,
+										230,
+										240,
+										250,
+										260,
+										270,
+										280,
+										290,
+										300,
+										310,
+										320,
+										330,
+										340,
+										350,
+										360,
+										370,
+										380,
+										390,
+										400,
+										410,
+										420,
+										430,
+										440
+									],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Yone/Spells/YoneWAbility/YoneW"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/yone/hud/icons2d/yonee.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ReturnTimer": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"MovementSpeed": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"DeathmarkBase": [
-					5,
-					20,
-					35,
-					50,
-					65,
-					80,
-					95
-				],
-				"DeathmarkPercent": [
-					0.225,
-					0.25,
-					0.275,
-					0.3,
-					0.325,
-					0.35,
-					0.375
-				],
-				"RecastLockout": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"EDashRange": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"EDashSpeed": [
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200
-				],
-				"OnHitIncrease": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"StartingMS": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"MissingHealthPercent": [
-					0.225,
-					0.25,
-					0.275,
-					0.3,
-					0.325,
-					0.35,
-					0.375
-				]
-			},
-			"spellCalculations": {
-				"{df232269}": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "DeathmarkBase",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mCoefficient": 0.25,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Soul Unbound",
+					"image": "assets/characters/yone/hud/icons2d/yonee.png",
+					"cooldownTime": [
+						22,
+						22,
+						19,
+						16,
+						13,
+						10,
+						10
+					],
+					"tooltip": "Yone enters a spirit form for @ReturnTimer@ seconds, leaving his body behind for the duration and gaining <speed>@StartingMS*100@%</speed> to <speed>@MovementSpeed*100@% ramping Move Speed</speed>. <br><br>When the spirit form ends, Yone snaps back to his body and repeats @DeathmarkPercent*100@% of all Attack and Ability damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br><br><recast>Recast: </recast>End spirit form early.",
+					"dataValues": {
+						"ReturnTimer": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MovementSpeed": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"DeathmarkBase": [
+							5,
+							20,
+							35,
+							50,
+							65,
+							80,
+							95
+						],
+						"DeathmarkPercent": [
+							0.225,
+							0.25,
+							0.275,
+							0.3,
+							0.325,
+							0.35,
+							0.375
+						],
+						"RecastLockout": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"EDashRange": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"EDashSpeed": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"OnHitIncrease": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"StartingMS": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"MissingHealthPercent": [
+							0.225,
+							0.25,
+							0.275,
+							0.3,
+							0.325,
+							0.35,
+							0.375
+						]
+					},
+					"spellCalculations": {
+						"{df232269}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "DeathmarkBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Yone/Spells/YoneEAbility/YoneE"
 				}
-			},
-			"cooldownTime": [
-				22,
-				22,
-				19,
-				16,
-				13,
-				10,
-				10
-			],
-			"name": "Soul Unbound",
-			"tooltip": "Yone enters a spirit form for @ReturnTimer@ seconds, leaving his body behind for the duration and gaining <speed>@StartingMS*100@%</speed> to <speed>@MovementSpeed*100@% ramping Move Speed</speed>. <br><br>When the spirit form ends, Yone snaps back to his body and repeats @DeathmarkPercent*100@% of all Attack and Ability damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br><br><recast>Recast: </recast>End spirit form early."
+			]
 		},
 		"r": {
-			"image": "assets/characters/yone/hud/icons2d/yoner.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					0,
-					200,
-					400,
-					600,
-					800,
-					1000,
-					1200
-				],
-				"ADRatio": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				],
-				"BlinkDistanceBehindTarget": [
-					200,
-					200,
-					200,
-					200,
-					200,
-					200,
-					200
-				],
-				"Width": [
-					225,
-					225,
-					225,
-					225,
-					225,
-					225,
-					225
-				],
-				"RKnockupHeight": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"RKnockupDuration": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"RKnockTowardsSpeed": [
-					3000,
-					3000,
-					3000,
-					3000,
-					3000,
-					3000,
-					3000
-				],
-				"RKnockTowardsDampener": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TooltipDamage": {
-					"mMultiplier": {
-						"mNumber": 0.5
+			"variants": [
+				{
+					"name": "Fate Sealed",
+					"image": "assets/characters/yone/hud/icons2d/yoner.png",
+					"cooldownTime": [
+						120,
+						120,
+						100,
+						80,
+						80,
+						80,
+						80
+					],
+					"tooltip": "Yone strikes all enemies along a path for <physicalDamage>@TooltipDamage@ physical damage</physicalDamage> and <magicDamage>@TooltipDamage@ magic damage</magicDamage>, teleporting behind the last champion hit and <status>Knocking Up</status> victims towards Yone.",
+					"dataValues": {
+						"BaseDamage": [
+							0,
+							200,
+							400,
+							600,
+							800,
+							1000,
+							1200
+						],
+						"ADRatio": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"BlinkDistanceBehindTarget": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"Width": [
+							225,
+							225,
+							225,
+							225,
+							225,
+							225,
+							225
+						],
+						"RKnockupHeight": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"RKnockupDuration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"RKnockTowardsSpeed": [
+							3000,
+							3000,
+							3000,
+							3000,
+							3000,
+							3000,
+							3000
+						],
+						"RKnockTowardsDampener": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						]
 					},
-					"mModifiedGameCalculation": "Damage"
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TooltipDamage": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"mModifiedGameCalculation": "Damage"
+						}
+					},
+					"dataKey": "Characters/Yone/Spells/YoneRAbility/YoneR"
 				}
-			},
-			"cooldownTime": [
-				120,
-				120,
-				100,
-				80,
-				80,
-				80,
-				80
-			],
-			"name": "Fate Sealed",
-			"tooltip": "Yone strikes all enemies along a path for <physicalDamage>@TooltipDamage@ physical damage</physicalDamage> and <magicDamage>@TooltipDamage@ magic damage</magicDamage>, teleporting behind the last champion hit and <status>Knocking Up</status> victims towards Yone."
+			]
 		}
 	}
 }

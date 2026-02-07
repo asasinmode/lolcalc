@@ -29,498 +29,523 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/kennen/hud/icons2d/kennen_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"EnergyRestore": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"StunDuration": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"ReducedStunDuration": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MarkDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"DiminishingReturnDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				]
-			},
-			"name": "Mark of the Storm",
-			"tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>.",
-			"tooltipExtended": "{{ Spell_KennenPassive_Tooltip }}<br><rules>If an enemy is <status>Stunned</status> more than once by this ability within @DiminishingReturnDuration@ seconds, they are instead <status>Stunned</status> for @ReducedStunDuration@ seconds.</rules>"
+			"variants": [
+				{
+					"name": "Mark of the Storm",
+					"image": "assets/characters/kennen/hud/icons2d/kennen_passive.png",
+					"tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>.",
+					"tooltipExtended": "{{ Spell_KennenPassive_Tooltip }}<br><rules>If an enemy is <status>Stunned</status> more than once by this ability within @DiminishingReturnDuration@ seconds, they are instead <status>Stunned</status> for @ReducedStunDuration@ seconds.</rules>",
+					"dataValues": {
+						"EnergyRestore": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"StunDuration": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"ReducedStunDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MarkDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"DiminishingReturnDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"dataKey": "Characters/Kennen/Spells/KennenPassiveAbility/KennenPassive"
+				}
+			]
 		},
 		"q": {
-			"image": "assets/characters/kennen/hud/icons2d/kennen_q.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.75,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Thundering Shuriken",
+					"image": "assets/characters/kennen/hud/icons2d/kennen_q.png",
+					"mana": [
+						60,
+						55,
+						50,
+						45,
+						40,
+						35
+					],
+					"cooldownTime": [
+						9,
+						7,
+						6.25,
+						5.5,
+						4.75,
+						4,
+						4
+					],
+					"tooltip": "Kennen throws a shuriken, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.75,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							30,
+							75,
+							125,
+							175,
+							225,
+							275,
+							325
+						]
+					},
+					"dataKey": "Characters/Kennen/Spells/KennenShurikenHurlMissile1Ability/KennenShurikenHurlMissile1"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					30,
-					75,
-					125,
-					175,
-					225,
-					275,
-					325
-				]
-			},
-			"mana": [
-				60,
-				55,
-				50,
-				45,
-				40,
-				35
-			],
-			"cooldownTime": [
-				9,
-				7,
-				6.25,
-				5.5,
-				4.75,
-				4,
-				4
-			],
-			"name": "Thundering Shuriken",
-			"tooltip": "Kennen throws a shuriken, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit."
+			]
 		},
 		"w": {
-			"image": "assets/characters/kennen/hud/icons2d/kennen_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"bADRatio": [
-					0.7,
-					0.8,
-					0.9,
-					1,
-					1.1,
-					1.2,
-					1.3
-				],
-				"BaseOnHitDamage": [
-					25,
-					35,
-					45,
-					55,
-					65,
-					75,
-					85
-				],
-				"BaseDamageActive": [
-					45,
-					70,
-					95,
-					120,
-					145,
-					170,
-					195
-				],
-				"APRatioActive": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				]
-			},
-			"spellCalculations": {
-				"TotalDamagePassive": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseOnHitDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Electrical Surge",
+					"image": "assets/characters/kennen/hud/icons2d/kennen_w.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						13,
+						13,
+						11.25,
+						9.5,
+						7.75,
+						6,
+						6
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.<br>",
+					"dataValues": {
+						"bADRatio": [
+							0.7,
+							0.8,
+							0.9,
+							1,
+							1.1,
+							1.2,
+							1.3
+						],
+						"BaseOnHitDamage": [
+							25,
+							35,
+							45,
+							55,
+							65,
+							75,
+							85
+						],
+						"BaseDamageActive": [
+							45,
+							70,
+							95,
+							120,
+							145,
+							170,
+							195
+						],
+						"APRatioActive": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						]
+					},
+					"spellCalculations": {
+						"TotalDamagePassive": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseOnHitDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.35,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mSubpart": {
+										"mDataValue": "BADRatio"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.35,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mSubpart": {
-								"mDataValue": "BADRatio"
-							},
-							"__type": "StatBySubPartCalculationPart"
+						"TotalDamageActive": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamageActive",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatioActive",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"TotalDamageActive": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamageActive",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatioActive",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							70,
+							70,
+							95,
+							120,
+							145,
+							170,
+							170
+						],
+						"1": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"2": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						]
+					},
+					"dataKey": "Characters/Kennen/Spells/KennenBringTheLightAbility/KennenBringTheLight"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					70,
-					70,
-					95,
-					120,
-					145,
-					170,
-					170
-				],
-				"1": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"2": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				13,
-				13,
-				11.25,
-				9.5,
-				7.75,
-				6,
-				6
-			],
-			"name": "Electrical Surge",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.<br>"
+			]
 		},
 		"e": {
-			"image": "assets/characters/kennen/hud/icons2d/kennen_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				],
-				"EnergyRefund": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"MovementSpeed": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"DurationAsBall": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"AttackSpeed": [
-					0.3,
-					0.4,
-					0.5,
-					0.6,
-					0.7,
-					0.8,
-					0.9
-				],
-				"DurationAfterBall": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"DamageToMinions": [
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65
-				],
-				"DamageRadius": [
-					200,
-					200,
-					200,
-					200,
-					200,
-					200,
-					200
-				],
-				"linger": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Lightning Rush",
+					"image": "assets/characters/kennen/hud/icons2d/kennen_e.png",
+					"mana": [
+						80,
+						80,
+						80,
+						80,
+						80,
+						80
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Kennen turns into a ball of lightning, gaining <speed>@MovementSpeed*100@% Move Speed</speed>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through, and becoming Ghosted for @DurationAsBall@ seconds. If Kennen damages at least one enemy, he gains @EnergyRefund@ Energy. <br><br>After this ability ends, Kennen gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @DurationAfterBall@ seconds. Kennen can <recast>Recast</recast> to end this Ability early.",
+					"dataValues": {
+						"BaseDamage": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						],
+						"EnergyRefund": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"MovementSpeed": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"DurationAsBall": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"AttackSpeed": [
+							0.3,
+							0.4,
+							0.5,
+							0.6,
+							0.7,
+							0.8,
+							0.9
+						],
+						"DurationAfterBall": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"DamageToMinions": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"DamageRadius": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"linger": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							85,
+							85,
+							125,
+							165,
+							205,
+							245,
+							285
+						],
+						"1": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"2": [
+							10,
+							10,
+							20,
+							30,
+							40,
+							50,
+							60
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"4": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"6": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"dataKey": "Characters/Kennen/Spells/KennenLightningRushAbility/KennenLightningRush"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					85,
-					85,
-					125,
-					165,
-					205,
-					245,
-					285
-				],
-				"1": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"2": [
-					10,
-					10,
-					20,
-					30,
-					40,
-					50,
-					60
-				],
-				"3": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"4": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"6": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"mana": [
-				80,
-				80,
-				80,
-				80,
-				80,
-				80
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9,
-				8,
-				7,
-				6,
-				6
-			],
-			"name": "Lightning Rush",
-			"tooltip": "Kennen turns into a ball of lightning, gaining <speed>@MovementSpeed*100@% Move Speed</speed>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through, and becoming Ghosted for @DurationAsBall@ seconds. If Kennen damages at least one enemy, he gains @EnergyRefund@ Energy. <br><br>After this ability ends, Kennen gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @DurationAfterBall@ seconds. Kennen can <recast>Recast</recast> to end this Ability early."
+			]
 		},
 		"r": {
-			"image": "assets/characters/kennen/hud/icons2d/kennen_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					5,
-					40,
-					75,
-					110,
-					145,
-					180,
-					215
-				],
-				"APRatio": [
-					0.225,
-					0.225,
-					0.225,
-					0.225,
-					0.225,
-					0.225,
-					0.225
-				],
-				"DamageAmp": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"KennenRTickRate": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"KennenRDefenses": [
-					0,
-					20,
-					40,
-					60,
-					80,
-					100,
-					120
-				],
-				"KennenRDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"PerTickDamageCalculated": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Slicing Maelstrom",
+					"image": "assets/characters/kennen/hud/icons2d/kennen_r.png",
+					"cooldownTime": [
+						120,
+						120,
+						100,
+						80,
+						80,
+						80,
+						80
+					],
+					"tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>@PerTickDamageCalculated@ magic damage</magicDamage> to all nearby enemies every @KennenRTickRate@ seconds, and gaining <scaleArmor>@KennenRDefenses@ Armor</scaleArmor> and <scaleMR>@KennenRDefenses@ Magic Resist</scaleMR> for @KennenRDuration@ seconds. Successive hits deal @DamageAmp*100@% increased damage for each hit the enemy has already suffered.",
+					"dataValues": {
+						"BaseDamage": [
+							5,
+							40,
+							75,
+							110,
+							145,
+							180,
+							215
+						],
+						"APRatio": [
+							0.225,
+							0.225,
+							0.225,
+							0.225,
+							0.225,
+							0.225,
+							0.225
+						],
+						"DamageAmp": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"KennenRTickRate": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"KennenRDefenses": [
+							0,
+							20,
+							40,
+							60,
+							80,
+							100,
+							120
+						],
+						"KennenRDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"PerTickDamageCalculated": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Kennen/Spells/KennenShurikenStormAbility/KennenShurikenStorm"
 				}
-			},
-			"cooldownTime": [
-				120,
-				120,
-				100,
-				80,
-				80,
-				80,
-				80
-			],
-			"name": "Slicing Maelstrom",
-			"tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>@PerTickDamageCalculated@ magic damage</magicDamage> to all nearby enemies every @KennenRTickRate@ seconds, and gaining <scaleArmor>@KennenRDefenses@ Armor</scaleArmor> and <scaleMR>@KennenRDefenses@ Magic Resist</scaleMR> for @KennenRDuration@ seconds. Successive hits deal @DamageAmp*100@% increased damage for each hit the enemy has already suffered."
+			]
 		}
 	}
 }

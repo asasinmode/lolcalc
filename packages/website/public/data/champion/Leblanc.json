@@ -29,521 +29,581 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"TooltipCooldown": [
-					60,
-					60,
-					60,
-					60,
-					60,
-					60,
-					60
-				]
-			},
-			"cooldownTime": [
-				60,
-				60,
-				60,
-				60,
-				60,
-				60,
-				60
-			],
-			"name": "Mirror Image",
-			"tooltip": "When LeBlanc drops below 40% Health, she becomes <keywordStealth>Invisible</keywordStealth> for 1 second and creates a harmless clone for 8 seconds. LeBlanc can move the clone with the \"Alt\" key.",
-			"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>"
+			"variants": [
+				{
+					"name": "Mirror Image",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png",
+					"cooldownTime": [
+						60,
+						60,
+						60,
+						60,
+						60,
+						60,
+						60
+					],
+					"tooltip": "When LeBlanc drops below 40% Health, she becomes <keywordStealth>Invisible</keywordStealth> for 1 second and creates a harmless clone for 8 seconds. LeBlanc can move the clone with the \"Alt\" key.",
+					"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
+					"dataValues": {
+						"TooltipCooldown": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						]
+					},
+					"dataKey": "Characters/Leblanc/Spells/LeblancPAbility/LeblancP"
+				}
+			]
 		},
 		"q": {
-			"image": "assets/characters/leblanc/hud/icons2d/leblancq.leblanc_rework.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					40,
-					65,
-					90,
-					115,
-					140,
-					165,
-					190
-				],
-				"BaseMarkDamage": [
-					40,
-					65,
-					90,
-					115,
-					140,
-					165,
-					190
-				],
-				"MarkDuration": [
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5
-				],
-				"CooldownRefund": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"ManaRefund": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"APRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MarkDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseMarkDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"BonusMinionDamage": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 10,
-							"mInitialBonusPerLevel": 8,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Sigil of Malice",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancq.leblanc_rework.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						6,
+						6,
+						6,
+						6,
+						6,
+						6,
+						6
+					],
+					"tooltip": "LeBlanc projects a sigil to an enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage> and marking them for @MarkDuration@ seconds.<br><br>Damaging the marked enemy with an Ability detonates the sigil, dealing <magicDamage>@MarkDamage@ magic damage</magicDamage>.<br><br>If either part kills the target, Leblanc refunds @ManaRefund*100@% of the Mana cost and @CooldownRefund*100@% of this spell's remaining Cooldown.<br><br><rules>The initial sigil deals an additional @BonusMinionDamage@ damage to minions. </rules>",
+					"dataValues": {
+						"BaseDamage": [
+							40,
+							65,
+							90,
+							115,
+							140,
+							165,
+							190
+						],
+						"BaseMarkDamage": [
+							40,
+							65,
+							90,
+							115,
+							140,
+							165,
+							190
+						],
+						"MarkDuration": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						],
+						"CooldownRefund": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"ManaRefund": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"APRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
 								{
-									"mLevel": 19
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
+						},
+						"MarkDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMarkDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BonusMinionDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 10,
+									"mInitialBonusPerLevel": 8,
+									"mBreakpoints": [
+										{
+											"mLevel": 19
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Leblanc/Spells/LeblancQAbility/LeblancQ"
 				}
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				6,
-				6,
-				6,
-				6,
-				6,
-				6,
-				6
-			],
-			"name": "Sigil of Malice",
-			"tooltip": "LeBlanc projects a sigil to an enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage> and marking them for @MarkDuration@ seconds.<br><br>Damaging the marked enemy with an Ability detonates the sigil, dealing <magicDamage>@MarkDamage@ magic damage</magicDamage>.<br><br>If either part kills the target, Leblanc refunds @ManaRefund*100@% of the Mana cost and @CooldownRefund*100@% of this spell's remaining Cooldown.<br><br><rules>The initial sigil deals an additional @BonusMinionDamage@ damage to minions. </rules>"
+			]
 		},
 		"w": {
-			"image": "assets/characters/leblanc/hud/icons2d/leblancw.leblanc_rework.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"WAPRatio": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				],
-				"BaseDamage": [
-					35,
-					75,
-					115,
-					155,
-					195,
-					235,
-					275
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "WAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Distortion",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancw.leblanc_rework.png",
+					"mana": [
+						60,
+						70,
+						80,
+						90,
+						100,
+						120
+					],
+					"cooldownTime": [
+						15,
+						15,
+						13.75,
+						12.5,
+						11.25,
+						10,
+						10
+					],
+					"tooltip": "LeBlanc dashes then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. For @Effect3Amount@ seconds after dashing, LeBlanc can <recast>Recast</recast>.<br><br><recast>Recast:</recast> LeBlanc returns to her starting location.",
+					"dataValues": {
+						"WAPRatio": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"BaseDamage": [
+							35,
+							75,
+							115,
+							155,
+							195,
+							235,
+							275
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "WAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"2": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"3": [
+							600,
+							600,
+							600,
+							600,
+							600,
+							600,
+							600
+						],
+						"4": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"5": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						]
+					},
+					"dataKey": "Characters/Leblanc/Spells/LeblancWAbility/LeblancW"
+				},
+				{
+					"name": "Distortion Return",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancwreturn.leblanc_rework.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "LeBlanc returns to her yellow marker.",
+					"effectAmount": {
+						"0": [
+							45,
+							85,
+							125,
+							165,
+							205,
+							245,
+							285
+						],
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"dataKey": "Characters/Leblanc/Spells/LeblancWAbility/LeblancWReturn"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"2": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"3": [
-					600,
-					600,
-					600,
-					600,
-					600,
-					600,
-					600
-				],
-				"4": [
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2
-				],
-				"5": [
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2
-				]
-			},
-			"mana": [
-				60,
-				70,
-				80,
-				90,
-				100,
-				120
-			],
-			"cooldownTime": [
-				15,
-				15,
-				13.75,
-				12.5,
-				11.25,
-				10,
-				10
-			],
-			"name": "Distortion",
-			"tooltip": "LeBlanc dashes then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. For @Effect3Amount@ seconds after dashing, LeBlanc can <recast>Recast</recast>.<br><br><recast>Recast:</recast> LeBlanc returns to her starting location."
+			]
 		},
 		"e": {
-			"image": "assets/characters/leblanc/hud/icons2d/leblance.leblanc_rework.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseInitialDamage": [
-					30,
-					50,
-					70,
-					90,
-					110,
-					130,
-					150
-				],
-				"BaseDelayedDamage": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				],
-				"InitialAPRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"DelayedAPRatio": [
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85
-				]
-			},
-			"spellCalculations": {
-				"InitialDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseInitialDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Ethereal Chains",
+					"image": "assets/characters/leblanc/hud/icons2d/leblance.leblanc_rework.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						14,
+						14,
+						13.25,
+						12.5,
+						11.75,
+						11,
+						11
+					],
+					"tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br><br>If they remain shackled for @Effect3Amount@ seconds, LeBlanc <status>Roots</status> them for @Effect4Amount@ seconds and deals an additional <magicDamage>@DelayedDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"BaseInitialDamage": [
+							30,
+							50,
+							70,
+							90,
+							110,
+							130,
+							150
+						],
+						"BaseDelayedDamage": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						],
+						"InitialAPRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"DelayedAPRatio": [
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85
+						]
+					},
+					"spellCalculations": {
+						"InitialDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseInitialDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "{4db10781}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "{4db10781}",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"DelayedDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDelayedDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "{16e82c6b}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"DelayedDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDelayedDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "{16e82c6b}",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"2": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"3": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"4": [
+							865,
+							865,
+							865,
+							865,
+							865,
+							865,
+							865
+						],
+						"5": [
+							14,
+							14,
+							13.25,
+							12.5,
+							11.75,
+							11,
+							11
+						]
+					},
+					"dataKey": "Characters/Leblanc/Spells/LeblancEAbility/LeblancE"
 				}
-			},
-			"effectAmount": {
-				"2": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"3": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"4": [
-					865,
-					865,
-					865,
-					865,
-					865,
-					865,
-					865
-				],
-				"5": [
-					14,
-					14,
-					13.25,
-					12.5,
-					11.75,
-					11,
-					11
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				14,
-				14,
-				13.25,
-				12.5,
-				11.75,
-				11,
-				11
-			],
-			"name": "Ethereal Chains",
-			"tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br><br>If they remain shackled for @Effect3Amount@ seconds, LeBlanc <status>Roots</status> them for @Effect4Amount@ seconds and deals an additional <magicDamage>@DelayedDamage@ magic damage</magicDamage>."
+			]
 		},
 		"r": {
-			"image": "assets/characters/leblanc/hud/icons2d/leblancr.leblanc_rework.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RQ1Base": [
-					0,
-					70,
-					140,
-					210,
-					280,
-					350,
-					420
-				],
-				"RQ2Base": [
-					0,
-					140,
-					280,
-					420,
-					560,
-					700,
-					840
-				],
-				"RWBase": [
-					0,
-					150,
-					300,
-					450,
-					600,
-					750,
-					900
-				],
-				"RE1Base": [
-					0,
-					70,
-					140,
-					210,
-					280,
-					350,
-					420
-				],
-				"RE2Base": [
-					0,
-					140,
-					280,
-					420,
-					560,
-					700,
-					840
-				],
-				"RQMarkDuration": [
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5
-				],
-				"RQ1RE1BaseAPRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				]
-			},
-			"spellCalculations": {
-				"RQ1Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RQ1Base",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Mimic",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancr.leblanc_rework.png",
+					"cooldownTime": [
+						45,
+						45,
+						35,
+						25,
+						25,
+						25,
+						25
+					],
+					"tooltip": "LeBlanc mimics her most recent Ability, using it again. The mimicked Ability deals increased damage.<br><br><spellName>Mimicked Sigil of Malice</spellName> deals <magicDamage>@RQ1Damage@ magic damage</magicDamage> when applied, and <magicDamage>@RQ2Damage@ magic damage</magicDamage> when consumed.<br><spellName>Mimicked Distortion</spellName> deals <magicDamage>@RWDamage@ magic damage</magicDamage>.<br><spellName>Mimicked Ethereal Chains</spellName> deals <magicDamage>@RE1Damage@ magic damage</magicDamage> when shackled and <magicDamage>@RE2Damage@ magic damage</magicDamage> when <status>Rooting</status>.",
+					"dataValues": {
+						"RQ1Base": [
+							0,
+							70,
+							140,
+							210,
+							280,
+							350,
+							420
+						],
+						"RQ2Base": [
+							0,
+							140,
+							280,
+							420,
+							560,
+							700,
+							840
+						],
+						"RWBase": [
+							0,
+							150,
+							300,
+							450,
+							600,
+							750,
+							900
+						],
+						"RE1Base": [
+							0,
+							70,
+							140,
+							210,
+							280,
+							350,
+							420
+						],
+						"RE2Base": [
+							0,
+							140,
+							280,
+							420,
+							560,
+							700,
+							840
+						],
+						"RQMarkDuration": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						],
+						"RQ1RE1BaseAPRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"RQ1Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RQ1Base",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "RQ1RE1BaseAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "RQ1RE1BaseAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"RQ2Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RQ2Base",
-							"__type": "NamedDataValueCalculationPart"
+						"RQ2Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RQ2Base",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"RWDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RWBase",
-							"__type": "NamedDataValueCalculationPart"
+						"RWDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RWBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"RE1Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RE1Base",
-							"__type": "NamedDataValueCalculationPart"
+						"RE1Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RE1Base",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "RQ1RE1BaseAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "RQ1RE1BaseAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"RE2Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RE2Base",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.85,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"RE2Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RE2Base",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.85,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Leblanc/Spells/LeblancRAbility/LeblancR"
 				}
-			},
-			"cooldownTime": [
-				45,
-				45,
-				35,
-				25,
-				25,
-				25,
-				25
-			],
-			"name": "Mimic",
-			"tooltip": "LeBlanc mimics her most recent Ability, using it again. The mimicked Ability deals increased damage.<br><br><spellName>Mimicked Sigil of Malice</spellName> deals <magicDamage>@RQ1Damage@ magic damage</magicDamage> when applied, and <magicDamage>@RQ2Damage@ magic damage</magicDamage> when consumed.<br><spellName>Mimicked Distortion</spellName> deals <magicDamage>@RWDamage@ magic damage</magicDamage>.<br><spellName>Mimicked Ethereal Chains</spellName> deals <magicDamage>@RE1Damage@ magic damage</magicDamage> when shackled and <magicDamage>@RE2Damage@ magic damage</magicDamage> when <status>Rooting</status>."
+			]
 		}
 	}
 }

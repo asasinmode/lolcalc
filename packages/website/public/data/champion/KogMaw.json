@@ -29,492 +29,542 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_icathiansurprise.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"TooltipPassiveMS": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"TooltipPassiveDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"PassiveDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 140,
-							"mEndValue": 650,
-							"__type": "ByCharLevelInterpolationCalculationPart"
+			"variants": [
+				{
+					"name": "Icathian Surprise",
+					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_icathiansurprise.png",
+					"tooltip": "For @TooltipPassiveDuration@ seconds after dying, Kog'Maw can continue to move, can move through units, and gains <speed>10% Move Speed</speed>, increasing to <speed>@TooltipPassiveMS*100@% Move Speed</speed> over the duration. At the end of the duration, he explodes and deals <trueDamage>@PassiveDamage@ true damage</trueDamage> to nearby enemies.",
+					"dataValues": {
+						"TooltipPassiveMS": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"TooltipPassiveDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"PassiveDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 140,
+									"mEndValue": 650,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/KogMaw/Spells/KogMawIcathianSurpriseReadyAbility/KogMawIcathianSurpriseReady"
 				}
-			},
-			"name": "Icathian Surprise",
-			"tooltip": "For @TooltipPassiveDuration@ seconds after dying, Kog'Maw can continue to move, can move through units, and gains <speed>10% Move Speed</speed>, increasing to <speed>@TooltipPassiveMS*100@% Move Speed</speed> over the duration. At the end of the duration, he explodes and deals <trueDamage>@PassiveDamage@ true damage</trueDamage> to nearby enemies."
+			]
 		},
 		"q": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_causticspittle.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"AttackSpeed": [
-					0,
-					0.05,
-					0.1,
-					0.15,
-					0.2,
-					0.25,
-					0.3
-				],
-				"BaseDamage": [
-					35,
-					80,
-					125,
-					170,
-					215,
-					260,
-					305
-				],
-				"APRatio": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				],
-				"ShredAmount": [
-					12,
-					16,
-					20,
-					24,
-					28,
-					32,
-					36
-				],
-				"ShredDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Caustic Spittle",
+					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_causticspittle.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						7,
+						7,
+						7,
+						7,
+						7,
+						7,
+						7
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>@ShredAmount@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.",
+					"dataValues": {
+						"AttackSpeed": [
+							0,
+							0.05,
+							0.1,
+							0.15,
+							0.2,
+							0.25,
+							0.3
+						],
+						"BaseDamage": [
+							35,
+							80,
+							125,
+							170,
+							215,
+							260,
+							305
+						],
+						"APRatio": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"ShredAmount": [
+							12,
+							16,
+							20,
+							24,
+							28,
+							32,
+							36
+						],
+						"ShredDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"4": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"5": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"6": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						]
+					},
+					"dataKey": "Characters/KogMaw/Spells/KogMawQAbility/KogMawQ"
 				}
-			},
-			"effectAmount": {
-				"4": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"5": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"6": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				7,
-				7,
-				7,
-				7,
-				7,
-				7,
-				7
-			],
-			"name": "Caustic Spittle",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>@ShredAmount@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MaxHealthDamage": [
-					2.25,
-					3,
-					3.75,
-					4.5,
-					5.25,
-					6,
-					6.75
-				],
-				"APRatio": [
-					0.015,
-					0.015,
-					0.015,
-					0.015,
-					0.015,
-					0.015,
-					0.015
-				],
-				"Range": [
-					110,
-					130,
-					150,
-					170,
-					190,
-					210,
-					230
-				],
-				"Duration": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"MonsterDamageCap": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				]
-			},
-			"spellCalculations": {
-				"TotalHealthDamage": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "MaxHealthDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Bio-Arcane Barrage",
+					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_bioarcanebarrage.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 2
+					"cooldownTime": [
+						17,
+						17,
+						17,
+						17,
+						17,
+						17,
+						17
+					],
+					"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> for @Duration@ seconds.",
+					"dataValues": {
+						"MaxHealthDamage": [
+							2.25,
+							3,
+							3.75,
+							4.5,
+							5.25,
+							6,
+							6.75
+						],
+						"APRatio": [
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015
+						],
+						"Range": [
+							110,
+							130,
+							150,
+							170,
+							190,
+							210,
+							230
+						],
+						"Duration": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"MonsterDamageCap": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						]
+					},
+					"spellCalculations": {
+						"TotalHealthDamage": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "MaxHealthDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/KogMaw/Spells/KogMawBioArcaneBarrageAbility/KogMawBioArcaneBarrage"
 				}
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				17,
-				17,
-				17,
-				17,
-				17,
-				17,
-				17
-			],
-			"name": "Bio-Arcane Barrage",
-			"tooltip": "Kog'Maw gains @Range@ Attack Range and his Attacks deal an additional <magicDamage>@TotalHealthDamage@ max Health magic damage</magicDamage> for @Duration@ seconds."
+			]
 		},
 		"e": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_voidooze.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					30,
-					70,
-					110,
-					150,
-					190,
-					230,
-					270
-				],
-				"APRatio": [
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65
-				],
-				"SlowAmount": [
-					35,
-					40,
-					45,
-					50,
-					55,
-					60,
-					65
-				],
-				"TrailDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"SlowDuration": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Void Ooze",
+					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_voidooze.png",
+					"mana": [
+						40,
+						55,
+						70,
+						85,
+						100,
+						110
+					],
+					"cooldownTime": [
+						12,
+						12,
+						12,
+						12,
+						12,
+						12,
+						12
+					],
+					"tooltip": "Kog'Maw spits bile, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and leaving a trail of ooze for @TrailDuration@ seconds. Enemies in the ooze are <status>Slowed</status> by @SlowAmount@%.",
+					"dataValues": {
+						"BaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"APRatio": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"SlowAmount": [
+							35,
+							40,
+							45,
+							50,
+							55,
+							60,
+							65
+						],
+						"TrailDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"SlowDuration": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/KogMaw/Spells/KogMawVoidOozeAbility/KogMawVoidOoze"
+				},
+				{
+					"image": "assets/spells/icons2d/bowmaster_enchantedarrow.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							75,
+							250,
+							425,
+							600,
+							0,
+							0,
+							175
+						]
+					},
+					"dataKey": "Characters/KogMaw/Spells/KogMawVoidOozeAbility/KogMawVoidOozeMissile"
 				}
-			},
-			"mana": [
-				40,
-				55,
-				70,
-				85,
-				100,
-				110
-			],
-			"cooldownTime": [
-				12,
-				12,
-				12,
-				12,
-				12,
-				12,
-				12
-			],
-			"name": "Void Ooze",
-			"tooltip": "Kog'Maw spits bile, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and leaving a trail of ooze for @TrailDuration@ seconds. Enemies in the ooze are <status>Slowed</status> by @SlowAmount@%."
+			]
 		},
 		"r": {
-			"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_livingartillery.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"Damage": [
-					60,
-					100,
-					140,
-					180,
-					220,
-					260,
-					300
-				],
-				"ManaCostDuration": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"Range": [
-					105,
-					130,
-					155,
-					180,
-					205,
-					230,
-					255
-				],
-				"BaseCost": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"ManaCostCap": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				],
-				"VisionDebuffDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"FinalDamageMult": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"MaxExtraCost": [
-					360,
-					360,
-					360,
-					360,
-					360,
-					360,
-					360
-				],
-				"VisionRadius": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				],
-				"MidDamageMult": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"TooltipMissingHealthDamageAmp": [
-					0.833,
-					0.833,
-					0.833,
-					0.833,
-					0.833,
-					0.833,
-					0.833
-				],
-				"APRatio": [
-					0.35,
-					0.35,
-					0.4,
-					0.45,
-					0.45,
-					0.45,
-					0.45
-				]
-			},
-			"spellCalculations": {
-				"BaseDamageCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Living Artillery",
+					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_livingartillery.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						2,
+						2,
+						1.5,
+						1,
+						2,
+						2,
+						2
+					],
+					"tooltip": "Kog'Maw shoots acid at an area, dealing <magicDamage>@BaseDamageCalc@ plus @TooltipMissingHealthDamageAmp@% per 1% missing Health magic damage</magicDamage> and revealing enemies hit for 2 seconds. Enemies below <healing>40% Health</healing> instead take <magicDamage>@MaxDamageCalc@ magic damage</magicDamage>.<br><br>Subsequent shots within @ManaCostDuration@ seconds cost an additional <scaleMana>@BaseCost@ Mana</scaleMana> (max: <scaleMana>@ManaCostCap@ Mana</scaleMana>).",
+					"dataValues": {
+						"Damage": [
+							60,
+							100,
+							140,
+							180,
+							220,
+							260,
+							300
+						],
+						"ManaCostDuration": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"Range": [
+							105,
+							130,
+							155,
+							180,
+							205,
+							230,
+							255
+						],
+						"BaseCost": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"ManaCostCap": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"VisionDebuffDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"FinalDamageMult": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"MaxExtraCost": [
+							360,
+							360,
+							360,
+							360,
+							360,
+							360,
+							360
+						],
+						"VisionRadius": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"MidDamageMult": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"TooltipMissingHealthDamageAmp": [
+							0.833,
+							0.833,
+							0.833,
+							0.833,
+							0.833,
+							0.833,
+							0.833
+						],
+						"APRatio": [
+							0.35,
+							0.35,
+							0.4,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						]
+					},
+					"spellCalculations": {
+						"BaseDamageCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.75,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"MidDamageCalc": {
+							"mMultiplier": {
+								"mDataValue": "MidDamageMult"
+							},
+							"mModifiedGameCalculation": "BaseDamageCalc"
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.75,
-							"__type": "StatByCoefficientCalculationPart"
+						"MaxDamageCalc": {
+							"mMultiplier": {
+								"mDataValue": "FinalDamageMult"
+							},
+							"mModifiedGameCalculation": "BaseDamageCalc"
 						}
-					]
-				},
-				"MidDamageCalc": {
-					"mMultiplier": {
-						"mDataValue": "MidDamageMult"
 					},
-					"mModifiedGameCalculation": "BaseDamageCalc"
-				},
-				"MaxDamageCalc": {
-					"mMultiplier": {
-						"mDataValue": "FinalDamageMult"
-					},
-					"mModifiedGameCalculation": "BaseDamageCalc"
+					"dataKey": "Characters/KogMaw/Spells/KogMawLivingArtilleryAbility/KogMawLivingArtillery"
 				}
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				2,
-				2,
-				1.5,
-				1,
-				2,
-				2,
-				2
-			],
-			"name": "Living Artillery",
-			"tooltip": "Kog'Maw shoots acid at an area, dealing <magicDamage>@BaseDamageCalc@ plus @TooltipMissingHealthDamageAmp@% per 1% missing Health magic damage</magicDamage> and revealing enemies hit for 2 seconds. Enemies below <healing>40% Health</healing> instead take <magicDamage>@MaxDamageCalc@ magic damage</magicDamage>.<br><br>Subsequent shots within @ManaCostDuration@ seconds cost an additional <scaleMana>@BaseCost@ Mana</scaleMana> (max: <scaleMana>@ManaCostCap@ Mana</scaleMana>)."
+			]
 		}
 	}
 }

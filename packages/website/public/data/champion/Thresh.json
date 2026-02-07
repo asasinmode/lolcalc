@@ -29,545 +29,610 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/thresh/hud/icons2d/thresh_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"StatValuePerSoul": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"SoulsToGainOnPickUp": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"CurrentSoulBonus": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mBuffName": "{5fbfbf13}",
-							"mIconKey": "%i:threshScalingIcon%",
-							"mDataValue": "StatValuePerSoul",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Damnation",
+					"image": "assets/characters/thresh/hud/icons2d/thresh_passive.png",
+					"tooltip": "Thresh collects the <keywordMajor>Souls</keywordMajor> of dead enemies by walking near them. Each <keywordMajor>Soul</keywordMajor> grants him <scaleArmor>@StatValuePerSoul@ Armor</scaleArmor> and <scaleAP>@StatValuePerSoul@ Ability Power</scaleAP>.",
+					"tooltipExtended": "{{Spell_ThreshPassiveSouls_Tooltip}}<br><br>Current <keywordMajor>Soul</keywordMajor> Bonuses: <statTracking>@CurrentSoulBonus@</statTracking> <scaleAP>Ability Power</scaleAP>, <statTracking>@CurrentSoulBonus@</statTracking> <scaleArmor>Armor</scaleArmor><br><br><rules>Champions and large minions always drop a <keywordMajor>Soul</keywordMajor>, while small minions and jungle monsters only sometimes drop one. Epic jungle monsters drop two <keywordMajor>Souls</keywordMajor>.</rules>",
+					"dataValues": {
+						"StatValuePerSoul": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SoulsToGainOnPickUp": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"CurrentSoulBonus": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{5fbfbf13}",
+									"mIconKey": "%i:threshScalingIcon%",
+									"mDataValue": "StatValuePerSoul",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Thresh/Spells/ThreshPassiveSoulsAbility/ThreshPassiveSouls"
 				}
-			},
-			"name": "Damnation",
-			"tooltip": "Thresh collects the <keywordMajor>Souls</keywordMajor> of dead enemies by walking near them. Each <keywordMajor>Soul</keywordMajor> grants him <scaleArmor>@StatValuePerSoul@ Armor</scaleArmor> and <scaleAP>@StatValuePerSoul@ Ability Power</scaleAP>.",
-			"tooltipExtended": "{{Spell_ThreshPassiveSouls_Tooltip}}<br><br>Current <keywordMajor>Soul</keywordMajor> Bonuses: <statTracking>@CurrentSoulBonus@</statTracking> <scaleAP>Ability Power</scaleAP>, <statTracking>@CurrentSoulBonus@</statTracking> <scaleArmor>Armor</scaleArmor><br><br><rules>Champions and large minions always drop a <keywordMajor>Soul</keywordMajor>, while small minions and jungle monsters only sometimes drop one. Epic jungle monsters drop two <keywordMajor>Souls</keywordMajor>.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					50,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				],
-				"APRatio": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				],
-				"TauntLength": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"SlowPercent": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				],
-				"HitBonusCooldown": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Death Sentence",
+					"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
+					"mana": [
+						70,
+						70,
+						70,
+						70,
+						70,
+						70
+					],
+					"cooldownTime": [
+						19,
+						19,
+						16.5,
+						14,
+						11.5,
+						9,
+						9
+					],
+					"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							50,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						],
+						"APRatio": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"TauntLength": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"SlowPercent": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"HitBonusCooldown": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"1": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"2": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"3": [
+							12,
+							12,
+							12,
+							12,
+							12,
+							12,
+							12
+						]
+					},
+					"dataKey": "Characters/Thresh/Spells/ThreshQAbility/ThreshQ"
+				},
+				{
+					"name": "Deathly Leap",
+					"image": "assets/characters/thresh/hud/icons2d/thresh_q3.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Thresh pulls himself to the poor soul.",
+					"effectAmount": {
+						"0": [
+							30,
+							60,
+							90,
+							120,
+							150,
+							180,
+							210
+						],
+						"1": [
+							0.75,
+							1,
+							1.25,
+							1.5,
+							1.75,
+							2,
+							2.25
+						]
+					},
+					"dataKey": "Characters/Thresh/Spells/ThreshQAbility/ThreshQLeap"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				],
-				"1": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"2": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				],
-				"3": [
-					12,
-					12,
-					12,
-					12,
-					12,
-					12,
-					12
-				]
-			},
-			"mana": [
-				70,
-				70,
-				70,
-				70,
-				70,
-				70
-			],
-			"cooldownTime": [
-				19,
-				19,
-				16.5,
-				14,
-				11.5,
-				9,
-				9
-			],
-			"name": "Death Sentence",
-			"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ShieldPerSoul": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"LanternDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"BaseShieldValue": [
-					30,
-					50,
-					70,
-					90,
-					110,
-					130,
-					150
-				],
-				"ShieldDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"TotalShield": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseShieldValue",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mBuffName": "{5fbfbf13}",
-							"mIconKey": "%i:threshScalingIcon%",
-							"mDataValue": "ShieldPerSoul",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Dark Passage",
+					"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						75
+					],
+					"cooldownTime": [
+						21,
+						21,
+						20,
+						19,
+						18,
+						17,
+						16
+					],
+					"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it.",
+					"dataValues": {
+						"ShieldPerSoul": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"LanternDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"BaseShieldValue": [
+							30,
+							50,
+							70,
+							90,
+							110,
+							130,
+							150
+						],
+						"ShieldDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShieldValue",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBuffName": "{5fbfbf13}",
+									"mIconKey": "%i:threshScalingIcon%",
+									"mDataValue": "ShieldPerSoul",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"3": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"4": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"dataKey": "Characters/Thresh/Spells/ThreshWAbility/ThreshW"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"1": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"3": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"4": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				75
-			],
-			"cooldownTime": [
-				21,
-				21,
-				20,
-				19,
-				18,
-				17,
-				16
-			],
-			"name": "Dark Passage",
-			"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it."
+			]
 		},
 		"e": {
-			"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"PassiveADRatioTT": [
-					0.6,
-					0.9,
-					1.2,
-					1.5,
-					1.8,
-					2.1,
-					2.4
-				],
-				"PassiveADRatio": [
-					60,
-					90,
-					120,
-					150,
-					180,
-					210,
-					240
-				],
-				"APRatio": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				]
-			},
-			"spellCalculations": {
-				"PAttackDamageMin": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mBuffName": "{5fbfbf13}",
-							"mIconKey": "%i:threshScalingIcon%",
-							"mCoefficient": 1.7,
-							"__type": "BuffCounterByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PAttackDamageMax": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mBuffName": "{5fbfbf13}",
-							"mIconKey": "%i:threshScalingIcon%",
-							"mCoefficient": 1.7,
-							"__type": "BuffCounterByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Flay",
+					"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
+					"mana": [
+						60,
+						65,
+						70,
+						75,
+						80,
+						85
+					],
+					"cooldownTime": [
+						13,
+						13,
+						12.25,
+						11.5,
+						10.75,
+						10,
+						9.25
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"PassiveADRatioTT": [
+							0.6,
+							0.9,
+							1.2,
+							1.5,
+							1.8,
+							2.1,
+							2.4
+						],
+						"PassiveADRatio": [
+							60,
+							90,
+							120,
+							150,
+							180,
+							210,
+							240
+						],
+						"APRatio": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						]
+					},
+					"spellCalculations": {
+						"PAttackDamageMin": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{5fbfbf13}",
+									"mIconKey": "%i:threshScalingIcon%",
+									"mCoefficient": 1.7,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mDataValue": "PassiveADRatioTT",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
+						"PAttackDamageMax": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{5fbfbf13}",
+									"mIconKey": "%i:threshScalingIcon%",
+									"mCoefficient": 1.7,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "PassiveADRatioTT",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							75,
+							75,
+							120,
+							165,
+							210,
+							255,
+							300
+						],
+						"1": [
+							20,
+							20,
+							25,
+							30,
+							35,
+							40,
+							45
+						],
+						"2": [
+							80,
+							80,
+							110,
+							140,
+							170,
+							200,
+							225
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"4": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"5": [
+							1.7,
+							1.7,
+							1.7,
+							1.7,
+							1.7,
+							1.7,
+							1.7
+						]
+					},
+					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshE"
+				},
+				{
+					"image": "assets/characters/thresh/hud/icons2d/thresh_e0.png",
+					"tooltipVariantIndex": 0,
+					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshEPassive"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					75,
-					75,
-					120,
-					165,
-					210,
-					255,
-					300
-				],
-				"1": [
-					20,
-					20,
-					25,
-					30,
-					35,
-					40,
-					45
-				],
-				"2": [
-					80,
-					80,
-					110,
-					140,
-					170,
-					200,
-					225
-				],
-				"3": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"4": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"5": [
-					1.7,
-					1.7,
-					1.7,
-					1.7,
-					1.7,
-					1.7,
-					1.7
-				]
-			},
-			"mana": [
-				60,
-				65,
-				70,
-				75,
-				80,
-				85
-			],
-			"cooldownTime": [
-				13,
-				13,
-				12.25,
-				11.5,
-				10.75,
-				10,
-				9.25
-			],
-			"name": "Flay",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>."
+			]
 		},
 		"r": {
-			"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"ThreshRCageRadius": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				],
-				"ThreshRWallThickness": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				],
-				"ThreshRWallLength": [
-					470.228,
-					470.228,
-					470.228,
-					470.228,
-					470.228,
-					470.228,
-					470.228
-				],
-				"APRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "The Box",
+					"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						0
+					],
+					"cooldownTime": [
+						120,
+						120,
+						100,
+						80,
+						80,
+						80,
+						80
+					],
+					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
+					"dataValues": {
+						"ThreshRCageRadius": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"ThreshRWallThickness": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"ThreshRWallLength": [
+							470.228,
+							470.228,
+							470.228,
+							470.228,
+							470.228,
+							470.228,
+							470.228
+						],
+						"APRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							0,
+							250,
+							400,
+							550,
+							175,
+							175,
+							0
+						],
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"2": [
+							99,
+							99,
+							99,
+							99,
+							99,
+							99,
+							99
+						],
+						"3": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"dataKey": "Characters/Thresh/Spells/ThreshRPentaAbility/ThreshRPenta"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0,
-					250,
-					400,
-					550,
-					175,
-					175,
-					0
-				],
-				"1": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"2": [
-					99,
-					99,
-					99,
-					99,
-					99,
-					99,
-					99
-				],
-				"3": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				0
-			],
-			"cooldownTime": [
-				120,
-				120,
-				100,
-				80,
-				80,
-				80,
-				80
-			],
-			"name": "The Box",
-			"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration."
+			]
 		}
 	}
 }

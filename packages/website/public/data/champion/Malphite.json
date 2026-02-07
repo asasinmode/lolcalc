@@ -29,486 +29,511 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/malphite/hud/icons2d/malphite_passive.png",
 			"maxLevel": 0,
-			"spellCalculations": {
-				"PassiveCooldown": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 8,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Granite Shield",
+					"image": "assets/characters/malphite/hud/icons2d/malphite_passive.png",
+					"tooltip": "Malphite grants himself <shield>@TotalShield@ Shield</shield> after not taking damage for @PassiveCooldown@ seconds.",
+					"spellCalculations": {
+						"PassiveCooldown": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
 								{
-									"mLevel": 7,
-									"mAdditionalBonusAtThisLevel": -1
-								},
-								{
-									"mLevel": 13,
-									"mAdditionalBonusAtThisLevel": -1
+									"mLevel1Value": 8,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
+						},
+						"TotalShield": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"TotalShield": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mStat": 12,
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Malphite/Spells/MalphiteShieldAbility/MalphiteShield"
 				}
-			},
-			"name": "Granite Shield",
-			"tooltip": "Malphite grants himself <shield>@TotalShield@ Shield</shield> after not taking damage for @PassiveCooldown@ seconds."
+			]
 		},
 		"q": {
-			"image": "assets/characters/malphite/hud/icons2d/malphite_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"SpeedSteal": [
-					10,
-					15,
-					20,
-					25,
-					30,
-					35,
-					40
-				],
-				"SlowDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"BaseDamage": [
-					20,
-					70,
-					120,
-					170,
-					220,
-					270,
-					320
-				]
-			},
-			"spellCalculations": {
-				"QDamageCalc": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Seismic Shard",
+					"image": "assets/characters/malphite/hud/icons2d/malphite_q.png",
+					"mana": [
+						70,
+						75,
+						80,
+						85,
+						90,
+						95
+					],
+					"cooldownTime": [
+						8,
+						8,
+						8,
+						8,
+						8,
+						8,
+						8
+					],
+					"tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> them by @Effect2Amount@% for @SlowDuration@ seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for @SlowDuration@ seconds.",
+					"dataValues": {
+						"SpeedSteal": [
+							10,
+							15,
+							20,
+							25,
+							30,
+							35,
+							40
+						],
+						"SlowDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"BaseDamage": [
+							20,
+							70,
+							120,
+							170,
+							220,
+							270,
+							320
+						]
+					},
+					"spellCalculations": {
+						"QDamageCalc": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							20,
+							70,
+							120,
+							170,
+							220,
+							270,
+							320
+						],
+						"1": [
+							20,
+							20,
+							25,
+							30,
+							35,
+							40,
+							45
+						],
+						"2": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"dataKey": "Characters/Malphite/Spells/SeismicShardAbility/SeismicShard"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					20,
-					70,
-					120,
-					170,
-					220,
-					270,
-					320
-				],
-				"1": [
-					20,
-					20,
-					25,
-					30,
-					35,
-					40,
-					45
-				],
-				"2": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"mana": [
-				70,
-				75,
-				80,
-				85,
-				90,
-				95
-			],
-			"cooldownTime": [
-				8,
-				8,
-				8,
-				8,
-				8,
-				8,
-				8
-			],
-			"name": "Seismic Shard",
-			"tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> them by @Effect2Amount@% for @SlowDuration@ seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for @SlowDuration@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/malphite/hud/icons2d/malphite_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ThunderclapBuffDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"ThunderclapBaseDamage": [
-					20,
-					30,
-					40,
-					50,
-					60,
-					70,
-					80
-				],
-				"ThunderclapSlowDamage": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"ThunderclapSplashAP": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"ThunderclapSplashArmor": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				],
-				"ThunderclapBaseDamageAPRatio": [
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2
-				],
-				"ThunderclapBaseDamageArmorRatio": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				],
-				"ThunderclapSplashDamage": [
-					5,
-					15,
-					25,
-					35,
-					45,
-					55,
-					65
-				],
-				"BonusArmorPassive": [
-					0.05,
-					0.1,
-					0.15,
-					0.2,
-					0.25,
-					0.3,
-					0.35
-				],
-				"BonusArmorPassiveMultiplier": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"ThunderClapSplashRange": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				],
-				"MonsterDamageMod": [
-					1.8,
-					1.8,
-					1.8,
-					1.8,
-					1.8,
-					1.8,
-					1.8
-				]
-			},
-			"spellCalculations": {
-				"TotalBonusDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "ThunderclapBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "ThunderclapBaseDamageAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 1,
-							"mDataValue": "ThunderclapBaseDamageArmorRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{185669f9}": {
-					"mMultiplier": {
-						"mDataValue": "ThunderclapSlowDamage"
+			"variants": [
+				{
+					"name": "Thunderclap",
+					"image": "assets/characters/malphite/hud/icons2d/malphite_w.png",
+					"mana": [
+						30,
+						35,
+						40,
+						45,
+						50,
+						55
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						8
+					],
+					"tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>@BonusArmorPassive*100@% Armor (%i:scaleArmor%@f1@)</scaleArmor>. This effect is increased to <scaleArmor>@BonusArmorPassive*300@% (%i:scaleArmor%@f2@)</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br><br><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>@TotalBonusDamage@ physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>@ThunderclapSplash@ physical damage</physicalDamage> in their direction. His Attacks continue to create aftershocks for the next @ThunderclapBuffDuration@ seconds.",
+					"dataValues": {
+						"ThunderclapBuffDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"ThunderclapBaseDamage": [
+							20,
+							30,
+							40,
+							50,
+							60,
+							70,
+							80
+						],
+						"ThunderclapSlowDamage": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"ThunderclapSplashAP": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"ThunderclapSplashArmor": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"ThunderclapBaseDamageAPRatio": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"ThunderclapBaseDamageArmorRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"ThunderclapSplashDamage": [
+							5,
+							15,
+							25,
+							35,
+							45,
+							55,
+							65
+						],
+						"BonusArmorPassive": [
+							0.05,
+							0.1,
+							0.15,
+							0.2,
+							0.25,
+							0.3,
+							0.35
+						],
+						"BonusArmorPassiveMultiplier": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"ThunderClapSplashRange": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"MonsterDamageMod": [
+							1.8,
+							1.8,
+							1.8,
+							1.8,
+							1.8,
+							1.8,
+							1.8
+						]
 					},
-					"mSimpleTooltipCalculationDisplay": 0,
-					"mModifiedGameCalculation": "TotalBonusDamage"
-				},
-				"ThunderclapSplash": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "ThunderclapSplashDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"TotalBonusDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "ThunderclapBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ThunderclapBaseDamageAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mDataValue": "ThunderclapBaseDamageArmorRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "ThunderclapSplashAP",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"{185669f9}": {
+							"mMultiplier": {
+								"mDataValue": "ThunderclapSlowDamage"
+							},
+							"mSimpleTooltipCalculationDisplay": 0,
+							"mModifiedGameCalculation": "TotalBonusDamage"
 						},
-						{
-							"mStat": 1,
-							"mDataValue": "ThunderclapSplashArmor",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"ThunderclapSplash": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "ThunderclapSplashDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ThunderclapSplashAP",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mDataValue": "ThunderclapSplashArmor",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{71941255}": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "BonusArmorPassive"
+									},
+									"mPart2": {
+										"mDataValue": "BonusArmorPassiveMultiplier"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"{71941255}": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mPart1": {
-								"mDataValue": "BonusArmorPassive"
-							},
-							"mPart2": {
-								"mDataValue": "BonusArmorPassiveMultiplier"
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Malphite/Spells/ObduracyAbility/Obduracy"
 				}
-			},
-			"mana": [
-				30,
-				35,
-				40,
-				45,
-				50,
-				55
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				8
-			],
-			"name": "Thunderclap",
-			"tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>@BonusArmorPassive*100@% Armor (%i:scaleArmor%@f1@)</scaleArmor>. This effect is increased to <scaleArmor>@BonusArmorPassive*300@% (%i:scaleArmor%@f2@)</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br><br><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>@TotalBonusDamage@ physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>@ThunderclapSplash@ physical damage</physicalDamage> in their direction. His Attacks continue to create aftershocks for the next @ThunderclapBuffDuration@ seconds."
+			]
 		},
 		"e": {
-			"image": "assets/characters/malphite/hud/icons2d/malphite_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					25,
-					60,
-					95,
-					130,
-					165,
-					200,
-					235
-				],
-				"ASReduction": [
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				],
-				"Duration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"EDamageCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 1,
-							"mCoefficient": 0.4,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Ground Slam",
+					"image": "assets/characters/malphite/hud/icons2d/malphite_e.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						75
+					],
+					"cooldownTime": [
+						7,
+						7,
+						7,
+						7,
+						7,
+						7,
+						7
+					],
+					"tooltip": "Malphite slams the ground, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and reducing <attackSpeed>Attack Speed by @ASReduction@%</attackSpeed> for @Duration@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							25,
+							60,
+							95,
+							130,
+							165,
+							200,
+							235
+						],
+						"ASReduction": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"Duration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"EDamageCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Malphite/Spells/LandslideAbility/Landslide"
 				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				75
-			],
-			"cooldownTime": [
-				7,
-				7,
-				7,
-				7,
-				7,
-				7,
-				7
-			],
-			"name": "Ground Slam",
-			"tooltip": "Malphite slams the ground, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and reducing <attackSpeed>Attack Speed by @ASReduction@%</attackSpeed> for @Duration@ seconds."
+			]
 		},
 		"r": {
-			"image": "assets/characters/malphite/hud/icons2d/malphite_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					100,
-					200,
-					300,
-					400,
-					500,
-					600,
-					700
-				],
-				"KnockupDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.9,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Unstoppable Force",
+					"image": "assets/characters/malphite/hud/icons2d/malphite_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						130,
+						130,
+						115,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for @KnockupDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700
+						],
+						"KnockupDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.9,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							0,
+							1.5,
+							1.75,
+							2,
+							0,
+							0,
+							0
+						],
+						"1": [
+							0,
+							200,
+							300,
+							400,
+							0,
+							0,
+							0
+						],
+						"2": [
+							0,
+							1.5,
+							1.5,
+							1.5,
+							0,
+							0,
+							0
+						]
+					},
+					"dataKey": "Characters/Malphite/Spells/UFSlashAbility/UFSlash"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0,
-					1.5,
-					1.75,
-					2,
-					0,
-					0,
-					0
-				],
-				"1": [
-					0,
-					200,
-					300,
-					400,
-					0,
-					0,
-					0
-				],
-				"2": [
-					0,
-					1.5,
-					1.5,
-					1.5,
-					0,
-					0,
-					0
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				130,
-				130,
-				115,
-				100,
-				100,
-				100,
-				100
-			],
-			"name": "Unstoppable Force",
-			"tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for @KnockupDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>."
+			]
 		}
 	}
 }

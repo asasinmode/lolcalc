@@ -29,516 +29,541 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"ArenaCooldownMod": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"HealRatio": [
-					0.055,
-					0.055,
-					0.055,
-					0.055,
-					0.055,
-					0.055,
-					0.055
-				]
-			},
-			"spellCalculations": {
-				"HealAmount": {
-					"mFormulaParts": [
-						{
-							"mStat": 12,
-							"mDataValue": "HealRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"HealCooldown": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 12,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Happy Hour",
+					"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
+					"cooldownTime": [
+						12,
+						12,
+						12,
+						12,
+						12,
+						12,
+						12
+					],
+					"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. ",
+					"dataValues": {
+						"ArenaCooldownMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HealRatio": [
+							0.055,
+							0.055,
+							0.055,
+							0.055,
+							0.055,
+							0.055,
+							0.055
+						]
+					},
+					"spellCalculations": {
+						"HealAmount": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": -2
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": -2
-								},
-								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": -2
+									"mStat": 12,
+									"mDataValue": "HealRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
+						},
+						"HealCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 12,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -2
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -2
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Gragas/Spells/GragasPassiveAbility/GragasPassive"
 				}
-			},
-			"cooldownTime": [
-				12,
-				12,
-				12,
-				12,
-				12,
-				12,
-				12
-			],
-			"name": "Happy Hour",
-			"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. "
+			]
 		},
 		"q": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				]
-			},
-			"spellCalculations": {
-				"MinDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"MaxDamage": {
-					"mMultiplier": {
-						"mNumber": 1.5
+			"variants": [
+				{
+					"name": "Barrel Roll",
+					"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
+					"mana": [
+						80,
+						80,
+						80,
+						80,
+						80,
+						80
+					],
+					"cooldownTime": [
+						11,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Gragas rolls a cask that explodes after @Effect4Amount@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @Effect2Amount@ and @Effect2Amount*1.5@% for @Effect3Amount@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
+					"dataValues": {
+						"BaseDamage": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						]
 					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "MinDamage"
+					"spellCalculations": {
+						"MinDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MaxDamage": {
+							"mMultiplier": {
+								"mNumber": 1.5
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "MinDamage"
+						}
+					},
+					"effectAmount": {
+						"0": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						],
+						"1": [
+							35,
+							40,
+							45,
+							50,
+							55,
+							60,
+							65
+						],
+						"2": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"3": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"4": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"5": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"6": [
+							70,
+							70,
+							70,
+							70,
+							70,
+							70,
+							70
+						]
+					},
+					"dataKey": "Characters/Gragas/Spells/GragasQAbility/GragasQ"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				],
-				"1": [
-					35,
-					40,
-					45,
-					50,
-					55,
-					60,
-					65
-				],
-				"2": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"3": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"4": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"5": [
-					150,
-					150,
-					150,
-					150,
-					150,
-					150,
-					150
-				],
-				"6": [
-					70,
-					70,
-					70,
-					70,
-					70,
-					70,
-					70
-				]
-			},
-			"mana": [
-				80,
-				80,
-				80,
-				80,
-				80,
-				80
-			],
-			"cooldownTime": [
-				11,
-				10,
-				9,
-				8,
-				7,
-				6,
-				6
-			],
-			"name": "Barrel Roll",
-			"tooltip": "Gragas rolls a cask that explodes after @Effect4Amount@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @Effect2Amount@ and @Effect2Amount*1.5@% for @Effect3Amount@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early."
+			]
 		},
 		"w": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"AttackRangeBuff": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"MaxHPPercentDamage": [
-					7,
-					7,
-					7,
-					7,
-					7,
-					7,
-					7
-				],
-				"BaseDamageReduction": [
-					8,
-					10,
-					12,
-					14,
-					16,
-					18,
-					20
-				],
-				"DamageReductionAP": [
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04
-				],
-				"BaseDamage": [
-					-10,
-					20,
-					50,
-					80,
-					110,
-					140,
-					170
-				],
-				"BaseDamageAP": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				],
-				"MonsterDamageCap": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"DefenseDuration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"AttackDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"TurretDamageMod": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"DamageReduction": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamageReduction",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "DamageReductionAP",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Drunken Rage",
+					"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png",
+					"mana": [
+						30,
+						30,
+						30,
+						30,
+						30,
+						30
 					],
-					"mDisplayAsPercent": true
-				},
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"cooldownTime": [
+						5,
+						5,
+						5,
+						5,
+						5,
+						5,
+						5
+					],
+					"tooltip": "Gragas samples his brew, reducing incoming damage by @DamageReduction@ for @DefenseDuration@ seconds and empowering his next Attack to deal an additional <magicDamage>@TotalDamage@</magicDamage> plus <magicDamage>@MaxHPPercentDamage@% max Health magic damage</magicDamage> to the target and surrounding enemies.",
+					"dataValues": {
+						"AttackRangeBuff": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"MaxHPPercentDamage": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"BaseDamageReduction": [
+							8,
+							10,
+							12,
+							14,
+							16,
+							18,
+							20
+						],
+						"DamageReductionAP": [
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04
+						],
+						"BaseDamage": [
+							-10,
+							20,
+							50,
+							80,
+							110,
+							140,
+							170
+						],
+						"BaseDamageAP": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"MonsterDamageCap": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"DefenseDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"AttackDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"TurretDamageMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"DamageReduction": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamageReduction",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "DamageReductionAP",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						},
-						{
-							"mDataValue": "BaseDamageAP",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "BaseDamageAP",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Gragas/Spells/GragasWAbility/GragasW"
 				}
-			},
-			"mana": [
-				30,
-				30,
-				30,
-				30,
-				30,
-				30
-			],
-			"cooldownTime": [
-				5,
-				5,
-				5,
-				5,
-				5,
-				5,
-				5
-			],
-			"name": "Drunken Rage",
-			"tooltip": "Gragas samples his brew, reducing incoming damage by @DamageReduction@ for @DefenseDuration@ seconds and empowering his next Attack to deal an additional <magicDamage>@TotalDamage@</magicDamage> plus <magicDamage>@MaxHPPercentDamage@% max Health magic damage</magicDamage> to the target and surrounding enemies."
+			]
 		},
 		"e": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					35,
-					80,
-					125,
-					170,
-					215,
-					260,
-					305
-				],
-				"APRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"CooldownRefund": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"StunDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"DashSpeed": [
-					900,
-					900,
-					900,
-					900,
-					900,
-					900,
-					900
-				],
-				"HitboxArea": [
-					180,
-					180,
-					180,
-					180,
-					180,
-					180,
-					180
-				],
-				"ForwardHitbox": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Body Slam",
+					"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						14,
+						14,
+						13.5,
+						13,
+						12.5,
+						12,
+						12
+					],
+					"tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for @StunDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to them.<br><br>This Ability's Cooldown is reduced by @CooldownRefund*100@% if Gragas collides with an enemy.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							80,
+							125,
+							170,
+							215,
+							260,
+							305
+						],
+						"APRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"CooldownRefund": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"StunDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"DashSpeed": [
+							900,
+							900,
+							900,
+							900,
+							900,
+							900,
+							900
+						],
+						"HitboxArea": [
+							180,
+							180,
+							180,
+							180,
+							180,
+							180,
+							180
+						],
+						"ForwardHitbox": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Gragas/Spells/GragasEAbility/GragasE"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				14,
-				14,
-				13.5,
-				13,
-				12.5,
-				12,
-				12
-			],
-			"name": "Body Slam",
-			"tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for @StunDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to them.<br><br>This Ability's Cooldown is reduced by @CooldownRefund*100@% if Gragas collides with an enemy."
+			]
 		},
 		"r": {
-			"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					100,
-					200,
-					300,
-					400,
-					500,
-					600,
-					700
-				],
-				"APRatio": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				],
-				"KnockbackDistance": [
-					900,
-					900,
-					900,
-					900,
-					900,
-					900,
-					900
-				]
-			},
-			"spellCalculations": {
-				"DamageDone": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Explosive Cask",
+					"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						100,
+						100,
+						85,
+						70,
+						70,
+						70,
+						70
+					],
+					"tooltip": "Gragas hurls his cask, dealing <magicDamage>@DamageDone@ magic damage</magicDamage> and <status>Knocking Away</status> enemies from the impact zone.",
+					"dataValues": {
+						"BaseDamage": [
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700
+						],
+						"APRatio": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"KnockbackDistance": [
+							900,
+							900,
+							900,
+							900,
+							900,
+							900,
+							900
+						]
+					},
+					"spellCalculations": {
+						"DamageDone": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Gragas/Spells/GragasRAbility/GragasR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				100,
-				100,
-				85,
-				70,
-				70,
-				70,
-				70
-			],
-			"name": "Explosive Cask",
-			"tooltip": "Gragas hurls his cask, dealing <magicDamage>@DamageDone@ magic damage</magicDamage> and <status>Knocking Away</status> enemies from the impact zone."
+			]
 		}
 	}
 }

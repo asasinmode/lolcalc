@@ -29,570 +29,1533 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/hwei/hud/icons2d/hweipassive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"InkTimeout": [
-					25000,
-					25000,
-					25000,
-					25000,
-					25000,
-					25000,
-					25000
-				],
-				"Duration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 35,
-							"mEndValue": 230,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mCoefficient": 0.35,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				}
-			},
-			"name": "Signature of the Visionary",
-			"tooltip": "Hwei's damaging Abilities against enemy champions mark them for @Duration@ seconds.<br><br>Hitting marked enemies with a second damaging Ability creates an explosion underneath them dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in range.",
-			"tooltipExtended": "{{Spell_HweiPassive_Tooltip}}<br><br><rules>Each Ability can only trigger this effect once per target.</rules>"
-		},
-		"q": {
-			"image": "assets/characters/hwei/hud/icons2d/hweiq.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"Tooltip_QQBaseDamage": [
-					20,
-					50,
-					80,
-					110,
-					140,
-					170,
-					200
-				],
-				"Tooltip_QQBonusDamage": [
-					2,
-					3,
-					4,
-					5,
-					6,
-					7,
-					8
-				],
-				"Tooltip_QWBaseDamage": [
-					35,
-					60,
-					85,
-					110,
-					135,
-					160,
-					185
-				],
-				"Tooltip_QWBonusDamageMult": [
-					1.625,
-					2,
-					2.375,
-					2.75,
-					3.125,
-					3.5,
-					3.875
-				],
-				"Tooltip_QEBaseDamage": [
-					5,
-					20,
-					35,
-					50,
-					65,
-					80,
-					95
-				],
-				"Tooltip_QEBaseDPS": [
-					5,
-					20,
-					35,
-					50,
-					65,
-					80,
-					95
-				]
-			},
-			"spellCalculations": {
-				"Tooltip_QQDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_QQBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.7,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"Tooltip_QWDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_QWBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.25,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"Tooltip_QWBonusDamage": {
-					"mMultiplier": {
-						"mDataValue": "Tooltip_QWBonusDamageMult"
+			"variants": [
+				{
+					"name": "Signature of the Visionary",
+					"image": "assets/characters/hwei/hud/icons2d/hweipassive.png",
+					"tooltip": "Hwei's damaging Abilities against enemy champions mark them for @Duration@ seconds.<br><br>Hitting marked enemies with a second damaging Ability creates an explosion underneath them dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in range.",
+					"tooltipExtended": "{{Spell_HweiPassive_Tooltip}}<br><br><rules>Each Ability can only trigger this effect once per target.</rules>",
+					"dataValues": {
+						"InkTimeout": [
+							25000,
+							25000,
+							25000,
+							25000,
+							25000,
+							25000,
+							25000
+						],
+						"Duration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
 					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "Tooltip_QWDamage"
-				},
-				"Tooltip_QEDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_QEBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.3,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"Tooltip_QEDamagePerSecond": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_QEBaseDPS",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.24,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				80,
-				90,
-				100,
-				110,
-				120,
-				120
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9,
-				8,
-				7,
-				6,
-				6
-			],
-			"name": "Subject: Disaster",
-			"tooltip": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>Hwei launches a blazing fast fireball that explodes on the first enemy hit, dealing <magicDamage>@Tooltip_QQDamage@ plus @Tooltip_QQBonusDamage@% max health magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>Hwei strikes over far distances with a delayed lightning bolt, dealing <magicDamage>@Tooltip_QWDamage@ magic damage</magicDamage>. Hitting an Isolated or <status>Immobilized</status> target increases the damage up to <magicDamage>@Tooltip_QWBonusDamage@ magic damage</magicDamage>, based on the target's missing health.<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>Hwei unleashes a path of eruptions, dealing <magicDamage>@Tooltip_QEDamage@ magic damage</magicDamage> in an area and leaving behind pools of lava that <status>Slow</status> enemies by @spell.HweiQE:SlowPercent@% and deal <magicDamage>@Tooltip_QEDamagePerSecond@ magic damage per second</magicDamage> for @spell.HweiQE:Duration@ seconds.",
-			"tooltipExtended": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>{{Spell_HweiQQ_Tooltip}}<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>{{Spell_HweiQW_Tooltip}}<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>{{Spell_HweiQE_Tooltip}}"
-		},
-		"w": {
-			"image": "assets/characters/hwei/hud/icons2d/hweiw.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"Tooltip_WQBaseMoveSpeed": [
-					27.5,
-					30,
-					32.5,
-					35,
-					37.5,
-					40,
-					42.5
-				],
-				"Tooltip_WQAreaDuration": [
-					3.5,
-					4,
-					4.5,
-					5,
-					5.5,
-					6,
-					6.5
-				],
-				"Tooltip_WWShieldAmountBase": [
-					75,
-					100,
-					125,
-					150,
-					175,
-					200,
-					225
-				],
-				"Tooltip_WEBaseOnHitDamage": [
-					10,
-					20,
-					30,
-					40,
-					50,
-					60,
-					70
-				],
-				"Tooltip_WEOnHitManaRestore": [
-					40,
-					45,
-					50,
-					55,
-					60,
-					65,
-					70
-				]
-			},
-			"spellCalculations": {
-				"Tooltip_WQMoveSpeed": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_WQBaseMoveSpeed",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.03,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"Tooltip_WWShieldAmount": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_WWShieldAmountBase",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"Tooltip_WWStartShieldAmount": {
-					"mMultiplier": {
-						"mNumber": 0.5
-					},
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_WWShieldAmountBase",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"Tooltip_WEOnHitDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_WEBaseOnHitDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.15,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				90,
-				95,
-				100,
-				105,
-				110,
-				110
-			],
-			"cooldownTime": [
-				18,
-				18,
-				17.5,
-				17,
-				16.5,
-				16,
-				16
-			],
-			"name": "Subject: Serenity",
-			"tooltip": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>Hwei launches a current of swift waters in a line that grants allies <speed>@Tooltip_WQMoveSpeed@ Move Speed</speed>.<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>Hwei forms a protective pool that grants <shield>@Tooltip_WWShieldAmount@ Shields</shield> over time to allied champions inside reduced by @spell.HweiWW:ToolTipAllyMod*100@% for allies.<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>Hwei creates three swirling lights that empower his next three Abilities or Attacks to deal an additional <magicDamage>@Tooltip_WEOnHitDamage@ magic damage</magicDamage> and restore <scaleMana>@Tooltip_WEOnHitManaRestore@ Mana</scaleMana> each.",
-			"tooltipExtended": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>{{Spell_HweiWQ_Tooltip}}<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>{{Spell_HweiWW_Tooltip}}<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>{{Spell_HweiWE_Tooltip}}"
-		},
-		"e": {
-			"image": "assets/characters/hwei/hud/icons2d/hweie.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"Tooltip_EQBaseDamage": [
-					30,
-					70,
-					110,
-					150,
-					190,
-					230,
-					270
-				],
-				"Tooltip_EWBaseDamage": [
-					30,
-					70,
-					110,
-					150,
-					190,
-					230,
-					270
-				],
-				"Tooltip_EWRootDuration": [
-					1,
-					1.2,
-					1.4,
-					1.6,
-					1.8,
-					2,
-					2.2
-				],
-				"Tooltip_EEBaseDamage": [
-					30,
-					70,
-					110,
-					150,
-					190,
-					230,
-					270
-				],
-				"Tooltip_EESlowAmount": [
-					32.5,
-					40,
-					47.5,
-					55,
-					62.5,
-					70,
-					77.5
-				],
-				"Tooltip_EQFleeDuration": [
-					0.875,
-					1,
-					1.125,
-					1.25,
-					1.375,
-					1.5,
-					1.625
-				]
-			},
-			"spellCalculations": {
-				"Tooltip_EQDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_EQBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.65,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"Tooltip_EWDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_EWBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.65,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"Tooltip_EEDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tooltip_EEBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.65,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				70
-			],
-			"cooldownTime": [
-				13,
-				13,
-				12.5,
-				12,
-				11.5,
-				11,
-				11
-			],
-			"name": "Subject: Torment",
-			"tooltip": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>Hwei launches a terrifying face that causes the first enemy hit to <status>Flee</status> for @Tooltip_EQFleeDuration@ second(s) and take <magicDamage>@Tooltip_EQDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>Hwei forms an eye that lingers and provides vision locking onto the first enemy champion that enters and launching a homing missile that <status>Roots</status> the first enemy hit for @Tooltip_EWRootDuration@ seconds dealing <magicDamage>@Tooltip_EWDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>Hwei paints a set of jaws at a target location that <status>Drags</status> enemies to the center dealing <magicDamage>@Tooltip_EEDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies caught by @Tooltip_EESlowAmount@% decaying over 1.25 seconds.",
-			"tooltipExtended": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>{{Spell_HweiEQ_Tooltip}}<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>{{Spell_HweiEW_Tooltip}}<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>{{Spell_HweiEE_Tooltip}}"
-		},
-		"r": {
-			"image": "assets/characters/hwei/hud/icons2d/hweir.png",
-			"maxLevel": 3,
-			"dataValues": {
-				"RBaseDamage": [
-					75,
-					200,
-					325,
-					450,
-					575,
-					700,
-					825
-				],
-				"Duration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"BaseDamageOverTime": [
-					0,
-					10,
-					20,
-					30,
-					40,
-					50,
-					60
-				],
-				"SlowPercentPerStack": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"SlowDuration": [
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35
-				],
-				"MaxDamageHelper": [
-					100,
-					230,
-					360,
-					490,
-					620,
-					750,
-					880
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"DamageOverTime": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamageOverTime",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.05,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"TotalMaxDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mSubparts": [
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
 								{
-									"mDataValue": "RBaseDamage"
+									"mStartValue": 35,
+									"mEndValue": 230,
+									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{
-									"mPart1": {
-										"mDataValue": "BaseDamageOverTime"
-									},
-									"mPart2": {
-										"mDataValue": "Duration"
-									}
+									"mCoefficient": 0.35,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "{1f86669b}"
+				}
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Subject: Disaster",
+					"image": "assets/characters/hwei/hud/icons2d/hweiq.png",
+					"mana": [
+						80,
+						90,
+						100,
+						110,
+						120,
+						120
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>Hwei launches a blazing fast fireball that explodes on the first enemy hit, dealing <magicDamage>@Tooltip_QQDamage@ plus @Tooltip_QQBonusDamage@% max health magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>Hwei strikes over far distances with a delayed lightning bolt, dealing <magicDamage>@Tooltip_QWDamage@ magic damage</magicDamage>. Hitting an Isolated or <status>Immobilized</status> target increases the damage up to <magicDamage>@Tooltip_QWBonusDamage@ magic damage</magicDamage>, based on the target's missing health.<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>Hwei unleashes a path of eruptions, dealing <magicDamage>@Tooltip_QEDamage@ magic damage</magicDamage> in an area and leaving behind pools of lava that <status>Slow</status> enemies by @spell.HweiQE:SlowPercent@% and deal <magicDamage>@Tooltip_QEDamagePerSecond@ magic damage per second</magicDamage> for @spell.HweiQE:Duration@ seconds.",
+					"tooltipExtended": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>{{Spell_HweiQQ_Tooltip}}<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>{{Spell_HweiQW_Tooltip}}<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>{{Spell_HweiQE_Tooltip}}",
+					"dataValues": {
+						"Tooltip_QQBaseDamage": [
+							20,
+							50,
+							80,
+							110,
+							140,
+							170,
+							200
+						],
+						"Tooltip_QQBonusDamage": [
+							2,
+							3,
+							4,
+							5,
+							6,
+							7,
+							8
+						],
+						"Tooltip_QWBaseDamage": [
+							35,
+							60,
+							85,
+							110,
+							135,
+							160,
+							185
+						],
+						"Tooltip_QWBonusDamageMult": [
+							1.625,
+							2,
+							2.375,
+							2.75,
+							3.125,
+							3.5,
+							3.875
+						],
+						"Tooltip_QEBaseDamage": [
+							5,
+							20,
+							35,
+							50,
+							65,
+							80,
+							95
+						],
+						"Tooltip_QEBaseDPS": [
+							5,
+							20,
+							35,
+							50,
+							65,
+							80,
+							95
+						]
+					},
+					"spellCalculations": {
+						"Tooltip_QQDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_QQBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Tooltip_QWDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_QWBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Tooltip_QWBonusDamage": {
+							"mMultiplier": {
+								"mDataValue": "Tooltip_QWBonusDamageMult"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "Tooltip_QWDamage"
+						},
+						"Tooltip_QEDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_QEBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Tooltip_QEDamagePerSecond": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_QEBaseDPS",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.24,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiQAbility/HweiQ"
+				},
+				{
+					"name": "Molten Fissure",
+					"image": "assets/characters/hwei/hud/icons2d/hweiqe.png",
+					"mana": [
+						80,
+						90,
+						100,
+						110,
+						120,
+						120
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Hwei paints a field of exploding volcanic eruptions, creating lingering lava in its path. Every eruption deals <magicDamage>@spell.HweiQ:Tooltip_QEDamage@ magic damage</magicDamage> to enemies hit. Enemies in the lava area are dealt <magicDamage>@spell.HweiQ:Tooltip_QEDamagePerSecond@ magic damage per second</magicDamage> and <status>Slowed</status> by @spell.HweiQE:SlowPercent@%. Each lava pool lasts @spell.HweiQE:Duration@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							5,
+							20,
+							35,
+							50,
+							65,
+							80,
+							95
+						],
+						"BaseDPS": [
+							5,
+							20,
+							35,
+							50,
+							65,
+							80,
+							95
+						],
+						"Duration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"Radius": [
+							225,
+							225,
+							225,
+							225,
+							225,
+							225,
+							225
+						],
+						"SlowPercent": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"DamageDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MinionDamageRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"JungleDamageRatio": [
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"DamagePerSecond": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDPS",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.24,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{a8f705ac}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 30,
+									"mScalePastDefaultMaxLevel": false,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiQAbility/HweiQE"
+				},
+				{
+					"name": "Devastating Fire",
+					"image": "assets/characters/hwei/hud/icons2d/hweiqq.png",
+					"mana": [
+						80,
+						90,
+						100,
+						110,
+						120,
+						120
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Hwei paints a blazing fireball that flies out in the target direction. It explodes on the first enemy hit, dealing <magicDamage>@spell.HweiQ:Tooltip_QQDamage@ plus @spell.HweiQ:Tooltip_QQBonusDamage@% max health magic damage</magicDamage> to all enemies in an area.",
+					"dataValues": {
+						"BaseDamage": [
+							20,
+							50,
+							80,
+							110,
+							140,
+							170,
+							200
+						],
+						"Radius": [
+							175,
+							175,
+							175,
+							175,
+							175,
+							175,
+							175
+						],
+						"BonusDamage": [
+							2,
+							3,
+							4,
+							5,
+							6,
+							7,
+							8
+						],
+						"MaxBonusDamage": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiQAbility/HweiQQ"
+				},
+				{
+					"name": "Severing Bolt",
+					"image": "assets/characters/hwei/hud/icons2d/hweiqw.png",
+					"mana": [
+						80,
+						90,
+						100,
+						110,
+						120,
+						120
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9,
+						8,
+						7,
+						6,
+						6
+					],
+					"tooltip": "Hwei paints a long-range, delayed lightning bolt at the target location, dealing <magicDamage>@spell.HweiQ:Tooltip_QWDamage@ magic damage</magicDamage>. Isolated or <status>Immobilized</status> enemies take increased damage based on missing health, up to <magicDamage>@spell.HweiQ:Tooltip_QWBonusDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							60,
+							85,
+							110,
+							135,
+							160,
+							185
+						],
+						"Delay": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"MinionDamageMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"Radius": [
+							225,
+							225,
+							225,
+							225,
+							225,
+							225,
+							225
+						],
+						"BonusDamageMult": [
+							1.625,
+							2,
+							2.375,
+							2.75,
+							3.125,
+							3.5,
+							3.875
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"BonusDamage": {
+							"mMultiplier": {
+								"mDataValue": "BonusDamageMult"
+							},
+							"mModifiedGameCalculation": "Damage"
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiQAbility/HweiQW"
+				},
+				{
+					"name": "Wash Brush",
+					"image": "assets/characters/hwei/hud/icons2d/hweiwashbrush.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Hwei clears his paintbrush and returns to base Abilities. Does not cost Mana or Cooldowns.",
+					"dataKey": "Characters/Hwei/Spells/HweiRAbility/HweiWashBrush"
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Subject: Serenity",
+					"image": "assets/characters/hwei/hud/icons2d/hweiw.png",
+					"mana": [
+						90,
+						95,
+						100,
+						105,
+						110,
+						110
+					],
+					"cooldownTime": [
+						18,
+						18,
+						17.5,
+						17,
+						16.5,
+						16,
+						16
+					],
+					"tooltip": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>Hwei launches a current of swift waters in a line that grants allies <speed>@Tooltip_WQMoveSpeed@ Move Speed</speed>.<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>Hwei forms a protective pool that grants <shield>@Tooltip_WWShieldAmount@ Shields</shield> over time to allied champions inside reduced by @spell.HweiWW:ToolTipAllyMod*100@% for allies.<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>Hwei creates three swirling lights that empower his next three Abilities or Attacks to deal an additional <magicDamage>@Tooltip_WEOnHitDamage@ magic damage</magicDamage> and restore <scaleMana>@Tooltip_WEOnHitManaRestore@ Mana</scaleMana> each.",
+					"tooltipExtended": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>{{Spell_HweiWQ_Tooltip}}<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>{{Spell_HweiWW_Tooltip}}<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>{{Spell_HweiWE_Tooltip}}",
+					"dataValues": {
+						"Tooltip_WQBaseMoveSpeed": [
+							27.5,
+							30,
+							32.5,
+							35,
+							37.5,
+							40,
+							42.5
+						],
+						"Tooltip_WQAreaDuration": [
+							3.5,
+							4,
+							4.5,
+							5,
+							5.5,
+							6,
+							6.5
+						],
+						"Tooltip_WWShieldAmountBase": [
+							75,
+							100,
+							125,
+							150,
+							175,
+							200,
+							225
+						],
+						"Tooltip_WEBaseOnHitDamage": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"Tooltip_WEOnHitManaRestore": [
+							40,
+							45,
+							50,
+							55,
+							60,
+							65,
+							70
+						]
+					},
+					"spellCalculations": {
+						"Tooltip_WQMoveSpeed": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_WQBaseMoveSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
-							"__type": "SumOfSubPartsCalculationPart"
+							"mDisplayAsPercent": true
 						},
-						{
-							"mCoefficient": 0.95,
-							"__type": "StatByCoefficientCalculationPart"
+						"Tooltip_WWShieldAmount": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_WWShieldAmountBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Tooltip_WWStartShieldAmount": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_WWShieldAmountBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Tooltip_WEOnHitDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_WEBaseOnHitDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.15,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiWAbility/HweiW"
+				},
+				{
+					"name": "Stirring Lights",
+					"image": "assets/characters/hwei/hud/icons2d/hweiwe.png",
+					"mana": [
+						90,
+						95,
+						100,
+						105,
+						110,
+						110
+					],
+					"cooldownTime": [
+						18,
+						18,
+						17.5,
+						17,
+						16.5,
+						16,
+						16
+					],
+					"tooltip": "Hwei paints three swirling lights that circle him causing his next three Abilities or Attacks to deal an additional <magicDamage>@spell.HweiW:Tooltip_WEOnHitDamage@ magic damage</magicDamage> and grant <scaleMana>@spell.HweiW:Tooltip_WEOnHitManaRestore@ Mana</scaleMana> on hit.",
+					"dataValues": {
+						"BaseOnHitDamage": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"Duration": [
+							9,
+							9,
+							9,
+							9,
+							9,
+							9,
+							9
+						],
+						"OnHitManaRestore": [
+							40,
+							45,
+							50,
+							55,
+							60,
+							65,
+							70
+						],
+						"ManaCostHelper": [
+							-85,
+							-90,
+							-95,
+							-100,
+							-105,
+							-110,
+							-115
+						]
+					},
+					"spellCalculations": {
+						"OnHitDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseOnHitDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.15,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalOnHitDamage": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"mModifiedGameCalculation": "OnHitDamage"
+						},
+						"{a14e3318}": {
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mDataValue": "OnHitManaRestore"
+										},
+										{
+											"mNumber": 3
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiWAbility/HweiWE"
+				},
+				{
+					"name": "Fleeting Current",
+					"image": "assets/characters/hwei/hud/icons2d/hweiwq.png",
+					"mana": [
+						90,
+						95,
+						100,
+						105,
+						110,
+						110
+					],
+					"cooldownTime": [
+						18,
+						18,
+						17.5,
+						17,
+						16.5,
+						16,
+						16
+					],
+					"tooltip": "Hwei paints a current of swift waters in a line for @spell.HweiW:Tooltip_WQAreaDuration@ seconds that grants <speed>@spell.HweiW:Tooltip_WQMoveSpeed@ Move Speed</speed> to himself and allied champions.",
+					"dataValues": {
+						"BaseMoveSpeed": [
+							27.5,
+							30,
+							32.5,
+							35,
+							37.5,
+							40,
+							42.5
+						],
+						"Duration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"AreaWidth": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"AreaDuration": [
+							3.5,
+							4,
+							4.5,
+							5,
+							5.5,
+							6,
+							6.5
+						]
+					},
+					"spellCalculations": {
+						"MoveSpeed": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseMoveSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiWAbility/HweiWQ"
+				},
+				{
+					"name": "Pool of Reflection",
+					"image": "assets/characters/hwei/hud/icons2d/hweiww.png",
+					"mana": [
+						90,
+						95,
+						100,
+						105,
+						110,
+						110
+					],
+					"cooldownTime": [
+						18,
+						18,
+						17.5,
+						17,
+						16.5,
+						16,
+						16
+					],
+					"tooltip": "Hwei paints a protective pool at the target location that lasts for @spell.HweiWW:AreaDuration@ seconds granting an immediate <shield>@spell.HweiW:Tooltip_WWStartShieldAmount@ Shields</shield>, increasing up to <shield>@spell.HweiW:Tooltip_WWShieldAmount@ Shields</shield> over @spell.HweiWW:SecsToFullStack@ seconds to allied champions in the area reduced by @spell.HweiWW:ToolTipAllyMod*100@% for allies.",
+					"dataValues": {
+						"AreaDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"ShieldAmountBase": [
+							75,
+							100,
+							125,
+							150,
+							175,
+							200,
+							225
+						],
+						"ShieldAPRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"ShieldDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SecsToFullStack": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"ZoneRadius": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"AllyMod": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"ToolTipAllyMod": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						]
+					},
+					"spellCalculations": {
+						"ShieldAmount": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShieldAmountBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{20a3d822}": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShieldAmountBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiWAbility/HweiWW"
+				},
+				{
+					"name": "Wash Brush",
+					"image": "assets/characters/hwei/hud/icons2d/hweiwashbrush.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Hwei clears his paintbrush and returns to base Abilities. Does not cost Mana or Cooldowns.",
+					"dataKey": "Characters/Hwei/Spells/HweiRAbility/HweiWashBrush"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				140,
-				140,
-				115,
-				80,
-				80,
-				80,
-				80
-			],
-			"name": "Spiraling Despair",
-			"tooltip": "Hwei launches a vision of pure despair that sticks to an enemy champion for @Duration@ seconds. The vision expands over time applying a <status>Slow</status> to enemies for @SlowPercentPerStack@% stacking every 0.25 seconds, and dealing <magicDamage>@DamageOverTime@ magic damage per second</magicDamage>.<br><br>Upon completion, the vision shatters, dealing <magicDamage>@Damage@ magic damage</magicDamage>."
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Subject: Torment",
+					"image": "assets/characters/hwei/hud/icons2d/hweie.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
+					],
+					"cooldownTime": [
+						13,
+						13,
+						12.5,
+						12,
+						11.5,
+						11,
+						11
+					],
+					"tooltip": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>Hwei launches a terrifying face that causes the first enemy hit to <status>Flee</status> for @Tooltip_EQFleeDuration@ second(s) and take <magicDamage>@Tooltip_EQDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>Hwei forms an eye that lingers and provides vision locking onto the first enemy champion that enters and launching a homing missile that <status>Roots</status> the first enemy hit for @Tooltip_EWRootDuration@ seconds dealing <magicDamage>@Tooltip_EWDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>Hwei paints a set of jaws at a target location that <status>Drags</status> enemies to the center dealing <magicDamage>@Tooltip_EEDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies caught by @Tooltip_EESlowAmount@% decaying over 1.25 seconds.",
+					"tooltipExtended": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>{{Spell_HweiEQ_Tooltip}}<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>{{Spell_HweiEW_Tooltip}}<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>{{Spell_HweiEE_Tooltip}}",
+					"dataValues": {
+						"Tooltip_EQBaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"Tooltip_EWBaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"Tooltip_EWRootDuration": [
+							1,
+							1.2,
+							1.4,
+							1.6,
+							1.8,
+							2,
+							2.2
+						],
+						"Tooltip_EEBaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"Tooltip_EESlowAmount": [
+							32.5,
+							40,
+							47.5,
+							55,
+							62.5,
+							70,
+							77.5
+						],
+						"Tooltip_EQFleeDuration": [
+							0.875,
+							1,
+							1.125,
+							1.25,
+							1.375,
+							1.5,
+							1.625
+						]
+					},
+					"spellCalculations": {
+						"Tooltip_EQDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_EQBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Tooltip_EWDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_EWBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Tooltip_EEDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tooltip_EEBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiEAbility/HweiE"
+				},
+				{
+					"name": "Crushing Maw",
+					"image": "assets/characters/hwei/hud/icons2d/hweiee.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
+					],
+					"cooldownTime": [
+						13,
+						13,
+						12.5,
+						12,
+						11.5,
+						11,
+						11
+					],
+					"tooltip": "Hwei paints crushing jaws that deal <magicDamage>@spell.HweiE:Tooltip_EEDamage@ magic damage</magicDamage> to enemies hit and <status>Drags</status> them toward the center, <status>Slowing</status> them by @spell.HweiE:Tooltip_EESlowAmount@% that decays over 1.25 seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"Delay": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"Width": [
+							320,
+							320,
+							320,
+							320,
+							320,
+							320,
+							320
+						],
+						"Depth": [
+							340,
+							340,
+							340,
+							340,
+							340,
+							340,
+							340
+						],
+						"SlowAmount": [
+							32.5,
+							40,
+							47.5,
+							55,
+							62.5,
+							70,
+							77.5
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiEAbility/HweiEE"
+				},
+				{
+					"name": "Grim Visage",
+					"image": "assets/characters/hwei/hud/icons2d/hweieq.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
+					],
+					"cooldownTime": [
+						13,
+						13,
+						12.5,
+						12,
+						11.5,
+						11,
+						11
+					],
+					"tooltip": "Hwei launches a terrifying face that strikes the first enemy hit, causing them to <status>Flee</status> for @spell.HweiEQ:FleeDuration@ second(s) and dealing <magicDamage>@spell.HweiE:Tooltip_EQDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"FleeDuration": [
+							0.875,
+							1,
+							1.125,
+							1.25,
+							1.375,
+							1.5,
+							1.625
+						],
+						"MaxSlow": [
+							99,
+							99,
+							99,
+							99,
+							99,
+							99,
+							99
+						],
+						"MinSlow": [
+							70,
+							70,
+							70,
+							70,
+							70,
+							70,
+							70
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiEAbility/HweiEQ"
+				},
+				{
+					"name": "Gaze of the Abyss",
+					"image": "assets/characters/hwei/hud/icons2d/hweiew.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
+					],
+					"cooldownTime": [
+						13,
+						13,
+						12.5,
+						12,
+						11.5,
+						11,
+						11
+					],
+					"tooltip": "Hwei paints an abyssal eye at the target location that grants vision, locking onto the nearest enemy champion and launches a homing missile at them <status>Rooting</status> the first enemy in its path for @spell.HweiE:Tooltip_EWRootDuration@ seconds and dealing <magicDamage>@spell.HweiE:Tooltip_EWDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"StareRadius": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"SetupDelay": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"MinSetupDelay": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"RootDuration": [
+							1,
+							1.2,
+							1.4,
+							1.6,
+							1.8,
+							2,
+							2.2
+						],
+						"BaseDamage": [
+							30,
+							70,
+							110,
+							150,
+							190,
+							230,
+							270
+						],
+						"FireDelay": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"StareDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"MinStareDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"VisibilityRadius": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiEAbility/HweiEW"
+				},
+				{
+					"name": "Wash Brush",
+					"image": "assets/characters/hwei/hud/icons2d/hweiwashbrush.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Hwei clears his paintbrush and returns to base Abilities. Does not cost Mana or Cooldowns.",
+					"dataKey": "Characters/Hwei/Spells/HweiRAbility/HweiWashBrush"
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Spiraling Despair",
+					"image": "assets/characters/hwei/hud/icons2d/hweir.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						140,
+						140,
+						115,
+						80,
+						80,
+						80,
+						80
+					],
+					"tooltip": "Hwei launches a vision of pure despair that sticks to an enemy champion for @Duration@ seconds. The vision expands over time applying a <status>Slow</status> to enemies for @SlowPercentPerStack@% stacking every 0.25 seconds, and dealing <magicDamage>@DamageOverTime@ magic damage per second</magicDamage>.<br><br>Upon completion, the vision shatters, dealing <magicDamage>@Damage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"RBaseDamage": [
+							75,
+							200,
+							325,
+							450,
+							575,
+							700,
+							825
+						],
+						"Duration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"BaseDamageOverTime": [
+							0,
+							10,
+							20,
+							30,
+							40,
+							50,
+							60
+						],
+						"SlowPercentPerStack": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"SlowDuration": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"MaxDamageHelper": [
+							100,
+							230,
+							360,
+							490,
+							620,
+							750,
+							880
+						]
+					},
+					"spellCalculations": {
+						"Damage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"DamageOverTime": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamageOverTime",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalMaxDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mDataValue": "RBaseDamage"
+										},
+										{
+											"mPart1": {
+												"mDataValue": "BaseDamageOverTime"
+											},
+											"mPart2": {
+												"mDataValue": "Duration"
+											}
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								},
+								{
+									"mCoefficient": 0.95,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hwei/Spells/HweiRAbility/HweiR"
+				},
+				{
+					"name": "Wash Brush",
+					"image": "assets/characters/hwei/hud/icons2d/hweiwashbrush.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Hwei clears his paintbrush and returns to base Abilities. Does not cost Mana or Cooldowns.",
+					"dataKey": "Characters/Hwei/Spells/HweiRAbility/HweiWashBrush"
+				}
+			]
 		}
 	}
 }

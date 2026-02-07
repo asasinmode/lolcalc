@@ -29,911 +29,936 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/smolder/hud/icons2d/icons_smolder_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"QCritRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"QDamagePerStack": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"WDamagePerStack": [
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55
-				],
-				"EDamagePerStack": [
-					0.12,
-					0.12,
-					0.12,
-					0.12,
-					0.12,
-					0.12,
-					0.12
-				],
-				"EStacksPerAttackTooltip": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				]
-			},
-			"spellCalculations": {
-				"Passive_QDamageIncrease": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mPart1": {
-									"mStat": 8,
-									"mDataValue": "QCritRatio"
-								},
-								"mPart2": {
-									"mSubparts": [
-										{
-											"mNumber": -1
-										},
-										{
-											"mStat": 9,
-											"mCoefficient": 1
-										}
-									]
-								}
-							}
+			"variants": [
+				{
+					"name": "Dragon Practice",
+					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants a stack of <spellName>{{Spell_SmolderP_Name}}</spellName>, which improves Smolder's basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ magic damage</magicDamage> and gain new effects at @spell.SmolderQ:StackTier1@, @spell.SmolderQ:StackTier2@, and @spell.SmolderQ:StackTier3@ stacks.<li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.<li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage> and gain an extra bolt every @EStacksPerAttackTooltip@ stacks.<br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules>",
+					"tooltipExtended": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants Smolder a stack of <spellName>Dragon Practice</spellName>. Stacks increase the damage of Smolders basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ = (</magicDamage><spellName>@TooltipOnly_QStacks@</spellName><magicDamage> * (</magicDamage><spellName>1</spellName><magicDamage> + </magicDamage><spellName>@TooltipOnly_QCritMultiplier@</spellName><magicDamage>)) magic damage</magicDamage> and at <keywordMajor>@Tier3_Breakpoint@</keywordMajor> stacks of <spellName>Dragon Practice</spellName> his burn deals an addition <trueDamage>@Q_tier3_bonus_burn@ max Health true damage</trueDamage>.</li><li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.</li><li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage>.</li><br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules><br>",
+					"dataValues": {
+						"QCritRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"QDamagePerStack": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"WDamagePerStack": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						],
+						"EDamagePerStack": [
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12
+						],
+						"EStacksPerAttackTooltip": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
 						]
 					},
-					"mFormulaParts": [
-						{
-							"mBuffName": "{32bcea5d}",
-							"mIconKey": "%i:Smolder%",
-							"mDataValue": "QDamagePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
+					"spellCalculations": {
+						"Passive_QDamageIncrease": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mStat": 8,
+											"mDataValue": "QCritRatio"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mNumber": -1
+												},
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mFormulaParts": [
+								{
+									"mBuffName": "{32bcea5d}",
+									"mIconKey": "%i:Smolder%",
+									"mDataValue": "QDamagePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"Passive_WDamageIncrease": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{32bcea5d}",
+									"mIconKey": "%i:Smolder%",
+									"mDataValue": "WDamagePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TooltipOnly_QStacks": {
+							"mExpandedTooltipCalculationDisplay": 2,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{32bcea5d}",
+									"mIconKey": "%i:Smolder%",
+									"mDataValue": "QDamagePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"TooltipOnly_QCritMultiplier": {
+							"mExpandedTooltipCalculationDisplay": 2,
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{098531db}",
+									"mIconKey": "%i:scaleCrit%",
+									"mDataValue": "QCritRatio",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"EBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{32bcea5d}",
+									"mIconKey": "%i:Smolder%",
+									"mDataValue": "EDamagePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"Passive_WDamageIncrease": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{32bcea5d}",
-							"mIconKey": "%i:Smolder%",
-							"mDataValue": "WDamagePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TooltipOnly_QStacks": {
-					"mExpandedTooltipCalculationDisplay": 2,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mBuffName": "{32bcea5d}",
-							"mIconKey": "%i:Smolder%",
-							"mDataValue": "QDamagePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"TooltipOnly_QCritMultiplier": {
-					"mExpandedTooltipCalculationDisplay": 2,
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mBuffName": "{098531db}",
-							"mIconKey": "%i:scaleCrit%",
-							"mDataValue": "QCritRatio",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"EBonusDamage": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{32bcea5d}",
-							"mIconKey": "%i:Smolder%",
-							"mDataValue": "EDamagePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "{c72a53d8}"
 				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Dragon Practice",
-			"tooltip": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants a stack of <spellName>{{Spell_SmolderP_Name}}</spellName>, which improves Smolder's basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ magic damage</magicDamage> and gain new effects at @spell.SmolderQ:StackTier1@, @spell.SmolderQ:StackTier2@, and @spell.SmolderQ:StackTier3@ stacks.<li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.<li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage> and gain an extra bolt every @EStacksPerAttackTooltip@ stacks.<br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules>",
-			"tooltipExtended": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants Smolder a stack of <spellName>Dragon Practice</spellName>. Stacks increase the damage of Smolders basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ = (</magicDamage><spellName>@TooltipOnly_QStacks@</spellName><magicDamage> * (</magicDamage><spellName>1</spellName><magicDamage> + </magicDamage><spellName>@TooltipOnly_QCritMultiplier@</spellName><magicDamage>)) magic damage</magicDamage> and at <keywordMajor>@Tier3_Breakpoint@</keywordMajor> stacks of <spellName>Dragon Practice</spellName> his burn deals an addition <trueDamage>@Q_tier3_bonus_burn@ max Health true damage</trueDamage>.</li><li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.</li><li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage>.</li><br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules><br>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/smolder/hud/icons2d/icons_smolder_q1.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					50,
-					65,
-					80,
-					95,
-					110,
-					125,
-					140
-				],
-				"ADRatio": [
-					1.3,
-					1.3,
-					1.3,
-					1.3,
-					1.3,
-					1.3,
-					1.3
-				],
-				"StackTier1": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"StackTier2": [
-					125,
-					125,
-					125,
-					125,
-					125,
-					125,
-					125
-				],
-				"StackTier3": [
-					225,
-					225,
-					225,
-					225,
-					225,
-					225,
-					225
-				],
-				"Tier1_ExplosionRadius": [
-					285,
-					285,
-					285,
-					285,
-					285,
-					285,
-					285
-				],
-				"Tier2_BlowbackDistance": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				],
-				"Tier2_BlowbackAmountBase": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"Tier2_BlowbackExplosionRadius": [
-					150,
-					150,
-					150,
-					150,
-					150,
-					150,
-					150
-				],
-				"Tier2_BlowbackSpreadAngle": [
-					15,
-					15,
-					15,
-					15,
-					15,
-					15,
-					15
-				],
-				"Tier3_TrueDamagePercent": [
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01
-				],
-				"Tier3_MonsterCap": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"CritRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"LifestealMod": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"Tier3_ExecuteThresholdStart": [
-					6.5,
-					6.5,
-					6.5,
-					6.5,
-					6.5,
-					6.5,
-					6.5
-				],
-				"Tier3_DotLength": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"Tier2_BlowbackPercentageDamage": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"minionmod": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"Tier3_Burn_Stack_Mult": [
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0
-				],
-				"ManaRestore": [
-					15,
-					15,
-					15,
-					15,
-					15,
-					15,
-					15
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mPart1": {
-									"mStat": 8,
-									"mDataValue": "CritRatio"
-								},
-								"mPart2": {
-									"mSubparts": [
-										{
-											"mNumber": -1
-										},
-										{
-											"mStat": 9,
-											"mCoefficient": 1
-										}
-									]
-								}
-							}
+			"variants": [
+				{
+					"name": "Super Scorcher Breath",
+					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_q1.png",
+					"mana": [
+						25,
+						25,
+						25,
+						25,
+						25,
+						25
+					],
+					"cooldownTime": [
+						5.5,
+						5.5,
+						5,
+						4.5,
+						4,
+						3.5,
+						3.5
+					],
+					"tooltip": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds <scaleMana>@ManaRestore@ Mana</scaleMana>, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.",
+					"dataValues": {
+						"BaseDamage": [
+							50,
+							65,
+							80,
+							95,
+							110,
+							125,
+							140
+						],
+						"ADRatio": [
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3
+						],
+						"StackTier1": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"StackTier2": [
+							125,
+							125,
+							125,
+							125,
+							125,
+							125,
+							125
+						],
+						"StackTier3": [
+							225,
+							225,
+							225,
+							225,
+							225,
+							225,
+							225
+						],
+						"Tier1_ExplosionRadius": [
+							285,
+							285,
+							285,
+							285,
+							285,
+							285,
+							285
+						],
+						"Tier2_BlowbackDistance": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"Tier2_BlowbackAmountBase": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"Tier2_BlowbackExplosionRadius": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"Tier2_BlowbackSpreadAngle": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"Tier3_TrueDamagePercent": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"Tier3_MonsterCap": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"CritRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"LifestealMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"Tier3_ExecuteThresholdStart": [
+							6.5,
+							6.5,
+							6.5,
+							6.5,
+							6.5,
+							6.5,
+							6.5
+						],
+						"Tier3_DotLength": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"Tier2_BlowbackPercentageDamage": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"minionmod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"Tier3_Burn_Stack_Mult": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"ManaRestore": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
 						]
 					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mStat": 8,
+											"mDataValue": "CritRatio"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mNumber": -1
+												},
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"Tier2_NumberOfBlowback": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tier2_BlowbackAmountBase",
-							"__type": "NamedDataValueCalculationPart"
+						"Tier2_NumberOfBlowback": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tier2_BlowbackAmountBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBuffName": "{32bcea5d}",
+									"mIconKey": "%i:Smolder%",
+									"mCoefficient": 0.008,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mBuffName": "{32bcea5d}",
-							"mIconKey": "%i:Smolder%",
-							"mCoefficient": 0.008,
-							"__type": "BuffCounterByCoefficientCalculationPart"
+						"Tier3_ExecuteThreshold": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Tier3_ExecuteThresholdStart",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"Tier3_Burn": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mBuffName": "{32bcea5d}",
+									"mIconKey": "%i:Smolder%",
+									"mDataValue": "Tier3_Burn_Stack_Mult",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						}
-					]
-				},
-				"Tier3_ExecuteThreshold": {
-					"mMultiplier": {
-						"mNumber": 0.01
 					},
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Tier3_ExecuteThresholdStart",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"Tier3_Burn": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mBuffName": "{32bcea5d}",
-							"mIconKey": "%i:Smolder%",
-							"mDataValue": "Tier3_Burn_Stack_Mult",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
+					"dataKey": "Characters/Smolder/Spells/SmolderQAbility/SmolderQ"
 				}
-			},
-			"mana": [
-				25,
-				25,
-				25,
-				25,
-				25,
-				25
-			],
-			"cooldownTime": [
-				5.5,
-				5.5,
-				5,
-				4.5,
-				4,
-				3.5,
-				3.5
-			],
-			"name": "Super Scorcher Breath",
-			"tooltip": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds <scaleMana>@ManaRestore@ Mana</scaleMana>, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly."
+			]
 		},
 		"w": {
-			"image": "assets/characters/smolder/hud/icons2d/icons_smolder_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					50,
-					60,
-					70,
-					80,
-					90,
-					100,
-					110
-				],
-				"HitADRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"ExplosionBaseDamage": [
-					-15,
-					10,
-					35,
-					60,
-					85,
-					110,
-					135
-				],
-				"ExplosionRadius": [
-					385,
-					385,
-					385,
-					385,
-					385,
-					385,
-					385
-				],
-				"SlowAmount": [
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35
-				],
-				"SlowDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"ExplosionDamageMult": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"ExplosionDamageMultihitPenalty": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"MinionMod": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"InitialDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Achooo!",
+					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_w.png",
+					"mana": [
+						50,
+						55,
+						60,
+						65,
+						70,
+						70
+					],
+					"cooldownTime": [
+						14,
+						14,
+						13,
+						12,
+						11,
+						10,
+						10
+					],
+					"tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							50,
+							60,
+							70,
+							80,
+							90,
+							100,
+							110
+						],
+						"HitADRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"ExplosionBaseDamage": [
+							-15,
+							10,
+							35,
+							60,
+							85,
+							110,
+							135
+						],
+						"ExplosionRadius": [
+							385,
+							385,
+							385,
+							385,
+							385,
+							385,
+							385
+						],
+						"SlowAmount": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"SlowDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"ExplosionDamageMult": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ExplosionDamageMultihitPenalty": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"MinionMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"InitialDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "HitADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "HitADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"ExplosionDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ExplosionBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"ExplosionDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ExplosionBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.65,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Smolder/Spells/SmolderWAbility/SmolderW"
 				}
-			},
-			"mana": [
-				50,
-				55,
-				60,
-				65,
-				70,
-				70
-			],
-			"cooldownTime": [
-				14,
-				14,
-				13,
-				12,
-				11,
-				10,
-				10
-			],
-			"name": "Achooo!",
-			"tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/smolder/hud/icons2d/icons_smolder_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Duration": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"MoveSpeed": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"NumOfAttacksBase": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BaseDamage": [
-					5,
-					10,
-					15,
-					20,
-					25,
-					30,
-					35
-				],
-				"ADRatio": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"Range": [
-					700,
-					700,
-					700,
-					700,
-					700,
-					700,
-					700
-				],
-				"NumAttackStackRatio": [
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01
-				]
-			},
-			"spellCalculations": {
-				"TotalNumberOfAttacks": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "NumOfAttacksBase",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mBuffName": "{32bcea5d}",
-							"mIconKey": "%i:Smolder%",
-							"mDataValue": "NumAttackStackRatio",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Flap, Flap, Flap",
+					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_e.png",
+					"mana": [
+						65,
+						65,
+						65,
+						65,
+						65,
+						65
 					],
-					"mPrecision": 2
-				},
-				"DamagePerHit": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"cooldownTime": [
+						24,
+						24,
+						22,
+						20,
+						18,
+						16,
+						16
+					],
+					"tooltip": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit.",
+					"dataValues": {
+						"Duration": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"MoveSpeed": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"NumOfAttacksBase": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BaseDamage": [
+							5,
+							10,
+							15,
+							20,
+							25,
+							30,
+							35
+						],
+						"ADRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"Range": [
+							700,
+							700,
+							700,
+							700,
+							700,
+							700,
+							700
+						],
+						"NumAttackStackRatio": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						]
+					},
+					"spellCalculations": {
+						"TotalNumberOfAttacks": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "NumOfAttacksBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBuffName": "{32bcea5d}",
+									"mIconKey": "%i:Smolder%",
+									"mDataValue": "NumAttackStackRatio",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 2
 						},
-						{
-							"mStat": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"DamagePerHit": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Smolder/Spells/SmolderEAbility/SmolderE"
 				}
-			},
-			"mana": [
-				65,
-				65,
-				65,
-				65,
-				65,
-				65
-			],
-			"cooldownTime": [
-				24,
-				24,
-				22,
-				20,
-				18,
-				16,
-				16
-			],
-			"name": "Flap, Flap, Flap",
-			"tooltip": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit."
+			]
 		},
 		"r": {
-			"image": "assets/characters/smolder/hud/icons2d/icons_smolder_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					100,
-					200,
-					300,
-					400,
-					500,
-					600,
-					700
-				],
-				"ADRatio": [
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1
-				],
-				"MomDistBehindOffset": [
-					600,
-					600,
-					600,
-					600,
-					600,
-					600,
-					600
-				],
-				"SlowDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"SlowAmount": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"MomSpawnDelay": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"SweetspotPercentageIncrease": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"MomHeal": [
-					65,
-					100,
-					135,
-					170,
-					205,
-					240,
-					275
-				],
-				"SoundDistanceBehindSmolder": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				],
-				"SoundDistanceBehindSmolderSelfOnly": [
-					1000,
-					1000,
-					1000,
-					1000,
-					1000,
-					1000,
-					1000
-				],
-				"LingeringSimmerSoundAmount": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"LingeringSimmerSoundOffset": [
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500
-				],
-				"MissileLandingSound": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				],
-				"VFXNorthAngleReplacement": [
-					90,
-					90,
-					90,
-					90,
-					90,
-					90,
-					90
-				],
-				"LingeringSimmerSoundDelay": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"MinionMod": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"TooltipOnly_TotalSweetspotDamage": {
-					"mMultiplier": {
-						"mDataValue": "SweetspotPercentageIncrease"
+			"variants": [
+				{
+					"name": "MMOOOMMMM!",
+					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						120,
+						120,
+						110,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.",
+					"dataValues": {
+						"BaseDamage": [
+							100,
+							200,
+							300,
+							400,
+							500,
+							600,
+							700
+						],
+						"ADRatio": [
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1
+						],
+						"MomDistBehindOffset": [
+							600,
+							600,
+							600,
+							600,
+							600,
+							600,
+							600
+						],
+						"SlowDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"SlowAmount": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"MomSpawnDelay": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SweetspotPercentageIncrease": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"MomHeal": [
+							65,
+							100,
+							135,
+							170,
+							205,
+							240,
+							275
+						],
+						"SoundDistanceBehindSmolder": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"SoundDistanceBehindSmolderSelfOnly": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						],
+						"LingeringSimmerSoundAmount": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"LingeringSimmerSoundOffset": [
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500
+						],
+						"MissileLandingSound": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"VFXNorthAngleReplacement": [
+							90,
+							90,
+							90,
+							90,
+							90,
+							90,
+							90
+						],
+						"LingeringSimmerSoundDelay": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"MinionMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
 					},
-					"mModifiedGameCalculation": "TotalDamage"
-				},
-				"MomHealCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "MomHeal",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
+						"TooltipOnly_TotalSweetspotDamage": {
+							"mMultiplier": {
+								"mDataValue": "SweetspotPercentageIncrease"
+							},
+							"mModifiedGameCalculation": "TotalDamage"
 						},
-						{
-							"mCoefficient": 0.75,
-							"__type": "StatByCoefficientCalculationPart"
+						"MomHealCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MomHeal",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.75,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Smolder/Spells/SmolderRAbility/SmolderR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				120,
-				120,
-				110,
-				100,
-				100,
-				100,
-				100
-			],
-			"name": "MMOOOMMMM!",
-			"tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him."
+			]
 		}
 	}
 }

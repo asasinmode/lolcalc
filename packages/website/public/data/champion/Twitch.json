@@ -29,501 +29,526 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/twitch/hud/icons2d/twitch_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"Duration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"MaxStacks": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"APRatio": [
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03
-				]
-			},
-			"spellCalculations": {
-				"DamagePerSecond": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 1,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Deadly Venom",
+					"image": "assets/characters/twitch/hud/icons2d/twitch_passive.png",
+					"tooltip": "Twitch's Attacks infect his target, dealing <trueDamage>@DamagePerSecond@ true damage</trueDamage> per second for @Duration@ seconds, stacking up to @MaxStacks@ times. <br><br>Max Damage Per Second: @DamagePerSecondMax@",
+					"dataValues": {
+						"Duration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"MaxStacks": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"APRatio": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						]
+					},
+					"spellCalculations": {
+						"DamagePerSecond": {
+							"mFormulaParts": [
 								{
-									"mLevel": 5,
-									"mAdditionalBonusAtThisLevel": 1
+									"mLevel1Value": 1,
+									"mBreakpoints": [
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 17,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 25,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 29,
+											"mAdditionalBonusAtThisLevel": 1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								},
 								{
-									"mLevel": 9,
-									"mAdditionalBonusAtThisLevel": 1
-								},
-								{
-									"mLevel": 13,
-									"mAdditionalBonusAtThisLevel": 1
-								},
-								{
-									"mLevel": 17,
-									"mAdditionalBonusAtThisLevel": 1
-								},
-								{
-									"mLevel": 21,
-									"mAdditionalBonusAtThisLevel": 1
-								},
-								{
-									"mLevel": 25,
-									"mAdditionalBonusAtThisLevel": 1
-								},
-								{
-									"mLevel": 29,
-									"mAdditionalBonusAtThisLevel": 1
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"DamagePerSecondMax": {
-					"mMultiplier": {
-						"mDataValue": "MaxStacks"
-					},
-					"mModifiedGameCalculation": "DamagePerSecond"
-				},
-				"DamageMaxTotal": {
-					"mMultiplier": {
-						"mPart1": {
-							"mDataValue": "Duration"
-						},
-						"mPart2": {
-							"mDataValue": "MaxStacks"
-						}
-					},
-					"mModifiedGameCalculation": "DamagePerSecond"
-				}
-			},
-			"name": "Deadly Venom",
-			"tooltip": "Twitch's Attacks infect his target, dealing <trueDamage>@DamagePerSecond@ true damage</trueDamage> per second for @Duration@ seconds, stacking up to @MaxStacks@ times. <br><br>Max Damage Per Second: @DamagePerSecondMax@"
-		},
-		"q": {
-			"image": "assets/characters/twitch/hud/icons2d/twitch_q.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"AttackSpeedMod": [
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.55,
-					0.6,
-					0.65
-				],
-				"AttackSpeedDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"StealthDuration": [
-					9,
-					10,
-					11,
-					12,
-					13,
-					14,
-					15
-				],
-				"MaxFadeTime": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"StealthDetectionRange": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				],
-				"MoveSpeedMod": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"HiddenSpeed": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				],
-				"MoveBonusRange": [
-					1000,
-					1000,
-					1000,
-					1000,
-					1000,
-					1000,
-					1000
-				]
-			},
-			"effectAmount": {
-				"6": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				16,
-				16,
-				16,
-				16,
-				16,
-				16,
-				16
-			],
-			"name": "Ambush",
-			"tooltip": "Twitch <keywordStealth>Camouflages</keywordStealth> and gains <speed>@MoveSpeedMod@% Move Speed</speed> for @StealthDuration@ seconds. The Move Speed increases to @HiddenSpeed@% while near an enemy champion that can't see him. After exiting <keywordStealth>Camouflage</keywordStealth>, Twitch gains <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>When an enemy champion dies while afflicted with <keywordMajor>Venom</keywordMajor>, this Ability's Cooldown is refreshed."
-		},
-		"w": {
-			"image": "assets/characters/twitch/hud/icons2d/twitch_w.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseSlowAmount": [
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				],
-				"Duration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"AoERadius": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"SlowAPRatio": [
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06,
-					0.06
-				]
-			},
-			"spellCalculations": {
-				"TotalSlowAmount": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseSlowAmount",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "SlowAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				70,
-				70,
-				70,
-				70,
-				70,
-				70
-			],
-			"cooldownTime": [
-				14,
-				13,
-				12,
-				11,
-				10,
-				9,
-				9
-			],
-			"name": "Venom Cask",
-			"tooltip": "Twitch hurls a cask that adds a stack of <spellName>Deadly Venom</spellName> to all enemies struck and leaves behind a toxic cloud that persists for @Duration@ seconds.<br><br>Enemies that remain within the cloud are <status>Slowed</status> by @TotalSlowAmount@% and receive an additional stack of <spellName>Deadly Venom</spellName> each second."
-		},
-		"e": {
-			"image": "assets/characters/twitch/hud/icons2d/twitch_e.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					10,
-					20,
-					30,
-					40,
-					50,
-					60,
-					70
-				],
-				"BasePhysicalDamagePerStack": [
-					10,
-					15,
-					20,
-					25,
-					30,
-					35,
-					40
-				],
-				"bADRatioPerStack": [
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35
-				],
-				"APRatioPerStack": [
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35
-				],
-				"MaxStacks": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				]
-			},
-			"spellCalculations": {
-				"PhysicalDamagePerStack": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BasePhysicalDamagePerStack",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "bADRatioPerStack",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MagicDamagePerStack": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "APRatioPerStack",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MaxPhysicalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mPart1": {
+						"DamagePerSecondMax": {
+							"mMultiplier": {
 								"mDataValue": "MaxStacks"
 							},
-							"mPart2": {
-								"mDataValue": "BasePhysicalDamagePerStack"
-							},
-							"__type": "ProductOfSubPartsCalculationPart"
+							"mModifiedGameCalculation": "DamagePerSecond"
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mSubpart": {
+						"DamageMaxTotal": {
+							"mMultiplier": {
 								"mPart1": {
-									"mDataValue": "bADRatioPerStack"
+									"mDataValue": "Duration"
 								},
 								"mPart2": {
 									"mDataValue": "MaxStacks"
 								}
 							},
-							"__type": "StatBySubPartCalculationPart"
+							"mModifiedGameCalculation": "DamagePerSecond"
 						}
-					]
-				},
-				"MaxMagicDamage": {
-					"mMultiplier": {
-						"mDataValue": "MaxStacks"
 					},
-					"mModifiedGameCalculation": "MagicDamagePerStack"
+					"dataKey": "Characters/Twitch/Spells/TwitchDeadlyVenomMarkerAbility/TwitchDeadlyVenomMarker"
 				}
-			},
-			"mana": [
-				50,
-				60,
-				70,
-				80,
-				90,
-				100
-			],
-			"cooldownTime": [
-				13,
-				12,
-				11,
-				10,
-				9,
-				8,
-				8
-			],
-			"name": "Contaminate",
-			"tooltip": "Deals <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to all nearby enemies affected by <spellName>Deadly Venom</spellName>, plus an additional <physicalDamage>@PhysicalDamagePerStack@ physical damage</physicalDamage> and <magicDamage>@MagicDamagePerStack@ magical damage</magicDamage> per stack of <spellName>Deadly Venom</spellName>.<br><br>Max Damage: <physicalDamage>@MaxPhysicalDamage@ physical damage</physicalDamage> and <magicDamage>@MaxMagicDamage@ magical damage</magicDamage>."
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Ambush",
+					"image": "assets/characters/twitch/hud/icons2d/twitch_q.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						16,
+						16,
+						16,
+						16,
+						16,
+						16,
+						16
+					],
+					"tooltip": "Twitch <keywordStealth>Camouflages</keywordStealth> and gains <speed>@MoveSpeedMod@% Move Speed</speed> for @StealthDuration@ seconds. The Move Speed increases to @HiddenSpeed@% while near an enemy champion that can't see him. After exiting <keywordStealth>Camouflage</keywordStealth>, Twitch gains <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>When an enemy champion dies while afflicted with <keywordMajor>Venom</keywordMajor>, this Ability's Cooldown is refreshed.",
+					"dataValues": {
+						"AttackSpeedMod": [
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.55,
+							0.6,
+							0.65
+						],
+						"AttackSpeedDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"StealthDuration": [
+							9,
+							10,
+							11,
+							12,
+							13,
+							14,
+							15
+						],
+						"MaxFadeTime": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"StealthDetectionRange": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"MoveSpeedMod": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"HiddenSpeed": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"MoveBonusRange": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						]
+					},
+					"effectAmount": {
+						"6": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"dataKey": "Characters/Twitch/Spells/TwitchHideInShadowsAbility/TwitchHideInShadows"
+				}
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Venom Cask",
+					"image": "assets/characters/twitch/hud/icons2d/twitch_w.png",
+					"mana": [
+						70,
+						70,
+						70,
+						70,
+						70,
+						70
+					],
+					"cooldownTime": [
+						14,
+						13,
+						12,
+						11,
+						10,
+						9,
+						9
+					],
+					"tooltip": "Twitch hurls a cask that adds a stack of <spellName>Deadly Venom</spellName> to all enemies struck and leaves behind a toxic cloud that persists for @Duration@ seconds.<br><br>Enemies that remain within the cloud are <status>Slowed</status> by @TotalSlowAmount@% and receive an additional stack of <spellName>Deadly Venom</spellName> each second.",
+					"dataValues": {
+						"BaseSlowAmount": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"Duration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"AoERadius": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"SlowAPRatio": [
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06
+						]
+					},
+					"spellCalculations": {
+						"TotalSlowAmount": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseSlowAmount",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "SlowAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Twitch/Spells/TwitchVenomCaskAbility/TwitchVenomCask"
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Contaminate",
+					"image": "assets/characters/twitch/hud/icons2d/twitch_e.png",
+					"mana": [
+						50,
+						60,
+						70,
+						80,
+						90,
+						100
+					],
+					"cooldownTime": [
+						13,
+						12,
+						11,
+						10,
+						9,
+						8,
+						8
+					],
+					"tooltip": "Deals <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to all nearby enemies affected by <spellName>Deadly Venom</spellName>, plus an additional <physicalDamage>@PhysicalDamagePerStack@ physical damage</physicalDamage> and <magicDamage>@MagicDamagePerStack@ magical damage</magicDamage> per stack of <spellName>Deadly Venom</spellName>.<br><br>Max Damage: <physicalDamage>@MaxPhysicalDamage@ physical damage</physicalDamage> and <magicDamage>@MaxMagicDamage@ magical damage</magicDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"BasePhysicalDamagePerStack": [
+							10,
+							15,
+							20,
+							25,
+							30,
+							35,
+							40
+						],
+						"bADRatioPerStack": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"APRatioPerStack": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"MaxStacks": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"spellCalculations": {
+						"PhysicalDamagePerStack": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BasePhysicalDamagePerStack",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "bADRatioPerStack",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MagicDamagePerStack": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "APRatioPerStack",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxPhysicalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mPart1": {
+										"mDataValue": "MaxStacks"
+									},
+									"mPart2": {
+										"mDataValue": "BasePhysicalDamagePerStack"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mSubpart": {
+										"mPart1": {
+											"mDataValue": "bADRatioPerStack"
+										},
+										"mPart2": {
+											"mDataValue": "MaxStacks"
+										}
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"MaxMagicDamage": {
+							"mMultiplier": {
+								"mDataValue": "MaxStacks"
+							},
+							"mModifiedGameCalculation": "MagicDamagePerStack"
+						}
+					},
+					"dataKey": "Characters/Twitch/Spells/TwitchExpungeAbility/TwitchExpunge"
+				}
+			]
 		},
 		"r": {
-			"image": "assets/characters/twitch/hud/icons2d/twitch_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BonusRange": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"FallOffDamage": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"MinimumFallOffDamage": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"BonusAD": [
-					15,
-					30,
-					45,
-					60,
-					75,
-					90,
-					105
-				],
-				"Duration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"OvershootMult": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"OvershootMin": [
-					250,
-					250,
-					250,
-					250,
-					250,
-					250,
-					250
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				90,
-				90,
-				90,
-				90,
-				90,
-				90,
-				90
-			],
-			"name": "Spray and Pray",
-			"tooltip": "Twitch unleashes his crossbow, gaining @BonusRange@ Attack Range and <scaleAD>@BonusAD@ Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for @Duration@ seconds. These bolts hit all enemies they pass through, but deal @FallOffDamage*100@% less damage to subsequent targets, down to a minimum of @MinimumFallOffDamage*100@% damage.<br>"
+			"variants": [
+				{
+					"name": "Spray and Pray",
+					"image": "assets/characters/twitch/hud/icons2d/twitch_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						90,
+						90,
+						90,
+						90,
+						90,
+						90,
+						90
+					],
+					"tooltip": "Twitch unleashes his crossbow, gaining @BonusRange@ Attack Range and <scaleAD>@BonusAD@ Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for @Duration@ seconds. These bolts hit all enemies they pass through, but deal @FallOffDamage*100@% less damage to subsequent targets, down to a minimum of @MinimumFallOffDamage*100@% damage.<br>",
+					"dataValues": {
+						"BonusRange": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"FallOffDamage": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"MinimumFallOffDamage": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"BonusAD": [
+							15,
+							30,
+							45,
+							60,
+							75,
+							90,
+							105
+						],
+						"Duration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"OvershootMult": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"OvershootMin": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						]
+					},
+					"dataKey": "Characters/Twitch/Spells/TwitchFullAutomaticAbility/TwitchFullAutomatic"
+				}
+			]
 		}
 	}
 }

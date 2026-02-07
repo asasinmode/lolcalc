@@ -29,684 +29,709 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/shen/hud/icons2d/shen_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"ShieldDuration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"LeashDistanceThreshold": [
-					3500,
-					3500,
-					3500,
-					3500,
-					3500,
-					3500,
-					3500
-				],
-				"LeashPreferredResultDistance": [
-					2250,
-					2250,
-					2250,
-					2250,
-					2250,
-					2250,
-					2250
-				],
-				"DirectionIndicatorMinimumDistance": [
-					150,
-					150,
-					150,
-					150,
-					150,
-					150,
-					150
-				],
-				"PassiveCDFlexAmount": [
-					0.125,
-					0.125,
-					0.125,
-					0.125,
-					0.125,
-					0.125,
-					0.125
-				],
-				"ShieldCooldown": [
-					11,
-					11,
-					11,
-					11,
-					11,
-					11,
-					11
-				],
-				"ShenZedQuestShieldMultiplier": [
-					1.3,
-					1.3,
-					1.3,
-					1.3,
-					1.3,
-					1.3,
-					1.3
-				]
-			},
-			"spellCalculations": {
-				"{58a09e24}": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 47,
-							"mEndValue": 120,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mCoefficient": 0.13,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"ShieldCooldownReduction": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 4,
-							"mInitialBonusPerLevel": 0.235,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Ki Barrier",
+					"image": "assets/characters/shen/hud/icons2d/shen_passive.png",
+					"cooldownTime": [
+						11,
+						11,
+						11,
+						11,
+						11,
+						11,
+						11
+					],
+					"tooltip": "Shen gains <shield>@ShieldValue@ Shield</shield> for @ShieldDuration@ seconds after using an Ability. This effect has a @ShieldCooldown@ second Cooldown, reduced by @ShieldCooldownReduction@ seconds when one of Shen's Abilities successfully affects an ally or enemy.<br><br>Shen has a <keywordMajor>Spirit Blade</keywordMajor> that his other Abilities use.",
+					"dataValues": {
+						"ShieldDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"LeashDistanceThreshold": [
+							3500,
+							3500,
+							3500,
+							3500,
+							3500,
+							3500,
+							3500
+						],
+						"LeashPreferredResultDistance": [
+							2250,
+							2250,
+							2250,
+							2250,
+							2250,
+							2250,
+							2250
+						],
+						"DirectionIndicatorMinimumDistance": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"PassiveCDFlexAmount": [
+							0.125,
+							0.125,
+							0.125,
+							0.125,
+							0.125,
+							0.125,
+							0.125
+						],
+						"ShieldCooldown": [
+							11,
+							11,
+							11,
+							11,
+							11,
+							11,
+							11
+						],
+						"ShenZedQuestShieldMultiplier": [
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3
+						]
+					},
+					"spellCalculations": {
+						"{58a09e24}": {
+							"mFormulaParts": [
 								{
-									"mLevel": 19,
-									"mBonusPerLevelAtAndAfter": 0.125
+									"mStartValue": 47,
+									"mEndValue": 120,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.13,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ShieldCooldownReduction": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 4,
+									"mInitialBonusPerLevel": 0.235,
+									"mBreakpoints": [
+										{
+											"mLevel": 19,
+											"mBonusPerLevelAtAndAfter": 0.125
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mPrecision": 1
-				},
-				"{87290189}": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 47,
-							"mEndValue": 101,
-							"__type": "ByCharLevelInterpolationCalculationPart"
+							"mPrecision": 1
 						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mCoefficient": 0.07,
-							"__type": "StatByCoefficientCalculationPart"
+						"{87290189}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 47,
+									"mEndValue": 101,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.07,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{7e912bc4}": {
+							"mMultiplier": {
+								"mDataValue": "ShenZedQuestShieldMultiplier"
+							},
+							"mFormulaParts": [
+								{
+									"mSpellCalculationKey": "{58a09e24}",
+									"__type": "{f3cbe7b2}"
+								}
+							]
+						},
+						"ShieldValue": {
+							"mDefaultGameCalculation": "{58a09e24}",
+							"mConditionalGameCalculation": "{7e912bc4}",
+							"mConditionalCalculationRequirements": {
+								"mBuffName": "{7dfdcd99}"
+							}
+						},
+						"{a7305d7f}": {
+							"mMultiplier": {
+								"mDataValue": "ShenZedQuestShieldMultiplier"
+							},
+							"mFormulaParts": [
+								{
+									"mSpellCalculationKey": "{87290189}",
+									"__type": "{f3cbe7b2}"
+								}
+							]
+						},
+						"{ff986284}": {
+							"mDefaultGameCalculation": "{87290189}",
+							"mConditionalGameCalculation": "{a7305d7f}",
+							"mConditionalCalculationRequirements": {
+								"mBuffName": "{7dfdcd99}"
+							}
 						}
-					]
-				},
-				"{7e912bc4}": {
-					"mMultiplier": {
-						"mDataValue": "ShenZedQuestShieldMultiplier"
 					},
-					"mFormulaParts": [
-						{
-							"mSpellCalculationKey": "{58a09e24}",
-							"__type": "{f3cbe7b2}"
-						}
-					]
-				},
-				"ShieldValue": {
-					"mDefaultGameCalculation": "{58a09e24}",
-					"mConditionalGameCalculation": "{7e912bc4}",
-					"mConditionalCalculationRequirements": {
-						"mBuffName": "{7dfdcd99}"
-					}
-				},
-				"{a7305d7f}": {
-					"mMultiplier": {
-						"mDataValue": "ShenZedQuestShieldMultiplier"
-					},
-					"mFormulaParts": [
-						{
-							"mSpellCalculationKey": "{87290189}",
-							"__type": "{f3cbe7b2}"
-						}
-					]
-				},
-				"{ff986284}": {
-					"mDefaultGameCalculation": "{87290189}",
-					"mConditionalGameCalculation": "{a7305d7f}",
-					"mConditionalCalculationRequirements": {
-						"mBuffName": "{7dfdcd99}"
-					}
+					"dataKey": "Characters/Shen/Spells/ShenPassiveAbility/ShenPassive"
 				}
-			},
-			"cooldownTime": [
-				11,
-				11,
-				11,
-				11,
-				11,
-				11,
-				11
-			],
-			"name": "Ki Barrier",
-			"tooltip": "Shen gains <shield>@ShieldValue@ Shield</shield> for @ShieldDuration@ seconds after using an Ability. This effect has a @ShieldCooldown@ second Cooldown, reduced by @ShieldCooldownReduction@ seconds when one of Shen's Abilities successfully affects an ally or enemy.<br><br>Shen has a <keywordMajor>Spirit Blade</keywordMajor> that his other Abilities use."
+			]
 		},
 		"q": {
-			"image": "assets/characters/shen/hud/icons2d/shen_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"QBaseOnHitDamage": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"QPerLevelOnHitDamage": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"QTowerDamageModifier": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"BaseFlatDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 10,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Twilight Assault",
+					"image": "assets/characters/shen/hud/icons2d/shen_q.png",
+					"mana": [
+						140,
+						130,
+						120,
+						110,
+						100,
+						90
+					],
+					"cooldownTime": [
+						8.75,
+						8,
+						7.25,
+						6.5,
+						5.75,
+						5,
+						5
+					],
+					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @Effect4Amount@% while moving away from Shen for the next @Effect5Amount@ seconds.<br><br>Additionally, Shen's next @Effect3Amount@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@Effect9Amount@% Attack Speed</attackSpeed> for those Attacks.",
+					"dataValues": {
+						"QBaseOnHitDamage": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"QPerLevelOnHitDamage": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"QTowerDamageModifier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"BaseFlatDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
 								{
-									"mLevel": 4,
-									"mAdditionalBonusAtThisLevel": 6
+									"mLevel1Value": 10,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mAdditionalBonusAtThisLevel": 6
+										},
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 6
+										},
+										{
+											"mLevel": 10,
+											"mAdditionalBonusAtThisLevel": 6
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 6
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"BasePercentHealth": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 2,
+									"__type": "EffectValueCalculationPart"
 								},
 								{
-									"mLevel": 7,
-									"mAdditionalBonusAtThisLevel": 6
-								},
-								{
-									"mLevel": 10,
-									"mAdditionalBonusAtThisLevel": 6
-								},
-								{
-									"mLevel": 13,
-									"mAdditionalBonusAtThisLevel": 6
-								},
-								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": 6
+									"mCoefficient": 0.015,
+									"__type": "StatByCoefficientCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"BasePercentHealth": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 2,
-							"__type": "EffectValueCalculationPart"
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
-						{
-							"mCoefficient": 0.015,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"EmpPercentHealth": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 6,
-							"__type": "EffectValueCalculationPart"
+						"EmpPercentHealth": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 6,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.02,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
-						{
-							"mCoefficient": 0.02,
-							"__type": "StatByCoefficientCalculationPart"
+						"TowerDamageCalc": {
+							"mMultiplier": {
+								"mDataValue": "{c6af10ed}"
+							},
+							"mModifiedGameCalculation": "BaseFlatDamage"
 						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"TowerDamageCalc": {
-					"mMultiplier": {
-						"mDataValue": "{c6af10ed}"
 					},
-					"mModifiedGameCalculation": "BaseFlatDamage"
+					"effectAmount": {
+						"0": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"1": [
+							1.5,
+							2,
+							2.5,
+							3,
+							3.5,
+							4,
+							4.5
+						],
+						"2": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"3": [
+							25,
+							25,
+							30,
+							35,
+							40,
+							45,
+							50
+						],
+						"4": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"5": [
+							4.5,
+							5,
+							5.5,
+							6,
+							6.5,
+							7,
+							7.5
+						],
+						"6": [
+							100,
+							120,
+							140,
+							160,
+							180,
+							200,
+							220
+						],
+						"7": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"8": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"9": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						]
+					},
+					"dataKey": "Characters/Shen/Spells/ShenQAbility/ShenQ"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"1": [
-					1.5,
-					2,
-					2.5,
-					3,
-					3.5,
-					4,
-					4.5
-				],
-				"2": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"3": [
-					25,
-					25,
-					30,
-					35,
-					40,
-					45,
-					50
-				],
-				"4": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"5": [
-					4.5,
-					5,
-					5.5,
-					6,
-					6.5,
-					7,
-					7.5
-				],
-				"6": [
-					100,
-					120,
-					140,
-					160,
-					180,
-					200,
-					220
-				],
-				"7": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"8": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"9": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				]
-			},
-			"mana": [
-				140,
-				130,
-				120,
-				110,
-				100,
-				90
-			],
-			"cooldownTime": [
-				8.75,
-				8,
-				7.25,
-				6.5,
-				5.75,
-				5,
-				5
-			],
-			"name": "Twilight Assault",
-			"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @Effect4Amount@% while moving away from Shen for the next @Effect5Amount@ seconds.<br><br>Additionally, Shen's next @Effect3Amount@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@Effect9Amount@% Attack Speed</attackSpeed> for those Attacks."
+			]
 		},
 		"w": {
-			"image": "assets/characters/shen/hud/icons2d/shen_w.png",
 			"maxLevel": 5,
-			"effectAmount": {
-				"0": [
-					1.75,
-					1.75,
-					1.75,
-					1.75,
-					1.75,
-					1.75,
-					1.75
-				],
-				"1": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				18.5,
-				16,
-				14.5,
-				13,
-				11.5,
-				10,
-				10
-			],
-			"name": "Spirit's Refuge",
-			"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @Effect1Amount@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @Effect2Amount@ seconds."
+			"variants": [
+				{
+					"name": "Spirit's Refuge",
+					"image": "assets/characters/shen/hud/icons2d/shen_w.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						18.5,
+						16,
+						14.5,
+						13,
+						11.5,
+						10,
+						10
+					],
+					"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @Effect1Amount@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @Effect2Amount@ seconds.",
+					"effectAmount": {
+						"0": [
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75
+						],
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"dataKey": "Characters/Shen/Spells/ShenWAbility/ShenW"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/shen/hud/icons2d/shen_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					35,
-					60,
-					85,
-					110,
-					135,
-					160,
-					185
-				],
-				"BonusHPRatio": [
-					0.11,
-					0.11,
-					0.11,
-					0.11,
-					0.11,
-					0.11,
-					0.11
-				],
-				"CCDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"CollisionPadding": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"DepartureCollisionRadius": [
-					125,
-					125,
-					125,
-					125,
-					125,
-					125,
-					125
-				],
-				"ArrivalCollisionRadius": [
-					150,
-					150,
-					150,
-					150,
-					150,
-					150,
-					150
-				],
-				"DashBonusSpeed": [
-					800,
-					800,
-					800,
-					800,
-					800,
-					800,
-					800
-				],
-				"MinimumDistance": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				]
-			},
-			"spellCalculations": {
-				"energyrefund": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 30,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Shadow Dash",
+					"image": "assets/characters/shen/hud/icons2d/shen_e.png",
+					"mana": [
+						150,
+						150,
+						150,
+						150,
+						150,
+						150
+					],
+					"cooldownTime": [
+						20,
+						18,
+						16,
+						14,
+						12,
+						10,
+						10
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with <spellName>Twilight Assault</spellName> or this Ability recovers <keywordMajor>@EnergyRefund@ Energy</keywordMajor>.<br><br><spellActive>Active:</spellActive> Shen dashes, <status>Taunting</status> champions and jungle monsters for @CCDuration@ seconds and dealing <physicalDamage>@TauntDamage@ physical damage</physicalDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							60,
+							85,
+							110,
+							135,
+							160,
+							185
+						],
+						"BonusHPRatio": [
+							0.11,
+							0.11,
+							0.11,
+							0.11,
+							0.11,
+							0.11,
+							0.11
+						],
+						"CCDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"CollisionPadding": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"DepartureCollisionRadius": [
+							125,
+							125,
+							125,
+							125,
+							125,
+							125,
+							125
+						],
+						"ArrivalCollisionRadius": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"DashBonusSpeed": [
+							800,
+							800,
+							800,
+							800,
+							800,
+							800,
+							800
+						],
+						"MinimumDistance": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						]
+					},
+					"spellCalculations": {
+						"energyrefund": {
+							"mFormulaParts": [
 								{
-									"mLevel": 4,
-									"mAdditionalBonusAtThisLevel": 10
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mAdditionalBonusAtThisLevel": 10
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 10
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TauntDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mLevel": 12,
-									"mAdditionalBonusAtThisLevel": 10
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "BonusHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
 						}
-					]
-				},
-				"TauntDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mDataValue": "BonusHPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Shen/Spells/ShenEAbility/ShenE"
 				}
-			},
-			"mana": [
-				150,
-				150,
-				150,
-				150,
-				150,
-				150
-			],
-			"cooldownTime": [
-				20,
-				18,
-				16,
-				14,
-				12,
-				10,
-				10
-			],
-			"name": "Shadow Dash",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with <spellName>Twilight Assault</spellName> or this Ability recovers <keywordMajor>@EnergyRefund@ Energy</keywordMajor>.<br><br><spellActive>Active:</spellActive> Shen dashes, <status>Taunting</status> champions and jungle monsters for @CCDuration@ seconds and dealing <physicalDamage>@TauntDamage@ physical damage</physicalDamage>."
+			]
 		},
 		"r": {
-			"image": "assets/characters/shen/hud/icons2d/shen_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"ArrivalPersonalSpace": [
-					175,
-					175,
-					175,
-					175,
-					175,
-					175,
-					175
-				],
-				"ArrivalCheckRadiusVisible": [
-					2000,
-					2000,
-					2000,
-					2000,
-					2000,
-					2000,
-					2000
-				],
-				"ArrivalCheckRadiusInvisible": [
-					600,
-					600,
-					600,
-					600,
-					600,
-					600,
-					600
-				],
-				"BaseShieldAmount": [
-					20,
-					120,
-					220,
-					320,
-					420,
-					520,
-					620
-				],
-				"ShieldAPRatio": [
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35,
-					1.35
-				],
-				"MaxShieldThreshold": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"MaxShieldMult": [
-					1.6,
-					1.6,
-					1.6,
-					1.6,
-					1.6,
-					1.6,
-					1.6
-				],
-				"ShieldDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"ChannelDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"Shield": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseShieldAmount",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mCoefficient": 0.15,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mDataValue": "ShieldAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MaxShield": {
-					"mMultiplier": {
-						"mDataValue": "MaxShieldMult"
+			"variants": [
+				{
+					"name": "Stand United",
+					"image": "assets/characters/shen/hud/icons2d/shen_r.png",
+					"cooldownTime": [
+						200,
+						200,
+						180,
+						160,
+						160,
+						160,
+						160
+					],
+					"tooltip": "Shen grants an allied champion anywhere on the map between <shield>@Shield@</shield> and <shield>@MaxShield@ Shield</shield> based on their missing Health for @ShieldDuration@ seconds (max Shield at 60% missing Health). After channeling for @ChannelDuration@ seconds, Shen teleports to his ally's location with his <keywordMajor>Spirit Blade</keywordMajor>.",
+					"dataValues": {
+						"ArrivalPersonalSpace": [
+							175,
+							175,
+							175,
+							175,
+							175,
+							175,
+							175
+						],
+						"ArrivalCheckRadiusVisible": [
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000
+						],
+						"ArrivalCheckRadiusInvisible": [
+							600,
+							600,
+							600,
+							600,
+							600,
+							600,
+							600
+						],
+						"BaseShieldAmount": [
+							20,
+							120,
+							220,
+							320,
+							420,
+							520,
+							620
+						],
+						"ShieldAPRatio": [
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35,
+							1.35
+						],
+						"MaxShieldThreshold": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"MaxShieldMult": [
+							1.6,
+							1.6,
+							1.6,
+							1.6,
+							1.6,
+							1.6,
+							1.6
+						],
+						"ShieldDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"ChannelDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
 					},
-					"mModifiedGameCalculation": "Shield"
+					"spellCalculations": {
+						"Shield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShieldAmount",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.15,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxShield": {
+							"mMultiplier": {
+								"mDataValue": "MaxShieldMult"
+							},
+							"mModifiedGameCalculation": "Shield"
+						}
+					},
+					"dataKey": "Characters/Shen/Spells/ShenRAbility/ShenR"
 				}
-			},
-			"cooldownTime": [
-				200,
-				200,
-				180,
-				160,
-				160,
-				160,
-				160
-			],
-			"name": "Stand United",
-			"tooltip": "Shen grants an allied champion anywhere on the map between <shield>@Shield@</shield> and <shield>@MaxShield@ Shield</shield> based on their missing Health for @ShieldDuration@ seconds (max Shield at 60% missing Health). After channeling for @ChannelDuration@ seconds, Shen teleports to his ally's location with his <keywordMajor>Spirit Blade</keywordMajor>."
+			]
 		}
 	}
 }

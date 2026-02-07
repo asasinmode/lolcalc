@@ -29,447 +29,472 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/fiora/hud/icons2d/fiora_p.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"PassiveDamageADRatio": [
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0
-				],
-				"PassiveDamageBase": [
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03
-				],
-				"MovementSpeedDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				]
-			},
-			"spellCalculations": {
-				"PassiveHealAmount": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 35,
-							"mEndValue": 100,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
-					]
-				},
-				"PassiveDamageTotal": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "PassiveDamageBase",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "PassiveDamageADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"RDamageTotal": {
-					"mMultiplier": {
-						"mNumber": 4
+			"variants": [
+				{
+					"name": "Duelist's Dance",
+					"image": "assets/characters/fiora/hud/icons2d/fiora_p.png",
+					"tooltip": "Fiora identifies <keywordMajor>Vitals</keywordMajor> on enemy champions. Hitting this <keywordMajor>Vital</keywordMajor> with an Attack or Ability deals an additional <trueDamage>@PassiveDamageTotal@ max Health true damage</trueDamage>, grants Fiora <speed>@spell.FioraR:PercentMS*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds, and restores <healing>@PassiveHealAmount@ Health</healing>.<br><br>Fiora reveals a new <keywordMajor>Vital</keywordMajor> after 15 seconds or after striking one.",
+					"dataValues": {
+						"PassiveDamageADRatio": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"PassiveDamageBase": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"MovementSpeedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
 					},
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mModifiedGameCalculation": "PassiveDamageTotal"
+					"spellCalculations": {
+						"PassiveHealAmount": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 35,
+									"mEndValue": 100,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"PassiveDamageTotal": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "PassiveDamageADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"RDamageTotal": {
+							"mMultiplier": {
+								"mNumber": 4
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mModifiedGameCalculation": "PassiveDamageTotal"
+						}
+					},
+					"dataKey": "Characters/Fiora/Spells/FioraPassiveAbility/FioraPassive"
 				}
-			},
-			"name": "Duelist's Dance",
-			"tooltip": "Fiora identifies <keywordMajor>Vitals</keywordMajor> on enemy champions. Hitting this <keywordMajor>Vital</keywordMajor> with an Attack or Ability deals an additional <trueDamage>@PassiveDamageTotal@ max Health true damage</trueDamage>, grants Fiora <speed>@spell.FioraR:PercentMS*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds, and restores <healing>@PassiveHealAmount@ Health</healing>.<br><br>Fiora reveals a new <keywordMajor>Vital</keywordMajor> after 15 seconds or after striking one."
+			]
 		},
 		"q": {
-			"image": "assets/characters/fiora/hud/icons2d/fiora_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Damage": [
-					60,
-					70,
-					80,
-					90,
-					100,
-					110,
-					120
-				],
-				"bADRatio": [
-					0.85,
-					0.9,
-					0.95,
-					1,
-					1.05,
-					1.1,
-					1.15
-				],
-				"CDRefundPercent": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mSubpart": {
-								"mDataValue": "BADRatio"
-							},
-							"__type": "StatBySubPartCalculationPart"
+			"variants": [
+				{
+					"name": "Lunge",
+					"image": "assets/characters/fiora/hud/icons2d/fiora_q.png",
+					"mana": [
+						20,
+						20,
+						20,
+						20,
+						20,
+						20
+					],
+					"cooldownTime": [
+						13,
+						13,
+						11.25,
+						9.5,
+						7.75,
+						6,
+						6
+					],
+					"tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br><br>If Fiora strikes an enemy, this Ability's Cooldown is reduced by @CDRefundPercent*100@%.",
+					"dataValues": {
+						"Damage": [
+							60,
+							70,
+							80,
+							90,
+							100,
+							110,
+							120
+						],
+						"bADRatio": [
+							0.85,
+							0.9,
+							0.95,
+							1,
+							1.05,
+							1.1,
+							1.15
+						],
+						"CDRefundPercent": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mSubpart": {
+										"mDataValue": "BADRatio"
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Fiora/Spells/FioraQAbility/FioraQ"
 				}
-			},
-			"mana": [
-				20,
-				20,
-				20,
-				20,
-				20,
-				20
-			],
-			"cooldownTime": [
-				13,
-				13,
-				11.25,
-				9.5,
-				7.75,
-				6,
-				6
-			],
-			"name": "Lunge",
-			"tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br><br>If Fiora strikes an enemy, this Ability's Cooldown is reduced by @CDRefundPercent*100@%."
+			]
 		},
 		"w": {
-			"image": "assets/characters/fiora/hud/icons2d/fiora_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					70,
-					110,
-					150,
-					190,
-					230,
-					270,
-					310
-				],
-				"ParryDuration": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"CCDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"MSSlowPercent": [
-					-0.5,
-					-0.5,
-					-0.5,
-					-0.5,
-					-0.5,
-					-0.5,
-					-0.5
-				],
-				"SmallBlockPercent": [
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03
-				],
-				"BigBlockPercent": [
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15,
-					0.15
-				],
-				"AttackSlowPercent": [
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25
-				]
-			},
-			"spellCalculations": {
-				"StabDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Riposte",
+					"image": "assets/characters/fiora/hud/icons2d/fiora_w.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						26,
+						24,
+						22,
+						20,
+						18,
+						16,
+						14
+					],
+					"tooltip": "Fiora parries all incoming damage, disables, and negative effects for @ParryDuration@ seconds, then stabs. The stab deals <magicDamage>@StabDamage@ magic damage</magicDamage> to the first champion hit and <status>Slows</status> <speed>Move Speed</speed> by @MSSlowPercent*-100@%<attackSpeed> and Attack Speed by @AttackSlowPercent*-100@% </attackSpeed> for @CCDuration@ seconds. If Fiora parries an <status>Immobilizing</status> effect, the stabbed enemy is <status>Stunned</status> rather than <status>Slowed</status>.",
+					"dataValues": {
+						"BaseDamage": [
+							70,
+							110,
+							150,
+							190,
+							230,
+							270,
+							310
+						],
+						"ParryDuration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"CCDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"MSSlowPercent": [
+							-0.5,
+							-0.5,
+							-0.5,
+							-0.5,
+							-0.5,
+							-0.5,
+							-0.5
+						],
+						"SmallBlockPercent": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"BigBlockPercent": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"AttackSlowPercent": [
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25
+						]
+					},
+					"spellCalculations": {
+						"StabDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Fiora/Spells/FioraWAbility/FioraW"
 				}
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				26,
-				24,
-				22,
-				20,
-				18,
-				16,
-				14
-			],
-			"name": "Riposte",
-			"tooltip": "Fiora parries all incoming damage, disables, and negative effects for @ParryDuration@ seconds, then stabs. The stab deals <magicDamage>@StabDamage@ magic damage</magicDamage> to the first champion hit and <status>Slows</status> <speed>Move Speed</speed> by @MSSlowPercent*-100@%<attackSpeed> and Attack Speed by @AttackSlowPercent*-100@% </attackSpeed> for @CCDuration@ seconds. If Fiora parries an <status>Immobilizing</status> effect, the stabbed enemy is <status>Stunned</status> rather than <status>Slowed</status>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/fiora/hud/icons2d/fiora_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BuffDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"SlowDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"SlowPercent": [
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3
-				],
-				"ASPercent": [
-					0.4,
-					0.5,
-					0.6,
-					0.7,
-					0.8,
-					0.9,
-					1
-				],
-				"AttackOnePercentTAD": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"AttackTwoPercentTAD": [
-					1.5,
-					1.6,
-					1.7,
-					1.8,
-					1.9,
-					2,
-					2.1
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				11,
-				11,
-				10,
-				9,
-				8,
-				7,
-				7
-			],
-			"name": "Bladework",
-			"tooltip": "Fiora gains <attackSpeed>@ASPercent*100@% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by @SlowPercent*-100@% for @SlowDuration@ second. The second Attack always critically strikes for <physicalDamage>@AttackTwopercentTAD*100@% damage</physicalDamage>."
+			"variants": [
+				{
+					"name": "Bladework",
+					"image": "assets/characters/fiora/hud/icons2d/fiora_e.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						11,
+						11,
+						10,
+						9,
+						8,
+						7,
+						7
+					],
+					"tooltip": "Fiora gains <attackSpeed>@ASPercent*100@% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by @SlowPercent*-100@% for @SlowDuration@ second. The second Attack always critically strikes for <physicalDamage>@AttackTwopercentTAD*100@% damage</physicalDamage>.",
+					"dataValues": {
+						"BuffDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"SlowDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SlowPercent": [
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3
+						],
+						"ASPercent": [
+							0.4,
+							0.5,
+							0.6,
+							0.7,
+							0.8,
+							0.9,
+							1
+						],
+						"AttackOnePercentTAD": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"AttackTwoPercentTAD": [
+							1.5,
+							1.6,
+							1.7,
+							1.8,
+							1.9,
+							2,
+							2.1
+						]
+					},
+					"dataKey": "Characters/Fiora/Spells/FioraEAbility/FioraE"
+				}
+			]
 		},
 		"r": {
-			"image": "assets/characters/fiora/hud/icons2d/fiora_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"MarkDuration": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"PassiveAS": [
-					0.2,
-					0.3,
-					0.4,
-					0.5,
-					0.6,
-					0.7,
-					0.8
-				],
-				"PercentMS": [
-					0.2,
-					0.3,
-					0.4,
-					0.5,
-					0.6,
-					0.7,
-					0.8
-				],
-				"MSRingRadius": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				],
-				"HealDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"HealPerSecond": [
-					50,
-					75,
-					100,
-					125,
-					150,
-					175,
-					200
-				],
-				"HealRingRadius": [
-					550,
-					550,
-					550,
-					550,
-					550,
-					550,
-					550
-				],
-				"HealDurationExtension": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"Ratio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				]
-			},
-			"spellCalculations": {
-				"HealPerSecondCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "HealPerSecond",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Grand Challenge",
+					"image": "assets/characters/fiora/hud/icons2d/fiora_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						10,
+						110,
+						90,
+						70,
+						10,
+						10,
+						10
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_FioraPassive_Name}}</spellName> <speed>Move Speed</speed> bonus is increased to @PercentMS*100@%.<br><br><spellActive>Active:</spellActive> Fiora reveals all four <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>@spell.FioraPassive:RDamageTotal@ max Health true damage</trueDamage> and gains <spellName>{{Spell_FioraPassive_Name}}'s</spellName> <speed>Move Speed</speed> bonus while near the target.<br><br>If Fiora strikes all four <keywordMajor>Vitals</keywordMajor> within @MarkDuration@ seconds or if the target dies after she has hit at least one, Fiora restores <healing>@HealPerSecondCalc@ Health per second</healing> to surrounding allied champions for @HealDuration@ seconds.",
+					"dataValues": {
+						"MarkDuration": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"PassiveAS": [
+							0.2,
+							0.3,
+							0.4,
+							0.5,
+							0.6,
+							0.7,
+							0.8
+						],
+						"PercentMS": [
+							0.2,
+							0.3,
+							0.4,
+							0.5,
+							0.6,
+							0.7,
+							0.8
+						],
+						"MSRingRadius": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"HealDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"HealPerSecond": [
+							50,
+							75,
+							100,
+							125,
+							150,
+							175,
+							200
+						],
+						"HealRingRadius": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						],
+						"HealDurationExtension": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"Ratio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						]
+					},
+					"spellCalculations": {
+						"HealPerSecondCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "HealPerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Fiora/Spells/FioraRAbility/FioraR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				10,
-				110,
-				90,
-				70,
-				10,
-				10,
-				10
-			],
-			"name": "Grand Challenge",
-			"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_FioraPassive_Name}}</spellName> <speed>Move Speed</speed> bonus is increased to @PercentMS*100@%.<br><br><spellActive>Active:</spellActive> Fiora reveals all four <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>@spell.FioraPassive:RDamageTotal@ max Health true damage</trueDamage> and gains <spellName>{{Spell_FioraPassive_Name}}'s</spellName> <speed>Move Speed</speed> bonus while near the target.<br><br>If Fiora strikes all four <keywordMajor>Vitals</keywordMajor> within @MarkDuration@ seconds or if the target dies after she has hit at least one, Fiora restores <healing>@HealPerSecondCalc@ Health per second</healing> to surrounding allied champions for @HealDuration@ seconds."
+			]
 		}
 	}
 }

@@ -29,455 +29,548 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/lissandra/hud/icons2d/lissandra_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"MoveSpeedMod": [
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25,
-					-0.25
-				],
-				"ExplosionDelay": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"Range": [
-					1350,
-					1350,
-					1350,
-					1350,
-					1350,
-					1350,
-					1350
-				],
-				"Radius": [
-					450,
-					450,
-					450,
-					450,
-					450,
-					450,
-					450
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 120,
-							"mInitialBonusPerLevel": 20,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Iceborn Subjugation",
+					"image": "assets/characters/lissandra/hud/icons2d/lissandra_passive.png",
+					"tooltip": "When an enemy champion dies near Lissandra they become a frozen zombie that seeks out living enemies. Enemies near these zombies are <status>Slowed</status> by @MoveSpeedMod*-100@%. After @ExplosionDelay@ seconds, frozen zombies shatter, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"MoveSpeedMod": [
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25
+						],
+						"ExplosionDelay": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"Range": [
+							1350,
+							1350,
+							1350,
+							1350,
+							1350,
+							1350,
+							1350
+						],
+						"Radius": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
 								{
-									"mLevel": 13,
-									"mBonusPerLevelAtAndAfter": 30
+									"mLevel1Value": 120,
+									"mInitialBonusPerLevel": 20,
+									"mBreakpoints": [
+										{
+											"mLevel": 13,
+											"mBonusPerLevelAtAndAfter": 30
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraPassiveAbility/LissandraPassive"
 				}
-			},
-			"name": "Iceborn Subjugation",
-			"tooltip": "When an enemy champion dies near Lissandra they become a frozen zombie that seeks out living enemies. Enemies near these zombies are <status>Slowed</status> by @MoveSpeedMod*-100@%. After @ExplosionDelay@ seconds, frozen zombies shatter, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
+			]
 		},
 		"q": {
-			"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"damage": [
-					45,
-					80,
-					115,
-					150,
-					185,
-					220,
-					255
-				],
-				"slowDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"slowPercentage": [
-					-0.16,
-					-0.2,
-					-0.24,
-					-0.28,
-					-0.32,
-					-0.36,
-					-0.4
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.75,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Ice Shard",
+					"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
+					"mana": [
+						55,
+						60,
+						65,
+						70,
+						75,
+						80
+					],
+					"cooldownTime": [
+						9,
+						8,
+						7,
+						6,
+						5,
+						4,
+						3
+					],
+					"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them.",
+					"dataValues": {
+						"damage": [
+							45,
+							80,
+							115,
+							150,
+							185,
+							220,
+							255
+						],
+						"slowDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"slowPercentage": [
+							-0.16,
+							-0.2,
+							-0.24,
+							-0.28,
+							-0.32,
+							-0.36,
+							-0.4
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.75,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"2": [
+							-0.16,
+							-0.2,
+							-0.24,
+							-0.28,
+							-0.32,
+							-0.36,
+							-0.4
+						]
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraQAbility/LissandraQ"
+				},
+				{
+					"image": "",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							30,
+							90,
+							150,
+							245,
+							315,
+							440,
+							565
+						],
+						"1": [
+							2.25,
+							2.5,
+							2.75,
+							3,
+							3.25,
+							3.5,
+							3.75
+						]
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraQAbility/LissandraQMissile"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"2": [
-					-0.16,
-					-0.2,
-					-0.24,
-					-0.28,
-					-0.32,
-					-0.36,
-					-0.4
-				]
-			},
-			"mana": [
-				55,
-				60,
-				65,
-				70,
-				75,
-				80
-			],
-			"cooldownTime": [
-				9,
-				8,
-				7,
-				6,
-				5,
-				4,
-				3
-			],
-			"name": "Ice Shard",
-			"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them."
+			]
 		},
 		"w": {
-			"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.7,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Ring of Frost",
+					"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						8
+					],
+					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							30,
+							70,
+							105,
+							140,
+							175,
+							210,
+							245
+						],
+						"1": [
+							1.25,
+							1.25,
+							1.35,
+							1.45,
+							1.55,
+							1.65,
+							1.65
+						],
+						"2": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"3": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						]
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraWAbility/LissandraW"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					30,
-					70,
-					105,
-					140,
-					175,
-					210,
-					245
-				],
-				"1": [
-					1.25,
-					1.25,
-					1.35,
-					1.45,
-					1.55,
-					1.65,
-					1.65
-				],
-				"2": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"3": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				8
-			],
-			"name": "Ring of Frost",
-			"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.6,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Glacial Path",
+					"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png",
+					"mana": [
+						80,
+						85,
+						90,
+						95,
+						100,
+						105
+					],
+					"cooldownTime": [
+						27,
+						24,
+						21,
+						18,
+						15,
+						12,
+						12
+					],
+					"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location.",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							25,
+							70,
+							105,
+							140,
+							175,
+							210,
+							245
+						],
+						"1": [
+							15,
+							14,
+							13,
+							12,
+							11,
+							10,
+							9
+						],
+						"2": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraEAbility/LissandraE"
+				},
+				{
+					"image": "assets/spells/icons2d/cryophoenix_frigidorb.png",
+					"cooldownTime": [
+						13,
+						12,
+						11,
+						10,
+						9,
+						8,
+						8
+					],
+					"tooltipVariantIndex": 0,
+					"effectAmount": {
+						"0": [
+							50,
+							80,
+							110,
+							140,
+							170,
+							200,
+							230
+						],
+						"1": [
+							13,
+							12,
+							11,
+							10,
+							9,
+							8,
+							7
+						]
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraEAbility/LissandraEMissile"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					25,
-					70,
-					105,
-					140,
-					175,
-					210,
-					245
-				],
-				"1": [
-					15,
-					14,
-					13,
-					12,
-					11,
-					10,
-					9
-				],
-				"2": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				],
-				"3": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"mana": [
-				80,
-				85,
-				90,
-				95,
-				100,
-				105
-			],
-			"cooldownTime": [
-				27,
-				24,
-				21,
-				18,
-				15,
-				12,
-				12
-			],
-			"name": "Glacial Path",
-			"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location."
+			]
 		},
 		"r": {
-			"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"APRatio": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"BaseDamage": [
-					50,
-					150,
-					250,
-					350,
-					450,
-					550,
-					650
-				],
-				"SlowAmount": [
-					-0.3,
-					-0.45,
-					-0.6,
-					-0.75,
-					-0.9,
-					-1.05,
-					-1.2
-				],
-				"SlowDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"EnemyCastDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"SelfCastDuration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"SelfCastFlatHeal": [
-					50,
-					100,
-					150,
-					200,
-					250,
-					300,
-					350
-				],
-				"SelfCastMissingHPRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"SelfCastMissingHPPerAbove": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"StartingAoESize": [
-					292,
-					292,
-					292,
-					292,
-					292,
-					292,
-					292
-				],
-				"PercentMissingHPRatio": [
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55
-				]
-			},
-			"spellCalculations": {
-				"CalculatedDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Frozen Tomb",
+					"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						10,
+						120,
+						100,
+						80,
+						10,
+						10,
+						10
+					],
+					"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%.",
+					"dataValues": {
+						"APRatio": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"BaseDamage": [
+							50,
+							150,
+							250,
+							350,
+							450,
+							550,
+							650
+						],
+						"SlowAmount": [
+							-0.3,
+							-0.45,
+							-0.6,
+							-0.75,
+							-0.9,
+							-1.05,
+							-1.2
+						],
+						"SlowDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"EnemyCastDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"SelfCastDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"SelfCastFlatHeal": [
+							50,
+							100,
+							150,
+							200,
+							250,
+							300,
+							350
+						],
+						"SelfCastMissingHPRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SelfCastMissingHPPerAbove": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"StartingAoESize": [
+							292,
+							292,
+							292,
+							292,
+							292,
+							292,
+							292
+						],
+						"PercentMissingHPRatio": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						]
+					},
+					"spellCalculations": {
+						"CalculatedDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"HealAmount": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "SelfCastFlatHeal",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "PercentMissingHPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"HealAmount": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "SelfCastFlatHeal",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "PercentMissingHPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraRAbility/LissandraR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				10,
-				120,
-				100,
-				80,
-				10,
-				10,
-				10
-			],
-			"name": "Frozen Tomb",
-			"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%."
+			]
 		}
 	}
 }

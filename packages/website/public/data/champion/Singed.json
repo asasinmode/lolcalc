@@ -29,364 +29,389 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/singed/hud/icons2d/singed_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"MSPercent": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"MSDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"PerTargetCD": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"TriggerArea": [
-					225,
-					225,
-					225,
-					225,
-					225,
-					225,
-					225
-				]
-			},
-			"name": "Noxious Slipstream",
-			"tooltip": "Singed drafts off of nearby allied or enemy champions, gaining <speed>@MSPercent*100@% Move Speed</speed> for @MSDuration@ seconds. This effect has an @PerTargetCD@ second Cooldown per champion."
+			"variants": [
+				{
+					"name": "Noxious Slipstream",
+					"image": "assets/characters/singed/hud/icons2d/singed_passive.png",
+					"tooltip": "Singed drafts off of nearby allied or enemy champions, gaining <speed>@MSPercent*100@% Move Speed</speed> for @MSDuration@ seconds. This effect has an @PerTargetCD@ second Cooldown per champion.",
+					"dataValues": {
+						"MSPercent": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MSDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PerTargetCD": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"TriggerArea": [
+							225,
+							225,
+							225,
+							225,
+							225,
+							225,
+							225
+						]
+					},
+					"dataKey": "Characters/Singed/Spells/SingedPAbility/SingedP"
+				}
+			]
 		},
 		"q": {
-			"image": "assets/characters/singed/hud/icons2d/singed_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamagePerSecond": [
-					10,
-					20,
-					30,
-					40,
-					50,
-					60,
-					70
-				],
-				"APRatioPerSecond": [
-					0.425,
-					0.425,
-					0.425,
-					0.425,
-					0.425,
-					0.425,
-					0.425
-				],
-				"ToggleCooldown": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"CloudDuration": [
-					3.25,
-					3.25,
-					3.25,
-					3.25,
-					3.25,
-					3.25,
-					3.25
-				],
-				"PoisonDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"TicksPerSecond": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"MaxLingerTicks": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				]
-			},
-			"spellCalculations": {
-				"DamagePerSecond": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamagePerSecond",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatioPerSecond",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"ApproximateTotalDamageTooltip": {
-					"mMultiplier": {
-						"mNumber": 4.75
+			"variants": [
+				{
+					"name": "Poison Trail",
+					"image": "assets/characters/singed/hud/icons2d/singed_q.png",
+					"mana": [
+						13,
+						13,
+						13,
+						13,
+						13,
+						13
+					],
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "<toggle>Toggle:</toggle> Singed lays a poisonous trail that deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.",
+					"dataValues": {
+						"BaseDamagePerSecond": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"APRatioPerSecond": [
+							0.425,
+							0.425,
+							0.425,
+							0.425,
+							0.425,
+							0.425,
+							0.425
+						],
+						"ToggleCooldown": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CloudDuration": [
+							3.25,
+							3.25,
+							3.25,
+							3.25,
+							3.25,
+							3.25,
+							3.25
+						],
+						"PoisonDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"TicksPerSecond": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"MaxLingerTicks": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						]
 					},
-					"tooltipOnly": true,
-					"mModifiedGameCalculation": "DamagePerSecond"
+					"spellCalculations": {
+						"DamagePerSecond": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatioPerSecond",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ApproximateTotalDamageTooltip": {
+							"mMultiplier": {
+								"mNumber": 4.75
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "DamagePerSecond"
+						}
+					},
+					"dataKey": "Characters/Singed/Spells/PoisonTrailAbility/PoisonTrail"
 				}
-			},
-			"mana": [
-				13,
-				13,
-				13,
-				13,
-				13,
-				13
-			],
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Poison Trail",
-			"tooltip": "<toggle>Toggle:</toggle> Singed lays a poisonous trail that deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second."
+			]
 		},
 		"w": {
-			"image": "assets/characters/singed/hud/icons2d/singed_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"SlowPercent": [
-					45,
-					50,
-					55,
-					60,
-					65,
-					70,
-					75
-				],
-				"WDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"WRadius": [
-					265,
-					265,
-					265,
-					265,
-					265,
-					265,
-					265
-				],
-				"DelayExecute": [
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375,
-					0.375
-				]
-			},
-			"mana": [
-				60,
-				70,
-				80,
-				90,
-				100,
-				100
-			],
-			"cooldownTime": [
-				17,
-				17,
-				16,
-				15,
-				14,
-				13,
-				13
-			],
-			"name": "Mega Adhesive",
-			"tooltip": "Singed hurls a cask of sticky liquid, <status>Grounding</status> and <status>Slowing</status> enemies in the area by @SlowPercent@% for @WDuration@ seconds."
+			"variants": [
+				{
+					"name": "Mega Adhesive",
+					"image": "assets/characters/singed/hud/icons2d/singed_w.png",
+					"mana": [
+						60,
+						70,
+						80,
+						90,
+						100,
+						100
+					],
+					"cooldownTime": [
+						17,
+						17,
+						16,
+						15,
+						14,
+						13,
+						13
+					],
+					"tooltip": "Singed hurls a cask of sticky liquid, <status>Grounding</status> and <status>Slowing</status> enemies in the area by @SlowPercent@% for @WDuration@ seconds.",
+					"dataValues": {
+						"SlowPercent": [
+							45,
+							50,
+							55,
+							60,
+							65,
+							70,
+							75
+						],
+						"WDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"WRadius": [
+							265,
+							265,
+							265,
+							265,
+							265,
+							265,
+							265
+						],
+						"DelayExecute": [
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375,
+							0.375
+						]
+					},
+					"dataKey": "Characters/Singed/Spells/MegaAdhesiveAbility/MegaAdhesive"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/singed/hud/icons2d/singed_e.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"BaseDamage": {
-					"tooltipOnly": true,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.55,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Fling",
+					"image": "assets/characters/singed/hud/icons2d/singed_e.png",
+					"mana": [
+						60,
+						70,
+						80,
+						90,
+						100,
+						110
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						8
+					],
+					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds.",
+					"spellCalculations": {
+						"BaseDamage": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.55,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							50,
+							50,
+							60,
+							70,
+							80,
+							90,
+							100
+						],
+						"1": [
+							0.75,
+							1,
+							1.25,
+							1.5,
+							1.75,
+							2,
+							2.25
+						],
+						"2": [
+							6,
+							6,
+							6.5,
+							7,
+							7.5,
+							8,
+							8.5
+						],
+						"3": [
+							420,
+							420,
+							420,
+							420,
+							420,
+							420,
+							420
+						],
+						"4": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						]
+					},
+					"dataKey": "Characters/Singed/Spells/FlingAbility/Fling"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					50,
-					50,
-					60,
-					70,
-					80,
-					90,
-					100
-				],
-				"1": [
-					0.75,
-					1,
-					1.25,
-					1.5,
-					1.75,
-					2,
-					2.25
-				],
-				"2": [
-					6,
-					6,
-					6.5,
-					7,
-					7.5,
-					8,
-					8.5
-				],
-				"3": [
-					420,
-					420,
-					420,
-					420,
-					420,
-					420,
-					420
-				],
-				"4": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				]
-			},
-			"mana": [
-				60,
-				70,
-				80,
-				90,
-				100,
-				110
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				8
-			],
-			"name": "Fling",
-			"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds."
+			]
 		},
 		"r": {
-			"image": "assets/characters/singed/hud/icons2d/singed_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"StatAmount": [
-					-10,
-					25,
-					60,
-					95,
-					130,
-					165,
-					200
-				],
-				"Duration": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"GrievousAmount": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"GrievousDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"name": "Insanity Potion",
-			"tooltip": "Singed drinks a potent brew of chemicals, granting him @StatAmount@ <scaleAP>Ability Power</scaleAP>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, <speed>Move Speed</speed>, <healing>Health Regen</healing>, and <scaleMana>Mana Regen</scaleMana> for @Duration@ seconds. During this effect, Singed's <spellName>Poison Trail</spellName> also applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ second."
+			"variants": [
+				{
+					"name": "Insanity Potion",
+					"image": "assets/characters/singed/hud/icons2d/singed_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltip": "Singed drinks a potent brew of chemicals, granting him @StatAmount@ <scaleAP>Ability Power</scaleAP>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, <speed>Move Speed</speed>, <healing>Health Regen</healing>, and <scaleMana>Mana Regen</scaleMana> for @Duration@ seconds. During this effect, Singed's <spellName>Poison Trail</spellName> also applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ second.",
+					"dataValues": {
+						"StatAmount": [
+							-10,
+							25,
+							60,
+							95,
+							130,
+							165,
+							200
+						],
+						"Duration": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"GrievousAmount": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"GrievousDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Singed/Spells/InsanityPotionAbility/InsanityPotion"
+				}
+			]
 		}
 	}
 }

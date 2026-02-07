@@ -29,599 +29,624 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
 			"maxLevel": 0,
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mSubpart": {
-								"mLevel1Value": 0.5,
-								"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Love Tap",
+					"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
+					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.5,
+										"mBreakpoints": [
+											{
+												"mLevel": 4,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 7,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 9,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 13,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 20,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 25,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 30,
+												"mAdditionalBonusAtThisLevel": 0.1
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"MinionDamage": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/MissFortune/Spells/MissFortunePassiveAbility/MissFortunePassive"
+				}
+			]
+		},
+		"q": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Double Up",
+					"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						8,
+						7,
+						6,
+						5,
+						4,
+						3,
+						3
+					],
+					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
+					"dataValues": {
+						"BaseDamage": [
+							-5,
+							20,
+							45,
+							70,
+							95,
+							120,
+							145
+						],
+						"ADRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"APRatio": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"BounceCriticalMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamageTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalDamageCrit": {
+							"mMultiplier": {
+								"mSubparts": [
 									{
-										"mLevel": 4,
-										"mAdditionalBonusAtThisLevel": 0.1
+										"mNumber": 1
 									},
 									{
-										"mLevel": 7,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 9,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 11,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 13,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 20,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 25,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 30,
-										"mAdditionalBonusAtThisLevel": 0.1
+										"mPart1": {
+											"mDataValue": "{f2018e54}"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
 									}
 								]
 							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				},
-				"MinionDamage": {
-					"mMultiplier": {
-						"mNumber": 0.5
-					},
-					"mModifiedGameCalculation": "TotalDamage"
-				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Love Tap",
-			"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
-			"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>"
-		},
-		"q": {
-			"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					-5,
-					20,
-					45,
-					70,
-					95,
-					120,
-					145
-				],
-				"ADRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"APRatio": [
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35,
-					0.35
-				],
-				"BounceCriticalMod": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamageTooltip": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+							"mModifiedGameCalculation": "TotalDamageTooltip"
 						},
-						{
-							"mStat": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalDamageCrit": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mPart1": {
-									"mDataValue": "{f2018e54}"
-								},
-								"mPart2": {
-									"mSubparts": [
-										{
-											"mStat": 9,
-											"mCoefficient": 1
-										},
-										{
-											"mNumber": -1
-										}
-									]
+						"{5a1fd353}": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
 								}
-							}
+							]
+						}
+					},
+					"effectAmount": {
+						"1": [
+							0,
+							20,
+							45,
+							70,
+							95,
+							120,
+							120
+						],
+						"4": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"5": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"6": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"7": [
+							110,
+							110,
+							110,
+							110,
+							110,
+							110,
+							110
+						],
+						"8": [
+							160,
+							160,
+							160,
+							160,
+							160,
+							160,
+							160
 						]
 					},
-					"mModifiedGameCalculation": "TotalDamageTooltip"
-				},
-				"{5a1fd353}": {
-					"mFormulaParts": [
-						{
-							"mStat": 9,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					"dataKey": "Characters/MissFortune/Spells/MissFortuneRicochetShotAbility/MissFortuneRicochetShot"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					0,
-					20,
-					45,
-					70,
-					95,
-					120,
-					120
-				],
-				"4": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"5": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				],
-				"6": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"7": [
-					110,
-					110,
-					110,
-					110,
-					110,
-					110,
-					110
-				],
-				"8": [
-					160,
-					160,
-					160,
-					160,
-					160,
-					160,
-					160
-				]
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				8,
-				7,
-				6,
-				5,
-				4,
-				3,
-				3
-			],
-			"name": "Double Up",
-			"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target."
+			]
 		},
 		"w": {
-			"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"PassiveBaseMS": [
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				],
-				"PassiveMaxMS": [
-					50,
-					60,
-					70,
-					80,
-					90,
-					100,
-					110
-				],
-				"LoveTapBaseRefund": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"ActiveAS": [
-					0.25,
-					0.4,
-					0.55,
-					0.7,
-					0.85,
-					1,
-					1.15
-				],
-				"ActiveDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"PassiveBaseMSOOC": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"PassiveMaxMSExtraOOC": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"LoveTapRefund": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "LoveTapBaseRefund",
-							"__type": "NamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Strut",
+					"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png",
+					"mana": [
+						45,
+						45,
+						45,
+						45,
+						45,
+						45
 					],
-					"mPrecision": 1
-				}
-			},
-			"mana": [
-				45,
-				45,
-				45,
-				45,
-				45,
-				45
-			],
-			"cooldownTime": [
-				12,
-				12,
-				12,
-				12,
-				12,
-				12,
-				12
-			],
-			"name": "Strut",
-			"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds."
-		},
-		"e": {
-			"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamagePerSecond": [
-					20,
-					35,
-					50,
-					65,
-					80,
-					95,
-					110
-				],
-				"BaseDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"BaseSlowAmount": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"APRatioPerSecond": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"TicksPerSecond": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"CastDelay": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"SlowPer100AP": [
-					0.001,
-					0.001,
-					0.001,
-					0.001,
-					0.001,
-					0.001,
-					0.001
-				]
-			},
-			"spellCalculations": {
-				"TotalDamagePerSecond": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamagePerSecond",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatioPerSecond",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalSlowAmount": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseSlowAmount",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "SlowPer100AP",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+					"cooldownTime": [
+						12,
+						12,
+						12,
+						12,
+						12,
+						12,
+						12
 					],
-					"mDisplayAsPercent": true
-				},
-				"TotalDamage": {
-					"mMultiplier": {
-						"mDataValue": "BaseDuration"
-					},
-					"mModifiedGameCalculation": "TotalDamagePerSecond"
-				}
-			},
-			"mana": [
-				80,
-				80,
-				80,
-				80,
-				80,
-				80
-			],
-			"cooldownTime": [
-				20,
-				18,
-				17,
-				16,
-				15,
-				14,
-				13
-			],
-			"name": "Make It Rain",
-			"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>)."
-		},
-		"r": {
-			"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png",
-			"maxLevel": 3,
-			"dataValues": {
-				"BaseWaves": [
-					12,
-					14,
-					16,
-					18,
-					20,
-					22,
-					24
-				],
-				"BaseDamage": [
-					10,
-					20,
-					30,
-					40,
-					50,
-					60,
-					70
-				],
-				"tADRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"APRatio": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"CritDamageMultiplier": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"BaseChannelDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"PhysicalDamagePerWave": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "tADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"CritDamagePerWave": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mPart1": {
-									"mDataValue": "{8afc08bf}"
-								},
-								"mPart2": {
-									"mSubparts": [
-										{
-											"mStat": 9,
-											"mCoefficient": 1
-										},
-										{
-											"mNumber": -1
-										}
-									]
-								}
-							}
+					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
+					"dataValues": {
+						"PassiveBaseMS": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"PassiveMaxMS": [
+							50,
+							60,
+							70,
+							80,
+							90,
+							100,
+							110
+						],
+						"LoveTapBaseRefund": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"ActiveAS": [
+							0.25,
+							0.4,
+							0.55,
+							0.7,
+							0.85,
+							1,
+							1.15
+						],
+						"ActiveDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"PassiveBaseMSOOC": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"PassiveMaxMSExtraOOC": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
 						]
 					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mModifiedGameCalculation": "PhysicalDamagePerWave"
-				},
-				"TotalPhysicalDamage": {
-					"mMultiplier": {
-						"mDataValue": "BaseWaves"
+					"spellCalculations": {
+						"LoveTapRefund": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "LoveTapBaseRefund",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
 					},
-					"mModifiedGameCalculation": "PhysicalDamagePerWave"
+					"dataKey": "Characters/MissFortune/Spells/MissFortuneViciousStrikesAbility/MissFortuneViciousStrikes"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				130,
-				120,
-				110,
-				100,
-				90,
-				80,
-				70
-			],
-			"name": "Bullet Time",
-			"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>."
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Make It Rain",
+					"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png",
+					"mana": [
+						80,
+						80,
+						80,
+						80,
+						80,
+						80
+					],
+					"cooldownTime": [
+						20,
+						18,
+						17,
+						16,
+						15,
+						14,
+						13
+					],
+					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
+					"dataValues": {
+						"BaseDamagePerSecond": [
+							20,
+							35,
+							50,
+							65,
+							80,
+							95,
+							110
+						],
+						"BaseDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"BaseSlowAmount": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"APRatioPerSecond": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"TicksPerSecond": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"CastDelay": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"SlowPer100AP": [
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001
+						]
+					},
+					"spellCalculations": {
+						"TotalDamagePerSecond": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamagePerSecond",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatioPerSecond",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalSlowAmount": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseSlowAmount",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "SlowPer100AP",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"TotalDamage": {
+							"mMultiplier": {
+								"mDataValue": "BaseDuration"
+							},
+							"mModifiedGameCalculation": "TotalDamagePerSecond"
+						}
+					},
+					"dataKey": "Characters/MissFortune/Spells/MissFortuneScattershotAbility/MissFortuneScattershot"
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Bullet Time",
+					"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						130,
+						120,
+						110,
+						100,
+						90,
+						80,
+						70
+					],
+					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
+					"dataValues": {
+						"BaseWaves": [
+							12,
+							14,
+							16,
+							18,
+							20,
+							22,
+							24
+						],
+						"BaseDamage": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"tADRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"APRatio": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"CritDamageMultiplier": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"BaseChannelDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"PhysicalDamagePerWave": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "tADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"CritDamagePerWave": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mDataValue": "{8afc08bf}"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "PhysicalDamagePerWave"
+						},
+						"TotalPhysicalDamage": {
+							"mMultiplier": {
+								"mDataValue": "BaseWaves"
+							},
+							"mModifiedGameCalculation": "PhysicalDamagePerWave"
+						}
+					},
+					"dataKey": "Characters/MissFortune/Spells/MissFortuneBulletTimeAbility/MissFortuneBulletTime"
+				}
+			]
 		}
 	}
 }

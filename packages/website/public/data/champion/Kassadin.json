@@ -29,507 +29,532 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"DamageReductionPercent": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				]
-			},
-			"name": "Void Stone",
-			"tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
-			"tooltipExtended": "{{ Spell_VoidStone_Tooltip }}<br><rules>{{Reminder_Ghosted}}</rules>"
+			"variants": [
+				{
+					"name": "Void Stone",
+					"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png",
+					"tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
+					"tooltipExtended": "{{ Spell_VoidStone_Tooltip }}<br><rules>{{Reminder_Ghosted}}</rules>",
+					"dataValues": {
+						"DamageReductionPercent": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"dataKey": "Characters/Kassadin/Spells/VoidStoneAbility/VoidStone"
+				}
+			]
 		},
 		"q": {
-			"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					35,
-					65,
-					95,
-					125,
-					155,
-					185,
-					215
-				],
-				"ShieldAmount": [
-					50,
-					80,
-					110,
-					140,
-					170,
-					200,
-					230
-				],
-				"ShieldDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"TotalShield": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ShieldAmount",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Null Sphere",
+					"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png",
+					"mana": [
+						60,
+						65,
+						70,
+						75,
+						80,
+						80
+					],
+					"cooldownTime": [
+						10,
+						10,
+						9.5,
+						9,
+						8.5,
+						8,
+						8
+					],
+					"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							65,
+							95,
+							125,
+							155,
+							185,
+							215
+						],
+						"ShieldAmount": [
+							50,
+							80,
+							110,
+							140,
+							170,
+							200,
+							230
+						],
+						"ShieldDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShieldAmount",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.3,
-							"__type": "StatByCoefficientCalculationPart"
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.7,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							35,
+							65,
+							95,
+							125,
+							155,
+							185,
+							215
+						],
+						"2": [
+							80,
+							80,
+							110,
+							140,
+							170,
+							200,
+							230
+						],
+						"3": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"dataKey": "Characters/Kassadin/Spells/NullLanceAbility/NullLance"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					35,
-					65,
-					95,
-					125,
-					155,
-					185,
-					215
-				],
-				"2": [
-					80,
-					80,
-					110,
-					140,
-					170,
-					200,
-					230
-				],
-				"3": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"mana": [
-				60,
-				65,
-				70,
-				75,
-				80,
-				80
-			],
-			"cooldownTime": [
-				10,
-				10,
-				9.5,
-				9,
-				8.5,
-				8,
-				8
-			],
-			"name": "Null Sphere",
-			"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ActiveBaseDamage": [
-					25,
-					50,
-					75,
-					100,
-					125,
-					150,
-					175
-				],
-				"PassiveBaseDamage": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				],
-				"MissingManaRatio": [
-					3.5,
-					4,
-					4.5,
-					5,
-					5.5,
-					6,
-					6.5
-				],
-				"ChampionMissingManaRatio": [
-					17.5,
-					20,
-					22.5,
-					25,
-					27.5,
-					30,
-					32.5
-				]
-			},
-			"spellCalculations": {
-				"ActiveDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ActiveBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Nether Blade",
+					"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png",
+					"mana": [
+						1,
+						1,
+						1,
+						1,
+						1,
+						1
+					],
+					"cooldownTime": [
+						7,
+						7,
+						7,
+						7,
+						7,
+						7,
+						7
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions.",
+					"dataValues": {
+						"ActiveBaseDamage": [
+							25,
+							50,
+							75,
+							100,
+							125,
+							150,
+							175
+						],
+						"PassiveBaseDamage": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"MissingManaRatio": [
+							3.5,
+							4,
+							4.5,
+							5,
+							5.5,
+							6,
+							6.5
+						],
+						"ChampionMissingManaRatio": [
+							17.5,
+							20,
+							22.5,
+							25,
+							27.5,
+							30,
+							32.5
+						]
+					},
+					"spellCalculations": {
+						"ActiveDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ActiveBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.8,
-							"__type": "StatByCoefficientCalculationPart"
+						"OnHitDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"OnHitDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "PassiveBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							4,
+							4,
+							4.5,
+							5,
+							5.5,
+							6,
+							6
+						],
+						"1": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"2": [
+							25,
+							50,
+							75,
+							100,
+							125,
+							150,
+							175
+						],
+						"3": [
+							20,
+							20,
+							22.5,
+							25,
+							27.5,
+							30,
+							30
+						]
+					},
+					"dataKey": "Characters/Kassadin/Spells/NetherBladeAbility/NetherBlade"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					4,
-					4,
-					4.5,
-					5,
-					5.5,
-					6,
-					6
-				],
-				"1": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				],
-				"2": [
-					25,
-					50,
-					75,
-					100,
-					125,
-					150,
-					175
-				],
-				"3": [
-					20,
-					20,
-					22.5,
-					25,
-					27.5,
-					30,
-					30
-				]
-			},
-			"mana": [
-				1,
-				1,
-				1,
-				1,
-				1,
-				1
-			],
-			"cooldownTime": [
-				7,
-				7,
-				7,
-				7,
-				7,
-				7,
-				7
-			],
-			"name": "Nether Blade",
-			"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions."
+			]
 		},
 		"e": {
-			"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"ReductionPerSpellCast": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"BaseDamage": [
-					40,
-					70,
-					100,
-					130,
-					160,
-					190,
-					220
-				],
-				"APRatio": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Force Pulse",
+					"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png",
+					"mana": [
+						60,
+						65,
+						70,
+						75,
+						80,
+						85
+					],
+					"cooldownTime": [
+						22,
+						21,
+						20,
+						19,
+						18,
+						17,
+						16
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
+					"dataValues": {
+						"ReductionPerSpellCast": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"BaseDamage": [
+							40,
+							70,
+							100,
+							130,
+							160,
+							190,
+							220
+						],
+						"APRatio": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							40,
+							50,
+							60,
+							70,
+							80,
+							90,
+							100
+						],
+						"2": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Kassadin/Spells/ForcePulseAbility/ForcePulse"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					40,
-					50,
-					60,
-					70,
-					80,
-					90,
-					100
-				],
-				"2": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"mana": [
-				60,
-				65,
-				70,
-				75,
-				80,
-				85
-			],
-			"cooldownTime": [
-				22,
-				21,
-				20,
-				19,
-				18,
-				17,
-				16
-			],
-			"name": "Force Pulse",
-			"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second."
+			]
 		},
 		"r": {
-			"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseCD": [
-					5,
-					5,
-					3.5,
-					2,
-					2,
-					2,
-					2
-				],
-				"RBaseCost": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"RBaseDamage": [
-					70,
-					70,
-					90,
-					110,
-					110,
-					110,
-					110
-				],
-				"StackDamage": [
-					35,
-					35,
-					45,
-					55,
-					55,
-					55,
-					55
-				],
-				"APRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"APStackRatio": [
-					0.07,
-					0.07,
-					0.07,
-					0.07,
-					0.07,
-					0.07,
-					0.07
-				],
-				"RStackDuration": [
-					15,
-					15,
-					15,
-					15,
-					15,
-					15,
-					15
-				],
-				"MaxStacks": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"RManaRatio": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"RStackManaRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"RiftWalkBaseDamage": [
-					70,
-					70,
-					90,
-					110,
-					110,
-					110,
-					110
-				],
-				"CastRange": [
-					500,
-					500,
-					500,
-					500,
-					500,
-					500,
-					500
-				]
-			},
-			"spellCalculations": {
-				"BaseDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Riftwalk",
+					"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						5,
+						5,
+						3.5,
+						2,
+						2,
+						2,
+						2
+					],
+					"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times.",
+					"dataValues": {
+						"BaseCD": [
+							5,
+							5,
+							3.5,
+							2,
+							2,
+							2,
+							2
+						],
+						"RBaseCost": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"RBaseDamage": [
+							70,
+							70,
+							90,
+							110,
+							110,
+							110,
+							110
+						],
+						"StackDamage": [
+							35,
+							35,
+							45,
+							55,
+							55,
+							55,
+							55
+						],
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"APStackRatio": [
+							0.07,
+							0.07,
+							0.07,
+							0.07,
+							0.07,
+							0.07,
+							0.07
+						],
+						"RStackDuration": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"MaxStacks": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"RManaRatio": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"RStackManaRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"RiftWalkBaseDamage": [
+							70,
+							70,
+							90,
+							110,
+							110,
+							110,
+							110
+						],
+						"CastRange": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						]
+					},
+					"spellCalculations": {
+						"BaseDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.02,
+									"__type": "AbilityResourceByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.02,
-							"__type": "AbilityResourceByCoefficientCalculationPart"
+						"BonusDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "StackDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APStackRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.01,
+									"__type": "AbilityResourceByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"BonusDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "StackDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APStackRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.01,
-							"__type": "AbilityResourceByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Kassadin/Spells/RiftWalkAbility/RiftWalk"
 				}
-			},
-			"mana": [
-				40,
-				40,
-				40,
-				40,
-				40,
-				40
-			],
-			"cooldownTime": [
-				5,
-				5,
-				3.5,
-				2,
-				2,
-				2,
-				2
-			],
-			"name": "Riftwalk",
-			"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times."
+			]
 		}
 	}
 }

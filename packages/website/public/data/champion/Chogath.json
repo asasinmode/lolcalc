@@ -29,544 +29,569 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png",
 			"maxLevel": 0,
-			"spellCalculations": {
-				"ChogathCarnivoreHeal": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 18,
-							"mInitialBonusPerLevel": 2,
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+			"variants": [
+				{
+					"name": "Carnivore",
+					"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png",
+					"tooltip": "Killing an enemy restores <scaleLevel>@ChogathCarnivoreHeal@</scaleLevel> Health and <scaleLevel>@ChogathCarnivoreMana@</scaleLevel> Mana.",
+					"spellCalculations": {
+						"ChogathCarnivoreHeal": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 18,
+									"mInitialBonusPerLevel": 2,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ChogathCarnivoreMana": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 4.72,
+									"mInitialBonusPerLevel": 0.28,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 1
 						}
-					]
-				},
-				"ChogathCarnivoreMana": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 4.72,
-							"mInitialBonusPerLevel": 0.28,
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mPrecision": 1
+					},
+					"effectAmount": {
+						"0": [
+							16,
+							16,
+							16,
+							16,
+							16,
+							16,
+							16
+						],
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"2": [
+							4.72,
+							4.72,
+							4.72,
+							4.72,
+							4.72,
+							4.72,
+							4.72
+						],
+						"3": [
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28
+						]
+					},
+					"dataKey": "Characters/Chogath/Spells/CarnivoreAbility/Carnivore"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					16,
-					16,
-					16,
-					16,
-					16,
-					16,
-					16
-				],
-				"1": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"2": [
-					4.72,
-					4.72,
-					4.72,
-					4.72,
-					4.72,
-					4.72,
-					4.72
-				],
-				"3": [
-					0.28,
-					0.28,
-					0.28,
-					0.28,
-					0.28,
-					0.28,
-					0.28
-				]
-			},
-			"name": "Carnivore",
-			"tooltip": "Killing an enemy restores <scaleLevel>@ChogathCarnivoreHeal@</scaleLevel> Health and <scaleLevel>@ChogathCarnivoreMana@</scaleLevel> Mana."
+			]
 		},
 		"q": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					25,
-					80,
-					135,
-					190,
-					245,
-					300,
-					355
-				],
-				"SlowAmountPercentage": [
-					60,
-					60,
-					60,
-					60,
-					60,
-					60,
-					60
-				]
-			},
-			"spellCalculations": {
-				"TotalDamageTooltip": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Rupture",
+					"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png",
+					"mana": [
+						50,
+						50,
+						50,
+						50,
+						50,
+						50
+					],
+					"cooldownTime": [
+						6,
+						6,
+						6,
+						6,
+						6,
+						6,
+						6
+					],
+					"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							25,
+							80,
+							135,
+							190,
+							245,
+							300,
+							355
+						],
+						"SlowAmountPercentage": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						]
+					},
+					"spellCalculations": {
+						"TotalDamageTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"1": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"2": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"3": [
+							0.625,
+							0.625,
+							0.625,
+							0.625,
+							0.625,
+							0.625,
+							0.625
+						],
+						"4": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Chogath/Spells/RuptureAbility/Rupture"
 				}
-			},
-			"effectAmount": {
-				"1": [
-					60,
-					60,
-					60,
-					60,
-					60,
-					60,
-					60
-				],
-				"2": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"3": [
-					0.625,
-					0.625,
-					0.625,
-					0.625,
-					0.625,
-					0.625,
-					0.625
-				],
-				"4": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"mana": [
-				50,
-				50,
-				50,
-				50,
-				50,
-				50
-			],
-			"cooldownTime": [
-				6,
-				6,
-				6,
-				6,
-				6,
-				6,
-				6
-			],
-			"name": "Rupture",
-			"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png",
 			"maxLevel": 5,
-			"spellCalculations": {
-				"TotalDamageTooltip": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.7,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Feral Scream",
+					"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png",
+					"mana": [
+						70,
+						75,
+						80,
+						85,
+						90,
+						95
+					],
+					"cooldownTime": [
+						11,
+						11,
+						10.5,
+						10,
+						9.5,
+						9,
+						9
+					],
+					"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
+					"spellCalculations": {
+						"TotalDamageTooltip": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.7,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							80,
+							80,
+							130,
+							180,
+							230,
+							280,
+							280
+						],
+						"1": [
+							1.6,
+							1.6,
+							1.7,
+							1.8,
+							1.9,
+							2,
+							2
+						]
+					},
+					"dataKey": "Characters/Chogath/Spells/FeralScreamAbility/FeralScream"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					80,
-					80,
-					130,
-					180,
-					230,
-					280,
-					280
-				],
-				"1": [
-					1.6,
-					1.6,
-					1.7,
-					1.8,
-					1.9,
-					2,
-					2
-				]
-			},
-			"mana": [
-				70,
-				75,
-				80,
-				85,
-				90,
-				95
-			],
-			"cooldownTime": [
-				11,
-				11,
-				10.5,
-				10,
-				9.5,
-				9,
-				9
-			],
-			"name": "Feral Scream",
-			"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					0,
-					20,
-					40,
-					60,
-					80,
-					100,
-					120
-				],
-				"APRatio": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"PercentHealthDamage": [
-					2.15,
-					2.5,
-					2.85,
-					3.2,
-					3.55,
-					3.9,
-					4.25
-				],
-				"FeastStackMultiplier": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"MonsterDamageCap": [
-					200,
-					200,
-					200,
-					200,
-					200,
-					200,
-					200
-				],
-				"SlowAmountPercentage": [
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				],
-				"SlowDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"AttackRangeIncrease": [
-					50,
-					50,
-					50,
-					50,
-					50,
-					50,
-					50
-				],
-				"MaximumAttacks": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"BuffDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"ModifiedMonsterCap": [
-					50,
-					80,
-					110,
-					140,
-					170,
-					200,
-					230
-				]
-			},
-			"spellCalculations": {
-				"FlatDamageCalc": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MaxHealthPercentCalc": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "PercentHealthDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mBuffName": "{8682fc00}",
-							"mDataValue": "FeastStackMultiplier",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Vorpal Spikes",
+					"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png",
+					"mana": [
+						30,
+						30,
+						30,
+						30,
+						30,
+						30
 					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
+					"cooldownTime": [
+						8,
+						8,
+						7,
+						6,
+						5,
+						4,
+						4
+					],
+					"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							0,
+							20,
+							40,
+							60,
+							80,
+							100,
+							120
+						],
+						"APRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"PercentHealthDamage": [
+							2.15,
+							2.5,
+							2.85,
+							3.2,
+							3.55,
+							3.9,
+							4.25
+						],
+						"FeastStackMultiplier": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MonsterDamageCap": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"SlowAmountPercentage": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"SlowDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"AttackRangeIncrease": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"MaximumAttacks": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"BuffDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"ModifiedMonsterCap": [
+							50,
+							80,
+							110,
+							140,
+							170,
+							200,
+							230
+						]
+					},
+					"spellCalculations": {
+						"FlatDamageCalc": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MaxHealthPercentCalc": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "PercentHealthDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mBuffName": "{8682fc00}",
+									"mDataValue": "FeastStackMultiplier",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Chogath/Spells/VorpalSpikesAbility/VorpalSpikes"
 				}
-			},
-			"mana": [
-				30,
-				30,
-				30,
-				30,
-				30,
-				30
-			],
-			"cooldownTime": [
-				8,
-				8,
-				7,
-				6,
-				5,
-				4,
-				4
-			],
-			"name": "Vorpal Spikes",
-			"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds."
+			]
 		},
 		"r": {
-			"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RBaseMonsterDamage": [
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200,
-					1200
-				],
-				"RBaseDamage": [
-					125,
-					300,
-					475,
-					650,
-					825,
-					1000,
-					1175
-				],
-				"RHealthPerStack": [
-					40,
-					80,
-					120,
-					160,
-					200,
-					240,
-					280
-				],
-				"RMinionMaxStacks": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"RStoneplateRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"CastRangePerStack": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"MaxBonusCastRange": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"AttackRangePerStack": [
-					3.2,
-					4.7,
-					6.2,
-					7.7,
-					9.2,
-					10.7,
-					12.2
-				],
-				"MaxBonusAttackRange": [
-					75,
-					75,
-					75,
-					75,
-					75,
-					75,
-					75
-				]
-			},
-			"spellCalculations": {
-				"RMonsterDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "RBaseMonsterDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Feast",
+					"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png",
+					"mana": [
+						100,
+						100,
+						100,
+						60,
+						60,
+						0
+					],
+					"cooldownTime": [
+						70,
+						80,
+						70,
+						60,
+						10,
+						10,
+						70
+					],
+					"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. ",
+					"dataValues": {
+						"RBaseMonsterDamage": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"RBaseDamage": [
+							125,
+							300,
+							475,
+							650,
+							825,
+							1000,
+							1175
+						],
+						"RHealthPerStack": [
+							40,
+							80,
+							120,
+							160,
+							200,
+							240,
+							280
+						],
+						"RMinionMaxStacks": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"RStoneplateRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CastRangePerStack": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"MaxBonusCastRange": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"AttackRangePerStack": [
+							3.2,
+							4.7,
+							6.2,
+							7.7,
+							9.2,
+							10.7,
+							12.2
+						],
+						"MaxBonusAttackRange": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						]
+					},
+					"spellCalculations": {
+						"RMonsterDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseMonsterDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
+						"RDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "RBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"RDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "RBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+						"BonusAttackRange": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{8682fc00}",
+									"mDataValue": "AttackRangePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 12,
-							"mStatFormula": 2,
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
+						"{9f798bd0}": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{8682fc00}",
+									"mDataValue": "CastRangePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"BonusAttackRange": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{8682fc00}",
-							"mDataValue": "AttackRangePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"{9f798bd0}": {
-					"mFormulaParts": [
-						{
-							"mBuffName": "{8682fc00}",
-							"mDataValue": "CastRangePerStack",
-							"__type": "BuffCounterByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Chogath/Spells/FeastAbility/Feast"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				60,
-				60,
-				0
-			],
-			"cooldownTime": [
-				70,
-				80,
-				70,
-				60,
-				10,
-				10,
-				70
-			],
-			"name": "Feast",
-			"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. "
+			]
 		}
 	}
 }

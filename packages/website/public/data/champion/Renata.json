@@ -29,565 +29,604 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/renata/hud/icons2d/renata_p.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"PercentAmp": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"APToPercentRatio": [
-					0,
-					0,
-					0,
-					0,
-					0,
-					0,
-					0
-				],
-				"MonsterDamageCap": [
-					150,
-					150,
-					150,
-					150,
-					150,
-					150,
-					150
-				],
-				"PassiveDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				]
-			},
-			"spellCalculations": {
-				"PercentAmpCalc": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.01,
-							"mInitialBonusPerLevel": 0.001,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Leverage",
+					"image": "assets/characters/renata/hud/icons2d/renata_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Renata's Attacks mark enemies for @PassiveDuration@ seconds and deal an additional <magicDamage>@PercentAmpCalcSelf@ max Health magic damage</magicDamage> if they were unmarked.<br><br>Allied champions' Attacks or Abilities consume the mark, dealing <magicDamage>@PercentAmpCalc@ max Health magic damage</magicDamage>.<br><br><rules>Renata may only have one target marked at a time.</rules>",
+					"dataValues": {
+						"PercentAmp": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"APToPercentRatio": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"MonsterDamageCap": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"PassiveDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"spellCalculations": {
+						"PercentAmpCalc": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mBonusPerLevelAtAndAfter": 0.001
+									"mLevel1Value": 0.01,
+									"mInitialBonusPerLevel": 0.001,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mBonusPerLevelAtAndAfter": 0.001
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.001
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								},
 								{
-									"mLevel": 9,
-									"mAdditionalBonusAtThisLevel": 0.001
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
-						{
-							"mDataValue": "APToPercentRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
-				},
-				"PercentAmpCalcSelf": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.01,
-							"mInitialBonusPerLevel": 0.001,
-							"mBreakpoints": [
+						"PercentAmpCalcSelf": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mBonusPerLevelAtAndAfter": 0.001
+									"mLevel1Value": 0.01,
+									"mInitialBonusPerLevel": 0.001,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mBonusPerLevelAtAndAfter": 0.001
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.001
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								},
 								{
-									"mLevel": 9,
-									"mAdditionalBonusAtThisLevel": 0.001
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						},
-						{
-							"mDataValue": "APToPercentRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						}
-					],
-					"mDisplayAsPercent": true,
-					"mPrecision": 1
+					},
+					"dataKey": "Characters/Renata/Spells/RenataPassiveAbility/RenataPassive"
 				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Leverage",
-			"tooltip": "Renata's Attacks mark enemies for @PassiveDuration@ seconds and deal an additional <magicDamage>@PercentAmpCalcSelf@ max Health magic damage</magicDamage> if they were unmarked.<br><br>Allied champions' Attacks or Abilities consume the mark, dealing <magicDamage>@PercentAmpCalc@ max Health magic damage</magicDamage>.<br><br><rules>Renata may only have one target marked at a time.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/renata/hud/icons2d/renata_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Damage": [
-					35,
-					80,
-					125,
-					170,
-					215,
-					260,
-					305
-				],
-				"RootDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"SelfSlow": [
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3,
-					-0.3
-				],
-				"StunDuration": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"PullDistance": [
-					275,
-					275,
-					275,
-					275,
-					275,
-					275,
-					275
-				],
-				"APRatio": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Handshake",
+					"image": "assets/characters/renata/hud/icons2d/renata_q.png",
+					"mana": [
+						80,
+						80,
+						80,
+						80,
+						80,
+						80
+					],
+					"cooldownTime": [
+						16,
+						16,
+						16,
+						16,
+						16,
+						16,
+						16
+					],
+					"tooltip": "Renata sends out a missile from her arm, <status>Rooting</status> the first enemy hit for @RootDuration@ second and dealing <magicDamage>@TotalDamage@</magicDamage> <magicDamage>magic damage</magicDamage>.<br><br><recast>Recast:</recast> Renata <status>Pulls</status> the enemy in a direction, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they are thrown into and <status>Stunning</status> for @StunDuration@ seconds if the thrown enemy is a champion.",
+					"dataValues": {
+						"Damage": [
+							35,
+							80,
+							125,
+							170,
+							215,
+							260,
+							305
+						],
+						"RootDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SelfSlow": [
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3,
+							-0.3
+						],
+						"StunDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"PullDistance": [
+							275,
+							275,
+							275,
+							275,
+							275,
+							275,
+							275
+						],
+						"APRatio": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Renata/Spells/RenataQAbility/RenataQ"
+				},
+				{
+					"image": "assets/characters/renata/hud/icons2d/renata_q2.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltipVariantIndex": 0,
+					"dataKey": "Characters/Renata/Spells/RenataQAbility/RenataQRecast"
 				}
-			},
-			"mana": [
-				80,
-				80,
-				80,
-				80,
-				80,
-				80
-			],
-			"cooldownTime": [
-				16,
-				16,
-				16,
-				16,
-				16,
-				16,
-				16
-			],
-			"name": "Handshake",
-			"tooltip": "Renata sends out a missile from her arm, <status>Rooting</status> the first enemy hit for @RootDuration@ second and dealing <magicDamage>@TotalDamage@</magicDamage> <magicDamage>magic damage</magicDamage>.<br><br><recast>Recast:</recast> Renata <status>Pulls</status> the enemy in a direction, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they are thrown into and <status>Stunning</status> for @StunDuration@ seconds if the thrown enemy is a champion."
+			]
 		},
 		"w": {
-			"image": "assets/characters/renata/hud/icons2d/renata_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Duration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BonusAttackSpeed": [
-					5,
-					10,
-					15,
-					20,
-					25,
-					30,
-					35
-				],
-				"BonusMoveSpeed": [
-					7.5,
-					10,
-					12.5,
-					15,
-					17.5,
-					20,
-					22.5
-				],
-				"APToPercentRatio": [
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01
-				],
-				"TriumphPercent": [
-					20,
-					20,
-					20,
-					20,
-					20,
-					20,
-					20
-				],
-				"TicksBeforeDeath": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"MaxStatMultiplier": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"TicksPerSecond": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"TagDuration": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				]
-			},
-			"spellCalculations": {
-				"ASCalc": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusAttackSpeed",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APToPercentRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Bailout",
+					"image": "assets/characters/renata/hud/icons2d/renata_w.png",
+					"mana": [
+						80,
+						80,
+						80,
+						80,
+						80,
+						80
 					],
-					"mDisplayAsPercent": true
-				},
-				"MSCalc": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusMoveSpeed",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APToPercentRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
+					"cooldownTime": [
+						24,
+						28,
+						27,
+						26,
+						25,
+						24,
+						10
 					],
-					"mDisplayAsPercent": true
-				},
-				"{85d7d7f0}": {
-					"mMultiplier": {
-						"mNumber": 0.25
+					"tooltip": "Renata infuses an ally champion, granting <attackSpeed>@ASCalc@ Attack Speed</attackSpeed> and <speed>@MSCalc@ Move Speed</speed> towards enemies, increasing to <attackSpeed>@FinalASCalc@ Attack Speed</attackSpeed> and <speed>@FinalMSCalc@ Move Speed</speed> over @Duration@ seconds. Takedowns refresh the duration of the buff.<br><br>If the ally would die, they instead return to full Health, which then decays over 3 seconds.<br><br>If they get a Takedown while decaying, they will be set to <healing>@TriumphPercent@% max Health</healing> and stop decaying.<br><br><rules>The Champion's death can be delayed by healing or similar effects while in the decaying state, but cannot be prevented unless the Champion gets a Takedown. Champions can only delay their death once.</rules>",
+					"dataValues": {
+						"Duration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BonusAttackSpeed": [
+							5,
+							10,
+							15,
+							20,
+							25,
+							30,
+							35
+						],
+						"BonusMoveSpeed": [
+							7.5,
+							10,
+							12.5,
+							15,
+							17.5,
+							20,
+							22.5
+						],
+						"APToPercentRatio": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"TriumphPercent": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"TicksBeforeDeath": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"MaxStatMultiplier": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"TicksPerSecond": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"TagDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
 					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "TicksBeforeDeath",
-							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"FinalASCalc": {
-					"mMultiplier": {
-						"mNumber": 0.02
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusAttackSpeed",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"ASCalc": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusAttackSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						},
-						{
-							"mDataValue": "APToPercentRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
-				},
-				"FinalMSCalc": {
-					"mMultiplier": {
-						"mNumber": 0.02
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusMoveSpeed",
-							"__type": "NamedDataValueCalculationPart"
+						"MSCalc": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusMoveSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						},
-						{
-							"mDataValue": "APToPercentRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"{85d7d7f0}": {
+							"mMultiplier": {
+								"mNumber": 0.25
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "TicksBeforeDeath",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"FinalASCalc": {
+							"mMultiplier": {
+								"mNumber": 0.02
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusAttackSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"FinalMSCalc": {
+							"mMultiplier": {
+								"mNumber": 0.02
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusMoveSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"dataKey": "Characters/Renata/Spells/RenataWAbility/RenataW"
 				}
-			},
-			"mana": [
-				80,
-				80,
-				80,
-				80,
-				80,
-				80
-			],
-			"cooldownTime": [
-				24,
-				28,
-				27,
-				26,
-				25,
-				24,
-				10
-			],
-			"name": "Bailout",
-			"tooltip": "Renata infuses an ally champion, granting <attackSpeed>@ASCalc@ Attack Speed</attackSpeed> and <speed>@MSCalc@ Move Speed</speed> towards enemies, increasing to <attackSpeed>@FinalASCalc@ Attack Speed</attackSpeed> and <speed>@FinalMSCalc@ Move Speed</speed> over @Duration@ seconds. Takedowns refresh the duration of the buff.<br><br>If the ally would die, they instead return to full Health, which then decays over 3 seconds.<br><br>If they get a Takedown while decaying, they will be set to <healing>@TriumphPercent@% max Health</healing> and stop decaying.<br><br><rules>The Champion's death can be delayed by healing or similar effects while in the decaying state, but cannot be prevented unless the Champion gets a Takedown. Champions can only delay their death once.</rules>"
+			]
 		},
 		"e": {
-			"image": "assets/characters/renata/hud/icons2d/renata_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Damage": [
-					35,
-					65,
-					95,
-					125,
-					155,
-					185,
-					215
-				],
-				"SlowPercent": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				],
-				"ShieldValue": [
-					35,
-					50,
-					65,
-					80,
-					95,
-					110,
-					125
-				],
-				"ShieldDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"SlowDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"InitialAoE": [
-					325,
-					325,
-					325,
-					325,
-					325,
-					325,
-					325
-				],
-				"EndAoE": [
-					225,
-					225,
-					225,
-					225,
-					225,
-					225,
-					225
-				],
-				"ShieldAPRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.55,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"{fe737c05}": {
-					"mMultiplier": {
-						"mNumber": 0.01
-					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "SlowPercent",
-							"__type": "NamedDataValueCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Loyalty Program",
+					"image": "assets/characters/renata/hud/icons2d/renata_e.png",
+					"mana": [
+						70,
+						80,
+						90,
+						100,
+						110,
+						120
 					],
-					"mDisplayAsPercent": true
-				},
-				"ShieldCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ShieldValue",
-							"__type": "NamedDataValueCalculationPart"
+					"cooldownTime": [
+						14,
+						14,
+						13,
+						12,
+						11,
+						10,
+						10
+					],
+					"tooltip": "Renata sends out a pair of chemtech missiles, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> surrounding enemies and enemies hit by 30% for @SlowDuration@ seconds. Allies hit gain <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds.",
+					"dataValues": {
+						"Damage": [
+							35,
+							65,
+							95,
+							125,
+							155,
+							185,
+							215
+						],
+						"SlowPercent": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"ShieldValue": [
+							35,
+							50,
+							65,
+							80,
+							95,
+							110,
+							125
+						],
+						"ShieldDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"SlowDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"InitialAoE": [
+							325,
+							325,
+							325,
+							325,
+							325,
+							325,
+							325
+						],
+						"EndAoE": [
+							225,
+							225,
+							225,
+							225,
+							225,
+							225,
+							225
+						],
+						"ShieldAPRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.55,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "ShieldAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"{fe737c05}": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "SlowPercent",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"ShieldCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShieldValue",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Renata/Spells/RenataEAbility/RenataE"
 				}
-			},
-			"mana": [
-				70,
-				80,
-				90,
-				100,
-				110,
-				120
-			],
-			"cooldownTime": [
-				14,
-				14,
-				13,
-				12,
-				11,
-				10,
-				10
-			],
-			"name": "Loyalty Program",
-			"tooltip": "Renata sends out a pair of chemtech missiles, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> surrounding enemies and enemies hit by 30% for @SlowDuration@ seconds. Allies hit gain <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds."
+			]
 		},
 		"r": {
-			"image": "assets/characters/renata/hud/icons2d/renata_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BerserkDuration": [
-					0.75,
-					1.25,
-					1.75,
-					2.25,
-					2.75,
-					3.25,
-					3.75
-				],
-				"BonusAttackSpeed": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				150,
-				150,
-				130,
-				110,
-				10,
-				10,
-				10
-			],
-			"name": "Hostile Takeover",
-			"tooltip": "Renata sends out a wave of chemicals, <status>Berserking</status> enemies for @BerserkDuration@ seconds, causing them to Attack the nearest unit, prioritizing their allies.<br><br>While <status>Berserk</status>, enemies gain <attackSpeed>@BonusAttackSpeed*100@% Attack Speed</attackSpeed>."
+			"variants": [
+				{
+					"name": "Hostile Takeover",
+					"image": "assets/characters/renata/hud/icons2d/renata_r.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						150,
+						150,
+						130,
+						110,
+						10,
+						10,
+						10
+					],
+					"tooltip": "Renata sends out a wave of chemicals, <status>Berserking</status> enemies for @BerserkDuration@ seconds, causing them to Attack the nearest unit, prioritizing their allies.<br><br>While <status>Berserk</status>, enemies gain <attackSpeed>@BonusAttackSpeed*100@% Attack Speed</attackSpeed>.",
+					"dataValues": {
+						"BerserkDuration": [
+							0.75,
+							1.25,
+							1.75,
+							2.25,
+							2.75,
+							3.25,
+							3.75
+						],
+						"BonusAttackSpeed": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Renata/Spells/RenataRAbility/RenataR"
+				}
+			]
 		}
 	}
 }

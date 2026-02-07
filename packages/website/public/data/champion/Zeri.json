@@ -29,868 +29,893 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/zeri/hud/icons2d/zeriqpassivecharged.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"ShieldDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"HastePercent": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"EnergizedDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"PercentShieldSteal": [
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45,
-					0.45
-				],
-				"ChampHitHasteDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"PassiveAttackSpeed": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.2,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Living Battery",
+					"image": "assets/characters/zeri/hud/icons2d/zeriqpassivecharged.png",
+					"tooltip": "Zeri's Attacks are treated as Abilities instead of Attacks and can be charged up by moving and casting <spellName>{{Spell_ZeriQ_Name}}</spellName>. Uncharged Attacks consume a small amount of charge, deal <magicDamage>@Spell.ZeriQ:MinDamage@ magic damage</magicDamage> and <danger>execute</danger> enemies below <attention>@Spell.ZeriQ:PassiveExecuteThreshold@ Health</attention>. A fully charged Attack deals <magicDamage>@Spell.ZeriQ:PassiveMaxDamage@ + @Spell.ZeriQ:PassiveMaxChargePercentHealth@ max Health magic damage</magicDamage> and consumes all charge.",
+					"tooltipExtended": "{{Spell_ZeriPassive_Tooltip}}<br><br><rules>Percent Health damage against jungle monsters is capped at 300.</rules>",
+					"dataValues": {
+						"ShieldDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"HastePercent": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"EnergizedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PercentShieldSteal": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						],
+						"ChampHitHasteDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"PassiveAttackSpeed": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.05
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.05
+									"mLevel1Value": 0.2,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Zeri/Spells/ZeriPassiveAbility/ZeriPassive"
 				}
-			},
-			"name": "Living Battery",
-			"tooltip": "Zeri's Attacks are treated as Abilities instead of Attacks and can be charged up by moving and casting <spellName>{{Spell_ZeriQ_Name}}</spellName>. Uncharged Attacks consume a small amount of charge, deal <magicDamage>@Spell.ZeriQ:MinDamage@ magic damage</magicDamage> and <danger>execute</danger> enemies below <attention>@Spell.ZeriQ:PassiveExecuteThreshold@ Health</attention>. A fully charged Attack deals <magicDamage>@Spell.ZeriQ:PassiveMaxDamage@ + @Spell.ZeriQ:PassiveMaxChargePercentHealth@ max Health magic damage</magicDamage> and consumes all charge.",
-			"tooltipExtended": "{{Spell_ZeriPassive_Tooltip}}<br><br><rules>Percent Health damage against jungle monsters is capped at 300.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/zeri/hud/icons2d/zeriq.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MinCooldown": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"AttackSpeedCap": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"ExcessAttackSpeedToADMult": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				],
-				"BaseDamage": [
-					13,
-					15,
-					17,
-					19,
-					21,
-					23,
-					25
-				],
-				"ActiveADRatio": [
-					1,
-					1.04,
-					1.08,
-					1.12,
-					1.16,
-					1.2,
-					1.24
-				],
-				"NumberOfMissiles": [
-					7,
-					7,
-					7,
-					7,
-					7,
-					7,
-					7
-				],
-				"EnergizedMissiles": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"SlowDuration": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"SlowPercent": [
-					0.99,
-					0.99,
-					0.99,
-					0.99,
-					0.99,
-					0.99,
-					0.99
-				],
-				"ActivePercentDamageToTowers": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"MaxPercentHealthToMonsters": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"ChargePerAttack": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				],
-				"ChargeDistanceMultiplier": [
-					0.025,
-					0.025,
-					0.025,
-					0.025,
-					0.025,
-					0.025,
-					0.025
-				]
-			},
-			"spellCalculations": {
-				"ActiveDamageThatCanCrit": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "ActiveADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MinDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 10,
-							"mEndValue": 25,
-							"mScaleByStatProgressionMultiplier": true,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mCoefficient": 0.03,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"CurrentCritDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 9,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PassiveMaxDamage": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 75,
-							"mEndValue": 160,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						},
-						{
-							"mCoefficient": 1.1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"PassiveMaxChargePercentHealth": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 0.01,
-							"mEndValue": 0.11,
-							"__type": "ByCharLevelInterpolationCalculationPart"
-						}
+			"variants": [
+				{
+					"name": "Burst Fire",
+					"image": "assets/characters/zeri/hud/icons2d/zeriq.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
 					],
-					"mDisplayAsPercent": true
-				},
-				"PassiveExecuteThreshold": {
-					"mFormulaParts": [
-						{
-							"mStartValue": 60,
-							"mEndValue": 150,
-							"__type": "ByCharLevelInterpolationCalculationPart"
+					"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. ",
+					"dataValues": {
+						"MinCooldown": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"AttackSpeedCap": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"ExcessAttackSpeedToADMult": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"BaseDamage": [
+							13,
+							15,
+							17,
+							19,
+							21,
+							23,
+							25
+						],
+						"ActiveADRatio": [
+							1,
+							1.04,
+							1.08,
+							1.12,
+							1.16,
+							1.2,
+							1.24
+						],
+						"NumberOfMissiles": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"EnergizedMissiles": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"SlowDuration": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"SlowPercent": [
+							0.99,
+							0.99,
+							0.99,
+							0.99,
+							0.99,
+							0.99,
+							0.99
+						],
+						"ActivePercentDamageToTowers": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"MaxPercentHealthToMonsters": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"ChargePerAttack": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"ChargeDistanceMultiplier": [
+							0.025,
+							0.025,
+							0.025,
+							0.025,
+							0.025,
+							0.025,
+							0.025
+						]
+					},
+					"spellCalculations": {
+						"ActiveDamageThatCanCrit": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ActiveADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.18,
-							"__type": "StatByCoefficientCalculationPart"
+						"MinDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 10,
+									"mEndValue": 25,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CurrentCritDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveMaxDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 75,
+									"mEndValue": 160,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 1.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveMaxChargePercentHealth": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.01,
+									"mEndValue": 0.11,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"PassiveExecuteThreshold": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 60,
+									"mEndValue": 150,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.18,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Zeri/Spells/ZeriQAbility/ZeriQ"
 				}
-			},
-			"cooldownTime": [
-				0,
-				0,
-				0,
-				0,
-				0,
-				0,
-				0
-			],
-			"name": "Burst Fire",
-			"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. "
+			]
 		},
 		"w": {
-			"image": "assets/characters/zeri/hud/icons2d/zeriw.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"Damage": [
-					-10,
-					30,
-					70,
-					110,
-					150,
-					190,
-					230
-				],
-				"ADRatio": [
-					1.2,
-					1.2,
-					1.2,
-					1.2,
-					1.2,
-					1.2,
-					1.2
-				],
-				"CriticalEffectiveness": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"SlowPercent": [
-					0.25,
-					0.3,
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.55
-				],
-				"SlowDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"WallBeamRange": [
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500
-				],
-				"BeamWidth": [
-					200,
-					200,
-					200,
-					200,
-					200,
-					200,
-					200
-				],
-				"BeamCastTime": [
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85,
-					0.85
-				],
-				"MinCastTime": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"ASpeedCastTimeScalarPerHundrethSecond": [
-					0.09,
-					0.09,
-					0.09,
-					0.09,
-					0.09,
-					0.09,
-					0.09
-				],
-				"BaseCastTime": [
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "Damage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.25,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"WallDamage": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mPart1": {
-									"mDataValue": "CriticalEffectiveness"
-								},
-								"mPart2": {
-									"mSubparts": [
-										{
-											"mStat": 9,
-											"mCoefficient": 1
-										},
-										{
-											"mNumber": -1
-										}
-									]
-								}
-							}
+			"variants": [
+				{
+					"name": "Ultrashock Laser",
+					"image": "assets/characters/zeri/hud/icons2d/zeriw.png",
+					"mana": [
+						50,
+						60,
+						70,
+						80,
+						90,
+						100
+					],
+					"cooldownTime": [
+						12,
+						12,
+						11,
+						10,
+						9,
+						8,
+						8
+					],
+					"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>.",
+					"dataValues": {
+						"Damage": [
+							-10,
+							30,
+							70,
+							110,
+							150,
+							190,
+							230
+						],
+						"ADRatio": [
+							1.2,
+							1.2,
+							1.2,
+							1.2,
+							1.2,
+							1.2,
+							1.2
+						],
+						"CriticalEffectiveness": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"SlowPercent": [
+							0.25,
+							0.3,
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.55
+						],
+						"SlowDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"WallBeamRange": [
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500
+						],
+						"BeamWidth": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"BeamCastTime": [
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85,
+							0.85
+						],
+						"MinCastTime": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"ASpeedCastTimeScalarPerHundrethSecond": [
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09
+						],
+						"BaseCastTime": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
 						]
 					},
-					"mModifiedGameCalculation": "TotalDamage"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "Damage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"WallDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mDataValue": "CriticalEffectiveness"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/Zeri/Spells/ZeriWAbility/ZeriW"
 				}
-			},
-			"mana": [
-				50,
-				60,
-				70,
-				80,
-				90,
-				100
-			],
-			"cooldownTime": [
-				12,
-				12,
-				11,
-				10,
-				9,
-				8,
-				8
-			],
-			"name": "Ultrashock Laser",
-			"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>."
+			]
 		},
 		"e": {
-			"image": "assets/characters/zeri/hud/icons2d/zerie.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MaxDistance": [
-					300,
-					300,
-					300,
-					300,
-					300,
-					300,
-					300
-				],
-				"MaxDistanceOverWalls": [
-					3000,
-					3000,
-					3000,
-					3000,
-					3000,
-					3000,
-					3000
-				],
-				"BuffDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"NumberOfPierceShots": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"PenDamagePercent": [
-					0.75,
-					0.8,
-					0.85,
-					0.9,
-					0.95,
-					1,
-					1.05
-				],
-				"CDReductionPerHit": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"ShortHopAnimCutoff": [
-					250,
-					250,
-					250,
-					250,
-					250,
-					250,
-					250
-				],
-				"MediumHopAnimCutoff": [
-					550,
-					550,
-					550,
-					550,
-					550,
-					550,
-					550
-				],
-				"RevealRangeOverWalls": [
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500
-				],
-				"BonusDamageBase": [
-					15,
-					17,
-					19,
-					21,
-					23,
-					25,
-					27
-				],
-				"BonusADRatio": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"BonusAPRatio": [
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2,
-					0.2
-				],
-				"IndicatorRevealTime": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"CritScalingMod": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"CritCDReductionPerHit": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"spellCalculations": {
-				"DashSpeed": {
-					"mFormulaParts": [
-						{
-							"mNumber": 600,
-							"__type": "NumberCalculationPart"
-						},
-						{
-							"mStat": 7,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"BonusDamageTotal": {
-					"mMultiplier": {
-						"mSubparts": [
-							{
-								"mNumber": 1
-							},
-							{
-								"mPart1": {
-									"mStat": 8,
-									"mDataValue": "CritScalingMod"
-								},
-								"mPart2": {
-									"mSubparts": [
-										{
-											"mStat": 9,
-											"mCoefficient": 1
-										},
-										{
-											"mNumber": -1
-										}
-									]
-								}
-							}
+			"variants": [
+				{
+					"name": "Spark Surge",
+					"image": "assets/characters/zeri/hud/icons2d/zerie.png",
+					"mana": [
+						90,
+						85,
+						80,
+						75,
+						70,
+						70
+					],
+					"cooldownTime": [
+						22,
+						22,
+						21,
+						20,
+						19,
+						18,
+						18
+					],
+					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
+					"dataValues": {
+						"MaxDistance": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"MaxDistanceOverWalls": [
+							3000,
+							3000,
+							3000,
+							3000,
+							3000,
+							3000,
+							3000
+						],
+						"BuffDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"NumberOfPierceShots": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PenDamagePercent": [
+							0.75,
+							0.8,
+							0.85,
+							0.9,
+							0.95,
+							1,
+							1.05
+						],
+						"CDReductionPerHit": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"ShortHopAnimCutoff": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						],
+						"MediumHopAnimCutoff": [
+							550,
+							550,
+							550,
+							550,
+							550,
+							550,
+							550
+						],
+						"RevealRangeOverWalls": [
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500
+						],
+						"BonusDamageBase": [
+							15,
+							17,
+							19,
+							21,
+							23,
+							25,
+							27
+						],
+						"BonusADRatio": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"BonusAPRatio": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"IndicatorRevealTime": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"CritScalingMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CritCDReductionPerHit": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
 						]
 					},
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusDamageBase",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"DashSpeed": {
+							"mFormulaParts": [
+								{
+									"mNumber": 600,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"BonusDamageTotal": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mStat": 8,
+											"mDataValue": "CritScalingMod"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "BonusAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "BonusAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"{93e3e1a0}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 600,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"{93e3e1a0}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 600,
-							"__type": "NumberCalculationPart"
-						},
-						{
-							"mStat": 7,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Zeri/Spells/ZeriEAbility/ZeriE"
 				}
-			},
-			"mana": [
-				90,
-				85,
-				80,
-				75,
-				70,
-				70
-			],
-			"cooldownTime": [
-				22,
-				22,
-				21,
-				20,
-				19,
-				18,
-				18
-			],
-			"name": "Spark Surge",
-			"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead."
+			]
 		},
 		"r": {
-			"image": "assets/characters/zeri/hud/icons2d/zerir.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"StackDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"MaxStacks": [
-					100000,
-					100000,
-					100000,
-					100000,
-					100000,
-					100000,
-					100000
-				],
-				"DurationIncreasePerHit": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"BaseASPercent": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"MSPercent": [
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01,
-					0.01
-				],
-				"RDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BonusMagicDamage": [
-					0,
-					5,
-					10,
-					15,
-					20,
-					25,
-					30
-				],
-				"ActiveDamage": [
-					50,
-					150,
-					250,
-					350,
-					450,
-					550,
-					650
-				],
-				"NovaRange": [
-					825,
-					825,
-					825,
-					825,
-					825,
-					825,
-					825
-				],
-				"MaxChainTargets": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"BaseBonusMS": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"MaxHyperchargeDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"ChainADRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				]
-			},
-			"spellCalculations": {
-				"TotalBonusDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BonusMagicDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Lightning Crash",
+					"image": "assets/characters/zeri/hud/icons2d/zerir.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						80,
+						80,
+						75,
+						70,
+						70,
+						70,
+						70
+					],
+					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>",
+					"dataValues": {
+						"StackDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MaxStacks": [
+							100000,
+							100000,
+							100000,
+							100000,
+							100000,
+							100000,
+							100000
+						],
+						"DurationIncreasePerHit": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"BaseASPercent": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"MSPercent": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"RDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BonusMagicDamage": [
+							0,
+							5,
+							10,
+							15,
+							20,
+							25,
+							30
+						],
+						"ActiveDamage": [
+							50,
+							150,
+							250,
+							350,
+							450,
+							550,
+							650
+						],
+						"NovaRange": [
+							825,
+							825,
+							825,
+							825,
+							825,
+							825,
+							825
+						],
+						"MaxChainTargets": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BaseBonusMS": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"MaxHyperchargeDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"ChainADRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"TotalBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusMagicDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.15,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.15,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"TotalActiveDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ActiveDamage",
-							"__type": "NamedDataValueCalculationPart"
+						"TotalActiveDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ActiveDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 1.1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 1.1,
-							"__type": "StatByCoefficientCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mCoefficient": 1,
-							"__type": "StatByCoefficientCalculationPart"
+						"ChainPhysicalDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "{6ecd0e86}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"ChainPhysicalDamage": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mDataValue": "{6ecd0e86}",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Zeri/Spells/ZeriRAbility/ZeriR"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				80,
-				80,
-				75,
-				70,
-				70,
-				70,
-				70
-			],
-			"name": "Lightning Crash",
-			"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>"
+			]
 		}
 	}
 }

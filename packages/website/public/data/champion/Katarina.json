@@ -29,550 +29,575 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/katarina/hud/icons2d/katarina_passive.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"ResetWindow": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"ResetCDR": [
-					15,
-					15,
-					15,
-					15,
-					15,
-					15,
-					15
-				],
-				"DaggerRadius": [
-					340,
-					340,
-					340,
-					340,
-					340,
-					340,
-					340
-				],
-				"DaggerDuration": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"BonusADRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mValues": [
-								0,
-								68.185,
-								72.138,
-								76.862,
-								82.354,
-								88.615,
-								95.646,
-								103.446,
-								112.015,
-								121.354,
-								131.462,
-								142.338,
-								153.985,
-								166.4,
-								179.585,
-								193.538,
-								208.262,
-								223.754,
-								240.015,
-								257.046,
-								274.846,
-								293.415,
-								312.754,
-								332.862,
-								353.738,
-								375.385,
-								397.8,
-								420.985,
-								444.938,
-								469.662,
-								495.154
-							],
-							"__type": "ByCharLevelFormulaCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "BonusADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mSubpart": {
-								"mLevel1Value": 0.7,
-								"mBreakpoints": [
-									{
-										"mLevel": 6,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 11,
-										"mAdditionalBonusAtThisLevel": 0.1
-									},
-									{
-										"mLevel": 16,
-										"mAdditionalBonusAtThisLevel": 0.1
-									}
-								]
-							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				},
-				"{e1ba6b0f}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.78,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Voracity",
+					"image": "assets/characters/katarina/hud/icons2d/katarina_passive.png",
+					"tooltip": "Whenever an enemy champion dies that Katarina has damaged in the last @ResetWindow@ seconds, her Ability Cooldowns are reduced by @ResetCDR@ seconds.<br><br>If Katarina picks up a <keywordMajor>Dagger</keywordMajor>, she uses it to slash through all nearby enemies, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_KatarinaPassive_Tooltip}}<br><br><rules><keywordMajor>Dagger</keywordMajor> slashes apply On-Hit Effects to champions.</rules>",
+					"dataValues": {
+						"ResetWindow": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"ResetCDR": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"DaggerRadius": [
+							340,
+							340,
+							340,
+							340,
+							340,
+							340,
+							340
+						],
+						"DaggerDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"BonusADRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.06
+									"mValues": [
+										0,
+										68.185,
+										72.138,
+										76.862,
+										82.354,
+										88.615,
+										95.646,
+										103.446,
+										112.015,
+										121.354,
+										131.462,
+										142.338,
+										153.985,
+										166.4,
+										179.585,
+										193.538,
+										208.262,
+										223.754,
+										240.015,
+										257.046,
+										274.846,
+										293.415,
+										312.754,
+										332.862,
+										353.738,
+										375.385,
+										397.8,
+										420.985,
+										444.938,
+										469.662,
+										495.154
+									],
+									"__type": "ByCharLevelFormulaCalculationPart"
 								},
 								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.06
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": 0.06
+									"mSubpart": {
+										"mLevel1Value": 0.7,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 16,
+												"mAdditionalBonusAtThisLevel": 0.1
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
+						},
+						"{e1ba6b0f}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.78,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.06
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Katarina/Spells/KatarinaPassiveAbility/KatarinaPassive"
 				}
-			},
-			"name": "Voracity",
-			"tooltip": "Whenever an enemy champion dies that Katarina has damaged in the last @ResetWindow@ seconds, her Ability Cooldowns are reduced by @ResetCDR@ seconds.<br><br>If Katarina picks up a <keywordMajor>Dagger</keywordMajor>, she uses it to slash through all nearby enemies, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-			"tooltipExtended": "{{Spell_KatarinaPassive_Tooltip}}<br><br><rules><keywordMajor>Dagger</keywordMajor> slashes apply On-Hit Effects to champions.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/katarina/hud/icons2d/katarina_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					45,
-					80,
-					115,
-					150,
-					185,
-					220,
-					255
-				],
-				"BounceOffset": [
-					350,
-					350,
-					350,
-					350,
-					350,
-					350,
-					350
-				],
-				"BounceRadius": [
-					450,
-					450,
-					450,
-					450,
-					450,
-					450,
-					450
-				],
-				"MaxBounces": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"QAPRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "QAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Bouncing Blade",
+					"image": "assets/characters/katarina/hud/icons2d/katarina_q.png",
+					"cooldownTime": [
+						12,
+						11,
+						10,
+						9,
+						8,
+						7,
+						7
+					],
+					"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target.",
+					"dataValues": {
+						"BaseDamage": [
+							45,
+							80,
+							115,
+							150,
+							185,
+							220,
+							255
+						],
+						"BounceOffset": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"BounceRadius": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						],
+						"MaxBounces": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"QAPRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "QAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"3": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"dataKey": "Characters/Katarina/Spells/KatarinaQAbility/KatarinaQ"
 				}
-			},
-			"effectAmount": {
-				"3": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				]
-			},
-			"cooldownTime": [
-				12,
-				11,
-				10,
-				9,
-				8,
-				7,
-				7
-			],
-			"name": "Bouncing Blade",
-			"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target."
+			]
 		},
 		"w": {
-			"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
 			"maxLevel": 5,
-			"effectAmount": {
-				"1": [
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25,
-					1.25
-				],
-				"3": [
-					40,
-					50,
-					60,
-					70,
-					80,
-					90,
-					100
-				]
-			},
-			"cooldownTime": [
-				16,
-				15,
-				14,
-				13,
-				12,
-				11,
-				11
-			],
-			"name": "Preparation",
-			"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds."
+			"variants": [
+				{
+					"name": "Preparation",
+					"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
+					"cooldownTime": [
+						16,
+						15,
+						14,
+						13,
+						12,
+						11,
+						11
+					],
+					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds.",
+					"effectAmount": {
+						"1": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"3": [
+							40,
+							50,
+							60,
+							70,
+							80,
+							90,
+							100
+						]
+					},
+					"dataKey": "Characters/Katarina/Spells/KatarinaWAbility/KatarinaW"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					10,
-					20,
-					30,
-					40,
-					50,
-					60,
-					70
-				],
-				"DataCooldown": [
-					13,
-					12,
-					11,
-					10,
-					9,
-					8,
-					7
-				],
-				"EADRatio": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"EAPRatio": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Shunpo",
+					"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
+					"cooldownTime": [
+						12,
+						12,
+						11,
+						10,
+						9,
+						8,
+						8
+					],
+					"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target.",
+					"dataValues": {
+						"BaseDamage": [
+							10,
+							20,
+							30,
+							40,
+							50,
+							60,
+							70
+						],
+						"DataCooldown": [
+							13,
+							12,
+							11,
+							10,
+							9,
+							8,
+							7
+						],
+						"EADRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"EAPRatio": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "EAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "EADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "EAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"DaggerCooldownReduction": {
+							"mMultiplier": {
+								"mPart2": {
+									"mDataValue": "DataCooldown"
+								}
+							},
+							"mModifiedGameCalculation": "{016cd4b3}"
 						},
-						{
-							"mStat": 2,
-							"mDataValue": "EADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"DaggerCooldownReduction": {
-					"mMultiplier": {
-						"mPart2": {
-							"mDataValue": "DataCooldown"
+						"{016cd4b3}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.78,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 0.04
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						},
+						"TooltipDaggerReduction": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.78,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.06
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 0.04
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
 						}
 					},
-					"mModifiedGameCalculation": "{016cd4b3}"
-				},
-				"{016cd4b3}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.78,
-							"mBreakpoints": [
-								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.06
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.06
-								},
-								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": 0.06
-								},
-								{
-									"mLevel": 21,
-									"mAdditionalBonusAtThisLevel": 0.04
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mPrecision": 2
-				},
-				"TooltipDaggerReduction": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.78,
-							"mBreakpoints": [
-								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.06
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.06
-								},
-								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": 0.06
-								},
-								{
-									"mLevel": 21,
-									"mAdditionalBonusAtThisLevel": 0.04
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					],
-					"mDisplayAsPercent": true
+					"dataKey": "Characters/Katarina/Spells/KatarinaEWrapperAbility/KatarinaEWrapper"
 				}
-			},
-			"cooldownTime": [
-				12,
-				12,
-				11,
-				10,
-				9,
-				8,
-				8
-			],
-			"name": "Shunpo",
-			"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target."
+			]
 		},
 		"r": {
-			"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"DamagePerTick": [
-					12.5,
-					25,
-					37.5,
-					50,
-					62.5,
-					75,
-					87.5
-				],
-				"TicksPerSecond": [
-					6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					6
-				],
-				"Duration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"GrievousDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"GrievousAmount": [
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4,
-					0.4
-				],
-				"OnHitRatio": [
-					0.2,
-					0.25,
-					0.3,
-					0.35,
-					0.4,
-					0.45,
-					0.5
-				],
-				"RAPRatio": [
-					0.19,
-					0.19,
-					0.19,
-					0.19,
-					0.19,
-					0.19,
-					0.19
-				]
-			},
-			"spellCalculations": {
-				"DamageCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "DamagePerTick",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "RAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalDamageCalc": {
-					"mMultiplier": {
-						"mPart1": {
-							"mDataValue": "TicksPerSecond"
-						},
-						"mPart2": {
-							"mDataValue": "Duration"
-						}
+			"variants": [
+				{
+					"name": "Death Lotus",
+					"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
+					"cooldownTime": [
+						75,
+						75,
+						60,
+						45,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>.",
+					"dataValues": {
+						"DamagePerTick": [
+							12.5,
+							25,
+							37.5,
+							50,
+							62.5,
+							75,
+							87.5
+						],
+						"TicksPerSecond": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"Duration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"GrievousDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"GrievousAmount": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"OnHitRatio": [
+							0.2,
+							0.25,
+							0.3,
+							0.35,
+							0.4,
+							0.45,
+							0.5
+						],
+						"RAPRatio": [
+							0.19,
+							0.19,
+							0.19,
+							0.19,
+							0.19,
+							0.19,
+							0.19
+						]
 					},
-					"mModifiedGameCalculation": "DamageCalc"
-				},
-				"ADDamageCalc": {
-					"mFormulaParts": [
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mSubpart": {
-								"mSubparts": [
-									{
-										"mPart1": {
-											"mNumber": 0.16
-										},
-										"mPart2": {
-											"mSubparts": [
-												{
-													"mNumber": 1
-												},
-												{
-													"mStat": 4,
-													"mStatFormula": 2,
-													"mCoefficient": 3.125
-												}
-											]
-										}
-									}
-								]
+					"spellCalculations": {
+						"DamageCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "DamagePerTick",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "RAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalDamageCalc": {
+							"mMultiplier": {
+								"mPart1": {
+									"mDataValue": "TicksPerSecond"
+								},
+								"mPart2": {
+									"mDataValue": "Duration"
+								}
 							},
-							"__type": "StatBySubPartCalculationPart"
-						}
-					]
-				},
-				"TotalADDamageCalc": {
-					"mMultiplier": {
-						"mPart1": {
-							"mDataValue": "TicksPerSecond"
+							"mModifiedGameCalculation": "DamageCalc"
 						},
-						"mPart2": {
-							"mDataValue": "Duration"
+						"ADDamageCalc": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mPart1": {
+													"mNumber": 0.16
+												},
+												"mPart2": {
+													"mSubparts": [
+														{
+															"mNumber": 1
+														},
+														{
+															"mStat": 4,
+															"mStatFormula": 2,
+															"mCoefficient": 3.125
+														}
+													]
+												}
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"TotalADDamageCalc": {
+							"mMultiplier": {
+								"mPart1": {
+									"mDataValue": "TicksPerSecond"
+								},
+								"mPart2": {
+									"mDataValue": "Duration"
+								}
+							},
+							"mModifiedGameCalculation": "ADDamageCalc"
 						}
 					},
-					"mModifiedGameCalculation": "ADDamageCalc"
+					"dataKey": "Characters/Katarina/Spells/KatarinaRAbility/KatarinaR"
 				}
-			},
-			"cooldownTime": [
-				75,
-				75,
-				60,
-				45,
-				0,
-				0,
-				0
-			],
-			"name": "Death Lotus",
-			"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>."
+			]
 		}
 	}
 }

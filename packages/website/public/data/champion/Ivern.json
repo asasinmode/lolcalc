@@ -29,622 +29,718 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernp.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"LevelForBuffShare": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"PickupDuration": [
-					60,
-					60,
-					60,
-					60,
-					60,
-					60,
-					60
-				],
-				"KrugExperience": [
-					58,
-					58,
-					58,
-					58,
-					58,
-					58,
-					58
-				],
-				"KrugGold": [
-					84,
-					84,
-					84,
-					84,
-					84,
-					84,
-					84
-				],
-				"ModeSpeedOverride": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"spellCalculations": {
-				"HarvestDuration": {
-					"mMultiplier": {
-						"mDataValue": "{04f9ad7d}"
+			"variants": [
+				{
+					"name": "Friend of the Forest",
+					"image": "assets/characters/ivern/hud/icons2d/ivernp.png",
+					"tooltip": "Ivern will not hurt non-epic monsters. Instead, Ivern can right click a monster to grow a <font color='#55FF00'>Grove</font> that costs <healing>@HealthTooltip@ Health</healing> and <scaleMana>@ManaTooltip@ Mana</scaleMana>.<br><br><font color='#55FF00'>Groves</font>:<li> Grow over @HarvestDuration@ second(s)<li> Once fully grown, Ivern can harvest them, freeing the camp and earning gold and experience<li> Ivern can also <spellName>Smite</spellName> the <font color='#55FF00'>Groves</font> to instantly grow and free the camp, earning gold and experience@SpellModifierDescriptionAppend@",
+					"tooltipExtended": "{{Spell_IvernP_Tooltip}}",
+					"dataValues": {
+						"LevelForBuffShare": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"PickupDuration": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"KrugExperience": [
+							58,
+							58,
+							58,
+							58,
+							58,
+							58,
+							58
+						],
+						"KrugGold": [
+							84,
+							84,
+							84,
+							84,
+							84,
+							84,
+							84
+						],
+						"ModeSpeedOverride": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
 					},
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 40,
-							"mInitialBonusPerLevel": -2,
-							"mBreakpoints": [
+					"spellCalculations": {
+						"HarvestDuration": {
+							"mMultiplier": {
+								"mDataValue": "{04f9ad7d}"
+							},
+							"mFormulaParts": [
 								{
-									"mLevel": 7,
-									"mBonusPerLevelAtAndAfter": -3
-								},
-								{
-									"mLevel": 12,
-									"mBonusPerLevelAtAndAfter": -4
-								},
-								{
-									"mLevel": 15,
-									"mBonusPerLevelAtAndAfter": -2
-								},
-								{
-									"mLevel": 16
+									"mLevel1Value": 40,
+									"mInitialBonusPerLevel": -2,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": -3
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": -4
+										},
+										{
+											"mLevel": 15,
+											"mBonusPerLevelAtAndAfter": -2
+										},
+										{
+											"mLevel": 16
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
+						},
+						"{60aa666f}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 15,
+									"mInitialBonusPerLevel": -0.882,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"{c6433908}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": -1.175,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"HealthTooltip": {
+							"mMultiplier": {
+								"mStat": 12,
+								"mStatFormula": 1,
+								"mCoefficient": 0.01
+							},
+							"mModifiedGameCalculation": "{60aa666f}"
+						},
+						"ManaTooltip": {
+							"mMultiplier": {
+								"mCoefficient": 0.01,
+								"mStatFormula": 1
+							},
+							"mModifiedGameCalculation": "{c6433908}"
 						}
-					]
-				},
-				"{60aa666f}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 15,
-							"mInitialBonusPerLevel": -0.882,
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"{c6433908}": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 20,
-							"mInitialBonusPerLevel": -1.175,
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"HealthTooltip": {
-					"mMultiplier": {
-						"mStat": 12,
-						"mStatFormula": 1,
-						"mCoefficient": 0.01
 					},
-					"mModifiedGameCalculation": "{60aa666f}"
-				},
-				"ManaTooltip": {
-					"mMultiplier": {
-						"mCoefficient": 0.01,
-						"mStatFormula": 1
+					"effectAmount": {
+						"0": [
+							120,
+							120,
+							120,
+							120,
+							120,
+							120,
+							120
+						]
 					},
-					"mModifiedGameCalculation": "{c6433908}"
+					"dataKey": "Characters/Ivern/Spells/IvernPAbility/IvernP"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					120,
-					120,
-					120,
-					120,
-					120,
-					120,
-					120
-				]
-			},
-			"name": "Friend of the Forest",
-			"tooltip": "Ivern will not hurt non-epic monsters. Instead, Ivern can right click a monster to grow a <font color='#55FF00'>Grove</font> that costs <healing>@HealthTooltip@ Health</healing> and <scaleMana>@ManaTooltip@ Mana</scaleMana>.<br><br><font color='#55FF00'>Groves</font>:<li> Grow over @HarvestDuration@ second(s)<li> Once fully grown, Ivern can harvest them, freeing the camp and earning gold and experience<li> Ivern can also <spellName>Smite</spellName> the <font color='#55FF00'>Groves</font> to instantly grow and free the camp, earning gold and experience@SpellModifierDescriptionAppend@",
-			"tooltipExtended": "{{Spell_IvernP_Tooltip}}"
+			]
 		},
 		"q": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernq.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"DashSpeed": [
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500,
-					1500
-				],
-				"BaseDamage": [
-					35,
-					80,
-					125,
-					170,
-					215,
-					260,
-					305
-				],
-				"RootDuration": [
-					1.5,
-					1.6,
-					1.7,
-					1.8,
-					1.9,
-					2,
-					2.1
-				],
-				"APRatio": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				60,
-				60,
-				60,
-				60,
-				60,
-				60
-			],
-			"cooldownTime": [
-				15,
-				14,
-				13,
-				12,
-				11,
-				10,
-				9
-			],
-			"name": "Rootcaller",
-			"tooltip": "Ivern conjures a vine dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Rooting</status> the first enemy hit for @RootDuration@ seconds. Allies that Attack a <status>Rooted</status> enemy dash into Attack Range. <br><br><recast>Recast:</recast> Ivern dashes directly onto the <status>Rooted</status> enemy.<br><br><rules>Hitting non-epic monsters reduces <spellName>{{ Spell_IvernQ_Name }}'s</spellName> cooldown by 50%.</rules>"
-		},
-		"w": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernw.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BuffDuration": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"AllyBuffDuration": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				],
-				"BaseDamage": [
-					12.5,
-					20,
-					27.5,
-					35,
-					42.5,
-					50,
-					57.5
-				],
-				"AllyBaseDamage": [
-					5,
-					10,
-					15,
-					20,
-					25,
-					30,
-					35
-				],
-				"RevealDuration": [
-					8,
-					8,
-					8,
-					8,
-					8,
-					8,
-					8
-				],
-				"MaxBrushDuration": [
-					45,
-					45,
-					45,
-					45,
-					45,
-					45,
-					45
-				],
-				"BrushRadius": [
-					190,
-					190,
-					190,
-					190,
-					190,
-					190,
-					190
-				],
-				"BrushSpacing": [
-					90,
-					90,
-					90,
-					90,
-					90,
-					90,
-					90
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.2,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"TotalAllyDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "AllyBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.1,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				30,
-				30,
-				30,
-				30,
-				30,
-				30
-			],
-			"cooldownTime": [
-				0.5,
-				0.5,
-				0.5,
-				0.5,
-				0.5,
-				0.5,
-				0.5
-			],
-			"name": "Brushmaker",
-			"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds."
-		},
-		"e": {
-			"image": "assets/characters/ivern/hud/icons2d/iverne.png",
-			"maxLevel": 5,
-			"dataValues": {
-				"BaseShield": [
-					35,
-					75,
-					115,
-					155,
-					195,
-					235,
-					275
-				],
-				"ShieldAPRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"BaseDamage": [
-					50,
-					70,
-					90,
-					110,
-					130,
-					150,
-					170
-				],
-				"DamageAPRatio": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				],
-				"SlowAmount": [
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.55,
-					0.6,
-					0.65
-				],
-				"SlowDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"ShieldDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				]
-			},
-			"spellCalculations": {
-				"TotalShield": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseShield",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "ShieldAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "DamageAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				}
-			},
-			"mana": [
-				70,
-				70,
-				70,
-				70,
-				70,
-				70
-			],
-			"cooldownTime": [
-				12,
-				11,
-				10,
-				9,
-				8,
-				7,
-				6
-			],
-			"name": "Triggerseed",
-			"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds."
-		},
-		"r": {
-			"image": "assets/characters/ivern/hud/icons2d/ivernr.png",
-			"maxLevel": 3,
-			"dataValues": {
-				"SpawnBuffDuration": [
-					5,
-					5,
-					5,
-					5,
-					5,
-					5,
-					5
-				],
-				"MSOnSpawn": [
-					40,
-					40,
-					40,
-					40,
-					40,
-					40,
-					40
-				],
-				"DROnSpawn": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"DaisyAS": [
-					15,
-					30,
-					45,
-					60,
-					75,
-					90,
-					105
-				],
-				"DaisyAD": [
-					40,
-					70,
-					100,
-					130,
-					160,
-					190,
-					220
-				],
-				"DaisyAoeDR": [
-					25,
-					25,
-					25,
-					25,
-					25,
-					25,
-					25
-				],
-				"DaisyDuration": [
-					45,
-					45,
-					45,
-					45,
-					45,
-					45,
-					45
-				],
-				"ShockwaveBaseDamage": [
-					40,
-					90,
-					140,
-					190,
-					240,
-					290,
-					340
-				],
-				"ShockwaveCCDuration": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"ShockwaveCD": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				]
-			},
-			"spellCalculations": {
-				"TotalBonusResists": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 30,
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Rootcaller",
+					"image": "assets/characters/ivern/hud/icons2d/ivernq.png",
+					"mana": [
+						60,
+						60,
+						60,
+						60,
+						60,
+						60
+					],
+					"cooldownTime": [
+						15,
+						14,
+						13,
+						12,
+						11,
+						10,
+						9
+					],
+					"tooltip": "Ivern conjures a vine dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Rooting</status> the first enemy hit for @RootDuration@ seconds. Allies that Attack a <status>Rooted</status> enemy dash into Attack Range. <br><br><recast>Recast:</recast> Ivern dashes directly onto the <status>Rooted</status> enemy.<br><br><rules>Hitting non-epic monsters reduces <spellName>{{ Spell_IvernQ_Name }}'s</spellName> cooldown by 50%.</rules>",
+					"dataValues": {
+						"DashSpeed": [
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500,
+							1500
+						],
+						"BaseDamage": [
+							35,
+							80,
+							125,
+							170,
+							215,
+							260,
+							305
+						],
+						"RootDuration": [
+							1.5,
+							1.6,
+							1.7,
+							1.8,
+							1.9,
+							2,
+							2.1
+						],
+						"APRatio": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
 								{
-									"mLevel": 7,
-									"mBonusPerLevelAtAndAfter": 5
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"TotalDaisyHP": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 1000,
-							"mBreakpoints": [
-								{
-									"mLevel": 7,
-									"mBonusPerLevelAtAndAfter": 50
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mLevel": 11,
-									"mBonusPerLevelAtAndAfter": 400
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
+							]
 						}
-					]
-				},
-				"TotalDaisyAD": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "DaisyAD",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.15,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"TotalShockwaveDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "ShockwaveBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.5,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"dataKey": "Characters/Ivern/Spells/IvernQAbility/IvernQ"
 				}
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				100,
-				100,
-				100
-			],
-			"cooldownTime": [
-				150,
-				140,
-				130,
-				120,
-				110,
-				100,
-				90
-			],
-			"name": "Daisy!",
-			"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move."
+			]
+		},
+		"w": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Brushmaker",
+					"image": "assets/characters/ivern/hud/icons2d/ivernw.png",
+					"mana": [
+						30,
+						30,
+						30,
+						30,
+						30,
+						30
+					],
+					"cooldownTime": [
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5,
+						0.5
+					],
+					"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds.",
+					"dataValues": {
+						"BuffDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"AllyBuffDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"BaseDamage": [
+							12.5,
+							20,
+							27.5,
+							35,
+							42.5,
+							50,
+							57.5
+						],
+						"AllyBaseDamage": [
+							5,
+							10,
+							15,
+							20,
+							25,
+							30,
+							35
+						],
+						"RevealDuration": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"MaxBrushDuration": [
+							45,
+							45,
+							45,
+							45,
+							45,
+							45,
+							45
+						],
+						"BrushRadius": [
+							190,
+							190,
+							190,
+							190,
+							190,
+							190,
+							190
+						],
+						"BrushSpacing": [
+							90,
+							90,
+							90,
+							90,
+							90,
+							90,
+							90
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalAllyDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "AllyBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Ivern/Spells/IvernWAbility/IvernW"
+				}
+			]
+		},
+		"e": {
+			"maxLevel": 5,
+			"variants": [
+				{
+					"name": "Triggerseed",
+					"image": "assets/characters/ivern/hud/icons2d/iverne.png",
+					"mana": [
+						70,
+						70,
+						70,
+						70,
+						70,
+						70
+					],
+					"cooldownTime": [
+						12,
+						11,
+						10,
+						9,
+						8,
+						7,
+						6
+					],
+					"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds.",
+					"dataValues": {
+						"BaseShield": [
+							35,
+							75,
+							115,
+							155,
+							195,
+							235,
+							275
+						],
+						"ShieldAPRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"BaseDamage": [
+							50,
+							70,
+							90,
+							110,
+							130,
+							150,
+							170
+						],
+						"DamageAPRatio": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"SlowAmount": [
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.55,
+							0.6,
+							0.65
+						],
+						"SlowDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"ShieldDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseShield",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "ShieldAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "DamageAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Ivern/Spells/IvernEAbility/IvernE"
+				}
+			]
+		},
+		"r": {
+			"maxLevel": 3,
+			"variants": [
+				{
+					"name": "Daisy!",
+					"image": "assets/characters/ivern/hud/icons2d/ivernr.png",
+					"mana": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"cooldownTime": [
+						150,
+						140,
+						130,
+						120,
+						110,
+						100,
+						90
+					],
+					"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move.",
+					"dataValues": {
+						"SpawnBuffDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MSOnSpawn": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"DROnSpawn": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"DaisyAS": [
+							15,
+							30,
+							45,
+							60,
+							75,
+							90,
+							105
+						],
+						"DaisyAD": [
+							40,
+							70,
+							100,
+							130,
+							160,
+							190,
+							220
+						],
+						"DaisyAoeDR": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"DaisyDuration": [
+							45,
+							45,
+							45,
+							45,
+							45,
+							45,
+							45
+						],
+						"ShockwaveBaseDamage": [
+							40,
+							90,
+							140,
+							190,
+							240,
+							290,
+							340
+						],
+						"ShockwaveCCDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ShockwaveCD": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"TotalBonusResists": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TotalDaisyHP": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1000,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 50
+										},
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 400
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalDaisyAD": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "DaisyAD",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.15,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalShockwaveDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "ShockwaveBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernR"
+				},
+				{
+					"name": "Daisy, wait!",
+					"image": "assets/characters/ivern/hud/icons2d/ivernr2.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Send Daisy to attack an enemy or move to a position. Target Ivern himself to order Daisy to follow.",
+					"effectAmount": {
+						"0": [
+							1250,
+							1250,
+							2500,
+							3750,
+							3750,
+							3750,
+							3750
+						],
+						"1": [
+							15,
+							15,
+							40,
+							90,
+							90,
+							90,
+							90
+						],
+						"2": [
+							30,
+							30,
+							50,
+							70,
+							70,
+							70,
+							70
+						],
+						"3": [
+							20,
+							20,
+							25,
+							30,
+							30,
+							30,
+							30
+						],
+						"4": [
+							150,
+							150,
+							250,
+							350,
+							350,
+							350,
+							350
+						],
+						"5": [
+							160,
+							160,
+							140,
+							120,
+							120,
+							120,
+							120
+						]
+					},
+					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernRRecast"
+				}
+			]
 		}
 	}
 }

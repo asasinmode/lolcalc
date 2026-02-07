@@ -29,542 +29,567 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"CooldownKillRefund": [
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5,
-					3.5
-				]
-			},
-			"spellCalculations": {
-				"MinionManaRestoreTT": {
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 30,
-							"mInitialBonusPerLevel": 3,
-							"mBreakpoints": [
-								{
-									"mLevel": 4,
-									"mBonusPerLevelAtAndAfter": 6
-								},
-								{
-									"mLevel": 7,
-									"mBonusPerLevelAtAndAfter": 9
-								},
-								{
-									"mLevel": 11,
-									"mBonusPerLevelAtAndAfter": 12
-								},
-								{
-									"mLevel": 16,
-									"mBonusPerLevelAtAndAfter": 15
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"ChampionManaRestoreTT": {
-					"mMultiplier": {
-						"mNumber": 2
+			"variants": [
+				{
+					"name": "Mana Surge",
+					"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png",
+					"tooltip": "Every 16 seconds Xerath's next Attack against a champion restores <scaleMana>@ChampionManaRestoreTT@ Mana</scaleMana>. It restores <scaleMana>@MinionManaRestoreTT@ Mana</scaleMana> if attacking minions, jungle monsters or structures.<br><br>Whenever Xerath kills a unit, this cooldown is reduced by @CooldownKillRefund@ seconds.",
+					"dataValues": {
+						"CooldownKillRefund": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						]
 					},
-					"mModifiedGameCalculation": "MinionManaRestoreTT"
+					"spellCalculations": {
+						"MinionManaRestoreTT": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mInitialBonusPerLevel": 3,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mBonusPerLevelAtAndAfter": 6
+										},
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 9
+										},
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 12
+										},
+										{
+											"mLevel": 16,
+											"mBonusPerLevelAtAndAfter": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ChampionManaRestoreTT": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"mModifiedGameCalculation": "MinionManaRestoreTT"
+						}
+					},
+					"dataKey": "Characters/Xerath/Spells/XerathAscended2Ability/XerathAscended2"
 				}
-			},
-			"name": "Mana Surge",
-			"tooltip": "Every 16 seconds Xerath's next Attack against a champion restores <scaleMana>@ChampionManaRestoreTT@ Mana</scaleMana>. It restores <scaleMana>@MinionManaRestoreTT@ Mana</scaleMana> if attacking minions, jungle monsters or structures.<br><br>Whenever Xerath kills a unit, this cooldown is reduced by @CooldownKillRefund@ seconds."
+			]
 		},
 		"q": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					35,
-					75,
-					115,
-					155,
-					195,
-					235,
-					275
-				]
-			},
-			"spellCalculations": {
-				"TooltipTotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.9,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Arcanopulse",
+					"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png",
+					"mana": [
+						80,
+						90,
+						100,
+						110,
+						120,
+						120
+					],
+					"cooldownTime": [
+						10,
+						9,
+						8,
+						7,
+						6,
+						5,
+						5
+					],
+					"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged.",
+					"dataValues": {
+						"BaseDamage": [
+							35,
+							75,
+							115,
+							155,
+							195,
+							235,
+							275
+						]
+					},
+					"spellCalculations": {
+						"TooltipTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.9,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							35,
+							75,
+							115,
+							155,
+							195,
+							235,
+							275
+						],
+						"1": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"2": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"3": [
+							145,
+							145,
+							145,
+							145,
+							145,
+							145,
+							145
+						],
+						"4": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"5": [
+							-0.2,
+							-0.2,
+							-0.2,
+							-0.2,
+							-0.2,
+							-0.2,
+							-0.2
+						],
+						"6": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"7": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"8": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"dataKey": "Characters/Xerath/Spells/XerathArcanopulseChargeUpAbility/XerathArcanopulseChargeUp"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					35,
-					75,
-					115,
-					155,
-					195,
-					235,
-					275
-				],
-				"1": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"2": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"3": [
-					145,
-					145,
-					145,
-					145,
-					145,
-					145,
-					145
-				],
-				"4": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"5": [
-					-0.2,
-					-0.2,
-					-0.2,
-					-0.2,
-					-0.2,
-					-0.2,
-					-0.2
-				],
-				"6": [
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1,
-					0.1
-				],
-				"7": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"8": [
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5,
-					1.5
-				]
-			},
-			"mana": [
-				80,
-				90,
-				100,
-				110,
-				120,
-				120
-			],
-			"cooldownTime": [
-				10,
-				9,
-				8,
-				7,
-				6,
-				5,
-				5
-			],
-			"name": "Arcanopulse",
-			"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged."
+			]
 		},
 		"w": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					15,
-					50,
-					85,
-					120,
-					155,
-					190,
-					225
-				],
-				"SweetSpotMultiplier": [
-					1.667,
-					1.667,
-					1.667,
-					1.667,
-					1.667,
-					1.667,
-					1.667
-				],
-				"SlowAmount": [
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25,
-					0.25
-				],
-				"SweetSpotSlowAmount": [
-					0.55,
-					0.6,
-					0.65,
-					0.7,
-					0.75,
-					0.8,
-					0.85
-				],
-				"MultiplicativeSlowDecayRate": [
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8,
-					0.8
-				],
-				"SlowDuration": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"DamageDelay": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"spellCalculations": {
-				"TotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.65,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"SweetSpotTotalDamage": {
-					"mMultiplier": {
-						"mDataValue": "SweetSpotMultiplier"
+			"variants": [
+				{
+					"name": "Eye of Destruction",
+					"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png",
+					"mana": [
+						80,
+						90,
+						100,
+						110,
+						120,
+						120
+					],
+					"cooldownTime": [
+						15,
+						14,
+						13,
+						12,
+						11,
+						10,
+						9
+					],
+					"tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. Enemies in the center take <magicDamage>@SweetSpotTotalDamage@ magic damage</magicDamage> instead and are <status>Slowed</status> by @SweetSpotSlowAmount*100@%, decaying over @SlowDuration@ seconds.",
+					"dataValues": {
+						"BaseDamage": [
+							15,
+							50,
+							85,
+							120,
+							155,
+							190,
+							225
+						],
+						"SweetSpotMultiplier": [
+							1.667,
+							1.667,
+							1.667,
+							1.667,
+							1.667,
+							1.667,
+							1.667
+						],
+						"SlowAmount": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"SweetSpotSlowAmount": [
+							0.55,
+							0.6,
+							0.65,
+							0.7,
+							0.75,
+							0.8,
+							0.85
+						],
+						"MultiplicativeSlowDecayRate": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"SlowDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"DamageDelay": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
 					},
-					"mModifiedGameCalculation": "TotalDamage"
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.65,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"SweetSpotTotalDamage": {
+							"mMultiplier": {
+								"mDataValue": "SweetSpotMultiplier"
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/Xerath/Spells/XerathArcaneBarrage2Ability/XerathArcaneBarrage2"
 				}
-			},
-			"mana": [
-				80,
-				90,
-				100,
-				110,
-				120,
-				120
-			],
-			"cooldownTime": [
-				15,
-				14,
-				13,
-				12,
-				11,
-				10,
-				9
-			],
-			"name": "Eye of Destruction",
-			"tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. Enemies in the center take <magicDamage>@SweetSpotTotalDamage@ magic damage</magicDamage> instead and are <status>Slowed</status> by @SweetSpotSlowAmount*100@%, decaying over @SlowDuration@ seconds."
+			]
 		},
 		"e": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MinStunDuration": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"MaxStunDuration": [
-					2.25,
-					2.25,
-					2.25,
-					2.25,
-					2.25,
-					2.25,
-					2.25
-				]
-			},
-			"spellCalculations": {
-				"TooltipTotalDamage": {
-					"mFormulaParts": [
-						{
-							"mEffectIndex": 1,
-							"__type": "EffectValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.45,
-							"__type": "StatByCoefficientCalculationPart"
+			"variants": [
+				{
+					"name": "Shocking Orb",
+					"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png",
+					"mana": [
+						60,
+						65,
+						70,
+						75,
+						80,
+						85
+					],
+					"cooldownTime": [
+						13.5,
+						13,
+						12.5,
+						12,
+						11.5,
+						11,
+						11
+					],
+					"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. ",
+					"dataValues": {
+						"MinStunDuration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"MaxStunDuration": [
+							2.25,
+							2.25,
+							2.25,
+							2.25,
+							2.25,
+							2.25,
+							2.25
+						]
+					},
+					"spellCalculations": {
+						"TooltipTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mEffectIndex": 1,
+									"__type": "EffectValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.45,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							50,
+							70,
+							100,
+							130,
+							160,
+							190,
+							230
+						],
+						"1": [
+							2.25,
+							2.25,
+							2.25,
+							2.25,
+							2.25,
+							2.25,
+							2.25
+						],
+						"2": [
+							0.17,
+							0.17,
+							0.17,
+							0.17,
+							0.17,
+							0.17,
+							0.17
+						],
+						"3": [
+							1125,
+							1125,
+							1125,
+							1125,
+							1125,
+							1125,
+							1125
+						],
+						"4": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"7": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"dataKey": "Characters/Xerath/Spells/XerathMageSpearAbility/XerathMageSpear"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					50,
-					70,
-					100,
-					130,
-					160,
-					190,
-					230
-				],
-				"1": [
-					2.25,
-					2.25,
-					2.25,
-					2.25,
-					2.25,
-					2.25,
-					2.25
-				],
-				"2": [
-					0.17,
-					0.17,
-					0.17,
-					0.17,
-					0.17,
-					0.17,
-					0.17
-				],
-				"3": [
-					1125,
-					1125,
-					1125,
-					1125,
-					1125,
-					1125,
-					1125
-				],
-				"4": [
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75,
-					0.75
-				],
-				"7": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"mana": [
-				60,
-				65,
-				70,
-				75,
-				80,
-				85
-			],
-			"cooldownTime": [
-				13.5,
-				13,
-				12.5,
-				12,
-				11.5,
-				11,
-				11
-			],
-			"name": "Shocking Orb",
-			"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. "
+			]
 		},
 		"r": {
-			"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"RampBaseDamage": [
-					15,
-					20,
-					25,
-					30,
-					35,
-					40,
-					45
-				],
-				"BaseDamage": [
-					120,
-					170,
-					220,
-					270,
-					320,
-					370,
-					420
-				]
-			},
-			"spellCalculations": {
-				"TooltipTotalDamage": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+			"variants": [
+				{
+					"name": "Rite of the Arcane",
+					"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png",
+					"mana": [
+						100,
+						100,
+						100,
+						0,
+						0,
+						0
+					],
+					"cooldownTime": [
+						130,
+						130,
+						115,
+						100,
+						130,
+						130,
+						130
+					],
+					"tooltip": "Xerath ascends to his true form and channels for @Effect1Amount@ seconds. During this time he may <recast>Recast</recast> up to @Effect2Amount@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>.",
+					"dataValues": {
+						"RampBaseDamage": [
+							15,
+							20,
+							25,
+							30,
+							35,
+							40,
+							45
+						],
+						"BaseDamage": [
+							120,
+							170,
+							220,
+							270,
+							320,
+							370,
+							420
+						]
+					},
+					"spellCalculations": {
+						"TooltipTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.45,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						},
-						{
-							"mCoefficient": 0.45,
-							"__type": "StatByCoefficientCalculationPart"
+						"RampDamageCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "RampBaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
 						}
-					]
-				},
-				"RampDamageCalc": {
-					"mFormulaParts": [
-						{
-							"mDataValue": "RampBaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mCoefficient": 0.05,
-							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
+					},
+					"effectAmount": {
+						"0": [
+							10,
+							10,
+							10,
+							10,
+							0,
+							0,
+							0
+						],
+						"1": [
+							4,
+							4,
+							5,
+							6,
+							6,
+							6,
+							0
+						],
+						"2": [
+							170,
+							170,
+							220,
+							270,
+							0,
+							0,
+							0
+						],
+						"3": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							0
+						],
+						"4": [
+							5000,
+							5000,
+							5000,
+							5000,
+							5000,
+							5000,
+							5000
+						],
+						"5": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"6": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"dataKey": "Characters/Xerath/Spells/XerathLocusOfPower2Ability/XerathLocusOfPower2"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					10,
-					10,
-					10,
-					10,
-					0,
-					0,
-					0
-				],
-				"1": [
-					4,
-					4,
-					5,
-					6,
-					6,
-					6,
-					0
-				],
-				"2": [
-					170,
-					170,
-					220,
-					270,
-					0,
-					0,
-					0
-				],
-				"3": [
-					200,
-					200,
-					200,
-					200,
-					200,
-					200,
-					0
-				],
-				"4": [
-					5000,
-					5000,
-					5000,
-					5000,
-					5000,
-					5000,
-					5000
-				],
-				"5": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				],
-				"6": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				]
-			},
-			"mana": [
-				100,
-				100,
-				100,
-				0,
-				0,
-				0
-			],
-			"cooldownTime": [
-				130,
-				130,
-				115,
-				100,
-				130,
-				130,
-				130
-			],
-			"name": "Rite of the Arcane",
-			"tooltip": "Xerath ascends to his true form and channels for @Effect1Amount@ seconds. During this time he may <recast>Recast</recast> up to @Effect2Amount@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>."
+			]
 		}
 	}
 }

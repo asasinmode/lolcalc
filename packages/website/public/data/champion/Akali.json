@@ -29,675 +29,763 @@
 	},
 	"abilities": {
 		"passive": {
-			"image": "assets/characters/akali/hud/icons2d/akali_p.png",
 			"maxLevel": 0,
-			"dataValues": {
-				"PassiveAPRatio": [
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55,
-					0.55
-				],
-				"PassiveBADRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				]
-			},
-			"spellCalculations": {
-				"EnergyRestore": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mBreakpoints": [
+			"variants": [
+				{
+					"name": "Assassin's Mark",
+					"image": "assets/characters/akali/hud/icons2d/akali_p.png",
+					"tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>",
+					"dataValues": {
+						"PassiveAPRatio": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						],
+						"PassiveBADRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						]
+					},
+					"spellCalculations": {
+						"EnergyRestore": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
 								{
-									"mLevel": 8
-								},
-								{
-									"mLevel": 13
+									"mBreakpoints": [
+										{
+											"mLevel": 8
+										},
+										{
+											"mLevel": 13
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
-						}
-					]
-				},
-				"Damage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 35,
-							"mInitialBonusPerLevel": 3,
-							"mBreakpoints": [
-								{
-									"mLevel": 8,
-									"mBonusPerLevelAtAndAfter": 9
-								},
-								{
-									"mLevel": 14,
-									"mBonusPerLevelAtAndAfter": 15
-								}
-							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							]
 						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "PassiveBADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"Damage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 35,
+									"mInitialBonusPerLevel": 3,
+									"mBreakpoints": [
+										{
+											"mLevel": 8,
+											"mBonusPerLevelAtAndAfter": 9
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "PassiveBADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "PassiveAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mDataValue": "PassiveAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"PassiveSpeedBonus": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mLevel1Value": 0.3,
-							"mBreakpoints": [
+						"PassiveSpeedBonus": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
 								{
-									"mLevel": 6,
-									"mAdditionalBonusAtThisLevel": 0.1
-								},
-								{
-									"mLevel": 11,
-									"mAdditionalBonusAtThisLevel": 0.1
-								},
-								{
-									"mLevel": 16,
-									"mAdditionalBonusAtThisLevel": 0.1
+									"mLevel1Value": 0.3,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
 							],
-							"__type": "ByCharLevelBreakpointsCalculationPart"
+							"mDisplayAsPercent": true
 						}
-					],
-					"mDisplayAsPercent": true
+					},
+					"effectAmount": {
+						"0": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"1": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"2": [
+							36,
+							36,
+							36,
+							36,
+							36,
+							36,
+							36
+						],
+						"3": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"5": [
+							8,
+							8,
+							13,
+							8,
+							8,
+							8,
+							8
+						],
+						"6": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						]
+					},
+					"dataKey": "Characters/Akali/Spells/AkaliPAbility/AkaliP"
 				}
-			},
-			"effectAmount": {
-				"0": [
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9,
-					0.9
-				],
-				"1": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				],
-				"2": [
-					36,
-					36,
-					36,
-					36,
-					36,
-					36,
-					36
-				],
-				"3": [
-					3,
-					3,
-					3,
-					3,
-					3,
-					3,
-					3
-				],
-				"5": [
-					8,
-					8,
-					13,
-					8,
-					8,
-					8,
-					8
-				],
-				"6": [
-					10,
-					10,
-					10,
-					10,
-					10,
-					10,
-					10
-				]
-			},
-			"name": "Assassin's Mark",
-			"tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>.",
-			"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>"
+			]
 		},
 		"q": {
-			"image": "assets/characters/akali/hud/icons2d/akali_q.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamageNamed": [
-					20,
-					45,
-					70,
-					95,
-					120,
-					145,
-					170
-				],
-				"tADRatio": [
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65,
-					0.65
-				],
-				"SlowDuration": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"SlowPercentage": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"BonusDamageToMinions": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"APRatio": [
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6,
-					0.6
-				]
-			},
-			"spellCalculations": {
-				"Damage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamageNamed",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "tADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"MinionDamage": {
-					"mMultiplier": {
-						"mDataValue": "BonusDamageToMinions"
+			"variants": [
+				{
+					"name": "Five Point Strike",
+					"image": "assets/characters/akali/hud/icons2d/akali_q.png",
+					"mana": [
+						110,
+						100,
+						90,
+						80,
+						70,
+						60
+					],
+					"cooldownTime": [
+						1.5,
+						1.5,
+						1.5,
+						1.5,
+						1.5,
+						1.5,
+						1.5
+					],
+					"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds.",
+					"dataValues": {
+						"BaseDamageNamed": [
+							20,
+							45,
+							70,
+							95,
+							120,
+							145,
+							170
+						],
+						"tADRatio": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						],
+						"SlowDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"SlowPercentage": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"BonusDamageToMinions": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"APRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						]
 					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mOverrideSpellLevel": 5,
-					"mModifiedGameCalculation": "Damage"
+					"spellCalculations": {
+						"Damage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamageNamed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "tADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MinionDamage": {
+							"mMultiplier": {
+								"mDataValue": "BonusDamageToMinions"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mOverrideSpellLevel": 5,
+							"mModifiedGameCalculation": "Damage"
+						}
+					},
+					"dataKey": "Characters/Akali/Spells/AkaliQAbility/AkaliQ"
 				}
-			},
-			"mana": [
-				110,
-				100,
-				90,
-				80,
-				70,
-				60
-			],
-			"cooldownTime": [
-				1.5,
-				1.5,
-				1.5,
-				1.5,
-				1.5,
-				1.5,
-				1.5
-			],
-			"name": "Five Point Strike",
-			"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds."
+			]
 		},
 		"w": {
-			"image": "assets/characters/akali/hud/icons2d/akali_w.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"MovementSpeed": [
-					25,
-					30,
-					35,
-					40,
-					45,
-					50,
-					55
-				],
-				"EnergyRestore": [
-					100,
-					100,
-					100,
-					100,
-					100,
-					100,
-					100
-				],
-				"BaseDuration": [
-					4.5,
-					5,
-					5.5,
-					6,
-					6.5,
-					7,
-					7.5
-				],
-				"MaxDuration": [
-					6.5,
-					7,
-					7.5,
-					8,
-					8.5,
-					9,
-					9.5
-				],
-				"CloudRadius": [
-					140,
-					140,
-					140,
-					140,
-					140,
-					140,
-					140
-				],
-				"MovementSpeedDuration": [
-					2,
-					2,
-					2,
-					2,
-					2,
-					2,
-					2
-				],
-				"CherryBonusHaste": [
-					30,
-					30,
-					30,
-					30,
-					30,
-					30,
-					30
-				]
-			},
-			"effectAmount": {
-				"0": [
-					140,
-					140,
-					140,
-					140,
-					140,
-					140,
-					140
-				],
-				"1": [
-					4,
-					4,
-					4,
-					4,
-					4,
-					4,
-					4
-				],
-				"3": [
-					250,
-					250,
-					250,
-					250,
-					250,
-					250,
-					250
-				],
-				"4": [
-					60,
-					60,
-					65,
-					70,
-					75,
-					80,
-					80
-				],
-				"5": [
-					0.2,
-					0.3,
-					0.35,
-					0.4,
-					0.45,
-					0.5,
-					0.45
-				],
-				"6": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"8": [
-					5,
-					5,
-					5.5,
-					6,
-					6.5,
-					7,
-					7.5
-				]
-			},
-			"cooldownTime": [
-				20,
-				20,
-				19,
-				18,
-				17,
-				16,
-				16
-			],
-			"name": "Twilight Shroud",
-			"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>."
+			"variants": [
+				{
+					"name": "Twilight Shroud",
+					"image": "assets/characters/akali/hud/icons2d/akali_w.png",
+					"cooldownTime": [
+						20,
+						20,
+						19,
+						18,
+						17,
+						16,
+						16
+					],
+					"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
+					"dataValues": {
+						"MovementSpeed": [
+							25,
+							30,
+							35,
+							40,
+							45,
+							50,
+							55
+						],
+						"EnergyRestore": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"BaseDuration": [
+							4.5,
+							5,
+							5.5,
+							6,
+							6.5,
+							7,
+							7.5
+						],
+						"MaxDuration": [
+							6.5,
+							7,
+							7.5,
+							8,
+							8.5,
+							9,
+							9.5
+						],
+						"CloudRadius": [
+							140,
+							140,
+							140,
+							140,
+							140,
+							140,
+							140
+						],
+						"MovementSpeedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"CherryBonusHaste": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						]
+					},
+					"effectAmount": {
+						"0": [
+							140,
+							140,
+							140,
+							140,
+							140,
+							140,
+							140
+						],
+						"1": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"3": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						],
+						"4": [
+							60,
+							60,
+							65,
+							70,
+							75,
+							80,
+							80
+						],
+						"5": [
+							0.2,
+							0.3,
+							0.35,
+							0.4,
+							0.45,
+							0.5,
+							0.45
+						],
+						"6": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"8": [
+							5,
+							5,
+							5.5,
+							6,
+							6.5,
+							7,
+							7.5
+						]
+					},
+					"dataKey": "Characters/Akali/Spells/AkaliWAbility/AkaliW"
+				}
+			]
 		},
 		"e": {
-			"image": "assets/characters/akali/hud/icons2d/akali_e.png",
 			"maxLevel": 5,
-			"dataValues": {
-				"BaseDamage": [
-					0,
-					70,
-					140,
-					210,
-					280,
-					350,
-					420
-				],
-				"SelfKnockbackRange": [
-					400,
-					400,
-					400,
-					400,
-					400,
-					400,
-					400
-				],
-				"E1PercentageOfTotal": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"TotalADRatio": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				],
-				"TotalAPRatio": [
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1,
-					1.1
-				],
-				"E2PercentageOfTotal": [
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7,
-					0.7
-				]
-			},
-			"spellCalculations": {
-				"E1Damage": {
-					"mMultiplier": {
-						"mDataValue": "E1PercentageOfTotal"
+			"variants": [
+				{
+					"name": "Shuriken Flip",
+					"image": "assets/characters/akali/hud/icons2d/akali_e.png",
+					"mana": [
+						30,
+						30,
+						30,
+						30,
+						30,
+						30
+					],
+					"cooldownTime": [
+						16,
+						16,
+						14.5,
+						13,
+						11.5,
+						10,
+						8.5
+					],
+					"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>.",
+					"dataValues": {
+						"BaseDamage": [
+							0,
+							70,
+							140,
+							210,
+							280,
+							350,
+							420
+						],
+						"SelfKnockbackRange": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"E1PercentageOfTotal": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"TotalADRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"TotalAPRatio": [
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1,
+							1.1
+						],
+						"E2PercentageOfTotal": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						]
 					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
+					"spellCalculations": {
+						"E1Damage": {
+							"mMultiplier": {
+								"mDataValue": "E1PercentageOfTotal"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "TotalADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "TotalAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						},
-						{
-							"mStat": 2,
-							"mDataValue": "TotalADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "TotalAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
+						"E2DamageCalc": {
+							"mMultiplier": {
+								"mDataValue": "E2PercentageOfTotal"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mDataValue": "TotalADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "TotalAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
 						}
-					]
+					},
+					"dataKey": "Characters/Akali/Spells/AkaliEAbility/AkaliE"
 				},
-				"E2DamageCalc": {
-					"mMultiplier": {
-						"mDataValue": "E2PercentageOfTotal"
-					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mDataValue": "TotalADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "TotalAPRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
+				{
+					"image": "assets/characters/akali/hud/icons2d/akali_e2.png",
+					"cooldownTime": [
+						1,
+						1,
+						1,
+						1,
+						1,
+						1,
+						1
+					],
+					"tooltipVariantIndex": 0,
+					"dataKey": "Characters/Akali/Spells/AkaliEAbility/AkaliEb"
 				}
-			},
-			"mana": [
-				30,
-				30,
-				30,
-				30,
-				30,
-				30
-			],
-			"cooldownTime": [
-				16,
-				16,
-				14.5,
-				13,
-				11.5,
-				10,
-				8.5
-			],
-			"name": "Shuriken Flip",
-			"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>."
+			]
 		},
 		"r": {
-			"image": "assets/characters/akali/hud/icons2d/akali_r.png",
 			"maxLevel": 3,
-			"dataValues": {
-				"BaseDamage": [
-					0,
-					110,
-					220,
-					330,
-					440,
-					550,
-					660
-				],
-				"R2BaseDamage": [
-					0,
-					70,
-					140,
-					210,
-					280,
-					350,
-					420
-				],
-				"R1ADRatio": [
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5,
-					0.5
-				],
-				"R1APRatio": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"R2APRatio": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"MaxExecuteThreshold": [
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3,
-					0.3
-				],
-				"CooldownBetweenCasts": [
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5,
-					2.5
-				],
-				"DashDistance": [
-					715,
-					715,
-					715,
-					715,
-					715,
-					715,
-					715
-				]
-			},
-			"spellCalculations": {
-				"Cast1Damage": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mStat": 2,
-							"mStatFormula": 2,
-							"mDataValue": "R1ADRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "R1APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"Cast2DamageMin": {
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mFormulaParts": [
-						{
-							"mDataValue": "R2BaseDamage",
-							"__type": "NamedDataValueCalculationPart"
-						},
-						{
-							"mDataValue": "R2APRatio",
-							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"Cast2DamageMax": {
-					"mMultiplier": {
-						"mNumber": 3
+			"variants": [
+				{
+					"name": "Perfect Execution",
+					"image": "assets/characters/akali/hud/icons2d/akali_r.png",
+					"cooldownTime": [
+						120,
+						120,
+						90,
+						60,
+						60,
+						60,
+						60
+					],
+					"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health.",
+					"dataValues": {
+						"BaseDamage": [
+							0,
+							110,
+							220,
+							330,
+							440,
+							550,
+							660
+						],
+						"R2BaseDamage": [
+							0,
+							70,
+							140,
+							210,
+							280,
+							350,
+							420
+						],
+						"R1ADRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"R1APRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"R2APRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"MaxExecuteThreshold": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"CooldownBetweenCasts": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"DashDistance": [
+							715,
+							715,
+							715,
+							715,
+							715,
+							715,
+							715
+						]
 					},
-					"mSimpleTooltipCalculationDisplay": 6,
-					"mModifiedGameCalculation": "Cast2DamageMin"
+					"spellCalculations": {
+						"Cast1Damage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "R1ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "R1APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"Cast2DamageMin": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "R2BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "R2APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"Cast2DamageMax": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "Cast2DamageMin"
+						}
+					},
+					"effectAmount": {
+						"2": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliR"
+				},
+				{
+					"image": "assets/characters/akali/hud/icons2d/akali_r2.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltipVariantIndex": 0,
+					"dataValues": {
+						"R2BaseDamage": [
+							0,
+							70,
+							140,
+							210,
+							280,
+							350,
+							420
+						],
+						"R2APRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						]
+					},
+					"spellCalculations": {
+						"Cast2DamageMin": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "R2BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "R2APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliRb"
 				}
-			},
-			"effectAmount": {
-				"2": [
-					1,
-					1,
-					1,
-					1,
-					1,
-					1,
-					1
-				]
-			},
-			"cooldownTime": [
-				120,
-				120,
-				90,
-				60,
-				60,
-				60,
-				60
-			],
-			"name": "Perfect Execution",
-			"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health."
+			]
 		}
 	}
 }
