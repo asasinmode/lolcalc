@@ -575,20 +575,6 @@
 						}
 					},
 					"dataKey": "Characters/Akali/Spells/AkaliEAbility/AkaliE"
-				},
-				{
-					"image": "assets/characters/akali/hud/icons2d/akali_e2.png",
-					"cooldownTime": [
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Akali/Spells/AkaliEAbility/AkaliEb"
 				}
 			]
 		},
@@ -735,55 +721,6 @@
 						]
 					},
 					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliR"
-				},
-				{
-					"image": "assets/characters/akali/hud/icons2d/akali_r2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataValues": {
-						"R2BaseDamage": [
-							0,
-							70,
-							140,
-							210,
-							280,
-							350,
-							420
-						],
-						"R2APRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
-					},
-					"spellCalculations": {
-						"Cast2DamageMin": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mDataValue": "R2BaseDamage",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mDataValue": "R2APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliRb"
 				}
 			]
 		}

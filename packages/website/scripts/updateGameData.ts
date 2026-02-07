@@ -813,9 +813,8 @@ function championAbilityData(
 	const variants: IChampion['abilities'][keyof IChampion['abilities']]['variants'] = [];
 
 	const abilityRootData = championData[abilityRootKey];
-	if (abilityRootData?.mRootSpell || abilityRootData?.mChildSpells) {
-		const keys = abilityRootData.mRootSpell ? [abilityRootData.mRootSpell] : [];
-		variantKeys = Array.from(new Set(keys.concat(abilityRootData.mChildSpells || [])));
+	if (abilityRootData?.mRootSpell) {
+		variantKeys = [abilityRootData.mRootSpell];
 	} else if (abilityRootData?.mSpell) {
 		variantKeys = [abilityRootKey];
 	} else {

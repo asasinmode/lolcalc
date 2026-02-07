@@ -482,21 +482,6 @@
 						}
 					},
 					"dataKey": "Characters/Garen/Spells/GarenEAbility/GarenE"
-				},
-				{
-					"name": "Cancel Judgement",
-					"image": "assets/characters/garen/hud/icons2d/garen_e2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Garen stops performing this Ability.",
-					"dataKey": "Characters/Garen/Spells/GarenEAbility/GarenECancel"
 				}
 			]
 		},

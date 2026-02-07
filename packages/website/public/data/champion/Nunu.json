@@ -655,49 +655,6 @@
 						}
 					},
 					"dataKey": "Characters/Nunu/Spells/NunuWAbility/NunuW"
-				},
-				{
-					"image": "assets/characters/nunu/hud/icons2d/nunuw2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							625,
-							625,
-							925,
-							1275,
-							1275,
-							1275,
-							1275
-						],
-						"1": [
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5
-						],
-						"5": [
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95
-						]
-					},
-					"dataKey": "Characters/Nunu/Spells/NunuWAbility/NunuW_Recast"
 				}
 			]
 		},
@@ -986,58 +943,6 @@
 						}
 					},
 					"dataKey": "Characters/Nunu/Spells/NunuRAbility/NunuR"
-				},
-				{
-					"image": "assets/characters/nunu/hud/icons2d/nunur.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							625,
-							625,
-							925,
-							1275,
-							1275,
-							1275,
-							1275
-						],
-						"1": [
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5
-						],
-						"5": [
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95,
-							-0.95
-						],
-						"7": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
-					},
-					"dataKey": "Characters/Nunu/Spells/NunuRAbility/NunuR_Recast"
 				}
 			]
 		}

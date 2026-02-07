@@ -654,21 +654,6 @@
 						}
 					},
 					"dataKey": "Characters/TahmKench/Spells/TahmKenchRWrapperAbility/TahmKenchRWrapper"
-				},
-				{
-					"name": "Regurgitate",
-					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchr2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Tahm Kench spits out his Devoured target.",
-					"dataKey": "Characters/TahmKench/Spells/TahmKenchRWrapperAbility/TahmKenchR2"
 				}
 			]
 		}

@@ -48,47 +48,6 @@
 						}
 					},
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaPassiveAbility/CassiopeiaPassive"
-				},
-				{
-					"name": "Triumphant Serpentine Grace",
-					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_passive_feats_upgrade.png",
-					"tooltip": "Cassiopeia gains <speed>@TotalMovementSpeed@ Move Speed</speed> and <scaleAP>@BonusAbilityPower@ Ability Power</scaleAP> but cannot purchase Boots.",
-					"tooltipExtended": "Cassiopeia gains <speed>@TotalMovementSpeed@ Move Speed</speed> and <scaleAP>@BonusAbilityPower@ Ability Power</scaleAP> but cannot purchase Boots.<br><br><rules>This passive has been enhanced by claiming the Feats of Strength.</rules>",
-					"dataValues": {
-						"ModesMSMod": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"TotalMovementSpeed": {
-							"mMultiplier": {
-								"mDataValue": "ModesMSMod"
-							},
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 4,
-									"mInitialBonusPerLevel": 4,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"BonusAbilityPower": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 3,
-									"mInitialBonusPerLevel": 3,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "{2b50ca69}"
 				}
 			]
 		},

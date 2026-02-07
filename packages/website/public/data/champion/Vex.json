@@ -674,46 +674,6 @@
 						}
 					},
 					"dataKey": "Characters/Vex/Spells/VexRAbility/VexR"
-				},
-				{
-					"name": "Shadow Surge",
-					"image": "assets/characters/vex/hud/icons2d/icons_vex_r02.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Shadow excitedly surges forward, dealing <magicDamage>@spell.VexR:RDamageCalc@ magic damage</magicDamage> and marking the first enemy champion hit for 4 seconds.<br><br><recast>Recast</recast>: Dash to the marked champion, dealing <magicDamage>@spell.VexR:RecastDamageCalc@ magic damage</magicDamage> on arrival.<br><br>If the marked champion dies within @spell.VexR:TakedownWindow@ seconds of taking damage from this Ability, its Cooldown is temporarily reset.",
-					"dataValues": {
-						"RecastDamage": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						]
-					},
-					"spellCalculations": {
-						"RecastDamageCalc": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "RecastDamage",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0.5,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Vex/Spells/VexRAbility/VexR2"
 				}
 			]
 		}

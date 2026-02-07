@@ -800,58 +800,6 @@
 						}
 					},
 					"dataKey": "Characters/Ornn/Spells/OrnnRAbility/OrnnR"
-				},
-				{
-					"image": "assets/characters/ornn/hud/icons2d/ornnr2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							50,
-							50,
-							70,
-							90,
-							110,
-							130,
-							0
-						],
-						"1": [
-							80,
-							80,
-							105,
-							130,
-							155,
-							180,
-							0
-						],
-						"2": [
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600
-						],
-						"3": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
-					},
-					"dataKey": "Characters/Ornn/Spells/OrnnRAbility/OrnnRCharge"
 				}
 			]
 		}

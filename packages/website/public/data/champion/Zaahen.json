@@ -359,20 +359,6 @@
 						}
 					},
 					"dataKey": "Characters/Zaahen/Spells/ZaahenQAbility/ZaahenQ"
-				},
-				{
-					"image": "assets/characters/zaahen/hud/icons2d/zaahenq2.zaahen.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "{85ed8107}"
 				}
 			]
 		},

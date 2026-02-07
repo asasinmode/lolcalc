@@ -178,21 +178,6 @@
 						}
 					},
 					"dataKey": "Characters/Velkoz/Spells/VelkozQAbility/VelkozQ"
-				},
-				{
-					"name": "Plasma Fission",
-					"image": "assets/characters/velkoz/hud/icons2d/velkoz_q2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Reactivate to split the missile at a 90 degree angle.",
-					"dataKey": "{8738eb36}"
 				}
 			]
 		},

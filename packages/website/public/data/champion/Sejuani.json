@@ -509,20 +509,6 @@
 						]
 					},
 					"dataKey": "Characters/Sejuani/Spells/SejuaniEAbility/SejuaniE"
-				},
-				{
-					"image": "assets/characters/sejuani/hud/icons2d/sejuani_w.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "{328fd7b3}"
 				}
 			]
 		},

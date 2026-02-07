@@ -475,20 +475,6 @@
 						}
 					},
 					"dataKey": "Characters/Briar/Spells/BriarWAbility/BriarW"
-				},
-				{
-					"image": "assets/characters/briar/hud/icons2d/briarw2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "{3c5c0e44}"
 				}
 			]
 		},

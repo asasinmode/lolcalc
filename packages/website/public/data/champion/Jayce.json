@@ -421,22 +421,6 @@
 						}
 					},
 					"dataKey": "Characters/Jayce/Spells/JayceStanceHtGAbility/JayceStanceHtG"
-				},
-				{
-					"name": "Mercury Hammer / Mercury Cannon",
-					"image": "assets/characters/jayce/hud/icons2d/jaycer_melee.png",
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
-					"tooltip": "<keywordMajor>Mercury Cannon:</keywordMajor> Jayce transforms his weapon into the <keywordMajor>Mercury Hammer</keywordMajor>, becoming melee ranged and gaining new Abilities and <scaleArmor>@spell.JayceStanceHtG:Resists@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. Jayce's next Attack deals an additional <magicDamage>@spell.JayceStanceHtG:Damage@ magic damage</magicDamage>.",
-					"tooltipExtended": "{{Spell_JayceStanceGtH_Tooltip}}<br><br>{{Spell_JayceStanceHtG_Tooltip}}",
-					"dataKey": "Characters/Jayce/Spells/JayceStanceHtGAbility/JayceStanceGtH"
 				}
 			]
 		}

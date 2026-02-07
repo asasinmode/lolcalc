@@ -198,41 +198,6 @@
 						]
 					},
 					"dataKey": "Characters/Thresh/Spells/ThreshQAbility/ThreshQ"
-				},
-				{
-					"name": "Deathly Leap",
-					"image": "assets/characters/thresh/hud/icons2d/thresh_q3.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Thresh pulls himself to the poor soul.",
-					"effectAmount": {
-						"0": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"1": [
-							0.75,
-							1,
-							1.25,
-							1.5,
-							1.75,
-							2,
-							2.25
-						]
-					},
-					"dataKey": "Characters/Thresh/Spells/ThreshQAbility/ThreshQLeap"
 				}
 			]
 		},
@@ -507,11 +472,6 @@
 						]
 					},
 					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshE"
-				},
-				{
-					"image": "assets/characters/thresh/hud/icons2d/thresh_e0.png",
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshEPassive"
 				}
 			]
 		},

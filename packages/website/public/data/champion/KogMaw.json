@@ -368,31 +368,6 @@
 						}
 					},
 					"dataKey": "Characters/KogMaw/Spells/KogMawVoidOozeAbility/KogMawVoidOoze"
-				},
-				{
-					"image": "assets/spells/icons2d/bowmaster_enchantedarrow.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							75,
-							250,
-							425,
-							600,
-							0,
-							0,
-							175
-						]
-					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawVoidOozeAbility/KogMawVoidOozeMissile"
 				}
 			]
 		},

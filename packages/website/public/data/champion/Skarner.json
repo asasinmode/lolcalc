@@ -251,11 +251,6 @@
 						}
 					},
 					"dataKey": "Characters/Skarner/Spells/SkarnerQAbility/SkarnerQ"
-				},
-				{
-					"image": "assets/characters/skarner/hud/icons2d/skarner_q_throw.png",
-					"tooltipVariantIndex": 0,
-					"dataKey": "{82f12fe7}"
 				}
 			]
 		},
@@ -630,12 +625,6 @@
 						}
 					},
 					"dataKey": "Characters/Skarner/Spells/SkarnerEAbility/SkarnerE"
-				},
-				{
-					"name": "Ixtal's Impact",
-					"image": "assets/characters/skarner/hud/icons2d/skarner_charge_cancel.png",
-					"tooltip": "Skarner ends his charge and releases any pinned victim.",
-					"dataKey": "{5ac742ee}"
 				}
 			]
 		},

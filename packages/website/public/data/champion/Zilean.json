@@ -110,49 +110,6 @@
 						}
 					},
 					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/HeightenedLearning"
-				},
-				{
-					"name": "Time in a Bottle",
-					"image": "assets/spells/icons2d/yeti_shatter.png",
-					"cooldownTime": [
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2
-					],
-					"effectAmount": {
-						"0": [
-							375,
-							625,
-							875,
-							1125,
-							0,
-							0,
-							250
-						],
-						"1": [
-							75,
-							150,
-							225,
-							300,
-							0,
-							0,
-							75
-						],
-						"2": [
-							180,
-							150,
-							120,
-							90,
-							0,
-							0,
-							0
-						]
-					},
-					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/ZileanPassiveChannel"
 				}
 			]
 		},

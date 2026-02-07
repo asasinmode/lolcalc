@@ -561,20 +561,6 @@
 						}
 					},
 					"dataKey": "Characters/Annie/Spells/AnnieRAbility/AnnieR"
-				},
-				{
-					"image": "assets/characters/annie/hud/icons2d/annie_r2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Annie/Spells/AnnieRAbility/AnnieRController"
 				}
 			]
 		}

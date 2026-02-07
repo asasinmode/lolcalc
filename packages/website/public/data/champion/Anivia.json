@@ -184,40 +184,6 @@
 						}
 					},
 					"dataKey": "Characters/Anivia/Spells/FlashFrostAbility/FlashFrost"
-				},
-				{
-					"image": "cryophoenix_frigidorb.png",
-					"cooldownTime": [
-						10,
-						10,
-						9.5,
-						9,
-						8.5,
-						8,
-						8
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							50,
-							80,
-							110,
-							140,
-							170,
-							200,
-							230
-						],
-						"1": [
-							13,
-							12,
-							11,
-							10,
-							9,
-							8,
-							7
-						]
-					},
-					"dataKey": "Characters/Anivia/Spells/FlashFrostAbility/FlashFrostSpell"
 				}
 			]
 		},

@@ -765,59 +765,6 @@
 						}
 					},
 					"dataKey": "Characters/Viktor/Spells/ViktorRAbility/ViktorR"
-				},
-				{
-					"name": "Guide Singularity",
-					"image": "assets/characters/viktor/hud/icons2d/viktor_r_guide.viktorvgu.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Relocate the storm to another position.",
-					"effectAmount": {
-						"0": [
-							150,
-							150,
-							250,
-							350,
-							0,
-							0,
-							30
-						],
-						"1": [
-							100,
-							100,
-							175,
-							250,
-							0,
-							0,
-							100
-						],
-						"2": [
-							120,
-							120,
-							100,
-							80,
-							0,
-							0,
-							0
-						],
-						"3": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0,
-							0,
-							0
-						]
-					},
-					"dataKey": "{b84358db}"
 				}
 			]
 		}

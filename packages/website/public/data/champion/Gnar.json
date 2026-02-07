@@ -294,40 +294,6 @@
 						}
 					},
 					"dataKey": "Characters/Gnar/Spells/GnarQAbility/GnarQ"
-				},
-				{
-					"image": "fallenangel_darkbinding.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							30,
-							90,
-							150,
-							245,
-							315,
-							440,
-							565
-						],
-						"1": [
-							2.25,
-							2.5,
-							2.75,
-							3,
-							3.25,
-							3.5,
-							3.75
-						]
-					},
-					"dataKey": "Characters/Gnar/Spells/GnarQAbility/GnarQMissile"
 				}
 			]
 		},

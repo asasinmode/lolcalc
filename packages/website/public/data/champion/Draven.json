@@ -528,67 +528,6 @@
 						}
 					},
 					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast"
-				},
-				{
-					"image": "assets/characters/draven/hud/icons2d/draven_whirlingdeath_recall.png",
-					"cooldownTime": [
-						1,
-						1,
-						1,
-						1,
-						1.5,
-						1.5,
-						1.5
-					],
-					"tooltip": "Cause Whirling Death to reverse direction early, returning to Draven.",
-					"effectAmount": {
-						"0": [
-							75,
-							200,
-							325,
-							450,
-							0,
-							0,
-							125
-						],
-						"1": [
-							10,
-							10,
-							10,
-							10,
-							50,
-							60,
-							60
-						],
-						"2": [
-							33,
-							28,
-							23,
-							18,
-							0,
-							0,
-							0
-						],
-						"3": [
-							0,
-							1,
-							2,
-							3,
-							0,
-							0,
-							1
-						],
-						"4": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRDoublecast"
 				}
 			]
 		}

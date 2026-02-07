@@ -332,20 +332,6 @@
 						}
 					},
 					"dataKey": "Characters/Yuumi/Spells/YuumiQAbility/YuumiQ"
-				},
-				{
-					"image": "assets/characters/yuumi/hud/icons2d/yuumiq2.png",
-					"cooldownTime": [
-						11,
-						10,
-						9,
-						8,
-						7,
-						6,
-						5
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Yuumi/Spells/YuumiQAbility/YuumiQCast"
 				}
 			]
 		},
@@ -474,51 +460,6 @@
 						}
 					},
 					"dataKey": "Characters/Yuumi/Spells/YuumiWAbility/YuumiW"
-				},
-				{
-					"name": "Change of Plan",
-					"image": "assets/characters/yuumi/hud/icons2d/yuumiw2.png",
-					"cooldownTime": [
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25
-					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> While on her Best Friend, Yuumi is increasing her <keywordMajor>Heal & Shield Power</keywordMajor> by <keywordMajor>@spell.YuumiW:HealAndShieldPower*100@%</keywordMajor>.<br><br>Her <keywordMajor>Best Friend</keywordMajor> also gains <healing>@spell.YuumiW:HealthOnHit@ healing</healing> On-Hit.<br><br><spellActive>Active:</spellActive> Yuumi dashes to another ally champion, or detaches from her current friend.",
-					"tooltipExtended": "<spellPassive>Passive:</spellPassive> While on her Best Friend, Yuumi is increasing her <keywordMajor>Heal & Shield Power</keywordMajor> by <keywordMajor>@spell.YuumiW:HealAndShieldPower*100@%</keywordMajor>.<br><br>Her <keywordMajor>Best Friend</keywordMajor> also gains <healing>@spell.YuumiW:HealthOnHit@ healing</healing> On-Hit.<br><br><spellActive>Active:</spellActive> Yuumi dashes to another ally champion, or detaches from her current friend.",
-					"dataValues": {
-						"CastForgivenessRange": [
-							125,
-							125,
-							125,
-							125,
-							125,
-							125,
-							125
-						],
-						"AdaptiveStatSharing": [
-							0.1,
-							0.12,
-							0.14,
-							0.16,
-							0.18,
-							0.2,
-							0.22
-						],
-						"FlatAdaptiveStats": [
-							10,
-							12,
-							14,
-							16,
-							18,
-							20,
-							22
-						]
-					},
-					"dataKey": "Characters/Yuumi/Spells/YuumiWAbility/YuumiWEndWrapper"
 				}
 			]
 		},
@@ -879,19 +820,6 @@
 						}
 					},
 					"dataKey": "Characters/Yuumi/Spells/YuumiRAbility/YuumiR"
-				},
-				{
-					"image": "assets/characters/yuumi/hud/icons2d/yuumiw.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"dataKey": "{1d7bd936}"
 				}
 			]
 		}

@@ -360,20 +360,6 @@
 						}
 					},
 					"dataKey": "Characters/Rengar/Spells/RengarQAbility/RengarQ"
-				},
-				{
-					"image": "assets/characters/rengar/hud/icons2d/rengarqemp.png",
-					"cooldownTime": [
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Rengar/Spells/RengarQAbility/RengarQEmp"
 				}
 			]
 		},
@@ -526,20 +512,6 @@
 						}
 					},
 					"dataKey": "Characters/Rengar/Spells/RengarWAbility/RengarW"
-				},
-				{
-					"image": "assets/characters/rengar/hud/icons2d/rengar_w_emp.png",
-					"cooldownTime": [
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Rengar/Spells/RengarWAbility/RengarWEmp"
 				}
 			]
 		},

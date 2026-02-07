@@ -323,20 +323,6 @@
 						}
 					},
 					"dataKey": "Characters/Pantheon/Spells/PantheonQAbility/PantheonQ"
-				},
-				{
-					"image": "assets/characters/pantheon/hud/icons2d/pantheon_q2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Pantheon/Spells/PantheonQAbility/PantheonQTap"
 				}
 			]
 		},
@@ -696,20 +682,6 @@
 						}
 					},
 					"dataKey": "Characters/Pantheon/Spells/PantheonEAbility/PantheonE"
-				},
-				{
-					"image": "assets/characters/pantheon/hud/icons2d/pantheon_q2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Pantheon/Spells/PantheonEAbility/PantheonEShieldSlam"
 				}
 			]
 		},

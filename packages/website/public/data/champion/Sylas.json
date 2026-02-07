@@ -487,31 +487,6 @@
 						}
 					},
 					"dataKey": "Characters/Sylas/Spells/SylasEAbility/SylasE"
-				},
-				{
-					"image": "assets/characters/sylas/hud/icons2d/sylase2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							20,
-							50,
-							80,
-							110,
-							140,
-							170,
-							200
-						]
-					},
-					"dataKey": "Characters/Sylas/Spells/SylasEAbility/SylasE2"
 				}
 			]
 		},

@@ -641,20 +641,6 @@
 						}
 					},
 					"dataKey": "Characters/Kled/Spells/KledEAbility/KledE"
-				},
-				{
-					"image": "assets/characters/kled/hud/icons2d/kled_e2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Kled can dash back through his initial target, dealing the same damage.",
-					"dataKey": "Characters/Kled/Spells/KledEAbility/KledE2"
 				}
 			]
 		},

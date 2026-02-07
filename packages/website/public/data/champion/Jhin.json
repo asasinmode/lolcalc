@@ -666,20 +666,6 @@
 						}
 					},
 					"dataKey": "Characters/Jhin/Spells/JhinRAbility/JhinR"
-				},
-				{
-					"image": "assets/characters/jhin/hud/icons2d/jhin_r_shot.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Jhin/Spells/JhinRAbility/JhinRShot"
 				}
 			]
 		}

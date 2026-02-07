@@ -497,67 +497,6 @@
 						]
 					},
 					"dataKey": "Characters/Kaisa/Spells/KaisaQAbility/KaisaQ"
-				},
-				{
-					"name": "Evolve Icathian Rain",
-					"image": "",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"effectAmount": {
-						"0": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"1": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"2": [
-							15,
-							20,
-							25,
-							30,
-							35,
-							40,
-							45
-						],
-						"3": [
-							18,
-							20,
-							22,
-							24,
-							26,
-							28,
-							30
-						],
-						"4": [
-							12,
-							24,
-							36,
-							48,
-							60,
-							72,
-							84
-						]
-					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaQAbility/KaisaQEvolved"
 				}
 			]
 		},
@@ -653,67 +592,6 @@
 						]
 					},
 					"dataKey": "Characters/Kaisa/Spells/KaisaWAbility/KaisaW"
-				},
-				{
-					"name": "Evolve Void Seeker",
-					"image": "",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"effectAmount": {
-						"0": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"1": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"2": [
-							15,
-							20,
-							25,
-							30,
-							35,
-							40,
-							45
-						],
-						"3": [
-							18,
-							20,
-							22,
-							24,
-							26,
-							28,
-							30
-						],
-						"4": [
-							12,
-							24,
-							36,
-							48,
-							60,
-							72,
-							84
-						]
-					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaWAbility/KaisaWEvolved"
 				}
 			]
 		},
@@ -862,67 +740,6 @@
 						]
 					},
 					"dataKey": "Characters/Kaisa/Spells/KaisaEAbility/KaisaE"
-				},
-				{
-					"name": "Evolve Supercharge",
-					"image": "",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"effectAmount": {
-						"0": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"1": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"2": [
-							15,
-							20,
-							25,
-							30,
-							35,
-							40,
-							45
-						],
-						"3": [
-							18,
-							20,
-							22,
-							24,
-							26,
-							28,
-							30
-						],
-						"4": [
-							12,
-							24,
-							36,
-							48,
-							60,
-							72,
-							84
-						]
-					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaEAbility/KaisaEEvolved"
 				}
 			]
 		},

@@ -574,67 +574,6 @@
 						}
 					},
 					"dataKey": "Characters/Fizz/Spells/FizzEAbility/FizzE"
-				},
-				{
-					"image": "assets/characters/fizz/hud/icons2d/fizz_e2.png",
-					"cooldownTime": [
-						16,
-						16,
-						14.5,
-						13,
-						11.5,
-						10,
-						10
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							20,
-							70,
-							120,
-							170,
-							220,
-							270,
-							320
-						],
-						"1": [
-							35,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						],
-						"2": [
-							225,
-							225,
-							225,
-							225,
-							225,
-							225,
-							225
-						],
-						"3": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"4": [
-							375,
-							375,
-							375,
-							375,
-							375,
-							375,
-							375
-						]
-					},
-					"dataKey": "Characters/Fizz/Spells/FizzEAbility/FizzETwo"
 				}
 			]
 		},

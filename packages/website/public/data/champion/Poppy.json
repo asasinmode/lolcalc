@@ -230,20 +230,6 @@
 						]
 					},
 					"dataKey": "Characters/Poppy/Spells/PoppyQAbility/PoppyQ"
-				},
-				{
-					"image": "",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Poppy/Spells/PoppyQAbility/PoppyQSpell"
 				}
 			]
 		},

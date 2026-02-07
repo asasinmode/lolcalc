@@ -483,66 +483,6 @@
 						]
 					},
 					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynW"
-				},
-				{
-					"image": "assets/characters/kayn/hud/icons2d/kayn_w_ass.png",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						65
-					],
-					"cooldownTime": [
-						13,
-						13,
-						12,
-						11,
-						10,
-						9,
-						9
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							90,
-							90,
-							135,
-							180,
-							225,
-							270,
-							315
-						],
-						"1": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"2": [
-							-0.6,
-							-0.6,
-							-0.6,
-							-0.6,
-							-0.6,
-							-0.6,
-							-0.6
-						],
-						"4": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"dataKey": "Characters/Kayn/Spells/KaynWAbility/KaynAssW"
 				}
 			]
 		},
@@ -886,21 +826,6 @@
 						]
 					},
 					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR"
-				},
-				{
-					"name": "Umbral Trespass",
-					"image": "assets/characters/kayn/hud/icons2d/kayn_r2_primary.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "End this Ability early.",
-					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynRJumpOut"
 				}
 			]
 		}

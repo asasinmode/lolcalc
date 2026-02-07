@@ -502,20 +502,6 @@
 						}
 					},
 					"dataKey": "Characters/Irelia/Spells/IreliaEAbility/IreliaE"
-				},
-				{
-					"image": "assets/characters/irelia/hud/icons2d/irelia_e2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Irelia/Spells/IreliaEAbility/IreliaE2"
 				}
 			]
 		},

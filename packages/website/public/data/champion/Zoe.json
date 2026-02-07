@@ -216,54 +216,6 @@
 						}
 					},
 					"dataKey": "Characters/Zoe/Spells/ZoeQAbility/ZoeQ"
-				},
-				{
-					"image": "fallenangel_darkbinding.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Zoe/Spells/ZoeQAbility/ZoeQMissile"
-				},
-				{
-					"image": "assets/characters/zoe/hud/icons2d/zoe_q2.png",
-					"cooldownTime": [
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							40,
-							40,
-							75,
-							110,
-							145,
-							180,
-							215
-						],
-						"1": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"dataKey": "Characters/Zoe/Spells/ZoeQAbility/ZoeQRecast"
 				}
 			]
 		},

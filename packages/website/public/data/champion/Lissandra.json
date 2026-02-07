@@ -186,40 +186,6 @@
 						]
 					},
 					"dataKey": "Characters/Lissandra/Spells/LissandraQAbility/LissandraQ"
-				},
-				{
-					"image": "",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							30,
-							90,
-							150,
-							245,
-							315,
-							440,
-							565
-						],
-						"1": [
-							2.25,
-							2.5,
-							2.75,
-							3,
-							3.25,
-							3.5,
-							3.75
-						]
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraQAbility/LissandraQMissile"
 				}
 			]
 		},
@@ -380,40 +346,6 @@
 						]
 					},
 					"dataKey": "Characters/Lissandra/Spells/LissandraEAbility/LissandraE"
-				},
-				{
-					"image": "assets/spells/icons2d/cryophoenix_frigidorb.png",
-					"cooldownTime": [
-						13,
-						12,
-						11,
-						10,
-						9,
-						8,
-						8
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							50,
-							80,
-							110,
-							140,
-							170,
-							200,
-							230
-						],
-						"1": [
-							13,
-							12,
-							11,
-							10,
-							9,
-							8,
-							7
-						]
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraEAbility/LissandraEMissile"
 				}
 			]
 		},

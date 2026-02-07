@@ -503,67 +503,6 @@
 						]
 					},
 					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine"
-				},
-				{
-					"image": "assets/characters/riven/hud/icons2d/rivenwindscar.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							50,
-							100,
-							150,
-							200,
-							200,
-							200,
-							250
-						],
-						"1": [
-							150,
-							300,
-							450,
-							600,
-							600,
-							600,
-							750
-						],
-						"2": [
-							25,
-							40,
-							55,
-							70,
-							0,
-							0,
-							15
-						],
-						"3": [
-							15,
-							15,
-							15,
-							15,
-							0,
-							0,
-							0
-						],
-						"4": [
-							90,
-							75,
-							60,
-							45,
-							0,
-							0,
-							0
-						]
-					},
-					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenIzunaBlade"
 				}
 			]
 		}

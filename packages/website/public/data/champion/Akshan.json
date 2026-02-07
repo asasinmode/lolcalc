@@ -761,20 +761,6 @@
 						}
 					},
 					"dataKey": "Characters/Akshan/Spells/AkshanEAbility/AkshanE"
-				},
-				{
-					"image": "assets/characters/akshan/hud/icons2d/akshan_e2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Akshan/Spells/AkshanEAbility/AkshanE2"
 				}
 			]
 		},

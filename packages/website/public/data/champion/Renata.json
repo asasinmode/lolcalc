@@ -234,20 +234,6 @@
 						}
 					},
 					"dataKey": "Characters/Renata/Spells/RenataQAbility/RenataQ"
-				},
-				{
-					"image": "assets/characters/renata/hud/icons2d/renata_q2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Renata/Spells/RenataQAbility/RenataQRecast"
 				}
 			]
 		},

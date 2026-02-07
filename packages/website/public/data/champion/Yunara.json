@@ -497,11 +497,6 @@
 						}
 					},
 					"dataKey": "Characters/Yunara/Spells/YunaraWAbility/YunaraW"
-				},
-				{
-					"image": "assets/characters/yunara/hud/icons2d/yunara_rw.yunara.png",
-					"tooltipVariantIndex": 0,
-					"dataKey": "{dbba96be}"
 				}
 			]
 		},
@@ -580,20 +575,6 @@
 						}
 					},
 					"dataKey": "Characters/Yunara/Spells/YunaraEAbility/YunaraE"
-				},
-				{
-					"image": "assets/characters/yunara/hud/icons2d/yunara_re.yunara.png",
-					"cooldownTime": [
-						9,
-						9,
-						9,
-						9,
-						9,
-						9,
-						9
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "{e9fad66a}"
 				}
 			]
 		},

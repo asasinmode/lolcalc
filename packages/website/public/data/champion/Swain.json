@@ -407,21 +407,6 @@
 						}
 					},
 					"dataKey": "Characters/Swain/Spells/SwainEAbility/SwainE"
-				},
-				{
-					"name": "Nevermove",
-					"image": "assets/characters/swain/hud/icons2d/swain_e2.png",
-					"cooldownTime": [
-						12,
-						12,
-						11.5,
-						11,
-						10.5,
-						10,
-						10
-					],
-					"tooltip": "Pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him and gain one <font color='#FF3F3F' size='18'>Soul Fragment</font> for each.",
-					"dataKey": "Characters/Swain/Spells/SwainEAbility/SwainE2"
 				}
 			]
 		},
@@ -673,21 +658,6 @@
 						}
 					},
 					"dataKey": "Characters/Swain/Spells/SwainRAbility/SwainR"
-				},
-				{
-					"name": "Demonflare",
-					"image": "assets/characters/swain/hud/icons2d/swain_r2.png",
-					"cooldownTime": [
-						8,
-						8,
-						8,
-						8,
-						8,
-						8,
-						8
-					],
-					"tooltip": "Swain unleashes a nova of soulfire, dealing <magicDamage>@Spell.SwainR:DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slowing</status> enemies by @Spell.SwainR:DemonflareSlowAmount*100@%, decaying over @Spell.SwainR:DemonflareSlowDuration@s.",
-					"dataKey": "Characters/Swain/Spells/SwainRAbility/SwainRSoulFlare"
 				}
 			]
 		}

@@ -250,34 +250,6 @@
 						}
 					},
 					"dataKey": "Characters/Yasuo/Spells/YasuoQ1WrapperAbility/YasuoQ1Wrapper"
-				},
-				{
-					"image": "assets/characters/yasuo/hud/icons2d/yasuo_q2.png",
-					"cooldownTime": [
-						4,
-						4,
-						4,
-						4,
-						4,
-						4,
-						4
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Yasuo/Spells/YasuoQ1WrapperAbility/YasuoQ2Wrapper"
-				},
-				{
-					"image": "assets/characters/yasuo/hud/icons2d/yasuo_q3.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Yasuo/Spells/YasuoQ1WrapperAbility/YasuoQ3Wrapper"
 				}
 			]
 		},

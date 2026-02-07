@@ -384,21 +384,6 @@
 						}
 					},
 					"dataKey": "Characters/Milio/Spells/MilioWAbility/MilioW"
-				},
-				{
-					"name": "Follow Them!",
-					"image": "assets/characters/milio/hud/icons2d/milio_w2.png",
-					"cooldownTime": [
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5
-					],
-					"tooltip": "Change who the hearth follows.",
-					"dataKey": "Characters/Milio/Spells/MilioWAbility/MilioWRetarget"
 				}
 			]
 		},

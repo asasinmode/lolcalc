@@ -290,41 +290,6 @@
 						]
 					},
 					"dataKey": "Characters/Leblanc/Spells/LeblancWAbility/LeblancW"
-				},
-				{
-					"name": "Distortion Return",
-					"image": "assets/characters/leblanc/hud/icons2d/leblancwreturn.leblanc_rework.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "LeBlanc returns to her yellow marker.",
-					"effectAmount": {
-						"0": [
-							45,
-							85,
-							125,
-							165,
-							205,
-							245,
-							285
-						],
-						"1": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"dataKey": "Characters/Leblanc/Spells/LeblancWAbility/LeblancWReturn"
 				}
 			]
 		},

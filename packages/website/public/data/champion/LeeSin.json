@@ -217,27 +217,6 @@
 						}
 					},
 					"dataKey": "Characters/LeeSin/Spells/LeeSinQOneAbility/LeeSinQOne"
-				},
-				{
-					"image": "assets/characters/leesin/hud/icons2d/leesinq2.png",
-					"mana": [
-						25,
-						25,
-						25,
-						25,
-						25,
-						25
-					],
-					"cooldownTime": [
-						11,
-						10,
-						9,
-						8,
-						7,
-						6,
-						6
-					],
-					"dataKey": "{45c13604}"
 				}
 			]
 		},
@@ -346,38 +325,6 @@
 						}
 					},
 					"dataKey": "Characters/LeeSin/Spells/LeeSinWOneAbility/LeeSinWOne"
-				},
-				{
-					"image": "assets/characters/leesin/hud/icons2d/leesinw2.png",
-					"mana": [
-						25,
-						25,
-						25,
-						25,
-						25,
-						25
-					],
-					"cooldownTime": [
-						12,
-						12,
-						12,
-						12,
-						12,
-						12,
-						12
-					],
-					"effectAmount": {
-						"9": [
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350
-						]
-					},
-					"dataKey": "{5c418040}"
 				}
 			]
 		},
@@ -459,27 +406,6 @@
 						}
 					},
 					"dataKey": "Characters/LeeSin/Spells/LeeSinEOneAbility/LeeSinEOne"
-				},
-				{
-					"image": "assets/characters/leesin/hud/icons2d/leesine2.png",
-					"mana": [
-						25,
-						25,
-						25,
-						25,
-						25,
-						25
-					],
-					"cooldownTime": [
-						8,
-						8,
-						8,
-						8,
-						8,
-						8,
-						8
-					],
-					"dataKey": "{e3b299ac}"
 				}
 			]
 		},

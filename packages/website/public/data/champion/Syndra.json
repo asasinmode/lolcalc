@@ -378,67 +378,6 @@
 						}
 					},
 					"dataKey": "Characters/Syndra/Spells/SyndraWAbility/SyndraW"
-				},
-				{
-					"image": "assets/characters/syndra/hud/icons2d/syndra_wr1.png",
-					"cooldownTime": [
-						13,
-						12,
-						11,
-						10,
-						9,
-						8,
-						8
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							20,
-							25,
-							30,
-							35,
-							40,
-							45,
-							50
-						],
-						"1": [
-							30,
-							70,
-							110,
-							150,
-							190,
-							230,
-							270
-						],
-						"2": [
-							13,
-							12,
-							11,
-							10,
-							9,
-							8,
-							7
-						],
-						"3": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"9": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"dataKey": "Characters/Syndra/Spells/SyndraWAbility/SyndraWCast"
 				}
 			]
 		},
@@ -546,28 +485,6 @@
 						}
 					},
 					"dataKey": "Characters/Syndra/Spells/SyndraEAbility/SyndraE"
-				},
-				{
-					"image": "assets/characters/syndra/hud/icons2d/syndra_e2.png",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						15,
-						15,
-						15,
-						15,
-						15,
-						15,
-						15
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Syndra/Spells/SyndraEAbility/SyndraE5"
 				}
 			]
 		},

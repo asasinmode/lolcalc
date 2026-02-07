@@ -417,20 +417,6 @@
 						]
 					},
 					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanE"
-				},
-				{
-					"image": "assets/characters/rakan/hud/icons2d/rakan_e2.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanERecast"
 				}
 			]
 		},

@@ -311,20 +311,6 @@
 						}
 					},
 					"dataKey": "Characters/Aurora/Spells/AuroraQAbility/AuroraQ"
-				},
-				{
-					"image": "assets/characters/aurora/hud/icons2d/auroraq2.aurora.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "{55293a74}"
 				}
 			]
 		},

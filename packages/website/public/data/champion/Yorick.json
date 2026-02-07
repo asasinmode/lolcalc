@@ -385,22 +385,6 @@
 						}
 					},
 					"dataKey": "Characters/Yorick/Spells/YorickQAbility/YorickQ"
-				},
-				{
-					"name": "Awakening",
-					"image": "assets/characters/yorick/hud/icons2d/yorick_q2.png",
-					"cooldownTime": [
-						5,
-						5,
-						5,
-						5,
-						5,
-						5,
-						5
-					],
-					"tooltip": "Yorick raises <keywordMajor>Mist Walkers</keywordMajor> from nearby graves.",
-					"tooltipExtended": "<recast>Recast</recast>: {{Spell_YorickQ2_Tooltip}}<br><br><recast>Base Ability</recast>: {{Spell_YorickQ_Tooltip}}",
-					"dataKey": "Characters/Yorick/Spells/YorickQAbility/YorickQ2"
 				}
 			]
 		},
@@ -836,20 +820,6 @@
 						}
 					},
 					"dataKey": "Characters/Yorick/Spells/YorickRAbility/YorickR"
-				},
-				{
-					"image": "assets/characters/yorick/hud/icons2d/yorick_r2.png",
-					"cooldownTime": [
-						5,
-						5,
-						5,
-						5,
-						5,
-						5,
-						5
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Yorick/Spells/YorickRAbility/YorickR2"
 				}
 			]
 		}
