@@ -106,6 +106,7 @@ if (!championData || championData?.version !== latestVersion) {
 								additionalData,
 								index === 0 ? abilityKey : `Characters/${championId}/Spells/${abilityKey}`,
 								index,
+								championId,
 							);
 
 							if ((championId === 'Jayce' && abilityName === 'r')
@@ -805,6 +806,7 @@ function championAbilityData(
 	championData: any,
 	abilityRootKey: string,
 	abilityIndex: number,
+	championId: string,
 ) {
 	let maxLevel: number | undefined;
 	let variantKeys = [];
@@ -818,6 +820,16 @@ function championAbilityData(
 		variantKeys = [abilityRootKey];
 	} else {
 		throw new Error(`${abilityRootKey} no spells\n${JSON.stringify(abilityRootData, null, 2)}`);
+	}
+
+	// heimerdinger's R ability variants are stored under R so move them to their own abilities here
+	if (championId === 'Heimerdinger') {
+		if (abilityIndex === 4) {
+			variantKeys.splice(1, 3);
+		} else if (abilityIndex > 0) {
+			const end = abilityRootKey.slice(abilityRootKey.lastIndexOf('/') + 1, -7);
+			variantKeys.push(`${abilityRootKey.slice(0, -8)}R${abilityRootKey.slice(-7)}/${end}Ult`);
+		}
 	}
 
 	for (let i = 0; i < variantKeys.length; i++) {
