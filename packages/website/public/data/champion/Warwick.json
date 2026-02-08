@@ -28,104 +28,6 @@
 		"attackspeedratio": 0.638
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Eternal Hunger",
-					"image": "assets/characters/warwick/hud/icons2d/warwickp.png",
-					"tooltip": "Warwick's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> On-Hit.<br><br>If Warwick is below @HealingThreshold*100@% Health, he also heals for <healing>@HealingRatio*100@% of the damage dealt by <keywordMajor>Eternal Hunger</keywordMajor></healing>. If Warwick is below @EmpoweredHealingThreshold*100@% health, the healing is increased to <healing>@EmpoweredHealingRatio*100@% of the damage dealt</healing>.",
-					"dataValues": {
-						"HealingThreshold": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"EmpoweredHealingThreshold": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"HealingRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"EmpoweredHealingRatio": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"HealthRestoreSlushTime": [
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55
-						],
-						"ADRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"APRatio": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
-					},
-					"spellCalculations": {
-						"OnHitDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStartValue": 6,
-									"mEndValue": 46,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "ADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Warwick/Spells/WarwickPAbility/WarwickP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -569,6 +471,104 @@
 						}
 					},
 					"dataKey": "Characters/Warwick/Spells/WarwickRAbility/WarwickR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Eternal Hunger",
+					"image": "assets/characters/warwick/hud/icons2d/warwickp.png",
+					"tooltip": "Warwick's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> On-Hit.<br><br>If Warwick is below @HealingThreshold*100@% Health, he also heals for <healing>@HealingRatio*100@% of the damage dealt by <keywordMajor>Eternal Hunger</keywordMajor></healing>. If Warwick is below @EmpoweredHealingThreshold*100@% health, the healing is increased to <healing>@EmpoweredHealingRatio*100@% of the damage dealt</healing>.",
+					"dataValues": {
+						"HealingThreshold": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"EmpoweredHealingThreshold": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"HealingRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"EmpoweredHealingRatio": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"HealthRestoreSlushTime": [
+							1.55,
+							1.55,
+							1.55,
+							1.55,
+							1.55,
+							1.55,
+							1.55
+						],
+						"ADRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"APRatio": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"spellCalculations": {
+						"OnHitDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 6,
+									"mEndValue": 46,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Warwick/Spells/WarwickPAbility/WarwickP"
 				}
 			]
 		}

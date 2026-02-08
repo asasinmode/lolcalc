@@ -28,29 +28,6 @@
 		"attackspeedratio": 0.647
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Serpentine Grace",
-					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_passive.png",
-					"tooltip": "Cassiopeia increases the effectiveness of all <speed>Move Speed</speed> bonuses by @PercentHasteMod@.",
-					"spellCalculations": {
-						"PercentHasteMod": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.06,
-									"mInitialBonusPerLevel": 0.02,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaPassiveAbility/CassiopeiaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -416,6 +393,29 @@
 						}
 					},
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaRAbility/CassiopeiaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Serpentine Grace",
+					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_passive.png",
+					"tooltip": "Cassiopeia increases the effectiveness of all <speed>Move Speed</speed> bonuses by @PercentHasteMod@.",
+					"spellCalculations": {
+						"PercentHasteMod": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.06,
+									"mInitialBonusPerLevel": 0.02,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaPassiveAbility/CassiopeiaPassive"
 				}
 			]
 		}

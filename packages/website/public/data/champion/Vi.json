@@ -28,67 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Blast Shield",
-					"image": "assets/characters/vi/hud/icons2d/vipassive.png",
-					"tooltip": "Vi gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds after hitting an enemy or structure with an activated Ability.",
-					"tooltipExtended": "{{Spell_ViPassive_Tooltip}}<br><br><rules>This Ability has a @ShieldCooldown@ second Cooldown, reduced by @CDReductionOn3Hit@ seconds when Vi triggers <spellName>Denting Blows</spellName>.</rules>",
-					"dataValues": {
-						"ShieldDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"CDReductionOn3Hit": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
-					},
-					"spellCalculations": {
-						"TotalShield": {
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mCoefficient": 0.12,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"ShieldCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 16,
-									"mInitialBonusPerLevel": -0.5,
-									"mBreakpoints": [
-										{
-											"mLevel": 10
-										},
-										{
-											"mLevel": 19,
-											"mAdditionalBonusAtThisLevel": -6
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Vi/Spells/ViPassiveAbility/ViPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -613,6 +552,67 @@
 						}
 					},
 					"dataKey": "Characters/Vi/Spells/ViRAbility/ViR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Blast Shield",
+					"image": "assets/characters/vi/hud/icons2d/vipassive.png",
+					"tooltip": "Vi gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds after hitting an enemy or structure with an activated Ability.",
+					"tooltipExtended": "{{Spell_ViPassive_Tooltip}}<br><br><rules>This Ability has a @ShieldCooldown@ second Cooldown, reduced by @CDReductionOn3Hit@ seconds when Vi triggers <spellName>Denting Blows</spellName>.</rules>",
+					"dataValues": {
+						"ShieldDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"CDReductionOn3Hit": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mCoefficient": 0.12,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ShieldCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 16,
+									"mInitialBonusPerLevel": -0.5,
+									"mBreakpoints": [
+										{
+											"mLevel": 10
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": -6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Vi/Spells/ViPassiveAbility/ViPassive"
 				}
 			]
 		}

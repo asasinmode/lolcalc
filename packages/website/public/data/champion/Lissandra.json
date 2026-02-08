@@ -28,76 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Iceborn Subjugation",
-					"image": "assets/characters/lissandra/hud/icons2d/lissandra_passive.png",
-					"tooltip": "When an enemy champion dies near Lissandra they become a frozen zombie that seeks out living enemies. Enemies near these zombies are <status>Slowed</status> by @MoveSpeedMod*-100@%. After @ExplosionDelay@ seconds, frozen zombies shatter, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"dataValues": {
-						"MoveSpeedMod": [
-							-0.25,
-							-0.25,
-							-0.25,
-							-0.25,
-							-0.25,
-							-0.25,
-							-0.25
-						],
-						"ExplosionDelay": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"Range": [
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350
-						],
-						"Radius": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 120,
-									"mInitialBonusPerLevel": 20,
-									"mBreakpoints": [
-										{
-											"mLevel": 13,
-											"mBonusPerLevelAtAndAfter": 30
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mCoefficient": 0.5,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraPassiveAbility/LissandraPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -501,6 +431,76 @@
 						}
 					},
 					"dataKey": "Characters/Lissandra/Spells/LissandraRAbility/LissandraR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Iceborn Subjugation",
+					"image": "assets/characters/lissandra/hud/icons2d/lissandra_passive.png",
+					"tooltip": "When an enemy champion dies near Lissandra they become a frozen zombie that seeks out living enemies. Enemies near these zombies are <status>Slowed</status> by @MoveSpeedMod*-100@%. After @ExplosionDelay@ seconds, frozen zombies shatter, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"dataValues": {
+						"MoveSpeedMod": [
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25,
+							-0.25
+						],
+						"ExplosionDelay": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"Range": [
+							1350,
+							1350,
+							1350,
+							1350,
+							1350,
+							1350,
+							1350
+						],
+						"Radius": [
+							450,
+							450,
+							450,
+							450,
+							450,
+							450,
+							450
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 120,
+									"mInitialBonusPerLevel": 20,
+									"mBreakpoints": [
+										{
+											"mLevel": 13,
+											"mBonusPerLevelAtAndAfter": 30
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Lissandra/Spells/LissandraPassiveAbility/LissandraPassive"
 				}
 			]
 		}

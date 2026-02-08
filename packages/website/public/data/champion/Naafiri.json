@@ -28,327 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "We Are More",
-					"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_p.png",
-					"tooltip": "Naafiri creates a <keywordMajor>Packmate</keywordMajor> every @PackmateSpawnCooldown@ seconds that will Attack enemies that she targets for <physicalDamage>@PackmateTotalDamage@ physical damage</physicalDamage>, increased to <physicalDamage>@FrenzyDamageTooltipOnly@</physicalDamage> after she uses an Ability. <br><br>Hitting champions and large monsters with Abilities reduces this Ability's Cooldown by @CooldownReduceOnAbilityHit@ seconds. Killing enemies reduces it by @CooldownReduceOnKill@ seconds.<br><br>Max <keywordMajor>Packmates</keywordMajor>: @PackmateCap@",
-					"tooltipExtended": "{{Spell_NaafiriP_Tooltip}}<br><br><rules><keywordMajor>Packmates</keywordMajor> deal @PackmateMonsterMod*100@% damage to Monsters and @PackmateTowerModifier*100@% damage to structures.<br><keywordMajor>Packmates</keywordMajor> take @AOEDamageModifier@ damage from AOE Abilities and effects.<br><keywordMajor>Packmates</keywordMajor> take @NonChampDamageModifier*100@% damage from non-epic monsters and minions.<br><keywordMajor>Packmates</keywordMajor> take @MeleeAttackDamageModifier*100@% damage from melee champion Attacks. </rules><br>",
-					"dataValues": {
-						"CooldownReduceOnKill": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CooldownReduceOnAbilityHit": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"PackmateBaseAS": [
-							0.688,
-							0.688,
-							0.688,
-							0.688,
-							0.688,
-							0.688,
-							0.688
-						],
-						"PackmateBaseMS": [
-							340,
-							340,
-							340,
-							340,
-							340,
-							340,
-							340
-						],
-						"PackmateModifierTooltipOnly": [
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08
-						],
-						"LeapSpeed": [
-							1250,
-							1250,
-							1250,
-							1250,
-							1250,
-							1250,
-							1250
-						],
-						"LeapMin": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"LeapMax": [
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200
-						],
-						"PackmateTowerModifier": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"PackmateMonsterMod": [
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55
-						],
-						"PackmateTauntDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PackmateLastHitHelpCD": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"PackmateCSHelpRadiusMax": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"PackmateCSHelpRadiusMin": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"PackmateFrenzyDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PackmateFrenzyMaxCounters": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PackmateFrenzyDamageMult": [
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3
-						],
-						"ProcDamageModifier": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HealthRegenDelay": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"HealthRegenPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"NonChampDamageModifier": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MeleeAttackDamageModifier": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PackmateBonusADRatio": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						]
-					},
-					"spellCalculations": {
-						"PackmateSpawnCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 30,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -5
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": -5
-										},
-										{
-											"mLevel": 12,
-											"mAdditionalBonusAtThisLevel": -5
-										},
-										{
-											"mLevel": 15,
-											"mAdditionalBonusAtThisLevel": -5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"PackmateCap": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 2,
-									"mBreakpoints": [
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 12,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 15,
-											"mAdditionalBonusAtThisLevel": 1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"PackmateTotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 10,
-									"mEndValue": 20,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "PackmateBonusADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"MinionExecuteThreshold": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 25,
-									"mInitialBonusPerLevel": 3,
-									"mBreakpoints": [
-										{
-											"mLevel": 12
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"FrenzyDamageTooltipOnly": {
-							"mMultiplier": {
-								"mDataValue": "PackmateFrenzyDamageMult"
-							},
-							"mModifiedGameCalculation": "PackmateTotalDamage"
-						},
-						"AOEDamageModifier": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.76,
-									"mInitialBonusPerLevel": -0.015,
-									"mBreakpoints": [
-										{
-											"mLevel": 16
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Naafiri/Spells/NaafiriPAbility/NaafiriP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -1055,6 +734,327 @@
 						}
 					},
 					"dataKey": "Characters/Naafiri/Spells/NaafiriWAbility/NaafiriW"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "We Are More",
+					"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_p.png",
+					"tooltip": "Naafiri creates a <keywordMajor>Packmate</keywordMajor> every @PackmateSpawnCooldown@ seconds that will Attack enemies that she targets for <physicalDamage>@PackmateTotalDamage@ physical damage</physicalDamage>, increased to <physicalDamage>@FrenzyDamageTooltipOnly@</physicalDamage> after she uses an Ability. <br><br>Hitting champions and large monsters with Abilities reduces this Ability's Cooldown by @CooldownReduceOnAbilityHit@ seconds. Killing enemies reduces it by @CooldownReduceOnKill@ seconds.<br><br>Max <keywordMajor>Packmates</keywordMajor>: @PackmateCap@",
+					"tooltipExtended": "{{Spell_NaafiriP_Tooltip}}<br><br><rules><keywordMajor>Packmates</keywordMajor> deal @PackmateMonsterMod*100@% damage to Monsters and @PackmateTowerModifier*100@% damage to structures.<br><keywordMajor>Packmates</keywordMajor> take @AOEDamageModifier@ damage from AOE Abilities and effects.<br><keywordMajor>Packmates</keywordMajor> take @NonChampDamageModifier*100@% damage from non-epic monsters and minions.<br><keywordMajor>Packmates</keywordMajor> take @MeleeAttackDamageModifier*100@% damage from melee champion Attacks. </rules><br>",
+					"dataValues": {
+						"CooldownReduceOnKill": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CooldownReduceOnAbilityHit": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"PackmateBaseAS": [
+							0.688,
+							0.688,
+							0.688,
+							0.688,
+							0.688,
+							0.688,
+							0.688
+						],
+						"PackmateBaseMS": [
+							340,
+							340,
+							340,
+							340,
+							340,
+							340,
+							340
+						],
+						"PackmateModifierTooltipOnly": [
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08
+						],
+						"LeapSpeed": [
+							1250,
+							1250,
+							1250,
+							1250,
+							1250,
+							1250,
+							1250
+						],
+						"LeapMin": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"LeapMax": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"PackmateTowerModifier": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"PackmateMonsterMod": [
+							1.55,
+							1.55,
+							1.55,
+							1.55,
+							1.55,
+							1.55,
+							1.55
+						],
+						"PackmateTauntDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PackmateLastHitHelpCD": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"PackmateCSHelpRadiusMax": [
+							800,
+							800,
+							800,
+							800,
+							800,
+							800,
+							800
+						],
+						"PackmateCSHelpRadiusMin": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"PackmateFrenzyDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PackmateFrenzyMaxCounters": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PackmateFrenzyDamageMult": [
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3,
+							1.3
+						],
+						"ProcDamageModifier": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HealthRegenDelay": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"HealthRegenPercent": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"NonChampDamageModifier": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MeleeAttackDamageModifier": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PackmateBonusADRatio": [
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04
+						]
+					},
+					"spellCalculations": {
+						"PackmateSpawnCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 15,
+											"mAdditionalBonusAtThisLevel": -5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"PackmateCap": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 2,
+									"mBreakpoints": [
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 15,
+											"mAdditionalBonusAtThisLevel": 1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"PackmateTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 10,
+									"mEndValue": 20,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "PackmateBonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MinionExecuteThreshold": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 25,
+									"mInitialBonusPerLevel": 3,
+									"mBreakpoints": [
+										{
+											"mLevel": 12
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"FrenzyDamageTooltipOnly": {
+							"mMultiplier": {
+								"mDataValue": "PackmateFrenzyDamageMult"
+							},
+							"mModifiedGameCalculation": "PackmateTotalDamage"
+						},
+						"AOEDamageModifier": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.76,
+									"mInitialBonusPerLevel": -0.015,
+									"mBreakpoints": [
+										{
+											"mLevel": 16
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Naafiri/Spells/NaafiriPAbility/NaafiriP"
 				}
 			]
 		}

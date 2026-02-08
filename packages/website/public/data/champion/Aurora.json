@@ -28,157 +28,6 @@
 		"attackspeedratio": 0.668
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Spirit Abjuration",
-					"image": "assets/characters/aurora/hud/icons2d/aurorapassive.aurora.png",
-					"tooltip": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.",
-					"tooltipExtended": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.<br><br><rules>Max health magic damage is capped at 100-270 against Monsters, based on Aurora's level.</rules>",
-					"dataValues": {
-						"DebuffDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SpiritModeDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"BaseHPDamage": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						],
-						"MonsterMaxDamage": [
-							90,
-							90,
-							90,
-							90,
-							90,
-							90,
-							90
-						],
-						"MSIncrease": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BonusMsIncrease": [
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02
-						]
-					},
-					"spellCalculations": {
-						"ProcDamage": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "BaseHPDamage",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"MoveSpeedCalc": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.05,
-									"mBreakpoints": [
-										{
-											"mLevel": 2,
-											"mAdditionalBonusAtThisLevel": 0.002,
-											"mBonusPerLevelAtAndAfter": 0.002
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mCoefficient": 0,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"HealCalc": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 3,
-									"mEndValue": 20,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.02,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{394d1781}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 10,
-									"mInitialBonusPerLevel": 10,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "MonsterMaxDamage",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							]
-						},
-						"BonusMSCalc": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "BonusMsIncrease",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"CooldownDuration": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 5,
-									"mEndValue": 5,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "{55fe4142}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -636,6 +485,157 @@
 						}
 					},
 					"dataKey": "Characters/Aurora/Spells/AuroraRAbility/AuroraR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Spirit Abjuration",
+					"image": "assets/characters/aurora/hud/icons2d/aurorapassive.aurora.png",
+					"tooltip": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.",
+					"tooltipExtended": "Damaging an enemy 3 times with Abilities or Attacks exorcises them, dealing <magicDamage>@ProcDamage@ max Health magic damage</magicDamage> and, if the enemy is a champion, frees a spirit that follows Aurora for @SpiritModeDuration@ seconds, restoring her Health for <healing>@HealCalc@</healing> every second.<br><br><rules>Max health magic damage is capped at 100-270 against Monsters, based on Aurora's level.</rules>",
+					"dataValues": {
+						"DebuffDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"SpiritModeDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"BaseHPDamage": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"MonsterMaxDamage": [
+							90,
+							90,
+							90,
+							90,
+							90,
+							90,
+							90
+						],
+						"MSIncrease": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BonusMsIncrease": [
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02
+						]
+					},
+					"spellCalculations": {
+						"ProcDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseHPDamage",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"MoveSpeedCalc": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.05,
+									"mBreakpoints": [
+										{
+											"mLevel": 2,
+											"mAdditionalBonusAtThisLevel": 0.002,
+											"mBonusPerLevelAtAndAfter": 0.002
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"HealCalc": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 3,
+									"mEndValue": 20,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.02,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{394d1781}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 10,
+									"mInitialBonusPerLevel": 10,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "MonsterMaxDamage",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BonusMSCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BonusMsIncrease",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"CooldownDuration": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 5,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "{55fe4142}"
 				}
 			]
 		}

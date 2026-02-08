@@ -28,84 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Phenomenal Evil Power",
-					"image": "assets/characters/veigar/hud/icons2d/veigar_entropy.png",
-					"tooltip": "Veigar's Abilities grant him @dAbilityStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor> when they strike enemy champions. Takedowns on champions grant an additional @dTakedownStacks@ stacks.<br><br>Each stack of <keywordMajor>Phenomenal Evil</keywordMajor> grants Veigar <scaleAP>@APPerStack@ Ability Power</scaleAP>.",
-					"tooltipExtended": "{{Spell_VeigarPassive_Tooltip}}<br><br>Veigar's evil is currently granting him <statTracking>@f1@ Ability Power</statTracking>",
-					"dataValues": {
-						"dQKillStacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"dAbilityStacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"dTakedownStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"dQKillStacksLarge": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PStacksPerDarkMatterCDR": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"DarkMatterCDRIncrement": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
-					},
-					"spellCalculations": {
-						"APPerStack": {
-							"mFormulaParts": [
-								{
-									"mNumber": 1,
-									"__type": "NumberCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Veigar/Spells/VeigarPassiveAbility/VeigarPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -393,6 +315,84 @@
 						}
 					},
 					"dataKey": "Characters/Veigar/Spells/VeigarRAbility/VeigarR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Phenomenal Evil Power",
+					"image": "assets/characters/veigar/hud/icons2d/veigar_entropy.png",
+					"tooltip": "Veigar's Abilities grant him @dAbilityStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor> when they strike enemy champions. Takedowns on champions grant an additional @dTakedownStacks@ stacks.<br><br>Each stack of <keywordMajor>Phenomenal Evil</keywordMajor> grants Veigar <scaleAP>@APPerStack@ Ability Power</scaleAP>.",
+					"tooltipExtended": "{{Spell_VeigarPassive_Tooltip}}<br><br>Veigar's evil is currently granting him <statTracking>@f1@ Ability Power</statTracking>",
+					"dataValues": {
+						"dQKillStacks": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"dAbilityStacks": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"dTakedownStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"dQKillStacksLarge": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PStacksPerDarkMatterCDR": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"DarkMatterCDRIncrement": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"spellCalculations": {
+						"APPerStack": {
+							"mFormulaParts": [
+								{
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Veigar/Spells/VeigarPassiveAbility/VeigarPassive"
 				}
 			]
 		}

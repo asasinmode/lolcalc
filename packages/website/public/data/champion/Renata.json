@@ -28,116 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Leverage",
-					"image": "assets/characters/renata/hud/icons2d/renata_p.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Renata's Attacks mark enemies for @PassiveDuration@ seconds and deal an additional <magicDamage>@PercentAmpCalcSelf@ max Health magic damage</magicDamage> if they were unmarked.<br><br>Allied champions' Attacks or Abilities consume the mark, dealing <magicDamage>@PercentAmpCalc@ max Health magic damage</magicDamage>.<br><br><rules>Renata may only have one target marked at a time.</rules>",
-					"dataValues": {
-						"PercentAmp": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"APToPercentRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"MonsterDamageCap": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"PassiveDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
-					},
-					"spellCalculations": {
-						"PercentAmpCalc": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.01,
-									"mInitialBonusPerLevel": 0.001,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mBonusPerLevelAtAndAfter": 0.001
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.001
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APToPercentRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						},
-						"PercentAmpCalcSelf": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.01,
-									"mInitialBonusPerLevel": 0.001,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mBonusPerLevelAtAndAfter": 0.001
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.001
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APToPercentRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "Characters/Renata/Spells/RenataPassiveAbility/RenataPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -611,6 +501,116 @@
 						]
 					},
 					"dataKey": "Characters/Renata/Spells/RenataRAbility/RenataR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Leverage",
+					"image": "assets/characters/renata/hud/icons2d/renata_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Renata's Attacks mark enemies for @PassiveDuration@ seconds and deal an additional <magicDamage>@PercentAmpCalcSelf@ max Health magic damage</magicDamage> if they were unmarked.<br><br>Allied champions' Attacks or Abilities consume the mark, dealing <magicDamage>@PercentAmpCalc@ max Health magic damage</magicDamage>.<br><br><rules>Renata may only have one target marked at a time.</rules>",
+					"dataValues": {
+						"PercentAmp": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"APToPercentRatio": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"MonsterDamageCap": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"PassiveDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"spellCalculations": {
+						"PercentAmpCalc": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.01,
+									"mInitialBonusPerLevel": 0.001,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mBonusPerLevelAtAndAfter": 0.001
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.001
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"PercentAmpCalcSelf": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.01,
+									"mInitialBonusPerLevel": 0.001,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mBonusPerLevelAtAndAfter": 0.001
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.001
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APToPercentRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Renata/Spells/RenataPassiveAbility/RenataPassive"
 				}
 			]
 		}

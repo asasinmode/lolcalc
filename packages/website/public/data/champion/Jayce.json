@@ -28,46 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Hextech Capacitor",
-					"image": "assets/characters/jayce/hud/icons2d/jaycep_melee.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Jayce can swap between melee and ranged weapons using <spellName>Mercury Cannon / Mercury Hammer</spellName> starting from level 1. Swapping weapons also swaps all his Abilities and grants him <speed>@FlatMovementSpeed@ Move Speed</speed> for @MovementSpeedDuration@ seconds.",
-					"dataValues": {
-						"FlatMovementSpeed": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"MovementSpeedDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
-					},
-					"dataKey": "Characters/Jayce/Spells/JaycePassiveAbility/JaycePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 6,
 			"variants": [
@@ -421,6 +381,46 @@
 						}
 					},
 					"dataKey": "Characters/Jayce/Spells/JayceStanceHtGAbility/JayceStanceHtG"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Hextech Capacitor",
+					"image": "assets/characters/jayce/hud/icons2d/jaycep_melee.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Jayce can swap between melee and ranged weapons using <spellName>Mercury Cannon / Mercury Hammer</spellName> starting from level 1. Swapping weapons also swaps all his Abilities and grants him <speed>@FlatMovementSpeed@ Move Speed</speed> for @MovementSpeedDuration@ seconds.",
+					"dataValues": {
+						"FlatMovementSpeed": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"MovementSpeedDuration": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						]
+					},
+					"dataKey": "Characters/Jayce/Spells/JaycePassiveAbility/JaycePassive"
 				}
 			]
 		}

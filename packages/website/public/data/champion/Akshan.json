@@ -28,226 +28,6 @@
 		"attackspeedratio": 0.4
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Dirty Fighting",
-					"image": "assets/characters/akshan/hud/icons2d/akshan_p.png",
-					"tooltip": "After launching an Attack, Akshan will fire an additional shot for <physicalDamage>@SecondAutoDamage@ physical damage</physicalDamage>. He can cancel this shot to instead gain <speed>@ASModdedMS@ Move Speed</speed> decaying over @HasteDuration@ second.<br><br>Every three hits from Attacks or Abilities deals an additional <magicDamage>@PassiveProcDamage@ magic damage</magicDamage>. Against champions, Akshan also gains <shield>@TotalShieldAmount@ Shield</shield> for @ShieldDuration@ seconds (@PassiveCooldown@ second Cooldown).<br><br>",
-					"tooltipExtended": "{{Spell_AkshanPassive_Tooltip}}<br><rules>The second Attack can critically strike at @SecondAutoCritRatio*100@% effectiveness.<br>The second Attack deals 100% total attack damage to minions.<br>The first Attack <speed>Move Speed</speed> scales with <attackSpeed>100% Attack Speed.</attackSpeed></rules>",
-					"dataValues": {
-						"MaxStacks": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"DebuffDuration": [
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5
-						],
-						"ShieldBADRatio": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"ShieldDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"SecondAutoADRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HasteDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"SecondAutoFlexedAttackRange": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"SecondAutoCritRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"APRatio": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						]
-					},
-					"spellCalculations": {
-						"MS": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 20,
-									"mEndValue": 75,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"TotalShieldAmount": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 40,
-									"mEndValue": 280,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "ShieldBADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"PassiveProcDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 15,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 25
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 40
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 70
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"SecondAutoDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mDataValue": "SecondAutoADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"PassiveCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 16,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -4
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -4
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -4
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"ASModdedMS": {
-							"mMultiplier": {
-								"mSubparts": [
-									{
-										"mNumber": 1
-									},
-									{
-										"mStat": 4,
-										"mStatFormula": 2,
-										"mCoefficient": 1
-									}
-								]
-							},
-							"mModifiedGameCalculation": "MS"
-						},
-						"{82593567}": {
-							"mMultiplier": {
-								"mSubparts": [
-									{
-										"mNumber": 1
-									},
-									{
-										"mPart1": {
-											"mDataValue": "SecondAutoCritRatio"
-										},
-										"mPart2": {
-											"mSubparts": [
-												{
-													"mStat": 9,
-													"mCoefficient": 1
-												},
-												{
-													"mNumber": -1
-												}
-											]
-										}
-									}
-								]
-							},
-							"mModifiedGameCalculation": "SecondAutoDamage"
-						}
-					},
-					"dataKey": "Characters/Akshan/Spells/AkshanPassiveAbility/AkshanPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -917,6 +697,226 @@
 						}
 					},
 					"dataKey": "Characters/Akshan/Spells/AkshanRAbility/AkshanR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Dirty Fighting",
+					"image": "assets/characters/akshan/hud/icons2d/akshan_p.png",
+					"tooltip": "After launching an Attack, Akshan will fire an additional shot for <physicalDamage>@SecondAutoDamage@ physical damage</physicalDamage>. He can cancel this shot to instead gain <speed>@ASModdedMS@ Move Speed</speed> decaying over @HasteDuration@ second.<br><br>Every three hits from Attacks or Abilities deals an additional <magicDamage>@PassiveProcDamage@ magic damage</magicDamage>. Against champions, Akshan also gains <shield>@TotalShieldAmount@ Shield</shield> for @ShieldDuration@ seconds (@PassiveCooldown@ second Cooldown).<br><br>",
+					"tooltipExtended": "{{Spell_AkshanPassive_Tooltip}}<br><rules>The second Attack can critically strike at @SecondAutoCritRatio*100@% effectiveness.<br>The second Attack deals 100% total attack damage to minions.<br>The first Attack <speed>Move Speed</speed> scales with <attackSpeed>100% Attack Speed.</attackSpeed></rules>",
+					"dataValues": {
+						"MaxStacks": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"DebuffDuration": [
+							4.5,
+							4.5,
+							4.5,
+							4.5,
+							4.5,
+							4.5,
+							4.5
+						],
+						"ShieldBADRatio": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"ShieldDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"SecondAutoADRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HasteDuration": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SecondAutoFlexedAttackRange": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"SecondAutoCritRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"APRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						]
+					},
+					"spellCalculations": {
+						"MS": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 20,
+									"mEndValue": 75,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"TotalShieldAmount": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 40,
+									"mEndValue": 280,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ShieldBADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PassiveProcDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 15,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 25
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 40
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 70
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"SecondAutoDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "SecondAutoADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PassiveCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 16,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -4
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ASModdedMS": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mStat": 4,
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									}
+								]
+							},
+							"mModifiedGameCalculation": "MS"
+						},
+						"{82593567}": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1
+									},
+									{
+										"mPart1": {
+											"mDataValue": "SecondAutoCritRatio"
+										},
+										"mPart2": {
+											"mSubparts": [
+												{
+													"mStat": 9,
+													"mCoefficient": 1
+												},
+												{
+													"mNumber": -1
+												}
+											]
+										}
+									}
+								]
+							},
+							"mModifiedGameCalculation": "SecondAutoDamage"
+						}
+					},
+					"dataKey": "Characters/Akshan/Spells/AkshanPassiveAbility/AkshanPassive"
 				}
 			]
 		}

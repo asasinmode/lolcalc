@@ -28,73 +28,6 @@
 		"attackspeedratio": 0.665
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Reign of Anger",
-					"image": "assets/characters/renekton/hud/icons2d/renekton_passive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Renekton gains <keywordMajor>@FuryPerAttack@ Fury</keywordMajor> per Attack. While above <keywordMajor>@FuryCost@ Fury</keywordMajor>, his next Ability spends it to become empowered. <keywordMajor>Fury</keywordMajor> decays while out of combat.<br><br>While below @LowHealthPercentThreshold*100@% Health, Renekton gains @FuryIncreasePercent*100@% increased <keywordMajor>Fury</keywordMajor>.",
-					"dataValues": {
-						"FuryPerAttack": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"FuryIncreasePercent": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"LowHealthPercentThreshold": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"InCombatDuration": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						],
-						"FuryCost": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						]
-					},
-					"dataKey": "Characters/Renekton/Spells/RenektonPredatorAbility/RenektonPredator"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -691,6 +624,73 @@
 						}
 					},
 					"dataKey": "Characters/Renekton/Spells/RenektonReignOfTheTyrantAbility/RenektonReignOfTheTyrant"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Reign of Anger",
+					"image": "assets/characters/renekton/hud/icons2d/renekton_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Renekton gains <keywordMajor>@FuryPerAttack@ Fury</keywordMajor> per Attack. While above <keywordMajor>@FuryCost@ Fury</keywordMajor>, his next Ability spends it to become empowered. <keywordMajor>Fury</keywordMajor> decays while out of combat.<br><br>While below @LowHealthPercentThreshold*100@% Health, Renekton gains @FuryIncreasePercent*100@% increased <keywordMajor>Fury</keywordMajor>.",
+					"dataValues": {
+						"FuryPerAttack": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"FuryIncreasePercent": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"LowHealthPercentThreshold": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"InCombatDuration": [
+							12,
+							12,
+							12,
+							12,
+							12,
+							12,
+							12
+						],
+						"FuryCost": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"dataKey": "Characters/Renekton/Spells/RenektonPredatorAbility/RenektonPredator"
 				}
 			]
 		}

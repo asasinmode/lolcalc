@@ -28,79 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Happy Hour",
-					"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
-					"cooldownTime": [
-						12,
-						12,
-						12,
-						12,
-						12,
-						12,
-						12
-					],
-					"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. ",
-					"dataValues": {
-						"ArenaCooldownMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HealRatio": [
-							0.055,
-							0.055,
-							0.055,
-							0.055,
-							0.055,
-							0.055,
-							0.055
-						]
-					},
-					"spellCalculations": {
-						"HealAmount": {
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mDataValue": "HealRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"HealCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 12,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -2
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -2
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -2
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Gragas/Spells/GragasPassiveAbility/GragasPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -562,6 +489,79 @@
 						}
 					},
 					"dataKey": "Characters/Gragas/Spells/GragasRAbility/GragasR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Happy Hour",
+					"image": "assets/characters/gragas/hud/icons2d/gragaspassiveheal.png",
+					"cooldownTime": [
+						12,
+						12,
+						12,
+						12,
+						12,
+						12,
+						12
+					],
+					"tooltip": "When Gragas uses an Ability, Gragas takes a drink, restoring <healing>@HealAmount@ Health</healing>. ",
+					"dataValues": {
+						"ArenaCooldownMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HealRatio": [
+							0.055,
+							0.055,
+							0.055,
+							0.055,
+							0.055,
+							0.055,
+							0.055
+						]
+					},
+					"spellCalculations": {
+						"HealAmount": {
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mDataValue": "HealRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"HealCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 12,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -2
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -2
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Gragas/Spells/GragasPassiveAbility/GragasPassive"
 				}
 			]
 		}

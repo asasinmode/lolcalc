@@ -28,107 +28,6 @@
 		"attackspeedratio": 0.679
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Deadly Venom",
-					"image": "assets/characters/twitch/hud/icons2d/twitch_passive.png",
-					"tooltip": "Twitch's Attacks infect his target, dealing <trueDamage>@DamagePerSecond@ true damage</trueDamage> per second for @Duration@ seconds, stacking up to @MaxStacks@ times. <br><br>Max Damage Per Second: @DamagePerSecondMax@",
-					"dataValues": {
-						"Duration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"MaxStacks": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"APRatio": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						]
-					},
-					"spellCalculations": {
-						"DamagePerSecond": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1,
-									"mBreakpoints": [
-										{
-											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 17,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 21,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 25,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 29,
-											"mAdditionalBonusAtThisLevel": 1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"DamagePerSecondMax": {
-							"mMultiplier": {
-								"mDataValue": "MaxStacks"
-							},
-							"mModifiedGameCalculation": "DamagePerSecond"
-						},
-						"DamageMaxTotal": {
-							"mMultiplier": {
-								"mPart1": {
-									"mDataValue": "Duration"
-								},
-								"mPart2": {
-									"mDataValue": "MaxStacks"
-								}
-							},
-							"mModifiedGameCalculation": "DamagePerSecond"
-						}
-					},
-					"dataKey": "Characters/Twitch/Spells/TwitchDeadlyVenomMarkerAbility/TwitchDeadlyVenomMarker"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -547,6 +446,107 @@
 						]
 					},
 					"dataKey": "Characters/Twitch/Spells/TwitchFullAutomaticAbility/TwitchFullAutomatic"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Deadly Venom",
+					"image": "assets/characters/twitch/hud/icons2d/twitch_passive.png",
+					"tooltip": "Twitch's Attacks infect his target, dealing <trueDamage>@DamagePerSecond@ true damage</trueDamage> per second for @Duration@ seconds, stacking up to @MaxStacks@ times. <br><br>Max Damage Per Second: @DamagePerSecondMax@",
+					"dataValues": {
+						"Duration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"MaxStacks": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"APRatio": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						]
+					},
+					"spellCalculations": {
+						"DamagePerSecond": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1,
+									"mBreakpoints": [
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 17,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 25,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 29,
+											"mAdditionalBonusAtThisLevel": 1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"DamagePerSecondMax": {
+							"mMultiplier": {
+								"mDataValue": "MaxStacks"
+							},
+							"mModifiedGameCalculation": "DamagePerSecond"
+						},
+						"DamageMaxTotal": {
+							"mMultiplier": {
+								"mPart1": {
+									"mDataValue": "Duration"
+								},
+								"mPart2": {
+									"mDataValue": "MaxStacks"
+								}
+							},
+							"mModifiedGameCalculation": "DamagePerSecond"
+						}
+					},
+					"dataKey": "Characters/Twitch/Spells/TwitchDeadlyVenomMarkerAbility/TwitchDeadlyVenomMarker"
 				}
 			]
 		}

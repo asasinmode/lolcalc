@@ -28,142 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Dauntless Instinct",
-					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_p.png",
-					"tooltip": "K'Sante's damaging Abilities mark enemies hit. Attacking a marked enemy deals <physicalDamage>@FlatDamage@ plus @PercentHealthDamage@ max Health physical damage</physicalDamage> and consumes the mark.<br><br><keywordMajor>All Out</keywordMajor>: K'Sante's Attacks, Abilities and Passive deal an additional @MaxHealthDamagePercent@ max Health physical damage.",
-					"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules><br>",
-					"dataValues": {
-						"MarkDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"RecoveryPercent": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"ArmorMRMultiplier": [
-							0.002,
-							0.002,
-							0.002,
-							0.002,
-							0.002,
-							0.002,
-							0.002
-						],
-						"PassiveStartingDamage": [
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004
-						],
-						"MaxHealthDamagePercentBase": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						],
-						"MaxHealthDamageResistRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"FlatDamage": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						]
-					},
-					"spellCalculations": {
-						"{281dd874}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.1,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.03
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.03
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.03
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": -1
-						},
-						"PercentHealthDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.01,
-									"mEndValue": 0.02,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": -1
-						},
-						"MaxHealthDamagePercent": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "MaxHealthDamagePercentBase",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 1,
-									"mStatFormula": 2,
-									"mDataValue": "MaxHealthDamageResistRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 6,
-									"mStatFormula": 2,
-									"mDataValue": "MaxHealthDamageResistRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 2
-						}
-					},
-					"dataKey": "Characters/KSante/Spells/KSantePAbility/KSanteP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -1356,6 +1220,142 @@
 						}
 					},
 					"dataKey": "Characters/KSante/Spells/KSanteRAbility/KSanteR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Dauntless Instinct",
+					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_p.png",
+					"tooltip": "K'Sante's damaging Abilities mark enemies hit. Attacking a marked enemy deals <physicalDamage>@FlatDamage@ plus @PercentHealthDamage@ max Health physical damage</physicalDamage> and consumes the mark.<br><br><keywordMajor>All Out</keywordMajor>: K'Sante's Attacks, Abilities and Passive deal an additional @MaxHealthDamagePercent@ max Health physical damage.",
+					"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules><br>",
+					"dataValues": {
+						"MarkDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"RecoveryPercent": [
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8,
+							0.8
+						],
+						"ArmorMRMultiplier": [
+							0.002,
+							0.002,
+							0.002,
+							0.002,
+							0.002,
+							0.002,
+							0.002
+						],
+						"PassiveStartingDamage": [
+							0.004,
+							0.004,
+							0.004,
+							0.004,
+							0.004,
+							0.004,
+							0.004
+						],
+						"MaxHealthDamagePercentBase": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"MaxHealthDamageResistRatio": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"FlatDamage": [
+							12,
+							12,
+							12,
+							12,
+							12,
+							12,
+							12
+						]
+					},
+					"spellCalculations": {
+						"{281dd874}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.1,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.03
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": -1
+						},
+						"PercentHealthDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.01,
+									"mEndValue": 0.02,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": -1
+						},
+						"MaxHealthDamagePercent": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "MaxHealthDamagePercentBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mDataValue": "MaxHealthDamageResistRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mDataValue": "MaxHealthDamageResistRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/KSante/Spells/KSantePAbility/KSanteP"
 				}
 			]
 		}

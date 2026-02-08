@@ -28,183 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Dream-Laden Bough",
-					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_passive.png",
-					"tooltip": "Lillia's Abilities apply <keywordMajor>Dream Dust</keywordMajor>, dealing <magicDamage>@DotPercentTooltip@ max Health magic damage</magicDamage> over @Duration@ seconds. Lillia restores <healing>@MonsterHealTT@ Health</healing> over the duration against large jungle monsters, and restores <healing>@ChampionHealTT@ Health</healing> against champions.",
-					"tooltipExtended": "{{Spell_LilliaP_Tooltip}}<br><br><rules>Dream Dust deals a max of @MonsterDamageCap@ damage over the duration to jungle monsters.</rules><br><rules>Dream Dust heal is @MultiHealMod*100@% effective for each source beyond the first.</rules><br><rules>Dream Dust can only heal from one jungle monster at a time.</rules>",
-					"dataValues": {
-						"Duration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"DotDamagePercent": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"DotTicks": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"MonsterHealingPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"ChampionHealingPercent": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"LargeMonsterHealMod": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"SmallMonsterHealMod": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MultiHealMod": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						]
-					},
-					"spellCalculations": {
-						"DotPercentTotal": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mDataValue": "DotDamagePercent",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0.013,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": -1
-						},
-						"MonsterDamageCap": {
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mNumber": 65,
-									"__type": "NumberCalculationPart"
-								}
-							]
-						},
-						"{b5d0316f}": {
-							"mFormulaParts": [
-								{
-									"mNumber": 6.5,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mCoefficient": 0.015,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{395ffd44}": {
-							"mMultiplier": {
-								"mDataValue": "SmallMonsterHealMod"
-							},
-							"mModifiedGameCalculation": "{b5d0316f}"
-						},
-						"ChampionHeal": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 1,
-									"mEndValue": 15,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"ChampionHealTT": {
-							"mMultiplier": {
-								"mDataValue": "DotTicks"
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "ChampionHeal"
-						},
-						"MonsterHealTT": {
-							"mMultiplier": {
-								"mDataValue": "DotTicks"
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{b5d0316f}"
-						},
-						"{7969ffc2}": {
-							"mMultiplier": {
-								"mPart1": {
-									"mDataValue": "DotTicks"
-								},
-								"mPart2": {
-									"mDataValue": "SmallMonsterHealMod"
-								}
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{b5d0316f}"
-						},
-						"DotPercentTooltip": {
-							"mMultiplier": {
-								"mNumber": 0.01
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "DotPercentTotal"
-						}
-					},
-					"dataKey": "Characters/Lillia/Spells/LilliaPAbility/LilliaP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -750,6 +573,183 @@
 						}
 					},
 					"dataKey": "Characters/Lillia/Spells/LilliaRAbility/LilliaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Dream-Laden Bough",
+					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_passive.png",
+					"tooltip": "Lillia's Abilities apply <keywordMajor>Dream Dust</keywordMajor>, dealing <magicDamage>@DotPercentTooltip@ max Health magic damage</magicDamage> over @Duration@ seconds. Lillia restores <healing>@MonsterHealTT@ Health</healing> over the duration against large jungle monsters, and restores <healing>@ChampionHealTT@ Health</healing> against champions.",
+					"tooltipExtended": "{{Spell_LilliaP_Tooltip}}<br><br><rules>Dream Dust deals a max of @MonsterDamageCap@ damage over the duration to jungle monsters.</rules><br><rules>Dream Dust heal is @MultiHealMod*100@% effective for each source beyond the first.</rules><br><rules>Dream Dust can only heal from one jungle monster at a time.</rules>",
+					"dataValues": {
+						"Duration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"DotDamagePercent": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"DotTicks": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"MonsterHealingPercent": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"ChampionHealingPercent": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"LargeMonsterHealMod": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"SmallMonsterHealMod": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MultiHealMod": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						]
+					},
+					"spellCalculations": {
+						"DotPercentTotal": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "DotDamagePercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.013,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": -1
+						},
+						"MonsterDamageCap": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 65,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"{b5d0316f}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 6.5,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.015,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{395ffd44}": {
+							"mMultiplier": {
+								"mDataValue": "SmallMonsterHealMod"
+							},
+							"mModifiedGameCalculation": "{b5d0316f}"
+						},
+						"ChampionHeal": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 1,
+									"mEndValue": 15,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ChampionHealTT": {
+							"mMultiplier": {
+								"mDataValue": "DotTicks"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "ChampionHeal"
+						},
+						"MonsterHealTT": {
+							"mMultiplier": {
+								"mDataValue": "DotTicks"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{b5d0316f}"
+						},
+						"{7969ffc2}": {
+							"mMultiplier": {
+								"mPart1": {
+									"mDataValue": "DotTicks"
+								},
+								"mPart2": {
+									"mDataValue": "SmallMonsterHealMod"
+								}
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{b5d0316f}"
+						},
+						"DotPercentTooltip": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "DotPercentTotal"
+						}
+					},
+					"dataKey": "Characters/Lillia/Spells/LilliaPAbility/LilliaP"
 				}
 			]
 		}

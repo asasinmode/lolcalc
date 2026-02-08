@@ -28,38 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Salvation",
-					"image": "assets/characters/soraka/hud/icons2d/soraka_passive.png",
-					"tooltip": "Soraka gains <speed>@MovementSpeed*100@% Move Speed</speed> while moving towards allied champions who are below @HealthThreshold*100@% Health. ",
-					"tooltipExtended": "{{Spell_Consecration_Self_Tooltip}}<br><br><rules>Allies must be within @CastRange@ range of Soraka.</rules>",
-					"dataValues": {
-						"MovementSpeed": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						],
-						"HealthThreshold": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
-					},
-					"dataKey": "Characters/Soraka/Spells/Consecration_SelfAbility/Consecration_Self"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -420,6 +388,38 @@
 						}
 					},
 					"dataKey": "Characters/Soraka/Spells/SorakaRAbility/SorakaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Salvation",
+					"image": "assets/characters/soraka/hud/icons2d/soraka_passive.png",
+					"tooltip": "Soraka gains <speed>@MovementSpeed*100@% Move Speed</speed> while moving towards allied champions who are below @HealthThreshold*100@% Health. ",
+					"tooltipExtended": "{{Spell_Consecration_Self_Tooltip}}<br><br><rules>Allies must be within @CastRange@ range of Soraka.</rules>",
+					"dataValues": {
+						"MovementSpeed": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"HealthThreshold": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"dataKey": "Characters/Soraka/Spells/Consecration_SelfAbility/Consecration_Self"
 				}
 			]
 		}

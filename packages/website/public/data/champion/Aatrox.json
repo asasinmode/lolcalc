@@ -28,132 +28,6 @@
 		"attackspeedratio": 0.651
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Deathbringer Stance",
-					"image": "assets/characters/aatrox/hud/icons2d/aatrox_passive.png",
-					"tooltip": "Aatrox's Attacks deal an additional <magicDamage>@PDamage@ max Health magic damage</magicDamage> and restore <healing>@PHealingRatio*100@% of damage dealt as Health</healing>, reduced to @PHealingMinionMod*100@% against minions. This effect has a @PCooldown@ second cooldown.<br><br>Attack and Ability hits against champions and large jungle monsters reduce this effect's cooldown by 2 seconds. Hits with the edge of <spellName>The Darkin Blade</spellName> reduce it by 4 seconds instead.",
-					"tooltipExtended": "{{Passive_AatroxPassive_Tooltip}}<br><br><rules>Deals a max of @MonsterDamageCap@ against monsters. <br>Multi-hits with Abilities only reduce the cooldown once.</rules>",
-					"dataValues": {
-						"PBonusAARange": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"PChargeRate": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PDamageTADBonusLevel1": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"PDamageTADBonusLevel18": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"PStructureCap": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"PHealShieldReduction": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"PDebuffDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PHealingMinionMod": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"PHealingRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"PDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.04,
-									"mEndValue": 0.1,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"PCooldown": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStartValue": 22,
-									"mEndValue": 10,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"MonsterDamageCap": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 100,
-									"mEndValue": 320,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Aatrox/Spells/AatroxPassiveAbility/AatroxPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -661,6 +535,132 @@
 						]
 					},
 					"dataKey": "Characters/Aatrox/Spells/AatroxRAbility/AatroxR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Deathbringer Stance",
+					"image": "assets/characters/aatrox/hud/icons2d/aatrox_passive.png",
+					"tooltip": "Aatrox's Attacks deal an additional <magicDamage>@PDamage@ max Health magic damage</magicDamage> and restore <healing>@PHealingRatio*100@% of damage dealt as Health</healing>, reduced to @PHealingMinionMod*100@% against minions. This effect has a @PCooldown@ second cooldown.<br><br>Attack and Ability hits against champions and large jungle monsters reduce this effect's cooldown by 2 seconds. Hits with the edge of <spellName>The Darkin Blade</spellName> reduce it by 4 seconds instead.",
+					"tooltipExtended": "{{Passive_AatroxPassive_Tooltip}}<br><br><rules>Deals a max of @MonsterDamageCap@ against monsters. <br>Multi-hits with Abilities only reduce the cooldown once.</rules>",
+					"dataValues": {
+						"PBonusAARange": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"PChargeRate": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PDamageTADBonusLevel1": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"PDamageTADBonusLevel18": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"PStructureCap": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"PHealShieldReduction": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"PDebuffDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PHealingMinionMod": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"PHealingRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"PDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.04,
+									"mEndValue": 0.1,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"PCooldown": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 22,
+									"mEndValue": 10,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"MonsterDamageCap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 100,
+									"mEndValue": 320,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Aatrox/Spells/AatroxPassiveAbility/AatroxPassive"
 				}
 			]
 		}

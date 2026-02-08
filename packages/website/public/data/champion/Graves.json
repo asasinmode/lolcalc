@@ -28,121 +28,6 @@
 		"attackspeedratio": 0.49
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "New Destiny",
-					"image": "assets/characters/graves/hud/icons2d/gravesp.png",
-					"tooltip": "Graves' Attacks have unique properties:<br><li>It can only fire two <keywordMajor>Shells</keywordMajor> before he must reload. <attackSpeed>Attack Speed</attackSpeed> reduces reload time slightly, but reduces time between shots dramatically.<li>Each Attack fires 4 bullets. The first bullet on a target deals <physicalDamage>@SingleBulletDamage@ physical damage</physicalDamage>, and subsequent bullets deal <physicalDamage>@MultiBulletDamage@</physicalDamage> each. Instead of normal Critical effects, Critical strikes fire 6 bullets and deal @CritDamageMult@ more damage. Structures take @StructureDamageReduction*100@% reduced damage.<li>Bullets stop on the first unit hit. Non-champions struck by multiple bullets are <status>Knocked Back</status>.",
-					"dataValues": {
-						"CritDamageRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"StructureDamageReduction": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
-					},
-					"spellCalculations": {
-						"SingleBulletDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mValues": [
-											0,
-											0.7,
-											0.711,
-											0.723,
-											0.736,
-											0.75,
-											0.764,
-											0.78,
-											0.796,
-											0.813,
-											0.83,
-											0.849,
-											0.868,
-											0.888,
-											0.909,
-											0.93,
-											0.953,
-											0.976,
-											1,
-											1.025,
-											1.05,
-											1.077,
-											1.104,
-											1.132,
-											1.161,
-											1.19,
-											1.221,
-											1.252,
-											1.284,
-											1.317,
-											1.35
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"MultiBulletDamage": {
-							"mMultiplier": {
-								"mNumber": 0.333
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "SingleBulletDamage"
-						},
-						"CritDamageMult": {
-							"mFormulaParts": [
-								{
-									"mPart1": {
-										"mDataValue": "CritDamageRatio"
-									},
-									"mPart2": {
-										"mSubparts": [
-											{
-												"mNumber": -1
-											},
-											{
-												"mStat": 9,
-												"mCoefficient": 1
-											}
-										]
-									},
-									"__type": "ProductOfSubPartsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{549cda4d}": {
-							"mFormulaParts": [
-								{
-									"mStat": 9,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Graves/Spells/GravesPassiveAbility/GravesPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -607,6 +492,121 @@
 						}
 					},
 					"dataKey": "Characters/Graves/Spells/GravesChargeShotAbility/GravesChargeShot"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "New Destiny",
+					"image": "assets/characters/graves/hud/icons2d/gravesp.png",
+					"tooltip": "Graves' Attacks have unique properties:<br><li>It can only fire two <keywordMajor>Shells</keywordMajor> before he must reload. <attackSpeed>Attack Speed</attackSpeed> reduces reload time slightly, but reduces time between shots dramatically.<li>Each Attack fires 4 bullets. The first bullet on a target deals <physicalDamage>@SingleBulletDamage@ physical damage</physicalDamage>, and subsequent bullets deal <physicalDamage>@MultiBulletDamage@</physicalDamage> each. Instead of normal Critical effects, Critical strikes fire 6 bullets and deal @CritDamageMult@ more damage. Structures take @StructureDamageReduction*100@% reduced damage.<li>Bullets stop on the first unit hit. Non-champions struck by multiple bullets are <status>Knocked Back</status>.",
+					"dataValues": {
+						"CritDamageRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"StructureDamageReduction": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						]
+					},
+					"spellCalculations": {
+						"SingleBulletDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mValues": [
+											0,
+											0.7,
+											0.711,
+											0.723,
+											0.736,
+											0.75,
+											0.764,
+											0.78,
+											0.796,
+											0.813,
+											0.83,
+											0.849,
+											0.868,
+											0.888,
+											0.909,
+											0.93,
+											0.953,
+											0.976,
+											1,
+											1.025,
+											1.05,
+											1.077,
+											1.104,
+											1.132,
+											1.161,
+											1.19,
+											1.221,
+											1.252,
+											1.284,
+											1.317,
+											1.35
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"MultiBulletDamage": {
+							"mMultiplier": {
+								"mNumber": 0.333
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "SingleBulletDamage"
+						},
+						"CritDamageMult": {
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mDataValue": "CritDamageRatio"
+									},
+									"mPart2": {
+										"mSubparts": [
+											{
+												"mNumber": -1
+											},
+											{
+												"mStat": 9,
+												"mCoefficient": 1
+											}
+										]
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{549cda4d}": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Graves/Spells/GravesPassiveAbility/GravesPassive"
 				}
 			]
 		}

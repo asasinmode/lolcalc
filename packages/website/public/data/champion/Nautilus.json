@@ -28,149 +28,6 @@
 		"attackspeedratio": 0.612
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Staggering Blow",
-					"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png",
-					"tooltip": "Nautilus' first Attack against a target deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> and <status>Roots</status> them for @RootDuration@ seconds.",
-					"tooltipExtended": "{{ Spell_NautilusPassive_Tooltip }}<br><rules>This effect cannot trigger on the same target more than once every @PerTargetCD@ seconds.</rules>",
-					"dataValues": {
-						"PerTargetCD": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
-					},
-					"spellCalculations": {
-						"BonusDamage": {
-							"mFormulaParts": [
-								{
-									"mValues": [
-										8,
-										14,
-										20,
-										26,
-										32,
-										38,
-										44,
-										50,
-										56,
-										62,
-										68,
-										74,
-										80,
-										86,
-										92,
-										98,
-										104,
-										110,
-										116,
-										122,
-										128,
-										134,
-										140,
-										146,
-										152,
-										158,
-										164,
-										170,
-										176,
-										182,
-										188
-									],
-									"__type": "ByCharLevelFormulaCalculationPart"
-								}
-							]
-						},
-						"TotalDamageTooltip": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mValues": [
-										8,
-										14,
-										20,
-										26,
-										32,
-										38,
-										44,
-										50,
-										56,
-										62,
-										68,
-										74,
-										80,
-										86,
-										92,
-										98,
-										104,
-										110,
-										116,
-										122,
-										128,
-										134,
-										140,
-										146,
-										152,
-										158,
-										164,
-										170,
-										176,
-										182,
-										188
-									],
-									"__type": "ByCharLevelFormulaCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"RootDuration": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.75,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 21,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 26,
-											"mAdditionalBonusAtThisLevel": 0.25
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 2
-						}
-					},
-					"dataKey": "Characters/Nautilus/Spells/NautilusPassiveAbility/NautilusPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -590,6 +447,149 @@
 						}
 					},
 					"dataKey": "Characters/Nautilus/Spells/NautilusGrandLineAbility/NautilusGrandLine"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Staggering Blow",
+					"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png",
+					"tooltip": "Nautilus' first Attack against a target deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> and <status>Roots</status> them for @RootDuration@ seconds.",
+					"tooltipExtended": "{{ Spell_NautilusPassive_Tooltip }}<br><rules>This effect cannot trigger on the same target more than once every @PerTargetCD@ seconds.</rules>",
+					"dataValues": {
+						"PerTargetCD": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"spellCalculations": {
+						"BonusDamage": {
+							"mFormulaParts": [
+								{
+									"mValues": [
+										8,
+										14,
+										20,
+										26,
+										32,
+										38,
+										44,
+										50,
+										56,
+										62,
+										68,
+										74,
+										80,
+										86,
+										92,
+										98,
+										104,
+										110,
+										116,
+										122,
+										128,
+										134,
+										140,
+										146,
+										152,
+										158,
+										164,
+										170,
+										176,
+										182,
+										188
+									],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								}
+							]
+						},
+						"TotalDamageTooltip": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mValues": [
+										8,
+										14,
+										20,
+										26,
+										32,
+										38,
+										44,
+										50,
+										56,
+										62,
+										68,
+										74,
+										80,
+										86,
+										92,
+										98,
+										104,
+										110,
+										116,
+										122,
+										128,
+										134,
+										140,
+										146,
+										152,
+										158,
+										164,
+										170,
+										176,
+										182,
+										188
+									],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"RootDuration": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.75,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 26,
+											"mAdditionalBonusAtThisLevel": 0.25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/Nautilus/Spells/NautilusPassiveAbility/NautilusPassive"
 				}
 			]
 		}

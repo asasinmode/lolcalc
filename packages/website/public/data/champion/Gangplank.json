@@ -28,93 +28,6 @@
 		"attackspeedratio": 0.69
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Trial by Fire",
-					"image": "assets/characters/gangplank/hud/icons2d/gangplank_passive.png",
-					"tooltip": "Gangplank's melee Attacks ignite the target, dealing an additional <trueDamage>@TotalDamage@ true damage</trueDamage> over @DoTDuration@ seconds and granting Gangplank <speed>@MoveSpeed@ Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Destroying a <keywordMajor>Powder Keg</keywordMajor> refreshes this Cooldown and grants Gangplank the same <speed>Move Speed</speed>.",
-					"tooltipExtended": "{{Spell_GangplankPassive_Tooltip}}<br><br><rules>Deals @TurretDamageMult*100@% damage to turrets.<br><spellName>{{Spell_GangplankQWrapper_Name}}</spellName> does not apply this Ability.</rules>",
-					"dataValues": {
-						"Cooldown": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"MoveSpeedDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"DoTDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"TurretDamageMult": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"ADRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mExpandedTooltipCalculationDisplay": 0,
-							"mFormulaParts": [
-								{
-									"mStartValue": 50,
-									"mEndValue": 250,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "ADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"MoveSpeed": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.15,
-									"mEndValue": 0.3,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Gangplank/Spells/GangplankPassiveAbility/GangplankPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -727,6 +640,93 @@
 						]
 					},
 					"dataKey": "Characters/Gangplank/Spells/GangplankRAbility/GangplankR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Trial by Fire",
+					"image": "assets/characters/gangplank/hud/icons2d/gangplank_passive.png",
+					"tooltip": "Gangplank's melee Attacks ignite the target, dealing an additional <trueDamage>@TotalDamage@ true damage</trueDamage> over @DoTDuration@ seconds and granting Gangplank <speed>@MoveSpeed@ Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Destroying a <keywordMajor>Powder Keg</keywordMajor> refreshes this Cooldown and grants Gangplank the same <speed>Move Speed</speed>.",
+					"tooltipExtended": "{{Spell_GangplankPassive_Tooltip}}<br><br><rules>Deals @TurretDamageMult*100@% damage to turrets.<br><spellName>{{Spell_GangplankQWrapper_Name}}</spellName> does not apply this Ability.</rules>",
+					"dataValues": {
+						"Cooldown": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"MoveSpeedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"DoTDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"TurretDamageMult": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"ADRatio": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mExpandedTooltipCalculationDisplay": 0,
+							"mFormulaParts": [
+								{
+									"mStartValue": 50,
+									"mEndValue": 250,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MoveSpeed": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.15,
+									"mEndValue": 0.3,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Gangplank/Spells/GangplankPassiveAbility/GangplankPassive"
 				}
 			]
 		}

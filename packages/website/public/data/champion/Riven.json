@@ -28,61 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Runic Blade",
-					"image": "assets/characters/riven/hud/icons2d/rivenrunicblades.png",
-					"tooltip": "Using an Ability grants Riven a charge for 6 seconds (max @Charges@). Her Attacks spend a charge to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
-					"tooltipExtended": "{{Spell_RivenPassive_Tooltip}}<br><br><rules>The bonus damage can critically strike.<br>Deals @MonsterBonusDamage@ bonus damage to monsters.</rules>",
-					"dataValues": {
-						"Charges": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"TowerRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MonsterBonusDamage": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mStartValue": 0.3,
-										"mEndValue": 0.45
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Riven/Spells/RivenPassiveAbility/RivenPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -503,6 +448,61 @@
 						]
 					},
 					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Runic Blade",
+					"image": "assets/characters/riven/hud/icons2d/rivenrunicblades.png",
+					"tooltip": "Using an Ability grants Riven a charge for 6 seconds (max @Charges@). Her Attacks spend a charge to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"tooltipExtended": "{{Spell_RivenPassive_Tooltip}}<br><br><rules>The bonus damage can critically strike.<br>Deals @MonsterBonusDamage@ bonus damage to monsters.</rules>",
+					"dataValues": {
+						"Charges": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"TowerRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MonsterBonusDamage": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mStartValue": 0.3,
+										"mEndValue": 0.45
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Riven/Spells/RivenPassiveAbility/RivenPassive"
 				}
 			]
 		}

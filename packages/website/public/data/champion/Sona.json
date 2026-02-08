@@ -28,94 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Power Chord",
-					"image": "assets/characters/sona/hud/icons2d/sona_passive_charged.png",
-					"tooltip": "<passive>Accelerando</passive>: Sona gains Accelerando stacks from using her Basic Abilities well. She gains +%i:scaleAH% @AccelerandoAHPerStack@ Basic Ability Haste permanently per stack, up to %i:scaleAH% @AccelerandoCap@ Basic Ability Haste. When she reaches %i:scaleAH% @AccelerandoCap@ Basic Ability Haste, instead of gaining further stacks her current <keywordMajor>Ultimate Ability's</keywordMajor> cooldown is reduced by @Spell.SonaPassive:AccelerandoUltCDR@ seconds.<br><br><passive>Power Chord</passive>: After using @PowerChordPassiveCountMax@ basic Abilities, Sona's next Attack deals an additional <magicDamage>@PowerChordDamage@ magic damage</magicDamage> and may have an additional effect based on the song Sona last activated.<br><li><spellName>Hymn of Valor:</spellName> The Attack deals <magicDamage>@Spell.SonaQ:TotalStaccatoDamage@ magic damage</magicDamage> instead.<li><spellName>Aria of Perseverance:</spellName> The target deals @Spell.SonaW:TotalDiminuendoWeakenPercent@ less damage for @Spell.SonaW:DiminuendoDuration@ seconds.<li><spellName>Song of Celerity:</spellName> The target is <status>Slowed</status> by @Spell.SonaE:TotalTempoMoveSpeedSlow@ for @Spell.SonaE:TempoDuration@ seconds.",
-					"dataValues": {
-						"TempoDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PowerChordPassiveCountMax": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"AccelerandoAHPerStack": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"AccelerandoCap": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"AccelerandoUltCDR": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"spellCalculations": {
-						"PowerChordDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 20,
-									"mInitialBonusPerLevel": 10,
-									"mBreakpoints": [
-										{
-											"mLevel": 9,
-											"mBonusPerLevelAtAndAfter": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mCoefficient": 0.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"AccelerandoAHCurrent": {
-							"mFormulaParts": [
-								{
-									"mBuffName": "{1705b20f}",
-									"mDataValue": "AccelerandoAHPerStack",
-									"__type": "BuffCounterByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Sona/Spells/SonaPassiveAbility/SonaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -642,6 +554,94 @@
 						}
 					},
 					"dataKey": "Characters/Sona/Spells/SonaRAbility/SonaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Power Chord",
+					"image": "assets/characters/sona/hud/icons2d/sona_passive_charged.png",
+					"tooltip": "<passive>Accelerando</passive>: Sona gains Accelerando stacks from using her Basic Abilities well. She gains +%i:scaleAH% @AccelerandoAHPerStack@ Basic Ability Haste permanently per stack, up to %i:scaleAH% @AccelerandoCap@ Basic Ability Haste. When she reaches %i:scaleAH% @AccelerandoCap@ Basic Ability Haste, instead of gaining further stacks her current <keywordMajor>Ultimate Ability's</keywordMajor> cooldown is reduced by @Spell.SonaPassive:AccelerandoUltCDR@ seconds.<br><br><passive>Power Chord</passive>: After using @PowerChordPassiveCountMax@ basic Abilities, Sona's next Attack deals an additional <magicDamage>@PowerChordDamage@ magic damage</magicDamage> and may have an additional effect based on the song Sona last activated.<br><li><spellName>Hymn of Valor:</spellName> The Attack deals <magicDamage>@Spell.SonaQ:TotalStaccatoDamage@ magic damage</magicDamage> instead.<li><spellName>Aria of Perseverance:</spellName> The target deals @Spell.SonaW:TotalDiminuendoWeakenPercent@ less damage for @Spell.SonaW:DiminuendoDuration@ seconds.<li><spellName>Song of Celerity:</spellName> The target is <status>Slowed</status> by @Spell.SonaE:TotalTempoMoveSpeedSlow@ for @Spell.SonaE:TempoDuration@ seconds.",
+					"dataValues": {
+						"TempoDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PowerChordPassiveCountMax": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"AccelerandoAHPerStack": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"AccelerandoCap": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"AccelerandoUltCDR": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"PowerChordDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": 10,
+									"mBreakpoints": [
+										{
+											"mLevel": 9,
+											"mBonusPerLevelAtAndAfter": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"AccelerandoAHCurrent": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{1705b20f}",
+									"mDataValue": "AccelerandoAHPerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Sona/Spells/SonaPassiveAbility/SonaPassive"
 				}
 			]
 		}

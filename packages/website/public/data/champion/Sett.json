@@ -28,279 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Pit Grit",
-					"image": "assets/characters/sett/hud/icons2d/sett_p.png",
-					"tooltip": "Sett's Attacks alternate between left and right punches. Right punches follow the left quickly and deal an additional <physicalDamage>@RightPunchBonus@ physical damage</physicalDamage>.<br><br>Sett gains <healing>@TooltipRegenPerMissingHealthCalc@ Health Regeneration</healing> for each @MissingHealthUnit*500@% missing Health.",
-					"tooltipExtended": "{{Spell_SettPassive_Tooltip}}<br><br><rules>Sett will reset back to a left punch if he does not do a right punch within 2 seconds of doing a left punch. The <attackSpeed>Attack Speed</attackSpeed> of a right punch is 8 times that of a left punch.</rules>",
-					"dataValues": {
-						"NumHits": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"LockoutTimer": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"MarkerDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"GrabDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"SelfSlowPercent": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MaxHPOnHit": [
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06
-						],
-						"MissingHealthUnit": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						],
-						"AttackSpeed": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"JabDamagePercent": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"HookDamagePercentFinal": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"PassiveHealthThreshold": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"PassiveHealthThresholdAmp": [
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02
-						]
-					},
-					"spellCalculations": {
-						"HealingCalc": {
-							"mFormulaParts": [
-								{
-									"mValues": [
-										0.003,
-										0.004,
-										0.005,
-										0.006,
-										0.007,
-										0.008,
-										0.009,
-										0.01,
-										0.011,
-										0.012,
-										0.013,
-										0.014,
-										0.015,
-										0.016,
-										0.017,
-										0.018,
-										0.019,
-										0.02,
-										0.021,
-										0.022,
-										0.023,
-										0.024,
-										0.025,
-										0.026,
-										0.027,
-										0.028,
-										0.029,
-										0.03,
-										0.031,
-										0.032,
-										0.033
-									],
-									"__type": "ByCharLevelFormulaCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"RightPunchBonus": {
-							"mFormulaParts": [
-								{
-									"mValues": [
-										0,
-										5,
-										10,
-										15,
-										20,
-										25,
-										30,
-										35,
-										40,
-										45,
-										50,
-										55,
-										60,
-										65,
-										70,
-										75,
-										80,
-										85,
-										90,
-										95,
-										100,
-										105,
-										110,
-										115,
-										120,
-										125,
-										130,
-										135,
-										140,
-										145,
-										150
-									],
-									"__type": "ByCharLevelFormulaCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mCoefficient": 0.55,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{7733e08c}": {
-							"mMultiplier": {
-								"mNumber": 0.01
-							},
-							"mSimpleTooltipCalculationDisplay": 4,
-							"mExpandedTooltipCalculationDisplay": 4,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 3,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 7
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 10
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 20
-										},
-										{
-											"mLevel": 19,
-											"mBonusPerLevelAtAndAfter": 1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 2
-						},
-						"{a156fbdc}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1.2,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"tooltipregenpermissinghealthcalc": {
-							"mMultiplier": {
-								"mNumber": 5
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{7733e08c}"
-						}
-					},
-					"dataKey": "Characters/Sett/Spells/SettPassiveAbility/SettPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -1086,6 +813,279 @@
 						}
 					},
 					"dataKey": "Characters/Sett/Spells/SettRAbility/SettR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Pit Grit",
+					"image": "assets/characters/sett/hud/icons2d/sett_p.png",
+					"tooltip": "Sett's Attacks alternate between left and right punches. Right punches follow the left quickly and deal an additional <physicalDamage>@RightPunchBonus@ physical damage</physicalDamage>.<br><br>Sett gains <healing>@TooltipRegenPerMissingHealthCalc@ Health Regeneration</healing> for each @MissingHealthUnit*500@% missing Health.",
+					"tooltipExtended": "{{Spell_SettPassive_Tooltip}}<br><br><rules>Sett will reset back to a left punch if he does not do a right punch within 2 seconds of doing a left punch. The <attackSpeed>Attack Speed</attackSpeed> of a right punch is 8 times that of a left punch.</rules>",
+					"dataValues": {
+						"NumHits": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"LockoutTimer": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"MarkerDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"GrabDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"SelfSlowPercent": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MaxHPOnHit": [
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06
+						],
+						"MissingHealthUnit": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"AttackSpeed": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"JabDamagePercent": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"HookDamagePercentFinal": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"PassiveHealthThreshold": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"PassiveHealthThresholdAmp": [
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02
+						]
+					},
+					"spellCalculations": {
+						"HealingCalc": {
+							"mFormulaParts": [
+								{
+									"mValues": [
+										0.003,
+										0.004,
+										0.005,
+										0.006,
+										0.007,
+										0.008,
+										0.009,
+										0.01,
+										0.011,
+										0.012,
+										0.013,
+										0.014,
+										0.015,
+										0.016,
+										0.017,
+										0.018,
+										0.019,
+										0.02,
+										0.021,
+										0.022,
+										0.023,
+										0.024,
+										0.025,
+										0.026,
+										0.027,
+										0.028,
+										0.029,
+										0.03,
+										0.031,
+										0.032,
+										0.033
+									],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"RightPunchBonus": {
+							"mFormulaParts": [
+								{
+									"mValues": [
+										0,
+										5,
+										10,
+										15,
+										20,
+										25,
+										30,
+										35,
+										40,
+										45,
+										50,
+										55,
+										60,
+										65,
+										70,
+										75,
+										80,
+										85,
+										90,
+										95,
+										100,
+										105,
+										110,
+										115,
+										120,
+										125,
+										130,
+										135,
+										140,
+										145,
+										150
+									],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.55,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{7733e08c}": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mSimpleTooltipCalculationDisplay": 4,
+							"mExpandedTooltipCalculationDisplay": 4,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 3,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 7
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 10
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 20
+										},
+										{
+											"mLevel": 19,
+											"mBonusPerLevelAtAndAfter": 1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						},
+						"{a156fbdc}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1.2,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"tooltipregenpermissinghealthcalc": {
+							"mMultiplier": {
+								"mNumber": 5
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{7733e08c}"
+						}
+					},
+					"dataKey": "Characters/Sett/Spells/SettPassiveAbility/SettPassive"
 				}
 			]
 		}

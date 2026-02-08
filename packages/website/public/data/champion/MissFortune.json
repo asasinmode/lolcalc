@@ -28,81 +28,6 @@
 		"attackspeedratio": 0.656
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Love Tap",
-					"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
-					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",
-					"spellCalculations": {
-						"TotalDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mLevel1Value": 0.5,
-										"mBreakpoints": [
-											{
-												"mLevel": 4,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 7,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 9,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 11,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 13,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 20,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 25,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 30,
-												"mAdditionalBonusAtThisLevel": 0.1
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"MinionDamage": {
-							"mMultiplier": {
-								"mNumber": 0.5
-							},
-							"mModifiedGameCalculation": "TotalDamage"
-						}
-					},
-					"dataKey": "Characters/MissFortune/Spells/MissFortunePassiveAbility/MissFortunePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -645,6 +570,81 @@
 						}
 					},
 					"dataKey": "Characters/MissFortune/Spells/MissFortuneBulletTimeAbility/MissFortuneBulletTime"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Love Tap",
+					"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
+					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.5,
+										"mBreakpoints": [
+											{
+												"mLevel": 4,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 7,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 9,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 13,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 20,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 25,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 30,
+												"mAdditionalBonusAtThisLevel": 0.1
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"MinionDamage": {
+							"mMultiplier": {
+								"mNumber": 0.5
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/MissFortune/Spells/MissFortunePassiveAbility/MissFortunePassive"
 				}
 			]
 		}

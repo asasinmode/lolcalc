@@ -28,91 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Break the Mold",
-					"image": "assets/characters/rell/hud/icons2d/rellp.png",
-					"tooltip": "Rell's Attacks and Abilities steal <scaleArmor>@StealPercent*100@% Armor</scaleArmor> and <scaleMR>@StealPercent*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds. Max: @MaxPercentTooltipOnly@%. Basic attacks deal <magicDamage>@OnHitDamage@ magic damage</magicDamage> on-hit.",
-					"tooltipExtended": "{{Spell_RellP_Tooltip}}<br><br><rules>Always steals at least @StealFloor@. Does not steal from minions or Epic jungle monsters.</rules>",
-					"dataValues": {
-						"RefreshDuration": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
-						],
-						"StealPercent": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						],
-						"ShredDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MaxStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MaxPercentTooltipOnly": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						]
-					},
-					"spellCalculations": {
-						"StealFloor": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 1.5,
-									"mEndValue": 3,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						},
-						"OnHitDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 1,
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mStat": 6,
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Rell/Spells/RellPAbility/RellP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -633,6 +548,91 @@
 						}
 					},
 					"dataKey": "Characters/Rell/Spells/RellRAbility/RellR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Break the Mold",
+					"image": "assets/characters/rell/hud/icons2d/rellp.png",
+					"tooltip": "Rell's Attacks and Abilities steal <scaleArmor>@StealPercent*100@% Armor</scaleArmor> and <scaleMR>@StealPercent*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds. Max: @MaxPercentTooltipOnly@%. Basic attacks deal <magicDamage>@OnHitDamage@ magic damage</magicDamage> on-hit.",
+					"tooltipExtended": "{{Spell_RellP_Tooltip}}<br><br><rules>Always steals at least @StealFloor@. Does not steal from minions or Epic jungle monsters.</rules>",
+					"dataValues": {
+						"RefreshDuration": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						],
+						"StealPercent": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"ShredDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MaxStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MaxPercentTooltipOnly": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						]
+					},
+					"spellCalculations": {
+						"StealFloor": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 1.5,
+									"mEndValue": 3,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						},
+						"OnHitDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 1,
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Rell/Spells/RellPAbility/RellP"
 				}
 			]
 		}

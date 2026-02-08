@@ -28,209 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Drakehound's Step",
-					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.domina.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "When Ambessa is casting an Ability, issuing a Move or Attack order will cause her to dash in that direction after the Ability finishes.<br><br>Each cast initiation grants her a charge for @Attack_Buff_Duration@ seconds (max: @Attack_Buff_Max_Stacks@). While Ambessa has a charge, she gains <attention>@Attack_Range_Amount@ %i:scaleRange% Attack Range</attention> and <attackSpeed>@Calc_Attack_Speed@ %i:scaleAS% Attack Speed</attackSpeed>. Attacks consume a charge to deal <physicalDamage>@Calc_OnHit_Damage_Flat@ physical damage</physicalDamage> and restore <keywordMajor>@Calc_OnHit_Energy_Refund@ Energy</keywordMajor>.",
-					"tooltipExtended": "{{Spell_AmbessaP_Tooltip}}<br><br><rules>Commands issued during the cast time or duration of Abilities or Attacks are stored. Once the Ability or Attack finishes, the most recently stored command is executed. The windup of charged Attacks cannot be canceled. Issuing a Stop command after an Attack command has been issued during a Ability cast will cancel Ambessa's dash but maintain her Attack command if the target is in range.</rules>",
-					"dataValues": {
-						"Buffer_Dash_Time": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"Buffer_Dash_Distance": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"Buffer_Dash_Min_Distance": [
-							175,
-							175,
-							175,
-							175,
-							175,
-							175,
-							175
-						],
-						"Buffer_Dash_Forgiveness_Window": [
-							0.275,
-							0.275,
-							0.275,
-							0.275,
-							0.275,
-							0.275,
-							0.275
-						],
-						"Buffer_Dash_W_Forgiveness_Window": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"Buffer_Dash_Wall_Forgiveness": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"Attack_Range_Amount": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"Attack_Range_Total": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"Attack_Buff_Max_Stacks": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"Attack_Buff_Duration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"Attack_Speed": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
-					},
-					"spellCalculations": {
-						"{57d26a55}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 770,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 60
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 60
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 60
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 7,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"Calc_OnHit_Damage_Flat": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 5,
-									"mEndValue": 30,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mCoefficient": 0.25,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"Calc_OnHit_Energy_Refund": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 40,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"Calc_Attack_Speed": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mDataValue": "Attack_Speed",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{d87d470b}": {},
-						"{01a5d393}": {
-							"mMultiplier": {
-								"mStat": 9,
-								"mCoefficient": 1
-							},
-							"mModifiedGameCalculation": "Calc_OnHit_Damage_Flat"
-						}
-					},
-					"dataKey": "{3f70c67a}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -792,6 +589,209 @@
 						}
 					},
 					"dataKey": "Characters/Ambessa/Spells/AmbessaRAbility/AmbessaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Drakehound's Step",
+					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.domina.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "When Ambessa is casting an Ability, issuing a Move or Attack order will cause her to dash in that direction after the Ability finishes.<br><br>Each cast initiation grants her a charge for @Attack_Buff_Duration@ seconds (max: @Attack_Buff_Max_Stacks@). While Ambessa has a charge, she gains <attention>@Attack_Range_Amount@ %i:scaleRange% Attack Range</attention> and <attackSpeed>@Calc_Attack_Speed@ %i:scaleAS% Attack Speed</attackSpeed>. Attacks consume a charge to deal <physicalDamage>@Calc_OnHit_Damage_Flat@ physical damage</physicalDamage> and restore <keywordMajor>@Calc_OnHit_Energy_Refund@ Energy</keywordMajor>.",
+					"tooltipExtended": "{{Spell_AmbessaP_Tooltip}}<br><br><rules>Commands issued during the cast time or duration of Abilities or Attacks are stored. Once the Ability or Attack finishes, the most recently stored command is executed. The windup of charged Attacks cannot be canceled. Issuing a Stop command after an Attack command has been issued during a Ability cast will cancel Ambessa's dash but maintain her Attack command if the target is in range.</rules>",
+					"dataValues": {
+						"Buffer_Dash_Time": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"Buffer_Dash_Distance": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"Buffer_Dash_Min_Distance": [
+							175,
+							175,
+							175,
+							175,
+							175,
+							175,
+							175
+						],
+						"Buffer_Dash_Forgiveness_Window": [
+							0.275,
+							0.275,
+							0.275,
+							0.275,
+							0.275,
+							0.275,
+							0.275
+						],
+						"Buffer_Dash_W_Forgiveness_Window": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"Buffer_Dash_Wall_Forgiveness": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"Attack_Range_Amount": [
+							75,
+							75,
+							75,
+							75,
+							75,
+							75,
+							75
+						],
+						"Attack_Range_Total": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"Attack_Buff_Max_Stacks": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"Attack_Buff_Duration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"Attack_Speed": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"{57d26a55}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 770,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 60
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 60
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 60
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_OnHit_Damage_Flat": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 30,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"Calc_OnHit_Energy_Refund": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 40,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"Calc_Attack_Speed": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mDataValue": "Attack_Speed",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{d87d470b}": {},
+						"{01a5d393}": {
+							"mMultiplier": {
+								"mStat": 9,
+								"mCoefficient": 1
+							},
+							"mModifiedGameCalculation": "Calc_OnHit_Damage_Flat"
+						}
+					},
+					"dataKey": "{3f70c67a}"
 				}
 			]
 		}

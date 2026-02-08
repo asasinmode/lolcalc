@@ -28,92 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Feline Friendship",
-					"image": "assets/characters/yuumi/hud/icons2d/yuumip2.png",
-					"tooltip": "When Yuumi's Attacks and Abilities strike champions, she heals herself for <healing><health>@HealAmount@ health</health></healing>. If Yuumi <keywordMajor>Attaches</keywordMajor> to an ally within @HealDelayTime@ seconds, they are <heal>healed</heal> as well. This effect has a @PassiveCooldown@ second Cooldown.<br><br>While <keywordMajor>Attached</keywordMajor>, Yuumi gains <keywordMajor>Friendship</keywordMajor> with her ally whenever they kill a champion or minion. The ally with the most <keywordMajor>Friendship</keywordMajor> becomes her <keywordMajor>Best Friend</keywordMajor> and grants Yuumi bonus effects to her Abilities while she is <keywordMajor>Attached</keywordMajor> to them. <br><br><rules>The heal will automatically trigger if Yuumi is already Attached to an ally.</rules>",
-					"dataValues": {
-						"TakedownCompanionship": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"HealDelayTime": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"MinionKillCompanionship": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PityTimer": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
-					},
-					"spellCalculations": {
-						"PassiveCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 20,
-									"mInitialBonusPerLevel": -1,
-									"mBreakpoints": [
-										{
-											"mLevel": 14
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"{656dde8a}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 50,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"HealAmount": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 20,
-									"mEndValue": 110,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.25,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Yuumi/Spells/YuumiPAbility/YuumiP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 6,
 			"variants": [
@@ -820,6 +734,92 @@
 						}
 					},
 					"dataKey": "Characters/Yuumi/Spells/YuumiRAbility/YuumiR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Feline Friendship",
+					"image": "assets/characters/yuumi/hud/icons2d/yuumip2.png",
+					"tooltip": "When Yuumi's Attacks and Abilities strike champions, she heals herself for <healing><health>@HealAmount@ health</health></healing>. If Yuumi <keywordMajor>Attaches</keywordMajor> to an ally within @HealDelayTime@ seconds, they are <heal>healed</heal> as well. This effect has a @PassiveCooldown@ second Cooldown.<br><br>While <keywordMajor>Attached</keywordMajor>, Yuumi gains <keywordMajor>Friendship</keywordMajor> with her ally whenever they kill a champion or minion. The ally with the most <keywordMajor>Friendship</keywordMajor> becomes her <keywordMajor>Best Friend</keywordMajor> and grants Yuumi bonus effects to her Abilities while she is <keywordMajor>Attached</keywordMajor> to them. <br><br><rules>The heal will automatically trigger if Yuumi is already Attached to an ally.</rules>",
+					"dataValues": {
+						"TakedownCompanionship": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"HealDelayTime": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"MinionKillCompanionship": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PityTimer": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"spellCalculations": {
+						"PassiveCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": -1,
+									"mBreakpoints": [
+										{
+											"mLevel": 14
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"{656dde8a}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 50,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"HealAmount": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 20,
+									"mEndValue": 110,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Yuumi/Spells/YuumiPAbility/YuumiP"
 				}
 			]
 		}

@@ -28,317 +28,6 @@
 		"attackspeedratio": 0.4
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Absolution",
-					"image": "assets/characters/senna/hud/icons2d/senna_passive.png",
-					"tooltip": "Senna can attack souls that spawn from dead enemies to absorb their <keywordMajor>Mist</keywordMajor>. She can also siphon <keywordMajor>Mist</keywordMajor> from enemy champions she hits with Attacks or Abilities twice, dealing an additional <physicalDamage>@BonusCurentHealthDamage@% current Health physical damage</physicalDamage>.<br><br>Each stack of <keywordMajor>Mist</keywordMajor> grants <physicalDamage>@ADPerStack@ Attack Damage</physicalDamage>. Every @StacksForBonus@ stacks grant @BonusRange@ Attack Range and @BonusCritChance@% Critical Strike Chance but she only has @CriticalDamage@ Critical Strike Damage. @CritToLifestealConversionPercent*100@% of excess Critical Strike Chance is converted into Lifesteal.<br><br>Senna's Attacks take extra time to fire, deal an additional <physicalDamage>@BonusOnHitDamage@ physical damage</physicalDamage>, and briefly grant her <speed>@MSSteal@ of the target's Move Speed</speed>.",
-					"tooltipExtended": "{{Spell_SennaPassive_Tooltip}}<br><br><rules>Senna can only siphon <keywordMajor>Mist</keywordMajor> from an individual champion once every <scaleLevel>@DebuffDuration@</scaleLevel> seconds.<br>Souls are less likely to spawn from minions Senna kills. Souls always spawn from large minions Senna doesn't kill, champions, and large jungle monsters. <br>Senna does not gain Attack Damage on level up.</rules>",
-					"dataValues": {
-						"ADPerStack": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"StacksForBonus": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"SoulDuration": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"BonusRange": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"CritDamageMod": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						],
-						"BonusCritChance": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"CritToLifestealConversionPercent": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"SoulDropPercentChance": [
-							0.28,
-							0.28,
-							0.28,
-							0.28,
-							0.28,
-							0.28,
-							0.28
-						],
-						"SoulDropPercentChanceOnSennaKill": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"MSStealDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"SoulTravelDistanceBad": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"SoulTravelDistanceGood": [
-							-50,
-							-50,
-							-50,
-							-50,
-							-50,
-							-50,
-							-50
-						],
-						"SoulTravelVarianceRadiusInner": [
-							130,
-							130,
-							130,
-							130,
-							130,
-							130,
-							130
-						],
-						"SoulTravelVarianceRadiusOuter": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"ChanceForGoodSoul": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"ThreshSoulsToTriggerQuest": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"SennaSoulsToTriggerQuest": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"QuestRewardForSennaStacks": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"QuestRewardSennaAPPerStack": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"QuestRewardSennaArmorPerStack": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"QuestRewardForThreshStacks": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"QuestAssistWindow": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"MarkDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ArmorShredDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
-					},
-					"spellCalculations": {
-						"BonusOnHitDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mCoefficient": 0.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"MSSteal": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.1,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.05
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{bb59ad08}": {
-							"mFormulaParts": [
-								{
-									"mBuffName": "{e88568f8}",
-									"mDataValue": "ADPerStack",
-									"__type": "BuffCounterByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"BonusCurentHealthDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1,
-									"mInitialBonusPerLevel": 1,
-									"mBreakpoints": [
-										{
-											"mLevel": 11
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"DebuffDuration": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 6,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -1
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"CriticalDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 9,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Senna/Spells/SennaPassiveAbility/SennaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -831,6 +520,317 @@
 						}
 					},
 					"dataKey": "Characters/Senna/Spells/SennaRAbility/SennaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Absolution",
+					"image": "assets/characters/senna/hud/icons2d/senna_passive.png",
+					"tooltip": "Senna can attack souls that spawn from dead enemies to absorb their <keywordMajor>Mist</keywordMajor>. She can also siphon <keywordMajor>Mist</keywordMajor> from enemy champions she hits with Attacks or Abilities twice, dealing an additional <physicalDamage>@BonusCurentHealthDamage@% current Health physical damage</physicalDamage>.<br><br>Each stack of <keywordMajor>Mist</keywordMajor> grants <physicalDamage>@ADPerStack@ Attack Damage</physicalDamage>. Every @StacksForBonus@ stacks grant @BonusRange@ Attack Range and @BonusCritChance@% Critical Strike Chance but she only has @CriticalDamage@ Critical Strike Damage. @CritToLifestealConversionPercent*100@% of excess Critical Strike Chance is converted into Lifesteal.<br><br>Senna's Attacks take extra time to fire, deal an additional <physicalDamage>@BonusOnHitDamage@ physical damage</physicalDamage>, and briefly grant her <speed>@MSSteal@ of the target's Move Speed</speed>.",
+					"tooltipExtended": "{{Spell_SennaPassive_Tooltip}}<br><br><rules>Senna can only siphon <keywordMajor>Mist</keywordMajor> from an individual champion once every <scaleLevel>@DebuffDuration@</scaleLevel> seconds.<br>Souls are less likely to spawn from minions Senna kills. Souls always spawn from large minions Senna doesn't kill, champions, and large jungle monsters. <br>Senna does not gain Attack Damage on level up.</rules>",
+					"dataValues": {
+						"ADPerStack": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"StacksForBonus": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"SoulDuration": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"BonusRange": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"CritDamageMod": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"BonusCritChance": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"CritToLifestealConversionPercent": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"SoulDropPercentChance": [
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28
+						],
+						"SoulDropPercentChanceOnSennaKill": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"MSStealDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"SoulTravelDistanceBad": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"SoulTravelDistanceGood": [
+							-50,
+							-50,
+							-50,
+							-50,
+							-50,
+							-50,
+							-50
+						],
+						"SoulTravelVarianceRadiusInner": [
+							130,
+							130,
+							130,
+							130,
+							130,
+							130,
+							130
+						],
+						"SoulTravelVarianceRadiusOuter": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"ChanceForGoodSoul": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"ThreshSoulsToTriggerQuest": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"SennaSoulsToTriggerQuest": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"QuestRewardForSennaStacks": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"QuestRewardSennaAPPerStack": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"QuestRewardSennaArmorPerStack": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"QuestRewardForThreshStacks": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"QuestAssistWindow": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"MarkDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"ArmorShredDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"spellCalculations": {
+						"BonusOnHitDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MSSteal": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.1,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{bb59ad08}": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{e88568f8}",
+									"mDataValue": "ADPerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BonusCurentHealthDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1,
+									"mInitialBonusPerLevel": 1,
+									"mBreakpoints": [
+										{
+											"mLevel": 11
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"DebuffDuration": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 6,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"CriticalDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Senna/Spells/SennaPassiveAbility/SennaPassive"
 				}
 			]
 		}

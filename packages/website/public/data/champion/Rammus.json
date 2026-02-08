@@ -28,62 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Spiked Shell",
-					"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
-					"tooltip": "Rammus's gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
-					"dataValues": {
-						"ArmorRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"MagicResistRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"BaseDamage": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 1,
-									"mDataValue": "ArmorRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 6,
-									"mDataValue": "{95ef2c35}",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -747,6 +691,62 @@
 						}
 					},
 					"dataKey": "Characters/Rammus/Spells/Tremors2Ability/Tremors2"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Spiked Shell",
+					"image": "assets/characters/rammus/hud/icons2d/armordillo_scavengearmor.png",
+					"tooltip": "Rammus's gains <scaleAD>@TotalDamage@ Attack Damage</scaleAD>.",
+					"dataValues": {
+						"ArmorRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"MagicResistRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"BaseDamage": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 1,
+									"mDataValue": "ArmorRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mDataValue": "{95ef2c35}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Rammus/Spells/RammusPAbility/RammusP"
 				}
 			]
 		}

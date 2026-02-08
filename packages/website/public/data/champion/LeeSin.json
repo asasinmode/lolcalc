@@ -28,65 +28,6 @@
 		"attackspeedratio": 0.651
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Flurry",
-					"image": "assets/characters/leesin/hud/icons2d/leesinp.png",
-					"tooltip": "Lee Sin's Abilities grant him <attackSpeed>@PassiveAS@% Attack Speed</attackSpeed> for two Attacks. The first Attack restores <keywordMajor>@TTFirstHitEnergy@ Energy</keywordMajor> and the second restores <keywordMajor>@EnergyReturn@ Energy</keywordMajor>.",
-					"dataValues": {
-						"PassiveAS": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"FirstHitEnergyMult": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"spellCalculations": {
-						"EnergyReturn": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 10,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 5
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"TTFirstHitEnergy": {
-							"mMultiplier": {
-								"mDataValue": "FirstHitEnergyMult"
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "EnergyReturn"
-						}
-					},
-					"dataKey": "Characters/LeeSin/Spells/LeeSinPassiveAbility/LeeSinPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -472,6 +413,65 @@
 						}
 					},
 					"dataKey": "Characters/LeeSin/Spells/LeeSinRAbility/LeeSinR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Flurry",
+					"image": "assets/characters/leesin/hud/icons2d/leesinp.png",
+					"tooltip": "Lee Sin's Abilities grant him <attackSpeed>@PassiveAS@% Attack Speed</attackSpeed> for two Attacks. The first Attack restores <keywordMajor>@TTFirstHitEnergy@ Energy</keywordMajor> and the second restores <keywordMajor>@EnergyReturn@ Energy</keywordMajor>.",
+					"dataValues": {
+						"PassiveAS": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"FirstHitEnergyMult": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"EnergyReturn": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 10,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 5
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TTFirstHitEnergy": {
+							"mMultiplier": {
+								"mDataValue": "FirstHitEnergyMult"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "EnergyReturn"
+						}
+					},
+					"dataKey": "Characters/LeeSin/Spells/LeeSinPassiveAbility/LeeSinPassive"
 				}
 			]
 		}

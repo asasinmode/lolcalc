@@ -28,109 +28,6 @@
 		"attackspeedratio": 0.656
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Short Fuse",
-					"image": "assets/characters/ziggs/hud/icons2d/ziggspassiveready.png",
-					"cooldownTime": [
-						12,
-						12,
-						12,
-						12,
-						12,
-						12,
-						12
-					],
-					"tooltip": "Every @Cooldown@ seconds, Ziggs' next Attack deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. It deals <magicDamage>@StructureDamage@ damage</magicDamage> instead to structures. <br><br>Ziggs' abilities reduce this Cooldown by @SpellCDR@ seconds.",
-					"dataValues": {
-						"APRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"StructureDamageRatio": [
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 20,
-									"mInitialBonusPerLevel": 4,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 8
-										},
-										{
-											"mLevel": 13,
-											"mBonusPerLevelAtAndAfter": 12
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"SpellCdr": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 4,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"StructureDamage": {
-							"mMultiplier": {
-								"mDataValue": "StructureDamageRatio"
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
-						}
-					},
-					"effectAmount": {
-						"0": [
-							35,
-							80,
-							125,
-							170,
-							215,
-							260,
-							305
-						]
-					},
-					"dataKey": "Characters/Ziggs/Spells/ZiggsPassiveBuffAbility/ZiggsPassiveBuff"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -658,6 +555,109 @@
 						}
 					},
 					"dataKey": "Characters/Ziggs/Spells/ZiggsRAbility/ZiggsR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Short Fuse",
+					"image": "assets/characters/ziggs/hud/icons2d/ziggspassiveready.png",
+					"cooldownTime": [
+						12,
+						12,
+						12,
+						12,
+						12,
+						12,
+						12
+					],
+					"tooltip": "Every @Cooldown@ seconds, Ziggs' next Attack deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. It deals <magicDamage>@StructureDamage@ damage</magicDamage> instead to structures. <br><br>Ziggs' abilities reduce this Cooldown by @SpellCDR@ seconds.",
+					"dataValues": {
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"StructureDamageRatio": [
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": 4,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 8
+										},
+										{
+											"mLevel": 13,
+											"mBonusPerLevelAtAndAfter": 12
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"SpellCdr": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 4,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"StructureDamage": {
+							"mMultiplier": {
+								"mDataValue": "StructureDamageRatio"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"effectAmount": {
+						"0": [
+							35,
+							80,
+							125,
+							170,
+							215,
+							260,
+							305
+						]
+					},
+					"dataKey": "Characters/Ziggs/Spells/ZiggsPassiveBuffAbility/ZiggsPassiveBuff"
 				}
 			]
 		}

@@ -28,157 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Second Skin",
-					"image": "assets/characters/kaisa/hud/icons2d/kaisa_passive.png",
-					"tooltip": "Kai'Sa's Attacks stack <keywordMajor>Plasma</keywordMajor> for @PDuration@ seconds and deal an additional <magicDamage>@PBaseDamage@ plus @PCurrentPerStackDamage@ per stack magic damage</magicDamage>. Attacking an enemy with @PMaxStacks@ stacks consumes the <keywordMajor>Plasma</keywordMajor>, dealing <magicDamage>@PExecutePercentage@ missing Health magic damage</magicDamage>. Nearby allies apply @PAllyStacks@ stack to champions they <status>Immobilize</status>.<br><br>Kai'Sa's suit evolves her basic Abilities based on her stats.<br><spellName>Icathian Rain</spellName>: <physicalDamage>@f1.1@/@spell.KaisaQ:Effect6Amount@ Bonus Attack Damage</physicalDamage><br><spellName>Void Seeker</spellName>: <scaleAP>@f2.1@/@spell.KaisaW:Effect2Amount@ Ability Power</scaleAP><br><spellName>Supercharge</spellName>: <attackSpeed>@f3.1@%/@spell.KaisaE:Effect6Amount@% Bonus Attack Speed</attackSpeed>",
-					"tooltipExtended": "{{Spell_KaisaPassive_Tooltip}}<br><br><rules>Consuming <keywordMajor>Plasma</keywordMajor> deals a maximum of <magicDamage>@PDamageCap@ magic damage</magicDamage> to monsters.<br><physicalDamage>Attack Damage</physicalDamage> and <attackSpeed>Attack Speed</attackSpeed> gained from leveling up progresses the <keywordMajor>Evolution</keywordMajor> of <spellName>Icathian Rain</spellName> and <spellName>Supercharge</spellName>, respectively.</rules>",
-					"dataValues": {
-						"PCoefficient": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"PMaxStacks": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"PDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"PDamageCap": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"PAPRatioBase": [
-							0.12,
-							0.12,
-							0.12,
-							0.12,
-							0.12,
-							0.12,
-							0.12
-						],
-						"PAPRatioPerStack": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						],
-						"PExecuteRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"PAllyStacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"PExecuteAPRatio": [
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001
-						],
-						"PTotalDamageMultiplier_ForModesBalance": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"PBaseDamage": {
-							"mMultiplier": {
-								"mDataValue": "PTotalDamageMultiplier_ForModesBalance"
-							},
-							"mFormulaParts": [
-								{
-									"mStartValue": 4,
-									"mEndValue": 24,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mDataValue": "PAPRatioBase",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"PCurrentPerStackDamage": {
-							"mMultiplier": {
-								"mDataValue": "PTotalDamageMultiplier_ForModesBalance"
-							},
-							"mFormulaParts": [
-								{
-									"mStartValue": 1,
-									"mEndValue": 6,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mDataValue": "PAPRatioPerStack",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"PExecutePercentage": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "PExecuteRatio",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mDataValue": "PExecuteAPRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaPassiveAbility/KaisaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -834,6 +683,157 @@
 						}
 					},
 					"dataKey": "Characters/Kaisa/Spells/KaisaRAbility/KaisaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Second Skin",
+					"image": "assets/characters/kaisa/hud/icons2d/kaisa_passive.png",
+					"tooltip": "Kai'Sa's Attacks stack <keywordMajor>Plasma</keywordMajor> for @PDuration@ seconds and deal an additional <magicDamage>@PBaseDamage@ plus @PCurrentPerStackDamage@ per stack magic damage</magicDamage>. Attacking an enemy with @PMaxStacks@ stacks consumes the <keywordMajor>Plasma</keywordMajor>, dealing <magicDamage>@PExecutePercentage@ missing Health magic damage</magicDamage>. Nearby allies apply @PAllyStacks@ stack to champions they <status>Immobilize</status>.<br><br>Kai'Sa's suit evolves her basic Abilities based on her stats.<br><spellName>Icathian Rain</spellName>: <physicalDamage>@f1.1@/@spell.KaisaQ:Effect6Amount@ Bonus Attack Damage</physicalDamage><br><spellName>Void Seeker</spellName>: <scaleAP>@f2.1@/@spell.KaisaW:Effect2Amount@ Ability Power</scaleAP><br><spellName>Supercharge</spellName>: <attackSpeed>@f3.1@%/@spell.KaisaE:Effect6Amount@% Bonus Attack Speed</attackSpeed>",
+					"tooltipExtended": "{{Spell_KaisaPassive_Tooltip}}<br><br><rules>Consuming <keywordMajor>Plasma</keywordMajor> deals a maximum of <magicDamage>@PDamageCap@ magic damage</magicDamage> to monsters.<br><physicalDamage>Attack Damage</physicalDamage> and <attackSpeed>Attack Speed</attackSpeed> gained from leveling up progresses the <keywordMajor>Evolution</keywordMajor> of <spellName>Icathian Rain</spellName> and <spellName>Supercharge</spellName>, respectively.</rules>",
+					"dataValues": {
+						"PCoefficient": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"PMaxStacks": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"PDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"PDamageCap": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"PAPRatioBase": [
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12,
+							0.12
+						],
+						"PAPRatioPerStack": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"PExecuteRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"PAllyStacks": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"PExecuteAPRatio": [
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001,
+							0.001
+						],
+						"PTotalDamageMultiplier_ForModesBalance": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"PBaseDamage": {
+							"mMultiplier": {
+								"mDataValue": "PTotalDamageMultiplier_ForModesBalance"
+							},
+							"mFormulaParts": [
+								{
+									"mStartValue": 4,
+									"mEndValue": 24,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mDataValue": "PAPRatioBase",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PCurrentPerStackDamage": {
+							"mMultiplier": {
+								"mDataValue": "PTotalDamageMultiplier_ForModesBalance"
+							},
+							"mFormulaParts": [
+								{
+									"mStartValue": 1,
+									"mEndValue": 6,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mDataValue": "PAPRatioPerStack",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PExecutePercentage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PExecuteRatio",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "PExecuteAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Kaisa/Spells/KaisaPassiveAbility/KaisaPassive"
 				}
 			]
 		}

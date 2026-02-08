@@ -28,116 +28,6 @@
 		"attackspeedratio": 0.721
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Umbra Blades",
-					"image": "assets/characters/nocturne/hud/icons2d/nocturne_umbrablades.png",
-					"cooldownTime": [
-						13,
-						13,
-						13,
-						13,
-						13,
-						13,
-						13
-					],
-					"tooltip": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.",
-					"tooltipExtended": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.<br><br><rules><spellName>Umbra Blades</spellName> deals @DamageMinionMod*100@% less damage to minions and heals @HealMinionMod*100@% less from lane minions.</rules>",
-					"dataValues": {
-						"AACDR": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"AAChampMonsterCDR": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"Cooldown": [
-							13,
-							13,
-							13,
-							13,
-							13,
-							13,
-							13
-						],
-						"Radius": [
-							360,
-							360,
-							360,
-							360,
-							360,
-							360,
-							360
-						],
-						"DamageMinionMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HealMinionMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
-					},
-					"spellCalculations": {
-						"TotalDamageNoCrit": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mCoefficient": 1.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"TotalHealing": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 13,
-									"mEndValue": 30,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"TotalDamageCrit": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mCoefficient": 1.1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Nocturne/Spells/NocturnePAbility/NocturneP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -485,6 +375,116 @@
 						}
 					},
 					"dataKey": "Characters/Nocturne/Spells/NocturneParanoiaAbility/NocturneParanoia"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Umbra Blades",
+					"image": "assets/characters/nocturne/hud/icons2d/nocturne_umbrablades.png",
+					"cooldownTime": [
+						13,
+						13,
+						13,
+						13,
+						13,
+						13,
+						13
+					],
+					"tooltip": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.",
+					"tooltipExtended": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.<br><br><rules><spellName>Umbra Blades</spellName> deals @DamageMinionMod*100@% less damage to minions and heals @HealMinionMod*100@% less from lane minions.</rules>",
+					"dataValues": {
+						"AACDR": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"AAChampMonsterCDR": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"Cooldown": [
+							13,
+							13,
+							13,
+							13,
+							13,
+							13,
+							13
+						],
+						"Radius": [
+							360,
+							360,
+							360,
+							360,
+							360,
+							360,
+							360
+						],
+						"DamageMinionMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HealMinionMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamageNoCrit": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 1.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalHealing": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 13,
+									"mEndValue": 30,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalDamageCrit": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 1.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Nocturne/Spells/NocturnePAbility/NocturneP"
 				}
 			]
 		}

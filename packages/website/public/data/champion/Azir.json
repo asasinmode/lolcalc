@@ -28,99 +28,6 @@
 		"attackspeedratio": 0.694
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Shurima's Legacy",
-					"image": "assets/characters/azir/hud/icons2d/azir_passive.png",
-					"cooldownTime": [
-						90,
-						90,
-						90,
-						90,
-						90,
-						90,
-						90
-					],
-					"tooltip": "Azir can summon the <keywordMajor>Sun Disc</keywordMajor> from the rubble of a turret. The <keywordMajor>Sun Disc</keywordMajor> deals <magicDamage>@TowerDamage@ magic damage</magicDamage> and has @BonusResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> but disintegrates over @TowerDisintegrationTime@ seconds.",
-					"tooltipExtended": "{{Spell_AzirPassive_Tooltip}}<br><br><rules>You may not target enemy Nexus and Inhibitor Turrets with this Ability.<br><keywordMajor>Sun Disk</keywordMajor> loses 100 <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> if you are dead or too far away.</rules>",
-					"dataValues": {
-						"TowerDisintegrationTime": [
-							45,
-							45,
-							45,
-							45,
-							45,
-							45,
-							45
-						],
-						"SoldierStabRange": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"SoldierDeactivationRange": [
-							660,
-							660,
-							660,
-							660,
-							660,
-							660,
-							660
-						],
-						"APRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
-					},
-					"spellCalculations": {
-						"TowerDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 230,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"BonusResists": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 30,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Azir/Spells/AzirPassiveAbility/AzirPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -648,6 +555,99 @@
 						]
 					},
 					"dataKey": "Characters/Azir/Spells/AzirRAbility/AzirR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Shurima's Legacy",
+					"image": "assets/characters/azir/hud/icons2d/azir_passive.png",
+					"cooldownTime": [
+						90,
+						90,
+						90,
+						90,
+						90,
+						90,
+						90
+					],
+					"tooltip": "Azir can summon the <keywordMajor>Sun Disc</keywordMajor> from the rubble of a turret. The <keywordMajor>Sun Disc</keywordMajor> deals <magicDamage>@TowerDamage@ magic damage</magicDamage> and has @BonusResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> but disintegrates over @TowerDisintegrationTime@ seconds.",
+					"tooltipExtended": "{{Spell_AzirPassive_Tooltip}}<br><br><rules>You may not target enemy Nexus and Inhibitor Turrets with this Ability.<br><keywordMajor>Sun Disk</keywordMajor> loses 100 <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> if you are dead or too far away.</rules>",
+					"dataValues": {
+						"TowerDisintegrationTime": [
+							45,
+							45,
+							45,
+							45,
+							45,
+							45,
+							45
+						],
+						"SoldierStabRange": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"SoldierDeactivationRange": [
+							660,
+							660,
+							660,
+							660,
+							660,
+							660,
+							660
+						],
+						"APRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"TowerDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 230,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BonusResists": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Azir/Spells/AzirPassiveAbility/AzirPassive"
 				}
 			]
 		}

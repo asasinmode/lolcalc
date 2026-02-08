@@ -28,37 +28,6 @@
 		"attackspeedratio": 0.638
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Soul Eater",
-					"image": "assets/characters/nasus/hud/icons2d/nasus_passive.png",
-					"tooltip": "Nasus has an additional @Spell.NasusPassive:LifestealTooltip@% Life Steal.",
-					"spellCalculations": {
-						"LifestealTooltip": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 12,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 6
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 6
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Nasus/Spells/NasusPassiveAbility/NasusPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -500,6 +469,37 @@
 						}
 					},
 					"dataKey": "Characters/Nasus/Spells/NasusRAbility/NasusR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Soul Eater",
+					"image": "assets/characters/nasus/hud/icons2d/nasus_passive.png",
+					"tooltip": "Nasus has an additional @Spell.NasusPassive:LifestealTooltip@% Life Steal.",
+					"spellCalculations": {
+						"LifestealTooltip": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 12,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 6
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Nasus/Spells/NasusPassiveAbility/NasusPassive"
 				}
 			]
 		}

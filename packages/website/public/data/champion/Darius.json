@@ -28,92 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Hemorrhage",
-					"image": "assets/characters/darius/hud/icons2d/darius_icon_hemorrhage.png",
-					"tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>{{Spell_DariusR_Name}}</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds.",
-					"tooltipExtended": "{{Spell_DariusHemoMarker_Tooltip}}<br><br><rules><keywordMajor>Hemorrhage</keywordMajor> deals @MonsterMod*100@% damage to jungle monsters.</rules>",
-					"dataValues": {
-						"MonsterMod": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"SecondsPerTick": [
-							1.26,
-							1.26,
-							1.26,
-							1.26,
-							1.26,
-							1.26,
-							1.26
-						],
-						"BleedDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MaxStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"spellCalculations": {
-						"BleedDamagePerStack": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 13,
-									"mEndValue": 30,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"NoxianMightBonusAD": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 30,
-									"mInitialBonusPerLevel": 5,
-									"mBreakpoints": [
-										{
-											"mLevel": 11,
-											"mBonusPerLevelAtAndAfter": 10
-										},
-										{
-											"mLevel": 14,
-											"mBonusPerLevelAtAndAfter": 25
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Darius/Spells/DariusHemoMarkerAbility/DariusHemoMarker"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -471,6 +385,92 @@
 						}
 					},
 					"dataKey": "Characters/Darius/Spells/DariusExecuteAbility/DariusExecute"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Hemorrhage",
+					"image": "assets/characters/darius/hud/icons2d/darius_icon_hemorrhage.png",
+					"tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>{{Spell_DariusR_Name}}</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds.",
+					"tooltipExtended": "{{Spell_DariusHemoMarker_Tooltip}}<br><br><rules><keywordMajor>Hemorrhage</keywordMajor> deals @MonsterMod*100@% damage to jungle monsters.</rules>",
+					"dataValues": {
+						"MonsterMod": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"SecondsPerTick": [
+							1.26,
+							1.26,
+							1.26,
+							1.26,
+							1.26,
+							1.26,
+							1.26
+						],
+						"BleedDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MaxStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"BleedDamagePerStack": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 13,
+									"mEndValue": 30,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"NoxianMightBonusAD": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mInitialBonusPerLevel": 5,
+									"mBreakpoints": [
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 10
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Darius/Spells/DariusHemoMarkerAbility/DariusHemoMarker"
 				}
 			]
 		}

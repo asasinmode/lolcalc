@@ -28,48 +28,6 @@
 		"attackspeedratio": 0.638
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Granite Shield",
-					"image": "assets/characters/malphite/hud/icons2d/malphite_passive.png",
-					"tooltip": "Malphite grants himself <shield>@TotalShield@ Shield</shield> after not taking damage for @PassiveCooldown@ seconds.",
-					"spellCalculations": {
-						"PassiveCooldown": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 8,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -1
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"TotalShield": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mCoefficient": 0.1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Malphite/Spells/MalphiteShieldAbility/MalphiteShield"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -532,6 +490,48 @@
 						]
 					},
 					"dataKey": "Characters/Malphite/Spells/UFSlashAbility/UFSlash"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Granite Shield",
+					"image": "assets/characters/malphite/hud/icons2d/malphite_passive.png",
+					"tooltip": "Malphite grants himself <shield>@TotalShield@ Shield</shield> after not taking damage for @PassiveCooldown@ seconds.",
+					"spellCalculations": {
+						"PassiveCooldown": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 8,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TotalShield": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Malphite/Spells/MalphiteShieldAbility/MalphiteShield"
 				}
 			]
 		}

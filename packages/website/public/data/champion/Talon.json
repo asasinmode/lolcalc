@@ -28,102 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Blade's End",
-					"image": "assets/characters/talon/hud/icons2d/talonp.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds.",
-					"tooltipExtended": "{{game_buff_tooltip_TalonPassive}}<br><br><rules>Damage over time effect deals @monstermod*100@% damage to jungle monsters.</rules>",
-					"dataValues": {
-						"MonsterMod": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"StackDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"BleedDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"BonusADRatio": [
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1
-						]
-					},
-					"spellCalculations": {
-						"BleedDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 80,
-									"mEndValue": 280,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "BonusADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"effectAmount": {
-						"0": [
-							25,
-							80,
-							135,
-							190,
-							245,
-							300,
-							355
-						],
-						"1": [
-							10,
-							15,
-							20,
-							25,
-							30,
-							35,
-							40
-						]
-					},
-					"dataKey": "Characters/Talon/Spells/TalonPassiveAbility/TalonPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -501,6 +405,102 @@
 						}
 					},
 					"dataKey": "Characters/Talon/Spells/TalonRAbility/TalonR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Blade's End",
+					"image": "assets/characters/talon/hud/icons2d/talonp.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds.",
+					"tooltipExtended": "{{game_buff_tooltip_TalonPassive}}<br><br><rules>Damage over time effect deals @monstermod*100@% damage to jungle monsters.</rules>",
+					"dataValues": {
+						"MonsterMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"StackDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"BleedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"BonusADRatio": [
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1
+						]
+					},
+					"spellCalculations": {
+						"BleedDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 80,
+									"mEndValue": 280,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							25,
+							80,
+							135,
+							190,
+							245,
+							300,
+							355
+						],
+						"1": [
+							10,
+							15,
+							20,
+							25,
+							30,
+							35,
+							40
+						]
+					},
+					"dataKey": "Characters/Talon/Spells/TalonPassiveAbility/TalonPassive"
 				}
 			]
 		}

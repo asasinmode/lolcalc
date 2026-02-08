@@ -28,79 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Frost Shot",
-					"image": "assets/characters/ashe/hud/icons2d/ashe_p.png",
-					"tooltip": "Ashe's Attacks and Abilities <status>Slow</status> by @SlowAmount@ for @SlowDuration@ seconds. Attacks deal @DamageBonus@ damage.<br><br>Ashe's critical strikes deal no extra damage, instead increasing the <status>Slow</status> to @EmpoweredSlowAmount@ decaying.",
-					"tooltipExtended": "{{Spell_AshePassive_Tooltip}}<br><br><rules>The bonus damage scales with Critical Strike Chance and Critical Strike Damage bonus.</rules>",
-					"dataValues": {
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"spellCalculations": {
-						"SlowAmount": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.2,
-									"mEndValue": 0.3,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"EmpoweredSlowAmount": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.4,
-									"mEndValue": 0.6,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"DamageBonus": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mNumber": 1,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 8,
-									"mSubpart": {
-										"mSubparts": [
-											{
-												"mNumber": 1
-											},
-											{
-												"mStat": 9,
-												"mStatFormula": 2,
-												"mCoefficient": 1
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Ashe/Spells/AshePassiveAbility/AshePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -506,6 +433,79 @@
 						}
 					},
 					"dataKey": "Characters/Ashe/Spells/EnchantedCrystalArrowAbility/EnchantedCrystalArrow"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Frost Shot",
+					"image": "assets/characters/ashe/hud/icons2d/ashe_p.png",
+					"tooltip": "Ashe's Attacks and Abilities <status>Slow</status> by @SlowAmount@ for @SlowDuration@ seconds. Attacks deal @DamageBonus@ damage.<br><br>Ashe's critical strikes deal no extra damage, instead increasing the <status>Slow</status> to @EmpoweredSlowAmount@ decaying.",
+					"tooltipExtended": "{{Spell_AshePassive_Tooltip}}<br><br><rules>The bonus damage scales with Critical Strike Chance and Critical Strike Damage bonus.</rules>",
+					"dataValues": {
+						"SlowDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"SlowAmount": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.2,
+									"mEndValue": 0.3,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"EmpoweredSlowAmount": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.4,
+									"mEndValue": 0.6,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"DamageBonus": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 8,
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mNumber": 1
+											},
+											{
+												"mStat": 9,
+												"mStatFormula": 2,
+												"mCoefficient": 1
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Ashe/Spells/AshePassiveAbility/AshePassive"
 				}
 			]
 		}

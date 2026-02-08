@@ -28,111 +28,6 @@
 		"attackspeedratio": 0.645
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Petricite Burst",
-					"image": "assets/characters/sylas/hud/icons2d/sylasp.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "After using an Ability, Sylas gains a charge (max @PassiveCharges@ charges). Sylas' Attacks expend a charge to whirl his chains, dealing <magicDamage>@PassiveDamage@ magic damage</magicDamage> to the main target and <magicDamage>@PassiveAoEDamage@ magic damage</magicDamage> to other surrounding enemies.<br><br>While he has at least one charge, Sylas gains <attackSpeed>@PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.",
-					"tooltipExtended": "After using an Ability, Sylas gains a charge (max @PassiveCharges@ charges). Sylas' Attacks expend a charge to whirl his chains, dealing <magicDamage>@PassiveDamage@ magic damage</magicDamage> to the main target and <magicDamage>@PassiveAoEDamage@ magic damage</magicDamage> to other surrounding enemies.<br><br>While he has at least one charge, Sylas gains <attackSpeed>@PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><rules>When empowered, Sylas's attacks execute low Health minions.<br>Deals @MonsterDamageMulti*100@% damage to monsters.</rules>",
-					"dataValues": {
-						"AoE": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"PassiveCharges": [
-							2,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PassiveDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"CheatingThreshold": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"PassiveAttackSpeed": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						],
-						"MonsterDamageMulti": [
-							1.15,
-							1.15,
-							1.15,
-							1.15,
-							1.15,
-							1.15,
-							1.15
-						]
-					},
-					"spellCalculations": {
-						"PassiveDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mCoefficient": 1.3,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"PassiveAoEDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mCoefficient": 0.4,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mCoefficient": 0.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Sylas/Spells/SylasPassiveAbility/SylasPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -568,6 +463,111 @@
 						}
 					},
 					"dataKey": "Characters/Sylas/Spells/SylasRAbility/SylasR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Petricite Burst",
+					"image": "assets/characters/sylas/hud/icons2d/sylasp.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "After using an Ability, Sylas gains a charge (max @PassiveCharges@ charges). Sylas' Attacks expend a charge to whirl his chains, dealing <magicDamage>@PassiveDamage@ magic damage</magicDamage> to the main target and <magicDamage>@PassiveAoEDamage@ magic damage</magicDamage> to other surrounding enemies.<br><br>While he has at least one charge, Sylas gains <attackSpeed>@PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.",
+					"tooltipExtended": "After using an Ability, Sylas gains a charge (max @PassiveCharges@ charges). Sylas' Attacks expend a charge to whirl his chains, dealing <magicDamage>@PassiveDamage@ magic damage</magicDamage> to the main target and <magicDamage>@PassiveAoEDamage@ magic damage</magicDamage> to other surrounding enemies.<br><br>While he has at least one charge, Sylas gains <attackSpeed>@PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><rules>When empowered, Sylas's attacks execute low Health minions.<br>Deals @MonsterDamageMulti*100@% damage to monsters.</rules>",
+					"dataValues": {
+						"AoE": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"PassiveCharges": [
+							2,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PassiveDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"CheatingThreshold": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"PassiveAttackSpeed": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"MonsterDamageMulti": [
+							1.15,
+							1.15,
+							1.15,
+							1.15,
+							1.15,
+							1.15,
+							1.15
+						]
+					},
+					"spellCalculations": {
+						"PassiveDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 1.3,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveAoEDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Sylas/Spells/SylasPassiveAbility/SylasPassive"
 				}
 			]
 		}

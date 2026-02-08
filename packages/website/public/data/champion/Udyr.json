@@ -28,218 +28,6 @@
 		"attackspeedratio": 0.65
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Bridge Between",
-					"image": "assets/characters/udyr/hud/icons2d/udyr_p.png",
-					"tooltip": "<spellPassive>Awakened Spirit:</spellPassive> Udyr has four basic Abilities that swap between <i>Stances</i>. Udyr can <recast>Recast</recast> an Ability that is on Cooldown to gain its bonuses again with Ultimate benefits. (@UltCD@ second Cooldown).<br><br><spellPassive>Monk Training:</spellPassive> After using an Ability, Udyr's next two Attacks within @AttackSpeedDuration@ seconds gain <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and refund @UltCDReduction*100@% of <keywordMajor>Awaken's</keywordMajor> Cooldown.<br>",
-					"dataValues": {
-						"UdyrAHAmountPerCloudDragon": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"GlobalCD": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"GlobalCDEmpowered": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"SwapChargeBonus": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MaxCharge": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"UltCDReduction": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"AttackSpeedDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"UltCDMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"{6a8aaac9}": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 15,
-									"mEndValue": 15,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"AttackSpeed": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mNumber": 0.3,
-									"__type": "NumberCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{1cfcbfbe}": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.3,
-									"mEndValue": 0.8,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{1800f4cb}": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.2,
-									"mEndValue": 0.3,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"UltCD": {
-							"mMultiplier": {
-								"mDataValue": "UltCDMultiplier"
-							},
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 50,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -10
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -10
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -10
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"LightningDamage": {
-							"mFormulaParts": [
-								{
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mCoefficient": 0.1,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mCoefficient": 0.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{73fab8fe}": {
-							"mFormulaParts": [
-								{
-									"mNumber": 10,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mCoefficient": 0.4,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{5e1424c3}": {
-							"mFormulaParts": [
-								{
-									"mNumber": 20,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{01dc7936}": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 5,
-									"mEndValue": 40,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mCoefficient": 0.4,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Udyr/Spells/UdyrPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 6,
 			"variants": [
@@ -1142,6 +930,218 @@
 						}
 					},
 					"dataKey": "Characters/Udyr/Spells/UdyrRAbility/UdyrR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Bridge Between",
+					"image": "assets/characters/udyr/hud/icons2d/udyr_p.png",
+					"tooltip": "<spellPassive>Awakened Spirit:</spellPassive> Udyr has four basic Abilities that swap between <i>Stances</i>. Udyr can <recast>Recast</recast> an Ability that is on Cooldown to gain its bonuses again with Ultimate benefits. (@UltCD@ second Cooldown).<br><br><spellPassive>Monk Training:</spellPassive> After using an Ability, Udyr's next two Attacks within @AttackSpeedDuration@ seconds gain <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and refund @UltCDReduction*100@% of <keywordMajor>Awaken's</keywordMajor> Cooldown.<br>",
+					"dataValues": {
+						"UdyrAHAmountPerCloudDragon": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"GlobalCD": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"GlobalCDEmpowered": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"SwapChargeBonus": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"MaxCharge": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						],
+						"UltCDReduction": [
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05
+						],
+						"AttackSpeedDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"UltCDMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"{6a8aaac9}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 15,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"AttackSpeed": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 0.3,
+									"__type": "NumberCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{1cfcbfbe}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.3,
+									"mEndValue": 0.8,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{1800f4cb}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.2,
+									"mEndValue": 0.3,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"UltCD": {
+							"mMultiplier": {
+								"mDataValue": "UltCDMultiplier"
+							},
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 50,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -10
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -10
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -10
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"LightningDamage": {
+							"mFormulaParts": [
+								{
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{73fab8fe}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 10,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{5e1424c3}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 20,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{01dc7936}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 40,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Udyr/Spells/UdyrPassive"
 				}
 			]
 		}

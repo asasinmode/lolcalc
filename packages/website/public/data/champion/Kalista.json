@@ -28,126 +28,6 @@
 		"attackspeedratio": 0.694
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Martial Poise",
-					"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png",
-					"tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}",
-					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules><br>",
-					"dataValues": {
-						"DashSpeedDivisor": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"GameModeInteger": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ModesASCap": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"ModesAStoADRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						]
-					},
-					"spellCalculations": {
-						"MoveSpeedMultiplier": {
-							"mMultiplier": {
-								"mNumber": 0.001
-							},
-							"mFormulaParts": [
-								{
-									"mNumber": 280,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 7,
-									"mCoefficient": 2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{c3169619}": {
-							"mMultiplier": {
-								"mDataValue": "{1912f686}"
-							},
-							"mFormulaParts": [
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mNumber": 1,
-									"__type": "NumberCalculationPart"
-								}
-							]
-						},
-						"{091295b4}": {
-							"mFormulaParts": [
-								{
-									"mStat": 4,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{5728f7e1}": {
-							"mMultiplier": {
-								"mDataValue": "{92949eba}"
-							},
-							"mFormulaParts": [
-								{
-									"mSubparts": [
-										{
-											"mPart1": {
-												"mDataValue": "ModesASCap"
-											},
-											"mPart2": {
-												"mNumber": -1
-											}
-										},
-										{
-											"mStat": 4,
-											"mCoefficient": 1
-										}
-									],
-									"__type": "ClampSubPartsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 2
-						}
-					},
-					"dataKey": "Characters/Kalista/Spells/KalistaPassiveBuffAbility/KalistaPassiveBuff"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -577,6 +457,126 @@
 						]
 					},
 					"dataKey": "Characters/Kalista/Spells/KalistaRxAbility/KalistaRx"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Martial Poise",
+					"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png",
+					"tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}",
+					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules><br>",
+					"dataValues": {
+						"DashSpeedDivisor": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"GameModeInteger": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ModesASCap": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"ModesAStoADRatio": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						]
+					},
+					"spellCalculations": {
+						"MoveSpeedMultiplier": {
+							"mMultiplier": {
+								"mNumber": 0.001
+							},
+							"mFormulaParts": [
+								{
+									"mNumber": 280,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 7,
+									"mCoefficient": 2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{c3169619}": {
+							"mMultiplier": {
+								"mDataValue": "{1912f686}"
+							},
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"{091295b4}": {
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{5728f7e1}": {
+							"mMultiplier": {
+								"mDataValue": "{92949eba}"
+							},
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mPart1": {
+												"mDataValue": "ModesASCap"
+											},
+											"mPart2": {
+												"mNumber": -1
+											}
+										},
+										{
+											"mStat": 4,
+											"mCoefficient": 1
+										}
+									],
+									"__type": "ClampSubPartsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/Kalista/Spells/KalistaPassiveBuffAbility/KalistaPassiveBuff"
 				}
 			]
 		}

@@ -28,63 +28,6 @@
 		"attackspeedratio": 0.69
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Guerrilla Warfare",
-					"image": "assets/characters/teemo/hud/icons2d/teemopassive.asu_teemo.png",
-					"tooltip": "If Teemo stands still for @StealthCooldownDuration@ seconds without being damaged, he becomes <keywordStealth>Invisible</keywordStealth> until he moves. While in a brush, he can maintain <keywordStealth>Invisibility</keywordStealth> while moving.<br><br>Upon exiting this <keywordStealth>Invisibility</keywordStealth>, Teemo gains <attackSpeed>@BonusAttackSpeed@ Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
-					"tooltipExtended": "{{Buff_TeemoPassive_Tooltip}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
-					"dataValues": {
-						"AttackSpeedDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"StealthCooldownDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"spellCalculations": {
-						"BonusAttackSpeed": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.2,
-									"mBreakpoints": [
-										{
-											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": 0.2
-										},
-										{
-											"mLevel": 10,
-											"mAdditionalBonusAtThisLevel": 0.2
-										},
-										{
-											"mLevel": 15,
-											"mAdditionalBonusAtThisLevel": 0.2
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "{5a629d30}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -539,6 +482,63 @@
 						}
 					},
 					"dataKey": "Characters/Teemo/Spells/TeemoRAbility/TeemoR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Guerrilla Warfare",
+					"image": "assets/characters/teemo/hud/icons2d/teemopassive.asu_teemo.png",
+					"tooltip": "If Teemo stands still for @StealthCooldownDuration@ seconds without being damaged, he becomes <keywordStealth>Invisible</keywordStealth> until he moves. While in a brush, he can maintain <keywordStealth>Invisibility</keywordStealth> while moving.<br><br>Upon exiting this <keywordStealth>Invisibility</keywordStealth>, Teemo gains <attackSpeed>@BonusAttackSpeed@ Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
+					"tooltipExtended": "{{Buff_TeemoPassive_Tooltip}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
+					"dataValues": {
+						"AttackSpeedDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"StealthCooldownDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"BonusAttackSpeed": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.2,
+									"mBreakpoints": [
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": 0.2
+										},
+										{
+											"mLevel": 10,
+											"mAdditionalBonusAtThisLevel": 0.2
+										},
+										{
+											"mLevel": 15,
+											"mAdditionalBonusAtThisLevel": 0.2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "{5a629d30}"
 				}
 			]
 		}

@@ -28,117 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Crimson Pact",
-					"image": "assets/characters/vladimir/hud/icons2d/vladimirp.png",
-					"tooltip": "Vladimir gains <scaleAP>1 Ability Power</scaleAP> for every <scaleHealth>@Effect1Amount@ bonus Health</scaleHealth>. He also gains <scaleHealth>@Effect2Amount@ max Health</scaleHealth> per <scaleAP>1 Ability Power</scaleAP>.<br><br><scaleAP>Bonus Ability Power: @ApproximateAPBonusAvoidingRecursion@</scaleAP><br><scaleHealth>Bonus Health: @ApproximateHPBonusAvoidingRecursion@</scaleHealth>",
-					"tooltipExtended": "{{Spell_VladimirP_Tooltip}}<br><br><rules>These bonuses don't count for each other.</rules>",
-					"spellCalculations": {
-						"ApproximateAPBonusAvoidingRecursion": {
-							"mMultiplier": {
-								"mNumber": 1.06
-							},
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mPart1": {
-										"mSubparts": [
-											{
-												"mStat": 12,
-												"mStatFormula": 2,
-												"mCoefficient": 1
-											},
-											{
-												"mPart1": {
-													"mEffectIndex": 2
-												},
-												"mPart2": {
-													"mCoefficient": -1
-												}
-											}
-										]
-									},
-									"mPart2": {
-										"mPart1": {
-											"mNumber": 0.01
-										},
-										"mPart2": {
-											"mNumber": 3.333
-										}
-									},
-									"__type": "ProductOfSubPartsCalculationPart"
-								}
-							]
-						},
-						"ApproximateHPBonusAvoidingRecursion": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mPart1": {
-										"mSubparts": [
-											{
-												"mStatFormula": 2,
-												"mCoefficient": 1
-											},
-											{
-												"mPart1": {
-													"mPart1": {
-														"mNumber": 0.01
-													},
-													"mPart2": {
-														"mNumber": 3.333
-													}
-												},
-												"mPart2": {
-													"mStat": 12,
-													"mStatFormula": 2,
-													"mCoefficient": -1
-												}
-											}
-										]
-									},
-									"mPart2": {
-										"mPart1": {
-											"mNumber": 1.06
-										},
-										"mPart2": {
-											"mEffectIndex": 2
-										}
-									},
-									"__type": "ProductOfSubPartsCalculationPart"
-								}
-							]
-						}
-					},
-					"effectAmount": {
-						"0": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"1": [
-							1.6,
-							1.6,
-							1.6,
-							1.6,
-							1.6,
-							1.6,
-							1.6
-						]
-					},
-					"dataKey": "Characters/Vladimir/Spells/VladimirBloodGorgedAbility/VladimirBloodGorged"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -685,6 +574,117 @@
 						]
 					},
 					"dataKey": "Characters/Vladimir/Spells/VladimirHemoplagueAbility/VladimirHemoplague"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Crimson Pact",
+					"image": "assets/characters/vladimir/hud/icons2d/vladimirp.png",
+					"tooltip": "Vladimir gains <scaleAP>1 Ability Power</scaleAP> for every <scaleHealth>@Effect1Amount@ bonus Health</scaleHealth>. He also gains <scaleHealth>@Effect2Amount@ max Health</scaleHealth> per <scaleAP>1 Ability Power</scaleAP>.<br><br><scaleAP>Bonus Ability Power: @ApproximateAPBonusAvoidingRecursion@</scaleAP><br><scaleHealth>Bonus Health: @ApproximateHPBonusAvoidingRecursion@</scaleHealth>",
+					"tooltipExtended": "{{Spell_VladimirP_Tooltip}}<br><br><rules>These bonuses don't count for each other.</rules>",
+					"spellCalculations": {
+						"ApproximateAPBonusAvoidingRecursion": {
+							"mMultiplier": {
+								"mNumber": 1.06
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mSubparts": [
+											{
+												"mStat": 12,
+												"mStatFormula": 2,
+												"mCoefficient": 1
+											},
+											{
+												"mPart1": {
+													"mEffectIndex": 2
+												},
+												"mPart2": {
+													"mCoefficient": -1
+												}
+											}
+										]
+									},
+									"mPart2": {
+										"mPart1": {
+											"mNumber": 0.01
+										},
+										"mPart2": {
+											"mNumber": 3.333
+										}
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							]
+						},
+						"ApproximateHPBonusAvoidingRecursion": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mSubparts": [
+											{
+												"mStatFormula": 2,
+												"mCoefficient": 1
+											},
+											{
+												"mPart1": {
+													"mPart1": {
+														"mNumber": 0.01
+													},
+													"mPart2": {
+														"mNumber": 3.333
+													}
+												},
+												"mPart2": {
+													"mStat": 12,
+													"mStatFormula": 2,
+													"mCoefficient": -1
+												}
+											}
+										]
+									},
+									"mPart2": {
+										"mPart1": {
+											"mNumber": 1.06
+										},
+										"mPart2": {
+											"mEffectIndex": 2
+										}
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"1": [
+							1.6,
+							1.6,
+							1.6,
+							1.6,
+							1.6,
+							1.6,
+							1.6
+						]
+					},
+					"dataKey": "Characters/Vladimir/Spells/VladimirBloodGorgedAbility/VladimirBloodGorged"
 				}
 			]
 		}

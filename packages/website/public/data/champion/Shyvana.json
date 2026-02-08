@@ -28,55 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Fury of the Dragonborn",
-					"image": "assets/characters/shyvana/hud/icons2d/shyvanareinforcedscales.png",
-					"tooltip": "Shyvana deals @BonusPercentDamageToDragons*100@% more damage to Dragon type jungle monsters. She gains @BonusResistsBase@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>, increased by an additional @BonusResistsPerDragon@ for each Dragon defeated by her or her allies.<br><br><rules>Total bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>: @f1@</rules>",
-					"dataValues": {
-						"BonusPercentDamageToDragons": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"BonusResistsBase": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BonusResistsPerDragon": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BonusDragonFuryRegen": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						]
-					},
-					"dataKey": "Characters/Shyvana/Spells/ShyvanaPassiveAbility/ShyvanaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -724,6 +675,55 @@
 						}
 					},
 					"dataKey": "Characters/Shyvana/Spells/ShyvanaTransformCastAbility/ShyvanaTransformCast"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Fury of the Dragonborn",
+					"image": "assets/characters/shyvana/hud/icons2d/shyvanareinforcedscales.png",
+					"tooltip": "Shyvana deals @BonusPercentDamageToDragons*100@% more damage to Dragon type jungle monsters. She gains @BonusResistsBase@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>, increased by an additional @BonusResistsPerDragon@ for each Dragon defeated by her or her allies.<br><br><rules>Total bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>: @f1@</rules>",
+					"dataValues": {
+						"BonusPercentDamageToDragons": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"BonusResistsBase": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BonusResistsPerDragon": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BonusDragonFuryRegen": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						]
+					},
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaPassiveAbility/ShyvanaPassive"
 				}
 			]
 		}

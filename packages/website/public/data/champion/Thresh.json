@@ -28,51 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Damnation",
-					"image": "assets/characters/thresh/hud/icons2d/thresh_passive.png",
-					"tooltip": "Thresh collects the <keywordMajor>Souls</keywordMajor> of dead enemies by walking near them. Each <keywordMajor>Soul</keywordMajor> grants him <scaleArmor>@StatValuePerSoul@ Armor</scaleArmor> and <scaleAP>@StatValuePerSoul@ Ability Power</scaleAP>.",
-					"tooltipExtended": "{{Spell_ThreshPassiveSouls_Tooltip}}<br><br>Current <keywordMajor>Soul</keywordMajor> Bonuses: <statTracking>@CurrentSoulBonus@</statTracking> <scaleAP>Ability Power</scaleAP>, <statTracking>@CurrentSoulBonus@</statTracking> <scaleArmor>Armor</scaleArmor><br><br><rules>Champions and large minions always drop a <keywordMajor>Soul</keywordMajor>, while small minions and jungle monsters only sometimes drop one. Epic jungle monsters drop two <keywordMajor>Souls</keywordMajor>.</rules>",
-					"dataValues": {
-						"StatValuePerSoul": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"SoulsToGainOnPickUp": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"CurrentSoulBonus": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mBuffName": "{5fbfbf13}",
-									"mIconKey": "%i:threshScalingIcon%",
-									"mDataValue": "StatValuePerSoul",
-									"__type": "BuffCounterByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Thresh/Spells/ThreshPassiveSoulsAbility/ThreshPassiveSouls"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -591,6 +546,51 @@
 						]
 					},
 					"dataKey": "Characters/Thresh/Spells/ThreshRPentaAbility/ThreshRPenta"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Damnation",
+					"image": "assets/characters/thresh/hud/icons2d/thresh_passive.png",
+					"tooltip": "Thresh collects the <keywordMajor>Souls</keywordMajor> of dead enemies by walking near them. Each <keywordMajor>Soul</keywordMajor> grants him <scaleArmor>@StatValuePerSoul@ Armor</scaleArmor> and <scaleAP>@StatValuePerSoul@ Ability Power</scaleAP>.",
+					"tooltipExtended": "{{Spell_ThreshPassiveSouls_Tooltip}}<br><br>Current <keywordMajor>Soul</keywordMajor> Bonuses: <statTracking>@CurrentSoulBonus@</statTracking> <scaleAP>Ability Power</scaleAP>, <statTracking>@CurrentSoulBonus@</statTracking> <scaleArmor>Armor</scaleArmor><br><br><rules>Champions and large minions always drop a <keywordMajor>Soul</keywordMajor>, while small minions and jungle monsters only sometimes drop one. Epic jungle monsters drop two <keywordMajor>Souls</keywordMajor>.</rules>",
+					"dataValues": {
+						"StatValuePerSoul": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SoulsToGainOnPickUp": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"CurrentSoulBonus": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{5fbfbf13}",
+									"mIconKey": "%i:threshScalingIcon%",
+									"mDataValue": "StatValuePerSoul",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Thresh/Spells/ThreshPassiveSoulsAbility/ThreshPassiveSouls"
 				}
 			]
 		}

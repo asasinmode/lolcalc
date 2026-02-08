@@ -28,157 +28,6 @@
 		"attackspeedratio": 0.638
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Lightslinger",
-					"image": "assets/characters/lucian/hud/icons2d/lucian_passive.png",
-					"tooltip": "After using an Ability, Lucian's next Attack within @PassiveDuration@ seconds will fire two shots. The second shot deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the target, increased to <physicalDamage>@MinionDamage@</physicalDamage> against minions.<br><br><attention>Vigilance: </attention>When Lucian is directly healed or shielded by an ally, or when a nearby enemy Champion is <status>Immobilized</status>, his pistols become <keywordMajor>Overcharged</keywordMajor> with energy, causing his next @NumAuto@ basic attacks to deal an additional <magicDamage>@PassiveTotalDamage@ magic damage</magicDamage>.",
-					"tooltipExtended": "{{ Spell_LucianPassive_Tooltip }}<br><rules>Vigilance can store up to @MaxAutos@ empowered basic attacks.</rules>",
-					"dataValues": {
-						"PassiveDuration": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
-						],
-						"PassiveDamageBase": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"OnhitPassiveDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"NumAuto": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"MaxAutos": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"CCRange": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mLevel1Value": 0.5,
-										"mBreakpoints": [
-											{
-												"mLevel": 7,
-												"mAdditionalBonusAtThisLevel": 0.05
-											},
-											{
-												"mLevel": 13,
-												"mAdditionalBonusAtThisLevel": 0.05
-											},
-											{
-												"mLevel": 19,
-												"mAdditionalBonusAtThisLevel": 0.1
-											},
-											{
-												"mLevel": 25,
-												"mAdditionalBonusAtThisLevel": 0.1
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"CritDamage": {
-							"mMultiplier": {
-								"mSubparts": [
-									{
-										"mNumber": 1.75
-									},
-									{
-										"mStat": 9,
-										"mStatFormula": 2,
-										"mCoefficient": 1
-									}
-								]
-							},
-							"mModifiedGameCalculation": "TotalDamage"
-						},
-						"MinionDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"MinionCritDamage": {
-							"mMultiplier": {
-								"mSubparts": [
-									{
-										"mNumber": 1.75
-									},
-									{
-										"mStat": 9,
-										"mStatFormula": 2,
-										"mCoefficient": 1
-									}
-								]
-							},
-							"mModifiedGameCalculation": "MinionDamage"
-						},
-						"PassiveTotalDamage": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "PassiveDamageBase",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mCoefficient": 0.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Lucian/Spells/LucianPassiveAbility/LucianPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -662,6 +511,157 @@
 						}
 					},
 					"dataKey": "Characters/Lucian/Spells/LucianRAbility/LucianR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Lightslinger",
+					"image": "assets/characters/lucian/hud/icons2d/lucian_passive.png",
+					"tooltip": "After using an Ability, Lucian's next Attack within @PassiveDuration@ seconds will fire two shots. The second shot deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the target, increased to <physicalDamage>@MinionDamage@</physicalDamage> against minions.<br><br><attention>Vigilance: </attention>When Lucian is directly healed or shielded by an ally, or when a nearby enemy Champion is <status>Immobilized</status>, his pistols become <keywordMajor>Overcharged</keywordMajor> with energy, causing his next @NumAuto@ basic attacks to deal an additional <magicDamage>@PassiveTotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtended": "{{ Spell_LucianPassive_Tooltip }}<br><rules>Vigilance can store up to @MaxAutos@ empowered basic attacks.</rules>",
+					"dataValues": {
+						"PassiveDuration": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						],
+						"PassiveDamageBase": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"OnhitPassiveDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"NumAuto": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"MaxAutos": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"CCRange": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.5,
+										"mBreakpoints": [
+											{
+												"mLevel": 7,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 13,
+												"mAdditionalBonusAtThisLevel": 0.05
+											},
+											{
+												"mLevel": 19,
+												"mAdditionalBonusAtThisLevel": 0.1
+											},
+											{
+												"mLevel": 25,
+												"mAdditionalBonusAtThisLevel": 0.1
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"CritDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1.75
+									},
+									{
+										"mStat": 9,
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									}
+								]
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						},
+						"MinionDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MinionCritDamage": {
+							"mMultiplier": {
+								"mSubparts": [
+									{
+										"mNumber": 1.75
+									},
+									{
+										"mStat": 9,
+										"mStatFormula": 2,
+										"mCoefficient": 1
+									}
+								]
+							},
+							"mModifiedGameCalculation": "MinionDamage"
+						},
+						"PassiveTotalDamage": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Lucian/Spells/LucianPassiveAbility/LucianPassive"
 				}
 			]
 		}

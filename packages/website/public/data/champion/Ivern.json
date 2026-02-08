@@ -28,140 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Friend of the Forest",
-					"image": "assets/characters/ivern/hud/icons2d/ivernp.png",
-					"tooltip": "Ivern will not hurt non-epic monsters. Instead, Ivern can right click a monster to grow a <font color='#55FF00'>Grove</font> that costs <healing>@HealthTooltip@ Health</healing> and <scaleMana>@ManaTooltip@ Mana</scaleMana>.<br><br><font color='#55FF00'>Groves</font>:<li> Grow over @HarvestDuration@ second(s)<li> Once fully grown, Ivern can harvest them, freeing the camp and earning gold and experience<li> Ivern can also <spellName>Smite</spellName> the <font color='#55FF00'>Groves</font> to instantly grow and free the camp, earning gold and experience@SpellModifierDescriptionAppend@",
-					"tooltipExtended": "{{Spell_IvernP_Tooltip}}",
-					"dataValues": {
-						"LevelForBuffShare": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"PickupDuration": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"KrugExperience": [
-							58,
-							58,
-							58,
-							58,
-							58,
-							58,
-							58
-						],
-						"KrugGold": [
-							84,
-							84,
-							84,
-							84,
-							84,
-							84,
-							84
-						],
-						"ModeSpeedOverride": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"HarvestDuration": {
-							"mMultiplier": {
-								"mDataValue": "{04f9ad7d}"
-							},
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 40,
-									"mInitialBonusPerLevel": -2,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": -3
-										},
-										{
-											"mLevel": 12,
-											"mBonusPerLevelAtAndAfter": -4
-										},
-										{
-											"mLevel": 15,
-											"mBonusPerLevelAtAndAfter": -2
-										},
-										{
-											"mLevel": 16
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"{60aa666f}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 15,
-									"mInitialBonusPerLevel": -0.882,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"{c6433908}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 20,
-									"mInitialBonusPerLevel": -1.175,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"HealthTooltip": {
-							"mMultiplier": {
-								"mStat": 12,
-								"mStatFormula": 1,
-								"mCoefficient": 0.01
-							},
-							"mModifiedGameCalculation": "{60aa666f}"
-						},
-						"ManaTooltip": {
-							"mMultiplier": {
-								"mCoefficient": 0.01,
-								"mStatFormula": 1
-							},
-							"mModifiedGameCalculation": "{c6433908}"
-						}
-					},
-					"effectAmount": {
-						"0": [
-							120,
-							120,
-							120,
-							120,
-							120,
-							120,
-							120
-						]
-					},
-					"dataKey": "Characters/Ivern/Spells/IvernPAbility/IvernP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -668,6 +534,140 @@
 						}
 					},
 					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Friend of the Forest",
+					"image": "assets/characters/ivern/hud/icons2d/ivernp.png",
+					"tooltip": "Ivern will not hurt non-epic monsters. Instead, Ivern can right click a monster to grow a <font color='#55FF00'>Grove</font> that costs <healing>@HealthTooltip@ Health</healing> and <scaleMana>@ManaTooltip@ Mana</scaleMana>.<br><br><font color='#55FF00'>Groves</font>:<li> Grow over @HarvestDuration@ second(s)<li> Once fully grown, Ivern can harvest them, freeing the camp and earning gold and experience<li> Ivern can also <spellName>Smite</spellName> the <font color='#55FF00'>Groves</font> to instantly grow and free the camp, earning gold and experience@SpellModifierDescriptionAppend@",
+					"tooltipExtended": "{{Spell_IvernP_Tooltip}}",
+					"dataValues": {
+						"LevelForBuffShare": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"PickupDuration": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"KrugExperience": [
+							58,
+							58,
+							58,
+							58,
+							58,
+							58,
+							58
+						],
+						"KrugGold": [
+							84,
+							84,
+							84,
+							84,
+							84,
+							84,
+							84
+						],
+						"ModeSpeedOverride": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"HarvestDuration": {
+							"mMultiplier": {
+								"mDataValue": "{04f9ad7d}"
+							},
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 40,
+									"mInitialBonusPerLevel": -2,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": -3
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": -4
+										},
+										{
+											"mLevel": 15,
+											"mBonusPerLevelAtAndAfter": -2
+										},
+										{
+											"mLevel": 16
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"{60aa666f}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 15,
+									"mInitialBonusPerLevel": -0.882,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"{c6433908}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": -1.175,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"HealthTooltip": {
+							"mMultiplier": {
+								"mStat": 12,
+								"mStatFormula": 1,
+								"mCoefficient": 0.01
+							},
+							"mModifiedGameCalculation": "{60aa666f}"
+						},
+						"ManaTooltip": {
+							"mMultiplier": {
+								"mCoefficient": 0.01,
+								"mStatFormula": 1
+							},
+							"mModifiedGameCalculation": "{c6433908}"
+						}
+					},
+					"effectAmount": {
+						"0": [
+							120,
+							120,
+							120,
+							120,
+							120,
+							120,
+							120
+						]
+					},
+					"dataKey": "Characters/Ivern/Spells/IvernPAbility/IvernP"
 				}
 			]
 		}

@@ -28,101 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Sovereign's Domination",
-					"image": "assets/characters/viego/hud/icons2d/viego_passive.png",
-					"tooltip": "The souls of enemy champions that die within @TakedownWindow@ seconds of being hit by Viego become wraiths. Viego can Attack wraiths to <keywordMajor>Possess</keywordMajor> them, restoring <healing>@PercentHealthHeal@% of enemy's max Health</healing> and gaining access to their non-ultimate Abilities, Attacks, and items for @TransformDuration@ seconds. During this time he replaces their Ultimate with a free cast of his own and gains <speed>@MoveSpeedPercent*100@% Move Speed</speed> towards enemy champions.",
-					"tooltipExtended": "{{Spell_ViegoPassive_Tooltip}}<br><br><rules>Viego keeps his summoner spells, runes, and trinkets during <keywordMajor>Possession</keywordMajor> and cannot use active or consumable items. Passive item Cooldowns are shared across <keywordMajor>Possessions</keywordMajor>.</rules>",
-					"dataValues": {
-						"MoveSpeedPercent": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"TransformDuration": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"BaseHealPercent": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"TakedownWindow": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"InvulnTimeWhileAttackingSoul": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"SoulDuration": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						]
-					},
-					"spellCalculations": {
-						"PercentHealthHeal": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "BaseHealPercent",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mCoefficient": 0.025,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mCoefficient": 0.02,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mCoefficient": 5,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "Characters/Viego/Spells/ViegoPassiveAbility/ViegoPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -738,6 +643,101 @@
 						}
 					},
 					"dataKey": "Characters/Viego/Spells/ViegoRAbility/ViegoR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Sovereign's Domination",
+					"image": "assets/characters/viego/hud/icons2d/viego_passive.png",
+					"tooltip": "The souls of enemy champions that die within @TakedownWindow@ seconds of being hit by Viego become wraiths. Viego can Attack wraiths to <keywordMajor>Possess</keywordMajor> them, restoring <healing>@PercentHealthHeal@% of enemy's max Health</healing> and gaining access to their non-ultimate Abilities, Attacks, and items for @TransformDuration@ seconds. During this time he replaces their Ultimate with a free cast of his own and gains <speed>@MoveSpeedPercent*100@% Move Speed</speed> towards enemy champions.",
+					"tooltipExtended": "{{Spell_ViegoPassive_Tooltip}}<br><br><rules>Viego keeps his summoner spells, runes, and trinkets during <keywordMajor>Possession</keywordMajor> and cannot use active or consumable items. Passive item Cooldowns are shared across <keywordMajor>Possessions</keywordMajor>.</rules>",
+					"dataValues": {
+						"MoveSpeedPercent": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"TransformDuration": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"BaseHealPercent": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"TakedownWindow": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"InvulnTimeWhileAttackingSoul": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"SoulDuration": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						]
+					},
+					"spellCalculations": {
+						"PercentHealthHeal": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "BaseHealPercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.025,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.02,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mCoefficient": 5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Viego/Spells/ViegoPassiveAbility/ViegoPassive"
 				}
 			]
 		}

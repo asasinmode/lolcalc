@@ -28,99 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Fired Up!",
-					"image": "assets/characters/milio/hud/icons2d/milio_p.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "When Milio's Abilities touch ally champions, their next Attack or Ability deals <physicalDamage>@ADBurstRatio@ ally Attack Damage</physicalDamage> as additional <magicDamage>magic damage</magicDamage>, plus <magicDamage>@BurnDamage@ magic damage</magicDamage> over @BurnDuration@ seconds.",
-					"tooltipExtended": "{{Spell_MilioPassive_Tooltip}}<br><br><rules>Burn damage does not stack from multiple hits.</rules>",
-					"dataValues": {
-						"MaxMonsterDamage": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"BurnDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"BaseDamageStart": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"BaseDamageEnd": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						]
-					},
-					"spellCalculations": {
-						"ADBurstRatio": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.07,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.04
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.04
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"BurnDamage": {
-							"mFormulaParts": [
-								{
-									"{0589a59c}": "{fd8eae9b}",
-									"{0b65bc23}": "{6470985e}",
-									"__type": "{ee18a47b}"
-								},
-								{
-									"mCoefficient": 0.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "{3e27cfac}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -544,6 +451,99 @@
 						}
 					},
 					"dataKey": "Characters/Milio/Spells/MilioRAbility/MilioR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Fired Up!",
+					"image": "assets/characters/milio/hud/icons2d/milio_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "When Milio's Abilities touch ally champions, their next Attack or Ability deals <physicalDamage>@ADBurstRatio@ ally Attack Damage</physicalDamage> as additional <magicDamage>magic damage</magicDamage>, plus <magicDamage>@BurnDamage@ magic damage</magicDamage> over @BurnDuration@ seconds.",
+					"tooltipExtended": "{{Spell_MilioPassive_Tooltip}}<br><br><rules>Burn damage does not stack from multiple hits.</rules>",
+					"dataValues": {
+						"MaxMonsterDamage": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"BurnDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"BaseDamageStart": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"BaseDamageEnd": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"spellCalculations": {
+						"ADBurstRatio": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.07,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.04
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.04
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"BurnDamage": {
+							"mFormulaParts": [
+								{
+									"{0589a59c}": "{fd8eae9b}",
+									"{0b65bc23}": "{6470985e}",
+									"__type": "{ee18a47b}"
+								},
+								{
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "{3e27cfac}"
 				}
 			]
 		}

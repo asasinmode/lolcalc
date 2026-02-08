@@ -28,120 +28,6 @@
 		"attackspeedratio": 0.694
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Moonsilver Blade",
-					"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png",
-					"cooldownTime": [
-						32,
-						28,
-						24,
-						20,
-						16,
-						12,
-						12
-					],
-					"tooltip": "Diana gains <attackSpeed>@BonusAS@ Attack Speed</attackSpeed>, increased to <attackSpeed>@EmpoweredAS@</attackSpeed> for @BuffDuration@ seconds after using an Ability.<br><br>Every third Attack cleaves nearby enemies for an additional <magicDamage>@CleaveDamage@ magic damage</magicDamage>. ",
-					"tooltipExtended": "{{Spell_DianaPassive_Tooltip}}<br><br><rules>Moonsilver Blade deals @Monstermod*100@% damage to monsters.</rules>",
-					"dataValues": {
-						"APRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"BuffDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"AttackSpeedValue": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"AttackCount": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"MonsterMod": [
-							2.3,
-							2.3,
-							2.3,
-							2.3,
-							2.3,
-							2.3,
-							2.3
-						]
-					},
-					"spellCalculations": {
-						"CleaveDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 20,
-									"mInitialBonusPerLevel": 5,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 10
-										},
-										{
-											"mLevel": 12,
-											"mBonusPerLevelAtAndAfter": 15
-										},
-										{
-											"mLevel": 17,
-											"mBonusPerLevelAtAndAfter": 25
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"BonusAS": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.15,
-									"mEndValue": 0.35,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"EmpoweredAS": {
-							"mMultiplier": {
-								"mNumber": 3
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "BonusAS"
-						}
-					},
-					"dataKey": "Characters/Diana/Spells/DianaPassiveAbility/DianaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -654,6 +540,120 @@
 						]
 					},
 					"dataKey": "Characters/Diana/Spells/DianaRAbility/DianaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Moonsilver Blade",
+					"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png",
+					"cooldownTime": [
+						32,
+						28,
+						24,
+						20,
+						16,
+						12,
+						12
+					],
+					"tooltip": "Diana gains <attackSpeed>@BonusAS@ Attack Speed</attackSpeed>, increased to <attackSpeed>@EmpoweredAS@</attackSpeed> for @BuffDuration@ seconds after using an Ability.<br><br>Every third Attack cleaves nearby enemies for an additional <magicDamage>@CleaveDamage@ magic damage</magicDamage>. ",
+					"tooltipExtended": "{{Spell_DianaPassive_Tooltip}}<br><br><rules>Moonsilver Blade deals @Monstermod*100@% damage to monsters.</rules>",
+					"dataValues": {
+						"APRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"BuffDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"AttackSpeedValue": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"AttackCount": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"MonsterMod": [
+							2.3,
+							2.3,
+							2.3,
+							2.3,
+							2.3,
+							2.3,
+							2.3
+						]
+					},
+					"spellCalculations": {
+						"CleaveDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": 5,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 10
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 15
+										},
+										{
+											"mLevel": 17,
+											"mBonusPerLevelAtAndAfter": 25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BonusAS": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.15,
+									"mEndValue": 0.35,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"EmpoweredAS": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "BonusAS"
+						}
+					},
+					"dataKey": "Characters/Diana/Spells/DianaPassiveAbility/DianaPassive"
 				}
 			]
 		}

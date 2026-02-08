@@ -28,190 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Cultivation of War",
-					"image": "assets/characters/zaahen/hud/icons2d/zaahenp.zaahen.png",
-					"cooldownTime": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"tooltip": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.<br>",
-					"tooltipExtended": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.<br><br><rules>{{Reminder_Stasis}}</rules>",
-					"dataValues": {
-						"PercentBonusAD": [
-							0.025,
-							0.025,
-							0.025,
-							0.025,
-							0.025,
-							0.025,
-							0.025
-						],
-						"FallOffDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"RevivePercent": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"MaxStacks": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						],
-						"ReviveDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"NumberOfTicks": [
-							32,
-							32,
-							32,
-							32,
-							32,
-							32,
-							32
-						],
-						"MaxStacksMultiplier": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PBonusADMin": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
-						],
-						"PBonusADMax": [
-							0.028,
-							0.028,
-							0.028,
-							0.028,
-							0.028,
-							0.028,
-							0.028
-						],
-						"ReviveLevel1Value": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"ReviveAdditionalBonusAtThisLevel": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						]
-					},
-					"spellCalculations": {
-						"ReviveCooldownCalc": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 300,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -60
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -60
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -60
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"RevivePercentCalc": {
-							"mFormulaParts": [
-								{
-									"{91d404a5}": "{97d06e0a}",
-									"{bbd778a2}": "{7f4480d4}",
-									"{9823b29a}": [
-										{
-											"level": 6,
-											"{ae9b464d}": "{a51b34b5}",
-											"{b0d8b2ac}": "{c41636b0}"
-										},
-										{
-											"level": 11,
-											"{ae9b464d}": "{a51b34b5}",
-											"{b0d8b2ac}": "{c41636b0}"
-										},
-										{
-											"level": 16,
-											"{ae9b464d}": "{a51b34b5}",
-											"{b0d8b2ac}": "{c41636b0}"
-										}
-									],
-									"__type": "{4ce08984}"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"PercentBonusADCalc": {
-							"mFormulaParts": [
-								{
-									"{0589a59c}": "{ab7680c1}",
-									"{0b65bc23}": "{9d89f26f}",
-									"__type": "{ee18a47b}"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "{4c6e6c43}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -724,6 +540,190 @@
 						}
 					},
 					"dataKey": "Characters/Zaahen/Spells/ZaahenRAbility/ZaahenR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Cultivation of War",
+					"image": "assets/characters/zaahen/hud/icons2d/zaahenp.zaahen.png",
+					"cooldownTime": [
+						100,
+						100,
+						100,
+						100,
+						100,
+						100,
+						100
+					],
+					"tooltip": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.<br>",
+					"tooltipExtended": "Zaahen gains a stack of <keyword>Determination</keyword> when he hits an enemy champion with an Attack or Ability (max @MaxStacks@). He gains <physicalDamage>@PercentBonusADCalc@ increased Attack Damage</physicalDamage> per stack.<br><br>When filled with <keyword>Determination</keyword>, Zaahen doubles the granted <physicalDamage>Attack Damage</physicalDamage>, and if he would die, he instead enters Stasis for @ReviveDuration@ seconds then revives with <healing>@RevivePercentCalc@ of his max Health</healing>.<br><br>Zaahen's revive has a @ReviveCooldownCalc@ second Cooldown.<br><br><rules>{{Reminder_Stasis}}</rules>",
+					"dataValues": {
+						"PercentBonusAD": [
+							0.025,
+							0.025,
+							0.025,
+							0.025,
+							0.025,
+							0.025,
+							0.025
+						],
+						"FallOffDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"RevivePercent": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"MaxStacks": [
+							12,
+							12,
+							12,
+							12,
+							12,
+							12,
+							12
+						],
+						"ReviveDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"NumberOfTicks": [
+							32,
+							32,
+							32,
+							32,
+							32,
+							32,
+							32
+						],
+						"MaxStacksMultiplier": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PBonusADMin": [
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015
+						],
+						"PBonusADMax": [
+							0.028,
+							0.028,
+							0.028,
+							0.028,
+							0.028,
+							0.028,
+							0.028
+						],
+						"ReviveLevel1Value": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"ReviveAdditionalBonusAtThisLevel": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						]
+					},
+					"spellCalculations": {
+						"ReviveCooldownCalc": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 300,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -60
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -60
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -60
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"RevivePercentCalc": {
+							"mFormulaParts": [
+								{
+									"{91d404a5}": "{97d06e0a}",
+									"{bbd778a2}": "{7f4480d4}",
+									"{9823b29a}": [
+										{
+											"level": 6,
+											"{ae9b464d}": "{a51b34b5}",
+											"{b0d8b2ac}": "{c41636b0}"
+										},
+										{
+											"level": 11,
+											"{ae9b464d}": "{a51b34b5}",
+											"{b0d8b2ac}": "{c41636b0}"
+										},
+										{
+											"level": 16,
+											"{ae9b464d}": "{a51b34b5}",
+											"{b0d8b2ac}": "{c41636b0}"
+										}
+									],
+									"__type": "{4ce08984}"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"PercentBonusADCalc": {
+							"mFormulaParts": [
+								{
+									"{0589a59c}": "{ab7680c1}",
+									"{0b65bc23}": "{9d89f26f}",
+									"__type": "{ee18a47b}"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "{4c6e6c43}"
 				}
 			]
 		}

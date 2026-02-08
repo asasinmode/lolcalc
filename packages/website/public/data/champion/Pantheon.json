@@ -28,82 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Mortal Will",
-					"image": "assets/characters/pantheon/hud/icons2d/pantheon_passive.png",
-					"tooltip": "After using @ActionsToEmpower@ Abilities or Attacks, Pantheon empowers his next basic Ability.",
-					"dataValues": {
-						"ActionsToEmpower": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"PhalanxDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"QDamageAmp": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"QDamageAmpMelee": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"OutOfCombatTimer": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"QExtraAttacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CritThreshold": [
-							-1,
-							-1,
-							-1,
-							-1,
-							-1,
-							-1,
-							-1
-						]
-					},
-					"dataKey": "Characters/Pantheon/Spells/PantheonPassiveAbility/PantheonPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -814,6 +738,82 @@
 						}
 					},
 					"dataKey": "Characters/Pantheon/Spells/PantheonRAbility/PantheonR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Mortal Will",
+					"image": "assets/characters/pantheon/hud/icons2d/pantheon_passive.png",
+					"tooltip": "After using @ActionsToEmpower@ Abilities or Attacks, Pantheon empowers his next basic Ability.",
+					"dataValues": {
+						"ActionsToEmpower": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"PhalanxDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"QDamageAmp": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"QDamageAmpMelee": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"OutOfCombatTimer": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"QExtraAttacks": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CritThreshold": [
+							-1,
+							-1,
+							-1,
+							-1,
+							-1,
+							-1,
+							-1
+						]
+					},
+					"dataKey": "Characters/Pantheon/Spells/PantheonPassiveAbility/PantheonPassive"
 				}
 			]
 		}

@@ -28,180 +28,6 @@
 		"attackspeedratio": 0.667
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Divine Ascent",
-					"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>",
-					"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
-					"dataValues": {
-						"LevelForPassiveRank0": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"LevelForPassiveRank1": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"LevelForPassiveRank2": [
-							11,
-							11,
-							11,
-							11,
-							11,
-							11,
-							11
-						],
-						"LevelForPassiveRank3": [
-							16,
-							16,
-							16,
-							16,
-							16,
-							16,
-							16
-						],
-						"UpgradedAttackRange": [
-							525,
-							525,
-							525,
-							525,
-							525,
-							525,
-							525
-						],
-						"FinalAttackRange": [
-							625,
-							625,
-							625,
-							625,
-							625,
-							625,
-							625
-						],
-						"MSTowardsEnemy": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"MSTowardsEnemyRadius": [
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000
-						],
-						"EnrageMaxStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"EnrageDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"EnrageASPerStack": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"PassiveWaveAPRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"PassiveWaveBonusADRatio": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
-					},
-					"spellCalculations": {
-						"EnrageTotalASPerStack": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "EnrageASPerStack",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							]
-						},
-						"PassiveWaveDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 20,
-									"mBreakpoints": [
-										{
-											"mLevel": 12,
-											"mBonusPerLevelAtAndAfter": 3
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "PassiveWaveAPRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "PassiveWaveBonusADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Kayle/Spells/KaylePassiveAbility/KaylePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -666,6 +492,180 @@
 						}
 					},
 					"dataKey": "Characters/Kayle/Spells/KayleRAbility/KayleR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Divine Ascent",
+					"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>",
+					"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
+					"dataValues": {
+						"LevelForPassiveRank0": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"LevelForPassiveRank1": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"LevelForPassiveRank2": [
+							11,
+							11,
+							11,
+							11,
+							11,
+							11,
+							11
+						],
+						"LevelForPassiveRank3": [
+							16,
+							16,
+							16,
+							16,
+							16,
+							16,
+							16
+						],
+						"UpgradedAttackRange": [
+							525,
+							525,
+							525,
+							525,
+							525,
+							525,
+							525
+						],
+						"FinalAttackRange": [
+							625,
+							625,
+							625,
+							625,
+							625,
+							625,
+							625
+						],
+						"MSTowardsEnemy": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"MSTowardsEnemyRadius": [
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000
+						],
+						"EnrageMaxStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"EnrageDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"EnrageASPerStack": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"PassiveWaveAPRatio": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"PassiveWaveBonusADRatio": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"spellCalculations": {
+						"EnrageTotalASPerStack": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "EnrageASPerStack",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PassiveWaveDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mBreakpoints": [
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 3
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "PassiveWaveAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "PassiveWaveBonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Kayle/Spells/KaylePassiveAbility/KaylePassive"
 				}
 			]
 		}

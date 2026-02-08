@@ -28,55 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Perseverance",
-					"image": "assets/characters/garen/hud/icons2d/garen_passive.png",
-					"tooltip": "Garen regenerates <healing>@RegenCalc@ max Health</healing> every 5 seconds if he has not been damaged or hit with enemy Abilities in the last @DamageTimer@ seconds.",
-					"tooltipExtended": "{{Spell_GarenPassive_Tooltip}}<br><br><rules>Minion and non-epic jungle monster damage does not stop the regeneration.</rules>",
-					"dataValues": {
-						"DamageTimer": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						]
-					},
-					"spellCalculations": {
-						"RegenCalc": {
-							"mMultiplier": {
-								"mNumber": 0.01
-							},
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1.5,
-									"mInitialBonusPerLevel": 0.2,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 0.8
-										},
-										{
-											"mLevel": 14,
-											"mBonusPerLevelAtAndAfter": 0.4
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "Characters/Garen/Spells/GarenPassiveAbility/GarenPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -531,6 +482,55 @@
 						]
 					},
 					"dataKey": "Characters/Garen/Spells/GarenRAbility/GarenR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Perseverance",
+					"image": "assets/characters/garen/hud/icons2d/garen_passive.png",
+					"tooltip": "Garen regenerates <healing>@RegenCalc@ max Health</healing> every 5 seconds if he has not been damaged or hit with enemy Abilities in the last @DamageTimer@ seconds.",
+					"tooltipExtended": "{{Spell_GarenPassive_Tooltip}}<br><br><rules>Minion and non-epic jungle monster damage does not stop the regeneration.</rules>",
+					"dataValues": {
+						"DamageTimer": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						]
+					},
+					"spellCalculations": {
+						"RegenCalc": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1.5,
+									"mInitialBonusPerLevel": 0.2,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 0.8
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 0.4
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Garen/Spells/GarenPassiveAbility/GarenPassive"
 				}
 			]
 		}

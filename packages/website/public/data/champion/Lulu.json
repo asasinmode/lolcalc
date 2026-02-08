@@ -28,49 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Pix, Faerie Companion",
-					"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
-					"tooltip": "Lulu is assisted by Pix the faerie. When Lulu Attacks, Pix fires 3 bolts at her target, dealing <magicDamage>@CombinedDamage@ magic damage</magicDamage> to the first enemy hit.",
-					"dataValues": {
-						"NumberOfBolts": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 5,
-									"mEndValue": 39,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"CombinedDamage": {
-							"mMultiplier": {
-								"mDataValue": "NumberOfBolts"
-							},
-							"mModifiedGameCalculation": "TotalDamage"
-						}
-					},
-					"dataKey": "Characters/Lulu/Spells/LuluPassiveAbility/LuluPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -536,6 +493,49 @@
 						}
 					},
 					"dataKey": "Characters/Lulu/Spells/LuluRAbility/LuluR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Pix, Faerie Companion",
+					"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
+					"tooltip": "Lulu is assisted by Pix the faerie. When Lulu Attacks, Pix fires 3 bolts at her target, dealing <magicDamage>@CombinedDamage@ magic damage</magicDamage> to the first enemy hit.",
+					"dataValues": {
+						"NumberOfBolts": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 39,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CombinedDamage": {
+							"mMultiplier": {
+								"mDataValue": "NumberOfBolts"
+							},
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/Lulu/Spells/LuluPassiveAbility/LuluPassive"
 				}
 			]
 		}

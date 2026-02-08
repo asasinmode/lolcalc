@@ -28,46 +28,6 @@
 		"attackspeedratio": 0.638
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Cursed Touch",
-					"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Amumu's Attacks <keywordMajor>Curse</keywordMajor> his enemies for @DebuffDuration@ seconds, causing them to take an additional <trueDamage>@DamageAmp*100@% true damage</trueDamage> from all magic damage they take.",
-					"dataValues": {
-						"DebuffDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"DamageAmp": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
-					},
-					"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -410,6 +370,46 @@
 						}
 					},
 					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Cursed Touch",
+					"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Amumu's Attacks <keywordMajor>Curse</keywordMajor> his enemies for @DebuffDuration@ seconds, causing them to take an additional <trueDamage>@DamageAmp*100@% true damage</trueDamage> from all magic damage they take.",
+					"dataValues": {
+						"DebuffDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"DamageAmp": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuP"
 				}
 			]
 		}

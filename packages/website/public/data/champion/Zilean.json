@@ -28,91 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Time In A Bottle",
-					"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png",
-					"tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}",
-					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
-					"dataValues": {
-						"PassiveCooldown": [
-							120,
-							120,
-							120,
-							120,
-							120,
-							120,
-							120
-						],
-						"GamemodeInteger": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"{e359ec0d}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.8,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.6
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.6
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.4
-										},
-										{
-											"mLevel": 21,
-											"mAdditionalBonusAtThisLevel": 0.6
-										},
-										{
-											"mLevel": 26,
-											"mAdditionalBonusAtThisLevel": 0.6
-										},
-										{
-											"mLevel": 31,
-											"mAdditionalBonusAtThisLevel": 0.6
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"TotalXP": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mBuffName": "{79ba1a32}",
-									"mCoefficient": 1,
-									"__type": "BuffCounterByCoefficientCalculationPart"
-								}
-							]
-						},
-						"XPPer5": {
-							"mMultiplier": {
-								"mNumber": 2.5
-							},
-							"mModifiedGameCalculation": "{e359ec0d}"
-						}
-					},
-					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/HeightenedLearning"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -424,6 +339,91 @@
 						}
 					},
 					"dataKey": "Characters/Zilean/Spells/ChronoShiftAbility/ChronoShift"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Time In A Bottle",
+					"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png",
+					"tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}",
+					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
+					"dataValues": {
+						"PassiveCooldown": [
+							120,
+							120,
+							120,
+							120,
+							120,
+							120,
+							120
+						],
+						"GamemodeInteger": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"{e359ec0d}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.8,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.4
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 26,
+											"mAdditionalBonusAtThisLevel": 0.6
+										},
+										{
+											"mLevel": 31,
+											"mAdditionalBonusAtThisLevel": 0.6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TotalXP": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{79ba1a32}",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						},
+						"XPPer5": {
+							"mMultiplier": {
+								"mNumber": 2.5
+							},
+							"mModifiedGameCalculation": "{e359ec0d}"
+						}
+					},
+					"dataKey": "Characters/Zilean/Spells/HeightenedLearningAbility/HeightenedLearning"
 				}
 			]
 		}

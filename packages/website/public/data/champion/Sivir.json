@@ -28,65 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Fleet of Foot",
-					"image": "assets/characters/sivir/hud/icons2d/sivir_passive.png",
-					"tooltip": "Sivir's Attacks and Abilities grant her a burst of <speed>@FlatMS@ Decaying Move Speed</speed> for @HasteDuration@ seconds when they damage enemy champions.<br>",
-					"dataValues": {
-						"HasteDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"spellCalculations": {
-						"FlatMS": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 55,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 5
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 5
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 5
-										},
-										{
-											"mLevel": 18,
-											"mAdditionalBonusAtThisLevel": 5
-										},
-										{
-											"mLevel": 24,
-											"mAdditionalBonusAtThisLevel": 5
-										},
-										{
-											"mLevel": 30,
-											"mAdditionalBonusAtThisLevel": 5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Sivir/Spells/SivirPassiveAbility/SivirPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -576,6 +517,65 @@
 						}
 					},
 					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Fleet of Foot",
+					"image": "assets/characters/sivir/hud/icons2d/sivir_passive.png",
+					"tooltip": "Sivir's Attacks and Abilities grant her a burst of <speed>@FlatMS@ Decaying Move Speed</speed> for @HasteDuration@ seconds when they damage enemy champions.<br>",
+					"dataValues": {
+						"HasteDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"FlatMS": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 55,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 5
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 5
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 5
+										},
+										{
+											"mLevel": 18,
+											"mAdditionalBonusAtThisLevel": 5
+										},
+										{
+											"mLevel": 24,
+											"mAdditionalBonusAtThisLevel": 5
+										},
+										{
+											"mLevel": 30,
+											"mAdditionalBonusAtThisLevel": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Sivir/Spells/SivirPassiveAbility/SivirPassive"
 				}
 			]
 		}

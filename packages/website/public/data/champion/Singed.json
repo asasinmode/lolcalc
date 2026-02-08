@@ -28,55 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Noxious Slipstream",
-					"image": "assets/characters/singed/hud/icons2d/singed_passive.png",
-					"tooltip": "Singed drafts off of nearby allied or enemy champions, gaining <speed>@MSPercent*100@% Move Speed</speed> for @MSDuration@ seconds. This effect has an @PerTargetCD@ second Cooldown per champion.",
-					"dataValues": {
-						"MSPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MSDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PerTargetCD": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"TriggerArea": [
-							225,
-							225,
-							225,
-							225,
-							225,
-							225,
-							225
-						]
-					},
-					"dataKey": "Characters/Singed/Spells/SingedPAbility/SingedP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -410,6 +361,55 @@
 						]
 					},
 					"dataKey": "Characters/Singed/Spells/InsanityPotionAbility/InsanityPotion"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Noxious Slipstream",
+					"image": "assets/characters/singed/hud/icons2d/singed_passive.png",
+					"tooltip": "Singed drafts off of nearby allied or enemy champions, gaining <speed>@MSPercent*100@% Move Speed</speed> for @MSDuration@ seconds. This effect has an @PerTargetCD@ second Cooldown per champion.",
+					"dataValues": {
+						"MSPercent": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MSDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PerTargetCD": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"TriggerArea": [
+							225,
+							225,
+							225,
+							225,
+							225,
+							225,
+							225
+						]
+					},
+					"dataKey": "Characters/Singed/Spells/SingedPAbility/SingedP"
 				}
 			]
 		}

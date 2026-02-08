@@ -28,68 +28,6 @@
 		"attackspeedratio": 0.635
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Fey Feathers",
-					"image": "assets/characters/rakan/hud/icons2d/rakan_p.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Every @ShieldCooldown@ seconds, Rakan gains <shield>@TotalShield@ Shield</shield>. Rakan's Attacks and Abilities against enemy champions reduce this Cooldown by @HitCooldown@ second.<br><br><keywordMajor>Lover's Leap</keywordMajor> - Xayah and Rakan can recall together.",
-					"dataValues": {
-						"HitCooldown": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"TotalShield": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 30,
-									"mEndValue": 225,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.95,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"ShieldCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 40,
-									"mInitialBonusPerLevel": -1.5,
-									"mBreakpoints": [
-										{
-											"mLevel": 19,
-											"mBonusPerLevelAtAndAfter": -0.875
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "Characters/Rakan/Spells/RakanPassiveAbility/RakanPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -533,6 +471,68 @@
 						]
 					},
 					"dataKey": "Characters/Rakan/Spells/RakanRAbility/RakanR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Fey Feathers",
+					"image": "assets/characters/rakan/hud/icons2d/rakan_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Every @ShieldCooldown@ seconds, Rakan gains <shield>@TotalShield@ Shield</shield>. Rakan's Attacks and Abilities against enemy champions reduce this Cooldown by @HitCooldown@ second.<br><br><keywordMajor>Lover's Leap</keywordMajor> - Xayah and Rakan can recall together.",
+					"dataValues": {
+						"HitCooldown": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"TotalShield": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 30,
+									"mEndValue": 225,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.95,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ShieldCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 40,
+									"mInitialBonusPerLevel": -1.5,
+									"mBreakpoints": [
+										{
+											"mLevel": 19,
+											"mBonusPerLevelAtAndAfter": -0.875
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Rakan/Spells/RakanPassiveAbility/RakanPassive"
 				}
 			]
 		}

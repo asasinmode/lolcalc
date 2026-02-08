@@ -28,175 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Darkness Rise",
-					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>.",
-					"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>",
-					"dataValues": {
-						"CombatTrackingDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"MaximumStacks": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PercentAPAddedToAutos": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"FuryForQHit": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"FuryForAutoHit": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"FuryForEHit": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"DoTRadius": [
-							375,
-							375,
-							375,
-							375,
-							375,
-							375,
-							375
-						],
-						"MovementSpeed": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						]
-					},
-					"spellCalculations": {
-						"AuraDamagePerStack": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mNumber": 5,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"PercentHealthForAura": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 1,
-									"mEndValue": 5,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"MaxAuraMonsterDamage": {
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mStartValue": 40,
-									"mEndValue": 200,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"BonusAPAuto": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mCoefficient": 0.4,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"PassiveMovementSpeed": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.03,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.03
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.03
-										},
-										{
-											"mLevel": 19,
-											"mAdditionalBonusAtThisLevel": 0.03
-										},
-										{
-											"mLevel": 24,
-											"mAdditionalBonusAtThisLevel": 0.03
-										},
-										{
-											"mLevel": 30,
-											"mAdditionalBonusAtThisLevel": 0.03
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserPassiveAbility/MordekaiserPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -609,6 +440,175 @@
 						]
 					},
 					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserRAbility/MordekaiserR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Darkness Rise",
+					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>.",
+					"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>",
+					"dataValues": {
+						"CombatTrackingDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"MaximumStacks": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PercentAPAddedToAutos": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"FuryForQHit": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"FuryForAutoHit": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"FuryForEHit": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"DoTRadius": [
+							375,
+							375,
+							375,
+							375,
+							375,
+							375,
+							375
+						],
+						"MovementSpeed": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						]
+					},
+					"spellCalculations": {
+						"AuraDamagePerStack": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mNumber": 5,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PercentHealthForAura": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 1,
+									"mEndValue": 5,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"MaxAuraMonsterDamage": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mStartValue": 40,
+									"mEndValue": 200,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"BonusAPAuto": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveMovementSpeed": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.03,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 24,
+											"mAdditionalBonusAtThisLevel": 0.03
+										},
+										{
+											"mLevel": 30,
+											"mAdditionalBonusAtThisLevel": 0.03
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Mordekaiser/Spells/MordekaiserPassiveAbility/MordekaiserPassive"
 				}
 			]
 		}

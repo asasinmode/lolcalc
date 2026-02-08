@@ -28,71 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Adaptive Defenses",
-					"image": "assets/characters/camille/hud/icons2d/camille_passive.png",
-					"tooltip": "Camille's Attacks on champions grant <shield>@ShieldAmount@ Shield</shield> against their damage type (<physicalDamage>Physical</physicalDamage> or <magicDamage>Magic</magicDamage>) for @ShieldDuration@ seconds. This effect has a @PassiveCooldown@ second Cooldown.",
-					"dataValues": {
-						"MaxHPCoefficient": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"ShieldDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"spellCalculations": {
-						"PassiveCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 18,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -4
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -4
-										},
-										{
-											"mLevel": 19,
-											"mAdditionalBonusAtThisLevel": -4
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"ShieldAmount": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mDataValue": "MaxHPCoefficient",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Camille/Spells/CamillePassiveAbility/CamillePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -604,6 +539,71 @@
 						]
 					},
 					"dataKey": "Characters/Camille/Spells/CamilleRAbility/CamilleR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Adaptive Defenses",
+					"image": "assets/characters/camille/hud/icons2d/camille_passive.png",
+					"tooltip": "Camille's Attacks on champions grant <shield>@ShieldAmount@ Shield</shield> against their damage type (<physicalDamage>Physical</physicalDamage> or <magicDamage>Magic</magicDamage>) for @ShieldDuration@ seconds. This effect has a @PassiveCooldown@ second Cooldown.",
+					"dataValues": {
+						"MaxHPCoefficient": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"ShieldDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"PassiveCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 18,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": -4
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ShieldAmount": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mDataValue": "MaxHPCoefficient",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Camille/Spells/CamillePassiveAbility/CamillePassive"
 				}
 			]
 		}

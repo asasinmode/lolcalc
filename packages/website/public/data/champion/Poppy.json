@@ -28,91 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Iron Ambassador",
-					"image": "assets/characters/poppy/hud/icons2d/poppy_passive.png",
-					"tooltip": "Every @ActualCooldown@ seconds, Poppy's next Attack throws her buckler, gaining @BonusRange@ range and dealing an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. The buckler ricochets off the target, landing nearby. Poppy can pick it up to gain <shield>@ShieldValue@ Shield</shield>, and enemies can step on it to destroy it.<br><br>The buckler automatically returns to Poppy if it kills the target.",
-					"dataValues": {
-						"BonusRange": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"ShieldDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"ShieldPickUpTime": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
-					},
-					"spellCalculations": {
-						"ActualCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 16,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -4
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -4
-										},
-										{
-											"mLevel": 19,
-											"mAdditionalBonusAtThisLevel": -2
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 20,
-									"mEndValue": 180,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"ShieldValue": {
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mSubpart": {
-										"mStartValue": 0.11,
-										"mEndValue": 0.2
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Poppy/Spells/PoppyPassiveAbility/PoppyPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -610,6 +525,91 @@
 						}
 					},
 					"dataKey": "Characters/Poppy/Spells/PoppyRAbility/PoppyR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Iron Ambassador",
+					"image": "assets/characters/poppy/hud/icons2d/poppy_passive.png",
+					"tooltip": "Every @ActualCooldown@ seconds, Poppy's next Attack throws her buckler, gaining @BonusRange@ range and dealing an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. The buckler ricochets off the target, landing nearby. Poppy can pick it up to gain <shield>@ShieldValue@ Shield</shield>, and enemies can step on it to destroy it.<br><br>The buckler automatically returns to Poppy if it kills the target.",
+					"dataValues": {
+						"BonusRange": [
+							350,
+							350,
+							350,
+							350,
+							350,
+							350,
+							350
+						],
+						"ShieldDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"ShieldPickUpTime": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"ActualCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 16,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -4
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": -2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 20,
+									"mEndValue": 180,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"ShieldValue": {
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mSubpart": {
+										"mStartValue": 0.11,
+										"mEndValue": 0.2
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Poppy/Spells/PoppyPassiveAbility/PoppyPassive"
 				}
 			]
 		}

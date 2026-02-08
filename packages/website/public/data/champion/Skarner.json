@@ -28,72 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Threads of Vibration",
-					"image": "assets/characters/skarner/hud/icons2d/skarner_passive.png",
-					"tooltip": "Skarner's Attacks, <spellName>Shattered Earth</spellName>, <spellName>Upheaval</spellName>, and <spellName>Impale</spellName>, apply <keywordMajor>Quaking</keywordMajor> for @Duration@s. At @StacksToTriggerPassive@ stacks of <keywordMajor>Quaking</keywordMajor>, enemies take <magicDamage>@PercentHealthDamage@ max Health magic damage</magicDamage> over its duration.",
-					"tooltipExtended": "{{Spell_Skarner_Passive_Tooltip}}<br><br><rules>Total damage to monsters is capped at @DamageMonsterCap@.</rules>",
-					"dataValues": {
-						"StacksToTriggerPassive": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"Duration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"TickFrequency": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
-					},
-					"spellCalculations": {
-						"PercentHealthDamage": {
-							"mMultiplier": {
-								"mNumber": 0.01
-							},
-							"mFormulaParts": [
-								{
-									"mStartValue": 5,
-									"mEndValue": 9,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						},
-						"DamageMonsterCap": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 100,
-									"mEndValue": 300,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Skarner/Spells/SkarnerPassiveAbility/SkarnerPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -750,6 +684,72 @@
 						}
 					},
 					"dataKey": "Characters/Skarner/Spells/SkarnerRAbility/SkarnerR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Threads of Vibration",
+					"image": "assets/characters/skarner/hud/icons2d/skarner_passive.png",
+					"tooltip": "Skarner's Attacks, <spellName>Shattered Earth</spellName>, <spellName>Upheaval</spellName>, and <spellName>Impale</spellName>, apply <keywordMajor>Quaking</keywordMajor> for @Duration@s. At @StacksToTriggerPassive@ stacks of <keywordMajor>Quaking</keywordMajor>, enemies take <magicDamage>@PercentHealthDamage@ max Health magic damage</magicDamage> over its duration.",
+					"tooltipExtended": "{{Spell_Skarner_Passive_Tooltip}}<br><br><rules>Total damage to monsters is capped at @DamageMonsterCap@.</rules>",
+					"dataValues": {
+						"StacksToTriggerPassive": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"Duration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"TickFrequency": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"spellCalculations": {
+						"PercentHealthDamage": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 9,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"DamageMonsterCap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 100,
+									"mEndValue": 300,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Skarner/Spells/SkarnerPassiveAbility/SkarnerPassive"
 				}
 			]
 		}

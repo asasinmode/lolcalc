@@ -28,53 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Signature of the Visionary",
-					"image": "assets/characters/hwei/hud/icons2d/hweipassive.png",
-					"tooltip": "Hwei's damaging Abilities against enemy champions mark them for @Duration@ seconds.<br><br>Hitting marked enemies with a second damaging Ability creates an explosion underneath them dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in range.",
-					"tooltipExtended": "{{Spell_HweiPassive_Tooltip}}<br><br><rules>Each Ability can only trigger this effect once per target.</rules>",
-					"dataValues": {
-						"InkTimeout": [
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000
-						],
-						"Duration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 35,
-									"mEndValue": 230,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.35,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "{1f86669b}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -616,6 +569,53 @@
 						}
 					},
 					"dataKey": "Characters/Hwei/Spells/HweiRAbility/HweiR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Signature of the Visionary",
+					"image": "assets/characters/hwei/hud/icons2d/hweipassive.png",
+					"tooltip": "Hwei's damaging Abilities against enemy champions mark them for @Duration@ seconds.<br><br>Hitting marked enemies with a second damaging Ability creates an explosion underneath them dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in range.",
+					"tooltipExtended": "{{Spell_HweiPassive_Tooltip}}<br><br><rules>Each Ability can only trigger this effect once per target.</rules>",
+					"dataValues": {
+						"InkTimeout": [
+							25000,
+							25000,
+							25000,
+							25000,
+							25000,
+							25000,
+							25000
+						],
+						"Duration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 35,
+									"mEndValue": 230,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.35,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "{1f86669b}"
 				}
 			]
 		}

@@ -28,78 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Way of the Hunter",
-					"image": "assets/characters/yone/hud/icons2d/yonepassive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "<spellPassive>Steel and Spirit:</spellPassive> Yone uses two blades, causing every second Attack to deal <magicDamage>@MagicDamageSplit*100@% magic damage</magicDamage>.<br><br><spellPassive>Intent:</spellPassive> Yone's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YoneCritToAD*.01@ Bonus AD</physicalDamage> for every 1% Critical Strike Chance above 100%.",
-					"tooltipExtended": "{{Spell_YonePassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
-					"dataValues": {
-						"MagicDamageSplit": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"YoneCritToAD": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"CritChanceMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CritDamageMod": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						]
-					},
-					"spellCalculations": {
-						"CurrentCritDamage": {
-							"mExpandedTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 9,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Yone/Spells/YonePassiveAbility/YonePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -800,6 +728,78 @@
 						}
 					},
 					"dataKey": "Characters/Yone/Spells/YoneRAbility/YoneR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Way of the Hunter",
+					"image": "assets/characters/yone/hud/icons2d/yonepassive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "<spellPassive>Steel and Spirit:</spellPassive> Yone uses two blades, causing every second Attack to deal <magicDamage>@MagicDamageSplit*100@% magic damage</magicDamage>.<br><br><spellPassive>Intent:</spellPassive> Yone's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YoneCritToAD*.01@ Bonus AD</physicalDamage> for every 1% Critical Strike Chance above 100%.",
+					"tooltipExtended": "{{Spell_YonePassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
+					"dataValues": {
+						"MagicDamageSplit": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"YoneCritToAD": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"CritChanceMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CritDamageMod": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						]
+					},
+					"spellCalculations": {
+						"CurrentCritDamage": {
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Yone/Spells/YonePassiveAbility/YonePassive"
 				}
 			]
 		}

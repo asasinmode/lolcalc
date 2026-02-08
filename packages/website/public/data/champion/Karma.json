@@ -28,45 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Gathering Fire",
-					"image": "assets/characters/karma/hud/icons2d/karma_passive.png",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						65
-					],
-					"cooldownTime": [
-						9,
-						8,
-						7,
-						6,
-						5,
-						4,
-						4
-					],
-					"tooltip": "Karma begins the game with a point in <spellName>{{Spell_KarmaMantra_Name}}</spellName>.<br><br>She reduces the Cooldown of <spellName>{{Spell_KarmaMantra_Name}}</spellName> by @SpellMantraRefund@ seconds when she damages a champion with an Ability.",
-					"dataValues": {},
-					"spellCalculations": {
-						"SpellMantraRefund": {
-							"mFormulaParts": [
-								{
-									"mNumber": 4,
-									"__type": "NumberCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Karma/Spells/KarmaPassiveAbility/KarmaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -546,6 +507,45 @@
 						}
 					},
 					"dataKey": "Characters/Karma/Spells/KarmaMantraAbility/KarmaMantra"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Gathering Fire",
+					"image": "assets/characters/karma/hud/icons2d/karma_passive.png",
+					"mana": [
+						40,
+						45,
+						50,
+						55,
+						60,
+						65
+					],
+					"cooldownTime": [
+						9,
+						8,
+						7,
+						6,
+						5,
+						4,
+						4
+					],
+					"tooltip": "Karma begins the game with a point in <spellName>{{Spell_KarmaMantra_Name}}</spellName>.<br><br>She reduces the Cooldown of <spellName>{{Spell_KarmaMantra_Name}}</spellName> by @SpellMantraRefund@ seconds when she damages a champion with an Ability.",
+					"dataValues": {},
+					"spellCalculations": {
+						"SpellMantraRefund": {
+							"mFormulaParts": [
+								{
+									"mNumber": 4,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Karma/Spells/KarmaPassiveAbility/KarmaPassive"
 				}
 			]
 		}

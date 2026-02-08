@@ -28,108 +28,6 @@
 		"attackspeedratio": 0.667
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Fury of the Xer'Sai",
-					"image": "assets/characters/reksai/hud/icons2d/reksai_passive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Rek'Sai generates <keywordMajor>@FuryFromAttacks@ Fury</keywordMajor> when she Attacks and <keywordMajor>@FuryFromAbilities@ Fury</keywordMajor> from Abilities.<br><br>While <keywordMajor>Burrowed</keywordMajor>, she consumes her <keywordMajor>Fury</keywordMajor> to restore up to <healing>@HealAmount@ Health</healing> over @HealDuration@ seconds, increasing with level.",
-					"tooltipExtended": "{{Spell_RekSaiPassive_Tooltip}}<br><br><rules>Rek'sai will not consume <keywordMajor>Fury</keywordMajor> while at full Health.<br>Rek'sai loses <keywordMajor>20 Fury</keywordMajor> per second after @PauseDuration@ seconds of not generating any.<br>Rek'Sai generates <keywordMajor>@FuryMinionMod*100@% Fury</keywordMajor> with Attacks against minions.</rules>",
-					"dataValues": {
-						"FuryFromAttacks": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"FuryFromAbilities": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"FuryMinionMod": [
-							0.16,
-							0.16,
-							0.16,
-							0.16,
-							0.16,
-							0.16,
-							0.16
-						],
-						"HealDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PauseDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"spellCalculations": {
-						"HealAmount": {
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mSubpart": {
-										"mStartValue": 0.09,
-										"mEndValue": 0.2
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						}
-					},
-					"effectAmount": {
-						"3": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"4": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						]
-					},
-					"dataKey": "Characters/RekSai/Spells/RekSaiPassiveAbility/RekSaiPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -882,6 +780,108 @@
 						}
 					},
 					"dataKey": "Characters/RekSai/Spells/RekSaiRAbility/RekSaiR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Fury of the Xer'Sai",
+					"image": "assets/characters/reksai/hud/icons2d/reksai_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Rek'Sai generates <keywordMajor>@FuryFromAttacks@ Fury</keywordMajor> when she Attacks and <keywordMajor>@FuryFromAbilities@ Fury</keywordMajor> from Abilities.<br><br>While <keywordMajor>Burrowed</keywordMajor>, she consumes her <keywordMajor>Fury</keywordMajor> to restore up to <healing>@HealAmount@ Health</healing> over @HealDuration@ seconds, increasing with level.",
+					"tooltipExtended": "{{Spell_RekSaiPassive_Tooltip}}<br><br><rules>Rek'sai will not consume <keywordMajor>Fury</keywordMajor> while at full Health.<br>Rek'sai loses <keywordMajor>20 Fury</keywordMajor> per second after @PauseDuration@ seconds of not generating any.<br>Rek'Sai generates <keywordMajor>@FuryMinionMod*100@% Fury</keywordMajor> with Attacks against minions.</rules>",
+					"dataValues": {
+						"FuryFromAttacks": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"FuryFromAbilities": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"FuryMinionMod": [
+							0.16,
+							0.16,
+							0.16,
+							0.16,
+							0.16,
+							0.16,
+							0.16
+						],
+						"HealDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PauseDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"HealAmount": {
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mSubpart": {
+										"mStartValue": 0.09,
+										"mEndValue": 0.2
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"3": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"4": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						]
+					},
+					"dataKey": "Characters/RekSai/Spells/RekSaiPassiveAbility/RekSaiPassive"
 				}
 			]
 		}

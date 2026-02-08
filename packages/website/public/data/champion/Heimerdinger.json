@@ -28,39 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Hextech Affinity",
-					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_passive.png",
-					"tooltip": "Heimerdinger gains <speed>@MovementSpeed.0*100@% Move Speed</speed> near his <keywordMajor>Turrets</keywordMajor> and ally towers.",
-					"dataValues": {
-						"MovementSpeed": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						]
-					},
-					"effectAmount": {
-						"0": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						]
-					},
-					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerPassiveAbility/HeimerdingerPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -299,20 +266,6 @@
 						]
 					},
 					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerQAbility/HeimerdingerQ"
-				},
-				{
-					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_q2.png",
-					"cooldownTime": [
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1
-					],
-					"tooltipVariantIndex": 0,
-					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerRAbility/HeimerdingerQUlt"
 				}
 			]
 		},
@@ -497,85 +450,6 @@
 						]
 					},
 					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerWAbility/HeimerdingerW"
-				},
-				{
-					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_w2.png",
-					"cooldownTime": [
-						11,
-						11,
-						10,
-						9,
-						8,
-						7,
-						7
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"1": [
-							6,
-							12,
-							18,
-							24,
-							30,
-							36,
-							42
-						],
-						"2": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"3": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"4": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"5": [
-							54,
-							108,
-							162,
-							216,
-							270,
-							324,
-							378
-						],
-						"6": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerRAbility/HeimerdingerWUlt"
 				}
 			]
 		},
@@ -656,58 +530,6 @@
 						}
 					},
 					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerEAbility/HeimerdingerE"
-				},
-				{
-					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_e2.png",
-					"cooldownTime": [
-						20,
-						18,
-						16,
-						14,
-						12,
-						10,
-						10
-					],
-					"tooltipVariantIndex": 0,
-					"effectAmount": {
-						"0": [
-							20,
-							60,
-							100,
-							140,
-							180,
-							220,
-							260
-						],
-						"1": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"2": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"3": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						]
-					},
-					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerRAbility/HeimerdingerEUlt"
 				}
 			]
 		},
@@ -1010,6 +832,39 @@
 						]
 					},
 					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerRAbility/HeimerdingerR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Hextech Affinity",
+					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_passive.png",
+					"tooltip": "Heimerdinger gains <speed>@MovementSpeed.0*100@% Move Speed</speed> near his <keywordMajor>Turrets</keywordMajor> and ally towers.",
+					"dataValues": {
+						"MovementSpeed": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						]
+					},
+					"effectAmount": {
+						"0": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						]
+					},
+					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerPassiveAbility/HeimerdingerPassive"
 				}
 			]
 		}

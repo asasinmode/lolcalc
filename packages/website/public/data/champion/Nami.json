@@ -28,61 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Surging Tides",
-					"image": "assets/characters/nami/hud/icons2d/namipassive.png",
-					"tooltip": "When Nami's Abilities hit allied champions, they gain <speed>@TotalMSBonus@ Move Speed</speed>, decaying over @BuffDuration@ seconds.",
-					"dataValues": {
-						"FlatMS": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"BuffDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"UltMult": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"spellCalculations": {
-						"TotalMSBonus": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mDataValue": "FlatMS",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0.25,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Nami/Spells/NamiPassiveAbility/NamiPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -583,6 +528,61 @@
 						]
 					},
 					"dataKey": "Characters/Nami/Spells/NamiRAbility/NamiR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Surging Tides",
+					"image": "assets/characters/nami/hud/icons2d/namipassive.png",
+					"tooltip": "When Nami's Abilities hit allied champions, they gain <speed>@TotalMSBonus@ Move Speed</speed>, decaying over @BuffDuration@ seconds.",
+					"dataValues": {
+						"FlatMS": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"BuffDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"UltMult": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"TotalMSBonus": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "FlatMS",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Nami/Spells/NamiPassiveAbility/NamiPassive"
 				}
 			]
 		}

@@ -28,109 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Junkyard Titan",
-					"image": "assets/characters/rumble/hud/icons2d/rumble_junkyardtitan1.png",
-					"tooltip": "Rumble's Abilities generate <keywordMajor>Heat</keywordMajor>. While above <keywordMajor>@DangerZoneHeat@ Heat</keywordMajor>, he enters the <keywordMajor>Danger Zone</keywordMajor>, causing his basic Abilities to gain bonus effects. When he reaches <keywordMajor>@OverheatingHeat@ Heat</keywordMajor>, he overheats for @OverheatDuration@ seconds. <br><br>While overheated, Rumble <status>Silences</status> himself, but gains <attackSpeed>@OverheatAS@ Attack Speed</attackSpeed> and causes his Attacks to deal an additional <magicDamage>@TotalBaseDamage@ plus @OverheatPercBonusDamage*100@% max Health magic damage</magicDamage>.<br><br><rules>Percent damage is limited to @MonsterCapScaling@ damage on Monsters. </rules>",
-					"dataValues": {
-						"OverheatDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"DangerZoneHeat": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"OverheatingHeat": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"OverheatPercBonusDamage": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						],
-						"MonsterCap": [
-							80,
-							80,
-							80,
-							80,
-							80,
-							80,
-							80
-						],
-						"HeatDecayPerS": [
-							-10,
-							-10,
-							-10,
-							-10,
-							-10,
-							-10,
-							-10
-						]
-					},
-					"spellCalculations": {
-						"TotalBaseDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 5,
-									"mEndValue": 40,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.25,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"OverheatAS": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.5,
-									"mEndValue": 1.3,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"MonsterCapScaling": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 65,
-									"mEndValue": 150,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Rumble/Spells/RumbleHeatSystemAbility/RumbleHeatSystem"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -703,6 +600,109 @@
 						]
 					},
 					"dataKey": "Characters/Rumble/Spells/RumbleCarpetBombAbility/RumbleCarpetBomb"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Junkyard Titan",
+					"image": "assets/characters/rumble/hud/icons2d/rumble_junkyardtitan1.png",
+					"tooltip": "Rumble's Abilities generate <keywordMajor>Heat</keywordMajor>. While above <keywordMajor>@DangerZoneHeat@ Heat</keywordMajor>, he enters the <keywordMajor>Danger Zone</keywordMajor>, causing his basic Abilities to gain bonus effects. When he reaches <keywordMajor>@OverheatingHeat@ Heat</keywordMajor>, he overheats for @OverheatDuration@ seconds. <br><br>While overheated, Rumble <status>Silences</status> himself, but gains <attackSpeed>@OverheatAS@ Attack Speed</attackSpeed> and causes his Attacks to deal an additional <magicDamage>@TotalBaseDamage@ plus @OverheatPercBonusDamage*100@% max Health magic damage</magicDamage>.<br><br><rules>Percent damage is limited to @MonsterCapScaling@ damage on Monsters. </rules>",
+					"dataValues": {
+						"OverheatDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"DangerZoneHeat": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"OverheatingHeat": [
+							150,
+							150,
+							150,
+							150,
+							150,
+							150,
+							150
+						],
+						"OverheatPercBonusDamage": [
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04
+						],
+						"MonsterCap": [
+							80,
+							80,
+							80,
+							80,
+							80,
+							80,
+							80
+						],
+						"HeatDecayPerS": [
+							-10,
+							-10,
+							-10,
+							-10,
+							-10,
+							-10,
+							-10
+						]
+					},
+					"spellCalculations": {
+						"TotalBaseDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 5,
+									"mEndValue": 40,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.25,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"OverheatAS": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.5,
+									"mEndValue": 1.3,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"MonsterCapScaling": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 65,
+									"mEndValue": 150,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Rumble/Spells/RumbleHeatSystemAbility/RumbleHeatSystem"
 				}
 			]
 		}

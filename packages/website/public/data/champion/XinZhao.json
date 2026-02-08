@@ -28,90 +28,6 @@
 		"attackspeedratio": 0.645
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Determination",
-					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkp.xinzhaorework.png",
-					"tooltip": "Every third Attack or strike with <spellName>Wind Becomes Lightning</spellName> deals an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing>.",
-					"dataValues": {
-						"HealAPRatio": [
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mLevel1Value": 0.15,
-										"mBreakpoints": [
-											{
-												"mLevel": 6,
-												"mAdditionalBonusAtThisLevel": 0.15
-											},
-											{
-												"mLevel": 11,
-												"mAdditionalBonusAtThisLevel": 0.15
-											},
-											{
-												"mLevel": 16,
-												"mAdditionalBonusAtThisLevel": 0.15
-											},
-											{
-												"mLevel": 21,
-												"mAdditionalBonusAtThisLevel": 0.15
-											},
-											{
-												"mLevel": 26,
-												"mAdditionalBonusAtThisLevel": 0.15
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"TotalHealing": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mSubpart": {
-										"mLevel1Value": 0.03,
-										"mBreakpoints": [
-											{
-												"mLevel": 6,
-												"mAdditionalBonusAtThisLevel": 0.01
-											},
-											{
-												"mLevel": 11,
-												"mAdditionalBonusAtThisLevel": 0.01
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								},
-								{
-									"mDataValue": "HealAPRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/XinZhao/Spells/XinZhaoPAbility/XinZhaoP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -598,6 +514,90 @@
 						}
 					},
 					"dataKey": "Characters/XinZhao/Spells/XinZhaoRAbility/XinZhaoR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Determination",
+					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkp.xinzhaorework.png",
+					"tooltip": "Every third Attack or strike with <spellName>Wind Becomes Lightning</spellName> deals an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing>.",
+					"dataValues": {
+						"HealAPRatio": [
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65,
+							0.65
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.15,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 16,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 21,
+												"mAdditionalBonusAtThisLevel": 0.15
+											},
+											{
+												"mLevel": 26,
+												"mAdditionalBonusAtThisLevel": 0.15
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"TotalHealing": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mSubpart": {
+										"mLevel1Value": 0.03,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.01
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.01
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								},
+								{
+									"mDataValue": "HealAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoPAbility/XinZhaoP"
 				}
 			]
 		}

@@ -28,117 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Stone Skin",
-					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png",
-					"cooldownTime": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
-					"tooltip": "Wukong gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and regenerates <healing>@HealthPercentPer5*100@% max Health per 5 seconds</healing>. These bonuses are increased by @StackMultiplier*100@% for @StackDuration@ seconds every time he or his <keywordMajor>Clone</keywordMajor> hit an enemy champion or jungle monster with an Attack or Ability, stacking up to @MaxStacks@ times.",
-					"dataValues": {
-						"CombatDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"StackDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MaxStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"StackMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"HealthPercentPer5": [
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004
-						],
-						"TooltipMult": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"TooltipMaxHealthPercentPer5": [
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1
-						],
-						"FallOffRate": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"BonusArmor": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 6,
-									"mEndValue": 10,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"TooltipMaxArmor": {
-							"mMultiplier": {
-								"mDataValue": "TooltipMult"
-							},
-							"mModifiedGameCalculation": "BonusArmor"
-						}
-					},
-					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingPassiveAbility/MonkeyKingPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -634,6 +523,117 @@
 						}
 					},
 					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingSpinToWinAbility/MonkeyKingSpinToWin"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Stone Skin",
+					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png",
+					"cooldownTime": [
+						20,
+						20,
+						20,
+						20,
+						20,
+						20,
+						20
+					],
+					"tooltip": "Wukong gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and regenerates <healing>@HealthPercentPer5*100@% max Health per 5 seconds</healing>. These bonuses are increased by @StackMultiplier*100@% for @StackDuration@ seconds every time he or his <keywordMajor>Clone</keywordMajor> hit an enemy champion or jungle monster with an Attack or Ability, stacking up to @MaxStacks@ times.",
+					"dataValues": {
+						"CombatDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"StackDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MaxStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"StackMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"HealthPercentPer5": [
+							0.004,
+							0.004,
+							0.004,
+							0.004,
+							0.004,
+							0.004,
+							0.004
+						],
+						"TooltipMult": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"TooltipMaxHealthPercentPer5": [
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1,
+							2.1
+						],
+						"FallOffRate": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"BonusArmor": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 6,
+									"mEndValue": 10,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"TooltipMaxArmor": {
+							"mMultiplier": {
+								"mDataValue": "TooltipMult"
+							},
+							"mModifiedGameCalculation": "BonusArmor"
+						}
+					},
+					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingPassiveAbility/MonkeyKingPassive"
 				}
 			]
 		}

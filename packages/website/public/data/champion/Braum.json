@@ -28,133 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Concussive Blows",
-					"image": "assets/characters/braum/hud/icons2d/braum_passive.png",
-					"tooltip": "Braum's Attacks apply <keywordMajor>Concussive Blows</keywordMajor> for @StackDuration@ seconds. Enemies with <keywordMajor>Concussive Blows</keywordMajor> gain additional stacks from any ally's Attacks.<br><br>At @StackCap@ stacks, the target is <status>Stunned</status> for @StunDuration@ seconds and takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. For the next @StunCD@ seconds they don't receive stacks, but take an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> from Braum's Attacks.",
-					"dataValues": {
-						"StackDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"StackCap": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AlreadyStunnedDamageAmp": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mValues": [
-										16,
-										26,
-										36,
-										46,
-										56,
-										66,
-										76,
-										86,
-										96,
-										106,
-										116,
-										126,
-										136,
-										146,
-										156,
-										166,
-										176,
-										186,
-										196,
-										206,
-										216,
-										226,
-										236,
-										246,
-										256,
-										266,
-										276,
-										286,
-										296,
-										306,
-										316
-									],
-									"__type": "ByCharLevelFormulaCalculationPart"
-								}
-							]
-						},
-						"OnHitDamage": {
-							"mMultiplier": {
-								"mDataValue": "{9e75385b}"
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
-						},
-						"StunCD": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 8,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -2
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -2
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"StunDuration": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1.25,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 0.25
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 2
-						}
-					},
-					"dataKey": "Characters/Braum/Spells/BraumPassiveAbility/BraumPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -627,6 +500,133 @@
 						}
 					},
 					"dataKey": "Characters/Braum/Spells/BraumRWrapperAbility/BraumRWrapper"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Concussive Blows",
+					"image": "assets/characters/braum/hud/icons2d/braum_passive.png",
+					"tooltip": "Braum's Attacks apply <keywordMajor>Concussive Blows</keywordMajor> for @StackDuration@ seconds. Enemies with <keywordMajor>Concussive Blows</keywordMajor> gain additional stacks from any ally's Attacks.<br><br>At @StackCap@ stacks, the target is <status>Stunned</status> for @StunDuration@ seconds and takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. For the next @StunCD@ seconds they don't receive stacks, but take an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> from Braum's Attacks.",
+					"dataValues": {
+						"StackDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"StackCap": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"AlreadyStunnedDamageAmp": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mValues": [
+										16,
+										26,
+										36,
+										46,
+										56,
+										66,
+										76,
+										86,
+										96,
+										106,
+										116,
+										126,
+										136,
+										146,
+										156,
+										166,
+										176,
+										186,
+										196,
+										206,
+										216,
+										226,
+										236,
+										246,
+										256,
+										266,
+										276,
+										286,
+										296,
+										306,
+										316
+									],
+									"__type": "ByCharLevelFormulaCalculationPart"
+								}
+							]
+						},
+						"OnHitDamage": {
+							"mMultiplier": {
+								"mDataValue": "{9e75385b}"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "TotalDamage"
+						},
+						"StunCD": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 8,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -2
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"StunDuration": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1.25,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/Braum/Spells/BraumPassiveAbility/BraumPassive"
 				}
 			]
 		}

@@ -28,71 +28,6 @@
 		"attackspeedratio": 0.694
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Berserker Rage",
-					"image": "assets/characters/olaf/hud/icons2d/olafp.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Olaf gains up to <attackSpeed>@MaxAttackSpeed@ Attack Speed</attackSpeed> and @MaxLifeSteal@ Life Steal, based on his missing Health.",
-					"tooltipExtended": "{{game_character_passiveDescription_Olaf}}<br><br><rules>Reaches max at 30% Health</rules>",
-					"dataValues": {
-						"AttackSpeedPerMissingHPPerc": [
-							0.009,
-							0.009,
-							0.009,
-							0.009,
-							0.009,
-							0.009,
-							0.009
-						],
-						"MaxStatsThreshold": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
-					},
-					"spellCalculations": {
-						"MaxAttackSpeed": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.5,
-									"mEndValue": 1,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"MaxLifeSteal": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.08,
-									"mEndValue": 0.25,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Olaf/Spells/OlafBerzerkerRageAbility/OlafBerzerkerRage"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -596,6 +531,71 @@
 						}
 					},
 					"dataKey": "Characters/Olaf/Spells/OlafRagnarokAbility/OlafRagnarok"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Berserker Rage",
+					"image": "assets/characters/olaf/hud/icons2d/olafp.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Olaf gains up to <attackSpeed>@MaxAttackSpeed@ Attack Speed</attackSpeed> and @MaxLifeSteal@ Life Steal, based on his missing Health.",
+					"tooltipExtended": "{{game_character_passiveDescription_Olaf}}<br><br><rules>Reaches max at 30% Health</rules>",
+					"dataValues": {
+						"AttackSpeedPerMissingHPPerc": [
+							0.009,
+							0.009,
+							0.009,
+							0.009,
+							0.009,
+							0.009,
+							0.009
+						],
+						"MaxStatsThreshold": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						]
+					},
+					"spellCalculations": {
+						"MaxAttackSpeed": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.5,
+									"mEndValue": 1,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"MaxLifeSteal": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.08,
+									"mEndValue": 0.25,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Olaf/Spells/OlafBerzerkerRageAbility/OlafBerzerkerRage"
 				}
 			]
 		}

@@ -28,155 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Echoing Flames",
-					"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png",
-					"tooltip": "Urgot has a cannon on each of his 6 legs. Attacks and <spellName>{{Spell_UrgotW_Name}}</spellName> will fire the leg cannon that is facing his target for <physicalDamage>@ADDamage@ plus @PercentHPRatio@ max Health physical damage</physicalDamage>. This effect has a @PerLegCD@ second Cooldown per leg.",
-					"tooltipExtended": "{{Spell_UrgotPassive_Tooltip}}<br><br><rules>Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to jungle monsters.</rules>",
-					"dataValues": {
-						"LegWarningTime": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						]
-					},
-					"spellCalculations": {
-						"PerLegCD": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 30,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -10
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": -10
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -5
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -2.5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						},
-						"ADDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mLevel1Value": 0.4,
-										"mBreakpoints": [
-											{
-												"mLevel": 6,
-												"mAdditionalBonusAtThisLevel": 0.12
-											},
-											{
-												"mLevel": 9,
-												"mAdditionalBonusAtThisLevel": 0.12
-											},
-											{
-												"mLevel": 11,
-												"mAdditionalBonusAtThisLevel": 0.12
-											},
-											{
-												"mLevel": 13,
-												"mAdditionalBonusAtThisLevel": 0.12
-											},
-											{
-												"mLevel": 15,
-												"mAdditionalBonusAtThisLevel": 0.12
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"PercentHPRatio": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.02,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.01
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.01
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.01
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 0.01
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"MonsterCap": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 100,
-									"mEndValue": 360,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"{91ffe3d8}": {
-							"mFormulaParts": [
-								{
-									"mNumber": 650,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 31,
-									"mStatFormula": 2,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"CastRange": {
-							"mFormulaParts": [
-								{
-									"mNumber": 700,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 31,
-									"mStatFormula": 2,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Urgot/Spells/UrgotPassiveAbility/UrgotPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -753,6 +604,155 @@
 						}
 					},
 					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Echoing Flames",
+					"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png",
+					"tooltip": "Urgot has a cannon on each of his 6 legs. Attacks and <spellName>{{Spell_UrgotW_Name}}</spellName> will fire the leg cannon that is facing his target for <physicalDamage>@ADDamage@ plus @PercentHPRatio@ max Health physical damage</physicalDamage>. This effect has a @PerLegCD@ second Cooldown per leg.",
+					"tooltipExtended": "{{Spell_UrgotPassive_Tooltip}}<br><br><rules>Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to jungle monsters.</rules>",
+					"dataValues": {
+						"LegWarningTime": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						]
+					},
+					"spellCalculations": {
+						"PerLegCD": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -10
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": -10
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -2.5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						},
+						"ADDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.4,
+										"mBreakpoints": [
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 9,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 11,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 13,
+												"mAdditionalBonusAtThisLevel": 0.12
+											},
+											{
+												"mLevel": 15,
+												"mAdditionalBonusAtThisLevel": 0.12
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"PercentHPRatio": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.02,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.01
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.01
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.01
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.01
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"MonsterCap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 100,
+									"mEndValue": 360,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"{91ffe3d8}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 650,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 31,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"CastRange": {
+							"mFormulaParts": [
+								{
+									"mNumber": 700,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 31,
+									"mStatFormula": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Urgot/Spells/UrgotPassiveAbility/UrgotPassive"
 				}
 			]
 		}

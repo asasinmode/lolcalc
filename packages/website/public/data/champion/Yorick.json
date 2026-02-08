@@ -28,248 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Shepherd of Souls",
-					"image": "assets/characters/yorick/hud/icons2d/yorick_p.png",
-					"tooltip": "Yorick raises a grave for every @YorickPassiveSpawnThreshold@ enemies that die near him. Champions and large monsters always leave a grave.<br><br>These graves can be used to <spellName>Awaken</spellName> <keywordMajor>Mist Walkers</keywordMajor> with <healing>@YorickPassiveGhoulHealth@ Health</healing> and <physicalDamage>@YorickPassiveGhoulDamage@ Attack Damage</physicalDamage>, up to @YorickPassiveGhoulMax@ in an area.",
-					"tooltipExtended": "{{Spell_YorickPassive_Tooltip}}<br><br><rules><keywordMajor>Mist Walkers</keywordMajor><br>Deal <physicalDamage>@YorickGhoulDamageReductionVsTowers*100@% damage</physicalDamage> to structures.<br>Deal <physicalDamage>@GhoulMonsterDamageMod*100@% damage</physicalDamage> to jungle monsters.<br>Take @MeleeAttackDamageModifier*100@% damage from melee Champion Attacks.<br>Take @AoEDamageModifier@ damage from area of effect damage.<br>Take @MinionDamageTakenMod*100@% damage from lane Minions.<br>Take @MonsterDamageTakenMod*100@% damage from jungle Monsters.</rules>",
-					"dataValues": {
-						"YorickPassiveGhoulMax": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"YorickGhoulDamageReductionVsTowers": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"YorickGhoulLeashRange": [
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600
-						],
-						"YorickGhoulSpawnDelay": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CherryGhoulHPMod": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"GhoulADRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"GraveDuration": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"MinionMoveBonus": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"MeleeAttackDamageModifier": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"MinionDamageTakenMod": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"ProcDamageModifier": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"ARAMPassiveSpawnThreshold": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"GhoulMonsterDamageMod": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"GhoulHealthRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"MonsterDamageTakenMod": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"YorickPassiveGhoulHealth": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 100,
-									"mEndValue": 300,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mDataValue": "{76270a4f}",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"YorickPassiveGhoulDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 15,
-									"mEndValue": 100,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "GhoulADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"YorickPassiveSpawnThreshold": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 8,
-									"mBreakpoints": [
-										{
-											"mLevel": 3,
-											"mAdditionalBonusAtThisLevel": -1
-										},
-										{
-											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": -1
-										},
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -1
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": -1
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -1
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"AOEDamageModifier": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.66,
-									"mInitialBonusPerLevel": -0.02,
-									"mBreakpoints": [
-										{
-											"mLevel": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"BonusAttackSpeed": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.08,
-									"mEndValue": 0.8,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Yorick/Spells/YorickPassiveAbility/YorickPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -820,6 +578,248 @@
 						}
 					},
 					"dataKey": "Characters/Yorick/Spells/YorickRAbility/YorickR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Shepherd of Souls",
+					"image": "assets/characters/yorick/hud/icons2d/yorick_p.png",
+					"tooltip": "Yorick raises a grave for every @YorickPassiveSpawnThreshold@ enemies that die near him. Champions and large monsters always leave a grave.<br><br>These graves can be used to <spellName>Awaken</spellName> <keywordMajor>Mist Walkers</keywordMajor> with <healing>@YorickPassiveGhoulHealth@ Health</healing> and <physicalDamage>@YorickPassiveGhoulDamage@ Attack Damage</physicalDamage>, up to @YorickPassiveGhoulMax@ in an area.",
+					"tooltipExtended": "{{Spell_YorickPassive_Tooltip}}<br><br><rules><keywordMajor>Mist Walkers</keywordMajor><br>Deal <physicalDamage>@YorickGhoulDamageReductionVsTowers*100@% damage</physicalDamage> to structures.<br>Deal <physicalDamage>@GhoulMonsterDamageMod*100@% damage</physicalDamage> to jungle monsters.<br>Take @MeleeAttackDamageModifier*100@% damage from melee Champion Attacks.<br>Take @AoEDamageModifier@ damage from area of effect damage.<br>Take @MinionDamageTakenMod*100@% damage from lane Minions.<br>Take @MonsterDamageTakenMod*100@% damage from jungle Monsters.</rules>",
+					"dataValues": {
+						"YorickPassiveGhoulMax": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"YorickGhoulDamageReductionVsTowers": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"YorickGhoulLeashRange": [
+							1600,
+							1600,
+							1600,
+							1600,
+							1600,
+							1600,
+							1600
+						],
+						"YorickGhoulSpawnDelay": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CherryGhoulHPMod": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"GhoulADRatio": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"GraveDuration": [
+							300,
+							300,
+							300,
+							300,
+							300,
+							300,
+							300
+						],
+						"MinionMoveBonus": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"MeleeAttackDamageModifier": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"MinionDamageTakenMod": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"ProcDamageModifier": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"ARAMPassiveSpawnThreshold": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"GhoulMonsterDamageMod": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"GhoulHealthRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"MonsterDamageTakenMod": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"YorickPassiveGhoulHealth": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 100,
+									"mEndValue": 300,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "{76270a4f}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"YorickPassiveGhoulDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 100,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "GhoulADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"YorickPassiveSpawnThreshold": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 8,
+									"mBreakpoints": [
+										{
+											"mLevel": 3,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -1
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"AOEDamageModifier": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.66,
+									"mInitialBonusPerLevel": -0.02,
+									"mBreakpoints": [
+										{
+											"mLevel": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"BonusAttackSpeed": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.08,
+									"mEndValue": 0.8,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Yorick/Spells/YorickPassiveAbility/YorickPassive"
 				}
 			]
 		}

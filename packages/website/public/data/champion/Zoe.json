@@ -28,105 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "More Sparkles!",
-					"image": "assets/characters/zoe/hud/icons2d/zoe_p.png",
-					"tooltip": "After using an Ability, Zoe's next Attack deals an additional <magicDamage>@PassiveDamage@ magic damage</magicDamage>.",
-					"tooltipExtended": "{{Spell_ZoePassive_Tooltip}}<br><br><rules>The empowered Attack deals damage instantly.</rules>",
-					"dataValues": {
-						"APRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						]
-					},
-					"spellCalculations": {
-						"PassiveDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 16,
-									"mInitialBonusPerLevel": 4,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 6
-										},
-										{
-											"mLevel": 12,
-											"mBonusPerLevelAtAndAfter": 8
-										},
-										{
-											"mLevel": 15,
-											"mBonusPerLevelAtAndAfter": 10
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"effectAmount": {
-						"0": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"1": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"2": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"8": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"9": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						]
-					},
-					"dataKey": "Characters/Zoe/Spells/ZoePassiveAbility/ZoePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -612,6 +513,105 @@
 						]
 					},
 					"dataKey": "Characters/Zoe/Spells/ZoeRAbility/ZoeR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "More Sparkles!",
+					"image": "assets/characters/zoe/hud/icons2d/zoe_p.png",
+					"tooltip": "After using an Ability, Zoe's next Attack deals an additional <magicDamage>@PassiveDamage@ magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_ZoePassive_Tooltip}}<br><br><rules>The empowered Attack deals damage instantly.</rules>",
+					"dataValues": {
+						"APRatio": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						]
+					},
+					"spellCalculations": {
+						"PassiveDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 16,
+									"mInitialBonusPerLevel": 4,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 6
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 8
+										},
+										{
+											"mLevel": 15,
+											"mBonusPerLevelAtAndAfter": 10
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"1": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"2": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"8": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"9": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						]
+					},
+					"dataKey": "Characters/Zoe/Spells/ZoePassiveAbility/ZoePassive"
 				}
 			]
 		}

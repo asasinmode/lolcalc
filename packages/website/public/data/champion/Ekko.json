@@ -28,108 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Z-Drive Resonance",
-					"image": "assets/characters/ekko/hud/icons2d/ekko_p.png",
-					"tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 5 seconds.",
-					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>",
-					"dataValues": {
-						"ModesMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"BonusMS": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.5,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"ThreeHitDamage": {
-							"mMultiplier": {
-								"mDataValue": "ModesMultiplier"
-							},
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 30,
-									"mInitialBonusPerLevel": 10,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mCoefficient": 0.8,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"SpeedDuration": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 2,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.5
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						}
-					},
-					"effectAmount": {
-						"1": [
-							2.7,
-							2.7,
-							2.7,
-							2.7,
-							2.7,
-							2.7,
-							2.7
-						]
-					},
-					"dataKey": "Characters/Ekko/Spells/EkkoPassiveAbility/EkkoPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -595,6 +493,108 @@
 						}
 					},
 					"dataKey": "Characters/Ekko/Spells/EkkoRAbility/EkkoR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Z-Drive Resonance",
+					"image": "assets/characters/ekko/hud/icons2d/ekko_p.png",
+					"tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 5 seconds.",
+					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>",
+					"dataValues": {
+						"ModesMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"BonusMS": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.5,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"ThreeHitDamage": {
+							"mMultiplier": {
+								"mDataValue": "ModesMultiplier"
+							},
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mInitialBonusPerLevel": 10,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 0.8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"SpeedDuration": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 2,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.5
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"effectAmount": {
+						"1": [
+							2.7,
+							2.7,
+							2.7,
+							2.7,
+							2.7,
+							2.7,
+							2.7
+						]
+					},
+					"dataKey": "Characters/Ekko/Spells/EkkoPassiveAbility/EkkoPassive"
 				}
 			]
 		}

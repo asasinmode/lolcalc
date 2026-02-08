@@ -28,101 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Triumphant Roar",
-					"image": "assets/characters/alistar/hud/icons2d/alistar_e.png",
-					"cooldownTime": [
-						3,
-						3,
-						3,
-						3,
-						3,
-						3,
-						3
-					],
-					"tooltip": "Alistar gains a stack whenever he <status>Stuns</status> or <status>Knocks</status> an enemy champion, or whenever an enemy dies. At @PassiveMaxStacks@ stacks, Alistar roars, restoring <healing>@BaseHeal@ Health</healing> to himself and <healing>@AllyHeal@ Health</healing> to nearby allied champions.<br><br>Enemy champion and epic jungle monster deaths fully charge this Ability.",
-					"dataValues": {
-						"AlistarPassiveHealRatio": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"AlistarPassiveAllyHealRatio": [
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4
-						],
-						"PassiveCooldown": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PassiveMaxStacks": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"PassiveStacksChampionKill": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"PassiveAllyNumHeal": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						]
-					},
-					"spellCalculations": {
-						"BaseHeal": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mDataValue": "AlistarPassiveHealRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"AllyHeal": {
-							"mMultiplier": {
-								"mDataValue": "AlistarPassiveAllyHealRatio"
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "BaseHeal"
-						}
-					},
-					"dataKey": "Characters/Alistar/Spells/AlistarPassiveAbility/AlistarPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -507,6 +412,101 @@
 						]
 					},
 					"dataKey": "Characters/Alistar/Spells/FerociousHowlAbility/FerociousHowl"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Triumphant Roar",
+					"image": "assets/characters/alistar/hud/icons2d/alistar_e.png",
+					"cooldownTime": [
+						3,
+						3,
+						3,
+						3,
+						3,
+						3,
+						3
+					],
+					"tooltip": "Alistar gains a stack whenever he <status>Stuns</status> or <status>Knocks</status> an enemy champion, or whenever an enemy dies. At @PassiveMaxStacks@ stacks, Alistar roars, restoring <healing>@BaseHeal@ Health</healing> to himself and <healing>@AllyHeal@ Health</healing> to nearby allied champions.<br><br>Enemy champion and epic jungle monster deaths fully charge this Ability.",
+					"dataValues": {
+						"AlistarPassiveHealRatio": [
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05
+						],
+						"AlistarPassiveAllyHealRatio": [
+							1.4,
+							1.4,
+							1.4,
+							1.4,
+							1.4,
+							1.4,
+							1.4
+						],
+						"PassiveCooldown": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PassiveMaxStacks": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"PassiveStacksChampionKill": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"PassiveAllyNumHeal": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						]
+					},
+					"spellCalculations": {
+						"BaseHeal": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mDataValue": "AlistarPassiveHealRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"AllyHeal": {
+							"mMultiplier": {
+								"mDataValue": "AlistarPassiveAllyHealRatio"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "BaseHeal"
+						}
+					},
+					"dataKey": "Characters/Alistar/Spells/AlistarPassiveAbility/AlistarPassive"
 				}
 			]
 		}

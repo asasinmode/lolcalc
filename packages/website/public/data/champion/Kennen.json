@@ -28,65 +28,6 @@
 		"attackspeedratio": 0.69
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Mark of the Storm",
-					"image": "assets/characters/kennen/hud/icons2d/kennen_passive.png",
-					"tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>.",
-					"tooltipExtended": "{{ Spell_KennenPassive_Tooltip }}<br><rules>If an enemy is <status>Stunned</status> more than once by this ability within @DiminishingReturnDuration@ seconds, they are instead <status>Stunned</status> for @ReducedStunDuration@ seconds.</rules>",
-					"dataValues": {
-						"EnergyRestore": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"StunDuration": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						],
-						"ReducedStunDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MarkDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"DiminishingReturnDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
-					},
-					"dataKey": "Characters/Kennen/Spells/KennenPassiveAbility/KennenPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -544,6 +485,65 @@
 						}
 					},
 					"dataKey": "Characters/Kennen/Spells/KennenShurikenStormAbility/KennenShurikenStorm"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Mark of the Storm",
+					"image": "assets/characters/kennen/hud/icons2d/kennen_passive.png",
+					"tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>.",
+					"tooltipExtended": "{{ Spell_KennenPassive_Tooltip }}<br><rules>If an enemy is <status>Stunned</status> more than once by this ability within @DiminishingReturnDuration@ seconds, they are instead <status>Stunned</status> for @ReducedStunDuration@ seconds.</rules>",
+					"dataValues": {
+						"EnergyRestore": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"StunDuration": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"ReducedStunDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MarkDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"DiminishingReturnDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"dataKey": "Characters/Kennen/Spells/KennenPassiveAbility/KennenPassive"
 				}
 			]
 		}

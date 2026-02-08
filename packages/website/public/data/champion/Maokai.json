@@ -28,76 +28,6 @@
 		"attackspeedratio": 0.695
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Sap Magic",
-					"image": "assets/characters/maokai/hud/icons2d/maokai_passive.png",
-					"tooltip": "Maokai's next Attack restores <healing>@PassiveHealingTotal@ Health</healing>.<br><br>Using an Ability or being hit by an enemy champion's Ability reduces the Cooldown by @PassiveCooldownReduction@ seconds. Being hit by large or epic monster's Attacks or Abilities reduces the Cooldown by @JungPassCooldownReduction@ second.",
-					"dataValues": {
-						"PassiveCooldownReduction": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"PassiveHealthThreshold": [
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95
-						],
-						"JungPassCooldownReduction": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"spellCalculations": {
-						"PassiveCooldown": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 30,
-									"mEndValue": 20,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"PassiveHealingTotal": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mSubpart": {
-										"mLevel1Value": 0.04,
-										"mInitialBonusPerLevel": 0.002,
-										"mBreakpoints": [
-											{
-												"mLevel": 7,
-												"mBonusPerLevelAtAndAfter": 0.007
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Maokai/Spells/MaokaiPassiveAbility/MaokaiPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -654,6 +584,76 @@
 						]
 					},
 					"dataKey": "Characters/Maokai/Spells/MaokaiRAbility/MaokaiR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Sap Magic",
+					"image": "assets/characters/maokai/hud/icons2d/maokai_passive.png",
+					"tooltip": "Maokai's next Attack restores <healing>@PassiveHealingTotal@ Health</healing>.<br><br>Using an Ability or being hit by an enemy champion's Ability reduces the Cooldown by @PassiveCooldownReduction@ seconds. Being hit by large or epic monster's Attacks or Abilities reduces the Cooldown by @JungPassCooldownReduction@ second.",
+					"dataValues": {
+						"PassiveCooldownReduction": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"PassiveHealthThreshold": [
+							0.95,
+							0.95,
+							0.95,
+							0.95,
+							0.95,
+							0.95,
+							0.95
+						],
+						"JungPassCooldownReduction": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"PassiveCooldown": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 30,
+									"mEndValue": 20,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"PassiveHealingTotal": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mSubpart": {
+										"mLevel1Value": 0.04,
+										"mInitialBonusPerLevel": 0.002,
+										"mBreakpoints": [
+											{
+												"mLevel": 7,
+												"mBonusPerLevelAtAndAfter": 0.007
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Maokai/Spells/MaokaiPassiveAbility/MaokaiPassive"
 				}
 			]
 		}

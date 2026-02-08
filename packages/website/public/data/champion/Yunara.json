@@ -28,43 +28,6 @@
 		"attackspeedratio": 0.65
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Vow of the First Lands",
-					"image": "assets/characters/yunara/hud/icons2d/yunara_passive.yunara.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Yunara's Critical Strikes deal an additional <magicDamage>@Calc_Damage_Amp@ magic damage</magicDamage>.",
-					"tooltipExtended": "{{Spell_YunaraP_Tooltip}}<br><br><rules></rules>",
-					"spellCalculations": {
-						"Calc_Damage_Amp": {
-							"mFormulaParts": [
-								{
-									"mNumber": 0.1,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mCoefficient": 0.001,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "{171bcf58}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -728,6 +691,43 @@
 						}
 					},
 					"dataKey": "Characters/Yunara/Spells/YunaraRAbility/YunaraR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Vow of the First Lands",
+					"image": "assets/characters/yunara/hud/icons2d/yunara_passive.yunara.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Yunara's Critical Strikes deal an additional <magicDamage>@Calc_Damage_Amp@ magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_YunaraP_Tooltip}}<br><br><rules></rules>",
+					"spellCalculations": {
+						"Calc_Damage_Amp": {
+							"mFormulaParts": [
+								{
+									"mNumber": 0.1,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.001,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "{171bcf58}"
 				}
 			]
 		}

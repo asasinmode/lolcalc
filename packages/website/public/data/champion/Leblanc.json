@@ -28,38 +28,6 @@
 		"attackspeedratio": 0.4
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Mirror Image",
-					"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png",
-					"cooldownTime": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"tooltip": "When LeBlanc drops below 40% Health, she becomes <keywordStealth>Invisible</keywordStealth> for 1 second and creates a harmless clone for 8 seconds. LeBlanc can move the clone with the \"Alt\" key.",
-					"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
-					"dataValues": {
-						"TooltipCooldown": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						]
-					},
-					"dataKey": "Characters/Leblanc/Spells/LeblancPAbility/LeblancP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -567,6 +535,38 @@
 						}
 					},
 					"dataKey": "Characters/Leblanc/Spells/LeblancRAbility/LeblancR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Mirror Image",
+					"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png",
+					"cooldownTime": [
+						60,
+						60,
+						60,
+						60,
+						60,
+						60,
+						60
+					],
+					"tooltip": "When LeBlanc drops below 40% Health, she becomes <keywordStealth>Invisible</keywordStealth> for 1 second and creates a harmless clone for 8 seconds. LeBlanc can move the clone with the \"Alt\" key.",
+					"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
+					"dataValues": {
+						"TooltipCooldown": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						]
+					},
+					"dataKey": "Characters/Leblanc/Spells/LeblancPAbility/LeblancP"
 				}
 			]
 		}

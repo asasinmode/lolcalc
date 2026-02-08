@@ -72,14 +72,14 @@ if (!championData || championData?.version !== latestVersion) {
 
 					const additionalData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`);
 
-					const characterRecordsKey = id === 'Fiddlesticks' ? 'FiddleSticks' : id;
-					const rootData = additionalData[`Characters/${characterRecordsKey}/CharacterRecords/Root`];
+					const characterRootKey = `Characters/${id === 'Fiddlesticks' ? 'FiddleSticks' : id}/CharacterRecords/Root`;
+					const rootData = additionalData[characterRootKey];
 					if (!rootData) {
 						console.log(Object.keys(additionalData));
 						throw new Error(`no root character data for ${name}`);
 					}
 
-					const { attackSpeedRatio, spellNames, mCharacterPassiveSpell, spellLevelUpInfo } = rootData;
+					const { attackSpeedRatio } = rootData;
 
 					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
 
@@ -92,31 +92,13 @@ if (!championData || championData?.version !== latestVersion) {
 						name,
 						partype,
 						stats,
-						abilities: Object.fromEntries(['passive', 'q', 'w', 'e', 'r'].map((abilityName, index) => {
-							const rawAbilityKey = index === 0 ? mCharacterPassiveSpell : spellNames[index - 1];
-							let abilityKey = rawAbilityKey;
-							if (rawAbilityKey.includes('/')) {
-								abilityKey = rawAbilityKey.slice(0, rawAbilityKey.lastIndexOf('/'));
-								if (abilityKey === `Characters/${championId}/Spells`) {
-									abilityKey = rawAbilityKey;
-								}
-							}
-
-							let { maxLevel, variants } = championAbilityData(
-								additionalData,
-								index === 0 ? abilityKey : `Characters/${championId}/Spells/${abilityKey}`,
+						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
+							const { maxLevel, variants } = championAbilityData(
 								index,
 								championId,
+								additionalData,
+								characterRootKey,
 							);
-
-							if ((championId === 'Jayce' && abilityName === 'r')
-								|| (championId === 'Aphelios' && (abilityName === 'q' || abilityName === 'w' || abilityName === 'e'))) {
-								maxLevel = spellLevelUpInfo[index - 1].mRequirements.length;
-							}
-
-							if (maxLevel === undefined) {
-								console.warn(`${rawAbilityKey} max ability level not found`);
-							}
 
 							return [abilityName, {
 								maxLevel,
@@ -803,33 +785,18 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 }
 
 function championAbilityData(
-	championData: any,
-	abilityRootKey: string,
+	/** 0-1-2-3 for Q-W-E-R, 4 for passive */
 	abilityIndex: number,
 	championId: string,
+	championData: any,
+	characterRootKey: string,
 ) {
+	const { mCharacterPassiveSpell, spells, spellLevelUpInfo } = championData[characterRootKey];
+	const abilityDataKey = abilityIndex === 4 ? mCharacterPassiveSpell : spells[abilityIndex];
+
 	let maxLevel: number | undefined;
-	let variantKeys = [];
+	const variantKeys = [abilityDataKey];
 	const variants: IChampion['abilities'][keyof IChampion['abilities']]['variants'] = [];
-
-	const abilityRootData = championData[abilityRootKey];
-	if (abilityRootData?.mRootSpell) {
-		variantKeys = [abilityRootData.mRootSpell];
-	} else if (abilityRootData?.mSpell) {
-		variantKeys = [abilityRootKey];
-	} else {
-		throw new Error(`${abilityRootKey} no spells\n${JSON.stringify(abilityRootData, null, 2)}`);
-	}
-
-	// heimerdinger's R ability variants are stored under R so move them to their own abilities here
-	if (championId === 'Heimerdinger') {
-		if (abilityIndex === 4) {
-			variantKeys.splice(1, 3);
-		} else if (abilityIndex > 0) {
-			const end = abilityRootKey.slice(abilityRootKey.lastIndexOf('/') + 1, -7);
-			variantKeys.push(`${abilityRootKey.slice(0, -8)}R${abilityRootKey.slice(-7)}/${end}Ult`);
-		}
-	}
 
 	for (let i = 0; i < variantKeys.length; i++) {
 		const variantDataKey = variantKeys[i];
@@ -837,7 +804,7 @@ function championAbilityData(
 		const variantMSpell = variantData?.mSpell;
 		if (!variantData || !variantMSpell) {
 			if (i === 0) {
-				throw new Error(`${abilityRootKey} no variant data ${variantDataKey}`);
+				throw new Error(`${abilityDataKey} no variant data ${variantDataKey}`);
 			} else {
 				continue;
 			}
@@ -845,49 +812,33 @@ function championAbilityData(
 
 		const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
 
+		if (!mClientData) {
+			throw new Error(`${variantDataKey} expected mClientData`);
+		}
+		if (!mImgIconName) {
+			throw new Error(`${variantDataKey} expected mImgIconName`);
+		}
+		if (!mClientData.mTooltipData) {
+			throw new Error(`${variantDataKey} expected mTooltipData`);
+		}
+
 		if (i === 0) {
-			if (!mClientData) {
-				throw new Error(`${variantDataKey} expected mClientData`);
-			}
-			if (!mImgIconName) {
-				throw new Error(`${variantDataKey} expected mImgIconName`);
-			}
-			if (!mClientData.mTooltipData) {
-				throw new Error(`${variantDataKey} expected mTooltipData`);
-			}
-
-			maxLevel = abilityIndex === 0 ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
-		} else if (!mImgIconName || variants.some(v => v.image === mImgIconName[0].toLowerCase().replace('.dds', '.png')) || !(mClientData?.mUseTooltipFromAnotherSpell || mClientData?.mTooltipData)) {
-			continue;
+			maxLevel = abilityIndex === 4 ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
 		}
 
-		let name, tooltipPointer, tooltip, tooltipExtended;
-		if (mClientData.mUseTooltipFromAnotherSpell) {
-			const alreadyResolvedVariantIndex = variants.findIndex(v => v.dataKey === mClientData.mUseTooltipFromAnotherSpell);
-
-			if (~alreadyResolvedVariantIndex) {
-				tooltipPointer = alreadyResolvedVariantIndex;
-			} else {
-				console.warn(`${variantDataKey} unresolved tooltip source ${mClientData.mUseTooltipFromAnotherSpell}`);
-			}
-		} else if (mClientData.mTooltipData) {
-			const { mLocKeys } = mClientData.mTooltipData;
-			if (i === 0 && (!mLocKeys?.keyName || !mLocKeys.keyTooltip)) {
-				console.warn(`${variantDataKey} expected mLocKeys '.keyName' and '.keyTooltip'`, mLocKeys);
-			}
-			if (mLocKeys) {
-				name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`);
-				tooltip = mLocKeys.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
-				tooltipExtended = mLocKeys.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
-			}
+		const { mLocKeys } = mClientData.mTooltipData;
+		if (!(mLocKeys?.keyName || mLocKeys?.keyTooltip)) {
+			console.warn(`${variantDataKey} expected mLocKeys '.keyName' and '.keyTooltip'`, mLocKeys);
 		}
+		const name = mLocKeys?.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`);
+		const tooltip = mLocKeys?.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
+		const tooltipExtended = mLocKeys?.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
 
 		variants.push({
 			name,
 			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
 			mana,
 			cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
-			tooltipVariantIndex: tooltipPointer,
 			tooltip,
 			tooltipExtended,
 			dataValues: DataValues?.length
@@ -899,6 +850,15 @@ function championAbilityData(
 			effectAmount: cleanupObject(mEffectAmount),
 			dataKey: variantDataKey,
 		});
+	}
+
+	if ((championId === 'Jayce' && abilityIndex === 3)
+		|| (championId === 'Aphelios' && abilityIndex < 3)) {
+		maxLevel = spellLevelUpInfo[abilityIndex].mRequirements.length;
+	}
+
+	if (maxLevel === undefined) {
+		console.warn(`${abilityDataKey} max ability level not found`);
 	}
 
 	return {

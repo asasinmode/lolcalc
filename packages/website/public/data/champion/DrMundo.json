@@ -28,161 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Goes Where He Pleases",
-					"image": "assets/characters/drmundo/hud/icons2d/drmundo_p.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Dr. Mundo resists the first <status>Immobilizing</status> effect that hits him, instead losing <healing>@CurrentHealthLoss*100@% current Health</healing> and dropping a chemical cannister nearby for @CannisterGroundDuration@ seconds. Moving over it reduces this Ability's Cooldown by @PassiveCooldownRefund@ seconds and restores <healing>@MaxHealthGain*100@% max Health</healing>. Enemy champions moving over the cannister destroy it.<br><br>Dr. Mundo regenerates <healing>@MaxHealthRegen@ max Health</healing> every 5 seconds.",
-					"dataValues": {
-						"CannisterGroundDuration": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"CannisterPickupRadius": [
-							115,
-							115,
-							115,
-							115,
-							115,
-							115,
-							115
-						],
-						"CannisterDistanceAway": [
-							525,
-							525,
-							525,
-							525,
-							525,
-							525,
-							525
-						],
-						"CannisterMaxAngle": [
-							70,
-							70,
-							70,
-							70,
-							70,
-							70,
-							70
-						],
-						"VFXLineIndicatorRange": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"PassiveCooldownRefund": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"CurrentHealthLoss": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						],
-						"MaxHealthGain": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						]
-					},
-					"spellCalculations": {
-						"PassiveCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 60,
-									"mBreakpoints": [
-										{
-											"mLevel": 3,
-											"mAdditionalBonusAtThisLevel": -9
-										},
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -9
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": -9
-										},
-										{
-											"mLevel": 12,
-											"mAdditionalBonusAtThisLevel": -9
-										},
-										{
-											"mLevel": 15,
-											"mAdditionalBonusAtThisLevel": -9
-										},
-										{
-											"mLevel": 21,
-											"mAdditionalBonusAtThisLevel": -9
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"MaxHealthRegen": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.004,
-									"mInitialBonusPerLevel": 0.001,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 0.001
-										},
-										{
-											"mLevel": 13,
-											"mBonusPerLevelAtAndAfter": 0.002
-										},
-										{
-											"mLevel": 16,
-											"mBonusPerLevelAtAndAfter": 0.002
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 2
-						}
-					},
-					"dataKey": "Characters/DrMundo/Spells/DrMundoPassiveAbility/DrMundoP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -675,6 +520,161 @@
 						]
 					},
 					"dataKey": "Characters/DrMundo/Spells/DrMundoRAbility/DrMundoR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Goes Where He Pleases",
+					"image": "assets/characters/drmundo/hud/icons2d/drmundo_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Dr. Mundo resists the first <status>Immobilizing</status> effect that hits him, instead losing <healing>@CurrentHealthLoss*100@% current Health</healing> and dropping a chemical cannister nearby for @CannisterGroundDuration@ seconds. Moving over it reduces this Ability's Cooldown by @PassiveCooldownRefund@ seconds and restores <healing>@MaxHealthGain*100@% max Health</healing>. Enemy champions moving over the cannister destroy it.<br><br>Dr. Mundo regenerates <healing>@MaxHealthRegen@ max Health</healing> every 5 seconds.",
+					"dataValues": {
+						"CannisterGroundDuration": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"CannisterPickupRadius": [
+							115,
+							115,
+							115,
+							115,
+							115,
+							115,
+							115
+						],
+						"CannisterDistanceAway": [
+							525,
+							525,
+							525,
+							525,
+							525,
+							525,
+							525
+						],
+						"CannisterMaxAngle": [
+							70,
+							70,
+							70,
+							70,
+							70,
+							70,
+							70
+						],
+						"VFXLineIndicatorRange": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						],
+						"PassiveCooldownRefund": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"CurrentHealthLoss": [
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04
+						],
+						"MaxHealthGain": [
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04
+						]
+					},
+					"spellCalculations": {
+						"PassiveCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 60,
+									"mBreakpoints": [
+										{
+											"mLevel": 3,
+											"mAdditionalBonusAtThisLevel": -9
+										},
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -9
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": -9
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": -9
+										},
+										{
+											"mLevel": 15,
+											"mAdditionalBonusAtThisLevel": -9
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": -9
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"MaxHealthRegen": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.004,
+									"mInitialBonusPerLevel": 0.001,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 0.001
+										},
+										{
+											"mLevel": 13,
+											"mBonusPerLevelAtAndAfter": 0.002
+										},
+										{
+											"mLevel": 16,
+											"mBonusPerLevelAtAndAfter": 0.002
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/DrMundo/Spells/DrMundoPassiveAbility/DrMundoP"
 				}
 			]
 		}

@@ -28,65 +28,6 @@
 		"attackspeedratio": 0.67
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Joy Unending",
-					"image": "assets/characters/nilah/hud/icons2d/nilahp.png",
-					"tooltip": "When Nilah kills a minion, she and her nearest ally gain @ExperiencePercentage*100@% of the experience they would have normally lost from sharing the kill.<br><br>Nilah gains <healing>@HealingIncrease*100@% increased effectiveness from healing</healing> and <shield>@ShieldIncrease*100@% from shielding</shield> given to her by allied champions abilities. If an ally heals or shields her, they will also gain the increased amount of the shield or heal themselves. If an ally shields or heals themself, Nilah will also gain that additional effect.",
-					"tooltipExtended": "When Nilah kills a minion, she and her nearest ally gain @ExperiencePercentage*100@% of the experience they would have normally lost from sharing the kill.<br><br>Nilah gains <healing>@HealingIncrease*100@% increased effectiveness from healing</healing> and <shield>@ShieldIncrease*100@% from shielding</shield> given to her by allied champions abilities. If an ally heals or shields her, they will also gain the increased amount of the shield or heal themselves. If an ally shields or heals themself, Nilah will also gain that additional effect.<br><br><rules>Shields shared by Nilah have a maximum duration of @ShieldMaxDuration@ seconds.</rules>",
-					"dataValues": {
-						"ExperiencePercentage": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HealDistance": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"ShieldIncrease": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"HealingIncrease": [
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075
-						],
-						"ShieldMaxDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
-					},
-					"dataKey": "Characters/Nilah/Spells/NilahPassiveAbility/NilahPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -623,6 +564,65 @@
 						}
 					},
 					"dataKey": "Characters/Nilah/Spells/NilahRAbility/NilahR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Joy Unending",
+					"image": "assets/characters/nilah/hud/icons2d/nilahp.png",
+					"tooltip": "When Nilah kills a minion, she and her nearest ally gain @ExperiencePercentage*100@% of the experience they would have normally lost from sharing the kill.<br><br>Nilah gains <healing>@HealingIncrease*100@% increased effectiveness from healing</healing> and <shield>@ShieldIncrease*100@% from shielding</shield> given to her by allied champions abilities. If an ally heals or shields her, they will also gain the increased amount of the shield or heal themselves. If an ally shields or heals themself, Nilah will also gain that additional effect.",
+					"tooltipExtended": "When Nilah kills a minion, she and her nearest ally gain @ExperiencePercentage*100@% of the experience they would have normally lost from sharing the kill.<br><br>Nilah gains <healing>@HealingIncrease*100@% increased effectiveness from healing</healing> and <shield>@ShieldIncrease*100@% from shielding</shield> given to her by allied champions abilities. If an ally heals or shields her, they will also gain the increased amount of the shield or heal themselves. If an ally shields or heals themself, Nilah will also gain that additional effect.<br><br><rules>Shields shared by Nilah have a maximum duration of @ShieldMaxDuration@ seconds.</rules>",
+					"dataValues": {
+						"ExperiencePercentage": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HealDistance": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						],
+						"ShieldIncrease": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"HealingIncrease": [
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075
+						],
+						"ShieldMaxDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"dataKey": "Characters/Nilah/Spells/NilahPassiveAbility/NilahPassive"
 				}
 			]
 		}

@@ -28,29 +28,6 @@
 		"attackspeedratio": 0.64
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Void Stone",
-					"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png",
-					"tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
-					"tooltipExtended": "{{ Spell_VoidStone_Tooltip }}<br><rules>{{Reminder_Ghosted}}</rules>",
-					"dataValues": {
-						"DamageReductionPercent": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
-					},
-					"dataKey": "Characters/Kassadin/Spells/VoidStoneAbility/VoidStone"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -553,6 +530,29 @@
 						}
 					},
 					"dataKey": "Characters/Kassadin/Spells/RiftWalkAbility/RiftWalk"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Void Stone",
+					"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png",
+					"tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
+					"tooltipExtended": "{{ Spell_VoidStone_Tooltip }}<br><rules>{{Reminder_Ghosted}}</rules>",
+					"dataValues": {
+						"DamageReductionPercent": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"dataKey": "Characters/Kassadin/Spells/VoidStoneAbility/VoidStone"
 				}
 			]
 		}

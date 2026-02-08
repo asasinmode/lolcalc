@@ -28,30 +28,6 @@
 		"attackspeedratio": 0.67
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "King's Tribute",
-					"image": "assets/characters/trundle/hud/icons2d/trundle_passive.png",
-					"tooltip": "When an enemy dies near Trundle, he restores <healing>@RegenPercent@ of its max Health</healing>.",
-					"spellCalculations": {
-						"RegenPercent": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.018,
-									"mEndValue": 0.055,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "Characters/Trundle/Spells/TrundleDiseaseOverseerAbility/TrundleDiseaseOverseer"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -487,6 +463,30 @@
 						}
 					},
 					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "King's Tribute",
+					"image": "assets/characters/trundle/hud/icons2d/trundle_passive.png",
+					"tooltip": "When an enemy dies near Trundle, he restores <healing>@RegenPercent@ of its max Health</healing>.",
+					"spellCalculations": {
+						"RegenPercent": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.018,
+									"mEndValue": 0.055,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Trundle/Spells/TrundleDiseaseOverseerAbility/TrundleDiseaseOverseer"
 				}
 			]
 		}

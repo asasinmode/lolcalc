@@ -28,200 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Living Vengeance",
-					"image": "assets/characters/varus/hud/icons2d/varuspassive.png",
-					"tooltip": "When Varus kills an enemy, he gains <attackSpeed>@MinionAS@ Attack Speed</attackSpeed>, <scaleAD>@MinionAD@ Attack Damage</scaleAD>, and <scaleAP>@MinionAP@ Ability Power</scaleAP> for @ASDuration@ seconds.<br><br>Champion takedowns grant <attackSpeed>@ChampionAS@ Attack Speed</attackSpeed> that can bypass the Attack Speed cap, <scaleAD>@ChampionAD@ Attack Damage</scaleAD>, and <scaleAP>@ChampionAP@ Ability Power</scaleAP> instead.",
-					"dataValues": {
-						"PassiveAS": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"PassiveASMinion": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"PassiveASRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"PassiveASRatioMinion": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"AStoADMinion": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"AStoAPMinion": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"AStoADChampion": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"AStoAPChampion": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"NewASCap": [
-							3.33,
-							3.33,
-							3.33,
-							3.33,
-							3.33,
-							3.33,
-							3.33
-						]
-					},
-					"spellCalculations": {
-						"MinionAS": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.1,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 0.05
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"ChampionAS": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "PassiveAS",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"ASDuration": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 5,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 2
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 2
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 2
-										},
-										{
-											"mLevel": 21,
-											"mAdditionalBonusAtThisLevel": 2
-										},
-										{
-											"mLevel": 26,
-											"mAdditionalBonusAtThisLevel": 2
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"MinionAD": {
-							"mFormulaParts": [
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mDataValue": "AStoADMinion",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"MinionAP": {
-							"mFormulaParts": [
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mDataValue": "AStoAPMinion",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"ChampionAD": {
-							"mFormulaParts": [
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mDataValue": "AStoADChampion",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"ChampionAP": {
-							"mFormulaParts": [
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mDataValue": "AStoAPChampion",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Varus/Spells/VarusPassiveAbility/VarusPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -895,6 +701,200 @@
 						]
 					},
 					"dataKey": "Characters/Varus/Spells/VarusRAbility/VarusR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Living Vengeance",
+					"image": "assets/characters/varus/hud/icons2d/varuspassive.png",
+					"tooltip": "When Varus kills an enemy, he gains <attackSpeed>@MinionAS@ Attack Speed</attackSpeed>, <scaleAD>@MinionAD@ Attack Damage</scaleAD>, and <scaleAP>@MinionAP@ Ability Power</scaleAP> for @ASDuration@ seconds.<br><br>Champion takedowns grant <attackSpeed>@ChampionAS@ Attack Speed</attackSpeed> that can bypass the Attack Speed cap, <scaleAD>@ChampionAD@ Attack Damage</scaleAD>, and <scaleAP>@ChampionAP@ Ability Power</scaleAP> instead.",
+					"dataValues": {
+						"PassiveAS": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"PassiveASMinion": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"PassiveASRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"PassiveASRatioMinion": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"AStoADMinion": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"AStoAPMinion": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"AStoADChampion": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"AStoAPChampion": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"NewASCap": [
+							3.33,
+							3.33,
+							3.33,
+							3.33,
+							3.33,
+							3.33,
+							3.33
+						]
+					},
+					"spellCalculations": {
+						"MinionAS": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.1,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"ChampionAS": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveAS",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"ASDuration": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 5,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 2
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 2
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 2
+										},
+										{
+											"mLevel": 21,
+											"mAdditionalBonusAtThisLevel": 2
+										},
+										{
+											"mLevel": 26,
+											"mAdditionalBonusAtThisLevel": 2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"MinionAD": {
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mDataValue": "AStoADMinion",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MinionAP": {
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mDataValue": "AStoAPMinion",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ChampionAD": {
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mDataValue": "AStoADChampion",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ChampionAP": {
+							"mFormulaParts": [
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mDataValue": "AStoAPChampion",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Varus/Spells/VarusPassiveAbility/VarusPassive"
 				}
 			]
 		}

@@ -28,130 +28,6 @@
 		"attackspeedratio": 0.667
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Gift of the Drowned Ones",
-					"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Pyke stores @OneEnemyCalc@ of damage taken from champions, increased to @AdditionalBonusCalc@ when there's more than one enemy nearby. Pyke can store up to @DamageStorageMax@ damage. While <unique>unseen</unique> by enemies, he rapidly regenerates this stored damage.<br><br>Additionally, Pyke converts all Maximum Health increases to Attack Damage instead at a rate of <healing>14 Health</healing> to <physicalDamage>1 Attack Damage</physicalDamage>. ",
-					"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>",
-					"dataValues": {
-						"OneEnemy": [
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09
-						],
-						"AdditionalBonus": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
-					},
-					"spellCalculations": {
-						"DamageStorageMax": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mNumber": 80,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mCoefficient": 8,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"OneEnemyCalc": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "OneEnemy",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 29,
-									"mCoefficient": 0.002,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"AdditionalBonusCalc": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "AdditionalBonus",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 29,
-									"mCoefficient": 0.004,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"effectAmount": {
-						"0": [
-							14,
-							14,
-							14,
-							14,
-							14,
-							14,
-							14
-						],
-						"3": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"5": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"6": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						]
-					},
-					"dataKey": "Characters/Pyke/Spells/PykePassiveAbility/PykePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -737,6 +613,130 @@
 						}
 					},
 					"dataKey": "Characters/Pyke/Spells/PykeRAbility/PykeR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Gift of the Drowned Ones",
+					"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Pyke stores @OneEnemyCalc@ of damage taken from champions, increased to @AdditionalBonusCalc@ when there's more than one enemy nearby. Pyke can store up to @DamageStorageMax@ damage. While <unique>unseen</unique> by enemies, he rapidly regenerates this stored damage.<br><br>Additionally, Pyke converts all Maximum Health increases to Attack Damage instead at a rate of <healing>14 Health</healing> to <physicalDamage>1 Attack Damage</physicalDamage>. ",
+					"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>",
+					"dataValues": {
+						"OneEnemy": [
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09,
+							0.09
+						],
+						"AdditionalBonus": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"DamageStorageMax": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mNumber": 80,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 8,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"OneEnemyCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "OneEnemy",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 29,
+									"mCoefficient": 0.002,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"AdditionalBonusCalc": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "AdditionalBonus",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 29,
+									"mCoefficient": 0.004,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"effectAmount": {
+						"0": [
+							14,
+							14,
+							14,
+							14,
+							14,
+							14,
+							14
+						],
+						"3": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"5": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"6": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						]
+					},
+					"dataKey": "Characters/Pyke/Spells/PykePassiveAbility/PykePassive"
 				}
 			]
 		}

@@ -28,76 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Carnivore",
-					"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png",
-					"tooltip": "Killing an enemy restores <scaleLevel>@ChogathCarnivoreHeal@</scaleLevel> Health and <scaleLevel>@ChogathCarnivoreMana@</scaleLevel> Mana.",
-					"spellCalculations": {
-						"ChogathCarnivoreHeal": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 18,
-									"mInitialBonusPerLevel": 2,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"ChogathCarnivoreMana": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 4.72,
-									"mInitialBonusPerLevel": 0.28,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						}
-					},
-					"effectAmount": {
-						"0": [
-							16,
-							16,
-							16,
-							16,
-							16,
-							16,
-							16
-						],
-						"1": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"2": [
-							4.72,
-							4.72,
-							4.72,
-							4.72,
-							4.72,
-							4.72,
-							4.72
-						],
-						"3": [
-							0.28,
-							0.28,
-							0.28,
-							0.28,
-							0.28,
-							0.28,
-							0.28
-						]
-					},
-					"dataKey": "Characters/Chogath/Spells/CarnivoreAbility/Carnivore"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -590,6 +520,76 @@
 						}
 					},
 					"dataKey": "Characters/Chogath/Spells/FeastAbility/Feast"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Carnivore",
+					"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png",
+					"tooltip": "Killing an enemy restores <scaleLevel>@ChogathCarnivoreHeal@</scaleLevel> Health and <scaleLevel>@ChogathCarnivoreMana@</scaleLevel> Mana.",
+					"spellCalculations": {
+						"ChogathCarnivoreHeal": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 18,
+									"mInitialBonusPerLevel": 2,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ChogathCarnivoreMana": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 4.72,
+									"mInitialBonusPerLevel": 0.28,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"effectAmount": {
+						"0": [
+							16,
+							16,
+							16,
+							16,
+							16,
+							16,
+							16
+						],
+						"1": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"2": [
+							4.72,
+							4.72,
+							4.72,
+							4.72,
+							4.72,
+							4.72,
+							4.72
+						],
+						"3": [
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28,
+							0.28
+						]
+					},
+					"dataKey": "Characters/Chogath/Spells/CarnivoreAbility/Carnivore"
 				}
 			]
 		}

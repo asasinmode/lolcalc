@@ -28,52 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Organic Deconstruction",
-					"image": "assets/characters/velkoz/hud/icons2d/velkoz_passive.png",
-					"tooltip": "Vel'Koz's Abilities apply a stack of <keywordMajor>Deconstruction</keywordMajor> for @Duration@ seconds. Enemies with 3 stacks consume them and take <trueDamage>@TotalDamage@ true damage</trueDamage>.<br><br>Vel'Koz's Attacks refresh the duration of <keywordMajor>Deconstruction</keywordMajor>, but won't add new stacks.",
-					"dataValues": {
-						"Duration": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"MaxStacks": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mCoefficient": 0.6,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mStartValue": 35,
-									"mEndValue": 180,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Velkoz/Spells/VelkozPassiveAbility/VelkozPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -543,6 +497,52 @@
 						]
 					},
 					"dataKey": "Characters/Velkoz/Spells/VelkozRAbility/VelkozR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Organic Deconstruction",
+					"image": "assets/characters/velkoz/hud/icons2d/velkoz_passive.png",
+					"tooltip": "Vel'Koz's Abilities apply a stack of <keywordMajor>Deconstruction</keywordMajor> for @Duration@ seconds. Enemies with 3 stacks consume them and take <trueDamage>@TotalDamage@ true damage</trueDamage>.<br><br>Vel'Koz's Attacks refresh the duration of <keywordMajor>Deconstruction</keywordMajor>, but won't add new stacks.",
+					"dataValues": {
+						"Duration": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						],
+						"MaxStacks": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStartValue": 35,
+									"mEndValue": 180,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Velkoz/Spells/VelkozPassiveAbility/VelkozPassive"
 				}
 			]
 		}

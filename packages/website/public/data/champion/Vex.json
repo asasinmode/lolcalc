@@ -28,241 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Doom 'n Gloom",
-					"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Every @DoomCD@ seconds Vex becomes afflicted with Doom, causing her next basic Ability to <status>Knock Down</status> and <status>Fear</status> enemies for @FearDuration@ seconds.<br><br>Whenever a nearby enemy dashes or blinks, Vex marks them with <keywordMajor>Gloom</keywordMajor> for @GloomDuration@ seconds. Vex's next Attack against a <keywordMajor>Gloomed</keywordMajor> enemy deals an additional <magicDamage>@GloomProcCalc@ magic damage</magicDamage> and reduces this Ability's Cooldown by @GloomCDChamp*100@%.",
-					"tooltipExtended": "{{Spell_VexP_Tooltip}}<br><br><rules>Non-champion targets take @GloomMinionMod@ damage and refund @GloomCDNonChamp*100@% of this Ability's Cooldown.<br>Enemies <status>Feared</status> by this Ability move more slowly the farther they are from Vex.</rules>",
-					"dataValues": {
-						"GloomDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"MaxDoomCD": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"DashListenerRange": [
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600
-						],
-						"DashLockoutTime": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"GloomCDChamp": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"GloomCDNonChamp": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"FearSlowPercentMax": [
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99
-						],
-						"FearedMinionSpeed": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"EFearedMinionSpeed": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"FearSlowPercentMin": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"RangeOfMaxFearSlow": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"RangeOfMinFearSlow": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"APRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
-					},
-					"spellCalculations": {
-						"GloomProcCalc": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 40,
-									"mEndValue": 150,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"FearDuration": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.75,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 0.25
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": -1
-						},
-						"{c21c264c}": {
-							"mFormulaParts": [
-								{
-									"mNumber": 25000,
-									"__type": "NumberCalculationPart"
-								}
-							]
-						},
-						"DoomCD": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 25,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -3
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -3
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -3
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"GloomMinionMod": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.4,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.05
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Vex/Spells/VexPAbility/VexP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -674,6 +439,241 @@
 						}
 					},
 					"dataKey": "Characters/Vex/Spells/VexRAbility/VexR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Doom 'n Gloom",
+					"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Every @DoomCD@ seconds Vex becomes afflicted with Doom, causing her next basic Ability to <status>Knock Down</status> and <status>Fear</status> enemies for @FearDuration@ seconds.<br><br>Whenever a nearby enemy dashes or blinks, Vex marks them with <keywordMajor>Gloom</keywordMajor> for @GloomDuration@ seconds. Vex's next Attack against a <keywordMajor>Gloomed</keywordMajor> enemy deals an additional <magicDamage>@GloomProcCalc@ magic damage</magicDamage> and reduces this Ability's Cooldown by @GloomCDChamp*100@%.",
+					"tooltipExtended": "{{Spell_VexP_Tooltip}}<br><br><rules>Non-champion targets take @GloomMinionMod@ damage and refund @GloomCDNonChamp*100@% of this Ability's Cooldown.<br>Enemies <status>Feared</status> by this Ability move more slowly the farther they are from Vex.</rules>",
+					"dataValues": {
+						"GloomDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"MaxDoomCD": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"DashListenerRange": [
+							1600,
+							1600,
+							1600,
+							1600,
+							1600,
+							1600,
+							1600
+						],
+						"DashLockoutTime": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"GloomCDChamp": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"GloomCDNonChamp": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"FearSlowPercentMax": [
+							0.99,
+							0.99,
+							0.99,
+							0.99,
+							0.99,
+							0.99,
+							0.99
+						],
+						"FearedMinionSpeed": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"EFearedMinionSpeed": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"FearSlowPercentMin": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						],
+						"RangeOfMaxFearSlow": [
+							800,
+							800,
+							800,
+							800,
+							800,
+							800,
+							800
+						],
+						"RangeOfMinFearSlow": [
+							250,
+							250,
+							250,
+							250,
+							250,
+							250,
+							250
+						],
+						"APRatio": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						]
+					},
+					"spellCalculations": {
+						"GloomProcCalc": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 40,
+									"mEndValue": 150,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"FearDuration": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.75,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": -1
+						},
+						"{c21c264c}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 25000,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"DoomCD": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 25,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -3
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -3
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -3
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"GloomMinionMod": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.4,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Vex/Spells/VexPAbility/VexP"
 				}
 			]
 		}

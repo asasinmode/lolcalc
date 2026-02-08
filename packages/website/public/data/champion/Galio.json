@@ -28,76 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Colossal Smash",
-					"image": "assets/characters/galio/hud/icons2d/galio_passive.png",
-					"tooltip": "Galio's Attacks have increased attack speed and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies. <br><br>This effect's cooldown is reduced by @ChargeRatePerHit@ seconds when Galio hits an enemy champion or epic monster with an ability, once per cast.",
-					"dataValues": {
-						"ChargeRatePerHit": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PassiveCooldown": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 15,
-									"mEndValue": 115,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mCoefficient": 0.4,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mStat": 6,
-									"mStatFormula": 2,
-									"mCoefficient": 0.6,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"PassiveCooldownModified": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mPart2": {
-										"mDataValue": "PassiveCooldown"
-									},
-									"__type": "ProductOfSubPartsCalculationPart"
-								}
-							],
-							"mPrecision": -1
-						}
-					},
-					"dataKey": "Characters/Galio/Spells/GalioPassiveAbility/GalioPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -589,6 +519,76 @@
 						}
 					},
 					"dataKey": "Characters/Galio/Spells/GalioRAbility/GalioR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Colossal Smash",
+					"image": "assets/characters/galio/hud/icons2d/galio_passive.png",
+					"tooltip": "Galio's Attacks have increased attack speed and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies. <br><br>This effect's cooldown is reduced by @ChargeRatePerHit@ seconds when Galio hits an enemy champion or epic monster with an ability, once per cast.",
+					"dataValues": {
+						"ChargeRatePerHit": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PassiveCooldown": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 115,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mCoefficient": 0.4,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 6,
+									"mStatFormula": 2,
+									"mCoefficient": 0.6,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveCooldownModified": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mPart2": {
+										"mDataValue": "PassiveCooldown"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								}
+							],
+							"mPrecision": -1
+						}
+					},
+					"dataKey": "Characters/Galio/Spells/GalioPassiveAbility/GalioPassive"
 				}
 			]
 		}

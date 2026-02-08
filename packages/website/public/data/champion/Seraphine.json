@@ -28,135 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Stage Presence",
-					"image": "assets/characters/seraphine/hud/icons2d/seraphine_passive.png",
-					"tooltip": "Every third basic Ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> for each nearby ally whenever she casts an Ability. For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.",
-					"tooltipExtended": "Every third basic ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> on each nearby ally whenever she casts an ability (<keywordMajor>Notes</keywordMajor> last @NoteDuration@ seconds and stack up to @MaxNotes@ per ally). For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.<br><br><rules>Notes from allies deal @AllyNoteDamagePercent*100@% damage.</rules>",
-					"dataValues": {
-						"EchoCastDelay": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						],
-						"AutoAPRatio": [
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075
-						],
-						"MaxNotes": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AllyNoteDamagePercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"NoteDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"BonusAARange": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"DelayBetweenNoteCasts": [
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075,
-							0.075
-						],
-						"NoteRadius": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"DelayBetweenNoteCastsDecayRate": [
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95
-						],
-						"MinionDamageMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"NoteAPRatio": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						]
-					},
-					"spellCalculations": {
-						"AutoDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStartValue": 4,
-									"mEndValue": 25,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mDataValue": "NoteAPRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Seraphine/Spells/SeraphinePassiveAbility/SeraphinePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -593,6 +464,135 @@
 						}
 					},
 					"dataKey": "Characters/Seraphine/Spells/SeraphineRAbility/SeraphineR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Stage Presence",
+					"image": "assets/characters/seraphine/hud/icons2d/seraphine_passive.png",
+					"tooltip": "Every third basic Ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> for each nearby ally whenever she casts an Ability. For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.",
+					"tooltipExtended": "Every third basic ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> on each nearby ally whenever she casts an ability (<keywordMajor>Notes</keywordMajor> last @NoteDuration@ seconds and stack up to @MaxNotes@ per ally). For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.<br><br><rules>Notes from allies deal @AllyNoteDamagePercent*100@% damage.</rules>",
+					"dataValues": {
+						"EchoCastDelay": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"AutoAPRatio": [
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075
+						],
+						"MaxNotes": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"AllyNoteDamagePercent": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"NoteDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"BonusAARange": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"DelayBetweenNoteCasts": [
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075,
+							0.075
+						],
+						"NoteRadius": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"DelayBetweenNoteCastsDecayRate": [
+							0.95,
+							0.95,
+							0.95,
+							0.95,
+							0.95,
+							0.95,
+							0.95
+						],
+						"MinionDamageMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"NoteAPRatio": [
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04,
+							0.04
+						]
+					},
+					"spellCalculations": {
+						"AutoDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 4,
+									"mEndValue": 25,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mDataValue": "NoteAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Seraphine/Spells/SeraphinePassiveAbility/SeraphinePassive"
 				}
 			]
 		}

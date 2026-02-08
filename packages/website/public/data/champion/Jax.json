@@ -28,125 +28,6 @@
 		"attackspeedratio": 0.638
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Relentless Assault",
-					"image": "assets/characters/jax/hud/icons2d/jaxp.png",
-					"tooltip": "Jax's Attacks grant a stack for 2.5 seconds that gives him <attackSpeed>@AttackSpeedPerStack@ Attack Speed</attackSpeed> (max <attackSpeed>@MaxBonusAttackSpeed@ Attack Speed</attackSpeed>).",
-					"dataValues": {
-						"BuffDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"MaxStacks": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"FallOffRate": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"BelvethVsJaxQuestRewardStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"spellCalculations": {
-						"AttackSpeedPerStack": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.05,
-									"mBreakpoints": [
-										{
-											"mLevel": 4,
-											"mAdditionalBonusAtThisLevel": 0.015
-										},
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 0.015
-										},
-										{
-											"mLevel": 10,
-											"mAdditionalBonusAtThisLevel": 0.015
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 0.015
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.015
-										},
-										{
-											"mLevel": 19,
-											"mAdditionalBonusAtThisLevel": 0.015
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						},
-						"MaxBonusAttackSpeed": {
-							"mMultiplier": {
-								"mDataValue": "MaxStacks"
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "AttackSpeedPerStack"
-						},
-						"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.003,
-									"mInitialBonusPerLevel": 0.001,
-									"mBreakpoints": [
-										{
-											"mLevel": 14
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 2
-						},
-						"BelvethVsJaxQuestRewardAttackSpeed": {
-							"mMultiplier": {
-								"mBuffName": "{a8a3dd7a}",
-								"mCoefficient": 1
-							},
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack"
-						}
-					},
-					"dataKey": "Characters/Jax/Spells/JaxPassiveAbility/JaxPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -585,6 +466,125 @@
 						}
 					},
 					"dataKey": "Characters/Jax/Spells/JaxRAbility/JaxR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Relentless Assault",
+					"image": "assets/characters/jax/hud/icons2d/jaxp.png",
+					"tooltip": "Jax's Attacks grant a stack for 2.5 seconds that gives him <attackSpeed>@AttackSpeedPerStack@ Attack Speed</attackSpeed> (max <attackSpeed>@MaxBonusAttackSpeed@ Attack Speed</attackSpeed>).",
+					"dataValues": {
+						"BuffDuration": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"MaxStacks": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"FallOffRate": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"BelvethVsJaxQuestRewardStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"AttackSpeedPerStack": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.05,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 10,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.015
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": 0.015
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"MaxBonusAttackSpeed": {
+							"mMultiplier": {
+								"mDataValue": "MaxStacks"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "AttackSpeedPerStack"
+						},
+						"BelvethVsJaxQuestRewardAttackSpeedPerStack": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.003,
+									"mInitialBonusPerLevel": 0.001,
+									"mBreakpoints": [
+										{
+											"mLevel": 14
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						},
+						"BelvethVsJaxQuestRewardAttackSpeed": {
+							"mMultiplier": {
+								"mBuffName": "{a8a3dd7a}",
+								"mCoefficient": 1
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mModifiedGameCalculation": "BelvethVsJaxQuestRewardAttackSpeedPerStack"
+						}
+					},
+					"dataKey": "Characters/Jax/Spells/JaxPassiveAbility/JaxPassive"
 				}
 			]
 		}

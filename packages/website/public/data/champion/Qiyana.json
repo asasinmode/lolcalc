@@ -28,169 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Royal Privilege",
-					"image": "assets/characters/qiyana/hud/icons2d/qiyana_passive.png",
-					"tooltip": "Qiyana's Attacks and Abilities deal an additional <physicalDamage>@FinalDamage@ bonus physical damage</physicalDamage>. This effect has a 25 second per-target Cooldown.<br><br>Using <spellName>{{Spell_QiyanaEnchant_Name}}</spellName> to gain a different weapon <keywordMajor>Enchantment</keywordMajor> resets this effect's Cooldown on all targets.",
-					"dataValues": {
-						"BurnDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SlowDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"StunDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HasteDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"StoneExecuteBase": [
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06
-						],
-						"HealDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"HealRadius": [
-							360,
-							360,
-							360,
-							360,
-							360,
-							360,
-							360
-						],
-						"DoubleHitBuffDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"BonusADRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"APRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
-					},
-					"spellCalculations": {
-						"FinalDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 15,
-									"mInitialBonusPerLevel": 4,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mBonusPerLevelAtAndAfter": 4
-										},
-										{
-											"mLevel": 11,
-											"mBonusPerLevelAtAndAfter": 4
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "BonusADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"ICD": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 14,
-									"mEndValue": 14,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"{222614ec}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1,
-									"mBreakpoints": [
-										{
-											"mLevel": 6
-										},
-										{
-											"mLevel": 11
-										},
-										{
-											"mLevel": 16
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Qiyana/Spells/QiyanaPassiveAbility/QiyanaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -820,6 +657,169 @@
 						}
 					},
 					"dataKey": "Characters/Qiyana/Spells/QiyanaRAbility/QiyanaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Royal Privilege",
+					"image": "assets/characters/qiyana/hud/icons2d/qiyana_passive.png",
+					"tooltip": "Qiyana's Attacks and Abilities deal an additional <physicalDamage>@FinalDamage@ bonus physical damage</physicalDamage>. This effect has a 25 second per-target Cooldown.<br><br>Using <spellName>{{Spell_QiyanaEnchant_Name}}</spellName> to gain a different weapon <keywordMajor>Enchantment</keywordMajor> resets this effect's Cooldown on all targets.",
+					"dataValues": {
+						"BurnDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"SlowDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"StunDuration": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HasteDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"StoneExecuteBase": [
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06
+						],
+						"HealDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"HealRadius": [
+							360,
+							360,
+							360,
+							360,
+							360,
+							360,
+							360
+						],
+						"DoubleHitBuffDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"BonusADRatio": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"APRatio": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						]
+					},
+					"spellCalculations": {
+						"FinalDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 15,
+									"mInitialBonusPerLevel": 4,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mBonusPerLevelAtAndAfter": 4
+										},
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 4
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "BonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ICD": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 14,
+									"mEndValue": 14,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"{222614ec}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1,
+									"mBreakpoints": [
+										{
+											"mLevel": 6
+										},
+										{
+											"mLevel": 11
+										},
+										{
+											"mLevel": 16
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Qiyana/Spells/QiyanaPassiveAbility/QiyanaPassive"
 				}
 			]
 		}

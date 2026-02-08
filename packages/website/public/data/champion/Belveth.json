@@ -28,142 +28,6 @@
 		"attackspeedratio": 0.85
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Death in Lavender ",
-					"image": "assets/characters/belveth/hud/icons2d/belveth_passive.png",
-					"tooltip": "After using an Ability, Bel'Veth becomes Ghosted and her next @SheenNumberOfAttacks@ Attacks gain <attackSpeed>@SheenSpeedPerStack@ Attack Speed</attackSpeed>.<br><br>Bel'veth gains <keywordMajor>@MonsterStacks@ Lavender</keywordMajor> stack for large minion and monster takedowns and <keywordMajor>@ChampionStacks@ Lavender</keywordMajor> stacks for champion and epic monster takedowns. Each stack permanently grants <attackSpeed>@AttackSpeedPerStack@% Attack Speed</attackSpeed>.<br><br>Total bonus <attackSpeed>Attack Speed</attackSpeed>: <attackSpeed>@TotalAttackSpeedFromStacks@%</attackSpeed>",
-					"tooltipExtended": "{{Spell_BelvethPassive_Tooltip}}<br><br><rules>Bel'veth Attacks faster than normal but her Attacks deal damage at @AttackADRatio*100@% effectiveness and her On-Hit Effects are applied at @OnHitRatio*100@% effectiveness.<br>Bel'Veth does not gain <attackSpeed>Attack Speed</attackSpeed> on level up and has no cap on <attackSpeed>Attack Speed</attackSpeed>.<br>{{Reminder_Ghosted}}</rules>",
-					"dataValues": {
-						"MonsterStacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ChampionStacks": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ARAMBonusStacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"TakedownDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SheenDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BaronBuffDuration": [
-							180,
-							180,
-							180,
-							180,
-							180,
-							180,
-							180
-						],
-						"SheenNumberOfAttacks": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"AttackADRatio": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"OnHitRatio": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"BrawlBonusStacks": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"spellCalculations": {
-						"AttackSpeedPerStack": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.28,
-									"mEndValue": 1.1,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mPrecision": 2
-						},
-						"SheenSpeedPerStack": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.2,
-									"mEndValue": 0.4,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"TotalAttackSpeedFromStacks": {
-							"mMultiplier": {
-								"mBuffName": "{7f3c01cf}",
-								"mCoefficient": 1
-							},
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "AttackSpeedPerStack"
-						}
-					},
-					"dataKey": "Characters/Belveth/Spells/BelvethPassiveAbility/BelvethPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -849,6 +713,142 @@
 						}
 					},
 					"dataKey": "Characters/Belveth/Spells/BelvethRAbility/BelvethR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Death in Lavender ",
+					"image": "assets/characters/belveth/hud/icons2d/belveth_passive.png",
+					"tooltip": "After using an Ability, Bel'Veth becomes Ghosted and her next @SheenNumberOfAttacks@ Attacks gain <attackSpeed>@SheenSpeedPerStack@ Attack Speed</attackSpeed>.<br><br>Bel'veth gains <keywordMajor>@MonsterStacks@ Lavender</keywordMajor> stack for large minion and monster takedowns and <keywordMajor>@ChampionStacks@ Lavender</keywordMajor> stacks for champion and epic monster takedowns. Each stack permanently grants <attackSpeed>@AttackSpeedPerStack@% Attack Speed</attackSpeed>.<br><br>Total bonus <attackSpeed>Attack Speed</attackSpeed>: <attackSpeed>@TotalAttackSpeedFromStacks@%</attackSpeed>",
+					"tooltipExtended": "{{Spell_BelvethPassive_Tooltip}}<br><br><rules>Bel'veth Attacks faster than normal but her Attacks deal damage at @AttackADRatio*100@% effectiveness and her On-Hit Effects are applied at @OnHitRatio*100@% effectiveness.<br>Bel'Veth does not gain <attackSpeed>Attack Speed</attackSpeed> on level up and has no cap on <attackSpeed>Attack Speed</attackSpeed>.<br>{{Reminder_Ghosted}}</rules>",
+					"dataValues": {
+						"MonsterStacks": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ChampionStacks": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"ARAMBonusStacks": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"TakedownDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"SheenDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BaronBuffDuration": [
+							180,
+							180,
+							180,
+							180,
+							180,
+							180,
+							180
+						],
+						"SheenNumberOfAttacks": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"AttackADRatio": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"OnHitRatio": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"BrawlBonusStacks": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"AttackSpeedPerStack": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.28,
+									"mEndValue": 1.1,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						},
+						"SheenSpeedPerStack": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.2,
+									"mEndValue": 0.4,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"TotalAttackSpeedFromStacks": {
+							"mMultiplier": {
+								"mBuffName": "{7f3c01cf}",
+								"mCoefficient": 1
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mModifiedGameCalculation": "AttackSpeedPerStack"
+						}
+					},
+					"dataKey": "Characters/Belveth/Spells/BelvethPassiveAbility/BelvethPassive"
 				}
 			]
 		}

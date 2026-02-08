@@ -28,121 +28,6 @@
 		"attackspeedratio": 0.7
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "The Relentless Storm",
-					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_p.png",
-					"tooltip": "Volibear gains <attackSpeed>@AttackSpeedCalc@ Attack Speed</attackSpeed> for @BuffDuration@ seconds whenever he deals damage with an Ability or Attack, stacking up to 5 times.<br><br>At 5 stacks, Volibear's claws ignite with lightning, causing his Attacks to deal an additional <magicDamage>@ChainLightningDamage@ magic damage</magicDamage> to the target and 4 closest enemies.",
-					"dataValues": {
-						"PDamageRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"BounceCounterMax": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"APRatio": [
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45
-						],
-						"BuffDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"PAttackSpeed": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						]
-					},
-					"spellCalculations": {
-						"ChainLightningDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 11,
-									"mInitialBonusPerLevel": 1,
-									"mBreakpoints": [
-										{
-											"mLevel": 4,
-											"mBonusPerLevelAtAndAfter": 2
-										},
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 3
-										},
-										{
-											"mLevel": 14,
-											"mBonusPerLevelAtAndAfter": 4
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"AttackSpeedCalc": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mDataValue": "PAttackSpeed",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{ebe98aa3}": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mDataValue": "PAttackSpeed",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mCoefficient": 0.04,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Volibear/Spells/VolibearPAbility/VolibearP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -874,6 +759,121 @@
 						]
 					},
 					"dataKey": "Characters/Volibear/Spells/VolibearRAbility/VolibearR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "The Relentless Storm",
+					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_p.png",
+					"tooltip": "Volibear gains <attackSpeed>@AttackSpeedCalc@ Attack Speed</attackSpeed> for @BuffDuration@ seconds whenever he deals damage with an Ability or Attack, stacking up to 5 times.<br><br>At 5 stacks, Volibear's claws ignite with lightning, causing his Attacks to deal an additional <magicDamage>@ChainLightningDamage@ magic damage</magicDamage> to the target and 4 closest enemies.",
+					"dataValues": {
+						"PDamageRatio": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"BounceCounterMax": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"APRatio": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						],
+						"BuffDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"PAttackSpeed": [
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05
+						]
+					},
+					"spellCalculations": {
+						"ChainLightningDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 11,
+									"mInitialBonusPerLevel": 1,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mBonusPerLevelAtAndAfter": 2
+										},
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 3
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 4
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"AttackSpeedCalc": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mDataValue": "PAttackSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{ebe98aa3}": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mDataValue": "PAttackSpeed",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mCoefficient": 0.04,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Volibear/Spells/VolibearPAbility/VolibearP"
 				}
 			]
 		}

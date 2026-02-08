@@ -28,50 +28,6 @@
 		"attackspeedratio": 0.679
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Double Strike",
-					"image": "assets/characters/masteryi/hud/icons2d/masteryi_passive1.png",
-					"tooltip": "Every @AttackCount@th Attack, Master Yi strikes twice. The second Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
-					"tooltipExtended": "{{Passive_MasterYiPassive_Tooltip}}<br><br><rules>The second strike counts as a normal Attack; it is able to critically strike and applies on-hit effects.</rules>",
-					"dataValues": {
-						"StackDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AttackCount": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mCoefficient": 0.5,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/MasterYi/Spells/MasterYiPassiveAbility/MasterYiPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -629,6 +585,50 @@
 						]
 					},
 					"dataKey": "Characters/MasterYi/Spells/HighlanderAbility/Highlander"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Double Strike",
+					"image": "assets/characters/masteryi/hud/icons2d/masteryi_passive1.png",
+					"tooltip": "Every @AttackCount@th Attack, Master Yi strikes twice. The second Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"tooltipExtended": "{{Passive_MasterYiPassive_Tooltip}}<br><br><rules>The second strike counts as a normal Attack; it is able to critically strike and applies on-hit effects.</rules>",
+					"dataValues": {
+						"StackDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"AttackCount": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mCoefficient": 0.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/MasterYi/Spells/MasterYiPassiveAbility/MasterYiPassive"
 				}
 			]
 		}

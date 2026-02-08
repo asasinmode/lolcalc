@@ -28,160 +28,6 @@
 		"attackspeedratio": 0.694
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Backstab",
-					"image": "assets/characters/shaco/hud/icons2d/jester_carefulstrikes.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "When striking enemies that are facing away from him:<li>Shaco's Attacks deal an additional <physicalDamage>@BasicAttackDamage@ physical damage</physicalDamage> that can critically strike.<li><spellName>{{Spell_TwoShivPoison_Name}}</spellName> deals an additional <magicDamage>@ShivDamage@ magic damage</magicDamage>, increased to <magicDamage>@ShivDamageExecute@ magic damage</magicDamage> if the target is below 30% Health.",
-					"dataValues": {
-						"PerUnitCD": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"MonsterCritMod": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"APRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"CloneMult": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"ShivSlowAmount": [
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4
-						],
-						"ShredDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ShivExecuteDamagePercent": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"AttackBonusADRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						]
-					},
-					"spellCalculations": {
-						"MonsterDamageTooltip": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mSubparts": [
-											{
-												"mDataValue": "MonsterCritMod"
-											},
-											{
-												"mStat": 9,
-												"mStatFormula": 2,
-												"mCoefficient": 1
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"BasicAttackDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 20,
-									"mEndValue": 35,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "AttackBonusADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"ShivDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 15,
-									"mEndValue": 50,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"ShivDamageExecute": {
-							"mMultiplier": {
-								"mDataValue": "ShivExecuteDamagePercent"
-							},
-							"mModifiedGameCalculation": "ShivDamage"
-						}
-					},
-					"dataKey": "Characters/Shaco/Spells/ShacoPassiveAbility/ShacoPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -801,6 +647,160 @@
 						]
 					},
 					"dataKey": "Characters/Shaco/Spells/HallucinateFullAbility/HallucinateFull"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Backstab",
+					"image": "assets/characters/shaco/hud/icons2d/jester_carefulstrikes.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "When striking enemies that are facing away from him:<li>Shaco's Attacks deal an additional <physicalDamage>@BasicAttackDamage@ physical damage</physicalDamage> that can critically strike.<li><spellName>{{Spell_TwoShivPoison_Name}}</spellName> deals an additional <magicDamage>@ShivDamage@ magic damage</magicDamage>, increased to <magicDamage>@ShivDamageExecute@ magic damage</magicDamage> if the target is below 30% Health.",
+					"dataValues": {
+						"PerUnitCD": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"MonsterCritMod": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"APRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"CloneMult": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						],
+						"ShivSlowAmount": [
+							-0.4,
+							-0.4,
+							-0.4,
+							-0.4,
+							-0.4,
+							-0.4,
+							-0.4
+						],
+						"ShredDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"ShivExecuteDamagePercent": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"AttackBonusADRatio": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						]
+					},
+					"spellCalculations": {
+						"MonsterDamageTooltip": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mDataValue": "MonsterCritMod"
+											},
+											{
+												"mStat": 9,
+												"mStatFormula": 2,
+												"mCoefficient": 1
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"BasicAttackDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 20,
+									"mEndValue": 35,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "AttackBonusADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"ShivDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 50,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ShivDamageExecute": {
+							"mMultiplier": {
+								"mDataValue": "ShivExecuteDamagePercent"
+							},
+							"mModifiedGameCalculation": "ShivDamage"
+						}
+					},
+					"dataKey": "Characters/Shaco/Spells/ShacoPassiveAbility/ShacoPassive"
 				}
 			]
 		}

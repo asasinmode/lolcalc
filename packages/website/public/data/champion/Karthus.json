@@ -28,28 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Death Defied",
-					"image": "assets/characters/karthus/hud/icons2d/karthus_passive.png",
-					"tooltip": "When Karthus dies he can use his Abilities for free for @PassiveDuration@ seconds.",
-					"dataValues": {
-						"PassiveDuration": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						]
-					},
-					"dataKey": "Characters/Karthus/Spells/KarthusDeathDefiedAbility/KarthusDeathDefied"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -379,6 +357,28 @@
 						}
 					},
 					"dataKey": "Characters/Karthus/Spells/KarthusFallenOneAbility/KarthusFallenOne"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Death Defied",
+					"image": "assets/characters/karthus/hud/icons2d/karthus_passive.png",
+					"tooltip": "When Karthus dies he can use his Abilities for free for @PassiveDuration@ seconds.",
+					"dataValues": {
+						"PassiveDuration": [
+							7,
+							7,
+							7,
+							7,
+							7,
+							7,
+							7
+						]
+					},
+					"dataKey": "Characters/Karthus/Spells/KarthusDeathDefiedAbility/KarthusDeathDefied"
 				}
 			]
 		}

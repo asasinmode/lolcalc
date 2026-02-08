@@ -28,106 +28,6 @@
 		"attackspeedratio": 0.679
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "League of Draven",
-					"image": "assets/characters/draven/hud/icons2d/draven_passive.png",
-					"tooltip": "Draven gains @StackGain@ stack whenever he kills a non-champion unit or turret, catches a <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven gains @PassiveGoldBase@ gold plus @PassiveGoldPerStack@ additional gold per stack upon killing a champion. Draven loses @PercentOfStacksLost@% of stacks upon death.<br><br>Total Gold Earned: <statTracking>@DravenPassiveGoldEarned@</statTracking><br>Highest Reward: <statTracking>@DravenPassiveHighestBounty@</statTracking>",
-					"dataValues": {
-						"PassiveGoldBase": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"PassiveGoldPerStack": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PercentOfStacksLost": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"StackGain": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"StackGainEnemy": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"CherryStacksPerRoundBeforeMultiplier": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"CherryStackMultiplier": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"spellCalculations": {
-						"DravenPassiveGoldEarned": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mBuffName": "DravenPassiveGoldEarned",
-									"mCoefficient": 1,
-									"__type": "BuffCounterByCoefficientCalculationPart"
-								}
-							]
-						},
-						"DravenPassiveHighestBounty": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mBuffName": "DravenPassiveHighestBounty",
-									"mCoefficient": 1,
-									"__type": "BuffCounterByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Draven/Spells/DravenPassiveAbility/DravenPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -528,6 +428,106 @@
 						}
 					},
 					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "League of Draven",
+					"image": "assets/characters/draven/hud/icons2d/draven_passive.png",
+					"tooltip": "Draven gains @StackGain@ stack whenever he kills a non-champion unit or turret, catches a <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven gains @PassiveGoldBase@ gold plus @PassiveGoldPerStack@ additional gold per stack upon killing a champion. Draven loses @PercentOfStacksLost@% of stacks upon death.<br><br>Total Gold Earned: <statTracking>@DravenPassiveGoldEarned@</statTracking><br>Highest Reward: <statTracking>@DravenPassiveHighestBounty@</statTracking>",
+					"dataValues": {
+						"PassiveGoldBase": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"PassiveGoldPerStack": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PercentOfStacksLost": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"StackGain": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"StackGainEnemy": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"CherryStacksPerRoundBeforeMultiplier": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"CherryStackMultiplier": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"DravenPassiveGoldEarned": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "DravenPassiveGoldEarned",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						},
+						"DravenPassiveHighestBounty": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mBuffName": "DravenPassiveHighestBounty",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Draven/Spells/DravenPassiveAbility/DravenPassive"
 				}
 			]
 		}

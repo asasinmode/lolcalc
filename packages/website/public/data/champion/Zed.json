@@ -28,119 +28,6 @@
 		"attackspeedratio": 0.651
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Contempt for the Weak",
-					"image": "assets/characters/zed/hud/icons2d/zedp.png",
-					"tooltip": "Whenever Zed Attacks an enemy below @CurrentHealthThreshold*100@% Health, he deals an additional <magicDamage>@MaxHPDamage@ max Health magic damage</magicDamage>. Enemy champions can only be hit once every @PerUnitCD@ seconds.",
-					"tooltipExtended": "{{Spell_ZedPassive_Tooltip}}<br><br><rules>This Ability deals @MonsterDamageMod*100@% damage to jungle monsters, capped at @MonsterDamageCap@ damage to epic monsters.</rules>",
-					"dataValues": {
-						"CurrentHealthThreshold": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"PerUnitCD": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"MonsterDamageCap": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"MonsterDamageMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"ShenZedQuestKillCount": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ShenZedQuestBonus": [
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02
-						]
-					},
-					"spellCalculations": {
-						"{6a1a62e9}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.06,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 0.02
-										},
-										{
-											"mLevel": 17,
-											"mAdditionalBonusAtThisLevel": 0.02
-										},
-										{
-											"mLevel": 25,
-											"mAdditionalBonusAtThisLevel": 0.02
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{ad3d785f}": {
-							"mFormulaParts": [
-								{
-									"mSpellCalculationKey": "{6a1a62e9}",
-									"__type": "{f3cbe7b2}"
-								},
-								{
-									"mDataValue": "ShenZedQuestBonus",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"MaxHPDamage": {
-							"mDefaultGameCalculation": "{6a1a62e9}",
-							"mConditionalGameCalculation": "{ad3d785f}",
-							"mConditionalCalculationRequirements": {
-								"mBuffName": "{ecbd8e2e}"
-							}
-						}
-					},
-					"dataKey": "Characters/Zed/Spells/ZedPassiveAbility/ZedPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -529,6 +416,119 @@
 						}
 					},
 					"dataKey": "Characters/Zed/Spells/ZedRAbility/ZedR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Contempt for the Weak",
+					"image": "assets/characters/zed/hud/icons2d/zedp.png",
+					"tooltip": "Whenever Zed Attacks an enemy below @CurrentHealthThreshold*100@% Health, he deals an additional <magicDamage>@MaxHPDamage@ max Health magic damage</magicDamage>. Enemy champions can only be hit once every @PerUnitCD@ seconds.",
+					"tooltipExtended": "{{Spell_ZedPassive_Tooltip}}<br><br><rules>This Ability deals @MonsterDamageMod*100@% damage to jungle monsters, capped at @MonsterDamageCap@ damage to epic monsters.</rules>",
+					"dataValues": {
+						"CurrentHealthThreshold": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"PerUnitCD": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"MonsterDamageCap": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"MonsterDamageMod": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"ShenZedQuestKillCount": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"ShenZedQuestBonus": [
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02
+						]
+					},
+					"spellCalculations": {
+						"{6a1a62e9}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.06,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 0.02
+										},
+										{
+											"mLevel": 17,
+											"mAdditionalBonusAtThisLevel": 0.02
+										},
+										{
+											"mLevel": 25,
+											"mAdditionalBonusAtThisLevel": 0.02
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{ad3d785f}": {
+							"mFormulaParts": [
+								{
+									"mSpellCalculationKey": "{6a1a62e9}",
+									"__type": "{f3cbe7b2}"
+								},
+								{
+									"mDataValue": "ShenZedQuestBonus",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"MaxHPDamage": {
+							"mDefaultGameCalculation": "{6a1a62e9}",
+							"mConditionalGameCalculation": "{ad3d785f}",
+							"mConditionalCalculationRequirements": {
+								"mBuffName": "{ecbd8e2e}"
+							}
+						}
+					},
+					"dataKey": "Characters/Zed/Spells/ZedPassiveAbility/ZedPassive"
 				}
 			]
 		}

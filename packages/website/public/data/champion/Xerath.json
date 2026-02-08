@@ -28,63 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Mana Surge",
-					"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png",
-					"tooltip": "Every 16 seconds Xerath's next Attack against a champion restores <scaleMana>@ChampionManaRestoreTT@ Mana</scaleMana>. It restores <scaleMana>@MinionManaRestoreTT@ Mana</scaleMana> if attacking minions, jungle monsters or structures.<br><br>Whenever Xerath kills a unit, this cooldown is reduced by @CooldownKillRefund@ seconds.",
-					"dataValues": {
-						"CooldownKillRefund": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
-						]
-					},
-					"spellCalculations": {
-						"MinionManaRestoreTT": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 30,
-									"mInitialBonusPerLevel": 3,
-									"mBreakpoints": [
-										{
-											"mLevel": 4,
-											"mBonusPerLevelAtAndAfter": 6
-										},
-										{
-											"mLevel": 7,
-											"mBonusPerLevelAtAndAfter": 9
-										},
-										{
-											"mLevel": 11,
-											"mBonusPerLevelAtAndAfter": 12
-										},
-										{
-											"mLevel": 16,
-											"mBonusPerLevelAtAndAfter": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"ChampionManaRestoreTT": {
-							"mMultiplier": {
-								"mNumber": 2
-							},
-							"mModifiedGameCalculation": "MinionManaRestoreTT"
-						}
-					},
-					"dataKey": "Characters/Xerath/Spells/XerathAscended2Ability/XerathAscended2"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -588,6 +531,63 @@
 						]
 					},
 					"dataKey": "Characters/Xerath/Spells/XerathLocusOfPower2Ability/XerathLocusOfPower2"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Mana Surge",
+					"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png",
+					"tooltip": "Every 16 seconds Xerath's next Attack against a champion restores <scaleMana>@ChampionManaRestoreTT@ Mana</scaleMana>. It restores <scaleMana>@MinionManaRestoreTT@ Mana</scaleMana> if attacking minions, jungle monsters or structures.<br><br>Whenever Xerath kills a unit, this cooldown is reduced by @CooldownKillRefund@ seconds.",
+					"dataValues": {
+						"CooldownKillRefund": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
+						]
+					},
+					"spellCalculations": {
+						"MinionManaRestoreTT": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mInitialBonusPerLevel": 3,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mBonusPerLevelAtAndAfter": 6
+										},
+										{
+											"mLevel": 7,
+											"mBonusPerLevelAtAndAfter": 9
+										},
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 12
+										},
+										{
+											"mLevel": 16,
+											"mBonusPerLevelAtAndAfter": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ChampionManaRestoreTT": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"mModifiedGameCalculation": "MinionManaRestoreTT"
+						}
+					},
+					"dataKey": "Characters/Xerath/Spells/XerathAscended2Ability/XerathAscended2"
 				}
 			]
 		}

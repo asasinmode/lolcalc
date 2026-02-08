@@ -28,48 +28,6 @@
 		"attackspeedratio": 0.665
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Icathian Surprise",
-					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_icathiansurprise.png",
-					"tooltip": "For @TooltipPassiveDuration@ seconds after dying, Kog'Maw can continue to move, can move through units, and gains <speed>10% Move Speed</speed>, increasing to <speed>@TooltipPassiveMS*100@% Move Speed</speed> over the duration. At the end of the duration, he explodes and deals <trueDamage>@PassiveDamage@ true damage</trueDamage> to nearby enemies.",
-					"dataValues": {
-						"TooltipPassiveMS": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"TooltipPassiveDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
-					},
-					"spellCalculations": {
-						"PassiveDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 140,
-									"mEndValue": 650,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawIcathianSurpriseReadyAbility/KogMawIcathianSurpriseReady"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -538,6 +496,48 @@
 						}
 					},
 					"dataKey": "Characters/KogMaw/Spells/KogMawLivingArtilleryAbility/KogMawLivingArtillery"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Icathian Surprise",
+					"image": "assets/characters/kogmaw/hud/icons2d/kogmaw_icathiansurprise.png",
+					"tooltip": "For @TooltipPassiveDuration@ seconds after dying, Kog'Maw can continue to move, can move through units, and gains <speed>10% Move Speed</speed>, increasing to <speed>@TooltipPassiveMS*100@% Move Speed</speed> over the duration. At the end of the duration, he explodes and deals <trueDamage>@PassiveDamage@ true damage</trueDamage> to nearby enemies.",
+					"dataValues": {
+						"TooltipPassiveMS": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"TooltipPassiveDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						]
+					},
+					"spellCalculations": {
+						"PassiveDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 140,
+									"mEndValue": 650,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/KogMaw/Spells/KogMawIcathianSurpriseReadyAbility/KogMawIcathianSurpriseReady"
 				}
 			]
 		}

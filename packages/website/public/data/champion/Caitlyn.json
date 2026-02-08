@@ -28,159 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Headshot",
-					"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png",
-					"tooltip": "Every @AttacksPerHeadshot@ Attacks, Caitlyn fires a <keywordMajor>Headshot</keywordMajor>. Attacks while in brush count as @BrushAttackTotal@ for building towards a <keywordMajor>Headshot</keywordMajor>.<br><br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotBonusDamage@ physical damage</physicalDamage>. They have double range against enemies affected by <spellName>{{Spell_CaitlynEntrapment_Name}}</spellName> and <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName>. <keywordMajor>Headshots</keywordMajor> against enemies hit by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> deal a further <physicalDamage>@spell.CaitlynW:HeadshotBonusDamage@ physical damage</physicalDamage>.",
-					"tooltipExtended": "{{Spell_CaitlynP_Tooltip}}<br><br><rules><keywordMajor>Headshot</keywordMajor> damage scales with level, Critical Strike Chance, and Critical Strike Damage.<br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotMinionBonusDamage@ physical damage</physicalDamage> to non-champions.<br>Extra damage on trapped targets scales with {{Spell_CaitlynYordleTrap_Name}} rank.</rules>",
-					"dataValues": {
-						"CriticalStrikeScaling": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"TowerCap": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"AttacksPerHeadshot": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BrushStackBonus": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"spellCalculations": {
-						"HeadShotBonusDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mSubparts": [
-											{
-												"mLevel1Value": 0.6,
-												"mBreakpoints": [
-													{
-														"mLevel": 7,
-														"mAdditionalBonusAtThisLevel": 0.2
-													},
-													{
-														"mLevel": 13,
-														"mAdditionalBonusAtThisLevel": 0.2
-													}
-												]
-											},
-											{
-												"mPart1": {
-													"mStat": 8,
-													"mDataValue": "{10e05b53}"
-												},
-												"mPart2": {
-													"mSubparts": [
-														{
-															"mStat": 9,
-															"mCoefficient": 1
-														},
-														{
-															"mNumber": -1
-														}
-													]
-												}
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"HeadShotMinionBonusDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mSubparts": [
-											{
-												"mNumber": 1
-											},
-											{
-												"mPart1": {
-													"mNumber": -1
-												},
-												"mPart2": {
-													"mLevel1Value": 0.5,
-													"mBreakpoints": [
-														{
-															"mLevel": 7,
-															"mAdditionalBonusAtThisLevel": 0.2
-														},
-														{
-															"mLevel": 13,
-															"mAdditionalBonusAtThisLevel": 0.2
-														}
-													]
-												}
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"BrushAttackTotal": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mSubparts": [
-										{
-											"mNumber": 1
-										},
-										{
-											"mDataValue": "BrushStackBonus"
-										}
-									],
-									"__type": "SumOfSubPartsCalculationPart"
-								}
-							]
-						},
-						"{36ebd3cf}": {
-							"mFormulaParts": [
-								{
-									"mStat": 9,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Caitlyn/Spells/CaitlynPassiveAbility/CaitlynPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -586,6 +433,159 @@
 						}
 					},
 					"dataKey": "Characters/Caitlyn/Spells/CaitlynRAbility/CaitlynR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Headshot",
+					"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png",
+					"tooltip": "Every @AttacksPerHeadshot@ Attacks, Caitlyn fires a <keywordMajor>Headshot</keywordMajor>. Attacks while in brush count as @BrushAttackTotal@ for building towards a <keywordMajor>Headshot</keywordMajor>.<br><br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotBonusDamage@ physical damage</physicalDamage>. They have double range against enemies affected by <spellName>{{Spell_CaitlynEntrapment_Name}}</spellName> and <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName>. <keywordMajor>Headshots</keywordMajor> against enemies hit by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> deal a further <physicalDamage>@spell.CaitlynW:HeadshotBonusDamage@ physical damage</physicalDamage>.",
+					"tooltipExtended": "{{Spell_CaitlynP_Tooltip}}<br><br><rules><keywordMajor>Headshot</keywordMajor> damage scales with level, Critical Strike Chance, and Critical Strike Damage.<br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotMinionBonusDamage@ physical damage</physicalDamage> to non-champions.<br>Extra damage on trapped targets scales with {{Spell_CaitlynYordleTrap_Name}} rank.</rules>",
+					"dataValues": {
+						"CriticalStrikeScaling": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"TowerCap": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"AttacksPerHeadshot": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BrushStackBonus": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"spellCalculations": {
+						"HeadShotBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mLevel1Value": 0.6,
+												"mBreakpoints": [
+													{
+														"mLevel": 7,
+														"mAdditionalBonusAtThisLevel": 0.2
+													},
+													{
+														"mLevel": 13,
+														"mAdditionalBonusAtThisLevel": 0.2
+													}
+												]
+											},
+											{
+												"mPart1": {
+													"mStat": 8,
+													"mDataValue": "{10e05b53}"
+												},
+												"mPart2": {
+													"mSubparts": [
+														{
+															"mStat": 9,
+															"mCoefficient": 1
+														},
+														{
+															"mNumber": -1
+														}
+													]
+												}
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"HeadShotMinionBonusDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mSubparts": [
+											{
+												"mNumber": 1
+											},
+											{
+												"mPart1": {
+													"mNumber": -1
+												},
+												"mPart2": {
+													"mLevel1Value": 0.5,
+													"mBreakpoints": [
+														{
+															"mLevel": 7,
+															"mAdditionalBonusAtThisLevel": 0.2
+														},
+														{
+															"mLevel": 13,
+															"mAdditionalBonusAtThisLevel": 0.2
+														}
+													]
+												}
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"BrushAttackTotal": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mDataValue": "BrushStackBonus"
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								}
+							]
+						},
+						"{36ebd3cf}": {
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Caitlyn/Spells/CaitlynPassiveAbility/CaitlynPassive"
 				}
 			]
 		}

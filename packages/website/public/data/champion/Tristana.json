@@ -28,36 +28,6 @@
 		"attackspeedratio": 0.694
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Draw a Bead",
-					"image": "assets/characters/tristana/hud/icons2d/tristana_passive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Tristana's Attack Range and the range of <spellName>{{Spell_TristanaE_Name}}</spellName> and <spellName>{{Spell_TristanaR_Name}}</spellName> are increased by @BonusPassiveRange@.",
-					"spellCalculations": {
-						"BonusPassiveRange": {
-							"mFormulaParts": [
-								{
-									"mEndValue": 150,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Tristana/Spells/TristanaPassiveAbility/TristanaPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -489,6 +459,36 @@
 						}
 					},
 					"dataKey": "Characters/Tristana/Spells/TristanaRAbility/TristanaR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Draw a Bead",
+					"image": "assets/characters/tristana/hud/icons2d/tristana_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Tristana's Attack Range and the range of <spellName>{{Spell_TristanaE_Name}}</spellName> and <spellName>{{Spell_TristanaR_Name}}</spellName> are increased by @BonusPassiveRange@.",
+					"spellCalculations": {
+						"BonusPassiveRange": {
+							"mFormulaParts": [
+								{
+									"mEndValue": 150,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Tristana/Spells/TristanaPassiveAbility/TristanaPassive"
 				}
 			]
 		}

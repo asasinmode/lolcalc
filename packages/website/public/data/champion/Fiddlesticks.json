@@ -28,17 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "A Harmless Scarecrow",
-					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksp.png",
-					"tooltip": "Fiddlesticks' trinket is replaced by <keywordMajor>Scarecrow Effigies</keywordMajor>. When discovered by enemies, <keywordMajor>Effigies</keywordMajor> briefly impersonate Fiddlesticks. If Fiddlesticks does not move for 2 seconds, he will impersonate an <keywordMajor>Effigy</keywordMajor>. At level six <keywordMajor>Effigies</keywordMajor> reveal nearby wards for 6 seconds.",
-					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksPassiveAbility/FiddleSticksPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -507,6 +496,17 @@
 						]
 					},
 					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksRAbility/FiddleSticksR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "A Harmless Scarecrow",
+					"image": "assets/characters/fiddlesticks/hud/icons2d/fiddlesticksp.png",
+					"tooltip": "Fiddlesticks' trinket is replaced by <keywordMajor>Scarecrow Effigies</keywordMajor>. When discovered by enemies, <keywordMajor>Effigies</keywordMajor> briefly impersonate Fiddlesticks. If Fiddlesticks does not move for 2 seconds, he will impersonate an <keywordMajor>Effigy</keywordMajor>. At level six <keywordMajor>Effigies</keywordMajor> reveal nearby wards for 6 seconds.",
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksPassiveAbility/FiddleSticksPassive"
 				}
 			]
 		}

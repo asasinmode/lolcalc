@@ -28,152 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Transcendent",
-					"image": "assets/characters/syndra/hud/icons2d/syndra_p1.png",
-					"tooltip": "Syndra can collect up to @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>. These enhance Syndra's Abilities and restore <scaleMana>@ManaPerProc@ Mana</scaleMana> each time she claims one from an enemy. <br><br>Syndra collects <evolve>Splinters of Wrath</evolve> from the following:<li><evolve>@StacksPerProc@ Splinter(s)</evolve> when damaging enemy champions with two Abilities within @MarkDuration@ seconds (@PassiveMarkCooldown@s Cooldown)<li><evolve>@PassiveStacksPerLevel@ Splinters</evolve> upon spending Ability points<li><evolve>@StackPerSiege@ Splinter</evolve> on killing large minions<br><br>At @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>, Syndra increases her <scaleAP>Ability Power by @CapstoneAPPerc*100@%</scaleAP>.<br>",
-					"dataValues": {
-						"MarkDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"Q1UpgradeThreshold": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"WUpgradeThreshold": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"EUpgradeThreshold": [
-							80,
-							80,
-							80,
-							80,
-							80,
-							80,
-							80
-						],
-						"RUpgradeThreshold": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"CapstoneAPPerc": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"MaxStackAmount": [
-							120,
-							120,
-							120,
-							120,
-							120,
-							120,
-							120
-						],
-						"StackPerSiege": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"PassiveMarkCooldown": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"PassiveStacksPerLevel": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"spellCalculations": {
-						"StacksPerProc": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1,
-									"mBreakpoints": [
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 1
-										},
-										{
-											"mLevel": 18,
-											"mAdditionalBonusAtThisLevel": 1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"ManaPerProc": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 20,
-									"mInitialBonusPerLevel": 5,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mBonusPerLevelAtAndAfter": 8
-										},
-										{
-											"mLevel": 11,
-											"mBonusPerLevelAtAndAfter": 15
-										},
-										{
-											"mLevel": 16,
-											"mBonusPerLevelAtAndAfter": 20
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Syndra/Spells/SyndraPassiveAbility/SyndraPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -605,6 +459,152 @@
 						}
 					},
 					"dataKey": "Characters/Syndra/Spells/SyndraRAbility/SyndraR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Transcendent",
+					"image": "assets/characters/syndra/hud/icons2d/syndra_p1.png",
+					"tooltip": "Syndra can collect up to @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>. These enhance Syndra's Abilities and restore <scaleMana>@ManaPerProc@ Mana</scaleMana> each time she claims one from an enemy. <br><br>Syndra collects <evolve>Splinters of Wrath</evolve> from the following:<li><evolve>@StacksPerProc@ Splinter(s)</evolve> when damaging enemy champions with two Abilities within @MarkDuration@ seconds (@PassiveMarkCooldown@s Cooldown)<li><evolve>@PassiveStacksPerLevel@ Splinters</evolve> upon spending Ability points<li><evolve>@StackPerSiege@ Splinter</evolve> on killing large minions<br><br>At @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>, Syndra increases her <scaleAP>Ability Power by @CapstoneAPPerc*100@%</scaleAP>.<br>",
+					"dataValues": {
+						"MarkDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"Q1UpgradeThreshold": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"WUpgradeThreshold": [
+							60,
+							60,
+							60,
+							60,
+							60,
+							60,
+							60
+						],
+						"EUpgradeThreshold": [
+							80,
+							80,
+							80,
+							80,
+							80,
+							80,
+							80
+						],
+						"RUpgradeThreshold": [
+							100,
+							100,
+							100,
+							100,
+							100,
+							100,
+							100
+						],
+						"CapstoneAPPerc": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"MaxStackAmount": [
+							120,
+							120,
+							120,
+							120,
+							120,
+							120,
+							120
+						],
+						"StackPerSiege": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"PassiveMarkCooldown": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"PassiveStacksPerLevel": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"StacksPerProc": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1,
+									"mBreakpoints": [
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 1
+										},
+										{
+											"mLevel": 18,
+											"mAdditionalBonusAtThisLevel": 1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"ManaPerProc": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 20,
+									"mInitialBonusPerLevel": 5,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mBonusPerLevelAtAndAfter": 8
+										},
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 15
+										},
+										{
+											"mLevel": 16,
+											"mBonusPerLevelAtAndAfter": 20
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Syndra/Spells/SyndraPassiveAbility/SyndraPassive"
 				}
 			]
 		}

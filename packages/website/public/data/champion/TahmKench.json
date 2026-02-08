@@ -28,129 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "An Acquired Taste",
-					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchp.png",
-					"tooltip": "Attacks deal <magicDamage>@TotalDamage@ bonus magic damage</magicDamage>. Against champions, they add a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> for @Duration@ seconds, up to @MaxStacks@ times.<br><br>At @MaxStacks@ stacks, <spellName>Tongue Lash</spellName> and <font color='#0bf7de'>Devour</font> become empowered against that champion.",
-					"tooltipExtended": "Attacks deal <magicDamage>@TotalDamage@ bonus magic damage</magicDamage>. Against champions, they add a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> for @Duration@ seconds, up to @MaxStacks@ times.<br><br>At @MaxStacks@ stacks, Tongue Lash and <font color='#0bf7de'>Devour</font> become empowered against that champion.<br><br><rules>%i:scaleAP% Ratio is equal to @APRatioPer100BonusHP*100@% per 100 bonus %i:scaleHealth%</rules>",
-					"dataValues": {
-						"Duration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MaxStacks": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PerStackDecayTimer": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"APRatioPer100BonusHP": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 6,
-									"mInitialBonusPerLevel": 4,
-									"mBreakpoints": [
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 6
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mCoefficient": 0.045,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mSubpart": {
-										"mPart1": {
-											"mStat": 12,
-											"mStatFormula": 2,
-											"mDataValue": "APRatioPer100BonusHP"
-										},
-										"mPart2": {
-											"mNumber": 0.01
-										}
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"{6c966659}": {
-							"mMultiplier": {
-								"mCoefficient": 0.01
-							},
-							"mFormulaParts": [
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mDataValue": "APRatioPer100BonusHP",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"{301fe730}": {
-							"mSimpleTooltipCalculationDisplay": 1,
-							"mExpandedTooltipCalculationDisplay": 1,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 8,
-									"mInitialBonusPerLevel": 4,
-									"mBreakpoints": [
-										{
-											"mLevel": 11,
-											"mBonusPerLevelAtAndAfter": 2
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mCoefficient": 0.03,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/TahmKench/Spells/TahmKenchPassiveAbility/TahmKenchPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -654,6 +531,129 @@
 						}
 					},
 					"dataKey": "Characters/TahmKench/Spells/TahmKenchRWrapperAbility/TahmKenchRWrapper"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "An Acquired Taste",
+					"image": "assets/characters/tahmkench/hud/icons2d/tahmkenchp.png",
+					"tooltip": "Attacks deal <magicDamage>@TotalDamage@ bonus magic damage</magicDamage>. Against champions, they add a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> for @Duration@ seconds, up to @MaxStacks@ times.<br><br>At @MaxStacks@ stacks, <spellName>Tongue Lash</spellName> and <font color='#0bf7de'>Devour</font> become empowered against that champion.",
+					"tooltipExtended": "Attacks deal <magicDamage>@TotalDamage@ bonus magic damage</magicDamage>. Against champions, they add a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> for @Duration@ seconds, up to @MaxStacks@ times.<br><br>At @MaxStacks@ stacks, Tongue Lash and <font color='#0bf7de'>Devour</font> become empowered against that champion.<br><br><rules>%i:scaleAP% Ratio is equal to @APRatioPer100BonusHP*100@% per 100 bonus %i:scaleHealth%</rules>",
+					"dataValues": {
+						"Duration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"MaxStacks": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"PerStackDecayTimer": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"APRatioPer100BonusHP": [
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 6,
+									"mInitialBonusPerLevel": 4,
+									"mBreakpoints": [
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.045,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mSubpart": {
+										"mPart1": {
+											"mStat": 12,
+											"mStatFormula": 2,
+											"mDataValue": "APRatioPer100BonusHP"
+										},
+										"mPart2": {
+											"mNumber": 0.01
+										}
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"{6c966659}": {
+							"mMultiplier": {
+								"mCoefficient": 0.01
+							},
+							"mFormulaParts": [
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "APRatioPer100BonusHP",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{301fe730}": {
+							"mSimpleTooltipCalculationDisplay": 1,
+							"mExpandedTooltipCalculationDisplay": 1,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 8,
+									"mInitialBonusPerLevel": 4,
+									"mBreakpoints": [
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 2
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0.03,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchPassiveAbility/TahmKenchPassive"
 				}
 			]
 		}

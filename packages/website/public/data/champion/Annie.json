@@ -28,67 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Pyromania",
-					"image": "assets/characters/annie/hud/icons2d/annie_passive.png",
-					"tooltip": "After using 4 Abilities, Annie's next damaging Ability <status>Stuns</status> for @StunDuration@ seconds.<br><br>Annie begins the game and respawns with <spellName>Pyromania</spellName> available.",
-					"dataValues": {
-						"MaxStacks": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"StunBaseDuration": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						],
-						"StunDurationPerTier": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
-					},
-					"spellCalculations": {
-						"StunDuration": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 1.25,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.25
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mPrecision": 2
-						}
-					},
-					"dataKey": "Characters/Annie/Spells/AnniePassiveAbility/AnniePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -561,6 +500,67 @@
 						}
 					},
 					"dataKey": "Characters/Annie/Spells/AnnieRAbility/AnnieR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Pyromania",
+					"image": "assets/characters/annie/hud/icons2d/annie_passive.png",
+					"tooltip": "After using 4 Abilities, Annie's next damaging Ability <status>Stuns</status> for @StunDuration@ seconds.<br><br>Annie begins the game and respawns with <spellName>Pyromania</spellName> available.",
+					"dataValues": {
+						"MaxStacks": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"StunBaseDuration": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						],
+						"StunDurationPerTier": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						]
+					},
+					"spellCalculations": {
+						"StunDuration": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 1.25,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.25
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mPrecision": 2
+						}
+					},
+					"dataKey": "Characters/Annie/Spells/AnniePassiveAbility/AnniePassive"
 				}
 			]
 		}

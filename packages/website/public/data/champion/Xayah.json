@@ -28,110 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Clean Cuts",
-					"image": "assets/characters/xayah/hud/icons2d/xayahpassive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "After using an Ability, Xayah's next @f14@ Attacks will deal @f16*100@% damage to all other targets along their path and leave a <keywordMajor>Feather</keywordMajor> for @f12@ seconds.<br><br><spellName>Lover's Leap:</spellName> Xayah and Rakan can recall together.",
-					"tooltipExtended": "{{Spell_XayahPassive_Tooltip}}<br><br><rules>Primary target of empowered Attacks take full damage and On-Hit effects as normal.</rules>",
-					"effectAmount": {
-						"0": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"1": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"2": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"3": [
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55
-						],
-						"4": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"5": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"6": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"7": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"8": [
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45
-						]
-					},
-					"dataKey": "Characters/Xayah/Spells/XayahPassiveAbility/XayahPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -598,6 +494,110 @@
 						}
 					},
 					"dataKey": "Characters/Xayah/Spells/XayahRAbility/XayahR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Clean Cuts",
+					"image": "assets/characters/xayah/hud/icons2d/xayahpassive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "After using an Ability, Xayah's next @f14@ Attacks will deal @f16*100@% damage to all other targets along their path and leave a <keywordMajor>Feather</keywordMajor> for @f12@ seconds.<br><br><spellName>Lover's Leap:</spellName> Xayah and Rakan can recall together.",
+					"tooltipExtended": "{{Spell_XayahPassive_Tooltip}}<br><br><rules>Primary target of empowered Attacks take full damage and On-Hit effects as normal.</rules>",
+					"effectAmount": {
+						"0": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"1": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"2": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"3": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						],
+						"4": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"5": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"6": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"7": [
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35,
+							0.35
+						],
+						"8": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						]
+					},
+					"dataKey": "Characters/Xayah/Spells/XayahPassiveAbility/XayahPassive"
 				}
 			]
 		}

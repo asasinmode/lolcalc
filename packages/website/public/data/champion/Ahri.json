@@ -28,74 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Essence Theft",
-					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_passive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Killing minions or monsters grants Ahri an Essence Fragment. After obtaining @MaxStacks@ Fragments, Ahri consumes them to <healing>restore @MinionHeal@ Health</healing>.<br><br>When Ahri scores a takedown against an enemy champion within @TakedownWindow@ seconds of damaging them, she feasts upon their Essence, <healing>restoring @ChampionHeal@ Health</healing>.",
-					"dataValues": {
-						"TakedownWindow": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"MaxStacks": [
-							9,
-							9,
-							9,
-							9,
-							9,
-							9,
-							9
-						]
-					},
-					"spellCalculations": {
-						"ChampionHeal": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 75,
-									"mEndValue": 165,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"MinionHeal": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 35,
-									"mEndValue": 95,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.2,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Ahri/Spells/AhriPassiveAbility/AhriPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -540,6 +472,74 @@
 						}
 					},
 					"dataKey": "Characters/Ahri/Spells/AhriRAbility/AhriR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Essence Theft",
+					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Killing minions or monsters grants Ahri an Essence Fragment. After obtaining @MaxStacks@ Fragments, Ahri consumes them to <healing>restore @MinionHeal@ Health</healing>.<br><br>When Ahri scores a takedown against an enemy champion within @TakedownWindow@ seconds of damaging them, she feasts upon their Essence, <healing>restoring @ChampionHeal@ Health</healing>.",
+					"dataValues": {
+						"TakedownWindow": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"MaxStacks": [
+							9,
+							9,
+							9,
+							9,
+							9,
+							9,
+							9
+						]
+					},
+					"spellCalculations": {
+						"ChampionHeal": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 75,
+									"mEndValue": 165,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"MinionHeal": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 35,
+									"mEndValue": 95,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.2,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Ahri/Spells/AhriPassiveAbility/AhriPassive"
 				}
 			]
 		}

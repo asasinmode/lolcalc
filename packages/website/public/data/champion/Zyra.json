@@ -28,127 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Garden of Thorns",
-					"image": "assets/characters/zyra/hud/icons2d/zyrap.png",
-					"mana": [
-						70,
-						70,
-						70,
-						70,
-						70,
-						70
-					],
-					"cooldownTime": [
-						8,
-						8,
-						8,
-						8,
-						8,
-						8,
-						8
-					],
-					"tooltip": "Zyra spawns <keywordMajor>Seeds</keywordMajor> around herself every @SeedCooldown@ seconds that last 30 seconds. She can have 8 <keywordMajor>Seeds</keywordMajor> planted at once. If an enemy champion steps on a <keywordMajor>Seed</keywordMajor>, it dies. Zyra will not spawn <keywordMajor>Seeds</keywordMajor> while hiding in brush.<br><br>These <keywordMajor>Seeds</keywordMajor> are used by her other Abilities to spawn plants that deal <magicDamage>@PlantDamage@ magic damage</magicDamage>.",
-					"tooltipExtended": "Zyra spawns <keywordMajor>Seeds</keywordMajor> around herself every @SeedCooldown@ seconds that last 30 seconds. She can have 8 <keywordMajor>Seeds</keywordMajor> planted at once. If an enemy champion steps on a <keywordMajor>Seed</keywordMajor>, it dies. Zyra will not spawn <keywordMajor>Seeds</keywordMajor> while hiding in brush.<br><br>These <keywordMajor>Seeds</keywordMajor> are used by her other Abilities to spawn plants that deal <magicDamage>@PlantDamage@ magic damage</magicDamage>.<br><br><rules>Zyra's plants deal <magicDamage>@MonsterMod@ bonus magic damage</magicDamage> to monsters.</rules> ",
-					"dataValues": {
-						"PlantDuration": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"PlantBaseDmg": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						],
-						"PlantLvlScaling": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"APRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						]
-					},
-					"spellCalculations": {
-						"SeedCooldown": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 13.6,
-									"mEndValue": 9.05,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						},
-						"PlantDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 15,
-									"mEndValue": 75,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"monstermod": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 50,
-									"mEndValue": 100,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"{c951f1e1}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 50,
-									"mInitialBonusPerLevel": -1,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"effectAmount": {
-						"0": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						]
-					},
-					"dataKey": "Characters/Zyra/Spells/ZyraPAbility/ZyraP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -498,6 +377,127 @@
 						]
 					},
 					"dataKey": "Characters/Zyra/Spells/ZyraRAbility/ZyraR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Garden of Thorns",
+					"image": "assets/characters/zyra/hud/icons2d/zyrap.png",
+					"mana": [
+						70,
+						70,
+						70,
+						70,
+						70,
+						70
+					],
+					"cooldownTime": [
+						8,
+						8,
+						8,
+						8,
+						8,
+						8,
+						8
+					],
+					"tooltip": "Zyra spawns <keywordMajor>Seeds</keywordMajor> around herself every @SeedCooldown@ seconds that last 30 seconds. She can have 8 <keywordMajor>Seeds</keywordMajor> planted at once. If an enemy champion steps on a <keywordMajor>Seed</keywordMajor>, it dies. Zyra will not spawn <keywordMajor>Seeds</keywordMajor> while hiding in brush.<br><br>These <keywordMajor>Seeds</keywordMajor> are used by her other Abilities to spawn plants that deal <magicDamage>@PlantDamage@ magic damage</magicDamage>.",
+					"tooltipExtended": "Zyra spawns <keywordMajor>Seeds</keywordMajor> around herself every @SeedCooldown@ seconds that last 30 seconds. She can have 8 <keywordMajor>Seeds</keywordMajor> planted at once. If an enemy champion steps on a <keywordMajor>Seed</keywordMajor>, it dies. Zyra will not spawn <keywordMajor>Seeds</keywordMajor> while hiding in brush.<br><br>These <keywordMajor>Seeds</keywordMajor> are used by her other Abilities to spawn plants that deal <magicDamage>@PlantDamage@ magic damage</magicDamage>.<br><br><rules>Zyra's plants deal <magicDamage>@MonsterMod@ bonus magic damage</magicDamage> to monsters.</rules> ",
+					"dataValues": {
+						"PlantDuration": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"PlantBaseDmg": [
+							12,
+							12,
+							12,
+							12,
+							12,
+							12,
+							12
+						],
+						"PlantLvlScaling": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"APRatio": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						]
+					},
+					"spellCalculations": {
+						"SeedCooldown": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 13.6,
+									"mEndValue": 9.05,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						},
+						"PlantDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 75,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"monstermod": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 50,
+									"mEndValue": 100,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"{c951f1e1}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 50,
+									"mInitialBonusPerLevel": -1,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"effectAmount": {
+						"0": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						]
+					},
+					"dataKey": "Characters/Zyra/Spells/ZyraPAbility/ZyraP"
 				}
 			]
 		}

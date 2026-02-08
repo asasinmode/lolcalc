@@ -28,37 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Night Hunter",
-					"image": "assets/characters/vayne/hud/icons2d/vayne_p.png",
-					"tooltip": "Vayne ruthlessly hunts evil-doers, gaining @MovementSpeed@ Move Speed when moving toward nearby enemy champions.",
-					"dataValues": {
-						"MovementSpeed": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"Range": [
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000
-						]
-					},
-					"dataKey": "Characters/Vayne/Spells/VaynePassiveAbility/VaynePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -378,6 +347,37 @@
 						]
 					},
 					"dataKey": "Characters/Vayne/Spells/VayneInquisitionAbility/VayneInquisition"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Night Hunter",
+					"image": "assets/characters/vayne/hud/icons2d/vayne_p.png",
+					"tooltip": "Vayne ruthlessly hunts evil-doers, gaining @MovementSpeed@ Move Speed when moving toward nearby enemy champions.",
+					"dataValues": {
+						"MovementSpeed": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						],
+						"Range": [
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000,
+							2000
+						]
+					},
+					"dataKey": "Characters/Vayne/Spells/VaynePassiveAbility/VaynePassive"
 				}
 			]
 		}

@@ -28,62 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Void Shift",
-					"image": "assets/characters/malzahar/hud/icons2d/malzahar_passive.png",
-					"tooltip": "Malzahar gains @DRPercent@% damage reduction and immunity from <status>Disabling</status> and <status>Immobilizing</status> effects, lingering for @LingerDuration@ seconds after taking damage or blocking one of those effects. This effect has a @ShieldCooldown@ second Cooldown.",
-					"tooltipExtended": "{{Spell_MalzaharPassive_Tooltip}}<br><br><rules>Taking damage will restart the Cooldown. <br>Damage from minions is not reduced, but it does not trigger or restart the Cooldown.</rules>",
-					"dataValues": {
-						"DRPercent": [
-							90,
-							90,
-							90,
-							90,
-							90,
-							90,
-							90
-						],
-						"LingerDuration": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
-					},
-					"spellCalculations": {
-						"ShieldCooldown": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 30,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -6
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -6
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -6
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharPassiveAbility/MalzaharPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -590,6 +534,62 @@
 						]
 					},
 					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Void Shift",
+					"image": "assets/characters/malzahar/hud/icons2d/malzahar_passive.png",
+					"tooltip": "Malzahar gains @DRPercent@% damage reduction and immunity from <status>Disabling</status> and <status>Immobilizing</status> effects, lingering for @LingerDuration@ seconds after taking damage or blocking one of those effects. This effect has a @ShieldCooldown@ second Cooldown.",
+					"tooltipExtended": "{{Spell_MalzaharPassive_Tooltip}}<br><br><rules>Taking damage will restart the Cooldown. <br>Damage from minions is not reduced, but it does not trigger or restart the Cooldown.</rules>",
+					"dataValues": {
+						"DRPercent": [
+							90,
+							90,
+							90,
+							90,
+							90,
+							90,
+							90
+						],
+						"LingerDuration": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						]
+					},
+					"spellCalculations": {
+						"ShieldCooldown": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 30,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -6
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -6
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -6
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Malzahar/Spells/MalzaharPassiveAbility/MalzaharPassive"
 				}
 			]
 		}

@@ -28,122 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Daredevil Impulse",
-					"image": "assets/characters/samira/hud/icons2d/samirap.png",
-					"tooltip": "Samira builds a combo by dealing damage with Attacks or Abilities against enemy champions unique from the previous one. Each one increases her <keywordMajor>Style</keywordMajor>, from \"E\" to \"S\" grade (6 total). Samira gains <speed>@MSBonusNew@ Move Speed</speed> per grade.<br><br>Samira's Attacks and Abilities in melee range deal an additional <magicDamage>@BonusMeleeDamage@ magic damage</magicDamage>, increased up to <magicDamage>@EmpoweredMeleeDamageTooltip@</magicDamage> based on the target's missing Health.<br><br>Samira's Attacks against enemies affected by <status>Immobilizing</status> effects will dash her to her Attack Range. If the enemy is <status>Knocked Up</status>, she also keeps them <status>Knocked Up</status> for at least 0.5 seconds.",
-					"tooltipExtended": "{{Spell_SamiraPassive_Tooltip}}<br><br><rules>Samira's dash range is @QueenMaxDashRange@ units. Samira loses her <keywordMajor>Style</keywordMajor> after not damaging an enemy champion with her Attacks or Abilities for @DurationTOOLTIP@ seconds</rules>.",
-					"dataValues": {
-						"SwordRange": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"VisualBonusRange": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"DurationTOOLTIP": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
-					},
-					"spellCalculations": {
-						"QueenMaxDashRange": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 650,
-									"mBreakpoints": [
-										{
-											"mLevel": 4,
-											"mAdditionalBonusAtThisLevel": 75
-										},
-										{
-											"mLevel": 8,
-											"mAdditionalBonusAtThisLevel": 75
-										},
-										{
-											"mLevel": 12,
-											"mAdditionalBonusAtThisLevel": 75
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 75
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"BonusMeleeDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 2,
-									"mInitialBonusPerLevel": 1,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mSubpart": {
-										"mStartValue": 0.035,
-										"mEndValue": 0.105
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"EmpoweredMeleeDamageTooltip": {
-							"mMultiplier": {
-								"mNumber": 2
-							},
-							"mModifiedGameCalculation": "BonusMeleeDamage"
-						},
-						"MSBonusNew": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.027,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.002
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.002
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.002
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "Characters/Samira/Spells/SamiraPassiveAbility/SamiraPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -501,6 +385,122 @@
 						}
 					},
 					"dataKey": "Characters/Samira/Spells/SamiraRAbility/SamiraR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Daredevil Impulse",
+					"image": "assets/characters/samira/hud/icons2d/samirap.png",
+					"tooltip": "Samira builds a combo by dealing damage with Attacks or Abilities against enemy champions unique from the previous one. Each one increases her <keywordMajor>Style</keywordMajor>, from \"E\" to \"S\" grade (6 total). Samira gains <speed>@MSBonusNew@ Move Speed</speed> per grade.<br><br>Samira's Attacks and Abilities in melee range deal an additional <magicDamage>@BonusMeleeDamage@ magic damage</magicDamage>, increased up to <magicDamage>@EmpoweredMeleeDamageTooltip@</magicDamage> based on the target's missing Health.<br><br>Samira's Attacks against enemies affected by <status>Immobilizing</status> effects will dash her to her Attack Range. If the enemy is <status>Knocked Up</status>, she also keeps them <status>Knocked Up</status> for at least 0.5 seconds.",
+					"tooltipExtended": "{{Spell_SamiraPassive_Tooltip}}<br><br><rules>Samira's dash range is @QueenMaxDashRange@ units. Samira loses her <keywordMajor>Style</keywordMajor> after not damaging an enemy champion with her Attacks or Abilities for @DurationTOOLTIP@ seconds</rules>.",
+					"dataValues": {
+						"SwordRange": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"VisualBonusRange": [
+							400,
+							400,
+							400,
+							400,
+							400,
+							400,
+							400
+						],
+						"DurationTOOLTIP": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"spellCalculations": {
+						"QueenMaxDashRange": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 650,
+									"mBreakpoints": [
+										{
+											"mLevel": 4,
+											"mAdditionalBonusAtThisLevel": 75
+										},
+										{
+											"mLevel": 8,
+											"mAdditionalBonusAtThisLevel": 75
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 75
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 75
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"BonusMeleeDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 2,
+									"mInitialBonusPerLevel": 1,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mSubpart": {
+										"mStartValue": 0.035,
+										"mEndValue": 0.105
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						},
+						"EmpoweredMeleeDamageTooltip": {
+							"mMultiplier": {
+								"mNumber": 2
+							},
+							"mModifiedGameCalculation": "BonusMeleeDamage"
+						},
+						"MSBonusNew": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.027,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.002
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.002
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.002
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/Samira/Spells/SamiraPassiveAbility/SamiraPassive"
 				}
 			]
 		}

@@ -28,58 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Tailwind",
-					"image": "assets/characters/janna/hud/icons2d/jannap.png",
-					"tooltip": "Ally champions gain <speed>@MSPercentAlly*100@% Move Speed</speed> moving towards Janna.<br><br>Janna deals <magicDamage>@BonusDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and with <keywordMajor>Zephyr</keywordMajor>.",
-					"dataValues": {
-						"MSPercentAlly": [
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06,
-							0.06
-						],
-						"MSBonusMagicDamage": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
-					},
-					"spellCalculations": {
-						"MSToOnHitConversionRate": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "{022aad62}",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"BonusDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 7,
-									"mStatFormula": 2,
-									"mDataValue": "{022aad62}",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/TailwindSelf"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -683,6 +631,58 @@
 						]
 					},
 					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Tailwind",
+					"image": "assets/characters/janna/hud/icons2d/jannap.png",
+					"tooltip": "Ally champions gain <speed>@MSPercentAlly*100@% Move Speed</speed> moving towards Janna.<br><br>Janna deals <magicDamage>@BonusDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and with <keywordMajor>Zephyr</keywordMajor>.",
+					"dataValues": {
+						"MSPercentAlly": [
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06,
+							0.06
+						],
+						"MSBonusMagicDamage": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						]
+					},
+					"spellCalculations": {
+						"MSToOnHitConversionRate": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "{022aad62}",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"BonusDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 7,
+									"mStatFormula": 2,
+									"mDataValue": "{022aad62}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/TailwindSelf"
 				}
 			]
 		}

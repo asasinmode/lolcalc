@@ -28,47 +28,6 @@
 		"attackspeedratio": 0.651
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Loaded Dice",
-					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_sealfate.png",
-					"tooltip": "{{ Spell_SecondSight_Tooltip_@GameModeInteger@ }}",
-					"tooltipExtended": "{{Spell_SecondSight_TooltipExtended_@GameModeInteger@}}",
-					"dataValues": {
-						"GoldRatioMinCherry": [
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02,
-							0.02
-						],
-						"GoldRatioMaxCherry": [
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08
-						],
-						"GameModeInteger": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
-					},
-					"dataKey": "Characters/TwistedFate/Spells/SecondSightAbility/SecondSight"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -629,6 +588,47 @@
 						]
 					},
 					"dataKey": "Characters/TwistedFate/Spells/DestinyAbility/Destiny"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Loaded Dice",
+					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_sealfate.png",
+					"tooltip": "{{ Spell_SecondSight_Tooltip_@GameModeInteger@ }}",
+					"tooltipExtended": "{{Spell_SecondSight_TooltipExtended_@GameModeInteger@}}",
+					"dataValues": {
+						"GoldRatioMinCherry": [
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02,
+							0.02
+						],
+						"GoldRatioMaxCherry": [
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08,
+							0.08
+						],
+						"GameModeInteger": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						]
+					},
+					"dataKey": "Characters/TwistedFate/Spells/SecondSightAbility/SecondSight"
 				}
 			]
 		}

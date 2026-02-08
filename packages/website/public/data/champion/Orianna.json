@@ -28,90 +28,6 @@
 		"attackspeedratio": 0.658
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Clockwork Windup",
-					"image": "assets/characters/orianna/hud/icons2d/oriannap.png",
-					"tooltip": "Orianna's Abilities originate from her <keywordMajor>Ball</keywordMajor>. Orianna's <keywordMajor>Ball</keywordMajor> automatically returns to her if she is too far away from it.<br><br>Orianna's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Subsequent Attacks against the same target within @StackDuration@ seconds deal an additional <magicDamage>@StackDamage@ magic damage</magicDamage> (max of <magicDamage>@StackDamageMax@ damage</magicDamage>).",
-					"dataValues": {
-						"StackMult": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"StackCount": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"StackDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"APRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStartValue": 10,
-									"mEndValue": 50,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mDataValue": "APRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"StackDamage": {
-							"mMultiplier": {
-								"mDataValue": "StackMult"
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
-						},
-						"StackDamageMax": {
-							"mMultiplier": {
-								"mPart1": {
-									"mDataValue": "StackMult"
-								},
-								"mPart2": {
-									"mNumber": 2
-								}
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "TotalDamage"
-						}
-					},
-					"dataKey": "Characters/Orianna/Spells/OriannaPAbility/OriannaP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -466,6 +382,90 @@
 						}
 					},
 					"dataKey": "Characters/Orianna/Spells/OrianaDetonateCommandAbility/OrianaDetonateCommand"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Clockwork Windup",
+					"image": "assets/characters/orianna/hud/icons2d/oriannap.png",
+					"tooltip": "Orianna's Abilities originate from her <keywordMajor>Ball</keywordMajor>. Orianna's <keywordMajor>Ball</keywordMajor> automatically returns to her if she is too far away from it.<br><br>Orianna's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Subsequent Attacks against the same target within @StackDuration@ seconds deal an additional <magicDamage>@StackDamage@ magic damage</magicDamage> (max of <magicDamage>@StackDamageMax@ damage</magicDamage>).",
+					"dataValues": {
+						"StackMult": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"StackCount": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"StackDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"APRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStartValue": 10,
+									"mEndValue": 50,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"StackDamage": {
+							"mMultiplier": {
+								"mDataValue": "StackMult"
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "TotalDamage"
+						},
+						"StackDamageMax": {
+							"mMultiplier": {
+								"mPart1": {
+									"mDataValue": "StackMult"
+								},
+								"mPart2": {
+									"mNumber": 2
+								}
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "TotalDamage"
+						}
+					},
+					"dataKey": "Characters/Orianna/Spells/OriannaPAbility/OriannaP"
 				}
 			]
 		}

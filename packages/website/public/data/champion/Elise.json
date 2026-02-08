@@ -28,84 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Spider Queen",
-					"image": "assets/characters/elise/hud/icons2d/elisepassive.png",
-					"tooltip": "Elise begins the game with a point in her Ultimate, allowing her to shapeshift between <keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor>.<br><br><keywordMajor>Human Form:</keywordMajor> Elise's Ability hits grant her a dormant <keywordMajor>Spiderling</keywordMajor> (max @spell.EliseR:SpiderlingsStored@).<br><br><keywordMajor>Spider Form:</keywordMajor> Attacks deal an additional <magicDamage>@spell.EliseR:PassiveTotalDamage@ magic damage</magicDamage> and restore <healing>@spell.EliseR:PassiveTotalHealing@ Health</healing>.",
-					"dataValues": {
-						"SpiderlingBaseHP": [
-							80,
-							80,
-							80,
-							80,
-							80,
-							80,
-							80
-						],
-						"SpiderlingMagicDamage": [
-							2,
-							8,
-							14,
-							20,
-							26,
-							32,
-							38
-						],
-						"SpiderlingAPRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"SpiderlingAoEReduction": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
-					},
-					"spellCalculations": {
-						"{38943004}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 5,
-									"mInitialBonusPerLevel": 10,
-									"mBreakpoints": [
-										{
-											"mLevel": 8,
-											"mBonusPerLevelAtAndAfter": 15
-										},
-										{
-											"mLevel": 11,
-											"mBonusPerLevelAtAndAfter": 20
-										},
-										{
-											"mLevel": 14,
-											"mBonusPerLevelAtAndAfter": 25
-										},
-										{
-											"mLevel": 17,
-											"mBonusPerLevelAtAndAfter": 30
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Elise/Spells/ElisePassiveAbility/ElisePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -644,6 +566,84 @@
 						]
 					},
 					"dataKey": "Characters/Elise/Spells/EliseRAbility/EliseR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Spider Queen",
+					"image": "assets/characters/elise/hud/icons2d/elisepassive.png",
+					"tooltip": "Elise begins the game with a point in her Ultimate, allowing her to shapeshift between <keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor>.<br><br><keywordMajor>Human Form:</keywordMajor> Elise's Ability hits grant her a dormant <keywordMajor>Spiderling</keywordMajor> (max @spell.EliseR:SpiderlingsStored@).<br><br><keywordMajor>Spider Form:</keywordMajor> Attacks deal an additional <magicDamage>@spell.EliseR:PassiveTotalDamage@ magic damage</magicDamage> and restore <healing>@spell.EliseR:PassiveTotalHealing@ Health</healing>.",
+					"dataValues": {
+						"SpiderlingBaseHP": [
+							80,
+							80,
+							80,
+							80,
+							80,
+							80,
+							80
+						],
+						"SpiderlingMagicDamage": [
+							2,
+							8,
+							14,
+							20,
+							26,
+							32,
+							38
+						],
+						"SpiderlingAPRatio": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"SpiderlingAoEReduction": [
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75,
+							0.75
+						]
+					},
+					"spellCalculations": {
+						"{38943004}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 5,
+									"mInitialBonusPerLevel": 10,
+									"mBreakpoints": [
+										{
+											"mLevel": 8,
+											"mBonusPerLevelAtAndAfter": 15
+										},
+										{
+											"mLevel": 11,
+											"mBonusPerLevelAtAndAfter": 20
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 25
+										},
+										{
+											"mLevel": 17,
+											"mBonusPerLevelAtAndAfter": 30
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Elise/Spells/ElisePassiveAbility/ElisePassive"
 				}
 			]
 		}

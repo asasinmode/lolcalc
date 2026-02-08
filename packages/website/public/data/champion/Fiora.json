@@ -28,80 +28,6 @@
 		"attackspeedratio": 0.69
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Duelist's Dance",
-					"image": "assets/characters/fiora/hud/icons2d/fiora_p.png",
-					"tooltip": "Fiora identifies <keywordMajor>Vitals</keywordMajor> on enemy champions. Hitting this <keywordMajor>Vital</keywordMajor> with an Attack or Ability deals an additional <trueDamage>@PassiveDamageTotal@ max Health true damage</trueDamage>, grants Fiora <speed>@spell.FioraR:PercentMS*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds, and restores <healing>@PassiveHealAmount@ Health</healing>.<br><br>Fiora reveals a new <keywordMajor>Vital</keywordMajor> after 15 seconds or after striking one.",
-					"dataValues": {
-						"PassiveDamageADRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"PassiveDamageBase": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						],
-						"MovementSpeedDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"spellCalculations": {
-						"PassiveHealAmount": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 35,
-									"mEndValue": 100,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"PassiveDamageTotal": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "PassiveDamageBase",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "PassiveDamageADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						},
-						"RDamageTotal": {
-							"mMultiplier": {
-								"mNumber": 4
-							},
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mModifiedGameCalculation": "PassiveDamageTotal"
-						}
-					},
-					"dataKey": "Characters/Fiora/Spells/FioraPassiveAbility/FioraPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -493,6 +419,80 @@
 						}
 					},
 					"dataKey": "Characters/Fiora/Spells/FioraRAbility/FioraR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Duelist's Dance",
+					"image": "assets/characters/fiora/hud/icons2d/fiora_p.png",
+					"tooltip": "Fiora identifies <keywordMajor>Vitals</keywordMajor> on enemy champions. Hitting this <keywordMajor>Vital</keywordMajor> with an Attack or Ability deals an additional <trueDamage>@PassiveDamageTotal@ max Health true damage</trueDamage>, grants Fiora <speed>@spell.FioraR:PercentMS*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds, and restores <healing>@PassiveHealAmount@ Health</healing>.<br><br>Fiora reveals a new <keywordMajor>Vital</keywordMajor> after 15 seconds or after striking one.",
+					"dataValues": {
+						"PassiveDamageADRatio": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"PassiveDamageBase": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"MovementSpeedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"PassiveHealAmount": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 35,
+									"mEndValue": 100,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"PassiveDamageTotal": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "PassiveDamageBase",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "PassiveDamageADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"RDamageTotal": {
+							"mMultiplier": {
+								"mNumber": 4
+							},
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mModifiedGameCalculation": "PassiveDamageTotal"
+						}
+					},
+					"dataKey": "Characters/Fiora/Spells/FioraPassiveAbility/FioraPassive"
 				}
 			]
 		}

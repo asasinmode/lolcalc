@@ -28,140 +28,6 @@
 		"attackspeedratio": 0.69
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "A Thousand Cuts",
-					"image": "assets/characters/gwen/hud/icons2d/gwen_passive.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Gwen's Attacks deal an additional <magicDamage>@PercentHealth1000Cuts@ Max Health magic damage</magicDamage> on hit. Gwen recovers Health equal to <healing>@HealingPercent@ of the damage</healing> this Ability deals to champions, up to a maximum of <healing>@healcap@</healing>.<br>",
-					"tooltipExtended": "{{ spell_gwenP_tooltip }}<br><rules>Max damage to monsters: @MonsterDamageCap@. Deals @ExecuteDamage@ bonus damage to minions below @ExecuteThreshold*100@% health.</rules><br>",
-					"dataValues": {
-						"ExecuteThreshold": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
-					},
-					"spellCalculations": {
-						"HealingPercent": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mNumber": 0.5,
-									"__type": "NumberCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"{540bce84}": {
-							"mFormulaParts": [
-								{
-									"mNumber": 1,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mCoefficient": 0.006,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 2
-						},
-						"HealCap": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 10,
-									"mEndValue": 25,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mCoefficient": 0.065,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"PercentHealth1000Cuts": {
-							"mMultiplier": {
-								"mNumber": 0.01
-							},
-							"mModifiedGameCalculation": "{540bce84}"
-						},
-						"MonsterDamageCap": {
-							"mFormulaParts": [
-								{
-									"mNumber": 3,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"PassiveMaxQTooltip": {
-							"mMultiplier": {
-								"mNumber": 0.06
-							},
-							"mExpandedTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "{540bce84}"
-						},
-						"PassiveMaxRTooltip": {
-							"mMultiplier": {
-								"mNumber": 0.09
-							},
-							"mExpandedTooltipCalculationDisplay": 6,
-							"mModifiedGameCalculation": "{540bce84}"
-						},
-						"{4197830d}": {
-							"mMultiplier": {
-								"mNumber": 0.03
-							},
-							"mModifiedGameCalculation": "{540bce84}"
-						},
-						"{4097817a}": {
-							"mMultiplier": {
-								"mNumber": 0.05
-							},
-							"mModifiedGameCalculation": "{540bce84}"
-						},
-						"{5bade13c}": {
-							"mFormulaParts": [
-								{
-									"mBuffName": "{9d0c98ec}",
-									"mCoefficient": 1,
-									"__type": "BuffCounterByCoefficientCalculationPart"
-								}
-							]
-						},
-						"ExecuteDamage": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 8,
-									"mEndValue": 30,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Gwen/Spells/GwenPAbility/GwenP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -723,6 +589,140 @@
 						}
 					},
 					"dataKey": "Characters/Gwen/Spells/GwenRAbility/GwenR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "A Thousand Cuts",
+					"image": "assets/characters/gwen/hud/icons2d/gwen_passive.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Gwen's Attacks deal an additional <magicDamage>@PercentHealth1000Cuts@ Max Health magic damage</magicDamage> on hit. Gwen recovers Health equal to <healing>@HealingPercent@ of the damage</healing> this Ability deals to champions, up to a maximum of <healing>@healcap@</healing>.<br>",
+					"tooltipExtended": "{{ spell_gwenP_tooltip }}<br><rules>Max damage to monsters: @MonsterDamageCap@. Deals @ExecuteDamage@ bonus damage to minions below @ExecuteThreshold*100@% health.</rules><br>",
+					"dataValues": {
+						"ExecuteThreshold": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"HealingPercent": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 0.5,
+									"__type": "NumberCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"{540bce84}": {
+							"mFormulaParts": [
+								{
+									"mNumber": 1,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.006,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 2
+						},
+						"HealCap": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 10,
+									"mEndValue": 25,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mCoefficient": 0.065,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PercentHealth1000Cuts": {
+							"mMultiplier": {
+								"mNumber": 0.01
+							},
+							"mModifiedGameCalculation": "{540bce84}"
+						},
+						"MonsterDamageCap": {
+							"mFormulaParts": [
+								{
+									"mNumber": 3,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.05,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"PassiveMaxQTooltip": {
+							"mMultiplier": {
+								"mNumber": 0.06
+							},
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "{540bce84}"
+						},
+						"PassiveMaxRTooltip": {
+							"mMultiplier": {
+								"mNumber": 0.09
+							},
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mModifiedGameCalculation": "{540bce84}"
+						},
+						"{4197830d}": {
+							"mMultiplier": {
+								"mNumber": 0.03
+							},
+							"mModifiedGameCalculation": "{540bce84}"
+						},
+						"{4097817a}": {
+							"mMultiplier": {
+								"mNumber": 0.05
+							},
+							"mModifiedGameCalculation": "{540bce84}"
+						},
+						"{5bade13c}": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{9d0c98ec}",
+									"mCoefficient": 1,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							]
+						},
+						"ExecuteDamage": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 8,
+									"mEndValue": 30,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Gwen/Spells/GwenPAbility/GwenP"
 				}
 			]
 		}

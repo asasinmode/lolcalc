@@ -28,73 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Rebirth",
-					"image": "assets/characters/anivia/hud/icons2d/anivia_p.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Upon taking fatal damage, Anivia reverts to an egg, healing to full Health and receiving <Level>@BonusResists@</Level> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. If she survives for 6 seconds, she is reborn.",
-					"dataValues": {
-						"Cooldown": [
-							240,
-							240,
-							240,
-							240,
-							240,
-							240,
-							240
-						]
-					},
-					"spellCalculations": {
-						"BonusResists": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": -40,
-									"mBreakpoints": [
-										{
-											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 8,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 12,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 15,
-											"mAdditionalBonusAtThisLevel": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"BonusResistsTooltip": {
-							"mMultiplier": {
-								"mNumber": -1
-							},
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mExpandedTooltipCalculationDisplay": 1,
-							"mModifiedGameCalculation": "BonusResists"
-						}
-					},
-					"dataKey": "Characters/Anivia/Spells/RebirthMarkerAbility/RebirthMarker"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -533,6 +466,73 @@
 						}
 					},
 					"dataKey": "Characters/Anivia/Spells/GlacialStormAbility/GlacialStorm"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Rebirth",
+					"image": "assets/characters/anivia/hud/icons2d/anivia_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Upon taking fatal damage, Anivia reverts to an egg, healing to full Health and receiving <Level>@BonusResists@</Level> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>. If she survives for 6 seconds, she is reborn.",
+					"dataValues": {
+						"Cooldown": [
+							240,
+							240,
+							240,
+							240,
+							240,
+							240,
+							240
+						]
+					},
+					"spellCalculations": {
+						"BonusResists": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": -40,
+									"mBreakpoints": [
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 8,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 15,
+											"mAdditionalBonusAtThisLevel": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"BonusResistsTooltip": {
+							"mMultiplier": {
+								"mNumber": -1
+							},
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mExpandedTooltipCalculationDisplay": 1,
+							"mModifiedGameCalculation": "BonusResists"
+						}
+					},
+					"dataKey": "Characters/Anivia/Spells/RebirthMarkerAbility/RebirthMarker"
 				}
 			]
 		}

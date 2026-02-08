@@ -28,171 +28,6 @@
 		"attackspeedratio": 0
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Whisper",
-					"image": "assets/characters/jhin/hud/icons2d/jhin_p.png",
-					"tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.<br><br>",
-					"tooltipExtended": "{{Spell_JhinPassive_Tooltip}}<br><rules>Attack Damage scales with Critical Strike Chance and bonus Attack Speed.<br>Move Speed scales with bonus Attack Speed.<br>Missing health damage is capped at 800 against monsters.</rules>",
-					"dataValues": {
-						"MaxAmmo": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ReloadTime": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"HasteDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"OutOfCombatTimeBeforeReload": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"FourthShotDamageMult": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"CritReductionPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"BaseAttackSpeed": [
-							0.625,
-							0.625,
-							0.625,
-							0.625,
-							0.625,
-							0.625,
-							0.625
-						],
-						"PercentAttackSpeedPerLevel": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						],
-						"CritMoveSpeedPercentASRatio": [
-							0.44,
-							0.44,
-							0.44,
-							0.44,
-							0.44,
-							0.44,
-							0.44
-						]
-					},
-					"spellCalculations": {
-						"FourthShotExecutePercent": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.15,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.05
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"TotalADPercent": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.04,
-									"mInitialBonusPerLevel": 0.01,
-									"mBreakpoints": [
-										{
-											"mLevel": 10,
-											"mBonusPerLevelAtAndAfter": 0.02
-										},
-										{
-											"mLevel": 12,
-											"mBonusPerLevelAtAndAfter": 0.04
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 8,
-									"mCoefficient": 0.35,
-									"__type": "StatByCoefficientCalculationPart"
-								},
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"CritMoveSpeedPercent": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mNumber": 0.14,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 4,
-									"mStatFormula": 2,
-									"mDataValue": "CritMoveSpeedPercentASRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Jhin/Spells/JhinPassiveAbility/JhinPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -666,6 +501,171 @@
 						}
 					},
 					"dataKey": "Characters/Jhin/Spells/JhinRAbility/JhinR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Whisper",
+					"image": "assets/characters/jhin/hud/icons2d/jhin_p.png",
+					"tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.<br><br>",
+					"tooltipExtended": "{{Spell_JhinPassive_Tooltip}}<br><rules>Attack Damage scales with Critical Strike Chance and bonus Attack Speed.<br>Move Speed scales with bonus Attack Speed.<br>Missing health damage is capped at 800 against monsters.</rules>",
+					"dataValues": {
+						"MaxAmmo": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"ReloadTime": [
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5,
+							2.5
+						],
+						"HasteDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"OutOfCombatTimeBeforeReload": [
+							8,
+							8,
+							8,
+							8,
+							8,
+							8,
+							8
+						],
+						"FourthShotDamageMult": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						],
+						"CritReductionPercent": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"BaseAttackSpeed": [
+							0.625,
+							0.625,
+							0.625,
+							0.625,
+							0.625,
+							0.625,
+							0.625
+						],
+						"PercentAttackSpeedPerLevel": [
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03,
+							0.03
+						],
+						"CritMoveSpeedPercentASRatio": [
+							0.44,
+							0.44,
+							0.44,
+							0.44,
+							0.44,
+							0.44,
+							0.44
+						]
+					},
+					"spellCalculations": {
+						"FourthShotExecutePercent": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.15,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"TotalADPercent": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.04,
+									"mInitialBonusPerLevel": 0.01,
+									"mBreakpoints": [
+										{
+											"mLevel": 10,
+											"mBonusPerLevelAtAndAfter": 0.02
+										},
+										{
+											"mLevel": 12,
+											"mBonusPerLevelAtAndAfter": 0.04
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 8,
+									"mCoefficient": 0.35,
+									"__type": "StatByCoefficientCalculationPart"
+								},
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mCoefficient": 0.3,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"CritMoveSpeedPercent": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mNumber": 0.14,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 4,
+									"mStatFormula": 2,
+									"mDataValue": "CritMoveSpeedPercentASRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Jhin/Spells/JhinPassiveAbility/JhinPassive"
 				}
 			]
 		}

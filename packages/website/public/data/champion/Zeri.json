@@ -28,85 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Living Battery",
-					"image": "assets/characters/zeri/hud/icons2d/zeriqpassivecharged.png",
-					"tooltip": "Zeri's Attacks are treated as Abilities instead of Attacks and can be charged up by moving and casting <spellName>{{Spell_ZeriQ_Name}}</spellName>. Uncharged Attacks consume a small amount of charge, deal <magicDamage>@Spell.ZeriQ:MinDamage@ magic damage</magicDamage> and <danger>execute</danger> enemies below <attention>@Spell.ZeriQ:PassiveExecuteThreshold@ Health</attention>. A fully charged Attack deals <magicDamage>@Spell.ZeriQ:PassiveMaxDamage@ + @Spell.ZeriQ:PassiveMaxChargePercentHealth@ max Health magic damage</magicDamage> and consumes all charge.",
-					"tooltipExtended": "{{Spell_ZeriPassive_Tooltip}}<br><br><rules>Percent Health damage against jungle monsters is capped at 300.</rules>",
-					"dataValues": {
-						"ShieldDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"HastePercent": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"EnergizedDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PercentShieldSteal": [
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45
-						],
-						"ChampHitHasteDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"spellCalculations": {
-						"PassiveAttackSpeed": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.2,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.05
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Zeri/Spells/ZeriPassiveAbility/ZeriPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -914,6 +835,85 @@
 						}
 					},
 					"dataKey": "Characters/Zeri/Spells/ZeriRAbility/ZeriR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Living Battery",
+					"image": "assets/characters/zeri/hud/icons2d/zeriqpassivecharged.png",
+					"tooltip": "Zeri's Attacks are treated as Abilities instead of Attacks and can be charged up by moving and casting <spellName>{{Spell_ZeriQ_Name}}</spellName>. Uncharged Attacks consume a small amount of charge, deal <magicDamage>@Spell.ZeriQ:MinDamage@ magic damage</magicDamage> and <danger>execute</danger> enemies below <attention>@Spell.ZeriQ:PassiveExecuteThreshold@ Health</attention>. A fully charged Attack deals <magicDamage>@Spell.ZeriQ:PassiveMaxDamage@ + @Spell.ZeriQ:PassiveMaxChargePercentHealth@ max Health magic damage</magicDamage> and consumes all charge.",
+					"tooltipExtended": "{{Spell_ZeriPassive_Tooltip}}<br><br><rules>Percent Health damage against jungle monsters is capped at 300.</rules>",
+					"dataValues": {
+						"ShieldDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"HastePercent": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"EnergizedDuration": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PercentShieldSteal": [
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45,
+							0.45
+						],
+						"ChampHitHasteDuration": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"PassiveAttackSpeed": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.2,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Zeri/Spells/ZeriPassiveAbility/ZeriPassive"
 				}
 			]
 		}

@@ -28,58 +28,6 @@
 		"attackspeedratio": 0.67
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Warpath",
-					"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png",
-					"tooltip": "Hecarim gains <scaleAD>@BonusAD@ Attack Damage</scaleAD>, increasing based on level.",
-					"tooltipExtended": "{{Spell_HecarimPassive_Tooltip}}<br><br><rules>Attack Damage scales with bonus Move speed.</rules>",
-					"spellCalculations": {
-						"BonusAD": {
-							"mFormulaParts": [
-								{
-									"mStat": 7,
-									"mStatFormula": 2,
-									"mSubpart": {
-										"mLevel1Value": 0.12,
-										"mBreakpoints": [
-											{
-												"mLevel": 3,
-												"mAdditionalBonusAtThisLevel": 0.02
-											},
-											{
-												"mLevel": 6,
-												"mAdditionalBonusAtThisLevel": 0.02
-											},
-											{
-												"mLevel": 9,
-												"mAdditionalBonusAtThisLevel": 0.02
-											},
-											{
-												"mLevel": 12,
-												"mAdditionalBonusAtThisLevel": 0.02
-											},
-											{
-												"mLevel": 15,
-												"mAdditionalBonusAtThisLevel": 0.02
-											},
-											{
-												"mLevel": 18,
-												"mAdditionalBonusAtThisLevel": 0.02
-											}
-										]
-									},
-									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Hecarim/Spells/HecarimPassiveAbility/HecarimPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -703,6 +651,58 @@
 						]
 					},
 					"dataKey": "Characters/Hecarim/Spells/HecarimUltAbility/HecarimUlt"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Warpath",
+					"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png",
+					"tooltip": "Hecarim gains <scaleAD>@BonusAD@ Attack Damage</scaleAD>, increasing based on level.",
+					"tooltipExtended": "{{Spell_HecarimPassive_Tooltip}}<br><br><rules>Attack Damage scales with bonus Move speed.</rules>",
+					"spellCalculations": {
+						"BonusAD": {
+							"mFormulaParts": [
+								{
+									"mStat": 7,
+									"mStatFormula": 2,
+									"mSubpart": {
+										"mLevel1Value": 0.12,
+										"mBreakpoints": [
+											{
+												"mLevel": 3,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 6,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 9,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 12,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 15,
+												"mAdditionalBonusAtThisLevel": 0.02
+											},
+											{
+												"mLevel": 18,
+												"mAdditionalBonusAtThisLevel": 0.02
+											}
+										]
+									},
+									"__type": "StatBySubPartCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Hecarim/Spells/HecarimPassiveAbility/HecarimPassive"
 				}
 			]
 		}

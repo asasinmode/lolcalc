@@ -28,55 +28,6 @@
 		"attackspeedratio": 0.67
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Inherent Glamour",
-					"image": "assets/characters/neeko/hud/icons2d/neeko_p.png",
-					"tooltip": "Neeko can disguise herself as other units on the map. At any time she can disguise as an allied champion, or Neeko can stand next to any allied or neutral unit to store their Sho'ma and be able to transform into it. Your disguise will break upon receiving <status>immobilizing crowd control</status>, casting a damaging spell, damaging enemy towers as a non-champion, or your disguise taking damage equal to its healthbar. <br><br><rules>Neeko gains many of the properties of the units she turns into, negative and positive.</rules>",
-					"dataValues": {
-						"MagicPen": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"MagicPenDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ChargeTime": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PassiveCooldown": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
-					},
-					"dataKey": "Characters/Neeko/Spells/NeekoPassiveAbility/NeekoPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -575,6 +526,55 @@
 						}
 					},
 					"dataKey": "Characters/Neeko/Spells/NeekoRAbility/NeekoR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Inherent Glamour",
+					"image": "assets/characters/neeko/hud/icons2d/neeko_p.png",
+					"tooltip": "Neeko can disguise herself as other units on the map. At any time she can disguise as an allied champion, or Neeko can stand next to any allied or neutral unit to store their Sho'ma and be able to transform into it. Your disguise will break upon receiving <status>immobilizing crowd control</status>, casting a damaging spell, damaging enemy towers as a non-champion, or your disguise taking damage equal to its healthbar. <br><br><rules>Neeko gains many of the properties of the units she turns into, negative and positive.</rules>",
+					"dataValues": {
+						"MagicPen": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"MagicPenDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"ChargeTime": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"PassiveCooldown": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						]
+					},
+					"dataKey": "Characters/Neeko/Spells/NeekoPassiveAbility/NeekoPassive"
 				}
 			]
 		}

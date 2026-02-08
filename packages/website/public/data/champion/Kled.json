@@ -28,241 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Skaarl, the Cowardly Lizard",
-					"image": "assets/characters/kled/hud/icons2d/kled_p.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "<keywordMajor>Mounted:</keywordMajor> Kled's mount Skaarl takes damage instead of Kled. When his Health depletes, Kled dismounts.<br><br><keywordMajor>Dismounted:</keywordMajor> Kled replaces <spellName>{{spell_KledQ_Name}}</spellName>, gains <speed>@DismountedMS@ Move Speed</speed> toward enemy champions, and he gains @DismountedResistBonus@ bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, increased by @ResistBonusPerEnemy*100@% for each nearby enemy Champion, up to @DismountedResistBonusMax@. While dismounted, Kled's attacks deal @DismountedAttackPenalty@ reduced damage to Champions. <br><br>Kled gains <keywordMajor>@CourageVsChamps@ Courage</keywordMajor> by Attacking champions, <keywordMajor>@CourageVsOther@ Courage</keywordMajor> by Attacking epic monsters and structures, and <keywordMajor>@CourageLastHit@ Courage</keywordMajor> by killing minions. At max <keywordMajor>Courage</keywordMajor> Kled remounts with @SkaarlRemountHealth@ of Skaarl's Health, once every @MountCooldown@ seconds.",
-					"tooltipExtended": "{{Spell_KledPassive_Tooltip}}<br><br><rules>Skaarl has <healing>@SkaarlHealth@ Health plus 100% of Kled's bonus Health</healing>.<br>When Kled dismounts, he cleanses all crowd control and becomes briefly untargetable.</rules>",
-					"dataValues": {
-						"CourageVsChamps": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"CourageVsOther": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"CourageLastHit": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"DismountedResistRatio": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						],
-						"DismountedMSPenalty": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"RemountDashDuration": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MountReturnTime": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"DismountInvulnWindow": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"DismountDistanceBase": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"DismountSpeedRadius": [
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200
-						],
-						"ResistBonusPerEnemy": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"ResistBonusRange": [
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400
-						],
-						"MountCD": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						]
-					},
-					"spellCalculations": {
-						"DismountedMS": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 70,
-									"mInitialBonusPerLevel": 5,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"SkaarlHealth": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 400,
-									"mEndValue": 1400,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"SkaarlRemountHealth": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.4,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"DismountedResistBonus": {
-							"mFormulaParts": [
-								{
-									"mNumber": 4,
-									"__type": "NumberCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mDataValue": "{8a3e65f6}",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"MountCooldown": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "{73cfda6d}",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							]
-						},
-						"DismountedResistBonusMax": {
-							"mMultiplier": {
-								"mNumber": 2.5
-							},
-							"mModifiedGameCalculation": "DismountedResistBonus"
-						},
-						"DismountedAttackPenalty": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.15,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": -0.05
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -0.05
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": -0.05
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Kled/Spells/KledPassiveAbility/KledPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -805,6 +570,241 @@
 						}
 					},
 					"dataKey": "Characters/Kled/Spells/KledRAbility/KledR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Skaarl, the Cowardly Lizard",
+					"image": "assets/characters/kled/hud/icons2d/kled_p.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "<keywordMajor>Mounted:</keywordMajor> Kled's mount Skaarl takes damage instead of Kled. When his Health depletes, Kled dismounts.<br><br><keywordMajor>Dismounted:</keywordMajor> Kled replaces <spellName>{{spell_KledQ_Name}}</spellName>, gains <speed>@DismountedMS@ Move Speed</speed> toward enemy champions, and he gains @DismountedResistBonus@ bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, increased by @ResistBonusPerEnemy*100@% for each nearby enemy Champion, up to @DismountedResistBonusMax@. While dismounted, Kled's attacks deal @DismountedAttackPenalty@ reduced damage to Champions. <br><br>Kled gains <keywordMajor>@CourageVsChamps@ Courage</keywordMajor> by Attacking champions, <keywordMajor>@CourageVsOther@ Courage</keywordMajor> by Attacking epic monsters and structures, and <keywordMajor>@CourageLastHit@ Courage</keywordMajor> by killing minions. At max <keywordMajor>Courage</keywordMajor> Kled remounts with @SkaarlRemountHealth@ of Skaarl's Health, once every @MountCooldown@ seconds.",
+					"tooltipExtended": "{{Spell_KledPassive_Tooltip}}<br><br><rules>Skaarl has <healing>@SkaarlHealth@ Health plus 100% of Kled's bonus Health</healing>.<br>When Kled dismounts, he cleanses all crowd control and becomes briefly untargetable.</rules>",
+					"dataValues": {
+						"CourageVsChamps": [
+							15,
+							15,
+							15,
+							15,
+							15,
+							15,
+							15
+						],
+						"CourageVsOther": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"CourageLastHit": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"DismountedResistRatio": [
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01,
+							0.01
+						],
+						"DismountedMSPenalty": [
+							40,
+							40,
+							40,
+							40,
+							40,
+							40,
+							40
+						],
+						"RemountDashDuration": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MountReturnTime": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"DismountInvulnWindow": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"DismountDistanceBase": [
+							200,
+							200,
+							200,
+							200,
+							200,
+							200,
+							200
+						],
+						"DismountSpeedRadius": [
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200,
+							1200
+						],
+						"ResistBonusPerEnemy": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"ResistBonusRange": [
+							1400,
+							1400,
+							1400,
+							1400,
+							1400,
+							1400,
+							1400
+						],
+						"MountCD": [
+							30,
+							30,
+							30,
+							30,
+							30,
+							30,
+							30
+						]
+					},
+					"spellCalculations": {
+						"DismountedMS": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 70,
+									"mInitialBonusPerLevel": 5,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"SkaarlHealth": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 400,
+									"mEndValue": 1400,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"SkaarlRemountHealth": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.4,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"DismountedResistBonus": {
+							"mFormulaParts": [
+								{
+									"mNumber": 4,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mDataValue": "{8a3e65f6}",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MountCooldown": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "{73cfda6d}",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"DismountedResistBonusMax": {
+							"mMultiplier": {
+								"mNumber": 2.5
+							},
+							"mModifiedGameCalculation": "DismountedResistBonus"
+						},
+						"DismountedAttackPenalty": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.15,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": -0.05
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": -0.05
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": -0.05
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Kled/Spells/KledPassiveAbility/KledPassive"
 				}
 			]
 		}

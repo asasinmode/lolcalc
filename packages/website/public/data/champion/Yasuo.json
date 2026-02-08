@@ -28,96 +28,6 @@
 		"attackspeedratio": 0.67
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Way of the Wanderer",
-					"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png",
-					"tooltip": "<spellPassive>Resolve:</spellPassive> Moving grants <keywordMajor>Flow</keywordMajor>, which is tracked on Yasuo's resource bar. Moving faster grants more <keywordMajor>Flow</keywordMajor>. At maximum <keywordMajor>Flow</keywordMajor>, damage from a champion or monster briefly grants <shield>@ShieldValue@ Shield</shield>.<br><br><spellPassive>Intent:</spellPassive> Yasuo's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YasuoCritToAD*.01@ Bonus Attack Damage</physicalDamage> for every 1% Critical Strike Chance above 100%.",
-					"tooltipExtended": "{{Spell_YasuoPassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
-					"dataValues": {
-						"YasuoCritToAD": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"CritChanceMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CritDamageMod": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						]
-					},
-					"spellCalculations": {
-						"ShieldValue": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 125,
-									"mEndValue": 600,
-									"mScaleByStatProgressionMultiplier": true,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"{74ce5438}": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 55,
-									"mBreakpoints": [
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -5
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -5
-										},
-										{
-											"mLevel": 19,
-											"mAdditionalBonusAtThisLevel": -5
-										},
-										{
-											"mLevel": 25,
-											"mAdditionalBonusAtThisLevel": -5
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"CurrentCritDamage": {
-							"mExpandedTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mStat": 9,
-									"mCoefficient": 1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Yasuo/Spells/YasuoPassiveAbility/YasuoPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -578,6 +488,96 @@
 						}
 					},
 					"dataKey": "Characters/Yasuo/Spells/YasuoRAbility/YasuoR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Way of the Wanderer",
+					"image": "assets/characters/yasuo/hud/icons2d/yasuo_passive.png",
+					"tooltip": "<spellPassive>Resolve:</spellPassive> Moving grants <keywordMajor>Flow</keywordMajor>, which is tracked on Yasuo's resource bar. Moving faster grants more <keywordMajor>Flow</keywordMajor>. At maximum <keywordMajor>Flow</keywordMajor>, damage from a champion or monster briefly grants <shield>@ShieldValue@ Shield</shield>.<br><br><spellPassive>Intent:</spellPassive> Yasuo's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YasuoCritToAD*.01@ Bonus Attack Damage</physicalDamage> for every 1% Critical Strike Chance above 100%.",
+					"tooltipExtended": "{{Spell_YasuoPassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
+					"dataValues": {
+						"YasuoCritToAD": [
+							50,
+							50,
+							50,
+							50,
+							50,
+							50,
+							50
+						],
+						"CritChanceMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"CritDamageMod": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						]
+					},
+					"spellCalculations": {
+						"ShieldValue": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 125,
+									"mEndValue": 600,
+									"mScaleByStatProgressionMultiplier": true,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"{74ce5438}": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 55,
+									"mBreakpoints": [
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 19,
+											"mAdditionalBonusAtThisLevel": -5
+										},
+										{
+											"mLevel": 25,
+											"mAdditionalBonusAtThisLevel": -5
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"CurrentCritDamage": {
+							"mExpandedTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mStat": 9,
+									"mCoefficient": 1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Yasuo/Spells/YasuoPassiveAbility/YasuoPassive"
 				}
 			]
 		}

@@ -28,93 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Bravado",
-					"image": "assets/characters/taric/hud/icons2d/taric_passive.png",
-					"tooltip": "After using an Ability, Taric's next 2 Attacks within @Duration@ seconds gain <attackSpeed>100% Attack Speed</attackSpeed>, deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>, and reduce his basic Ability Cooldowns by @CDR@ second.",
-					"dataValues": {
-						"Duration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BaseDamageMultiplierForModesBalance": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ArmorDamageValue": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						]
-					},
-					"spellCalculations": {
-						"TotalDamage": {
-							"mFormulaParts": [
-								{
-									"mPart1": {
-										"mStartValue": 25,
-										"mEndValue": 93
-									},
-									"mPart2": {
-										"mDataValue": "BaseDamageMultiplierForModesBalance"
-									},
-									"__type": "ProductOfSubPartsCalculationPart"
-								},
-								{
-									"mStat": 1,
-									"mStatFormula": 2,
-									"mDataValue": "ArmorDamageValue",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"CDR": {
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mSubparts": [
-										{
-											"mNumber": 1
-										},
-										{
-											"mSubparts": [
-												{
-													"mNumber": 1
-												},
-												{
-													"mPart2": {
-														"mNumber": -1
-													}
-												}
-											]
-										}
-									],
-									"__type": "SumOfSubPartsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Taric/Spells/TaricPassiveAbility/TaricPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -496,6 +409,93 @@
 						]
 					},
 					"dataKey": "Characters/Taric/Spells/TaricRAbility/TaricR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Bravado",
+					"image": "assets/characters/taric/hud/icons2d/taric_passive.png",
+					"tooltip": "After using an Ability, Taric's next 2 Attacks within @Duration@ seconds gain <attackSpeed>100% Attack Speed</attackSpeed>, deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>, and reduce his basic Ability Cooldowns by @CDR@ second.",
+					"dataValues": {
+						"Duration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BaseDamageMultiplierForModesBalance": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ArmorDamageValue": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						]
+					},
+					"spellCalculations": {
+						"TotalDamage": {
+							"mFormulaParts": [
+								{
+									"mPart1": {
+										"mStartValue": 25,
+										"mEndValue": 93
+									},
+									"mPart2": {
+										"mDataValue": "BaseDamageMultiplierForModesBalance"
+									},
+									"__type": "ProductOfSubPartsCalculationPart"
+								},
+								{
+									"mStat": 1,
+									"mStatFormula": 2,
+									"mDataValue": "ArmorDamageValue",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"CDR": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mSubparts": [
+										{
+											"mNumber": 1
+										},
+										{
+											"mSubparts": [
+												{
+													"mNumber": 1
+												},
+												{
+													"mPart2": {
+														"mNumber": -1
+													}
+												}
+											]
+										}
+									],
+									"__type": "SumOfSubPartsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Taric/Spells/TaricPassiveAbility/TaricPassive"
 				}
 			]
 		}

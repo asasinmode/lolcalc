@@ -28,51 +28,6 @@
 		"attackspeedratio": 0.694
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Battle Fury",
-					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_passive.png",
-					"tooltip": "Tryndamere's Attacks grant him <keywordMajor>5 Fury</keywordMajor> or <keywordMajor>10 Fury</keywordMajor> for a critical strike, and <keywordMajor>10 Fury</keywordMajor> for killing a unit. After 8 seconds of being out of combat, Tryndamere loses <keywordMajor>5 Fury</keywordMajor> every second.<br><br>Each point of <keywordMajor>Fury</keywordMajor> grants @PassiveCritConversionTooltip@% Critical Strike Chance.",
-					"dataValues": {
-						"CherryFuryModifier": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"spellCalculations": {
-						"PassiveCritConversionTooltip": {
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mNumber": 0.5,
-									"__type": "NumberCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						},
-						"{dc63b617}": {
-							"mMultiplier": {
-								"mNumber": 0.1
-							},
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.05,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Tryndamere/Spells/TryndamerePassiveAbility/TryndamerePassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -454,6 +409,51 @@
 						]
 					},
 					"dataKey": "Characters/Tryndamere/Spells/UndyingRageAbility/UndyingRage"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Battle Fury",
+					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_passive.png",
+					"tooltip": "Tryndamere's Attacks grant him <keywordMajor>5 Fury</keywordMajor> or <keywordMajor>10 Fury</keywordMajor> for a critical strike, and <keywordMajor>10 Fury</keywordMajor> for killing a unit. After 8 seconds of being out of combat, Tryndamere loses <keywordMajor>5 Fury</keywordMajor> every second.<br><br>Each point of <keywordMajor>Fury</keywordMajor> grants @PassiveCritConversionTooltip@% Critical Strike Chance.",
+					"dataValues": {
+						"CherryFuryModifier": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"PassiveCritConversionTooltip": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 0.5,
+									"__type": "NumberCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						},
+						"{dc63b617}": {
+							"mMultiplier": {
+								"mNumber": 0.1
+							},
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.05,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Tryndamere/Spells/TryndamerePassiveAbility/TryndamerePassive"
 				}
 			]
 		}

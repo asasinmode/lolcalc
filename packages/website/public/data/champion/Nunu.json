@@ -28,102 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Call of the Freljord",
-					"image": "assets/characters/nunu/hud/icons2d/nunupassive.png",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
-					"tooltip": "When Nunu and Willump deal damage to champions, large jungle monsters, or structures, they and a nearby ally gain <attackSpeed>@ASIncrease*100@% Attack Speed</attackSpeed> and <speed>@MSIncrease*100@% Move Speed</speed> for 4 seconds.<br><br>Willump's Attacks deal an additional <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to other nearby enemies while he has this buff.",
-					"tooltipExtended": "{{Spell_NunuPassive_Tooltip}}<br><br><rules>The buff range is increased against champions and structures.<br>The duration stacks but the effect can only occur once every 10 seconds per target.<br>The buff attempts to target the champion who will get the most use from it.</rules>",
-					"dataValues": {
-						"MonsterRadius": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						],
-						"LargeRadius": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"BloodBoilBaseDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ADRatioForAOE": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"ASIncrease": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"MSIncrease": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
-					},
-					"spellCalculations": {
-						"CleaveDamage": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mDataValue": "ADRatioForAOE",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Nunu/Spells/NunuPassiveAbility/NunuPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -943,6 +847,102 @@
 						}
 					},
 					"dataKey": "Characters/Nunu/Spells/NunuRAbility/NunuR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Call of the Freljord",
+					"image": "assets/characters/nunu/hud/icons2d/nunupassive.png",
+					"mana": [
+						40,
+						40,
+						40,
+						40,
+						40,
+						40
+					],
+					"cooldownTime": [
+						20,
+						20,
+						20,
+						20,
+						20,
+						20,
+						20
+					],
+					"tooltip": "When Nunu and Willump deal damage to champions, large jungle monsters, or structures, they and a nearby ally gain <attackSpeed>@ASIncrease*100@% Attack Speed</attackSpeed> and <speed>@MSIncrease*100@% Move Speed</speed> for 4 seconds.<br><br>Willump's Attacks deal an additional <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to other nearby enemies while he has this buff.",
+					"tooltipExtended": "{{Spell_NunuPassive_Tooltip}}<br><br><rules>The buff range is increased against champions and structures.<br>The duration stacks but the effect can only occur once every 10 seconds per target.<br>The buff attempts to target the champion who will get the most use from it.</rules>",
+					"dataValues": {
+						"MonsterRadius": [
+							700,
+							700,
+							700,
+							700,
+							700,
+							700,
+							700
+						],
+						"LargeRadius": [
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000,
+							1000
+						],
+						"BloodBoilBaseDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"ADRatioForAOE": [
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3,
+							0.3
+						],
+						"ASIncrease": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"MSIncrease": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"spellCalculations": {
+						"CleaveDamage": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "ADRatioForAOE",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Nunu/Spells/NunuPassiveAbility/NunuPassive"
 				}
 			]
 		}

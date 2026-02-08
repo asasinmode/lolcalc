@@ -28,80 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Cosmic Creator",
-					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolp.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"tooltip": "Aurelion Sol's damaging Abilities break down enemies into <font color='#3458eb'>Stardust</font>, which improves his Abilities.<li><spellName>{{Spell_AurelionSolQ_Name}}</spellName>: Bursts deal an additional <magicDamage>@QPassiveScaling@ max Health magic damage</magicDamage></li><li><spellName>{{Spell_AurelionSolW_Name}}</spellName>: @f2.1@% increased distance.</li><li><spellName>{{Spell_AurelionSolE_Name}}</spellName>: @f3.1@% increased area and <scaleHealth>@EPassiveScalingExecute@</scaleHealth> bonus execute threshold.</li><li><spellName>{{Spell_AurelionSolR1_Name}} and {{Spell_AurelionSolR2_Name}}</spellName>: @f4.1@% increased area.</li><br><rules>Aurelion Sol has acquired <font color='#3458eb'>Stardust</font>: <font color='#3458eb'>@f1@</font></rules>",
-					"dataValues": {
-						"QMaxHealthTrueDamagePerStack": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"BaseExecutionThreshold": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"ExecutionGrowthPerBreakpoint": [
-							0.026,
-							0.026,
-							0.026,
-							0.026,
-							0.026,
-							0.026,
-							0.026
-						]
-					},
-					"spellCalculations": {
-						"QPassiveScaling": {
-							"mFormulaParts": [
-								{
-									"mBuffName": "{c9372c6b}",
-									"mIconKey": "%i:asolStackIcon%",
-									"mDataValue": "QMaxHealthTrueDamagePerStack",
-									"__type": "BuffCounterByNamedDataValueCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
-						},
-						"EPassiveScalingExecute": {
-							"mFormulaParts": [
-								{
-									"mBuffName": "{c9372c6b}",
-									"mIconKey": "%i:asolStackIcon%",
-									"mDataValue": "ExecutionGrowthPerBreakpoint",
-									"__type": "BuffCounterByNamedDataValueCalculationPart"
-								}
-							],
-							"mPrecision": 1
-						}
-					},
-					"dataKey": "Characters/AurelionSol/Spells/AurelionSolPassiveAbility/AurelionSolPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -1024,6 +950,80 @@
 						}
 					},
 					"dataKey": "Characters/AurelionSol/Spells/AurelionSolRAbility/AurelionSolR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Cosmic Creator",
+					"image": "assets/characters/aurelionsol/hud/icons2d/aurelionsolp.png",
+					"cooldownTime": [
+						0,
+						0,
+						0,
+						0,
+						0,
+						0,
+						0
+					],
+					"tooltip": "Aurelion Sol's damaging Abilities break down enemies into <font color='#3458eb'>Stardust</font>, which improves his Abilities.<li><spellName>{{Spell_AurelionSolQ_Name}}</spellName>: Bursts deal an additional <magicDamage>@QPassiveScaling@ max Health magic damage</magicDamage></li><li><spellName>{{Spell_AurelionSolW_Name}}</spellName>: @f2.1@% increased distance.</li><li><spellName>{{Spell_AurelionSolE_Name}}</spellName>: @f3.1@% increased area and <scaleHealth>@EPassiveScalingExecute@</scaleHealth> bonus execute threshold.</li><li><spellName>{{Spell_AurelionSolR1_Name}} and {{Spell_AurelionSolR2_Name}}</spellName>: @f4.1@% increased area.</li><br><rules>Aurelion Sol has acquired <font color='#3458eb'>Stardust</font>: <font color='#3458eb'>@f1@</font></rules>",
+					"dataValues": {
+						"QMaxHealthTrueDamagePerStack": [
+							0,
+							0,
+							0,
+							0,
+							0,
+							0,
+							0
+						],
+						"BaseExecutionThreshold": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"ExecutionGrowthPerBreakpoint": [
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026,
+							0.026
+						]
+					},
+					"spellCalculations": {
+						"QPassiveScaling": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "QMaxHealthTrueDamagePerStack",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
+						},
+						"EPassiveScalingExecute": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{c9372c6b}",
+									"mIconKey": "%i:asolStackIcon%",
+									"mDataValue": "ExecutionGrowthPerBreakpoint",
+									"__type": "BuffCounterByNamedDataValueCalculationPart"
+								}
+							],
+							"mPrecision": 1
+						}
+					},
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolPassiveAbility/AurelionSolPassive"
 				}
 			]
 		}

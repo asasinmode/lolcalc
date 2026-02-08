@@ -28,67 +28,6 @@
 		"attackspeedratio": 0.668
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Harrier",
-					"image": "assets/characters/quinn/hud/icons2d/quinn_passive.png",
-					"tooltip": "Every @f1@ seconds, Valor marks a nearby enemy as <keywordMajor>Vulnerable</keywordMajor>, revealing it for @RevealDuration@ seconds and causing Quinn's next Attack against them to deal <physicalDamage>@BonusDamage@ bonus physical damage</physicalDamage>.",
-					"tooltipExtended": "{{Spell_QuinnPassive_Tooltip}}<br><br><rules>Cooldown is reduced by Critical Strike Chance.</rules>",
-					"dataValues": {
-						"RevealDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ModesPassiveDamageMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ADRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
-					},
-					"spellCalculations": {
-						"BonusDamage": {
-							"mMultiplier": {
-								"mDataValue": "ModesPassiveDamageMultiplier"
-							},
-							"mFormulaParts": [
-								{
-									"mStartValue": 15,
-									"mEndValue": 120,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "ADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Quinn/Spells/QuinnPassiveAbility/QuinnPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -434,6 +373,67 @@
 						}
 					},
 					"dataKey": "Characters/Quinn/Spells/QuinnRAbility/QuinnR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Harrier",
+					"image": "assets/characters/quinn/hud/icons2d/quinn_passive.png",
+					"tooltip": "Every @f1@ seconds, Valor marks a nearby enemy as <keywordMajor>Vulnerable</keywordMajor>, revealing it for @RevealDuration@ seconds and causing Quinn's next Attack against them to deal <physicalDamage>@BonusDamage@ bonus physical damage</physicalDamage>.",
+					"tooltipExtended": "{{Spell_QuinnPassive_Tooltip}}<br><br><rules>Cooldown is reduced by Critical Strike Chance.</rules>",
+					"dataValues": {
+						"RevealDuration": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"ModesPassiveDamageMultiplier": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"ADRatio": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						]
+					},
+					"spellCalculations": {
+						"BonusDamage": {
+							"mMultiplier": {
+								"mDataValue": "ModesPassiveDamageMultiplier"
+							},
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 120,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "ADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Quinn/Spells/QuinnPassiveAbility/QuinnPassive"
 				}
 			]
 		}

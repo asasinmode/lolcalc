@@ -28,18 +28,6 @@
 		"attackspeedratio": 0.638
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Prowl",
-					"image": "assets/characters/nidalee/hud/icons2d/nidalee_passive.png",
-					"tooltip": "Nidalee starts with a rank in <spellName>Aspect of the Cougar</spellName>. <br><br>Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed> for 2 seconds when entering Brush, increased to <speed>@spell.AspectOfTheCougar:PassivePercentMS*3@% Move Speed</speed> while moving toward enemy champions.<br><br>Hitting champions or jungle monsters with <spellName>Javelin Toss</spellName> or <spellName>Bushwhack</spellName> marks them as <keywordMajor>Hunted</keywordMajor> for 4 seconds. While an enemy is <keywordMajor>Hunted</keywordMajor>, they are revealed with <keywordStealth>True Sight</keywordStealth> and Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed>, increased to <speed>@spell.AspectOfTheCougar:PassivePercentMS*3@% Move Speed</speed> toward the <keywordMajor>Hunted</keywordMajor> enemy. ",
-					"tooltipExtended": "{{Spell_NidaleePassiveHunt_Tooltip}}<br><br><rules><br>The <speed>Move Speed</speed> can stack but not exceed 30%<br></rules>",
-					"dataKey": "Characters/Nidalee/Spells/NidaleePassiveHuntAbility/NidaleePassiveHunt"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -607,6 +595,18 @@
 						]
 					},
 					"dataKey": "Characters/Nidalee/Spells/AspectOfTheCougarAbility/AspectOfTheCougar"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Prowl",
+					"image": "assets/characters/nidalee/hud/icons2d/nidalee_passive.png",
+					"tooltip": "Nidalee starts with a rank in <spellName>Aspect of the Cougar</spellName>. <br><br>Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed> for 2 seconds when entering Brush, increased to <speed>@spell.AspectOfTheCougar:PassivePercentMS*3@% Move Speed</speed> while moving toward enemy champions.<br><br>Hitting champions or jungle monsters with <spellName>Javelin Toss</spellName> or <spellName>Bushwhack</spellName> marks them as <keywordMajor>Hunted</keywordMajor> for 4 seconds. While an enemy is <keywordMajor>Hunted</keywordMajor>, they are revealed with <keywordStealth>True Sight</keywordStealth> and Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed>, increased to <speed>@spell.AspectOfTheCougar:PassivePercentMS*3@% Move Speed</speed> toward the <keywordMajor>Hunted</keywordMajor> enemy. ",
+					"tooltipExtended": "{{Spell_NidaleePassiveHunt_Tooltip}}<br><br><rules><br>The <speed>Move Speed</speed> can stack but not exceed 30%<br></rules>",
+					"dataKey": "Characters/Nidalee/Spells/NidaleePassiveHuntAbility/NidaleePassiveHunt"
 				}
 			]
 		}

@@ -28,46 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Rising Spell Force",
-					"image": "assets/characters/ezreal/hud/icons2d/ezreal_passive.png",
-					"tooltip": "Ezreal's Ability hits grant him <attackSpeed>@AttackSpeedPerStack.0*100@% Attack Speed</attackSpeed> for @StackDuration@ seconds, stacking up to @MaxStacks@ times.",
-					"dataValues": {
-						"AttackSpeedPerStack": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"StackDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"MaxStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"dataKey": "Characters/Ezreal/Spells/EzrealPassiveAbility/EzrealPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -432,6 +392,46 @@
 						}
 					},
 					"dataKey": "Characters/Ezreal/Spells/EzrealRAbility/EzrealR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Rising Spell Force",
+					"image": "assets/characters/ezreal/hud/icons2d/ezreal_passive.png",
+					"tooltip": "Ezreal's Ability hits grant him <attackSpeed>@AttackSpeedPerStack.0*100@% Attack Speed</attackSpeed> for @StackDuration@ seconds, stacking up to @MaxStacks@ times.",
+					"dataValues": {
+						"AttackSpeedPerStack": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						],
+						"StackDuration": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
+						],
+						"MaxStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"dataKey": "Characters/Ezreal/Spells/EzrealPassiveAbility/EzrealPassive"
 				}
 			]
 		}

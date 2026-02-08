@@ -28,82 +28,6 @@
 		"attackspeedratio": 0.644
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Hextech Munitions",
-					"image": "assets/characters/corki/hud/icons2d/corki_rapidreload.png",
-					"tooltip": "Corki's Attacks and <keywordMajor>Spellblades</keywordMajor> deal <trueDamage>@AttackConversion*100@% bonus true damage</trueDamage>.<br>Attacks: <trueDamage>@BasicAttackTOOLTIP@</trueDamage>.<br>Critical Strikes: <trueDamage>@CriticalStrikeTOOLTIP@</trueDamage>.",
-					"dataValues": {
-						"AttackConversion": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"InitialCD": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"PackageDuration": [
-							45,
-							45,
-							45,
-							45,
-							45,
-							45,
-							45
-						],
-						"BonusMS": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"SubsequentCD": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
-					},
-					"spellCalculations": {
-						"BasicAttackTOOLTIP": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mDataValue": "AttackConversion",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"CriticalStrikeTOOLTIP": {
-							"mMultiplier": {
-								"mStat": 9,
-								"mCoefficient": 1
-							},
-							"mModifiedGameCalculation": "BasicAttackTOOLTIP"
-						}
-					},
-					"dataKey": "Characters/Corki/Spells/RapidReloadAbility/RapidReload"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -599,6 +523,82 @@
 						}
 					},
 					"dataKey": "Characters/Corki/Spells/MissileBarrageAbility/MissileBarrage"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Hextech Munitions",
+					"image": "assets/characters/corki/hud/icons2d/corki_rapidreload.png",
+					"tooltip": "Corki's Attacks and <keywordMajor>Spellblades</keywordMajor> deal <trueDamage>@AttackConversion*100@% bonus true damage</trueDamage>.<br>Attacks: <trueDamage>@BasicAttackTOOLTIP@</trueDamage>.<br>Critical Strikes: <trueDamage>@CriticalStrikeTOOLTIP@</trueDamage>.",
+					"dataValues": {
+						"AttackConversion": [
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2,
+							0.2
+						],
+						"InitialCD": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						],
+						"PackageDuration": [
+							45,
+							45,
+							45,
+							45,
+							45,
+							45,
+							45
+						],
+						"BonusMS": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"SubsequentCD": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"spellCalculations": {
+						"BasicAttackTOOLTIP": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "AttackConversion",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"CriticalStrikeTOOLTIP": {
+							"mMultiplier": {
+								"mStat": 9,
+								"mCoefficient": 1
+							},
+							"mModifiedGameCalculation": "BasicAttackTOOLTIP"
+						}
+					},
+					"dataKey": "Characters/Corki/Spells/RapidReloadAbility/RapidReload"
 				}
 			]
 		}

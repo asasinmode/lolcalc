@@ -28,156 +28,6 @@
 		"attackspeedratio": 0.669
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Crimson Curse",
-					"image": "assets/characters/briar/hud/icons2d/briarp.png",
-					"tooltip": "Briar's Attacks and Abilities apply a bleed for @BleedDuration@ seconds, stacking up to @MaxBleedStacks@ times. The bleed deals <physicalDamage>@BleedDamageOverDurationTooltip@ to @BleedMaxDamageOverDurationTooltip@ physical damage</physicalDamage> based on stacks, and <healing>Heals Briar for @HealPercent*100@% of the pre-mitigation damage</healing>.<br><br>Briar gains up to <health>@TotalHealPerMissingHPPercentTooltip@%</health> increased <healing>Healing</healing> based on her missing Health. She has no Base Health Regeneration and her Abilities cost <font color='#CC3300'>@CurrentHealthPercentCost*100@% current Health</font> to cast.<br>",
-					"tooltipExtended": "{{ Spell_BriarP_Tooltip }}<br><rules>Briar <healing>heals</healing> for @PercentOfBleedHealedOnKill*100@% of the remaining bleed damage when a bleeding enemy dies.</rules>",
-					"dataValues": {
-						"BleedDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BleedTickRate": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HealPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"HealShieldPerMissingHPPercent": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"CurrentHealthPercentCost": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"BleedPercentAdd": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MaxBleedStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"PercentOfBleedHealedOnKill": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						]
-					},
-					"spellCalculations": {
-						"{15da76ad}": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 2,
-									"mEndValue": 10,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mCoefficient": 0.1,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"{f06e5a79}": {
-							"mMultiplier": {
-								"mNumber": 3
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{15da76ad}"
-						},
-						"BleedDamageOverDurationTooltip": {
-							"mMultiplier": {
-								"mDataValue": "BleedDuration"
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{15da76ad}"
-						},
-						"BleedMaxDamageOverDurationTooltip": {
-							"mMultiplier": {
-								"mPart1": {
-									"mDataValue": "BleedDuration"
-								},
-								"mPart2": {
-									"mNumber": 2
-								}
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{15da76ad}"
-						},
-						"{b38f3487}": {
-							"mFormulaParts": [
-								{
-									"mDataValue": "HealShieldPerMissingHPPercent",
-									"__type": "NamedDataValueCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mStatFormula": 2,
-									"mCoefficient": 0,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"TotalHealPerMissingHPPercentTooltip": {
-							"mMultiplier": {
-								"mNumber": 100
-							},
-							"tooltipOnly": true,
-							"mModifiedGameCalculation": "{b38f3487}"
-						}
-					},
-					"dataKey": "{cf6ed5a6}"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -832,6 +682,156 @@
 						}
 					},
 					"dataKey": "Characters/Briar/Spells/BriarRAbility/BriarR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Crimson Curse",
+					"image": "assets/characters/briar/hud/icons2d/briarp.png",
+					"tooltip": "Briar's Attacks and Abilities apply a bleed for @BleedDuration@ seconds, stacking up to @MaxBleedStacks@ times. The bleed deals <physicalDamage>@BleedDamageOverDurationTooltip@ to @BleedMaxDamageOverDurationTooltip@ physical damage</physicalDamage> based on stacks, and <healing>Heals Briar for @HealPercent*100@% of the pre-mitigation damage</healing>.<br><br>Briar gains up to <health>@TotalHealPerMissingHPPercentTooltip@%</health> increased <healing>Healing</healing> based on her missing Health. She has no Base Health Regeneration and her Abilities cost <font color='#CC3300'>@CurrentHealthPercentCost*100@% current Health</font> to cast.<br>",
+					"tooltipExtended": "{{ Spell_BriarP_Tooltip }}<br><rules>Briar <healing>heals</healing> for @PercentOfBleedHealedOnKill*100@% of the remaining bleed damage when a bleeding enemy dies.</rules>",
+					"dataValues": {
+						"BleedDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"BleedTickRate": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"HealPercent": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"HealShieldPerMissingHPPercent": [
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4,
+							0.4
+						],
+						"CurrentHealthPercentCost": [
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05
+						],
+						"BleedPercentAdd": [
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25,
+							0.25
+						],
+						"MaxBleedStacks": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						],
+						"PercentOfBleedHealedOnKill": [
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25,
+							1.25
+						]
+					},
+					"spellCalculations": {
+						"{15da76ad}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 2,
+									"mEndValue": 10,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mCoefficient": 0.1,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"{f06e5a79}": {
+							"mMultiplier": {
+								"mNumber": 3
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{15da76ad}"
+						},
+						"BleedDamageOverDurationTooltip": {
+							"mMultiplier": {
+								"mDataValue": "BleedDuration"
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{15da76ad}"
+						},
+						"BleedMaxDamageOverDurationTooltip": {
+							"mMultiplier": {
+								"mPart1": {
+									"mDataValue": "BleedDuration"
+								},
+								"mPart2": {
+									"mNumber": 2
+								}
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{15da76ad}"
+						},
+						"{b38f3487}": {
+							"mFormulaParts": [
+								{
+									"mDataValue": "HealShieldPerMissingHPPercent",
+									"__type": "NamedDataValueCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mStatFormula": 2,
+									"mCoefficient": 0,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"TotalHealPerMissingHPPercentTooltip": {
+							"mMultiplier": {
+								"mNumber": 100
+							},
+							"tooltipOnly": true,
+							"mModifiedGameCalculation": "{b38f3487}"
+						}
+					},
+					"dataKey": "{cf6ed5a6}"
 				}
 			]
 		}

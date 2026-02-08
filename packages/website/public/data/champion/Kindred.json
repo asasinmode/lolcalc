@@ -28,139 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Mark of the Kindred",
-					"image": "assets/characters/kindred/hud/icons2d/kindred_passive.png",
-					"tooltip": "Kindred can designate a champion to hunt by clicking their portrait above their inventory. They also designate certain jungle monsters to hunt with an icon on the minimap automatically.<br><br>Getting a takedown on a hunted target grants Kindred a <keywordMajor>Mark</keywordMajor>, empowering them. After @f2@ <keywordMajor>Marks</keywordMajor>, Kindred gains @f8@ Attack Range. Every @f7@ <keywordMajor>Marks</keywordMajor> after the fourth grants a further @f9@ Attack Range.<br><br><keywordMajor>Marks</keywordMajor> empower Kindred's basic Abilities:<li><spellName>{{Spell_KindredQ_Name}}</spellName> grants an additional <attackSpeed>@QMarkBonus@ Attack Speed</attackSpeed><li><spellName>{{Spell_KindredW_Name}}</spellName> deal an additional <magicDamage>@WMarkBonus@ current Health damage</magicDamage>.<li><spellName>{{Spell_KindredEWrapper_Name}}</spellName> deal an additional <physicalDamage>@EMarkBonus@ missing Health damage</physicalDamage>.",
-					"tooltipExtended": "{{Spell_KindredPassiveManager_Tooltip}}<br><br>Currently granting <statTracking>@f3@ Attack Range</statTracking>.<br><br><rules>The hunted jungle monsters change as Kindred gains <keywordMajor>Marks</keywordMajor>, moving further into the enemy jungle, eventually hunting epic monsters.</rules>",
-					"dataValues": {
-						"BaseHealAmount": [
-							45,
-							45,
-							45,
-							45,
-							45,
-							45,
-							45
-						],
-						"HealAmountPerLevel": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
-					},
-					"spellCalculations": {
-						"QMarkBonus": {
-							"tooltipOnly": true,
-							"mFormulaParts": [
-								{
-									"mBuffName": "{64290302}",
-									"mIconKey": "%i:kindredPassiveIcon%",
-									"mCoefficient": 0.05,
-									"__type": "BuffCounterByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"WMarkBonus": {
-							"mFormulaParts": [
-								{
-									"mBuffName": "{64290302}",
-									"mIconKey": "%i:kindredPassiveIcon%",
-									"mCoefficient": 0.01,
-									"__type": "BuffCounterByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"EMarkBonus": {
-							"mFormulaParts": [
-								{
-									"mBuffName": "{64290302}",
-									"mIconKey": "%i:kindredPassiveIcon%",
-									"mCoefficient": 0.005,
-									"__type": "BuffCounterByCoefficientCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"effectAmount": {
-						"0": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"1": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"2": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"3": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"4": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"5": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"6": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
-					},
-					"dataKey": "Characters/Kindred/Spells/KindredPassiveManagerAbility/KindredPassiveManager"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -848,6 +715,139 @@
 						]
 					},
 					"dataKey": "Characters/Kindred/Spells/KindredRAbility/KindredR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Mark of the Kindred",
+					"image": "assets/characters/kindred/hud/icons2d/kindred_passive.png",
+					"tooltip": "Kindred can designate a champion to hunt by clicking their portrait above their inventory. They also designate certain jungle monsters to hunt with an icon on the minimap automatically.<br><br>Getting a takedown on a hunted target grants Kindred a <keywordMajor>Mark</keywordMajor>, empowering them. After @f2@ <keywordMajor>Marks</keywordMajor>, Kindred gains @f8@ Attack Range. Every @f7@ <keywordMajor>Marks</keywordMajor> after the fourth grants a further @f9@ Attack Range.<br><br><keywordMajor>Marks</keywordMajor> empower Kindred's basic Abilities:<li><spellName>{{Spell_KindredQ_Name}}</spellName> grants an additional <attackSpeed>@QMarkBonus@ Attack Speed</attackSpeed><li><spellName>{{Spell_KindredW_Name}}</spellName> deal an additional <magicDamage>@WMarkBonus@ current Health damage</magicDamage>.<li><spellName>{{Spell_KindredEWrapper_Name}}</spellName> deal an additional <physicalDamage>@EMarkBonus@ missing Health damage</physicalDamage>.",
+					"tooltipExtended": "{{Spell_KindredPassiveManager_Tooltip}}<br><br>Currently granting <statTracking>@f3@ Attack Range</statTracking>.<br><br><rules>The hunted jungle monsters change as Kindred gains <keywordMajor>Marks</keywordMajor>, moving further into the enemy jungle, eventually hunting epic monsters.</rules>",
+					"dataValues": {
+						"BaseHealAmount": [
+							45,
+							45,
+							45,
+							45,
+							45,
+							45,
+							45
+						],
+						"HealAmountPerLevel": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						]
+					},
+					"spellCalculations": {
+						"QMarkBonus": {
+							"tooltipOnly": true,
+							"mFormulaParts": [
+								{
+									"mBuffName": "{64290302}",
+									"mIconKey": "%i:kindredPassiveIcon%",
+									"mCoefficient": 0.05,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"WMarkBonus": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{64290302}",
+									"mIconKey": "%i:kindredPassiveIcon%",
+									"mCoefficient": 0.01,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"EMarkBonus": {
+							"mFormulaParts": [
+								{
+									"mBuffName": "{64290302}",
+									"mIconKey": "%i:kindredPassiveIcon%",
+									"mCoefficient": 0.005,
+									"__type": "BuffCounterByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"effectAmount": {
+						"0": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"1": [
+							25,
+							25,
+							25,
+							25,
+							25,
+							25,
+							25
+						],
+						"2": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"3": [
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05
+						],
+						"4": [
+							1,
+							1,
+							1,
+							1,
+							1,
+							1,
+							1
+						],
+						"5": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"6": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"dataKey": "Characters/Kindred/Spells/KindredPassiveManagerAbility/KindredPassiveManager"
 				}
 			]
 		}

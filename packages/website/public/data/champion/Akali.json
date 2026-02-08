@@ -28,166 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Assassin's Mark",
-					"image": "assets/characters/akali/hud/icons2d/akali_p.png",
-					"tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>.",
-					"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>",
-					"dataValues": {
-						"PassiveAPRatio": [
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55
-						],
-						"PassiveBADRatio": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						]
-					},
-					"spellCalculations": {
-						"EnergyRestore": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mBreakpoints": [
-										{
-											"mLevel": 8
-										},
-										{
-											"mLevel": 13
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							]
-						},
-						"Damage": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 35,
-									"mInitialBonusPerLevel": 3,
-									"mBreakpoints": [
-										{
-											"mLevel": 8,
-											"mBonusPerLevelAtAndAfter": 9
-										},
-										{
-											"mLevel": 14,
-											"mBonusPerLevelAtAndAfter": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
-									"mDataValue": "PassiveBADRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								},
-								{
-									"mDataValue": "PassiveAPRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"PassiveSpeedBonus": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.3,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 16,
-											"mAdditionalBonusAtThisLevel": 0.1
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"effectAmount": {
-						"0": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						],
-						"1": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"2": [
-							36,
-							36,
-							36,
-							36,
-							36,
-							36,
-							36
-						],
-						"3": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"5": [
-							8,
-							8,
-							13,
-							8,
-							8,
-							8,
-							8
-						],
-						"6": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						]
-					},
-					"dataKey": "Characters/Akali/Spells/AkaliPAbility/AkaliP"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -721,6 +561,166 @@
 						]
 					},
 					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Assassin's Mark",
+					"image": "assets/characters/akali/hud/icons2d/akali_p.png",
+					"tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>",
+					"dataValues": {
+						"PassiveAPRatio": [
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55,
+							0.55
+						],
+						"PassiveBADRatio": [
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6,
+							0.6
+						]
+					},
+					"spellCalculations": {
+						"EnergyRestore": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mBreakpoints": [
+										{
+											"mLevel": 8
+										},
+										{
+											"mLevel": 13
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							]
+						},
+						"Damage": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 35,
+									"mInitialBonusPerLevel": 3,
+									"mBreakpoints": [
+										{
+											"mLevel": 8,
+											"mBonusPerLevelAtAndAfter": 9
+										},
+										{
+											"mLevel": 14,
+											"mBonusPerLevelAtAndAfter": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
+									"mDataValue": "PassiveBADRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								},
+								{
+									"mDataValue": "PassiveAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"PassiveSpeedBonus": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.3,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 16,
+											"mAdditionalBonusAtThisLevel": 0.1
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"effectAmount": {
+						"0": [
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9,
+							0.9
+						],
+						"1": [
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7,
+							0.7
+						],
+						"2": [
+							36,
+							36,
+							36,
+							36,
+							36,
+							36,
+							36
+						],
+						"3": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"5": [
+							8,
+							8,
+							13,
+							8,
+							8,
+							8,
+							8
+						],
+						"6": [
+							10,
+							10,
+							10,
+							10,
+							10,
+							10,
+							10
+						]
+					},
+					"dataKey": "Characters/Akali/Spells/AkaliPAbility/AkaliP"
 				}
 			]
 		}

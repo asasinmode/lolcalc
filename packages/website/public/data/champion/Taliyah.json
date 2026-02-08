@@ -28,61 +28,6 @@
 		"attackspeedratio": 0.625
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Rock Surfing",
-					"image": "assets/characters/taliyah/hud/icons2d/taliyah_passive.png",
-					"tooltip": "Taliyah gains <speed>@TotalMS@ Move Speed</speed> while out of combat if she has been near a wall within the last @FallOffTime@ seconds.",
-					"dataValues": {
-						"FallOffTime": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
-					},
-					"spellCalculations": {
-						"TotalMS": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 0.1,
-									"mBreakpoints": [
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.05
-										},
-										{
-											"mLevel": 12,
-											"mAdditionalBonusAtThisLevel": 0.1
-										},
-										{
-											"mLevel": 15,
-											"mAdditionalBonusAtThisLevel": 0.15
-										},
-										{
-											"mLevel": 27,
-											"mAdditionalBonusAtThisLevel": 0.25
-										},
-										{
-											"mLevel": 30,
-											"mAdditionalBonusAtThisLevel": 0.3
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true
-						}
-					},
-					"dataKey": "Characters/Taliyah/Spells/TaliyahPassiveAbility/TaliyahPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -650,6 +595,61 @@
 						]
 					},
 					"dataKey": "Characters/Taliyah/Spells/TaliyahRAbility/TaliyahR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Rock Surfing",
+					"image": "assets/characters/taliyah/hud/icons2d/taliyah_passive.png",
+					"tooltip": "Taliyah gains <speed>@TotalMS@ Move Speed</speed> while out of combat if she has been near a wall within the last @FallOffTime@ seconds.",
+					"dataValues": {
+						"FallOffTime": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"spellCalculations": {
+						"TotalMS": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 0.1,
+									"mBreakpoints": [
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.05
+										},
+										{
+											"mLevel": 12,
+											"mAdditionalBonusAtThisLevel": 0.1
+										},
+										{
+											"mLevel": 15,
+											"mAdditionalBonusAtThisLevel": 0.15
+										},
+										{
+											"mLevel": 27,
+											"mAdditionalBonusAtThisLevel": 0.25
+										},
+										{
+											"mLevel": 30,
+											"mAdditionalBonusAtThisLevel": 0.3
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						}
+					},
+					"dataKey": "Characters/Taliyah/Spells/TaliyahPassiveAbility/TaliyahPassive"
 				}
 			]
 		}

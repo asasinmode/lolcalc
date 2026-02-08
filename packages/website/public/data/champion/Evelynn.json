@@ -28,64 +28,6 @@
 		"attackspeedratio": 0.667
 	},
 	"abilities": {
-		"passive": {
-			"maxLevel": 0,
-			"variants": [
-				{
-					"name": "Demon Shade",
-					"image": "assets/characters/evelynn/hud/icons2d/evelynn_passive.png",
-					"tooltip": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not Attacking or using Abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or towers removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.",
-					"tooltipExtended": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not attacking or using abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or turrets removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.<br><br><rules><keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.</rules><br>",
-					"dataValues": {
-						"DemonShadeTimer": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"StealthDropTimer": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
-					},
-					"spellCalculations": {
-						"HealingThresholdTOOLTIP": {
-							"mSimpleTooltipCalculationDisplay": 6,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 250,
-									"mInitialBonusPerLevel": 20,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mCoefficient": 2.5,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"HealPerSecondTOOLTIP": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mStartValue": 15,
-									"mEndValue": 150,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						}
-					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnPassiveAbility/EvelynnPassive"
-				}
-			]
-		},
 		"q": {
 			"maxLevel": 5,
 			"variants": [
@@ -840,6 +782,64 @@
 						]
 					},
 					"dataKey": "Characters/Evelynn/Spells/EvelynnRAbility/EvelynnR"
+				}
+			]
+		},
+		"passive": {
+			"maxLevel": 0,
+			"variants": [
+				{
+					"name": "Demon Shade",
+					"image": "assets/characters/evelynn/hud/icons2d/evelynn_passive.png",
+					"tooltip": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not Attacking or using Abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or towers removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.",
+					"tooltipExtended": "Evelynn enshrouds herself in her <keywordMajor>Demon Shade</keywordMajor> after @DemonShadeTimer@ seconds of not attacking or using abilities. <keywordMajor>Demon Shade</keywordMajor> restores <healing>@HealPerSecondTOOLTIP@ Health per second</healing> while below <healing>@HealingThresholdTOOLTIP@ Health</healing>. From level 6 onward, it also grants <keywordStealth>Camouflage</keywordStealth>.<br><br>Taking damage from champions or turrets removes <keywordMajor>Demon Shade</keywordMajor> for @StealthDropTimer@ seconds.<br><br><rules><keywordStealth>Camouflaged</keywordStealth> units cannot be seen unless an enemy champion is inside their detection radius.</rules><br>",
+					"dataValues": {
+						"DemonShadeTimer": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"StealthDropTimer": [
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5,
+							1.5
+						]
+					},
+					"spellCalculations": {
+						"HealingThresholdTOOLTIP": {
+							"mSimpleTooltipCalculationDisplay": 6,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 250,
+									"mInitialBonusPerLevel": 20,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mCoefficient": 2.5,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"HealPerSecondTOOLTIP": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mStartValue": 15,
+									"mEndValue": 150,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						}
+					},
+					"dataKey": "Characters/Evelynn/Spells/EvelynnPassiveAbility/EvelynnPassive"
 				}
 			]
 		}
