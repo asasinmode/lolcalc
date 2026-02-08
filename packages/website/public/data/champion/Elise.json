@@ -133,6 +133,22 @@
 						}
 					},
 					"dataKey": "Characters/Elise/Spells/EliseHumanQAbility/EliseHumanQ"
+				},
+				{
+					"name": "Venomous Bite / Neurotoxin",
+					"image": "assets/characters/elise/hud/icons2d/elisespiderq.png",
+					"cooldownTime": [
+						6,
+						6,
+						6,
+						6,
+						6,
+						6,
+						6
+					],
+					"tooltip": "<keywordMajor>Spider Form:</keywordMajor> Elise lunges with a poisonous bite, dealing <magicDamage>@Spell.EliseSpiderQCast:BaseDamage@ plus @Spell.EliseSpiderQCast:MissingHPDamage@ missing Health magic damage</magicDamage>.",
+					"tooltipExtended": "{{Spell_EliseSpiderQ_Tooltip}}<br><br>{{Spell_EliseHumanQ_Tooltip}}<br>",
+					"dataKey": "Characters/Elise/Spells/EliseSpiderQAbility/EliseSpiderQ"
 				}
 			]
 		},
@@ -253,6 +269,89 @@
 						]
 					},
 					"dataKey": "Characters/Elise/Spells/EliseHumanWAbility/EliseHumanW"
+				},
+				{
+					"name": "Skittering Frenzy / Volatile Spiderling",
+					"image": "assets/characters/elise/hud/icons2d/elisespiderw.png",
+					"cooldownTime": [
+						6,
+						6,
+						6,
+						6,
+						6,
+						6,
+						6
+					],
+					"tooltip": "<keywordMajor>Spider Form</keywordMajor> <spellPassive>Passive</spellPassive>: <keywordMajor>Spiderlings</keywordMajor> gain <attackSpeed>@spell.EliseSpiderW:PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><keywordMajor>Spider Form</keywordMajor> <spellActive>Active:</spellActive> Elise grants herself and her <keywordMajor>Spiderlings</keywordMajor> <attackSpeed>@spell.EliseSpiderW:ActiveAttackSpeed*100@% Attack Speed</attackSpeed> for @spell.EliseSpiderW:BuffDuration@ seconds.",
+					"tooltipExtended": "{{Spell_EliseSpiderW_Tooltip}}<br><br>{{Spell_EliseHumanW_Tooltip}}",
+					"dataValues": {
+						"PassiveAttackSpeed": [
+							0,
+							0.05,
+							0.1,
+							0.15,
+							0.2,
+							0.25,
+							0.3
+						],
+						"ActiveAttackSpeed": [
+							0.45,
+							0.6,
+							0.75,
+							0.9,
+							1.05,
+							1.2,
+							1.35
+						],
+						"BuffDuration": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						]
+					},
+					"effectAmount": {
+						"0": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"3": [
+							3,
+							3,
+							3,
+							3,
+							3,
+							3,
+							3
+						],
+						"4": [
+							0,
+							5,
+							10,
+							15,
+							20,
+							25,
+							30
+						],
+						"5": [
+							0.6,
+							0.6,
+							0.7,
+							0.8,
+							0.9,
+							1,
+							1.1
+						]
+					},
+					"dataKey": "Characters/Elise/Spells/EliseSpiderWAbility/EliseSpiderW"
 				}
 			]
 		},
@@ -367,6 +466,115 @@
 						]
 					},
 					"dataKey": "Characters/Elise/Spells/EliseHumanEAbility/EliseHumanE"
+				},
+				{
+					"name": "Rappel / Cocoon",
+					"image": "assets/characters/elise/hud/icons2d/elisespidere.png",
+					"cooldownTime": [
+						22,
+						22,
+						21,
+						20,
+						19,
+						18,
+						17
+					],
+					"tooltip": "<keywordMajor>Spider Form</keywordMajor>: Elise and her <keywordMajor>Spiderlings</keywordMajor> lift into the air, becoming Untargetable for up to 2 seconds and descending on enemies she targets. Upon descending, she increases the bonus damage and healing from <spellName>Spider Queen</spellName> by @spell.EliseSpiderE:PBonusIncrease*100@% for @spell.EliseSpiderE:BuffDuration@ seconds. <br>",
+					"dataValues": {
+						"PBonusIncrease": [
+							0.25,
+							0.4,
+							0.55,
+							0.7,
+							0.85,
+							1,
+							1.15
+						],
+						"BuffDuration": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"effectAmount": {
+						"0": [
+							15,
+							14,
+							13,
+							12,
+							11,
+							10,
+							9
+						],
+						"1": [
+							10,
+							15,
+							20,
+							25,
+							30,
+							35,
+							40
+						],
+						"2": [
+							22,
+							22,
+							21,
+							20,
+							19,
+							18,
+							18
+						],
+						"3": [
+							2,
+							2,
+							2,
+							2,
+							2,
+							2,
+							2
+						],
+						"4": [
+							0.75,
+							1,
+							1.25,
+							1.5,
+							1.75,
+							2,
+							2.25
+						],
+						"5": [
+							25,
+							40,
+							55,
+							70,
+							85,
+							100,
+							115
+						],
+						"6": [
+							1.25,
+							1.4,
+							1.55,
+							1.7,
+							1.85,
+							2,
+							2.15
+						],
+						"7": [
+							5,
+							5,
+							5,
+							5,
+							5,
+							5,
+							5
+						]
+					},
+					"dataKey": "Characters/Elise/Spells/EliseSpiderEAbility/EliseSpiderEInitial"
 				}
 			]
 		},
@@ -566,6 +774,105 @@
 						]
 					},
 					"dataKey": "Characters/Elise/Spells/EliseRAbility/EliseR"
+				},
+				{
+					"name": "Human Form",
+					"image": "assets/characters/elise/hud/icons2d/eliser.png",
+					"cooldownTime": [
+						3,
+						3,
+						3,
+						3,
+						3,
+						3,
+						3
+					],
+					"tooltip": "<keywordMajor>Spider Form</keywordMajor>: Elise returns to <keywordMajor>Human Form</keywordMajor> and all remaining <keywordMajor>Spiderlings</keywordMajor> become dormant.",
+					"tooltipExtended": "{{Spell_EliseRSpider_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseR_Tooltip}}",
+					"effectAmount": {
+						"0": [
+							0,
+							10,
+							20,
+							30,
+							40,
+							0,
+							0
+						],
+						"1": [
+							0,
+							12,
+							22,
+							32,
+							42,
+							0,
+							0
+						],
+						"2": [
+							0,
+							25,
+							25,
+							25,
+							25,
+							0,
+							0
+						],
+						"3": [
+							0,
+							25,
+							25,
+							25,
+							25,
+							0,
+							0
+						],
+						"4": [
+							0,
+							2,
+							3,
+							4,
+							5,
+							0,
+							0
+						],
+						"5": [
+							0,
+							30,
+							50,
+							70,
+							90,
+							0,
+							0
+						],
+						"6": [
+							0,
+							50,
+							70,
+							90,
+							110,
+							0,
+							0
+						],
+						"7": [
+							0,
+							4,
+							6,
+							8,
+							10,
+							0,
+							0
+						],
+						"8": [
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1,
+							0.1
+						]
+					},
+					"dataKey": "Characters/Elise/Spells/EliseRAbility/EliseRSpider"
 				}
 			]
 		},

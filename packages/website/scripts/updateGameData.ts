@@ -791,12 +791,26 @@ function championAbilityData(
 	championData: any,
 	characterRootKey: string,
 ) {
-	const { mCharacterPassiveSpell, spells, spellLevelUpInfo } = championData[characterRootKey];
+	const { mCharacterPassiveSpell, spells, spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityIndex === 4 ? mCharacterPassiveSpell : spells[abilityIndex];
 
 	let maxLevel: number | undefined;
 	const variantKeys = [abilityDataKey];
 	const variants: IChampion['abilities'][keyof IChampion['abilities']]['variants'] = [];
+
+	if (abilityIndex !== 4 && characterToolData?.alternateForms?.length) {
+		const championDataEntries = Object.entries(championData);
+		for (const form of characterToolData.alternateForms) {
+			if (form.spells) {
+				const maybeKey = championDataEntries.find(([,value]: any[]) => value.ObjectName === form.spells[abilityIndex])?.[0];
+				if (maybeKey) {
+					variantKeys.push(maybeKey);
+				} else {
+					console.warn(`${abilityDataKey} no alternate form key found for ${form.spells[abilityIndex]}`);
+				}
+			}
+		}
+	}
 
 	for (let i = 0; i < variantKeys.length; i++) {
 		const variantDataKey = variantKeys[i];
@@ -812,26 +826,36 @@ function championAbilityData(
 
 		const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
 
-		if (!mClientData) {
-			throw new Error(`${variantDataKey} expected mClientData`);
-		}
-		if (!mImgIconName) {
-			throw new Error(`${variantDataKey} expected mImgIconName`);
-		}
-		if (!mClientData.mTooltipData) {
-			throw new Error(`${variantDataKey} expected mTooltipData`);
-		}
-
 		if (i === 0) {
+			if (!mClientData) {
+				throw new Error(`${variantDataKey} expected mClientData`);
+			}
+			if (!mImgIconName) {
+				throw new Error(`${variantDataKey} expected mImgIconName`);
+			}
+			if (!mClientData.mTooltipData) {
+				throw new Error(`${variantDataKey} expected mTooltipData`);
+			}
+
 			maxLevel = abilityIndex === 4 ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
 		}
 
-		const { mLocKeys } = mClientData.mTooltipData;
-		if (!(mLocKeys?.keyName || mLocKeys?.keyTooltip)) {
-			console.warn(`${variantDataKey} expected mLocKeys '.keyName' and '.keyTooltip'`, mLocKeys);
+		let mLocKeys;
+		if (mClientData.mUseTooltipFromAnotherSpell) {
+			const tooltipSourceSpell = championData[mClientData.mUseTooltipFromAnotherSpell];
+			if (tooltipSourceSpell?.mSpell?.mClientData) {
+				({ mLocKeys } = tooltipSourceSpell.mSpell.mClientData.mTooltipData);
+			}
+		} else {
+			({ mLocKeys } = mClientData.mTooltipData);
 		}
-		const name = mLocKeys?.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`);
-		const tooltip = mLocKeys?.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
+
+		if (!(mLocKeys?.keyName || mLocKeys?.keyTooltip)) {
+			throw new Error(`${variantDataKey} no mLocKeys ${mClientData.mUseTooltipFromAnotherSpell}\n${JSON.stringify(mLocKeys, null, 2)}`);
+		}
+
+		const name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`);
+		const tooltip = mLocKeys.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
 		const tooltipExtended = mLocKeys?.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
 
 		variants.push({
