@@ -206,7 +206,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				const { name, stats, gold, image, into: rawInto, from: rawFrom, tags, maps: { 11: sr, 12: ha } } = itemData as any;
 
 				let mapMask = 0;
-				// aram guardian items, seem to have been added to sr with swiftplay
+				/* aram guardian items, seem to have been added to sr with swiftplay */
 				if (sr && !['2051', '3112', '3177', '3184'].includes(itemId)) {
 					mapMask |= MAPS.sr.mask;
 				}

@@ -14,7 +14,7 @@ export function replaceGameDescriptionStringtableVariables(
 		const variable = stringtable[variableName];
 
 		if (variable === undefined) {
-			// TODO resolve actual name
+			// TODO resolve actual name, forgot what this todo means :c
 			unknownStringtableVariables.push([name, variableName]);
 			return `<unknown>{{${name}}}</unknown>`;
 		}
