@@ -29,33 +29,35 @@ export type IChampionRole = 'top' | 'jungle' | 'middle' | 'bottom' | 'support';
 export type IChampionStat = keyof typeof ExampleChampion['stats'];
 
 export interface IChampion {
+	version: string;
 	id: string;
 	key: string;
 	name: string;
 	partype: string;
 	stats: Record<IChampionStat, number>;
-	abilities: Record<'passive' | 'q' | 'w' | 'e' | 'r', {
-		image: string;
-		maxLevel: number;
-		cooldownTime?: number[];
-		variants: {
-			name?: string;
-			image: string;
-			mana?: number[];
-			cooldownTime?: number[];
-			/** if present, means the variant uses the tooltip of another variant at the specified index */
-			tooltipVariantIndex?: number;
-			tooltip?: string;
-			tooltipExtended?: string;
-			dataValues: any;
-			spellCalculations: any;
-			effectAmount: any;
-			dataKey: string;
-		}[];
-	}>;
+	abilities: Record<'passive' | 'q' | 'w' | 'e' | 'r', IChampionAbility>;
 }
 
 export interface IListedChampion extends Pick<IChampion, 'id' | 'name'> {
 	image: string;
 	roles: Partial<Record<IChampionRole, boolean>>;
+}
+
+export interface IChampionAbility {
+	maxLevel: number;
+	cooldownTime?: number[];
+	variants: {
+		name?: string;
+		image: string;
+		mana?: number[];
+		cooldownTime?: number[];
+		/** if present, means the variant uses the tooltip of another variant at the specified index */
+		tooltipVariantIndex?: number;
+		tooltip?: string;
+		tooltipExtended?: string;
+		dataValues: any;
+		spellCalculations: any;
+		effectAmount: any;
+		dataKey: string;
+	}[];
 }

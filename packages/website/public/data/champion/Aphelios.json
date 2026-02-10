@@ -30,70 +30,37 @@
 	"abilities": {
 		"q": {
 			"maxLevel": 6,
-			"variants": [
-				{
-					"name": "Weapon Abilites",
-					"image": "assets/characters/aphelios/hud/icons2d/apheliosq.png",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"cooldownTime": [
-						9,
-						9,
-						9,
-						9,
-						9,
-						9,
-						9
-					],
-					"dataKey": "Characters/Aphelios/Spells/ApheliosQ_ClientTooltipWrapper"
-				}
-			]
+			"variants": []
 		},
 		"w": {
 			"maxLevel": 6,
-			"variants": [
-				{
-					"name": "Phase",
-					"image": "assets/characters/aphelios/hud/icons2d/apheliosw.png",
-					"cooldownTime": [
-						0.8,
-						0.8,
-						0.8,
-						0.8,
-						0.8,
-						0.8,
-						0.8
-					],
-					"tooltip": "Swap main-hand and off-hand weapons, equipping <b><i>{{ ApheliosGun_LoreName_@f1@ }}</i></b>.",
-					"dataValues": {},
-					"dataKey": "Characters/Aphelios/Spells/ApheliosWAbility/ApheliosW"
-				}
-			]
+			"variants": []
 		},
 		"e": {
 			"maxLevel": 6,
 			"variants": [
-				{
-					"name": "Weapon Queue System",
-					"image": "assets/characters/aphelios/hud/icons2d/calibrum_l.png",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
-					"dataKey": "Characters/Aphelios/Spells/ApheliosE_ClientTooltipWrapper"
-				}
-			]
+				[
+					"assets/characters/aphelios/hud/icons2d/calibrum_l.png",
+					"assets/characters/aphelios/hud/icons2d/calibrum_m.png"
+				],
+				[
+					"assets/characters/aphelios/hud/icons2d/severum_l.png",
+					"assets/characters/aphelios/hud/icons2d/severum_m.png"
+				],
+				[
+					"assets/characters/aphelios/hud/icons2d/infernum_l.png",
+					"assets/characters/aphelios/hud/icons2d/infernum_m.png"
+				],
+				[
+					"assets/characters/aphelios/hud/icons2d/crescendum_l.png",
+					"assets/characters/aphelios/hud/icons2d/crescendum_m.png"
+				],
+				[
+					"assets/characters/aphelios/hud/icons2d/gravitum_l.png",
+					"assets/characters/aphelios/hud/icons2d/gravitum_m.png"
+				]
+			],
+			"dataKey": "{21df6123}"
 		},
 		"r": {
 			"maxLevel": 3,

@@ -1,4 +1,4 @@
-import type { IChampion } from '../app/composables/useChampions';
+import type { IChampion, IChampionAbility } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { IGameVariableType } from '../app/utils/gameVariable';
 import type { ITexture } from '../app/utils/types';
@@ -56,7 +56,7 @@ if (await championFile.exists()) {
 	championData = await championFile.json();
 }
 
-if (!championData || championData?.version !== latestVersion) {
+if (true || !championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -85,28 +85,32 @@ if (!championData || championData?.version !== latestVersion) {
 
 					const championFile = Bun.file(`${import.meta.dir}/../public/data/champion/${id}.json`);
 
-					const championFileData = {
-						version: latestVersion,
-						id,
-						key,
-						name,
-						partype,
-						stats,
-						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
-							const { maxLevel, variants } = championAbilityData(
-								index,
-								championId,
-								additionalData,
-								characterRootKey,
-							);
+					if (championId === 'Aphelios') {
+						const championFileData: IChampion = {
+							version: latestVersion,
+							id,
+							key,
+							name,
+							partype,
+							stats,
+							abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
+								const { maxLevel, variants } = championAbilityData(
+									index,
+									championId,
+									additionalData,
+									characterRootKey,
+								);
 
-							return [abilityName, {
-								maxLevel,
-								variants,
-							}];
-						})),
-					};
-					await championFile.write(JSON.stringify(championFileData, null, '\t'));
+								return [abilityName, {
+									maxLevel,
+									variants,
+								} satisfies IChampionAbility];
+							})) as IChampion['abilities'],
+						};
+						adjustApheliosAbilityData(additionalData, characterRootKey, championFileData.abilities);
+
+						await championFile.write(JSON.stringify(championFileData, null, '\t'));
+					}
 
 					return [championId, {
 						id,
@@ -790,7 +794,7 @@ function championAbilityData(
 	championId: string,
 	championData: any,
 	characterRootKey: string,
-) {
+): IChampionAbility {
 	const { mCharacterPassiveSpell, spells, spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityIndex === 4 ? mCharacterPassiveSpell : spells[abilityIndex];
 
@@ -883,12 +887,66 @@ function championAbilityData(
 
 	if (maxLevel === undefined) {
 		console.warn(`${abilityDataKey} max ability level not found`);
+		maxLevel = 0;
 	}
 
 	return {
 		maxLevel,
 		variants,
 	};
+}
+
+function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {
+	const { mAbilities } = championData[characterRootKey];
+
+	const handledAbilities = Object.values(abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey));
+
+	abilities.w.variants = [];
+	abilities.q.variants = [];
+	abilities.e.variants = [];
+
+	for (const abilityKey of mAbilities) {
+		const abilityData = championData[abilityKey];
+		if (!abilityData) {
+			console.warn(`${abilityKey} data not found for Aphelios Q variants`);
+			continue;
+		}
+
+		if (handledAbilities.includes(abilityData.mRootSpell)) {
+			continue;
+		}
+
+		const variantData = championData[abilityData.mRootSpell];
+
+		if (!variantData?.mSpell) {
+			console.warn(`${abilityData.mRootSpell} data not found or no mSpell`);
+			continue;
+		}
+
+		if (variantData.ObjectName === 'ApheliosE') {
+			if (!variantData.mSpell?.mImgIconName) {
+				throw new Error(`${abilityData.mRootSpell} expected Aphelios E with weapon swap icons`);
+			}
+			const variants = [];
+			for (const img of Array.from(new Set(variantData.mSpell.mImgIconName)) as string[]) {
+				const image = img.toLowerCase().replace('.dds', '.png');
+				const existingVariantIndex = variants.findIndex(variant => variant[0].slice(0, -6) === image.slice(0, -6));
+				if (~existingVariantIndex) {
+					variants[existingVariantIndex].push(image);
+				} else {
+					variants.push([image]);
+				}
+			}
+			for (const variant of variants) {
+				variant.sort((a, b) => a.localeCompare(b));
+			}
+			abilities.e.variants = variants as unknown as IChampionAbility['variants'];
+			(abilities.e as any).dataKey = abilityData.mRootSpell;
+			continue;
+		}
+
+		console.log('q variant found?', variantData.ObjectName);
+	}
 }
 
 function getUnknownTags(text: string): Set<string> {
