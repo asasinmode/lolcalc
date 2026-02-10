@@ -798,9 +798,7 @@ function championAbilityData(
 	const { mCharacterPassiveSpell, spells, spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityIndex === 4 ? mCharacterPassiveSpell : spells[abilityIndex];
 
-	let maxLevel: number | undefined;
 	const variantKeys = [abilityDataKey];
-	const variants: IChampion['abilities'][keyof IChampion['abilities']]['variants'] = [];
 
 	if (abilityIndex !== 4 && characterToolData?.alternateForms?.length) {
 		const championDataEntries = Object.entries(championData);
@@ -815,6 +813,92 @@ function championAbilityData(
 			}
 		}
 	}
+
+	let [maxLevel, variants] = championAbilityVariants(variantKeys, championData, abilityDataKey, abilityIndex);
+
+	if ((championId === 'Jayce' && abilityIndex === 3)
+		|| (championId === 'Aphelios' && abilityIndex < 3)) {
+		maxLevel = spellLevelUpInfo[abilityIndex].mRequirements.length;
+	}
+
+	if (maxLevel === undefined) {
+		console.warn(`${abilityDataKey} max ability level not found`);
+		maxLevel = 0;
+	}
+
+	return {
+		maxLevel,
+		variants,
+	};
+}
+
+function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {
+	const { mAbilities } = championData[characterRootKey];
+
+	const handledAbilities = Object.values(abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey));
+
+	abilities.w.variants = [];
+	abilities.e.variants = [];
+
+	const qVariantKeys = [];
+
+	for (const abilityKey of mAbilities) {
+		const abilityData = championData[abilityKey];
+		if (!abilityData) {
+			console.warn(`${abilityKey} data not found for Aphelios Q variants`);
+			continue;
+		}
+
+		if (handledAbilities.includes(abilityData.mRootSpell)) {
+			continue;
+		}
+
+		const variantData = championData[abilityData.mRootSpell];
+
+		if (!variantData?.mSpell) {
+			console.warn(`${abilityData.mRootSpell} data not found or no mSpell`);
+			continue;
+		}
+
+		if (variantData.ObjectName === 'ApheliosE') {
+			if (!variantData.mSpell?.mImgIconName) {
+				throw new Error(`${abilityData.mRootSpell} expected Aphelios E with weapon swap icons`);
+			}
+
+			const variants = [];
+			for (const img of Array.from(new Set(variantData.mSpell.mImgIconName)) as string[]) {
+				const image = img.toLowerCase().replace('.dds', '.png');
+				const existingVariantIndex = variants.findIndex(variant => variant[0].slice(0, -6) === image.slice(0, -6));
+				if (~existingVariantIndex) {
+					variants[existingVariantIndex].push(image);
+				} else {
+					variants.push([image]);
+				}
+			}
+			for (const variant of variants) {
+				variant.sort((a, b) => a.localeCompare(b));
+			}
+
+			abilities.e.variants = variants as unknown as IChampionAbility['variants'];
+			(abilities.e as any).dataKey = abilityData.mRootSpell;
+
+			continue;
+		}
+
+		qVariantKeys.push(abilityData.mRootSpell);
+	}
+
+	abilities.q.variants = championAbilityVariants(qVariantKeys, championData, 'aphelios q variants', 0)[1];
+}
+
+function championAbilityVariants(
+	variantKeys: string[],
+	championData: any,
+	abilityDataKey: string,
+	abilityIndex: number,
+): [number, IChampionAbility['variants'] ] {
+	let maxLevel: number | undefined;
+	const rv: IChampionAbility['variants'] = [];
 
 	for (let i = 0; i < variantKeys.length; i++) {
 		const variantDataKey = variantKeys[i];
@@ -862,7 +946,7 @@ function championAbilityData(
 		const tooltip = mLocKeys.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
 		const tooltipExtended = mLocKeys?.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
 
-		variants.push({
+		rv.push({
 			name,
 			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
 			mana,
@@ -880,73 +964,7 @@ function championAbilityData(
 		});
 	}
 
-	if ((championId === 'Jayce' && abilityIndex === 3)
-		|| (championId === 'Aphelios' && abilityIndex < 3)) {
-		maxLevel = spellLevelUpInfo[abilityIndex].mRequirements.length;
-	}
-
-	if (maxLevel === undefined) {
-		console.warn(`${abilityDataKey} max ability level not found`);
-		maxLevel = 0;
-	}
-
-	return {
-		maxLevel,
-		variants,
-	};
-}
-
-function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {
-	const { mAbilities } = championData[characterRootKey];
-
-	const handledAbilities = Object.values(abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey));
-
-	abilities.w.variants = [];
-	abilities.q.variants = [];
-	abilities.e.variants = [];
-
-	for (const abilityKey of mAbilities) {
-		const abilityData = championData[abilityKey];
-		if (!abilityData) {
-			console.warn(`${abilityKey} data not found for Aphelios Q variants`);
-			continue;
-		}
-
-		if (handledAbilities.includes(abilityData.mRootSpell)) {
-			continue;
-		}
-
-		const variantData = championData[abilityData.mRootSpell];
-
-		if (!variantData?.mSpell) {
-			console.warn(`${abilityData.mRootSpell} data not found or no mSpell`);
-			continue;
-		}
-
-		if (variantData.ObjectName === 'ApheliosE') {
-			if (!variantData.mSpell?.mImgIconName) {
-				throw new Error(`${abilityData.mRootSpell} expected Aphelios E with weapon swap icons`);
-			}
-			const variants = [];
-			for (const img of Array.from(new Set(variantData.mSpell.mImgIconName)) as string[]) {
-				const image = img.toLowerCase().replace('.dds', '.png');
-				const existingVariantIndex = variants.findIndex(variant => variant[0].slice(0, -6) === image.slice(0, -6));
-				if (~existingVariantIndex) {
-					variants[existingVariantIndex].push(image);
-				} else {
-					variants.push([image]);
-				}
-			}
-			for (const variant of variants) {
-				variant.sort((a, b) => a.localeCompare(b));
-			}
-			abilities.e.variants = variants as unknown as IChampionAbility['variants'];
-			(abilities.e as any).dataKey = abilityData.mRootSpell;
-			continue;
-		}
-
-		console.log('q variant found?', variantData.ObjectName);
-	}
+	return [maxLevel, rv];
 }
 
 function getUnknownTags(text: string): Set<string> {
