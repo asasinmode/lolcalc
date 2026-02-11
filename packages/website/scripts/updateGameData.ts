@@ -871,7 +871,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 	for (const abilityKey of mAbilities) {
 		const abilityData = championData[abilityKey];
 		if (!abilityData) {
-			console.warn(`${abilityKey} data not found for Aphelios Q variants`);
+			console.warn(`Aphelios Q variants data not found for ${abilityKey}`);
 			continue;
 		}
 
@@ -882,13 +882,13 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 		const variantData = championData[abilityData.mRootSpell];
 
 		if (!variantData?.mSpell) {
-			console.warn(`${abilityData.mRootSpell} data not found or no mSpell`);
+			console.warn(`Aphelios Q variants data not found or no mSpell in ${abilityData.mRootSpell}`);
 			continue;
 		}
 
 		if (variantData.ObjectName === 'ApheliosE') {
 			if (!variantData.mSpell?.mImgIconName) {
-				throw new Error(`${abilityData.mRootSpell} expected Aphelios E with weapon swap icons`);
+				throw new Error(`Aphelios Q variants expected Aphelios E with weapon swap icons in ${abilityData.mRootSpell}`);
 			}
 
 			const variants = [];
@@ -933,14 +933,14 @@ function championAbilityVariants(
 	let maxLevel: number | undefined;
 	const stringtableObject = { stringtable: {} };
 	const variants: IChampionAbility['variants'] = [];
-	const debugPrefix = `${championId} ${abilityName}[${abilityIndex}]`;
 
 	for (let i = 0; i < variantKeys.length; i++) {
+		const debugPrefix = `${championId} ${abilityName}[${i}]`;
 		const variantDataKey = variantKeys[i];
 		const variantData = championData[variantDataKey];
 		const variantMSpell = variantData?.mSpell;
 		if (!variantData || !variantMSpell) {
-			throw new Error(`${championId} ${abilityName} variant ${i} with key "${variantDataKey}" not found in championData`);
+			throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
 		}
 
 		const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
