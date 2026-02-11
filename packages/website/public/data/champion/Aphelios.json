@@ -243,7 +243,7 @@
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
-					"image": "assets/characters/aphelios/hud/icons2d/q_crescendum.png",
+					"image": "assets/characters/aphelios/hud/icons2d/q_severum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
 					"mana": [
@@ -255,7 +255,16 @@
 						60
 					],
 					"dataValues": {
-						"MiniBuffDuration": [
+						"Duration": [
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75,
+							1.75
+						],
+						"DecayTakes": [
 							5,
 							5,
 							5,
@@ -264,202 +273,141 @@
 							5,
 							5
 						],
-						"MiniBuffResetDuration": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
+						"ASCoeff": [
+							0.333,
+							0.333,
+							0.333,
+							0.333,
+							0.333,
+							0.333,
+							0.333
 						],
-						"UnitsPerPercentAttackSpeedPerSecond": [
-							750,
-							750,
-							750,
-							750,
-							750,
-							750,
-							750
-						],
-						"TurretDurationIdle": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"TurretDurationActive": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AttackRange": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"MiniDamageRatioMax": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"MiniDamageRatioMin": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"MiniBaseDamage": [
-							15,
-							25,
-							35,
-							45,
-							55,
-							65,
-							75
-						],
-						"TurretAPRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MiniDamageRatioDecPer": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
+						"StartingAttacks": [
+							6,
+							6,
+							6,
+							6,
+							6,
+							6,
+							6
 						]
 					},
 					"spellCalculations": {
-						"{c61fdd37}": {
-							"mSimpleTooltipCalculationDisplay": 0,
+						"NumAttacks": {
+							"mMultiplier": {
+								"mDataValue": "StartingAttacks"
+							},
+							"mExpandedTooltipCalculationDisplay": 0,
 							"mFormulaParts": [
 								{
-									"mNumber": 600,
+									"mNumber": 1,
 									"__type": "NumberCalculationPart"
 								},
 								{
 									"mStat": 4,
 									"mStatFormula": 2,
-									"mDataValue": "UnitsPerPercentAttackSpeedPerSecond",
+									"mDataValue": "ASCoeff",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
-						"MiniDamageMin": {
+						"{9480e64f}": {
 							"mFormulaParts": [
 								{
 									"mStat": 2,
-									"mDataValue": "MiniDamageRatioMin",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"MiniDamageMax": {
-							"mFormulaParts": [
-								{
-									"mStat": 2,
-									"mDataValue": "MiniDamageRatioMax",
-									"__type": "StatByNamedDataValueCalculationPart"
-								}
-							]
-						},
-						"TurretDamage": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 35,
-									"mBreakpoints": [
-										{
-											"mLevel": 3,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 15
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 15
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 2,
-									"mStatFormula": 2,
 									"mSubpart": {
-										"mLevel1Value": 0.3,
+										"mLevel1Value": 0.19,
 										"mBreakpoints": [
 											{
 												"mLevel": 3,
-												"mAdditionalBonusAtThisLevel": 0.03
+												"mAdditionalBonusAtThisLevel": 0.035
 											},
 											{
 												"mLevel": 5,
-												"mAdditionalBonusAtThisLevel": 0.03
+												"mAdditionalBonusAtThisLevel": 0.035
 											},
 											{
 												"mLevel": 7,
-												"mAdditionalBonusAtThisLevel": 0.03
+												"mAdditionalBonusAtThisLevel": 0.035
 											},
 											{
 												"mLevel": 9,
-												"mAdditionalBonusAtThisLevel": 0.03
+												"mAdditionalBonusAtThisLevel": 0.035
 											},
 											{
 												"mLevel": 11,
-												"mAdditionalBonusAtThisLevel": 0.03
+												"mAdditionalBonusAtThisLevel": 0.035
 											},
 											{
 												"mLevel": 13,
-												"mAdditionalBonusAtThisLevel": 0.03
+												"mAdditionalBonusAtThisLevel": 0.035
 											}
 										]
 									},
 									"__type": "StatBySubPartCalculationPart"
-								},
-								{
-									"mDataValue": "TurretAPRatio",
-									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
+						},
+						"TotalDamage": {
+							"mMultiplier": {
+								"mStat": 2,
+								"mSubpart": {
+									"mLevel1Value": 0.19,
+									"mBreakpoints": [
+										{
+											"mLevel": 3,
+											"mAdditionalBonusAtThisLevel": 0.035
+										},
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": 0.035
+										},
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 0.035
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 0.035
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 0.035
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 0.035
+										}
+									]
+								}
+							},
+							"mExpandedTooltipCalculationDisplay": 0,
+							"mModifiedGameCalculation": "NumAttacks"
+						},
+						"Haste": {
+							"mFormulaParts": [
+								{
+									"mNumber": 0.25,
+									"__type": "NumberCalculationPart"
+								},
+								{
+									"mCoefficient": 0.001,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true
+						},
+						"HealAmount": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 0.02,
+									"mEndValue": 0.071,
+									"mScalePastDefaultMaxLevel": false,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							],
+							"mDisplayAsPercent": true,
+							"mPrecision": 1
 						},
 						"AttackDamage": {
 							"mFormulaParts": [
@@ -470,43 +418,110 @@
 								}
 							]
 						},
-						"CrescendumQCD": {
+						"MaxShield": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 9,
+									"mLevel1Value": 10,
+									"mBreakpoints": [
+										{
+											"mLevel": 6,
+											"mBonusPerLevelAtAndAfter": 10
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 12,
+									"mCoefficient": 0.06,
+									"__type": "StatByCoefficientCalculationPart"
+								}
+							]
+						},
+						"SeverumQCD": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 10,
 									"mBreakpoints": [
 										{
 											"mLevel": 3,
-											"mAdditionalBonusAtThisLevel": -0.5
+											"mAdditionalBonusAtThisLevel": -0.333
 										},
 										{
 											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": -0.5
+											"mAdditionalBonusAtThisLevel": -0.333
 										},
 										{
 											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -0.5
+											"mAdditionalBonusAtThisLevel": -0.333
 										},
 										{
 											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": -0.5
+											"mAdditionalBonusAtThisLevel": -0.333
 										},
 										{
 											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -0.5
+											"mAdditionalBonusAtThisLevel": -0.333
 										},
 										{
 											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -0.5
+											"mAdditionalBonusAtThisLevel": -0.333
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
+							]
+						},
+						"{3f4c2ea7}": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 25,
+									"__type": "NumberCalculationPart"
+								}
+							]
+						},
+						"TotalDecayDurationForTooltip": {
+							"mSimpleTooltipCalculationDisplay": 5,
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 25,
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mDataValue": "DecayTakes",
+									"__type": "NamedDataValueCalculationPart"
+								}
+							]
+						},
+						"{31c5a522}": {
+							"mFormulaParts": [
+								{
+									"mStartValue": 35,
+									"mEndValue": 100,
+									"__type": "ByCharLevelInterpolationCalculationPart"
+								}
+							]
+						},
+						"OnHitDamageReduction": {
+							"mExpandedTooltipCalculationDisplay": 5,
+							"mFormulaParts": [
+								{
+									"mNumber": 0.25,
+									"__type": "NumberCalculationPart"
+								}
 							],
-							"mPrecision": 2
+							"mDisplayAsPercent": true
+						},
+						"HealAmountSpell": {
+							"mMultiplier": {
+								"mNumber": 2.5
+							},
+							"mModifiedGameCalculation": "HealAmount"
 						}
 					},
-					"dataKey": "{ad4cfba9}"
+					"dataKey": "{c872c72d}"
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
@@ -878,7 +893,7 @@
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
-					"image": "assets/characters/aphelios/hud/icons2d/q_severum.png",
+					"image": "assets/characters/aphelios/hud/icons2d/q_crescendum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
 					"mana": [
@@ -890,16 +905,7 @@
 						60
 					],
 					"dataValues": {
-						"Duration": [
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75
-						],
-						"DecayTakes": [
+						"MiniBuffDuration": [
 							5,
 							5,
 							5,
@@ -908,141 +914,202 @@
 							5,
 							5
 						],
-						"ASCoeff": [
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333
+						"MiniBuffResetDuration": [
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5,
+							3.5
 						],
-						"StartingAttacks": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
+						"UnitsPerPercentAttackSpeedPerSecond": [
+							750,
+							750,
+							750,
+							750,
+							750,
+							750,
+							750
+						],
+						"TurretDurationIdle": [
+							20,
+							20,
+							20,
+							20,
+							20,
+							20,
+							20
+						],
+						"TurretDurationActive": [
+							4,
+							4,
+							4,
+							4,
+							4,
+							4,
+							4
+						],
+						"AttackRange": [
+							500,
+							500,
+							500,
+							500,
+							500,
+							500,
+							500
+						],
+						"MiniDamageRatioMax": [
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15,
+							0.15
+						],
+						"MiniDamageRatioMin": [
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05,
+							0.05
+						],
+						"MiniBaseDamage": [
+							15,
+							25,
+							35,
+							45,
+							55,
+							65,
+							75
+						],
+						"TurretAPRatio": [
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5,
+							0.5
+						],
+						"MiniDamageRatioDecPer": [
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015,
+							0.015
 						]
 					},
 					"spellCalculations": {
-						"NumAttacks": {
-							"mMultiplier": {
-								"mDataValue": "StartingAttacks"
-							},
-							"mExpandedTooltipCalculationDisplay": 0,
+						"{c61fdd37}": {
+							"mSimpleTooltipCalculationDisplay": 0,
 							"mFormulaParts": [
 								{
-									"mNumber": 1,
+									"mNumber": 600,
 									"__type": "NumberCalculationPart"
 								},
 								{
 									"mStat": 4,
 									"mStatFormula": 2,
-									"mDataValue": "ASCoeff",
+									"mDataValue": "UnitsPerPercentAttackSpeedPerSecond",
 									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
-						"{9480e64f}": {
+						"MiniDamageMin": {
 							"mFormulaParts": [
 								{
 									"mStat": 2,
+									"mDataValue": "MiniDamageRatioMin",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"MiniDamageMax": {
+							"mFormulaParts": [
+								{
+									"mStat": 2,
+									"mDataValue": "MiniDamageRatioMax",
+									"__type": "StatByNamedDataValueCalculationPart"
+								}
+							]
+						},
+						"TurretDamage": {
+							"mFormulaParts": [
+								{
+									"mLevel1Value": 35,
+									"mBreakpoints": [
+										{
+											"mLevel": 3,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 5,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 7,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 9,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 11,
+											"mAdditionalBonusAtThisLevel": 15
+										},
+										{
+											"mLevel": 13,
+											"mAdditionalBonusAtThisLevel": 15
+										}
+									],
+									"__type": "ByCharLevelBreakpointsCalculationPart"
+								},
+								{
+									"mStat": 2,
+									"mStatFormula": 2,
 									"mSubpart": {
-										"mLevel1Value": 0.19,
+										"mLevel1Value": 0.3,
 										"mBreakpoints": [
 											{
 												"mLevel": 3,
-												"mAdditionalBonusAtThisLevel": 0.035
+												"mAdditionalBonusAtThisLevel": 0.03
 											},
 											{
 												"mLevel": 5,
-												"mAdditionalBonusAtThisLevel": 0.035
+												"mAdditionalBonusAtThisLevel": 0.03
 											},
 											{
 												"mLevel": 7,
-												"mAdditionalBonusAtThisLevel": 0.035
+												"mAdditionalBonusAtThisLevel": 0.03
 											},
 											{
 												"mLevel": 9,
-												"mAdditionalBonusAtThisLevel": 0.035
+												"mAdditionalBonusAtThisLevel": 0.03
 											},
 											{
 												"mLevel": 11,
-												"mAdditionalBonusAtThisLevel": 0.035
+												"mAdditionalBonusAtThisLevel": 0.03
 											},
 											{
 												"mLevel": 13,
-												"mAdditionalBonusAtThisLevel": 0.035
+												"mAdditionalBonusAtThisLevel": 0.03
 											}
 										]
 									},
 									"__type": "StatBySubPartCalculationPart"
-								}
-							]
-						},
-						"TotalDamage": {
-							"mMultiplier": {
-								"mStat": 2,
-								"mSubpart": {
-									"mLevel1Value": 0.19,
-									"mBreakpoints": [
-										{
-											"mLevel": 3,
-											"mAdditionalBonusAtThisLevel": 0.035
-										},
-										{
-											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": 0.035
-										},
-										{
-											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": 0.035
-										},
-										{
-											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": 0.035
-										},
-										{
-											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": 0.035
-										},
-										{
-											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": 0.035
-										}
-									]
-								}
-							},
-							"mExpandedTooltipCalculationDisplay": 0,
-							"mModifiedGameCalculation": "NumAttacks"
-						},
-						"Haste": {
-							"mFormulaParts": [
-								{
-									"mNumber": 0.25,
-									"__type": "NumberCalculationPart"
 								},
 								{
-									"mCoefficient": 0.001,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "TurretAPRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
-							],
-							"mDisplayAsPercent": true
-						},
-						"HealAmount": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 0.02,
-									"mEndValue": 0.071,
-									"mScalePastDefaultMaxLevel": false,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							],
-							"mDisplayAsPercent": true,
-							"mPrecision": 1
+							]
 						},
 						"AttackDamage": {
 							"mFormulaParts": [
@@ -1053,110 +1120,43 @@
 								}
 							]
 						},
-						"MaxShield": {
+						"CrescendumQCD": {
 							"mFormulaParts": [
 								{
-									"mLevel1Value": 10,
-									"mBreakpoints": [
-										{
-											"mLevel": 6,
-											"mBonusPerLevelAtAndAfter": 10
-										}
-									],
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mStat": 12,
-									"mCoefficient": 0.06,
-									"__type": "StatByCoefficientCalculationPart"
-								}
-							]
-						},
-						"SeverumQCD": {
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 10,
+									"mLevel1Value": 9,
 									"mBreakpoints": [
 										{
 											"mLevel": 3,
-											"mAdditionalBonusAtThisLevel": -0.333
+											"mAdditionalBonusAtThisLevel": -0.5
 										},
 										{
 											"mLevel": 5,
-											"mAdditionalBonusAtThisLevel": -0.333
+											"mAdditionalBonusAtThisLevel": -0.5
 										},
 										{
 											"mLevel": 7,
-											"mAdditionalBonusAtThisLevel": -0.333
+											"mAdditionalBonusAtThisLevel": -0.5
 										},
 										{
 											"mLevel": 9,
-											"mAdditionalBonusAtThisLevel": -0.333
+											"mAdditionalBonusAtThisLevel": -0.5
 										},
 										{
 											"mLevel": 11,
-											"mAdditionalBonusAtThisLevel": -0.333
+											"mAdditionalBonusAtThisLevel": -0.5
 										},
 										{
 											"mLevel": 13,
-											"mAdditionalBonusAtThisLevel": -0.333
+											"mAdditionalBonusAtThisLevel": -0.5
 										}
 									],
 									"__type": "ByCharLevelBreakpointsCalculationPart"
 								}
-							]
-						},
-						"{3f4c2ea7}": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mNumber": 25,
-									"__type": "NumberCalculationPart"
-								}
-							]
-						},
-						"TotalDecayDurationForTooltip": {
-							"mSimpleTooltipCalculationDisplay": 5,
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mLevel1Value": 25,
-									"__type": "ByCharLevelBreakpointsCalculationPart"
-								},
-								{
-									"mDataValue": "DecayTakes",
-									"__type": "NamedDataValueCalculationPart"
-								}
-							]
-						},
-						"{31c5a522}": {
-							"mFormulaParts": [
-								{
-									"mStartValue": 35,
-									"mEndValue": 100,
-									"__type": "ByCharLevelInterpolationCalculationPart"
-								}
-							]
-						},
-						"OnHitDamageReduction": {
-							"mExpandedTooltipCalculationDisplay": 5,
-							"mFormulaParts": [
-								{
-									"mNumber": 0.25,
-									"__type": "NumberCalculationPart"
-								}
 							],
-							"mDisplayAsPercent": true
-						},
-						"HealAmountSpell": {
-							"mMultiplier": {
-								"mNumber": 2.5
-							},
-							"mModifiedGameCalculation": "HealAmount"
+							"mPrecision": 2
 						}
 					},
-					"dataKey": "{c872c72d}"
+					"dataKey": "{ad4cfba9}"
 				}
 			]
 		},

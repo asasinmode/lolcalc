@@ -5,6 +5,7 @@ import type { ITexture } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps';
+import { CHAMPION_SPECIFICS } from '../app/utils/champion';
 import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
 
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionVariables } from '../app/utils/gameVariable';
@@ -1004,6 +1005,20 @@ function championAbilityVariants(
 
 		variants.push(variant);
 	}
+
+	const weaponOrderMap = Object.fromEntries(
+		CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER.map((weapon, index) => [weapon, index]),
+	);
+
+	variants.sort((a, b) => {
+		const weaponA = a.image.slice(a.image.lastIndexOf('/') + 3, -4);
+		const weaponB = b.image.slice(b.image.lastIndexOf('/') + 3, -4);
+
+		const indexA = weaponOrderMap[weaponA] ?? Infinity;
+		const indexB = weaponOrderMap[weaponB] ?? Infinity;
+
+		return indexA - indexB;
+	});
 
 	return [maxLevel, variants, stringtableObject.stringtable];
 }
