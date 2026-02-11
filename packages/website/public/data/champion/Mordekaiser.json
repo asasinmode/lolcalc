@@ -34,6 +34,7 @@
 				{
 					"name": "Obliterate",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserq.png",
+					"tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>@QDamage@ magic damage</magicDamage>, increased to <magicDamage>@EmpoweredDamageTooltip@</magicDamage> if it hits only a single enemy.",
 					"cooldownTime": [
 						8,
 						8,
@@ -43,7 +44,6 @@
 						4,
 						4
 					],
-					"tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>@QDamage@ magic damage</magicDamage>, increased to <magicDamage>@EmpoweredDamageTooltip@</magicDamage> if it hits only a single enemy.",
 					"dataValues": {
 						"QBaseDamage": [
 							45,
@@ -165,6 +165,7 @@
 				{
 					"name": "Indestructible",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png",
+					"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>",
 					"cooldownTime": [
 						12,
 						12,
@@ -174,7 +175,6 @@
 						8,
 						8
 					],
-					"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>",
 					"dataValues": {
 						"Duration": [
 							5,
@@ -300,6 +300,7 @@
 				{
 					"name": "Death's Grasp",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains @MagicPen*100@% Magic Penetration.<br><br><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
 					"cooldownTime": [
 						18,
 						18,
@@ -309,7 +310,6 @@
 						10,
 						10
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains @MagicPen*100@% Magic Penetration.<br><br><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
 					"dataValues": {
 						"Damage": [
 							45,
@@ -391,6 +391,7 @@
 				{
 					"name": "Realm of Death",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png",
+					"tooltip": "Mordekaiser banishes a champion to the Death Realm with him for @SpiritRealmDuration@s, stealing @StatStealPercentScalar*100@% of their core stats for the duration.<br><br>If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns.",
 					"cooldownTime": [
 						140,
 						140,
@@ -400,7 +401,6 @@
 						80,
 						8
 					],
-					"tooltip": "Mordekaiser banishes a champion to the Death Realm with him for @SpiritRealmDuration@s, stealing @StatStealPercentScalar*100@% of their core stats for the duration.<br><br>If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns.",
 					"dataValues": {
 						"SpiritRealmDuration": [
 							7,
@@ -449,6 +449,8 @@
 				{
 					"name": "Darkness Rise",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
+					"tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>.",
+					"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>",
 					"cooldownTime": [
 						0,
 						0,
@@ -458,8 +460,6 @@
 						0,
 						0
 					],
-					"tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>.",
-					"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>",
 					"dataValues": {
 						"CombatTrackingDuration": [
 							4,
@@ -612,5 +612,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

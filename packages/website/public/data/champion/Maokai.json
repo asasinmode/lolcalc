@@ -34,6 +34,7 @@
 				{
 					"name": "Bramble Smash",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_q.png",
+					"tooltip": "Maokai smashes his fist into the ground, dealing <magicDamage>@TotalDamage@ plus @BasePercentHealth*100@% max Health magic damage</magicDamage> and briefly <status>Slowing</status>. Nearby enemies are also <status>Knocked Back</status>.",
 					"mana": [
 						40,
 						40,
@@ -51,7 +52,6 @@
 						5,
 						5
 					],
-					"tooltip": "Maokai smashes his fist into the ground, dealing <magicDamage>@TotalDamage@ plus @BasePercentHealth*100@% max Health magic damage</magicDamage> and briefly <status>Slowing</status>. Nearby enemies are also <status>Knocked Back</status>.",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -179,6 +179,7 @@
 				{
 					"name": "Twisted Advance",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_w.png",
+					"tooltip": "Maokai transforms into a moving mass of roots, becoming Untargetable and dashing to an enemy. Upon arrival, he <status>Roots</status> the enemy for @Effect2Amount@ second(s) and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"mana": [
 						60,
 						60,
@@ -196,7 +197,6 @@
 						10,
 						10
 					],
-					"tooltip": "Maokai transforms into a moving mass of roots, becoming Untargetable and dashing to an enemy. Upon arrival, he <status>Roots</status> the enemy for @Effect2Amount@ second(s) and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -262,6 +262,7 @@
 				{
 					"name": "Sapling Toss",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_e.png",
+					"tooltip": "Maokai flings a sapling, which stands watch for @SaplingDuration@ seconds. Saplings chase nearby enemies, detonating on arrival to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slow</status> surrounding enemies by @SlowAmount*100@% for @SlowDuration@ seconds. <keywordMajor>Sap Magic's</keywordMajor> Cooldown is reduced by an additional 4 seconds if the sapling hits an enemy champion or epic monster.<br><br>If placed in brush, Saplings instead last for @EmpoweredSaplingDuration@ seconds and cause a larger explosion, dealing <magicDamage>@TotalEmpoweredDamage@ magic damage</magicDamage> over @EmpoweredDoTDuration@ seconds and <status>Slowing</status> enemies by @EmpoweredSlowAmount@.",
 					"mana": [
 						60,
 						65,
@@ -279,7 +280,6 @@
 						14,
 						14
 					],
-					"tooltip": "Maokai flings a sapling, which stands watch for @SaplingDuration@ seconds. Saplings chase nearby enemies, detonating on arrival to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slow</status> surrounding enemies by @SlowAmount*100@% for @SlowDuration@ seconds. <keywordMajor>Sap Magic's</keywordMajor> Cooldown is reduced by an additional 4 seconds if the sapling hits an enemy champion or epic monster.<br><br>If placed in brush, Saplings instead last for @EmpoweredSaplingDuration@ seconds and cause a larger explosion, dealing <magicDamage>@TotalEmpoweredDamage@ magic damage</magicDamage> over @EmpoweredDoTDuration@ seconds and <status>Slowing</status> enemies by @EmpoweredSlowAmount@.",
 					"dataValues": {
 						"SaplingDuration": [
 							30,
@@ -492,6 +492,7 @@
 				{
 					"name": "Nature's Grasp",
 					"image": "assets/characters/maokai/hud/icons2d/maokai_r.png",
+					"tooltip": "Maokai summons a colossal wave of brambles and thorns, <status>Rooting</status> enemies for @MinRootDuration@ to @MaxRootDuration@ seconds, increasing with distance travelled, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Hitting a champion gives Maokai <speed>@MoveHaste*100@% Move Speed</speed>, decaying over @HasteDuration@ seconds. ",
 					"mana": [
 						100,
 						100,
@@ -509,7 +510,6 @@
 						90,
 						90
 					],
-					"tooltip": "Maokai summons a colossal wave of brambles and thorns, <status>Rooting</status> enemies for @MinRootDuration@ to @MaxRootDuration@ seconds, increasing with distance travelled, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Hitting a champion gives Maokai <speed>@MoveHaste*100@% Move Speed</speed>, decaying over @HasteDuration@ seconds. ",
 					"dataValues": {
 						"MinRootDuration": [
 							0.75,
@@ -657,5 +657,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

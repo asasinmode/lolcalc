@@ -34,6 +34,7 @@
 				{
 					"name": "Dragon Strike",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivq.png",
+					"tooltip": "Jarvan extends his lance, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and removing <scaleArmor>@Effect2Amount@% Armor</scaleArmor> for @Effect3Amount@ seconds.<br><br>If the lance connects with <spellName>{{Spell_JarvanIVDemacianStandard_Name}}</spellName>, Jarvan will pull himself to it, <status>Knocking Up</status> those in his path for 0.75 seconds.",
 					"mana": [
 						45,
 						50,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "Jarvan extends his lance, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and removing <scaleArmor>@Effect2Amount@% Armor</scaleArmor> for @Effect3Amount@ seconds.<br><br>If the lance connects with <spellName>{{Spell_JarvanIVDemacianStandard_Name}}</spellName>, Jarvan will pull himself to it, <status>Knocking Up</status> those in his path for 0.75 seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -119,6 +119,7 @@
 				{
 					"name": "Golden Aegis",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivw.png",
+					"tooltip": "Jarvan summons an aegis, <status>Slowing</status> nearby enemies by @Effect2Amount@% for @Effect5Amount@ seconds and granting him a <shield>@BaseShield@ Shield</shield>, increased by <shield>@BonusShield@</shield> for each enemy champion hit.",
 					"mana": [
 						30,
 						30,
@@ -136,7 +137,6 @@
 						9,
 						9
 					],
-					"tooltip": "Jarvan summons an aegis, <status>Slowing</status> nearby enemies by @Effect2Amount@% for @Effect5Amount@ seconds and granting him a <shield>@BaseShield@ Shield</shield>, increased by <shield>@BonusShield@</shield> for each enemy champion hit.",
 					"spellCalculations": {
 						"BaseShield": {
 							"mFormulaParts": [
@@ -228,6 +228,7 @@
 				{
 					"name": "Demacian Standard",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanive.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Jarvan gains <attackSpeed>@PermanentAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Jarvan throws a standard into the ground, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting allies near the standard <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
 					"mana": [
 						55,
 						55,
@@ -245,7 +246,6 @@
 						10,
 						10
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Jarvan gains <attackSpeed>@PermanentAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Jarvan throws a standard into the ground, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting allies near the standard <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
 					"dataValues": {
 						"EDashSpeed": [
 							1400,
@@ -355,6 +355,7 @@
 				{
 					"name": "Cataclysm",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivr.png",
+					"tooltip": "Jarvan heroically leaps to an enemy Champion, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to them and surrounding enemies and creating an arena of impassable terrain around them for @WallDuration@ seconds.<br><br>Jarvan can <recast>Recast</recast> to collapse the terrain.",
 					"mana": [
 						100,
 						100,
@@ -372,7 +373,6 @@
 						5,
 						0
 					],
-					"tooltip": "Jarvan heroically leaps to an enemy Champion, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to them and surrounding enemies and creating an arena of impassable terrain around them for @WallDuration@ seconds.<br><br>Jarvan can <recast>Recast</recast> to collapse the terrain.",
 					"dataValues": {
 						"BaseDamage": [
 							75,
@@ -478,5 +478,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

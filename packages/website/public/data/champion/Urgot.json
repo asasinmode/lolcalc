@@ -34,6 +34,7 @@
 				{
 					"name": "Corrosive Charge",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_q.png",
+					"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.",
 					"mana": [
 						70,
 						70,
@@ -51,7 +52,6 @@
 						8,
 						7.5
 					],
-					"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.",
 					"dataValues": {
 						"SlowDuration": [
 							1.25,
@@ -142,6 +142,7 @@
 				{
 					"name": "Purge",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @Effect8Amount@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @Effect2Amount@% <status>Slow</status> resistance, but loses <speed>@Effect5Amount@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
 					"mana": [
 						40,
 						30,
@@ -159,7 +160,6 @@
 						0,
 						0
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @Effect8Amount@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @Effect2Amount@% <status>Slow</status> resistance, but loses <speed>@Effect5Amount@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
 					"dataValues": {
 						"ADRatioTT": [
 							0.165,
@@ -330,6 +330,7 @@
 				{
 					"name": "Disdain",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_e.png",
+					"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>.",
 					"mana": [
 						60,
 						70,
@@ -347,7 +348,6 @@
 						14,
 						13.5
 					],
-					"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"EShieldDuration": [
 							4,
@@ -486,6 +486,7 @@
 				{
 					"name": "Fear Beyond Death",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_r.png",
+					"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds.",
 					"mana": [
 						100,
 						100,
@@ -503,7 +504,6 @@
 						70,
 						70
 					],
-					"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds.",
 					"dataValues": {
 						"RBaseDamage": [
 							100,
@@ -756,5 +756,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

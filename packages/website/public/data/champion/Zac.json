@@ -34,6 +34,7 @@
 				{
 					"name": "Stretching Strikes",
 					"image": "assets/characters/zac/hud/icons2d/zacq.png",
+					"tooltip": "Zac stretches his arm out, attaching it to the first enemy hit to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and briefly <status>Slow</status> them. Zac's next Attack gains increased range and applies the same damage and <status>Slow</status>. <br><br>If Zac hits a <i>different</i> enemy with this Attack, he <status>Knocks Up</status> both towards each other. If they collide, they and surrounding enemies take <magicDamage>@TotalDamage@ magic damage</magicDamage> and are briefly <status>Slowed</status>.",
 					"cooldownTime": [
 						14,
 						14,
@@ -43,7 +44,6 @@
 						8,
 						8
 					],
-					"tooltip": "Zac stretches his arm out, attaching it to the first enemy hit to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and briefly <status>Slow</status> them. Zac's next Attack gains increased range and applies the same damage and <status>Slow</status>. <br><br>If Zac hits a <i>different</i> enemy with this Attack, he <status>Knocks Up</status> both towards each other. If they collide, they and surrounding enemies take <magicDamage>@TotalDamage@ magic damage</magicDamage> and are briefly <status>Slowed</status>.",
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
@@ -200,6 +200,7 @@
 				{
 					"name": "Unstable Matter",
 					"image": "assets/characters/zac/hud/icons2d/zacw.png",
+					"tooltip": "Zac's body erupts, dealing <magicDamage>@BaseDamage@ + @DisplayPercentDamage@ max Health magic damage</magicDamage> to nearby enemies.<br><br>Absorbing <keywordMajor>Goo</keywordMajor> reduces this Ability's Cooldown by 1 second.",
 					"cooldownTime": [
 						5,
 						5,
@@ -209,7 +210,6 @@
 						5,
 						5
 					],
-					"tooltip": "Zac's body erupts, dealing <magicDamage>@BaseDamage@ + @DisplayPercentDamage@ max Health magic damage</magicDamage> to nearby enemies.<br><br>Absorbing <keywordMajor>Goo</keywordMajor> reduces this Ability's Cooldown by 1 second.",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -347,6 +347,7 @@
 				{
 					"name": "Elastic Slingshot",
 					"image": "assets/characters/zac/hud/icons2d/zace.png",
+					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
 					"cooldownTime": [
 						25,
 						22,
@@ -356,7 +357,6 @@
 						10,
 						10
 					],
-					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
 					"spellCalculations": {
 						"MaxStun": {
 							"mExpandedTooltipCalculationDisplay": 5,
@@ -509,6 +509,7 @@
 				{
 					"name": "Let's Bounce!",
 					"image": "assets/characters/zac/hud/icons2d/zacr.png",
+					"tooltip": "Zac bounces @Bounces@ times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>@DamagePerBounce@ magic damage</magicDamage>. Subsequent bounces deal <magicDamage>@DamagePerSubsequentBounce@ magic damage</magicDamage> and <status>Slow</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>Zac gains up to <speed>@EndingMS*100@% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing.",
 					"cooldownTime": [
 						120,
 						120,
@@ -518,7 +519,6 @@
 						90,
 						90
 					],
-					"tooltip": "Zac bounces @Bounces@ times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>@DamagePerBounce@ magic damage</magicDamage>. Subsequent bounces deal <magicDamage>@DamagePerSubsequentBounce@ magic damage</magicDamage> and <status>Slow</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>Zac gains up to <speed>@EndingMS*100@% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing.",
 					"dataValues": {
 						"Bounces": [
 							4,
@@ -815,6 +815,8 @@
 				{
 					"name": "Cell Division",
 					"image": "assets/characters/zac/hud/icons2d/zacpassive.png",
+					"tooltip": "Each time Zac hits an enemy with an Ability, he sheds a chunk of <keywordMajor>Goo</keywordMajor> that can be reabsorbed to restore <healing>@HealPercent@ Max Health</healing>.<br><br>Upon dying, Zac splits into 4 bloblets that attempt to recombine. If any bloblets remain after <scaleLevel>@ReviveBlobletDuration@</scaleLevel> seconds, he will revive with 10-50% Health based on the surviving bloblet's Health. This has a @ReviveCooldown@ second Cooldown.",
+					"tooltipExtended": "{{Spell_ZacPassiveChunkDrop_Tooltip}}<br><br><rules>Each bloblet has 12% of Zac's max <healing>Health</healing>, and 50% of his <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.</rules>",
 					"cooldownTime": [
 						300,
 						300,
@@ -824,8 +826,6 @@
 						300,
 						300
 					],
-					"tooltip": "Each time Zac hits an enemy with an Ability, he sheds a chunk of <keywordMajor>Goo</keywordMajor> that can be reabsorbed to restore <healing>@HealPercent@ Max Health</healing>.<br><br>Upon dying, Zac splits into 4 bloblets that attempt to recombine. If any bloblets remain after <scaleLevel>@ReviveBlobletDuration@</scaleLevel> seconds, he will revive with 10-50% Health based on the surviving bloblet's Health. This has a @ReviveCooldown@ second Cooldown.",
-					"tooltipExtended": "{{Spell_ZacPassiveChunkDrop_Tooltip}}<br><br><rules>Each bloblet has 12% of Zac's max <healing>Health</healing>, and 50% of his <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.</rules>",
 					"dataValues": {
 						"ReviveCooldown": [
 							300,
@@ -887,5 +887,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

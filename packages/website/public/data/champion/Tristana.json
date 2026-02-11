@@ -34,6 +34,7 @@
 				{
 					"name": "Rapid Fire",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_q.png",
+					"tooltip": "Tristana goes full-auto, gaining <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.",
 					"mana": [
 						30,
 						35,
@@ -51,7 +52,6 @@
 						16,
 						16
 					],
-					"tooltip": "Tristana goes full-auto, gaining <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.",
 					"dataValues": {
 						"AttackSpeedMod": [
 							0.45,
@@ -82,6 +82,7 @@
 				{
 					"name": "Rocket Jump",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_w.png",
+					"tooltip": "Tristana launches herself, dealing <magicDamage>@LandingDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowMod*-100@% for @SlowDuration@ seconds upon landing.<br><br>Champion takedowns and max stack <spellName>{{Spell_TristanaE_Name}}</spellName> detonations on champions refresh this Ability's Cooldown.",
 					"mana": [
 						30,
 						35,
@@ -99,7 +100,6 @@
 						14,
 						14
 					],
-					"tooltip": "Tristana launches herself, dealing <magicDamage>@LandingDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowMod*-100@% for @SlowDuration@ seconds upon landing.<br><br>Champion takedowns and max stack <spellName>{{Spell_TristanaE_Name}}</spellName> detonations on champions refresh this Ability's Cooldown.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -186,6 +186,7 @@
 				{
 					"name": "Explosive Charge",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_e.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>@PassiveDamage@ magic damage</magicDamage> to surrounding enemies.<br><br><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>@ActiveDamage@ physical damage</physicalDamage> to surrounding enemies after @ActiveDuration@ seconds. The damage is increased by @ActivePerStackAmp*100@% each time Tristana hits an Attack or Ability (max 4 stacks).<br><br>At @ActiveMaxStacks@ stacks, the bomb explodes immediately (max <physicalDamage>@ActiveMaxDamage@ physical damage</physicalDamage>).",
 					"mana": [
 						50,
 						55,
@@ -203,7 +204,6 @@
 						14,
 						14
 					],
-					"tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>@PassiveDamage@ magic damage</magicDamage> to surrounding enemies.<br><br><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>@ActiveDamage@ physical damage</physicalDamage> to surrounding enemies after @ActiveDuration@ seconds. The damage is increased by @ActivePerStackAmp*100@% each time Tristana hits an Attack or Ability (max 4 stacks).<br><br>At @ActiveMaxStacks@ stacks, the bomb explodes immediately (max <physicalDamage>@ActiveMaxDamage@ physical damage</physicalDamage>).",
 					"dataValues": {
 						"PassiveBaseDamage": [
 							30,
@@ -382,6 +382,7 @@
 				{
 					"name": "Buster Shot",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_r.png",
+					"tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for @StunDuration@ seconds.",
 					"mana": [
 						100,
 						100,
@@ -399,7 +400,6 @@
 						100,
 						100
 					],
-					"tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for @StunDuration@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							175,
@@ -468,6 +468,7 @@
 				{
 					"name": "Draw a Bead",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_passive.png",
+					"tooltip": "Tristana's Attack Range and the range of <spellName>{{Spell_TristanaE_Name}}</spellName> and <spellName>{{Spell_TristanaR_Name}}</spellName> are increased by @BonusPassiveRange@.",
 					"cooldownTime": [
 						0,
 						0,
@@ -477,7 +478,6 @@
 						0,
 						0
 					],
-					"tooltip": "Tristana's Attack Range and the range of <spellName>{{Spell_TristanaE_Name}}</spellName> and <spellName>{{Spell_TristanaR_Name}}</spellName> are increased by @BonusPassiveRange@.",
 					"spellCalculations": {
 						"BonusPassiveRange": {
 							"mFormulaParts": [
@@ -492,5 +492,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -34,6 +34,7 @@
 				{
 					"name": "Elemental Wrath / Edge of Ixtal",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_q2_red.png",
+					"tooltip": "If Qiyana does not have an <keywordMajor>Enchantment</keywordMajor>, she slashes, dealing <physicalDamage>@VanillaDamage@ physical damage</physicalDamage> to enemies in a small area. If she does, this Ability gains extra range and an additional effect based on the type of <keywordMajor>Enchantment</keywordMajor>:<li><keywordMajor>Ice Enchantment</keywordMajor>: Briefly <status>Roots</status>, then <status>Slows</status> by @SlowPotency*-100@% for @SlowDuration@ second.<li><keywordMajor>Rock Enchantment</keywordMajor>: Deals an additional <physicalDamage>@TremorDamage@ physical damage</physicalDamage> to units below @CritThreshold*100@% Health.<li><keywordMajor>Wild Enchantment</keywordMajor>: Leaves a trail that turns Qiyana <keywordStealth>Invisible</keywordStealth> and grants <speed>@Haste*100@% Move Speed</speed>.<br>",
 					"mana": [
 						35,
 						35,
@@ -51,7 +52,6 @@
 						7,
 						7
 					],
-					"tooltip": "If Qiyana does not have an <keywordMajor>Enchantment</keywordMajor>, she slashes, dealing <physicalDamage>@VanillaDamage@ physical damage</physicalDamage> to enemies in a small area. If she does, this Ability gains extra range and an additional effect based on the type of <keywordMajor>Enchantment</keywordMajor>:<li><keywordMajor>Ice Enchantment</keywordMajor>: Briefly <status>Roots</status>, then <status>Slows</status> by @SlowPotency*-100@% for @SlowDuration@ second.<li><keywordMajor>Rock Enchantment</keywordMajor>: Deals an additional <physicalDamage>@TremorDamage@ physical damage</physicalDamage> to units below @CritThreshold*100@% Health.<li><keywordMajor>Wild Enchantment</keywordMajor>: Leaves a trail that turns Qiyana <keywordStealth>Invisible</keywordStealth> and grants <speed>@Haste*100@% Move Speed</speed>.<br>",
 					"dataValues": {
 						"VanillaBase": [
 							40,
@@ -255,6 +255,7 @@
 				{
 					"name": "Terrashape",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> While Qiyana's weapon is <keywordMajor>Enchanted</keywordMajor>, she gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> and her Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>. She also gains <speed>@PassiveMS*100@% Move Speed</speed> while out of combat near the corresponding terrain type.<br><br><spellActive>Active:</spellActive> Qiyana dashes towards a nearby brush, terrain, or river and <keywordMajor>Enchants</keywordMajor> her weapon with that particular terrain type. This refreshes <spellName>{{Spell_QiyanaQv2_Name}}</spellName>'s Cooldown.",
 					"mana": [
 						25,
 						30,
@@ -272,7 +273,6 @@
 						7,
 						7
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> While Qiyana's weapon is <keywordMajor>Enchanted</keywordMajor>, she gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> and her Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>. She also gains <speed>@PassiveMS*100@% Move Speed</speed> while out of combat near the corresponding terrain type.<br><br><spellActive>Active:</spellActive> Qiyana dashes towards a nearby brush, terrain, or river and <keywordMajor>Enchants</keywordMajor> her weapon with that particular terrain type. This refreshes <spellName>{{Spell_QiyanaQv2_Name}}</spellName>'s Cooldown.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -424,6 +424,7 @@
 				{
 					"name": "Audacity",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_e.png",
+					"tooltip": "Qiyana dashes through an enemy and deals <physicalDamage>@Damage@ physical damage</physicalDamage> to them.",
 					"mana": [
 						40,
 						45,
@@ -441,7 +442,6 @@
 						7,
 						7
 					],
-					"tooltip": "Qiyana dashes through an enemy and deals <physicalDamage>@Damage@ physical damage</physicalDamage> to them.",
 					"dataValues": {
 						"BaseDamage": [
 							10,
@@ -506,6 +506,7 @@
 				{
 					"name": "Supreme Display of Talent",
 					"image": "assets/characters/qiyana/hud/icons2d/qiyana_r.png",
+					"tooltip": "Qiyana launches a shockwave that <status>Knocks Back</status> enemies and detonates when it hits terrain. The explosion follows the entire edge of the terrain, <status>Stunning</status> for between 0.5 and @StunDuration@ seconds and dealing <physicalDamage>@Damage@</physicalDamage> plus <physicalDamage>@MissingHealthDamageRock@ max Health physical damage</physicalDamage>. <status>Stun</status> duration scales down with distance the shockwave has travelled.<br><br>Any river or brush the shockwave passes through also explode after a delay for the same damage and <status>Stun</status>.",
 					"mana": [
 						100,
 						100,
@@ -523,7 +524,6 @@
 						120,
 						120
 					],
-					"tooltip": "Qiyana launches a shockwave that <status>Knocks Back</status> enemies and detonates when it hits terrain. The explosion follows the entire edge of the terrain, <status>Stunning</status> for between 0.5 and @StunDuration@ seconds and dealing <physicalDamage>@Damage@</physicalDamage> plus <physicalDamage>@MissingHealthDamageRock@ max Health physical damage</physicalDamage>. <status>Stun</status> duration scales down with distance the shockwave has travelled.<br><br>Any river or brush the shockwave passes through also explode after a delay for the same damage and <status>Stun</status>.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -823,5 +823,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

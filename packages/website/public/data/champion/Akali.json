@@ -34,6 +34,7 @@
 				{
 					"name": "Five Point Strike",
 					"image": "assets/characters/akali/hud/icons2d/akali_q.png",
+					"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds.",
 					"mana": [
 						110,
 						100,
@@ -51,7 +52,6 @@
 						1.5,
 						1.5
 					],
-					"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds.",
 					"dataValues": {
 						"BaseDamageNamed": [
 							20,
@@ -146,6 +146,7 @@
 				{
 					"name": "Twilight Shroud",
 					"image": "assets/characters/akali/hud/icons2d/akali_w.png",
+					"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
 					"cooldownTime": [
 						20,
 						20,
@@ -155,7 +156,6 @@
 						16,
 						16
 					],
-					"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
 					"dataValues": {
 						"MovementSpeed": [
 							25,
@@ -296,6 +296,7 @@
 				{
 					"name": "Shuriken Flip",
 					"image": "assets/characters/akali/hud/icons2d/akali_e.png",
+					"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>.",
 					"mana": [
 						30,
 						30,
@@ -313,7 +314,6 @@
 						10,
 						8.5
 					],
-					"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -424,6 +424,7 @@
 				{
 					"name": "Perfect Execution",
 					"image": "assets/characters/akali/hud/icons2d/akali_r.png",
+					"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health.",
 					"cooldownTime": [
 						120,
 						120,
@@ -433,7 +434,6 @@
 						60,
 						60
 					],
-					"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -724,5 +724,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

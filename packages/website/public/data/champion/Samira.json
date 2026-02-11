@@ -34,6 +34,7 @@
 				{
 					"name": "Flair",
 					"image": "assets/characters/samira/hud/icons2d/samiraq.png",
+					"tooltip": "Samira fires a shot, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to the first enemy hit.<br><br>If this Ability is cast towards an enemy in melee range, Samira will instead slash with her sword, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage>. ",
 					"mana": [
 						30,
 						30,
@@ -51,7 +52,6 @@
 						2,
 						2
 					],
-					"tooltip": "Samira fires a shot, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to the first enemy hit.<br><br>If this Ability is cast towards an enemy in melee range, Samira will instead slash with her sword, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage>. ",
 					"dataValues": {
 						"BaseDamage": [
 							-5,
@@ -150,6 +150,7 @@
 				{
 					"name": "Blade Whirl",
 					"image": "assets/characters/samira/hud/icons2d/samiraw.png",
+					"tooltip": "Samira slashes around her for @SlashDuration@ seconds, damaging enemies twice for <physicalDamage>@DamageCalc@ physical damage</physicalDamage> each and destroying any enemy missiles that enter the area.<br><br>",
 					"mana": [
 						60,
 						60,
@@ -167,7 +168,6 @@
 						22,
 						20
 					],
-					"tooltip": "Samira slashes around her for @SlashDuration@ seconds, damaging enemies twice for <physicalDamage>@DamageCalc@ physical damage</physicalDamage> each and destroying any enemy missiles that enter the area.<br><br>",
 					"dataValues": {
 						"BaseDamage": [
 							5,
@@ -214,6 +214,7 @@
 				{
 					"name": "Wild Rush",
 					"image": "assets/characters/samira/hud/icons2d/samirae.png",
+					"tooltip": "Samira dashes through an enemy (including structures), slashing enemies she passes through dealing <magicDamage>@DashDamage@ magic damage</magicDamage> and gaining <attackSpeed>@BonusAttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds. <br><br>If an enemy champion is killed within 3 seconds of Samira damaging them, This Ability's Cooldown is reset.",
 					"mana": [
 						40,
 						40,
@@ -231,7 +232,6 @@
 						12,
 						10
 					],
-					"tooltip": "Samira dashes through an enemy (including structures), slashing enemies she passes through dealing <magicDamage>@DashDamage@ magic damage</magicDamage> and gaining <attackSpeed>@BonusAttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds. <br><br>If an enemy champion is killed within 3 seconds of Samira damaging them, This Ability's Cooldown is reset.",
 					"dataValues": {
 						"BaseDamage": [
 							40,
@@ -305,6 +305,7 @@
 				{
 					"name": "Inferno Trigger",
 					"image": "assets/characters/samira/hud/icons2d/samirar1.png",
+					"tooltip": "Samira can only use this Ability if her current <keywordMajor>Style</keywordMajor> rating is S. Using this Ability consumes all <keywordMajor>Style</keywordMajor> rating.<br><br>Samira unleashes a torrent of shots from her weapons, wildly shooting all enemies surrounding her 10 times over 2 seconds, each shot dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> and applying Life Steal at @LifestealMod*100@% effectiveness. Each shot can also critically strike.",
 					"cooldownTime": [
 						5,
 						5,
@@ -314,7 +315,6 @@
 						5,
 						5
 					],
-					"tooltip": "Samira can only use this Ability if her current <keywordMajor>Style</keywordMajor> rating is S. Using this Ability consumes all <keywordMajor>Style</keywordMajor> rating.<br><br>Samira unleashes a torrent of shots from her weapons, wildly shooting all enemies surrounding her 10 times over 2 seconds, each shot dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> and applying Life Steal at @LifestealMod*100@% effectiveness. Each shot can also critically strike.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -504,5 +504,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

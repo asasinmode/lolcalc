@@ -34,6 +34,8 @@
 				{
 					"name": "Subject: Disaster",
 					"image": "assets/characters/hwei/hud/icons2d/hweiq.png",
+					"tooltip": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>Hwei launches a blazing fast fireball that explodes on the first enemy hit, dealing <magicDamage>@Tooltip_QQDamage@ plus @Tooltip_QQBonusDamage@% max health magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>Hwei strikes over far distances with a delayed lightning bolt, dealing <magicDamage>@Tooltip_QWDamage@ magic damage</magicDamage>. Hitting an Isolated or <status>Immobilized</status> target increases the damage up to <magicDamage>@Tooltip_QWBonusDamage@ magic damage</magicDamage>, based on the target's missing health.<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>Hwei unleashes a path of eruptions, dealing <magicDamage>@Tooltip_QEDamage@ magic damage</magicDamage> in an area and leaving behind pools of lava that <status>Slow</status> enemies by @spell.HweiQE:SlowPercent@% and deal <magicDamage>@Tooltip_QEDamagePerSecond@ magic damage per second</magicDamage> for @spell.HweiQE:Duration@ seconds.",
+					"tooltipExtended": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>{{Spell_HweiQQ_Tooltip}}<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>{{Spell_HweiQW_Tooltip}}<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>{{Spell_HweiQE_Tooltip}}",
 					"mana": [
 						80,
 						90,
@@ -51,8 +53,6 @@
 						6,
 						6
 					],
-					"tooltip": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>Hwei launches a blazing fast fireball that explodes on the first enemy hit, dealing <magicDamage>@Tooltip_QQDamage@ plus @Tooltip_QQBonusDamage@% max health magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>Hwei strikes over far distances with a delayed lightning bolt, dealing <magicDamage>@Tooltip_QWDamage@ magic damage</magicDamage>. Hitting an Isolated or <status>Immobilized</status> target increases the damage up to <magicDamage>@Tooltip_QWBonusDamage@ magic damage</magicDamage>, based on the target's missing health.<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>Hwei unleashes a path of eruptions, dealing <magicDamage>@Tooltip_QEDamage@ magic damage</magicDamage> in an area and leaving behind pools of lava that <status>Slow</status> enemies by @spell.HweiQE:SlowPercent@% and deal <magicDamage>@Tooltip_QEDamagePerSecond@ magic damage per second</magicDamage> for @spell.HweiQE:Duration@ seconds.",
-					"tooltipExtended": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>{{Spell_HweiQQ_Tooltip}}<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>{{Spell_HweiQW_Tooltip}}<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>{{Spell_HweiQE_Tooltip}}",
 					"dataValues": {
 						"Tooltip_QQBaseDamage": [
 							20,
@@ -180,6 +180,8 @@
 				{
 					"name": "Subject: Serenity",
 					"image": "assets/characters/hwei/hud/icons2d/hweiw.png",
+					"tooltip": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>Hwei launches a current of swift waters in a line that grants allies <speed>@Tooltip_WQMoveSpeed@ Move Speed</speed>.<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>Hwei forms a protective pool that grants <shield>@Tooltip_WWShieldAmount@ Shields</shield> over time to allied champions inside reduced by @spell.HweiWW:ToolTipAllyMod*100@% for allies.<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>Hwei creates three swirling lights that empower his next three Abilities or Attacks to deal an additional <magicDamage>@Tooltip_WEOnHitDamage@ magic damage</magicDamage> and restore <scaleMana>@Tooltip_WEOnHitManaRestore@ Mana</scaleMana> each.",
+					"tooltipExtended": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>{{Spell_HweiWQ_Tooltip}}<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>{{Spell_HweiWW_Tooltip}}<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>{{Spell_HweiWE_Tooltip}}",
 					"mana": [
 						90,
 						95,
@@ -197,8 +199,6 @@
 						16,
 						16
 					],
-					"tooltip": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>Hwei launches a current of swift waters in a line that grants allies <speed>@Tooltip_WQMoveSpeed@ Move Speed</speed>.<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>Hwei forms a protective pool that grants <shield>@Tooltip_WWShieldAmount@ Shields</shield> over time to allied champions inside reduced by @spell.HweiWW:ToolTipAllyMod*100@% for allies.<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>Hwei creates three swirling lights that empower his next three Abilities or Attacks to deal an additional <magicDamage>@Tooltip_WEOnHitDamage@ magic damage</magicDamage> and restore <scaleMana>@Tooltip_WEOnHitManaRestore@ Mana</scaleMana> each.",
-					"tooltipExtended": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>{{Spell_HweiWQ_Tooltip}}<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>{{Spell_HweiWW_Tooltip}}<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>{{Spell_HweiWE_Tooltip}}",
 					"dataValues": {
 						"Tooltip_WQBaseMoveSpeed": [
 							27.5,
@@ -317,6 +317,8 @@
 				{
 					"name": "Subject: Torment",
 					"image": "assets/characters/hwei/hud/icons2d/hweie.png",
+					"tooltip": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>Hwei launches a terrifying face that causes the first enemy hit to <status>Flee</status> for @Tooltip_EQFleeDuration@ second(s) and take <magicDamage>@Tooltip_EQDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>Hwei forms an eye that lingers and provides vision locking onto the first enemy champion that enters and launching a homing missile that <status>Roots</status> the first enemy hit for @Tooltip_EWRootDuration@ seconds dealing <magicDamage>@Tooltip_EWDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>Hwei paints a set of jaws at a target location that <status>Drags</status> enemies to the center dealing <magicDamage>@Tooltip_EEDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies caught by @Tooltip_EESlowAmount@% decaying over 1.25 seconds.",
+					"tooltipExtended": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>{{Spell_HweiEQ_Tooltip}}<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>{{Spell_HweiEW_Tooltip}}<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>{{Spell_HweiEE_Tooltip}}",
 					"mana": [
 						50,
 						55,
@@ -334,8 +336,6 @@
 						11,
 						11
 					],
-					"tooltip": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>Hwei launches a terrifying face that causes the first enemy hit to <status>Flee</status> for @Tooltip_EQFleeDuration@ second(s) and take <magicDamage>@Tooltip_EQDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>Hwei forms an eye that lingers and provides vision locking onto the first enemy champion that enters and launching a homing missile that <status>Roots</status> the first enemy hit for @Tooltip_EWRootDuration@ seconds dealing <magicDamage>@Tooltip_EWDamage@ magic damage</magicDamage>.<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>Hwei paints a set of jaws at a target location that <status>Drags</status> enemies to the center dealing <magicDamage>@Tooltip_EEDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies caught by @Tooltip_EESlowAmount@% decaying over 1.25 seconds.",
-					"tooltipExtended": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>{{Spell_HweiEQ_Tooltip}}<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>{{Spell_HweiEW_Tooltip}}<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>{{Spell_HweiEE_Tooltip}}",
 					"dataValues": {
 						"Tooltip_EQBaseDamage": [
 							30,
@@ -443,6 +443,7 @@
 				{
 					"name": "Spiraling Despair",
 					"image": "assets/characters/hwei/hud/icons2d/hweir.png",
+					"tooltip": "Hwei launches a vision of pure despair that sticks to an enemy champion for @Duration@ seconds. The vision expands over time applying a <status>Slow</status> to enemies for @SlowPercentPerStack@% stacking every 0.25 seconds, and dealing <magicDamage>@DamageOverTime@ magic damage per second</magicDamage>.<br><br>Upon completion, the vision shatters, dealing <magicDamage>@Damage@ magic damage</magicDamage>.",
 					"mana": [
 						100,
 						100,
@@ -460,7 +461,6 @@
 						80,
 						80
 					],
-					"tooltip": "Hwei launches a vision of pure despair that sticks to an enemy champion for @Duration@ seconds. The vision expands over time applying a <status>Slow</status> to enemies for @SlowPercentPerStack@% stacking every 0.25 seconds, and dealing <magicDamage>@DamageOverTime@ magic damage per second</magicDamage>.<br><br>Upon completion, the vision shatters, dealing <magicDamage>@Damage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"RBaseDamage": [
 							75,
@@ -619,5 +619,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -34,6 +34,7 @@
 				{
 					"name": "Death's Hand",
 					"image": "assets/characters/swain/hud/icons2d/swain_q.png",
+					"tooltip": "Swain unleashes 5 eldritch bolts, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> plus <magicDamage>@ExtraBoltDamage@ magic damage</magicDamage> per bolt past the first (max <magicDamage>@MaxDamage@ magic damage</magicDamage>).",
 					"mana": [
 						40,
 						45,
@@ -51,7 +52,6 @@
 						3,
 						3
 					],
-					"tooltip": "Swain unleashes 5 eldritch bolts, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> plus <magicDamage>@ExtraBoltDamage@ magic damage</magicDamage> per bolt past the first (max <magicDamage>@MaxDamage@ magic damage</magicDamage>).",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -135,6 +135,7 @@
 				{
 					"name": "Vision of Empire",
 					"image": "assets/characters/swain/hud/icons2d/swain_w.png",
+					"tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds.<br><br>Champions hit grant Swain a <font color='#FF3F3F' size='18'>Soul Fragment</font> and are revealed for @RevealDuration@ seconds.",
 					"mana": [
 						60,
 						65,
@@ -152,7 +153,6 @@
 						18,
 						18
 					],
-					"tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds.<br><br>Champions hit grant Swain a <font color='#FF3F3F' size='18'>Soul Fragment</font> and are revealed for @RevealDuration@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -257,6 +257,7 @@
 				{
 					"name": "Nevermove",
 					"image": "assets/characters/swain/hud/icons2d/swain_e.png",
+					"tooltip": "Swain launches a wave of demonic power that returns, detonating on the first enemy hit to deal <magicDamage>@SecondaryDamage@ magic damage</magicDamage> and <status>Root</status> enemies in the area for @RootDuration@ seconds.<br><br><status>Rooting</status> a champion allows Swain to reactivate this ability to pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him, gaining a <font color='#FF3F3F' size='18'>Soul Fragment</font> for each.",
 					"mana": [
 						50,
 						55,
@@ -274,7 +275,6 @@
 						10,
 						10
 					],
-					"tooltip": "Swain launches a wave of demonic power that returns, detonating on the first enemy hit to deal <magicDamage>@SecondaryDamage@ magic damage</magicDamage> and <status>Root</status> enemies in the area for @RootDuration@ seconds.<br><br><status>Rooting</status> a champion allows Swain to reactivate this ability to pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him, gaining a <font color='#FF3F3F' size='18'>Soul Fragment</font> for each.",
 					"dataValues": {
 						"E2Damage": [
 							50,
@@ -355,6 +355,7 @@
 				{
 					"name": "Demonic Ascension",
 					"image": "assets/characters/swain/hud/icons2d/swain_r.png",
+					"tooltip": "Swain frees the demon, which deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and drains <healing>@HealingCalc@ Health</healing> per second from nearby enemies. His Demonic Energy depletes over time but can be recharged indefinitely by draining enemy Champions and is fully restored on Champion takedowns.<br><br>After @DemonflareCastDelay@ seconds and every @DemonflareCooldownTooltip@ seconds thereafter, Swain can cast <spellName>Demonflare</spellName> while transformed, which deals <magicDamage>@DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slows</status> enemies by @DemonflareSlowAmount*100@%, decaying over @DemonflareSlowDuration@s.",
 					"mana": [
 						100,
 						100,
@@ -372,7 +373,6 @@
 						120,
 						120
 					],
-					"tooltip": "Swain frees the demon, which deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and drains <healing>@HealingCalc@ Health</healing> per second from nearby enemies. His Demonic Energy depletes over time but can be recharged indefinitely by draining enemy Champions and is fully restored on Champion takedowns.<br><br>After @DemonflareCastDelay@ seconds and every @DemonflareCooldownTooltip@ seconds thereafter, Swain can cast <spellName>Demonflare</spellName> while transformed, which deals <magicDamage>@DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slows</status> enemies by @DemonflareSlowAmount*100@%, decaying over @DemonflareSlowDuration@s.",
 					"dataValues": {
 						"DamagePerSecond": [
 							5,
@@ -661,5 +661,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

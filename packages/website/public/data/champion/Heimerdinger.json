@@ -34,6 +34,7 @@
 				{
 					"name": "H-28 G Evolution Turret",
 					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_q1.png",
+					"tooltip": "Heimerdinger constructs a <keywordMajor>Turret</keywordMajor> that attacks nearby enemies. Heimerdinger can have @MaxTurrets@ turrets active at once. <keywordMajor>Turrets</keywordMajor> slowly build up charge. At max charge, they fire a stronger attack.<br><br>If Heimerdinger gets too far away, his <keywordMajor>Turrets</keywordMajor> will deactivate after 8 seconds.<br><br>This Ability has @MaxKits@ charges.",
 					"mana": [
 						20,
 						20,
@@ -51,7 +52,6 @@
 						1,
 						1
 					],
-					"tooltip": "Heimerdinger constructs a <keywordMajor>Turret</keywordMajor> that attacks nearby enemies. Heimerdinger can have @MaxTurrets@ turrets active at once. <keywordMajor>Turrets</keywordMajor> slowly build up charge. At max charge, they fire a stronger attack.<br><br>If Heimerdinger gets too far away, his <keywordMajor>Turrets</keywordMajor> will deactivate after 8 seconds.<br><br>This Ability has @MaxKits@ charges.",
 					"dataValues": {
 						"MaxTurrets": [
 							0,
@@ -275,6 +275,7 @@
 				{
 					"name": "Hextech Micro-Rockets",
 					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_w1.png",
+					"tooltip": "Heimerdinger unleashes a barrage of @Rockets@ rockets that deal <magicDamage>@Damage@ magic damage</magicDamage> to the first enemy hit. Additional rocket hits deal reduced damage.<br><br>Max Damage: <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Nearby <keywordMajor>Turrets</keywordMajor> gain 20% charge per rocket that hits a champion.",
 					"mana": [
 						50,
 						60,
@@ -292,7 +293,6 @@
 						7,
 						7
 					],
-					"tooltip": "Heimerdinger unleashes a barrage of @Rockets@ rockets that deal <magicDamage>@Damage@ magic damage</magicDamage> to the first enemy hit. Additional rocket hits deal reduced damage.<br><br>Max Damage: <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Nearby <keywordMajor>Turrets</keywordMajor> gain 20% charge per rocket that hits a champion.",
 					"dataValues": {
 						"Rockets": [
 							5,
@@ -459,6 +459,7 @@
 				{
 					"name": "CH-2 Electron Storm Grenade",
 					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_e1.png",
+					"tooltip": "Heimerdinger hurls a grenade that deals <magicDamage>@Damage@ magic damage</magicDamage> in an area and <status>Slows</status> by @SlowPercent.0*100@% for @SlowDuration@ seconds. Enemies in the center are also <status>Stunned</status> for @StunDuration@ seconds.<br><br>Hitting a champion fully charges nearby <keywordMajor>Turrets</keywordMajor>.",
 					"mana": [
 						85,
 						85,
@@ -476,7 +477,6 @@
 						11,
 						11
 					],
-					"tooltip": "Heimerdinger hurls a grenade that deals <magicDamage>@Damage@ magic damage</magicDamage> in an area and <status>Slows</status> by @SlowPercent.0*100@% for @SlowDuration@ seconds. Enemies in the center are also <status>Stunned</status> for @StunDuration@ seconds.<br><br>Hitting a champion fully charges nearby <keywordMajor>Turrets</keywordMajor>.",
 					"dataValues": {
 						"BaseDamage": [
 							20,
@@ -539,6 +539,7 @@
 				{
 					"name": "UPGRADE!!!",
 					"image": "assets/characters/heimerdinger/hud/icons2d/heimerdinger_r.png",
+					"tooltip": "Heimerdinger upgrades his next non-ultimate Ability.<br><br><spellName>H-28Q Apex Turret:</spellName> Place an upgraded <keywordMajor>Turret</keywordMajor> for 8 seconds that doesn't count towards Heimerdinger's max turrets, deals <magicDamage>@QUltDamage@ magic damage</magicDamage> per shot and <magicDamage>@QUltDamageBeam@ magic damage</magicDamage> per charged shot. Its attacks deal damage in an area, <status>Slow</status> by 25% for 2 seconds, and it is immune to crowd control.<br><br><spellName>Hextech Rocket Swarm:</spellName> Fires 4 waves of rockets that each deal <magicDamage>@WUltDamage@ magic damage</magicDamage>. Champions and jungle monsters hit by additional rockets take reduced damage, and minions take increased damage. Max Damage: <magicDamage>@WUltTotalDamage@ magic damage</magicDamage>. <br><br><spellName>CH-3X Lightning Grenade:</spellName> Throws a bouncing grenade that discharges three times, dealing <magicDamage>@EUltDamage@ magic damage</magicDamage>. The <status>Stun</status> and <status>Slow</status> areas are larger.<br><br><recast>Recast:</recast> Cancel this Ability.",
 					"mana": [
 						100,
 						100,
@@ -556,7 +557,6 @@
 						70,
 						75
 					],
-					"tooltip": "Heimerdinger upgrades his next non-ultimate Ability.<br><br><spellName>H-28Q Apex Turret:</spellName> Place an upgraded <keywordMajor>Turret</keywordMajor> for 8 seconds that doesn't count towards Heimerdinger's max turrets, deals <magicDamage>@QUltDamage@ magic damage</magicDamage> per shot and <magicDamage>@QUltDamageBeam@ magic damage</magicDamage> per charged shot. Its attacks deal damage in an area, <status>Slow</status> by 25% for 2 seconds, and it is immune to crowd control.<br><br><spellName>Hextech Rocket Swarm:</spellName> Fires 4 waves of rockets that each deal <magicDamage>@WUltDamage@ magic damage</magicDamage>. Champions and jungle monsters hit by additional rockets take reduced damage, and minions take increased damage. Max Damage: <magicDamage>@WUltTotalDamage@ magic damage</magicDamage>. <br><br><spellName>CH-3X Lightning Grenade:</spellName> Throws a bouncing grenade that discharges three times, dealing <magicDamage>@EUltDamage@ magic damage</magicDamage>. The <status>Stun</status> and <status>Slow</status> areas are larger.<br><br><recast>Recast:</recast> Cancel this Ability.",
 					"dataValues": {
 						"QUltBaseDamage": [
 							60,
@@ -868,5 +868,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

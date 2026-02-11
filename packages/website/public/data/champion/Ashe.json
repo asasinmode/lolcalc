@@ -34,6 +34,7 @@
 				{
 					"name": "Ranger's Focus",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_q.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
 					"mana": [
 						30,
 						30,
@@ -51,7 +52,6 @@
 						0,
 						0
 					],
-					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
 					"dataValues": {
 						"DamagePerStrike": [
 							1.025,
@@ -169,6 +169,7 @@
 				{
 					"name": "Volley",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_w.png",
+					"tooltip": "Ashe fires a volley of @NumberOfArrowsTooltip@ arrows, each dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies can be hit by multiple arrows, but only take damage from the first.",
 					"mana": [
 						75,
 						70,
@@ -186,7 +187,6 @@
 						4,
 						4
 					],
-					"tooltip": "Ashe fires a volley of @NumberOfArrowsTooltip@ arrows, each dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies can be hit by multiple arrows, but only take damage from the first.",
 					"dataValues": {
 						"BaseDamage": [
 							25,
@@ -254,6 +254,7 @@
 				{
 					"name": "Hawkshot",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_e.png",
+					"tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br><br>This Ability has 2 charges (@ChargeCooldown@ second recharge).",
 					"cooldownTime": [
 						5,
 						5,
@@ -263,7 +264,6 @@
 						5,
 						5
 					],
-					"tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br><br>This Ability has 2 charges (@ChargeCooldown@ second recharge).",
 					"dataValues": {
 						"BaseCooldown": [
 							100,
@@ -338,6 +338,7 @@
 				{
 					"name": "Enchanted Crystal Arrow",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_r.png",
+					"tooltip": "Ashe launches a crystal arrow of ice that <status>Stuns</status> the first champion hit and deals <magicDamage>@RMainDamage@ magic damage</magicDamage>. The <status>Stun</status> duration increases with distance travelled, up to @MaxStunDuration@ seconds. Surrounding enemies are <status>Slowed</status> by <spellName>Frost Shot</spellName>.",
 					"mana": [
 						100,
 						100,
@@ -355,7 +356,6 @@
 						60,
 						60
 					],
-					"tooltip": "Ashe launches a crystal arrow of ice that <status>Stuns</status> the first champion hit and deals <magicDamage>@RMainDamage@ magic damage</magicDamage>. The <status>Stun</status> duration increases with distance travelled, up to @MaxStunDuration@ seconds. Surrounding enemies are <status>Slowed</status> by <spellName>Frost Shot</spellName>.",
 					"dataValues": {
 						"RBaseDamage": [
 							0,
@@ -509,5 +509,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

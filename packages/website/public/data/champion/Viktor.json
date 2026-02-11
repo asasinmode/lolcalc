@@ -34,6 +34,7 @@
 				{
 					"name": "Siphon Power",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_q1.viktorvgu.png",
+					"tooltip": "Viktor blasts an enemy, dealing <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and granting Viktor <shield>@ShieldLevelScaling@ Shield</shield> for @BuffDuration@ seconds.<br><br>Viktor's next Attack within 4 seconds deals <magicDamage>@AttackTotalDMG@ magic damage</magicDamage>.<br><br><keywordMajor>Upgraded:</keywordMajor> Grants <shield>@TotalAugmentedShieldValue@ Shield</shield> and Viktor additionally gains <speed>@AugmentMoveSpeedBonus@% Move Speed</speed> for @BuffDuration@ seconds.",
 					"mana": [
 						45,
 						50,
@@ -51,7 +52,6 @@
 						5,
 						5
 					],
-					"tooltip": "Viktor blasts an enemy, dealing <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and granting Viktor <shield>@ShieldLevelScaling@ Shield</shield> for @BuffDuration@ seconds.<br><br>Viktor's next Attack within 4 seconds deals <magicDamage>@AttackTotalDMG@ magic damage</magicDamage>.<br><br><keywordMajor>Upgraded:</keywordMajor> Grants <shield>@TotalAugmentedShieldValue@ Shield</shield> and Viktor additionally gains <speed>@AugmentMoveSpeedBonus@% Move Speed</speed> for @BuffDuration@ seconds.",
 					"dataValues": {
 						"MissileDamage": [
 							45,
@@ -233,6 +233,7 @@
 				{
 					"name": "Gravity Field",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_w1.viktorvgu.png",
+					"tooltip": "Viktor deploys a gravitational imprisonment device for @FieldDuration@ seconds, <status>Slowing</status> enemies inside it by @SlowPotency*-1@%. Enemies who remain within its radius for 1.25 seconds are <status>Stunned</status> for @StunDuration@ seconds.<br><br><keywordMajor>Upgraded Passive:</keywordMajor> Viktor's Abilities <status>Slow</status> by @AugmentSlow@% for 1 second.<br><br><br>",
 					"mana": [
 						65,
 						65,
@@ -250,7 +251,6 @@
 						13,
 						13
 					],
-					"tooltip": "Viktor deploys a gravitational imprisonment device for @FieldDuration@ seconds, <status>Slowing</status> enemies inside it by @SlowPotency*-1@%. Enemies who remain within its radius for 1.25 seconds are <status>Stunned</status> for @StunDuration@ seconds.<br><br><keywordMajor>Upgraded Passive:</keywordMajor> Viktor's Abilities <status>Slow</status> by @AugmentSlow@% for 1 second.<br><br><br>",
 					"dataValues": {
 						"SlowPotency": [
 							-30,
@@ -335,6 +335,7 @@
 				{
 					"name": "Hextech Ray",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_e1.viktorvgu.png",
+					"tooltip": "Viktor fires a hextech ray in a chosen direction, dealing <magicDamage>@LaserDamage@ magic damage</magicDamage> to any enemies it hits.<br><br><keywordMajor>Upgraded:</keywordMajor> An aftershock follows Hextech Ray, dealing <magicDamage>@AftershockDamage@ magic damage</magicDamage>.<br><br><br>",
 					"mana": [
 						60,
 						70,
@@ -352,7 +353,6 @@
 						8,
 						8
 					],
-					"tooltip": "Viktor fires a hextech ray in a chosen direction, dealing <magicDamage>@LaserDamage@ magic damage</magicDamage> to any enemies it hits.<br><br><keywordMajor>Upgraded:</keywordMajor> An aftershock follows Hextech Ray, dealing <magicDamage>@AftershockDamage@ magic damage</magicDamage>.<br><br><br>",
 					"dataValues": {
 						"LaserRange": [
 							700,
@@ -498,6 +498,7 @@
 				{
 					"name": "Arcane Storm",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_r1.viktorvgu.png",
+					"tooltip": "Viktor conjures an Arcane Storm in an area for @StormDuration@ seconds, which instantly deals <magicDamage>@InitialBurstDamage@ magic damage</magicDamage> followed by <magicDamage>@SubsequentBurstDamage@ magic damage</magicDamage> per second to surrounding enemies. The storm automatically follows champions it has recently damaged.<br><br><recast>Recast:</recast> Viktor can manually move the storm.<br><br><keywordMajor>Upgraded:</keywordMajor> The storm moves @AugmentBoost*100@% faster. If a champion that the storm has damaged dies, the storm increases its size and its duration by @Tooltip_DurationExtension@ seconds (up to @MaxGrowths@ times).<br><br>",
 					"mana": [
 						100,
 						100,
@@ -515,7 +516,6 @@
 						0,
 						0
 					],
-					"tooltip": "Viktor conjures an Arcane Storm in an area for @StormDuration@ seconds, which instantly deals <magicDamage>@InitialBurstDamage@ magic damage</magicDamage> followed by <magicDamage>@SubsequentBurstDamage@ magic damage</magicDamage> per second to surrounding enemies. The storm automatically follows champions it has recently damaged.<br><br><recast>Recast:</recast> Viktor can manually move the storm.<br><br><keywordMajor>Upgraded:</keywordMajor> The storm moves @AugmentBoost*100@% faster. If a champion that the storm has damaged dies, the storm increases its size and its duration by @Tooltip_DurationExtension@ seconds (up to @MaxGrowths@ times).<br><br>",
 					"dataValues": {
 						"InitialBurstBaseDamage": [
 							100,
@@ -768,5 +768,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

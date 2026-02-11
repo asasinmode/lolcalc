@@ -34,6 +34,7 @@
 				{
 					"name": "Thundering Smash",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_q.png",
+					"tooltip": "Volibear gains <speed>@MinSpeedCalc@ Move Speed</speed>, doubled to <speed>@MaxSpeedCalc@</speed> towards enemy champions for the next @Duration@ seconds. While active, Volibear's next Attack deals <physicalDamage>@CalculatedDamage@ physical damage</physicalDamage> and <status>Stuns</status> the target for @StunDuration@ second.<br><br>Volibear becomes enraged if an enemy <status>Immobilizes</status> him before he <status>Stuns</status> a target, ending the Ability early but refreshing its Cooldown.",
 					"mana": [
 						50,
 						50,
@@ -51,7 +52,6 @@
 						10,
 						10
 					],
-					"tooltip": "Volibear gains <speed>@MinSpeedCalc@ Move Speed</speed>, doubled to <speed>@MaxSpeedCalc@</speed> towards enemy champions for the next @Duration@ seconds. While active, Volibear's next Attack deals <physicalDamage>@CalculatedDamage@ physical damage</physicalDamage> and <status>Stuns</status> the target for @StunDuration@ second.<br><br>Volibear becomes enraged if an enemy <status>Immobilizes</status> him before he <status>Stuns</status> a target, ending the Ability early but refreshing its Cooldown.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -192,6 +192,7 @@
 				{
 					"name": "Frenzied Maul",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_w.png",
+					"tooltip": "Volibear mauls an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them for @MarkDuration@ seconds.<br><br>If this Ability is used on a marked target, its damage is increased to <physicalDamage>@EmpoweredDamage@</physicalDamage> and Volibear restores <healing>@BaseHeal@ plus @PercentMissingHealthHealingRatio@ missing Health</healing>.",
 					"mana": [
 						30,
 						35,
@@ -209,7 +210,6 @@
 						5,
 						5
 					],
-					"tooltip": "Volibear mauls an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them for @MarkDuration@ seconds.<br><br>If this Ability is used on a marked target, its damage is increased to <physicalDamage>@EmpoweredDamage@</physicalDamage> and Volibear restores <healing>@BaseHeal@ plus @PercentMissingHealthHealingRatio@ missing Health</healing>.",
 					"dataValues": {
 						"BaseDamage": [
 							-20,
@@ -339,6 +339,7 @@
 				{
 					"name": "Sky Splitter",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_e.png",
+					"tooltip": "Volibear summons a thundercloud that fires a lightning bolt, dealing <magicDamage>@TotalDamageTooltip@ plus @PercentDamage*100@% max Health magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If Volibear is inside the blast zone, he gains a <shield>@ShieldAPRatioTooltip@ plus @ShieldAmount*100@% max Health Shield</shield> for @ShieldDuration@ seconds.",
 					"mana": [
 						60,
 						60,
@@ -356,7 +357,6 @@
 						16,
 						16
 					],
-					"tooltip": "Volibear summons a thundercloud that fires a lightning bolt, dealing <magicDamage>@TotalDamageTooltip@ plus @PercentDamage*100@% max Health magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If Volibear is inside the blast zone, he gains a <shield>@ShieldAPRatioTooltip@ plus @ShieldAmount*100@% max Health Shield</shield> for @ShieldDuration@ seconds.",
 					"dataValues": {
 						"SlowAmount": [
 							0.4,
@@ -519,6 +519,7 @@
 				{
 					"name": "Stormbringer",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_r.png",
+					"tooltip": "Volibear transforms and leaps, gaining <healing>@HealthAmount@ Health</healing> and @BonusAttackRange@ Attack Range for the next @TransformDuration@ seconds.<br><br>Upon landing, Volibear cracks the earth, <status>Disabling</status> nearby towers for @TowerDisableDuration@ seconds and dealing <physicalDamage>@TowerDamageTooltip@ physical damage to them</physicalDamage>. Nearby enemies are <status>Slowed</status> by @SlowAmount*100@%, decaying over 1 second. Enemies directly underneath Volibear suffer <physicalDamage>@SweetSpotDamageTooltip@ physical damage</physicalDamage>.",
 					"mana": [
 						100,
 						100,
@@ -536,7 +537,6 @@
 						110,
 						110
 					],
-					"tooltip": "Volibear transforms and leaps, gaining <healing>@HealthAmount@ Health</healing> and @BonusAttackRange@ Attack Range for the next @TransformDuration@ seconds.<br><br>Upon landing, Volibear cracks the earth, <status>Disabling</status> nearby towers for @TowerDisableDuration@ seconds and dealing <physicalDamage>@TowerDamageTooltip@ physical damage to them</physicalDamage>. Nearby enemies are <status>Slowed</status> by @SlowAmount*100@%, decaying over 1 second. Enemies directly underneath Volibear suffer <physicalDamage>@SweetSpotDamageTooltip@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"SweetSpotDamage": [
 							100,
@@ -877,5 +877,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

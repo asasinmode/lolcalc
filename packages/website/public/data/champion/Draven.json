@@ -34,6 +34,7 @@
 				{
 					"name": "Spinning Axe",
 					"image": "assets/characters/draven/hud/icons2d/draven_spinningaxe.png",
+					"tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once.",
 					"mana": [
 						45,
 						45,
@@ -51,7 +52,6 @@
 						8,
 						8
 					],
-					"tooltip": "Draven readies a <keywordMajor>Spinning Axe</keywordMajor>, causing his next Attack to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and ricochet into the air. If Draven catches it, he readies another <keywordMajor>Spinning Axe</keywordMajor>.<br><br>Draven can hold two <keywordMajor>Spinning Axes</keywordMajor> at once.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -128,6 +128,7 @@
 				{
 					"name": "Blood Rush",
 					"image": "assets/characters/draven/hud/icons2d/draven_bloodrage.png",
+					"tooltip": "Draven becomes Ghosted, gains <speed>@Effect2Amount@% Move Speed</speed> decaying over @Effect3Amount@ seconds and <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's Cooldown is refreshed.",
 					"mana": [
 						40,
 						35,
@@ -145,7 +146,6 @@
 						12,
 						12
 					],
-					"tooltip": "Draven becomes Ghosted, gains <speed>@Effect2Amount@% Move Speed</speed> decaying over @Effect3Amount@ seconds and <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When Draven catches a <keywordMajor>Spinning Axe</keywordMajor>, this Ability's Cooldown is refreshed.",
 					"dataValues": {
 						"AttackSpeed": [
 							0.15,
@@ -241,6 +241,7 @@
 				{
 					"name": "Stand Aside",
 					"image": "assets/characters/draven/hud/icons2d/draven_twinaxe.png",
+					"tooltip": "Draven chucks a sideways axe that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>, <status>Knocks Back</status>, and <status>Slows</status> by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"mana": [
 						70,
 						70,
@@ -258,7 +259,6 @@
 						14,
 						14
 					],
-					"tooltip": "Draven chucks a sideways axe that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>, <status>Knocks Back</status>, and <status>Slows</status> by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							40,
@@ -335,6 +335,7 @@
 				{
 					"name": "Whirling Death",
 					"image": "assets/characters/draven/hud/icons2d/draven_whirlingdeath.png",
+					"tooltip": "Draven hurls two massive axes that deal <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal @RDamageReductionPerHit*100@% less damage for each enemy hit, down to a minimum of @RMinDamagePercent@%.<br><br>If <keywordMajor>{{ Spell_DravenRCast_Name }}</keywordMajor> would leave an enemy champion with less health than @RPassiveStacksCoefficient*100@% of Draven's current <keywordMajor>{{Spell_DravenPassive_Name}}</keywordMajor> stacks (@RPassiveTrueDamage@), he will execute them.",
 					"mana": [
 						100,
 						100,
@@ -352,7 +353,6 @@
 						0,
 						0
 					],
-					"tooltip": "Draven hurls two massive axes that deal <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage>. Upon hitting a champion or <recast>Recasting</recast>, they reverse direction and return to Draven. The axes deal @RDamageReductionPerHit*100@% less damage for each enemy hit, down to a minimum of @RMinDamagePercent@%.<br><br>If <keywordMajor>{{ Spell_DravenRCast_Name }}</keywordMajor> would leave an enemy champion with less health than @RPassiveStacksCoefficient*100@% of Draven's current <keywordMajor>{{Spell_DravenPassive_Name}}</keywordMajor> stacks (@RPassiveTrueDamage@), he will execute them.",
 					"dataValues": {
 						"RBaseDamage": [
 							100,
@@ -531,5 +531,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

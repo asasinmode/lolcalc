@@ -34,6 +34,7 @@
 				{
 					"name": "Aqua Prison",
 					"image": "assets/characters/nami/hud/icons2d/namiq.png",
+					"tooltip": "Nami hurls a bubble, <status>Stunning</status> for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage>.",
 					"mana": [
 						60,
 						60,
@@ -51,7 +52,6 @@
 						8,
 						8
 					],
-					"tooltip": "Nami hurls a bubble, <status>Stunning</status> for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -117,6 +117,7 @@
 				{
 					"name": "Ebb and Flow",
 					"image": "assets/characters/nami/hud/icons2d/namiw.png",
+					"tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to @MaxTargets@ targets.<li>Restores <healing>@TotalHeal@ Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.<br>The damage and healing value is modified by @BounceScaling@ each bounce. ",
 					"mana": [
 						70,
 						75,
@@ -125,7 +126,6 @@
 						90,
 						90
 					],
-					"tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to @MaxTargets@ targets.<li>Restores <healing>@TotalHeal@ Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.<br>The damage and healing value is modified by @BounceScaling@ each bounce. ",
 					"dataValues": {
 						"BaseDamage": [
 							25,
@@ -245,6 +245,7 @@
 				{
 					"name": "Tidecaller's Blessing",
 					"image": "assets/characters/nami/hud/icons2d/namie.png",
+					"tooltip": "Nami empowers an allied champion's next @HitCount@ Attacks and Abilities for @BuffDuration@ seconds, causing them to <status>Slow</status> their targets by @TotalSlow@ for @SlowDuration@s and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"mana": [
 						55,
 						60,
@@ -262,7 +263,6 @@
 						11,
 						11
 					],
-					"tooltip": "Nami empowers an allied champion's next @HitCount@ Attacks and Abilities for @BuffDuration@ seconds, causing them to <status>Slow</status> their targets by @TotalSlow@ for @SlowDuration@s and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"dataValues": {
 						"BaseDamage": [
 							10,
@@ -427,6 +427,7 @@
 				{
 					"name": "Tidal Wave",
 					"image": "assets/characters/nami/hud/icons2d/namir.png",
+					"tooltip": "Nami summons a tidal wave, <status>Knocking Up</status> for 0.5 seconds, <status>Slowing</status> by @Effect4Amount@%, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The duration of the <status>Slow</status> increases based on distance the wave traveled, up to @Effect5Amount@ seconds.<br><br>Allies hit by the wave gain double the effect of <spellName>Surging Tides</spellName>.",
 					"mana": [
 						100,
 						100,
@@ -444,7 +445,6 @@
 						10,
 						10
 					],
-					"tooltip": "Nami summons a tidal wave, <status>Knocking Up</status> for 0.5 seconds, <status>Slowing</status> by @Effect4Amount@%, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The duration of the <status>Slow</status> increases based on distance the wave traveled, up to @Effect5Amount@ seconds.<br><br>Allies hit by the wave gain double the effect of <spellName>Surging Tides</spellName>.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -586,5 +586,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

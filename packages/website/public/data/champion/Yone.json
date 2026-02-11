@@ -34,6 +34,7 @@
 				{
 					"name": "Mortal Steel",
 					"image": "assets/characters/yone/hud/icons2d/yoneq.png",
+					"tooltip": "Yone thrusts forward, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>.<br><br>On hit, grants a stack for @BuffDuration@ seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for @Q3KnockupDuration@ seconds and deals <physicalDamage>@QDamage@ physical damage</physicalDamage>. ",
 					"cooldownTime": [
 						4,
 						4,
@@ -43,7 +44,6 @@
 						4,
 						4
 					],
-					"tooltip": "Yone thrusts forward, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>.<br><br>On hit, grants a stack for @BuffDuration@ seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for @Q3KnockupDuration@ seconds and deals <physicalDamage>@QDamage@ physical damage</physicalDamage>. ",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -222,6 +222,7 @@
 				{
 					"name": "Spirit Cleave",
 					"image": "assets/characters/yone/hud/icons2d/yonew.png",
+					"tooltip": "Yone cleaves forward, dealing <physicalDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health physical damage</physicalDamage> and <magicDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health magic damage</magicDamage>.<br><br>If Yone hits, he gains <shield>@WShield@ Shield</shield> for @ShieldDuration@ seconds. The amount of <shield>Shield</shield> increases for each champion struck. ",
 					"cooldownTime": [
 						14,
 						14,
@@ -231,7 +232,6 @@
 						14,
 						14
 					],
-					"tooltip": "Yone cleaves forward, dealing <physicalDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health physical damage</physicalDamage> and <magicDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health magic damage</magicDamage>.<br><br>If Yone hits, he gains <shield>@WShield@ Shield</shield> for @ShieldDuration@ seconds. The amount of <shield>Shield</shield> increases for each champion struck. ",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -494,6 +494,7 @@
 				{
 					"name": "Soul Unbound",
 					"image": "assets/characters/yone/hud/icons2d/yonee.png",
+					"tooltip": "Yone enters a spirit form for @ReturnTimer@ seconds, leaving his body behind for the duration and gaining <speed>@StartingMS*100@%</speed> to <speed>@MovementSpeed*100@% ramping Move Speed</speed>. <br><br>When the spirit form ends, Yone snaps back to his body and repeats @DeathmarkPercent*100@% of all Attack and Ability damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br><br><recast>Recast: </recast>End spirit form early.",
 					"cooldownTime": [
 						22,
 						22,
@@ -503,7 +504,6 @@
 						10,
 						10
 					],
-					"tooltip": "Yone enters a spirit form for @ReturnTimer@ seconds, leaving his body behind for the duration and gaining <speed>@StartingMS*100@%</speed> to <speed>@MovementSpeed*100@% ramping Move Speed</speed>. <br><br>When the spirit form ends, Yone snaps back to his body and repeats @DeathmarkPercent*100@% of all Attack and Ability damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br><br><recast>Recast: </recast>End spirit form early.",
 					"dataValues": {
 						"ReturnTimer": [
 							5,
@@ -621,6 +621,7 @@
 				{
 					"name": "Fate Sealed",
 					"image": "assets/characters/yone/hud/icons2d/yoner.png",
+					"tooltip": "Yone strikes all enemies along a path for <physicalDamage>@TooltipDamage@ physical damage</physicalDamage> and <magicDamage>@TooltipDamage@ magic damage</magicDamage>, teleporting behind the last champion hit and <status>Knocking Up</status> victims towards Yone.",
 					"cooldownTime": [
 						120,
 						120,
@@ -630,7 +631,6 @@
 						80,
 						80
 					],
-					"tooltip": "Yone strikes all enemies along a path for <physicalDamage>@TooltipDamage@ physical damage</physicalDamage> and <magicDamage>@TooltipDamage@ magic damage</magicDamage>, teleporting behind the last champion hit and <status>Knocking Up</status> victims towards Yone.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -737,6 +737,8 @@
 				{
 					"name": "Way of the Hunter",
 					"image": "assets/characters/yone/hud/icons2d/yonepassive.png",
+					"tooltip": "<spellPassive>Steel and Spirit:</spellPassive> Yone uses two blades, causing every second Attack to deal <magicDamage>@MagicDamageSplit*100@% magic damage</magicDamage>.<br><br><spellPassive>Intent:</spellPassive> Yone's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YoneCritToAD*.01@ Bonus AD</physicalDamage> for every 1% Critical Strike Chance above 100%.",
+					"tooltipExtended": "{{Spell_YonePassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
 					"cooldownTime": [
 						0,
 						0,
@@ -746,8 +748,6 @@
 						0,
 						0
 					],
-					"tooltip": "<spellPassive>Steel and Spirit:</spellPassive> Yone uses two blades, causing every second Attack to deal <magicDamage>@MagicDamageSplit*100@% magic damage</magicDamage>.<br><br><spellPassive>Intent:</spellPassive> Yone's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YoneCritToAD*.01@ Bonus AD</physicalDamage> for every 1% Critical Strike Chance above 100%.",
-					"tooltipExtended": "{{Spell_YonePassive_Tooltip}}<br><br><rules>Intent is calculated after other Critical Strike Chance modifying effects.<br><onlyShowInGame>Current bonus: @f2@% Critical Strike Chance, <physicalDamage>@f3@ Bonus Attack Damage</physicalDamage>.</onlyShowInGame></rules>",
 					"dataValues": {
 						"MagicDamageSplit": [
 							0.5,
@@ -803,5 +803,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

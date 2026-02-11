@@ -34,6 +34,7 @@
 				{
 					"name": "Broken Wings",
 					"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
+					"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
 					"cooldownTime": [
 						13,
 						13,
@@ -43,7 +44,6 @@
 						13,
 						13
 					],
-					"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							15,
@@ -137,6 +137,7 @@
 				{
 					"name": "Ki Burst",
 					"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
+					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
 					"cooldownTime": [
 						12,
 						11,
@@ -146,7 +147,6 @@
 						7,
 						7
 					],
-					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
@@ -221,6 +221,7 @@
 				{
 					"name": "Valor",
 					"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
+					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
 					"cooldownTime": [
 						10,
 						10,
@@ -230,7 +231,6 @@
 						6,
 						6
 					],
-					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
 					"spellCalculations": {
 						"TotalShield": {
 							"mFormulaParts": [
@@ -304,6 +304,7 @@
 				{
 					"name": "Blade of the Exile",
 					"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
+					"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health.",
 					"cooldownTime": [
 						10,
 						120,
@@ -313,7 +314,6 @@
 						10,
 						10
 					],
-					"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health.",
 					"dataValues": {
 						"MinBase": [
 							50,
@@ -506,5 +506,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

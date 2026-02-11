@@ -34,6 +34,7 @@
 				{
 					"name": "Light Binding",
 					"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
+					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @Effect3Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
 					"mana": [
 						50,
 						50,
@@ -51,7 +52,6 @@
 						9,
 						9
 					],
-					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @Effect3Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
 					"dataValues": {
 						"BaseDamage": [
 							40,
@@ -126,6 +126,7 @@
 				{
 					"name": "Prismatic Barrier",
 					"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
+					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @Effect3Amount@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
 					"mana": [
 						60,
 						65,
@@ -143,7 +144,6 @@
 						10,
 						10
 					],
-					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @Effect3Amount@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
 					"dataValues": {
 						"BaseShieldAmount": [
 							25,
@@ -236,6 +236,7 @@
 				{
 					"name": "Lucent Singularity",
 					"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png",
+					"tooltip": "Lux creates a light zone that <status>Slows</status> by @Effect1Amount@% and reveals the area. After @Effect3Amount@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
 					"mana": [
 						70,
 						80,
@@ -253,7 +254,6 @@
 						8,
 						8
 					],
-					"tooltip": "Lux creates a light zone that <status>Slows</status> by @Effect1Amount@% and reveals the area. After @Effect3Amount@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
 					"dataValues": {
 						"VisionRadius": [
 							650,
@@ -366,6 +366,7 @@
 				{
 					"name": "Final Spark",
 					"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png",
+					"tooltip": "Lux fires a dazzling ray of light, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in a line.",
 					"mana": [
 						100,
 						100,
@@ -383,7 +384,6 @@
 						40,
 						30
 					],
-					"tooltip": "Lux fires a dazzling ray of light, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in a line.",
 					"dataValues": {
 						"Damage": [
 							200,
@@ -438,6 +438,7 @@
 				{
 					"name": "Illumination",
 					"image": "assets/characters/lux/hud/icons2d/luxilluminatingfraulein.png",
+					"tooltip": "Lux's damaging Abilities mark enemies for @DebuffDuration@ seconds. Lux's Attacks consume the mark, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><spellName>Final Spark</spellName> will consume marks on enemies it hits and refresh them.",
 					"cooldownTime": [
 						0,
 						0,
@@ -447,7 +448,6 @@
 						0,
 						0
 					],
-					"tooltip": "Lux's damaging Abilities mark enemies for @DebuffDuration@ seconds. Lux's Attacks consume the mark, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><spellName>Final Spark</spellName> will consume marks on enemies it hits and refresh them.",
 					"dataValues": {
 						"DebuffDuration": [
 							6,
@@ -519,5 +519,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

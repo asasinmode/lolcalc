@@ -34,6 +34,7 @@
 				{
 					"name": "Consume",
 					"image": "assets/characters/nunu/hud/icons2d/nunuq.png",
+					"tooltip": "Nunu asks Willump to take a bite of an enemy, dealing <trueDamage>@MonsterMinionDamage@ true damage</trueDamage> and restoring <healing>@MonsterHealing@ Health</healing> when used against a minion or jungle monster. Against a champion, it instead deals <magicDamage>@TotalChampionDamage@ magic damage</magicDamage> and restores <healing>@ChampionHealing@ Health</healing>.<br><br>The <healing>healing</healing> is increased by @LowHealthHealingScalar*100@% when Nunu and Willump are below @LowHealthThreshhold*100@% Health.",
 					"mana": [
 						60,
 						60,
@@ -51,7 +52,6 @@
 						9,
 						8
 					],
-					"tooltip": "Nunu asks Willump to take a bite of an enemy, dealing <trueDamage>@MonsterMinionDamage@ true damage</trueDamage> and restoring <healing>@MonsterHealing@ Health</healing> when used against a minion or jungle monster. Against a champion, it instead deals <magicDamage>@TotalChampionDamage@ magic damage</magicDamage> and restores <healing>@ChampionHealing@ Health</healing>.<br><br>The <healing>healing</healing> is increased by @LowHealthHealingScalar*100@% when Nunu and Willump are below @LowHealthThreshhold*100@% Health.",
 					"dataValues": {
 						"MonsterMinionDamage": [
 							200,
@@ -198,6 +198,7 @@
 				{
 					"name": "Biggest Snowball Ever!",
 					"image": "assets/characters/nunu/hud/icons2d/nunuw1.png",
+					"tooltip": "Nunu and Willump create a snowball that grows in size and speed as they roll it. They turn slower while rolling it, but can increase turning speed by holding the turn.<br><br>The snowball does between <magicDamage>@NoImpactSnowballDamage@</magicDamage> and <magicDamage>@MaximumSnowballDamage@ magic damage</magicDamage>, and <status>Knocks Up</status> for between @BaseKnockupDuration@ and @MaximumStunDuration@ seconds when it collides with a champion, large monster or wall. These values scale up with distance rolled.<br><br>Nunu and Willump can <recast>Recast</recast> to let the snowball go early.",
 					"mana": [
 						50,
 						55,
@@ -215,7 +216,6 @@
 						14,
 						14
 					],
-					"tooltip": "Nunu and Willump create a snowball that grows in size and speed as they roll it. They turn slower while rolling it, but can increase turning speed by holding the turn.<br><br>The snowball does between <magicDamage>@NoImpactSnowballDamage@</magicDamage> and <magicDamage>@MaximumSnowballDamage@ magic damage</magicDamage>, and <status>Knocks Up</status> for between @BaseKnockupDuration@ and @MaximumStunDuration@ seconds when it collides with a champion, large monster or wall. These values scale up with distance rolled.<br><br>Nunu and Willump can <recast>Recast</recast> to let the snowball go early.",
 					"dataValues": {
 						"MonsterCollisionRadiusScalar": [
 							1.25,
@@ -568,6 +568,7 @@
 				{
 					"name": "Snowball Barrage",
 					"image": "assets/characters/nunu/hud/icons2d/nunue.png",
+					"tooltip": "Nunu throws three snowballs, dealing <magicDamage>@TotalSnowballDamage@ magic damage</magicDamage> per snowball and <status>Slowing</status> enemies hit by all three by @SlowAmount*-100@% for @SlowDuration@ second. Nunu can <recast>Recast</recast> this up to twice more.<br><br>After @TotalSpellDuration@ seconds, Nunu <status>Roots</status> all nearby enemies that had been <status>Slowed</status> by the snowballs for @RootDuration@ seconds and deals an additional <magicDamage>@TotalRootDamage@ magic damage</magicDamage>.",
 					"mana": [
 						50,
 						55,
@@ -585,7 +586,6 @@
 						10,
 						10
 					],
-					"tooltip": "Nunu throws three snowballs, dealing <magicDamage>@TotalSnowballDamage@ magic damage</magicDamage> per snowball and <status>Slowing</status> enemies hit by all three by @SlowAmount*-100@% for @SlowDuration@ second. Nunu can <recast>Recast</recast> this up to twice more.<br><br>After @TotalSpellDuration@ seconds, Nunu <status>Roots</status> all nearby enemies that had been <status>Slowed</status> by the snowballs for @RootDuration@ seconds and deals an additional <magicDamage>@TotalRootDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							7.5,
@@ -706,6 +706,7 @@
 				{
 					"name": "Absolute Zero",
 					"image": "assets/characters/nunu/hud/icons2d/nunu_r.png",
+					"tooltip": "Nunu and Willump channel a powerful blizzard for up to @ChannelDuration@ seconds. Enemies inside are <status>Slowed</status> by @SlowStartAmount*-100@%, increasing to @MaxSlowAmount*-100@% over the duration. Nunu and Willump also gain <shield>@TotalShieldAmount@ Shield</shield> for the duration before decaying over @ShieldDecayDuration@ seconds afterwards.<br><br>When the blizzard ends, it detonates, dealing up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> based on channel time. Nunu and Willump can <recast>Recast</recast> to end the blizzard early.",
 					"mana": [
 						100,
 						100,
@@ -723,7 +724,6 @@
 						90,
 						90
 					],
-					"tooltip": "Nunu and Willump channel a powerful blizzard for up to @ChannelDuration@ seconds. Enemies inside are <status>Slowed</status> by @SlowStartAmount*-100@%, increasing to @MaxSlowAmount*-100@% over the duration. Nunu and Willump also gain <shield>@TotalShieldAmount@ Shield</shield> for the duration before decaying over @ShieldDecayDuration@ seconds afterwards.<br><br>When the blizzard ends, it detonates, dealing up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> based on channel time. Nunu and Willump can <recast>Recast</recast> to end the blizzard early.",
 					"dataValues": {
 						"BaseDamage": [
 							625,
@@ -856,6 +856,8 @@
 				{
 					"name": "Call of the Freljord",
 					"image": "assets/characters/nunu/hud/icons2d/nunupassive.png",
+					"tooltip": "When Nunu and Willump deal damage to champions, large jungle monsters, or structures, they and a nearby ally gain <attackSpeed>@ASIncrease*100@% Attack Speed</attackSpeed> and <speed>@MSIncrease*100@% Move Speed</speed> for 4 seconds.<br><br>Willump's Attacks deal an additional <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to other nearby enemies while he has this buff.",
+					"tooltipExtended": "{{Spell_NunuPassive_Tooltip}}<br><br><rules>The buff range is increased against champions and structures.<br>The duration stacks but the effect can only occur once every 10 seconds per target.<br>The buff attempts to target the champion who will get the most use from it.</rules>",
 					"mana": [
 						40,
 						40,
@@ -873,8 +875,6 @@
 						20,
 						20
 					],
-					"tooltip": "When Nunu and Willump deal damage to champions, large jungle monsters, or structures, they and a nearby ally gain <attackSpeed>@ASIncrease*100@% Attack Speed</attackSpeed> and <speed>@MSIncrease*100@% Move Speed</speed> for 4 seconds.<br><br>Willump's Attacks deal an additional <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to other nearby enemies while he has this buff.",
-					"tooltipExtended": "{{Spell_NunuPassive_Tooltip}}<br><br><rules>The buff range is increased against champions and structures.<br>The duration stacks but the effect can only occur once every 10 seconds per target.<br>The buff attempts to target the champion who will get the most use from it.</rules>",
 					"dataValues": {
 						"MonsterRadius": [
 							700,
@@ -946,5 +946,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

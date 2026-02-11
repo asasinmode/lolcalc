@@ -34,6 +34,7 @@
 				{
 					"name": "Twilight Assault",
 					"image": "assets/characters/shen/hud/icons2d/shen_q.png",
+					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @Effect4Amount@% while moving away from Shen for the next @Effect5Amount@ seconds.<br><br>Additionally, Shen's next @Effect3Amount@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@Effect9Amount@% Attack Speed</attackSpeed> for those Attacks.",
 					"mana": [
 						140,
 						130,
@@ -51,7 +52,6 @@
 						5,
 						5
 					],
-					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @Effect4Amount@% while moving away from Shen for the next @Effect5Amount@ seconds.<br><br>Additionally, Shen's next @Effect3Amount@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@Effect9Amount@% Attack Speed</attackSpeed> for those Attacks.",
 					"dataValues": {
 						"QBaseOnHitDamage": [
 							10,
@@ -257,6 +257,7 @@
 				{
 					"name": "Spirit's Refuge",
 					"image": "assets/characters/shen/hud/icons2d/shen_w.png",
+					"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @Effect1Amount@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @Effect2Amount@ seconds.",
 					"mana": [
 						40,
 						40,
@@ -274,7 +275,6 @@
 						10,
 						10
 					],
-					"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @Effect1Amount@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @Effect2Amount@ seconds.",
 					"effectAmount": {
 						"0": [
 							1.75,
@@ -305,6 +305,7 @@
 				{
 					"name": "Shadow Dash",
 					"image": "assets/characters/shen/hud/icons2d/shen_e.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with <spellName>Twilight Assault</spellName> or this Ability recovers <keywordMajor>@EnergyRefund@ Energy</keywordMajor>.<br><br><spellActive>Active:</spellActive> Shen dashes, <status>Taunting</status> champions and jungle monsters for @CCDuration@ seconds and dealing <physicalDamage>@TauntDamage@ physical damage</physicalDamage>.",
 					"mana": [
 						150,
 						150,
@@ -322,7 +323,6 @@
 						10,
 						10
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with <spellName>Twilight Assault</spellName> or this Ability recovers <keywordMajor>@EnergyRefund@ Energy</keywordMajor>.<br><br><spellActive>Active:</spellActive> Shen dashes, <status>Taunting</status> champions and jungle monsters for @CCDuration@ seconds and dealing <physicalDamage>@TauntDamage@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -441,6 +441,7 @@
 				{
 					"name": "Stand United",
 					"image": "assets/characters/shen/hud/icons2d/shen_r.png",
+					"tooltip": "Shen grants an allied champion anywhere on the map between <shield>@Shield@</shield> and <shield>@MaxShield@ Shield</shield> based on their missing Health for @ShieldDuration@ seconds (max Shield at 60% missing Health). After channeling for @ChannelDuration@ seconds, Shen teleports to his ally's location with his <keywordMajor>Spirit Blade</keywordMajor>.",
 					"cooldownTime": [
 						200,
 						200,
@@ -450,7 +451,6 @@
 						160,
 						160
 					],
-					"tooltip": "Shen grants an allied champion anywhere on the map between <shield>@Shield@</shield> and <shield>@MaxShield@ Shield</shield> based on their missing Health for @ShieldDuration@ seconds (max Shield at 60% missing Health). After channeling for @ChannelDuration@ seconds, Shen teleports to his ally's location with his <keywordMajor>Spirit Blade</keywordMajor>.",
 					"dataValues": {
 						"ArrivalPersonalSpace": [
 							175,
@@ -570,6 +570,7 @@
 				{
 					"name": "Ki Barrier",
 					"image": "assets/characters/shen/hud/icons2d/shen_passive.png",
+					"tooltip": "Shen gains <shield>@ShieldValue@ Shield</shield> for @ShieldDuration@ seconds after using an Ability. This effect has a @ShieldCooldown@ second Cooldown, reduced by @ShieldCooldownReduction@ seconds when one of Shen's Abilities successfully affects an ally or enemy.<br><br>Shen has a <keywordMajor>Spirit Blade</keywordMajor> that his other Abilities use.",
 					"cooldownTime": [
 						11,
 						11,
@@ -579,7 +580,6 @@
 						11,
 						11
 					],
-					"tooltip": "Shen gains <shield>@ShieldValue@ Shield</shield> for @ShieldDuration@ seconds after using an Ability. This effect has a @ShieldCooldown@ second Cooldown, reduced by @ShieldCooldownReduction@ seconds when one of Shen's Abilities successfully affects an ally or enemy.<br><br>Shen has a <keywordMajor>Spirit Blade</keywordMajor> that his other Abilities use.",
 					"dataValues": {
 						"ShieldDuration": [
 							2.5,
@@ -733,5 +733,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

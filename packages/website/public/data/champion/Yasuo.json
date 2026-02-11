@@ -34,6 +34,7 @@
 				{
 					"name": "Steel Tempest",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png",
+					"tooltip": "Yasuo thrusts, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If he hits, he gains a stack for @GatheringStormDuration@ seconds. While he has 2 stacks, his next use of this Ability fires a whirlwind from range, dealing the same damage and <status>Knocking Up</status> for @KnockUpDurationTOOLTIPONLY@ second.<br><br>If used while dashing, this Ability strikes in a circle rather than a stab.",
 					"cooldownTime": [
 						4,
 						4,
@@ -43,7 +44,6 @@
 						4,
 						4
 					],
-					"tooltip": "Yasuo thrusts, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If he hits, he gains a stack for @GatheringStormDuration@ seconds. While he has 2 stacks, his next use of this Ability fires a whirlwind from range, dealing the same damage and <status>Knocking Up</status> for @KnockUpDurationTOOLTIPONLY@ second.<br><br>If used while dashing, this Ability strikes in a circle rather than a stab.",
 					"dataValues": {
 						"BaseDamage": [
 							-5,
@@ -169,6 +169,7 @@
 				{
 					"name": "Wind Wall",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png",
+					"tooltip": "Yasuo creates a drifting wall of wind that blocks all enemy projectiles for 4 seconds.",
 					"cooldownTime": [
 						27,
 						25,
@@ -178,7 +179,6 @@
 						17,
 						15
 					],
-					"tooltip": "Yasuo creates a drifting wall of wind that blocks all enemy projectiles for 4 seconds.",
 					"dataValues": {
 						"WallLife": [
 							4,
@@ -283,6 +283,7 @@
 				{
 					"name": "Sweeping Blade",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png",
+					"tooltip": "Yasuo dashes through a target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Each use of this Ability grants <magicDamage>@BonusDamagePerStack@</magicDamage> bonus damage to subsequent uses for @StackDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>This Ability has a @Effect2Amount@ second per-target Cooldown.",
 					"cooldownTime": [
 						0.5,
 						0.5,
@@ -292,7 +293,6 @@
 						0.1,
 						0.1
 					],
-					"tooltip": "Yasuo dashes through a target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Each use of this Ability grants <magicDamage>@BonusDamagePerStack@</magicDamage> bonus damage to subsequent uses for @StackDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>This Ability has a @Effect2Amount@ second per-target Cooldown.",
 					"dataValues": {
 						"MaxStacks": [
 							4,
@@ -405,6 +405,7 @@
 				{
 					"name": "Last Breath",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png",
+					"tooltip": "Yasuo teleports to an <status>Airborne</status> enemy champion, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> and holding all nearby <status>Airborne</status> enemies up for an additional @RKnockupDuration@ second. Yasuo also gains maximum <keywordMajor>Flow</keywordMajor>, but loses all <spellName>{{Spell_YasuoQ1Wrapper_Name}}</spellName> stacks.<br><br>Afterwards, Yasuo's critical strikes ignore <scaleArmor>@RPercentArmorPen@% bonus Armor</scaleArmor> for @RBuffDuration@ seconds.",
 					"cooldownTime": [
 						105,
 						70,
@@ -414,7 +415,6 @@
 						30,
 						30
 					],
-					"tooltip": "Yasuo teleports to an <status>Airborne</status> enemy champion, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> and holding all nearby <status>Airborne</status> enemies up for an additional @RKnockupDuration@ second. Yasuo also gains maximum <keywordMajor>Flow</keywordMajor>, but loses all <spellName>{{Spell_YasuoQ1Wrapper_Name}}</spellName> stacks.<br><br>Afterwards, Yasuo's critical strikes ignore <scaleArmor>@RPercentArmorPen@% bonus Armor</scaleArmor> for @RBuffDuration@ seconds.",
 					"dataValues": {
 						"RBaseDamage": [
 							50,
@@ -581,5 +581,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

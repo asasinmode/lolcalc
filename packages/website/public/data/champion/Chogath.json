@@ -34,6 +34,7 @@
 				{
 					"name": "Rupture",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png",
+					"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"mana": [
 						50,
 						50,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							25,
@@ -135,6 +135,7 @@
 				{
 					"name": "Feral Scream",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png",
+					"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"mana": [
 						70,
 						75,
@@ -152,7 +153,6 @@
 						9,
 						9
 					],
-					"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -198,6 +198,7 @@
 				{
 					"name": "Vorpal Spikes",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png",
+					"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds.",
 					"mana": [
 						30,
 						30,
@@ -215,7 +216,6 @@
 						4,
 						4
 					],
-					"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -360,6 +360,7 @@
 				{
 					"name": "Feast",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png",
+					"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. ",
 					"mana": [
 						100,
 						100,
@@ -377,7 +378,6 @@
 						10,
 						70
 					],
-					"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. ",
 					"dataValues": {
 						"RBaseMonsterDamage": [
 							1200,
@@ -593,5 +593,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

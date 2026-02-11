@@ -34,6 +34,7 @@
 				{
 					"name": "Urchin Strike",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_q.png",
+					"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>.",
 					"mana": [
 						50,
 						50,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>.",
 					"spellCalculations": {
 						"QDamage": {
 							"mFormulaParts": [
@@ -151,6 +151,7 @@
 				{
 					"name": "Seastone Trident",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_w.png",
+					"tooltip": "<spellPassive>Passive</spellPassive>: Fizz's Attacks cause his enemies to bleed, dealing <magicDamage>@DoTDamage@ magic damage</magicDamage> over @BleedDuration@ seconds. <br><br><spellActive>Active</spellActive>: Fizz's next Attack deals an additional <magicDamage>@ActiveDamage@ magic damage</magicDamage>. If this Attack kills its target, Fizz refunds <scaleMana>@OnKillManaRefund@ Mana</scaleMana> and reduces the cooldown of this Ability to @OnKillNewCooldown@ second. If it does not kill, Fizz's Attacks deal an additional <magicDamage>@OnHitBuffDamage@ magic damage</magicDamage> for @OnHitBuffDuration@ seconds.",
 					"mana": [
 						30,
 						40,
@@ -168,7 +169,6 @@
 						3,
 						3
 					],
-					"tooltip": "<spellPassive>Passive</spellPassive>: Fizz's Attacks cause his enemies to bleed, dealing <magicDamage>@DoTDamage@ magic damage</magicDamage> over @BleedDuration@ seconds. <br><br><spellActive>Active</spellActive>: Fizz's next Attack deals an additional <magicDamage>@ActiveDamage@ magic damage</magicDamage>. If this Attack kills its target, Fizz refunds <scaleMana>@OnKillManaRefund@ Mana</scaleMana> and reduces the cooldown of this Ability to @OnKillNewCooldown@ second. If it does not kill, Fizz's Attacks deal an additional <magicDamage>@OnHitBuffDamage@ magic damage</magicDamage> for @OnHitBuffDuration@ seconds.",
 					"dataValues": {
 						"DoTBaseDamage": [
 							15,
@@ -354,6 +354,7 @@
 				{
 					"name": "Playful / Trickster",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_e1.png",
+					"tooltip": "Fizz hops onto his trident, becoming Untargetable for 0.75 seconds, after which he deals <magicDamage>@EDamage@ magic damage</magicDamage> to nearby enemies and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>Fizz can <recast>Recast</recast> this Ability while Untargetable to dash again, which ends the effect early, deals damage in a smaller area, and doesn't <status>Slow</status>.",
 					"mana": [
 						75,
 						80,
@@ -371,7 +372,6 @@
 						8,
 						6
 					],
-					"tooltip": "Fizz hops onto his trident, becoming Untargetable for 0.75 seconds, after which he deals <magicDamage>@EDamage@ magic damage</magicDamage> to nearby enemies and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>Fizz can <recast>Recast</recast> this Ability while Untargetable to dash again, which ends the effect early, deals damage in a smaller area, and doesn't <status>Slow</status>.",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -443,6 +443,7 @@
 				{
 					"name": "Chum the Waters",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_r.png",
+					"tooltip": "Fizz launches a fish that attaches to the first champion hit. The victim is afflicted with <keywordStealth>True Sight</keywordStealth> and <status>Slowed</status> by between 40% to 80% based on how far the fish travelled before attaching. <br><br>After @DetonationTime@ seconds a shark erupts on the target, <status>Knocking Up</status> the target with the fish for 1 second, <status>Knocking Back</status> everything else, and dealing between <magicDamage>@SmallSharkDamage@ to @BigSharkDamage@ magic damage</magicDamage> based on how far the fish travelled before attaching.",
 					"mana": [
 						100,
 						100,
@@ -460,7 +461,6 @@
 						80,
 						80
 					],
-					"tooltip": "Fizz launches a fish that attaches to the first champion hit. The victim is afflicted with <keywordStealth>True Sight</keywordStealth> and <status>Slowed</status> by between 40% to 80% based on how far the fish travelled before attaching. <br><br>After @DetonationTime@ seconds a shark erupts on the target, <status>Knocking Up</status> the target with the fish for 1 second, <status>Knocking Back</status> everything else, and dealing between <magicDamage>@SmallSharkDamage@ to @BigSharkDamage@ magic damage</magicDamage> based on how far the fish travelled before attaching.",
 					"dataValues": {
 						"SmallDamage": [
 							60,
@@ -607,6 +607,8 @@
 				{
 					"name": "Nimble Fighter",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_p.png",
+					"tooltip": "Fizz is Ghosted and takes @DamageReductionCalc@ reduced damage from all sources.",
+					"tooltipExtended": "{{Spell_FizzPassive_Tooltip}}<br><br><rules>Ghosted units ignore collision with other units.<br>Damage reduction modified to @MonsterDamageReductionCalc@ against jungle monsters.<br>Damage cannot be reduced by more than @DamageReductionMax*100@%.</rules>",
 					"mana": [
 						40,
 						40,
@@ -615,8 +617,6 @@
 						40,
 						40
 					],
-					"tooltip": "Fizz is Ghosted and takes @DamageReductionCalc@ reduced damage from all sources.",
-					"tooltipExtended": "{{Spell_FizzPassive_Tooltip}}<br><br><rules>Ghosted units ignore collision with other units.<br>Damage reduction modified to @MonsterDamageReductionCalc@ against jungle monsters.<br>Damage cannot be reduced by more than @DamageReductionMax*100@%.</rules>",
 					"dataValues": {
 						"DamageReduction": [
 							4,
@@ -741,5 +741,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

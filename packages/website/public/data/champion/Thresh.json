@@ -34,6 +34,7 @@
 				{
 					"name": "Death Sentence",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
+					"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds.",
 					"mana": [
 						70,
 						70,
@@ -51,7 +52,6 @@
 						9,
 						9
 					],
-					"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -162,6 +162,7 @@
 				{
 					"name": "Dark Passage",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
+					"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it.",
 					"mana": [
 						50,
 						55,
@@ -179,7 +180,6 @@
 						17,
 						16
 					],
-					"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it.",
 					"dataValues": {
 						"ShieldPerSoul": [
 							2,
@@ -282,6 +282,7 @@
 				{
 					"name": "Flay",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [
 						60,
 						65,
@@ -299,7 +300,6 @@
 						10,
 						9.25
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"PassiveADRatioTT": [
 							0.6,
@@ -436,6 +436,7 @@
 				{
 					"name": "The Box",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
+					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
 					"mana": [
 						100,
 						100,
@@ -453,7 +454,6 @@
 						80,
 						80
 					],
-					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
 					"dataValues": {
 						"ThreshRCageRadius": [
 							400,
@@ -594,5 +594,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

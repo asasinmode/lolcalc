@@ -34,6 +34,7 @@
 				{
 					"name": "Threaded Volley",
 					"image": "assets/characters/taliyah/hud/icons2d/taliyah_q.png",
+					"tooltip": "Taliyah hurls 5 rocks, each dealing <magicDamage>@RockDamage@ magic damage</magicDamage> in an area around the first enemy hit while creating Worked Ground at that area. Subsequent hits against the same enemy deal @ExtraMissileReducedDamagePercent@% less damage.<br><br>Casts on worked ground cost @Effect7Amount@ Mana and have @WorkedGroundCDR*100@% less Cooldown, consume the Worked Ground, and hurl a boulder that <status>Slows</status> enemies it hits by @SlowPercent*100@% for @SlowDuration@ seconds, dealing <magicDamage>@BigRockDamage@ magic damage</magicDamage> to the primary target. Monsters hit by the boulder are <status>Stunned</status> for @MonsterStunDuration@ seconds.",
 					"mana": [
 						55,
 						60,
@@ -51,7 +52,6 @@
 						3,
 						2
 					],
-					"tooltip": "Taliyah hurls 5 rocks, each dealing <magicDamage>@RockDamage@ magic damage</magicDamage> in an area around the first enemy hit while creating Worked Ground at that area. Subsequent hits against the same enemy deal @ExtraMissileReducedDamagePercent@% less damage.<br><br>Casts on worked ground cost @Effect7Amount@ Mana and have @WorkedGroundCDR*100@% less Cooldown, consume the Worked Ground, and hurl a boulder that <status>Slows</status> enemies it hits by @SlowPercent*100@% for @SlowDuration@ seconds, dealing <magicDamage>@BigRockDamage@ magic damage</magicDamage> to the primary target. Monsters hit by the boulder are <status>Stunned</status> for @MonsterStunDuration@ seconds.",
 					"dataValues": {
 						"WorkedGroundCDR": [
 							0.5,
@@ -243,6 +243,7 @@
 				{
 					"name": "Seismic Shove",
 					"image": "assets/characters/taliyah/hud/icons2d/taliyah_w.png",
+					"tooltip": "Taliyah quakes the earth, <status>Knocking</status> enemies in an area in the chosen direction.",
 					"mana": [
 						40,
 						30,
@@ -260,7 +261,6 @@
 						8,
 						8
 					],
-					"tooltip": "Taliyah quakes the earth, <status>Knocking</status> enemies in an area in the chosen direction.",
 					"effectAmount": {
 						"1": [
 							0.5,
@@ -291,6 +291,7 @@
 				{
 					"name": "Unraveled Earth",
 					"image": "assets/characters/taliyah/hud/icons2d/taliyah_e.png",
+					"tooltip": "Taliyah scatters loose stones in an area, <status>Slowing</status> enemies hit by @SlowPercent*100@% and dealing <magicDamage>@ScatterDamage@ magic damage</magicDamage>. The stones detonate when enemies dash or are <status>Knocked</status> through them, <status>Stunning</status> for the remaining movement duration + @StunDuration@ seconds and dealing <magicDamage>@DetonationDamage@ magic damage</magicDamage>.",
 					"mana": [
 						90,
 						90,
@@ -308,7 +309,6 @@
 						14,
 						14
 					],
-					"tooltip": "Taliyah scatters loose stones in an area, <status>Slowing</status> enemies hit by @SlowPercent*100@% and dealing <magicDamage>@ScatterDamage@ magic damage</magicDamage>. The stones detonate when enemies dash or are <status>Knocked</status> through them, <status>Stunning</status> for the remaining movement duration + @StunDuration@ seconds and dealing <magicDamage>@DetonationDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							15,
@@ -455,6 +455,7 @@
 				{
 					"name": "Weaver's Wall",
 					"image": "assets/characters/taliyah/hud/icons2d/taliyah_r.png",
+					"tooltip": "Taliyah creates a massive earthen wall for @Effect1Amount@ seconds. If she immediately <recast>Recasts</recast>, she will ride along the wall as it unravels. Moving or being immobilized will end the ride.<br><br>This ability cannot be cast if Taliyah has taken damage from Champions or structures within the last @DamageLockoutTime@ seconds.",
 					"mana": [
 						100,
 						100,
@@ -472,7 +473,6 @@
 						0,
 						140
 					],
-					"tooltip": "Taliyah creates a massive earthen wall for @Effect1Amount@ seconds. If she immediately <recast>Recasts</recast>, she will ride along the wall as it unravels. Moving or being immobilized will end the ride.<br><br>This ability cannot be cast if Taliyah has taken damage from Champions or structures within the last @DamageLockoutTime@ seconds.",
 					"dataValues": {
 						"DamageLockoutTime": [
 							3,
@@ -653,5 +653,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

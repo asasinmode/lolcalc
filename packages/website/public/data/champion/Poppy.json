@@ -34,6 +34,7 @@
 				{
 					"name": "Hammer Shock",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_q.png",
+					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Effect3Amount@% and erupts after @Effect4Amount@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
 					"mana": [
 						35,
 						40,
@@ -51,7 +52,6 @@
 						4,
 						3
 					],
-					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Effect3Amount@% and erupts after @Effect4Amount@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
 					"dataValues": {
 						"HealthDamagePercent": [
 							9,
@@ -154,6 +154,7 @@
 				{
 					"name": "Steadfast Presence",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Effect2Amount@% Move Speed</speed> and projects a field around her for @Effect1Amount@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
 					"mana": [
 						50,
 						50,
@@ -171,7 +172,6 @@
 						12,
 						12
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Effect2Amount@% Move Speed</speed> and projects a field around her for @Effect1Amount@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"GroundingDuration": [
 							2,
@@ -299,6 +299,7 @@
 				{
 					"name": "Heroic Charge",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_e.png",
+					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @Effect3Amount@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
 					"mana": [
 						70,
 						70,
@@ -316,7 +317,6 @@
 						10,
 						10
 					],
-					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @Effect3Amount@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
 					"spellCalculations": {
 						"TackleDamage": {
 							"tooltipOnly": true,
@@ -391,6 +391,7 @@
 				{
 					"name": "Keeper's Verdict",
 					"image": "assets/characters/poppy/hud/icons2d/poppy_r.png",
+					"tooltip": "<charge>Begin Casting:</charge> Poppy begins charging her hammer for up to @ChannelMaxDuration@ seconds, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Poppy smashes the ground, creating a shockwave that deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first champion hit and surrounding enemies, <status>Knocks</status> them <status>Back</status> towards their Nexus, and makes them Untargetable while they fly. The range and <status>Knock Back</status> distance increase with charge duration.<br><br>An uncharged swing deals <physicalDamage>@HalfDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> for @KnockupDurationSnap@ seconds.",
 					"mana": [
 						100,
 						100,
@@ -408,7 +409,6 @@
 						10,
 						10
 					],
-					"tooltip": "<charge>Begin Casting:</charge> Poppy begins charging her hammer for up to @ChannelMaxDuration@ seconds, <status>Slowing</status> herself by @SelfSlow@%.<br><br><release>Release:</release> Poppy smashes the ground, creating a shockwave that deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first champion hit and surrounding enemies, <status>Knocks</status> them <status>Back</status> towards their Nexus, and makes them Untargetable while they fly. The range and <status>Knock Back</status> distance increase with charge duration.<br><br>An uncharged swing deals <physicalDamage>@HalfDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> for @KnockupDurationSnap@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							200,
@@ -613,5 +613,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

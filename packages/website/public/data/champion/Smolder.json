@@ -34,6 +34,7 @@
 				{
 					"name": "Super Scorcher Breath",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_q1.png",
+					"tooltip": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds <scaleMana>@ManaRestore@ Mana</scaleMana>, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.",
 					"mana": [
 						25,
 						25,
@@ -51,7 +52,6 @@
 						3.5,
 						3.5
 					],
-					"tooltip": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds <scaleMana>@ManaRestore@ Mana</scaleMana>, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -330,6 +330,7 @@
 				{
 					"name": "Achooo!",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_w.png",
+					"tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>.",
 					"mana": [
 						50,
 						55,
@@ -347,7 +348,6 @@
 						10,
 						10
 					],
-					"tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -475,6 +475,7 @@
 				{
 					"name": "Flap, Flap, Flap",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_e.png",
+					"tooltip": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit.",
 					"mana": [
 						65,
 						65,
@@ -492,7 +493,6 @@
 						16,
 						16
 					],
-					"tooltip": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit.",
 					"dataValues": {
 						"Duration": [
 							1.25,
@@ -598,6 +598,7 @@
 				{
 					"name": "MMOOOMMMM!",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_r.png",
+					"tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.",
 					"mana": [
 						100,
 						100,
@@ -615,7 +616,6 @@
 						100,
 						100
 					],
-					"tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.",
 					"dataValues": {
 						"BaseDamage": [
 							100,
@@ -816,6 +816,8 @@
 				{
 					"name": "Dragon Practice",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_passive.png",
+					"tooltip": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants a stack of <spellName>{{Spell_SmolderP_Name}}</spellName>, which improves Smolder's basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ magic damage</magicDamage> and gain new effects at @spell.SmolderQ:StackTier1@, @spell.SmolderQ:StackTier2@, and @spell.SmolderQ:StackTier3@ stacks.<li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.<li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage> and gain an extra bolt every @EStacksPerAttackTooltip@ stacks.<br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules>",
+					"tooltipExtended": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants Smolder a stack of <spellName>Dragon Practice</spellName>. Stacks increase the damage of Smolders basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ = (</magicDamage><spellName>@TooltipOnly_QStacks@</spellName><magicDamage> * (</magicDamage><spellName>1</spellName><magicDamage> + </magicDamage><spellName>@TooltipOnly_QCritMultiplier@</spellName><magicDamage>)) magic damage</magicDamage> and at <keywordMajor>@Tier3_Breakpoint@</keywordMajor> stacks of <spellName>Dragon Practice</spellName> his burn deals an addition <trueDamage>@Q_tier3_bonus_burn@ max Health true damage</trueDamage>.</li><li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.</li><li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage>.</li><br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules><br>",
 					"cooldownTime": [
 						0,
 						0,
@@ -825,8 +827,6 @@
 						0,
 						0
 					],
-					"tooltip": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants a stack of <spellName>{{Spell_SmolderP_Name}}</spellName>, which improves Smolder's basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ magic damage</magicDamage> and gain new effects at @spell.SmolderQ:StackTier1@, @spell.SmolderQ:StackTier2@, and @spell.SmolderQ:StackTier3@ stacks.<li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.<li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage> and gain an extra bolt every @EStacksPerAttackTooltip@ stacks.<br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules>",
-					"tooltipExtended": "Hitting champions with Abilities and killing enemies with <spellName>{{Spell_SmolderQ_Name}}</spellName> grants Smolder a stack of <spellName>Dragon Practice</spellName>. Stacks increase the damage of Smolders basic Abilities.<br><li><spellName>{{Spell_SmolderQ_Name}}</spellName>: Deal an additional <magicDamage>@Passive_QDamageIncrease@ = (</magicDamage><spellName>@TooltipOnly_QStacks@</spellName><magicDamage> * (</magicDamage><spellName>1</spellName><magicDamage> + </magicDamage><spellName>@TooltipOnly_QCritMultiplier@</spellName><magicDamage>)) magic damage</magicDamage> and at <keywordMajor>@Tier3_Breakpoint@</keywordMajor> stacks of <spellName>Dragon Practice</spellName> his burn deals an addition <trueDamage>@Q_tier3_bonus_burn@ max Health true damage</trueDamage>.</li><li><spellName>{{Spell_SmolderW_Name}}</spellName>: Explosions deal an additional <magicDamage>@Passive_WDamageIncrease@ magic damage</magicDamage>.</li><li><spellName>{{Spell_SmolderE_Name}}</spellName>: Each hit deals an additional <magicDamage>@EBonusDamage@ magic damage</magicDamage>.</li><br><br><rules>Smolder has acquired <font color='#c93c3c'>Dragon Practice:</font> <font color='#c93c3c'>@f1.0@</font>.</rules><br>",
 					"dataValues": {
 						"QCritRatio": [
 							0.5,
@@ -960,5 +960,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

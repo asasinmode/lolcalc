@@ -13,3 +13,5 @@
 ```
 
 being a combination of main weapon index and off weapon index. a lot of variables reference other stringtable stuff there, probably need to handle it before moving on. try saving stringtable on the champion themselves?
+
+stub `@f7@` variable, I think it corresponds to the current guns like calibrum + severum would be `12`. in `updateGameData` either have to go through all variants to save proper keys to stringtable or do something else

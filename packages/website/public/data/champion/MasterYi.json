@@ -34,6 +34,7 @@
 				{
 					"name": "Alpha Strike",
 					"image": "assets/characters/masteryi/hud/icons2d/masteryi_q.png",
+					"tooltip": "Master Yi becomes Untargetable and teleports to rapidly strike enemies near his target, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemies hit after @AlphaStrikeBounces@ hits. <br><br>This Ability can strike the same enemy repeatedly if there are no other targets, dealing @SubsequentHitMultiplier*100@% damage for subsequent hits (<physicalDamage>@SubesquentDamage@</physicalDamage>), for a maximum single target total of <physicalDamage>@SingleTotalDamage@ physical damage</physicalDamage>.",
 					"mana": [
 						50,
 						55,
@@ -51,7 +52,6 @@
 						18,
 						17.5
 					],
-					"tooltip": "Master Yi becomes Untargetable and teleports to rapidly strike enemies near his target, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemies hit after @AlphaStrikeBounces@ hits. <br><br>This Ability can strike the same enemy repeatedly if there are no other targets, dealing @SubsequentHitMultiplier*100@% damage for subsequent hits (<physicalDamage>@SubesquentDamage@</physicalDamage>), for a maximum single target total of <physicalDamage>@SingleTotalDamage@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"SubsequentHitMultiplier": [
 							0.25,
@@ -293,6 +293,7 @@
 				{
 					"name": "Meditate",
 					"image": "assets/characters/masteryi/hud/icons2d/masteryi_w.png",
+					"tooltip": "Master Yi channels, restoring <healing>@TotalHeal@ Health</healing> over @HealDuration@ seconds. This healing is increased by up to @MaxMissingHealthPercent*100@% based on Master Yi's missing Health.<br><br>While channeling and for @DRLinger@ seconds afterwards, he takes @InitialDR@ reduced damage, decreased to @DamageReduction*100@% after the first @InitialExtraDRDuration@ seconds.",
 					"mana": [
 						40,
 						40,
@@ -301,7 +302,6 @@
 						40,
 						40
 					],
-					"tooltip": "Master Yi channels, restoring <healing>@TotalHeal@ Health</healing> over @HealDuration@ seconds. This healing is increased by up to @MaxMissingHealthPercent*100@% based on Master Yi's missing Health.<br><br>While channeling and for @DRLinger@ seconds afterwards, he takes @InitialDR@ reduced damage, decreased to @DamageReduction*100@% after the first @InitialExtraDRDuration@ seconds.",
 					"dataValues": {
 						"BaseHeal": [
 							40,
@@ -444,6 +444,7 @@
 				{
 					"name": "Wuju Style",
 					"image": "assets/characters/masteryi/hud/icons2d/masteryi_e1.png",
+					"tooltip": "Master Yi's Attacks deal an additional <trueDamage>@TotalDamage@ true damage</trueDamage> for @Duration@ seconds.",
 					"cooldownTime": [
 						14,
 						14,
@@ -453,7 +454,6 @@
 						14,
 						14
 					],
-					"tooltip": "Master Yi's Attacks deal an additional <trueDamage>@TotalDamage@ true damage</trueDamage> for @Duration@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							15,
@@ -519,6 +519,7 @@
 				{
 					"name": "Highlander",
 					"image": "assets/characters/masteryi/hud/icons2d/masteryi_r.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Champion takedowns reduce the remaining Cooldown of Master Yi's basic Abilities by @RCooldownRefund*100@%.<br><br><spellActive>Active:</spellActive> Master Yi enters a trance, gaining <speed>@RMSBonus@% Move Speed</speed>, <attackSpeed>@RASBonus@% Attack Speed</attackSpeed>, and immunity to <status>Slows</status> for @RDuration@ seconds. Champion takedowns extend the duration of this Ability by @RKillAssistExtension@ seconds.",
 					"mana": [
 						100,
 						100,
@@ -536,7 +537,6 @@
 						85,
 						85
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Champion takedowns reduce the remaining Cooldown of Master Yi's basic Abilities by @RCooldownRefund*100@%.<br><br><spellActive>Active:</spellActive> Master Yi enters a trance, gaining <speed>@RMSBonus@% Move Speed</speed>, <attackSpeed>@RASBonus@% Attack Speed</attackSpeed>, and immunity to <status>Slows</status> for @RDuration@ seconds. Champion takedowns extend the duration of this Ability by @RKillAssistExtension@ seconds.",
 					"dataValues": {
 						"RDuration": [
 							7,
@@ -632,5 +632,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

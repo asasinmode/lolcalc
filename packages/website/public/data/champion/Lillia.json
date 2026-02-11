@@ -34,6 +34,7 @@
 				{
 					"name": "Blooming Blows",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_q.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge.",
 					"mana": [
 						65,
 						65,
@@ -51,7 +52,6 @@
 						4,
 						4
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge.",
 					"dataValues": {
 						"MinimumRadius": [
 							225,
@@ -196,6 +196,7 @@
 				{
 					"name": "Watch Out! Eep!",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_w.png",
+					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
 					"mana": [
 						50,
 						50,
@@ -213,7 +214,6 @@
 						10,
 						9
 					],
-					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
 					"dataValues": {
 						"FlatDamageBase": [
 							60,
@@ -365,6 +365,7 @@
 				{
 					"name": "Swirlseed",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_e.png",
+					"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain.",
 					"mana": [
 						70,
 						70,
@@ -382,7 +383,6 @@
 						12,
 						12
 					],
-					"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain.",
 					"dataValues": {
 						"SlowAmount": [
 							0.4,
@@ -491,6 +491,8 @@
 				{
 					"name": "Lilting Lullaby",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_r.png",
+					"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [
 						50,
 						50,
@@ -508,8 +510,6 @@
 						100,
 						100
 					],
-					"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"DrowsyDuration": [
 							1.5,
@@ -753,5 +753,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -34,6 +34,7 @@
 				{
 					"name": "Piercing Light",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_q.png",
+					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.<br>",
 					"mana": [
 						48,
 						56,
@@ -51,7 +52,6 @@
 						5,
 						5
 					],
-					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.<br>",
 					"dataValues": {
 						"BaseDamage": [
 							45,
@@ -127,6 +127,7 @@
 				{
 					"name": "Ardent Blaze",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_w.png",
+					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@Effect2Amount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
 					"mana": [
 						60,
 						60,
@@ -144,7 +145,6 @@
 						10,
 						10
 					],
-					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@Effect2Amount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
 					"dataValues": {
 						"BaseDamage": [
 							40,
@@ -263,6 +263,7 @@
 				{
 					"name": "Relentless Pursuit",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_e.png",
+					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @Effect1Amount@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@Effect2Amount@ seconds for champions). ",
 					"mana": [
 						40,
 						30,
@@ -280,7 +281,6 @@
 						14,
 						14
 					],
-					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @Effect1Amount@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@Effect2Amount@ seconds for champions). ",
 					"effectAmount": {
 						"0": [
 							1,
@@ -338,6 +338,7 @@
 				{
 					"name": "The Culling",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_r.png",
+					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage><br>",
 					"mana": [
 						100,
 						100,
@@ -355,7 +356,6 @@
 						10,
 						10
 					],
-					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage><br>",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -665,5 +665,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

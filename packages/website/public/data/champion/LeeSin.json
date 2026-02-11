@@ -34,6 +34,7 @@
 				{
 					"name": "Sonic Wave / Resonating Strike",
 					"image": "assets/characters/leesin/hud/icons2d/leesinq1.png",
+					"tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to the first enemy hit, granting <keywordStealth>True Sight</keywordStealth> of them, and allows Lee Sin to <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>@RecastDamage@ to @EmpoweredDamage@ physical damage</physicalDamage> scaling with the target's missing Health. ",
 					"mana": [
 						50,
 						50,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to the first enemy hit, granting <keywordStealth>True Sight</keywordStealth> of them, and allows Lee Sin to <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>@RecastDamage@ to @EmpoweredDamage@ physical damage</physicalDamage> scaling with the target's missing Health. ",
 					"dataValues": {
 						"Q1BaseDamage": [
 							30,
@@ -167,6 +167,7 @@
 				{
 					"name": "Safeguard / Iron Will",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
+					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Life Steal and Spell Vamp for @LifestealAndSpellVampTime@ seconds.",
 					"mana": [
 						50,
 						50,
@@ -184,7 +185,6 @@
 						12,
 						12
 					],
-					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Life Steal and Spell Vamp for @LifestealAndSpellVampTime@ seconds.",
 					"dataValues": {
 						"LifestealAndSpellVamp": [
 							6,
@@ -275,6 +275,7 @@
 				{
 					"name": "Tempest / Cripple",
 					"image": "assets/characters/leesin/hud/icons2d/leesine1.png",
+					"tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>@InitialDamage@ magic damage</magicDamage> and reveals them for @SlowDuration@ seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by @SlowAmount@% decaying over @SlowDuration@ seconds.",
 					"mana": [
 						50,
 						50,
@@ -292,7 +293,6 @@
 						8,
 						8
 					],
-					"tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>@InitialDamage@ magic damage</magicDamage> and reveals them for @SlowDuration@ seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by @SlowAmount@% decaying over @SlowDuration@ seconds.",
 					"dataValues": {
 						"SlowAmount": [
 							25,
@@ -356,6 +356,7 @@
 				{
 					"name": "Dragon's Rage",
 					"image": "assets/characters/leesin/hud/icons2d/leesinr.png",
+					"tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>@Damage@ plus @PercentHPCarryThrough@% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
 					"cooldownTime": [
 						100,
 						110,
@@ -365,7 +366,6 @@
 						60,
 						60
 					],
-					"tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>@Damage@ plus @PercentHPCarryThrough@% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							-50,
@@ -475,5 +475,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

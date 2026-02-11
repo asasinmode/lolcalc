@@ -34,6 +34,7 @@
 				{
 					"name": "Tentacle Smash",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_q.png",
+					"tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage> (currently <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>).<br><br><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward.",
 					"mana": [
 						40,
 						45,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage> (currently <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>).<br><br><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward.",
 					"dataValues": {
 						"TentacleDamageAmp": [
 							0,
@@ -160,6 +160,7 @@
 				{
 					"name": "Harsh Lesson",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_w.png",
+					"tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>@HealthPercentTotal@ max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target.",
 					"mana": [
 						30,
 						30,
@@ -177,7 +178,6 @@
 						4,
 						4
 					],
-					"tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>@HealthPercentTotal@ max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target.",
 					"dataValues": {
 						"WMinDamage": [
 							10,
@@ -296,6 +296,7 @@
 				{
 					"name": "Test of Spirit",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_e.png",
+					"tooltip": "Illaoi pulls the spirit from an enemy champion for @SpiritDuration@ seconds. The spirit can be damaged like a champion, with @EchoPercent@ of that damage echoing to its owner.<br><br>If the spirit dies or the target leaves its range, the target becomes marked for @VesselDuration@ seconds and is <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds. Marked enemies spawn Tentacles if possible.<br><br>Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every @TimeBetweenVesselTentacleSlams@ seconds.",
 					"mana": [
 						35,
 						40,
@@ -313,7 +314,6 @@
 						12,
 						11
 					],
-					"tooltip": "Illaoi pulls the spirit from an enemy champion for @SpiritDuration@ seconds. The spirit can be damaged like a champion, with @EchoPercent@ of that damage echoing to its owner.<br><br>If the spirit dies or the target leaves its range, the target becomes marked for @VesselDuration@ seconds and is <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds. Marked enemies spawn Tentacles if possible.<br><br>Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every @TimeBetweenVesselTentacleSlams@ seconds.",
 					"dataValues": {
 						"BaseDamageTransferPercent": [
 							0.2,
@@ -462,6 +462,7 @@
 				{
 					"name": "Leap of Faith",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_r.png",
+					"tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br><br>For the next @Duration@ seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a @spell.IllaoiW:CooldownDuringR@ second cooldown.",
 					"mana": [
 						100,
 						100,
@@ -479,7 +480,6 @@
 						70,
 						70
 					],
-					"tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br><br>For the next @Duration@ seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a @spell.IllaoiW:CooldownDuringR@ second cooldown.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -609,5 +609,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

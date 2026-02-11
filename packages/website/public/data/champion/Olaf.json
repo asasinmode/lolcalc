@@ -34,6 +34,7 @@
 				{
 					"name": "Undertow",
 					"image": "assets/characters/olaf/hud/icons2d/olafq.png",
+					"tooltip": "Olaf throws an axe, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for up to @Effect3Amount@ seconds (based on distance travelled). Champions hit lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @DebuffDuration@ seconds.<br><br>If Olaf picks up the axe, this Ability's Cooldown is reduced to @TooltipCDRefund@ seconds, or fully refunded if @TooltipCDRefund@ seconds has elapsed.",
 					"mana": [
 						50,
 						55,
@@ -51,7 +52,6 @@
 						9,
 						9
 					],
-					"tooltip": "Olaf throws an axe, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for up to @Effect3Amount@ seconds (based on distance travelled). Champions hit lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @DebuffDuration@ seconds.<br><br>If Olaf picks up the axe, this Ability's Cooldown is reduced to @TooltipCDRefund@ seconds, or fully refunded if @TooltipCDRefund@ seconds has elapsed.",
 					"dataValues": {
 						"MinimumRange": [
 							425,
@@ -209,6 +209,7 @@
 				{
 					"name": "Tough It Out",
 					"image": "assets/characters/olaf/hud/icons2d/olafw.png",
+					"tooltip": "Olaf gains <attackSpeed>@Attackspeed*100@% Attack Speed</attackSpeed> for @Duration@ seconds, and <shield>@BaseShield@ plus @ShieldPercMissingHP*100@% missing Health Shield (up to a maximum of @MaxShieldCalc@ Shield below @ThresholdForMax*100@% Health)</shield> for @ShieldDuration@ seconds.",
 					"mana": [
 						50,
 						50,
@@ -226,7 +227,6 @@
 						12,
 						11
 					],
-					"tooltip": "Olaf gains <attackSpeed>@Attackspeed*100@% Attack Speed</attackSpeed> for @Duration@ seconds, and <shield>@BaseShield@ plus @ShieldPercMissingHP*100@% missing Health Shield (up to a maximum of @MaxShieldCalc@ Shield below @ThresholdForMax*100@% Health)</shield> for @ShieldDuration@ seconds.",
 					"dataValues": {
 						"Attackspeed": [
 							0.3,
@@ -347,6 +347,7 @@
 				{
 					"name": "Reckless Swing",
 					"image": "assets/characters/olaf/hud/icons2d/olafe.png",
+					"tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>@TotalDamage@ true damage</trueDamage>. If the enemy dies, the cost is refunded.<br><br>Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.",
 					"cooldownTime": [
 						12,
 						11,
@@ -356,7 +357,6 @@
 						7,
 						6
 					],
-					"tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>@TotalDamage@ true damage</trueDamage>. If the enemy dies, the cost is refunded.<br><br>Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.",
 					"dataValues": {
 						"Cast_Time_Base": [
 							0.25,
@@ -432,6 +432,7 @@
 				{
 					"name": "Ragnarok",
 					"image": "assets/characters/olaf/hud/icons2d/olafr.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Olaf gains <scaleArmor>@Resists@ Armor</scaleArmor> and <scaleMR>@Resists@ Magic Resist</scaleMR>.<br><br><spellActive>Active: </spellActive>Olaf cleanses all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and becomes immune to them for @Duration@ seconds. While active, Olaf gains <scaleAD>@AD@ Attack Damage</scaleAD>. Hitting a champion with an Attack or <spellName>Reckless Swing</spellName> extends the duration by @DurationExtension@ seconds.<br><br>Additionally, Olaf gains <speed>@Haste*100@% Move Speed</speed> towards enemy champions for @HasteDuration@ second.",
 					"mana": [
 						100,
 						100,
@@ -449,7 +450,6 @@
 						160,
 						100
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Olaf gains <scaleArmor>@Resists@ Armor</scaleArmor> and <scaleMR>@Resists@ Magic Resist</scaleMR>.<br><br><spellActive>Active: </spellActive>Olaf cleanses all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and becomes immune to them for @Duration@ seconds. While active, Olaf gains <scaleAD>@AD@ Attack Damage</scaleAD>. Hitting a champion with an Attack or <spellName>Reckless Swing</spellName> extends the duration by @DurationExtension@ seconds.<br><br>Additionally, Olaf gains <speed>@Haste*100@% Move Speed</speed> towards enemy champions for @HasteDuration@ second.",
 					"dataValues": {
 						"Resists": [
 							5,
@@ -540,6 +540,8 @@
 				{
 					"name": "Berserker Rage",
 					"image": "assets/characters/olaf/hud/icons2d/olafp.png",
+					"tooltip": "Olaf gains up to <attackSpeed>@MaxAttackSpeed@ Attack Speed</attackSpeed> and @MaxLifeSteal@ Life Steal, based on his missing Health.",
+					"tooltipExtended": "{{game_character_passiveDescription_Olaf}}<br><br><rules>Reaches max at 30% Health</rules>",
 					"cooldownTime": [
 						0,
 						0,
@@ -549,8 +551,6 @@
 						0,
 						0
 					],
-					"tooltip": "Olaf gains up to <attackSpeed>@MaxAttackSpeed@ Attack Speed</attackSpeed> and @MaxLifeSteal@ Life Steal, based on his missing Health.",
-					"tooltipExtended": "{{game_character_passiveDescription_Olaf}}<br><br><rules>Reaches max at 30% Health</rules>",
 					"dataValues": {
 						"AttackSpeedPerMissingHPPerc": [
 							0.009,
@@ -599,5 +599,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

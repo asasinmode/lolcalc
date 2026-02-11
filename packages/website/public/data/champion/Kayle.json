@@ -34,6 +34,7 @@
 				{
 					"name": "Radiant Blast",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_q.png",
+					"tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ seconds, and removing <scaleArmor>@ShredPercent@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds from the target and enemies behind them.",
 					"mana": [
 						60,
 						70,
@@ -51,7 +52,6 @@
 						8,
 						7
 					],
-					"tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ seconds, and removing <scaleArmor>@ShredPercent@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds from the target and enemies behind them.",
 					"dataValues": {
 						"ManaRefundPercent": [
 							0.5,
@@ -210,6 +210,7 @@
 				{
 					"name": "Celestial Blessing",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_w.png",
+					"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds.",
 					"mana": [
 						70,
 						75,
@@ -227,7 +228,6 @@
 						15,
 						15
 					],
-					"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds.",
 					"dataValues": {
 						"Heal": [
 							30,
@@ -294,6 +294,7 @@
 				{
 					"name": "Starfire Spellblade",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_e.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
 					"cooldownTime": [
 						8,
 						8,
@@ -303,7 +304,6 @@
 						6,
 						8
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
 					"dataValues": {
 						"PassiveDamage": [
 							15,
@@ -424,6 +424,7 @@
 				{
 					"name": "Divine Judgment",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_r.png",
+					"tooltip": "Kayle makes an allied champion Invulnerable for @InvulnDuration@ seconds and then purifies the area around them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
 					"mana": [
 						100,
 						50,
@@ -441,7 +442,6 @@
 						80,
 						80
 					],
-					"tooltip": "Kayle makes an allied champion Invulnerable for @InvulnDuration@ seconds and then purifies the area around them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
 					"dataValues": {
 						"Damage": [
 							100,
@@ -501,6 +501,8 @@
 				{
 					"name": "Divine Ascent",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
+					"tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>",
+					"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
 					"cooldownTime": [
 						0,
 						0,
@@ -510,8 +512,6 @@
 						0,
 						0
 					],
-					"tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>",
-					"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",
 					"dataValues": {
 						"LevelForPassiveRank0": [
 							1,
@@ -669,5 +669,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

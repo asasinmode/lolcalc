@@ -34,6 +34,7 @@
 				{
 					"name": "Vault Breaker",
 					"image": "assets/characters/vi/hud/icons2d/viq.png",
+					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @Effect4Amount@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
 					"mana": [
 						50,
 						60,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @Effect4Amount@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
 					"dataValues": {
 						"KnockbackDuration": [
 							0.75,
@@ -205,6 +205,7 @@
 				{
 					"name": "Denting Blows",
 					"image": "assets/characters/vi/hud/icons2d/viw.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Every 3rd Attack on the same target deals an additional <physicalDamage>@TotalDamageTooltip@ max Health physical damage</physicalDamage>, removes <scaleArmor>@ShredAmount@% Armor</scaleArmor> and grants Vi <attackSpeed>@AttackSpeed@% Attack Speed</attackSpeed> for @SharedBuffsDuration@ seconds. It also reduces the remaining Cooldown of <spellName>Blast Shield</spellName> by @spell.ViPassive:CDReductionOn3Hit@ seconds.",
 					"cooldownTime": [
 						0,
 						0,
@@ -214,7 +215,6 @@
 						0,
 						0
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Every 3rd Attack on the same target deals an additional <physicalDamage>@TotalDamageTooltip@ max Health physical damage</physicalDamage>, removes <scaleArmor>@ShredAmount@% Armor</scaleArmor> and grants Vi <attackSpeed>@AttackSpeed@% Attack Speed</attackSpeed> for @SharedBuffsDuration@ seconds. It also reduces the remaining Cooldown of <spellName>Blast Shield</spellName> by @spell.ViPassive:CDReductionOn3Hit@ seconds.",
 					"dataValues": {
 						"ADCoefficient": [
 							0.035,
@@ -319,6 +319,7 @@
 				{
 					"name": "Relentless Force",
 					"image": "assets/characters/vi/hud/icons2d/vie.png",
+					"tooltip": "Vi's next Attack deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to the target and enemies behind them.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
 					"mana": [
 						26,
 						32,
@@ -336,7 +337,6 @@
 						1,
 						1
 					],
-					"tooltip": "Vi's next Attack deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to the target and enemies behind them.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
 					"dataValues": {
 						"ADRatio": [
 							1.1,
@@ -437,6 +437,7 @@
 				{
 					"name": "Cease and Desist",
 					"image": "assets/characters/vi/hud/icons2d/vir.png",
+					"tooltip": "Vi singles out an enemy champion, revealing them and dashing unstoppably towards them. Upon reaching them, Vi <status>Knocks</status> them <status>Up</status> for @RStunDuration@ seconds and deals <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Any other enemies Vi collides with are dealt damage, knocked aside, and <status>Stunned</status> for @SecondaryTargetStunDuration@ seconds.",
 					"mana": [
 						100,
 						100,
@@ -454,7 +455,6 @@
 						90,
 						90
 					],
-					"tooltip": "Vi singles out an enemy champion, revealing them and dashing unstoppably towards them. Upon reaching them, Vi <status>Knocks</status> them <status>Up</status> for @RStunDuration@ seconds and deals <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Any other enemies Vi collides with are dealt damage, knocked aside, and <status>Stunned</status> for @SecondaryTargetStunDuration@ seconds.",
 					"dataValues": {
 						"RBaseSpeed": [
 							800,
@@ -616,5 +616,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

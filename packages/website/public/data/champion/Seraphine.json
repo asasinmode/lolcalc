@@ -34,6 +34,7 @@
 				{
 					"name": "High Note",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_q1.png",
+					"tooltip": "Seraphine projects a pure note, dealing <magicDamage>@ExplosionDamage@ magic damage</magicDamage>, increased against champions and monsters by the target's missing Health percentage up to <magicDamage>@TotalEmpoweredDamage@ damage</magicDamage> below @ExecuteThreshold*100@% Health.",
 					"mana": [
 						60,
 						70,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "Seraphine projects a pure note, dealing <magicDamage>@ExplosionDamage@ magic damage</magicDamage>, increased against champions and monsters by the target's missing Health percentage up to <magicDamage>@TotalEmpoweredDamage@ damage</magicDamage> below @ExecuteThreshold*100@% Health.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -123,6 +123,7 @@
 				{
 					"name": "Surround Sound",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_w1.png",
+					"tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>@HasteValueAllies@ Move Speed</speed>, herself <speed>@WMSBonusTotal@ decaying Move Speed</speed> and both <shield>@ShieldValueSeraphine@ Shield</shield> for @ShieldDuration@ seconds.<br><br>If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>@WMissingHPHeal@% missing Health</healing> to them after a @WHealSplitDelay@ second delay.",
 					"mana": [
 						70,
 						75,
@@ -140,7 +141,6 @@
 						22,
 						22
 					],
-					"tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>@HasteValueAllies@ Move Speed</speed>, herself <speed>@WMSBonusTotal@ decaying Move Speed</speed> and both <shield>@ShieldValueSeraphine@ Shield</shield> for @ShieldDuration@ seconds.<br><br>If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>@WMissingHPHeal@% missing Health</healing> to them after a @WHealSplitDelay@ second delay.",
 					"dataValues": {
 						"ShieldDuration": [
 							2.5,
@@ -286,6 +286,7 @@
 				{
 					"name": "Beat Drop",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_e1.png",
+					"tooltip": "Seraphine unleashes a heavy soundwave, dealing <magicDamage>@FinalDamage@ magic damage</magicDamage> to enemies in a line and <status>Slowing</status> them by @SlowValue@% for @SlowDuration@ seconds.<br><br>Enemies that are already <status>Slowed</status> are <status>Rooted</status> instead, and <status>Immobilized</status> enemies are <status>Stunned</status>.",
 					"mana": [
 						60,
 						60,
@@ -303,7 +304,6 @@
 						9,
 						9
 					],
-					"tooltip": "Seraphine unleashes a heavy soundwave, dealing <magicDamage>@FinalDamage@ magic damage</magicDamage> to enemies in a line and <status>Slowing</status> them by @SlowValue@% for @SlowDuration@ seconds.<br><br>Enemies that are already <status>Slowed</status> are <status>Rooted</status> instead, and <status>Immobilized</status> enemies are <status>Stunned</status>.",
 					"dataValues": {
 						"BaseDamage": [
 							40,
@@ -375,6 +375,7 @@
 				{
 					"name": "Encore",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_r.png",
+					"tooltip": "Seraphine takes the stage, projecting a captivating force that <status>Charms</status> for @RChannelDuration@ seconds and deals <magicDamage>@R1TotalDamage@ magic damage</magicDamage>.<br><br>Any champions struck (including allies) become part of the performance, extending the range of this Ability. Allied champions gain maximum <keywordMajor>Notes</keywordMajor>.",
 					"mana": [
 						100,
 						100,
@@ -392,7 +393,6 @@
 						120,
 						120
 					],
-					"tooltip": "Seraphine takes the stage, projecting a captivating force that <status>Charms</status> for @RChannelDuration@ seconds and deals <magicDamage>@R1TotalDamage@ magic damage</magicDamage>.<br><br>Any champions struck (including allies) become part of the performance, extending the range of this Ability. Allied champions gain maximum <keywordMajor>Notes</keywordMajor>.",
 					"dataValues": {
 						"RChannelDuration": [
 							1,
@@ -596,5 +596,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

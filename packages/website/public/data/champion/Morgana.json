@@ -34,6 +34,7 @@
 				{
 					"name": "Dark Binding",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
+					"tooltip": "Morgana hurls a blast of starfire that <status>Roots</status> the first enemy hit for @RootDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [
 						50,
 						55,
@@ -42,7 +43,6 @@
 						70,
 						75
 					],
-					"tooltip": "Morgana hurls a blast of starfire that <status>Roots</status> the first enemy hit for @RootDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"Damage": [
 							25,
@@ -88,6 +88,7 @@
 				{
 					"name": "Tormented Shadow",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png",
+					"tooltip": "Morgana ignites the ground for @WDuration@ seconds, dealing <magicDamage>@TotalMinDamage@ magic damage</magicDamage> per second, increased by up to <magicDamage>@TotalMaxDamage@</magicDamage> based on the targets' missing Health.<br><br>This Ability's Cooldown is reduced by @CDRefundPercent*100@% every time Morgana is healed by <spellName>{{Spell_MorganaPassive_Name}}</spellName>.",
 					"mana": [
 						70,
 						80,
@@ -105,7 +106,6 @@
 						12,
 						12
 					],
-					"tooltip": "Morgana ignites the ground for @WDuration@ seconds, dealing <magicDamage>@TotalMinDamage@ magic damage</magicDamage> per second, increased by up to <magicDamage>@TotalMaxDamage@</magicDamage> based on the targets' missing Health.<br><br>This Ability's Cooldown is reduced by @CDRefundPercent*100@% every time Morgana is healed by <spellName>{{Spell_MorganaPassive_Name}}</spellName>.",
 					"dataValues": {
 						"BaseDamage": [
 							5,
@@ -209,6 +209,7 @@
 				{
 					"name": "Black Shield",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png",
+					"tooltip": "Morgana grants an ally champion <shield>@TotalShieldStrength@ Magic Shield</shield> for @ShieldDuration@ seconds. The shield prevents <status>Disabling</status> and <status>Immobilizing</status> effects until it breaks.",
 					"mana": [
 						80,
 						80,
@@ -226,7 +227,6 @@
 						16,
 						16
 					],
-					"tooltip": "Morgana grants an ally champion <shield>@TotalShieldStrength@ Magic Shield</shield> for @ShieldDuration@ seconds. The shield prevents <status>Disabling</status> and <status>Immobilizing</status> effects until it breaks.",
 					"dataValues": {
 						"ShieldStrength": [
 							45,
@@ -272,6 +272,7 @@
 				{
 					"name": "Soul Shackles",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png",
+					"tooltip": "Morgana chains herself to nearby enemy Champions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowPercent@%. After @ChainDuration@ seconds, enemies unable to break the chains take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and are <status>Stunned</status> for @StunDuration@ seconds.<br><br>While casting this Ability, Morgana gains <speed>@HastePercent@% Move Speed</speed>.",
 					"mana": [
 						100,
 						100,
@@ -289,7 +290,6 @@
 						10,
 						10
 					],
-					"tooltip": "Morgana chains herself to nearby enemy Champions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowPercent@%. After @ChainDuration@ seconds, enemies unable to break the chains take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and are <status>Stunned</status> for @StunDuration@ seconds.<br><br>While casting this Ability, Morgana gains <speed>@HastePercent@% Move Speed</speed>.",
 					"dataValues": {
 						"Damage": [
 							125,
@@ -362,6 +362,7 @@
 				{
 					"name": "Soul Siphon",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_empathize.png",
+					"tooltip": "Morgana <healing>Heals for @HealPercent@%</healing> of the damage dealt by her Abilities to champions, large minions, and medium and larger jungle monsters.",
 					"cooldownTime": [
 						0,
 						0,
@@ -371,7 +372,6 @@
 						0,
 						0
 					],
-					"tooltip": "Morgana <healing>Heals for @HealPercent@%</healing> of the damage dealt by her Abilities to champions, large minions, and medium and larger jungle monsters.",
 					"dataValues": {
 						"HealPercent": [
 							18,
@@ -387,5 +387,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

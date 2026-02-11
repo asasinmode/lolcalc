@@ -34,6 +34,7 @@
 				{
 					"name": "Howling Gale",
 					"image": "assets/characters/janna/hud/icons2d/jannaq.png",
+					"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early.",
 					"mana": [
 						90,
 						95,
@@ -51,7 +52,6 @@
 						14,
 						14
 					],
-					"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early.",
 					"dataValues": {
 						"MissileTravelTime": [
 							1.25,
@@ -239,6 +239,7 @@
 				{
 					"name": "Zephyr",
 					"image": "assets/characters/janna/hud/icons2d/jannaw.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>.",
 					"mana": [
 						50,
 						55,
@@ -256,7 +257,6 @@
 						6,
 						6
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"MSPercent": [
 							0.05,
@@ -376,6 +376,7 @@
 				{
 					"name": "Eye Of The Storm",
 					"image": "assets/characters/janna/hud/icons2d/jannae.png",
+					"tooltip": "Janna grants an ally champion or turret <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. While shielded, they gain <scaleAD>@TotalAD@ Attack Damage</scaleAD>.<br><br>Janna refunds @ECDRefundforCC*100@% of the cooldown whenever she impairs an enemy champion's movement with an Ability.",
 					"mana": [
 						70,
 						75,
@@ -393,7 +394,6 @@
 						12,
 						12
 					],
-					"tooltip": "Janna grants an ally champion or turret <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. While shielded, they gain <scaleAD>@TotalAD@ Attack Damage</scaleAD>.<br><br>Janna refunds @ECDRefundforCC*100@% of the cooldown whenever she impairs an enemy champion's movement with an Ability.",
 					"dataValues": {
 						"ECDRefundforCC": [
 							0.2,
@@ -505,6 +505,7 @@
 				{
 					"name": "Monsoon",
 					"image": "assets/characters/janna/hud/icons2d/jannar.png",
+					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
 					"mana": [
 						100,
 						100,
@@ -522,7 +523,6 @@
 						100,
 						100
 					],
-					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
 					"dataValues": {
 						"HealBasePerSecond": [
 							50,
@@ -686,5 +686,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

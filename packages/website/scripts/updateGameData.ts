@@ -1,6 +1,6 @@
 import type { IChampion, IChampionAbility } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
-import type { IGameVariableType } from '../app/utils/gameVariable';
+import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { ITexture } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
@@ -30,6 +30,7 @@ interface IDebugCategory {
 const debug = {
 	item: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 	rune: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+	champion: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 };
 
 const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
@@ -84,33 +85,40 @@ if (true || !championData || championData?.version !== latestVersion) {
 					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
 
 					const championFile = Bun.file(`${import.meta.dir}/../public/data/champion/${id}.json`);
+					const championFileDataStringtable: IChampion['stringtable'] = {};
+
+					// if (championId === 'Aphelios') {
+					const championFileData: IChampion = {
+						version: latestVersion,
+						id,
+						key,
+						name,
+						partype,
+						stats,
+						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
+							const [{ maxLevel, variants }, abilityStringtable] = championAbilityData(
+								[abilityName, index],
+								championId,
+								additionalData,
+								characterRootKey,
+							);
+
+							Object.assign(championFileDataStringtable, abilityStringtable);
+
+							return [abilityName, {
+								maxLevel,
+								variants,
+							} satisfies IChampionAbility];
+						})) as IChampion['abilities'],
+						stringtable: championFileDataStringtable,
+					};
 
 					if (championId === 'Aphelios') {
-						const championFileData: IChampion = {
-							version: latestVersion,
-							id,
-							key,
-							name,
-							partype,
-							stats,
-							abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
-								const { maxLevel, variants } = championAbilityData(
-									index,
-									championId,
-									additionalData,
-									characterRootKey,
-								);
-
-								return [abilityName, {
-									maxLevel,
-									variants,
-								} satisfies IChampionAbility];
-							})) as IChampion['abilities'],
-						};
-						adjustApheliosAbilityData(additionalData, characterRootKey, championFileData.abilities);
-
-						await championFile.write(JSON.stringify(championFileData, null, '\t'));
+						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, championFileData.abilities));
 					}
+
+					await championFile.write(JSON.stringify(championFileData, null, '\t'));
+					// }
 
 					return [championId, {
 						id,
@@ -441,7 +449,7 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 
 					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
 						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards', { category: 'rune', key: slotKey, variableType: 'rune', variableStatSource: slotValue, variableSourceKeys: ['effectAmount'] }),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards', { category: 'rune', key: slotKey, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
 					};
 
 					return [mPerkName.toLowerCase(), slotValue];
@@ -694,7 +702,7 @@ function createRuneSlotData(data: any) {
 		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
 	};
 
-	const variableDebug: Omit<IStringtableVariableDebug, 'key'> = { category: 'rune' as const, variableType: 'rune', variableStatSource: value, variableSourceKeys: ['calculations', 'effectAmount'] };
+	const variableDebug = { category: 'rune' as const, variableType: 'rune', variableValueParameters: [value], variableSourceKeys: ['calculations', 'effectAmount'] } satisfies Omit<IStringtableVariableDebug, 'key'>;
 
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
@@ -722,12 +730,22 @@ async function loadRcpFeLolCollectionsCss() {
 	}
 }
 
-interface IStringtableVariableDebug {
+type IStringtableVariableDebug = IBaseStringtableVariableDebug<'item', IGameVariableValueParameters['item']>
+	| IBaseStringtableVariableDebug<'rune', IGameVariableValueParameters['rune']>
+	| IBaseStringtableVariableDebug<'championAbility', IGameVariableValueParameters['championAbility']>;
+
+interface IBaseStringtableVariableDebug<T extends IGameVariableType, P extends IGameVariableValueParameters[T]> {
 	category: keyof typeof debug;
+	/** identifier of the variable, like rune-X-tooltipShort */
 	key: string;
-	variableType: IGameVariableType;
-	variableStatSource: any;
+	/** type of the game variable being resolved */
+	variableType: T;
+	/** parameters of the function used for resolving game variables */
+	variableValueParameters: P;
+	/** the keys under which variables can be found on the target of the replacement. They will be used to replace recognized variables with their resolved names if they are hashed */
 	variableSourceKeys: string[];
+	/** the object under which to save the stringtable variables. `textData` by default */
+	stringtableVariableSaveUnder?: { stringtable?: Record<string, string> };
 }
 
 function getStringtableValue(path: string, debugPrefix: string, variableDebug?: IStringtableVariableDebug) {
@@ -736,28 +754,38 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 		console.warn(`[${debugPrefix}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
 	if (variableDebug) {
+		const { category, key, stringtableVariableSaveUnder, variableType, variableValueParameters, variableSourceKeys } = variableDebug;
+
 		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable);
-		for (const [stringtableKey, value] of stringtableVariables.entries()) {
-			(textData.data.stringtable as any)[stringtableKey] = value;
-		}
-		if (unknownStringtableVariables.length) {
-			debug[variableDebug.category].stringtableVariables.set(variableDebug.key, unknownStringtableVariables.map(v => v[0]));
+
+		if (stringtableVariables.size && stringtableVariableSaveUnder) {
+			stringtableVariableSaveUnder.stringtable ||= {};
 		}
 
-		const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableDebug.variableType, variableDebug.variableStatSource);
+		for (const [stringtableKey, value] of stringtableVariables.entries()) {
+			((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
+		}
+		if (unknownStringtableVariables.length) {
+			debug[category].stringtableVariables.set(key, unknownStringtableVariables.map(v => v[0]));
+		}
+
+		const variableSource = variableValueParameters[0];
+
+		const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
+
 		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
 			const hash = hashRuneVariable(variableName);
-			for (const sourceKey of variableDebug.variableSourceKeys) {
+			for (const sourceKey of variableSourceKeys) {
 				let rename: [from: string, to: string] | undefined;
 
-				if (variableDebug.variableStatSource[sourceKey]?.[hash]) {
+				if (variableSource[sourceKey]?.[hash]) {
 					rename = [hash, variableName];
 				}
 
-				// TODO not sure if legal for variables other than the rune ones
+				// TODO not sure if legal for variables other than the rune ones, they might be case sensitive
 				if (!rename) {
-					const lowercaseKeys = Object.keys(variableDebug.variableStatSource[sourceKey] || {});
+					const lowercaseKeys = Object.keys(variableSource[sourceKey] || {});
 					for (const key of lowercaseKeys) {
 						if (variableName !== key && variableName.toLowerCase() === key.toLowerCase()) {
 							rename = [key, variableName];
@@ -767,72 +795,69 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 
 				if (rename) {
 					const [from, to] = rename;
-					variableDebug.variableStatSource[sourceKey][to] = variableDebug.variableStatSource[sourceKey][from];
-					variableDebug.variableStatSource[sourceKey].__renamedVariables ||= {};
-					variableDebug.variableStatSource[sourceKey].__renamedVariables[from] = to;
-					variableDebug.variableStatSource[sourceKey][from] = undefined;
+					variableSource[sourceKey][to] = variableSource[sourceKey][from];
+					variableSource[sourceKey].__renamedVariables ||= {};
+					variableSource[sourceKey].__renamedVariables[from] = to;
+					variableSource[sourceKey][from] = undefined;
 					unknownVariables.splice(i, 1);
 					continue outer;
 				}
 			}
 		}
 		if (unknownVariables.length) {
-			debug[variableDebug.category].variables.set(variableDebug.key, unknownVariables.map(v => v[0]));
+			debug[category].variables.set(key, unknownVariables.map(v => v[0]));
 		}
 		const unknownTags = getUnknownTags(value);
 		if (unknownTags.size) {
-			debug[variableDebug.category].tags[0].push(variableDebug.key);
-			debug[variableDebug.category].tags[1] = debug[variableDebug.category].tags[1].union(unknownTags);
+			debug[category].tags[0].push(key);
+			debug[category].tags[1] = debug[category].tags[1].union(unknownTags);
 		}
 	}
 	return value;
 }
 
 function championAbilityData(
-	/** 0-1-2-3 for Q-W-E-R, 4 for passive */
-	abilityIndex: number,
+	/** abilityName - q-w-e-r-passive, abilityIndex 0-1-2-3-4 corresponding to abilityName */
+	abilityInfo: [string, number],
 	championId: string,
 	championData: any,
 	characterRootKey: string,
-): IChampionAbility {
+): [IChampionAbility, stringtable: IChampion['stringtable']] {
 	const { mCharacterPassiveSpell, spells, spellLevelUpInfo, characterToolData } = championData[characterRootKey];
-	const abilityDataKey = abilityIndex === 4 ? mCharacterPassiveSpell : spells[abilityIndex];
+	const abilityDataKey = abilityInfo[1] === 4 ? mCharacterPassiveSpell : spells[abilityInfo[1]];
 
 	const variantKeys = [abilityDataKey];
 
-	if (abilityIndex !== 4 && characterToolData?.alternateForms?.length) {
+	if (abilityInfo[1] !== 4 && characterToolData?.alternateForms?.length) {
 		const championDataEntries = Object.entries(championData);
 		for (const form of characterToolData.alternateForms) {
 			if (form.spells) {
-				const maybeKey = championDataEntries.find(([,value]: any[]) => value.ObjectName === form.spells[abilityIndex])?.[0];
+				const maybeKey = championDataEntries.find(([,value]: any[]) => value.ObjectName === form.spells[abilityInfo[1]])?.[0];
 				if (maybeKey) {
 					variantKeys.push(maybeKey);
 				} else {
-					console.warn(`${abilityDataKey} no alternate form key found for ${form.spells[abilityIndex]}`);
+					console.warn(`${championId} ${abilityInfo[0]}[${abilityInfo[1]}] key for alternate form not found ${form.spells[abilityInfo[1]]}`);
 				}
 			}
 		}
 	}
 
-	let [maxLevel, variants] = championAbilityVariants(variantKeys, championData, abilityDataKey, abilityIndex);
+	let [maxLevel, variants, stringtable] = championAbilityVariants(championId, championData, abilityInfo, variantKeys);
 
-	if ((championId === 'Jayce' && abilityIndex === 3)
-		|| (championId === 'Aphelios' && abilityIndex < 3)) {
-		maxLevel = spellLevelUpInfo[abilityIndex].mRequirements.length;
+	if ((championId === 'Jayce' && abilityInfo[1] === 3)
+		|| (championId === 'Aphelios' && abilityInfo[1] < 3)) {
+		maxLevel = spellLevelUpInfo[abilityInfo[1]].mRequirements.length;
 	}
 
 	if (maxLevel === undefined) {
-		console.warn(`${abilityDataKey} max ability level not found`);
+		console.warn(`${championId} ${abilityInfo[0]}[${abilityInfo[1]}] max ability level not found "${abilityDataKey}"`);
 		maxLevel = 0;
 	}
 
-	return {
-		maxLevel,
-		variants,
-	};
+	return [{ maxLevel, variants }, stringtable];
 }
 
-function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {
+function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']): IChampion['stringtable'] {
 	const { mAbilities } = championData[characterRootKey];
 
 	const handledAbilities = Object.values(abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey));
@@ -841,6 +866,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 	abilities.e.variants = [];
 
 	const qVariantKeys = [];
+	let qVariantsStringtable;
 
 	for (const abilityKey of mAbilities) {
 		const abilityData = championData[abilityKey];
@@ -888,41 +914,46 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 		qVariantKeys.push(abilityData.mRootSpell);
 	}
 
-	abilities.q.variants = championAbilityVariants(qVariantKeys, championData, 'aphelios q variants', 0)[1];
+	([, abilities.q.variants, qVariantsStringtable] = championAbilityVariants(
+		'Aphelios',
+		championData,
+		['q', 0],
+		qVariantKeys,
+	));
+
+	return qVariantsStringtable;
 }
 
 function championAbilityVariants(
-	variantKeys: string[],
+	championId: string,
 	championData: any,
-	abilityDataKey: string,
-	abilityIndex: number,
-): [number, IChampionAbility['variants'] ] {
+	[abilityName, abilityIndex]: [string, number],
+	variantKeys: string[],
+): [number | undefined, IChampionAbility['variants'], stringtable: IChampion['stringtable']] {
 	let maxLevel: number | undefined;
-	const rv: IChampionAbility['variants'] = [];
+	const stringtableObject = { stringtable: {} };
+	const variants: IChampionAbility['variants'] = [];
+	const debugPrefix = `${championId} ${abilityName}[${abilityIndex}]`;
 
 	for (let i = 0; i < variantKeys.length; i++) {
 		const variantDataKey = variantKeys[i];
 		const variantData = championData[variantDataKey];
 		const variantMSpell = variantData?.mSpell;
 		if (!variantData || !variantMSpell) {
-			if (i === 0) {
-				throw new Error(`${abilityDataKey} no variant data ${variantDataKey}`);
-			} else {
-				continue;
-			}
+			throw new Error(`${championId} ${abilityName} variant ${i} with key "${variantDataKey}" not found in championData`);
 		}
 
 		const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
 
 		if (i === 0) {
 			if (!mClientData) {
-				throw new Error(`${variantDataKey} expected mClientData`);
+				throw new Error(`${debugPrefix} expected mClientData in variant "${variantDataKey}"`);
 			}
 			if (!mImgIconName) {
-				throw new Error(`${variantDataKey} expected mImgIconName`);
+				throw new Error(`${debugPrefix} expected mImgIconName in variant "${variantDataKey}"`);
 			}
 			if (!mClientData.mTooltipData) {
-				throw new Error(`${variantDataKey} expected mTooltipData`);
+				throw new Error(`${debugPrefix} expected mTooltipData in variant "${variantDataKey}"`);
 			}
 
 			maxLevel = abilityIndex === 4 ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
@@ -939,20 +970,16 @@ function championAbilityVariants(
 		}
 
 		if (!(mLocKeys?.keyName || mLocKeys?.keyTooltip)) {
-			throw new Error(`${variantDataKey} no mLocKeys ${mClientData.mUseTooltipFromAnotherSpell}\n${JSON.stringify(mLocKeys, null, 2)}`);
+			throw new Error(`${debugPrefix} expected mLocKeys in variant "${variantDataKey}"`);
 		}
 
-		const name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`);
-		const tooltip = mLocKeys.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
-		const tooltipExtended = mLocKeys?.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
-
-		rv.push({
-			name,
+		const variant = {
+			name: undefined,
 			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
+			tooltip: undefined,
+			tooltipExtended: undefined,
 			mana,
 			cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
-			tooltip,
-			tooltipExtended,
 			dataValues: DataValues?.length
 				? Object.fromEntries(DataValues.map(({ mName, mValues }: Record<string, number[]>) =>
 						[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
@@ -961,10 +988,24 @@ function championAbilityVariants(
 			spellCalculations: cleanupObject(mSpellCalculations),
 			effectAmount: cleanupObject(mEffectAmount),
 			dataKey: variantDataKey,
+		} as IChampionAbility['variants'][number];
+
+		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`, {
+			category: 'champion',
+			key: `${debugPrefix} ${variantData.ObjectName} name`,
+			variableType: 'championAbility',
+			variableValueParameters: [variant],
+			variableSourceKeys: ['effectAmount'],
+			stringtableVariableSaveUnder: stringtableObject,
 		});
+		// TODO add debug info
+		variant.tooltip = mLocKeys.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
+		variant.tooltipExtended = mLocKeys?.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
+
+		variants.push(variant);
 	}
 
-	return [maxLevel, rv];
+	return [maxLevel, variants, stringtableObject.stringtable];
 }
 
 function getUnknownTags(text: string): Set<string> {

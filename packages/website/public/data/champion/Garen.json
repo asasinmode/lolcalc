@@ -34,6 +34,7 @@
 				{
 					"name": "Decisive Strike",
 					"image": "assets/characters/garen/hud/icons2d/garen_q.png",
+					"tooltip": "Garen removes all <status>Slowing</status> effects on him and gains <speed>@MovementSpeedAmount*100@% Move Speed</speed> for @MovementSpeedDuration@ second(s).<br><br>His next Attack <status>Silences</status> for @SilenceDuration@ seconds and does <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"cooldownTime": [
 						8,
 						8,
@@ -43,7 +44,6 @@
 						8,
 						8
 					],
-					"tooltip": "Garen removes all <status>Slowing</status> effects on him and gains <speed>@MovementSpeedAmount*100@% Move Speed</speed> for @MovementSpeedDuration@ second(s).<br><br>His next Attack <status>Silences</status> for @SilenceDuration@ seconds and does <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -125,6 +125,7 @@
 				{
 					"name": "Courage",
 					"image": "assets/characters/garen/hud/icons2d/garen_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Garen has <scaleArmor>@ResistsForTooltip@ bonus Armor</scaleArmor> and <scaleMR>@ResistsForTooltip@ bonus Magic Resist</scaleMR>. Killing units permanently grants <attention>@ResistGainOnKillTooltip@ resists</attention>, up to a max of <attention>@ResistMax@</attention>.<br><br><spellActive>Active:</spellActive> Garen steels his courage for @DRDuration@ seconds, reducing incoming damage by @DRPercent*100@%. He also gains <shield>@TotalShield@ Shield</shield> and <slow>@UpfrontTenacity*100@% Tenacity</slow> for @UpfrontDuration@ seconds.",
 					"cooldownTime": [
 						22,
 						22,
@@ -134,7 +135,6 @@
 						12,
 						12
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Garen has <scaleArmor>@ResistsForTooltip@ bonus Armor</scaleArmor> and <scaleMR>@ResistsForTooltip@ bonus Magic Resist</scaleMR>. Killing units permanently grants <attention>@ResistGainOnKillTooltip@ resists</attention>, up to a max of <attention>@ResistMax@</attention>.<br><br><spellActive>Active:</spellActive> Garen steels his courage for @DRDuration@ seconds, reducing incoming damage by @DRPercent*100@%. He also gains <shield>@TotalShield@ Shield</shield> and <slow>@UpfrontTenacity*100@% Tenacity</slow> for @UpfrontDuration@ seconds.",
 					"dataValues": {
 						"BuffCounterPerKill": [
 							1,
@@ -281,6 +281,7 @@
 				{
 					"name": "Judgment",
 					"image": "assets/characters/garen/hud/icons2d/garen_e1.png",
+					"tooltip": "Garen rapidly spins his sword for @Duration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> @f1@ times over the duration. The nearest enemy takes <physicalDamage>@NearestEnemyBonus*100@% increased damage</physicalDamage>. Champions hit by @StacksToShred@ strikes lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br><recast>Recast</recast>: Garen ends this Ability early.",
 					"cooldownTime": [
 						9,
 						9,
@@ -290,7 +291,6 @@
 						6,
 						6
 					],
-					"tooltip": "Garen rapidly spins his sword for @Duration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> @f1@ times over the duration. The nearest enemy takes <physicalDamage>@NearestEnemyBonus*100@% increased damage</physicalDamage>. Champions hit by @StacksToShred@ strikes lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br><recast>Recast</recast>: Garen ends this Ability early.",
 					"dataValues": {
 						"NumTicks": [
 							7,
@@ -442,6 +442,7 @@
 				{
 					"name": "Demacian Justice",
 					"image": "assets/characters/garen/hud/icons2d/garen_r.png",
+					"tooltip": "Garen calls upon the might of Demacia to slay his enemy, dealing <trueDamage>@BaseDamage@ plus @ExecuteDamage*100@% missing Health true damage</trueDamage>.",
 					"cooldownTime": [
 						120,
 						120,
@@ -451,7 +452,6 @@
 						120,
 						120
 					],
-					"tooltip": "Garen calls upon the might of Demacia to slay his enemy, dealing <trueDamage>@BaseDamage@ plus @ExecuteDamage*100@% missing Health true damage</trueDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -534,5 +534,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

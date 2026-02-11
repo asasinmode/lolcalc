@@ -34,6 +34,8 @@
 				{
 					"name": "Boomerang Throw / Boulder Toss",
 					"image": "assets/characters/gnar/hud/icons2d/gnar_q.png",
+					"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar throws a boomerang that deals <physicalDamage>@spell.GnarQ:MiniTotalDamage@ physical damage</physicalDamage> and <status>Slows</status> by @spell.GnarQ:SlowAmount*100@% for @spell.GnarQ:SlowDuration@ seconds. The boomerang returns after hitting an enemy, dealing reduced damage to subsequent targets. Each enemy can only be hit once. Catching the boomerang reduces its Cooldown by @spell.GnarQ:MiniCDRefund*100@%.",
+					"tooltipExtended": "{{spell_GnarQ_Tooltip}}<br><br>{{spell_GnarBigQ_Tooltip}}",
 					"cooldownTime": [
 						17.5,
 						16,
@@ -43,8 +45,6 @@
 						10,
 						10
 					],
-					"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar throws a boomerang that deals <physicalDamage>@spell.GnarQ:MiniTotalDamage@ physical damage</physicalDamage> and <status>Slows</status> by @spell.GnarQ:SlowAmount*100@% for @spell.GnarQ:SlowDuration@ seconds. The boomerang returns after hitting an enemy, dealing reduced damage to subsequent targets. Each enemy can only be hit once. Catching the boomerang reduces its Cooldown by @spell.GnarQ:MiniCDRefund*100@%.",
-					"tooltipExtended": "{{spell_GnarQ_Tooltip}}<br><br>{{spell_GnarBigQ_Tooltip}}",
 					"dataValues": {
 						"MiniBaseDamage": [
 							5,
@@ -208,6 +208,8 @@
 				{
 					"name": "Hyper / Wallop",
 					"image": "assets/characters/gnar/hud/icons2d/gnar_w.png",
+					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Every third Attack or Ability on the same enemy deals an additional <magicDamage>@spell.GnarW:MiniTotalDamage@ plus @spell.GnarW:MiniPercentHPDamage*100@% max Health magic damage</magicDamage> and grants <speed>@spell.GnarR:RHyperMovementSpeedPercent@% Move Speed</speed> decaying over @spell.GnarW:MiniHasteDuration@ seconds.",
+					"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}",
 					"cooldownTime": [
 						7,
 						7,
@@ -217,8 +219,6 @@
 						7,
 						7
 					],
-					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Every third Attack or Ability on the same enemy deals an additional <magicDamage>@spell.GnarW:MiniTotalDamage@ plus @spell.GnarW:MiniPercentHPDamage*100@% max Health magic damage</magicDamage> and grants <speed>@spell.GnarR:RHyperMovementSpeedPercent@% Move Speed</speed> decaying over @spell.GnarW:MiniHasteDuration@ seconds.",
-					"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}",
 					"dataValues": {
 						"MiniBaseDamage": [
 							0,
@@ -348,6 +348,8 @@
 				{
 					"name": "Hop / Crunch",
 					"image": "assets/characters/gnar/hud/icons2d/gnar_e.png",
+					"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar leaps, gaining <attackSpeed>@spell.GnarE:MinibAS*100@% Attack Speed</attackSpeed> for @spell.GnarE:MiniASDuration@ seconds. If Gnar lands on a unit he will bounce off it, traveling further. Bouncing off an enemy deals <physicalDamage>@spell.GnarE:MiniTotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @spell.GnarE:MoveSpeedMod*-100@%.",
+					"tooltipExtended": "{{spell_GnarE_Tooltip}}<br><br>{{spell_GnarBigE_Tooltip}}",
 					"cooldownTime": [
 						24.5,
 						22,
@@ -357,8 +359,6 @@
 						12,
 						12
 					],
-					"tooltip": "<keywordMajor>Mini Gnar:</keywordMajor> Gnar leaps, gaining <attackSpeed>@spell.GnarE:MinibAS*100@% Attack Speed</attackSpeed> for @spell.GnarE:MiniASDuration@ seconds. If Gnar lands on a unit he will bounce off it, traveling further. Bouncing off an enemy deals <physicalDamage>@spell.GnarE:MiniTotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @spell.GnarE:MoveSpeedMod*-100@%.",
-					"tooltipExtended": "{{spell_GnarE_Tooltip}}<br><br>{{spell_GnarBigE_Tooltip}}",
 					"dataValues": {
 						"MinibAS": [
 							0.35,
@@ -507,6 +507,7 @@
 				{
 					"name": "GNAR!",
 					"image": "assets/characters/gnar/hud/icons2d/gnarbig_r.png",
+					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Increase <spellName>Hyper's</spellName> <speed>Move Speed</speed>.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gnar tosses nearby enemies, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, <status>Knocking Back</status>, and <status>Slowing</status> them by @RSlowPercent@% for @RCCDuration@ seconds. Enemies that hit a wall instead take <physicalDamage>@WallDamage@ physical damage</physicalDamage> and are <status>Stunned</status>.",
 					"cooldownTime": [
 						0,
 						90,
@@ -516,7 +517,6 @@
 						0,
 						0
 					],
-					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Increase <spellName>Hyper's</spellName> <speed>Move Speed</speed>.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gnar tosses nearby enemies, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, <status>Knocking Back</status>, and <status>Slowing</status> them by @RSlowPercent@% for @RCCDuration@ seconds. Enemies that hit a wall instead take <physicalDamage>@WallDamage@ physical damage</physicalDamage> and are <status>Stunned</status>.",
 					"dataValues": {
 						"RBaseDamage": [
 							100,
@@ -713,5 +713,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -60,8 +60,7 @@ const contents = computed<{
 				.replace('(', '<span>(')
 				.replace(')', ')</span>'),
 			'item',
-			item,
-			{ target: props.target },
+			[item, props.target],
 		);
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
 
@@ -71,8 +70,7 @@ const contents = computed<{
 				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
 					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
 					'item',
-					item,
-					{ target: props.target },
+					[item, props.target],
 				);
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;

@@ -34,6 +34,7 @@
 				{
 					"name": "Bloodlust",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_q.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining up to <scaleAD>@MaximumBonusAD@ Attack Damage</scaleAD> based on his missing Health.<br><br><spellActive>Active:</spellActive> Tryndamere consumes his <keywordMajor>Fury</keywordMajor>, restoring <healing>@BaseHeal@ plus @HealPerFury@ Health per Fury (max: @MaximumHeal@)</healing>. ",
 					"cooldownTime": [
 						12,
 						12,
@@ -43,7 +44,6 @@
 						12,
 						12
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining up to <scaleAD>@MaximumBonusAD@ Attack Damage</scaleAD> based on his missing Health.<br><br><spellActive>Active:</spellActive> Tryndamere consumes his <keywordMajor>Fury</keywordMajor>, restoring <healing>@BaseHeal@ plus @HealPerFury@ Health per Fury (max: @MaximumHeal@)</healing>. ",
 					"dataValues": {
 						"BaseHealing": [
 							20,
@@ -168,6 +168,7 @@
 				{
 					"name": "Mocking Shout",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_w.png",
+					"tooltip": "Tryndamere hurls insults, reducing champions' Attack Damage by @ADReduction*-1@ for @ReductionDuration@ seconds and <status>Slowing</status> by @SlowPotency*-100@% while cowering from him for @SlowDuration@ seconds.",
 					"cooldownTime": [
 						14,
 						14,
@@ -177,7 +178,6 @@
 						14,
 						14
 					],
-					"tooltip": "Tryndamere hurls insults, reducing champions' Attack Damage by @ADReduction*-1@ for @ReductionDuration@ seconds and <status>Slowing</status> by @SlowPotency*-100@% while cowering from him for @SlowDuration@ seconds.",
 					"dataValues": {
 						"ADReduction": [
 							-5,
@@ -226,6 +226,7 @@
 				{
 					"name": "Spinning Slash",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_e.png",
+					"tooltip": "Tryndamere spins through his enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and generating <keywordMajor>@NonChampFuryGain@ Fury</keywordMajor> per enemy hit, increased to <keywordMajor>@ChampFuryGain@ Fury</keywordMajor> against enemy champions.<br><br>This Ability's Cooldown is reduced by @NonChampCDRefund@ seconds when Tryndamere critically strikes, and reduced by @ChampCDRefund@ seconds when critically striking a champion.",
 					"cooldownTime": [
 						12,
 						12,
@@ -235,7 +236,6 @@
 						8,
 						7
 					],
-					"tooltip": "Tryndamere spins through his enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and generating <keywordMajor>@NonChampFuryGain@ Fury</keywordMajor> per enemy hit, increased to <keywordMajor>@ChampFuryGain@ Fury</keywordMajor> against enemy champions.<br><br>This Ability's Cooldown is reduced by @NonChampCDRefund@ seconds when Tryndamere critically strikes, and reduced by @ChampCDRefund@ seconds when critically striking a champion.",
 					"dataValues": {
 						"Damage": [
 							40,
@@ -340,6 +340,7 @@
 				{
 					"name": "Undying Rage",
 					"image": "assets/characters/tryndamere/hud/icons2d/tryndamere_r.png",
+					"tooltip": "Tryndamere becomes completely immune to death for @Effect3Amount@ seconds, refusing to be reduced below @Effect2Amount@ Health, and instantly gains <keywordMajor>@Effect1Amount@ Fury</keywordMajor>.",
 					"cooldownTime": [
 						120,
 						120,
@@ -349,7 +350,6 @@
 						80,
 						80
 					],
-					"tooltip": "Tryndamere becomes completely immune to death for @Effect3Amount@ seconds, refusing to be reduced below @Effect2Amount@ Health, and instantly gains <keywordMajor>@Effect1Amount@ Fury</keywordMajor>.",
 					"dataValues": {
 						"TryndRFuryGain": [
 							50,
@@ -457,5 +457,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

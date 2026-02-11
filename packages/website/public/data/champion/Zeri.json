@@ -34,6 +34,7 @@
 				{
 					"name": "Burst Fire",
 					"image": "assets/characters/zeri/hud/icons2d/zeriq.png",
+					"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. ",
 					"cooldownTime": [
 						0,
 						0,
@@ -43,7 +44,6 @@
 						0,
 						0
 					],
-					"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. ",
 					"dataValues": {
 						"MinCooldown": [
 							0.5,
@@ -247,6 +247,7 @@
 				{
 					"name": "Ultrashock Laser",
 					"image": "assets/characters/zeri/hud/icons2d/zeriw.png",
+					"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>.",
 					"mana": [
 						50,
 						60,
@@ -264,7 +265,6 @@
 						8,
 						8
 					],
-					"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"Damage": [
 							-10,
@@ -421,6 +421,7 @@
 				{
 					"name": "Spark Surge",
 					"image": "assets/characters/zeri/hud/icons2d/zerie.png",
+					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
 					"mana": [
 						90,
 						85,
@@ -438,7 +439,6 @@
 						18,
 						18
 					],
-					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
 					"dataValues": {
 						"MaxDistance": [
 							300,
@@ -656,6 +656,7 @@
 				{
 					"name": "Lightning Crash",
 					"image": "assets/characters/zeri/hud/icons2d/zerir.png",
+					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>",
 					"mana": [
 						100,
 						100,
@@ -673,7 +674,6 @@
 						70,
 						70
 					],
-					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>",
 					"dataValues": {
 						"StackDuration": [
 							5,
@@ -917,5 +917,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -34,6 +34,7 @@
 				{
 					"name": "Precision Protocol",
 					"image": "assets/characters/camille/hud/icons2d/camille_q1.png",
+					"tooltip": "Camille's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and grants her <speed>@MSBonus*100@% Move Speed</speed> for @MSDuration@ second. This ability can be <recast>Recast</recast> in the next @QTotalRecastTime@ seconds.<br><br>If the <recast>Recast</recast> Attack hits at least @QRampUpTime@ seconds after the first, the bonus damage is increased to <physicalDamage>@EmpoweredBonusDamage@</physicalDamage> and @DamageConversionPercentage@ of the Attack's damage is converted into <trueDamage>true damage</trueDamage>.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"mana": [
 						25,
 						25,
@@ -51,7 +52,6 @@
 						5,
 						5
 					],
-					"tooltip": "Camille's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and grants her <speed>@MSBonus*100@% Move Speed</speed> for @MSDuration@ second. This ability can be <recast>Recast</recast> in the next @QTotalRecastTime@ seconds.<br><br>If the <recast>Recast</recast> Attack hits at least @QRampUpTime@ seconds after the first, the bonus damage is increased to <physicalDamage>@EmpoweredBonusDamage@</physicalDamage> and @DamageConversionPercentage@ of the Attack's damage is converted into <trueDamage>true damage</trueDamage>.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"dataValues": {
 						"QRampUpTime": [
 							1.5,
@@ -168,6 +168,7 @@
 				{
 					"name": "Tactical Sweep",
 					"image": "assets/characters/camille/hud/icons2d/camille_w.png",
+					"tooltip": "Camille winds up and slices, dealing <physicalDamage>@BaseDamageTotal@ physical damage</physicalDamage>.<br><br>Enemies hit by the outer half are <status>Slowed</status> by @SlowPercentage@% decaying over @SlowDuration@ seconds, and they take an additional <physicalDamage>@OuterEdgeTooltip@ max Health physical damage</physicalDamage>. Camille restores <healing>@OuterConeHealingRatio@% of the bonus damage dealt to champions as Health</healing>.",
 					"mana": [
 						50,
 						55,
@@ -185,7 +186,6 @@
 						11,
 						11
 					],
-					"tooltip": "Camille winds up and slices, dealing <physicalDamage>@BaseDamageTotal@ physical damage</physicalDamage>.<br><br>Enemies hit by the outer half are <status>Slowed</status> by @SlowPercentage@% decaying over @SlowDuration@ seconds, and they take an additional <physicalDamage>@OuterEdgeTooltip@ max Health physical damage</physicalDamage>. Camille restores <healing>@OuterConeHealingRatio@% of the bonus damage dealt to champions as Health</healing>.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -346,6 +346,7 @@
 				{
 					"name": "Hookshot",
 					"image": "assets/characters/camille/hud/icons2d/camille_e.png",
+					"tooltip": "Camille fires a hookshot that attaches to terrain, pulling her to it for 1 second and allowing this Ability to be <recast>Recast</recast>.<br><br><recast>Recast:</recast> Camille dashes from the wall, colliding with the first enemy champion hit. Upon landing, she deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to nearby enemies and <status>Stuns</status> enemy champions for @KnockupDuration@ seconds. Dashes towards enemy champions travel twice as far and grant <attackSpeed>@ASBuff*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds on impact.",
 					"mana": [
 						70,
 						70,
@@ -363,7 +364,6 @@
 						12,
 						12
 					],
-					"tooltip": "Camille fires a hookshot that attaches to terrain, pulling her to it for 1 second and allowing this Ability to be <recast>Recast</recast>.<br><br><recast>Recast:</recast> Camille dashes from the wall, colliding with the first enemy champion hit. Upon landing, she deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to nearby enemies and <status>Stuns</status> enemy champions for @KnockupDuration@ seconds. Dashes towards enemy champions travel twice as far and grant <attackSpeed>@ASBuff*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds on impact.",
 					"dataValues": {
 						"EMinionMonsterGhostDuration": [
 							3,
@@ -491,6 +491,7 @@
 				{
 					"name": "The Hextech Ultimatum",
 					"image": "assets/characters/camille/hud/icons2d/camille_r.png",
+					"tooltip": "Camille briefly becomes Untargetable and leaps onto an enemy champion, interrupting channels and locking them into an area they cannot escape by any means for @RDuration@ seconds. Other nearby enemies are <status>Knocked Away</status>. Her Attacks against the trapped enemy deal an additional <magicDamage>@RPercentCurrentHPDamage@% current Health magic damage</magicDamage>.",
 					"mana": [
 						100,
 						100,
@@ -508,7 +509,6 @@
 						0,
 						70
 					],
-					"tooltip": "Camille briefly becomes Untargetable and leaps onto an enemy champion, interrupting channels and locking them into an area they cannot escape by any means for @RDuration@ seconds. Other nearby enemies are <status>Knocked Away</status>. Her Attacks against the trapped enemy deal an additional <magicDamage>@RPercentCurrentHPDamage@% current Health magic damage</magicDamage>.",
 					"dataValues": {
 						"RPercentCurrentHPDamage": [
 							2,
@@ -607,5 +607,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

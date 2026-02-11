@@ -34,6 +34,7 @@
 				{
 					"name": "Pierce",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_q.png",
+					"tooltip": "Kalista hurls a spear, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first target hit. If this kills the target, the spear continues onward, carrying any <spellName>{{Spell_KalistaExpungeWrapper_Name}}</spellName> stacks to the next target hit.<br><br>Kalista can dash after using this Ability using <spellName>{{Spell_KalistaPassiveBuff_Name}}</spellName>.",
 					"mana": [
 						60,
 						65,
@@ -51,7 +52,6 @@
 						9,
 						9
 					],
-					"tooltip": "Kalista hurls a spear, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first target hit. If this kills the target, the spear continues onward, carrying any <spellName>{{Spell_KalistaExpungeWrapper_Name}}</spellName> stacks to the next target hit.<br><br>Kalista can dash after using this Ability using <spellName>{{Spell_KalistaPassiveBuff_Name}}</spellName>.",
 					"dataValues": {
 						"BaseDamage": [
 							-55,
@@ -97,6 +97,7 @@
 				{
 					"name": "Sentinel",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
 					"cooldownTime": [
 						30,
 						30,
@@ -106,7 +107,6 @@
 						30,
 						30
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
 					"dataValues": {
 						"MarkDuration": [
 							4,
@@ -211,6 +211,7 @@
 				{
 					"name": "Rend",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_e.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
 					"mana": [
 						30,
 						30,
@@ -228,7 +229,6 @@
 						0,
 						0
 					],
-					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
 					"dataValues": {
 						"EpicMonsterDamageMod": [
 							0.5,
@@ -418,6 +418,7 @@
 				{
 					"name": "Fate's Call",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_r.png",
+					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
 					"mana": [
 						100,
 						100,
@@ -435,7 +436,6 @@
 						80,
 						60
 					],
-					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
 					"effectAmount": {
 						"1": [
 							0,
@@ -580,5 +580,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -87,23 +87,67 @@ export function runeVariableValue(variable: string, rune: IRune): IVariableValue
 	return { value, actualVariableName };
 }
 
-export type IGameVariableType = 'item' | 'rune';
+// TODO implement
+export function championAbilityVariableValue(_variable: string, _abilityVariant: IChampionAbility['variants'][number]): IVariableValueResult {
+	let value: IVariableValueResult['value'];
+	let actualVariableName: IVariableValueResult['actualVariableName'];
 
-interface IVariableTypeValueFunctions {
-	item: typeof itemVariableValue;
-	rune: typeof runeVariableValue;
+	return { value, actualVariableName };
+
+	// const [variableName, ...dotPath] = variable.split('.');
+	// const sources = ['calculations' in rune && rune.calculations, 'effectAmount' in rune && rune.effectAmount];
+
+	// if (dotPath.length) {
+	// 	actualVariableName = variableName;
+	// }
+
+	// for (const source of sources) {
+	// 	if (!source) {
+	// 		continue;
+	// 	}
+
+	// 	value = source[variableName!];
+	// 	if (value !== undefined) {
+	// 		for (const path in dotPath) {
+	// 			// TODO figure this out, some paths seem to have .0 or .-1
+	// 			const number = Number(path);
+	// 			if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
+	// 				value = (value as any)[path];
+	// 			}
+	// 		}
+	// 	}
+	// 	if (value !== undefined) {
+	// 		break;
+	// 	}
+	// }
+
+	// return { value, actualVariableName };
 }
 
-export function replaceGameDescriptionVariables<T extends IGameVariableType>(
-	text: string,
-	variableType: T,
-	item: Parameters<IVariableTypeValueFunctions[T]>[1],
-	{ target }: Partial<{ target: IGameVariableCalculationTarget }> = {},
-): {
+export type IGameVariableType = 'item' | 'rune' | 'championAbility';
+
+type ParametersExceptFirst<T extends (...args: any) => any> = T extends (first: any, ...rest: infer R) => any ? R : never;
+
+export interface IGameVariableValueParameters {
+	item: ParametersExceptFirst<typeof itemVariableValue>;
+	rune: ParametersExceptFirst<typeof runeVariableValue>;
+	championAbility: ParametersExceptFirst<typeof championAbilityVariableValue>;
+};
+
+interface IReplaceGameDescriptionVariablesRV {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
 	unknownVariables: [rawName: string, actualName: string | undefined][];
-} {
+}
+
+export function replaceGameDescriptionVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>): IReplaceGameDescriptionVariablesRV;
+export function replaceGameDescriptionVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>): IReplaceGameDescriptionVariablesRV;
+export function replaceGameDescriptionVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>): IReplaceGameDescriptionVariablesRV;
+export function replaceGameDescriptionVariables(
+	text: string,
+	variableType: IGameVariableType,
+	variableValueFunctionArguments: any[],
+): IReplaceGameDescriptionVariablesRV {
 	const unknownVariables: [string, string | undefined][] = [];
 	const variables = new Map<string, number | [number, number]>();
 
@@ -117,10 +161,19 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName } = (variableType === 'item' ? itemVariableValue : runeVariableValue)(variableName, item as any, target);
+		let { value: variable, isMeleeRanged, actualVariableName } = (variableType === 'item'
+			? itemVariableValue
+			: variableType === 'championAbility'
+				? championAbilityVariableValue
+				// @ts-expect-error spread if fine
+				: runeVariableValue)(variableName, ...variableValueFunctionArguments);
 
-		if (Array.isArray(variable) ? variable.some(v => typeof v !== 'number' || Number.isNaN(v)) : (typeof variable !== 'number' || Number.isNaN(variable))) {
-			variable = Array.isArray(variable) ? variable.map(v => (typeof v !== 'number' || Number.isNaN(v)) ? undefined : v) as typeof variable : undefined;
+		if (Array.isArray(variable)
+			? variable.some(v => typeof v !== 'number' || Number.isNaN(v))
+			: (typeof variable !== 'number' || Number.isNaN(variable))) {
+			variable = Array.isArray(variable)
+				? variable.map(v => (typeof v !== 'number' || Number.isNaN(v)) ? undefined : v) as typeof variable
+				: undefined;
 		}
 
 		if (variable === undefined) {
@@ -143,7 +196,14 @@ export function replaceGameDescriptionVariables<T extends IGameVariableType>(
 
 		variable = roundVariable(variable * multiplier);
 		variables.set(variableName, variable);
-		return isMeleeRanged ? `%i:${target?.isRanged ? 'ranged' : 'melee'}active% ${variable}` : variable.toString();
+
+		const meleeRangedIconPath = variableType === 'item' && (variableValueFunctionArguments as Parameters<typeof itemVariableValue>)[2]?.isRanged
+			? 'ranged'
+			: 'melee';
+
+		return isMeleeRanged
+			? `%i:${meleeRangedIconPath}active% ${variable}`
+			: variable.toString();
 	});
 
 	return { replaced, variables, unknownVariables };

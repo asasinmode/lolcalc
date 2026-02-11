@@ -34,6 +34,7 @@
 				{
 					"name": "Leap Strike",
 					"image": "assets/characters/jax/hud/icons2d/jaxq.png",
+					"tooltip": "Jax leaps to a friendly or enemy unit or ward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> if it is an enemy.",
 					"mana": [
 						65,
 						65,
@@ -51,7 +52,6 @@
 						6,
 						5.5
 					],
-					"tooltip": "Jax leaps to a friendly or enemy unit or ward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> if it is an enemy.",
 					"dataValues": {
 						"Damage": [
 							25,
@@ -89,6 +89,7 @@
 				{
 					"name": "Empower",
 					"image": "assets/characters/jax/hud/icons2d/jaxw.png",
+					"tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [
 						30,
 						30,
@@ -106,7 +107,6 @@
 						3,
 						3
 					],
-					"tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"Damage": [
 							15,
@@ -151,6 +151,7 @@
 				{
 					"name": "Counter Strike",
 					"image": "assets/characters/jax/hud/icons2d/jaxe.png",
+					"tooltip": "Jax enters a defensive stance for up to @DodgeDuration@ seconds, dodging incoming Attacks and taking @AoEDamageReduction@% less damage from area of effect Abilities. After @DodgeDuration@ seconds or <recast>Recasting</recast>, Jax deals <magicDamage>@TotalDamage@ + @PercentHealthDamage@% max Health magic damage</magicDamage> and <status>Stuns</status> nearby enemies for @StunDuration@ second. <br><br>The damage is increased by @PercentIncreasedPerDodge*100@% per Attack dodged, up to a maximum of <magicDamage>@MaxDamage@ + @MaxPercentHealthDamage@% max Health</magicDamage>.",
 					"mana": [
 						50,
 						60,
@@ -168,7 +169,6 @@
 						9,
 						9
 					],
-					"tooltip": "Jax enters a defensive stance for up to @DodgeDuration@ seconds, dodging incoming Attacks and taking @AoEDamageReduction@% less damage from area of effect Abilities. After @DodgeDuration@ seconds or <recast>Recasting</recast>, Jax deals <magicDamage>@TotalDamage@ + @PercentHealthDamage@% max Health magic damage</magicDamage> and <status>Stuns</status> nearby enemies for @StunDuration@ second. <br><br>The damage is increased by @PercentIncreasedPerDodge*100@% per Attack dodged, up to a maximum of <magicDamage>@MaxDamage@ + @MaxPercentHealthDamage@% max Health</magicDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							10,
@@ -297,6 +297,7 @@
 				{
 					"name": "Grandmaster-at-Arms",
 					"image": "assets/characters/jax/hud/icons2d/jaxr.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack within @PassiveFallOffTime@ seconds deals an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Jax slams his lantern down, dealing <magicDamage>@SwingDamageTotal@ magic damage</magicDamage> to nearby enemies. If he hits a champion he gains <scaleArmor>@BaseArmor@ Armor</scaleArmor> and <scaleMR>@BaseMR@ Magic Resist</scaleMR> plus <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR> per additional champion hit for @Duration@ seconds. During this time every second Attack deals additional <magicDamage>magic damage</magicDamage> instead of every third.",
 					"mana": [
 						100,
 						100,
@@ -314,7 +315,6 @@
 						7,
 						7
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack within @PassiveFallOffTime@ seconds deals an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Jax slams his lantern down, dealing <magicDamage>@SwingDamageTotal@ magic damage</magicDamage> to nearby enemies. If he hits a champion he gains <scaleArmor>@BaseArmor@ Armor</scaleArmor> and <scaleMR>@BaseMR@ Magic Resist</scaleMR> plus <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR> per additional champion hit for @Duration@ seconds. During this time every second Attack deals additional <magicDamage>magic damage</magicDamage> instead of every third.",
 					"dataValues": {
 						"Duration": [
 							8,
@@ -588,5 +588,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

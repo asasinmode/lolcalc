@@ -34,6 +34,7 @@
 				{
 					"name": "Twofold Hex",
 					"image": "assets/characters/aurora/hud/icons2d/auroraq.aurora.png",
+					"tooltip": "Fire cursed energy in a direction, dealing <magicDamage>@damage@ magic damage</magicDamage> to enemies and cursing them for @MarkDuration@ seconds.<br><br><recast>Recast:</recast> End the curse, drawing back part of the enemy's spirit to Aurora, dealing up to <magicDamage>@Q2DamageMax@ magic damage</magicDamage> to enemies passed through based on their missing Health. Damage beyond the first hit is reduced to 20%.<br><br>If the duration runs out, Aurora will automatically <recast>Recast</recast> the Ability.",
 					"mana": [
 						60,
 						60,
@@ -51,7 +52,6 @@
 						7,
 						6.5
 					],
-					"tooltip": "Fire cursed energy in a direction, dealing <magicDamage>@damage@ magic damage</magicDamage> to enemies and cursing them for @MarkDuration@ seconds.<br><br><recast>Recast:</recast> End the curse, drawing back part of the enemy's spirit to Aurora, dealing up to <magicDamage>@Q2DamageMax@ magic damage</magicDamage> to enemies passed through based on their missing Health. Damage beyond the first hit is reduced to 20%.<br><br>If the duration runs out, Aurora will automatically <recast>Recast</recast> the Ability.",
 					"dataValues": {
 						"BaseDamage": [
 							20,
@@ -169,6 +169,7 @@
 				{
 					"name": "Across the Veil",
 					"image": "assets/characters/aurora/hud/icons2d/auroraw.aurora.png",
+					"tooltip": "Hop in a direction. Upon landing, enter the spirit realm, becoming <keywordStealth>Invisible</keywordStealth> for @InvisDuration@ seconds and entering <keywordMajor>Realm Hopper</keywordMajor>, gaining <speed>@MoveSpeedBonus@% Move Speed</speed>.<br><br>Scoring a takedown on an enemy champion resets this Ability's Cooldown.",
 					"mana": [
 						80,
 						80,
@@ -186,7 +187,6 @@
 						18,
 						17
 					],
-					"tooltip": "Hop in a direction. Upon landing, enter the spirit realm, becoming <keywordStealth>Invisible</keywordStealth> for @InvisDuration@ seconds and entering <keywordMajor>Realm Hopper</keywordMajor>, gaining <speed>@MoveSpeedBonus@% Move Speed</speed>.<br><br>Scoring a takedown on an enemy champion resets this Ability's Cooldown.",
 					"dataValues": {
 						"InvisDuration": [
 							0.85,
@@ -244,6 +244,7 @@
 				{
 					"name": "The Weirding",
 					"image": "assets/characters/aurora/hud/icons2d/aurorae.aurora.png",
+					"tooltip": "Converge the realms, sending out a blast of spirit magic dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slowing</status> them by @SlowPercent*-100@% decaying over @SlowDuration@ second.<br><br>Aurora hops backwards a short distance after casting.<br>",
 					"mana": [
 						80,
 						80,
@@ -261,7 +262,6 @@
 						11,
 						10
 					],
-					"tooltip": "Converge the realms, sending out a blast of spirit magic dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slowing</status> them by @SlowPercent*-100@% decaying over @SlowDuration@ second.<br><br>Aurora hops backwards a short distance after casting.<br>",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -351,6 +351,7 @@
 				{
 					"name": "Between Worlds",
 					"image": "assets/characters/aurora/hud/icons2d/aurorar.aurora.png",
+					"tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Slows</status> enemies hit by @SlowPercent*-100@% for 2 seconds.<br><br>The area of convergence stays active for @AreaDuration@ seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> for @RBuffDuration@ seconds, allowing her to jump from one edge of the area to another.<br><br>Enemies attempting to enter or leave the area are <status>Slowed</status> by @ExitSlowPercent*-100@% for @StunDuration@ seconds.<br><br>Aurora can <recast>Recast</recast> this Ability to end the effect early.",
 					"mana": [
 						100,
 						100,
@@ -368,7 +369,6 @@
 						10,
 						10
 					],
-					"tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Slows</status> enemies hit by @SlowPercent*-100@% for 2 seconds.<br><br>The area of convergence stays active for @AreaDuration@ seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> for @RBuffDuration@ seconds, allowing her to jump from one edge of the area to another.<br><br>Enemies attempting to enter or leave the area are <status>Slowed</status> by @ExitSlowPercent*-100@% for @StunDuration@ seconds.<br><br>Aurora can <recast>Recast</recast> this Ability to end the effect early.",
 					"dataValues": {
 						"BaseDamage": [
 							75,
@@ -639,5 +639,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

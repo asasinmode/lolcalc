@@ -34,6 +34,7 @@
 				{
 					"name": "Tumble",
 					"image": "assets/characters/vayne/hud/icons2d/vayne_q.png",
+					"tooltip": "Vayne rolls a short distance, and deals an additional <physicalDamage>@ADRatioBonus@ physical damage</physicalDamage> on her next Attack.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"mana": [
 						30,
 						30,
@@ -51,7 +52,6 @@
 						2,
 						2
 					],
-					"tooltip": "Vayne rolls a short distance, and deals an additional <physicalDamage>@ADRatioBonus@ physical damage</physicalDamage> on her next Attack.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"dataValues": {
 						"TotalADRatio": [
 							0.65,
@@ -106,6 +106,7 @@
 				{
 					"name": "Silver Bolts",
 					"image": "assets/characters/vayne/hud/icons2d/vayne_w.png",
+					"tooltip": "<spellPassive>Passive</spellPassive>: Every third consecutive Attack or Ability against an enemy deals an additional <trueDamage>@TotalDamage@ max Health true damage</trueDamage>.",
 					"cooldownTime": [
 						0,
 						0,
@@ -115,7 +116,6 @@
 						0,
 						0
 					],
-					"tooltip": "<spellPassive>Passive</spellPassive>: Every third consecutive Attack or Ability against an enemy deals an additional <trueDamage>@TotalDamage@ max Health true damage</trueDamage>.",
 					"dataValues": {
 						"MaxHealthRatio": [
 							0.05,
@@ -175,6 +175,7 @@
 				{
 					"name": "Condemn",
 					"image": "assets/characters/vayne/hud/icons2d/vayne_e.png",
+					"tooltip": "Vayne fires a bolt that <status>Knocks Back</status> and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If the target collides with terrain, they take <physicalDamage>@EmpoweredDamageTT@ bonus physical damage</physicalDamage> and become <status>Stunned</status> for @StunDuration@ seconds. ",
 					"mana": [
 						90,
 						90,
@@ -192,7 +193,6 @@
 						12,
 						12
 					],
-					"tooltip": "Vayne fires a bolt that <status>Knocks Back</status> and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If the target collides with terrain, they take <physicalDamage>@EmpoweredDamageTT@ bonus physical damage</physicalDamage> and become <status>Stunned</status> for @StunDuration@ seconds. ",
 					"dataValues": {
 						"Damage": [
 							15,
@@ -263,6 +263,7 @@
 				{
 					"name": "Final Hour",
 					"image": "assets/characters/vayne/hud/icons2d/vayne_r.png",
+					"tooltip": "Vayne gains <physicalDamage>@BonusAttackDamage@ Attack Damage</physicalDamage> for @BaseDuration@ seconds, extended by @DurationToAdd@ seconds whenever a champion damaged by Vayne dies within @DamagedMarkerDuration@ seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>@MovementSpeed@ Move Speed</speed>.<li>The Cooldown of <spellName>Tumble</spellName> is reduced by @TumbleCDReduction@%, and grants <keywordStealth>Invisibility</keywordStealth> for @TumbleStealthDuration@ second.",
 					"mana": [
 						80,
 						80,
@@ -280,7 +281,6 @@
 						70,
 						70
 					],
-					"tooltip": "Vayne gains <physicalDamage>@BonusAttackDamage@ Attack Damage</physicalDamage> for @BaseDuration@ seconds, extended by @DurationToAdd@ seconds whenever a champion damaged by Vayne dies within @DamagedMarkerDuration@ seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>@MovementSpeed@ Move Speed</speed>.<li>The Cooldown of <spellName>Tumble</spellName> is reduced by @TumbleCDReduction@%, and grants <keywordStealth>Invisibility</keywordStealth> for @TumbleStealthDuration@ second.",
 					"dataValues": {
 						"BonusAttackDamage": [
 							20,
@@ -381,5 +381,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

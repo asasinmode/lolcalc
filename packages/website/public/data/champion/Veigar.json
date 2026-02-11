@@ -34,6 +34,7 @@
 				{
 					"name": "Baleful Strike",
 					"image": "assets/characters/veigar/hud/icons2d/veigarbalefulstrike.png",
+					"tooltip": "Veigar unleashes a bolt of dark energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit.<br><br>If Veigar kills an enemy with this Ability, he gains @Spell.VeigarPassive:dQKillStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor>. Large minions and large monsters grant @Spell.VeigarPassive:dQKillStacksLarge@ stacks instead.",
 					"mana": [
 						30,
 						35,
@@ -51,7 +52,6 @@
 						4,
 						3.5
 					],
-					"tooltip": "Veigar unleashes a bolt of dark energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit.<br><br>If Veigar kills an enemy with this Ability, he gains @Spell.VeigarPassive:dQKillStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor>. Large minions and large monsters grant @Spell.VeigarPassive:dQKillStacksLarge@ stacks instead.",
 					"dataValues": {
 						"APRatio": [
 							0.45,
@@ -116,6 +116,8 @@
 				{
 					"name": "Dark Matter",
 					"image": "assets/characters/veigar/hud/icons2d/veigardarkmatter.png",
+					"tooltip": "Veigar summons dark matter from the sky, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Every @Spell.VeigarPassive:PStacksPerDarkMatterCDR@ stacks of <keywordMajor>Phenomenal Evil</keywordMajor> reduce this Ability's Cooldown by @Spell.VeigarPassive:DarkMatterCDRIncrement*100@%.",
+					"tooltipExtended": "{{Spell_VeigarDarkMatter_Tooltip}}<br><br>Cooldown currently reduced by <statTracking>@f2.0*100@%</statTracking>.",
 					"mana": [
 						60,
 						65,
@@ -133,8 +135,6 @@
 						0,
 						0
 					],
-					"tooltip": "Veigar summons dark matter from the sky, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Every @Spell.VeigarPassive:PStacksPerDarkMatterCDR@ stacks of <keywordMajor>Phenomenal Evil</keywordMajor> reduce this Ability's Cooldown by @Spell.VeigarPassive:DarkMatterCDRIncrement*100@%.",
-					"tooltipExtended": "{{Spell_VeigarDarkMatter_Tooltip}}<br><br>Cooldown currently reduced by <statTracking>@f2.0*100@%</statTracking>.",
 					"dataValues": {
 						"APRatio": [
 							0.6,
@@ -199,6 +199,7 @@
 				{
 					"name": "Event Horizon",
 					"image": "assets/characters/veigar/hud/icons2d/veigareventhorizon.png",
+					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @Effect1Amount@ seconds. The cage lasts for 3 seconds.",
 					"mana": [
 						70,
 						75,
@@ -216,7 +217,6 @@
 						14,
 						14
 					],
-					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @Effect1Amount@ seconds. The cage lasts for 3 seconds.",
 					"effectAmount": {
 						"0": [
 							1.25,
@@ -247,6 +247,7 @@
 				{
 					"name": "Primordial Burst",
 					"image": "assets/characters/veigar/hud/icons2d/veigarprimordialburst.png",
+					"tooltip": "Veigar blasts an enemy champion with primal magic to deal between <magicDamage>@MinDamage@ and @MaxDamage@ magic damage</magicDamage>, increasing with the target's missing Health. Damage is maximized against enemies below 33% Health.",
 					"mana": [
 						100,
 						100,
@@ -264,7 +265,6 @@
 						60,
 						60
 					],
-					"tooltip": "Veigar blasts an enemy champion with primal magic to deal between <magicDamage>@MinDamage@ and @MaxDamage@ magic damage</magicDamage>, increasing with the target's missing Health. Damage is maximized against enemies below 33% Health.",
 					"dataValues": {
 						"APRatio": [
 							0.6,
@@ -396,5 +396,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

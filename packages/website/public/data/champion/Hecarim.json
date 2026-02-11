@@ -34,6 +34,7 @@
 				{
 					"name": "Rampage",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png",
+					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.<br>",
 					"mana": [
 						28,
 						26,
@@ -51,7 +52,6 @@
 						4,
 						4
 					],
-					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.<br>",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -203,6 +203,7 @@
 				{
 					"name": "Spirit of Dread",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_spiritofdread.png",
+					"tooltip": "Hecarim deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over @BuffDuration@ seconds to nearby enemies. <br><br>Hecarim gains <passive>@ResistAmount@</passive> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and heals for <healing>@LeechAmount@% of damage</healing> nearby enemies take from Hecarim and <healing>@AllyTooltipLeachValue@% of damage</healing> taken from his allies.",
 					"mana": [
 						50,
 						55,
@@ -220,7 +221,6 @@
 						14,
 						14
 					],
-					"tooltip": "Hecarim deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over @BuffDuration@ seconds to nearby enemies. <br><br>Hecarim gains <passive>@ResistAmount@</passive> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and heals for <healing>@LeechAmount@% of damage</healing> nearby enemies take from Hecarim and <healing>@AllyTooltipLeachValue@% of damage</healing> taken from his allies.",
 					"dataValues": {
 						"NonSelfLeechRatio": [
 							0.5,
@@ -343,6 +343,7 @@
 				{
 					"name": "Devastating Charge",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_devastingcharge.png",
+					"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Effect5Amount@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
 					"mana": [
 						60,
 						60,
@@ -360,7 +361,6 @@
 						16,
 						15
 					],
-					"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Effect5Amount@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
 					"dataValues": {
 						"MinMoveSpeed": [
 							0.25,
@@ -524,6 +524,7 @@
 				{
 					"name": "Onslaught of Shadows",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_onslaughtofshadows.png",
+					"tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>@DamageDone@ magic damage</magicDamage>. Hecarim unleashes a shockwave at the end of the charge that <status>Fears</status> for between @FearDurationMin@ to @FearDurationMax@ seconds, increased by charge distance.",
 					"mana": [
 						100,
 						100,
@@ -541,7 +542,6 @@
 						100,
 						0
 					],
-					"tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>@DamageDone@ magic damage</magicDamage>. Hecarim unleashes a shockwave at the end of the charge that <status>Fears</status> for between @FearDurationMin@ to @FearDurationMax@ seconds, increased by charge distance.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -706,5 +706,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

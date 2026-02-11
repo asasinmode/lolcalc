@@ -34,6 +34,7 @@
 				{
 					"name": "Piercing Darkness",
 					"image": "assets/characters/senna/hud/icons2d/senna_q.png",
+					"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second.",
 					"mana": [
 						70,
 						80,
@@ -51,7 +52,6 @@
 						15,
 						15
 					],
-					"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second.",
 					"dataValues": {
 						"BaseDamage": [
 							0,
@@ -225,6 +225,7 @@
 				{
 					"name": "Last Embrace",
 					"image": "assets/characters/senna/hud/icons2d/senna_w.png",
+					"tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After a @DelayTime@ second delay the target and other nearby enemies are <status>Rooted</status> for @RootDuration@ second(s).",
 					"mana": [
 						50,
 						55,
@@ -242,7 +243,6 @@
 						11,
 						11
 					],
-					"tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After a @DelayTime@ second delay the target and other nearby enemies are <status>Rooted</status> for @RootDuration@ second(s).",
 					"dataValues": {
 						"BaseDamage": [
 							25,
@@ -298,6 +298,7 @@
 				{
 					"name": "Curse of the Black Mist",
 					"image": "assets/characters/senna/hud/icons2d/senna_e.png",
+					"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby.",
 					"mana": [
 						70,
 						70,
@@ -315,7 +316,6 @@
 						20,
 						20
 					],
-					"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby.",
 					"dataValues": {
 						"BuffDuration": [
 							5.5,
@@ -424,6 +424,7 @@
 				{
 					"name": "Dawning Shadow",
 					"image": "assets/characters/senna/hud/icons2d/senna_r.png",
+					"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.",
 					"mana": [
 						100,
 						100,
@@ -441,7 +442,6 @@
 						100,
 						100
 					],
-					"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.",
 					"dataValues": {
 						"Damage": [
 							100,
@@ -834,5 +834,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

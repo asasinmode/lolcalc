@@ -34,6 +34,7 @@
 				{
 					"name": "Infected Bonesaw",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_q.png",
+					"tooltip": "Dr. Mundo hurls his bonesaw, dealing <magicDamage>@CurrentHealthDamage*100@% current Health magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the bonesaw hits a champion or monster, Dr. Mundo restores <healing>@HealthRestoreOnHitChampionMonster@ Health</healing>. If it hits a non-champion or non-monster, Dr. Mundo instead restores <healing>@HealthRestoreOnHitMinion@ Health</healing>.",
 					"cooldownTime": [
 						4,
 						4,
@@ -43,7 +44,6 @@
 						4,
 						4
 					],
-					"tooltip": "Dr. Mundo hurls his bonesaw, dealing <magicDamage>@CurrentHealthDamage*100@% current Health magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the bonesaw hits a champion or monster, Dr. Mundo restores <healing>@HealthRestoreOnHitChampionMonster@ Health</healing>. If it hits a non-champion or non-monster, Dr. Mundo instead restores <healing>@HealthRestoreOnHitMinion@ Health</healing>.",
 					"dataValues": {
 						"SlowDuration": [
 							2,
@@ -160,6 +160,7 @@
 				{
 					"name": "Heart Zapper",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_w.png",
+					"tooltip": "Dr. Mundo charges up a defibrilator, dealing <magicDamage>@DamagePerTick*4@ magic damage</magicDamage> each second for up to @Duration@ seconds to nearby enemies. Additionally he stores @GrayHealthStorageInitial@ of damage taken for the first @GrayHealthInitialDuration@ seconds and @GrayHealthStorage*100@% for the remaining duration as gray health and can <recast>Recast</recast>.<br><br><recast>Recast:</recast> Detonate the defibrilator, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. If this hits at least one champion, Dr. Mundo restores <healing>@GrayHealthBigMod*100@% of gray health</healing>, otherwise he instead restores <healing>@GrayHealthSmallMod*100@% of gray health</healing>.",
 					"cooldownTime": [
 						17,
 						17,
@@ -169,7 +170,6 @@
 						15,
 						15
 					],
-					"tooltip": "Dr. Mundo charges up a defibrilator, dealing <magicDamage>@DamagePerTick*4@ magic damage</magicDamage> each second for up to @Duration@ seconds to nearby enemies. Additionally he stores @GrayHealthStorageInitial@ of damage taken for the first @GrayHealthInitialDuration@ seconds and @GrayHealthStorage*100@% for the remaining duration as gray health and can <recast>Recast</recast>.<br><br><recast>Recast:</recast> Detonate the defibrilator, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. If this hits at least one champion, Dr. Mundo restores <healing>@GrayHealthBigMod*100@% of gray health</healing>, otherwise he instead restores <healing>@GrayHealthSmallMod*100@% of gray health</healing>.",
 					"dataValues": {
 						"Duration": [
 							3,
@@ -298,6 +298,7 @@
 				{
 					"name": "Blunt Force Trauma",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_e.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Dr Mundo gains <physicalDamage>@PassiveBonusAD@ Attack Damage</physicalDamage>.<br><br><spellActive>Active:</spellActive> Dr Mundo violently swings his \"medical\" bag, causing his next Attack to deal an additional <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage>, increased by up to @MaxDamageAmpTooltip@ based on his missing Health. If the enemy is killed, Mundo swats them away, dealing <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> to enemies they pass through.",
 					"cooldownTime": [
 						9,
 						9,
@@ -307,7 +308,6 @@
 						6,
 						6
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Dr Mundo gains <physicalDamage>@PassiveBonusAD@ Attack Damage</physicalDamage>.<br><br><spellActive>Active:</spellActive> Dr Mundo violently swings his \"medical\" bag, causing his next Attack to deal an additional <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage>, increased by up to @MaxDamageAmpTooltip@ based on his missing Health. If the enemy is killed, Mundo swats them away, dealing <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> to enemies they pass through.",
 					"dataValues": {
 						"AttackOverrideDuration": [
 							4,
@@ -453,6 +453,7 @@
 				{
 					"name": "Maximum Dosage",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_r.png",
+					"tooltip": "Dr. Mundo pumps himself with chemicals, gaining <healing>@MissingHealthHeal*100@% of his missing Health as max Health</healing>, <speed>@SpeedBoostAmount*100@% Move Speed</speed>, and regenerating <healing>@MaxHealthHoT*100@% max Health</healing> over @Duration@ seconds.<br><br>At Rank 3, both healing effects are increased by an additional @BonusPerNearbyChampion*100@% per nearby enemy champion.",
 					"cooldownTime": [
 						120,
 						120,
@@ -462,7 +463,6 @@
 						120,
 						120
 					],
-					"tooltip": "Dr. Mundo pumps himself with chemicals, gaining <healing>@MissingHealthHeal*100@% of his missing Health as max Health</healing>, <speed>@SpeedBoostAmount*100@% Move Speed</speed>, and regenerating <healing>@MaxHealthHoT*100@% max Health</healing> over @Duration@ seconds.<br><br>At Rank 3, both healing effects are increased by an additional @BonusPerNearbyChampion*100@% per nearby enemy champion.",
 					"dataValues": {
 						"Duration": [
 							10,
@@ -529,6 +529,7 @@
 				{
 					"name": "Goes Where He Pleases",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_p.png",
+					"tooltip": "Dr. Mundo resists the first <status>Immobilizing</status> effect that hits him, instead losing <healing>@CurrentHealthLoss*100@% current Health</healing> and dropping a chemical cannister nearby for @CannisterGroundDuration@ seconds. Moving over it reduces this Ability's Cooldown by @PassiveCooldownRefund@ seconds and restores <healing>@MaxHealthGain*100@% max Health</healing>. Enemy champions moving over the cannister destroy it.<br><br>Dr. Mundo regenerates <healing>@MaxHealthRegen@ max Health</healing> every 5 seconds.",
 					"cooldownTime": [
 						0,
 						0,
@@ -538,7 +539,6 @@
 						0,
 						0
 					],
-					"tooltip": "Dr. Mundo resists the first <status>Immobilizing</status> effect that hits him, instead losing <healing>@CurrentHealthLoss*100@% current Health</healing> and dropping a chemical cannister nearby for @CannisterGroundDuration@ seconds. Moving over it reduces this Ability's Cooldown by @PassiveCooldownRefund@ seconds and restores <healing>@MaxHealthGain*100@% max Health</healing>. Enemy champions moving over the cannister destroy it.<br><br>Dr. Mundo regenerates <healing>@MaxHealthRegen@ max Health</healing> every 5 seconds.",
 					"dataValues": {
 						"CannisterGroundDuration": [
 							7,
@@ -678,5 +678,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -34,6 +34,7 @@
 				{
 					"name": "Command: Attack",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
+					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first.",
 					"mana": [
 						35,
 						35,
@@ -51,7 +52,6 @@
 						3,
 						3
 					],
-					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first.",
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mFormulaParts": [
@@ -117,6 +117,7 @@
 				{
 					"name": "Command: Dissonance",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaw.png",
+					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds.",
 					"mana": [
 						60,
 						65,
@@ -134,7 +135,6 @@
 						7,
 						7
 					],
-					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -216,6 +216,7 @@
 				{
 					"name": "Command: Protect",
 					"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"mana": [
 						60,
 						60,
@@ -233,7 +234,6 @@
 						9,
 						9
 					],
-					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -319,6 +319,7 @@
 				{
 					"name": "Command: Shockwave",
 					"image": "assets/characters/orianna/hud/icons2d/oriannar.png",
+					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
 					"mana": [
 						100,
 						100,
@@ -336,7 +337,6 @@
 						80,
 						80
 					],
-					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
 					"dataValues": {
 						"Damage": [
 							100,
@@ -469,5 +469,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

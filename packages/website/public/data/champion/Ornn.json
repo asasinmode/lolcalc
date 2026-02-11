@@ -34,6 +34,7 @@
 				{
 					"name": "Volcanic Rupture",
 					"image": "assets/characters/ornn/hud/icons2d/ornnq.png",
+					"tooltip": "Ornn slams the ground, creating a fissure dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @Effect5Amount@% for @Effect6Amount@ seconds. A pillar of rock forms at the fissure's end for @Effect3Amount@ seconds. ",
 					"mana": [
 						45,
 						45,
@@ -51,7 +52,6 @@
 						7,
 						6.5
 					],
-					"tooltip": "Ornn slams the ground, creating a fissure dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @Effect5Amount@% for @Effect6Amount@ seconds. A pillar of rock forms at the fissure's end for @Effect3Amount@ seconds. ",
 					"dataValues": {
 						"BaseDamage": [
 							-5,
@@ -135,6 +135,7 @@
 				{
 					"name": "Bellows Breath",
 					"image": "assets/characters/ornn/hud/icons2d/ornnw.png",
+					"tooltip": "Ornn stomps forward Unstoppably while breathing fire, dealing <magicDamage>@MaxPercentHPPerTickTooltip@% max Health magic damage</magicDamage> over @BreathDuration@ seconds. Enemies hit by the final bout of flame become <keywordMajor>Brittle</keywordMajor> for @BrittleDuration@ seconds.<br><br><status>Immobilizing</status> effects on <keywordMajor>Brittle</keywordMajor> targets have their duration increased by 30% and deal an additional <magicDamage>@BrittlePercentMaxHPCalc@ max Health magic damage</magicDamage>. Ornn's Attacks against <keywordMajor>Brittle</keywordMajor> targets <status>Knock</status> them <status>Back</status>, dealing the additional damage.",
 					"mana": [
 						45,
 						50,
@@ -152,7 +153,6 @@
 						10,
 						9.5
 					],
-					"tooltip": "Ornn stomps forward Unstoppably while breathing fire, dealing <magicDamage>@MaxPercentHPPerTickTooltip@% max Health magic damage</magicDamage> over @BreathDuration@ seconds. Enemies hit by the final bout of flame become <keywordMajor>Brittle</keywordMajor> for @BrittleDuration@ seconds.<br><br><status>Immobilizing</status> effects on <keywordMajor>Brittle</keywordMajor> targets have their duration increased by 30% and deal an additional <magicDamage>@BrittlePercentMaxHPCalc@ max Health magic damage</magicDamage>. Ornn's Attacks against <keywordMajor>Brittle</keywordMajor> targets <status>Knock</status> them <status>Back</status>, dealing the additional damage.",
 					"dataValues": {
 						"MinimumDamagePerTick": [
 							6,
@@ -312,6 +312,7 @@
 				{
 					"name": "Searing Charge",
 					"image": "assets/characters/ornn/hud/icons2d/ornne.png",
+					"tooltip": "Ornn charges, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If Ornn rams into terrain, he creates a shockwave that <status>Knocks Up</status> enemies for @KnockupDuration@ seconds and applies the same damage to those not hit by the charge.<br><br>Ornn's charge destroys magma pillars and terrain created by enemies.",
 					"mana": [
 						35,
 						40,
@@ -329,7 +330,6 @@
 						12,
 						12
 					],
-					"tooltip": "Ornn charges, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If Ornn rams into terrain, he creates a shockwave that <status>Knocks Up</status> enemies for @KnockupDuration@ seconds and applies the same damage to those not hit by the charge.<br><br>Ornn's charge destroys magma pillars and terrain created by enemies.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -445,6 +445,7 @@
 				{
 					"name": "Call of the Forge God",
 					"image": "assets/characters/ornn/hud/icons2d/ornnr1.png",
+					"tooltip": "Ornn summons a massive lava elemental, which stampedes towards him, dealing <magicDamage>@RDamageCalc@ magic damage</magicDamage>, applying <keywordMajor>Brittle</keywordMajor> to, and <status>Slowing</status> enemies hit by @RSlowPercentBasePreMath@% for @BrittleDurationTOOLTIPONLY@ seconds.<br><br>Ornn can <recast>Recast</recast> to dash with a headbutt. If he dashes into the elemental, he redirects and empowers it, causing it to <status>Knock Up</status> the first champion for @RStunDuration@ second and subsequent champions for @MinStun@ seconds. The elemental also deals <magicDamage>@RDamageCalc@ magic damage</magicDamage> and reapplies <keywordMajor>Brittle</keywordMajor>.",
 					"mana": [
 						100,
 						100,
@@ -462,7 +463,6 @@
 						100,
 						100
 					],
-					"tooltip": "Ornn summons a massive lava elemental, which stampedes towards him, dealing <magicDamage>@RDamageCalc@ magic damage</magicDamage>, applying <keywordMajor>Brittle</keywordMajor> to, and <status>Slowing</status> enemies hit by @RSlowPercentBasePreMath@% for @BrittleDurationTOOLTIPONLY@ seconds.<br><br>Ornn can <recast>Recast</recast> to dash with a headbutt. If he dashes into the elemental, he redirects and empowers it, causing it to <status>Knock Up</status> the first champion for @RStunDuration@ second and subsequent champions for @MinStun@ seconds. The elemental also deals <magicDamage>@RDamageCalc@ magic damage</magicDamage> and reapplies <keywordMajor>Brittle</keywordMajor>.",
 					"dataValues": {
 						"RCastRange": [
 							2500,
@@ -595,6 +595,8 @@
 				{
 					"name": "Living Forge",
 					"image": "assets/characters/ornn/hud/icons2d/ornnp.png",
+					"tooltip": "{{Spell_OrnnP_Tooltip_@GameModeInteger@}}",
+					"tooltipExtended": "{{Spell_OrnnP_TooltipExtended_@GameModeInteger@}}",
 					"cooldownTime": [
 						0,
 						0,
@@ -604,8 +606,6 @@
 						0,
 						0
 					],
-					"tooltip": "{{Spell_OrnnP_Tooltip_@GameModeInteger@}}",
-					"tooltipExtended": "{{Spell_OrnnP_TooltipExtended_@GameModeInteger@}}",
 					"dataValues": {
 						"MasterworkLevel": [
 							13,
@@ -803,5 +803,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

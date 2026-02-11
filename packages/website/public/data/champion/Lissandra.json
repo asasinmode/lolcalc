@@ -34,6 +34,7 @@
 				{
 					"name": "Ice Shard",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
+					"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them.",
 					"mana": [
 						55,
 						60,
@@ -51,7 +52,6 @@
 						4,
 						3
 					],
-					"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them.",
 					"dataValues": {
 						"damage": [
 							45,
@@ -125,6 +125,7 @@
 				{
 					"name": "Ring of Frost",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
+					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [
 						40,
 						40,
@@ -142,7 +143,6 @@
 						8,
 						8
 					],
-					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
@@ -205,6 +205,7 @@
 				{
 					"name": "Glacial Path",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png",
+					"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location.",
 					"mana": [
 						80,
 						85,
@@ -222,7 +223,6 @@
 						12,
 						12
 					],
-					"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location.",
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
@@ -285,6 +285,7 @@
 				{
 					"name": "Frozen Tomb",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png",
+					"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%.",
 					"mana": [
 						100,
 						100,
@@ -302,7 +303,6 @@
 						10,
 						10
 					],
-					"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%.",
 					"dataValues": {
 						"APRatio": [
 							0.75,
@@ -504,5 +504,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

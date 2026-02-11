@@ -34,6 +34,7 @@
 				{
 					"name": "Head Rush",
 					"image": "assets/characters/briar/hud/icons2d/briarq.png",
+					"tooltip": "Briar leaps to a target, <status>Stunning</status> it for @StunDuration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and reducing @ShredPercent*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.<br><br><rules>Briar will stop prioritizing champions if she casts this Ability on a minion or monster during <keywordMajor>Blood Frenzy</keywordMajor>.</rules>",
 					"cooldownTime": [
 						13,
 						13,
@@ -43,7 +44,6 @@
 						9,
 						8
 					],
-					"tooltip": "Briar leaps to a target, <status>Stunning</status> it for @StunDuration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and reducing @ShredPercent*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.<br><br><rules>Briar will stop prioritizing champions if she casts this Ability on a minion or monster during <keywordMajor>Blood Frenzy</keywordMajor>.</rules>",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -130,6 +130,7 @@
 				{
 					"name": "Blood Frenzy / Snack Attack",
 					"image": "assets/characters/briar/hud/icons2d/briarw.png",
+					"tooltip": "Briar leaps and enters a <keywordMajor>Blood Frenzy</keywordMajor>, self-taunting to the nearest enemy for @BerserkDuration@ seconds, prioritizing Champions. While in <keywordMajor>Blood Frenzy</keywordMajor> she gains <attackSpeed>@BerserkAS*100@% Attack Speed</attackSpeed> and <speed>@BerserkMS*100@% Move Speed</speed>, and her Attacks deal <physicalDamage>@TotalAoEDamage@ physical damage</physicalDamage> to enemies surrounding her target.<br><br>Briar can <recast>Recast</recast> this Ability to empower her next Attack. It deals <physicalDamage>@TotalAttackBonusDamage@ + @TotalAttackPercentMissingHealth@% missing Health physical damage</physicalDamage> and <healing>heals Briar for @AttackMaxHPHeal@ + @AttackHealPercent*100@% of the damage dealt</healing>.<br>",
 					"cooldownTime": [
 						14,
 						14,
@@ -139,7 +140,6 @@
 						10,
 						10
 					],
-					"tooltip": "Briar leaps and enters a <keywordMajor>Blood Frenzy</keywordMajor>, self-taunting to the nearest enemy for @BerserkDuration@ seconds, prioritizing Champions. While in <keywordMajor>Blood Frenzy</keywordMajor> she gains <attackSpeed>@BerserkAS*100@% Attack Speed</attackSpeed> and <speed>@BerserkMS*100@% Move Speed</speed>, and her Attacks deal <physicalDamage>@TotalAoEDamage@ physical damage</physicalDamage> to enemies surrounding her target.<br><br>Briar can <recast>Recast</recast> this Ability to empower her next Attack. It deals <physicalDamage>@TotalAttackBonusDamage@ + @TotalAttackPercentMissingHealth@% missing Health physical damage</physicalDamage> and <healing>heals Briar for @AttackMaxHPHeal@ + @AttackHealPercent*100@% of the damage dealt</healing>.<br>",
 					"dataValues": {
 						"TauntRange": [
 							1000,
@@ -334,6 +334,7 @@
 				{
 					"name": "Chilling Scream",
 					"image": "assets/characters/briar/hud/icons2d/briare.png",
+					"tooltip": "<charge>Begin Charging:</charge> Briar removes <keywordMajor>Blood Frenzy</keywordMajor> and gathers energy, gaining @DRPercent@% damage reduction and restoring <healing>@PercentMaxHPHeal@ Health</healing> over 1 second.<br><br><release>Release:</release> Briar unleashes a scream that deals up to <magicDamage>@Damage@ magic damage</magicDamage> based on time charged, and <status>Slows</status> by @SlowPercent*100@% for @SlowDuration@ seconds. When fully charged, the scream <status>Knocks Back</status> enemies, dealing <magicDamage>@WallHitDamage@ magic damage</magicDamage> to those who hit a wall and <status>Stunning</status> them for @WallStunDuration@ seconds.",
 					"cooldownTime": [
 						16,
 						16,
@@ -343,7 +344,6 @@
 						16,
 						16
 					],
-					"tooltip": "<charge>Begin Charging:</charge> Briar removes <keywordMajor>Blood Frenzy</keywordMajor> and gathers energy, gaining @DRPercent@% damage reduction and restoring <healing>@PercentMaxHPHeal@ Health</healing> over 1 second.<br><br><release>Release:</release> Briar unleashes a scream that deals up to <magicDamage>@Damage@ magic damage</magicDamage> based on time charged, and <status>Slows</status> by @SlowPercent*100@% for @SlowDuration@ seconds. When fully charged, the scream <status>Knocks Back</status> enemies, dealing <magicDamage>@WallHitDamage@ magic damage</magicDamage> to those who hit a wall and <status>Stunning</status> them for @WallStunDuration@ seconds.",
 					"dataValues": {
 						"MaxBaseDamage": [
 							45,
@@ -547,6 +547,7 @@
 				{
 					"name": "Certain Death",
 					"image": "assets/characters/briar/hud/icons2d/briarr.png",
+					"tooltip": "Briar kicks her pillory's hemolith gemstone and flies to the location of the first champion it hits, marking them as her prey. On landing, she deals <magicDamage>@Damage@ magic damage</magicDamage> to everything nearby and causes enemies who are not her prey to <status>Flee</status> for @FearDuration@ seconds. She then enters an empowered <keywordMajor>Blood Frenzy</keywordMajor> and will pursue her prey until death. During this time, she gains @TotalResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @LifeStealPercent*100@% Lifesteal, and an additional <speed>@ExtraMoveSpeedPercent*100@% Move Speed</speed>.",
 					"cooldownTime": [
 						120,
 						120,
@@ -556,7 +557,6 @@
 						70,
 						70
 					],
-					"tooltip": "Briar kicks her pillory's hemolith gemstone and flies to the location of the first champion it hits, marking them as her prey. On landing, she deals <magicDamage>@Damage@ magic damage</magicDamage> to everything nearby and causes enemies who are not her prey to <status>Flee</status> for @FearDuration@ seconds. She then enters an empowered <keywordMajor>Blood Frenzy</keywordMajor> and will pursue her prey until death. During this time, she gains @TotalResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @LifeStealPercent*100@% Lifesteal, and an additional <speed>@ExtraMoveSpeedPercent*100@% Move Speed</speed>.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -835,5 +835,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

@@ -34,6 +34,7 @@
 				{
 					"name": "Crushing Blow",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcrushingblow.png",
+					"tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains @AttackRangeBonus@ range, deals an additional <physicalDamage>@BonusDamageTT@ physical damage</physicalDamage>, and removes <scaleArmor>@ArmorShredPercent*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br>This Ability's cooldown is reduced by @CooldownDecrease@ seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"mana": [
 						20,
 						20,
@@ -51,7 +52,6 @@
 						6,
 						6
 					],
-					"tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains @AttackRangeBonus@ range, deals an additional <physicalDamage>@BonusDamageTT@ physical damage</physicalDamage>, and removes <scaleArmor>@ArmorShredPercent*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br>This Ability's cooldown is reduced by @CooldownDecrease@ seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"dataValues": {
 						"BaseDamage": [
 							-5,
@@ -159,6 +159,7 @@
 				{
 					"name": "Warrior Trickster",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingdecoy.png",
+					"tooltip": "Wukong dashes and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ second, leaving behind a stationary <keywordMajor>Clone</keywordMajor> for @CloneDuration@ seconds.<br><br>The <keywordMajor>Clone</keywordMajor> Attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, each dealing @CloneDamageMod*100@% of normal damage.",
 					"mana": [
 						60,
 						55,
@@ -176,7 +177,6 @@
 						18,
 						18
 					],
-					"tooltip": "Wukong dashes and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ second, leaving behind a stationary <keywordMajor>Clone</keywordMajor> for @CloneDuration@ seconds.<br><br>The <keywordMajor>Clone</keywordMajor> Attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, each dealing @CloneDamageMod*100@% of normal damage.",
 					"dataValues": {
 						"CloneDamageMod": [
 							0.25,
@@ -243,6 +243,7 @@
 				{
 					"name": "Nimbus Strike",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingnimbusstrike.png",
+					"tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to @ExtraTargets@ additional enemies nearby. Each enemy struck takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>",
 					"mana": [
 						30,
 						35,
@@ -260,7 +261,6 @@
 						7,
 						7
 					],
-					"tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to @ExtraTargets@ additional enemies nearby. Each enemy struck takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>",
 					"dataValues": {
 						"BaseDamage": [
 							40,
@@ -366,6 +366,7 @@
 				{
 					"name": "Cyclone",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcyclone.png",
+					"tooltip": "Wukong gains <speed>@MoveSpeed*100@% Move Speed</speed> and spins his staff, <status>Knocking Up</status> nearby enemies for @KnockupDuration@ seconds and take <physicalDamage>@TotalDamageTT@ plus @PercentHPDamageTT@ max Health physical damage</physicalDamage> over @SpinDuration@ seconds.<br><br>This Ability can be cast a second time within @RecastWindow@ seconds before going on cooldown.",
 					"mana": [
 						100,
 						100,
@@ -383,7 +384,6 @@
 						90,
 						10
 					],
-					"tooltip": "Wukong gains <speed>@MoveSpeed*100@% Move Speed</speed> and spins his staff, <status>Knocking Up</status> nearby enemies for @KnockupDuration@ seconds and take <physicalDamage>@TotalDamageTT@ plus @PercentHPDamageTT@ max Health physical damage</physicalDamage> over @SpinDuration@ seconds.<br><br>This Ability can be cast a second time within @RecastWindow@ seconds before going on cooldown.",
 					"dataValues": {
 						"KnockupDuration": [
 							0.6,
@@ -532,6 +532,7 @@
 				{
 					"name": "Stone Skin",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png",
+					"tooltip": "Wukong gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and regenerates <healing>@HealthPercentPer5*100@% max Health per 5 seconds</healing>. These bonuses are increased by @StackMultiplier*100@% for @StackDuration@ seconds every time he or his <keywordMajor>Clone</keywordMajor> hit an enemy champion or jungle monster with an Attack or Ability, stacking up to @MaxStacks@ times.",
 					"cooldownTime": [
 						20,
 						20,
@@ -541,7 +542,6 @@
 						20,
 						20
 					],
-					"tooltip": "Wukong gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and regenerates <healing>@HealthPercentPer5*100@% max Health per 5 seconds</healing>. These bonuses are increased by @StackMultiplier*100@% for @StackDuration@ seconds every time he or his <keywordMajor>Clone</keywordMajor> hit an enemy champion or jungle monster with an Attack or Ability, stacking up to @MaxStacks@ times.",
 					"dataValues": {
 						"CombatDuration": [
 							3,
@@ -637,5 +637,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

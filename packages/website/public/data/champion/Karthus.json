@@ -34,6 +34,7 @@
 				{
 					"name": "Lay Waste",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_q.png",
+					"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>.",
 					"mana": [
 						20,
 						25,
@@ -51,7 +52,6 @@
 						0,
 						0
 					],
-					"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"MonsterMod": [
 							1,
@@ -123,6 +123,7 @@
 				{
 					"name": "Wall of Pain",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_w.png",
+					"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration.",
 					"mana": [
 						70,
 						70,
@@ -140,7 +141,6 @@
 						15,
 						15
 					],
-					"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration.",
 					"effectAmount": {
 						"0": [
 							25,
@@ -198,6 +198,7 @@
 				{
 					"name": "Defile",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_e.png",
+					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
 					"mana": [
 						30,
 						42,
@@ -215,7 +216,6 @@
 						0.5,
 						0.5
 					],
-					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
 					"dataValues": {
 						"DamagePerSecond": [
 							10,
@@ -304,6 +304,7 @@
 				{
 					"name": "Requiem",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_r.png",
+					"tooltip": "Karthus channels for 3 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemy champions, regardless of distance.",
 					"mana": [
 						100,
 						100,
@@ -321,7 +322,6 @@
 						180,
 						200
 					],
-					"tooltip": "Karthus channels for 3 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemy champions, regardless of distance.",
 					"dataValues": {
 						"BaseDamage": [
 							50,
@@ -382,5 +382,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

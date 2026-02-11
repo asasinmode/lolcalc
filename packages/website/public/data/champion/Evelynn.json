@@ -34,6 +34,7 @@
 				{
 					"name": "Hate Spike",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_q1.png",
+					"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit.",
 					"mana": [
 						40,
 						45,
@@ -51,7 +52,6 @@
 						4,
 						4
 					],
-					"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit.",
 					"dataValues": {
 						"MissileBaseDamage": [
 							25,
@@ -236,6 +236,7 @@
 				{
 					"name": "Allure",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_w.png",
+					"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>.",
 					"mana": [
 						60,
 						70,
@@ -253,7 +254,6 @@
 						11,
 						11
 					],
-					"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>.",
 					"dataValues": {
 						"CharmDuration": [
 							1,
@@ -435,6 +435,7 @@
 				{
 					"name": "Whiplash",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_e1.png",
+					"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead.",
 					"mana": [
 						40,
 						45,
@@ -452,7 +453,6 @@
 						8,
 						8
 					],
-					"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead.",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -640,6 +640,7 @@
 				{
 					"name": "Last Caress",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_r.png",
+					"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown.",
 					"mana": [
 						100,
 						100,
@@ -657,7 +658,6 @@
 						80,
 						80
 					],
-					"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown.",
 					"dataValues": {
 						"CritMultiplier": [
 							2.4,
@@ -843,5 +843,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

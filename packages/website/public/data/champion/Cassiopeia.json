@@ -34,6 +34,7 @@
 				{
 					"name": "Noxious Blast",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_q.png",
+					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @Effect2Amount@ seconds. Hitting a champion grants Cassiopeia <speed>@Effect3Amount@% Move Speed</speed> decaying over @Effect4Amount@ seconds.",
 					"mana": [
 						50,
 						55,
@@ -51,7 +52,6 @@
 						3.5,
 						3.5
 					],
-					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @Effect2Amount@ seconds. Hitting a champion grants Cassiopeia <speed>@Effect3Amount@% Move Speed</speed> decaying over @Effect4Amount@ seconds.",
 					"spellCalculations": {
 						"TooltipTotalDamage": {
 							"tooltipOnly": true,
@@ -124,6 +124,7 @@
 				{
 					"name": "Miasma",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_w.png",
+					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @Effect4Amount@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @Effect2Amount@%.",
 					"mana": [
 						70,
 						75,
@@ -141,7 +142,6 @@
 						16,
 						14
 					],
-					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @Effect4Amount@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @Effect2Amount@%.",
 					"spellCalculations": {
 						"DamagePerSecond": {
 							"tooltipOnly": true,
@@ -205,6 +205,7 @@
 				{
 					"name": "Twin Fang",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_e.png",
+					"tooltip": "Cassiopeia launches deadly fangs, dealing <magicDamage>@BasicDamage@ magic damage</magicDamage>. If the enemy is <keywordMajor>Poisoned</keywordMajor>, they take an additional <magicDamage>@BonusPoisonedDamage@ magic damage</magicDamage> and Cassiopeia restores <healing>@HealCalc@ Health</healing>, reduced to <healing>@HealCalcMinion@ Health</healing> against lane minions and small monsters.<br><br>If this kills the target, Cassiopeia restores <scaleMana>@Cost@ Mana</scaleMana>.<br><br>",
 					"mana": [
 						40,
 						40,
@@ -222,7 +223,6 @@
 						0.75,
 						0.75
 					],
-					"tooltip": "Cassiopeia launches deadly fangs, dealing <magicDamage>@BasicDamage@ magic damage</magicDamage>. If the enemy is <keywordMajor>Poisoned</keywordMajor>, they take an additional <magicDamage>@BonusPoisonedDamage@ magic damage</magicDamage> and Cassiopeia restores <healing>@HealCalc@ Health</healing>, reduced to <healing>@HealCalcMinion@ Health</healing> against lane minions and small monsters.<br><br>If this kills the target, Cassiopeia restores <scaleMana>@Cost@ Mana</scaleMana>.<br><br>",
 					"dataValues": {
 						"BasicAPRatio": [
 							0.1,
@@ -322,6 +322,7 @@
 				{
 					"name": "Petrifying Gaze",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_r.png",
+					"tooltip": "Cassiopeia unleashes a petrifying gaze, dealing <magicDamage>@RDamage@ magic damage</magicDamage> and <status>Stunning</status> enemies facing her for @RCCDuration@ seconds. Enemies facing away are <status>Slowed</status> by @RSlowPercent@% decaying over the same duration instead.",
 					"mana": [
 						100,
 						100,
@@ -339,7 +340,6 @@
 						10,
 						10
 					],
-					"tooltip": "Cassiopeia unleashes a petrifying gaze, dealing <magicDamage>@RDamage@ magic damage</magicDamage> and <status>Stunning</status> enemies facing her for @RCCDuration@ seconds. Enemies facing away are <status>Slowed</status> by @RSlowPercent@% decaying over the same duration instead.",
 					"dataValues": {
 						"RCCDuration": [
 							2,
@@ -419,5 +419,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

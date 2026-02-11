@@ -34,6 +34,7 @@
 				{
 					"name": "Poison Trail",
 					"image": "assets/characters/singed/hud/icons2d/singed_q.png",
+					"tooltip": "<toggle>Toggle:</toggle> Singed lays a poisonous trail that deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.",
 					"mana": [
 						13,
 						13,
@@ -51,7 +52,6 @@
 						0,
 						0
 					],
-					"tooltip": "<toggle>Toggle:</toggle> Singed lays a poisonous trail that deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.",
 					"dataValues": {
 						"BaseDamagePerSecond": [
 							10,
@@ -148,6 +148,7 @@
 				{
 					"name": "Mega Adhesive",
 					"image": "assets/characters/singed/hud/icons2d/singed_w.png",
+					"tooltip": "Singed hurls a cask of sticky liquid, <status>Grounding</status> and <status>Slowing</status> enemies in the area by @SlowPercent@% for @WDuration@ seconds.",
 					"mana": [
 						60,
 						70,
@@ -165,7 +166,6 @@
 						13,
 						13
 					],
-					"tooltip": "Singed hurls a cask of sticky liquid, <status>Grounding</status> and <status>Slowing</status> enemies in the area by @SlowPercent@% for @WDuration@ seconds.",
 					"dataValues": {
 						"SlowPercent": [
 							45,
@@ -214,6 +214,7 @@
 				{
 					"name": "Fling",
 					"image": "assets/characters/singed/hud/icons2d/singed_e.png",
+					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds.",
 					"mana": [
 						60,
 						70,
@@ -231,7 +232,6 @@
 						8,
 						8
 					],
-					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds.",
 					"spellCalculations": {
 						"BaseDamage": {
 							"tooltipOnly": true,
@@ -304,6 +304,7 @@
 				{
 					"name": "Insanity Potion",
 					"image": "assets/characters/singed/hud/icons2d/singed_r.png",
+					"tooltip": "Singed drinks a potent brew of chemicals, granting him @StatAmount@ <scaleAP>Ability Power</scaleAP>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, <speed>Move Speed</speed>, <healing>Health Regen</healing>, and <scaleMana>Mana Regen</scaleMana> for @Duration@ seconds. During this effect, Singed's <spellName>Poison Trail</spellName> also applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ second.",
 					"mana": [
 						100,
 						100,
@@ -321,7 +322,6 @@
 						100,
 						100
 					],
-					"tooltip": "Singed drinks a potent brew of chemicals, granting him @StatAmount@ <scaleAP>Ability Power</scaleAP>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, <speed>Move Speed</speed>, <healing>Health Regen</healing>, and <scaleMana>Mana Regen</scaleMana> for @Duration@ seconds. During this effect, Singed's <spellName>Poison Trail</spellName> also applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ second.",
 					"dataValues": {
 						"StatAmount": [
 							-10,
@@ -413,5 +413,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

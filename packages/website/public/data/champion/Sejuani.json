@@ -34,6 +34,7 @@
 				{
 					"name": "Arctic Assault",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_q.png",
+					"tooltip": "Sejuani charges, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to enemies and <status>Knocking</status> them <status>Up</status> for @Effect4Amount@ seconds. The charge ends after hitting an enemy champion.",
 					"mana": [
 						60,
 						65,
@@ -51,7 +52,6 @@
 						12,
 						12
 					],
-					"tooltip": "Sejuani charges, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to enemies and <status>Knocking</status> them <status>Up</status> for @Effect4Amount@ seconds. The charge ends after hitting an enemy champion.",
 					"dataValues": {
 						"BaseDamage": [
 							40,
@@ -125,6 +125,8 @@
 				{
 					"name": "Winter's Wrath",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_w.png",
+					"tooltip": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage</physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>.",
+					"tooltipExtended": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage </physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>.",
 					"mana": [
 						60,
 						60,
@@ -142,8 +144,6 @@
 						5,
 						5
 					],
-					"tooltip": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage</physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>.",
-					"tooltipExtended": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage </physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>.",
 					"dataValues": {
 						"SlowAmount": [
 							0.75,
@@ -275,6 +275,7 @@
 				{
 					"name": "Permafrost",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_e.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Nearby melee allied champions' Attacks apply a stack to champions and jungle monsters.<br><br><spellPassive>Active:</spellPassive> Sejuani deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to target enemy with 4 stacks and <status>Stuns</status> them for @Effect1Amount@ second. ",
 					"mana": [
 						20,
 						20,
@@ -292,7 +293,6 @@
 						1.5,
 						1.5
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Nearby melee allied champions' Attacks apply a stack to champions and jungle monsters.<br><br><spellPassive>Active:</spellPassive> Sejuani deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to target enemy with 4 stacks and <status>Stuns</status> them for @Effect1Amount@ second. ",
 					"dataValues": {
 						"PerChampionCD": [
 							8,
@@ -393,6 +393,7 @@
 				{
 					"name": "Glacial Prison",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_r.png",
+					"tooltip": "Sejuani throws her True Ice bola, <status>Stunning</status> and revealing the first enemy champion hit for @Effect2Amount@ second and dealing <magicDamage>@MinorDamageTooltip@ magic damage</magicDamage>.<br><br>If the bola travels at least 25% of its range, it <status>Stuns</status> and reveals for @Effect6Amount@ seconds instead. It then also creates an ice storm that <status>Slows</status> surrounding enemies by @Effect4Amount@% for @Effect3Amount@ seconds. All affected enemies take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"mana": [
 						100,
 						100,
@@ -410,7 +411,6 @@
 						90,
 						90
 					],
-					"tooltip": "Sejuani throws her True Ice bola, <status>Stunning</status> and revealing the first enemy champion hit for @Effect2Amount@ second and dealing <magicDamage>@MinorDamageTooltip@ magic damage</magicDamage>.<br><br>If the bola travels at least 25% of its range, it <status>Stuns</status> and reveals for @Effect6Amount@ seconds instead. It then also creates an ice storm that <status>Slows</status> surrounding enemies by @Effect4Amount@% for @Effect3Amount@ seconds. All affected enemies take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mFormulaParts": [
@@ -640,5 +640,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

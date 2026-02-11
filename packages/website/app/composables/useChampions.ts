@@ -36,6 +36,8 @@ export interface IChampion {
 	partype: string;
 	stats: Record<IChampionStat, number>;
 	abilities: Record<'passive' | 'q' | 'w' | 'e' | 'r', IChampionAbility>;
+	/** nested stringtable variables used in champion abilities' descriptions */
+	stringtable: Record<string, string>;
 }
 
 export interface IListedChampion extends Pick<IChampion, 'id' | 'name'> {
@@ -51,8 +53,9 @@ export interface IChampionAbility {
 		image: string;
 		mana?: number[];
 		cooldownTime?: number[];
-		/** if present, means the variant uses the tooltip of another variant at the specified index */
-		tooltipVariantIndex?: number;
+		// TODO not sure if still needed, Aphelios variants use it maybe?
+		// /** if present, means the variant uses the tooltip of another variant at the specified index */
+		// tooltipVariantIndex?: number;
 		tooltip?: string;
 		tooltipExtended?: string;
 		dataValues: any;

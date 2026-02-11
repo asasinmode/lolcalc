@@ -34,6 +34,7 @@
 				{
 					"name": "Bouncing Blade",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_q.png",
+					"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target.",
 					"cooldownTime": [
 						12,
 						11,
@@ -43,7 +44,6 @@
 						7,
 						7
 					],
-					"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target.",
 					"dataValues": {
 						"BaseDamage": [
 							45,
@@ -126,6 +126,7 @@
 				{
 					"name": "Preparation",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
+					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds.",
 					"cooldownTime": [
 						16,
 						15,
@@ -135,7 +136,6 @@
 						11,
 						11
 					],
-					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds.",
 					"effectAmount": {
 						"1": [
 							1.25,
@@ -166,6 +166,7 @@
 				{
 					"name": "Shunpo",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
+					"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target.",
 					"cooldownTime": [
 						12,
 						12,
@@ -175,7 +176,6 @@
 						8,
 						8
 					],
-					"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target.",
 					"dataValues": {
 						"BaseDamage": [
 							10,
@@ -305,6 +305,7 @@
 				{
 					"name": "Death Lotus",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
+					"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>.",
 					"cooldownTime": [
 						75,
 						75,
@@ -314,7 +315,6 @@
 						0,
 						0
 					],
-					"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"DamagePerTick": [
 							12.5,
@@ -599,5 +599,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

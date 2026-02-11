@@ -34,6 +34,7 @@
 				{
 					"name": "Double Up",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png",
+					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
 					"mana": [
 						40,
 						40,
@@ -51,7 +52,6 @@
 						3,
 						3
 					],
-					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
 					"dataValues": {
 						"BaseDamage": [
 							-5,
@@ -211,6 +211,7 @@
 				{
 					"name": "Strut",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png",
+					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
 					"mana": [
 						45,
 						45,
@@ -228,7 +229,6 @@
 						12,
 						12
 					],
-					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
 					"dataValues": {
 						"PassiveBaseMS": [
 							25,
@@ -315,6 +315,7 @@
 				{
 					"name": "Make It Rain",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png",
+					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
 					"mana": [
 						80,
 						80,
@@ -332,7 +333,6 @@
 						14,
 						13
 					],
-					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
 					"dataValues": {
 						"BaseDamagePerSecond": [
 							20,
@@ -442,6 +442,7 @@
 				{
 					"name": "Bullet Time",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png",
+					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
 					"mana": [
 						100,
 						100,
@@ -459,7 +460,6 @@
 						80,
 						70
 					],
-					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
 					"dataValues": {
 						"BaseWaves": [
 							12,
@@ -579,6 +579,8 @@
 				{
 					"name": "Love Tap",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
+					"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
+					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",
 					"cooldownTime": [
 						0,
 						0,
@@ -588,8 +590,6 @@
 						0,
 						0
 					],
-					"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
-					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",
 					"spellCalculations": {
 						"TotalDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -648,5 +648,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

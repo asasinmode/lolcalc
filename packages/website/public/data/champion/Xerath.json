@@ -34,6 +34,7 @@
 				{
 					"name": "Arcanopulse",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png",
+					"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged.",
 					"mana": [
 						80,
 						90,
@@ -51,7 +52,6 @@
 						5,
 						5
 					],
-					"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -170,6 +170,7 @@
 				{
 					"name": "Eye of Destruction",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png",
+					"tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. Enemies in the center take <magicDamage>@SweetSpotTotalDamage@ magic damage</magicDamage> instead and are <status>Slowed</status> by @SweetSpotSlowAmount*100@%, decaying over @SlowDuration@ seconds.",
 					"mana": [
 						80,
 						90,
@@ -187,7 +188,6 @@
 						10,
 						9
 					],
-					"tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. Enemies in the center take <magicDamage>@SweetSpotTotalDamage@ magic damage</magicDamage> instead and are <status>Slowed</status> by @SweetSpotSlowAmount*100@%, decaying over @SlowDuration@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							15,
@@ -283,6 +283,7 @@
 				{
 					"name": "Shocking Orb",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png",
+					"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. ",
 					"mana": [
 						60,
 						65,
@@ -300,7 +301,6 @@
 						11,
 						11
 					],
-					"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. ",
 					"dataValues": {
 						"MinStunDuration": [
 							0.75,
@@ -401,6 +401,7 @@
 				{
 					"name": "Rite of the Arcane",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png",
+					"tooltip": "Xerath ascends to his true form and channels for @Effect1Amount@ seconds. During this time he may <recast>Recast</recast> up to @Effect2Amount@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>.",
 					"mana": [
 						100,
 						100,
@@ -418,7 +419,6 @@
 						130,
 						130
 					],
-					"tooltip": "Xerath ascends to his true form and channels for @Effect1Amount@ seconds. During this time he may <recast>Recast</recast> up to @Effect2Amount@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>.",
 					"dataValues": {
 						"RampBaseDamage": [
 							15,
@@ -591,5 +591,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

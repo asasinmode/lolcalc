@@ -34,6 +34,7 @@
 				{
 					"name": "Blinding Assault",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_q.png",
+					"tooltip": "Quinn orders Valor to dive, making the first enemy hit <keywordMajor>Vulnerable</keywordMajor>, reducing their vision radius for @Effect3Amount@ seconds and dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all surrounding enemies.<br><br>If the first enemy struck is not a champion, it is <status>Disarmed</status> for @Effect3Amount@ seconds.",
 					"mana": [
 						50,
 						55,
@@ -51,7 +52,6 @@
 						9,
 						9
 					],
-					"tooltip": "Quinn orders Valor to dive, making the first enemy hit <keywordMajor>Vulnerable</keywordMajor>, reducing their vision radius for @Effect3Amount@ seconds and dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all surrounding enemies.<br><br>If the first enemy struck is not a champion, it is <status>Disarmed</status> for @Effect3Amount@ seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							30,
@@ -131,6 +131,7 @@
 				{
 					"name": "Heightened Senses",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Attacking a <keywordMajor>Vulnerable</keywordMajor> target grants Quinn <attackSpeed>@AttackSpeedBonus*100@% Attack Speed</attackSpeed> and <speed>@Effect3Amount*100@% Move Speed</speed> for @Effect1Amount@ seconds.<br><br><spellActive>Active:</spellActive> Valor reveals a large area nearby for @Effect5Amount@ seconds.",
 					"cooldownTime": [
 						55,
 						50,
@@ -140,7 +141,6 @@
 						30,
 						30
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Attacking a <keywordMajor>Vulnerable</keywordMajor> target grants Quinn <attackSpeed>@AttackSpeedBonus*100@% Attack Speed</attackSpeed> and <speed>@Effect3Amount*100@% Move Speed</speed> for @Effect1Amount@ seconds.<br><br><spellActive>Active:</spellActive> Valor reveals a large area nearby for @Effect5Amount@ seconds.",
 					"dataValues": {
 						"AttackSpeedBonus": [
 							0.15,
@@ -209,6 +209,7 @@
 				{
 					"name": "Vault",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_e.png",
+					"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them <keywordMajor>Vulnerable</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @Effect1Amount*100@%, decaying over @Effect3Amount@ seconds.",
 					"mana": [
 						50,
 						50,
@@ -226,7 +227,6 @@
 						8,
 						8
 					],
-					"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them <keywordMajor>Vulnerable</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @Effect1Amount*100@%, decaying over @Effect3Amount@ seconds.",
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
@@ -282,6 +282,7 @@
 				{
 					"name": "Behind Enemy Lines",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_r1.png",
+					"tooltip": "Quinn calls to Valor, pairing up after channeling for 2 seconds gaining <speed>@MovementSpeedMod*100@% Move Speed</speed> and allowing her to <recast>Recast</recast> this Ability. Attacking or using <spellName>{{Spell_QuinnQ_Name}}</spellName> or <spellName>{{Spell_QuinnE_Name}}</spellName> automatically <recast>Recasts</recast> this Ability.<br><br><recast>Recast</recast>: Quinn and Valor perform an aerial maneuver, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, marking champions as <keywordMajor>Vulnerable</keywordMajor>, and ending this Ability.",
 					"mana": [
 						100,
 						50,
@@ -299,7 +300,6 @@
 						3,
 						3
 					],
-					"tooltip": "Quinn calls to Valor, pairing up after channeling for 2 seconds gaining <speed>@MovementSpeedMod*100@% Move Speed</speed> and allowing her to <recast>Recast</recast> this Ability. Attacking or using <spellName>{{Spell_QuinnQ_Name}}</spellName> or <spellName>{{Spell_QuinnE_Name}}</spellName> automatically <recast>Recasts</recast> this Ability.<br><br><recast>Recast</recast>: Quinn and Valor perform an aerial maneuver, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, marking champions as <keywordMajor>Vulnerable</keywordMajor>, and ending this Ability.",
 					"dataValues": {
 						"MovementSpeedMod": [
 							0.4,
@@ -437,5 +437,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

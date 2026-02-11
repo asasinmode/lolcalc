@@ -34,6 +34,7 @@
 				{
 					"name": "Siphoning Strike",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_q.png",
+					"tooltip": "Nasus' next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Killing an enemy with this Attack permanently increases its damage by @BasicStacks@, increased to @BigStacks@ against champions, large minions and large jungle monsters.",
 					"mana": [
 						20,
 						20,
@@ -51,7 +52,6 @@
 						3.5,
 						2.5
 					],
-					"tooltip": "Nasus' next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Killing an enemy with this Attack permanently increases its damage by @BasicStacks@, increased to @BigStacks@ against champions, large minions and large jungle monsters.",
 					"dataValues": {
 						"BonusRange": [
 							50,
@@ -160,6 +160,7 @@
 				{
 					"name": "Wither",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_w.png",
+					"tooltip": "Nasus ages a champion, <status>Slowing</status> them by @SlowBase@%, increasing to @MaxSlowTooltipOnly@% over @Duration@ seconds. Their <attackSpeed>Attack Speed</attackSpeed> is also reduced by @AttackSpeedSlowMult*100@% of the <status>Slow</status>.",
 					"mana": [
 						80,
 						80,
@@ -177,7 +178,6 @@
 						11,
 						11
 					],
-					"tooltip": "Nasus ages a champion, <status>Slowing</status> them by @SlowBase@%, increasing to @MaxSlowTooltipOnly@% over @Duration@ seconds. Their <attackSpeed>Attack Speed</attackSpeed> is also reduced by @AttackSpeedSlowMult*100@% of the <status>Slow</status>.",
 					"dataValues": {
 						"SlowBase": [
 							35,
@@ -235,6 +235,7 @@
 				{
 					"name": "Spirit Fire",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_e.png",
+					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@Effect2Amount*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds.",
 					"mana": [
 						60,
 						70,
@@ -252,7 +253,6 @@
 						12,
 						12
 					],
-					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@Effect2Amount*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds.",
 					"spellCalculations": {
 						"TotalDotDamage": {
 							"mMultiplier": {
@@ -334,6 +334,7 @@
 				{
 					"name": "Fury of the Sands",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_r.png",
+					"tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <healing>maximum Health by @BonusHealth@</healing> and <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR> by @InitialResistGain@.<br><br>While the storm rages, nearby enemies take <magicDamage>@DamageCalc@ of their maximum Health as magic damage</magicDamage> each second and <spellName>Siphoning Strike</spellName> has a @QCDR*100@% reduced Cooldown.",
 					"mana": [
 						100,
 						100,
@@ -351,7 +352,6 @@
 						80,
 						80
 					],
-					"tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <healing>maximum Health by @BonusHealth@</healing> and <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR> by @InitialResistGain@.<br><br>While the storm rages, nearby enemies take <magicDamage>@DamageCalc@ of their maximum Health as magic damage</magicDamage> each second and <spellName>Siphoning Strike</spellName> has a @QCDR*100@% reduced Cooldown.",
 					"dataValues": {
 						"BonusHealth": [
 							150,
@@ -503,5 +503,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

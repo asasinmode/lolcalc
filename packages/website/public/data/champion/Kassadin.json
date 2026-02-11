@@ -34,6 +34,7 @@
 				{
 					"name": "Null Sphere",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png",
+					"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds.",
 					"mana": [
 						60,
 						65,
@@ -51,7 +52,6 @@
 						8,
 						8
 					],
-					"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -146,6 +146,7 @@
 				{
 					"name": "Nether Blade",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions.",
 					"mana": [
 						1,
 						1,
@@ -163,7 +164,6 @@
 						7,
 						7
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions.",
 					"dataValues": {
 						"ActiveBaseDamage": [
 							25,
@@ -276,6 +276,7 @@
 				{
 					"name": "Force Pulse",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
 					"mana": [
 						60,
 						65,
@@ -293,7 +294,6 @@
 						17,
 						16
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
 					"dataValues": {
 						"ReductionPerSpellCast": [
 							0.75,
@@ -367,6 +367,7 @@
 				{
 					"name": "Riftwalk",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png",
+					"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times.",
 					"mana": [
 						40,
 						40,
@@ -384,7 +385,6 @@
 						2,
 						2
 					],
-					"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times.",
 					"dataValues": {
 						"BaseCD": [
 							5,
@@ -556,5 +556,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }

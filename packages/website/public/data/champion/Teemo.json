@@ -34,6 +34,7 @@
 				{
 					"name": "Blinding Dart",
 					"image": "assets/characters/teemo/hud/icons2d/teemoq.asu_teemo.png",
+					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
 					"mana": [
 						70,
 						75,
@@ -51,7 +52,6 @@
 						7,
 						7
 					],
-					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
 					"dataValues": {
 						"BaseDamage": [
 							35,
@@ -134,6 +134,7 @@
 				{
 					"name": "Move Quick",
 					"image": "assets/characters/teemo/hud/icons2d/teemow.asu_teemo.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
 					"mana": [
 						40,
 						40,
@@ -151,7 +152,6 @@
 						14,
 						14
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
 					"dataValues": {
 						"PassiveMoveSpeedBonus": [
 							0.08,
@@ -200,6 +200,7 @@
 				{
 					"name": "Toxic Shot",
 					"image": "assets/characters/teemo/hud/icons2d/teemoe.asu_teemo.png",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
 					"cooldownTime": [
 						0,
 						0,
@@ -209,7 +210,6 @@
 						0,
 						0
 					],
-					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
 					"dataValues": {
 						"TickBaseDamage": [
 							0,
@@ -330,6 +330,7 @@
 				{
 					"name": "Noxious Trap",
 					"image": "assets/characters/teemo/hud/icons2d/teemor.asu_teemo.png",
+					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).<br>",
 					"mana": [
 						75,
 						55,
@@ -347,7 +348,6 @@
 						0.25,
 						0.25
 					],
-					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).<br>",
 					"dataValues": {
 						"TriggerRadius": [
 							160,
@@ -542,5 +542,6 @@
 				}
 			]
 		}
-	}
+	},
+	"stringtable": {}
 }
