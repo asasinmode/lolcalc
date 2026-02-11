@@ -1534,5 +1534,26 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_apheliosq_name_12": "Resurgent Moonshot",
+		"spell_apheliosq_name_13": "Incendiary Moonshot",
+		"spell_apheliosq_name_14": "Arcing Moonshot",
+		"spell_apheliosq_name_15": "Binding Moonshot",
+		"spell_apheliosq_name_21": "Precision Onslaught",
+		"spell_apheliosq_name_23": "Incendiary Onslaught",
+		"spell_apheliosq_name_24": "Arcing Onslaught",
+		"spell_apheliosq_name_25": "Binding Onslaught",
+		"spell_apheliosq_name_31": "Precision Duskwave",
+		"spell_apheliosq_name_32": "Resurgent Duskwave",
+		"spell_apheliosq_name_34": "Arcing Duskwave",
+		"spell_apheliosq_name_35": "Binding Duskwave",
+		"spell_apheliosq_name_41": "Precision Sentry",
+		"spell_apheliosq_name_42": "Resurgent Sentry",
+		"spell_apheliosq_name_43": "Incendiary Sentry",
+		"spell_apheliosq_name_45": "Binding Sentry",
+		"spell_apheliosq_name_51": "Binding Eclipse",
+		"spell_apheliosq_name_52": "{{ Spell_ApheliosQ_Name_51 }}",
+		"spell_apheliosq_name_53": "{{ Spell_ApheliosQ_Name_51 }}",
+		"spell_apheliosq_name_54": "{{ Spell_ApheliosQ_Name_51 }}"
+	}
 }

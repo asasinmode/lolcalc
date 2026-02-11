@@ -837,7 +837,7 @@ function championAbilityData(
 				if (maybeKey) {
 					variantKeys.push(maybeKey);
 				} else {
-					console.warn(`${championId} ${abilityInfo[0]}[${abilityInfo[1]}] key for alternate form not found ${form.spells[abilityInfo[1]]}`);
+					console.warn(`${championId} ${abilityInfo[0]} key with ObjectName of alternate form "${form.spells[abilityInfo[1]]}" not found`);
 				}
 			}
 		}
@@ -915,12 +915,26 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 		qVariantKeys.push(abilityData.mRootSpell);
 	}
 
-	([, abilities.q.variants, qVariantsStringtable] = championAbilityVariants(
-		'Aphelios',
-		championData,
-		['q', 0],
-		qVariantKeys,
-	));
+	([, abilities.q.variants, qVariantsStringtable] = championAbilityVariants('Aphelios', championData, ['q', 0], qVariantKeys));
+
+	let qVariantStringtablePathPrefix = abilities.q.variants[0].name!.slice(2, -2).trim();
+	qVariantStringtablePathPrefix = qVariantStringtablePathPrefix.slice(0, qVariantStringtablePathPrefix.lastIndexOf('_') + 1);
+
+	for (let i = 1; i <= CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER.length; i++) {
+		for (let j = 1; j <= CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER.length; j++) {
+			if (i !== j) {
+				const path = `${qVariantStringtablePathPrefix}${i}${j}`.toLowerCase();
+				qVariantsStringtable[path] = getStringtableValue(path, 'Aphelios Q variants', {
+					category: 'champion',
+					key: `Aphelios Q variant name ${i}${j}`,
+					variableType: 'championAbility',
+					variableSourceKeys: [],
+					variableValueParameters: [{}],
+					stringtableVariableSaveUnder: { stringtable: qVariantsStringtable },
+				});
+			}
+		}
+	}
 
 	return qVariantsStringtable;
 }
@@ -928,7 +942,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 function championAbilityVariants(
 	championId: string,
 	championData: any,
-	[abilityName, abilityIndex]: [string, number],
+	[abilityName]: [string, number],
 	variantKeys: string[],
 ): [number | undefined, IChampionAbility['variants'], stringtable: IChampion['stringtable']] {
 	let maxLevel: number | undefined;
@@ -957,7 +971,7 @@ function championAbilityVariants(
 				throw new Error(`${debugPrefix} expected mTooltipData in variant "${variantDataKey}"`);
 			}
 
-			maxLevel = abilityIndex === 4 ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
+			maxLevel = abilityName === 'passive' ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
 		}
 
 		let mLocKeys;
@@ -991,7 +1005,7 @@ function championAbilityVariants(
 			dataKey: variantDataKey,
 		} as IChampionAbility['variants'][number];
 
-		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${variantDataKey} name`, {
+		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${debugPrefix} name`, {
 			category: 'champion',
 			key: `${debugPrefix} ${variantData.ObjectName} name`,
 			variableType: 'championAbility',
