@@ -822,7 +822,7 @@
 				{
 					"name": "Pit Grit",
 					"image": "assets/characters/sett/hud/icons2d/sett_p.png",
-					"tooltip": "Sett's Attacks alternate between left and right punches. Right punches follow the left quickly and deal an additional <physicalDamage>@RightPunchBonus@ physical damage</physicalDamage>.<br><br>Sett gains <healing>@TooltipRegenPerMissingHealthCalc@ Health Regeneration</healing> for each @MissingHealthUnit*500@% missing Health.",
+					"tooltip": "{{Spell_SettPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_SettPassive_Tooltip}}<br><br><rules>Sett will reset back to a left punch if he does not do a right punch within 2 seconds of doing a left punch. The <attackSpeed>Attack Speed</attackSpeed> of a right punch is 8 times that of a left punch.</rules>",
 					"dataValues": {
 						"NumHits": [
@@ -1090,5 +1090,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_settpassive_tooltip": "Sett's Attacks alternate between left and right punches. Right punches follow the left quickly and deal an additional <physicalDamage>@RightPunchBonus@ physical damage</physicalDamage>.<br><br>Sett gains <healing>@TooltipRegenPerMissingHealthCalc@ Health Regeneration</healing> for each @MissingHealthUnit*500@% missing Health."
+	}
 }

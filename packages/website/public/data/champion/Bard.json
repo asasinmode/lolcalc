@@ -433,7 +433,7 @@
 				{
 					"name": "Traveler's Call",
 					"image": "assets/characters/bard/hud/icons2d/bard_passive.png",
-					"tooltip": "Bard attracts <font color='#cccc00'>Chimes</font> randomly around the map. When Bard moves near a <font color='#cccc00'>Chime</font> he collects it, gaining <speed>@TooltipMSPerStack@% Move Speed</speed> (stacking up to @MaxSpeedStacks@ times) while out of combat for @SpeedStackDuration@ seconds, @f1@ Experience, and restoring <scaleMana>@TooltipManaRestore@% max Mana</scaleMana>.<br><br>Bard attracts a <font color='#FF9900'>Meep</font> every @f5@ seconds (max: @f4@). Bard's Attacks consume a <font color='#FF9900'>Meep</font> to deal an additional <magicDamage>@MeepDamageNoChime@ plus @DamagePerCheckpoint@ per @TooltipChimeDamageCheckpoint@ <font color='#cccc00'>Chimes</font> magic damage</magicDamage>, plus additional effects based on <font color='#cccc00'>Chimes</font> collected.",
+					"tooltip": "{{Spell_BardPTooltip_D_nS_Tooltip}}",
 					"tooltipExtended": "{{Spell_BardPTooltip_D_nS_Tooltip}}<br><br><rules><keywordMajor>Meep</keywordMajor> spawn time and max both improve with number of <keywordMajor>Chimes</keywordMajor>.<br>At @ChimesForSlowUpgrade@ <keywordMajor>Chimes</keywordMajor>, <keywordMajor>Meeps</keywordMajor> also <status>Slow</status> by @f2@% for @SlowDuration@s.<br>At @ChimesForSplashDamageUpgrade@ <keywordMajor>Chimes</keywordMajor>, <keywordMajor>Meeps</keywordMajor> also hit in an area around and behind the enemy.<br>At @ChimesForSplashAreaUpgrade@ <keywordMajor>Chimes</keywordMajor>, the area is larger.<br>The <speed>Move Speed</speed> can stack up to @TooltipMSMax@%.<br>The Experience increases by 1 per minute after 5 minutes.</rules>",
 					"dataValues": {
 						"TooltipMSPerStack": [
@@ -615,5 +615,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_bardptooltip_d_ns_tooltip": "Bard attracts <font color='#cccc00'>Chimes</font> randomly around the map. When Bard moves near a <font color='#cccc00'>Chime</font> he collects it, gaining <speed>@TooltipMSPerStack@% Move Speed</speed> (stacking up to @MaxSpeedStacks@ times) while out of combat for @SpeedStackDuration@ seconds, @f1@ Experience, and restoring <scaleMana>@TooltipManaRestore@% max Mana</scaleMana>.<br><br>Bard attracts a <font color='#FF9900'>Meep</font> every @f5@ seconds (max: @f4@). Bard's Attacks consume a <font color='#FF9900'>Meep</font> to deal an additional <magicDamage>@MeepDamageNoChime@ plus @DamagePerCheckpoint@ per @TooltipChimeDamageCheckpoint@ <font color='#cccc00'>Chimes</font> magic damage</magicDamage>, plus additional effects based on <font color='#cccc00'>Chimes</font> collected."
+	}
 }

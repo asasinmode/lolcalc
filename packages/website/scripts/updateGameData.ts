@@ -1005,17 +1005,31 @@ function championAbilityVariants(
 			dataKey: variantDataKey,
 		} as IChampionAbility['variants'][number];
 
-		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${debugPrefix} name`, {
+		const variableDebug = {
 			category: 'champion',
-			key: `${debugPrefix} ${variantData.ObjectName} name`,
 			variableType: 'championAbility',
 			variableValueParameters: [variant],
 			variableSourceKeys: ['effectAmount'],
 			stringtableVariableSaveUnder: stringtableObject,
-		});
-		// TODO add debug info
-		variant.tooltip = mLocKeys.keyTooltip && getStringtableValue(mLocKeys.keyTooltip, `${variantDataKey} tooltip`);
-		variant.tooltipExtended = mLocKeys?.keyTooltipExtended && getStringtableValue(mLocKeys.keyTooltipExtended, `${variantDataKey} tooltip extended`);
+		} satisfies Omit<IStringtableVariableDebug, 'key'>;
+
+		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${debugPrefix} name`, { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} name` });
+		// TODO add tooltips for all abilities, not just passive
+		variant.tooltip = mLocKeys.keyTooltip && getStringtableValue(
+			mLocKeys.keyTooltip,
+			`${variantDataKey} tooltip`,
+			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip` } : undefined,
+		);
+		variant.tooltipExtended = mLocKeys.keyTooltipExtended && getStringtableValue(
+			mLocKeys.keyTooltipExtended,
+			`${variantDataKey} tooltip extended`,
+			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} extended` } : undefined,
+		);
+
+		/** many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
+		if (mLocKeys.keyTooltip && (mLocKeys.keyTooltip.toLowerCase() in stringtableObject.stringtable)) {
+			variant.tooltip = `{{${mLocKeys.keyTooltip}}}`;
+		}
 
 		variants.push(variant);
 	}

@@ -425,7 +425,7 @@
 				{
 					"name": "Contempt for the Weak",
 					"image": "assets/characters/zed/hud/icons2d/zedp.png",
-					"tooltip": "Whenever Zed Attacks an enemy below @CurrentHealthThreshold*100@% Health, he deals an additional <magicDamage>@MaxHPDamage@ max Health magic damage</magicDamage>. Enemy champions can only be hit once every @PerUnitCD@ seconds.",
+					"tooltip": "{{Spell_ZedPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ZedPassive_Tooltip}}<br><br><rules>This Ability deals @MonsterDamageMod*100@% damage to jungle monsters, capped at @MonsterDamageCap@ damage to epic monsters.</rules>",
 					"dataValues": {
 						"CurrentHealthThreshold": [
@@ -533,5 +533,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_zedpassive_tooltip": "Whenever Zed Attacks an enemy below @CurrentHealthThreshold*100@% Health, he deals an additional <magicDamage>@MaxHPDamage@ max Health magic damage</magicDamage>. Enemy champions can only be hit once every @PerUnitCD@ seconds."
+	}
 }

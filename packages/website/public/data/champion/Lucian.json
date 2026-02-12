@@ -520,7 +520,7 @@
 				{
 					"name": "Lightslinger",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_passive.png",
-					"tooltip": "After using an Ability, Lucian's next Attack within @PassiveDuration@ seconds will fire two shots. The second shot deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the target, increased to <physicalDamage>@MinionDamage@</physicalDamage> against minions.<br><br><attention>Vigilance: </attention>When Lucian is directly healed or shielded by an ally, or when a nearby enemy Champion is <status>Immobilized</status>, his pistols become <keywordMajor>Overcharged</keywordMajor> with energy, causing his next @NumAuto@ basic attacks to deal an additional <magicDamage>@PassiveTotalDamage@ magic damage</magicDamage>.",
+					"tooltip": "{{Spell_LucianPassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_LucianPassive_Tooltip }}<br><rules>Vigilance can store up to @MaxAutos@ empowered basic attacks.</rules>",
 					"dataValues": {
 						"PassiveDuration": [
@@ -666,5 +666,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_lucianpassive_tooltip": "After using an Ability, Lucian's next Attack within @PassiveDuration@ seconds will fire two shots. The second shot deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the target, increased to <physicalDamage>@MinionDamage@</physicalDamage> against minions.<br><br><attention>Vigilance: </attention>When Lucian is directly healed or shielded by an ally, or when a nearby enemy Champion is <status>Immobilized</status>, his pistols become <keywordMajor>Overcharged</keywordMajor> with energy, causing his next @NumAuto@ basic attacks to deal an additional <magicDamage>@PassiveTotalDamage@ magic damage</magicDamage>."
+	}
 }

@@ -607,7 +607,7 @@
 				{
 					"name": "Nimble Fighter",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_p.png",
-					"tooltip": "Fizz is Ghosted and takes @DamageReductionCalc@ reduced damage from all sources.",
+					"tooltip": "{{Spell_FizzPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_FizzPassive_Tooltip}}<br><br><rules>Ghosted units ignore collision with other units.<br>Damage reduction modified to @MonsterDamageReductionCalc@ against jungle monsters.<br>Damage cannot be reduced by more than @DamageReductionMax*100@%.</rules>",
 					"mana": [
 						40,
@@ -742,5 +742,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_fizzpassive_tooltip": "Fizz is Ghosted and takes @DamageReductionCalc@ reduced damage from all sources."
+	}
 }

@@ -722,7 +722,7 @@
 				{
 					"name": "Death in Lavender ",
 					"image": "assets/characters/belveth/hud/icons2d/belveth_passive.png",
-					"tooltip": "After using an Ability, Bel'Veth becomes Ghosted and her next @SheenNumberOfAttacks@ Attacks gain <attackSpeed>@SheenSpeedPerStack@ Attack Speed</attackSpeed>.<br><br>Bel'veth gains <keywordMajor>@MonsterStacks@ Lavender</keywordMajor> stack for large minion and monster takedowns and <keywordMajor>@ChampionStacks@ Lavender</keywordMajor> stacks for champion and epic monster takedowns. Each stack permanently grants <attackSpeed>@AttackSpeedPerStack@% Attack Speed</attackSpeed>.<br><br>Total bonus <attackSpeed>Attack Speed</attackSpeed>: <attackSpeed>@TotalAttackSpeedFromStacks@%</attackSpeed>",
+					"tooltip": "{{Spell_BelvethPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_BelvethPassive_Tooltip}}<br><br><rules>Bel'veth Attacks faster than normal but her Attacks deal damage at @AttackADRatio*100@% effectiveness and her On-Hit Effects are applied at @OnHitRatio*100@% effectiveness.<br>Bel'Veth does not gain <attackSpeed>Attack Speed</attackSpeed> on level up and has no cap on <attackSpeed>Attack Speed</attackSpeed>.<br>{{Reminder_Ghosted}}</rules>",
 					"dataValues": {
 						"MonsterStacks": [
@@ -853,5 +853,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_belvethpassive_tooltip": "After using an Ability, Bel'Veth becomes Ghosted and her next @SheenNumberOfAttacks@ Attacks gain <attackSpeed>@SheenSpeedPerStack@ Attack Speed</attackSpeed>.<br><br>Bel'veth gains <keywordMajor>@MonsterStacks@ Lavender</keywordMajor> stack for large minion and monster takedowns and <keywordMajor>@ChampionStacks@ Lavender</keywordMajor> stacks for champion and epic monster takedowns. Each stack permanently grants <attackSpeed>@AttackSpeedPerStack@% Attack Speed</attackSpeed>.<br><br>Total bonus <attackSpeed>Attack Speed</attackSpeed>: <attackSpeed>@TotalAttackSpeedFromStacks@%</attackSpeed>",
+		"reminder_ghosted": "Ghosted units can pass through other units."
+	}
 }

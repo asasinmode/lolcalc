@@ -510,7 +510,7 @@
 				{
 					"name": "Whisper",
 					"image": "assets/characters/jhin/hud/icons2d/jhin_p.png",
-					"tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.<br><br>",
+					"tooltip": "{{Spell_JhinPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_JhinPassive_Tooltip}}<br><rules>Attack Damage scales with Critical Strike Chance and bonus Attack Speed.<br>Move Speed scales with bonus Attack Speed.<br>Missing health damage is capped at 800 against monsters.</rules>",
 					"dataValues": {
 						"MaxAmmo": [
@@ -670,5 +670,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_jhinpassive_tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.<br><br>"
+	}
 }

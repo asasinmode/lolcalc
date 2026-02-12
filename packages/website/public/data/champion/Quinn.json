@@ -382,7 +382,7 @@
 				{
 					"name": "Harrier",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_passive.png",
-					"tooltip": "Every @f1@ seconds, Valor marks a nearby enemy as <keywordMajor>Vulnerable</keywordMajor>, revealing it for @RevealDuration@ seconds and causing Quinn's next Attack against them to deal <physicalDamage>@BonusDamage@ bonus physical damage</physicalDamage>.",
+					"tooltip": "{{Spell_QuinnPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_QuinnPassive_Tooltip}}<br><br><rules>Cooldown is reduced by Critical Strike Chance.</rules>",
 					"dataValues": {
 						"RevealDuration": [
@@ -438,5 +438,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_quinnpassive_tooltip": "Every @f1@ seconds, Valor marks a nearby enemy as <keywordMajor>Vulnerable</keywordMajor>, revealing it for @RevealDuration@ seconds and causing Quinn's next Attack against them to deal <physicalDamage>@BonusDamage@ bonus physical damage</physicalDamage>."
+	}
 }

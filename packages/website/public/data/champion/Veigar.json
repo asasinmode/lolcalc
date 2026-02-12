@@ -324,7 +324,7 @@
 				{
 					"name": "Phenomenal Evil Power",
 					"image": "assets/characters/veigar/hud/icons2d/veigar_entropy.png",
-					"tooltip": "Veigar's Abilities grant him @dAbilityStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor> when they strike enemy champions. Takedowns on champions grant an additional @dTakedownStacks@ stacks.<br><br>Each stack of <keywordMajor>Phenomenal Evil</keywordMajor> grants Veigar <scaleAP>@APPerStack@ Ability Power</scaleAP>.",
+					"tooltip": "{{Spell_VeigarPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_VeigarPassive_Tooltip}}<br><br>Veigar's evil is currently granting him <statTracking>@f1@ Ability Power</statTracking>",
 					"dataValues": {
 						"dQKillStacks": [
@@ -397,5 +397,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_veigarpassive_tooltip": "Veigar's Abilities grant him @dAbilityStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor> when they strike enemy champions. Takedowns on champions grant an additional @dTakedownStacks@ stacks.<br><br>Each stack of <keywordMajor>Phenomenal Evil</keywordMajor> grants Veigar <scaleAP>@APPerStack@ Ability Power</scaleAP>."
+	}
 }

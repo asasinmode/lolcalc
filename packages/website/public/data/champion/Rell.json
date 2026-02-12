@@ -557,7 +557,7 @@
 				{
 					"name": "Break the Mold",
 					"image": "assets/characters/rell/hud/icons2d/rellp.png",
-					"tooltip": "Rell's Attacks and Abilities steal <scaleArmor>@StealPercent*100@% Armor</scaleArmor> and <scaleMR>@StealPercent*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds. Max: @MaxPercentTooltipOnly@%. Basic attacks deal <magicDamage>@OnHitDamage@ magic damage</magicDamage> on-hit.",
+					"tooltip": "{{Spell_RellP_Tooltip}}",
 					"tooltipExtended": "{{Spell_RellP_Tooltip}}<br><br><rules>Always steals at least @StealFloor@. Does not steal from minions or Epic jungle monsters.</rules>",
 					"dataValues": {
 						"RefreshDuration": [
@@ -637,5 +637,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_rellp_tooltip": "Rell's Attacks and Abilities steal <scaleArmor>@StealPercent*100@% Armor</scaleArmor> and <scaleMR>@StealPercent*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds. Max: @MaxPercentTooltipOnly@%. Basic attacks deal <magicDamage>@OnHitDamage@ magic damage</magicDamage> on-hit."
+	}
 }

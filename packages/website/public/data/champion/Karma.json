@@ -550,5 +550,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_karmamantra_name": "Mantra"
+	}
 }

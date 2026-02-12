@@ -598,7 +598,7 @@
 				{
 					"name": "Drakehound's Step",
 					"image": "assets/characters/ambessa/hud/icons2d/icon_ambessa_passive.domina.png",
-					"tooltip": "When Ambessa is casting an Ability, issuing a Move or Attack order will cause her to dash in that direction after the Ability finishes.<br><br>Each cast initiation grants her a charge for @Attack_Buff_Duration@ seconds (max: @Attack_Buff_Max_Stacks@). While Ambessa has a charge, she gains <attention>@Attack_Range_Amount@ %i:scaleRange% Attack Range</attention> and <attackSpeed>@Calc_Attack_Speed@ %i:scaleAS% Attack Speed</attackSpeed>. Attacks consume a charge to deal <physicalDamage>@Calc_OnHit_Damage_Flat@ physical damage</physicalDamage> and restore <keywordMajor>@Calc_OnHit_Energy_Refund@ Energy</keywordMajor>.",
+					"tooltip": "{{Spell_AmbessaP_Tooltip}}",
 					"tooltipExtended": "{{Spell_AmbessaP_Tooltip}}<br><br><rules>Commands issued during the cast time or duration of Abilities or Attacks are stored. Once the Ability or Attack finishes, the most recently stored command is executed. The windup of charged Attacks cannot be canceled. Issuing a Stop command after an Attack command has been issued during a Ability cast will cancel Ambessa's dash but maintain her Attack command if the target is in range.</rules>",
 					"cooldownTime": [
 						0,
@@ -796,5 +796,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_ambessap_tooltip": "When Ambessa is casting an Ability, issuing a Move or Attack order will cause her to dash in that direction after the Ability finishes.<br><br>Each cast initiation grants her a charge for @Attack_Buff_Duration@ seconds (max: @Attack_Buff_Max_Stacks@). While Ambessa has a charge, she gains <attention>@Attack_Range_Amount@ %i:scaleRange% Attack Range</attention> and <attackSpeed>@Calc_Attack_Speed@ %i:scaleAS% Attack Speed</attackSpeed>. Attacks consume a charge to deal <physicalDamage>@Calc_OnHit_Damage_Flat@ physical damage</physicalDamage> and restore <keywordMajor>@Calc_OnHit_Energy_Refund@ Energy</keywordMajor>."
+	}
 }

@@ -660,7 +660,7 @@
 				{
 					"name": "Warpath",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_passive.png",
-					"tooltip": "Hecarim gains <scaleAD>@BonusAD@ Attack Damage</scaleAD>, increasing based on level.",
+					"tooltip": "{{Spell_HecarimPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_HecarimPassive_Tooltip}}<br><br><rules>Attack Damage scales with bonus Move speed.</rules>",
 					"spellCalculations": {
 						"BonusAD": {
@@ -707,5 +707,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_hecarimpassive_tooltip": "Hecarim gains <scaleAD>@BonusAD@ Attack Damage</scaleAD>, increasing based on level."
+	}
 }

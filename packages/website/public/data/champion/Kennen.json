@@ -494,7 +494,7 @@
 				{
 					"name": "Mark of the Storm",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_passive.png",
-					"tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>.",
+					"tooltip": "{{Spell_KennenPassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_KennenPassive_Tooltip }}<br><rules>If an enemy is <status>Stunned</status> more than once by this ability within @DiminishingReturnDuration@ seconds, they are instead <status>Stunned</status> for @ReducedStunDuration@ seconds.</rules>",
 					"dataValues": {
 						"EnergyRestore": [
@@ -548,5 +548,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_kennenpassive_tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>."
+	}
 }

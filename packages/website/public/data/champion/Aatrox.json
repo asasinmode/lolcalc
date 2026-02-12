@@ -544,7 +544,7 @@
 				{
 					"name": "Deathbringer Stance",
 					"image": "assets/characters/aatrox/hud/icons2d/aatrox_passive.png",
-					"tooltip": "Aatrox's Attacks deal an additional <magicDamage>@PDamage@ max Health magic damage</magicDamage> and restore <healing>@PHealingRatio*100@% of damage dealt as Health</healing>, reduced to @PHealingMinionMod*100@% against minions. This effect has a @PCooldown@ second cooldown.<br><br>Attack and Ability hits against champions and large jungle monsters reduce this effect's cooldown by 2 seconds. Hits with the edge of <spellName>The Darkin Blade</spellName> reduce it by 4 seconds instead.",
+					"tooltip": "{{Passive_AatroxPassive_Tooltip}}",
 					"tooltipExtended": "{{Passive_AatroxPassive_Tooltip}}<br><br><rules>Deals a max of @MonsterDamageCap@ against monsters. <br>Multi-hits with Abilities only reduce the cooldown once.</rules>",
 					"dataValues": {
 						"PBonusAARange": [
@@ -665,5 +665,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"passive_aatroxpassive_tooltip": "Aatrox's Attacks deal an additional <magicDamage>@PDamage@ max Health magic damage</magicDamage> and restore <healing>@PHealingRatio*100@% of damage dealt as Health</healing>, reduced to @PHealingMinionMod*100@% against minions. This effect has a @PCooldown@ second cooldown.<br><br>Attack and Ability hits against champions and large jungle monsters reduce this effect's cooldown by 2 seconds. Hits with the edge of <spellName>The Darkin Blade</spellName> reduce it by 4 seconds instead."
+	}
 }

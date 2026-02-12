@@ -549,7 +549,7 @@
 				{
 					"name": "Moonsilver Blade",
 					"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png",
-					"tooltip": "Diana gains <attackSpeed>@BonusAS@ Attack Speed</attackSpeed>, increased to <attackSpeed>@EmpoweredAS@</attackSpeed> for @BuffDuration@ seconds after using an Ability.<br><br>Every third Attack cleaves nearby enemies for an additional <magicDamage>@CleaveDamage@ magic damage</magicDamage>. ",
+					"tooltip": "{{Spell_DianaPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_DianaPassive_Tooltip}}<br><br><rules>Moonsilver Blade deals @Monstermod*100@% damage to monsters.</rules>",
 					"cooldownTime": [
 						32,
@@ -658,5 +658,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_dianapassive_tooltip": "Diana gains <attackSpeed>@BonusAS@ Attack Speed</attackSpeed>, increased to <attackSpeed>@EmpoweredAS@</attackSpeed> for @BuffDuration@ seconds after using an Ability.<br><br>Every third Attack cleaves nearby enemies for an additional <magicDamage>@CleaveDamage@ magic damage</magicDamage>. "
+	}
 }

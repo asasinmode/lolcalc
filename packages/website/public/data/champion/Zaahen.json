@@ -728,5 +728,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"reminder_stasis": "Units in Stasis cannot move or act, and are invulnerable and Untargetable."
+	}
 }

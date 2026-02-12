@@ -622,7 +622,7 @@
 				{
 					"name": "Gift of the Drowned Ones",
 					"image": "assets/characters/pyke/hud/icons2d/pykepassive.png",
-					"tooltip": "Pyke stores @OneEnemyCalc@ of damage taken from champions, increased to @AdditionalBonusCalc@ when there's more than one enemy nearby. Pyke can store up to @DamageStorageMax@ damage. While <unique>unseen</unique> by enemies, he rapidly regenerates this stored damage.<br><br>Additionally, Pyke converts all Maximum Health increases to Attack Damage instead at a rate of <healing>14 Health</healing> to <physicalDamage>1 Attack Damage</physicalDamage>. ",
+					"tooltip": "{{Spell_PykePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_PykePassive_Tooltip}}<br><br>Bonus Attack Damage: <statTracking>@f1@ Attack Damage</statTracking>",
 					"cooldownTime": [
 						0,
@@ -741,5 +741,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_pykepassive_tooltip": "Pyke stores @OneEnemyCalc@ of damage taken from champions, increased to @AdditionalBonusCalc@ when there's more than one enemy nearby. Pyke can store up to @DamageStorageMax@ damage. While <unique>unseen</unique> by enemies, he rapidly regenerates this stored damage.<br><br>Additionally, Pyke converts all Maximum Health increases to Attack Damage instead at a rate of <healing>14 Health</healing> to <physicalDamage>1 Attack Damage</physicalDamage>. "
+	}
 }

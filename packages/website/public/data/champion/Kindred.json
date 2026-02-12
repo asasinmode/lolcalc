@@ -724,7 +724,7 @@
 				{
 					"name": "Mark of the Kindred",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_passive.png",
-					"tooltip": "Kindred can designate a champion to hunt by clicking their portrait above their inventory. They also designate certain jungle monsters to hunt with an icon on the minimap automatically.<br><br>Getting a takedown on a hunted target grants Kindred a <keywordMajor>Mark</keywordMajor>, empowering them. After @f2@ <keywordMajor>Marks</keywordMajor>, Kindred gains @f8@ Attack Range. Every @f7@ <keywordMajor>Marks</keywordMajor> after the fourth grants a further @f9@ Attack Range.<br><br><keywordMajor>Marks</keywordMajor> empower Kindred's basic Abilities:<li><spellName>{{Spell_KindredQ_Name}}</spellName> grants an additional <attackSpeed>@QMarkBonus@ Attack Speed</attackSpeed><li><spellName>{{Spell_KindredW_Name}}</spellName> deal an additional <magicDamage>@WMarkBonus@ current Health damage</magicDamage>.<li><spellName>{{Spell_KindredEWrapper_Name}}</spellName> deal an additional <physicalDamage>@EMarkBonus@ missing Health damage</physicalDamage>.",
+					"tooltip": "{{Spell_KindredPassiveManager_Tooltip}}",
 					"tooltipExtended": "{{Spell_KindredPassiveManager_Tooltip}}<br><br>Currently granting <statTracking>@f3@ Attack Range</statTracking>.<br><br><rules>The hunted jungle monsters change as Kindred gains <keywordMajor>Marks</keywordMajor>, moving further into the enemy jungle, eventually hunting epic monsters.</rules>",
 					"dataValues": {
 						"BaseHealAmount": [
@@ -852,5 +852,10 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_kindredq_name": "Dance of Arrows",
+		"spell_kindredw_name": "Wolf's Frenzy",
+		"spell_kindredewrapper_name": "Mounting Dread",
+		"spell_kindredpassivemanager_tooltip": "Kindred can designate a champion to hunt by clicking their portrait above their inventory. They also designate certain jungle monsters to hunt with an icon on the minimap automatically.<br><br>Getting a takedown on a hunted target grants Kindred a <keywordMajor>Mark</keywordMajor>, empowering them. After @f2@ <keywordMajor>Marks</keywordMajor>, Kindred gains @f8@ Attack Range. Every @f7@ <keywordMajor>Marks</keywordMajor> after the fourth grants a further @f9@ Attack Range.<br><br><keywordMajor>Marks</keywordMajor> empower Kindred's basic Abilities:<li><spellName>{{Spell_KindredQ_Name}}</spellName> grants an additional <attackSpeed>@QMarkBonus@ Attack Speed</attackSpeed><li><spellName>{{Spell_KindredW_Name}}</spellName> deal an additional <magicDamage>@WMarkBonus@ current Health damage</magicDamage>.<li><spellName>{{Spell_KindredEWrapper_Name}}</spellName> deal an additional <physicalDamage>@EMarkBonus@ missing Health damage</physicalDamage>."
+	}
 }

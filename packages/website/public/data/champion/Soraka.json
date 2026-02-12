@@ -397,7 +397,7 @@
 				{
 					"name": "Salvation",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_passive.png",
-					"tooltip": "Soraka gains <speed>@MovementSpeed*100@% Move Speed</speed> while moving towards allied champions who are below @HealthThreshold*100@% Health. ",
+					"tooltip": "{{Spell_Consecration_Self_Tooltip}}",
 					"tooltipExtended": "{{Spell_Consecration_Self_Tooltip}}<br><br><rules>Allies must be within @CastRange@ range of Soraka.</rules>",
 					"dataValues": {
 						"MovementSpeed": [
@@ -424,5 +424,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_consecration_self_tooltip": "Soraka gains <speed>@MovementSpeed*100@% Move Speed</speed> while moving towards allied champions who are below @HealthThreshold*100@% Health. "
+	}
 }

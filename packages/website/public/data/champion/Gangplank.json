@@ -649,7 +649,7 @@
 				{
 					"name": "Trial by Fire",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_passive.png",
-					"tooltip": "Gangplank's melee Attacks ignite the target, dealing an additional <trueDamage>@TotalDamage@ true damage</trueDamage> over @DoTDuration@ seconds and granting Gangplank <speed>@MoveSpeed@ Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Destroying a <keywordMajor>Powder Keg</keywordMajor> refreshes this Cooldown and grants Gangplank the same <speed>Move Speed</speed>.",
+					"tooltip": "{{Spell_GangplankPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_GangplankPassive_Tooltip}}<br><br><rules>Deals @TurretDamageMult*100@% damage to turrets.<br><spellName>{{Spell_GangplankQWrapper_Name}}</spellName> does not apply this Ability.</rules>",
 					"dataValues": {
 						"Cooldown": [
@@ -731,5 +731,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_gangplankpassive_tooltip": "Gangplank's melee Attacks ignite the target, dealing an additional <trueDamage>@TotalDamage@ true damage</trueDamage> over @DoTDuration@ seconds and granting Gangplank <speed>@MoveSpeed@ Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Destroying a <keywordMajor>Powder Keg</keywordMajor> refreshes this Cooldown and grants Gangplank the same <speed>Move Speed</speed>.",
+		"spell_gangplankqwrapper_name": "Parrrley"
+	}
 }

@@ -706,7 +706,7 @@
 				{
 					"name": "Dirty Fighting",
 					"image": "assets/characters/akshan/hud/icons2d/akshan_p.png",
-					"tooltip": "After launching an Attack, Akshan will fire an additional shot for <physicalDamage>@SecondAutoDamage@ physical damage</physicalDamage>. He can cancel this shot to instead gain <speed>@ASModdedMS@ Move Speed</speed> decaying over @HasteDuration@ second.<br><br>Every three hits from Attacks or Abilities deals an additional <magicDamage>@PassiveProcDamage@ magic damage</magicDamage>. Against champions, Akshan also gains <shield>@TotalShieldAmount@ Shield</shield> for @ShieldDuration@ seconds (@PassiveCooldown@ second Cooldown).<br><br>",
+					"tooltip": "{{Spell_AkshanPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_AkshanPassive_Tooltip}}<br><rules>The second Attack can critically strike at @SecondAutoCritRatio*100@% effectiveness.<br>The second Attack deals 100% total attack damage to minions.<br>The first Attack <speed>Move Speed</speed> scales with <attackSpeed>100% Attack Speed.</attackSpeed></rules>",
 					"dataValues": {
 						"MaxStacks": [
@@ -921,5 +921,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_akshanpassive_tooltip": "After launching an Attack, Akshan will fire an additional shot for <physicalDamage>@SecondAutoDamage@ physical damage</physicalDamage>. He can cancel this shot to instead gain <speed>@ASModdedMS@ Move Speed</speed> decaying over @HasteDuration@ second.<br><br>Every three hits from Attacks or Abilities deals an additional <magicDamage>@PassiveProcDamage@ magic damage</magicDamage>. Against champions, Akshan also gains <shield>@TotalShieldAmount@ Shield</shield> for @ShieldDuration@ seconds (@PassiveCooldown@ second Cooldown).<br><br>"
+	}
 }

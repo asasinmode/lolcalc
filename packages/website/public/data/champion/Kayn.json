@@ -656,7 +656,7 @@
 				{
 					"name": "The Darkin Scythe",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_passive_primary.png",
-					"tooltip": "{{ game_spell_Kayn_P_main_@f1@ }}",
+					"tooltip": "{{Spell_KaynPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KaynPassive_Tooltip}}<br><rules><br>@PassiveSecondFormDelayTooltip@ minutes after reaching full charge on either form, Kayn can transform into either, even if it is not at full charge. The timer is reduced by 5 seconds when gaining charge in the non-full form.<br>Kayn gains Homeguard after transforming.<br></rules>",
 					"dataValues": {
 						"TransformationVariable": [
@@ -830,5 +830,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_kaynpassive_tooltip": "{{ game_spell_Kayn_P_main_@f1@ }}"
+	}
 }

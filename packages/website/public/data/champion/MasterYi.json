@@ -594,7 +594,7 @@
 				{
 					"name": "Double Strike",
 					"image": "assets/characters/masteryi/hud/icons2d/masteryi_passive1.png",
-					"tooltip": "Every @AttackCount@th Attack, Master Yi strikes twice. The second Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
+					"tooltip": "{{Passive_MasterYiPassive_Tooltip}}",
 					"tooltipExtended": "{{Passive_MasterYiPassive_Tooltip}}<br><br><rules>The second strike counts as a normal Attack; it is able to critically strike and applies on-hit effects.</rules>",
 					"dataValues": {
 						"StackDuration": [
@@ -633,5 +633,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"passive_masteryipassive_tooltip": "Every @AttackCount@th Attack, Master Yi strikes twice. The second Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>."
+	}
 }

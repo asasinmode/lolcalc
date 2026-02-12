@@ -522,7 +522,7 @@
 				{
 					"name": "More Sparkles!",
 					"image": "assets/characters/zoe/hud/icons2d/zoe_p.png",
-					"tooltip": "After using an Ability, Zoe's next Attack deals an additional <magicDamage>@PassiveDamage@ magic damage</magicDamage>.",
+					"tooltip": "{{Spell_ZoePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ZoePassive_Tooltip}}<br><br><rules>The empowered Attack deals damage instantly.</rules>",
 					"dataValues": {
 						"APRatio": [
@@ -616,5 +616,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_zoepassive_tooltip": "After using an Ability, Zoe's next Attack deals an additional <magicDamage>@PassiveDamage@ magic damage</magicDamage>."
+	}
 }

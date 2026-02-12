@@ -805,5 +805,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_twoshivpoison_name": "Two-Shiv Poison"
+	}
 }

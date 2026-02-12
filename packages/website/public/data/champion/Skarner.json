@@ -693,7 +693,7 @@
 				{
 					"name": "Threads of Vibration",
 					"image": "assets/characters/skarner/hud/icons2d/skarner_passive.png",
-					"tooltip": "Skarner's Attacks, <spellName>Shattered Earth</spellName>, <spellName>Upheaval</spellName>, and <spellName>Impale</spellName>, apply <keywordMajor>Quaking</keywordMajor> for @Duration@s. At @StacksToTriggerPassive@ stacks of <keywordMajor>Quaking</keywordMajor>, enemies take <magicDamage>@PercentHealthDamage@ max Health magic damage</magicDamage> over its duration.",
+					"tooltip": "{{Spell_Skarner_Passive_Tooltip}}",
 					"tooltipExtended": "{{Spell_Skarner_Passive_Tooltip}}<br><br><rules>Total damage to monsters is capped at @DamageMonsterCap@.</rules>",
 					"dataValues": {
 						"StacksToTriggerPassive": [
@@ -754,5 +754,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_skarner_passive_tooltip": "Skarner's Attacks, <spellName>Shattered Earth</spellName>, <spellName>Upheaval</spellName>, and <spellName>Impale</spellName>, apply <keywordMajor>Quaking</keywordMajor> for @Duration@s. At @StacksToTriggerPassive@ stacks of <keywordMajor>Quaking</keywordMajor>, enemies take <magicDamage>@PercentHealthDamage@ max Health magic damage</magicDamage> over its duration."
+	}
 }

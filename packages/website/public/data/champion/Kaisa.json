@@ -692,7 +692,7 @@
 				{
 					"name": "Second Skin",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_passive.png",
-					"tooltip": "Kai'Sa's Attacks stack <keywordMajor>Plasma</keywordMajor> for @PDuration@ seconds and deal an additional <magicDamage>@PBaseDamage@ plus @PCurrentPerStackDamage@ per stack magic damage</magicDamage>. Attacking an enemy with @PMaxStacks@ stacks consumes the <keywordMajor>Plasma</keywordMajor>, dealing <magicDamage>@PExecutePercentage@ missing Health magic damage</magicDamage>. Nearby allies apply @PAllyStacks@ stack to champions they <status>Immobilize</status>.<br><br>Kai'Sa's suit evolves her basic Abilities based on her stats.<br><spellName>Icathian Rain</spellName>: <physicalDamage>@f1.1@/@spell.KaisaQ:Effect6Amount@ Bonus Attack Damage</physicalDamage><br><spellName>Void Seeker</spellName>: <scaleAP>@f2.1@/@spell.KaisaW:Effect2Amount@ Ability Power</scaleAP><br><spellName>Supercharge</spellName>: <attackSpeed>@f3.1@%/@spell.KaisaE:Effect6Amount@% Bonus Attack Speed</attackSpeed>",
+					"tooltip": "{{Spell_KaisaPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KaisaPassive_Tooltip}}<br><br><rules>Consuming <keywordMajor>Plasma</keywordMajor> deals a maximum of <magicDamage>@PDamageCap@ magic damage</magicDamage> to monsters.<br><physicalDamage>Attack Damage</physicalDamage> and <attackSpeed>Attack Speed</attackSpeed> gained from leveling up progresses the <keywordMajor>Evolution</keywordMajor> of <spellName>Icathian Rain</spellName> and <spellName>Supercharge</spellName>, respectively.</rules>",
 					"dataValues": {
 						"PCoefficient": [
@@ -838,5 +838,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_kaisapassive_tooltip": "Kai'Sa's Attacks stack <keywordMajor>Plasma</keywordMajor> for @PDuration@ seconds and deal an additional <magicDamage>@PBaseDamage@ plus @PCurrentPerStackDamage@ per stack magic damage</magicDamage>. Attacking an enemy with @PMaxStacks@ stacks consumes the <keywordMajor>Plasma</keywordMajor>, dealing <magicDamage>@PExecutePercentage@ missing Health magic damage</magicDamage>. Nearby allies apply @PAllyStacks@ stack to champions they <status>Immobilize</status>.<br><br>Kai'Sa's suit evolves her basic Abilities based on her stats.<br><spellName>Icathian Rain</spellName>: <physicalDamage>@f1.1@/@spell.KaisaQ:Effect6Amount@ Bonus Attack Damage</physicalDamage><br><spellName>Void Seeker</spellName>: <scaleAP>@f2.1@/@spell.KaisaW:Effect2Amount@ Ability Power</scaleAP><br><spellName>Supercharge</spellName>: <attackSpeed>@f3.1@%/@spell.KaisaE:Effect6Amount@% Bonus Attack Speed</attackSpeed>"
+	}
 }

@@ -624,7 +624,7 @@
 				{
 					"name": "Rage Gene",
 					"image": "assets/characters/gnar/hud/icons2d/gnar_passive.png",
-					"tooltip": "Gnar generates <keywordMajor>Rage</keywordMajor> by dealing and receiving damage. At max <keywordMajor>Rage</keywordMajor> his next Ability transforms him into <keywordMajor>Mega Gnar</keywordMajor> for 15 seconds.<br><br><keywordMajor>Mini Gnar:</keywordMajor> Gain <speed>@TotalMS@ Move Speed</speed>, <attackSpeed>@TotalAS@ Attack Speed</attackSpeed>, and @TotalAttackRange@ Attack Range.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gain <healing>@TotalMegaGnarHealth@ max Health</healing>, <scaleArmor>@TotalMegaGnarArmor@ Armor</scaleArmor>, <scaleMR>@TotalMegaGnarMR@ Magic Resist</scaleMR>, and <physicalDamage>@TotalMegaGnarAD@ Attack Damage</physicalDamage>.",
+					"tooltip": "{{Spell_GnarPassive_Tooltip}}",
 					"tooltipExtended": "{{spell_GnarPassive_Tooltip}}<br><br><rules>At max <keywordMajor>Rage</keywordMajor>, Gnar will automatically transform after 4 seconds if he does not use an Ability.<br><keywordMajor>Rage</keywordMajor> decays after 13 seconds if Gnar has not dealt or received damage.<br><keywordMajor>Rage</keywordMajor> gain is greater when dealing damage to champions.</rules>",
 					"spellCalculations": {
 						"TotalAttackRange": {
@@ -714,5 +714,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_gnarpassive_tooltip": "Gnar generates <keywordMajor>Rage</keywordMajor> by dealing and receiving damage. At max <keywordMajor>Rage</keywordMajor> his next Ability transforms him into <keywordMajor>Mega Gnar</keywordMajor> for 15 seconds.<br><br><keywordMajor>Mini Gnar:</keywordMajor> Gain <speed>@TotalMS@ Move Speed</speed>, <attackSpeed>@TotalAS@ Attack Speed</attackSpeed>, and @TotalAttackRange@ Attack Range.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gain <healing>@TotalMegaGnarHealth@ max Health</healing>, <scaleArmor>@TotalMegaGnarArmor@ Armor</scaleArmor>, <scaleMR>@TotalMegaGnarMR@ Magic Resist</scaleMR>, and <physicalDamage>@TotalMegaGnarAD@ Attack Damage</physicalDamage>."
+	}
 }

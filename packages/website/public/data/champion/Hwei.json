@@ -578,7 +578,7 @@
 				{
 					"name": "Signature of the Visionary",
 					"image": "assets/characters/hwei/hud/icons2d/hweipassive.png",
-					"tooltip": "Hwei's damaging Abilities against enemy champions mark them for @Duration@ seconds.<br><br>Hitting marked enemies with a second damaging Ability creates an explosion underneath them dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in range.",
+					"tooltip": "{{Spell_HweiPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_HweiPassive_Tooltip}}<br><br><rules>Each Ability can only trigger this effect once per target.</rules>",
 					"dataValues": {
 						"InkTimeout": [
@@ -620,5 +620,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_hweipassive_tooltip": "Hwei's damaging Abilities against enemy champions mark them for @Duration@ seconds.<br><br>Hitting marked enemies with a second damaging Ability creates an explosion underneath them dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in range."
+	}
 }

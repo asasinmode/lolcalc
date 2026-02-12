@@ -856,7 +856,7 @@
 				{
 					"name": "Call of the Freljord",
 					"image": "assets/characters/nunu/hud/icons2d/nunupassive.png",
-					"tooltip": "When Nunu and Willump deal damage to champions, large jungle monsters, or structures, they and a nearby ally gain <attackSpeed>@ASIncrease*100@% Attack Speed</attackSpeed> and <speed>@MSIncrease*100@% Move Speed</speed> for 4 seconds.<br><br>Willump's Attacks deal an additional <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to other nearby enemies while he has this buff.",
+					"tooltip": "{{Spell_NunuPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_NunuPassive_Tooltip}}<br><br><rules>The buff range is increased against champions and structures.<br>The duration stacks but the effect can only occur once every 10 seconds per target.<br>The buff attempts to target the champion who will get the most use from it.</rules>",
 					"mana": [
 						40,
@@ -947,5 +947,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_nunupassive_tooltip": "When Nunu and Willump deal damage to champions, large jungle monsters, or structures, they and a nearby ally gain <attackSpeed>@ASIncrease*100@% Attack Speed</attackSpeed> and <speed>@MSIncrease*100@% Move Speed</speed> for 4 seconds.<br><br>Willump's Attacks deal an additional <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to other nearby enemies while he has this buff."
+	}
 }

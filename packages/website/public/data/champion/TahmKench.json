@@ -658,5 +658,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_tahmkenchpassive_name": "An Acquired Taste"
+	}
 }

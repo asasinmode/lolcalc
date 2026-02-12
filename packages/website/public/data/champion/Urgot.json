@@ -613,7 +613,7 @@
 				{
 					"name": "Echoing Flames",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png",
-					"tooltip": "Urgot has a cannon on each of his 6 legs. Attacks and <spellName>{{Spell_UrgotW_Name}}</spellName> will fire the leg cannon that is facing his target for <physicalDamage>@ADDamage@ plus @PercentHPRatio@ max Health physical damage</physicalDamage>. This effect has a @PerLegCD@ second Cooldown per leg.",
+					"tooltip": "{{Spell_UrgotPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_UrgotPassive_Tooltip}}<br><br><rules>Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to jungle monsters.</rules>",
 					"dataValues": {
 						"LegWarningTime": [
@@ -757,5 +757,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_urgotw_name": "Purge",
+		"spell_urgotpassive_tooltip": "Urgot has a cannon on each of his 6 legs. Attacks and <spellName>{{Spell_UrgotW_Name}}</spellName> will fire the leg cannon that is facing his target for <physicalDamage>@ADDamage@ plus @PercentHPRatio@ max Health physical damage</physicalDamage>. This effect has a @PerLegCD@ second Cooldown per leg."
+	}
 }

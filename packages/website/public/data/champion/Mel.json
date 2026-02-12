@@ -659,7 +659,7 @@
 				{
 					"name": "Searing Brilliance",
 					"image": "assets/characters/mel/hud/icons2d/mel_passive.png",
-					"tooltip": "Mel's Attacks and Abilities apply and refresh stacks of <keywordMajor>Overwhelm</keywordMajor> for @OverwhelmDuration@ seconds each time they deal damage, storing <magicDamage>@spell.MelR:PassiveFlatDamage@ plus @spell.MelR:PassiveStackDamage@ damage per stack of magic damage</magicDamage>. When applied, if the stored amount exceeds the enemy's combined shields and Health, they are executed.<br><br>When an Ability is cast, Mel's next Attack fires @PassiveBonusMissiles@ extra projectiles, each dealing <magicDamage>@PassiveBonusMissileDamage@ magic damage</magicDamage>. This effect can stack up to @MaxPassiveBonusMissiles@ extra projectiles.",
+					"tooltip": "{{Spell_MelPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MelPassive_Tooltip}}<br><br><rules><keywordMajor>Overwhelm</keywordMajor> deals @spell.MelR:MinionModTooltip@ reduced damage with the first stack when used against minions.</rules>",
 					"dataValues": {
 						"OverwhelmDuration": [
@@ -719,5 +719,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_melpassive_tooltip": "Mel's Attacks and Abilities apply and refresh stacks of <keywordMajor>Overwhelm</keywordMajor> for @OverwhelmDuration@ seconds each time they deal damage, storing <magicDamage>@spell.MelR:PassiveFlatDamage@ plus @spell.MelR:PassiveStackDamage@ damage per stack of magic damage</magicDamage>. When applied, if the stored amount exceeds the enemy's combined shields and Health, they are executed.<br><br>When an Ability is cast, Mel's next Attack fires @PassiveBonusMissiles@ extra projectiles, each dealing <magicDamage>@PassiveBonusMissileDamage@ magic damage</magicDamage>. This effect can stack up to @MaxPassiveBonusMissiles@ extra projectiles."
+	}
 }

@@ -570,7 +570,7 @@
 				{
 					"name": "Assassin's Mark",
 					"image": "assets/characters/akali/hud/icons2d/akali_p.png",
-					"tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>.",
+					"tooltip": "{{Spell_AkaliP_Tooltip}}",
 					"tooltipExtended": "{{Spell_AkaliP_Tooltip}}<br><br><rules>Once Akali crosses the ring, she gains the <speed>Move Speed</speed> toward enemies.</rules>",
 					"dataValues": {
 						"PassiveAPRatio": [
@@ -725,5 +725,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_akalip_tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>."
+	}
 }

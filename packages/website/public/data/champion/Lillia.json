@@ -582,7 +582,7 @@
 				{
 					"name": "Dream-Laden Bough",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_passive.png",
-					"tooltip": "Lillia's Abilities apply <keywordMajor>Dream Dust</keywordMajor>, dealing <magicDamage>@DotPercentTooltip@ max Health magic damage</magicDamage> over @Duration@ seconds. Lillia restores <healing>@MonsterHealTT@ Health</healing> over the duration against large jungle monsters, and restores <healing>@ChampionHealTT@ Health</healing> against champions.",
+					"tooltip": "{{Spell_LilliaP_Tooltip}}",
 					"tooltipExtended": "{{Spell_LilliaP_Tooltip}}<br><br><rules>Dream Dust deals a max of @MonsterDamageCap@ damage over the duration to jungle monsters.</rules><br><rules>Dream Dust heal is @MultiHealMod*100@% effective for each source beyond the first.</rules><br><rules>Dream Dust can only heal from one jungle monster at a time.</rules>",
 					"dataValues": {
 						"Duration": [
@@ -754,5 +754,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_lilliap_tooltip": "Lillia's Abilities apply <keywordMajor>Dream Dust</keywordMajor>, dealing <magicDamage>@DotPercentTooltip@ max Health magic damage</magicDamage> over @Duration@ seconds. Lillia restores <healing>@MonsterHealTT@ Health</healing> over the duration against large jungle monsters, and restores <healing>@ChampionHealTT@ Health</healing> against champions."
+	}
 }

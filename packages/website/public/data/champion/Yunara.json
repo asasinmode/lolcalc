@@ -700,7 +700,7 @@
 				{
 					"name": "Vow of the First Lands",
 					"image": "assets/characters/yunara/hud/icons2d/yunara_passive.yunara.png",
-					"tooltip": "Yunara's Critical Strikes deal an additional <magicDamage>@Calc_Damage_Amp@ magic damage</magicDamage>.",
+					"tooltip": "{{Spell_YunaraP_Tooltip}}",
 					"tooltipExtended": "{{Spell_YunaraP_Tooltip}}<br><br><rules></rules>",
 					"cooldownTime": [
 						0,
@@ -732,5 +732,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_yunarap_tooltip": "Yunara's Critical Strikes deal an additional <magicDamage>@Calc_Damage_Amp@ magic damage</magicDamage>."
+	}
 }

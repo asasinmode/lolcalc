@@ -456,7 +456,7 @@
 				{
 					"name": "Staggering Blow",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png",
-					"tooltip": "Nautilus' first Attack against a target deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> and <status>Roots</status> them for @RootDuration@ seconds.",
+					"tooltip": "{{Spell_NautilusPassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_NautilusPassive_Tooltip }}<br><rules>This effect cannot trigger on the same target more than once every @PerTargetCD@ seconds.</rules>",
 					"dataValues": {
 						"PerTargetCD": [
@@ -594,5 +594,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_nautiluspassive_tooltip": "Nautilus' first Attack against a target deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> and <status>Roots</status> them for @RootDuration@ seconds."
+	}
 }

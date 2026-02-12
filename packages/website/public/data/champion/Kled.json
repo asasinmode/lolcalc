@@ -579,7 +579,7 @@
 				{
 					"name": "Skaarl, the Cowardly Lizard",
 					"image": "assets/characters/kled/hud/icons2d/kled_p.png",
-					"tooltip": "<keywordMajor>Mounted:</keywordMajor> Kled's mount Skaarl takes damage instead of Kled. When his Health depletes, Kled dismounts.<br><br><keywordMajor>Dismounted:</keywordMajor> Kled replaces <spellName>{{spell_KledQ_Name}}</spellName>, gains <speed>@DismountedMS@ Move Speed</speed> toward enemy champions, and he gains @DismountedResistBonus@ bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, increased by @ResistBonusPerEnemy*100@% for each nearby enemy Champion, up to @DismountedResistBonusMax@. While dismounted, Kled's attacks deal @DismountedAttackPenalty@ reduced damage to Champions. <br><br>Kled gains <keywordMajor>@CourageVsChamps@ Courage</keywordMajor> by Attacking champions, <keywordMajor>@CourageVsOther@ Courage</keywordMajor> by Attacking epic monsters and structures, and <keywordMajor>@CourageLastHit@ Courage</keywordMajor> by killing minions. At max <keywordMajor>Courage</keywordMajor> Kled remounts with @SkaarlRemountHealth@ of Skaarl's Health, once every @MountCooldown@ seconds.",
+					"tooltip": "{{Spell_KledPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KledPassive_Tooltip}}<br><br><rules>Skaarl has <healing>@SkaarlHealth@ Health plus 100% of Kled's bonus Health</healing>.<br>When Kled dismounts, he cleanses all crowd control and becomes briefly untargetable.</rules>",
 					"cooldownTime": [
 						0,
@@ -809,5 +809,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_kledq_name": "Bear Trap on a Rope",
+		"spell_kledpassive_tooltip": "<keywordMajor>Mounted:</keywordMajor> Kled's mount Skaarl takes damage instead of Kled. When his Health depletes, Kled dismounts.<br><br><keywordMajor>Dismounted:</keywordMajor> Kled replaces <spellName>{{spell_KledQ_Name}}</spellName>, gains <speed>@DismountedMS@ Move Speed</speed> toward enemy champions, and he gains @DismountedResistBonus@ bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, increased by @ResistBonusPerEnemy*100@% for each nearby enemy Champion, up to @DismountedResistBonusMax@. While dismounted, Kled's attacks deal @DismountedAttackPenalty@ reduced damage to Champions. <br><br>Kled gains <keywordMajor>@CourageVsChamps@ Courage</keywordMajor> by Attacking champions, <keywordMajor>@CourageVsOther@ Courage</keywordMajor> by Attacking epic monsters and structures, and <keywordMajor>@CourageLastHit@ Courage</keywordMajor> by killing minions. At max <keywordMajor>Courage</keywordMajor> Kled remounts with @SkaarlRemountHealth@ of Skaarl's Health, once every @MountCooldown@ seconds."
+	}
 }

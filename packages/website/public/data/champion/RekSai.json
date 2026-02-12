@@ -789,7 +789,7 @@
 				{
 					"name": "Fury of the Xer'Sai",
 					"image": "assets/characters/reksai/hud/icons2d/reksai_passive.png",
-					"tooltip": "Rek'Sai generates <keywordMajor>@FuryFromAttacks@ Fury</keywordMajor> when she Attacks and <keywordMajor>@FuryFromAbilities@ Fury</keywordMajor> from Abilities.<br><br>While <keywordMajor>Burrowed</keywordMajor>, she consumes her <keywordMajor>Fury</keywordMajor> to restore up to <healing>@HealAmount@ Health</healing> over @HealDuration@ seconds, increasing with level.",
+					"tooltip": "{{Spell_RekSaiPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_RekSaiPassive_Tooltip}}<br><br><rules>Rek'sai will not consume <keywordMajor>Fury</keywordMajor> while at full Health.<br>Rek'sai loses <keywordMajor>20 Fury</keywordMajor> per second after @PauseDuration@ seconds of not generating any.<br>Rek'Sai generates <keywordMajor>@FuryMinionMod*100@% Fury</keywordMajor> with Attacks against minions.</rules>",
 					"cooldownTime": [
 						0,
@@ -886,5 +886,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_reksaipassive_tooltip": "Rek'Sai generates <keywordMajor>@FuryFromAttacks@ Fury</keywordMajor> when she Attacks and <keywordMajor>@FuryFromAbilities@ Fury</keywordMajor> from Abilities.<br><br>While <keywordMajor>Burrowed</keywordMajor>, she consumes her <keywordMajor>Fury</keywordMajor> to restore up to <healing>@HealAmount@ Health</healing> over @HealDuration@ seconds, increasing with level."
+	}
 }

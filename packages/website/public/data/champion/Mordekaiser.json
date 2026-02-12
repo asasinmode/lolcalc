@@ -449,7 +449,7 @@
 				{
 					"name": "Darkness Rise",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserpassive.png",
-					"tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>.",
+					"tooltip": "{{Spell_MordekaiserPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MordekaiserPassive_Tooltip}}<br><br><rules>Damage aura and Move Speed last for @CombatTrackingDuration@ seconds and are refreshed with each Ability hit or Attack against a champion or jungle monster.<br>This Ability deals a max of @MaxAuraMonsterDamage@ damage to monsters per second.</rules>",
 					"cooldownTime": [
 						0,
@@ -613,5 +613,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_mordekaiserpassive_tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>."
+	}
 }

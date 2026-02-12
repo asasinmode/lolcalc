@@ -824,5 +824,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_qiyanaenchant_name": "Terrashape"
+	}
 }

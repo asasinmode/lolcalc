@@ -539,7 +539,7 @@
 				{
 					"name": "Void Stone",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_passive.png",
-					"tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
+					"tooltip": "{{Spell_VoidStone_Tooltip}}",
 					"tooltipExtended": "{{ Spell_VoidStone_Tooltip }}<br><rules>{{Reminder_Ghosted}}</rules>",
 					"dataValues": {
 						"DamageReductionPercent": [
@@ -557,5 +557,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_voidstone_tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
+		"reminder_ghosted": "Ghosted units can pass through other units."
+	}
 }

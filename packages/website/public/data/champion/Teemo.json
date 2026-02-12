@@ -491,7 +491,7 @@
 				{
 					"name": "Guerrilla Warfare",
 					"image": "assets/characters/teemo/hud/icons2d/teemopassive.asu_teemo.png",
-					"tooltip": "If Teemo stands still for @StealthCooldownDuration@ seconds without being damaged, he becomes <keywordStealth>Invisible</keywordStealth> until he moves. While in a brush, he can maintain <keywordStealth>Invisibility</keywordStealth> while moving.<br><br>Upon exiting this <keywordStealth>Invisibility</keywordStealth>, Teemo gains <attackSpeed>@BonusAttackSpeed@ Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
+					"tooltip": "{{Buff_TeemoPassive_Tooltip}}",
 					"tooltipExtended": "{{Buff_TeemoPassive_Tooltip}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
 					"dataValues": {
 						"AttackSpeedDuration": [
@@ -543,5 +543,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"buff_teemopassive_tooltip": "If Teemo stands still for @StealthCooldownDuration@ seconds without being damaged, he becomes <keywordStealth>Invisible</keywordStealth> until he moves. While in a brush, he can maintain <keywordStealth>Invisibility</keywordStealth> while moving.<br><br>Upon exiting this <keywordStealth>Invisibility</keywordStealth>, Teemo gains <attackSpeed>@BonusAttackSpeed@ Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
+		"reminder_invisibility": "<keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or <font color='#ee91d7'>True Sight</font color>."
+	}
 }

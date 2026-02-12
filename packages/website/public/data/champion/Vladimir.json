@@ -583,7 +583,7 @@
 				{
 					"name": "Crimson Pact",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirp.png",
-					"tooltip": "Vladimir gains <scaleAP>1 Ability Power</scaleAP> for every <scaleHealth>@Effect1Amount@ bonus Health</scaleHealth>. He also gains <scaleHealth>@Effect2Amount@ max Health</scaleHealth> per <scaleAP>1 Ability Power</scaleAP>.<br><br><scaleAP>Bonus Ability Power: @ApproximateAPBonusAvoidingRecursion@</scaleAP><br><scaleHealth>Bonus Health: @ApproximateHPBonusAvoidingRecursion@</scaleHealth>",
+					"tooltip": "{{Spell_VladimirP_Tooltip}}",
 					"tooltipExtended": "{{Spell_VladimirP_Tooltip}}<br><br><rules>These bonuses don't count for each other.</rules>",
 					"spellCalculations": {
 						"ApproximateAPBonusAvoidingRecursion": {
@@ -689,5 +689,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_vladimirp_tooltip": "Vladimir gains <scaleAP>1 Ability Power</scaleAP> for every <scaleHealth>@Effect1Amount@ bonus Health</scaleHealth>. He also gains <scaleHealth>@Effect2Amount@ max Health</scaleHealth> per <scaleAP>1 Ability Power</scaleAP>.<br><br><scaleAP>Bonus Ability Power: @ApproximateAPBonusAvoidingRecursion@</scaleAP><br><scaleHealth>Bonus Health: @ApproximateHPBonusAvoidingRecursion@</scaleHealth>"
+	}
 }

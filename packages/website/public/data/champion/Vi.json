@@ -561,7 +561,7 @@
 				{
 					"name": "Blast Shield",
 					"image": "assets/characters/vi/hud/icons2d/vipassive.png",
-					"tooltip": "Vi gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds after hitting an enemy or structure with an activated Ability.",
+					"tooltip": "{{Spell_ViPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViPassive_Tooltip}}<br><br><rules>This Ability has a @ShieldCooldown@ second Cooldown, reduced by @CDReductionOn3Hit@ seconds when Vi triggers <spellName>Denting Blows</spellName>.</rules>",
 					"dataValues": {
 						"ShieldDuration": [
@@ -617,5 +617,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_vipassive_tooltip": "Vi gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds after hitting an enemy or structure with an activated Ability."
+	}
 }

@@ -536,7 +536,7 @@
 				{
 					"name": "Prophet of an Elder God",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_p.png",
-					"tooltip": "Illaoi draws the presence of her god, spawning a Tentacle on nearby terrain if no other Tentacles are nearby (<scaleLevel>@SpawnCD@</scaleLevel> second cooldown). Tentacles will not attack on their own, but can be made to <keywordMajor>Slam</keywordMajor> by Illaoi's Abilities.<br><br><keywordMajor>Slam</keywordMajor> deals <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>. Hitting at least one enemy champion restores <healing>@MissingHPPercentHeal*100@% missing Health</healing> to Illaoi.",
+					"tooltip": "{{Spell_IllaoiPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_IllaoiPassive_Tooltip}}<br><br><rules>Enemies hit by multiple Slams at once take 50% damage for the second and 25% damage for all additional Slams.<br>Tentacles last until killed or Illaoi is out of range for @TentacleDisabledLifetime@ seconds.</rules>",
 					"dataValues": {
 						"MissingHPPercentHeal": [
@@ -610,5 +610,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_illaoipassive_tooltip": "Illaoi draws the presence of her god, spawning a Tentacle on nearby terrain if no other Tentacles are nearby (<scaleLevel>@SpawnCD@</scaleLevel> second cooldown). Tentacles will not attack on their own, but can be made to <keywordMajor>Slam</keywordMajor> by Illaoi's Abilities.<br><br><keywordMajor>Slam</keywordMajor> deals <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>. Hitting at least one enemy champion restores <healing>@MissingHPPercentHeal*100@% missing Health</healing> to Illaoi."
+	}
 }

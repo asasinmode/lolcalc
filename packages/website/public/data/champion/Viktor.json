@@ -724,7 +724,7 @@
 				{
 					"name": "Glorious Evolution",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_passive.viktorvgu.png",
-					"tooltip": "Viktor gains <keywordMajor>Hex Fragments</keywordMajor> whenever he kills an enemy. Every @EvolutionStackBreakpoint@ <keywordMajor>Hex Fragments</keywordMajor> Viktor obtains will permanently upgrade an active Ability. After upgrading all of his basic Abilities, Viktor can upgrade his Ultimate Ability.<br><br>Killing minions grants @MinionStacks@ <keywordMajor>Hex Fragment</keywordMajor>.<br>Killing cannon minions grants @CannonStacks@ <keywordMajor>Hex Fragments</keywordMajor>.<br>Champion takedowns grant @ChampionStacks@ <keywordMajor>Hex Fragments</keywordMajor>.",
+					"tooltip": "{{Spell_ViktorP_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViktorP_Tooltip}}<br><rules><br>Viktor can upgrade his ultimate only after upgrading all non-ultimate Abilities.</rules>",
 					"dataValues": {
 						"MinionStacks": [
@@ -769,5 +769,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_viktorp_tooltip": "Viktor gains <keywordMajor>Hex Fragments</keywordMajor> whenever he kills an enemy. Every @EvolutionStackBreakpoint@ <keywordMajor>Hex Fragments</keywordMajor> Viktor obtains will permanently upgrade an active Ability. After upgrading all of his basic Abilities, Viktor can upgrade his Ultimate Ability.<br><br>Killing minions grants @MinionStacks@ <keywordMajor>Hex Fragment</keywordMajor>.<br>Killing cannon minions grants @CannonStacks@ <keywordMajor>Hex Fragments</keywordMajor>.<br>Champion takedowns grant @ChampionStacks@ <keywordMajor>Hex Fragments</keywordMajor>."
+	}
 }

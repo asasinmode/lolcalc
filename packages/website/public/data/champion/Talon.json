@@ -414,7 +414,7 @@
 				{
 					"name": "Blade's End",
 					"image": "assets/characters/talon/hud/icons2d/talonp.png",
-					"tooltip": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds.",
+					"tooltip": "{{game_buff_tooltip_TalonPassive}}",
 					"tooltipExtended": "{{game_buff_tooltip_TalonPassive}}<br><br><rules>Damage over time effect deals @monstermod*100@% damage to jungle monsters.</rules>",
 					"cooldownTime": [
 						0,
@@ -505,5 +505,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"game_buff_tooltip_talonpassive": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds."
+	}
 }

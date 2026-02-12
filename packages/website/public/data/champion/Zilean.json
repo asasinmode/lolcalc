@@ -348,7 +348,7 @@
 				{
 					"name": "Time In A Bottle",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png",
-					"tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}",
+					"tooltip": "{{Spell_HeightenedLearning_Tooltip}}",
 					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
 					"dataValues": {
 						"PassiveCooldown": [
@@ -428,5 +428,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_heightenedlearning_tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}"
+	}
 }

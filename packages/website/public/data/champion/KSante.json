@@ -1229,7 +1229,7 @@
 				{
 					"name": "Dauntless Instinct",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_p.png",
-					"tooltip": "K'Sante's damaging Abilities mark enemies hit. Attacking a marked enemy deals <physicalDamage>@FlatDamage@ plus @PercentHealthDamage@ max Health physical damage</physicalDamage> and consumes the mark.<br><br><keywordMajor>All Out</keywordMajor>: K'Sante's Attacks, Abilities and Passive deal an additional @MaxHealthDamagePercent@ max Health physical damage.",
+					"tooltip": "{{Spell_KSanteP_Tooltip}}",
 					"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules><br>",
 					"dataValues": {
 						"MarkDuration": [
@@ -1360,5 +1360,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_ksantep_tooltip": "K'Sante's damaging Abilities mark enemies hit. Attacking a marked enemy deals <physicalDamage>@FlatDamage@ plus @PercentHealthDamage@ max Health physical damage</physicalDamage> and consumes the mark.<br><br><keywordMajor>All Out</keywordMajor>: K'Sante's Attacks, Abilities and Passive deal an additional @MaxHealthDamagePercent@ max Health physical damage."
+	}
 }

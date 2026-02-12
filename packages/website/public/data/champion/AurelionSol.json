@@ -1028,5 +1028,11 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_aurelionsolq_name": "Breath of Light",
+		"spell_aurelionsolw_name": "Astral Flight",
+		"spell_aurelionsole_name": "Singularity",
+		"spell_aurelionsolr1_name": "Falling Star",
+		"spell_aurelionsolr2_name": "The Skies Descend"
+	}
 }

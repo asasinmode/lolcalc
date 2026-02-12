@@ -502,7 +502,7 @@
 				{
 					"name": "Z-Drive Resonance",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_p.png",
-					"tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 5 seconds.",
+					"tooltip": "{{Spell_EkkoPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>",
 					"dataValues": {
 						"ModesMultiplier": [
@@ -599,5 +599,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_ekkopassive_tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 5 seconds."
+	}
 }

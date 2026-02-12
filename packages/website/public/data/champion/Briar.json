@@ -691,7 +691,7 @@
 				{
 					"name": "Crimson Curse",
 					"image": "assets/characters/briar/hud/icons2d/briarp.png",
-					"tooltip": "Briar's Attacks and Abilities apply a bleed for @BleedDuration@ seconds, stacking up to @MaxBleedStacks@ times. The bleed deals <physicalDamage>@BleedDamageOverDurationTooltip@ to @BleedMaxDamageOverDurationTooltip@ physical damage</physicalDamage> based on stacks, and <healing>Heals Briar for @HealPercent*100@% of the pre-mitigation damage</healing>.<br><br>Briar gains up to <health>@TotalHealPerMissingHPPercentTooltip@%</health> increased <healing>Healing</healing> based on her missing Health. She has no Base Health Regeneration and her Abilities cost <font color='#CC3300'>@CurrentHealthPercentCost*100@% current Health</font> to cast.<br>",
+					"tooltip": "{{Spell_BriarP_Tooltip}}",
 					"tooltipExtended": "{{ Spell_BriarP_Tooltip }}<br><rules>Briar <healing>heals</healing> for @PercentOfBleedHealedOnKill*100@% of the remaining bleed damage when a bleeding enemy dies.</rules>",
 					"dataValues": {
 						"BleedDuration": [
@@ -836,5 +836,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_briarp_tooltip": "Briar's Attacks and Abilities apply a bleed for @BleedDuration@ seconds, stacking up to @MaxBleedStacks@ times. The bleed deals <physicalDamage>@BleedDamageOverDurationTooltip@ to @BleedMaxDamageOverDurationTooltip@ physical damage</physicalDamage> based on stacks, and <healing>Heals Briar for @HealPercent*100@% of the pre-mitigation damage</healing>.<br><br>Briar gains up to <health>@TotalHealPerMissingHPPercentTooltip@%</health> increased <healing>Healing</healing> based on her missing Health. She has no Base Health Regeneration and her Abilities cost <font color='#CC3300'>@CurrentHealthPercentCost*100@% current Health</font> to cast.<br>"
+	}
 }

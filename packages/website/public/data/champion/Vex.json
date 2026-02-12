@@ -448,7 +448,7 @@
 				{
 					"name": "Doom 'n Gloom",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png",
-					"tooltip": "Every @DoomCD@ seconds Vex becomes afflicted with Doom, causing her next basic Ability to <status>Knock Down</status> and <status>Fear</status> enemies for @FearDuration@ seconds.<br><br>Whenever a nearby enemy dashes or blinks, Vex marks them with <keywordMajor>Gloom</keywordMajor> for @GloomDuration@ seconds. Vex's next Attack against a <keywordMajor>Gloomed</keywordMajor> enemy deals an additional <magicDamage>@GloomProcCalc@ magic damage</magicDamage> and reduces this Ability's Cooldown by @GloomCDChamp*100@%.",
+					"tooltip": "{{Spell_VexP_Tooltip}}",
 					"tooltipExtended": "{{Spell_VexP_Tooltip}}<br><br><rules>Non-champion targets take @GloomMinionMod@ damage and refund @GloomCDNonChamp*100@% of this Ability's Cooldown.<br>Enemies <status>Feared</status> by this Ability move more slowly the farther they are from Vex.</rules>",
 					"cooldownTime": [
 						0,
@@ -678,5 +678,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_vexp_tooltip": "Every @DoomCD@ seconds Vex becomes afflicted with Doom, causing her next basic Ability to <status>Knock Down</status> and <status>Fear</status> enemies for @FearDuration@ seconds.<br><br>Whenever a nearby enemy dashes or blinks, Vex marks them with <keywordMajor>Gloom</keywordMajor> for @GloomDuration@ seconds. Vex's next Attack against a <keywordMajor>Gloomed</keywordMajor> enemy deals an additional <magicDamage>@GloomProcCalc@ magic damage</magicDamage> and reduces this Ability's Cooldown by @GloomCDChamp*100@%."
+	}
 }

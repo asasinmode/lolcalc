@@ -627,7 +627,7 @@
 				{
 					"name": "Unseen Predator",
 					"image": "assets/characters/rengar/hud/icons2d/rengar_p.png",
-					"tooltip": "While in Brush, Rengar leaps to enemies he Attacks.<br><br>Rengar generates <keywordMajor>1 Ferocity</keywordMajor> when he uses a non-ultimate Ability. At the start of the leap Unseen Predator will generate <keywordMajor>1 Ferocity</keywordMajor> if none of his current Ferocity was generated this way.<br> <br>At <keywordMajor>@MaxFerocity@ Ferocity</keywordMajor>, his next non-ultimate Ability is empowered. Casting an empowered Ability grants Rengar <speed>@EmpoweredMS@ Move Speed</speed> for @EmpoweredMSDuration@ seconds.<br><br>Unique takedowns increase Rengar's <physicalDamage>Attack Damage</physicalDamage> from <keywordMajor>Bonetooth Necklace</keywordMajor>.",
+					"tooltip": "{{Spell_RengarPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_RengarPassive_Tooltip}}<br><rules><br>Rengar loses all <keywordMajor>Ferocity</keywordMajor> after being out of combat for @InCombatTimer@ seconds.<br>Rengar gains extra <physicalDamage>Attack Damage</physicalDamage> for killing Kha'Zix.</rules>",
 					"dataValues": {
 						"MaxFerocity": [
@@ -728,5 +728,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_rengarpassive_tooltip": "While in Brush, Rengar leaps to enemies he Attacks.<br><br>Rengar generates <keywordMajor>1 Ferocity</keywordMajor> when he uses a non-ultimate Ability. At the start of the leap Unseen Predator will generate <keywordMajor>1 Ferocity</keywordMajor> if none of his current Ferocity was generated this way.<br> <br>At <keywordMajor>@MaxFerocity@ Ferocity</keywordMajor>, his next non-ultimate Ability is empowered. Casting an empowered Ability grants Rengar <speed>@EmpoweredMS@ Move Speed</speed> for @EmpoweredMSDuration@ seconds.<br><br>Unique takedowns increase Rengar's <physicalDamage>Attack Damage</physicalDamage> from <keywordMajor>Bonetooth Necklace</keywordMajor>."
+	}
 }

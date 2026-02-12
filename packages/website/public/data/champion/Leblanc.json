@@ -544,7 +544,7 @@
 				{
 					"name": "Mirror Image",
 					"image": "assets/characters/leblanc/hud/icons2d/leblancp.leblanc_rework.png",
-					"tooltip": "When LeBlanc drops below 40% Health, she becomes <keywordStealth>Invisible</keywordStealth> for 1 second and creates a harmless clone for 8 seconds. LeBlanc can move the clone with the \"Alt\" key.",
+					"tooltip": "{{game_character_passiveTooltip_LeBlanc}}",
 					"tooltipExtended": "{{game_character_passiveTooltip_Leblanc}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
 					"cooldownTime": [
 						60,
@@ -571,5 +571,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"game_character_passivetooltip_leblanc": "When LeBlanc drops below 40% Health, she becomes <keywordStealth>Invisible</keywordStealth> for 1 second and creates a harmless clone for 8 seconds. LeBlanc can move the clone with the \"Alt\" key.",
+		"reminder_invisibility": "<keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or <font color='#ee91d7'>True Sight</font color>."
+	}
 }

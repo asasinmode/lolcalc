@@ -431,7 +431,7 @@
 				{
 					"name": "Get Excited!",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_passive.png",
-					"tooltip": "Whenever a champion, epic monster, or structure that Jinx has dealt damage to within the last @AssistMarkerDuration@ seconds is killed or destroyed, she gains <speed>@MSBuff@% decaying Move Speed</speed> and <attackSpeed>@ASBuff@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.<br><br>Champion takedowns stack the <attackSpeed>Attack Speed</attackSpeed> up to 5 times.",
+					"tooltip": "{{Spell_JinxPassiveMarker_Tooltip}}",
 					"tooltipExtended": "{{Spell_JinxPassiveMarker_Tooltip}}<br><rules>While excited Jinx can exceed the Attack Speed cap.</rules>",
 					"dataValues": {
 						"BuffDuration": [
@@ -485,5 +485,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_jinxpassivemarker_tooltip": "Whenever a champion, epic monster, or structure that Jinx has dealt damage to within the last @AssistMarkerDuration@ seconds is killed or destroyed, she gains <speed>@MSBuff@% decaying Move Speed</speed> and <attackSpeed>@ASBuff@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.<br><br>Champion takedowns stack the <attackSpeed>Attack Speed</attackSpeed> up to 5 times."
+	}
 }

@@ -394,7 +394,7 @@
 				{
 					"name": "Hemorrhage",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_hemorrhage.png",
-					"tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>{{Spell_DariusR_Name}}</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds.",
+					"tooltip": "{{Spell_DariusHemoMarker_Tooltip}}",
 					"tooltipExtended": "{{Spell_DariusHemoMarker_Tooltip}}<br><br><rules><keywordMajor>Hemorrhage</keywordMajor> deals @MonsterMod*100@% damage to jungle monsters.</rules>",
 					"dataValues": {
 						"MonsterMod": [
@@ -475,5 +475,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_dariusr_name": "Noxian Guillotine",
+		"spell_dariushemomarker_tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>{{Spell_DariusR_Name}}</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds."
+	}
 }

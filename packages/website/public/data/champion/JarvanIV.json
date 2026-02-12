@@ -419,7 +419,7 @@
 				{
 					"name": "Martial Cadence",
 					"image": "assets/characters/jarvaniv/hud/icons2d/jarvanivp.png",
-					"tooltip": "Jarvan's Attacks deal an additional <physicalDamage>@TooltipCurrentHealthDamage*100@% current Health physical damage</physicalDamage>. This effect has a @TooltipCooldown@ second Cooldown per target.",
+					"tooltip": "{{Spell_JarvanIVMartialCadence_Tooltip}}",
 					"tooltipExtended": "{{ Spell_JarvanIVMartialCadence_Tooltip }}<br><br><rules>Deals a minimum of 20 and a maximum of 400 damage to non-champions.</rules>",
 					"dataValues": {
 						"MaximumCadenceDamage": [
@@ -479,5 +479,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_jarvanivmartialcadence_tooltip": "Jarvan's Attacks deal an additional <physicalDamage>@TooltipCurrentHealthDamage*100@% current Health physical damage</physicalDamage>. This effect has a @TooltipCooldown@ second Cooldown per target."
+	}
 }

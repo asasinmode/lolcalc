@@ -540,7 +540,7 @@
 				{
 					"name": "Berserker Rage",
 					"image": "assets/characters/olaf/hud/icons2d/olafp.png",
-					"tooltip": "Olaf gains up to <attackSpeed>@MaxAttackSpeed@ Attack Speed</attackSpeed> and @MaxLifeSteal@ Life Steal, based on his missing Health.",
+					"tooltip": "{{game_character_passiveDescription_Olaf}}",
 					"tooltipExtended": "{{game_character_passiveDescription_Olaf}}<br><br><rules>Reaches max at 30% Health</rules>",
 					"cooldownTime": [
 						0,
@@ -600,5 +600,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"game_character_passivedescription_olaf": "Olaf gains up to <attackSpeed>@MaxAttackSpeed@ Attack Speed</attackSpeed> and @MaxLifeSteal@ Life Steal, based on his missing Health."
+	}
 }

@@ -460,7 +460,7 @@
 				{
 					"name": "Fired Up!",
 					"image": "assets/characters/milio/hud/icons2d/milio_p.png",
-					"tooltip": "When Milio's Abilities touch ally champions, their next Attack or Ability deals <physicalDamage>@ADBurstRatio@ ally Attack Damage</physicalDamage> as additional <magicDamage>magic damage</magicDamage>, plus <magicDamage>@BurnDamage@ magic damage</magicDamage> over @BurnDuration@ seconds.",
+					"tooltip": "{{Spell_MilioPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MilioPassive_Tooltip}}<br><br><rules>Burn damage does not stack from multiple hits.</rules>",
 					"cooldownTime": [
 						0,
@@ -548,5 +548,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_miliopassive_tooltip": "When Milio's Abilities touch ally champions, their next Attack or Ability deals <physicalDamage>@ADBurstRatio@ ally Attack Damage</physicalDamage> as additional <magicDamage>magic damage</magicDamage>, plus <magicDamage>@BurnDamage@ magic damage</magicDamage> over @BurnDuration@ seconds."
+	}
 }

@@ -543,7 +543,7 @@
 				{
 					"name": "Void Shift",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_passive.png",
-					"tooltip": "Malzahar gains @DRPercent@% damage reduction and immunity from <status>Disabling</status> and <status>Immobilizing</status> effects, lingering for @LingerDuration@ seconds after taking damage or blocking one of those effects. This effect has a @ShieldCooldown@ second Cooldown.",
+					"tooltip": "{{Spell_MalzaharPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MalzaharPassive_Tooltip}}<br><br><rules>Taking damage will restart the Cooldown. <br>Damage from minions is not reduced, but it does not trigger or restart the Cooldown.</rules>",
 					"dataValues": {
 						"DRPercent": [
@@ -594,5 +594,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_malzaharpassive_tooltip": "Malzahar gains @DRPercent@% damage reduction and immunity from <status>Disabling</status> and <status>Immobilizing</status> effects, lingering for @LingerDuration@ seconds after taking damage or blocking one of those effects. This effect has a @ShieldCooldown@ second Cooldown."
+	}
 }

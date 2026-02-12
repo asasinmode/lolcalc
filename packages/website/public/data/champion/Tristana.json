@@ -493,5 +493,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_tristanae_name": "Explosive Charge",
+		"spell_tristanar_name": "Buster Shot"
+	}
 }

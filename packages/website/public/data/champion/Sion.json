@@ -691,7 +691,7 @@
 				{
 					"name": "Glory in Death",
 					"image": "assets/characters/sion/hud/icons2d/sion_passive1.png",
-					"tooltip": "After being killed Sion will reanimate himself allowing him to move and Attack, but his Health rapidly decays while he is reanimated. He also gains @Lifesteal*100@% Lifesteal, attacks extremely fast, and his Attacks deal an additional <physicalDamage>@PercentMaxHP*100@% max Health physical damage</physicalDamage>.<br><br>All of his Abilities are replaced with <spellName>Death Surge</spellName>, which grants him a burst of Move Speed.",
+					"tooltip": "{{Spell_SionPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_SionPassive_Tooltip}}<br><br><rules>Max @NonChampCap@ bonus damage against non-champions.<br>Sion deals @StructureMod*100@% damage to structures while in this form.</rules>",
 					"dataValues": {
 						"Lifesteal": [
@@ -736,5 +736,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_sionpassive_tooltip": "After being killed Sion will reanimate himself allowing him to move and Attack, but his Health rapidly decays while he is reanimated. He also gains @Lifesteal*100@% Lifesteal, attacks extremely fast, and his Attacks deal an additional <physicalDamage>@PercentMaxHP*100@% max Health physical damage</physicalDamage>.<br><br>All of his Abilities are replaced with <spellName>Death Surge</spellName>, which grants him a burst of Move Speed."
+	}
 }

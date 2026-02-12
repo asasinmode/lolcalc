@@ -521,7 +521,7 @@
 				{
 					"name": "Fury of the North",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_passive.png",
-					"tooltip": "Sejuani becomes immune to <status>Slows</status> and gains <scaleArmor>@TotalArmorTooltip@ Armor</scaleArmor> and <scaleMR>@TotalMRTooltip@ Magic Resist</scaleMR> after not taking damage from champions or large jungle monsters for @FrostArmorOOC@ seconds.<br><br>Sejuani's first Attack against enemies she has <status>Stunned</status> deals an additional <magicDamage>@PercentHPDamage@ max Health magic damage</magicDamage>.",
+					"tooltip": "{{Spell_SejuaniPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_SejuaniPassive_Tooltip}}<br><br><rules>Percent Health damage against epic jungle monsters is capped at @EpicMonsterCap@.<br>Defensive effect persists for @FrostArmorDuration@ seconds after taking damage from champions or large jungle monsters.</rules>",
 					"dataValues": {
 						"FrostArmorDuration": [
@@ -641,5 +641,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_sejuanipassive_tooltip": "Sejuani becomes immune to <status>Slows</status> and gains <scaleArmor>@TotalArmorTooltip@ Armor</scaleArmor> and <scaleMR>@TotalMRTooltip@ Magic Resist</scaleMR> after not taking damage from champions or large jungle monsters for @FrostArmorOOC@ seconds.<br><br>Sejuani's first Attack against enemies she has <status>Stunned</status> deals an additional <magicDamage>@PercentHPDamage@ max Health magic damage</magicDamage>."
+	}
 }

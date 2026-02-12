@@ -1535,6 +1535,9 @@
 		}
 	},
 	"stringtable": {
+		"spell_apheliosp_buff_ad": "<physicalDamage>Attack Damage</physicalDamage>",
+		"spell_apheliosp_buff_as": "<attackSpeed>Attack Speed</attackSpeed>",
+		"spell_apheliosp_buff_ap": "<scaleLethality>Lethality</scaleLethality>",
 		"spell_apheliosq_name_12": "Resurgent Moonshot",
 		"spell_apheliosq_name_13": "Incendiary Moonshot",
 		"spell_apheliosq_name_14": "Arcing Moonshot",

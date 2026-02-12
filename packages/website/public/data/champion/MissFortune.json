@@ -579,7 +579,7 @@
 				{
 					"name": "Love Tap",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
-					"tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds.",
+					"tooltip": "{{Spell_MissFortunePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",
 					"cooldownTime": [
 						0,
@@ -649,5 +649,9 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_missfortunepassive_name": "Love Tap",
+		"spell_missfortunew_name": "Strut",
+		"spell_missfortunepassive_tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>{{ Spell_MissFortunePassive_Name }}</spellName> reduces the cooldown of <spellName>{{ Spell_MissfortuneW_Name }}</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds."
+	}
 }

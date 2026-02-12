@@ -466,7 +466,7 @@
 				{
 					"name": "Martial Poise",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png",
-					"tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}",
+					"tooltip": "{{Spell_KalistaPassiveBuff_Tooltip}}",
 					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules><br>",
 					"dataValues": {
 						"DashSpeedDivisor": [
@@ -581,5 +581,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_kalistapassivebuff_tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}"
+	}
 }

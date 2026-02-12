@@ -687,5 +687,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"item_keyword_onhit": "%i:OnHit% <OnHit>On-Hit</OnHit>"
+	}
 }

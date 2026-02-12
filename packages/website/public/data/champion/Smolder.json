@@ -961,5 +961,10 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_smolderq_name": "Super Scorcher Breath",
+		"spell_smolderp_name": "Dragon Practice",
+		"spell_smolderw_name": "Achooo!",
+		"spell_smoldere_name": "Flap, Flap, Flap"
+	}
 }

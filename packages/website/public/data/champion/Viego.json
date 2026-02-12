@@ -652,7 +652,7 @@
 				{
 					"name": "Sovereign's Domination",
 					"image": "assets/characters/viego/hud/icons2d/viego_passive.png",
-					"tooltip": "The souls of enemy champions that die within @TakedownWindow@ seconds of being hit by Viego become wraiths. Viego can Attack wraiths to <keywordMajor>Possess</keywordMajor> them, restoring <healing>@PercentHealthHeal@% of enemy's max Health</healing> and gaining access to their non-ultimate Abilities, Attacks, and items for @TransformDuration@ seconds. During this time he replaces their Ultimate with a free cast of his own and gains <speed>@MoveSpeedPercent*100@% Move Speed</speed> towards enemy champions.",
+					"tooltip": "{{Spell_ViegoPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViegoPassive_Tooltip}}<br><br><rules>Viego keeps his summoner spells, runes, and trinkets during <keywordMajor>Possession</keywordMajor> and cannot use active or consumable items. Passive item Cooldowns are shared across <keywordMajor>Possessions</keywordMajor>.</rules>",
 					"dataValues": {
 						"MoveSpeedPercent": [
@@ -742,5 +742,7 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_viegopassive_tooltip": "The souls of enemy champions that die within @TakedownWindow@ seconds of being hit by Viego become wraiths. Viego can Attack wraiths to <keywordMajor>Possess</keywordMajor> them, restoring <healing>@PercentHealthHeal@% of enemy's max Health</healing> and gaining access to their non-ultimate Abilities, Attacks, and items for @TransformDuration@ seconds. During this time he replaces their Ultimate with a free cast of his own and gains <speed>@MoveSpeedPercent*100@% Move Speed</speed> towards enemy champions."
+	}
 }
