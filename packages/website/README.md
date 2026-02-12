@@ -40,7 +40,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] stats
     - [x] current health/mana
     - [x] champion data loading indicator
-    - [ ] passive with tooltip, resolve nested stringtable references in ability description
+    - [ ] passive with tooltip, resolve `@spell.CaitlynW.X` variables, possibly have to save `ObjectName` on abilities and get it that way?
     - [ ] aphelios
     - [ ] abilities ui (not implemented, coming soon)
     - [ ] runes

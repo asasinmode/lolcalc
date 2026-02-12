@@ -831,6 +831,6 @@
 		}
 	},
 	"stringtable": {
-		"spell_kaynpassive_tooltip": "{{ game_spell_Kayn_P_main_@f1@ }}"
+		"spell_kaynpassive_tooltip": "{{game_spell_Kayn_P_main_@f1@}}"
 	}
 }

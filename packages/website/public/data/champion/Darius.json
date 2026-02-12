@@ -477,6 +477,6 @@
 	},
 	"stringtable": {
 		"spell_dariusr_name": "Noxian Guillotine",
-		"spell_dariushemomarker_tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>{{Spell_DariusR_Name}}</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds."
+		"spell_dariushemomarker_tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>Noxian Guillotine</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds."
 	}
 }

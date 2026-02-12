@@ -1,5 +1,6 @@
 import type { IChampion, IChampionAbility } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
+import type { IChampionSpecificsAsAbilityDynamicValuesMap } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { ITexture } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
@@ -755,7 +756,7 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 	if (variableDebug) {
 		const { category, key, stringtableVariableSaveUnder, variableType, variableValueParameters, variableSourceKeys } = variableDebug;
 
-		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable);
+		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, variableValueParameters[0]?.dynamicValues, false);
 
 		if (stringtableVariables.size && stringtableVariableSaveUnder) {
 			stringtableVariableSaveUnder.stringtable ||= {};
@@ -915,29 +916,6 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 
 	([, abilities.q.variants, qVariantsStringtable] = championAbilityVariants('Aphelios', championData, ['q', 0], qVariantKeys));
 
-	if (abilities.q.variants[0]?.name) {
-		let qVariantStringtablePathPrefix = abilities.q.variants[0].name.slice(2, -2).trim();
-		qVariantStringtablePathPrefix = qVariantStringtablePathPrefix.slice(0, qVariantStringtablePathPrefix.lastIndexOf('_') + 1);
-
-		for (let i = 1; i <= CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER.length; i++) {
-			for (let j = 1; j <= CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER.length; j++) {
-				if (i !== j) {
-					const path = `${qVariantStringtablePathPrefix}${i}${j}`.toLowerCase();
-					qVariantsStringtable[path] = getStringtableValue(path, 'Aphelios Q variants', {
-						category: 'champion',
-						key: `Aphelios Q variant name ${i}${j}`,
-						variableType: 'championAbility',
-						variableSourceKeys: [],
-						variableValueParameters: [{}],
-						stringtableVariableSaveUnder: { stringtable: qVariantsStringtable },
-					});
-				}
-			}
-		}
-	} else {
-		console.warn(`Aphelios Q variant [0] has no name to be used for sorting variants`);
-	}
-
 	return qVariantsStringtable;
 }
 
@@ -1010,7 +988,10 @@ function championAbilityVariants(
 		const variableDebug = {
 			category: 'champion',
 			variableType: 'championAbility',
-			variableValueParameters: [variant],
+			variableValueParameters: [{
+				...variant,
+				dynamicValues: (CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[championId]?.POSSIBLE_DYNAMIC_VALUES,
+			}],
 			variableSourceKeys: ['effectAmount'],
 			stringtableVariableSaveUnder: stringtableObject,
 		} satisfies Omit<IStringtableVariableDebug, 'key'>;

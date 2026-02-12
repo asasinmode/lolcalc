@@ -1535,6 +1535,26 @@
 		}
 	},
 	"stringtable": {
+		"apheliosgun_lorename_1": "<font color='#00e6b8'>Calibrum</font>",
+		"apheliosgun_gameplaydesc_1": "Rifle",
+		"apheliosgun_name_1": "<font color='#00e6b8'>Calibrum</font> (Rifle)",
+		"spell_apheliosp_gunshortdesc_1": "<font color='#00e6b8'>Calibrum</font> (Rifle): Long range Attacks.",
+		"apheliosgun_lorename_2": "<font color='#e6005c'>Severum</font>",
+		"apheliosgun_gameplaydesc_2": "Scythe Pistol",
+		"apheliosgun_name_2": "<font color='#e6005c'>Severum</font> (Scythe Pistol)",
+		"spell_apheliosp_gunshortdesc_2": "<font color='#e6005c'>Severum</font> (Scythe Pistol): Life Steal and <speed>Move Speed</speed>.",
+		"apheliosgun_lorename_3": "<font color='#1a75ff'>Infernum</font>",
+		"apheliosgun_gameplaydesc_3": "Flamethrower",
+		"apheliosgun_name_3": "<font color='#1a75ff'>Infernum</font> (Flamethrower)",
+		"spell_apheliosp_gunshortdesc_3": "<font color='#1a75ff'>Infernum</font> (Flamethrower): Area of effect damage.",
+		"apheliosgun_lorename_4": "<font color='#ffffcc'>Crescendum</font>",
+		"apheliosgun_gameplaydesc_4": "Chakram",
+		"apheliosgun_name_4": "<font color='#ffffcc'>Crescendum</font> (Chakram)",
+		"spell_apheliosp_gunshortdesc_4": "<font color='#ffffcc'>Crescendum</font> (Chakram): High damage at close range.",
+		"apheliosgun_lorename_5": "<font color='#a64dff'>Gravitum</font>",
+		"apheliosgun_gameplaydesc_5": "Cannon",
+		"apheliosgun_name_5": "<font color='#a64dff'>Gravitum</font> (Cannon)",
+		"spell_apheliosp_gunshortdesc_5": "<font color='#a64dff'>Gravitum</font> (Cannon): <status>Slowing</status> + <status>Immobilizing</status> effects.",
 		"spell_apheliosp_buff_ad": "<physicalDamage>Attack Damage</physicalDamage>",
 		"spell_apheliosp_buff_as": "<attackSpeed>Attack Speed</attackSpeed>",
 		"spell_apheliosp_buff_ap": "<scaleLethality>Lethality</scaleLethality>",
@@ -1555,8 +1575,8 @@
 		"spell_apheliosq_name_43": "Incendiary Sentry",
 		"spell_apheliosq_name_45": "Binding Sentry",
 		"spell_apheliosq_name_51": "Binding Eclipse",
-		"spell_apheliosq_name_52": "{{ Spell_ApheliosQ_Name_51 }}",
-		"spell_apheliosq_name_53": "{{ Spell_ApheliosQ_Name_51 }}",
-		"spell_apheliosq_name_54": "{{ Spell_ApheliosQ_Name_51 }}"
+		"spell_apheliosq_name_52": "Binding Eclipse",
+		"spell_apheliosq_name_53": "Binding Eclipse",
+		"spell_apheliosq_name_54": "Binding Eclipse"
 	}
 }
