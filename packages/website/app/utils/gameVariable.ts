@@ -87,41 +87,42 @@ export function runeVariableValue(variable: string, rune: IRune): IVariableValue
 	return { value, actualVariableName };
 }
 
-// TODO implement
-export function championAbilityVariableValue(_variable: string, _abilityVariant: IChampionAbility['variants'][number]): IVariableValueResult {
+export function championAbilityVariableValue(variable: string, abilityVariant: IChampionAbility['variants'][number], abilityLevel = 1): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let actualVariableName: IVariableValueResult['actualVariableName'];
 
+	const [variableName, ...dotPath] = variable.split('.');
+	const sources = ['spellCalculations' in abilityVariant && abilityVariant.spellCalculations, 'dataValues' in abilityVariant && abilityVariant.dataValues, 'effectAmount' in abilityVariant && abilityVariant.effectAmount];
+
+	if (dotPath.length) {
+		actualVariableName = variableName;
+	}
+
+	for (const source of sources) {
+		if (!source) {
+			continue;
+		}
+
+		value = source[variableName!];
+		if (value !== undefined) {
+			for (const path in dotPath) {
+				// TODO figure this out, some paths seem to have .0 or .-1
+				const number = Number(path);
+				if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
+					value = (value as any)[path];
+				}
+			}
+		}
+		if (value !== undefined) {
+			break;
+		}
+	}
+
+	if (Array.isArray(value)) {
+		value = value[abilityLevel];
+	}
+
 	return { value, actualVariableName };
-
-	// const [variableName, ...dotPath] = variable.split('.');
-	// const sources = ['calculations' in rune && rune.calculations, 'effectAmount' in rune && rune.effectAmount];
-
-	// if (dotPath.length) {
-	// 	actualVariableName = variableName;
-	// }
-
-	// for (const source of sources) {
-	// 	if (!source) {
-	// 		continue;
-	// 	}
-
-	// 	value = source[variableName!];
-	// 	if (value !== undefined) {
-	// 		for (const path in dotPath) {
-	// 			// TODO figure this out, some paths seem to have .0 or .-1
-	// 			const number = Number(path);
-	// 			if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
-	// 				value = (value as any)[path];
-	// 			}
-	// 		}
-	// 	}
-	// 	if (value !== undefined) {
-	// 		break;
-	// 	}
-	// }
-
-	// return { value, actualVariableName };
 }
 
 export type IGameVariableType = 'item' | 'rune' | 'championAbility';
