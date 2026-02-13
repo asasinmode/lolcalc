@@ -4,12 +4,12 @@ export function replaceGameDescriptionStringtableVariables(
 	/** either resolved dynamic variables or possible values of dynamic variables */
 	dynamicValues: Record<string, unknown> = {},
 	wrapUnknown = true,
-	unknownStringtableVariables: [rawName: string, resolvedName?: string][] = [],
+	unknownStringtableVariables = new Map<string, Set<string>>(),
 	stringtableVariables = new Map<string, string>(),
 ): {
 	replaced: string;
 	stringtableVariables: Map<string, string>;
-	unknownStringtableVariables: [rawName: string, resolvedName?: string][];
+	unknownStringtableVariables: Map<string, Set<string>>;
 } {
 	const replaced = text.replace(/\{\{ ?(.+?) ?\}\}/g, (_, name) => {
 		let variableName = name.toLowerCase();
@@ -32,7 +32,7 @@ export function replaceGameDescriptionStringtableVariables(
 
 						const possibleValueText = stringtable[possibleValueVariableName];
 						if (!possibleValueText) {
-							unknownStringtableVariables.push([variableName, possibleValueVariableName]);
+							addUnknownStringtableVariable(unknownStringtableVariables, variableName, possibleValueVariableName);
 							continue;
 						}
 
@@ -54,7 +54,7 @@ export function replaceGameDescriptionStringtableVariables(
 		const value = stringtable[variableName] ?? stringtableVariables.get(variableName);
 
 		if (value === undefined) {
-			unknownStringtableVariables.push([name, variableName]);
+			addUnknownStringtableVariable(unknownStringtableVariables, name, variableName);
 			return wrapUnknown ? `<unknown>{{${name}}}</unknown>` : `{{${name}}}`;
 		}
 
@@ -76,4 +76,9 @@ export function replaceGameDescriptionStringtableVariables(
 	});
 
 	return { replaced, stringtableVariables, unknownStringtableVariables };
+}
+
+function addUnknownStringtableVariable(map: Map<string, Set<string>>, rawName: string, resolvedName: string) {
+	const set = map.get(rawName);
+	set ? set.add(resolvedName) : map.set(rawName, new Set([resolvedName]));
 }

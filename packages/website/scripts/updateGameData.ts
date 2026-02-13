@@ -25,7 +25,12 @@ const cacheHits: Record<string, any> = {};
 
 interface IDebugCategory {
 	variables: Map<string, string[]>;
-	stringtableVariables: Map<string, [rawName: string, resolvedName?: string][]>;
+	/**
+	 * parent map key is the ability in which unknown stringtable variables were found, like `Kalista passive[0] KalistaPassiveBuff tooltip`>
+	 * parent map value is a map of raw stringtable variables, like `spell_kalistap_tooltip_@gamemodeinteger@`
+	 * then that submap's value is the set with all resolved stringtable variables that weren't found, like `spell_kalistap_tooltip_1`
+	 */
+	stringtableVariables: Map<string, Map<string, Set<string>>>;
 	tags: [string[], Set<string>];
 }
 
@@ -765,7 +770,8 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 		for (const [stringtableKey, value] of stringtableVariables.entries()) {
 			((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
 		}
-		if (unknownStringtableVariables.length) {
+		// TODO try hashed stringtable variables, cant figure out what the hashing algorithm is atm
+		if (unknownStringtableVariables.size) {
 			debug[category].stringtableVariables.set(key, unknownStringtableVariables);
 		}
 
