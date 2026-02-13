@@ -25,7 +25,7 @@ const cacheHits: Record<string, any> = {};
 
 interface IDebugCategory {
 	variables: Map<string, string[]>;
-	stringtableVariables: Map<string, string[]>;
+	stringtableVariables: Map<string, [rawName: string, resolvedName?: string][]>;
 	tags: [string[], Set<string>];
 }
 
@@ -766,7 +766,7 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 			((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
 		}
 		if (unknownStringtableVariables.length) {
-			debug[category].stringtableVariables.set(key, unknownStringtableVariables.map(v => v[0]));
+			debug[category].stringtableVariables.set(key, unknownStringtableVariables);
 		}
 
 		const variableSource = variableValueParameters[0];

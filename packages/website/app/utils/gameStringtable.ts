@@ -4,12 +4,12 @@ export function replaceGameDescriptionStringtableVariables(
 	/** either resolved dynamic variables or possible values of dynamic variables */
 	dynamicValues: Record<string, unknown> = {},
 	wrapUnknown = true,
-	unknownStringtableVariables: [string, string | undefined][] = [],
+	unknownStringtableVariables: [rawName: string, resolvedName?: string][] = [],
 	stringtableVariables = new Map<string, string>(),
 ): {
 	replaced: string;
 	stringtableVariables: Map<string, string>;
-	unknownStringtableVariables: [rawName: string, actualName: string | undefined][];
+	unknownStringtableVariables: [rawName: string, resolvedName?: string][];
 } {
 	const replaced = text.replace(/\{\{ ?(.+?) ?\}\}/g, (_, name) => {
 		let variableName = name.toLowerCase();
