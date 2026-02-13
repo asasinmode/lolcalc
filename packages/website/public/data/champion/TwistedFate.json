@@ -633,5 +633,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_secondsight_tooltip_1": "Upon killing a unit, Twisted Fate rolls his 'lucky' dice receiving 1 to 6 bonus gold.",
+		"spell_secondsight_tooltipextended_1": "Spell_SecondSight_Tooltip_@GameModeInteger@<br><br>Total Gold Hustled: <statTracking>@f1@</statTracking><br>Total Gold Critically Hustled: <statTracking>@f2@</statTracking><br><br><rules>This ability can strike critically.</rules>"
+	}
 }

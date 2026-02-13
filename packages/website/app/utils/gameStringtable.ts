@@ -19,9 +19,11 @@ export function replaceGameDescriptionStringtableVariables(
 			const subVariablePrefix = variableName.slice(0, subVariableStartIndex);
 			const subVariableName = variableName.slice(subVariableStartIndex + 1, -1);
 
-			if (subVariableName in dynamicValues) {
-				if (Array.isArray(dynamicValues[subVariableName])) {
-					for (const possibleSubVariableValue of dynamicValues[subVariableName]) {
+			const subVariableValue = subVariableName in dynamicValues ? dynamicValues[subVariableName] : Object.entries(dynamicValues).find(([key]) => key.toLowerCase() === subVariableName)?.[1];
+
+			if (subVariableValue !== undefined) {
+				if (Array.isArray(subVariableValue)) {
+					for (const possibleSubVariableValue of subVariableValue) {
 						const possibleValueVariableName = `${subVariablePrefix}${possibleSubVariableValue}`;
 						if (stringtableVariables.has(possibleValueVariableName)) {
 							continue;
@@ -39,7 +41,7 @@ export function replaceGameDescriptionStringtableVariables(
 
 					return name;
 				} else {
-					variableName = `${variableName.slice(0, subVariableStartIndex - 1)}_${dynamicValues[subVariableName]}`;
+					variableName = `${variableName.slice(0, subVariableStartIndex - 1)}_${subVariableValue}`;
 				}
 			}
 		}

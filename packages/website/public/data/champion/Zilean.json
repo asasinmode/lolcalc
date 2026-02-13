@@ -429,6 +429,6 @@
 		}
 	},
 	"stringtable": {
-		"spell_heightenedlearning_tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}"
+		"spell_heightenedlearning_tooltip": "Spell_HeightenedLearning_Tooltip_@GameModeInteger@"
 	}
 }

@@ -990,14 +990,17 @@ function championAbilityVariants(
 			variableType: 'championAbility',
 			variableValueParameters: [{
 				...variant,
-				dynamicValues: (CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[championId]?.POSSIBLE_DYNAMIC_VALUES,
+				dynamicValues: {
+					...variant.dataValues,
+					...(CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[championId]?.POSSIBLE_DYNAMIC_VALUES,
+				},
 			}],
 			variableSourceKeys: ['effectAmount'],
 			stringtableVariableSaveUnder: stringtableObject,
 		} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
 		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${debugPrefix} name`, { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} name` });
-		// TODO add tooltips for all abilities, not just passive
+		// TODO debug tooltips for all abilities, not just passive
 		variant.tooltip = mLocKeys.keyTooltip && getStringtableValue(
 			mLocKeys.keyTooltip,
 			`${variantDataKey} tooltip`,

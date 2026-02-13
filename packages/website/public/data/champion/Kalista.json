@@ -582,6 +582,6 @@
 		}
 	},
 	"stringtable": {
-		"spell_kalistapassivebuff_tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}"
+		"spell_kalistapassivebuff_tooltip": "Spell_KalistaP_Tooltip_@GameModeInteger@"
 	}
 }
