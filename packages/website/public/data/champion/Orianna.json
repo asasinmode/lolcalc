@@ -35,23 +35,8 @@
 					"name": "Command: Attack",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first.",
-					"mana": [
-						35,
-						35,
-						35,
-						35,
-						35,
-						35
-					],
-					"cooldownTime": [
-						6.75,
-						6,
-						5.25,
-						4.5,
-						3.75,
-						3,
-						3
-					],
+					"mana": [35, 35, 35, 35, 35, 35],
+					"cooldownTime": [6.75, 6, 5.25, 4.5, 3.75, 3, 3],
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mFormulaParts": [
@@ -79,33 +64,9 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"1": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"2": [
-							70,
-							70,
-							70,
-							70,
-							70,
-							70,
-							70
-						]
+						"0": [30, 60, 90, 120, 150, 180, 210],
+						"1": [30, 30, 30, 30, 30, 30, 30],
+						"2": [70, 70, 70, 70, 70, 70, 70]
 					},
 					"dataKey": "Characters/Orianna/Spells/OrianaIzunaCommandAbility/OrianaIzunaCommand"
 				}
@@ -118,78 +79,15 @@
 					"name": "Command: Dissonance",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaw.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds.",
-					"mana": [
-						60,
-						65,
-						70,
-						75,
-						80,
-						85
-					],
-					"cooldownTime": [
-						7,
-						7,
-						7,
-						7,
-						7,
-						7,
-						7
-					],
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							70,
-							110,
-							150,
-							190,
-							230,
-							270
-						],
-						"APRatio": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"SlowAmount": [
-							0.15,
-							0.2,
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45
-						],
-						"HasteAmount": [
-							0.15,
-							0.2,
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45
-						],
-						"FieldDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"SlowAndHasteDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"BaseDamage": [30, 70, 110, 150, 190, 230, 270],
+						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"SlowAmount": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
+						"HasteAmount": [0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45],
+						"FieldDuration": [3, 3, 3, 3, 3, 3, 3],
+						"SlowAndHasteDuration": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -217,23 +115,8 @@
 					"name": "Command: Protect",
 					"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"cooldownTime": [
-						9,
-						9,
-						9,
-						9,
-						9,
-						9,
-						9
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"spellCalculations": {
 						"TotalDamageTooltip": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -263,51 +146,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							20,
-							55,
-							90,
-							125,
-							160,
-							195,
-							230
-						],
-						"1": [
-							0,
-							6,
-							12,
-							18,
-							24,
-							30,
-							36
-						],
-						"2": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"3": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"4": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						]
+						"0": [20, 55, 90, 125, 160, 195, 230],
+						"1": [0, 6, 12, 18, 24, 30, 36],
+						"2": [30, 60, 90, 120, 150, 180, 210],
+						"3": [75, 75, 75, 75, 75, 75, 75],
+						"4": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
 					"dataKey": "Characters/Orianna/Spells/OrianaRedactCommandAbility/OrianaRedactCommand"
 				}
@@ -320,51 +163,12 @@
 					"name": "Command: Shockwave",
 					"image": "assets/characters/orianna/hud/icons2d/oriannar.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						110,
-						110,
-						95,
-						80,
-						80,
-						80,
-						80
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 95, 80, 80, 80, 80],
 					"dataValues": {
-						"Damage": [
-							100,
-							250,
-							400,
-							550,
-							700,
-							850,
-							1000
-						],
-						"AoERadius": [
-							415,
-							415,
-							415,
-							415,
-							415,
-							415,
-							415
-						],
-						"StunDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
+						"Damage": [100, 250, 400, 550, 700, 850, 1000],
+						"AoERadius": [415, 415, 415, 415, 415, 415, 415],
+						"StunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -393,42 +197,10 @@
 					"image": "assets/characters/orianna/hud/icons2d/oriannap.png",
 					"tooltip": "Orianna's Abilities originate from her <keywordMajor>Ball</keywordMajor>. Orianna's <keywordMajor>Ball</keywordMajor> automatically returns to her if she is too far away from it.<br><br>Orianna's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Subsequent Attacks against the same target within @StackDuration@ seconds deal an additional <magicDamage>@StackDamage@ magic damage</magicDamage> (max of <magicDamage>@StackDamageMax@ damage</magicDamage>).",
 					"dataValues": {
-						"StackMult": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"StackCount": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"StackDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"APRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						]
+						"StackMult": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"StackCount": [2, 2, 2, 2, 2, 2, 2],
+						"StackDuration": [4, 4, 4, 4, 4, 4, 4],
+						"APRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

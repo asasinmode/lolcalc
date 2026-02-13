@@ -35,87 +35,16 @@
 					"name": "Crushing Blow",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcrushingblow.png",
 					"tooltip": "Wukong and his <keywordMajor>Clone's</keywordMajor> next Attack gains @AttackRangeBonus@ range, deals an additional <physicalDamage>@BonusDamageTT@ physical damage</physicalDamage>, and removes <scaleArmor>@ArmorShredPercent*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br>This Ability's cooldown is reduced by @CooldownDecrease@ seconds every time Wukong or his <keywordMajor>Clone</keywordMajor> hit an enemy with an Attack or Ability.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
-					"mana": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
-					"cooldownTime": [
-						8,
-						8,
-						7.5,
-						7,
-						6.5,
-						6,
-						6
-					],
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
-						"BaseDamage": [
-							-5,
-							20,
-							45,
-							70,
-							95,
-							120,
-							145
-						],
-						"ADRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"ArmorShredPercent": [
-							0.05,
-							0.1,
-							0.15,
-							0.2,
-							0.25,
-							0.3,
-							0.35
-						],
-						"ShredDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"BuffDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"AttackRangeBonus": [
-							125,
-							135,
-							145,
-							155,
-							165,
-							175,
-							185
-						],
-						"CooldownDecrease": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"BaseDamage": [-5, 20, 45, 70, 95, 120, 145],
+						"ADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"ArmorShredPercent": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35],
+						"ShredDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"AttackRangeBonus": [125, 135, 145, 155, 165, 175, 185],
+						"CooldownDecrease": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -160,78 +89,15 @@
 					"name": "Warrior Trickster",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingdecoy.png",
 					"tooltip": "Wukong dashes and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ second, leaving behind a stationary <keywordMajor>Clone</keywordMajor> for @CloneDuration@ seconds.<br><br>The <keywordMajor>Clone</keywordMajor> Attacks nearby enemies Wukong has recently damaged and will mimic his ultimate, each dealing @CloneDamageMod*100@% of normal damage.",
-					"mana": [
-						60,
-						55,
-						50,
-						45,
-						40,
-						40
-					],
-					"cooldownTime": [
-						22,
-						22,
-						21,
-						20,
-						19,
-						18,
-						18
-					],
+					"mana": [60, 55, 50, 45, 40, 40],
+					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"dataValues": {
-						"CloneDamageMod": [
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5,
-							0.55
-						],
-						"StealthDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CloneDuration": [
-							3.25,
-							3.25,
-							3.25,
-							3.25,
-							3.25,
-							3.25,
-							3.25
-						],
-						"DashSpeed": [
-							900,
-							900,
-							900,
-							900,
-							900,
-							900,
-							900
-						],
-						"RangeClamp": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"MinRange": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						]
+						"CloneDamageMod": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
+						"StealthDuration": [1, 1, 1, 1, 1, 1, 1],
+						"CloneDuration": [3.25, 3.25, 3.25, 3.25, 3.25, 3.25, 3.25],
+						"DashSpeed": [900, 900, 900, 900, 900, 900, 900],
+						"RangeClamp": [300, 300, 300, 300, 300, 300, 300],
+						"MinRange": [100, 100, 100, 100, 100, 100, 100]
 					},
 					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingDecoyAbility/MonkeyKingDecoy"
 				}
@@ -244,96 +110,17 @@
 					"name": "Nimbus Strike",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingnimbusstrike.png",
 					"tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to @ExtraTargets@ additional enemies nearby. Each enemy struck takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>",
-					"mana": [
-						30,
-						35,
-						40,
-						45,
-						50,
-						50
-					],
-					"cooldownTime": [
-						10,
-						10,
-						9.25,
-						8.5,
-						7.75,
-						7,
-						7
-					],
+					"mana": [30, 35, 40, 45, 50, 50],
+					"cooldownTime": [10, 10, 9.25, 8.5, 7.75, 7, 7],
 					"dataValues": {
-						"BaseDamage": [
-							40,
-							80,
-							120,
-							160,
-							200,
-							240,
-							280
-						],
-						"AttackSpeed": [
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5,
-							0.55,
-							0.6
-						],
-						"AttackSpeedDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"DashSpeed": [
-							1050,
-							1050,
-							1050,
-							1050,
-							1050,
-							1050,
-							1050
-						],
-						"EndPointOffsetDistance": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"ExtraTargets": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ExtraTargetRange": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						],
-						"MonsterDamageRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
+						"AttackSpeed": [0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6],
+						"AttackSpeedDuration": [5, 5, 5, 5, 5, 5, 5],
+						"DashSpeed": [1050, 1050, 1050, 1050, 1050, 1050, 1050],
+						"EndPointOffsetDistance": [75, 75, 75, 75, 75, 75, 75],
+						"ExtraTargets": [2, 2, 2, 2, 2, 2, 2],
+						"ExtraTargetRange": [700, 700, 700, 700, 700, 700, 700],
+						"MonsterDamageRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -367,96 +154,17 @@
 					"name": "Cyclone",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingcyclone.png",
 					"tooltip": "Wukong gains <speed>@MoveSpeed*100@% Move Speed</speed> and spins his staff, <status>Knocking Up</status> nearby enemies for @KnockupDuration@ seconds and take <physicalDamage>@TotalDamageTT@ plus @PercentHPDamageTT@ max Health physical damage</physicalDamage> over @SpinDuration@ seconds.<br><br>This Ability can be cast a second time within @RecastWindow@ seconds before going on cooldown.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						0
-					],
-					"cooldownTime": [
-						10,
-						130,
-						110,
-						90,
-						90,
-						90,
-						10
-					],
+					"mana": [100, 100, 100, 100, 100, 0],
+					"cooldownTime": [10, 130, 110, 90, 90, 90, 10],
 					"dataValues": {
-						"KnockupDuration": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"SpinDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"MoveSpeed": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"BasePercentMaxHPDmgPerSec": [
-							0.02,
-							0.04,
-							0.06,
-							0.08,
-							0.1,
-							0.12,
-							0.14
-						],
-						"SecondsPerTick": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"RecastWindow": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"LockoutTimeBetweenCasts": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ADRatioPerSecond": [
-							1.375,
-							1.375,
-							1.375,
-							1.375,
-							1.375,
-							1.375,
-							1.375
-						]
+						"KnockupDuration": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"SpinDuration": [2, 2, 2, 2, 2, 2, 2],
+						"MoveSpeed": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"BasePercentMaxHPDmgPerSec": [0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14],
+						"SecondsPerTick": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"RecastWindow": [8, 8, 8, 8, 8, 8, 8],
+						"LockoutTimeBetweenCasts": [1, 1, 1, 1, 1, 1, 1],
+						"ADRatioPerSecond": [1.375, 1.375, 1.375, 1.375, 1.375, 1.375, 1.375]
 					},
 					"spellCalculations": {
 						"DamagePerSecondTotal": {
@@ -533,88 +241,16 @@
 					"name": "Stone Skin",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingstoneskin.png",
 					"tooltip": "Wukong gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and regenerates <healing>@HealthPercentPer5*100@% max Health per 5 seconds</healing>. These bonuses are increased by @StackMultiplier*100@% for @StackDuration@ seconds every time he or his <keywordMajor>Clone</keywordMajor> hit an enemy champion or jungle monster with an Attack or Ability, stacking up to @MaxStacks@ times.",
-					"cooldownTime": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
+					"cooldownTime": [20, 20, 20, 20, 20, 20, 20],
 					"dataValues": {
-						"CombatDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"StackDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MaxStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"StackMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"HealthPercentPer5": [
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004
-						],
-						"TooltipMult": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"TooltipMaxHealthPercentPer5": [
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1
-						],
-						"FallOffRate": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"CombatDuration": [3, 3, 3, 3, 3, 3, 3],
+						"StackDuration": [5, 5, 5, 5, 5, 5, 5],
+						"MaxStacks": [5, 5, 5, 5, 5, 5, 5],
+						"StackMultiplier": [1, 1, 1, 1, 1, 1, 1],
+						"HealthPercentPer5": [0.004, 0.004, 0.004, 0.004, 0.004, 0.004, 0.004],
+						"TooltipMult": [6, 6, 6, 6, 6, 6, 6],
+						"TooltipMaxHealthPercentPer5": [2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1],
+						"FallOffRate": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"BonusArmor": {

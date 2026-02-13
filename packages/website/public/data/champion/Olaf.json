@@ -35,87 +35,16 @@
 					"name": "Undertow",
 					"image": "assets/characters/olaf/hud/icons2d/olafq.png",
 					"tooltip": "Olaf throws an axe, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for up to @Effect3Amount@ seconds (based on distance travelled). Champions hit lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @DebuffDuration@ seconds.<br><br>If Olaf picks up the axe, this Ability's Cooldown is reduced to @TooltipCDRefund@ seconds, or fully refunded if @TooltipCDRefund@ seconds has elapsed.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						70
-					],
-					"cooldownTime": [
-						9,
-						9,
-						9,
-						9,
-						9,
-						9,
-						9
-					],
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"dataValues": {
-						"MinimumRange": [
-							425,
-							425,
-							425,
-							425,
-							425,
-							425,
-							425
-						],
-						"SlowAmount": [
-							0.2,
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5
-						],
-						"ShredAmount": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"DebuffDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"MinimumCooldown": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"BaseDamage": [
-							10,
-							60,
-							110,
-							160,
-							210,
-							260,
-							310
-						],
-						"MonsterDamage": [
-							-5,
-							10,
-							25,
-							40,
-							55,
-							70,
-							85
-						]
+						"MinimumRange": [425, 425, 425, 425, 425, 425, 425],
+						"SlowAmount": [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
+						"ShredAmount": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"DebuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"MinimumCooldown": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"BaseDamage": [10, 60, 110, 160, 210, 260, 310],
+						"MonsterDamage": [-5, 10, 25, 40, 55, 70, 85]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -144,60 +73,12 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							80,
-							125,
-							170,
-							215,
-							260,
-							305
-						],
-						"1": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"2": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"3": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"4": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"5": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						]
+						"0": [30, 80, 125, 170, 215, 260, 305],
+						"1": [30, 30, 30, 30, 30, 30, 30],
+						"2": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"3": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"4": [800, 800, 800, 800, 800, 800, 800],
+						"5": [400, 400, 400, 400, 400, 400, 400]
 					},
 					"dataKey": "Characters/Olaf/Spells/OlafAxeThrowCastAbility/OlafAxeThrowCast"
 				}
@@ -210,78 +91,15 @@
 					"name": "Tough It Out",
 					"image": "assets/characters/olaf/hud/icons2d/olafw.png",
 					"tooltip": "Olaf gains <attackSpeed>@Attackspeed*100@% Attack Speed</attackSpeed> for @Duration@ seconds, and <shield>@BaseShield@ plus @ShieldPercMissingHP*100@% missing Health Shield (up to a maximum of @MaxShieldCalc@ Shield below @ThresholdForMax*100@% Health)</shield> for @ShieldDuration@ seconds.",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						16,
-						16,
-						15,
-						14,
-						13,
-						12,
-						11
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
-						"Attackspeed": [
-							0.3,
-							0.4,
-							0.5,
-							0.6,
-							0.7,
-							0.8,
-							0.9
-						],
-						"Duration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"ShieldPercMissingHP": [
-							0.175,
-							0.175,
-							0.175,
-							0.175,
-							0.175,
-							0.175,
-							0.175
-						],
-						"ShieldDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"BaseShield": [
-							-20,
-							10,
-							40,
-							70,
-							100,
-							130,
-							160
-						],
-						"ThresholdForMax": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
+						"Attackspeed": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+						"Duration": [5, 5, 5, 5, 5, 5, 5],
+						"ShieldPercMissingHP": [0.175, 0.175, 0.175, 0.175, 0.175, 0.175, 0.175],
+						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"BaseShield": [-20, 10, 40, 70, 100, 130, 160],
+						"ThresholdForMax": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
 					},
 					"spellCalculations": {
 						"ShieldCalc": {
@@ -348,43 +166,11 @@
 					"name": "Reckless Swing",
 					"image": "assets/characters/olaf/hud/icons2d/olafe.png",
 					"tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>@TotalDamage@ true damage</trueDamage>. If the enemy dies, the cost is refunded.<br><br>Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.",
-					"cooldownTime": [
-						12,
-						11,
-						10,
-						9,
-						8,
-						7,
-						6
-					],
+					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
 					"dataValues": {
-						"Cast_Time_Base": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"Cast_Time_Min": [
-							0.175,
-							0.175,
-							0.175,
-							0.175,
-							0.175,
-							0.175,
-							0.175
-						],
-						"Cast_Time_Attack_Speed_Cap": [
-							125,
-							125,
-							125,
-							125,
-							125,
-							125,
-							125
-						]
+						"Cast_Time_Base": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"Cast_Time_Min": [0.175, 0.175, 0.175, 0.175, 0.175, 0.175, 0.175],
+						"Cast_Time_Attack_Speed_Cap": [125, 125, 125, 125, 125, 125, 125]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -403,24 +189,8 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							25,
-							70,
-							115,
-							160,
-							205,
-							250,
-							250
-						],
-						"1": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						]
+						"0": [25, 70, 115, 160, 205, 250, 250],
+						"1": [30, 30, 30, 30, 30, 30, 30]
 					},
 					"dataKey": "Characters/Olaf/Spells/OlafRecklessStrikeAbility/OlafRecklessStrike"
 				}
@@ -433,87 +203,16 @@
 					"name": "Ragnarok",
 					"image": "assets/characters/olaf/hud/icons2d/olafr.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Olaf gains <scaleArmor>@Resists@ Armor</scaleArmor> and <scaleMR>@Resists@ Magic Resist</scaleMR>.<br><br><spellActive>Active: </spellActive>Olaf cleanses all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and becomes immune to them for @Duration@ seconds. While active, Olaf gains <scaleAD>@AD@ Attack Damage</scaleAD>. Hitting a champion with an Attack or <spellName>Reckless Swing</spellName> extends the duration by @DurationExtension@ seconds.<br><br>Additionally, Olaf gains <speed>@Haste*100@% Move Speed</speed> towards enemy champions for @HasteDuration@ second.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						100,
-						100,
-						90,
-						80,
-						160,
-						160,
-						100
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 90, 80, 160, 160, 100],
 					"dataValues": {
-						"Resists": [
-							5,
-							10,
-							15,
-							20,
-							25,
-							30,
-							35
-						],
-						"Duration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"FlatAD": [
-							0,
-							10,
-							20,
-							30,
-							40,
-							50,
-							60
-						],
-						"PercentTotalADAmp": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"HasteDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"Haste": [
-							-0.05,
-							0.2,
-							0.45,
-							0.7,
-							0.95,
-							1.2,
-							1.45
-						],
-						"DurationExtension": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						]
+						"Resists": [5, 10, 15, 20, 25, 30, 35],
+						"Duration": [3, 3, 3, 3, 3, 3, 3],
+						"FlatAD": [0, 10, 20, 30, 40, 50, 60],
+						"PercentTotalADAmp": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"HasteDuration": [1, 1, 1, 1, 1, 1, 1],
+						"Haste": [-0.05, 0.2, 0.45, 0.7, 0.95, 1.2, 1.45],
+						"DurationExtension": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
 					"spellCalculations": {
 						"AD": {
@@ -542,34 +241,10 @@
 					"image": "assets/characters/olaf/hud/icons2d/olafp.png",
 					"tooltip": "{{game_character_passiveDescription_Olaf}}",
 					"tooltipExtended": "{{game_character_passiveDescription_Olaf}}<br><br><rules>Reaches max at 30% Health</rules>",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"AttackSpeedPerMissingHPPerc": [
-							0.009,
-							0.009,
-							0.009,
-							0.009,
-							0.009,
-							0.009,
-							0.009
-						],
-						"MaxStatsThreshold": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
+						"AttackSpeedPerMissingHPPerc": [0.009, 0.009, 0.009, 0.009, 0.009, 0.009, 0.009],
+						"MaxStatsThreshold": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
 					},
 					"spellCalculations": {
 						"MaxAttackSpeed": {

@@ -35,51 +35,12 @@
 					"name": "Time Bomb",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
 					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds.",
-					"mana": [
-						60,
-						65,
-						70,
-						75,
-						80,
-						85
-					],
-					"cooldownTime": [
-						10.5,
-						10,
-						9.5,
-						9,
-						8.5,
-						8,
-						8
-					],
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
-						"BombBaseDamage": [
-							30,
-							75,
-							115,
-							165,
-							230,
-							300,
-							380
-						],
-						"APRatio": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						],
-						"StunDuration": [
-							1,
-							1.1,
-							1.2,
-							1.3,
-							1.4,
-							1.5,
-							1.6
-						]
+						"BombBaseDamage": [30, 75, 115, 165, 230, 300, 380],
+						"APRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+						"StunDuration": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -97,42 +58,10 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							75,
-							115,
-							165,
-							230,
-							300,
-							380
-						],
-						"1": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"2": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"3": [
-							1,
-							1.1,
-							1.2,
-							1.3,
-							1.4,
-							1.5,
-							1.6
-						]
+						"0": [30, 75, 115, 165, 230, 300, 380],
+						"1": [3, 3, 3, 3, 3, 3, 3],
+						"2": [7, 7, 7, 7, 7, 7, 7],
+						"3": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
 					},
 					"dataKey": "Characters/Zilean/Spells/ZileanQAbility/ZileanQ"
 				}
@@ -145,51 +74,12 @@
 					"name": "Rewind",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
 					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @Effect2Amount@ seconds.",
-					"mana": [
-						35,
-						35,
-						35,
-						35,
-						35,
-						35
-					],
-					"cooldownTime": [
-						16,
-						14,
-						12,
-						10,
-						8,
-						6,
-						6
-					],
+					"mana": [35, 35, 35, 35, 35, 35],
+					"cooldownTime": [16, 14, 12, 10, 8, 6, 6],
 					"effectAmount": {
-						"0": [
-							10,
-							20,
-							30,
-							40,
-							50,
-							60,
-							70
-						],
-						"1": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"2": [
-							35,
-							35,
-							35,
-							35,
-							35,
-							35,
-							35
-						]
+						"0": [10, 20, 30, 40, 50, 60, 70],
+						"1": [10, 10, 10, 10, 10, 10, 10],
+						"2": [35, 35, 35, 35, 35, 35, 35]
 					},
 					"dataKey": "Characters/Zilean/Spells/ZileanWAbility/ZileanW"
 				}
@@ -202,60 +92,13 @@
 					"name": "Time Warp",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
 					"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds.",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						15,
-						15,
-						15,
-						15,
-						15,
-						15,
-						15
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"effectAmount": {
-						"0": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"1": [
-							25,
-							40,
-							55,
-							70,
-							85,
-							99,
-							114
-						],
-						"2": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"3": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						]
+						"0": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"1": [25, 40, 55, 70, 85, 99, 114],
+						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"3": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"dataKey": "Characters/Zilean/Spells/TimeWarpAbility/TimeWarp"
 				}
@@ -268,60 +111,13 @@
 					"name": "Chronoshift",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
 					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
-					"mana": [
-						125,
-						150,
-						175,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						10,
-						120,
-						90,
-						60,
-						0,
-						0,
-						10
-					],
+					"mana": [125, 150, 175, 0, 0, 0],
+					"cooldownTime": [10, 120, 90, 60, 0, 0, 10],
 					"dataValues": {
-						"RBaseHeal": [
-							350,
-							600,
-							850,
-							1100,
-							1350,
-							1600,
-							1850
-						],
-						"RDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"APRatio": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ReviveStateDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"RBaseHeal": [350, 600, 850, 1100, 1350, 1600, 1850],
+						"RDuration": [5, 5, 5, 5, 5, 5, 5],
+						"APRatio": [2, 2, 2, 2, 2, 2, 2],
+						"ReviveStateDuration": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"RTotalHeal": {
@@ -351,24 +147,8 @@
 					"tooltip": "{{Spell_HeightenedLearning_Tooltip}}",
 					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",
 					"dataValues": {
-						"PassiveCooldown": [
-							120,
-							120,
-							120,
-							120,
-							120,
-							120,
-							120
-						],
-						"GamemodeInteger": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"PassiveCooldown": [120, 120, 120, 120, 120, 120, 120],
+						"GamemodeInteger": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"{e359ec0d}": {

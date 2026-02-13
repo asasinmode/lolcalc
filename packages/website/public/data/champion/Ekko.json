@@ -35,42 +35,11 @@
 					"name": "Timewinder",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_q.png",
 					"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @Effect2Amount*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>.",
-					"mana": [
-						50,
-						60,
-						70,
-						80,
-						90,
-						100
-					],
-					"cooldownTime": [
-						9.5,
-						9,
-						8.5,
-						8,
-						7.5,
-						7,
-						7
-					],
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
-						"OutgoingDamage": [
-							65,
-							80,
-							95,
-							110,
-							125,
-							140,
-							155
-						],
-						"ReturnDamage": [
-							15,
-							40,
-							65,
-							90,
-							115,
-							140,
-							165
-						]
+						"OutgoingDamage": [65, 80, 95, 110, 125, 140, 155],
+						"ReturnDamage": [15, 40, 65, 90, 115, 140, 165]
 					},
 					"spellCalculations": {
 						"InitialDamage": {
@@ -101,60 +70,12 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							55,
-							70,
-							85,
-							100,
-							115,
-							130,
-							145
-						],
-						"1": [
-							-0.25,
-							-0.4,
-							-0.45,
-							-0.5,
-							-0.55,
-							-0.6,
-							-0.67
-						],
-						"2": [
-							15,
-							40,
-							65,
-							90,
-							115,
-							140,
-							165
-						],
-						"3": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"5": [
-							165,
-							165,
-							165,
-							165,
-							165,
-							165,
-							165
-						],
-						"6": [
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75
-						]
+						"0": [55, 70, 85, 100, 115, 130, 145],
+						"1": [-0.25, -0.4, -0.45, -0.5, -0.55, -0.6, -0.67],
+						"2": [15, 40, 65, 90, 115, 140, 165],
+						"3": [100, 100, 100, 100, 100, 100, 100],
+						"5": [165, 165, 165, 165, 165, 165, 165],
+						"6": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75]
 					},
 					"dataKey": "Characters/Ekko/Spells/EkkoQAbility/EkkoQ"
 				}
@@ -167,33 +88,10 @@
 					"name": "Parallel Convergence",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
-					"mana": [
-						30,
-						35,
-						40,
-						45,
-						50,
-						50
-					],
-					"cooldownTime": [
-						24,
-						22,
-						20,
-						18,
-						16,
-						14,
-						14
-					],
+					"mana": [30, 35, 40, 45, 50, 50],
+					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"dataValues": {
-						"BaseOnHitDamage": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"BaseOnHitDamage": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"MissingHealthPercent": {
@@ -228,96 +126,16 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							375,
-							375,
-							375,
-							375,
-							375,
-							375,
-							375
-						],
-						"1": [
-							2.25,
-							2.25,
-							2.25,
-							2.25,
-							2.25,
-							2.25,
-							2.25
-						],
-						"2": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"3": [
-							80,
-							100,
-							120,
-							140,
-							160,
-							180,
-							200
-						],
-						"4": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"5": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"6": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"7": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"8": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"9": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						]
+						"0": [375, 375, 375, 375, 375, 375, 375],
+						"1": [2.25, 2.25, 2.25, 2.25, 2.25, 2.25, 2.25],
+						"2": [3, 3, 3, 3, 3, 3, 3],
+						"3": [80, 100, 120, 140, 160, 180, 200],
+						"4": [150, 150, 150, 150, 150, 150, 150],
+						"5": [15, 15, 15, 15, 15, 15, 15],
+						"6": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"7": [3, 3, 3, 3, 3, 3, 3],
+						"8": [2, 2, 2, 2, 2, 2, 2],
+						"9": [40, 40, 40, 40, 40, 40, 40]
 					},
 					"dataKey": "Characters/Ekko/Spells/EkkoWAbility/EkkoW"
 				}
@@ -330,23 +148,8 @@
 					"name": "Phase Dive",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_e.png",
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						60
-					],
-					"cooldownTime": [
-						9.5,
-						9,
-						8.5,
-						8,
-						7.5,
-						7,
-						7
-					],
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
@@ -363,42 +166,10 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							25,
-							50,
-							75,
-							100,
-							125,
-							150,
-							175
-						],
-						"1": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"2": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"3": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						]
+						"0": [25, 50, 75, 100, 125, 150, 175],
+						"1": [350, 350, 350, 350, 350, 350, 350],
+						"2": [3, 3, 3, 3, 3, 3, 3],
+						"3": [300, 300, 300, 300, 300, 300, 300]
 					},
 					"dataKey": "Characters/Ekko/Spells/EkkoEAbility/EkkoE"
 				}
@@ -411,60 +182,13 @@
 					"name": "Chronobreak",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_r.png",
 					"tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>@TotalBaseHeal@ Health</healing>, increased by @PercentHealAmpPerPercentMissingHealth@% for each 1% Health he lost in last 4 seconds.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						110,
-						110,
-						80,
-						50,
-						50,
-						50,
-						50
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [110, 110, 80, 50, 50, 50, 50],
 					"dataValues": {
-						"Damage": [
-							50,
-							200,
-							350,
-							500,
-							650,
-							800,
-							950
-						],
-						"FlatHeal": [
-							50,
-							100,
-							150,
-							200,
-							250,
-							300,
-							350
-						],
-						"AoERadius": [
-							375,
-							375,
-							375,
-							375,
-							375,
-							375,
-							375
-						],
-						"PercentHealAmpPerPercentMissingHealth": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"Damage": [50, 200, 350, 500, 650, 800, 950],
+						"FlatHeal": [50, 100, 150, 200, 250, 300, 350],
+						"AoERadius": [375, 375, 375, 375, 375, 375, 375],
+						"PercentHealAmpPerPercentMissingHealth": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -505,15 +229,7 @@
 					"tooltip": "{{Spell_EkkoPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_EkkoPassive_Tooltip}}<br><br><rules>This effect deals @f5@% damage to monsters.</rules>",
 					"dataValues": {
-						"ModesMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"ModesMultiplier": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"BonusMS": {
@@ -584,15 +300,7 @@
 						}
 					},
 					"effectAmount": {
-						"1": [
-							2.7,
-							2.7,
-							2.7,
-							2.7,
-							2.7,
-							2.7,
-							2.7
-						]
+						"1": [2.7, 2.7, 2.7, 2.7, 2.7, 2.7, 2.7]
 					},
 					"dataKey": "Characters/Ekko/Spells/EkkoPassiveAbility/EkkoPassive"
 				}

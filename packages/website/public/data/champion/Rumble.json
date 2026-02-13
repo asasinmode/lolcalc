@@ -35,115 +35,19 @@
 					"name": "Flamespitter",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_flamespitter.png",
 					"tooltip": "Rumble ignites his flamethrower, dealing <magicDamage>@FlatDamage@ plus @HealthDamage*100@% max Health magic damage</magicDamage> over @FlamespitterDuration@ seconds, reduced to <attention>@MinionMod*100@%</attention> against minions.<br><br><keywordMajor>Danger Zone:</keywordMajor> Damage is increased to <magicDamage>@EmpoweredDamage@ plus @EmpoweredHealth@ max Health</magicDamage>.<br><br><rules>Percent damage is limited to @MonsterCap@ damage on Monsters. </rules>",
-					"cooldownTime": [
-						10,
-						10,
-						9,
-						8,
-						7,
-						6,
-						6
-					],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"BaseDamage": [
-							35,
-							60,
-							85,
-							110,
-							135,
-							160,
-							185
-						],
-						"MinionMod": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"HealthDamage": [
-							0.055,
-							0.06,
-							0.065,
-							0.07,
-							0.075,
-							0.08,
-							0.085
-						],
-						"APRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"OverheatMulti": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"FlamespitterDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"DebuffTicks": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"TickRate": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"TotalTicks": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						],
-						"InitialHeatCost": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"BurnDuration": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						]
+						"BaseDamage": [35, 60, 85, 110, 135, 160, 185],
+						"MinionMod": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"HealthDamage": [0.055, 0.06, 0.065, 0.07, 0.075, 0.08, 0.085],
+						"APRatio": [1, 1, 1, 1, 1, 1, 1],
+						"OverheatMulti": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"FlamespitterDuration": [3, 3, 3, 3, 3, 3, 3],
+						"DebuffTicks": [3, 3, 3, 3, 3, 3, 3],
+						"TickRate": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"TotalTicks": [12, 12, 12, 12, 12, 12, 12],
+						"InitialHeatCost": [20, 20, 20, 20, 20, 20, 20],
+						"BurnDuration": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
 					"spellCalculations": {
 						"FlatDamage": {
@@ -207,79 +111,15 @@
 					"name": "Scrap Shield",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_scrapshield.png",
 					"tooltip": "Rumble tosses up a barrier, gaining <shield>@TotalShield@ Shield</shield> for @ShieldDuration.1@ seconds and <speed>@MoveSpeed*100@% Move Speed</speed> for @MoveSpeedDuration@ second.<br><br><keywordMajor>Danger Zone:</keywordMajor> The barrier grants <shield>@EmpoweredShield@ Shield</shield> and <speed>@EmpoweredMS@ Move Speed</speed> instead.",
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"HeatCost": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"BaseShield": [
-							-5,
-							25,
-							55,
-							85,
-							115,
-							145,
-							175
-						],
-						"HealthShield": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						],
-						"MoveSpeed": [
-							0.05,
-							0.1,
-							0.15,
-							0.2,
-							0.25,
-							0.3,
-							0.35
-						],
-						"APRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"ShieldDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"MoveSpeedDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"HeatCost": [20, 20, 20, 20, 20, 20, 20],
+						"BaseShield": [-5, 25, 55, 85, 115, 145, 175],
+						"HealthShield": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+						"MoveSpeed": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35],
+						"APRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"ShieldDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"MoveSpeedDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalShield": {
@@ -322,51 +162,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							60,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"1": [
-							10,
-							10,
-							15,
-							20,
-							25,
-							30,
-							30
-						],
-						"2": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"4": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"5": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"0": [60, 60, 90, 120, 150, 180, 210],
+						"1": [10, 10, 15, 20, 25, 30, 30],
+						"2": [20, 20, 20, 20, 20, 20, 20],
+						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"5": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"dataKey": "Characters/Rumble/Spells/RumbleShieldAbility/RumbleShield"
 				}
@@ -379,88 +179,16 @@
 					"name": "Electro Harpoon",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_electroharpoon.png",
 					"tooltip": "Rumble launches an electrified harpoon, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @BaseSlowAmount@% for @SlowDuration@ seconds, and reducing the enemy's <scaleMR>Magic Resist</scaleMR> by @PercMagicPen*100@% for @ShredDuration@ seconds.<br><br>Hitting an enemy who's already <status>Slowed</status> by this Ability increases the <status>Slow</status> to @EmpoweredSlowAmount@% and reduces the enemy's <scaleMR>Magic Resist</scaleMR> by @EnhancedMagicPen*100@%<br><br><keywordMajor>Danger Zone:</keywordMajor> The harpoon deals <magicDamage>@EmpDamage@ magic damage</magicDamage> instead and the <status>Slow</status> and reduced <scaleMR>Magic Resist</scaleMR> are increased by 50%.",
-					"cooldownTime": [
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5
-					],
+					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							55,
-							80,
-							105,
-							130,
-							155,
-							180
-						],
-						"FirstCastHeatCost": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"PercMagicPen": [
-							0.08,
-							0.1,
-							0.12,
-							0.14,
-							0.16,
-							0.18,
-							0.2
-						],
-						"EnhancedMagicPen": [
-							0.16,
-							0.2,
-							0.24,
-							0.28,
-							0.32,
-							0.36,
-							0.4
-						],
-						"ShredDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"BaseSlowAmount": [
-							10,
-							15,
-							20,
-							25,
-							30,
-							35,
-							40
-						],
-						"EmpoweredSlowAmount": [
-							20,
-							30,
-							40,
-							50,
-							60,
-							70,
-							80
-						]
+						"BaseDamage": [30, 55, 80, 105, 130, 155, 180],
+						"FirstCastHeatCost": [20, 20, 20, 20, 20, 20, 20],
+						"PercMagicPen": [0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2],
+						"EnhancedMagicPen": [0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4],
+						"ShredDuration": [4, 4, 4, 4, 4, 4, 4],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"BaseSlowAmount": [10, 15, 20, 25, 30, 35, 40],
+						"EmpoweredSlowAmount": [20, 30, 40, 50, 60, 70, 80]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -493,79 +221,15 @@
 					"name": "The Equalizer",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_r.png",
 					"tooltip": "Rumble launches a line of rockets, creating a burning trail that lasts @TrailDuration@ seconds, <status>Slowing</status> by @SlowAmount@% and dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.<br><br>Rumble can control the direction of the trail by clicking and dragging while casting this Ability.",
-					"cooldownTime": [
-						130,
-						130,
-						105,
-						80,
-						80,
-						80,
-						80
-					],
+					"cooldownTime": [130, 130, 105, 80, 80, 80, 80],
 					"dataValues": {
-						"NumMissiles": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"TrailDuration": [
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5
-						],
-						"TickRate": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"SlowAmount": [
-							35,
-							35,
-							35,
-							35,
-							35,
-							35,
-							35
-						],
-						"BaseDamagePerSecond": [
-							70,
-							140,
-							210,
-							280,
-							350,
-							420,
-							490
-						],
-						"MaxBurnSeconds": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BurnLingerTime": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"NumMissiles": [6, 6, 6, 6, 6, 6, 6],
+						"TrailDuration": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
+						"TickRate": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"SlowAmount": [35, 35, 35, 35, 35, 35, 35],
+						"BaseDamagePerSecond": [70, 140, 210, 280, 350, 420, 490],
+						"MaxBurnSeconds": [5, 5, 5, 5, 5, 5, 5],
+						"BurnLingerTime": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"DamagePerSecond": {
@@ -589,15 +253,7 @@
 						}
 					},
 					"effectAmount": {
-						"5": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
+						"5": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"dataKey": "Characters/Rumble/Spells/RumbleCarpetBombAbility/RumbleCarpetBomb"
 				}
@@ -611,60 +267,12 @@
 					"image": "assets/characters/rumble/hud/icons2d/rumble_junkyardtitan1.png",
 					"tooltip": "Rumble's Abilities generate <keywordMajor>Heat</keywordMajor>. While above <keywordMajor>@DangerZoneHeat@ Heat</keywordMajor>, he enters the <keywordMajor>Danger Zone</keywordMajor>, causing his basic Abilities to gain bonus effects. When he reaches <keywordMajor>@OverheatingHeat@ Heat</keywordMajor>, he overheats for @OverheatDuration@ seconds. <br><br>While overheated, Rumble <status>Silences</status> himself, but gains <attackSpeed>@OverheatAS@ Attack Speed</attackSpeed> and causes his Attacks to deal an additional <magicDamage>@TotalBaseDamage@ plus @OverheatPercBonusDamage*100@% max Health magic damage</magicDamage>.<br><br><rules>Percent damage is limited to @MonsterCapScaling@ damage on Monsters. </rules>",
 					"dataValues": {
-						"OverheatDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"DangerZoneHeat": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"OverheatingHeat": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"OverheatPercBonusDamage": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						],
-						"MonsterCap": [
-							80,
-							80,
-							80,
-							80,
-							80,
-							80,
-							80
-						],
-						"HeatDecayPerS": [
-							-10,
-							-10,
-							-10,
-							-10,
-							-10,
-							-10,
-							-10
-						]
+						"OverheatDuration": [4, 4, 4, 4, 4, 4, 4],
+						"DangerZoneHeat": [50, 50, 50, 50, 50, 50, 50],
+						"OverheatingHeat": [150, 150, 150, 150, 150, 150, 150],
+						"OverheatPercBonusDamage": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+						"MonsterCap": [80, 80, 80, 80, 80, 80, 80],
+						"HeatDecayPerS": [-10, -10, -10, -10, -10, -10, -10]
 					},
 					"spellCalculations": {
 						"TotalBaseDamage": {

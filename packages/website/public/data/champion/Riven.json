@@ -35,34 +35,10 @@
 					"name": "Broken Wings",
 					"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
 					"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
-					"cooldownTime": [
-						13,
-						13,
-						13,
-						13,
-						13,
-						13,
-						13
-					],
+					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"dataValues": {
-						"BaseDamage": [
-							15,
-							45,
-							75,
-							105,
-							135,
-							165,
-							195
-						],
-						"ADRatio": [
-							0.55,
-							0.6,
-							0.65,
-							0.7,
-							0.75,
-							0.8,
-							0.85
-						]
+						"BaseDamage": [15, 45, 75, 105, 135, 165, 195],
+						"ADRatio": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85]
 					},
 					"spellCalculations": {
 						"FirstSlashDamage": {
@@ -81,51 +57,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							45,
-							45,
-							75,
-							105,
-							135,
-							165,
-							165
-						],
-						"1": [
-							5,
-							30,
-							55,
-							80,
-							105,
-							130,
-							155
-						],
-						"2": [
-							75,
-							150,
-							225,
-							300,
-							375,
-							450,
-							525
-						],
-						"3": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"4": [
-							65,
-							65,
-							70,
-							75,
-							80,
-							85,
-							85
-						]
+						"0": [45, 45, 75, 105, 135, 165, 165],
+						"1": [5, 30, 55, 80, 105, 130, 155],
+						"2": [75, 150, 225, 300, 375, 450, 525],
+						"3": [2, 2, 2, 2, 2, 2, 2],
+						"4": [65, 65, 70, 75, 80, 85, 85]
 					},
 					"dataKey": "Characters/Riven/Spells/RivenTriCleaveAbility/RivenTriCleave"
 				}
@@ -138,15 +74,7 @@
 					"name": "Ki Burst",
 					"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
 					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
-					"cooldownTime": [
-						12,
-						11,
-						10,
-						9,
-						8,
-						7,
-						7
-					],
+					"cooldownTime": [12, 11, 10, 9, 8, 7, 7],
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
@@ -165,51 +93,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							65,
-							95,
-							125,
-							155,
-							185,
-							215
-						],
-						"1": [
-							10,
-							40,
-							70,
-							100,
-							130,
-							160,
-							190
-						],
-						"2": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"3": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"4": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
+						"0": [30, 65, 95, 125, 155, 185, 215],
+						"1": [10, 40, 70, 100, 130, 160, 190],
+						"2": [3, 3, 3, 3, 3, 3, 3],
+						"3": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"4": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"dataKey": "Characters/Riven/Spells/RivenMartyrAbility/RivenMartyr"
 				}
@@ -222,15 +110,7 @@
 					"name": "Valor",
 					"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
 					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
-					"cooldownTime": [
-						10,
-						10,
-						9,
-						8,
-						7,
-						6,
-						6
-					],
+					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"spellCalculations": {
 						"TotalShield": {
 							"mFormulaParts": [
@@ -248,51 +128,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							50,
-							70,
-							95,
-							120,
-							145,
-							170,
-							235
-						],
-						"1": [
-							50,
-							70,
-							95,
-							120,
-							145,
-							170,
-							235
-						],
-						"2": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"3": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"4": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
+						"0": [50, 70, 95, 120, 145, 170, 235],
+						"1": [50, 70, 95, 120, 145, 170, 235],
+						"2": [4, 4, 4, 4, 4, 4, 4],
+						"3": [800, 800, 800, 800, 800, 800, 800],
+						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
 					"dataKey": "Characters/Riven/Spells/RivenFeintAbility/RivenFeint"
 				}
@@ -305,61 +145,13 @@
 					"name": "Blade of the Exile",
 					"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
 					"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health.",
-					"cooldownTime": [
-						10,
-						120,
-						90,
-						60,
-						60,
-						10,
-						10
-					],
+					"cooldownTime": [10, 120, 90, 60, 60, 10, 10],
 					"dataValues": {
-						"MinBase": [
-							50,
-							100,
-							150,
-							200,
-							250,
-							300,
-							350
-						],
-						"MaxBase": [
-							150,
-							300,
-							450,
-							600,
-							750,
-							900,
-							1050
-						],
-						"Duration": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"PercentBonusAD": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"TooltipAttackRange": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						]
+						"MinBase": [50, 100, 150, 200, 250, 300, 350],
+						"MaxBase": [150, 300, 450, 600, 750, 900, 1050],
+						"Duration": [15, 15, 15, 15, 15, 15, 15],
+						"PercentBonusAD": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"TooltipAttackRange": [75, 75, 75, 75, 75, 75, 75]
 					},
 					"spellCalculations": {
 						"MinDamage": {
@@ -401,51 +193,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							100,
-							100,
-							150,
-							200,
-							200,
-							200,
-							200
-						],
-						"1": [
-							300,
-							300,
-							450,
-							600,
-							600,
-							600,
-							600
-						],
-						"2": [
-							0,
-							20,
-							20,
-							20,
-							0,
-							0,
-							0
-						],
-						"3": [
-							0,
-							15,
-							15,
-							15,
-							0,
-							0,
-							0
-						],
-						"4": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						]
+						"0": [100, 100, 150, 200, 200, 200, 200],
+						"1": [300, 300, 450, 600, 600, 600, 600],
+						"2": [0, 20, 20, 20, 0, 0, 0],
+						"3": [0, 15, 15, 15, 0, 0, 0],
+						"4": [25, 25, 25, 25, 25, 25, 25]
 					},
 					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine"
 				}
@@ -460,33 +212,9 @@
 					"tooltip": "{{Spell_RivenPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_RivenPassive_Tooltip}}<br><br><rules>The bonus damage can critically strike.<br>Deals @MonsterBonusDamage@ bonus damage to monsters.</rules>",
 					"dataValues": {
-						"Charges": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"TowerRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MonsterBonusDamage": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						]
+						"Charges": [3, 3, 3, 3, 3, 3, 3],
+						"TowerRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MonsterBonusDamage": [50, 50, 50, 50, 50, 50, 50]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

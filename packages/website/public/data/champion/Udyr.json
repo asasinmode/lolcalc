@@ -35,168 +35,25 @@
 					"name": "Wilding Claw",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_q.png",
 					"tooltip": "<spellActive>Claw Stance:</spellActive> Udyr gains <attackSpeed>@AttackSpeedBase*100@% Attack Speed</attackSpeed> and his Attacks deal <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }} for @AttackSpeedDurationBase@ seconds. Additionally, Udyr's next two Attacks in this stance deal a bonus <physicalDamage>@MaxHPOnHit1@ max Health physical damage</physicalDamage> and gain @AttackRange@ range.<br><br><keywordMajor>Awaken:</keywordMajor> Increase bonus <attackSpeed>Attack Speed</attackSpeed> to <attackSpeed>@EmpoweredTotalAS@</attackSpeed> and max Health damage to <physicalDamage>@Q2TotalOnHitHPDamage@</physicalDamage>. Additionally, Udyr's next two Attacks call lightning six times, dealing a total of <magicDamage>@EmpoweredLightningBonusMax@ max Health magic damage</magicDamage> to isolated targets (strikes bounce to other nearby targets when possible).<br>",
-					"mana": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"AttackSpeedBase": [
-							0.08,
-							0.2,
-							0.32,
-							0.44,
-							0.56,
-							0.68,
-							0.8
-						],
-						"AttackSpeedDurationBase": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AttackSpeedDurationEmpowered": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"MaxHPOnHitBase": [
-							0.02,
-							0.03,
-							0.04,
-							0.05,
-							0.06,
-							0.07,
-							0.08
-						],
-						"RepeatBouncePenalty": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"LightningAPRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"Bounces": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"BounceRange": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						],
-						"BaseDamage": [
-							-1,
-							5,
-							11,
-							17,
-							23,
-							29,
-							35
-						],
-						"MaxHPADRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"Q2MaxHPADRatio": [
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001
-						],
-						"AttackRange": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"LightningDamageLevel1": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
-						],
-						"LightningDamageLevel18": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						],
-						"EmpoweredBonusASLevel1": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"EmpoweredBonusASLevel18": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						]
+						"AttackSpeedBase": [0.08, 0.2, 0.32, 0.44, 0.56, 0.68, 0.8],
+						"AttackSpeedDurationBase": [4, 4, 4, 4, 4, 4, 4],
+						"AttackSpeedDurationEmpowered": [4, 4, 4, 4, 4, 4, 4],
+						"MaxHPOnHitBase": [0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08],
+						"RepeatBouncePenalty": [1, 1, 1, 1, 1, 1, 1],
+						"LightningAPRatio": [0, 0, 0, 0, 0, 0, 0],
+						"Bounces": [6, 6, 6, 6, 6, 6, 6],
+						"BounceRange": [450, 450, 450, 450, 450, 450, 450],
+						"BaseDamage": [-1, 5, 11, 17, 23, 29, 35],
+						"MaxHPADRatio": [0, 0, 0, 0, 0, 0, 0],
+						"Q2MaxHPADRatio": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001],
+						"AttackRange": [50, 50, 50, 50, 50, 50, 50],
+						"LightningDamageLevel1": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
+						"LightningDamageLevel18": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
+						"EmpoweredBonusASLevel1": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"EmpoweredBonusASLevel18": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
 						"EmpoweredTotalAS": {
@@ -399,114 +256,19 @@
 					"name": "Iron Mantle",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_w.png",
 					"tooltip": "<spellPassive>Mantle Stance:</spellPassive> Udyr gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. Additionally, Udyr's next two Attacks gain @LifeSteal*100@% Life Steal and restore <healing>@LifeOnHit@ Health</healing>.<br><br><keywordMajor>Awaken:</keywordMajor> Gain <shield>@RecastShield@ Shield</shield>, restore <healing>@RecastHeal@ Health</healing> over @ShieldDuration@ seconds, and Udyr's next two Attacks instead have @LifeSteal*200@% Life Steal and restore <healing>@LifeOnHitAwakened@ Health</healing>.<br>",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"ShieldDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ShieldBase": [
-							30,
-							45,
-							60,
-							75,
-							90,
-							105,
-							120
-						],
-						"LifeOnHitHPRatio": [
-							0.012,
-							0.012,
-							0.012,
-							0.012,
-							0.012,
-							0.012,
-							0.012
-						],
-						"ShieldPercentHealth": [
-							0.017,
-							0.02,
-							0.023,
-							0.026,
-							0.029,
-							0.032,
-							0.035
-						],
-						"LifeSteal": [
-							0.14,
-							0.15,
-							0.16,
-							0.17,
-							0.18,
-							0.19,
-							0.2
-						],
-						"HealOnHitMinionPenalty": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"HealAttackMult": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ShieldAPRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"OnHitHealAPRatio": [
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08
-						],
-						"PercentOfShieldHealAmount": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"ShieldDuration": [4, 4, 4, 4, 4, 4, 4],
+						"ShieldBase": [30, 45, 60, 75, 90, 105, 120],
+						"LifeOnHitHPRatio": [0.012, 0.012, 0.012, 0.012, 0.012, 0.012, 0.012],
+						"ShieldPercentHealth": [0.017, 0.02, 0.023, 0.026, 0.029, 0.032, 0.035],
+						"LifeSteal": [0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2],
+						"HealOnHitMinionPenalty": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"HealAttackMult": [2, 2, 2, 2, 2, 2, 2],
+						"ShieldAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"OnHitHealAPRatio": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"PercentOfShieldHealAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalShield": {
@@ -631,78 +393,15 @@
 					"name": "Blazing Stampede",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_e.png",
 					"tooltip": "<spellActive>Stampede Stance:</spellActive> Udyr gains <speed>@MoveSpeed*100@% Move Speed</speed>, decaying over @MoveSpeedDuration@ seconds. Additionally, Udyr's Attacks dash him to the target and <status>Stun</status> for @StunDuration@ seconds (@ICD@ second Cooldown per target).<br><br><keywordMajor>Awaken:</keywordMajor> Grants immunity to <status>Immobilizing</status> and <status>Disabling</status> effects and an additional <speed>@MoveSpeedBonus@ Move Speed</speed> for @UnstoppableDuration@ seconds.",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"ICD": [
-							6.4,
-							6,
-							5.6,
-							5.2,
-							4.8,
-							4.4,
-							4
-						],
-						"MoveSpeed": [
-							0.19,
-							0.25,
-							0.31,
-							0.37,
-							0.43,
-							0.49,
-							0.55
-						],
-						"MoveSpeedDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"StunDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"EmpoweredBonusRange": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"UnstoppableDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
+						"ICD": [6.4, 6, 5.6, 5.2, 4.8, 4.4, 4],
+						"MoveSpeed": [0.19, 0.25, 0.31, 0.37, 0.43, 0.49, 0.55],
+						"MoveSpeedDuration": [4, 4, 4, 4, 4, 4, 4],
+						"StunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"EmpoweredBonusRange": [75, 75, 75, 75, 75, 75, 75],
+						"UnstoppableDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
 					"spellCalculations": {
 						"MoveSpeedBonus": {
@@ -755,69 +454,14 @@
 					"image": "assets/characters/udyr/hud/icons2d/udyr_r.png",
 					"tooltip": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for @BuffDuration@ seconds, dealing <magicDamage>@StormDamage@ magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by @SlowPotency*100@%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>@PulseDamage@ magic damage</magicDamage> to enemies in the storm.<br><br><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>@PercentHPBlast@ max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional @EmpoweredSlow@.",
 					"tooltipExtended": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for @BuffDuration@ seconds, dealing <magicDamage>@StormDamage@ magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by @SlowPotency*100@%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>@PulseDamage@ magic damage</magicDamage> to enemies in the storm <i>(or enemies around Udyr if the storm expires)</i>.<br><br><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>@PercentHPBlast@ max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional @EmpoweredSlow@.",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"BuffDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SlowPotency": [
-							0.12,
-							0.15,
-							0.18,
-							0.21,
-							0.24,
-							0.27,
-							0.3
-						],
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"StormBaseDamage": [
-							4,
-							20,
-							36,
-							52,
-							68,
-							84,
-							100
-						],
-						"StormAPRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						]
+						"BuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"SlowPotency": [0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"StormBaseDamage": [4, 20, 36, 52, 68, 84, 100],
+						"StormAPRatio": [0, 0, 0, 0, 0, 0, 0]
 					},
 					"spellCalculations": {
 						"PercentHPBlast": {
@@ -941,78 +585,14 @@
 					"image": "assets/characters/udyr/hud/icons2d/udyr_p.png",
 					"tooltip": "<spellPassive>Awakened Spirit:</spellPassive> Udyr has four basic Abilities that swap between <i>Stances</i>. Udyr can <recast>Recast</recast> an Ability that is on Cooldown to gain its bonuses again with Ultimate benefits. (@UltCD@ second Cooldown).<br><br><spellPassive>Monk Training:</spellPassive> After using an Ability, Udyr's next two Attacks within @AttackSpeedDuration@ seconds gain <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and refund @UltCDReduction*100@% of <keywordMajor>Awaken's</keywordMajor> Cooldown.<br>",
 					"dataValues": {
-						"UdyrAHAmountPerCloudDragon": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"GlobalCD": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"GlobalCDEmpowered": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"SwapChargeBonus": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MaxCharge": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"UltCDReduction": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"AttackSpeedDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"UltCDMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"UdyrAHAmountPerCloudDragon": [6, 6, 6, 6, 6, 6, 6],
+						"GlobalCD": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"GlobalCDEmpowered": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SwapChargeBonus": [1, 1, 1, 1, 1, 1, 1],
+						"MaxCharge": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"UltCDReduction": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"AttackSpeedDuration": [4, 4, 4, 4, 4, 4, 4],
+						"UltCDMultiplier": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"{6a8aaac9}": {

@@ -36,69 +36,14 @@
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_q.png",
 					"tooltip": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}",
 					"tooltipExtended": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}<br><br>Total Gold plundered: <statTracking>@f1@ Gold</statTracking><br>Total SS plundered: <statTracking>@f3@ Silver Serpents</statTracking>",
-					"mana": [
-						50,
-						45,
-						40,
-						35,
-						30,
-						30
-					],
-					"cooldownTime": [
-						4.5,
-						4.5,
-						4.5,
-						4.5,
-						4.5,
-						4.5,
-						4.5
-					],
+					"mana": [50, 45, 40, 35, 30, 30],
+					"cooldownTime": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
 					"dataValues": {
-						"SpellDamage": [
-							-20,
-							10,
-							40,
-							70,
-							100,
-							130,
-							160
-						],
-						"ADRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CherryRatio": [
-							0.07,
-							0.07,
-							0.07,
-							0.07,
-							0.07,
-							0.07,
-							0.07
-						],
-						"GameModeInteger": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"CritDamageMod": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"SpellDamage": [-20, 10, 40, 70, 100, 130, 160],
+						"ADRatio": [1, 1, 1, 1, 1, 1, 1],
+						"CherryRatio": [0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07],
+						"GameModeInteger": [1, 1, 1, 1, 1, 1, 1],
+						"CritDamageMod": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"ShotDamage": {
@@ -142,42 +87,10 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							10,
-							10,
-							40,
-							70,
-							100,
-							130,
-							145
-						],
-						"1": [
-							3,
-							3,
-							4,
-							5,
-							6,
-							7,
-							8
-						],
-						"3": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"4": [
-							4,
-							4,
-							5,
-							6,
-							7,
-							8,
-							9
-						]
+						"0": [10, 10, 40, 70, 100, 130, 145],
+						"1": [3, 3, 4, 5, 6, 7, 8],
+						"3": [500, 500, 500, 500, 500, 500, 500],
+						"4": [4, 4, 5, 6, 7, 8, 9]
 					},
 					"dataKey": "Characters/Gangplank/Spells/GangplankQWrapperAbility/GangplankQWrapper"
 				}
@@ -190,23 +103,8 @@
 					"name": "Remove Scurvy",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_w.png",
 					"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @Effect2Amount@% missing Health</healing>.",
-					"mana": [
-						60,
-						70,
-						80,
-						90,
-						100,
-						110
-					],
-					"cooldownTime": [
-						24,
-						22,
-						20,
-						18,
-						16,
-						14,
-						14
-					],
+					"mana": [60, 70, 80, 90, 100, 110],
+					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"spellCalculations": {
 						"BaseHealth": {
 							"tooltipOnly": true,
@@ -223,51 +121,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							20,
-							45,
-							70,
-							95,
-							120,
-							145,
-							170
-						],
-						"1": [
-							13,
-							13,
-							13,
-							13,
-							13,
-							13,
-							13
-						],
-						"2": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"3": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"4": [
-							20,
-							30,
-							40,
-							50,
-							60,
-							70,
-							80
-						]
+						"0": [20, 45, 70, 95, 120, 145, 170],
+						"1": [13, 13, 13, 13, 13, 13, 13],
+						"2": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"3": [200, 200, 200, 200, 200, 200, 200],
+						"4": [20, 30, 40, 50, 60, 70, 80]
 					},
 					"dataKey": "Characters/Gangplank/Spells/GangplankWAbility/GangplankW"
 				}
@@ -280,25 +138,9 @@
 					"name": "Powder Keg",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png",
 					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @Effect5Amount@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @Effect2Amount@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @Effect10Amount@% Armor. Champions take an additional <physicalDamage>@Effect3Amount@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"BarrelSlow": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						]
+						"BarrelSlow": [30, 40, 50, 60, 70, 80, 90]
 					},
 					"spellCalculations": {
 						"FinalSlowAmount": {
@@ -331,96 +173,16 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							3,
-							3,
-							3,
-							4,
-							4,
-							5,
-							5
-						],
-						"1": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"2": [
-							75,
-							75,
-							95,
-							115,
-							135,
-							155,
-							175
-						],
-						"3": [
-							40,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"4": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"5": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"6": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"7": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"8": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"9": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						]
+						"0": [3, 3, 3, 4, 4, 5, 5],
+						"1": [2, 2, 2, 2, 2, 2, 2],
+						"2": [75, 75, 95, 115, 135, 155, 175],
+						"3": [40, 40, 50, 60, 70, 80, 90],
+						"4": [25, 25, 25, 25, 25, 25, 25],
+						"5": [2, 2, 2, 2, 2, 2, 2],
+						"6": [10, 10, 10, 10, 10, 10, 10],
+						"7": [100, 100, 100, 100, 100, 100, 100],
+						"8": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"9": [40, 40, 40, 40, 40, 40, 40]
 					},
 					"dataKey": "Characters/Gangplank/Spells/GangplankEAbility/GangplankE"
 				}
@@ -433,132 +195,21 @@
 					"name": "Cannon Barrage",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_r.png",
 					"tooltip": "Gangplank signals his ship to fire @TotalWavesTooltip@ waves of cannonballs anywhere on the map over @ZoneDuration@ seconds. Each wave <status>Slows</status> by @SlowPercent@% for @SlowDuration@ seconds and deals <magicDamage>@OneWaveDamage@ magic damage</magicDamage>. Maximum damage: @TotalDamageTooltip@<br><br>This Ability can be upgraded in the shop via <spellName>{{Spell_GangplankQWrapper_Name}}</spellName>.<br><br><spellName>Fire at Will</spellName>: Fires 6 additional waves of cannonballs.<br><spellName>Death's Daughter</spellName>: Fires a Mega-Cannonball that deals <trueDamage>@DeathsDaughterDamage@ true damage</trueDamage> and <status>Slows</status> by @DeathsDaughterSlow@% for @DeathsDaughterSlowDuration@ second.<br><spellName>Raise Morale</spellName>: Allies inside Cannon Barrage gain <speed>@RaiseMoraleHaste@% Move Speed</speed> for @RaiseMoraleHasteDuration@ seconds.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						160,
-						160,
-						140,
-						120,
-						120,
-						120,
-						120
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"dataValues": {
-						"DamagePerWave": [
-							10,
-							40,
-							70,
-							100,
-							130,
-							160,
-							190
-						],
-						"DeathsDaughterBaseDamage": [
-							30,
-							120,
-							210,
-							300,
-							390,
-							480,
-							570
-						],
-						"RaiseMoraleHaste": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"ZoneDuration": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"CannonDelay": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"CannonInterval": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"SlowPercent": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"SlowDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"DeathsDaughterSlow": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"DeathsDaughterSlowDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"RaiseMoraleHasteDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"TotalWavesTooltip": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						]
+						"DamagePerWave": [10, 40, 70, 100, 130, 160, 190],
+						"DeathsDaughterBaseDamage": [30, 120, 210, 300, 390, 480, 570],
+						"RaiseMoraleHaste": [40, 40, 40, 40, 40, 40, 40],
+						"ZoneDuration": [8, 8, 8, 8, 8, 8, 8],
+						"CannonDelay": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"CannonInterval": [2, 2, 2, 2, 2, 2, 2],
+						"SlowPercent": [30, 30, 30, 30, 30, 30, 30],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DeathsDaughterSlow": [75, 75, 75, 75, 75, 75, 75],
+						"DeathsDaughterSlowDuration": [1, 1, 1, 1, 1, 1, 1],
+						"RaiseMoraleHasteDuration": [2, 2, 2, 2, 2, 2, 2],
+						"TotalWavesTooltip": [12, 12, 12, 12, 12, 12, 12]
 					},
 					"spellCalculations": {
 						"OneWaveDamage": {
@@ -593,51 +244,11 @@
 						}
 					},
 					"effectAmount": {
-						"4": [
-							0,
-							1.5,
-							0.5,
-							0.5,
-							0,
-							0,
-							0
-						],
-						"6": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"7": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"8": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"9": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						]
+						"4": [0, 1.5, 0.5, 0.5, 0, 0, 0],
+						"6": [300, 300, 300, 300, 300, 300, 300],
+						"7": [75, 75, 75, 75, 75, 75, 75],
+						"8": [1, 1, 1, 1, 1, 1, 1],
+						"9": [40, 40, 40, 40, 40, 40, 40]
 					},
 					"dataKey": "Characters/Gangplank/Spells/GangplankRAbility/GangplankR"
 				}
@@ -652,51 +263,11 @@
 					"tooltip": "{{Spell_GangplankPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_GangplankPassive_Tooltip}}<br><br><rules>Deals @TurretDamageMult*100@% damage to turrets.<br><spellName>{{Spell_GangplankQWrapper_Name}}</spellName> does not apply this Ability.</rules>",
 					"dataValues": {
-						"Cooldown": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"MoveSpeedDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"DoTDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"TurretDamageMult": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"ADRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"Cooldown": [15, 15, 15, 15, 15, 15, 15],
+						"MoveSpeedDuration": [2, 2, 2, 2, 2, 2, 2],
+						"DoTDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"TurretDamageMult": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"ADRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

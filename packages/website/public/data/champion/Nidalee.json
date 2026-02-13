@@ -36,69 +36,14 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_q1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee throws her javelin, dealing <magicDamage>@HumanMinimumDamage@ magic damage</magicDamage>, increased up to <magicDamage>@HumanMaximumDamage@ magic damage</magicDamage> based on distance flown.",
 					"tooltipExtended": "{{Spell_JavelinToss_Tooltip}}<br><br>{{Spell_Takedown_Tooltip}}",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"TooltipCougarMinimumDamage": [
-							-20,
-							5,
-							30,
-							55,
-							80,
-							105,
-							130
-						],
-						"SpearMinimumAPRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"SpearMinimumDamage": [
-							50,
-							70,
-							90,
-							110,
-							130,
-							150,
-							170
-						],
-						"SpearMaximumDamage": [
-							162.5,
-							227.5,
-							292.5,
-							357.5,
-							422.5,
-							487.5,
-							552.5
-						],
-						"DamageMulti": [
-							3.25,
-							3.25,
-							3.25,
-							3.25,
-							3.25,
-							3.25,
-							3.25
-						]
+						"TooltipCougarMinimumDamage": [-20, 5, 30, 55, 80, 105, 130],
+						"SpearMinimumAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SpearMinimumDamage": [50, 70, 90, 110, 130, 150, 170],
+						"SpearMaximumDamage": [162.5, 227.5, 292.5, 357.5, 422.5, 487.5, 552.5],
+						"DamageMulti": [3.25, 3.25, 3.25, 3.25, 3.25, 3.25, 3.25]
 					},
 					"spellCalculations": {
 						"HumanMinimumDamage": {
@@ -130,51 +75,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							50,
-							70,
-							90,
-							110,
-							130,
-							150,
-							170
-						],
-						"1": [
-							150,
-							227.5,
-							292.5,
-							357.5,
-							422.5,
-							487.5,
-							555
-						],
-						"4": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"5": [
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2
-						],
-						"6": [
-							525,
-							525,
-							525,
-							525,
-							525,
-							525,
-							525
-						]
+						"0": [50, 70, 90, 110, 130, 150, 170],
+						"1": [150, 227.5, 292.5, 357.5, 422.5, 487.5, 555],
+						"4": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"5": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2],
+						"6": [525, 525, 525, 525, 525, 525, 525]
 					},
 					"dataKey": "Characters/Nidalee/Spells/JavelinTossAbility/JavelinToss"
 				},
@@ -183,90 +88,18 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_q2.png",
 					"tooltip": "<keywordMajor>Cougar Form:</keywordMajor> Nidalee's next Attack deals <magicDamage>@spell.AspectOfTheCougar:TotalTakedownDamage@ plus @spell.AspectOfTheCougar:TakedownDamageAmp@% per 1% missing Health magic damage</magicDamage>.<br><br>If the enemy was <keywordMajor>Hunted</keywordMajor>, deals 30% increased damage.",
 					"tooltipExtended": "{{Spell_Takedown_Tooltip}}<br><br>{{Spell_JavelinToss_Tooltip}}",
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
-						"TotalADRatio": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
+						"TotalADRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"effectAmount": {
-						"0": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"1": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"2": [
-							5,
-							5,
-							30,
-							55,
-							80,
-							80,
-							80
-						],
-						"3": [
-							10,
-							10,
-							67.5,
-							137.5,
-							220,
-							220,
-							220
-						],
-						"4": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"5": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						],
-						"6": [
-							1,
-							1,
-							1.25,
-							1.5,
-							1.75,
-							1.75,
-							1.75
-						]
+						"0": [10, 10, 10, 10, 10, 10, 10],
+						"1": [75, 75, 75, 75, 75, 75, 75],
+						"2": [5, 5, 30, 55, 80, 80, 80],
+						"3": [10, 10, 67.5, 137.5, 220, 220, 220],
+						"4": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"5": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+						"6": [1, 1, 1.25, 1.5, 1.75, 1.75, 1.75]
 					},
 					"dataKey": "Characters/Nidalee/Spells/Takedown"
 				}
@@ -280,23 +113,8 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_w1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee places an invisible trap for 2 minutes. When an enemy walks over it, they are dealt <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second for @Effect3Amount@ seconds.<br><br>@MaxTraps@ traps may be active at once.",
 					"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}",
-					"mana": [
-						30,
-						35,
-						40,
-						45,
-						50,
-						55
-					],
-					"cooldownTime": [
-						14,
-						13,
-						12,
-						11,
-						10,
-						9,
-						9
-					],
+					"mana": [30, 35, 40, 45, 50, 55],
+					"cooldownTime": [14, 13, 12, 11, 10, 9, 9],
 					"dataValues": {},
 					"spellCalculations": {
 						"MaxTraps": {
@@ -341,51 +159,11 @@
 						}
 					},
 					"effectAmount": {
-						"2": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"3": [
-							14,
-							13,
-							12,
-							11,
-							10,
-							9,
-							9
-						],
-						"4": [
-							0,
-							10,
-							20,
-							30,
-							40,
-							50,
-							60
-						],
-						"5": [
-							120,
-							120,
-							120,
-							120,
-							120,
-							120,
-							120
-						],
-						"6": [
-							0,
-							40,
-							80,
-							120,
-							160,
-							200,
-							240
-						]
+						"2": [4, 4, 4, 4, 4, 4, 4],
+						"3": [14, 13, 12, 11, 10, 9, 9],
+						"4": [0, 10, 20, 30, 40, 50, 60],
+						"5": [120, 120, 120, 120, 120, 120, 120],
+						"6": [0, 40, 80, 120, 160, 200, 240]
 					},
 					"dataKey": "Characters/Nidalee/Spells/BushwhackAbility/Bushwhack"
 				},
@@ -394,70 +172,14 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_w2.png",
 					"tooltip": "<keywordMajor>Cougar Form:</keywordMajor> Nidalee pounces, dealing <magicDamage>@spell.AspectOfTheCougar:TotalPounceDamage@ magic damage</magicDamage> to enemies surrounding where she lands. Killing a unit in <keywordMajor>Cougar Form</keywordMajor> reduces this Ability's Cooldown to @spell.AspectOfTheCougar:PounceCooldown@ seconds.<br><br>Pouncing at a <keywordMajor>Hunted</keywordMajor> enemy can be done from a greater distance and reduces this Ability's Cooldown to @spell.AspectOfTheCougar:PounceCooldown@ seconds.",
 					"tooltipExtended": "{{Spell_Pounce_Tooltip}}<br><br>{{Spell_Bushwhack_Tooltip}}",
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"effectAmount": {
-						"0": [
-							10,
-							60,
-							110,
-							160,
-							210,
-							210,
-							260
-						],
-						"1": [
-							3.5,
-							3,
-							2.5,
-							2,
-							1.5,
-							1.5,
-							1.5
-						],
-						"2": [
-							750,
-							750,
-							750,
-							750,
-							750,
-							750,
-							750
-						],
-						"3": [
-							14,
-							13,
-							12,
-							11,
-							10,
-							9,
-							8
-						],
-						"4": [
-							0,
-							10,
-							20,
-							30,
-							40,
-							50,
-							60
-						],
-						"6": [
-							0,
-							40,
-							80,
-							120,
-							160,
-							200,
-							240
-						]
+						"0": [10, 60, 110, 160, 210, 210, 260],
+						"1": [3.5, 3, 2.5, 2, 1.5, 1.5, 1.5],
+						"2": [750, 750, 750, 750, 750, 750, 750],
+						"3": [14, 13, 12, 11, 10, 9, 8],
+						"4": [0, 10, 20, 30, 40, 50, 60],
+						"6": [0, 40, 80, 120, 160, 200, 240]
 					},
 					"dataKey": "Characters/Nidalee/Spells/Pounce"
 				}
@@ -471,69 +193,14 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_e1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee restores <healing>@TotalHealing@ Health</healing> increased up to <healing>@MaxHealing@</healing> based on missing Health and grants them <attackSpeed>@BonusAS*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 					"tooltipExtended": "{{Spell_PrimalSurge_Tooltip}}<br><br>{{Spell_Swipe_Tooltip}}",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						12,
-						12,
-						12,
-						12,
-						12,
-						12,
-						12
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
-						"BaseHeal": [
-							25,
-							50,
-							75,
-							100,
-							125,
-							150,
-							175
-						],
-						"MaxHealMult": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MaxHealThreshold": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"BonusAS": [
-							0.2,
-							0.3,
-							0.4,
-							0.5,
-							0.6,
-							0.7,
-							0.8
-						],
-						"ASDuration": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						]
+						"BaseHeal": [25, 50, 75, 100, 125, 150, 175],
+						"MaxHealMult": [1, 1, 1, 1, 1, 1, 1],
+						"MaxHealThreshold": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"BonusAS": [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8],
+						"ASDuration": [7, 7, 7, 7, 7, 7, 7]
 					},
 					"spellCalculations": {
 						"TotalHealing": {
@@ -569,34 +236,10 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_e2.png",
 					"tooltip": "<keywordMajor>Cougar Form:</keywordMajor> Nidalee claws at enemies in front of her, dealing <magicDamage>@spell.AspectOfTheCougar:TotalSwipeDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_Swipe_Tooltip}}<br><br>{{Spell_PrimalSurge_Tooltip}}",
-					"cooldownTime": [
-						6,
-						6,
-						6,
-						6,
-						6,
-						6,
-						6
-					],
+					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"effectAmount": {
-						"0": [
-							80,
-							80,
-							140,
-							200,
-							260,
-							260,
-							260
-						],
-						"1": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"0": [80, 80, 140, 200, 260, 260, 260],
+						"1": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"dataKey": "Characters/Nidalee/Spells/Swipe"
 				}
@@ -609,124 +252,20 @@
 					"name": "Aspect Of The Cougar",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
-					"cooldownTime": [
-						3,
-						3,
-						3,
-						3,
-						3,
-						3,
-						3
-					],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
-						"PassivePercentMS": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"TakedownBaseDamage": [
-							-20,
-							5,
-							30,
-							55,
-							80,
-							105,
-							130
-						],
-						"TakedownADRatio": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"TakedownAPRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"TakedownDamageAmp": [
-							0.75,
-							1,
-							1.25,
-							1.5,
-							1.75,
-							2,
-							2.25
-						],
-						"PounceCooldown": [
-							3.5,
-							3,
-							2.5,
-							2,
-							1.5,
-							1.5,
-							1.5
-						],
-						"PounceDamage": [
-							10,
-							55,
-							100,
-							145,
-							190,
-							235,
-							280
-						],
-						"PounceADRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"PounceAPRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"SwipeDamage": [
-							10,
-							70,
-							130,
-							190,
-							250,
-							310,
-							370
-						],
-						"SwipeADRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"SwipeAPRatio": [
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55
-						]
+						"PassivePercentMS": [10, 10, 10, 10, 10, 10, 10],
+						"TakedownBaseDamage": [-20, 5, 30, 55, 80, 105, 130],
+						"TakedownADRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"TakedownAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"TakedownDamageAmp": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25],
+						"PounceCooldown": [3.5, 3, 2.5, 2, 1.5, 1.5, 1.5],
+						"PounceDamage": [10, 55, 100, 145, 190, 235, 280],
+						"PounceADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"PounceAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"SwipeDamage": [10, 70, 130, 190, 250, 310, 370],
+						"SwipeADRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"SwipeAPRatio": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55]
 					},
 					"spellCalculations": {
 						"TotalPounceDamage": {
@@ -784,15 +323,7 @@
 						}
 					},
 					"effectAmount": {
-						"5": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
+						"5": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"dataKey": "Characters/Nidalee/Spells/AspectOfTheCougarAbility/AspectOfTheCougar"
 				},
@@ -800,124 +331,20 @@
 					"name": "Aspect Of The Cougar",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
-					"cooldownTime": [
-						3,
-						3,
-						3,
-						3,
-						3,
-						3,
-						3
-					],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
-						"PassivePercentMS": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"TakedownBaseDamage": [
-							-20,
-							5,
-							30,
-							55,
-							80,
-							105,
-							130
-						],
-						"TakedownADRatio": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"TakedownAPRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"TakedownDamageAmp": [
-							0.75,
-							1,
-							1.25,
-							1.5,
-							1.75,
-							2,
-							2.25
-						],
-						"PounceCooldown": [
-							3.5,
-							3,
-							2.5,
-							2,
-							1.5,
-							1.5,
-							1.5
-						],
-						"PounceDamage": [
-							10,
-							55,
-							100,
-							145,
-							190,
-							235,
-							280
-						],
-						"PounceADRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"PounceAPRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"SwipeDamage": [
-							10,
-							70,
-							130,
-							190,
-							250,
-							310,
-							370
-						],
-						"SwipeADRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"SwipeAPRatio": [
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55
-						]
+						"PassivePercentMS": [10, 10, 10, 10, 10, 10, 10],
+						"TakedownBaseDamage": [-20, 5, 30, 55, 80, 105, 130],
+						"TakedownADRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"TakedownAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"TakedownDamageAmp": [0.75, 1, 1.25, 1.5, 1.75, 2, 2.25],
+						"PounceCooldown": [3.5, 3, 2.5, 2, 1.5, 1.5, 1.5],
+						"PounceDamage": [10, 55, 100, 145, 190, 235, 280],
+						"PounceADRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"PounceAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"SwipeDamage": [10, 70, 130, 190, 250, 310, 370],
+						"SwipeADRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"SwipeAPRatio": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55]
 					},
 					"spellCalculations": {
 						"TotalPounceDamage": {
@@ -975,15 +402,7 @@
 						}
 					},
 					"effectAmount": {
-						"5": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
+						"5": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"dataKey": "Characters/Nidalee/Spells/AspectOfTheCougarAbility/AspectOfTheCougar"
 				}

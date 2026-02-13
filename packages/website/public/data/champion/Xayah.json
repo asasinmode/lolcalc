@@ -35,69 +35,14 @@
 					"name": "Double Daggers",
 					"image": "assets/characters/xayah/hud/icons2d/xayahq.png",
 					"tooltip": "Xayah throws two daggers, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> each and leaving two <keywordMajor>Feathers</keywordMajor>. Targets hit after the first take <physicalDamage>@MultiHitDamage@ damage</physicalDamage> from each dagger.",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						10,
-						10,
-						9.5,
-						9,
-						8.5,
-						8,
-						6
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 6],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							45,
-							60,
-							75,
-							90,
-							105,
-							120
-						],
-						"MultiHitRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"StartingCastTime": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MinCastTime": [
-							0,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"ASpeedCastTimeScalarPerHundrethSecond": [
-							0,
-							0.07,
-							0.07,
-							0.07,
-							0.07,
-							0.07,
-							0.07
-						]
+						"BaseDamage": [30, 45, 60, 75, 90, 105, 120],
+						"MultiHitRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"StartingCastTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MinCastTime": [0, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"ASpeedCastTimeScalarPerHundrethSecond": [0, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -122,60 +67,12 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							45,
-							60,
-							75,
-							90,
-							105,
-							120
-						],
-						"1": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"2": [
-							0.334,
-							0.334,
-							0.334,
-							0.334,
-							0.334,
-							0.334,
-							0.334
-						],
-						"3": [
-							0.584,
-							0.584,
-							0.584,
-							0.584,
-							0.584,
-							0.584,
-							0.584
-						],
-						"4": [
-							3500,
-							3500,
-							3500,
-							3500,
-							3500,
-							3500,
-							3500
-						],
-						"5": [
-							3500,
-							3500,
-							3500,
-							3500,
-							3500,
-							3500,
-							3500
-						]
+						"0": [30, 45, 60, 75, 90, 105, 120],
+						"1": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"2": [0.334, 0.334, 0.334, 0.334, 0.334, 0.334, 0.334],
+						"3": [0.584, 0.584, 0.584, 0.584, 0.584, 0.584, 0.584],
+						"4": [3500, 3500, 3500, 3500, 3500, 3500, 3500],
+						"5": [3500, 3500, 3500, 3500, 3500, 3500, 3500]
 					},
 					"dataKey": "Characters/Xayah/Spells/XayahQAbility/XayahQ"
 				}
@@ -188,89 +85,18 @@
 					"name": "Deadly Plumage",
 					"image": "assets/characters/xayah/hud/icons2d/xayahw.png",
 					"tooltip": "Xayah creates a storm of blades for @Effect2Amount@ seconds that grants her <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed> and cause her Attacks to fire a secondary blade that deals @BonusDamagePercent@% damage.<br><br>When the secondary blade hits a champion, she grants herself <speed>@Effect3Amount@% Move Speed</speed> for @Effect4Amount@ seconds.<br><br>If Rakan is nearby he will also gain the effects of this Ability, except he gains <speed>Move Speed</speed> when <i>Xayah</i> strikes a target.",
-					"mana": [
-						60,
-						55,
-						50,
-						45,
-						40,
-						35
-					],
-					"cooldownTime": [
-						20,
-						20,
-						19,
-						18,
-						17,
-						16,
-						16
-					],
+					"mana": [60, 55, 50, 45, 40, 35],
+					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
 					"dataValues": {
-						"BonusDamagePercent": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						]
+						"BonusDamagePercent": [25, 25, 25, 25, 25, 25, 25]
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							35,
-							40,
-							45,
-							50,
-							55,
-							60
-						],
-						"1": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"2": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"3": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"4": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"5": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						]
+						"0": [30, 35, 40, 45, 50, 55, 60],
+						"1": [4, 4, 4, 4, 4, 4, 4],
+						"2": [30, 30, 30, 30, 30, 30, 30],
+						"3": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"4": [20, 20, 20, 20, 20, 20, 20],
+						"5": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
 					},
 					"dataKey": "Characters/Xayah/Spells/XayahWAbility/XayahW"
 				}
@@ -283,96 +109,17 @@
 					"name": "Bladecaller",
 					"image": "assets/characters/xayah/hud/icons2d/xayahe.png",
 					"tooltip": "Xayah calls all <keywordMajor>Feathers</keywordMajor> back to her, dealing <physicalDamage>@FeatherDamage@ physical damage</physicalDamage> each. If @FeatherThreshold@ or more <keywordMajor>Feathers</keywordMajor> hit an enemy, they are <status>Rooted</status> for @RootDuration@ seconds.",
-					"mana": [
-						30,
-						30,
-						30,
-						30,
-						30,
-						30
-					],
-					"cooldownTime": [
-						12,
-						12,
-						11,
-						10,
-						9,
-						8,
-						7
-					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
-						"BaseDamage": [
-							35,
-							50,
-							65,
-							80,
-							95,
-							110,
-							125
-						],
-						"bADRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"CritRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"FeatherFalloff": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"MinionMultiplier": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"FeatherThreshold": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"RootDuration": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						],
-						"FeatherReturnDelay": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"BaseDamage": [35, 50, 65, 80, 95, 110, 125],
+						"bADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"CritRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"FeatherFalloff": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"MinionMultiplier": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"FeatherThreshold": [3, 3, 3, 3, 3, 3, 3],
+						"RootDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"FeatherReturnDelay": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"FeatherDamage": {
@@ -431,51 +178,12 @@
 					"name": "Featherstorm",
 					"image": "assets/characters/xayah/hud/icons2d/xayahr.png",
 					"tooltip": "Xayah leaps into the air becoming Untargetable and Ghosted for 1.5 seconds before raining down daggers that deal <physicalDamage>@Damage@ physical damage</physicalDamage> and leave behind a line of <keywordMajor>Feathers</keywordMajor>.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						160,
-						140,
-						120,
-						100,
-						100,
-						100,
-						100
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
-						"RBaseDamage": [
-							100,
-							200,
-							300,
-							400,
-							500,
-							600,
-							700
-						],
-						"RAttackDelay": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"RUntargetable": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						]
+						"RBaseDamage": [100, 200, 300, 400, 500, 600, 700],
+						"RAttackDelay": [1, 1, 1, 1, 1, 1, 1],
+						"RUntargetable": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -505,97 +213,17 @@
 					"image": "assets/characters/xayah/hud/icons2d/xayahpassive.png",
 					"tooltip": "{{Spell_XayahPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_XayahPassive_Tooltip}}<br><br><rules>Primary target of empowered Attacks take full damage and On-Hit effects as normal.</rules>",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"effectAmount": {
-						"0": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"1": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"2": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"3": [
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55
-						],
-						"4": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"5": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"6": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"7": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"8": [
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45
-						]
+						"0": [6, 6, 6, 6, 6, 6, 6],
+						"1": [25, 25, 25, 25, 25, 25, 25],
+						"2": [40, 40, 40, 40, 40, 40, 40],
+						"3": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
+						"4": [8, 8, 8, 8, 8, 8, 8],
+						"5": [3, 3, 3, 3, 3, 3, 3],
+						"6": [5, 5, 5, 5, 5, 5, 5],
+						"7": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"8": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45]
 					},
 					"dataKey": "Characters/Xayah/Spells/XayahPassiveAbility/XayahPassive"
 				}

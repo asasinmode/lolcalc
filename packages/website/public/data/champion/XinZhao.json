@@ -35,23 +35,8 @@
 					"name": "Three Talon Strike",
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkq.xinzhaorework.png",
 					"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @Effect2Amount@ seconds.<br>",
-					"mana": [
-						30,
-						30,
-						30,
-						30,
-						30,
-						30
-					],
-					"cooldownTime": [
-						7,
-						7,
-						6.5,
-						6,
-						5.5,
-						5,
-						5
-					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [7, 7, 6.5, 6, 5.5, 5, 5],
 					"spellCalculations": {
 						"BonusDamage": {
 							"mSimpleTooltipCalculationDisplay": 6,
@@ -70,24 +55,8 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							15,
-							15,
-							30,
-							45,
-							60,
-							75,
-							75
-						],
-						"1": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
+						"0": [15, 15, 30, 45, 60, 75, 75],
+						"1": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"dataKey": "Characters/XinZhao/Spells/XinZhaoQAbility/XinZhaoQ"
 				}
@@ -100,78 +69,15 @@
 					"name": "Wind Becomes Lightning",
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkw.xinzhaorework.png",
 					"tooltip": "Xin Zhao slashes, dealing <physicalDamage>@SlashDamage@ physical damage</physicalDamage>, then thrusts, dealing <physicalDamage>@ThrustDamage@</physicalDamage>. Enemies hit by the thrust are <status>Slowed</status> by @Effect6Amount*-100@% for @Effect7Amount@ seconds. <br><br>Champions and Large Monsters hit by the thrust are marked as <keywordMajor>Challenged</keywordMajor> for @MarkDuration@ seconds and revealed unless <keywordStealth>Stealthed</keywordStealth>.",
-					"mana": [
-						60,
-						55,
-						50,
-						45,
-						40,
-						40
-					],
-					"cooldownTime": [
-						12,
-						12,
-						11,
-						10,
-						9,
-						8,
-						7
-					],
+					"mana": [60, 55, 50, 45, 40, 40],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
-						"SlashBaseDamage": [
-							20,
-							30,
-							40,
-							50,
-							60,
-							70,
-							80
-						],
-						"ThrustBaseDamage": [
-							15,
-							50,
-							85,
-							120,
-							155,
-							190,
-							225
-						],
-						"CritChanceAmp": [
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333
-						],
-						"MarkDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"HitNum": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"DelayTime": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						]
+						"SlashBaseDamage": [20, 30, 40, 50, 60, 70, 80],
+						"ThrustBaseDamage": [15, 50, 85, 120, 155, 190, 225],
+						"CritChanceAmp": [0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333],
+						"MarkDuration": [3, 3, 3, 3, 3, 3, 3],
+						"HitNum": [4, 4, 4, 4, 4, 4, 4],
+						"DelayTime": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 					},
 					"spellCalculations": {
 						"SlashDamage": {
@@ -235,69 +141,13 @@
 						}
 					},
 					"effectAmount": {
-						"2": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"3": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"4": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"5": [
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5
-						],
-						"6": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"7": [
-							140,
-							140,
-							140,
-							140,
-							140,
-							140,
-							140
-						],
-						"8": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						]
+						"2": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"3": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"5": [-0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5],
+						"6": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"7": [140, 140, 140, 140, 140, 140, 140],
+						"8": [200, 200, 200, 200, 200, 200, 200]
 					},
 					"dataKey": "Characters/XinZhao/Spells/XinZhaoWAbility/XinZhaoW"
 				}
@@ -310,42 +160,11 @@
 					"name": "Audacious Charge",
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworke.xinzhaorework.png",
 					"tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>@ChargeDamage@ magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by @BaseSlowAmount@% for @Effect6Amount@ seconds.<br><br>Xin Zhao also grants himself <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.<br><br>This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>. <br>",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						11,
-						11,
-						11,
-						11,
-						11,
-						11,
-						11
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [11, 11, 11, 11, 11, 11, 11],
 					"dataValues": {
-						"BaseSlowAmount": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"APRatio": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						]
+						"BaseSlowAmount": [30, 30, 30, 30, 30, 30, 30],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
 					"spellCalculations": {
 						"ChargeDamage": {
@@ -362,60 +181,12 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							20,
-							50,
-							75,
-							100,
-							125,
-							150,
-							225
-						],
-						"1": [
-							-0.3,
-							-0.3,
-							-0.3,
-							-0.3,
-							-0.3,
-							-0.3,
-							-0.3
-						],
-						"2": [
-							0.4,
-							0.4,
-							0.5,
-							0.6,
-							0.7,
-							0.8,
-							0.9
-						],
-						"3": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"4": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"5": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"0": [20, 50, 75, 100, 125, 150, 225],
+						"1": [-0.3, -0.3, -0.3, -0.3, -0.3, -0.3, -0.3],
+						"2": [0.4, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+						"3": [5, 5, 5, 5, 5, 5, 5],
+						"4": [250, 250, 250, 250, 250, 250, 250],
+						"5": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"dataKey": "Characters/XinZhao/Spells/XinZhaoEAbility/XinZhaoE"
 				}
@@ -428,69 +199,14 @@
 					"name": "Crescent Guard",
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkr.xinzhaorework.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> The last champion Xin Zhao damaged with an Attack or <spellName>Audacious Charge</spellName> is <keywordMajor>Challenged</keywordMajor> for @MarkDuration@ seconds.<br><br><spellActive>Active:</spellActive> Xin Zhao unleashes a sweep around him that deals <physicalDamage>@TotalDamage@ plus @PercentCurrentHealthDamage*100@% current Health physical damage</physicalDamage> and <status>Knocks Back</status> all <keywordMajor>non-Challenged</keywordMajor> enemies. <br>  <br>Afterwards, Xin Zhao becomes immune to damage from enemies outside the sweep range for @MissileDefenseBaseDuration@ seconds. ",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						120,
-						120,
-						110,
-						100,
-						100,
-						100,
-						100
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
 					"dataValues": {
-						"BaseDamage": [
-							-25,
-							75,
-							175,
-							275,
-							375,
-							475,
-							575
-						],
-						"PercentCurrentHealthDamage": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"MissileDefenseBaseDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"MissileDefenseRadius": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						],
-						"MarkDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"BaseDamage": [-25, 75, 175, 275, 375, 475, 575],
+						"PercentCurrentHealthDamage": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"MissileDefenseBaseDuration": [4, 4, 4, 4, 4, 4, 4],
+						"MissileDefenseRadius": [450, 450, 450, 450, 450, 450, 450],
+						"MarkDuration": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -525,15 +241,7 @@
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkp.xinzhaorework.png",
 					"tooltip": "Every third Attack or strike with <spellName>Wind Becomes Lightning</spellName> deals an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing>.",
 					"dataValues": {
-						"HealAPRatio": [
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65
-						]
+						"HealAPRatio": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

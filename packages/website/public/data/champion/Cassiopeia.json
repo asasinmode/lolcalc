@@ -35,23 +35,8 @@
 					"name": "Noxious Blast",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_q.png",
 					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @Effect2Amount@ seconds. Hitting a champion grants Cassiopeia <speed>@Effect3Amount@% Move Speed</speed> decaying over @Effect4Amount@ seconds.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						70
-					],
-					"cooldownTime": [
-						3.5,
-						3.5,
-						3.5,
-						3.5,
-						3.5,
-						3.5,
-						3.5
-					],
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"spellCalculations": {
 						"TooltipTotalDamage": {
 							"tooltipOnly": true,
@@ -68,51 +53,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							75,
-							110,
-							145,
-							180,
-							215,
-							250
-						],
-						"1": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"2": [
-							25,
-							30,
-							35,
-							40,
-							45,
-							50,
-							50
-						],
-						"3": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"4": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						]
+						"0": [30, 75, 110, 145, 180, 215, 250],
+						"1": [3, 3, 3, 3, 3, 3, 3],
+						"2": [25, 30, 35, 40, 45, 50, 50],
+						"3": [3, 3, 3, 3, 3, 3, 3],
+						"4": [7, 7, 7, 7, 7, 7, 7]
 					},
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaQAbility/CassiopeiaQ"
 				}
@@ -125,23 +70,8 @@
 					"name": "Miasma",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_w.png",
 					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @Effect4Amount@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @Effect2Amount@%.",
-					"mana": [
-						70,
-						75,
-						80,
-						85,
-						90,
-						90
-					],
-					"cooldownTime": [
-						24,
-						24,
-						22,
-						20,
-						18,
-						16,
-						14
-					],
+					"mana": [70, 75, 80, 85, 90, 90],
+					"cooldownTime": [24, 24, 22, 20, 18, 16, 14],
 					"spellCalculations": {
 						"DamagePerSecond": {
 							"tooltipOnly": true,
@@ -158,42 +88,10 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							20,
-							20,
-							25,
-							30,
-							35,
-							40,
-							45
-						],
-						"1": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"2": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"3": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
+						"0": [20, 20, 25, 30, 35, 40, 45],
+						"1": [30, 40, 50, 60, 70, 80, 90],
+						"2": [1, 1, 1, 1, 1, 1, 1],
+						"3": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"dataKey": "Characters/Cassiopeia/Spells/CassiopeiaWAbility/CassiopeiaW"
 				}
@@ -206,69 +104,14 @@
 					"name": "Twin Fang",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_e.png",
 					"tooltip": "Cassiopeia launches deadly fangs, dealing <magicDamage>@BasicDamage@ magic damage</magicDamage>. If the enemy is <keywordMajor>Poisoned</keywordMajor>, they take an additional <magicDamage>@BonusPoisonedDamage@ magic damage</magicDamage> and Cassiopeia restores <healing>@HealCalc@ Health</healing>, reduced to <healing>@HealCalcMinion@ Health</healing> against lane minions and small monsters.<br><br>If this kills the target, Cassiopeia restores <scaleMana>@Cost@ Mana</scaleMana>.<br><br>",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						0.75,
-						0.75,
-						0.75,
-						0.75,
-						0.75,
-						0.75,
-						0.75
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 					"dataValues": {
-						"BasicAPRatio": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"BonusDamage": [
-							0,
-							20,
-							43,
-							66,
-							89,
-							112,
-							138
-						],
-						"BonusAPRatio": [
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55
-						],
-						"HealRatio": [
-							0.085,
-							0.1,
-							0.115,
-							0.13,
-							0.145,
-							0.16,
-							0.175
-						],
-						"MinionReductionModifier": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"BasicAPRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"BonusDamage": [0, 20, 43, 66, 89, 112, 138],
+						"BonusAPRatio": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55],
+						"HealRatio": [0.085, 0.1, 0.115, 0.13, 0.145, 0.16, 0.175],
+						"MinionReductionModifier": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"HealCalc": {
@@ -323,60 +166,13 @@
 					"name": "Petrifying Gaze",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_r.png",
 					"tooltip": "Cassiopeia unleashes a petrifying gaze, dealing <magicDamage>@RDamage@ magic damage</magicDamage> and <status>Stunning</status> enemies facing her for @RCCDuration@ seconds. Enemies facing away are <status>Slowed</status> by @RSlowPercent@% decaying over the same duration instead.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						120,
-						120,
-						100,
-						80,
-						10,
-						10,
-						10
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [120, 120, 100, 80, 10, 10, 10],
 					"dataValues": {
-						"RCCDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"RSlowPercent": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"RBaseDamage": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						],
-						"APRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"RCCDuration": [2, 2, 2, 2, 2, 2, 2],
+						"RSlowPercent": [40, 40, 40, 40, 40, 40, 40],
+						"RBaseDamage": [50, 150, 250, 350, 450, 550, 650],
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"RDamage": {

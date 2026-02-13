@@ -35,42 +35,11 @@
 					"name": "Mistral Bolt",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_q01.png",
 					"tooltip": "Vex launches a wave of mist that deals <magicDamage>@QDamageCalc@ magic damage</magicDamage>. After a delay, the wave becomes smaller and faster.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
-					"mana": [
-						45,
-						50,
-						55,
-						60,
-						65,
-						65
-					],
-					"cooldownTime": [
-						8,
-						8,
-						7,
-						6,
-						5,
-						4,
-						4
-					],
+					"mana": [45, 50, 55, 60, 65, 65],
+					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"dataValues": {
-						"BaseDamage": [
-							25,
-							70,
-							115,
-							160,
-							205,
-							250,
-							295
-						],
-						"APRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						]
+						"BaseDamage": [25, 70, 115, 160, 205, 250, 295],
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
 						"QDamageCalc": {
@@ -112,78 +81,15 @@
 					"name": "Personal Space",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_w01.png",
 					"tooltip": "Vex gains <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds and emits a shockwave that deals <magicDamage>@WDamageCalc@ magic damage</magicDamage>.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
-					"mana": [
-						75,
-						75,
-						75,
-						75,
-						75,
-						75
-					],
-					"cooldownTime": [
-						17,
-						16,
-						15,
-						14,
-						13,
-						12,
-						11
-					],
+					"mana": [75, 75, 75, 75, 75, 75],
+					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
-						"ShieldAmount": [
-							25,
-							50,
-							75,
-							100,
-							125,
-							150,
-							175
-						],
-						"BaseDamage": [
-							40,
-							80,
-							120,
-							160,
-							200,
-							240,
-							280
-						],
-						"ShieldDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"AOERadius": [
-							475,
-							475,
-							475,
-							475,
-							475,
-							475,
-							475
-						],
-						"BonusAOERadiusVsDashes": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"DamageAPRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
+						"ShieldAmount": [25, 50, 75, 100, 125, 150, 175],
+						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
+						"ShieldDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"AOERadius": [475, 475, 475, 475, 475, 475, 475],
+						"BonusAOERadiusVsDashes": [75, 75, 75, 75, 75, 75, 75],
+						"DamageAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
 					},
 					"spellCalculations": {
 						"ShieldCalc": {
@@ -223,105 +129,18 @@
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_e01.png",
 					"tooltip": "Vex commands Shadow to fly to a location, increasing in size as it travels. Upon arriving, it deals <magicDamage>@EDamageCalc@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Killing an enemy with this ability reduces <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown by @GloomCDNonChampTooltip*100@%.<br><br>Applies <keywordMajor>Gloom</keywordMajor> to enemies hit.",
 					"tooltipExtended": "{{Spell_VexE_Tooltip}}<br><br><rules>Killing a champion refunds @GloomCDChampTooltip*100@% of <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown instead.<br>Enemies <status>Feared</status> by this Ability move away from the center rather than from Vex.</rules>",
-					"mana": [
-						70,
-						80,
-						90,
-						100,
-						110,
-						110
-					],
-					"cooldownTime": [
-						13,
-						13,
-						13,
-						13,
-						13,
-						13,
-						13
-					],
+					"mana": [70, 80, 90, 100, 110, 110],
+					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							50,
-							70,
-							90,
-							110,
-							130,
-							150
-						],
-						"SlowAmount": [
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5,
-							0.55
-						],
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"StartingRadius": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"RadiusGrowthRate": [
-							13,
-							13,
-							13,
-							13,
-							13,
-							13,
-							13
-						],
-						"APRatio": [
-							0.35,
-							0.4,
-							0.45,
-							0.5,
-							0.55,
-							0.6,
-							0.65
-						],
-						"MaxRadius": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"GloomCDChampTooltip": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"GloomCDNonChampTooltip": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
+						"BaseDamage": [30, 50, 70, 90, 110, 130, 150],
+						"SlowAmount": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"StartingRadius": [200, 200, 200, 200, 200, 200, 200],
+						"RadiusGrowthRate": [13, 13, 13, 13, 13, 13, 13],
+						"APRatio": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
+						"MaxRadius": [300, 300, 300, 300, 300, 300, 300],
+						"GloomCDChampTooltip": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"GloomCDNonChampTooltip": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"spellCalculations": {
 						"EDamageCalc": {
@@ -348,69 +167,14 @@
 					"name": "Shadow Surge",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_r01.png",
 					"tooltip": "Shadow excitedly surges forward, dealing <magicDamage>@spell.VexR:RDamageCalc@ magic damage</magicDamage> and marking the first enemy champion hit for 4 seconds.<br><br><recast>Recast</recast>: Dash to the marked champion, dealing <magicDamage>@spell.VexR:RecastDamageCalc@ magic damage</magicDamage> on arrival.<br><br>If the marked champion dies within @spell.VexR:TakedownWindow@ seconds of taking damage from this Ability, its Cooldown is temporarily reset.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						140,
-						140,
-						120,
-						100,
-						100,
-						100,
-						100
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
-						"BaseDamage": [
-							25,
-							75,
-							125,
-							175,
-							225,
-							275,
-							325
-						],
-						"RecastDamage": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						],
-						"R2Duration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"TakedownWindow": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"ResetWindow": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						]
+						"BaseDamage": [25, 75, 125, 175, 225, 275, 325],
+						"RecastDamage": [50, 150, 250, 350, 450, 550, 650],
+						"R2Duration": [4, 4, 4, 4, 4, 4, 4],
+						"TakedownWindow": [6, 6, 6, 6, 6, 6, 6],
+						"ResetWindow": [12, 12, 12, 12, 12, 12, 12]
 					},
 					"spellCalculations": {
 						"RDamageCalc": {
@@ -450,133 +214,21 @@
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_passive.png",
 					"tooltip": "{{Spell_VexP_Tooltip}}",
 					"tooltipExtended": "{{Spell_VexP_Tooltip}}<br><br><rules>Non-champion targets take @GloomMinionMod@ damage and refund @GloomCDNonChamp*100@% of this Ability's Cooldown.<br>Enemies <status>Feared</status> by this Ability move more slowly the farther they are from Vex.</rules>",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"GloomDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"MaxDoomCD": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"DashListenerRange": [
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600
-						],
-						"DashLockoutTime": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"GloomCDChamp": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"GloomCDNonChamp": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"FearSlowPercentMax": [
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99
-						],
-						"FearedMinionSpeed": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"EFearedMinionSpeed": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"FearSlowPercentMin": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"RangeOfMaxFearSlow": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"RangeOfMinFearSlow": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"APRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"GloomDuration": [6, 6, 6, 6, 6, 6, 6],
+						"MaxDoomCD": [15, 15, 15, 15, 15, 15, 15],
+						"DashListenerRange": [1600, 1600, 1600, 1600, 1600, 1600, 1600],
+						"DashLockoutTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"GloomCDChamp": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"GloomCDNonChamp": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"FearSlowPercentMax": [0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99],
+						"FearedMinionSpeed": [25, 25, 25, 25, 25, 25, 25],
+						"EFearedMinionSpeed": [5, 5, 5, 5, 5, 5, 5],
+						"FearSlowPercentMin": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"RangeOfMaxFearSlow": [800, 800, 800, 800, 800, 800, 800],
+						"RangeOfMinFearSlow": [250, 250, 250, 250, 250, 250, 250],
+						"APRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"GloomProcCalc": {

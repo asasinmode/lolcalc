@@ -35,33 +35,10 @@
 					"name": "Ranger's Focus",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_q.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
-					"mana": [
-						30,
-						30,
-						30,
-						30,
-						30,
-						30
-					],
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"DamagePerStrike": [
-							1.025,
-							1.1,
-							1.175,
-							1.25,
-							1.325,
-							1.4,
-							1.475
-						]
+						"DamagePerStrike": [1.025, 1.1, 1.175, 1.25, 1.325, 1.4, 1.475]
 					},
 					"spellCalculations": {
 						"EmpoweredDamage": {
@@ -77,87 +54,15 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"1": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"2": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"3": [
-							20,
-							20,
-							30,
-							40,
-							50,
-							60,
-							60
-						],
-						"4": [
-							0.22,
-							0.22,
-							0.235,
-							0.25,
-							0.265,
-							0.28,
-							0.28
-						],
-						"5": [
-							1.1,
-							1.1,
-							1.175,
-							1.25,
-							1.325,
-							1.4,
-							1.4
-						],
-						"6": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"7": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"8": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"0": [4, 4, 4, 4, 4, 4, 4],
+						"1": [4, 4, 4, 4, 4, 4, 4],
+						"2": [6, 6, 6, 6, 6, 6, 6],
+						"3": [20, 20, 30, 40, 50, 60, 60],
+						"4": [0.22, 0.22, 0.235, 0.25, 0.265, 0.28, 0.28],
+						"5": [1.1, 1.1, 1.175, 1.25, 1.325, 1.4, 1.4],
+						"6": [1, 1, 1, 1, 1, 1, 1],
+						"7": [1, 1, 1, 1, 1, 1, 1],
+						"8": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"dataKey": "Characters/Ashe/Spells/AsheQAbility/AsheQ"
 				}
@@ -170,51 +75,12 @@
 					"name": "Volley",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_w.png",
 					"tooltip": "Ashe fires a volley of @NumberOfArrowsTooltip@ arrows, each dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies can be hit by multiple arrows, but only take damage from the first.",
-					"mana": [
-						75,
-						70,
-						65,
-						60,
-						55,
-						50
-					],
-					"cooldownTime": [
-						18,
-						18,
-						14.5,
-						11,
-						7.5,
-						4,
-						4
-					],
+					"mana": [75, 70, 65, 60, 55, 50],
+					"cooldownTime": [18, 18, 14.5, 11, 7.5, 4, 4],
 					"dataValues": {
-						"BaseDamage": [
-							25,
-							60,
-							95,
-							130,
-							165,
-							200,
-							235
-						],
-						"NumberOfArrowsTooltip": [
-							6,
-							7,
-							8,
-							9,
-							10,
-							11,
-							12
-						],
-						"ADRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"BaseDamage": [25, 60, 95, 130, 165, 200, 235],
+						"NumberOfArrowsTooltip": [6, 7, 8, 9, 10, 11, 12],
+						"ADRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -234,15 +100,7 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							3,
-							5,
-							7,
-							9,
-							11,
-							13,
-							15
-						]
+						"0": [3, 5, 7, 9, 11, 13, 15]
 					},
 					"dataKey": "Characters/Ashe/Spells/VolleyAbility/Volley"
 				}
@@ -255,25 +113,9 @@
 					"name": "Hawkshot",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_e.png",
 					"tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br><br>This Ability has 2 charges (@ChargeCooldown@ second recharge).",
-					"cooldownTime": [
-						5,
-						5,
-						5,
-						5,
-						5,
-						5,
-						5
-					],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
-						"BaseCooldown": [
-							100,
-							90,
-							80,
-							70,
-							60,
-							50,
-							40
-						]
+						"BaseCooldown": [100, 90, 80, 70, 60, 50, 40]
 					},
 					"spellCalculations": {
 						"ChargeCooldown": {
@@ -291,42 +133,10 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"1": [
-							10,
-							50,
-							90,
-							130,
-							170,
-							210,
-							250
-						],
-						"2": [
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000
-						],
-						"3": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
+						"0": [3, 3, 3, 3, 3, 3, 3],
+						"1": [10, 50, 90, 130, 170, 210, 250],
+						"2": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
+						"3": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"dataKey": "Characters/Ashe/Spells/AsheSpiritOfTheHawkAbility/AsheSpiritOfTheHawk"
 				}
@@ -339,78 +149,15 @@
 					"name": "Enchanted Crystal Arrow",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_r.png",
 					"tooltip": "Ashe launches a crystal arrow of ice that <status>Stuns</status> the first champion hit and deals <magicDamage>@RMainDamage@ magic damage</magicDamage>. The <status>Stun</status> duration increases with distance travelled, up to @MaxStunDuration@ seconds. Surrounding enemies are <status>Slowed</status> by <spellName>Frost Shot</spellName>.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						100,
-						100,
-						80,
-						60,
-						60,
-						60,
-						60
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"dataValues": {
-						"RBaseDamage": [
-							0,
-							200,
-							400,
-							600,
-							800,
-							1000,
-							1200
-						],
-						"MinStunDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MaxStunDuration": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
-						],
-						"SlowRadius": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"AoECoefficient": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"APRatio": [
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2
-						]
+						"RBaseDamage": [0, 200, 400, 600, 800, 1000, 1200],
+						"MinStunDuration": [1, 1, 1, 1, 1, 1, 1],
+						"MaxStunDuration": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+						"SlowRadius": [400, 400, 400, 400, 400, 400, 400],
+						"AoECoefficient": [1, 1, 1, 1, 1, 1, 1],
+						"APRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2]
 					},
 					"spellCalculations": {
 						"RMainDamage": {
@@ -445,15 +192,7 @@
 					"tooltip": "{{Spell_AshePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_AshePassive_Tooltip}}<br><br><rules>The bonus damage scales with Critical Strike Chance and Critical Strike Damage bonus.</rules>",
 					"dataValues": {
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"SlowAmount": {

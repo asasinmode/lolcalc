@@ -35,87 +35,16 @@
 					"name": "Sonic Wave / Resonating Strike",
 					"image": "assets/characters/leesin/hud/icons2d/leesinq1.png",
 					"tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to the first enemy hit, granting <keywordStealth>True Sight</keywordStealth> of them, and allows Lee Sin to <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>@RecastDamage@ to @EmpoweredDamage@ physical damage</physicalDamage> scaling with the target's missing Health. ",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						11,
-						10,
-						9,
-						8,
-						7,
-						6,
-						6
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"Q1BaseDamage": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"Q2BaseDamage": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"Q2ADRatio": [
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95,
-							0.95
-						],
-						"Q2MaxMissingHealthMod": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ReactivateTime": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"CherryBonusHaste": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"DashSpeed": [
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350
-						]
+						"Q1BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"Q2BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"Q2ADRatio": [0.95, 0.95, 0.95, 0.95, 0.95, 0.95, 0.95],
+						"Q2MaxMissingHealthMod": [1, 1, 1, 1, 1, 1, 1],
+						"ReactivateTime": [3, 3, 3, 3, 3, 3, 3],
+						"CherryBonusHaste": [30, 30, 30, 30, 30, 30, 30],
+						"DashSpeed": [1350, 1350, 1350, 1350, 1350, 1350, 1350]
 					},
 					"spellCalculations": {
 						"InitialDamage": {
@@ -168,87 +97,16 @@
 					"name": "Safeguard / Iron Will",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
 					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Life Steal and Spell Vamp for @LifestealAndSpellVampTime@ seconds.",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						12,
-						12,
-						12,
-						12,
-						12,
-						12,
-						12
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
-						"LifestealAndSpellVamp": [
-							6,
-							10,
-							14,
-							18,
-							22,
-							26,
-							30
-						],
-						"ShieldValue": [
-							25,
-							70,
-							115,
-							160,
-							205,
-							250,
-							295
-						],
-						"ShieldDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"DashSpeed": [
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350
-						],
-						"W1ReactivateTime": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"W1CooldownRecovered": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"LifestealAndSpellVampTime": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"LifestealAndSpellVamp": [6, 10, 14, 18, 22, 26, 30],
+						"ShieldValue": [25, 70, 115, 160, 205, 250, 295],
+						"ShieldDuration": [2, 2, 2, 2, 2, 2, 2],
+						"DashSpeed": [1350, 1350, 1350, 1350, 1350, 1350, 1350],
+						"W1ReactivateTime": [3, 3, 3, 3, 3, 3, 3],
+						"W1CooldownRecovered": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"LifestealAndSpellVampTime": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"ShieldAmount": {
@@ -276,60 +134,13 @@
 					"name": "Tempest / Cripple",
 					"image": "assets/characters/leesin/hud/icons2d/leesine1.png",
 					"tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>@InitialDamage@ magic damage</magicDamage> and reveals them for @SlowDuration@ seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by @SlowAmount@% decaying over @SlowDuration@ seconds.",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						8,
-						8,
-						8,
-						8,
-						8,
-						8,
-						8
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
-						"SlowAmount": [
-							25,
-							35,
-							45,
-							55,
-							65,
-							75,
-							85
-						],
-						"E1Damage": [
-							10,
-							35,
-							60,
-							85,
-							110,
-							135,
-							160
-						],
-						"ReactivateTime": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"SlowDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"SlowAmount": [25, 35, 45, 55, 65, 75, 85],
+						"E1Damage": [10, 35, 60, 85, 110, 135, 160],
+						"ReactivateTime": [3, 3, 3, 3, 3, 3, 3],
+						"SlowDuration": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"InitialDamage": {
@@ -357,43 +168,11 @@
 					"name": "Dragon's Rage",
 					"image": "assets/characters/leesin/hud/icons2d/leesinr.png",
 					"tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>@Damage@ plus @PercentHPCarryThrough@% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
-					"cooldownTime": [
-						100,
-						110,
-						85,
-						60,
-						60,
-						60,
-						60
-					],
+					"cooldownTime": [100, 110, 85, 60, 60, 60, 60],
 					"dataValues": {
-						"BaseDamage": [
-							-50,
-							175,
-							400,
-							625,
-							850,
-							1075,
-							1300
-						],
-						"PercentHPCarryThrough": [
-							12,
-							12,
-							15,
-							18,
-							21,
-							24,
-							27
-						],
-						"KickDistance": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						]
+						"BaseDamage": [-50, 175, 400, 625, 850, 1075, 1300],
+						"PercentHPCarryThrough": [12, 12, 15, 18, 21, 24, 27],
+						"KickDistance": [800, 800, 800, 800, 800, 800, 800]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -424,24 +203,8 @@
 					"image": "assets/characters/leesin/hud/icons2d/leesinp.png",
 					"tooltip": "Lee Sin's Abilities grant him <attackSpeed>@PassiveAS@% Attack Speed</attackSpeed> for two Attacks. The first Attack restores <keywordMajor>@TTFirstHitEnergy@ Energy</keywordMajor> and the second restores <keywordMajor>@EnergyReturn@ Energy</keywordMajor>.",
 					"dataValues": {
-						"PassiveAS": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"FirstHitEnergyMult": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"PassiveAS": [40, 40, 40, 40, 40, 40, 40],
+						"FirstHitEnergyMult": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"EnergyReturn": {

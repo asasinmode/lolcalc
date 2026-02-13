@@ -35,61 +35,13 @@
 					"name": "Bouncing Blade",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_q.png",
 					"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target.",
-					"cooldownTime": [
-						12,
-						11,
-						10,
-						9,
-						8,
-						7,
-						7
-					],
+					"cooldownTime": [12, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
-						"BaseDamage": [
-							45,
-							80,
-							115,
-							150,
-							185,
-							220,
-							255
-						],
-						"BounceOffset": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"BounceRadius": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						],
-						"MaxBounces": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"QAPRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
+						"BaseDamage": [45, 80, 115, 150, 185, 220, 255],
+						"BounceOffset": [350, 350, 350, 350, 350, 350, 350],
+						"BounceRadius": [450, 450, 450, 450, 450, 450, 450],
+						"MaxBounces": [2, 2, 2, 2, 2, 2, 2],
+						"QAPRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -106,15 +58,7 @@
 						}
 					},
 					"effectAmount": {
-						"3": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"3": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"dataKey": "Characters/Katarina/Spells/KatarinaQAbility/KatarinaQ"
 				}
@@ -127,34 +71,10 @@
 					"name": "Preparation",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
 					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds.",
-					"cooldownTime": [
-						16,
-						15,
-						14,
-						13,
-						12,
-						11,
-						11
-					],
+					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
 					"effectAmount": {
-						"1": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						],
-						"3": [
-							40,
-							50,
-							60,
-							70,
-							80,
-							90,
-							100
-						]
+						"1": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"3": [40, 50, 60, 70, 80, 90, 100]
 					},
 					"dataKey": "Characters/Katarina/Spells/KatarinaWAbility/KatarinaW"
 				}
@@ -167,52 +87,12 @@
 					"name": "Shunpo",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
 					"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target.",
-					"cooldownTime": [
-						12,
-						12,
-						11,
-						10,
-						9,
-						8,
-						8
-					],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
-						"BaseDamage": [
-							10,
-							20,
-							30,
-							40,
-							50,
-							60,
-							70
-						],
-						"DataCooldown": [
-							13,
-							12,
-							11,
-							10,
-							9,
-							8,
-							7
-						],
-						"EADRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"EAPRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"BaseDamage": [10, 20, 30, 40, 50, 60, 70],
+						"DataCooldown": [13, 12, 11, 10, 9, 8, 7],
+						"EADRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"EAPRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -306,79 +186,15 @@
 					"name": "Death Lotus",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
 					"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>.",
-					"cooldownTime": [
-						75,
-						75,
-						60,
-						45,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [75, 75, 60, 45, 0, 0, 0],
 					"dataValues": {
-						"DamagePerTick": [
-							12.5,
-							25,
-							37.5,
-							50,
-							62.5,
-							75,
-							87.5
-						],
-						"TicksPerSecond": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"Duration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"GrievousDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"GrievousAmount": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"OnHitRatio": [
-							0.2,
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5
-						],
-						"RAPRatio": [
-							0.19,
-							0.19,
-							0.19,
-							0.19,
-							0.19,
-							0.19,
-							0.19
-						]
+						"DamagePerTick": [12.5, 25, 37.5, 50, 62.5, 75, 87.5],
+						"TicksPerSecond": [6, 6, 6, 6, 6, 6, 6],
+						"Duration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"GrievousDuration": [3, 3, 3, 3, 3, 3, 3],
+						"GrievousAmount": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"OnHitRatio": [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
+						"RAPRatio": [0.19, 0.19, 0.19, 0.19, 0.19, 0.19, 0.19]
 					},
 					"spellCalculations": {
 						"DamageCalc": {
@@ -459,89 +275,17 @@
 					"tooltip": "{{Spell_KatarinaPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KatarinaPassive_Tooltip}}<br><br><rules><keywordMajor>Dagger</keywordMajor> slashes apply On-Hit Effects to champions.</rules>",
 					"dataValues": {
-						"ResetWindow": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"ResetCDR": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"DaggerRadius": [
-							340,
-							340,
-							340,
-							340,
-							340,
-							340,
-							340
-						],
-						"DaggerDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"BonusADRatio": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						]
+						"ResetWindow": [3, 3, 3, 3, 3, 3, 3],
+						"ResetCDR": [15, 15, 15, 15, 15, 15, 15],
+						"DaggerRadius": [340, 340, 340, 340, 340, 340, 340],
+						"DaggerDuration": [4, 4, 4, 4, 4, 4, 4],
+						"BonusADRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mValues": [
-										0,
-										68.185,
-										72.138,
-										76.862,
-										82.354,
-										88.615,
-										95.646,
-										103.446,
-										112.015,
-										121.354,
-										131.462,
-										142.338,
-										153.985,
-										166.4,
-										179.585,
-										193.538,
-										208.262,
-										223.754,
-										240.015,
-										257.046,
-										274.846,
-										293.415,
-										312.754,
-										332.862,
-										353.738,
-										375.385,
-										397.8,
-										420.985,
-										444.938,
-										469.662,
-										495.154
-									],
+									"mValues": [0, 68.185, 72.138, 76.862, 82.354, 88.615, 95.646, 103.446, 112.015, 121.354, 131.462, 142.338, 153.985, 166.4, 179.585, 193.538, 208.262, 223.754, 240.015, 257.046, 274.846, 293.415, 312.754, 332.862, 353.738, 375.385, 397.8, 420.985, 444.938, 469.662, 495.154],
 									"__type": "ByCharLevelFormulaCalculationPart"
 								},
 								{

@@ -35,69 +35,14 @@
 					"name": "Bouncing Bomb",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsq.png",
 					"tooltip": "Ziggs throws a bouncing bomb that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						6.5,
-						6,
-						5.5,
-						5,
-						4.5,
-						4,
-						4
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [6.5, 6, 5.5, 5, 4.5, 4, 4],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							80,
-							130,
-							180,
-							230,
-							280,
-							330
-						],
-						"APRatio": [
-							0.55,
-							0.6,
-							0.65,
-							0.7,
-							0.75,
-							0.8,
-							0.85
-						],
-						"MaxRange": [
-							850,
-							850,
-							850,
-							850,
-							850,
-							850,
-							850
-						],
-						"MaxRangeFirstBounce": [
-							325,
-							325,
-							325,
-							325,
-							325,
-							325,
-							325
-						],
-						"MaxRangeSecondBounce": [
-							225,
-							225,
-							225,
-							225,
-							225,
-							225,
-							225
-						]
+						"BaseDamage": [30, 80, 130, 180, 230, 280, 330],
+						"APRatio": [0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85],
+						"MaxRange": [850, 850, 850, 850, 850, 850, 850],
+						"MaxRangeFirstBounce": [325, 325, 325, 325, 325, 325, 325],
+						"MaxRangeSecondBounce": [225, 225, 225, 225, 225, 225, 225]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -114,60 +59,12 @@
 						}
 					},
 					"effectAmount": {
-						"1": [
-							850,
-							850,
-							850,
-							850,
-							850,
-							850,
-							850
-						],
-						"2": [
-							325,
-							325,
-							325,
-							325,
-							325,
-							325,
-							325
-						],
-						"3": [
-							225,
-							225,
-							225,
-							225,
-							225,
-							225,
-							225
-						],
-						"4": [
-							180,
-							180,
-							180,
-							180,
-							180,
-							180,
-							180
-						],
-						"5": [
-							240,
-							240,
-							240,
-							240,
-							240,
-							240,
-							240
-						],
-						"6": [
-							70,
-							70,
-							70,
-							70,
-							70,
-							70,
-							70
-						]
+						"1": [850, 850, 850, 850, 850, 850, 850],
+						"2": [325, 325, 325, 325, 325, 325, 325],
+						"3": [225, 225, 225, 225, 225, 225, 225],
+						"4": [180, 180, 180, 180, 180, 180, 180],
+						"5": [240, 240, 240, 240, 240, 240, 240],
+						"6": [70, 70, 70, 70, 70, 70, 70]
 					},
 					"dataKey": "Characters/Ziggs/Spells/ZiggsQAbility/ZiggsQ"
 				}
@@ -180,123 +77,20 @@
 					"name": "Satchel Charge",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsw.png",
 					"tooltip": "Ziggs flings an explosive charge that detonates after @BombDuration@ seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br><br>Satchel Charge will automatically destroy towers below @TurretDestroyPercent*100@% of their Health.",
-					"mana": [
-						80,
-						80,
-						80,
-						80,
-						80,
-						80
-					],
-					"cooldownTime": [
-						20,
-						20,
-						18,
-						16,
-						14,
-						12,
-						12
-					],
+					"mana": [80, 80, 80, 80, 80, 80],
+					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"dataValues": {
-						"BaseDamage": [
-							35,
-							70,
-							105,
-							140,
-							175,
-							210,
-							245
-						],
-						"BombDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"TurretDestroyPercent": [
-							0.225,
-							0.25,
-							0.275,
-							0.3,
-							0.325,
-							0.35,
-							0.375
-						],
-						"KnockbackSpeed": [
-							600,
-							600,
-							600,
-							600,
-							600,
-							600,
-							600
-						],
-						"KnockbackGravity": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"KnockbackDistance": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"ExplosionRadius": [
-							325,
-							325,
-							325,
-							325,
-							325,
-							325,
-							325
-						],
-						"KnockbackDistanceAlly": [
-							775,
-							775,
-							775,
-							775,
-							775,
-							775,
-							775
-						],
-						"PerceptionBubbleRadius": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"PerceptionBubbleDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"CherryBonusHaste": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						]
+						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"BombDuration": [4, 4, 4, 4, 4, 4, 4],
+						"TurretDestroyPercent": [0.225, 0.25, 0.275, 0.3, 0.325, 0.35, 0.375],
+						"KnockbackSpeed": [600, 600, 600, 600, 600, 600, 600],
+						"KnockbackGravity": [50, 50, 50, 50, 50, 50, 50],
+						"KnockbackDistance": [500, 500, 500, 500, 500, 500, 500],
+						"ExplosionRadius": [325, 325, 325, 325, 325, 325, 325],
+						"KnockbackDistanceAlly": [775, 775, 775, 775, 775, 775, 775],
+						"PerceptionBubbleRadius": [400, 400, 400, 400, 400, 400, 400],
+						"PerceptionBubbleDuration": [6, 6, 6, 6, 6, 6, 6],
+						"CherryBonusHaste": [30, 30, 30, 30, 30, 30, 30]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -313,15 +107,7 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							0,
-							70,
-							105,
-							140,
-							175,
-							210,
-							245
-						]
+						"0": [0, 70, 105, 140, 175, 210, 245]
 					},
 					"dataKey": "Characters/Ziggs/Spells/ZiggsWAbility/ZiggsW"
 				}
@@ -334,60 +120,13 @@
 					"name": "Hexplosive Minefield",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggse.png",
 					"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @Effect4Amount@ seconds. Mines last @MineDuration@ seconds.",
-					"mana": [
-						70,
-						80,
-						90,
-						100,
-						110,
-						120
-					],
-					"cooldownTime": [
-						16,
-						16,
-						16,
-						16,
-						16,
-						16,
-						16
-					],
+					"mana": [70, 80, 90, 100, 110, 120],
+					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
-						"APRatioPerMine": [
-							0.2,
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5
-						],
-						"Slow": [
-							0,
-							-0.1,
-							-0.2,
-							-0.3,
-							-0.4,
-							-0.5,
-							-0.6
-						],
-						"DamagePerMine": [
-							-10,
-							30,
-							70,
-							110,
-							150,
-							190,
-							230
-						],
-						"MineDuration": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						]
+						"APRatioPerMine": [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
+						"Slow": [0, -0.1, -0.2, -0.3, -0.4, -0.5, -0.6],
+						"DamagePerMine": [-10, 30, 70, 110, 150, 190, 230],
+						"MineDuration": [10, 10, 10, 10, 10, 10, 10]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -413,51 +152,11 @@
 						}
 					},
 					"effectAmount": {
-						"2": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"3": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"4": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"6": [
-							135,
-							135,
-							135,
-							135,
-							135,
-							135,
-							135
-						],
-						"7": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						]
+						"2": [10, 10, 10, 10, 10, 10, 10],
+						"3": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"4": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"6": [135, 135, 135, 135, 135, 135, 135],
+						"7": [150, 150, 150, 150, 150, 150, 150]
 					},
 					"dataKey": "Characters/Ziggs/Spells/ZiggsEAbility/ZiggsE"
 				}
@@ -470,69 +169,14 @@
 					"name": "Mega Inferno Bomb",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsr.png",
 					"tooltip": "Ziggs hurls his ultimate creation, dealing <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> in the center of the blast radius, or <magicDamage>@BlastDamage@ magic damage</magicDamage> at the edge.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						120,
-						120,
-						95,
-						70,
-						70,
-						70,
-						70
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [120, 120, 95, 70, 70, 70, 70],
 					"dataValues": {
-						"BaseDamage": [
-							100,
-							300,
-							500,
-							700,
-							900,
-							1100,
-							1300
-						],
-						"APRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"OuterRingModifier": [
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65
-						],
-						"MaximumRadius": [
-							525,
-							525,
-							525,
-							525,
-							525,
-							525,
-							525
-						],
-						"EmpoweredRadius": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						]
+						"BaseDamage": [100, 300, 500, 700, 900, 1100, 1300],
+						"APRatio": [1, 1, 1, 1, 1, 1, 1],
+						"OuterRingModifier": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"MaximumRadius": [525, 525, 525, 525, 525, 525, 525],
+						"EmpoweredRadius": [250, 250, 250, 250, 250, 250, 250]
 					},
 					"spellCalculations": {
 						"EmpoweredDamage": {
@@ -565,34 +209,10 @@
 					"name": "Short Fuse",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggspassiveready.png",
 					"tooltip": "Every @Cooldown@ seconds, Ziggs' next Attack deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. It deals <magicDamage>@StructureDamage@ damage</magicDamage> instead to structures. <br><br>Ziggs' abilities reduce this Cooldown by @SpellCDR@ seconds.",
-					"cooldownTime": [
-						12,
-						12,
-						12,
-						12,
-						12,
-						12,
-						12
-					],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
-						"APRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"StructureDamageRatio": [
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75
-						]
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"StructureDamageRatio": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -647,15 +267,7 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							35,
-							80,
-							125,
-							170,
-							215,
-							260,
-							305
-						]
+						"0": [35, 80, 125, 170, 215, 260, 305]
 					},
 					"dataKey": "Characters/Ziggs/Spells/ZiggsPassiveBuffAbility/ZiggsPassiveBuff"
 				}

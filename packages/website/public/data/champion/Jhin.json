@@ -35,69 +35,14 @@
 					"name": "Dancing Grenade",
 					"image": "assets/characters/jhin/hud/icons2d/jhin_q.png",
 					"tooltip": "Jhin launches a cartridge that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> before bouncing to a nearby enemy that has not been hit yet.<br><br>The cartridge can hit a maximum of @TooltipMaxTargetsHit@ times. Enemies that die shortly after being hit increase the damage of subsequent hits by @PercentAmpOnKill*100@%.",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						65
-					],
-					"cooldownTime": [
-						7.5,
-						7,
-						6.5,
-						6,
-						5.5,
-						5,
-						5
-					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 5],
 					"dataValues": {
-						"BaseDamage": [
-							19,
-							44,
-							69,
-							94,
-							119,
-							144,
-							169
-						],
-						"ADRatio": [
-							0.365,
-							0.44,
-							0.515,
-							0.59,
-							0.665,
-							0.74,
-							0.815
-						],
-						"PercentAmpOnKill": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"NumberOfBounces": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"BounceRange": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						]
+						"BaseDamage": [19, 44, 69, 94, 119, 144, 169],
+						"ADRatio": [0.365, 0.44, 0.515, 0.59, 0.665, 0.74, 0.815],
+						"PercentAmpOnKill": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"NumberOfBounces": [3, 3, 3, 3, 3, 3, 3],
+						"BounceRange": [450, 450, 450, 450, 450, 450, 450]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -145,60 +90,13 @@
 					"name": "Deadly Flourish",
 					"image": "assets/characters/jhin/hud/icons2d/jhin_w.png",
 					"tooltip": "Jhin fires a long range shot dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first champion hit and other enemies along the way.<br><br>If this skill strikes a champion that has been damaged by an allied champion within the last @SpottingDuration@ seconds, it will <status>Root</status> them for @RootDuration@ seconds and grant Jhin <spellName>Whisper</spellName>'s Move Speed.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						12,
-						12,
-						12,
-						12,
-						12,
-						12,
-						12
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
-						"BaseDamage": [
-							35,
-							70,
-							105,
-							140,
-							175,
-							210,
-							245
-						],
-						"RootDuration": [
-							1,
-							1.25,
-							1.5,
-							1.75,
-							2,
-							2.25,
-							2.5
-						],
-						"MinionMod": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"SpottingDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"RootDuration": [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5],
+						"MinionMod": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"SpottingDuration": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -227,114 +125,19 @@
 					"name": "Captive Audience",
 					"image": "assets/characters/jhin/hud/icons2d/jhin_e.png",
 					"tooltip": "<passive>Passive:</passive> Champions Jhin kills will create and detonate a Lotus Trap at their location.<br><br><active>Active:</active> Jhin places an invisible Lotus Trap for @TrapDuration@ minutes that creates a zone that <status>Slows</status> by @TrapSlowAmount*100@% when stepped on by an enemy. After @TrapDetonationTime@ seconds, the trap detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This ability has 2 charges (@AmmoRechargeRateTooltip@ second refresh).",
-					"mana": [
-						30,
-						30,
-						30,
-						30,
-						30,
-						30
-					],
-					"cooldownTime": [
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2
-					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"dataValues": {
-						"AmmoRechargeRateBaseTooltip": [
-							26.5,
-							24,
-							21.5,
-							19,
-							16.5,
-							14,
-							11.5
-						],
-						"TrapSlowAmount": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"ReducedDamagePercent": [
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65
-						],
-						"BaseDamage": [
-							-40,
-							20,
-							80,
-							140,
-							200,
-							260,
-							320
-						],
-						"TrapDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"TrapAoERadius": [
-							260,
-							260,
-							260,
-							260,
-							260,
-							260,
-							260
-						],
-						"TrapTriggerRadius": [
-							160,
-							160,
-							160,
-							160,
-							160,
-							160,
-							160
-						],
-						"TrapDetonationTime": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"TrapRevealDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"TrapArmTime": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
+						"AmmoRechargeRateBaseTooltip": [26.5, 24, 21.5, 19, 16.5, 14, 11.5],
+						"TrapSlowAmount": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"ReducedDamagePercent": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"BaseDamage": [-40, 20, 80, 140, 200, 260, 320],
+						"TrapDuration": [3, 3, 3, 3, 3, 3, 3],
+						"TrapAoERadius": [260, 260, 260, 260, 260, 260, 260],
+						"TrapTriggerRadius": [160, 160, 160, 160, 160, 160, 160],
+						"TrapDetonationTime": [2, 2, 2, 2, 2, 2, 2],
+						"TrapRevealDuration": [4, 4, 4, 4, 4, 4, 4],
+						"TrapArmTime": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -388,87 +191,16 @@
 					"name": "Curtain Call",
 					"image": "assets/characters/jhin/hud/icons2d/jhin_r.png",
 					"tooltip": "Jhin sets up and channels, enabling him to fire 4 super shots, each dealing between <physicalDamage>@DamageCalc@</physicalDamage> and <physicalDamage>@MaxIncreaseCalc@ physical damage</physicalDamage> to the first champion hit based on their percentage missing health and <status>Slowing</status> them by @SlowPercent*100@% for @SlowDuration@ seconds. The fourth shot critically strikes for @FourthShotMultiplier*100@% damage.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						120,
-						120,
-						105,
-						90,
-						0,
-						0,
-						0
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 105, 90, 0, 0, 0],
 					"dataValues": {
-						"Damage": [
-							0,
-							64,
-							128,
-							192,
-							256,
-							320,
-							384
-						],
-						"FourthShotMultiplier": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"SlowPercent": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"SlowDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"PercentMissingAmp": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"MInimumDelayBetweenShots": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ADRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"Damage": [0, 64, 128, 192, 256, 320, 384],
+						"FourthShotMultiplier": [2, 2, 2, 2, 2, 2, 2],
+						"SlowPercent": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"PercentMissingAmp": [3, 3, 3, 3, 3, 3, 3],
+						"MInimumDelayBetweenShots": [1, 1, 1, 1, 1, 1, 1],
+						"ADRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"DamageCalc": {
@@ -513,87 +245,15 @@
 					"tooltip": "{{Spell_JhinPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_JhinPassive_Tooltip}}<br><rules>Attack Damage scales with Critical Strike Chance and bonus Attack Speed.<br>Move Speed scales with bonus Attack Speed.<br>Missing health damage is capped at 800 against monsters.</rules>",
 					"dataValues": {
-						"MaxAmmo": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"ReloadTime": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"HasteDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"OutOfCombatTimeBeforeReload": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"FourthShotDamageMult": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"CritReductionPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"BaseAttackSpeed": [
-							0.625,
-							0.625,
-							0.625,
-							0.625,
-							0.625,
-							0.625,
-							0.625
-						],
-						"PercentAttackSpeedPerLevel": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						],
-						"CritMoveSpeedPercentASRatio": [
-							0.44,
-							0.44,
-							0.44,
-							0.44,
-							0.44,
-							0.44,
-							0.44
-						]
+						"MaxAmmo": [4, 4, 4, 4, 4, 4, 4],
+						"ReloadTime": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"HasteDuration": [2, 2, 2, 2, 2, 2, 2],
+						"OutOfCombatTimeBeforeReload": [8, 8, 8, 8, 8, 8, 8],
+						"FourthShotDamageMult": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"CritReductionPercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"BaseAttackSpeed": [0.625, 0.625, 0.625, 0.625, 0.625, 0.625, 0.625],
+						"PercentAttackSpeedPerLevel": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
+						"CritMoveSpeedPercentASRatio": [0.44, 0.44, 0.44, 0.44, 0.44, 0.44, 0.44]
 					},
 					"spellCalculations": {
 						"FourthShotExecutePercent": {

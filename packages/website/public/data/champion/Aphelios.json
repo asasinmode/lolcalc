@@ -36,69 +36,14 @@
 					"image": "assets/characters/aphelios/hud/icons2d/q_calibrum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
 					"dataValues": {
-						"MarkDuration": [
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5
-						],
-						"BonusRange": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"MoonlightCost": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"BonusAS": [
-							0.05,
-							0.09,
-							0.13,
-							0.17,
-							0.21,
-							0.25,
-							0.29
-						],
-						"BonusASMax": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MaxMarkRange": [
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800
-						]
+						"MarkDuration": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
+						"BonusRange": [100, 100, 100, 100, 100, 100, 100],
+						"MoonlightCost": [10, 10, 10, 10, 10, 10, 10],
+						"BonusAS": [0.05, 0.09, 0.13, 0.17, 0.21, 0.25, 0.29],
+						"BonusASMax": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MaxMarkRange": [1800, 1800, 1800, 1800, 1800, 1800, 1800]
 					},
 					"spellCalculations": {
 						"BonusDamagePerMark": {
@@ -246,51 +191,12 @@
 					"image": "assets/characters/aphelios/hud/icons2d/q_severum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
 					"dataValues": {
-						"Duration": [
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75
-						],
-						"DecayTakes": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"ASCoeff": [
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333
-						],
-						"StartingAttacks": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
+						"Duration": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
+						"DecayTakes": [5, 5, 5, 5, 5, 5, 5],
+						"ASCoeff": [0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333],
+						"StartingAttacks": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"spellCalculations": {
 						"NumAttacks": {
@@ -528,33 +434,10 @@
 					"image": "assets/characters/aphelios/hud/icons2d/q_gravitum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
 					"dataValues": {
-						"SlowDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"RootDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"SlowDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"RootDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"SlowAmountInitial": {
@@ -700,42 +583,11 @@
 					"image": "assets/characters/aphelios/hud/icons2d/q_infernum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"cooldownTime": [
-						9,
-						9,
-						9,
-						9,
-						9,
-						9,
-						9
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"dataValues": {
-						"InfernumDamageMultiplier": [
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1
-						],
-						"MinionPenaltyBase": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						]
+						"InfernumDamageMultiplier": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"MinionPenaltyBase": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
 					},
 					"spellCalculations": {
 						"InfernumQCD": {
@@ -896,114 +748,19 @@
 					"image": "assets/characters/aphelios/hud/icons2d/q_crescendum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
 					"dataValues": {
-						"MiniBuffDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MiniBuffResetDuration": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
-						],
-						"UnitsPerPercentAttackSpeedPerSecond": [
-							750,
-							750,
-							750,
-							750,
-							750,
-							750,
-							750
-						],
-						"TurretDurationIdle": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"TurretDurationActive": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AttackRange": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"MiniDamageRatioMax": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"MiniDamageRatioMin": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"MiniBaseDamage": [
-							15,
-							25,
-							35,
-							45,
-							55,
-							65,
-							75
-						],
-						"TurretAPRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MiniDamageRatioDecPer": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
-						]
+						"MiniBuffDuration": [5, 5, 5, 5, 5, 5, 5],
+						"MiniBuffResetDuration": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+						"UnitsPerPercentAttackSpeedPerSecond": [750, 750, 750, 750, 750, 750, 750],
+						"TurretDurationIdle": [20, 20, 20, 20, 20, 20, 20],
+						"TurretDurationActive": [4, 4, 4, 4, 4, 4, 4],
+						"AttackRange": [500, 500, 500, 500, 500, 500, 500],
+						"MiniDamageRatioMax": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"MiniDamageRatioMin": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"MiniBaseDamage": [15, 25, 35, 45, 55, 65, 75],
+						"TurretAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MiniDamageRatioDecPer": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015]
 					},
 					"spellCalculations": {
 						"{c61fdd37}": {
@@ -1197,96 +954,17 @@
 					"name": "Moonlight Vigil",
 					"image": "assets/characters/aphelios/hud/icons2d/apheliosr.png",
 					"tooltip": "Aphelios fires a concentrated blast of moonlight that explodes when it hits a champion, dealing <physicalDamage>@MaxDamage@ physical damage</physicalDamage> to surrounding enemies.<br><br>Then, Aphelios attacks all champions hit with his main-hand weapon. {{ Spell_ApheliosR_WeaponMod_@f1@ }}",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						120,
-						120,
-						110,
-						100,
-						100,
-						100,
-						100
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
 					"dataValues": {
-						"RBaseDamage": [
-							75,
-							125,
-							175,
-							225,
-							275,
-							325,
-							375
-						],
-						"SeverumRHealBonus": [
-							150,
-							250,
-							350,
-							450,
-							550,
-							650,
-							750
-						],
-						"CalibrumRMarkBonusDamage": [
-							20,
-							50,
-							80,
-							110,
-							140,
-							170,
-							200
-						],
-						"CrescendumRBonusMinis": [
-							0,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"InfernumRBonusDamageBase": [
-							0,
-							50,
-							100,
-							150,
-							200,
-							250,
-							300
-						],
-						"GravitumRBonusSlowBase": [
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99,
-							0.99
-						],
-						"CritDamageMod": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"GravitumRRootDuration": [
-							1.35,
-							1.35,
-							1.35,
-							1.35,
-							1.35,
-							1.35,
-							1.35
-						]
+						"RBaseDamage": [75, 125, 175, 225, 275, 325, 375],
+						"SeverumRHealBonus": [150, 250, 350, 450, 550, 650, 750],
+						"CalibrumRMarkBonusDamage": [20, 50, 80, 110, 140, 170, 200],
+						"CrescendumRBonusMinis": [0, 5, 5, 5, 5, 5, 5],
+						"InfernumRBonusDamageBase": [0, 50, 100, 150, 200, 250, 300],
+						"GravitumRBonusSlowBase": [0.99, 0.99, 0.99, 0.99, 0.99, 0.99, 0.99],
+						"CritDamageMod": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"GravitumRRootDuration": [1.35, 1.35, 1.35, 1.35, 1.35, 1.35, 1.35]
 					},
 					"spellCalculations": {
 						"MaxDamage": {
@@ -1397,60 +1075,13 @@
 					"image": "assets/characters/aphelios/hud/icons2d/apheliosp.png",
 					"tooltip": "Aphelios wields 5 Lunari Weapons made by his sister, Alune. He has access to two at a time: one main-hand and one off-hand. Each weapon has a unique Attack and Ability [@spell.ApheliosCalibrumQ:Hotkey@]. Attacks and Abilities consume a weapon's ammo. When out of ammo, Aphelios discards the weapon and Alune summons the next one. <br><br>Aphelios unlocks his weapon's Ability [@spell.ApheliosCalibrumQ:Hotkey@] at level 2 and his Ultimate at level 6. Instead of powering up his Abilities, Aphelios' rank-ups grant him permanent stats.<br><br><passive>Lunari Weapon Order:</passive><li>{{ Spell_ApheliosP_GunShortDesc_@f1@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f2@ }}</li><font color='#424242'><li>{{ Spell_ApheliosP_GunShortDesc_@f3@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f4@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f5@ }}</li></font>",
 					"tooltipExtended": "Aphelios wields 5 Lunari Weapons made by his sister Alune. He has access to two at a time: one main-hand and one off-hand. Each weapon has a unique Attack and Ability [@spell.ApheliosCalibrumQ:Hotkey@]. Attacks and Abilities consume a weapon's ammo. When out of ammo, Aphelios discards the weapon and Alune summons the next one. <br><br>Aphelios unlocks his weapon's Ability [@spell.ApheliosCalibrumQ:Hotkey@] at level 2 and his Ultimate at level 6. Instead of powering up his Abilities, Aphelios' rank-ups grant him permanent stats:<li>{{ Spell_ApheliosP_Buff_AD }} [@spell.ApheliosCalibrumQ:Hotkey@]: <physicalDamage>@spell.ApheliosP:AttackDamage@ / @AttackDamageMax@</physicalDamage></li><li>{{ Spell_ApheliosP_Buff_AS }} [@spell.ApheliosW:Hotkey@]: <attackSpeed>@spell.ApheliosP:AttackSpeed@ / @AttackSpeedMax@</attackSpeed></li><li>{{ Spell_ApheliosP_Buff_AP }} [@spell.ApheliosE:Hotkey@]: <scaleLethality>@spell.ApheliosP:ArPenBonus@ / @ArPenBonusMax@</scaleLethality></li><br><br><passive>Lunari Weapon Order:</passive><li>{{ Spell_ApheliosP_GunShortDesc_@f1@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f2@ }}</li><font color='#424242'><li>{{ Spell_ApheliosP_GunShortDesc_@f3@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f4@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f5@ }}</li></font>",
-					"mana": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
-					"cooldownTime": [
-						2,
-						2,
-						2,
-						2,
-						2,
-						2,
-						2
-					],
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"dataValues": {
-						"MaxRanksPerStat": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"ADPerRank": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"ASPerRank": [
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09
-						],
-						"APPerRank": [
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5,
-							4.5
-						]
+						"MaxRanksPerStat": [6, 6, 6, 6, 6, 6, 6],
+						"ADPerRank": [5, 5, 5, 5, 5, 5, 5],
+						"ASPerRank": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
+						"APPerRank": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5]
 					},
 					"spellCalculations": {
 						"AttackSpeed": {

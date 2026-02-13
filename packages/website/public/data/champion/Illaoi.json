@@ -35,69 +35,14 @@
 					"name": "Tentacle Smash",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_q.png",
 					"tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage> (currently <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>).<br><br><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward.",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						65
-					],
-					"cooldownTime": [
-						11,
-						10,
-						9,
-						8,
-						7,
-						6,
-						6
-					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"TentacleDamageAmp": [
-							0,
-							0.1,
-							0.15,
-							0.2,
-							0.25,
-							0.3,
-							0.35
-						],
-						"TotalADRatio": [
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1
-						],
-						"APRatio": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"TentacleLength": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"TentacleWidth": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						]
+						"TentacleDamageAmp": [0, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35],
+						"TotalADRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"TentacleLength": [800, 800, 800, 800, 800, 800, 800],
+						"TentacleWidth": [200, 200, 200, 200, 200, 200, 200]
 					},
 					"spellCalculations": {
 						"TentacleDamageTotal": {
@@ -161,87 +106,16 @@
 					"name": "Harsh Lesson",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_w.png",
 					"tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>@HealthPercentTotal@ max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target.",
-					"mana": [
-						30,
-						30,
-						30,
-						30,
-						30,
-						30
-					],
-					"cooldownTime": [
-						4,
-						4,
-						4,
-						4,
-						4,
-						4,
-						4
-					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
-						"WMinDamage": [
-							10,
-							20,
-							30,
-							40,
-							50,
-							60,
-							70
-						],
-						"HealthPercentDamage": [
-							2.5,
-							3,
-							3.5,
-							4,
-							4.5,
-							5,
-							5.5
-						],
-						"HealthDamageADRatio": [
-							0.035,
-							0.035,
-							0.035,
-							0.035,
-							0.035,
-							0.035,
-							0.035
-						],
-						"CooldownDuringR": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"MonsterDamageCap": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"BuffDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"DashSpeedBonus": [
-							600,
-							600,
-							600,
-							600,
-							600,
-							600,
-							600
-						]
+						"WMinDamage": [10, 20, 30, 40, 50, 60, 70],
+						"HealthPercentDamage": [2.5, 3, 3.5, 4, 4.5, 5, 5.5],
+						"HealthDamageADRatio": [0.035, 0.035, 0.035, 0.035, 0.035, 0.035, 0.035],
+						"CooldownDuringR": [2, 2, 2, 2, 2, 2, 2],
+						"MonsterDamageCap": [300, 300, 300, 300, 300, 300, 300],
+						"BuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"DashSpeedBonus": [600, 600, 600, 600, 600, 600, 600]
 					},
 					"spellCalculations": {
 						"HealthPercentTotal": {
@@ -276,15 +150,7 @@
 						}
 					},
 					"effectAmount": {
-						"1": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"1": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"dataKey": "Characters/Illaoi/Spells/IllaoiWAbility/IllaoiW"
 				}
@@ -297,105 +163,18 @@
 					"name": "Test of Spirit",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_e.png",
 					"tooltip": "Illaoi pulls the spirit from an enemy champion for @SpiritDuration@ seconds. The spirit can be damaged like a champion, with @EchoPercent@ of that damage echoing to its owner.<br><br>If the spirit dies or the target leaves its range, the target becomes marked for @VesselDuration@ seconds and is <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds. Marked enemies spawn Tentacles if possible.<br><br>Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every @TimeBetweenVesselTentacleSlams@ seconds.",
-					"mana": [
-						35,
-						40,
-						45,
-						50,
-						55,
-						60
-					],
-					"cooldownTime": [
-						16,
-						16,
-						15,
-						14,
-						13,
-						12,
-						11
-					],
+					"mana": [35, 40, 45, 50, 55, 60],
+					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
-						"BaseDamageTransferPercent": [
-							0.2,
-							0.25,
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5
-						],
-						"VesselDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SpiritDuration": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"SlowDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"SlowAmount": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"EchoTADScalar": [
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001,
-							0.001
-						],
-						"GraceBeforeDormantAfterELand": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"Density": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						],
-						"SpiritLeashRange": [
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500
-						]
+						"BaseDamageTransferPercent": [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5],
+						"VesselDuration": [4, 4, 4, 4, 4, 4, 4],
+						"SpiritDuration": [7, 7, 7, 7, 7, 7, 7],
+						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"SlowAmount": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"EchoTADScalar": [0.001, 0.001, 0.001, 0.001, 0.001, 0.001, 0.001],
+						"GraceBeforeDormantAfterELand": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"Density": [700, 700, 700, 700, 700, 700, 700],
+						"SpiritLeashRange": [1500, 1500, 1500, 1500, 1500, 1500, 1500]
 					},
 					"spellCalculations": {
 						"TimeBetweenVesselTentacleSlams": {
@@ -463,51 +242,12 @@
 					"name": "Leap of Faith",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_r.png",
 					"tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br><br>For the next @Duration@ seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a @spell.IllaoiW:CooldownDuringR@ second cooldown.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						120,
-						120,
-						95,
-						70,
-						70,
-						70,
-						70
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [120, 120, 95, 70, 70, 70, 70],
 					"dataValues": {
-						"BaseDamage": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						],
-						"BuffRadius": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"Duration": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						]
+						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
+						"BuffRadius": [500, 500, 500, 500, 500, 500, 500],
+						"Duration": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"spellCalculations": {
 						"DamageCalc": {
@@ -539,60 +279,12 @@
 					"tooltip": "{{Spell_IllaoiPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_IllaoiPassive_Tooltip}}<br><br><rules>Enemies hit by multiple Slams at once take 50% damage for the second and 25% damage for all additional Slams.<br>Tentacles last until killed or Illaoi is out of range for @TentacleDisabledLifetime@ seconds.</rules>",
 					"dataValues": {
-						"MissingHPPercentHeal": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"TentacleDisabledLifetime": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"SpawnRadius": [
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200
-						],
-						"SpawnDensity": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"PassiveTentacleLength": [
-							925,
-							925,
-							925,
-							925,
-							925,
-							925,
-							925
-						],
-						"PassiveTentacleWidth": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						]
+						"MissingHPPercentHeal": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"TentacleDisabledLifetime": [30, 30, 30, 30, 30, 30, 30],
+						"SpawnRadius": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+						"SpawnDensity": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"PassiveTentacleLength": [925, 925, 925, 925, 925, 925, 925],
+						"PassiveTentacleWidth": [200, 200, 200, 200, 200, 200, 200]
 					},
 					"spellCalculations": {
 						"SpawnCD": {

@@ -35,60 +35,13 @@
 					"name": "Piercing Light",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_q.png",
 					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.<br>",
-					"mana": [
-						48,
-						56,
-						64,
-						72,
-						80,
-						90
-					],
-					"cooldownTime": [
-						10,
-						9,
-						8,
-						7,
-						6,
-						5,
-						5
-					],
+					"mana": [48, 56, 64, 72, 80, 90],
+					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"dataValues": {
-						"BaseDamage": [
-							45,
-							80,
-							115,
-							150,
-							185,
-							220,
-							255
-						],
-						"BonusADRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"Range": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"Width": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						]
+						"BaseDamage": [45, 80, 115, 150, 185, 220, 255],
+						"BonusADRatio": [1, 1, 1, 1, 1, 1, 1],
+						"Range": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"Width": [100, 100, 100, 100, 100, 100, 100]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -107,15 +60,7 @@
 						}
 					},
 					"effectAmount": {
-						"3": [
-							0.41,
-							0.41,
-							0.41,
-							0.41,
-							0.41,
-							0.41,
-							0.41
-						]
+						"3": [0.41, 0.41, 0.41, 0.41, 0.41, 0.41, 0.41]
 					},
 					"dataKey": "Characters/Lucian/Spells/LucianQAbility/LucianQ"
 				}
@@ -128,33 +73,10 @@
 					"name": "Ardent Blaze",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_w.png",
 					"tooltip": "Lucian fires a shot that explodes at the end of its range or on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, briefly revealing enemies and marking them for 6 seconds.<br><br>When Lucian or an ally damages a marked enemy, Lucian gains <speed>@Effect2Amount@ Move Speed</speed> for 1 second. Allies triggering this effect will also grant Lucian <attention>Vigilance</attention>.",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"cooldownTime": [
-						15,
-						14,
-						13,
-						12,
-						11,
-						10,
-						10
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
-						"BaseDamage": [
-							40,
-							75,
-							110,
-							145,
-							180,
-							215,
-							250
-						]
+						"BaseDamage": [40, 75, 110, 145, 180, 215, 250]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -171,87 +93,15 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							75,
-							75,
-							110,
-							145,
-							180,
-							215,
-							215
-						],
-						"1": [
-							55,
-							60,
-							65,
-							70,
-							75,
-							80,
-							85
-						],
-						"2": [
-							900,
-							900,
-							900,
-							900,
-							900,
-							900,
-							900
-						],
-						"4": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"5": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"6": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"7": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"8": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"9": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						]
+						"0": [75, 75, 110, 145, 180, 215, 215],
+						"1": [55, 60, 65, 70, 75, 80, 85],
+						"2": [900, 900, 900, 900, 900, 900, 900],
+						"4": [1, 1, 1, 1, 1, 1, 1],
+						"5": [200, 200, 200, 200, 200, 200, 200],
+						"6": [1, 1, 1, 1, 1, 1, 1],
+						"7": [6, 6, 6, 6, 6, 6, 6],
+						"8": [1, 1, 1, 1, 1, 1, 1],
+						"9": [700, 700, 700, 700, 700, 700, 700]
 					},
 					"dataKey": "Characters/Lucian/Spells/LucianWAbility/LucianW"
 				}
@@ -264,69 +114,14 @@
 					"name": "Relentless Pursuit",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_e.png",
 					"tooltip": "Lucian dashes.<br><br>Cooldown is reduced by @Effect1Amount@ second whenever Lucian hits an enemy with <spellName>Lightslinger</spellName> (@Effect2Amount@ seconds for champions). ",
-					"mana": [
-						40,
-						30,
-						20,
-						10,
-						0,
-						0
-					],
-					"cooldownTime": [
-						18,
-						18,
-						17,
-						16,
-						15,
-						14,
-						14
-					],
+					"mana": [40, 30, 20, 10, 0, 0],
+					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"effectAmount": {
-						"0": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"1": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"2": [
-							425,
-							425,
-							425,
-							425,
-							425,
-							425,
-							425
-						],
-						"3": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"4": [
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350
-						]
+						"0": [1, 1, 1, 1, 1, 1, 1],
+						"1": [2, 2, 2, 2, 2, 2, 2],
+						"2": [425, 425, 425, 425, 425, 425, 425],
+						"3": [200, 200, 200, 200, 200, 200, 200],
+						"4": [1350, 1350, 1350, 1350, 1350, 1350, 1350]
 					},
 					"dataKey": "Characters/Lucian/Spells/LucianEAbility/LucianE"
 				}
@@ -339,105 +134,18 @@
 					"name": "The Culling",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_r.png",
 					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage><br>",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						10,
-						110,
-						100,
-						90,
-						10,
-						10,
-						10
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [10, 110, 100, 90, 10, 10, 10],
 					"dataValues": {
-						"BaseDamage": [
-							0,
-							15,
-							30,
-							45,
-							60,
-							75,
-							90
-						],
-						"DamageADRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"DamageAPRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"CritValueMod": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"PercentDamageAmpToMinions": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"NumShots": [
-							22,
-							22,
-							22,
-							22,
-							22,
-							22,
-							22
-						],
-						"Duration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"RecastLockout": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"RangeCheck": [
-							1050,
-							1050,
-							1050,
-							1050,
-							1050,
-							1050,
-							1050
-						]
+						"BaseDamage": [0, 15, 30, 45, 60, 75, 90],
+						"DamageADRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"DamageAPRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"CritValueMod": [1, 1, 1, 1, 1, 1, 1],
+						"PercentDamageAmpToMinions": [200, 200, 200, 200, 200, 200, 200],
+						"NumShots": [22, 22, 22, 22, 22, 22, 22],
+						"Duration": [3, 3, 3, 3, 3, 3, 3],
+						"RecastLockout": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"RangeCheck": [1050, 1050, 1050, 1050, 1050, 1050, 1050]
 					},
 					"spellCalculations": {
 						"DamagePerBullet": {
@@ -523,60 +231,12 @@
 					"tooltip": "{{Spell_LucianPassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_LucianPassive_Tooltip }}<br><rules>Vigilance can store up to @MaxAutos@ empowered basic attacks.</rules>",
 					"dataValues": {
-						"PassiveDuration": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
-						],
-						"PassiveDamageBase": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"OnhitPassiveDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"NumAuto": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"MaxAutos": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"CCRange": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						]
+						"PassiveDuration": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+						"PassiveDamageBase": [15, 15, 15, 15, 15, 15, 15],
+						"OnhitPassiveDuration": [6, 6, 6, 6, 6, 6, 6],
+						"NumAuto": [2, 2, 2, 2, 2, 2, 2],
+						"MaxAutos": [4, 4, 4, 4, 4, 4, 4],
+						"CCRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

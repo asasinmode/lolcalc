@@ -35,69 +35,14 @@
 					"name": "Blinding Dart",
 					"image": "assets/characters/teemo/hud/icons2d/teemoq.asu_teemo.png",
 					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
-					"mana": [
-						70,
-						75,
-						80,
-						85,
-						90,
-						95
-					],
-					"cooldownTime": [
-						7,
-						7,
-						7,
-						7,
-						7,
-						7,
-						7
-					],
+					"mana": [70, 75, 80, 85, 90, 95],
+					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
-						"BaseDamage": [
-							35,
-							80,
-							125,
-							170,
-							215,
-							260,
-							305
-						],
-						"APRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"BlindDuration": [
-							1.75,
-							2,
-							2.25,
-							2.5,
-							2.75,
-							3,
-							3.25
-						],
-						"MissChance": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MinionMonsterDurationMod": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"BaseDamage": [35, 80, 125, 170, 215, 260, 305],
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"BlindDuration": [1.75, 2, 2.25, 2.5, 2.75, 3, 3.25],
+						"MissChance": [1, 1, 1, 1, 1, 1, 1],
+						"MinionMonsterDurationMod": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"CalculatedDamage": {
@@ -135,60 +80,13 @@
 					"name": "Move Quick",
 					"image": "assets/characters/teemo/hud/icons2d/teemow.asu_teemo.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						14,
-						14,
-						14,
-						14,
-						14,
-						14,
-						14
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
-						"PassiveMoveSpeedBonus": [
-							0.08,
-							0.12,
-							0.16,
-							0.2,
-							0.24,
-							0.28,
-							0.32
-						],
-						"ActiveMoveSpeedBuffDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"ActiveMoveSpeedBonus": [
-							0.16,
-							0.24,
-							0.32,
-							0.4,
-							0.48,
-							0.56,
-							0.64
-						],
-						"PassiveCooldownOnDamageTaken": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
+						"PassiveMoveSpeedBonus": [0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32],
+						"ActiveMoveSpeedBuffDuration": [3, 3, 3, 3, 3, 3, 3],
+						"ActiveMoveSpeedBonus": [0.16, 0.24, 0.32, 0.4, 0.48, 0.56, 0.64],
+						"PassiveCooldownOnDamageTaken": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"dataKey": "Characters/Teemo/Spells/TeemoWAbility/TeemoW"
 				}
@@ -201,79 +99,15 @@
 					"name": "Toxic Shot",
 					"image": "assets/characters/teemo/hud/icons2d/teemoe.asu_teemo.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"TickBaseDamage": [
-							0,
-							6,
-							12,
-							18,
-							24,
-							30,
-							36
-						],
-						"TickAPRatio": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"ImpactBaseDamage": [
-							-5,
-							9,
-							23,
-							37,
-							51,
-							65,
-							79
-						],
-						"ImpactAPRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"PoisonDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"TickFrequency": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MonsterMod": [
-							1.45,
-							1.45,
-							1.45,
-							1.45,
-							1.45,
-							1.45,
-							1.45
-						]
+						"TickBaseDamage": [0, 6, 12, 18, 24, 30, 36],
+						"TickAPRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"ImpactBaseDamage": [-5, 9, 23, 37, 51, 65, 79],
+						"ImpactAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"PoisonDuration": [4, 4, 4, 4, 4, 4, 4],
+						"TickFrequency": [1, 1, 1, 1, 1, 1, 1],
+						"MonsterMod": [1.45, 1.45, 1.45, 1.45, 1.45, 1.45, 1.45]
 					},
 					"spellCalculations": {
 						"TickCalculatedDamage": {
@@ -331,141 +165,22 @@
 					"name": "Noxious Trap",
 					"image": "assets/characters/teemo/hud/icons2d/teemor.asu_teemo.png",
 					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).<br>",
-					"mana": [
-						75,
-						55,
-						35,
-						35,
-						35,
-						35
-					],
-					"cooldownTime": [
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25,
-						0.25
-					],
+					"mana": [75, 55, 35, 35, 35, 35],
+					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"dataValues": {
-						"TriggerRadius": [
-							160,
-							160,
-							160,
-							160,
-							160,
-							160,
-							160
-						],
-						"MaxAmmo": [
-							2,
-							3,
-							4,
-							5,
-							6,
-							7,
-							8
-						],
-						"MaxBounceDistance": [
-							360,
-							360,
-							440,
-							550,
-							550,
-							550,
-							550
-						],
-						"ArmTime": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MushroomDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BaseDamage": [
-							75,
-							200,
-							325,
-							450,
-							575,
-							700,
-							825
-						],
-						"SlowAmount": [
-							20,
-							30,
-							40,
-							50,
-							60,
-							70,
-							80
-						],
-						"DebuffDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"APRatioPerTick": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"ExplosionRadius": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						],
-						"MaxTraps": [
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000
-						],
-						"MinTossDistanceBounceThreshold": [
-							150,
-							220,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"VisionRadius": [
-							210,
-							210,
-							210,
-							210,
-							210,
-							210,
-							210
-						]
+						"TriggerRadius": [160, 160, 160, 160, 160, 160, 160],
+						"MaxAmmo": [2, 3, 4, 5, 6, 7, 8],
+						"MaxBounceDistance": [360, 360, 440, 550, 550, 550, 550],
+						"ArmTime": [1, 1, 1, 1, 1, 1, 1],
+						"MushroomDuration": [5, 5, 5, 5, 5, 5, 5],
+						"BaseDamage": [75, 200, 325, 450, 575, 700, 825],
+						"SlowAmount": [20, 30, 40, 50, 60, 70, 80],
+						"DebuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"APRatioPerTick": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"ExplosionRadius": [450, 450, 450, 450, 450, 450, 450],
+						"MaxTraps": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
+						"MinTossDistanceBounceThreshold": [150, 220, 500, 500, 500, 500, 500],
+						"VisionRadius": [210, 210, 210, 210, 210, 210, 210]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -494,24 +209,8 @@
 					"tooltip": "{{Buff_TeemoPassive_Tooltip}}",
 					"tooltipExtended": "{{Buff_TeemoPassive_Tooltip}}<br><br><rules>{{Reminder_Invisibility}}</rules>",
 					"dataValues": {
-						"AttackSpeedDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"StealthCooldownDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
+						"AttackSpeedDuration": [5, 5, 5, 5, 5, 5, 5],
+						"StealthCooldownDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
 					"spellCalculations": {
 						"BonusAttackSpeed": {

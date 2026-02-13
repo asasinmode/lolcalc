@@ -35,60 +35,13 @@
 					"name": "Rootcaller",
 					"image": "assets/characters/ivern/hud/icons2d/ivernq.png",
 					"tooltip": "Ivern conjures a vine dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Rooting</status> the first enemy hit for @RootDuration@ seconds. Allies that Attack a <status>Rooted</status> enemy dash into Attack Range. <br><br><recast>Recast:</recast> Ivern dashes directly onto the <status>Rooted</status> enemy.<br><br><rules>Hitting non-epic monsters reduces <spellName>{{ Spell_IvernQ_Name }}'s</spellName> cooldown by 50%.</rules>",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"cooldownTime": [
-						15,
-						14,
-						13,
-						12,
-						11,
-						10,
-						9
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
-						"DashSpeed": [
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500
-						],
-						"BaseDamage": [
-							35,
-							80,
-							125,
-							170,
-							215,
-							260,
-							305
-						],
-						"RootDuration": [
-							1.5,
-							1.6,
-							1.7,
-							1.8,
-							1.9,
-							2,
-							2.1
-						],
-						"APRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						]
+						"DashSpeed": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
+						"BaseDamage": [35, 80, 125, 170, 215, 260, 305],
+						"RootDuration": [1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1],
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -115,96 +68,17 @@
 					"name": "Brushmaker",
 					"image": "assets/characters/ivern/hud/icons2d/ivernw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds.",
-					"mana": [
-						30,
-						30,
-						30,
-						30,
-						30,
-						30
-					],
-					"cooldownTime": [
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5
-					],
+					"mana": [30, 30, 30, 30, 30, 30],
+					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
-						"BuffDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"AllyBuffDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"BaseDamage": [
-							12.5,
-							20,
-							27.5,
-							35,
-							42.5,
-							50,
-							57.5
-						],
-						"AllyBaseDamage": [
-							5,
-							10,
-							15,
-							20,
-							25,
-							30,
-							35
-						],
-						"RevealDuration": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"MaxBrushDuration": [
-							45,
-							45,
-							45,
-							45,
-							45,
-							45,
-							45
-						],
-						"BrushRadius": [
-							190,
-							190,
-							190,
-							190,
-							190,
-							190,
-							190
-						],
-						"BrushSpacing": [
-							90,
-							90,
-							90,
-							90,
-							90,
-							90,
-							90
-						]
+						"BuffDuration": [3, 3, 3, 3, 3, 3, 3],
+						"AllyBuffDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"BaseDamage": [12.5, 20, 27.5, 35, 42.5, 50, 57.5],
+						"AllyBaseDamage": [5, 10, 15, 20, 25, 30, 35],
+						"RevealDuration": [8, 8, 8, 8, 8, 8, 8],
+						"MaxBrushDuration": [45, 45, 45, 45, 45, 45, 45],
+						"BrushRadius": [190, 190, 190, 190, 190, 190, 190],
+						"BrushSpacing": [90, 90, 90, 90, 90, 90, 90]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -243,87 +117,16 @@
 					"name": "Triggerseed",
 					"image": "assets/characters/ivern/hud/icons2d/iverne.png",
 					"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds.",
-					"mana": [
-						70,
-						70,
-						70,
-						70,
-						70,
-						70
-					],
-					"cooldownTime": [
-						12,
-						11,
-						10,
-						9,
-						8,
-						7,
-						6
-					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
 					"dataValues": {
-						"BaseShield": [
-							35,
-							75,
-							115,
-							155,
-							195,
-							235,
-							275
-						],
-						"ShieldAPRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"BaseDamage": [
-							50,
-							70,
-							90,
-							110,
-							130,
-							150,
-							170
-						],
-						"DamageAPRatio": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"SlowAmount": [
-							0.35,
-							0.4,
-							0.45,
-							0.5,
-							0.55,
-							0.6,
-							0.65
-						],
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ShieldDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"BaseShield": [35, 75, 115, 155, 195, 235, 275],
+						"ShieldAPRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BaseDamage": [50, 70, 90, 110, 130, 150, 170],
+						"DamageAPRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"SlowAmount": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"ShieldDuration": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"TotalShield": {
@@ -362,114 +165,19 @@
 					"name": "Daisy!",
 					"image": "assets/characters/ivern/hud/icons2d/ivernr.png",
 					"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						150,
-						140,
-						130,
-						120,
-						110,
-						100,
-						90
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [150, 140, 130, 120, 110, 100, 90],
 					"dataValues": {
-						"SpawnBuffDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"MSOnSpawn": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						],
-						"DROnSpawn": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"DaisyAS": [
-							15,
-							30,
-							45,
-							60,
-							75,
-							90,
-							105
-						],
-						"DaisyAD": [
-							40,
-							70,
-							100,
-							130,
-							160,
-							190,
-							220
-						],
-						"DaisyAoeDR": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"DaisyDuration": [
-							45,
-							45,
-							45,
-							45,
-							45,
-							45,
-							45
-						],
-						"ShockwaveBaseDamage": [
-							40,
-							90,
-							140,
-							190,
-							240,
-							290,
-							340
-						],
-						"ShockwaveCCDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ShockwaveCD": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"SpawnBuffDuration": [5, 5, 5, 5, 5, 5, 5],
+						"MSOnSpawn": [40, 40, 40, 40, 40, 40, 40],
+						"DROnSpawn": [25, 25, 25, 25, 25, 25, 25],
+						"DaisyAS": [15, 30, 45, 60, 75, 90, 105],
+						"DaisyAD": [40, 70, 100, 130, 160, 190, 220],
+						"DaisyAoeDR": [25, 25, 25, 25, 25, 25, 25],
+						"DaisyDuration": [45, 45, 45, 45, 45, 45, 45],
+						"ShockwaveBaseDamage": [40, 90, 140, 190, 240, 290, 340],
+						"ShockwaveCCDuration": [1, 1, 1, 1, 1, 1, 1],
+						"ShockwaveCD": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"spellCalculations": {
 						"TotalBonusResists": {
@@ -546,51 +254,11 @@
 					"tooltip": "{{Spell_IvernP_Tooltip}}",
 					"tooltipExtended": "{{Spell_IvernP_Tooltip}}",
 					"dataValues": {
-						"LevelForBuffShare": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"PickupDuration": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"KrugExperience": [
-							58,
-							58,
-							58,
-							58,
-							58,
-							58,
-							58
-						],
-						"KrugGold": [
-							84,
-							84,
-							84,
-							84,
-							84,
-							84,
-							84
-						],
-						"ModeSpeedOverride": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"LevelForBuffShare": [5, 5, 5, 5, 5, 5, 5],
+						"PickupDuration": [60, 60, 60, 60, 60, 60, 60],
+						"KrugExperience": [58, 58, 58, 58, 58, 58, 58],
+						"KrugGold": [84, 84, 84, 84, 84, 84, 84],
+						"ModeSpeedOverride": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"HarvestDuration": {
@@ -657,15 +325,7 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							120,
-							120,
-							120,
-							120,
-							120,
-							120,
-							120
-						]
+						"0": [120, 120, 120, 120, 120, 120, 120]
 					},
 					"dataKey": "Characters/Ivern/Spells/IvernPAbility/IvernP"
 				}

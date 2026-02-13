@@ -35,105 +35,18 @@
 					"name": "Hymn of Valor",
 					"image": "assets/characters/sona/hud/icons2d/sona_q.png",
 					"tooltip": "Sona deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the nearest two enemies, prioritizing champions. She then begins a new <keywordMajor>Melody</keywordMajor>. Gain a stack of <keywordMajor>Accelerando</keywordMajor> for every champion you damage with this.<br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds, granting allied champions an additional <magicDamage>@TotalOnHitDamage@ magic damage</magicDamage> %i:OnHit% on their next Attack within @OnHitDuration@ seconds.<br><br><keywordMajor>Power Chord - Staccato:</keywordMajor> Power Chord bonus damage (<magicDamage>@TotalStaccatoDamage@ total magic damage</magicDamage>).",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						8,
-						8,
-						8,
-						8,
-						8,
-						8,
-						8
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
-						"BaseDamage": [
-							15,
-							50,
-							85,
-							120,
-							155,
-							190,
-							225
-						],
-						"BaseOnHitDamage": [
-							5,
-							10,
-							15,
-							20,
-							25,
-							30,
-							35
-						],
-						"AuraRange": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"OnHitDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"EnemiesToHit": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"AuraDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"BaseGlobalCD": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"OnHitProcs": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"OnHitRatio": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
+						"BaseDamage": [15, 50, 85, 120, 155, 190, 225],
+						"BaseOnHitDamage": [5, 10, 15, 20, 25, 30, 35],
+						"AuraRange": [400, 400, 400, 400, 400, 400, 400],
+						"OnHitDuration": [5, 5, 5, 5, 5, 5, 5],
+						"EnemiesToHit": [2, 2, 2, 2, 2, 2, 2],
+						"AuraDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BaseGlobalCD": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"OnHitProcs": [1, 1, 1, 1, 1, 1, 1],
+						"OnHitRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -191,114 +104,19 @@
 					"name": "Aria of Perseverance",
 					"image": "assets/characters/sona/hud/icons2d/sona_w.png",
 					"tooltip": "<spellPassive>Active:</spellPassive> Sona restores <healing>@TotalHeal@ Health</healing> to herself and a nearby allied champion, prioritizing the most wounded. She then begins a new <keywordMajor>Melody</keywordMajor>.<br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds, granting allied champions <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.<br><br>Gain a stack of <keywordMajor>Accelerando</keywordMajor> whenever you heal another injured ally and every time you protect another ally from at least @AccelerandoShieldBreakpoint@ damage with this shield.<br><br><keywordMajor>Power Chord - Diminuendo:</keywordMajor> Power Chord also reduces physical and magic damage dealt by the target by @TotalDiminuendoWeakenPercent@ for @DiminuendoDuration@ seconds.",
-					"mana": [
-						80,
-						85,
-						90,
-						95,
-						100,
-						105
-					],
+					"mana": [80, 85, 90, 95, 100, 105],
 					"dataValues": {
-						"BaseHeal": [
-							15,
-							30,
-							45,
-							60,
-							75,
-							90,
-							105
-						],
-						"BaseShield": [
-							5,
-							25,
-							45,
-							65,
-							85,
-							105,
-							125
-						],
-						"AuraDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"AuraRange": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"BaseGlobalCD": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"DiminuendoDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"HealRange": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"ShieldDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"AccelerandoShieldBreakpoint": [
-							5,
-							25,
-							45,
-							65,
-							85,
-							105,
-							125
-						],
-						"HealRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"ShieldRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"BaseHeal": [15, 30, 45, 60, 75, 90, 105],
+						"BaseShield": [5, 25, 45, 65, 85, 105, 125],
+						"AuraDuration": [3, 3, 3, 3, 3, 3, 3],
+						"AuraRange": [400, 400, 400, 400, 400, 400, 400],
+						"BaseGlobalCD": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DiminuendoDuration": [3, 3, 3, 3, 3, 3, 3],
+						"HealRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"ShieldDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"AccelerandoShieldBreakpoint": [5, 25, 45, 65, 85, 105, 125],
+						"HealRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"ShieldRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"TotalHeal": {
@@ -350,105 +168,18 @@
 					"name": "Song of Celerity",
 					"image": "assets/characters/sona/hud/icons2d/sona_e.png",
 					"tooltip": "<spellPassive>Active:</spellPassive> She begins a new <keywordMajor>Melody</keywordMajor> and grants herself <speed>@TotalSelfMovementSpeed@ Move Speed</speed> for @SelfMovementSpeedDurationMin@ seconds, extended to up to @SelfMovementSpeedDurationMax@ seconds if she doesn't take damage. <br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds that grants allied champions <speed>@TotalAllyMovementSpeed@ Move Speed</speed> for @AllyMovementSpeedDuration@ seconds.<br><br><keywordMajor>Power Chord - Tempo:</keywordMajor> Power Chord also <status>Slows</status> the target by @TotalTempoMoveSpeedSlow@ for @TempoDuration@ seconds.",
-					"mana": [
-						65,
-						65,
-						65,
-						65,
-						65,
-						65
-					],
-					"cooldownTime": [
-						14,
-						14,
-						14,
-						14,
-						14,
-						14,
-						14
-					],
+					"mana": [65, 65, 65, 65, 65, 65],
+					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
-						"SelfBaseMovementSpeed": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"AllyBaseMovementSpeed": [
-							0.08,
-							0.1,
-							0.12,
-							0.14,
-							0.16,
-							0.18,
-							0.2
-						],
-						"SelfMovementSpeedDurationMin": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"SelfMovementSpeedDurationMax": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"AllyMovementSpeedDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"AuraRange": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"AuraDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"BaseGlobalCD": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"TempoDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"SelfBaseMovementSpeed": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"AllyBaseMovementSpeed": [0.08, 0.1, 0.12, 0.14, 0.16, 0.18, 0.2],
+						"SelfMovementSpeedDurationMin": [3, 3, 3, 3, 3, 3, 3],
+						"SelfMovementSpeedDurationMax": [7, 7, 7, 7, 7, 7, 7],
+						"AllyMovementSpeedDuration": [3, 3, 3, 3, 3, 3, 3],
+						"AuraRange": [400, 400, 400, 400, 400, 400, 400],
+						"AuraDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BaseGlobalCD": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"TempoDuration": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"TotalSelfMovementSpeed": {
@@ -502,42 +233,11 @@
 					"name": "Crescendo",
 					"image": "assets/characters/sona/hud/icons2d/sona_r.png",
 					"tooltip": "Sona strikes an irresistible chord, <status>Stunning</status> enemy for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						140,
-						140,
-						120,
-						100,
-						100,
-						100,
-						100
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
-						"BaseDamage": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						],
-						"StunDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
+						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
+						"StunDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -565,51 +265,11 @@
 					"image": "assets/characters/sona/hud/icons2d/sona_passive_charged.png",
 					"tooltip": "<passive>Accelerando</passive>: Sona gains Accelerando stacks from using her Basic Abilities well. She gains +%i:scaleAH% @AccelerandoAHPerStack@ Basic Ability Haste permanently per stack, up to %i:scaleAH% @AccelerandoCap@ Basic Ability Haste. When she reaches %i:scaleAH% @AccelerandoCap@ Basic Ability Haste, instead of gaining further stacks her current <keywordMajor>Ultimate Ability's</keywordMajor> cooldown is reduced by @Spell.SonaPassive:AccelerandoUltCDR@ seconds.<br><br><passive>Power Chord</passive>: After using @PowerChordPassiveCountMax@ basic Abilities, Sona's next Attack deals an additional <magicDamage>@PowerChordDamage@ magic damage</magicDamage> and may have an additional effect based on the song Sona last activated.<br><li><spellName>Hymn of Valor:</spellName> The Attack deals <magicDamage>@Spell.SonaQ:TotalStaccatoDamage@ magic damage</magicDamage> instead.<li><spellName>Aria of Perseverance:</spellName> The target deals @Spell.SonaW:TotalDiminuendoWeakenPercent@ less damage for @Spell.SonaW:DiminuendoDuration@ seconds.<li><spellName>Song of Celerity:</spellName> The target is <status>Slowed</status> by @Spell.SonaE:TotalTempoMoveSpeedSlow@ for @Spell.SonaE:TempoDuration@ seconds.",
 					"dataValues": {
-						"TempoDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"PowerChordPassiveCountMax": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"AccelerandoAHPerStack": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"AccelerandoCap": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"AccelerandoUltCDR": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
+						"TempoDuration": [2, 2, 2, 2, 2, 2, 2],
+						"PowerChordPassiveCountMax": [3, 3, 3, 3, 3, 3, 3],
+						"AccelerandoAHPerStack": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"AccelerandoCap": [60, 60, 60, 60, 60, 60, 60],
+						"AccelerandoUltCDR": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
 					"spellCalculations": {
 						"PowerChordDamage": {

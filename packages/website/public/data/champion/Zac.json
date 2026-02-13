@@ -35,15 +35,7 @@
 					"name": "Stretching Strikes",
 					"image": "assets/characters/zac/hud/icons2d/zacq.png",
 					"tooltip": "Zac stretches his arm out, attaching it to the first enemy hit to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and briefly <status>Slow</status> them. Zac's next Attack gains increased range and applies the same damage and <status>Slow</status>. <br><br>If Zac hits a <i>different</i> enemy with this Attack, he <status>Knocks Up</status> both towards each other. If they collide, they and surrounding enemies take <magicDamage>@TotalDamage@ magic damage</magicDamage> and are briefly <status>Slowed</status>.",
-					"cooldownTime": [
-						14,
-						14,
-						12.5,
-						11,
-						9.5,
-						8,
-						8
-					],
+					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
@@ -99,96 +91,16 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							25,
-							40,
-							55,
-							70,
-							85,
-							100,
-							100
-						],
-						"1": [
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08
-						],
-						"2": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"3": [
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4
-						],
-						"4": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"5": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"6": [
-							900,
-							900,
-							900,
-							900,
-							900,
-							900,
-							900
-						],
-						"7": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						],
-						"8": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"9": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						]
+						"0": [25, 40, 55, 70, 85, 100, 100],
+						"1": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"2": [800, 800, 800, 800, 800, 800, 800],
+						"3": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, -0.4],
+						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"5": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"6": [900, 900, 900, 900, 900, 900, 900],
+						"7": [700, 700, 700, 700, 700, 700, 700],
+						"8": [300, 300, 300, 300, 300, 300, 300],
+						"9": [300, 300, 300, 300, 300, 300, 300]
 					},
 					"dataKey": "Characters/Zac/Spells/ZacQAbility/ZacQ"
 				}
@@ -201,52 +113,12 @@
 					"name": "Unstable Matter",
 					"image": "assets/characters/zac/hud/icons2d/zacw.png",
 					"tooltip": "Zac's body erupts, dealing <magicDamage>@BaseDamage@ + @DisplayPercentDamage@ max Health magic damage</magicDamage> to nearby enemies.<br><br>Absorbing <keywordMajor>Goo</keywordMajor> reduces this Ability's Cooldown by 1 second.",
-					"cooldownTime": [
-						5,
-						5,
-						5,
-						5,
-						5,
-						5,
-						5
-					],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"APRatioToPercentDamage": [
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03,
-							0.03
-						],
-						"BaseMaxHealthDamage": [
-							0.03,
-							0.04,
-							0.05,
-							0.06,
-							0.07,
-							0.08,
-							0.09
-						],
-						"HealthPercentTooltip": [
-							3,
-							4,
-							5,
-							6,
-							7,
-							8,
-							9
-						]
+						"BaseDamage": [30, 40, 50, 60, 70, 80, 90],
+						"APRatioToPercentDamage": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03],
+						"BaseMaxHealthDamage": [0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
+						"HealthPercentTooltip": [3, 4, 5, 6, 7, 8, 9]
 					},
 					"spellCalculations": {
 						"DisplayPercentDamage": {
@@ -291,51 +163,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							40,
-							40,
-							50,
-							60,
-							70,
-							80,
-							80
-						],
-						"1": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						],
-						"2": [
-							0.04,
-							0.04,
-							0.05,
-							0.06,
-							0.07,
-							0.08,
-							0.09
-						],
-						"3": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"4": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						]
+						"0": [40, 40, 50, 60, 70, 80, 80],
+						"1": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+						"2": [0.04, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09],
+						"3": [1, 1, 1, 1, 1, 1, 1],
+						"4": [200, 200, 200, 200, 200, 200, 200]
 					},
 					"dataKey": "Characters/Zac/Spells/ZacWAbility/ZacW"
 				}
@@ -348,15 +180,7 @@
 					"name": "Elastic Slingshot",
 					"image": "assets/characters/zac/hud/icons2d/zace.png",
 					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
-					"cooldownTime": [
-						25,
-						22,
-						19,
-						16,
-						13,
-						10,
-						10
-					],
+					"cooldownTime": [25, 22, 19, 16, 13, 10, 10],
 					"spellCalculations": {
 						"MaxStun": {
 							"mExpandedTooltipCalculationDisplay": 5,
@@ -408,96 +232,16 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							60,
-							60,
-							105,
-							150,
-							195,
-							240,
-							240
-						],
-						"1": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						],
-						"2": [
-							1050,
-							1200,
-							1350,
-							1500,
-							1650,
-							1800,
-							1950
-						],
-						"3": [
-							0.8,
-							0.9,
-							1,
-							1.1,
-							1.2,
-							1.3,
-							1.4
-						],
-						"4": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"5": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"6": [
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350,
-							1350
-						],
-						"7": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"8": [
-							265,
-							265,
-							265,
-							265,
-							265,
-							265,
-							265
-						],
-						"9": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"0": [60, 60, 105, 150, 195, 240, 240],
+						"1": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+						"2": [1050, 1200, 1350, 1500, 1650, 1800, 1950],
+						"3": [0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4],
+						"4": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"5": [500, 500, 500, 500, 500, 500, 500],
+						"6": [1350, 1350, 1350, 1350, 1350, 1350, 1350],
+						"7": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"8": [265, 265, 265, 265, 265, 265, 265],
+						"9": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"dataKey": "Characters/Zac/Spells/ZacEAbility/ZacE"
 				}
@@ -510,124 +254,20 @@
 					"name": "Let's Bounce!",
 					"image": "assets/characters/zac/hud/icons2d/zacr.png",
 					"tooltip": "Zac bounces @Bounces@ times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>@DamagePerBounce@ magic damage</magicDamage>. Subsequent bounces deal <magicDamage>@DamagePerSubsequentBounce@ magic damage</magicDamage> and <status>Slow</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>Zac gains up to <speed>@EndingMS*100@% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing.",
-					"cooldownTime": [
-						120,
-						120,
-						105,
-						90,
-						90,
-						90,
-						90
-					],
+					"cooldownTime": [120, 120, 105, 90, 90, 90, 90],
 					"dataValues": {
-						"Bounces": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"TimeBetweenBounces": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"KnockupDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"BaseDamageBounce": [
-							70,
-							140,
-							210,
-							280,
-							350,
-							420,
-							490
-						],
-						"DamageReductionBounce": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"KnockbackDistance": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"KnockbackRange": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"BeginningMS": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"EndingMS": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"SlowAmount": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"SlowDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"BounceAPRatioTooltip": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
+						"Bounces": [4, 4, 4, 4, 4, 4, 4],
+						"TimeBetweenBounces": [1, 1, 1, 1, 1, 1, 1],
+						"KnockupDuration": [1, 1, 1, 1, 1, 1, 1],
+						"BaseDamageBounce": [70, 140, 210, 280, 350, 420, 490],
+						"DamageReductionBounce": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"KnockbackDistance": [250, 250, 250, 250, 250, 250, 250],
+						"KnockbackRange": [300, 300, 300, 300, 300, 300, 300],
+						"BeginningMS": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"EndingMS": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SlowAmount": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
+						"BounceAPRatioTooltip": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
 					},
 					"spellCalculations": {
 						"DamagePerBounce": {
@@ -714,96 +354,16 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							150,
-							150,
-							250,
-							350,
-							350,
-							350,
-							350
-						],
-						"1": [
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1
-						],
-						"2": [
-							700,
-							700,
-							850,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"3": [
-							-0.3,
-							-0.3,
-							-0.4,
-							-0.5,
-							-0.5,
-							-0.5,
-							-0.5
-						],
-						"4": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"5": [
-							275,
-							275,
-							275,
-							275,
-							275,
-							275,
-							275
-						],
-						"6": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"7": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"8": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"9": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
+						"0": [150, 150, 250, 350, 350, 350, 350],
+						"1": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"2": [700, 700, 850, 1000, 1000, 1000, 1000],
+						"3": [-0.3, -0.3, -0.4, -0.5, -0.5, -0.5, -0.5],
+						"4": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"5": [275, 275, 275, 275, 275, 275, 275],
+						"6": [300, 300, 300, 300, 300, 300, 300],
+						"7": [1, 1, 1, 1, 1, 1, 1],
+						"8": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"9": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"dataKey": "Characters/Zac/Spells/ZacRAbility/ZacR"
 				}
@@ -817,25 +377,9 @@
 					"image": "assets/characters/zac/hud/icons2d/zacpassive.png",
 					"tooltip": "{{Spell_ZacPassiveChunkDrop_Tooltip}}",
 					"tooltipExtended": "{{Spell_ZacPassiveChunkDrop_Tooltip}}<br><br><rules>Each bloblet has 12% of Zac's max <healing>Health</healing>, and 50% of his <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.</rules>",
-					"cooldownTime": [
-						300,
-						300,
-						300,
-						300,
-						300,
-						300,
-						300
-					],
+					"cooldownTime": [300, 300, 300, 300, 300, 300, 300],
 					"dataValues": {
-						"ReviveCooldown": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						]
+						"ReviveCooldown": [300, 300, 300, 300, 300, 300, 300]
 					},
 					"spellCalculations": {
 						"HealPercent": {

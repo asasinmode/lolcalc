@@ -35,69 +35,14 @@
 					"name": "Death's Hand",
 					"image": "assets/characters/swain/hud/icons2d/swain_q.png",
 					"tooltip": "Swain unleashes 5 eldritch bolts, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> plus <magicDamage>@ExtraBoltDamage@ magic damage</magicDamage> per bolt past the first (max <magicDamage>@MaxDamage@ magic damage</magicDamage>).",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						60
-					],
-					"cooldownTime": [
-						7,
-						7,
-						6,
-						5,
-						4,
-						3,
-						3
-					],
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"FirstBoltAPRatio": [
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45
-						],
-						"ExtraBoltRatio": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"BoundaryCheckRange": [
-							725,
-							725,
-							725,
-							725,
-							725,
-							725,
-							725
-						],
-						"MaxDamageMultiTOOLTIP": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"FirstBoltAPRatio": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45],
+						"ExtraBoltRatio": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"BoundaryCheckRange": [725, 725, 725, 725, 725, 725, 725],
+						"MaxDamageMultiTOOLTIP": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"InitialDamage": {
@@ -136,96 +81,17 @@
 					"name": "Vision of Empire",
 					"image": "assets/characters/swain/hud/icons2d/swain_w.png",
 					"tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds.<br><br>Champions hit grant Swain a <font color='#FF3F3F' size='18'>Soul Fragment</font> and are revealed for @RevealDuration@ seconds.",
-					"mana": [
-						60,
-						65,
-						70,
-						75,
-						80,
-						80
-					],
-					"cooldownTime": [
-						22,
-						22,
-						21,
-						20,
-						19,
-						18,
-						18
-					],
+					"mana": [60, 65, 70, 75, 80, 80],
+					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"dataValues": {
-						"BaseDamage": [
-							35,
-							70,
-							105,
-							140,
-							175,
-							210,
-							245
-						],
-						"APRatio": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"MinionMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"Slow": [
-							-0.45,
-							-0.5,
-							-0.55,
-							-0.6,
-							-0.65,
-							-0.7,
-							-0.75
-						],
-						"SlowDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"RevealDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"EffectRadius": [
-							325,
-							325,
-							325,
-							325,
-							325,
-							325,
-							325
-						],
-						"VisionRadius": [
-							420,
-							420,
-							420,
-							420,
-							420,
-							420,
-							420
-						]
+						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"MinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Slow": [-0.45, -0.5, -0.55, -0.6, -0.65, -0.7, -0.75],
+						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"RevealDuration": [6, 6, 6, 6, 6, 6, 6],
+						"EffectRadius": [325, 325, 325, 325, 325, 325, 325],
+						"VisionRadius": [420, 420, 420, 420, 420, 420, 420]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -258,78 +124,15 @@
 					"name": "Nevermove",
 					"image": "assets/characters/swain/hud/icons2d/swain_e.png",
 					"tooltip": "Swain launches a wave of demonic power that returns, detonating on the first enemy hit to deal <magicDamage>@SecondaryDamage@ magic damage</magicDamage> and <status>Root</status> enemies in the area for @RootDuration@ seconds.<br><br><status>Rooting</status> a champion allows Swain to reactivate this ability to pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him, gaining a <font color='#FF3F3F' size='18'>Soul Fragment</font> for each.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						70
-					],
-					"cooldownTime": [
-						12,
-						12,
-						11.5,
-						11,
-						10.5,
-						10,
-						10
-					],
+					"mana": [50, 55, 60, 65, 70, 70],
+					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"dataValues": {
-						"E2Damage": [
-							50,
-							90,
-							130,
-							170,
-							210,
-							250,
-							290
-						],
-						"E2Ratio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"RootDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"PullDistance": [
-							290,
-							290,
-							290,
-							290,
-							290,
-							290,
-							290
-						],
-						"CooldownRefund": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"ExplosionRadius": [
-							205,
-							205,
-							205,
-							205,
-							205,
-							205,
-							205
-						]
+						"E2Damage": [50, 90, 130, 170, 210, 250, 290],
+						"E2Ratio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"RootDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"PullDistance": [290, 290, 290, 290, 290, 290, 290],
+						"CooldownRefund": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"ExplosionRadius": [205, 205, 205, 205, 205, 205, 205]
 					},
 					"spellCalculations": {
 						"SecondaryDamage": {
@@ -356,195 +159,28 @@
 					"name": "Demonic Ascension",
 					"image": "assets/characters/swain/hud/icons2d/swain_r.png",
 					"tooltip": "Swain frees the demon, which deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and drains <healing>@HealingCalc@ Health</healing> per second from nearby enemies. His Demonic Energy depletes over time but can be recharged indefinitely by draining enemy Champions and is fully restored on Champion takedowns.<br><br>After @DemonflareCastDelay@ seconds and every @DemonflareCooldownTooltip@ seconds thereafter, Swain can cast <spellName>Demonflare</spellName> while transformed, which deals <magicDamage>@DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slows</status> enemies by @DemonflareSlowAmount*100@%, decaying over @DemonflareSlowDuration@s.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						120,
-						120,
-						120,
-						120,
-						120,
-						120,
-						120
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"dataValues": {
-						"DamagePerSecond": [
-							5,
-							15,
-							25,
-							35,
-							45,
-							55,
-							65
-						],
-						"DamageAPRatio": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"HealPerSecond": [
-							0,
-							15,
-							30,
-							45,
-							60,
-							75,
-							90
-						],
-						"HealAPRatio": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"HealHPRatio": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
-						],
-						"MinionMonsterHealReduction": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"DemonPowerMax": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"DemonPowerDegen": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"DemonPowerRegen": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"DemonflareDamageBase": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						],
-						"DemonflareDamageRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"DemonflareSlowAmount": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"DemonflareSlowDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"AmpTime": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"DegenAmpAmount": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"DemonflareCastDelay": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"MaxDemonflareCast": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"TimeBetweenTicks": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"DemonflareCooldownTooltip": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						]
+						"DamagePerSecond": [5, 15, 25, 35, 45, 55, 65],
+						"DamageAPRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"HealPerSecond": [0, 15, 30, 45, 60, 75, 90],
+						"HealAPRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"HealHPRatio": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
+						"MinionMonsterHealReduction": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"DemonPowerMax": [50, 50, 50, 50, 50, 50, 50],
+						"DemonPowerDegen": [10, 10, 10, 10, 10, 10, 10],
+						"DemonPowerRegen": [20, 20, 20, 20, 20, 20, 20],
+						"DemonflareDamageBase": [50, 150, 250, 350, 450, 550, 650],
+						"DemonflareDamageRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DemonflareSlowAmount": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"DemonflareSlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"AmpTime": [5, 5, 5, 5, 5, 5, 5],
+						"DegenAmpAmount": [15, 15, 15, 15, 15, 15, 15],
+						"DemonflareCastDelay": [2, 2, 2, 2, 2, 2, 2],
+						"MaxDemonflareCast": [100, 100, 100, 100, 100, 100, 100],
+						"TimeBetweenTicks": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DemonflareCooldownTooltip": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"spellCalculations": {
 						"DamageCalc": {
@@ -608,24 +244,8 @@
 					"image": "assets/characters/swain/hud/icons2d/swain_p.png",
 					"tooltip": "Swain collects <font color='#FF3F3F' size='18'>Soul Fragments</font> from <spellName>Vision of Empire</spellName>, <spellName>Nevermove</spellName>, and enemy champion deaths. <font color='#FF3F3F' size='18'>Soul Fragments</font> restore<healing> @PassiveHealPercent@ maximum Health</healing> and permanently grant Swain <healing>@HealthIncrement@ max Health</healing>.<br><br>Soul Fragments collected: @f1@<br>Total Health gained: <scaleHealth>@MaxHealthGained@</scaleHealth>",
 					"dataValues": {
-						"SoulCollectionRange": [
-							1100,
-							1100,
-							1100,
-							1100,
-							1100,
-							1100,
-							1100
-						],
-						"HealthIncrement": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						]
+						"SoulCollectionRange": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
+						"HealthIncrement": [15, 15, 15, 15, 15, 15, 15]
 					},
 					"spellCalculations": {
 						"PassiveHealPercent": {

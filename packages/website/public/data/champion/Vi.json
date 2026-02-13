@@ -35,114 +35,19 @@
 					"name": "Vault Breaker",
 					"image": "assets/characters/vi/hud/icons2d/viq.png",
 					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @Effect4Amount@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
-					"mana": [
-						50,
-						60,
-						70,
-						80,
-						90,
-						80
-					],
-					"cooldownTime": [
-						12,
-						12,
-						10.5,
-						9,
-						7.5,
-						6,
-						6
-					],
+					"mana": [50, 60, 70, 80, 90, 80],
+					"cooldownTime": [12, 12, 10.5, 9, 7.5, 6, 6],
 					"dataValues": {
-						"KnockbackDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"MinDamage": [
-							20,
-							40,
-							60,
-							80,
-							100,
-							120,
-							140
-						],
-						"MaxDamageMult": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"MinionDamageMult": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MinDashRange": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"ExtraDashRangeAtMaxCharge": [
-							475,
-							475,
-							475,
-							475,
-							475,
-							475,
-							475
-						],
-						"DashWallCheating": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"ADRatio": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"CanceledRefundTime": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"ManaRefundPercent": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"KnockbackDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"MinDamage": [20, 40, 60, 80, 100, 120, 140],
+						"MaxDamageMult": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"MinionDamageMult": [1, 1, 1, 1, 1, 1, 1],
+						"MinDashRange": [250, 250, 250, 250, 250, 250, 250],
+						"ExtraDashRangeAtMaxCharge": [475, 475, 475, 475, 475, 475, 475],
+						"DashWallCheating": [50, 50, 50, 50, 50, 50, 50],
+						"ADRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"CanceledRefundTime": [3, 3, 3, 3, 3, 3, 3],
+						"ManaRefundPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -167,33 +72,9 @@
 						}
 					},
 					"effectAmount": {
-						"3": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"4": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"5": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
+						"3": [15, 15, 15, 15, 15, 15, 15],
+						"4": [6, 6, 6, 6, 6, 6, 6],
+						"5": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"dataKey": "Characters/Vi/Spells/ViQAbility/ViQ"
 				}
@@ -206,88 +87,16 @@
 					"name": "Denting Blows",
 					"image": "assets/characters/vi/hud/icons2d/viw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every 3rd Attack on the same target deals an additional <physicalDamage>@TotalDamageTooltip@ max Health physical damage</physicalDamage>, removes <scaleArmor>@ShredAmount@% Armor</scaleArmor> and grants Vi <attackSpeed>@AttackSpeed@% Attack Speed</attackSpeed> for @SharedBuffsDuration@ seconds. It also reduces the remaining Cooldown of <spellName>Blast Shield</spellName> by @spell.ViPassive:CDReductionOn3Hit@ seconds.",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"ADCoefficient": [
-							0.035,
-							0.035,
-							0.035,
-							0.035,
-							0.035,
-							0.035,
-							0.035
-						],
-						"MaxHealthDamage": [
-							3,
-							4,
-							5,
-							6,
-							7,
-							8,
-							9
-						],
-						"SharedBuffsDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AttackSpeed": [
-							25,
-							30,
-							35,
-							40,
-							45,
-							50,
-							55
-						],
-						"ShredAmount": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"MonsterDamageCap": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"MarkerBuffDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"StacksBeforeEffect": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"ADCoefficient": [0.035, 0.035, 0.035, 0.035, 0.035, 0.035, 0.035],
+						"MaxHealthDamage": [3, 4, 5, 6, 7, 8, 9],
+						"SharedBuffsDuration": [4, 4, 4, 4, 4, 4, 4],
+						"AttackSpeed": [25, 30, 35, 40, 45, 50, 55],
+						"ShredAmount": [20, 20, 20, 20, 20, 20, 20],
+						"MonsterDamageCap": [300, 300, 300, 300, 300, 300, 300],
+						"MarkerBuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"StacksBeforeEffect": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
@@ -320,42 +129,11 @@
 					"name": "Relentless Force",
 					"image": "assets/characters/vi/hud/icons2d/vie.png",
 					"tooltip": "Vi's next Attack deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to the target and enemies behind them.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
-					"mana": [
-						26,
-						32,
-						38,
-						44,
-						50,
-						50
-					],
-					"cooldownTime": [
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1
-					],
+					"mana": [26, 32, 38, 44, 50, 50],
+					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"dataValues": {
-						"ADRatio": [
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1
-						],
-						"BaseDamage": [
-							-10,
-							10,
-							30,
-							50,
-							70,
-							90,
-							110
-						]
+						"ADRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"BaseDamage": [-10, 10, 30, 50, 70, 90, 110]
 					},
 					"spellCalculations": {
 						"TotalDamageTooltip": {
@@ -390,42 +168,10 @@
 						}
 					},
 					"effectAmount": {
-						"2": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"3": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"4": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"5": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"2": [50, 50, 50, 50, 50, 50, 50],
+						"3": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"4": [6, 6, 6, 6, 6, 6, 6],
+						"5": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"dataKey": "Characters/Vi/Spells/ViEAbility/ViE"
 				}
@@ -438,96 +184,17 @@
 					"name": "Cease and Desist",
 					"image": "assets/characters/vi/hud/icons2d/vir.png",
 					"tooltip": "Vi singles out an enemy champion, revealing them and dashing unstoppably towards them. Upon reaching them, Vi <status>Knocks</status> them <status>Up</status> for @RStunDuration@ seconds and deals <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Any other enemies Vi collides with are dealt damage, knocked aside, and <status>Stunned</status> for @SecondaryTargetStunDuration@ seconds.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						140,
-						140,
-						115,
-						90,
-						90,
-						90,
-						90
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [140, 140, 115, 90, 90, 90, 90],
 					"dataValues": {
-						"RBaseSpeed": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"RStunDuration": [
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3
-						],
-						"RBaseDamage": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						],
-						"SecondaryTargetDamageMultiplier": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"SecondaryTargetKnockbackDistance": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"SecondaryTargetStunDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"SecondaryTargetKnockbackDuration": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"RBonusADRatio": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						]
+						"RBaseSpeed": [800, 800, 800, 800, 800, 800, 800],
+						"RStunDuration": [1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3],
+						"RBaseDamage": [50, 150, 250, 350, 450, 550, 650],
+						"SecondaryTargetDamageMultiplier": [1, 1, 1, 1, 1, 1, 1],
+						"SecondaryTargetKnockbackDistance": [350, 350, 350, 350, 350, 350, 350],
+						"SecondaryTargetStunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"SecondaryTargetKnockbackDuration": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"RBonusADRatio": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -564,24 +231,8 @@
 					"tooltip": "{{Spell_ViPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViPassive_Tooltip}}<br><br><rules>This Ability has a @ShieldCooldown@ second Cooldown, reduced by @CDReductionOn3Hit@ seconds when Vi triggers <spellName>Denting Blows</spellName>.</rules>",
 					"dataValues": {
-						"ShieldDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"CDReductionOn3Hit": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"ShieldDuration": [3, 3, 3, 3, 3, 3, 3],
+						"CDReductionOn3Hit": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"TotalShield": {

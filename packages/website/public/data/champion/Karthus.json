@@ -35,51 +35,12 @@
 					"name": "Lay Waste",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_q.png",
 					"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>.",
-					"mana": [
-						20,
-						25,
-						30,
-						35,
-						40,
-						45
-					],
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"mana": [20, 25, 30, 35, 40, 45],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"MonsterMod": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"BaseDamage": [
-							21,
-							40,
-							59,
-							78,
-							97,
-							116,
-							135
-						],
-						"APRatio": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						]
+						"MonsterMod": [1, 1, 1, 1, 1, 1, 1],
+						"BaseDamage": [21, 40, 59, 78, 97, 116, 135],
+						"APRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
 					},
 					"spellCalculations": {
 						"QDamage": {
@@ -103,15 +64,7 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							45,
-							45,
-							65,
-							85,
-							105,
-							125,
-							145
-						]
+						"0": [45, 45, 65, 85, 105, 125, 145]
 					},
 					"dataKey": "Characters/Karthus/Spells/KarthusLayWasteA1Ability/KarthusLayWasteA1"
 				}
@@ -124,69 +77,14 @@
 					"name": "Wall of Pain",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_w.png",
 					"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration.",
-					"mana": [
-						70,
-						70,
-						70,
-						70,
-						70,
-						70
-					],
-					"cooldownTime": [
-						15,
-						15,
-						15,
-						15,
-						15,
-						15,
-						15
-					],
+					"mana": [70, 70, 70, 70, 70, 70],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"effectAmount": {
-						"0": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"1": [
-							700,
-							800,
-							900,
-							1000,
-							1100,
-							1200,
-							1300
-						],
-						"2": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"3": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"4": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
+						"0": [25, 25, 25, 25, 25, 25, 25],
+						"1": [700, 800, 900, 1000, 1100, 1200, 1300],
+						"2": [30, 40, 50, 60, 70, 80, 90],
+						"3": [5, 5, 5, 5, 5, 5, 5],
+						"4": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"dataKey": "Characters/Karthus/Spells/KarthusWallOfPainAbility/KarthusWallOfPain"
 				}
@@ -199,51 +97,12 @@
 					"name": "Defile",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
-					"mana": [
-						30,
-						42,
-						54,
-						66,
-						78,
-						90
-					],
-					"cooldownTime": [
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5,
-						0.5
-					],
+					"mana": [30, 42, 54, 66, 78, 90],
+					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
-						"DamagePerSecond": [
-							10,
-							30,
-							50,
-							70,
-							90,
-							110,
-							130
-						],
-						"APRatioPerSecond": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"ManaRestoreOnKill": [
-							0,
-							10,
-							20,
-							30,
-							40,
-							50,
-							60
-						]
+						"DamagePerSecond": [10, 30, 50, 70, 90, 110, 130],
+						"APRatioPerSecond": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"ManaRestoreOnKill": [0, 10, 20, 30, 40, 50, 60]
 					},
 					"spellCalculations": {
 						"TotalDPS": {
@@ -266,33 +125,9 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							10,
-							30,
-							50,
-							70,
-							90,
-							110,
-							130
-						],
-						"1": [
-							0,
-							10,
-							20,
-							30,
-							40,
-							50,
-							60
-						],
-						"2": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"0": [10, 30, 50, 70, 90, 110, 130],
+						"1": [0, 10, 20, 30, 40, 50, 60],
+						"2": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"dataKey": "Characters/Karthus/Spells/KarthusDefileAbility/KarthusDefile"
 				}
@@ -305,42 +140,11 @@
 					"name": "Requiem",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_r.png",
 					"tooltip": "Karthus channels for 3 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemy champions, regardless of distance.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						200,
-						200,
-						180,
-						160,
-						180,
-						180,
-						200
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [200, 200, 180, 160, 180, 180, 200],
 					"dataValues": {
-						"BaseDamage": [
-							50,
-							200,
-							350,
-							500,
-							650,
-							800,
-							950
-						],
-						"APRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						]
+						"BaseDamage": [50, 200, 350, 500, 650, 800, 950],
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -368,15 +172,7 @@
 					"image": "assets/characters/karthus/hud/icons2d/karthus_passive.png",
 					"tooltip": "When Karthus dies he can use his Abilities for free for @PassiveDuration@ seconds.",
 					"dataValues": {
-						"PassiveDuration": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						]
+						"PassiveDuration": [7, 7, 7, 7, 7, 7, 7]
 					},
 					"dataKey": "Characters/Karthus/Spells/KarthusDeathDefiedAbility/KarthusDeathDefied"
 				}

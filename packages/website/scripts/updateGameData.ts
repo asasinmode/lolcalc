@@ -118,7 +118,7 @@ if (true || !championData || championData?.version !== latestVersion) {
 						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, championFileData.abilities));
 					}
 
-					await championFile.write(JSON.stringify(championFileData, null, '\t'));
+					await championFile.write(stringifyObject(championFileData));
 
 					return [championId, {
 						id,
@@ -144,7 +144,7 @@ if (true || !championData || championData?.version !== latestVersion) {
 		}
 	}
 
-	await championFile.write(JSON.stringify(championData, null, '\t'));
+	await championFile.write(stringifyObject(championData));
 }
 
 const itemFile = Bun.file(`${import.meta.dir}/../app/assets/item.json`);
@@ -368,9 +368,9 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			}), {} as Partial<Record<IItemCategory, boolean>>);
 	}
 
-	await itemFile.write(JSON.stringify(itemData, null, '\t'));
+	await itemFile.write(stringifyObject(itemData));
 
-	await textFile.write(JSON.stringify(textData, null, '\t'));
+	await textFile.write(stringifyObject(textData));
 }
 
 const runeFile = Bun.file(`${import.meta.dir}/../app/assets/rune.json`);
@@ -458,8 +458,8 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 		} as unknown as NonNullable<(typeof runeData)>['data'],
 	};
 
-	await runeFile.write(JSON.stringify(runeData, null, '\t'));
-	await textFile.write(JSON.stringify(textData, null, '\t'));
+	await runeFile.write(stringifyObject(runeData));
+	await textFile.write(stringifyObject(textData));
 }
 
 const uiFile = Bun.file(`${import.meta.dir}/../app/assets/ui.json`);
@@ -609,7 +609,7 @@ if (!uiData || uiData?.version !== latestVersion) {
 		} as unknown as NonNullable<(typeof uiData)>['data'],
 	};
 
-	await uiFile.write(JSON.stringify(uiData, null, '\t'));
+	await uiFile.write(stringifyObject(uiData));
 }
 
 for (const category in debug) {
@@ -1102,10 +1102,19 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 	}
 	if (!data) {
 		data = await fetch(url).then(r => r[responseMethod]());
-		await cacheFile.write(responseMethod === 'json' ? JSON.stringify(data, null, '\t') : data);
+		await cacheFile.write(responseMethod === 'json' ? stringifyObject(data) : data);
 	}
 	cacheHits[filename] = data;
 	return data;
+}
+
+function stringifyObject(obj: object) {
+	const json = JSON.stringify(obj, (_k, v) =>
+		Array.isArray(v) && v.every(item => typeof item === 'number')
+			? `__ARRAY__[${v.join(', ')}]__ARRAY__`
+			: v, '\t');
+
+	return json.replace(/"__ARRAY__(.*?)__ARRAY__"/g, '$1');
 }
 
 function hashRuneVariable(variable: string) {

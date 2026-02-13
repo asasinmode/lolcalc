@@ -35,42 +35,11 @@
 					"name": "Jaws of the Beast",
 					"image": "assets/characters/warwick/hud/icons2d/warwickq.png",
 					"tooltip": "<tap>Tap:</tap> Warwick lunges forward and bites, dealing <magicDamage>@BaseBiteDamage@ plus @TargetPercentHPDamage@% max Health magic damage</magicDamage> and <healing>healing for @Effect3Amount@% of the damage dealt</healing>.<br><br><hold>Hold:</hold> Warwick lunges and clamps his jaws on the target, leaping behind them. While clamped, Warwick follows all movement of the target. After releasing his hold, he does the same damage and healing.",
-					"mana": [
-						80,
-						85,
-						90,
-						95,
-						100,
-						100
-					],
-					"cooldownTime": [
-						8,
-						8,
-						7.5,
-						7,
-						6.5,
-						6,
-						6
-					],
+					"mana": [80, 85, 90, 95, 100, 100],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
-						"TargetPercentHPDamage": [
-							5,
-							6,
-							7,
-							8,
-							9,
-							10,
-							11
-						],
-						"ADRatio": [
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2,
-							1.2
-						]
+						"TargetPercentHPDamage": [5, 6, 7, 8, 9, 10, 11],
+						"ADRatio": [1.2, 1.2, 1.2, 1.2, 1.2, 1.2, 1.2]
 					},
 					"spellCalculations": {
 						"BaseBiteDamage": {
@@ -89,69 +58,13 @@
 						}
 					},
 					"effectAmount": {
-						"1": [
-							50,
-							100,
-							150,
-							200,
-							250,
-							300,
-							350
-						],
-						"2": [
-							25,
-							25,
-							37.5,
-							50,
-							62.5,
-							75,
-							75
-						],
-						"3": [
-							135,
-							150,
-							165,
-							180,
-							195,
-							210,
-							225
-						],
-						"4": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						],
-						"5": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"6": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"7": [
-							425,
-							425,
-							425,
-							425,
-							425,
-							425,
-							425
-						]
+						"1": [50, 100, 150, 200, 250, 300, 350],
+						"2": [25, 25, 37.5, 50, 62.5, 75, 75],
+						"3": [135, 150, 165, 180, 195, 210, 225],
+						"4": [450, 450, 450, 450, 450, 450, 450],
+						"5": [200, 200, 200, 200, 200, 200, 200],
+						"6": [300, 300, 300, 300, 300, 300, 300],
+						"7": [425, 425, 425, 425, 425, 425, 425]
 					},
 					"dataKey": "Characters/Warwick/Spells/WarwickQAbility/WarwickQ"
 				}
@@ -164,152 +77,25 @@
 					"name": "Blood Hunt",
 					"image": "assets/characters/warwick/hud/icons2d/warwickw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Warwick can sense champions below 50% Health, gaining <speed>@PassiveMSBonus@% Move Speed</speed> towards them. Spells and attacks against enemies below 50% Health grant <speed>@PassiveASBonus@% Attack Speed</speed>. These effects are increased by 200% against enemies below 25% Health. <br><br><spellActive>Active:</spellActive> Warwick can briefly sense all enemies, and gains this Ability's passive effect against the closest champion for 8 seconds, regardless of Health. If no champions are found, this Ability's cooldown is reduced by 30%.",
-					"mana": [
-						55,
-						55,
-						55,
-						55,
-						55,
-						55
-					],
-					"cooldownTime": [
-						80,
-						80,
-						70,
-						60,
-						50,
-						40,
-						40
-					],
+					"mana": [55, 55, 55, 55, 55, 55],
+					"cooldownTime": [80, 80, 70, 60, 50, 40, 40],
 					"dataValues": {
-						"PassiveASBonus": [
-							60,
-							70,
-							80,
-							90,
-							100,
-							110,
-							120
-						],
-						"Duration": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"MoveSpeedBonus": [
-							10,
-							15,
-							20,
-							25,
-							30,
-							35,
-							40
-						],
-						"PassiveMSBonus": [
-							27.5,
-							35,
-							42.5,
-							50,
-							57.5,
-							65,
-							72.5
-						],
-						"NoTargetCDReduction": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"PassiveASDuration": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						],
-						"FirstHPThreshold": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"SecondHPThreshold": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"PassiveASBonus": [60, 70, 80, 90, 100, 110, 120],
+						"Duration": [8, 8, 8, 8, 8, 8, 8],
+						"MoveSpeedBonus": [10, 15, 20, 25, 30, 35, 40],
+						"PassiveMSBonus": [27.5, 35, 42.5, 50, 57.5, 65, 72.5],
+						"NoTargetCDReduction": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"PassiveASDuration": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"FirstHPThreshold": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SecondHPThreshold": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"effectAmount": {
-						"0": [
-							27.5,
-							35,
-							42.5,
-							50,
-							57.5,
-							65,
-							72.5
-						],
-						"1": [
-							35,
-							70,
-							80,
-							90,
-							100,
-							110,
-							125
-						],
-						"2": [
-							5,
-							10,
-							15,
-							20,
-							25,
-							30,
-							35
-						],
-						"3": [
-							70,
-							80,
-							90,
-							100,
-							110,
-							120,
-							130
-						],
-						"4": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"5": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						]
+						"0": [27.5, 35, 42.5, 50, 57.5, 65, 72.5],
+						"1": [35, 70, 80, 90, 100, 110, 125],
+						"2": [5, 10, 15, 20, 25, 30, 35],
+						"3": [70, 80, 90, 100, 110, 120, 130],
+						"4": [30, 30, 30, 30, 30, 30, 30],
+						"5": [8, 8, 8, 8, 8, 8, 8]
 					},
 					"dataKey": "Characters/Warwick/Spells/WarwickWAbility/WarwickW"
 				}
@@ -322,89 +108,18 @@
 					"name": "Primal Howl",
 					"image": "assets/characters/warwick/hud/icons2d/warwicke.png",
 					"tooltip": "Warwick gains @Effect1Amount@% damage reduction for 2.5 seconds. After it ends, Warwick howls, <status>Fearing</status> nearby enemies for @Effect3Amount@ second. Warwick can <recast>Recast</recast> to end the Ability early.",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						16,
-						15,
-						14,
-						13,
-						12,
-						11,
-						11
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
 					"dataValues": {
-						"CherryNegaHaste": [
-							-20,
-							-20,
-							-20,
-							-20,
-							-20,
-							-20,
-							-20
-						]
+						"CherryNegaHaste": [-20, -20, -20, -20, -20, -20, -20]
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							35,
-							40,
-							45,
-							50,
-							55,
-							60
-						],
-						"1": [
-							2.75,
-							2.75,
-							2.75,
-							2.75,
-							2.75,
-							2.75,
-							2.75
-						],
-						"2": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"3": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"4": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"5": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						]
+						"0": [30, 35, 40, 45, 50, 55, 60],
+						"1": [2.75, 2.75, 2.75, 2.75, 2.75, 2.75, 2.75],
+						"2": [1, 1, 1, 1, 1, 1, 1],
+						"3": [1, 1, 1, 1, 1, 1, 1],
+						"4": [800, 800, 800, 800, 800, 800, 800],
+						"5": [400, 400, 400, 400, 400, 400, 400]
 					},
 					"dataKey": "Characters/Warwick/Spells/WarwickEAbility/WarwickE"
 				}
@@ -417,42 +132,11 @@
 					"name": "Infinite Duress",
 					"image": "assets/characters/warwick/hud/icons2d/warwickr.png",
 					"tooltip": "Warwick leaps a huge distance that scales with his <speed>Move Speed</speed>, <status>Suppressing</status> the first champion he collides with while he channels for @RDuration@ seconds. He attacks that champion 3 times over the duration, dealing <magicDamage>@DamageCumulative@ magic damage</magicDamage>. Warwick <healing>heals for 100% of all damage dealt</healing> during the channel.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						110,
-						110,
-						90,
-						70,
-						70,
-						70,
-						70
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [110, 110, 90, 70, 70, 70, 70],
 					"dataValues": {
-						"RDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"RBaseDamage": [
-							0,
-							175,
-							350,
-							525,
-							700,
-							875,
-							1050
-						]
+						"RDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"RBaseDamage": [0, 175, 350, 525, 700, 875, 1050]
 					},
 					"spellCalculations": {
 						"DamageCumulative": {
@@ -482,69 +166,13 @@
 					"image": "assets/characters/warwick/hud/icons2d/warwickp.png",
 					"tooltip": "Warwick's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> On-Hit.<br><br>If Warwick is below @HealingThreshold*100@% Health, he also heals for <healing>@HealingRatio*100@% of the damage dealt by <keywordMajor>Eternal Hunger</keywordMajor></healing>. If Warwick is below @EmpoweredHealingThreshold*100@% health, the healing is increased to <healing>@EmpoweredHealingRatio*100@% of the damage dealt</healing>.",
 					"dataValues": {
-						"HealingThreshold": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"EmpoweredHealingThreshold": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"HealingRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"EmpoweredHealingRatio": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"HealthRestoreSlushTime": [
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55,
-							1.55
-						],
-						"ADRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"APRatio": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
+						"HealingThreshold": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"EmpoweredHealingThreshold": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"HealingRatio": [1, 1, 1, 1, 1, 1, 1],
+						"EmpoweredHealingRatio": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"HealthRestoreSlushTime": [1.55, 1.55, 1.55, 1.55, 1.55, 1.55, 1.55],
+						"ADRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"APRatio": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"spellCalculations": {
 						"OnHitDamage": {

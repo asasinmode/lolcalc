@@ -35,60 +35,13 @@
 					"name": "Pulverize",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_q.png",
 					"tooltip": "Alistar smashes the ground, <status>Knocking Up</status> enemies for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						15,
-						14,
-						13,
-						12,
-						11,
-						10,
-						9
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
-						"BaseDamage": [
-							20,
-							60,
-							100,
-							140,
-							180,
-							220,
-							260
-						],
-						"APRatio": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"AoERadius": [
-							375,
-							375,
-							375,
-							375,
-							375,
-							375,
-							375
-						],
-						"KnockupDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"BaseDamage": [20, 60, 100, 140, 180, 220, 260],
+						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"AoERadius": [375, 375, 375, 375, 375, 375, 375],
+						"KnockupDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -116,69 +69,14 @@
 					"name": "Headbutt",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_w.png",
 					"tooltip": "Alistar rams into an enemy, <status>Knocking</status> them <status>Back</status> and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						15,
-						14,
-						13,
-						12,
-						11,
-						10,
-						10
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
-						"KnockBackDistance": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						],
-						"Damage": [
-							0,
-							55,
-							110,
-							165,
-							220,
-							275,
-							330
-						],
-						"StunDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"KnockUpDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"APRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"KnockBackDistance": [700, 700, 700, 700, 700, 700, 700],
+						"Damage": [0, 55, 110, 165, 220, 275, 330],
+						"StunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"KnockUpDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"APRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -196,24 +94,8 @@
 						}
 					},
 					"effectAmount": {
-						"2": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						],
-						"3": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						]
+						"2": [700, 700, 700, 700, 700, 700, 700],
+						"3": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
 					},
 					"dataKey": "Characters/Alistar/Spells/HeadbuttAbility/Headbutt"
 				}
@@ -226,33 +108,10 @@
 					"name": "Trample",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_passive.png",
 					"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @Effect5Amount@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @Effect6Amount@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>.",
-					"mana": [
-						50,
-						55,
-						60,
-						65,
-						70,
-						75
-					],
-					"cooldownTime": [
-						12.5,
-						12,
-						11.5,
-						11,
-						10.5,
-						10,
-						9.5
-					],
+					"mana": [50, 55, 60, 65, 70, 75],
+					"cooldownTime": [12.5, 12, 11.5, 11, 10.5, 10, 9.5],
 					"dataValues": {
-						"APRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						]
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -281,87 +140,15 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							80,
-							80,
-							110,
-							140,
-							170,
-							200,
-							230
-						],
-						"1": [
-							50,
-							50,
-							50,
-							50,
-							50,
-							50,
-							50
-						],
-						"2": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"3": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"4": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"5": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"6": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"7": [
-							20,
-							20,
-							20,
-							20,
-							20,
-							20,
-							20
-						],
-						"8": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						]
+						"0": [80, 80, 110, 140, 170, 200, 230],
+						"1": [50, 50, 50, 50, 50, 50, 50],
+						"2": [5, 5, 5, 5, 5, 5, 5],
+						"3": [350, 350, 350, 350, 350, 350, 350],
+						"4": [5, 5, 5, 5, 5, 5, 5],
+						"5": [1, 1, 1, 1, 1, 1, 1],
+						"6": [5, 5, 5, 5, 5, 5, 5],
+						"7": [20, 20, 20, 20, 20, 20, 20],
+						"8": [15, 15, 15, 15, 15, 15, 15]
 					},
 					"dataKey": "Characters/Alistar/Spells/AlistarEAbility/AlistarE"
 				}
@@ -374,42 +161,11 @@
 					"name": "Unbreakable Will",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_r.png",
 					"tooltip": "Alistar immediately cleanses all <status>Disabling</status> effects and takes @RDamageReduction@% reduced damage for @RDuration@ seconds.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						120,
-						120,
-						100,
-						80,
-						120,
-						120,
-						120
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [120, 120, 100, 80, 120, 120, 120],
 					"dataValues": {
-						"RDuration": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"RDamageReduction": [
-							45,
-							55,
-							65,
-							75,
-							85,
-							95,
-							105
-						]
+						"RDuration": [7, 7, 7, 7, 7, 7, 7],
+						"RDamageReduction": [45, 55, 65, 75, 85, 95, 105]
 					},
 					"dataKey": "Characters/Alistar/Spells/FerociousHowlAbility/FerociousHowl"
 				}
@@ -422,70 +178,14 @@
 					"name": "Triumphant Roar",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_e.png",
 					"tooltip": "Alistar gains a stack whenever he <status>Stuns</status> or <status>Knocks</status> an enemy champion, or whenever an enemy dies. At @PassiveMaxStacks@ stacks, Alistar roars, restoring <healing>@BaseHeal@ Health</healing> to himself and <healing>@AllyHeal@ Health</healing> to nearby allied champions.<br><br>Enemy champion and epic jungle monster deaths fully charge this Ability.",
-					"cooldownTime": [
-						3,
-						3,
-						3,
-						3,
-						3,
-						3,
-						3
-					],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
-						"AlistarPassiveHealRatio": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"AlistarPassiveAllyHealRatio": [
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4
-						],
-						"PassiveCooldown": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"PassiveMaxStacks": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"PassiveStacksChampionKill": [
-							7,
-							7,
-							7,
-							7,
-							7,
-							7,
-							7
-						],
-						"PassiveAllyNumHeal": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						]
+						"AlistarPassiveHealRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"AlistarPassiveAllyHealRatio": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4],
+						"PassiveCooldown": [3, 3, 3, 3, 3, 3, 3],
+						"PassiveMaxStacks": [7, 7, 7, 7, 7, 7, 7],
+						"PassiveStacksChampionKill": [7, 7, 7, 7, 7, 7, 7],
+						"PassiveAllyNumHeal": [15, 15, 15, 15, 15, 15, 15]
 					},
 					"spellCalculations": {
 						"BaseHeal": {

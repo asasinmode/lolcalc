@@ -35,51 +35,12 @@
 					"name": "Crescent Strike",
 					"image": "assets/characters/diana/hud/icons2d/diana_q_moonsedge.png",
 					"tooltip": "Diana unleashes an arc of lunar energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and marking with <keywordMajor>Moonlight</keywordMajor> for @MoonlightDuration@ seconds. <br><br><keywordMajor>Moonlight</keywordMajor> reveals enemies that are not <keywordStealth>stealthed</keywordStealth>.",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						8,
-						8,
-						7.5,
-						7,
-						6.5,
-						6,
-						6
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
-						"MoonlightDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"BaseDamage": [
-							35,
-							70,
-							105,
-							140,
-							175,
-							210,
-							245
-						],
-						"APRatio": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						]
+						"MoonlightDuration": [3, 3, 3, 3, 3, 3, 3],
+						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"APRatio": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -96,33 +57,9 @@
 						}
 					},
 					"effectAmount": {
-						"1": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"2": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"3": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"1": [1, 1, 1, 1, 1, 1, 1],
+						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"3": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"dataKey": "Characters/Diana/Spells/DianaQAbility/DianaQ"
 				}
@@ -135,78 +72,15 @@
 					"name": "Pale Cascade",
 					"image": "assets/characters/diana/hud/icons2d/diana_w_lunarshower.png",
 					"tooltip": "Diana creates three orbiting spheres for @ShieldDuration@ seconds that explode on contact, each dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, up to a max of <magicDamage>@TotalMaxDamage@ damage</magicDamage>.<br><br>Diana also gains <shield>@ShieldValue@ Shield</shield> for the same duration. When the last sphere detonates, she gains an additional <shield>@ShieldValue@ Shield</shield> and refreshes the duration.",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						65
-					],
-					"cooldownTime": [
-						15,
-						15,
-						13.5,
-						12,
-						10.5,
-						9,
-						7.5
-					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [15, 15, 13.5, 12, 10.5, 9, 7.5],
 					"dataValues": {
-						"ShieldBase": [
-							30,
-							45,
-							60,
-							75,
-							90,
-							105,
-							120
-						],
-						"OrbDamage": [
-							8,
-							20,
-							32,
-							44,
-							56,
-							68,
-							80
-						],
-						"ShieldAPRatio": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"ShieldDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"OrbAPRatio": [
-							0.18,
-							0.18,
-							0.18,
-							0.18,
-							0.18,
-							0.18,
-							0.18
-						],
-						"ShieldBHPRatio": [
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09,
-							0.09
-						]
+						"ShieldBase": [30, 45, 60, 75, 90, 105, 120],
+						"OrbDamage": [8, 20, 32, 44, 56, 68, 80],
+						"ShieldAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"ShieldDuration": [5, 5, 5, 5, 5, 5, 5],
+						"OrbAPRatio": [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18],
+						"ShieldBHPRatio": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09]
 					},
 					"spellCalculations": {
 						"ShieldValue": {
@@ -247,33 +121,9 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"3": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"4": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"0": [5, 5, 5, 5, 5, 5, 5],
+						"3": [1, 1, 1, 1, 1, 1, 1],
+						"4": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"dataKey": "Characters/Diana/Spells/DianaOrbsAbility/DianaOrbs"
 				}
@@ -286,51 +136,12 @@
 					"name": "Lunar Rush",
 					"image": "assets/characters/diana/hud/icons2d/diana_e_fasterthanlight.png",
 					"tooltip": "Diana becomes as the vengeful moon, dashing to an enemy and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. If the target is afflicted with <keywordMajor>Moonlight</keywordMajor>, this Ability's Cooldown is refreshed.",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						60
-					],
-					"cooldownTime": [
-						22,
-						22,
-						20,
-						18,
-						16,
-						14,
-						10
-					],
+					"mana": [40, 45, 50, 55, 60, 60],
+					"cooldownTime": [22, 22, 20, 18, 16, 14, 10],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							50,
-							70,
-							90,
-							110,
-							130,
-							150
-						],
-						"APRatio": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"CDResetTime": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						]
+						"BaseDamage": [30, 50, 70, 90, 110, 130, 150],
+						"APRatio": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"CDResetTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -347,33 +158,9 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							0,
-							4,
-							4,
-							4,
-							0,
-							0,
-							0
-						],
-						"1": [
-							0,
-							40,
-							60,
-							80,
-							100,
-							120,
-							0
-						],
-						"2": [
-							0,
-							50,
-							75,
-							100,
-							0,
-							0,
-							0
-						]
+						"0": [0, 4, 4, 4, 0, 0, 0],
+						"1": [0, 40, 60, 80, 100, 120, 0],
+						"2": [0, 50, 75, 100, 0, 0, 0]
 					},
 					"dataKey": "Characters/Diana/Spells/DianaTeleportAbility/DianaTeleport"
 				}
@@ -386,78 +173,15 @@
 					"name": "Moonfall",
 					"image": "assets/characters/diana/hud/icons2d/diana_r_moonfall.png",
 					"tooltip": "Diana <status>Pulls In</status>, <status>Slows</status> by @SlowTooltip@%, and reveals nearby enemies for @SlowDuration@ seconds.<br><br>If Diana hits at least one enemy champion, she calls to the moon, dealing <magicDamage>@RExplosionDamage@ magic damage</magicDamage> plus <magicDamage>@RMultihitAmplification@</magicDamage> for each champion pulled beyond the first, up to a max of an additional <magicDamage>@MaxDamage@ damage</magicDamage>.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						100,
-						100,
-						90,
-						80,
-						80,
-						80,
-						80
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
 					"dataValues": {
-						"Damage": [
-							100,
-							200,
-							300,
-							400,
-							500,
-							600,
-							700
-						],
-						"Delay": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"SlowPotency": [
-							-0.3,
-							-0.4,
-							-0.5,
-							-0.6,
-							-0.7,
-							-0.8,
-							-0.9
-						],
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"SlowTooltip": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"MultihitAmp": [
-							10,
-							35,
-							60,
-							85,
-							110,
-							135,
-							160
-						]
+						"Damage": [100, 200, 300, 400, 500, 600, 700],
+						"Delay": [1, 1, 1, 1, 1, 1, 1],
+						"SlowPotency": [-0.3, -0.4, -0.5, -0.6, -0.7, -0.8, -0.9],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SlowTooltip": [30, 40, 50, 60, 70, 80, 90],
+						"MultihitAmp": [10, 35, 60, 85, 110, 135, 160]
 					},
 					"spellCalculations": {
 						"RExplosionDamage": {
@@ -493,51 +217,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							-0.35,
-							-0.35,
-							-0.4,
-							-0.45,
-							-0.5,
-							-0.55,
-							-0.6
-						],
-						"1": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"2": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"3": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"4": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"0": [-0.35, -0.35, -0.4, -0.45, -0.5, -0.55, -0.6],
+						"1": [2, 2, 2, 2, 2, 2, 2],
+						"2": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"3": [3, 3, 3, 3, 3, 3, 3],
+						"4": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"dataKey": "Characters/Diana/Spells/DianaRAbility/DianaR"
 				}
@@ -551,61 +235,13 @@
 					"image": "assets/characters/diana/hud/icons2d/diana_passive_lunarblade.png",
 					"tooltip": "{{Spell_DianaPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_DianaPassive_Tooltip}}<br><br><rules>Moonsilver Blade deals @Monstermod*100@% damage to monsters.</rules>",
-					"cooldownTime": [
-						32,
-						28,
-						24,
-						20,
-						16,
-						12,
-						12
-					],
+					"cooldownTime": [32, 28, 24, 20, 16, 12, 12],
 					"dataValues": {
-						"APRatio": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"BuffDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"AttackSpeedValue": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"AttackCount": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"MonsterMod": [
-							2.3,
-							2.3,
-							2.3,
-							2.3,
-							2.3,
-							2.3,
-							2.3
-						]
+						"APRatio": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BuffDuration": [5, 5, 5, 5, 5, 5, 5],
+						"AttackSpeedValue": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"AttackCount": [3, 3, 3, 3, 3, 3, 3],
+						"MonsterMod": [2.3, 2.3, 2.3, 2.3, 2.3, 2.3, 2.3]
 					},
 					"spellCalculations": {
 						"CleaveDamage": {

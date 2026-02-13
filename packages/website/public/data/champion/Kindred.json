@@ -35,60 +35,13 @@
 					"name": "Dance of Arrows",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_q.png",
 					"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @Effect8Amount@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @Effect4Amount@ seconds.",
-					"mana": [
-						35,
-						35,
-						35,
-						35,
-						35,
-						35
-					],
-					"cooldownTime": [
-						9,
-						9,
-						9,
-						9,
-						9,
-						9,
-						9
-					],
+					"mana": [35, 35, 35, 35, 35, 35],
+					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"dataValues": {
-						"DashSpeed": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"DashSpeedScaling": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						],
-						"BaseASDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"CDNewValue": [
-							4.5,
-							4,
-							3.5,
-							3,
-							2.5,
-							2,
-							1.5
-						]
+						"DashSpeed": [500, 500, 500, 500, 500, 500, 500],
+						"DashSpeedScaling": [12, 12, 12, 12, 12, 12, 12],
+						"BaseASDuration": [4, 4, 4, 4, 4, 4, 4],
+						"CDNewValue": [4.5, 4, 3.5, 3, 2.5, 2, 1.5]
 					},
 					"spellCalculations": {
 						"TotalQAttackSpeed": {
@@ -123,69 +76,13 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							25,
-							40,
-							65,
-							90,
-							115,
-							140,
-							175
-						],
-						"2": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"3": [
-							4.5,
-							4,
-							3.5,
-							3,
-							2.5,
-							2,
-							2
-						],
-						"4": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"5": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						],
-						"6": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"7": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"0": [25, 40, 65, 90, 115, 140, 175],
+						"2": [500, 500, 500, 500, 500, 500, 500],
+						"3": [4.5, 4, 3.5, 3, 2.5, 2, 2],
+						"4": [100, 100, 100, 100, 100, 100, 100],
+						"5": [12, 12, 12, 12, 12, 12, 12],
+						"6": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"7": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"dataKey": "Characters/Kindred/Spells/KindredQAbility/KindredQ"
 				}
@@ -198,87 +95,16 @@
 					"name": "Wolf's Frenzy",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>@AttackHeal@ Health</healing> based on their missing Health.<br><br><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>@BaseWolfDamage@</magicDamage> plus <magicDamage>@PercentWolfDamage@ current Health magic damage</magicDamage>.",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						19,
-						18,
-						17,
-						16,
-						15,
-						14,
-						14
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [19, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
-						"LambToWolfAttackSpeedConversionPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"RingRange": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"APRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"CloneBasePercentDamage": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
-						],
-						"CloneDamageFlat": [
-							20,
-							25,
-							30,
-							35,
-							40,
-							45,
-							50
-						],
-						"CloneADRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"ClonePercentDamagePerBounty": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						]
+						"LambToWolfAttackSpeedConversionPercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"RingRange": [800, 800, 800, 800, 800, 800, 800],
+						"APRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"CloneBasePercentDamage": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
+						"CloneDamageFlat": [20, 25, 30, 35, 40, 45, 50],
+						"CloneADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"ClonePercentDamagePerBounty": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
 					},
 					"spellCalculations": {
 						"AttackHeal": {
@@ -327,78 +153,14 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							40,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						],
-						"1": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"2": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"3": [
-							8.5,
-							8.5,
-							8.5,
-							8.5,
-							8.5,
-							8.5,
-							8.5
-						],
-						"4": [
-							25,
-							25,
-							30,
-							35,
-							40,
-							45,
-							50
-						],
-						"5": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"6": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"7": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"0": [40, 40, 45, 50, 55, 60, 65],
+						"1": [1, 1, 1, 1, 1, 1, 1],
+						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"3": [8.5, 8.5, 8.5, 8.5, 8.5, 8.5, 8.5],
+						"4": [25, 25, 30, 35, 40, 45, 50],
+						"5": [800, 800, 800, 800, 800, 800, 800],
+						"6": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"7": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"dataKey": "Characters/Kindred/Spells/KindredWAbility/KindredW"
 				}
@@ -411,106 +173,18 @@
 					"name": "Mounting Dread",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_e.png",
 					"tooltip": "Kindred weakens an enemy, <status>Slowing</status> them by @TotalSlow@% for @SlowDuration@ second.<br><br>Kindred's third Attack against the target within @TotalDuration@ seconds of each other directs Wolf to pounce on the enemy, dealing an additional <physicalDamage>@BaseBiteDamage@</physicalDamage> plus <physicalDamage>@PercentBiteDamage@ missing Health physical damage</physicalDamage>.",
-					"cooldownTime": [
-						14,
-						14,
-						12.5,
-						11,
-						9.5,
-						8,
-						8
-					],
+					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
 					"dataValues": {
-						"MonsterCap": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"BaseDamage": [
-							50,
-							80,
-							110,
-							140,
-							170,
-							200,
-							230
-						],
-						"SlowAmount": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"SlowDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"TotalDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"StacksToProc": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SlowAPRatio": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"BasePercentDamage": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"CritMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"BonusADRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"MonsterCap": [200, 200, 200, 200, 200, 200, 200],
+						"BaseDamage": [50, 80, 110, 140, 170, 200, 230],
+						"SlowAmount": [30, 30, 30, 30, 30, 30, 30],
+						"SlowDuration": [1, 1, 1, 1, 1, 1, 1],
+						"TotalDuration": [4, 4, 4, 4, 4, 4, 4],
+						"StacksToProc": [4, 4, 4, 4, 4, 4, 4],
+						"SlowAPRatio": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"BasePercentDamage": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"CritMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BonusADRatio": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"BaseBiteDamage": {
@@ -630,89 +304,18 @@
 					"name": "Lamb's Respite",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_r.png",
 					"tooltip": "Kindred blesses the ground for @Effect2Amount@ seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br><br>When the blessing ends, all units inside heal for <healing>@Effect1Amount@ Health</healing>.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						160,
-						160,
-						140,
-						120,
-						120,
-						120,
-						120
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"dataValues": {
-						"HealFlat": [
-							150,
-							225,
-							300,
-							375,
-							450,
-							525,
-							600
-						],
-						"BuffDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AoERadius": [
-							530,
-							530,
-							530,
-							530,
-							530,
-							530,
-							530
-						]
+						"HealFlat": [150, 225, 300, 375, 450, 525, 600],
+						"BuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"AoERadius": [530, 530, 530, 530, 530, 530, 530]
 					},
 					"effectAmount": {
-						"0": [
-							225,
-							225,
-							300,
-							375,
-							400,
-							400,
-							400
-						],
-						"1": [
-							4,
-							4,
-							4,
-							4,
-							0,
-							0,
-							0
-						],
-						"2": [
-							530,
-							530,
-							530,
-							530,
-							0,
-							0,
-							0
-						],
-						"3": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						]
+						"0": [225, 225, 300, 375, 400, 400, 400],
+						"1": [4, 4, 4, 4, 0, 0, 0],
+						"2": [530, 530, 530, 530, 0, 0, 0],
+						"3": [400, 400, 400, 400, 400, 400, 400]
 					},
 					"dataKey": "Characters/Kindred/Spells/KindredRAbility/KindredR"
 				}
@@ -727,24 +330,8 @@
 					"tooltip": "{{Spell_KindredPassiveManager_Tooltip}}",
 					"tooltipExtended": "{{Spell_KindredPassiveManager_Tooltip}}<br><br>Currently granting <statTracking>@f3@ Attack Range</statTracking>.<br><br><rules>The hunted jungle monsters change as Kindred gains <keywordMajor>Marks</keywordMajor>, moving further into the enemy jungle, eventually hunting epic monsters.</rules>",
 					"dataValues": {
-						"BaseHealAmount": [
-							45,
-							45,
-							45,
-							45,
-							45,
-							45,
-							45
-						],
-						"HealAmountPerLevel": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"BaseHealAmount": [45, 45, 45, 45, 45, 45, 45],
+						"HealAmountPerLevel": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"QMarkBonus": {
@@ -783,69 +370,13 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"1": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"2": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"3": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"4": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"5": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"6": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"0": [4, 4, 4, 4, 4, 4, 4],
+						"1": [25, 25, 25, 25, 25, 25, 25],
+						"2": [3, 3, 3, 3, 3, 3, 3],
+						"3": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"4": [1, 1, 1, 1, 1, 1, 1],
+						"5": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"6": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"dataKey": "Characters/Kindred/Spells/KindredPassiveManagerAbility/KindredPassiveManager"
 				}

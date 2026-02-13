@@ -35,51 +35,12 @@
 					"name": "Duskbringer",
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_duskbringer.png",
 					"tooltip": "Nocturne throws a shadow blade, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and leaving a dusk trail for @Effect3Amount@ seconds. Enemy champions hit also leave a trail. <br><br>While on the trail, Nocturne is Ghosted and gains <speed>@MoveSpeed@% Move Speed</speed> and <physicalDamage>@BonusTrailAD@ Attack Damage</physicalDamage>.",
-					"mana": [
-						60,
-						65,
-						70,
-						75,
-						80,
-						85
-					],
-					"cooldownTime": [
-						8,
-						8,
-						8,
-						8,
-						8,
-						8,
-						8
-					],
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
-						"BaseDamage": [
-							20,
-							65,
-							110,
-							155,
-							200,
-							245,
-							290
-						],
-						"MoveSpeed": [
-							10,
-							15,
-							20,
-							25,
-							30,
-							35,
-							40
-						],
-						"BonusTrailAD": [
-							5,
-							15,
-							25,
-							35,
-							45,
-							55,
-							65
-						]
+						"BaseDamage": [20, 65, 110, 155, 200, 245, 290],
+						"MoveSpeed": [10, 15, 20, 25, 30, 35, 40],
+						"BonusTrailAD": [5, 15, 25, 35, 45, 55, 65]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -98,42 +59,10 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							15,
-							15,
-							20,
-							25,
-							30,
-							35,
-							40
-						],
-						"1": [
-							65,
-							65,
-							110,
-							155,
-							200,
-							245,
-							290
-						],
-						"2": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"3": [
-							15,
-							15,
-							25,
-							35,
-							45,
-							55,
-							55
-						]
+						"0": [15, 15, 20, 25, 30, 35, 40],
+						"1": [65, 65, 110, 155, 200, 245, 290],
+						"2": [5, 5, 5, 5, 5, 5, 5],
+						"3": [15, 15, 25, 35, 45, 55, 55]
 					},
 					"dataKey": "Characters/Nocturne/Spells/NocturneDuskbringerAbility/NocturneDuskbringer"
 				}
@@ -146,60 +75,13 @@
 					"name": "Shroud of Darkness",
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_shroudofdarkness.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Nocturne creates a shadow barrier for 1.5 seconds that blocks the next enemy Ability. If an Ability is blocked, this Ability's passive effect is increased to <attackSpeed>@Effect1Amount*2@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
-					"mana": [
-						50,
-						50,
-						50,
-						50,
-						50,
-						50
-					],
-					"cooldownTime": [
-						22,
-						20,
-						18,
-						16,
-						14,
-						12,
-						12
-					],
+					"mana": [50, 50, 50, 50, 50, 50],
+					"cooldownTime": [22, 20, 18, 16, 14, 12, 12],
 					"effectAmount": {
-						"0": [
-							30,
-							30,
-							35,
-							40,
-							45,
-							50,
-							55
-						],
-						"1": [
-							0.3,
-							0.3,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"2": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"3": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
+						"0": [30, 30, 35, 40, 45, 50, 55],
+						"1": [0.3, 0.3, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"3": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"dataKey": "Characters/Nocturne/Spells/NocturneShroudofDarknessAbility/NocturneShroudofDarkness"
 				}
@@ -212,33 +94,10 @@
 					"name": "Unspeakable Horror",
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_unspeakablehorror.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <speed>@TooltipFearMS*100@% Move Speed</speed> toward <status>Feared</status> enemies.<br><br><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds. If the tether remains unbroken, the target is <status>Feared</status> for @Effect2Amount@ second(s).",
-					"mana": [
-						60,
-						65,
-						70,
-						75,
-						80,
-						85
-					],
-					"cooldownTime": [
-						16,
-						15,
-						14,
-						13,
-						12,
-						11,
-						11
-					],
+					"mana": [60, 65, 70, 75, 80, 85],
+					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
 					"dataValues": {
-						"TooltipFearMS": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						]
+						"TooltipFearMS": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -255,42 +114,10 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							35,
-							80,
-							125,
-							170,
-							215,
-							260,
-							305
-						],
-						"1": [
-							1,
-							1.25,
-							1.5,
-							1.75,
-							2,
-							2.25,
-							2.5
-						],
-						"2": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"3": [
-							465,
-							465,
-							465,
-							465,
-							465,
-							465,
-							465
-						]
+						"0": [35, 80, 125, 170, 215, 260, 305],
+						"1": [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5],
+						"2": [2, 2, 2, 2, 2, 2, 2],
+						"3": [465, 465, 465, 465, 465, 465, 465]
 					},
 					"dataKey": "Characters/Nocturne/Spells/NocturneUnspeakableHorrorAbility/NocturneUnspeakableHorror"
 				}
@@ -303,60 +130,13 @@
 					"name": "Paranoia",
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_paranoia.png",
 					"tooltip": "Nocturne darkens the map, reducing the sight radius of all enemy champions and removing their vision of allies for @ParanoiaDuration@ seconds. Nocturne can <recast>Recast</recast> this Ability during the duration to launch himself at an enemy champion dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						140,
-						140,
-						115,
-						90,
-						90,
-						90,
-						90
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [140, 140, 115, 90, 90, 90, 90],
 					"dataValues": {
-						"ParanoiaDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"TrackDistance": [
-							3500,
-							3500,
-							4250,
-							5000,
-							5750,
-							6500,
-							7250
-						],
-						"BaseDamage": [
-							150,
-							150,
-							275,
-							400,
-							525,
-							650,
-							775
-						],
-						"DashSpeed": [
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800
-						]
+						"ParanoiaDuration": [6, 6, 6, 6, 6, 6, 6],
+						"TrackDistance": [3500, 3500, 4250, 5000, 5750, 6500, 7250],
+						"BaseDamage": [150, 150, 275, 400, 525, 650, 775],
+						"DashSpeed": [1800, 1800, 1800, 1800, 1800, 1800, 1800]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -386,70 +166,14 @@
 					"image": "assets/characters/nocturne/hud/icons2d/nocturne_umbrablades.png",
 					"tooltip": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.",
 					"tooltipExtended": "Every @Cooldown@ seconds, Nocturne's next Attack strikes all nearby enemies for <physicalDamage>@TotalDamageNoCrit@ physical damage</physicalDamage> and restores <healing>@TotalHealing@ Health</healing> per target hit.<br><br>Nocturne's Attacks reduce this Ability's Cooldown by @AACDR@ second, increased to @AAChampMonsterCDR@ against champions and jungle monsters.<br><br><rules><spellName>Umbra Blades</spellName> deals @DamageMinionMod*100@% less damage to minions and heals @HealMinionMod*100@% less from lane minions.</rules>",
-					"cooldownTime": [
-						13,
-						13,
-						13,
-						13,
-						13,
-						13,
-						13
-					],
+					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"dataValues": {
-						"AACDR": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"AAChampMonsterCDR": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"Cooldown": [
-							13,
-							13,
-							13,
-							13,
-							13,
-							13,
-							13
-						],
-						"Radius": [
-							360,
-							360,
-							360,
-							360,
-							360,
-							360,
-							360
-						],
-						"DamageMinionMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HealMinionMod": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"AACDR": [1, 1, 1, 1, 1, 1, 1],
+						"AAChampMonsterCDR": [3, 3, 3, 3, 3, 3, 3],
+						"Cooldown": [13, 13, 13, 13, 13, 13, 13],
+						"Radius": [360, 360, 360, 360, 360, 360, 360],
+						"DamageMinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"HealMinionMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalDamageNoCrit": {

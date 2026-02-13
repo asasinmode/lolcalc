@@ -35,160 +35,24 @@
 					"name": "Void Surge",
 					"image": "assets/characters/belveth/hud/icons2d/bv_q_1.png",
 					"tooltip": "Bel'Veth dashes, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to enemies she passes through.<br><br>Each direction has an unique Cooldown of @f1@ seconds that scales down based on her <attackSpeed>Attack Speed</attackSpeed>.<br>",
-					"cooldownTime": [
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1
-					],
+					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"dataValues": {
-						"PerSideCooldown": [
-							16,
-							16,
-							15,
-							14,
-							13,
-							12,
-							11
-						],
-						"PerSideCDAttackSpeedMultiplier": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"BaseDashSpeed": [
-							750,
-							800,
-							850,
-							900,
-							950,
-							1000,
-							1050
-						],
-						"DashDistance": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"MaxDistanceOverWalls": [
-							625,
-							625,
-							625,
-							625,
-							625,
-							625,
-							625
-						],
-						"RiftDashSpeed": [
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500
-						],
-						"CDReduction": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"AttackSpeed": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"NumberOfAttacks": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"SpeedDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"AttackSpeedDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"BaseHealthSteal": [
-							0,
-							0.01,
-							0.02,
-							0.03,
-							0.04,
-							0.05,
-							0.06
-						],
-						"ADRatio": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"Damage": [
-							-5,
-							0,
-							5,
-							10,
-							15,
-							20,
-							25
-						],
-						"MonsterMod": [
-							45,
-							55,
-							65,
-							75,
-							85,
-							95,
-							105
-						],
-						"MinonMod": [
-							0.5,
-							0.6,
-							0.7,
-							0.8,
-							0.9,
-							1,
-							1.1
-						]
+						"PerSideCooldown": [16, 16, 15, 14, 13, 12, 11],
+						"PerSideCDAttackSpeedMultiplier": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"BaseDashSpeed": [750, 800, 850, 900, 950, 1000, 1050],
+						"DashDistance": [400, 400, 400, 400, 400, 400, 400],
+						"MaxDistanceOverWalls": [625, 625, 625, 625, 625, 625, 625],
+						"RiftDashSpeed": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
+						"CDReduction": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"AttackSpeed": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"NumberOfAttacks": [2, 2, 2, 2, 2, 2, 2],
+						"SpeedDuration": [4, 4, 4, 4, 4, 4, 4],
+						"AttackSpeedDuration": [2, 2, 2, 2, 2, 2, 2],
+						"BaseHealthSteal": [0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06],
+						"ADRatio": [1, 1, 1, 1, 1, 1, 1],
+						"Damage": [-5, 0, 5, 10, 15, 20, 25],
+						"MonsterMod": [45, 55, 65, 75, 85, 95, 105],
+						"MinonMod": [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1]
 					},
 					"spellCalculations": {
 						"BaseDamage": {
@@ -226,52 +90,12 @@
 					"name": "Above and Below",
 					"image": "assets/characters/belveth/hud/icons2d/belvethw.png",
 					"tooltip": "Bel'Veth slams her tail, dealing <magicDamage>@Damage@ magic damage</magicDamage>, <status>Knocking Up</status> foes for @Duration@ seconds, and <status>Slowing</status> them by @SlowPercent*100@% for @SlowDuration@ seconds. If a champion is hit, this refreshes the Cooldown of <spellName>Void Surge</spellName> in that direction.",
-					"cooldownTime": [
-						12,
-						12,
-						11,
-						10,
-						9,
-						8,
-						8
-					],
+					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
-						"Duration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"BaseDamage": [
-							30,
-							70,
-							110,
-							150,
-							190,
-							230,
-							270
-						],
-						"SlowPercent": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"SlowDuration": [
-							1,
-							1.25,
-							1.5,
-							1.75,
-							2,
-							2.25,
-							2.5
-						]
+						"Duration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"BaseDamage": [30, 70, 110, 150, 190, 230, 270],
+						"SlowPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"SlowDuration": [1, 1.25, 1.5, 1.75, 2, 2.25, 2.5]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -305,97 +129,17 @@
 					"name": "Royal Maelstrom",
 					"image": "assets/characters/belveth/hud/icons2d/belvethe.png",
 					"tooltip": "Bel'Veth channels and slashes around herself, gaining @DRPercent*100@% Damage Reduction, @TotalLifesteal@ Life Steal, and Attacking @f2.0@ times over @TotalDuration@ seconds with the number of Attacks increasing based on her <attackSpeed>Attack Speed</attackSpeed>. Each Attack strikes the lowest-health enemy, dealing <physicalDamage>@DamagePerStrike@</physicalDamage> to <physicalDamage>@MaxDamagePerStrikeTooltip@ physical damage</physicalDamage> based on the target's missing Health.<br><br>Using another Ability or <recast>Recasting</recast> ends this Ability early.<br>",
-					"cooldownTime": [
-						20,
-						20,
-						19,
-						18,
-						17,
-						16,
-						16
-					],
+					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
 					"dataValues": {
-						"TotalDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"AttackSpeedMult": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"DamagePerHit": [
-							5,
-							6,
-							7,
-							8,
-							9,
-							10,
-							11
-						],
-						"OnHitRatio": [
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08
-						],
-						"NumberOfStrikes": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"MonsterMod": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"MissingHealthMult": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"DRPercent": [
-							0.3,
-							0.35,
-							0.4,
-							0.45,
-							0.5,
-							0.55,
-							0.6
-						],
-						"BonusLifeSteal": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						]
+						"TotalDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"AttackSpeedMult": [8, 8, 8, 8, 8, 8, 8],
+						"DamagePerHit": [5, 6, 7, 8, 9, 10, 11],
+						"OnHitRatio": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"NumberOfStrikes": [6, 6, 6, 6, 6, 6, 6],
+						"MonsterMod": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"MissingHealthMult": [3, 3, 3, 3, 3, 3, 3],
+						"DRPercent": [0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6],
+						"BonusLifeSteal": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
 					},
 					"spellCalculations": {
 						"TotalStrikes": {
@@ -463,196 +207,28 @@
 					"name": "Endless Banquet",
 					"image": "assets/characters/belveth/hud/icons2d/belvethr.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every second Attack against the same target deals an additional <trueDamage>@FinalOnHitDamage@ true damage</trueDamage>, stacking infinitely. Takedowns against champions and epic monsters leave behind a piece of Void Coral.<br><br><spellActive>Active:</spellActive> Consuming Void Coral grants <keywordMajor>@PassiveStacksOnDevour@ Lavender</keywordMajor> stack and activates Bel'Veth's true form for @SteroidDuration@ seconds. Void Coral from Void epic monsters increases the duration to @VoidDuration@ seconds and causes minions that die nearby to become Void Remora. While casting, Bel'Veth <status>Slows</status> nearby enemies before exploding, dealing <trueDamage>@TotalExplosionDamage@ + @MissingHealthDamage*100@% missing-Health true damage</trueDamage>.<br><br>In her true form, Bel'Veth gains <healing>@MaxHealthOnDevour@ max Health</healing>, <speed>@OOCMS@ Move Speed</speed> out of combat, @BonusAARange@ Attack range, <attackSpeed>@TotalASMod*100@% Total Attack Speed</attackSpeed>, and <spellName>Void Surge</spellName> can pass through walls.<br><br><br>",
-					"cooldownTime": [
-						1,
-						1,
-						1,
-						1,
-						1,
-						1,
-						1
-					],
+					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"dataValues": {
-						"PassiveStacksOnDevour": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"OnHitDamage": [
-							2,
-							6,
-							10,
-							14,
-							18,
-							22,
-							26
-						],
-						"CorpseDuration": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"BaseDamage": [
-							100,
-							150,
-							200,
-							250,
-							300,
-							350,
-							400
-						],
-						"MissingHealthDamage": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"AoERange": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"MaxExecuteVsMonsters": [
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500
-						],
-						"SteroidDuration": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"VoidDuration": [
-							180,
-							180,
-							180,
-							180,
-							180,
-							180,
-							180
-						],
-						"MinionRadius": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"BonusAARange": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"RPassiveStackDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"OOCMS": [
-							-25,
-							10,
-							45,
-							80,
-							115,
-							150,
-							185
-						],
-						"BaseMaxHealth": [
-							50,
-							100,
-							150,
-							200,
-							250,
-							300,
-							350
-						],
-						"TotalASMod": [
-							0.05,
-							0.1,
-							0.15,
-							0.2,
-							0.25,
-							0.3,
-							0.35
-						],
-						"MaxEpicMonsterStacks": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"VoidlingHPScale": [
-							-0.05,
-							0.2,
-							0.45,
-							0.7,
-							0.95,
-							1.2,
-							1.45
-						],
-						"VoidlingADScale": [
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1
-						],
-						"MeleeVoidlingSkinScaleMod": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"VoidlingMovementSpeedMod": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						]
+						"PassiveStacksOnDevour": [1, 1, 1, 1, 1, 1, 1],
+						"OnHitDamage": [2, 6, 10, 14, 18, 22, 26],
+						"CorpseDuration": [15, 15, 15, 15, 15, 15, 15],
+						"BaseDamage": [100, 150, 200, 250, 300, 350, 400],
+						"MissingHealthDamage": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"AoERange": [500, 500, 500, 500, 500, 500, 500],
+						"MaxExecuteVsMonsters": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
+						"SteroidDuration": [60, 60, 60, 60, 60, 60, 60],
+						"VoidDuration": [180, 180, 180, 180, 180, 180, 180],
+						"MinionRadius": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"BonusAARange": [75, 75, 75, 75, 75, 75, 75],
+						"RPassiveStackDuration": [5, 5, 5, 5, 5, 5, 5],
+						"OOCMS": [-25, 10, 45, 80, 115, 150, 185],
+						"BaseMaxHealth": [50, 100, 150, 200, 250, 300, 350],
+						"TotalASMod": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35],
+						"MaxEpicMonsterStacks": [10, 10, 10, 10, 10, 10, 10],
+						"VoidlingHPScale": [-0.05, 0.2, 0.45, 0.7, 0.95, 1.2, 1.45],
+						"VoidlingADScale": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"MeleeVoidlingSkinScaleMod": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"VoidlingMovementSpeedMod": [100, 100, 100, 100, 100, 100, 100]
 					},
 					"spellCalculations": {
 						"FinalOnHitDamage": {
@@ -725,96 +301,16 @@
 					"tooltip": "{{Spell_BelvethPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_BelvethPassive_Tooltip}}<br><br><rules>Bel'veth Attacks faster than normal but her Attacks deal damage at @AttackADRatio*100@% effectiveness and her On-Hit Effects are applied at @OnHitRatio*100@% effectiveness.<br>Bel'Veth does not gain <attackSpeed>Attack Speed</attackSpeed> on level up and has no cap on <attackSpeed>Attack Speed</attackSpeed>.<br>{{Reminder_Ghosted}}</rules>",
 					"dataValues": {
-						"MonsterStacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ChampionStacks": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ARAMBonusStacks": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"TakedownDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"SheenDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BaronBuffDuration": [
-							180,
-							180,
-							180,
-							180,
-							180,
-							180,
-							180
-						],
-						"SheenNumberOfAttacks": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"AttackADRatio": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"OnHitRatio": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"BrawlBonusStacks": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"MonsterStacks": [1, 1, 1, 1, 1, 1, 1],
+						"ChampionStacks": [2, 2, 2, 2, 2, 2, 2],
+						"ARAMBonusStacks": [1, 1, 1, 1, 1, 1, 1],
+						"TakedownDuration": [4, 4, 4, 4, 4, 4, 4],
+						"SheenDuration": [5, 5, 5, 5, 5, 5, 5],
+						"BaronBuffDuration": [180, 180, 180, 180, 180, 180, 180],
+						"SheenNumberOfAttacks": [2, 2, 2, 2, 2, 2, 2],
+						"AttackADRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"OnHitRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"BrawlBonusStacks": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"spellCalculations": {
 						"AttackSpeedPerStack": {

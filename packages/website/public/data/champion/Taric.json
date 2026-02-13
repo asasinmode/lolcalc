@@ -35,60 +35,13 @@
 					"name": "Starlight's Touch",
 					"image": "assets/characters/taric/hud/icons2d/taric_q.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @Effect6Amount@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @Effect6Amount@ stacks).",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"cooldownTime": [
-						3,
-						3,
-						3,
-						3,
-						3,
-						3,
-						3
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
-						"Recharge": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"HealingPerStackBase": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"HealingAPRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"HealingHPRatio": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						]
+						"Recharge": [15, 15, 15, 15, 15, 15, 15],
+						"HealingPerStackBase": [25, 25, 25, 25, 25, 25, 25],
+						"HealingAPRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"HealingHPRatio": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01]
 					},
 					"spellCalculations": {
 						"StackCooldown": {
@@ -139,60 +92,12 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"1": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"2": [
-							0.15,
-							0.15,
-							0.3,
-							0.45,
-							0.6,
-							0.75,
-							1
-						],
-						"3": [
-							0.75,
-							0.75,
-							1.5,
-							2.25,
-							3,
-							3.75,
-							6
-						],
-						"4": [
-							25,
-							25,
-							50,
-							75,
-							100,
-							125,
-							125
-						],
-						"5": [
-							1,
-							1,
-							2,
-							3,
-							4,
-							5,
-							6
-						]
+						"0": [25, 25, 25, 25, 25, 25, 25],
+						"1": [1, 1, 1, 1, 1, 1, 1],
+						"2": [0.15, 0.15, 0.3, 0.45, 0.6, 0.75, 1],
+						"3": [0.75, 0.75, 1.5, 2.25, 3, 3.75, 6],
+						"4": [25, 25, 50, 75, 100, 125, 125],
+						"5": [1, 1, 2, 3, 4, 5, 6]
 					},
 					"dataKey": "Characters/Taric/Spells/TaricQAbility/TaricQ"
 				}
@@ -205,33 +110,10 @@
 					"name": "Bastion",
 					"image": "assets/characters/taric/hud/icons2d/taric_w.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Taric gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and forms a tether between him and the ally bound by this Ability. As long as they are near each other, the ally gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and Taric casts all his Abilities from both himself and his linked ally.<br><br><spellPassive>Active: </spellPassive>Taric binds to an ally champion, granting a <shield>@Effect2Amount@% max Health Shield</shield> for @Effect3Amount@ seconds.",
-					"mana": [
-						60,
-						60,
-						60,
-						60,
-						60,
-						60
-					],
-					"cooldownTime": [
-						15,
-						15,
-						15,
-						15,
-						15,
-						15,
-						15
-					],
+					"mana": [60, 60, 60, 60, 60, 60],
+					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
-						"ArmorBonusPercentage": [
-							0.05,
-							0.06,
-							0.07,
-							0.08,
-							0.09,
-							0.1,
-							0.11
-						]
+						"ArmorBonusPercentage": [0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11]
 					},
 					"spellCalculations": {
 						"BonusArmor": {
@@ -245,42 +127,10 @@
 						}
 					},
 					"effectAmount": {
-						"1": [
-							6,
-							7,
-							8,
-							9,
-							10,
-							11,
-							12
-						],
-						"2": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"3": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"4": [
-							1300,
-							1300,
-							1300,
-							1300,
-							1300,
-							1300,
-							1300
-						]
+						"1": [6, 7, 8, 9, 10, 11, 12],
+						"2": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"3": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"4": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
 					},
 					"dataKey": "Characters/Taric/Spells/TaricWAbility/TaricW"
 				}
@@ -293,23 +143,8 @@
 					"name": "Dazzle",
 					"image": "assets/characters/taric/hud/icons2d/taric_e.png",
 					"tooltip": "Taric projects a beam of starlight, bursting after @Effect3Amount@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @Effect2Amount@ seconds.",
-					"mana": [
-						40,
-						40,
-						40,
-						40,
-						40,
-						40
-					],
-					"cooldownTime": [
-						17,
-						16,
-						15,
-						14,
-						13,
-						12,
-						11
-					],
+					"mana": [40, 40, 40, 40, 40, 40],
+					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"spellCalculations": {
 						"TotalDamage": {
 							"tooltipOnly": true,
@@ -332,33 +167,9 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							50,
-							90,
-							130,
-							170,
-							210,
-							250,
-							290
-						],
-						"1": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"2": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"0": [50, 90, 130, 170, 210, 250, 290],
+						"1": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"2": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"dataKey": "Characters/Taric/Spells/TaricEAbility/TaricE"
 				}
@@ -371,42 +182,11 @@
 					"name": "Cosmic Radiance",
 					"image": "assets/characters/taric/hud/icons2d/taric_r.png",
 					"tooltip": "Taric calls down protection from the heavens. After @InitialDelay@ seconds, nearby ally champions become invulnerable for @InvulnDuration@ seconds.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						210,
-						180,
-						150,
-						120,
-						90,
-						60,
-						30
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [210, 180, 150, 120, 90, 60, 30],
 					"dataValues": {
-						"InitialDelay": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"InvulnDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						]
+						"InitialDelay": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"InvulnDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
 					"dataKey": "Characters/Taric/Spells/TaricRAbility/TaricR"
 				}
@@ -420,33 +200,9 @@
 					"image": "assets/characters/taric/hud/icons2d/taric_passive.png",
 					"tooltip": "After using an Ability, Taric's next 2 Attacks within @Duration@ seconds gain <attackSpeed>100% Attack Speed</attackSpeed>, deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>, and reduce his basic Ability Cooldowns by @CDR@ second.",
 					"dataValues": {
-						"Duration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BaseDamageMultiplierForModesBalance": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"ArmorDamageValue": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						]
+						"Duration": [5, 5, 5, 5, 5, 5, 5],
+						"BaseDamageMultiplierForModesBalance": [1, 1, 1, 1, 1, 1, 1],
+						"ArmorDamageValue": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
 					},
 					"spellCalculations": {
 						"TotalDamage": {

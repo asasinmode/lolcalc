@@ -35,70 +35,14 @@
 					"name": "Head Rush",
 					"image": "assets/characters/briar/hud/icons2d/briarq.png",
 					"tooltip": "Briar leaps to a target, <status>Stunning</status> it for @StunDuration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and reducing @ShredPercent*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.<br><br><rules>Briar will stop prioritizing champions if she casts this Ability on a minion or monster during <keywordMajor>Blood Frenzy</keywordMajor>.</rules>",
-					"cooldownTime": [
-						13,
-						13,
-						12,
-						11,
-						10,
-						9,
-						8
-					],
+					"cooldownTime": [13, 13, 12, 11, 10, 9, 8],
 					"dataValues": {
-						"BaseDamage": [
-							35,
-							60,
-							85,
-							110,
-							135,
-							160,
-							185
-						],
-						"DashSpeedBase": [
-							600,
-							600,
-							600,
-							600,
-							600,
-							600,
-							600
-						],
-						"ExtraDashSpeedBasedOnDistance": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"StunDuration": [
-							0.85,
-							0.85,
-							0.85,
-							0.85,
-							0.85,
-							0.85,
-							0.85
-						],
-						"ShredPercent": [
-							0.075,
-							0.1,
-							0.125,
-							0.15,
-							0.175,
-							0.2,
-							0.225
-						],
-						"ShredDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						]
+						"BaseDamage": [35, 60, 85, 110, 135, 160, 185],
+						"DashSpeedBase": [600, 600, 600, 600, 600, 600, 600],
+						"ExtraDashSpeedBasedOnDistance": [300, 300, 300, 300, 300, 300, 300],
+						"StunDuration": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85],
+						"ShredPercent": [0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225],
+						"ShredDuration": [5, 5, 5, 5, 5, 5, 5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -131,151 +75,23 @@
 					"name": "Blood Frenzy / Snack Attack",
 					"image": "assets/characters/briar/hud/icons2d/briarw.png",
 					"tooltip": "Briar leaps and enters a <keywordMajor>Blood Frenzy</keywordMajor>, self-taunting to the nearest enemy for @BerserkDuration@ seconds, prioritizing Champions. While in <keywordMajor>Blood Frenzy</keywordMajor> she gains <attackSpeed>@BerserkAS*100@% Attack Speed</attackSpeed> and <speed>@BerserkMS*100@% Move Speed</speed>, and her Attacks deal <physicalDamage>@TotalAoEDamage@ physical damage</physicalDamage> to enemies surrounding her target.<br><br>Briar can <recast>Recast</recast> this Ability to empower her next Attack. It deals <physicalDamage>@TotalAttackBonusDamage@ + @TotalAttackPercentMissingHealth@% missing Health physical damage</physicalDamage> and <healing>heals Briar for @AttackMaxHPHeal@ + @AttackHealPercent*100@% of the damage dealt</healing>.<br>",
-					"cooldownTime": [
-						14,
-						14,
-						13,
-						12,
-						11,
-						10,
-						10
-					],
+					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
-						"TauntRange": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"MinDashDistance": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"MaxDashDistance": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"MaxRangeOverWalls": [
-							650,
-							650,
-							650,
-							650,
-							650,
-							650,
-							650
-						],
-						"DashSpeed": [
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200
-						],
-						"BerserkDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BerserkAS": [
-							0.45,
-							0.55,
-							0.65,
-							0.75,
-							0.85,
-							0.95,
-							1.05
-						],
-						"BerserkMS": [
-							0.15,
-							0.24,
-							0.33,
-							0.42,
-							0.51,
-							0.6,
-							0.69
-						],
-						"AttackBonusDamage": [
-							-10,
-							5,
-							20,
-							35,
-							50,
-							65,
-							80
-						],
-						"AttackPercentMissingHealth": [
-							9,
-							9,
-							9,
-							9,
-							9,
-							9,
-							9
-						],
-						"AttackHealPercent": [
-							0.2,
-							0.24,
-							0.28,
-							0.32,
-							0.36,
-							0.4,
-							0.44
-						],
-						"MaxMonsterDamage": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"AoEAttackRadius": [
-							275,
-							275,
-							275,
-							275,
-							275,
-							275,
-							275
-						],
-						"AoEAttackDamagePercent": [
-							0.5,
-							0.6,
-							0.7,
-							0.8,
-							0.9,
-							1,
-							1.1
-						],
-						"MonsterAndMinionPercentMod": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
+						"TauntRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"MinDashDistance": [75, 75, 75, 75, 75, 75, 75],
+						"MaxDashDistance": [300, 300, 300, 300, 300, 300, 300],
+						"MaxRangeOverWalls": [650, 650, 650, 650, 650, 650, 650],
+						"DashSpeed": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+						"BerserkDuration": [5, 5, 5, 5, 5, 5, 5],
+						"BerserkAS": [0.45, 0.55, 0.65, 0.75, 0.85, 0.95, 1.05],
+						"BerserkMS": [0.15, 0.24, 0.33, 0.42, 0.51, 0.6, 0.69],
+						"AttackBonusDamage": [-10, 5, 20, 35, 50, 65, 80],
+						"AttackPercentMissingHealth": [9, 9, 9, 9, 9, 9, 9],
+						"AttackHealPercent": [0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44],
+						"MaxMonsterDamage": [400, 400, 400, 400, 400, 400, 400],
+						"AoEAttackRadius": [275, 275, 275, 275, 275, 275, 275],
+						"AoEAttackDamagePercent": [0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1],
+						"MonsterAndMinionPercentMod": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"spellCalculations": {
 						"TotalAttackBonusDamage": {
@@ -335,160 +151,24 @@
 					"name": "Chilling Scream",
 					"image": "assets/characters/briar/hud/icons2d/briare.png",
 					"tooltip": "<charge>Begin Charging:</charge> Briar removes <keywordMajor>Blood Frenzy</keywordMajor> and gathers energy, gaining @DRPercent@% damage reduction and restoring <healing>@PercentMaxHPHeal@ Health</healing> over 1 second.<br><br><release>Release:</release> Briar unleashes a scream that deals up to <magicDamage>@Damage@ magic damage</magicDamage> based on time charged, and <status>Slows</status> by @SlowPercent*100@% for @SlowDuration@ seconds. When fully charged, the scream <status>Knocks Back</status> enemies, dealing <magicDamage>@WallHitDamage@ magic damage</magicDamage> to those who hit a wall and <status>Stunning</status> them for @WallStunDuration@ seconds.",
-					"cooldownTime": [
-						16,
-						16,
-						16,
-						16,
-						16,
-						16,
-						16
-					],
+					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
-						"MaxBaseDamage": [
-							45,
-							80,
-							115,
-							150,
-							185,
-							220,
-							255
-						],
-						"WallHitBaseDamage": [
-							65,
-							140,
-							215,
-							290,
-							365,
-							440,
-							515
-						],
-						"MinMissileRange": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"MaxMissileRange": [
-							600,
-							600,
-							600,
-							600,
-							600,
-							600,
-							600
-						],
-						"Width": [
-							380,
-							380,
-							380,
-							380,
-							380,
-							380,
-							380
-						],
-						"RectangleDistanceBehindCaster": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"RectangleDistanceInFrontOfCaster": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"RKnockupHeight": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"RKnockupDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"RKnockTowardsSpeed": [
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800
-						],
-						"WallStunDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"KnockbackDistance": [
-							575,
-							575,
-							575,
-							575,
-							575,
-							575,
-							575
-						],
-						"SlowPercent": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"SlowDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"DRPercent": [
-							35,
-							35,
-							35,
-							35,
-							35,
-							35,
-							35
-						],
-						"HealHPPercent": [
-							0.085,
-							0.1,
-							0.115,
-							0.13,
-							0.145,
-							0.16,
-							0.175
-						]
+						"MaxBaseDamage": [45, 80, 115, 150, 185, 220, 255],
+						"WallHitBaseDamage": [65, 140, 215, 290, 365, 440, 515],
+						"MinMissileRange": [400, 400, 400, 400, 400, 400, 400],
+						"MaxMissileRange": [600, 600, 600, 600, 600, 600, 600],
+						"Width": [380, 380, 380, 380, 380, 380, 380],
+						"RectangleDistanceBehindCaster": [100, 100, 100, 100, 100, 100, 100],
+						"RectangleDistanceInFrontOfCaster": [10, 10, 10, 10, 10, 10, 10],
+						"RKnockupHeight": [2, 2, 2, 2, 2, 2, 2],
+						"RKnockupDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"RKnockTowardsSpeed": [1800, 1800, 1800, 1800, 1800, 1800, 1800],
+						"WallStunDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"KnockbackDistance": [575, 575, 575, 575, 575, 575, 575],
+						"SlowPercent": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DRPercent": [35, 35, 35, 35, 35, 35, 35],
+						"HealHPPercent": [0.085, 0.1, 0.115, 0.13, 0.145, 0.16, 0.175]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -548,115 +228,19 @@
 					"name": "Certain Death",
 					"image": "assets/characters/briar/hud/icons2d/briarr.png",
 					"tooltip": "Briar kicks her pillory's hemolith gemstone and flies to the location of the first champion it hits, marking them as her prey. On landing, she deals <magicDamage>@Damage@ magic damage</magicDamage> to everything nearby and causes enemies who are not her prey to <status>Flee</status> for @FearDuration@ seconds. She then enters an empowered <keywordMajor>Blood Frenzy</keywordMajor> and will pursue her prey until death. During this time, she gains @TotalResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @LifeStealPercent*100@% Lifesteal, and an additional <speed>@ExtraMoveSpeedPercent*100@% Move Speed</speed>.",
-					"cooldownTime": [
-						120,
-						120,
-						100,
-						80,
-						70,
-						70,
-						70
-					],
+					"cooldownTime": [120, 120, 100, 80, 70, 70, 70],
 					"dataValues": {
-						"BaseDamage": [
-							50,
-							150,
-							250,
-							350,
-							450,
-							550,
-							650
-						],
-						"HuntDuration": [
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000
-						],
-						"FearDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"FleeSlowPercent": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"AoERadius": [
-							575,
-							575,
-							575,
-							575,
-							575,
-							575,
-							575
-						],
-						"MinDashSpeed": [
-							2500,
-							2500,
-							2500,
-							2500,
-							2500,
-							2500,
-							2500
-						],
-						"MaxDashSpeed": [
-							5000,
-							5000,
-							5000,
-							5000,
-							5000,
-							5000,
-							5000
-						],
-						"IdealDashTime": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"LifestealPercent": [
-							0.05,
-							0.1,
-							0.15,
-							0.2,
-							0.25,
-							0.3,
-							0.35
-						],
-						"ResistADRatio": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"ExtraMoveSpeedPercent": [
-							0,
-							0.1,
-							0.2,
-							0.3,
-							0.4,
-							0.5,
-							0.6
-						]
+						"BaseDamage": [50, 150, 250, 350, 450, 550, 650],
+						"HuntDuration": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
+						"FearDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"FleeSlowPercent": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"AoERadius": [575, 575, 575, 575, 575, 575, 575],
+						"MinDashSpeed": [2500, 2500, 2500, 2500, 2500, 2500, 2500],
+						"MaxDashSpeed": [5000, 5000, 5000, 5000, 5000, 5000, 5000],
+						"IdealDashTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"LifestealPercent": [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35],
+						"ResistADRatio": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"ExtraMoveSpeedPercent": [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
 					},
 					"spellCalculations": {
 						"Damage": {
@@ -694,78 +278,14 @@
 					"tooltip": "{{Spell_BriarP_Tooltip}}",
 					"tooltipExtended": "{{ Spell_BriarP_Tooltip }}<br><rules>Briar <healing>heals</healing> for @PercentOfBleedHealedOnKill*100@% of the remaining bleed damage when a bleeding enemy dies.</rules>",
 					"dataValues": {
-						"BleedDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"BleedTickRate": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"HealPercent": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"HealShieldPerMissingHPPercent": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"CurrentHealthPercentCost": [
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05,
-							0.05
-						],
-						"BleedPercentAdd": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MaxBleedStacks": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"PercentOfBleedHealedOnKill": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						]
+						"BleedDuration": [5, 5, 5, 5, 5, 5, 5],
+						"BleedTickRate": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"HealPercent": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"HealShieldPerMissingHPPercent": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"CurrentHealthPercentCost": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
+						"BleedPercentAdd": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MaxBleedStacks": [5, 5, 5, 5, 5, 5, 5],
+						"PercentOfBleedHealedOnKill": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25]
 					},
 					"spellCalculations": {
 						"{15da76ad}": {

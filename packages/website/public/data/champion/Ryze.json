@@ -35,78 +35,15 @@
 					"name": "Overload",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_q.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_RyzeW_Name}}</spellName> and <spellName>{{Spell_RyzeE_Name}}</spellName> refresh this Ability's Cooldown and charge a rune for @RuneDuration@ seconds (max @MaximumRunes@ runes).<br><br><spellActive>Active:</spellActive> Ryze unleashes a blast, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> to the first enemy hit. If the target has <keywordMajor>Flux</keywordMajor> on it, it is consumed, causing this Ability to deal @Spell.RyzeR:OverloadDamageBonus@% increased damage and bounces to nearby enemies with <keywordMajor>Flux</keywordMajor>.<br><br>Ryze also discharges all runes, granting Ryze <speed>@MovementSpeedAmount@% Move Speed</speed> for @MovementSpeedDuration@ seconds if @MaximumRunes@ runes were charged.<br>",
-					"mana": [
-						40,
-						38,
-						36,
-						34,
-						32,
-						32
-					],
-					"cooldownTime": [
-						5,
-						5,
-						5,
-						5,
-						5,
-						5,
-						5
-					],
+					"mana": [40, 38, 36, 34, 32, 32],
+					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
-						"BaseDamage": [
-							55,
-							75,
-							95,
-							115,
-							135,
-							155,
-							175
-						],
-						"DamageAmp": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"MovementSpeedAmount": [
-							24,
-							28,
-							32,
-							36,
-							40,
-							44,
-							48
-						],
-						"MovementSpeedDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"MaximumRunes": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"RuneDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						]
+						"BaseDamage": [55, 75, 95, 115, 135, 155, 175],
+						"DamageAmp": [30, 40, 50, 60, 70, 80, 90],
+						"MovementSpeedAmount": [24, 28, 32, 36, 40, 44, 48],
+						"MovementSpeedDuration": [2, 2, 2, 2, 2, 2, 2],
+						"MaximumRunes": [2, 2, 2, 2, 2, 2, 2],
+						"RuneDuration": [4, 4, 4, 4, 4, 4, 4]
 					},
 					"spellCalculations": {
 						"QDamageCalc": {
@@ -128,87 +65,15 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							70,
-							70,
-							110,
-							150,
-							190,
-							230,
-							270
-						],
-						"1": [
-							25,
-							25,
-							40,
-							55,
-							70,
-							85,
-							100
-						],
-						"2": [
-							50,
-							50,
-							75,
-							100,
-							125,
-							150,
-							175
-						],
-						"3": [
-							25,
-							25,
-							28,
-							31,
-							24,
-							37,
-							40
-						],
-						"4": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"5": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"6": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"7": [
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015,
-							0.015
-						],
-						"8": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						]
+						"0": [70, 70, 110, 150, 190, 230, 270],
+						"1": [25, 25, 40, 55, 70, 85, 100],
+						"2": [50, 50, 75, 100, 125, 150, 175],
+						"3": [25, 25, 28, 31, 24, 37, 40],
+						"4": [2, 2, 2, 2, 2, 2, 2],
+						"5": [2, 2, 2, 2, 2, 2, 2],
+						"6": [3, 3, 3, 3, 3, 3, 3],
+						"7": [0.015, 0.015, 0.015, 0.015, 0.015, 0.015, 0.015],
+						"8": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"dataKey": "Characters/Ryze/Spells/RyzeQWrapperAbility/RyzeQWrapper"
 				}
@@ -221,51 +86,12 @@
 					"name": "Rune Prison",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_w.png",
 					"tooltip": "Ryze deals <magicDamage>@WDamageCalc@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @CCDuration@ seconds. If the target has <keywordMajor>Flux</keywordMajor>, it is consumed and this Ability <status>Roots</status> instead of <status>Slowing</status>.",
-					"mana": [
-						50,
-						60,
-						70,
-						80,
-						90,
-						100
-					],
-					"cooldownTime": [
-						11,
-						11,
-						10.5,
-						10,
-						9.5,
-						9,
-						8.5
-					],
+					"mana": [50, 60, 70, 80, 90, 100],
+					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 8.5],
 					"dataValues": {
-						"SlowAmount": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"BaseDamage": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"CCDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						]
+						"SlowAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"CCDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
 					"spellCalculations": {
 						"WDamageCalc": {
@@ -297,87 +123,16 @@
 					"name": "Spell Flux",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_e.png",
 					"tooltip": "Ryze fires an orb, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and applies <keywordMajor>Flux</keywordMajor> for @DebuffDuration@ seconds to the target and nearby enemies. Enemies already afflicted with <keywordMajor>Flux</keywordMajor> will cause it to spread further.",
-					"mana": [
-						35,
-						45,
-						55,
-						65,
-						75,
-						85
-					],
-					"cooldownTime": [
-						3.75,
-						3.5,
-						3.25,
-						3,
-						2.75,
-						2.5,
-						2.5
-					],
+					"mana": [35, 45, 55, 65, 75, 85],
+					"cooldownTime": [3.75, 3.5, 3.25, 3, 2.75, 2.5, 2.5],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						],
-						"DebuffDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"BounceRadius": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"DamageAmp": [
-							0,
-							10,
-							20,
-							30,
-							40,
-							50,
-							60
-						],
-						"BounceRadiusLargeUnit": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"BounceRadiusQSmallUnit": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"BounceRadiusQLargeUnit": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						]
+						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"DebuffDuration": [4, 4, 4, 4, 4, 4, 4],
+						"BounceRadius": [350, 350, 350, 350, 350, 350, 350],
+						"DamageAmp": [0, 10, 20, 30, 40, 50, 60],
+						"BounceRadiusLargeUnit": [400, 400, 400, 400, 400, 400, 400],
+						"BounceRadiusQSmallUnit": [350, 350, 350, 350, 350, 350, 350],
+						"BounceRadiusQLargeUnit": [500, 500, 500, 500, 500, 500, 500]
 					},
 					"spellCalculations": {
 						"EDamageCalc": {
@@ -399,78 +154,14 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							80,
-							80,
-							90,
-							100,
-							110,
-							120,
-							130
-						],
-						"1": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"2": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"3": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"4": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"5": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"6": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"7": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"0": [80, 80, 90, 100, 110, 120, 130],
+						"1": [30, 40, 50, 60, 70, 80, 90],
+						"2": [100, 100, 100, 100, 100, 100, 100],
+						"3": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"5": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"6": [4, 4, 4, 4, 4, 4, 4],
+						"7": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"dataKey": "Characters/Ryze/Spells/RyzeEAbility/RyzeE"
 				}
@@ -483,107 +174,20 @@
 					"name": "Realm Warp",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_r.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_RyzeQWrapper_Name}}</spellName> damage bonus against targets with <keywordMajor>Flux</keywordMajor> increased to @OverloadDamageBonus@%.<br><br><spellActive>Active:</spellActive> Ryze opens a portal to another location. After @ChargeTimeTooltip@ seconds, all allies near the portal are teleported to that location.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						180,
-						180,
-						160,
-						140,
-						140,
-						140,
-						140
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"dataValues": {
-						"ChargeTime": [
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1,
-							2.1
-						],
-						"TeleportTime": [
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65
-						],
-						"AllyIndicatorBuffDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"ChargeTimeTooltip": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"OverloadDamageBonus": [
-							25,
-							50,
-							75,
-							100,
-							125,
-							150,
-							175
-						],
-						"OverloadHealPercent": [
-							0,
-							20,
-							25,
-							30,
-							40,
-							50,
-							60
-						],
-						"HealPercentMinionMod": [
-							0.33,
-							0.33,
-							0.33,
-							0.33,
-							0.33,
-							0.33,
-							0.33
-						],
-						"MinimumCastRange": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						]
+						"ChargeTime": [2.1, 2.1, 2.1, 2.1, 2.1, 2.1, 2.1],
+						"TeleportTime": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"AllyIndicatorBuffDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"ChargeTimeTooltip": [2, 2, 2, 2, 2, 2, 2],
+						"OverloadDamageBonus": [25, 50, 75, 100, 125, 150, 175],
+						"OverloadHealPercent": [0, 20, 25, 30, 40, 50, 60],
+						"HealPercentMinionMod": [0.33, 0.33, 0.33, 0.33, 0.33, 0.33, 0.33],
+						"MinimumCastRange": [1000, 1000, 1000, 1000, 1000, 1000, 1000]
 					},
 					"effectAmount": {
-						"5": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
+						"5": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"dataKey": "Characters/Ryze/Spells/RyzeRAbility/RyzeR"
 				}
@@ -596,34 +200,10 @@
 					"name": "Arcane Mastery",
 					"image": "assets/characters/ryze/hud/icons2d/ryze_p.png",
 					"tooltip": "Ryze gains <scaleMana>@PassiveManaCalcTooltip@% max Mana</scaleMana>. His Abilities do additional damage based on his <scaleMana>bonus Mana</scaleMana>.",
-					"cooldownTime": [
-						0,
-						0,
-						0,
-						0,
-						0,
-						0,
-						0
-					],
+					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
-						"PercentManaIncrease": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"APAmount": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						]
+						"PercentManaIncrease": [10, 10, 10, 10, 10, 10, 10],
+						"APAmount": [100, 100, 100, 100, 100, 100, 100]
 					},
 					"spellCalculations": {
 						"{92bc0080}": {
@@ -648,24 +228,8 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							0,
-							10,
-							20,
-							30,
-							40,
-							50,
-							60
-						],
-						"1": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						]
+						"0": [0, 10, 20, 30, 40, 50, 60],
+						"1": [30, 60, 90, 120, 150, 180, 210]
 					},
 					"dataKey": "Characters/Ryze/Spells/RyzePassiveAbility/RyzePassive"
 				}

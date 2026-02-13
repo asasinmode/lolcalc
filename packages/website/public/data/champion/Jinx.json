@@ -35,87 +35,16 @@
 					"name": "Switcheroo!",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_q1.png",
 					"tooltip": "Jinx swaps weapons between Fishbones the rocket launcher and Pow-Pow the minigun.<br><br>While using the rocket launcher, Jinx's Attacks deal <physicalDamage>@RocketDamage@ physical damage</physicalDamage> to the target and nearby enemies, gain @RocketBonusRange@ range, cost Mana, and scale @RocketASPDPenalty*100@% less with bonus Attack Speed.<br><br>While using the minigun, Jinx's Attacks grant <attackSpeed>Attack Speed</attackSpeed> for @MinigunAttackSpeedDuration@ seconds, stacking up to @MinigunAttackSpeedStacks@ times (<attackSpeed>+@MinigunAttackSpeedMax@% %i:scaleAS% max</attackSpeed>).",
-					"mana": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
-					"cooldownTime": [
-						0.9,
-						0.9,
-						0.9,
-						0.9,
-						0.9,
-						0.9,
-						0.9
-					],
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
 					"dataValues": {
-						"RocketAoERadius": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"RocketBonusRange": [
-							75,
-							100,
-							125,
-							150,
-							175,
-							200,
-							225
-						],
-						"MinigunAttackSpeedMax": [
-							5,
-							30,
-							55,
-							80,
-							105,
-							130,
-							155
-						],
-						"MinigunAttackSpeedDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"MinigunAttackSpeedStacks": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"RocketTAD": [
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1,
-							1.1
-						],
-						"RocketASPDPenalty": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						]
+						"RocketAoERadius": [250, 250, 250, 250, 250, 250, 250],
+						"RocketBonusRange": [75, 100, 125, 150, 175, 200, 225],
+						"MinigunAttackSpeedMax": [5, 30, 55, 80, 105, 130, 155],
+						"MinigunAttackSpeedDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"MinigunAttackSpeedStacks": [3, 3, 3, 3, 3, 3, 3],
+						"RocketTAD": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
+						"RocketASPDPenalty": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
 					"spellCalculations": {
 						"RocketDamage": {
@@ -139,78 +68,15 @@
 					"name": "Zap!",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_w.png",
 					"tooltip": "Jinx fires a shock blast that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, <status>Slows</status> them by @SlowPercent@%, and reveals them for @SlowDuration@ seconds.",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						65
-					],
-					"cooldownTime": [
-						9,
-						8,
-						7,
-						6,
-						5,
-						4,
-						3
-					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"dataValues": {
-						"JinxLowEndWCastTime": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"JinxWASpeedCastTimeScalarPerHundrethSecond": [
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08
-						],
-						"Damage": [
-							-40,
-							10,
-							60,
-							110,
-							160,
-							210,
-							260
-						],
-						"SlowPercent": [
-							30,
-							40,
-							50,
-							60,
-							70,
-							80,
-							90
-						],
-						"SlowDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"ADRatio": [
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4,
-							1.4
-						]
+						"JinxLowEndWCastTime": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"JinxWASpeedCastTimeScalarPerHundrethSecond": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"Damage": [-40, 10, 60, 110, 160, 210, 260],
+						"SlowPercent": [30, 40, 50, 60, 70, 80, 90],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"ADRatio": [1.4, 1.4, 1.4, 1.4, 1.4, 1.4, 1.4]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -238,60 +104,13 @@
 					"name": "Flame Chompers!",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_e.png",
 					"tooltip": "Jinx tosses out 3 chompers that last for @GrenadeDuration@ seconds. They explode on contact with enemy champions, <status>Rooting</status> them for @RootDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
-					"mana": [
-						90,
-						90,
-						90,
-						90,
-						90,
-						90
-					],
-					"cooldownTime": [
-						27.5,
-						24,
-						20.5,
-						17,
-						13.5,
-						10,
-						10
-					],
+					"mana": [90, 90, 90, 90, 90, 90],
+					"cooldownTime": [27.5, 24, 20.5, 17, 13.5, 10, 10],
 					"dataValues": {
-						"Damage": [
-							40,
-							90,
-							140,
-							190,
-							240,
-							290,
-							340
-						],
-						"RootDuration": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"GrenadeDuration": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"GrenadeArmTime": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"Damage": [40, 90, 140, 190, 240, 290, 340],
+						"RootDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"GrenadeDuration": [5, 5, 5, 5, 5, 5, 5],
+						"GrenadeArmTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -318,78 +137,15 @@
 					"name": "Super Mega Death Rocket!",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_r.png",
 					"tooltip": "Jinx fires a rocket that explodes on the first enemy champion hit, dealing <physicalDamage>@DamageFloor@ to @DamageMax@ + @PercentDamage@% missing Health physical damage</physicalDamage>, gaining damage over the first second of travel time. Nearby enemies take @AoEDamageMult*100@% Damage.<br><br><rules>Missing Health damage cannot exceed @MonsterExecuteMax@ against Monsters.</rules>",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						85,
-						85,
-						65,
-						45,
-						45,
-						45,
-						45
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [85, 85, 65, 45, 45, 45, 45],
 					"dataValues": {
-						"BaseDamage": [
-							5,
-							20,
-							35,
-							50,
-							65,
-							80,
-							95
-						],
-						"MaxDamage": [
-							50,
-							200,
-							350,
-							500,
-							650,
-							800,
-							950
-						],
-						"PercentDamage": [
-							20,
-							25,
-							30,
-							35,
-							40,
-							45,
-							50
-						],
-						"AoEDamageMult": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"MonsterExecuteMax": [
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200,
-							1200
-						],
-						"AoERadius": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						]
+						"BaseDamage": [5, 20, 35, 50, 65, 80, 95],
+						"MaxDamage": [50, 200, 350, 500, 650, 800, 950],
+						"PercentDamage": [20, 25, 30, 35, 40, 45, 50],
+						"AoEDamageMult": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"MonsterExecuteMax": [1200, 1200, 1200, 1200, 1200, 1200, 1200],
+						"AoERadius": [400, 400, 400, 400, 400, 400, 400]
 					},
 					"spellCalculations": {
 						"DamageFloor": {
@@ -434,51 +190,11 @@
 					"tooltip": "{{Spell_JinxPassiveMarker_Tooltip}}",
 					"tooltipExtended": "{{Spell_JinxPassiveMarker_Tooltip}}<br><rules>While excited Jinx can exceed the Attack Speed cap.</rules>",
 					"dataValues": {
-						"BuffDuration": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"ASBuff": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"MSBuff": [
-							175,
-							175,
-							175,
-							175,
-							175,
-							175,
-							175
-						],
-						"MSDecayRate": [
-							0.875,
-							0.875,
-							0.875,
-							0.875,
-							0.875,
-							0.875,
-							0.875
-						],
-						"AssistMarkerDuration": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						]
+						"BuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"ASBuff": [25, 25, 25, 25, 25, 25, 25],
+						"MSBuff": [175, 175, 175, 175, 175, 175, 175],
+						"MSDecayRate": [0.875, 0.875, 0.875, 0.875, 0.875, 0.875, 0.875],
+						"AssistMarkerDuration": [3, 3, 3, 3, 3, 3, 3]
 					},
 					"dataKey": "Characters/Jinx/Spells/JinxPassiveMarkerAbility/JinxPassiveMarker"
 				}

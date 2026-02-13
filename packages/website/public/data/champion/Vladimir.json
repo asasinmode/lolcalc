@@ -35,25 +35,9 @@
 					"name": "Transfusion",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirq.png",
 					"tooltip": "Vladimir drains his target's lifeforce, dealing <magicDamage>@BaseDamageTooltip@ magic damage</magicDamage> and restoring <healing>@BaseHealTooltip@ Health</healing>. After using this Ability twice, Vladimir gains <speed>@MovementSpeedOnQ2@% Move Speed</speed> for 0.5 seconds and empowers the next use of this Ability for @Effect8Amount@ seconds.<br><br>The empowered version of this Ability deals <magicDamage>@EmpoweredDamageTooltip@ magic damage</magicDamage> instead and restores an additional <healing>@EmpoweredHealTooltip@ plus @EmpoweredHealPercentTooltip@ missing Health</healing>.",
-					"cooldownTime": [
-						10.1,
-						9,
-						7.9,
-						6.8,
-						5.7,
-						4.6,
-						3.5
-					],
+					"cooldownTime": [10.1, 9, 7.9, 6.8, 5.7, 4.6, 3.5],
 					"dataValues": {
-						"HealAPRatio": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						]
+						"HealAPRatio": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35]
 					},
 					"spellCalculations": {
 						"BaseDamageTooltip": {
@@ -155,69 +139,13 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							60,
-							80,
-							100,
-							120,
-							140,
-							160,
-							180
-						],
-						"1": [
-							15,
-							20,
-							25,
-							30,
-							35,
-							40,
-							45
-						],
-						"4": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"5": [
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04,
-							0.04
-						],
-						"6": [
-							85,
-							85,
-							85,
-							85,
-							85,
-							85,
-							85
-						],
-						"7": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"8": [
-							35,
-							35,
-							35,
-							35,
-							35,
-							35,
-							35
-						]
+						"0": [60, 80, 100, 120, 140, 160, 180],
+						"1": [15, 20, 25, 30, 35, 40, 45],
+						"4": [5, 5, 5, 5, 5, 5, 5],
+						"5": [0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04],
+						"6": [85, 85, 85, 85, 85, 85, 85],
+						"7": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"8": [35, 35, 35, 35, 35, 35, 35]
 					},
 					"dataKey": "Characters/Vladimir/Spells/VladimirQAbility/VladimirQ"
 				}
@@ -230,88 +158,16 @@
 					"name": "Sanguine Pool",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirw.png",
 					"tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>@HasteBoost*100@% decaying Move Speed</speed> for @HasteDuration@ second and becoming <keyword>Untargetable</keyword> and <keyword>Ghosted</keyword> while <status>Slowing</status> enemies in the pool by @MoveSpeedMod*-100@%.<br><br>Vladimir deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and restores <healing>@TotalHeal@ Health</healing> per enemy over the duration.",
-					"cooldownTime": [
-						31,
-						28,
-						25,
-						22,
-						19,
-						16,
-						16
-					],
+					"cooldownTime": [31, 28, 25, 22, 19, 16, 16],
 					"dataValues": {
-						"MinionHealingMod": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"BaseDamage": [
-							25,
-							80,
-							135,
-							190,
-							245,
-							300,
-							355
-						],
-						"HealthCost": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"BonusHealthRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"MoveSpeedMod": [
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4,
-							-0.4
-						],
-						"VampPercent": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"HasteBoost": [
-							0.375,
-							0.375,
-							0.375,
-							0.375,
-							0.375,
-							0.375,
-							0.375
-						],
-						"HasteDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						]
+						"MinionHealingMod": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"BaseDamage": [25, 80, 135, 190, 245, 300, 355],
+						"HealthCost": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"BonusHealthRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"MoveSpeedMod": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, -0.4],
+						"VampPercent": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"HasteBoost": [0.375, 0.375, 0.375, 0.375, 0.375, 0.375, 0.375],
+						"HasteDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -346,25 +202,9 @@
 					"name": "Tides of Blood",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimire.png",
 					"tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to <font color='#CC3300'>@ChargeHealthTooltip@ Health</font>. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br><br><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>@MinDamageTooltip@</magicDamage> and <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by @SlowPercent@% for 0.5 seconds.",
-					"cooldownTime": [
-						15,
-						13,
-						11,
-						9,
-						7,
-						5,
-						5
-					],
+					"cooldownTime": [15, 13, 11, 9, 7, 5, 5],
 					"dataValues": {
-						"SlowPercent": [
-							35,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						]
+						"SlowPercent": [35, 40, 45, 50, 55, 60, 65]
 					},
 					"spellCalculations": {
 						"MinDamageTooltip": {
@@ -413,78 +253,14 @@
 						}
 					},
 					"effectAmount": {
-						"1": [
-							8,
-							8,
-							8,
-							8,
-							8,
-							8,
-							8
-						],
-						"2": [
-							15,
-							30,
-							45,
-							60,
-							75,
-							90,
-							105
-						],
-						"3": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"4": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"6": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"7": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"8": [
-							35,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						],
-						"9": [
-							30,
-							60,
-							90,
-							120,
-							150,
-							180,
-							210
-						]
+						"1": [8, 8, 8, 8, 8, 8, 8],
+						"2": [15, 30, 45, 60, 75, 90, 105],
+						"3": [6, 6, 6, 6, 6, 6, 6],
+						"4": [150, 150, 150, 150, 150, 150, 150],
+						"6": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"7": [1, 1, 1, 1, 1, 1, 1],
+						"8": [35, 40, 45, 50, 55, 60, 65],
+						"9": [30, 60, 90, 120, 150, 180, 210]
 					},
 					"dataKey": "Characters/Vladimir/Spells/VladimirEAbility/VladimirE"
 				}
@@ -497,15 +273,7 @@
 					"name": "Hemoplague",
 					"image": "assets/characters/vladimir/hud/icons2d/vladimirr.png",
 					"tooltip": "Vladimir creates a virulent plague, causing its victims to take @Effect2Amount@% increased damage from all sources for @Effect4Amount@ seconds. After it expires, Vladimir deals <magicDamage>@Damage@ magic damage</magicDamage> to all infected targets. Vladimir restores <healing>@Damage@ Health</healing> if he hits a champion, and restores an additional <healing>@SecondaryHealingTooltip@ Health</healing> for each champion beyond the first.",
-					"cooldownTime": [
-						120,
-						120,
-						120,
-						120,
-						120,
-						120,
-						120
-					],
+					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"spellCalculations": {
 						"Damage": {
 							"mFormulaParts": [
@@ -527,51 +295,11 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							150,
-							150,
-							250,
-							350,
-							0,
-							0,
-							0
-						],
-						"1": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"2": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"3": [
-							4,
-							4,
-							4,
-							4,
-							0,
-							0,
-							0
-						],
-						"4": [
-							40,
-							40,
-							40,
-							40,
-							40,
-							40,
-							40
-						]
+						"0": [150, 150, 250, 350, 0, 0, 0],
+						"1": [10, 10, 10, 10, 10, 10, 10],
+						"2": [100, 100, 100, 100, 100, 100, 100],
+						"3": [4, 4, 4, 4, 0, 0, 0],
+						"4": [40, 40, 40, 40, 40, 40, 40]
 					},
 					"dataKey": "Characters/Vladimir/Spells/VladimirHemoplagueAbility/VladimirHemoplague"
 				}
@@ -665,24 +393,8 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"1": [
-							1.6,
-							1.6,
-							1.6,
-							1.6,
-							1.6,
-							1.6,
-							1.6
-						]
+						"0": [30, 30, 30, 30, 30, 30, 30],
+						"1": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6]
 					},
 					"dataKey": "Characters/Vladimir/Spells/VladimirBloodGorgedAbility/VladimirBloodGorged"
 				}

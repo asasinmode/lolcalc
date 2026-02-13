@@ -35,249 +35,34 @@
 					"name": "Ntofo Strikes",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_q1.png",
 					"tooltip": "K'Sante slams his weapon, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage> and <status>Slowing</status> enemies by @SlowPercent*100@% for @SlowDuration@s. If he hits, he gains a stack of Ntofo Strikes for @RecastWindow@ seconds. At 2 stacks, he instead fires a shockwave that <status>Stuns</status> and <status>Pulls</status> enemies for @StunDuration@ second.<br><br><keywordMajor>All Out</keywordMajor>: Cooldown is reduced by @RCooldownReduction.0*100@%.",
-					"mana": [
-						20,
-						20,
-						20,
-						20,
-						20,
-						20
-					],
-					"cooldownTime": [
-						3.5,
-						3.5,
-						3.5,
-						3.5,
-						3.5,
-						3.5,
-						3.5
-					],
+					"mana": [20, 20, 20, 20, 20, 20],
+					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"dataValues": {
-						"FlatDamage": [
-							40,
-							70,
-							100,
-							130,
-							160,
-							190,
-							220
-						],
-						"RectangleWidth": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"RectangleLength": [
-							465,
-							465,
-							465,
-							465,
-							465,
-							465,
-							465
-						],
-						"SlowPercent": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"SlowDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"Range": [
-							700,
-							700,
-							700,
-							700,
-							700,
-							700,
-							700
-						],
-						"RecastWindow": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						],
-						"RecastLockoutAO": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						],
-						"KnockupDuration": [
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65,
-							0.65
-						],
-						"PullSpeed": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"PullDistance": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"KnockGrav": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"StunDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"MaxCastTime": [
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45
-						],
-						"MinCastTime": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"MinCastTimeQ3": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"BaseCD": [
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5,
-							3.5
-						],
-						"MinCD": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"RCooldownReduction": [
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333,
-							0.333
-						],
-						"DefenseCapforCooldown": [
-							120,
-							120,
-							120,
-							120,
-							120,
-							120,
-							120
-						],
-						"PullSpeedMin": [
-							110,
-							110,
-							110,
-							110,
-							110,
-							110,
-							110
-						],
-						"PullSpeedMax": [
-							600,
-							600,
-							600,
-							600,
-							600,
-							600,
-							600
-						],
-						"PullDistanceMin": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"PullDistanceMax": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"LifetimeMax": [
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45,
-							0.45
-						]
+						"FlatDamage": [40, 70, 100, 130, 160, 190, 220],
+						"RectangleWidth": [100, 100, 100, 100, 100, 100, 100],
+						"RectangleLength": [465, 465, 465, 465, 465, 465, 465],
+						"SlowPercent": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"SlowDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"Range": [700, 700, 700, 700, 700, 700, 700],
+						"RecastWindow": [6, 6, 6, 6, 6, 6, 6],
+						"RecastLockoutAO": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25],
+						"KnockupDuration": [0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+						"PullSpeed": [500, 500, 500, 500, 500, 500, 500],
+						"PullDistance": [300, 300, 300, 300, 300, 300, 300],
+						"KnockGrav": [30, 30, 30, 30, 30, 30, 30],
+						"StunDuration": [1, 1, 1, 1, 1, 1, 1],
+						"MaxCastTime": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45],
+						"MinCastTime": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"MinCastTimeQ3": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"BaseCD": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
+						"MinCD": [2, 2, 2, 2, 2, 2, 2],
+						"RCooldownReduction": [0.333, 0.333, 0.333, 0.333, 0.333, 0.333, 0.333],
+						"DefenseCapforCooldown": [120, 120, 120, 120, 120, 120, 120],
+						"PullSpeedMin": [110, 110, 110, 110, 110, 110, 110],
+						"PullSpeedMax": [600, 600, 600, 600, 600, 600, 600],
+						"PullDistanceMin": [100, 100, 100, 100, 100, 100, 100],
+						"PullDistanceMax": [400, 400, 400, 400, 400, 400, 400],
+						"LifetimeMax": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45]
 					},
 					"spellCalculations": {
 						"BaseDamage": {
@@ -328,249 +113,34 @@
 					"name": "Path Maker",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_w.png",
 					"tooltip": "K'Sante raises his weapons defensively for @MinDurationTOOLTIP@-@MaxDuration.1@s, becoming Unstoppable and reducing incoming damage by @DamageReduction*100@%. Then, he rams forward, dealing <physicalDamage>@BaseDamage@ + @TotalMaxHealthDamage@ max Health physical damage</physicalDamage>. Enemies hit are <status>Knocked Back</status> and <status>Stunned</status> for @MinKnockbackDuration@-@MaxKnockbackDuration@s (based on charge time).<br><br><keywordMajor>All Out:</keywordMajor> Cooldown is refreshed. Deals an additional @RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@% damage as <trueDamage>true damage</trueDamage> (based on charge time), damage reduction is increased to @RDamageReduction*100@% and dash speed is increased, but no longer <status>Knocks Back</status> or <status>Stuns</status>.",
-					"mana": [
-						40,
-						45,
-						50,
-						55,
-						60,
-						65
-					],
-					"cooldownTime": [
-						16,
-						14,
-						13,
-						12,
-						11,
-						10,
-						12
-					],
+					"mana": [40, 45, 50, 55, 60, 65],
+					"cooldownTime": [16, 14, 13, 12, 11, 10, 12],
 					"dataValues": {
-						"BaseDamage": [
-							15,
-							45,
-							75,
-							105,
-							135,
-							165,
-							195
-						],
-						"MaxHealthDamage": [
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08,
-							0.08
-						],
-						"MaxHealthDamageResistRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"MaxDuration": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"TimeToFullCharge": [
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9,
-							0.9
-						],
-						"DashSpeedBase": [
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400
-						],
-						"DashSpeedAO": [
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800,
-							1800
-						],
-						"VictimDashMod": [
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3,
-							1.3
-						],
-						"MinKnockbackDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"MaxKnockbackDuration": [
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75
-						],
-						"KnockbackSpeed": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"KnockbackDist": [
-							125,
-							125,
-							125,
-							125,
-							125,
-							125,
-							125
-						],
-						"KnockbackDistOnTopOfMod": [
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6,
-							0.6
-						],
-						"MinDashBase": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"MaxDashBase": [
-							450,
-							450,
-							450,
-							450,
-							450,
-							450,
-							450
-						],
-						"MinDurationTOOLTIP": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"AOMinDurationTOOLTIP": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"HexflashBugfixLockout": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"MinChargeTime": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						],
-						"RDamageIncreaseMin": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"RDamageIncreaseMax": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"MinimumMinionDamage": [
-							30,
-							80,
-							130,
-							180,
-							230,
-							280,
-							330
-						],
-						"DamageReduction": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"RDamageReduction": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"MaxMonsterDamage": [
-							100,
-							180,
-							260,
-							340,
-							420,
-							500,
-							580
-						]
+						"BaseDamage": [15, 45, 75, 105, 135, 165, 195],
+						"MaxHealthDamage": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
+						"MaxHealthDamageResistRatio": [0, 0, 0, 0, 0, 0, 0],
+						"MaxDuration": [1, 1, 1, 1, 1, 1, 1],
+						"TimeToFullCharge": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
+						"DashSpeedBase": [1400, 1400, 1400, 1400, 1400, 1400, 1400],
+						"DashSpeedAO": [1800, 1800, 1800, 1800, 1800, 1800, 1800],
+						"VictimDashMod": [1.3, 1.3, 1.3, 1.3, 1.3, 1.3, 1.3],
+						"MinKnockbackDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MaxKnockbackDuration": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
+						"KnockbackSpeed": [800, 800, 800, 800, 800, 800, 800],
+						"KnockbackDist": [125, 125, 125, 125, 125, 125, 125],
+						"KnockbackDistOnTopOfMod": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
+						"MinDashBase": [100, 100, 100, 100, 100, 100, 100],
+						"MaxDashBase": [450, 450, 450, 450, 450, 450, 450],
+						"MinDurationTOOLTIP": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"AOMinDurationTOOLTIP": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"HexflashBugfixLockout": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"MinChargeTime": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
+						"RDamageIncreaseMin": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"RDamageIncreaseMax": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"MinimumMinionDamage": [30, 80, 130, 180, 230, 280, 330],
+						"DamageReduction": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"RDamageReduction": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"MaxMonsterDamage": [100, 180, 260, 340, 420, 500, 580]
 					},
 					"spellCalculations": {
 						"TotalMaxHealthDamage": {
@@ -607,141 +177,22 @@
 					"name": "Footwork",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_e.png",
 					"tooltip": "K'Sante dashes, gaining <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. If dashing to an ally, the distance of the dash is significantly increased and the ally is also <shield>Shielded</shield>.<br><br><keywordMajor>All Out</keywordMajor>: Cooldown is decreased by @CooldownModAO*100@% and dash speed is increased.",
-					"mana": [
-						45,
-						50,
-						55,
-						60,
-						65,
-						70
-					],
-					"cooldownTime": [
-						10,
-						10,
-						9.5,
-						9,
-						8.5,
-						8,
-						8
-					],
+					"mana": [45, 50, 55, 60, 65, 70],
+					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
-						"DashDistance": [
-							550,
-							550,
-							550,
-							550,
-							550,
-							550,
-							550
-						],
-						"TargetingForgiveness": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"ShieldDuration": [
-							2,
-							2,
-							2,
-							2,
-							2,
-							2,
-							2
-						],
-						"FreeTargetRangeBase": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"FreeTargetSpeedBase": [
-							550,
-							550,
-							550,
-							550,
-							550,
-							550,
-							550
-						],
-						"AllySpeedBase": [
-							1100,
-							1100,
-							1100,
-							1100,
-							1100,
-							1100,
-							1100
-						],
-						"FreeTargetRangeAO": [
-							400,
-							400,
-							400,
-							400,
-							400,
-							400,
-							400
-						],
-						"FreeTargetSpeedAO": [
-							1250,
-							1250,
-							1250,
-							1250,
-							1250,
-							1250,
-							1250
-						],
-						"AllySpeedAO": [
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400
-						],
-						"ShieldBaseAmountFast": [
-							40,
-							80,
-							120,
-							160,
-							200,
-							240,
-							280
-						],
-						"DashArrivial": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"ShieldHealthRatio": [
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15,
-							0.15
-						],
-						"CooldownModAO": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						]
+						"DashDistance": [550, 550, 550, 550, 550, 550, 550],
+						"TargetingForgiveness": [150, 150, 150, 150, 150, 150, 150],
+						"ShieldDuration": [2, 2, 2, 2, 2, 2, 2],
+						"FreeTargetRangeBase": [250, 250, 250, 250, 250, 250, 250],
+						"FreeTargetSpeedBase": [550, 550, 550, 550, 550, 550, 550],
+						"AllySpeedBase": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
+						"FreeTargetRangeAO": [400, 400, 400, 400, 400, 400, 400],
+						"FreeTargetSpeedAO": [1250, 1250, 1250, 1250, 1250, 1250, 1250],
+						"AllySpeedAO": [1400, 1400, 1400, 1400, 1400, 1400, 1400],
+						"ShieldBaseAmountFast": [40, 80, 120, 160, 200, 240, 280],
+						"DashArrivial": [500, 500, 500, 500, 500, 500, 500],
+						"ShieldHealthRatio": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
+						"CooldownModAO": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
 					"spellCalculations": {
 						"TotalShield": {
@@ -770,438 +221,55 @@
 					"name": "All Out",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_r1.png",
 					"tooltip": "K'Sante shatters his ntofos to <status>Knock Back</status> an enemy champion, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage>, then dashes behind them and goes <keywordMajor>All Out</keywordMajor> for @AllOutDuration@s. If the enemy would hit a wall, they are <status>Knocked Back</status> through the wall and K'Sante strikes them again for <physicalDamage>@TotalDamageSlamDown@ physical damage</physicalDamage>.<br><br>While <keywordMajor>All Out</keywordMajor>, K'Sante's Abilities are upgraded and he gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>, @ArmorPenPercent*100@% Bonus Armor Penetration, and <omnivamp>@Omnivamp*100@% Omnivamp</omnivamp>, but loses <healing>@HealthLost*100@% max Health</healing>, <scaleArmor>@DefensesLost*100@% Bonus Armor</scaleArmor>, and <scaleMR>@DefensesLost*100@% Bonus Magic Resistance</scaleMR>.",
-					"mana": [
-						100,
-						100,
-						100,
-						100,
-						100,
-						100
-					],
-					"cooldownTime": [
-						120,
-						120,
-						100,
-						80,
-						80,
-						80,
-						80
-					],
+					"mana": [100, 100, 100, 100, 100, 100],
+					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
-						"AllOutDuration": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"BaseDamage": [
-							45,
-							80,
-							115,
-							150,
-							185,
-							220,
-							255
-						],
-						"SlamDownStrikeDamage": [
-							45,
-							80,
-							115,
-							150,
-							185,
-							220,
-							255
-						],
-						"WallStunDuration": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"NoWallStunDuration": [
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25,
-							0.25
-						],
-						"MaxSuppressTime": [
-							10,
-							10,
-							10,
-							10,
-							10,
-							10,
-							10
-						],
-						"TackleRange": [
-							300,
-							300,
-							300,
-							300,
-							300,
-							300,
-							300
-						],
-						"TackleSpeed": [
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000
-						],
-						"CarrySpeed": [
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000,
-							1000
-						],
-						"MaxWallCarry": [
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000,
-							25000
-						],
-						"MaxWallCarrySR": [
-							5000,
-							5000,
-							5000,
-							5000,
-							5000,
-							5000,
-							5000
-						],
-						"WallCheckDist": [
-							-25,
-							-25,
-							-25,
-							-25,
-							-25,
-							-25,
-							-25
-						],
-						"KSanteLandingOffset": [
-							250,
-							250,
-							250,
-							250,
-							250,
-							250,
-							250
-						],
-						"WallBuffer": [
-							350,
-							350,
-							350,
-							350,
-							350,
-							350,
-							350
-						],
-						"HealthLost": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"DefensesLost": [
-							0.85,
-							0.85,
-							0.85,
-							0.85,
-							0.85,
-							0.85,
-							0.85
-						],
-						"Omnivamp": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"AttackSpeed": [
-							0.2,
-							0.4,
-							0.6,
-							0.8,
-							1,
-							1.2,
-							1.4
-						],
-						"ArmorPenPercent": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"KsanteArrivesFirstBySec": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"AfterImageArrivesFirstBySec": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"ManaRegenPercent": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"KnockGrav": [
-							14,
-							14,
-							14,
-							14,
-							14,
-							14,
-							14
-						],
-						"TimeToLast": [
-							0.18,
-							0.18,
-							0.18,
-							0.18,
-							0.18,
-							0.18,
-							0.18
-						],
-						"TackleRangeOverstatedNoWall": [
-							3000,
-							3000,
-							3000,
-							3000,
-							3000,
-							3000,
-							3000
-						],
-						"CarrySpeedUnderstatedNoWall": [
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600,
-							1600
-						],
-						"CarrySpeedNoWall": [
-							800,
-							800,
-							800,
-							800,
-							800,
-							800,
-							800
-						],
-						"KsanteAnimLockWall": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"DistanceTriggerFasterCarrySpeed": [
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400,
-							1400
-						],
-						"FasterCarrySpeed": [
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500,
-							1500
-						],
-						"AuraOffset": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"LingeringPerceptionPostStun": [
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5,
-							1.5
-						],
-						"WallLookAhead": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"VfxInWallPerDistance": [
-							200,
-							200,
-							200,
-							200,
-							200,
-							200,
-							200
-						],
-						"AnimationDashTime": [
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3,
-							0.3
-						],
-						"DistanceRatioMin": [
-							600,
-							600,
-							600,
-							600,
-							600,
-							600,
-							600
-						],
-						"DistanceRatioMax": [
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000,
-							2000
-						],
-						"CarrySpeedRatioMin": [
-							900,
-							900,
-							900,
-							900,
-							900,
-							900,
-							900
-						],
-						"CarrySpeedRatioMax": [
-							1700,
-							1700,
-							1700,
-							1700,
-							1700,
-							1700,
-							1700
-						],
-						"CameraHoldRatioMin": [
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2,
-							0.2
-						],
-						"CameraHoldRatioMax": [
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7,
-							0.7
-						],
-						"InitialAnimHoldMax": [
-							0.27,
-							0.27,
-							0.27,
-							0.27,
-							0.27,
-							0.27,
-							0.27
-						],
-						"CastTime": [
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35,
-							0.35
-						],
-						"WallBufferFailCase": [
-							100,
-							100,
-							100,
-							100,
-							100,
-							100,
-							100
-						],
-						"VictimCameraZoomMin": [
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5,
-							0.5
-						],
-						"VictimCameraZoomMax": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						]
+						"AllOutDuration": [15, 15, 15, 15, 15, 15, 15],
+						"BaseDamage": [45, 80, 115, 150, 185, 220, 255],
+						"SlamDownStrikeDamage": [45, 80, 115, 150, 185, 220, 255],
+						"WallStunDuration": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"NoWallStunDuration": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
+						"MaxSuppressTime": [10, 10, 10, 10, 10, 10, 10],
+						"TackleRange": [300, 300, 300, 300, 300, 300, 300],
+						"TackleSpeed": [2000, 2000, 2000, 2000, 2000, 2000, 2000],
+						"CarrySpeed": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
+						"MaxWallCarry": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
+						"MaxWallCarrySR": [5000, 5000, 5000, 5000, 5000, 5000, 5000],
+						"WallCheckDist": [-25, -25, -25, -25, -25, -25, -25],
+						"KSanteLandingOffset": [250, 250, 250, 250, 250, 250, 250],
+						"WallBuffer": [350, 350, 350, 350, 350, 350, 350],
+						"HealthLost": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"DefensesLost": [0.85, 0.85, 0.85, 0.85, 0.85, 0.85, 0.85],
+						"Omnivamp": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"AttackSpeed": [0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4],
+						"ArmorPenPercent": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"KsanteArrivesFirstBySec": [1, 1, 1, 1, 1, 1, 1],
+						"AfterImageArrivesFirstBySec": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"ManaRegenPercent": [5, 5, 5, 5, 5, 5, 5],
+						"KnockGrav": [14, 14, 14, 14, 14, 14, 14],
+						"TimeToLast": [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18],
+						"TackleRangeOverstatedNoWall": [3000, 3000, 3000, 3000, 3000, 3000, 3000],
+						"CarrySpeedUnderstatedNoWall": [1600, 1600, 1600, 1600, 1600, 1600, 1600],
+						"CarrySpeedNoWall": [800, 800, 800, 800, 800, 800, 800],
+						"KsanteAnimLockWall": [1, 1, 1, 1, 1, 1, 1],
+						"DistanceTriggerFasterCarrySpeed": [1400, 1400, 1400, 1400, 1400, 1400, 1400],
+						"FasterCarrySpeed": [1500, 1500, 1500, 1500, 1500, 1500, 1500],
+						"AuraOffset": [200, 200, 200, 200, 200, 200, 200],
+						"LingeringPerceptionPostStun": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
+						"WallLookAhead": [100, 100, 100, 100, 100, 100, 100],
+						"VfxInWallPerDistance": [200, 200, 200, 200, 200, 200, 200],
+						"AnimationDashTime": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"DistanceRatioMin": [600, 600, 600, 600, 600, 600, 600],
+						"DistanceRatioMax": [2000, 2000, 2000, 2000, 2000, 2000, 2000],
+						"CarrySpeedRatioMin": [900, 900, 900, 900, 900, 900, 900],
+						"CarrySpeedRatioMax": [1700, 1700, 1700, 1700, 1700, 1700, 1700],
+						"CameraHoldRatioMin": [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2],
+						"CameraHoldRatioMax": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7],
+						"InitialAnimHoldMax": [0.27, 0.27, 0.27, 0.27, 0.27, 0.27, 0.27],
+						"CastTime": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+						"WallBufferFailCase": [100, 100, 100, 100, 100, 100, 100],
+						"VictimCameraZoomMin": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"VictimCameraZoomMax": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8]
 					},
 					"spellCalculations": {
 						"TotalDamageSlamDown": {
@@ -1232,69 +300,13 @@
 					"tooltip": "{{Spell_KSanteP_Tooltip}}",
 					"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules><br>",
 					"dataValues": {
-						"MarkDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"RecoveryPercent": [
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8,
-							0.8
-						],
-						"ArmorMRMultiplier": [
-							0.002,
-							0.002,
-							0.002,
-							0.002,
-							0.002,
-							0.002,
-							0.002
-						],
-						"PassiveStartingDamage": [
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004,
-							0.004
-						],
-						"MaxHealthDamagePercentBase": [
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01,
-							0.01
-						],
-						"MaxHealthDamageResistRatio": [
-							0,
-							0,
-							0,
-							0,
-							0,
-							0,
-							0
-						],
-						"FlatDamage": [
-							12,
-							12,
-							12,
-							12,
-							12,
-							12,
-							12
-						]
+						"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
+						"RecoveryPercent": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"ArmorMRMultiplier": [0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002],
+						"PassiveStartingDamage": [0.004, 0.004, 0.004, 0.004, 0.004, 0.004, 0.004],
+						"MaxHealthDamagePercentBase": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"MaxHealthDamageResistRatio": [0, 0, 0, 0, 0, 0, 0],
+						"FlatDamage": [12, 12, 12, 12, 12, 12, 12]
 					},
 					"spellCalculations": {
 						"{281dd874}": {

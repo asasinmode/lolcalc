@@ -35,87 +35,16 @@
 					"name": "Decimating Smash",
 					"image": "assets/characters/sion/hud/icons2d/sion_q.png",
 					"tooltip": "<charge>Begin Charging</charge>: Sion charges a heavy blow for up to 2 seconds.<br><br><release>Release</release>: Sion slams his axe down, briefly <status>Slowing</status> and dealing between <physicalDamage>@MinDamageTotal@ and @MaxDamageTotal@ physical damage</physicalDamage> based on charge time. If Sion charged for at least 1 second, enemies are <status>Knocked Up</status> and <status>Stunned</status> for between @BaseStunTime@ and 2.25 seconds based on charge time.",
-					"mana": [
-						45,
-						45,
-						45,
-						45,
-						45,
-						45
-					],
-					"cooldownTime": [
-						11,
-						10,
-						9,
-						8,
-						7,
-						6,
-						6
-					],
+					"mana": [45, 45, 45, 45, 45, 45],
+					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
-						"ADRatioMin": [
-							0.3,
-							0.4,
-							0.5,
-							0.6,
-							0.7,
-							0.8,
-							0.9
-						],
-						"ADRatioMax": [
-							0.9,
-							1.2,
-							1.5,
-							1.8,
-							2.1,
-							2.4,
-							2.7
-						],
-						"LowDamage": [
-							20,
-							40,
-							60,
-							80,
-							100,
-							120,
-							140
-						],
-						"HighDamage": [
-							25,
-							90,
-							155,
-							220,
-							285,
-							350,
-							415
-						],
-						"MinionRatio": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"MonsterRatio": [
-							165,
-							165,
-							165,
-							165,
-							165,
-							165,
-							165
-						],
-						"BaseStunTime": [
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25,
-							1.25
-						]
+						"ADRatioMin": [0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+						"ADRatioMax": [0.9, 1.2, 1.5, 1.8, 2.1, 2.4, 2.7],
+						"LowDamage": [20, 40, 60, 80, 100, 120, 140],
+						"HighDamage": [25, 90, 155, 220, 285, 350, 415],
+						"MinionRatio": [60, 60, 60, 60, 60, 60, 60],
+						"MonsterRatio": [165, 165, 165, 165, 165, 165, 165],
+						"BaseStunTime": [1.25, 1.25, 1.25, 1.25, 1.25, 1.25, 1.25]
 					},
 					"spellCalculations": {
 						"MinDamageTotal": {
@@ -147,51 +76,11 @@
 						}
 					},
 					"effectAmount": {
-						"4": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"6": [
-							7.5,
-							7.5,
-							7.5,
-							7.5,
-							7.5,
-							7.5,
-							7.5
-						],
-						"7": [
-							60,
-							60,
-							60,
-							60,
-							60,
-							60,
-							60
-						],
-						"8": [
-							150,
-							150,
-							150,
-							150,
-							150,
-							150,
-							150
-						],
-						"9": [
-							-0.8,
-							-0.8,
-							-0.8,
-							-0.8,
-							-0.8,
-							-0.8,
-							-0.8
-						]
+						"4": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"6": [7.5, 7.5, 7.5, 7.5, 7.5, 7.5, 7.5],
+						"7": [60, 60, 60, 60, 60, 60, 60],
+						"8": [150, 150, 150, 150, 150, 150, 150],
+						"9": [-0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8]
 					},
 					"dataKey": "Characters/Sion/Spells/SionQAbility/SionQ"
 				}
@@ -205,69 +94,14 @@
 					"image": "assets/characters/sion/hud/icons2d/sion_w1.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: Sion gains <scaleHealth>@HPPerKill@ max Health</scaleHealth> when he kills a unit, or @HPPerChampKill@ for champion takedowns, large minions and large monsters.<br><br><spellActive>Active</spellActive>: Sion gains <shield>@TotalShield@ Shield</shield> for 6 seconds. After @Effect7Amount@ seconds if the shield still holds, Sion can <recast>Recast</recast> to detonate the shield to deal <magicDamage>@TotalDamage@ plus @Effect4Amount@% max Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_SionW_Tooltip}}<br><br>Current Bonus Health: <statTracking>@f1@</statTracking>",
-					"mana": [
-						65,
-						70,
-						75,
-						80,
-						85,
-						90
-					],
-					"cooldownTime": [
-						15,
-						15,
-						14,
-						13,
-						12,
-						11,
-						11
-					],
+					"mana": [65, 70, 75, 80, 85, 90],
+					"cooldownTime": [15, 15, 14, 13, 12, 11, 11],
 					"dataValues": {
-						"ShieldPercentHealthTooltip": [
-							0.06,
-							0.08,
-							0.1,
-							0.12,
-							0.14,
-							0.16,
-							0.18
-						],
-						"DamagePercentHealthTooltip": [
-							0.09,
-							0.1,
-							0.11,
-							0.12,
-							0.13,
-							0.14,
-							0.15
-						],
-						"HPPerChampKill": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"HPPerKill": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"HPPerLargeKill": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						]
+						"ShieldPercentHealthTooltip": [0.06, 0.08, 0.1, 0.12, 0.14, 0.16, 0.18],
+						"DamagePercentHealthTooltip": [0.09, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15],
+						"HPPerChampKill": [15, 15, 15, 15, 15, 15, 15],
+						"HPPerKill": [4, 4, 4, 4, 4, 4, 4],
+						"HPPerLargeKill": [15, 15, 15, 15, 15, 15, 15]
 					},
 					"spellCalculations": {
 						"TotalShield": {
@@ -301,87 +135,15 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							60,
-							60,
-							75,
-							90,
-							105,
-							120,
-							120
-						],
-						"1": [
-							15,
-							40,
-							65,
-							90,
-							115,
-							140,
-							165
-						],
-						"2": [
-							8,
-							8,
-							10,
-							12,
-							14,
-							16,
-							16
-						],
-						"3": [
-							14,
-							14,
-							14,
-							14,
-							14,
-							14,
-							14
-						],
-						"4": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"5": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"6": [
-							3,
-							3,
-							3,
-							3,
-							3,
-							3,
-							3
-						],
-						"7": [
-							15,
-							15,
-							15,
-							15,
-							15,
-							15,
-							15
-						],
-						"8": [
-							6,
-							6,
-							6,
-							6,
-							6,
-							6,
-							6
-						]
+						"0": [60, 60, 75, 90, 105, 120, 120],
+						"1": [15, 40, 65, 90, 115, 140, 165],
+						"2": [8, 8, 10, 12, 14, 16, 16],
+						"3": [14, 14, 14, 14, 14, 14, 14],
+						"4": [4, 4, 4, 4, 4, 4, 4],
+						"5": [15, 15, 15, 15, 15, 15, 15],
+						"6": [3, 3, 3, 3, 3, 3, 3],
+						"7": [15, 15, 15, 15, 15, 15, 15],
+						"8": [6, 6, 6, 6, 6, 6, 6]
 					},
 					"dataKey": "Characters/Sion/Spells/SionWAbility/SionW"
 				}
@@ -394,78 +156,15 @@
 					"name": "Roar of the Slayer",
 					"image": "assets/characters/sion/hud/icons2d/sion_e.png",
 					"tooltip": "Sion fires a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @SlowAmount@% for @SlowDuration@ seconds and removing <scaleArmor>@ArmorShred@% Armor</scaleArmor> for @ArmorShredDuration@ seconds. Non-champions hit are <status>Knocked Back</status>. Enemies hit by a <status>Knocked Back</status> unit take the same damage and effects.",
-					"mana": [
-						35,
-						40,
-						45,
-						50,
-						55,
-						60
-					],
-					"cooldownTime": [
-						13,
-						12,
-						11,
-						10,
-						9,
-						8,
-						8
-					],
+					"mana": [35, 40, 45, 50, 55, 60],
+					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
-						"BaseDamage": [
-							30,
-							65,
-							100,
-							135,
-							170,
-							205,
-							240
-						],
-						"SlowAmount": [
-							35,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						],
-						"ArmorShred": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"SlowDuration": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						],
-						"ArmorShredDuration": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"APRatio": [
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55,
-							0.55
-						]
+						"BaseDamage": [30, 65, 100, 135, 170, 205, 240],
+						"SlowAmount": [35, 40, 45, 50, 55, 60, 65],
+						"ArmorShred": [25, 25, 25, 25, 25, 25, 25],
+						"SlowDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
+						"ArmorShredDuration": [4, 4, 4, 4, 4, 4, 4],
+						"APRatio": [0.55, 0.55, 0.55, 0.55, 0.55, 0.55, 0.55]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -483,78 +182,14 @@
 						}
 					},
 					"effectAmount": {
-						"0": [
-							65,
-							65,
-							100,
-							135,
-							170,
-							205,
-							205
-						],
-						"1": [
-							35,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						],
-						"2": [
-							5,
-							5,
-							5,
-							5,
-							5,
-							5,
-							5
-						],
-						"3": [
-							35,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						],
-						"4": [
-							25,
-							25,
-							25,
-							25,
-							25,
-							25,
-							25
-						],
-						"5": [
-							30,
-							30,
-							30,
-							30,
-							30,
-							30,
-							30
-						],
-						"6": [
-							4,
-							4,
-							4,
-							4,
-							4,
-							4,
-							4
-						],
-						"7": [
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5,
-							2.5
-						]
+						"0": [65, 65, 100, 135, 170, 205, 205],
+						"1": [35, 40, 45, 50, 55, 60, 65],
+						"2": [5, 5, 5, 5, 5, 5, 5],
+						"3": [35, 40, 45, 50, 55, 60, 65],
+						"4": [25, 25, 25, 25, 25, 25, 25],
+						"5": [30, 30, 30, 30, 30, 30, 30],
+						"6": [4, 4, 4, 4, 4, 4, 4],
+						"7": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
 					"dataKey": "Characters/Sion/Spells/SionEAbility/SionE"
 				}
@@ -567,87 +202,16 @@
 					"name": "Unstoppable Onslaught",
 					"image": "assets/characters/sion/hud/icons2d/sion_r1.png",
 					"tooltip": "Sion charges Unstoppably in a direction for 8 seconds, turning towards the mouse cursor. Sion stops on colliding with an enemy champion or wall or on <recast>Recasting</recast> this Ability.  <br><br>At the end of the charge, Sion deals between <physicalDamage>@MinDamageTotal@ and @MaxDamageTotal@ physical damage</physicalDamage> based on distance travelled. Enemies close to Sion are <status>Stunned</status> for between @MinStunDuration@ and @MaxStunDuration@ seconds based on distance travelled. Enemies in a larger area are <status>Slowed</status> by @SlowAmount@% for 3 seconds.",
-					"mana": [
-						100,
-						100,
-						100,
-						0,
-						0,
-						0
-					],
-					"cooldownTime": [
-						10,
-						140,
-						100,
-						60,
-						10,
-						10,
-						10
-					],
+					"mana": [100, 100, 100, 0, 0, 0],
+					"cooldownTime": [10, 140, 100, 60, 10, 10, 10],
 					"dataValues": {
-						"MinDamage": [
-							0,
-							150,
-							300,
-							450,
-							600,
-							750,
-							900
-						],
-						"MaxDamage": [
-							0,
-							400,
-							800,
-							1200,
-							1600,
-							2000,
-							2400
-						],
-						"SlowAmount": [
-							35,
-							40,
-							45,
-							50,
-							55,
-							60,
-							65
-						],
-						"MinionDamagePercent": [
-							500,
-							500,
-							500,
-							500,
-							500,
-							500,
-							500
-						],
-						"MinStunDuration": [
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75,
-							0.75
-						],
-						"MaxStunDuration": [
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75,
-							1.75
-						],
-						"MoveSpeedCap": [
-							950,
-							950,
-							950,
-							950,
-							950,
-							950,
-							950
-						]
+						"MinDamage": [0, 150, 300, 450, 600, 750, 900],
+						"MaxDamage": [0, 400, 800, 1200, 1600, 2000, 2400],
+						"SlowAmount": [35, 40, 45, 50, 55, 60, 65],
+						"MinionDamagePercent": [500, 500, 500, 500, 500, 500, 500],
+						"MinStunDuration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
+						"MaxStunDuration": [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75],
+						"MoveSpeedCap": [950, 950, 950, 950, 950, 950, 950]
 					},
 					"spellCalculations": {
 						"MinDamageTotal": {
@@ -694,42 +258,10 @@
 					"tooltip": "{{Spell_SionPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_SionPassive_Tooltip}}<br><br><rules>Max @NonChampCap@ bonus damage against non-champions.<br>Sion deals @StructureMod*100@% damage to structures while in this form.</rules>",
 					"dataValues": {
-						"Lifesteal": [
-							1,
-							1,
-							1,
-							1,
-							1,
-							1,
-							1
-						],
-						"PercentMaxHP": [
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1,
-							0.1
-						],
-						"NonChampCap": [
-							75,
-							75,
-							75,
-							75,
-							75,
-							75,
-							75
-						],
-						"StructureMod": [
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4,
-							0.4
-						]
+						"Lifesteal": [1, 1, 1, 1, 1, 1, 1],
+						"PercentMaxHP": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"NonChampCap": [75, 75, 75, 75, 75, 75, 75],
+						"StructureMod": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
 					},
 					"dataKey": "Characters/Sion/Spells/SionPassiveAbility/SionPassive"
 				}
