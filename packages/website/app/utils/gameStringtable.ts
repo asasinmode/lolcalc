@@ -32,12 +32,16 @@ export function replaceGameDescriptionStringtableVariables(
 
 						const possibleValueText = stringtable[possibleValueVariableName];
 						if (!possibleValueText) {
-							console.warn(`possible dynamic value stringtable key ${possibleValueVariableName} not found in the stringtable`);
+							unknownStringtableVariables.push([variableName, possibleValueVariableName]);
 							continue;
 						}
 
 						const { replaced } = replaceGameDescriptionStringtableVariables(possibleValueText, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
 						stringtableVariables.set(possibleValueVariableName, replaced);
+
+						if (replaced.includes('{{')) {
+							replaceGameDescriptionStringtableVariables(replaced, stringtable, dynamicValues, wrapUnknown, unknownStringtableVariables, stringtableVariables);
+						}
 					}
 
 					return `{{${name}}}`;
