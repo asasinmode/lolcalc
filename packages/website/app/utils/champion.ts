@@ -18,6 +18,11 @@ export const CHAMPION_SPECIFICS = {
 			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)),
 		},
 	},
+	Kayn: {
+		POSSIBLE_DYNAMIC_VALUES: {
+			f1: [0, 1, 2],
+		},
+	},
 };
 
 /**

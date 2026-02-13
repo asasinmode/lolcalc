@@ -315,6 +315,9 @@
 		}
 	},
 	"stringtable": {
+		"game_spell_kayn_p_main_0": "Kayn the <keywordMajor>Shadow Assassin</keywordMajor> fights Rhaast the <keywordMajor>Darkin Slayer</keywordMajor> for control. One will win, the other will die.<br><br>Damaging ranged champions charges the <keywordMajor>Shadow Assassin</keywordMajor>, and damaging melee champions charges the <keywordMajor>Darkin Slayer</keywordMajor>. At full charge, Kayn can permanently transform at his fountain.<br><br><keywordMajor>Shadow Assassin:</keywordMajor> After entering combat Kayn's Attacks and Abilities deal an additional <magicDamage>@KaynAssBonusDamage@ damage dealt magic damage</magicDamage> for 3 seconds. This only occurs if Kayn has been out of combat for @PAmpCooldownAss@ seconds or used <spellName>Umbral Trespass</spellName>.<br><br><keywordMajor>Darkin Slayer:</keywordMajor> Kayn heals for @KaynSlayerHealing@ of physical damage dealt to champions.",
+		"game_spell_kayn_p_main_1": "The <keywordMajor>Shadow Assassin</keywordMajor> has won.<br><br><keywordMajor>Shadow Assassin:</keywordMajor> After entering combat Kayn's Attacks and Abilities deal an additional <magicDamage>@KaynAssBonusDamage@ damage dealt magic damage</magicDamage> for 3 seconds. This only occurs if Kayn has been out of combat for @PAmpCooldownAss@ seconds or used <spellName>Umbral Trespass</spellName>.",
+		"game_spell_kayn_p_main_2": "The <keywordMajor>Darkin Slayer</keywordMajor> has won.<br><br><keywordMajor>Darkin Slayer:</keywordMajor> Kayn heals for @KaynSlayerHealing@ of physical damage dealt to champions.",
 		"spell_kaynpassive_tooltip": "{{game_spell_Kayn_P_main_@f1@}}"
 	}
 }
