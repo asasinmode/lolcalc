@@ -22,6 +22,7 @@ export function replaceGameDescriptionStringtableVariables(
 			const subVariableValue = subVariableName in dynamicValues ? dynamicValues[subVariableName] : Object.entries(dynamicValues).find(([key]) => key.toLowerCase() === subVariableName)?.[1];
 
 			if (subVariableValue !== undefined) {
+				/** array branch means it's most likely updateGameData and it's being used to get all of the possible values for this variable to save in the champion's stringtable */
 				if (Array.isArray(subVariableValue)) {
 					for (const possibleSubVariableValue of subVariableValue) {
 						const possibleValueVariableName = `${subVariablePrefix}${possibleSubVariableValue}`;
@@ -39,7 +40,7 @@ export function replaceGameDescriptionStringtableVariables(
 						stringtableVariables.set(possibleValueVariableName, replaced);
 					}
 
-					return name;
+					return `{{${name}}}`;
 				} else {
 					variableName = `${variableName.slice(0, subVariableStartIndex - 1)}_${subVariableValue}`;
 				}

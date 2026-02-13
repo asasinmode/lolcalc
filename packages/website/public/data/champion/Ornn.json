@@ -274,6 +274,6 @@
 	},
 	"stringtable": {
 		"spell_ornnp_tooltip_1": "Ornn can spend gold to forge non-consumable items anywhere.<br><br>When Ornn reaches level @MasterworkLevel@, he will upgrade one of his Legendary items into a Masterwork Item. For each level after @MasterworkLevel@, Ornn can upgrade an ally's Legendary Item by clicking on them while nearby.<br><br>Ornn gains an additional @BaseStatAmp*100@% bonus <healing>Health</healing>, <scaleArmor>Armor</scaleArmor>, and <scaleMR>Magic Resist</scaleMR> from all sources. This value increases by @AdditionalMythicStatAmp*100@% of these bonus stats per Legendary item Ornn upgrades.",
-		"spell_ornnp_tooltipextended_1": "Spell_OrnnP_Tooltip_@GameModeInteger@<br><br>Current Amp: <statTracking>@f1@%</statTracking> (<scaleArmor>@f2@ Armor</scaleArmor>/<scaleMR>@f3@ Magic Resist</scaleMR>/<healing>@f4@ Health</healing>)<br><br><rules>A champion may only have one Masterwork item.<br>Ornn can smith items directly from his forge menu or the shop.</rules>"
+		"spell_ornnp_tooltipextended_1": "{{Spell_OrnnP_Tooltip_@GameModeInteger@}}<br><br>Current Amp: <statTracking>@f1@%</statTracking> (<scaleArmor>@f2@ Armor</scaleArmor>/<scaleMR>@f3@ Magic Resist</scaleMR>/<healing>@f4@ Health</healing>)<br><br><rules>A champion may only have one Masterwork item.<br>Ornn can smith items directly from his forge menu or the shop.</rules>"
 	}
 }
