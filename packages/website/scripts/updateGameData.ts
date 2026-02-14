@@ -771,6 +771,10 @@ function getStringtableValue(path: string, debugPrefix: string, variableDebug?: 
 			((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
 		}
 		// TODO try hashed stringtable variables, cant figure out what the hashing algorithm is atm
+		// in passives only Zilean and Kalista have their tooltips hashed using xxh3 but the hashes my version outputs are 1 letter different from what's in the stringtable
+		// for Kalista `74fdc9540b` instead of `34fdc9540b`
+		// for Zilean `7ce6b5f53c` instead of `3ce6b5f53c`
+		// so when implementing trying hash variable either make some workaround with checking if 9 match or find the cause of the problem
 		if (unknownStringtableVariables.size) {
 			debug[category].stringtableVariables.set(key, unknownStringtableVariables);
 		}
@@ -1015,7 +1019,7 @@ function championAbilityVariants(
 		variant.tooltipExtended = mLocKeys.keyTooltipExtended && getStringtableValue(
 			mLocKeys.keyTooltipExtended,
 			`${variantDataKey} tooltip extended`,
-			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} extended` } : undefined,
+			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended` } : undefined,
 		);
 
 		/** many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
