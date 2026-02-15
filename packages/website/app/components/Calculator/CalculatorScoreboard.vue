@@ -25,7 +25,8 @@ let dragTimeout: ReturnType<typeof setTimeout> | undefined;
 let disableDragTargetPointerEventsTimeout: ReturnType<typeof setTimeout> | undefined;
 let droppedAt: { target: DamageSource[]; index: number; dropDirection: 'above' | 'below' } | undefined;
 
-function startDrag(event: MouseEvent, index: number, source: DamageSource[], duplicate?: boolean) {
+// TODO try to see if drag and drop API is easier, especially for mobile?
+function startDrag(event: MouseEvent, source: DamageSource[], index: number, duplicate?: boolean) {
 	const value = source[index]!;
 	let runePathPrimaryKeystone;
 	let runePathSecondary;
@@ -262,6 +263,49 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 	const newItem = alt ? markRaw(target[index]!.clone()) : target.splice(index, 1)[0]!;
 	target.splice(toIndex, 0, newItem);
 }
+
+let draggingFromItemListEl: HTMLUListElement | null;
+let draggingOntoItemListEl: HTMLUListElement | null;
+
+function startItemDrag(event: DragEvent, source: DamageSource[], index: number, itemIndex: number) {
+	draggingFromItemListEl = (event.target as HTMLImageElement).closest('ul');
+	event.dataTransfer!.effectAllowed = 'copyMove';
+	event.dataTransfer!.setData('target', source === damageSources.value ? 'targets' : 'sources');
+	event.dataTransfer!.setData('index', index.toString());
+	event.dataTransfer!.setData('index', itemIndex.toString());
+	console.log('item drag started', draggingFromItemListEl, event.dataTransfer);
+}
+
+// TODO show icon item is being dropped here
+function showItemDropIndicator(event: DragEvent) {
+	const el = event.target as HTMLUListElement;
+	if (draggingFromItemListEl?.contains(el) || draggingOntoItemListEl === el) {
+		return;
+	}
+	draggingOntoItemListEl = el;
+	// event.preventDefault();
+	console.log('possibly dropping on', el);
+}
+
+function handleItemDropIndicator(event: DragEvent) {
+	// event.preventDefault();
+	// console.log('dragover', event.target);
+}
+
+function hideItemDropIndicator(event: DragEvent) {
+	const el = event.target as HTMLUListElement;
+	if (draggingFromItemListEl?.contains(el) || draggingOntoItemListEl === el) {
+		return;
+	}
+	draggingOntoItemListEl = null;
+	console.log('not dropping', event.target);
+}
+
+function dropItem(event: DragEvent, target: DamageSource[], index: number) {
+	console.log('dropping from', event.dataTransfer, 'into', index);
+	draggingFromItemListEl = null;
+	draggingOntoItemListEl = null;
+}
 </script>
 
 <template>
@@ -301,7 +345,12 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				@duplicate="duplicate(index, damageSources, $event)"
 				@change-group="changeGroup(index, damageSources, $event)"
 				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
-				@start-drag="(event, duplicate) => startDrag(event, index, damageSources, duplicate)"
+				@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
+				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageSources, index, itemIndex)"
+				@item-list-dragenter="showItemDropIndicator"
+				@item-list-dragover="handleItemDropIndicator"
+				@item-list-dragleave="hideItemDropIndicator"
+				@item-list-drop="dropItem($event, damageSources, index)"
 			/>
 			<li>
 				<button
@@ -334,7 +383,12 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 				@duplicate="duplicate(index, damageTargets, $event)"
 				@change-group="changeGroup(index, damageTargets, $event)"
 				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
-				@start-drag="(event, duplicate) => startDrag(event, index, damageTargets, duplicate)"
+				@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
+				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageTargets, index, itemIndex)"
+				@item-list-dragenter="showItemDropIndicator"
+				@item-list-dragover="handleItemDropIndicator"
+				@item-list-dragleave="hideItemDropIndicator"
+				@item-list-drop="dropItem($event, damageTargets, index)"
 			/>
 			<li>
 				<button

@@ -15,6 +15,11 @@ const emit = defineEmits<{
 	changeGroup: [alt: boolean];
 	move: [toIndex: number, alt: boolean];
 	startDrag: [event: MouseEvent, duplicate?: boolean];
+	itemListDragenter: [event: DragEvent];
+	itemListDragover: [event: DragEvent];
+	itemListDragleave: [event: DragEvent];
+	itemListDrop: [event: DragEvent];
+	itemDragstart: [ event: DragEvent, itemIndex: number];
 }>();
 
 const runes = useRunes();
@@ -621,11 +626,17 @@ defineExpose({ el });
 				class="w-4"
 			>
 		</button>
-		<ul class="flex h-8">
+		<ul
+			class="flex h-8"
+			@dragenter="$emit('itemListDragenter', $event)"
+			@dragover="$emit('itemListDragover', $event)"
+			@dragleave="$emit('itemListDragleave', $event)"
+			@drop="$emit('itemListDrop', $event)"
+		>
 			<li v-for="i in 6" :key="i" class="me-0.5 last:me-0">
-				<button
+				<component
+					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					class="bg-black size-8 inline-block"
-					:disabled="!value.items.value[i - 1]"
 					@click.right.prevent="value.items.value.splice(i - 1, 1)"
 				>
 					<span class="sr-only">{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
@@ -635,8 +646,9 @@ defineExpose({ el });
 						width="64"
 						height="64"
 						loading="lazy"
+						@dragstart="$emit('itemDragstart', $event, i - 1)"
 					>
-				</button>
+				</component>
 			</li>
 		</ul>
 		<button
@@ -903,7 +915,7 @@ defineExpose({ el });
 		}
 
 		> [data-select-items] {
-			--at-apply: 'mx-2 b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 self-center';
+			--at-apply: 'mx-2 b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 self-center w-max whitespace-nowrap';
 			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-items;
 
@@ -913,7 +925,7 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'self-center me-3';
+			--at-apply: 'self-center me-3 w-min';
 			grid-area: items;
 		}
 
