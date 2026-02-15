@@ -63,7 +63,7 @@ defineExpose({
 					<span class="sr-only">{{ role }}</span>
 				</template>
 			</VButtonRadiogroup>
-			<div data-inline-search-label="">
+			<div class="inline-search-label">
 				<input
 					id="champ-select-search"
 					v-model="search"

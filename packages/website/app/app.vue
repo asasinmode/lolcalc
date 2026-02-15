@@ -41,20 +41,3 @@ const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]) 
 	<ItemShop />
 	<RuneSelect />
 </template>
-
-<style>
-@layer components {
-	:root {
-		--ui-button-border-clr: hsl(40 59% 61%);
-		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
-	}
-
-	.pretend-ui-button {
-		--at-apply: 'b b-[--ui-button-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
-
-		.icon {
-			--at-apply: 'text-[--ui-pretend-button-icon-clr]';
-		}
-	}
-}
-</style>

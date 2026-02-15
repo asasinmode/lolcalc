@@ -683,9 +683,9 @@ defineExpose({ el });
 						</dd>
 					</template>
 				</dl>
-				<div id="champion-stat-hover-tooltip" ref="championStatTooltip" popover="hint">
+				<div ref="championStatTooltip" class="hover-tooltip champion-stat-hover-tooltip" popover="hint">
 					<h4>{{ hoveredStat?.name }}</h4>
-					<p data-game-description="" v-html="hoveredStat?.description" />
+					<p class="game-description" v-html="hoveredStat?.description" />
 					<dl>
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 							<dt>{{ statValue.name }}:</dt>
@@ -988,8 +988,8 @@ defineExpose({ el });
 				}
 			}
 
-			#champion-stat-hover-tooltip {
-				--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none absolute py-1 px-1.5 b b-[--ui-button-border-clr] text-neutral-300';
+			.champion-stat-hover-tooltip {
+				--at-apply: 'py-1 px-1.5';
 				inset: unset;
 				position-anchor: --champion-stats-minor;
 				bottom: calc(anchor(top) - 1px);

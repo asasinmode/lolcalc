@@ -31,9 +31,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] alt + move = duplicate
     - [x] shift + click remove = clear
     - [x] dragging
-  - [ ] drag items
-    - [ ] in current inventory
-    - [ ] between inventories
+  - [ ] items
+    - [ ] drag between/in current inventory
+    - [ ] hover tooltip
   - [ ] mirror layout
   - [ ] first source/target is what's used in damage results?
   - [ ] expanded

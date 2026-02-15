@@ -89,8 +89,21 @@
 	}
 }
 
-@layer component {
-	[data-inline-search-label] {
+@layer components {
+	:root {
+		--ui-button-border-clr: hsl(40 59% 61%);
+		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
+	}
+
+	.pretend-ui-button {
+		--at-apply: 'b b-[--ui-button-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
+
+		.icon {
+			--at-apply: 'text-[--ui-pretend-button-icon-clr]';
+		}
+	}
+
+	.inline-search-label {
 		--at-apply: relative;
 
 		label {
@@ -100,5 +113,9 @@
 		input:is(:focus, :focus-visible, :not([data-empty='true'])) + label span:nth-child(2) {
 			opacity: 0;
 		}
+	}
+
+	.hover-tooltip {
+		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-button-border-clr] text-neutral-300';
 	}
 }

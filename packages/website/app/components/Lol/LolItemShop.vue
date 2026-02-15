@@ -341,7 +341,7 @@ defineExpose({
 					</span>
 				</button>
 			</form>
-			<div class="col-span-full" data-inline-search-label="" @focusout="closeSearchIfOutside">
+			<div class="inline-search-label col-span-full" @focusout="closeSearchIfOutside">
 				<input
 					id="item-shop-search"
 					ref="searchInput"
@@ -697,7 +697,7 @@ defineExpose({
 			<button>Sell</button>
 			<button>Undo</button>
 		</footer>
-		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint">
+		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
 			<ItemDescription :item="hoveredItem" :target header-subtitles />
 		</div>
 	</VDialog>
@@ -890,7 +890,7 @@ defineExpose({
 	}
 
 	#item-shop-hover-tooltip {
-		--at-apply: 'bg-neutral-950 max-w-screen w-(--width) pointer-events-none fixed';
+		--at-apply: 'w-(--width) fixed';
 		--width: 36rem;
 		inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 		inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));

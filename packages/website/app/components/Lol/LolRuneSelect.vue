@@ -199,7 +199,7 @@ const hoveredRuneTooltip = computed(() => {
 		[hoveredRune.value.rune],
 	);
 
-	const anyUnknownVariables = shortUnknownSV.length || shortUnknownV.length || longUnknownSV.length || longUnknownV.length;
+	const anyUnknownVariables = shortUnknownSV.size || shortUnknownV.length || longUnknownSV.size || longUnknownV.length;
 
 	return { shortReplaced, longReplaced, anyUnknownVariables };
 });
@@ -389,7 +389,7 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" data-game-description="">
+		<div id="rune-select-dialog-hover-tooltip" ref="runeDescriptionTooltip" popover="hint" class="hover-tooltip game-description">
 			<h4>{{ hoveredRune?.title }}</h4>
 			<div v-html="globalKeyModifiers.shift && hoveredRuneTooltip?.longReplaced || hoveredRuneTooltip?.shortReplaced" />
 			<UnresolvedVariablesAlert v-if="hoveredRuneTooltip?.anyUnknownVariables" />
@@ -781,14 +781,14 @@ defineExpose({
 	}
 
 	#rune-select-dialog-hover-tooltip {
-		--at-apply: 'bg-neutral-900 b-2 b-[--ui-button-border-clr] w-(--width) pointer-events-none fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
+		--at-apply: 'b-2 w-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
 
 		--width: 21.5rem;
 		inset-inline-start: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
 		top: clamp(var(--height), var(--top), 100vh);
 
 		h4 {
-			--at-apply: 'font-600 uppercase mb-1 tracking-wide';
+			--at-apply: 'font-600 text-white uppercase mb-1 tracking-wide';
 		}
 
 		> div {
@@ -806,7 +806,7 @@ defineExpose({
 			li {
 				--at-apply: 'ms-5';
 
-				/* IMPORTANT workaround for grasp of undying that has nested <rules>, maybe need to parse it properly if more things do it */
+				/* WORKAROUND for grasp of undying that has nested <rules>, maybe need to parse it properly if more things do it */
 				rules {
 					--at-apply: '-ms-5 block';
 				}

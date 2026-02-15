@@ -125,7 +125,7 @@ defineExpose({ header });
 		<span>{{ contents.subtitleLeft }}</span>
 		<span>{{ contents.subtitleRight }}</span>
 	</component>
-	<div class="item-description-content" :class="descriptionClass">
+	<div class="item-description" :class="descriptionClass">
 		<UnresolvedVariablesAlert v-if="contents.anyUnknownExtraVariables" />
 		<ul>
 			<li v-for="([icon, value, name], i) in contents.stats" :key="i">
@@ -190,7 +190,7 @@ defineExpose({ header });
 		}
 	}
 
-	.item-description-content {
+	.item-description {
 		ul li {
 			--at-apply: 'flex items-center gap-[0.5ch]';
 
@@ -234,8 +234,8 @@ defineExpose({ header });
 		}
 	}
 
-	.item-description-content,
-	[data-game-description] {
+	.item-description,
+	.game-description {
 		unknown {
 			color: #ff00ff;
 			font-weight: 700;
