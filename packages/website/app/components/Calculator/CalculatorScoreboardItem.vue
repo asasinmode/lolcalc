@@ -97,8 +97,6 @@ function toggleExpanded() {
 
 onMounted(() => props.index === 0 && props.value && toggleExpanded());
 
-const championStats = computed(() => calculateChampionStats(props.value));
-
 interface IChampionStat {
 	name: string;
 	iconTextureKey: keyof (typeof ui)['playerStats'];
@@ -116,7 +114,7 @@ interface IChampionStat {
 }
 
 const minorStats = computed<IChampionStat[]>(() => {
-	const { stats } = championStats.value;
+	const { stats } = props.value.stats.value;
 	const minorStats = [
 		{
 			name: 'Health | Resource Regeneration',
@@ -248,7 +246,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 });
 
 const majorStats = computed<IChampionStat[]>(() => {
-	const { stats } = championStats.value;
+	const { stats } = props.value.stats.value;
 	const majorStats = [
 		{
 			name: 'Attack Damage',
