@@ -8,6 +8,7 @@ interface IOverrides {
 	items: UnwrapRef<IDamageSource['items']>;
 	runes: UnwrapRef<IDamageSource['runes']>;
 	abilityLevels: Partial<UnwrapRef<IDamageSource['abilityLevels']>>;
+	abilityVariants: Partial<UnwrapRef<IDamageSource['abilityVariants']>>;
 	currentHealth: UnwrapRef<IDamageSource['currentHealth']>;
 	currentAbilityResource: UnwrapRef<IDamageSource['currentAbilityResource']>;
 }
@@ -19,12 +20,8 @@ export class DamageSource {
 	level: Ref<number>;
 	items: Ref<IItem[]>;
 	runes: Ref<IChampionRunes>;
-	abilityLevels: Ref<{
-		q: number;
-		w: number;
-		e: number;
-		r: number;
-	}>;
+	abilityLevels: Ref<Record<Exclude<keyof IChampion['abilities'], 'passive'>, number>>;
+	abilityVariants: Ref<Record<keyof IChampion['abilities'], number>>;
 
 	currentHealth: Ref<number>;
 	currentAbilityResource: Ref<number>;
@@ -58,7 +55,7 @@ export class DamageSource {
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
-		this.items = ref(overrides.items ? structuredClone(toRaw(overrides.items)) : []);
+		this.items = ref(overrides.items ? [...toRaw(overrides.items)] : []);
 		this.runes = ref<IChampionRunes>(overrides.runes
 			? structuredClone(toRaw(overrides.runes))
 			: {
@@ -77,6 +74,7 @@ export class DamageSource {
 		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.stats.total.hp || 0));
 		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.stats.total.mana || 0));
 		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...(overrides.abilityLevels || {}) });
+		this.abilityVariants = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...(overrides.abilityVariants || {}) });
 
 		watch(this.listedChampion, async (c) => {
 			this.champion.value = undefined;
@@ -105,6 +103,7 @@ export class DamageSource {
 			currentHealth: this.currentHealth.value,
 			currentAbilityResource: this.currentAbilityResource.value,
 			abilityLevels: structuredClone(toRaw(this.abilityLevels.value)),
+			abilityVariants: structuredClone(toRaw(this.abilityVariants.value)),
 			...overrides,
 		});
 	}

@@ -695,7 +695,7 @@ defineExpose({ el });
 					<img
 						v-if="value.listedChampion.value"
 						v-show="!isLoading"
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities.passive.image}`"
+						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities.passive.variants[value.abilityVariants.value.passive]?.image}`"
 						width="64"
 						height="64"
 						aria-hidden="true"
@@ -714,7 +714,7 @@ defineExpose({ el });
 						<img
 							v-if="value.listedChampion.value"
 							v-show="!isLoading"
-							:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities[ability].image}`"
+							:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities[ability].variants[value.abilityVariants.value[ability]]?.image}`"
 							width="64"
 							height="64"
 							aria-hidden="true"
