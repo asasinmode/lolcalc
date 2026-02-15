@@ -423,6 +423,46 @@ const maxHealth = computed(() => Math.round(props.value.stats.value?.stats.total
 const updateChampionHealth = useNumberInput(props.value.currentHealth, true, maxHealth);
 const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource);
 
+const healthBarEl = useTemplateRef('healthBar');
+const { onMousedown: startHealthBarDrag, cleanup: healthBarCleanup } = healthResourceSliderEvents(props.value.currentHealth, maxHealth, healthBarEl);
+const resourceBarEl = useTemplateRef('resourceBar');
+const { onMousedown: startAbilityResourceBarDrag, cleanup: abilityResourceBarCleanup } = healthResourceSliderEvents(props.value.currentAbilityResource, props.value.maxAbilityResource, resourceBarEl);
+
+function healthResourceSliderEvents(target: Ref<number>, max: Ref<number>, element: Ref<HTMLElement | null>) {
+	function onMousedown(event: MouseEvent) {
+		if (!max.value || event.button !== 0 || event.target !== element.value) {
+			return;
+		}
+		document.addEventListener('mousemove', onMousemove);
+		document.addEventListener('mouseup', onMouseup);
+		updateValue(event.clientX);
+		event.preventDefault();
+	}
+
+	function onMousemove(event: MouseEvent) {
+		updateValue(event.clientX);
+	}
+
+	function onMouseup(event: MouseEvent) {
+		updateValue(event.clientX);
+		cleanup();
+	}
+
+	function cleanup() {
+		document.removeEventListener('mousemove', onMousemove);
+		document.removeEventListener('mouseup', onMouseup);
+	}
+
+	function updateValue(mousePosition: number) {
+		const { left, right } = element.value!.getBoundingClientRect();
+		mousePosition = Math.max(left, Math.min(right, mousePosition));
+		const fillPercentage = (mousePosition - left) / (right - left);
+		target.value = Math.max(0, Math.min(max.value, Math.round(fillPercentage * max.value)));
+	}
+
+	return { onMousedown, cleanup };
+}
+
 function resetAbilityLevel(event: MouseEvent, ability: Exclude<keyof IChampion['abilities'], 'passive'>) {
 	event.preventDefault();
 	// eslint-disable-next-line vue/no-mutating-props
@@ -443,6 +483,11 @@ function hideAbilityTooltip() {
 }
 
 const el = useTemplateRef('el');
+
+onBeforeUnmount(() => {
+	healthBarCleanup();
+	abilityResourceBarCleanup();
+});
 
 defineExpose({ el });
 </script>
@@ -659,7 +704,12 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-abilities="" :inert="isLoading || undefined">
-				<div data-current-health="" :style="`--fill-percentage: ${value.champion.value ? Math.min(value.currentHealth.value / maxHealth, 1) : 1}`">
+				<div
+					ref="healthBar"
+					data-current-health=""
+					:style="`--fill-percentage: ${value.champion.value ? Math.min(value.currentHealth.value / maxHealth, 1) : 1}`"
+					@mousedown="startHealthBarDrag"
+				>
 					<template v-if="value.champion.value">
 						<label :for="`${group}-${index}-current-ability-health`">
 							health
@@ -675,7 +725,12 @@ defineExpose({ el });
 						<span>/ {{ maxHealth }}</span>
 					</template>
 				</div>
-				<div data-current-ability-resource="" :style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(value.currentAbilityResource.value / value.maxAbilityResource.value, 1)}` : undefined">
+				<div
+					ref="resourceBar"
+					data-current-ability-resource=""
+					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(value.currentAbilityResource.value / value.maxAbilityResource.value, 1)}` : undefined"
+					@mousedown="startAbilityResourceBarDrag"
+				>
 					<template v-if="value.maxAbilityResource.value">
 						<label :for="`${group}-${index}-current-ability-resource`">
 							{{ value.abilityResourceName.value }}
@@ -1101,6 +1156,7 @@ defineExpose({ el });
 						--at-apply: 'z-1 pointer-events-none select-none';
 					}
 
+					/* TODO add field-sizing: content; once firefox has it */
 					> input {
 						--at-apply: 'z-1 w-12 bg-white text-black text-center leading-[1] px-1';
 						-webkit-appearance: textfield;

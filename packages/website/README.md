@@ -39,6 +39,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] expanded
     - [x] stats
     - [x] current health/mana
+    - [x] slider drag health/mana
     - [x] champion data loading indicator
     - [ ] passive with tooltip, resolve `@spell.CaitlynW.X` variables, possibly have to save `ObjectName` on abilities and get it that way?
     - [ ] aphelios
@@ -81,6 +82,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups with helpful info
   - [ ] dragging scoreboard elements
+  - [ ] dragging items
   - [ ] right click to sell items
   - [ ] right click to clear ability level
 - [ ] update browser to make sure everything works properly info
