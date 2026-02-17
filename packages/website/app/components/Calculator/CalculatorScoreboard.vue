@@ -265,46 +265,40 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 }
 
 let draggingFromItemListEl: HTMLUListElement | null;
-let draggingOntoItemListEl: HTMLUListElement | null;
 
 function startItemDrag(event: DragEvent, source: DamageSource[], index: number, itemIndex: number) {
 	draggingFromItemListEl = (event.target as HTMLImageElement).closest('ul');
 	event.dataTransfer!.effectAllowed = 'copyMove';
 	event.dataTransfer!.setData('target', source === damageSources.value ? 'targets' : 'sources');
 	event.dataTransfer!.setData('index', index.toString());
-	event.dataTransfer!.setData('index', itemIndex.toString());
-	console.log('item drag started', draggingFromItemListEl, event.dataTransfer);
+	event.dataTransfer!.setData('item-index', itemIndex.toString());
 }
 
-// TODO show icon item is being dropped here
-function showItemDropIndicator(event: DragEvent) {
-	const el = event.target as HTMLUListElement;
-	if (draggingFromItemListEl?.contains(el) || draggingOntoItemListEl === el) {
-		return;
+function onItemDragEnter(event: DragEvent) {
+	const el = (event.target as HTMLElement)?.closest('ul');
+	if (el && el !== draggingFromItemListEl) {
+		el.dataset.dropTarget = '';
 	}
-	draggingOntoItemListEl = el;
-	// event.preventDefault();
-	console.log('possibly dropping on', el);
 }
 
-function handleItemDropIndicator(event: DragEvent) {
-	// event.preventDefault();
-	// console.log('dragover', event.target);
-}
-
-function hideItemDropIndicator(event: DragEvent) {
-	const el = event.target as HTMLUListElement;
-	if (draggingFromItemListEl?.contains(el) || draggingOntoItemListEl === el) {
-		return;
+function onItemDragover(event: DragEvent) {
+	if (event.dataTransfer?.types.includes('item-index') && !draggingFromItemListEl?.contains(event.target as HTMLElement)) {
+		event.preventDefault();
 	}
-	draggingOntoItemListEl = null;
-	console.log('not dropping', event.target);
+}
+
+function onItemDragLeave(event: DragEvent) {
+	if (event.target) {
+		delete (event.target as HTMLElement).dataset.dropTarget;
+	}
 }
 
 function dropItem(event: DragEvent, target: DamageSource[], index: number) {
-	console.log('dropping from', event.dataTransfer, 'into', index);
+	console.log('dropping', event.target, event.dataTransfer, 'into', index);
 	draggingFromItemListEl = null;
-	draggingOntoItemListEl = null;
+	if (event.target) {
+		delete (event.target as HTMLElement).dataset.dropTarget;
+	}
 }
 </script>
 
@@ -347,9 +341,9 @@ function dropItem(event: DragEvent, target: DamageSource[], index: number) {
 				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
 				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageSources, index, itemIndex)"
-				@item-list-dragenter="showItemDropIndicator"
-				@item-list-dragover="handleItemDropIndicator"
-				@item-list-dragleave="hideItemDropIndicator"
+				@item-list-dragenter="onItemDragEnter"
+				@item-list-dragover="onItemDragover"
+				@item-list-dragleave="onItemDragLeave"
 				@item-list-drop="dropItem($event, damageSources, index)"
 			/>
 			<li>
@@ -385,9 +379,9 @@ function dropItem(event: DragEvent, target: DamageSource[], index: number) {
 				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
 				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageTargets, index, itemIndex)"
-				@item-list-dragenter="showItemDropIndicator"
-				@item-list-dragover="handleItemDropIndicator"
-				@item-list-dragleave="hideItemDropIndicator"
+				@item-list-dragenter="onItemDragEnter"
+				@item-list-dragover="onItemDragover"
+				@item-list-dragleave="onItemDragLeave"
 				@item-list-drop="dropItem($event, damageTargets, index)"
 			/>
 			<li>

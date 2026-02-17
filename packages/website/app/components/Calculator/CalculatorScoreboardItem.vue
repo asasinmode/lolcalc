@@ -637,7 +637,9 @@ defineExpose({ el });
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					class="bg-black size-8 inline-block"
-					@click.right.prevent="value.items.value.splice(i - 1, 1)"
+					:draggable="value.items.value[i - 1] ? 'true' : undefined"
+					@click.right.prevent="value.items.value[i - 1] && value.items.value.splice(i - 1, 1)"
+					@dragstart="$emit('itemDragstart', $event, i - 1)"
 				>
 					<span class="sr-only">{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
 					<img
@@ -646,7 +648,6 @@ defineExpose({ el });
 						width="64"
 						height="64"
 						loading="lazy"
-						@dragstart="$emit('itemDragstart', $event, i - 1)"
 					>
 				</component>
 			</li>
@@ -925,8 +926,19 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'self-center me-3 w-min';
+			--at-apply: 'self-center relative me-3 w-min';
 			grid-area: items;
+
+			&[data-drop-target] {
+				&::before {
+					--at-apply: 'inset-0 content-empty absolute z-10 bg-white/20';
+				}
+
+				&::after {
+					--at-apply: 'content-empty start-1/2 top-1/2 absolute translate-center size-4 bg-white';
+					mask: icon('i-ph:plus-bold') center / 100% 100% no-repeat;
+				}
+			}
 		}
 
 		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */
