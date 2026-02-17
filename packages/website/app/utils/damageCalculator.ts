@@ -92,9 +92,17 @@ export class DamageSource {
 			this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
 		}, { flush: 'post' });
 
-		watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], () => {
-			this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.stats.total.hp || 0);
-			this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
+		watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
+			if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
+				this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
+			} else {
+				this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.stats.total.hp || 0);
+			}
+			if (previousTotalAbilityResource && this.currentAbilityResource.value === previousTotalAbilityResource) {
+				this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
+			} else {
+				this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
+			}
 		}, { flush: 'post' });
 	}
 
