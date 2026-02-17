@@ -269,7 +269,7 @@ let draggingFromItemListEl: HTMLUListElement | null;
 function startItemDrag(event: DragEvent, source: DamageSource[], index: number, itemIndex: number) {
 	draggingFromItemListEl = (event.target as HTMLImageElement).closest('ul');
 	event.dataTransfer!.effectAllowed = 'copyMove';
-	event.dataTransfer!.setData('target', source === damageSources.value ? 'targets' : 'sources');
+	event.dataTransfer!.setData('source', source === damageSources.value ? 'sources' : 'targets');
 	event.dataTransfer!.setData('index', index.toString());
 	event.dataTransfer!.setData('item-index', itemIndex.toString());
 }
@@ -293,11 +293,27 @@ function onItemDragLeave(event: DragEvent) {
 	}
 }
 
-function dropItem(event: DragEvent, target: DamageSource[], index: number) {
-	console.log('dropping', event.target, event.dataTransfer, 'into', index);
+function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number) {
 	draggingFromItemListEl = null;
 	if (event.target) {
 		delete (event.target as HTMLElement).dataset.dropTarget;
+	}
+
+	const sourceGroup = event.dataTransfer!.getData('source');
+	const sourceIndex = event.dataTransfer!.getData('index');
+	const itemIndex = event.dataTransfer!.getData('item-index');
+
+	if (target[targetIndex] && !target[targetIndex].inventoryFull.value && sourceGroup && sourceIndex && itemIndex) {
+		const source = (sourceGroup === 'sources' ? damageSources : damageTargets).value[Number(sourceIndex)];
+		if (!source) {
+			throw new Error('move item source no longer exists');
+		}
+		const parsedItemIndex = Number(itemIndex);
+		const item = globalKeyModifiers.value.alt ? source.items.value[parsedItemIndex]! : source.items.value.splice(parsedItemIndex, 1)[0]!;
+		if (!item) {
+			throw new Error(`move item source no longer has an item at ${parsedItemIndex}`);
+		}
+		target[targetIndex].items.value.push(item);
 	}
 }
 </script>

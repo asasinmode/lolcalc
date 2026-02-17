@@ -50,6 +50,10 @@ export class DamageSource {
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
 	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
+	inventoryFull = computed(() => {
+		return this.items.value.length === 6;
+	});
+
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
 		this.id = id;
 		this.listedChampion = shallowRef(overrides.champion);
