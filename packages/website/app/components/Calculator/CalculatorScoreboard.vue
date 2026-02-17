@@ -268,7 +268,7 @@ let draggingFromItemListEl: HTMLUListElement | null;
 
 function startItemDrag(event: DragEvent, source: DamageSource[], index: number, itemIndex: number) {
 	draggingFromItemListEl = (event.target as HTMLImageElement).closest('ul');
-	event.dataTransfer!.effectAllowed = 'copyMove';
+	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
 	event.dataTransfer!.setData('source', source === damageSources.value ? 'sources' : 'targets');
 	event.dataTransfer!.setData('index', index.toString());
 	event.dataTransfer!.setData('item-index', itemIndex.toString());

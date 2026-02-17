@@ -32,7 +32,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] shift + click remove = clear
     - [x] dragging
   - [ ] items
-    - [ ] drag between/in current inventory
+    - [x] drag between inventories
     - [ ] hover tooltip
   - [ ] mirror layout
   - [ ] first source/target is what's used in damage results?
