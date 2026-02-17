@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-	target?: IGameVariableCalculationTarget;
+	target?: IItemVariableCalculationTarget;
 }>();
 
 const inventory = defineModel<IItem[]>();
@@ -247,7 +247,7 @@ function enterTooltipableElement(event: MouseEvent, item: IItem) {
 	const { target } = event as unknown as { target: HTMLElement };
 	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
-	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true });
+	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
 	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
 	hoveredItem.value = item;
 	updateTooltipPosition(event);
@@ -255,7 +255,6 @@ function enterTooltipableElement(event: MouseEvent, item: IItem) {
 
 function leaveTooltipableElement() {
 	itemTooltip.value?.hidePopover();
-	itemTooltipAnchor?.removeEventListener('mouseleave', leaveTooltipableElement);
 	itemTooltipAnchor?.removeEventListener('mousemove', updateTooltipPosition);
 	itemTooltipAnchor = undefined;
 }

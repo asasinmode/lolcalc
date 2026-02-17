@@ -1,7 +1,7 @@
 import { ITEM_STAT_ICON_NAMES } from './item';
 import { roundVariable } from './misc';
 
-export interface IGameVariableCalculationTarget {
+export interface IItemVariableCalculationTarget {
 	isRanged?: boolean;
 	stats?: IChampionStats;
 }
@@ -16,7 +16,7 @@ interface IVariableValueResult {
 }
 
 // TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
-export function itemVariableValue(variable: string, item: IItem, target?: IGameVariableCalculationTarget): IVariableValueResult {
+export function itemVariableValue(variable: string, item: IItem, target?: IItemVariableCalculationTarget): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let isMeleeRanged: IVariableValueResult['isMeleeRanged'];
 

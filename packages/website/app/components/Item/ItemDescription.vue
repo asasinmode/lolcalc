@@ -6,7 +6,7 @@ const props = defineProps<{
 	headerClass?: string;
 	descriptionClass?: string;
 	headerSubtitles?: boolean;
-	target?: IGameVariableCalculationTarget;
+	target?: IItemVariableCalculationTarget;
 }>();
 
 defineEmits<{

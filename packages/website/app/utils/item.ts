@@ -1,4 +1,4 @@
-export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IGameVariableCalculationTarget) => number>> = {
+export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IItemVariableCalculationTarget) => number>> = {
 	3004: {	// manamune
 		// TODO
 		// BonusADFromMana(_source) {

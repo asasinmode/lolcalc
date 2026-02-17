@@ -20,6 +20,7 @@ bun generate
 
 lightningcss getting mad at unocss @property inside of a layer should be resolved when a release with https://github.com/parcel-bundler/lightningcss/issues/968 is out
 
+- [x] favicon 🇱🖩
 - [x] script for downloading/updating latest patch data
 - [x] calculating stats (no item/champ passives)
 - [x] item rarity for shop
@@ -31,11 +32,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] alt + move = duplicate
     - [x] shift + click remove = clear
     - [x] dragging
-  - [ ] items
+  - [x] items
     - [x] drag between inventories
-    - [ ] hover tooltip
-  - [ ] mirror layout
-  - [ ] first source/target is what's used in damage results?
+    - [x] hover tooltip
+    - [ ] move with keyboard, shift + arrows?
   - [ ] expanded
     - [x] stats
     - [x] current health/mana
@@ -44,10 +44,12 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] passive with tooltip, resolve `@spell.CaitlynW.X` variables, possibly have to save `ObjectName` on abilities and get it that way?
     - [ ] aphelios
     - [ ] abilities ui (not implemented, coming soon)
-    - [ ] runes
+    - [ ] runes (only shards implemented)
     - [ ] dragons/souls
     - [ ] choose role quest [icon](https://raw.communitydragon.org/latest/game/assets/ux/lol/)
+  - [ ] mirror layout
 - [ ] results ui
+  - [ ] which source/targets are used? Maybe a checkbox next to each other to choose to compare?
   - [ ] multiple builds/champions you can switch between
   - [ ] some cool graphs
   - [ ] choose damage for: passive, aa, abilities (grayed out with "coming in a future update" tooltip); columns
@@ -72,19 +74,18 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] calculations
   - [ ] item passives (resolve tooltip values)
   - [ ] champion passives (resolve tooltip values, level breakpoints)
-- [ ] mobile version
-- [ ] creating a screenshot?
+- [ ] mobile version and make look better
+- [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
 - [ ] disclaimer not endorsed by riot
-- [x] favicon 🇱🖩
-- [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
-  - [ ] help/faq page
-  - [ ] github readme
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups with helpful info
   - [ ] dragging scoreboard elements
   - [ ] dragging items
   - [ ] right click to sell items
   - [ ] right click to clear ability level
+- [ ] keyboard navigation
+  - [ ] show tooltips when navigated to with keyboard
+- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] update browser to make sure everything works properly info
   - chrome 125
   - edge 125
@@ -96,12 +97,13 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - opera android 83
   - safari ios 26
   - samsung internet 27
+- [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
+  - [ ] help/faq page
+  - [ ] github readme
 - [ ] submit feedback on page / report issues
   - [ ] probably a rust server
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
-- [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
-  - [ ] tabindex for champion stats/abilities and show tooltip
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] future features in github project page thingy?
@@ -117,10 +119,14 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
-- [ ] aram
-  - item overrides - `DataValuesModeOverride`
 - [ ] per patch versions = see stats/features from older patches
 - [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
+
+#### very future
+
+- [ ] combo damage, choose spells/aas in order, apply them to target, show damage
+- [ ] aram
+  - item overrides - `DataValuesModeOverride`
 
 #### misc pages
 

@@ -100,7 +100,35 @@ function toggleExpanded() {
 	}
 }
 
+// TMP
 onMounted(() => props.index === 0 && props.value && toggleExpanded());
+
+const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
+const hoveredItem = shallowRef<IItem>();
+
+function showItemHoverTooltip(event: MouseEvent, item: IItem) {
+	itemHoverTooltip.value?.showPopover();
+	event.target?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
+	hoveredItem.value = item;
+}
+
+function leaveTooltipableElement() {
+	itemHoverTooltip.value?.hidePopover();
+}
+
+function removeItem(event: MouseEvent, index: number) {
+	if (props.value.items.value[index]) {
+		event.preventDefault();
+		// eslint-disable-next-line vue/no-mutating-props
+		props.value.items.value.splice(index, 1);
+		itemHoverTooltip.value?.hidePopover();
+	}
+}
+
+function startItemDrag(event: DragEvent, index: number) {
+	itemHoverTooltip.value?.hidePopover();
+	emit('itemDragstart', event, index);
+}
 
 interface IChampionStat {
 	name: string;
@@ -627,21 +655,20 @@ defineExpose({ el });
 			>
 		</button>
 		<ul
-			class="flex h-8"
 			@dragenter="$emit('itemListDragenter', $event)"
 			@dragover="$emit('itemListDragover', $event)"
 			@dragleave="$emit('itemListDragleave', $event)"
 			@drop="$emit('itemListDrop', $event)"
 		>
-			<li v-for="i in 6" :key="i" class="me-0.5 last:me-0">
+			<li v-for="i in 6" :key="i">
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
-					class="bg-black size-8 inline-block"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
-					@click.right.prevent="value.items.value[i - 1] && value.items.value.splice(i - 1, 1)"
-					@dragstart="$emit('itemDragstart', $event, i - 1)"
+					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, value.items.value[i - 1]!)"
+					@click.right="removeItem($event, i - 1)"
+					@dragstart="startItemDrag($event, i - 1)"
 				>
-					<span class="sr-only">{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
+					<span>{{ value.items.value[i - 1]?.name || `item ${i}` }}</span>
 					<img
 						v-if="value.items.value[i - 1]"
 						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${value.items.value[i - 1]!.image}`"
@@ -652,6 +679,9 @@ defineExpose({ el });
 				</component>
 			</li>
 		</ul>
+		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip scoreboard-item-hover-tooltip">
+			<ItemDescription :item="hoveredItem" :target="value.getItemVariableCalculationTarget()" />
+		</div>
 		<button
 			:title="removeButtonAttrs.title"
 			class="pretend-ui-button"
@@ -826,6 +856,7 @@ defineExpose({ el });
 		transition-duration: var(--transition-duration);
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
+		anchor-scope: --scoreboard-item-items;
 
 		&:has(> details[open]) {
 			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
@@ -926,8 +957,21 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'self-center relative me-3 w-min';
+			--at-apply: 'flex h-8 self-center relative me-3 w-min';
 			grid-area: items;
+			anchor-name: --scoreboard-item-items;
+
+			> li {
+				--at-apply: 'me-0.5 last:me-0';
+
+				> * {
+					--at-apply: 'bg-black size-8 inline-block';
+
+					> span {
+						--at-apply: 'sr-only';
+					}
+				}
+			}
 
 			&[data-drop-target] {
 				> li {
@@ -956,6 +1000,15 @@ defineExpose({ el });
 					paint-order: stroke fill;
 				}
 			}
+		}
+
+		.scoreboard-item-hover-tooltip {
+			--at-apply: 'w-160 max-w-screen';
+			inset: unset;
+			justify-self: anchor-center;
+			position-anchor: --scoreboard-item-items;
+			position-try: flip-block;
+			top: calc(anchor(bottom) + 4 * var(--spacing));
 		}
 
 		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */

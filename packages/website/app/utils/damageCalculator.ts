@@ -28,7 +28,7 @@ export class DamageSource {
 
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => calculateChampionStats(this));
-	itemDamageCalculationTarget = computed((): IGameVariableCalculationTarget => ({
+	itemDamageCalculationTarget = computed((): IItemVariableCalculationTarget => ({
 		isRanged: this.isRanged.value,
 		stats: this.stats.value?.stats.total,
 	}));
@@ -118,5 +118,13 @@ export class DamageSource {
 			abilityVariants: structuredClone(toRaw(this.abilityVariants.value)),
 			...overrides,
 		});
+	}
+
+	getItemVariableCalculationTarget(): IItemVariableCalculationTarget {
+		return {
+			isRanged: this.isRanged.value,
+			// TODO might be an infinite loop not sure how it's going to work
+			stats: this.stats.value.stats.total,
+		};
 	}
 }
