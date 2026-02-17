@@ -274,15 +274,15 @@ function startItemDrag(event: DragEvent, source: DamageSource[], index: number, 
 	event.dataTransfer!.setData('item-index', itemIndex.toString());
 }
 
-function onItemDragEnter(event: DragEvent) {
+function onItemDragEnter(event: DragEvent, inventoryFull: boolean) {
 	const el = (event.target as HTMLElement)?.closest('ul');
 	if (el && el !== draggingFromItemListEl) {
-		el.dataset.dropTarget = '';
+		el.dataset.dropTarget = inventoryFull.toString();
 	}
 }
 
-function onItemDragover(event: DragEvent) {
-	if (event.dataTransfer?.types.includes('item-index') && !draggingFromItemListEl?.contains(event.target as HTMLElement)) {
+function onItemDragover(event: DragEvent, inventoryFull: boolean) {
+	if (!inventoryFull && event.dataTransfer?.types.includes('item-index') && !draggingFromItemListEl?.contains(event.target as HTMLElement)) {
 		event.preventDefault();
 	}
 }
@@ -357,8 +357,8 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
 				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageSources, index, itemIndex)"
-				@item-list-dragenter="onItemDragEnter"
-				@item-list-dragover="onItemDragover"
+				@item-list-dragenter="(event) => onItemDragEnter(event, value.inventoryFull.value)"
+				@item-list-dragover="(event) => onItemDragover(event, value.inventoryFull.value)"
 				@item-list-dragleave="onItemDragLeave"
 				@item-list-drop="dropItem($event, damageSources, index)"
 			/>
@@ -395,8 +395,8 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
 				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageTargets, index, itemIndex)"
-				@item-list-dragenter="onItemDragEnter"
-				@item-list-dragover="onItemDragover"
+				@item-list-dragenter="(event) => onItemDragEnter(event, value.inventoryFull.value)"
+				@item-list-dragover="(event) => onItemDragover(event, value.inventoryFull.value)"
 				@item-list-dragleave="onItemDragLeave"
 				@item-list-drop="dropItem($event, damageTargets, index)"
 			/>

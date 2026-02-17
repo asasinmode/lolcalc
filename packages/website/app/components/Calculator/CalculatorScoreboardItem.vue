@@ -930,13 +930,30 @@ defineExpose({ el });
 			grid-area: items;
 
 			&[data-drop-target] {
+				> li {
+					--at-apply: 'op-50';
+				}
+
 				&::before {
-					--at-apply: 'inset-0 content-empty absolute z-10 bg-white/20';
+					--at-apply: 'inset-0 content-empty absolute z-10 bg-white/10';
 				}
 
 				&::after {
-					--at-apply: 'content-empty start-1/2 top-1/2 absolute translate-center size-4 bg-white';
+					--at-apply: 'content-empty start-1/2 top-1/2 absolute translate-center size-4.5 bg-white';
 					mask: icon('i-ph:plus-bold') center / 100% 100% no-repeat;
+				}
+			}
+
+			&[data-drop-target='true'] {
+				&::before {
+					--at-apply: 'bg-red/25';
+				}
+
+				&::after {
+					--at-apply: "content-['FULL'] tracking-wide bg-transparent size-auto text-white font-semibold";
+					mask: unset;
+					-webkit-text-stroke: black 0.15em;
+					paint-order: stroke fill;
 				}
 			}
 		}
