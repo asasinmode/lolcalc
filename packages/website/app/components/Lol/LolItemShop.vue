@@ -608,7 +608,7 @@ defineExpose({
 						:disabled="!buildsIntoItems[6]"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[6]!)"
-						@mouseenter="enterTooltipableElement($event, buildsIntoItems[6]!)"
+						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
 					>
 						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6].name }}</span>
 						<img
