@@ -1009,6 +1009,7 @@ function championAbilityVariants(
 			stringtableVariableSaveUnder: stringtableObject,
 		} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
+		// TODO some abilities have `{{buff_desc_SpellEffects}}` which seems to be champion specific? figure it out
 		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${debugPrefix} name`, { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} name` });
 		// TODO debug tooltips for all abilities, not just passive
 		variant.tooltip = mLocKeys.keyTooltip && getStringtableValue(

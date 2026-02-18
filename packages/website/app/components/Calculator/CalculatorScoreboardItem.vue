@@ -538,6 +538,10 @@ const hoveredAbilityTooltipText = computed(() => {
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
+	const extendedVariableInfo: [string, number[]][] = [
+		['Cooldown', [1, 2, 3, 4, 5]],
+	];
+
 	// TODO detect unknown cost/cooldown
 	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
 
@@ -549,8 +553,7 @@ const hoveredAbilityTooltipText = computed(() => {
 		anyUnknownVariables,
 		cooldown,
 		cost,
-		// TODO
-		extendedVariableInfo: [],
+		extendedVariableInfo,
 	};
 });
 
@@ -881,19 +884,35 @@ defineExpose({ el });
 						{{ hoveredAbility === 'passive' ? '' : hoveredAbilityTooltipText?.cost ? `${hoveredAbilityTooltipText.cost} ${value.champion.value?.partype}` : 'No Cost' }}
 					</span>
 					<div class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
-					<footer>
+					<footer v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariableInfo.length">
 						<div
 							v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
 							v-show="globalKeyModifiers.shift"
 							v-html="hoveredAbilityTooltipText.tooltipExtendedBelowLine"
 						/>
 						<dl v-show="globalKeyModifiers.shift && hoveredAbilityTooltipText?.extendedVariableInfo">
-							<dt>
-								some variable
-							</dt>
-							<dd>
-								1 / 2 / 3 / 4 /5
-							</dd>
+							<template v-for="[variableName, variableValues] in hoveredAbilityTooltipText?.extendedVariableInfo" :key="variableName">
+								<dt>
+									{{ variableName }}
+								</dt>
+								<dd>
+									<template
+										v-for="(variable, variableIndex) in variableValues"
+										:key="`${variableName}-${variableIndex}`"
+									>
+										<span
+											:data-current="hoveredAbility
+												? (variableIndex + 1 === (hoveredAbility === 'passive'
+													? 1
+													: value.abilityLevels.value[hoveredAbility])) ? '' : undefined
+												: undefined"
+										>
+											{{ variable }}
+										</span>
+										{{ variableIndex === (variableValues.length - 1) ? '' : ' / ' }}
+									</template>
+								</dd>
+							</template>
 						</dl>
 						<p v-show="!globalKeyModifiers.shift">
 							Press [Shift] to show more info
@@ -1422,6 +1441,14 @@ defineExpose({ el });
 
 					> dl {
 						--at-apply: 'grid grid-cols-[1fr_auto]';
+
+						> dd {
+							--at-apply: 'text-neutral-400';
+
+							[data-current] {
+								--at-apply: 'text-white font-medium';
+							}
+						}
 					}
 				}
 			}
