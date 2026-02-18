@@ -538,12 +538,8 @@ const hoveredAbilityTooltipText = computed(() => {
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
-	// TODO
-	const extendedVariableInfo: [string, number[]][] = [
-		['Cooldown', [1, 2, 3, 4, 5]],
-		['Another', [1, 2, 3, 4, 5]],
-		['More', [1, 2, 3, 4, 5]],
-	];
+	// TODO collect all encountered variables and their possible values
+	const extendedVariableInfo: [string, number[]][] = [];
 
 	// TODO detect unknown cost/cooldown
 	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
@@ -915,7 +911,7 @@ defineExpose({ el });
 											:data-current="hoveredAbility
 												? (variableIndex + 1 === (hoveredAbility === 'passive'
 													? 1
-													: value.abilityLevels.value[hoveredAbility])) ? '' : undefined
+													: value.abilityLevels.value[hoveredAbility] || 1)) ? '' : undefined
 												: undefined"
 										>
 											{{ variable }}
@@ -1274,6 +1270,10 @@ defineExpose({ el });
 				--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
 			}
 
+			.champion-ability-hover-tooltip > div:last-child {
+				--at-apply: 'b-b-0 pb-0 mb-0';
+			}
+
 			> [data-champion-abilities] {
 				--at-apply: 'grid gap-x-2 auto-rows-max';
 				grid-template-areas:
@@ -1450,6 +1450,10 @@ defineExpose({ el });
 
 				> div {
 					--at-apply: 'col-span-full mt-2';
+
+					rules {
+						--at-apply: 'italic';
+					}
 				}
 
 				> footer {
@@ -1457,6 +1461,10 @@ defineExpose({ el });
 
 					> p {
 						--at-apply: 'text-end';
+					}
+
+					> div {
+						--at-apply: 'italic';
 					}
 
 					> dl {
