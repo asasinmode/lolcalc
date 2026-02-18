@@ -58,6 +58,7 @@ export interface IChampionAbility {
 		// tooltipVariantIndex?: number;
 		tooltip?: string;
 		tooltipExtended?: string;
+		tooltipExtendedBelowLine?: string;
 		dataValues: any;
 		spellCalculations: any;
 		effectAmount: any;

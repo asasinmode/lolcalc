@@ -509,46 +509,65 @@ const hoveredAbilityTooltipText = computed(() => {
 		return undefined;
 	}
 
+	const abilityLevel = hoveredAbility.value && hoveredAbility.value !== 'passive' ? props.value.abilityLevels.value[hoveredAbility.value] : undefined;
+
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
 		hoveredAbilityVariant.value.name || '<unknown>UNKNOWN</unknown>',
 		props.value.champion.value?.stringtable,
 	);
 
-	const { replaced: stringtableVariableReplacedTooltip, unknownStringtableVariables: tooltipUnknownSV } = replaceGameDescriptionStringtableVariables(
+	const { replaced: tooltipReplaced, unknownSV: tooltipUnknownSV, unknownV: tooltipUnknownV } = abilityText(
 		hoveredAbilityVariant.value.tooltip || '<unknown>UNKNOWN</unknown>',
+		hoveredAbilityVariant.value,
 		props.value.champion.value?.stringtable,
+		abilityLevel,
 	);
-
-	const abilityLevel = hoveredAbility.value && hoveredAbility.value !== 'passive' ? props.value.abilityLevels.value[hoveredAbility.value] : undefined;
-
-	const { replaced: tooltipReplaced, unknownVariables: tooltipUnknownV } = replaceGameDescriptionVariables(
-		stringtableVariableReplacedTooltip,
-		'championAbility',
-		[hoveredAbilityVariant.value, abilityLevel],
-	);
-
-	const { replaced: stringtableVariableReplacedTooltipExtended, unknownStringtableVariables: tooltipExtendedUnknownSV } = replaceGameDescriptionStringtableVariables(
+	const { replaced: tooltipExtendedReplaced, unknownSV: tooltipExtendedUnknownSV, unknownV: tooltipExtendedUnknownV } = abilityText(
 		hoveredAbilityVariant.value.tooltipExtended || '',
+		hoveredAbilityVariant.value,
 		props.value.champion.value?.stringtable,
+		abilityLevel,
+	);
+	const { replaced: tooltipExtendedBelowLineReplaced, unknownSV: tooltipExtendedBelowLineUnknownSV, unknownV: tooltipExtendedBelowLineUnknownV } = abilityText(
+		hoveredAbilityVariant.value.tooltipExtendedBelowLine || '',
+		hoveredAbilityVariant.value,
+		props.value.champion.value?.stringtable,
+		abilityLevel,
 	);
 
-	const { replaced: tooltipExtendedReplaced, unknownVariables: tooltipExtendedUnknownV } = replaceGameDescriptionVariables(
-		stringtableVariableReplacedTooltipExtended,
-		'championAbility',
-		[hoveredAbilityVariant.value, abilityLevel],
-	);
+	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
+	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
-	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length;
+	// TODO detect unknown cost/cooldown
+	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
 
 	return {
 		name: nameReplaced,
 		tooltip: tooltipReplaced,
 		tooltipExtended: tooltipExtendedReplaced,
-		cooldown: hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1],
-		cost: hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1],
+		tooltipExtendedBelowLine: tooltipExtendedBelowLineReplaced,
 		anyUnknownVariables,
+		cooldown,
+		cost,
+		// TODO
+		extendedVariableInfo: [],
 	};
 });
+
+function abilityText(value: string, variant: IChampionAbility['variants'][number], stringtable?: Record<string, string>, level?: number) {
+	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(
+		value,
+		stringtable,
+	);
+
+	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
+		stringtableReplaced,
+		'championAbility',
+		[variant, level],
+	);
+
+	return { replaced, unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
+}
 
 function showAbilityTooltip(event: MouseEvent, ability: keyof IChampion['abilities']) {
 	if (props.value.champion.value) {
@@ -839,7 +858,7 @@ defineExpose({ el });
 						</VButtonRadiogroup>
 					</div>
 				</template>
-				<div ref="championAbilityHoverTooltip" popover="hint" class="hover-tooltip champion-ability-hover-tooltip">
+				<div ref="championAbilityHoverTooltip" popover="hint" class="hover-tooltip champion-ability-hover-tooltip game-description">
 					<img
 						v-show="!isLoading"
 						:src="!isLoading && hoveredAbilityVariant ? `https://raw.communitydragon.org/${minorVersion}/game/${hoveredAbilityVariant?.image}` : undefined"
@@ -859,11 +878,26 @@ defineExpose({ el });
 						</template>
 					</span>
 					<span>
-						{{ hoveredAbility === 'passive' ? '' : (hoveredAbilityTooltipText?.cost || 'No Cost') }}
+						{{ hoveredAbility === 'passive' ? '' : hoveredAbilityTooltipText?.cost ? `${hoveredAbilityTooltipText.cost} ${value.champion.value?.partype}` : 'No Cost' }}
 					</span>
 					<div class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
-					<footer v-show="!globalKeyModifiers.shift">
-						Press [Shift] to show more info
+					<footer>
+						<div
+							v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
+							v-show="globalKeyModifiers.shift"
+							v-html="hoveredAbilityTooltipText.tooltipExtendedBelowLine"
+						/>
+						<dl v-show="globalKeyModifiers.shift && hoveredAbilityTooltipText?.extendedVariableInfo">
+							<dt>
+								some variable
+							</dt>
+							<dd>
+								1 / 2 / 3 / 4 /5
+							</dd>
+						</dl>
+						<p v-show="!globalKeyModifiers.shift">
+							Press [Shift] to show more info
+						</p>
 					</footer>
 				</div>
 			</section>
@@ -1168,11 +1202,7 @@ defineExpose({ el });
 				justify-self: anchor-center;
 
 				h4 {
-					--at-apply: 'text-lg/6 font-500 pb-0.5 b-b b-[--ui-button-border-clr] text-white';
-				}
-
-				p:first-of-type {
-					--at-apply: 'b-b b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+					--at-apply: 'text-lg/6 font-500 text-white';
 				}
 
 				dl {
@@ -1206,6 +1236,11 @@ defineExpose({ el });
 				p:last-child {
 					--at-apply: 'mt-1';
 				}
+			}
+
+			.champion-stat-hover-tooltip p:first-of-type,
+			.champion-ability-hover-tooltip > div {
+				--at-apply: 'b-b b-t mt-0.5 b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
 			}
 
 			> [data-champion-abilities] {
@@ -1379,7 +1414,15 @@ defineExpose({ el });
 				}
 
 				> footer {
-					--at-apply: 'text-end col-span-full';
+					--at-apply: 'col-span-full';
+
+					> p {
+						--at-apply: 'text-end';
+					}
+
+					> dl {
+						--at-apply: 'grid grid-cols-[1fr_auto]';
+					}
 				}
 			}
 		}
