@@ -1,6 +1,6 @@
 export function replaceGameDescriptionStringtableVariables(
 	text: string,
-	stringtable: Record<string, string>,
+	stringtable: Record<string, string> = {},
 	/** either resolved dynamic variables or possible values of dynamic variables */
 	dynamicValues: Record<string, unknown> = {},
 	wrapUnknown = true,

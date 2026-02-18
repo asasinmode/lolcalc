@@ -500,13 +500,63 @@ function resetAbilityLevel(event: MouseEvent, ability: Exclude<keyof IChampion['
 	props.value.abilityLevels.value[ability] = 0;
 }
 
-const hoveredAbility = shallowRef<string>();
-const hoveredAbilityTooltip = useTemplateRef('championAbilityTooltip');
+const hoveredAbility = ref<keyof IChampion['abilities']>();
+const hoveredAbilityVariant = shallowRef<IChampionAbility['variants'][number]>();
+const hoveredAbilityTooltip = useTemplateRef('championAbilityHoverTooltip');
 
-function showAbilityTooltip(event: MouseEvent, ability: string) {
-	hoveredAbility.value = ability;
-	// @ts-expect-error source is ok
-	hoveredAbilityTooltip.value?.showPopover({ source: event.target });
+const hoveredAbilityTooltipText = computed(() => {
+	if (!hoveredAbilityVariant.value) {
+		return undefined;
+	}
+
+	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
+		hoveredAbilityVariant.value.name || '<unknown>UNKNOWN</unknown>',
+		props.value.champion.value?.stringtable,
+	);
+
+	const { replaced: stringtableVariableReplacedTooltip, unknownStringtableVariables: tooltipUnknownSV } = replaceGameDescriptionStringtableVariables(
+		hoveredAbilityVariant.value.tooltip || '<unknown>UNKNOWN</unknown>',
+		props.value.champion.value?.stringtable,
+	);
+
+	const abilityLevel = hoveredAbility.value && hoveredAbility.value !== 'passive' ? props.value.abilityLevels.value[hoveredAbility.value] : undefined;
+
+	const { replaced: tooltipReplaced, unknownVariables: tooltipUnknownV } = replaceGameDescriptionVariables(
+		stringtableVariableReplacedTooltip,
+		'championAbility',
+		[hoveredAbilityVariant.value, abilityLevel],
+	);
+
+	const { replaced: stringtableVariableReplacedTooltipExtended, unknownStringtableVariables: tooltipExtendedUnknownSV } = replaceGameDescriptionStringtableVariables(
+		hoveredAbilityVariant.value.tooltipExtended || '',
+		props.value.champion.value?.stringtable,
+	);
+
+	const { replaced: tooltipExtendedReplaced, unknownVariables: tooltipExtendedUnknownV } = replaceGameDescriptionVariables(
+		stringtableVariableReplacedTooltipExtended,
+		'championAbility',
+		[hoveredAbilityVariant.value, abilityLevel],
+	);
+
+	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length;
+
+	return {
+		name: nameReplaced,
+		tooltip: tooltipReplaced,
+		tooltipExtended: tooltipExtendedReplaced,
+		cooldown: hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1],
+		cost: hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1],
+		anyUnknownVariables,
+	};
+});
+
+function showAbilityTooltip(event: MouseEvent, ability: keyof IChampion['abilities']) {
+	if (props.value.champion.value) {
+		hoveredAbility.value = ability;
+		hoveredAbilityVariant.value = props.value.champion.value.abilities[ability].variants[0];
+		event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
+		hoveredAbilityTooltip.value?.showPopover();
+	}
 }
 
 function hideAbilityTooltip() {
@@ -527,7 +577,7 @@ defineExpose({ el });
 <template>
 	<li ref="el" data-scoreboard-item="">
 		<h3 class="sr-only">
-			{{ group.slice(0, -1) }} {{ index + 1 }}
+			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}
 		</h3>
 		<button
 			title="move up, alt+click to duplicate above"
@@ -789,12 +839,12 @@ defineExpose({ el });
 				</div>
 				<div data-passive="">
 					<img
-						v-if="value.listedChampion.value"
 						v-show="!isLoading"
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities.passive.variants[value.abilityVariants.value.passive]?.image}`"
+						:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]?.image}` : undefined"
 						width="64"
 						height="64"
 						aria-hidden="true"
+						@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
 					>
 					<span>passive</span>
 				</div>
@@ -808,12 +858,12 @@ defineExpose({ el });
 						:key="ability"
 					>
 						<img
-							v-if="value.listedChampion.value"
 							v-show="!isLoading"
-							:src="`https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value?.abilities[ability].variants[value.abilityVariants.value[ability]]?.image}`"
+							:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities[ability].variants[value.abilityVariants.value[ability]]?.image}` : undefined"
 							width="64"
 							height="64"
 							aria-hidden="true"
+							@mouseenter="value.champion.value && showAbilityTooltip($event, ability)"
 						>
 						<span>{{ ability }}</span>
 						<VButtonRadiogroup
@@ -831,8 +881,32 @@ defineExpose({ el });
 						</VButtonRadiogroup>
 					</div>
 				</template>
-				<div id="champion-ability-hover-tooltip" ref="championAbilityTooltip" popover="hint">
-					here goes hovered ability description {{ hoveredAbility }}
+				<div ref="championAbilityHoverTooltip" popover="hint" class="hover-tooltip champion-ability-hover-tooltip">
+					<img
+						v-show="!isLoading"
+						:src="!isLoading && hoveredAbilityVariant ? `https://raw.communitydragon.org/${minorVersion}/game/${hoveredAbilityVariant?.image}` : undefined"
+						width="64"
+						height="64"
+						aria-hidden="true"
+					>
+					<h4>
+						{{ hoveredAbility && hoveredAbility !== 'passive' ? `[${hoveredAbility.toUpperCase()}] ` : '' }}{{ hoveredAbilityTooltipText?.name }}
+					</h4>
+					<span>
+						<template v-if="hoveredAbility !== 'passive' && hoveredAbilityTooltipText?.cooldown">
+							{{ hoveredAbilityTooltipText?.cooldown }}s
+						</template>
+						<template v-else-if="hoveredAbility !== 'passive'">
+							<Unknown>UNKNOWN</Unknown>
+						</template>
+					</span>
+					<span>
+						{{ hoveredAbility === 'passive' ? '' : (hoveredAbilityTooltipText?.cost || 'No Cost') }}
+					</span>
+					<div class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
+					<footer v-show="!globalKeyModifiers.shift">
+						Press [Shift] to show more info
+					</footer>
 				</div>
 			</section>
 		</details>
@@ -856,7 +930,7 @@ defineExpose({ el });
 		transition-duration: var(--transition-duration);
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
-		anchor-scope: --scoreboard-item-items;
+		anchor-scope: --scoreboard-item-items, --scoreboard-item-abilities;
 
 		&:has(> details[open]) {
 			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
@@ -965,7 +1039,7 @@ defineExpose({ el });
 				--at-apply: 'me-0.5 last:me-0';
 
 				> * {
-					--at-apply: 'bg-black size-8 inline-block';
+					--at-apply: 'bg-black size-8 inline-block cursor-default';
 
 					> span {
 						--at-apply: 'sr-only';
@@ -1136,17 +1210,14 @@ defineExpose({ el });
 					'passive	q					w					e					r'
 					'health		health		health		health		health'
 					'resource	resource	resource	resource	resource';
-
-				> * {
-					--at-apply: 'relative';
-				}
+				anchor-name: --scoreboard-item-abilities;
 
 				[data-passive],
 				[data-q],
 				[data-w],
 				[data-e],
 				[data-r] {
-					--at-apply: 'size-14 b b-neutral-300';
+					--at-apply: 'relative size-14 b b-neutral-300';
 
 					> span {
 						--at-apply: 'absolute uppercase bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none';
@@ -1266,6 +1337,43 @@ defineExpose({ el });
 				[data-current-ability-resource] {
 					--fill-bg: theme('colors.blue.500');
 					grid-area: resource;
+				}
+			}
+
+			.champion-ability-hover-tooltip {
+				--at-apply: 'max-w-160 p-2 grid-cols-[auto_1fr_auto] auto-rows-min';
+				inset: unset;
+				justify-self: anchor-center;
+				position-anchor: --scoreboard-item-abilities;
+				position-try: flip-block;
+				bottom: calc(anchor(top) - 1px);
+
+				&:popover-open {
+					--at-apply: 'grid';
+				}
+
+				> img {
+					--at-apply: 'row-span-2';
+				}
+
+				> h4 {
+					--at-apply: 'text-white text-lg row-span-2';
+				}
+
+				> span {
+					--at-apply: 'text-end text-lg';
+
+					&:nth-of-type(2) {
+						--at-apply: 'self-start';
+					}
+				}
+
+				> div {
+					--at-apply: 'col-span-full';
+				}
+
+				> footer {
+					--at-apply: 'text-end col-span-full';
 				}
 			}
 		}

@@ -21,6 +21,11 @@ export default defineNuxtConfig({
 			transformer: 'lightningcss',
 		},
 	},
+	vue: {
+		compilerOptions: {
+			isCustomElement: tag => tag.toLowerCase() === 'unknown',
+		},
+	},
 	typescript: {
 		tsConfig: {
 			include: [

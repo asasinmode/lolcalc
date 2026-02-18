@@ -178,7 +178,7 @@ const hoveredRuneTooltip = computed(() => {
 	}
 
 	const { replaced: shortStringtableVariableReplaced, unknownStringtableVariables: shortUnknownSV } = replaceGameDescriptionStringtableVariables(
-		(globalKeyModifiers.value.shift && hoveredRune.value.expandedDescription) || hoveredRune.value.description,
+		hoveredRune.value.description,
 		text.stringtable,
 	);
 

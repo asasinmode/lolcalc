@@ -113,9 +113,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 ### future features
 
 - [ ] champion abilities
+  - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] aphelios ability levels, ult levels up automatically on 6/11/16
   - [ ] shapeshifting champions click on r to swap, jayce has 1 lvl
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
+- [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
