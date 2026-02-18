@@ -835,6 +835,7 @@ defineExpose({ el });
 						v-for="ability in ['q', 'w', 'e', 'r'] as const"
 						v-bind="{ [`data-${ability}`]: '' }"
 						:key="ability"
+						:data-level="value.abilityLevels.value[ability]"
 					>
 						<img
 							v-show="!isLoading"
@@ -1287,7 +1288,7 @@ defineExpose({ el });
 				[data-w],
 				[data-e],
 				[data-r] {
-					--at-apply: 'relative size-14 b b-neutral-300';
+					--at-apply: 'relative size-14 b b-[--ui-button-border-clr]';
 
 					> span {
 						--at-apply: 'absolute uppercase bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none';
@@ -1304,6 +1305,15 @@ defineExpose({ el });
 					--at-apply: 'mb-[calc(var(--button-indicator-size)+2*var(--button-py))]';
 					--button-indicator-size: calc(2 * var(--spacing));
 					--button-py: calc(1 * var(--spacing));
+
+					&[data-level='0'],
+					&:not([data-level]) {
+						--at-apply: 'b-neutral-300';
+
+						img {
+							--at-apply: 'grayscale-70 brightness-80';
+						}
+					}
 
 					> [role='radiogroup'] {
 						--at-apply: 'flex justify-center';
