@@ -891,7 +891,7 @@ defineExpose({ el });
 					</span>
 					<div class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
 					<UnresolvedVariablesAlert v-if="hoveredAbilityTooltipText?.anyUnknownVariables" class="col-span-full" />
-					<footer v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariableInfo.length">
+					<footer v-if="hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariableInfo.length">
 						<div
 							v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
 							v-show="globalKeyModifiers.shift"
