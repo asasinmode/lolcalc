@@ -795,48 +795,6 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-abilities="" :inert="isLoading || undefined">
-				<div
-					ref="healthBar"
-					data-current-health=""
-					:style="`--fill-percentage: ${value.champion.value ? Math.min(value.currentHealth.value / maxHealth, 1) : 1}`"
-					@mousedown="startHealthBarDrag"
-				>
-					<template v-if="value.champion.value">
-						<label :for="`${group}-${index}-current-ability-health`">
-							health
-						</label>
-						<input
-							:id="`${group}-${index}-current-ability-health`"
-							:value="Math.round(value.currentHealth.value)"
-							min="0"
-							:max="maxHealth"
-							type="number"
-							@input="updateChampionHealth"
-						>
-						<span>/ {{ maxHealth }}</span>
-					</template>
-				</div>
-				<div
-					ref="resourceBar"
-					data-current-ability-resource=""
-					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(value.currentAbilityResource.value / value.maxAbilityResource.value, 1)}` : undefined"
-					@mousedown="startAbilityResourceBarDrag"
-				>
-					<template v-if="value.maxAbilityResource.value">
-						<label :for="`${group}-${index}-current-ability-resource`">
-							{{ value.abilityResourceName.value }}
-						</label>
-						<input
-							:id="`${group}-${index}-current-ability-resource`"
-							:value="Math.round(value.currentAbilityResource.value)"
-							min="0"
-							:max="value.maxAbilityResource.value"
-							type="number"
-							@input="updateChampionAbilityResource"
-						>
-						<span>/ {{ value.maxAbilityResource.value }}</span>
-					</template>
-				</div>
 				<div data-passive="">
 					<img
 						v-show="!isLoading"
@@ -907,6 +865,50 @@ defineExpose({ el });
 					<footer v-show="!globalKeyModifiers.shift">
 						Press [Shift] to show more info
 					</footer>
+				</div>
+			</section>
+			<section data-champion-health-ability-resource="">
+				<div
+					ref="healthBar"
+					data-current-health=""
+					:style="`--fill-percentage: ${value.champion.value ? Math.min(value.currentHealth.value / maxHealth, 1) : 1}`"
+					@mousedown="startHealthBarDrag"
+				>
+					<template v-if="value.champion.value">
+						<label :for="`${group}-${index}-current-ability-health`">
+							health
+						</label>
+						<input
+							:id="`${group}-${index}-current-ability-health`"
+							:value="Math.round(value.currentHealth.value)"
+							min="0"
+							:max="maxHealth"
+							type="number"
+							@input="updateChampionHealth"
+						>
+						<span>/ {{ maxHealth }}</span>
+					</template>
+				</div>
+				<div
+					ref="resourceBar"
+					data-current-ability-resource=""
+					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(value.currentAbilityResource.value / value.maxAbilityResource.value, 1)}` : undefined"
+					@mousedown="startAbilityResourceBarDrag"
+				>
+					<template v-if="value.maxAbilityResource.value">
+						<label :for="`${group}-${index}-current-ability-resource`">
+							{{ value.abilityResourceName.value }}
+						</label>
+						<input
+							:id="`${group}-${index}-current-ability-resource`"
+							:value="Math.round(value.currentAbilityResource.value)"
+							min="0"
+							:max="value.maxAbilityResource.value"
+							type="number"
+							@input="updateChampionAbilityResource"
+						>
+						<span>/ {{ value.maxAbilityResource.value }}</span>
+					</template>
 				</div>
 			</section>
 		</details>
@@ -1107,7 +1109,7 @@ defineExpose({ el });
 			grid-area: expanded;
 
 			&::details-content {
-				--at-apply: 'pt-4 -mt-6 flex';
+				--at-apply: 'pt-4 -mt-6 grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]';
 			}
 
 			[data-loading] {
@@ -1125,6 +1127,8 @@ defineExpose({ el });
 			}
 
 			> [data-champion-stats] {
+				--at-apply: 'row-span-2';
+
 				> dl {
 					--at-apply: 'grid grid-rows-4 items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
 
@@ -1302,7 +1306,9 @@ defineExpose({ el });
 				[data-r] {
 					grid-area: r;
 				}
+			}
 
+			[data-champion-health-ability-resource] {
 				[data-current-health],
 				[data-current-ability-resource] {
 					--at-apply: 'relative bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
