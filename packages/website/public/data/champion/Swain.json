@@ -113,7 +113,8 @@
 							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
-					"dataKey": "Characters/Swain/Spells/SwainWAbility/SwainW"
+					"dataKey": "Characters/Swain/Spells/SwainWAbility/SwainW",
+					"tooltipExtendedBelowLine": "<rules>Deals <magicDamage>@MinionDamage@ damage</magicDamage> instead to minions.</rules>"
 				}
 			]
 		},
@@ -148,7 +149,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Swain/Spells/SwainEAbility/SwainE"
+					"dataKey": "Characters/Swain/Spells/SwainEAbility/SwainE",
+					"tooltipExtendedBelowLine": "<rules><spellName>Nevermove</spellName> temporarily grants vision of rooted champions.</rules>"
 				}
 			]
 		},
@@ -232,7 +234,8 @@
 							"mModifiedGameCalculation": "HealingCalc"
 						}
 					},
-					"dataKey": "Characters/Swain/Spells/SwainRAbility/SwainR"
+					"dataKey": "Characters/Swain/Spells/SwainRAbility/SwainR",
+					"tooltipExtendedBelowLine": "<rules>Healing is reduced to <healing>@MinionMonsterHealReduction*100@%</healing> against non-champions.<br>Depletes @DemonPowerDegen@ Demonic Energy per second. After @AmpTime@ seconds, this increases to @DegenAmpAmount@.<br>Regenerates @DemonPowerRegen@ Demonic Energy per second while draining from champions.</rules>"
 				}
 			]
 		},

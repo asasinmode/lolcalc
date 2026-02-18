@@ -170,7 +170,8 @@
 					"effectAmount": {
 						"4": [900, 900, 900, 900, 900, 900, 900]
 					},
-					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerQAbility/HeimerdingerQ"
+					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerQAbility/HeimerdingerQ",
+					"tooltipExtendedBelowLine": "<rules>Turrets prioritize attacking enemies Heimerdinger has recently damaged and enemies attacking Heimerdinger.<br><br>Turret Stats:<br><healing>@TurretHealth@ Health</healing><br><magicDamage>@Damage@ magic damage</magicDamage> per regular shot<br><magicDamage>@DamageBeam@ magic damage</magicDamage> per charged shot</rules>"
 				}
 			]
 		},
@@ -243,7 +244,8 @@
 						"5": [54, 108, 162, 216, 270, 324, 378],
 						"6": [5, 5, 5, 5, 5, 5, 5]
 					},
-					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerWAbility/HeimerdingerW"
+					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerWAbility/HeimerdingerW",
+					"tooltipExtendedBelowLine": "<rules>Enemies hit by multiple rockets take <magicDamage>@ExtraHitDamage@ magic damage</magicDamage> beyond the first. Minions instead take <magicDamage>@ExtraHitDamageMinions@ magic damage</magicDamage> beyond the first</rules>"
 				}
 			]
 		},
@@ -435,7 +437,8 @@
 						"8": [0, 28, 39, 49, 0, 0, 0],
 						"9": [0, 150, 250, 350, 0, 0, 0]
 					},
-					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerRAbility/HeimerdingerR"
+					"dataKey": "Characters/Heimerdinger/Spells/HeimerdingerRAbility/HeimerdingerR",
+					"tooltipExtendedBelowLine": "<rules>The upgraded Ability has no cost.<br>Upgraded rockets deal 2000% damage to minions.<br><br>Apex Turret Stats:<br><healing>@QUltTurretHealth@ Health</healing><br><scaleArmor>@RQTurretResists@ Armor</scaleArmor><br><scaleMR>@RQTurretResists@ Magic Resist</scaleMR><br><magicDamage>@QUltDamage@ magic damage</magicDamage> per regular shot<br><magicDamage>@QUltDamageBeam@ magic damage</magicDamage> per charged shot</rules>"
 				}
 			]
 		},

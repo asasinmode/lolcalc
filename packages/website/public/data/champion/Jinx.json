@@ -57,7 +57,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jinx/Spells/JinxQAbility/JinxQ"
+					"dataKey": "Characters/Jinx/Spells/JinxQAbility/JinxQ",
+					"tooltipExtendedBelowLine": "<rules>Minigun stacks fall off one at a time and only benefit Jinx's first Attack after switching to the rocket launcher.</rules>"
 				}
 			]
 		},
@@ -93,7 +94,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jinx/Spells/JinxWAbility/JinxW"
+					"dataKey": "Characters/Jinx/Spells/JinxWAbility/JinxW",
+					"tooltipExtendedBelowLine": "<rules>Zap!'s cast time decreases as Jinx gains <attackSpeed>Attack Speed</attackSpeed>.</rules>"
 				}
 			]
 		},
@@ -126,7 +128,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jinx/Spells/JinxEAbility/JinxE"
+					"dataKey": "Characters/Jinx/Spells/JinxEAbility/JinxE",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},

@@ -65,7 +65,8 @@
 						"7": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"8": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathArcanopulseChargeUpAbility/XerathArcanopulseChargeUp"
+					"dataKey": "Characters/Xerath/Spells/XerathArcanopulseChargeUpAbility/XerathArcanopulseChargeUp",
+					"tooltipExtendedBelowLine": "<rules>If Xerath does not release the beam, half the cost is refunded.</rules>"
 				}
 			]
 		},
@@ -107,7 +108,8 @@
 							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathArcaneBarrage2Ability/XerathArcaneBarrage2"
+					"dataKey": "Characters/Xerath/Spells/XerathArcaneBarrage2Ability/XerathArcaneBarrage2",
+					"tooltipExtendedBelowLine": "<rules>Empowered <status>Slow</status> decays down to @SlowAmount*100@%.</rules>"
 				}
 			]
 		},
@@ -146,7 +148,8 @@
 						"4": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"7": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathMageSpearAbility/XerathMageSpear"
+					"dataKey": "Characters/Xerath/Spells/XerathMageSpearAbility/XerathMageSpear",
+					"tooltipExtendedBelowLine": "<rules>Minimum <status>Stun</status> duration is 0.75 seconds.</rules>"
 				}
 			]
 		},
@@ -198,7 +201,8 @@
 						"5": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"6": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathLocusOfPower2Ability/XerathLocusOfPower2"
+					"dataKey": "Characters/Xerath/Spells/XerathLocusOfPower2Ability/XerathLocusOfPower2",
+					"tooltipExtendedBelowLine": "<rules>If Xerath does not <recast>Recast</recast> at all, this Ability's Cooldown is reduced by @Effect7Amount*100@%.</rules>"
 				}
 			]
 		},

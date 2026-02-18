@@ -64,7 +64,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Trundle/Spells/TrundleTrollSmashAbility/TrundleTrollSmash"
+					"dataKey": "Characters/Trundle/Spells/TrundleTrollSmashAbility/TrundleTrollSmash",
+					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>Trundle gains @BonusRange@ attack range for this attack.</rules>"
 				}
 			]
 		},
@@ -146,7 +147,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain"
+					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain",
+					"tooltipExtendedBelowLine": "<rules>Half of the damage and shred happen immediately and the other half happens over the duration.<br>The shred lasts for @DurationOfDrainForTooltip@ seconds after the drain ends.</rules>"
 				}
 			]
 		},

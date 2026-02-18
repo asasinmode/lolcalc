@@ -83,7 +83,8 @@
 						"8": [4, 4, 4, 4, 4, 4, 4],
 						"9": [-0.25, -0.25, -0.25, -0.25, -0.25, -0.25, -0.25]
 					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnQAbility/EvelynnQ"
+					"dataKey": "Characters/Evelynn/Spells/EvelynnQAbility/EvelynnQ",
+					"tooltipExtendedBelowLine": "<rules>The spikes prioritizes the target Evelynn is attacking.</rules>"
 				}
 			]
 		},
@@ -131,7 +132,8 @@
 						"8": [0.325, 0.35, 0.375, 0.4, 0.425, 0.45, 0.475],
 						"9": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnWAbility/EvelynnW"
+					"dataKey": "Characters/Evelynn/Spells/EvelynnWAbility/EvelynnW",
+					"tooltipExtendedBelowLine": "<rules>Using this Ability does not remove Evelynn from <keywordMajor>Demon Shade</keywordMajor>.</rules>"
 				}
 			]
 		},
@@ -201,7 +203,8 @@
 						"8": [2, 2, 2, 2, 2, 2, 2],
 						"9": [1.25, 1.3, 1.35, 1.4, 1.45, 1.5, 1.55]
 					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnEAbility/EvelynnE"
+					"dataKey": "Characters/Evelynn/Spells/EvelynnEAbility/EvelynnE",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies On-Hit Effects to the targeted enemy.</rules>"
 				}
 			]
 		},
@@ -249,7 +252,8 @@
 						"7": [700, 700, 700, 700, 700, 700, 700],
 						"8": [30, 30, 45, 60, 60, 60, 60]
 					},
-					"dataKey": "Characters/Evelynn/Spells/EvelynnRAbility/EvelynnR"
+					"dataKey": "Characters/Evelynn/Spells/EvelynnRAbility/EvelynnR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>"
 				}
 			]
 		},

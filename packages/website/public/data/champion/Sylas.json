@@ -84,7 +84,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sylas/Spells/SylasQAbility/SylasQ"
+					"dataKey": "Characters/Sylas/Spells/SylasQAbility/SylasQ",
+					"tooltipExtendedBelowLine": "<rules>The explosion deals @MinionMod*100@% damage to minions.</rules>"
 				}
 			]
 		},
@@ -210,7 +211,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sylas/Spells/SylasRAbility/SylasR"
+					"dataKey": "Characters/Sylas/Spells/SylasRAbility/SylasR",
+					"tooltipExtendedBelowLine": "<rules>Sylas converts non-hybrid AD ratios into AP ratios, granting him .4 AP: 1 Bonus AD and .6 AP: 1 Total AD respectively.</rules>"
 				}
 			]
 		},

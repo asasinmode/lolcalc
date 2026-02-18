@@ -112,7 +112,8 @@
 						"0": [1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75],
 						"1": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Veigar/Spells/VeigarEventHorizonAbility/VeigarEventHorizon"
+					"dataKey": "Characters/Veigar/Spells/VeigarEventHorizonAbility/VeigarEventHorizon",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},

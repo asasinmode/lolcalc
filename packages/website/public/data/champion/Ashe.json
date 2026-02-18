@@ -64,7 +64,8 @@
 						"7": [1, 1, 1, 1, 1, 1, 1],
 						"8": [1, 1, 1, 1, 1, 1, 1]
 					},
-					"dataKey": "Characters/Ashe/Spells/AsheQAbility/AsheQ"
+					"dataKey": "Characters/Ashe/Spells/AsheQAbility/AsheQ",
+					"tooltipExtendedBelowLine": "<rules>The empowered Attacks are comprised of a flurry of 5 small strikes. They only apply on-hit effects once per Attack.</rules>"
 				}
 			]
 		},
@@ -102,7 +103,8 @@
 					"effectAmount": {
 						"0": [3, 5, 7, 9, 11, 13, 15]
 					},
-					"dataKey": "Characters/Ashe/Spells/VolleyAbility/Volley"
+					"dataKey": "Characters/Ashe/Spells/VolleyAbility/Volley",
+					"tooltipExtendedBelowLine": "<rules>Champion hits count as critical strikes for the purposes of <spellName>Frost Shot</spellName>.</rules>"
 				}
 			]
 		},
@@ -179,7 +181,8 @@
 							"mModifiedGameCalculation": "RMainDamage"
 						}
 					},
-					"dataKey": "Characters/Ashe/Spells/EnchantedCrystalArrowAbility/EnchantedCrystalArrow"
+					"dataKey": "Characters/Ashe/Spells/EnchantedCrystalArrowAbility/EnchantedCrystalArrow",
+					"tooltipExtendedBelowLine": "<rules>Minimum <status>Stun</status> duration is @MinStunDuration@ second.</rules>"
 				}
 			]
 		},

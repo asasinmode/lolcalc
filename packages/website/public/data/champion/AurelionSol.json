@@ -102,7 +102,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/AurelionSol/Spells/AurelionSolQAbility/AurelionSolQ"
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolQAbility/AurelionSolQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability's range is @LevelBasedRangeScaling@.<br>Canceling this Ability within 0.25 seconds of casting it will lock the Ability for 1 second.<br>Minimum mana cost of @ManaCostPerSecond@ per cast.<br>Percent damage deals a max of <magicDamage>@MonsterDamageCap@ magic damage</magicDamage> against jungle monsters.</rules>"
 				}
 			]
 		},
@@ -171,7 +172,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/AurelionSol/Spells/AurelionSolWAbility/AurelionSolW"
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolWAbility/AurelionSolW",
+					"tooltipExtendedBelowLine": "<rules>Casting <spellName>{{Spell_AurelionSolQ_Name}}</spellName> while flying reduces flight speed by 50%.<br>Flight speed is @DashSpeed@.</rules>"
 				}
 			]
 		},
@@ -326,7 +328,8 @@
 							"mModifiedGameCalculation": "{5dfac189}"
 						}
 					},
-					"dataKey": "Characters/AurelionSol/Spells/AurelionSolEAbility/AurelionSolE"
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolEAbility/AurelionSolE",
+					"tooltipExtendedBelowLine": "<rules>This Ability's cast range is @LevelBasedRangeScaling@.<br>Lane minions and jungle monsters inside have <speed>0 Movement Speed</speed>.<br>Epic monsters cannot be executed.<br>Absorbs <font color='#3458eb'>@ChampionMassPerSecond@ Stardust</font> per second from Champions.<br>Absorbs <font color='#3458eb'>Stardust</font> from units that die in the black hole:<li>Champions: <font color='#3458eb'>@ChampionCountBonus@ Stardust</font></li><li>Epic monsters: <font color='#3458eb'>@EpicMonsterCountBonus@ Stardust</font></li><li>Large monsters: <font color='#3458eb'>@LargeMonsterCountBonus@ Stardust</font></li><li>Siege minions: <font color='#3458eb'>@LargeMinionCountBonus@ Stardust</font></li><li>Minions and small monsters: <font color='#3458eb'>@MinionMassDeath@ Stardust</font></li></rules>"
 				}
 			]
 		},
@@ -409,7 +412,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/AurelionSol/Spells/AurelionSolRAbility/AurelionSolR"
+					"dataKey": "Characters/AurelionSol/Spells/AurelionSolRAbility/AurelionSolR",
+					"tooltipExtendedBelowLine": "<rules><font color='#3458eb'>Stardust</font> collected towards <spellName>{{Spell_AurelionSolR2_Name}}</spellName>: <font color='#3458eb'>@f1@/@CalamityStacks@.</font></rules>"
 				}
 			]
 		},

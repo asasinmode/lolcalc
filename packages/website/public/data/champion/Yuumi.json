@@ -158,7 +158,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yuumi/Spells/YuumiWAbility/YuumiW"
+					"dataKey": "Characters/Yuumi/Spells/YuumiWAbility/YuumiW",
+					"tooltipExtendedBelowLine": "<rules>This Ability has a @spell.YuumiW:AttachCooldown@ second Cooldown, but Yuumi can cast it anytime she is already <keywordMajor>Attached</keywordMajor> to switch between friends or <keywordMajor>Unattach</keywordMajor>.<br><br>Yuumi's Abilities will use her <keywordMajor>Attached</keywordMajor> ally's position instead of hers.<br><br>Yuumi will <keywordMajor>Unattach</keywordMajor> if her ally uses Summoner Teleport.</rules>"
 				}
 			]
 		},
@@ -312,7 +313,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yuumi/Spells/YuumiRAbility/YuumiR"
+					"dataKey": "Characters/Yuumi/Spells/YuumiRAbility/YuumiR",
+					"tooltipExtendedBelowLine": "<rules>Missiles after the first deal <magicDamage>@MultiMissileTotal@ magic damage</magicDamage>. Max possible damage to a single enemy is <magicDamage>@TotalSingleTargetDamage@ magic damage</magicDamage>.</rules>"
 				}
 			]
 		},

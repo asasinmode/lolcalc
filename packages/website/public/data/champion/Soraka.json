@@ -115,7 +115,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Soraka/Spells/SorakaWAbility/SorakaW"
+					"dataKey": "Characters/Soraka/Spells/SorakaWAbility/SorakaW",
+					"tooltipExtendedBelowLine": "<rules>This Ability cannot be used if Soraka is below @MinimumHealth@ Health .</rules>"
 				}
 			]
 		},

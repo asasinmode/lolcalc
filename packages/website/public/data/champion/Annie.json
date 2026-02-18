@@ -255,7 +255,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Annie/Spells/AnnieRAbility/AnnieR"
+					"dataKey": "Characters/Annie/Spells/AnnieRAbility/AnnieR",
+					"tooltipExtendedBelowLine": "<rules>Tibbers has:<br><healing>@TibbersTotalHP@ Health</healing><br><scaleArmor>@TibbersTotalResists@ Armor</scaleArmor><br><scaleMR>@TibbersTotalResists@ Magic Resist</scaleMR><br><scaleAD>@TibbersAADamage@ Attack Damage</scaleAD></rules>"
 				}
 			]
 		},

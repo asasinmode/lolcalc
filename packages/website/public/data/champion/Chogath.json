@@ -153,7 +153,8 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Chogath/Spells/VorpalSpikesAbility/VorpalSpikes"
+					"dataKey": "Characters/Chogath/Spells/VorpalSpikesAbility/VorpalSpikes",
+					"tooltipExtendedBelowLine": "<rules><spellName>Feast</spellName> stacks increase the width of the spikes and the max Health damage by @FeastStackMultiplier@% per stack.<br>Percent Health damage against monsters is replaced with @ModifiedMonsterCap@.</rules>"
 				}
 			]
 		},
@@ -235,7 +236,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Chogath/Spells/FeastAbility/Feast"
+					"dataKey": "Characters/Chogath/Spells/FeastAbility/Feast",
+					"tooltipExtendedBelowLine": "<rules>Current minion and non-epic jungle monster stacks:</rules> <statTracking>@f3@/@RMinionMaxStacks@</statTracking><br><rules>Cho'Gath gains bonus attack and <spellName>Feast</spellName> cast range based upon his stacks:<br>@AttackRangePerStack@ Attack Range per stack (max @MaxBonusAttackRange@).<br>@CastRangePerStack@ Cast Range per stack (max @MaxBonusCastRange@).</rules>"
 				}
 			]
 		},

@@ -235,7 +235,8 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Nunu/Spells/NunuEAbility/NunuE"
+					"dataKey": "Characters/Nunu/Spells/NunuEAbility/NunuE",
+					"tooltipExtendedBelowLine": "<rules>Nunu can only <status>Slow</status> each enemy once with this Ability.</rules>"
 				}
 			]
 		},

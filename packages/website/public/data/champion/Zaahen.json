@@ -79,7 +79,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Zaahen/Spells/ZaahenQAbility/ZaahenQ"
+					"dataKey": "Characters/Zaahen/Spells/ZaahenQAbility/ZaahenQ",
+					"tooltipExtendedBelowLine": "<rules>Healing reduced to @MinionHealPercent*100@% against non-champions.</rules><br><rules>Deals an additional @MonsterDamagePercent*100@% bonus damage to monsters.</rules>"
 				}
 			]
 		},
@@ -175,7 +176,8 @@
 							"mModifiedGameCalculation": "BaseDamageCalc"
 						}
 					},
-					"dataKey": "Characters/Zaahen/Spells/ZaahenEAbility/ZaahenE"
+					"dataKey": "Characters/Zaahen/Spells/ZaahenEAbility/ZaahenE",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <physicalDamage>@MonsterDamageBonus@ bonus physical damage</physicalDamage> to monsters.</rules><br><rules>Additional Maximum Health damage capped to @MonsterDamageCap@ against monsters.</rules><br>"
 				}
 			]
 		},

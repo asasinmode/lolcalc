@@ -124,7 +124,8 @@
 							"mModifiedGameCalculation": "ChampHealing"
 						}
 					},
-					"dataKey": "Characters/Renekton/Spells/RenektonCleaveAbility/RenektonCleave"
+					"dataKey": "Characters/Renekton/Spells/RenektonCleaveAbility/RenektonCleave",
+					"tooltipExtendedBelowLine": "<rules>Max <keywordMajor>@FuryGainCap@ Fury</keywordMajor> per cast.<br>Restores up to <healing>@BasicHealCap@ Health</healing> on basic casts.<br>Restores up to <healing>@EmpoweredHealCap@ Health</healing> on empowered casts.</rules>"
 				}
 			]
 		},
@@ -171,7 +172,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Renekton/Spells/RenektonPreExecuteAbility/RenektonPreExecute"
+					"dataKey": "Characters/Renekton/Spells/RenektonPreExecuteAbility/RenektonPreExecute",
+					"tooltipExtendedBelowLine": "<rules>All Attacks apply On-hit effects separately.</rules><br><rules>Does not break shields on monsters.</rules>"
 				}
 			]
 		},
@@ -239,7 +241,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Renekton/Spells/RenektonSliceAndDiceAbility/RenektonSliceAndDice"
+					"dataKey": "Characters/Renekton/Spells/RenektonSliceAndDiceAbility/RenektonSliceAndDice",
+					"tooltipExtendedBelowLine": "<rules>Max <keywordMajor>@FuryMax@ Fury</keywordMajor> per cast.</rules>"
 				}
 			]
 		},

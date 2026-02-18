@@ -106,7 +106,8 @@
 						"7": [110, 110, 110, 110, 110, 110, 110],
 						"8": [160, 160, 160, 160, 160, 160, 160]
 					},
-					"dataKey": "Characters/MissFortune/Spells/MissFortuneRicochetShotAbility/MissFortuneRicochetShot"
+					"dataKey": "Characters/MissFortune/Spells/MissFortuneRicochetShotAbility/MissFortuneRicochetShot",
+					"tooltipExtendedBelowLine": "<rules>Both strikes apply on-hit effects.</rules>"
 				}
 			]
 		},

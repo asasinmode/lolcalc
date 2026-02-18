@@ -87,7 +87,8 @@
 						"3": [5.25, 5.25, 5.25, 5.25, 5.25, 5.25, 5.25],
 						"4": [5, 5, 5, 5, 5, 5, 5]
 					},
-					"dataKey": "Characters/Zed/Spells/ZedWAbility/ZedW"
+					"dataKey": "Characters/Zed/Spells/ZedWAbility/ZedW",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Energy</keywordMajor> can only be gained once per Ability usage.</rules>"
 				}
 			]
 		},
@@ -170,7 +171,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Zed/Spells/ZedRAbility/ZedR"
+					"dataKey": "Characters/Zed/Spells/ZedRAbility/ZedR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules><br><rules>The <keywordMajor>Shadow</keywordMajor> remains for an extra 1.5 seconds after the recast window ends.</rules>"
 				}
 			]
 		},

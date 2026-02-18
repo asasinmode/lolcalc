@@ -76,7 +76,8 @@
 						"4": [6, 6, 6, 6, 6, 6, 6],
 						"5": [5, 5, 5, 5, 5, 5, 5]
 					},
-					"dataKey": "Characters/Vi/Spells/ViQAbility/ViQ"
+					"dataKey": "Characters/Vi/Spells/ViQAbility/ViQ",
+					"tooltipExtendedBelowLine": "<rules>Non-champions hit are pulled towards Vi.<br>If the charge is interrupted, this Ability goes on a 3 second Cooldown.</rules>"
 				}
 			]
 		},
@@ -118,7 +119,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Vi/Spells/ViWAbility/ViW"
+					"dataKey": "Characters/Vi/Spells/ViWAbility/ViW",
+					"tooltipExtendedBelowLine": "<rules>Deals a maximum of <physicalDamage>@MonsterDamageCap@ damage</physicalDamage> against jungle monsters.</rules>"
 				}
 			]
 		},

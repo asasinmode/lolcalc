@@ -166,7 +166,8 @@
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"4": [120, 120, 120, 120, 120, 120, 120]
 					},
-					"dataKey": "Characters/Varus/Spells/VarusWAbility/VarusW"
+					"dataKey": "Characters/Varus/Spells/VarusWAbility/VarusW",
+					"tooltipExtendedBelowLine": "<rules>Passive damage from <keywordMajor>Blight</keywordMajor> detonations is capped at @MaxMonsterDamage@ damage per stack against jungle monsters.</rules>"
 				}
 			]
 		},
@@ -208,7 +209,8 @@
 						"2": [4, 4, 4, 4, 4, 4, 4],
 						"4": [300, 300, 300, 300, 300, 300, 300]
 					},
-					"dataKey": "Characters/Varus/Spells/VarusEAbility/VarusE"
+					"dataKey": "Characters/Varus/Spells/VarusEAbility/VarusE",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_GrievousWounds}}</rules>"
 				}
 			]
 		},

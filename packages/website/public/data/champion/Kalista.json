@@ -162,7 +162,8 @@
 					"effectAmount": {
 						"6": [2, 2, 2, 2, 2, 2, 2]
 					},
-					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper"
+					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals @EpicMonsterDamageMod*100@% damage to epic jungle monsters.</rules>"
 				}
 			]
 		},

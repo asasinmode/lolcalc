@@ -103,7 +103,8 @@
 						"6": [1, 1, 1, 1, 1, 1, 1],
 						"8": [5, 5, 5.5, 6, 6.5, 7, 7.5]
 					},
-					"dataKey": "Characters/Akali/Spells/AkaliWAbility/AkaliW"
+					"dataKey": "Characters/Akali/Spells/AkaliWAbility/AkaliW",
+					"tooltipExtendedBelowLine": "<rules><keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or True Sight.</rules>"
 				}
 			]
 		},
@@ -234,7 +235,8 @@
 					"effectAmount": {
 						"2": [1, 1, 1, 1, 1, 1, 1]
 					},
-					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliR"
+					"dataKey": "Characters/Akali/Spells/AkaliRAbility/AkaliR",
+					"tooltipExtendedBelowLine": "<rules>Deals max damage to targets below @MaxExecuteThreshold*100@% Health.</rules>"
 				}
 			]
 		},

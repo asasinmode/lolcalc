@@ -55,7 +55,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Rell/Spells/RellQAbility/RellQ"
+					"dataKey": "Characters/Rell/Spells/RellQAbility/RellQ",
+					"tooltipExtendedBelowLine": "<rules>Does not break Shields on monsters.</rules>"
 				}
 			]
 		},
@@ -189,7 +190,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Rell/Spells/RellEAbility/RellE"
+					"dataKey": "Characters/Rell/Spells/RellEAbility/RellE",
+					"tooltipExtendedBelowLine": "<rules>Damage capped at @PercentHealthDamageCap@ against jungle monsters and structures.</rules>"
 				}
 			]
 		},

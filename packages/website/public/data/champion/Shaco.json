@@ -91,7 +91,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Shaco/Spells/DeceiveAbility/Deceive"
+					"dataKey": "Characters/Shaco/Spells/DeceiveAbility/Deceive",
+					"tooltipExtendedBelowLine": "<rules>The bonus damage on Attack can critically strike.<br>{{Reminder_Invisibility}}</rules>"
 				}
 			]
 		},
@@ -274,7 +275,8 @@
 					"effectAmount": {
 						"4": [6, 6, 6, 6, 6, 6, 6]
 					},
-					"dataKey": "Characters/Shaco/Spells/HallucinateFullAbility/HallucinateFull"
+					"dataKey": "Characters/Shaco/Spells/HallucinateFullAbility/HallucinateFull",
+					"tooltipExtendedBelowLine": "<rules>The clone can be controlled using the Alt key and right click, or by <recast>Recasting</recast> this Ability.</rules>"
 				}
 			]
 		},

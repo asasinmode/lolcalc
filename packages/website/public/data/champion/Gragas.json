@@ -70,7 +70,8 @@
 						"5": [150, 150, 150, 150, 150, 150, 150],
 						"6": [70, 70, 70, 70, 70, 70, 70]
 					},
-					"dataKey": "Characters/Gragas/Spells/GragasQAbility/GragasQ"
+					"dataKey": "Characters/Gragas/Spells/GragasQAbility/GragasQ",
+					"tooltipExtendedBelowLine": "<rules>Deals @Effect7Amount@% damage to minions.</rules>"
 				}
 			]
 		},
@@ -125,7 +126,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Gragas/Spells/GragasWAbility/GragasW"
+					"dataKey": "Characters/Gragas/Spells/GragasWAbility/GragasW",
+					"tooltipExtendedBelowLine": "<rules>Max Health damage is capped at @MonsterDamageCap@ versus jungle monsters.</rules><br><rules>Deals @TurretDamageMod*100@% damage to structures.</rules>"
 				}
 			]
 		},
@@ -196,7 +198,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Gragas/Spells/GragasRAbility/GragasR"
+					"dataKey": "Characters/Gragas/Spells/GragasRAbility/GragasR",
+					"tooltipExtendedBelowLine": "<rules>Enemies cannot be <status>Knocked</status> over walls with this Ability.</rules>"
 				}
 			]
 		},

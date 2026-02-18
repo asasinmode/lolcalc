@@ -114,7 +114,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jhin/Spells/JhinWAbility/JhinW"
+					"dataKey": "Characters/Jhin/Spells/JhinWAbility/JhinW",
+					"tooltipExtendedBelowLine": "<rules>This ability deals @MinionMod*100@% damage to minions.<br>Champions that step on a trap from <spellName>Captive Audience</spellName> can also be rooted.</rules>"
 				}
 			]
 		},
@@ -180,7 +181,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jhin/Spells/JhinEAbility/JhinE"
+					"dataKey": "Characters/Jhin/Spells/JhinEAbility/JhinE",
+					"tooltipExtendedBelowLine": "<rules>Lotus Trap hits deal @ReducedDamagePercent*100@% damage to minions, and enemies recently hit by another Lotus Trap.</rules>"
 				}
 			]
 		},

@@ -78,7 +78,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/DrMundo/Spells/DrMundoQAbility/DrMundoQ"
+					"dataKey": "Characters/DrMundo/Spells/DrMundoQAbility/DrMundoQ",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of <magicDamage>@MinimumDamage@ magic damage</magicDamage>, and a maximum of <magicDamage>@MaximumMonsterDamage@ magic damage</magicDamage> to jungle monsters.</rules>"
 				}
 			]
 		},
@@ -195,7 +196,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/DrMundo/Spells/DrMundoEAbility/DrMundoE"
+					"dataKey": "Characters/DrMundo/Spells/DrMundoEAbility/DrMundoE",
+					"tooltipExtendedBelowLine": "<rules>The bonuses from the passive reach their maximum at @MaxMissingHealthThreshold*100@% missing Health.<br>Deals @MinionMod*100@% damage to minions. Deals @MonsterMod*100@% damage to jungle monsters.</rules>"
 				}
 			]
 		},

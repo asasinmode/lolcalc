@@ -92,7 +92,8 @@
 						"3": [500, 500, 500, 500, 500, 500, 500],
 						"4": [4, 4, 5, 6, 7, 8, 9]
 					},
-					"dataKey": "Characters/Gangplank/Spells/GangplankQWrapperAbility/GangplankQWrapper"
+					"dataKey": "Characters/Gangplank/Spells/GangplankQWrapperAbility/GangplankQWrapper",
+					"tooltipExtendedBelowLine": "<rules>The shot applies On-Hit effects (other than <spellName>{{Spell_GangplankPassive_Name}}</spellName>) and can critically strike for <physicalDamage>@ShotCrit@ physical damage</physicalDamage>.</rules>"
 				}
 			]
 		},
@@ -184,7 +185,8 @@
 						"8": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"9": [40, 40, 40, 40, 40, 40, 40]
 					},
-					"dataKey": "Characters/Gangplank/Spells/GangplankEAbility/GangplankE"
+					"dataKey": "Characters/Gangplank/Spells/GangplankEAbility/GangplankE",
+					"tooltipExtendedBelowLine": "<rules>Keg decay rate increases at level 7 and 13.</rules>"
 				}
 			]
 		},

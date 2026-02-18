@@ -158,7 +158,8 @@
 						"6": [135, 135, 135, 135, 135, 135, 135],
 						"7": [150, 150, 150, 150, 150, 150, 150]
 					},
-					"dataKey": "Characters/Ziggs/Spells/ZiggsEAbility/ZiggsE"
+					"dataKey": "Characters/Ziggs/Spells/ZiggsEAbility/ZiggsE",
+					"tooltipExtendedBelowLine": "<rules>Mines beyond the first deal <magicDamage>@ReducedDamage@ damage</magicDamage>.</rules>"
 				}
 			]
 		},

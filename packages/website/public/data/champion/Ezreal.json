@@ -63,7 +63,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ezreal/Spells/EzrealQAbility/EzrealQ"
+					"dataKey": "Characters/Ezreal/Spells/EzrealQAbility/EzrealQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies {{ Item_Keyword_OnHit }} effects.</rules>"
 				}
 			]
 		},

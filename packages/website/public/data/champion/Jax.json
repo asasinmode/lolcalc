@@ -87,7 +87,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jax/Spells/JaxWAbility/JaxW"
+					"dataKey": "Characters/Jax/Spells/JaxWAbility/JaxW",
+					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>Deals @StructureMod*100@% damage to structures.</rules>"
 				}
 			]
 		},
@@ -245,7 +246,8 @@
 							"mModifiedGameCalculation": "BonusArmor"
 						}
 					},
-					"dataKey": "Characters/Jax/Spells/JaxRAbility/JaxR"
+					"dataKey": "Characters/Jax/Spells/JaxRAbility/JaxR",
+					"tooltipExtendedBelowLine": "<rules>Deals @StructureMod*100@% damage to structures.</rules>"
 				}
 			]
 		},

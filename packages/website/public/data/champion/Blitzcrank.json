@@ -100,7 +100,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Blitzcrank/Spells/OverdriveAbility/Overdrive"
+					"dataKey": "Characters/Blitzcrank/Spells/OverdriveAbility/Overdrive",
+					"tooltipExtendedBelowLine": "<rules>Move Speed decays to @MoveSpeedModMin*100@% over @MoveSpeedModMinTime@ seconds</rules>"
 				}
 			]
 		},
@@ -200,7 +201,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Blitzcrank/Spells/StaticFieldAbility/StaticField"
+					"dataKey": "Characters/Blitzcrank/Spells/StaticFieldAbility/StaticField",
+					"tooltipExtendedBelowLine": "<rules>Does not break shields on monsters.</rules>"
 				}
 			]
 		},

@@ -121,7 +121,8 @@
 						"4": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
 						"5": [2, 2, 2, 2, 2, 2, 2]
 					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharWAbility/MalzaharW"
+					"dataKey": "Characters/Malzahar/Spells/MalzaharWAbility/MalzaharW",
+					"tooltipExtendedBelowLine": "<rules>Voidlings deal @LaneMinionMod*100@% damage to lane minions affected by <spellName>Malefic Visions</spellName>.<br>Voidlings deal @EpicMonsterMod*100@% damage to epic monsters.</rules>"
 				}
 			]
 		},
@@ -241,7 +242,8 @@
 						"2": [5, 5, 5, 5, 5, 5, 5],
 						"3": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR"
+					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},

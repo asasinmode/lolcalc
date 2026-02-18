@@ -70,7 +70,8 @@
 						"6": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
 						"7": [40, 40, 40, 40, 40, 40, 40]
 					},
-					"dataKey": "Characters/Fizz/Spells/FizzQAbility/FizzQ"
+					"dataKey": "Characters/Fizz/Spells/FizzQAbility/FizzQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies On-Hit effects.</rules>"
 				}
 			]
 		},
@@ -138,7 +139,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Fizz/Spells/FizzWAbility/FizzW"
+					"dataKey": "Characters/Fizz/Spells/FizzWAbility/FizzW",
+					"tooltipExtendedBelowLine": "<rules>Attacks deal @BonusMonsterDamage@ bonus damage to jungle monsters.<br>Attacks deal @TurretMod*100@% damage to structures.</rules>"
 				}
 			]
 		},

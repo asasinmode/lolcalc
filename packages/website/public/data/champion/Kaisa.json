@@ -194,7 +194,8 @@
 						"5": [100, 100, 100, 100, 100, 100, 100],
 						"6": [12, 12, 12, 12, 12, 12, 12]
 					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaQAbility/KaisaQ"
+					"dataKey": "Characters/Kaisa/Spells/KaisaQAbility/KaisaQ",
+					"tooltipExtendedBelowLine": "<rules>Minions below <scaleHealth>@Effect5Amount*100@% Health</scaleHealth> take @Effect4Amount*100@% damage.</rules>"
 				}
 			]
 		},
@@ -234,7 +235,8 @@
 						"3": [2, 2, 2, 2, 2, 2, 2],
 						"4": [3, 3, 3, 3, 3, 3, 3]
 					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaWAbility/KaisaW"
+					"dataKey": "Characters/Kaisa/Spells/KaisaWAbility/KaisaW",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Plasma</keywordMajor> applied by this Ability deals the damage from <spellName>Second Skin</spellName>.</rules>"
 				}
 			]
 		},
@@ -303,7 +305,8 @@
 						"6": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"7": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaEAbility/KaisaE"
+					"dataKey": "Characters/Kaisa/Spells/KaisaEAbility/KaisaE",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}<br>{{Reminder_Invisibility}}<br>The charge time scales down with <attackSpeed>Attack Speed</attackSpeed> (Current: @TotalCastTime@)</rules>"
 				}
 			]
 		},

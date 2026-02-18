@@ -85,7 +85,8 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Sett/Spells/SettQAbility/SettQ"
+					"dataKey": "Characters/Sett/Spells/SettQAbility/SettQ",
+					"tooltipExtendedBelowLine": "<rules>The Attacks are always a left and right punch. Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to monsters per punch.</rules>"
 				}
 			]
 		},
@@ -225,7 +226,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sett/Spells/SettEAbility/SettE"
+					"dataKey": "Characters/Sett/Spells/SettEAbility/SettE",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonus@ bonus damage against monsters.</rules>"
 				}
 			]
 		},

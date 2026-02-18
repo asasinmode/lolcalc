@@ -79,7 +79,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yorick/Spells/YorickQAbility/YorickQ"
+					"dataKey": "Characters/Yorick/Spells/YorickQAbility/YorickQ",
+					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}</rules>"
 				}
 			]
 		},
@@ -177,7 +178,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yorick/Spells/YorickEAbility/YorickE"
+					"dataKey": "Characters/Yorick/Spells/YorickEAbility/YorickE",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of <magicDamage>@Calc_MinimumDamage@ magic damage</magicDamage> to lane Minions.<br>Deals a maximum of <magicDamage>@Calc_MonsterCapDamage@ magic damage</magicDamage> to jungle Monsters.</rules>"
 				}
 			]
 		},
@@ -261,7 +263,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yorick/Spells/YorickRAbility/YorickR"
+					"dataKey": "Characters/Yorick/Spells/YorickRAbility/YorickR",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Maiden of the Mist</keywordMajor><br><scaleArmor>@YorickMaidenResists@ Armor</scaleArmor><br><scaleMR>@YorickMaidenResists@ Magic Resist</scaleMR><br>Takes @MinionDamageTakenModifier*100@% damage from lane minions</rules>"
 				}
 			]
 		},

@@ -102,7 +102,8 @@
 							"mPrecision": 2
 						}
 					},
-					"dataKey": "Characters/KogMaw/Spells/KogMawBioArcaneBarrageAbility/KogMawBioArcaneBarrage"
+					"dataKey": "Characters/KogMaw/Spells/KogMawBioArcaneBarrageAbility/KogMawBioArcaneBarrage",
+					"tooltipExtendedBelowLine": "<rules>Deals a maximum of <magicDamage>@MonsterDamageCap@ magic damage</magicDamage> to Monsters.</rules>"
 				}
 			]
 		},

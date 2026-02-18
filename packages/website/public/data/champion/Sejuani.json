@@ -162,7 +162,8 @@
 						"5": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
 						"8": [250, 250, 250, 250, 250, 250, 250]
 					},
-					"dataKey": "Characters/Sejuani/Spells/SejuaniEAbility/SejuaniE"
+					"dataKey": "Characters/Sejuani/Spells/SejuaniEAbility/SejuaniE",
+					"tooltipExtendedBelowLine": "<rules>Champions <status>Stunned</status> by Sejuani can't gain stacks for @PerChampionCD@ seconds.<br>Enemies <status>Stunned</status> by this Ability are slightly <status>Knocked Back</status>.<br>Permafrost will target the closest valid enemy to your cursor (prioritizing champions).<br>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},
@@ -211,7 +212,8 @@
 						"6": [0, 200, 300, 400, 0, 0, 30],
 						"7": [30, 30, 30, 30, 30, 30, 30]
 					},
-					"dataKey": "Characters/Sejuani/Spells/SejuaniRAbility/SejuaniR"
+					"dataKey": "Characters/Sejuani/Spells/SejuaniRAbility/SejuaniR",
+					"tooltipExtendedBelowLine": "<rules>The <status>Stunned</status> enemy takes damage immediately, while enemies inside the storm take damage after it ends. Enemies in the storm are also <status>Slowed</status> for an additional 1 second.</rules>"
 				}
 			]
 		},

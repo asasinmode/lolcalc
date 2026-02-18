@@ -125,7 +125,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Nami/Spells/NamiWAbility/NamiW"
+					"dataKey": "Characters/Nami/Spells/NamiWAbility/NamiW",
+					"tooltipExtendedBelowLine": "<rules>Can only bounce to visible enemies.</rules>"
 				}
 			]
 		},
@@ -196,7 +197,8 @@
 						"3": [3, 3, 3, 3, 3, 3, 3],
 						"4": [6, 6, 6, 6, 6, 6, 6]
 					},
-					"dataKey": "Characters/Nami/Spells/NamiEAbility/NamiE"
+					"dataKey": "Characters/Nami/Spells/NamiEAbility/NamiE",
+					"tooltipExtendedBelowLine": "<rules>Deals @AoEMod@ damage to non-champions when empowering area of effect Abilities.</rules>"
 				}
 			]
 		},
@@ -235,7 +237,8 @@
 						"4": [4, 4, 4, 4, 4, 4, 4],
 						"5": [0.002, 0.002, 0.002, 0.002, 0.002, 0.002, 0.002]
 					},
-					"dataKey": "Characters/Nami/Spells/NamiRAbility/NamiR"
+					"dataKey": "Characters/Nami/Spells/NamiRAbility/NamiR",
+					"tooltipExtendedBelowLine": "<rules>The <status>Slow</status> has a minimum duration of @Effect3Amount@ seconds.</rules>"
 				}
 			]
 		},

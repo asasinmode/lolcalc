@@ -118,7 +118,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Kayle/Spells/KayleWAbility/KayleW"
+					"dataKey": "Characters/Kayle/Spells/KayleWAbility/KayleW",
+					"tooltipExtendedBelowLine": "<rules>If cast without a target, this Ability will heal the most wounded ally in range.</rules>"
 				}
 			]
 		},
@@ -184,7 +185,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Kayle/Spells/KayleEAbility/KayleE"
+					"dataKey": "Characters/Kayle/Spells/KayleEAbility/KayleE",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies on-hit and spell effects. Max @MaxExecuteVsMonsters@ bonus damage vs. jungle monsters.</rules>"
 				}
 			]
 		},

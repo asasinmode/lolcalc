@@ -245,7 +245,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Udyr/Spells/UdyrQAbility/UdyrQ"
+					"dataKey": "Characters/Udyr/Spells/UdyrQAbility/UdyrQ",
+					"tooltipExtendedBelowLine": "<rules>Claw Stance Max Health damage is capped at @MonsterCap@ to monsters. Each lightning strike deals <magicDamage>@EmpoweredLightningBonus@ max Health magic damage</magicDamage>  Minimum damage to minions: @LightningDamageToMinionsMin@).</rules>"
 				}
 			]
 		},
@@ -382,7 +383,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Udyr/Spells/UdyrWAbility/UdyrW"
+					"dataKey": "Characters/Udyr/Spells/UdyrWAbility/UdyrW",
+					"tooltipExtendedBelowLine": "<rules>The Shield granted by an Awaken cast will stack with any remaining Shield from the original cast. Life on hit reduced by @HealOnHitMinionPenalty*100@% against minions.</rules>"
 				}
 			]
 		},
@@ -442,7 +444,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Udyr/Spells/UdyrEAbility/UdyrE"
+					"dataKey": "Characters/Udyr/Spells/UdyrEAbility/UdyrE",
+					"tooltipExtendedBelowLine": "<rules>Udyr moves through units during the Move Speed boost, and his Attacks in this <keywordMajor>Stance</keywordMajor> can't be cancelled.</rules>"
 				}
 			]
 		},
@@ -573,7 +576,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Udyr/Spells/UdyrRAbility/UdyrR"
+					"dataKey": "Characters/Udyr/Spells/UdyrRAbility/UdyrR",
+					"tooltipExtendedBelowLine": "<rules>Storm deals @DamageToMinions_Scaling@ damage to minions. Awakened deals a minimum of @spell.UdyrQ:MonsterNukeMinRCalc@ to monsters.</rules>"
 				}
 			]
 		},

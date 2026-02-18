@@ -152,7 +152,8 @@
 					"effectAmount": {
 						"1": [2, 2, 2, 2, 2, 2, 2]
 					},
-					"dataKey": "Characters/Illaoi/Spells/IllaoiWAbility/IllaoiW"
+					"dataKey": "Characters/Illaoi/Spells/IllaoiWAbility/IllaoiW",
+					"tooltipExtendedBelowLine": "<rules>The percent Health damage does a minimum of @WMinDamage@. Against jungle monsters the damage is capped at @MonsterDamageCap@.<br>{{ buff_desc_SpellEffects }}</rules>"
 				}
 			]
 		},
@@ -231,7 +232,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Illaoi/Spells/IllaoiEAbility/IllaoiE"
+					"dataKey": "Characters/Illaoi/Spells/IllaoiEAbility/IllaoiE",
+					"tooltipExtendedBelowLine": "<rules>Marked enemies are revealed for a short time.</rules>"
 				}
 			]
 		},
@@ -266,7 +268,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Illaoi/Spells/IllaoiRAbility/IllaoiR"
+					"dataKey": "Characters/Illaoi/Spells/IllaoiRAbility/IllaoiR",
+					"tooltipExtendedBelowLine": "<rules>Spirits from <spellName>Test Of Spirit</spellName> also generate a Tentacle if hit by this ability.</rules>"
 				}
 			]
 		},

@@ -59,7 +59,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/TahmKench/Spells/TahmKenchQAbility/TahmKenchQ"
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchQAbility/TahmKenchQ",
+					"tooltipExtendedBelowLine": "<rules>{{ Spell_TahmKenchQ_Name }}'s range increases with Tahm Kench's size</rules>"
 				}
 			]
 		},
@@ -95,7 +96,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/TahmKench/Spells/TahmKenchWAbility/TahmKenchW"
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchWAbility/TahmKenchW",
+					"tooltipExtendedBelowLine": "Enemies cannot see where you are headed to until @EnemyWarningDelayFromChannelStart@ seconds into the channel.<br><br><font color='#cccccc'><i>'Boy, the world's one river, and I'm its king. Ain't no place I ain't been; ain't no place I can't go again.'</i></font>"
 				}
 			]
 		},
@@ -137,7 +139,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/TahmKench/Spells/TahmKenchEAbility/TahmKenchE"
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchEAbility/TahmKenchE",
+					"tooltipExtendedBelowLine": "<rules>Grey Health is capped at @GreyHealthMaximum@</rules>"
 				}
 			]
 		},
@@ -205,7 +208,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/TahmKench/Spells/TahmKenchRWrapperAbility/TahmKenchRWrapper"
+					"dataKey": "Characters/TahmKench/Spells/TahmKenchRWrapperAbility/TahmKenchRWrapper",
+					"tooltipExtendedBelowLine": "<rules>Allies can see when this spell is available next to your health bar (enemies cannot).<br>Shield decays by @ShieldDecayPerSecond@ per second.</rules>"
 				}
 			]
 		},

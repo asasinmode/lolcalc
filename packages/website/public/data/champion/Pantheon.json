@@ -135,7 +135,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Pantheon/Spells/PantheonQAbility/PantheonQ"
+					"dataKey": "Characters/Pantheon/Spells/PantheonQAbility/PantheonQ",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterDamageMod*100@% damage to monsters.</rules><br><rules>Deals @MinionDamageMod*100@% damage to minions.</rules>"
 				}
 			]
 		},
@@ -210,7 +211,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Pantheon/Spells/PantheonWAbility/PantheonW"
+					"dataKey": "Characters/Pantheon/Spells/PantheonWAbility/PantheonW",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of @MonsterDamageMin@ and a maximum of @MonsterDamageCap@ damage to Minions and Monsters.</rules>"
 				}
 			]
 		},
@@ -312,7 +314,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Pantheon/Spells/PantheonEAbility/PantheonE"
+					"dataKey": "Characters/Pantheon/Spells/PantheonEAbility/PantheonE",
+					"tooltipExtendedBelowLine": "<rules><recast>Recast</recast> to end early (Pantheon still slams with his shield as the last hit). <br>Damage to minions is reduced by @MinionDamageReduction*100@%.</rules>"
 				}
 			]
 		},

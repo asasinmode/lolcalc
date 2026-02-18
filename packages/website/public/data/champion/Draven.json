@@ -63,7 +63,8 @@
 						"1": [75, 75, 75, 75, 75, 75, 75],
 						"3": [5.75, 5.75, 5.75, 5.75, 5.75, 5.75, 5.75]
 					},
-					"dataKey": "Characters/Draven/Spells/DravenSpinningAbility/DravenSpinning"
+					"dataKey": "Characters/Draven/Spells/DravenSpinningAbility/DravenSpinning",
+					"tooltipExtendedBelowLine": "<rules>Draven will drop any <keywordMajor>Spinning Axes</keywordMajor> if he does not attack for @DurationTOOLTIP@ seconds. Attacking a turret or structure will not cause Draven's <keywordMajor>Spinning Axes</keywordMajor> to richochet.</rules>"
 				}
 			]
 		},
@@ -89,7 +90,8 @@
 						"4": [3, 3, 3, 3, 3, 3, 3],
 						"5": [-0.056, -0.062, -0.069, -0.075, -0.081, -0.087, -0.094]
 					},
-					"dataKey": "Characters/Draven/Spells/DravenFuryAbility/DravenFury"
+					"dataKey": "Characters/Draven/Spells/DravenFuryAbility/DravenFury",
+					"tooltipExtendedBelowLine": "<rules>Ghosted units can pass through other units.</rules>"
 				}
 			]
 		},
@@ -175,7 +177,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast"
+					"dataKey": "Characters/Draven/Spells/DravenRCastAbility/DravenRCast",
+					"tooltipExtendedBelowLine": "<rules>Damage falloff resets after reversing direction.<br>Whirling Executes from League of Draven: @f1@</rules>"
 				}
 			]
 		},

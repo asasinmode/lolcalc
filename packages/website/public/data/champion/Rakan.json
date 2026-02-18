@@ -157,7 +157,8 @@
 						"7": [1150, 1150, 1150, 1150, 1150, 1150, 1150],
 						"8": [1250, 1250, 1250, 1250, 1250, 1250, 1250]
 					},
-					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanE"
+					"dataKey": "Characters/Rakan/Spells/RakanEAbility/RakanE",
+					"tooltipExtendedBelowLine": "<rules>Cast range is increased when cast on Xayah.</rules>"
 				}
 			]
 		},

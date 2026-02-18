@@ -107,7 +107,8 @@
 							"mModifiedGameCalculation": "QDamage"
 						}
 					},
-					"dataKey": "Characters/Aatrox/Spells/AatroxQAbility/AatroxQ"
+					"dataKey": "Characters/Aatrox/Spells/AatroxQAbility/AatroxQ",
+					"tooltipExtendedBelowLine": "<rules>Deals @QMinionDamage@ damage to minions.<br><status>Knock Up</status> duration against monsters is doubled and it deals @QMonsterBonus@ bonus damage.</rules>"
 				}
 			]
 		},
@@ -141,7 +142,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Aatrox/Spells/AatroxWAbility/AatroxW"
+					"dataKey": "Characters/Aatrox/Spells/AatroxWAbility/AatroxW",
+					"tooltipExtendedBelowLine": "<rules>Deals double damage to minions.</rules>"
 				}
 			]
 		},
@@ -214,7 +216,8 @@
 						"RMinionFearDuration": [3, 3, 3, 3, 3, 3, 3],
 						"RChampionFearDuration": [1, 1, 1, 1, 1, 1, 1]
 					},
-					"dataKey": "Characters/Aatrox/Spells/AatroxRAbility/AatroxR"
+					"dataKey": "Characters/Aatrox/Spells/AatroxRAbility/AatroxR",
+					"tooltipExtendedBelowLine": "<rules>Duration cannot be increased past @RDuration@ seconds.</rules>"
 				}
 			]
 		},

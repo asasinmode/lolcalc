@@ -98,7 +98,8 @@
 						"6": [10, 10, 10, 10, 10, 10, 10],
 						"7": [400, 400, 400, 400, 400, 400, 400]
 					},
-					"dataKey": "Characters/Taliyah/Spells/TaliyahQAbility/TaliyahQ"
+					"dataKey": "Characters/Taliyah/Spells/TaliyahQAbility/TaliyahQ",
+					"tooltipExtendedBelowLine": "<rules>Taliyah can move and use other Abilities while hurling rocks.<br>Casting this Ability on Worked Ground cannot reduce its Cooldown to less than @MinimumWorkedGroundCD@ seconds.<br>Total damage to a single target: <magicDamage>@MaxDamageTooltip@</magicDamage><br>Each rock deals <magicDamage>@TotalBonusFlatMonsterDamage@</magicDamage> additional damage to monsters.</rules>"
 				}
 			]
 		},
@@ -176,7 +177,8 @@
 						"3": [85, 85, 85, 85, 85, 85, 85],
 						"5": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/Taliyah/Spells/TaliyahEAbility/TaliyahE"
+					"dataKey": "Characters/Taliyah/Spells/TaliyahEAbility/TaliyahE",
+					"tooltipExtendedBelowLine": "<rules>The stun's duration cannot exceed @MaxStunDuration@ seconds. Each enemy can only be stunned once per cast. Monsters are always stunned for the maximum duration.<br>Stones beyond the first one deal @MineDamageFalloff*100@% less damage. <br>Max detonation damage: <magicDamage>@MaxDetonationDamageTooltip@</magicDamage><br>This ability deals @MonsterModPercent*100@% damage to monsters.</rules>"
 				}
 			]
 		},
@@ -206,7 +208,8 @@
 						"2": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 						"3": [2500, 2500, 2500, 2500, 2500, 2500, 2500]
 					},
-					"dataKey": "Characters/Taliyah/Spells/TaliyahRAbility/TaliyahR"
+					"dataKey": "Characters/Taliyah/Spells/TaliyahRAbility/TaliyahR",
+					"tooltipExtendedBelowLine": "<rules>Once the wall is fully formed, Taliyah can <recast>Recast</recast> to destroy it early.</rules>"
 				}
 			]
 		},

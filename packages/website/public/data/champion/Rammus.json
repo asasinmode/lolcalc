@@ -326,7 +326,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Rammus/Spells/Tremors2Ability/Tremors2"
+					"dataKey": "Characters/Rammus/Spells/Tremors2Ability/Tremors2",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals @TurretDamageModifier*100@% damage to turrets.</rules>"
 				}
 			]
 		},

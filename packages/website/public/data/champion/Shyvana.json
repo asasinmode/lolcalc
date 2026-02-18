@@ -140,7 +140,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Shyvana/Spells/ShyvanaImmolationAuraAbility/ShyvanaImmolationAura"
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaImmolationAuraAbility/ShyvanaImmolationAura",
+					"tooltipExtendedBelowLine": "<rules>This Ability has a max duration of @MaxBuffDuration@ seconds.</rules>"
 				}
 			]
 		},
@@ -265,7 +266,8 @@
 					"effectAmount": {
 						"5": [0, 60, 100, 140, 180, 220, 260]
 					},
-					"dataKey": "Characters/Shyvana/Spells/ShyvanaFireballAbility/ShyvanaFireball"
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaFireballAbility/ShyvanaFireball",
+					"tooltipExtendedBelowLine": "<rules>The bonus damage on Attacks is capped at <magicDamage>@MaxDamageVsMonsters@ damage</magicDamage> against jungle monsters.</rules>"
 				}
 			]
 		},

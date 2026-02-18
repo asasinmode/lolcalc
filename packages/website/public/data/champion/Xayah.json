@@ -167,7 +167,8 @@
 							"mModifiedGameCalculation": "FeatherDamage"
 						}
 					},
-					"dataKey": "Characters/Xayah/Spells/XayahEAbility/XayahE"
+					"dataKey": "Characters/Xayah/Spells/XayahEAbility/XayahE",
+					"tooltipExtendedBelowLine": "<rules>Damage scales with Critical Strike Chance and Critical Strike Damage at <physicalDamage>@CritRatio*100@%</physicalDamage> effectiveness.<br>Minions take @MinionMultiplier*100@% damage from this Ability.<br>Enemies take 5% less damage per feather hit, to a minimum of 10% damage.</rules>"
 				}
 			]
 		},
@@ -201,7 +202,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Xayah/Spells/XayahRAbility/XayahR"
+					"dataKey": "Characters/Xayah/Spells/XayahRAbility/XayahR",
+					"tooltipExtendedBelowLine": "<rules>Untargetable units won't be affected by enemy Attacks or Abilities unless they've already been affected by them.<br>Ghosted units ignore collision with other units.<br>Xayah can move while in the air.</rules>"
 				}
 			]
 		},

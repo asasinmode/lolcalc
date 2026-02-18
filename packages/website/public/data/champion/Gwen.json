@@ -113,7 +113,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Gwen/Spells/GwenQAbility/GwenQ"
+					"dataKey": "Characters/Gwen/Spells/GwenQAbility/GwenQ",
+					"tooltipExtendedBelowLine": "<rules>Max damage: @MaxDamage@, plus @spell.GwenP:PassiveMaxQTooltip@ percent health from <spellName>A Thousand Cuts</spellName></rules>."
 				}
 			]
 		},
@@ -152,7 +153,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Gwen/Spells/GwenWAbility/GwenW"
+					"dataKey": "Characters/Gwen/Spells/GwenWAbility/GwenW",
+					"tooltipExtendedBelowLine": ""
 				}
 			]
 		},
@@ -203,7 +205,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Gwen/Spells/GwenEAbility/GwenE"
+					"dataKey": "Characters/Gwen/Spells/GwenEAbility/GwenE",
+					"tooltipExtendedBelowLine": ""
 				}
 			]
 		},
@@ -256,7 +259,8 @@
 							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
-					"dataKey": "Characters/Gwen/Spells/GwenRAbility/GwenR"
+					"dataKey": "Characters/Gwen/Spells/GwenRAbility/GwenR",
+					"tooltipExtendedBelowLine": "<rules>Subsequent needle hits on the same unit <status>Slow</status> by @SubsequentSlow*-100@% instead.<br>Max damage: @MaxDamage@, plus @spell.GwenP:PassiveMaxRTooltip@ max health damage from <spellName>A Thousand Cuts</spellName>.</rules>"
 				}
 			]
 		},

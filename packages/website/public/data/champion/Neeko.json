@@ -71,7 +71,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Neeko/Spells/NeekoQAbility/NeekoQ"
+					"dataKey": "Characters/Neeko/Spells/NeekoQAbility/NeekoQ",
+					"tooltipExtendedBelowLine": "<rules>Each bloom deals an additional <magicDamage>@MonsterBonus@ magic damage</magicDamage> to monsters.</rules>"
 				}
 			]
 		},
@@ -109,7 +110,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Neeko/Spells/NeekoWAbility/NeekoW"
+					"dataKey": "Characters/Neeko/Spells/NeekoWAbility/NeekoW",
+					"tooltipExtendedBelowLine": "<rules>The clone is untargetable while stealthed.<br>Empowered Attacks deal <magicDamage>@MonsterBonus@ bonus magic damage</magicDamage> to monsters.</rules>"
 				}
 			]
 		},

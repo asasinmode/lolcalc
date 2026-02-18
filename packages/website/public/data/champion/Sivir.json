@@ -120,7 +120,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirQAbility/SivirQ"
+					"dataKey": "Characters/Sivir/Spells/SivirQAbility/SivirQ",
+					"tooltipExtendedBelowLine": "<rules>The damage falloff resets upon beginning its return.<br>Damage scales with Critical Strike Chance and Critical Strike Damage at @CritRatio*100@% effectiveness.<br>Cast time scales down with Attack Speed</rules>"
 				}
 			]
 		},
@@ -183,7 +184,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirWAbility/SivirW"
+					"dataKey": "Characters/Sivir/Spells/SivirWAbility/SivirW",
+					"tooltipExtendedBelowLine": "<rules>Bounces will prioritize new targets before returning to targets that have already been struck. Can only hit each target a maximum of two times.<br>Bounces deal @MinionDamageMod*100@% damage to minions.</rules><br><rules>This ability executes low Health minions.</rules>"
 				}
 			]
 		},
@@ -218,7 +220,8 @@
 						"1": [55, 55, 55, 55, 55, 55, 55],
 						"2": [60, 60, 60, 60, 60, 60, 60]
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirEAbility/SivirE"
+					"dataKey": "Characters/Sivir/Spells/SivirEAbility/SivirE",
+					"tooltipExtendedBelowLine": "<rules>This shield blocks both champion and item Abilities.</rules>"
 				}
 			]
 		},
@@ -255,7 +258,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR"
+					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR",
+					"tooltipExtendedBelowLine": ""
 				}
 			]
 		},

@@ -126,7 +126,8 @@
 							"mPrecision": 2
 						}
 					},
-					"dataKey": "Characters/Janna/Spells/HowlingGaleAbility/HowlingGale"
+					"dataKey": "Characters/Janna/Spells/HowlingGaleAbility/HowlingGale",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <magicDamage>@ExtraDamagePerSecondCharged@ magic damage</magicDamage>, <status>Knocks Up</status> for an additional @ChargeKnockup@ seconds, and travels @ChargeDistancePercent@% farther for each second it grew, and always reaches its destination in @MissileTravelTime@ seconds.</rules>"
 				}
 			]
 		},
@@ -192,7 +193,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Janna/Spells/SowTheWindAbility/SowTheWind"
+					"dataKey": "Characters/Janna/Spells/SowTheWindAbility/SowTheWind",
+					"tooltipExtendedBelowLine": "<rules>Ghosted units ignore collision with other units.</rules><br>"
 				}
 			]
 		},
@@ -290,7 +292,8 @@
 						"7": [10, 10, 10, 10, 10, 10, 10],
 						"8": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind"
+					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind",
+					"tooltipExtendedBelowLine": "<rules>The <status>Knock Back</status> cannot push enemies over walls.</rules>"
 				}
 			]
 		},

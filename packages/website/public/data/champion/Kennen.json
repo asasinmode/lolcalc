@@ -116,7 +116,8 @@
 						"1": [25, 25, 25, 25, 25, 25, 25],
 						"2": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
-					"dataKey": "Characters/Kennen/Spells/KennenBringTheLightAbility/KennenBringTheLight"
+					"dataKey": "Characters/Kennen/Spells/KennenBringTheLightAbility/KennenBringTheLight",
+					"tooltipExtendedBelowLine": "<rules>The passive also applies <spellName>Mark of the Storm</spellName>.<br>Attacking structures will stack the passive, but not expend it. The active automatically hits enemies inside of <spellName>Slicing Maelstrom</spellName>.</rules>"
 				}
 			]
 		},
@@ -164,7 +165,8 @@
 						"4": [2, 2, 2, 2, 2, 2, 2],
 						"6": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/Kennen/Spells/KennenLightningRushAbility/KennenLightningRush"
+					"dataKey": "Characters/Kennen/Spells/KennenLightningRushAbility/KennenLightningRush",
+					"tooltipExtendedBelowLine": "<rules>Ghosted units can pass through other units.<br>Deals @DamageToMinions*100@% damage to minions and jungle monsters.</rules>"
 				}
 			]
 		},
@@ -199,7 +201,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kennen/Spells/KennenShurikenStormAbility/KennenShurikenStorm"
+					"dataKey": "Characters/Kennen/Spells/KennenShurikenStormAbility/KennenShurikenStorm",
+					"tooltipExtendedBelowLine": "<rules>Enemies can only receive 3 stacks of <spellName>Mark of the Storm</spellName> from this ability.</rules>"
 				}
 			]
 		},

@@ -155,7 +155,8 @@
 						"1": [33, 33, 33, 33, 33, 33, 33],
 						"2": [900, 900, 900, 900, 900, 900, 900]
 					},
-					"dataKey": "Characters/Bard/Spells/BardEAbility/BardE"
+					"dataKey": "Characters/Bard/Spells/BardEAbility/BardE",
+					"tooltipExtendedBelowLine": "<rules>Allies travel @FriendlyMovementBonusPercentage@% faster than enemies.</rules>"
 				}
 			]
 		},
@@ -171,7 +172,8 @@
 					"dataValues": {
 						"RStasisDuration": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
-					"dataKey": "Characters/Bard/Spells/BardRAbility/BardR"
+					"dataKey": "Characters/Bard/Spells/BardRAbility/BardR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Stasis}}</rules>"
 				}
 			]
 		},

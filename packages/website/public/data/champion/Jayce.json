@@ -60,7 +60,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jayce/Spells/JayceToTheSkiesAbility/JayceToTheSkies"
+					"dataKey": "Characters/Jayce/Spells/JayceToTheSkiesAbility/JayceToTheSkies",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonusDamage@ bonus damage to jungle monsters.</rules>"
 				},
 				{
 					"name": "Shock Blast",
@@ -101,7 +102,8 @@
 					"effectAmount": {
 						"0": [10, 25, 40, 55, 70, 85, 100]
 					},
-					"dataKey": "Characters/Jayce/Spells/JayceShockBlastAbility/JayceShockBlast"
+					"dataKey": "Characters/Jayce/Spells/JayceShockBlastAbility/JayceShockBlast",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterBonusDamage@ bonus damage to jungle monsters.</rules>"
 				}
 			]
 		},
@@ -197,7 +199,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jayce/Spells/JayceThunderingBlowAbility/JayceThunderingBlow"
+					"dataKey": "Characters/Jayce/Spells/JayceThunderingBlowAbility/JayceThunderingBlow",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Hammer</keywordMajor> swing does a max of <magicDamage>@MonsterCap@ magic damage</magicDamage> against jungle monsters.</rules>"
 				},
 				{
 					"name": "Acceleration Gate",

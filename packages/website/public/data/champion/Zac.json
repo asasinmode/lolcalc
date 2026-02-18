@@ -102,7 +102,8 @@
 						"8": [300, 300, 300, 300, 300, 300, 300],
 						"9": [300, 300, 300, 300, 300, 300, 300]
 					},
-					"dataKey": "Characters/Zac/Spells/ZacQAbility/ZacQ"
+					"dataKey": "Characters/Zac/Spells/ZacQAbility/ZacQ",
+					"tooltipExtendedBelowLine": "<rules><status>Slows</status> by @Effect4Amount*-100@%. <br>Maximum magic damage: <magicDamage>@MaxDamageTooltip@.</magicDamage></rules>"
 				}
 			]
 		},
@@ -169,7 +170,8 @@
 						"3": [1, 1, 1, 1, 1, 1, 1],
 						"4": [200, 200, 200, 200, 200, 200, 200]
 					},
-					"dataKey": "Characters/Zac/Spells/ZacWAbility/ZacW"
+					"dataKey": "Characters/Zac/Spells/ZacWAbility/ZacW",
+					"tooltipExtendedBelowLine": "<rules>Percent Health damage against minions and jungle monsters is capped at 200.</rules>"
 				}
 			]
 		},
@@ -243,7 +245,8 @@
 						"8": [265, 265, 265, 265, 265, 265, 265],
 						"9": [1, 1, 1, 1, 1, 1, 1]
 					},
-					"dataKey": "Characters/Zac/Spells/ZacEAbility/ZacE"
+					"dataKey": "Characters/Zac/Spells/ZacEAbility/ZacE",
+					"tooltipExtendedBelowLine": "<rules>Can be cancelled by moving.<br>If cancelled, refunds half of the Ability's Cooldown and cost.</rules>"
 				}
 			]
 		},
@@ -365,7 +368,8 @@
 						"8": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"9": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 					},
-					"dataKey": "Characters/Zac/Spells/ZacRAbility/ZacR"
+					"dataKey": "Characters/Zac/Spells/ZacRAbility/ZacR",
+					"tooltipExtendedBelowLine": "<rules>Total Damage: <magicDamage>@MaxDamageTooltip@ magic damage</magicDamage><br><speed>Move Speed</speed> increases from <speed>@BeginningMS*100@%</speed> to <speed>@EndingMS*100@%</speed> over the duration.<br>During Let's Bounce!, Zac is Ghosted. Ghosted units ignore collision with other units.</rules>"
 				}
 			]
 		},

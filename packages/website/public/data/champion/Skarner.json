@@ -73,7 +73,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Skarner/Spells/SkarnerQAbility/SkarnerQ"
+					"dataKey": "Characters/Skarner/Spells/SkarnerQAbility/SkarnerQ",
+					"tooltipExtendedBelowLine": "<rules>Percent Health Damage to monsters is capped at @MonsterDamageCap@.<br>This Ability deals @TurretDamageMod*100@% to structures.</rules>"
 				}
 			]
 		},
@@ -177,7 +178,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Skarner/Spells/SkarnerEAbility/SkarnerE"
+					"dataKey": "Characters/Skarner/Spells/SkarnerEAbility/SkarnerE",
+					"tooltipExtendedBelowLine": "<rules>Successful wall collisions reduce this Ability's cooldown to @RefundPercent*100@%.</rules>"
 				}
 			]
 		},

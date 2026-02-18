@@ -62,7 +62,8 @@
 					"effectAmount": {
 						"3": [0.41, 0.41, 0.41, 0.41, 0.41, 0.41, 0.41]
 					},
-					"dataKey": "Characters/Lucian/Spells/LucianQAbility/LucianQ"
+					"dataKey": "Characters/Lucian/Spells/LucianQAbility/LucianQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability's cast time decreases with Lucian's level.</rules>"
 				}
 			]
 		},
@@ -123,7 +124,8 @@
 						"3": [200, 200, 200, 200, 200, 200, 200],
 						"4": [1350, 1350, 1350, 1350, 1350, 1350, 1350]
 					},
-					"dataKey": "Characters/Lucian/Spells/LucianEAbility/LucianE"
+					"dataKey": "Characters/Lucian/Spells/LucianEAbility/LucianE",
+					"tooltipExtendedBelowLine": "<rules>Lucian can use other Abilities while dashing.</rules>"
 				}
 			]
 		},
@@ -218,7 +220,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lucian/Spells/LucianRAbility/LucianR"
+					"dataKey": "Characters/Lucian/Spells/LucianRAbility/LucianR",
+					"tooltipExtendedBelowLine": "<rules>Number of shots scales with Lucian's Critical Strike chance and Critical Strike damage at @CritValueMod*100@% effectiveness.<br>Deals @PercentDamageAmpToMinions@% damage to minions.</rules>"
 				}
 			]
 		},

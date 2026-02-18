@@ -86,7 +86,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Gnar/Spells/GnarQAbility/GnarQ"
+					"dataKey": "Characters/Gnar/Spells/GnarQAbility/GnarQ",
+					"tooltipExtendedBelowLine": "<rules>Deals @MiniSubsequentMult*100@% damage to enemies beyond the first.</rules>"
 				}
 			]
 		},
@@ -138,7 +139,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Gnar/Spells/GnarWAbility/GnarW"
+					"dataKey": "Characters/Gnar/Spells/GnarWAbility/GnarW",
+					"tooltipExtendedBelowLine": "<rules>Gnar also gains the <speed>Move Speed</speed> when he leaves <keywordMajor>Mega Gnar</keywordMajor> form.<br>Deals a max of <magicDamage>@MiniMonsterCap@ magic damage</magicDamage> against jungle monsters.</rules>"
 				}
 			]
 		},
@@ -246,7 +248,8 @@
 							"mModifiedGameCalculation": "Damage"
 						}
 					},
-					"dataKey": "Characters/Gnar/Spells/GnarRAbility/GnarR"
+					"dataKey": "Characters/Gnar/Spells/GnarRAbility/GnarR",
+					"tooltipExtendedBelowLine": "<rules>After transforming to <keywordMajor>Mini Gnar</keywordMajor>, Gnar cannot gain <keywordMajor>Rage</keywordMajor> for 15 seconds.</rules>"
 				}
 			]
 		},

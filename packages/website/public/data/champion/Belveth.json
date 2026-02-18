@@ -79,7 +79,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Belveth/Spells/BelvethQAbility/BelvethQ"
+					"dataKey": "Characters/Belveth/Spells/BelvethQAbility/BelvethQ",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterMod@ bonus damage to monsters and @MinonMod*100@% damage to minions.<br>Applies On-Hit Effects to the first target hit.<br>Each <attackSpeed>1% Attack Speed</attackSpeed> is equivalent to @PerSideCDAttackSpeedMultiplier@ Ability Haste for this Ability's per-direction Cooldown.</rules>"
 				}
 			]
 		},
@@ -196,7 +197,8 @@
 							"mModifiedGameCalculation": "DamagePerStrike"
 						}
 					},
-					"dataKey": "Characters/Belveth/Spells/BelvethEAbility/BelvethE"
+					"dataKey": "Characters/Belveth/Spells/BelvethEAbility/BelvethE",
+					"tooltipExtendedBelowLine": "<rules>Attacks from this Ability deal @MonsterMod*100@% damage to monsters and apply On-Hit Effects at @OnHitRatio*100@% to @OnHitRatio*400@% effectiveness based on the target's missing Health.</rules><br>"
 				}
 			]
 		},
@@ -288,7 +290,8 @@
 							"mModifiedGameCalculation": "FinalOnHitDamage"
 						}
 					},
-					"dataKey": "Characters/Belveth/Spells/BelvethRAbility/BelvethR"
+					"dataKey": "Characters/Belveth/Spells/BelvethRAbility/BelvethR",
+					"tooltipExtendedBelowLine": "<rules>Void Remora count as lane minions with <healing>@VoidlingHPScale*100@% Health</healing> and <physicalDamage>@VoidlingADScale*100@% Attack Damage</physicalDamage>.<br>The applied <status>Slow</status> ramps up to 99% while Bel'Veth consumes Void Coral. <br>The passive deals a maximum of <trueDamage>@MaxMonsterOnHitTooltip@ true damage</trueDamage> to epic monsters.<br>While in true form, consuming Void Coral renews the form's duration and restores <healing>@BaseMaxHealth@ Health</healing>.</rules><br>"
 				}
 			]
 		},

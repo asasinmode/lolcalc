@@ -62,7 +62,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/TwistedFate/Spells/WildCardsAbility/WildCards"
+					"dataKey": "Characters/TwistedFate/Spells/WildCardsAbility/WildCards",
+					"tooltipExtendedBelowLine": "<rules>Enemies can only be damaged by one of the cards.</rules>"
 				}
 			]
 		},
@@ -290,7 +291,8 @@
 					"effectAmount": {
 						"3": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/TwistedFate/Spells/CardmasterStackAbility/CardmasterStack"
+					"dataKey": "Characters/TwistedFate/Spells/CardmasterStackAbility/CardmasterStack",
+					"tooltipExtendedBelowLine": "<rules>@TowerEffectiveness*100@% effective against structures.</rules>"
 				}
 			]
 		},
@@ -310,7 +312,8 @@
 						"0": [0, 6, 8, 10, 0, 0, 0],
 						"3": [0, 5500, 5500, 5500, 0, 0, 0]
 					},
-					"dataKey": "Characters/TwistedFate/Spells/DestinyAbility/Destiny"
+					"dataKey": "Characters/TwistedFate/Spells/DestinyAbility/Destiny",
+					"tooltipExtendedBelowLine": "<rules><status>Disabling</status> effects will interrupt the teleport.</rules>"
 				}
 			]
 		},

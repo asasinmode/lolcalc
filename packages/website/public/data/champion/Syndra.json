@@ -58,7 +58,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Syndra/Spells/SyndraQAbility/SyndraQ"
+					"dataKey": "Characters/Syndra/Spells/SyndraQAbility/SyndraQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability can be cast while moving.</rules>"
 				}
 			]
 		},
@@ -137,7 +138,8 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Syndra/Spells/SyndraWAbility/SyndraW"
+					"dataKey": "Characters/Syndra/Spells/SyndraWAbility/SyndraW",
+					"tooltipExtendedBelowLine": "<rules>If no target is selected, grabs nearest <keywordMajor>Dark Sphere</keywordMajor>.<br>This Ability can be cast while moving.</rules>"
 				}
 			]
 		},
@@ -173,7 +175,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Syndra/Spells/SyndraEAbility/SyndraE"
+					"dataKey": "Characters/Syndra/Spells/SyndraEAbility/SyndraE",
+					"tooltipExtendedBelowLine": "<rules>Enemies can only take damage and be Knocked Back from this Ability once per cast.<br></rules>"
 				}
 			]
 		},

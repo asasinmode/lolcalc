@@ -75,7 +75,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lulu/Spells/LuluQAbility/LuluQ"
+					"dataKey": "Characters/Lulu/Spells/LuluQAbility/LuluQ",
+					"tooltipExtendedBelowLine": "<rules>Deals <magicDamage>@MinionMod*100@% damage</magicDamage> to Minions.</rules>"
 				}
 			]
 		},
@@ -112,7 +113,8 @@
 						"5": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
 						"6": [0.2, 0.2, 0.225, 0.25, 0.275, 0.3, 0.3]
 					},
-					"dataKey": "Characters/Lulu/Spells/LuluWAbility/LuluW"
+					"dataKey": "Characters/Lulu/Spells/LuluWAbility/LuluW",
+					"tooltipExtendedBelowLine": "<rules><status>Polymorphed</status> targets are <status>Silenced</status>, <status>Disarmed</status>, and <status>Slowed</status> by @Effect4Amount*-1@.</rules>"
 				}
 			]
 		},

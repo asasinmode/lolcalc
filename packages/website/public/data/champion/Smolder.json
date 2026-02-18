@@ -145,7 +145,8 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Smolder/Spells/SmolderQAbility/SmolderQ"
+					"dataKey": "Characters/Smolder/Spells/SmolderQAbility/SmolderQ",
+					"tooltipExtendedBelowLine": "<rules><spellName>{{Spell_SmolderQ_Name}}</spellName> is considered a basic Attack, applies On-Hit effects, and applies Life Steal at @LifestealMod*100@% effectiveness.<br>Damage is increased by %i:scaleCrit% Critical Strike Chance and %i:scaleCritMult% Critical Strike Damage at @CritRatio*100@% effectiveness.<br>This Ability can only damage each target one time per cast.<br></rules>"
 				}
 			]
 		},
@@ -203,7 +204,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Smolder/Spells/SmolderWAbility/SmolderW"
+					"dataKey": "Characters/Smolder/Spells/SmolderWAbility/SmolderW",
+					"tooltipExtendedBelowLine": "<rules>Each consecutive explosion does @ExplosionDamageMultihitPenalty*100@% damage.<br>Smolder can only gain one <spellName>Dragon Practice</spellName> stack per champion hit.</rules>"
 				}
 			]
 		},
@@ -255,7 +257,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Smolder/Spells/SmolderEAbility/SmolderE"
+					"dataKey": "Characters/Smolder/Spells/SmolderEAbility/SmolderE",
+					"tooltipExtendedBelowLine": "<rules>This Ability prioritizes champions.<br>While flying, Smolder gains expanded vision.</rules>"
 				}
 			]
 		},
@@ -330,7 +333,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Smolder/Spells/SmolderRAbility/SmolderR"
+					"dataKey": "Characters/Smolder/Spells/SmolderRAbility/SmolderR",
+					"tooltipExtendedBelowLine": "<rules>Deals @MinionMod*100@% damage to minions and monsters.</rules>"
 				}
 			]
 		},

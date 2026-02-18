@@ -121,7 +121,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Mel/Spells/MelQAbility/MelQ"
+					"dataKey": "Characters/Mel/Spells/MelQAbility/MelQ",
+					"tooltipExtendedBelowLine": ""
 				}
 			]
 		},
@@ -170,7 +171,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Mel/Spells/MelWAbility/MelW"
+					"dataKey": "Characters/Mel/Spells/MelWAbility/MelW",
+					"tooltipExtendedBelowLine": "<rules>Reflected projectile damage is calculated using the original caster's attributes before damage adjustments and magic penetration.<br><physicalDamage>Physical damage</physicalDamage> is reduced by @PhysDamageMod*100@% when converted to magic damage.<br>Does not apply item effects from the original caster.<br>Projectiles targeting each enemy in an area are destroyed instead of reflected.</rules>"
 				}
 			]
 		},
@@ -246,7 +248,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Mel/Spells/MelEAbility/MelE"
+					"dataKey": "Characters/Mel/Spells/MelEAbility/MelE",
+					"tooltipExtendedBelowLine": "<rules>The Slow and damage-over-time effects linger on enemies for a short duration after they've left the area created by the orb.<br>Deals @MinionModTooltip@ reduced damage when used against minions.</rules>"
 				}
 			]
 		},

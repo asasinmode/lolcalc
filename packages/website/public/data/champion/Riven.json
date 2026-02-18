@@ -63,7 +63,8 @@
 						"3": [2, 2, 2, 2, 2, 2, 2],
 						"4": [65, 65, 70, 75, 80, 85, 85]
 					},
-					"dataKey": "Characters/Riven/Spells/RivenTriCleaveAbility/RivenTriCleave"
+					"dataKey": "Characters/Riven/Spells/RivenTriCleaveAbility/RivenTriCleave",
+					"tooltipExtendedBelowLine": "<rules>Only the last use of this Ability can cross terrain.<br>Riven targets the unit your cursor is on, or dashes forward if there is no target.</rules>"
 				}
 			]
 		},
@@ -134,7 +135,8 @@
 						"3": [800, 800, 800, 800, 800, 800, 800],
 						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
-					"dataKey": "Characters/Riven/Spells/RivenFeintAbility/RivenFeint"
+					"dataKey": "Characters/Riven/Spells/RivenFeintAbility/RivenFeint",
+					"tooltipExtendedBelowLine": "<rules>This dash cannot go over terrain.</rules>"
 				}
 			]
 		},
@@ -199,7 +201,8 @@
 						"3": [0, 15, 15, 15, 0, 0, 0],
 						"4": [25, 25, 25, 25, 25, 25, 25]
 					},
-					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine"
+					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine",
+					"tooltipExtendedBelowLine": "<rules>Gains @TooltipAttackRange@ Attack Range</rules> "
 				}
 			]
 		},

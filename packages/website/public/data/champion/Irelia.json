@@ -87,7 +87,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaQAbility/IreliaQ"
+					"dataKey": "Characters/Irelia/Spells/IreliaQAbility/IreliaQ",
+					"tooltipExtendedBelowLine": "<rules>This ability applies On-Hit Effects.</rules>"
 				}
 			]
 		},
@@ -168,7 +169,8 @@
 							"mModifiedGameCalculation": "FinalPhysicalDR"
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaWAbility/IreliaW"
+					"dataKey": "Characters/Irelia/Spells/IreliaWAbility/IreliaW",
+					"tooltipExtendedBelowLine": "<rules>The <release>Release</release> will happen automatically at the end of the <charge>Charge</charge> and cannot be interrupted. Reaches max damage increase after @ChargeTimeForMax@ seconds.</rules>"
 				}
 			]
 		},
@@ -207,7 +209,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaEAbility/IreliaE"
+					"dataKey": "Characters/Irelia/Spells/IreliaEAbility/IreliaE",
+					"tooltipExtendedBelowLine": "<rules>Irelia will automatically <recast>Recast</recast> at her location after @BuffDuration@ seconds.</rules>"
 				}
 			]
 		},
@@ -258,7 +261,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaRAbility/IreliaR"
+					"dataKey": "Characters/Irelia/Spells/IreliaRAbility/IreliaR",
+					"tooltipExtendedBelowLine": "<rules>When the barrage explodes, surrounding enemies are also hit. </rules><br>"
 				}
 			]
 		},

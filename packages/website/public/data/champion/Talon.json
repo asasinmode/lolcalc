@@ -83,7 +83,8 @@
 							"mModifiedGameCalculation": "LeapDamage"
 						}
 					},
-					"dataKey": "Characters/Talon/Spells/TalonQAbility/TalonQ"
+					"dataKey": "Characters/Talon/Spells/TalonQAbility/TalonQ",
+					"tooltipExtendedBelowLine": "<rules>Melee damage is affected by Critical Strike Damage increase.</rules>"
 				}
 			]
 		},
@@ -191,7 +192,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Talon/Spells/TalonRAbility/TalonR"
+					"dataKey": "Characters/Talon/Spells/TalonRAbility/TalonR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Invisibility}}</rules>"
 				}
 			]
 		},

@@ -128,7 +128,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Nilah/Spells/NilahQAbility/NilahQ"
+					"dataKey": "Characters/Nilah/Spells/NilahQAbility/NilahQ",
+					"tooltipExtendedBelowLine": "<rules>Damage is increased by her Critical Strike Chance and Critical Strike Damage at @ActiveCritScaling*100@% effectiveness.<br>If cast during <spellName>Slipstream</spellName>, Nilah creates a wave of water striking all enemies along Nilah's path. </rules><br><rules>Area attacks deal @MinionMod*100@% damage to minions and @MonsterMod*100@% damage to monsters.</rules><br><rules>This ability executes low Health minions.</rules>"
 				}
 			]
 		},
@@ -149,7 +150,8 @@
 						"AreaTriggerSize": [150, 150, 150, 150, 150, 150, 150],
 						"MagicDamageReduction": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
-					"dataKey": "Characters/Nilah/Spells/NilahWAbility/NilahW"
+					"dataKey": "Characters/Nilah/Spells/NilahWAbility/NilahW",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}</rules>"
 				}
 			]
 		},
@@ -271,7 +273,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Nilah/Spells/NilahRAbility/NilahR"
+					"dataKey": "Characters/Nilah/Spells/NilahRAbility/NilahR",
+					"tooltipExtendedBelowLine": "<rules>Healing is reduced to @OtherHealingPercent*100@% against non-champions</rules>"
 				}
 			]
 		},

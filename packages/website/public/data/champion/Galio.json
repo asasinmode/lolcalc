@@ -90,7 +90,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Galio/Spells/GalioQAbility/GalioQ"
+					"dataKey": "Characters/Galio/Spells/GalioQAbility/GalioQ",
+					"tooltipExtendedBelowLine": "<rules>Percent Health damage deals a max of <magicDamage>@SuperQMonsterMaxDamageTotal@ damage</magicDamage> to jungle monsters.</rules>"
 				}
 			]
 		},

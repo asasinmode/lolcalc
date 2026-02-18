@@ -284,7 +284,8 @@
 							}
 						}
 					},
-					"dataKey": "Characters/Khazix/Spells/KhazixRAbility/KhazixR"
+					"dataKey": "Characters/Khazix/Spells/KhazixRAbility/KhazixR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Invisibility}}</rules>"
 				}
 			]
 		},

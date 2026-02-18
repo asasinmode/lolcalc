@@ -82,7 +82,8 @@
 						"8": [150, 150, 150, 150, 150, 150, 150],
 						"9": [-0.8, -0.8, -0.8, -0.8, -0.8, -0.8, -0.8]
 					},
-					"dataKey": "Characters/Sion/Spells/SionQAbility/SionQ"
+					"dataKey": "Characters/Sion/Spells/SionQAbility/SionQ",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterRatio@% damage to jungle monsters and @MinionRatio@% damage to minions.</rules>"
 				}
 			]
 		},
@@ -145,7 +146,8 @@
 						"7": [15, 15, 15, 15, 15, 15, 15],
 						"8": [6, 6, 6, 6, 6, 6, 6]
 					},
-					"dataKey": "Characters/Sion/Spells/SionWAbility/SionW"
+					"dataKey": "Characters/Sion/Spells/SionWAbility/SionW",
+					"tooltipExtendedBelowLine": "<rules>Max 400 bonus damage to minions and monsters.</rules>"
 				}
 			]
 		},

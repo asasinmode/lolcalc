@@ -105,7 +105,8 @@
 							"mModifiedGameCalculation": "SingleFireDamage"
 						}
 					},
-					"dataKey": "Characters/Ahri/Spells/AhriWAbility/AhriW"
+					"dataKey": "Characters/Ahri/Spells/AhriWAbility/AhriW",
+					"tooltipExtendedBelowLine": "<rules>Fox-fires prioritize champions hit by <spellName>{{Spell_AhriSeduce_Name}}</spellName>, enemies Ahri has attacked, then other champions. Minions below @MinionBonusDamageThreshold*100@% Health take @MinionBonusDamageMultiplier*100@% damage.</rules><br>"
 				}
 			]
 		},
@@ -139,7 +140,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ahri/Spells/AhriEAbility/AhriE"
+					"dataKey": "Characters/Ahri/Spells/AhriEAbility/AhriE",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},

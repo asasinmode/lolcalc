@@ -165,7 +165,8 @@
 						"2": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"6": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
 					},
-					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum"
+					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum",
+					"tooltipExtendedBelowLine": "<rules>Damage reduction effect can't reduce the damage below @FlatDamageReductionMax*100@%.</rules>"
 				}
 			]
 		},
@@ -197,7 +198,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy"
+					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy",
+					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},

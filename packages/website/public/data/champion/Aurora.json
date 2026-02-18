@@ -88,7 +88,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Aurora/Spells/AuroraQAbility/AuroraQ"
+					"dataKey": "Characters/Aurora/Spells/AuroraQAbility/AuroraQ",
+					"tooltipExtendedBelowLine": "<rules>Recast deals @Q2MinionMod*100@% damage to minions and monsters.</rules>"
 				}
 			]
 		},

@@ -137,7 +137,8 @@
 						"8": [2, 2, 2, 2, 2, 2, 2],
 						"9": [40, 40, 40, 40, 40, 40, 40]
 					},
-					"dataKey": "Characters/Ekko/Spells/EkkoWAbility/EkkoW"
+					"dataKey": "Characters/Ekko/Spells/EkkoWAbility/EkkoW",
+					"tooltipExtendedBelowLine": "<rules>Bonus Attack damage deals a min of <magicDamage>@Effect6Amount@</magicDamage> and a max of <magicDamage>@Effect5Amount@ damage</magicDamage> against minions and monsters.</rules>"
 				}
 			]
 		},
@@ -171,7 +172,8 @@
 						"2": [3, 3, 3, 3, 3, 3, 3],
 						"3": [300, 300, 300, 300, 300, 300, 300]
 					},
-					"dataKey": "Characters/Ekko/Spells/EkkoEAbility/EkkoE"
+					"dataKey": "Characters/Ekko/Spells/EkkoEAbility/EkkoE",
+					"tooltipExtendedBelowLine": "<rules>Ekko can use any of his other Abilities during the dash.</rules>"
 				}
 			]
 		},
@@ -216,7 +218,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ekko/Spells/EkkoRAbility/EkkoR"
+					"dataKey": "Characters/Ekko/Spells/EkkoRAbility/EkkoR",
+					"tooltipExtendedBelowLine": "<rules>Will detonate the chronosphere from {{ Spell_EkkoW_Name }} [@spell.EkkoW:HotKey@] if Ekko passed through it.</rules><br><rules>Units in Stasis cannot move or act, and are Invulnerable and Untargetable.</rules>"
 				}
 			]
 		},

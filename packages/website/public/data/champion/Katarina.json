@@ -175,7 +175,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Katarina/Spells/KatarinaEWrapperAbility/KatarinaEWrapper"
+					"dataKey": "Characters/Katarina/Spells/KatarinaEWrapperAbility/KatarinaEWrapper",
+					"tooltipExtendedBelowLine": "<rules>The strike Applies On-Hit Effects.</rules>"
 				}
 			]
 		},
@@ -262,7 +263,8 @@
 							"mModifiedGameCalculation": "ADDamageCalc"
 						}
 					},
-					"dataKey": "Characters/Katarina/Spells/KatarinaRAbility/KatarinaR"
+					"dataKey": "Characters/Katarina/Spells/KatarinaRAbility/KatarinaR",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies %i:OnHit% <OnHit>On-Hit and On-Attack</OnHit> effects at @OnHitRatio*100@% damage, and does not Critically Strike or apply Life Steal.<br>The <physicalDamage>physical damage</physicalDamage> additionally increases with <attackSpeed>Attack Speed</attackSpeed>.</rules>"
 				}
 			]
 		},

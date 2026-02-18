@@ -189,7 +189,8 @@
 					"effectAmount": {
 						"5": [6, 6, 6, 6, 6, 6, 6]
 					},
-					"dataKey": "Characters/Ryze/Spells/RyzeRAbility/RyzeR"
+					"dataKey": "Characters/Ryze/Spells/RyzeRAbility/RyzeR",
+					"tooltipExtendedBelowLine": "<rules>If Ryze becomes <status>Immobilized</status> or <status>Disabled</status>, the portal is cancelled.</rules>"
 				}
 			]
 		},

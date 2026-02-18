@@ -62,7 +62,8 @@
 						"4": [40, 40, 40, 40, 40, 40, 40],
 						"5": [2, 2, 2, 2, 2, 2, 2]
 					},
-					"dataKey": "Characters/Ornn/Spells/OrnnQAbility/OrnnQ"
+					"dataKey": "Characters/Ornn/Spells/OrnnQAbility/OrnnQ",
+					"tooltipExtendedBelowLine": "<rules>The fissure stops shortly after hitting an enemy champion. </rules><br>"
 				}
 			]
 		},
@@ -128,7 +129,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ornn/Spells/OrnnWAbility/OrnnW"
+					"dataKey": "Characters/Ornn/Spells/OrnnWAbility/OrnnW",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of <magicDamage>@TotalMinimumDamage@ magic damage</magicDamage> to champions and minions, and a max of <magicDamage>@TotalMonsterDamageCap@ magic damage</magicDamage> to jungle monsters.</rules>"
 				}
 			]
 		},

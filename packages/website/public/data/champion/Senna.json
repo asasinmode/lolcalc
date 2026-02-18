@@ -104,7 +104,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Senna/Spells/SennaQAbility/SennaQ"
+					"dataKey": "Characters/Senna/Spells/SennaQAbility/SennaQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability's cast range matches Senna's attack range and its cast time is improved with Attack Speed. It can target anything and applies on-hit effects to enemy champions.</rules>"
 				}
 			]
 		},
@@ -177,7 +178,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Senna/Spells/SennaEAbility/SennaE"
+					"dataKey": "Characters/Senna/Spells/SennaEAbility/SennaE",
+					"tooltipExtendedBelowLine": "<rules>Enemies can see where Wraiths are, but not who they are. They are otherwise treated as being <keywordStealth>Camouflaged</keywordStealth>.<br>{{Reminder_Camouflage}}<br>Unselectable units cannot be targeted by Attacks or Abilities that require a target.</rules>"
 				}
 			]
 		},
@@ -235,7 +237,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Senna/Spells/SennaRAbility/SennaR"
+					"dataKey": "Characters/Senna/Spells/SennaRAbility/SennaR",
+					"tooltipExtendedBelowLine": "<rules>The shield's power scales with the amount of <keywordMajor>Mist</keywordMajor> Senna has collected.</rules>"
 				}
 			]
 		},

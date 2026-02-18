@@ -64,7 +64,8 @@
 							"mModifiedGameCalculation": "TotalPercentHealthDamage"
 						}
 					},
-					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksQAbility/FiddleSticksQ"
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksQAbility/FiddleSticksQ",
+					"tooltipExtendedBelowLine": "<rules>Deals a minimum of <magicDamage>@MinimumDamage@ magic damage</magicDamage>, or <magicDamage>@MinimumDamage*2@ magic damage</magicDamage> if the target has been recently <status>Feared</status> by Fiddlesticks.</rules><br><rules>Deals a maximum of <magicDamage>400 magic damage</magicDamage> to minions and jungle monsters.</rules>"
 				}
 			]
 		},
@@ -105,7 +106,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksWAbility/FiddleSticksW"
+					"dataKey": "Characters/Fiddlesticks/Spells/FiddleSticksWAbility/FiddleSticksW",
+					"tooltipExtendedBelowLine": "<rules>Healing based on pre-mitigation damage.<br>Against monsters, this Ability deals @MonsterDamageMod*100@% damage and <healing>heals @MonsterHealingMod*100@%</healing> of damage done.<br>Against minions, this Ability deals @MinionDamageMod*100@% damage and <healing>heals @MinionHealingMod@%</healing> of damage done.</rules>"
 				}
 			]
 		},

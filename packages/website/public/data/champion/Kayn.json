@@ -99,7 +99,8 @@
 						"5": [40, 40, 40, 40, 40, 40, 40],
 						"6": [300, 300, 300, 300, 300, 300, 300]
 					},
-					"dataKey": "Characters/Kayn/Spells/KaynQAbility/KaynQ"
+					"dataKey": "Characters/Kayn/Spells/KaynQAbility/KaynQ",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <physicalDamage>@Effect6Amount@ physical damage</physicalDamage> to minions and jungle monsters (max: @Effect5Amount@).</rules>"
 				}
 			]
 		},
@@ -181,7 +182,8 @@
 						"6": [80, 90, 100, 110, 120, 130, 140],
 						"7": [0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45]
 					},
-					"dataKey": "Characters/Kayn/Spells/KaynEAbility/KaynE"
+					"dataKey": "Characters/Kayn/Spells/KaynEAbility/KaynE",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}<br>Maximum duration in combat with enemy champions is @Effect6Amount@ seconds.<br></rules>"
 				}
 			]
 		},
@@ -250,7 +252,8 @@
 						"8": [750, 750, 750, 750, 750, 750, 750],
 						"9": [550, 550, 550, 550, 550, 550, 550]
 					},
-					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR"
+					"dataKey": "Characters/Kayn/Spells/KaynRAbility/KaynR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>"
 				}
 			]
 		},

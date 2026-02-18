@@ -66,7 +66,8 @@
 						"6": [300, 300, 300, 300, 300, 300, 300],
 						"7": [425, 425, 425, 425, 425, 425, 425]
 					},
-					"dataKey": "Characters/Warwick/Spells/WarwickQAbility/WarwickQ"
+					"dataKey": "Characters/Warwick/Spells/WarwickQAbility/WarwickQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies On-Hit and On-Attack effects, and does not Critically Strike. <br>While clamped, Warwick is immune to displacement.</rules>"
 				}
 			]
 		},
@@ -97,7 +98,8 @@
 						"4": [30, 30, 30, 30, 30, 30, 30],
 						"5": [8, 8, 8, 8, 8, 8, 8]
 					},
-					"dataKey": "Characters/Warwick/Spells/WarwickWAbility/WarwickW"
+					"dataKey": "Characters/Warwick/Spells/WarwickWAbility/WarwickW",
+					"tooltipExtendedBelowLine": "<rules>Warwick can only passively sense enemies who were brought below 50% Health by allies.</rules>"
 				}
 			]
 		},
@@ -154,7 +156,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Warwick/Spells/WarwickRAbility/WarwickR"
+					"dataKey": "Characters/Warwick/Spells/WarwickRAbility/WarwickR",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies On-Hit and On-Attack effects 3 distinct times over its duration, and does not Critically Strike.<br>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},

@@ -84,7 +84,8 @@
 						"6": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
 						"7": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/Kindred/Spells/KindredQAbility/KindredQ"
+					"dataKey": "Characters/Kindred/Spells/KindredQAbility/KindredQ",
+					"tooltipExtendedBelowLine": "<rules>Attack Speed scales with <keywordMajor>Marks</keywordMajor> taken.</rules>"
 				}
 			]
 		},
@@ -162,7 +163,8 @@
 						"6": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"7": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Kindred/Spells/KindredWAbility/KindredW"
+					"dataKey": "Characters/Kindred/Spells/KindredWAbility/KindredW",
+					"tooltipExtendedBelowLine": "<rules>Wolf strikes faster based on Kindred's <attackSpeed>Attack Speed</attackSpeed>. Against jungle monsters, Wolf deals @Effect7Amount*100@% increased damage and <status>Slows</status> them by @Effect8Amount*100@% for 2 seconds.</rules>"
 				}
 			]
 		},
@@ -293,7 +295,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kindred/Spells/KindredEWrapperAbility/KindredEWrapper"
+					"dataKey": "Characters/Kindred/Spells/KindredEWrapperAbility/KindredEWrapper",
+					"tooltipExtendedBelowLine": "<rules>Damage is increased by Critical Strike Chance and Damage at @CritMod*100@% effectiveness.<br>Missing health damage is capped at @MonsterCap@ against jungle monsters.</rules>"
 				}
 			]
 		},

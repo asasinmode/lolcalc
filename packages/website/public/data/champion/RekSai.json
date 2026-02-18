@@ -85,7 +85,8 @@
 						"6": [3, 3, 3, 3, 3, 3, 3],
 						"7": [300, 300, 300, 300, 300, 300, 300]
 					},
-					"dataKey": "Characters/RekSai/Spells/RekSaiQAbility/RekSaiQ"
+					"dataKey": "Characters/RekSai/Spells/RekSaiQAbility/RekSaiQ",
+					"tooltipExtendedBelowLine": "<rules>The bonus damage can critically strike the primary target.</rules>"
 				}
 			]
 		},

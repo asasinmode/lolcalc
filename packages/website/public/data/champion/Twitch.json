@@ -50,7 +50,8 @@
 					"effectAmount": {
 						"6": [3, 3, 3, 3, 3, 3, 3]
 					},
-					"dataKey": "Characters/Twitch/Spells/TwitchHideInShadowsAbility/TwitchHideInShadows"
+					"dataKey": "Characters/Twitch/Spells/TwitchHideInShadowsAbility/TwitchHideInShadows",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}</rules>"
 				}
 			]
 		},
@@ -185,7 +186,8 @@
 						"OvershootMult": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"OvershootMin": [250, 250, 250, 250, 250, 250, 250]
 					},
-					"dataKey": "Characters/Twitch/Spells/TwitchFullAutomaticAbility/TwitchFullAutomatic"
+					"dataKey": "Characters/Twitch/Spells/TwitchFullAutomaticAbility/TwitchFullAutomatic",
+					"tooltipExtendedBelowLine": "<rules>Using this Ability does not break <keywordStealth>Camouflage</keywordStealth>, but Attacking still does.</rules>"
 				}
 			]
 		},

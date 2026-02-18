@@ -178,7 +178,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lissandra/Spells/LissandraRAbility/LissandraR"
+					"dataKey": "Characters/Lissandra/Spells/LissandraRAbility/LissandraR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Stasis}}<br>This Ability <status>Knocks Down</status> enemies.</rules>"
 				}
 			]
 		},

@@ -204,7 +204,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/MasterYi/Spells/AlphaStrikeAbility/AlphaStrike"
+					"dataKey": "Characters/MasterYi/Spells/AlphaStrikeAbility/AlphaStrike",
+					"tooltipExtendedBelowLine": "<rules>Applies %i:OnHit% <OnHit>On-Hit</OnHit> effects at @BaseOnHitMultiplier*100@% damage. Subsequent hits are reduced to @SubsequentHitMultiplier*100@% of this.<br>Can critically strike for an additional <physicalDamage>@CritBonus@ physical damage</physicalDamage>. Subsequent hits are reduced to @SubsequentHitMultiplier*100@% of this, for a maximum single target total of <physicalDamage>@SingleCritTotalDamage@</physicalDamage>.<br>Jungle monsters take @BonusMonsterDamage@ bonus damage per strike.<br>Attacks reduce this Ability's Cooldown by @BasicAttackCDR@ second.<br><spellName>{{ Spell_AlphaStrike_Name }}</spellName> does not reduce its own cooldown or stack <spellName>{{ Passive_MasterYiPassive_Name }}</spellName> %i:OnHit% <OnHit>On-Hit</OnHit>.<br>Master Yi will reappear near the initial target.</rules><br>"
 				}
 			]
 		},
@@ -260,7 +261,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/MasterYi/Spells/MeditateAbility/Meditate"
+					"dataKey": "Characters/MasterYi/Spells/MeditateAbility/Meditate",
+					"tooltipExtendedBelowLine": "<rules>Master Yi will gain stacks of <spellName>Double Strike</spellName>.<br>Damage reduction is halved against turrets.</rules>"
 				}
 			]
 		},
@@ -295,7 +297,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/MasterYi/Spells/WujuStyleAbility/WujuStyle"
+					"dataKey": "Characters/MasterYi/Spells/WujuStyleAbility/WujuStyle",
+					"tooltipExtendedBelowLine": "<rules>The duration of <spellName>{{ Spell_WujuStyle_Name }}</spellName> is paused during <spellName>{{ Spell_AlphaStrike_Name }}</spellName> and <spellName>{{ Spell_Meditate_Name }}</spellName></rules>"
 				}
 			]
 		},
@@ -315,7 +318,8 @@
 						"RKillAssistExtension": [7, 7, 7, 7, 7, 7, 7],
 						"RCooldownRefund": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
-					"dataKey": "Characters/MasterYi/Spells/HighlanderAbility/Highlander"
+					"dataKey": "Characters/MasterYi/Spells/HighlanderAbility/Highlander",
+					"tooltipExtendedBelowLine": "<rules>The duration of <spellName>{{ Spell_Highlander_Name }}</spellName> is paused during <spellName>{{ Spell_AlphaStrike_Name }}</spellName> and <spellName>{{ Spell_Meditate_Name }}</spellName></rules>"
 				}
 			]
 		},

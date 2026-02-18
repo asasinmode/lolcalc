@@ -64,7 +64,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Briar/Spells/BriarQAbility/BriarQ"
+					"dataKey": "Characters/Briar/Spells/BriarQAbility/BriarQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies {{ Item_Keyword_OnHit }} effects.</rules>"
 				}
 			]
 		},
@@ -140,7 +141,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Briar/Spells/BriarWAbility/BriarW"
+					"dataKey": "Characters/Briar/Spells/BriarWAbility/BriarW",
+					"tooltipExtendedBelowLine": "<rules>The bite deals @MonsterAndMinionPercentMod*100@% increased damage to minions and monsters (Max @MaxMonsterDamage@ missing health damage).<br>This ability does not remove or replace <spellName>{{Spell_BriarR_Name}}'s</spellName> empowered <keywordMajor>Blood Frenzy</keywordMajor>.</rules>"
 				}
 			]
 		},
@@ -265,7 +267,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Briar/Spells/BriarRAbility/BriarR"
+					"dataKey": "Characters/Briar/Spells/BriarRAbility/BriarR",
+					"tooltipExtendedBelowLine": "<rules>When the hemolith hits it interrupts channeled Abilities. Briar has <font color='#ee91d7'>True Sight</font color> of her prey.</rules>"
 				}
 			]
 		},

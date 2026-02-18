@@ -152,7 +152,8 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoQAbility/ViegoQ"
+					"dataKey": "Characters/Viego/Spells/ViegoQAbility/ViegoQ",
+					"tooltipExtendedBelowLine": "<rules>The second strike can Critically Strike and applies %i:OnHit% <OnHit>On-Hit</OnHit> effects while not <keywordMajor>Possessing</keywordMajor> an enemy. Its healing is decreased to @HealModVsMonsters*100@% vs. jungle monsters and @HealModVsMinions*100@% vs. minions. <br>The bonus %i:OnHit% <OnHit>On-Hit</OnHit> damage can critically strike for <physicalDamage>@HealthCritDamage@ current Health</physicalDamage> and deals a minimum of <physicalDamage>@MinDamageOnHit@ damage</physicalDamage>. It deals a max of <physicalDamage>@MonsterCapOnHit@ damage</physicalDamage> vs. jungle monsters.<br>This Ability's cast time is reduced with Attack Speed. Its damage scales with Critical Strike Chance and Damage at @ActiveCritMod*100@% effectiveness.</rules>"
 				}
 			]
 		},
@@ -191,7 +192,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoWAbility/ViegoW"
+					"dataKey": "Characters/Viego/Spells/ViegoWAbility/ViegoW",
+					"tooltipExtendedBelowLine": "<rules>This Ability's Cooldown is set to @CDWheninterrupted@ seconds when interrupted.</rules>"
 				}
 			]
 		},
@@ -226,7 +228,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoEAbility/ViegoE"
+					"dataKey": "Characters/Viego/Spells/ViegoEAbility/ViegoE",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}<br>Viego reveals himself for @RestealthTime@ seconds whenever he attacks or uses an Ability.</rules>"
 				}
 			]
 		},
@@ -298,7 +301,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoRAbility/ViegoR"
+					"dataKey": "Characters/Viego/Spells/ViegoRAbility/ViegoR",
+					"tooltipExtendedBelowLine": "<rules>This Ability applies on-hit effects to the primary target and spell effects to everything else.<br>Damage scales with Critical Strike Chance and Damage at @CritMod*100@% effectiveness.</rules>"
 				}
 			]
 		},

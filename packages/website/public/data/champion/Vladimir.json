@@ -147,7 +147,8 @@
 						"7": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"8": [35, 35, 35, 35, 35, 35, 35]
 					},
-					"dataKey": "Characters/Vladimir/Spells/VladimirQAbility/VladimirQ"
+					"dataKey": "Characters/Vladimir/Spells/VladimirQAbility/VladimirQ",
+					"tooltipExtendedBelowLine": "<rules>Empowered healing reduced to 30% against minions.</rules>"
 				}
 			]
 		},
@@ -191,7 +192,8 @@
 							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
-					"dataKey": "Characters/Vladimir/Spells/VladimirSanguinePoolAbility/VladimirSanguinePool"
+					"dataKey": "Characters/Vladimir/Spells/VladimirSanguinePoolAbility/VladimirSanguinePool",
+					"tooltipExtendedBelowLine": "<rules>This Ability can be used while charging <spellName>Tides of Blood</spellName>.<br>Vladimir can't Attack or use other Abilities while inside the pool.<br><healing>Healing</healing> is @MinionHealingMod*100@% effective against minions.<br>{{Reminder_Untargetable}}<br>{{Reminder_Ghosted}}</rules>"
 				}
 			]
 		},
@@ -262,7 +264,8 @@
 						"8": [35, 40, 45, 50, 55, 60, 65],
 						"9": [30, 60, 90, 120, 150, 180, 210]
 					},
-					"dataKey": "Characters/Vladimir/Spells/VladimirEAbility/VladimirE"
+					"dataKey": "Characters/Vladimir/Spells/VladimirEAbility/VladimirE",
+					"tooltipExtendedBelowLine": "<rules>This Ability releases automatically after @Effect7Amount@ seconds.<br>Enemies can be hit by multiple blood missiles, but take no damage after the first.<br></rules>"
 				}
 			]
 		},

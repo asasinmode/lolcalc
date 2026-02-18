@@ -1063,7 +1063,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Aphelios/Spells/ApheliosRAbility/ApheliosR"
+					"dataKey": "Characters/Aphelios/Spells/ApheliosRAbility/ApheliosR",
+					"tooltipExtendedBelowLine": "<rules>The Attacks apply on-hits. Critical strikes deal @CritDamageModCalc@ of normal damage instead.</rules>"
 				}
 			]
 		},

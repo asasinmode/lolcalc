@@ -135,7 +135,8 @@
 						"AugmentSlow": [20, 20, 20, 20, 20, 20, 20],
 						"Size": [275, 275, 275, 275, 275, 275, 275]
 					},
-					"dataKey": "Characters/Viktor/Spells/ViktorWAbility/ViktorW"
+					"dataKey": "Characters/Viktor/Spells/ViktorWAbility/ViktorW",
+					"tooltipExtendedBelowLine": "<rules>Enemies that are <status>Stunned</status> by this Ability are also <status>Knocked Down</status>.</rules>"
 				}
 			]
 		},
@@ -270,7 +271,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Viktor/Spells/ViktorRAbility/ViktorR"
+					"dataKey": "Characters/Viktor/Spells/ViktorRAbility/ViktorR",
+					"tooltipExtendedBelowLine": "<rules>When the storm appears it interrupts channeled Abilities.<br>The farther the storm is from Viktor, the slower it moves.</rules>"
 				}
 			]
 		},

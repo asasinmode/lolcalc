@@ -154,7 +154,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ivern/Spells/IvernEAbility/IvernE"
+					"dataKey": "Characters/Ivern/Spells/IvernEAbility/IvernE",
+					"tooltipExtendedBelowLine": "<rules>Can also be used on Daisy.</rules>"
 				}
 			]
 		},
@@ -241,7 +242,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernR"
+					"dataKey": "Characters/Ivern/Spells/IvernRAbility/IvernR",
+					"tooltipExtendedBelowLine": "<rules>Daisy has:<br><healing>@TotalDaisyHP@ Health</healing><br><scaleArmor>@TotalBonusResists@ Armor</scaleArmor><br><scaleMR>@TotalBonusResists@ Magic Resist</scaleMR><br><scaleAD>@TotalDaisyAD@ Attack Damage</scaleAD></rules>"
 				}
 			]
 		},

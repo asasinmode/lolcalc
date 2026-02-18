@@ -122,7 +122,8 @@
 						"8": [12, 12, 12, 12, 12, 12, 12],
 						"9": [50, 50, 50, 50, 50, 50, 50]
 					},
-					"dataKey": "Characters/Urgot/Spells/UrgotWAbility/UrgotW"
+					"dataKey": "Characters/Urgot/Spells/UrgotWAbility/UrgotW",
+					"tooltipExtendedBelowLine": "<rules>The shots apply On-Hit effects at @OnHitDamageReduction*100@% damage. They cannot critically strike.<br>Shots deal a minimum of @Effect10Amount@ damage to minions and jungle monsters.<br>Urgot can move through minions and non-epic jungle monsters while firing.</rules>"
 				}
 			]
 		},
@@ -183,7 +184,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Urgot/Spells/UrgotEAbility/UrgotE"
+					"dataKey": "Characters/Urgot/Spells/UrgotEAbility/UrgotE",
+					"tooltipExtendedBelowLine": "<rules>Cannot cross terrain.</rules>"
 				}
 			]
 		},
@@ -223,7 +225,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotR"
+					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotR",
+					"tooltipExtendedBelowLine": "<rules>This Ability will automatically <recast>Recast</recast> at the end of the duration if the victim is under the execution threshold.</rules>"
 				}
 			]
 		},

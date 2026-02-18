@@ -62,7 +62,8 @@
 						"1": [6, 10, 14, 18, 22, 26, 30],
 						"2": [3, 3, 3, 3, 3, 3, 3]
 					},
-					"dataKey": "Characters/JarvanIV/Spells/JarvanIVDragonStrikeAbility/JarvanIVDragonStrike"
+					"dataKey": "Characters/JarvanIV/Spells/JarvanIVDragonStrikeAbility/JarvanIVDragonStrike",
+					"tooltipExtendedBelowLine": "<rules>Jarvan can pull himself even while <status>Immobilized</status>.</rules>"
 				}
 			]
 		},

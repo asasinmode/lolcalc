@@ -132,7 +132,8 @@
 						"3": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
 						"4": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
 					},
-					"dataKey": "Characters/Taric/Spells/TaricWAbility/TaricW"
+					"dataKey": "Characters/Taric/Spells/TaricWAbility/TaricW",
+					"tooltipExtendedBelowLine": "<rules>Mimicked spell effects do not stack.</rules><br><rules>Only one ally can be bound at a time. </rules><br><br>"
 				}
 			]
 		},

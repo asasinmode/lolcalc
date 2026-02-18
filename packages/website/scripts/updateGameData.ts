@@ -1021,6 +1021,11 @@ function championAbilityVariants(
 			`${variantDataKey} tooltip extended`,
 			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended` } : undefined,
 		);
+		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine && getStringtableValue(
+			mLocKeys.keyTooltipExtendedBelowLine,
+			`${variantDataKey} tooltip extended`,
+			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended below line` } : undefined,
+		);
 
 		/** many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
 		if (mLocKeys.keyTooltip && (mLocKeys.keyTooltip.toLowerCase() in stringtableObject.stringtable)) {

@@ -95,7 +95,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Nasus/Spells/NasusQAbility/NasusQ"
+					"dataKey": "Characters/Nasus/Spells/NasusQAbility/NasusQ",
+					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>This Ability can critically strike for <physicalDamage>@CritDamage@ physical damage</physicalDamage>.</rules>"
 				}
 			]
 		},
@@ -208,7 +209,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Nasus/Spells/NasusRAbility/NasusR"
+					"dataKey": "Characters/Nasus/Spells/NasusRAbility/NasusR",
+					"tooltipExtendedBelowLine": "<rules>The storm deals a max of @MaxDamageCap@ damage per second.</rules>"
 				}
 			]
 		},

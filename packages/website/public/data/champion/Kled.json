@@ -87,7 +87,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledQAbility/KledQ"
+					"dataKey": "Characters/Kled/Spells/KledQAbility/KledQ",
+					"tooltipExtendedBelowLine": "<rules>While hooked, Kled has <keywordStealth>True Sight</keywordStealth> to the enemy.<br>Deals @MinionDamageMultiplier*100@% damage to minions.</rules>"
 				}
 			]
 		},
@@ -136,7 +137,8 @@
 							"mPrecision": 2
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledWAbility/KledW"
+					"dataKey": "Characters/Kled/Spells/KledWAbility/KledW",
+					"tooltipExtendedBelowLine": "<rules>Max Health damage is capped at <physicalDamage>@MonsterCap@ physical damage</physicalDamage> against monsters.<br>While on Cooldown, Attacks reduce this Ability's Cooldown by @NonChampCooldownRefund@ second(s). Against Champions, this Cooldown reduction is increased to @ChampCooldownRefund@ second(s).</rules>"
 				}
 			]
 		},
@@ -173,7 +175,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledEAbility/KledE"
+					"dataKey": "Characters/Kled/Spells/KledEAbility/KledE",
+					"tooltipExtendedBelowLine": "<rules>Kled gains <keywordStealth>True Sight</keywordStealth> to enemies he passes through.<br></rules>"
 				}
 			]
 		},
@@ -273,7 +276,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledRAbility/KledR"
+					"dataKey": "Characters/Kled/Spells/KledRAbility/KledR",
+					"tooltipExtendedBelowLine": "<rules>The damage, <speed>Move Speed</speed>, and <shield>Shield</shield> reach their max values after @SecondsToMaxPower@ second(s) of charging.<br></rules>"
 				}
 			]
 		},

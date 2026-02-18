@@ -127,7 +127,8 @@
 						"8": [1.15, 1.15, 1.15, 1.15, 1.15, 1.15, 1.15],
 						"9": [5, 5, 5, 5, 5, 5, 5]
 					},
-					"dataKey": "Characters/Pyke/Spells/PykeWAbility/PykeW"
+					"dataKey": "Characters/Pyke/Spells/PykeWAbility/PykeW",
+					"tooltipExtendedBelowLine": "<rules><speed>Move Speed</speed> scales with Lethality.<br>{{Reminder_Camouflage}}</rules>"
 				}
 			]
 		},
@@ -184,7 +185,8 @@
 						"2": [550, 550, 550, 550, 550, 550, 550],
 						"3": [1, 1, 1, 1, 1, 1, 1]
 					},
-					"dataKey": "Characters/Pyke/Spells/PykeEAbility/PykeE"
+					"dataKey": "Characters/Pyke/Spells/PykeEAbility/PykeE",
+					"tooltipExtendedBelowLine": "<rules><status>Stun</status> duration scales with Lethality.</rules>"
 				}
 			]
 		},
@@ -296,7 +298,8 @@
 							"mModifiedGameCalculation": "RDamage"
 						}
 					},
-					"dataKey": "Characters/Pyke/Spells/PykeRAbility/PykeR"
+					"dataKey": "Characters/Pyke/Spells/PykeRAbility/PykeR",
+					"tooltipExtendedBelowLine": "Total gold shared with allies: <statTracking>@f9@</statTracking><br>Total gold kept for self: <statTracking>@f10@</statTracking>"
 				}
 			]
 		},

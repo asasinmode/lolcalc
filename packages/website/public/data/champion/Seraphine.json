@@ -142,7 +142,8 @@
 							"mModifiedGameCalculation": "TotalShieldStrength"
 						}
 					},
-					"dataKey": "Characters/Seraphine/Spells/SeraphineWAbility/SeraphineW"
+					"dataKey": "Characters/Seraphine/Spells/SeraphineWAbility/SeraphineW",
+					"tooltipExtendedBelowLine": "<rules>This Ability only heals once, even if cast twice.</rules>"
 				}
 			]
 		},
@@ -176,7 +177,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Seraphine/Spells/SeraphineEAbility/SeraphineE"
+					"dataKey": "Characters/Seraphine/Spells/SeraphineEAbility/SeraphineE",
+					"tooltipExtendedBelowLine": "<rules>Deals @MinionDamageMod*100@% damage against minions.</rules>"
 				}
 			]
 		},

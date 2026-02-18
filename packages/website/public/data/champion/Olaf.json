@@ -80,7 +80,8 @@
 						"4": [800, 800, 800, 800, 800, 800, 800],
 						"5": [400, 400, 400, 400, 400, 400, 400]
 					},
-					"dataKey": "Characters/Olaf/Spells/OlafAxeThrowCastAbility/OlafAxeThrowCast"
+					"dataKey": "Characters/Olaf/Spells/OlafAxeThrowCastAbility/OlafAxeThrowCast",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterDamage@ bonus damage to monsters.</rules>"
 				}
 			]
 		},
@@ -192,7 +193,8 @@
 						"0": [25, 70, 115, 160, 205, 250, 250],
 						"1": [30, 30, 30, 30, 30, 30, 30]
 					},
-					"dataKey": "Characters/Olaf/Spells/OlafRecklessStrikeAbility/OlafRecklessStrike"
+					"dataKey": "Characters/Olaf/Spells/OlafRecklessStrikeAbility/OlafRecklessStrike",
+					"tooltipExtendedBelowLine": "<rules>Cast time scales based on bonus Attack Speed.</rules>"
 				}
 			]
 		},

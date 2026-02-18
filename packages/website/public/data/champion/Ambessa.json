@@ -173,7 +173,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ambessa/Spells/AmbessaQAbility/AmbessaQ"
+					"dataKey": "Characters/Ambessa/Spells/AmbessaQAbility/AmbessaQ",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <physicalDamage>@Calc_Damage_Monster_Flat_Bonus@ physical damage</physicalDamage> to monsters.<br>The percent of max Health damage to monsters is capped at <physicalDamage>@Calc_Damage_Monster_Percent_Cap@</physicalDamage>.</rules>"
 				}
 			]
 		},
@@ -231,7 +232,8 @@
 							"mModifiedGameCalculation": "Calc_Damage_Low"
 						}
 					},
-					"dataKey": "Characters/Ambessa/Spells/AmbessaWAbility/AmbessaW"
+					"dataKey": "Characters/Ambessa/Spells/AmbessaWAbility/AmbessaW",
+					"tooltipExtendedBelowLine": ""
 				}
 			]
 		},
@@ -266,7 +268,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ambessa/Spells/AmbessaEAbility/AmbessaE"
+					"dataKey": "Characters/Ambessa/Spells/AmbessaEAbility/AmbessaE",
+					"tooltipExtendedBelowLine": ""
 				}
 			]
 		},
@@ -319,7 +322,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Ambessa/Spells/AmbessaRAbility/AmbessaR"
+					"dataKey": "Characters/Ambessa/Spells/AmbessaRAbility/AmbessaR",
+					"tooltipExtendedBelowLine": "<rules>Healing is @Omnivamp_MinionMod*100@% effective against minions and @Omnivamp_MonsterMod*100@% effective against monsters.</rules>"
 				}
 			]
 		},

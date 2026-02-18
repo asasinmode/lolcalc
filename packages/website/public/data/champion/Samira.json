@@ -85,7 +85,8 @@
 							"mModifiedGameCalculation": "DamageCalc"
 						}
 					},
-					"dataKey": "Characters/Samira/Spells/SamiraQAbility/SamiraQ"
+					"dataKey": "Characters/Samira/Spells/SamiraQAbility/SamiraQ",
+					"tooltipExtendedBelowLine": "<rules>Either hit can critically strike for <physicalDamage>@CriticalDamageCalc@</physicalDamage> damage and applies Life Steal at @LifestealMod*100@% effectiveness. </rules><br><rules>If cast during <spellName>Wild Rush</spellName>, Samira will strike all enemies in her path upon completion. </rules>"
 				}
 			]
 		},
@@ -195,7 +196,8 @@
 							"mModifiedGameCalculation": "DamageCalc"
 						}
 					},
-					"dataKey": "Characters/Samira/Spells/SamiraRAbility/SamiraR"
+					"dataKey": "Characters/Samira/Spells/SamiraRAbility/SamiraR",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals @MinionDamageMod*100@% damage to minions.</rules>"
 				}
 			]
 		},

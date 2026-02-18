@@ -149,7 +149,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lillia/Spells/LilliaWAbility/LilliaW"
+					"dataKey": "Characters/Lillia/Spells/LilliaWAbility/LilliaW",
+					"tooltipExtendedBelowLine": "<rules>Lillia does not dash over terrain with this ability.</rules><br><rules>Deals 50% less damage to minions.</rules>"
 				}
 			]
 		},
@@ -224,7 +225,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lillia/Spells/LilliaRAbility/LilliaR"
+					"dataKey": "Characters/Lillia/Spells/LilliaRAbility/LilliaR",
+					"tooltipExtendedBelowLine": "<rules>Drowsy units are slowed over the duration, and fall Asleep afterwards.<br>Asleep units can't move or act until damaged by an enemy with non-periodic damage.</rules>"
 				}
 			]
 		},

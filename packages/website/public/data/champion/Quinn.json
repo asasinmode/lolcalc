@@ -159,7 +159,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Quinn/Spells/QuinnRAbility/QuinnR"
+					"dataKey": "Characters/Quinn/Spells/QuinnRAbility/QuinnR",
+					"tooltipExtendedBelowLine": "<rules>Being damaged by non-minions removes the Move Speed bonus for @SlowDuration@ seconds.</rules> "
 				}
 			]
 		},

@@ -191,7 +191,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/LeeSin/Spells/LeeSinRAbility/LeeSinR"
+					"dataKey": "Characters/LeeSin/Spells/LeeSinRAbility/LeeSinR",
+					"tooltipExtendedBelowLine": "<rules>The target is <status>Rooted</status> during the cast time.</rules>"
 				}
 			]
 		},

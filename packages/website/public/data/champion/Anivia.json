@@ -205,7 +205,8 @@
 							"mModifiedGameCalculation": "TotalDamagePerSecond"
 						}
 					},
-					"dataKey": "Characters/Anivia/Spells/GlacialStormAbility/GlacialStorm"
+					"dataKey": "Characters/Anivia/Spells/GlacialStormAbility/GlacialStorm",
+					"tooltipExtendedBelowLine": "<rules>The storm ends if Anivia is too far away.</rules>"
 				}
 			]
 		},

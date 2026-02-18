@@ -76,7 +76,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanQAbility/AkshanQ"
+					"dataKey": "Characters/Akshan/Spells/AkshanQAbility/AkshanQ",
+					"tooltipExtendedBelowLine": "<rules>Deals @SecondaryTargetDamage*100@% damage to non-champions. Enemies hit are briefly revealed.</rules>"
 				}
 			]
 		},
@@ -116,7 +117,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanWAbility/AkshanW"
+					"dataKey": "Characters/Akshan/Spells/AkshanWAbility/AkshanW",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}<br>While active, Akshan also sees trails leading to <keywordMajor>Scoundrels</keywordMajor>.<br>Akshan can only claim Scoundrels when he is alive.<br>Total gold earned: @f2@</rules>"
 				}
 			]
 		},
@@ -207,7 +209,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanEAbility/AkshanE"
+					"dataKey": "Characters/Akshan/Spells/AkshanEAbility/AkshanE",
+					"tooltipExtendedBelowLine": "<rules>Akshan prioritizes shooting champions marked by <spellName>Dirty Fighting</spellName>.<br>On-hits while swinging are @OnHitDamageReduction*100@% effective.<br>Damage is increased by <attackSpeed>@AttackSpeedCoefficient*100@% of bonus Attack Speed</attackSpeed>.<br>Attacks can critically strike for <physicalDamage>@CriticalCalc@ physical damage</physicalDamage>.</rules>"
 				}
 			]
 		},
@@ -276,7 +279,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanRAbility/AkshanR"
+					"dataKey": "Characters/Akshan/Spells/AkshanRAbility/AkshanR",
+					"tooltipExtendedBelowLine": "<rules>Bullets execute minions and apply Lifesteal.<br>Bullet damage scales with Critical Strike Chance and Critical Strike Damage at @CritDamageMod*100@% effectiveness.</rules>"
 				}
 			]
 		},

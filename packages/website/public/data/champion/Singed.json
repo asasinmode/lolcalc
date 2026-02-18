@@ -67,7 +67,8 @@
 							"mModifiedGameCalculation": "DamagePerSecond"
 						}
 					},
-					"dataKey": "Characters/Singed/Spells/PoisonTrailAbility/PoisonTrail"
+					"dataKey": "Characters/Singed/Spells/PoisonTrailAbility/PoisonTrail",
+					"tooltipExtendedBelowLine": "<rules>Cloud duration: @CloudDuration@ seconds.<br>Poison duration: @PoisonDuration@ seconds.<br>Approximate total damage: <magicDamage>@ApproximateTotalDamageTooltip@ magic damage</magicDamage>.<br>If a minion would be killed by minion damage while under the effects of Poison Trail, Singed claims the kill credit instead.</rules>"
 				}
 			]
 		},
@@ -121,7 +122,8 @@
 						"3": [420, 420, 420, 420, 420, 420, 420],
 						"4": [300, 300, 300, 300, 300, 300, 300]
 					},
-					"dataKey": "Characters/Singed/Spells/FlingAbility/Fling"
+					"dataKey": "Characters/Singed/Spells/FlingAbility/Fling",
+					"tooltipExtendedBelowLine": "<rules>Max Health damage is capped at 300 against minions and jungle monsters.</rules>"
 				}
 			]
 		},

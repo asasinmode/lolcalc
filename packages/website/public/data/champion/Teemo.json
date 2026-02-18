@@ -69,7 +69,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Teemo/Spells/TeemoQAbility/TeemoQ"
+					"dataKey": "Characters/Teemo/Spells/TeemoQAbility/TeemoQ",
+					"tooltipExtendedBelowLine": "<rules>Minions and jungle monsters are <status>Blinded</status> for @MinionMonsterDurationMod*100@% longer.</rules>"
 				}
 			]
 		},
@@ -154,7 +155,8 @@
 							"mModifiedGameCalculation": "TickCalculatedDamage"
 						}
 					},
-					"dataKey": "Characters/Teemo/Spells/TeemoEAbility/TeemoE"
+					"dataKey": "Characters/Teemo/Spells/TeemoEAbility/TeemoE",
+					"tooltipExtendedBelowLine": "<rules>This poison deals @MonsterMod*100@% damage to jungle monsters.</rules>"
 				}
 			]
 		},

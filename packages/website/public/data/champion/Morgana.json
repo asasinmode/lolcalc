@@ -105,7 +105,8 @@
 							"mModifiedGameCalculation": "TotalMinDamage"
 						}
 					},
-					"dataKey": "Characters/Morgana/Spells/MorganaWAbility/MorganaW"
+					"dataKey": "Characters/Morgana/Spells/MorganaWAbility/MorganaW",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals @MonsterMod@% damage to jungle monsters.</rules>"
 				}
 			]
 		},
@@ -172,7 +173,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Morgana/Spells/MorganaRAbility/MorganaR"
+					"dataKey": "Characters/Morgana/Spells/MorganaRAbility/MorganaR",
+					"tooltipExtendedBelowLine": "<rules>Morgana gains <keywordStealth>True Sight</keywordStealth> of all enemies affected by this Ability.</rules>"
 				}
 			]
 		},

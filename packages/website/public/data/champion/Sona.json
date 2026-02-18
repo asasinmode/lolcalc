@@ -253,7 +253,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sona/Spells/SonaRAbility/SonaR"
+					"dataKey": "Characters/Sona/Spells/SonaRAbility/SonaR",
+					"tooltipExtendedBelowLine": "Enemies that know how to dance, will dance during the stun."
 				}
 			]
 		},

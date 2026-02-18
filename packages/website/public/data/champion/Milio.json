@@ -77,7 +77,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Milio/Spells/MilioQAbility/MilioQ"
+					"dataKey": "Characters/Milio/Spells/MilioQAbility/MilioQ",
+					"tooltipExtendedBelowLine": "<rules>Minions and monsters are knocked further and create a larger explosion.</rules>"
 				}
 			]
 		},
@@ -190,7 +191,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Milio/Spells/MilioRAbility/MilioR"
+					"dataKey": "Characters/Milio/Spells/MilioRAbility/MilioR",
+					"tooltipExtendedBelowLine": "<rules>Does not cleanse <status>Airborne</status>.</rules>"
 				}
 			]
 		},

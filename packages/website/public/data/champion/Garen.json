@@ -59,7 +59,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Garen/Spells/GarenQAbility/GarenQ"
+					"dataKey": "Characters/Garen/Spells/GarenQAbility/GarenQ",
+					"tooltipExtendedBelowLine": "<rules>The empowered Attack expires after @AttackWindow@ seconds.<br>{{ buff_desc_SpellEffects }}</rules>"
 				}
 			]
 		},
@@ -184,7 +185,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Garen/Spells/GarenEAbility/GarenE"
+					"dataKey": "Characters/Garen/Spells/GarenEAbility/GarenE",
+					"tooltipExtendedBelowLine": "<rules>Gains one strike from every <attackSpeed>@ASPerTick*100@% Attack Speed</attackSpeed> from items and levels.<br>Can critically strike for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.</rules>"
 				}
 			]
 		},

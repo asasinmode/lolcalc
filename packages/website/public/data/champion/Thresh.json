@@ -106,7 +106,8 @@
 						"3": [6, 6, 6, 6, 6, 6, 6],
 						"4": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/Thresh/Spells/ThreshWAbility/ThreshW"
+					"dataKey": "Characters/Thresh/Spells/ThreshWAbility/ThreshW",
+					"tooltipExtendedBelowLine": "<rules>The <shield>Shield</shield> scales with number of <keywordMajor>Souls</keywordMajor> collected. Thresh can use his lantern to pick up <keywordMajor>Souls</keywordMajor>.</rules>"
 				}
 			]
 		},
@@ -173,7 +174,8 @@
 						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"5": [1.7, 1.7, 1.7, 1.7, 1.7, 1.7, 1.7]
 					},
-					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshE"
+					"dataKey": "Characters/Thresh/Spells/ThreshEAbility/ThreshE",
+					"tooltipExtendedBelowLine": "<rules>Passive damage scales with number of <keywordMajor>Souls</keywordMajor> collected.</rules>"
 				}
 			]
 		},

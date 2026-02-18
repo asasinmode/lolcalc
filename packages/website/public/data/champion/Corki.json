@@ -160,7 +160,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Corki/Spells/GGunAbility/GGun"
+					"dataKey": "Characters/Corki/Spells/GGunAbility/GGun",
+					"tooltipExtendedBelowLine": "<rules>The shred lingers for @ShredDuration@ seconds after being hit.</rules>"
 				}
 			]
 		},

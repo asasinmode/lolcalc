@@ -74,7 +74,8 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Maokai/Spells/MaokaiQAbility/MaokaiQ"
+					"dataKey": "Characters/Maokai/Spells/MaokaiQAbility/MaokaiQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability deals an additional <magicDamage>@BonusMonsterDamage@ magic damage</magicDamage> to jungle monsters.</rules>"
 				}
 			]
 		},
@@ -229,7 +230,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Maokai/Spells/MaokaiEAbility/MaokaiE"
+					"dataKey": "Characters/Maokai/Spells/MaokaiEAbility/MaokaiE",
+					"tooltipExtendedBelowLine": "<rules>Saplings run at @SaplingMoveSpeed@ Move Speed. Brush saplings do not deal the increased damage to minions.</rules>"
 				}
 			]
 		},

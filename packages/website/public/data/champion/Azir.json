@@ -66,7 +66,8 @@
 						"5": [200, 200, 200, 200, 200, 200, 200],
 						"6": [325, 325, 325, 325, 325, 325, 325]
 					},
-					"dataKey": "Characters/Azir/Spells/AzirQWrapperAbility/AzirQWrapper"
+					"dataKey": "Characters/Azir/Spells/AzirQWrapperAbility/AzirQWrapper",
+					"tooltipExtendedBelowLine": "<rules>Enemies hit by multiple <keywordMajor>Sand Soldiers</keywordMajor> will not take additional damage.</rules>"
 				}
 			]
 		},
@@ -132,7 +133,8 @@
 						"8": [25, 25, 25, 25, 25, 25, 25],
 						"9": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Azir/Spells/AzirWAbility/AzirW"
+					"dataKey": "Characters/Azir/Spells/AzirWAbility/AzirW",
+					"tooltipExtendedBelowLine": "<rules><keywordMajor>Sand Soldiers</keywordMajor> apply On-hits at @OnHitMultiplier*100@% damage once per attack to Azir's primary target.<br><keywordMajor>Sand Soldiers</keywordMajor> that strike the same targets deal @Effect9Amount@% damage after the first.<br><keywordMajor>Sand Soldiers</keywordMajor> deal @SecondaryTargetDamageMod@% damage to enemies that are not Azir's Attack target.<br><keywordMajor>Sand Soldiers</keywordMajor> expire twice as fast when near an enemy turret.<br></rules>"
 				}
 			]
 		},

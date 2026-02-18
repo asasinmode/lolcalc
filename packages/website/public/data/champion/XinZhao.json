@@ -149,7 +149,8 @@
 						"7": [140, 140, 140, 140, 140, 140, 140],
 						"8": [200, 200, 200, 200, 200, 200, 200]
 					},
-					"dataKey": "Characters/XinZhao/Spells/XinZhaoWAbility/XinZhaoW"
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoWAbility/XinZhaoW",
+					"tooltipExtendedBelowLine": "<rules>The thrust's damage is increased by up to @CritChanceAmp*100@% based on Xin Zhao's Critical Strike Chance.<br>Deals @MinionMod@% damage to minions.<br>Applies Lifesteal at 33% effectiveness on both attacks.</rules>"
 				}
 			]
 		},
@@ -229,7 +230,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/XinZhao/Spells/XinZhaoRAbility/XinZhaoR"
+					"dataKey": "Characters/XinZhao/Spells/XinZhaoRAbility/XinZhaoR",
+					"tooltipExtendedBelowLine": "<rules>Deals a max of <physicalDamage>600 damage</physicalDamage> to jungle monsters and minions.</rules>"
 				}
 			]
 		},

@@ -99,7 +99,8 @@
 						"RangeClamp": [300, 300, 300, 300, 300, 300, 300],
 						"MinRange": [100, 100, 100, 100, 100, 100, 100]
 					},
-					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingDecoyAbility/MonkeyKingDecoy"
+					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingDecoyAbility/MonkeyKingDecoy",
+					"tooltipExtendedBelowLine": "<rules><keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or true sight.</rules>"
 				}
 			]
 		},
@@ -230,7 +231,8 @@
 							"mModifiedGameCalculation": "MonsterCap"
 						}
 					},
-					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingSpinToWinAbility/MonkeyKingSpinToWin"
+					"dataKey": "Characters/MonkeyKing/Spells/MonkeyKingSpinToWinAbility/MonkeyKingSpinToWin",
+					"tooltipExtendedBelowLine": "<rules>Damage to jungle monsters is capped at <physicalDamage>@MonsterCapTT@ damage</physicalDamage> over @SpinDuration@ seconds.</rules>"
 				}
 			]
 		},

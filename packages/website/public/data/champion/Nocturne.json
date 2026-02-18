@@ -64,7 +64,8 @@
 						"2": [5, 5, 5, 5, 5, 5, 5],
 						"3": [15, 15, 25, 35, 45, 55, 55]
 					},
-					"dataKey": "Characters/Nocturne/Spells/NocturneDuskbringerAbility/NocturneDuskbringer"
+					"dataKey": "Characters/Nocturne/Spells/NocturneDuskbringerAbility/NocturneDuskbringer",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}</rules>"
 				}
 			]
 		},
@@ -83,7 +84,8 @@
 						"2": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"3": [5, 5, 5, 5, 5, 5, 5]
 					},
-					"dataKey": "Characters/Nocturne/Spells/NocturneShroudofDarknessAbility/NocturneShroudofDarkness"
+					"dataKey": "Characters/Nocturne/Spells/NocturneShroudofDarknessAbility/NocturneShroudofDarkness",
+					"tooltipExtendedBelowLine": "<rules>This Ability will remain active during <spellName>Paranoia's</spellName> flight.</rules>"
 				}
 			]
 		},

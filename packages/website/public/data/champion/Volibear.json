@@ -111,7 +111,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Volibear/Spells/VolibearQAbility/VolibearQ"
+					"dataKey": "Characters/Volibear/Spells/VolibearQAbility/VolibearQ",
+					"tooltipExtendedBelowLine": "<rules>Volibear gains @BonusRange@ attack range for this attack.</rules>"
 				}
 			]
 		},
@@ -179,7 +180,8 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Volibear/Spells/VolibearWAbility/VolibearW"
+					"dataKey": "Characters/Volibear/Spells/VolibearWAbility/VolibearW",
+					"tooltipExtendedBelowLine": "<rules>Empowered damage scales with %i:scaleAD% (Damage multiplier: @W2DamageMultiplier*100@% + @W2BonusADDamageMultiplier*10000@%)<br>This Ability applies on-hit effects.<br>Healing is @MinionAndMonsterMod*100@% effective against minions.</rules><br>"
 				}
 			]
 		},
@@ -272,7 +274,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Volibear/Spells/VolibearEAbility/VolibearE"
+					"dataKey": "Characters/Volibear/Spells/VolibearEAbility/VolibearE",
+					"tooltipExtendedBelowLine": "<rules>Damage against non-champions is capped at <activeRank>@MonsterDamageCap@</activeRank>.</rules>"
 				}
 			]
 		},

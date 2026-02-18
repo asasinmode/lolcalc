@@ -84,7 +84,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yone/Spells/YoneQAbility/YoneQ"
+					"dataKey": "Characters/Yone/Spells/YoneQAbility/YoneQ",
+					"tooltipExtendedBelowLine": "<rules>This Ability acts like an Attack: it can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>, it applies %i:OnHit% <OnHit>On-hit</OnHit> effects and lifesteal to the first enemy struck, is interruptible by crowd control, and its cooldown and cast time are reduced with <attackSpeed>Attack Speed</attackSpeed>.</rules>"
 				}
 			]
 		},
@@ -188,7 +189,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yone/Spells/YoneWAbility/YoneW"
+					"dataKey": "Characters/Yone/Spells/YoneWAbility/YoneW",
+					"tooltipExtendedBelowLine": "<rules>Shield increased by @FirstChampShieldMultiplier*100@% for the first champion hit and @SecondChampShieldMultiplier*100@% for all subsequent champions.<br>This abilities cooldown and cast time are reduced by Attack Speed.<br>Minimum <scaleLevel>@MinimumDamageMinions@</scaleLevel> total damage against minions.</rules>"
 				}
 			]
 		},
@@ -227,7 +229,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Yone/Spells/YoneEAbility/YoneE"
+					"dataKey": "Characters/Yone/Spells/YoneEAbility/YoneE",
+					"tooltipExtendedBelowLine": "<rules>Yone cannot snap back while affected by hard crowd control.</rules>"
 				}
 			]
 		},
@@ -271,7 +274,8 @@
 							"mModifiedGameCalculation": "Damage"
 						}
 					},
-					"dataKey": "Characters/Yone/Spells/YoneRAbility/YoneR"
+					"dataKey": "Characters/Yone/Spells/YoneRAbility/YoneR",
+					"tooltipExtendedBelowLine": "<rules>If no enemy champion is struck, Yone will instead blink to maximum range.</rules>"
 				}
 			]
 		},

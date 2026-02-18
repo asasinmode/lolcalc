@@ -143,7 +143,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Naafiri/Spells/NaafiriQAbility/NaafiriQ"
+					"dataKey": "Characters/Naafiri/Spells/NaafiriQAbility/NaafiriQ",
+					"tooltipExtendedBelowLine": "<rules>Executes lane minions and non-epic monsters below @MinionExecuteThreshold@ health.</rules>"
 				}
 			]
 		},
@@ -305,7 +306,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Naafiri/Spells/NaafiriWAbility/NaafiriW"
+					"dataKey": "Characters/Naafiri/Spells/NaafiriWAbility/NaafiriW",
+					"tooltipExtendedBelowLine": "<rules>Briefly extends<keywordMajor> The Call of the Pack</keywordMajor>.</rules>"
 				}
 			]
 		},

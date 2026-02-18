@@ -237,7 +237,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Rengar/Spells/RengarWAbility/RengarW"
+					"dataKey": "Characters/Rengar/Spells/RengarWAbility/RengarW",
+					"tooltipExtendedBelowLine": "<rules>Deals an additional <magicDamage>@BonusMonsterDamage@ magic damage</magicDamage> to jungle monsters. Restores <healing>@MonsterHealingMod@%</healing> of damage taken from jungle monsters.</rules>"
 				}
 			]
 		},
@@ -287,7 +288,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Rengar/Spells/RengarEAbility/RengarE"
+					"dataKey": "Characters/Rengar/Spells/RengarEAbility/RengarE",
+					"tooltipExtendedBelowLine": "<rules>Reveals enemies for @RevealDuration@ seconds.</rules><br><rules><spellName>Bola Strike</spellName> has no cast time when leaping.</rules>"
 				}
 			]
 		},
@@ -321,7 +323,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Rengar/Spells/RengarRAbility/RengarR"
+					"dataKey": "Characters/Rengar/Spells/RengarRAbility/RengarR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}</rules>"
 				}
 			]
 		},

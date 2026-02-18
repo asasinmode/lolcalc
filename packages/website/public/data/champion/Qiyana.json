@@ -134,7 +134,8 @@
 							"mModifiedGameCalculation": "VanillaDamage"
 						}
 					},
-					"dataKey": "Characters/Qiyana/Spells/QiyanaQAbility/QiyanaQ"
+					"dataKey": "Characters/Qiyana/Spells/QiyanaQAbility/QiyanaQ",
+					"tooltipExtendedBelowLine": "<rules>Enemies beyond the first take <physicalDamage>@FalloffDamage@ physical damage</physicalDamage> instead.<br>This Ability deals @JungleDamageAmp*100@% damage to jungle monsters.<br>{{Reminder_Invisibility}}</rules>"
 				}
 			]
 		},
@@ -235,7 +236,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Qiyana/Spells/QiyanaEAbility/QiyanaE"
+					"dataKey": "Characters/Qiyana/Spells/QiyanaEAbility/QiyanaE",
+					"tooltipExtendedBelowLine": "<rules>If <spellName>{{Spell_QiyanaQv2_Name}}</spellName> is cast while this Ability is targeting a champion, Qiyana will automatically aim it at her target.</rules>"
 				}
 			]
 		},

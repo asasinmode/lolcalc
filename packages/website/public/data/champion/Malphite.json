@@ -148,7 +148,8 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Malphite/Spells/ObduracyAbility/Obduracy"
+					"dataKey": "Characters/Malphite/Spells/ObduracyAbility/Obduracy",
+					"tooltipExtendedBelowLine": "<rules>Deals @MonsterDamageMod*100@% damage to jungle monsters.</rules>"
 				}
 			]
 		},

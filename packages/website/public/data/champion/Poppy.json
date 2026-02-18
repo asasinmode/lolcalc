@@ -65,7 +65,8 @@
 						"5": [50, 50, 80, 110, 140, 170, 170],
 						"6": [100, 100, 100, 100, 100, 100, 100]
 					},
-					"dataKey": "Characters/Poppy/Spells/PoppyQAbility/PoppyQ"
+					"dataKey": "Characters/Poppy/Spells/PoppyQAbility/PoppyQ",
+					"tooltipExtendedBelowLine": "<rules>Percent Health damage deals a max of @Effect6Amount@ damage to minions and jungle monsters per hit.</rules>"
 				}
 			]
 		},
@@ -208,7 +209,8 @@
 							"mModifiedGameCalculation": "Damage"
 						}
 					},
-					"dataKey": "Characters/Poppy/Spells/PoppyRAbility/PoppyR"
+					"dataKey": "Characters/Poppy/Spells/PoppyRAbility/PoppyR",
+					"tooltipExtendedBelowLine": "<rules>{{Reminder_Untargetable}}</rules>"
 				}
 			]
 		},
