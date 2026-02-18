@@ -98,23 +98,36 @@ export function championAbilityVariableValue(variable: string, abilityVariant: I
 		actualVariableName = variableName;
 	}
 
-	for (const source of sources) {
-		if (!source) {
-			continue;
-		}
-
-		value = source[variableName!];
-		if (value !== undefined) {
-			for (const path in dotPath) {
-				// TODO figure this out, some paths seem to have .0 or .-1
-				const number = Number(path);
-				if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
-					value = (value as any)[path];
-				}
+	if (variableName!.startsWith('Effect') && variableName!.endsWith('Amount')) {
+		const index = Number(variableName!.slice(6, -6));
+		if ('effectAmount' in abilityVariant) {
+			if (Number.isNaN(index)) {
+				console.warn('potential effectAmount variable index NaN', variableName);
+			} else {
+				value = abilityVariant.effectAmount[index - 1];
 			}
 		}
-		if (value !== undefined) {
-			break;
+	}
+
+	if (value === undefined) {
+		for (const source of sources) {
+			if (!source) {
+				continue;
+			}
+
+			value = source[variableName!];
+			if (value !== undefined) {
+				for (const path in dotPath) {
+				// TODO figure this out, some paths seem to have .0 or .-1
+					const number = Number(path);
+					if (Number.isNaN(number) || (number >= 0 && Array.isArray(value))) {
+						value = (value as any)[path];
+					}
+				}
+			}
+			if (value !== undefined) {
+				break;
+			}
 		}
 	}
 
