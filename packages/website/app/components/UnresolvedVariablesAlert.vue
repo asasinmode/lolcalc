@@ -15,7 +15,7 @@
 		}
 
 		&:before {
-			--at-apply: 'absolute top-0 end-0 content-empty z-0 bg-amber-400 size-4 rounded-bs-md';
+			--at-apply: 'absolute top-0 end-0 content-empty z-0 bg-amber-400 size-4 rounded-es-sm';
 		}
 
 		.icon {

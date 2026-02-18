@@ -538,8 +538,11 @@ const hoveredAbilityTooltipText = computed(() => {
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
+	// TODO
 	const extendedVariableInfo: [string, number[]][] = [
 		['Cooldown', [1, 2, 3, 4, 5]],
+		['Another', [1, 2, 3, 4, 5]],
+		['More', [1, 2, 3, 4, 5]],
 	];
 
 	// TODO detect unknown cost/cooldown
@@ -875,6 +878,12 @@ defineExpose({ el });
 					<span>
 						<template v-if="hoveredAbility !== 'passive' && hoveredAbilityTooltipText?.cooldown">
 							{{ hoveredAbilityTooltipText?.cooldown }}s
+							<img
+								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`"
+								width="20"
+								height="20"
+								aria-hidden="true"
+							>
 						</template>
 						<template v-else-if="hoveredAbility !== 'passive'">
 							<Unknown>UNKNOWN</Unknown>
@@ -884,6 +893,7 @@ defineExpose({ el });
 						{{ hoveredAbility === 'passive' ? '' : hoveredAbilityTooltipText?.cost ? `${hoveredAbilityTooltipText.cost} ${value.champion.value?.partype}` : 'No Cost' }}
 					</span>
 					<div class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
+					<UnresolvedVariablesAlert v-if="hoveredAbilityTooltipText?.anyUnknownVariables" class="col-span-full" />
 					<footer v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariableInfo.length">
 						<div
 							v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
@@ -896,6 +906,7 @@ defineExpose({ el });
 									{{ variableName }}
 								</dt>
 								<dd>
+									[
 									<template
 										v-for="(variable, variableIndex) in variableValues"
 										:key="`${variableName}-${variableIndex}`"
@@ -911,6 +922,7 @@ defineExpose({ el });
 										</span>
 										{{ variableIndex === (variableValues.length - 1) ? '' : ' / ' }}
 									</template>
+									]
 								</dd>
 							</template>
 						</dl>
@@ -1259,7 +1271,7 @@ defineExpose({ el });
 
 			.champion-stat-hover-tooltip p:first-of-type,
 			.champion-ability-hover-tooltip > div {
-				--at-apply: 'b-b b-t mt-0.5 b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+				--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
 			}
 
 			> [data-champion-abilities] {
@@ -1401,12 +1413,12 @@ defineExpose({ el });
 			}
 
 			.champion-ability-hover-tooltip {
-				--at-apply: 'max-w-160 p-2 grid-cols-[auto_1fr_auto] auto-rows-min';
+				--at-apply: 'max-w-160 p-2 relative grid-cols-[auto_1fr_auto] auto-rows-min';
 				inset: unset;
 				justify-self: anchor-center;
 				position-anchor: --scoreboard-item-abilities;
 				position-try: flip-block;
-				bottom: calc(anchor(top) - 1px);
+				top: calc(anchor(bottom) - 1px);
 
 				&:popover-open {
 					--at-apply: 'grid';
@@ -1423,13 +1435,21 @@ defineExpose({ el });
 				> span {
 					--at-apply: 'text-end text-lg';
 
+					&:first-of-type {
+						--at-apply: 'flex gap-[0.5ch] justify-end items-center text-yellow-100';
+
+						img {
+							--at-apply: '';
+						}
+					}
+
 					&:nth-of-type(2) {
 						--at-apply: 'self-start';
 					}
 				}
 
 				> div {
-					--at-apply: 'col-span-full';
+					--at-apply: 'col-span-full mt-2';
 				}
 
 				> footer {
@@ -1440,10 +1460,16 @@ defineExpose({ el });
 					}
 
 					> dl {
-						--at-apply: 'grid grid-cols-[1fr_auto]';
+						--at-apply: 'grid grid-cols-[1fr_auto] leading-5';
+
+						&:not(:first-child) {
+							--at-apply: 'mt-1.5';
+						}
 
 						> dd {
-							--at-apply: 'text-neutral-400';
+							> span {
+								--at-apply: 'text-neutral-400';
+							}
 
 							[data-current] {
 								--at-apply: 'text-white font-medium';
