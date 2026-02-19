@@ -115,6 +115,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
+  - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`?
   - [ ] aphelios ability levels, ult levels up automatically on 6/11/16
   - [ ] shapeshifting champions click on r to swap, jayce has 1 lvl
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
