@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Illaoi",
 	"key": "420",
 	"name": "Illaoi",
@@ -59,7 +59,7 @@
 							"mFormulaParts": [
 								{
 									"mStartValue": 9,
-									"mEndValue": 162,
+									"mEndValue": 180,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{

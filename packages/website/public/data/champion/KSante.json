@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "KSante",
 	"key": "897",
 	"name": "K'Sante",
@@ -309,7 +309,9 @@
 						"PassiveStartingDamage": [0.004, 0.004, 0.004, 0.004, 0.004, 0.004, 0.004],
 						"MaxHealthDamagePercentBase": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
 						"MaxHealthDamageResistRatio": [0, 0, 0, 0, 0, 0, 0],
-						"FlatDamage": [12, 12, 12, 12, 12, 12, 12]
+						"FlatDamage": [12, 12, 12, 12, 12, 12, 12],
+						"MarkDamagePercentMin": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
+						"MarkDamagePercentMax": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02]
 					},
 					"spellCalculations": {
 						"{281dd874}": {
@@ -339,9 +341,9 @@
 						"PercentHealthDamage": {
 							"mFormulaParts": [
 								{
-									"mStartValue": 0.01,
-									"mEndValue": 0.02,
-									"__type": "ByCharLevelInterpolationCalculationPart"
+									"{0589a59c}": "{cd7e016a}",
+									"{0b65bc23}": "{d79198e0}",
+									"__type": "{ee18a47b}"
 								}
 							],
 							"mDisplayAsPercent": true,

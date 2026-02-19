@@ -1,12 +1,12 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Mel",
 	"key": "800",
 	"name": "Mel",
 	"partype": "Mana",
 	"stats": {
 		"hp": 630,
-		"hpperlevel": 93,
+		"hpperlevel": 99,
 		"mp": 480,
 		"mpperlevel": 28,
 		"movespeed": 330,
@@ -165,7 +165,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.6,
+									"mCoefficient": 0.7,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -206,7 +206,7 @@
 									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.6,
+									"mCoefficient": 0.7,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]
@@ -367,11 +367,11 @@
 							"mFormulaParts": [
 								{
 									"mStartValue": 8,
-									"mEndValue": 25,
+									"mEndValue": 30,
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{
-									"mCoefficient": 0.03,
+									"mCoefficient": 0.04,
 									"__type": "StatByCoefficientCalculationPart"
 								}
 							]

@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Xayah",
 	"key": "498",
 	"name": "Xayah",
@@ -35,7 +35,7 @@
 					"name": "Double Daggers",
 					"image": "assets/characters/xayah/hud/icons2d/xayahq.png",
 					"tooltip": "Xayah throws two daggers, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> each and leaving two <keywordMajor>Feathers</keywordMajor>. Targets hit after the first take <physicalDamage>@MultiHitDamage@ damage</physicalDamage> from each dagger.",
-					"mana": [50, 50, 50, 50, 50, 50],
+					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 6],
 					"dataValues": {
 						"BaseDamage": [30, 45, 60, 75, 90, 105, 120],
@@ -86,7 +86,7 @@
 					"image": "assets/characters/xayah/hud/icons2d/xayahw.png",
 					"tooltip": "Xayah creates a storm of blades for @Effect2Amount@ seconds that grants her <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed> and cause her Attacks to fire a secondary blade that deals @BonusDamagePercent@% damage.<br><br>When the secondary blade hits a champion, she grants herself <speed>@Effect3Amount@% Move Speed</speed> for @Effect4Amount@ seconds.<br><br>If Rakan is nearby he will also gain the effects of this Ability, except he gains <speed>Move Speed</speed> when <i>Xayah</i> strikes a target.",
 					"mana": [60, 55, 50, 45, 40, 35],
-					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
+					"cooldownTime": [20, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
 						"BonusDamagePercent": [25, 25, 25, 25, 25, 25, 25]
 					},
@@ -109,7 +109,7 @@
 					"name": "Bladecaller",
 					"image": "assets/characters/xayah/hud/icons2d/xayahe.png",
 					"tooltip": "Xayah calls all <keywordMajor>Feathers</keywordMajor> back to her, dealing <physicalDamage>@FeatherDamage@ physical damage</physicalDamage> each. If @FeatherThreshold@ or more <keywordMajor>Feathers</keywordMajor> hit an enemy, they are <status>Rooted</status> for @RootDuration@ seconds.",
-					"mana": [30, 30, 30, 30, 30, 30],
+					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
 						"BaseDamage": [35, 50, 65, 80, 95, 110, 125],

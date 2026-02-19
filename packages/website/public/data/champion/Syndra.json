@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Syndra",
 	"key": "134",
 	"name": "Syndra",
@@ -75,7 +75,7 @@
 					"dataValues": {
 						"BaseSlow": [25, 25, 25, 25, 25, 25, 25],
 						"SlowDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
-						"BaseDamage": [35, 70, 105, 140, 175, 210, 245],
+						"BaseDamage": [40, 70, 100, 130, 160, 190, 220],
 						"ExtraSpherePickupRadius": [450, 450, 450, 450, 450, 450, 450]
 					},
 					"spellCalculations": {
@@ -190,7 +190,7 @@
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 100, 80, 60, 60, 60],
 					"dataValues": {
-						"DamagePerSphere": [50, 90, 130, 170, 210, 250, 290],
+						"DamagePerSphere": [40, 80, 120, 160, 200, 240, 280],
 						"MaxSpheresToUse": [7, 7, 7, 7, 7, 7, 7],
 						"UpgradeExecuteThreshold": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15],
 						"QHastePerRank": [10, 10, 10, 10, 10, 10, 10],

@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "LeeSin",
 	"key": "64",
 	"name": "Lee Sin",
@@ -96,7 +96,7 @@
 				{
 					"name": "Safeguard / Iron Will",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
-					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Life Steal and Spell Vamp for @LifestealAndSpellVampTime@ seconds.",
+					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {

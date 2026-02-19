@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Samira",
 	"key": "360",
 	"name": "Samira",
@@ -41,7 +41,7 @@
 						"BaseDamage": [-5, 0, 5, 10, 15, 20, 25],
 						"CheatingThreshold": [20, 20, 20, 20, 20, 20, 20],
 						"CritDamageMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-						"LifestealMod": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"LifestealMod": [1, 1, 1, 1, 1, 1, 1],
 						"QADRatio": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1]
 					},
 					"spellCalculations": {
@@ -170,7 +170,7 @@
 					"dataValues": {
 						"BaseDamage": [0, 20, 40, 60, 80, 100, 120],
 						"BaseMSBonus": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02],
-						"LifestealMod": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],
+						"LifestealMod": [1, 1, 1, 1, 1, 1, 1],
 						"MinionDamageMod": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"ADRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3]
 					},

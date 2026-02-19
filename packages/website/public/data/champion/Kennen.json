@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Kennen",
 	"key": "85",
 	"name": "Kennen",
@@ -177,7 +177,7 @@
 					"name": "Slicing Maelstrom",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_r.png",
 					"tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>@PerTickDamageCalculated@ magic damage</magicDamage> to all nearby enemies every @KennenRTickRate@ seconds, and gaining <scaleArmor>@KennenRDefenses@ Armor</scaleArmor> and <scaleMR>@KennenRDefenses@ Magic Resist</scaleMR> for @KennenRDuration@ seconds. Successive hits deal @DamageAmp*100@% increased damage for each hit the enemy has already suffered.",
-					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
+					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"dataValues": {
 						"BaseDamage": [5, 40, 75, 110, 145, 180, 215],
 						"APRatio": [0.225, 0.225, 0.225, 0.225, 0.225, 0.225, 0.225],

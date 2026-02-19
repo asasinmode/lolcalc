@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Annie",
 	"key": "1",
 	"name": "Annie",
@@ -38,7 +38,7 @@
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
-						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
+						"BaseDamage": [35, 80, 125, 170, 215, 260, 305],
 						"APRatio": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8]
 					},
 					"spellCalculations": {
@@ -98,7 +98,6 @@
 					"image": "assets/characters/annie/hud/icons2d/annie_e.png",
 					"tooltip": "Annie grants an ally champion <shield>@ShieldBlockTotal@ Shield</shield> for @ShieldDuration@ seconds and <speed>@MoveSpeedCalc@ Decaying Move Speed</speed> for @MovementSpeedDuration@ seconds. While the shield holds, enemies who hit the shielded ally with an Attack or Ability receive <magicDamage>@DamageReturn@ magic damage</magicDamage> once per shield.<br><br>Tibbers always gains the effects of <spellName>Molten Shield</spellName> when summoned.",
 					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [13, 12, 11.5, 11, 10.5, 10, 10],
 					"dataValues": {
 						"ShieldDuration": [3, 3, 3, 3, 3, 3, 3],
 						"DamageReduction": [9, 13, 17, 21, 25, 29, 33],

@@ -72,8 +72,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] item groups, only one from group
 - [ ] sharing, saving/reading data in query
 - [ ] calculations
-  - [ ] item passives (resolve tooltip values)
-  - [ ] champion passives (resolve tooltip values, level breakpoints)
+  - [ ] resolve game variables
+  - [ ] item passives
+  - [ ] champion passives (level breakpoints)
 - [ ] mobile version and make look better
 - [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
 - [ ] disclaimer not endorsed by riot

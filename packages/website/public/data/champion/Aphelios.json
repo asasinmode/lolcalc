@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Aphelios",
 	"key": "523",
 	"name": "Aphelios",
@@ -1080,7 +1080,7 @@
 					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"dataValues": {
 						"MaxRanksPerStat": [6, 6, 6, 6, 6, 6, 6],
-						"ADPerRank": [5, 5, 5, 5, 5, 5, 5],
+						"ADPerRank": [4, 4, 4, 4, 4, 4, 4],
 						"ASPerRank": [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09],
 						"APPerRank": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5]
 					},

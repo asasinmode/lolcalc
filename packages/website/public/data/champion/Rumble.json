@@ -1,11 +1,11 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Rumble",
 	"key": "68",
 	"name": "Rumble",
 	"partype": "Heat",
 	"stats": {
-		"hp": 655,
+		"hp": 640,
 		"hpperlevel": 105,
 		"mp": 150,
 		"mpperlevel": 0,
@@ -227,7 +227,7 @@
 						"TrailDuration": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
 						"TickRate": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 						"SlowAmount": [35, 35, 35, 35, 35, 35, 35],
-						"BaseDamagePerSecond": [70, 140, 210, 280, 350, 420, 490],
+						"BaseDamagePerSecond": [40, 120, 200, 280, 360, 440, 520],
 						"MaxBurnSeconds": [5, 5, 5, 5, 5, 5, 5],
 						"BurnLingerTime": [1, 1, 1, 1, 1, 1, 1]
 					},

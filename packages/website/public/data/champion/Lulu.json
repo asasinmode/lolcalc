@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Lulu",
 	"key": "117",
 	"name": "Lulu",
@@ -214,7 +214,8 @@
 					"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
 					"tooltip": "Lulu is assisted by Pix the faerie. When Lulu Attacks, Pix fires 3 bolts at her target, dealing <magicDamage>@CombinedDamage@ magic damage</magicDamage> to the first enemy hit.",
 					"dataValues": {
-						"NumberOfBolts": [3, 3, 3, 3, 3, 3, 3]
+						"NumberOfBolts": [3, 3, 3, 3, 3, 3, 3],
+						"APRatioPerHit": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 					},
 					"spellCalculations": {
 						"TotalDamage": {
@@ -225,8 +226,8 @@
 									"__type": "ByCharLevelInterpolationCalculationPart"
 								},
 								{
-									"mCoefficient": 0.05,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "{32ce024f}",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},

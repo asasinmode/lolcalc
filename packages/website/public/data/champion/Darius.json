@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Darius",
 	"key": "122",
 	"name": "Darius",
@@ -185,7 +185,7 @@
 					"tooltip": "{{Spell_DariusHemoMarker_Tooltip}}",
 					"tooltipExtended": "{{Spell_DariusHemoMarker_Tooltip}}<br><br><rules><keywordMajor>Hemorrhage</keywordMajor> deals @MonsterMod*100@% damage to jungle monsters.</rules>",
 					"dataValues": {
-						"MonsterMod": [2, 2, 2, 2, 2, 2, 2],
+						"MonsterMod": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"SecondsPerTick": [1.26, 1.26, 1.26, 1.26, 1.26, 1.26, 1.26],
 						"BleedDuration": [5, 5, 5, 5, 5, 5, 5],
 						"MaxStacks": [5, 5, 5, 5, 5, 5, 5]

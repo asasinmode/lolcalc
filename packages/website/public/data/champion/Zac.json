@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Zac",
 	"key": "154",
 	"name": "Zac",
@@ -36,25 +36,32 @@
 					"image": "assets/characters/zac/hud/icons2d/zacq.png",
 					"tooltip": "Zac stretches his arm out, attaching it to the first enemy hit to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and briefly <status>Slow</status> them. Zac's next Attack gains increased range and applies the same damage and <status>Slow</status>. <br><br>If Zac hits a <i>different</i> enemy with this Attack, he <status>Knocks Up</status> both towards each other. If they collide, they and surrounding enemies take <magicDamage>@TotalDamage@ magic damage</magicDamage> and are briefly <status>Slowed</status>.",
 					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
+					"dataValues": {
+						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
+						"APRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"HealthRatio": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
+					},
 					"spellCalculations": {
 						"TotalDamage": {
 							"mFormulaParts": [
 								{
-									"mEffectIndex": 1,
-									"__type": "EffectValueCalculationPart"
+									"mDataValue": "BaseDamage",
+									"__type": "NamedDataValueCalculationPart"
 								},
 								{
-									"mCoefficient": 0.3,
-									"__type": "StatByCoefficientCalculationPart"
+									"mDataValue": "APRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								},
 								{
 									"mStat": 12,
-									"mCoefficient": 0.03,
-									"__type": "StatByCoefficientCalculationPart"
+									"mStatFormula": 2,
+									"mDataValue": "HealthRatio",
+									"__type": "StatByNamedDataValueCalculationPart"
 								}
 							]
 						},
 						"MaxDamageTooltip": {
+							"mExpandedTooltipCalculationDisplay": 6,
 							"mFormulaParts": [
 								{
 									"mPart1": {
@@ -91,7 +98,6 @@
 						}
 					},
 					"effectAmount": {
-						"0": [25, 40, 55, 70, 85, 100, 100],
 						"1": [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08],
 						"2": [800, 800, 800, 800, 800, 800, 800],
 						"3": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, -0.4],
@@ -262,7 +268,7 @@
 						"Bounces": [4, 4, 4, 4, 4, 4, 4],
 						"TimeBetweenBounces": [1, 1, 1, 1, 1, 1, 1],
 						"KnockupDuration": [1, 1, 1, 1, 1, 1, 1],
-						"BaseDamageBounce": [70, 140, 210, 280, 350, 420, 490],
+						"BaseDamageBounce": [50, 120, 190, 260, 330, 400, 470],
 						"DamageReductionBounce": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"KnockbackDistance": [250, 250, 250, 250, 250, 250, 250],
 						"KnockbackRange": [300, 300, 300, 300, 300, 300, 300],
@@ -357,7 +363,6 @@
 						}
 					},
 					"effectAmount": {
-						"0": [150, 150, 250, 350, 350, 350, 350],
 						"1": [1.1, 1.1, 1.1, 1.1, 1.1, 1.1, 1.1],
 						"2": [700, 700, 850, 1000, 1000, 1000, 1000],
 						"3": [-0.3, -0.3, -0.4, -0.5, -0.5, -0.5, -0.5],

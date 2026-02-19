@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Brand",
 	"key": "63",
 	"name": "Brand",
@@ -181,10 +181,10 @@
 					"tooltip": "{{Spell_BrandPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_BrandPassive_Tooltip}}<br><br><rules>This Ability does increased damage to monsters, up to @JungleMonsterDPSCap@ damage per second increased to @EpicMonsterDPSCap@ against epic jungle monsters. </rules><br><br><rules>The explosion caused by the third stack of <keywordMajor>Ablaze</keywordMajor> is capped at @JungleMonsterExplosionFlatCap@ against jungle monsters </rules>",
 					"dataValues": {
-						"MonsterMod": [265, 265, 265, 265, 265, 265, 265],
+						"MonsterMod": [270, 270, 270, 270, 270, 270, 270],
 						"PercentHealthDamage": [2, 2, 2, 2, 2, 2, 2],
 						"EpicMonsterDPSCap": [80, 80, 80, 80, 80, 80, 80],
-						"JungleMonsterDPSCap": [40, 40, 40, 40, 40, 40, 40]
+						"JungleMonsterDPSCap": [50, 50, 50, 50, 50, 50, 50]
 					},
 					"spellCalculations": {
 						"ManaRestore": {

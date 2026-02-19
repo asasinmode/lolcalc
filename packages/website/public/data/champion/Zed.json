@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Zed",
 	"key": "238",
 	"name": "Zed",
@@ -187,8 +187,8 @@
 					"dataValues": {
 						"CurrentHealthThreshold": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"PerUnitCD": [10, 10, 10, 10, 10, 10, 10],
-						"MonsterDamageCap": [100, 100, 100, 100, 100, 100, 100],
-						"MonsterDamageMod": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MonsterDamageCap": [175, 175, 175, 175, 175, 175, 175],
+						"MonsterDamageMod": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"ShenZedQuestKillCount": [2, 2, 2, 2, 2, 2, 2],
 						"ShenZedQuestBonus": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02]
 					},

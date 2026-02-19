@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Naafiri",
 	"key": "950",
 	"name": "Naafiri",
@@ -15,8 +15,8 @@
 		"spellblock": 32,
 		"spellblockperlevel": 2.05,
 		"attackrange": 125,
-		"hpregen": 7.5,
-		"hpregenperlevel": 0.7,
+		"hpregen": 6.25,
+		"hpregenperlevel": 0.6,
 		"mpregen": 7.5,
 		"mpregenperlevel": 1,
 		"crit": 0,
@@ -35,7 +35,7 @@
 					"name": "Darkin Daggers",
 					"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_q.png",
 					"tooltip": "Naafiri hurls Darkin-tainted blades, dealing <physicalDamage>@spell.NaafiriQ:TotalDamageFirstCast@ physical damage</physicalDamage> and inflicting a bleed, dealing <physicalDamage>@spell.NaafiriQ:TotalBleedDamage@ physical damage</physicalDamage> over @spell.NaafiriQ:BleedDuration@ seconds.<br><br>Naafiri can <recast>Recast</recast> this Ability. If enemies hit are already bleeding from this Ability, it instead deals the remaining bleed damage plus between <physicalDamage>@spell.NaafiriQ:TotalMinDamageSecondCast@</physicalDamage> and <physicalDamage>@spell.NaafiriQ:TotalMaxDamageSecondCast@ physical damage</physicalDamage>, based on their missing Health. If that target was a champion or large monster, Naafiri restores <healing>@spell.NaafiriQ:TotalHealSecondCast@ Health</healing>.<br><br><keywordMajor>Packmates</keywordMajor> will leap at the first champion or monster hit and attack them for @spell.NaafiriP:PackmateTauntDuration@ seconds. <br><br>",
-					"mana": [55, 60, 65, 70, 75, 80],
+					"mana": [50, 60, 70, 80, 90, 90],
 					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
 						"BaseDamageFirstCast": [30, 35, 40, 45, 50, 55, 60],
@@ -188,7 +188,7 @@
 					"name": "Eviscerate",
 					"image": "assets/characters/naafiri/hud/icons2d/icons_naafiri_e.png",
 					"tooltip": "Naafiri surges forward, dealing <physicalDamage>@TotalDamageFirstSlash@ physical damage</physicalDamage>, then explodes in a flurry of blades, dealing <physicalDamage>@TotalDamageSecondSlash@ physical damage.</physicalDamage><br><br><keywordMajor>Packmates</keywordMajor> become Untargetable and are recalled to Naafiri <healing>restoring 100% Health</healing>. <br>",
-					"mana": [35, 35, 35, 35, 35, 35],
+					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
 						"BaseDamageFirstSlash": [5, 15, 25, 35, 45, 55, 65],

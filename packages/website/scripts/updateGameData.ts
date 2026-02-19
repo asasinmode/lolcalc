@@ -721,7 +721,7 @@ function createRuneSlotData(data: any) {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
 		tooltipShort: getStringtableValue(mShortDescLocalizationKey, 'rune slot', { ...variableDebug, key: `${mPerkName}-tooltipShort` }),
 		tooltipLong: getStringtableValue(mLongDescLocalizationKey, 'rune slot', { ...variableDebug, key: `${mPerkName}-tooltipLong` }),
-		// TODO add debug when implementing
+		// TODO add debug when implementing, replace long with {{}} if it uses it and is in the stringtable, similar to variant.tooltip = `{{${mLocKeys.keyTooltip}}}` in championAbilityVariants
 		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
 	};
 
@@ -1035,7 +1035,7 @@ function championAbilityVariants(
 			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended below line` } : undefined,
 		);
 
-		/** many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
+		/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
 		if (mLocKeys.keyTooltip && (mLocKeys.keyTooltip.toLowerCase() in stringtableObject.stringtable)) {
 			variant.tooltip = `{{${mLocKeys.keyTooltip}}}`;
 		}

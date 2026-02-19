@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Lux",
 	"key": "99",
 	"name": "Lux",
@@ -7,7 +7,7 @@
 	"stats": {
 		"hp": 580,
 		"hpperlevel": 99,
-		"mp": 480,
+		"mp": 440,
 		"mpperlevel": 23.5,
 		"movespeed": 330,
 		"armor": 21,
@@ -17,7 +17,7 @@
 		"attackrange": 550,
 		"hpregen": 5.5,
 		"hpregenperlevel": 0.55,
-		"mpregen": 7,
+		"mpregen": 9,
 		"mpregenperlevel": 0.8,
 		"crit": 0,
 		"critperlevel": 0,
@@ -36,7 +36,6 @@
 					"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
 					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @Effect3Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
 					"mana": [50, 50, 50, 50, 50, 50],
-					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
 					"dataValues": {
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
 						"APRatio": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75]
@@ -57,8 +56,6 @@
 						}
 					},
 					"effectAmount": {
-						"0": [0, 80, 120, 160, 200, 240, 240],
-						"1": [50, 50, 50, 50, 50, 50, 50],
 						"2": [2, 2, 2, 2, 2, 2, 2]
 					},
 					"dataKey": "Characters/Lux/Spells/LuxLightBindingAbility/LuxLightBinding"
@@ -73,7 +70,7 @@
 					"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
 					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @Effect3Amount@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
 					"mana": [60, 65, 70, 75, 80, 85],
-					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
+					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 9.5],
 					"dataValues": {
 						"BaseShieldAmount": [25, 40, 55, 70, 85, 100, 115],
 						"APRatio": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4],
@@ -96,7 +93,6 @@
 					},
 					"effectAmount": {
 						"0": [0, 2, 4, 6, 8, 10, 12],
-						"1": [25, 40, 55, 70, 85, 100, 145],
 						"2": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"3": [100, 100, 100, 100, 100, 100, 100]
 					},

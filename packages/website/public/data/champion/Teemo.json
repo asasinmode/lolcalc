@@ -1,5 +1,5 @@
 {
-	"version": "16.3.1",
+	"version": "16.4.1",
 	"id": "Teemo",
 	"key": "17",
 	"name": "Teemo",
@@ -108,7 +108,7 @@
 						"ImpactAPRatio": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
 						"PoisonDuration": [4, 4, 4, 4, 4, 4, 4],
 						"TickFrequency": [1, 1, 1, 1, 1, 1, 1],
-						"MonsterMod": [1.45, 1.45, 1.45, 1.45, 1.45, 1.45, 1.45]
+						"MonsterMod": [1.6, 1.6, 1.6, 1.6, 1.6, 1.6, 1.6]
 					},
 					"spellCalculations": {
 						"TickCalculatedDamage": {
