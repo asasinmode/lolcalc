@@ -64,7 +64,7 @@ if (await championFile.exists()) {
 	championData = await championFile.json();
 }
 
-if (true || !championData || championData?.version !== latestVersion) {
+if (!championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -616,6 +616,14 @@ if (!uiData || uiData?.version !== latestVersion) {
 
 	await uiFile.write(stringifyObject(uiData));
 }
+
+// dragons https://raw.communitydragon.org/latest/game/shared.cdtb.bin.json
+// Shared/Spells/SRX_DragonBuffCloud `mSpell`, maybe `mImgIconName`, `mBuff`.`mDescription`
+// Shared/Spells/SRX_DragonSoulBuffHextech similar except `mLocKeys`
+// stack icons https://raw.communitydragon.org/latest/game/assets/ux/scoreboard/
+// soul icons ? https://raw.communitydragon.org/latest/game/data/shared/spells/icons2d/
+// scoreboard atlas thingy https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
+// atlas https://raw.communitydragon.org/latest/game/assets/ux/srx/dragonuiprototype.png
 
 for (const category in debug) {
 	const { variables, stringtableVariables, tags } = debug[category as keyof typeof debug];
