@@ -12,50 +12,13 @@
 					}
 				},
 				"soul": {
-					"ObjectName": "SRX_DragonSoulBuffCloud",
-					"mScriptName": "SRX_DragonSoulBuffCloud",
-					"mSpell": {
-						"DataValues": [
-							{
-								"mName": "MSBuffDuration",
-								"mValues": [6, 6, 6, 6, 6, 6, 6],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "MSAmount",
-								"mValues": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "MSBuffCooldown",
-								"mValues": [30, 30, 30, 30, 30, 30, 30],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "PersistentMSValue",
-								"mValues": [0.15000000596046448, 0.15000000596046448, 0.15000000596046448, 0.15000000596046448, 0.15000000596046448, 0.15000000596046448, 0.15000000596046448],
-								"__type": "SpellDataValue"
-							}
-						],
-						"mImgIconName": [
-							"DragonSoulIconCloud.dds"
-						],
-						"__type": "SpellDataResource"
-					},
-					"mBuff": {
-						"mTooltipData": {
-							"mObjectName": "SRX_DragonSoulBuffCloud",
-							"mFormat": "{2ca8f134}",
-							"mLocKeys": {
-								"keyName": "Buff_DragonSoulCloud_Name",
-								"keyTooltip": "Buff_DragonSoulCloud_Tooltip",
-								"keyCooldown": "Buff_DragonSoulCloud_Cooldown"
-							},
-							"__type": "TooltipInstanceBuff"
-						},
-						"__type": "BuffData"
-					},
-					"__type": "SpellObject"
+					"objectName": "SRX_DragonSoulBuffCloud",
+					"dataValues": {
+						"MSBuffDuration": [6, 6, 6, 6, 6, 6, 6],
+						"MSAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"MSBuffCooldown": [30, 30, 30, 30, 30, 30, 30],
+						"PersistentMSValue": [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15]
+					}
 				}
 			},
 			"Mountain": {
@@ -67,123 +30,14 @@
 					}
 				},
 				"soul": {
-					"ObjectName": "SRX_DragonSoulBuffMountain",
-					"mScriptName": "SRX_DragonSoulBuffMountain",
-					"mSpell": {
-						"DataValues": [
-							{
-								"mName": "BaseShieldValue",
-								"mValues": [220, 220, 220, 220, 220, 220, 220],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BonusHPRatio",
-								"mValues": [0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BonusADRatio",
-								"mValues": [0.1599999964237213, 0.1599999964237213, 0.1599999964237213, 0.1599999964237213, 0.1599999964237213, 0.1599999964237213, 0.1599999964237213],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "APRatio",
-								"mValues": [0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099, 0.11999999731779099],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "TimeWithoutTakingDamage",
-								"mValues": [5, 5, 5, 5, 5, 5, 5],
-								"__type": "SpellDataValue"
-							}
-						],
-						"DataValuesModeOverride": {
-							"Ruby": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseShieldValue",
-										"mValues": [170, 170, 170, 170, 170, 170, 170],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"{b0cea932}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseShieldValue",
-										"mValues": [170, 170, 170, 170, 170, 170, 170],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"{afcea79f}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseShieldValue",
-										"mValues": [170, 170, 170, 170, 170, 170, 170],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"{aecea60c}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseShieldValue",
-										"mValues": [170, 170, 170, 170, 170, 170, 170],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							}
-						},
-						"mSpellCalculations": {
-							"TotalShield": {
-								"mFormulaParts": [
-									{
-										"mDataValue": "BaseShieldValue",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 2,
-										"mStatFormula": 2,
-										"mDataValue": "BonusADRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									},
-									{
-										"mDataValue": "APRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 12,
-										"mStatFormula": 2,
-										"mDataValue": "BonusHPRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									}
-								],
-								"__type": "GameCalculation"
-							}
-						},
-						"mImgIconName": [
-							"DragonSoulIconMountain.dds"
-						],
-						"__type": "SpellDataResource"
-					},
-					"mBuff": {
-						"mTooltipData": {
-							"mObjectName": "SRX_DragonSoulBuffMountain",
-							"mFormat": "{2ca8f134}",
-							"mLocKeys": {
-								"keyName": "Buff_DragonSoulMountain_Name",
-								"keyTooltip": "Buff_DragonSoulMountain_Tooltip"
-							},
-							"__type": "TooltipInstanceBuff"
-						},
-						"__type": "BuffData"
-					},
-					"__type": "SpellObject"
+					"objectName": "SRX_DragonSoulBuffMountain",
+					"dataValues": {
+						"BaseShieldValue": [220, 220, 220, 220, 220, 220, 220],
+						"BonusHPRatio": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
+						"BonusADRatio": [0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16],
+						"APRatio": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
+						"TimeWithoutTakingDamage": [5, 5, 5, 5, 5, 5, 5]
+					}
 				}
 			},
 			"Infernal": {
@@ -195,111 +49,15 @@
 					}
 				},
 				"soul": {
-					"ObjectName": "SRX_DragonSoulBuffInfernal",
-					"mScriptName": "SRX_DragonSoulBuffInfernal",
-					"mSpell": {
-						"DataValues": [
-							{
-								"mName": "BaseDamage",
-								"mValues": [100, 100, 100, 100, 100, 100, 100],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BlastRadius",
-								"mValues": [250, 250, 250, 250, 250, 250, 250],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "ProcCooldown",
-								"mValues": [3, 3, 3, 3, 3, 3, 3],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BonusHPRatio",
-								"mValues": [0.027499999850988388, 0.027499999850988388, 0.027499999850988388, 0.027499999850988388, 0.027499999850988388, 0.027499999850988388, 0.027499999850988388],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BonusADRatio",
-								"mValues": [0.22499999403953552, 0.22499999403953552, 0.22499999403953552, 0.22499999403953552, 0.22499999403953552, 0.22499999403953552, 0.22499999403953552],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "APRatio",
-								"mValues": [0.13500000536441803, 0.13500000536441803, 0.13500000536441803, 0.13500000536441803, 0.13500000536441803, 0.13500000536441803, 0.13500000536441803],
-								"__type": "SpellDataValue"
-							}
-						],
-						"DataValuesModeOverride": {
-							"{bffdf499}": {
-								"SpellDataValues": [
-									{
-										"mName": "ProcCooldown",
-										"mValues": [6, 6, 6, 6, 6, 6, 6],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							}
-						},
-						"mSpellCalculations": {
-							"TotalDamage": {
-								"mFormulaParts": [
-									{
-										"mDataValue": "BaseDamage",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 2,
-										"mStatFormula": 2,
-										"mDataValue": "BonusADRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									},
-									{
-										"mDataValue": "APRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 12,
-										"mStatFormula": 2,
-										"mDataValue": "BonusHPRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									}
-								],
-								"__type": "GameCalculation"
-							}
-						},
-						"mImgIconName": [
-							"DragonSoulIconInfernal.dds"
-						],
-						"mClientData": {
-							"mTooltipData": {
-								"mObjectName": "SRX_DragonSoulBuffInfernal",
-								"mFormat": "{d7c27163}",
-								"mLocKeys": {
-									"keyName": "Buff_DragonSoulInfernal_Name",
-									"keySummary": "Spell_SRX_DragonSoulBuffInfernal"
-								},
-								"__type": "TooltipInstanceSpell"
-							},
-							"__type": "SpellDataResourceClient"
-						},
-						"__type": "SpellDataResource"
-					},
-					"mBuff": {
-						"mTooltipData": {
-							"mObjectName": "SRX_DragonSoulBuffInfernal",
-							"mFormat": "{2ca8f134}",
-							"mLocKeys": {
-								"keyName": "Buff_DragonSoulInfernal_Name",
-								"keyTooltip": "Buff_DragonSoulInfernal_Tooltip",
-								"keyCooldown": "Buff_DragonSoulInfernal_Cooldown"
-							},
-							"__type": "TooltipInstanceBuff"
-						},
-						"__type": "BuffData"
-					},
-					"__type": "SpellObject"
+					"objectName": "SRX_DragonSoulBuffInfernal",
+					"dataValues": {
+						"BaseDamage": [100, 100, 100, 100, 100, 100, 100],
+						"BlastRadius": [250, 250, 250, 250, 250, 250, 250],
+						"ProcCooldown": [3, 3, 3, 3, 3, 3, 3],
+						"BonusHPRatio": [0.027, 0.027, 0.027, 0.027, 0.027, 0.027, 0.027],
+						"BonusADRatio": [0.225, 0.225, 0.225, 0.225, 0.225, 0.225, 0.225],
+						"APRatio": [0.135, 0.135, 0.135, 0.135, 0.135, 0.135, 0.135]
+					}
 				}
 			},
 			"Ocean": {
@@ -312,171 +70,17 @@
 					}
 				},
 				"soul": {
-					"ObjectName": "SRX_DragonSoulBuffOcean",
-					"mScriptName": "SRX_DragonSoulBuffOcean",
-					"mSpell": {
-						"DataValues": [
-							{
-								"mName": "BaseHealValue",
-								"mValues": [150, 150, 150, 150, 150, 150, 150],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "MinionPenalty",
-								"mValues": [0.30000001192092896, 0.30000001192092896, 0.30000001192092896, 0.30000001192092896, 0.30000001192092896, 0.30000001192092896, 0.30000001192092896],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BaseManaValue",
-								"mValues": [100, 100, 100, 100, 100, 100, 100],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BonusHPRatio",
-								"mValues": [0.07000000029802322, 0.07000000029802322, 0.07000000029802322, 0.07000000029802322, 0.07000000029802322, 0.07000000029802322, 0.07000000029802322],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BonusADRatio",
-								"mValues": [0.25999999046325684, 0.25999999046325684, 0.25999999046325684, 0.25999999046325684, 0.25999999046325684, 0.25999999046325684, 0.25999999046325684],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "APRatio",
-								"mValues": [0.17000000178813934, 0.17000000178813934, 0.17000000178813934, 0.17000000178813934, 0.17000000178813934, 0.17000000178813934, 0.17000000178813934],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "HealDuration",
-								"mValues": [4, 4, 4, 4, 4, 4, 4],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "ManaRatioForTooltip",
-								"mValues": [0.03500000014901161, 0.03500000014901161, 0.03500000014901161, 0.03500000014901161, 0.03500000014901161, 0.03500000014901161, 0.03500000014901161],
-								"__type": "SpellDataValue"
-							}
-						],
-						"DataValuesModeOverride": {
-							"cherry": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseHealValue",
-										"mValues": [100, 100, 100, 100, 100, 100, 100],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"Ruby": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseHealValue",
-										"mValues": [100, 100, 100, 100, 100, 100, 100],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"{b0cea932}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseHealValue",
-										"mValues": [100, 100, 100, 100, 100, 100, 100],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"{afcea79f}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseHealValue",
-										"mValues": [100, 100, 100, 100, 100, 100, 100],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"{aecea60c}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseHealValue",
-										"mValues": [100, 100, 100, 100, 100, 100, 100],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							},
-							"{bffdf499}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseHealValue",
-										"mValues": [100, 100, 100, 100, 100, 100, 100],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							}
-						},
-						"mSpellCalculations": {
-							"TotalHeal": {
-								"mFormulaParts": [
-									{
-										"mDataValue": "BaseHealValue",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 2,
-										"mStatFormula": 2,
-										"mDataValue": "BonusADRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									},
-									{
-										"mDataValue": "APRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 12,
-										"mStatFormula": 2,
-										"mDataValue": "BonusHPRatio",
-										"__type": "StatByNamedDataValueCalculationPart"
-									}
-								],
-								"__type": "GameCalculation"
-							},
-							"TotalMana": {
-								"mFormulaParts": [
-									{
-										"mDataValue": "BaseManaValue",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									{
-										"mCoefficient": 0.03500000014901161,
-										"__type": "AbilityResourceByCoefficientCalculationPart"
-									}
-								],
-								"__type": "GameCalculation"
-							}
-						},
-						"mImgIconName": [
-							"DragonSoulIconOcean.dds"
-						],
-						"__type": "SpellDataResource"
-					},
-					"mBuff": {
-						"mTooltipData": {
-							"mObjectName": "SRX_DragonSoulBuffOcean",
-							"mFormat": "{2ca8f134}",
-							"mLocKeys": {
-								"keyName": "Buff_DragonSoulOcean_Name",
-								"keyTooltip": "Buff_DragonSoulOcean_Tooltip"
-							},
-							"__type": "TooltipInstanceBuff"
-						},
-						"__type": "BuffData"
-					},
-					"__type": "SpellObject"
+					"objectName": "SRX_DragonSoulBuffOcean",
+					"dataValues": {
+						"BaseHealValue": [150, 150, 150, 150, 150, 150, 150],
+						"MinionPenalty": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+						"BaseManaValue": [100, 100, 100, 100, 100, 100, 100],
+						"BonusHPRatio": [0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07],
+						"BonusADRatio": [0.26, 0.26, 0.26, 0.26, 0.26, 0.26, 0.26],
+						"APRatio": [0.17, 0.17, 0.17, 0.17, 0.17, 0.17, 0.17],
+						"HealDuration": [4, 4, 4, 4, 4, 4, 4],
+						"ManaRatioForTooltip": [0.035, 0.035, 0.035, 0.035, 0.035, 0.035, 0.035]
+					}
 				}
 			},
 			"Chemtech": {
@@ -489,44 +93,12 @@
 					}
 				},
 				"soul": {
-					"ObjectName": "SRX_DragonSoulBuffChemTech",
-					"mScriptName": "SRX_DragonSoulBuffChemTech",
-					"mSpell": {
-						"DataValues": [
-							{
-								"mName": "TriggerThreshold",
-								"mValues": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "DR",
-								"mValues": [0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "DamageAmp",
-								"mValues": [0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842, 0.12999999523162842],
-								"__type": "SpellDataValue"
-							}
-						],
-						"mImgIconName": [
-							"DragonSoulIconChemTech.dds"
-						],
-						"__type": "SpellDataResource"
-					},
-					"mBuff": {
-						"mTooltipData": {
-							"mObjectName": "SRX_DragonSoulBuffChemTech",
-							"mFormat": "{2ca8f134}",
-							"mLocKeys": {
-								"keyName": "Buff_DragonSoul_Chemtech_Name",
-								"keyTooltip": "Buff_DragonSoul_ChemTech_Tooltip"
-							},
-							"__type": "TooltipInstanceBuff"
-						},
-						"__type": "BuffData"
-					},
-					"__type": "SpellObject"
+					"objectName": "SRX_DragonSoulBuffChemTech",
+					"dataValues": {
+						"TriggerThreshold": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+						"DR": [0.13, 0.13, 0.13, 0.13, 0.13, 0.13, 0.13],
+						"DamageAmp": [0.13, 0.13, 0.13, 0.13, 0.13, 0.13, 0.13]
+					}
 				}
 			},
 			"Hextech": {
@@ -539,165 +111,17 @@
 					}
 				},
 				"soul": {
-					"ObjectName": "SRX_DragonSoulBuffHextech",
-					"mScriptName": "SRX_DragonSoulBuffHextech",
-					"mSpell": {
-						"DataValues": [
-							{
-								"mName": "BaseSlowAmountMelee",
-								"mValues": [45, 45, 45, 45, 45, 45, 45],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BaseUnitsToHit",
-								"mValues": [4, 4, 4, 4, 4, 4, 4],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BaseBounceRange",
-								"mValues": [600, 600, 600, 600, 600, 600, 600],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BaseTriggerCD",
-								"mValues": [8, 8, 8, 8, 8, 8, 8],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "SlowDuration",
-								"mValues": [2, 2, 2, 2, 2, 2, 2],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "SlowDecayRanged",
-								"mValues": [0.05999999865889549, 0.05999999865889549, 0.05999999865889549, 0.05999999865889549, 0.05999999865889549, 0.05999999865889549, 0.05999999865889549],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "SlowDecayMelee",
-								"mValues": [0.10000000149011612, 0.10000000149011612, 0.10000000149011612, 0.10000000149011612, 0.10000000149011612, 0.10000000149011612, 0.10000000149011612],
-								"__type": "SpellDataValue"
-							},
-							{
-								"mName": "BaseSlowAmountRanged",
-								"mValues": [35, 35, 35, 35, 35, 35, 35],
-								"__type": "SpellDataValue"
-							}
-						],
-						"DataValuesModeOverride": {
-							"{bffdf499}": {
-								"SpellDataValues": [
-									{
-										"mName": "BaseTriggerCD",
-										"mValues": [12, 12, 12, 12, 12, 12, 12],
-										"__type": "SpellDataValue"
-									}
-								],
-								"__type": "SpellDataValueVector"
-							}
-						},
-						"mSpellCalculations": {
-							"TotalSlowAmountMelee": {
-								"mMultiplier": {
-									"mNumber": 0.009999999776482582,
-									"__type": "NumberCalculationPart"
-								},
-								"mFormulaParts": [
-									{
-										"mDataValue": "BaseSlowAmountMelee",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 12,
-										"mStatFormula": 2,
-										"mCoefficient": 0.004999999888241291,
-										"__type": "StatByCoefficientCalculationPart"
-									},
-									{
-										"mCoefficient": 0.009999999776482582,
-										"__type": "StatByCoefficientCalculationPart"
-									},
-									{
-										"mStat": 2,
-										"mStatFormula": 2,
-										"mCoefficient": 0.029999999329447746,
-										"__type": "StatByCoefficientCalculationPart"
-									}
-								],
-								"mDisplayAsPercent": true,
-								"__type": "GameCalculation"
-							},
-							"TotalDamage": {
-								"mFormulaParts": [
-									{
-										"mStartValue": 25,
-										"mEndValue": 50,
-										"__type": "ByCharLevelInterpolationCalculationPart"
-									}
-								],
-								"__type": "GameCalculation"
-							},
-							"TotalSlowAmountRanged": {
-								"mMultiplier": {
-									"mNumber": 0.009999999776482582,
-									"__type": "NumberCalculationPart"
-								},
-								"mFormulaParts": [
-									{
-										"mDataValue": "BaseSlowAmountRanged",
-										"__type": "NamedDataValueCalculationPart"
-									},
-									{
-										"mStat": 12,
-										"mStatFormula": 2,
-										"mCoefficient": 0.004999999888241291,
-										"__type": "StatByCoefficientCalculationPart"
-									},
-									{
-										"mCoefficient": 0.009999999776482582,
-										"__type": "StatByCoefficientCalculationPart"
-									},
-									{
-										"mStat": 2,
-										"mStatFormula": 2,
-										"mCoefficient": 0.029999999329447746,
-										"__type": "StatByCoefficientCalculationPart"
-									}
-								],
-								"mDisplayAsPercent": true,
-								"__type": "GameCalculation"
-							}
-						},
-						"mImgIconName": [
-							"DragonSoulIconHextech.dds"
-						],
-						"mClientData": {
-							"mTooltipData": {
-								"mObjectName": "SRX_DragonSoulBuffHextech",
-								"mFormat": "{d7c27163}",
-								"mLocKeys": {
-									"keyName": "Buff_DragonSoul_Hextech_Name",
-									"keySummary": "Spell_SRX_DragonSoulBuffHextech_Tooltip"
-								},
-								"__type": "TooltipInstanceSpell"
-							},
-							"__type": "SpellDataResourceClient"
-						},
-						"__type": "SpellDataResource"
-					},
-					"mBuff": {
-						"mTooltipData": {
-							"mObjectName": "SRX_DragonSoulBuffHextech",
-							"mFormat": "{2ca8f134}",
-							"mLocKeys": {
-								"keyName": "Buff_DragonSoul_Hextech_Name",
-								"keyTooltip": "Buff_DragonSoul_Hextech_Tooltip"
-							},
-							"__type": "TooltipInstanceBuff"
-						},
-						"__type": "BuffData"
-					},
-					"__type": "SpellObject"
+					"objectName": "SRX_DragonSoulBuffHextech",
+					"dataValues": {
+						"BaseSlowAmountMelee": [45, 45, 45, 45, 45, 45, 45],
+						"BaseUnitsToHit": [4, 4, 4, 4, 4, 4, 4],
+						"BaseBounceRange": [600, 600, 600, 600, 600, 600, 600],
+						"BaseTriggerCD": [8, 8, 8, 8, 8, 8, 8],
+						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
+						"SlowDecayRanged": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06],
+						"SlowDecayMelee": [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+						"BaseSlowAmountRanged": [35, 35, 35, 35, 35, 35, 35]
+					}
 				}
 			}
 		}

@@ -516,13 +516,23 @@ if (true || !miscData || miscData?.version !== latestVersion) {
 						))
 					: undefined;
 
+				const { ObjectName: soulObjectName, mSpell: { DataValues: soulDataValues } } = soulData;
+				const parsedSoulDataValues = soulDataValues?.length
+					? Object.fromEntries(soulDataValues.map(({ mName, mValues }: Record<string, number[]>) =>
+							[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
+						))
+					: undefined;
+
 				return [name, {
 					name,
 					stack: {
 						objectName: stackObjectName,
 						dataValues: parsedStackDataValues,
 					},
-					soul: soulData,
+					soul: {
+						objectName: soulObjectName,
+						dataValues: parsedSoulDataValues,
+					},
 				}];
 			}))),
 		} as unknown as NonNullable<(typeof miscData)>['data'],
@@ -549,7 +559,7 @@ if (true || !miscData || miscData?.version !== latestVersion) {
 		return [name, {
 			stack,
 		}];
-	}));
+	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
 
 	await miscFile.write(stringifyObject(miscData));
 	await textFile.write(stringifyObject(textData));
