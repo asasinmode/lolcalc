@@ -2468,22 +2468,28 @@
 		},
 		"dragons": {
 			"Cloud": {
-				"stack": "<titleLeft>Cloud Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffCloud:MSAmountPerStack*100@% Out Of Combat Move Speed and +@Spell.SRX_DragonBuffCloud:SRAmountPerStack*100@% Slow Resistance</mainText>"
+				"stack": "<titleLeft>Cloud Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffCloud:MSAmountPerStack*100@% Out Of Combat Move Speed and +@Spell.SRX_DragonBuffCloud:SRAmountPerStack*100@% Slow Resistance</mainText>",
+				"soul": "Gain @Spell.SRX_DragonSoulBuffCloud:PersistentMSValue*100@% Move Speed, increased by an additional @Spell.SRX_DragonSoulBuffCloud:MSAmount*100@% Move Speed for @Spell.SRX_DragonSoulBuffCloud:MSBuffDuration@ seconds after casting your ultimate. (@Spell.SRX_DragonSoulBuffCloud:MSBuffCooldown@ second cooldown). "
 			},
 			"Mountain": {
-				"stack": "<titleLeft>Mountain Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffMountain:BonusDefenses*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR></mainText>"
+				"stack": "<titleLeft>Mountain Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffMountain:BonusDefenses*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR></mainText>",
+				"soul": "Gain a <shield>@Spell.SRX_DragonSoulBuffMountain:TotalShield@ Shield</shield> after avoiding damage for @Spell.SRX_DragonSoulBuffMountain:TimeWithoutTakingDamage@ seconds."
 			},
 			"Infernal": {
-				"stack": "<titleLeft>Infernal Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffInfernal:ADandAPPercentIncrease*100@% <scaleAD>Attack Damage</scaleAD> and <scaleAP>Ability Power</scaleAP></mainText>"
+				"stack": "<titleLeft>Infernal Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffInfernal:ADandAPPercentIncrease*100@% <scaleAD>Attack Damage</scaleAD> and <scaleAP>Ability Power</scaleAP></mainText>",
+				"soul": "Damaging Abilities and Attacks create an explosion around the target, dealing <font color='#48C4B7'>@Spell.SRX_DragonSoulBuffInfernal:TotalDamage@ adaptive damage</font>."
 			},
 			"Ocean": {
-				"stack": "<titleLeft>Ocean Dragon</titleLeft><mainText>Restore <healing>@Spell.SRX_DragonBuffOcean:HealingPercent*100@% missing Health</healing> every @Spell.SRX_DragonBuffOcean:HealFrequency@ seconds</mainText>"
+				"stack": "<titleLeft>Ocean Dragon</titleLeft><mainText>Restore <healing>@Spell.SRX_DragonBuffOcean:HealingPercent*100@% missing Health</healing> every @Spell.SRX_DragonBuffOcean:HealFrequency@ seconds</mainText>",
+				"soul": "Restore <healing>@Spell.SRX_DragonSoulBuffOcean:TotalHeal@ Health</healing> and <scaleMana>@Spell.SRX_DragonSoulBuffOcean:TotalMana@ Mana</scaleMana> over @Spell.SRX_DragonSoulBuffOcean:HealDuration.0@ seconds upon damaging an enemy.<br><br><rules>Reduced to @Spell.SRX_DragonSoulBuffOcean:MinionPenalty*100@% versus minions and monsters.</rules>"
 			},
 			"Chemtech": {
-				"stack": "<titleLeft>Chemtech Dragon</titleLeft><br>Gain %i:scaleTenacity% @Spell.SRX_DragonBuffChemtech:TenacityPerStack*100@% Tenacity and %i:scaleHealShield% @Spell.SRX_DragonBuffChemtech:HealShieldPerStack*100@% Heal and Shield Power per stack."
+				"stack": "<titleLeft>Chemtech Dragon</titleLeft><br>Gain %i:scaleTenacity% @Spell.SRX_DragonBuffChemtech:TenacityPerStack*100@% Tenacity and %i:scaleHealShield% @Spell.SRX_DragonBuffChemtech:HealShieldPerStack*100@% Heal and Shield Power per stack.",
+				"soul": "While below @spell.SRX_DragonSoulBuffChemtech:TriggerThreshold*100@% Health, gain @spell.SRX_DragonSoulBuffChemtech:DR*100@% Damage Resist and deal @spell.SRX_DragonSoulBuffChemtech:DamageAmp*100@% increased damage."
 			},
 			"Hextech": {
-				"stack": "<titleLeft>Hextech Dragon</titleLeft><br>Grants %i:scaleCooldown% @Spell.SRX_DragonBuffHextech:AbilityHaste@ Ability Haste and %i:scaleAS% @Spell.SRX_DragonBuffHextech:AttackSpeed*100@% Attack Speed per stack."
+				"stack": "<titleLeft>Hextech Dragon</titleLeft><br>Grants %i:scaleCooldown% @Spell.SRX_DragonBuffHextech:AbilityHaste@ Ability Haste and %i:scaleAS% @Spell.SRX_DragonBuffHextech:AttackSpeed*100@% Attack Speed per stack.",
+				"soul": "When you damage an enemy with an attack or ability, also strike them with lightning, dealing <trueDamage>@Spell.SRX_DragonSoulBuffHextech:TotalDamage@</trueDamage> and slowing them by (%i:meleeActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountMelee@% || %i:rangedActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountRanged@%) decaying over @Spell.SRX_DragonSoulBuffHextech:SlowDuration@ seconds. Lightning then chains to up to @Spell.SRX_DragonSoulBuffHextech:BaseUnitsToHit@ nearby enemies, repeating the effect.<br><br>This slow stacks from multiple sources. The slow decays slower when striking ranged opponents."
 			}
 		}
 	}

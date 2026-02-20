@@ -538,7 +538,7 @@ if (true || !miscData || miscData?.version !== latestVersion) {
 		} as unknown as NonNullable<(typeof miscData)>['data'],
 	};
 
-	textData.data.dragons ||= Object.fromEntries(DRAGONS.map(([name, spellKey]) => {
+	textData.data.dragons = Object.fromEntries(DRAGONS.map(([name, spellKey]) => {
 		const stackData = sharedData[`Shared/Spells/SRX_DragonBuff${spellKey || name}`];
 		const soulData = sharedData[`Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`];
 
@@ -547,6 +547,7 @@ if (true || !miscData || miscData?.version !== latestVersion) {
 		const allSpells = [stackAbility, soulAbility];
 
 		const { mBuff: { mDescription: stackDescriptionKey } } = stackData;
+		const { mBuff: { mTooltipData: { mLocKeys: { keyTooltip: soulTooltipKey } } } } = soulData;
 
 		const stack = getStringtableValue(stackDescriptionKey, {
 			category: 'misc',
@@ -555,10 +556,15 @@ if (true || !miscData || miscData?.version !== latestVersion) {
 			variableType: 'championAbility',
 			variableValueParameters: [stackAbility],
 		});
+		const soul = getStringtableValue(soulTooltipKey, {
+			category: 'misc',
+			key: `dragon soul ${name}`,
+			variableSourceKeys: ['DataValues'],
+			variableType: 'championAbility',
+			variableValueParameters: [soulAbility],
+		});
 
-		return [name, {
-			stack,
-		}];
+		return [name, { stack, soul }];
 	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
 
 	await miscFile.write(stringifyObject(miscData));
