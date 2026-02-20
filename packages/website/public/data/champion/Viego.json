@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Blade of the Ruined King",
+					"objectName": "ViegoQ",
 					"image": "assets/characters/viego/hud/icons2d/viego_q.png",
 					"tooltip": " <spellPassive>Passive:</spellPassive> Viego's Attacks deal an additional <physicalDamage>@TotalPercentHealthOnHit@ current Health physical damage</physicalDamage>. His first Attack against an enemy he has recently damaged with an Ability hits a second time, dealing <physicalDamage>@SecondAttackDamage@ physical damage</physicalDamage> and restoring <healing>@HealModVsChamps*100@% of damage dealt as Health</healing>. These bonuses are kept during <keywordMajor>Possession</keywordMajor>.<br><br><spellActive>Active: </spellActive>Viego stabs forward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"cooldownTime": [5, 5, 4.5, 4, 3.5, 3, 3],
@@ -152,8 +153,7 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoQAbility/ViegoQ",
-					"tooltipExtendedBelowLine": "<rules>The second strike can Critically Strike and applies %i:OnHit% <OnHit>On-Hit</OnHit> effects while not <keywordMajor>Possessing</keywordMajor> an enemy. Its healing is decreased to @HealModVsMonsters*100@% vs. jungle monsters and @HealModVsMinions*100@% vs. minions. <br>The bonus %i:OnHit% <OnHit>On-Hit</OnHit> damage can critically strike for <physicalDamage>@HealthCritDamage@ current Health</physicalDamage> and deals a minimum of <physicalDamage>@MinDamageOnHit@ damage</physicalDamage>. It deals a max of <physicalDamage>@MonsterCapOnHit@ damage</physicalDamage> vs. jungle monsters.<br>This Ability's cast time is reduced with Attack Speed. Its damage scales with Critical Strike Chance and Damage at @ActiveCritMod*100@% effectiveness.</rules>"
+					"dataKey": "Characters/Viego/Spells/ViegoQAbility/ViegoQ"
 				}
 			]
 		},
@@ -162,6 +162,7 @@
 			"variants": [
 				{
 					"name": "Spectral Maw",
+					"objectName": "ViegoW",
 					"image": "assets/characters/viego/hud/icons2d/viego_w.png",
 					"tooltip": "<charge>Begin Charging:</charge> Viego begins gathering Mist, <status>Slowing</status> himself by @SelfSlowPercent*100@%.<br><br><release>Release:</release> Viego dashes forward and hurls the gathered Mist. Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stuns</status> the first enemy hit for @Stunduration@ to @MaxStunTT@ seconds based on charge time.<br>",
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
@@ -192,8 +193,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoWAbility/ViegoW",
-					"tooltipExtendedBelowLine": "<rules>This Ability's Cooldown is set to @CDWheninterrupted@ seconds when interrupted.</rules>"
+					"dataKey": "Characters/Viego/Spells/ViegoWAbility/ViegoW"
 				}
 			]
 		},
@@ -202,6 +202,7 @@
 			"variants": [
 				{
 					"name": "Harrowed Path",
+					"objectName": "ViegoE",
 					"image": "assets/characters/viego/hud/icons2d/viego_e.png",
 					"tooltip": "Viego sends forth a spectre to haunt the first terrain hit, surrounding it with Mist for @MistDuration@ seconds. Viego gains <keywordStealth>Camouflage</keywordStealth>, <speed>@TotalMoveSpeed@ Move Speed</speed>, and <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> while inside the Mist.",
 					"cooldownTime": [14, 14, 12, 10, 8, 6, 6],
@@ -228,8 +229,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoEAbility/ViegoE",
-					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}<br>Viego reveals himself for @RestealthTime@ seconds whenever he attacks or uses an Ability.</rules>"
+					"dataKey": "Characters/Viego/Spells/ViegoEAbility/ViegoE"
 				}
 			]
 		},
@@ -238,6 +238,7 @@
 			"variants": [
 				{
 					"name": "Heartbreaker",
+					"objectName": "ViegoR",
 					"image": "assets/characters/viego/hud/icons2d/viego_r.png",
 					"tooltip": "Viego discards any souls he is currently <keywordMajor>Possessing</keywordMajor> and teleports. On arrival he Attacks the champion with the lowest percent Health, briefly <status>Slowing</status> them by @SlowPercent*100@% and dealing <physicalDamage>@TotalDamage@ + @TotalPercentHealth@% missing Health physical damage</physicalDamage>. Other nearby enemies are <status>Knocked Back</status> and take <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
@@ -301,8 +302,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Viego/Spells/ViegoRAbility/ViegoR",
-					"tooltipExtendedBelowLine": "<rules>This Ability applies on-hit effects to the primary target and spell effects to everything else.<br>Damage scales with Critical Strike Chance and Damage at @CritMod*100@% effectiveness.</rules>"
+					"dataKey": "Characters/Viego/Spells/ViegoRAbility/ViegoR"
 				}
 			]
 		},
@@ -311,6 +311,7 @@
 			"variants": [
 				{
 					"name": "Sovereign's Domination",
+					"objectName": "ViegoPassive",
 					"image": "assets/characters/viego/hud/icons2d/viego_passive.png",
 					"tooltip": "{{Spell_ViegoPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViegoPassive_Tooltip}}<br><br><rules>Viego keeps his summoner spells, runes, and trinkets during <keywordMajor>Possession</keywordMajor> and cannot use active or consumable items. Passive item Cooldowns are shared across <keywordMajor>Possessions</keywordMajor>.</rules>",

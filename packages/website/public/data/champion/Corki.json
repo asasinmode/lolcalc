@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Phosphorus Bomb",
+					"objectName": "PhosphorusBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_phosphorusbomb.png",
 					"tooltip": "Corki lobs a bomb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The area and champions hit are revealed for @RevealDuration@ seconds.",
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -72,6 +73,7 @@
 			"variants": [
 				{
 					"name": "Valkyrie",
+					"objectName": "CarpetBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_valkyrie.png",
 					"tooltip": "Corki flies over and scorches a path, burning it for @TrailDuration@ seconds. Enemies in the fire take up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> over the duration.",
 					"mana": [80, 85, 90, 95, 100, 100],
@@ -131,6 +133,7 @@
 			"variants": [
 				{
 					"name": "Gatling Gun",
+					"objectName": "GGun",
 					"image": "assets/characters/corki/hud/icons2d/corki_gatlinggun.png",
 					"tooltip": "Corki fires a gatling gun in front of him, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> over @SprayDuration@ seconds and shredding up to <scaleArmor>@ShredMax*-1@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.",
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -160,8 +163,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Corki/Spells/GGunAbility/GGun",
-					"tooltipExtendedBelowLine": "<rules>The shred lingers for @ShredDuration@ seconds after being hit.</rules>"
+					"dataKey": "Characters/Corki/Spells/GGunAbility/GGun"
 				}
 			]
 		},
@@ -170,6 +172,7 @@
 			"variants": [
 				{
 					"name": "Missile Barrage",
+					"objectName": "MissileBarrage",
 					"image": "assets/characters/corki/hud/icons2d/corki_missilebarrage.png",
 					"tooltip": "Corki fires a missile that explodes on the first enemy hit, dealing <physicalDamage>@RSmallMissileDamage@ physical damage</physicalDamage> to surrounding enemies. Every third missile instead deals <physicalDamage>@RBigMissileDamage@ physical damage</physicalDamage>.<br><br>This Ability has up to @MaxAmmoTOOLTIP@ charges. Basic attacks against champions reduce the time between charges by <attention>@AttackRefund@</attention> seconds on hit.",
 					"mana": [35, 35, 35, 35, 35, 35],
@@ -232,6 +235,7 @@
 			"variants": [
 				{
 					"name": "Hextech Munitions",
+					"objectName": "RapidReload",
 					"image": "assets/characters/corki/hud/icons2d/corki_rapidreload.png",
 					"tooltip": "Corki's Attacks and <keywordMajor>Spellblades</keywordMajor> deal <trueDamage>@AttackConversion*100@% bonus true damage</trueDamage>.<br>Attacks: <trueDamage>@BasicAttackTOOLTIP@</trueDamage>.<br>Critical Strikes: <trueDamage>@CriticalStrikeTOOLTIP@</trueDamage>.",
 					"dataValues": {

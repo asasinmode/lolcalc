@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
+					"objectName": "ApheliosCalibrumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_calibrum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
@@ -188,6 +189,7 @@
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
+					"objectName": "ApheliosSeverumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_severum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
@@ -431,6 +433,7 @@
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
+					"objectName": "ApheliosGravitumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_gravitum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
@@ -580,6 +583,7 @@
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
+					"objectName": "ApheliosInfernumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_infernum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
@@ -745,6 +749,7 @@
 				},
 				{
 					"name": "{{ Spell_ApheliosQ_Name_@f7@ }}",
+					"objectName": "ApheliosCrescendumQ",
 					"image": "assets/characters/aphelios/hud/icons2d/q_crescendum.png",
 					"tooltip": "{{ Spell_ApheliosQ_Tooltip_@f3@ }}",
 					"tooltipExtended": "{{ Spell_ApheliosQ_TooltipExtended_@f3@ }}<br><br><rules>Off-Hand Weapon Reminder - {{ ApheliosGun_LoreName_@f5@ }}: {{ Spell_ApheliosQ_Offhand_Description_@f5@ }} </rules>",
@@ -952,6 +957,7 @@
 			"variants": [
 				{
 					"name": "Moonlight Vigil",
+					"objectName": "ApheliosR",
 					"image": "assets/characters/aphelios/hud/icons2d/apheliosr.png",
 					"tooltip": "Aphelios fires a concentrated blast of moonlight that explodes when it hits a champion, dealing <physicalDamage>@MaxDamage@ physical damage</physicalDamage> to surrounding enemies.<br><br>Then, Aphelios attacks all champions hit with his main-hand weapon. {{ Spell_ApheliosR_WeaponMod_@f1@ }}",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -1063,8 +1069,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Aphelios/Spells/ApheliosRAbility/ApheliosR",
-					"tooltipExtendedBelowLine": "<rules>The Attacks apply on-hits. Critical strikes deal @CritDamageModCalc@ of normal damage instead.</rules>"
+					"dataKey": "Characters/Aphelios/Spells/ApheliosRAbility/ApheliosR"
 				}
 			]
 		},
@@ -1073,6 +1078,7 @@
 			"variants": [
 				{
 					"name": "The Hitman and the Seer",
+					"objectName": "ApheliosP",
 					"image": "assets/characters/aphelios/hud/icons2d/apheliosp.png",
 					"tooltip": "Aphelios wields 5 Lunari Weapons made by his sister, Alune. He has access to two at a time: one main-hand and one off-hand. Each weapon has a unique Attack and Ability [@spell.ApheliosCalibrumQ:Hotkey@]. Attacks and Abilities consume a weapon's ammo. When out of ammo, Aphelios discards the weapon and Alune summons the next one. <br><br>Aphelios unlocks his weapon's Ability [@spell.ApheliosCalibrumQ:Hotkey@] at level 2 and his Ultimate at level 6. Instead of powering up his Abilities, Aphelios' rank-ups grant him permanent stats.<br><br><passive>Lunari Weapon Order:</passive><li>{{ Spell_ApheliosP_GunShortDesc_@f1@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f2@ }}</li><font color='#424242'><li>{{ Spell_ApheliosP_GunShortDesc_@f3@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f4@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f5@ }}</li></font>",
 					"tooltipExtended": "Aphelios wields 5 Lunari Weapons made by his sister Alune. He has access to two at a time: one main-hand and one off-hand. Each weapon has a unique Attack and Ability [@spell.ApheliosCalibrumQ:Hotkey@]. Attacks and Abilities consume a weapon's ammo. When out of ammo, Aphelios discards the weapon and Alune summons the next one. <br><br>Aphelios unlocks his weapon's Ability [@spell.ApheliosCalibrumQ:Hotkey@] at level 2 and his Ultimate at level 6. Instead of powering up his Abilities, Aphelios' rank-ups grant him permanent stats:<li>{{ Spell_ApheliosP_Buff_AD }} [@spell.ApheliosCalibrumQ:Hotkey@]: <physicalDamage>@spell.ApheliosP:AttackDamage@ / @AttackDamageMax@</physicalDamage></li><li>{{ Spell_ApheliosP_Buff_AS }} [@spell.ApheliosW:Hotkey@]: <attackSpeed>@spell.ApheliosP:AttackSpeed@ / @AttackSpeedMax@</attackSpeed></li><li>{{ Spell_ApheliosP_Buff_AP }} [@spell.ApheliosE:Hotkey@]: <scaleLethality>@spell.ApheliosP:ArPenBonus@ / @ArPenBonusMax@</scaleLethality></li><br><br><passive>Lunari Weapon Order:</passive><li>{{ Spell_ApheliosP_GunShortDesc_@f1@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f2@ }}</li><font color='#424242'><li>{{ Spell_ApheliosP_GunShortDesc_@f3@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f4@ }}</li><li>{{ Spell_ApheliosP_GunShortDesc_@f5@ }}</li></font>",

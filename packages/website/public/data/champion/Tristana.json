@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Rapid Fire",
+					"objectName": "TristanaQ",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_q.png",
 					"tooltip": "Tristana goes full-auto, gaining <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.",
 					"mana": [30, 35, 40, 45, 50, 50],
@@ -50,6 +51,7 @@
 			"variants": [
 				{
 					"name": "Rocket Jump",
+					"objectName": "TristanaW",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_w.png",
 					"tooltip": "Tristana launches herself, dealing <magicDamage>@LandingDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowMod*-100@% for @SlowDuration@ seconds upon landing.<br><br>Champion takedowns and max stack <spellName>{{Spell_TristanaE_Name}}</spellName> detonations on champions refresh this Ability's Cooldown.",
 					"mana": [30, 35, 40, 45, 50, 50],
@@ -91,6 +93,7 @@
 			"variants": [
 				{
 					"name": "Explosive Charge",
+					"objectName": "TristanaE",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>@PassiveDamage@ magic damage</magicDamage> to surrounding enemies.<br><br><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>@ActiveDamage@ physical damage</physicalDamage> to surrounding enemies after @ActiveDuration@ seconds. The damage is increased by @ActivePerStackAmp*100@% each time Tristana hits an Attack or Ability (max 4 stacks).<br><br>At @ActiveMaxStacks@ stacks, the bomb explodes immediately (max <physicalDamage>@ActiveMaxDamage@ physical damage</physicalDamage>).",
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -183,8 +186,7 @@
 							"mModifiedGameCalculation": "ActiveDamage"
 						}
 					},
-					"dataKey": "Characters/Tristana/Spells/TristanaEAbility/TristanaE",
-					"tooltipExtendedBelowLine": "<rules>Active damage is increased by Critical Strike Chance and Critical Strike Damage at @CritChanceModifier*100@% effectiveness.<br>The detonation radius is twice as large if used on a turret.</rules>"
+					"dataKey": "Characters/Tristana/Spells/TristanaEAbility/TristanaE"
 				}
 			]
 		},
@@ -193,6 +195,7 @@
 			"variants": [
 				{
 					"name": "Buster Shot",
+					"objectName": "TristanaR",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_r.png",
 					"tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for @StunDuration@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -223,8 +226,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Tristana/Spells/TristanaRAbility/TristanaR",
-					"tooltipExtendedBelowLine": "<rules>If this Ability applies the final stack of <spellName>{{Spell_TristanaE_Name}}</spellName>, it explodes after the unit is <status>Knocked Back</status>.</rules>"
+					"dataKey": "Characters/Tristana/Spells/TristanaRAbility/TristanaR"
 				}
 			]
 		},
@@ -233,6 +235,7 @@
 			"variants": [
 				{
 					"name": "Draw a Bead",
+					"objectName": "TristanaPassive",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_passive.png",
 					"tooltip": "Tristana's Attack Range and the range of <spellName>{{Spell_TristanaE_Name}}</spellName> and <spellName>{{Spell_TristanaR_Name}}</spellName> are increased by @BonusPassiveRange@.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],

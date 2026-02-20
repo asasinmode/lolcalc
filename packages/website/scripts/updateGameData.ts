@@ -9,6 +9,7 @@ import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion';
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
+
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable';
 import { ALL_RUNE_PATHS } from '../app/utils/rune';
 
@@ -491,7 +492,7 @@ if (await miscFile.exists()) {
 // scoreboard atlas thingy https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
 // atlas https://raw.communitydragon.org/latest/game/assets/ux/srx/dragonuiprototype.png
 
-if (true || !miscData || miscData?.version !== latestVersion) {
+if (!miscData || miscData?.version !== latestVersion) {
 	console.log('misc data not present or outdated, fetching...');
 
 	const sharedData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/shared.cdtb.bin.json`, 'game/shared.cdtb.bin.json');
@@ -820,8 +821,8 @@ function createRuneSlotData(data: any) {
 
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
-		tooltipShort: getStringtableValue(mShortDescLocalizationKey, 'rune slot', { ...variableDebug, key: `${mPerkName}-tooltipShort` }),
-		tooltipLong: getStringtableValue(mLongDescLocalizationKey, 'rune slot', { ...variableDebug, key: `${mPerkName}-tooltipLong` }),
+		tooltipShort: getStringtableValue(mShortDescLocalizationKey, { ...variableDebug, key: `${mPerkName}-tooltipShort` }),
+		tooltipLong: getStringtableValue(mLongDescLocalizationKey, { ...variableDebug, key: `${mPerkName}-tooltipLong` }),
 		// TODO add debug when implementing, replace long with {{}} if it uses it and is in the stringtable, similar to variant.tooltip = `{{${mLocKeys.keyTooltip}}}` in championAbilityVariants
 		tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, 'rune slot'),
 	};
@@ -1057,7 +1058,7 @@ function championAbilityVariants(
 			throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
 		}
 
-		const { ObjectName, mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
+		const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
 
 		if (i === 0) {
 			if (!mClientData) {
@@ -1089,7 +1090,7 @@ function championAbilityVariants(
 
 		const variant = {
 			name: undefined,
-			objectName: ObjectName,
+			objectName: variantData.ObjectName,
 			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
 			tooltip: undefined,
 			tooltipExtended: undefined,
@@ -1129,10 +1130,13 @@ function championAbilityVariants(
 			mLocKeys.keyTooltipExtended,
 			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended` } : `${variantDataKey} tooltip extended`,
 		);
-		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine && getStringtableValue(
-			mLocKeys.keyTooltipExtendedBelowLine,
-			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended below line` } : `${variantDataKey} tooltip extended`,
-		);
+		// TODO TMP some abilities have it but found in stringtable, they're probably hashed so uncomment it when hashed versions are tried and resolved
+		if (abilityName === 'passive') {
+			variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine && getStringtableValue(
+				mLocKeys.keyTooltipExtendedBelowLine,
+				{ ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended below line` },
+			);
+		}
 
 		/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
 		if (mLocKeys.keyTooltip && (mLocKeys.keyTooltip.toLowerCase() in stringtableObject.stringtable)) {

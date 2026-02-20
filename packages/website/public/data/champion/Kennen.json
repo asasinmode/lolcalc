@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Thundering Shuriken",
+					"objectName": "KennenShurikenHurlMissile1",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_q.png",
 					"tooltip": "Kennen throws a shuriken, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.",
 					"mana": [60, 55, 50, 45, 40, 35],
@@ -65,6 +66,7 @@
 			"variants": [
 				{
 					"name": "Electrical Surge",
+					"objectName": "KennenBringTheLight",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.<br>",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -116,8 +118,7 @@
 						"1": [25, 25, 25, 25, 25, 25, 25],
 						"2": [0.7, 0.7, 0.7, 0.7, 0.7, 0.7, 0.7]
 					},
-					"dataKey": "Characters/Kennen/Spells/KennenBringTheLightAbility/KennenBringTheLight",
-					"tooltipExtendedBelowLine": "<rules>The passive also applies <spellName>Mark of the Storm</spellName>.<br>Attacking structures will stack the passive, but not expend it. The active automatically hits enemies inside of <spellName>Slicing Maelstrom</spellName>.</rules>"
+					"dataKey": "Characters/Kennen/Spells/KennenBringTheLightAbility/KennenBringTheLight"
 				}
 			]
 		},
@@ -126,6 +127,7 @@
 			"variants": [
 				{
 					"name": "Lightning Rush",
+					"objectName": "KennenLightningRush",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_e.png",
 					"tooltip": "Kennen turns into a ball of lightning, gaining <speed>@MovementSpeed*100@% Move Speed</speed>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through, and becoming Ghosted for @DurationAsBall@ seconds. If Kennen damages at least one enemy, he gains @EnergyRefund@ Energy. <br><br>After this ability ends, Kennen gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @DurationAfterBall@ seconds. Kennen can <recast>Recast</recast> to end this Ability early.",
 					"mana": [80, 80, 80, 80, 80, 80],
@@ -165,8 +167,7 @@
 						"4": [2, 2, 2, 2, 2, 2, 2],
 						"6": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/Kennen/Spells/KennenLightningRushAbility/KennenLightningRush",
-					"tooltipExtendedBelowLine": "<rules>Ghosted units can pass through other units.<br>Deals @DamageToMinions*100@% damage to minions and jungle monsters.</rules>"
+					"dataKey": "Characters/Kennen/Spells/KennenLightningRushAbility/KennenLightningRush"
 				}
 			]
 		},
@@ -175,6 +176,7 @@
 			"variants": [
 				{
 					"name": "Slicing Maelstrom",
+					"objectName": "KennenShurikenStorm",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_r.png",
 					"tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>@PerTickDamageCalculated@ magic damage</magicDamage> to all nearby enemies every @KennenRTickRate@ seconds, and gaining <scaleArmor>@KennenRDefenses@ Armor</scaleArmor> and <scaleMR>@KennenRDefenses@ Magic Resist</scaleMR> for @KennenRDuration@ seconds. Successive hits deal @DamageAmp*100@% increased damage for each hit the enemy has already suffered.",
 					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
@@ -201,8 +203,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kennen/Spells/KennenShurikenStormAbility/KennenShurikenStorm",
-					"tooltipExtendedBelowLine": "<rules>Enemies can only receive 3 stacks of <spellName>Mark of the Storm</spellName> from this ability.</rules>"
+					"dataKey": "Characters/Kennen/Spells/KennenShurikenStormAbility/KennenShurikenStorm"
 				}
 			]
 		},
@@ -211,6 +212,7 @@
 			"variants": [
 				{
 					"name": "Mark of the Storm",
+					"objectName": "KennenPassive",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_passive.png",
 					"tooltip": "{{Spell_KennenPassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_KennenPassive_Tooltip }}<br><rules>If an enemy is <status>Stunned</status> more than once by this ability within @DiminishingReturnDuration@ seconds, they are instead <status>Stunned</status> for @ReducedStunDuration@ seconds.</rules>",

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Double Up",
+					"objectName": "MissFortuneRicochetShot",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png",
 					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -106,8 +107,7 @@
 						"7": [110, 110, 110, 110, 110, 110, 110],
 						"8": [160, 160, 160, 160, 160, 160, 160]
 					},
-					"dataKey": "Characters/MissFortune/Spells/MissFortuneRicochetShotAbility/MissFortuneRicochetShot",
-					"tooltipExtendedBelowLine": "<rules>Both strikes apply on-hit effects.</rules>"
+					"dataKey": "Characters/MissFortune/Spells/MissFortuneRicochetShotAbility/MissFortuneRicochetShot"
 				}
 			]
 		},
@@ -116,6 +116,7 @@
 			"variants": [
 				{
 					"name": "Strut",
+					"objectName": "MissFortuneViciousStrikes",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png",
 					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
 					"mana": [45, 45, 45, 45, 45, 45],
@@ -149,6 +150,7 @@
 			"variants": [
 				{
 					"name": "Make It Rain",
+					"objectName": "MissFortuneScattershot",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png",
 					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
 					"mana": [80, 80, 80, 80, 80, 80],
@@ -205,6 +207,7 @@
 			"variants": [
 				{
 					"name": "Bullet Time",
+					"objectName": "MissFortuneBulletTime",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png",
 					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -279,6 +282,7 @@
 			"variants": [
 				{
 					"name": "Love Tap",
+					"objectName": "MissFortunePassive",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_w.png",
 					"tooltip": "{{Spell_MissFortunePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MissFortunePassive_Tooltip}}<br><br><rules>Deals <physicalDamage>@MinionDamage@</physicalDamage> damage to minions.</rules>",

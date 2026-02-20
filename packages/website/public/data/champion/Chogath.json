@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Rupture",
+					"objectName": "Rupture",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png",
 					"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"mana": [50, 50, 50, 50, 50, 50],
@@ -71,6 +72,7 @@
 			"variants": [
 				{
 					"name": "Feral Scream",
+					"objectName": "FeralScream",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png",
 					"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"mana": [70, 75, 80, 85, 90, 95],
@@ -103,6 +105,7 @@
 			"variants": [
 				{
 					"name": "Vorpal Spikes",
+					"objectName": "VorpalSpikes",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png",
 					"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds.",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -153,8 +156,7 @@
 							"mPrecision": 1
 						}
 					},
-					"dataKey": "Characters/Chogath/Spells/VorpalSpikesAbility/VorpalSpikes",
-					"tooltipExtendedBelowLine": "<rules><spellName>Feast</spellName> stacks increase the width of the spikes and the max Health damage by @FeastStackMultiplier@% per stack.<br>Percent Health damage against monsters is replaced with @ModifiedMonsterCap@.</rules>"
+					"dataKey": "Characters/Chogath/Spells/VorpalSpikesAbility/VorpalSpikes"
 				}
 			]
 		},
@@ -163,6 +165,7 @@
 			"variants": [
 				{
 					"name": "Feast",
+					"objectName": "Feast",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png",
 					"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. ",
 					"mana": [100, 100, 100, 60, 60, 0],
@@ -236,8 +239,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Chogath/Spells/FeastAbility/Feast",
-					"tooltipExtendedBelowLine": "<rules>Current minion and non-epic jungle monster stacks:</rules> <statTracking>@f3@/@RMinionMaxStacks@</statTracking><br><rules>Cho'Gath gains bonus attack and <spellName>Feast</spellName> cast range based upon his stacks:<br>@AttackRangePerStack@ Attack Range per stack (max @MaxBonusAttackRange@).<br>@CastRangePerStack@ Cast Range per stack (max @MaxBonusCastRange@).</rules>"
+					"dataKey": "Characters/Chogath/Spells/FeastAbility/Feast"
 				}
 			]
 		},
@@ -246,6 +248,7 @@
 			"variants": [
 				{
 					"name": "Carnivore",
+					"objectName": "Carnivore",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_tailspike.png",
 					"tooltip": "Killing an enemy restores <scaleLevel>@ChogathCarnivoreHeal@</scaleLevel> Health and <scaleLevel>@ChogathCarnivoreMana@</scaleLevel> Mana.",
 					"spellCalculations": {

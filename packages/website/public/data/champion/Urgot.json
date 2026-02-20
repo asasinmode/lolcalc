@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Corrosive Charge",
+					"objectName": "UrgotQ",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_q.png",
 					"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.",
 					"mana": [70, 70, 70, 70, 70, 70],
@@ -70,6 +71,7 @@
 			"variants": [
 				{
 					"name": "Purge",
+					"objectName": "UrgotW",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @Effect8Amount@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @Effect2Amount@% <status>Slow</status> resistance, but loses <speed>@Effect5Amount@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
 					"mana": [40, 30, 20, 10, 0, 0],
@@ -122,8 +124,7 @@
 						"8": [12, 12, 12, 12, 12, 12, 12],
 						"9": [50, 50, 50, 50, 50, 50, 50]
 					},
-					"dataKey": "Characters/Urgot/Spells/UrgotWAbility/UrgotW",
-					"tooltipExtendedBelowLine": "<rules>The shots apply On-Hit effects at @OnHitDamageReduction*100@% damage. They cannot critically strike.<br>Shots deal a minimum of @Effect10Amount@ damage to minions and jungle monsters.<br>Urgot can move through minions and non-epic jungle monsters while firing.</rules>"
+					"dataKey": "Characters/Urgot/Spells/UrgotWAbility/UrgotW"
 				}
 			]
 		},
@@ -132,6 +133,7 @@
 			"variants": [
 				{
 					"name": "Disdain",
+					"objectName": "UrgotE",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_e.png",
 					"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>.",
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -184,8 +186,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Urgot/Spells/UrgotEAbility/UrgotE",
-					"tooltipExtendedBelowLine": "<rules>Cannot cross terrain.</rules>"
+					"dataKey": "Characters/Urgot/Spells/UrgotEAbility/UrgotE"
 				}
 			]
 		},
@@ -194,6 +195,7 @@
 			"variants": [
 				{
 					"name": "Fear Beyond Death",
+					"objectName": "UrgotR",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_r.png",
 					"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -225,8 +227,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotR",
-					"tooltipExtendedBelowLine": "<rules>This Ability will automatically <recast>Recast</recast> at the end of the duration if the victim is under the execution threshold.</rules>"
+					"dataKey": "Characters/Urgot/Spells/UrgotRAbility/UrgotR"
 				}
 			]
 		},
@@ -235,6 +236,7 @@
 			"variants": [
 				{
 					"name": "Echoing Flames",
+					"objectName": "UrgotPassive",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_passive.png",
 					"tooltip": "{{Spell_UrgotPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_UrgotPassive_Tooltip}}<br><br><rules>Deals a max of <physicalDamage>@MonsterCap@ damage</physicalDamage> to jungle monsters.</rules>",

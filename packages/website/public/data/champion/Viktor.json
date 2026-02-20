@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Siphon Power",
+					"objectName": "ViktorQ",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_q1.viktorvgu.png",
 					"tooltip": "Viktor blasts an enemy, dealing <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and granting Viktor <shield>@ShieldLevelScaling@ Shield</shield> for @BuffDuration@ seconds.<br><br>Viktor's next Attack within 4 seconds deals <magicDamage>@AttackTotalDMG@ magic damage</magicDamage>.<br><br><keywordMajor>Upgraded:</keywordMajor> Grants <shield>@TotalAugmentedShieldValue@ Shield</shield> and Viktor additionally gains <speed>@AugmentMoveSpeedBonus@% Move Speed</speed> for @BuffDuration@ seconds.",
 					"mana": [45, 50, 55, 60, 65, 70],
@@ -121,6 +122,7 @@
 			"variants": [
 				{
 					"name": "Gravity Field",
+					"objectName": "ViktorW",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_w1.viktorvgu.png",
 					"tooltip": "Viktor deploys a gravitational imprisonment device for @FieldDuration@ seconds, <status>Slowing</status> enemies inside it by @SlowPotency*-1@%. Enemies who remain within its radius for 1.25 seconds are <status>Stunned</status> for @StunDuration@ seconds.<br><br><keywordMajor>Upgraded Passive:</keywordMajor> Viktor's Abilities <status>Slow</status> by @AugmentSlow@% for 1 second.<br><br><br>",
 					"mana": [65, 65, 65, 65, 65, 65],
@@ -135,8 +137,7 @@
 						"AugmentSlow": [20, 20, 20, 20, 20, 20, 20],
 						"Size": [275, 275, 275, 275, 275, 275, 275]
 					},
-					"dataKey": "Characters/Viktor/Spells/ViktorWAbility/ViktorW",
-					"tooltipExtendedBelowLine": "<rules>Enemies that are <status>Stunned</status> by this Ability are also <status>Knocked Down</status>.</rules>"
+					"dataKey": "Characters/Viktor/Spells/ViktorWAbility/ViktorW"
 				}
 			]
 		},
@@ -145,6 +146,7 @@
 			"variants": [
 				{
 					"name": "Hextech Ray",
+					"objectName": "ViktorE",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_e1.viktorvgu.png",
 					"tooltip": "Viktor fires a hextech ray in a chosen direction, dealing <magicDamage>@LaserDamage@ magic damage</magicDamage> to any enemies it hits.<br><br><keywordMajor>Upgraded:</keywordMajor> An aftershock follows Hextech Ray, dealing <magicDamage>@AftershockDamage@ magic damage</magicDamage>.<br><br><br>",
 					"mana": [60, 70, 80, 90, 100, 100],
@@ -213,6 +215,7 @@
 			"variants": [
 				{
 					"name": "Arcane Storm",
+					"objectName": "ViktorR",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_r1.viktorvgu.png",
 					"tooltip": "Viktor conjures an Arcane Storm in an area for @StormDuration@ seconds, which instantly deals <magicDamage>@InitialBurstDamage@ magic damage</magicDamage> followed by <magicDamage>@SubsequentBurstDamage@ magic damage</magicDamage> per second to surrounding enemies. The storm automatically follows champions it has recently damaged.<br><br><recast>Recast:</recast> Viktor can manually move the storm.<br><br><keywordMajor>Upgraded:</keywordMajor> The storm moves @AugmentBoost*100@% faster. If a champion that the storm has damaged dies, the storm increases its size and its duration by @Tooltip_DurationExtension@ seconds (up to @MaxGrowths@ times).<br><br>",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -271,8 +274,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Viktor/Spells/ViktorRAbility/ViktorR",
-					"tooltipExtendedBelowLine": "<rules>When the storm appears it interrupts channeled Abilities.<br>The farther the storm is from Viktor, the slower it moves.</rules>"
+					"dataKey": "Characters/Viktor/Spells/ViktorRAbility/ViktorR"
 				}
 			]
 		},
@@ -281,6 +283,7 @@
 			"variants": [
 				{
 					"name": "Glorious Evolution",
+					"objectName": "ViktorPassive",
 					"image": "assets/characters/viktor/hud/icons2d/viktor_passive.viktorvgu.png",
 					"tooltip": "{{Spell_ViktorP_Tooltip}}",
 					"tooltipExtended": "{{Spell_ViktorP_Tooltip}}<br><rules><br>Viktor can upgrade his ultimate only after upgrading all non-ultimate Abilities.</rules>",

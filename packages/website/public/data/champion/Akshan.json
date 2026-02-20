@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Avengerang",
+					"objectName": "AkshanQ",
 					"image": "assets/characters/akshan/hud/icons2d/akshan_q.png",
 					"tooltip": "Akshan throws a boomerang that deals <physicalDamage>@FinalDamage@ physical damage</physicalDamage>, extending the range each time an enemy is hit.<br><br>Champion hits grant Akshan <speed>@TotalHaste@ Move Speed</speed> decaying over @HasteDuration@ second.",
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -76,8 +77,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanQAbility/AkshanQ",
-					"tooltipExtendedBelowLine": "<rules>Deals @SecondaryTargetDamage*100@% damage to non-champions. Enemies hit are briefly revealed.</rules>"
+					"dataKey": "Characters/Akshan/Spells/AkshanQAbility/AkshanQ"
 				}
 			]
 		},
@@ -86,6 +86,7 @@
 			"variants": [
 				{
 					"name": "Going Rogue",
+					"objectName": "AkshanW",
 					"image": "assets/characters/akshan/hud/icons2d/akshan_w.png",
 					"tooltip": "{{ Spell_AkshanW_Tooltip_@GameModeInteger@ }}",
 					"mana": [40, 30, 20, 10, 0, 30],
@@ -117,8 +118,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanWAbility/AkshanW",
-					"tooltipExtendedBelowLine": "<rules>{{Reminder_Camouflage}}<br>While active, Akshan also sees trails leading to <keywordMajor>Scoundrels</keywordMajor>.<br>Akshan can only claim Scoundrels when he is alive.<br>Total gold earned: @f2@</rules>"
+					"dataKey": "Characters/Akshan/Spells/AkshanWAbility/AkshanW"
 				}
 			]
 		},
@@ -127,6 +127,7 @@
 			"variants": [
 				{
 					"name": "Heroic Swing",
+					"objectName": "AkshanE",
 					"image": "assets/characters/akshan/hud/icons2d/akshan_e.png",
 					"tooltip": "<spellActive>First Cast:</spellActive> Akshan fires a grappling hook, attaching to the first terrain hit.<br><br><spellActive>Second Cast:</spellActive> Akshan swings around the terrain, repeatedly firing at the nearest enemy for <physicalDamage>@DamageToDeal@ physical damage</physicalDamage> per shot.<br><br><spellActive>Third Cast:</spellActive> Akshan dives off the rope, firing a final shot.<br><br>Colliding with an enemy Champion or terrain ends the swing early.<br><br>Champion takedowns refresh this Ability's Cooldown.",
 					"mana": [70, 70, 70, 70, 70, 70],
@@ -209,8 +210,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanEAbility/AkshanE",
-					"tooltipExtendedBelowLine": "<rules>Akshan prioritizes shooting champions marked by <spellName>Dirty Fighting</spellName>.<br>On-hits while swinging are @OnHitDamageReduction*100@% effective.<br>Damage is increased by <attackSpeed>@AttackSpeedCoefficient*100@% of bonus Attack Speed</attackSpeed>.<br>Attacks can critically strike for <physicalDamage>@CriticalCalc@ physical damage</physicalDamage>.</rules>"
+					"dataKey": "Characters/Akshan/Spells/AkshanEAbility/AkshanE"
 				}
 			]
 		},
@@ -219,6 +219,7 @@
 			"variants": [
 				{
 					"name": "Comeuppance",
+					"objectName": "AkshanR",
 					"image": "assets/characters/akshan/hud/icons2d/akshan_r.png",
 					"tooltip": "Akshan locks onto a champion and begins overcharging his gun for up to @ChannelDuration@ seconds, storing up to @NumberOfBullets@ bullets.<br><br><recast>Recast:</recast> Akshan unleashes the stored bullets, each dealing at least <physicalDamage>@DamagePerBulletWithCrit@ physical damage</physicalDamage> to the first enemy or structure hit, increased up to <physicalDamage>@MaxDamagePerBullet@ physical damage</physicalDamage> based on missing Health.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -279,8 +280,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Akshan/Spells/AkshanRAbility/AkshanR",
-					"tooltipExtendedBelowLine": "<rules>Bullets execute minions and apply Lifesteal.<br>Bullet damage scales with Critical Strike Chance and Critical Strike Damage at @CritDamageMod*100@% effectiveness.</rules>"
+					"dataKey": "Characters/Akshan/Spells/AkshanRAbility/AkshanR"
 				}
 			]
 		},
@@ -289,6 +289,7 @@
 			"variants": [
 				{
 					"name": "Dirty Fighting",
+					"objectName": "AkshanPassive",
 					"image": "assets/characters/akshan/hud/icons2d/akshan_p.png",
 					"tooltip": "{{Spell_AkshanPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_AkshanPassive_Tooltip}}<br><rules>The second Attack can critically strike at @SecondAutoCritRatio*100@% effectiveness.<br>The second Attack deals 100% total attack damage to minions.<br>The first Attack <speed>Move Speed</speed> scales with <attackSpeed>100% Attack Speed.</attackSpeed></rules>",

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Starlight's Touch",
+					"objectName": "TaricQ",
 					"image": "assets/characters/taric/hud/icons2d/taric_q.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @Effect6Amount@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @Effect6Amount@ stacks).",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -108,6 +109,7 @@
 			"variants": [
 				{
 					"name": "Bastion",
+					"objectName": "TaricW",
 					"image": "assets/characters/taric/hud/icons2d/taric_w.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Taric gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and forms a tether between him and the ally bound by this Ability. As long as they are near each other, the ally gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and Taric casts all his Abilities from both himself and his linked ally.<br><br><spellPassive>Active: </spellPassive>Taric binds to an ally champion, granting a <shield>@Effect2Amount@% max Health Shield</shield> for @Effect3Amount@ seconds.",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -132,8 +134,7 @@
 						"3": [1000, 1000, 1000, 1000, 1000, 1000, 1000],
 						"4": [1300, 1300, 1300, 1300, 1300, 1300, 1300]
 					},
-					"dataKey": "Characters/Taric/Spells/TaricWAbility/TaricW",
-					"tooltipExtendedBelowLine": "<rules>Mimicked spell effects do not stack.</rules><br><rules>Only one ally can be bound at a time. </rules><br><br>"
+					"dataKey": "Characters/Taric/Spells/TaricWAbility/TaricW"
 				}
 			]
 		},
@@ -142,6 +143,7 @@
 			"variants": [
 				{
 					"name": "Dazzle",
+					"objectName": "TaricE",
 					"image": "assets/characters/taric/hud/icons2d/taric_e.png",
 					"tooltip": "Taric projects a beam of starlight, bursting after @Effect3Amount@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @Effect2Amount@ seconds.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -181,6 +183,7 @@
 			"variants": [
 				{
 					"name": "Cosmic Radiance",
+					"objectName": "TaricR",
 					"image": "assets/characters/taric/hud/icons2d/taric_r.png",
 					"tooltip": "Taric calls down protection from the heavens. After @InitialDelay@ seconds, nearby ally champions become invulnerable for @InvulnDuration@ seconds.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -198,6 +201,7 @@
 			"variants": [
 				{
 					"name": "Bravado",
+					"objectName": "TaricPassive",
 					"image": "assets/characters/taric/hud/icons2d/taric_passive.png",
 					"tooltip": "After using an Ability, Taric's next 2 Attacks within @Duration@ seconds gain <attackSpeed>100% Attack Speed</attackSpeed>, deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>, and reduce his basic Ability Cooldowns by @CDR@ second.",
 					"dataValues": {

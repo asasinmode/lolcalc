@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Conquering Sands",
+					"objectName": "AzirQWrapper",
 					"image": "assets/characters/azir/hud/icons2d/azir_q.png",
 					"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @Effect2Amount*-100@% for 1 second.",
 					"mana": [70, 80, 90, 100, 110, 110],
@@ -66,8 +67,7 @@
 						"5": [200, 200, 200, 200, 200, 200, 200],
 						"6": [325, 325, 325, 325, 325, 325, 325]
 					},
-					"dataKey": "Characters/Azir/Spells/AzirQWrapperAbility/AzirQWrapper",
-					"tooltipExtendedBelowLine": "<rules>Enemies hit by multiple <keywordMajor>Sand Soldiers</keywordMajor> will not take additional damage.</rules>"
+					"dataKey": "Characters/Azir/Spells/AzirQWrapperAbility/AzirQWrapper"
 				}
 			]
 		},
@@ -76,6 +76,7 @@
 			"variants": [
 				{
 					"name": "Arise!",
+					"objectName": "AzirW",
 					"image": "assets/characters/azir/hud/icons2d/azir_w.png",
 					"tooltip": "Azir summons a <keywordMajor>Sand Soldier</keywordMajor> for @Effect1Amount@ seconds. When Azir Attacks an enemy near a <keywordMajor>Sand Soldier</keywordMajor>, he instead orders the soldiers to stab, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> in their direction.<br><br>This Ability has @MaxAmmo@ charges.",
 					"mana": [40, 35, 30, 25, 20, 20],
@@ -133,8 +134,7 @@
 						"8": [25, 25, 25, 25, 25, 25, 25],
 						"9": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Azir/Spells/AzirWAbility/AzirW",
-					"tooltipExtendedBelowLine": "<rules><keywordMajor>Sand Soldiers</keywordMajor> apply On-hits at @OnHitMultiplier*100@% damage once per attack to Azir's primary target.<br><keywordMajor>Sand Soldiers</keywordMajor> that strike the same targets deal @Effect9Amount@% damage after the first.<br><keywordMajor>Sand Soldiers</keywordMajor> deal @SecondaryTargetDamageMod@% damage to enemies that are not Azir's Attack target.<br><keywordMajor>Sand Soldiers</keywordMajor> expire twice as fast when near an enemy turret.<br></rules>"
+					"dataKey": "Characters/Azir/Spells/AzirWAbility/AzirW"
 				}
 			]
 		},
@@ -143,6 +143,7 @@
 			"variants": [
 				{
 					"name": "Shifting Sands",
+					"objectName": "AzirEWrapper",
 					"image": "assets/characters/azir/hud/icons2d/azir_e.png",
 					"tooltip": "Azir grants himself <shield>@TotalShield@ Shield</shield> for @Effect6Amount@ seconds and dashes to one of his <keywordMajor>Sand Soldiers</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through.<br><br>If Azir hits an enemy champion, he stops and gains a <keywordMajor>Sand Soldier</keywordMajor> charge.",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -196,6 +197,7 @@
 			"variants": [
 				{
 					"name": "Emperor's Divide",
+					"objectName": "AzirR",
 					"image": "assets/characters/azir/hud/icons2d/azir_r.png",
 					"tooltip": "Azir summons a wall of armored soldiers that charges forward, <status>Knocking Back</status> enemies and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The soldiers remain, blocking enemy paths for @Effect4Amount@ seconds.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -233,6 +235,7 @@
 			"variants": [
 				{
 					"name": "Shurima's Legacy",
+					"objectName": "AzirPassive",
 					"image": "assets/characters/azir/hud/icons2d/azir_passive.png",
 					"tooltip": "{{Spell_AzirPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_AzirPassive_Tooltip}}<br><br><rules>You may not target enemy Nexus and Inhibitor Turrets with this Ability.<br><keywordMajor>Sun Disk</keywordMajor> loses 100 <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> if you are dead or too far away.</rules>",

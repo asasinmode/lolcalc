@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Ranger's Focus",
+					"objectName": "AsheQ",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_q.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -64,8 +65,7 @@
 						"7": [1, 1, 1, 1, 1, 1, 1],
 						"8": [1, 1, 1, 1, 1, 1, 1]
 					},
-					"dataKey": "Characters/Ashe/Spells/AsheQAbility/AsheQ",
-					"tooltipExtendedBelowLine": "<rules>The empowered Attacks are comprised of a flurry of 5 small strikes. They only apply on-hit effects once per Attack.</rules>"
+					"dataKey": "Characters/Ashe/Spells/AsheQAbility/AsheQ"
 				}
 			]
 		},
@@ -74,6 +74,7 @@
 			"variants": [
 				{
 					"name": "Volley",
+					"objectName": "Volley",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_w.png",
 					"tooltip": "Ashe fires a volley of @NumberOfArrowsTooltip@ arrows, each dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies can be hit by multiple arrows, but only take damage from the first.",
 					"mana": [75, 70, 65, 60, 55, 50],
@@ -103,8 +104,7 @@
 					"effectAmount": {
 						"0": [3, 5, 7, 9, 11, 13, 15]
 					},
-					"dataKey": "Characters/Ashe/Spells/VolleyAbility/Volley",
-					"tooltipExtendedBelowLine": "<rules>Champion hits count as critical strikes for the purposes of <spellName>Frost Shot</spellName>.</rules>"
+					"dataKey": "Characters/Ashe/Spells/VolleyAbility/Volley"
 				}
 			]
 		},
@@ -113,6 +113,7 @@
 			"variants": [
 				{
 					"name": "Hawkshot",
+					"objectName": "AsheSpiritOfTheHawk",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_e.png",
 					"tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br><br>This Ability has 2 charges (@ChargeCooldown@ second recharge).",
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
@@ -149,6 +150,7 @@
 			"variants": [
 				{
 					"name": "Enchanted Crystal Arrow",
+					"objectName": "EnchantedCrystalArrow",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_r.png",
 					"tooltip": "Ashe launches a crystal arrow of ice that <status>Stuns</status> the first champion hit and deals <magicDamage>@RMainDamage@ magic damage</magicDamage>. The <status>Stun</status> duration increases with distance travelled, up to @MaxStunDuration@ seconds. Surrounding enemies are <status>Slowed</status> by <spellName>Frost Shot</spellName>.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -181,8 +183,7 @@
 							"mModifiedGameCalculation": "RMainDamage"
 						}
 					},
-					"dataKey": "Characters/Ashe/Spells/EnchantedCrystalArrowAbility/EnchantedCrystalArrow",
-					"tooltipExtendedBelowLine": "<rules>Minimum <status>Stun</status> duration is @MinStunDuration@ second.</rules>"
+					"dataKey": "Characters/Ashe/Spells/EnchantedCrystalArrowAbility/EnchantedCrystalArrow"
 				}
 			]
 		},
@@ -191,6 +192,7 @@
 			"variants": [
 				{
 					"name": "Frost Shot",
+					"objectName": "AshePassive",
 					"image": "assets/characters/ashe/hud/icons2d/ashe_p.png",
 					"tooltip": "{{Spell_AshePassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_AshePassive_Tooltip}}<br><br><rules>The bonus damage scales with Critical Strike Chance and Critical Strike Damage bonus.</rules>",

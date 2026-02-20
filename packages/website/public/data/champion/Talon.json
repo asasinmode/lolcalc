@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Noxian Diplomacy",
+					"objectName": "TalonQ",
 					"image": "assets/characters/talon/hud/icons2d/talonq.png",
 					"tooltip": "Talon leaps to a target and deals <physicalDamage>@LeapDamage@ physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.<br><br>If this Ability kills the target, Talon restores <healing>@TotalHealing@ Health</healing> and refunds @CooldownRefund*100@% of its Cooldown.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -83,8 +84,7 @@
 							"mModifiedGameCalculation": "LeapDamage"
 						}
 					},
-					"dataKey": "Characters/Talon/Spells/TalonQAbility/TalonQ",
-					"tooltipExtendedBelowLine": "<rules>Melee damage is affected by Critical Strike Damage increase.</rules>"
+					"dataKey": "Characters/Talon/Spells/TalonQAbility/TalonQ"
 				}
 			]
 		},
@@ -93,6 +93,7 @@
 			"variants": [
 				{
 					"name": "Rake",
+					"objectName": "TalonW",
 					"image": "assets/characters/talon/hud/icons2d/talonw.png",
 					"tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>@TotalInitialDamage@ physical damage</physicalDamage>. The blades then return to him, dealing <physicalDamage>@TotalReturnDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @MovespeedSlow*100@% for @SlowDuration@ second.",
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -146,6 +147,7 @@
 			"variants": [
 				{
 					"name": "Assassin's Path",
+					"objectName": "TalonE",
 					"image": "assets/characters/talon/hud/icons2d/talone.png",
 					"tooltip": "Talon vaults over the nearest terrain or structure. Talon cannot dash over the same terrain more than once every @WallCD@ seconds.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -167,6 +169,7 @@
 			"variants": [
 				{
 					"name": "Shadow Assault",
+					"objectName": "TalonR",
 					"image": "assets/characters/talon/hud/icons2d/talonr.png",
 					"tooltip": "Talon disperses a ring of blades that deal <physicalDamage>@Damage@ physical damage</physicalDamage>, gains <speed>@MoveSpeed*100@% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for @Duration@ seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> again.<br><br>If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>{{Spell_TalonQ_Name}}</spellName>, the blades return to the target instead.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -192,8 +195,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Talon/Spells/TalonRAbility/TalonR",
-					"tooltipExtendedBelowLine": "<rules>{{Reminder_Invisibility}}</rules>"
+					"dataKey": "Characters/Talon/Spells/TalonRAbility/TalonR"
 				}
 			]
 		},
@@ -202,6 +204,7 @@
 			"variants": [
 				{
 					"name": "Blade's End",
+					"objectName": "TalonPassive",
 					"image": "assets/characters/talon/hud/icons2d/talonp.png",
 					"tooltip": "{{game_buff_tooltip_TalonPassive}}",
 					"tooltipExtended": "{{game_buff_tooltip_TalonPassive}}<br><br><rules>Damage over time effect deals @monstermod*100@% damage to jungle monsters.</rules>",

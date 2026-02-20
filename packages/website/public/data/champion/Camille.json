@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Precision Protocol",
+					"objectName": "CamilleQ",
 					"image": "assets/characters/camille/hud/icons2d/camille_q1.png",
 					"tooltip": "Camille's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and grants her <speed>@MSBonus*100@% Move Speed</speed> for @MSDuration@ second. This ability can be <recast>Recast</recast> in the next @QTotalRecastTime@ seconds.<br><br>If the <recast>Recast</recast> Attack hits at least @QRampUpTime@ seconds after the first, the bonus damage is increased to <physicalDamage>@EmpoweredBonusDamage@</physicalDamage> and @DamageConversionPercentage@ of the Attack's damage is converted into <trueDamage>true damage</trueDamage>.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"mana": [25, 25, 25, 25, 25, 25],
@@ -88,6 +89,7 @@
 			"variants": [
 				{
 					"name": "Tactical Sweep",
+					"objectName": "CamilleW",
 					"image": "assets/characters/camille/hud/icons2d/camille_w.png",
 					"tooltip": "Camille winds up and slices, dealing <physicalDamage>@BaseDamageTotal@ physical damage</physicalDamage>.<br><br>Enemies hit by the outer half are <status>Slowed</status> by @SlowPercentage@% decaying over @SlowDuration@ seconds, and they take an additional <physicalDamage>@OuterEdgeTooltip@ max Health physical damage</physicalDamage>. Camille restores <healing>@OuterConeHealingRatio@% of the bonus damage dealt to champions as Health</healing>.",
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -146,8 +148,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Camille/Spells/CamilleWAbility/CamilleW",
-					"tooltipExtendedBelowLine": "<rules>This Ability does @MonsterDamageReduction@% less damage to non-epic jungle monsters.<br>Max health damage is capped at @MonsterHealthDamageCap@ against jungle monsters.</rules>"
+					"dataKey": "Characters/Camille/Spells/CamilleWAbility/CamilleW"
 				}
 			]
 		},
@@ -156,6 +157,7 @@
 			"variants": [
 				{
 					"name": "Hookshot",
+					"objectName": "CamilleE",
 					"image": "assets/characters/camille/hud/icons2d/camille_e.png",
 					"tooltip": "Camille fires a hookshot that attaches to terrain, pulling her to it for 1 second and allowing this Ability to be <recast>Recast</recast>.<br><br><recast>Recast:</recast> Camille dashes from the wall, colliding with the first enemy champion hit. Upon landing, she gains <attackSpeed>@ASBuff*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds, deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to nearby enemies, and <status>Stuns</status> enemy champions for @KnockupDuration@ seconds. Dashes towards enemy champions travel twice as far.",
 					"mana": [70, 70, 70, 70, 70, 70],
@@ -198,6 +200,7 @@
 			"variants": [
 				{
 					"name": "The Hextech Ultimatum",
+					"objectName": "CamilleR",
 					"image": "assets/characters/camille/hud/icons2d/camille_r.png",
 					"tooltip": "Camille briefly becomes Untargetable and leaps onto an enemy champion, interrupting channels and locking them into an area they cannot escape by any means for @RDuration@ seconds. Other nearby enemies are <status>Knocked Away</status>. Her Attacks against the trapped enemy deal an additional <magicDamage>@RPercentCurrentHPDamage@% current Health magic damage</magicDamage>.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -207,8 +210,7 @@
 						"RDuration": [1.75, 2.5, 3.25, 4, 4.75, 5.5, 6.25],
 						"RCircleRadius": [425, 425, 425, 425, 425, 425, 425]
 					},
-					"dataKey": "Characters/Camille/Spells/CamilleRAbility/CamilleR",
-					"tooltipExtendedBelowLine": "<rules>This Ability ends if Camille leaves the area.</rules>"
+					"dataKey": "Characters/Camille/Spells/CamilleRAbility/CamilleR"
 				}
 			]
 		},
@@ -217,6 +219,7 @@
 			"variants": [
 				{
 					"name": "Adaptive Defenses",
+					"objectName": "CamillePassive",
 					"image": "assets/characters/camille/hud/icons2d/camille_passive.png",
 					"tooltip": "Camille's Attacks on champions grant <shield>@ShieldAmount@ Shield</shield> against their damage type (<physicalDamage>Physical</physicalDamage> or <magicDamage>Magic</magicDamage>) for @ShieldDuration@ seconds. This effect has a @PassiveCooldown@ second Cooldown.",
 					"dataValues": {

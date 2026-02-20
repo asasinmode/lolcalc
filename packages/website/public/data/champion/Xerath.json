@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Arcanopulse",
+					"objectName": "XerathArcanopulseChargeUp",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_q1.png",
 					"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged.",
 					"mana": [80, 90, 100, 110, 120, 120],
@@ -65,8 +66,7 @@
 						"7": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"8": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathArcanopulseChargeUpAbility/XerathArcanopulseChargeUp",
-					"tooltipExtendedBelowLine": "<rules>If Xerath does not release the beam, half the cost is refunded.</rules>"
+					"dataKey": "Characters/Xerath/Spells/XerathArcanopulseChargeUpAbility/XerathArcanopulseChargeUp"
 				}
 			]
 		},
@@ -75,6 +75,7 @@
 			"variants": [
 				{
 					"name": "Eye of Destruction",
+					"objectName": "XerathArcaneBarrage2",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_w1.png",
 					"tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. Enemies in the center take <magicDamage>@SweetSpotTotalDamage@ magic damage</magicDamage> instead and are <status>Slowed</status> by @SweetSpotSlowAmount*100@%, decaying over @SlowDuration@ seconds.",
 					"mana": [80, 90, 100, 110, 120, 120],
@@ -108,8 +109,7 @@
 							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathArcaneBarrage2Ability/XerathArcaneBarrage2",
-					"tooltipExtendedBelowLine": "<rules>Empowered <status>Slow</status> decays down to @SlowAmount*100@%.</rules>"
+					"dataKey": "Characters/Xerath/Spells/XerathArcaneBarrage2Ability/XerathArcaneBarrage2"
 				}
 			]
 		},
@@ -118,6 +118,7 @@
 			"variants": [
 				{
 					"name": "Shocking Orb",
+					"objectName": "XerathMageSpear",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_e1.png",
 					"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. ",
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -148,8 +149,7 @@
 						"4": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"7": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathMageSpearAbility/XerathMageSpear",
-					"tooltipExtendedBelowLine": "<rules>Minimum <status>Stun</status> duration is 0.75 seconds.</rules>"
+					"dataKey": "Characters/Xerath/Spells/XerathMageSpearAbility/XerathMageSpear"
 				}
 			]
 		},
@@ -158,6 +158,7 @@
 			"variants": [
 				{
 					"name": "Rite of the Arcane",
+					"objectName": "XerathLocusOfPower2",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_r1.png",
 					"tooltip": "Xerath ascends to his true form and channels for @Effect1Amount@ seconds. During this time he may <recast>Recast</recast> up to @Effect2Amount@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -201,8 +202,7 @@
 						"5": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6],
 						"6": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Xerath/Spells/XerathLocusOfPower2Ability/XerathLocusOfPower2",
-					"tooltipExtendedBelowLine": "<rules>If Xerath does not <recast>Recast</recast> at all, this Ability's Cooldown is reduced by @Effect7Amount*100@%.</rules>"
+					"dataKey": "Characters/Xerath/Spells/XerathLocusOfPower2Ability/XerathLocusOfPower2"
 				}
 			]
 		},
@@ -211,6 +211,7 @@
 			"variants": [
 				{
 					"name": "Mana Surge",
+					"objectName": "XerathAscended2",
 					"image": "assets/characters/xerath/hud/icons2d/xerath_passive1.png",
 					"tooltip": "Every 16 seconds Xerath's next Attack against a champion restores <scaleMana>@ChampionManaRestoreTT@ Mana</scaleMana>. It restores <scaleMana>@MinionManaRestoreTT@ Mana</scaleMana> if attacking minions, jungle monsters or structures.<br><br>Whenever Xerath kills a unit, this cooldown is reduced by @CooldownKillRefund@ seconds.",
 					"dataValues": {

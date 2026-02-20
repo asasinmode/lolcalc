@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Piercing Darkness",
+					"objectName": "SennaQ",
 					"image": "assets/characters/senna/hud/icons2d/senna_q.png",
 					"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second.",
 					"mana": [70, 80, 90, 100, 110, 110],
@@ -104,8 +105,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Senna/Spells/SennaQAbility/SennaQ",
-					"tooltipExtendedBelowLine": "<rules>This Ability's cast range matches Senna's attack range and its cast time is improved with Attack Speed. It can target anything and applies on-hit effects to enemy champions.</rules>"
+					"dataKey": "Characters/Senna/Spells/SennaQAbility/SennaQ"
 				}
 			]
 		},
@@ -114,6 +114,7 @@
 			"variants": [
 				{
 					"name": "Last Embrace",
+					"objectName": "SennaW",
 					"image": "assets/characters/senna/hud/icons2d/senna_w.png",
 					"tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After a @DelayTime@ second delay the target and other nearby enemies are <status>Rooted</status> for @RootDuration@ second(s).",
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -148,6 +149,7 @@
 			"variants": [
 				{
 					"name": "Curse of the Black Mist",
+					"objectName": "SennaE",
 					"image": "assets/characters/senna/hud/icons2d/senna_e.png",
 					"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby.",
 					"mana": [70, 70, 70, 70, 70, 70],
@@ -178,8 +180,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Senna/Spells/SennaEAbility/SennaE",
-					"tooltipExtendedBelowLine": "<rules>Enemies can see where Wraiths are, but not who they are. They are otherwise treated as being <keywordStealth>Camouflaged</keywordStealth>.<br>{{Reminder_Camouflage}}<br>Unselectable units cannot be targeted by Attacks or Abilities that require a target.</rules>"
+					"dataKey": "Characters/Senna/Spells/SennaEAbility/SennaE"
 				}
 			]
 		},
@@ -188,6 +189,7 @@
 			"variants": [
 				{
 					"name": "Dawning Shadow",
+					"objectName": "SennaR",
 					"image": "assets/characters/senna/hud/icons2d/senna_r.png",
 					"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -237,8 +239,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Senna/Spells/SennaRAbility/SennaR",
-					"tooltipExtendedBelowLine": "<rules>The shield's power scales with the amount of <keywordMajor>Mist</keywordMajor> Senna has collected.</rules>"
+					"dataKey": "Characters/Senna/Spells/SennaRAbility/SennaR"
 				}
 			]
 		},
@@ -247,6 +248,7 @@
 			"variants": [
 				{
 					"name": "Absolution",
+					"objectName": "SennaPassive",
 					"image": "assets/characters/senna/hud/icons2d/senna_passive.png",
 					"tooltip": "{{Spell_SennaPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_SennaPassive_Tooltip}}<br><br><rules>Senna can only siphon <keywordMajor>Mist</keywordMajor> from an individual champion once every <scaleLevel>@DebuffDuration@</scaleLevel> seconds.<br>Souls are less likely to spawn from minions Senna kills. Souls always spawn from large minions Senna doesn't kill, champions, and large jungle monsters. <br>Senna does not gain Attack Damage on level up.</rules>",

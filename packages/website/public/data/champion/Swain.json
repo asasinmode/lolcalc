@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Death's Hand",
+					"objectName": "SwainQ",
 					"image": "assets/characters/swain/hud/icons2d/swain_q.png",
 					"tooltip": "Swain unleashes 5 eldritch bolts, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> plus <magicDamage>@ExtraBoltDamage@ magic damage</magicDamage> per bolt past the first (max <magicDamage>@MaxDamage@ magic damage</magicDamage>).",
 					"mana": [40, 45, 50, 55, 60, 60],
@@ -79,6 +80,7 @@
 			"variants": [
 				{
 					"name": "Vision of Empire",
+					"objectName": "SwainW",
 					"image": "assets/characters/swain/hud/icons2d/swain_w.png",
 					"tooltip": "Swain opens a demon eye, revealing a location for 1.5 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @SlowDuration@ seconds.<br><br>Champions hit grant Swain a <font color='#FF3F3F' size='18'>Soul Fragment</font> and are revealed for @RevealDuration@ seconds.",
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -113,8 +115,7 @@
 							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
-					"dataKey": "Characters/Swain/Spells/SwainWAbility/SwainW",
-					"tooltipExtendedBelowLine": "<rules>Deals <magicDamage>@MinionDamage@ damage</magicDamage> instead to minions.</rules>"
+					"dataKey": "Characters/Swain/Spells/SwainWAbility/SwainW"
 				}
 			]
 		},
@@ -123,6 +124,7 @@
 			"variants": [
 				{
 					"name": "Nevermove",
+					"objectName": "SwainE",
 					"image": "assets/characters/swain/hud/icons2d/swain_e.png",
 					"tooltip": "Swain launches a wave of demonic power that returns, detonating on the first enemy hit to deal <magicDamage>@SecondaryDamage@ magic damage</magicDamage> and <status>Root</status> enemies in the area for @RootDuration@ seconds.<br><br><status>Rooting</status> a champion allows Swain to reactivate this ability to pull all champions <status>Rooted</status> by <spellName>Nevermove</spellName> toward him, gaining a <font color='#FF3F3F' size='18'>Soul Fragment</font> for each.",
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -149,8 +151,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Swain/Spells/SwainEAbility/SwainE",
-					"tooltipExtendedBelowLine": "<rules><spellName>Nevermove</spellName> temporarily grants vision of rooted champions.</rules>"
+					"dataKey": "Characters/Swain/Spells/SwainEAbility/SwainE"
 				}
 			]
 		},
@@ -159,6 +160,7 @@
 			"variants": [
 				{
 					"name": "Demonic Ascension",
+					"objectName": "SwainR",
 					"image": "assets/characters/swain/hud/icons2d/swain_r.png",
 					"tooltip": "Swain frees the demon, which deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and drains <healing>@HealingCalc@ Health</healing> per second from nearby enemies. His Demonic Energy depletes over time but can be recharged indefinitely by draining enemy Champions and is fully restored on Champion takedowns.<br><br>After @DemonflareCastDelay@ seconds and every @DemonflareCooldownTooltip@ seconds thereafter, Swain can cast <spellName>Demonflare</spellName> while transformed, which deals <magicDamage>@DemonflareDamageTotal@ magic damage</magicDamage> and <status>Slows</status> enemies by @DemonflareSlowAmount*100@%, decaying over @DemonflareSlowDuration@s.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -234,8 +236,7 @@
 							"mModifiedGameCalculation": "HealingCalc"
 						}
 					},
-					"dataKey": "Characters/Swain/Spells/SwainRAbility/SwainR",
-					"tooltipExtendedBelowLine": "<rules>Healing is reduced to <healing>@MinionMonsterHealReduction*100@%</healing> against non-champions.<br>Depletes @DemonPowerDegen@ Demonic Energy per second. After @AmpTime@ seconds, this increases to @DegenAmpAmount@.<br>Regenerates @DemonPowerRegen@ Demonic Energy per second while draining from champions.</rules>"
+					"dataKey": "Characters/Swain/Spells/SwainRAbility/SwainR"
 				}
 			]
 		},
@@ -244,6 +245,7 @@
 			"variants": [
 				{
 					"name": "Ravenous Flock",
+					"objectName": "SwainPassive",
 					"image": "assets/characters/swain/hud/icons2d/swain_p.png",
 					"tooltip": "Swain collects <font color='#FF3F3F' size='18'>Soul Fragments</font> from <spellName>Vision of Empire</spellName>, <spellName>Nevermove</spellName>, and enemy champion deaths. <font color='#FF3F3F' size='18'>Soul Fragments</font> restore<healing> @PassiveHealPercent@ maximum Health</healing> and permanently grant Swain <healing>@HealthIncrement@ max Health</healing>.<br><br>Soul Fragments collected: @f1@<br>Total Health gained: <scaleHealth>@MaxHealthGained@</scaleHealth>",
 					"dataValues": {

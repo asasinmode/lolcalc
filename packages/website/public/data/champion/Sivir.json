@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Boomerang Blade",
+					"objectName": "SivirQ",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_q.png",
 					"tooltip": "Sivir hurls her crossblade like a boomerang, dealing <physicalDamage>@TotalDamage@</physicalDamage> to all enemies it cuts through. Hitting non-champions reduces the damage to subsequent targets, down to a minimum of @FallOffMinimum*100@%.",
 					"mana": [55, 60, 65, 70, 75, 70],
@@ -120,8 +121,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirQAbility/SivirQ",
-					"tooltipExtendedBelowLine": "<rules>The damage falloff resets upon beginning its return.<br>Damage scales with Critical Strike Chance and Critical Strike Damage at @CritRatio*100@% effectiveness.<br>Cast time scales down with Attack Speed</rules>"
+					"dataKey": "Characters/Sivir/Spells/SivirQAbility/SivirQ"
 				}
 			]
 		},
@@ -130,6 +130,7 @@
 			"variants": [
 				{
 					"name": "Ricochet",
+					"objectName": "SivirW",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_w.png",
 					"tooltip": "For the next @BuffDuration@ seconds, Sivir gains <attackSpeed>@RicochetAttackSpeed*100@% Attack Speed</attackSpeed> and her auto attacks are empowered to bounce to additional surrounding enemies dealing <physicalDamage>@BounceDamage@ physical damage</physicalDamage> each bounce for up to @MaxBounces@ bounces.<br><br>These bounces critically strike if the attack generating them does.",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -184,8 +185,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirWAbility/SivirW",
-					"tooltipExtendedBelowLine": "<rules>Bounces will prioritize new targets before returning to targets that have already been struck. Can only hit each target a maximum of two times.<br>Bounces deal @MinionDamageMod*100@% damage to minions.</rules><br><rules>This ability executes low Health minions.</rules>"
+					"dataKey": "Characters/Sivir/Spells/SivirWAbility/SivirW"
 				}
 			]
 		},
@@ -194,6 +194,7 @@
 			"variants": [
 				{
 					"name": "Spell Shield",
+					"objectName": "SivirE",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_e.png",
 					"tooltip": "Sivir creates a magical barrier for @Effect1Amount@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot.",
 					"cooldownTime": [25, 24, 22.5, 21, 19.5, 18, 10],
@@ -220,8 +221,7 @@
 						"1": [55, 55, 55, 55, 55, 55, 55],
 						"2": [60, 60, 60, 60, 60, 60, 60]
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirEAbility/SivirE",
-					"tooltipExtendedBelowLine": "<rules>This shield blocks both champion and item Abilities.</rules>"
+					"dataKey": "Characters/Sivir/Spells/SivirEAbility/SivirE"
 				}
 			]
 		},
@@ -230,6 +230,7 @@
 			"variants": [
 				{
 					"name": "On The Hunt",
+					"objectName": "SivirR",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_r.png",
 					"tooltip": "Sivir rallies her nearby allies, granting them <speed>@MaxMS*100@% Move Speed</speed> for @UltDuration@ seconds.<br><br>Sivir's attacks against champions while On The Hunt reduce the cooldown of her basic abilities by 0.5 seconds.<br><br>Takedowns on recently damaged enemies refreshes the duration of the hunt.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -258,8 +259,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR",
-					"tooltipExtendedBelowLine": ""
+					"dataKey": "Characters/Sivir/Spells/SivirRAbility/SivirR"
 				}
 			]
 		},
@@ -268,6 +268,7 @@
 			"variants": [
 				{
 					"name": "Fleet of Foot",
+					"objectName": "SivirPassive",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_passive.png",
 					"tooltip": "Sivir's Attacks and Abilities grant her a burst of <speed>@FlatMS@ Decaying Move Speed</speed> for @HasteDuration@ seconds when they damage enemy champions.<br>",
 					"dataValues": {

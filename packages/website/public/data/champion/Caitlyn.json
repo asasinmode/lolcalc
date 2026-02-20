@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Piltover Peacemaker",
+					"objectName": "CaitlynQ",
 					"image": "assets/characters/caitlyn/hud/icons2d/caitlynq.png",
 					"tooltip": "Caitlyn revs her rifle to fire a piercing shot dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage>. After the bolt strikes the first target, it opens into a wider shot that deals <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.<br><br>Enemies revealed by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> always take full damage.",
 					"mana": [55, 60, 65, 70, 75, 80],
@@ -79,6 +80,7 @@
 			"variants": [
 				{
 					"name": "Yordle Snap Trap",
+					"objectName": "CaitlynW",
 					"image": "assets/characters/caitlyn/hud/icons2d/caitlynw.png",
 					"tooltip": "Caitlyn sets a trap that <status>Roots</status> the first champion that steps on it for @RootDuration@ seconds and granting <keywordStealth>True Sight</keywordStealth> of them for 3 seconds. Traps last for @TrapDuration@ seconds, and @MaximumTraps@ traps may be active at once. This Ability has @MaximumCharges@ charges (@AmmoRechargeTime@ second refresh).<br><br>Targets rooted by this Ability take an additional <physicalDamage>@HeadshotBonusDamage@ physical damage</physicalDamage> from <keywordMajor>Headshot</keywordMajor>.",
 					"mana": [20, 20, 20, 20, 20, 20],
@@ -120,6 +122,7 @@
 			"variants": [
 				{
 					"name": "90 Caliber Net",
+					"objectName": "CaitlynE",
 					"image": "assets/characters/caitlyn/hud/icons2d/caitlyne.png",
 					"tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by @Effect3Amount@% for @Effect2Amount@ second and deals <magicDamage>@NetDamage@ magic damage</magicDamage>.",
 					"mana": [75, 75, 75, 75, 75, 75],
@@ -155,6 +158,7 @@
 			"variants": [
 				{
 					"name": "Ace in the Hole",
+					"objectName": "CaitlynR",
 					"image": "assets/characters/caitlyn/hud/icons2d/caitlynr.png",
 					"tooltip": "Caitlyn takes a moment to channel and line up the perfect shot, then she fires, dealing <physicalDamage>@RTotalDamage@ physical damage</physicalDamage>, but other enemy champions can intercept it. This Ability grants <keywordStealth>True Sight</keywordStealth> of the target during the channel.<br><br><rules>Damage scales with Caitlyn's Critical Strike chance and Critical Strike Damage.</rules>",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -213,6 +217,7 @@
 			"variants": [
 				{
 					"name": "Headshot",
+					"objectName": "CaitlynPassive",
 					"image": "assets/characters/caitlyn/hud/icons2d/caitlynp.png",
 					"tooltip": "{{Spell_CaitlynP_Tooltip}}",
 					"tooltipExtended": "{{Spell_CaitlynP_Tooltip}}<br><br><rules><keywordMajor>Headshot</keywordMajor> damage scales with level, Critical Strike Chance, and Critical Strike Damage.<br><keywordMajor>Headshots</keywordMajor> deal an additional <physicalDamage>@HeadShotMinionBonusDamage@ physical damage</physicalDamage> to non-champions.<br>Extra damage on trapped targets scales with {{Spell_CaitlynYordleTrap_Name}} rank.</rules>",

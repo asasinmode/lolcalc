@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Orb of Deception",
+					"objectName": "AhriQ",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_q.png",
 					"tooltip": "Ahri throws then pulls back her orb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> on the way out and <trueDamage>@TotalDamage@ true damage</trueDamage> on the way back.",
 					"mana": [55, 65, 75, 85, 95, 95],
@@ -64,6 +65,7 @@
 			"variants": [
 				{
 					"name": "Fox-Fire",
+					"objectName": "AhriW",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_w.png",
 					"tooltip": "Ahri releases 3 fox-fires that seek nearby enemies and deal <magicDamage>@SingleFireDamage@ magic damage</magicDamage>, reduced to <magicDamage>@MultiFireDamage@ damage</magicDamage> beyond the first. She also gains <speed>@MovementSpeed*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -105,8 +107,7 @@
 							"mModifiedGameCalculation": "SingleFireDamage"
 						}
 					},
-					"dataKey": "Characters/Ahri/Spells/AhriWAbility/AhriW",
-					"tooltipExtendedBelowLine": "<rules>Fox-fires prioritize champions hit by <spellName>{{Spell_AhriSeduce_Name}}</spellName>, enemies Ahri has attacked, then other champions. Minions below @MinionBonusDamageThreshold*100@% Health take @MinionBonusDamageMultiplier*100@% damage.</rules><br>"
+					"dataKey": "Characters/Ahri/Spells/AhriWAbility/AhriW"
 				}
 			]
 		},
@@ -115,6 +116,7 @@
 			"variants": [
 				{
 					"name": "Charm",
+					"objectName": "AhriE",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_e.png",
 					"tooltip": "Ahri blows a kiss that <status>Charms</status> the first enemy hit for @CharmDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -140,8 +142,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Ahri/Spells/AhriEAbility/AhriE",
-					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
+					"dataKey": "Characters/Ahri/Spells/AhriEAbility/AhriE"
 				}
 			]
 		},
@@ -150,6 +151,7 @@
 			"variants": [
 				{
 					"name": "Spirit Rush",
+					"objectName": "AhriR",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_r.png",
 					"tooltip": "Ahri nimbly dashes, firing @RMaxTargetsPerCast@ essence bolts at nearby enemies, prioritizing champions. These bolts deal <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> each. <spellName>Spirit Rush</spellName> can be <recast>Recast</recast> up to 2 more times within @RRecastWindow@ seconds.<br><br>Consuming a champion's Essence with <spellName>Essence Theft</spellName> during this period extends the recast window by up to @PDurationExtension@ seconds and grants an additional recast of <spellName>Spirit Rush</spellName> (up to @RMaxCasts@ stored).",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -190,6 +192,7 @@
 			"variants": [
 				{
 					"name": "Essence Theft",
+					"objectName": "AhriPassive",
 					"image": "assets/characters/ahri/hud/icons2d/icons_ahri_passive.png",
 					"tooltip": "Killing minions or monsters grants Ahri an Essence Fragment. After obtaining @MaxStacks@ Fragments, Ahri consumes them to <healing>restore @MinionHeal@ Health</healing>.<br><br>When Ahri scores a takedown against an enemy champion within @TakedownWindow@ seconds of damaging them, she feasts upon their Essence, <healing>restoring @ChampionHeal@ Health</healing>.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],

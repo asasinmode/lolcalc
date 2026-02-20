@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Formless Blade",
+					"objectName": "NilahQ",
 					"image": "assets/characters/nilah/hud/icons2d/nilahq.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nilah gains @CritArmorPen@ Armor Penetration, and her Attacks against champions restore <healing>@CritLifesteal@ damage dealt as Health</healing>. Overhealing from this is converted into a <shield>Shield</shield> for @ShieldDuration@ seconds.<br><br><spellActive>Active:</spellActive> Nilah cracks her whip-blade, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage>. If an enemy unit or structure is hit, Nilah gains 125 Attack Range and <attackSpeed>@BonusAttackSpeedCalc@% Attack Speed</attackSpeed>, and her Attacks hit in a cone for @BuffDuration@ seconds.<br>",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -128,8 +129,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Nilah/Spells/NilahQAbility/NilahQ",
-					"tooltipExtendedBelowLine": "<rules>Damage is increased by her Critical Strike Chance and Critical Strike Damage at @ActiveCritScaling*100@% effectiveness.<br>If cast during <spellName>Slipstream</spellName>, Nilah creates a wave of water striking all enemies along Nilah's path. </rules><br><rules>Area attacks deal @MinionMod*100@% damage to minions and @MonsterMod*100@% damage to monsters.</rules><br><rules>This ability executes low Health minions.</rules>"
+					"dataKey": "Characters/Nilah/Spells/NilahQAbility/NilahQ"
 				}
 			]
 		},
@@ -138,6 +138,7 @@
 			"variants": [
 				{
 					"name": "Jubilant Veil",
+					"objectName": "NilahW",
 					"image": "assets/characters/nilah/hud/icons2d/nilahw.png",
 					"tooltip": "Nilah envelops herself in mist for @BaseDuration@ seconds, becoming Ghosted, gaining <speed>@MoveSpeedPercent*100@% Move Speed</speed>, dodging Attacks, and reducing <magicDamage>magic damage</magicDamage> taken by @MagicDamageReduction*100@%.<br><br>While active, touching allied champions envelops them in mist, granting the same benefits for @ShareBaseDuration@ seconds.<br>",
 					"mana": [60, 45, 30, 15, 0, 0],
@@ -150,8 +151,7 @@
 						"AreaTriggerSize": [150, 150, 150, 150, 150, 150, 150],
 						"MagicDamageReduction": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25]
 					},
-					"dataKey": "Characters/Nilah/Spells/NilahWAbility/NilahW",
-					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}</rules>"
+					"dataKey": "Characters/Nilah/Spells/NilahWAbility/NilahW"
 				}
 			]
 		},
@@ -160,6 +160,7 @@
 			"variants": [
 				{
 					"name": "Slipstream",
+					"objectName": "NilahE",
 					"image": "assets/characters/nilah/hud/icons2d/nilahe.png",
 					"tooltip": "Nilah dashes through a unit, dealing <physicalDamage>@DashDamage@ physical damage</physicalDamage> to any enemies she passes through.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -194,6 +195,7 @@
 			"variants": [
 				{
 					"name": "Apotheosis",
+					"objectName": "NilahR",
 					"image": "assets/characters/nilah/hud/icons2d/nilahr.png",
 					"tooltip": "Nilah whirls her whip-blade, dealing <physicalDamage>@DamagePerTickCalcTooltip@ physical damage</physicalDamage> over 1 second, then finishes with a burst of <physicalDamage>@DamageCalc@ physical damage</physicalDamage> that also <status>Pulls</status> nearby enemies toward her.<br><br>Apotheosis heals Nilah and her nearby allies for <healing>@ChampHealingPercent@ (+@spell.NilahQ:CritLifesteal@ {{ Spell_NilahQ_Name }}) of the damage dealt</healing> to enemy champions, converting any overhealing into a <shield>Shield</shield> for @Duration@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -273,8 +275,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Nilah/Spells/NilahRAbility/NilahR",
-					"tooltipExtendedBelowLine": "<rules>Healing is reduced to @OtherHealingPercent*100@% against non-champions</rules>"
+					"dataKey": "Characters/Nilah/Spells/NilahRAbility/NilahR"
 				}
 			]
 		},
@@ -283,6 +284,7 @@
 			"variants": [
 				{
 					"name": "Joy Unending",
+					"objectName": "NilahPassive",
 					"image": "assets/characters/nilah/hud/icons2d/nilahp.png",
 					"tooltip": "When Nilah kills a minion, she and her nearest ally gain @ExperiencePercentage*100@% of the experience they would have normally lost from sharing the kill.<br><br>Nilah gains <healing>@HealingIncrease*100@% increased effectiveness from healing</healing> and <shield>@ShieldIncrease*100@% from shielding</shield> given to her by allied champions abilities. If an ally heals or shields her, they will also gain the increased amount of the shield or heal themselves. If an ally shields or heals themself, Nilah will also gain that additional effect.",
 					"tooltipExtended": "When Nilah kills a minion, she and her nearest ally gain @ExperiencePercentage*100@% of the experience they would have normally lost from sharing the kill.<br><br>Nilah gains <healing>@HealingIncrease*100@% increased effectiveness from healing</healing> and <shield>@ShieldIncrease*100@% from shielding</shield> given to her by allied champions abilities. If an ally heals or shields her, they will also gain the increased amount of the shield or heal themselves. If an ally shields or heals themself, Nilah will also gain that additional effect.<br><br><rules>Shields shared by Nilah have a maximum duration of @ShieldMaxDuration@ seconds.</rules>",

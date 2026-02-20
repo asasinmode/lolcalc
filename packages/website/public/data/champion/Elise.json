@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Neurotoxin / Venomous Bite",
+					"objectName": "EliseHumanQ",
 					"image": "assets/characters/elise/hud/icons2d/elisehumanq.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise injects neurotoxin, dealing <magicDamage>@BaseDamage@ plus @HumanPercentHealth@ current Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_EliseHumanQ_Tooltip}}<br><br>{{Spell_EliseSpiderQ_Tooltip}}",
@@ -77,17 +78,16 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Elise/Spells/EliseHumanQAbility/EliseHumanQ",
-					"tooltipExtendedBelowLine": "<rules><keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor> percent Health damage is capped at @MonsterDamageCapCalc@ against monsters.</rules>"
+					"dataKey": "Characters/Elise/Spells/EliseHumanQAbility/EliseHumanQ"
 				},
 				{
 					"name": "Venomous Bite / Neurotoxin",
+					"objectName": "EliseSpiderQ",
 					"image": "assets/characters/elise/hud/icons2d/elisespiderq.png",
 					"tooltip": "<keywordMajor>Spider Form:</keywordMajor> Elise lunges with a poisonous bite, dealing <magicDamage>@Spell.EliseSpiderQCast:BaseDamage@ plus @Spell.EliseSpiderQCast:MissingHPDamage@ missing Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_EliseSpiderQ_Tooltip}}<br><br>{{Spell_EliseHumanQ_Tooltip}}<br>",
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
-					"dataKey": "Characters/Elise/Spells/EliseSpiderQAbility/EliseSpiderQ",
-					"tooltipExtendedBelowLine": "<rules>Venomous Bite will apply on-hit effects once to the target</rules>"
+					"dataKey": "Characters/Elise/Spells/EliseSpiderQAbility/EliseSpiderQ"
 				}
 			]
 		},
@@ -96,6 +96,7 @@
 			"variants": [
 				{
 					"name": "Volatile Spiderling / Skittering Frenzy",
+					"objectName": "EliseHumanW",
 					"image": "assets/characters/elise/hud/icons2d/elisehumanw.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise summons an explosive spider that moves to a location and explodes when it nears an enemy or after 3 seconds. The spider deals <magicDamage>@spell.EliseHumanW:TotalDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_EliseHumanW_Tooltip}}<br><br>{{Spell_EliseSpiderW_Tooltip}}",
@@ -132,6 +133,7 @@
 				},
 				{
 					"name": "Skittering Frenzy / Volatile Spiderling",
+					"objectName": "EliseSpiderW",
 					"image": "assets/characters/elise/hud/icons2d/elisespiderw.png",
 					"tooltip": "<keywordMajor>Spider Form</keywordMajor> <spellPassive>Passive</spellPassive>: <keywordMajor>Spiderlings</keywordMajor> gain <attackSpeed>@spell.EliseSpiderW:PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><keywordMajor>Spider Form</keywordMajor> <spellActive>Active:</spellActive> Elise grants herself and her <keywordMajor>Spiderlings</keywordMajor> <attackSpeed>@spell.EliseSpiderW:ActiveAttackSpeed*100@% Attack Speed</attackSpeed> for @spell.EliseSpiderW:BuffDuration@ seconds.",
 					"tooltipExtended": "{{Spell_EliseSpiderW_Tooltip}}<br><br>{{Spell_EliseHumanW_Tooltip}}",
@@ -156,6 +158,7 @@
 			"variants": [
 				{
 					"name": "Cocoon / Rappel",
+					"objectName": "EliseHumanE",
 					"image": "assets/characters/elise/hud/icons2d/elisehumane.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise fires a cocoon, <status>Stunning</status> and revealing the first enemy hit for @StunDuration@ seconds.",
 					"tooltipExtended": "{{Spell_EliseHumanE_Tooltip}}<br><br>{{Spell_EliseSpiderE_Tooltip}}",
@@ -178,6 +181,7 @@
 				},
 				{
 					"name": "Rappel / Cocoon",
+					"objectName": "EliseSpiderEInitial",
 					"image": "assets/characters/elise/hud/icons2d/elisespidere.png",
 					"tooltip": "<keywordMajor>Spider Form</keywordMajor>: Elise and her <keywordMajor>Spiderlings</keywordMajor> lift into the air, becoming Untargetable for up to 2 seconds and descending on enemies she targets. Upon descending, she increases the bonus damage and healing from <spellName>Spider Queen</spellName> by @spell.EliseSpiderE:PBonusIncrease*100@% for @spell.EliseSpiderE:BuffDuration@ seconds. <br>",
 					"cooldownTime": [22, 22, 21, 20, 19, 18, 17],
@@ -204,6 +208,7 @@
 			"variants": [
 				{
 					"name": "Spider Form",
+					"objectName": "EliseR",
 					"image": "assets/characters/elise/hud/icons2d/eliser.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise transforms into a menacing spider, becoming melee, gaining access to <keywordMajor>Spider Form</keywordMajor> Abilities and summons all dormant <keywordMajor>Spiderlings</keywordMajor>.",
 					"tooltipExtended": "{{Spell_EliseR_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseRSpider_Tooltip}}",
@@ -270,6 +275,7 @@
 				},
 				{
 					"name": "Human Form",
+					"objectName": "EliseRSpider",
 					"image": "assets/characters/elise/hud/icons2d/eliser.png",
 					"tooltip": "<keywordMajor>Spider Form</keywordMajor>: Elise returns to <keywordMajor>Human Form</keywordMajor> and all remaining <keywordMajor>Spiderlings</keywordMajor> become dormant.",
 					"tooltipExtended": "{{Spell_EliseRSpider_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseR_Tooltip}}",
@@ -294,6 +300,7 @@
 			"variants": [
 				{
 					"name": "Spider Queen",
+					"objectName": "ElisePassive",
 					"image": "assets/characters/elise/hud/icons2d/elisepassive.png",
 					"tooltip": "Elise begins the game with a point in her Ultimate, allowing her to shapeshift between <keywordMajor>Human Form</keywordMajor> and <keywordMajor>Spider Form</keywordMajor>.<br><br><keywordMajor>Human Form:</keywordMajor> Elise's Ability hits grant her a dormant <keywordMajor>Spiderling</keywordMajor> (max @spell.EliseR:SpiderlingsStored@).<br><br><keywordMajor>Spider Form:</keywordMajor> Attacks deal an additional <magicDamage>@spell.EliseR:PassiveTotalDamage@ magic damage</magicDamage> and restore <healing>@spell.EliseR:PassiveTotalHealing@ Health</healing>.",
 					"dataValues": {

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Glitterlance",
+					"objectName": "LuluQ",
 					"image": "assets/characters/lulu/hud/icons2d/lulu_glitterbolt.png",
 					"tooltip": "Lulu and Pix each fire a piercing bolt dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@%, decaying over @SlowDuration@ seconds.<br><br>Enemies take <magicDamage>@BonusMissileDamage@ magic damage</magicDamage> from additional bolts.",
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -75,8 +76,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lulu/Spells/LuluQAbility/LuluQ",
-					"tooltipExtendedBelowLine": "<rules>Deals <magicDamage>@MinionMod*100@% damage</magicDamage> to Minions.</rules>"
+					"dataKey": "Characters/Lulu/Spells/LuluQAbility/LuluQ"
 				}
 			]
 		},
@@ -85,6 +85,7 @@
 			"variants": [
 				{
 					"name": "Whimsy",
+					"objectName": "LuluW",
 					"image": "assets/characters/lulu/hud/icons2d/lulu_whimsy.png",
 					"tooltip": "When used on an ally, Lulu grants <speed>@TotalMS@ Move Speed</speed> and <attackSpeed>@Effect7Amount*100@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When used on an enemy, Lulu <status>Polymorphs</status> them for @Effect3Amount@ seconds.",
 					"mana": [65, 65, 65, 65, 65, 65],
@@ -113,8 +114,7 @@
 						"5": [0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01],
 						"6": [0.2, 0.2, 0.225, 0.25, 0.275, 0.3, 0.3]
 					},
-					"dataKey": "Characters/Lulu/Spells/LuluWAbility/LuluW",
-					"tooltipExtendedBelowLine": "<rules><status>Polymorphed</status> targets are <status>Silenced</status>, <status>Disarmed</status>, and <status>Slowed</status> by @Effect4Amount*-1@.</rules>"
+					"dataKey": "Characters/Lulu/Spells/LuluWAbility/LuluW"
 				}
 			]
 		},
@@ -123,6 +123,7 @@
 			"variants": [
 				{
 					"name": "Help, Pix!",
+					"objectName": "LuluE",
 					"image": "assets/characters/lulu/hud/icons2d/lulu_commandpix.png",
 					"tooltip": "When used on an ally, Pix jumps to them and grants <spellName>Pix, Faerie Companion</spellName> for @Effect1Amount@ seconds. If the ally is a champion, Pix also grants <shield>@TotalShield@ Shield</shield> for @Effect7Amount@ seconds.<br><br>When used on an enemy champion, Pix hampers them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth> of them for @Effect6Amount@ seconds.",
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -176,6 +177,7 @@
 			"variants": [
 				{
 					"name": "Wild Growth",
+					"objectName": "LuluR",
 					"image": "assets/characters/lulu/hud/icons2d/lulu_giantgrowth.png",
 					"tooltip": "Lulu enlarges an ally, <status>Knocking Up</status> surrounding enemies for @KnockbackDuration@ second. The enlarged ally gains <healing>@TotalBonusHealth@ max Health</healing> and <status>Slows</status> surrounding enemies by @SlowPercent@% for @BuffDuration@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 0],
@@ -211,6 +213,7 @@
 			"variants": [
 				{
 					"name": "Pix, Faerie Companion",
+					"objectName": "LuluPassive",
 					"image": "assets/characters/lulu/hud/icons2d/lulu_pixfaeriecompanion.png",
 					"tooltip": "Lulu is assisted by Pix the faerie. When Lulu Attacks, Pix fires 3 bolts at her target, dealing <magicDamage>@CombinedDamage@ magic damage</magicDamage> to the first enemy hit.",
 					"dataValues": {

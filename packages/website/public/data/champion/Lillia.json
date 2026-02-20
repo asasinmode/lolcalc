@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Blooming Blows",
+					"objectName": "LilliaQ",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_q.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge.",
 					"mana": [65, 65, 65, 65, 65, 65],
@@ -100,6 +101,7 @@
 			"variants": [
 				{
 					"name": "Watch Out! Eep!",
+					"objectName": "LilliaW",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_w.png",
 					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
 					"mana": [50, 50, 50, 50, 50, 50],
@@ -149,8 +151,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lillia/Spells/LilliaWAbility/LilliaW",
-					"tooltipExtendedBelowLine": "<rules>Lillia does not dash over terrain with this ability.</rules><br><rules>Deals 50% less damage to minions.</rules>"
+					"dataKey": "Characters/Lillia/Spells/LilliaWAbility/LilliaW"
 				}
 			]
 		},
@@ -159,6 +160,7 @@
 			"variants": [
 				{
 					"name": "Swirlseed",
+					"objectName": "LilliaE",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_e.png",
 					"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain.",
 					"mana": [70, 70, 70, 70, 70, 70],
@@ -198,6 +200,7 @@
 			"variants": [
 				{
 					"name": "Lilting Lullaby",
+					"objectName": "LilliaR",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_r.png",
 					"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
@@ -225,8 +228,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Lillia/Spells/LilliaRAbility/LilliaR",
-					"tooltipExtendedBelowLine": "<rules>Drowsy units are slowed over the duration, and fall Asleep afterwards.<br>Asleep units can't move or act until damaged by an enemy with non-periodic damage.</rules>"
+					"dataKey": "Characters/Lillia/Spells/LilliaRAbility/LilliaR"
 				}
 			]
 		},
@@ -235,6 +237,7 @@
 			"variants": [
 				{
 					"name": "Dream-Laden Bough",
+					"objectName": "LilliaP",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_passive.png",
 					"tooltip": "{{Spell_LilliaP_Tooltip}}",
 					"tooltipExtended": "{{Spell_LilliaP_Tooltip}}<br><br><rules>Dream Dust deals a max of @MonsterDamageCap@ damage over the duration to jungle monsters.</rules><br><rules>Dream Dust heal is @MultiHealMod*100@% effective for each source beyond the first.</rules><br><rules>Dream Dust can only heal from one jungle monster at a time.</rules>",

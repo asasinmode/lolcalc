@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Lunge",
+					"objectName": "FioraQ",
 					"image": "assets/characters/fiora/hud/icons2d/fiora_q.png",
 					"tooltip": "Fiora lunges in a direction and stabs the closest enemy, ward, or structure, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. The strike will prioritize <keywordMajor>Vitals</keywordMajor> and enemies it will kill.<br><br>If Fiora strikes an enemy, this Ability's Cooldown is reduced by @CDRefundPercent*100@%.",
 					"mana": [20, 20, 20, 20, 20, 20],
@@ -60,8 +61,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Fiora/Spells/FioraQAbility/FioraQ",
-					"tooltipExtendedBelowLine": "<rules>The strike applies On-Hit Effects.</rules>"
+					"dataKey": "Characters/Fiora/Spells/FioraQAbility/FioraQ"
 				}
 			]
 		},
@@ -70,6 +70,7 @@
 			"variants": [
 				{
 					"name": "Riposte",
+					"objectName": "FioraW",
 					"image": "assets/characters/fiora/hud/icons2d/fiora_w.png",
 					"tooltip": "Fiora parries all incoming damage, disables, and negative effects for @ParryDuration@ seconds, then stabs. The stab deals <magicDamage>@StabDamage@ magic damage</magicDamage> to the first champion hit and <status>Slows</status> <speed>Move Speed</speed> by @MSSlowPercent*-100@%<attackSpeed> and Attack Speed by @AttackSlowPercent*-100@% </attackSpeed> for @CCDuration@ seconds. If Fiora parries an <status>Immobilizing</status> effect, the stabbed enemy is <status>Stunned</status> rather than <status>Slowed</status>.",
 					"mana": [50, 50, 50, 50, 50, 50],
@@ -107,6 +108,7 @@
 			"variants": [
 				{
 					"name": "Bladework",
+					"objectName": "FioraE",
 					"image": "assets/characters/fiora/hud/icons2d/fiora_e.png",
 					"tooltip": "Fiora gains <attackSpeed>@ASPercent*100@% Attack Speed</attackSpeed> for her next two Attacks. The first Attack <status>Slows</status> by @SlowPercent*-100@% for @SlowDuration@ second. The second Attack always critically strikes for <physicalDamage>@AttackTwopercentTAD*100@% damage</physicalDamage>.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -128,6 +130,7 @@
 			"variants": [
 				{
 					"name": "Grand Challenge",
+					"objectName": "FioraR",
 					"image": "assets/characters/fiora/hud/icons2d/fiora_r.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_FioraPassive_Name}}</spellName> <speed>Move Speed</speed> bonus is increased to @PercentMS*100@%.<br><br><spellActive>Active:</spellActive> Fiora reveals all four <keywordMajor>Vitals</keywordMajor> on a champion for a max of <trueDamage>@spell.FioraPassive:RDamageTotal@ max Health true damage</trueDamage> and gains <spellName>{{Spell_FioraPassive_Name}}'s</spellName> <speed>Move Speed</speed> bonus while near the target.<br><br>If Fiora strikes all four <keywordMajor>Vitals</keywordMajor> within @MarkDuration@ seconds or if the target dies after she has hit at least one, Fiora restores <healing>@HealPerSecondCalc@ Health per second</healing> to surrounding allied champions for @HealDuration@ seconds.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -168,6 +171,7 @@
 			"variants": [
 				{
 					"name": "Duelist's Dance",
+					"objectName": "FioraPassive",
 					"image": "assets/characters/fiora/hud/icons2d/fiora_p.png",
 					"tooltip": "Fiora identifies <keywordMajor>Vitals</keywordMajor> on enemy champions. Hitting this <keywordMajor>Vital</keywordMajor> with an Attack or Ability deals an additional <trueDamage>@PassiveDamageTotal@ max Health true damage</trueDamage>, grants Fiora <speed>@spell.FioraR:PercentMS*100@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds, and restores <healing>@PassiveHealAmount@ Health</healing>.<br><br>Fiora reveals a new <keywordMajor>Vital</keywordMajor> after 15 seconds or after striking one.",
 					"dataValues": {

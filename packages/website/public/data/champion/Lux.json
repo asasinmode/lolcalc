@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Light Binding",
+					"objectName": "LuxLightBinding",
 					"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
 					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @Effect3Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
 					"mana": [50, 50, 50, 50, 50, 50],
@@ -67,6 +68,7 @@
 			"variants": [
 				{
 					"name": "Prismatic Barrier",
+					"objectName": "LuxPrismaticWave",
 					"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
 					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @Effect3Amount@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -96,8 +98,7 @@
 						"2": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5],
 						"3": [100, 100, 100, 100, 100, 100, 100]
 					},
-					"dataKey": "Characters/Lux/Spells/LuxPrismaticWaveAbility/LuxPrismaticWave",
-					"tooltipExtendedBelowLine": "<rules>Both instances of Shield can stack.</rules>"
+					"dataKey": "Characters/Lux/Spells/LuxPrismaticWaveAbility/LuxPrismaticWave"
 				}
 			]
 		},
@@ -106,6 +107,7 @@
 			"variants": [
 				{
 					"name": "Lucent Singularity",
+					"objectName": "LuxLightStrikeKugel",
 					"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png",
 					"tooltip": "Lux creates a light zone that <status>Slows</status> by @Effect1Amount@% and reveals the area. After @Effect3Amount@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
 					"mana": [70, 80, 90, 100, 110, 110],
@@ -157,6 +159,7 @@
 			"variants": [
 				{
 					"name": "Final Spark",
+					"objectName": "LuxR",
 					"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png",
 					"tooltip": "Lux fires a dazzling ray of light, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in a line.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -190,6 +193,7 @@
 			"variants": [
 				{
 					"name": "Illumination",
+					"objectName": "LuxIlluminationPassive",
 					"image": "assets/characters/lux/hud/icons2d/luxilluminatingfraulein.png",
 					"tooltip": "Lux's damaging Abilities mark enemies for @DebuffDuration@ seconds. Lux's Attacks consume the mark, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br><spellName>Final Spark</spellName> will consume marks on enemies it hits and refresh them.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],

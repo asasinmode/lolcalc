@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Bouncing Blade",
+					"objectName": "KatarinaQ",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_q.png",
 					"tooltip": "Katarina throws a <keywordMajor>Dagger</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the target and @MaxBounces@ nearby enemies. The <keywordMajor>Dagger</keywordMajor> then ricochets onto the ground behind the primary target.",
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 7],
@@ -69,6 +70,7 @@
 			"variants": [
 				{
 					"name": "Preparation",
+					"objectName": "KatarinaW",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_w.png",
 					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds.",
 					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
@@ -85,6 +87,7 @@
 			"variants": [
 				{
 					"name": "Shunpo",
+					"objectName": "KatarinaEWrapper",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_e.png",
 					"tooltip": "Katarina blinks in the wink of an eye to the target ally, enemy, or <keywordMajor>Dagger</keywordMajor>. If it is an enemy, Katarina strikes for <magicDamage>@TotalDamage@ magic damage</magicDamage> - otherwise she strikes the nearest enemy in range.<br><br>Picking up a <keywordMajor>Dagger</keywordMajor> will reduce this Ability's Cooldown by <scaleLevel>@DaggerCooldownReduction@</scaleLevel> seconds (<scaleLevel>@TooltipDaggerReduction@</scaleLevel>). Katarina can blink to any location near the target.",
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
@@ -175,8 +178,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Katarina/Spells/KatarinaEWrapperAbility/KatarinaEWrapper",
-					"tooltipExtendedBelowLine": "<rules>The strike Applies On-Hit Effects.</rules>"
+					"dataKey": "Characters/Katarina/Spells/KatarinaEWrapperAbility/KatarinaEWrapper"
 				}
 			]
 		},
@@ -185,6 +187,7 @@
 			"variants": [
 				{
 					"name": "Death Lotus",
+					"objectName": "KatarinaR",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_r.png",
 					"tooltip": "Katarina becomes a flurry of blades, rapidly attacking the three nearest enemy champions with a flurry of knives. Each knife deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and <physicalDamage>@ADDamageCalc@ physical damage</physicalDamage>, and applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ seconds.<br><br>Total over @Duration@ seconds to each enemy: <magicDamage>@TotalDamageCalc@ magic damage</magicDamage> and <physicalDamage>@TotalADDamageCalc@ physical damage</physicalDamage>.",
 					"cooldownTime": [75, 75, 60, 45, 0, 0, 0],
@@ -263,8 +266,7 @@
 							"mModifiedGameCalculation": "ADDamageCalc"
 						}
 					},
-					"dataKey": "Characters/Katarina/Spells/KatarinaRAbility/KatarinaR",
-					"tooltipExtendedBelowLine": "<rules>This Ability applies %i:OnHit% <OnHit>On-Hit and On-Attack</OnHit> effects at @OnHitRatio*100@% damage, and does not Critically Strike or apply Life Steal.<br>The <physicalDamage>physical damage</physicalDamage> additionally increases with <attackSpeed>Attack Speed</attackSpeed>.</rules>"
+					"dataKey": "Characters/Katarina/Spells/KatarinaRAbility/KatarinaR"
 				}
 			]
 		},
@@ -273,6 +275,7 @@
 			"variants": [
 				{
 					"name": "Voracity",
+					"objectName": "KatarinaPassive",
 					"image": "assets/characters/katarina/hud/icons2d/katarina_passive.png",
 					"tooltip": "{{Spell_KatarinaPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KatarinaPassive_Tooltip}}<br><br><rules><keywordMajor>Dagger</keywordMajor> slashes apply On-Hit Effects to champions.</rules>",

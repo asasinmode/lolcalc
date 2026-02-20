@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Wild Cards",
+					"objectName": "WildCards",
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_powercard.png",
 					"tooltip": "Twisted Fate throws three cards that deal <magicDamage>@TotalDamage@ magic damage</magicDamage> each.",
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -62,8 +63,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/TwistedFate/Spells/WildCardsAbility/WildCards",
-					"tooltipExtendedBelowLine": "<rules>Enemies can only be damaged by one of the cards.</rules>"
+					"dataKey": "Characters/TwistedFate/Spells/WildCardsAbility/WildCards"
 				}
 			]
 		},
@@ -72,6 +72,7 @@
 			"variants": [
 				{
 					"name": "Pick a Card",
+					"objectName": "PickACard",
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_fatesgambit.png",
 					"tooltip": "Twisted Fate begins shuffling his deck, allowing him to <recast>Recast</recast> to lock in one of three cards and enhance his next Attack.<br><li>The Blue Card deals <magicDamage>@BlueDamage@ magic damage</magicDamage> and restores <scaleMana>@Effect6Amount@ Mana</scaleMana>.<li>The Red Card deals <magicDamage>@RedDamage@</magicDamage> to nearby enemies and <status>Slows</status> by @Effect2Amount@% for 2.5 seconds.<li>The Gold Card deals <magicDamage>@GoldDamage@</magicDamage> and <status>Stuns</status> for @Effect3Amount@ seconds.",
 					"tooltipExtended": "Twisted Fate begins shuffling his deck, allowing him to <recast>Recast</recast> to lock in one of three cards and enhance his next Attack.<br><li>The Blue Card deals <magicDamage>@ttBlueDamage@ = (</magicDamage><trueDamage>@BlueBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttBlueAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @BlueCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and restores <scaleMana>@Effect6Amount@ Mana</scaleMana>.<li>The Red Card deals <magicDamage>@ttRedDamage@ = (</magicDamage><trueDamage>@RedBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttRedAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @RedCritMultiplier*100@%<magicDamage> magic damage</magicDamage> to nearby enemies and <status>Slows</status> by @Effect2Amount@% for 2.5 seconds.<li>The Gold Card deals <magicDamage>@ttGoldDamage@ = (</magicDamage><trueDamage>@GoldBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttGoldAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @GoldCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and <status>Stuns</status> for @Effect3Amount@ seconds.",
@@ -258,6 +259,7 @@
 			"variants": [
 				{
 					"name": "Stacked Deck",
+					"objectName": "CardmasterStack",
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_rapidtoss.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Twisted Fate gains <attackSpeed>@AttackSpeedBonus@% Attack Speed</attackSpeed> and every 4th Attack deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -291,8 +293,7 @@
 					"effectAmount": {
 						"3": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/TwistedFate/Spells/CardmasterStackAbility/CardmasterStack",
-					"tooltipExtendedBelowLine": "<rules>@TowerEffectiveness*100@% effective against structures.</rules>"
+					"dataKey": "Characters/TwistedFate/Spells/CardmasterStackAbility/CardmasterStack"
 				}
 			]
 		},
@@ -301,6 +302,7 @@
 			"variants": [
 				{
 					"name": "Destiny",
+					"objectName": "Destiny",
 					"image": "assets/characters/twistedfate/hud/icons2d/destiny_temp.png",
 					"tooltip": "Twisted Fate focuses on his cards, granting <keywordStealth>True Sight</keywordStealth> of all enemy champions on the map for @Effect1Amount@ seconds and allowing him to <recast>Recast</recast>.<br><br><recast>Recast</recast>: Twisted Fate teleports up to @Effect4Amount@ units away.",
 					"mana": [100, 100, 100, 115, 130, 0],
@@ -312,8 +314,7 @@
 						"0": [0, 6, 8, 10, 0, 0, 0],
 						"3": [0, 5500, 5500, 5500, 0, 0, 0]
 					},
-					"dataKey": "Characters/TwistedFate/Spells/DestinyAbility/Destiny",
-					"tooltipExtendedBelowLine": "<rules><status>Disabling</status> effects will interrupt the teleport.</rules>"
+					"dataKey": "Characters/TwistedFate/Spells/DestinyAbility/Destiny"
 				}
 			]
 		},
@@ -322,6 +323,7 @@
 			"variants": [
 				{
 					"name": "Loaded Dice",
+					"objectName": "SecondSight",
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_sealfate.png",
 					"tooltip": "{{ Spell_SecondSight_Tooltip_@GameModeInteger@ }}",
 					"tooltipExtended": "{{Spell_SecondSight_TooltipExtended_@GameModeInteger@}}",

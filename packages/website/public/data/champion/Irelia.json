@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Bladesurge",
+					"objectName": "IreliaQ",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_q.png",
 					"tooltip": "Irelia dashes to an enemy, dealing <physicalDamage>@ChampionDamage@ physical damage</physicalDamage> and restoring <healing>@HealAmount@ Health</healing> to herself. If the enemy dies or was <keywordMajor>Unsteady</keywordMajor>, the Cooldown is refreshed.<br><br>Deals @MinionDamage@ damage to minions.",
 					"mana": [15, 15, 15, 15, 15, 15],
@@ -87,8 +88,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaQAbility/IreliaQ",
-					"tooltipExtendedBelowLine": "<rules>This ability applies On-Hit Effects.</rules>"
+					"dataKey": "Characters/Irelia/Spells/IreliaQAbility/IreliaQ"
 				}
 			]
 		},
@@ -97,6 +97,7 @@
 			"variants": [
 				{
 					"name": "Defiant Dance",
+					"objectName": "IreliaW",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_w.png",
 					"tooltip": "<charge>Begin Charging:</charge> Irelia enters a defensive stance for up to @MaxDuration@ seconds, becoming unable to act but reducing physical damage taken by @FinalPhysicalDR@% and magic damage taken by @FinalMagicDR@%.<br><br><release>Release:</release> Irelia lashes out with her blades, dealing <physicalDamage>@MinDamageCalc@ physical damage</physicalDamage> increased up to <physicalDamage>@MaxDamageCalc@</physicalDamage> based on charge time.",
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -169,8 +170,7 @@
 							"mModifiedGameCalculation": "FinalPhysicalDR"
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaWAbility/IreliaW",
-					"tooltipExtendedBelowLine": "<rules>The <release>Release</release> will happen automatically at the end of the <charge>Charge</charge> and cannot be interrupted. Reaches max damage increase after @ChargeTimeForMax@ seconds.</rules>"
+					"dataKey": "Characters/Irelia/Spells/IreliaWAbility/IreliaW"
 				}
 			]
 		},
@@ -179,6 +179,7 @@
 			"variants": [
 				{
 					"name": "Flawless Duet",
+					"objectName": "IreliaE",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_e.png",
 					"tooltip": "Irelia throws a blade into the ground and can <recast>Recast</recast> for up to @BuffDuration@ seconds. <br><br><recast>Recast:</recast> Irelia throws a second blade, then they fly towards each other <status>Stunning</status> for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Champions and large jungle monsters become <keywordMajor>Unsteady</keywordMajor> for @MarkDuration@ seconds.",
 					"mana": [50, 50, 50, 50, 50, 50],
@@ -209,8 +210,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaEAbility/IreliaE",
-					"tooltipExtendedBelowLine": "<rules>Irelia will automatically <recast>Recast</recast> at her location after @BuffDuration@ seconds.</rules>"
+					"dataKey": "Characters/Irelia/Spells/IreliaEAbility/IreliaE"
 				}
 			]
 		},
@@ -219,6 +219,7 @@
 			"variants": [
 				{
 					"name": "Vanguard's Edge",
+					"objectName": "IreliaR",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_r.png",
 					"tooltip": "Irelia launches a barrage of blades, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> and making champions and large jungle monsters <keywordMajor>Unsteady</keywordMajor> for @MarkDuration@ seconds. The barrage explodes into a cage around the first champion hit for @ZoneDuration@ seconds. The cage deals <magicDamage>@ZoneDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount@% for @CCDuration@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -261,8 +262,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Irelia/Spells/IreliaRAbility/IreliaR",
-					"tooltipExtendedBelowLine": "<rules>When the barrage explodes, surrounding enemies are also hit. </rules><br>"
+					"dataKey": "Characters/Irelia/Spells/IreliaRAbility/IreliaR"
 				}
 			]
 		},
@@ -271,6 +271,7 @@
 			"variants": [
 				{
 					"name": "Ionian Fervor",
+					"objectName": "IreliaPassive",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_passive.png",
 					"tooltip": "Irelia gains a stack for @BuffDuration@ seconds when she hits an enemy with an Ability (max @MaxStacks@). She gains <attackSpeed>@SingleStackAS@% Attack Speed</attackSpeed> per stack, and at max stacks her Attacks deal an additional <magicDamage>@OnHitBonus@ magic damage</magicDamage>.<br><br>Attacking a champion, structure, or large monster refreshes the duration of the stacks. Irelia gains a stack for each champion hit, or if she hits at least one non-champion enemy.",
 					"tooltipExtended": "Irelia gains a stack for @BuffDuration@ seconds when she hits an enemy with an Ability (max @MaxStacks@). She gains <attackSpeed>@SingleStackAS@% Attack Speed</attackSpeed> per stack, and at max stacks her Attacks deal an additional <magicDamage>@OnHitBonus@ magic damage</magicDamage>.<br><br>Attacking a champion, structure, or large monster refreshes the duration of the stacks. Irelia gains a stack for each champion hit, or if she hits at least one non-champion enemy.<br><br><rules>Deals @OnHitStructureMod*100@% damage to structures.</rules>",

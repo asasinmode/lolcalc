@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Pierce",
+					"objectName": "KalistaMysticShot",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_q.png",
 					"tooltip": "Kalista hurls a spear, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first target hit. If this kills the target, the spear continues onward, carrying any <spellName>{{Spell_KalistaExpungeWrapper_Name}}</spellName> stacks to the next target hit.<br><br>Kalista can dash after using this Ability using <spellName>{{Spell_KalistaPassiveBuff_Name}}</spellName>.",
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -65,6 +66,7 @@
 			"variants": [
 				{
 					"name": "Sentinel",
+					"objectName": "KalistaW",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
 					"cooldownTime": [30, 30, 30, 30, 30, 30, 30],
@@ -91,6 +93,7 @@
 			"variants": [
 				{
 					"name": "Rend",
+					"objectName": "KalistaExpungeWrapper",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -162,8 +165,7 @@
 					"effectAmount": {
 						"6": [2, 2, 2, 2, 2, 2, 2]
 					},
-					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper",
-					"tooltipExtendedBelowLine": "<rules>This Ability deals @EpicMonsterDamageMod*100@% damage to epic jungle monsters.</rules>"
+					"dataKey": "Characters/Kalista/Spells/KalistaExpungeWrapperAbility/KalistaExpungeWrapper"
 				}
 			]
 		},
@@ -172,6 +174,7 @@
 			"variants": [
 				{
 					"name": "Fate's Call",
+					"objectName": "KalistaRx",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_r.png",
 					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -189,6 +192,7 @@
 			"variants": [
 				{
 					"name": "Martial Poise",
+					"objectName": "KalistaPassiveBuff",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png",
 					"tooltip": "{{Spell_KalistaPassiveBuff_Tooltip}}",
 					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules><br>",

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Bouncing Bomb",
+					"objectName": "ZiggsQ",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsq.png",
 					"tooltip": "Ziggs throws a bouncing bomb that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -75,6 +76,7 @@
 			"variants": [
 				{
 					"name": "Satchel Charge",
+					"objectName": "ZiggsW",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsw.png",
 					"tooltip": "Ziggs flings an explosive charge that detonates after @BombDuration@ seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br><br>Satchel Charge will automatically destroy towers below @TurretDestroyPercent*100@% of their Health.",
 					"mana": [80, 80, 80, 80, 80, 80],
@@ -118,6 +120,7 @@
 			"variants": [
 				{
 					"name": "Hexplosive Minefield",
+					"objectName": "ZiggsE",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggse.png",
 					"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @Effect4Amount@ seconds. Mines last @MineDuration@ seconds.",
 					"mana": [70, 80, 90, 100, 110, 120],
@@ -158,8 +161,7 @@
 						"6": [135, 135, 135, 135, 135, 135, 135],
 						"7": [150, 150, 150, 150, 150, 150, 150]
 					},
-					"dataKey": "Characters/Ziggs/Spells/ZiggsEAbility/ZiggsE",
-					"tooltipExtendedBelowLine": "<rules>Mines beyond the first deal <magicDamage>@ReducedDamage@ damage</magicDamage>.</rules>"
+					"dataKey": "Characters/Ziggs/Spells/ZiggsEAbility/ZiggsE"
 				}
 			]
 		},
@@ -168,6 +170,7 @@
 			"variants": [
 				{
 					"name": "Mega Inferno Bomb",
+					"objectName": "ZiggsR",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsr.png",
 					"tooltip": "Ziggs hurls his ultimate creation, dealing <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> in the center of the blast radius, or <magicDamage>@BlastDamage@ magic damage</magicDamage> at the edge.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -208,6 +211,7 @@
 			"variants": [
 				{
 					"name": "Short Fuse",
+					"objectName": "ZiggsPassiveBuff",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggspassiveready.png",
 					"tooltip": "Every @Cooldown@ seconds, Ziggs' next Attack deals an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. It deals <magicDamage>@StructureDamage@ damage</magicDamage> instead to structures. <br><br>Ziggs' abilities reduce this Cooldown by @SpellCDR@ seconds.",
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],

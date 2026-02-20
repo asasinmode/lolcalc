@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Radiant Blast",
+					"objectName": "KayleQ",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_q.png",
 					"tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ seconds, and removing <scaleArmor>@ShredPercent@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds from the target and enemies behind them.",
 					"mana": [60, 70, 80, 90, 100, 100],
@@ -82,6 +83,7 @@
 			"variants": [
 				{
 					"name": "Celestial Blessing",
+					"objectName": "KayleW",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_w.png",
 					"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds.",
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -118,8 +120,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Kayle/Spells/KayleWAbility/KayleW",
-					"tooltipExtendedBelowLine": "<rules>If cast without a target, this Ability will heal the most wounded ally in range.</rules>"
+					"dataKey": "Characters/Kayle/Spells/KayleWAbility/KayleW"
 				}
 			]
 		},
@@ -128,6 +129,7 @@
 			"variants": [
 				{
 					"name": "Starfire Spellblade",
+					"objectName": "KayleE",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 8],
@@ -185,8 +187,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Kayle/Spells/KayleEAbility/KayleE",
-					"tooltipExtendedBelowLine": "<rules>This Ability applies on-hit and spell effects. Max @MaxExecuteVsMonsters@ bonus damage vs. jungle monsters.</rules>"
+					"dataKey": "Characters/Kayle/Spells/KayleEAbility/KayleE"
 				}
 			]
 		},
@@ -195,6 +196,7 @@
 			"variants": [
 				{
 					"name": "Divine Judgment",
+					"objectName": "KayleR",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_r.png",
 					"tooltip": "Kayle makes an allied champion Invulnerable for @InvulnDuration@ seconds and then purifies the area around them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
 					"mana": [100, 50, 0, 0, 0, 0],
@@ -233,6 +235,7 @@
 			"variants": [
 				{
 					"name": "Divine Ascent",
+					"objectName": "KaylePassive",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_p.png",
 					"tooltip": "{{Spell_KaylePassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_KaylePassive_Tooltip }}<br><rules>Fire waves apply spell effects and can Critically Strike.</rules>",

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Broken Wings",
+					"objectName": "RivenTriCleave",
 					"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
 					"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
 					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
@@ -63,8 +64,7 @@
 						"3": [2, 2, 2, 2, 2, 2, 2],
 						"4": [65, 65, 70, 75, 80, 85, 85]
 					},
-					"dataKey": "Characters/Riven/Spells/RivenTriCleaveAbility/RivenTriCleave",
-					"tooltipExtendedBelowLine": "<rules>Only the last use of this Ability can cross terrain.<br>Riven targets the unit your cursor is on, or dashes forward if there is no target.</rules>"
+					"dataKey": "Characters/Riven/Spells/RivenTriCleaveAbility/RivenTriCleave"
 				}
 			]
 		},
@@ -73,6 +73,7 @@
 			"variants": [
 				{
 					"name": "Ki Burst",
+					"objectName": "RivenMartyr",
 					"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
 					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 7],
@@ -109,6 +110,7 @@
 			"variants": [
 				{
 					"name": "Valor",
+					"objectName": "RivenFeint",
 					"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
 					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
@@ -135,8 +137,7 @@
 						"3": [800, 800, 800, 800, 800, 800, 800],
 						"4": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},
-					"dataKey": "Characters/Riven/Spells/RivenFeintAbility/RivenFeint",
-					"tooltipExtendedBelowLine": "<rules>This dash cannot go over terrain.</rules>"
+					"dataKey": "Characters/Riven/Spells/RivenFeintAbility/RivenFeint"
 				}
 			]
 		},
@@ -145,6 +146,7 @@
 			"variants": [
 				{
 					"name": "Blade of the Exile",
+					"objectName": "RivenFengShuiEngine",
 					"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
 					"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health.",
 					"cooldownTime": [10, 120, 90, 60, 60, 10, 10],
@@ -201,8 +203,7 @@
 						"3": [0, 15, 15, 15, 0, 0, 0],
 						"4": [25, 25, 25, 25, 25, 25, 25]
 					},
-					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine",
-					"tooltipExtendedBelowLine": "<rules>Gains @TooltipAttackRange@ Attack Range</rules> "
+					"dataKey": "Characters/Riven/Spells/RivenFengShuiEngineAbility/RivenFengShuiEngine"
 				}
 			]
 		},
@@ -211,6 +212,7 @@
 			"variants": [
 				{
 					"name": "Runic Blade",
+					"objectName": "RivenPassive",
 					"image": "assets/characters/riven/hud/icons2d/rivenrunicblades.png",
 					"tooltip": "{{Spell_RivenPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_RivenPassive_Tooltip}}<br><br><rules>The bonus damage can critically strike.<br>Deals @MonsterBonusDamage@ bonus damage to monsters.</rules>",

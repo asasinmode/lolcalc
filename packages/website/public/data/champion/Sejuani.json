@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Arctic Assault",
+					"objectName": "SejuaniQ",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_q.png",
 					"tooltip": "Sejuani charges, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to enemies and <status>Knocking</status> them <status>Up</status> for @Effect4Amount@ seconds. The charge ends after hitting an enemy champion.",
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -69,6 +70,7 @@
 			"variants": [
 				{
 					"name": "Winter's Wrath",
+					"objectName": "SejuaniW",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_w.png",
 					"tooltip": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage</physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>.",
 					"tooltipExtended": "Sejuani swings her flail, dealing <physicalDamage>@FirstHitDamageTooltip@ physical damage </physicalDamage> and <status>Knocking Back</status> minions and jungle monsters. She then lashes out again, dealing <physicalDamage>@SecondHitDamageTooltip@ physical damage</physicalDamage> and briefly <status>Slowing</status> targets by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Both swings apply stacks of <spellName>Permafrost</spellName>.",
@@ -132,6 +134,7 @@
 			"variants": [
 				{
 					"name": "Permafrost",
+					"objectName": "SejuaniE",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nearby melee allied champions' Attacks apply a stack to champions and jungle monsters.<br><br><spellPassive>Active:</spellPassive> Sejuani deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to target enemy with 4 stacks and <status>Stuns</status> them for @Effect1Amount@ second. ",
 					"mana": [20, 20, 20, 20, 20, 20],
@@ -162,8 +165,7 @@
 						"5": [1100, 1100, 1100, 1100, 1100, 1100, 1100],
 						"8": [250, 250, 250, 250, 250, 250, 250]
 					},
-					"dataKey": "Characters/Sejuani/Spells/SejuaniEAbility/SejuaniE",
-					"tooltipExtendedBelowLine": "<rules>Champions <status>Stunned</status> by Sejuani can't gain stacks for @PerChampionCD@ seconds.<br>Enemies <status>Stunned</status> by this Ability are slightly <status>Knocked Back</status>.<br>Permafrost will target the closest valid enemy to your cursor (prioritizing champions).<br>This Ability <status>Knocks Down</status> enemies.</rules>"
+					"dataKey": "Characters/Sejuani/Spells/SejuaniEAbility/SejuaniE"
 				}
 			]
 		},
@@ -172,6 +174,7 @@
 			"variants": [
 				{
 					"name": "Glacial Prison",
+					"objectName": "SejuaniR",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_r.png",
 					"tooltip": "Sejuani throws her True Ice bola, <status>Stunning</status> and revealing the first enemy champion hit for @Effect2Amount@ second and dealing <magicDamage>@MinorDamageTooltip@ magic damage</magicDamage>.<br><br>If the bola travels at least 25% of its range, it <status>Stuns</status> and reveals for @Effect6Amount@ seconds instead. It then also creates an ice storm that <status>Slows</status> surrounding enemies by @Effect4Amount@% for @Effect3Amount@ seconds. All affected enemies take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -212,8 +215,7 @@
 						"6": [0, 200, 300, 400, 0, 0, 30],
 						"7": [30, 30, 30, 30, 30, 30, 30]
 					},
-					"dataKey": "Characters/Sejuani/Spells/SejuaniRAbility/SejuaniR",
-					"tooltipExtendedBelowLine": "<rules>The <status>Stunned</status> enemy takes damage immediately, while enemies inside the storm take damage after it ends. Enemies in the storm are also <status>Slowed</status> for an additional 1 second.</rules>"
+					"dataKey": "Characters/Sejuani/Spells/SejuaniRAbility/SejuaniR"
 				}
 			]
 		},
@@ -222,6 +224,7 @@
 			"variants": [
 				{
 					"name": "Fury of the North",
+					"objectName": "SejuaniPassive",
 					"image": "assets/characters/sejuani/hud/icons2d/sejuani_passive.png",
 					"tooltip": "{{Spell_SejuaniPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_SejuaniPassive_Tooltip}}<br><br><rules>Percent Health damage against epic jungle monsters is capped at @EpicMonsterCap@.<br>Defensive effect persists for @FrostArmorDuration@ seconds after taking damage from champions or large jungle monsters.</rules>",

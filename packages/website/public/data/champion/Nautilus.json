@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Dredge Line",
+					"objectName": "NautilusAnchorDrag",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_anchorchain.png",
 					"tooltip": "Nautilus hurls his anchor forward. If it hits an enemy, Nautilus drags himself and the target together, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Stunning</status> them briefly. If the anchor hits terrain, Nautilus will drag himself towards it.",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -61,8 +62,7 @@
 						"2": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"3": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Nautilus/Spells/NautilusAnchorDragAbility/NautilusAnchorDrag",
-					"tooltipExtendedBelowLine": "<rules>If Nautilus's hook hits terrain, this Ability's Cooldown is reduced by @TerrainCDR*100@%, and @TerrainMana*100@% of the Mana cost is refunded.</rules>"
+					"dataKey": "Characters/Nautilus/Spells/NautilusAnchorDragAbility/NautilusAnchorDrag"
 				}
 			]
 		},
@@ -71,6 +71,7 @@
 			"variants": [
 				{
 					"name": "Titan's Wrath",
+					"objectName": "NautilusPiercingGaze",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_wrath.png",
 					"tooltip": "Nautilus gains a <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds. While the <shield>Shield</shield> persists, Nautilus' Attacks deal an additional <magicDamage>@DotDamageCalc@ magic damage</magicDamage> over 2 seconds to his target and all surrounding enemies.",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -109,8 +110,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Nautilus/Spells/NautilusPiercingGazeAbility/NautilusPiercingGaze",
-					"tooltipExtendedBelowLine": ""
+					"dataKey": "Characters/Nautilus/Spells/NautilusPiercingGazeAbility/NautilusPiercingGaze"
 				}
 			]
 		},
@@ -119,6 +119,7 @@
 			"variants": [
 				{
 					"name": "Riptide",
+					"objectName": "NautilusSplashZone",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_rippleeffect.png",
 					"tooltip": "Nautilus creates three exploding waves around himself, each dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slows</status> them by @SlowPercent*100@% decaying over @SlowDuration@ seconds.",
 					"mana": [50, 60, 70, 80, 90, 100],
@@ -160,8 +161,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Nautilus/Spells/NautilusSplashZoneAbility/NautilusSplashZone",
-					"tooltipExtendedBelowLine": "<rules>Waves deal @ExtraWavePenalty*100@% less damage after the first.</rules><br><rules>This Ability deals @MonsterBonusCalc@ bonus damage to jungle monsters the first time it hits.</rules>"
+					"dataKey": "Characters/Nautilus/Spells/NautilusSplashZoneAbility/NautilusSplashZone"
 				}
 			]
 		},
@@ -170,6 +170,7 @@
 			"variants": [
 				{
 					"name": "Depth Charge",
+					"objectName": "NautilusGrandLine",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_grandline.png",
 					"tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing <magicDamage>@PrimaryTargetDamage@ magic damage</magicDamage>, <status>Knocking</status> them <status>Up</status> and <status>Stunning</status> them for @StunDuration@ seconds. Other enemies hit by the shockwave are also <status>Knocked Up</status> and <status>Stunned</status> and take <magicDamage>@SecondaryTargetDamage@ magic damage</magicDamage>.",
 					"mana": [100, 100, 100, 100, 100, 0],
@@ -214,6 +215,7 @@
 			"variants": [
 				{
 					"name": "Staggering Blow",
+					"objectName": "NautilusPassive",
 					"image": "assets/characters/nautilus/hud/icons2d/nautilus_staggeringblow.png",
 					"tooltip": "{{Spell_NautilusPassive_Tooltip}}",
 					"tooltipExtended": "{{ Spell_NautilusPassive_Tooltip }}<br><rules>This effect cannot trigger on the same target more than once every @PerTargetCD@ seconds.</rules>",

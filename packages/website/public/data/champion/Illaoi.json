@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Tentacle Smash",
+					"objectName": "IllaoiQ",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_q.png",
 					"tooltip": "<passive>Passive:</passive> <keywordMajor>Slam</keywordMajor> damage is increased by <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage> (currently <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ physical damage</physicalDamage>).<br><br><active>Active:</active> Illaoi swings her idol, causing a Tentacle to <keywordMajor>Slam</keywordMajor> forward.",
 					"mana": [40, 45, 50, 55, 60, 65],
@@ -104,6 +105,7 @@
 			"variants": [
 				{
 					"name": "Harsh Lesson",
+					"objectName": "IllaoiW",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_w.png",
 					"tooltip": "Illaoi's next Attack causes her to leap at the target, dealing an additional <physicalDamage>@HealthPercentTotal@ max Health physical damage</physicalDamage>. When she strikes, nearby Tentacles will <keywordMajor>Slam</keywordMajor> at the target.",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -152,8 +154,7 @@
 					"effectAmount": {
 						"1": [2, 2, 2, 2, 2, 2, 2]
 					},
-					"dataKey": "Characters/Illaoi/Spells/IllaoiWAbility/IllaoiW",
-					"tooltipExtendedBelowLine": "<rules>The percent Health damage does a minimum of @WMinDamage@. Against jungle monsters the damage is capped at @MonsterDamageCap@.<br>{{ buff_desc_SpellEffects }}</rules>"
+					"dataKey": "Characters/Illaoi/Spells/IllaoiWAbility/IllaoiW"
 				}
 			]
 		},
@@ -162,6 +163,7 @@
 			"variants": [
 				{
 					"name": "Test of Spirit",
+					"objectName": "IllaoiE",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_e.png",
 					"tooltip": "Illaoi pulls the spirit from an enemy champion for @SpiritDuration@ seconds. The spirit can be damaged like a champion, with @EchoPercent@ of that damage echoing to its owner.<br><br>If the spirit dies or the target leaves its range, the target becomes marked for @VesselDuration@ seconds and is <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds. Marked enemies spawn Tentacles if possible.<br><br>Tentacles will automatically <keywordMajor>Slam</keywordMajor> at spirits and marked enemies once every @TimeBetweenVesselTentacleSlams@ seconds.",
 					"mana": [35, 40, 45, 50, 55, 60],
@@ -232,8 +234,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Illaoi/Spells/IllaoiEAbility/IllaoiE",
-					"tooltipExtendedBelowLine": "<rules>Marked enemies are revealed for a short time.</rules>"
+					"dataKey": "Characters/Illaoi/Spells/IllaoiEAbility/IllaoiE"
 				}
 			]
 		},
@@ -242,6 +243,7 @@
 			"variants": [
 				{
 					"name": "Leap of Faith",
+					"objectName": "IllaoiR",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_r.png",
 					"tooltip": "Illaoi smashes her idol into the ground, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> to nearby enemies and spawning a Tentacle for each enemy champion hit.<br><br>For the next @Duration@ seconds, Tentacles are untargetable and <keywordMajor>Slam</keywordMajor> 50% faster, and <spellName>Harsh Lesson</spellName> has a @spell.IllaoiW:CooldownDuringR@ second cooldown.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -268,8 +270,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Illaoi/Spells/IllaoiRAbility/IllaoiR",
-					"tooltipExtendedBelowLine": "<rules>Spirits from <spellName>Test Of Spirit</spellName> also generate a Tentacle if hit by this ability.</rules>"
+					"dataKey": "Characters/Illaoi/Spells/IllaoiRAbility/IllaoiR"
 				}
 			]
 		},
@@ -278,6 +279,7 @@
 			"variants": [
 				{
 					"name": "Prophet of an Elder God",
+					"objectName": "IllaoiPassive",
 					"image": "assets/characters/illaoi/hud/icons2d/illaoi_p.png",
 					"tooltip": "{{Spell_IllaoiPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_IllaoiPassive_Tooltip}}<br><br><rules>Enemies hit by multiple Slams at once take 50% damage for the second and 25% damage for all additional Slams.<br>Tentacles last until killed or Illaoi is out of range for @TentacleDisabledLifetime@ seconds.</rules>",

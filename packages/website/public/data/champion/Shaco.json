@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Deceive",
+					"objectName": "Deceive",
 					"image": "assets/characters/shaco/hud/icons2d/jester_maniacalcloak2.png",
 					"tooltip": "Shaco teleports and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ seconds. Using <spellName>{{Spell_JackInTheBox_Name}}</spellName> or <spellName>{{Spell_HallucinateFull_Name}}</spellName> does not break <keywordStealth>Invisibility</keywordStealth>.<br><br>Shaco's next Attack while <keywordStealth>Invisible</keywordStealth> deals an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If striking from behind, this Attack critically strikes for @QCritDamageMod@ damage.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -91,8 +92,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Shaco/Spells/DeceiveAbility/Deceive",
-					"tooltipExtendedBelowLine": "<rules>The bonus damage on Attack can critically strike.<br>{{Reminder_Invisibility}}</rules>"
+					"dataKey": "Characters/Shaco/Spells/DeceiveAbility/Deceive"
 				}
 			]
 		},
@@ -101,6 +101,7 @@
 			"variants": [
 				{
 					"name": "Jack In The Box",
+					"objectName": "JackInTheBox",
 					"image": "assets/characters/shaco/hud/icons2d/jester_deathward.png",
 					"tooltip": "Shaco creates a trap that stealths itself after @Effect5Amount@ seconds and lasts for @TrapDuration@ seconds. It activates when an enemy comes near or when revealed, <status>Fearing</status> nearby enemy Champions for @FearDuration@ seconds, or @MinionFearDuration@ seconds for minions and jungle monsters.<br><br>Once activated, the trap fires at all nearby enemies for 5 seconds, dealing <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ damage</magicDamage> if focused on a single target.<br><br>Jack in the Box's attacks deal an additional <magicDamage>@MonsterBonusDamage@</magicDamage> damage to monsters.",
 					"mana": [70, 65, 60, 55, 50, 50],
@@ -169,6 +170,7 @@
 			"variants": [
 				{
 					"name": "Two-Shiv Poison",
+					"objectName": "TwoShivPoison",
 					"image": "assets/characters/shaco/hud/icons2d/jester_incrediblyprecise.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While this Ability is off Cooldown, Shaco's Attacks <status>Slow</status> the target by @SlowAmount*-100@% for @SlowDurationPassive@ seconds.<br><br><spellActive>Active:</spellActive> Shaco throws a shiv, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@% for @SlowDurationActive@ seconds. If the target has less than @ExecuteHealthThreshold*100@% Health, the shiv deals <magicDamage>@TotalExecuteDamage@ damage</magicDamage> instead.",
 					"mana": [75, 75, 75, 75, 75, 75],
@@ -218,6 +220,7 @@
 			"variants": [
 				{
 					"name": "Hallucinate",
+					"objectName": "HallucinateFull",
 					"image": "assets/characters/shaco/hud/icons2d/jester_hallucinogenbomb.png",
 					"tooltip": "Shaco briefly disappears, then reappears with a clone that lasts @CloneLifetime@ seconds and detonates when it dies, dealing <magicDamage>@ExplosionTotalDamage@ magic damage</magicDamage> and spawning three mini <spellName>Jack in the Boxes</spellName> that trigger immediately. The clone deals @CloneAADamagePercent*100@% of Shaco's damage and receives @CloneIncomingDamagePercent*100@% increased damage.<br><br>Mini <spellName>Jack in the Boxes</spellName> deal <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ magic damage</magicDamage> if firing at only one enemy, and <status>Fear</status> for @BoxFearDuration@ second.<br>",
 					"mana": [100, 100, 100, 75, 75, 0],
@@ -275,8 +278,7 @@
 					"effectAmount": {
 						"4": [6, 6, 6, 6, 6, 6, 6]
 					},
-					"dataKey": "Characters/Shaco/Spells/HallucinateFullAbility/HallucinateFull",
-					"tooltipExtendedBelowLine": "<rules>The clone can be controlled using the Alt key and right click, or by <recast>Recasting</recast> this Ability.</rules>"
+					"dataKey": "Characters/Shaco/Spells/HallucinateFullAbility/HallucinateFull"
 				}
 			]
 		},
@@ -285,6 +287,7 @@
 			"variants": [
 				{
 					"name": "Backstab",
+					"objectName": "ShacoPassive",
 					"image": "assets/characters/shaco/hud/icons2d/jester_carefulstrikes.png",
 					"tooltip": "When striking enemies that are facing away from him:<li>Shaco's Attacks deal an additional <physicalDamage>@BasicAttackDamage@ physical damage</physicalDamage> that can critically strike.<li><spellName>{{Spell_TwoShivPoison_Name}}</spellName> deals an additional <magicDamage>@ShivDamage@ magic damage</magicDamage>, increased to <magicDamage>@ShivDamageExecute@ magic damage</magicDamage> if the target is below 30% Health.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],

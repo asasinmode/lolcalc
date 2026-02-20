@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Burst Fire",
+					"objectName": "ZeriQ",
 					"image": "assets/characters/zeri/hud/icons2d/zeriq.png",
 					"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. ",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -125,8 +126,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Zeri/Spells/ZeriQAbility/ZeriQ",
-					"tooltipExtendedBelowLine": "<rules>This Ability can crit, apply on-hit effects once per target, and hit anything that an Attack can. The Cooldown and cast time scale down with <attackSpeed>Attack Speed</attackSpeed> (max <attackSpeed>@AttackSpeedCap@ attacks per second</attackSpeed>). @ExcessAttackSpeedToADMult*100@% of excess <attackSpeed>Attack Speed</attackSpeed> is converted into <physicalDamage>Attack Damage</physicalDamage>.</rules>"
+					"dataKey": "Characters/Zeri/Spells/ZeriQAbility/ZeriQ"
 				}
 			]
 		},
@@ -135,6 +135,7 @@
 			"variants": [
 				{
 					"name": "Ultrashock Laser",
+					"objectName": "ZeriW",
 					"image": "assets/characters/zeri/hud/icons2d/zeriw.png",
 					"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>.",
 					"mana": [50, 60, 70, 80, 90, 100],
@@ -197,8 +198,7 @@
 							"mModifiedGameCalculation": "TotalDamage"
 						}
 					},
-					"dataKey": "Characters/Zeri/Spells/ZeriWAbility/ZeriW",
-					"tooltipExtendedBelowLine": "<rules>This Ability's cast time scales down with <attackSpeed>Attack Speed</attackSpeed>.<br>Empowered damage scales with Critical Strike Damage at @CriticalEffectiveness*100@% effectiveness.</rules>"
+					"dataKey": "Characters/Zeri/Spells/ZeriWAbility/ZeriW"
 				}
 			]
 		},
@@ -207,6 +207,7 @@
 			"variants": [
 				{
 					"name": "Spark Surge",
+					"objectName": "ZeriE",
 					"image": "assets/characters/zeri/hud/icons2d/zerie.png",
 					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
 					"mana": [90, 85, 80, 75, 70, 70],
@@ -298,8 +299,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Zeri/Spells/ZeriEAbility/ZeriE",
-					"tooltipExtendedBelowLine": "<rules>On-hit damage is increased by Zeri's Critical Strike Chance and Critical Strike Damage at @CritScalingMod*100@% effectiveness.<br>Pierce damage can critically strike but does not apply On-Hit effects.<br>Uncharged Attacks do not reduce this ability's cooldown.</rules>"
+					"dataKey": "Characters/Zeri/Spells/ZeriEAbility/ZeriE"
 				}
 			]
 		},
@@ -308,6 +308,7 @@
 			"variants": [
 				{
 					"name": "Lightning Crash",
+					"objectName": "ZeriR",
 					"image": "assets/characters/zeri/hud/icons2d/zerir.png",
 					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -368,8 +369,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Zeri/Spells/ZeriRAbility/ZeriR",
-					"tooltipExtendedBelowLine": "<rules>The <attackSpeed>Attack Speed</attackSpeed> also increases Zeri's <attackSpeed>max Attack Speed</attackSpeed>. The chain lightning can critically strike but does not apply On-Hit effects. Uncharged Attacks do not stack or refresh this ability.<br>This ability's duration extension cannot exceed its original duration of @RDuration@ seconds.</rules>"
+					"dataKey": "Characters/Zeri/Spells/ZeriRAbility/ZeriR"
 				}
 			]
 		},
@@ -378,6 +378,7 @@
 			"variants": [
 				{
 					"name": "Living Battery",
+					"objectName": "ZeriPassive",
 					"image": "assets/characters/zeri/hud/icons2d/zeriqpassivecharged.png",
 					"tooltip": "{{Spell_ZeriPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_ZeriPassive_Tooltip}}<br><br><rules>Percent Health damage against jungle monsters is capped at 300.</rules>",

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Bandage Toss",
+					"objectName": "BandageToss",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_q.png",
 					"tooltip": "Amumu launches a bandage, pulling himself to the first enemy hit, <status>Stunning</status> them for @Effect2Amount@ second, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>This Ability has 2 charges.",
 					"mana": [50, 50, 50, 50, 50, 50],
@@ -67,6 +68,7 @@
 			"variants": [
 				{
 					"name": "Despair",
+					"objectName": "AuraofDespair",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_w.png",
 					"tooltip": "<toggle>Toggle:</toggle> Amumu begins crying, dealing <magicDamage>@BaseDamage@ plus @TotalHealthDamage@% max Health magic damage</magicDamage> to nearby enemies every second and refreshing <keywordMajor>Curse</keywordMajor>.",
 					"mana": [8, 8, 8, 8, 8, 8],
@@ -117,6 +119,7 @@
 			"variants": [
 				{
 					"name": "Tantrum",
+					"objectName": "Tantrum",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Amumu takes @DamageReduction@ reduced physical damage. Additionally, when Amumu is hit by an Attack, this Ability's Cooldown is reduced by @Effect3Amount@ seconds.<br><br><spellActive>Active:</spellActive> Amumu throws a tantrum, dealing <magicDamage>@TantrumDamage@ magic damage</magicDamage> to nearby enemies.",
 					"mana": [35, 35, 35, 35, 35, 35],
@@ -165,8 +168,7 @@
 						"2": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
 						"6": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
 					},
-					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum",
-					"tooltipExtendedBelowLine": "<rules>Damage reduction effect can't reduce the damage below @FlatDamageReductionMax*100@%.</rules>"
+					"dataKey": "Characters/Amumu/Spells/TantrumAbility/Tantrum"
 				}
 			]
 		},
@@ -175,6 +177,7 @@
 			"variants": [
 				{
 					"name": "Curse of the Sad Mummy",
+					"objectName": "CurseoftheSadMummy",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_r.png",
 					"tooltip": "Amumu flares out his bandages, <status>Stunning</status> for @RDuration@ seconds, dealing <magicDamage>@RCalculatedDamage@ magic damage</magicDamage> and applying <keywordMajor>Curse</keywordMajor>.",
 					"mana": [100, 150, 200, 80, 80, 0],
@@ -198,8 +201,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy",
-					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
+					"dataKey": "Characters/Amumu/Spells/CurseoftheSadMummyAbility/CurseoftheSadMummy"
 				}
 			]
 		},
@@ -208,6 +210,7 @@
 			"variants": [
 				{
 					"name": "Cursed Touch",
+					"objectName": "AmumuP",
 					"image": "assets/characters/amumu/hud/icons2d/amumu_passive.png",
 					"tooltip": "Amumu's Attacks <keywordMajor>Curse</keywordMajor> his enemies for @DebuffDuration@ seconds, causing them to take an additional <trueDamage>@DamageAmp*100@% true damage</trueDamage> from all magic damage they take.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],

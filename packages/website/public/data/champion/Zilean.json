@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Time Bomb",
+					"objectName": "ZileanQ",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
 					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds.",
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -63,8 +64,7 @@
 						"2": [7, 7, 7, 7, 7, 7, 7],
 						"3": [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
 					},
-					"dataKey": "Characters/Zilean/Spells/ZileanQAbility/ZileanQ",
-					"tooltipExtendedBelowLine": "<rules>The bomb will prioritize attaching to champions and units that already have a bomb.</rules>"
+					"dataKey": "Characters/Zilean/Spells/ZileanQAbility/ZileanQ"
 				}
 			]
 		},
@@ -73,6 +73,7 @@
 			"variants": [
 				{
 					"name": "Rewind",
+					"objectName": "ZileanW",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
 					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @Effect2Amount@ seconds.",
 					"mana": [35, 35, 35, 35, 35, 35],
@@ -91,6 +92,7 @@
 			"variants": [
 				{
 					"name": "Time Warp",
+					"objectName": "TimeWarp",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
 					"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds.",
 					"mana": [50, 50, 50, 50, 50, 50],
@@ -110,6 +112,7 @@
 			"variants": [
 				{
 					"name": "Chronoshift",
+					"objectName": "ChronoShift",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
 					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
 					"mana": [125, 150, 175, 0, 0, 0],
@@ -135,8 +138,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Zilean/Spells/ChronoShiftAbility/ChronoShift",
-					"tooltipExtendedBelowLine": "<rules>Units in Stasis cannot move or act, and are invulnerable and Untargetable.</rules>"
+					"dataKey": "Characters/Zilean/Spells/ChronoShiftAbility/ChronoShift"
 				}
 			]
 		},
@@ -145,6 +147,7 @@
 			"variants": [
 				{
 					"name": "Time In A Bottle",
+					"objectName": "HeightenedLearning",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_passive.png",
 					"tooltip": "{{Spell_HeightenedLearning_Tooltip}}",
 					"tooltipExtended": "{{Spell_HeightenedLearning_Tooltip}}<br><br>Total awarded: <statTracking>@TotalXP@ Experience</statTracking>.<br><br><rules>Experience can't be granted in combat.</rules>",

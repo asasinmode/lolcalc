@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "High Note",
+					"objectName": "SeraphineQ",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_q1.png",
 					"tooltip": "Seraphine projects a pure note, dealing <magicDamage>@ExplosionDamage@ magic damage</magicDamage>, increased against champions and monsters by the target's missing Health percentage up to <magicDamage>@TotalEmpoweredDamage@ damage</magicDamage> below @ExecuteThreshold*100@% Health.",
 					"mana": [60, 70, 80, 90, 100, 100],
@@ -75,6 +76,7 @@
 			"variants": [
 				{
 					"name": "Surround Sound",
+					"objectName": "SeraphineW",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_w1.png",
 					"tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>@HasteValueAllies@ Move Speed</speed>, herself <speed>@WMSBonusTotal@ decaying Move Speed</speed> and both <shield>@ShieldValueSeraphine@ Shield</shield> for @ShieldDuration@ seconds.<br><br>If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>@WMissingHPHeal@% missing Health</healing> to them after a @WHealSplitDelay@ second delay.",
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -142,8 +144,7 @@
 							"mModifiedGameCalculation": "TotalShieldStrength"
 						}
 					},
-					"dataKey": "Characters/Seraphine/Spells/SeraphineWAbility/SeraphineW",
-					"tooltipExtendedBelowLine": "<rules>This Ability only heals once, even if cast twice.</rules>"
+					"dataKey": "Characters/Seraphine/Spells/SeraphineWAbility/SeraphineW"
 				}
 			]
 		},
@@ -152,6 +153,7 @@
 			"variants": [
 				{
 					"name": "Beat Drop",
+					"objectName": "SeraphineE",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_e1.png",
 					"tooltip": "Seraphine unleashes a heavy soundwave, dealing <magicDamage>@FinalDamage@ magic damage</magicDamage> to enemies in a line and <status>Slowing</status> them by @SlowValue@% for @SlowDuration@ seconds.<br><br>Enemies that are already <status>Slowed</status> are <status>Rooted</status> instead, and <status>Immobilized</status> enemies are <status>Stunned</status>.",
 					"mana": [60, 60, 60, 60, 60, 60],
@@ -177,8 +179,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Seraphine/Spells/SeraphineEAbility/SeraphineE",
-					"tooltipExtendedBelowLine": "<rules>Deals @MinionDamageMod*100@% damage against minions.</rules>"
+					"dataKey": "Characters/Seraphine/Spells/SeraphineEAbility/SeraphineE"
 				}
 			]
 		},
@@ -187,6 +188,7 @@
 			"variants": [
 				{
 					"name": "Encore",
+					"objectName": "SeraphineR",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_r.png",
 					"tooltip": "Seraphine takes the stage, projecting a captivating force that <status>Charms</status> for @RChannelDuration@ seconds and deals <magicDamage>@R1TotalDamage@ magic damage</magicDamage>.<br><br>Any champions struck (including allies) become part of the performance, extending the range of this Ability. Allied champions gain maximum <keywordMajor>Notes</keywordMajor>.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -222,6 +224,7 @@
 			"variants": [
 				{
 					"name": "Stage Presence",
+					"objectName": "SeraphinePassive",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_passive.png",
 					"tooltip": "Every third basic Ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> for each nearby ally whenever she casts an Ability. For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.",
 					"tooltipExtended": "Every third basic ability Seraphine casts will echo, automatically casting a second time.<br><br>Additionally, Seraphine draws inspiration from the music within her allies, creating a <keywordMajor>Note</keywordMajor> on each nearby ally whenever she casts an ability (<keywordMajor>Notes</keywordMajor> last @NoteDuration@ seconds and stack up to @MaxNotes@ per ally). For each <keywordMajor>Note</keywordMajor>, Seraphine's Attacks gain @BonusAARange@ Attack Range and deal an additional <magicDamage>@AutoDamage@ magic damage</magicDamage> and consume the <keywordMajor>Notes</keywordMajor>.<br><br><rules>Notes from allies deal @AllyNoteDamagePercent*100@% damage.</rules>",

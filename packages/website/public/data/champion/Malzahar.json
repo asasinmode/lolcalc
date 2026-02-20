@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Call of the Void",
+					"objectName": "MalzaharQ",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_q.png",
 					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @Effect2Amount@ second(s).",
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -66,6 +67,7 @@
 			"variants": [
 				{
 					"name": "Void Swarm",
+					"objectName": "MalzaharW",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit.",
 					"mana": [40, 45, 50, 55, 60, 60],
@@ -121,8 +123,7 @@
 						"4": [25000, 25000, 25000, 25000, 25000, 25000, 25000],
 						"5": [2, 2, 2, 2, 2, 2, 2]
 					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharWAbility/MalzaharW",
-					"tooltipExtendedBelowLine": "<rules>Voidlings deal @LaneMinionMod*100@% damage to lane minions affected by <spellName>Malefic Visions</spellName>.<br>Voidlings deal @EpicMonsterMod*100@% damage to epic monsters.</rules>"
+					"dataKey": "Characters/Malzahar/Spells/MalzaharWAbility/MalzaharW"
 				}
 			]
 		},
@@ -131,6 +132,7 @@
 			"variants": [
 				{
 					"name": "Malefic Visions",
+					"objectName": "MalzaharE",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_e.png",
 					"tooltip": "Malzahar inflicts terrible visions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds. Applying <spellName>Call of the Void</spellName> or <spellName>Nether Grasp</spellName> to the victim during this time refreshes the visions.<br><br>If the victim dies, Malzahar gains <scaleMana>@ManaRestore@ Mana</scaleMana> and the visions spread to the nearest enemy.<br><br><rules>Malefic Visions executes minions below @MinionExecuteThreshold@ Health.</rules>",
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -191,6 +193,7 @@
 			"variants": [
 				{
 					"name": "Nether Grasp",
+					"objectName": "MalzaharR",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_r.png",
 					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @Effect4Amount@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @Effect3Amount@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -242,8 +245,7 @@
 						"2": [5, 5, 5, 5, 5, 5, 5],
 						"3": [2.5, 2.5, 2.5, 2.5, 2.5, 2.5, 2.5]
 					},
-					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR",
-					"tooltipExtendedBelowLine": "<rules>This Ability <status>Knocks Down</status> enemies.</rules>"
+					"dataKey": "Characters/Malzahar/Spells/MalzaharRAbility/MalzaharR"
 				}
 			]
 		},
@@ -252,6 +254,7 @@
 			"variants": [
 				{
 					"name": "Void Shift",
+					"objectName": "MalzaharPassive",
 					"image": "assets/characters/malzahar/hud/icons2d/malzahar_passive.png",
 					"tooltip": "{{Spell_MalzaharPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_MalzaharPassive_Tooltip}}<br><br><rules>Taking damage will restart the Cooldown. <br>Damage from minions is not reduced, but it does not trigger or restart the Cooldown.</rules>",

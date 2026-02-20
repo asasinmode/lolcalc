@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Noxious Blast",
+					"objectName": "CassiopeiaQ",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_q.png",
 					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @Effect2Amount@ seconds. Hitting a champion grants Cassiopeia <speed>@Effect3Amount@% Move Speed</speed> decaying over @Effect4Amount@ seconds.",
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -68,6 +69,7 @@
 			"variants": [
 				{
 					"name": "Miasma",
+					"objectName": "CassiopeiaW",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_w.png",
 					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @Effect4Amount@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @Effect2Amount@%.",
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -102,6 +104,7 @@
 			"variants": [
 				{
 					"name": "Twin Fang",
+					"objectName": "CassiopeiaE",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_e.png",
 					"tooltip": "Cassiopeia launches deadly fangs, dealing <magicDamage>@BasicDamage@ magic damage</magicDamage>. If the enemy is <keywordMajor>Poisoned</keywordMajor>, they take an additional <magicDamage>@BonusPoisonedDamage@ magic damage</magicDamage> and Cassiopeia restores <healing>@HealCalc@ Health</healing>, reduced to <healing>@HealCalcMinion@ Health</healing> against lane minions and small monsters.<br><br>If this kills the target, Cassiopeia restores <scaleMana>@Cost@ Mana</scaleMana>.<br><br>",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -164,6 +167,7 @@
 			"variants": [
 				{
 					"name": "Petrifying Gaze",
+					"objectName": "CassiopeiaR",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_r.png",
 					"tooltip": "Cassiopeia unleashes a petrifying gaze, dealing <magicDamage>@RDamage@ magic damage</magicDamage> and <status>Stunning</status> enemies facing her for @RCCDuration@ seconds. Enemies facing away are <status>Slowed</status> by @RSlowPercent@% decaying over the same duration instead.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -197,6 +201,7 @@
 			"variants": [
 				{
 					"name": "Serpentine Grace",
+					"objectName": "CassiopeiaPassive",
 					"image": "assets/characters/cassiopeia/hud/icons2d/cassiopeia_passive.png",
 					"tooltip": "Cassiopeia increases the effectiveness of all <speed>Move Speed</speed> bonuses by @PercentHasteMod@.",
 					"spellCalculations": {

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Javelin Toss / Takedown",
+					"objectName": "JavelinToss",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_q1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee throws her javelin, dealing <magicDamage>@HumanMinimumDamage@ magic damage</magicDamage>, increased up to <magicDamage>@HumanMaximumDamage@ magic damage</magicDamage> based on distance flown.",
 					"tooltipExtended": "{{Spell_JavelinToss_Tooltip}}<br><br>{{Spell_Takedown_Tooltip}}",
@@ -85,6 +86,7 @@
 				},
 				{
 					"name": "Takedown / Javelin Toss",
+					"objectName": "Takedown",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_q2.png",
 					"tooltip": "<keywordMajor>Cougar Form:</keywordMajor> Nidalee's next Attack deals <magicDamage>@spell.AspectOfTheCougar:TotalTakedownDamage@ plus @spell.AspectOfTheCougar:TakedownDamageAmp@% per 1% missing Health magic damage</magicDamage>.<br><br>If the enemy was <keywordMajor>Hunted</keywordMajor>, deals 30% increased damage.",
 					"tooltipExtended": "{{Spell_Takedown_Tooltip}}<br><br>{{Spell_JavelinToss_Tooltip}}",
@@ -110,6 +112,7 @@
 			"variants": [
 				{
 					"name": "Bushwhack / Pounce",
+					"objectName": "Bushwhack",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_w1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee places an invisible trap for 2 minutes. When an enemy walks over it, they are dealt <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second for @Effect3Amount@ seconds.<br><br>@MaxTraps@ traps may be active at once.",
 					"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}",
@@ -169,6 +172,7 @@
 				},
 				{
 					"name": "Pounce / Bushwhack",
+					"objectName": "Pounce",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_w2.png",
 					"tooltip": "<keywordMajor>Cougar Form:</keywordMajor> Nidalee pounces, dealing <magicDamage>@spell.AspectOfTheCougar:TotalPounceDamage@ magic damage</magicDamage> to enemies surrounding where she lands. Killing a unit in <keywordMajor>Cougar Form</keywordMajor> reduces this Ability's Cooldown to @spell.AspectOfTheCougar:PounceCooldown@ seconds.<br><br>Pouncing at a <keywordMajor>Hunted</keywordMajor> enemy can be done from a greater distance and reduces this Ability's Cooldown to @spell.AspectOfTheCougar:PounceCooldown@ seconds.",
 					"tooltipExtended": "{{Spell_Pounce_Tooltip}}<br><br>{{Spell_Bushwhack_Tooltip}}",
@@ -190,6 +194,7 @@
 			"variants": [
 				{
 					"name": "Primal Surge / Swipe",
+					"objectName": "PrimalSurge",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_e1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee restores <healing>@TotalHealing@ Health</healing> increased up to <healing>@MaxHealing@</healing> based on missing Health and grants them <attackSpeed>@BonusAS*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 					"tooltipExtended": "{{Spell_PrimalSurge_Tooltip}}<br><br>{{Spell_Swipe_Tooltip}}",
@@ -233,6 +238,7 @@
 				},
 				{
 					"name": "Swipe / Primal Surge",
+					"objectName": "Swipe",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_e2.png",
 					"tooltip": "<keywordMajor>Cougar Form:</keywordMajor> Nidalee claws at enemies in front of her, dealing <magicDamage>@spell.AspectOfTheCougar:TotalSwipeDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_Swipe_Tooltip}}<br><br>{{Spell_PrimalSurge_Tooltip}}",
@@ -250,6 +256,7 @@
 			"variants": [
 				{
 					"name": "Aspect Of The Cougar",
+					"objectName": "AspectOfTheCougar",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
@@ -329,6 +336,7 @@
 				},
 				{
 					"name": "Aspect Of The Cougar",
+					"objectName": "AspectOfTheCougar",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
@@ -413,6 +421,7 @@
 			"variants": [
 				{
 					"name": "Prowl",
+					"objectName": "NidaleePassiveHunt",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_passive.png",
 					"tooltip": "{{Spell_NidaleePassiveHunt_Tooltip}}",
 					"tooltipExtended": "{{Spell_NidaleePassiveHunt_Tooltip}}<br><br><rules><br>The <speed>Move Speed</speed> can stack but not exceed 30%<br></rules>",

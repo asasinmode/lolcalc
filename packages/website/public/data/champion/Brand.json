@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Sear",
+					"objectName": "BrandQ",
 					"image": "assets/characters/brand/hud/icons2d/brandq.png",
 					"tooltip": "Brand launches a fireball that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for @StunDuration@ seconds.",
 					"mana": [70, 70, 70, 70, 70, 70],
@@ -67,6 +68,7 @@
 			"variants": [
 				{
 					"name": "Pillar of Flame",
+					"objectName": "BrandW",
 					"image": "assets/characters/brand/hud/icons2d/brandw.png",
 					"tooltip": "Brand creates a pillar of pure fire, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Units that are <keywordMajor>Ablaze</keywordMajor> take <magicDamage>@EmpoweredDamage@ damage</magicDamage> instead.",
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -110,6 +112,7 @@
 			"variants": [
 				{
 					"name": "Conflagration",
+					"objectName": "BrandE",
 					"image": "assets/characters/brand/hud/icons2d/brande.png",
 					"tooltip": "Brand conjures a powerful blast at his target, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> to surrounding units.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, the spread range is doubled.",
 					"mana": [70, 75, 80, 85, 90, 95],
@@ -144,6 +147,7 @@
 			"variants": [
 				{
 					"name": "Pyroclasm",
+					"objectName": "BrandR",
 					"image": "assets/characters/brand/hud/icons2d/brandr.png",
 					"tooltip": "Brand unleashes a devastating torrent of fire that can bounce to Brand or another enemy up to 5 times, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies each bounce. Bounces prioritize stacking <keywordMajor>Blaze</keywordMajor> to max on champions.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they are briefly <status>Slowed</status> by @SlowAmount@%.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -177,6 +181,7 @@
 			"variants": [
 				{
 					"name": "Blaze",
+					"objectName": "BrandPassive",
 					"image": "assets/characters/brand/hud/icons2d/brandp.png",
 					"tooltip": "{{Spell_BrandPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_BrandPassive_Tooltip}}<br><br><rules>This Ability does increased damage to monsters, up to @JungleMonsterDPSCap@ damage per second increased to @EpicMonsterDPSCap@ against epic jungle monsters. </rules><br><br><rules>The explosion caused by the third stack of <keywordMajor>Ablaze</keywordMajor> is capped at @JungleMonsterExplosionFlatCap@ against jungle monsters </rules>",

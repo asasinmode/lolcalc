@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Dance of Arrows",
+					"objectName": "KindredQ",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_q.png",
 					"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @Effect8Amount@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @Effect4Amount@ seconds.",
 					"mana": [35, 35, 35, 35, 35, 35],
@@ -84,8 +85,7 @@
 						"6": [0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
 						"7": [4, 4, 4, 4, 4, 4, 4]
 					},
-					"dataKey": "Characters/Kindred/Spells/KindredQAbility/KindredQ",
-					"tooltipExtendedBelowLine": "<rules>Attack Speed scales with <keywordMajor>Marks</keywordMajor> taken.</rules>"
+					"dataKey": "Characters/Kindred/Spells/KindredQAbility/KindredQ"
 				}
 			]
 		},
@@ -94,6 +94,7 @@
 			"variants": [
 				{
 					"name": "Wolf's Frenzy",
+					"objectName": "KindredW",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>@AttackHeal@ Health</healing> based on their missing Health.<br><br><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>@BaseWolfDamage@</magicDamage> plus <magicDamage>@PercentWolfDamage@ current Health magic damage</magicDamage>.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -163,8 +164,7 @@
 						"6": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"7": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Kindred/Spells/KindredWAbility/KindredW",
-					"tooltipExtendedBelowLine": "<rules>Wolf strikes faster based on Kindred's <attackSpeed>Attack Speed</attackSpeed>. Against jungle monsters, Wolf deals @Effect7Amount*100@% increased damage and <status>Slows</status> them by @Effect8Amount*100@% for 2 seconds.</rules>"
+					"dataKey": "Characters/Kindred/Spells/KindredWAbility/KindredW"
 				}
 			]
 		},
@@ -173,6 +173,7 @@
 			"variants": [
 				{
 					"name": "Mounting Dread",
+					"objectName": "KindredEWrapper",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_e.png",
 					"tooltip": "Kindred weakens an enemy, <status>Slowing</status> them by @TotalSlow@% for @SlowDuration@ second.<br><br>Kindred's third Attack against the target within @TotalDuration@ seconds of each other directs Wolf to pounce on the enemy, dealing an additional <physicalDamage>@BaseBiteDamage@</physicalDamage> plus <physicalDamage>@PercentBiteDamage@ missing Health physical damage</physicalDamage>.",
 					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
@@ -295,8 +296,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kindred/Spells/KindredEWrapperAbility/KindredEWrapper",
-					"tooltipExtendedBelowLine": "<rules>Damage is increased by Critical Strike Chance and Damage at @CritMod*100@% effectiveness.<br>Missing health damage is capped at @MonsterCap@ against jungle monsters.</rules>"
+					"dataKey": "Characters/Kindred/Spells/KindredEWrapperAbility/KindredEWrapper"
 				}
 			]
 		},
@@ -305,6 +305,7 @@
 			"variants": [
 				{
 					"name": "Lamb's Respite",
+					"objectName": "KindredR",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_r.png",
 					"tooltip": "Kindred blesses the ground for @Effect2Amount@ seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br><br>When the blessing ends, all units inside heal for <healing>@Effect1Amount@ Health</healing>.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -329,6 +330,7 @@
 			"variants": [
 				{
 					"name": "Mark of the Kindred",
+					"objectName": "KindredPassiveManager",
 					"image": "assets/characters/kindred/hud/icons2d/kindred_passive.png",
 					"tooltip": "{{Spell_KindredPassiveManager_Tooltip}}",
 					"tooltipExtended": "{{Spell_KindredPassiveManager_Tooltip}}<br><br>Currently granting <statTracking>@f3@ Attack Range</statTracking>.<br><br><rules>The hunted jungle monsters change as Kindred gains <keywordMajor>Marks</keywordMajor>, moving further into the enemy jungle, eventually hunting epic monsters.</rules>",

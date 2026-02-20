@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Bear Trap on a Rope",
+					"objectName": "KledQ",
 					"image": "assets/characters/kled/hud/icons2d/kled_q1.png",
 					"tooltip": "<keywordMajor>Mounted:</keywordMajor> Kled throws a bear trap that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and hooks onto the first enemy champion or large jungle monster hit.<br><br>If Kled stays near a hooked enemy for @TetherPopTime@ seconds, he yanks out the trap, dealing <physicalDamage>@TotalYankDamage@ physical damage</physicalDamage>, <status>Pulling</status> them, and <status>Slowing</status> by @SlowAmount*-100@% for @SlowDuration@ seconds.",
 					"tooltipExtended": "{{spell_KledQ_Tooltip}}<br><br><keywordMajor>Dismounted:</keywordMajor> Kled fires a shotgun, dealing <physicalDamage>@DismountedQDamage@ physical damage</physicalDamage> and blasting Kled backward. Pellets beyond the first deal reduced damage.<br><br>Each pellet that hits an enemy champion or epic monster restores <keywordMajor>Courage</keywordMajor>.",
@@ -87,8 +88,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledQAbility/KledQ",
-					"tooltipExtendedBelowLine": "<rules>While hooked, Kled has <keywordStealth>True Sight</keywordStealth> to the enemy.<br>Deals @MinionDamageMultiplier*100@% damage to minions.</rules>"
+					"dataKey": "Characters/Kled/Spells/KledQAbility/KledQ"
 				}
 			]
 		},
@@ -97,6 +97,7 @@
 			"variants": [
 				{
 					"name": "Violent Tendencies",
+					"objectName": "KledW",
 					"image": "assets/characters/kled/hud/icons2d/kled_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kled's next Attack grants <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for four Attacks or @ActiveDuration@ seconds.<br><br>The fourth hit deals an additional <physicalDamage>@BaseFlatDamage@ plus @PercentDamage@ max Health physical damage</physicalDamage>.",
 					"cooldownTime": [14, 13, 12, 11, 10, 9, 9],
@@ -137,8 +138,7 @@
 							"mPrecision": 2
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledWAbility/KledW",
-					"tooltipExtendedBelowLine": "<rules>Max Health damage is capped at <physicalDamage>@MonsterCap@ physical damage</physicalDamage> against monsters.<br>While on Cooldown, Attacks reduce this Ability's Cooldown by @NonChampCooldownRefund@ second(s). Against Champions, this Cooldown reduction is increased to @ChampCooldownRefund@ second(s).</rules>"
+					"dataKey": "Characters/Kled/Spells/KledWAbility/KledW"
 				}
 			]
 		},
@@ -147,6 +147,7 @@
 			"variants": [
 				{
 					"name": "Jousting",
+					"objectName": "KledE",
 					"image": "assets/characters/kled/hud/icons2d/kled_e1.png",
 					"tooltip": "Kled dashes, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies he passes through, pulling minions and small monsters towards him.<br><br>If this Ability hits an enemy champion or large jungle monster, Kled gains <speed>@MoveSpeed*100@% Move Speed</speed> for @MoveSpeedDuration@ second(s) and can <recast>Recast</recast> within @RecastWindow@ seconds to dash back through the same target.",
 					"cooldownTime": [14, 13, 12, 11, 10, 9, 9],
@@ -175,8 +176,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledEAbility/KledE",
-					"tooltipExtendedBelowLine": "<rules>Kled gains <keywordStealth>True Sight</keywordStealth> to enemies he passes through.<br></rules>"
+					"dataKey": "Characters/Kled/Spells/KledEAbility/KledE"
 				}
 			]
 		},
@@ -185,6 +185,7 @@
 			"variants": [
 				{
 					"name": "Chaaaaaaaarge!!!",
+					"objectName": "KledR",
 					"image": "assets/characters/kled/hud/icons2d/kled_r.png",
 					"tooltip": "Kled charges toward an area, leaving a trail that grants allies increasing <speed>Move Speed</speed>. While charging and for 2 seconds after Kled gains up to <shield>@MaximumShield@ Shield</shield>. Skaarl rams the first enemy champion encountered, dealing <magicDamage>@MinimumDamageTooltip@</magicDamage> to <magicDamage>@MaximumChargeDamage@ max Health magic damage</magicDamage> (based on distance travelled) and briefly <status>Knocking Back</status>.",
 					"cooldownTime": [140, 140, 125, 110, 110, 110, 110],
@@ -276,8 +277,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Kled/Spells/KledRAbility/KledR",
-					"tooltipExtendedBelowLine": "<rules>The damage, <speed>Move Speed</speed>, and <shield>Shield</shield> reach their max values after @SecondsToMaxPower@ second(s) of charging.<br></rules>"
+					"dataKey": "Characters/Kled/Spells/KledRAbility/KledR"
 				}
 			]
 		},
@@ -286,6 +286,7 @@
 			"variants": [
 				{
 					"name": "Skaarl, the Cowardly Lizard",
+					"objectName": "KledPassive",
 					"image": "assets/characters/kled/hud/icons2d/kled_p.png",
 					"tooltip": "{{Spell_KledPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KledPassive_Tooltip}}<br><br><rules>Skaarl has <healing>@SkaarlHealth@ Health plus 100% of Kled's bonus Health</healing>.<br>When Kled dismounts, he cleanses all crowd control and becomes briefly untargetable.</rules>",

@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Starcall",
+					"objectName": "SorakaQ",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_q.png",
 					"tooltip": "Soraka calls down a star, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @MoveSpeedSlow*100@% for @SlowDuration@ seconds. <br><br>Hitting an enemy champion grants Soraka <keywordMajor>Rejuvenation</keywordMajor>, which restores <healing>@TotalHoT@ Health</healing> over @HoTDuration@ seconds and grants <speed>@MoveSpeedHaste*100@% Move Speed</speed> decaying over the same duration.",
 					"mana": [45, 50, 55, 60, 65, 65],
@@ -82,6 +83,7 @@
 			"variants": [
 				{
 					"name": "Astral Infusion",
+					"objectName": "SorakaW",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_w.png",
 					"tooltip": "Soraka restores <healing>@TotalHeal@ Health</healing> to another allied champion.<br><br>If Soraka is affected by <keywordMajor>Rejuvenation</keywordMajor>, the Health cost will be reduced by @PercentHealthCostRefund*100@%, and the target will gain <keywordMajor>Rejuvenation</keywordMajor> for @Spell.SorakaQ:HoTDuration@ seconds.",
 					"mana": [40, 45, 50, 55, 60, 60],
@@ -115,8 +117,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Soraka/Spells/SorakaWAbility/SorakaW",
-					"tooltipExtendedBelowLine": "<rules>This Ability cannot be used if Soraka is below @MinimumHealth@ Health .</rules>"
+					"dataKey": "Characters/Soraka/Spells/SorakaWAbility/SorakaW"
 				}
 			]
 		},
@@ -125,6 +126,7 @@
 			"variants": [
 				{
 					"name": "Equinox",
+					"objectName": "SorakaE",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_e.png",
 					"tooltip": "Soraka creates a starfield that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to champions. The field lingers for @RootDelay@ seconds, <status>Silencing</status> enemies inside. When the zone disappears, champions inside the zone are <status>Rooted</status> for @RootDuration@ second(s) and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -157,6 +159,7 @@
 			"variants": [
 				{
 					"name": "Wish",
+					"objectName": "SorakaR",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_r.png",
 					"tooltip": "Soraka calls upon divine powers, restoring <healing>@HealingCalc@ Health</healing> to all allied champions, regardless of distance. Healing is increased to <healing>@AmpedHealing@</healing> on targets below 40% Health.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -201,6 +204,7 @@
 			"variants": [
 				{
 					"name": "Salvation",
+					"objectName": "Consecration_Self",
 					"image": "assets/characters/soraka/hud/icons2d/soraka_passive.png",
 					"tooltip": "{{Spell_Consecration_Self_Tooltip}}",
 					"tooltipExtended": "{{Spell_Consecration_Self_Tooltip}}<br><br><rules>Allies must be within @CastRange@ range of Soraka.</rules>",

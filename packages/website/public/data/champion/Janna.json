@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Howling Gale",
+					"objectName": "HowlingGale",
 					"image": "assets/characters/janna/hud/icons2d/jannaq.png",
 					"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early.",
 					"mana": [90, 95, 100, 105, 110, 110],
@@ -126,8 +127,7 @@
 							"mPrecision": 2
 						}
 					},
-					"dataKey": "Characters/Janna/Spells/HowlingGaleAbility/HowlingGale",
-					"tooltipExtendedBelowLine": "<rules>Deals an additional <magicDamage>@ExtraDamagePerSecondCharged@ magic damage</magicDamage>, <status>Knocks Up</status> for an additional @ChargeKnockup@ seconds, and travels @ChargeDistancePercent@% farther for each second it grew, and always reaches its destination in @MissileTravelTime@ seconds.</rules>"
+					"dataKey": "Characters/Janna/Spells/HowlingGaleAbility/HowlingGale"
 				}
 			]
 		},
@@ -136,6 +136,7 @@
 			"variants": [
 				{
 					"name": "Zephyr",
+					"objectName": "SowTheWind",
 					"image": "assets/characters/janna/hud/icons2d/jannaw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>.",
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -193,8 +194,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Janna/Spells/SowTheWindAbility/SowTheWind",
-					"tooltipExtendedBelowLine": "<rules>Ghosted units ignore collision with other units.</rules><br>"
+					"dataKey": "Characters/Janna/Spells/SowTheWindAbility/SowTheWind"
 				}
 			]
 		},
@@ -203,6 +203,7 @@
 			"variants": [
 				{
 					"name": "Eye Of The Storm",
+					"objectName": "EyeOfTheStorm",
 					"image": "assets/characters/janna/hud/icons2d/jannae.png",
 					"tooltip": "Janna grants an ally champion or turret <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. While shielded, they gain <scaleAD>@TotalAD@ Attack Damage</scaleAD>.<br><br>Janna refunds @ECDRefundforCC*100@% of the cooldown whenever she impairs an enemy champion's movement with an Ability.",
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -253,6 +254,7 @@
 			"variants": [
 				{
 					"name": "Monsoon",
+					"objectName": "ReapTheWhirlwind",
 					"image": "assets/characters/janna/hud/icons2d/jannar.png",
 					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
 					"mana": [100, 100, 100, 0, 0, 0],
@@ -292,8 +294,7 @@
 						"7": [10, 10, 10, 10, 10, 10, 10],
 						"8": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
 					},
-					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind",
-					"tooltipExtendedBelowLine": "<rules>The <status>Knock Back</status> cannot push enemies over walls.</rules>"
+					"dataKey": "Characters/Janna/Spells/ReapTheWhirlwindAbility/ReapTheWhirlwind"
 				}
 			]
 		},
@@ -302,6 +303,7 @@
 			"variants": [
 				{
 					"name": "Tailwind",
+					"objectName": "TailwindSelf",
 					"image": "assets/characters/janna/hud/icons2d/jannap.png",
 					"tooltip": "Ally champions gain <speed>@MSPercentAlly*100@% Move Speed</speed> moving towards Janna.<br><br>Janna deals <magicDamage>@BonusDamage@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and with <keywordMajor>Zephyr</keywordMajor>.",
 					"dataValues": {

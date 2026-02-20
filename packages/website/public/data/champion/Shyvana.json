@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Twin Bite",
+					"objectName": "ShyvanaDoubleAttack",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanatwinbite.png",
 					"tooltip": "Shyvana's next Attack strikes twice, dealing <physicalDamage>@FirstHitDamageCalc@</physicalDamage> then <physicalDamage>@SecondHitDamageCalc@ physical damage</physicalDamage>. Her next 2 Attacks gain<speed> @BonusAS@% Attack Speed</speed>.<br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ seconds.<br><br><keywordMajor>Dragon Form:</keywordMajor> The empowered Attacks hit all units in front of Shyvana.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 5.5],
@@ -80,6 +81,7 @@
 			"variants": [
 				{
 					"name": "Burnout",
+					"objectName": "ShyvanaImmolationAura",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanascorchedearth.png",
 					"tooltip": "Shyvana summons a flame storm around her, gaining <speed>@FinalMSPerc@ decaying Move Speed</speed> and dealing <magicDamage>@DamagePerTickCalc@ magic damage per second</magicDamage> for @BaseDuration@ seconds. <br><br>The flame storm also causes Shyvana's Attacks to deal an additional <magicDamage>@DamageOnHitCalc@ magic damage</magicDamage> to surrounding enemies and extend this Ability's duration by @BonusDurationOnHit@ second.<br><br><keywordMajor>Dragon Form:</keywordMajor> The size of the flame storm is increased.",
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
@@ -140,8 +142,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Shyvana/Spells/ShyvanaImmolationAuraAbility/ShyvanaImmolationAura",
-					"tooltipExtendedBelowLine": "<rules>This Ability has a max duration of @MaxBuffDuration@ seconds.</rules>"
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaImmolationAuraAbility/ShyvanaImmolationAura"
 				}
 			]
 		},
@@ -150,6 +151,7 @@
 			"variants": [
 				{
 					"name": "Flame Breath",
+					"objectName": "ShyvanaFireball",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanaflamebreath.png",
 					"tooltip": "Shyvana unleashes a fireball that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and marks for @MarkDuration@ seconds. The fireball stops on the first champion hit.<br><br>Shyvana's Attacks against marked targets deal an additional <magicDamage>@PercentHPDamageOnHit@% max Health magic damage</magicDamage>.<br><br><keywordMajor>Dragon Form:</keywordMajor> The fireball explodes once it ends, dealing an additional <magicDamage>@DragonExplosionCalc@ magic damage</magicDamage> and scorching the earth, dealing <magicDamage>@DragonDamageTotalCalc@ magic damage</magicDamage> over 4 seconds.",
 					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
@@ -266,8 +268,7 @@
 					"effectAmount": {
 						"5": [0, 60, 100, 140, 180, 220, 260]
 					},
-					"dataKey": "Characters/Shyvana/Spells/ShyvanaFireballAbility/ShyvanaFireball",
-					"tooltipExtendedBelowLine": "<rules>The bonus damage on Attacks is capped at <magicDamage>@MaxDamageVsMonsters@ damage</magicDamage> against jungle monsters.</rules>"
+					"dataKey": "Characters/Shyvana/Spells/ShyvanaFireballAbility/ShyvanaFireball"
 				}
 			]
 		},
@@ -276,6 +277,7 @@
 			"variants": [
 				{
 					"name": "Dragon's Descent",
+					"objectName": "ShyvanaTransformCast",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanadragonsdescent.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Shyvana generates <keywordMajor>@FuryGainPerTick@ Fury</keywordMajor> every second, and Attacks generate an extra <keywordMajor>@FuryGainOnHit@ Fury</keywordMajor>.<br><br><spellActive>Active: </spellActive>Shyvana transforms into <keywordMajor>Dragon Form</keywordMajor>, gaining <healing>@BonusHP@ max Health</healing> and flying forward, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Knocking</status> enemies toward her target location.",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
@@ -317,6 +319,7 @@
 			"variants": [
 				{
 					"name": "Fury of the Dragonborn",
+					"objectName": "ShyvanaPassive",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanareinforcedscales.png",
 					"tooltip": "Shyvana deals @BonusPercentDamageToDragons*100@% more damage to Dragon type jungle monsters. She gains @BonusResistsBase@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>, increased by an additional @BonusResistsPerDragon@ for each Dragon defeated by her or her allies.<br><br><rules>Total bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR>: @f1@</rules>",
 					"dataValues": {

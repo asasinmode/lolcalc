@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Leap Strike",
+					"objectName": "JaxQ",
 					"image": "assets/characters/jax/hud/icons2d/jaxq.png",
 					"tooltip": "Jax leaps to a friendly or enemy unit or ward, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> if it is an enemy.",
 					"mana": [65, 65, 65, 65, 65, 65],
@@ -65,6 +66,7 @@
 			"variants": [
 				{
 					"name": "Empower",
+					"objectName": "JaxW",
 					"image": "assets/characters/jax/hud/icons2d/jaxw.png",
 					"tooltip": "Jax charges his weapon with energy, causing his next Attack or <spellName>Leap Strike</spellName> to deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -87,8 +89,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Jax/Spells/JaxWAbility/JaxW",
-					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>Deals @StructureMod*100@% damage to structures.</rules>"
+					"dataKey": "Characters/Jax/Spells/JaxWAbility/JaxW"
 				}
 			]
 		},
@@ -97,6 +98,7 @@
 			"variants": [
 				{
 					"name": "Counter Strike",
+					"objectName": "JaxE",
 					"image": "assets/characters/jax/hud/icons2d/jaxe.png",
 					"tooltip": "Jax enters a defensive stance for up to @DodgeDuration@ seconds, dodging incoming Attacks and taking @AoEDamageReduction@% less damage from area of effect Abilities. After @DodgeDuration@ seconds or <recast>Recasting</recast>, Jax deals <magicDamage>@TotalDamage@ + @PercentHealthDamage@% max Health magic damage</magicDamage> and <status>Stuns</status> nearby enemies for @StunDuration@ second. <br><br>The damage is increased by @PercentIncreasedPerDodge*100@% per Attack dodged, up to a maximum of <magicDamage>@MaxDamage@ + @MaxPercentHealthDamage@% max Health</magicDamage>.",
 					"mana": [50, 60, 70, 80, 90, 100],
@@ -164,6 +166,7 @@
 			"variants": [
 				{
 					"name": "Grandmaster-at-Arms",
+					"objectName": "JaxR",
 					"image": "assets/characters/jax/hud/icons2d/jaxr.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every third Attack within @PassiveFallOffTime@ seconds deals an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Jax slams his lantern down, dealing <magicDamage>@SwingDamageTotal@ magic damage</magicDamage> to nearby enemies. If he hits a champion he gains <scaleArmor>@BaseArmor@ Armor</scaleArmor> and <scaleMR>@BaseMR@ Magic Resist</scaleMR> plus <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR> per additional champion hit for @Duration@ seconds. During this time every second Attack deals additional <magicDamage>magic damage</magicDamage> instead of every third.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -246,8 +249,7 @@
 							"mModifiedGameCalculation": "BonusArmor"
 						}
 					},
-					"dataKey": "Characters/Jax/Spells/JaxRAbility/JaxR",
-					"tooltipExtendedBelowLine": "<rules>Deals @StructureMod*100@% damage to structures.</rules>"
+					"dataKey": "Characters/Jax/Spells/JaxRAbility/JaxR"
 				}
 			]
 		},
@@ -256,6 +258,7 @@
 			"variants": [
 				{
 					"name": "Relentless Assault",
+					"objectName": "JaxPassive",
 					"image": "assets/characters/jax/hud/icons2d/jaxp.png",
 					"tooltip": "Jax's Attacks grant a stack for 2.5 seconds that gives him <attackSpeed>@AttackSpeedPerStack@ Attack Speed</attackSpeed> (max <attackSpeed>@MaxBonusAttackSpeed@ Attack Speed</attackSpeed>).",
 					"dataValues": {

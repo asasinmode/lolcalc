@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Chomp",
+					"objectName": "TrundleTrollSmash",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_q.png",
 					"tooltip": "Trundle's next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @SlowAmount*100@%, then Trundle gains <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> for @SapDebuffDuration@ seconds and the enemy loses <physicalDamage>@SappedAD*-1@ Attack Damage</physicalDamage> for the same duration.",
 					"mana": [20, 20, 20, 20, 20, 20],
@@ -64,8 +65,7 @@
 							]
 						}
 					},
-					"dataKey": "Characters/Trundle/Spells/TrundleTrollSmashAbility/TrundleTrollSmash",
-					"tooltipExtendedBelowLine": "<rules>{{ buff_desc_SpellEffects }}<br>Trundle gains @BonusRange@ attack range for this attack.</rules>"
+					"dataKey": "Characters/Trundle/Spells/TrundleTrollSmashAbility/TrundleTrollSmash"
 				}
 			]
 		},
@@ -74,6 +74,7 @@
 			"variants": [
 				{
 					"name": "Frozen Domain",
+					"objectName": "trundledesecrate",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_w.png",
 					"tooltip": "Trundle freezes an area for @Effect4Amount@ seconds. While inside he gains <speed>@Effect1Amount*100@% Move Speed</speed>, <attackSpeed>@Effect2Amount*100@% Attack Speed</attackSpeed>, and @Effect3Amount*100@% increased healing.",
 					"mana": [40, 40, 40, 40, 40, 40],
@@ -94,6 +95,7 @@
 			"variants": [
 				{
 					"name": "Pillar of Ice",
+					"objectName": "TrundleCircle",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_e.png",
 					"tooltip": "Trundle creates an icy pillar for @Effect1Amount@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @Effect2Amount@%.",
 					"mana": [75, 75, 75, 75, 75, 75],
@@ -117,6 +119,7 @@
 			"variants": [
 				{
 					"name": "Subjugate",
+					"objectName": "TrundlePain",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_r.png",
 					"tooltip": "Trundle drains the lifeforce of an enemy champion, dealing <magicDamage>@TotalPercentHPDamage@ max Health magic damage</magicDamage> and stealing <scaleArmor>@ArmorMRShred*100@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> over @ActualDurationOfDrainBuff@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -147,8 +150,7 @@
 							"mDisplayAsPercent": true
 						}
 					},
-					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain",
-					"tooltipExtendedBelowLine": "<rules>Half of the damage and shred happen immediately and the other half happens over the duration.<br>The shred lasts for @DurationOfDrainForTooltip@ seconds after the drain ends.</rules>"
+					"dataKey": "Characters/Trundle/Spells/TrundlePainAbility/TrundlePain"
 				}
 			]
 		},
@@ -157,6 +159,7 @@
 			"variants": [
 				{
 					"name": "King's Tribute",
+					"objectName": "TrundleDiseaseOverseer",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_passive.png",
 					"tooltip": "When an enemy dies near Trundle, he restores <healing>@RegenPercent@ of its max Health</healing>.",
 					"spellCalculations": {

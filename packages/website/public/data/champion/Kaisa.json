@@ -33,6 +33,7 @@
 			"variants": [
 				{
 					"name": "Icathian Rain",
+					"objectName": "KaisaQ",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_q.png",
 					"tooltip": "Kai'Sa launches @Effect2Amount@ missiles that split among nearby enemies, each dealing <physicalDamage>@TotalIndividualMissileDamage@ physical damage</physicalDamage>, up to a maximum of @MaxDamageDisplay@. Additional missile hits on champions or monsters deal @ExtraHitReduction*100@% damage.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead fires @Effect7Amount@ missiles.<br>Current: <physicalDamage>@f11.1@/@Effect6Amount@ Bonus Attack Damage</physicalDamage>",
 					"mana": [55, 55, 55, 55, 55, 55],
@@ -194,8 +195,7 @@
 						"5": [100, 100, 100, 100, 100, 100, 100],
 						"6": [12, 12, 12, 12, 12, 12, 12]
 					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaQAbility/KaisaQ",
-					"tooltipExtendedBelowLine": "<rules>Minions below <scaleHealth>@Effect5Amount*100@% Health</scaleHealth> take @Effect4Amount*100@% damage.</rules>"
+					"dataKey": "Characters/Kaisa/Spells/KaisaQAbility/KaisaQ"
 				}
 			]
 		},
@@ -204,6 +204,7 @@
 			"variants": [
 				{
 					"name": "Void Seeker",
+					"objectName": "KaisaW",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_w.png",
 					"tooltip": "Kai'Sa fires a void blast that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>, applies @Effect4Amount@ stacks of <keywordMajor>Plasma</keywordMajor>, and grants <keywordStealth>True Sight</keywordStealth> of the first enemy hit for @spell.KaisaPassive:PDuration@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead applies @Effect5Amount@ stacks of <keywordMajor>Plasma</keywordMajor> and hitting a champion reduces the Cooldown by @Effect3Amount@%.<br>Current: <scaleAP>@f2.1@/@Effect2Amount@ Ability Power</scaleAP>",
 					"mana": [55, 60, 65, 70, 75, 85],
@@ -235,8 +236,7 @@
 						"3": [2, 2, 2, 2, 2, 2, 2],
 						"4": [3, 3, 3, 3, 3, 3, 3]
 					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaWAbility/KaisaW",
-					"tooltipExtendedBelowLine": "<rules><keywordMajor>Plasma</keywordMajor> applied by this Ability deals the damage from <spellName>Second Skin</spellName>.</rules>"
+					"dataKey": "Characters/Kaisa/Spells/KaisaWAbility/KaisaW"
 				}
 			]
 		},
@@ -245,6 +245,7 @@
 			"variants": [
 				{
 					"name": "Supercharge",
+					"objectName": "KaisaE",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_e.png",
 					"tooltip": "Kai'Sa supercharges her void energy, gaining <speed>@TotalMoveSpeed@ Move Speed</speed> and becoming Ghosted while charging, then gaining <attackSpeed>@Effect5Amount*100@% Attack Speed</attackSpeed> for @Effect2Amount@ seconds.<br><br>Attacks reduce this Ability's Cooldown by @Effect4Amount@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa also becomes <keywordStealth>Invisible</keywordStealth> for @Effect7Amount@ seconds.<br>Current: <attackSpeed>@f10.1@%/@Effect6Amount@% Bonus Attack Speed</attackSpeed>",
 					"mana": [30, 30, 30, 30, 30, 30],
@@ -305,8 +306,7 @@
 						"6": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"7": [0.6, 0.6, 0.6, 0.6, 0.6, 0.6, 0.6]
 					},
-					"dataKey": "Characters/Kaisa/Spells/KaisaEAbility/KaisaE",
-					"tooltipExtendedBelowLine": "<rules>{{Reminder_Ghosted}}<br>{{Reminder_Invisibility}}<br>The charge time scales down with <attackSpeed>Attack Speed</attackSpeed> (Current: @TotalCastTime@)</rules>"
+					"dataKey": "Characters/Kaisa/Spells/KaisaEAbility/KaisaE"
 				}
 			]
 		},
@@ -315,6 +315,7 @@
 			"variants": [
 				{
 					"name": "Killer Instinct",
+					"objectName": "KaisaR",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_r.png",
 					"tooltip": "Kai'Sa warps near an enemy champion affected by <keywordMajor>Plasma</keywordMajor> and gains <shield>@RCalculatedShieldValue@ Shield</shield> for @RShieldDuration@ seconds.",
 					"mana": [100, 100, 100, 100, 100, 100],
@@ -354,6 +355,7 @@
 			"variants": [
 				{
 					"name": "Second Skin",
+					"objectName": "KaisaPassive",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_passive.png",
 					"tooltip": "{{Spell_KaisaPassive_Tooltip}}",
 					"tooltipExtended": "{{Spell_KaisaPassive_Tooltip}}<br><br><rules>Consuming <keywordMajor>Plasma</keywordMajor> deals a maximum of <magicDamage>@PDamageCap@ magic damage</magicDamage> to monsters.<br><physicalDamage>Attack Damage</physicalDamage> and <attackSpeed>Attack Speed</attackSpeed> gained from leveling up progresses the <keywordMajor>Evolution</keywordMajor> of <spellName>Icathian Rain</spellName> and <spellName>Supercharge</spellName>, respectively.</rules>",
