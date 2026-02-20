@@ -1,5 +1,6 @@
 import type { IChampion, IChampionAbility } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
+import type { IDragonName } from '../app/composables/useMisc';
 import type { IChampionSpecificsAsAbilityDynamicValuesMap } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { ITexture } from '../app/utils/types';
@@ -38,6 +39,7 @@ const debug = {
 	item: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 	rune: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 	champion: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+	misc: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 };
 
 const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
@@ -454,7 +456,7 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 
 					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
 						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, 'rune shards', { category: 'rune', key: slotKey, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: slotKey, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
 					};
 
 					return [mPerkName.toLowerCase(), slotValue];
@@ -464,6 +466,92 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 	};
 
 	await runeFile.write(stringifyObject(runeData));
+	await textFile.write(stringifyObject(textData));
+}
+
+const DRAGONS: ([name: IDragonName] | [name: IDragonName, spellDataKey: string])[] = [
+	['Cloud'],
+	['Mountain'],
+	['Infernal'],
+	['Ocean'],
+	['Chemtech', 'ChemTech'],
+	['Hextech'],
+];
+const miscFile = Bun.file(`${import.meta.dir}/../app/assets/misc.json`);
+let miscData: typeof import('../app/assets/misc.json') | undefined;
+
+if (await miscFile.exists()) {
+	miscData = await miscFile.json();
+}
+
+// dragons https://raw.communitydragon.org/latest/game/shared.cdtb.bin.json
+// Shared/Spells/SRX_DragonBuffCloud `mSpell`, maybe `mImgIconName`, `mBuff`.`mDescription`
+// Shared/Spells/SRX_DragonSoulBuffHextech similar except `mLocKeys`
+// stack icons https://raw.communitydragon.org/latest/game/assets/ux/scoreboard/
+// soul icons ? https://raw.communitydragon.org/latest/game/data/shared/spells/icons2d/
+// scoreboard atlas thingy https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
+// atlas https://raw.communitydragon.org/latest/game/assets/ux/srx/dragonuiprototype.png
+
+if (true || !miscData || miscData?.version !== latestVersion) {
+	console.log('misc data not present or outdated, fetching...');
+
+	const sharedData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/shared.cdtb.bin.json`, 'game/shared.cdtb.bin.json');
+	await loadStringTable();
+
+	miscData = {
+		version: latestVersion,
+		data: {
+			dragons: Object.fromEntries(await Promise.all(DRAGONS.map(async ([name, spellKey]) => {
+				const stackData = sharedData[`Shared/Spells/SRX_DragonBuff${spellKey || name}`];
+				const soulData = sharedData[`Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`];
+
+				if (!stackData || !soulData) {
+					throw new Error(`Dragon ${name} stack (${!!stackData}) / soul (${!!soulData}) data not present`);
+				}
+
+				const { ObjectName: stackObjectName, mSpell: { DataValues: stackDataValues } } = stackData;
+				const parsedStackDataValues = stackDataValues?.length
+					? Object.fromEntries(stackDataValues.map(({ mName, mValues }: Record<string, number[]>) =>
+							[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
+						))
+					: undefined;
+
+				return [name, {
+					name,
+					stack: {
+						objectName: stackObjectName,
+						dataValues: parsedStackDataValues,
+					},
+					soul: soulData,
+				}];
+			}))),
+		} as unknown as NonNullable<(typeof miscData)>['data'],
+	};
+
+	textData.data.dragons ||= Object.fromEntries(DRAGONS.map(([name, spellKey]) => {
+		const stackData = sharedData[`Shared/Spells/SRX_DragonBuff${spellKey || name}`];
+		const soulData = sharedData[`Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`];
+
+		const stackAbility = miscData!.data.dragons[name as IDragonName].stack;
+		const soulAbility = miscData!.data.dragons[name as IDragonName].soul;
+		const allSpells = [stackAbility, soulAbility];
+
+		const { mBuff: { mDescription: stackDescriptionKey } } = stackData;
+
+		const stack = getStringtableValue(stackDescriptionKey, {
+			category: 'misc',
+			key: `dragon stack ${name}`,
+			variableSourceKeys: ['DataValues'],
+			variableType: 'championAbility',
+			variableValueParameters: [stackAbility],
+		});
+
+		return [name, {
+			stack,
+		}];
+	}));
+
+	await miscFile.write(stringifyObject(miscData));
 	await textFile.write(stringifyObject(textData));
 }
 
@@ -617,14 +705,6 @@ if (!uiData || uiData?.version !== latestVersion) {
 	await uiFile.write(stringifyObject(uiData));
 }
 
-// dragons https://raw.communitydragon.org/latest/game/shared.cdtb.bin.json
-// Shared/Spells/SRX_DragonBuffCloud `mSpell`, maybe `mImgIconName`, `mBuff`.`mDescription`
-// Shared/Spells/SRX_DragonSoulBuffHextech similar except `mLocKeys`
-// stack icons https://raw.communitydragon.org/latest/game/assets/ux/scoreboard/
-// soul icons ? https://raw.communitydragon.org/latest/game/data/shared/spells/icons2d/
-// scoreboard atlas thingy https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
-// atlas https://raw.communitydragon.org/latest/game/assets/ux/srx/dragonuiprototype.png
-
 for (const category in debug) {
 	const { variables, stringtableVariables, tags } = debug[category as keyof typeof debug];
 	if (variables.size) {
@@ -761,12 +841,12 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType, P extends I
 	stringtableVariableSaveUnder?: { stringtable?: Record<string, string> };
 }
 
-function getStringtableValue(path: string, debugPrefix: string, variableDebug?: IStringtableVariableDebug) {
+function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug) {
 	const value = stringtable[path.toLowerCase()];
 	if (!value) {
-		console.warn(`[${debugPrefix}] string "${path.toLowerCase()}" not found in the stringtable`);
+		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
-	if (variableDebug) {
+	if (typeof variableDebug === 'object') {
 		const { category, key, stringtableVariableSaveUnder, variableType, variableValueParameters, variableSourceKeys } = variableDebug;
 
 		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, variableValueParameters[0]?.dynamicValues, false);
@@ -956,7 +1036,7 @@ function championAbilityVariants(
 			throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
 		}
 
-		const { mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
+		const { ObjectName, mImgIconName, DataValues, mSpellCalculations, mEffectAmount, mClientData, mana, cooldownTime } = variantMSpell;
 
 		if (i === 0) {
 			if (!mClientData) {
@@ -988,6 +1068,7 @@ function championAbilityVariants(
 
 		const variant = {
 			name: undefined,
+			objectName: ObjectName,
 			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
 			tooltip: undefined,
 			tooltipExtended: undefined,
@@ -1017,22 +1098,19 @@ function championAbilityVariants(
 			stringtableVariableSaveUnder: stringtableObject,
 		} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
-		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, `${debugPrefix} name`, { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} name` });
+		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} name` });
 		// TODO debug tooltips for all abilities, not just passive
 		variant.tooltip = mLocKeys.keyTooltip && getStringtableValue(
 			mLocKeys.keyTooltip,
-			`${variantDataKey} tooltip`,
-			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip` } : undefined,
+			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip` } : `${variantDataKey} tooltip`,
 		);
 		variant.tooltipExtended = mLocKeys.keyTooltipExtended && getStringtableValue(
 			mLocKeys.keyTooltipExtended,
-			`${variantDataKey} tooltip extended`,
-			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended` } : undefined,
+			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended` } : `${variantDataKey} tooltip extended`,
 		);
 		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine && getStringtableValue(
 			mLocKeys.keyTooltipExtendedBelowLine,
-			`${variantDataKey} tooltip extended`,
-			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended below line` } : undefined,
+			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended below line` } : `${variantDataKey} tooltip extended`,
 		);
 
 		/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */

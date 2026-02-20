@@ -2465,6 +2465,26 @@
 			"perk_long_desc_boneplating": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockBase@-@BlockMax@ (based on level) less damage.<br><br>Duration: @BlockDuration@s<br>Cooldown: @Cooldown@s",
 			"item_2422_name": "Slightly Magical Footwear",
 			"game_item_displayname_2010": "Total Biscuit of Everlasting Will"
+		},
+		"dragons": {
+			"Cloud": {
+				"stack": "<titleLeft>Cloud Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffCloud:MSAmountPerStack*100@% Out Of Combat Move Speed and +@Spell.SRX_DragonBuffCloud:SRAmountPerStack*100@% Slow Resistance</mainText>"
+			},
+			"Mountain": {
+				"stack": "<titleLeft>Mountain Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffMountain:BonusDefenses*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR></mainText>"
+			},
+			"Infernal": {
+				"stack": "<titleLeft>Infernal Dragon</titleLeft><mainText>+@Spell.SRX_DragonBuffInfernal:ADandAPPercentIncrease*100@% <scaleAD>Attack Damage</scaleAD> and <scaleAP>Ability Power</scaleAP></mainText>"
+			},
+			"Ocean": {
+				"stack": "<titleLeft>Ocean Dragon</titleLeft><mainText>Restore <healing>@Spell.SRX_DragonBuffOcean:HealingPercent*100@% missing Health</healing> every @Spell.SRX_DragonBuffOcean:HealFrequency@ seconds</mainText>"
+			},
+			"Chemtech": {
+				"stack": "<titleLeft>Chemtech Dragon</titleLeft><br>Gain %i:scaleTenacity% @Spell.SRX_DragonBuffChemtech:TenacityPerStack*100@% Tenacity and %i:scaleHealShield% @Spell.SRX_DragonBuffChemtech:HealShieldPerStack*100@% Heal and Shield Power per stack."
+			},
+			"Hextech": {
+				"stack": "<titleLeft>Hextech Dragon</titleLeft><br>Grants %i:scaleCooldown% @Spell.SRX_DragonBuffHextech:AbilityHaste@ Ability Haste and %i:scaleAS% @Spell.SRX_DragonBuffHextech:AttackSpeed*100@% Attack Speed per stack."
+			}
 		}
 	}
 }
