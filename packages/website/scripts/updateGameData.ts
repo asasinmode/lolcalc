@@ -8,9 +8,8 @@ import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion';
-import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
-
-import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionVariables } from '../app/utils/gameVariable';
+import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
+import { replaceGameDescriptionVariables } from '../app/utils/gameVariable';
 import { ALL_RUNE_PATHS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
@@ -549,7 +548,7 @@ if (true || !miscData || miscData?.version !== latestVersion) {
 		const { mBuff: { mDescription: stackDescriptionKey } } = stackData;
 		const { mBuff: { mTooltipData: { mLocKeys: { keyTooltip: soulTooltipKey } } } } = soulData;
 
-		const stack = getStringtableValue(stackDescriptionKey, {
+		let stack = getStringtableValue(stackDescriptionKey, {
 			category: 'misc',
 			key: `dragon stack ${name}`,
 			variableSourceKeys: ['DataValues'],
@@ -563,6 +562,12 @@ if (true || !miscData || miscData?.version !== latestVersion) {
 			variableType: 'championAbility',
 			variableValueParameters: [soulAbility],
 		});
+
+		const stackTitleEndIndex = stack.indexOf('</titleLeft>');
+		if (~stackTitleEndIndex) {
+			stack = stack.slice(stackTitleEndIndex + 12);
+		}
+		stack = stack.replaceAll('<br>', '').replaceAll('<mainText>', '').replaceAll('</mainText>', '');
 
 		return [name, { stack, soul }];
 	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
