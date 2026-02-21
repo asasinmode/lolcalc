@@ -45,24 +45,26 @@ export interface IListedChampion extends Pick<IChampion, 'id' | 'name'> {
 	roles: Partial<Record<IChampionRole, boolean>>;
 }
 
+export interface IChampionAbilityVariant {
+	name?: string;
+	image: string;
+	mana?: number[];
+	cooldownTime?: number[];
+	// TODO not sure if still needed, Aphelios variants use it maybe?
+	// /** if present, means the variant uses the tooltip of another variant at the specified index */
+	// tooltipVariantIndex?: number;
+	tooltip?: string;
+	tooltipExtended?: string;
+	tooltipExtendedBelowLine?: string;
+	dataValues: any;
+	spellCalculations: any;
+	effectAmount: any;
+	dataKey: string;
+	objectName: string;
+}
+
 export interface IChampionAbility {
 	maxLevel: number;
 	cooldownTime?: number[];
-	variants: {
-		name?: string;
-		image: string;
-		mana?: number[];
-		cooldownTime?: number[];
-		// TODO not sure if still needed, Aphelios variants use it maybe?
-		// /** if present, means the variant uses the tooltip of another variant at the specified index */
-		// tooltipVariantIndex?: number;
-		tooltip?: string;
-		tooltipExtended?: string;
-		tooltipExtendedBelowLine?: string;
-		dataValues: any;
-		spellCalculations: any;
-		effectAmount: any;
-		dataKey: string;
-		objectName: string;
-	}[];
+	variants: IChampionAbilityVariant[];
 }

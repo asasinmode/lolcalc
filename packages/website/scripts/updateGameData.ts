@@ -1,4 +1,4 @@
-import type { IChampion, IChampionAbility } from '../app/composables/useChampions';
+import type { IChampion, IChampionAbility, IChampionAbilityVariant } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IChampionSpecificsAsAbilityDynamicValuesMap } from '../app/utils/champion';
@@ -1106,7 +1106,7 @@ function championAbilityVariants(
 			spellCalculations: cleanupObject(mSpellCalculations),
 			effectAmount: cleanupObject(mEffectAmount),
 			dataKey: variantDataKey,
-		} as IChampionAbility['variants'][number];
+		} as IChampionAbilityVariant;
 
 		/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
 		variant.name = mLocKeys.keyName;
@@ -1138,11 +1138,15 @@ function championAbilityVariants(
 }
 
 /**
- * sets champion ability variants' name and tooltips after their data, like variables, is already parsed
+ * sets champion ability variants' name and tooltips after their data is already parsed
  * done in a separate step because abilities' text can reference other abilities like `spell.CaitlynW:HeadshotBonusDamage`
- * **IMPORTANT** expects ability variant's text properties to be set to the stringtable keys they're supposed to be under so it doesn't have to go through the raw ability object again, as in
+ *
+ * expects ability variant's text properties to be set to the stringtable keys they're supposed to be under so it doesn't have to go through the raw ability object again, as in
  * ```json
- * "name": ""
+ * "name": "Spell_CaitlynP_Name",
+ * "tooltip": "Spell_CaitlynP_Tooltip",
+ * "tooltipExtended": "Spell_CaitlynP_TooltipExtended",
+ * ```
  */
 function setChampionAbilityVariantsText(champion: IChampion) {
 	const abilitiesWithVariants = Object.entries(champion.abilities).map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [keyof IChampion['abilities'], IChampionAbility['variants']][];
@@ -1161,7 +1165,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 						...variant.dataValues,
 						...(CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[champion.id]?.POSSIBLE_DYNAMIC_VALUES,
 					},
-				}, 1],
+				}, 1, allVariants],
 				variableSourceKeys: ['effectAmount'],
 				stringtableVariableSaveUnder: champion,
 			} satisfies Omit<IStringtableVariableDebug, 'key'>;

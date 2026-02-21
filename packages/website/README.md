@@ -75,6 +75,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] resolve game variables
   - [ ] item passives
   - [ ] champion passives (level breakpoints)
+  - [ ] try always lowercase only match variables
 - [ ] mobile version and make look better
 - [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
 - [ ] disclaimer not endorsed by riot

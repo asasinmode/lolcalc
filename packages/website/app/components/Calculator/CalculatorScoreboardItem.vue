@@ -501,7 +501,7 @@ function resetAbilityLevel(event: MouseEvent, ability: Exclude<keyof IChampion['
 }
 
 const hoveredAbility = ref<keyof IChampion['abilities']>();
-const hoveredAbilityVariant = shallowRef<IChampionAbility['variants'][number]>();
+const hoveredAbilityVariant = shallowRef<IChampionAbilityVariant>();
 const hoveredAbilityTooltip = useTemplateRef('championAbilityHoverTooltip');
 
 const hoveredAbilityTooltipText = computed(() => {
@@ -556,7 +556,7 @@ const hoveredAbilityTooltipText = computed(() => {
 	};
 });
 
-function abilityText(value: string, variant: IChampionAbility['variants'][number], stringtable?: Record<string, string>, level?: number) {
+function abilityText(value: string, variant: IChampionAbilityVariant, stringtable?: Record<string, string>, level?: number) {
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(
 		value,
 		stringtable,

@@ -87,12 +87,37 @@ export function runeVariableValue(variable: string, rune: IRune): IVariableValue
 	return { value, actualVariableName };
 }
 
-export function championAbilityVariableValue(variable: string, abilityVariant: IChampionAbility['variants'][number], abilityLevel = 1): IVariableValueResult {
+export function championAbilityVariableValue(
+	variable: string,
+	abilityVariant: IChampionAbilityVariant,
+	abilityLevel = 1,
+	allAbilitiesVariants: IChampionAbility['variants'] = [],
+): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let actualVariableName: IVariableValueResult['actualVariableName'];
 
+	const colonIndex = variable.indexOf(':');
+	if (~colonIndex) {
+		const [rawVariantObjectName, variantVariableName] = variable.split(':');
+		const variantObjectName = rawVariantObjectName!.split('.').at(-1);
+
+		const otherAbilityVariant = allAbilitiesVariants.find((variant: IChampionAbilityVariant) => variant.objectName === variantObjectName);
+		if (otherAbilityVariant) {
+			const rv = championAbilityVariableValue(variantVariableName!, otherAbilityVariant, abilityLevel, allAbilitiesVariants);
+			return rv;
+		} else {
+			console.warn(`[championAbilityVariableValue] variant referenced in ${variable} not found`);
+		}
+	}
+
 	const [variableName, ...dotPath] = variable.split('.');
-	const sources = ['spellCalculations' in abilityVariant && abilityVariant.spellCalculations, 'dataValues' in abilityVariant && abilityVariant.dataValues, 'effectAmount' in abilityVariant && abilityVariant.effectAmount];
+	/* some variables names' cases don't match so keep them in form of key/value and try all lowercase key if exact case not found */
+	// TODO maybe can just always do lowercase variables
+	const sources: (false | [string, any][])[] = [
+		abilityVariant.spellCalculations && Object.entries(abilityVariant.spellCalculations),
+		abilityVariant.dataValues && Object.entries(abilityVariant.dataValues),
+		abilityVariant.effectAmount && Object.entries(abilityVariant.effectAmount),
+	];
 
 	if (dotPath.length) {
 		actualVariableName = variableName;
@@ -115,7 +140,7 @@ export function championAbilityVariableValue(variable: string, abilityVariant: I
 				continue;
 			}
 
-			value = source[variableName!];
+			value = source.find(source => source[0] === variableName || source[0].toLowerCase() === variableName!.toLowerCase())?.[1];
 			if (value !== undefined) {
 				for (const path in dotPath) {
 				// TODO figure this out, some paths seem to have .0 or .-1
@@ -179,7 +204,7 @@ export function replaceGameDescriptionVariables(
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
-				// @ts-expect-error spread if fine
+				// @ts-expect-error spread is fine
 				: runeVariableValue)(variableName, ...variableValueFunctionArguments);
 
 		if (Array.isArray(variable)
