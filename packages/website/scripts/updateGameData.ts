@@ -125,6 +125,8 @@ if (!championData || championData?.version !== latestVersion) {
 						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, championFileData.abilities));
 					}
 
+					setChampionAbilityVariantsText(championFileData);
+
 					await championFile.write(stringifyObject(championFileData));
 
 					return [championId, {
@@ -1106,41 +1108,13 @@ function championAbilityVariants(
 			dataKey: variantDataKey,
 		} as IChampionAbility['variants'][number];
 
-		const variableDebug = {
-			category: 'champion',
-			variableType: 'championAbility',
-			variableValueParameters: [{
-				...variant,
-				dynamicValues: {
-					...variant.dataValues,
-					...(CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[championId]?.POSSIBLE_DYNAMIC_VALUES,
-				},
-			}],
-			variableSourceKeys: ['effectAmount'],
-			stringtableVariableSaveUnder: stringtableObject,
-		} satisfies Omit<IStringtableVariableDebug, 'key'>;
-
-		variant.name = mLocKeys.keyName && getStringtableValue(mLocKeys.keyName, { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} name` });
-		// TODO debug tooltips for all abilities, not just passive
-		variant.tooltip = mLocKeys.keyTooltip && getStringtableValue(
-			mLocKeys.keyTooltip,
-			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip` } : `${variantDataKey} tooltip`,
-		);
-		variant.tooltipExtended = mLocKeys.keyTooltipExtended && getStringtableValue(
-			mLocKeys.keyTooltipExtended,
-			abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended` } : `${variantDataKey} tooltip extended`,
-		);
-		// TODO TMP some abilities have it but found in stringtable, they're probably hashed so uncomment it when hashed versions are tried and resolved
+		/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
+		variant.name = mLocKeys.keyName;
+		variant.tooltip = mLocKeys.keyTooltip;
+		variant.tooltipExtended = mLocKeys.keyTooltipExtended;
+		// TODO should be done for all abilities
 		if (abilityName === 'passive') {
-			variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine && getStringtableValue(
-				mLocKeys.keyTooltipExtendedBelowLine,
-				{ ...variableDebug, key: `${debugPrefix} ${variantData.ObjectName} tooltip extended below line` },
-			);
-		}
-
-		/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
-		if (mLocKeys.keyTooltip && (mLocKeys.keyTooltip.toLowerCase() in stringtableObject.stringtable)) {
-			variant.tooltip = `{{${mLocKeys.keyTooltip}}}`;
+			variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
 		}
 
 		variants.push(variant);
@@ -1161,6 +1135,63 @@ function championAbilityVariants(
 	});
 
 	return [maxLevel, variants, stringtableObject.stringtable];
+}
+
+/**
+ * sets champion ability variants' name and tooltips after their data, like variables, is already parsed
+ * done in a separate step because abilities' text can reference other abilities like `spell.CaitlynW:HeadshotBonusDamage`
+ * **IMPORTANT** expects ability variant's text properties to be set to the stringtable keys they're supposed to be under so it doesn't have to go through the raw ability object again, as in
+ * ```json
+ * "name": ""
+ */
+function setChampionAbilityVariantsText(champion: IChampion) {
+	const abilitiesWithVariants = Object.entries(champion.abilities).map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [keyof IChampion['abilities'], IChampionAbility['variants']][];
+	const allVariants = abilitiesWithVariants.flatMap(([, variants]) => variants);
+
+	for (const [abilityName, variants] of abilitiesWithVariants) {
+		for (let i = 0; i < variants.length; i++) {
+			const variant = variants[i];
+			const debugPrefix = `${champion.id} ${abilityName}[${i}]`;
+			const variableDebug = {
+				category: 'champion',
+				variableType: 'championAbility',
+				variableValueParameters: [{
+					...variant,
+					dynamicValues: {
+						...variant.dataValues,
+						...(CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[champion.id]?.POSSIBLE_DYNAMIC_VALUES,
+					},
+				}, 1],
+				variableSourceKeys: ['effectAmount'],
+				stringtableVariableSaveUnder: champion,
+			} satisfies Omit<IStringtableVariableDebug, 'key'>;
+
+			const variantTooltipStringtableKey = variant.tooltip;
+
+			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` });
+			// TODO debug tooltips for all abilities, not just passive
+			variant.tooltip = variant.tooltip && getStringtableValue(
+				variant.tooltip,
+				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip` } : `${variant.dataKey} tooltip`,
+			);
+			variant.tooltipExtended = variant.tooltipExtended && getStringtableValue(
+				variant.tooltipExtended,
+				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` } : `${variant.dataKey} tooltip extended`,
+			);
+			// TODO TMP some abilities have it but found in stringtable, they're probably hashed so uncomment it when hashed versions are tried and resolved
+			if (abilityName === 'passive') {
+				variant.tooltipExtendedBelowLine = variant.tooltipExtendedBelowLine && getStringtableValue(
+					variant.tooltipExtendedBelowLine,
+					{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
+				);
+			}
+
+			/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
+			if (variantTooltipStringtableKey && (variantTooltipStringtableKey.toLowerCase() in champion.stringtable)) {
+				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
+			}
+		}
+	}
 }
 
 function getUnknownTags(text: string): Set<string> {

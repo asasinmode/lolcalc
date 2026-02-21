@@ -63,5 +63,6 @@ export interface IChampionAbility {
 		spellCalculations: any;
 		effectAmount: any;
 		dataKey: string;
+		objectName: string;
 	}[];
 }
