@@ -88,17 +88,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] keyboard navigation
   - [ ] show tooltips when navigated to with keyboard
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
-- [ ] update browser to make sure everything works properly info
-  - chrome 125
-  - edge 125
-  - firefox 147
-  - opera 111
-  - safari 26
-  - chrome android 125
-  - firefox android 147
-  - opera android 83
-  - safari ios 26
-  - samsung internet 27
+- [ ] update browser to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
   - [ ] github readme
