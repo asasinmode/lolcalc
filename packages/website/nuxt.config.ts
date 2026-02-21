@@ -36,6 +36,6 @@ export default defineNuxtConfig({
 			},
 		},
 	},
-	modules: ['@nuxt/eslint', '@nuxt/hints', '@unocss/nuxt'],
+	modules: ['@nuxt/eslint', '@unocss/nuxt'],
 	css: ['~/assets/index.css'],
 });
