@@ -54,6 +54,8 @@ export class DamageSource {
 		return this.items.value.length === 6;
 	});
 
+	allAbilityVariants = computed(() => this.champion.value ? Object.values(this.champion.value.abilities).flatMap(ability => ability.variants) : []);
+
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
 		this.id = id;
 		this.listedChampion = shallowRef(overrides.champion);

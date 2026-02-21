@@ -24,6 +24,7 @@ const emit = defineEmits<{
 
 const runes = useRunes();
 const ui = useUi();
+const misc = useMisc();
 const { version, minorVersion } = usePatchVersion();
 const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
@@ -565,7 +566,7 @@ function abilityText(value: string, variant: IChampionAbilityVariant, stringtabl
 	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
 		stringtableReplaced,
 		'championAbility',
-		[variant, level],
+		[variant, level, props.value.allAbilityVariants.value],
 	);
 
 	return { replaced, unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
@@ -773,7 +774,7 @@ defineExpose({ el });
 			<span class="sr-only">expand</span>
 			<Icon class="i-ph:caret-down size-5" />
 		</button>
-		<details ref="details" :aria-busy="isLoading">
+		<details ref="details" :aria-busy="isLoading" :data-champion-loaded="value.champion.value ? '' : undefined">
 			<summary>
 				details
 			</summary>
@@ -975,6 +976,9 @@ defineExpose({ el });
 					</template>
 				</div>
 			</section>
+			<section data-champion-dragons="">
+				dragons go here :3
+			</section>
 		</details>
 	</li>
 </template>
@@ -1173,7 +1177,7 @@ defineExpose({ el });
 			grid-area: expanded;
 
 			&::details-content {
-				--at-apply: 'pt-4 -mt-6 grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]';
+				--at-apply: 'pt-4 -mt-6 grid grid-cols-[auto_1fr] grid-rows-[auto_auto_1fr]';
 			}
 
 			[data-loading] {
@@ -1190,8 +1194,8 @@ defineExpose({ el });
 				--at-apply: 'list-none invisible pointer-events-none';
 			}
 
-			> [data-champion-stats] {
-				--at-apply: 'row-span-2';
+			[data-champion-stats] {
+				--at-apply: 'row-span-3';
 
 				> dl {
 					--at-apply: 'grid grid-rows-4 items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
@@ -1268,16 +1272,7 @@ defineExpose({ el });
 				}
 			}
 
-			.champion-stat-hover-tooltip p:first-of-type,
-			.champion-ability-hover-tooltip > div {
-				--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
-			}
-
-			.champion-ability-hover-tooltip > div:last-child {
-				--at-apply: 'b-b-0 pb-0 mb-0';
-			}
-
-			> [data-champion-abilities] {
+			[data-champion-abilities] {
 				--at-apply: 'grid gap-x-2 auto-rows-max';
 				grid-template-areas:
 					'passive	q					w					e					r'
@@ -1386,42 +1381,13 @@ defineExpose({ el });
 				}
 			}
 
-			[data-champion-health-ability-resource] {
-				[data-current-health],
-				[data-current-ability-resource] {
-					--at-apply: 'relative bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
+			.champion-stat-hover-tooltip p:first-of-type,
+			.champion-ability-hover-tooltip > div {
+				--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+			}
 
-					&:before {
-						--at-apply: 'content-empty block absolute z-0 inset-0 origin-left bg-[--fill-bg] scale-x-[var(--fill-percentage,0)]';
-					}
-
-					> label {
-						--at-apply: 'z-1 sr-only';
-					}
-
-					> span {
-						--at-apply: 'z-1 pointer-events-none select-none';
-					}
-
-					/* TODO add field-sizing: content; once firefox has it */
-					> input {
-						--at-apply: 'z-1 w-12 bg-white text-black text-center leading-[1] px-1';
-						-webkit-appearance: textfield;
-						-moz-appearance: textfield;
-						appearance: textfield;
-					}
-				}
-
-				[data-current-health] {
-					--at-apply: 'mt-2';
-					--fill-bg: theme('colors.green.500');
-					grid-area: health;
-				}
-
-				[data-current-ability-resource] {
-					--fill-bg: theme('colors.blue.500');
-					grid-area: resource;
-				}
+			.champion-ability-hover-tooltip > div:last-child {
+				--at-apply: 'b-b-0 pb-0 mb-0';
 			}
 
 			.champion-ability-hover-tooltip {
@@ -1497,6 +1463,48 @@ defineExpose({ el });
 						}
 					}
 				}
+			}
+
+			[data-champion-health-ability-resource] {
+				[data-current-health],
+				[data-current-ability-resource] {
+					--at-apply: 'relative bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
+
+					&:before {
+						--at-apply: 'content-empty block absolute z-0 inset-0 origin-left bg-[--fill-bg] scale-x-[var(--fill-percentage,0)]';
+					}
+
+					> label {
+						--at-apply: 'z-1 sr-only';
+					}
+
+					> span {
+						--at-apply: 'z-1 pointer-events-none select-none';
+					}
+
+					/* TODO add field-sizing: content; once firefox has it */
+					> input {
+						--at-apply: 'z-1 w-12 bg-white text-black text-center leading-[1] px-1';
+						-webkit-appearance: textfield;
+						-moz-appearance: textfield;
+						appearance: textfield;
+					}
+				}
+
+				[data-current-health] {
+					--at-apply: 'mt-2';
+					--fill-bg: theme('colors.green.500');
+					grid-area: health;
+				}
+
+				[data-current-ability-resource] {
+					--fill-bg: theme('colors.blue.500');
+					grid-area: resource;
+				}
+			}
+
+			[data-champion-dragons] {
+				--at-apply: 'bg-pink-500';
 			}
 		}
 	}
