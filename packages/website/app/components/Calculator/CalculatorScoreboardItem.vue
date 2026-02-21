@@ -774,7 +774,7 @@ defineExpose({ el });
 			<span class="sr-only">expand</span>
 			<Icon class="i-ph:caret-down size-5" />
 		</button>
-		<details ref="details" :aria-busy="isLoading" :data-champion-loaded="value.champion.value ? '' : undefined">
+		<details ref="details" :aria-busy="isLoading" :data-empty="!value.champion.value ? '' : undefined">
 			<summary>
 				details
 			</summary>
@@ -1293,6 +1293,10 @@ defineExpose({ el });
 						-webkit-text-stroke: black 0.1em;
 						paint-order: stroke fill;
 					}
+				}
+
+				details[data-empty] & [data-passive] {
+					--at-apply: 'b-neutral-300';
 				}
 
 				[data-q],
