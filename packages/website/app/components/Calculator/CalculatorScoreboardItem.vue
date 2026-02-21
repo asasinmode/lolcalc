@@ -584,6 +584,8 @@ function hideAbilityTooltip() {
 	hoveredAbilityTooltip.value?.hidePopover();
 }
 
+// atlas for dragons https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
+
 const el = useTemplateRef('el');
 
 onBeforeUnmount(() => {

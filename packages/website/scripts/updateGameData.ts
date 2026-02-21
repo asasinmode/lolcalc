@@ -486,14 +486,6 @@ if (await miscFile.exists()) {
 	miscData = await miscFile.json();
 }
 
-// dragons https://raw.communitydragon.org/latest/game/shared.cdtb.bin.json
-// Shared/Spells/SRX_DragonBuffCloud `mSpell`, maybe `mImgIconName`, `mBuff`.`mDescription`
-// Shared/Spells/SRX_DragonSoulBuffHextech similar except `mLocKeys`
-// stack icons https://raw.communitydragon.org/latest/game/assets/ux/scoreboard/
-// soul icons ? https://raw.communitydragon.org/latest/game/data/shared/spells/icons2d/
-// scoreboard atlas thingy https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
-// atlas https://raw.communitydragon.org/latest/game/assets/ux/srx/dragonuiprototype.png
-
 if (!miscData || miscData?.version !== latestVersion) {
 	console.log('misc data not present or outdated, fetching...');
 
@@ -597,10 +589,13 @@ const autoAtlasImages: Record<string, {
 if (!uiData || uiData?.version !== latestVersion) {
 	console.log('ui data not present or outdated, fetching...');
 
-	const itemshopUiBase = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json');
-	const playerstatsUiBase = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/lol/playerstats/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/lol/playerstats/uibase.cdtb.bin.json');
-	/* auto atlas data for playerstat icons */
-	await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/lol/playerstats.cdtb.json`, 'game/clientstates/gameplay/ux/lol/playerstats.cdtb.json');
+	const [itemshopUiBase, playerstatsUiBase, dragonUiPrototype] = await Promise.all([
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json'),
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/lol/playerstats/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/lol/playerstats/uibase.cdtb.bin.json'),
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json`, 'game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json'),
+		/* auto atlas data for playerstat icons, prefetch since it can be called multiple times */
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/lol/playerstats.cdtb.json`, 'game/clientstates/gameplay/ux/lol/playerstats.cdtb.json'),
+	]);
 
 	async function getTexture(data: any, debug: string, autoAtlasCdtbUrl?: string) {
 		const { TextureData } = data || {};
@@ -724,6 +719,13 @@ if (!uiData || uiData?.version !== latestVersion) {
 					`player stats ${name}`,
 					'game/clientstates/gameplay/ux/lol/playerstats.cdtb.json',
 				)];
+			}))),
+			dragons: Object.fromEntries(await Promise.all(DRAGONS.map(async ([name]) => {
+				return [name, {
+					stack: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_Source_${name}Icon`], `dragon stack ${name}`),
+					soulInactive: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_CSrceKnwn_${name}Icon`], `dragon soul inactive ${name}`),
+					soulActive: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_CSrceAct_${name}Icon`], `dragon soul active ${name}`),
+				}];
 			}))),
 		} as unknown as NonNullable<(typeof uiData)>['data'],
 	};
@@ -1264,7 +1266,10 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 		data = await cacheFile[responseMethod]();
 	}
 	if (!data) {
-		data = await fetch(url).then(r => r[responseMethod]());
+		data = await fetch(url).then(r => r[responseMethod]()).catch((err) => {
+			console.log(`[fetchCached] ${url} ${responseMethod}`);
+			throw err;
+		});
 		await cacheFile.write(responseMethod === 'json' ? stringifyObject(data) : data);
 	}
 	cacheHits[filename] = data;

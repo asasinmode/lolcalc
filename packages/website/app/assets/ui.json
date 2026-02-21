@@ -336,6 +336,128 @@
 				"resHeight": 512,
 				"uv": [285, 487, 309, 511]
 			}
+		},
+		"dragons": {
+			"Cloud": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [18, 263, 58, 303]
+				},
+				"soulInactive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [4, 188, 72, 257]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [4, 113, 72, 182]
+				}
+			},
+			"Mountain": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [93, 263, 133, 303]
+				},
+				"soulInactive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [79, 188, 147, 257]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [79, 113, 147, 182]
+				}
+			},
+			"Infernal": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [168, 263, 208, 303]
+				},
+				"soulInactive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [154, 188, 222, 257]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [154, 113, 222, 182]
+				}
+			},
+			"Ocean": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [243, 263, 283, 303]
+				},
+				"soulInactive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [229, 188, 297, 257]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [229, 113, 297, 182]
+				}
+			},
+			"Chemtech": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [395, 263, 435, 303]
+				},
+				"soulInactive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [381, 189, 449, 257]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [381, 114, 449, 182]
+				}
+			},
+			"Hextech": {
+				"stack": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [25, 468, 64, 507]
+				},
+				"soulInactive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [12, 393, 81, 462]
+				},
+				"soulActive": {
+					"spriteSheet": "assets/ux/srx/dragonuiprototype.png",
+					"resWidth": 512,
+					"resHeight": 512,
+					"uv": [13, 318, 82, 386]
+				}
+			}
 		}
 	}
 }
