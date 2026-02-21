@@ -511,14 +511,14 @@ if (!miscData || miscData?.version !== latestVersion) {
 					throw new Error(`Dragon ${name} stack (${!!stackData}) / soul (${!!soulData}) data not present`);
 				}
 
-				const { ObjectName: stackObjectName, mSpell: { DataValues: stackDataValues } } = stackData;
+				const { ObjectName: stackObjectName, mSpell: { DataValues: stackDataValues, mSpellCalculations: stackSpellCalculations } } = stackData;
 				const parsedStackDataValues = stackDataValues?.length
 					? Object.fromEntries(stackDataValues.map(({ mName, mValues }: Record<string, number[]>) =>
 							[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
 						))
 					: undefined;
 
-				const { ObjectName: soulObjectName, mSpell: { DataValues: soulDataValues } } = soulData;
+				const { ObjectName: soulObjectName, mSpell: { DataValues: soulDataValues, mSpellCalculations: soulSpellCalculations } } = soulData;
 				const parsedSoulDataValues = soulDataValues?.length
 					? Object.fromEntries(soulDataValues.map(({ mName, mValues }: Record<string, number[]>) =>
 							[mName, mValues?.length ? mValues.map(value => formatNumber(value)) : undefined],
@@ -530,10 +530,12 @@ if (!miscData || miscData?.version !== latestVersion) {
 					stack: {
 						objectName: stackObjectName,
 						dataValues: parsedStackDataValues,
+						spellCalculations: cleanupObject(stackSpellCalculations),
 					},
 					soul: {
 						objectName: soulObjectName,
 						dataValues: parsedSoulDataValues,
+						spellCalculations: cleanupObject(soulSpellCalculations),
 					},
 				}];
 			}))),
@@ -556,14 +558,14 @@ if (!miscData || miscData?.version !== latestVersion) {
 			key: `dragon stack ${name}`,
 			variableSourceKeys: ['DataValues'],
 			variableType: 'championAbility',
-			variableValueParameters: [stackAbility],
+			variableValueParameters: [stackAbility, undefined, allSpells],
 		});
 		const soul = getStringtableValue(soulTooltipKey, {
 			category: 'misc',
 			key: `dragon soul ${name}`,
 			variableSourceKeys: ['DataValues'],
 			variableType: 'championAbility',
-			variableValueParameters: [soulAbility],
+			variableValueParameters: [soulAbility, undefined, allSpells],
 		});
 
 		const stackTitleEndIndex = stack.indexOf('</titleLeft>');
@@ -1165,7 +1167,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 						...variant.dataValues,
 						...(CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[champion.id]?.POSSIBLE_DYNAMIC_VALUES,
 					},
-				}, 1, allVariants],
+				}, undefined, allVariants],
 				variableSourceKeys: ['effectAmount'],
 				stringtableVariableSaveUnder: champion,
 			} satisfies Omit<IStringtableVariableDebug, 'key'>;

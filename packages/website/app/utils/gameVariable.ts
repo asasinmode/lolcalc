@@ -107,7 +107,8 @@ export function championAbilityVariableValue(
 			};
 		}
 
-		const otherAbilityVariant = allAbilitiesVariants.find((variant: IChampionAbilityVariant) => variant.objectName === variantObjectName);
+		// TODO maybe can keep object names in lowercase, same as variable names
+		const otherAbilityVariant = allAbilitiesVariants.find(variant => variant.objectName === variantObjectName || variant.objectName.toLowerCase() === variantObjectName?.toLowerCase());
 		if (otherAbilityVariant) {
 			return championAbilityVariableValue(variantVariableName!, otherAbilityVariant, abilityLevel, allAbilitiesVariants);
 		} else {
