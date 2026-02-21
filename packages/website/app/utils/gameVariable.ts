@@ -8,7 +8,7 @@ export interface IItemVariableCalculationTarget {
 
 interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
-	value?: number | [number | undefined, number | undefined];
+	value?: string | number | [number | undefined, number | undefined];
 	/** if `true`, the variable is different for melee and ranged champions */
 	isMeleeRanged?: boolean;
 	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
@@ -101,10 +101,15 @@ export function championAbilityVariableValue(
 		const [rawVariantObjectName, variantVariableName] = variable.split(':');
 		const variantObjectName = rawVariantObjectName!.split('.').at(-1);
 
+		if (variantVariableName === 'Hotkey') {
+			return {
+				value: variantObjectName!.at(-1),
+			};
+		}
+
 		const otherAbilityVariant = allAbilitiesVariants.find((variant: IChampionAbilityVariant) => variant.objectName === variantObjectName);
 		if (otherAbilityVariant) {
-			const rv = championAbilityVariableValue(variantVariableName!, otherAbilityVariant, abilityLevel, allAbilitiesVariants);
-			return rv;
+			return championAbilityVariableValue(variantVariableName!, otherAbilityVariant, abilityLevel, allAbilitiesVariants);
 		} else {
 			console.warn(`[championAbilityVariableValue] variant referenced in ${variable} not found`);
 		}
@@ -207,9 +212,11 @@ export function replaceGameDescriptionVariables(
 				// @ts-expect-error spread is fine
 				: runeVariableValue)(variableName, ...variableValueFunctionArguments);
 
-		if (Array.isArray(variable)
-			? variable.some(v => typeof v !== 'number' || Number.isNaN(v))
-			: (typeof variable !== 'number' || Number.isNaN(variable))) {
+		if (typeof variable !== 'string' && (
+			Array.isArray(variable)
+				? variable.some(v => typeof v !== 'number' || Number.isNaN(v))
+				: (typeof variable !== 'number' || Number.isNaN(variable)))
+		) {
 			variable = Array.isArray(variable)
 				? variable.map(v => (typeof v !== 'number' || Number.isNaN(v)) ? undefined : v) as typeof variable
 				: undefined;
@@ -218,6 +225,10 @@ export function replaceGameDescriptionVariables(
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
 			return `<unknown>@${name}@</unknown>`;
+		}
+
+		if (typeof variable === 'string') {
+			return variable;
 		}
 
 		if (Array.isArray(variable)) {

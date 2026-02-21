@@ -71,7 +71,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
 - [ ] sharing, saving/reading data in query
-- [ ] calculations
+- [ ] calculations [check out](https://github.com/OsOmE1/leaguebuilder)
   - [ ] resolve game variables
   - [ ] item passives
   - [ ] champion passives (level breakpoints)
