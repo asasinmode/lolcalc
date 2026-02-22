@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-defineProps<{
+const props = defineProps<{
 	id: string;
 	label: string;
 	options: [value: T, text: string | number][];
@@ -15,11 +15,24 @@ const value = defineModel<T>();
 function setValue(event: Event) {
 	value.value = (event.target as HTMLSelectElement).value as T || undefined;
 }
+
+function clear(event: MouseEvent) {
+	if (props.clearable) {
+		value.value = undefined;
+		event.preventDefault();
+	}
+}
 </script>
 
 <template>
 	<div class="v-select">
-		<select :id :value @change="setValue" @click.right.prevent="value = undefined" @mouseenter="$emit('labelMouseenter', $event)">
+		<select
+			:id
+			:value
+			@change="setValue"
+			@click.right="clear"
+			@mouseenter="$emit('labelMouseenter', $event)"
+		>
 			<option v-if="clearable" value="">
 				&lt;none&gt;
 			</option>
@@ -49,7 +62,7 @@ function setValue(event: Event) {
 		}
 
 		label {
-			--at-apply: 'block relative pointer-events-none';
+			--at-apply: 'block relative pointer-events-none z-1';
 
 			> :first-child {
 				--at-apply: 'sr-only';

@@ -585,6 +585,20 @@ function hideAbilityTooltip() {
 	abilityHoverTooltipEl.value?.hidePopover();
 }
 
+function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'soul', subpath?: number) {
+	if (target === 'stack') {
+		// eslint-disable-next-line vue/no-mutating-props
+		props.value.dragonStacks.value[subpath!] = value;
+	} else {
+		// eslint-disable-next-line vue/no-mutating-props
+		props.value.dragonSoul.value = value;
+	}
+
+	if (!value) {
+		leaveDragonTooltipableElement();
+	}
+}
+
 const dragonOptions = ALL_DRAGON_NAMES.map(name => [name, name.toLowerCase()]) as [IDragonName, string][];
 
 let dragonTooltipAnchor: HTMLElement | undefined;
@@ -603,6 +617,7 @@ function enterDragonTooltipableElement(event: MouseEvent, dragonThing: [IDragonN
 
 function leaveDragonTooltipableElement() {
 	dragonHoverTooltipEl.value?.hidePopover();
+	dragonTooltipAnchor?.removeEventListener('mouseleave', leaveDragonTooltipableElement);
 	dragonTooltipAnchor?.removeEventListener('mousemove', updateDragonTooltipPosition);
 	dragonTooltipAnchor = undefined;
 }
@@ -731,12 +746,16 @@ defineExpose({ el });
 					style="--focus-brightness: 1.5"
 				>
 			</button>
-			<label :for="`${group}-${index}-level-select`" class="sr-only">Level</label>
-			<select :id="`${group}-${index}-level-select`" v-model="value.level.value" data-select-champion-level="">
-				<option v-for="i in 18" :key="i" :value="i">
-					{{ i }}
-				</option>
-			</select>
+			<VSelect
+				:id="`${group}-${index}-level-select`"
+				label="level"
+				:model-value="value.level.value"
+				data-select-champion-level=""
+				:options="Array.from({ length: 18 }, (_, i) => [i + 1, (i + 1).toString()])"
+				@update:model-value="value.level.value = $event!"
+			>
+				<span>{{ value.level.value }}</span>
+			</VSelect>
 		</div>
 		<button
 			:title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'"
@@ -1060,7 +1079,7 @@ defineExpose({ el });
 					label="soul"
 					data-dragon-stack=""
 					clearable
-					@update:model-value="value.dragonStacks.value[i - 1] = $event"
+					@update:model-value="updateDragonThing($event, 'stack', i - 1)"
 					@label-mouseenter="value.dragonStacks.value[i - 1] && enterDragonTooltipableElement($event, [value.dragonStacks.value[i - 1]!, 'stack'])"
 				>
 					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 32)" />
@@ -1078,7 +1097,7 @@ defineExpose({ el });
 					data-dragon-soul=""
 					label="soul"
 					clearable
-					@update:model-value="value.dragonSoul.value = $event"
+					@update:model-value="updateDragonThing($event, 'soul')"
 					@label-mouseenter="value.dragonSoul.value && enterDragonTooltipableElement($event, [value.dragonSoul.value, 'soul'])"
 				>
 					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 56)" />
@@ -1191,7 +1210,15 @@ defineExpose({ el });
 			}
 
 			> [data-select-champion-level] {
-				--at-apply: 'absolute -bottom-1 -end-2';
+				--at-apply: 'absolute -bottom-0.5 -end-0.5';
+
+				> select {
+					--at-apply: 'rounded-full';
+				}
+
+				> label > span:last-child {
+					--at-apply: 'size-5 bg-black text-white text-center text-sm/5.25 rounded-full grid-center';
+				}
 			}
 		}
 
@@ -1603,7 +1630,7 @@ defineExpose({ el });
 				}
 
 				[data-current-health] {
-					--at-apply: 'mt-2';
+					--at-apply: 'mt-1.25';
 					--fill-bg: theme('colors.green.500');
 				}
 
