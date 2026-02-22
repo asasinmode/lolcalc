@@ -778,10 +778,11 @@ defineExpose({ el });
 			<summary>
 				details
 			</summary>
-			<h3 data-loading="">
+			<h4 data-loading="">
 				loading...
-			</h3>
+			</h4>
 			<section data-champion-stats="" :inert="isLoading || undefined">
+				<h4>runes and stats</h4>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
 					:key="statKindIndex"
@@ -801,7 +802,7 @@ defineExpose({ el });
 					</template>
 				</dl>
 				<div ref="championStatTooltip" class="hover-tooltip champion-stat-hover-tooltip" popover="hint">
-					<h4>{{ hoveredStat?.name }}</h4>
+					<h5>{{ hoveredStat?.name }}</h5>
 					<p class="game-description" v-html="hoveredStat?.description" />
 					<dl>
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
@@ -819,6 +820,7 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-abilities="" :inert="isLoading || undefined">
+				<h4>abilties</h4>
 				<div data-passive="">
 					<img
 						v-show="!isLoading"
@@ -872,9 +874,9 @@ defineExpose({ el });
 						height="64"
 						aria-hidden="true"
 					>
-					<h4>
+					<h5>
 						{{ hoveredAbility && hoveredAbility !== 'passive' ? `[${hoveredAbility.toUpperCase()}] ` : '' }}{{ hoveredAbilityTooltipText?.name }}
-					</h4>
+					</h5>
 					<span>
 						<template v-if="hoveredAbility !== 'passive' && hoveredAbilityTooltipText?.cooldown">
 							{{ hoveredAbilityTooltipText?.cooldown }}s
@@ -933,6 +935,7 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-health-ability-resource="">
+				<h4>health and ability resource</h4>
 				<div
 					ref="healthBar"
 					data-current-health=""
@@ -984,9 +987,12 @@ defineExpose({ el });
 					:model-value="value.dragonStacks.value[i - 1]"
 					:options="dragonOptions"
 					label="soul"
+					data-dragon-stack=""
 					clearable
 					@update:model-value="value.dragonStacks.value[i - 1] = $event"
-				/>
+				>
+					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 32)" />
+				</VSelect>
 				<VSelect
 					:id="`${group}-${index}-dragon-soul`"
 					:model-value="value.dragonSoul.value"
@@ -1211,6 +1217,10 @@ defineExpose({ el });
 				--at-apply: 'list-none invisible pointer-events-none';
 			}
 
+			section > h4 {
+				--at-apply: 'sr-only';
+			}
+
 			[data-champion-stats] {
 				--at-apply: 'row-span-3';
 
@@ -1252,7 +1262,7 @@ defineExpose({ el });
 				bottom: calc(anchor(top) - 1px);
 				justify-self: anchor-center;
 
-				h4 {
+				h5 {
 					--at-apply: 'text-lg/6 font-500 text-white';
 				}
 
@@ -1406,7 +1416,7 @@ defineExpose({ el });
 					--at-apply: 'row-span-2';
 				}
 
-				> h4 {
+				> h5 {
 					--at-apply: 'text-white text-lg row-span-2';
 				}
 
@@ -1502,7 +1512,13 @@ defineExpose({ el });
 			}
 
 			[data-champion-dragons] {
-				--at-apply: '';
+				--at-apply: 'flex items-center';
+
+				[data-dragon-stack] {
+					> label {
+						--at-apply: 'size-10 grid-center bg-black rounded-full of-hidden';
+					}
+				}
 			}
 		}
 	}

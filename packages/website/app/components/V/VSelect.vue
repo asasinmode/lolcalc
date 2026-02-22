@@ -14,13 +14,46 @@ function setValue(event: Event) {
 </script>
 
 <template>
-	<label :for="id" class="sr-only">{{ label }}</label>
-	<select :id :value @change="setValue">
-		<option v-if="clearable" value="">
-			&lt;none&gt;
-		</option>
-		<option v-for="[optionValue, text] in options" :key="text" :value="optionValue">
-			{{ text }}
-		</option>
-	</select>
+	<div class="v-select">
+		<select :id :value @change="setValue" @click.right.prevent="value = undefined">
+			<option v-if="clearable" value="">
+				&lt;none&gt;
+			</option>
+			<option v-for="[optionValue, text] in options" :key="text" :value="optionValue">
+				{{ text }}
+			</option>
+		</select>
+		<label :for="id">
+			<span>{{ label }}</span>
+			<slot />
+		</label>
+	</div>
 </template>
+
+<style>
+@layer components {
+	.v-select {
+		--at-apply: 'relative';
+
+		select {
+			--at-apply: 'absolute size-full of-hidden rounded-full cursor-pointer z-0';
+		}
+
+		select:focus-visible + label {
+			outline: auto;
+		}
+
+		label {
+			--at-apply: 'block relative pointer-events-none';
+
+			> :first-child {
+				--at-apply: 'sr-only';
+			}
+
+			> button {
+				--at-apply: 'size-full';
+			}
+		}
+	}
+}
+</style>
