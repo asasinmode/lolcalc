@@ -6,9 +6,12 @@ const props = defineProps<{
 	valueKey: ValueKey;
 	titleKey?: keyof T | '';
 	required?: boolean;
-	onOptionMouseenter?: (event: MouseEvent, option: T) => void;
-	onOptionFocus?: (event: FocusEvent, option: T) => void;
-	onOptionRightClick?: (event: MouseEvent, option: T) => void;
+}>();
+
+defineEmits<{
+	optionMouseenter: [event: MouseEvent, option: T];
+	optionFocus: [event: FocusEvent, option: T];
+	optionRightClick: [event: MouseEvent, option: T];
 }>();
 
 const value = defineModel<T[ValueKey]>();
@@ -60,10 +63,10 @@ function selectOption(tab: T[ValueKey]) {
 			:title="titleKey !== '' ? option[titleKey || valueKey] as string : undefined"
 			:tabindex="(!value && index === 0) || value === option[valueKey] ? 0 : -1"
 			:aria-checked="value === option[valueKey]"
-			@mouseenter="onOptionMouseenter?.($event, option)"
-			@focus="onOptionFocus?.($event, option)"
+			@mouseenter="$emit('optionMouseenter', $event, option)"
+			@focus="$emit('optionFocus', $event, option)"
 			@click="selectOption(option[valueKey])"
-			@click.right="onOptionRightClick?.($event, option)"
+			@click.right="$emit('optionRightClick', $event, option)"
 		>
 			<slot :option :is-selected="value === option[valueKey]" />
 		</button>

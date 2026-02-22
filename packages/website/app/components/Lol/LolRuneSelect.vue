@@ -263,8 +263,8 @@ defineExpose({
 				value-key="name"
 				title-key=""
 				data-path=""
-				:on-option-mouseenter="enterTooltipableElement"
-				:on-option-focus="enterTooltipableElement"
+				@option-mouseenter="enterTooltipableElement"
+				@option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'primary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -288,8 +288,8 @@ defineExpose({
 				:data-keystone="slotIndex === 0 ? '' : undefined"
 				value-key="name"
 				title-key=""
-				:on-option-mouseenter="enterTooltipableElement"
-				:on-option-focus="enterTooltipableElement"
+				@option-mouseenter="enterTooltipableElement"
+				@option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'primarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -316,8 +316,8 @@ defineExpose({
 				value-key="name"
 				title-key=""
 				data-path=""
-				:on-option-mouseenter="enterTooltipableElement"
-				:on-option-focus="enterTooltipableElement"
+				@option-mouseenter="enterTooltipableElement"
+				@option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'secondary'], $event)"
 			>
 				<template #default="{ option: { title, icon, iconColor } }">
@@ -346,8 +346,8 @@ defineExpose({
 				:options="Object.values(slots)"
 				value-key="name"
 				title-key=""
-				:on-option-mouseenter="enterTooltipableElement"
-				:on-option-focus="enterTooltipableElement"
+				@option-mouseenter="enterTooltipableElement"
+				@option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['paths', 'secondarySlots', slotIndex], $event)"
 			>
 				<template #default="{ option: { title, icon } }">
@@ -374,8 +374,8 @@ defineExpose({
 				:options="slots"
 				value-key="name"
 				title-key=""
-				:on-option-mouseenter="enterTooltipableElement"
-				:on-option-focus="enterTooltipableElement"
+				@option-mouseenter="enterTooltipableElement"
+				@option-focus="enterTooltipableElement"
 				@update:model-value="updateValue(['shards', slotName], $event)"
 			>
 				<template #default="{ option: { title, icon } }">

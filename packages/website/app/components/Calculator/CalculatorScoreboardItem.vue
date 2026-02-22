@@ -918,7 +918,7 @@ defineExpose({ el });
 							:label="`${ability} level`"
 							:options="Array.from({ length: value.champion.value.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
 							value-key="level"
-							:on-option-right-click="(event) => resetAbilityLevel(event, ability)"
+							@option-right-click="(event) => resetAbilityLevel(event, ability)"
 						>
 							<template #default="{ option }">
 								<span>{{ option.level }}</span>
