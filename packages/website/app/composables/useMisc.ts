@@ -8,7 +8,7 @@ export const ALL_DRAGON_NAMES = Object.keys(data.dragons) as IDragonName[];
 
 export type IDragonName = 'Cloud' | 'Mountain' | 'Infernal' | 'Ocean' | 'Chemtech' | 'Hextech';
 
-interface IMiscData {
+export interface IMiscData {
 	dragons: Record<IDragonName, {
 		name: string;
 		stack: {

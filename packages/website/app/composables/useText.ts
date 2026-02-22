@@ -33,5 +33,9 @@ export interface ITextData {
 			}>;
 		};
 	};
+	dragons: Record<IDragonName, {
+		stack: string;
+		soul: string;
+	}>;
 	stringtable: Record<string, string>;
 }

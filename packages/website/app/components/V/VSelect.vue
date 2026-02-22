@@ -6,6 +6,10 @@ defineProps<{
 	clearable?: boolean;
 }>();
 
+defineEmits<{
+	labelMouseenter: [event: MouseEvent];
+}>();
+
 const value = defineModel<T>();
 
 function setValue(event: Event) {
@@ -15,7 +19,7 @@ function setValue(event: Event) {
 
 <template>
 	<div class="v-select">
-		<select :id :value @change="setValue" @click.right.prevent="value = undefined">
+		<select :id :value @change="setValue" @click.right.prevent="value = undefined" @mouseenter="$emit('labelMouseenter', $event)">
 			<option v-if="clearable" value="">
 				&lt;none&gt;
 			</option>

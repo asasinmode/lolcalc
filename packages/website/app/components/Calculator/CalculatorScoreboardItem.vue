@@ -24,6 +24,7 @@ const emit = defineEmits<{
 
 const runes = useRunes();
 const ui = useUi();
+const misc = useMisc();
 const { version, minorVersion } = usePatchVersion();
 const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
@@ -502,7 +503,7 @@ function resetAbilityLevel(event: MouseEvent, ability: Exclude<keyof IChampion['
 
 const hoveredAbility = ref<keyof IChampion['abilities']>();
 const hoveredAbilityVariant = shallowRef<IChampionAbilityVariant>();
-const hoveredAbilityTooltip = useTemplateRef('championAbilityHoverTooltip');
+const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 
 const hoveredAbilityTooltipText = computed(() => {
 	if (!hoveredAbilityVariant.value) {
@@ -576,16 +577,68 @@ function showAbilityTooltip(event: MouseEvent, ability: keyof IChampion['abiliti
 		hoveredAbility.value = ability;
 		hoveredAbilityVariant.value = props.value.champion.value.abilities[ability].variants[0];
 		event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
-		hoveredAbilityTooltip.value?.showPopover();
+		abilityHoverTooltipEl.value?.showPopover();
 	}
 }
 
 function hideAbilityTooltip() {
-	hoveredAbilityTooltip.value?.hidePopover();
+	abilityHoverTooltipEl.value?.hidePopover();
 }
 
 const dragonOptions = ALL_DRAGON_NAMES.map(name => [name, name.toLowerCase()]) as [IDragonName, string][];
-// atlas for dragons https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
+
+let dragonTooltipAnchor: HTMLElement | undefined;
+const hoveredDragonThing = shallowRef<[IDragonName, 'stack' | 'soul']>();
+const dragonHoverTooltipEl = useTemplateRef('dragonTooltip');
+
+function enterDragonTooltipableElement(event: MouseEvent, dragonThing: [IDragonName, 'stack' | 'soul']) {
+	const { target } = event as unknown as { target: HTMLElement };
+	dragonHoverTooltipEl.value?.showPopover();
+	dragonTooltipAnchor = target;
+	dragonTooltipAnchor?.addEventListener('mouseleave', leaveDragonTooltipableElement, { passive: true, once: true });
+	dragonTooltipAnchor?.addEventListener('mousemove', updateDragonTooltipPosition, { passive: true });
+	hoveredDragonThing.value = dragonThing;
+	updateDragonTooltipPosition(event);
+}
+
+function leaveDragonTooltipableElement() {
+	dragonHoverTooltipEl.value?.hidePopover();
+	dragonTooltipAnchor?.removeEventListener('mousemove', updateDragonTooltipPosition);
+	dragonTooltipAnchor = undefined;
+}
+
+function updateDragonTooltipPosition(event: MouseEvent) {
+	const { clientX, clientY } = event;
+	dragonHoverTooltipEl.value!.style.setProperty('--left', `${clientX + 10}px`);
+	dragonHoverTooltipEl.value!.style.setProperty('--top', `${clientY + 10}px`);
+	dragonHoverTooltipEl.value!.style.setProperty('--width', `${dragonHoverTooltipEl.value!.clientWidth}px`);
+	dragonHoverTooltipEl.value!.style.setProperty('--height', `${dragonHoverTooltipEl.value!.clientHeight}px`);
+}
+
+const hoveredDragonThingText = computed(() => {
+	if (!hoveredDragonThing.value) {
+		return;
+	}
+
+	const [dragonName, abilityName] = hoveredDragonThing.value;
+
+	const ability = misc.dragons[dragonName][abilityName];
+	const string = text.dragons[dragonName][abilityName];
+
+	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(string);
+
+	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
+		stringtableReplaced,
+		'championAbility',
+		[ability as unknown as IChampionAbility, 1, [misc.dragons[dragonName].stack, misc.dragons[dragonName].soul] as unknown as IChampionAbility[]],
+	);
+
+	return {
+		title: `${dragonName} ${abilityName === 'stack' ? 'Dragon' : 'Soul'}`,
+		description: replaced,
+		anyUnknown: unknownStringtableVariables.size || unknownVariables.length,
+	};
+});
 
 const el = useTemplateRef('el');
 
@@ -760,7 +813,7 @@ defineExpose({ el });
 				</component>
 			</li>
 		</ul>
-		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip scoreboard-item-hover-tooltip">
+		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item">
 			<ItemDescription :item="hoveredItem" :target="value.getItemVariableCalculationTarget()" />
 		</div>
 		<button
@@ -808,7 +861,7 @@ defineExpose({ el });
 						</dd>
 					</template>
 				</dl>
-				<div ref="championStatTooltip" class="hover-tooltip champion-stat-hover-tooltip" popover="hint">
+				<div ref="championStatTooltip" class="hover-tooltip champion-stat" popover="hint">
 					<h5>{{ hoveredStat?.name }}</h5>
 					<p class="game-description" v-html="hoveredStat?.description" />
 					<dl>
@@ -873,7 +926,7 @@ defineExpose({ el });
 						</VButtonRadiogroup>
 					</div>
 				</template>
-				<div ref="championAbilityHoverTooltip" popover="hint" class="hover-tooltip champion-ability-hover-tooltip game-description">
+				<div ref="championAbilityHoverTooltip" popover="hint" class="hover-tooltip champion-ability game-description">
 					<img
 						v-show="!isLoading"
 						:src="!isLoading && hoveredAbilityVariant ? `https://raw.communitydragon.org/${minorVersion}/game/${hoveredAbilityVariant?.image}` : undefined"
@@ -997,6 +1050,7 @@ defineExpose({ el });
 					data-dragon-stack=""
 					clearable
 					@update:model-value="value.dragonStacks.value[i - 1] = $event"
+					@label-mouseenter="value.dragonStacks.value[i - 1] && enterDragonTooltipableElement($event, [value.dragonStacks.value[i - 1]!, 'stack'])"
 				>
 					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 32)" />
 					<template #post>
@@ -1014,6 +1068,7 @@ defineExpose({ el });
 					label="soul"
 					clearable
 					@update:model-value="value.dragonSoul.value = $event"
+					@label-mouseenter="value.dragonSoul.value && enterDragonTooltipableElement($event, [value.dragonSoul.value, 'soul'])"
 				>
 					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 56)" />
 					<template #post>
@@ -1023,6 +1078,10 @@ defineExpose({ el });
 						</div>
 					</template>
 				</VSelect>
+				<div ref="dragonTooltip" popover="hint" class="dragon-thing hover-tooltip">
+					<h5>{{ hoveredDragonThingText?.title }}</h5>
+					<p class="game-description" v-html="hoveredDragonThingText?.description" />
+				</div>
 			</section>
 		</details>
 	</li>
@@ -1191,7 +1250,7 @@ defineExpose({ el });
 			}
 		}
 
-		.scoreboard-item-hover-tooltip {
+		.hover-tooltip.scoreboard-item {
 			--at-apply: 'w-160 max-w-screen';
 			inset: unset;
 			justify-self: anchor-center;
@@ -1277,16 +1336,11 @@ defineExpose({ el });
 				}
 			}
 
-			.champion-stat-hover-tooltip {
-				--at-apply: 'py-1 px-1.5';
+			.hover-tooltip.champion-stat {
 				inset: unset;
 				position-anchor: --champion-stats-minor;
 				bottom: calc(anchor(top) - 1px);
 				justify-self: anchor-center;
-
-				h5 {
-					--at-apply: 'text-lg/6 font-500 text-white';
-				}
 
 				dl {
 					--at-apply: 'leading-5.5';
@@ -1413,17 +1467,26 @@ defineExpose({ el });
 				}
 			}
 
-			.champion-stat-hover-tooltip p:first-of-type,
-			.champion-ability-hover-tooltip > div {
-				--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+			.hover-tooltip.dragon-thing,
+			.hover-tooltip.champion-stat,
+			.hover-tooltip.champion-ability {
+				--at-apply: 'p-2';
+
+				> h5 {
+					--at-apply: 'text-lg/6 font-500 text-white';
+				}
+
+				> .game-description {
+					--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+				}
 			}
 
-			.champion-ability-hover-tooltip > div:last-child {
+			.hover-tooltip > .game-description:last-child {
 				--at-apply: 'b-b-0 pb-0 mb-0';
 			}
 
-			.champion-ability-hover-tooltip {
-				--at-apply: 'max-w-160 p-2 relative grid-cols-[auto_1fr_auto] auto-rows-min';
+			.hover-tooltip.champion-ability {
+				--at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min';
 				inset: unset;
 				justify-self: anchor-center;
 				position-anchor: --scoreboard-item-abilities;
@@ -1439,7 +1502,7 @@ defineExpose({ el });
 				}
 
 				> h5 {
-					--at-apply: 'text-white text-lg row-span-2';
+					--at-apply: 'row-span-2';
 				}
 
 				> span {
@@ -1579,6 +1642,12 @@ defineExpose({ el });
 							}
 						}
 					}
+				}
+
+				.dragon-thing.hover-tooltip {
+					--at-apply: 'w-fit max-w-screen fixed whitespace-nowrap';
+					inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width, 0rem))));
+					inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 				}
 			}
 		}
