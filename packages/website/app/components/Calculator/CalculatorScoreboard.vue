@@ -412,19 +412,21 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 			</li>
 		</ul>
 		<div ref="draggingPopover" data-drag-preview="" popover="hint" inert>
-			<img
-				v-if="dragging?.value.listedChampion.value"
-				:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.listedChampion.value.image}`"
-				loading="lazy"
-				width="128"
-				height="128"
-			>
-			<img
-				v-else
-				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-				width="256"
-				height="256"
-			>
+			<span>
+				<img
+					v-if="dragging?.value.listedChampion.value"
+					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.listedChampion.value.image}`"
+					loading="lazy"
+					width="128"
+					height="128"
+				>
+				<img
+					v-else
+					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+					width="256"
+					height="256"
+				>
+			</span>
 			<span>{{ dragging?.value.level.value }}</span>
 			<div>
 				<img
@@ -485,11 +487,15 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 			}
 
 			> :nth-child(1) {
-				--at-apply: 'size-12 rounded-full b b-[--ui-button-border-clr]';
+				--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-button-border-clr]';
+
+				> img {
+					--at-apply: 'size-14 -ms-1 -mt-1 max-w-none';
+				}
 			}
 
 			> :nth-child(2) {
-				--at-apply: 'absolute bg-black rounded-full top-11 start-11 translate-center text-xs size-5 text-center grid-center b b-[--ui-button-border-clr]';
+				--at-apply: 'absolute bg-black rounded-full top-11 start-11.5 translate-center text-xs/3 size-5 text-center grid-center b b-[--ui-button-border-clr]';
 			}
 
 			> :nth-child(3) {

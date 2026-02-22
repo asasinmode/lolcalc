@@ -1217,7 +1217,7 @@ defineExpose({ el });
 				}
 
 				> label > span:last-child {
-					--at-apply: 'size-5 bg-black text-white text-center text-sm/5.25 rounded-full grid-center';
+					--at-apply: 'size-5 bg-black text-white b b-[--ui-button-border-clr] text-center text-sm/4 rounded-full grid-center';
 				}
 			}
 		}
