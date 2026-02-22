@@ -997,10 +997,13 @@ defineExpose({ el });
 					:id="`${group}-${index}-dragon-soul`"
 					:model-value="value.dragonSoul.value"
 					:options="dragonOptions"
+					data-dragon-soul=""
 					label="soul"
 					clearable
 					@update:model-value="value.dragonSoul.value = $event"
-				/>
+				>
+					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 56)" />
+				</VSelect>
 			</section>
 		</details>
 	</li>
@@ -1514,9 +1517,22 @@ defineExpose({ el });
 			[data-champion-dragons] {
 				--at-apply: 'flex items-center';
 
-				[data-dragon-stack] {
+				> [data-dragon-stack] {
 					> label {
 						--at-apply: 'size-10 grid-center bg-black rounded-full of-hidden';
+					}
+				}
+
+				> [data-dragon-soul] {
+					--at-apply: 'm-[calc((var(--size)*sqrt(2)-var(--size))/2)]';
+					--size: calc(12 * var(--spacing));
+
+					> label {
+						--at-apply: 'size-[--size] grid-center bg-black of-hidden rotate-45';
+
+						> div {
+							--at-apply: '-rotate-45 -translate-1';
+						}
 					}
 				}
 			}
