@@ -6,6 +6,7 @@
 				"name": "Cloud",
 				"stack": {
 					"objectName": "SRX_DragonBuffCloud",
+					"dataKey": "Shared/Spells/SRX_DragonBuffCloud",
 					"dataValues": {
 						"SRAmountPerStack": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05],
 						"MSAmountPerStack": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
@@ -13,6 +14,7 @@
 				},
 				"soul": {
 					"objectName": "SRX_DragonSoulBuffCloud",
+					"dataKey": "Shared/Spells/SRX_DragonSoulBuffCloud",
 					"dataValues": {
 						"MSBuffDuration": [6, 6, 6, 6, 6, 6, 6],
 						"MSAmount": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -25,12 +27,14 @@
 				"name": "Mountain",
 				"stack": {
 					"objectName": "SRX_DragonBuffMountain",
+					"dataKey": "Shared/Spells/SRX_DragonBuffMountain",
 					"dataValues": {
 						"BonusDefenses": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
 					}
 				},
 				"soul": {
 					"objectName": "SRX_DragonSoulBuffMountain",
+					"dataKey": "Shared/Spells/SRX_DragonSoulBuffMountain",
 					"dataValues": {
 						"BaseShieldValue": [220, 220, 220, 220, 220, 220, 220],
 						"BonusHPRatio": [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12],
@@ -70,12 +74,14 @@
 				"name": "Infernal",
 				"stack": {
 					"objectName": "SRX_DragonBuffInfernal",
+					"dataKey": "Shared/Spells/SRX_DragonBuffInfernal",
 					"dataValues": {
 						"ADandAPPercentIncrease": [0.03, 0.03, 0.03, 0.03, 0.03, 0.03, 0.03]
 					}
 				},
 				"soul": {
 					"objectName": "SRX_DragonSoulBuffInfernal",
+					"dataKey": "Shared/Spells/SRX_DragonSoulBuffInfernal",
 					"dataValues": {
 						"BaseDamage": [100, 100, 100, 100, 100, 100, 100],
 						"BlastRadius": [250, 250, 250, 250, 250, 250, 250],
@@ -116,6 +122,7 @@
 				"name": "Ocean",
 				"stack": {
 					"objectName": "SRX_DragonBuffOcean",
+					"dataKey": "Shared/Spells/SRX_DragonBuffOcean",
 					"dataValues": {
 						"HealingPercent": [0.02, 0.02, 0.02, 0.02, 0.02, 0.02, 0.02],
 						"HealFrequency": [5, 5, 5, 5, 5, 5, 5]
@@ -123,6 +130,7 @@
 				},
 				"soul": {
 					"objectName": "SRX_DragonSoulBuffOcean",
+					"dataKey": "Shared/Spells/SRX_DragonSoulBuffOcean",
 					"dataValues": {
 						"BaseHealValue": [150, 150, 150, 150, 150, 150, 150],
 						"MinionPenalty": [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
@@ -177,6 +185,7 @@
 				"name": "Chemtech",
 				"stack": {
 					"objectName": "SRX_DragonBuffChemTech",
+					"dataKey": "Shared/Spells/SRX_DragonBuffChemTech",
 					"dataValues": {
 						"TenacityPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06],
 						"HealShieldPerStack": [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
@@ -184,6 +193,7 @@
 				},
 				"soul": {
 					"objectName": "SRX_DragonSoulBuffChemTech",
+					"dataKey": "Shared/Spells/SRX_DragonSoulBuffChemTech",
 					"dataValues": {
 						"TriggerThreshold": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 						"DR": [0.13, 0.13, 0.13, 0.13, 0.13, 0.13, 0.13],
@@ -195,6 +205,7 @@
 				"name": "Hextech",
 				"stack": {
 					"objectName": "SRX_DragonBuffHextech",
+					"dataKey": "Shared/Spells/SRX_DragonBuffHextech",
 					"dataValues": {
 						"AbilityHaste": [5, 5, 5, 5, 5, 5, 5],
 						"AttackSpeed": [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05]
@@ -202,6 +213,7 @@
 				},
 				"soul": {
 					"objectName": "SRX_DragonSoulBuffHextech",
+					"dataKey": "Shared/Spells/SRX_DragonSoulBuffHextech",
 					"dataValues": {
 						"BaseSlowAmountMelee": [45, 45, 45, 45, 45, 45, 45],
 						"BaseUnitsToHit": [4, 4, 4, 4, 4, 4, 4],

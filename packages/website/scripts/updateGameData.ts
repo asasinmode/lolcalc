@@ -496,8 +496,10 @@ if (!miscData || miscData?.version !== latestVersion) {
 		version: latestVersion,
 		data: {
 			dragons: Object.fromEntries(await Promise.all(DRAGONS.map(async ([name, spellKey]) => {
-				const stackData = sharedData[`Shared/Spells/SRX_DragonBuff${spellKey || name}`];
-				const soulData = sharedData[`Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`];
+				const stackDataKey = `Shared/Spells/SRX_DragonBuff${spellKey || name}`;
+				const soulDataKey = `Shared/Spells/SRX_DragonSoulBuff${spellKey || name}`;
+				const stackData = sharedData[stackDataKey];
+				const soulData = sharedData[soulDataKey];
 
 				if (!stackData || !soulData) {
 					throw new Error(`Dragon ${name} stack (${!!stackData}) / soul (${!!soulData}) data not present`);
@@ -521,11 +523,13 @@ if (!miscData || miscData?.version !== latestVersion) {
 					name,
 					stack: {
 						objectName: stackObjectName,
+						dataKey: stackDataKey,
 						dataValues: parsedStackDataValues,
 						spellCalculations: cleanupObject(stackSpellCalculations),
 					},
 					soul: {
 						objectName: soulObjectName,
+						dataKey: soulDataKey,
 						dataValues: parsedSoulDataValues,
 						spellCalculations: cleanupObject(soulSpellCalculations),
 					},
