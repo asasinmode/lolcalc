@@ -11,6 +11,8 @@ interface IOverrides {
 	abilityVariants: Partial<UnwrapRef<IDamageSource['abilityVariants']>>;
 	currentHealth: UnwrapRef<IDamageSource['currentHealth']>;
 	currentAbilityResource: UnwrapRef<IDamageSource['currentAbilityResource']>;
+	dragonStacks: UnwrapRef<IDamageSource['dragonStacks']>;
+	dragonSoul: UnwrapRef<IDamageSource['dragonSoul']>;
 }
 
 export class DamageSource {
@@ -25,6 +27,9 @@ export class DamageSource {
 
 	currentHealth: Ref<number>;
 	currentAbilityResource: Ref<number>;
+
+	dragonStacks: Ref<(IDragonName | undefined)[]>;
+	dragonSoul: Ref<IDragonName | undefined>;
 
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => calculateChampionStats(this));
@@ -44,7 +49,7 @@ export class DamageSource {
 	});
 
 	anythingFilled = computed(() => {
-		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value);
+		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value);
 	});
 
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
@@ -61,26 +66,26 @@ export class DamageSource {
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
-		this.items = ref(overrides.items ? [...toRaw(overrides.items)] : []);
-		this.runes = ref<IChampionRunes>(overrides.runes
-			? structuredClone(toRaw(overrides.runes))
-			: {
-					paths: {
-						primary: 'Precision',
-						primarySlots: [],
-						secondary: undefined,
-						secondarySlots: [],
-					},
-					shards: {
-						offensive: 'adaptive',
-						flex: 'adaptive',
-						defensive: 'health',
-					},
-				});
-		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.stats.total.hp || 0));
-		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.stats.total.mana || 0));
-		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...(overrides.abilityLevels || {}) });
-		this.abilityVariants = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...(overrides.abilityVariants || {}) });
+		this.items = ref(overrides.items ?? []);
+		this.runes = ref<IChampionRunes>(overrides.runes ?? {
+			paths: {
+				primary: 'Precision',
+				primarySlots: [],
+				secondary: undefined,
+				secondarySlots: [],
+			},
+			shards: {
+				offensive: 'adaptive',
+				flex: 'adaptive',
+				defensive: 'health',
+			},
+		});
+		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.stats.total.hp ?? 0));
+		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.stats.total.mana ?? 0));
+		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...overrides.abilityLevels });
+		this.abilityVariants = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...overrides.abilityVariants });
+		this.dragonStacks = ref(overrides.dragonStacks ?? []);
+		this.dragonSoul = ref(overrides.dragonSoul);
 
 		watch(this.listedChampion, async (c) => {
 			this.champion.value = undefined;
@@ -112,12 +117,14 @@ export class DamageSource {
 		return new DamageSource(id, {
 			champion: this.listedChampion.value,
 			level: this.level.value,
-			items: this.items.value,
-			runes: this.runes.value,
+			items: [...toRaw(this.items.value)],
+			runes: structuredClone(toRaw(this.runes.value)),
 			currentHealth: this.currentHealth.value,
 			currentAbilityResource: this.currentAbilityResource.value,
 			abilityLevels: structuredClone(toRaw(this.abilityLevels.value)),
 			abilityVariants: structuredClone(toRaw(this.abilityVariants.value)),
+			dragonStacks: structuredClone(toRaw(this.dragonStacks.value)),
+			dragonSoul: this.dragonSoul.value,
 			...overrides,
 		});
 	}

@@ -585,6 +585,16 @@ function hideAbilityTooltip() {
 	hoveredAbilityTooltip.value?.hidePopover();
 }
 
+function setEmptiableSelect(event: Event, targetRef: Ref, subPath?: number) {
+	const { value } = event.target as HTMLSelectElement;
+	if (subPath === undefined) {
+		targetRef.value = value || undefined;
+	} else {
+		targetRef.value[subPath] = value || undefined;
+	}
+	console.log(value, targetRef.value);
+}
+
 // atlas for dragons https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
 
 const el = useTemplateRef('el');
@@ -977,7 +987,35 @@ defineExpose({ el });
 				</div>
 			</section>
 			<section data-champion-dragons="">
-				dragons go here :3
+				<h4>dragons</h4>
+				<template v-for="i in 4" :key="i">
+					<label :for="`${group}-${index}-dragon-stack-${i}`">stack {{ i }}</label>
+					<select
+						:id="`${group}-${index}-dragon-stack-${i}`"
+						:value="value.dragonStacks.value[i - 1]"
+						@change="setEmptiableSelect($event, value.dragonStacks, i - 1)"
+					>
+						<option value="">
+							&lt;none&gt;
+						</option>
+						<option v-for="dragon in ALL_DRAGON_TYPES" :key="`${i}-${dragon}`" :value="dragon">
+							{{ dragon.toLowerCase() }}
+						</option>
+					</select>
+				</template>
+				<label :for="`${group}-${index}-dragon-soul`">soul</label>
+				<select
+					:id="`${group}-${index}-dragon-soul`"
+					:value="value.dragonSoul.value"
+					@change="setEmptiableSelect($event, value.dragonSoul)"
+				>
+					<option value="">
+						&lt;none&gt;
+					</option>
+					<option v-for="dragon in ALL_DRAGON_TYPES" :key="`soul-${dragon}`" :value="dragon">
+						{{ dragon.toLowerCase() }}
+					</option>
+				</select>
 			</section>
 		</details>
 	</li>
@@ -1273,11 +1311,7 @@ defineExpose({ el });
 			}
 
 			[data-champion-abilities] {
-				--at-apply: 'grid gap-x-2 auto-rows-max';
-				grid-template-areas:
-					'passive	q					w					e					r'
-					'health		health		health		health		health'
-					'resource	resource	resource	resource	resource';
+				--at-apply: 'gap-x-2 flex';
 				anchor-name: --scoreboard-item-abilities;
 
 				[data-passive],
@@ -1361,27 +1395,10 @@ defineExpose({ el });
 
 				[data-passive] {
 					--at-apply: 'size-10';
-					grid-area: passive;
 
 					> span {
 						--at-apply: 'sr-only';
 					}
-				}
-
-				[data-q] {
-					grid-area: q;
-				}
-
-				[data-w] {
-					grid-area: w;
-				}
-
-				[data-e] {
-					grid-area: e;
-				}
-
-				[data-r] {
-					grid-area: r;
 				}
 			}
 
@@ -1498,17 +1515,15 @@ defineExpose({ el });
 				[data-current-health] {
 					--at-apply: 'mt-2';
 					--fill-bg: theme('colors.green.500');
-					grid-area: health;
 				}
 
 				[data-current-ability-resource] {
 					--fill-bg: theme('colors.blue.500');
-					grid-area: resource;
 				}
 			}
 
 			[data-champion-dragons] {
-				--at-apply: 'bg-pink-500';
+				--at-apply: '';
 			}
 		}
 	}
