@@ -45,7 +45,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] aphelios
     - [ ] abilities ui (not implemented, coming soon)
     - [ ] runes (only shards implemented)
-    - [ ] dragons/souls
+    - [x] dragons/souls
     - [ ] choose role quest [icon](https://raw.communitydragon.org/latest/game/assets/ux/lol/)
   - [ ] mirror layout
 - [ ] results ui
@@ -75,6 +75,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] resolve game variables
   - [ ] item passives
   - [ ] champion passives (level breakpoints)
+  - [ ] dragons/souls
+  - [ ] choose role quest [icon](https://raw.communitydragon.org/latest/game/assets/ux/lol/)
   - [ ] try always lowercase only match variables
 - [ ] mobile version and make look better
 - [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)

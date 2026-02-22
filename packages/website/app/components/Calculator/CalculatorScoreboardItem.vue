@@ -1613,7 +1613,15 @@ defineExpose({ el });
 			}
 
 			[data-champion-dragons] {
-				--at-apply: 'flex items-center gap-2';
+				--at-apply: 'flex-center mx-auto relative items-center gap-[--gap]';
+				--gap: calc(2 * var(--spacing));
+				--soul-size: calc(12 * var(--spacing));
+				--stack-size: calc(10 * var(--spacing));
+				--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
+
+				&::before {
+					--at-apply: 'absolute top-1/2 -translate-y-1/2 content-empty start-[calc(var(--stack-size)/2)] bg-black h-[calc(var(--stack-size)*0.2)] end-[calc(var(--soul-size)+2*var(--soul-rotation-size-diff)+var(--gap)+var(--stack-size)/2)]';
+				}
 
 				> [data-dragon-stack] {
 					> select {
@@ -1621,21 +1629,19 @@ defineExpose({ el });
 					}
 
 					> label {
-						--at-apply: 'size-10 grid-center bg-black rounded-full of-hidden';
+						--at-apply: 'size-[--stack-size] grid-center bg-black rounded-full of-hidden';
 					}
 				}
 
 				> [data-dragon-soul] {
-					--at-apply: 'm-[--rotation-size-diff]';
-					--size: calc(12 * var(--spacing));
-					--rotation-size-diff: calc((var(--size) * sqrt(2) - var(--size)) / 2);
+					--at-apply: 'm-[--soul-rotation-size-diff]';
 
 					> select {
-						--at-apply: 'size-[calc(100%)] rotate-45';
+						--at-apply: 'size-full rotate-45';
 					}
 
 					> label {
-						--at-apply: 'size-[--size] grid-center bg-black of-hidden rotate-45';
+						--at-apply: 'size-[--soul-size] grid-center bg-black of-hidden rotate-45';
 
 						> div {
 							--at-apply: '-rotate-45 -translate-1';
