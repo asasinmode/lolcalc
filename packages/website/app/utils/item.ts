@@ -8,11 +8,12 @@ export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IItemVar
 	},
 };
 
-export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' | 'level' | 'range', string> = {
+export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' | 'level' | 'range' | 'cooldown', string> = {
 	OnHit: 'onhit',
 	FlatPhysicalDamageMod: 'scalead',
 	adaptiveForce: 'adaptiveforce',
 	AbilityHasteMod: 'scaleah',
+	cooldown: 'scalecooldown',
 	FlatMagicDamageMod: 'scaleap',
 	PhysicalLethality: 'scaleapen',
 	PercentArmorPenetrationMod: 'scaleapen',

@@ -634,7 +634,7 @@ const hoveredDragonThingText = computed(() => {
 
 	return {
 		title: `${dragonName} ${abilityName === 'stack' ? 'Dragon' : 'Soul'}`,
-		description: replaced,
+		description: replaceGameDescriptionIcons(replaced),
 		anyUnknown: unknownStringtableVariables.size || unknownVariables.length,
 	};
 });
@@ -1648,6 +1648,10 @@ defineExpose({ el });
 					--at-apply: 'w-fit max-w-screen fixed whitespace-nowrap';
 					inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width, 0rem))));
 					inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
+
+					> .game-description > img {
+						--at-apply: 'inline-block align-middle size-4';
+					}
 				}
 			}
 		}
