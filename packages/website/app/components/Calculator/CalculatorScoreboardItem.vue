@@ -999,6 +999,12 @@ defineExpose({ el });
 					@update:model-value="value.dragonStacks.value[i - 1] = $event"
 				>
 					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 32)" />
+					<template #post>
+						<div v-show="value.dragonStacksInvalid.value">
+							<span>(invalid)</span>
+							<Icon class="i-ph:exclamation-mark-bold" />
+						</div>
+					</template>
 				</VSelect>
 				<VSelect
 					:id="`${group}-${index}-dragon-soul`"
@@ -1556,7 +1562,10 @@ defineExpose({ el });
 							--at-apply: '-rotate-45 -translate-1';
 						}
 					}
+				}
 
+				> [data-dragon-stack],
+				> [data-dragon-soul] {
 					> :last-child {
 						--at-apply: 'text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0 -top-0 z-1';
 

@@ -54,6 +54,20 @@ export class DamageSource {
 
 	dragonStacks: Ref<(IDragonName | undefined)[]>;
 	dragonSoul: Ref<IDragonName | undefined>;
+	dragonStacksInvalid = computed(() => {
+		const counts: [IDragonName, number][] = [];
+		for (const dragon of this.dragonStacks.value) {
+			if (dragon) {
+				const count = counts.find(c => c[0] === dragon);
+				if (count) {
+					count[1] += 1;
+				} else {
+					counts.push([dragon, 1]);
+				}
+			}
+		}
+		return counts.filter(c => c[1] >= 2).length > 1;
+	});
 	dragonSoulInvalid = computed(() => this.dragonSoul.value
 		? this.dragonStacks.value.filter(Boolean).length < 4 || (this.dragonStacks.value.filter(stack => stack === this.dragonSoul.value).length < 2)
 		: false);
