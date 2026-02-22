@@ -674,9 +674,16 @@ defineExpose({ el });
 				</option>
 			</select>
 		</div>
-		<button title="runes" data-select-runes="" @click="selectRunes(value.runes)">
+		<button
+			:title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'"
+			data-select-runes=""
+			@click="selectRunes(value.runes)"
+		>
 			<span class="sr-only">{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
-			<span v-show="value.runesInvalid.value" class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5">
+			<span
+				v-show="value.runesInvalid.value"
+				class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5"
+			>
 				<span class="sr-only">(invalid)</span>
 				<Icon class="i-ph:exclamation-mark-bold size-2.5" />
 			</span>
@@ -1003,6 +1010,12 @@ defineExpose({ el });
 					@update:model-value="value.dragonSoul.value = $event"
 				>
 					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 56)" />
+					<template #post>
+						<div v-show="value.dragonSoulInvalid.value">
+							<span>(invalid)</span>
+							<Icon class="i-ph:exclamation-mark-bold" />
+						</div>
+					</template>
 				</VSelect>
 			</section>
 		</details>
@@ -1518,20 +1531,43 @@ defineExpose({ el });
 				--at-apply: 'flex items-center';
 
 				> [data-dragon-stack] {
+					> select {
+						--at-apply: 'rounded-full';
+					}
+
 					> label {
 						--at-apply: 'size-10 grid-center bg-black rounded-full of-hidden';
 					}
 				}
 
 				> [data-dragon-soul] {
-					--at-apply: 'm-[calc((var(--size)*sqrt(2)-var(--size))/2)]';
+					--at-apply: 'm-[--rotation-size-diff]';
 					--size: calc(12 * var(--spacing));
+					--rotation-size-diff: calc((var(--size) * sqrt(2) - var(--size)) / 2);
+
+					> select {
+						--at-apply: 'size-[calc(100%)] rotate-45';
+					}
 
 					> label {
 						--at-apply: 'size-[--size] grid-center bg-black of-hidden rotate-45';
 
 						> div {
 							--at-apply: '-rotate-45 -translate-1';
+						}
+					}
+
+					> :last-child {
+						--at-apply: 'text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0 -top-0 z-1';
+
+						> span {
+							&:nth-child(1) {
+								--at-apply: 'sr-only';
+							}
+
+							&:nth-child(2) {
+								--at-apply: 'size-3';
+							}
 						}
 					}
 				}

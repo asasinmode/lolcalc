@@ -20,16 +20,6 @@ export class DamageSource {
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
 	level: Ref<number>;
-	items: Ref<IItem[]>;
-	runes: Ref<IChampionRunes>;
-	abilityLevels: Ref<Record<Exclude<keyof IChampion['abilities'], 'passive'>, number>>;
-	abilityVariants: Ref<Record<keyof IChampion['abilities'], number>>;
-
-	currentHealth: Ref<number>;
-	currentAbilityResource: Ref<number>;
-
-	dragonStacks: Ref<(IDragonName | undefined)[]>;
-	dragonSoul: Ref<IDragonName | undefined>;
 
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => calculateChampionStats(this));
@@ -38,28 +28,39 @@ export class DamageSource {
 		stats: this.stats.value?.stats.total,
 	}));
 
+	runes: Ref<IChampionRunes>;
 	runePathsEmpty = computed(() => {
 		const { primarySlots, secondary, secondarySlots } = this.runes.value.paths;
 		return !(primarySlots.length || secondary || secondarySlots.length);
 	});
-
 	runesInvalid = computed(() => {
 		const { primarySlots, secondary, secondarySlots } = this.runes.value.paths;
 		return !this.runePathsEmpty.value && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
 	});
 
-	anythingFilled = computed(() => {
-		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value);
-	});
-
+	currentHealth: Ref<number>;
+	currentAbilityResource: Ref<number>;
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
 	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
+	items: Ref<IItem[]>;
 	inventoryFull = computed(() => {
 		return this.items.value.length === 6;
 	});
 
+	abilityLevels: Ref<Record<Exclude<keyof IChampion['abilities'], 'passive'>, number>>;
+	abilityVariants: Ref<Record<keyof IChampion['abilities'], number>>;
 	allAbilityVariants = computed(() => this.champion.value ? Object.values(this.champion.value.abilities).flatMap(ability => ability.variants) : []);
+
+	dragonStacks: Ref<(IDragonName | undefined)[]>;
+	dragonSoul: Ref<IDragonName | undefined>;
+	dragonSoulInvalid = computed(() => this.dragonSoul.value
+		? this.dragonStacks.value.filter(Boolean).length < 4 || (this.dragonStacks.value.filter(stack => stack === this.dragonSoul.value).length < 2)
+		: false);
+
+	anythingFilled = computed(() => {
+		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value);
+	});
 
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
 		this.id = id;

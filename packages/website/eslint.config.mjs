@@ -17,6 +17,7 @@ export default withNuxt(
 			'no-labels': 'off',
 			'no-undef': 'off',
 			'vue/component-name-in-template-casing': ['warn', 'PascalCase', { registeredComponentsOnly: false }],
+			'style/lines-between-class-members': 'off',
 		},
 		formatters: true,
 		ignores: ['app/assets/*.json'],

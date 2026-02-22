@@ -27,6 +27,7 @@ function setValue(event: Event) {
 			<span>{{ label }}</span>
 			<slot />
 		</label>
+		<slot name="post" />
 	</div>
 </template>
 
@@ -36,7 +37,7 @@ function setValue(event: Event) {
 		--at-apply: 'relative';
 
 		select {
-			--at-apply: 'absolute size-full of-hidden rounded-full cursor-pointer z-0';
+			--at-apply: 'absolute inset-0 of-hidden cursor-pointer z-0';
 		}
 
 		select:focus-visible + label {
