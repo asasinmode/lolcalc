@@ -24,7 +24,6 @@ const emit = defineEmits<{
 
 const runes = useRunes();
 const ui = useUi();
-const misc = useMisc();
 const { version, minorVersion } = usePatchVersion();
 const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
@@ -585,16 +584,7 @@ function hideAbilityTooltip() {
 	hoveredAbilityTooltip.value?.hidePopover();
 }
 
-function setEmptiableSelect(event: Event, targetRef: Ref, subPath?: number) {
-	const { value } = event.target as HTMLSelectElement;
-	if (subPath === undefined) {
-		targetRef.value = value || undefined;
-	} else {
-		targetRef.value[subPath] = value || undefined;
-	}
-	console.log(value, targetRef.value);
-}
-
+const dragonOptions = ALL_DRAGON_NAMES.map(name => [name, name.toLowerCase()]) as [IDragonName, string][];
 // atlas for dragons https://raw.communitydragon.org/latest/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json
 
 const el = useTemplateRef('el');
@@ -988,34 +978,23 @@ defineExpose({ el });
 			</section>
 			<section data-champion-dragons="">
 				<h4>dragons</h4>
-				<template v-for="i in 4" :key="i">
-					<label :for="`${group}-${index}-dragon-stack-${i}`">stack {{ i }}</label>
-					<select
-						:id="`${group}-${index}-dragon-stack-${i}`"
-						:value="value.dragonStacks.value[i - 1]"
-						@change="setEmptiableSelect($event, value.dragonStacks, i - 1)"
-					>
-						<option value="">
-							&lt;none&gt;
-						</option>
-						<option v-for="dragon in ALL_DRAGON_TYPES" :key="`${i}-${dragon}`" :value="dragon">
-							{{ dragon.toLowerCase() }}
-						</option>
-					</select>
-				</template>
-				<label :for="`${group}-${index}-dragon-soul`">soul</label>
-				<select
+				<VSelect
+					v-for="i in 4" :id="`${group}-${index}-dragon-stack-${i}`"
+					:key="i"
+					:model-value="value.dragonStacks.value[i - 1]"
+					:options="dragonOptions"
+					label="soul"
+					clearable
+					@update:model-value="value.dragonStacks.value[i - 1] = $event"
+				/>
+				<VSelect
 					:id="`${group}-${index}-dragon-soul`"
-					:value="value.dragonSoul.value"
-					@change="setEmptiableSelect($event, value.dragonSoul)"
-				>
-					<option value="">
-						&lt;none&gt;
-					</option>
-					<option v-for="dragon in ALL_DRAGON_TYPES" :key="`soul-${dragon}`" :value="dragon">
-						{{ dragon.toLowerCase() }}
-					</option>
-				</select>
+					:model-value="value.dragonSoul.value"
+					:options="dragonOptions"
+					label="soul"
+					clearable
+					@update:model-value="value.dragonSoul.value = $event"
+				/>
 			</section>
 		</details>
 	</li>
