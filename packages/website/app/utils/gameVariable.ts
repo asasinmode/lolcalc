@@ -89,6 +89,7 @@ export function runeVariableValue(variable: string, rune: IRune): IVariableValue
 
 type IChampionAbilityVariableVariant = Pick<IChampionAbilityVariant, 'objectName' | 'spellCalculations' | 'dataValues' | 'effectAmount'>;
 
+// TODO make sure it handles hextech soul description
 export function championAbilityVariableValue(
 	variable: string,
 	abilityVariant: IChampionAbilityVariableVariant,

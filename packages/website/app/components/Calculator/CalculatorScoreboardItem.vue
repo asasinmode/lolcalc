@@ -623,6 +623,7 @@ const hoveredDragonThingText = computed(() => {
 	const [dragonName, abilityName] = hoveredDragonThing.value;
 	const ability = misc.dragons[dragonName][abilityName];
 	const string = text.dragons[dragonName][abilityName];
+	const isStack = abilityName === 'stack';
 
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(string);
 
@@ -632,10 +633,21 @@ const hoveredDragonThingText = computed(() => {
 		[ability, 1, [misc.dragons[dragonName].stack, misc.dragons[dragonName].soul]],
 	);
 
+	let invalid: string | undefined;
+
+	if (isStack) {
+		if (props.value.dragonStacksInvalid.value) {
+			invalid = 'Only 1 dragon type can be repeated';
+		}
+	} else if (props.value.dragonSoulInvalid.value) {
+		invalid = 'Soul needs at least 2 matching stacks';
+	}
+
 	return {
-		title: `${dragonName} ${abilityName === 'stack' ? 'Dragon' : 'Soul'}`,
+		title: `${dragonName} ${isStack ? 'Dragon' : 'Soul'}`,
 		description: replaceGameDescriptionIcons(replaced),
 		anyUnknown: unknownStringtableVariables.size || unknownVariables.length,
+		invalid,
 	};
 });
 
@@ -1081,6 +1093,10 @@ defineExpose({ el });
 					<h5>{{ hoveredDragonThingText?.title }}</h5>
 					<p class="game-description" v-html="hoveredDragonThingText?.description" />
 					<UnresolvedVariablesAlert v-if="hoveredDragonThingText?.anyUnknown" />
+					<p v-if="hoveredDragonThingText?.invalid" class="alert error">
+						<Icon class="i-ph:warning-circle-light" />
+						{{ hoveredDragonThingText.invalid }}
+					</p>
 				</div>
 			</section>
 		</details>
@@ -1597,7 +1613,7 @@ defineExpose({ el });
 			}
 
 			[data-champion-dragons] {
-				--at-apply: 'flex items-center';
+				--at-apply: 'flex items-center gap-2';
 
 				> [data-dragon-stack] {
 					> select {
