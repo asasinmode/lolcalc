@@ -87,11 +87,13 @@ export function runeVariableValue(variable: string, rune: IRune): IVariableValue
 	return { value, actualVariableName };
 }
 
+type IChampionAbilityVariableVariant = Pick<IChampionAbilityVariant, 'objectName' | 'spellCalculations' | 'dataValues' | 'effectAmount'>;
+
 export function championAbilityVariableValue(
 	variable: string,
-	abilityVariant: IChampionAbilityVariant,
+	abilityVariant: IChampionAbilityVariableVariant,
 	abilityLevel = 1,
-	allAbilitiesVariants: IChampionAbility['variants'] = [],
+	allAbilitiesVariants: IChampionAbilityVariableVariant[] = [],
 ): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let actualVariableName: IVariableValueResult['actualVariableName'];

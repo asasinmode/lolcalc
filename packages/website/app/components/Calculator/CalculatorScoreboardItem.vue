@@ -621,7 +621,6 @@ const hoveredDragonThingText = computed(() => {
 	}
 
 	const [dragonName, abilityName] = hoveredDragonThing.value;
-
 	const ability = misc.dragons[dragonName][abilityName];
 	const string = text.dragons[dragonName][abilityName];
 
@@ -630,7 +629,7 @@ const hoveredDragonThingText = computed(() => {
 	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
 		stringtableReplaced,
 		'championAbility',
-		[ability as unknown as IChampionAbility, 1, [misc.dragons[dragonName].stack, misc.dragons[dragonName].soul] as unknown as IChampionAbility[]],
+		[ability, 1, [misc.dragons[dragonName].stack, misc.dragons[dragonName].soul]],
 	);
 
 	return {
@@ -1081,6 +1080,7 @@ defineExpose({ el });
 				<div ref="dragonTooltip" popover="hint" class="dragon-thing hover-tooltip">
 					<h5>{{ hoveredDragonThingText?.title }}</h5>
 					<p class="game-description" v-html="hoveredDragonThingText?.description" />
+					<UnresolvedVariablesAlert v-if="hoveredDragonThingText?.anyUnknown" />
 				</div>
 			</section>
 		</details>
