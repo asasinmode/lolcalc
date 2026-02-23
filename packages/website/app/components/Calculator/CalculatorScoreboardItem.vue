@@ -968,17 +968,17 @@ defineExpose({ el });
 						{{ hoveredAbility && hoveredAbility !== 'passive' ? `[${hoveredAbility.toUpperCase()}] ` : '' }}{{ hoveredAbilityTooltipText?.name }}
 					</h5>
 					<span>
-						<template v-if="hoveredAbility !== 'passive' && hoveredAbilityTooltipText?.cooldown">
-							{{ hoveredAbilityTooltipText?.cooldown }}s
+						<template v-if="hoveredAbility !== 'passive'">
+							<template v-if="hoveredAbilityTooltipText?.cooldown">
+								{{ hoveredAbilityTooltipText?.cooldown }}s
+							</template>
+							<Unknown v-else>UNKNOWN</Unknown>
 							<img
 								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`"
 								width="20"
 								height="20"
 								aria-hidden="true"
 							>
-						</template>
-						<template v-else-if="hoveredAbility !== 'passive'">
-							<Unknown>UNKNOWN</Unknown>
 						</template>
 					</span>
 					<span>
@@ -1293,7 +1293,7 @@ defineExpose({ el });
 			}
 		}
 
-		.hover-tooltip.scoreboard-item {
+		.hover-tooltip.champion-item {
 			--at-apply: 'w-160 max-w-screen';
 			inset: unset;
 			justify-self: anchor-center;
