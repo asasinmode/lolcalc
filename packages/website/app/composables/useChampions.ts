@@ -24,7 +24,7 @@ export interface IChampionData {
 	champions: Record<IChampionId, IChampion>;
 }
 
-export type IChampionRole = 'top' | 'jungle' | 'middle' | 'bottom' | 'support';
+export type IChampionRole = 'top' | 'jungle' | 'mid' | 'bot' | 'support';
 
 export type IChampionStat = keyof typeof ExampleChampion['stats'];
 

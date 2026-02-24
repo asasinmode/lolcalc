@@ -149,7 +149,7 @@ if (!championData || championData?.version !== latestVersion) {
 	for (const [role, playrates] of Object.entries(roleScriptData)) {
 		for (const championKey of Object.keys(playrates)) {
 			const champion = allChampions.find(champion => champion.key === championKey);
-			(champion!.roles as Record<string, boolean>)[role.toLowerCase()] = true;
+			(champion!.roles as Record<string, boolean>)[role === 'MIDDLE' ? 'mid' : role === 'BOTTOM' ? 'bot' : role.toLowerCase()] = true;
 		}
 	}
 
@@ -554,14 +554,14 @@ if (!miscData || miscData?.version !== latestVersion) {
 			key: `dragon stack ${name}`,
 			variableSourceKeys: ['DataValues'],
 			variableType: 'championAbility',
-			variableValueParameters: [stackAbility as any, undefined, allSpells as any],
+			variableValueParameters: [stackAbility, undefined, allSpells],
 		});
 		const soul = getStringtableValue(soulTooltipKey, {
 			category: 'misc',
 			key: `dragon soul ${name}`,
 			variableSourceKeys: ['DataValues'],
 			variableType: 'championAbility',
-			variableValueParameters: [soulAbility as any, undefined, allSpells as any],
+			variableValueParameters: [soulAbility, undefined, allSpells],
 		});
 
 		const stackTitleEndIndex = stack.indexOf('</titleLeft>');
@@ -575,7 +575,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 
 	textData.data.roleQuests = Object.fromEntries(['top', 'jungle', 'mid', 'bot', 'support'].map(role =>
 		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`)],
-	));
+	)) as NonNullable<(typeof textData)>['data']['roleQuests'];
 
 	await miscFile.write(stringifyObject(miscData));
 	await textFile.write(stringifyObject(textData));
@@ -1161,7 +1161,13 @@ function championAbilityVariants(
  * ```
  */
 function setChampionAbilityVariantsText(champion: IChampion) {
-	const abilitiesWithVariants = Object.entries(champion.abilities).map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [keyof IChampion['abilities'], IChampionAbility['variants']][];
+	let filteredAbilitiesWithVariants = Object.entries(champion.abilities);
+	if (champion.id === 'Aphelios') {
+		filteredAbilitiesWithVariants = filteredAbilitiesWithVariants.filter(([abilityName]) => abilityName !== 'w' && abilityName !== 'e');
+	}
+
+	const abilitiesWithVariants = filteredAbilitiesWithVariants.map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [keyof IChampion['abilities'], IChampionAbility['variants']][];
+
 	const allVariants = abilitiesWithVariants.flatMap(([, variants]) => variants);
 
 	for (const [abilityName, variants] of abilitiesWithVariants) {

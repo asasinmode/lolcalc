@@ -3,7 +3,13 @@ const value = defineModel<IListedChampion>();
 const champions = useChampions();
 const { version, minorVersion } = usePatchVersion();
 
-const ALL_ROLES: IChampionRole[] = ['top', 'jungle', 'middle', 'bottom', 'support'];
+const ALL_ROLES: [ IChampionRole, string ][] = [
+	['top', 'top'],
+	['jungle', 'jungle'],
+	['mid', 'middle'],
+	['bot', 'bottom'],
+	['support', 'utility'],
+];
 const ALL_CHAMPION = Object.values(champions);
 
 const vDialog = useTemplateRef('vDialog');
@@ -49,12 +55,12 @@ defineExpose({
 				id="champ-select-role"
 				v-model="selectedRole"
 				label="Role"
-				:options="ALL_ROLES.map(role => ({ role }))"
+				:options="ALL_ROLES.map(([role, icon]) => ({ role, icon }))"
 				value-key="role"
 			>
-				<template #default="{ option: { role }, isSelected }">
+				<template #default="{ option: { role, icon }, isSelected }">
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${role === 'support' ? 'utility' : role}${isSelected ? '' : '-light'}.svg`"
+						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${icon}${isSelected ? '' : '-light'}.svg`"
 						aria-hidden="true"
 						width="34"
 						height="34"
