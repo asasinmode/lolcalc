@@ -2491,6 +2491,13 @@
 				"stack": "Grants %i:scaleCooldown% @Spell.SRX_DragonBuffHextech:AbilityHaste@ Ability Haste and %i:scaleAS% @Spell.SRX_DragonBuffHextech:AttackSpeed*100@% Attack Speed per stack.",
 				"soul": "When you damage an enemy with an attack or ability, also strike them with lightning, dealing <trueDamage>@Spell.SRX_DragonSoulBuffHextech:TotalDamage@</trueDamage> and slowing them by (%i:meleeActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountMelee@% || %i:rangedActive%@Spell.SRX_DragonSoulBuffHextech:TotalSlowAmountRanged@%) decaying over @Spell.SRX_DragonSoulBuffHextech:SlowDuration@ seconds. Lightning then chains to up to @Spell.SRX_DragonSoulBuffHextech:BaseUnitsToHit@ nearby enemies, repeating the effect.<br><br>This slow stacks from multiple sources. The slow decays slower when striking ranged opponents."
 			}
+		},
+		"roleQuests": {
+			"top": "Teleport or Enhanced Teleport<br>Increased experience gain and level cap",
+			"jungle": "Upgraded jungle pet and Smite<br>Increased rewards from large monsters<br>Bonus Movement Speed in the jungle",
+			"mid": "Tier 3 boots<br>Enhanced recall",
+			"bot": "An immediate lump sum of gold<br>Increased gold from minions and takedowns<br>Dedicated slot for boots",
+			"support": "Upgraded Support item<br>Discounted control wards"
 		}
 	}
 }

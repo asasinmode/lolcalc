@@ -554,14 +554,14 @@ if (!miscData || miscData?.version !== latestVersion) {
 			key: `dragon stack ${name}`,
 			variableSourceKeys: ['DataValues'],
 			variableType: 'championAbility',
-			variableValueParameters: [stackAbility, undefined, allSpells],
+			variableValueParameters: [stackAbility as any, undefined, allSpells as any],
 		});
 		const soul = getStringtableValue(soulTooltipKey, {
 			category: 'misc',
 			key: `dragon soul ${name}`,
 			variableSourceKeys: ['DataValues'],
 			variableType: 'championAbility',
-			variableValueParameters: [soulAbility, undefined, allSpells],
+			variableValueParameters: [soulAbility as any, undefined, allSpells as any],
 		});
 
 		const stackTitleEndIndex = stack.indexOf('</titleLeft>');
@@ -572,6 +572,10 @@ if (!miscData || miscData?.version !== latestVersion) {
 
 		return [name, { stack, soul }];
 	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
+
+	textData.data.roleQuests = Object.fromEntries(['top', 'jungle', 'mid', 'bot', 'support'].map(role =>
+		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`)],
+	));
 
 	await miscFile.write(stringifyObject(miscData));
 	await textFile.write(stringifyObject(textData));
