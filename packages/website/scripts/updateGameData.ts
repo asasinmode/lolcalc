@@ -574,7 +574,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
 
 	textData.data.roleQuests = Object.fromEntries(['top', 'jungle', 'mid', 'bot', 'support'].map(role =>
-		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`)],
+		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`).split('<br>')],
 	)) as NonNullable<(typeof textData)>['data']['roleQuests'];
 
 	await miscFile.write(stringifyObject(miscData));

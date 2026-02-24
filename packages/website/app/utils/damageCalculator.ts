@@ -13,6 +13,7 @@ interface IOverrides {
 	currentAbilityResource: UnwrapRef<IDamageSource['currentAbilityResource']>;
 	dragonStacks: UnwrapRef<IDamageSource['dragonStacks']>;
 	dragonSoul: UnwrapRef<IDamageSource['dragonSoul']>;
+	roleQuest: UnwrapRef<IDamageSource['roleQuest']>;
 }
 
 export class DamageSource {
@@ -44,9 +45,7 @@ export class DamageSource {
 	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
 	items: Ref<IItem[]>;
-	inventoryFull = computed(() => {
-		return this.items.value.length === 6;
-	});
+	inventoryFull = computed(() => this.items.value.filter(Boolean).length === 6);
 
 	abilityLevels: Ref<Record<Exclude<keyof IChampion['abilities'], 'passive'>, number>>;
 	abilityVariants: Ref<Record<keyof IChampion['abilities'], number>>;
@@ -72,8 +71,10 @@ export class DamageSource {
 		? this.dragonStacks.value.filter(Boolean).length < 4 || (this.dragonStacks.value.filter(stack => stack === this.dragonSoul.value).length < 2)
 		: false);
 
+	roleQuest: Ref<IChampionRole | undefined>;
+
 	anythingFilled = computed(() => {
-		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value);
+		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
 	});
 
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
@@ -101,6 +102,7 @@ export class DamageSource {
 		this.abilityVariants = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...overrides.abilityVariants });
 		this.dragonStacks = ref(overrides.dragonStacks ?? []);
 		this.dragonSoul = ref(overrides.dragonSoul);
+		this.roleQuest = ref(overrides.roleQuest);
 
 		watch(this.listedChampion, async (c) => {
 			this.champion.value = undefined;
@@ -140,6 +142,7 @@ export class DamageSource {
 			abilityVariants: structuredClone(toRaw(this.abilityVariants.value)),
 			dragonStacks: structuredClone(toRaw(this.dragonStacks.value)),
 			dragonSoul: this.dragonSoul.value,
+			roleQuest: this.roleQuest.value,
 			...overrides,
 		});
 	}

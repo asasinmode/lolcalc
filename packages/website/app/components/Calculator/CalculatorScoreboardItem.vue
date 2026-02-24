@@ -585,6 +585,21 @@ function hideAbilityTooltip() {
 	abilityHoverTooltipEl.value?.hidePopover();
 }
 
+const hoveredRoleQuestRewards = shallowRef<string[]>();
+const roleQuestHoverTooltipEl = useTemplateRef('roleQuestHoverTooltip');
+
+function showRoleQuestTooltip(event: MouseEvent) {
+	if (props.value.roleQuest.value) {
+		hoveredRoleQuestRewards.value = text.roleQuests[props.value.roleQuest.value];
+		event.target?.addEventListener('mouseleave', hideRoleQuestTooltip, { passive: true, once: true });
+		roleQuestHoverTooltipEl.value?.showPopover();
+	}
+}
+
+function hideRoleQuestTooltip() {
+	roleQuestHoverTooltipEl.value?.hidePopover();
+}
+
 function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'soul', subpath?: number) {
 	if (target === 'stack') {
 		// eslint-disable-next-line vue/no-mutating-props
@@ -1071,11 +1086,42 @@ defineExpose({ el });
 			</section>
 			<section data-role-quest="">
 				<h4>role quest</h4>
+				<VSelect
+					:id="`${group}-${index}-role-quest`"
+					:model-value="value.roleQuest.value"
+					:options="Object.keys(text.roleQuests).map(role => [role, role])"
+					label="role quest"
+					clearable
+					@update:model-value="value.roleQuest.value = $event as IChampionRole"
+					@label-mouseenter="showRoleQuestTooltip"
+				>
+					<template v-if="value.roleQuest.value">
+						<img
+
+							:src="`https://raw.communitydragon.org/latest/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
+							width="64"
+							height="64"
+							loading="lazy"
+						>
+						<img
+							:src="`https://raw.communitydragon.org/latest/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
+							width="32"
+							height="32"
+							loading="lazy"
+						>
+					</template>
+				</VSelect>
+				<ul ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
+					<li v-for="(reward, i) in hoveredRoleQuestRewards" :key="i">
+						{{ reward }}
+					</li>
+				</ul>
 			</section>
 			<section data-dragons="">
 				<h4>dragons</h4>
 				<VSelect
-					v-for="i in 4" :id="`${group}-${index}-dragon-stack-${i}`"
+					v-for="i in 4"
+					:id="`${group}-${index}-dragon-stack-${i}`"
 					:key="i"
 					:model-value="value.dragonStacks.value[i - 1]"
 					:options="dragonOptions"
@@ -1142,7 +1188,7 @@ defineExpose({ el });
 		transition-duration: var(--transition-duration);
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
-		anchor-scope: --scoreboard-item-items, --scoreboard-item-abilities;
+		anchor-scope: all;
 
 		&:has(> details[open]) {
 			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';
@@ -1327,7 +1373,7 @@ defineExpose({ el });
 
 		> details {
 			--at-apply: 'relative';
-			anchor-scope: --champion-stats-minor;
+			anchor-scope: --scoreboard-item-champion-stats-minor;
 			grid-area: expanded;
 
 			&::details-content {
@@ -1381,7 +1427,7 @@ defineExpose({ el });
 					--at-apply: 'grid grid-rows-4 items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
 
 					&:first-of-type {
-						anchor-name: --champion-stats-minor;
+						anchor-name: --scoreboard-item-champion-stats-minor;
 					}
 
 					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
@@ -1409,7 +1455,7 @@ defineExpose({ el });
 
 				.hover-tooltip.champion-stat {
 					inset: unset;
-					position-anchor: --champion-stats-minor;
+					position-anchor: --scoreboard-item-champion-stats-minor;
 					bottom: calc(anchor(top) - 1px);
 					justify-self: anchor-center;
 
@@ -1654,6 +1700,48 @@ defineExpose({ el });
 
 			[data-role-quest] {
 				--at-apply: 'relative';
+				anchor-name: --scoreboard-item-role-quest;
+
+				> .v-select {
+					> select {
+						--at-apply: 'rounded-full size-8';
+					}
+
+					> select:focus-visible + label {
+						outline: none;
+
+						&::before {
+							outline: auto;
+						}
+						}
+
+					> label {
+						--at-apply: 'relative flex items-center gap-1 w-fit';
+
+
+						&::before {
+							--at-apply: 'size-8 content-empty rounded-full bg-black b b-[--ui-button-border-clr]';
+						}
+
+						> img {
+							&:nth-of-type(1) {
+								--at-apply: 'size-8 absolute start-0 top-0 rounded-full b b-[--ui-button-border-clr]';
+							}
+
+							&:nth-of-type(2) {
+								--at-apply: 'size-5';
+							}
+						}
+					}
+				}
+
+				.hover-tooltip.role-quest {
+					/* --at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min'; */
+					inset: unset;
+					justify-self: anchor-center;
+					position-anchor: --scoreboard-item-role-quest;
+					bottom: calc(anchor(top));
+				}
 			}
 
 			[data-dragons] {
@@ -1665,6 +1753,10 @@ defineExpose({ el });
 
 				&::before {
 					--at-apply: 'absolute top-1/2 -translate-y-1/2 content-empty start-[calc(var(--stack-size)/2)] bg-black h-[calc(var(--stack-size)*0.2)] end-[calc(var(--soul-size)+2*var(--soul-rotation-size-diff)+var(--gap)+var(--stack-size)/2)]';
+				}
+
+				> h4 {
+					--at-apply: 'absolute top-0 start-0';
 				}
 
 				> [data-dragon-stack] {
@@ -1724,7 +1816,7 @@ defineExpose({ el });
 			[data-role-quest],
 			[data-dragons] {
 				> h4 {
-					--at-apply: 'absolute top-0 start-0 text-xs uppercase font-medium text-neutral-300';
+					--at-apply: 'text-xs uppercase font-medium text-neutral-300 leading-3';
 				}
 			}
 		}

@@ -2493,11 +2493,28 @@
 			}
 		},
 		"roleQuests": {
-			"top": "Teleport or Enhanced Teleport<br>Increased experience gain and level cap",
-			"jungle": "Upgraded jungle pet and Smite<br>Increased rewards from large monsters<br>Bonus Movement Speed in the jungle",
-			"mid": "Tier 3 boots<br>Enhanced recall",
-			"bot": "An immediate lump sum of gold<br>Increased gold from minions and takedowns<br>Dedicated slot for boots",
-			"support": "Upgraded Support item<br>Discounted control wards"
+			"top": [
+				"Teleport or Enhanced Teleport",
+				"Increased experience gain and level cap"
+			],
+			"jungle": [
+				"Upgraded jungle pet and Smite",
+				"Increased rewards from large monsters",
+				"Bonus Movement Speed in the jungle"
+			],
+			"mid": [
+				"Tier 3 boots",
+				"Enhanced recall"
+			],
+			"bot": [
+				"An immediate lump sum of gold",
+				"Increased gold from minions and takedowns",
+				"Dedicated slot for boots"
+			],
+			"support": [
+				"Upgraded Support item",
+				"Discounted control wards"
+			]
 		}
 	}
 }
