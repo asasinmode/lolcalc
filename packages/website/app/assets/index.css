@@ -8,6 +8,10 @@
 			cursor: default;
 		}
 	}
+
+	[popover] {
+		inset: unset;
+	}
 }
 
 @layer page {

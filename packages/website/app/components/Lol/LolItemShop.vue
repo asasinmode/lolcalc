@@ -883,7 +883,6 @@ defineExpose({
 	#builds-into-more-list {
 		--at-apply: 'h-max max-h-[60vh] w-max of-y-auto z-10';
 		position-anchor: --last-builds-into-button;
-		inset: unset;
 		inset-block-start: calc(anchor(bottom) + 2px);
 		inset-inline-end: anchor(right);
 	}

@@ -1357,7 +1357,6 @@ defineExpose({ el });
 
 		.hover-tooltip.champion-item {
 			--at-apply: 'w-160 max-w-screen';
-			inset: unset;
 			justify-self: anchor-center;
 			position-anchor: --scoreboard-item-items;
 			position-try: flip-block;
@@ -1464,7 +1463,6 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.champion-stat {
-					inset: unset;
 					position-anchor: --scoreboard-item-champion-stats-minor;
 					bottom: calc(anchor(top) - 1px);
 					justify-self: anchor-center;
@@ -1596,7 +1594,6 @@ defineExpose({ el });
 
 				.hover-tooltip.champion-ability {
 					--at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min';
-					inset: unset;
 					justify-self: anchor-center;
 					position-anchor: --scoreboard-item-abilities;
 					position-try: flip-block;
@@ -1745,7 +1742,6 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.role-quest {
-					inset: unset;
 					justify-self: anchor-center;
 					position-anchor: --scoreboard-item-role-quest;
 					bottom: calc(anchor(top));
