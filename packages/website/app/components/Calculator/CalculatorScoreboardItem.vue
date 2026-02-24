@@ -655,7 +655,7 @@ const hoveredDragonThingText = computed(() => {
 			invalid = 'Only 1 dragon type can be repeated';
 		}
 	} else if (props.value.dragonSoulInvalid.value) {
-		invalid = 'Soul needs at least 2 matching stacks';
+		invalid = 'Soul needs at least 4 total and 2 matching stacks';
 	}
 
 	return {
@@ -679,7 +679,7 @@ defineExpose({ el });
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<li ref="el" data-scoreboard-item="">
-		<h3 class="sr-only">
+		<h3>
 			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}
 		</h3>
 		<button
@@ -871,7 +871,7 @@ defineExpose({ el });
 			<h4 data-loading="">
 				loading...
 			</h4>
-			<section data-champion-stats="" :inert="isLoading || undefined">
+			<section data-stats="" :inert="isLoading || undefined">
 				<h4>runes and stats</h4>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
@@ -909,7 +909,7 @@ defineExpose({ el });
 					<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
 				</div>
 			</section>
-			<section data-champion-abilities="" :inert="isLoading || undefined">
+			<section data-abilities="" :inert="isLoading || undefined">
 				<h4>abilties</h4>
 				<div data-passive="">
 					<img
@@ -1024,7 +1024,7 @@ defineExpose({ el });
 					</footer>
 				</div>
 			</section>
-			<section data-champion-health-ability-resource="">
+			<section data-health-ability-resource="">
 				<h4>health and ability resource</h4>
 				<div
 					ref="healthBar"
@@ -1069,7 +1069,10 @@ defineExpose({ el });
 					</template>
 				</div>
 			</section>
-			<section data-champion-dragons="">
+			<section data-role-quest="">
+				<h4>role quest</h4>
+			</section>
+			<section data-dragons="">
 				<h4>dragons</h4>
 				<VSelect
 					v-for="i in 4" :id="`${group}-${index}-dragon-stack-${i}`"
@@ -1082,7 +1085,7 @@ defineExpose({ el });
 					@update:model-value="updateDragonThing($event, 'stack', i - 1)"
 					@label-mouseenter="value.dragonStacks.value[i - 1] && enterDragonTooltipableElement($event, [value.dragonStacks.value[i - 1]!, 'stack'])"
 				>
-					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 32)" />
+					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
 					<template #post>
 						<div v-show="value.dragonStacksInvalid.value">
 							<span>(invalid)</span>
@@ -1100,7 +1103,7 @@ defineExpose({ el });
 					@update:model-value="updateDragonThing($event, 'soul')"
 					@label-mouseenter="value.dragonSoul.value && enterDragonTooltipableElement($event, [value.dragonSoul.value, 'soul'])"
 				>
-					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 56)" />
+					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 44)" />
 					<template #post>
 						<div v-show="value.dragonSoulInvalid.value">
 							<span>(invalid)</span>
@@ -1147,6 +1150,10 @@ defineExpose({ el });
 			> button:nth-last-of-type(1) {
 				--at-apply: 'rotate-180';
 			}
+		}
+
+		> h3 {
+			--at-apply: 'sr-only';
 		}
 
 		> button {
@@ -1324,7 +1331,7 @@ defineExpose({ el });
 			grid-area: expanded;
 
 			&::details-content {
-				--at-apply: 'pt-4 -mt-6 grid grid-cols-[auto_1fr] grid-rows-[auto_auto_1fr]';
+				--at-apply: 'pt-4 -mt-6 grid grid-cols-[auto_1fr_auto] grid-rows-[auto_auto_1fr]';
 			}
 
 			[data-loading] {
@@ -1341,11 +1348,33 @@ defineExpose({ el });
 				--at-apply: 'list-none invisible pointer-events-none';
 			}
 
-			section > h4 {
-				--at-apply: 'sr-only';
+			[data-stats],
+			[data-abilities],
+			[data-health-ability-resource] {
+				> h4 {
+					--at-apply: 'sr-only';
+				}
 			}
 
-			[data-champion-stats] {
+			.hover-tooltip.dragon-thing,
+			.hover-tooltip.champion-stat,
+			.hover-tooltip.champion-ability {
+				--at-apply: 'p-2';
+
+				> h5 {
+					--at-apply: 'text-lg/6 font-500 text-white';
+				}
+
+				> .game-description {
+					--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+				}
+			}
+
+			.hover-tooltip > .game-description:last-child {
+				--at-apply: 'b-b-0 pb-0 mb-0';
+			}
+
+			[data-stats] {
 				--at-apply: 'row-span-3';
 
 				> dl {
@@ -1377,49 +1406,49 @@ defineExpose({ el });
 						}
 					}
 				}
+
+				.hover-tooltip.champion-stat {
+					inset: unset;
+					position-anchor: --champion-stats-minor;
+					bottom: calc(anchor(top) - 1px);
+					justify-self: anchor-center;
+
+					dl {
+						--at-apply: 'leading-5.5';
+
+						dt,
+						dd {
+							--at-apply: 'inline';
+						}
+
+						dd {
+							--at-apply: 'ms-[0.5ch]';
+						}
+					}
+
+					[data-total],
+					[data-base] {
+						--at-apply: 'text-cyan-300 font-500';
+					}
+
+					[data-bonus] {
+						--at-apply: 'text-[#0f0] font-500';
+					}
+
+					[data-has-bonus] {
+						[data-total] {
+							--at-apply: 'text-[#0f0]';
+						}
+					}
+
+					p:last-child {
+						--at-apply: 'mt-1';
+					}
+				}
 			}
 
-			.hover-tooltip.champion-stat {
-				inset: unset;
-				position-anchor: --champion-stats-minor;
-				bottom: calc(anchor(top) - 1px);
-				justify-self: anchor-center;
-
-				dl {
-					--at-apply: 'leading-5.5';
-
-					dt,
-					dd {
-						--at-apply: 'inline';
-					}
-
-					dd {
-						--at-apply: 'ms-[0.5ch]';
-					}
-				}
-
-				[data-total],
-				[data-base] {
-					--at-apply: 'text-cyan-300 font-500';
-				}
-
-				[data-bonus] {
-					--at-apply: 'text-[#0f0] font-500';
-				}
-
-				[data-has-bonus] {
-					[data-total] {
-						--at-apply: 'text-[#0f0]';
-					}
-				}
-
-				p:last-child {
-					--at-apply: 'mt-1';
-				}
-			}
-
-			[data-champion-abilities] {
-				--at-apply: 'gap-x-2 flex';
+			[data-abilities] {
+				--at-apply: 'gap-x-2 col-span-2 flex';
 				anchor-name: --scoreboard-item-abilities;
 
 				[data-passive],
@@ -1508,102 +1537,86 @@ defineExpose({ el });
 						--at-apply: 'sr-only';
 					}
 				}
-			}
 
-			.hover-tooltip.dragon-thing,
-			.hover-tooltip.champion-stat,
-			.hover-tooltip.champion-ability {
-				--at-apply: 'p-2';
+				.hover-tooltip.champion-ability {
+					--at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min';
+					inset: unset;
+					justify-self: anchor-center;
+					position-anchor: --scoreboard-item-abilities;
+					position-try: flip-block;
+					top: calc(anchor(bottom) - 1px);
 
-				> h5 {
-					--at-apply: 'text-lg/6 font-500 text-white';
-				}
+					&:popover-open {
+						--at-apply: 'grid';
+					}
 
-				> .game-description {
-					--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
-				}
-			}
+					> img {
+						--at-apply: 'row-span-2';
+					}
 
-			.hover-tooltip > .game-description:last-child {
-				--at-apply: 'b-b-0 pb-0 mb-0';
-			}
+					> h5 {
+						--at-apply: 'row-span-2';
+					}
 
-			.hover-tooltip.champion-ability {
-				--at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min';
-				inset: unset;
-				justify-self: anchor-center;
-				position-anchor: --scoreboard-item-abilities;
-				position-try: flip-block;
-				top: calc(anchor(bottom) - 1px);
+					> span {
+						--at-apply: 'text-end text-lg';
 
-				&:popover-open {
-					--at-apply: 'grid';
-				}
+						&:first-of-type {
+							--at-apply: 'flex gap-[0.5ch] justify-end items-center text-yellow-100';
 
-				> img {
-					--at-apply: 'row-span-2';
-				}
-
-				> h5 {
-					--at-apply: 'row-span-2';
-				}
-
-				> span {
-					--at-apply: 'text-end text-lg';
-
-					&:first-of-type {
-						--at-apply: 'flex gap-[0.5ch] justify-end items-center text-yellow-100';
-
-						img {
-							--at-apply: '';
+							img {
+								--at-apply: '';
+							}
 						}
-					}
 
-					&:nth-of-type(2) {
-						--at-apply: 'self-start';
-					}
-				}
-
-				> div {
-					--at-apply: 'col-span-full mt-2';
-
-					rules {
-						--at-apply: 'italic';
-					}
-				}
-
-				> footer {
-					--at-apply: 'col-span-full';
-
-					> p {
-						--at-apply: 'text-end';
+						&:nth-of-type(2) {
+							--at-apply: 'self-start';
+						}
 					}
 
 					> div {
-						--at-apply: 'italic';
+						--at-apply: 'col-span-full mt-2';
+
+						rules {
+							--at-apply: 'italic';
+						}
 					}
 
-					> dl {
-						--at-apply: 'grid grid-cols-[1fr_auto] leading-5';
+					> footer {
+						--at-apply: 'col-span-full';
 
-						&:not(:first-child) {
-							--at-apply: 'mt-1.5';
+						> p {
+							--at-apply: 'text-end';
 						}
 
-						> dd {
-							> span {
-								--at-apply: 'text-neutral-400';
+						> div {
+							--at-apply: 'italic';
+						}
+
+						> dl {
+							--at-apply: 'grid grid-cols-[1fr_auto] leading-5';
+
+							&:not(:first-child) {
+								--at-apply: 'mt-1.5';
 							}
 
-							[data-current] {
-								--at-apply: 'text-white font-medium';
+							> dd {
+								> span {
+									--at-apply: 'text-neutral-400';
+								}
+
+								[data-current] {
+									--at-apply: 'text-white font-medium';
+								}
 							}
 						}
 					}
 				}
 			}
 
-			[data-champion-health-ability-resource] {
+			[data-health-ability-resource] {
+				--at-apply: 'col-span-2';
+
 				[data-current-health],
 				[data-current-ability-resource] {
 					--at-apply: 'relative bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
@@ -1639,11 +1652,15 @@ defineExpose({ el });
 				}
 			}
 
-			[data-champion-dragons] {
-				--at-apply: 'flex-center mx-auto relative items-center gap-[--gap]';
+			[data-role-quest] {
+				--at-apply: 'relative';
+			}
+
+			[data-dragons] {
+				--at-apply: 'flex-center mx-auto h-max relative items-center gap-[--gap]';
 				--gap: calc(2 * var(--spacing));
-				--soul-size: calc(12 * var(--spacing));
-				--stack-size: calc(10 * var(--spacing));
+				--soul-size: calc(10 * var(--spacing));
+				--stack-size: calc(8 * var(--spacing));
 				--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
 
 				&::before {
@@ -1671,7 +1688,7 @@ defineExpose({ el });
 						--at-apply: 'size-[--soul-size] grid-center bg-black of-hidden rotate-45';
 
 						> div {
-							--at-apply: '-rotate-45 -translate-1';
+							--at-apply: '-rotate-45 -translate-[calc(var(--soul-rotation-size-diff)/4)]';
 						}
 					}
 				}
@@ -1701,6 +1718,13 @@ defineExpose({ el });
 					> .game-description > img {
 						--at-apply: 'inline-block align-middle size-4';
 					}
+				}
+			}
+
+			[data-role-quest],
+			[data-dragons] {
+				> h4 {
+					--at-apply: 'absolute top-0 start-0 text-xs uppercase font-medium text-neutral-300';
 				}
 			}
 		}
