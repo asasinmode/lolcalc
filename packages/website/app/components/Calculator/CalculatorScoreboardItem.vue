@@ -585,12 +585,18 @@ function hideAbilityTooltip() {
 	abilityHoverTooltipEl.value?.hidePopover();
 }
 
-const hoveredRoleQuestRewards = shallowRef<string[]>();
 const roleQuestHoverTooltipEl = useTemplateRef('roleQuestHoverTooltip');
+
+function updateRoleQuest(value?: IChampionRole) {
+	// eslint-disable-next-line vue/no-mutating-props
+	props.value.roleQuest.value = value;
+	if (!value) {
+		hideRoleQuestTooltip();
+	}
+}
 
 function showRoleQuestTooltip(event: MouseEvent) {
 	if (props.value.roleQuest.value) {
-		hoveredRoleQuestRewards.value = text.roleQuests[props.value.roleQuest.value];
 		event.target?.addEventListener('mouseleave', hideRoleQuestTooltip, { passive: true, once: true });
 		roleQuestHoverTooltipEl.value?.showPopover();
 	}
@@ -1089,10 +1095,10 @@ defineExpose({ el });
 				<VSelect
 					:id="`${group}-${index}-role-quest`"
 					:model-value="value.roleQuest.value"
-					:options="Object.keys(text.roleQuests).map(role => [role, role])"
+					:options="Object.keys(text.roleQuests).map(role => [role, role]) as [IChampionRole, string][]"
 					label="role quest"
 					clearable
-					@update:model-value="value.roleQuest.value = $event as IChampionRole"
+					@update:model-value="updateRoleQuest"
 					@label-mouseenter="showRoleQuestTooltip"
 				>
 					<template v-if="value.roleQuest.value">
@@ -1111,11 +1117,14 @@ defineExpose({ el });
 						>
 					</template>
 				</VSelect>
-				<ul ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
-					<li v-for="(reward, i) in hoveredRoleQuestRewards" :key="i">
-						{{ reward }}
-					</li>
-				</ul>
+				<div ref="roleQuestHoverTooltip" popover="hint" class="hover-tooltip role-quest game-description">
+					<h5>{{ value.roleQuest.value }}{{ value.roleQuest.value !== 'jungle' && value.roleQuest.value !== 'support' ? ' lane' : '' }} quest rewards</h5>
+					<ul class="game-description">
+						<li v-for="(reward, i) in value.roleQuest.value ? text.roleQuests[value.roleQuest.value] : []" :key="i">
+							{{ reward }}
+						</li>
+					</ul>
+				</div>
 			</section>
 			<section data-dragons="">
 				<h4>dragons</h4>
@@ -1404,7 +1413,8 @@ defineExpose({ el });
 
 			.hover-tooltip.dragon-thing,
 			.hover-tooltip.champion-stat,
-			.hover-tooltip.champion-ability {
+			.hover-tooltip.champion-ability,
+			.hover-tooltip.role-quest {
 				--at-apply: 'p-2';
 
 				> h5 {
@@ -1713,14 +1723,13 @@ defineExpose({ el });
 						&::before {
 							outline: auto;
 						}
-						}
+					}
 
 					> label {
 						--at-apply: 'relative flex items-center gap-1 w-fit';
 
-
 						&::before {
-							--at-apply: 'size-8 content-empty rounded-full bg-black b b-[--ui-button-border-clr]';
+							--at-apply: 'size-8 content-empty rounded-full bg-black';
 						}
 
 						> img {
@@ -1736,11 +1745,22 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.role-quest {
-					/* --at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min'; */
 					inset: unset;
 					justify-self: anchor-center;
 					position-anchor: --scoreboard-item-role-quest;
 					bottom: calc(anchor(top));
+
+					> h5:first-letter {
+						--at-apply: 'capitalize';
+					}
+
+					> ul {
+						--at-apply: 'list-disc';
+
+						> li {
+							--at-apply: 'ms-4';
+						}
+					}
 				}
 			}
 
