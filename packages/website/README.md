@@ -118,6 +118,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
+  - [ ] components for stuff like manaflow band or precision legends for setting values
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
 - [ ] per patch versions = see stats/features from older patches

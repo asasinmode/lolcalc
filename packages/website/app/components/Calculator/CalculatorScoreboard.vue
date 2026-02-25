@@ -432,8 +432,8 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 				<img
 					:src="dragging?.runePathPrimaryKeystone || `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`"
 					aria-hidden="true"
-					width="32"
-					height="32"
+					:width="dragging?.runePathPrimaryKeystone ? 256 : 80"
+					:height="dragging?.runePathPrimaryKeystone ? 256 : 80"
 					loading="lazy"
 					data-primary-path-keystone=""
 				>

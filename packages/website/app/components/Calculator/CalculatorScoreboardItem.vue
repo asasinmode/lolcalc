@@ -109,11 +109,11 @@ const hoveredItem = shallowRef<IItem>();
 
 function showItemHoverTooltip(event: MouseEvent, item: IItem) {
 	itemHoverTooltip.value?.showPopover();
-	event.target?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
+	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, { passive: true, once: true });
 	hoveredItem.value = item;
 }
 
-function leaveTooltipableElement() {
+function leaveTooltipableItemElement() {
 	itemHoverTooltip.value?.hidePopover();
 }
 
@@ -145,6 +145,50 @@ interface IChampionStat {
 	}[];
 	displayedValue: string;
 	bottomText?: string;
+}
+
+interface IChampionRune {
+	name: string;
+	description: string;
+	anyUnknown?: number;
+	icon: string;
+}
+
+const championRunes = computed<(IChampionRune | undefined)[]>(() => {
+	const { paths: { primary, primarySlots, secondary, secondarySlots }, shards } = props.value.runes.value;
+
+	return Array.from({ length: 4 }, (_, i) => primarySlots[i] && getRuneText(primarySlots[i], i, primary))
+		.concat(Array.from({ length: 2 }, (_, i) => secondary && secondarySlots[i] && getRuneText(secondarySlots[i], i, secondary)))
+		.concat([{
+			name: 'Rune shards',
+			description: Object.values(shards).join(' '),
+			icon: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`,
+		}]);
+});
+
+function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePathName): IChampionRune {
+	const rune = runes.paths[path].slots[slotNumber]![slotName]!;
+	const { name, tooltipStats } = text.runes.slots[slotName]!;
+
+	const icon = `https://raw.communitydragon.org/${minorVersion}/game/${rune.icon}`;
+
+	const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceGameDescriptionStringtableVariables(
+		tooltipStats,
+		text.stringtable,
+	);
+
+	const { replaced: replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
+		stringtableVariableReplaced,
+		'rune',
+		[rune],
+	);
+
+	return {
+		name,
+		description: replaced,
+		anyUnknown: unknownSV.size || unknownV.length,
+		icon,
+	};
 }
 
 const minorStats = computed<IChampionStat[]>(() => {
@@ -894,6 +938,23 @@ defineExpose({ el });
 			</h4>
 			<section data-stats="" :inert="isLoading || undefined">
 				<h4>runes and stats</h4>
+				<dl>
+					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
+						<dt>
+							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
+							<img
+								v-if="championRune?.icon"
+								:src="championRune.icon"
+								:width="runeIndex === 6 ? 80 : runeIndex ? 64 : 256"
+								:height="runeIndex === 6 ? 80 : runeIndex ? 64 : 256"
+								loading="lazy"
+							>
+						</dt>
+						<dd>
+							{{ runeIndex === 6 ? 'TODO' : 0 }}
+						</dd>
+					</template>
+				</dl>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
 					:key="statKindIndex"

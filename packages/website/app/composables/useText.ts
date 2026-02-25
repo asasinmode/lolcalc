@@ -38,5 +38,5 @@ export interface ITextData {
 		soul: string;
 	}>;
 	roleQuests: Record<IChampionRole, string[]>;
-	stringtable: Record<string, string[]>;
+	stringtable: Record<string, string>;
 }
