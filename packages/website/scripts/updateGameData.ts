@@ -466,7 +466,13 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 							category: 'rune',
 							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
 							variableType: 'rune',
-							variableValueParameters: [slotValue],
+							/* same thing as for champion variants with `app/utils/champion.ts` POSSIBLE_DYNAMIC_VALUES except only adaptive rune seems to have it so just one liner */
+							variableValueParameters: [perkKey === 'Perks/StatMods/Adaptive'
+								? {
+										...slotValue,
+										dynamicValues: { f1: [0, 1] },
+									}
+								: slotValue],
 							variableSourceKeys: ['effectAmount'],
 						}),
 					};

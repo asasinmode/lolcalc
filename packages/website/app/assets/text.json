@@ -2471,7 +2471,9 @@
 			"perk_short_desc_conditioning": "After @MinutesRequired@ min gain +@ArmorBase@ Armor and +@MRBase@ Magic Resist and increase your Armor and Magic Resist by @ExtraResist*100@%.",
 			"perk_long_desc_boneplating": "After taking damage from an enemy champion, the next @BlockCount@ spells or attacks you receive from them deal @BlockBase@-@BlockMax@ (based on level) less damage.<br><br>Duration: @BlockDuration@s<br>Cooldown: @Cooldown@s",
 			"item_2422_name": "Slightly Magical Footwear",
-			"game_item_displayname_2010": "Total Biscuit of Everlasting Will"
+			"game_item_displayname_2010": "Total Biscuit of Everlasting Will",
+			"perk_tooltip_dynamic_statmodadaptive_0": "<scaleAD>+@f2@ Attack Damage</scaleAD>",
+			"perk_tooltip_dynamic_statmodadaptive_1": "<scaleAP>+@f2@ Ability Power</scaleAP>"
 		},
 		"dragons": {
 			"Cloud": {

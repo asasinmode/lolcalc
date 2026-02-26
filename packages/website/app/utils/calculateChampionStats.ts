@@ -201,6 +201,7 @@ const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Am
 type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
 type IAdaptiveForceStatRv = [IAdaptiveForceStat, multiplier: number];
 
+// TODO should return `@f1@` variable value, which for runes would be 0 = AD, 1 = AP
 function getAdaptiveForceStat(championId: string, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
 	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0.6];
 	return attackDamage > abilityPower
