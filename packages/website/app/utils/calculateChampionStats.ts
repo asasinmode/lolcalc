@@ -115,7 +115,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	itemStats.moveSpeed += baseWithFlatFlatItemMoveSpeed * itemsTotalPercentMovementSpeed;
 	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio;
 
-	// TODO make sure it works, calculate runes
+	// TODO make sure it works, calculate rune shards
 	const [_adaptiveForceTargetStat, adaptiveForceStatVariable, _adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
 
 	// const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);

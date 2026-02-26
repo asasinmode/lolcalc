@@ -1,10 +1,15 @@
+import { data } from '../assets/rune.json';
+
 export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {
 			POSSIBLE_DYNAMIC_VALUES: { f1: [0, 1] },
 			calculateDynamicVariables(damageSource: DamageSource) {
+				const { adaptiveForceStatVariable } = damageSource.stats.value;
+
 				return {
-					f1: damageSource.stats.value.adaptiveForceStatVariable,
+					f1: adaptiveForceStatVariable,
+					f2: data.shards.offensive.adaptive.effectAmount[`StatGain${(adaptiveForceStatVariable + 1) as 1 | 2}`],
 				};
 			},
 		},
