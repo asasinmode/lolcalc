@@ -10,6 +10,7 @@ interface IStatsCalculationResult {
 		total: IChampionStats;
 	};
 	hasMana: boolean;
+	adaptiveForceStatVariable: IAdaptiveForceStatRv[1];
 }
 
 export function calculateChampionStats(source: DamageSource): IStatsCalculationResult {
@@ -49,7 +50,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	if (!champion) {
 		return {
-			hasMana: false,
 			stats: {
 				base: baseStats,
 				level: baseStats,
@@ -58,6 +58,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 				bonus: bonusStats,
 				total: baseStats,
 			},
+			hasMana: false,
+			adaptiveForceStatVariable: 0,
 		};
 	}
 
@@ -114,7 +116,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	itemStats.attackSpeed = itemStats.bonusAttackSpeedPercent * champion.stats.attackspeedratio;
 
 	// TODO make sure it works, calculate runes
-	// const [adaptiveForceTargetStat, adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
+	const [_adaptiveForceTargetStat, adaptiveForceStatVariable, _adaptiveForceStatMultiplier] = getAdaptiveForceStat(champion.id, itemStats.attackDamage, itemStats.abilityPower);
 
 	// const { adaptiveForce: runeShardsAdaptiveForce, ...preAdaptiveRuneShardStats } = getRuneShardStats(runes.shards, level);
 	// const runeShardStats: Partial<IChampionStats> = {
@@ -124,7 +126,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	// 	[adaptiveForceTargetStat]: runeShardsAdaptiveForce * adaptiveForceStatMultiplier,
 	// };
 
-	// TODO changed attack speed on champion to be kept as % (0.25 instead 25), make sure everything ok, the multipcation below can be removed
+	// TODO changed attack speed on champion to be kept as % (0.25 instead 25), make sure everything ok, the multiplication below can be removed
 	// to keep it consistent with the way it's displayed stored on `champion.stats.attackspeedperlevel`
 	// itemStats.bonusAttackSpeedPercent *= 100;
 	// runeShardStats.bonusAttackSpeedPercent! *= 100;
@@ -146,7 +148,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	)) as IChampionStats;
 
 	return {
-		hasMana: champion.partype === 'mana',
 		stats: {
 			base: baseStats,
 			level: levelStats,
@@ -155,6 +156,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 			bonus: bonusStats,
 			total: totalStats,
 		},
+		hasMana: champion.partype === 'mana',
+		adaptiveForceStatVariable,
 	};
 }
 
@@ -199,16 +202,15 @@ function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
 const ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS: IChampionId[] = ['Aatrox', 'Akshan', 'Ambessa', 'Aphelios', 'Ashe', 'Belveth', 'Blitzcrank', 'Braum', 'Briar', 'Caitlyn', 'Camille', 'Corki', 'Darius', 'Draven', 'DrMundo', 'Ezreal', 'Fiora', 'Gangplank', 'Garen', 'Gnar', 'Graves', 'Hecarim', 'Illaoi', 'Irelia', 'JarvanIV', 'Jax', 'Jayce', 'Jhin', 'Jinx', 'Kaisa', 'Kalista', 'Kayle', 'Kayn', 'Khazix', 'Kindred', 'Kled', 'KogMaw', 'KSante', 'LeeSin', 'Leona', 'Lucian', 'MasterYi', 'MissFortune', 'MonkeyKing', 'Naafiri', 'Nasus', 'Nilah', 'Nocturne', 'Olaf', 'Ornn', 'Pantheon', 'Poppy', 'Pyke', 'Qiyana', 'Quinn', 'Rammus', 'RekSai', 'Rell', 'Renekton', 'Rengar', 'Riven', 'Samira', 'Senna', 'Sett', 'Shaco', 'Shen', 'Shyvana', 'Sion', 'Sivir', 'Skarner', 'Smolder', 'TahmKench', 'Talon', 'Taric', 'Thresh', 'Tristana', 'Trundle', 'Tryndamere', 'Twitch', 'Udyr', 'Urgot', 'Varus', 'Vayne', 'Vi', 'Viego', 'Volibear', 'Warwick', 'Xayah', 'XinZhao', 'Yasuo', 'Yone', 'Yorick', 'Yunara', 'Zaahen', 'Zed', 'Zeri'];
 
 type IAdaptiveForceStat = 'attackDamage' | 'abilityPower';
-type IAdaptiveForceStatRv = [IAdaptiveForceStat, multiplier: number];
+type IAdaptiveForceStatRv = [IAdaptiveForceStat, adaptiveForceVariable: 0 | 1, multiplier: number];
 
-// TODO should return `@f1@` variable value, which for runes would be 0 = AD, 1 = AP
 function getAdaptiveForceStat(championId: string, attackDamage: number, abilityPower: number): IAdaptiveForceStatRv {
-	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0.6];
+	const adRv: IAdaptiveForceStatRv = ['attackDamage', 0, 0.6];
 	return attackDamage > abilityPower
 		? adRv
 		: (attackDamage === abilityPower && ADAPTIVE_FORCE_AD_BIAS_CHAMPIONS.includes(championId as IChampionId))
 				? adRv
-				: ['abilityPower', 1];
+				: ['abilityPower', 1, 1];
 }
 
 // function getRuneShardStats(shards: IRuneShards, level: number) {

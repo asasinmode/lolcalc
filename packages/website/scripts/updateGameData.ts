@@ -11,7 +11,6 @@ import { CHAMPION_SPECIFICS } from '../app/utils/champion';
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
 
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable';
-import { ALL_RUNE_PATHS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -416,7 +415,7 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 	runeData = {
 		version: latestVersion,
 		data: {
-			paths: Object.fromEntries(ALL_RUNE_PATHS.map((path) => {
+			paths: Object.fromEntries(['Precision', 'Domination', 'Sorcery', 'Resolve', 'Inspiration'].map((path) => {
 				const dataKey = `Perks/Styles/${path}`;
 				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[dataKey];
 
