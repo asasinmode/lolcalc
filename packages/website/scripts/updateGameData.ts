@@ -446,11 +446,11 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 				slotKey = slotKey.slice(0, -5).toLowerCase();
 
 				(textData.data.runes.shards.slotNames as any)[slotKey] = {
-					name: getStringtableValue(mSlotLabelKey, 'rune shards'),
+					name: getStringtableValue(mSlotLabelKey, `rune shards ${slotKey} name`),
 				};
 
 				return [slotKey, Object.fromEntries(mPerks.map((perkKey: string) => {
-					const { mPerkId, mPerkName, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mIconTextureName, mScript } = data[perkKey];
+					const { mPerkId, mPerkName, mDisplayNameLocalizationKey, mShortDescLocalizationKey, mTooltipNameLocalizationKey, mIconTextureName, mScript } = data[perkKey];
 
 					const slotValue = {
 						id: mPerkId,
@@ -460,8 +460,15 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 					} as any;
 
 					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
-						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `${slotKey} ${perkKey}`, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
+						name: getStringtableValue(mDisplayNameLocalizationKey, `rune shards ${slotKey} ${perkKey} name`),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `rune shards ${slotKey} ${perkKey} tooltip`, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
+						tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, {
+							category: 'rune',
+							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
+							variableType: 'rune',
+							variableValueParameters: [slotValue],
+							variableSourceKeys: ['effectAmount'],
+						}),
 					};
 
 					return [mPerkName.toLowerCase(), slotValue];

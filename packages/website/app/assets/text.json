@@ -2428,31 +2428,38 @@
 				"slotValues": {
 					"adaptive": {
 						"name": "Adaptive Force",
-						"tooltip": "+@StatGain2@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>Adaptive Force</font></lol-uikit-tooltipped-keyword>"
+						"tooltip": "+@StatGain2@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive'><font color='#48C4B7'>Adaptive Force</font></lol-uikit-tooltipped-keyword>",
+						"tooltipStats": "{{perk_tooltip_dynamic_StatModAdaptive_@f1@}}"
 					},
 					"attackspeed": {
 						"name": "Attack Speed",
-						"tooltip": "+@StatGain@% Attack Speed"
+						"tooltip": "+@StatGain@% Attack Speed",
+						"tooltipStats": "+@StatGain@% Attack Speed"
 					},
 					"cdrscaling": {
 						"name": "Ability Haste",
-						"tooltip": "+@HasteGain@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> "
+						"tooltip": "+@HasteGain@ <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_CDR'>Ability Haste</lol-uikit-tooltipped-keyword> ",
+						"tooltipStats": "<attention>+@HasteGain@ Ability Haste</attention>"
 					},
 					"movementspeed": {
 						"name": "Move Speed",
-						"tooltip": "+@StatGain1@% <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>Move Speed</lol-uikit-tooltipped-keyword>"
+						"tooltip": "+@StatGain1@% <lol-uikit-tooltipped-keyword key='LinkTooltip_Description_MS'>Move Speed</lol-uikit-tooltipped-keyword>",
+						"tooltipStats": "<speed>+@StatGain1@% Move Speed</speed>"
 					},
 					"healthscaling": {
 						"name": "Health Scaling",
-						"tooltip": "+@StatGainMin@-@StatGainMax@ Health (based on level)"
+						"tooltip": "+@StatGainMin@-@StatGainMax@ Health (based on level)",
+						"tooltipStats": "<scaleHealth>+@f1@ Health</scaleHealth> (based on level)"
 					},
 					"health": {
 						"name": "Health",
-						"tooltip": "+@StatGain@ Health"
+						"tooltip": "+@StatGain@ Health",
+						"tooltipStats": "<scaleHealth>+@StatGain@ Health</scaleHealth>"
 					},
 					"tenacity": {
 						"name": "Tenacity and Slow Resist",
-						"tooltip": "+@StatGain@% Tenacity and Slow Resist"
+						"tooltip": "+@StatGain@% Tenacity and Slow Resist",
+						"tooltipStats": "+@StatGain@% Tenacity and Slow Resist"
 					}
 				}
 			}
