@@ -417,7 +417,8 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 		version: latestVersion,
 		data: {
 			paths: Object.fromEntries(ALL_RUNE_PATHS.map((path) => {
-				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[`Perks/Styles/${path}`];
+				const dataKey = `Perks/Styles/${path}`;
+				const { mPerkStyleId, mPerkStyleName, mTooltipNameLocalizationKey, mDisplayNameLocalizationKey, mSlots, mIconTextureName } = data[dataKey];
 
 				const cssSliceSelector = `.primary-perk-selector.keystone.${mPerkStyleName.toLowerCase()}`;
 				/** these selectors are expected to contain `{--middle-color:#dc4747}` hence the slice values */
@@ -433,9 +434,10 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 					id: mPerkStyleId,
 					name: mPerkStyleName,
 					icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
+					dataKey,
 					iconColor,
 					slots: mSlots.map(({ mPerks }: { mPerks: string[] }) => Object.fromEntries(
-						mPerks.map(perk => createRuneSlotData(data[perk])),
+						mPerks.map(perk => createRuneSlotData(perk, data[perk])),
 					)),
 				}];
 			})),
@@ -453,12 +455,13 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 					const slotValue = {
 						id: mPerkId,
 						icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
+						dataKey: perkKey,
 						effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount),
 					} as any;
 
 					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
 						name: getStringtableValue(mDisplayNameLocalizationKey, 'rune shards'),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: slotKey, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `${slotKey} ${perkKey}`, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
 					};
 
 					return [mPerkName.toLowerCase(), slotValue];
@@ -820,13 +823,14 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
 	}
 }
 
-function createRuneSlotData(data: any) {
+function createRuneSlotData(dataKey: string, data: any) {
 	const { mPerkId, mPerkName, mScript: { mSpellScriptData }, mDisplayNameLocalizationKey, mTooltipNameLocalizationKey, mShortDescLocalizationKey, mLongDescLocalizationKey, mIconTextureName } = data;
 
 	const value = {
 		id: mPerkId,
 		name: mPerkName,
 		icon: mIconTextureName.toLowerCase().replace('.tex', '.png'),
+		dataKey,
 		calculations: cleanupObject(mSpellScriptData.mCalculations),
 		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
 	};
