@@ -36,6 +36,8 @@ const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
 const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
 
+const runeIconImgSrc = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
+
 const runePathPrimary = computed(() => {
 	const { primary, primarySlots } = props.value.runes.value.paths;
 	if (primarySlots[0]) {
@@ -131,6 +133,19 @@ function startItemDrag(event: DragEvent, index: number) {
 	emit('itemDragstart', event, index);
 }
 
+const hoveredRune = shallowRef<IChampionRune>();
+const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
+
+function showRuneTooltip(event: MouseEvent, rune: IChampionRune) {
+	hoveredRune.value = rune;
+	// @ts-expect-error source is ok
+	hoveredRuneTooltip.value?.showPopover({ source: event.target });
+}
+
+function hideRuneTooltip() {
+	hoveredRuneTooltip.value?.hidePopover();
+}
+
 interface IChampionRune {
 	name: string;
 	description: string;
@@ -138,8 +153,6 @@ interface IChampionRune {
 	icon: string;
 	iconDimensions: 256 | 80 | 64;
 }
-
-const runeIconImgSrc = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
 
 const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 	const { paths: { primary, primarySlots, secondary, secondarySlots }, shards } = props.value.runes.value;
@@ -150,12 +163,12 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 			name: 'Rune shards',
 			description: Object.values(shards).join(' '),
 			icon: runeIconImgSrc,
-			iconDimensions: 80
+			iconDimensions: 80,
 		}]);
 });
 
 function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePathName, isPrimary: boolean): IChampionRune {
-	const rune = runes.paths[path].slots[slotNumber]![slotName]!;
+	const rune = runes.paths[path].slots[isPrimary ? slotNumber : RUNE_SLOT_NAME_TO_NUMBER[slotName]!]![slotName]!;
 	const { name, tooltipStats } = text.runes.slots[slotName]!;
 
 	const icon = `https://raw.communitydragon.org/${minorVersion}/game/${rune.icon}`;
@@ -178,6 +191,19 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 		icon,
 		iconDimensions: slotNumber === 0 && isPrimary ? 256 : 64,
 	};
+}
+
+const hoveredStat = shallowRef<IChampionStat>();
+const hoveredStatTooltip = useTemplateRef('championStatTooltip');
+
+function showStatTooltip(event: MouseEvent, stat: IChampionStat) {
+	hoveredStat.value = stat;
+	// @ts-expect-error source is ok
+	hoveredStatTooltip.value?.showPopover({ source: event.target });
+}
+
+function hideStatTooltip() {
+	hoveredStatTooltip.value?.hidePopover();
 }
 
 interface IChampionStat {
@@ -484,19 +510,6 @@ function formatStatValue(multiplier: number, value: IChampionStat['values'][numb
 	return value.decimal
 		? roundVariable(value[key] as number * multiplier, value.decimal)
 		: Math.round(value[key] as number * multiplier);
-}
-
-const hoveredStat = shallowRef<IChampionStat>();
-const hoveredStatTooltip = useTemplateRef('championStatTooltip');
-
-function showStatTooltip(event: MouseEvent, stat: IChampionStat) {
-	hoveredStat.value = stat;
-	// @ts-expect-error source is ok
-	hoveredStatTooltip.value?.showPopover({ source: event.target });
-}
-
-function hideStatTooltip() {
-	hoveredStatTooltip.value?.hidePopover();
 }
 
 const maxHealth = computed(() => Math.round(props.value.stats.value?.stats.total.hp || 1));
@@ -944,7 +957,7 @@ defineExpose({ el });
 				<h4>runes and stats</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
-						<dt>
+						<dt @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
 							<img
 								v-if="championRune"
@@ -954,11 +967,15 @@ defineExpose({ el });
 								loading="lazy"
 							>
 						</dt>
-						<dd>
+						<dd @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
 							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>
 				</dl>
+				<div ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="hint">
+					<h5>{{ hoveredRune?.name }}</h5>
+					<p class="game-description" v-html="hoveredRune?.description" />
+				</div>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
 					:key="statKindIndex"
@@ -1474,9 +1491,10 @@ defineExpose({ el });
 				}
 			}
 
-			.hover-tooltip.dragon-thing,
 			.hover-tooltip.champion-stat,
+			.hover-tooltip.champion-rune,
 			.hover-tooltip.champion-ability,
+			.hover-tooltip.dragon-thing,
 			.hover-tooltip.role-quest {
 				--at-apply: 'p-2';
 
@@ -1495,7 +1513,6 @@ defineExpose({ el });
 
 			[data-runes-stats] {
 				--at-apply: 'row-span-3 grid grid-cols-2 grid-rows-2';
-
 				anchor-name: --scoreboard-item-runes-stats;
 
 				> dl {
@@ -1573,7 +1590,7 @@ defineExpose({ el });
 							&::before {
 								--at-apply: 'content-empty block size-4.5 rounded-full bg-black';
 							}
-							}
+						}
 					}
 
 					&:nth-of-type(2) {
@@ -1597,11 +1614,25 @@ defineExpose({ el });
 					}
 				}
 
+				.hover-tooltip.champion-rune,
 				.hover-tooltip.champion-stat {
-					position-anchor: --scoreboard-item-runes-stats;
-					bottom: calc(anchor(top) - 1px);
-					justify-self: anchor-center;
+					--at-apply: 'max-w-156';
 
+					position-anchor: --scoreboard-item-runes-stats;
+					position-try: flip-block;
+					top: calc(anchor(bottom) - 1px);
+					justify-self: anchor-center;
+				}
+
+				.hover-tooltip.champion-rune {
+					.game-description {
+						rules {
+							--at-apply: 'italic';
+						}
+					}
+				}
+
+				.hover-tooltip.champion-stat {
 					dl {
 						--at-apply: 'leading-5.5';
 
