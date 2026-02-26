@@ -677,7 +677,7 @@ function updateDragonThing(value: IDragonName | undefined, target: 'stack' | 'so
 	}
 
 	if (!value) {
-		leaveDragonTooltipableElement();
+		hideDragonTooltip();
 	}
 }
 
@@ -687,29 +687,18 @@ let dragonTooltipAnchor: HTMLElement | undefined;
 const hoveredDragonThing = shallowRef<[IDragonName, 'stack' | 'soul']>();
 const dragonHoverTooltipEl = useTemplateRef('dragonTooltip');
 
-function enterDragonTooltipableElement(event: MouseEvent, dragonThing: [IDragonName, 'stack' | 'soul']) {
+function showDragonTooltip(event: MouseEvent, dragonThing: [IDragonName, 'stack' | 'soul']) {
 	const { target } = event as unknown as { target: HTMLElement };
 	dragonHoverTooltipEl.value?.showPopover();
 	dragonTooltipAnchor = target;
-	dragonTooltipAnchor?.addEventListener('mouseleave', leaveDragonTooltipableElement, { passive: true, once: true });
-	dragonTooltipAnchor?.addEventListener('mousemove', updateDragonTooltipPosition, { passive: true });
+	dragonTooltipAnchor?.addEventListener('mouseleave', hideDragonTooltip, { passive: true, once: true });
 	hoveredDragonThing.value = dragonThing;
-	updateDragonTooltipPosition(event);
 }
 
-function leaveDragonTooltipableElement() {
+function hideDragonTooltip() {
 	dragonHoverTooltipEl.value?.hidePopover();
-	dragonTooltipAnchor?.removeEventListener('mouseleave', leaveDragonTooltipableElement);
-	dragonTooltipAnchor?.removeEventListener('mousemove', updateDragonTooltipPosition);
+	dragonTooltipAnchor?.removeEventListener('mouseleave', hideDragonTooltip);
 	dragonTooltipAnchor = undefined;
-}
-
-function updateDragonTooltipPosition(event: MouseEvent) {
-	const { clientX, clientY } = event;
-	dragonHoverTooltipEl.value!.style.setProperty('--left', `${clientX + 10}px`);
-	dragonHoverTooltipEl.value!.style.setProperty('--top', `${clientY + 10}px`);
-	dragonHoverTooltipEl.value!.style.setProperty('--width', `${dragonHoverTooltipEl.value!.clientWidth}px`);
-	dragonHoverTooltipEl.value!.style.setProperty('--height', `${dragonHoverTooltipEl.value!.clientHeight}px`);
 }
 
 const hoveredDragonThingText = computed(() => {
@@ -1220,7 +1209,7 @@ defineExpose({ el });
 					data-dragon-stack=""
 					clearable
 					@update:model-value="updateDragonThing($event, 'stack', i - 1)"
-					@label-mouseenter="value.dragonStacks.value[i - 1] && enterDragonTooltipableElement($event, [value.dragonStacks.value[i - 1]!, 'stack'])"
+					@label-mouseenter="value.dragonStacks.value[i - 1] && showDragonTooltip($event, [value.dragonStacks.value[i - 1]!, 'stack'])"
 				>
 					<div v-if="value.dragonStacks.value[i - 1]" v-bind="textureBgImageAttrs(ui.dragons[value.dragonStacks.value[i - 1]!].stack, 28)" />
 					<template #post>
@@ -1238,7 +1227,7 @@ defineExpose({ el });
 					label="soul"
 					clearable
 					@update:model-value="updateDragonThing($event, 'soul')"
-					@label-mouseenter="value.dragonSoul.value && enterDragonTooltipableElement($event, [value.dragonSoul.value, 'soul'])"
+					@label-mouseenter="value.dragonSoul.value && showDragonTooltip($event, [value.dragonSoul.value, 'soul'])"
 				>
 					<div v-if="value.dragonSoul.value" v-bind="textureBgImageAttrs(ui.dragons[value.dragonSoul.value].soulActive, 44)" />
 					<template #post>
@@ -1872,7 +1861,7 @@ defineExpose({ el });
 			}
 
 			[data-role-quest] {
-				--at-apply: 'relative';
+				--at-apply: 'relative h-min';
 				anchor-name: --scoreboard-item-role-quest;
 
 				> .v-select {
@@ -1910,7 +1899,7 @@ defineExpose({ el });
 				.hover-tooltip.role-quest {
 					justify-self: anchor-center;
 					position-anchor: --scoreboard-item-role-quest;
-					bottom: calc(anchor(top));
+					top: calc(anchor(bottom));
 
 					> h5:first-letter {
 						--at-apply: 'capitalize';
@@ -1932,6 +1921,7 @@ defineExpose({ el });
 				--soul-size: calc(10 * var(--spacing));
 				--stack-size: calc(8 * var(--spacing));
 				--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
+				anchor-name: --scoreboard-item-dragons;
 
 				&::before {
 					--at-apply: 'absolute top-1/2 -translate-y-1/2 content-empty start-[calc(var(--stack-size)/2)] bg-black h-[calc(var(--stack-size)*0.2)] end-[calc(var(--soul-size)+2*var(--soul-rotation-size-diff)+var(--gap)+var(--stack-size)/2)]';
@@ -1986,8 +1976,8 @@ defineExpose({ el });
 
 				.dragon-thing.hover-tooltip {
 					--at-apply: 'w-fit max-w-screen fixed whitespace-nowrap';
-					inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width, 0rem))));
-					inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
+					top: calc(anchor(bottom));
+					position-anchor: --scoreboard-item-dragons;
 
 					> .game-description > img {
 						--at-apply: 'inline-block align-middle size-4';
