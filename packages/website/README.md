@@ -41,23 +41,24 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] current health/mana
     - [x] slider drag health/mana
     - [x] champion data loading indicator
-    - [ ] passive with tooltip, resolve `@spell.CaitlynW.X` variables, possibly have to save `ObjectName` on abilities and get it that way?
+    - [x] passive with tooltip
     - [ ] aphelios
     - [ ] abilities ui (not implemented, coming soon)
     - [ ] runes (only shards implemented)
     - [x] dragons/souls
-    - [ ] choose role quest
+    - [x] choose role quest
   - [ ] mirror layout
 - [ ] results ui
-  - [ ] which source/targets are used? Maybe a checkbox next to each other to choose to compare?
-  - [ ] multiple builds/champions you can switch between
+  - [ ] table where columns are champion + aa/ability, ideally color matched with scoreboard items. Rows are ability damage numbers/aa physical/magical/true damage
+  - [ ] add ability/aa to results button
   - [ ] some cool graphs
-  - [ ] choose damage for: passive, aa, abilities (grayed out with "coming in a future update" tooltip); columns
+  - [ ] show/hide in graph button
+  - [ ] damage target? All should be available to choose from, same as source. Figure out how to fit it
 - [ ] damage compare mode, no mirror mode = both sources and targets available, check which ones to use, check which ability to compare the damage of
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
-  - [x] hover tooltips, check styles with reference_images/rune hovers.mp4
+  - [x] hover tooltips
   - [x] rune paths not implemented alert
 - [ ] champ select dialog
 - [ ] item shop dialog

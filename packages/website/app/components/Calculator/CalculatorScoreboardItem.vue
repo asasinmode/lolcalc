@@ -136,21 +136,25 @@ interface IChampionRune {
 	description: string;
 	anyUnknown?: number;
 	icon: string;
+	iconDimensions: 256 | 80 | 64;
 }
+
+const runeIconImgSrc = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
 
 const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 	const { paths: { primary, primarySlots, secondary, secondarySlots }, shards } = props.value.runes.value;
 
-	return Array.from({ length: 4 }, (_, i) => primarySlots[i] && getRuneText(primarySlots[i], i, primary))
-		.concat(Array.from({ length: 2 }, (_, i) => secondary && secondarySlots[i] && getRuneText(secondarySlots[i], i, secondary)))
+	return Array.from({ length: 4 }, (_, i) => primarySlots[i] && getRuneText(primarySlots[i], i, primary, true))
+		.concat(Array.from({ length: 2 }, (_, i) => secondary && secondarySlots[i] && getRuneText(secondarySlots[i], i, secondary, false)))
 		.concat([{
 			name: 'Rune shards',
 			description: Object.values(shards).join(' '),
-			icon: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`,
+			icon: runeIconImgSrc,
+			iconDimensions: 80
 		}]);
 });
 
-function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePathName): IChampionRune {
+function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePathName, isPrimary: boolean): IChampionRune {
 	const rune = runes.paths[path].slots[slotNumber]![slotName]!;
 	const { name, tooltipStats } = text.runes.slots[slotName]!;
 
@@ -172,6 +176,7 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 		description: replaced,
 		anyUnknown: unknownSV.size || unknownV.length,
 		icon,
+		iconDimensions: slotNumber === 0 && isPrimary ? 256 : 64,
 	};
 }
 
@@ -583,7 +588,6 @@ const hoveredAbilityTooltipText = computed(() => {
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
-	// TODO collect all encountered variables and their possible values
 	const extendedVariableInfo: [string, number[]][] = [];
 
 	// TODO detect unknown cost/cooldown
@@ -851,7 +855,7 @@ defineExpose({ el });
 			</template>
 			<img
 				v-else
-				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`"
+				:src="runeIconImgSrc"
 				aria-hidden="true"
 				width="32"
 				height="32"
@@ -936,22 +940,22 @@ defineExpose({ el });
 			<h4 data-loading="">
 				loading...
 			</h4>
-			<section data-stats="" :inert="isLoading || undefined">
+			<section data-runes-stats="" :inert="isLoading || undefined">
 				<h4>runes and stats</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
 						<dt>
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
 							<img
-								v-if="championRune?.icon"
+								v-if="championRune"
 								:src="championRune.icon"
-								:width="runeIndex === 6 ? 80 : runeIndex ? 64 : 256"
-								:height="runeIndex === 6 ? 80 : runeIndex ? 64 : 256"
+								:width="championRune.iconDimensions || 80"
+								:height="championRune.iconDimensions || 80"
 								loading="lazy"
 							>
 						</dt>
 						<dd>
-							{{ runeIndex === 6 ? 'TODO' : 0 }}
+							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>
 				</dl>
@@ -1442,7 +1446,6 @@ defineExpose({ el });
 
 		> details {
 			--at-apply: 'relative';
-			anchor-scope: --scoreboard-item-champion-stats-minor;
 			grid-area: expanded;
 
 			&::details-content {
@@ -1463,7 +1466,7 @@ defineExpose({ el });
 				--at-apply: 'list-none invisible pointer-events-none';
 			}
 
-			[data-stats],
+			[data-runes-stats],
 			[data-abilities],
 			[data-health-ability-resource] {
 				> h4 {
@@ -1490,20 +1493,91 @@ defineExpose({ el });
 				--at-apply: 'b-b-0 pb-0 mb-0';
 			}
 
-			[data-stats] {
-				--at-apply: 'row-span-3';
+			[data-runes-stats] {
+				--at-apply: 'row-span-3 grid grid-cols-2 grid-rows-2';
+
+				anchor-name: --scoreboard-item-runes-stats;
 
 				> dl {
-					--at-apply: 'grid grid-rows-4 items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
-
-					&:first-of-type {
-						anchor-name: --scoreboard-item-champion-stats-minor;
-					}
+					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
 
 					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
 
+					&:nth-of-type(1) {
+						--at-apply: 'row-span-2 b-e-0 self-end';
+
+						> dt:nth-of-type(1) {
+							grid-column: 1;
+							grid-row: 1;
+						}
+						> dd:nth-of-type(1) {
+							grid-column: 2;
+							grid-row: 1;
+						}
+
+						> dt:nth-of-type(2) {
+							grid-column: 1;
+							grid-row: 2;
+						}
+						> dd:nth-of-type(2) {
+							grid-column: 2;
+							grid-row: 2;
+						}
+
+						> dt:nth-of-type(3) {
+							grid-column: 1;
+							grid-row: 3;
+						}
+						> dd:nth-of-type(3) {
+							grid-column: 2;
+							grid-row: 3;
+						}
+
+						> dt:nth-of-type(4) {
+							grid-column: 1;
+							grid-row: 4;
+						}
+						> dd:nth-of-type(4) {
+							grid-column: 2;
+							grid-row: 4;
+						}
+
+						> dt:nth-of-type(5) {
+							grid-column: 3;
+							grid-row: 1;
+						}
+						> dd:nth-of-type(5) {
+							grid-column: 4;
+							grid-row: 1;
+						}
+
+						> dt:nth-of-type(6) {
+							grid-column: 3;
+							grid-row: 2;
+						}
+						> dd:nth-of-type(6) {
+							grid-column: 4;
+							grid-row: 2;
+						}
+
+						> dt:nth-of-type(7) {
+							grid-column: 3;
+							grid-row: 3;
+						}
+						> dd:nth-of-type(7) {
+							grid-column: 4;
+							grid-row: 3;
+						}
+
+						> dt:has(> span:last-child) {
+							&::before {
+								--at-apply: 'content-empty block size-4.5 rounded-full bg-black';
+							}
+							}
+					}
+
 					&:nth-of-type(2) {
-						--at-apply: 'b-t-0';
+						--at-apply: 'b-b-0';
 					}
 
 					> dt {
@@ -1524,7 +1598,7 @@ defineExpose({ el });
 				}
 
 				.hover-tooltip.champion-stat {
-					position-anchor: --scoreboard-item-champion-stats-minor;
+					position-anchor: --scoreboard-item-runes-stats;
 					bottom: calc(anchor(top) - 1px);
 					justify-self: anchor-center;
 
