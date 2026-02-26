@@ -43,8 +43,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [ ] aphelios
-    - [ ] abilities ui (not implemented, coming soon)
-    - [ ] runes (only shards implemented)
+    - [ ] abilities ui (only passive implemented)
+    - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest
   - [ ] mirror layout
@@ -79,9 +79,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] item passives
   - [ ] champion passives (level breakpoints)
+  - [ ] stats from rune shards
   - [ ] dragons/souls
   - [ ] implement role quests
-  - [ ] try always lowercase only match variables
+  - [ ] check if can always lowercase match variables
 - [ ] mobile version and make look better
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles

@@ -250,7 +250,7 @@ defineExpose({
 				</button>
 			</form>
 		</header>
-		<ComingSoonCover v-if="!enableUnimplementedUi" style="grid-area: primary" feature="Primary path" />
+		<ComingSoonCover style="grid-area: primary" feature="Primary path" />
 		<section id="rune-select-primary" :style="primaryRunePathStyle" :inert="!enableUnimplementedUi">
 			<h2 class="sr-only">
 				Primary
@@ -303,7 +303,7 @@ defineExpose({
 				</template>
 			</VButtonRadiogroup>
 		</section>
-		<ComingSoonCover v-if="!enableUnimplementedUi" style="grid-area: secondary" feature="Secondary path" />
+		<ComingSoonCover style="grid-area: secondary" feature="Secondary path" />
 		<section id="rune-select-secondary" :style="secondaryRunePathStyle" :data-slots-filled="value?.paths.secondarySlots.length" :inert="!enableUnimplementedUi">
 			<h2 class="sr-only">
 				Secondary

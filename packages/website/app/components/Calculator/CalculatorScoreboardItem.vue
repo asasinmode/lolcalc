@@ -24,6 +24,7 @@ const emit = defineEmits<{
 	itemDragstart: [ event: DragEvent, itemIndex: number];
 }>();
 
+const enableUnimplementedUi = useEnableUnimplementedUi();
 const runes = useRunes();
 const ui = useUi();
 const misc = useMisc();
@@ -975,7 +976,11 @@ defineExpose({ el });
 				<h4>runes and stats</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
-						<dt @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
+						<dt
+							:inert="!enableUnimplementedUi && runeIndex !== 6"
+							@mouseenter="championRune && showRuneTooltip($event, championRune)"
+							@mouseleave="hideRuneTooltip"
+						>
 							<span>{{ championRune?.name || `${runeIndex < 4 ? 'primary' : 'secondary'} rune slot ${runeIndex + 1}` }}</span>
 							<img
 								v-if="championRune"
@@ -985,10 +990,15 @@ defineExpose({ el });
 								loading="lazy"
 							>
 						</dt>
-						<dd @mouseenter="championRune && showRuneTooltip($event, championRune)" @mouseleave="hideRuneTooltip">
+						<dd
+							:inert="!enableUnimplementedUi && runeIndex !== 6"
+							@mouseenter="championRune && showRuneTooltip($event, championRune)"
+							@mouseleave="hideRuneTooltip"
+						>
 							{{ runeIndex === 6 ? '' : championRune ? 0 : '-' }}
 						</dd>
 					</template>
+					<ComingSoonCover feature="major runes" class="text-xs px-1 end-1/2 start-0 inset-y-0 absolute" />
 				</dl>
 				<div ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="hint">
 					<h5>{{ hoveredRune?.name }}</h5>
@@ -1540,7 +1550,11 @@ defineExpose({ el });
 					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
 
 					&:nth-of-type(1) {
-						--at-apply: 'row-span-2 b-e-0 self-end';
+						--at-apply: 'row-span-2 b-e-0 self-end relative';
+
+						&:has(> .coming-soon-cover)::before {
+							--at-apply: 'content-empty absolute end-0 start-1/2 top-0 bottom-1/2 bg-neutral-950/30';
+						}
 
 						> dt:nth-of-type(1) {
 							grid-column: 1;
