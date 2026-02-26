@@ -1,16 +1,16 @@
 import type { IChampion, IChampionAbility, IChampionAbilityVariant } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
-import type { IChampionSpecificsAsAbilityDynamicValuesMap } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
-import type { ITexture } from '../app/utils/types';
+import type { ITexture, IWithPossibleDynamicValues } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion';
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
-
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable';
+
+import { RUNE_SPECIFICS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -458,7 +458,9 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 						effectAmount: cleanupObject(mScript.mSpellScriptData.mEffectAmount),
 					} as any;
 
-					(textData.data.runes.shards.slotValues as any)[mPerkName.toLowerCase()] = {
+					const perkName: string = mPerkName.toLowerCase();
+
+					(textData.data.runes.shards.slotValues as any)[perkName] = {
 						name: getStringtableValue(mDisplayNameLocalizationKey, `rune shards ${slotKey} ${perkKey} name`),
 						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `rune shards ${slotKey} ${perkKey} tooltip`, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
 						tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, {
@@ -466,18 +468,12 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
 							variableType: 'rune',
 							/* same thing as for champion variants with `app/utils/champion.ts` POSSIBLE_DYNAMIC_VALUES except only 2 shards seem to have it so just this */
-							variableValueParameters: [perkKey === 'Perks/StatMods/Adaptive'
+							variableValueParameters: [(RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName]?.POSSIBLE_DYNAMIC_VALUES
 								? {
 										...slotValue,
-										dynamicValues: { f1: [0, 1] },
+										dynamicValues: (RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName].POSSIBLE_DYNAMIC_VALUES,
 									}
-								: perkKey === 'Perks/StatMods/HealthScaling'
-									? {
-											...slotValue,
-											/* in reality goes from 10-200 in 10-increments but it's not used in stringtable so just 2 values */
-											dynamicValues: { f1: [10, 200] },
-										}
-									: slotValue],
+								: slotValue],
 							variableSourceKeys: ['effectAmount'],
 						}),
 					};
@@ -1203,7 +1199,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 					...variant,
 					dynamicValues: {
 						...variant.dataValues,
-						...(CHAMPION_SPECIFICS as unknown as IChampionSpecificsAsAbilityDynamicValuesMap)[champion.id]?.POSSIBLE_DYNAMIC_VALUES,
+						...(CHAMPION_SPECIFICS as IWithPossibleDynamicValues)[champion.id]?.POSSIBLE_DYNAMIC_VALUES,
 					},
 				}, undefined, allVariants],
 				variableSourceKeys: ['effectAmount'],

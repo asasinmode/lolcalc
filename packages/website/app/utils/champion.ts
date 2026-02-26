@@ -24,10 +24,3 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 };
-
-/**
- * champions can have dynamic variables, like veigar stacks or current aphelios gun rotation.
- * possible values for these can be specified in `CHAMPION_SPECIFICS` under proper key, these are then used for saving needed stringtable variables when getting game data
- * there might be a better way of doing this
- */
-export type IChampionSpecificsAsAbilityDynamicValuesMap = Record<string, { POSSIBLE_DYNAMIC_VALUES?: Record<string, string> }>;
