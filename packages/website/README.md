@@ -74,6 +74,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] sharing, saving/reading data in query
 - [ ] calculations [check out](https://github.com/OsOmE1/leaguebuilder)
   - [ ] resolve game variables
+  - [ ] DamageSource.dedicatedData: any that's set and maintained based on stuff in utils/champion.ts
+  - [ ] maybe dynamic variables can be cached on damage source under a key then reused
+  - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] item passives
   - [ ] champion passives (level breakpoints)
   - [ ] dragons/souls

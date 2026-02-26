@@ -7,7 +7,6 @@ const aph1to5 = [1, 2, 3, 4, 5];
 export const CHAMPION_SPECIFICS = {
 	Aphelios: {
 		WEAPON_ORDER: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'],
-		// TODO maybe should be renamed to smth like POSSIBLE_STRINGTABLE_DYNAMIC_VARIABLE_VALUES
 		POSSIBLE_DYNAMIC_VALUES: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
 			f1: aph1to5,
@@ -15,7 +14,7 @@ export const CHAMPION_SPECIFICS = {
 			f3: [],
 			f4: [],
 			f5: [],
-			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)),
+			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
 		},
 	},
 	Kayn: {

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { IWithCalculateDynamicValues } from '~/utils/types';
+
 const props = defineProps<{
 	index: number;
 	value: DamageSource;
@@ -161,15 +163,21 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 	const shardDescriptions = Object.entries(shards as any).map(([shardSlot, shardName]) => {
 		const rune = (runes.shards[shardSlot as IRuneShardSlotName] as any)[shardName as string];
 
+		const dynamicValues = (RUNE_SPECIFICS.shards as IWithCalculateDynamicValues)[shardName as string]?.calculateDynamicVariables?.(props.value);
+
 		const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceGameDescriptionStringtableVariables(
 			text.runes.shards.slotValues[shardName as string]!.tooltipStats,
 			text.stringtable,
+			dynamicValues,
 		);
 
 		const { replaced: replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
 			stringtableVariableReplaced,
 			'rune',
-			[rune],
+			[{
+				...rune,
+				dynamicValues,
+			}],
 		);
 
 		shardAnyUnknown ||= unknownSV.size || unknownV.length;
