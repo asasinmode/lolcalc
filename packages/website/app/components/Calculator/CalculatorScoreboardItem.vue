@@ -149,7 +149,7 @@ function hideRuneTooltip() {
 interface IChampionRune {
 	name: string;
 	description: string;
-	anyUnknown?: number;
+	anyUnknownVariables?: number;
 	icon: string;
 	iconDimensions: 256 | 80 | 64;
 }
@@ -157,11 +157,32 @@ interface IChampionRune {
 const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 	const { paths: { primary, primarySlots, secondary, secondarySlots }, shards } = props.value.runes.value;
 
+	let shardAnyUnknown = 0;
+	const shardDescriptions = Object.entries(shards as any).map(([shardSlot, shardName]) => {
+		const rune = (runes.shards[shardSlot as IRuneShardSlotName] as any)[shardName as string];
+
+		const { replaced: stringtableVariableReplaced, unknownStringtableVariables: unknownSV } = replaceGameDescriptionStringtableVariables(
+			text.runes.shards.slotValues[shardName as string]!.tooltipStats,
+			text.stringtable,
+		);
+
+		const { replaced: replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
+			stringtableVariableReplaced,
+			'rune',
+			[rune],
+		);
+
+		shardAnyUnknown ||= unknownSV.size || unknownV.length;
+
+		return replaced;
+	});
+
 	return Array.from({ length: 4 }, (_, i) => primarySlots[i] && getRuneText(primarySlots[i], i, primary, true))
 		.concat(Array.from({ length: 2 }, (_, i) => secondary && secondarySlots[i] && getRuneText(secondarySlots[i], i, secondary, false)))
 		.concat([{
 			name: 'Rune shards',
-			description: Object.values(shards).join(' '),
+			description: shardDescriptions.join('<br>'),
+			anyUnknownVariables: shardAnyUnknown,
 			icon: runeIconImgSrc,
 			iconDimensions: 80,
 		}]);
@@ -187,7 +208,7 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 	return {
 		name,
 		description: replaced,
-		anyUnknown: unknownSV.size || unknownV.length,
+		anyUnknownVariables: unknownSV.size || unknownV.length,
 		icon,
 		iconDimensions: slotNumber === 0 && isPrimary ? 256 : 64,
 	};
@@ -964,6 +985,7 @@ defineExpose({ el });
 				<div ref="championRuneTooltip" class="hover-tooltip champion-rune" popover="hint">
 					<h5>{{ hoveredRune?.name }}</h5>
 					<p class="game-description" v-html="hoveredRune?.description" />
+					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</div>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"

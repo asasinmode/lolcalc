@@ -30,6 +30,8 @@ export interface ITextData {
 				name: string;
 				/** champ select rune dialog hover */
 				tooltip: string;
+				/** the tooltip displayed when hovering over in game stats panel */
+				tooltipStats: string;
 			}>;
 		};
 	};
