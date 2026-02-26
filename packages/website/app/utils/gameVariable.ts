@@ -6,6 +6,10 @@ export interface IItemVariableCalculationTarget {
 	stats?: IChampionStats;
 }
 
+type IWithDynamic<T> = T & {
+	dynamicValues?: number | number[];
+};
+
 interface IVariableValueResult {
 	/** if not found, `undefined`. Otherwise a `number` if value is the same regardless of range or `[number, number]` for melee and ranged champions respectively */
 	value?: string | number | [number | undefined, number | undefined];
@@ -53,17 +57,22 @@ export function itemVariableValue(variable: string, item: IItem, target?: IItemV
 	return { value, isMeleeRanged };
 }
 
-export function runeVariableValue(variable: string, rune: IRune): IVariableValueResult {
+export function runeVariableValue(variable: string, rune: IWithDynamic<IRune>): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let actualVariableName: IVariableValueResult['actualVariableName'];
 
 	const [variableName, ...dotPath] = variable.split('.');
-	const sources = ['calculations' in rune && rune.calculations, 'effectAmount' in rune && rune.effectAmount];
 
 	if (dotPath.length) {
 		actualVariableName = variableName;
 	}
 
+	/* expected to be an array only in `updateGameData` for debug logs */
+	if (Array.isArray((rune as any).dynamicValues?.[variableName!])) {
+		return { value: '__DYNAMIC VALUE__', actualVariableName };
+	}
+
+	const sources = [(rune as any).calculations, (rune as any).effectAmount, (rune as any).dynamicValues];
 	for (const source of sources) {
 		if (!source) {
 			continue;
