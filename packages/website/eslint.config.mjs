@@ -20,6 +20,6 @@ export default withNuxt(
 			'style/lines-between-class-members': 'off',
 		},
 		formatters: true,
-		ignores: ['app/assets/*.json'],
+		ignores: ['app/assets/*.json', 'public/data/**/*.json'],
 	}, unocss, oxlint.configs['flat/recommended']),
 );

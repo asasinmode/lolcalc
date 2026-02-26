@@ -131,22 +131,6 @@ function startItemDrag(event: DragEvent, index: number) {
 	emit('itemDragstart', event, index);
 }
 
-interface IChampionStat {
-	name: string;
-	iconTextureKey: keyof (typeof ui)['playerStats'];
-	description: string;
-	values: {
-		name: string;
-		decimal?: number;
-		isPercentage?: boolean;
-		base?: number | string;
-		bonus: number | string;
-		total: number | string;
-	}[];
-	displayedValue: string;
-	bottomText?: string;
-}
-
 interface IChampionRune {
 	name: string;
 	description: string;
@@ -189,6 +173,22 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 		anyUnknown: unknownSV.size || unknownV.length,
 		icon,
 	};
+}
+
+interface IChampionStat {
+	name: string;
+	iconTextureKey: keyof (typeof ui)['playerStats'];
+	description: string;
+	values: {
+		name: string;
+		decimal?: number;
+		isPercentage?: boolean;
+		base?: number | string;
+		bonus: number | string;
+		total: number | string;
+	}[];
+	displayedValue: string;
+	bottomText?: string;
 }
 
 const minorStats = computed<IChampionStat[]>(() => {
