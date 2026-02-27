@@ -103,14 +103,12 @@ if (!championData || championData?.version !== latestVersion) {
 						partype,
 						stats,
 						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
-							const [{ maxLevel, variants }, abilityStringtable] = championAbilityData(
+							const { maxLevel, variants } = championAbilityData(
 								[abilityName, index],
 								championId,
 								additionalData,
 								characterRootKey,
 							);
-
-							Object.assign(championFileDataStringtable, abilityStringtable);
 
 							return [abilityName, {
 								maxLevel,
@@ -974,7 +972,7 @@ function championAbilityData(
 	championId: string,
 	championData: any,
 	characterRootKey: string,
-): [IChampionAbility, stringtable: IChampion['stringtable']] {
+): IChampionAbility {
 	const { mCharacterPassiveSpell, spells, spellLevelUpInfo, characterToolData } = championData[characterRootKey];
 	const abilityDataKey = abilityInfo[1] === 4 ? mCharacterPassiveSpell : spells[abilityInfo[1]];
 
@@ -994,7 +992,7 @@ function championAbilityData(
 		}
 	}
 
-	let [maxLevel, variants, stringtable] = championAbilityVariants(championId, championData, abilityInfo, variantKeys);
+	let [maxLevel, variants] = championAbilityVariants(championId, championData, abilityInfo, variantKeys);
 
 	if ((championId === 'Jayce' && abilityInfo[1] === 3)
 		|| (championId === 'Aphelios' && abilityInfo[1] < 3)) {
@@ -1006,19 +1004,17 @@ function championAbilityData(
 		maxLevel = 0;
 	}
 
-	return [{ maxLevel, variants }, stringtable];
+	return { maxLevel, variants };
 }
 
-function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']): IChampion['stringtable'] {
+function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {
 	const { mAbilities } = championData[characterRootKey];
-
 	const handledAbilities = Object.values(abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey));
 
 	abilities.w.variants = [];
 	abilities.e.variants = [];
 
 	const qVariantKeys = [];
-	let qVariantsStringtable;
 
 	for (const abilityKey of mAbilities) {
 		const abilityData = championData[abilityKey];
@@ -1077,9 +1073,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 		qVariantKeys.push(abilityData.mRootSpell);
 	}
 
-	([, abilities.q.variants, qVariantsStringtable] = championAbilityVariants('Aphelios', championData, ['q', 0], qVariantKeys));
-
-	return qVariantsStringtable;
+	([, abilities.q.variants] = championAbilityVariants('Aphelios', championData, ['q', 0], qVariantKeys));
 }
 
 function championAbilityVariants(
@@ -1087,9 +1081,8 @@ function championAbilityVariants(
 	championData: any,
 	[abilityName]: [string, number],
 	variantKeys: string[],
-): [number | undefined, IChampionAbility['variants'], stringtable: IChampion['stringtable']] {
+): [number | undefined, IChampionAbility['variants']] {
 	let maxLevel: number | undefined;
-	const stringtableObject = { stringtable: {} };
 	const variants: IChampionAbility['variants'] = [];
 
 	for (let i = 0; i < variantKeys.length; i++) {
@@ -1171,7 +1164,7 @@ function championAbilityVariants(
 		return indexA - indexB;
 	});
 
-	return [maxLevel, variants, stringtableObject.stringtable];
+	return [maxLevel, variants];
 }
 
 /**
