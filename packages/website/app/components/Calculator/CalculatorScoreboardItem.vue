@@ -172,7 +172,7 @@ const championRunes = computed<(IChampionRune | undefined)[]>(() => {
 			dynamicValues,
 		);
 
-		const { replaced: replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
+		const { replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
 			stringtableVariableReplaced,
 			'rune',
 			[{
@@ -208,7 +208,7 @@ function getRuneText(slotName: IRuneSlotName, slotNumber: number, path: IRunePat
 		text.stringtable,
 	);
 
-	const { replaced: replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
+	const { replaced, unknownVariables: unknownV } = replaceGameDescriptionVariables(
 		stringtableVariableReplaced,
 		'rune',
 		[rune],

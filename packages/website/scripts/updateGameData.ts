@@ -1305,11 +1305,11 @@ function isEmptyObject(obj: unknown): boolean {
 	}
 
 	if (Array.isArray(obj)) {
-		return obj.length === 0 || obj.every(v => isEmptyObject(v));
+		return obj.every(v => isEmptyObject(v));
 	}
 
 	const values = Object.values(obj as Record<string, unknown>);
-	return values.length === 0 || (values.length === 1 && '__type' in obj) || values.every(v => isEmptyObject(v));
+	return (values.length === 1 && '__type' in obj) || values.every(v => isEmptyObject(v));
 }
 
 async function fetchCached(url: string, filename: string, responseMethod: 'text' | 'json' | 'arrayBuffer' = 'json') {

@@ -5,6 +5,7 @@
 .nitro
 .cache
 dist
+*.tsbuildinfo
 
 # Node dependencies
 node_modules
@@ -24,4 +25,5 @@ logs
 !.env.example
 
 .eslintcache
+
 reference_images
