@@ -663,10 +663,10 @@ function abilityText(value: string, variant: IChampionAbilityVariant, stringtabl
 	return { replaced, unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
 }
 
-function showAbilityTooltip(event: MouseEvent, ability: keyof IChampion['abilities']) {
+function showAbilityTooltip(event: MouseEvent, ability: keyof IChampion['abilities'], variant = 0) {
 	if (props.value.champion.value) {
 		hoveredAbility.value = ability;
-		hoveredAbilityVariant.value = props.value.champion.value.abilities[ability].variants[0];
+		hoveredAbilityVariant.value = props.value.champion.value.abilities[ability].variants[variant];
 		event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
 		abilityHoverTooltipEl.value?.showPopover();
 	}

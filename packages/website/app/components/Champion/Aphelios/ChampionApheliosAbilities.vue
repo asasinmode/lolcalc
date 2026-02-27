@@ -9,7 +9,7 @@ defineProps<{
 }>();
 
 defineEmits<{
-	abilityHover: [event: MouseEvent, ability: keyof IChampion['abilities']];
+	abilityHover: [event: MouseEvent, ability: keyof IChampion['abilities'], variant?: number];
 }>();
 
 const { minorVersion } = usePatchVersion();
@@ -34,7 +34,7 @@ const { minorVersion } = usePatchVersion();
 			width="64"
 			height="64"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'q')"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e')"
 		>
 		<img
 			v-show="!isLoading"
@@ -42,7 +42,7 @@ const { minorVersion } = usePatchVersion();
 			width="64"
 			height="64"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e')"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'q')"
 		>
 	</div>
 	<div data-aphelios-w="">
@@ -52,7 +52,7 @@ const { minorVersion } = usePatchVersion();
 			width="64"
 			height="64"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e')"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.w)"
 		>
 		<img
 			v-show="!isLoading"
@@ -60,7 +60,7 @@ const { minorVersion } = usePatchVersion();
 			width="64"
 			height="64"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e')"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.e)"
 		>
 	</div>
 	<div data-aphelios-r="">
