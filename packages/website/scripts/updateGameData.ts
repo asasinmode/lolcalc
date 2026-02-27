@@ -2,7 +2,7 @@ import type { IChampion, IChampionAbility, IChampionAbilityVariant } from '../ap
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
-import type { ITexture, IWithPossibleDynamicValues } from '../app/utils/types';
+import type { IPossibleDynamicValues, ITexture, IWithPossibleDynamicValues } from '../app/utils/types';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps';
@@ -465,13 +465,14 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 							category: 'rune',
 							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
 							variableType: 'rune',
-							/* same thing as for champion variants with `app/utils/champion.ts` POSSIBLE_DYNAMIC_VALUES except only 2 shards seem to have it so just this */
-							variableValueParameters: [(RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName]?.POSSIBLE_DYNAMIC_VALUES
-								? {
-										...slotValue,
-										dynamicValues: (RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName].POSSIBLE_DYNAMIC_VALUES,
-									}
-								: slotValue],
+							variableValueParameters: [
+								(RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName]?.POSSIBLE_DYNAMIC_VALUES
+									? {
+											...slotValue,
+											dynamicValues: possibleDynamicValues((RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName].POSSIBLE_DYNAMIC_VALUES),
+										}
+									: slotValue,
+							],
 							variableSourceKeys: ['effectAmount'],
 						}),
 					};
@@ -966,6 +967,10 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 	return value;
 }
 
+function possibleDynamicValues(value?: IPossibleDynamicValues, abilityKey?: Exclude<keyof IPossibleDynamicValues, 'all'>) {
+	return value && (abilityKey ? { ...value.all, ...value[abilityKey] } : value.all);
+}
+
 function championAbilityData(
 	/** abilityName - q-w-e-r-passive, abilityIndex 0-1-2-3-4 corresponding to abilityName */
 	abilityInfo: [string, number],
@@ -1219,7 +1224,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 					...variant,
 					dynamicValues: {
 						...variant.dataValues,
-						...(CHAMPION_SPECIFICS as IWithPossibleDynamicValues)[champion.id]?.POSSIBLE_DYNAMIC_VALUES,
+						...possibleDynamicValues((CHAMPION_SPECIFICS as IWithPossibleDynamicValues)[champion.id]?.POSSIBLE_DYNAMIC_VALUES, abilityName),
 					},
 				}, undefined, allVariants],
 				variableSourceKeys: ['effectAmount'],

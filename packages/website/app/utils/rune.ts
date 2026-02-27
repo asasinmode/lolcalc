@@ -1,9 +1,10 @@
+import type { IPossibleDynamicValues } from './types';
 import { data } from '../assets/rune.json';
 
 export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {
-			POSSIBLE_DYNAMIC_VALUES: { f1: [0, 1] },
+			POSSIBLE_DYNAMIC_VALUES: { all: { f1: [0, 1] } } satisfies IPossibleDynamicValues,
 			calculateDynamicVariables(damageSource: DamageSource) {
 				const { adaptiveForceStatVariable } = damageSource.stats.value;
 
@@ -15,7 +16,7 @@ export const RUNE_SPECIFICS = {
 		},
 		healthscaling: {
 			/* in reality `f1` goes from 10-200 by 10-increments but it's not used in stringtable so just this */
-			POSSIBLE_DYNAMIC_VALUES: { f1: [10, 200] },
+			POSSIBLE_DYNAMIC_VALUES: { all: { f1: [10, 200] } } satisfies IPossibleDynamicValues,
 			calculateDynamicVariables(damageSource: DamageSource) {
 				return {
 					f1: 10 + (180 - 10) / 17 * (damageSource.level.value - 1),
