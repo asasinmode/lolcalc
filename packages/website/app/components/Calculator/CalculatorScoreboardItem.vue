@@ -1099,9 +1099,7 @@ defineExpose({ el });
 						height="64"
 						aria-hidden="true"
 					>
-					<h5>
-						{{ hoveredAbility && hoveredAbility !== 'passive' ? `[${hoveredAbility.toUpperCase()}] ` : '' }}{{ hoveredAbilityTooltipText?.name }}
-					</h5>
+					<h5 v-html="`${hoveredAbility && hoveredAbility !== 'passive' ? `[${hoveredAbility.toUpperCase()}] ` : ''} ${hoveredAbilityTooltipText?.name}`" />
 					<span>
 						<template v-if="hoveredAbility !== 'passive'">
 							<template v-if="hoveredAbilityTooltipText?.cooldown">

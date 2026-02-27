@@ -1043,27 +1043,27 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 				throw new Error(`Aphelios Q variants expected Aphelios E with weapon swap icons in ${abilityData.mRootSpell}`);
 			}
 
-			const variants: { objectName: string; imageActive: string; imageInactive: string }[] = [];
+			const variants: { objectName: string; image: string; imageAlt: string }[] = [];
 			for (const img of Array.from(new Set(variantData.mSpell.mImgIconName)) as string[]) {
 				const image = img.toLowerCase().replace('.dds', '.png');
-				const key: 'imageActive' | 'imageInactive' = image.at(-5) === 'l' ? 'imageActive' : 'imageInactive';
-				const existingVariantIndex = variants.findIndex(variant => variant.imageActive.slice(0, -6) === image.slice(0, -6));
+				const key = image.at(-5) === 'l' ? 'image' : 'imageAlt';
+				const existingVariantIndex = variants.findIndex(variant => variant.image.slice(0, -6) === image.slice(0, -6));
 				if (~existingVariantIndex) {
 					variants[existingVariantIndex][key] = image;
 				} else {
 					variants.push({
 						objectName: variantData.ObjectName,
 						[key]: image,
-					} as any);
+					} as typeof variants[number]);
 				}
 			}
 
 			variants.sort((a, b) => {
-				const weaponA = a.imageActive.slice(a.imageActive.lastIndexOf('/') + 1, -6);
-				const weaponB = b.imageActive.slice(b.imageActive.lastIndexOf('/') + 1, -6);
+				const weaponA = a.image.slice(a.image.lastIndexOf('/') + 1, -6);
+				const weaponB = b.image.slice(b.image.lastIndexOf('/') + 1, -6);
 
-				const indexA = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP[weaponA] ?? Infinity;
-				const indexB = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP[weaponB] ?? Infinity;
+				const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponA] ?? Infinity;
+				const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponB] ?? Infinity;
 
 				return indexA - indexB;
 			});
@@ -1165,8 +1165,8 @@ function championAbilityVariants(
 		const weaponA = a.image.slice(a.image.lastIndexOf('/') + 3, -4);
 		const weaponB = b.image.slice(b.image.lastIndexOf('/') + 3, -4);
 
-		const indexA = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP[weaponA] ?? Infinity;
-		const indexB = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP[weaponB] ?? Infinity;
+		const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponA] ?? Infinity;
+		const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponB] ?? Infinity;
 
 		return indexA - indexB;
 	});
