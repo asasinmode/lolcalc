@@ -1019,7 +1019,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 	for (const abilityKey of mAbilities) {
 		const abilityData = championData[abilityKey];
 		if (!abilityData) {
-			console.warn(`Aphelios Q variants data not found for ${abilityKey}`);
+			console.warn(`[adjustApheliosAbilityData] ability data not found for ${abilityKey} from ${characterRootKey} mAbilities`);
 			continue;
 		}
 
@@ -1030,16 +1030,22 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 		const variantData = championData[abilityData.mRootSpell];
 
 		if (!variantData?.mSpell) {
-			console.warn(`Aphelios Q variants data not found or no mSpell in ${abilityData.mRootSpell}`);
+			console.warn(`[adjustApheliosAbilityData] data not found or no mSpell in ${abilityData.mRootSpell}`);
 			continue;
 		}
 
 		if (variantData.ObjectName === 'ApheliosE') {
 			if (!variantData.mSpell?.mImgIconName) {
-				throw new Error(`Aphelios Q variants expected Aphelios E with weapon swap icons in ${abilityData.mRootSpell}`);
+				throw new Error(`[adjustApheliosAbilityData] expected Aphelios E with weapon swap icons in ${abilityData.mRootSpell}`);
 			}
 
-			const variants: { objectName: string; image: string; imageAlt: string }[] = [];
+			const mLocKeys = variantData.mSpell.mClientData?.mTooltipData?.mLocKeys;
+
+			if (!mLocKeys) {
+				throw new Error(`[adjustApheliosAbilityData] expected Aphelios E tooltip data in ${abilityData.mRootSpell}`);
+			}
+
+			const variants: (IChampionAbilityVariant & { imageAlt: string })[] = [];
 			for (const img of Array.from(new Set(variantData.mSpell.mImgIconName)) as string[]) {
 				const image = img.toLowerCase().replace('.dds', '.png');
 				const key = image.at(-5) === 'l' ? 'image' : 'imageAlt';
@@ -1048,8 +1054,14 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 					variants[existingVariantIndex][key] = image;
 				} else {
 					variants.push({
+						name: undefined,
 						objectName: variantData.ObjectName,
+						image: '',
+						imageAlt: '',
 						[key]: image,
+						tooltip: undefined,
+						tooltipExtended: undefined,
+						tooltipExtendedBelowLine: undefined,
 					} as typeof variants[number]);
 				}
 			}
@@ -1063,6 +1075,13 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 
 				return indexA - indexB;
 			});
+
+			for (const variant of variants) {
+				variant.name = mLocKeys.keyName;
+				variant.tooltip = mLocKeys.keyTooltip;
+				variant.tooltipExtended = mLocKeys.keyTooltipExtended;
+				variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
+			}
 
 			abilities.e.variants = variants as unknown as IChampionAbility['variants'];
 			(abilities.e as any).dataKey = abilityData.mRootSpell;
@@ -1130,6 +1149,7 @@ function championAbilityVariants(
 			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
 			tooltip: undefined,
 			tooltipExtended: undefined,
+			tooltipExtendedBelowLine: undefined,
 			mana,
 			cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 			dataValues: DataValues?.length
@@ -1181,7 +1201,7 @@ function championAbilityVariants(
 function setChampionAbilityVariantsText(champion: IChampion) {
 	let filteredAbilitiesWithVariants = Object.entries(champion.abilities);
 	if (champion.id === 'Aphelios') {
-		filteredAbilitiesWithVariants = filteredAbilitiesWithVariants.filter(([abilityName]) => abilityName !== 'w' && abilityName !== 'e');
+		filteredAbilitiesWithVariants = filteredAbilitiesWithVariants.filter(([abilityName]) => abilityName !== 'w');
 	}
 
 	const abilitiesWithVariants = filteredAbilitiesWithVariants.map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [keyof IChampion['abilities'], IChampionAbility['variants']][];

@@ -9,6 +9,7 @@ type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'cresc
 export const CHAMPION_SPECIFICS = {
 	Aphelios: {
 		WEAPON_ORDER_MAP: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>,
+		/* stringtable variants are different from order. `apheliosgun_name_1` is for calibrum and so on */
 		WEAPON_VARIANT_MAP: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
 		POSSIBLE_DYNAMIC_VALUES: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
