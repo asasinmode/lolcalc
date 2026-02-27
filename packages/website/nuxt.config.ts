@@ -44,7 +44,8 @@ export default defineNuxtConfig({
 	typescript: {
 		tsConfig: {
 			include: [
-				'../test/**/*',
+				'../test/**/*.ts',
+				'../scripts/**/*.ts',
 			],
 			compilerOptions: {
 				types: ['@types/bun'],

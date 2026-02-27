@@ -14,7 +14,7 @@ import { RUNE_SPECIFICS } from '../app/utils/rune';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
-const [latestVersion] = versions;
+const [latestVersion] = versions as [string];
 const minorVersion = latestVersion.slice(0, latestVersion.lastIndexOf('.'));
 
 console.log('latest version', latestVersion);
@@ -370,7 +370,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		item.categories = (itemMoreData.mItemAttributes as number[])
 			.reduce((acc, categoryNumber) => ({
 				...acc,
-				[CATEGORY_NUMBER_TO_NAME[categoryNumber]]: true,
+				[CATEGORY_NUMBER_TO_NAME[categoryNumber]!]: true,
 			}), {} as Partial<Record<IItemCategory, boolean>>);
 	}
 
@@ -469,7 +469,7 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 								(RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName]?.POSSIBLE_DYNAMIC_VALUES
 									? {
 											...slotValue,
-											dynamicValues: possibleDynamicValues((RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName].POSSIBLE_DYNAMIC_VALUES),
+											dynamicValues: possibleDynamicValues((RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName]!.POSSIBLE_DYNAMIC_VALUES),
 										}
 									: slotValue,
 							],
@@ -580,6 +580,10 @@ if (!miscData || miscData?.version !== latestVersion) {
 			variableValueParameters: [soulAbility, undefined, allSpells],
 		});
 
+		if (!stack) {
+			throw new Error(`[misc dragons] stack ${name} string not found`);
+		}
+
 		const stackTitleEndIndex = stack.indexOf('</titleLeft>');
 		if (~stackTitleEndIndex) {
 			stack = stack.slice(stackTitleEndIndex + 12);
@@ -590,7 +594,7 @@ if (!miscData || miscData?.version !== latestVersion) {
 	})) as unknown as NonNullable<(typeof textData)>['data']['dragons'];
 
 	textData.data.roleQuests = Object.fromEntries(['top', 'jungle', 'mid', 'bot', 'support'].map(role =>
-		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`).split('<br>')],
+		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`)?.split('<br>')],
 	)) as NonNullable<(typeof textData)>['data']['roleQuests'];
 
 	await miscFile.write(stringifyObject(miscData));
@@ -772,6 +776,9 @@ for (const category in debug) {
 
 function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
 	const text = getStringtableValue(mShopTooltip, 'item shop tooltip');
+	if (!text) {
+		throw new Error('[updateItemShopItemTooltipText] no string');
+	}
 
 	const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
 	const subtitleLeftEndIndex = text.indexOf('</subtitleLeft>');
@@ -808,7 +815,7 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
 	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')) : undefined;
 	for (let i = 0; i < (extra?.length || 0); i++) {
 		const replaced: string[] = [];
-		let [heading] = extra![i];
+		let [heading] = extra![i] as [string];
 		let liStartIndex = heading.indexOf('<li>');
 		while (~liStartIndex) {
 			const headingEndIndex = heading.indexOf('</passive>');
@@ -899,10 +906,10 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 	if (!value) {
 		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
-	if (typeof variableDebug === 'object') {
+	if (value && typeof variableDebug === 'object') {
 		const { category, key, stringtableVariableSaveUnder, variableType, variableValueParameters, variableSourceKeys } = variableDebug;
 
-		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, variableValueParameters[0]?.dynamicValues, false);
+		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, (variableValueParameters[0] as any)?.dynamicValues, false);
 
 		if (stringtableVariables.size && stringtableVariableSaveUnder) {
 			stringtableVariableSaveUnder.stringtable ||= {};
@@ -927,7 +934,7 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
 			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
 			const hash = hashRuneVariable(variableName);
-			for (const sourceKey of variableSourceKeys) {
+			for (const sourceKey of variableSourceKeys as (keyof typeof variableSource)[]) {
 				let rename: [from: string, to: string] | undefined;
 
 				if (variableSource[sourceKey]?.[hash]) {
@@ -1056,7 +1063,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 				const key = image.at(-5) === 'l' ? 'image' : 'imageAlt';
 				const existingVariantIndex = variants.findIndex(variant => variant.image.slice(0, -6) === image.slice(0, -6));
 				if (~existingVariantIndex) {
-					variants[existingVariantIndex][key] = image;
+					variants[existingVariantIndex]![key] = image;
 				} else {
 					variants.push({
 						name: undefined,
@@ -1112,7 +1119,7 @@ function championAbilityVariants(
 	for (let i = 0; i < variantKeys.length; i++) {
 		const debugPrefix = `${championId} ${abilityName}[${i}]`;
 		const variantDataKey = variantKeys[i];
-		const variantData = championData[variantDataKey];
+		const variantData = championData[variantDataKey!];
 		const variantMSpell = variantData?.mSpell;
 		if (!variantData || !variantMSpell) {
 			throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
@@ -1215,7 +1222,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 	for (const [abilityName, variants] of abilitiesWithVariants) {
 		for (let i = 0; i < variants.length; i++) {
-			const variant = variants[i];
+			const variant = variants[i]!;
 			const debugPrefix = `${champion.id} ${abilityName}[${i}]`;
 			const variableDebug = {
 				category: 'champion',
@@ -1261,7 +1268,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 function getUnknownTags(text: string): Set<string> {
 	const tags = text.replaceAll('<br>', '').matchAll(/<\s*([a-z][\w-]*)\b[^>]*>/gi);
-	return new Set(Array.from(tags, m => m[1].toLocaleLowerCase()).filter(tag => !KNOWN_GAME_DESCRIPTION_TAGS.includes(tag)));
+	return new Set(Array.from(tags, m => m[1]!.toLocaleLowerCase()).filter(tag => !KNOWN_GAME_DESCRIPTION_TAGS.includes(tag)));
 }
 
 function formatNumber(n: number, precision = 3): number {
@@ -1279,8 +1286,8 @@ function cleanupObject(obj?: object, removeType = true): any {
 		entries = entries.filter(([key]) => key !== '__type');
 	}
 
-	if (entries.length === 1 && entries[0][0] === 'value') {
-		return entries[0][1].map((v: unknown) => typeof v === 'number' ? formatNumber(v) : v);
+	if (entries.length === 1 && entries[0]![0] === 'value') {
+		return entries[0]![1].map((v: unknown) => typeof v === 'number' ? formatNumber(v) : v);
 	}
 
 	return Object.fromEntries(entries.map(([key, value]) =>

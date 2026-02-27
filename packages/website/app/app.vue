@@ -25,7 +25,7 @@ _setupGlobalKeyModifiers();
 const damageSources = ref<DamageSource<any>[]>([
 	markRaw(new DamageSource(useId(), { champion: champions.Aphelios })),
 ]) as unknown as DamageSource[];
-const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource<any>[];
+const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 </script>
 
 <template>
