@@ -109,6 +109,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
+- [ ] service worker for caching cdragon images
 - [ ] future features in github project page thingy?
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`

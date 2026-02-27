@@ -929,26 +929,31 @@
 		"e": {
 			"maxLevel": 6,
 			"variants": [
-				[
-					"assets/characters/aphelios/hud/icons2d/calibrum_l.png",
-					"assets/characters/aphelios/hud/icons2d/calibrum_m.png"
-				],
-				[
-					"assets/characters/aphelios/hud/icons2d/severum_l.png",
-					"assets/characters/aphelios/hud/icons2d/severum_m.png"
-				],
-				[
-					"assets/characters/aphelios/hud/icons2d/infernum_l.png",
-					"assets/characters/aphelios/hud/icons2d/infernum_m.png"
-				],
-				[
-					"assets/characters/aphelios/hud/icons2d/crescendum_l.png",
-					"assets/characters/aphelios/hud/icons2d/crescendum_m.png"
-				],
-				[
-					"assets/characters/aphelios/hud/icons2d/gravitum_l.png",
-					"assets/characters/aphelios/hud/icons2d/gravitum_m.png"
-				]
+				{
+					"objectName": "ApheliosE",
+					"imageActive": "assets/characters/aphelios/hud/icons2d/calibrum_l.png",
+					"imageInactive": "assets/characters/aphelios/hud/icons2d/calibrum_m.png"
+				},
+				{
+					"objectName": "ApheliosE",
+					"imageActive": "assets/characters/aphelios/hud/icons2d/severum_l.png",
+					"imageInactive": "assets/characters/aphelios/hud/icons2d/severum_m.png"
+				},
+				{
+					"objectName": "ApheliosE",
+					"imageActive": "assets/characters/aphelios/hud/icons2d/gravitum_l.png",
+					"imageInactive": "assets/characters/aphelios/hud/icons2d/gravitum_m.png"
+				},
+				{
+					"objectName": "ApheliosE",
+					"imageActive": "assets/characters/aphelios/hud/icons2d/infernum_l.png",
+					"imageInactive": "assets/characters/aphelios/hud/icons2d/infernum_m.png"
+				},
+				{
+					"objectName": "ApheliosE",
+					"imageActive": "assets/characters/aphelios/hud/icons2d/crescendum_l.png",
+					"imageInactive": "assets/characters/aphelios/hud/icons2d/crescendum_m.png"
+				}
 			],
 			"dataKey": "{21df6123}"
 		},

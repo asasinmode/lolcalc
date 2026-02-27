@@ -23,9 +23,7 @@ _setupGlobalKeyModifiers();
 
 // TMP as unknown as..., can't put it in v-model or it doesn't build atm
 const damageSources = ref<DamageSource[]>([
-	markRaw(new DamageSource(useId(), { champion: champions.Caitlyn })),
-	markRaw(new DamageSource(useId(), { champion: champions.Zaahen, level: 12, abilityLevels: { q: 2 } })),
-	markRaw(new DamageSource(useId(), { champion: champions.Gnar })),
+	markRaw(new DamageSource(useId(), { champion: champions.Aphelios })),
 ]) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 </script>

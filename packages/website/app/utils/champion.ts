@@ -6,7 +6,7 @@ const aph1to5 = [1, 2, 3, 4, 5];
 
 export const CHAMPION_SPECIFICS = {
 	Aphelios: {
-		WEAPON_ORDER: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'],
+		WEAPON_ORDER_MAP: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } as Record<string, number>,
 		POSSIBLE_DYNAMIC_VALUES: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
 			f1: aph1to5,

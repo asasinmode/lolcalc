@@ -779,7 +779,7 @@ defineExpose({ el });
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-	<li ref="el" data-scoreboard-item="">
+	<li ref="el" :data-scoreboard-item="value.listedChampion.value?.id || ''">
 		<h3>
 			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}
 		</h3>
@@ -1043,21 +1043,24 @@ defineExpose({ el });
 			</section>
 			<section data-abilities="" :inert="isLoading || undefined">
 				<h4>abilties</h4>
-				<div data-passive="">
-					<img
-						v-show="!isLoading"
-						:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]?.image}` : undefined"
-						width="64"
-						height="64"
-						aria-hidden="true"
-						@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
-					>
-					<span>passive</span>
-				</div>
-				<template v-if="value.listedChampion.value?.id === 'Aphelios'">
-					aphelios catdespair
-				</template>
+				<ChampionApheliosAbilities
+					v-if="value.listedChampion.value?.id === 'Aphelios'"
+					:value
+					:is-loading
+					@ability-hover="showAbilityTooltip"
+				/>
 				<template v-else>
+					<div data-passive="">
+						<img
+							v-show="!isLoading"
+							:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]?.image}` : undefined"
+							width="64"
+							height="64"
+							aria-hidden="true"
+							@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
+						>
+						<span>passive</span>
+					</div>
 					<div
 						v-for="ability in ['q', 'w', 'e', 'r'] as const"
 						v-bind="{ [`data-${ability}`]: '' }"
@@ -1293,7 +1296,7 @@ defineExpose({ el });
 
 <style>
 @layer components {
-	#calculator-scoreboard [data-scoreboard-item] {
+	#calculator-scoreboard > ul > [data-scoreboard-item] {
 		--at-apply: 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);
@@ -1504,17 +1507,17 @@ defineExpose({ el });
 				paint-order: stroke fill;
 			}
 
-			&[aria-busy='true'] [data-loading] {
+			&[aria-busy='true'] > [data-loading] {
 				--at-apply: 'block';
 			}
 
-			summary {
+			> summary {
 				--at-apply: 'list-none invisible pointer-events-none';
 			}
 
-			[data-runes-stats],
-			[data-abilities],
-			[data-health-ability-resource] {
+			> [data-runes-stats],
+			> [data-abilities],
+			> [data-health-ability-resource] {
 				> h4 {
 					--at-apply: 'sr-only';
 				}
@@ -1540,7 +1543,7 @@ defineExpose({ el });
 				--at-apply: 'b-b-0 pb-0 mb-0';
 			}
 
-			[data-runes-stats] {
+			> [data-runes-stats] {
 				--at-apply: 'row-span-3 grid grid-cols-2 grid-rows-2';
 				anchor-name: --scoreboard-item-runes-stats;
 
@@ -1700,7 +1703,7 @@ defineExpose({ el });
 				}
 			}
 
-			[data-abilities] {
+			> [data-abilities] {
 				--at-apply: 'gap-x-2 col-span-2 flex';
 				anchor-name: --scoreboard-item-abilities;
 
@@ -1866,7 +1869,7 @@ defineExpose({ el });
 				}
 			}
 
-			[data-health-ability-resource] {
+			> [data-health-ability-resource] {
 				--at-apply: 'col-span-2';
 
 				[data-current-health],
@@ -1904,7 +1907,7 @@ defineExpose({ el });
 				}
 			}
 
-			[data-role-quest] {
+			> [data-role-quest] {
 				--at-apply: 'relative h-min';
 				anchor-name: --scoreboard-item-role-quest;
 
@@ -1959,7 +1962,7 @@ defineExpose({ el });
 				}
 			}
 
-			[data-dragons] {
+			> [data-dragons] {
 				--at-apply: 'flex-center mx-auto h-max relative items-center gap-[--gap]';
 				--gap: calc(2 * var(--spacing));
 				--soul-size: calc(10 * var(--spacing));
@@ -2029,8 +2032,8 @@ defineExpose({ el });
 				}
 			}
 
-			[data-role-quest],
-			[data-dragons] {
+			> [data-role-quest],
+			> [data-dragons] {
 				> h4 {
 					--at-apply: 'text-xs uppercase font-medium text-neutral-300 leading-3';
 				}
