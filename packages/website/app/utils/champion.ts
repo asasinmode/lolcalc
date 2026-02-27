@@ -16,6 +16,9 @@ export const CHAMPION_SPECIFICS = {
 			f5: [],
 			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
 		},
+		setupInternalData(self: DamageSource) {
+			console.log('setting up', self.listedChampion.value?.id);
+		},
 	},
 	Kayn: {
 		POSSIBLE_DYNAMIC_VALUES: {

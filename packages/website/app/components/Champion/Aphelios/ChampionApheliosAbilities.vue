@@ -23,6 +23,36 @@ const { minorVersion } = usePatchVersion();
 		>
 		<span>passive</span>
 	</div>
+	<div data-aphelios-q="">
+		<img
+			v-show="!isLoading"
+			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.r.variants[value.abilityVariants.value.r]?.image}` : undefined"
+			width="64"
+			height="64"
+			aria-hidden="true"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'r')"
+		>
+	</div>
+	<div data-aphelios-w="">
+		<img
+			v-show="!isLoading"
+			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.r.variants[value.abilityVariants.value.r]?.image}` : undefined"
+			width="64"
+			height="64"
+			aria-hidden="true"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'r')"
+		>
+	</div>
+	<div data-aphelios-r="">
+		<img
+			v-show="!isLoading"
+			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.r.variants[value.abilityVariants.value.r]?.image}` : undefined"
+			width="64"
+			height="64"
+			aria-hidden="true"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'r')"
+		>
+	</div>
 </template>
 
 <style>

@@ -1,8 +1,8 @@
 import type ExampleChampion from '../../public/data/champion/Ahri.json';
 import { data } from '../assets/champion.json';
 
-export function useChampions(): Record<IChampionId, IListedChampion> {
-	return data satisfies Record<IChampionId, IListedChampion>;
+export function useChampions() {
+	return data satisfies Record<IChampionId, IListedChampion<any>> as IChampionData;
 }
 
 const championCache = new Map<IChampionId, IChampion>();
@@ -19,18 +19,15 @@ export async function useChampion(id: string): Promise<IChampion> {
 
 export type IChampionId = keyof typeof data;
 
-export interface IChampionData {
-	version: string;
-	champions: Record<IChampionId, IChampion>;
-}
+type IChampionData = { [Id in IChampionId]: IListedChampion<Id> };
 
 export type IChampionRole = 'top' | 'jungle' | 'mid' | 'bot' | 'support';
 
 export type IChampionStat = keyof typeof ExampleChampion['stats'];
 
-export interface IChampion {
+export interface IChampion<T extends IChampionId = any> {
 	version: string;
-	id: string;
+	id: T;
 	key: string;
 	name: string;
 	partype: string;
@@ -40,7 +37,7 @@ export interface IChampion {
 	stringtable: Record<string, string>;
 }
 
-export interface IListedChampion extends Pick<IChampion, 'id' | 'name'> {
+export interface IListedChampion<T extends IChampionId = any> extends Pick<IChampion<T>, 'id' | 'name'> {
 	image: string;
 	roles: Partial<Record<IChampionRole, boolean>>;
 }

@@ -16,7 +16,7 @@ interface IOverrides {
 	roleQuest: UnwrapRef<IDamageSource['roleQuest']>;
 }
 
-export class DamageSource {
+export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	id: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
@@ -77,7 +77,13 @@ export class DamageSource {
 		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
 	});
 
-	constructor(id: string = crypto.randomUUID(), overrides: Partial<IOverrides> = {}) {
+	internalData: Ref<Id extends IInternalDataSetupChampions
+		? ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
+		: undefined>;
+
+	constructor(id: string = crypto.randomUUID(), overrides: Partial<Omit<IOverrides, 'champion'>> & {
+		champion?: { id: Id } & IListedChampion;
+	} = {}) {
 		this.id = id;
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
@@ -103,6 +109,7 @@ export class DamageSource {
 		this.dragonStacks = ref(overrides.dragonStacks ?? []);
 		this.dragonSoul = ref(overrides.dragonSoul);
 		this.roleQuest = ref(overrides.roleQuest);
+		this.internalData = ref<any>();
 
 		watch(this.listedChampion, async (c) => {
 			this.champion.value = undefined;
@@ -112,6 +119,7 @@ export class DamageSource {
 		}, { immediate: true });
 
 		watch(this.champion, () => {
+			this.internalData.value = this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this);
 			this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
 			this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
 		}, { flush: 'post' });
@@ -155,3 +163,9 @@ export class DamageSource {
 		};
 	}
 }
+
+type IInternalDataSetupChampions = {
+	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupInternalData: (...args: any) => any }
+		? K
+		: never;
+}[keyof typeof CHAMPION_SPECIFICS];
