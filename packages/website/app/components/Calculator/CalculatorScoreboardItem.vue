@@ -666,7 +666,7 @@ function abilityText(value: string, variant: IChampionAbilityVariant, stringtabl
 function showAbilityTooltip(event: MouseEvent, ability: keyof IChampion['abilities'], variant = 0) {
 	if (props.value.champion.value) {
 		hoveredAbility.value = ability;
-		hoveredAbilityVariant.value = props.value.champion.value.abilities[ability].variants[variant];
+		hoveredAbilityVariant.value = props.value.champion.value.abilities[ability].variants[variant ?? props.value.abilityVariants.value[ability]];
 		event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
 		abilityHoverTooltipEl.value?.showPopover();
 	}
@@ -1301,10 +1301,15 @@ defineExpose({ el });
 		--placeholder-champion-bg-clr: #020a13;
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
+
 		--ability-size-passive: calc(var(--spacing) * 10);
 		--ability-size: calc(var(--spacing) * 14);
+		--ability-level-button-indicator-size: calc(2 * var(--spacing));
+		--ability-level-button-py: calc(1 * var(--spacing));
+		--ability-level-buttons-size: calc(var(--ability-level-button-indicator-size) + 2 * var(--ability-level-button-py));
 		--abilities-gap: calc(var(--spacing) * 2);
-		--abilities-size: calc(4 * var(--ability-size) + var(--ability-size-passive) + 4 * var(--abilities-gap));
+		--abilities-width: calc(4 * var(--ability-size) + var(--ability-size-passive) + 4 * var(--abilities-gap));
+		--abilities-height: calc(var(--ability-size) + var(--ability-level-buttons-size));
 
 		grid-template-areas:
 			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
@@ -1518,6 +1523,10 @@ defineExpose({ el });
 				--at-apply: 'list-none invisible pointer-events-none';
 			}
 
+			> section {
+				--at-apply: 'h-min';
+			}
+
 			> [data-runes-stats],
 			> [data-abilities],
 			> [data-health-ability-resource] {
@@ -1710,6 +1719,7 @@ defineExpose({ el });
 				--at-apply: 'gap-x-[--abilities-gap] col-span-2 flex';
 				anchor-name: --scoreboard-item-abilities;
 				width: var(--abilities-width);
+				height: var(--abilities-height);
 
 				[data-passive],
 				[data-q],
@@ -1734,9 +1744,7 @@ defineExpose({ el });
 				[data-w],
 				[data-e],
 				[data-r] {
-					--at-apply: 'mb-[calc(var(--button-indicator-size)+2*var(--button-py))]';
-					--button-indicator-size: calc(2 * var(--spacing));
-					--button-py: calc(1 * var(--spacing));
+					--at-apply: 'mb-[calc(var(--ability-level-button-indicator-size)+2*var(--ability-level-button-py))]';
 
 					&[data-level='0'],
 					&:not([data-level]) {
@@ -1751,10 +1759,10 @@ defineExpose({ el });
 						--at-apply: 'flex justify-center';
 
 						> button {
-							--at-apply: 'py-[--button-py] px-0.25';
+							--at-apply: 'py-[--ability-level-button-py] px-0.25';
 
 							&::before {
-								--at-apply: 'content-empty block b b-[--ui-button-border-clr] size-[--button-indicator-size] rounded-full bg-black mx-auto';
+								--at-apply: 'content-empty block b b-[--ui-button-border-clr] size-[--ability-level-button-indicator-size] rounded-full bg-black mx-auto';
 							}
 
 							&[aria-checked='true']::before,
@@ -1874,7 +1882,7 @@ defineExpose({ el });
 			}
 
 			> [data-health-ability-resource] {
-				--at-apply: 'col-span-2';
+				--at-apply: 'col-span-2 pt-1.375';
 
 				[data-current-health],
 				[data-current-ability-resource] {
@@ -1902,7 +1910,6 @@ defineExpose({ el });
 				}
 
 				[data-current-health] {
-					--at-apply: 'mt-1.25';
 					--fill-bg: theme('colors.green.500');
 				}
 
@@ -1912,7 +1919,7 @@ defineExpose({ el });
 			}
 
 			> [data-role-quest] {
-				--at-apply: 'relative h-min';
+				--at-apply: 'relative';
 				anchor-name: --scoreboard-item-role-quest;
 
 				> .v-select {
