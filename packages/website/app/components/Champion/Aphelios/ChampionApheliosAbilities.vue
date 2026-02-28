@@ -110,10 +110,10 @@ const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS
 		> [data-aphelios-q],
 		> [data-aphelios-w],
 		> [data-aphelios-r] {
-			--at-apply: 'relative -mt-0.75 h-[calc(var(--ability-size)+1.5*var(--spacing))]';
+			--at-apply: 'relative h-[--ability-size]';
 
 			> h5 {
-				--at-apply: 'absolute uppercase start-0 top-[--ability-size] leading-[1] -translate-x-1/2 -translate-y-[calc(100%*2/3-2px)] pointer-events-none z-2';
+				--at-apply: 'absolute start-0 bottom-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none z-2';
 
 				-webkit-text-stroke: black 0.1em;
 				paint-order: stroke fill;
@@ -167,7 +167,7 @@ const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS
 
 			> img {
 				&:nth-of-type(1) {
-					--at-apply: 'b-2 b-[--ui-button-border-clr] h-full aspect-square w-auto rounded-1/2 z-2 -me-3.5';
+					--at-apply: 'b-2 b-[--ui-button-border-clr] size-[calc(var(--ability-size)+1.5*var(--spacing))] -my-0.75 rounded-1/2 z-2 -me-3.5';
 				}
 
 				&:nth-of-type(2) {

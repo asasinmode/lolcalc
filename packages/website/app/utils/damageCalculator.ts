@@ -113,6 +113,8 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 		watch(this.listedChampion, async (c) => {
 			this.champion.value = undefined;
+			this.abilityLevels.value = { q: 0, w: 0, e: 0, r: 0 };
+			this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 			if (c) {
 				this.champion.value = await useChampion(c.id);
 			}

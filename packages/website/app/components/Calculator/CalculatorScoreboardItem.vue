@@ -1729,7 +1729,7 @@ defineExpose({ el });
 					--at-apply: 'relative size-[--ability-size] b b-[--ui-button-border-clr]';
 
 					> h5 {
-						--at-apply: 'absolute uppercase bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none z-1';
+						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none z-1';
 
 						-webkit-text-stroke: black 0.1em;
 						paint-order: stroke fill;
