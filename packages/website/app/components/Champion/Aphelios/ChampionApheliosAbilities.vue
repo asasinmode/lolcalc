@@ -154,12 +154,7 @@ const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS
 		}
 
 		> [data-aphelios-q] {
-			--at-apply: 'flex items-center z-1';
-
-			&::before,
-			&::after {
-				--at-apply: 'translate-x-[calc((var(--funny-ability-w)-var(--ability-size))/2)]';
-			}
+			--at-apply: 'flex items-center z-1 pe-[calc((var(--funny-ability-w)-var(--ability-size))/2)]';
 
 			> h5 {
 				--at-apply: 'start-[--ability-size]';
@@ -177,29 +172,38 @@ const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS
 		}
 
 		> [data-aphelios-w] {
-			--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-1';
-			--bridge-w: calc(6 * var(--spacing));
-			--bridge-mx: calc(-1 * var(--spacing));
-
-			&::before {
-				--at-apply: 'z-0 content-empty mx-[--mx] h-5.5 w-[--bridge-w] bg-black b-y b-[--ui-button-border-clr]';
-			}
+			--at-apply: 'grid grid-cols-[auto_1fr] place-items-center grid-rows-1';
 
 			&::after {
-				--at-apply: 'z-0 content-empty bg-black col-start-2 b b-[--ui-button-border-clr] size-[calc(var(--ability-size)*0.8)] rounded-1/2';
+				--at-apply: 'z-0 content-empty bg-black col-start-2 row-start-1 b b-[--ui-button-border-clr] size-[calc(var(--ability-size)*0.8)] rounded-1/2';
 			}
 
 			> h5:first-of-type {
-				--at-apply: 'top-1/2 start-[calc(0.5*var(--ps))] bottom-auto text-sm translate-center';
+				--at-apply: 'text-center static -mx-1 h-5.5 w-6 bg-black b-y b-[--ui-button-border-clr] text-sm translate-0 z-0 leading-5 relative';
+
+				&::before,
+				&::after {
+					--at-apply: 'absolute content-empty h-1.25 w-1.75 bg-[--ui-button-border-clr]';
+				}
+
+				&::before {
+					--at-apply: '-translate-y-full top-0 end-0 -translate-x-0.25';
+					clip-path: polygon(0% 0%, 100% 100%, 0% 100%);
+				}
+
+				&::after {
+					--at-apply: 'translate-y-full bottom-0 start-0 translate-x-0.5';
+					clip-path: polygon(0% 0%, 100% 0%, 100% 100%);
+				}
 			}
 
 			> img {
 				&:nth-of-type(1) {
-					--at-apply: 'size-[calc(var(--ability-size)*0.65)] col-start-2 z-1';
+					--at-apply: 'size-[calc(var(--ability-size)*0.65)] col-start-2 row-start-1 z-1';
 				}
 
 				&:nth-of-type(2) {
-					--at-apply: 'absolute top-0 end-0 size-[calc(var(--ability-size)*0.45)]';
+					--at-apply: 'absolute top-0 end-0 size-[calc(var(--ability-size)*0.45)] z-1 b b-[--ui-button-border-clr] rounded-1/2';
 				}
 			}
 		}
