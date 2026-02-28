@@ -1,6 +1,6 @@
 import type { ImgHTMLAttributes } from 'vue';
 import type { ITexture } from '~/utils/types';
-import fileData from '../assets/ui.json' with { type: 'json' };
+import fileData from '../assets/ui.json';
 
 const { data } = fileData;
 

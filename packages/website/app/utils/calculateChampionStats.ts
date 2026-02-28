@@ -1,4 +1,4 @@
-import { data as runes } from '../assets/rune.json' with { type: 'json' };
+import { data as runes } from '../assets/rune.json';
 
 interface IStatsCalculationResult {
 	stats: {
