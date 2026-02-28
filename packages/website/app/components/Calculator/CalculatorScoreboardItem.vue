@@ -1737,7 +1737,7 @@ defineExpose({ el });
 				}
 
 				details[data-empty] & [data-passive] {
-					--at-apply: 'b-neutral-300';
+					--at-apply: 'b-neutral-400';
 				}
 
 				[data-q],
@@ -1748,7 +1748,7 @@ defineExpose({ el });
 
 					&[data-level='0'],
 					&:not([data-level]) {
-						--at-apply: 'b-neutral-300';
+						--at-apply: 'b-neutral-400';
 
 						img {
 							--at-apply: 'grayscale-70 brightness-80';
