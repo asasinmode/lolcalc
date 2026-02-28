@@ -1051,6 +1051,7 @@ defineExpose({ el });
 				/>
 				<template v-else>
 					<div data-passive="">
+						<h5>passive</h5>
 						<img
 							v-show="!isLoading"
 							:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]?.image}` : undefined"
@@ -1059,7 +1060,6 @@ defineExpose({ el });
 							aria-hidden="true"
 							@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
 						>
-						<span>passive</span>
 					</div>
 					<div
 						v-for="ability in ['q', 'w', 'e', 'r'] as const"
@@ -1067,6 +1067,7 @@ defineExpose({ el });
 						:key="ability"
 						:data-level="value.abilityLevels.value[ability]"
 					>
+						<h5>{{ ability.toUpperCase() }}</h5>
 						<img
 							v-show="!isLoading"
 							:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities[ability].variants[value.abilityVariants.value[ability]]?.image}` : undefined"
@@ -1075,7 +1076,6 @@ defineExpose({ el });
 							aria-hidden="true"
 							@mouseenter="value.champion.value && showAbilityTooltip($event, ability)"
 						>
-						<span>{{ ability }}</span>
 						<VButtonRadiogroup
 							v-if="value.champion.value"
 							:id="`${group}-${index}-ability-${ability}`"
@@ -1728,8 +1728,8 @@ defineExpose({ el });
 				[data-r] {
 					--at-apply: 'relative size-[--ability-size] b b-[--ui-button-border-clr]';
 
-					> span {
-						--at-apply: 'absolute uppercase bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none';
+					> h5 {
+						--at-apply: 'absolute uppercase bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none z-1';
 
 						-webkit-text-stroke: black 0.1em;
 						paint-order: stroke fill;
@@ -1801,7 +1801,7 @@ defineExpose({ el });
 				[data-passive] {
 					--at-apply: 'size-[--ability-size-passive]';
 
-					> span {
+					> h5 {
 						--at-apply: 'sr-only';
 					}
 				}

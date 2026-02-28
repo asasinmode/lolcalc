@@ -6,7 +6,7 @@ export function cooldownReductionPercentageFromHaste(haste: number) {
 
 const aph1to5 = [1, 2, 3, 4, 5];
 
-type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';
+export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';
 
 /**
  * object containing specific champion's helpers, utils and calculations
