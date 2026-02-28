@@ -13,8 +13,6 @@ defineEmits<{
 }>();
 
 const { minorVersion } = usePatchVersion();
-
-const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP).map(([weapon, order]) => [order, weapon])) as Record<number, IApheliosWeapon>;
 </script>
 
 <template>
@@ -95,10 +93,14 @@ const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS
 		--funny-ability-w: calc(var(--ability-size) * 10 / 9);
 
 		> [data-passive] {
-			--at-apply: 'rounded-1/2 b-2';
+			--at-apply: 'b-none size-auto pe-2';
 
 			> h5 {
 				--at-apply: 'sr-only';
+			}
+
+			> img {
+				--at-apply: 'size-[--ability-size-passive] rounded-1/2 b-2 b-[--ui-button-border-clr]';
 			}
 		}
 
@@ -172,10 +174,10 @@ const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS
 		}
 
 		> [data-aphelios-w] {
-			--at-apply: 'grid grid-cols-[auto_1fr] place-items-center grid-rows-1';
+			--at-apply: 'grid grid-cols-[auto_1fr_auto] place-items-center grid-rows-1';
 
 			&::after {
-				--at-apply: 'z-0 content-empty bg-black col-start-2 row-start-1 b b-[--ui-button-border-clr] size-[calc(var(--ability-size)*0.8)] rounded-1/2';
+				--at-apply: 'z-0 content-empty bg-black col-start-2 row-start-1 b b-[--ui-button-border-clr] size-[calc(var(--ability-size)*0.7)] rounded-1/2';
 			}
 
 			> h5:first-of-type {
@@ -199,17 +201,17 @@ const ORDER_TO_WEAPON_MAP = Object.fromEntries(Object.entries(CHAMPION_SPECIFICS
 
 			> img {
 				&:nth-of-type(1) {
-					--at-apply: 'size-[calc(var(--ability-size)*0.65)] col-start-2 row-start-1 z-1';
+					--at-apply: 'size-[calc(var(--ability-size)*0.55)] col-start-2 row-start-1 z-1';
 				}
 
 				&:nth-of-type(2) {
-					--at-apply: 'absolute top-0 end-0 size-[calc(var(--ability-size)*0.45)] z-1 b b-[--ui-button-border-clr] rounded-1/2';
+					--at-apply: 'size-[calc(var(--ability-size)*0.45)] b b-[--ui-button-border-clr] rounded-1/2 self-start -mt-1/3 -ms-1/3';
 				}
 			}
 		}
 
 		> [data-aphelios-r] {
-			--at-apply: 'grid-center w-[--funny-ability-w]';
+			--at-apply: 'grid-center w-[--funny-ability-w] ms-auto';
 
 			> h5 {
 				--at-apply: 'translate-x-0';
