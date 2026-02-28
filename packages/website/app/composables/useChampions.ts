@@ -1,5 +1,7 @@
 import type ExampleChampion from '../../public/data/champion/Ahri.json';
-import { data } from '../assets/champion.json';
+import fileData from '../assets/champion.json' with { type: 'json' };
+
+const { data } = fileData;
 
 export function useChampions() {
 	return data satisfies Record<IChampionId, IListedChampion<any>> as IChampionData;

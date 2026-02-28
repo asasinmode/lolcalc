@@ -1,6 +1,8 @@
 import type { ImgHTMLAttributes } from 'vue';
 import type { ITexture } from '~/utils/types';
-import { data } from '../assets/ui.json';
+import fileData from '../assets/ui.json' with { type: 'json' };
+
+const { data } = fileData;
 
 export function useUi() {
 	return data satisfies IUiData;

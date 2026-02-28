@@ -1,5 +1,7 @@
 import type { IPossibleDynamicValues } from './types';
-import { data } from '../assets/rune.json';
+import runeData from '../assets/rune.json' with { type: 'json' };
+
+const { data } = runeData;
 
 export const RUNE_SPECIFICS = {
 	shards: {

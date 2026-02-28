@@ -1,5 +1,5 @@
-import { ITEM_STAT_ICON_NAMES } from './item';
-import { roundVariable } from './misc';
+import { ITEM_STAT_ICON_NAMES } from './item.ts';
+import { roundVariable } from './misc.ts';
 
 export interface IItemVariableCalculationTarget {
 	isRanged?: boolean;
@@ -234,8 +234,7 @@ export function replaceGameDescriptionVariables(
 		if (typeof variable !== 'string' && (
 			Array.isArray(variable)
 				? variable.some(v => typeof v !== 'number' || Number.isNaN(v))
-				: (typeof variable !== 'number' || Number.isNaN(variable)))
-		) {
+				: (typeof variable !== 'number' || Number.isNaN(variable)))) {
 			variable = Array.isArray(variable)
 				? variable.map(v => (typeof v !== 'number' || Number.isNaN(v)) ? undefined : v) as typeof variable
 				: undefined;

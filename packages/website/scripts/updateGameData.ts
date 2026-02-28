@@ -3,14 +3,14 @@ import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composabl
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { IPossibleDynamicValues, ITexture, IWithPossibleDynamicValues } from '../app/utils/types';
+import fs from 'node:fs/promises';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
-import { useMaps } from '../app/composables/useMaps';
-import { CHAMPION_SPECIFICS } from '../app/utils/champion';
-import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable';
-import { replaceGameDescriptionVariables } from '../app/utils/gameVariable';
-
-import { RUNE_SPECIFICS } from '../app/utils/rune';
+import { useMaps } from '../app/composables/useMaps.ts';
+import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
+import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
+import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
+import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
 
 const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
 
@@ -41,7 +41,7 @@ const debug = {
 	misc: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 };
 
-const textFile = Bun.file(`${import.meta.dir}/../app/assets/text.json`);
+const textFilePath = `${import.meta.dirname}/../app/assets/text.json`;
 let textData = {
 	version: latestVersion,
 	data: {
@@ -53,17 +53,19 @@ let textData = {
 	},
 } as typeof import('../app/assets/text.json');
 
-if (await textFile.exists()) {
-	textData = await textFile.json();
+try {
+	await fs.access(textFilePath);
+	textData = JSON.parse(await fs.readFile(textFilePath, 'utf8'));
 	textData.data.stringtable ||= {} as any;
-}
+} catch {}
 
-const championFile = Bun.file(`${import.meta.dir}/../app/assets/champion.json`);
+const championFilePath = `${import.meta.dirname}/../app/assets/champion.json`;
 let championData: typeof import('../app/assets/champion.json') | undefined;
 
-if (await championFile.exists()) {
-	championData = await championFile.json();
-}
+try {
+	await fs.access(championFilePath);
+	championData = JSON.parse(await fs.readFile(championFilePath, 'utf8'));
+} catch {}
 
 if (!championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
@@ -92,10 +94,10 @@ if (!championData || championData?.version !== latestVersion) {
 
 					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
 
-					const championFile = Bun.file(`${import.meta.dir}/../public/data/champion/${id}.json`);
+					const dedicatedChampionFilePath = `${import.meta.dirname}/../public/data/champion/${id}.json`;
 					const championFileDataStringtable: IChampion['stringtable'] = {};
 
-					const championFileData: IChampion = {
+					const dedicatedChampionFileData: IChampion = {
 						version: latestVersion,
 						id,
 						key,
@@ -119,12 +121,12 @@ if (!championData || championData?.version !== latestVersion) {
 					};
 
 					if (championId === 'Aphelios') {
-						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, championFileData.abilities));
+						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
 					}
 
-					setChampionAbilityVariantsText(championFileData);
+					setChampionAbilityVariantsText(dedicatedChampionFileData);
 
-					await championFile.write(stringifyObject(championFileData));
+					await fs.writeFile(dedicatedChampionFilePath, stringifyObject(dedicatedChampionFileData));
 
 					return [championId, {
 						id,
@@ -150,15 +152,16 @@ if (!championData || championData?.version !== latestVersion) {
 		}
 	}
 
-	await championFile.write(stringifyObject(championData));
+	await fs.writeFile(championFilePath, stringifyObject(championData));
 }
 
-const itemFile = Bun.file(`${import.meta.dir}/../app/assets/item.json`);
+const itemFilePath = `${import.meta.dirname}/../app/assets/item.json`;
 let itemData: typeof import('../app/assets/item.json') | undefined;
 
-if (await itemFile.exists()) {
-	itemData = await itemFile.json();
-}
+try {
+	await fs.access(itemFilePath);
+	itemData = JSON.parse(await fs.readFile(itemFilePath, 'utf8'));
+} catch {}
 
 if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	console.log('item data not present or outdated, fetching...');
@@ -374,17 +377,17 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			}), {} as Partial<Record<IItemCategory, boolean>>);
 	}
 
-	await itemFile.write(stringifyObject(itemData));
-
-	await textFile.write(stringifyObject(textData));
+	await fs.writeFile(itemFilePath, stringifyObject(itemData));
+	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const runeFile = Bun.file(`${import.meta.dir}/../app/assets/rune.json`);
+const runeFilePath = `${import.meta.dirname}/../app/assets/rune.json`;
 let runeData: typeof import('../app/assets/rune.json') | undefined;
 
-if (await runeFile.exists()) {
-	runeData = await runeFile.json();
-}
+try {
+	await fs.access(runeFilePath);
+	runeData = JSON.parse(await fs.readFile(runeFilePath, 'utf8'));
+} catch {}
 
 if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 	console.log('rune data not present or outdated, fetching...');
@@ -483,8 +486,8 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 		} as unknown as NonNullable<(typeof runeData)>['data'],
 	};
 
-	await runeFile.write(stringifyObject(runeData));
-	await textFile.write(stringifyObject(textData));
+	await fs.writeFile(runeFilePath, stringifyObject(runeData));
+	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
 const DRAGONS: ([name: IDragonName] | [name: IDragonName, spellDataKey: string])[] = [
@@ -495,12 +498,13 @@ const DRAGONS: ([name: IDragonName] | [name: IDragonName, spellDataKey: string])
 	['Chemtech', 'ChemTech'],
 	['Hextech'],
 ];
-const miscFile = Bun.file(`${import.meta.dir}/../app/assets/misc.json`);
+const miscFilePath = `${import.meta.dirname}/../app/assets/misc.json`;
 let miscData: typeof import('../app/assets/misc.json') | undefined;
 
-if (await miscFile.exists()) {
-	miscData = await miscFile.json();
-}
+try {
+	await fs.access(miscFilePath);
+	miscData = JSON.parse(await fs.readFile(miscFilePath, 'utf8'));
+} catch {}
 
 if (!miscData || miscData?.version !== latestVersion) {
 	console.log('misc data not present or outdated, fetching...');
@@ -597,16 +601,17 @@ if (!miscData || miscData?.version !== latestVersion) {
 		[role, getStringtableValue(`role_quest_bark_${role}_completed`, `role quest ${role}`)?.split('<br>')],
 	)) as NonNullable<(typeof textData)>['data']['roleQuests'];
 
-	await miscFile.write(stringifyObject(miscData));
-	await textFile.write(stringifyObject(textData));
+	await fs.writeFile(miscFilePath, stringifyObject(miscData));
+	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
-const uiFile = Bun.file(`${import.meta.dir}/../app/assets/ui.json`);
+const uiFilePath = `${import.meta.dirname}/../app/assets/ui.json`;
 let uiData: typeof import('../app/assets/ui.json') | undefined;
 
-if (await uiFile.exists()) {
-	uiData = await uiFile.json();
-}
+try {
+	await fs.access(uiFilePath);
+	uiData = JSON.parse(await fs.readFile(uiFilePath, 'utf8'));
+} catch {}
 
 const uiAutoAtlasData: Record<string, any> = {};
 const autoAtlasImages: Record<string, {
@@ -758,7 +763,7 @@ if (!uiData || uiData?.version !== latestVersion) {
 		} as unknown as NonNullable<(typeof uiData)>['data'],
 	};
 
-	await uiFile.write(stringifyObject(uiData));
+	await fs.writeFile(uiFilePath, stringifyObject(uiData));
 }
 
 for (const category in debug) {
@@ -1324,17 +1329,23 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 		return cacheHits[filename];
 	}
 
-	const cacheFile = Bun.file(`${import.meta.dir}/.cache/${minorVersion}/${filename}`);
+	const cacheFilePath = `${import.meta.dirname}/.cache/${minorVersion}/${filename}`;
 	let data;
-	if (await cacheFile.exists()) {
-		data = await cacheFile[responseMethod]();
-	}
+	try {
+		await fs.access(cacheFilePath);
+		data = await fs.readFile(cacheFilePath);
+		data = responseMethod === 'text'
+			? data.toString('utf8')
+			: responseMethod === 'json'
+				? JSON.parse(data.toString('utf8'))
+				: data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength);
+	} catch {};
 	if (!data) {
 		data = await fetch(url).then(r => r[responseMethod]()).catch((err) => {
 			console.log(`[fetchCached] ${url} ${responseMethod}`);
 			throw err;
 		});
-		await cacheFile.write(responseMethod === 'json' ? stringifyObject(data) : data);
+		await fs.writeFile(cacheFilePath, responseMethod === 'json' ? stringifyObject(data) : data);
 	}
 	cacheHits[filename] = data;
 	return data;
