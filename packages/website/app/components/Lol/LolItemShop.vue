@@ -735,6 +735,7 @@ defineExpose({
 							</component>
 						</li>
 					</ul>
+					<div />
 					<img
 						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
 						width="26"
@@ -894,7 +895,11 @@ defineExpose({
 			}
 
 			> img {
-				--at-apply: 'absolute size-[--inventory-panel-eq-button-size] top-1/2 -translate-y-1/2 end-0';
+				--at-apply: 'absolute size-[--inventory-panel-eq-button-size] top-1/2 -translate-y-1/2 end-[--inventory-panel-inner-p]';
+			}
+
+			> div {
+				--at-apply: 'absolute end-[--inventory-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--inventory-panel-eq-button-size)-6px)] bg-black hidden';
 			}
 		}
 
@@ -902,10 +907,12 @@ defineExpose({
 		&:hover,
 		&:focus-within {
 			> div {
-				--at-apply: '';
+				> img {
+					--at-apply: 'hidden';
+				}
 
-				> img:nth-of-type(1) {
-					--at-apply: '';
+				> div {
+					--at-apply: 'block';
 				}
 			}
 		}
@@ -932,7 +939,7 @@ defineExpose({
 		}
 
 		> .icon.caret {
-			--at-apply: 'size-5 start-1 top-1/2 absolute -translate-y-full';
+			--at-apply: 'size-5 bg-cyan-400 start-1 top-1/2 absolute -translate-y-1/2';
 		}
 
 		&[data-pinned],
@@ -986,6 +993,7 @@ defineExpose({
 	}
 
 	#item-shop-panel-eq > div > ul > li > *,
+	#item-shop-panel-eq > div > div,
 	.item-shop-item-btn img,
 	.item-shop-item-img {
 		box-shadow:
