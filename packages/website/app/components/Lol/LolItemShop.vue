@@ -105,8 +105,6 @@ function sellItem(event: MouseEvent, index: number) {
 	if (inventory.value?.[index]) {
 		inventory.value.splice(index, 1);
 		leaveTooltipableElement();
-
-		// TODO do the same in scoreboard
 		if (inventory.value?.[index]) {
 			enterTooltipableElement(event, inventory.value[index]);
 		}

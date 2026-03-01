@@ -127,7 +127,11 @@ function removeItem(event: MouseEvent, index: number) {
 		event.preventDefault();
 		// eslint-disable-next-line vue/no-mutating-props
 		props.value.items.value.splice(index, 1);
-		itemHoverTooltip.value?.hidePopover();
+		if (props.value.items.value[index]) {
+			showItemHoverTooltip(event, props.value.items.value[index]);
+		} else {
+			itemHoverTooltip.value?.hidePopover();
+		}
 	}
 }
 
