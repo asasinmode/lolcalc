@@ -701,7 +701,7 @@ defineExpose({
 				</ul>
 			</div>
 		</section>
-		<section id="item-shop-panel-inventory" :data-pinned="inventoryPanelPinned || undefined">
+		<section id="item-shop-panel-eq" :data-pinned="inventoryPanelPinned || undefined">
 			<h2>inventory</h2>
 			<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
 				<span>Pin inventory panel</span>
@@ -712,16 +712,11 @@ defineExpose({
 			</button>
 			<Icon class="i-ph:caret-left-bold caret" />
 			<div>
-				<img
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
-					width="26"
-					height="24"
-					loading="lazy"
-				>
 				<ul>
 					<li v-for="i in 6" :key="i">
 						<component
 							:is="inventory?.[i - 1] ? 'button' : 'div'"
+							:class="{ selected: inventory?.[i - 1] && inventory[i - 1]!.id === displayedItem?.id }"
 							@mouseenter="inventory?.[i - 1] && enterTooltipableElement($event, inventory[i - 1]!)"
 							@click="inventory?.[i - 1] && selectItem(inventory[i - 1]!, true)"
 							@click.right="inventory?.[i - 1] && sellItem($event, i - 1)"
@@ -738,6 +733,14 @@ defineExpose({
 						</component>
 					</li>
 				</ul>
+				<div>
+					<img
+						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
+						width="26"
+						height="24"
+						loading="lazy"
+					>
+				</div>
 			</div>
 		</section>
 		<footer style="grid-area: footer">
@@ -821,13 +824,20 @@ defineExpose({
 	}
 
 	#item-shop-panel-boots,
-	#item-shop-panel-inventory {
+	#item-shop-panel-eq {
 		--inventory-panel-gap: calc(2 * var(--spacing));
 		--inventory-panel-py: calc(4 * var(--spacing));
-		--inventory-panel-gap: var(--spacing) * 3;
+		--inventory-panel-gap: calc(var(--spacing) * 3);
 		--inventory-panel-row-h: calc(var(--item-img-size) + 1.5rem);
-		--inventory-panel-inner-p: var(--spacing) * 1.25;
+		--inventory-panel-p: calc(var(--spacing) * 4);
+		--inventory-panel-inner-p: calc(var(--spacing) * 1.25);
 		--inventory-panel-w: calc(var(--item-img-size) + 2 * var(--inventory-panel-inner-p));
+
+		--inventory-panel-eq-gap: calc(1 * var(--spacing));
+		--inventory-panel-eq-button-size: calc(
+			(3 * var(--item-img-size) + 2 * var(--inventory-panel-gap) - 4 * var(--inventory-panel-eq-gap)) / 4
+		);
+		--inventory-panel-eq-h: calc(var(--inventory-panel-eq-button-size) * 2 + var(--inventory-panel-eq-gap));
 
 		:where(&[data-pinned]) {
 			> .pin-button img {
@@ -838,7 +848,7 @@ defineExpose({
 	}
 
 	#item-shop-panel-boots {
-		--at-apply: 'bg-inherit p-4 ps-6 start-0 bottom-[calc(2*var(--item-img-size))] absolute z-10 -translate-x-full';
+		--at-apply: 'bg-inherit p-[--inventory-panel-p] ps-6 start-0 bottom-[calc(var(--inventory-panel-eq-h)+2*var(--inventory-panel-inner-p)+4*var(--spacing))] absolute z-10 -translate-x-full';
 		--inventory-panel-h: calc(
 			var(--inventory-panel-row-h) * 3 + 2 * var(--inventory-panel-gap) + 2 * var(--inventory-panel-inner-p)
 		);
@@ -854,27 +864,20 @@ defineExpose({
 		}
 	}
 
-	#item-shop-panel-inventory {
-		--at-apply: 'bg-inherit p-4 ps-6 start-0 bottom-[0] absolute z-10 -translate-x-full';
-		--gap: calc(1 * var(--spacing));
-		--button-size: calc((3 * var(--item-img-size) + 2 * var(--inventory-panel-gap) - 4 * var(--gap)) / 4);
-		--inventory-panel-h: calc(var(--button-size) * 2 + var(--gap));
+	#item-shop-panel-eq {
+		--at-apply: 'bg-inherit p-[--inventory-panel-p] ps-6 start-0 bottom-[0] absolute z-10 -translate-x-full';
 
 		> div {
-			--at-apply: 'relative w-(--inventory-panel-w) h-(--inventory-panel-h) box-content of-hidden flex flex-row-reverse pe-[calc(var(--button-size)+2*var(--gap))]';
-
-			> img {
-				--at-apply: 'absolute end-0 top-1/2 -translate-y-1/2 size-[--button-size]';
-			}
+			--at-apply: 'relative w-(--inventory-panel-w) h-(--inventory-panel-eq-h) box-content of-hidden flex';
 
 			> ul {
-				--at-apply: 'absolute end-[calc(var(--button-size)+2*var(--gap))] top-0 translate-x-full grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] gap-[--gap]';
+				--at-apply: 'absolute end-[calc(var(--inventory-panel-eq-button-size)+2*var(--inventory-panel-eq-gap))] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--inventory-panel-eq-gap] z-0';
 
 				> li {
-					--at-apply: 'size-[--button-size]';
+					--at-apply: 'size-[--inventory-panel-eq-button-size]';
 
 					> * {
-						--at-apply: 'bg-black size-[--button-size]';
+						--at-apply: 'bg-black m-[3px] size-[calc(var(--inventory-panel-eq-button-size)-6px)]';
 
 						> span {
 							--at-apply: 'sr-only';
@@ -882,19 +885,29 @@ defineExpose({
 					}
 				}
 			}
+
+			> div {
+				--at-apply: 'w-[calc(var(--inventory-panel-eq-button-size)+2*var(--inventory-panel-eq-gap))] z-1';
+
+				> img {
+					--at-apply: 'size-[--inventory-panel-eq-button-size]';
+				}
+			}
 		}
 
 		&[data-pinned],
 		&:hover,
 		&:focus-within {
-			> div > ul {
-				--at-apply: 'translate-x-0';
+			> div {
+				> ul {
+					--at-apply: 'translate-x-0';
+				}
 			}
 		}
 	}
 
 	#item-shop-panel-boots,
-	#item-shop-panel-inventory {
+	#item-shop-panel-eq {
 		> h2 {
 			--at-apply: 'sr-only';
 		}
@@ -965,12 +978,19 @@ defineExpose({
 	.item-shop-item-btn img,
 	.item-shop-item-img {
 		--at-apply: 'size-12.5 min-w-12.5 m-0.75 text-xs text-center break-words';
-		--inner-border: gray;
+	}
+
+	#item-shop-panel-eq > div > ul > li > *,
+	.item-shop-item-btn img,
+	.item-shop-item-img {
 		box-shadow:
-			0 0 0 2px var(--inner-border),
+			0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
 			0 0 0 3px black;
 	}
 
+	#item-shop-panel-eq > div > ul > li > button:hover,
+	#item-shop-panel-eq > div > ul > li > button:focus-visible,
+	#item-shop-panel-eq > div > ul > li > button.selected,
 	.item-shop-item-btn:hover img,
 	.item-shop-item-btn.selected img,
 	#item-shop-search-listbox > li.selected img,
