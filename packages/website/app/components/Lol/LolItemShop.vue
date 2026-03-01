@@ -326,7 +326,7 @@ const bootItems = [
 /* eslint-enable antfu/consistent-list-newline */
 
 const bootsPanelPinned = ref(false);
-const inventoryPanelPinned = ref(false);
+const inventoryPanelPinned = ref(true);
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -337,11 +337,10 @@ defineExpose({
 	<VDialog
 		id="dialog-item-shop"
 		ref="vDialog"
-		class="bg-cyan-950 max-h-[80vh] max-w-[90vw] shadow-lg relative of-visible [&[open]]-grid"
 		@close="closeSearch"
 		@contextmenu.prevent=""
 	>
-		<header style="grid-area: header;" class="bg-inherit grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center">
+		<header style="grid-area: header;" class="grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center">
 			<h1 class="col-span-full">
 				Item shop
 			</h1>
@@ -701,39 +700,41 @@ defineExpose({
 				</ul>
 			</div>
 		</section>
-		<section id="item-shop-panel-eq" :data-pinned="inventoryPanelPinned || undefined">
-			<h2>inventory</h2>
-			<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
-				<span>Pin inventory panel</span>
-				<img
-					v-bind="textureBgImageAttrs(ui.shop.pin.default, 28)"
-					:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
-				>
-			</button>
-			<Icon class="i-ph:caret-left-bold caret" />
-			<div>
-				<ul>
-					<li v-for="i in 6" :key="i">
-						<component
-							:is="inventory?.[i - 1] ? 'button' : 'div'"
-							:class="{ selected: inventory?.[i - 1] && inventory[i - 1]!.id === displayedItem?.id }"
-							@mouseenter="inventory?.[i - 1] && enterTooltipableElement($event, inventory[i - 1]!)"
-							@click="inventory?.[i - 1] && selectItem(inventory[i - 1]!, true)"
-							@click.right="inventory?.[i - 1] && sellItem($event, i - 1)"
-						>
-							<span>{{ inventory?.[i - 1]?.name }}</span>
-							<img
-								v-if="inventory?.[i - 1]"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${inventory[i - 1]!.image}`"
-								width="64"
-								height="64"
-								aria-hidden="true"
-								loading="lazy"
-							>
-						</component>
-					</li>
-				</ul>
+		<footer style="grid-area: footer">
+			<button>Sell</button>
+			<button>Undo</button>
+			<section id="item-shop-panel-eq" :data-pinned="inventoryPanelPinned || undefined">
+				<h2>inventory</h2>
+				<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
+					<span>Pin inventory panel</span>
+					<img
+						v-bind="textureBgImageAttrs(ui.shop.pin.default, 28)"
+						:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
+					>
+				</button>
+				<Icon class="i-ph:caret-left-bold caret" />
 				<div>
+					<ul>
+						<li v-for="i in 6" :key="i">
+							<component
+								:is="inventory?.[i - 1] ? 'button' : 'div'"
+								:class="{ selected: inventory?.[i - 1] && inventory[i - 1]!.id === displayedItem?.id }"
+								@mouseenter="inventory?.[i - 1] && enterTooltipableElement($event, inventory[i - 1]!)"
+								@click="inventory?.[i - 1] && selectItem(inventory[i - 1]!, true)"
+								@click.right="inventory?.[i - 1] && sellItem($event, i - 1)"
+							>
+								<span>{{ inventory?.[i - 1]?.name }}</span>
+								<img
+									v-if="inventory?.[i - 1]"
+									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${inventory[i - 1]!.image}`"
+									width="64"
+									height="64"
+									aria-hidden="true"
+									loading="lazy"
+								>
+							</component>
+						</li>
+					</ul>
 					<img
 						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
 						width="26"
@@ -741,11 +742,7 @@ defineExpose({
 						loading="lazy"
 					>
 				</div>
-			</div>
-		</section>
-		<footer style="grid-area: footer">
-			<button>Sell</button>
-			<button>Undo</button>
+			</section>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
 			<ItemDescription :item="hoveredItem" :target header-subtitles />
@@ -765,6 +762,13 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
+		--at-apply: 'bg-[--bg-clr] max-h-[80vh] max-w-[90vw] shadow-lg relative of-visible';
+		--bg-clr: theme('colors.cyan.950');
+
+		&[open] {
+			--at-apply: 'grid';
+		}
+
 		grid-template-areas:
 			'header header builds-into'
 			'aside items builds-into'
@@ -825,6 +829,8 @@ defineExpose({
 
 	#item-shop-panel-boots,
 	#item-shop-panel-eq {
+		--at-apply: 'bg-[--bg-clr]';
+
 		--inventory-panel-gap: calc(2 * var(--spacing));
 		--inventory-panel-py: calc(4 * var(--spacing));
 		--inventory-panel-gap: calc(var(--spacing) * 3);
@@ -835,7 +841,7 @@ defineExpose({
 
 		--inventory-panel-eq-gap: calc(1 * var(--spacing));
 		--inventory-panel-eq-button-size: calc(
-			(3 * var(--item-img-size) + 2 * var(--inventory-panel-gap) - 4 * var(--inventory-panel-eq-gap)) / 4
+			(var(--inventory-panel-inner-p) + 2 * var(--item-img-size) + var(--inventory-panel-gap)) / 3
 		);
 		--inventory-panel-eq-h: calc(var(--inventory-panel-eq-button-size) * 2 + var(--inventory-panel-eq-gap));
 
@@ -848,7 +854,7 @@ defineExpose({
 	}
 
 	#item-shop-panel-boots {
-		--at-apply: 'bg-inherit p-[--inventory-panel-p] ps-6 start-0 bottom-[calc(var(--inventory-panel-eq-h)+2*var(--inventory-panel-inner-p)+4*var(--spacing))] absolute z-10 -translate-x-full';
+		--at-apply: 'p-[--inventory-panel-p] ps-6 start-0 bottom-[calc(var(--inventory-panel-eq-h)+2*var(--inventory-panel-p)+14*var(--spacing))] absolute z-10 -translate-x-full';
 		--inventory-panel-h: calc(
 			var(--inventory-panel-row-h) * 3 + 2 * var(--inventory-panel-gap) + 2 * var(--inventory-panel-inner-p)
 		);
@@ -865,13 +871,13 @@ defineExpose({
 	}
 
 	#item-shop-panel-eq {
-		--at-apply: 'bg-inherit p-[--inventory-panel-p] ps-6 start-0 bottom-[0] absolute z-10 -translate-x-full';
+		--at-apply: 'p-[--inventory-panel-p] ps-6 start-0 bottom-8 absolute z-10 -translate-x-full';
 
 		> div {
-			--at-apply: 'relative w-(--inventory-panel-w) h-(--inventory-panel-eq-h) box-content of-hidden flex';
+			--at-apply: 'relative pe-(--inventory-panel-w) h-(--inventory-panel-eq-h) box-content of-hidden';
 
 			> ul {
-				--at-apply: 'absolute end-[calc(var(--inventory-panel-eq-button-size)+2*var(--inventory-panel-eq-gap))] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--inventory-panel-eq-gap] z-0';
+				--at-apply: 'absolute end-[--inventory-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--inventory-panel-eq-gap] z-0';
 
 				> li {
 					--at-apply: 'size-[--inventory-panel-eq-button-size]';
@@ -886,12 +892,8 @@ defineExpose({
 				}
 			}
 
-			> div {
-				--at-apply: 'w-[calc(var(--inventory-panel-eq-button-size)+2*var(--inventory-panel-eq-gap))] z-1';
-
-				> img {
-					--at-apply: 'size-[--inventory-panel-eq-button-size]';
-				}
+			> img {
+				--at-apply: 'absolute size-[--inventory-panel-eq-button-size] top-1/2 -translate-y-1/2 end-0';
 			}
 		}
 
@@ -899,8 +901,10 @@ defineExpose({
 		&:hover,
 		&:focus-within {
 			> div {
-				> ul {
-					--at-apply: 'translate-x-0';
+				--at-apply: '';
+
+				> img:nth-of-type(1) {
+					--at-apply: '';
 				}
 			}
 		}
@@ -988,13 +992,9 @@ defineExpose({
 			0 0 0 3px black;
 	}
 
-	#item-shop-panel-eq > div > ul > li > button:hover,
-	#item-shop-panel-eq > div > ul > li > button:focus-visible,
-	#item-shop-panel-eq > div > ul > li > button.selected,
-	.item-shop-item-btn:hover img,
-	.item-shop-item-btn.selected img,
-	#item-shop-search-listbox > li.selected img,
-	#item-shop-search-listbox > li:hover img,
+	#item-shop-panel-eq > div > ul > li > button:is(:hover, :focus-visible, .selected),
+	.item-shop-item-btn:is(:hover, :focus-visible, .selected) img,
+	#item-shop-search-listbox > li:is(:hover, :focus-visible, .selected) img,
 	.item-shop-item-img:hover {
 		--inner-border: white;
 	}
