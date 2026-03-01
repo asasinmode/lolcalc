@@ -42,7 +42,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] slider drag health/mana
     - [x] champion data loading indicator
     - [x] passive with tooltip
-    - [ ] aphelios
+    - [ ] aphelios "ability" levels
     - [ ] abilities ui (only passive implemented)
     - [x] runes (only shards implemented)
     - [x] dragons/souls
@@ -54,7 +54,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] some cool graphs
   - [ ] show/hide in graph button
   - [ ] damage target? All should be available to choose from, same as source. Figure out how to fit it
-- [ ] damage compare mode, no mirror mode = both sources and targets available, check which ones to use, check which ability to compare the damage of
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
@@ -71,24 +70,25 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] inventory panel or list in the footer
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
+- [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query
 - [ ] calculations [check out](https://github.com/OsOmE1/leaguebuilder)
-  - [ ] resolve game variables
-  - [ ] DamageSource.dedicatedData: any that's set and maintained based on stuff in utils/champion.ts
-  - [ ] maybe dynamic variables can be cached on damage source under a key then reused
-  - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
-  - [ ] item passives
-  - [ ] champion passives (level breakpoints)
   - [ ] stats from rune shards
   - [ ] dragons/souls
   - [ ] implement role quests
+  - [ ] resolve game variables
+  - [ ] item passives
+  - [ ] champion passives
+    - [ ] level breakpoint calculations
+    - [ ] champion-specific ui (veigar, ?)
+  - [ ] DamageSource.dedicatedData: any that's set and maintained based on stuff in utils/champion.ts
+  - [ ] maybe dynamic variables can be cached on damage source under a key then reused
+  - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
-- [ ] mobile version and make look better
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
   - [ ] dragons
-- [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
 - [ ] disclaimer not endorsed by riot
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups with helpful info
@@ -99,7 +99,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] keyboard navigation
   - [ ] show tooltips when navigated to with keyboard
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
-- [ ] update browser to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
+- [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
   - [ ] github readme
@@ -119,8 +119,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`?
-  - [ ] aphelios ability levels, ult levels up automatically on 6/11/16
-  - [ ] shapeshifting champions click on r to swap, jayce has 1 lvl
+  - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
@@ -135,6 +134,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] combo damage, choose spells/aas in order, apply them to target, show damage
 - [ ] aram
   - item overrides - `DataValuesModeOverride`
+- [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
 
 #### misc pages
 

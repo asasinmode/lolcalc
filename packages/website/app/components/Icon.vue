@@ -3,7 +3,9 @@
 </template>
 
 <style>
-.icon {
-	--at-apply: 'inline-block';
+@layer components {
+	:where(.icon) {
+		--at-apply: 'inline-block';
+	}
 }
 </style>

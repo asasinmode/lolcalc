@@ -7,7 +7,7 @@ const inventory = defineModel<IItem[]>();
 
 type IAllItemCategory = IItemCategory | 'all';
 
-const { version } = usePatchVersion();
+const { version, minorVersion } = usePatchVersion();
 const items = useItems();
 const maps = useMaps();
 const ui = useUi();
@@ -98,6 +98,18 @@ function selectItem(item: IItem, overwriteDisplayed: boolean) {
 function buyItem(item: IItem) {
 	if (inventory.value && inventory.value.length < 6) {
 		inventory.value.push(markRaw(item));
+	}
+}
+
+function sellItem(event: MouseEvent, index: number) {
+	if (inventory.value?.[index]) {
+		inventory.value.splice(index, 1);
+		leaveTooltipableElement();
+
+		// TODO do the same in scoreboard
+		if (inventory.value?.[index]) {
+			enterTooltipableElement(event, inventory.value[index]);
+		}
 	}
 }
 
@@ -243,14 +255,14 @@ let itemTooltipAnchor: undefined | HTMLElement;
 const itemTooltip = useTemplateRef('itemTooltip');
 const hoveredItem = shallowRef<IItem>();
 
-function enterTooltipableElement(event: MouseEvent, item: IItem) {
-	const { target } = event as unknown as { target: HTMLElement };
+function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IItem) {
+	const { target } = eventLike as { target: HTMLElement };
 	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
 	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
 	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
 	hoveredItem.value = item;
-	updateTooltipPosition(event);
+	'clientX' in eventLike && updateTooltipPosition(eventLike);
 }
 
 function leaveTooltipableElement() {
@@ -314,6 +326,7 @@ const bootItems = [
 /* eslint-enable antfu/consistent-list-newline */
 
 const bootsPanelPinned = ref(false);
+const inventoryPanelPinned = ref(false);
 
 defineExpose({
 	open: () => vDialog.value?.open(),
@@ -491,21 +504,18 @@ defineExpose({
 			</fieldset>
 		</aside>
 		<section id="item-shop-panel-boots" :data-pinned="bootsPanelPinned || undefined">
-			<h2 class="col-span-full sr-only">
-				boots
-			</h2>
+			<h2>boots</h2>
 			<button
-				id="item-shop-pin-panel-boots"
-				class="op-0 start-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5"
+				class="pin-button"
 				@click="bootsPanelPinned = !bootsPanelPinned"
 			>
-				<span class="sr-only">Pin boots panel</span>
+				<span>Pin boots panel</span>
 				<img
 					v-bind="textureBgImageAttrs(ui.shop.pin.default, 28)"
 					:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
 				>
 			</button>
-			<Icon id="panel-boots-caret-icon" class="i-ph:caret-left-bold" />
+			<Icon class="i-ph:caret-left-bold caret" />
 			<div>
 				<ul>
 					<li v-for="item in bootItems" :key="item.id">
@@ -556,7 +566,6 @@ defineExpose({
 							<span>{{ item.name }}</span>
 							<img
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
-								:alt="item.name"
 								width="64"
 								height="64"
 								aria-hidden="true"
@@ -637,6 +646,7 @@ defineExpose({
 								@click="selectBuildsIntoMoreItem(item)"
 								@click.right="rightClickItem($event, item)"
 							>
+								<span>{{ item.name }}</span>
 								<img
 									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
 									:alt="item.name"
@@ -646,7 +656,6 @@ defineExpose({
 									aria-hidden="true"
 									loading="lazy"
 								>
-								<span>{{ item.name }}</span>
 							</button>
 						</li>
 					</ul>
@@ -688,6 +697,45 @@ defineExpose({
 								/>
 							</li>
 						</ul>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section id="item-shop-panel-inventory" :data-pinned="inventoryPanelPinned || undefined">
+			<h2>inventory</h2>
+			<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
+				<span>Pin inventory panel</span>
+				<img
+					v-bind="textureBgImageAttrs(ui.shop.pin.default, 28)"
+					:style="`--txt-hover-uv-start-x: -${ui.shop.pin.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.pin.hover.uv[1]}px; --txt-slcHover-uv-start-x: -${ui.shop.pin.slcHover.uv[0]}px; --txt-slcHover-uv-start-y: -${ui.shop.pin.slcHover.uv[1]}px`"
+				>
+			</button>
+			<Icon class="i-ph:caret-left-bold caret" />
+			<div>
+				<img
+					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
+					width="26"
+					height="24"
+					loading="lazy"
+				>
+				<ul>
+					<li v-for="i in 6" :key="i">
+						<component
+							:is="inventory?.[i - 1] ? 'button' : 'div'"
+							@mouseenter="inventory?.[i - 1] && enterTooltipableElement($event, inventory[i - 1]!)"
+							@click="inventory?.[i - 1] && selectItem(inventory[i - 1]!, true)"
+							@click.right="inventory?.[i - 1] && sellItem($event, i - 1)"
+						>
+							<span>{{ inventory?.[i - 1]?.name }}</span>
+							<img
+								v-if="inventory?.[i - 1]"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${inventory[i - 1]!.image}`"
+								width="64"
+								height="64"
+								aria-hidden="true"
+								loading="lazy"
+							>
+						</component>
 					</li>
 				</ul>
 			</div>
@@ -772,27 +820,109 @@ defineExpose({
 		display: none;
 	}
 
+	#item-shop-panel-boots,
+	#item-shop-panel-inventory {
+		--inventory-panel-gap: calc(2 * var(--spacing));
+		--inventory-panel-py: calc(4 * var(--spacing));
+		--inventory-panel-gap: var(--spacing) * 3;
+		--inventory-panel-row-h: calc(var(--item-img-size) + 1.5rem);
+		--inventory-panel-inner-p: var(--spacing) * 1.25;
+		--inventory-panel-w: calc(var(--item-img-size) + 2 * var(--inventory-panel-inner-p));
+
+		:where(&[data-pinned]) {
+			> .pin-button img {
+				--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
+				--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
+			}
+		}
+	}
+
 	#item-shop-panel-boots {
-		--at-apply: 'bg-inherit p-4 ps-6 start-0 top-1/2 absolute z-10 -translate-x-full';
+		--at-apply: 'bg-inherit p-4 ps-6 start-0 bottom-[calc(2*var(--item-img-size))] absolute z-10 -translate-x-full';
+		--inventory-panel-h: calc(
+			var(--inventory-panel-row-h) * 3 + 2 * var(--inventory-panel-gap) + 2 * var(--inventory-panel-inner-p)
+		);
 
 		> div {
-			--at-apply: 'relative w-(--desktop-w) h-(--desktop-h) box-content of-hidden';
+			--at-apply: 'relative w-(--inventory-panel-w) h-(--inventory-panel-h) box-content of-hidden';
 
-			--gap: var(--spacing) * 3;
-			--row-h: calc(var(--item-img-size) + 1.5rem);
-			--inner-p: var(--spacing) * 1.25;
-			--desktop-w: calc(var(--item-img-size) + 2 * var(--inner-p));
-			--desktop-h: calc(var(--row-h) * 3 + 2 * var(--gap) + 2 * var(--inner-p));
-
-			ul {
+			> ul {
 				--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
 
 				direction: rtl;
 			}
 		}
+	}
 
-		#panel-boots-caret-icon {
+	#item-shop-panel-inventory {
+		--at-apply: 'bg-inherit p-4 ps-6 start-0 bottom-[0] absolute z-10 -translate-x-full';
+		--gap: calc(1 * var(--spacing));
+		--button-size: calc((3 * var(--item-img-size) + 2 * var(--inventory-panel-gap) - 4 * var(--gap)) / 4);
+		--inventory-panel-h: calc(var(--button-size) * 2 + var(--gap));
+
+		> div {
+			--at-apply: 'relative w-(--inventory-panel-w) h-(--inventory-panel-h) box-content of-hidden flex flex-row-reverse pe-[calc(var(--button-size)+2*var(--gap))]';
+
+			> img {
+				--at-apply: 'absolute end-0 top-1/2 -translate-y-1/2 size-[--button-size]';
+			}
+
+			> ul {
+				--at-apply: 'absolute end-[calc(var(--button-size)+2*var(--gap))] top-0 translate-x-full grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] gap-[--gap]';
+
+				> li {
+					--at-apply: 'size-[--button-size]';
+
+					> * {
+						--at-apply: 'bg-black size-[--button-size]';
+
+						> span {
+							--at-apply: 'sr-only';
+						}
+					}
+				}
+			}
+		}
+
+		&[data-pinned],
+		&:hover,
+		&:focus-within {
+			> div > ul {
+				--at-apply: 'translate-x-0';
+			}
+		}
+	}
+
+	#item-shop-panel-boots,
+	#item-shop-panel-inventory {
+		> h2 {
+			--at-apply: 'sr-only';
+		}
+
+		> .pin-button {
+			--at-apply: 'op-0 start-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5';
+
+			&:hover img,
+			&:focus-visible img {
+				--txt-uv-start-x: var(--txt-slcHover-uv-start-x) !important;
+				--txt-uv-start-y: var(--txt-slcHover-uv-start-y) !important;
+			}
+
+			> span {
+				--at-apply: 'sr-only';
+			}
+		}
+
+		> .icon.caret {
 			--at-apply: 'size-5 start-1 top-1/2 absolute -translate-y-full';
+		}
+
+		&[data-pinned],
+		&:hover,
+		&:focus-within {
+			> .pin-button {
+				--at-apply: 'op-100';
+			}
 		}
 
 		&[data-pinned],
@@ -800,7 +930,7 @@ defineExpose({
 		&:has(li > button:focus-visible) {
 			--at-apply: 'ps-4';
 
-			#panel-boots-caret-icon {
+			> .icon.caret {
 				--at-apply: 'hidden';
 			}
 
@@ -812,28 +942,6 @@ defineExpose({
 				}
 			}
 		}
-
-		&[data-pinned],
-		&:hover,
-		&:focus-within {
-			#item-shop-pin-panel-boots {
-				--at-apply: 'op-100';
-			}
-		}
-	}
-
-	:where(#item-shop-panel-boots[data-pinned]) {
-		#item-shop-pin-panel-boots img,
-		#item-shop-pin-panel-boots img {
-			--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
-			--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
-		}
-	}
-
-	#item-shop-pin-panel-boots:hover img,
-	#item-shop-pin-panel-boots:focus-visible img {
-		--txt-uv-start-x: var(--txt-slcHover-uv-start-x) !important;
-		--txt-uv-start-y: var(--txt-slcHover-uv-start-y) !important;
 	}
 
 	.item-shop-item-btn {
