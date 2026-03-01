@@ -718,7 +718,7 @@ defineExpose({
 						<li v-for="i in 6" :key="i">
 							<component
 								:is="inventory?.[i - 1] ? 'button' : 'div'"
-								:class="{ selected: inventory?.[i - 1] && inventory[i - 1]!.id === displayedItem?.id }"
+								:class="inventory?.[i - 1] && inventory[i - 1]!.id === displayedItem?.id ? 'selected' : undefined"
 								@mouseenter="inventory?.[i - 1] && enterTooltipableElement($event, inventory[i - 1]!)"
 								@click="inventory?.[i - 1] && selectItem(inventory[i - 1]!, true)"
 								@click.right="inventory?.[i - 1] && sellItem($event, i - 1)"
@@ -735,7 +735,9 @@ defineExpose({
 							</component>
 						</li>
 					</ul>
-					<div />
+					<div>
+						<span>ward slot (n/a)</span>
+					</div>
 					<img
 						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/images/nav-icon-collections.svg`"
 						width="26"
@@ -899,13 +901,25 @@ defineExpose({
 			}
 
 			> div {
-				--at-apply: 'absolute end-[--inventory-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--inventory-panel-eq-button-size)-6px)] bg-black hidden';
+				--at-apply: 'hidden absolute end-[--inventory-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--inventory-panel-eq-button-size)-6px)] bg-black cursor-not-allowed';
+
+				> span {
+					--at-apply: 'sr-only';
+				}
+
+				&::before {
+					--at-apply: 'block size-full brightness-80 content-empty';
+					background-image: url('https://raw.communitydragon.org/latest/game/assets/ux/minimap/pings/need_ward_gray.png');
+					background-repeat: no-repeat;
+					background-size: 60%;
+					background-position: center;
+				}
 			}
 		}
 
 		&[data-pinned],
 		&:hover,
-		&:focus-within {
+		&:has(li > button:focus-visible) {
 			> div {
 				> img {
 					--at-apply: 'hidden';
