@@ -764,6 +764,7 @@ defineExpose({
 	#dialog-item-shop {
 		--at-apply: 'bg-[--bg-clr] max-h-[80vh] max-w-[90vw] shadow-lg relative of-visible';
 		--bg-clr: theme('colors.cyan.950');
+		--item-button-img-b-w: 3px;
 
 		&[open] {
 			--at-apply: 'grid';
@@ -874,16 +875,16 @@ defineExpose({
 		--at-apply: 'p-[--inventory-panel-p] ps-6 start-0 bottom-8 absolute z-10 -translate-x-full';
 
 		> div {
-			--at-apply: 'relative pe-(--inventory-panel-w) h-(--inventory-panel-eq-h) box-content of-hidden';
+			--at-apply: 'relative pe-[calc(var(--inventory-panel-w)-var(--inventory-panel-inner-p)-var(--item-button-img-b-w))] h-(--inventory-panel-eq-h) box-content of-hidden';
 
 			> ul {
-				--at-apply: 'absolute end-[--inventory-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--inventory-panel-eq-gap] z-0';
+				--at-apply: 'absolute ps-[calc(var(--inventory-panel-inner-p)+var(--item-button-img-b-w))] end-[--inventory-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--inventory-panel-eq-gap] z-0';
 
 				> li {
 					--at-apply: 'size-[--inventory-panel-eq-button-size]';
 
 					> * {
-						--at-apply: 'bg-black m-[3px] size-[calc(var(--inventory-panel-eq-button-size)-6px)]';
+						--at-apply: 'bg-black m-[--item-button-img-b-w] size-[calc(var(--inventory-panel-eq-button-size)-6px)]';
 
 						> span {
 							--at-apply: 'sr-only';
@@ -989,7 +990,7 @@ defineExpose({
 	.item-shop-item-img {
 		box-shadow:
 			0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
-			0 0 0 3px black;
+			0 0 0 var(--item-button-img-b-w) black;
 	}
 
 	#item-shop-panel-eq > div > ul > li > button:is(:hover, :focus-visible, .selected),
