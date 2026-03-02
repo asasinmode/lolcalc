@@ -1,9 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
-	target?: IItemVariableCalculationTarget;
-}>();
+const target = defineModel<DamageSource>();
 
-const inventory = defineModel<IItem[]>();
+const itemVariableCalculationTarget = computed(() => target.value?.getItemVariableCalculationTarget());
 
 type IAllItemCategory = IItemCategory | 'all';
 
@@ -32,14 +30,23 @@ const sortedByPriceForMap = computed(() => Object
 	.values(items)
 	.sort((a, b) => a.gold.total - b.gold.total)
 	.filter(item => (item.mapMask & mapMask.value) !== 0));
+
 /**
  * buyability:
  * -1 = locked (same group)
  *	0 = inventory full
  *	1 = can buy
  */
-const withBuyability = computed<[IItem, buyability: -1 | 0 | 1][]>(() => sortedByPriceForMap.value.map((item) => {
-	return [item, -1];
+type IShopItem = [IItem, buyability: -1 | 0 | 1, adjustedPrice: number];
+
+const withBuyability = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
+	let buyability: -1 | 0 | 1 = 1;
+
+	if (target.value?.inventoryFull.value) {
+		buyability = 0;
+	}
+
+	return [item, buyability, item.gold.total];
 }));
 const filteredByCategory = computed(() =>
 	selectedCategory.value === 'all'
@@ -64,7 +71,7 @@ const groupedByEpicness = computed(() => filteredByStats.value.reduce((acc, item
 	}
 
 	return { ...acc, [epicness]: [itemWithBuyability] };
-}, {} as Record<number, [IItem, buyability: -1 | 0 | 1][]>));
+}, {} as Record<number, IShopItem[]>));
 
 const availableStatFilters = computed(() => Object.fromEntries(
 	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [
@@ -105,17 +112,17 @@ function selectItem(item: IItem, overwriteDisplayed: boolean) {
 }
 
 function buyItem(item: IItem) {
-	if (inventory.value && inventory.value.length < 6) {
-		inventory.value.push(markRaw(item));
+	if (target.value && !target.value.inventoryFull.value) {
+		target.value.items.value.push(markRaw(item));
 	}
 }
 
 function sellItem(event: MouseEvent, index: number) {
-	if (inventory.value?.[index]) {
-		inventory.value.splice(index, 1);
+	if (target.value?.items.value?.[index]) {
+		target.value.items.value.splice(index, 1);
 		leaveTooltipableElement();
-		if (inventory.value?.[index]) {
-			enterTooltipableElement(event, inventory.value[index]);
+		if (target.value.items.value?.[index]) {
+			enterTooltipableElement(event, target.value.items.value[index]);
 		}
 	}
 }
@@ -434,7 +441,7 @@ defineExpose({
 							:item="searchCursoredOverItem"
 							header-class="hoverable:bg-white/10"
 							header-tag="button"
-							:target
+							:target="itemVariableCalculationTarget"
 							@header-click="onSearchHeaderClick"
 						/>
 					</section>
@@ -584,7 +591,13 @@ defineExpose({
 			</template>
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
-			<ItemDescription :item="selectedItem" header-class="order-5" header-tag="h2" description-class="order-6" :target />
+			<ItemDescription
+				:item="selectedItem"
+				header-class="order-5"
+				header-tag="h2"
+				description-class="order-6"
+				:target="itemVariableCalculationTarget"
+			/>
 			<button
 				:disabled="!selectedItem"
 				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-neutral-950"
@@ -724,16 +737,16 @@ defineExpose({
 					<ul>
 						<li v-for="i in 6" :key="i">
 							<component
-								:is="inventory?.[i - 1] ? 'button' : 'div'"
-								:class="inventory?.[i - 1] && inventory[i - 1]!.id === displayedItem?.id ? 'selected' : undefined"
-								@mouseenter="inventory?.[i - 1] && enterTooltipableElement($event, inventory[i - 1]!)"
-								@click="inventory?.[i - 1] && selectItem(inventory[i - 1]!, true)"
-								@click.right="inventory?.[i - 1] && sellItem($event, i - 1)"
+								:is="target?.items.value[i - 1] ? 'button' : 'div'"
+								:class="target?.items.value[i - 1] && target.items.value[i - 1]!.id === displayedItem?.id ? 'selected' : undefined"
+								@mouseenter="target?.items.value[i - 1] && enterTooltipableElement($event, target.items.value[i - 1]!)"
+								@click="target?.items.value[i - 1] && selectItem(target.items.value[i - 1]!, true)"
+								@click.right="target?.items.value[i - 1] && sellItem($event, i - 1)"
 							>
-								<span>{{ inventory?.[i - 1]?.name }}</span>
+								<span>{{ target?.items.value[i - 1]?.name }}</span>
 								<img
-									v-if="inventory?.[i - 1]"
-									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${inventory[i - 1]!.image}`"
+									v-if="target?.items.value[i - 1]"
+									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${target.items.value[i - 1]!.image}`"
 									width="64"
 									height="64"
 									aria-hidden="true"
@@ -755,7 +768,7 @@ defineExpose({
 			</section>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
-			<ItemDescription :item="hoveredItem" :target header-subtitles />
+			<ItemDescription :item="hoveredItem" :target="itemVariableCalculationTarget" header-subtitles />
 		</div>
 	</VDialog>
 </template>
@@ -842,19 +855,19 @@ defineExpose({
 	#item-shop-panel-eq {
 		--at-apply: 'bg-[--bg-clr]';
 
-		--inventory-panel-gap: calc(2 * var(--spacing));
-		--inventory-panel-py: calc(4 * var(--spacing));
-		--inventory-panel-gap: calc(var(--spacing) * 3);
-		--inventory-panel-row-h: calc(var(--item-img-size) + 1.5rem);
-		--inventory-panel-p: calc(var(--spacing) * 4);
-		--inventory-panel-inner-p: calc(var(--spacing) * 1.25);
-		--inventory-panel-w: calc(var(--item-img-size) + 2 * var(--inventory-panel-inner-p));
+		--side-panel-gap: calc(2 * var(--spacing));
+		--side-panel-py: calc(4 * var(--spacing));
+		--side-panel-gap: calc(var(--spacing) * 3);
+		--side-panel-row-h: calc(var(--item-img-size) + 1.5rem);
+		--side-panel-p: calc(var(--spacing) * 4);
+		--side-panel-inner-p: calc(var(--spacing) * 1.25);
+		--side-panel-w: calc(var(--item-img-size) + 2 * var(--side-panel-inner-p));
 
-		--inventory-panel-eq-gap: calc(1 * var(--spacing));
-		--inventory-panel-eq-button-size: calc(
-			(var(--inventory-panel-inner-p) + 2 * var(--item-img-size) + var(--inventory-panel-gap)) / 3
+		--side-panel-eq-gap: calc(1 * var(--spacing));
+		--side-panel-eq-button-size: calc(
+			(var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-gap)) / 3
 		);
-		--inventory-panel-eq-h: calc(var(--inventory-panel-eq-button-size) * 2 + var(--inventory-panel-eq-gap));
+		--side-panel-eq-h: calc(var(--side-panel-eq-button-size) * 2 + var(--side-panel-eq-gap));
 
 		:where(&[data-pinned]) {
 			> .pin-button img {
@@ -865,13 +878,11 @@ defineExpose({
 	}
 
 	#item-shop-panel-boots {
-		--at-apply: 'p-[--inventory-panel-p] ps-6 start-0 bottom-[calc(var(--inventory-panel-eq-h)+2*var(--inventory-panel-p)+14*var(--spacing))] absolute z-10 -translate-x-full';
-		--inventory-panel-h: calc(
-			var(--inventory-panel-row-h) * 3 + 2 * var(--inventory-panel-gap) + 2 * var(--inventory-panel-inner-p)
-		);
+		--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-[calc(var(--side-panel-eq-h)+2*var(--side-panel-p)+14*var(--spacing))] absolute z-10 -translate-x-full';
+		--side-panel-h: calc(var(--side-panel-row-h) * 3 + 2 * var(--side-panel-gap) + 2 * var(--side-panel-inner-p));
 
 		> div {
-			--at-apply: 'relative w-(--inventory-panel-w) h-(--inventory-panel-h) box-content of-hidden';
+			--at-apply: 'relative w-(--side-panel-w) h-(--side-panel-h) box-content of-hidden';
 
 			> ul {
 				--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
@@ -882,19 +893,19 @@ defineExpose({
 	}
 
 	#item-shop-panel-eq {
-		--at-apply: 'p-[--inventory-panel-p] ps-6 start-0 bottom-8 absolute z-10 -translate-x-full';
+		--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-8 absolute z-10 -translate-x-full';
 
 		> div {
-			--at-apply: 'relative pe-[calc(var(--inventory-panel-w)-var(--inventory-panel-inner-p)-var(--item-button-img-b-w))] h-(--inventory-panel-eq-h) box-content of-hidden';
+			--at-apply: 'relative pe-[calc(var(--side-panel-w)-var(--side-panel-inner-p)-var(--item-button-img-b-w))] h-(--side-panel-eq-h) box-content of-hidden';
 
 			> ul {
-				--at-apply: 'absolute ps-[calc(var(--inventory-panel-inner-p)+var(--item-button-img-b-w))] end-[--inventory-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--inventory-panel-eq-gap] z-0';
+				--at-apply: 'absolute ps-[calc(var(--side-panel-inner-p)+var(--item-button-img-b-w))] end-[--side-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--side-panel-eq-gap] z-0';
 
 				> li {
-					--at-apply: 'size-[--inventory-panel-eq-button-size]';
+					--at-apply: 'size-[--side-panel-eq-button-size]';
 
 					> * {
-						--at-apply: 'bg-black m-[--item-button-img-b-w] size-[calc(var(--inventory-panel-eq-button-size)-6px)]';
+						--at-apply: 'bg-black m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)]';
 
 						> span {
 							--at-apply: 'sr-only';
@@ -904,11 +915,11 @@ defineExpose({
 			}
 
 			> img {
-				--at-apply: 'absolute size-[--inventory-panel-eq-button-size] top-1/2 -translate-y-1/2 end-[--inventory-panel-inner-p]';
+				--at-apply: 'absolute size-[--side-panel-eq-button-size] top-1/2 -translate-y-1/2 end-[--side-panel-inner-p]';
 			}
 
 			> div {
-				--at-apply: 'hidden absolute end-[--inventory-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--inventory-panel-eq-button-size)-6px)] bg-black cursor-not-allowed';
+				--at-apply: 'hidden absolute end-[--side-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)] bg-black cursor-not-allowed';
 
 				> span {
 					--at-apply: 'sr-only';

@@ -909,10 +909,7 @@ defineExpose({ el });
 				/>
 			</template>
 		</button>
-		<button
-			data-select-items=""
-			@click="selectItems(value.items, value.itemDamageCalculationTarget.value)"
-		>
+		<button data-select-items="" @click="selectItems(value)">
 			items
 			<img
 				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"

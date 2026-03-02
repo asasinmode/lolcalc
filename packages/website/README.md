@@ -70,6 +70,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] inventory panel or list in the footer
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
+  - [ ] show inventory total value
 - [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query
 - [ ] calculations [check out](https://github.com/OsOmE1/leaguebuilder)
