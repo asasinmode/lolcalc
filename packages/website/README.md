@@ -67,7 +67,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] double click to buy
   - [x] builds into displayed item tree
   - [x] item hover tooltip `Items/{{id}}.mItemDataClient`
-  - [ ] inventory panel or list in the footer
+  - [x] inventory panel or list in the footer
   - [ ] buying mechanism, components into item and so on
   - [ ] item groups, only one from group
 - [ ] mobile version and make look better

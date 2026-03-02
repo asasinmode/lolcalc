@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
 	target?: IItemVariableCalculationTarget;
 }>();
 
@@ -32,35 +32,44 @@ const sortedByPriceForMap = computed(() => Object
 	.values(items)
 	.sort((a, b) => a.gold.total - b.gold.total)
 	.filter(item => (item.mapMask & mapMask.value) !== 0));
+/**
+ * buyability:
+ * -1 = locked (same group)
+ *	0 = inventory full
+ *	1 = can buy
+ */
+const withBuyability = computed<[IItem, buyability: -1 | 0 | 1][]>(() => sortedByPriceForMap.value.map((item) => {
+	return [item, -1];
+}));
 const filteredByCategory = computed(() =>
 	selectedCategory.value === 'all'
-		? sortedByPriceForMap.value
-		: sortedByPriceForMap.value.filter(item => item.categories?.[selectedCategory.value as IItemCategory]),
+		? withBuyability.value
+		: withBuyability.value.filter(([item]) => item.categories?.[selectedCategory.value as IItemCategory]),
 );
 const filteredByStats = computed(() => {
 	const filterFunctions = Object.entries(appliedStatFilters.value).filter(([, isEnabled]) => isEnabled).map(([filter]) => ITEM_SHOP_STAT_FILTERS[filter as IItemShopStatFilter].filter);
 
-	return filterFunctions.length ? filteredByCategory.value.filter(item => filterFunctions.every(f => f(item))) : filteredByCategory.value;
+	return filterFunctions.length ? filteredByCategory.value.filter(([item]) => filterFunctions.every(f => f(item))) : filteredByCategory.value;
 });
-const groupedByEpicness = computed(() => filteredByStats.value.reduce((acc, item) => {
-	const { epicness = 0 } = item;
+const groupedByEpicness = computed(() => filteredByStats.value.reduce((acc, itemWithBuyability) => {
+	const { epicness = 0 } = itemWithBuyability[0];
 
-	if (item.isBoots && epicness !== 7) {
+	if (itemWithBuyability[0].isBoots && epicness !== 7) {
 		return acc;
 	}
 
 	if (acc[epicness]) {
-		acc[epicness].push(item);
+		acc[epicness].push(itemWithBuyability);
 		return acc;
 	}
 
-	return { ...acc, [epicness]: [item] };
-}, {} as Record<number, IItem[]>));
+	return { ...acc, [epicness]: [itemWithBuyability] };
+}, {} as Record<number, [IItem, buyability: -1 | 0 | 1][]>));
 
 const availableStatFilters = computed(() => Object.fromEntries(
 	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [
 		filter,
-		appliedStatFilters.value[filter as IItemShopStatFilter] || filteredByStats.value.some(filterFunction),
+		appliedStatFilters.value[filter as IItemShopStatFilter] || filteredByStats.value.some(([item]) => filterFunction(item)),
 	]),
 ) as Record<IItemShopStatFilter, boolean>);
 const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
@@ -550,7 +559,7 @@ defineExpose({
 					{{ epicnessName }}
 				</h3>
 				<ul class="mb-5 gap-3 grid grid-cols-10 last:mb-0">
-					<li v-for="item in groupedByEpicness[epicness]" :key="item.id">
+					<li v-for="[item, buyability] in groupedByEpicness[epicness]" :key="item.id">
 						<button
 							class="item-shop-item-btn"
 							:class="{ selected: selectedItem?.id === item.id }"
