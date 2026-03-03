@@ -111,6 +111,10 @@ function clearStatFilters() {
 	}
 }
 
+const targetShopItems = computed<IShopItem<false>[] | undefined>(() => target.value?.items.value.map(item =>
+	shopItemsMap.value.get(item.id)!,
+));
+
 const selectedItem = shallowRef<IShopItem<boolean>>();
 const displayedItem = shallowRef<IShopItem<boolean>>();
 
@@ -761,18 +765,17 @@ defineExpose({
 				<div>
 					<ul>
 						<li v-for="i in 6" :key="i">
-							<!-- TODO also computed, cache and use that -->
 							<component
-								:is="target?.items.value[i - 1] ? 'button' : 'div'"
-								:class="target?.items.value[i - 1] && target.items.value[i - 1]!.id === displayedItem?.[0].id ? 'selected' : undefined"
-								@mouseenter="target?.items.value[i - 1] && enterTooltipableElement($event, shopItemsMap.get(target.items.value[i - 1]!.id)!)"
-								@click="target?.items.value[i - 1] && selectItem(shopItemsMap.get(target.items.value[i - 1]!.id)!, true)"
-								@click.right="target?.items.value[i - 1] && sellItem($event, i - 1)"
+								:is="targetShopItems?.[i - 1] ? 'button' : 'div'"
+								:class="targetShopItems?.[i - 1] && targetShopItems[i - 1]![0].id === displayedItem?.[0].id ? 'selected' : undefined"
+								@mouseenter="targetShopItems?.[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
+								@click="targetShopItems?.[i - 1] && selectItem(targetShopItems[i - 1]!, true)"
+								@click.right="targetShopItems?.[i - 1] && sellItem($event, i - 1)"
 							>
-								<span>{{ target?.items.value[i - 1]?.name }}</span>
+								<span>{{ targetShopItems?.[i - 1]![0].name }}</span>
 								<img
-									v-if="target?.items.value[i - 1]"
-									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${target.items.value[i - 1]!.image}`"
+									v-if="targetShopItems?.[i - 1]"
+									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${targetShopItems[i - 1]![0].image}`"
 									width="64"
 									height="64"
 									aria-hidden="true"
