@@ -668,12 +668,10 @@ defineExpose({
 					>
 						<li v-for="shopItem in buildsIntoItems.slice(6)" :key="shopItem[0].id">
 							<button
-								class="hoverable:bg-white/10 flex w-full items-center"
 								@mouseenter="enterTooltipableElement($event, shopItem)"
 								@click="selectBuildsIntoMoreItem(shopItem)"
 								@click.right="rightClickItem($event, shopItem[0], shopItem[1])"
 							>
-								<span>{{ shopItem[0].name }}</span>
 								<img
 									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem[0].image}`"
 									:alt="shopItem[0].name"
@@ -683,6 +681,7 @@ defineExpose({
 									aria-hidden="true"
 									loading="lazy"
 								>
+								<span>{{ shopItem[0].name }}</span>
 							</button>
 						</li>
 					</ul>
@@ -1043,6 +1042,7 @@ defineExpose({
 			0 0 0 var(--item-button-img-b-w) black;
 	}
 
+	#builds-into-more-list > li > button:is(:hover, :focus-visible),
 	#item-shop-panel-eq > div > ul > li > button:is(:hover, :focus-visible, .selected),
 	.item-shop-item-btn:is(:hover, :focus-visible, .selected) img,
 	#item-shop-search-listbox > li:is(:hover, :focus-visible, .selected) img,
@@ -1064,6 +1064,12 @@ defineExpose({
 		position-anchor: --last-builds-into-button;
 		inset-block-start: calc(anchor(bottom) + 2px);
 		inset-inline-end: anchor(right);
+
+		> li {
+			> button {
+				--at-apply: 'hoverable:bg-white/10 flex w-full items-center';
+			}
+		}
 	}
 
 	#item-shop-hover-tooltip {
