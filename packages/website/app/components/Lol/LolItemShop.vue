@@ -55,7 +55,7 @@ const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((ite
 
 	return [item, buyability, item.gold.total];
 }));
-const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems).map(v => [v[0].id, v])));
+const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v[0].id, v])));
 const filteredByCategory = computed(() =>
 	selectedCategory.value === 'all'
 		? shopItems.value

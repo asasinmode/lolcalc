@@ -81,7 +81,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] item passives
   - [ ] champion passives
     - [ ] level breakpoint calculations
-    - [ ] champion-specific ui (veigar, ?)
+    - [ ] champion-specific ui (veigar, volibear, zaahen)
   - [ ] DamageSource.dedicatedData: any that's set and maintained based on stuff in utils/champion.ts
   - [ ] maybe dynamic variables can be cached on damage source under a key then reused
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
