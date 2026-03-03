@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { IShopItem } from '~/utils/types';
+
 const target = defineModel<DamageSource>();
 
 const itemVariableCalculationTarget = computed(() => target.value?.getItemVariableCalculationTarget());
@@ -30,16 +32,6 @@ const sortedByPriceForMap = computed(() => Object
 	.values(items)
 	.sort((a, b) => a.gold.total - b.gold.total)
 	.filter(item => (item.mapMask & mapMask.value) !== 0));
-
-/**
- * buyability:
- * -1 = locked (already have item of this group)
- *	0 = inventory full
- *	1 = can buy
- */
-type IShopItem<T = false> = T extends true
-	? [IItem, buyability: -1 | 0 | 1, adjustedPrice: number, IShopItem<boolean>[]]
-	: [IItem, buyability: -1 | 0 | 1, adjustedPrice: number];
 
 // TODO only items which components are present, update prices
 // calculate item total
@@ -291,9 +283,9 @@ function selectOrBuyIfDouble(item: IShopItem, overwriteDisplayed: boolean): bool
 
 let itemTooltipAnchor: undefined | HTMLElement;
 const itemTooltip = useTemplateRef('itemTooltip');
-const hoveredItem = shallowRef<IShopItem | IBuildsFromItem>();
+const hoveredItem = shallowRef<IShopItem<boolean>>();
 
-function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem | IBuildsFromItem) {
+function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem<boolean>) {
 	const { target } = eventLike as { target: HTMLElement };
 	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
@@ -714,9 +706,8 @@ defineExpose({
 			<div id="item-shop-build-path" class="text-center flex basis-[40%] flex-col items-center justify-center order-3">
 				<ItemBuildPathButton
 					v-if="displayedItem"
-					:item="displayedItem[0]"
+					:shop-item="displayedItem"
 					:is-selected="selectedItem?.[0].id === displayedItem[0].id"
-					:data-buyability="displayedItem[1]"
 					@click="selectItem(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem[0], displayedItem[1])"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
@@ -731,9 +722,8 @@ defineExpose({
 						:key="`${displayedItem![0].id}-${secondLevelBuildsFromItem[0].id}-${index}`"
 					>
 						<ItemBuildPathButton
-							:item="secondLevelBuildsFromItem[0]"
+							:shop-item="secondLevelBuildsFromItem"
 							:is-selected="selectedItem?.[0].id === secondLevelBuildsFromItem[0].id"
-							:data-buyability="secondLevelBuildsFromItem[1]"
 							@click="selectItem(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem[0], secondLevelBuildsFromItem[1])"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
@@ -744,9 +734,8 @@ defineExpose({
 								:key="`${displayedItem![0].id}-${secondLevelBuildsFromItem[0].id}-${thirdLevelBuildsFromItem[0].id}`"
 							>
 								<ItemBuildPathButton
-									:item="thirdLevelBuildsFromItem[0]"
+									:shop-item="thirdLevelBuildsFromItem"
 									:is-selected="selectedItem?.[0].id === thirdLevelBuildsFromItem[0].id"
-									:data-buyability="thirdLevelBuildsFromItem[1]"
 									@click="selectItem(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem[0], thirdLevelBuildsFromItem[1])"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
@@ -1110,7 +1099,7 @@ defineExpose({
 	#builds-into-more-list > li > button,
 	#item-shop-builds-into-list > li > button,
 	.item-shop-item-btn {
-			&[data-buyability='0'] {
+		&[data-buyability='0'] {
 			--at-apply: 'text-neutral-400';
 
 			> img {

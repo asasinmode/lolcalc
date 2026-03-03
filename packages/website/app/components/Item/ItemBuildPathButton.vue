@@ -1,23 +1,30 @@
 <script setup lang="ts">
+import type { IShopItem } from '~/utils/types';
+
 defineProps<{
 	isSelected?: boolean;
-	item: IItem;
+	shopItem: IShopItem<boolean>;
 }>();
 
 const { version } = usePatchVersion();
 </script>
 
 <template>
-	<button class="item-shop-item-btn" :class="{ selected: isSelected }" :data-has-components="item.from?.length ? '' : undefined">
-		<span>{{ item.name }}</span>
+	<button
+		class="item-shop-item-btn"
+		:class="{ selected: isSelected }"
+		:data-has-components="shopItem[0].from?.length ? '' : undefined"
+		:data-buyability="shopItem[1]"
+	>
+		<span>{{ shopItem[0].name }}</span>
 		<img
-			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem[0].image}`"
 			width="64"
 			height="64"
 			aria-hidden="true"
 			loading="lazy"
 		>
-		{{ item.gold.total }}
+		{{ shopItem[2] }}
 	</button>
 </template>
 

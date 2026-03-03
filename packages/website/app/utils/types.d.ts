@@ -8,6 +8,16 @@ export interface ITexture {
 }
 
 /**
+ * buyability:
+ * -1 = locked (already have item of this group)
+ *	0 = inventory full
+ *	1 = can buy
+ */
+export type IShopItem<T = false> = T extends true
+	? [IItem, buyability: -1 | 0 | 1, calculatedPrice: number, IShopItem<boolean>[]]
+	: [IItem, buyability: -1 | 0 | 1, calculatedPrice: number];
+
+/**
  * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value
  * possible values for these can be specified in `champion.ts` and `rune.ts` under proper key, these are then used for saving needed stringtable variables when getting game data
  */
