@@ -107,13 +107,15 @@ const targetShopItems = computed<IShopItem<false>[] | undefined>(() => target.va
 	shopItemsMap.value.get(item.id)!,
 ));
 
-const selectedItem = shallowRef<IShopItem<boolean>>();
-const displayedItem = shallowRef<IShopItem<boolean>>();
+const selectedItemId = ref<string>();
+const displayedItemId = ref<string>();
+const selectedItem = computed(() => selectedItemId.value ? shopItemsMap.value.get(selectedItemId.value) : undefined);
+const displayedItem = computed(() => displayedItemId.value ? shopItemsMap.value.get(displayedItemId.value) : undefined);
 
 function selectItem(item: IShopItem<boolean>, overwriteDisplayed: boolean) {
-	selectedItem.value = item;
+	selectedItemId.value = item[0].id;
 	if (overwriteDisplayed) {
-		displayedItem.value = item;
+		displayedItemId.value = item[0].id;
 	}
 }
 
@@ -180,7 +182,7 @@ function clearSearch() {
 function selectSearchResult(event: MouseEvent, index: number) {
 	const item = searchResults.value[index]!;
 	if (event.button === 2) {
-		selectedItem.value = item;
+		selectedItemId.value = item[0].id;
 		searchCursoredOverIndex.value = undefined;
 		selectItem(item, true);
 		buyItem(item[0], item[1]);
@@ -342,7 +344,7 @@ const displayedItemBuildPath3rdLevelHasTwo3Items = computed(() => {
 });
 
 /* eslint-disable antfu/consistent-list-newline */
-const bootItems: IShopItem[] = [
+const bootItems = computed<IShopItem[]>(() => [
 	'1001', '3047', '3111', // first col: boots, plated steelcaps, mercury's treads
 	'3006', '3009', '3020', // 2nd col: berserker's greaves, boots of swiftness, sorcerer's shoes
 	'3158', // 3rd col: ionian boots of lucidity
@@ -352,7 +354,7 @@ const bootItems: IShopItem[] = [
 		console.warn(`boot item not found ${id}`);
 	}
 	return item!;
-});
+}));
 /* eslint-enable antfu/consistent-list-newline */
 
 const bootsPanelPinned = ref(false);
@@ -426,6 +428,7 @@ defineExpose({
 						aria-labelledby="item-shop-results-lbl"
 						class="h-full of-y-auto *:grid *:grid-cols-[auto_1fr] *:grid-rows-2"
 					>
+						<!-- TODO style with buyability -->
 						<li
 							v-for="(shopItem, index) in searchResults"
 							:id="`item-shop-search-result-${index}`"
