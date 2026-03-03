@@ -37,7 +37,9 @@ const sortedByPriceForMap = computed(() => Object
  *	0 = inventory full
  *	1 = can buy
  */
-type IShopItem = [IItem, buyability: -1 | 0 | 1, adjustedPrice: number];
+type IShopItem<T = false> = T extends true
+	? [IItem, buyability: -1 | 0 | 1, adjustedPrice: number, IShopItem<boolean>[]]
+	: [IItem, buyability: -1 | 0 | 1, adjustedPrice: number];
 
 // TODO only items which components are present, update prices
 // calculate item total
@@ -109,10 +111,10 @@ function clearStatFilters() {
 	}
 }
 
-const selectedItem = shallowRef<IShopItem>();
-const displayedItem = shallowRef<IShopItem>();
+const selectedItem = shallowRef<IShopItem<boolean>>();
+const displayedItem = shallowRef<IShopItem<boolean>>();
 
-function selectItem(item: IShopItem, overwriteDisplayed: boolean) {
+function selectItem(item: IShopItem<boolean>, overwriteDisplayed: boolean) {
 	selectedItem.value = item;
 	if (overwriteDisplayed) {
 		displayedItem.value = item;
@@ -138,6 +140,16 @@ function sellItem(event: MouseEvent, index: number) {
 function rightClickItem(event: MouseEvent, item: IItem, buyability: IShopItem[1]) {
 	!event.shiftKey && buyItem(item, buyability);
 }
+
+const displayedItemBuildsFrom = computed<IShopItem<true>[] | undefined>(() =>
+	displayedItem.value?.[0].from?.map((secondLevelItemId) => {
+		const secondLevelItem = shopItemsMap.value.get(secondLevelItemId)!;
+		return [...secondLevelItem, (secondLevelItem[0].from || []).map((thirdLevelItemId) => {
+			const thirdLevelItem = shopItemsMap.value.get(thirdLevelItemId)!;
+			return thirdLevelItem;
+		})];
+	}),
+);
 
 const search = ref('');
 const searchInput = useTemplateRef('searchInput');
@@ -275,9 +287,9 @@ function selectOrBuyIfDouble(item: IShopItem, overwriteDisplayed: boolean): bool
 
 let itemTooltipAnchor: undefined | HTMLElement;
 const itemTooltip = useTemplateRef('itemTooltip');
-const hoveredItem = shallowRef<IShopItem>();
+const hoveredItem = shallowRef<IShopItem | IBuildsFromItem>();
 
-function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem) {
+function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem | IBuildsFromItem) {
 	const { target } = eventLike as { target: HTMLElement };
 	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
@@ -700,27 +712,32 @@ defineExpose({
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
 				/>
 				<ul
-					v-if="displayedItem?.[0].from?.length"
+					v-if="displayedItemBuildsFrom?.length"
 					class="grid grid-flow-col w-full"
 					:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
 				>
-					<!-- TODO compute, cache and use that from with gotten sohp item -->
-					<li v-for="(secondLevelItemId, index) in displayedItem[0].from" :key="`${displayedItem[0].id}-${secondLevelItemId}-${index}`">
+					<li
+						v-for="(secondLevelBuildsFromItem, index) in displayedItemBuildsFrom"
+						:key="`${displayedItem![0].id}-${secondLevelBuildsFromItem[0].id}-${index}`"
+					>
 						<ItemBuildPathButton
-							:item="shopItemsMap.get(secondLevelItemId)![0]"
-							:is-selected="selectedItem?.[0].id === secondLevelItemId"
-							@click="selectItem(shopItemsMap.get(secondLevelItemId)!, false)"
-							@click.right="rightClickItem($event, ...(shopItemsMap.get(secondLevelItemId)!.slice(0, 2) as [IItem, IShopItem[1]]))"
-							@mouseenter="enterTooltipableElement($event, shopItemsMap.get(secondLevelItemId)!)"
+							:item="secondLevelBuildsFromItem[0]"
+							:is-selected="selectedItem?.[0].id === secondLevelBuildsFromItem[0].id"
+							@click="selectItem(secondLevelBuildsFromItem, false)"
+							@click.right="rightClickItem($event, secondLevelBuildsFromItem[0], secondLevelBuildsFromItem[1])"
+							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
 						/>
-						<ul v-if="items[secondLevelItemId]?.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
-							<li v-for="thirdLevelItemId in items[secondLevelItemId].from" :key="`${displayedItem[0].id}-${secondLevelItemId}-${thirdLevelItemId}`">
+						<ul v-if="secondLevelBuildsFromItem[3].length" class="grid auto-cols-[1fr] grid-flow-col w-full">
+							<li
+								v-for="thirdLevelBuildsFromItem in secondLevelBuildsFromItem[3]"
+								:key="`${displayedItem![0].id}-${secondLevelBuildsFromItem[0].id}-${thirdLevelBuildsFromItem[0].id}`"
+							>
 								<ItemBuildPathButton
-									:item="shopItemsMap.get(thirdLevelItemId)![0]"
-									:is-selected="selectedItem?.[0].id === thirdLevelItemId"
-									@click="selectItem(shopItemsMap.get(thirdLevelItemId)!, false)"
-									@click.right="rightClickItem($event, ...(shopItemsMap.get(thirdLevelItemId)!.slice(0, 2) as [IItem, IShopItem[1]]))"
-									@mouseenter="enterTooltipableElement($event, shopItemsMap.get(thirdLevelItemId)!)"
+									:item="thirdLevelBuildsFromItem[0]"
+									:is-selected="selectedItem?.[0].id === thirdLevelBuildsFromItem[0].id"
+									@click="selectItem(thirdLevelBuildsFromItem, false)"
+									@click.right="rightClickItem($event, thirdLevelBuildsFromItem[0], thirdLevelBuildsFromItem[1])"
+									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
 								/>
 							</li>
 						</ul>
