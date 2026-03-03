@@ -559,6 +559,7 @@ defineExpose({
 						<button
 							class="item-shop-item-btn"
 							:class="{ selected: selectedItem?.[0].id === shopItem[0].id }"
+							:data-buyability="shopItem[1]"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@click="selectOrBuyIfDouble(shopItem, true)"
 							@click.right="rightClickItem($event, shopItem[0], shopItem[1])"
@@ -594,6 +595,7 @@ defineExpose({
 						<button
 							class="item-shop-item-btn"
 							:class="{ selected: selectedItem?.[0].id === shopItem[0].id }"
+							:data-buyability="shopItem[1]"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@mousedown.left="selectOrBuyIfDouble(shopItem, true)"
 							@mousedown.right="rightClickItem($event, shopItem[0], shopItem[1])"
@@ -636,6 +638,7 @@ defineExpose({
 				<li v-for="i in 6" :key="i">
 					<button
 						:disabled="!buildsIntoItems[i - 1]"
+						:data-buyability="buildsIntoItems[i - 1]?.[1]"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[i - 1]![0], buildsIntoItems[i - 1]![1])"
@@ -657,6 +660,7 @@ defineExpose({
 					<button
 						v-if="buildsIntoItems.length <= 7"
 						:disabled="!buildsIntoItems[6]"
+						:data-buyability="buildsIntoItems[6]?.[1]"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[6]![0], buildsIntoItems[6]![1])"
 						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
@@ -684,6 +688,7 @@ defineExpose({
 					>
 						<li v-for="shopItem in buildsIntoItems.slice(6)" :key="shopItem[0].id">
 							<button
+								:data-buyability="shopItem[1]"
 								@mouseenter="enterTooltipableElement($event, shopItem)"
 								@click="selectBuildsIntoMoreItem(shopItem)"
 								@click.right="rightClickItem($event, shopItem[0], shopItem[1])"
@@ -711,6 +716,7 @@ defineExpose({
 					v-if="displayedItem"
 					:item="displayedItem[0]"
 					:is-selected="selectedItem?.[0].id === displayedItem[0].id"
+					:data-buyability="displayedItem[1]"
 					@click="selectItem(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem[0], displayedItem[1])"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
@@ -727,6 +733,7 @@ defineExpose({
 						<ItemBuildPathButton
 							:item="secondLevelBuildsFromItem[0]"
 							:is-selected="selectedItem?.[0].id === secondLevelBuildsFromItem[0].id"
+							:data-buyability="secondLevelBuildsFromItem[1]"
 							@click="selectItem(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem[0], secondLevelBuildsFromItem[1])"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
@@ -739,6 +746,7 @@ defineExpose({
 								<ItemBuildPathButton
 									:item="thirdLevelBuildsFromItem[0]"
 									:is-selected="selectedItem?.[0].id === thirdLevelBuildsFromItem[0].id"
+									:data-buyability="thirdLevelBuildsFromItem[1]"
 									@click="selectItem(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem[0], thirdLevelBuildsFromItem[1])"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
@@ -772,7 +780,7 @@ defineExpose({
 								@click="targetShopItems?.[i - 1] && selectItem(targetShopItems[i - 1]!, true)"
 								@click.right="targetShopItems?.[i - 1] && sellItem($event, i - 1)"
 							>
-								<span>{{ targetShopItems?.[i - 1]![0].name }}</span>
+								<span>{{ targetShopItems?.[i - 1]?.[0].name }}</span>
 								<img
 									v-if="targetShopItems?.[i - 1]"
 									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${targetShopItems[i - 1]![0].image}`"
@@ -1048,7 +1056,7 @@ defineExpose({
 		}
 	}
 
-	.item-shop-item-btn img,
+	.item-shop-item-btn > img,
 	.item-shop-item-img {
 		--at-apply: 'size-12.5 min-w-12.5 m-0.75 text-xs text-center break-words';
 	}
@@ -1097,6 +1105,18 @@ defineExpose({
 		--width: 36rem;
 		inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 		inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
+	}
+
+	#builds-into-more-list > li > button,
+	#item-shop-builds-into-list > li > button,
+	.item-shop-item-btn {
+			&[data-buyability='0'] {
+			--at-apply: 'text-neutral-400';
+
+			> img {
+				--at-apply: 'brightness-60';
+			}
+		}
 	}
 }
 </style>

@@ -17,7 +17,7 @@ const { version } = usePatchVersion();
 			aria-hidden="true"
 			loading="lazy"
 		>
-		<span>{{ item.gold.total }}</span>
+		{{ item.gold.total }}
 	</button>
 </template>
 
