@@ -649,7 +649,7 @@ defineExpose({
 						:data-bought="buildsIntoItems[i - 1]?.buyability ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
-						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.item)"
+						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
 					>
 						<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.item.name }}</span>
 						<img
@@ -737,26 +737,24 @@ defineExpose({
 					:class="{ 'auto-cols-[1fr]': !(displayedItemBuildPath2ndLevelItemCount >= 3 && displayedItemBuildPath3rdLevelHasTwo3Items) }"
 				>
 					<li
-						v-for="(secondLevelBuildsFromItem, index) in displayedItemBuildsFrom"
-						:key="`${displayedItem!.item.id}-${secondLevelBuildsFromItem.item.id}-${index}`"
+						v-for="(secondLevelBuildsFromItem, secondLevelIndex) in displayedItemBuildsFrom"
+						:key="secondLevelIndex"
 					>
 						<ItemBuildPathButton
 							:shop-item="secondLevelBuildsFromItem"
 							:is-selected="selectedItem?.item.id === secondLevelBuildsFromItem.item.id"
-							:data-bought="displayedItem!.isBought || secondLevelBuildsFromItem.isBought ? '' : undefined"
 							@click="selectItem(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
 						/>
 						<ul v-if="secondLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
 							<li
-								v-for="thirdLevelBuildsFromItem in secondLevelBuildsFromItem.from"
-								:key="`${displayedItem!.item.id}-${secondLevelBuildsFromItem.item.id}-${thirdLevelBuildsFromItem.item.id}`"
+								v-for="(thirdLevelBuildsFromItem, thirdLevelIndex) in secondLevelBuildsFromItem.from"
+								:key="`${secondLevelIndex}-${thirdLevelIndex}`"
 							>
 								<ItemBuildPathButton
 									:shop-item="thirdLevelBuildsFromItem"
 									:is-selected="selectedItem?.item.id === thirdLevelBuildsFromItem.item.id"
-									:data-bought="displayedItem!.isBought || secondLevelBuildsFromItem.isBought || thirdLevelBuildsFromItem.isBought ? '' : undefined"
 									@click="selectItem(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"

@@ -3,7 +3,7 @@ import type { IShopItem } from '~/utils/types';
 
 defineProps<{
 	isSelected?: boolean;
-	shopItem: IShopItem<boolean>;
+	shopItem: IShopItem;
 }>();
 
 const { version } = usePatchVersion();
@@ -13,18 +13,19 @@ const { version } = usePatchVersion();
 	<button
 		class="item-shop-item-btn"
 		:class="{ selected: isSelected }"
-		:data-has-components="shopItem[0].from?.length ? '' : undefined"
-		:data-buyability="shopItem[1]"
+		:data-has-components="shopItem.item.from?.length ? '' : undefined"
+		:data-buyability="shopItem.buyability"
+		:data-bought="shopItem.isBought ? '' : undefined"
 	>
-		<span>{{ shopItem[0].name }}</span>
+		<span>{{ shopItem.item.name }}</span>
 		<img
-			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem[0].image}`"
+			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
 			width="64"
 			height="64"
 			aria-hidden="true"
 			loading="lazy"
 		>
-		<span>{{ shopItem[2] }}</span>
+		<span>{{ shopItem.calculatedPrice }}</span>
 	</button>
 </template>
 
