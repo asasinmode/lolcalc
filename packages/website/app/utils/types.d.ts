@@ -7,15 +7,18 @@ export interface ITexture {
 	uv: number[];
 }
 
-/**
- * buyability:
- * -1 = locked (already have item of this group)
- *	0 = inventory full
- *	1 = can buy
- */
-export type IShopItem<T = false> = T extends true
-	? [IItem, buyability: -1 | 0 | 1, calculatedPrice: number, isBought?: boolean, IShopItem<boolean>[]]
-	: [IItem, buyability: -1 | 0 | 1, calculatedPrice: number, isBought?: boolean];
+export interface IShopItem {
+	item: IItem;
+	/**
+	 * -1 = locked (already have item of this group)
+	 *	0 = inventory full
+	 *	1 = can buy
+	 */
+	buyability: -1 | 0 | 1;
+	calculatedPrice: number;
+	isBought?: boolean;
+	from?: IShopItem[];
+}
 
 /**
  * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value

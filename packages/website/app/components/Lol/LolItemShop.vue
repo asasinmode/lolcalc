@@ -57,23 +57,28 @@ const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((ite
 		buyability = 0;
 	}
 
-	return [item, buyability, item.gold.total, target.value?.items.value.some(inventoryItem => inventoryItem.id === item.id)];
+	return {
+		item,
+		buyability,
+		calculatedPrice: item.gold.total,
+		isBought: target.value?.items.value.some(inventoryItem => inventoryItem.id === item.id),
+	};
 }));
-const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v[0].id, v])));
+const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v.item.id, v])));
 const filteredByCategory = computed(() =>
 	selectedCategory.value === 'all'
 		? shopItems.value
-		: shopItems.value.filter(([item]) => item.categories?.[selectedCategory.value as IItemCategory]),
+		: shopItems.value.filter(({ item }) => item.categories?.[selectedCategory.value as IItemCategory]),
 );
 const filteredByStats = computed(() => {
 	const filterFunctions = Object.entries(appliedStatFilters.value).filter(([, isEnabled]) => isEnabled).map(([filter]) => ITEM_SHOP_STAT_FILTERS[filter as IItemShopStatFilter].filter);
 
-	return filterFunctions.length ? filteredByCategory.value.filter(([item]) => filterFunctions.every(f => f(item))) : filteredByCategory.value;
+	return filterFunctions.length ? filteredByCategory.value.filter(({ item }) => filterFunctions.every(f => f(item))) : filteredByCategory.value;
 });
 const groupedByEpicness = computed(() => filteredByStats.value.reduce((acc, itemWithBuyability) => {
-	const { epicness = 0 } = itemWithBuyability[0];
+	const { epicness = 0 } = itemWithBuyability.item;
 
-	if (itemWithBuyability[0].isBoots && epicness !== 7) {
+	if (itemWithBuyability.item.isBoots && epicness !== 7) {
 		return acc;
 	}
 
@@ -88,7 +93,7 @@ const groupedByEpicness = computed(() => filteredByStats.value.reduce((acc, item
 const availableStatFilters = computed(() => Object.fromEntries(
 	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { filter: filterFunction }]) => [
 		filter,
-		appliedStatFilters.value[filter as IItemShopStatFilter] || filteredByStats.value.some(([item]) => filterFunction(item)),
+		appliedStatFilters.value[filter as IItemShopStatFilter] || filteredByStats.value.some(({ item }) => filterFunction(item)),
 	]),
 ) as Record<IItemShopStatFilter, boolean>);
 const computedStatFilters = computed(() => Object.fromEntries(Object.entries(ITEM_SHOP_STAT_FILTERS).map(([filter, { name }]) => {
@@ -113,7 +118,7 @@ function clearStatFilters() {
 	}
 }
 
-const targetShopItems = computed<IShopItem<false>[] | undefined>(() => target.value?.items.value.map(item =>
+const targetShopItems = computed<IShopItem[] | undefined>(() => target.value?.items.value.map(item =>
 	shopItemsMap.value.get(item.id)!,
 ));
 
@@ -122,14 +127,14 @@ const displayedItemId = ref<string>();
 const selectedItem = computed(() => selectedItemId.value ? shopItemsMap.value.get(selectedItemId.value) : undefined);
 const displayedItem = computed(() => displayedItemId.value ? shopItemsMap.value.get(displayedItemId.value) : undefined);
 
-function selectItem(item: IShopItem<boolean>, overwriteDisplayed: boolean) {
-	selectedItemId.value = item[0].id;
+function selectItem(item: IShopItem, overwriteDisplayed: boolean) {
+	selectedItemId.value = item.item.id;
 	if (overwriteDisplayed) {
-		displayedItemId.value = item[0].id;
+		displayedItemId.value = item.item.id;
 	}
 }
 
-function buyItem(item: IItem, buyability: IShopItem[1]) {
+function buyItem(item: IItem, buyability: IShopItem['buyability']) {
 	if (target.value && !target.value.inventoryFull.value) {
 		target.value.items.value.push(markRaw(item));
 	}
@@ -145,17 +150,17 @@ function sellItem(event: MouseEvent, index: number) {
 	}
 }
 
-function rightClickItem(event: MouseEvent, item: IItem, buyability: IShopItem[1]) {
+function rightClickItem(event: MouseEvent, item: IItem, buyability: IShopItem['buyability']) {
 	!event.shiftKey && buyItem(item, buyability);
 }
 
-const displayedItemBuildsFrom = computed<IShopItem<true>[] | undefined>(() =>
-	displayedItem.value?.[0].from?.map((secondLevelItemId) => {
+const displayedItemBuildsFrom = computed<IShopItem[] | undefined>(() =>
+	displayedItem.value?.item.from?.map((secondLevelItemId) => {
 		const secondLevelItem = shopItemsMap.value.get(secondLevelItemId)!;
-		return [...secondLevelItem, (secondLevelItem[0].from || []).map((thirdLevelItemId) => {
-			const thirdLevelItem = shopItemsMap.value.get(thirdLevelItemId)!;
-			return thirdLevelItem;
-		})];
+		return {
+			...secondLevelItem,
+			from: (secondLevelItem.item.from || []).map(thirdLevelItemId => shopItemsMap.value.get(thirdLevelItemId)!),
+		} satisfies IShopItem;
 	}),
 );
 
@@ -173,7 +178,7 @@ const searchResults = computed(() => {
 	}
 
 	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v);
-	return shopItems.value.filter(([item]) => splitSearch.every(word => item.searchString.includes(word)));
+	return shopItems.value.filter(({ item }) => splitSearch.every(word => item.searchString.includes(word)));
 });
 
 const searchCursoredOverItem = computed(() => searchCursoredOverIndex.value !== undefined ? searchResults.value[searchCursoredOverIndex.value] : undefined);
@@ -190,18 +195,18 @@ function clearSearch() {
 }
 
 function selectSearchResult(event: MouseEvent, index: number) {
-	const item = searchResults.value[index]!;
+	const shopItem = searchResults.value[index]!;
 	if (event.button === 2) {
-		selectedItemId.value = item[0].id;
+		selectedItemId.value = shopItem.item.id;
 		searchCursoredOverIndex.value = undefined;
-		selectItem(item, true);
-		buyItem(item[0], item[1]);
+		selectItem(shopItem, true);
+		buyItem(shopItem.item, shopItem.buyability);
 		closeSearch();
 		searchInput.value?.blur();
 	} else {
 		searchCursoredOverIndex.value = index;
 		searchSelectedIndex.value = index;
-		if (selectOrBuyIfDouble(item, true)) {
+		if (selectOrBuyIfDouble(shopItem, true)) {
 			closeSearch();
 			searchInput.value?.blur();
 		}
@@ -224,7 +229,7 @@ function onSearchKeydown(event: KeyboardEvent) {
 	switch (event.key) {
 		case 'Enter': {
 			if (searchCursoredOverItem.value) {
-				buyItem(searchCursoredOverItem.value[0], searchCursoredOverItem.value[1]);
+				buyItem(searchCursoredOverItem.value.item, searchCursoredOverItem.value.buyability);
 				closeSearch();
 			} else {
 				closeSearch();
@@ -272,7 +277,7 @@ function onSearchKeydown(event: KeyboardEvent) {
 
 function onSearchHeaderClick(isRightClick: boolean) {
 	if (isRightClick) {
-		buyItem(searchCursoredOverItem.value![0], searchCursoredOverItem.value![1]);
+		buyItem(searchCursoredOverItem.value!.item, searchCursoredOverItem.value!.buyability);
 	} else {
 		selectOrBuyIfDouble(searchCursoredOverItem.value!, true);
 	}
@@ -282,22 +287,22 @@ let lastLeftClicked: [time: number, itemId: string] | undefined;
 
 function selectOrBuyIfDouble(item: IShopItem, overwriteDisplayed: boolean): boolean {
 	const now = Date.now();
-	if (lastLeftClicked && item[0].id === lastLeftClicked[1] && ((now - lastLeftClicked[0]) < 500)) {
-		buyItem(item[0], item[1]);
+	if (lastLeftClicked && item.item.id === lastLeftClicked[1] && ((now - lastLeftClicked[0]) < 500)) {
+		buyItem(item.item, item.buyability);
 		lastLeftClicked = undefined;
 		return true;
 	}
 
-	lastLeftClicked = [now, item[0].id];
+	lastLeftClicked = [now, item.item.id];
 	selectItem(item, overwriteDisplayed);
 	return false;
 }
 
 let itemTooltipAnchor: undefined | HTMLElement;
 const itemTooltip = useTemplateRef('itemTooltip');
-const hoveredItem = shallowRef<IShopItem<boolean>>();
+const hoveredItem = shallowRef<IShopItem>();
 
-function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem<boolean>) {
+function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent, item: IShopItem) {
 	const { target } = eventLike as { target: HTMLElement };
 	itemTooltip.value?.showPopover();
 	itemTooltipAnchor = target;
@@ -322,10 +327,10 @@ function updateTooltipPosition(event: MouseEvent) {
 
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
 
-const buildsIntoItems = computed(() => selectedItem.value?.[0].into
+const buildsIntoItems = computed(() => selectedItem.value?.item.into
 	?.filter(id => (items[id]!.mapMask & mapMask.value) !== 0)
 	.map(id => shopItemsMap.value.get(id)!)
-	.sort((a, b) => a[0].gold.total - b[0].gold.total) || []);
+	.sort((a, b) => a.item.gold.total - b.item.gold.total) || []);
 
 function closeBuildsIntoMoreListIfOutside(event: FocusEvent) {
 	const target = event.relatedTarget as HTMLElement | null;
@@ -339,10 +344,10 @@ function selectBuildsIntoMoreItem(item: IShopItem) {
 	leaveTooltipableElement();
 }
 
-const displayedItemBuildPath2ndLevelItemCount = computed(() => displayedItem.value?.[0].from?.length || 0);
+const displayedItemBuildPath2ndLevelItemCount = computed(() => displayedItem.value?.item.from?.length || 0);
 const displayedItemBuildPath3rdLevelHasTwo3Items = computed(() => {
 	let has3Components = false;
-	for (const itemId of displayedItem.value?.[0].from || []) {
+	for (const itemId of displayedItem.value?.item.from || []) {
 		const currentHas3Components = (items[itemId]?.from?.length || 0) >= 3;
 		if (has3Components && currentHas3Components) {
 			return true;
@@ -437,7 +442,7 @@ defineExpose({
 						<li
 							v-for="(shopItem, index) in searchResults"
 							:id="`item-shop-search-result-${index}`"
-							:key="shopItem[0].id"
+							:key="shopItem.item.id"
 							role="option"
 							class="hover:bg-white/10"
 							:class="{
@@ -448,21 +453,21 @@ defineExpose({
 							@mousedown.stop.prevent="selectSearchResult($event, index)"
 						>
 							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem[0].image}`"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
 								width="64"
 								height="64"
 								class="item-shop-item-img row-span-full"
 								aria-hidden="true"
 								loading="lazy"
 							>
-							{{ shopItem[0].name }}
-							<span>{{ shopItem[2] }}</span>
+							{{ shopItem.item.name }}
+							<span>{{ shopItem.calculatedPrice }}</span>
 						</li>
 					</ul>
 					<section aria-live="polite" aria-atomic="true" class="row-span-full">
 						<ItemDescription
 							ref="searchItemDescription"
-							:item="searchCursoredOverItem?.[0]"
+							:item="searchCursoredOverItem?.item"
 							header-class="hoverable:bg-white/10"
 							header-tag="button"
 							:target="itemVariableCalculationTarget"
@@ -555,26 +560,26 @@ defineExpose({
 			<Icon class="i-ph:caret-left-bold caret" />
 			<div>
 				<ul>
-					<li v-for="shopItem in bootItems" :key="shopItem[0].id">
+					<li v-for="shopItem in bootItems" :key="shopItem.item.id">
 						<button
 							class="item-shop-item-btn"
-							:class="{ selected: selectedItem?.[0].id === shopItem[0].id }"
-							:data-buyability="shopItem[1]"
-							:data-bought="shopItem[3] ? '' : undefined"
+							:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
+							:data-buyability="shopItem.buyability"
+							:data-bought="shopItem.isBought ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@click="selectOrBuyIfDouble(shopItem, true)"
-							@click.right="rightClickItem($event, shopItem[0], shopItem[1])"
+							@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
 						>
-							<span>{{ shopItem[0].name }}</span>
+							<span>{{ shopItem.item.name }}</span>
 							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem[0].image}`"
-								:alt="shopItem[0].name"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
+								:alt="shopItem.item.name"
 								width="64"
 								height="64"
 								aria-hidden="true"
 								loading="lazy"
 							>
-							<span>{{ shopItem[2] }}</span>
+							<span>{{ shopItem.buyability }}</span>
 						</button>
 					</li>
 				</ul>
@@ -592,27 +597,27 @@ defineExpose({
 					{{ epicnessName }}
 				</h3>
 				<ul class="mb-5 gap-3 grid grid-cols-10 last:mb-0">
-					<li v-for="shopItem in groupedByEpicness[epicness]" :key="shopItem[0].id">
+					<li v-for="shopItem in groupedByEpicness[epicness]" :key="shopItem.item.id">
 						<button
 							class="item-shop-item-btn"
-							:class="{ selected: selectedItem?.[0].id === shopItem[0].id }"
-							:data-buyability="shopItem[1]"
-							:data-bought="shopItem[3] ? '' : undefined"
+							:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
+							:data-buyability="shopItem.buyability"
+							:data-bought="shopItem.isBought ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@mousedown.left="selectOrBuyIfDouble(shopItem, true)"
-							@mousedown.right="rightClickItem($event, shopItem[0], shopItem[1])"
+							@mousedown.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
 							@keydown.space="selectItem(shopItem, true)"
-							@keydown.enter="buyItem(shopItem[0], shopItem[1])"
+							@keydown.enter="buyItem(shopItem.item, shopItem.buyability)"
 						>
-							<span>{{ shopItem[0].name }}</span>
+							<span>{{ shopItem.item.name }}</span>
 							<img
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem[0].image}`"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
 								width="64"
 								height="64"
 								aria-hidden="true"
 								loading="lazy"
 							>
-							<span>{{ shopItem[2] }}</span>
+							<span>{{ shopItem.calculatedPrice }}</span>
 						</button>
 					</li>
 				</ul>
@@ -620,7 +625,7 @@ defineExpose({
 		</section>
 		<section style="grid-area: builds-into" class="flex flex-col">
 			<ItemDescription
-				:item="selectedItem?.[0]"
+				:item="selectedItem?.item"
 				header-class="order-5"
 				header-tag="h2"
 				description-class="order-6"
@@ -629,7 +634,7 @@ defineExpose({
 			<button
 				:disabled="!selectedItem"
 				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-neutral-950"
-				@click="buyItem(selectedItem![0], selectedItem![1])"
+				@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
 			>
 				Purchase
 			</button>
@@ -640,17 +645,17 @@ defineExpose({
 				<li v-for="i in 6" :key="i">
 					<button
 						:disabled="!buildsIntoItems[i - 1]"
-						:data-buyability="buildsIntoItems[i - 1]?.[1]"
-						:data-bought="buildsIntoItems[i - 1]?.[3] ? '' : undefined"
+						:data-buyability="buildsIntoItems[i - 1]?.item"
+						:data-bought="buildsIntoItems[i - 1]?.buyability ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
-						@click.right="rightClickItem($event, buildsIntoItems[i - 1]![0], buildsIntoItems[i - 1]![1])"
+						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.item)"
 					>
-						<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]![0].name }}</span>
+						<span v-if="buildsIntoItems[i - 1]" class="sr-only">{{ buildsIntoItems[i - 1]!.item.name }}</span>
 						<img
 							v-if="buildsIntoItems[i - 1]"
-							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]![0].image}`"
-							:alt="buildsIntoItems[i - 1]![0].name"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[i - 1]!.item.image}`"
+							:alt="buildsIntoItems[i - 1]!.item.name"
 							class="item-shop-item-img"
 							width="64"
 							height="64"
@@ -663,17 +668,17 @@ defineExpose({
 					<button
 						v-if="buildsIntoItems.length <= 7"
 						:disabled="!buildsIntoItems[6]"
-						:data-buyability="buildsIntoItems[6]?.[1]"
-						:data-bought="buildsIntoItems[6]?.[3] ? '' : undefined"
+						:data-buyability="buildsIntoItems[6]?.buyability"
+						:data-bought="buildsIntoItems[6]?.isBought ? '' : undefined"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
-						@click.right="rightClickItem($event, buildsIntoItems[6]![0], buildsIntoItems[6]![1])"
+						@click.right="rightClickItem($event, buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
 					>
-						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6][0].name }}</span>
+						<span v-if="buildsIntoItems[6]" class="sr-only">{{ buildsIntoItems[6].item.name }}</span>
 						<img
 							v-if="buildsIntoItems[6]"
-							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[6][0].image}`"
-							:alt="buildsIntoItems[6][0].name"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${buildsIntoItems[6].item.image}`"
+							:alt="buildsIntoItems[6].item.name"
 							class="item-shop-item-img"
 							width="64"
 							height="64"
@@ -690,40 +695,40 @@ defineExpose({
 						popover
 						@focusout="closeBuildsIntoMoreListIfOutside"
 					>
-						<li v-for="shopItem in buildsIntoItems.slice(6)" :key="shopItem[0].id">
+						<li v-for="shopItem in buildsIntoItems.slice(6)" :key="shopItem.item.id">
 							<button
-								:data-buyability="shopItem[1]"
-								:data-bought="shopItem[3] ? '' : undefined"
+								:data-buyability="shopItem.buyability"
+								:data-bought="shopItem.isBought ? '' : undefined"
 								@mouseenter="enterTooltipableElement($event, shopItem)"
 								@click="selectBuildsIntoMoreItem(shopItem)"
-								@click.right="rightClickItem($event, shopItem[0], shopItem[1])"
+								@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
 							>
 								<img
-									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem[0].image}`"
-									:alt="shopItem[0].name"
+									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
+									:alt="shopItem.item.name"
 									class="item-shop-item-img"
 									width="64"
 									height="64"
 									aria-hidden="true"
 									loading="lazy"
 								>
-								<span>{{ shopItem[0].name }}</span>
+								<span>{{ shopItem.item.name }}</span>
 							</button>
 						</li>
 					</ul>
 				</li>
 			</ul>
 			<h3 v-show="displayedItem" class="sr-only">
-				{{ displayedItem?.[0].name }} build path
+				{{ displayedItem?.item.name }} build path
 			</h3>
 			<div id="item-shop-build-path" class="text-center flex basis-[40%] flex-col items-center justify-center order-3">
 				<ItemBuildPathButton
 					v-if="displayedItem"
 					:shop-item="displayedItem"
-					:is-selected="selectedItem?.[0].id === displayedItem[0].id"
-					:data-bought="displayedItem[3] ? '' : undefined"
+					:is-selected="selectedItem?.item.id === displayedItem.item.id"
+					:data-bought="displayedItem.isBought ? '' : undefined"
 					@click="selectItem(displayedItem, false)"
-					@click.right="rightClickItem($event, displayedItem[0], displayedItem[1])"
+					@click.right="rightClickItem($event, displayedItem.item, displayedItem.buyability)"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
 				/>
 				<ul
@@ -733,27 +738,27 @@ defineExpose({
 				>
 					<li
 						v-for="(secondLevelBuildsFromItem, index) in displayedItemBuildsFrom"
-						:key="`${displayedItem![0].id}-${secondLevelBuildsFromItem[0].id}-${index}`"
+						:key="`${displayedItem!.item.id}-${secondLevelBuildsFromItem.item.id}-${index}`"
 					>
 						<ItemBuildPathButton
 							:shop-item="secondLevelBuildsFromItem"
-							:is-selected="selectedItem?.[0].id === secondLevelBuildsFromItem[0].id"
-							:data-bought="displayedItem![3] || secondLevelBuildsFromItem[3] ? '' : undefined"
+							:is-selected="selectedItem?.item.id === secondLevelBuildsFromItem.item.id"
+							:data-bought="displayedItem!.isBought || secondLevelBuildsFromItem.isBought ? '' : undefined"
 							@click="selectItem(secondLevelBuildsFromItem, false)"
-							@click.right="rightClickItem($event, secondLevelBuildsFromItem[0], secondLevelBuildsFromItem[1])"
+							@click.right="rightClickItem($event, secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
 						/>
-						<ul v-if="secondLevelBuildsFromItem[4].length" class="grid auto-cols-[1fr] grid-flow-col w-full">
+						<ul v-if="secondLevelBuildsFromItem.from?.length" class="grid auto-cols-[1fr] grid-flow-col w-full">
 							<li
-								v-for="thirdLevelBuildsFromItem in secondLevelBuildsFromItem[4]"
-								:key="`${displayedItem![0].id}-${secondLevelBuildsFromItem[0].id}-${thirdLevelBuildsFromItem[0].id}`"
+								v-for="thirdLevelBuildsFromItem in secondLevelBuildsFromItem.from"
+								:key="`${displayedItem!.item.id}-${secondLevelBuildsFromItem.item.id}-${thirdLevelBuildsFromItem.item.id}`"
 							>
 								<ItemBuildPathButton
 									:shop-item="thirdLevelBuildsFromItem"
-									:is-selected="selectedItem?.[0].id === thirdLevelBuildsFromItem[0].id"
-									:data-bought="displayedItem![3] || secondLevelBuildsFromItem[3] || thirdLevelBuildsFromItem[3] ? '' : undefined"
+									:is-selected="selectedItem?.item.id === thirdLevelBuildsFromItem.item.id"
+									:data-bought="displayedItem!.isBought || secondLevelBuildsFromItem.isBought || thirdLevelBuildsFromItem.isBought ? '' : undefined"
 									@click="selectItem(thirdLevelBuildsFromItem, false)"
-									@click.right="rightClickItem($event, thirdLevelBuildsFromItem[0], thirdLevelBuildsFromItem[1])"
+									@click.right="rightClickItem($event, thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
 								/>
 							</li>
@@ -780,15 +785,15 @@ defineExpose({
 						<li v-for="i in 6" :key="i">
 							<component
 								:is="targetShopItems?.[i - 1] ? 'button' : 'div'"
-								:class="targetShopItems?.[i - 1] && targetShopItems[i - 1]![0].id === displayedItem?.[0].id ? 'selected' : undefined"
+								:class="targetShopItems?.[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
 								@mouseenter="targetShopItems?.[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
 								@click="targetShopItems?.[i - 1] && selectItem(targetShopItems[i - 1]!, true)"
 								@click.right="targetShopItems?.[i - 1] && sellItem($event, i - 1)"
 							>
-								<span>{{ targetShopItems?.[i - 1]?.[0].name }}</span>
+								<span>{{ targetShopItems?.[i - 1]?.item.name }}</span>
 								<img
 									v-if="targetShopItems?.[i - 1]"
-									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${targetShopItems[i - 1]![0].image}`"
+									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${targetShopItems[i - 1]!.item.image}`"
 									width="64"
 									height="64"
 									aria-hidden="true"
@@ -810,7 +815,7 @@ defineExpose({
 			</section>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
-			<ItemDescription :item="hoveredItem?.[0]" :target="itemVariableCalculationTarget" header-subtitles />
+			<ItemDescription :item="hoveredItem?.item" :target="itemVariableCalculationTarget" header-subtitles />
 		</div>
 	</VDialog>
 </template>
