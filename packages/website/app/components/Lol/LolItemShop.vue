@@ -1037,9 +1037,14 @@ defineExpose({
 
 	.item-shop-item-btn {
 		--at-apply: 'p-1 -m-1';
+		direction: ltr;
 
 		> span:first-child {
 			--at-apply: 'sr-only';
+		}
+
+		> span:last-of-type {
+			--at-apply: 'block leading-5 text-center';
 		}
 
 		&:hover,
