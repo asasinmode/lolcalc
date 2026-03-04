@@ -24,7 +24,7 @@ const { version } = usePatchVersion();
 			aria-hidden="true"
 			loading="lazy"
 		>
-		{{ shopItem[2] }}
+		<span>{{ shopItem[2] }}</span>
 	</button>
 </template>
 

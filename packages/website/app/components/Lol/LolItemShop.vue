@@ -28,6 +28,16 @@ const ITEM_EPICNESSES: [number, string][] = [
 	[5, 'legendary'],
 ];
 
+const BOOT_ITEM_IDS = [
+	'1001', // boots
+	'3047', // plated steelcaps
+	'3111', // mercury's treads
+	'3006', // berserker's greaves
+	'3009',	// boots of swiftness
+	'3020', // sorcerer's shoes
+	'3158', // ionian boots of lucidity
+];
+
 const sortedByPriceForMap = computed(() => Object
 	.values(items)
 	.sort((a, b) => a.gold.total - b.gold.total)
@@ -343,19 +353,13 @@ const displayedItemBuildPath3rdLevelHasTwo3Items = computed(() => {
 	return false;
 });
 
-/* eslint-disable antfu/consistent-list-newline */
-const bootItems = computed<IShopItem[]>(() => [
-	'1001', '3047', '3111', // first col: boots, plated steelcaps, mercury's treads
-	'3006', '3009', '3020', // 2nd col: berserker's greaves, boots of swiftness, sorcerer's shoes
-	'3158', // 3rd col: ionian boots of lucidity
-].map((id) => {
+const bootItems = computed<IShopItem[]>(() => BOOT_ITEM_IDS.map((id) => {
 	const item = shopItemsMap.value.get(id);
 	if (!item) {
 		console.warn(`boot item not found ${id}`);
 	}
 	return item!;
 }));
-/* eslint-enable antfu/consistent-list-newline */
 
 const bootsPanelPinned = ref(false);
 const inventoryPanelPinned = ref(true);
@@ -369,6 +373,7 @@ defineExpose({
 	<VDialog
 		id="dialog-item-shop"
 		ref="vDialog"
+		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg)`"
 		@close="closeSearch"
 		@contextmenu.prevent=""
 	>
@@ -568,7 +573,7 @@ defineExpose({
 								aria-hidden="true"
 								loading="lazy"
 							>
-							{{ shopItem[2] }}
+							<span>{{ shopItem[2] }}</span>
 						</button>
 					</li>
 				</ul>
@@ -605,7 +610,7 @@ defineExpose({
 								aria-hidden="true"
 								loading="lazy"
 							>
-							{{ shopItem[2] }}
+							<span>{{ shopItem[2] }}</span>
 						</button>
 					</li>
 				</ul>
@@ -1102,11 +1107,40 @@ defineExpose({
 	#builds-into-more-list > li > button,
 	#item-shop-builds-into-list > li > button,
 	.item-shop-item-btn {
-		&[data-buyability='0'] {
+		&[data-buyability='0'],
+		&[data-buyability='-1'] {
 			--at-apply: 'text-neutral-400';
 
 			> img {
 				--at-apply: 'brightness-60';
+			}
+		}
+	}
+
+	.item-shop-item-btn {
+		&[data-buyability='-1'] {
+			> span:last-of-type {
+				--at-apply: 'relative text-transparent';
+
+			&::before {
+				--at-apply: 'content-empty absolute bottom-0 start-1/2 -translate-x-1/2 rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
+					box-shadow: 0 2px 3px 2px theme('colors.black/0.45');
+			}
+
+			&::after {
+				mask: var(--lock-icon-url) center / 100% 100% no-repeat;
+					--at-apply: 'content-empty absolute bottom-0.75 start-1/2 -translate-x-1/2 size-3.5 bg-amber-100 saturate-60 brightness-80';
+			}
+			}
+
+			&:hover > span:last-of-type {
+				&::before {
+					--at-apply: 'brightness-100';
+				}
+
+				&::after {
+					--at-apply: 'bg-white saturate-100 brightness-100';
+				}
 			}
 		}
 	}
