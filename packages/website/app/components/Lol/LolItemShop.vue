@@ -57,7 +57,7 @@ const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((ite
 		buyability = 0;
 	}
 
-	return [item, buyability, item.gold.total];
+	return [item, buyability, item.gold.total, target.value?.items.value.some(inventoryItem => inventoryItem.id === item.id)];
 }));
 const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v[0].id, v])));
 const filteredByCategory = computed(() =>
@@ -560,6 +560,7 @@ defineExpose({
 							class="item-shop-item-btn"
 							:class="{ selected: selectedItem?.[0].id === shopItem[0].id }"
 							:data-buyability="shopItem[1]"
+							:data-bought="shopItem[3] ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@click="selectOrBuyIfDouble(shopItem, true)"
 							@click.right="rightClickItem($event, shopItem[0], shopItem[1])"
@@ -596,6 +597,7 @@ defineExpose({
 							class="item-shop-item-btn"
 							:class="{ selected: selectedItem?.[0].id === shopItem[0].id }"
 							:data-buyability="shopItem[1]"
+							:data-bought="shopItem[3] ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@mousedown.left="selectOrBuyIfDouble(shopItem, true)"
 							@mousedown.right="rightClickItem($event, shopItem[0], shopItem[1])"
@@ -639,6 +641,7 @@ defineExpose({
 					<button
 						:disabled="!buildsIntoItems[i - 1]"
 						:data-buyability="buildsIntoItems[i - 1]?.[1]"
+						:data-bought="buildsIntoItems[i - 1]?.[3] ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[i - 1]![0], buildsIntoItems[i - 1]![1])"
@@ -661,6 +664,7 @@ defineExpose({
 						v-if="buildsIntoItems.length <= 7"
 						:disabled="!buildsIntoItems[6]"
 						:data-buyability="buildsIntoItems[6]?.[1]"
+						:data-bought="buildsIntoItems[6]?.[3] ? '' : undefined"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[6]![0], buildsIntoItems[6]![1])"
 						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
@@ -689,6 +693,7 @@ defineExpose({
 						<li v-for="shopItem in buildsIntoItems.slice(6)" :key="shopItem[0].id">
 							<button
 								:data-buyability="shopItem[1]"
+								:data-bought="shopItem[3] ? '' : undefined"
 								@mouseenter="enterTooltipableElement($event, shopItem)"
 								@click="selectBuildsIntoMoreItem(shopItem)"
 								@click.right="rightClickItem($event, shopItem[0], shopItem[1])"
@@ -716,6 +721,7 @@ defineExpose({
 					v-if="displayedItem"
 					:shop-item="displayedItem"
 					:is-selected="selectedItem?.[0].id === displayedItem[0].id"
+					:data-bought="displayedItem[3] ? '' : undefined"
 					@click="selectItem(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem[0], displayedItem[1])"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
@@ -732,18 +738,20 @@ defineExpose({
 						<ItemBuildPathButton
 							:shop-item="secondLevelBuildsFromItem"
 							:is-selected="selectedItem?.[0].id === secondLevelBuildsFromItem[0].id"
+							:data-bought="displayedItem![3] || secondLevelBuildsFromItem[3] ? '' : undefined"
 							@click="selectItem(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem[0], secondLevelBuildsFromItem[1])"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
 						/>
-						<ul v-if="secondLevelBuildsFromItem[3].length" class="grid auto-cols-[1fr] grid-flow-col w-full">
+						<ul v-if="secondLevelBuildsFromItem[4].length" class="grid auto-cols-[1fr] grid-flow-col w-full">
 							<li
-								v-for="thirdLevelBuildsFromItem in secondLevelBuildsFromItem[3]"
+								v-for="thirdLevelBuildsFromItem in secondLevelBuildsFromItem[4]"
 								:key="`${displayedItem![0].id}-${secondLevelBuildsFromItem[0].id}-${thirdLevelBuildsFromItem[0].id}`"
 							>
 								<ItemBuildPathButton
 									:shop-item="thirdLevelBuildsFromItem"
 									:is-selected="selectedItem?.[0].id === thirdLevelBuildsFromItem[0].id"
+									:data-bought="displayedItem![3] || secondLevelBuildsFromItem[3] || thirdLevelBuildsFromItem[3] ? '' : undefined"
 									@click="selectItem(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem[0], thirdLevelBuildsFromItem[1])"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
@@ -1112,6 +1120,7 @@ defineExpose({
 	#builds-into-more-list > li > button,
 	#item-shop-builds-into-list > li > button,
 	.item-shop-item-btn {
+		&[data-bought],
 		&[data-buyability='0'],
 		&[data-buyability='-1'] {
 			--at-apply: 'text-neutral-400';
@@ -1120,6 +1129,11 @@ defineExpose({
 				--at-apply: 'brightness-60';
 			}
 		}
+
+		&[data-bought] > img {
+			/* TODO should be check icon */
+			--inner-border: theme('colors.green.500');
+		}
 	}
 
 	.item-shop-item-btn {
@@ -1127,15 +1141,15 @@ defineExpose({
 			> span:last-of-type {
 				--at-apply: 'relative text-transparent';
 
-			&::before {
-				--at-apply: 'content-empty absolute bottom-0 start-1/2 -translate-x-1/2 rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
+				&::before {
+					--at-apply: 'content-empty absolute bottom-0 start-1/2 -translate-x-1/2 rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
 					box-shadow: 0 2px 3px 2px theme('colors.black/0.45');
-			}
+				}
 
-			&::after {
-				mask: var(--lock-icon-url) center / 100% 100% no-repeat;
+				&::after {
+					mask: var(--lock-icon-url) center / 100% 100% no-repeat;
 					--at-apply: 'content-empty absolute bottom-0.75 start-1/2 -translate-x-1/2 size-3.5 bg-amber-100 saturate-60 brightness-80';
-			}
+				}
 			}
 
 			&:hover > span:last-of-type {
