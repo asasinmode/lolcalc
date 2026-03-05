@@ -43,10 +43,10 @@ export function calculateItemDiscount(
 	itemId: string,
 	inventory: (IItem | undefined)[],
 	allItems: Record<string, IItem>,
-	isRoot = true,
+	inComponent = false,
 	consumedInventoryIndexes: number[] = [],
 ): number {
-	if (!isRoot) {
+	if (inComponent) {
 		const inventoryIndex = inventory.findIndex((item, i) => item?.id === itemId && !consumedInventoryIndexes.includes(i));
 		if (~inventoryIndex) {
 			consumedInventoryIndexes.push(inventoryIndex);
@@ -54,12 +54,28 @@ export function calculateItemDiscount(
 		}
 	}
 
-	const item = allItems[itemId];
-	if (!item?.from?.length) {
-		return 0;
+	return (allItems[itemId]!.from || []).reduce((discount, componentId) =>
+		discount + calculateItemDiscount(componentId, inventory, allItems, true, consumedInventoryIndexes), 0);
+}
+
+export function consumeItemComponents(
+	itemId: string,
+	inventory: (IItem | undefined)[],
+	allItems: Record<string, IItem>,
+	consumedInventoryIndexes: number[] = [],
+	inComponent = false,
+): number[] {
+	if (inComponent) {
+		const inventoryIndex = inventory.findIndex((item, i) => item?.id === itemId && !consumedInventoryIndexes.includes(i));
+		if (~inventoryIndex) {
+			consumedInventoryIndexes.push(inventoryIndex);
+			return consumedInventoryIndexes;
+		}
 	}
 
-	return item.from.reduce((discount, componentId) => {
-		return discount + calculateItemDiscount(componentId, inventory, allItems, false, consumedInventoryIndexes);
-	}, 0);
+	for (const componentId of allItems[itemId]!.from || []) {
+		consumeItemComponents(componentId, inventory, allItems, consumedInventoryIndexes, true);
+	}
+
+	return consumedInventoryIndexes;
 }

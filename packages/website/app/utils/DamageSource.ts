@@ -88,7 +88,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
-		this.items = ref(overrides.items ?? Array.from({ length: 7 }));
+		this.items = ref(Array.from({ length: 7 }, (_, i) => overrides.items?.[i]));
 		this.runes = ref<IChampionRunes>(overrides.runes ?? {
 			paths: {
 				primary: 'Precision',
@@ -163,6 +163,35 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			// TODO might be an infinite loop not sure how it's going to work
 			stats: this.stats.value.stats.total,
 		};
+	}
+
+	// TODO role quest handle boots?
+	addItem(item: IItem, allItems: Record<string, IItem>): void {
+		const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
+		for (const index of consumedInventoryIndexes) {
+			this.items.value[index] = undefined;
+		}
+
+		const firstEmptyIndex = this.items.value.indexOf(undefined);
+		if (~firstEmptyIndex && firstEmptyIndex !== 6) {
+			this.items.value[firstEmptyIndex] = item;
+		}
+
+		cleanupItems(this.items.value);
+	}
+
+	removeItem(index: number): void {
+		if (this.items.value[index]) {
+			this.items.value[index] = undefined;
+			cleanupItems(this.items.value);
+		}
+	}
+}
+
+function cleanupItems(items: (IItem | undefined)[]) {
+	const filledSlots = items.slice(0, 6).filter(Boolean);
+	for (let i = 0; i < 6; i++) {
+		items[i] = filledSlots[i];
 	}
 }
 

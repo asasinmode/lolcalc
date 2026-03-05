@@ -147,18 +147,16 @@ function selectItem(item: IShopItem, overwriteDisplayed: boolean) {
 }
 
 function buyItem(item: IItem, buyability: IShopItem['buyability']) {
-	if (!target.value || target.value.inventoryFull.value || buyability !== 1) {
-		return;
+	if (target.value && buyability === 1) {
+		target.value.addItem(item, items);
 	}
 }
 
 function sellItem(event: MouseEvent, index: number) {
-	if (target.value?.items.value?.[index]) {
-		target.value.items.value.splice(index, 1);
-		leaveTooltipableElement();
-		if (target.value.items.value?.[index]) {
-			enterTooltipableElement(event, shopItemsMap.value.get(target.value.items.value[index].id)!);
-		}
+	target.value?.removeItem(index);
+	leaveTooltipableElement();
+	if (target.value?.items.value[index]) {
+		enterTooltipableElement(event, shopItemsMap.value.get(target.value.items.value[index].id)!);
 	}
 }
 
@@ -658,7 +656,7 @@ defineExpose({
 					<button
 						:disabled="!buildsIntoItems[i - 1]"
 						:data-buyability="buildsIntoItems[i - 1]?.item"
-						:data-bought="buildsIntoItems[i - 1]?.buyability ? '' : undefined"
+						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
