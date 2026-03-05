@@ -29,14 +29,18 @@ const ITEM_EPICNESSES: [number, string][] = [
 ];
 
 const BOOT_ITEM_IDS = [
-	'1001', // boots
-	'3047', // plated steelcaps
-	'3111', // mercury's treads
-	'3006', // berserker's greaves
-	'3009',	// boots of swiftness
-	'3020', // sorcerer's shoes
-	'3158', // ionian boots of lucidity
+	'1001', /* boots */
+	'3047', /* plated steelcaps */
+	'3111', /* mercury's treads */
+	'3006', /* berserker's greaves */
+	'3009',	/* boots of swiftness */
+	'3020', /* sorcerer's shoes */
+	'3158', /* ionian boots of lucidity */
 ];
+
+const RANGED_ONLY_ITEM_IDS = [
+	'3085',	/* runaan's hurricane, has `mRequiredPurchaseIdentities	[ "Ranged" ]` but it's the only item like that so this should be fine */
+]
 
 const sortedByPriceForMap = computed(() => Object
 	.values(items)
@@ -55,6 +59,10 @@ const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((ite
 
 	if (target.value?.inventoryFull.value) {
 		buyability = 0;
+	} else if(
+		(target.value && !target.value.isRanged.value && RANGED_ONLY_ITEM_IDS.includes(item.id))
+	) {
+		buyability = -1;
 	}
 
 	return {
@@ -579,7 +587,7 @@ defineExpose({
 								aria-hidden="true"
 								loading="lazy"
 							>
-							<span>{{ shopItem.buyability }}</span>
+							<span>{{ shopItem.calculatedPrice }}</span>
 						</button>
 					</li>
 				</ul>
