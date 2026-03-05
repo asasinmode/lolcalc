@@ -38,3 +38,28 @@ export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' 
 	PercentOmnivampMod: 'scalesv',
 	PercentTenacityMod: 'scaletenacity',
 };
+
+export function calculateItemDiscount(
+	itemId: string,
+	inventory: (IItem | undefined)[],
+	allItems: Record<string, IItem>,
+	isRoot = true,
+	consumedInventoryIndexes: number[] = [],
+): number {
+	if (!isRoot) {
+		const inventoryIndex = inventory.findIndex((item, i) => item?.id === itemId && !consumedInventoryIndexes.includes(i));
+		if (~inventoryIndex) {
+			consumedInventoryIndexes.push(inventoryIndex);
+			return allItems[itemId]!.gold.total;
+		}
+	}
+
+	const item = allItems[itemId];
+	if (!item?.from?.length) {
+		return 0;
+	}
+
+	return item.from.reduce((discount, componentId) => {
+		return discount + calculateItemDiscount(componentId, inventory, allItems, false, consumedInventoryIndexes);
+	}, 0);
+}

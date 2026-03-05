@@ -40,7 +40,7 @@ const BOOT_ITEM_IDS = [
 
 const RANGED_ONLY_ITEM_IDS = [
 	'3085',	/* runaan's hurricane, has `mRequiredPurchaseIdentities	[ "Ranged" ]` but it's the only item like that so this should be fine */
-]
+];
 
 const sortedByPriceForMap = computed(() => Object
 	.values(items)
@@ -59,17 +59,19 @@ const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((ite
 
 	if (target.value?.inventoryFull.value) {
 		buyability = 0;
-	} else if(
+	} else if (
 		(target.value && !target.value.isRanged.value && RANGED_ONLY_ITEM_IDS.includes(item.id))
 	) {
 		buyability = -1;
 	}
 
+	const discount = target.value ? calculateItemDiscount(item.id, target.value?.items.value, items) : 0;
+
 	return {
 		item,
 		buyability,
-		calculatedPrice: item.gold.total,
-		isBought: target.value?.items.value.some(inventoryItem => inventoryItem.id === item.id),
+		calculatedPrice: item.gold.total - discount,
+		isBought: target.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id),
 	};
 }));
 const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v.item.id, v])));
@@ -126,9 +128,11 @@ function clearStatFilters() {
 	}
 }
 
-const targetShopItems = computed<IShopItem[] | undefined>(() => target.value?.items.value.map(item =>
-	shopItemsMap.value.get(item.id)!,
-));
+const targetShopItems = computed<(IShopItem | undefined)[]>(() => Array.from(
+	{ length: target.value?.items.value.length ?? 0 },
+	(_, i) => target.value!.items.value[i] && shopItemsMap.value.get(target.value!.items.value[i].id)!,
+),
+);
 
 const selectedItemId = ref<string>();
 const displayedItemId = ref<string>();
@@ -143,8 +147,8 @@ function selectItem(item: IShopItem, overwriteDisplayed: boolean) {
 }
 
 function buyItem(item: IItem, buyability: IShopItem['buyability']) {
-	if (target.value && !target.value.inventoryFull.value) {
-		target.value.items.value.push(markRaw(item));
+	if (!target.value || target.value.inventoryFull.value || buyability !== 1) {
+		return;
 	}
 }
 
@@ -790,15 +794,15 @@ defineExpose({
 					<ul>
 						<li v-for="i in 6" :key="i">
 							<component
-								:is="targetShopItems?.[i - 1] ? 'button' : 'div'"
-								:class="targetShopItems?.[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
-								@mouseenter="targetShopItems?.[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
-								@click="targetShopItems?.[i - 1] && selectItem(targetShopItems[i - 1]!, true)"
-								@click.right="targetShopItems?.[i - 1] && sellItem($event, i - 1)"
+								:is="targetShopItems[i - 1] ? 'button' : 'div'"
+								:class="targetShopItems[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
+								@mouseenter="targetShopItems[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
+								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true)"
+								@click.right="targetShopItems[i - 1] && sellItem($event, i - 1)"
 							>
-								<span>{{ targetShopItems?.[i - 1]?.item.name }}</span>
+								<span>{{ targetShopItems[i - 1]?.item.name }}</span>
 								<img
-									v-if="targetShopItems?.[i - 1]"
+									v-if="targetShopItems[i - 1]"
 									:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${targetShopItems[i - 1]!.item.image}`"
 									width="64"
 									height="64"

@@ -44,7 +44,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
 	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
-	items: Ref<IItem[]>;
+	items: Ref<(IItem | undefined)[]>;
 	inventoryFull = computed(() => this.items.value.filter(Boolean).length === 6);
 
 	abilityLevels: Ref<Record<Exclude<keyof IChampion['abilities'], 'passive'>, number>>;
@@ -88,7 +88,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
-		this.items = ref(overrides.items ?? []);
+		this.items = ref(overrides.items ?? Array.from({ length: 7 }));
 		this.runes = ref<IChampionRunes>(overrides.runes ?? {
 			paths: {
 				primary: 'Precision',
@@ -140,7 +140,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		}, { flush: 'post' });
 	}
 
-	clone(id?: string, overrides: Partial<IOverrides> = {}) {
+	clone(id?: string, overrides: Partial<IOverrides> = {}): DamageSource<Id> {
 		return new DamageSource(id, {
 			champion: this.listedChampion.value,
 			level: this.level.value,

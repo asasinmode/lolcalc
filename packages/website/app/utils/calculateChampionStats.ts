@@ -93,20 +93,20 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 	}), {} as IChampionStats);
 
 	let itemsTotalPercentMovementSpeed = 0;
-	for (const item of items) {
+	for (const item of items.filter(Boolean)) {
 		for (const [statName, statValue] of itemToChampionStats(item)) {
 			/** hpRegen is stored in per second in item but per 5 seconds in champion/displayed */
 			itemStats[statName] += statValue * (statName === 'hpRegen' ? 5 : 1);
 		}
 
-		if (item.stats.PercentBaseHPRegenMod) {
-			itemStats.hpRegen += baseOnLevelStats.hpRegen * item.stats.PercentBaseHPRegenMod;
+		if (item!.stats.PercentBaseHPRegenMod) {
+			itemStats.hpRegen += baseOnLevelStats.hpRegen * item!.stats.PercentBaseHPRegenMod;
 		}
-		if (item.stats.PercentBaseMPRegenMod) {
-			itemStats.manaRegen += baseOnLevelStats.manaRegen * item.stats.PercentBaseMPRegenMod;
+		if (item!.stats.PercentBaseMPRegenMod) {
+			itemStats.manaRegen += baseOnLevelStats.manaRegen * item!.stats.PercentBaseMPRegenMod;
 		}
-		if (item.stats.PercentMovementSpeedMod) {
-			itemsTotalPercentMovementSpeed += item.stats.PercentMovementSpeedMod;
+		if (item!.stats.PercentMovementSpeedMod) {
+			itemsTotalPercentMovementSpeed += item!.stats.PercentMovementSpeedMod;
 		}
 	}
 
@@ -187,15 +187,17 @@ const ITEM_TO_CHAMPION_STATS: Record<Exclude<
 	PercentOmnivampMod: 'omnivamp',
 };
 
-function itemToChampionStats(item: IItem): [IChampionStatName, number][] {
-	return Object.entries(item.stats)
-		.filter(([itemStatName]) => itemStatName in ITEM_TO_CHAMPION_STATS)
-		.map(([itemStatName, itemStatValue]) => {
-			return [
-				ITEM_TO_CHAMPION_STATS[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS],
-				itemStatValue,
-			];
-		});
+function itemToChampionStats(item?: IItem): [IChampionStatName, number][] {
+	return item
+		? Object.entries(item.stats)
+				.filter(([itemStatName]) => itemStatName in ITEM_TO_CHAMPION_STATS)
+				.map(([itemStatName, itemStatValue]) => {
+					return [
+						ITEM_TO_CHAMPION_STATS[itemStatName as keyof typeof ITEM_TO_CHAMPION_STATS],
+						itemStatValue,
+					];
+				})
+		: [];
 }
 
 // TODO maybe a better way exists

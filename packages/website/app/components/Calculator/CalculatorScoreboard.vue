@@ -293,6 +293,7 @@ function onItemDragLeave(event: DragEvent) {
 	}
 }
 
+// TODO check item buyability
 function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number) {
 	draggingFromItemListEl = null;
 	if (event.target) {
