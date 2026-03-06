@@ -4,20 +4,30 @@ import type { IDragonName } from '../app/composables/useMisc';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { IPossibleDynamicValues, ITexture, IWithPossibleDynamicValues } from '../app/utils/types';
 import fs from 'node:fs/promises';
+import path from 'node:path';
+import process from 'node:process';
 import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps.ts';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
+import { ITEM_STAT_META } from '../app/utils/item.ts';
 import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
 
-const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
+let latestVersion = process.argv[2];
 
-const [latestVersion] = versions as [string];
+if (!latestVersion) {
+	const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
+
+	([latestVersion] = versions as [string]);
+
+	console.log('latest version', latestVersion);
+} else {
+	console.log('using version override', latestVersion);
+}
+
 const minorVersion = latestVersion.slice(0, latestVersion.lastIndexOf('.'));
-
-console.log('latest version', latestVersion);
 
 let stringtable: Record<string, string>;
 let rcpFeLolCollectionsCss: string;
@@ -1345,6 +1355,7 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 			console.log(`[fetchCached] ${url} ${responseMethod}`);
 			throw err;
 		});
+		await fs.mkdir(path.dirname(cacheFilePath), { recursive: true });
 		await fs.writeFile(cacheFilePath, responseMethod === 'json' ? stringifyObject(data) : data);
 	}
 	cacheHits[filename] = data;
