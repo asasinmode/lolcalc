@@ -830,6 +830,7 @@ defineExpose({
 		--at-apply: 'bg-[--bg-clr] max-h-[80vh] max-w-[90vw] shadow-lg relative of-visible';
 		--bg-clr: theme('colors.cyan.950');
 		--item-button-img-b-w: 3px;
+		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
 
 		&[open] {
 			--at-apply: 'grid';
@@ -1081,6 +1082,7 @@ defineExpose({
 			0 0 0 var(--item-button-img-b-w) black;
 	}
 
+	#item-shop-builds-into-list > li > button[popovertarget]:is(:hover, :focus-visible, :has(+ [popover]:popover-open)),
 	#builds-into-more-list > li > button:is(:hover, :focus-visible),
 	#item-shop-panel-eq > div > ul > li > button:is(:hover, :focus-visible, .selected),
 	.item-shop-item-btn:is(:hover, :focus-visible, .selected) img,
@@ -1089,17 +1091,36 @@ defineExpose({
 		--inner-border: white;
 	}
 
-	#item-shop-builds-into-list > li > button {
-		--at-apply: 'bg-black size-(--item-img-size) block';
-	}
+	#item-shop-builds-into-list {
+		> li {
+			--at-apply: 'bg-black size-(--item-img-size)';
 
-	#item-shop-builds-into-list > li:last-child {
-		--at-apply: 'relative';
-		anchor-name: --last-builds-into-button;
+			> button {
+				--at-apply: 'size-full';
+
+				&:disabled,
+				&[popovertarget] {
+					--at-apply: 'm-[--item-button-img-b-w] size-(--item-img-borderless-size)';
+					box-shadow:
+						0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
+						0 0 0 var(--item-button-img-b-w) black;
+				}
+
+				&[popovertarget]:is(:hover, :focus-visible),
+				&[popovertarget]:has(+ [popover]:popover-open) {
+					background-image: linear-gradient(0deg, theme('colors.white/0.2'), transparent);
+				}
+			}
+
+			&:last-child {
+				--at-apply: 'relative';
+				anchor-name: --last-builds-into-button;
+			}
+		}
 	}
 
 	#builds-into-more-list {
-		--at-apply: 'h-max max-h-[60vh] max-w-screen w-66 of-y-auto z-10';
+		--at-apply: 'h-max max-h-[60vh] max-w-screen w-66 of-y-auto z-10 py-1';
 		position-anchor: --last-builds-into-button;
 		inset-block-start: calc(anchor(bottom) + 2px);
 		inset-inline-end: anchor(right);
@@ -1118,7 +1139,7 @@ defineExpose({
 	}
 
 	#item-shop-hover-tooltip {
-		--at-apply: 'w-(--width) fixed';
+		--at-apply: 'w-(--width) fixed p-2';
 		--width: 36rem;
 		inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
 		inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
@@ -1193,15 +1214,14 @@ defineExpose({
 		}
 	}
 
-
 	#builds-into-more-list > li > button[data-buyability='-1']:where(:hover, :focus-visible),
 	.item-shop-item-btn[data-buyability='-1']:where(:hover, :focus-visible) > span:last-of-type {
-			&::before {
-				--at-apply: 'brightness-100';
-			}
+		&::before {
+			--at-apply: 'brightness-100';
+		}
 
-			&::after {
-				--at-apply: 'bg-white saturate-100 brightness-100';
+		&::after {
+			--at-apply: 'bg-white saturate-100 brightness-100';
 		}
 	}
 }
