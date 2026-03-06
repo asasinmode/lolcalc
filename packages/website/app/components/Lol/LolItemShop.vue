@@ -1052,7 +1052,7 @@ defineExpose({
 		}
 
 		> span:last-of-type {
-			--at-apply: 'block leading-5 text-center';
+			--at-apply: 'block leading-5 pt-0.5 text-center font-medium';
 		}
 
 		&:hover,
@@ -1099,16 +1099,20 @@ defineExpose({
 	}
 
 	#builds-into-more-list {
-		--at-apply: 'h-max max-h-[60vh] w-max of-y-auto z-10';
+		--at-apply: 'h-max max-h-[60vh] max-w-screen w-66 of-y-auto z-10';
 		position-anchor: --last-builds-into-button;
 		inset-block-start: calc(anchor(bottom) + 2px);
 		inset-inline-end: anchor(right);
 
 		> li {
 			> button {
-				--at-apply: 'hoverable:bg-white/10 flex w-full items-center py-[--py] px-[--px] gap-2';
+				--at-apply: 'text-start flex w-full items-center py-[--py] px-[--px] gap-2 hoverable:bg-white/10';
 				--px: calc(var(--spacing) * 5);
 				--py: calc(var(--spacing) * 2);
+
+				> span {
+					--at-apply: 'truncate font-medium';
+				}
 			}
 		}
 	}
@@ -1148,8 +1152,8 @@ defineExpose({
 		}
 	}
 
-	#builds-into-more-list > li > button[data-buyability='-1'],
-	.item-shop-item-btn[data-buyability='-1'] > span:last-of-type {
+	:where(#builds-into-more-list > li > button[data-buyability='-1']),
+	:where(.item-shop-item-btn[data-buyability='-1'] > span:last-of-type) {
 		--at-apply: 'relative';
 
 		&::before {
@@ -1168,21 +1172,11 @@ defineExpose({
 			--at-apply: 'text-transparent';
 
 			&::before {
-				--at-apply: 'bottom-0 start-1/2 -translate-x-1/2';
+				--at-apply: '-bottom-0.25 start-1/2 -translate-x-1/2';
 			}
 
 			&::after {
-				--at-apply: 'bottom-0.75 start-1/2 -translate-x-1/2';
-			}
-		}
-
-		&:hover > span:last-of-type {
-			&::before {
-				--at-apply: 'brightness-100';
-			}
-
-			&::after {
-				--at-apply: 'bg-white saturate-100 brightness-100';
+				--at-apply: 'bottom-0.5 start-1/2 -translate-x-1/2';
 			}
 		}
 	}
@@ -1191,11 +1185,23 @@ defineExpose({
 		--lock-inline-start: calc(var(--px) + 0.5 * (var(--item-img-size) + var(--item-button-img-b-w)));
 
 		&::before {
-			--at-apply: 'bottom-[--py] start-[--lock-inline-start] -translate-x-1/2 z-1';
+			--at-apply: 'bottom-[--py] start-[--lock-inline-start] -translate-x-1/2 z-1 translate-y-1';
 		}
 
 		&::after {
-			--at-apply: 'bottom-[calc(var(--py)+0.75*var(--spacing))] start-[--lock-inline-start] -translate-x-1/2 z-1';
+			--at-apply: 'bottom-[calc(var(--py)+0.75*var(--spacing))] start-[--lock-inline-start] -translate-x-1/2 z-1 translate-y-1';
+		}
+	}
+
+
+	#builds-into-more-list > li > button[data-buyability='-1']:where(:hover, :focus-visible),
+	.item-shop-item-btn[data-buyability='-1']:where(:hover, :focus-visible) > span:last-of-type {
+			&::before {
+				--at-apply: 'brightness-100';
+			}
+
+			&::after {
+				--at-apply: 'bg-white saturate-100 brightness-100';
 		}
 	}
 }
