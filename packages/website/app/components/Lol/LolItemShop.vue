@@ -46,7 +46,6 @@ const sortedByPriceForMap = computed(() => Object
 // TODO
 // add sr-only (not buyable, inventory full?)
 // bought items style
-// stop `buyItem` and dragging in scoreboard if can't buy
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
 	const discount = target.value ? calculateItemDiscount(item.id, target.value.items.value, items) : 0;
 
@@ -643,7 +642,7 @@ defineExpose({
 				<li v-for="i in 6" :key="i">
 					<button
 						:disabled="!buildsIntoItems[i - 1]"
-						:data-buyability="buildsIntoItems[i - 1]?.item"
+						:data-buyability="buildsIntoItems[i - 1]?.buyability"
 						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
@@ -1069,7 +1068,8 @@ defineExpose({
 
 	.item-shop-item-btn > img,
 	.item-shop-item-img {
-		--at-apply: 'size-12.5 min-w-12.5 m-0.75 text-xs text-center break-words';
+		--size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
+		--at-apply: 'size-[--size] min-w-[--size] m-[--item-button-img-b-w] text-xs text-center break-words';
 	}
 
 	#item-shop-panel-eq > div > ul > li > *,
@@ -1106,7 +1106,9 @@ defineExpose({
 
 		> li {
 			> button {
-				--at-apply: 'hoverable:bg-white/10 flex w-full items-center';
+				--at-apply: 'hoverable:bg-white/10 flex w-full items-center py-[--py] px-[--px] gap-2';
+				--px: calc(var(--spacing) * 5);
+				--py: calc(var(--spacing) * 2);
 			}
 		}
 	}
@@ -1146,31 +1148,54 @@ defineExpose({
 		}
 	}
 
-	.item-shop-item-btn {
-		&[data-buyability='-1'] {
-			> span:last-of-type {
-				--at-apply: 'relative text-transparent';
+	#builds-into-more-list > li > button[data-buyability='-1'],
+	.item-shop-item-btn[data-buyability='-1'] > span:last-of-type {
+		--at-apply: 'relative';
 
-				&::before {
-					--at-apply: 'content-empty absolute bottom-0 start-1/2 -translate-x-1/2 rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
-					box-shadow: 0 2px 3px 2px theme('colors.black/0.45');
-				}
+		&::before {
+			--at-apply: 'content-empty absolute rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
+			box-shadow: 0 2px var(--item-button-img-b-w) 2px theme('colors.black/0.45');
+		}
 
-				&::after {
-					mask: var(--lock-icon-url) center / 100% 100% no-repeat;
-					--at-apply: 'content-empty absolute bottom-0.75 start-1/2 -translate-x-1/2 size-3.5 bg-amber-100 saturate-60 brightness-80';
-				}
+		&::after {
+			mask: var(--lock-icon-url) center / 100% 100% no-repeat;
+			--at-apply: 'content-empty absolute size-3.5 bg-amber-100 saturate-60 brightness-80';
+		}
+	}
+
+	.item-shop-item-btn[data-buyability='-1'] {
+		> span:last-of-type {
+			--at-apply: 'text-transparent';
+
+			&::before {
+				--at-apply: 'bottom-0 start-1/2 -translate-x-1/2';
 			}
 
-			&:hover > span:last-of-type {
-				&::before {
-					--at-apply: 'brightness-100';
-				}
-
-				&::after {
-					--at-apply: 'bg-white saturate-100 brightness-100';
-				}
+			&::after {
+				--at-apply: 'bottom-0.75 start-1/2 -translate-x-1/2';
 			}
+		}
+
+		&:hover > span:last-of-type {
+			&::before {
+				--at-apply: 'brightness-100';
+			}
+
+			&::after {
+				--at-apply: 'bg-white saturate-100 brightness-100';
+			}
+		}
+	}
+
+	#builds-into-more-list > li > button[data-buyability='-1'] {
+		--lock-inline-start: calc(var(--px) + 0.5 * (var(--item-img-size) + var(--item-button-img-b-w)));
+
+		&::before {
+			--at-apply: 'bottom-[--py] start-[--lock-inline-start] -translate-x-1/2 z-1';
+		}
+
+		&::after {
+			--at-apply: 'bottom-[calc(var(--py)+0.75*var(--spacing))] start-[--lock-inline-start] -translate-x-1/2 z-1';
 		}
 	}
 }
