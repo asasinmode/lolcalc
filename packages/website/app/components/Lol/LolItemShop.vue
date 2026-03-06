@@ -38,38 +38,21 @@ const BOOT_ITEM_IDS = [
 	'3158', /* ionian boots of lucidity */
 ];
 
-const RANGED_ONLY_ITEM_IDS = [
-	'3085',	/* runaan's hurricane, has `mRequiredPurchaseIdentities	[ "Ranged" ]` but it's the only item like that so this should be fine */
-];
-
 const sortedByPriceForMap = computed(() => Object
 	.values(items)
 	.sort((a, b) => a.gold.total - b.gold.total)
 	.filter(item => (item.mapMask & mapMask.value) !== 0));
 
-// TODO only items which components are present, update prices
-// calculate item total
-// add locks, ideally pseudo elements
+// TODO
 // add sr-only (not buyable, inventory full?)
-// check look of search unavailable items, check
-// stop `buyItem` if can't buy
-// use calculated prices in places (build path, others)
+// search item with -1 = no price
+// stop `buyItem` and dragging in scoreboard if can't buy
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
-	let buyability: -1 | 0 | 1 = 1;
-
-	if (target.value?.inventoryFull.value) {
-		buyability = 0;
-	} else if (
-		(target.value && !target.value.isRanged.value && RANGED_ONLY_ITEM_IDS.includes(item.id))
-	) {
-		buyability = -1;
-	}
-
 	const discount = target.value ? calculateItemDiscount(item.id, target.value.items.value, items) : 0;
 
 	return {
 		item,
-		buyability,
+		buyability: itemBuyability(item, target.value, items),
 		calculatedPrice: item.gold.total - discount,
 		isBought: target.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id),
 	};
@@ -450,13 +433,14 @@ defineExpose({
 						aria-labelledby="item-shop-results-lbl"
 						class="h-full of-y-auto *:grid *:grid-cols-[auto_1fr] *:grid-rows-2"
 					>
-						<!-- TODO style with buyability -->
 						<li
 							v-for="(shopItem, index) in searchResults"
 							:id="`item-shop-search-result-${index}`"
 							:key="shopItem.item.id"
 							role="option"
 							class="hover:bg-white/10"
+							:data-buyability="shopItem.buyability"
+							:data-bought="shopItem.isBought ? '' : undefined"
 							:class="{
 								'bg-white/10': searchSelectedIndex === index,
 								'selected': searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
@@ -473,7 +457,7 @@ defineExpose({
 								loading="lazy"
 							>
 							{{ shopItem.item.name }}
-							<span>{{ shopItem.calculatedPrice }}</span>
+							<span>{{ shopItem.isBought ? '' : shopItem.calculatedPrice }}</span>
 						</li>
 					</ul>
 					<section aria-live="polite" aria-atomic="true" class="row-span-full">
@@ -1134,14 +1118,13 @@ defineExpose({
 		inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 	}
 
+	#item-shop-search-listbox > li,
 	#builds-into-more-list > li > button,
 	#item-shop-builds-into-list > li > button,
 	.item-shop-item-btn {
 		&[data-bought],
 		&[data-buyability='0'],
 		&[data-buyability='-1'] {
-			--at-apply: 'text-neutral-400';
-
 			> img {
 				--at-apply: 'brightness-60';
 			}
@@ -1150,6 +1133,16 @@ defineExpose({
 		&[data-bought] > img {
 			/* TODO should be check icon */
 			--inner-border: theme('colors.green.500');
+		}
+	}
+
+	#builds-into-more-list > li > button,
+	#item-shop-builds-into-list > li > button,
+	.item-shop-item-btn {
+		&[data-bought],
+		&[data-buyability='0'],
+		&[data-buyability='-1'] {
+			--at-apply: 'text-neutral-400';
 		}
 	}
 

@@ -119,3 +119,30 @@ export function consumeItemComponents(
 
 	return consumedInventoryIndexes;
 }
+
+const RANGED_ONLY_ITEM_IDS = [
+	'3085',	/* runaan's hurricane, has `mRequiredPurchaseIdentities	[ "Ranged" ]` but it's the only item like that so this should be fine */
+];
+
+export function itemBuyability(item: IItem, target: DamageSource | undefined, allItems: Record<string, IItem>) {
+	let buyability: -1 | 0 | 1 = 1;
+
+	if (!target) {
+		return buyability;
+	}
+
+	const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value, allItems);
+
+	if (target.inventoryFull.value) {
+		buyability = 0;
+	} else if (
+		(!target.isRanged.value && RANGED_ONLY_ITEM_IDS.includes(item.id))
+		|| (target.items.value
+			.map((item, index) => !inventoryIndexesConsumedOnBuy.includes(index) && item)
+			.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
+	) {
+		buyability = -1;
+	}
+
+	return buyability;
+}
