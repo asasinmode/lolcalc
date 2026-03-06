@@ -20,12 +20,13 @@ const appliedStatFilters = ref<Record<IItemShopStatFilter, boolean>>(Object.from
 	Object.entries(ITEM_SHOP_STAT_FILTERS).map(([name]) => [name, false]),
 ) as Record<IItemShopStatFilter, boolean>);
 
+const ITEM_EPICNESS_LEGENDARY = 5;
 const ITEM_EPICNESSES: [number, string][] = [
 	[7, 'unique'],
 	[1, 'starter'],
 	[0, 'basic'],
 	[4, 'epic'],
-	[5, 'legendary'],
+	[ITEM_EPICNESS_LEGENDARY, 'legendary'],
 ];
 
 const BOOT_ITEM_IDS = [
@@ -45,7 +46,6 @@ const sortedByPriceForMap = computed(() => Object
 
 // TODO
 // add sr-only (not buyable, inventory full?)
-// bought items style
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
 	const discount = target.value ? calculateItemDiscount(item.id, target.value.items.value, items) : 0;
 
@@ -440,6 +440,7 @@ defineExpose({
 							class="hover:bg-white/10"
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
+							:data-legendary="shopItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
 							:class="{
 								'bg-white/10': searchSelectedIndex === index,
 								'selected': searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
@@ -600,6 +601,7 @@ defineExpose({
 							:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
+							:data-legendary="shopItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@mousedown.left="selectOrBuyIfDouble(shopItem, true)"
 							@mousedown.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
@@ -646,6 +648,7 @@ defineExpose({
 						:disabled="!buildsIntoItems[i - 1]"
 						:data-buyability="buildsIntoItems[i - 1]?.buyability"
 						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
+						:data-legendary="buildsIntoItems[i - 1]?.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
@@ -670,6 +673,7 @@ defineExpose({
 						:disabled="!buildsIntoItems[6]"
 						:data-buyability="buildsIntoItems[6]?.buyability"
 						:data-bought="buildsIntoItems[6]?.isBought ? '' : undefined"
+						:data-legendary="buildsIntoItems[6]?.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
@@ -700,6 +704,7 @@ defineExpose({
 							<button
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
+								:data-legendary="shopItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
 								@mouseenter="enterTooltipableElement($event, shopItem)"
 								@click="selectBuildsIntoMoreItem(shopItem)"
 								@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
@@ -729,6 +734,7 @@ defineExpose({
 					:shop-item="displayedItem"
 					:is-selected="selectedItem?.item.id === displayedItem.item.id"
 					:data-bought="displayedItem.isBought ? '' : undefined"
+					:data-legendary="displayedItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
 					@click="selectItem(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem.item, displayedItem.buyability)"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
@@ -1137,7 +1143,7 @@ defineExpose({
 				--px: calc(var(--spacing) * 5);
 				--py: calc(var(--spacing) * 2);
 
-				&[data-bought]{
+				&[data-bought] {
 					--at-apply: 'bg-black/20';
 				}
 
@@ -1173,23 +1179,12 @@ defineExpose({
 			--at-apply: 'hidden';
 		}
 
-		&[data-bought] > .icon {
-			--at-apply: 'absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] grid-center grid-cols-1 grid-rows-1 pointer-events-none';
-
-			&::before,
-			&::after {
-				--at-apply: 'content-empty block col-start-1 row-start-1';
-			}
-
-			&::before {
-				--at-apply: 'size-full bg-cyan-300';
-				mask: icon('i-ph:check-fat-fill') center / 100% 100% no-repeat;
-			}
-
-			&::after {
-				--at-apply: 'size-full bg-black';
-				mask: icon('i-ph:check-fat') center / 100% 100% no-repeat;
-			}
+		&[data-bought][data-legendary] > .icon {
+			--at-apply: 'block absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3C!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --%3E%3Cg%3E%3Cpath fill='oklch(78.9%25 0.154 211.53)' d='m237.66 85.26l-128.4 128.4a8 8 0 0 1-11.32 0l-71.6-72a8 8 0 0 1 0-11.31l24-24a8 8 0 0 1 11.32 0L104 147.43l98.34-97.09a8 8 0 0 1 11.32 0l24 23.6a8 8 0 0 1 0 11.32'/%3E%3Cpath fill='%23000' d='m243.28 68.24l-24-23.56a16 16 0 0 0-22.59 0L104 136.23l-36.69-35.6a16 16 0 0 0-22.58.05l-24 24a16 16 0 0 0 0 22.61l71.62 72a16 16 0 0 0 22.63 0L243.33 90.91a16 16 0 0 0-.05-22.67M103.62 208L32 136l24-24a.6.6 0 0 1 .08.08l42.35 41.09a8 8 0 0 0 11.19 0L208.06 56L232 79.6Z'/%3E%3C/g%3E%3C/svg%3E"); /* cyan-400 fill */
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
 		}
 	}
 
