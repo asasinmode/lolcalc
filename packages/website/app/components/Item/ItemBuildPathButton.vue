@@ -25,6 +25,7 @@ const { version } = usePatchVersion();
 			aria-hidden="true"
 			loading="lazy"
 		>
+		<Icon />
 		<span>{{ shopItem.calculatedPrice }}</span>
 	</button>
 </template>

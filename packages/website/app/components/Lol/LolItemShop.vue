@@ -456,6 +456,7 @@ defineExpose({
 								loading="lazy"
 							>
 							{{ shopItem.item.name }}
+							<Icon />
 							<span>{{ shopItem.isBought ? '' : shopItem.calculatedPrice }}</span>
 						</li>
 					</ul>
@@ -613,6 +614,7 @@ defineExpose({
 								aria-hidden="true"
 								loading="lazy"
 							>
+							<Icon />
 							<span>{{ shopItem.calculatedPrice }}</span>
 						</button>
 					</li>
@@ -659,6 +661,7 @@ defineExpose({
 							aria-hidden="true"
 							loading="lazy"
 						>
+						<Icon />
 					</button>
 				</li>
 				<li>
@@ -682,6 +685,7 @@ defineExpose({
 							aria-hidden="true"
 							loading="lazy"
 						>
+						<Icon />
 					</button>
 					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside">
 						+{{ buildsIntoItems.length - 6 }}
@@ -709,6 +713,7 @@ defineExpose({
 									aria-hidden="true"
 									loading="lazy"
 								>
+								<Icon />
 								<span>{{ shopItem.item.name }}</span>
 							</button>
 						</li>
@@ -1045,7 +1050,8 @@ defineExpose({
 	}
 
 	.item-shop-item-btn {
-		--at-apply: 'p-1 -m-1';
+		--at-apply: 'p-[--p] -m-1';
+		--p: calc(1 * var(--spacing));
 		direction: ltr;
 
 		> span:first-child {
@@ -1131,6 +1137,10 @@ defineExpose({
 				--px: calc(var(--spacing) * 5);
 				--py: calc(var(--spacing) * 2);
 
+				&[data-bought]{
+					--at-apply: 'bg-black/20';
+				}
+
 				> span {
 					--at-apply: 'truncate font-medium';
 				}
@@ -1149,6 +1159,8 @@ defineExpose({
 	#builds-into-more-list > li > button,
 	#item-shop-builds-into-list > li > button,
 	.item-shop-item-btn {
+		--at-apply: 'relative';
+
 		&[data-bought],
 		&[data-buyability='0'],
 		&[data-buyability='-1'] {
@@ -1157,10 +1169,38 @@ defineExpose({
 			}
 		}
 
-		&[data-bought] > img {
-			/* TODO should be check icon, probably also only when buyability is -1? */
-			--inner-border: theme('colors.green.500');
+		> .icon {
+			--at-apply: 'hidden';
 		}
+
+		&[data-bought] > .icon {
+			--at-apply: 'absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] grid-center grid-cols-1 grid-rows-1 pointer-events-none';
+
+			&::before,
+			&::after {
+				--at-apply: 'content-empty block col-start-1 row-start-1';
+			}
+
+			&::before {
+				--at-apply: 'size-full bg-cyan-300';
+				mask: icon('i-ph:check-fat-fill') center / 100% 100% no-repeat;
+			}
+
+			&::after {
+				--at-apply: 'size-full bg-black';
+				mask: icon('i-ph:check-fat') center / 100% 100% no-repeat;
+			}
+		}
+	}
+
+	.item-shop-item-btn {
+		--check-icon-start: var(--p);
+		--check-icon-top: var(--p);
+	}
+
+	#builds-into-more-list > li > button {
+		--check-icon-start: var(--px);
+		--check-icon-top: var(--py);
 	}
 
 	#builds-into-more-list > li > button,
