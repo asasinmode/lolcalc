@@ -246,7 +246,13 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				}
 
 				const searchTerms = Array.from(
-					new Set(`${name};${(stringtable[`generatedtip_item_${itemId}_colloquialism`] || ';')};${tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')}`
+					new Set(`${name};${
+						(stringtable[`generatedtip_item_${itemId}_colloquialism`] || ';')
+					};${
+						tags.join(';').replace('NonbootsMovement', 'movement').replace('SpellBlock', 'magic resist').replace('Lane', '')
+					};${
+						Object.keys(stats).map(stat => ITEM_STAT_META[stat as keyof typeof ITEM_STAT_META]!.name).join(';')
+					}`
 						.toLocaleLowerCase()
 						.replaceAll(/[^a-z;]/g, '')
 						.split(';')

@@ -4,7 +4,7 @@
 		"1001": {
 			"id": "1001",
 			"name": "Boots",
-			"searchString": "boots",
+			"searchString": "boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 25
 			},
@@ -115,7 +115,7 @@
 		"1018": {
 			"id": "1018",
 			"name": "Cloak of Agility",
-			"searchString": "cloakofagility;criticalstrike",
+			"searchString": "cloakofagility;criticalstrike;criticalstrikechance",
 			"stats": {
 				"FlatCritChanceMod": 0.15
 			},
@@ -143,7 +143,7 @@
 		"1026": {
 			"id": "1026",
 			"name": "Blasting Wand",
-			"searchString": "blastingwand;spelldamage",
+			"searchString": "blastingwand;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 45
 			},
@@ -350,7 +350,7 @@
 		"1036": {
 			"id": "1036",
 			"name": "Long Sword",
-			"searchString": "longsword;damage",
+			"searchString": "longsword;damage;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 10
 			},
@@ -395,7 +395,7 @@
 		"1037": {
 			"id": "1037",
 			"name": "Pickaxe",
-			"searchString": "pickaxe;damage",
+			"searchString": "pickaxe;damage;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 25
 			},
@@ -437,7 +437,7 @@
 		"1038": {
 			"id": "1038",
 			"name": "B. F. Sword",
-			"searchString": "bfsword;bf;damage",
+			"searchString": "bfsword;bf;damage;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 40
 			},
@@ -534,7 +534,7 @@
 		"1052": {
 			"id": "1052",
 			"name": "Amplifying Tome",
-			"searchString": "amplifyingtome;amptome;book;spelldamage",
+			"searchString": "amplifyingtome;amptome;book;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 20
 			},
@@ -571,7 +571,7 @@
 		"1053": {
 			"id": "1053",
 			"name": "Vampiric Scepter",
-			"searchString": "vampiricscepter;damage;lifesteal",
+			"searchString": "vampiricscepter;damage;lifesteal;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 15,
 				"PercentLifeStealMod": 0.07
@@ -603,7 +603,7 @@
 		"1054": {
 			"id": "1054",
 			"name": "Doran's Shield",
-			"searchString": "doransshield;dshield;health;healthregen",
+			"searchString": "doransshield;dshield;health;healthregen;healtheveryseconds",
 			"stats": {
 				"FlatHPPoolMod": 110,
 				"FlatHPRegenMod": 0.8
@@ -643,7 +643,7 @@
 		"1055": {
 			"id": "1055",
 			"name": "Doran's Blade",
-			"searchString": "doransblade;dblade;health;damage;lifesteal;spellvamp",
+			"searchString": "doransblade;dblade;health;damage;lifesteal;spellvamp;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 80,
 				"FlatPhysicalDamageMod": 10,
@@ -667,7 +667,7 @@
 		"1056": {
 			"id": "1056",
 			"name": "Doran's Ring",
-			"searchString": "doransring;dring;health;manaregen;spelldamage",
+			"searchString": "doransring;dring;health;manaregen;spelldamage;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 90,
 				"FlatMagicDamageMod": 18
@@ -728,7 +728,7 @@
 		"1058": {
 			"id": "1058",
 			"name": "Needlessly Large Rod",
-			"searchString": "needlesslylargerod;nlr;spelldamage",
+			"searchString": "needlesslylargerod;nlr;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 65
 			},
@@ -753,7 +753,7 @@
 		"1082": {
 			"id": "1082",
 			"name": "Dark Seal",
-			"searchString": "darkseal;health;spelldamage",
+			"searchString": "darkseal;health;spelldamage;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 50,
 				"FlatMagicDamageMod": 15
@@ -795,7 +795,7 @@
 		"1083": {
 			"id": "1083",
 			"name": "Cull",
-			"searchString": "cull;damage;onhit",
+			"searchString": "cull;damage;onhit;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 7
 			},
@@ -824,7 +824,7 @@
 		"2019": {
 			"id": "2019",
 			"name": "Steel Sigil",
-			"searchString": "steelsigil;bloodstone;armor;damage",
+			"searchString": "steelsigil;bloodstone;armor;damage;attackdamage",
 			"stats": {
 				"FlatArmorMod": 30,
 				"FlatPhysicalDamageMod": 15
@@ -859,7 +859,7 @@
 		"2020": {
 			"id": "2020",
 			"name": "The Brutalizer",
-			"searchString": "thebrutalizer;bloodstone;damage;cooldownreduction;armorpenetration",
+			"searchString": "thebrutalizer;bloodstone;damage;cooldownreduction;armorpenetration;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 25,
 				"AbilityHasteMod": 10,
@@ -894,7 +894,7 @@
 		"2021": {
 			"id": "2021",
 			"name": "Tunneler",
-			"searchString": "tunneler;drill;health;damage",
+			"searchString": "tunneler;drill;health;damage;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 250,
 				"FlatPhysicalDamageMod": 15
@@ -967,7 +967,7 @@
 		"2051": {
 			"id": "2051",
 			"name": "Guardian's Horn",
-			"searchString": "guardianshorn;health;healthregen",
+			"searchString": "guardianshorn;health;healthregen;healtheveryseconds",
 			"stats": {
 				"FlatHPPoolMod": 150,
 				"FlatHPRegenMod": 4
@@ -991,7 +991,7 @@
 		"2065": {
 			"id": "2065",
 			"name": "Shurelya's Battlesong",
-			"searchString": "shurelyasbattlesong;spelldamage;manaregen;active;cooldownreduction;movement;abilityhaste",
+			"searchString": "shurelyasbattlesong;spelldamage;manaregen;active;cooldownreduction;movement;abilityhaste;abilitypower;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 50,
 				"PercentMovementSpeedMod": 0.04,
@@ -1026,7 +1026,7 @@
 		"2420": {
 			"id": "2420",
 			"name": "Seeker's Armguard",
-			"searchString": "seekersarmguard;zhg;zhonyas;zonyas;armor;spelldamage;active",
+			"searchString": "seekersarmguard;zhg;zhonyas;zonyas;armor;spelldamage;active;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 40,
 				"FlatArmorMod": 25
@@ -1059,7 +1059,7 @@
 		"2422": {
 			"id": "2422",
 			"name": "Slightly Magical Footwear",
-			"searchString": "slightlymagicalfootwear;boots",
+			"searchString": "slightlymagicalfootwear;boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 25
 			},
@@ -1087,7 +1087,7 @@
 		"2501": {
 			"id": "2501",
 			"name": "Overlord's Bloodmail",
-			"searchString": "overlordsbloodmail;health;damage",
+			"searchString": "overlordsbloodmail;health;damage;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 550,
 				"FlatPhysicalDamageMod": 30
@@ -1193,7 +1193,7 @@
 		"2503": {
 			"id": "2503",
 			"name": "Blackfire Torch",
-			"searchString": "blackfiretorch;spelldamage;mana;cooldownreduction;abilityhaste",
+			"searchString": "blackfiretorch;spelldamage;mana;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 600,
 				"FlatMagicDamageMod": 80,
@@ -1310,7 +1310,7 @@
 		"2508": {
 			"id": "2508",
 			"name": "Fated Ashes",
-			"searchString": "fatedashes;spelldamage",
+			"searchString": "fatedashes;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 30
 			},
@@ -1343,7 +1343,7 @@
 		"2510": {
 			"id": "2510",
 			"name": "Dusk and Dawn",
-			"searchString": "duskanddawn;spellblade;bonking;health;attackspeed;spelldamage;onhit;abilityhaste",
+			"searchString": "duskanddawn;spellblade;bonking;health;attackspeed;spelldamage;onhit;abilityhaste;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 350,
 				"FlatMagicDamageMod": 70,
@@ -1410,7 +1410,7 @@
 		"2512": {
 			"id": "2512",
 			"name": "Fiendhunter Bolts",
-			"searchString": "fiendhunterbolts;criticalstrike;attackspeed;movement;abilityhaste",
+			"searchString": "fiendhunterbolts;criticalstrike;attackspeed;movement;abilityhaste;criticalstrikechance;movespeed",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"PercentAttackSpeedMod": 0.45,
@@ -1445,7 +1445,7 @@
 		"2517": {
 			"id": "2517",
 			"name": "Endless Hunger",
-			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste",
+			"searchString": "endlesshunger;bloodsphere;damage;lifesteal;spellvamp;tenacity;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 65,
 				"PercentOmnivampMod": 0.05,
@@ -1493,7 +1493,7 @@
 		"2520": {
 			"id": "2520",
 			"name": "Bastionbreaker",
-			"searchString": "bastionbreaker;damage;armorpenetration;abilityhaste",
+			"searchString": "bastionbreaker;damage;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 15,
@@ -1562,7 +1562,7 @@
 		"2522": {
 			"id": "2522",
 			"name": "Actualizer",
-			"searchString": "actualizer;spelldamage;mana;abilityhaste",
+			"searchString": "actualizer;spelldamage;mana;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 300,
 				"FlatMagicDamageMod": 90,
@@ -1616,7 +1616,7 @@
 		"2523": {
 			"id": "2523",
 			"name": "Hexoptics C44",
-			"searchString": "hexopticsc;damage;criticalstrike",
+			"searchString": "hexopticsc;damage;criticalstrike;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 55
@@ -1824,7 +1824,7 @@
 		"3002": {
 			"id": "3002",
 			"name": "Trailblazer",
-			"searchString": "trailblazer;health;armor;movement",
+			"searchString": "trailblazer;health;armor;movement;movespeed",
 			"stats": {
 				"FlatHPPoolMod": 250,
 				"FlatArmorMod": 40,
@@ -1859,7 +1859,7 @@
 		"3003": {
 			"id": "3003",
 			"name": "Archangel's Staff",
-			"searchString": "archangelsstaff;aa;seraphsembrace;tear;spelldamage;mana;abilityhaste",
+			"searchString": "archangelsstaff;aa;seraphsembrace;tear;spelldamage;mana;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 600,
 				"FlatMagicDamageMod": 70,
@@ -1894,7 +1894,7 @@
 		"3004": {
 			"id": "3004",
 			"name": "Manamune",
-			"searchString": "manamune;muramana;tear;damage;mana;cooldownreduction;onhit;abilityhaste",
+			"searchString": "manamune;muramana;tear;damage;mana;cooldownreduction;onhit;abilityhaste;attackdamage",
 			"stats": {
 				"FlatMPPoolMod": 500,
 				"FlatPhysicalDamageMod": 35,
@@ -1941,7 +1941,7 @@
 		"3006": {
 			"id": "3006",
 			"name": "Berserker's Greaves",
-			"searchString": "berserkersgreaves;zerker;attackspeed;boots",
+			"searchString": "berserkersgreaves;zerker;attackspeed;boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"PercentAttackSpeedMod": 0.25
@@ -1975,7 +1975,7 @@
 		"3009": {
 			"id": "3009",
 			"name": "Boots of Swiftness",
-			"searchString": "bootsofswiftness;swifties;boots",
+			"searchString": "bootsofswiftness;swifties;boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 55
 			},
@@ -2008,7 +2008,7 @@
 		"3020": {
 			"id": "3020",
 			"name": "Sorcerer's Shoes",
-			"searchString": "sorcerersshoes;sorcs;boots;magicpenetration",
+			"searchString": "sorcerersshoes;sorcs;boots;magicpenetration;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"FlatMagicPenetrationMod": 12
@@ -2070,7 +2070,7 @@
 		"3026": {
 			"id": "3026",
 			"name": "Guardian Angel",
-			"searchString": "guardianangel;ga;armor;damage",
+			"searchString": "guardianangel;ga;armor;damage;attackdamage",
 			"stats": {
 				"FlatArmorMod": 45,
 				"FlatPhysicalDamageMod": 55
@@ -2101,7 +2101,7 @@
 		"3031": {
 			"id": "3031",
 			"name": "Infinity Edge",
-			"searchString": "infinityedge;ie;criticalstrike;damage",
+			"searchString": "infinityedge;ie;criticalstrike;damage;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 75,
@@ -2128,7 +2128,7 @@
 		"3032": {
 			"id": "3032",
 			"name": "Yun Tal Wildarrows",
-			"searchString": "yuntalwildarrows;yuntal;arrow;damage;criticalstrike;attackspeed",
+			"searchString": "yuntalwildarrows;yuntal;arrow;damage;criticalstrike;attackspeed;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 50,
 				"PercentAttackSpeedMod": 0.4
@@ -2178,7 +2178,7 @@
 		"3033": {
 			"id": "3033",
 			"name": "Mortal Reminder",
-			"searchString": "mortalreminder;grievouswounds;damage;criticalstrike;armorpenetration",
+			"searchString": "mortalreminder;grievouswounds;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 35,
@@ -2209,7 +2209,7 @@
 		"3035": {
 			"id": "3035",
 			"name": "Last Whisper",
-			"searchString": "lastwhisper;lw;armorpenetration;damage",
+			"searchString": "lastwhisper;lw;armorpenetration;damage;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 20,
 				"PercentArmorPenetrationMod": 0.18
@@ -2240,7 +2240,7 @@
 		"3036": {
 			"id": "3036",
 			"name": "Lord Dominik's Regards",
-			"searchString": "lorddominiksregards;lw;ldr;doms;damage;criticalstrike;armorpenetration",
+			"searchString": "lorddominiksregards;lw;ldr;doms;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 35,
@@ -2270,7 +2270,7 @@
 		"3040": {
 			"id": "3040",
 			"name": "Seraph's Embrace",
-			"searchString": "seraphsembrace;spelldamage;mana;abilityhaste",
+			"searchString": "seraphsembrace;spelldamage;mana;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 1000,
 				"FlatMagicDamageMod": 70,
@@ -2319,7 +2319,7 @@
 		"3041": {
 			"id": "3041",
 			"name": "Mejai's Soulstealer",
-			"searchString": "mejaissoulstealer;book;health;spelldamage;movement",
+			"searchString": "mejaissoulstealer;book;health;spelldamage;movement;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 100,
 				"FlatMagicDamageMod": 20
@@ -2363,7 +2363,7 @@
 		"3042": {
 			"id": "3042",
 			"name": "Muramana",
-			"searchString": "muramana;damage;mana;cooldownreduction;onhit;armorpenetration",
+			"searchString": "muramana;damage;mana;cooldownreduction;onhit;armorpenetration;attackdamage",
 			"stats": {
 				"FlatMPPoolMod": 1000,
 				"FlatPhysicalDamageMod": 35,
@@ -2451,7 +2451,7 @@
 		"3044": {
 			"id": "3044",
 			"name": "Phage",
-			"searchString": "phage;mallet;health;damage;movement",
+			"searchString": "phage;mallet;health;damage;movement;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"FlatPhysicalDamageMod": 15
@@ -2502,7 +2502,7 @@
 		"3046": {
 			"id": "3046",
 			"name": "Phantom Dancer",
-			"searchString": "phantomdancer;pd;criticalstrike;attackspeed;movement",
+			"searchString": "phantomdancer;pd;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"PercentAttackSpeedMod": 0.65,
@@ -2529,7 +2529,7 @@
 		"3047": {
 			"id": "3047",
 			"name": "Plated Steelcaps",
-			"searchString": "platedsteelcaps;ninjatabi;armor;boots",
+			"searchString": "platedsteelcaps;ninjatabi;armor;boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"FlatArmorMod": 25
@@ -2601,7 +2601,7 @@
 		"3051": {
 			"id": "3051",
 			"name": "Hearthbound Axe",
-			"searchString": "hearthboundaxe;bluearrow;damage;attackspeed",
+			"searchString": "hearthboundaxe;bluearrow;damage;attackspeed;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 20,
 				"PercentAttackSpeedMod": 0.2
@@ -2840,7 +2840,7 @@
 		"3066": {
 			"id": "3066",
 			"name": "Winged Moonplate",
-			"searchString": "wingedmoonplate;pants;chaps;zoomin;leggings;health;movement",
+			"searchString": "wingedmoonplate;pants;chaps;zoomin;leggings;health;movement;movespeed",
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"PercentMovementSpeedMod": 0.04
@@ -3022,7 +3022,7 @@
 		"3071": {
 			"id": "3071",
 			"name": "Black Cleaver",
-			"searchString": "blackcleaver;bc;health;damage;cooldownreduction;onhit;movement;armorpenetration;abilityhaste",
+			"searchString": "blackcleaver;bc;health;damage;cooldownreduction;onhit;movement;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 400,
 				"FlatPhysicalDamageMod": 40,
@@ -3056,7 +3056,7 @@
 		"3072": {
 			"id": "3072",
 			"name": "Bloodthirster",
-			"searchString": "bloodthirster;bt;healsword;damage;lifesteal",
+			"searchString": "bloodthirster;bt;healsword;damage;lifesteal;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 80,
 				"PercentLifeStealMod": 0.15
@@ -3103,7 +3103,7 @@
 		"3073": {
 			"id": "3073",
 			"name": "Experimental Hexplate",
-			"searchString": "experimentalhexplate;health;damage;attackspeed;cooldownreduction;movement;abilityhaste",
+			"searchString": "experimentalhexplate;health;damage;attackspeed;cooldownreduction;movement;abilityhaste;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 450,
 				"FlatPhysicalDamageMod": 40,
@@ -3137,7 +3137,7 @@
 		"3074": {
 			"id": "3074",
 			"name": "Ravenous Hydra",
-			"searchString": "ravenoushydra;ravhydra;damage;lifesteal;cooldownreduction;onhit;abilityhaste",
+			"searchString": "ravenoushydra;ravhydra;damage;lifesteal;cooldownreduction;onhit;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 65,
 				"PercentLifeStealMod": 0.12,
@@ -3319,7 +3319,7 @@
 		"3077": {
 			"id": "3077",
 			"name": "Tiamat",
-			"searchString": "tiamat;damage;onhit",
+			"searchString": "tiamat;damage;onhit;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 20
 			},
@@ -3414,7 +3414,7 @@
 		"3078": {
 			"id": "3078",
 			"name": "Trinity Force",
-			"searchString": "trinityforce;triforce;tonsofdamage;spellblade;health;damage;attackspeed;cooldownreduction;onhit;movement;abilityhaste",
+			"searchString": "trinityforce;triforce;tonsofdamage;spellblade;health;damage;attackspeed;cooldownreduction;onhit;movement;abilityhaste;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 333,
 				"FlatPhysicalDamageMod": 36,
@@ -3644,7 +3644,7 @@
 		"3085": {
 			"id": "3085",
 			"name": "Runaan's Hurricane",
-			"searchString": "runaanshurricane;criticalstrike;attackspeed;onhit;movement",
+			"searchString": "runaanshurricane;criticalstrike;attackspeed;onhit;movement;criticalstrikechance;movespeed",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"PercentAttackSpeedMod": 0.4,
@@ -3720,7 +3720,7 @@
 		"3086": {
 			"id": "3086",
 			"name": "Zeal",
-			"searchString": "zeal;criticalstrike;attackspeed;movement",
+			"searchString": "zeal;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
 			"stats": {
 				"FlatCritChanceMod": 0.15,
 				"PercentAttackSpeedMod": 0.15,
@@ -3753,7 +3753,7 @@
 		"3087": {
 			"id": "3087",
 			"name": "Statikk Shiv",
-			"searchString": "statikkshiv;damage;attackspeed;onhit;movement",
+			"searchString": "statikkshiv;damage;attackspeed;onhit;movement;attackdamage;movespeed",
 			"stats": {
 				"FlatPhysicalDamageMod": 45,
 				"PercentAttackSpeedMod": 0.3,
@@ -3831,7 +3831,7 @@
 		"3089": {
 			"id": "3089",
 			"name": "Rabadon's Deathcap",
-			"searchString": "rabadonsdeathcap;dc;dcap;hat;banksys;wooglets;witchcap;spelldamage",
+			"searchString": "rabadonsdeathcap;dc;dcap;hat;banksys;wooglets;witchcap;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 130
 			},
@@ -3897,7 +3897,7 @@
 		"3094": {
 			"id": "3094",
 			"name": "Rapid Firecannon",
-			"searchString": "rapidfirecannon;rfc;rapidfire;canon;gun;criticalstrike;attackspeed;movement",
+			"searchString": "rapidfirecannon;rfc;rapidfire;canon;gun;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"PercentAttackSpeedMod": 0.35,
@@ -3928,7 +3928,7 @@
 		"3097": {
 			"id": "3097",
 			"name": "Stormrazor",
-			"searchString": "stormrazor;damage;criticalstrike;attackspeed;movement",
+			"searchString": "stormrazor;damage;criticalstrike;attackspeed;movement;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 50,
@@ -3969,7 +3969,7 @@
 		"3100": {
 			"id": "3100",
 			"name": "Lich Bane",
-			"searchString": "lichbane;spellblade;spelldamage;onhit;movement;abilityhaste",
+			"searchString": "lichbane;spellblade;spelldamage;onhit;movement;abilityhaste;abilitypower;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 100,
 				"PercentMovementSpeedMod": 0.04,
@@ -4021,7 +4021,7 @@
 		"3102": {
 			"id": "3102",
 			"name": "Banshee's Veil",
-			"searchString": "bansheesveil;bv;spellshield;magicresist;spelldamage",
+			"searchString": "bansheesveil;bv;spellshield;magicresist;spelldamage;abilitypower",
 			"stats": {
 				"FlatSpellBlockMod": 40,
 				"FlatMagicDamageMod": 105
@@ -4050,7 +4050,7 @@
 		"3107": {
 			"id": "3107",
 			"name": "Redemption",
-			"searchString": "redemption;spelldamage;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "redemption;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 30,
 				"AbilityHasteMod": 15,
@@ -4127,7 +4127,7 @@
 		"3108": {
 			"id": "3108",
 			"name": "Fiendish Codex",
-			"searchString": "fiendishcodex;book;spelldamage;cooldownreduction;abilityhaste",
+			"searchString": "fiendishcodex;book;spelldamage;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 25,
 				"AbilityHasteMod": 10
@@ -4235,7 +4235,7 @@
 		"3111": {
 			"id": "3111",
 			"name": "Mercury's Treads",
-			"searchString": "mercurystreads;mercs;boots;magicresist;tenacity",
+			"searchString": "mercurystreads;mercs;boots;magicresist;tenacity;movespeed",
 			"stats": {
 				"FlatSpellBlockMod": 20,
 				"FlatMovementSpeedMod": 45,
@@ -4270,7 +4270,7 @@
 		"3112": {
 			"id": "3112",
 			"name": "Guardian's Orb",
-			"searchString": "guardiansorb;health;spelldamage;manaregen",
+			"searchString": "guardiansorb;health;spelldamage;manaregen;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 150,
 				"FlatMagicDamageMod": 50
@@ -4294,7 +4294,7 @@
 		"3113": {
 			"id": "3113",
 			"name": "Aether Wisp",
-			"searchString": "aetherwisp;spookyghost;movement;spelldamage",
+			"searchString": "aetherwisp;spookyghost;movement;spelldamage;abilitypower;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 30,
 				"PercentMovementSpeedMod": 0.04
@@ -4358,7 +4358,7 @@
 		"3115": {
 			"id": "3115",
 			"name": "Nashor's Tooth",
-			"searchString": "nashorstooth;nashors;attackspeed;spelldamage;onhit;abilityhaste",
+			"searchString": "nashorstooth;nashors;attackspeed;spelldamage;onhit;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 80,
 				"PercentAttackSpeedMod": 0.5,
@@ -4405,7 +4405,7 @@
 		"3116": {
 			"id": "3116",
 			"name": "Rylai's Crystal Scepter",
-			"searchString": "rylaiscrystalscepter;rylais;health;spelldamage;slow",
+			"searchString": "rylaiscrystalscepter;rylais;health;spelldamage;slow;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 400,
 				"FlatMagicDamageMod": 65
@@ -4436,7 +4436,7 @@
 		"3118": {
 			"id": "3118",
 			"name": "Malignance",
-			"searchString": "malignance;burn;spelldamage;mana;abilityhaste",
+			"searchString": "malignance;burn;spelldamage;mana;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 600,
 				"FlatMagicDamageMod": 90,
@@ -4601,7 +4601,7 @@
 		"3123": {
 			"id": "3123",
 			"name": "Executioner's Calling",
-			"searchString": "executionerscalling;grievouswounds;damage",
+			"searchString": "executionerscalling;grievouswounds;damage;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 15
 			},
@@ -4635,7 +4635,7 @@
 		"3124": {
 			"id": "3124",
 			"name": "Guinsoo's Rageblade",
-			"searchString": "guinsoosrageblade;damage;attackspeed;spelldamage;onhit",
+			"searchString": "guinsoosrageblade;damage;attackspeed;spelldamage;onhit;abilitypower;attackdamage",
 			"stats": {
 				"FlatMagicDamageMod": 30,
 				"FlatPhysicalDamageMod": 30,
@@ -4711,7 +4711,7 @@
 		"3133": {
 			"id": "3133",
 			"name": "Caulfield's Warhammer",
-			"searchString": "caulfieldswarhammer;damage;cooldownreduction;abilityhaste",
+			"searchString": "caulfieldswarhammer;damage;cooldownreduction;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 20,
 				"AbilityHasteMod": 10
@@ -4754,7 +4754,7 @@
 		"3134": {
 			"id": "3134",
 			"name": "Serrated Dirk",
-			"searchString": "serrateddirk;lethality;damage;armorpenetration",
+			"searchString": "serrateddirk;lethality;damage;armorpenetration;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 20,
 				"PhysicalLethality": 10
@@ -4794,7 +4794,7 @@
 		"3135": {
 			"id": "3135",
 			"name": "Void Staff",
-			"searchString": "voidstaff;magicpenetration;spelldamage",
+			"searchString": "voidstaff;magicpenetration;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 95,
 				"PercentMagicPenetrationMod": 0.4
@@ -4819,7 +4819,7 @@
 		"3137": {
 			"id": "3137",
 			"name": "Cryptbloom",
-			"searchString": "cryptbloom;spelldamage;magicpenetration;abilityhaste",
+			"searchString": "cryptbloom;spelldamage;magicpenetration;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 75,
 				"AbilityHasteMod": 20,
@@ -4867,7 +4867,7 @@
 		"3139": {
 			"id": "3139",
 			"name": "Mercurial Scimitar",
-			"searchString": "mercurialscimitar;mercscim;quicksilversash;qss;silvermeredawn;magicresist;damage;lifesteal;active;movement;tenacity",
+			"searchString": "mercurialscimitar;mercscim;quicksilversash;qss;silvermeredawn;magicresist;damage;lifesteal;active;movement;tenacity;attackdamage",
 			"stats": {
 				"FlatSpellBlockMod": 35,
 				"FlatPhysicalDamageMod": 50,
@@ -4930,7 +4930,7 @@
 		"3142": {
 			"id": "3142",
 			"name": "Youmuu's Ghostblade",
-			"searchString": "youmuusghostblade;lethality;haste;damage;active;movement;armorpenetration",
+			"searchString": "youmuusghostblade;lethality;haste;damage;active;movement;armorpenetration;attackdamage;movespeed",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"PercentMovementSpeedMod": 0.04,
@@ -5090,7 +5090,7 @@
 		"3145": {
 			"id": "3145",
 			"name": "Hextech Alternator",
-			"searchString": "hextechalternator;revolver;pewpew;spelldamage",
+			"searchString": "hextechalternator;revolver;pewpew;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 45
 			},
@@ -5134,7 +5134,7 @@
 		"3146": {
 			"id": "3146",
 			"name": "Hextech Gunblade",
-			"searchString": "hextechgunblade;damage;lifesteal;spelldamage;active;spellvamp",
+			"searchString": "hextechgunblade;damage;lifesteal;spelldamage;active;spellvamp;abilitypower;attackdamage",
 			"stats": {
 				"FlatMagicDamageMod": 80,
 				"FlatPhysicalDamageMod": 40,
@@ -5182,7 +5182,7 @@
 		"3147": {
 			"id": "3147",
 			"name": "Haunting Guise",
-			"searchString": "hauntingguise;health;spelldamage",
+			"searchString": "hauntingguise;health;spelldamage;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"FlatMagicDamageMod": 30
@@ -5218,7 +5218,7 @@
 		"3152": {
 			"id": "3152",
 			"name": "Hextech Rocketbelt",
-			"searchString": "hextechrocketbelt;protobelt;health;spelldamage;active;cooldownreduction;movement;abilityhaste",
+			"searchString": "hextechrocketbelt;protobelt;health;spelldamage;active;cooldownreduction;movement;abilityhaste;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 300,
 				"FlatMagicDamageMod": 70,
@@ -5264,7 +5264,7 @@
 		"3153": {
 			"id": "3153",
 			"name": "Blade of The Ruined King",
-			"searchString": "bladeoftheruinedking;brk;bork;botrk;mist;damage;attackspeed;lifesteal;slow;onhit",
+			"searchString": "bladeoftheruinedking;brk;bork;botrk;mist;damage;attackspeed;lifesteal;slow;onhit;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 40,
 				"PercentAttackSpeedMod": 0.25,
@@ -5399,7 +5399,7 @@
 		"3155": {
 			"id": "3155",
 			"name": "Hexdrinker",
-			"searchString": "hexdrinker;damage;magicresist",
+			"searchString": "hexdrinker;damage;magicresist;attackdamage",
 			"stats": {
 				"FlatSpellBlockMod": 25,
 				"FlatPhysicalDamageMod": 25
@@ -5459,7 +5459,7 @@
 		"3156": {
 			"id": "3156",
 			"name": "Maw of Malmortius",
-			"searchString": "mawofmalmortius;magicresist;damage;lifesteal;spellvamp;abilityhaste",
+			"searchString": "mawofmalmortius;magicresist;damage;lifesteal;spellvamp;abilityhaste;attackdamage",
 			"stats": {
 				"FlatSpellBlockMod": 40,
 				"FlatPhysicalDamageMod": 60,
@@ -5542,7 +5542,7 @@
 		"3157": {
 			"id": "3157",
 			"name": "Zhonya's Hourglass",
-			"searchString": "zhonyashourglass;zhg;zonyas;wooglets;witchcap;armor;spelldamage;active",
+			"searchString": "zhonyashourglass;zhg;zonyas;wooglets;witchcap;armor;spelldamage;active;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 105,
 				"FlatArmorMod": 50
@@ -5572,7 +5572,7 @@
 		"3158": {
 			"id": "3158",
 			"name": "Ionian Boots of Lucidity",
-			"searchString": "ionianbootsoflucidity;boots;cooldownreduction",
+			"searchString": "ionianbootsoflucidity;boots;cooldownreduction;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"AbilityHasteMod": 10
@@ -5607,7 +5607,7 @@
 		"3161": {
 			"id": "3161",
 			"name": "Spear of Shojin",
-			"searchString": "spearofshojin;health;damage;abilityhaste",
+			"searchString": "spearofshojin;health;damage;abilityhaste;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 450,
 				"FlatPhysicalDamageMod": 45
@@ -5680,7 +5680,7 @@
 		"3165": {
 			"id": "3165",
 			"name": "Morellonomicon",
-			"searchString": "morellonomicon;nmst;grievouswounds;forbiddenbook;lastshadow;health;spelldamage;cooldownreduction;abilityhaste",
+			"searchString": "morellonomicon;nmst;grievouswounds;forbiddenbook;lastshadow;health;spelldamage;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 350,
 				"FlatMagicDamageMod": 75,
@@ -5712,7 +5712,7 @@
 		"3170": {
 			"id": "3170",
 			"name": "Swiftmarch",
-			"searchString": "swiftmarch;boots",
+			"searchString": "swiftmarch;boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 65
 			},
@@ -5758,7 +5758,7 @@
 		"3171": {
 			"id": "3171",
 			"name": "Crimson Lucidity",
-			"searchString": "crimsonlucidity;cooldownreduction;boots",
+			"searchString": "crimsonlucidity;cooldownreduction;boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"AbilityHasteMod": 20
@@ -5809,7 +5809,7 @@
 		"3172": {
 			"id": "3172",
 			"name": "Gunmetal Greaves",
-			"searchString": "gunmetalgreaves;attackspeed;lifesteal;movement",
+			"searchString": "gunmetalgreaves;attackspeed;lifesteal;movement;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"PercentAttackSpeedMod": 0.4,
@@ -5859,7 +5859,7 @@
 		"3173": {
 			"id": "3173",
 			"name": "Chainlaced Crushers",
-			"searchString": "chainlacedcrushers;magicresist;boots;tenacity",
+			"searchString": "chainlacedcrushers;magicresist;boots;tenacity;movespeed",
 			"stats": {
 				"FlatSpellBlockMod": 30,
 				"FlatMovementSpeedMod": 45,
@@ -5918,7 +5918,7 @@
 		"3174": {
 			"id": "3174",
 			"name": "Armored Advance",
-			"searchString": "armoredadvance;armor;boots",
+			"searchString": "armoredadvance;armor;boots;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"FlatArmorMod": 35
@@ -5977,7 +5977,7 @@
 		"3175": {
 			"id": "3175",
 			"name": "Spellslinger's Shoes",
-			"searchString": "spellslingersshoes;boots;magicpenetration",
+			"searchString": "spellslingersshoes;boots;magicpenetration;movespeed",
 			"stats": {
 				"FlatMovementSpeedMod": 45,
 				"FlatMagicPenetrationMod": 18,
@@ -6011,7 +6011,7 @@
 		"3177": {
 			"id": "3177",
 			"name": "Guardian's Blade",
-			"searchString": "guardiansblade;dblade;health;damage;abilityhaste",
+			"searchString": "guardiansblade;dblade;health;damage;abilityhaste;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 150,
 				"FlatPhysicalDamageMod": 30,
@@ -6037,7 +6037,7 @@
 		"3179": {
 			"id": "3179",
 			"name": "Umbral Glaive",
-			"searchString": "umbralglaive;lethality;damage;vision;cooldownreduction;armorpenetration;abilityhaste",
+			"searchString": "umbralglaive;lethality;damage;vision;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 60,
 				"AbilityHasteMod": 15,
@@ -6140,7 +6140,7 @@
 		"3181": {
 			"id": "3181",
 			"name": "Hullbreaker",
-			"searchString": "hullbreaker;hull;pirate;yarrr;ahoy;health;damage;movement",
+			"searchString": "hullbreaker;hull;pirate;yarrr;ahoy;health;damage;movement;attackdamage;movespeed",
 			"stats": {
 				"FlatHPPoolMod": 500,
 				"FlatPhysicalDamageMod": 40,
@@ -6248,7 +6248,7 @@
 		"3184": {
 			"id": "3184",
 			"name": "Guardian's Hammer",
-			"searchString": "guardianshammer;dblade;health;damage;lifesteal",
+			"searchString": "guardianshammer;dblade;health;damage;lifesteal;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 150,
 				"FlatPhysicalDamageMod": 25,
@@ -6445,7 +6445,7 @@
 		"3302": {
 			"id": "3302",
 			"name": "Terminus",
-			"searchString": "terminus;bow;sentinel;damage;attackspeed;onhit;magicpenetration;armorpenetration",
+			"searchString": "terminus;bow;sentinel;damage;attackspeed;onhit;magicpenetration;armorpenetration;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 30,
 				"PercentAttackSpeedMod": 0.35
@@ -6505,7 +6505,7 @@
 		"3504": {
 			"id": "3504",
 			"name": "Ardent Censer",
-			"searchString": "ardentcenser;attackspeed;spelldamage;manaregen;movement",
+			"searchString": "ardentcenser;attackspeed;spelldamage;manaregen;movement;abilitypower;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 45,
 				"PercentMovementSpeedMod": 0.04,
@@ -6537,7 +6537,7 @@
 		"3508": {
 			"id": "3508",
 			"name": "Essence Reaver",
-			"searchString": "essencereaver;er;spellblade;damage;criticalstrike;manaregen;cooldownreduction;onhit;abilityhaste",
+			"searchString": "essencereaver;er;spellblade;damage;criticalstrike;manaregen;cooldownreduction;onhit;abilityhaste;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 50,
@@ -6598,7 +6598,7 @@
 		"3742": {
 			"id": "3742",
 			"name": "Dead Man's Plate",
-			"searchString": "deadmansplate;dmp;gangplank;health;armor;slow;movement",
+			"searchString": "deadmansplate;dmp;gangplank;health;armor;slow;movement;movespeed",
 			"stats": {
 				"FlatHPPoolMod": 350,
 				"FlatArmorMod": 55,
@@ -6655,7 +6655,7 @@
 		"3748": {
 			"id": "3748",
 			"name": "Titanic Hydra",
-			"searchString": "titanichydra;beefer;health;healthregen;damage;onhit",
+			"searchString": "titanichydra;beefer;health;healthregen;damage;onhit;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 600,
 				"FlatPhysicalDamageMod": 40
@@ -6799,7 +6799,7 @@
 		"3802": {
 			"id": "3802",
 			"name": "Lost Chapter",
-			"searchString": "lostchapter;manabook;spelldamage;mana;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "lostchapter;manabook;spelldamage;mana;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 300,
 				"FlatMagicDamageMod": 40,
@@ -6873,7 +6873,7 @@
 		"3814": {
 			"id": "3814",
 			"name": "Edge of Night",
-			"searchString": "edgeofnight;eon;spellshield;lethality;health;damage;armorpenetration",
+			"searchString": "edgeofnight;eon;spellshield;lethality;health;damage;armorpenetration;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 250,
 				"FlatPhysicalDamageMod": 50,
@@ -7281,7 +7281,7 @@
 		"3916": {
 			"id": "3916",
 			"name": "Oblivion Orb",
-			"searchString": "oblivionorb;grievouswounds;spelldamage",
+			"searchString": "oblivionorb;grievouswounds;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 25
 			},
@@ -7312,7 +7312,7 @@
 		"4003": {
 			"id": "4003",
 			"name": "Lifeline",
-			"searchString": "lifeline;damage;movement;armorpenetration",
+			"searchString": "lifeline;damage;movement;armorpenetration;attackdamage;movespeed",
 			"stats": {
 				"FlatPhysicalDamageMod": 25,
 				"PercentMovementSpeedMod": 0.04
@@ -7345,7 +7345,7 @@
 		"4004": {
 			"id": "4004",
 			"name": "Spectral Cutlass",
-			"searchString": "spectralcutlass;damage;movement;armorpenetration",
+			"searchString": "spectralcutlass;damage;movement;armorpenetration;attackdamage;movespeed",
 			"stats": {
 				"FlatPhysicalDamageMod": 50,
 				"PercentMovementSpeedMod": 0.04,
@@ -7376,7 +7376,7 @@
 		"4005": {
 			"id": "4005",
 			"name": "Imperial Mandate",
-			"searchString": "imperialmandate;bannerofcommand;flag;spelldamage;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "imperialmandate;bannerofcommand;flag;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 60,
 				"AbilityHasteMod": 20,
@@ -7410,7 +7410,7 @@
 		"4401": {
 			"id": "4401",
 			"name": "Force of Nature",
-			"searchString": "forceofnature;fon;health;magicresist;movement",
+			"searchString": "forceofnature;fon;health;magicresist;movement;movespeed",
 			"stats": {
 				"FlatSpellBlockMod": 55,
 				"FlatHPPoolMod": 400,
@@ -7445,7 +7445,7 @@
 		"4628": {
 			"id": "4628",
 			"name": "Horizon Focus",
-			"searchString": "horizonfocus;snipe;lockon;spelldamage;abilityhaste",
+			"searchString": "horizonfocus;snipe;lockon;spelldamage;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 75,
 				"AbilityHasteMod": 25
@@ -7481,7 +7481,7 @@
 		"4629": {
 			"id": "4629",
 			"name": "Cosmic Drive",
-			"searchString": "cosmicdrive;cooldownhat;health;spelldamage;movement;abilityhaste",
+			"searchString": "cosmicdrive;cooldownhat;health;spelldamage;movement;abilityhaste;abilitypower;movespeed",
 			"stats": {
 				"FlatHPPoolMod": 350,
 				"FlatMagicDamageMod": 70,
@@ -7526,7 +7526,7 @@
 		"4630": {
 			"id": "4630",
 			"name": "Blighting Jewel",
-			"searchString": "blightingjewel;pen;purple;magicpenetration;spelldamage",
+			"searchString": "blightingjewel;pen;purple;magicpenetration;spelldamage;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 25,
 				"PercentMagicPenetrationMod": 0.13
@@ -7554,7 +7554,7 @@
 		"4632": {
 			"id": "4632",
 			"name": "Verdant Barrier",
-			"searchString": "verdantbarrier;necklace;magicresist;spelldamage",
+			"searchString": "verdantbarrier;necklace;magicresist;spelldamage;abilitypower",
 			"stats": {
 				"FlatSpellBlockMod": 25,
 				"FlatMagicDamageMod": 40
@@ -7591,7 +7591,7 @@
 		"4633": {
 			"id": "4633",
 			"name": "Riftmaker",
-			"searchString": "riftmaker;velkoz;health;spelldamage;cooldownreduction;spellvamp",
+			"searchString": "riftmaker;velkoz;health;spelldamage;cooldownreduction;spellvamp;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 350,
 				"FlatMagicDamageMod": 70,
@@ -7679,7 +7679,7 @@
 		"4642": {
 			"id": "4642",
 			"name": "Bandleglass Mirror",
-			"searchString": "bandleglassmirror;yordle;spelldamage;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "bandleglassmirror;yordle;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 20,
 				"AbilityHasteMod": 10,
@@ -7712,7 +7712,7 @@
 		"4645": {
 			"id": "4645",
 			"name": "Shadowflame",
-			"searchString": "shadowflame;spelldamage;magicpenetration",
+			"searchString": "shadowflame;spelldamage;magicpenetration;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 110,
 				"FlatMagicPenetrationMod": 15
@@ -7742,7 +7742,7 @@
 		"4646": {
 			"id": "4646",
 			"name": "Stormsurge",
-			"searchString": "stormsurge;spelldamage;goldper;movement;magicpenetration",
+			"searchString": "stormsurge;spelldamage;goldper;movement;magicpenetration;abilitypower;movespeed",
 			"stats": {
 				"FlatMagicDamageMod": 90,
 				"PercentMovementSpeedMod": 0.06,
@@ -7832,7 +7832,7 @@
 		"6333": {
 			"id": "6333",
 			"name": "Death's Dance",
-			"searchString": "deathsdance;dd;armor;damage;abilityhaste",
+			"searchString": "deathsdance;dd;armor;damage;abilityhaste;attackdamage",
 			"stats": {
 				"FlatArmorMod": 50,
 				"FlatPhysicalDamageMod": 60,
@@ -7918,7 +7918,7 @@
 		"6609": {
 			"id": "6609",
 			"name": "Chempunk Chainsword",
-			"searchString": "chempunkchainsword;grievouswounds;health;damage;cooldownreduction;abilityhaste",
+			"searchString": "chempunkchainsword;grievouswounds;health;damage;cooldownreduction;abilityhaste;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 450,
 				"FlatPhysicalDamageMod": 45,
@@ -7950,7 +7950,7 @@
 		"6610": {
 			"id": "6610",
 			"name": "Sundered Sky",
-			"searchString": "sunderedsky;health;damage;cooldownreduction;abilityhaste",
+			"searchString": "sunderedsky;health;damage;cooldownreduction;abilityhaste;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 400,
 				"FlatPhysicalDamageMod": 45,
@@ -8035,7 +8035,7 @@
 		"6616": {
 			"id": "6616",
 			"name": "Staff of Flowing Water",
-			"searchString": "staffofflowingwater;nami;spelldamage;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "staffofflowingwater;nami;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 35,
 				"AbilityHasteMod": 15,
@@ -8069,7 +8069,7 @@
 		"6617": {
 			"id": "6617",
 			"name": "Moonstone Renewer",
-			"searchString": "moonstonerenewer;yuumi;health;spelldamage;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "moonstonerenewer;yuumi;health;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"FlatMagicDamageMod": 25,
@@ -8145,7 +8145,7 @@
 		"6620": {
 			"id": "6620",
 			"name": "Echoes of Helia",
-			"searchString": "echoesofhelia;spookycup;health;spelldamage;manaregen;cooldownreduction;abilityhaste",
+			"searchString": "echoesofhelia;spookycup;health;spelldamage;manaregen;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 200,
 				"FlatMagicDamageMod": 35,
@@ -8188,7 +8188,7 @@
 		"6621": {
 			"id": "6621",
 			"name": "Dawncore",
-			"searchString": "dawncore;spelldamage;manaregen",
+			"searchString": "dawncore;spelldamage;manaregen;abilitypower",
 			"stats": {
 				"FlatMagicDamageMod": 45,
 				"PercentBaseMPRegenMod": 1,
@@ -8219,7 +8219,7 @@
 		"6631": {
 			"id": "6631",
 			"name": "Stridebreaker",
-			"searchString": "stridebreaker;kneecapper;whipchain;health;damage;attackspeed;slow",
+			"searchString": "stridebreaker;kneecapper;whipchain;health;damage;attackspeed;slow;attackdamage",
 			"stats": {
 				"FlatHPPoolMod": 450,
 				"FlatPhysicalDamageMod": 40,
@@ -8313,7 +8313,7 @@
 		"6653": {
 			"id": "6653",
 			"name": "Liandry's Torment",
-			"searchString": "liandrystorment;lastshadow;ls;burn;health;spelldamage",
+			"searchString": "liandrystorment;lastshadow;ls;burn;health;spelldamage;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 300,
 				"FlatMagicDamageMod": 60
@@ -8349,7 +8349,7 @@
 		"6655": {
 			"id": "6655",
 			"name": "Luden's Echo",
-			"searchString": "ludensecho;spelldamage;mana;cooldownreduction;abilityhaste",
+			"searchString": "ludensecho;spelldamage;mana;cooldownreduction;abilityhaste;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 600,
 				"FlatMagicDamageMod": 100,
@@ -8403,7 +8403,7 @@
 		"6657": {
 			"id": "6657",
 			"name": "Rod of Ages",
-			"searchString": "rodofages;roa;health;healthregen;spelldamage;mana;manaregen",
+			"searchString": "rodofages;roa;health;healthregen;spelldamage;mana;manaregen;abilitypower",
 			"stats": {
 				"FlatMPPoolMod": 500,
 				"FlatHPPoolMod": 350,
@@ -8684,7 +8684,7 @@
 		"6670": {
 			"id": "6670",
 			"name": "Noonquiver",
-			"searchString": "noonquiver;damage;criticalstrike",
+			"searchString": "noonquiver;damage;criticalstrike;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.2,
 				"FlatPhysicalDamageMod": 15
@@ -8714,7 +8714,7 @@
 		"6672": {
 			"id": "6672",
 			"name": "Kraken Slayer",
-			"searchString": "krakenslayer;damage;attackspeed;onhit;movement",
+			"searchString": "krakenslayer;damage;attackspeed;onhit;movement;attackdamage;movespeed",
 			"stats": {
 				"FlatPhysicalDamageMod": 45,
 				"PercentAttackSpeedMod": 0.4,
@@ -8773,7 +8773,7 @@
 		"6673": {
 			"id": "6673",
 			"name": "Immortal Shieldbow",
-			"searchString": "immortalshieldbow;damage;criticalstrike",
+			"searchString": "immortalshieldbow;damage;criticalstrike;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 55
@@ -8823,7 +8823,7 @@
 		"6675": {
 			"id": "6675",
 			"name": "Navori Flickerblade",
-			"searchString": "navoriflickerblade;critshojin;criticalstrike;attackspeed;movement",
+			"searchString": "navoriflickerblade;critshojin;criticalstrike;attackspeed;movement;criticalstrikechance;movespeed",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"PercentAttackSpeedMod": 0.4,
@@ -8854,7 +8854,7 @@
 		"6676": {
 			"id": "6676",
 			"name": "The Collector",
-			"searchString": "thecollector;deathblade;lethality;gun;damage;criticalstrike;armorpenetration",
+			"searchString": "thecollector;deathblade;lethality;gun;damage;criticalstrike;armorpenetration;criticalstrikechance;attackdamage",
 			"stats": {
 				"FlatCritChanceMod": 0.25,
 				"FlatPhysicalDamageMod": 50,
@@ -8887,7 +8887,7 @@
 		"6690": {
 			"id": "6690",
 			"name": "Rectrix",
-			"searchString": "rectrix;damage;movement",
+			"searchString": "rectrix;damage;movement;attackdamage;movespeed",
 			"stats": {
 				"FlatPhysicalDamageMod": 15,
 				"PercentMovementSpeedMod": 0.04
@@ -8919,7 +8919,7 @@
 		"6692": {
 			"id": "6692",
 			"name": "Eclipse",
-			"searchString": "eclipse;damage;cooldownreduction;abilityhaste",
+			"searchString": "eclipse;damage;cooldownreduction;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 60,
 				"AbilityHasteMod": 15
@@ -9026,7 +9026,7 @@
 		"6694": {
 			"id": "6694",
 			"name": "Serylda's Grudge",
-			"searchString": "seryldasgrudge;slow;damage;cooldownreduction;armorpenetration;abilityhaste",
+			"searchString": "seryldasgrudge;slow;damage;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 45,
 				"AbilityHasteMod": 15,
@@ -9072,7 +9072,7 @@
 		"6695": {
 			"id": "6695",
 			"name": "Serpent's Fang",
-			"searchString": "serpentsfang;lethality;damage;armorpenetration",
+			"searchString": "serpentsfang;lethality;damage;armorpenetration;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"PhysicalLethality": 15
@@ -9117,7 +9117,7 @@
 		"6696": {
 			"id": "6696",
 			"name": "Axiom Arc",
-			"searchString": "axiomarc;damage;armorpenetration;abilityhaste",
+			"searchString": "axiomarc;damage;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 20,
@@ -9163,7 +9163,7 @@
 		"6697": {
 			"id": "6697",
 			"name": "Hubris",
-			"searchString": "hubris;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste",
+			"searchString": "hubris;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 60,
 				"AbilityHasteMod": 10,
@@ -9211,7 +9211,7 @@
 		"6698": {
 			"id": "6698",
 			"name": "Profane Hydra",
-			"searchString": "profanehydra;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste",
+			"searchString": "profanehydra;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 10,
@@ -9321,7 +9321,7 @@
 		"6699": {
 			"id": "6699",
 			"name": "Voltaic Cyclosword",
-			"searchString": "voltaiccyclosword;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste",
+			"searchString": "voltaiccyclosword;lethality;damage;active;cooldownreduction;armorpenetration;abilityhaste;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"AbilityHasteMod": 10,
@@ -9409,7 +9409,7 @@
 		"6701": {
 			"id": "6701",
 			"name": "Opportunity",
-			"searchString": "opportunity;lethality;damage;active;movement;armorpenetration",
+			"searchString": "opportunity;lethality;damage;active;movement;armorpenetration;attackdamage",
 			"stats": {
 				"FlatPhysicalDamageMod": 55,
 				"PhysicalLethality": 18
@@ -9458,7 +9458,7 @@
 		"8010": {
 			"id": "8010",
 			"name": "Bloodletter's Curse",
-			"searchString": "bloodletterscurse;health;spelldamage;cooldownreduction;magicpenetration",
+			"searchString": "bloodletterscurse;health;spelldamage;cooldownreduction;magicpenetration;abilitypower",
 			"stats": {
 				"FlatHPPoolMod": 400,
 				"FlatMagicDamageMod": 65,
