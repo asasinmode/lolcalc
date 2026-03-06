@@ -45,7 +45,7 @@ const sortedByPriceForMap = computed(() => Object
 
 // TODO
 // add sr-only (not buyable, inventory full?)
-// search item with -1 = no price
+// bought items style
 // stop `buyItem` and dragging in scoreboard if can't buy
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
 	const discount = target.value ? calculateItemDiscount(item.id, target.value.items.value, items) : 0;
@@ -1131,7 +1131,7 @@ defineExpose({
 		}
 
 		&[data-bought] > img {
-			/* TODO should be check icon */
+			/* TODO should be check icon, probably also only when buyability is -1? */
 			--inner-border: theme('colors.green.500');
 		}
 	}

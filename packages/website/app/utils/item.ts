@@ -132,14 +132,13 @@ export function itemBuyability(item: IItem, target: DamageSource | undefined, al
 	}
 
 	const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value, allItems);
+	const inventoryAfterBuying = target.items.value.map((item, index) => !inventoryIndexesConsumedOnBuy.includes(index) && item);
 
-	if (target.inventoryFull.value) {
+	if (inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5) {
 		buyability = 0;
 	} else if (
 		(!target.isRanged.value && RANGED_ONLY_ITEM_IDS.includes(item.id))
-		|| (target.items.value
-			.map((item, index) => !inventoryIndexesConsumedOnBuy.includes(index) && item)
-			.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group))))
+		|| inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group)))
 	) {
 		buyability = -1;
 	}
