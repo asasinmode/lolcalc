@@ -1,3 +1,5 @@
+import type { IShopItem } from './types';
+
 export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IItemVariableCalculationTarget) => number>> = {
 	3004: {	// manamune
 		// TODO
@@ -124,23 +126,32 @@ const RANGED_ONLY_ITEM_IDS = [
 	'3085',	/* runaan's hurricane, has `mRequiredPurchaseIdentities	[ "Ranged" ]` but it's the only item like that so this should be fine */
 ];
 
-export function itemBuyability(item: IItem, target: DamageSource | undefined, allItems: Record<string, IItem>) {
-	let buyability: -1 | 0 | 1 = 1;
+export function itemBuyability(
+	item: IItem,
+	target: DamageSource | undefined,
+	allItems: Record<string, IItem>,
+	consumeComponents = true,
+): IShopItem['buyability'] {
+	let buyability: IShopItem['buyability'] = 1;
 
 	if (!target) {
 		return buyability;
 	}
 
-	const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value, allItems);
-	const inventoryAfterBuying = target.items.value.map((item, index) => !inventoryIndexesConsumedOnBuy.includes(index) && item);
+	let inventoryAfterBuying = target.items.value;
 
-	if (inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5) {
-		buyability = 0;
-	} else if (
+	if (consumeComponents) {
+		const inventoryIndexesConsumedOnBuy = consumeItemComponents(item.id, target.items.value, allItems);
+		inventoryAfterBuying = target.items.value.map((item, index) => inventoryIndexesConsumedOnBuy.includes(index) ? undefined : item);
+	}
+
+	if (
 		(!target.isRanged.value && RANGED_ONLY_ITEM_IDS.includes(item.id))
 		|| inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group)))
 	) {
 		buyability = -1;
+	} else if (inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5) {
+		buyability = 0;
 	}
 
 	return buyability;

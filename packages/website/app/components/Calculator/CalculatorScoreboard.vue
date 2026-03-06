@@ -275,47 +275,60 @@ function startItemDrag(event: DragEvent, source: DamageSource[], index: number, 
 	event.dataTransfer!.setData('item-index', itemIndex.toString());
 }
 
-function onItemDragEnter(event: DragEvent, inventoryFull: boolean) {
+function onItemDragEnter(event: DragEvent, target: DamageSource) {
 	const el = (event.target as HTMLElement)?.closest('ul');
 	if (el && el !== draggingFromItemListEl) {
-		el.dataset.dropTarget = inventoryFull.toString();
+		const dragData = itemDragEventData(event);
+		if (dragData) {
+			el.dataset.dropBuyability = itemBuyability(dragData.item, target, items, false).toString();
+		}
 	}
 }
 
-function onItemDragover(event: DragEvent, inventoryFull: boolean) {
-	if (!inventoryFull && event.dataTransfer?.types.includes('item-index') && !draggingFromItemListEl?.contains(event.target as HTMLElement)) {
+function onItemDragover(event: DragEvent, target: DamageSource) {
+	const dragData = itemDragEventData(event);
+	if (!draggingFromItemListEl?.contains(event.target as HTMLElement) && dragData && itemBuyability(dragData.item, target, items, false) === 1) {
 		event.preventDefault();
 	}
 }
 
 function onItemDragLeave(event: DragEvent) {
 	if (event.target) {
-		delete (event.target as HTMLElement).dataset.dropTarget;
+		delete (event.target as HTMLElement).dataset.dropBuyability;
 	}
 }
 
 function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number) {
 	draggingFromItemListEl = null;
 	if (event.target) {
-		delete (event.target as HTMLElement).dataset.dropTarget;
+		delete (event.target as HTMLElement).dataset.dropBuyability;
 	}
 
+	const dragData = itemDragEventData(event);
+	if (target[targetIndex] && dragData && itemBuyability(dragData.item, target[targetIndex], items, false) === 1) {
+		const { source, itemIndex } = dragData;
+		const item = globalKeyModifiers.value.alt ? source.items.value[itemIndex]! : source.removeItem(itemIndex)!;
+		target[targetIndex].addItem(item, items, false);
+	}
+}
+
+function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex: number; item: IItem } | undefined {
 	const sourceGroup = event.dataTransfer!.getData('source');
 	const sourceIndex = event.dataTransfer!.getData('index');
 	const itemIndex = event.dataTransfer!.getData('item-index');
 
-	if (target[targetIndex] && !target[targetIndex].inventoryFull.value && sourceGroup && sourceIndex && itemIndex) {
-		const source = (sourceGroup === 'sources' ? damageSources : damageTargets).value[Number(sourceIndex)];
-		if (!source) {
-			throw new Error('move item source no longer exists');
-		}
-		const parsedItemIndex = Number(itemIndex);
-		const item = globalKeyModifiers.value.alt ? source.items.value[parsedItemIndex]! : source.removeItem(parsedItemIndex);
-		if (!item) {
-			throw new Error(`move item source no longer has an item at ${parsedItemIndex}`);
-		}
-		target[targetIndex].addItem(item, items, false);
+	if (!sourceGroup || !sourceIndex || !itemIndex) {
+		return;
 	}
+
+	const source = (sourceGroup === 'sources' ? damageSources : damageTargets).value[Number(sourceIndex)];
+	const parsedItemIndex = Number(itemIndex);
+
+	return {
+		source: source!,
+		itemIndex: parsedItemIndex,
+		item: source!.items.value[parsedItemIndex]!,
+	};
 }
 </script>
 
@@ -358,8 +371,8 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
 				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageSources, index, itemIndex)"
-				@item-list-dragenter="(event) => onItemDragEnter(event, value.inventoryFull.value)"
-				@item-list-dragover="(event) => onItemDragover(event, value.inventoryFull.value)"
+				@item-list-dragenter="onItemDragEnter($event, value)"
+				@item-list-dragover="onItemDragover($event, value)"
 				@item-list-dragleave="onItemDragLeave"
 				@item-list-drop="dropItem($event, damageSources, index)"
 			/>
@@ -396,8 +409,8 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
 				@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
 				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageTargets, index, itemIndex)"
-				@item-list-dragenter="(event) => onItemDragEnter(event, value.inventoryFull.value)"
-				@item-list-dragover="(event) => onItemDragover(event, value.inventoryFull.value)"
+				@item-list-dragenter="onItemDragEnter($event, value)"
+				@item-list-dragover="onItemDragover($event, value)"
 				@item-list-dragleave="onItemDragLeave"
 				@item-list-drop="dropItem($event, damageTargets, index)"
 			/>

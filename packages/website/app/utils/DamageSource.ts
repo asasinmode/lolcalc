@@ -167,23 +167,25 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	}
 
 	// TODO role quest handle boots?
-	addItem(item: IItem, allItems: Record<string, IItem>, consume = true): void {
-		if (consume) {
+	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {
+		if (consumeComponents) {
 			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
 			for (const index of consumedInventoryIndexes) {
 				this.items.value[index] = undefined;
 			}
 		}
 
-		const firstEmptyIndex = this.items.value.indexOf(undefined);
-		if (~firstEmptyIndex && firstEmptyIndex !== 6) {
-			this.items.value[firstEmptyIndex] = item;
+		for (let i = 0; i < 6; i++) {
+			if (!this.items.value[i]) {
+				this.items.value[i] = item;
+				break;
+			}
 		}
 
 		cleanupItems(this.items.value);
 	}
 
-	removeItem(index: number): IItem | void {
+	removeItem(index: number): IItem | undefined {
 		const item = this.items.value[index];
 		if (item) {
 			this.items.value[index] = undefined;
@@ -193,7 +195,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	}
 }
 
-function cleanupItems(items: (IItem | undefined)[]) {
+function cleanupItems(items: (IItem | undefined)[]): void {
 	const filledSlots = items.slice(0, 6).filter(Boolean);
 	for (let i = 0; i < 6; i++) {
 		items[i] = filledSlots[i];
