@@ -44,16 +44,28 @@ const sortedByPriceForMap = computed(() => Object
 	.sort((a, b) => a.gold.total - b.gold.total)
 	.filter(item => (item.mapMask & mapMask.value) !== 0));
 
-// TODO
-// add sr-only (not buyable, inventory full?)
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
 	const discount = target.value ? calculateItemDiscount(item.id, target.value.items.value, items) : 0;
+	const buyability = itemBuyability(item, target.value, items);
+	const isBought = target.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id);
+
+	const statuses: string[] = [];
+	if (isBought && item.epicness === ITEM_EPICNESS_LEGENDARY) {
+		statuses.push('bought');
+	}
+	if (buyability === -1) {
+		statuses.push('locked');
+	} else if (buyability === 0) {
+		statuses.push('unavailable');
+	}
 
 	return {
 		item,
-		buyability: itemBuyability(item, target.value, items),
+		buyability,
+		isBought,
+		srStatus: statuses.join(', '),
 		calculatedPrice: item.gold.total - discount,
-		isBought: target.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id),
+		isLegendary: item.epicness === ITEM_EPICNESS_LEGENDARY,
 	};
 }));
 const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v.item.id, v])));
@@ -440,7 +452,7 @@ defineExpose({
 							class="hover:bg-white/10"
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
-							:data-legendary="shopItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
+							:data-legendary="shopItem.isLegendary ? '' : undefined"
 							:class="{
 								'bg-white/10': searchSelectedIndex === index,
 								'selected': searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
@@ -457,8 +469,8 @@ defineExpose({
 								loading="lazy"
 							>
 							{{ shopItem.item.name }}
-							<Icon />
-							<span>{{ shopItem.isBought ? '' : shopItem.calculatedPrice }}</span>
+							<span class="sr-status">{{ shopItem.srStatus }}</span>
+							<span>{{ shopItem.isBought && shopItem.buyability === -1 ? '' : shopItem.calculatedPrice }}</span>
 						</li>
 					</ul>
 					<section aria-live="polite" aria-atomic="true" class="row-span-full">
@@ -577,6 +589,7 @@ defineExpose({
 								aria-hidden="true"
 								loading="lazy"
 							>
+							<span class="sr-status">{{ shopItem.srStatus }}</span>
 							<span>{{ shopItem.calculatedPrice }}</span>
 						</button>
 					</li>
@@ -601,7 +614,7 @@ defineExpose({
 							:class="{ selected: selectedItem?.item.id === shopItem.item.id }"
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
-							:data-legendary="shopItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
+							:data-legendary="shopItem.isLegendary ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@mousedown.left="selectOrBuyIfDouble(shopItem, true)"
 							@mousedown.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
@@ -616,7 +629,7 @@ defineExpose({
 								aria-hidden="true"
 								loading="lazy"
 							>
-							<Icon />
+							<span class="sr-status">{{ shopItem.srStatus }}</span>
 							<span>{{ shopItem.calculatedPrice }}</span>
 						</button>
 					</li>
@@ -633,11 +646,11 @@ defineExpose({
 				:target="itemVariableCalculationTarget"
 			/>
 			<button
-				:disabled="!selectedItem"
+				:disabled="selectedItem?.buyability !== 1"
 				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-neutral-950"
 				@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
 			>
-				Purchase
+				{{ selectedItem?.buyability === 1 ? "Purchase item" : 'Item unavailable' }}
 			</button>
 			<h3 class="order-1">
 				Builds into
@@ -648,7 +661,7 @@ defineExpose({
 						:disabled="!buildsIntoItems[i - 1]"
 						:data-buyability="buildsIntoItems[i - 1]?.buyability"
 						:data-bought="buildsIntoItems[i - 1]?.isBought ? '' : undefined"
-						:data-legendary="buildsIntoItems[i - 1]?.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
+						:data-legendary="buildsIntoItems[i - 1]?.isLegendary ? '' : undefined"
 						@mouseenter="buildsIntoItems[i - 1] && enterTooltipableElement($event, buildsIntoItems[i - 1]!)"
 						@click="selectOrBuyIfDouble(buildsIntoItems[i - 1]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[i - 1]!.item, buildsIntoItems[i - 1]!.buyability)"
@@ -664,7 +677,7 @@ defineExpose({
 							aria-hidden="true"
 							loading="lazy"
 						>
-						<Icon />
+						<span class="sr-status">{{ buildsIntoItems[i - 1]?.srStatus }}</span>
 					</button>
 				</li>
 				<li>
@@ -673,7 +686,7 @@ defineExpose({
 						:disabled="!buildsIntoItems[6]"
 						:data-buyability="buildsIntoItems[6]?.buyability"
 						:data-bought="buildsIntoItems[6]?.isBought ? '' : undefined"
-						:data-legendary="buildsIntoItems[6]?.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
+						:data-legendary="buildsIntoItems[6]?.isLegendary ? '' : undefined"
 						@click="selectOrBuyIfDouble(buildsIntoItems[6]!, true)"
 						@click.right="rightClickItem($event, buildsIntoItems[6]!.item, buildsIntoItems[6]!.buyability)"
 						@mouseenter="buildsIntoItems[6] && enterTooltipableElement($event, buildsIntoItems[6]!)"
@@ -689,7 +702,7 @@ defineExpose({
 							aria-hidden="true"
 							loading="lazy"
 						>
-						<Icon />
+						<span class="sr-status">{{ buildsIntoItems[6]?.srStatus }}</span>
 					</button>
 					<button v-else popovertarget="builds-into-more-list" @focusout="closeBuildsIntoMoreListIfOutside">
 						+{{ buildsIntoItems.length - 6 }}
@@ -704,7 +717,7 @@ defineExpose({
 							<button
 								:data-buyability="shopItem.buyability"
 								:data-bought="shopItem.isBought ? '' : undefined"
-								:data-legendary="shopItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
+								:data-legendary="shopItem.isLegendary ? '' : undefined"
 								@mouseenter="enterTooltipableElement($event, shopItem)"
 								@click="selectBuildsIntoMoreItem(shopItem)"
 								@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
@@ -718,7 +731,7 @@ defineExpose({
 									aria-hidden="true"
 									loading="lazy"
 								>
-								<Icon />
+								<span class="sr-status">{{ shopItem.srStatus }}</span>
 								<span>{{ shopItem.item.name }}</span>
 							</button>
 						</li>
@@ -732,7 +745,7 @@ defineExpose({
 				<ItemBuildPathButton
 					v-if="displayedItem"
 					:shop-item="displayedItem"
-					:data-legendary="displayedItem.item.epicness === ITEM_EPICNESS_LEGENDARY ? '' : undefined"
+					:data-legendary="displayedItem.isLegendary ? '' : undefined"
 					@click="selectItem(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem.item, displayedItem.buyability)"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
@@ -747,6 +760,7 @@ defineExpose({
 						:key="secondLevelIndex"
 					>
 						<ItemBuildPathButton
+							component
 							:shop-item="secondLevelBuildsFromItem"
 							@click="selectItem(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
@@ -758,6 +772,7 @@ defineExpose({
 								:key="`${secondLevelIndex}-${thirdLevelIndex}`"
 							>
 								<ItemBuildPathButton
+									component
 									:shop-item="thirdLevelBuildsFromItem"
 									@click="selectItem(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
@@ -1163,12 +1178,8 @@ defineExpose({
 	.item-shop-item-btn {
 		--at-apply: 'relative';
 
-		> .icon {
-			--at-apply: 'hidden absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3C!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --%3E%3Cg%3E%3Cpath fill='oklch(78.9%25 0.154 211.53)' d='m237.66 85.26l-128.4 128.4a8 8 0 0 1-11.32 0l-71.6-72a8 8 0 0 1 0-11.31l24-24a8 8 0 0 1 11.32 0L104 147.43l98.34-97.09a8 8 0 0 1 11.32 0l24 23.6a8 8 0 0 1 0 11.32'/%3E%3Cpath fill='%23000' d='m243.28 68.24l-24-23.56a16 16 0 0 0-22.59 0L104 136.23l-36.69-35.6a16 16 0 0 0-22.58.05l-24 24a16 16 0 0 0 0 22.61l71.62 72a16 16 0 0 0 22.63 0L243.33 90.91a16 16 0 0 0-.05-22.67M103.62 208L32 136l24-24a.6.6 0 0 1 .08.08l42.35 41.09a8 8 0 0 0 11.19 0L208.06 56L232 79.6Z'/%3E%3C/g%3E%3C/svg%3E"); /* cyan-400 fill */
-			background-size: 100% 100%;
-			background-position: center;
-			background-repeat: no-repeat;
+		> .sr-status {
+			--at-apply: 'block text-transparent tracking-[-1em] absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
 		}
 	}
 
@@ -1190,10 +1201,13 @@ defineExpose({
 			#item-shop-builds-into-list > li > button,
 			.item-shop-item-btn
 		)[data-bought][data-legendary]
-		> .icon,
-	#item-shop-build-path ul .item-shop-item-btn[data-bought] > .icon,
-	#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > .icon{
-		--at-apply: 'block';
+		> .sr-status,
+	#item-shop-build-path ul .item-shop-item-btn[data-bought] > .sr-status,
+	#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > .sr-status {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3C!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --%3E%3Cg%3E%3Cpath fill='oklch(78.9%25 0.154 211.53)' d='m237.66 85.26l-128.4 128.4a8 8 0 0 1-11.32 0l-71.6-72a8 8 0 0 1 0-11.31l24-24a8 8 0 0 1 11.32 0L104 147.43l98.34-97.09a8 8 0 0 1 11.32 0l24 23.6a8 8 0 0 1 0 11.32'/%3E%3Cpath fill='%23000' d='m243.28 68.24l-24-23.56a16 16 0 0 0-22.59 0L104 136.23l-36.69-35.6a16 16 0 0 0-22.58.05l-24 24a16 16 0 0 0 0 22.61l71.62 72a16 16 0 0 0 22.63 0L243.33 90.91a16 16 0 0 0-.05-22.67M103.62 208L32 136l24-24a.6.6 0 0 1 .08.08l42.35 41.09a8 8 0 0 0 11.19 0L208.06 56L232 79.6Z'/%3E%3C/g%3E%3C/svg%3E"); /* cyan-400 fill */
+		background-size: 100% 100%;
+		background-position: center;
+		background-repeat: no-repeat;
 	}
 
 	.item-shop-item-btn {
@@ -1206,14 +1220,15 @@ defineExpose({
 		--check-icon-top: var(--py);
 	}
 
-	#builds-into-more-list > li > button,
-	#item-shop-builds-into-list > li > button,
-	.item-shop-item-btn {
+	:is(#builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where(
 		&[data-bought],
 		&[data-buyability='0'],
-		&[data-buyability='-1'] {
-			--at-apply: 'text-neutral-400';
-		}
+		&[data-buyability='-1']
+	),
+	#item-shop-search-listbox
+		> li:where([data-bought], [data-buyability='0'], [data-buyability='-1'])
+		> span:last-of-type {
+		--at-apply: 'text-neutral-400';
 	}
 
 	:where(#builds-into-more-list > li > button[data-buyability='-1']),
@@ -1233,7 +1248,7 @@ defineExpose({
 
 	.item-shop-item-btn[data-buyability='-1'] {
 		> span:last-of-type {
-			--at-apply: 'text-transparent';
+			--at-apply: 'text-transparent tracking-[-1em]';
 
 			&::before {
 				--at-apply: '-bottom-0.25 start-1/2 -translate-x-1/2';

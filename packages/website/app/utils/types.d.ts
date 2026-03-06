@@ -18,6 +18,8 @@ export interface IShopItem {
 	calculatedPrice: number;
 	isBought?: boolean;
 	from?: IShopItem[];
+	isLegendary: boolean;
+	srStatus: string;
 }
 
 /**

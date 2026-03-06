@@ -118,10 +118,10 @@ defineExpose({ header });
 				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
 				width="32"
 				height="28"
-				aria-hidden="true"
+				alt="gold coins"
 				loading="lazy"
 			>
-			{{ gold ?? item?.gold.total }} <span class="sr-only">gold</span>
+			{{ gold ?? item?.gold.total }}
 		</span>
 		<span>{{ contents.subtitleLeft }}</span>
 		<span>{{ contents.subtitleRight }}</span>

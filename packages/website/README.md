@@ -69,7 +69,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] item hover tooltip `Items/{{id}}.mItemDataClient`
   - [x] inventory panel or list in the footer
   - [x] buying mechanism, components into item and so on
-  - [ ] item groups, only one from group
+  - [x] item groups, only one from group
   - [ ] show inventory total value
 - [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query

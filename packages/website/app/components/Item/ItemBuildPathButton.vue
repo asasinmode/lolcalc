@@ -2,7 +2,7 @@
 import type { IShopItem } from '~/utils/types';
 
 defineProps<{
-	isSelected?: boolean;
+	component?: boolean;
 	shopItem: IShopItem;
 }>();
 
@@ -12,7 +12,6 @@ const { version } = usePatchVersion();
 <template>
 	<button
 		class="item-shop-item-btn"
-		:class="{ selected: isSelected }"
 		:data-has-components="shopItem.item.from?.length ? '' : undefined"
 		:data-buyability="shopItem.buyability"
 		:data-bought="shopItem.isBought ? '' : undefined"
@@ -25,7 +24,10 @@ const { version } = usePatchVersion();
 			aria-hidden="true"
 			loading="lazy"
 		>
-		<Icon />
+		<span class="sr-status">
+			{{ component ? `checked${shopItem.srStatus ? ', ' : ''}` : '' }}
+			{{ shopItem.srStatus }}
+		</span>
 		<span>{{ shopItem.calculatedPrice }}</span>
 	</button>
 </template>
