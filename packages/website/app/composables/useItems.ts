@@ -78,6 +78,7 @@ export type IItemStat = UnionKeys<(typeof data)[keyof typeof data]['stats']> | '
 export interface IItem {
 	id: string;
 	name: string;
+	/** joined search terms of the item */
 	searchString: string;
 	stats: Partial<Record<IItemStat, number>>;
 	gold: {
@@ -87,11 +88,14 @@ export interface IItem {
 		sell: number;
 	};
 	image: string;
+	/** the mask of maps item is enabled on, see `useMaps.ts` */
 	mapMask: number;
 	into?: string[];
 	from?: string[];
 	epicness?: number;
 	categories?: Partial<Record<IItemCategory, boolean>>;
+	/** item "buy" groups, cant buy multiple from the same group */
+	itemGroups?: string[];
 	/** has 'Boots' in `tags` */
 	isBoots?: boolean;
 	/** has 'OnHit' in `tags` */

@@ -25,6 +25,11 @@
 				"3158"
 			],
 			"isBoots": true,
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsOfSpeed",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"support": true
 			}
@@ -632,6 +637,9 @@
 				}
 			},
 			"effectAmount": [8, 5, 45, 0.66],
+			"itemGroups": [
+				"Items/ItemGroups/DoransItems"
+			],
 			"categories": {
 				"tank": true,
 				"fighter": true,
@@ -658,6 +666,9 @@
 			"image": "1055.png",
 			"mapMask": 3,
 			"epicness": 1,
+			"itemGroups": [
+				"Items/ItemGroups/DoransItems"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -689,6 +700,9 @@
 				"ManaRestorePerSecondUpgraded": 2,
 				"UpgradeDuration": 5
 			},
+			"itemGroups": [
+				"Items/ItemGroups/DoransItems"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -788,6 +802,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Glory"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -982,6 +999,9 @@
 			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [15, 0.25],
+			"itemGroups": [
+				"Items/ItemGroups/GuardianItems"
+			],
 			"categories": {
 				"tank": true,
 				"support": true,
@@ -1019,6 +1039,9 @@
 				"PerChampCD": 4,
 				"Cooldown": 75
 			},
+			"itemGroups": [
+				"{3179bd6e}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -1052,6 +1075,9 @@
 				"Duration": 2.5
 			},
 			"effectAmount": [0, 2.5],
+			"itemGroups": [
+				"Items/ItemGroups/StopwatchGroup"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -1080,6 +1106,11 @@
 				"3009"
 			],
 			"isBoots": true,
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsOfSpeed",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"support": true
 			}
@@ -1129,6 +1160,9 @@
 					"mDisplayAsPercent": true
 				}
 			},
+			"itemGroups": [
+				"{673b048f}"
+			],
 			"categories": {
 				"fighter": true,
 				"tank": true
@@ -1186,6 +1220,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{683b0622}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -1262,6 +1299,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{693b07b5}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -1303,6 +1343,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{623afcb0}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -1403,6 +1446,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{6c3d4b05}",
+				"{8b55a7b3}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -1438,6 +1485,9 @@
 				"NumberOfAttacks": 3,
 				"CritModifier": 0.8
 			},
+			"itemGroups": [
+				"{6a3d47df}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -1486,6 +1536,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{653d4000}"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -1555,6 +1608,9 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"{f2405c8e}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -1609,6 +1665,9 @@
 					"mPrecision": 1
 				}
 			},
+			"itemGroups": [
+				"{f0405968}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -1642,6 +1701,9 @@
 				"MaxRange": 500,
 				"MaxDamageAmp": 0.1
 			},
+			"itemGroups": [
+				"{f1405afb}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -1704,6 +1766,9 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"{f64062da}"
+			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -1770,6 +1835,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{f740646d}",
+				"Items/ItemGroups/LifelineItems"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -1817,6 +1886,11 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{f4405fb4}",
+				"Items/ItemGroups/TearItems",
+				"{f842a497}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -1851,6 +1925,10 @@
 				"MaxStackSlowDuration": 1,
 				"MovespeedDonation": 0.15
 			},
+			"itemGroups": [
+				"{b1a64644}",
+				"{1b1c30d5}"
+			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -1887,6 +1965,11 @@
 				"InternalCDPerCastID": 6.5,
 				"APFromMana": 0.01
 			},
+			"itemGroups": [
+				"Items/ItemGroups/TearItems",
+				"Items/ItemGroups/LifelineItems",
+				"{2bb000ae}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -1932,6 +2015,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/TearItems",
+				"{29affd88}"
+			],
 			"categories": {
 				"marksman": true,
 				"fighter": true,
@@ -1967,6 +2054,10 @@
 			"dataValues": {
 				"FeatsAS": 0.05
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -1999,6 +2090,10 @@
 				"SlowResistTooltip": 25,
 				"FeatsMS": 5
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"support": true,
 				"marksman": true,
@@ -2032,6 +2127,10 @@
 			"dataValues": {
 				"FeatsMPen": 2
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -2092,6 +2191,9 @@
 				"Cooldown": 300
 			},
 			"effectAmount": [0.5, 4, 300, 1, 0],
+			"itemGroups": [
+				"{2da0f94a}"
+			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -2121,6 +2223,10 @@
 				"1018"
 			],
 			"epicness": 5,
+			"itemGroups": [
+				"{aca3ffce}",
+				"{0321bdeb}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -2171,6 +2277,9 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"{aba3fe3b}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -2202,6 +2311,10 @@
 				"GrievousDuration": 3,
 				"GrievousAmount": 0.4
 			},
+			"itemGroups": [
+				"{aaa3fca8}",
+				"Items/ItemGroups/LastWhisper"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -2232,6 +2345,9 @@
 				"1036"
 			],
 			"epicness": 4,
+			"itemGroups": [
+				"Items/ItemGroups/LastWhisper"
+			],
 			"categories": {
 				"marksman": true,
 				"assassin": true
@@ -2263,6 +2379,9 @@
 				"MaxBonusDamagePercent": 0.15,
 				"MaxBonusHealth": 1500
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LastWhisper"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -2312,6 +2431,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{2bb000ae}",
+				"Items/ItemGroups/LifelineItems"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -2356,6 +2479,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Glory"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -2442,6 +2568,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{29affd88}"
+			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -2522,6 +2651,9 @@
 				"1042"
 			],
 			"epicness": 5,
+			"itemGroups": [
+				"{2db003d4}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -2555,6 +2687,10 @@
 				"FeatsArmor": 5
 			},
 			"effectAmount": [0.1],
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"tank": true,
 				"assassin": true,
@@ -2593,6 +2729,9 @@
 				"StormRadius": 350,
 				"UltimateHaste": 15
 			},
+			"itemGroups": [
+				"{31b248b7}"
+			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -2752,6 +2891,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -2799,6 +2941,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{8b55a7b3}"
+			],
 			"categories": {
 				"fighter": true,
 				"mage": true,
@@ -2833,6 +2978,9 @@
 				"HealingIncrease": 0.25,
 				"ShieldIncrease": 0.25
 			},
+			"itemGroups": [
+				"{1cab6be3}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -2976,6 +3124,9 @@
 					"mModifiedGameCalculation": "DPS"
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/ImmolateItems"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -3010,6 +3161,9 @@
 				"ManaChargeMaxAmmo": 4,
 				"InternalCDPerCastID": 6.5
 			},
+			"itemGroups": [
+				"Items/ItemGroups/TearItems"
+			],
 			"categories": {
 				"mage": true,
 				"marksman": true,
@@ -3049,6 +3203,10 @@
 				"MoveSpeedDuration": 2
 			},
 			"effectAmount": [0, 0.06, 6, 5, 0.3, 0, 0, 0, 0, 0.01],
+			"itemGroups": [
+				"{24adb712}",
+				"Items/ItemGroups/LastWhisper"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -3095,6 +3253,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{23adb57f}"
+			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -3130,6 +3291,9 @@
 				"HasteDuration": 8,
 				"Cooldown": 30
 			},
+			"itemGroups": [
+				"{22adb3ec}"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -3219,6 +3383,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -3268,6 +3435,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{20adb0c6}"
+			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -3405,6 +3575,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems"
+			],
 			"categories": {
 				"fighter": true,
 				"tank": true,
@@ -3464,6 +3637,10 @@
 				}
 			},
 			"effectAmount": [25, 60, 2, 1.5, 1.5],
+			"itemGroups": [
+				"{2dadc53d}",
+				"{8b55a7b3}"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -3549,6 +3726,9 @@
 					"mModifiedGameCalculation": "TotalHealing"
 				}
 			},
+			"itemGroups": [
+				"{a292a6ef}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -3637,6 +3817,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{9f92a236}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -3713,6 +3896,9 @@
 				}
 			},
 			"effectAmount": [0, 40, 2, 0, 40, 1],
+			"itemGroups": [
+				"{a092a3c9}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -3824,6 +4010,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{9e92a0a3}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -3851,6 +4040,10 @@
 			"dataValues": {
 				"APAmp": 0.3
 			},
+			"itemGroups": [
+				"{ac92b6ad}",
+				"{bbcc250a}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -3889,6 +4082,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{a894eef8}"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -3921,6 +4117,9 @@
 				"MaxRangeIncrease": 150,
 				"BonusDamage": 40
 			},
+			"itemGroups": [
+				"{ad94f6d7}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -3962,6 +4161,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{ac94f544}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -4014,6 +4216,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{123d7d35}",
+				"{8b55a7b3}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -4043,6 +4249,10 @@
 				"Cooldown": 40
 			},
 			"effectAmount": [40, 45, 10, -0.1, 8, 2, 0, 0],
+			"itemGroups": [
+				"{103d7a0f}",
+				"{3fcdbdac}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -4120,6 +4330,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{0b3d7230}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -4196,6 +4409,9 @@
 				"AllyHealingConversion": 0.1,
 				"Cooldown": 60
 			},
+			"itemGroups": [
+				"{193d883a}"
+			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -4227,6 +4443,9 @@
 				"ASPDSlow": -0.2,
 				"AuraRadius": 700
 			},
+			"itemGroups": [
+				"{0c3b352c}"
+			],
 			"categories": {
 				"tank": true,
 				"support": true
@@ -4261,6 +4480,10 @@
 			"dataValues": {
 				"FeatsMR": 5
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"tank": true,
 				"assassin": true,
@@ -4285,6 +4508,9 @@
 			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [3],
+			"itemGroups": [
+				"Items/ItemGroups/GuardianItems"
+			],
 			"categories": {
 				"mage": true,
 				"support": true,
@@ -4397,6 +4623,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{093b3073}"
+			],
 			"categories": {
 				"mage": true,
 				"marksman": true
@@ -4429,6 +4658,9 @@
 				"SlowDuration": 1
 			},
 			"effectAmount": [-0.3, -0.3, -0.3, 1, 1, 1],
+			"itemGroups": [
+				"{0a3b3206}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -4502,6 +4734,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{143b41c4}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -4547,6 +4782,11 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/TearItems",
+				"{153b4357}",
+				"{9d42d534}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -4594,6 +4834,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{9d42d534}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -4704,6 +4947,9 @@
 				}
 			},
 			"effectAmount": [0.08, 2.5, 2.5, 3, 4, 0.1, 0.1, 15, 1, 3, 0, 0, 3],
+			"itemGroups": [
+				"{9a42d07b}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -4786,6 +5032,9 @@
 			"dataValues": {
 				"LethalityAmount": 10
 			},
+			"itemGroups": [
+				"{1c3fcb8a}"
+			],
 			"categories": {
 				"assassin": true,
 				"marksman": true
@@ -4812,6 +5061,9 @@
 				"1026"
 			],
 			"epicness": 5,
+			"itemGroups": [
+				"Items/ItemGroups/VoidPen"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -4860,6 +5112,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/VoidPen"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -4893,6 +5148,9 @@
 				"MoveSpeed": 0.5
 			},
 			"effectAmount": [0.5, 2, 90, 0, 0, 0, 0, 0],
+			"itemGroups": [
+				"Items/ItemGroups/Quicksilver"
+			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -4923,6 +5181,9 @@
 			"dataValues": {
 				"Cooldown": 90
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Quicksilver"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -5006,6 +5267,9 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"{9833c2cb}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -5038,6 +5302,9 @@
 				"Radius": 500,
 				"Cooldown": 90
 			},
+			"itemGroups": [
+				"{9733c138}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -5174,6 +5441,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{9c33c917}"
+			],
 			"categories": {
 				"mage": true,
 				"assassin": true
@@ -5211,6 +5481,9 @@
 				"DamageIncreasePerSecond": 0.02,
 				"DamageIncreaseMax": 0.06
 			},
+			"itemGroups": [
+				"{9b33c784}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -5257,6 +5530,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{9631810e}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -5391,6 +5667,9 @@
 					"mDisplayAsPercent": true
 				}
 			},
+			"itemGroups": [
+				"{973182a1}"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true
@@ -5450,6 +5729,9 @@
 					"DefaultResult": "@MeleeItemCalcValue@"
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems"
+			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -5533,6 +5815,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems"
+			],
 			"categories": {
 				"fighter": true,
 				"assassin": true,
@@ -5565,6 +5850,10 @@
 				"Duration": 2.5
 			},
 			"effectAmount": [0, 2.5, 120],
+			"itemGroups": [
+				"Items/ItemGroups/BuildsFromStopwatchGroup",
+				"{9b3188ed}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -5598,6 +5887,10 @@
 				"SummonerHaste": 10,
 				"FeatsHaste": 5
 			},
+			"itemGroups": [
+				"Items/ItemGroups/Boots",
+				"Items/ItemGroups/BootsWithoutActives"
+			],
 			"categories": {
 				"support": true,
 				"mage": true,
@@ -5673,6 +5966,9 @@
 					"mModifiedGameCalculation": "MeleeItemCalcValue"
 				}
 			},
+			"itemGroups": [
+				"{0538eb90}"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -5704,6 +6000,9 @@
 				"GrievousAmount": 0.4,
 				"GrievousDuration": 3
 			},
+			"itemGroups": [
+				"{0938f1dc}"
+			],
 			"categories": {
 				"mage": true,
 				"support": true
@@ -5753,7 +6052,11 @@
 						}
 					]
 				}
-			}
+			},
+			"itemGroups": [
+				"{a0360dfa}",
+				"Items/ItemGroups/Boots"
+			]
 		},
 		"3171": {
 			"id": "3171",
@@ -5804,7 +6107,11 @@
 						}
 					]
 				}
-			}
+			},
+			"itemGroups": [
+				"{a1360f8d}",
+				"Items/ItemGroups/Boots"
+			]
 		},
 		"3172": {
 			"id": "3172",
@@ -5854,7 +6161,11 @@
 						}
 					]
 				}
-			}
+			},
+			"itemGroups": [
+				"{9e360ad4}",
+				"Items/ItemGroups/Boots"
+			]
 		},
 		"3173": {
 			"id": "3173",
@@ -5913,7 +6224,11 @@
 						}
 					]
 				}
-			}
+			},
+			"itemGroups": [
+				"{9f360c67}",
+				"Items/ItemGroups/Boots"
+			]
 		},
 		"3174": {
 			"id": "3174",
@@ -5972,7 +6287,11 @@
 						}
 					]
 				}
-			}
+			},
+			"itemGroups": [
+				"{9c3607ae}",
+				"Items/ItemGroups/Boots"
+			]
 		},
 		"3175": {
 			"id": "3175",
@@ -6006,7 +6325,11 @@
 						}
 					]
 				}
-			}
+			},
+			"itemGroups": [
+				"{9d360941}",
+				"Items/ItemGroups/Boots"
+			]
 		},
 		"3177": {
 			"id": "3177",
@@ -6027,6 +6350,9 @@
 			"mapMask": 2,
 			"epicness": 1,
 			"effectAmount": [10],
+			"itemGroups": [
+				"Items/ItemGroups/GuardianItems"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -6133,6 +6459,9 @@
 				}
 			},
 			"effectAmount": [10, 8, 90],
+			"itemGroups": [
+				"{993602f5}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -6241,6 +6570,10 @@
 					"DefaultResult": "@MeleeBonusMinionResists@"
 				}
 			},
+			"itemGroups": [
+				"{212a0d1a}",
+				"Items/ItemGroups/DisabledOnFIRSTBLOODMode"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -6263,6 +6596,9 @@
 			"image": "3184.png",
 			"mapMask": 2,
 			"epicness": 1,
+			"itemGroups": [
+				"Items/ItemGroups/GuardianItems"
+			],
 			"categories": {
 				"fighter": true,
 				"marksman": true,
@@ -6330,6 +6666,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{9c26fd24}"
+			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -6438,6 +6777,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{bf3ed580}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -6497,6 +6839,11 @@
 					"mModifiedGameCalculation": "ARMRPerHitScaling"
 				}
 			},
+			"itemGroups": [
+				"{370ee665}",
+				"Items/ItemGroups/LastWhisper",
+				"Items/ItemGroups/VoidPen"
+			],
 			"categories": {
 				"marksman": true,
 				"fighter": true
@@ -6530,6 +6877,9 @@
 				"Duration": 6,
 				"OnHitMin": 20
 			},
+			"itemGroups": [
+				"{5aa31b15}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -6591,6 +6941,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{5ea32161}",
+				"{8b55a7b3}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -6647,6 +7001,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{92901b7d}",
+				"{1b1c30d5}"
+			],
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -6762,6 +7120,9 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems"
+			],
 			"categories": {
 				"fighter": true,
 				"tank": true
@@ -6830,6 +7191,9 @@
 				"ManaRestorePercent": 0.2,
 				"RestorationDuration": 3
 			},
+			"itemGroups": [
+				"Items/ItemGroups/MythicItems"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -6865,6 +7229,9 @@
 				"EternityMaxHealPerCast": 20,
 				"EternityCDPerCast": 1
 			},
+			"itemGroups": [
+				"Items/ItemGroups/EternityItems"
+			],
 			"categories": {
 				"tank": true,
 				"mage": true
@@ -6897,6 +7264,10 @@
 				"Cooldown": 40
 			},
 			"effectAmount": [0, 0, 0, 40],
+			"itemGroups": [
+				"{c6c2af47}",
+				"{3fcdbdac}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -6977,6 +7348,11 @@
 				}
 			},
 			"effectAmount": [3],
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems",
+				"Items/ItemGroups/DoransItems",
+				"{2b093179}"
+			],
 			"categories": {
 				"support": true,
 				"tank": true
@@ -7014,6 +7390,9 @@
 				"SlowAmount": 0.5
 			},
 			"effectAmount": [9],
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems"
+			],
 			"categories": {
 				"support": true
 			}
@@ -7081,6 +7460,9 @@
 				}
 			},
 			"effectAmount": [9],
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems"
+			],
 			"categories": {
 				"support": true
 			}
@@ -7144,6 +7526,9 @@
 				}
 			},
 			"effectAmount": [9],
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems"
+			],
 			"categories": {
 				"support": true
 			}
@@ -7194,6 +7579,9 @@
 				}
 			},
 			"effectAmount": [9],
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems"
+			],
 			"categories": {
 				"support": true
 			}
@@ -7274,6 +7662,10 @@
 				}
 			},
 			"effectAmount": [9],
+			"itemGroups": [
+				"Items/ItemGroups/GoldItems",
+				"{8b55a7b3}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -7338,6 +7730,9 @@
 				"Cooldown": 45,
 				"LethalityAmount": 5
 			},
+			"itemGroups": [
+				"{602a9b91}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -7369,6 +7764,9 @@
 				"Cooldown": 45,
 				"LethalityAmount": 15
 			},
+			"itemGroups": [
+				"{602a9b91}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -7403,6 +7801,9 @@
 				"AllyDamagePerc": 0.1,
 				"Cooldown": 9
 			},
+			"itemGroups": [
+				"{5f2a99fe}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -7438,6 +7839,9 @@
 				"StackRefreshTimer": 1,
 				"BonusMagicResist": 70
 			},
+			"itemGroups": [
+				"{27df203e}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -7474,6 +7878,9 @@
 				"Cooldown": 30,
 				"DamageAmp": 0.1
 			},
+			"itemGroups": [
+				"{466ecfe1}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -7519,6 +7926,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{456ece4e}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -7547,6 +7957,9 @@
 				"1052"
 			],
 			"epicness": 4,
+			"itemGroups": [
+				"Items/ItemGroups/VoidPen"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -7584,6 +7997,9 @@
 				"SpellShieldCooldown": 60,
 				"Cooldown": 60
 			},
+			"itemGroups": [
+				"{3fcdbdac}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -7672,6 +8088,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{bb6bb679}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -7735,6 +8154,9 @@
 				"SpellItemDamageAmp": 0.2,
 				"DamageOverTimeAmp": 0.2
 			},
+			"itemGroups": [
+				"{bd7d02c0}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -7825,6 +8247,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{c07d0779}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -7911,6 +8336,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{001c1988}"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -7942,6 +8370,9 @@
 				"GrievousAmount": 0.4,
 				"GrievousDuration": 3
 			},
+			"itemGroups": [
+				"{b458712e}"
+			],
 			"categories": {
 				"fighter": true,
 				"assassin": true
@@ -8028,6 +8459,9 @@
 					"mModifiedGameCalculation": "MeleeItemCalcValue"
 				}
 			},
+			"itemGroups": [
+				"{a7561e20}"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -8062,6 +8496,9 @@
 				"MSDecayPercentageThresholdUnused": 0.015,
 				"AbilityPowerMin": 45
 			},
+			"itemGroups": [
+				"{ad562792}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -8138,6 +8575,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{ae562925}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -8181,6 +8621,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{395dbfbb}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -8212,6 +8655,9 @@
 				"APPerManaRegen": 10,
 				"HSPowerPerManaRegen": 0.02
 			},
+			"itemGroups": [
+				"{3432bd77}"
+			],
 			"categories": {
 				"support": true
 			}
@@ -8306,6 +8752,10 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{b45aafc5}",
+				"Items/ItemGroups/LegendaryClearingItems"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -8342,6 +8792,9 @@
 				"BuffCounterDuration": 3,
 				"MaxStackNumber": 3
 			},
+			"itemGroups": [
+				"{42600c7d}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -8396,6 +8849,9 @@
 					"mModifiedGameCalculation": "Damage"
 				}
 			},
+			"itemGroups": [
+				"{3c60030b}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -8433,6 +8889,10 @@
 				"EternityCDPerCast": 1,
 				"SecondsPerStack": 60
 			},
+			"itemGroups": [
+				"Items/ItemGroups/EternityItems",
+				"{3e600631}"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -8486,6 +8946,9 @@
 					"mModifiedGameCalculation": "DamagePerTick"
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/ImmolateItems"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -8562,6 +9025,10 @@
 					"DefaultResult": "@MeleeItemCalcValue@"
 				}
 			},
+			"itemGroups": [
+				"{b3677a25}",
+				"{8b55a7b3}"
+			],
 			"categories": {
 				"tank": true,
 				"fighter": true
@@ -8646,6 +9113,10 @@
 					"mModifiedGameCalculation": "DamagePerTick"
 				}
 			},
+			"itemGroups": [
+				"{ad6770b3}",
+				"Items/ItemGroups/ImmolateItems"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -8677,6 +9148,9 @@
 				"BonusResistPercentage": 0.3,
 				"MaxStacks": 5
 			},
+			"itemGroups": [
+				"{ac676f20}"
+			],
 			"categories": {
 				"tank": true
 			}
@@ -8766,6 +9240,9 @@
 					"mModifiedGameCalculation": "DamageAmount"
 				}
 			},
+			"itemGroups": [
+				"{a9652bd0}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -8816,6 +9293,10 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LifelineItems",
+				"{aa652d63}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -8847,6 +9328,9 @@
 				"CDRAmount": 0.15
 			},
 			"effectAmount": [0.5, 1, 90, 0, 0, 0, 0, 0],
+			"itemGroups": [
+				"{b06536d5}"
+			],
 			"categories": {
 				"marksman": true
 			}
@@ -8879,6 +9363,9 @@
 				"ExecuteThreshold": 0.05,
 				"GoldAmount": 25
 			},
+			"itemGroups": [
+				"{ad65321c}"
+			],
 			"categories": {
 				"marksman": true,
 				"assassin": true
@@ -9019,6 +9506,9 @@
 					"DefaultResult": "@MaxHealthPercent@"
 				}
 			},
+			"itemGroups": [
+				"{b969c22e}"
+			],
 			"categories": {
 				"fighter": true
 			}
@@ -9065,6 +9555,9 @@
 					"mDisplayAsPercent": true
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LastWhisper"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -9110,6 +9603,9 @@
 					"DefaultResult": "@ShieldShred@"
 				}
 			},
+			"itemGroups": [
+				"{bc69c6e7}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -9156,6 +9652,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{bd69c87a}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -9204,6 +9703,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{be69ca0d}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -9314,6 +9816,9 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"Items/ItemGroups/LegendaryClearingItems"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -9402,6 +9907,9 @@
 					]
 				}
 			},
+			"itemGroups": [
+				"{b069b403}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -9451,6 +9959,9 @@
 					}
 				}
 			},
+			"itemGroups": [
+				"{ced2e7d1}"
+			],
 			"categories": {
 				"assassin": true
 			}
@@ -9484,6 +9995,10 @@
 				"StaleCastTime": 0.3,
 				"MaxStacks": 4
 			},
+			"itemGroups": [
+				"{6219a9e8}",
+				"Items/ItemGroups/VoidPen"
+			],
 			"categories": {
 				"mage": true
 			}
@@ -9514,6 +10029,9 @@
 				"Radius": 700,
 				"DamageAmp": 0.12
 			},
+			"itemGroups": [
+				"{d4211923}"
+			],
 			"categories": {
 				"tank": true,
 				"support": true
