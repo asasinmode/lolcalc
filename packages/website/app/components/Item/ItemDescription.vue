@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
 	item?: IItem;
+	gold?: number;
 	headerTag?: string;
 	headerButton?: boolean;
 	headerClass?: string;
@@ -120,7 +121,7 @@ defineExpose({ header });
 				aria-hidden="true"
 				loading="lazy"
 			>
-			{{ item?.gold.total }} <span class="sr-only">gold</span>
+			{{ gold ?? item?.gold.total }} <span class="sr-only">gold</span>
 		</span>
 		<span>{{ contents.subtitleLeft }}</span>
 		<span>{{ contents.subtitleRight }}</span>

@@ -65,7 +65,7 @@ const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((ite
 		buyability = -1;
 	}
 
-	const discount = target.value ? calculateItemDiscount(item.id, target.value?.items.value, items) : 0;
+	const discount = target.value ? calculateItemDiscount(item.id, target.value.items.value, items) : 0;
 
 	return {
 		item,
@@ -212,12 +212,14 @@ function selectSearchResult(event: MouseEvent, index: number) {
 		selectItem(shopItem, true);
 		buyItem(shopItem.item, shopItem.buyability);
 		closeSearch();
+		leaveTooltipableElement();
 		searchInput.value?.blur();
 	} else {
 		searchCursoredOverIndex.value = index;
 		searchSelectedIndex.value = index;
 		if (selectOrBuyIfDouble(shopItem, true)) {
 			closeSearch();
+			leaveTooltipableElement();
 			searchInput.value?.blur();
 		}
 	}
@@ -478,6 +480,7 @@ defineExpose({
 						<ItemDescription
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem?.item"
+							:gold="searchCursoredOverItem?.calculatedPrice"
 							header-class="hoverable:bg-white/10"
 							header-tag="button"
 							:target="itemVariableCalculationTarget"
@@ -636,6 +639,7 @@ defineExpose({
 		<section style="grid-area: builds-into" class="flex flex-col">
 			<ItemDescription
 				:item="selectedItem?.item"
+				:gold="selectedItem?.calculatedPrice"
 				header-class="order-5"
 				header-tag="h2"
 				description-class="order-6"
