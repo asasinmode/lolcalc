@@ -167,10 +167,12 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	}
 
 	// TODO role quest handle boots?
-	addItem(item: IItem, allItems: Record<string, IItem>): void {
-		const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
-		for (const index of consumedInventoryIndexes) {
-			this.items.value[index] = undefined;
+	addItem(item: IItem, allItems: Record<string, IItem>, consume = true): void {
+		if (consume) {
+			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
+			for (const index of consumedInventoryIndexes) {
+				this.items.value[index] = undefined;
+			}
 		}
 
 		const firstEmptyIndex = this.items.value.indexOf(undefined);
@@ -181,10 +183,12 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		cleanupItems(this.items.value);
 	}
 
-	removeItem(index: number): void {
-		if (this.items.value[index]) {
+	removeItem(index: number): IItem | void {
+		const item = this.items.value[index];
+		if (item) {
 			this.items.value[index] = undefined;
 			cleanupItems(this.items.value);
+			return item;
 		}
 	}
 }

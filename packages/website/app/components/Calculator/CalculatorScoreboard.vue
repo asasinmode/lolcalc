@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const runes = useRunes();
 const text = useText();
+const items = useItems();
 const { version, minorVersion } = usePatchVersion();
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
@@ -293,7 +294,6 @@ function onItemDragLeave(event: DragEvent) {
 	}
 }
 
-// TODO check item buyability
 function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number) {
 	draggingFromItemListEl = null;
 	if (event.target) {
@@ -310,11 +310,11 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 			throw new Error('move item source no longer exists');
 		}
 		const parsedItemIndex = Number(itemIndex);
-		const item = globalKeyModifiers.value.alt ? source.items.value[parsedItemIndex]! : source.items.value.splice(parsedItemIndex, 1)[0]!;
+		const item = globalKeyModifiers.value.alt ? source.items.value[parsedItemIndex]! : source.removeItem(parsedItemIndex);
 		if (!item) {
 			throw new Error(`move item source no longer has an item at ${parsedItemIndex}`);
 		}
-		target[targetIndex].items.value.push(item);
+		target[targetIndex].addItem(item, items, false);
 	}
 }
 </script>
