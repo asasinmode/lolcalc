@@ -13,6 +13,7 @@ const { minorVersion } = usePatchVersion();
 const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomenalEvilStacks']);
 </script>
 
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<article class="number-extra" data-passive-stacks="">
 		<img
@@ -20,7 +21,7 @@ const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomen
 			width="64"
 			height="64"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'passive')"
+			@mouseenter="$emit('abilityHover', $event, 'passive')"
 		>
 		<label :for="`${idPrefix}-passive-stacks`">
 			Phenomenal Evil stacks
@@ -32,5 +33,11 @@ const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomen
 			type="number"
 			@input="onPassiveStacksInput"
 		>
+		<button class="pretend-ui-button" @click="value.internalData.value.phenomenalEvilStacks = 0">
+			min
+		</button>
+		<button class="pretend-ui-button" disabled>
+			max
+		</button>
 	</article>
 </template>

@@ -2078,14 +2078,22 @@ defineExpose({ el });
 				}
 
 				> .number-extra {
-					--at-apply: 'grid gap-x-2 grid-cols-[auto_1fr] grid-rows-[min-content_min-content]';
+					--at-apply: 'grid grid-cols-[auto_auto_min-content_1fr] grid-rows-[min-content_min-content]';
 
 					> img {
-						--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size]';
+						--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size] me-2';
+					}
+
+					> label {
+						--at-apply: 'col-span-3';
 					}
 
 					> input {
-						--at-apply: 'box-content w-[6ch] px-1 py-0.5 bg-white text-black';
+						--at-apply: 'box-content h-min w-[6ch] px-1 py-0.5 row-span-2 bg-white text-black me-2';
+					}
+
+					> button {
+						--at-apply: 'w-12 h-7';
 					}
 				}
 			}
