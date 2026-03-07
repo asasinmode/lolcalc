@@ -47,6 +47,12 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest
+    - [ ] extras ui (items and champion passives for now)
+      - [ ] veigar
+      - [ ] volibear
+      - [ ] zaahen
+      - [ ] kai'sa
+      - [ ] kraken slayer
   - [ ] mirror layout
 - [ ] results ui
   - [ ] table where columns are champion + aa/ability, ideally color matched with scoreboard items. Rows are ability damage numbers/aa physical/magical/true damage
@@ -54,6 +60,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] some cool graphs
   - [ ] show/hide in graph button
   - [ ] damage target? All should be available to choose from, same as source. Figure out how to fit it
+  - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
@@ -81,11 +88,12 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] item passives
   - [ ] champion passives
     - [ ] level breakpoint calculations
-    - [ ] champion-specific ui (veigar, volibear, zaahen)
+    - [ ] use extras passive data
   - [ ] DamageSource.dedicatedData: any that's set and maintained based on stuff in utils/champion.ts
   - [ ] maybe dynamic variables can be cached on damage source under a key then reused
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
+  - [ ] check if can save only gold cost, not whole object
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
@@ -96,7 +104,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] dragging scoreboard elements
   - [ ] dragging items
   - [ ] right click to sell items
-  - [ ] right click to clear ability level
+  - [ ] right click to clear ability level/soul/role quest/others
 - [ ] keyboard navigation
   - [ ] show tooltips when navigated to with keyboard
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)

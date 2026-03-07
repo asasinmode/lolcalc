@@ -1,4 +1,5 @@
 import type { IPossibleDynamicValues } from './types';
+import ChampionExtrasVeigar from '~/components/Champion/ChampionExtrasVeigar.vue';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
@@ -49,5 +50,17 @@ export const CHAMPION_SPECIFICS = {
 				f1: [0, 1, 2],
 			},
 		} satisfies IPossibleDynamicValues,
+	},
+	Veigar: {
+		setupInternalData(_self: DamageSource): {
+			phenomenalEvilStacks: number;
+		} {
+			return {
+				phenomenalEvilStacks: 0,
+			};
+		},
+		components: {
+			extras: ChampionExtrasVeigar,
+		},
 	},
 };

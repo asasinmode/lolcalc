@@ -1,3 +1,5 @@
+import type { Component } from 'vue';
+
 export type UnionKeys<T> = T extends T ? keyof T : never;
 
 export interface ITexture {
@@ -40,3 +42,8 @@ export type IPossibleDynamicValues = Partial<Record<'all' | keyof IChampion['abi
  * possible values for these can be specified in `champion.ts` and `rune.ts` under proper key, these are then used in calculations
  */
 export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVariables?: (damageSource: DamageSource) => any }>;
+
+/**
+ * same as `IWithPossibleDynamicValues` except for components
+ */
+export type ISpecificsWithComponents = Record<string, { components?: { extras?: Component } }>;

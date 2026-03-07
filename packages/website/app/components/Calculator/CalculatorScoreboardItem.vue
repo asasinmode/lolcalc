@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IWithCalculateDynamicValues } from '~/utils/types';
+import type { ISpecificsWithComponents, IWithCalculateDynamicValues } from '~/utils/types';
 
 const props = defineProps<{
 	index: number;
@@ -1289,6 +1289,9 @@ defineExpose({ el });
 					</p>
 				</div>
 			</section>
+			<section v-if="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.listedChampion.value?.id]?.components?.extras" data-extras="">
+				<component :is="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.listedChampion.value!.id]!.components!.extras" :value />
+			</section>
 		</details>
 	</li>
 </template>
@@ -2057,6 +2060,10 @@ defineExpose({ el });
 				> h4 {
 					--at-apply: 'text-xs uppercase font-medium text-neutral-300 leading-3';
 				}
+			}
+
+			> [data-extras] {
+				--at-apply: 'col-span-full';
 			}
 		}
 	}
