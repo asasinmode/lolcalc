@@ -10,52 +10,27 @@ defineEmits<{
 
 const { minorVersion } = usePatchVersion();
 
-const veigarPassive = props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!;
-
-const name = computed(() => {
-	const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-		veigarPassive.name	|| '<unknown>UNKNOWN</unknown>',
-		props.value.champion.value!.stringtable,
-	);
-
-	return nameReplaced;
-});
-
 const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomenalEvilStacks']);
 </script>
 
 <template>
-	<div data-passive-stacks="">
+	<article class="number-extra" data-passive-stacks="">
 		<img
-			:src="`https://raw.communitydragon.org/${minorVersion}/game/${veigarPassive?.image}`"
+			:src="`https://raw.communitydragon.org/${minorVersion}/game/${props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image}`"
 			width="64"
 			height="64"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'passive')"
 		>
 		<label :for="`${idPrefix}-passive-stacks`">
-			{{ name }}
+			Phenomenal Evil stacks
 		</label>
 		<input
 			:id="`${idPrefix}-passive-stacks`"
-			:model-value="value.internalData.value.phenomenalEvilStacks"
+			:value="value.internalData.value.phenomenalEvilStacks"
 			min="0"
 			type="number"
 			@input="onPassiveStacksInput"
 		>
-	</div>
+	</article>
 </template>
-
-<style>
-@layer components {
-	#calculator-scoreboard > ul > [data-scoreboard-item='Veigar'] > details > [data-extras] {
-		> [data-passive-stacks] {
-			--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-[min-content_min-content]';
-
-			> img {
-				--at-apply: 'row-span-full';
-			}
-		}
-	}
-}
-</style>

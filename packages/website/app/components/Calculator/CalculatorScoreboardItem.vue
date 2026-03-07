@@ -1319,6 +1319,9 @@ defineExpose({ el });
 		--abilities-gap: calc(var(--spacing) * 2);
 		--abilities-width: calc(4 * var(--ability-size) + var(--ability-size-passive) + 4 * var(--abilities-gap));
 		--abilities-height: calc(var(--ability-size) + var(--ability-level-buttons-size));
+		--soul-size: calc(10 * var(--spacing));
+		--stack-size: calc(8 * var(--spacing));
+		--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
 
 		grid-template-areas:
 			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
@@ -1923,6 +1926,11 @@ defineExpose({ el });
 						-webkit-appearance: textfield;
 						-moz-appearance: textfield;
 						appearance: textfield;
+
+						&::-webkit-outer-spin-button,
+						&::-webkit-inner-spin-button {
+							appearance: none;
+						}
 					}
 				}
 
@@ -1936,7 +1944,7 @@ defineExpose({ el });
 			}
 
 			> [data-role-quest] {
-				--at-apply: 'relative';
+				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))]';
 				anchor-name: --scoreboard-item-role-quest;
 
 				> .v-select {
@@ -1993,17 +2001,10 @@ defineExpose({ el });
 			> [data-dragons] {
 				--at-apply: 'flex-center mx-auto h-max relative items-center gap-[--gap]';
 				--gap: calc(2 * var(--spacing));
-				--soul-size: calc(10 * var(--spacing));
-				--stack-size: calc(8 * var(--spacing));
-				--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
 				anchor-name: --scoreboard-item-dragons;
 
 				&::before {
 					--at-apply: 'absolute top-1/2 -translate-y-1/2 content-empty start-[calc(var(--stack-size)/2)] bg-black h-[calc(var(--stack-size)*0.2)] end-[calc(var(--soul-size)+2*var(--soul-rotation-size-diff)+var(--gap)+var(--stack-size)/2)]';
-				}
-
-				> h4 {
-					--at-apply: 'absolute top-0 start-0';
 				}
 
 				> [data-dragon-stack] {
@@ -2062,13 +2063,31 @@ defineExpose({ el });
 
 			> [data-role-quest],
 			> [data-dragons] {
+				--at-apply: 'self-center';
+
 				> h4 {
-					--at-apply: 'text-xs uppercase font-medium text-neutral-300 leading-3';
+					--at-apply: 'absolute top-0 start-0 text-xs uppercase font-medium text-neutral-300 leading-3';
 				}
 			}
 
 			> [data-extras] {
 				--at-apply: 'col-span-full';
+
+				> article {
+					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] p-2 w-fit rounded-md';
+				}
+
+				> .number-extra {
+					--at-apply: 'grid gap-x-2 grid-cols-[auto_1fr] grid-rows-[min-content_min-content]';
+
+					> img {
+						--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size]';
+					}
+
+					> input {
+						--at-apply: 'box-content w-[6ch] px-1 py-0.5 bg-white text-black';
+					}
+				}
 			}
 		}
 	}
