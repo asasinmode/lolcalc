@@ -21,7 +21,7 @@ const name = computed(() => {
 	return nameReplaced;
 });
 
-const onPassiveStacksInput = useNumberInput([props.value.internalData.value, 'phenomenalEvilStacks']);
+const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomenalEvilStacks']);
 </script>
 
 <template>

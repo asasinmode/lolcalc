@@ -32,7 +32,7 @@ export const CHAMPION_SPECIFICS = {
 				f1: [1, 2, 3],
 			},
 		} satisfies IPossibleDynamicValues,
-		setupInternalData(self: DamageSource): {
+		setupInternalData(self: DamageSource<'Aphelios'>): {
 			mainHand: IApheliosWeapon;
 			offHand: IApheliosWeapon;
 		} {
@@ -52,11 +52,11 @@ export const CHAMPION_SPECIFICS = {
 		} satisfies IPossibleDynamicValues,
 	},
 	Veigar: {
-		setupInternalData(_self: DamageSource): {
+		setupInternalData(self: DamageSource<'Veigar'>): {
 			phenomenalEvilStacks: number;
 		} {
 			return {
-				phenomenalEvilStacks: 0,
+				phenomenalEvilStacks: self.internalData.value.phenomenalEvilStacks ?? 0,
 			};
 		},
 		components: {

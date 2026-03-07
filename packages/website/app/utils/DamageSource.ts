@@ -1,8 +1,8 @@
 import type { ShallowRef, UnwrapRef } from 'vue';
 
-type IDamageSource = InstanceType<typeof DamageSource>;
+type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
-interface IOverrides {
+interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	champion: UnwrapRef<IDamageSource['listedChampion']>;
 	level: UnwrapRef<IDamageSource['level']>;
 	items: UnwrapRef<IDamageSource['items']>;
@@ -14,6 +14,7 @@ interface IOverrides {
 	dragonStacks: UnwrapRef<IDamageSource['dragonStacks']>;
 	dragonSoul: UnwrapRef<IDamageSource['dragonSoul']>;
 	roleQuest: UnwrapRef<IDamageSource['roleQuest']>;
+	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
 }
 
 export class DamageSource<Id extends IChampionId | undefined = undefined> {
@@ -82,7 +83,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		? ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
 		: undefined>;
 
-	constructor(id: string = crypto.randomUUID(), overrides: Partial<Omit<IOverrides, 'champion'>> & {
+	constructor(id: string = crypto.randomUUID(), overrides: Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
 	} = {}) {
 		this.id = id;
@@ -110,7 +111,8 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		this.dragonStacks = ref(overrides.dragonStacks ?? []);
 		this.dragonSoul = ref(overrides.dragonSoul);
 		this.roleQuest = ref(overrides.roleQuest);
-		this.internalData = ref<any>({});
+		/* expected to be overriden by freshly setup data in `this.champion` watch below */
+		this.internalData = ref<any>(overrides.internalData ?? {});
 
 		watch(this.listedChampion, async (c) => {
 			this.champion.value = undefined;
@@ -142,7 +144,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	}
 
 	clone(id?: string, overrides: Partial<IOverrides> = {}): DamageSource<Id> {
-		return new DamageSource(id, {
+		return new DamageSource<Id>(id, {
 			champion: this.listedChampion.value,
 			level: this.level.value,
 			items: [...toRaw(this.items.value)],
@@ -154,6 +156,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			dragonStacks: structuredClone(toRaw(this.dragonStacks.value)),
 			dragonSoul: this.dragonSoul.value,
 			roleQuest: this.roleQuest.value,
+			internalData: this.internalData.value,
 			...overrides,
 		});
 	}

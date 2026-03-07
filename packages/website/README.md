@@ -48,6 +48,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] dragons/souls
     - [x] choose role quest
     - [ ] extras ui (items and champion passives for now)
+      - [ ] aphelios
       - [ ] veigar
       - [ ] volibear
       - [ ] zaahen
