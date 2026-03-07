@@ -110,7 +110,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		this.dragonStacks = ref(overrides.dragonStacks ?? []);
 		this.dragonSoul = ref(overrides.dragonSoul);
 		this.roleQuest = ref(overrides.roleQuest);
-		this.internalData = ref<any>();
+		this.internalData = ref<any>({});
 
 		watch(this.listedChampion, async (c) => {
 			this.champion.value = undefined;
@@ -122,7 +122,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		}, { immediate: true });
 
 		watch(this.champion, () => {
-			this.internalData.value = this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this);
+			this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 			this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
 			this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
 		}, { flush: 'post' });

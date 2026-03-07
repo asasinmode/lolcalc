@@ -3,7 +3,7 @@ import type { ISpecificsWithComponents, IWithCalculateDynamicValues } from '~/ut
 
 const props = defineProps<{
 	index: number;
-	value: DamageSource;
+	value: DamageSource<any>;
 	/** side of the scoreboard it's on, left (damage sources) by default */
 	isRight?: boolean;
 	canRemove?: boolean;
@@ -1289,8 +1289,13 @@ defineExpose({ el });
 					</p>
 				</div>
 			</section>
-			<section v-if="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.listedChampion.value?.id]?.components?.extras" data-extras="">
-				<component :is="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.listedChampion.value!.id]!.components!.extras" :value />
+			<section v-if="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.champion.value?.id]?.components?.extras" data-extras="">
+				<component
+					:is="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.champion.value!.id]!.components!.extras"
+					:value
+					:id-prefix="`${group}-${index}`"
+					@ability-hover="showAbilityTooltip"
+				/>
 			</section>
 		</details>
 	</li>

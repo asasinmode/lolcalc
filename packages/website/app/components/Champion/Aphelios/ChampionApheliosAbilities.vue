@@ -4,7 +4,7 @@ import type Aphelios from '../../../../public/data/champion/Aphelios.json';
 type IAphelios = typeof Aphelios;
 
 defineProps<{
-	value: DamageSource;
+	value: DamageSource<'Aphelios'>;
 	isLoading: boolean;
 }>();
 
