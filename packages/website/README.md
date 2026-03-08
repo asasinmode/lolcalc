@@ -4,16 +4,16 @@
 
 ```bash
 # install dependencies
-bun install
+pnpm install
 
 # fetch game data
-bun ./scripts/updateGameData.ts
+node ./scripts/updateGameData.ts
 
 # start dev server
-bun dev
+pnpm dev
 
 # build
-bun generate
+pnpm generate
 ```
 
 ## todo
@@ -42,14 +42,13 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] slider drag health/mana
     - [x] champion data loading indicator
     - [x] passive with tooltip
-    - [ ] aphelios "ability" levels
     - [ ] abilities ui (only passive implemented)
     - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest
     - [ ] extras ui (items and champion passives for now)
-      - [ ] aphelios
-      - [ ] veigar
+      - [ ] aphelios ability levels
+      - [x] veigar
       - [ ] volibear
       - [ ] zaahen
       - [ ] kai'sa
@@ -90,7 +89,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champion passives
     - [ ] level breakpoint calculations
     - [ ] use extras passive data
-  - [ ] DamageSource.dedicatedData: any that's set and maintained based on stuff in utils/champion.ts
+  - [ ] DamageSource.internalData set from utils/champion.ts
   - [ ] maybe dynamic variables can be cached on damage source under a key then reused
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
