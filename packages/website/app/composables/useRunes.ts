@@ -1,5 +1,5 @@
 import type { UnionKeys } from '~/utils/types';
-import fileData from '../assets/rune.json';
+import fileData from '../assets/rune.json' with { type: 'json' };
 
 const { data } = fileData;
 
