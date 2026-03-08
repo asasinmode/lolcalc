@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { ISpecificsWithComponents, IWithCalculateDynamicValues } from '~/utils/types';
+import type { IWithCalculateDynamicValues } from '~/utils/types';
+import { CHAMPION_COMPONENTS } from '~/components/Champion';
 
 const props = defineProps<{
 	index: number;
@@ -1289,9 +1290,9 @@ defineExpose({ el });
 					</p>
 				</div>
 			</section>
-			<section v-if="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.champion.value?.id]?.components?.extras" data-extras="">
+			<section v-if="value.champion.value && CHAMPION_COMPONENTS[value.champion.value.id as IChampionId]?.extras" data-extras="">
 				<component
-					:is="(CHAMPION_SPECIFICS as unknown as ISpecificsWithComponents)[value.champion.value!.id]!.components!.extras"
+					:is="CHAMPION_COMPONENTS[value.champion.value.id as IChampionId]!.extras"
 					:value
 					:id-prefix="`${group}-${index}`"
 					@ability-hover="showAbilityTooltip"

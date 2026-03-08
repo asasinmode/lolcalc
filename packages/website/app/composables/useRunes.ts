@@ -1,7 +1,5 @@
 import type { UnionKeys } from '~/utils/types';
-import fileData from '../assets/rune.json' with { type: 'json' };
-
-const { data } = fileData;
+import { data } from '../assets/rune.json';
 
 export function useRunes() {
 	return data as unknown as IRunes;

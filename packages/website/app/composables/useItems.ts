@@ -1,7 +1,5 @@
 import type { UnionKeys } from '~/utils/types';
-import fileData from '../assets/item.json' with { type: 'json' };
-
-const { data } = fileData;
+import { data } from '../assets/item.json';
 
 export function useItems(): Record<string, IItem> {
 	return data satisfies Record<string, IItem>;

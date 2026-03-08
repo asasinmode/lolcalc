@@ -1,6 +1,4 @@
-import fileData from '../assets/text.json' with { type: 'json' };
-
-const { data } = fileData;
+import { data } from '../assets/text.json';
 
 export function useText(): ITextData {
 	return data;

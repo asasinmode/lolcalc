@@ -1,6 +1,5 @@
-import fileData from '../assets/champion.json' with { type: 'json' };
+import { version } from '../assets/champion.json';
 
-const { version } = fileData;
 const minorVersion = version.slice(0, version.lastIndexOf('.'));
 const rv = { minorVersion, version };
 

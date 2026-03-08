@@ -1,6 +1,4 @@
-import fileData from '../assets/misc.json' with { type: 'json' };
-
-const { data } = fileData;
+import { data } from '../assets/misc.json';
 
 export function useMisc() {
 	return data satisfies IMiscData;
