@@ -118,8 +118,10 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			this.champion.value = undefined;
 			this.abilityLevels.value = { q: 0, w: 0, e: 0, r: 0 };
 			this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
-			if (c) {
-				this.champion.value = await useChampion(c.id);
+
+			const champion = c && await useChampion(c.id);
+			if (this.listedChampion.value?.id === champion?.id) {
+				this.champion.value = champion;
 			}
 		}, { immediate: true });
 
@@ -180,7 +182,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 		for (let i = 0; i < 6; i++) {
 			if (!this.items.value[i]) {
-				this.items.value[i] = item;
+				this.items.value[i] = markRaw(item);
 				break;
 			}
 		}

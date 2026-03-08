@@ -14,7 +14,6 @@ useSeoMeta({
 });
 
 const { version } = usePatchVersion();
-const champions = useChampions();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
@@ -23,7 +22,7 @@ _setupGlobalKeyModifiers();
 
 // TMP as unknown as..., can't put it in v-model or it doesn't build atm
 const damageSources = ref<DamageSource<any>[]>([
-	markRaw(new DamageSource(useId(), { champion: champions.Veigar })),
+	markRaw(new DamageSource(useId())),
 ]) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 </script>

@@ -3,7 +3,7 @@ import fileData from '../assets/champion.json' with { type: 'json' };
 
 const { data } = fileData;
 
-export function useChampions() {
+export function useChampions(): IChampionData {
 	return data satisfies Record<IChampionId, IListedChampion<any>> as IChampionData;
 }
 
@@ -14,6 +14,10 @@ export async function useChampion(id: string): Promise<IChampion> {
 	if (cacheHit) {
 		return cacheHit;
 	}
+	/*
+	 * if this runs on server, for example a DamageSource with champion id is present during `nuxt generate`, the build will fail with out of memory error because it rerequests itself over and over or something
+	 * atm just generate app with empty DamageSource to work around this
+	 */
 	const champion = await $fetch<IChampion>(`/data/champion/${id}.json`);
 	championCache.set(id as IChampionId, champion);
 	return champion;
