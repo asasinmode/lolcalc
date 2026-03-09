@@ -19,8 +19,7 @@ const { minorVersion } = usePatchVersion();
 	<div data-passive="">
 		<h5>passive</h5>
 		<img
-			v-show="!isLoading"
-			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]?.image}` : undefined"
+			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]?.image}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"
@@ -30,8 +29,7 @@ const { minorVersion } = usePatchVersion();
 	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined">
 		<h5>main weapon</h5>
 		<img
-			v-show="!isLoading"
-			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${(value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.q]?.image}` : undefined"
+			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${(value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.q]?.image}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"
@@ -39,8 +37,7 @@ const { minorVersion } = usePatchVersion();
 		>
 		<h5>Q</h5>
 		<img
-			v-show="!isLoading"
-			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.q.variants[value.abilityVariants.value.q]?.image}` : undefined"
+			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.q.variants[value.abilityVariants.value.q]?.image}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"
@@ -51,8 +48,7 @@ const { minorVersion } = usePatchVersion();
 		<h5>W</h5>
 		<h5>offhand weapon</h5>
 		<img
-			v-show="!isLoading"
-			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${(value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.w]?.imageAlt}` : undefined"
+			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${(value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.w]?.imageAlt}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"
@@ -60,8 +56,7 @@ const { minorVersion } = usePatchVersion();
 		>
 		<h5>next weapon</h5>
 		<img
-			v-show="!isLoading"
-			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${(value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.e]?.imageAlt}` : undefined"
+			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${(value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.e]?.imageAlt}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"
@@ -71,8 +66,7 @@ const { minorVersion } = usePatchVersion();
 	<div data-aphelios-r="" :data-level="value.level.value >= 6 ? 1 : undefined">
 		<h5>R</h5>
 		<img
-			v-show="!isLoading"
-			:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.r.variants[value.abilityVariants.value.r]?.image}` : undefined"
+			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.r.variants[value.abilityVariants.value.r]?.image}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"

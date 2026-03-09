@@ -1531,7 +1531,7 @@ defineExpose({ el });
 			}
 
 			[data-loading] {
-				--at-apply: 'hidden z-10 text-center pt-10 absolute -inset-1 inset-t-3 font-600 text-2xl backdrop-blur-2';
+				--at-apply: 'hidden z-10 text-center pt-10 absolute -inset-1 inset-t-1 font-600 text-2xl backdrop-blur-2';
 				-webkit-text-stroke: black 0.1em;
 				paint-order: stroke fill;
 			}
