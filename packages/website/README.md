@@ -54,13 +54,14 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] kai'sa
       - [ ] kraken slayer
   - [ ] mirror layout
-- [ ] results ui
-  - [ ] table where columns are champion + aa/ability, ideally color matched with scoreboard items. Rows are ability damage numbers/aa physical/magical/true damage
-  - [ ] add ability/aa to results button
-  - [ ] some cool graphs
-  - [ ] show/hide in graph button
-  - [ ] damage target? All should be available to choose from, same as source. Figure out how to fit it
+- [ ] results ui, table like the post game one
+  - [ ] grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
+  - [ ] collapsible sections [treegrid](https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/examples/treegrid-1/)
+  - [ ] header choose/add/change sources vs targets and which ability
+  - [ ] scoreboard add to results button
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
+  - [ ] graphs, maybe in style of post match graphs?
+  - [ ] add/remove results in graphs
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
