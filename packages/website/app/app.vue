@@ -25,6 +25,8 @@ const damageSources = ref<DamageSource<any>[]>([
 	markRaw(new DamageSource(useId())),
 ]) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
+
+const tableResults = ref([]);
 </script>
 
 <template>
@@ -33,6 +35,7 @@ const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()
 	</header>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
+		<CalculatorResultsTable v-model="tableResults" :damage-sources :damage-targets />
 	</main>
 	<ChampSelect />
 	<ItemShop />
