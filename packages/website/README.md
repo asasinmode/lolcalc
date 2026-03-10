@@ -56,7 +56,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] mirror layout
 - [ ] results ui, table like the post game one
   - [ ] grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
-  - [ ] collapsible sections [treegrid](https://www.w3.org/WAI/ARIA/apg/patterns/treegrid/examples/treegrid-1/)
+  - [ ] collapsible sections, custom table same as post game
   - [ ] header choose/add/change sources vs targets and which ability
   - [ ] scoreboard add to results button
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
