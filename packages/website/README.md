@@ -43,6 +43,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [ ] abilities ui (only passive implemented)
+    - [ ] ability tooltip shift variables
     - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest
@@ -57,10 +58,15 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] mirror layout
 - [ ] results ui, table like the post game one
   - [ ] grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
+  - [ ] cleanup results when source/target is moved/deleted
   - [ ] collapsible sections, custom table same as post game
+  - [ ] the actual ability value
   - [ ] header choose/add/change sources vs targets and which ability
   - [ ] scoreboard add to results button
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
+  - [ ] ability rows not implemented yet, coming soon
+  - [ ] per damage results row unknown variables, add exclamation that results are incorrect
+  - [ ] results section aphelios ability variants
   - [ ] graphs, maybe in style of post match graphs?
   - [ ] add/remove results in graphs
 - [ ] rune dialog

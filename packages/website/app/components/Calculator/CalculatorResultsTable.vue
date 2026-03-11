@@ -15,9 +15,27 @@ function columnOptions(from: DamageSource[]): [DamageSource, string][] {
 		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
 		.map((source, i) => [source, `(${i}) ${source.listedChampion.value?.name!}`] as [DamageSource, string]);
 }
-
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
+
+const damageSectionOptions = computed(() => props.damageSources
+	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
+	.flatMap(source => Object.entries(source.champion.value!.abilities).map(([abilityKey, ability]) => {
+		const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as keyof IChampion['abilities']]]!;
+		const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+			abilityVariant.name || 'UNKNOWN',
+			source.champion.value!.stringtable,
+		);
+
+		return {
+			id: `${source.champion.value!.id}-${abilityKey}`,
+			championId: source.champion.value!.id,
+			abilityKey,
+			name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
+		};
+	}))
+	.filter(source => !resultSections.value.some(section => section.id === source.id)),
+);
 
 function damageSectionRowCellValue(
 	_section: IDamageResultTableSection,
@@ -29,6 +47,7 @@ function damageSectionRowCellValue(
 		return '-';
 	}
 
+	// TODO
 	return Math.round(Math.random() * 500);
 }
 </script>
@@ -52,7 +71,7 @@ function damageSectionRowCellValue(
 						label="column's damage source"
 						:options="sourceOptions"
 					>
-						s
+						TODO
 					</VSelect>
 					vs
 					<VSelect
@@ -61,7 +80,7 @@ function damageSectionRowCellValue(
 						:options="targetOptions"
 						clearable
 					>
-						t
+						TODO
 					</VSelect>
 				</td>
 			</tr>
@@ -81,6 +100,20 @@ function damageSectionRowCellValue(
 				</td>
 			</tr>
 		</tbody>
+		<tbody v-show="damageSectionOptions.length">
+			<tr>
+				<th scope="rowgroup" :colspan="resultColumns.length + 2">
+					add results section
+					<VSelect
+						id="results-table-row-section"
+						label="section ability"
+						:options="damageSectionOptions.map(option => [option, option.name])"
+					>
+						TODO
+					</VSelect>
+				</th>
+			</tr>
+		</tbody>
 	</table>
 </template>
 
@@ -94,7 +127,7 @@ function damageSectionRowCellValue(
 		--at-apply: 'mx-auto border-spacing-0 border-collapse b b-[--border-color]';
 		--border-color: theme('colors.neutral.400');
 
-		&[inert]{
+		&[inert] {
 			--at-apply: 'blur-3';
 		}
 
