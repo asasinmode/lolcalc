@@ -56,19 +56,18 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] kraken slayer
     - [ ] confirm removing/clearing row
   - [ ] mirror layout
-- [ ] results ui, table like the post game one
-  - [ ] grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
-  - [ ] cleanup results when source/target is moved/deleted
-  - [ ] collapsible sections, custom table same as post game
-  - [ ] the actual ability value
-  - [ ] header choose/add/change sources vs targets and which ability
-  - [ ] scoreboard add to results button
+- [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
+  - [ ] source vs target column headers
+  - [ ] unique sections, basic attack, item or ability
+  - [ ] damage type row, use the actual calculated value in the cells
+  - [ ] column header functionality - choose source/target, remove
+  - [ ] section header functionality - add new, expand/collapse, remove
+  - [ ] cleanup results when source/target is moved/deleted or champion changes
+  - [ ] row/column hover/focus style
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
   - [ ] ability rows not implemented yet, coming soon
   - [ ] per damage results row unknown variables, add exclamation that results are incorrect
-  - [ ] results section aphelios ability variants
-  - [ ] graphs, maybe in style of post match graphs?
-  - [ ] add/remove results in graphs
+  - [ ] aphelios ability variants
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
@@ -129,6 +128,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] service worker for caching cdragon images
 - [ ] future features in github project page thingy?
+- [ ] result graphs, probably future feature, maybe in style of post match graphs?
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
