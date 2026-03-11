@@ -1,10 +1,29 @@
 <script setup lang="ts">
+import type { IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+
 defineProps<{
 	damageSources: DamageSource[];
 	damageTargets: DamageSource[];
 }>();
 
-const results = defineModel();
+const resultSections = defineModel<IDamageResultTableSection[]>('sections', {required: true});
+const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', {required: true});
+
+function columnOptions(from: DamageSource[]): [DamageSource, string][] {
+	return from
+		.filter(source => source.listedChampion.value)
+		.map(source => [source, source.listedChampion.value?.name!] as [DamageSource, string]);
+}
+
+function damageSectionRowCellValue(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number], columnIndex: number){
+	const column = resultColumns.value[columnIndex];
+
+	if(!column?.sourceId){
+		return '-'
+	}
+
+	return Math.round(Math.random() * 500);
+}
 </script>
 
 <template>
@@ -17,46 +36,40 @@ const results = defineModel();
 				<th scope="col">
 					damage type
 				</th>
-				<th scope="col">
-					Aatrox 1 vs Dummy
+				<th v-for="column in resultColumns" :key="column.id">
+					{{ column.sourceId }} vs {{ column.targetId }}
 				</th>
-				<th scope="col">
-					Aatrox 2 vs Dummy
-				</th>
+				<td>
+					<VSelect
+						id="results-table-column-source"
+						label="column's damage source"
+						:options="columnOptions(damageSources)"
+					>
+						s
+					</VSelect>
+					<VSelect
+						id="results-table-column-target"
+						label="column's damage target"
+						:options="columnOptions(damageTargets)"
+						clearable
+					>
+						t
+					</VSelect>
+				</td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody v-for="section in resultSections" :key="section.id">
 			<tr>
-				<th scope="row">
-					AA physical damage
+				<th scope="rowgroup" :colspan="resultColumns.length + 1">
+					{{ section.name }}
 				</th>
-				<td>
-					12
-				</td>
-				<td>
-					24
-				</td>
 			</tr>
-			<tr>
+			<tr v-for="row in section.rows" :key="`${section.id}-${row.name}`">
 				<th scope="row">
-					AA magic damage
+					{{ row.name }}
 				</th>
-				<td>
-					0
-				</td>
-				<td>
-					0
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">
-					AA true damage
-				</th>
-				<td>
-					0
-				</td>
-				<td>
-					0
+				<td v-for="i in (resultColumns.length + 1)" :key="`${section.id}-total-${resultColumns[i - 1]?.id || 'new'}`">
+					{{ damageSectionRowCellValue(section, row, i - 1) }}
 				</td>
 			</tr>
 		</tbody>

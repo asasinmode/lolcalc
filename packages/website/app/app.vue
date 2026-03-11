@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 
 useHead({
@@ -26,7 +27,31 @@ const damageSources = ref<DamageSource<any>[]>([
 ]) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 
-const tableResults = ref([]);
+const tableResultSections = ref<IDamageResultTableSection[]>([
+	{
+		id: 'basicAttack',
+		name: 'basic attack',
+		rows: [
+			{
+				name: 'total',
+				property: 'total',
+			},
+			{
+				name: 'physical damage',
+				property: 'physicalDamage',
+			},
+			{
+				name: 'magic damage',
+				property: 'magicDamage',
+			},
+			{
+				name: 'true damage',
+				property: 'trueDamage',
+			},
+		],
+	},
+]);
+const tableResultColumns = ref<IDamageResultTableColumn[]>([]);
 </script>
 
 <template>
@@ -35,7 +60,12 @@ const tableResults = ref([]);
 	</header>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
-		<CalculatorResultsTable v-model="tableResults" :damage-sources :damage-targets />
+		<CalculatorResultsTable
+			v-model:sections="tableResultSections"
+			v-model:columns="tableResultColumns"
+			:damage-sources
+			:damage-targets
+		/>
 	</main>
 	<ChampSelect />
 	<ItemShop />

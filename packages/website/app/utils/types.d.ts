@@ -42,3 +42,18 @@ export type IPossibleDynamicValues = Partial<Record<'all' | keyof IChampion['abi
  * possible values for these can be specified in `champion.ts` and `rune.ts` under proper key, these are then used in calculations
  */
 export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVariables?: (damageSource: DamageSource) => any }>;
+
+export interface IDamageResultTableSection {
+	id: string;
+	name: string;
+	rows: {
+		name: string;
+		property: string;
+	}[];
+}
+
+export interface IDamageResultTableColumn {
+	id: string;
+	sourceId: string;
+	targetId: string;
+}

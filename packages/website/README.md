@@ -79,6 +79,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] buying mechanism, components into item and so on
   - [x] item groups, only one from group
   - [ ] show inventory total value
+- [ ] target dummy damage source
 - [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query
 - [ ] calculations [check out](https://github.com/OsOmE1/leaguebuilder)
