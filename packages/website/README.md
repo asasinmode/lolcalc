@@ -53,6 +53,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] zaahen
       - [ ] kai'sa
       - [ ] kraken slayer
+    - [ ] confirm removing/clearing row
   - [ ] mirror layout
 - [ ] results ui, table like the post game one
   - [ ] grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
-defineProps<{
+const props = defineProps<{
 	damageSources: DamageSource[];
 	damageTargets: DamageSource[];
+	showResults: boolean;
 }>();
 
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
@@ -11,9 +12,12 @@ const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { requi
 
 function columnOptions(from: DamageSource[]): [DamageSource, string][] {
 	return from
-		.filter(source => source.listedChampion.value)
-		.map(source => [source, source.listedChampion.value?.name!] as [DamageSource, string]);
+		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
+		.map((source, i) => [source, `(${i}) ${source.listedChampion.value?.name!}`] as [DamageSource, string]);
 }
+
+const sourceOptions = computed(() => columnOptions(props.damageSources));
+const targetOptions = computed(() => columnOptions(props.damageTargets));
 
 function damageSectionRowCellValue(
 	_section: IDamageResultTableSection,
@@ -30,30 +34,31 @@ function damageSectionRowCellValue(
 </script>
 
 <template>
-	<table id="calculator-results-table">
+	<table id="calculator-results-table" :inert="!showResults">
 		<caption>
 			comparison table
 		</caption>
 		<thead>
 			<tr>
-				<th scope="col">
+				<th scope="col" width="240px">
 					damage type
 				</th>
-				<th v-for="column in resultColumns" :key="column.id">
+				<th v-for="column in resultColumns" :key="column.id" width="100px">
 					{{ column.sourceId }} vs {{ column.targetId }}
 				</th>
-				<td>
+				<td width="100px">
 					<VSelect
 						id="results-table-column-source"
 						label="column's damage source"
-						:options="columnOptions(damageSources)"
+						:options="sourceOptions"
 					>
 						s
 					</VSelect>
+					vs
 					<VSelect
 						id="results-table-column-target"
 						label="column's damage target"
-						:options="columnOptions(damageTargets)"
+						:options="targetOptions"
 						clearable
 					>
 						t
@@ -81,32 +86,25 @@ function damageSectionRowCellValue(
 
 <style>
 @layer components {
+	#calculator-results {
+		--at-apply: 'of-x-auto';
+	}
+
 	#calculator-results-table {
-		--at-apply: 'mx-auto border-spacing-0 border-separate b b-[--border-color]';
+		--at-apply: 'mx-auto border-spacing-0 border-collapse b b-[--border-color]';
 		--border-color: theme('colors.neutral.400');
 
-		th:not(:last-child),
-		td:not(:last-child) {
-			--at-apply: 'b-r b-[--border-color]';
+		&[inert]{
+			--at-apply: 'blur-3';
+		}
+
+		> caption {
+			--at-apply: 'text-start';
 		}
 
 		th,
 		td {
-			--at-apply: 'py-1 px-2';
-		}
-
-		> thead > tr > th,
-		> thead > tr > td,
-		> tbody > tr:not(:last-child) > th,
-		> tbody > tr:not(:last-child) > td,
-		> tfoot > tr > th,
-		> tfoot > tr > td,
-		> tr:not(:last-child) > td,
-		> tr:not(:last-child) > th,
-		> thead:not(:last-child),
-		> tbody:not(:last-child),
-		> tfoot:not(:last-child) {
-			--at-apply: 'b-b b-[--border-color]';
+			--at-apply: 'py-1 px-2 b b-[--border-color]';
 		}
 
 		th {
@@ -115,7 +113,7 @@ function damageSectionRowCellValue(
 
 		> thead > tr > th {
 			&:first-child {
-				--at-apply: 'align-bottom';
+				--at-apply: 'align-bottom text-sm';
 			}
 		}
 

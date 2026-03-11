@@ -27,6 +27,11 @@ const damageSources = ref<DamageSource<any>[]>([
 ]) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 
+const showResults = computed(() => (damageSources as unknown as Ref<DamageSource[]>).value.some(
+	source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id),
+),
+);
+
 const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'basicAttack',
@@ -60,14 +65,30 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>([]);
 	</header>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
-		<CalculatorResultsTable
-			v-model:sections="tableResultSections"
-			v-model:columns="tableResultColumns"
-			:damage-sources
-			:damage-targets
-		/>
+		<section id="calculator-results">
+			<p v-show="!showResults">
+				configure a damage source champion to view results
+			</p>
+			<CalculatorResultsTable
+				v-model:sections="tableResultSections"
+				v-model:columns="tableResultColumns"
+				:damage-sources
+				:damage-targets
+				:show-results
+			/>
+		</section>
 	</main>
 	<ChampSelect />
 	<ItemShop />
 	<RuneSelect />
 </template>
+
+<style>
+#calculator-results {
+	p:first-child {
+		--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
+		-webkit-text-stroke: black 0.2em;
+		paint-order: stroke fill;
+	}
+}
+</style>
