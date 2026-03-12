@@ -63,6 +63,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] column header functionality - choose source/target, remove
   - [ ] section header functionality - add new, expand/collapse, remove
   - [ ] cleanup results when source/target is moved/deleted or champion changes
+  - [ ] color coded/matching results with scoreboard
   - [ ] row/column hover/focus style
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
   - [ ] ability rows not implemented yet, coming soon
