@@ -77,7 +77,7 @@ try {
 	championData = JSON.parse(await fs.readFile(championFilePath, 'utf8'));
 } catch {}
 
-if (!championData || championData?.version !== latestVersion) {
+if (true || !championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -1287,6 +1287,10 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
 			if (variantTooltipStringtableKey && (variantTooltipStringtableKey.toLowerCase() in champion.stringtable)) {
 				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
+			}
+
+			if (!variant.name) {
+				throw new Error(`${debugPrefix} variant has no name`);
 			}
 		}
 	}

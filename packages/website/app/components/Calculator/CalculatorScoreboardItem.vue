@@ -610,7 +610,7 @@ const hoveredAbilityTooltipText = computed(() => {
 	const abilityLevel = hoveredAbility.value && hoveredAbility.value !== 'passive' ? props.value.abilityLevels.value[hoveredAbility.value] : undefined;
 
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
-		hoveredAbilityVariant.value.name || '<unknown>UNKNOWN</unknown>',
+		hoveredAbilityVariant.value.name,
 		props.value.champion.value?.stringtable,
 	);
 

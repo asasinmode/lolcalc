@@ -23,7 +23,7 @@ const damageSectionOptions = computed(() => props.damageSources
 	.flatMap(source => Object.entries(source.champion.value!.abilities).map(([abilityKey, ability]) => {
 		const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as keyof IChampion['abilities']]]!;
 		const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-			abilityVariant.name || 'UNKNOWN',
+			abilityVariant.name,
 			source.champion.value!.stringtable,
 		);
 

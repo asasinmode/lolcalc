@@ -47,7 +47,7 @@ export interface IListedChampion<T extends IChampionId = any> extends Pick<ICham
 }
 
 export interface IChampionAbilityVariant {
-	name?: string;
+	name: string;
 	image: string;
 	mana?: number[];
 	cooldownTime?: number[];
