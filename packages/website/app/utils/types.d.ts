@@ -45,7 +45,10 @@ export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVaria
 
 export interface IDamageResultTableSection {
 	id: string;
+	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
+	/** ability variant image */
+	image: string;
 	rows: {
 		name: string;
 		property: string;

@@ -10,6 +10,8 @@ const props = defineProps<{
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
 
+const { minorVersion } = usePatchVersion();
+
 function columnOptions(from: DamageSource[]): [DamageSource, string][] {
 	return from
 		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
@@ -31,6 +33,7 @@ const damageSectionOptions = computed(() => props.damageSources
 			id: `${source.champion.value!.id}-${abilityKey}`,
 			championId: source.champion.value!.id,
 			abilityKey: abilityKey as IChampionAbilityKey,
+			image: abilityVariant.image,
 			name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
 		};
 	}))
@@ -46,6 +49,8 @@ async function addDamageSection(event: SubmitEvent) {
 	resultSections.value.push({
 		id: option.id,
 		name: option.name,
+		// TODO hover tooltip
+		image: option.image,
 		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, property: variable })),
 	});
 
@@ -104,7 +109,7 @@ function damageSectionRowCellValue(
 					>
 						TODO
 					</VSelect>
-					<button>
+					<button class="pretend-ui-button">
 						add
 					</button>
 				</td>
@@ -113,8 +118,14 @@ function damageSectionRowCellValue(
 		<tbody v-for="section in resultSections" :key="section.id">
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
+					<img
+						:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.id === 'basicAttack' ? 'assets/ux/deathrecap/autoattack.png' : section.image}`"
+						width="64"
+						height="64"
+						aria-hidden="true"
+					>
 					{{ section.name }}
-					<button v-if="section.id !== 'basicAttack'" @click="removeDamageSection(section)">
+					<button v-if="section.id !== 'basicAttack'" class="pretend-ui-button" @click="removeDamageSection(section)">
 						remove
 					</button>
 				</th>
@@ -177,7 +188,9 @@ function damageSectionRowCellValue(
 			--at-apply: 'text-start font-normal';
 		}
 
-		> thead > tr > th {
+		> thead > tr > * {
+			--at-apply: 'text-lg';
+
 			&:first-child {
 				--at-apply: 'align-bottom text-sm';
 			}
@@ -185,7 +198,11 @@ function damageSectionRowCellValue(
 
 		> tbody > tr {
 			&:first-child {
-				--at-apply: 'text-lg font-medium';
+				--at-apply: 'text-lg font-medium bg-[--ui-button-border-clr]/10 whitespace-nowrap';
+
+				> th {
+					--at-apply: 'py-1';
+				}
 			}
 
 			&:nth-child(n + 2) {
@@ -201,7 +218,7 @@ function damageSectionRowCellValue(
 
 		> #results-table-new-section {
 			form {
-				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-y-1 gap-x-2';
+				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
 
 				> span {
 					--at-apply: 'col-span-full';
@@ -216,7 +233,7 @@ function damageSectionRowCellValue(
 				}
 
 				> button {
-					--at-apply: 'w-fit whitespace-nowrap px-3 py-1';
+					--at-apply: 'w-fit whitespace-nowrap';
 				}
 			}
 		}

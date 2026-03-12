@@ -333,7 +333,7 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 </script>
 
 <template>
-	<article id="calculator-scoreboard" class="mx-auto b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty start-1/2 bottom-0 top-12 absolute -translate-x-1/2)">
+	<article id="calculator-scoreboard">
 		<header class="text-center b-b col-span-full">
 			<h1 class="text-xl font-500">
 				lolcalc
@@ -475,6 +475,8 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 <style>
 @layer components {
 	#calculator-scoreboard {
+		--at-apply: 'mx-auto b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty start-1/2 bottom-0 top-12 absolute -translate-x-1/2)';
+
 		> h3 {
 			--at-apply: 'text-center';
 		}
