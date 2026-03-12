@@ -9,7 +9,7 @@ defineProps<{
 }>();
 
 defineEmits<{
-	abilityHover: [event: MouseEvent, ability: keyof IChampion['abilities'], variant?: number];
+	abilityHover: [event: MouseEvent, ability: IChampionAbilityKey, variant?: number];
 }>();
 
 const { minorVersion } = usePatchVersion();

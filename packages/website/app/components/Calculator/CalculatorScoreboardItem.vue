@@ -107,9 +107,6 @@ function toggleExpanded() {
 	}
 }
 
-// TMP
-onMounted(() => props.index === 0 && props.value && toggleExpanded());
-
 const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
 const hoveredItem = shallowRef<IItem>();
 
@@ -592,13 +589,13 @@ function healthResourceSliderEvents(target: Ref<number>, max: Ref<number>, eleme
 	return { onMousedown, cleanup };
 }
 
-function resetAbilityLevel(event: MouseEvent, ability: Exclude<keyof IChampion['abilities'], 'passive'>) {
+function resetAbilityLevel(event: MouseEvent, ability: Exclude<IChampionAbilityKey, 'passive'>) {
 	event.preventDefault();
 	// eslint-disable-next-line vue/no-mutating-props
 	props.value.abilityLevels.value[ability] = 0;
 }
 
-const hoveredAbility = ref<keyof IChampion['abilities']>();
+const hoveredAbility = ref<IChampionAbilityKey>();
 const hoveredAbilityVariant = shallowRef<IChampionAbilityVariant>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 
@@ -668,7 +665,7 @@ function abilityText(value: string, variant: IChampionAbilityVariant, stringtabl
 	return { replaced, unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
 }
 
-function showAbilityTooltip(event: MouseEvent, ability: keyof IChampion['abilities'], variant = 0) {
+function showAbilityTooltip(event: MouseEvent, ability: IChampionAbilityKey, variant = 0) {
 	if (props.value.champion.value) {
 		hoveredAbility.value = ability;
 		hoveredAbilityVariant.value = props.value.champion.value.abilities[ability].variants[variant ?? props.value.abilityVariants.value[ability]];

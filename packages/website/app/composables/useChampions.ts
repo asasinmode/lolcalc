@@ -69,3 +69,5 @@ export interface IChampionAbility {
 	cooldownTime?: number[];
 	variants: IChampionAbilityVariant[];
 }
+
+export type IChampionAbilityKey = keyof IChampion['abilities'];

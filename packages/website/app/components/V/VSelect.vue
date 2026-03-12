@@ -3,7 +3,9 @@ const props = defineProps<{
 	id: string;
 	label: string;
 	options: [value: T, text: string | number][];
+	name?: string;
 	clearable?: boolean;
+	required?: boolean;
 }>();
 
 defineEmits<{
@@ -29,6 +31,8 @@ function clear(event: MouseEvent) {
 		<select
 			:id
 			:value
+			:required
+			:name
 			@change="setValue"
 			@click.right="clear"
 			@mouseenter="$emit('labelMouseenter', $event)"

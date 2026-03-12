@@ -49,8 +49,8 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	// TODO probably can remove
 	inventoryFull = computed(() => this.items.value.slice(0, 6).filter(Boolean).length === 6);
 
-	abilityLevels: Ref<Record<Exclude<keyof IChampion['abilities'], 'passive'>, number>>;
-	abilityVariants: Ref<Record<keyof IChampion['abilities'], number>>;
+	abilityLevels: Ref<Record<Exclude<IChampionAbilityKey, 'passive'>, number>>;
+	abilityVariants: Ref<Record<IChampionAbilityKey, number>>;
 	allAbilityVariants = computed(() => this.champion.value ? Object.values(this.champion.value.abilities).flatMap(ability => ability.variants) : []);
 
 	dragonStacks: Ref<(IDragonName | undefined)[]>;

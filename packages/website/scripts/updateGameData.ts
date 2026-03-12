@@ -1,4 +1,4 @@
-import type { IChampion, IChampionAbility, IChampionAbilityVariant } from '../app/composables/useChampions';
+import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
@@ -1242,7 +1242,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 		filteredAbilitiesWithVariants = filteredAbilitiesWithVariants.filter(([abilityName]) => abilityName !== 'w');
 	}
 
-	const abilitiesWithVariants = filteredAbilitiesWithVariants.map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [keyof IChampion['abilities'], IChampionAbility['variants']][];
+	const abilitiesWithVariants = filteredAbilitiesWithVariants.map(([abilityName, abilityData]) => [abilityName, abilityData.variants]) as [IChampionAbilityKey, IChampionAbility['variants']][];
 
 	const allVariants = abilitiesWithVariants.flatMap(([, variants]) => variants);
 

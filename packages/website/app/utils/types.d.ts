@@ -35,7 +35,7 @@ export type IWithPossibleDynamicValues = Record<string, {
 /**
  * record containing possible values for a champion/rune-specific variable. The ones under `all` are used first, then overriden by ability specific ones (if they exist)
  */
-export type IPossibleDynamicValues = Partial<Record<'all' | keyof IChampion['abilities'], Record<string, (string | number)[]>>>;
+export type IPossibleDynamicValues = Partial<Record<'all' | IChampionAbilityKey, Record<string, (string | number)[]>>>;
 
 /**
  * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value

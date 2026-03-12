@@ -55,6 +55,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] kai'sa
       - [ ] kraken slayer
     - [ ] confirm removing/clearing row
+    - [ ] add all of champion's things to damage results
   - [ ] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [ ] source vs target column headers
@@ -65,6 +66,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] cleanup results when source/target is moved/deleted or champion changes
   - [ ] color coded/matching results with scoreboard
   - [ ] row/column hover/focus style
+  - [ ] cell have number values, then color them red/green hue depending on if higher or lower than others
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
   - [ ] ability rows not implemented yet, coming soon
   - [ ] per damage results row unknown variables, add exclamation that results are incorrect
@@ -96,6 +98,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] resolve game variables
   - [ ] item passives
   - [ ] champion passives
+    - [ ] shapeshifting champions choose shape since it can affect stats
     - [ ] level breakpoint calculations
     - [ ] use extras passive data
   - [ ] DamageSource.internalData set from utils/champion.ts

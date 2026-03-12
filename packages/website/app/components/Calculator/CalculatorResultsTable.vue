@@ -13,7 +13,7 @@ const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { requi
 function columnOptions(from: DamageSource[]): [DamageSource, string][] {
 	return from
 		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
-		.map((source, i) => [source, `(${i}) ${source.listedChampion.value?.name!}`] as [DamageSource, string]);
+		.map((source, i) => [source, `(${i + 1}) ${source.listedChampion.value?.name!}`] as [DamageSource, string]);
 }
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
@@ -21,7 +21,7 @@ const targetOptions = computed(() => columnOptions(props.damageTargets));
 const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
 	.flatMap(source => Object.entries(source.champion.value!.abilities).map(([abilityKey, ability]) => {
-		const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as keyof IChampion['abilities']]]!;
+		const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
 		const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
 			abilityVariant.name,
 			source.champion.value!.stringtable,
@@ -30,12 +30,34 @@ const damageSectionOptions = computed(() => props.damageSources
 		return {
 			id: `${source.champion.value!.id}-${abilityKey}`,
 			championId: source.champion.value!.id,
-			abilityKey,
+			abilityKey: abilityKey as IChampionAbilityKey,
 			name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
 		};
 	}))
 	.filter(source => !resultSections.value.some(section => section.id === source.id)),
 );
+
+async function addDamageSection(event: SubmitEvent) {
+	const rawSectionIndex = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex');
+
+	const option = damageSectionOptions.value[Number.parseInt(rawSectionIndex as string)]!;
+	const champion = await useChampion(option.championId);
+
+	resultSections.value.push({
+		id: option.id,
+		name: option.name,
+		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, property: variable })),
+	});
+
+	(event.target as HTMLFormElement).reset();
+}
+
+function removeDamageSection(section: IDamageResultTableSection) {
+	const index = resultSections.value.indexOf(section);
+	if (~index) {
+		resultSections.value.splice(index, 1);
+	}
+}
 
 function damageSectionRowCellValue(
 	_section: IDamageResultTableSection,
@@ -82,6 +104,9 @@ function damageSectionRowCellValue(
 					>
 						TODO
 					</VSelect>
+					<button>
+						add
+					</button>
 				</td>
 			</tr>
 		</thead>
@@ -89,6 +114,9 @@ function damageSectionRowCellValue(
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
 					{{ section.name }}
+					<button v-if="section.id !== 'basicAttack'" @click="removeDamageSection(section)">
+						remove
+					</button>
 				</th>
 			</tr>
 			<tr v-for="row in section.rows" :key="`${section.id}-${row.name}`">
@@ -100,17 +128,22 @@ function damageSectionRowCellValue(
 				</td>
 			</tr>
 		</tbody>
-		<tbody v-show="damageSectionOptions.length">
+		<tbody v-show="damageSectionOptions.length" id="results-table-new-section">
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
-					add results section
-					<VSelect
-						id="results-table-row-section"
-						label="section ability"
-						:options="damageSectionOptions.map(option => [option, option.name])"
-					>
-						TODO
-					</VSelect>
+					<form @submit.prevent="addDamageSection">
+						<span> add results section </span>
+						<VSelect
+							id="results-table-row-section"
+							label="section ability"
+							name="sectionOptionIndex"
+							:options="damageSectionOptions.map((option, index) => [index, option.name])"
+							required
+						/>
+						<button class="pretend-ui-button" type="submit">
+							add
+						</button>
+					</form>
 				</th>
 			</tr>
 		</tbody>
@@ -137,7 +170,7 @@ function damageSectionRowCellValue(
 
 		th,
 		td {
-			--at-apply: 'py-1 px-2 b b-[--border-color]';
+			--at-apply: 'b b-[--border-color]';
 		}
 
 		th {
@@ -163,6 +196,28 @@ function damageSectionRowCellValue(
 
 			&:nth-child(2n + 3) {
 				--at-apply: 'bg-neutral-400/10';
+			}
+		}
+
+		> #results-table-new-section {
+			form {
+				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-y-1 gap-x-2';
+
+				> span {
+					--at-apply: 'col-span-full';
+				}
+
+				> div {
+					--at-apply: 'w-64';
+
+					> select {
+						--at-apply: 'inset-unset static w-full h-full';
+					}
+				}
+
+				> button {
+					--at-apply: 'w-fit whitespace-nowrap px-3 py-1';
+				}
 			}
 		}
 	}
