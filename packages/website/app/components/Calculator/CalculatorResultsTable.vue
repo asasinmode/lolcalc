@@ -35,6 +35,10 @@ function addResultsColumn() {
 	columnNewTargetId.value = undefined;
 }
 
+function removeResultsColumn(index: number) {
+	resultColumns.value.splice(index, 1);
+}
+
 const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
 	.flatMap(source => Object.entries(source.champion.value!.abilities).map(([abilityKey, ability]) => {
@@ -103,8 +107,11 @@ function damageSectionRowCellValue(
 				<th scope="col" width="240px">
 					damage type
 				</th>
-				<th v-for="column in resultColumns" :key="column.id" width="100px">
+				<th v-for="(column, index) in resultColumns" :key="column.id" width="100px">
 					{{ column.sourceId }} vs {{ column.targetId }}
+					<button @click="removeResultsColumn(index)">
+						remove
+					</button>
 				</th>
 				<td width="100px">
 					<form @submit.prevent="addResultsColumn">
