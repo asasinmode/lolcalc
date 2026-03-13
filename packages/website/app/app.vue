@@ -23,9 +23,22 @@ _setupGlobalKeyModifiers();
 
 // TMP as unknown as..., can't put it in v-model or it doesn't build atm
 const damageSources = ref<DamageSource<any>[]>([
-	markRaw(new DamageSource(useId())),
+	markRaw(new DamageSource(useId(), { champion: useChampions().Aatrox })),
+	markRaw(new DamageSource(useId(), { champion: useChampions().Ambessa })),
+	markRaw(new DamageSource(useId(), { champion: useChampions().Annie })),
+	markRaw(new DamageSource(useId(), { champion: useChampions().AurelionSol })),
 ]) as unknown as DamageSource[];
-const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
+const damageTargets = ref<DamageSource<any>[]>([
+	markRaw(new DamageSource(useId(), { champion: useChampions().Zaahen })),
+	markRaw(new DamageSource(useId(), { champion: useChampions().Zed })),
+	markRaw(new DamageSource(useId(), { champion: useChampions().Zac })),
+]) as unknown as DamageSource[];
+
+// TMP replace the above with this for build/push
+// const damageSources = ref<DamageSource<any>[]>([
+// 	markRaw(new DamageSource(useId())),
+// ]) as unknown as DamageSource[];
+// const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 
 const showResults = computed(() => (damageSources as unknown as Ref<DamageSource[]>).value.some(
 	source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id),
@@ -36,6 +49,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'basicAttack',
 		name: 'basic attack',
+		image: 'assets/ux/deathrecap/autoattack.png',
 		rows: [
 			{
 				name: 'total',
@@ -84,11 +98,17 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>([]);
 </template>
 
 <style>
-#calculator-results {
-	p:first-child {
-		--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
-		-webkit-text-stroke: black 0.2em;
-		paint-order: stroke fill;
+@layer components {
+	:root {
+		--placeholder-champion-bg-clr: #020a13;
+	}
+
+	#calculator-results {
+		p:first-child {
+			--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
+			-webkit-text-stroke: black 0.2em;
+			paint-order: stroke fill;
+		}
 	}
 }
 </style>

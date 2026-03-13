@@ -22,7 +22,7 @@ const emit = defineEmits<{
 	itemListDragover: [event: DragEvent];
 	itemListDragleave: [event: DragEvent];
 	itemListDrop: [event: DragEvent];
-	itemDragstart: [ event: DragEvent, itemIndex: number];
+	itemDragstart: [event: DragEvent, itemIndex: number];
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
@@ -1305,7 +1305,6 @@ defineExpose({ el });
 		--at-apply: 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);
-		--placeholder-champion-bg-clr: #020a13;
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
 
@@ -1392,7 +1391,7 @@ defineExpose({ el });
 				--at-apply: 'group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden';
 
 				img {
-					--at-apply: 'max-w-none size-[calc(100%_+_var(--spacing)_*_2)] -ms-1 -mt-1';
+					--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
 				}
 
 				&:hover,

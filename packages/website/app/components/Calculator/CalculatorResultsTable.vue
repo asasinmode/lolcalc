@@ -10,12 +10,18 @@ const props = defineProps<{
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
 
-const { minorVersion } = usePatchVersion();
+const columnNewSourceId = ref<string>();
+const columnNewTargetId = ref<string>();
 
-function columnOptions(from: DamageSource[]): [DamageSource, string][] {
+const columnNewSource = computed(() => columnNewSourceId.value ? props.damageSources.find(source => source.id === columnNewSourceId.value) : undefined);
+const columnNewTarget = computed(() => columnNewTargetId.value ? props.damageTargets.find(source => source.id === columnNewTargetId.value) : undefined);
+
+const { version, minorVersion } = usePatchVersion();
+
+function columnOptions(from: DamageSource[]): [string, string][] {
 	return from
 		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
-		.map((source, i) => [source, `(${i + 1}) ${source.listedChampion.value?.name!}`] as [DamageSource, string]);
+		.map((source, i) => [source.id, `(${i + 1}) ${source.listedChampion.value?.name!}`]);
 }
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
@@ -49,7 +55,6 @@ async function addDamageSection(event: SubmitEvent) {
 	resultSections.value.push({
 		id: option.id,
 		name: option.name,
-		// TODO hover tooltip
 		image: option.image,
 		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, property: variable })),
 	});
@@ -93,25 +98,58 @@ function damageSectionRowCellValue(
 					{{ column.sourceId }} vs {{ column.targetId }}
 				</th>
 				<td width="100px">
-					<VSelect
-						id="results-table-column-source"
-						label="column's damage source"
-						:options="sourceOptions"
-					>
-						TODO
-					</VSelect>
-					vs
-					<VSelect
-						id="results-table-column-target"
-						label="column's damage target"
-						:options="targetOptions"
-						clearable
-					>
-						TODO
-					</VSelect>
-					<button class="pretend-ui-button">
-						add
-					</button>
+					<form @submit.prevent="">
+						<VSelect
+							id="results-table-column-source"
+							v-model="columnNewSourceId"
+							label="column's damage source"
+							:options="sourceOptions"
+							required
+						>
+							<img
+								v-if="columnNewSource"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewSource.listedChampion.value!.image}`"
+								loading="lazy"
+								width="128"
+								height="128"
+								style="--focus-brightness: 1.2"
+							>
+							<img
+								v-else
+								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+								width="256"
+								height="256"
+								style="--focus-brightness: 1.5"
+							>
+						</VSelect>
+						vs
+						<VSelect
+							id="results-table-column-target"
+							v-model="columnNewTargetId"
+							label="column's damage target"
+							:options="targetOptions"
+							clearable
+						>
+							<img
+								v-if="columnNewTarget"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewTarget.listedChampion.value!.image}`"
+								loading="lazy"
+								width="128"
+								height="128"
+								style="--focus-brightness: 1.2"
+							>
+							<img
+								v-else
+								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+								width="256"
+								height="256"
+								style="--focus-brightness: 1.5"
+							>
+						</VSelect>
+						<button class="pretend-ui-button" type="submit">
+							add
+						</button>
+					</form>
 				</td>
 			</tr>
 		</thead>
@@ -119,7 +157,7 @@ function damageSectionRowCellValue(
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.id === 'basicAttack' ? 'assets/ux/deathrecap/autoattack.png' : section.image}`"
+						:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
 						width="64"
 						height="64"
 						aria-hidden="true"
@@ -193,6 +231,36 @@ function damageSectionRowCellValue(
 
 			&:first-child {
 				--at-apply: 'align-bottom text-sm';
+			}
+
+			> form {
+				--at-apply: 'grid grid-cols-[min-content_auto] grid-rows-[1fr_auto_1fr] grid-flow-col text-center';
+
+				> .v-select {
+					> select {
+						--at-apply: 'rounded-1/2 size-12';
+					}
+
+					> label {
+						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b b-[--ui-button-border-clr]';
+
+						> img {
+							--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
+						}
+					}
+
+					> select:is(:hover, :focus-visible) + label {
+						--at-apply: 'bg-neutral-800';
+
+						> img {
+							--at-apply: 'brightness-[--focus-brightness]';
+						}
+					}
+				}
+
+				> button {
+					--at-apply: 'row-span-full h-min self-center';
+				}
 			}
 		}
 
