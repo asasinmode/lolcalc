@@ -58,5 +58,5 @@ export interface IDamageResultTableSection {
 export interface IDamageResultTableColumn {
 	id: string;
 	sourceId: string;
-	targetId: string;
+	targetId?: string;
 }

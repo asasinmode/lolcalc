@@ -7,16 +7,15 @@ const props = defineProps<{
 	showResults: boolean;
 }>();
 
-const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
+const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
+
+const { version, minorVersion } = usePatchVersion();
 
 const columnNewSourceId = ref<string>();
 const columnNewTargetId = ref<string>();
-
 const columnNewSource = computed(() => columnNewSourceId.value ? props.damageSources.find(source => source.id === columnNewSourceId.value) : undefined);
 const columnNewTarget = computed(() => columnNewTargetId.value ? props.damageTargets.find(source => source.id === columnNewTargetId.value) : undefined);
-
-const { version, minorVersion } = usePatchVersion();
 
 function columnOptions(from: DamageSource[]): [string, string][] {
 	return from
@@ -25,6 +24,16 @@ function columnOptions(from: DamageSource[]): [string, string][] {
 }
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
+
+function addResultsColumn() {
+	resultColumns.value.push({
+		id: crypto.randomUUID(),
+		sourceId: columnNewSourceId.value!,
+		targetId: columnNewTargetId.value,
+	});
+	columnNewSourceId.value = undefined;
+	columnNewTargetId.value = undefined;
+}
 
 const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
@@ -46,7 +55,7 @@ const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => !resultSections.value.some(section => section.id === source.id)),
 );
 
-async function addDamageSection(event: SubmitEvent) {
+async function addResultsSection(event: SubmitEvent) {
 	const rawSectionIndex = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex');
 
 	const option = damageSectionOptions.value[Number.parseInt(rawSectionIndex as string)]!;
@@ -98,7 +107,7 @@ function damageSectionRowCellValue(
 					{{ column.sourceId }} vs {{ column.targetId }}
 				</th>
 				<td width="100px">
-					<form @submit.prevent="">
+					<form @submit.prevent="addResultsColumn">
 						<VSelect
 							id="results-table-column-source"
 							v-model="columnNewSourceId"
@@ -180,7 +189,7 @@ function damageSectionRowCellValue(
 		<tbody v-show="damageSectionOptions.length" id="results-table-new-section">
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
-					<form @submit.prevent="addDamageSection">
+					<form @submit.prevent="addResultsSection">
 						<span> add results section </span>
 						<VSelect
 							id="results-table-row-section"
@@ -242,7 +251,7 @@ function damageSectionRowCellValue(
 					}
 
 					> label {
-						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b b-[--ui-button-border-clr]';
+						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b-2 b-[--ui-button-border-clr]';
 
 						> img {
 							--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
