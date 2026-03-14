@@ -55,7 +55,12 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 	dragonStacks: Ref<(IDragonName | undefined)[]>;
 	dragonSoul: Ref<IDragonName | undefined>;
-	dragonStacksInvalid = computed(() => {
+	/**
+	 * 0 - stacks valid
+	 * 1 - more than 1 type repeated, i.e infernal, infernal, cloud, cloud
+	 * 2 - 4 different stacks (only 3 are possible), i.e infernal, cloud, ocean, mountain
+	 */
+	dragonStacksInvalid = computed<0 | 1 | 2>(() => {
 		const counts: [IDragonName, number][] = [];
 		for (const dragon of this.dragonStacks.value) {
 			if (dragon) {
@@ -67,7 +72,11 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 				}
 			}
 		}
-		return counts.filter(c => c[1] >= 2).length > 1;
+		return counts.length > 3
+			? 2
+			: counts.filter(c => c[1] >= 2).length > 1
+				? 1
+				: 0;
 	});
 	dragonSoulInvalid = computed(() => this.dragonSoul.value
 		? this.dragonStacks.value.filter(Boolean).length < 4 || (this.dragonStacks.value.filter(stack => stack === this.dragonSoul.value).length < 2)
@@ -158,6 +167,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			dragonStacks: structuredClone(toRaw(this.dragonStacks.value)),
 			dragonSoul: this.dragonSoul.value,
 			roleQuest: this.roleQuest.value,
+			/* not cloned because the `setupInternalData` should handle safely using previous values to create new ones */
 			internalData: this.internalData.value,
 			...overrides,
 		});

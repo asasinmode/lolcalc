@@ -755,7 +755,7 @@ const hoveredDragonThingText = computed(() => {
 
 	if (isStack) {
 		if (props.value.dragonStacksInvalid.value) {
-			invalid = 'Only 1 dragon type can be repeated';
+			invalid = props.value.dragonStacksInvalid.value === 1 ? 'Only 1 dragon type can be repeated' : 'There can be only 3 different dragon types';
 		}
 	} else if (props.value.dragonSoulInvalid.value) {
 		invalid = 'Soul needs at least 4 total and 2 matching stacks';
