@@ -1,4 +1,4 @@
-import type { ShallowRef, UnwrapRef } from 'vue';
+import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
 
 type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -91,6 +91,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	internalData: Ref<Id extends IInternalDataSetupChampions
 		? ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
 		: undefined>;
+	watchHandles: WatchHandle[];
 
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
@@ -123,35 +124,37 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
 
-		watch(this.listedChampion, async (c) => {
-			this.champion.value = undefined;
-			this.abilityLevels.value = { q: 0, w: 0, e: 0, r: 0 };
-			this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+		this.watchHandles = [
+			watch(this.listedChampion, async (c) => {
+				this.champion.value = undefined;
+				this.abilityLevels.value = { q: 0, w: 0, e: 0, r: 0 };
+				this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 
-			const champion = c && await useChampion(c.id);
-			if (this.listedChampion.value?.id === champion?.id) {
-				this.champion.value = champion;
-			}
-		}, { immediate: true });
+				const champion = c && await useChampion(c.id);
+				if (this.listedChampion.value?.id === champion?.id) {
+					this.champion.value = champion;
+				}
+			}, { immediate: true }),
 
-		watch(this.champion, () => {
-			this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
-			this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
-			this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
-		});
-
-		watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
-			if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
+			watch(this.champion, () => {
+				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 				this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
-			} else {
-				this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.stats.total.hp || 0);
-			}
-			if (previousTotalAbilityResource && this.currentAbilityResource.value === previousTotalAbilityResource) {
 				this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
-			} else {
-				this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
-			}
-		});
+			}),
+
+			watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
+				if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
+					this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
+				} else {
+					this.currentHealth.value = Math.min(this.currentHealth.value, this.stats.value?.stats.total.hp || 0);
+				}
+				if (previousTotalAbilityResource && this.currentAbilityResource.value === previousTotalAbilityResource) {
+					this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
+				} else {
+					this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
+				}
+			}),
+		];
 	}
 
 	clone(id?: string, overrides: Partial<IOverrides> = {}): DamageSource<Id> {

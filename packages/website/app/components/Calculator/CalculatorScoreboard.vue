@@ -223,7 +223,10 @@ function clear(index: number, target: DamageSource[]) {
 }
 
 function remove(index: number, target: DamageSource[]) {
-	target.splice(index, 1);
+	const [damageSource] = target.splice(index, 1);
+	for (const unwatch of damageSource!.watchHandles) {
+		unwatch();
+	}
 }
 
 function add(target: DamageSource[]) {
