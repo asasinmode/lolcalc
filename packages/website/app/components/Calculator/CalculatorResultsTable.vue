@@ -148,26 +148,34 @@ const damageSourceWatchers = new Map<string, WatchHandle>();
 
 watch(
 	() => props.damageSources.map(source => source.id),
-	(newV, oldV) => handleSourceUpdate('Sources', newV, oldV),
+	(newV, oldV) => handleSourceUpdate(props.damageSources, newV, oldV),
 	{ immediate: true },
 );
 watch(
 	() => props.damageTargets.map(source => source.id),
-	(newV, oldV) => handleSourceUpdate('Targets', newV, oldV),
+	(newV, oldV) => handleSourceUpdate(props.damageTargets, newV, oldV),
 	{ immediate: true },
 );
 
-function handleSourceUpdate(target: 'Sources' | 'Targets', currIds: string[], prevIds: string[] = []) {
+function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: string[] = []) {
 	const addedIds = currIds.filter(id => !prevIds.includes(id));
 	const removedIds = prevIds.filter(id => !currIds.includes(id));
 
 	for (const id of removedIds) {
 		damageSourceWatchers.get(id)?.();
 		damageSourceWatchers.delete(id);
+
+		for (const column of resultColumns.value) {
+			const columnProperty = target === props.damageSources ? 'source' : 'target';
+			if (column[columnProperty]?.id === id) {
+				column[columnProperty] = undefined;
+				// TODO update values
+			}
+		}
 	}
 
 	for (const id of addedIds) {
-		const source = (props[`damage${target}`].find(damageSource => damageSource.id === id))!;
+		const source = (target.find(damageSource => damageSource.id === id))!;
 		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
 			console.log('TODO', source.id, source.champion.value?.id);
 		}));

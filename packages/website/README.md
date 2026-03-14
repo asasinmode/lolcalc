@@ -58,6 +58,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] add all of champion's things to damage results
   - [ ] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
+  - [ ] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
   - [ ] source vs target column headers
   - [ ] unique sections, basic attack, item or ability
   - [ ] damage type row, use the actual calculated value in the cells
