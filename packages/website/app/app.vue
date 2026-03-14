@@ -22,19 +22,25 @@ const { _component: RuneSelect } = useRuneSelect();
 _setupGlobalKeyModifiers();
 
 // TMP as unknown as..., can't put it in v-model or it doesn't build atm
-const damageSources = ref<DamageSource<any>[]>([
-	// markRaw(new DamageSource(useId())),
-	markRaw(new DamageSource(useId(), { champion: useChampions().Aatrox })),
-	markRaw(new DamageSource(useId(), { champion: useChampions().Ambessa })),
-	markRaw(new DamageSource(useId(), { champion: useChampions().Annie })),
-	markRaw(new DamageSource(useId(), { champion: useChampions().AurelionSol })),
-]) as unknown as DamageSource[];
-const damageTargets = ref<DamageSource<any>[]>([
-	// markRaw(new DamageSource(useId())),
-	markRaw(new DamageSource(useId(), { champion: useChampions().Zaahen })),
-	markRaw(new DamageSource(useId(), { champion: useChampions().Zed })),
-	markRaw(new DamageSource(useId(), { champion: useChampions().Zac })),
-]) as unknown as DamageSource[];
+const damageSources = ref<DamageSource<any>[]>(import.meta.dev
+	? [
+			markRaw(new DamageSource(useId(), { champion: useChampions().Aatrox })),
+			markRaw(new DamageSource(useId(), { champion: useChampions().Ambessa })),
+			markRaw(new DamageSource(useId(), { champion: useChampions().Annie })),
+			markRaw(new DamageSource(useId(), { champion: useChampions().AurelionSol })),
+		]
+	: [
+			markRaw(new DamageSource(useId())),
+		],
+) as unknown as DamageSource[];
+const damageTargets = ref<DamageSource<any>[]>(import.meta.dev
+	? [
+			markRaw(new DamageSource(useId(), { champion: useChampions().Zaahen })),
+			markRaw(new DamageSource(useId(), { champion: useChampions().Zed })),
+			markRaw(new DamageSource(useId(), { champion: useChampions().Zac })),
+		]
+	: [markRaw(new DamageSource(useId()))],
+) as unknown as DamageSource[];
 
 const showResults = computed(() => (damageSources as unknown as Ref<DamageSource[]>).value.some(
 	source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id),
@@ -67,27 +73,30 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		],
 	},
 ]);
-const tableResultColumns = ref<IDamageResultTableColumn[]>([
-	{
-		id: useId(),
-		source: (damageSources as unknown as Ref).value[0],
-		target: (damageTargets as unknown as Ref).value[0],
-	},
-	{
-		id: useId(),
-		source: (damageSources as unknown as Ref).value[1],
-		target: (damageTargets as unknown as Ref).value[1],
-	},
-	{
-		id: useId(),
-		source: (damageSources as unknown as Ref).value[2],
-		target: (damageTargets as unknown as Ref).value[2],
-	},
-	{
-		id: useId(),
-		source: (damageSources as unknown as Ref).value[3],
-	},
-]);
+const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
+	? [
+			{
+				id: useId(),
+				source: (damageSources as unknown as Ref).value[0],
+				target: (damageTargets as unknown as Ref).value[0],
+			},
+			{
+				id: useId(),
+				source: (damageSources as unknown as Ref).value[1],
+				target: (damageTargets as unknown as Ref).value[1],
+			},
+			{
+				id: useId(),
+				source: (damageSources as unknown as Ref).value[2],
+				target: (damageTargets as unknown as Ref).value[2],
+			},
+			{
+				id: useId(),
+				source: (damageSources as unknown as Ref).value[3],
+			},
+		]
+	: [],
+);
 </script>
 
 <template>
