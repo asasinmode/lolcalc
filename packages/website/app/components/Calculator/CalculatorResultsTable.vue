@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { WatchHandle } from 'vue';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 const props = defineProps<{
@@ -131,6 +132,7 @@ async function addResultsSection(event: SubmitEvent) {
 
 	const section: IDamageResultTableSection = {
 		id: option.id,
+		championId: champion.id,
 		name: option.name,
 		image: option.image,
 		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, id: variable })),
@@ -145,6 +147,43 @@ function removeDamageSection(index: number) {
 	const [section] = resultSections.value.splice(index, 1);
 	computedResults.value.delete(section!.id);
 }
+
+const damageSourceWatchers = new Map<string, WatchHandle>();
+
+watch(
+	() => props.damageSources.map(source => source.id),
+	(newV, oldV) => handleSourceUpdate('Sources', newV, oldV),
+	{ immediate: true },
+);
+watch(
+	() => props.damageTargets.map(source => source.id),
+	(newV, oldV) => handleSourceUpdate('Targets', newV, oldV),
+	{ immediate: true },
+);
+
+function handleSourceUpdate(target: 'Sources' | 'Targets', currIds: string[], prevIds: string[] = []) {
+	const addedIds = currIds.filter(id => !prevIds.includes(id));
+	const removedIds = prevIds.filter(id => !currIds.includes(id));
+
+	// TODO figure out watching when source's champion changes, columns should probably be removed?
+	for (const id of removedIds) {
+		console.log('unwatching', id);
+		damageSourceWatchers.get(id)?.();
+		damageSourceWatchers.delete(id);
+	}
+	for (const id of addedIds) {
+		const source = (props[`damage${target}`].find(damageSource => damageSource.id === id))!;
+		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
+			console.log('TODO', source.id, source.champion.value?.id);
+		}));
+	}
+}
+
+onBeforeUnmount(() => {
+	for (const unwatch of damageSourceWatchers.values()) {
+		unwatch();
+	}
+});
 </script>
 
 <template>
@@ -167,7 +206,7 @@ function removeDamageSection(index: number) {
 							required
 						>
 							<img
-								v-if="column.sourceId"
+								v-if="damageSources.find(source => source.id === column.sourceId)"
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${damageSources.find(source => source.id === column.sourceId)!.listedChampion.value!.image}`"
 								loading="lazy"
 								width="128"
@@ -191,7 +230,7 @@ function removeDamageSection(index: number) {
 							clearable
 						>
 							<img
-								v-if="column.targetId"
+								v-if="column.targetId && damageTargets.find(source => source.id === column.targetId)"
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${damageTargets.find(source => source.id === column.targetId)!.listedChampion.value!.image}`"
 								loading="lazy"
 								width="128"

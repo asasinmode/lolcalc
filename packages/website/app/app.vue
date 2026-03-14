@@ -45,6 +45,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'basicAttack',
 		name: 'basic attack',
+		championId: 'all',
 		image: 'assets/ux/deathrecap/autoattack.png',
 		rows: [
 			{
@@ -116,6 +117,7 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>([
 <style>
 @layer components {
 	:root {
+		/* bg color of the 'plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png' */
 		--placeholder-champion-bg-clr: #020a13;
 	}
 

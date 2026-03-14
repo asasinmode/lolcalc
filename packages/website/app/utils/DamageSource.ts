@@ -129,7 +129,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 			this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
 			this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
-		}, { flush: 'post' });
+		});
 
 		watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
 			if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
@@ -142,7 +142,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			} else {
 				this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
 			}
-		}, { flush: 'post' });
+		});
 	}
 
 	clone(id?: string, overrides: Partial<IOverrides> = {}): DamageSource<Id> {
@@ -169,6 +169,25 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			// TODO might be an infinite loop not sure how it's going to work
 			stats: this.stats.value.stats.total,
 		};
+	}
+
+	getWatchable(): MaybeRefOrGetter[] {
+		return [
+			this.champion,
+			this.level,
+			() => this.items.value.map(item => item?.id).join('-'),
+			() => this.runes.value.paths.primary,
+			() => this.runes.value.paths.secondary,
+			() => this.runes.value.paths.primarySlots.join('-').concat(this.runes.value.paths.secondarySlots.join('-')),
+			() => Object.values(this.runes.value.shards).join('-'),
+			this.currentHealth,
+			this.currentAbilityResource,
+			() => Object.values(this.abilityLevels.value).join('-'),
+			() => Object.values(this.abilityVariants.value).join('-'),
+			this.roleQuest,
+			() => this.dragonStacks.value.join('-'),
+			this.dragonSoul,
+		];
 	}
 
 	// TODO role quest handle boots?
