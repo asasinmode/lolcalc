@@ -958,7 +958,6 @@ defineExpose({ el });
 		<button
 			title="expand"
 			class="pretend-ui-button"
-			:disabled="!value.anythingFilled.value"
 			@click="toggleExpanded"
 		>
 			<span class="sr-only">expand</span>

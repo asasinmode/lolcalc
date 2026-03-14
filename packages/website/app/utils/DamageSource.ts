@@ -76,7 +76,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	roleQuest: Ref<IChampionRole | undefined>;
 
 	anythingFilled = computed(() => {
-		return Boolean(this.listedChampion.value || this.items.value.length || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
+		return Boolean(this.listedChampion.value || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
 	});
 
 	internalData: Ref<Id extends IInternalDataSetupChampions
@@ -108,7 +108,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.stats.total.mana ?? 0));
 		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...overrides.abilityLevels });
 		this.abilityVariants = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...overrides.abilityVariants });
-		this.dragonStacks = ref(overrides.dragonStacks ?? []);
+		this.dragonStacks = ref(overrides.dragonStacks ?? Array.from({ length: 4 }));
 		this.dragonSoul = ref(overrides.dragonSoul);
 		this.roleQuest = ref(overrides.roleQuest);
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
