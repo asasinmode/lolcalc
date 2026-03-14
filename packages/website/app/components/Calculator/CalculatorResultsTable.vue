@@ -216,7 +216,11 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 </script>
 
 <template>
-	<table id="calculator-results-table" :inert="!showResults">
+	<table
+		id="calculator-results-table"
+		:inert="!showResults"
+		:aria-busy="resultColumns.some(column => column.source?.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id)"
+	>
 		<caption>
 			comparison table
 		</caption>
