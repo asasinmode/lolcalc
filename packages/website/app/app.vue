@@ -70,22 +70,22 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 const tableResultColumns = ref<IDamageResultTableColumn[]>([
 	{
 		id: useId(),
-		sourceId: 'v-0',
-		targetId: 'v-4',
+		source: (damageSources as unknown as Ref).value[0],
+		target: (damageTargets as unknown as Ref).value[0],
 	},
 	{
 		id: useId(),
-		sourceId: 'v-1',
-		targetId: 'v-5',
+		source: (damageSources as unknown as Ref).value[1],
+		target: (damageTargets as unknown as Ref).value[1],
 	},
 	{
 		id: useId(),
-		sourceId: 'v-2',
-		targetId: 'v-6',
+		source: (damageSources as unknown as Ref).value[2],
+		target: (damageTargets as unknown as Ref).value[2],
 	},
 	{
 		id: useId(),
-		sourceId: 'v-3',
+		source: (damageSources as unknown as Ref).value[3],
 	},
 ]);
 </script>

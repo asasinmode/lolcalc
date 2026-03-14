@@ -62,17 +62,13 @@ interface IComputedSectionRowColumn {
 	value: string | number;
 }
 
-const computedResults = ref(new Map<string, IComputedSection>());
-
-for (const section of resultSections.value) {
-	addComputedSection(section.id);
-}
+const computedResults = ref(new Map<string, IComputedSection>(resultSections.value.map(section => [section.id, computeSection(section)] as [string, IComputedSection])));
 
 function addComputedSection(sectionId: string) {
 	computedResults.value.set(sectionId, computeSection(resultSections.value.find(section => section.id === sectionId)!));
 }
 
-function computeSection(section: IDamageResultTableSection) {
+function computeSection(section: IDamageResultTableSection): IComputedSection {
 	return {
 		sectionId: section.id,
 		rows: new Map(section.rows.map(row => [row.id, computeSectionRow(section, row)])),
@@ -98,8 +94,8 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 function addResultsColumn() {
 	const column: IDamageResultTableColumn = {
 		id: crypto.randomUUID(),
-		sourceId: columnNewSourceId.value!,
-		targetId: columnNewTargetId.value,
+		source: props.damageSources.find(damageSource => damageSource.id === columnNewSourceId.value!),
+		target: props.damageTargets.find(damageSource => damageSource.id === columnNewTargetId.value),
 	};
 	resultColumns.value.push(column);
 	columnNewSourceId.value = undefined;
@@ -165,12 +161,11 @@ function handleSourceUpdate(target: 'Sources' | 'Targets', currIds: string[], pr
 	const addedIds = currIds.filter(id => !prevIds.includes(id));
 	const removedIds = prevIds.filter(id => !currIds.includes(id));
 
-	// TODO figure out watching when source's champion changes, columns should probably be removed?
 	for (const id of removedIds) {
-		console.log('unwatching', id);
 		damageSourceWatchers.get(id)?.();
 		damageSourceWatchers.delete(id);
 	}
+
 	for (const id of addedIds) {
 		const source = (props[`damage${target}`].find(damageSource => damageSource.id === id))!;
 		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
@@ -200,14 +195,15 @@ onBeforeUnmount(() => {
 					<div>
 						<VSelect
 							:id="`results-table-column-source-${index}`"
-							v-model="resultColumns[index]!.sourceId"
+							:model-value="resultColumns[index]!.source?.id"
 							label="column's damage source"
 							:options="sourceOptions"
 							required
+							@update:model-value="resultColumns[index]!.source = damageSources.find(damageSource => damageSource.id === $event)!"
 						>
 							<img
-								v-if="damageSources.find(source => source.id === column.sourceId)"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${damageSources.find(source => source.id === column.sourceId)!.listedChampion.value!.image}`"
+								v-if="column.source"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.source.listedChampion.value!.image}`"
 								loading="lazy"
 								width="128"
 								height="128"
@@ -224,14 +220,15 @@ onBeforeUnmount(() => {
 						vs
 						<VSelect
 							:id="`results-table-column-target-${index}`"
-							v-model="resultColumns[index]!.targetId"
+							:model-value="resultColumns[index]!.target?.id"
 							label="column's damage target"
 							:options="targetOptions"
 							clearable
+							@update:model-value="resultColumns[index]!.target = damageTargets.find(damageSource => damageSource.id === $event)!"
 						>
 							<img
-								v-if="column.targetId && damageTargets.find(source => source.id === column.targetId)"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${damageTargets.find(source => source.id === column.targetId)!.listedChampion.value!.image}`"
+								v-if="column.target"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.target.listedChampion.value!.image}`"
 								loading="lazy"
 								width="128"
 								height="128"
