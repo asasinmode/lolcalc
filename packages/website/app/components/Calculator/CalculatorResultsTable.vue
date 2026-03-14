@@ -108,10 +108,58 @@ function damageSectionRowCellValue(
 					damage type
 				</th>
 				<th v-for="(column, index) in resultColumns" :key="column.id" width="100px">
-					{{ column.sourceId }} vs {{ column.targetId }}
-					<button @click="removeResultsColumn(index)">
-						remove
-					</button>
+					<div>
+						<VSelect
+							:id="`results-table-column-source-${index}`"
+							v-model="resultColumns[index]!.sourceId"
+							label="column's damage source"
+							:options="sourceOptions"
+							required
+						>
+							<img
+								v-if="column.sourceId"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${damageSources.find(source => source.id === column.sourceId)!.listedChampion.value!.image}`"
+								loading="lazy"
+								width="128"
+								height="128"
+								style="--focus-brightness: 1.2"
+							>
+							<img
+								v-else
+								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+								width="256"
+								height="256"
+								style="--focus-brightness: 1.5"
+							>
+						</VSelect>
+						vs
+						<VSelect
+							:id="`results-table-column-target-${index}`"
+							v-model="resultColumns[index]!.targetId"
+							label="column's damage target"
+							:options="targetOptions"
+							clearable
+						>
+							<img
+								v-if="column.targetId"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${damageTargets.find(source => source.id === column.targetId)!.listedChampion.value!.image}`"
+								loading="lazy"
+								width="128"
+								height="128"
+								style="--focus-brightness: 1.2"
+							>
+							<img
+								v-else
+								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+								width="256"
+								height="256"
+								style="--focus-brightness: 1.5"
+							>
+						</VSelect>
+						<button class="pretend-ui-button" @click="removeResultsColumn(index)">
+							remove
+						</button>
+					</div>
 				</th>
 				<td width="100px">
 					<form @submit.prevent="addResultsColumn">
@@ -188,7 +236,7 @@ function damageSectionRowCellValue(
 				<th scope="row">
 					{{ row.name }}
 				</th>
-				<td v-for="i in (resultColumns.length + 1)" :key="`${section.id}-total-${resultColumns[i - 1]?.id || 'new'}`">
+				<td v-for="i in (resultColumns.length + 1)" :key="`${section.id}-${row.property}-${resultColumns[i - 1]?.id || 'new'}`">
 					{{ damageSectionRowCellValue(section, row, i - 1) }}
 				</td>
 			</tr>
@@ -249,7 +297,8 @@ function damageSectionRowCellValue(
 				--at-apply: 'align-bottom text-sm';
 			}
 
-			> form {
+			> form,
+			> div {
 				--at-apply: 'grid grid-cols-[min-content_auto] grid-rows-[1fr_auto_1fr] grid-flow-col text-center';
 
 				> .v-select {

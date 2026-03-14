@@ -23,22 +23,18 @@ _setupGlobalKeyModifiers();
 
 // TMP as unknown as..., can't put it in v-model or it doesn't build atm
 const damageSources = ref<DamageSource<any>[]>([
+	// markRaw(new DamageSource(useId())),
 	markRaw(new DamageSource(useId(), { champion: useChampions().Aatrox })),
 	markRaw(new DamageSource(useId(), { champion: useChampions().Ambessa })),
 	markRaw(new DamageSource(useId(), { champion: useChampions().Annie })),
 	markRaw(new DamageSource(useId(), { champion: useChampions().AurelionSol })),
 ]) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource<any>[]>([
+	// markRaw(new DamageSource(useId())),
 	markRaw(new DamageSource(useId(), { champion: useChampions().Zaahen })),
 	markRaw(new DamageSource(useId(), { champion: useChampions().Zed })),
 	markRaw(new DamageSource(useId(), { champion: useChampions().Zac })),
 ]) as unknown as DamageSource[];
-
-// TMP replace the above with this for build/push
-// const damageSources = ref<DamageSource<any>[]>([
-// 	markRaw(new DamageSource(useId())),
-// ]) as unknown as DamageSource[];
-// const damageTargets = ref<DamageSource<any>[]>([markRaw(new DamageSource(useId()))]) as unknown as DamageSource[];
 
 const showResults = computed(() => (damageSources as unknown as Ref<DamageSource[]>).value.some(
 	source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id),
@@ -70,7 +66,27 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		],
 	},
 ]);
-const tableResultColumns = ref<IDamageResultTableColumn[]>([]);
+const tableResultColumns = ref<IDamageResultTableColumn[]>([
+	{
+		id: useId(),
+		sourceId: 'v-0',
+		targetId: 'v-4',
+	},
+	{
+		id: useId(),
+		sourceId: 'v-1',
+		targetId: 'v-5',
+	},
+	{
+		id: useId(),
+		sourceId: 'v-2',
+		targetId: 'v-6',
+	},
+	{
+		id: useId(),
+		sourceId: 'v-3',
+	},
+]);
 </script>
 
 <template>
