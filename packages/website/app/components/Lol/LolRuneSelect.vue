@@ -221,6 +221,7 @@ function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredR
 function leaveTooltipableElement() {
 	runeDescriptionTooltip.value?.hidePopover();
 	runeDescriptionTooltipAnchor?.removeEventListener('mouseleave', leaveTooltipableElement);
+	window.removeEventListener('resize', updateTooltipPosition);
 	runeDescriptionTooltipAnchor = undefined;
 }
 
