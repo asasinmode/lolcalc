@@ -58,6 +58,7 @@ interface IComputedSectionRow {
 
 interface IComputedSectionRowColumn {
 	columnId: string;
+	irrelevant?: boolean;
 	numberValue?: number;
 	value: string | number;
 }
@@ -83,12 +84,28 @@ function computeSectionRow(section: IDamageResultTableSection, row: IDamageResul
 }
 
 function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number], column: IDamageResultTableColumn): IComputedSectionRowColumn {
-	const value = Math.round(Math.random() * 500);
-	return {
+	const rv: IComputedSectionRowColumn = {
 		columnId: column.id,
-		numberValue: value,
-		value,
+		irrelevant: true,
+		value: '-',
 	};
+
+	if (!column.source?.listedChampion.value) {
+		rv.value = '-';
+	} else if (column.source.listedChampion.value.id !== column.source.champion.value?.id) {
+		rv.value = 'loading...';
+	} else if (
+		(section.championId !== 'all' && column.source.champion.value?.id !== section.championId)
+		|| (column.source.champion.value?.id === 'Zeri' && section.id === 'basicAttack')
+	) {
+		rv.value = 'n/a';
+	} else {
+		rv.value = Math.round(Math.random() * 500);
+		rv.numberValue = rv.value;
+		rv.irrelevant = false;
+	}
+
+	return rv;
 }
 
 function addResultsColumn() {
@@ -187,6 +204,15 @@ onBeforeUnmount(() => {
 		unwatch();
 	}
 });
+
+function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number]) {
+	return resultColumns.value.map((column) => {
+		return {
+			key: `${section.id}-${row.id}-${column.id || 'new'}`,
+			computedRow: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
+		};
+	});
+}
 </script>
 
 <template>
@@ -330,12 +356,15 @@ onBeforeUnmount(() => {
 				<th scope="row">
 					{{ row.name }}
 				</th>
-				<td v-for="i in (resultColumns.length + 1)" :key="`${section.id}-${row.id}-${resultColumns[i - 1]?.id || 'new'}`">
-					{{ resultColumns[i - 1]?.id ? computedResults.get(section.id)!.rows.get(row.id)!.columns.get(resultColumns[i - 1]!.id)!.value : '-' }}
+				<td v-for="cell in sectionRowCells(section, row)" :key="cell.key" :class="{ irrelevant: cell.computedRow.irrelevant }">
+					{{ cell.computedRow.value }}
+				</td>
+				<td>
+					-
 				</td>
 			</tr>
 		</tbody>
-		<tbody v-show="damageSectionOptions.length" id="results-table-new-section">
+		<tfoot v-show="damageSectionOptions.length">
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
 					<form @submit.prevent="addResultsSection">
@@ -353,7 +382,7 @@ onBeforeUnmount(() => {
 					</form>
 				</th>
 			</tr>
-		</tbody>
+		</tfoot>
 	</table>
 </template>
 
@@ -440,9 +469,15 @@ onBeforeUnmount(() => {
 				}
 			}
 
-			&:nth-child(n + 2) {
+			&:not(:first-child) {
 				> th {
 					--at-apply: 'ps-6';
+				}
+
+				> td {
+					&.irrelevant {
+						--at-apply: 'text-neutral-400';
+					}
 				}
 			}
 
@@ -451,7 +486,7 @@ onBeforeUnmount(() => {
 			}
 		}
 
-		> #results-table-new-section {
+		> tfoot {
 			form {
 				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
 
