@@ -49,19 +49,19 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		rows: [
 			{
 				name: 'total',
-				property: 'total',
+				id: 'total',
 			},
 			{
 				name: 'physical damage',
-				property: 'physicalDamage',
+				id: 'physicalDamage',
 			},
 			{
 				name: 'magic damage',
-				property: 'magicDamage',
+				id: 'magicDamage',
 			},
 			{
 				name: 'true damage',
-				property: 'trueDamage',
+				id: 'trueDamage',
 			},
 		],
 	},

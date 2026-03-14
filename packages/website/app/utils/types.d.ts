@@ -51,7 +51,8 @@ export interface IDamageResultTableSection {
 	image: string;
 	rows: {
 		name: string;
-		property: string;
+		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
+		id: string;
 	}[];
 }
 

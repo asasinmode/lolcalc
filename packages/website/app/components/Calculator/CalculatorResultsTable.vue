@@ -25,20 +25,6 @@ function columnOptions(from: DamageSource[]): [string, string][] {
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
 
-function addResultsColumn() {
-	resultColumns.value.push({
-		id: crypto.randomUUID(),
-		sourceId: columnNewSourceId.value!,
-		targetId: columnNewTargetId.value,
-	});
-	columnNewSourceId.value = undefined;
-	columnNewTargetId.value = undefined;
-}
-
-function removeResultsColumn(index: number) {
-	resultColumns.value.splice(index, 1);
-}
-
 const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
 	.flatMap(source => Object.entries(source.champion.value!.abilities).map(([abilityKey, ability]) => {
@@ -59,6 +45,69 @@ const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => !resultSections.value.some(section => section.id === source.id)),
 );
 
+interface IComputedSection {
+	sectionId: string;
+	rows: Map<string, IComputedSectionRow>;
+}
+
+interface IComputedSectionRow {
+	rowId: string;
+	columns: Map<string, IComputedSectionRowColumn>;
+}
+
+interface IComputedSectionRowColumn {
+	columnId: string;
+	numberValue?: number;
+	value: string | number;
+}
+
+const computedResults = ref(new Map<string, IComputedSection>());
+
+for (const section of resultSections.value) {
+	addComputedSection(section.id);
+}
+
+function addComputedSection(sectionId: string) {
+	computedResults.value.set(sectionId, computeSection(resultSections.value.find(section => section.id === sectionId)!));
+}
+
+function computeSection(section: IDamageResultTableSection) {
+	return {
+		sectionId: section.id,
+		rows: new Map(section.rows.map(row => [row.id, computeSectionRow(section, row)])),
+	};
+}
+
+function computeSectionRow(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number]): IComputedSectionRow {
+	return {
+		rowId: row.id,
+		columns: new Map(resultColumns.value.map(column => [column.id, computeSectionRowColumn(section, row, column)])),
+	};
+}
+
+function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number], column: IDamageResultTableColumn): IComputedSectionRowColumn {
+	const value = Math.round(Math.random() * 500);
+	return {
+		columnId: column.id,
+		numberValue: value,
+		value,
+	};
+}
+
+function addResultsColumn() {
+	resultColumns.value.push({
+		id: crypto.randomUUID(),
+		sourceId: columnNewSourceId.value!,
+		targetId: columnNewTargetId.value,
+	});
+	columnNewSourceId.value = undefined;
+	columnNewTargetId.value = undefined;
+}
+
+function removeResultsColumn(index: number) {
+	resultColumns.value.splice(index, 1);
+}
+
 async function addResultsSection(event: SubmitEvent) {
 	const rawSectionIndex = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex');
 
@@ -69,7 +118,7 @@ async function addResultsSection(event: SubmitEvent) {
 		id: option.id,
 		name: option.name,
 		image: option.image,
-		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, property: variable })),
+		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, id: variable })),
 	});
 
 	(event.target as HTMLFormElement).reset();
@@ -80,20 +129,6 @@ function removeDamageSection(section: IDamageResultTableSection) {
 	if (~index) {
 		resultSections.value.splice(index, 1);
 	}
-}
-
-function damageSectionRowCellValue(
-	_section: IDamageResultTableSection,
-	_row: IDamageResultTableSection['rows'][number],
-	columnIndex: number,
-) {
-	const column = resultColumns.value[columnIndex];
-	if (!column?.sourceId) {
-		return '-';
-	}
-
-	// TODO
-	return Math.round(Math.random() * 500);
 }
 </script>
 
@@ -232,12 +267,12 @@ function damageSectionRowCellValue(
 					</button>
 				</th>
 			</tr>
-			<tr v-for="row in section.rows" :key="`${section.id}-${row.name}`">
+			<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
 				<th scope="row">
 					{{ row.name }}
 				</th>
-				<td v-for="i in (resultColumns.length + 1)" :key="`${section.id}-${row.property}-${resultColumns[i - 1]?.id || 'new'}`">
-					{{ damageSectionRowCellValue(section, row, i - 1) }}
+				<td v-for="i in (resultColumns.length + 1)" :key="`${section.id}-${row.id}-${resultColumns[i - 1]?.id || 'new'}`">
+					{{ resultColumns[i - 1]?.id ? computedResults.get(section.id)!.rows.get(row.id)!.columns.get(resultColumns[i - 1]!.id)!.value : '-' }}
 				</td>
 			</tr>
 		</tbody>
@@ -335,6 +370,14 @@ function damageSectionRowCellValue(
 
 				> th {
 					--at-apply: 'py-1';
+
+					> img {
+						--at-apply: 'inline-block size-6 align-middle';
+					}
+
+					> button {
+						--at-apply: 'float-start me-3';
+					}
 				}
 			}
 
