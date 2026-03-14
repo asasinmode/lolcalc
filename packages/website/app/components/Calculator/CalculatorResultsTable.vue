@@ -186,7 +186,7 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 			const columnProperty = target === props.damageSources ? 'source' : 'target';
 			if (column[columnProperty]?.id === id) {
 				column[columnProperty] = undefined;
-				// TODO update values
+				recalculateColumn(column);
 			}
 		}
 	}
@@ -194,7 +194,10 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 	for (const id of addedIds) {
 		const source = (target.find(damageSource => damageSource.id === id))!;
 		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
-			console.log('TODO', source.id, source.champion.value?.id);
+			const columns = resultColumns.value.filter(column => column.source?.id === source.id || column.target?.id === source.id);
+			for (const column of columns) {
+				recalculateColumn(column);
+			}
 		}));
 	}
 }
@@ -212,6 +215,17 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 			computedRow: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
 		};
 	});
+}
+
+function recalculateColumn(column: IDamageResultTableColumn) {
+	for (const section of resultSections.value) {
+		for (const row of section.rows) {
+			computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
+				column.id,
+				computeSectionRowColumn(section, row, column),
+			);
+		}
+	}
 }
 </script>
 
