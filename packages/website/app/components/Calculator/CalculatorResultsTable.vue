@@ -95,17 +95,32 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 }
 
 function addResultsColumn() {
-	resultColumns.value.push({
+	const column: IDamageResultTableColumn = {
 		id: crypto.randomUUID(),
 		sourceId: columnNewSourceId.value!,
 		targetId: columnNewTargetId.value,
-	});
+	};
+	resultColumns.value.push(column);
 	columnNewSourceId.value = undefined;
 	columnNewTargetId.value = undefined;
+
+	for (const section of computedResults.value.values()) {
+		const resultSection = resultSections.value.find(rSection => rSection.id === section.sectionId)!;
+		for (const row of section.rows.values()) {
+			const resultRow = resultSection.rows.find(rRow => rRow.id === row.rowId)!;
+			row.columns.set(column.id, computeSectionRowColumn(resultSection, resultRow, column));
+		}
+	}
 }
 
 function removeResultsColumn(index: number) {
-	resultColumns.value.splice(index, 1);
+	const [column] = resultColumns.value.splice(index, 1);
+
+	for (const section of computedResults.value.values()) {
+		for (const row of section.rows.values()) {
+			row.columns.delete(column!.id);
+		}
+	}
 }
 
 async function addResultsSection(event: SubmitEvent) {
@@ -114,21 +129,21 @@ async function addResultsSection(event: SubmitEvent) {
 	const option = damageSectionOptions.value[Number.parseInt(rawSectionIndex as string)]!;
 	const champion = await useChampion(option.championId);
 
-	resultSections.value.push({
+	const section: IDamageResultTableSection = {
 		id: option.id,
 		name: option.name,
 		image: option.image,
 		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, id: variable })),
-	});
+	};
 
+	resultSections.value.push(section);
+	addComputedSection(section.id);
 	(event.target as HTMLFormElement).reset();
 }
 
-function removeDamageSection(section: IDamageResultTableSection) {
-	const index = resultSections.value.indexOf(section);
-	if (~index) {
-		resultSections.value.splice(index, 1);
-	}
+function removeDamageSection(index: number) {
+	const [section] = resultSections.value.splice(index, 1);
+	computedResults.value.delete(section!.id);
 }
 </script>
 
@@ -252,7 +267,7 @@ function removeDamageSection(section: IDamageResultTableSection) {
 				</td>
 			</tr>
 		</thead>
-		<tbody v-for="section in resultSections" :key="section.id">
+		<tbody v-for="(section, index) in resultSections" :key="section.id">
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
 					<img
@@ -262,7 +277,7 @@ function removeDamageSection(section: IDamageResultTableSection) {
 						aria-hidden="true"
 					>
 					{{ section.name }}
-					<button v-if="section.id !== 'basicAttack'" class="pretend-ui-button" @click="removeDamageSection(section)">
+					<button v-if="section.id !== 'basicAttack'" class="pretend-ui-button" @click="removeDamageSection(index)">
 						remove
 					</button>
 				</th>
