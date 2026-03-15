@@ -26,6 +26,13 @@ function columnOptions(from: DamageSource[]): [string, string][] {
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
 
+function setColumnChampion(column: IDamageResultTableColumn, damageSources: DamageSource[], championId?: string) {
+	column[damageSources === props.damageSources ? 'source' : 'target'] = championId
+		? damageSources.find(damageSource => damageSource.id === championId)
+		: undefined;
+	recalculateColumn(column);
+}
+
 const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
 	.flatMap(source => Object.entries(source.champion.value!.abilities).map(([abilityKey, ability]) => {
@@ -227,6 +234,30 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 		}
 	}
 }
+
+function cleanupUnused() {
+	for (let i = resultColumns.value.length - 1; i >= 0; i--) {
+		const column = resultColumns.value[i]!;
+		if (!column.source && !column.target) {
+			for (const section of computedResults.value.values()) {
+				for (const row of section.rows.values()) {
+					row.columns.delete(column.id);
+				}
+			}
+			resultColumns.value.splice(i, 1);
+		}
+	}
+
+	for (let i = resultSections.value.length - 1; i >= 0; i--) {
+		const section = resultSections.value[i]!;
+		if (section.championId !== 'all' && !resultColumns.value.some(column =>
+			column.source?.listedChampion.value?.id === section.championId || column.target?.listedChampion.value?.id === section.championId,
+		)) {
+			computedResults.value.delete(section.id);
+			resultSections.value.splice(i, 1);
+		}
+	}
+}
 </script>
 
 <template>
@@ -242,6 +273,9 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 			<tr>
 				<th scope="col" width="240px">
 					damage type
+					<button class="pretend-ui-button" @click="cleanupUnused">
+						cleanup
+					</button>
 				</th>
 				<th v-for="(column, index) in resultColumns" :key="column.id" width="100px">
 					<div>
@@ -251,7 +285,7 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 							label="column's damage source"
 							:options="sourceOptions"
 							required
-							@update:model-value="resultColumns[index]!.source = damageSources.find(damageSource => damageSource.id === $event)!"
+							@update:model-value="setColumnChampion(column, damageSources, $event)"
 						>
 							<img
 								v-if="column.source"
@@ -276,7 +310,7 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 							label="column's damage target"
 							:options="targetOptions"
 							clearable
-							@update:model-value="resultColumns[index]!.target = damageTargets.find(damageSource => damageSource.id === $event)!"
+							@update:model-value="setColumnChampion(column, damageTargets, $event)"
 						>
 							<img
 								v-if="column.target"
@@ -436,6 +470,10 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 
 			&:first-child {
 				--at-apply: 'align-bottom text-sm';
+
+				> button {
+					--at-apply: 'float-end';
+				}
 			}
 
 			> form,
