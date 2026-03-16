@@ -124,6 +124,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] right click to clear ability level/soul/role quest/others
 - [ ] keyboard navigation
   - [ ] show tooltips when navigated to with keyboard
+  - [ ] skip links around busy areas (scoreboard, item shop?)
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)

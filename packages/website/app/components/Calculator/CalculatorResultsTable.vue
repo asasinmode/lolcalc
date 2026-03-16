@@ -303,6 +303,9 @@ function cleanupUnused() {
 					>
 						cleanup
 					</button>
+					<a href="#results-table-section-header-basicAttack" class="skip-link">
+						skip column controls
+					</a>
 				</th>
 				<th v-for="(column, index) in resultColumns" :key="column.id" width="100px">
 					<div>
@@ -413,6 +416,12 @@ function cleanupUnused() {
 							add
 						</button>
 					</form>
+					<a href="#calculator-results" class="skip-link">
+						skip back to results start
+					</a>
+					<a id="calculator-results-table-skip-rows" href="#results-table-row-new-section" class="skip-link">
+						skip result rows
+					</a>
 				</td>
 			</tr>
 		</thead>
@@ -461,11 +470,11 @@ function cleanupUnused() {
 		</template>
 		<tfoot v-show="damageSectionOptions.length">
 			<tr>
-				<th scope="rowgroup" :colspan="resultColumns.length + 2">
+				<td :colspan="resultColumns.length + 2">
 					<form @submit.prevent="addResultsSection">
 						<span> add results section </span>
 						<VSelect
-							id="results-table-row-section"
+							id="results-table-row-new-section"
 							label="section ability"
 							name="sectionOptionIndex"
 							:options="damageSectionOptions.map((option, index) => [index, option.name])"
@@ -475,7 +484,10 @@ function cleanupUnused() {
 							add
 						</button>
 					</form>
-				</th>
+					<a href="#calculator-results-table-skip-rows" class="skip-link">
+						skip back to column headers
+					</a>
+				</td>
 			</tr>
 		</tfoot>
 	</table>
@@ -512,11 +524,15 @@ function cleanupUnused() {
 			--at-apply: 'text-lg';
 
 			&:first-child {
-				--at-apply: 'align-bottom text-sm';
+				--at-apply: 'align-bottom text-sm relative';
 
 				> button {
 					--at-apply: 'float-end';
 				}
+			}
+
+			&:last-child {
+				--at-apply: 'relative';
 			}
 
 			> form,
@@ -592,23 +608,27 @@ function cleanupUnused() {
 		}
 
 		> tfoot {
-			form {
-				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
+			> tr > td {
+				--at-apply: 'relative';
 
-				> span {
-					--at-apply: 'col-span-full';
-				}
+				form {
+					--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
 
-				> div {
-					--at-apply: 'w-64';
-
-					> select {
-						--at-apply: 'inset-unset static w-full h-full';
+					> span {
+						--at-apply: 'col-span-full';
 					}
-				}
 
-				> button {
-					--at-apply: 'w-fit whitespace-nowrap';
+					> div {
+						--at-apply: 'w-64';
+
+						> select {
+							--at-apply: 'inset-unset static w-full h-full';
+						}
+					}
+
+					> button {
+						--at-apply: 'w-fit whitespace-nowrap';
+					}
 				}
 			}
 		}

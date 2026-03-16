@@ -96,7 +96,8 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 			},
 		]
 	: [],
-);
+	// TMP
+) as unknown as IDamageResultTableColumn[];
 </script>
 
 <template>
@@ -105,7 +106,10 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 	</header>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
-		<section id="calculator-results">
+		<section>
+			<h2 id="calculator-results">
+				results
+			</h2>
 			<p v-show="!showResults">
 				configure a damage source champion to view results
 			</p>
@@ -131,11 +135,13 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 	}
 
 	#calculator-results {
-		p:first-child {
-			--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
-			-webkit-text-stroke: black 0.2em;
-			paint-order: stroke fill;
-		}
+		--at-apply: 'mx-auto text-center';
+	}
+
+	#calculator-results + p {
+		--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
+		-webkit-text-stroke: black 0.2em;
+		paint-order: stroke fill;
 	}
 }
 </style>
