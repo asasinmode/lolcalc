@@ -144,6 +144,17 @@ function removeResultsColumn(index: number) {
 	}
 }
 
+const expandedSections = ref<string[]>(resultSections.value.map(section => section.id));
+
+function toggleResultsSection(sectionId: string) {
+	const index = expandedSections.value.indexOf(sectionId);
+	if (~index) {
+		expandedSections.value.splice(index, 1);
+	} else {
+		expandedSections.value.push(sectionId);
+	}
+}
+
 async function addResultsSection(event: SubmitEvent) {
 	const rawSectionIndex = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex');
 
@@ -159,6 +170,7 @@ async function addResultsSection(event: SubmitEvent) {
 	};
 
 	resultSections.value.push(section);
+	expandedSections.value.push(section.id);
 	addComputedSection(section.id);
 	(event.target as HTMLFormElement).reset();
 }
@@ -389,33 +401,49 @@ function cleanupUnused() {
 				</td>
 			</tr>
 		</thead>
-		<tbody v-for="(section, index) in resultSections" :key="section.id">
-			<tr>
-				<th scope="rowgroup" :colspan="resultColumns.length + 2">
-					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
-						width="64"
-						height="64"
-						aria-hidden="true"
-					>
-					{{ section.name }}
-					<button v-if="section.id !== 'basicAttack'" class="pretend-ui-button" @click="removeDamageSection(index)">
-						remove
-					</button>
-				</th>
-			</tr>
-			<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
-				<th scope="row">
-					{{ row.name }}
-				</th>
-				<td v-for="cell in sectionRowCells(section, row)" :key="cell.key" :class="{ irrelevant: cell.computedRow.irrelevant }">
-					{{ cell.computedRow.value }}
-				</td>
-				<td>
-					-
-				</td>
-			</tr>
-		</tbody>
+		<template v-for="(section, index) in resultSections" :key="section.id">
+			<tbody>
+				<tr>
+					<th :id="`results-table-section-header-${section.id}`" scope="rowgroup" :colspan="resultColumns.length + 2">
+						<img
+							:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
+							width="64"
+							height="64"
+							aria-hidden="true"
+						>
+						{{ section.name }}
+						<button
+							class="pretend-ui-button"
+							:aria-expanded="expandedSections.includes(section.id)"
+							:aria-controls="`results-table-section-${section.id}`"
+							@click="toggleResultsSection(section.id)"
+						>
+							{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
+						</button>
+						<button v-if="section.id !== 'basicAttack'" class="pretend-ui-button" @click="removeDamageSection(index)">
+							remove
+						</button>
+					</th>
+				</tr>
+			</tbody>
+			<tbody
+				:id="`results-table-section-${section.id}`"
+				:aria-labelledby="`results-table-section-header-${section.id}`"
+				:hidden="!expandedSections.includes(section.id)"
+			>
+				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
+					<th scope="row">
+						{{ row.name }}
+					</th>
+					<td v-for="cell in sectionRowCells(section, row)" :key="cell.key" :class="{ irrelevant: cell.computedRow.irrelevant }">
+						{{ cell.computedRow.value }}
+					</td>
+					<td>
+						-
+					</td>
+				</tr>
+			</tbody>
+		</template>
 		<tfoot v-show="damageSectionOptions.length">
 			<tr>
 				<th scope="rowgroup" :colspan="resultColumns.length + 2">
@@ -508,24 +536,30 @@ function cleanupUnused() {
 			}
 		}
 
-		> tbody > tr {
-			&:first-child {
-				--at-apply: 'text-lg font-medium bg-[--ui-button-border-clr]/10 whitespace-nowrap';
+		> tbody {
+			&:not([aria-labelledby]) {
+				> tr {
+					--at-apply: 'text-lg font-medium bg-[--ui-button-border-clr]/10 whitespace-nowrap';
 
-				> th {
-					--at-apply: 'py-1';
+					> th {
+						--at-apply: 'py-1';
 
-					> img {
-						--at-apply: 'inline-block size-6 align-middle';
-					}
+						> img {
+							--at-apply: 'inline-block size-6 align-middle';
+						}
 
-					> button {
-						--at-apply: 'float-start me-3';
+						> button[aria-expanded] {
+							--at-apply: 'float-start me-3';
+						}
+
+						> button:not([aria-expanded]) {
+							--at-apply: 'float-end ms-3';
+						}
 					}
 				}
 			}
 
-			&:not(:first-child) {
+			&[aria-labelledby] > tr {
 				> th {
 					--at-apply: 'ps-6';
 				}
@@ -535,10 +569,10 @@ function cleanupUnused() {
 						--at-apply: 'text-neutral-400';
 					}
 				}
-			}
 
-			&:nth-child(2n + 3) {
-				--at-apply: 'bg-neutral-400/10';
+				&:nth-child(2n + 3) {
+					--at-apply: 'bg-neutral-400/10';
+				}
 			}
 		}
 

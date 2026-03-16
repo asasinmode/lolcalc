@@ -53,6 +53,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] volibear
       - [ ] zaahen
       - [ ] kai'sa
+      - [ ] ornn
       - [ ] kraken slayer
     - [ ] confirm removing/clearing row
     - [ ] add all of champion's things to damage results
@@ -72,7 +73,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
   - [ ] ability rows not implemented yet, coming soon
   - [ ] per damage results row unknown variables, add exclamation that results are incorrect
-  - [ ] aphelios ability variants
+  - [ ] compare stats section
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
@@ -144,6 +145,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`?
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
+  - [ ] aphelios q variants in results?
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
