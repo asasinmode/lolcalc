@@ -74,6 +74,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] ability rows not implemented yet, coming soon
   - [ ] per damage results row unknown variables, add exclamation that results are incorrect
   - [ ] compare stats section
+  - [ ] moving columns left/right
+  - [ ] moving sections up/down
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout

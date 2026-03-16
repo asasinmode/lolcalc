@@ -247,27 +247,38 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 	}
 }
 
+const cleanableColumnsSections = computed<[
+	[index: number, column: IDamageResultTableColumn][],
+	[index: number, section: IDamageResultTableSection][],
+]>(() => {
+	const columns = (resultColumns.value
+		.map((column, index) => [index, column]) as [number, IDamageResultTableColumn][])
+		.filter(([, column]) => !column.source && !column.target);
+
+	const sections = (resultSections.value
+		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
+		.filter(([,section]) => section.championId !== 'all' && !resultColumns.value.some(column =>
+			column.source?.listedChampion.value?.id === section.championId || column.target?.listedChampion.value?.id === section.championId,
+		));
+
+	return [columns, sections];
+});
+
 function cleanupUnused() {
-	for (let i = resultColumns.value.length - 1; i >= 0; i--) {
-		const column = resultColumns.value[i]!;
-		if (!column.source && !column.target) {
-			for (const section of computedResults.value.values()) {
-				for (const row of section.rows.values()) {
-					row.columns.delete(column.id);
-				}
+	for (let i = cleanableColumnsSections.value[0].length - 1; i >= 0; i--) {
+		const [columnIndex, column] = cleanableColumnsSections.value[0][i]!;
+		for (const section of computedResults.value.values()) {
+			for (const row of section.rows.values()) {
+				row.columns.delete(column.id);
 			}
-			resultColumns.value.splice(i, 1);
 		}
+		resultColumns.value.splice(columnIndex, 1);
 	}
 
-	for (let i = resultSections.value.length - 1; i >= 0; i--) {
-		const section = resultSections.value[i]!;
-		if (section.championId !== 'all' && !resultColumns.value.some(column =>
-			column.source?.listedChampion.value?.id === section.championId || column.target?.listedChampion.value?.id === section.championId,
-		)) {
-			computedResults.value.delete(section.id);
-			resultSections.value.splice(i, 1);
-		}
+	for (let i = cleanableColumnsSections.value[1].length - 1; i >= 0; i--) {
+		const [sectionIndex, section] = cleanableColumnsSections.value[1][i]!;
+		computedResults.value.delete(section.id);
+		resultSections.value.splice(sectionIndex, 1);
 	}
 }
 </script>
@@ -285,7 +296,11 @@ function cleanupUnused() {
 			<tr>
 				<th scope="col" width="240px">
 					damage type
-					<button class="pretend-ui-button" @click="cleanupUnused">
+					<button
+						class="pretend-ui-button"
+						:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
+						@click="cleanupUnused"
+					>
 						cleanup
 					</button>
 				</th>
