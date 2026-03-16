@@ -11,7 +11,10 @@ const props = defineProps<{
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 
+const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
+
+let highlightedColumnId: string | undefined;
 
 const columnNewSourceId = ref<string>();
 const columnNewTargetId = ref<string>();
@@ -281,6 +284,18 @@ function cleanupUnused() {
 		resultSections.value.splice(sectionIndex, 1);
 	}
 }
+
+function highlightColumnSources(column: IDamageResultTableColumn) {
+	highlightedColumnId = column.id;
+	column.source && highlightedDamageSources.add(column.source.id);
+	column.target && highlightedDamageSources.add(column.target.id);
+}
+
+function lowlightColumnSources(column: IDamageResultTableColumn) {
+	highlightedColumnId = undefined;
+	column.source && highlightedDamageSources.remove(column.source.id);
+	column.target && highlightedDamageSources.remove(column.target.id);
+}
 </script>
 
 <template>
@@ -307,7 +322,13 @@ function cleanupUnused() {
 						skip column controls
 					</a>
 				</th>
-				<th v-for="(column, index) in resultColumns" :key="column.id" width="100px">
+				<th
+					v-for="(column, index) in resultColumns"
+					:key="column.id"
+					width="100px"
+					@mouseenter="highlightColumnSources(column)"
+					@mouseleave="lowlightColumnSources(column)"
+				>
 					<div>
 						<VSelect
 							:id="`results-table-column-source-${index}`"
@@ -416,7 +437,7 @@ function cleanupUnused() {
 							add
 						</button>
 					</form>
-					<a href="#calculator-results" class="skip-link">
+					<a href="#calculator-results-header" class="skip-link">
 						skip back to results start
 					</a>
 					<a id="calculator-results-table-skip-rows" href="#results-table-row-new-section" class="skip-link">
@@ -495,10 +516,6 @@ function cleanupUnused() {
 
 <style>
 @layer components {
-	#calculator-results {
-		--at-apply: 'of-x-auto';
-	}
-
 	#calculator-results-table {
 		--at-apply: 'mx-auto border-spacing-0 border-collapse b b-[--border-color]';
 		--border-color: theme('colors.neutral.400');

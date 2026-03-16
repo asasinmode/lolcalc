@@ -18,6 +18,7 @@ const { version } = usePatchVersion();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
+const enableUnimplementedUi = useEnableUnimplementedUi();
 
 _setupGlobalKeyModifiers();
 
@@ -102,12 +103,24 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 
 <template>
 	<header>
-		current patch: {{ version }}
+		<h1 class="text-xl font-500">
+			lolcalc
+		</h1>
+		<h2 class="text-sm">
+			League of Legends damage calculator
+		</h2>
+		<p>
+			current patch: {{ version }}
+		</p>
+		<label for="calculator-scoreboard-enable-unimplemented-ui">
+			TMP enable unimplemented ui
+			<input id="calculator-scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
+		</label>
 	</header>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
-		<section>
-			<h2 id="calculator-results">
+		<section id="calculator-results">
+			<h2 id="calculator-results-header">
 				results
 			</h2>
 			<p v-show="!showResults">

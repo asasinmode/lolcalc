@@ -26,6 +26,7 @@ const emit = defineEmits<{
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
+const highlightedDamageSources = useHighlightedDamageSources();
 const runes = useRunes();
 const ui = useUi();
 const misc = useMisc();
@@ -781,7 +782,12 @@ defineExpose({ el });
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-	<li ref="el" :data-scoreboard-item="value.listedChampion.value?.id || ''">
+	<li
+		ref="el"
+		:data-scoreboard-item="value.listedChampion.value?.id || ''"
+		@mouseenter="highlightedDamageSources.add(value.id)"
+		@mouseleave="highlightedDamageSources.remove(value.id)"
+	>
 		<h3>
 			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}
 		</h3>
@@ -1300,7 +1306,7 @@ defineExpose({ el });
 
 <style>
 @layer components {
-	#calculator-scoreboard > ul > [data-scoreboard-item] {
+	#calculator-scoreboard > div > ul > [data-scoreboard-item] {
 		--at-apply: 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);

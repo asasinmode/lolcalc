@@ -3,7 +3,6 @@ const runes = useRunes();
 const text = useText();
 const items = useItems();
 const { version, minorVersion } = usePatchVersion();
-const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
@@ -336,239 +335,234 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 </script>
 
 <template>
-	<article id="calculator-scoreboard">
-		<header class="text-center b-b col-span-full">
-			<h1 class="text-xl font-500">
-				lolcalc
-			</h1>
-			<h2 class="text-sm">
-				League of Legends damage calculator
-			</h2>
-			<label for="calculator-scoreboard-enable-unimplemented-ui" class="start-0 top-0 absolute">
-				TMP enable unimplemented ui
-				<input id="calculator-scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
-			</label>
-			<label for="calculator-scoreboard-mirror" class="end-0 top-0 absolute">
-				TODO mirror layout
-				<input id="calculator-scoreboard-mirror" type="checkbox">
-			</label>
-		</header>
-		<h3>
-			damage sources
-		</h3>
-		<ul>
-			<CalculatorScoreboardItem
-				v-for="(value, index) in damageSources"
-				ref="sourceElements"
-				:key="value.id"
-				:value
-				:index
-				:can-remove="damageSources.length > 1"
-				:can-move-down="index !== damageSources.length - 1"
-				:data-index="index"
-				data-group="sources"
-				@clear="clear(index, damageSources)"
-				@remove="remove(index, damageSources)"
-				@duplicate="duplicate(index, damageSources, $event)"
-				@change-group="changeGroup(index, damageSources, $event)"
-				@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
-				@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
-				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageSources, index, itemIndex)"
-				@item-list-dragenter="onItemDragEnter($event, value)"
-				@item-list-dragover="onItemDragover($event, value)"
-				@item-list-dragleave="onItemDragLeave"
-				@item-list-drop="dropItem($event, damageSources, index)"
-			/>
-			<li>
-				<button
-					class="pretend-ui-button"
-					:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
-					@click="add(damageSources)"
-				>
-					<Icon class="i-ph:plus-bold" />
-					add damage source
-				</button>
-			</li>
-		</ul>
-		<h3>
-			damage targets
-		</h3>
-		<ul>
-			<CalculatorScoreboardItem
-				v-for="(value, index) in damageTargets"
-				ref="targetElements"
-				:key="value.id"
-				:value
-				:index
-				:can-remove="damageTargets.length > 1"
-				:can-move-down="index !== damageTargets.length - 1"
-				:data-index="index"
-				data-group="targets"
-				is-right
-				@clear="clear(index, damageTargets)"
-				@remove="remove(index, damageTargets)"
-				@duplicate="duplicate(index, damageTargets, $event)"
-				@change-group="changeGroup(index, damageTargets, $event)"
-				@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
-				@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
-				@item-dragstart="(event, itemIndex) => startItemDrag(event, damageTargets, index, itemIndex)"
-				@item-list-dragenter="onItemDragEnter($event, value)"
-				@item-list-dragover="onItemDragover($event, value)"
-				@item-list-dragleave="onItemDragLeave"
-				@item-list-drop="dropItem($event, damageTargets, index)"
-			/>
-			<li>
-				<button
-					class="pretend-ui-button"
-					:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
-					@click="add(damageTargets)"
-				>
-					<Icon class="i-ph:plus-bold" />
-					add damage target
-				</button>
-			</li>
-		</ul>
-		<div ref="draggingPopover" data-drag-preview="" popover="hint" inert>
-			<span>
-				<img
-					v-if="dragging?.value.listedChampion.value"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.listedChampion.value.image}`"
-					loading="lazy"
-					width="128"
-					height="128"
-				>
-				<img
-					v-else
-					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-					width="256"
-					height="256"
-				>
-			</span>
-			<span>{{ dragging?.value.level.value }}</span>
-			<div>
-				<img
-					:src="dragging?.runePathPrimaryKeystone || `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`"
-					aria-hidden="true"
-					:width="dragging?.runePathPrimaryKeystone ? 256 : 80"
-					:height="dragging?.runePathPrimaryKeystone ? 256 : 80"
-					loading="lazy"
-					data-primary-path-keystone=""
-				>
-				<span
-					v-show="dragging?.runePathSecondary"
-					:style="dragging?.runePathSecondary ? `background-color: ${dragging.runePathSecondary.iconColor}; mask: url(${dragging.runePathSecondary.icon}) no-repeat center;` : ''"
-					data-secondary-path=""
-				/>
-			</div>
+	<section id="calculator-scoreboard">
+		<h2 id="calculator-scoreboard-header">
+			configuration scoreboard
+		</h2>
+		<div>
+			<h3>
+				damage sources
+			</h3>
 			<ul>
-				<li v-for="i in 6" :key="i">
-					<img
-						v-if="dragging?.value.items.value[i - 1]"
-						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${dragging?.value.items.value[i - 1]!.image}`"
-						width="64"
-						height="64"
-						loading="lazy"
+				<CalculatorScoreboardItem
+					v-for="(value, index) in damageSources"
+					ref="sourceElements"
+					:key="value.id"
+					:value
+					:index
+					:can-remove="damageSources.length > 1"
+					:can-move-down="index !== damageSources.length - 1"
+					:data-index="index"
+					data-group="sources"
+					@clear="clear(index, damageSources)"
+					@remove="remove(index, damageSources)"
+					@duplicate="duplicate(index, damageSources, $event)"
+					@change-group="changeGroup(index, damageSources, $event)"
+					@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
+					@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
+					@item-dragstart="(event, itemIndex) => startItemDrag(event, damageSources, index, itemIndex)"
+					@item-list-dragenter="onItemDragEnter($event, value)"
+					@item-list-dragover="onItemDragover($event, value)"
+					@item-list-dragleave="onItemDragLeave"
+					@item-list-drop="dropItem($event, damageSources, index)"
+				/>
+				<li>
+					<button
+						class="pretend-ui-button"
+						:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
+						@click="add(damageSources)"
 					>
+						<Icon class="i-ph:plus-bold" />
+						add damage source
+					</button>
 				</li>
 			</ul>
+			<h3>
+				damage targets
+			</h3>
+			<ul>
+				<CalculatorScoreboardItem
+					v-for="(value, index) in damageTargets"
+					ref="targetElements"
+					:key="value.id"
+					:value
+					:index
+					:can-remove="damageTargets.length > 1"
+					:can-move-down="index !== damageTargets.length - 1"
+					:data-index="index"
+					data-group="targets"
+					is-right
+					@clear="clear(index, damageTargets)"
+					@remove="remove(index, damageTargets)"
+					@duplicate="duplicate(index, damageTargets, $event)"
+					@change-group="changeGroup(index, damageTargets, $event)"
+					@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
+					@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
+					@item-dragstart="(event, itemIndex) => startItemDrag(event, damageTargets, index, itemIndex)"
+					@item-list-dragenter="onItemDragEnter($event, value)"
+					@item-list-dragover="onItemDragover($event, value)"
+					@item-list-dragleave="onItemDragLeave"
+					@item-list-drop="dropItem($event, damageTargets, index)"
+				/>
+				<li>
+					<button
+						class="pretend-ui-button"
+						:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
+						@click="add(damageTargets)"
+					>
+						<Icon class="i-ph:plus-bold" />
+						add damage target
+					</button>
+				</li>
+			</ul>
+			<div ref="draggingPopover" data-drag-preview="" popover="hint" inert>
+				<span>
+					<img
+						v-if="dragging?.value.listedChampion.value"
+						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.listedChampion.value.image}`"
+						loading="lazy"
+						width="128"
+						height="128"
+					>
+					<img
+						v-else
+						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+						width="256"
+						height="256"
+					>
+				</span>
+				<span>{{ dragging?.value.level.value }}</span>
+				<div>
+					<img
+						:src="dragging?.runePathPrimaryKeystone || `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`"
+						aria-hidden="true"
+						:width="dragging?.runePathPrimaryKeystone ? 256 : 80"
+						:height="dragging?.runePathPrimaryKeystone ? 256 : 80"
+						loading="lazy"
+						data-primary-path-keystone=""
+					>
+					<span
+						v-show="dragging?.runePathSecondary"
+						:style="dragging?.runePathSecondary ? `background-color: ${dragging.runePathSecondary.iconColor}; mask: url(${dragging.runePathSecondary.icon}) no-repeat center;` : ''"
+						data-secondary-path=""
+					/>
+				</div>
+				<ul>
+					<li v-for="i in 6" :key="i">
+						<img
+							v-if="dragging?.value.items.value[i - 1]"
+							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${dragging?.value.items.value[i - 1]!.image}`"
+							width="64"
+							height="64"
+							loading="lazy"
+						>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</article>
+	</section>
 </template>
 
 <style>
 @layer components {
 	#calculator-scoreboard {
-		--at-apply: 'mx-auto b grid grid-flow-col grid-rows-[auto_min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty start-1/2 bottom-0 top-12 absolute -translate-x-1/2)';
-
-		> h3 {
-			--at-apply: 'text-center';
+		> #calculator-scoreboard-header {
+			--at-apply: 'mx-auto text-center';
 		}
 
-		> ul {
-			> li:last-child {
-				--at-apply: 'grid-center';
+		> div {
+			--at-apply: 'b mx-auto grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty start-1/2 inset-y-0 absolute -translate-x-1/2)';
 
-				> button {
-					--at-apply: 'p-1';
+			> h3 {
+				--at-apply: 'text-center';
+			}
 
-					.icon {
-						--at-apply: 'align-sub size-4 me-0.5';
+			> ul {
+				> li:last-child {
+					--at-apply: 'grid-center';
+
+					> button {
+						--at-apply: 'p-1';
+
+						.icon {
+							--at-apply: 'align-sub size-4 me-0.5';
+						}
 					}
 				}
 			}
-		}
 
-		> [data-drag-preview] {
-			--at-apply: 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute start-[--left] top-[--top]';
+			> [data-drag-preview] {
+				--at-apply: 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute start-[--left] top-[--top]';
 
-			&:popover-open {
-				--at-apply: 'flex';
-			}
+				&:popover-open {
+					--at-apply: 'flex';
+				}
 
-			> :nth-child(1) {
-				--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-button-border-clr]';
+				> :nth-child(1) {
+					--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-button-border-clr]';
 
-				> img {
-					--at-apply: 'size-14 -ms-1 -mt-1 max-w-none';
+					> img {
+						--at-apply: 'size-14 -ms-1 -mt-1 max-w-none';
+					}
+				}
+
+				> :nth-child(2) {
+					--at-apply: 'absolute bg-black rounded-full top-11 start-11.5 translate-center text-xs/3 size-5 text-center grid-center b b-[--ui-button-border-clr]';
+				}
+
+				> :nth-child(3) {
+					--at-apply: 'flex flex-col items-center self-center gap-1';
+
+					[data-primary-path-keystone] {
+						--at-apply: 'size-5';
+					}
+
+					[data-secondary-path] {
+						--at-apply: 'size-4';
+					}
+				}
+
+				> :nth-child(4) {
+					--at-apply: 'grid grid-cols-3 grid-rows-2 gap-0.5';
+
+					li {
+						--at-apply: 'size-5.5 bg-black';
+					}
 				}
 			}
 
-			> :nth-child(2) {
-				--at-apply: 'absolute bg-black rounded-full top-11 start-11.5 translate-center text-xs/3 size-5 text-center grid-center b b-[--ui-button-border-clr]';
-			}
+			[data-drop-direction] {
+				--at-apply: 'relative';
+				--drop-indicator-bg-direction: 180deg;
 
-			> :nth-child(3) {
-				--at-apply: 'flex flex-col items-center self-center gap-1';
-
-				[data-primary-path-keystone] {
-					--at-apply: 'size-5';
+				&::before,
+				&::after {
+					--at-apply: 'content-empty absolute z-10';
 				}
 
-				[data-secondary-path] {
-					--at-apply: 'size-4';
+				&::before {
+					--at-apply: 'inset-0';
+					background-image: linear-gradient(
+						var(--drop-indicator-bg-direction),
+						hsl(0 100% 100%) 0px,
+						hsl(0 100% 100%) 0.5px,
+						hsl(0 100% 100% / 0.2) 0.5px,
+						transparent 1.5rem
+					);
+				}
+
+				&::after {
+					--at-apply: 'top-0.5 start-1/2 -translate-x-1/2 size-4 bg-neutral-300';
+					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 				}
 			}
 
-			> :nth-child(4) {
-				--at-apply: 'grid grid-cols-3 grid-rows-2 gap-0.5';
+			[data-drop-direction='below'] {
+				--drop-indicator-bg-direction: 0deg;
 
-				li {
-					--at-apply: 'size-5.5 bg-black';
+				&::after {
+					--at-apply: 'bottom-0.5 top-auto rotate-180';
 				}
-			}
-		}
-
-		[data-drop-direction] {
-			--at-apply: 'relative';
-			--drop-indicator-bg-direction: 180deg;
-
-			&::before,
-			&::after {
-				--at-apply: 'content-empty absolute z-10';
-			}
-
-			&::before {
-				--at-apply: 'inset-0';
-				background-image: linear-gradient(
-					var(--drop-indicator-bg-direction),
-					hsl(0 100% 100%) 0px,
-					hsl(0 100% 100%) 0.5px,
-					hsl(0 100% 100% / 0.2) 0.5px,
-					transparent 1.5rem
-				);
-			}
-
-			&::after {
-				--at-apply: 'top-0.5 start-1/2 -translate-x-1/2 size-4 bg-neutral-300';
-				mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
-			}
-		}
-
-		[data-drop-direction='below'] {
-			--drop-indicator-bg-direction: 0deg;
-
-			&::after {
-				--at-apply: 'bottom-0.5 top-auto rotate-180';
 			}
 		}
 	}
