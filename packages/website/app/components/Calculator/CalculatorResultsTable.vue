@@ -629,14 +629,16 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 			<tr>
 				<td :colspan="resultColumns.length + 2">
 					<form @submit.prevent="addResultsSection">
-						<span> add results section </span>
-						<VSelect
-							id="results-table-row-new-section"
-							label="section ability"
+						<label for="results-table-row-new-section-ability"> section ability </label>
+						<select
+							id="results-table-row-new-section-ability"
 							name="sectionOptionIndex"
-							:options="damageSectionOptions.map((option, index) => [index, option.name])"
 							required
-						/>
+						>
+							<option v-for="(option, index) in damageSectionOptions" :key="option.name" :value="index">
+								{{ option.name }}
+							</option>
+						</select>
 						<button class="pretend-ui-button" type="submit">
 							add
 						</button>
@@ -779,7 +781,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 					'select';
 
 				> button {
-					--at-apply: 'w-auto text-center align-middle px-1';
+					--at-apply: 'w-auto align-middle px-1';
 					grid-area: add;
 				}
 			}
@@ -856,27 +858,19 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		}
 
 		> tfoot {
-			> tr > td {
-				--at-apply: 'relative';
+			> tr > td > form {
+				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
 
-				form {
-					--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
+				> label {
+					--at-apply: 'col-span-full text-start text-lg';
+				}
 
-					> span {
-						--at-apply: 'col-span-full';
-					}
+				> select {
+					--at-apply: 'w-64';
+				}
 
-					> div {
-						--at-apply: 'w-64';
-
-						> select {
-							--at-apply: 'inset-unset static w-full h-full';
-						}
-					}
-
-					> button {
-						--at-apply: 'w-fit whitespace-nowrap';
-					}
+				> button {
+					--at-apply: 'w-fit px-1 h-6 whitespace-nowrap';
 				}
 			}
 		}
