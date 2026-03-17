@@ -239,9 +239,13 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 		return {
 			key: `${section.id}-${row.id}-${column.id || 'new'}`,
 			computedRow: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
-			style: columnDamageSourcesColorStyles(column),
 		};
 	});
+}
+
+function columnIdDamageSourcesColorStyles(id: string){
+	const column = resultColumns.value.find(column => column.id === id);
+	return column && columnDamageSourcesColorStyles(column);
 }
 
 function columnDamageSourcesColorStyles(column: IDamageResultTableColumn) {
@@ -492,7 +496,7 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 							height="64"
 							aria-hidden="true"
 						>
-						{{ section.name }}
+						<span>{{ section.name }}</span>
 						<button
 							class="pretend-ui-button"
 							:aria-expanded="expandedSections.includes(section.id)"
@@ -520,7 +524,7 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 						:key="cell.key"
 						:class="{ irrelevant: cell.computedRow.irrelevant, highlighted: highlightedColumns[cellIndex] }"
-						:style="cell.style"
+						:style="columnIdDamageSourcesColorStyles(cell.computedRow.columnId)"
 						@mouseenter="highlightColumnIdSources(cell.computedRow.columnId)"
 						@mouseleave="lowlightColumnIdSources(cell.computedRow.columnId)"
 					>
@@ -638,15 +642,21 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 		}
 
 		> tbody {
+			--section-header-row-h: calc(10 * var(--spacing));
+
 			&:not([aria-labelledby]) {
 				> tr {
-					--at-apply: 'text-lg font-medium bg-[--ui-button-border-clr]/10 whitespace-nowrap';
+					--at-apply: 'text-lg font-medium bg-[--ui-button-border-clr]/10 whitespace-nowrap h-[--section-header-row-h]';
 
 					> th {
 						--at-apply: 'py-1';
 
 						> img {
 							--at-apply: 'inline-block size-6 align-middle';
+						}
+
+						> span {
+							--at-apply: 'z-2 relative';
 						}
 
 						> button[aria-expanded] {
@@ -672,10 +682,12 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 						--at-apply: 'ps-6';
 					}
 
-					> td {
-						&.irrelevant {
-							--at-apply: 'text-neutral-500';
-						}
+					> td:is(.irrelevant, :last-child) {
+						--at-apply: 'text-neutral-500';
+					}
+
+					&:first-child > td {
+						--at-apply: 'relative before:absolute before:(h-[calc(var(--section-header-row-h)+1px)] inset-x-0 top-0 -translate-y-full content-empty) z-1';
 					}
 
 					&:nth-child(even) {
