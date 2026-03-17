@@ -1310,14 +1310,21 @@ defineExpose({ el });
 
 <style>
 @layer components {
+	#calculator-scoreboard > div > ul:nth-of-type(1) > [data-scoreboard-item] {
+		border-inline-start: 0.25rem solid var(--damage-source-clr);
+	}
+
+	#calculator-scoreboard > div > ul:nth-of-type(2) > [data-scoreboard-item] {
+		--bg-direction: 270deg;
+		border-inline-end: 0.25rem solid var(--damage-source-clr);
+	}
+
 	#calculator-scoreboard > div > ul > [data-scoreboard-item] {
 		--at-apply: 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
-		--bg-opacity: 0.08;
-		--bg-lightness: 1;
 
 		--ability-size-passive: calc(var(--spacing) * 10);
 		--ability-size: calc(var(--spacing) * 14);
@@ -1340,11 +1347,19 @@ defineExpose({ el });
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
 		anchor-scope: all;
-		background-color: oklch(from var(--damage-source-clr) calc(l * var(--bg-lightness)) c h / var(--bg-opacity));
+		background-image: linear-gradient(
+			var(--bg-direction, 90deg),
+			oklch(from var(--damage-source-clr) l c h / 0.08),
+			oklch(from var(--damage-source-clr) l c h / 0.08)
+		);
 
 		&.highlighted {
-			--bg-lightness: 1.25;
-			--bg-opacity: 0.15;
+			background-image: linear-gradient(
+				var(--bg-direction, 90deg),
+				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.35) 0%,
+				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.15) 12.5%,
+				oklch(from var(--damage-source-clr) calc(l * 1.15) c h / 0.15) 100%
+			);
 		}
 
 		&:has(> details[open]) {

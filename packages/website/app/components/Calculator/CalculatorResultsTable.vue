@@ -296,6 +296,10 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 	column.source && highlightedDamageSources.remove(column.source.id);
 	column.target && highlightedDamageSources.remove(column.target.id);
 }
+
+const highlightedColumns = computed(() => resultColumns.value.map(column =>
+	(column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)),
+));
 </script>
 
 <template>
@@ -326,6 +330,7 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 					v-for="(column, index) in resultColumns"
 					:key="column.id"
 					width="100px"
+					:class="{ highlighted: highlightedColumns[index] }"
 					@mouseenter="highlightColumnSources(column)"
 					@focusin="highlightColumnSources(column)"
 					@mouseleave="lowlightColumnSources(column)"
@@ -338,6 +343,7 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 							label="column's damage source"
 							:options="sourceOptions"
 							required
+							:style="resultColumns[index]!.source ? `--damage-source-clr: ${resultColumns[index]!.source.color}` : undefined"
 							@update:model-value="setColumnChampion(column, damageSources, $event)"
 						>
 							<img
@@ -363,6 +369,7 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 							label="column's damage target"
 							:options="targetOptions"
 							clearable
+							:style="resultColumns[index]!.target ? `--damage-source-clr: ${resultColumns[index]!.target.color}` : undefined"
 							@update:model-value="setColumnChampion(column, damageTargets, $event)"
 						>
 							<img
@@ -482,7 +489,11 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 					<th scope="row">
 						{{ row.name }}
 					</th>
-					<td v-for="cell in sectionRowCells(section, row)" :key="cell.key" :class="{ irrelevant: cell.computedRow.irrelevant }">
+					<td
+						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
+						:key="cell.key"
+						:class="{ irrelevant: cell.computedRow.irrelevant, highlighted: highlightedColumns[cellIndex] }"
+					>
 						{{ cell.computedRow.value }}
 					</td>
 					<td>
@@ -542,6 +553,10 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 		> thead > tr > * {
 			--at-apply: 'text-lg';
 
+			&.highlighted {
+				--at-apply: 'bg-white/10';
+			}
+
 			&:first-child {
 				--at-apply: 'align-bottom text-sm relative';
 
@@ -564,7 +579,7 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 					}
 
 					> label {
-						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b-2 b-[--ui-button-border-clr]';
+						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b-3 b-[--damage-source-clr,var(--ui-button-border-clr)]';
 
 						> img {
 							--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -609,19 +624,27 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 				}
 			}
 
-			&[aria-labelledby] > tr {
-				> th {
-					--at-apply: 'ps-6';
-				}
+			&[aria-labelledby] {
+				--at-apply: 'text-neutral-300';
 
-				> td {
-					&.irrelevant {
-						--at-apply: 'text-neutral-400';
+				> tr {
+					&:hover {
+						--at-apply: 'text-white';
 					}
-				}
 
-				&:nth-child(even) {
-					--at-apply: 'bg-neutral-400/10';
+					> th {
+						--at-apply: 'ps-6';
+					}
+
+					> td {
+						&.irrelevant {
+							--at-apply: 'text-neutral-500';
+						}
+					}
+
+					&:nth-child(even) {
+						--at-apply: 'bg-neutral-400/10';
+					}
 				}
 			}
 		}

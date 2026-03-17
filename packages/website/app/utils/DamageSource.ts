@@ -18,7 +18,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 }
 
 export class DamageSource<Id extends IChampionId | undefined = undefined> {
-	id: number;
+	id: string;
 	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
@@ -102,7 +102,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		const hue = ((counter.value++ + 1) * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
-		this.id = counter.value;
+		this.id = counter.value.toString();
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);

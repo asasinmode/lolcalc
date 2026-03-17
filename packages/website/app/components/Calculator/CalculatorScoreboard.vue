@@ -471,7 +471,7 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 		}
 
 		> div {
-			--at-apply: 'b mx-auto grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-2 w-max relative after:(bg-white w-px content-empty start-1/2 inset-y-0 absolute -translate-x-1/2)';
+			--at-apply: 'mx-auto gap-x-10 grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-2 w-max relative after:(bg-neutral-400 w-px content-empty start-1/2 inset-y-0 absolute -translate-x-1/2)';
 
 			> h3 {
 				--at-apply: 'text-center';
@@ -479,7 +479,7 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 
 			> ul {
 				> li:last-child {
-					--at-apply: 'grid-center';
+					--at-apply: 'grid-center h-18';
 
 					> button {
 						--at-apply: 'p-1';
