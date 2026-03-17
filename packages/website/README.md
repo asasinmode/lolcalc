@@ -36,6 +36,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] drag between inventories
     - [x] hover tooltip
     - [ ] move with keyboard, shift + arrows?
+  - [ ] toggle button aria-controls, aria-expanded
   - [ ] expanded
     - [x] stats
     - [x] current health/mana
@@ -55,7 +56,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] kai'sa
       - [ ] ornn
       - [ ] kraken slayer
-    - [ ] confirm removing/clearing row
     - [ ] add all of champion's things to damage results
   - [ ] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
@@ -93,6 +93,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] buying mechanism, components into item and so on
   - [x] item groups, only one from group
   - [ ] show inventory total value
+  - [ ] try not to intercept all right clicks
 - [ ] target dummy damage source
 - [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query
@@ -130,6 +131,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
   - [ ] github readme
+- [ ] confirm removing/clearing row/scoreboard item, ideally undo + dismiss
 - [ ] submit feedback on page / report issues
   - [ ] probably a rust server
   - [ ] github issue template

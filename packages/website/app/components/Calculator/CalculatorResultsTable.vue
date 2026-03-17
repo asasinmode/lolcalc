@@ -11,6 +11,7 @@ const props = defineProps<{
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 
+const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
@@ -141,7 +142,14 @@ function addResultsColumn() {
 	}
 }
 
-function removeResultsColumn(index: number) {
+function removeResultsColumn(index: number, clear: boolean) {
+	if (clear) {
+		resultColumns.value[index]!.source = undefined;
+		resultColumns.value[index]!.target = undefined;
+		recalculateColumn(resultColumns.value[index]!);
+		return;
+	}
+
 	const [column] = resultColumns.value.splice(index, 1);
 
 	for (const section of computedResults.value.values()) {
@@ -243,7 +251,7 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 	});
 }
 
-function columnIdDamageSourcesColorStyles(id: string){
+function columnIdDamageSourcesColorStyles(id: string) {
 	const column = resultColumns.value.find(column => column.id === id);
 	return column && columnDamageSourcesColorStyles(column);
 }
@@ -329,6 +337,22 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 		? column.id === highlightedColumnId.value
 		: (column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)),
 ));
+
+function moveResultColumn(index: number, copy: boolean) {
+	console.log('moving', { index, copy });
+}
+
+function startResultColumnDrag(index: number, event: DragEvent) {
+	console.log('starting drag', index);
+}
+
+function moveResultSection(index: number, copy: boolean) {
+	console.log('moving', { index, copy });
+}
+
+function startResultSectionDrag(index: number, event: DragEvent) {
+	console.log('starting drag', index);
+}
 </script>
 
 <template>
@@ -344,6 +368,9 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 			<tr>
 				<th scope="col" width="240px">
 					damage type
+					<a href="#results-table-section-header-basicAttack" class="skip-link">
+						skip column controls
+					</a>
 					<button
 						class="pretend-ui-button"
 						:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
@@ -351,9 +378,6 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 					>
 						cleanup
 					</button>
-					<a href="#results-table-section-header-basicAttack" class="skip-link">
-						skip column controls
-					</a>
 				</th>
 				<th
 					v-for="(column, index) in resultColumns"
@@ -393,7 +417,7 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 								style="--focus-brightness: 1.5"
 							>
 						</VSelect>
-						vs
+						<span>vs</span>
 						<VSelect
 							:id="`results-table-column-target-${index}`"
 							:model-value="resultColumns[index]!.target?.id"
@@ -419,8 +443,37 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 								style="--focus-brightness: 1.5"
 							>
 						</VSelect>
-						<button class="pretend-ui-button" @click="removeResultsColumn(index)">
-							remove
+						<button
+							title="move left, alt+click to duplicate to the left"
+							class="pretend-ui-button"
+							:disabled="index === 0"
+							draggable="true"
+							@click="moveResultColumn(index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+							@dragstart="startResultColumnDrag(index, $event)"
+						>
+							<span>move left, alt+click to duplicate to the left</span>
+							<Icon class="i-ph:arrow-left" />
+						</button>
+						<button
+							title="remove, shift+click to clear"
+							class="pretend-ui-button"
+							@click="removeResultsColumn(index, globalKeyModifiers.shift)"
+						>
+							<span>
+								remove, shift+click to clear
+							</span>
+							<Icon class="i-ph:trash" />
+						</button>
+						<button
+							title="move right, alt+click to duplicate to the right"
+							class="pretend-ui-button"
+							draggable="true"
+							:disabled="index === (resultColumns.length - 1)"
+							@click="moveResultColumn(index + 1, globalKeyModifiers.alt)"
+							@dragstart="startResultColumnDrag(index, $event)"
+						>
+							<span>move right, alt+click to duplicate to the right</span>
+							<Icon class="i-ph:arrow-right" />
 						</button>
 					</div>
 				</th>
@@ -449,7 +502,7 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 								style="--focus-brightness: 1.5"
 							>
 						</VSelect>
-						vs
+						<span>vs</span>
 						<VSelect
 							id="results-table-column-target"
 							v-model="columnNewTargetId"
@@ -490,24 +543,60 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 			<tbody>
 				<tr>
 					<th :id="`results-table-section-header-${section.id}`" scope="rowgroup" :colspan="resultColumns.length + 2">
-						<img
-							:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
-							width="64"
-							height="64"
-							aria-hidden="true"
-						>
-						<span>{{ section.name }}</span>
-						<button
-							class="pretend-ui-button"
-							:aria-expanded="expandedSections.includes(section.id)"
-							:aria-controls="`results-table-section-${section.id}`"
-							@click="toggleResultsSection(section.id)"
-						>
-							{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
-						</button>
-						<button v-if="section.id !== 'basicAttack'" class="pretend-ui-button" @click="removeDamageSection(index)">
-							remove
-						</button>
+						<div>
+							<button
+								title="move up"
+								class="pretend-ui-button"
+								:disabled="index === 0"
+								draggable="true"
+								@click="moveResultSection(index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+								@dragstart="startResultSectionDrag(index, $event)"
+							>
+								<span>move up</span>
+								<Icon class="i-ph:arrow-up" />
+							</button>
+							<button
+								title="move down"
+								class="pretend-ui-button"
+								draggable="true"
+								:disabled="index === (resultSections.length - 1)"
+								@click="moveResultSection(index + 1, globalKeyModifiers.alt)"
+								@dragstart="startResultSectionDrag(index, $event)"
+							>
+								<span>move down</span>
+								<Icon class="i-ph:arrow-down" />
+							</button>
+							<button
+								title="remove"
+								class="pretend-ui-button"
+								:disabled="section.id === 'basicAttack'"
+								@click="removeDamageSection(index)"
+							>
+								<span>
+									remove
+								</span>
+								<Icon class="i-ph:trash" />
+							</button>
+							<button
+								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
+								class="pretend-ui-button"
+								:aria-expanded="expandedSections.includes(section.id)"
+								:aria-controls="`results-table-section-${section.id}`"
+								@click="toggleResultsSection(section.id)"
+							>
+								<span>
+									{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
+								</span>
+								<Icon class="i-ph:caret-down" />
+							</button>
+							<img
+								:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
+								width="64"
+								height="64"
+								aria-hidden="true"
+							>
+							<span>{{ section.name }}</span>
+						</div>
 					</th>
 				</tr>
 			</tbody>
@@ -566,6 +655,7 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 	#calculator-results-table {
 		--at-apply: 'mx-auto border-spacing-0 border-collapse b b-[--border-color]';
 		--border-color: theme('colors.neutral.400');
+		--column-w: calc(25 * var(--spacing));
 
 		&[inert] {
 			--at-apply: 'blur-3';
@@ -585,11 +675,8 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 		}
 
 		> thead > tr > * {
-			--at-apply: 'text-lg';
-
-			&.highlighted {
-				--at-apply: 'bg-white/10';
-			}
+			--at-apply: 'py-2';
+			--button-h: calc(6 * var(--spacing));
 
 			&:first-child {
 				--at-apply: 'align-bottom text-sm relative';
@@ -605,21 +692,29 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 
 			> form,
 			> div {
-				--at-apply: 'grid grid-cols-[min-content_auto] grid-rows-[1fr_auto_1fr] grid-flow-col text-center';
+				--at-apply: 'grid grid-rows-[auto_1fr] gap-y-2 relative';
+				--select-size: calc(12 * var(--spacing));
 
 				> .v-select {
+					--at-apply: 'size-[--select-size]';
+
 					--b-width: 2px;
+					grid-area: select;
 
 					&[style] {
 						--b-width: 2.5px;
 					}
 
+					&:nth-of-type(2) {
+						--at-apply: 'translate-x-[calc(100%+(var(--column-w)-2*var(--select-size)))]';
+					}
+
 					> select {
-						--at-apply: 'rounded-1/2 size-12';
+						--at-apply: 'rounded-1/2 size-full';
 					}
 
 					> label {
-						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--damage-source-clr,var(--ui-button-border-clr)]';
+						--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--damage-source-clr,var(--ui-button-border-clr)]';
 
 						> img {
 							--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -635,8 +730,57 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 					}
 				}
 
+				> span {
+					--at-apply: 'pointer-events-none text-lg absolute font-semibold z-1 start-1/2 -translate-x-1/2 bottom-[calc(0.5*var(--select-size))] translate-y-1/2';
+					-webkit-text-stroke: black 0.15em;
+					paint-order: stroke fill;
+				}
+
 				> button {
-					--at-apply: 'row-span-full h-min self-center';
+					--at-apply: 'size-[--button-h] mx-auto';
+
+					> span:nth-child(2) {
+						--at-apply: 'size-5';
+					}
+				}
+			}
+
+			> div {
+				--at-apply: 'grid-cols-3';
+				grid-template-areas:
+					'move-left remove move-right'
+					'select select select';
+
+				> button {
+					--at-apply: 'grid place-items-center self-center';
+
+					&:nth-of-type(1) {
+						grid-area: move-left;
+					}
+
+					&:nth-of-type(2) {
+						grid-area: remove;
+					}
+
+					&:nth-of-type(3) {
+						grid-area: move-right;
+					}
+
+					> span:nth-child(1) {
+						--at-apply: 'sr-only';
+					}
+				}
+			}
+
+			> form {
+				--at-apply: 'grid-cols-1';
+				grid-template-areas:
+					'add'
+					'select';
+
+				> button {
+					--at-apply: 'w-auto text-center align-middle px-1';
+					grid-area: add;
 				}
 			}
 		}
@@ -648,23 +792,31 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 				> tr {
 					--at-apply: 'text-lg font-medium bg-[--ui-button-border-clr]/10 whitespace-nowrap h-[--section-header-row-h]';
 
-					> th {
-						--at-apply: 'py-1';
+					> th > div {
+						--at-apply: 'grid grid-cols-[min-content_min-content_auto_1fr] grid-rows-2 items-center grid-flow-col';
+
+						> button {
+							--at-apply: 'size-6 grid place-items-center';
+
+							> span {
+								--at-apply: 'size-5';
+							}
+
+							> span:nth-child(1) {
+								--at-apply: 'sr-only';
+							}
+
+							&[aria-expanded='true'] > span {
+								--at-apply: 'rotate-180';
+							}
+						}
 
 						> img {
-							--at-apply: 'inline-block size-6 align-middle';
+							--at-apply: 'size-6 row-span-full mx-2';
 						}
 
 						> span {
-							--at-apply: 'z-2 relative';
-						}
-
-						> button[aria-expanded] {
-							--at-apply: 'float-start me-3';
-						}
-
-						> button:not([aria-expanded]) {
-							--at-apply: 'float-end ms-3';
+							--at-apply: 'row-span-full';
 						}
 					}
 				}
@@ -674,7 +826,8 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 				--at-apply: 'text-neutral-200';
 
 				> tr {
-					&:hover {
+					&:hover > th,
+					&:hover > td:not(.irrelevant, :last-child) {
 						--at-apply: 'text-white';
 					}
 
@@ -686,12 +839,8 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 						--at-apply: 'text-neutral-500';
 					}
 
-					&:first-child > td {
-						--at-apply: 'relative before:absolute before:(h-[calc(var(--section-header-row-h)+1px)] inset-x-0 top-0 -translate-y-full content-empty) z-1';
-					}
-
 					&:nth-child(even) {
-						background-color: oklch(1 0 0 / 0.08);
+						--at-apply: 'bg-white/07';
 					}
 				}
 			}

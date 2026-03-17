@@ -963,7 +963,7 @@ defineExpose({ el });
 			@click="removeButtonAttrs.emit"
 		>
 			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
-			<Icon class="i-ph:x size-5" />
+			<Icon class="i-ph:trash size-5" />
 		</button>
 		<button
 			title="expand"

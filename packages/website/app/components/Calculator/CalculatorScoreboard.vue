@@ -372,7 +372,6 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 						:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
 						@click="add(damageSources)"
 					>
-						<Icon class="i-ph:plus-bold" />
 						add damage source
 					</button>
 				</li>
@@ -410,7 +409,6 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 						:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
 						@click="add(damageTargets)"
 					>
-						<Icon class="i-ph:plus-bold" />
 						add damage target
 					</button>
 				</li>
@@ -483,10 +481,6 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 
 					> button {
 						--at-apply: 'p-1';
-
-						.icon {
-							--at-apply: 'align-sub size-4 me-0.5';
-						}
 					}
 				}
 			}
