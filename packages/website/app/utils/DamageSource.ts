@@ -18,7 +18,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 }
 
 export class DamageSource<Id extends IChampionId | undefined = undefined> {
-	id: string;
+	id: number;
 	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
@@ -94,7 +94,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		: undefined>;
 	watchHandles: WatchHandle[];
 
-	constructor(id: string = crypto.randomUUID(), overrides: Partial<Omit<IOverrides<Id>, 'champion'>> & {
+	constructor(overrides: Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
 	} = {}) {
 		const counter = useState<number>('damageSourceCounter', () => 0);
@@ -102,7 +102,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		const hue = ((counter.value++ + 1) * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
-		this.id = id;
+		this.id = counter.value;
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
@@ -163,8 +163,8 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		];
 	}
 
-	clone(id?: string, overrides: Partial<IOverrides> = {}): DamageSource<Id> {
-		return new DamageSource<Id>(id, {
+	clone(overrides: Partial<IOverrides> = {}): DamageSource<Id> {
+		return new DamageSource<Id>({
 			champion: this.listedChampion.value,
 			level: this.level.value,
 			items: [...toRaw(this.items.value)],

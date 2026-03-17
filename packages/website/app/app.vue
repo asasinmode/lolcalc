@@ -25,22 +25,22 @@ _setupGlobalKeyModifiers();
 // TMP as unknown as..., can't put it in v-model or it doesn't build atm
 const damageSources = ref<DamageSource<any>[]>(import.meta.dev
 	? [
-			markRaw(new DamageSource(useId(), { champion: useChampions().Aatrox })),
-			markRaw(new DamageSource(useId(), { champion: useChampions().Ambessa })),
-			markRaw(new DamageSource(useId(), { champion: useChampions().Annie })),
-			markRaw(new DamageSource(useId(), { champion: useChampions().AurelionSol })),
+			markRaw(new DamageSource({ champion: useChampions().Aatrox })),
+			markRaw(new DamageSource({ champion: useChampions().Ambessa })),
+			markRaw(new DamageSource({ champion: useChampions().Annie })),
+			markRaw(new DamageSource({ champion: useChampions().AurelionSol })),
 		]
 	: [
-			markRaw(new DamageSource(useId())),
+			markRaw(new DamageSource()),
 		],
 ) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource<any>[]>(import.meta.dev
 	? [
-			markRaw(new DamageSource(useId(), { champion: useChampions().Zaahen })),
-			markRaw(new DamageSource(useId(), { champion: useChampions().Zed })),
-			markRaw(new DamageSource(useId(), { champion: useChampions().Zac })),
+			markRaw(new DamageSource({ champion: useChampions().Zaahen })),
+			markRaw(new DamageSource({ champion: useChampions().Zed })),
+			markRaw(new DamageSource({ champion: useChampions().Zac })),
 		]
-	: [markRaw(new DamageSource(useId()))],
+	: [markRaw(new DamageSource())],
 ) as unknown as DamageSource[];
 
 const showResults = computed(() => (damageSources as unknown as Ref<DamageSource[]>).value.some(
