@@ -786,7 +786,9 @@ defineExpose({ el });
 		ref="el"
 		:data-scoreboard-item="value.listedChampion.value?.id || ''"
 		@mouseenter="highlightedDamageSources.add(value.id)"
+		@focusin="highlightedDamageSources.add(value.id)"
 		@mouseleave="highlightedDamageSources.remove(value.id)"
+		@focusout="highlightedDamageSources.remove(value.id)"
 	>
 		<h3>
 			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}

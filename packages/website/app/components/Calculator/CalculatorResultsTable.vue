@@ -327,7 +327,9 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 					:key="column.id"
 					width="100px"
 					@mouseenter="highlightColumnSources(column)"
+					@focusin="highlightColumnSources(column)"
 					@mouseleave="lowlightColumnSources(column)"
+					@focusout="lowlightColumnSources(column)"
 				>
 					<div>
 						<VSelect

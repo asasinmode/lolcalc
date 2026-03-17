@@ -103,14 +103,15 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 
 <template>
 	<header>
-		<h1 class="text-xl font-500">
+		<h1>
 			lolcalc
 		</h1>
-		<h2 class="text-sm">
+		<h2>
 			League of Legends damage calculator
 		</h2>
 		<p>
 			current patch: {{ version }}
+			<br>
 		</p>
 		<label for="calculator-scoreboard-enable-unimplemented-ui">
 			TMP enable unimplemented ui
