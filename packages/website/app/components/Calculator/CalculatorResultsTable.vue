@@ -14,8 +14,7 @@ const resultSections = defineModel<IDamageResultTableSection[]>('sections', { re
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
-let highlightedColumnId: string | undefined;
-
+const highlightedColumnId = ref<string>();
 const columnNewSourceId = ref<string>();
 const columnNewTargetId = ref<string>();
 const columnNewSource = computed(() => columnNewSourceId.value ? props.damageSources.find(source => source.id === columnNewSourceId.value) : undefined);
@@ -30,10 +29,15 @@ const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
 
 function setColumnChampion(column: IDamageResultTableColumn, damageSources: DamageSource[], championId?: string) {
+	const oldDamageSourceId = column[damageSources === props.damageSources ? 'source' : 'target']?.id;
+	oldDamageSourceId && highlightedDamageSources.remove(oldDamageSourceId);
+
 	column[damageSources === props.damageSources ? 'source' : 'target'] = championId
 		? damageSources.find(damageSource => damageSource.id === championId)
 		: undefined;
 	recalculateColumn(column);
+
+	highlightedDamageSources.add(column[damageSources === props.damageSources ? 'source' : 'target']!.id);
 }
 
 const damageSectionOptions = computed(() => props.damageSources
@@ -235,8 +239,17 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 		return {
 			key: `${section.id}-${row.id}-${column.id || 'new'}`,
 			computedRow: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
+			style: columnDamageSourcesColorStyles(column),
 		};
 	});
+}
+
+function columnDamageSourcesColorStyles(column: IDamageResultTableColumn) {
+	return `${
+		column.source ? `--col-damage-source-clr: ${column.source.color};` : ''
+	}${
+		column.target ? `--col-damage-target-clr: ${column.target.color};` : ''
+	}`;
 }
 
 function recalculateColumn(column: IDamageResultTableColumn) {
@@ -286,19 +299,31 @@ function cleanupUnused() {
 }
 
 function highlightColumnSources(column: IDamageResultTableColumn) {
-	highlightedColumnId = column.id;
+	highlightedColumnId.value = column.id;
 	column.source && highlightedDamageSources.add(column.source.id);
 	column.target && highlightedDamageSources.add(column.target.id);
 }
 
 function lowlightColumnSources(column: IDamageResultTableColumn) {
-	highlightedColumnId = undefined;
+	highlightedColumnId.value = undefined;
 	column.source && highlightedDamageSources.remove(column.source.id);
 	column.target && highlightedDamageSources.remove(column.target.id);
 }
 
+function highlightColumnIdSources(id: string) {
+	const column = resultColumns.value.find(column => column.id === id);
+	column && highlightColumnSources(column);
+}
+
+function lowlightColumnIdSources(id: string) {
+	const column = resultColumns.value.find(column => column.id === id);
+	column && lowlightColumnSources(column);
+}
+
 const highlightedColumns = computed(() => resultColumns.value.map(column =>
-	(column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)),
+	highlightedColumnId.value
+		? column.id === highlightedColumnId.value
+		: (column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)),
 ));
 </script>
 
@@ -330,7 +355,9 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 					v-for="(column, index) in resultColumns"
 					:key="column.id"
 					width="100px"
+					scope="col"
 					:class="{ highlighted: highlightedColumns[index] }"
+					:style="columnDamageSourcesColorStyles(column)"
 					@mouseenter="highlightColumnSources(column)"
 					@focusin="highlightColumnSources(column)"
 					@mouseleave="lowlightColumnSources(column)"
@@ -493,6 +520,9 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 						:key="cell.key"
 						:class="{ irrelevant: cell.computedRow.irrelevant, highlighted: highlightedColumns[cellIndex] }"
+						:style="cell.style"
+						@mouseenter="highlightColumnIdSources(cell.computedRow.columnId)"
+						@mouseleave="lowlightColumnIdSources(cell.computedRow.columnId)"
 					>
 						{{ cell.computedRow.value }}
 					</td>
@@ -574,12 +604,18 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 				--at-apply: 'grid grid-cols-[min-content_auto] grid-rows-[1fr_auto_1fr] grid-flow-col text-center';
 
 				> .v-select {
+					--b-width: 2px;
+
+					&[style] {
+						--b-width: 2.5px;
+					}
+
 					> select {
 						--at-apply: 'rounded-1/2 size-12';
 					}
 
 					> label {
-						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b-3 b-[--damage-source-clr,var(--ui-button-border-clr)]';
+						--at-apply: 'rounded-1/2 size-12 of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--damage-source-clr,var(--ui-button-border-clr)]';
 
 						> img {
 							--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -625,7 +661,7 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 			}
 
 			&[aria-labelledby] {
-				--at-apply: 'text-neutral-300';
+				--at-apply: 'text-neutral-200';
 
 				> tr {
 					&:hover {
@@ -643,10 +679,19 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 					}
 
 					&:nth-child(even) {
-						--at-apply: 'bg-neutral-400/10';
+						background-color: oklch(1 0 0 / 0.08);
 					}
 				}
 			}
+		}
+
+		> thead > tr > th:nth-child(n + 2).highlighted,
+		> tbody[aria-labelledby] > tr > td:not(:last-child).highlighted {
+			background-image: linear-gradient(
+				to right,
+				oklch(from var(--col-damage-source-clr, white) l c h / 0.08),
+				oklch(from var(--col-damage-target-clr, white) l c h / 0.08)
+			);
 		}
 
 		> tfoot {
