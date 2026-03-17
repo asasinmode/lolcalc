@@ -785,6 +785,8 @@ defineExpose({ el });
 	<li
 		ref="el"
 		:data-scoreboard-item="value.listedChampion.value?.id || ''"
+		:style="`--damage-source-clr: ${value.color};`"
+		:class="{ highlighted: highlightedDamageSources.has(value.id) }"
 		@mouseenter="highlightedDamageSources.add(value.id)"
 		@focusin="highlightedDamageSources.add(value.id)"
 		@mouseleave="highlightedDamageSources.remove(value.id)"
@@ -1314,6 +1316,8 @@ defineExpose({ el });
 		--select-champion-size: calc(var(--spacing) * 14);
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
+		--bg-opacity: 0.08;
+		--bg-lightness: 1;
 
 		--ability-size-passive: calc(var(--spacing) * 10);
 		--ability-size: calc(var(--spacing) * 14);
@@ -1336,6 +1340,12 @@ defineExpose({ el });
 		transition-timing-function: ease-in-out;
 		transition-property: grid-template-rows;
 		anchor-scope: all;
+		background-color: oklch(from var(--damage-source-clr) calc(l * var(--bg-lightness)) c h / var(--bg-opacity));
+
+		&.highlighted {
+			--bg-lightness: 1.25;
+			--bg-opacity: 0.15;
+		}
 
 		&:has(> details[open]) {
 			--at-apply: 'grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_1fr)]';

@@ -620,7 +620,7 @@ function lowlightColumnSources(column: IDamageResultTableColumn) {
 					}
 				}
 
-				&:nth-child(2n + 3) {
+				&:nth-child(even) {
 					--at-apply: 'bg-neutral-400/10';
 				}
 			}

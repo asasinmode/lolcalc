@@ -19,6 +19,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 
 export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	id: string;
+	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
 	level: Ref<number>;
@@ -96,6 +97,11 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	constructor(id: string = crypto.randomUUID(), overrides: Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
 	} = {}) {
+		const counter = useState<number>('damageSourceCounter', () => 0);
+		/* + 1 because it's a nicer color */
+		const hue = ((counter.value++ + 1) * 137.508) % 360;
+		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
+
 		this.id = id;
 		this.listedChampion = shallowRef(overrides.champion);
 		this.champion = shallowRef();

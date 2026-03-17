@@ -79,21 +79,21 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 			{
 				id: useId(),
 				source: (damageSources as unknown as Ref).value[0],
-				target: (damageTargets as unknown as Ref).value[0],
-			},
-			{
-				id: useId(),
-				source: (damageSources as unknown as Ref).value[1],
-				target: (damageTargets as unknown as Ref).value[1],
-			},
-			{
-				id: useId(),
-				source: (damageSources as unknown as Ref).value[2],
 				target: (damageTargets as unknown as Ref).value[2],
 			},
 			{
 				id: useId(),
 				source: (damageSources as unknown as Ref).value[3],
+				target: (damageTargets as unknown as Ref).value[0],
+			},
+			{
+				id: useId(),
+				source: (damageSources as unknown as Ref).value[2],
+				target: (damageTargets as unknown as Ref).value[1],
+			},
+			{
+				id: useId(),
+				source: (damageSources as unknown as Ref).value[1],
 			},
 		]
 	: [],
