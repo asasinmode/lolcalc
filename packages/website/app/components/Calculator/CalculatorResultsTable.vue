@@ -660,7 +660,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 						@mouseenter="highlightColumnIdSources(cell.computedColumn.columnId)"
 						@mouseleave="lowlightColumnIdSources(cell.computedColumn.columnId)"
 					>
-						{{ cell.computedColumn.value }}
+						<span>{{ cell.computedColumn.value }}</span>
 					</td>
 					<td>
 						-
@@ -877,12 +877,22 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							--at-apply: 'text-white';
 						}
 
-						> td.higher {
-							--at-apply: 'text-green-400';
-						}
+						> td:not(.irrelevant, :last-child) {
+							&.higher {
+								--at-apply: 'text-green-400';
 
-						> td.lower {
-							--at-apply: 'text-red-400';
+								> span::after {
+									content: '▲';
+								}
+							}
+
+							&.lower {
+								--at-apply: 'text-red-400';
+
+								> span::after {
+									content: '▼';
+								}
+							}
 						}
 					}
 
@@ -895,11 +905,19 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 					}
 
 					> td {
-						--at-apply: 'px-2';
-					}
+						--at-apply: 'px-3';
 
-					> td:is(.irrelevant, :last-child) {
-						--at-apply: 'text-neutral-500';
+						&:is(.irrelevant, :last-child) {
+							--at-apply: 'text-neutral-500';
+						}
+
+						&:not(.irrelevant, :last-child) > span {
+							--at-apply: 'relative';
+
+							&::after {
+								--at-apply: 'absolute text-xs top-1/2 -translate-y-1/2 -end-4';
+							}
+						}
 					}
 
 					&:nth-child(even) {
