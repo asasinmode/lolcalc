@@ -923,7 +923,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				}
 			}
 
-			&:not(:first-of-type):not([aria-labelledby]) > tr > th {
+			&:not(:first-of-type):not([aria-labelledby]) > tr > * {
 				--at-apply: 'pt-6';
 			}
 
