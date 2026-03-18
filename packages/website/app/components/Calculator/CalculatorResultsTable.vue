@@ -142,14 +142,7 @@ function addResultsColumn() {
 	}
 }
 
-function removeResultsColumn(index: number, clear: boolean) {
-	if (clear) {
-		resultColumns.value[index]!.source = undefined;
-		resultColumns.value[index]!.target = undefined;
-		recalculateColumn(resultColumns.value[index]!);
-		return;
-	}
-
+function removeResultsColumn(index: number) {
 	const [column] = resultColumns.value.splice(index, 1);
 
 	for (const section of computedResults.value.values()) {
@@ -367,22 +360,24 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		<thead>
 			<tr>
 				<th scope="col" width="240px">
-					damage type
-					<a href="#results-table-section-header-basicAttack" class="skip-link">
-						skip column controls
-					</a>
-					<button
-						class="pretend-ui-button"
-						:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
-						@click="cleanupUnused"
-					>
-						cleanup
-					</button>
+					<div>
+						<span>damage type</span>
+						<a href="#results-table-section-header-basicAttack" class="skip-link">
+							skip column controls
+						</a>
+						<button
+							class="pretend-ui-button"
+							:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
+							@click="cleanupUnused"
+						>
+							remove unused
+						</button>
+					</div>
 				</th>
 				<th
 					v-for="(column, index) in resultColumns"
 					:key="column.id"
-					width="100px"
+					width="120px"
 					scope="col"
 					:class="{ highlighted: highlightedColumns[index] }"
 					:style="columnDamageSourcesColorStyles(column)"
@@ -455,12 +450,12 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							<Icon class="i-ph:arrow-left" />
 						</button>
 						<button
-							title="remove, shift+click to clear"
+							title="remove"
 							class="pretend-ui-button"
-							@click="removeResultsColumn(index, globalKeyModifiers.shift)"
+							@click="removeResultsColumn(index)"
 						>
 							<span>
-								remove, shift+click to clear
+								remove
 							</span>
 							<Icon class="i-ph:trash" />
 						</button>
@@ -655,9 +650,8 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 <style>
 @layer components {
 	#calculator-results-table {
-		--at-apply: 'mx-auto border-spacing-0 border-collapse b b-[--border-color]';
+		--at-apply: 'mx-auto border-separate border-spacing-0';
 		--border-color: theme('colors.neutral.400');
-		--column-w: calc(25 * var(--spacing));
 
 		&[inert] {
 			--at-apply: 'blur-3';
@@ -667,48 +661,50 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 			--at-apply: 'text-start';
 		}
 
-		th,
-		td {
-			--at-apply: 'b b-[--border-color]';
-		}
-
 		th {
 			--at-apply: 'text-start font-normal';
 		}
 
 		> thead > tr > * {
-			--at-apply: 'py-2';
-			--button-h: calc(6 * var(--spacing));
+			--at-apply: 'pb-3';
+			--header-row-h: calc(19 * var(--spacing));
+			--button-size: calc(6 * var(--spacing));
 
-			&:first-child {
-				--at-apply: 'align-bottom text-sm relative';
+			&:first-child > div {
+				--at-apply: 'grid place-items-center';
+
+				> span {
+					--at-apply: 'sr-only';
+				}
 
 				> button {
-					--at-apply: 'float-end';
+					--at-apply: 'px-1 leading-5 h-[--button-size]';
 				}
 			}
 
-			&:last-child {
-				--at-apply: 'relative';
-			}
-
 			> form,
-			> div {
-				--at-apply: 'grid grid-rows-[auto_1fr] gap-y-2 relative';
-				--select-size: calc(12 * var(--spacing));
+			&:nth-child(n + 2) > div {
+				--at-apply: 'grid grid-rows-[auto_1fr] gap-y-3 relative grid-cols-[1fr_var(--button-size)_1fr]';
+				--select-size: calc(10 * var(--spacing));
+				grid-template-areas:
+					'move-left remove move-right'
+					'source vs target';
 
 				> .v-select {
 					--at-apply: 'size-[--select-size]';
-
 					--b-width: 2px;
-					grid-area: select;
 
 					&[style] {
 						--b-width: 2.5px;
 					}
 
+					&:nth-of-type(1){
+						--at-apply: 'ms-auto';
+						grid-area: source;
+					}
+
 					&:nth-of-type(2) {
-						--at-apply: 'translate-x-[calc(100%+(var(--column-w)-2*var(--select-size)))]';
+						grid-area: target;
 					}
 
 					> select {
@@ -733,13 +729,14 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				}
 
 				> span {
-					--at-apply: 'pointer-events-none text-lg absolute font-semibold z-1 start-1/2 -translate-x-1/2 bottom-[calc(0.5*var(--select-size))] translate-y-1/2';
+					--at-apply: 'pointer-events-none text-center self-center text-lg font-semibold z-1';
 					-webkit-text-stroke: black 0.15em;
 					paint-order: stroke fill;
+					grid-area: vs;
 				}
 
 				> button {
-					--at-apply: 'size-[--button-h] mx-auto';
+					--at-apply: 'size-[--button-size]';
 
 					> span:nth-child(2) {
 						--at-apply: 'size-5';
@@ -747,16 +744,12 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				}
 			}
 
-			> div {
-				--at-apply: 'grid-cols-3';
-				grid-template-areas:
-					'move-left remove move-right'
-					'select select select';
-
+			&:nth-child(n + 2) > div {
 				> button {
 					--at-apply: 'grid place-items-center self-center';
 
 					&:nth-of-type(1) {
+						--at-apply: 'justify-self-end';
 						grid-area: move-left;
 					}
 
@@ -765,6 +758,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 					}
 
 					&:nth-of-type(3) {
+						--at-apply: 'justify-self-start';
 						grid-area: move-right;
 					}
 
@@ -774,51 +768,44 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				}
 			}
 
-			> form {
-				--at-apply: 'grid-cols-1';
-				grid-template-areas:
-					'add'
-					'select';
-
+			&:last-child > form {
 				> button {
-					--at-apply: 'w-auto align-middle px-1';
-					grid-area: add;
+					--at-apply: 'w-auto px-1 justify-self-center leading-5';
+					grid-area: 1 / 1 / 2 / 4;
 				}
 			}
 		}
 
 		> tbody {
-			--section-header-row-h: calc(10 * var(--spacing));
-
 			&:not([aria-labelledby]) {
 				> tr {
-					--at-apply: 'text-lg font-medium bg-[--ui-button-border-clr]/10 whitespace-nowrap h-[--section-header-row-h]';
+					> th {
+						> div {
+							--at-apply: 'grid text-lg font-medium whitespace-nowrap grid-cols-[min-content_min-content_auto_1fr] grid-rows-2 items-center grid-flow-col bg-[--ui-button-border-clr]/10';
 
-					> th > div {
-						--at-apply: 'grid grid-cols-[min-content_min-content_auto_1fr] grid-rows-2 items-center grid-flow-col';
+							> button {
+								--at-apply: 'size-6 grid place-items-center';
 
-						> button {
-							--at-apply: 'size-6 grid place-items-center';
+								> span {
+									--at-apply: 'size-5';
+								}
+
+								> span:nth-child(1) {
+									--at-apply: 'sr-only';
+								}
+
+								&[aria-expanded='true'] > span {
+									--at-apply: 'rotate-180';
+								}
+							}
+
+							> img {
+								--at-apply: 'size-6 row-span-full mx-2';
+							}
 
 							> span {
-								--at-apply: 'size-5';
+								--at-apply: 'row-span-full';
 							}
-
-							> span:nth-child(1) {
-								--at-apply: 'sr-only';
-							}
-
-							&[aria-expanded='true'] > span {
-								--at-apply: 'rotate-180';
-							}
-						}
-
-						> img {
-							--at-apply: 'size-6 row-span-full mx-2';
-						}
-
-						> span {
-							--at-apply: 'row-span-full';
 						}
 					}
 				}
@@ -828,13 +815,27 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				--at-apply: 'text-neutral-200';
 
 				> tr {
-					&:hover > th,
-					&:hover > td:not(.irrelevant, :last-child) {
-						--at-apply: 'text-white';
+					&:hover {
+						> * {
+							--at-apply: 'b-[--ui-button-border-clr]';
+						}
+
+						> th,
+						> td:not(.irrelevant, :last-child) {
+							--at-apply: 'text-white';
+						}
+					}
+
+					> * {
+						--at-apply: 'py-1 b-y b-transparent';
 					}
 
 					> th {
-						--at-apply: 'ps-6';
+						--at-apply: 'ps-3';
+					}
+
+					> td {
+						--at-apply: 'px-2';
 					}
 
 					> td:is(.irrelevant, :last-child) {
@@ -842,7 +843,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 					}
 
 					&:nth-child(even) {
-						--at-apply: 'bg-white/07';
+						--at-apply: 'bg-white/05';
 					}
 				}
 			}
@@ -852,8 +853,8 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		> tbody[aria-labelledby] > tr > td:not(:last-child).highlighted {
 			background-image: linear-gradient(
 				to right,
-				oklch(from var(--col-damage-source-clr, white) l c h / 0.08),
-				oklch(from var(--col-damage-target-clr, white) l c h / 0.08)
+				oklch(from var(--col-damage-source-clr, white) l c h / 0.1),
+				oklch(from var(--col-damage-target-clr, white) l c h / 0.1)
 			);
 		}
 
