@@ -412,7 +412,10 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		</caption>
 		<thead>
 			<tr>
-				<th scope="col" width="240px">
+				<th width="48px" scope="col">
+					<span>section controls</span>
+				</th>
+				<th id="results-table-header-damage-type" scope="col" width="240px">
 					<span>damage type</span>
 				</th>
 				<th
@@ -484,7 +487,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				</td>
 			</tr>
 			<tr>
-				<td width="240px">
+				<td width="240px" colspan="2">
 					<span aria-hidden="true">damage type</span>
 					<a href="#results-table-section-header-basicAttack" class="skip-link">
 						skip column controls
@@ -599,6 +602,53 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		<template v-for="(section, index) in resultSections" :key="section.id">
 			<tbody>
 				<tr>
+					<td :headers="`results-table-section-header-${section.id}`">
+						<button
+							title="move up"
+							class="pretend-ui-button"
+							:disabled="index === 0"
+							draggable="true"
+							@click="moveResultSection(index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+							@dragstart="startResultSectionDrag(index, $event)"
+						>
+							<span>move up</span>
+							<Icon class="i-ph:arrow-up" />
+						</button>
+						<button
+							title="move down"
+							class="pretend-ui-button"
+							draggable="true"
+							:disabled="index === (resultSections.length - 1)"
+							@click="moveResultSection(index + 1, globalKeyModifiers.alt)"
+							@dragstart="startResultSectionDrag(index, $event)"
+						>
+							<span>move down</span>
+							<Icon class="i-ph:arrow-down" />
+						</button>
+						<button
+							title="remove"
+							class="pretend-ui-button"
+							:disabled="section.id === 'basicAttack'"
+							@click="removeDamageSection(index)"
+						>
+							<span>
+								remove
+							</span>
+							<Icon class="i-ph:trash" />
+						</button>
+						<button
+							:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
+							class="pretend-ui-button"
+							:aria-expanded="expandedSections.includes(section.id)"
+							:aria-controls="`results-table-section-body-${section.id}`"
+							@click="toggleResultsSection(section.id)"
+						>
+							<span>
+								{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
+							</span>
+							<Icon class="i-ph:caret-down" />
+						</button>
+					</td>
 					<th
 						:id="`results-table-section-header-${section.id}`"
 						scope="colgroup"
@@ -611,52 +661,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 								height="64"
 								aria-hidden="true"
 							>
-							<span>{{ section.name }}</span>
-							<button
-								title="move up"
-								class="pretend-ui-button"
-								:disabled="index === 0"
-								draggable="true"
-								@click="moveResultSection(index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
-								@dragstart="startResultSectionDrag(index, $event)"
-							>
-								<span>move up</span>
-								<Icon class="i-ph:arrow-up" />
-							</button>
-							<button
-								title="move down"
-								class="pretend-ui-button"
-								draggable="true"
-								:disabled="index === (resultSections.length - 1)"
-								@click="moveResultSection(index + 1, globalKeyModifiers.alt)"
-								@dragstart="startResultSectionDrag(index, $event)"
-							>
-								<span>move down</span>
-								<Icon class="i-ph:arrow-down" />
-							</button>
-							<button
-								title="remove"
-								class="pretend-ui-button"
-								:disabled="section.id === 'basicAttack'"
-								@click="removeDamageSection(index)"
-							>
-								<span>
-									remove
-								</span>
-								<Icon class="i-ph:trash" />
-							</button>
-							<button
-								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
-								class="pretend-ui-button"
-								:aria-expanded="expandedSections.includes(section.id)"
-								:aria-controls="`results-table-section-body-${section.id}`"
-								@click="toggleResultsSection(section.id)"
-							>
-								<span>
-									{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
-								</span>
-								<Icon class="i-ph:caret-down" />
-							</button>
+							{{ section.name }}
 						</div>
 					</th>
 				</tr>
@@ -667,7 +672,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				:hidden="!expandedSections.includes(section.id)"
 			>
 				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
-					<th scope="row">
+					<th :id="`results-table-section-row-${section.id}-${row.id}`" scope="row" colspan="2" headers="results-table-header-damage-type">
 						{{ row.name }}
 					</th>
 					<td
@@ -743,11 +748,11 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		> thead {
 			> tr:nth-child(1) {
 				> th > * {
-				--at-apply: 'sr-only';
+					--at-apply: 'sr-only';
 				}
 
 				> td > span:first-child {
---at-apply: 'sr-only';
+					--at-apply: 'sr-only';
 				}
 			}
 
@@ -859,54 +864,34 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		> tbody {
 			&:not([aria-labelledby]) {
 				> tr {
+					> td {
+						--at-apply: 'grid grid-cols-2 grid-rows-2';
+
+						> button {
+							--at-apply: 'size-6 grid place-items-center';
+
+							> span {
+								--at-apply: 'size-5';
+							}
+
+							> span:nth-child(1) {
+								--at-apply: 'sr-only';
+							}
+
+							&[aria-expanded='true'] > span {
+								--at-apply: 'rotate-180';
+							}
+						}
+					}
+
 					> th {
 						--at-apply: 'pb-1';
 
 						> div {
-							--at-apply: 'grid text-lg font-medium whitespace-nowrap grid-cols-[min-content_min-content_auto_1fr] grid-rows-2 items-center grid-flow-col';
-							grid-template-areas:
-								'move-up remove img name'
-								'move-down toggle img name';
-
-							> button {
-								--at-apply: 'size-6 grid place-items-center';
-
-								&:nth-of-type(1) {
-									grid-area: move-up;
-								}
-
-								&:nth-of-type(2) {
-									grid-area: move-down;
-								}
-
-								&:nth-of-type(3) {
-									grid-area: remove;
-								}
-
-								&:nth-of-type(4) {
-									grid-area: toggle;
-								}
-
-								> span {
-									--at-apply: 'size-5';
-								}
-
-								> span:nth-child(1) {
-									--at-apply: 'sr-only';
-								}
-
-								&[aria-expanded='true'] > span {
-									--at-apply: 'rotate-180';
-								}
-							}
+							--at-apply: 'text-lg font-medium whitespace-nowrap';
 
 							> img {
-								--at-apply: 'size-6 mx-2';
-								grid-area: img;
-							}
-
-							> span {
-								grid-area: name;
+								--at-apply: 'size-6 mx-2 inline-block';
 							}
 						}
 					}
