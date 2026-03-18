@@ -43,22 +43,28 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 
 const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
-	.flatMap(source => Object.entries(source.champion.value!.abilities).map(([abilityKey, ability]) => {
-		const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
-		const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-			abilityVariant.name,
-			source.champion.value!.stringtable,
-		);
+	.map(source => ({
+		championId: source.champion.value!.id,
+		championName: source.champion.value!.name,
+		abilities: Object.entries(source.champion.value!.abilities)
+			.map(([abilityKey, ability]) => {
+				const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
+				const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+					abilityVariant.name,
+					source.champion.value!.stringtable,
+				);
 
-		return {
-			id: `${source.champion.value!.id}-${abilityKey}`,
-			championId: source.champion.value!.id,
-			abilityKey: abilityKey as IChampionAbilityKey,
-			image: abilityVariant.image,
-			name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
-		};
+				return {
+					id: `${source.champion.value!.id}-${abilityKey}`,
+					championId: source.champion.value!.id,
+					abilityKey: abilityKey as IChampionAbilityKey,
+					image: abilityVariant.image,
+					name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
+				};
+			})
+			.filter(source => !resultSections.value.some(section => section.id === source.id)),
 	}))
-	.filter(source => !resultSections.value.some(section => section.id === source.id)),
+	.filter(option => option.abilities.length),
 );
 
 interface IComputedSection {
@@ -164,17 +170,18 @@ function toggleResultsSection(sectionId: string) {
 }
 
 async function addResultsSection(event: SubmitEvent) {
-	const rawSectionIndex = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex');
+	const [rawOptionIndex, rawAbilityIndex] = (new FormData(event.target as HTMLFormElement).get('sectionOptionIndex')! as string).split('-');
 
-	const option = damageSectionOptions.value[Number.parseInt(rawSectionIndex as string)]!;
+	const option = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!;
+	const ability = option.abilities[Number.parseInt(rawAbilityIndex!)]!;
 	const champion = await useChampion(option.championId);
 
 	const section: IDamageResultTableSection = {
-		id: option.id,
-		championId: champion.id,
-		name: option.name,
-		image: option.image,
-		rows: abilityVariantListedVariables(champion, option.abilityKey, 0).map(variable => ({ name: variable, id: variable })),
+		id: ability.id,
+		championId: option.championId,
+		name: ability.name,
+		image: ability.image,
+		rows: abilityVariantListedVariables(champion, ability.abilityKey, 0).map(variable => ({ name: variable, id: variable })),
 	};
 
 	resultSections.value.push(section);
@@ -535,7 +542,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		<template v-for="(section, index) in resultSections" :key="section.id">
 			<tbody>
 				<tr>
-					<th :id="`results-table-section-header-${section.id}`" scope="rowgroup" :colspan="resultColumns.length + 2">
+					<th :id="`results-table-section-header-${section.id}`" scope="colgroup" :colspan="resultColumns.length + 2">
 						<div>
 							<button
 								title="move up"
@@ -628,9 +635,11 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							name="sectionOptionIndex"
 							required
 						>
-							<option v-for="(option, index) in damageSectionOptions" :key="option.name" :value="index">
-								{{ option.name }}
-							</option>
+							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.championId" :label="option.championName">
+								<option v-for="(ability, abilityIndex) in option.abilities" :key="ability.id" :value="`${optionIndex}-${abilityIndex}`">
+									{{ ability.name }}
+								</option>
+							</optgroup>
 						</select>
 						<button class="pretend-ui-button" type="submit">
 							add
