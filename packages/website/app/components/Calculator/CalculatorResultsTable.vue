@@ -909,15 +909,15 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 						}
 					}
 
-					> th {
+					> * {
 						--at-apply: 'pb-1';
+					}
 
-						> div {
-							--at-apply: 'text-lg font-medium whitespace-nowrap';
+					> th > div {
+						--at-apply: 'text-lg font-medium whitespace-nowrap';
 
-							> img {
-								--at-apply: 'size-6 mx-2 inline-block';
-							}
+						> img {
+							--at-apply: 'size-6 mx-2 inline-block';
 						}
 					}
 				}
