@@ -16,6 +16,8 @@ const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
 const highlightedColumnId = ref<string>();
+const highlightedColumn = computed(() => highlightedColumnId.value && resultColumns.value.find(column => column.id === highlightedColumnId.value));
+
 const columnNewSourceId = ref<string>();
 const columnNewTargetId = ref<string>();
 const columnNewSource = computed(() => columnNewSourceId.value ? props.damageSources.find(source => source.id === columnNewSourceId.value) : undefined);
@@ -82,9 +84,12 @@ interface IComputedSectionRowColumn {
 	irrelevant?: boolean;
 	numberValue?: number;
 	value: string | number;
+	comparisonMap: Record<string, 'higher' | 'lower'>;
 }
 
 const computedResults = ref(new Map<string, IComputedSection>(resultSections.value.map(section => [section.id, computeSection(section)] as [string, IComputedSection])));
+
+recalculateResultCellComparisonNumbers();
 
 function addComputedSection(sectionId: string) {
 	computedResults.value.set(sectionId, computeSection(resultSections.value.find(section => section.id === sectionId)!));
@@ -109,6 +114,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		columnId: column.id,
 		irrelevant: true,
 		value: '-',
+		comparisonMap: {}
 	};
 
 	if (!column.source?.listedChampion.value) {
@@ -246,7 +252,7 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 	return resultColumns.value.map((column) => {
 		return {
 			key: `${section.id}-${row.id}-${column.id || 'new'}`,
-			computedRow: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
+			computedColumn: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
 		};
 	});
 }
@@ -258,7 +264,7 @@ function columnDamageSourcesColorStyles(column: IDamageResultTableColumn) {
 	};
 }
 
-const columnDamageSourceColors = computed(() => resultColumns.value.map(column => columnDamageSourcesColorStyles(column)))
+const columnDamageSourceColors = computed(() => resultColumns.value.map(column => columnDamageSourcesColorStyles(column)));
 
 function recalculateColumn(column: IDamageResultTableColumn) {
 	for (const section of resultSections.value) {
@@ -267,6 +273,37 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 				column.id,
 				computeSectionRowColumn(section, row, column),
 			);
+		}
+	}
+	recalculateResultCellComparisonNumbers();
+}
+
+function recalculateResultCellComparisonNumbers() {
+	for (const section of computedResults.value.values()) {
+		for (const row of section.rows.values()) {
+			const columns = Array.from(row.columns.entries());
+
+			for (const [idA, colA] of columns) {
+				const map: IComputedSectionRowColumn['comparisonMap'] = {};
+
+				for (const [idB, colB] of columns) {
+					if (idA === idB) {
+						continue;
+					}
+
+					const a = colA.numberValue;
+					const b = colB.numberValue;
+					if (a !== undefined && b !== undefined) {
+						if (a > b) {
+							map[idB] = 'higher';
+						} else if (a < b) {
+							map[idB] = 'lower';
+						}
+					}
+				}
+
+				colA.comparisonMap = map;
+			}
 		}
 	}
 }
@@ -608,12 +645,16 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 					<td
 						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 						:key="cell.key"
-						:class="{ irrelevant: cell.computedRow.irrelevant, highlighted: highlightedColumns[cellIndex] }"
+						:class="{
+							irrelevant: cell.computedColumn.irrelevant,
+							highlighted: highlightedColumns[cellIndex],
+							...(highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId] && { [cell.computedColumn.comparisonMap[highlightedColumnId]!]: true }),
+						}"
 						:style="columnDamageSourceColors[cellIndex]"
-						@mouseenter="highlightColumnIdSources(cell.computedRow.columnId)"
-						@mouseleave="lowlightColumnIdSources(cell.computedRow.columnId)"
+						@mouseenter="highlightColumnIdSources(cell.computedColumn.columnId)"
+						@mouseleave="lowlightColumnIdSources(cell.computedColumn.columnId)"
 					>
-						{{ cell.computedRow.value }}
+						{{ cell.computedColumn.value }}
 					</td>
 					<td>
 						-
@@ -828,6 +869,14 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 						> th,
 						> td:not(.irrelevant, :last-child) {
 							--at-apply: 'text-white';
+						}
+
+						> td.higher {
+							--at-apply: 'text-green-400';
+						}
+
+						> td.lower {
+							--at-apply: 'text-red-400';
 						}
 					}
 
