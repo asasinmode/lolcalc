@@ -389,8 +389,24 @@ function moveResultSection(index: number, copy: boolean) {
 	console.log('moving', { index, copy });
 }
 
-function startResultSectionDrag(index: number, event: DragEvent) {
+function startResultSectionDrag(event: DragEvent, index: number) {
 	console.log('starting drag', index);
+}
+
+function onResultSectionDragenter(event: DragEvent, index: number) {
+	console.log('entered', index);
+}
+
+function onResultSectionDragover(event: DragEvent, index: number) {
+	console.log('dragged over', index);
+}
+
+function onResultSectionDragleave(event: DragEvent) {
+	console.log('left');
+}
+
+function onResultSectionDrop(event: DragEvent, index: number) {
+	console.log('dropped', index);
 }
 </script>
 
@@ -600,7 +616,12 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 			</tr>
 		</thead>
 		<template v-for="(section, index) in resultSections" :key="section.id">
-			<tbody>
+			<tbody
+				@dragenter="onResultSectionDragenter($event, index)"
+				@dragover="onResultSectionDragover($event, index)"
+				@dragleave="onResultSectionDragleave"
+				@drop="onResultSectionDrop($event, index)"
+			>
 				<tr>
 					<td :headers="`results-table-section-header-${section.id}`">
 						<button
@@ -609,7 +630,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							:disabled="index === 0"
 							draggable="true"
 							@click="moveResultSection(index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
-							@dragstart="startResultSectionDrag(index, $event)"
+							@dragstart="startResultSectionDrag($event, index)"
 						>
 							<span>move up</span>
 							<Icon class="i-ph:arrow-up" />
@@ -620,7 +641,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							draggable="true"
 							:disabled="index === (resultSections.length - 1)"
 							@click="moveResultSection(index + 1, globalKeyModifiers.alt)"
-							@dragstart="startResultSectionDrag(index, $event)"
+							@dragstart="startResultSectionDrag($event, index)"
 						>
 							<span>move down</span>
 							<Icon class="i-ph:arrow-down" />
@@ -670,6 +691,10 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				:id="`results-table-section-body-${section.id}`"
 				:aria-labelledby="`results-table-section-header-${section.id}`"
 				:hidden="!expandedSections.includes(section.id)"
+				@dragenter="onResultSectionDragenter($event, index)"
+				@dragover="onResultSectionDragover($event, index)"
+				@dragleave="onResultSectionDragleave"
+				@drop="onResultSectionDrop($event, index)"
 			>
 				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
 					<th :id="`results-table-section-row-${section.id}-${row.id}`" scope="row" colspan="2" headers="results-table-header-damage-type">
