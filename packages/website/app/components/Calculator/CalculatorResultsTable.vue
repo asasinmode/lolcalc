@@ -356,23 +356,21 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 	>
 		<caption>
 			comparison table
+			<button
+				class="pretend-ui-button"
+				:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
+				@click="cleanupUnused"
+			>
+				remove unused
+			</button>
 		</caption>
 		<thead>
 			<tr>
 				<th scope="col" width="240px">
-					<div>
-						<span>damage type</span>
-						<a href="#results-table-section-header-basicAttack" class="skip-link">
-							skip column controls
-						</a>
-						<button
-							class="pretend-ui-button"
-							:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
-							@click="cleanupUnused"
-						>
-							remove unused
-						</button>
-					</div>
+					damage type
+					<a href="#results-table-section-header-basicAttack" class="skip-link">
+						skip column controls
+					</a>
 				</th>
 				<th
 					v-for="(column, index) in resultColumns"
@@ -659,6 +657,10 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 
 		> caption {
 			--at-apply: 'text-start';
+
+			> button {
+				--at-apply: 'px-1 leading-5 h-[--button-size] float-end';
+			}
 		}
 
 		th {
@@ -670,20 +672,12 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 			--header-row-h: calc(19 * var(--spacing));
 			--button-size: calc(6 * var(--spacing));
 
-			&:first-child > div {
-				--at-apply: 'grid place-items-center';
-
-				> span {
-					--at-apply: 'sr-only';
-				}
-
-				> button {
-					--at-apply: 'px-1 leading-5 h-[--button-size]';
-				}
+			&:first-child {
+				--at-apply: 'align-bottom ps-3';
 			}
 
 			> form,
-			&:nth-child(n + 2) > div {
+			> div {
 				--at-apply: 'grid grid-rows-[auto_1fr] gap-y-3 relative grid-cols-[1fr_var(--button-size)_1fr]';
 				--select-size: calc(10 * var(--spacing));
 				grid-template-areas:
@@ -698,7 +692,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 						--b-width: 2.5px;
 					}
 
-					&:nth-of-type(1){
+					&:nth-of-type(1) {
 						--at-apply: 'ms-auto';
 						grid-area: source;
 					}
@@ -744,7 +738,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				}
 			}
 
-			&:nth-child(n + 2) > div {
+			> div {
 				> button {
 					--at-apply: 'grid place-items-center self-center';
 
@@ -768,7 +762,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 				}
 			}
 
-			&:last-child > form {
+			> form {
 				> button {
 					--at-apply: 'w-auto px-1 justify-self-center leading-5';
 					grid-area: 1 / 1 / 2 / 4;
@@ -780,8 +774,10 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 			&:not([aria-labelledby]) {
 				> tr {
 					> th {
+						--at-apply: 'pb-1';
+
 						> div {
-							--at-apply: 'grid text-lg font-medium whitespace-nowrap grid-cols-[min-content_min-content_auto_1fr] grid-rows-2 items-center grid-flow-col bg-[--ui-button-border-clr]/10';
+							--at-apply: 'grid text-lg font-medium whitespace-nowrap grid-cols-[min-content_min-content_auto_1fr] grid-rows-2 items-center grid-flow-col';
 
 							> button {
 								--at-apply: 'size-6 grid place-items-center';
@@ -809,6 +805,10 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 						}
 					}
 				}
+			}
+
+			&:not(:first-of-type):not([aria-labelledby]) > tr > th {
+				--at-apply: 'pt-6';
 			}
 
 			&[aria-labelledby] {
