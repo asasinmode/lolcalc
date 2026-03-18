@@ -655,11 +655,10 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 					<td
 						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 						:key="cell.key"
-						:class="{
+						:class="[{
 							irrelevant: cell.computedColumn.irrelevant,
 							highlighted: highlightedColumns[cellIndex],
-							...(highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId] && { [cell.computedColumn.comparisonMap[highlightedColumnId]!]: true }),
-						}"
+						}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
 						:style="columnDamageSourceColors[cellIndex]"
 						@mouseenter="highlightColumnIdSources(cell.computedColumn.columnId)"
 						@mouseleave="lowlightColumnIdSources(cell.computedColumn.columnId)"
