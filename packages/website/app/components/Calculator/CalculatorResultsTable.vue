@@ -251,18 +251,14 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 	});
 }
 
-function columnIdDamageSourcesColorStyles(id: string) {
-	const column = resultColumns.value.find(column => column.id === id);
-	return column && columnDamageSourcesColorStyles(column);
+function columnDamageSourcesColorStyles(column: IDamageResultTableColumn) {
+	return {
+		'--col-damage-source-clr': column.source?.color,
+		'--col-damage-target-clr': column.target?.color,
+	};
 }
 
-function columnDamageSourcesColorStyles(column: IDamageResultTableColumn) {
-	return `${
-		column.source ? `--col-damage-source-clr: ${column.source.color};` : ''
-	}${
-		column.target ? `--col-damage-target-clr: ${column.target.color};` : ''
-	}`;
-}
+const columnDamageSourceColors = computed(() => resultColumns.value.map(column => columnDamageSourcesColorStyles(column)))
 
 function recalculateColumn(column: IDamageResultTableColumn) {
 	for (const section of resultSections.value) {
@@ -613,7 +609,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 						:key="cell.key"
 						:class="{ irrelevant: cell.computedRow.irrelevant, highlighted: highlightedColumns[cellIndex] }"
-						:style="columnIdDamageSourcesColorStyles(cell.computedRow.columnId)"
+						:style="columnDamageSourceColors[cellIndex]"
 						@mouseenter="highlightColumnIdSources(cell.computedRow.columnId)"
 						@mouseleave="lowlightColumnIdSources(cell.computedRow.columnId)"
 					>
