@@ -413,16 +413,87 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		<thead>
 			<tr>
 				<th scope="col" width="240px">
-					damage type
+					<span>damage type</span>
+				</th>
+				<th
+					v-for="(column) in resultColumns"
+					:key="column.id"
+					scope="col"
+					width="120px"
+				>
+					<span>
+						{{ column.source && sourceOptions.find(option => option[0] === column.source!.id)?.[1] || 'undefined source' }}
+						vs
+						{{ column.target && targetOptions.find(option => option[0] === column.target!.id)?.[1] || 'undefined target' }}
+					</span>
+				</th>
+				<td width="120px" rowspan="2">
+					<span>configure new column</span>
+					<form @submit.prevent="addResultsColumn">
+						<VSelect
+							id="results-table-column-source"
+							v-model="columnNewSourceId"
+							label="column's damage source"
+							:options="sourceOptions"
+							required
+						>
+							<img
+								v-if="columnNewSource"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewSource.listedChampion.value!.image}`"
+								loading="lazy"
+								width="128"
+								height="128"
+								style="--focus-brightness: 1.2"
+							>
+							<img
+								v-else
+								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+								width="256"
+								height="256"
+								style="--focus-brightness: 1.5"
+							>
+						</VSelect>
+						<span>vs</span>
+						<VSelect
+							id="results-table-column-target"
+							v-model="columnNewTargetId"
+							label="column's damage target"
+							:options="targetOptions"
+							clearable
+						>
+							<img
+								v-if="columnNewTarget"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewTarget.listedChampion.value!.image}`"
+								loading="lazy"
+								width="128"
+								height="128"
+								style="--focus-brightness: 1.2"
+							>
+							<img
+								v-else
+								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+								width="256"
+								height="256"
+								style="--focus-brightness: 1.5"
+							>
+						</VSelect>
+						<button class="pretend-ui-button" type="submit">
+							add
+						</button>
+					</form>
+				</td>
+			</tr>
+			<tr>
+				<td width="240px">
+					<span aria-hidden="true">damage type</span>
 					<a href="#results-table-section-header-basicAttack" class="skip-link">
 						skip column controls
 					</a>
-				</th>
-				<th
+				</td>
+				<td
 					v-for="(column, index) in resultColumns"
 					:key="column.id"
 					width="120px"
-					scope="col"
 					:class="{ highlighted: highlightedColumns[index] }"
 					:style="columnDamageSourcesColorStyles(column)"
 					@mouseenter="highlightColumnSources(column)"
@@ -515,67 +586,14 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							<Icon class="i-ph:arrow-right" />
 						</button>
 					</div>
-				</th>
-				<td width="100px">
-					<form @submit.prevent="addResultsColumn">
-						<VSelect
-							id="results-table-column-source"
-							v-model="columnNewSourceId"
-							label="column's damage source"
-							:options="sourceOptions"
-							required
-						>
-							<img
-								v-if="columnNewSource"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewSource.listedChampion.value!.image}`"
-								loading="lazy"
-								width="128"
-								height="128"
-								style="--focus-brightness: 1.2"
-							>
-							<img
-								v-else
-								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-								width="256"
-								height="256"
-								style="--focus-brightness: 1.5"
-							>
-						</VSelect>
-						<span>vs</span>
-						<VSelect
-							id="results-table-column-target"
-							v-model="columnNewTargetId"
-							label="column's damage target"
-							:options="targetOptions"
-							clearable
-						>
-							<img
-								v-if="columnNewTarget"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewTarget.listedChampion.value!.image}`"
-								loading="lazy"
-								width="128"
-								height="128"
-								style="--focus-brightness: 1.2"
-							>
-							<img
-								v-else
-								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-								width="256"
-								height="256"
-								style="--focus-brightness: 1.5"
-							>
-						</VSelect>
-						<button class="pretend-ui-button" type="submit">
-							add
-						</button>
-					</form>
-					<a href="#results-header" class="skip-link">
-						skip back to results start
-					</a>
-					<a id="results-table-skip-rows" href="#results-table-row-new-section-ability" class="skip-link">
-						skip result rows
-					</a>
 				</td>
+				<!-- TODO figure out where to put these -->
+				<!-- <a href="#results-header" class="skip-link"> -->
+				<!-- 	skip back to results start -->
+				<!-- </a> -->
+				<!-- <a id="results-table-skip-rows" href="#results-table-row-new-section-ability" class="skip-link"> -->
+				<!-- 	skip result rows -->
+				<!-- </a> -->
 			</tr>
 		</thead>
 		<template v-for="(section, index) in resultSections" :key="section.id">
@@ -722,105 +740,118 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 			--at-apply: 'text-start font-normal';
 		}
 
-		> thead > tr > * {
-			--at-apply: 'pb-3';
-			--header-row-h: calc(19 * var(--spacing));
-			--button-size: calc(6 * var(--spacing));
+		> thead {
+			> tr:nth-child(1) {
+				> th > * {
+				--at-apply: 'sr-only';
+				}
 
-			&:first-child {
-				--at-apply: 'align-bottom ps-3';
+				> td > span:first-child {
+--at-apply: 'sr-only';
+				}
 			}
 
-			> form,
-			> div {
-				--at-apply: 'grid grid-rows-[auto_1fr] gap-y-3 relative grid-cols-[1fr_var(--button-size)_1fr]';
-				--select-size: calc(10 * var(--spacing));
-				grid-template-areas:
-					'move-left remove move-right'
-					'source vs target';
+			> tr:nth-child(2) > td:first-child {
+				--at-apply: 'align-bottom text-start ps-3';
+			}
 
-				> .v-select {
-					--at-apply: 'size-[--select-size]';
-					--b-width: 2px;
+			> tr:nth-child(1) > td,
+			> tr:nth-child(2) > * {
+				--at-apply: 'pb-3';
+				--header-row-h: calc(19 * var(--spacing));
+				--button-size: calc(6 * var(--spacing));
 
-					&[style] {
-						--b-width: 2.5px;
-					}
+				> form,
+				> div {
+					--at-apply: 'grid grid-rows-[auto_1fr] gap-y-3 relative grid-cols-[1fr_var(--button-size)_1fr]';
+					--select-size: calc(10 * var(--spacing));
+					grid-template-areas:
+						'move-left remove move-right'
+						'source vs target';
 
-					&:nth-of-type(1) {
-						--at-apply: 'ms-auto';
-						grid-area: source;
-					}
+					> .v-select {
+						--at-apply: 'size-[--select-size]';
+						--b-width: 2px;
 
-					&:nth-of-type(2) {
-						grid-area: target;
-					}
+						&[style] {
+							--b-width: 2.5px;
+						}
 
-					> select {
-						--at-apply: 'rounded-1/2 size-full';
-					}
+						&:nth-of-type(1) {
+							--at-apply: 'ms-auto';
+							grid-area: source;
+						}
 
-					> label {
-						--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--damage-source-clr,var(--ui-button-border-clr)]';
+						&:nth-of-type(2) {
+							grid-area: target;
+						}
 
-						> img {
-							--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
+						> select {
+							--at-apply: 'rounded-1/2 size-full';
+						}
+
+						> label {
+							--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--damage-source-clr,var(--ui-button-border-clr)]';
+
+							> img {
+								--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
+							}
+						}
+
+						> select:is(:hover, :focus-visible) + label {
+							--at-apply: 'bg-neutral-800';
+
+							> img {
+								--at-apply: 'brightness-[--focus-brightness]';
+							}
 						}
 					}
 
-					> select:is(:hover, :focus-visible) + label {
-						--at-apply: 'bg-neutral-800';
+					> span {
+						--at-apply: 'pointer-events-none text-center self-center text-lg font-semibold z-1';
+						-webkit-text-stroke: black 0.15em;
+						paint-order: stroke fill;
+						grid-area: vs;
+					}
 
-						> img {
-							--at-apply: 'brightness-[--focus-brightness]';
+					> button {
+						--at-apply: 'size-[--button-size]';
+
+						> span:nth-child(2) {
+							--at-apply: 'size-5';
 						}
 					}
 				}
 
-				> span {
-					--at-apply: 'pointer-events-none text-center self-center text-lg font-semibold z-1';
-					-webkit-text-stroke: black 0.15em;
-					paint-order: stroke fill;
-					grid-area: vs;
-				}
+				> div {
+					> button {
+						--at-apply: 'grid place-items-center self-center';
 
-				> button {
-					--at-apply: 'size-[--button-size]';
+						&:nth-of-type(1) {
+							--at-apply: 'justify-self-end';
+							grid-area: move-left;
+						}
 
-					> span:nth-child(2) {
-						--at-apply: 'size-5';
+						&:nth-of-type(2) {
+							grid-area: remove;
+						}
+
+						&:nth-of-type(3) {
+							--at-apply: 'justify-self-start';
+							grid-area: move-right;
+						}
+
+						> span:nth-child(1) {
+							--at-apply: 'sr-only';
+						}
 					}
 				}
-			}
 
-			> div {
-				> button {
-					--at-apply: 'grid place-items-center self-center';
-
-					&:nth-of-type(1) {
-						--at-apply: 'justify-self-end';
-						grid-area: move-left;
+				> form {
+					> button {
+						--at-apply: 'w-auto px-1 justify-self-center leading-5';
+						grid-area: 1 / 1 / 2 / 4;
 					}
-
-					&:nth-of-type(2) {
-						grid-area: remove;
-					}
-
-					&:nth-of-type(3) {
-						--at-apply: 'justify-self-start';
-						grid-area: move-right;
-					}
-
-					> span:nth-child(1) {
-						--at-apply: 'sr-only';
-					}
-				}
-			}
-
-			> form {
-				> button {
-					--at-apply: 'w-auto px-1 justify-self-center leading-5';
-					grid-area: 1 / 1 / 2 / 4;
 				}
 			}
 		}
