@@ -865,7 +865,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 			&:not([aria-labelledby]) {
 				> tr {
 					> td {
-						--at-apply: 'grid grid-cols-2 grid-rows-2';
+						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2';
 
 						> button {
 							--at-apply: 'size-6 grid place-items-center';
