@@ -396,7 +396,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 
 <template>
 	<table
-		id="calculator-results-table"
+		id="results-table"
 		:inert="!showResults"
 		:aria-busy="resultColumns.some(column => column.source?.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id)"
 	>
@@ -569,10 +569,10 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							add
 						</button>
 					</form>
-					<a href="#calculator-results-header" class="skip-link">
+					<a href="#results-header" class="skip-link">
 						skip back to results start
 					</a>
-					<a id="calculator-results-table-skip-rows" href="#results-table-row-new-section" class="skip-link">
+					<a id="results-table-skip-rows" href="#results-table-row-new-section-ability" class="skip-link">
 						skip result rows
 					</a>
 				</td>
@@ -581,8 +581,19 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 		<template v-for="(section, index) in resultSections" :key="section.id">
 			<tbody>
 				<tr>
-					<th :id="`results-table-section-header-${section.id}`" scope="colgroup" :colspan="resultColumns.length + 2">
+					<th
+						:id="`results-table-section-header-${section.id}`"
+						scope="colgroup"
+						:colspan="resultColumns.length + 2"
+					>
 						<div>
+							<img
+								:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
+								width="64"
+								height="64"
+								aria-hidden="true"
+							>
+							<span>{{ section.name }}</span>
 							<button
 								title="move up"
 								class="pretend-ui-button"
@@ -620,7 +631,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
 								class="pretend-ui-button"
 								:aria-expanded="expandedSections.includes(section.id)"
-								:aria-controls="`results-table-section-${section.id}`"
+								:aria-controls="`results-table-section-body-${section.id}`"
 								@click="toggleResultsSection(section.id)"
 							>
 								<span>
@@ -628,19 +639,12 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 								</span>
 								<Icon class="i-ph:caret-down" />
 							</button>
-							<img
-								:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
-								width="64"
-								height="64"
-								aria-hidden="true"
-							>
-							<span>{{ section.name }}</span>
 						</div>
 					</th>
 				</tr>
 			</tbody>
 			<tbody
-				:id="`results-table-section-${section.id}`"
+				:id="`results-table-section-body-${section.id}`"
 				:aria-labelledby="`results-table-section-header-${section.id}`"
 				:hidden="!expandedSections.includes(section.id)"
 			>
@@ -688,7 +692,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							add
 						</button>
 					</form>
-					<a href="#calculator-results-table-skip-rows" class="skip-link">
+					<a href="#results-table-skip-rows" class="skip-link">
 						skip back to column headers
 					</a>
 				</td>
@@ -699,7 +703,7 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 
 <style>
 @layer components {
-	#calculator-results-table {
+	#results-table {
 		--at-apply: 'mx-auto border-separate border-spacing-0';
 		--border-color: theme('colors.neutral.400');
 
@@ -830,9 +834,28 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 
 						> div {
 							--at-apply: 'grid text-lg font-medium whitespace-nowrap grid-cols-[min-content_min-content_auto_1fr] grid-rows-2 items-center grid-flow-col';
+							grid-template-areas:
+								'move-up remove img name'
+								'move-down toggle img name';
 
 							> button {
 								--at-apply: 'size-6 grid place-items-center';
+
+								&:nth-of-type(1) {
+									grid-area: move-up;
+								}
+
+								&:nth-of-type(2) {
+									grid-area: move-down;
+								}
+
+								&:nth-of-type(3) {
+									grid-area: remove;
+								}
+
+								&:nth-of-type(4) {
+									grid-area: toggle;
+								}
 
 								> span {
 									--at-apply: 'size-5';
@@ -848,11 +871,12 @@ function startResultSectionDrag(index: number, event: DragEvent) {
 							}
 
 							> img {
-								--at-apply: 'size-6 row-span-full mx-2';
+								--at-apply: 'size-6 mx-2';
+								grid-area: img;
 							}
 
 							> span {
-								--at-apply: 'row-span-full';
+								grid-area: name;
 							}
 						}
 					}

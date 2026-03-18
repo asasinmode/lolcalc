@@ -77,7 +77,7 @@ const { minorVersion } = usePatchVersion();
 
 <style>
 @layer overrides {
-	#calculator-scoreboard > ul > [data-scoreboard-item='Aphelios'] > details > [data-abilities] {
+	#scoreboard > ul > [data-scoreboard-item='Aphelios'] > details > [data-abilities] {
 		--at-apply: 'gap-x-0';
 		--ui-button-border-clr: theme('colors.slate.300');
 		/* radius of the funny border */

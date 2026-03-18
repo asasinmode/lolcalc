@@ -335,8 +335,8 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 </script>
 
 <template>
-	<section id="calculator-scoreboard">
-		<h2 id="calculator-scoreboard-header">
+	<section id="scoreboard">
+		<h2 id="scoreboard-header">
 			configuration scoreboard
 		</h2>
 		<div>
@@ -463,8 +463,8 @@ function itemDragEventData(event: DragEvent): { source: DamageSource; itemIndex:
 
 <style>
 @layer components {
-	#calculator-scoreboard {
-		> #calculator-scoreboard-header {
+	#scoreboard {
+		> #scoreboard-header {
 			--at-apply: 'mx-auto text-center';
 		}
 

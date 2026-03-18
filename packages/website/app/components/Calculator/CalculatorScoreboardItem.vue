@@ -1310,16 +1310,16 @@ defineExpose({ el });
 
 <style>
 @layer components {
-	#calculator-scoreboard > div > ul:nth-of-type(1) > [data-scoreboard-item] {
+	#scoreboard > div > ul:nth-of-type(1) > [data-scoreboard-item] {
 		border-inline-start: 0.25rem solid var(--damage-source-clr);
 	}
 
-	#calculator-scoreboard > div > ul:nth-of-type(2) > [data-scoreboard-item] {
+	#scoreboard > div > ul:nth-of-type(2) > [data-scoreboard-item] {
 		--bg-direction: 270deg;
 		border-inline-end: 0.25rem solid var(--damage-source-clr);
 	}
 
-	#calculator-scoreboard > div > ul > [data-scoreboard-item] {
+	#scoreboard > div > ul > [data-scoreboard-item] {
 		--at-apply: 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);

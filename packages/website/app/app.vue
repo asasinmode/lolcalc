@@ -113,15 +113,15 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 			current patch: {{ version }}
 			<br>
 		</p>
-		<label for="calculator-scoreboard-enable-unimplemented-ui">
+		<label for="scoreboard-enable-unimplemented-ui">
 			TMP enable unimplemented ui
-			<input id="calculator-scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
+			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
 		</label>
 	</header>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
-		<section id="calculator-results">
-			<h2 id="calculator-results-header">
+		<section id="results">
+			<h2 id="results-header">
 				results
 			</h2>
 			<p v-show="!showResults">
@@ -148,11 +148,11 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 		--placeholder-champion-bg-clr: #020a13;
 	}
 
-	#calculator-results {
+	#results {
 		--at-apply: 'mx-auto text-center';
 	}
 
-	#calculator-results + p {
+	#results + p {
 		--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
 		-webkit-text-stroke: black 0.2em;
 		paint-order: stroke fill;
