@@ -92,7 +92,9 @@ const computedResults = ref(new Map<string, IComputedSection>(resultSections.val
 recalculateResultCellComparisonNumbers();
 
 function addComputedSection(sectionId: string) {
-	computedResults.value.set(sectionId, computeSection(resultSections.value.find(section => section.id === sectionId)!));
+	const section = computeSection(resultSections.value.find(section => section.id === sectionId)!);
+	calculateComputedSectionComparisonMaps(section);
+	computedResults.value.set(sectionId, section);
 }
 
 function computeSection(section: IDamageResultTableSection): IComputedSection {
@@ -114,7 +116,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		columnId: column.id,
 		irrelevant: true,
 		value: '-',
-		comparisonMap: {}
+		comparisonMap: {},
 	};
 
 	if (!column.source?.listedChampion.value) {
@@ -280,30 +282,34 @@ function recalculateColumn(column: IDamageResultTableColumn) {
 
 function recalculateResultCellComparisonNumbers() {
 	for (const section of computedResults.value.values()) {
-		for (const row of section.rows.values()) {
-			const columns = Array.from(row.columns.entries());
+		calculateComputedSectionComparisonMaps(section);
+	}
+}
 
-			for (const [idA, colA] of columns) {
-				const map: IComputedSectionRowColumn['comparisonMap'] = {};
+function calculateComputedSectionComparisonMaps(section: IComputedSection) {
+	for (const row of section.rows.values()) {
+		const columns = Array.from(row.columns.entries());
 
-				for (const [idB, colB] of columns) {
-					if (idA === idB) {
-						continue;
-					}
+		for (const [idA, colA] of columns) {
+			const map: IComputedSectionRowColumn['comparisonMap'] = {};
 
-					const a = colA.numberValue;
-					const b = colB.numberValue;
-					if (a !== undefined && b !== undefined) {
-						if (a > b) {
-							map[idB] = 'higher';
-						} else if (a < b) {
-							map[idB] = 'lower';
-						}
-					}
+			for (const [idB, colB] of columns) {
+				if (idA === idB) {
+					continue;
 				}
 
-				colA.comparisonMap = map;
+				const a = colA.numberValue;
+				const b = colB.numberValue;
+				if (a !== undefined && b !== undefined) {
+					if (a > b) {
+						map[idB] = 'higher';
+					} else if (a < b) {
+						map[idB] = 'lower';
+					}
+				}
 			}
+
+			colA.comparisonMap = map;
 		}
 	}
 }
