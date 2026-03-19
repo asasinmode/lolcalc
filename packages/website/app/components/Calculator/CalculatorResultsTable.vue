@@ -16,7 +16,6 @@ const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
 const highlightedColumnId = ref<string>();
-const highlightedColumn = computed(() => highlightedColumnId.value && resultColumns.value.find(column => column.id === highlightedColumnId.value));
 
 const columnNewSourceId = ref<string>();
 const columnNewTargetId = ref<string>();
@@ -649,7 +648,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 						<button
 							title="remove"
 							class="pretend-ui-button"
-							:disabled="section.id === 'basicAttack'"
+							:disabled="section.permanent"
 							@click="removeDamageSection(index)"
 						>
 							<span>

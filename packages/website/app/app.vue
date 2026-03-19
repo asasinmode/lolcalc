@@ -53,6 +53,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		id: 'basicAttack',
 		name: 'basic attack',
 		championId: 'all',
+		permanent: true,
 		image: 'assets/ux/deathrecap/autoattack.png',
 		rows: [
 			{

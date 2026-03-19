@@ -59,21 +59,21 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [ ] add all of champion's things to damage results
   - [ ] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
-  - [ ] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
-  - [ ] source vs target column headers
-  - [ ] unique sections, basic attack, item or ability
+  - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
+  - [x] source vs target column headers
+  - [x] unique sections, basic attack, item or ability
+  - [ ] compare stats section
   - [ ] damage type row, use the actual calculated value in the cells
-  - [ ] column header functionality - choose source/target, remove
-  - [ ] section header functionality - add new, expand/collapse, remove
+  - [x] column header functionality - choose source/target, remove
+  - [x] section header functionality - add new, expand/collapse, remove
   - [ ] cleanup results when source/target is moved/deleted or champion changes
-  - [ ] color coded/matching results with scoreboard
-  - [ ] row/column hover/focus style
-  - [ ] cell have number values, then color them red/green hue depending on if higher or lower than others
+  - [x] color coded/matching results with scoreboard
+  - [x] row/column hover/focus style
+  - [x] cell have number values, then color them red/green depending on if higher or lower than others
   - [ ] section image appropriate ability/item hover tooltip with variable names instead of values
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
   - [ ] ability rows not implemented yet, coming soon
   - [ ] per damage results row unknown variables, add exclamation that results are incorrect
-  - [ ] compare stats section
   - [ ] moving columns left/right
   - [ ] moving sections up/down
 - [ ] rune dialog
