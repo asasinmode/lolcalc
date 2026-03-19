@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { IComputedDamageSourceChampionStat } from '~/utils/DamageSource';
 import type { IWithCalculateDynamicValues } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 
@@ -245,18 +246,17 @@ interface IChampionStat {
 	description: string;
 	values: {
 		name: string;
-		decimal?: number;
-		isPercentage?: boolean;
-		base?: number | string;
-		bonus: number | string;
-		total: number | string;
+		base?: number;
+		bonus: number;
+		stat: IComputedDamageSourceChampionStat;
 	}[];
 	displayedValue: string;
 	bottomText?: string;
 }
 
 const minorStats = computed<IChampionStat[]>(() => {
-	const { stats } = props.value.stats.value;
+	const { stats } = props.value.computed;
+
 	const minorStats = [
 		{
 			name: 'Health | Resource Regeneration',
@@ -265,15 +265,11 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Health Regen',
-					base: stats.baseOnLevel.hpRegen,
-					bonus: stats.bonus.hpRegen,
-					total: stats.total.hpRegen,
+					stat: stats.value.hpRegen,
 				},
 				{
 					name: 'Resource Regen',
-					base: stats.baseOnLevel.manaRegen,
-					bonus: stats.bonus.manaRegen,
-					total: stats.total.manaRegen,
+					stat: stats.value.manaRegen,
 				},
 			],
 		},
@@ -284,9 +280,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Heal and Shield Power',
-					total: stats.total.healShieldPower,
-					bonus: stats.total.healShieldPower,
-					isPercentage: true,
+					stat: stats.value.healShieldPower,
 				},
 			],
 		},
@@ -297,15 +291,11 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Lethality',
-					bonus: stats.bonus.lethality,
-					total: stats.total.lethality,
+					stat: stats.value.lethality,
 				},
 				{
 					name: 'Armor Penetration',
-					decimal: 2,
-					bonus: stats.bonus.percentArmorPen,
-					total: stats.total.percentArmorPen,
-					isPercentage: true,
+					stat: stats.value.percentArmorPen,
 				},
 			],
 		},
@@ -316,15 +306,11 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Flat Magic Penetration',
-					bonus: stats.bonus.flatMagicPen,
-					total: stats.total.flatMagicPen,
+					stat: stats.value.flatMagicPen,
 				},
 				{
 					name: 'Magic Penetration',
-					decimal: 2,
-					bonus: stats.bonus.percentMagicPen,
-					total: stats.total.percentMagicPen,
-					isPercentage: true,
+					stat: stats.value.percentMagicPen,
 				},
 			],
 		},
@@ -335,9 +321,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Life Steal',
-					bonus: stats.bonus.lifeSteal,
-					total: stats.total.lifeSteal,
-					isPercentage: true,
+					stat: stats.value.lifeSteal,
 				},
 			],
 		},
@@ -348,9 +332,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Omnivamp',
-					bonus: stats.bonus.omnivamp,
-					total: stats.total.omnivamp,
-					isPercentage: true,
+					stat: stats.value.omnivamp,
 				},
 			],
 		},
@@ -361,9 +343,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Attack Range',
-					base: stats.baseOnLevel.attackRange,
-					bonus: stats.bonus.attackRange,
-					total: stats.total.attackRange,
+					stat: stats.value.attackRange,
 				},
 			],
 		},
@@ -374,9 +354,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Tenacity',
-					bonus: stats.bonus.tenacity,
-					total: stats.total.tenacity,
-					isPercentage: true,
+					stat: stats.value.tenacity,
 				},
 			],
 		},
@@ -388,7 +366,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 });
 
 const majorStats = computed<IChampionStat[]>(() => {
-	const { stats } = props.value.stats.value;
+	const { stats } = props.value.computed;
 	const majorStats = [
 		{
 			name: 'Attack Damage',
@@ -397,9 +375,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Attack Damage',
-					base: stats.baseOnLevel.attackDamage,
-					bonus: stats.bonus.attackDamage,
-					total: stats.total.attackDamage,
+					stat: stats.value.attackDamage,
 				},
 			],
 		},
@@ -410,8 +386,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Ability Power',
-					bonus: stats.bonus.abilityPower,
-					total: stats.total.abilityPower,
+					stat: stats.value.abilityPower,
 				},
 			],
 		},
@@ -422,12 +397,10 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Armor',
-					base: stats.baseOnLevel.armor,
-					bonus: stats.bonus.armor,
-					total: stats.total.armor,
+					stat: stats.value.armor,
 				},
 			],
-			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced physical damage.`,
+			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.value.armor.total) * 100)}</span>% reduced physical damage.`,
 		},
 		{
 			name: 'Magic Resist',
@@ -436,12 +409,10 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Magic Resist',
-					base: stats.baseOnLevel.magicResist,
-					bonus: stats.bonus.magicResist,
-					total: stats.total.magicResist,
+					stat: stats.value.magicResist,
 				},
 			],
-			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.total.magicResist) * 100)}</span>% reduced magic damage.`,
+			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.value.magicResist.total) * 100)}</span>% reduced magic damage.`,
 		},
 		{
 			name: 'Attack Speed',
@@ -450,23 +421,18 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Bonus Attack Speed',
-					bonus: stats.bonus.bonusAttackSpeedPercent,
-					total: stats.total.bonusAttackSpeedPercent,
-					isPercentage: true,
-					decimal: 5,
+					stat: stats.value.bonusAttackSpeedPercent,
 				},
 				{
 					name: 'Attacks per second',
-					total: stats.total.attackSpeed,
-					decimal: 3,
+					stat: stats.value.attackSpeed,
 				},
 				{
 					name: 'Ratio',
-					total: stats.total.attackSpeedRatio,
-					decimal: 3,
+					stat: stats.value.attackSpeedRatio,
 				},
 			],
-			displayedValue: stats.total.attackSpeed.toFixed(2),
+			displayedValue: stats.value.attackSpeed.total.toFixed(2),
 		},
 		{
 			name: 'Ability Haste',
@@ -475,11 +441,10 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Current Ability Haste',
-					bonus: stats.bonus.abilityHaste,
-					total: stats.total.abilityHaste,
+					stat: stats.value.abilityHaste,
 				},
 			],
-			bottomText: `Equivalent to reducing your Ability cooldowns by <span data-total="">${Math.round(cooldownReductionPercentageFromHaste(stats.total.abilityHaste))}</span>%`,
+			bottomText: `Equivalent to reducing your Ability cooldowns by <span data-total="">${Math.round(cooldownReductionPercentageFromHaste(stats.value.abilityHaste.total))}</span>%`,
 		},
 		{
 			name: 'Critical Strike Chance',
@@ -488,9 +453,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Critical Strike Chance',
-					bonus: stats.bonus.critChance,
-					total: stats.total.critChance,
-					isPercentage: true,
+					stat: stats.value.critChance,
 				},
 			],
 		},
@@ -501,9 +464,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			values: [
 				{
 					name: 'Move Speed',
-					base: stats.baseOnLevel.moveSpeed,
-					bonus: stats.bonus.moveSpeed,
-					total: stats.total.moveSpeed,
+					stat: stats.value.moveSpeed,
 				},
 			],
 		},
@@ -520,29 +481,19 @@ function updateComputedStats(stats: IChampionStat[]) {
 
 		for (let i = 0; i <= stat.values.length - 1; i++) {
 			const value = stat.values[i]!;
-			const multiplier = value.isPercentage ? 100 : 1;
+			const multiplier = value.stat.isPercentage ? 100 : 1;
 
-			displayedValue.push(`${formatStatValue(multiplier, value, 'total')}${value.isPercentage ? '%' : ''}`);
+			displayedValue.push(`${value.stat.formattedTotal}${value.stat.isPercentage ? '%' : ''}`);
 
-			value.total = formatStatValue(multiplier, value, 'total');
+			value.bonus = formatChampionStatValue(multiplier, value.stat, 'bonus');
 
-			if (value.bonus) {
-				value.bonus = formatStatValue(multiplier, value, 'bonus');
-			}
-
-			if ('base' in value) {
-				value.base = formatStatValue(multiplier, value, 'base');
+			if ('base' in value.stat) {
+				value.base = formatChampionStatValue(multiplier, value.stat, 'base');
 			}
 		}
 
 		stat.displayedValue ||= displayedValue.join(' | ');
 	}
-}
-
-function formatStatValue(multiplier: number, value: IChampionStat['values'][number], key: 'total' | 'base' | 'bonus') {
-	return value.decimal
-		? roundVariable(value[key] as number * multiplier, value.decimal)
-		: Math.round(value[key] as number * multiplier);
 }
 
 const maxHealth = computed(() => Math.round(props.value.stats.value?.stats.total.hp || 1));
@@ -1023,7 +974,7 @@ defineExpose({ el });
 							<img v-bind="textureBgImageAttrs(ui.playerStats[stat.iconTextureKey], 20)">
 						</dt>
 						<dd
-							:data-has-bonus="stat.values.some(value => value.bonus) || undefined"
+							:data-has-bonus="stat.values.some(value => value.stat.bonus) || undefined"
 							@mouseenter="showStatTooltip($event, stat)"
 							@mouseleave="hideStatTooltip"
 						>
@@ -1037,8 +988,8 @@ defineExpose({ el });
 					<dl>
 						<template v-for="(statValue, valueIndex) in hoveredStat?.values" :key="valueIndex">
 							<dt>{{ statValue.name }}:</dt>
-							<dd :data-has-bonus="statValue.bonus || undefined">
-								<span data-total="">{{ statValue.total }}</span>{{ statValue.isPercentage ? '%' : '' }}
+							<dd :data-has-bonus="statValue.stat.bonus || undefined">
+								<span data-total="">{{ statValue.stat.formattedTotal }}</span>{{ statValue.stat.isPercentage ? '%' : '' }}
 								<template v-if="'base' in statValue">
 									(<span data-base="">{{ statValue.base }}</span> base + <span data-bonus="">{{ statValue.bonus }}</span> bonus)
 								</template>

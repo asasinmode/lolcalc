@@ -56,6 +56,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] kai'sa
       - [ ] ornn
       - [ ] kraken slayer
+      - [ ] yun tal wildarrows
     - [ ] add all of champion's things to damage results
   - [ ] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
