@@ -50,12 +50,17 @@ export interface IDamageResultTableSection {
 	permanent?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
-	/** ability variant image */
-	image: string;
+	/** ability variant image, basic attack icon */
+	icon: string;
 	rows: {
 		name: string;
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
 		id: string;
+		icon?: {
+			path: string;
+			width: number;
+			height: number;
+		};
 	}[];
 }
 

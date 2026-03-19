@@ -165,7 +165,7 @@ function removeResultsColumn(index: number) {
 	}
 }
 
-const expandedSections = ref<string[]>(resultSections.value.map(section => section.id));
+const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== 'stats').map(section => section.id));
 
 function toggleResultsSection(sectionId: string) {
 	const index = expandedSections.value.indexOf(sectionId);
@@ -187,7 +187,7 @@ async function addResultsSection(event: SubmitEvent) {
 		id: ability.id,
 		championId: option.championId,
 		name: ability.name,
-		image: ability.image,
+		icon: ability.image,
 		rows: abilityVariantListedVariables(champion, ability.abilityKey, 0).map(variable => ({ name: variable, id: variable })),
 	};
 
@@ -425,7 +425,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				remove unused
 			</button>
 			<span>
-				Columns, except the first, contain the corresponding damage source's (left) value applied (if applicable) vs the specified damage target (right, can be empty)
+				Columns, except the first and last, contain the corresponding damage source's (left) value applied (if applicable) vs the specified damage target (right, can be empty)
 			</span>
 		</caption>
 		<thead>
@@ -679,7 +679,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 					>
 						<div>
 							<img
-								:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.image}`"
+								:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.icon}`"
 								width="64"
 								height="64"
 								aria-hidden="true"
@@ -700,6 +700,13 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			>
 				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
 					<th :id="`results-table-section-row-${section.id}-${row.id}`" scope="row" colspan="2" headers="results-table-header-damage-type">
+						<img
+							v-if="row.icon"
+							:src="`https://raw.communitydragon.org/${minorVersion}/${row.icon.path}`"
+							:width="row.icon.width"
+							:height="row.icon.height"
+							aria-hidden="true"
+						>
 						{{ row.name }}
 					</th>
 					<td
@@ -971,7 +978,14 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 					}
 
 					> th {
-						--at-apply: 'ps-3';
+						--at-apply: 'ps-[--ps]';
+						--ps: calc(2 * var(--control-button-size));
+
+						> img {
+							--at-apply: 'inline-block size-[--size] align-middle -ms-[--ms] me-[calc(0.5*var(--size))]';
+							--size: calc(5 * var(--spacing));
+							--ms: calc(0.5 * (var(--ps) + var(--size)));
+						}
 					}
 
 					> td {

@@ -54,23 +54,36 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		name: 'stats',
 		championId: 'all',
 		permanent: true,
-		image: 'assets/ux/deathrecap/autoattack.png',
-		rows: Object.entries(ITEM_TO_CHAMPION_STATS).map(([itemStat, championStat]) => {
-			const statMeta = ITEM_STAT_META[itemStat as IItemStat];
+		icon: 'assets/ux/deathrecap/autoattack.png',
+		rows: Object.entries(ITEM_TO_CHAMPION_STATS)
+			.concat([['PercentBaseMPRegenMod', 'manaRegen']] satisfies [IItemStat, IChampionStatName][])
+			.map(([itemStat, championStat]) => {
+				const statMeta = ITEM_STAT_META[itemStat as IItemStat];
 
-			return {
-				id: championStat,
-				name: statMeta.name,
-				order: statMeta.order,
-			};
-		}).sort((a, b) => b.order - a.order),
+				return {
+					id: championStat,
+					name:
+				championStat === 'percentArmorPen' || championStat === 'percentMagicPen'
+					? `Percentage ${statMeta.name.toLowerCase()}`
+					: championStat === 'manaRegen'
+						? ITEM_STAT_META.FlatHPRegenMod.name.replace('Health', 'Mana')
+						: statMeta.name,
+					order: statMeta.order,
+					icon: {
+						path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${ITEM_STAT_ICON_NAMES[itemStat as IItemStat]}.png`,
+						width: 20,
+						height: 20,
+					},
+				};
+			})
+			.sort((a, b) => b.order - a.order),
 	},
 	{
 		id: 'basicAttack',
 		name: 'basic attack',
 		championId: 'all',
 		permanent: true,
-		image: 'assets/ux/deathrecap/autoattack.png',
+		icon: 'assets/ux/deathrecap/autoattack.png',
 		rows: [
 			{
 				name: 'total',
