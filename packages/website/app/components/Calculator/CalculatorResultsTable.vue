@@ -991,7 +991,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			}
 		}
 
-		> thead > tr > th:nth-child(n + 2).highlighted,
+		> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
 		> tbody[aria-labelledby] > tr > td:not(:last-child).highlighted {
 			background-image: linear-gradient(
 				to right,
