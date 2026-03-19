@@ -54,7 +54,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		name: 'stats',
 		championId: 'all',
 		permanent: true,
-		icon: 'assets/ux/deathrecap/autoattack.png',
+		icon: 'assets/ux/deathrecap/unknowndamage.png',
 		rows: Object.entries(ITEM_TO_CHAMPION_STATS)
 			.concat([['PercentBaseMPRegenMod', 'manaRegen']] satisfies [IItemStat, IChampionStatName][])
 			.map(([itemStat, championStat]) => {
@@ -100,6 +100,10 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 			{
 				name: 'true damage',
 				id: 'trueDamage',
+			},
+			{
+				name: 'DPS',
+				id: 'dps',
 			},
 		],
 	},

@@ -930,7 +930,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 						--at-apply: 'text-lg font-medium whitespace-nowrap';
 
 						> img {
-							--at-apply: 'size-6 mx-2 inline-block';
+							--at-apply: 'size-6 ms-2 me-1 inline-block';
 						}
 					}
 				}
