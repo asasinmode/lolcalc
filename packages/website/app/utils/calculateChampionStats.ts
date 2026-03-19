@@ -1,3 +1,5 @@
+import { ITEM_TO_CHAMPION_STATS } from './item';
+
 interface IStatsCalculationResult {
 	stats: {
 		base: IChampionStats;
@@ -158,32 +160,6 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		adaptiveForceStatVariable,
 	};
 }
-
-const ITEM_TO_CHAMPION_STATS: Record<Exclude<
-	IItemStat,
-'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
->, IChampionStatName> = {
-	AbilityHasteMod: 'abilityHaste',
-	FlatArmorMod: 'armor',
-	FlatCritChanceMod: 'critChance',
-	FlatHPPoolMod: 'hp',
-	FlatHPRegenMod: 'hpRegen',
-	FlatMPPoolMod: 'mana',
-	FlatCritDamageMod: 'critDamageMultiplier',
-	FlatMagicDamageMod: 'abilityPower',
-	FlatMagicPenetrationMod: 'flatMagicPen',
-	FlatMovementSpeedMod: 'moveSpeed',
-	FlatPhysicalDamageMod: 'attackDamage',
-	FlatSpellBlockMod: 'magicResist',
-	PercentArmorPenetrationMod: 'percentArmorPen',
-	PercentAttackSpeedMod: 'bonusAttackSpeedPercent',
-	PercentHealingAmountMod: 'healShieldPower',
-	PercentLifeStealMod: 'lifeSteal',
-	PercentMagicPenetrationMod: 'percentMagicPen',
-	PercentTenacityMod: 'tenacity',
-	PhysicalLethality: 'lethality',
-	PercentOmnivampMod: 'omnivamp',
-};
 
 function itemToChampionStats(item?: IItem): [IChampionStatName, number][] {
 	return item

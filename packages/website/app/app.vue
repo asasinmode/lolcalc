@@ -50,6 +50,22 @@ const showResults = computed(() => (damageSources as unknown as Ref<DamageSource
 
 const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
+		id: 'stats',
+		name: 'stats',
+		championId: 'all',
+		permanent: true,
+		image: 'assets/ux/deathrecap/autoattack.png',
+		rows: Object.entries(ITEM_TO_CHAMPION_STATS).map(([itemStat, championStat]) => {
+			const statMeta = ITEM_STAT_META[itemStat as IItemStat];
+
+			return {
+				id: championStat,
+				name: statMeta.name,
+				order: statMeta.order,
+			};
+		}).sort((a, b) => b.order - a.order),
+	},
+	{
 		id: 'basicAttack',
 		name: 'basic attack',
 		championId: 'all',

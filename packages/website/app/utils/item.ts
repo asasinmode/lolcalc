@@ -10,6 +10,7 @@ export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IItemVar
 	},
 };
 
+/** paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${ITEM_STAT_ICON_NAME}.png` */
 export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' | 'level' | 'range' | 'cooldown', string> = {
 	OnHit: 'onhit',
 	FlatPhysicalDamageMod: 'scalead',
@@ -39,6 +40,32 @@ export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' 
 	range: 'scalerange',
 	PercentOmnivampMod: 'scalesv',
 	PercentTenacityMod: 'scaletenacity',
+};
+
+export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
+	IItemStat,
+'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
+>, IChampionStatName> = {
+	AbilityHasteMod: 'abilityHaste',
+	FlatArmorMod: 'armor',
+	FlatCritChanceMod: 'critChance',
+	FlatHPPoolMod: 'hp',
+	FlatHPRegenMod: 'hpRegen',
+	FlatMPPoolMod: 'mana',
+	FlatCritDamageMod: 'critDamageMultiplier',
+	FlatMagicDamageMod: 'abilityPower',
+	FlatMagicPenetrationMod: 'flatMagicPen',
+	FlatMovementSpeedMod: 'moveSpeed',
+	FlatPhysicalDamageMod: 'attackDamage',
+	FlatSpellBlockMod: 'magicResist',
+	PercentArmorPenetrationMod: 'percentArmorPen',
+	PercentAttackSpeedMod: 'bonusAttackSpeedPercent',
+	PercentHealingAmountMod: 'healShieldPower',
+	PercentLifeStealMod: 'lifeSteal',
+	PercentMagicPenetrationMod: 'percentMagicPen',
+	PercentTenacityMod: 'tenacity',
+	PhysicalLethality: 'lethality',
+	PercentOmnivampMod: 'omnivamp',
 };
 
 export const ITEM_STAT_META: Record<IItemStat, {

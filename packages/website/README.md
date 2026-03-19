@@ -150,7 +150,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`?
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
-  - [ ] aphelios q variants in results?
+- [ ] results
+  - [ ] aphelios q variants
+  - [ ] compare runes, same as item?
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)

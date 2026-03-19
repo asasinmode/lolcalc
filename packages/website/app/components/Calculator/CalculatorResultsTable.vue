@@ -424,6 +424,9 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			>
 				remove unused
 			</button>
+			<span>
+				Columns, except the first, contain the corresponding damage source's (left) value applied (if applicable) vs the specified damage target (right, can be empty)
+			</span>
 		</caption>
 		<thead>
 			<tr>
@@ -752,16 +755,21 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 	#results-table {
 		--at-apply: 'mx-auto border-separate border-spacing-0';
 		--border-color: theme('colors.neutral.400');
+		--control-button-size: calc(6 * var(--spacing));
 
 		&[inert] {
 			--at-apply: 'blur-3';
 		}
 
 		> caption {
-			--at-apply: 'text-start';
+			--at-apply: 'text-start text-lg';
 
 			> button {
-				--at-apply: 'px-1 leading-5 h-[--button-size] float-end';
+				--at-apply: 'px-1 leading-5 h-[--control-button-size] float-end text-base';
+			}
+
+			> span {
+				--at-apply: 'block text-neutral-300 text-base';
 			}
 		}
 
@@ -788,11 +796,10 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			> tr:nth-child(2) > * {
 				--at-apply: 'pb-3';
 				--header-row-h: calc(19 * var(--spacing));
-				--button-size: calc(6 * var(--spacing));
 
 				> form,
 				> div {
-					--at-apply: 'grid grid-rows-[auto_1fr] gap-y-3 relative grid-cols-[1fr_var(--button-size)_1fr]';
+					--at-apply: 'grid grid-rows-[auto_1fr] gap-y-3 relative grid-cols-[1fr_var(--control-button-size)_1fr]';
 					--select-size: calc(10 * var(--spacing));
 					grid-template-areas:
 						'move-left remove move-right'
@@ -844,7 +851,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 					}
 
 					> button {
-						--at-apply: 'size-[--button-size]';
+						--at-apply: 'size-[--control-button-size]';
 
 						> span:nth-child(2) {
 							--at-apply: 'size-5';
