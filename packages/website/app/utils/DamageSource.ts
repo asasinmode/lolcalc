@@ -279,15 +279,15 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 					total: stats.total.attackSpeed,
 					decimal: 3,
 				},
-				attackSpeedRatio: {
-					total: stats.total.attackSpeedRatio,
-					decimal: 3,
-				},
 				bonusAttackSpeedPercent: {
 					bonus: stats.bonus.bonusAttackSpeedPercent,
 					total: stats.total.bonusAttackSpeedPercent,
 					isPercentage: true,
 					decimal: 5,
+				},
+				attackSpeedRatio: {
+					total: stats.total.attackSpeedRatio,
+					decimal: 3,
 				},
 				critChance: {
 					bonus: stats.bonus.critChance,

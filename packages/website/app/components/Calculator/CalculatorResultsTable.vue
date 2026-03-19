@@ -149,7 +149,10 @@ function addResultsColumn() {
 	resultColumns.value.push(column);
 	columnNewSourceId.value = undefined;
 	columnNewTargetId.value = undefined;
+	addComputedColumn(column);
+}
 
+function addComputedColumn(column: IDamageResultTableColumn) {
 	for (const section of computedResults.value.values()) {
 		const resultSection = resultSections.value.find(rSection => rSection.id === section.sectionId)!;
 		for (const row of section.rows.values()) {
@@ -380,16 +383,21 @@ const highlightedColumns = computed(() => resultColumns.value.map(column =>
 		: (column.source && highlightedDamageSources.has(column.source.id)) || (column.target && highlightedDamageSources.has(column.target.id)),
 ));
 
-function moveResultColumn(index: number, copy: boolean) {
-	console.log('moving', { index, copy });
+function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
+	const column: IDamageResultTableColumn = copy
+		? { id: crypto.randomUUID(), source: resultColumns.value[fromIndex]!.source, target: resultColumns.value[fromIndex]!.target }
+		: resultColumns.value.splice(fromIndex, 1)[0]!;
+
+	resultColumns.value.splice(toIndex, 0, column);
+	copy && addComputedColumn(column);
 }
 
 function startResultColumnDrag(index: number, event: DragEvent) {
 	console.log('starting drag', index);
 }
 
-function moveResultSection(index: number, copy: boolean) {
-	console.log('moving', { index, copy });
+function moveResultSection(fromIndex: number, toIndex: number) {
+	console.log('moving', { fromIndex, toIndex });
 }
 
 function startResultSectionDrag(event: DragEvent, index: number) {
@@ -583,7 +591,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							class="pretend-ui-button"
 							:disabled="index === 0"
 							draggable="true"
-							@click="moveResultColumn(index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+							@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
 							@dragstart="startResultColumnDrag(index, $event)"
 						>
 							<span>move left, alt+click to duplicate to the left</span>
@@ -604,7 +612,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							class="pretend-ui-button"
 							draggable="true"
 							:disabled="index === (resultColumns.length - 1)"
-							@click="moveResultColumn(index + 1, globalKeyModifiers.alt)"
+							@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
 							@dragstart="startResultColumnDrag(index, $event)"
 						>
 							<span>move right, alt+click to duplicate to the right</span>
@@ -635,7 +643,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							class="pretend-ui-button"
 							:disabled="index === 0"
 							draggable="true"
-							@click="moveResultSection(index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+							@click="moveResultSection(index, index + (globalKeyModifiers.alt ? 0 : -1))"
 							@dragstart="startResultSectionDrag($event, index)"
 						>
 							<span>move up</span>
@@ -646,7 +654,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							class="pretend-ui-button"
 							draggable="true"
 							:disabled="index === (resultSections.length - 1)"
-							@click="moveResultSection(index + 1, globalKeyModifiers.alt)"
+							@click="moveResultSection(index, index + 1)"
 							@dragstart="startResultSectionDrag($event, index)"
 						>
 							<span>move down</span>
