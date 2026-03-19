@@ -44,27 +44,36 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 
 const damageSectionOptions = computed(() => props.damageSources
 	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
-	.map(source => ({
-		championId: source.champion.value!.id,
-		championName: source.champion.value!.name,
-		abilities: Object.entries(source.champion.value!.abilities)
-			.map(([abilityKey, ability]) => {
-				const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
-				const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-					abilityVariant.name,
-					source.champion.value!.stringtable,
-				);
+	.map((source) => {
+		const championId = source.champion.value!.id;
+		let abilityEntries = Object.entries(source.champion.value!.abilities);
 
-				return {
-					id: `${source.champion.value!.id}-${abilityKey}`,
-					championId: source.champion.value!.id,
-					abilityKey: abilityKey as IChampionAbilityKey,
-					image: abilityVariant.image,
-					name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
-				};
-			})
-			.filter(source => !resultSections.value.some(section => section.id === source.id)),
-	}))
+		if (championId === 'Aphelios') {
+			abilityEntries = abilityEntries.filter(([abilityKey]) => abilityKey === 'q' || abilityKey === 'r');
+		}
+
+		return {
+			championId,
+			championName: source.champion.value!.name,
+			abilities: abilityEntries
+				.map(([abilityKey, ability]) => {
+					const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
+					const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+						abilityVariant.name,
+						source.champion.value!.stringtable,
+					);
+
+					return {
+						id: `${source.champion.value!.id}-${abilityKey}`,
+						championId: source.champion.value!.id,
+						abilityKey: abilityKey as IChampionAbilityKey,
+						image: abilityVariant.image,
+						name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
+					};
+				})
+				.filter(source => !resultSections.value.some(section => section.id === source.id)),
+		};
+	})
 	.filter(option => option.abilities.length),
 );
 
