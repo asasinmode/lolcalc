@@ -270,26 +270,22 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 				flatMagicPen: {
 					bonus: stats.bonus.flatMagicPen,
 					total: stats.total.flatMagicPen,
-
 				},
 				percentMagicPen: {
 					decimal: 2,
 					bonus: stats.bonus.percentMagicPen,
 					total: stats.total.percentMagicPen,
 					isPercentage: true,
-
 				},
 				lifeSteal: {
 					bonus: stats.bonus.lifeSteal,
 					total: stats.total.lifeSteal,
 					isPercentage: true,
-
 				},
 				omnivamp: {
 					bonus: stats.bonus.omnivamp,
 					total: stats.total.omnivamp,
 					isPercentage: true,
-
 				},
 				attackRange: {
 					base: stats.baseOnLevel.attackRange,
@@ -305,7 +301,6 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 					base: stats.baseOnLevel.attackDamage,
 					bonus: stats.bonus.attackDamage,
 					total: stats.total.attackDamage,
-
 				},
 				abilityPower: {
 					bonus: stats.bonus.abilityPower,
@@ -320,7 +315,6 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 					base: stats.baseOnLevel.magicResist,
 					bonus: stats.bonus.magicResist,
 					total: stats.total.magicResist,
-
 				},
 				bonusAttackSpeedPercent: {
 					bonus: stats.bonus.bonusAttackSpeedPercent,
@@ -364,6 +358,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 					base: stats.base.critDamageMultiplier,
 					bonus: stats.bonus.critDamageMultiplier,
 					total: stats.total.critDamageMultiplier,
+					isPercentage: true,
 				},
 			};
 
@@ -372,7 +367,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 				stat.formattedTotal = formatChampionStatValue(stat.isPercentage ? 100 : 1, stat, 'total');
 			}
 
-			return rv;
+			return rv as Record<IChampionStatName, IComputedDamageSourceChampionStat>;
 		}),
 	};
 }

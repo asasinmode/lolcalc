@@ -55,6 +55,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] zaahen
       - [ ] kai'sa
       - [ ] ornn
+      - [ ] senna
+      - [ ] thresh
       - [ ] kraken slayer
       - [ ] yun tal wildarrows
     - [ ] add all of champion's things to damage results

@@ -4,6 +4,10 @@ export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
 }
 
+export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent'] as const;
+
+export type IChampionStatName = (typeof CHAMPION_STATS)[number];
+
 const aph1to5 = [1, 2, 3, 4, 5];
 
 export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';

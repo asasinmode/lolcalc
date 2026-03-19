@@ -42,7 +42,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		bonusAttackSpeedPercent: 0,
 		abilityHaste: 0,
 		critChance: champion?.stats.crit ?? 0,
-		critDamageMultiplier: 1.75,
+		critDamageMultiplier: 2,
 		moveSpeed: champion?.stats.movespeed ?? 0,
 	};
 
@@ -229,5 +229,3 @@ function getAdaptiveForceStat(championId: string, attackDamage: number, abilityP
 // }
 
 export type IChampionStats = Record<IChampionStatName, number>;
-
-export type IChampionStatName = 'hp' | 'hpRegen' | 'mana' | 'manaRegen' | 'healShieldPower' | 'lethality' | 'percentArmorPen' | 'flatMagicPen' | 'percentMagicPen' | 'lifeSteal' | 'omnivamp' | 'attackRange' | 'tenacity' | 'attackDamage' | 'abilityPower' | 'armor' | 'magicResist' | 'attackSpeed' | 'attackSpeedRatio' | 'abilityHaste' | 'critChance' | 'critDamageMultiplier' | 'moveSpeed' | 'bonusAttackSpeedPercent';

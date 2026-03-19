@@ -54,7 +54,7 @@ export interface IDamageResultTableSection {
 	icon: string;
 	// TODO shouldn't be optional
 	getCellValue?: (rowId: string, source: DamageSource, target?: DamageTarget) => {
-		value: string;
+		value: string | number;
 		numberValue: number;
 	};
 	rows: {

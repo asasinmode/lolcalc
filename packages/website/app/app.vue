@@ -77,9 +77,10 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 			})
 			.sort((a, b) => b.order - a.order),
 		getCellValue(rowId, source, _target) {
+			const stat = source.computed.stats.value[rowId as IChampionStatName];
 			return {
-				numberValue: 12,
-				value: '12',
+				numberValue: stat.total,
+				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
 			};
 		},
 	},
