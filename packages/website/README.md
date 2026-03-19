@@ -71,6 +71,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] row/column hover/focus style
   - [x] cell have number values, then color them red/green depending on if higher or lower than others
   - [ ] basic attack section normal/crit/average
+  - [ ] stats section show for source/damage
   - [ ] section image appropriate ability/item hover tooltip with variable names instead of values
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
   - [ ] ability rows not implemented yet, coming soon

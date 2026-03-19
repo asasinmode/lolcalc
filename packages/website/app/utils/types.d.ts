@@ -52,6 +52,11 @@ export interface IDamageResultTableSection {
 	name: string;
 	/** ability variant image, basic attack icon */
 	icon: string;
+	// TODO shouldn't be optional
+	getCellValue?: (rowId: string, source: DamageSource, target?: DamageTarget) => {
+		value: string;
+		numberValue: number;
+	};
 	rows: {
 		name: string;
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */

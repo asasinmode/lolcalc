@@ -128,8 +128,12 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 	) {
 		rv.value = 'n/a';
 	} else {
-		rv.value = Math.round(Math.random() * 500);
-		rv.numberValue = rv.value;
+		if (section.getCellValue) {
+			({ value: rv.value, numberValue: rv.numberValue } = section.getCellValue(row.id, column.source, column.target));
+		} else {
+			rv.value = Math.round(Math.random() * 500);
+			rv.numberValue = rv.value;
+		}
 		rv.irrelevant = false;
 	}
 

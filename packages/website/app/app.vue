@@ -62,12 +62,11 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 
 				return {
 					id: championStat,
-					name:
-				championStat === 'percentArmorPen' || championStat === 'percentMagicPen'
-					? `Percentage ${statMeta.name.toLowerCase()}`
-					: championStat === 'manaRegen'
-						? ITEM_STAT_META.FlatHPRegenMod.name.replace('Health', 'Mana')
-						: statMeta.name,
+					name: championStat === 'percentArmorPen' || championStat === 'percentMagicPen'
+						? `Percentage ${statMeta.name.toLowerCase()}`
+						: championStat === 'manaRegen'
+							? ITEM_STAT_META.FlatHPRegenMod.name.replace('Health', 'Mana')
+							: statMeta.name,
 					order: statMeta.order,
 					icon: {
 						path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${ITEM_STAT_ICON_NAMES[itemStat as IItemStat]}.png`,
@@ -77,6 +76,12 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 				};
 			})
 			.sort((a, b) => b.order - a.order),
+		getCellValue(rowId, source, _target) {
+			return {
+				numberValue: 12,
+				value: '12',
+			};
+		},
 	},
 	{
 		id: 'basicAttack',
