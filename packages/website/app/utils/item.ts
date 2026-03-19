@@ -10,36 +10,59 @@ export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IItemVar
 	},
 };
 
-/** paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${ITEM_STAT_ICON_NAME}.png` */
-export const ITEM_STAT_ICON_NAMES: Record<IItemStat | 'adaptiveForce' | 'OnHit' | 'level' | 'range' | 'cooldown', string> = {
+/** paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAME}.png` */
+export const STAT_ICON_NAMES: Record<IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown', string> = {
 	OnHit: 'onhit',
+	attackDamage: 'scalead',
 	FlatPhysicalDamageMod: 'scalead',
 	adaptiveForce: 'adaptiveforce',
 	AbilityHasteMod: 'scaleah',
+	abilityHaste: 'scaleah',
 	cooldown: 'scalecooldown',
 	FlatMagicDamageMod: 'scaleap',
+	abilityPower: 'scaleap',
 	PhysicalLethality: 'scaleapen',
+	lethality: 'scaleapen',
 	PercentArmorPenetrationMod: 'scaleapen',
+	percentArmorPen: 'scaleapen',
 	FlatArmorMod: 'scalearmor',
+	armor: 'scalearmor',
 	PercentAttackSpeedMod: 'scaleas',
+	attackSpeed: 'scaleas',
+	attackSpeedRatio: 'scaleas',
+	bonusAttackSpeedPercent: 'scaleas',
 	FlatCritChanceMod: 'scalecrit',
+	critChance: 'scalecrit',
 	FlatCritDamageMod: 'scalecritmult',
+	critDamageMultiplier: 'scalecritmult',
 	PercentHealingAmountMod: 'scalehealshield',
+	healShieldPower: 'scalehealshield',
 	FlatHPPoolMod: 'scalehealth',
+	hp: 'scalehealth',
 	FlatHPRegenMod: 'scalehpregen',
 	PercentBaseHPRegenMod: 'scalehpregen',
+	hpRegen: 'scalehpregen',
 	level: 'scalelevel',
 	PercentLifeStealMod: 'scalels',
+	lifeSteal: 'scalels',
 	FlatMPPoolMod: 'scalemana',
+	mana: 'scalemana',
 	PercentBaseMPRegenMod: 'scalemanaregen',
+	manaRegen: 'scalemanaregen',
 	FlatMagicPenetrationMod: 'scalempen',
+	flatMagicPen: 'scalempen',
 	PercentMagicPenetrationMod: 'scalempen',
+	percentMagicPen: 'scalempen',
 	FlatSpellBlockMod: 'scalemr',
+	magicResist: 'scalemr',
 	FlatMovementSpeedMod: 'scalems',
 	PercentMovementSpeedMod: 'scalems',
-	range: 'scalerange',
+	moveSpeed: 'scalems',
+	attackRange: 'scalerange',
 	PercentOmnivampMod: 'scalesv',
+	omnivamp: 'scalesv',
 	PercentTenacityMod: 'scaletenacity',
+	tenacity: 'scaletenacity',
 };
 
 export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
@@ -70,6 +93,7 @@ export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
 
 export const ITEM_STAT_META: Record<IItemStat, {
 	name: string;
+	/** value by which the stat is sorted in the item hover tooltip */
 	order: number;
 	displayMultiplier?: number;
 	isPercentage?: boolean;

@@ -1,4 +1,4 @@
-import { ITEM_STAT_ICON_NAMES } from './item.ts';
+import { STAT_ICON_NAMES } from './item.ts';
 import { roundVariable } from './misc.ts';
 
 export interface IItemVariableCalculationTarget {
@@ -277,11 +277,11 @@ export function replaceGameDescriptionVariables(
 	return { replaced, variables, unknownVariables };
 }
 
-const STAT_ICON_NAMES = Object.values(ITEM_STAT_ICON_NAMES);
+const statIconNameValues = Object.values(STAT_ICON_NAMES);
 
 export function replaceGameDescriptionIcons(text: string) {
 	return text.replace(/%i:(\w+)%/g, (_, name: string) => {
 		name = name.toLocaleLowerCase();
-		return `<img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${STAT_ICON_NAMES.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
+		return `<img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
 	});
 }

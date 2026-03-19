@@ -242,19 +242,62 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			const { stats } = this.stats.value;
 
 			const rv: Record<IChampionStatName, Omit<IComputedDamageSourceChampionStat, 'formattedTotal'> & { formattedTotal?: number }> = {
-				hpRegen: {
-					base: stats.baseOnLevel.hpRegen,
-					bonus: stats.bonus.hpRegen,
-					total: stats.total.hpRegen,
+				hp: {
+					base: stats.baseOnLevel.hp,
+					bonus: stats.bonus.hp,
+					total: stats.total.hp,
 				},
-				manaRegen: {
-					base: stats.baseOnLevel.manaRegen,
-					bonus: stats.bonus.manaRegen,
-					total: stats.total.manaRegen,
+				mana: {
+					base: stats.baseOnLevel.mana,
+					bonus: stats.bonus.mana,
+					total: stats.total.mana,
 				},
-				healShieldPower: {
-					total: stats.total.healShieldPower,
-					bonus: stats.total.healShieldPower,
+				attackDamage: {
+					base: stats.baseOnLevel.attackDamage,
+					bonus: stats.bonus.attackDamage,
+					total: stats.total.attackDamage,
+				},
+				abilityPower: {
+					bonus: stats.bonus.abilityPower,
+					total: stats.total.abilityPower,
+				},
+				armor: {
+					base: stats.baseOnLevel.armor,
+					bonus: stats.bonus.armor,
+					total: stats.total.armor,
+				},
+				magicResist: {
+					base: stats.baseOnLevel.magicResist,
+					bonus: stats.bonus.magicResist,
+					total: stats.total.magicResist,
+				},
+				abilityHaste: {
+					bonus: stats.bonus.abilityHaste,
+					total: stats.total.abilityHaste,
+				},
+				attackSpeed: {
+					total: stats.total.attackSpeed,
+					decimal: 3,
+				},
+				attackSpeedRatio: {
+					total: stats.total.attackSpeedRatio,
+					decimal: 3,
+				},
+				bonusAttackSpeedPercent: {
+					bonus: stats.bonus.bonusAttackSpeedPercent,
+					total: stats.total.bonusAttackSpeedPercent,
+					isPercentage: true,
+					decimal: 5,
+				},
+				critChance: {
+					bonus: stats.bonus.critChance,
+					total: stats.total.critChance,
+					isPercentage: true,
+				},
+				critDamageMultiplier: {
+					base: stats.base.critDamageMultiplier,
+					bonus: stats.bonus.critDamageMultiplier,
+					total: stats.total.critDamageMultiplier,
 					isPercentage: true,
 				},
 				lethality: {
@@ -287,78 +330,35 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 					total: stats.total.omnivamp,
 					isPercentage: true,
 				},
-				attackRange: {
-					base: stats.baseOnLevel.attackRange,
-					bonus: stats.bonus.attackRange,
-					total: stats.total.attackRange,
+				moveSpeed: {
+					base: stats.baseOnLevel.moveSpeed,
+					bonus: stats.bonus.moveSpeed,
+					total: stats.total.moveSpeed,
 				},
 				tenacity: {
 					bonus: stats.bonus.tenacity,
 					total: stats.total.tenacity,
 					isPercentage: true,
 				},
-				attackDamage: {
-					base: stats.baseOnLevel.attackDamage,
-					bonus: stats.bonus.attackDamage,
-					total: stats.total.attackDamage,
-				},
-				abilityPower: {
-					bonus: stats.bonus.abilityPower,
-					total: stats.total.abilityPower,
-				},
-				armor: {
-					base: stats.baseOnLevel.armor,
-					bonus: stats.bonus.armor,
-					total: stats.total.armor,
-				},
-				magicResist: {
-					base: stats.baseOnLevel.magicResist,
-					bonus: stats.bonus.magicResist,
-					total: stats.total.magicResist,
-				},
-				bonusAttackSpeedPercent: {
-					bonus: stats.bonus.bonusAttackSpeedPercent,
-					total: stats.total.bonusAttackSpeedPercent,
-					isPercentage: true,
-					decimal: 5,
-				},
-				attackSpeed: {
-					total: stats.total.attackSpeed,
-					decimal: 3,
-				},
-				attackSpeedRatio: {
-					total: stats.total.attackSpeedRatio,
-					decimal: 3,
-				},
-				abilityHaste: {
-					bonus: stats.bonus.abilityHaste,
-					total: stats.total.abilityHaste,
-				},
-				critChance: {
-					bonus: stats.bonus.critChance,
-					total: stats.total.critChance,
+				healShieldPower: {
+					total: stats.total.healShieldPower,
+					bonus: stats.total.healShieldPower,
 					isPercentage: true,
 				},
-				moveSpeed: {
-					base: stats.baseOnLevel.moveSpeed,
-					bonus: stats.bonus.moveSpeed,
-					total: stats.total.moveSpeed,
+				attackRange: {
+					base: stats.baseOnLevel.attackRange,
+					bonus: stats.bonus.attackRange,
+					total: stats.total.attackRange,
 				},
-				hp: {
-					base: stats.baseOnLevel.hp,
-					bonus: stats.bonus.hp,
-					total: stats.total.hp,
+				hpRegen: {
+					base: stats.baseOnLevel.hpRegen,
+					bonus: stats.bonus.hpRegen,
+					total: stats.total.hpRegen,
 				},
-				mana: {
-					base: stats.baseOnLevel.mana,
-					bonus: stats.bonus.mana,
-					total: stats.total.mana,
-				},
-				critDamageMultiplier: {
-					base: stats.base.critDamageMultiplier,
-					bonus: stats.bonus.critDamageMultiplier,
-					total: stats.total.critDamageMultiplier,
-					isPercentage: true,
+				manaRegen: {
+					base: stats.baseOnLevel.manaRegen,
+					bonus: stats.bonus.manaRegen,
+					total: stats.total.manaRegen,
 				},
 			};
 

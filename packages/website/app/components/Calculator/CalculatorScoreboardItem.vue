@@ -274,12 +274,12 @@ const minorStats = computed<IChampionStat[]>(() => {
 			],
 		},
 		{
-			name: 'Heal and Shield Power',
+			name: CHAMPION_STAT_NAMES.healShieldPower,
 			description: 'Increases the effectiveness of <healing>Heals</healing> and <shields>Shields</shields>.',
 			iconTextureKey: 'healShieldPower',
 			values: [
 				{
-					name: 'Heal and Shield Power',
+					name: CHAMPION_STAT_NAMES.healShieldPower,
 					stat: stats.value.healShieldPower,
 				},
 			],
@@ -290,7 +290,7 @@ const minorStats = computed<IChampionStat[]>(() => {
 			iconTextureKey: 'armorPen',
 			values: [
 				{
-					name: 'Lethality',
+					name: CHAMPION_STAT_NAMES.lethality,
 					stat: stats.value.lethality,
 				},
 				{
@@ -315,45 +315,45 @@ const minorStats = computed<IChampionStat[]>(() => {
 			],
 		},
 		{
-			name: 'Life Steal',
+			name: CHAMPION_STAT_NAMES.lifeSteal,
 			description: 'Returns a portion of the damage you deal with Attacks as <scalehealth>Health</scalehealth>.',
 			iconTextureKey: 'lifeSteal',
 			values: [
 				{
-					name: 'Life Steal',
+					name: CHAMPION_STAT_NAMES.lifeSteal,
 					stat: stats.value.lifeSteal,
 				},
 			],
 		},
 		{
-			name: 'Omnivamp',
+			name: CHAMPION_STAT_NAMES.omnivamp,
 			description: 'Returns a portion of all damage you deal as <scalehealth>Health</scalehealth>.<br><br>Reduced to 20% effectiveness when dealing damage to minions or monsters.',
 			iconTextureKey: 'omnivamp',
 			values: [
 				{
-					name: 'Omnivamp',
+					name: CHAMPION_STAT_NAMES.omnivamp,
 					stat: stats.value.omnivamp,
 				},
 			],
 		},
 		{
-			name: 'Attack Range',
+			name: CHAMPION_STAT_NAMES.attackRange,
 			description: 'The distance at which you can Attack.',
 			iconTextureKey: 'attackRange',
 			values: [
 				{
-					name: 'Attack Range',
+					name: CHAMPION_STAT_NAMES.attackRange,
 					stat: stats.value.attackRange,
 				},
 			],
 		},
 		{
-			name: 'Tenacity',
+			name: CHAMPION_STAT_NAMES.tenacity,
 			description: 'Reduces the duration of crowd control debuffs, such as <keyword>Slows</keyword> and <keyword>Stuns</keyword>.<br><br>Does not affect <keyword>Airborne</keyword> and <keyword>Suppression</keyword>.',
 			iconTextureKey: 'tenacity',
 			values: [
 				{
-					name: 'Tenacity',
+					name: CHAMPION_STAT_NAMES.tenacity,
 					stat: stats.value.tenacity,
 				},
 			],
@@ -369,58 +369,58 @@ const majorStats = computed<IChampionStat[]>(() => {
 	const { stats } = props.value.computed;
 	const majorStats = [
 		{
-			name: 'Attack Damage',
+			name: CHAMPION_STAT_NAMES.attackDamage,
 			description: 'The amount of <physicaldamage>physical damage</physicaldamage> your Attack deal.<br><br>Also increases the amount of damage you deal with certain Abilities.',
 			iconTextureKey: 'attackDamage',
 			values: [
 				{
-					name: 'Attack Damage',
+					name: CHAMPION_STAT_NAMES.attackDamage,
 					stat: stats.value.attackDamage,
 				},
 			],
 		},
 		{
-			name: 'Ability Power',
+			name: CHAMPION_STAT_NAMES.abilityPower,
 			description: 'Increases the amount of damage you deal with most Abilities.',
 			iconTextureKey: 'abilityPower',
 			values: [
 				{
-					name: 'Ability Power',
+					name: CHAMPION_STAT_NAMES.abilityPower,
 					stat: stats.value.abilityPower,
 				},
 			],
 		},
 		{
-			name: 'Armor',
+			name: CHAMPION_STAT_NAMES.armor,
 			description: 'Reduces the amount of <physicaldamage>magic damage</physicaldamage> you take.',
 			iconTextureKey: 'armor',
 			values: [
 				{
-					name: 'Armor',
+					name: CHAMPION_STAT_NAMES.armor,
 					stat: stats.value.armor,
 				},
 			],
 			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.value.armor.total) * 100)}</span>% reduced physical damage.`,
 		},
 		{
-			name: 'Magic Resist',
+			name: CHAMPION_STAT_NAMES.magicResist,
 			description: 'Reduces the amount of <magicdamage>magic damage</magicdamage> you take.',
 			iconTextureKey: 'magicResist',
 			values: [
 				{
-					name: 'Magic Resist',
+					name: CHAMPION_STAT_NAMES.magicResist,
 					stat: stats.value.magicResist,
 				},
 			],
 			bottomText: `You take <span data-total="">${Math.round(calculateResistPercentageReduction(stats.value.magicResist.total) * 100)}</span>% reduced magic damage.`,
 		},
 		{
-			name: 'Attack Speed',
+			name: CHAMPION_STAT_NAMES.attackSpeed,
 			description: 'Increases the rate at which you can Attack.<br><br>Ratio determines the effectiveness of bonus Attack Speed.',
 			iconTextureKey: 'attackSpeed',
 			values: [
 				{
-					name: 'Bonus Attack Speed',
+					name: CHAMPION_STAT_NAMES.bonusAttackSpeedPercent,
 					stat: stats.value.bonusAttackSpeedPercent,
 				},
 				{
@@ -435,7 +435,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 			displayedValue: stats.value.attackSpeed.total.toFixed(2),
 		},
 		{
-			name: 'Ability Haste',
+			name: CHAMPION_STAT_NAMES.abilityHaste,
 			description: 'Allows you to cast your Abilities more often',
 			iconTextureKey: 'abilityHaste',
 			values: [
@@ -447,23 +447,23 @@ const majorStats = computed<IChampionStat[]>(() => {
 			bottomText: `Equivalent to reducing your Ability cooldowns by <span data-total="">${Math.round(cooldownReductionPercentageFromHaste(stats.value.abilityHaste.total))}</span>%`,
 		},
 		{
-			name: 'Critical Strike Chance',
+			name: CHAMPION_STAT_NAMES.critChance,
 			description: 'Grants a change to deal 100% increased damage on each Attack.',
 			iconTextureKey: 'crit',
 			values: [
 				{
-					name: 'Critical Strike Chance',
+					name: CHAMPION_STAT_NAMES.critChance,
 					stat: stats.value.critChance,
 				},
 			],
 		},
 		{
-			name: 'Move Speed',
+			name: CHAMPION_STAT_NAMES.moveSpeed,
 			description: 'The speed at which you travel.',
 			iconTextureKey: 'moveSpeed',
 			values: [
 				{
-					name: 'Move Speed',
+					name: CHAMPION_STAT_NAMES.moveSpeed,
 					stat: stats.value.moveSpeed,
 				},
 			],

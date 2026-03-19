@@ -20,7 +20,7 @@ const { version, minorVersion } = usePatchVersion();
 const header = useTemplateRef<HTMLButtonElement>('header');
 
 const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
-const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${ITEM_STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 const contents = computed<{
 	subtitleLeft?: string;
@@ -43,7 +43,7 @@ const contents = computed<{
 		.map(([statName, value]) => {
 			const { name, displayMultiplier, isPercentage } = ITEM_STAT_META[statName as IItemStat];
 			return [
-				ITEM_STAT_ICON_NAMES[statName as IItemStat],
+				STAT_ICON_NAMES[statName as IItemStat],
 				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
 				name,
 			] as [string, number, string];
