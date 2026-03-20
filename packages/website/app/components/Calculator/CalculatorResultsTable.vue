@@ -464,13 +464,11 @@ function getDropTargetIndex(
 	fromIndex: number | undefined,
 	itemsLength: number,
 	isVertical: boolean,
-	midpointOffset = 0,
+	combinedSiblingIsNext?: boolean,
 ): [toIndex: number | undefined, fromIndex: number | undefined] {
 	if (fromIndex === undefined || fromIndex === index) {
 		return [undefined, undefined];
 	}
-
-	console.log('offset by', midpointOffset);
 
 	let toIndex;
 	if (index === itemsLength) {
@@ -481,10 +479,14 @@ function getDropTargetIndex(
 		toIndex = index + 1;
 	} else {
 		const el = event.currentTarget as HTMLElement;
-		const rect = el.getBoundingClientRect();
-		toIndex = event[isVertical ? 'clientY' : 'clientX'] < rect[isVertical ? 'top' : 'left'] + rect[isVertical ? 'height' : 'width'] / 2
-			? index
-			: index + 1;
+		const rect = combinedSiblingIsNext !== undefined ? combinedSiblingsRect(el, combinedSiblingIsNext) : el.getBoundingClientRect();
+		const rectSize = rect[isVertical ? 'height' : 'width'];
+		const posInEl = event[isVertical ? 'clientY' : 'clientX'] - rect[isVertical ? 'top' : 'left'];
+
+		const midpoint = rectSize / 2;
+		// console.log({ posInEl, rectSize, midpoint }, rectangleLike, posInEl < midpoint ? 'before' : 'after', el);
+
+		toIndex = posInEl < midpoint ? index : index + 1;
 	}
 
 	return [toIndex, fromIndex];
@@ -507,11 +509,11 @@ function startResultSectionDrag(event: DragEvent, index: number) {
 }
 
 function onResultSectionDragenter(event: DragEvent, index: number, isHeader: boolean) {
-	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, false, getSectionHeaderDragRowOffset(event, isHeader)));
+	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
 }
 
 function onResultSectionDragover(event: DragEvent, index: number, isHeader: boolean) {
-	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, false, getSectionHeaderDragRowOffset(event, isHeader)));
+	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
 	if (sectionDragDropIndex.value !== undefined) {
 		event.preventDefault();
 	}
@@ -530,9 +532,32 @@ function onResultSectionDrop(event: DragEvent, index: number, isHeader: boolean)
 	sectionDragDropIndex.value = undefined;
 }
 
-function getSectionHeaderDragRowOffset(event: DragEvent, isHeader: boolean): number {
-	const el = isHeader ? event.currentTarget : (event.currentTarget as HTMLElement).previousElementSibling;
-	return el ? ( el as HTMLElement ).offsetHeight : 0;
+function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
+	let rect1, rect2;
+
+	if (isNext) {
+		rect1 = el.getBoundingClientRect();
+		rect2 = (el.nextElementSibling as HTMLElement).getBoundingClientRect();
+	} else {
+		rect1 = (el.previousElementSibling as HTMLElement).getBoundingClientRect();
+		rect2 = el.getBoundingClientRect();
+	}
+
+	if (!rect2) {
+		return rect1;
+	}
+
+	// Combine both rects
+	const top = Math.min(rect1.top, rect2.top);
+	const bottom = Math.max(rect1.bottom, rect2.bottom);
+	const left = Math.min(rect1.left, rect2.left);
+	const right = Math.max(rect1.right, rect2.right);
+
+
+	const rv = new DOMRect(left, top, right - left, bottom - top);
+	console.log(rv, rect1, rect2)
+
+	return rv;
 }
 </script>
 
@@ -1200,9 +1225,7 @@ function getSectionHeaderDragRowOffset(event: DragEvent, isHeader: boolean): num
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
 		> tbody[aria-labelledby] {
-			&[data-drop-direction] {
-				--at-apply: 'relative';
-			}
+			--at-apply: 'relative isolate';
 		}
 
 		> thead > tr:nth-child(1) > td,
