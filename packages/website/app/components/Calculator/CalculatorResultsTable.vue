@@ -401,8 +401,75 @@ function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
 	copy && addComputedColumn(column);
 }
 
+function colDragData(event: DragEvent) {
+	const rawIndex = event.dataTransfer?.getData('index');
+
+	if (rawIndex) {
+		return {
+			index: Number.parseInt(rawIndex),
+		};
+	}
+}
+
+const columnDragDropIndex = ref<number>();
+
 function startResultColumnDrag(index: number, event: DragEvent) {
-	console.log('starting drag', index);
+	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
+	event.dataTransfer!.setData('index', index.toString());
+
+	const div = (event.target as HTMLElement).closest('div')!;
+	event.dataTransfer!.setDragImage(div, div.offsetWidth, div.offsetHeight);
+}
+
+function onResultColumnDragenter(event: DragEvent, index: number) {
+	columnDragDropIndex.value = getColumnDropTargetIndex(event, index);
+}
+
+function onResultColumnDragover(event: DragEvent, index: number) {
+	columnDragDropIndex.value = getColumnDropTargetIndex(event, index);
+	if (columnDragDropIndex.value !== undefined) {
+		event.preventDefault();
+	}
+}
+
+function onResultColumnDragleave(event: DragEvent) {
+	if (
+		!event.currentTarget || !event.relatedTarget
+		|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
+	) {
+		columnDragDropIndex.value = undefined;
+	}
+}
+
+function onResultColumnDrop(event: DragEvent, index: number) {
+	columnDragDropIndex.value = undefined;
+
+	const toIndex = getColumnDropTargetIndex(event, index);
+	if (toIndex !== undefined) {
+		const { index: fromIndex } = colDragData(event)!;
+		console.log('dropped to', { fromIndex, toIndex });
+	}
+}
+
+function getColumnDropTargetIndex(event: DragEvent, index: number): number | undefined {
+	const dragData = colDragData(event);
+	if (!dragData || dragData.index === index) {
+		return;
+	}
+
+	const length = resultColumns.value.length;
+	if (index === length) {
+		return dragData.index === resultColumns.value.length - 1 ? undefined : length;
+	} else if (index === dragData.index - 1) {
+		return index;
+	} else if (index === dragData.index + 1) {
+		return index + 1;
+	}
+
+	const el = event.currentTarget as HTMLElement;
+	const rect = el.getBoundingClientRect();
+
+	return event.clientX < rect.left + rect.width / 2 ? index : index + 1;
 }
 
 function moveResultSection(fromIndex: number, toIndex: number) {
@@ -414,19 +481,19 @@ function startResultSectionDrag(event: DragEvent, index: number) {
 }
 
 function onResultSectionDragenter(event: DragEvent, index: number) {
-	console.log('entered', index);
+	// console.log('entered', index);
 }
 
 function onResultSectionDragover(event: DragEvent, index: number) {
-	console.log('dragged over', index);
+	// console.log('dragged over', index);
 }
 
 function onResultSectionDragleave(event: DragEvent) {
-	console.log('left');
+	// console.log('left');
 }
 
 function onResultSectionDrop(event: DragEvent, index: number) {
-	console.log('dropped', index);
+	// console.log('dropped', index);
 }
 </script>
 
@@ -469,7 +536,15 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 						{{ column.target && targetOptions.find(option => option[0] === column.target!.id)?.[1] || 'undefined target' }}
 					</span>
 				</th>
-				<td width="120px" rowspan="2">
+				<td
+					width="120px"
+					rowspan="2"
+					:data-drop-direction="columnDragDropIndex === resultColumns.length ? 'before' : undefined"
+					@dragenter="onResultColumnDragenter($event, resultColumns.length)"
+					@dragover="onResultColumnDragover($event, resultColumns.length)"
+					@dragleave="onResultColumnDragleave"
+					@drop="onResultColumnDrop($event, resultColumns.length)"
+				>
 					<span>configure new column</span>
 					<form @submit.prevent="addResultsColumn">
 						<VSelect
@@ -536,12 +611,17 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 					v-for="(column, index) in resultColumns"
 					:key="column.id"
 					width="120px"
+					:data-drop-direction="columnDragDropIndex === index ? 'before' : columnDragDropIndex === index + 1 ? 'after' : undefined"
 					:class="{ highlighted: highlightedColumns[index] }"
 					:style="columnDamageSourcesColorStyles(column)"
 					@mouseenter="highlightColumnSources(column)"
 					@focusin="highlightColumnSources(column)"
 					@mouseleave="lowlightColumnSources(column)"
 					@focusout="lowlightColumnSources(column)"
+					@dragenter="onResultColumnDragenter($event, index)"
+					@dragover="onResultColumnDragover($event, index)"
+					@dragleave="onResultColumnDragleave"
+					@drop="onResultColumnDrop($event, index)"
 				>
 					<div>
 						<VSelect
@@ -738,12 +818,23 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							highlighted: highlightedColumns[cellIndex],
 						}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
 						:style="columnDamageSourceColors[cellIndex]"
+						:data-drop-direction="columnDragDropIndex === cellIndex ? 'before' : columnDragDropIndex === cellIndex + 1 ? 'after' : undefined"
 						@mouseenter="highlightColumnIdSources(cell.computedColumn.columnId)"
 						@mouseleave="lowlightColumnIdSources(cell.computedColumn.columnId)"
+						@dragenter="onResultColumnDragenter($event, cellIndex)"
+						@dragover="onResultColumnDragover($event, cellIndex)"
+						@dragleave="onResultColumnDragleave"
+						@drop="onResultColumnDrop($event, cellIndex)"
 					>
 						<span>{{ cell.computedColumn.value }}</span>
 					</td>
-					<td>
+					<td
+						:data-drop-direction="columnDragDropIndex === resultColumns.length ? 'before' : undefined"
+						@dragenter="onResultColumnDragenter($event, resultColumns.length)"
+						@dragover="onResultColumnDragover($event, resultColumns.length)"
+						@dragleave="onResultColumnDragleave"
+						@drop="onResultColumnDrop($event, resultColumns.length)"
+					>
 						-
 					</td>
 				</tr>
@@ -824,6 +915,15 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			> tr:nth-child(2) > * {
 				--at-apply: 'pb-3';
 				--header-row-h: calc(19 * var(--spacing));
+
+				&[data-drop-direction]::after {
+					--at-apply: ' content-empty absolute z-10 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
+					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
+				}
+
+				&[data-drop-direction='after']::after {
+					--at-apply: 'end-0.25 start-auto rotate-90';
+				}
 
 				> form,
 				> div {
@@ -1039,6 +1139,30 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				oklch(from var(--col-damage-source-clr, white) l c h / 0.1),
 				oklch(from var(--col-damage-target-clr, white) l c h / 0.1)
 			);
+		}
+
+		> thead > tr:nth-child(1) > td,
+		> thead > tr:nth-child(2) > td,
+		> tbody[aria-labelledby] > tr > td {
+			&[data-drop-direction] {
+				--at-apply: 'relative';
+				--drop-indicator-bg-direction: 90deg;
+
+				&::before {
+					--at-apply: 'content-empty absolute z-10 inset-x-0 -inset-y-px';
+					background-image: linear-gradient(
+						var(--drop-indicator-bg-direction),
+						hsl(0 100% 100%) 0px,
+						hsl(0 100% 100%) 0.5px,
+						hsl(0 100% 100% / 0.2) 0.5px,
+						transparent 1rem
+					);
+				}
+			}
+
+			&[data-drop-direction='after'] {
+				--drop-indicator-bg-direction: 270deg;
+			}
 		}
 
 		> tfoot {
