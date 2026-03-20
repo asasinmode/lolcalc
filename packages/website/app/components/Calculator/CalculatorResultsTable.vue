@@ -872,7 +872,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 <style>
 @layer components {
 	#results-table {
-		--at-apply: 'mx-auto border-separate border-spacing-0';
+		--at-apply: 'mx-auto border-collapse border-spacing-0';
 		--border-color: theme('colors.neutral.400');
 		--control-button-size: calc(6 * var(--spacing));
 
@@ -1065,6 +1065,12 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				--at-apply: 'text-neutral-200';
 
 				> tr {
+					&:has(+ &:hover) {
+						> * {
+							--at-apply: 'b-b-[--ui-button-border-clr]';
+						}
+					}
+
 					&:hover {
 						> * {
 							--at-apply: 'b-[--ui-button-border-clr]';
@@ -1147,14 +1153,15 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			&[data-drop-direction] {
 				--at-apply: 'relative';
 				--drop-indicator-bg-direction: 90deg;
+				--indicator-b-w: 0.5px;
 
 				&::before {
-					--at-apply: 'content-empty absolute z-10 inset-x-0 -inset-y-px';
+					--at-apply: 'content-empty absolute z-10 inset-0 -bottom-px';
 					background-image: linear-gradient(
 						var(--drop-indicator-bg-direction),
 						hsl(0 100% 100%) 0px,
-						hsl(0 100% 100%) 0.5px,
-						hsl(0 100% 100% / 0.2) 0.5px,
+						hsl(0 100% 100%) var(--indicator-b-w),
+						hsl(0 100% 100% / 0.2) var(--indicator-b-w),
 						transparent 1rem
 					);
 				}
@@ -1163,6 +1170,11 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			&[data-drop-direction='after'] {
 				--drop-indicator-bg-direction: 270deg;
 			}
+		}
+
+		> thead > tr:nth-child(2) > td:nth-child(2),
+		> tbody[aria-labelledby] > tr > td:first-of-type {
+			--indicator-b-w: 1px;
 		}
 
 		> tfoot {
