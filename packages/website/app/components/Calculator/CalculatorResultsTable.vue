@@ -458,10 +458,19 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 	resultColumns.value.splice(adjustedIndex, 0, column!);
 }
 
-function getDropTargetIndex(event: DragEvent, index: number, fromIndex: number | undefined, itemsLength: number, isVertical: boolean): [toIndex: number | undefined, fromIndex: number | undefined] {
+function getDropTargetIndex(
+	event: DragEvent,
+	index: number,
+	fromIndex: number | undefined,
+	itemsLength: number,
+	isVertical: boolean,
+	midpointOffset = 0,
+): [toIndex: number | undefined, fromIndex: number | undefined] {
 	if (fromIndex === undefined || fromIndex === index) {
 		return [undefined, undefined];
 	}
+
+	console.log('offset by', midpointOffset);
 
 	let toIndex;
 	if (index === itemsLength) {
@@ -473,7 +482,9 @@ function getDropTargetIndex(event: DragEvent, index: number, fromIndex: number |
 	} else {
 		const el = event.currentTarget as HTMLElement;
 		const rect = el.getBoundingClientRect();
-		toIndex = event[isVertical ? 'clientY' : 'clientX'] < rect[isVertical ? 'top' : 'left'] + rect[isVertical ? 'height' : 'width'] / 2 ? index : index + 1;
+		toIndex = event[isVertical ? 'clientY' : 'clientX'] < rect[isVertical ? 'top' : 'left'] + rect[isVertical ? 'height' : 'width'] / 2
+			? index
+			: index + 1;
 	}
 
 	return [toIndex, fromIndex];
@@ -484,24 +495,44 @@ function moveResultSection(fromIndex: number, toIndex: number) {
 	resultSections.value.splice(toIndex, 0, section!);
 }
 
+const sectionDragDropIndex = ref<number>();
+let sectionDraggedFromIndex: number | undefined;
+
 function startResultSectionDrag(event: DragEvent, index: number) {
-	console.log('starting drag', index);
+	event.dataTransfer!.effectAllowed = 'move';
+	sectionDraggedFromIndex = index;
+
+	const el = (event.target as HTMLElement).closest('tr')!.children.item(1)!.firstElementChild as HTMLElement;
+	event.dataTransfer!.setDragImage(el, el.offsetWidth, el.offsetHeight);
 }
 
-function onResultSectionDragenter(event: DragEvent, index: number) {
-	// console.log('entered', index);
+function onResultSectionDragenter(event: DragEvent, index: number, isHeader: boolean) {
+	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, false, getSectionHeaderDragRowOffset(event, isHeader)));
 }
 
-function onResultSectionDragover(event: DragEvent, index: number) {
-	// console.log('dragged over', index);
+function onResultSectionDragover(event: DragEvent, index: number, isHeader: boolean) {
+	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, false, getSectionHeaderDragRowOffset(event, isHeader)));
+	if (sectionDragDropIndex.value !== undefined) {
+		event.preventDefault();
+	}
 }
 
 function onResultSectionDragleave(event: DragEvent) {
-	// console.log('left');
+	if (
+		!event.currentTarget || !event.relatedTarget
+		|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
+	) {
+		sectionDragDropIndex.value = undefined;
+	}
 }
 
-function onResultSectionDrop(event: DragEvent, index: number) {
-	// console.log('dropped', index);
+function onResultSectionDrop(event: DragEvent, index: number, isHeader: boolean) {
+	sectionDragDropIndex.value = undefined;
+}
+
+function getSectionHeaderDragRowOffset(event: DragEvent, isHeader: boolean): number {
+	const el = isHeader ? event.currentTarget : (event.currentTarget as HTMLElement).previousElementSibling;
+	return el ? ( el as HTMLElement ).offsetHeight : 0;
 }
 </script>
 
@@ -728,10 +759,13 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 		</thead>
 		<template v-for="(section, index) in resultSections" :key="section.id">
 			<tbody
-				@dragenter="onResultSectionDragenter($event, index)"
-				@dragover="onResultSectionDragover($event, index)"
+				:data-drop-direction="sectionDragDropIndex === index
+					? 'before'
+					: (!expandedSections.includes(section.id) && sectionDragDropIndex === index + 1) ? 'after' : undefined"
+				@dragenter="onResultSectionDragenter($event, index, true)"
+				@dragover="onResultSectionDragover($event, index, true)"
 				@dragleave="onResultSectionDragleave"
-				@drop="onResultSectionDrop($event, index)"
+				@drop="onResultSectionDrop($event, index, true)"
 			>
 				<tr>
 					<td :headers="`results-table-section-header-${section.id}`">
@@ -752,7 +786,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							draggable="true"
 							:disabled="index === (resultSections.length - 1)"
 							@click="moveResultSection(index, index + 1)"
-							@dragstart="startResultSectionDrag($event, index + 1)"
+							@dragstart="startResultSectionDrag($event, index)"
 						>
 							<span>move down</span>
 							<Icon class="i-ph:arrow-down" />
@@ -802,10 +836,11 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				:id="`results-table-section-body-${section.id}`"
 				:aria-labelledby="`results-table-section-header-${section.id}`"
 				:hidden="!expandedSections.includes(section.id)"
-				@dragenter="onResultSectionDragenter($event, index)"
-				@dragover="onResultSectionDragover($event, index)"
+				:data-drop-direction="sectionDragDropIndex === index + 1 ? 'after' : undefined"
+				@dragenter="onResultSectionDragenter($event, index, false)"
+				@dragover="onResultSectionDragover($event, index, false)"
 				@dragleave="onResultSectionDragleave"
-				@drop="onResultSectionDrop($event, index)"
+				@drop="onResultSectionDrop($event, index, false)"
 			>
 				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
 					<th :id="`results-table-section-row-${section.id}-${row.id}`" scope="row" colspan="2" headers="results-table-header-damage-type">
@@ -848,7 +883,10 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				</tr>
 			</tbody>
 		</template>
-		<tfoot v-show="damageSectionOptions.length">
+		<tfoot
+			v-show="damageSectionOptions.length"
+			:data-drop-direction="sectionDragDropIndex === resultSections.length ? 'before' : undefined"
+		>
 			<tr>
 				<td :colspan="resultColumns.length + 2">
 					<form @submit.prevent="addResultsSection">
@@ -884,6 +922,11 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 		--bg-clr: theme('colors.neutral.950');
 		--control-button-size: calc(6 * var(--spacing));
 		--header-row-h: calc(22 * var(--spacing));
+		--section-header-row-py: calc(1 * var(--spacing));
+		--section-body-pb: 0px;
+		/* --section-header-row-h: calc( */
+		/* 	2 * var(--control-button-size) + var(--section-header-row-pt) + var(--section-header-row-pb) */
+		/* ); */
 
 		&[inert] {
 			--at-apply: 'blur-3';
@@ -927,7 +970,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				--at-apply: 'pb-3 bg-[--bg-clr]';
 
 				&[data-drop-direction]::after {
-					--at-apply: ' content-empty absolute z-10 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
+					--at-apply: 'content-empty absolute z-10 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
 					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 				}
 
@@ -1056,11 +1099,11 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 					}
 
 					> * {
-						--at-apply: 'pb-1';
+						--at-apply: 'py-[--section-header-row-py]';
 					}
 
 					> th > div {
-						--at-apply: 'text-lg font-medium whitespace-nowrap';
+						--at-apply: 'text-lg font-medium whitespace-nowrap w-max';
 
 						> img {
 							--at-apply: 'size-6 ms-2 me-1 inline-block';
@@ -1070,11 +1113,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			}
 
 			&:not(:first-of-type):not([aria-labelledby]) {
-				--at-apply: 'top-[calc(var(--header-row-h)-5*var(--spacing))]';
-
-				> tr > * {
-					--at-apply: 'pt-6';
-				}
+				--at-apply: 'top-[--header-row-h]';
 			}
 
 			&[aria-labelledby] {
@@ -1162,16 +1201,23 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 		> tbody[aria-labelledby] > tr > td {
 			&[data-drop-direction] {
 				--at-apply: 'relative';
+			}
+		}
+
+		> thead > tr:nth-child(1) > td,
+		> thead > tr:nth-child(2) > td,
+		> tbody[aria-labelledby] > tr > td,
+		> :where(thead, tbody, tfoot) {
+			&[data-drop-direction] {
 				--drop-indicator-bg-direction: 90deg;
-				--indicator-b-w: 0.5px;
 
 				&::before {
 					--at-apply: 'content-empty absolute z-10 inset-0 -inset-y-px';
 					background-image: linear-gradient(
 						var(--drop-indicator-bg-direction),
 						hsl(0 100% 100%) 0px,
-						hsl(0 100% 100%) var(--indicator-b-w),
-						hsl(0 100% 100% / 0.2) var(--indicator-b-w),
+						hsl(0 100% 100%) 0.5px,
+						hsl(0 100% 100% / 0.2) 0.5px,
 						transparent 1rem
 					);
 				}
@@ -1180,11 +1226,6 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 			&[data-drop-direction='after'] {
 				--drop-indicator-bg-direction: 270deg;
 			}
-		}
-
-		> thead > tr:nth-child(2) > td:nth-child(2),
-		> tbody[aria-labelledby] > tr > td:first-of-type {
-			--indicator-b-w: 1px;
 		}
 
 		> tfoot {
@@ -1201,6 +1242,35 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 
 				> button {
 					--at-apply: 'w-fit px-1 h-6 whitespace-nowrap';
+				}
+			}
+		}
+	}
+}
+
+@layer overrides {
+	#results-table {
+		> thead,
+		> tbody,
+		> tfoot {
+			&[data-drop-direction] {
+				--drop-indicator-bg-direction: 180deg;
+
+				&::before {
+					--at-apply: 'inset-y-0';
+				}
+
+				&::after {
+					--at-apply: 'content-empty absolute z-10 start-1/2 top-0.5 -translate-x-1/2 size-4 bg-neutral-300';
+					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
+				}
+			}
+
+			&[data-drop-direction='after'] {
+				--drop-indicator-bg-direction: 0deg;
+
+				&::after {
+					--at-apply: 'bottom-0.5 top-auto rotate-180';
 				}
 			}
 		}
