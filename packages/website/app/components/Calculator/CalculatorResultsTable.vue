@@ -481,7 +481,8 @@ function getColumnDropTargetIndex(event: DragEvent, index: number): [ toIndex: n
 }
 
 function moveResultSection(fromIndex: number, toIndex: number) {
-	console.log('moving', { fromIndex, toIndex });
+	const [section] = resultSections.value.splice(fromIndex, 1);
+	resultSections.value.splice(toIndex, 0, section!);
 }
 
 function startResultSectionDrag(event: DragEvent, index: number) {
@@ -740,7 +741,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							class="pretend-ui-button"
 							:disabled="index === 0"
 							draggable="true"
-							@click="moveResultSection(index, index + (globalKeyModifiers.alt ? 0 : -1))"
+							@click="moveResultSection(index, index - 1)"
 							@dragstart="startResultSectionDrag($event, index)"
 						>
 							<span>move up</span>
@@ -752,7 +753,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 							draggable="true"
 							:disabled="index === (resultSections.length - 1)"
 							@click="moveResultSection(index, index + 1)"
-							@dragstart="startResultSectionDrag($event, index)"
+							@dragstart="startResultSectionDrag($event, index + 1)"
 						>
 							<span>move down</span>
 							<Icon class="i-ph:arrow-down" />
