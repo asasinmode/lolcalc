@@ -409,26 +409,32 @@ function startResultColumnDrag(index: number, event: DragEvent) {
 	columnDraggedFromIndex = index;
 
 	const el = (event.target as HTMLElement).closest('div')!;
-	event.dataTransfer!.setDragImage(el, el.offsetWidth, el.offsetHeight);
+	event.dataTransfer!.setDragImage(el, 0, 0);
 }
 
 function onResultColumnDragenter(event: DragEvent, index: number) {
-	([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
+	if (columnDraggedFromIndex !== undefined) {
+		([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
+	}
 }
 
 function onResultColumnDragover(event: DragEvent, index: number) {
-	([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
-	if (columnDragDropIndex.value !== undefined) {
-		event.preventDefault();
+	if (columnDraggedFromIndex !== undefined) {
+		([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
+		if (columnDragDropIndex.value !== undefined) {
+			event.preventDefault();
+		}
 	}
 }
 
 function onResultColumnDragleave(event: DragEvent) {
-	if (
-		!event.currentTarget || !event.relatedTarget
-		|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
-	) {
-		columnDragDropIndex.value = undefined;
+	if (columnDraggedFromIndex !== undefined) {
+		if (
+			!event.currentTarget || !event.relatedTarget
+			|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
+		) {
+			columnDragDropIndex.value = undefined;
+		}
 	}
 }
 
@@ -504,60 +510,61 @@ function startResultSectionDrag(event: DragEvent, index: number) {
 	event.dataTransfer!.effectAllowed = 'move';
 	sectionDraggedFromIndex = index;
 
-	const el = (event.target as HTMLElement).closest('tr')!.children.item(1)!.firstElementChild as HTMLElement;
-	event.dataTransfer!.setDragImage(el, el.offsetWidth, el.offsetHeight);
+	const el = (event.target as HTMLElement).closest('tr')!;
+	event.dataTransfer!.setDragImage(el, 0, 0);
 }
 
 function onResultSectionDragenter(event: DragEvent, index: number, isHeader: boolean) {
-	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
+	if (sectionDraggedFromIndex !== undefined) {
+		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
+	}
 }
 
 function onResultSectionDragover(event: DragEvent, index: number, isHeader: boolean) {
-	([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
-	if (sectionDragDropIndex.value !== undefined) {
-		event.preventDefault();
+	if (sectionDraggedFromIndex !== undefined) {
+		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
+		if (sectionDragDropIndex.value !== undefined) {
+			event.preventDefault();
+		}
 	}
 }
 
 function onResultSectionDragleave(event: DragEvent) {
-	if (
-		!event.currentTarget || !event.relatedTarget
-		|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
-	) {
-		sectionDragDropIndex.value = undefined;
+	if (sectionDraggedFromIndex !== undefined) {
+		if (
+			!event.currentTarget || !event.relatedTarget
+			|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
+		) {
+			sectionDragDropIndex.value = undefined;
+		}
 	}
 }
 
 function onResultSectionDrop(event: DragEvent, index: number, isHeader: boolean) {
 	sectionDragDropIndex.value = undefined;
+	sectionDraggedFromIndex = undefined;
 }
 
 function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
-	let rect1, rect2;
-
+	let el1, el2;
 	if (isNext) {
-		rect1 = el.getBoundingClientRect();
-		rect2 = (el.nextElementSibling as HTMLElement).getBoundingClientRect();
+		el1 = el;
+		el2 = (el.nextElementSibling as HTMLElement);
 	} else {
-		rect1 = (el.previousElementSibling as HTMLElement).getBoundingClientRect();
-		rect2 = el.getBoundingClientRect();
+		el1 = (el.previousElementSibling as HTMLElement);
+		el2 = el;
 	}
 
-	if (!rect2) {
-		return rect1;
-	}
+	const rect1 = el1.getBoundingClientRect();
+	const rect2 = el2.getBoundingClientRect();
 
-	// Combine both rects
-	const top = Math.min(rect1.top, rect2.top);
+	/* section header row is sticky, this should take care of top of body possibly being above header */
+	const top = rect2.top < rect1.top ? rect1.top : Math.min(rect1.top, rect2.top);
 	const bottom = Math.max(rect1.bottom, rect2.bottom);
 	const left = Math.min(rect1.left, rect2.left);
 	const right = Math.max(rect1.right, rect2.right);
 
-
-	const rv = new DOMRect(left, top, right - left, bottom - top);
-	console.log(rv, rect1, rect2)
-
-	return rv;
+	return new DOMRect(left, top, right - left, bottom - top);
 }
 </script>
 
@@ -995,7 +1002,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 				--at-apply: 'pb-3 bg-[--bg-clr]';
 
 				&[data-drop-direction]::after {
-					--at-apply: 'content-empty absolute z-10 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
+					--at-apply: 'content-empty absolute z-3 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
 					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 				}
 
@@ -1236,7 +1243,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 				--drop-indicator-bg-direction: 90deg;
 
 				&::before {
-					--at-apply: 'content-empty absolute z-10 inset-0 -inset-y-px';
+					--at-apply: 'content-empty absolute z-3 inset-0 -inset-y-px';
 					background-image: linear-gradient(
 						var(--drop-indicator-bg-direction),
 						hsl(0 100% 100%) 0px,
@@ -1285,7 +1292,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 				}
 
 				&::after {
-					--at-apply: 'content-empty absolute z-10 start-1/2 top-0.5 -translate-x-1/2 size-4 bg-neutral-300';
+					--at-apply: 'content-empty absolute z-3 start-1/2 top-0.5 -translate-x-1/2 size-4 bg-neutral-300';
 					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 				}
 			}
