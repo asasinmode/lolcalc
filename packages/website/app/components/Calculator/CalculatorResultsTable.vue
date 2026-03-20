@@ -408,16 +408,16 @@ function startResultColumnDrag(index: number, event: DragEvent) {
 	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
 	columnDraggedFromIndex = index;
 
-	const div = (event.target as HTMLElement).closest('div')!;
-	event.dataTransfer!.setDragImage(div, div.offsetWidth, div.offsetHeight);
+	const el = (event.target as HTMLElement).closest('div')!;
+	event.dataTransfer!.setDragImage(el, el.offsetWidth, el.offsetHeight);
 }
 
 function onResultColumnDragenter(event: DragEvent, index: number) {
-	([columnDragDropIndex.value] = getColumnDropTargetIndex(event, index));
+	([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
 }
 
 function onResultColumnDragover(event: DragEvent, index: number) {
-	([columnDragDropIndex.value] = getColumnDropTargetIndex(event, index));
+	([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
 	if (columnDragDropIndex.value !== undefined) {
 		event.preventDefault();
 	}
@@ -435,7 +435,7 @@ function onResultColumnDragleave(event: DragEvent) {
 function onResultColumnDrop(event: DragEvent, index: number) {
 	columnDragDropIndex.value = undefined;
 
-	const [toIndex, fromIndex] = getColumnDropTargetIndex(event, index);
+	const [toIndex, fromIndex] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false);
 	if (toIndex === undefined || fromIndex === undefined) {
 		return;
 	}
@@ -458,26 +458,25 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 	resultColumns.value.splice(adjustedIndex, 0, column!);
 }
 
-function getColumnDropTargetIndex(event: DragEvent, index: number): [ toIndex: number | undefined, fromIndex: number | undefined ] {
-	if (columnDraggedFromIndex === undefined || columnDraggedFromIndex === index) {
+function getDropTargetIndex(event: DragEvent, index: number, fromIndex: number | undefined, itemsLength: number, isVertical: boolean): [toIndex: number | undefined, fromIndex: number | undefined] {
+	if (fromIndex === undefined || fromIndex === index) {
 		return [undefined, undefined];
 	}
 
 	let toIndex;
-	const length = resultColumns.value.length;
-	if (index === length) {
-		toIndex = columnDraggedFromIndex === resultColumns.value.length - 1 ? undefined : length;
-	} else if (index === columnDraggedFromIndex - 1) {
+	if (index === itemsLength) {
+		toIndex = fromIndex === (itemsLength - 1) ? undefined : itemsLength;
+	} else if (index === fromIndex - 1) {
 		toIndex = index;
-	} else if (index === columnDraggedFromIndex + 1) {
+	} else if (index === fromIndex + 1) {
 		toIndex = index + 1;
 	} else {
 		const el = event.currentTarget as HTMLElement;
 		const rect = el.getBoundingClientRect();
-		toIndex = event.clientX < rect.left + rect.width / 2 ? index : index + 1;
+		toIndex = event[isVertical ? 'clientY' : 'clientX'] < rect[isVertical ? 'top' : 'left'] + rect[isVertical ? 'height' : 'width'] / 2 ? index : index + 1;
 	}
 
-	return [toIndex, columnDraggedFromIndex];
+	return [toIndex, fromIndex];
 }
 
 function moveResultSection(fromIndex: number, toIndex: number) {
