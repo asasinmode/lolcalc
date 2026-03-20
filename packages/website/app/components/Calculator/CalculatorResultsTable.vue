@@ -401,21 +401,12 @@ function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
 	copy && addComputedColumn(column);
 }
 
-function colDragData(event: DragEvent) {
-	const rawIndex = event.dataTransfer?.getData('index');
-
-	if (rawIndex) {
-		return {
-			index: Number.parseInt(rawIndex),
-		};
-	}
-}
-
 const columnDragDropIndex = ref<number>();
+let columnDraggedFromIndex: number | undefined;
 
 function startResultColumnDrag(index: number, event: DragEvent) {
 	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
-	event.dataTransfer!.setData('index', index.toString());
+	columnDraggedFromIndex = index;
 
 	const div = (event.target as HTMLElement).closest('div')!;
 	event.dataTransfer!.setDragImage(div, div.offsetWidth, div.offsetHeight);
@@ -449,6 +440,7 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 		return;
 	}
 
+	columnDraggedFromIndex = undefined;
 	if (globalKeyModifiers.value.alt) {
 		const column: IDamageResultTableColumn = {
 			id: crypto.randomUUID(),
@@ -467,19 +459,17 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 }
 
 function getColumnDropTargetIndex(event: DragEvent, index: number): [ toIndex: number | undefined, fromIndex: number | undefined ] {
-	const dragData = colDragData(event);
-	if (!dragData || dragData.index === index) {
+	if (columnDraggedFromIndex === undefined || columnDraggedFromIndex === index) {
 		return [undefined, undefined];
 	}
 
-	const fromIndex = dragData.index;
 	let toIndex;
 	const length = resultColumns.value.length;
 	if (index === length) {
-		toIndex = dragData.index === resultColumns.value.length - 1 ? undefined : length;
-	} else if (index === dragData.index - 1) {
+		toIndex = columnDraggedFromIndex === resultColumns.value.length - 1 ? undefined : length;
+	} else if (index === columnDraggedFromIndex - 1) {
 		toIndex = index;
-	} else if (index === dragData.index + 1) {
+	} else if (index === columnDraggedFromIndex + 1) {
 		toIndex = index + 1;
 	} else {
 		const el = event.currentTarget as HTMLElement;
@@ -487,7 +477,7 @@ function getColumnDropTargetIndex(event: DragEvent, index: number): [ toIndex: n
 		toIndex = event.clientX < rect.left + rect.width / 2 ? index : index + 1;
 	}
 
-	return [toIndex, fromIndex];
+	return [toIndex, columnDraggedFromIndex];
 }
 
 function moveResultSection(fromIndex: number, toIndex: number) {
@@ -1176,7 +1166,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				--indicator-b-w: 0.5px;
 
 				&::before {
-					--at-apply: 'content-empty absolute z-10 inset-0 -bottom-px';
+					--at-apply: 'content-empty absolute z-10 inset-0 -inset-y-px';
 					background-image: linear-gradient(
 						var(--drop-indicator-bg-direction),
 						hsl(0 100% 100%) 0px,
