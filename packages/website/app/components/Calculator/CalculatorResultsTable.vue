@@ -1198,7 +1198,8 @@ function getSectionHeaderDragRowOffset(event: DragEvent, isHeader: boolean): num
 
 		> thead > tr:nth-child(1) > td,
 		> thead > tr:nth-child(2) > td,
-		> tbody[aria-labelledby] > tr > td {
+		> tbody[aria-labelledby] > tr > td,
+		> tbody[aria-labelledby] {
 			&[data-drop-direction] {
 				--at-apply: 'relative';
 			}
