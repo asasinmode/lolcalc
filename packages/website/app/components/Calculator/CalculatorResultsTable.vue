@@ -890,9 +890,10 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 <style>
 @layer components {
 	#results-table {
-		--at-apply: 'mx-auto border-collapse border-spacing-0';
-		--border-color: theme('colors.neutral.400');
+		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr]';
+		--bg-clr: theme('colors.neutral.950');
 		--control-button-size: calc(6 * var(--spacing));
+		--header-row-h: calc(22 * var(--spacing));
 
 		&[inert] {
 			--at-apply: 'blur-3';
@@ -915,6 +916,8 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 		}
 
 		> thead {
+			--at-apply: 'sticky top-0 z-5';
+
 			> tr:nth-child(1) {
 				> th > * {
 					--at-apply: 'sr-only';
@@ -931,8 +934,7 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 
 			> tr:nth-child(1) > td,
 			> tr:nth-child(2) > * {
-				--at-apply: 'pb-3';
-				--header-row-h: calc(19 * var(--spacing));
+				--at-apply: 'pb-3 bg-[--bg-clr]';
 
 				&[data-drop-direction]::after {
 					--at-apply: ' content-empty absolute z-10 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
@@ -1040,6 +1042,8 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 
 		> tbody {
 			&:not([aria-labelledby]) {
+				--at-apply: 'sticky top-[--header-row-h] z-4 bg-[--bg-clr]';
+
 				> tr {
 					> td {
 						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2';
@@ -1075,20 +1079,18 @@ function onResultSectionDrop(event: DragEvent, index: number) {
 				}
 			}
 
-			&:not(:first-of-type):not([aria-labelledby]) > tr > * {
-				--at-apply: 'pt-6';
+			&:not(:first-of-type):not([aria-labelledby]) {
+				--at-apply: 'top-[calc(var(--header-row-h)-5*var(--spacing))]';
+
+				> tr > * {
+					--at-apply: 'pt-6';
+				}
 			}
 
 			&[aria-labelledby] {
 				--at-apply: 'text-neutral-200';
 
 				> tr {
-					&:has(+ &:hover) {
-						> * {
-							--at-apply: 'b-b-[--ui-button-border-clr]';
-						}
-					}
-
 					&:hover {
 						> * {
 							--at-apply: 'b-[--ui-button-border-clr]';
