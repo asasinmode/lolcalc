@@ -289,7 +289,10 @@ function onItemDragover(event: DragEvent, index: number, target: DamageSource) {
 }
 
 function onItemDragLeave(event: DragEvent) {
-	if (event.target) {
+	if (
+		!event.currentTarget || !event.relatedTarget
+		|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
+	) {
 		delete (event.target as HTMLElement).dataset.dropBuyability;
 	}
 }
