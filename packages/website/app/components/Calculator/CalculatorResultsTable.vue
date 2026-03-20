@@ -422,11 +422,11 @@ function startResultColumnDrag(index: number, event: DragEvent) {
 }
 
 function onResultColumnDragenter(event: DragEvent, index: number) {
-	columnDragDropIndex.value = getColumnDropTargetIndex(event, index);
+	([columnDragDropIndex.value] = getColumnDropTargetIndex(event, index));
 }
 
 function onResultColumnDragover(event: DragEvent, index: number) {
-	columnDragDropIndex.value = getColumnDropTargetIndex(event, index);
+	([columnDragDropIndex.value] = getColumnDropTargetIndex(event, index));
 	if (columnDragDropIndex.value !== undefined) {
 		event.preventDefault();
 	}
@@ -444,32 +444,50 @@ function onResultColumnDragleave(event: DragEvent) {
 function onResultColumnDrop(event: DragEvent, index: number) {
 	columnDragDropIndex.value = undefined;
 
-	const toIndex = getColumnDropTargetIndex(event, index);
-	if (toIndex !== undefined) {
-		const { index: fromIndex } = colDragData(event)!;
-		console.log('dropped to', { fromIndex, toIndex });
-	}
-}
-
-function getColumnDropTargetIndex(event: DragEvent, index: number): number | undefined {
-	const dragData = colDragData(event);
-	if (!dragData || dragData.index === index) {
+	const [toIndex, fromIndex] = getColumnDropTargetIndex(event, index);
+	if (toIndex === undefined || fromIndex === undefined) {
 		return;
 	}
 
-	const length = resultColumns.value.length;
-	if (index === length) {
-		return dragData.index === resultColumns.value.length - 1 ? undefined : length;
-	} else if (index === dragData.index - 1) {
-		return index;
-	} else if (index === dragData.index + 1) {
-		return index + 1;
+	if (globalKeyModifiers.value.alt) {
+		const column: IDamageResultTableColumn = {
+			id: crypto.randomUUID(),
+			source: resultColumns.value[fromIndex]!.source,
+			target: resultColumns.value[fromIndex]!.target,
+		};
+		resultColumns.value.splice(toIndex, 0, column);
+		addComputedColumn(column);
+		return;
 	}
 
-	const el = event.currentTarget as HTMLElement;
-	const rect = el.getBoundingClientRect();
+	const [column] = resultColumns.value.splice(fromIndex, 1);
+	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
 
-	return event.clientX < rect.left + rect.width / 2 ? index : index + 1;
+	resultColumns.value.splice(adjustedIndex, 0, column!);
+}
+
+function getColumnDropTargetIndex(event: DragEvent, index: number): [ toIndex: number | undefined, fromIndex: number | undefined ] {
+	const dragData = colDragData(event);
+	if (!dragData || dragData.index === index) {
+		return [undefined, undefined];
+	}
+
+	const fromIndex = dragData.index;
+	let toIndex;
+	const length = resultColumns.value.length;
+	if (index === length) {
+		toIndex = dragData.index === resultColumns.value.length - 1 ? undefined : length;
+	} else if (index === dragData.index - 1) {
+		toIndex = index;
+	} else if (index === dragData.index + 1) {
+		toIndex = index + 1;
+	} else {
+		const el = event.currentTarget as HTMLElement;
+		const rect = el.getBoundingClientRect();
+		toIndex = event.clientX < rect.left + rect.width / 2 ? index : index + 1;
+	}
+
+	return [toIndex, fromIndex];
 }
 
 function moveResultSection(fromIndex: number, toIndex: number) {
