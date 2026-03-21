@@ -1267,12 +1267,12 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 				--drop-indicator-bg-direction: 90deg;
 
 				&::before {
-					--at-apply: 'content-empty absolute z-3 inset-0 -inset-y-px';
+					--at-apply: 'content-empty absolute z-3 start-0 -end-[0.5px] -top-px -bottom-px';
 					background-image: linear-gradient(
 						var(--drop-indicator-bg-direction),
 						hsl(0 100% 100%) 0px,
-						hsl(0 100% 100%) 0.5px,
-						hsl(0 100% 100% / 0.2) 0.5px,
+						hsl(0 100% 100%) 1px,
+						hsl(0 100% 100% / 0.2) 1px,
 						transparent 1rem
 					);
 				}
@@ -1280,6 +1280,15 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 			&[data-drop-direction='after'] {
 				--drop-indicator-bg-direction: 270deg;
+
+				&::before {
+					--at-apply: 'start-[0.5px] end-0';
+					background-image: linear-gradient(
+						var(--drop-indicator-bg-direction),
+						hsl(0 100% 100% / 0.2) 0px,
+						transparent 1rem
+					);
+				}
 			}
 		}
 
@@ -1311,7 +1320,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 				--drop-indicator-bg-direction: 180deg;
 
 				&::before {
-					--at-apply: 'inset-y-0';
+					--at-apply: 'inset-x-0 bottom-0 -top-[0.5px]';
 				}
 
 				&::after {
@@ -1323,10 +1332,19 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 			&[data-drop-direction='after'] {
 				--drop-indicator-bg-direction: 0deg;
 
+				&::before {
+					--at-apply: 'bottom-[0.5px] top-0';
+				}
+
 				&::after {
 					--at-apply: 'bottom-0.5 top-auto rotate-180';
 				}
 			}
+		}
+
+		> tfoot[data-drop-direction]::before,
+		> tbody:first-of-type[data-drop-direction]::before {
+			--at-apply: 'top-0';
 		}
 	}
 }
