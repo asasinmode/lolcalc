@@ -494,7 +494,6 @@ function getDropTargetIndex(
 		const posInEl = event[isVertical ? 'clientY' : 'clientX'] - rect[isVertical ? 'top' : 'left'];
 
 		const midpoint = rectSize / 2;
-		// console.log({ posInEl, rectSize, midpoint }, rectangleLike, posInEl < midpoint ? 'before' : 'after', el);
 
 		toIndex = posInEl < midpoint ? index : index + 1;
 	}
@@ -518,13 +517,13 @@ function startResultSectionDrag(event: DragEvent, index: number) {
 	event.dataTransfer!.setDragImage(el, 0, 0);
 }
 
-function onResultSectionDragenter(event: DragEvent, index: number, isHeader: boolean) {
+function onResultSectionDragenter(event: DragEvent, index: number, isHeader?: boolean) {
 	if (sectionDraggedFromIndex !== undefined) {
 		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
 	}
 }
 
-function onResultSectionDragover(event: DragEvent, index: number, isHeader: boolean) {
+function onResultSectionDragover(event: DragEvent, index: number, isHeader?: boolean) {
 	if (sectionDraggedFromIndex !== undefined) {
 		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
 		if (sectionDragDropIndex.value !== undefined) {
@@ -544,9 +543,20 @@ function onResultSectionDragleave(event: DragEvent) {
 	}
 }
 
-function onResultSectionDrop(event: DragEvent, index: number, isHeader: boolean) {
+function onResultSectionDrop(event: DragEvent, index: number, isHeader?: boolean) {
 	sectionDragDropIndex.value = undefined;
+
+	const [toIndex, fromIndex] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader);
+	if (toIndex === undefined || fromIndex === undefined) {
+		return;
+	}
+
 	sectionDraggedFromIndex = undefined;
+
+	const [section] = resultSections.value.splice(fromIndex, 1);
+	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
+
+	resultSections.value.splice(adjustedIndex, 0, section!);
 }
 
 function endResultSectionDrag() {
@@ -930,10 +940,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 		<tfoot
 			v-show="damageSectionOptions.length"
 			:data-drop-direction="sectionDragDropIndex === resultSections.length ? 'before' : undefined"
-			@dragenter="onResultSectionDragenter($event, resultSections.length, false)"
-			@dragover="onResultSectionDragover($event, resultSections.length, false)"
+			@dragenter="onResultSectionDragenter($event, resultSections.length)"
+			@dragover="onResultSectionDragover($event, resultSections.length)"
 			@dragleave="onResultSectionDragleave"
-			@drop="onResultSectionDrop($event, resultSections.length, false)"
+			@drop="onResultSectionDrop($event, resultSections.length)"
 		>
 			<tr>
 				<td :colspan="resultColumns.length + 2">
