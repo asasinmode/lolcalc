@@ -1238,7 +1238,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 		> thead > tr:nth-child(1) > td,
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
-		> :where(thead, tbody, tfoot) {
+		> tbody {
 			&[data-drop-direction] {
 				--drop-indicator-bg-direction: 90deg;
 
@@ -1281,28 +1281,24 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 @layer overrides {
 	#results-table {
-		> thead,
-		> tbody,
-		> tfoot {
-			&[data-drop-direction] {
-				--drop-indicator-bg-direction: 180deg;
+		> tbody[data-drop-direction] {
+			--drop-indicator-bg-direction: 180deg;
 
-				&::before {
-					--at-apply: 'inset-y-0';
-				}
-
-				&::after {
-					--at-apply: 'content-empty absolute z-3 start-1/2 top-0.5 -translate-x-1/2 size-4 bg-neutral-300';
-					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
-				}
+			&::before {
+				--at-apply: 'inset-y-0';
 			}
 
-			&[data-drop-direction='after'] {
-				--drop-indicator-bg-direction: 0deg;
+			&::after {
+				--at-apply: 'content-empty absolute z-3 start-1/2 top-0.5 -translate-x-1/2 size-4 bg-neutral-300';
+				mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
+			}
+		}
 
-				&::after {
-					--at-apply: 'bottom-0.5 top-auto rotate-180';
-				}
+		> tbody[data-drop-direction='after'] {
+			--drop-indicator-bg-direction: 0deg;
+
+			&::after {
+				--at-apply: 'bottom-0.5 top-auto rotate-180';
 			}
 		}
 	}
