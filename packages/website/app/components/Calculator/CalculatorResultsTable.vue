@@ -464,7 +464,7 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 	resultColumns.value.splice(adjustedIndex, 0, column!);
 }
 
-function endResultColumnDrag(){
+function endResultColumnDrag() {
 	columnDraggedFromIndex = undefined;
 }
 
@@ -549,7 +549,7 @@ function onResultSectionDrop(event: DragEvent, index: number, isHeader: boolean)
 	sectionDraggedFromIndex = undefined;
 }
 
-function endResultSectionDrag(){
+function endResultSectionDrag() {
 	sectionDraggedFromIndex = undefined;
 }
 
@@ -930,6 +930,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 		<tfoot
 			v-show="damageSectionOptions.length"
 			:data-drop-direction="sectionDragDropIndex === resultSections.length ? 'before' : undefined"
+			@dragenter="onResultSectionDragenter($event, resultSections.length, false)"
+			@dragover="onResultSectionDragover($event, resultSections.length, false)"
+			@dragleave="onResultSectionDragleave"
+			@drop="onResultSectionDrop($event, resultSections.length, false)"
 		>
 			<tr>
 				<td :colspan="resultColumns.length + 2">
@@ -1119,7 +1123,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 		> tbody {
 			&:not([aria-labelledby]) {
-				--at-apply: 'sticky top-[--header-row-h] z-4 bg-[--bg-clr]';
+				--at-apply: 'sticky top-[calc(var(--header-row-h)+1px)] z-4 bg-[--bg-clr]';
 
 				> tr {
 					> td {
@@ -1154,10 +1158,6 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 						}
 					}
 				}
-			}
-
-			&:not(:first-of-type):not([aria-labelledby]) {
-				--at-apply: 'top-[--header-row-h]';
 			}
 
 			&[aria-labelledby] {
@@ -1243,14 +1243,16 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 		> thead > tr:nth-child(1) > td,
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
-		> tbody[aria-labelledby] {
+		> tbody[aria-labelledby],
+		> tfoot {
 			--at-apply: 'relative isolate';
 		}
 
 		> thead > tr:nth-child(1) > td,
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
-		> tbody {
+		> tbody,
+		> tfoot {
 			&[data-drop-direction] {
 				--drop-indicator-bg-direction: 90deg;
 
@@ -1293,24 +1295,27 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 @layer overrides {
 	#results-table {
-		> tbody[data-drop-direction] {
-			--drop-indicator-bg-direction: 180deg;
+		> tbody,
+		> tfoot {
+			&[data-drop-direction] {
+				--drop-indicator-bg-direction: 180deg;
 
-			&::before {
-				--at-apply: 'inset-y-0';
+				&::before {
+					--at-apply: 'inset-y-0';
+				}
+
+				&::after {
+					--at-apply: 'content-empty absolute z-3 start-1/2 top-0.5 -translate-x-1/2 size-4 bg-neutral-300';
+					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
+				}
 			}
 
-			&::after {
-				--at-apply: 'content-empty absolute z-3 start-1/2 top-0.5 -translate-x-1/2 size-4 bg-neutral-300';
-				mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
-			}
-		}
+			&[data-drop-direction='after'] {
+				--drop-indicator-bg-direction: 0deg;
 
-		> tbody[data-drop-direction='after'] {
-			--drop-indicator-bg-direction: 0deg;
-
-			&::after {
-				--at-apply: 'bottom-0.5 top-auto rotate-180';
+				&::after {
+					--at-apply: 'bottom-0.5 top-auto rotate-180';
+				}
 			}
 		}
 	}
