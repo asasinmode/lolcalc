@@ -464,6 +464,10 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 	resultColumns.value.splice(adjustedIndex, 0, column!);
 }
 
+function endResultColumnDrag(){
+	columnDraggedFromIndex = undefined;
+}
+
 function getDropTargetIndex(
 	event: DragEvent,
 	index: number,
@@ -542,6 +546,10 @@ function onResultSectionDragleave(event: DragEvent) {
 
 function onResultSectionDrop(event: DragEvent, index: number, isHeader: boolean) {
 	sectionDragDropIndex.value = undefined;
+	sectionDraggedFromIndex = undefined;
+}
+
+function endResultSectionDrag(){
 	sectionDraggedFromIndex = undefined;
 }
 
@@ -753,6 +761,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							draggable="true"
 							@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
 							@dragstart="startResultColumnDrag(index, $event)"
+							@dragend="endResultColumnDrag"
 						>
 							<span>move left, alt+click to duplicate to the left</span>
 							<Icon class="i-ph:arrow-left" />
@@ -774,6 +783,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							:disabled="index === (resultColumns.length - 1)"
 							@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
 							@dragstart="startResultColumnDrag(index, $event)"
+							@dragend="endResultColumnDrag"
 						>
 							<span>move right, alt+click to duplicate to the right</span>
 							<Icon class="i-ph:arrow-right" />
@@ -808,6 +818,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							draggable="true"
 							@click="moveResultSection(index, index - 1)"
 							@dragstart="startResultSectionDrag($event, index)"
+							@dragend="endResultSectionDrag"
 						>
 							<span>move up</span>
 							<Icon class="i-ph:arrow-up" />
@@ -819,6 +830,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							:disabled="index === (resultSections.length - 1)"
 							@click="moveResultSection(index, index + 1)"
 							@dragstart="startResultSectionDrag($event, index)"
+							@dragend="endResultSectionDrag"
 						>
 							<span>move down</span>
 							<Icon class="i-ph:arrow-down" />
