@@ -1133,7 +1133,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 		> tbody {
 			&:not([aria-labelledby]) {
-				--at-apply: 'sticky top-[calc(var(--header-row-h)+1px)] z-4 bg-[--bg-clr]';
+				--at-apply: 'sticky top-[--header-row-h] z-4 bg-[--bg-clr]';
 
 				> tr {
 					> td {
