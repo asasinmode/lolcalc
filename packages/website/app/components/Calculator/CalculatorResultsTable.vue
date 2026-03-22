@@ -138,7 +138,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		rv.value = 'n/a';
 	} else {
 		if (section.getCellValue) {
-			({ value: rv.value, numberValue: rv.numberValue } = section.getCellValue(row.id, column.source, column.target));
+			({ value: rv.value, numberValue: rv.numberValue } = section.getCellValue(section, row.id, column.source, column.target));
 		} else {
 			rv.value = Math.round(Math.random() * 500);
 			rv.numberValue = rv.value;
@@ -882,6 +882,20 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 								aria-hidden="true"
 							>
 							{{ section.name }}
+							<template v-if="section.selectOptions?.length">
+								<label :for="`results-table-header-select-${section.id}`">
+									{{ section.selectLabel }}
+								</label>
+								<select
+									:id="`results-table-header-select-${section.id}`"
+									v-model="section.selectValue"
+									@update:model-value="addComputedSection(section.id)"
+								>
+									<option v-for="[value, text] in section.selectOptions" :key="value" :value>
+										{{ text }}
+									</option>
+								</select>
+							</template>
 						</div>
 					</th>
 				</tr>
@@ -1165,6 +1179,14 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 						> img {
 							--at-apply: 'size-6 ms-2 me-1 inline-block';
+						}
+
+						> label {
+							--at-apply: 'sr-only';
+						}
+
+						> select {
+							--at-apply: 'px-1';
 						}
 					}
 				}

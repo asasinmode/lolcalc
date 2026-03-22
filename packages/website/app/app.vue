@@ -51,7 +51,7 @@ const showResults = computed(() => (damageSources as unknown as Ref<DamageSource
 const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'stats',
-		name: 'stats',
+		name: 'stats of',
 		championId: 'all',
 		permanent: true,
 		icon: 'assets/ux/deathrecap/unknowndamage.png',
@@ -66,7 +66,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 				},
 			};
 		}),
-		getCellValue(rowId, source, _target) {
+		getCellValue(section, rowId, source, _target) {
 			const stat = source.computed.stats.value[rowId as IChampionStatName];
 			return {
 				numberValue: stat.total,
@@ -75,6 +75,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		},
 		selectOptions: [['source', 'source'], ['target', 'target']],
 		selectValue: 'source',
+		selectLabel: 'show stats for column\'s',
 	},
 	{
 		id: 'basicAttack',
