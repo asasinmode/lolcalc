@@ -73,6 +73,8 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
 			};
 		},
+		selectOptions: [['source', 'source'], ['target', 'target']],
+		selectValue: 'source',
 	},
 	{
 		id: 'basicAttack',

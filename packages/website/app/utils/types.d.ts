@@ -57,6 +57,10 @@ export interface IDamageResultTableSection {
 		value: string | number;
 		numberValue: number;
 	};
+	/** when present, the row will have a select to choose from provided options used for setting `selectValue` */
+	selectOptions?: [value: string, text: string][];
+	/** use with selectOptions */
+	selectValue?: string;
 	rows: {
 		name: string;
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
