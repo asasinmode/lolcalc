@@ -66,22 +66,22 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
   - [x] source vs target column headers
   - [x] unique sections, basic attack, item or ability
-  - [ ] compare stats section
-  - [ ] damage type row, use the actual calculated value in the cells
+  - [x] compare stats section
   - [x] column header functionality - choose source/target, remove
   - [x] section header functionality - add new, expand/collapse, remove
-  - [ ] cleanup results when source/target is moved/deleted or champion changes
+  - [x] cleanup results when source/target is moved/deleted or champion changes
   - [x] color coded/matching results with scoreboard
   - [x] row/column hover/focus style
   - [x] cell have number values, then color them red/green depending on if higher or lower than others
   - [ ] basic attack section normal/crit/average
-  - [ ] stats section show for source/damage
-  - [ ] section image appropriate ability/item hover tooltip with variable names instead of values
+  - [ ] stats section show for source/target
   - [ ] compare item proc damage, something like `ITEM_SPECIFICS.luden.proc` that would return damageresults[] then can be chosen for damage compare and whatever it spits out is added to the table
-  - [ ] ability rows not implemented yet, coming soon
+  - [ ] section image appropriate ability/item hover tooltip with variable names instead of values
+  - [ ] damage type row, use the actual calculated value in the cells
+  - [ ] ability rows not implemented yet, coming soon. Inert header cell and body, keep controls to delete
   - [ ] per damage results row unknown variables, add exclamation that results are incorrect
-  - [ ] moving columns left/right
-  - [ ] moving sections up/down
+  - [x] moving columns left/right
+  - [x] moving sections up/down
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
