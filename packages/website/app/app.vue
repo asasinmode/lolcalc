@@ -68,7 +68,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		}),
 		getCellValue(section, rowId, source, target) {
 			const damageSource = (section.selectValue === 'source' ? source : target);
-			if(!damageSource){
+			if (!damageSource) {
 				return;
 			}
 
@@ -110,6 +110,9 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 				id: 'dps',
 			},
 		],
+		selectValue: 'normal',
+		selectOptions: [['normal', 'normal'], ['critical', 'critical'], ['average', 'average']],
+		selectLabel: 'attack type',
 	},
 ]);
 const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
