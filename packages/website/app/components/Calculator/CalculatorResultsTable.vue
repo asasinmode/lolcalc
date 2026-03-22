@@ -138,7 +138,12 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		rv.value = 'n/a';
 	} else {
 		if (section.getCellValue) {
-			({ value: rv.value, numberValue: rv.numberValue } = section.getCellValue(section, row.id, column.source, column.target));
+			const cellValue = section.getCellValue(section, row.id, column.source, column.target);
+			if (cellValue) {
+				({ value: rv.value, numberValue: rv.numberValue } = cellValue);
+			} else {
+				rv.value = 'n/a';
+			}
 		} else {
 			rv.value = Math.round(Math.random() * 500);
 			rv.numberValue = rv.value;

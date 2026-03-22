@@ -66,8 +66,13 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 				},
 			};
 		}),
-		getCellValue(section, rowId, source, _target) {
-			const stat = source.computed.stats.value[rowId as IChampionStatName];
+		getCellValue(section, rowId, source, target) {
+			const damageSource = (section.selectValue === 'source' ? source : target);
+			if(!damageSource){
+				return;
+			}
+
+			const stat = damageSource.computed.stats.value[rowId as IChampionStatName];
 			return {
 				numberValue: stat.total,
 				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,

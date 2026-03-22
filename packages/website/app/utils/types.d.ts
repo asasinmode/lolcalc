@@ -53,10 +53,10 @@ export interface IDamageResultTableSection {
 	/** ability variant image, basic attack icon */
 	icon: string;
 	// TODO shouldn't be optional
-	getCellValue?: (section: IDamageResultTableColumn, rowId: string, source: DamageSource, target?: DamageTarget) => {
+	getCellValue?: (section: IDamageResultTableSection, rowId: string, source: DamageSource, target?: DamageTarget) => {
 		value: string | number;
 		numberValue: number;
-	};
+	} | undefined;
 	/** when present, the row will have a select to choose from provided options used for setting `selectValue` */
 	selectOptions?: [value: string, text: string][];
 	/** use with selectOptions */
