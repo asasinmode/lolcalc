@@ -11,6 +11,7 @@ const props = defineProps<{
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 
+const text = useText();
 const items = useItems();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
@@ -253,7 +254,7 @@ async function addResultsSection(event: SubmitEvent) {
 		rows = championAbilityVariantListedVariables(champion, ability.abilityKey as IChampionAbilityKey, 0);
 	} else {
 		additionalId = 'item';
-		rows = itemAbilityListedVariables(items[ability.championOrItemId]!);
+		rows = itemAbilityListedVariables(text, minorVersion, items[ability.championOrItemId]!);
 	}
 
 	const section: IDamageResultTableSection = {

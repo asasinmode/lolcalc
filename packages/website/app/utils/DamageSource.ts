@@ -508,8 +508,8 @@ export function computedItemDescription(
 }
 
 function mergeMapsWithWarnDuplicate<T, U>(map1: Map<T, U>, map2: Map<T, U>, warnPrefix: string) {
-	for (const [variableKey, variableValue] of map1.entries()) {
-		if (map2.has(variableKey)) {
+	for (const [variableKey, variableValue] of map2.entries()) {
+		if (map1.has(variableKey)) {
 			console.warn(`${warnPrefix} variable "${variableKey}" resolves multiple times`);
 		}
 		map1.set(variableKey, variableValue);
