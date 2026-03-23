@@ -17,12 +17,14 @@ defineEmits<{
 const text = useText();
 const { version, minorVersion } = usePatchVersion();
 
-const contents = computed<IComputedItemDescription>(() => computedItemDescription(
-	text,
-	minorVersion,
-	props.item,
-	props.damageSource,
-));
+const contents = computed<IComputedItemDescription>(() =>
+	(props.item && props.damageSource?.computed.items.value.find(item => item && item.itemId === props.item?.id))?.descriptionContents
+	|| computedItemDescription(
+		text,
+		minorVersion,
+		props.item,
+		props.damageSource,
+	));
 
 const header = useTemplateRef<HTMLButtonElement>('header');
 

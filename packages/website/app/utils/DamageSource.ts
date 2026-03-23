@@ -370,6 +370,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			const { minorVersion } = usePatchVersion();
 
 			return {
+				itemId: item.id,
 				descriptionContents: computedItemDescription(text, minorVersion, item, this),
 			};
 		}),
@@ -410,6 +411,7 @@ export function formatChampionStatValue(
 }
 
 export interface IComputedDamageSourceItem {
+	itemId: string;
 	descriptionContents: IComputedItemDescription;
 }
 
