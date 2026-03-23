@@ -1092,7 +1092,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 					variants[existingVariantIndex]![key] = image;
 				} else {
 					variants.push({
-						name: undefined,
+						name: undefined!,
 						objectName: variantData.ObjectName,
 						image: '',
 						imageAlt: '',
@@ -1100,6 +1100,7 @@ function adjustApheliosAbilityData(championData: any, characterRootKey: string, 
 						tooltip: undefined,
 						tooltipExtended: undefined,
 						tooltipExtendedBelowLine: undefined,
+						dataKey: abilityData.mRootSpell,
 					} as typeof variants[number]);
 				}
 			}
@@ -1182,7 +1183,7 @@ function championAbilityVariants(
 		}
 
 		const variant = {
-			name: undefined,
+			name: undefined!,
 			objectName: variantData.ObjectName,
 			image: mImgIconName[0].toLowerCase().replace('.dds', '.png'),
 			tooltip: undefined,
@@ -1266,7 +1267,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 			const variantTooltipStringtableKey = variant.tooltip;
 
-			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` });
+			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` })!;
 			// TODO debug tooltips for all abilities, not just passive
 			variant.tooltip = variant.tooltip && getStringtableValue(
 				variant.tooltip,
