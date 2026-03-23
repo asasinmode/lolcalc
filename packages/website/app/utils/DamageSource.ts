@@ -361,13 +361,19 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 			return rv as Record<IChampionStatName, IComputedDamageSourceChampionStat>;
 		}),
-		items: computed<IComputedDamageSourceItem[]>(() => this.items.value.map((item): IComputedDamageSourceItem => {
+		items: computed<(IComputedDamageSourceItem | undefined)[]>(() => this.items.value.map((item): IComputedDamageSourceItem | undefined => {
+			if (!item) {
+				return undefined;
+			}
+
+			const text = useText();
+			const { minorVersion } = usePatchVersion();
+
 			return {
-				descriptionContents: {
-					stats: [],
-				},
+				descriptionContents: computedItemDescription(text, minorVersion, item, this),
 			};
-		})),
+		}),
+		),
 	};
 }
 
@@ -412,6 +418,8 @@ export interface IComputedItemDescription {
 	subtitleRight?: string;
 	stats: [iconName: string, value: number, name: string][];
 	extra?: string[][];
+	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
+	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 	anyUnknownExtraVariables?: boolean;
 }
 
@@ -419,11 +427,16 @@ export function computedItemDescription(
 	text: ITextData,
 	minorVersion: string,
 	item?: IItem,
-	damageSource?: DamageSource,
+	damageSource?: DamageSource<any>,
 ): IComputedItemDescription {
+	const variables: IComputedItemDescription['variables'] = new Map();
+	const unknownVariables: IComputedItemDescription['unknownVariables'] = [];
+
 	if (!item) {
 		return {
 			stats: [],
+			variables,
+			unknownVariables,
 		};
 	}
 
@@ -445,7 +458,7 @@ export function computedItemDescription(
 
 	let anyUnknownExtraVariables = false;
 	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
-		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
+		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
 			heading!
 				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
 					const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
@@ -457,18 +470,24 @@ export function computedItemDescription(
 			'item',
 			[item, damageSource?.itemDamageCalculationTarget.value],
 		);
+
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
+		unknownVariables.push(...headingUnknown);
+		mergeMapsWithWarnDuplicate(variables, headingVariables, `[computedItemDescription] item ${item.id}`);
 
 		return [
 			replaceGameDescriptionIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
-				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
+				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
 					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
 					'item',
 					[item, damageSource?.itemDamageCalculationTarget.value],
 				);
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
+				unknownVariables.push(...paragraphUnknown);
+				mergeMapsWithWarnDuplicate(variables, paragraphVariables, `[computedItemDescription] item ${item.id}`);
+
 				return replaceGameDescriptionIcons(replacedParagraph);
 			},
 			),
@@ -476,10 +495,21 @@ export function computedItemDescription(
 	});
 
 	return {
+		variables,
+		unknownVariables,
 		anyUnknownExtraVariables,
 		subtitleLeft,
 		subtitleRight,
 		stats,
 		extra: extraFormatted,
 	};
+}
+
+function mergeMapsWithWarnDuplicate<T, U>(map1: Map<T, U>, map2: Map<T, U>, warnPrefix: string) {
+	for (const [variableKey, variableValue] of map1.entries()) {
+		if (map2.has(variableKey)) {
+			console.warn(`${warnPrefix} variable "${variableKey}" resolves multiple times`);
+		}
+		map1.set(variableKey, variableValue);
+	}
 }
