@@ -42,40 +42,54 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 	highlightedDamageSources.add(column[damageSources === props.damageSources ? 'source' : 'target']!.id);
 }
 
-const damageSectionOptions = computed(() => props.damageSources
-	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
-	.map((source) => {
-		const championId = source.champion.value!.id;
-		let abilityEntries = Object.entries(source.champion.value!.abilities);
+const damageSectionOptions = computed(() => {
+	const itemIds = props.damageSources
+		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
+			item?.descriptionContents.variables.size || item?.descriptionContents.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
+		))
+		.filter(Boolean);
 
-		if (championId === 'Aphelios') {
-			abilityEntries = abilityEntries.filter(([abilityKey]) => abilityKey === 'q' || abilityKey === 'r');
-		}
+	console.log(itemIds);
 
-		return {
-			championId,
-			championName: source.champion.value!.name,
-			abilities: abilityEntries
-				.map(([abilityKey, ability]) => {
-					const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
-					const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-						abilityVariant.name,
-						source.champion.value!.stringtable,
-					);
+	return props.damageSources
+		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
+		.map((source) => {
+			const championId = source.champion.value!.id;
+			let abilityEntries = Object.entries(source.champion.value!.abilities);
 
-					return {
-						id: `${source.champion.value!.id}-${abilityKey}`,
-						championId: source.champion.value!.id,
-						abilityKey: abilityKey as IChampionAbilityKey,
-						image: abilityVariant.image,
-						name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
-					};
-				})
-				.filter(source => !resultSections.value.some(section => section.id === source.id)),
-		};
-	})
-	.filter(option => option.abilities.length),
-);
+			if (championId === 'Aphelios') {
+				abilityEntries = abilityEntries.filter(([abilityKey]) => abilityKey === 'q' || abilityKey === 'r');
+			}
+
+			return {
+				championId,
+				championName: source.champion.value!.name,
+				abilities: abilityEntries
+					.map(([abilityKey, ability]) => {
+						const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
+						const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+							abilityVariant.name,
+							source.champion.value!.stringtable,
+						);
+
+						return {
+							id: `${source.champion.value!.id}-${abilityKey}`,
+							championId: source.champion.value!.id,
+							abilityKey: abilityKey as IChampionAbilityKey,
+							image: abilityVariant.image,
+							name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
+						};
+					})
+					.filter(source => !resultSections.value.some(section => section.id === source.id)),
+			};
+		})
+	// .concat({
+	// 	championId: 'item',
+	// 	championName: 'items',
+	// 	abilities: props.damageSources.flatMap(source)
+	// })
+		.filter(option => option.abilities.length);
+});
 
 interface IComputedSection {
 	sectionId: string;
