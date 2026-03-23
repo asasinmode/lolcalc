@@ -107,7 +107,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 			const item = items[itemId!]!;
 
 			return {
-				id: `items-${itemId}`,
+				id: itemId!,
 				championOrItemId: itemId!,
 				name: item.name,
 				abilityKey: '',
@@ -131,7 +131,8 @@ interface IComputedSectionRow {
 
 interface IComputedSectionRowColumn {
 	columnId: string;
-	irrelevant?: boolean;
+	isIrrelevant?: boolean;
+	isUnknown?: boolean;
 	numberValue?: number;
 	value: string | number;
 	comparisonMap: Record<string, 'higher' | 'lower'>;
@@ -164,9 +165,10 @@ function computeSectionRow(section: IDamageResultTableSection, row: IDamageResul
 function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number], column: IDamageResultTableColumn): IComputedSectionRowColumn {
 	const rv: IComputedSectionRowColumn = {
 		columnId: column.id,
-		irrelevant: true,
+		isIrrelevant: true,
 		value: '-',
 		comparisonMap: {},
+		isUnknown: false,
 	};
 
 	if (!column.source?.listedChampion.value) {
@@ -174,7 +176,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 	} else if (column.source.listedChampion.value.id !== column.source.champion.value?.id) {
 		rv.value = 'loading...';
 	} else if (
-		(section.additionalId !== 'all' && column.source.champion.value?.id !== section.additionalId)
+		(section.additionalId !== 'all' && section.additionalId !== 'item' && column.source.champion.value?.id !== section.additionalId)
 		|| (column.source.champion.value?.id === 'Zeri' && section.id === 'basicAttack')
 	) {
 		rv.value = 'n/a';
@@ -182,7 +184,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		if (section.getCellValue) {
 			const cellValue = section.getCellValue(section, row.id, column.source, column.target);
 			if (cellValue) {
-				({ value: rv.value, numberValue: rv.numberValue } = cellValue);
+				({ value: rv.value, numberValue: rv.numberValue, isUnknown: cellValue.isUnknown } = cellValue);
 			} else {
 				rv.value = 'n/a';
 			}
@@ -190,7 +192,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 			rv.value = Math.round(Math.random() * 500);
 			rv.numberValue = rv.value;
 		}
-		rv.irrelevant = false;
+		rv.isIrrelevant = false;
 	}
 
 	return rv;
@@ -247,6 +249,7 @@ async function addResultsSection(event: SubmitEvent) {
 
 	let additionalId: IDamageResultTableSection['additionalId'];
 	let rows: IDamageResultTableSection['rows'];
+	let getCellValue: IDamageResultTableSection['getCellValue'];
 
 	if (option.type === 'champion') {
 		const champion = await useChampion(option.optionId);
@@ -255,6 +258,32 @@ async function addResultsSection(event: SubmitEvent) {
 	} else {
 		additionalId = 'item';
 		rows = itemAbilityListedVariables(text, minorVersion, items[ability.championOrItemId]!);
+		getCellValue = function (section, rowId, source, _target) {
+			const computedItem = source.computed.items.value.find(item => item?.itemId === section.id);
+			console.log('trying to get', rowId, computedItem, section.id)
+			if (!computedItem) {
+				return undefined;
+			}
+
+			let numberValue = computedItem.descriptionContents.variables.get(rowId);
+			let value: string | number = numberValue as unknown as string;
+			let isUnknown = false;
+
+			if (numberValue === undefined) {
+				numberValue = 0;
+				value = 0;
+				isUnknown = true;
+			} else if (typeof numberValue !== 'number') {
+				value = `${numberValue[0]} | ${numberValue[1]}`;
+				numberValue = undefined;
+			}
+
+			return {
+				numberValue,
+				value,
+				isUnknown,
+			};
+		};
 	}
 
 	const section: IDamageResultTableSection = {
@@ -263,6 +292,7 @@ async function addResultsSection(event: SubmitEvent) {
 		name: ability.name,
 		image: ability.image,
 		rows,
+		getCellValue,
 	};
 
 	resultSections.value.push(section);
@@ -983,7 +1013,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 						:key="cell.key"
 						:class="[{
-							irrelevant: cell.computedColumn.irrelevant,
+							irrelevant: cell.computedColumn.isIrrelevant,
 							highlighted: highlightedColumns[cellIndex],
 						}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
 						:style="columnDamageSourceColors[cellIndex]"

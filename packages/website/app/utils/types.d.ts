@@ -54,7 +54,8 @@ export interface IDamageResultTableSection {
 	// TODO shouldn't be optional
 	getCellValue?: (section: IDamageResultTableSection, rowId: string, source: DamageSource, target?: DamageTarget) => {
 		value: string | number;
-		numberValue: number;
+		numberValue?: number;
+		isUnknown?: boolean;
 	} | undefined;
 	/** when present, the row will have a select to choose from provided options used for setting `selectValue` */
 	selectOptions?: [value: string, text: string][];
