@@ -83,7 +83,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 							id: `${source.champion.value!.id}-${abilityKey}`,
 							championOrItemId: source.champion.value!.id,
 							abilityKey: abilityKey as IChampionAbilityKey,
-							image: abilityVariant.image,
+							image: `https://raw.communitydragon.org/${minorVersion}/game/${abilityVariant.image}`,
 							name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
 						};
 					})
@@ -110,7 +110,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 				championOrItemId: itemId!,
 				name: item.name,
 				abilityKey: '',
-				image: item.image,
+				image: `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`,
 			};
 		}).filter(ability => !resultSections.value.some(section => section.id === ability.id)).toArray(),
 	});
@@ -260,7 +260,7 @@ async function addResultsSection(event: SubmitEvent) {
 		id: ability.id,
 		additionalId,
 		name: ability.name,
-		icon: ability.image,
+		image: ability.image,
 		rows,
 	};
 
@@ -933,7 +933,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 					>
 						<div>
 							<img
-								:src="section.id.startsWith('items-') ? `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${section.icon}` : `https://raw.communitydragon.org/${minorVersion}/game/${section.icon}`"
+								:src="section.image"
 								width="64"
 								height="64"
 								aria-hidden="true"

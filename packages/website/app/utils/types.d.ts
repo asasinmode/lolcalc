@@ -50,8 +50,7 @@ export interface IDamageResultTableSection {
 	permanent?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
-	/** ability variant image, basic attack icon */
-	icon: string;
+	image: string;
 	// TODO shouldn't be optional
 	getCellValue?: (section: IDamageResultTableSection, rowId: string, source: DamageSource, target?: DamageTarget) => {
 		value: string | number;

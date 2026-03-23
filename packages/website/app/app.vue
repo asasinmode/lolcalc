@@ -14,7 +14,7 @@ useSeoMeta({
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
 
-const { version } = usePatchVersion();
+const { version, minorVersion } = usePatchVersion();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
@@ -52,9 +52,9 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'stats',
 		name: 'stats of',
-		championId: 'all',
+		additionalId: 'all',
 		permanent: true,
-		icon: 'assets/ux/deathrecap/unknowndamage.png',
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
 		rows: Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
 			return {
 				id: championStat,
@@ -85,9 +85,9 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'basicAttack',
 		name: 'basic attack',
-		championId: 'all',
+		additionalId: 'all',
 		permanent: true,
-		icon: 'assets/ux/deathrecap/autoattack.png',
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
 		rows: [
 			{
 				name: 'total',
