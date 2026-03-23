@@ -254,7 +254,7 @@ const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (sectio
 
 	if (numberValue === undefined) {
 		numberValue = 0;
-		value = 'unknown';
+		value = '?';
 		isUnknown = true;
 	} else if (typeof numberValue !== 'number') {
 		value = `${numberValue[0]} | ${numberValue[1]}`;
@@ -274,28 +274,23 @@ async function addResultsSection(event: SubmitEvent) {
 	const option = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!;
 	const ability = option.abilities[Number.parseInt(rawAbilityIndex!)]!;
 
-	let additionalId: IDamageResultTableSection['additionalId'];
-	let rows: IDamageResultTableSection['rows'];
-	let getCellValue: IDamageResultTableSection['getCellValue'];
+	const section: IDamageResultTableSection = {
+		id: ability.id,
+		additionalId: 'all',
+		name: ability.name,
+		image: ability.image,
+		rows: [],
+	};
 
 	if (option.type === 'champion') {
 		const champion = await useChampion(option.optionId);
-		additionalId = champion.id;
-		rows = championAbilityVariantListedVariables(champion, ability.abilityKey as IChampionAbilityKey, 0);
+		section.additionalId = champion.id;
+		section.rows = championAbilityVariantListedVariables(champion, ability.abilityKey as IChampionAbilityKey, 0);
 	} else {
-		additionalId = 'item';
-		rows = itemAbilityListedVariables(text, minorVersion, items[ability.championOrItemId]!);
-		getCellValue = itemVariableCellValue;
+		section.additionalId = 'item';
+		section.rows = itemAbilityListedVariables(text, minorVersion, items[ability.championOrItemId]!);
+		section.getCellValue = itemVariableCellValue;
 	}
-
-	const section: IDamageResultTableSection = {
-		id: ability.id,
-		additionalId,
-		name: ability.name,
-		image: ability.image,
-		rows,
-		getCellValue,
-	};
 
 	resultSections.value.push(section);
 	expandedSections.value.push(section.id);
@@ -1000,7 +995,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 				@dragleave="onResultSectionDragleave"
 				@drop="onResultSectionDrop($event, index, false)"
 			>
-				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`">
+				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`" :class="{ unknown: row.isUnknown }">
 					<th :id="`results-table-section-row-${section.id}-${row.id}`" scope="row" colspan="2" headers="results-table-header-damage-type">
 						<img
 							v-if="row.icon"
@@ -1009,14 +1004,15 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							:height="row.icon.height"
 							aria-hidden="true"
 						>
+						<span v-if="row.isUnknown">unknown</span>
 						{{ row.name }}
 					</th>
 					<td
 						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
 						:key="cell.key"
 						:class="[{
-							irrelevant: cell.computedColumn.isIrrelevant,
 							unknown: cell.computedColumn.isUnknown,
+							irrelevant: cell.computedColumn.isIrrelevant,
 							highlighted: highlightedColumns[cellIndex],
 						}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
 						:style="columnDamageSourceColors[cellIndex]"
@@ -1288,13 +1284,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 				> tr {
 					&:hover {
+						--at-apply: 'text-white';
+
 						> * {
 							--at-apply: 'b-[--ui-button-border-clr]';
-						}
-
-						> th,
-						> td:not(.irrelevant, .unknown, :last-child) {
-							--at-apply: 'text-white';
 						}
 
 						> td:not(.irrelevant, :last-child) {
@@ -1316,6 +1309,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 						}
 					}
 
+					&.unknown {
+						--at-apply: 'text-[#f0f]';
+					}
+
 					> * {
 						--at-apply: 'py-1 b-y b-transparent';
 					}
@@ -1328,6 +1325,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							--at-apply: 'inline-block size-[--size] align-middle -ms-[--ms] me-[calc(0.5*var(--size))]';
 							--size: calc(5 * var(--spacing));
 							--ms: calc(0.5 * (var(--ps) + var(--size)));
+						}
+
+						> span {
+							--at-apply: 'sr-only';
 						}
 					}
 

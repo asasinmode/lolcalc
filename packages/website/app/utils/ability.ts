@@ -12,5 +12,9 @@ export function championAbilityVariantListedVariables(_champion: IChampion, _abi
 /** same as `championAbilityVariantListedVariables` */
 export function itemAbilityListedVariables(text: ITextData, minorVersion: string, item: IItem): IDamageResultTableSection['rows'] {
 	const { variables, unknownVariables } = computedItemDescription(text, minorVersion, item);
-	return variables.keys().toArray().concat(unknownVariables.map(([rawName, actualName]) => actualName || rawName)).map(name => ({ id: name, name }));
+	return variables.keys().toArray().map(name => ({ id: name, name })).concat(unknownVariables.map(([rawName, actualName]) => ({
+		id: rawName,
+		name: actualName || rawName,
+		isUnknown: true,
+	})));
 }
