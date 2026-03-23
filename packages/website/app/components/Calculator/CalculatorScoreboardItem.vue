@@ -905,7 +905,7 @@ defineExpose({ el });
 			</li>
 		</ul>
 		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item">
-			<ItemDescription :item="hoveredItem" :target="value.getItemVariableCalculationTarget()" />
+			<ItemDescription :item="hoveredItem" :damage-source="value" />
 		</div>
 		<button
 			:title="removeButtonAttrs.title"

@@ -3,8 +3,6 @@ import type { IShopItem } from '~/utils/types';
 
 const target = defineModel<DamageSource>();
 
-const itemVariableCalculationTarget = computed(() => target.value?.getItemVariableCalculationTarget());
-
 type IAllItemCategory = IItemCategory | 'all';
 
 const { version, minorVersion } = usePatchVersion();
@@ -478,9 +476,9 @@ defineExpose({
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem?.item"
 							:gold="searchCursoredOverItem?.calculatedPrice"
+							:damage-source="target"
 							header-class="hoverable:bg-white/10"
 							header-tag="button"
-							:target="itemVariableCalculationTarget"
 							@header-click="onSearchHeaderClick"
 						/>
 					</section>
@@ -640,10 +638,10 @@ defineExpose({
 			<ItemDescription
 				:item="selectedItem?.item"
 				:gold="selectedItem?.calculatedPrice"
+				:damage-source="target"
 				header-class="order-5"
 				header-tag="h2"
 				description-class="order-6"
-				:target="itemVariableCalculationTarget"
 			/>
 			<button
 				:disabled="selectedItem?.buyability !== 1"
@@ -832,7 +830,7 @@ defineExpose({
 			</section>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
-			<ItemDescription :item="hoveredItem?.item" :target="itemVariableCalculationTarget" header-subtitles />
+			<ItemDescription :item="hoveredItem?.item" :damage-source="target" header-subtitles />
 		</div>
 	</VDialog>
 </template>

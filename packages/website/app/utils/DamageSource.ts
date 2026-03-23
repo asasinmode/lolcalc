@@ -26,7 +26,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => calculateChampionStats(this));
-	itemDamageCalculationTarget = computed((): IItemVariableCalculationTarget => ({
+	itemDamageCalculationTarget = computed<IItemVariableCalculationTarget>(() => ({
 		isRanged: this.isRanged.value,
 		stats: this.stats.value?.stats.total,
 	}));
@@ -180,14 +180,6 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			internalData: this.internalData.value,
 			...overrides,
 		});
-	}
-
-	getItemVariableCalculationTarget(): IItemVariableCalculationTarget {
-		return {
-			isRanged: this.isRanged.value,
-			// TODO might be an infinite loop not sure how it's going to work
-			stats: this.stats.value.stats.total,
-		};
 	}
 
 	getWatchable(): MaybeRefOrGetter[] {
@@ -369,6 +361,13 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 			return rv as Record<IChampionStatName, IComputedDamageSourceChampionStat>;
 		}),
+		items: computed<IComputedDamageSourceItem[]>(() => this.items.value.map((item): IComputedDamageSourceItem => {
+			return {
+				descriptionContents: {
+					stats: [],
+				},
+			};
+		})),
 	};
 }
 
@@ -402,4 +401,85 @@ export function formatChampionStatValue(
 	return value.decimal
 		? roundVariable(value[key] as number * multiplier, value.decimal)
 		: Math.round(value[key] as number * multiplier);
+}
+
+export interface IComputedDamageSourceItem {
+	descriptionContents: IComputedItemDescription;
+}
+
+export interface IComputedItemDescription {
+	subtitleLeft?: string;
+	subtitleRight?: string;
+	stats: [iconName: string, value: number, name: string][];
+	extra?: string[][];
+	anyUnknownExtraVariables?: boolean;
+}
+
+export function computedItemDescription(
+	text: ITextData,
+	minorVersion: string,
+	item?: IItem,
+	damageSource?: DamageSource,
+): IComputedItemDescription {
+	if (!item) {
+		return {
+			stats: [],
+		};
+	}
+
+	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
+	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+
+	const { subtitleLeft = '', subtitleRight = '', extra = [] } = text.items[item.id]?.tooltipShop || {};
+	const stats = Object.entries(item.stats)
+		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
+		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
+		.map(([statName, value]) => {
+			const { name, displayMultiplier, isPercentage } = ITEM_STAT_META[statName as IItemStat];
+			return [
+				STAT_ICON_NAMES[statName as IItemStat],
+				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
+				name,
+			] as [string, number, string];
+		});
+
+	let anyUnknownExtraVariables = false;
+	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
+		const { replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
+			heading!
+				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
+					const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
+					anyUnknownExtraVariables ||= !value;
+					return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+				})
+				.replace('(', '<span>(')
+				.replace(')', ')</span>'),
+			'item',
+			[item, damageSource?.itemDamageCalculationTarget.value],
+		);
+		anyUnknownExtraVariables ||= !!headingUnknown.length;
+
+		return [
+			replaceGameDescriptionIcons(replacedHeading),
+			...paragraphs.map((paragraph) => {
+				const { replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
+					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
+					'item',
+					[item, damageSource?.itemDamageCalculationTarget.value],
+				);
+
+				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
+				return replaceGameDescriptionIcons(replacedParagraph);
+			},
+			),
+		];
+	});
+
+	return {
+		anyUnknownExtraVariables,
+		subtitleLeft,
+		subtitleRight,
+		stats,
+		extra: extraFormatted,
+	};
 }
