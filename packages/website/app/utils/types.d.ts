@@ -45,7 +45,7 @@ export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVaria
 
 export interface IDamageResultTableSection {
 	id: string;
-	championId: IChampionId | 'all';
+	additionalId: IChampionId | 'all' | 'item';
 	/** stats and basic attack cannot be removed */
 	permanent?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */

@@ -11,6 +11,7 @@ const props = defineProps<{
 const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
 const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 
+const items = useItems();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
@@ -42,14 +43,39 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 	highlightedDamageSources.add(column[damageSources === props.damageSources ? 'source' : 'target']!.id);
 }
 
-const damageSectionOptions = computed(() => {
-	const itemIds = props.damageSources
+interface IDamageSectionOption {
+	type: 'champion' | 'item';
+	optionId: string;
+	optionName: string;
+	abilities: {
+		id: string;
+		championOrItemId: string;
+		name: string;
+		image: string;
+		abilityKey: string;
+	}[];
+}
+
+const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
+	const itemIds = new Set(props.damageSources
 		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
 			item?.descriptionContents.variables.size || item?.descriptionContents.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
 		))
-		.filter(Boolean);
+		.filter(Boolean));
 
-	console.log(itemIds);
+	const itemAbilities: IDamageSectionOption['abilities'] = itemIds.values().map((itemId): IDamageSectionOption['abilities'][number] => {
+		const item = items[itemId!]!;
+
+		return {
+			id: `items-${itemId}`,
+			championOrItemId: itemId!,
+			name: item.name,
+			abilityKey: '',
+			image: item.image,
+		};
+	}).toArray();
+
+	console.log(itemAbilities);
 
 	return props.damageSources
 		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
@@ -62,8 +88,9 @@ const damageSectionOptions = computed(() => {
 			}
 
 			return {
-				championId,
-				championName: source.champion.value!.name,
+				type: 'champion',
+				optionId: championId,
+				optionName: source.champion.value!.name,
 				abilities: abilityEntries
 					.map(([abilityKey, ability]) => {
 						const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
@@ -74,20 +101,15 @@ const damageSectionOptions = computed(() => {
 
 						return {
 							id: `${source.champion.value!.id}-${abilityKey}`,
-							championId: source.champion.value!.id,
+							championOrItemId: source.champion.value!.id,
 							abilityKey: abilityKey as IChampionAbilityKey,
 							image: abilityVariant.image,
 							name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
 						};
 					})
 					.filter(source => !resultSections.value.some(section => section.id === source.id)),
-			};
+			} satisfies IDamageSectionOption;
 		})
-	// .concat({
-	// 	championId: 'item',
-	// 	championName: 'items',
-	// 	abilities: props.damageSources.flatMap(source)
-	// })
 		.filter(option => option.abilities.length);
 });
 
@@ -146,7 +168,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 	} else if (column.source.listedChampion.value.id !== column.source.champion.value?.id) {
 		rv.value = 'loading...';
 	} else if (
-		(section.championId !== 'all' && column.source.champion.value?.id !== section.championId)
+		(section.additionalId !== 'all' && column.source.champion.value?.id !== section.additionalId)
 		|| (column.source.champion.value?.id === 'Zeri' && section.id === 'basicAttack')
 	) {
 		rv.value = 'n/a';
@@ -216,14 +238,25 @@ async function addResultsSection(event: SubmitEvent) {
 
 	const option = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!;
 	const ability = option.abilities[Number.parseInt(rawAbilityIndex!)]!;
-	const champion = await useChampion(option.championId);
+
+	let additionalId: IDamageResultTableSection['additionalId'];
+	let rows: IDamageResultTableSection['rows'];
+
+	if (option.type === 'champion') {
+		const champion = await useChampion(option.optionId);
+		additionalId = champion.id;
+		rows = championAbilityVariantListedVariables(champion, ability.abilityKey as IChampionAbilityKey, 0);
+	} else {
+		additionalId = 'item';
+		rows = itemAbilityListedVariables(items[option.optionId]!);
+	}
 
 	const section: IDamageResultTableSection = {
 		id: ability.id,
-		championId: option.championId,
+		additionalId,
 		name: ability.name,
 		icon: ability.image,
-		rows: abilityVariantListedVariables(champion, ability.abilityKey, 0).map(variable => ({ name: variable, id: variable })),
+		rows,
 	};
 
 	resultSections.value.push(section);
@@ -358,8 +391,8 @@ const cleanableColumnsSections = computed<[
 
 	const sections = (resultSections.value
 		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
-		.filter(([,section]) => section.championId !== 'all' && !resultColumns.value.some(column =>
-			column.source?.listedChampion.value?.id === section.championId || column.target?.listedChampion.value?.id === section.championId,
+		.filter(([,section]) => section.additionalId !== 'all' && !resultColumns.value.some(column =>
+			column.source?.listedChampion.value?.id === section.additionalId || column.target?.listedChampion.value?.id === section.additionalId,
 		));
 
 	return [columns, sections];
@@ -987,7 +1020,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							name="sectionOptionIndex"
 							required
 						>
-							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.championId" :label="option.championName">
+							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="option.optionName">
 								<option v-for="(ability, abilityIndex) in option.abilities" :key="ability.id" :value="`${optionIndex}-${abilityIndex}`">
 									{{ ability.name }}
 								</option>

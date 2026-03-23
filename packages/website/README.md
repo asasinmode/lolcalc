@@ -49,7 +49,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest
-    - [ ] extras ui (items and champion passives for now)
+    - [ ] extras ui champions
       - [ ] aphelios ability levels
       - [x] veigar
       - [ ] volibear
@@ -58,9 +58,15 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] ornn
       - [ ] senna
       - [ ] thresh
+      - [ ] jax
+    - [ ] extras ui items
+      - [ ] guinsoo
+      - [ ] terminus
+      - [ ] heartsteel
       - [ ] kraken slayer
       - [ ] yun tal wildarrows
-    - [ ] add all of champion's things to damage results
+    - [ ] add all of champion's items/abilities to damage results
+    - [ ] shapeshifting champions choose shape, switch abilities since it can affect stats
   - [ ] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
@@ -108,11 +114,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] dragons/souls
   - [ ] implement role quests
   - [ ] resolve game variables
-  - [ ] item passives
+  - [ ] items
   - [ ] champion passives
-    - [ ] shapeshifting champions choose shape since it can affect stats
-    - [ ] level breakpoint calculations
-    - [ ] use extras passive data
+  - [ ] use everything that has extra ui (and internalData on source)
+  - [ ] level breakpoint calculations
   - [ ] DamageSource.internalData set from utils/champion.ts
   - [ ] maybe dynamic variables can be cached on damage source under a key then reused
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
