@@ -184,15 +184,16 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		if (section.getCellValue) {
 			const cellValue = section.getCellValue(section, row.id, column.source, column.target);
 			if (cellValue) {
-				({ value: rv.value, numberValue: rv.numberValue, isUnknown: cellValue.isUnknown } = cellValue);
+				({ value: rv.value, numberValue: rv.numberValue, isUnknown: rv.isUnknown } = cellValue);
+				rv.isIrrelevant = false;
 			} else {
 				rv.value = 'n/a';
 			}
 		} else {
 			rv.value = Math.round(Math.random() * 500);
 			rv.numberValue = rv.value;
+			rv.isIrrelevant = false;
 		}
-		rv.isIrrelevant = false;
 	}
 
 	return rv;
@@ -241,6 +242,32 @@ function toggleResultsSection(sectionId: string) {
 	}
 }
 
+const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+	const computedItem = source.computed.items.value.find(item => item?.itemId === section.id);
+	if (!computedItem) {
+		return undefined;
+	}
+
+	let numberValue = computedItem.descriptionContents.variables.get(rowId);
+	let value: string | number = numberValue as unknown as string;
+	let isUnknown = false;
+
+	if (numberValue === undefined) {
+		numberValue = 0;
+		value = 'unknown';
+		isUnknown = true;
+	} else if (typeof numberValue !== 'number') {
+		value = `${numberValue[0]} | ${numberValue[1]}`;
+		numberValue = undefined;
+	}
+
+	return {
+		numberValue,
+		value,
+		isUnknown,
+	};
+};
+
 async function addResultsSection(event: SubmitEvent) {
 	const [rawOptionIndex, rawAbilityIndex] = (new FormData(event.target as HTMLFormElement).get('sectionOptionIndex')! as string).split('-');
 
@@ -258,32 +285,7 @@ async function addResultsSection(event: SubmitEvent) {
 	} else {
 		additionalId = 'item';
 		rows = itemAbilityListedVariables(text, minorVersion, items[ability.championOrItemId]!);
-		getCellValue = function (section, rowId, source, _target) {
-			const computedItem = source.computed.items.value.find(item => item?.itemId === section.id);
-			console.log('trying to get', rowId, computedItem, section.id)
-			if (!computedItem) {
-				return undefined;
-			}
-
-			let numberValue = computedItem.descriptionContents.variables.get(rowId);
-			let value: string | number = numberValue as unknown as string;
-			let isUnknown = false;
-
-			if (numberValue === undefined) {
-				numberValue = 0;
-				value = 0;
-				isUnknown = true;
-			} else if (typeof numberValue !== 'number') {
-				value = `${numberValue[0]} | ${numberValue[1]}`;
-				numberValue = undefined;
-			}
-
-			return {
-				numberValue,
-				value,
-				isUnknown,
-			};
-		};
+		getCellValue = itemVariableCellValue;
 	}
 
 	const section: IDamageResultTableSection = {
@@ -1014,6 +1016,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 						:key="cell.key"
 						:class="[{
 							irrelevant: cell.computedColumn.isIrrelevant,
+							unknown: cell.computedColumn.isUnknown,
 							highlighted: highlightedColumns[cellIndex],
 						}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
 						:style="columnDamageSourceColors[cellIndex]"
@@ -1290,7 +1293,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 						}
 
 						> th,
-						> td:not(.irrelevant, :last-child) {
+						> td:not(.irrelevant, .unknown, :last-child) {
 							--at-apply: 'text-white';
 						}
 
@@ -1333,6 +1336,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 						&:is(.irrelevant, :last-child) {
 							--at-apply: 'text-neutral-500';
+						}
+
+						&.unknown {
+							--at-apply: 'text-[#f0f]';
 						}
 
 						&:not(.irrelevant, :last-child) > span {
