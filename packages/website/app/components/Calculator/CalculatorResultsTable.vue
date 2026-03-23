@@ -57,27 +57,7 @@ interface IDamageSectionOption {
 }
 
 const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
-	const itemIds = new Set(props.damageSources
-		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
-			item?.descriptionContents.variables.size || item?.descriptionContents.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
-		))
-		.filter(Boolean));
-
-	const itemAbilities: IDamageSectionOption['abilities'] = itemIds.values().map((itemId): IDamageSectionOption['abilities'][number] => {
-		const item = items[itemId!]!;
-
-		return {
-			id: `items-${itemId}`,
-			championOrItemId: itemId!,
-			name: item.name,
-			abilityKey: '',
-			image: item.image,
-		};
-	}).toArray();
-
-	console.log(itemAbilities);
-
-	return props.damageSources
+	const options: IDamageSectionOption[] = props.damageSources
 		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
 		.map((source) => {
 			const championId = source.champion.value!.id;
@@ -107,10 +87,35 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 							name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
 						};
 					})
-					.filter(source => !resultSections.value.some(section => section.id === source.id)),
+					.filter(ability => !resultSections.value.some(section => section.id === ability.id)),
 			} satisfies IDamageSectionOption;
 		})
-		.filter(option => option.abilities.length);
+		.concat();
+
+	const itemIds = new Set(props.damageSources
+		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
+			item?.descriptionContents.variables.size || item?.descriptionContents.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
+		))
+		.filter(Boolean));
+
+	options.push({
+		optionId: 'items',
+		optionName: 'Items',
+		type: 'item',
+		abilities: itemIds.values().map((itemId): IDamageSectionOption['abilities'][number] => {
+			const item = items[itemId!]!;
+
+			return {
+				id: `items-${itemId}`,
+				championOrItemId: itemId!,
+				name: item.name,
+				abilityKey: '',
+				image: item.image,
+			};
+		}).filter(ability => !resultSections.value.some(section => section.id === ability.id)).toArray(),
+	});
+
+	return options.filter(option => option.abilities.length);
 });
 
 interface IComputedSection {
@@ -248,7 +253,7 @@ async function addResultsSection(event: SubmitEvent) {
 		rows = championAbilityVariantListedVariables(champion, ability.abilityKey as IChampionAbilityKey, 0);
 	} else {
 		additionalId = 'item';
-		rows = itemAbilityListedVariables(items[option.optionId]!);
+		rows = itemAbilityListedVariables(items[ability.championOrItemId]!);
 	}
 
 	const section: IDamageResultTableSection = {
@@ -928,7 +933,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 					>
 						<div>
 							<img
-								:src="`https://raw.communitydragon.org/${minorVersion}/game/${section.icon}`"
+								:src="section.id.startsWith('items-') ? `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${section.icon}` : `https://raw.communitydragon.org/${minorVersion}/game/${section.icon}`"
 								width="64"
 								height="64"
 								aria-hidden="true"

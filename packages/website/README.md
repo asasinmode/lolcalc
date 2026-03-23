@@ -86,6 +86,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] basic attack section normal/crit/average
   - [ ] ability rows not implemented yet, coming soon. Inert header cell and body, keep controls to delete
   - [ ] per damage results row unknown variables, add exclamation that results are incorrect
+  - [ ] one select to switch between sources/targets?
   - [x] moving columns left/right
   - [x] moving sections up/down
 - [ ] rune dialog
