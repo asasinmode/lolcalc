@@ -8,6 +8,7 @@ const props = defineProps<{
 	descriptionClass?: string;
 	headerSubtitles?: boolean;
 	damageSource?: DamageSource;
+	replaceVariablesWithNames?: boolean;
 }>();
 
 defineEmits<{
@@ -24,6 +25,7 @@ const contents = computed<IComputedItemDescription>(() =>
 		minorVersion,
 		props.item,
 		props.damageSource,
+		{ replaceWithName: props.replaceVariablesWithNames },
 	));
 
 const header = useTemplateRef<HTMLButtonElement>('header');

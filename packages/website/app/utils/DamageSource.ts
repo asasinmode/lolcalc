@@ -429,6 +429,7 @@ export function computedItemDescription(
 	minorVersion: string,
 	item?: IItem,
 	damageSource?: DamageSource<any>,
+	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
 ): IComputedItemDescription {
 	const variables: IComputedItemDescription['variables'] = new Map();
 	const unknownVariables: IComputedItemDescription['unknownVariables'] = [];
@@ -470,6 +471,7 @@ export function computedItemDescription(
 				.replace(')', ')</span>'),
 			'item',
 			[item, damageSource?.itemDamageCalculationTarget.value],
+			replaceOptions,
 		);
 
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
@@ -483,6 +485,7 @@ export function computedItemDescription(
 					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
 					'item',
 					[item, damageSource?.itemDamageCalculationTarget.value],
+					replaceOptions,
 				);
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
