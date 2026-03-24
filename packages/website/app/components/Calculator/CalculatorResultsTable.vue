@@ -976,8 +976,8 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 									v-model="section.selectValue"
 									@update:model-value="addComputedSection(section.id)"
 								>
-									<option v-for="[value, text] in section.selectOptions" :key="value" :value>
-										{{ text }}
+									<option v-for="[value, optionText] in section.selectOptions" :key="value" :value>
+										{{ optionText }}
 									</option>
 								</select>
 							</template>

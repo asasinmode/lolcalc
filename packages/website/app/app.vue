@@ -37,7 +37,7 @@ const damageSources = ref<DamageSource<any>[]>(import.meta.dev
 const damageTargets = ref<DamageSource<any>[]>(import.meta.dev
 	? [
 			markRaw(new DamageSource({ champion: useChampions().Zaahen })),
-			markRaw(new DamageSource({ champion: useChampions().Zed })),
+			markRaw(new DamageSource({ champion: useChampions().Aphelios })),
 			markRaw(new DamageSource({ champion: useChampions().Zac })),
 		]
 	: [markRaw(new DamageSource())],

@@ -175,6 +175,10 @@ defineExpose({ header });
 
 	.item-description,
 	.game-description {
+		img {
+			--at-apply: 'inline-block align-middle size-4';
+		}
+
 		unknown {
 			color: #ff00ff;
 			font-weight: 700;

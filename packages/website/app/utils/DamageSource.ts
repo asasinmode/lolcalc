@@ -47,12 +47,11 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
 	items: Ref<(IItem | undefined)[]>;
-	// TODO probably can remove
-	inventoryFull = computed(() => this.items.value.slice(0, 6).filter(Boolean).length === 6);
 
 	abilityLevels: Ref<Record<Exclude<IChampionAbilityKey, 'passive'>, number>>;
 	abilityVariants: Ref<Record<IChampionAbilityKey, number>>;
-	allAbilityVariants = computed(() => this.champion.value ? Object.values(this.champion.value.abilities).flatMap(ability => ability.variants) : []);
+	// TODO unused
+	allAbilityVariants = computed(() => allChampionAbilityVariants(this.champion.value));
 
 	dragonStacks: Ref<(IDragonName | undefined)[]>;
 	dragonSoul: Ref<IDragonName | undefined>;
@@ -514,4 +513,8 @@ function mergeMapsWithWarnDuplicate<T, U>(map1: Map<T, U>, map2: Map<T, U>, warn
 		}
 		map1.set(variableKey, variableValue);
 	}
+}
+
+export function allChampionAbilityVariants(champion?: IChampion) {
+	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
