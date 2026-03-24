@@ -88,4 +88,5 @@ export interface IChampionAbilityHoverTooltipProps {
 	abilityKey?: IChampionAbilityKey;
 	abilityVariant?: number;
 	abilityLevel?: number;
+	replaceVariablesWithNames?: boolean;
 }

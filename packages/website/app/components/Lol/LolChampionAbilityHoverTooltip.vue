@@ -97,6 +97,7 @@ function abilityText(value: string, variant: IChampionAbilityVariant, stringtabl
 		stringtableReplaced,
 		'championAbility',
 		[variant, level, championAllAbilityVariants.value],
+		{ replaceWithName: props.replaceVariablesWithNames },
 	);
 
 	return { replaced: replaceGameDescriptionIcons(replaced), unknownSV: unknownStringtableVariables, unknownV: unknownVariables };

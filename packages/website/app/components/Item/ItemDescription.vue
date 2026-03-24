@@ -179,6 +179,15 @@ defineExpose({ header });
 			--at-apply: 'inline-block align-middle size-4';
 		}
 
+		variablename {
+			--at-apply: 'font-medium';
+			text-decoration-line: underline;
+			text-decoration-thickness: 0.1em;
+			text-decoration-color: #ff00ff;
+			text-decoration-skip-ink: auto;
+			text-decoration-style: dashed;
+		}
+
 		unknown {
 			color: #ff00ff;
 			font-weight: 700;

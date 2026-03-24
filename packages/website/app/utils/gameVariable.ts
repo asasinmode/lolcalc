@@ -203,16 +203,24 @@ interface IReplaceGameDescriptionVariablesRV {
 	unknownVariables: [rawName: string, actualName: string | undefined][];
 }
 
-export function replaceGameDescriptionVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>): IReplaceGameDescriptionVariablesRV;
-export function replaceGameDescriptionVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>): IReplaceGameDescriptionVariablesRV;
+interface IOptions {
+	replaceWithName: boolean;
+}
+
+export function replaceGameDescriptionVariables(text: string, variableType: 'item', variableValueFunctionArguments: ParametersExceptFirst<typeof itemVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
+export function replaceGameDescriptionVariables(text: string, variableType: 'rune', variableValueFunctionArguments: ParametersExceptFirst<typeof runeVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
+export function replaceGameDescriptionVariables(text: string, variableType: 'championAbility', variableValueFunctionArguments: ParametersExceptFirst<typeof championAbilityVariableValue>, options?: Partial<IOptions>): IReplaceGameDescriptionVariablesRV;
 export function replaceGameDescriptionVariables(
 	text: string,
 	variableType: IGameVariableType,
 	variableValueFunctionArguments: any[],
+	options: Partial<IOptions> = {},
 ): IReplaceGameDescriptionVariablesRV {
 	const unknownVariables: [string, string | undefined][] = [];
 	const variables = new Map<string, number | [number, number]>();
+
+	const tagWrapStart = options.replaceWithName ? '<variablename>' : '';
+	const tagWrapEnd = options.replaceWithName ? '</variablename>' : '';
 
 	const replaced = text.replace(/@(.+?)@/g, (_, name) => {
 		let variableName = name;
@@ -242,24 +250,24 @@ export function replaceGameDescriptionVariables(
 
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
-			return `<unknown>@${name}@</unknown>`;
+			return `${tagWrapStart}<unknown>@${name}@</unknown>${tagWrapEnd}`;
 		}
 
 		if (typeof variable === 'string') {
-			return variable;
+			return `${tagWrapStart}${options.replaceWithName ? name : variable}${tagWrapEnd}`;
 		}
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
 				unknownVariables.push([name, actualVariableName]);
-				return `<unknown>@${name}@</unknown>`;
+				return `${tagWrapStart}<unknown>@${name}@</unknown>${tagWrapEnd}`;
 			}
 
 			variable[0] = roundVariable(variable[0] * multiplier);
 			variable[1] = roundVariable(variable[1] * multiplier);
 			variables.set(variableName, variable as [number, number]);
 
-			return `%i:meleeactive%${variable[0]} | %i:rangedactive%${variable[1]}`;
+			return `%i:meleeactive%${tagWrapStart}${options.replaceWithName ? name : variable[0]}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${options.replaceWithName ? name : variable[1]}${tagWrapEnd}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -270,8 +278,8 @@ export function replaceGameDescriptionVariables(
 			: 'melee';
 
 		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${variable}`
-			: variable.toString();
+			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? name : variable}${tagWrapEnd}`
+			: `${tagWrapStart}${options.replaceWithName ? name : variable.toString()}${tagWrapEnd}`;
 	});
 
 	return { replaced, variables, unknownVariables };

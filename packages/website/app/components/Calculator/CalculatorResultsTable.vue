@@ -988,6 +988,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 							<LolChampionAbilityHoverTooltip
 								v-if="section.hoverTooltipData"
 								v-bind="section.hoverTooltipData"
+								replace-variables-with-names
 							/>
 							<template v-if="section.selectOptions?.length">
 								<label :for="`results-table-header-select-${section.id}`">
