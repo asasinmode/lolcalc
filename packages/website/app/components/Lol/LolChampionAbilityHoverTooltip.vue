@@ -201,6 +201,10 @@ defineExpose({ el });
 		}
 	}
 
+	.hover-tooltip.champion-item {
+		--at-apply: 'p-2';
+	}
+
 	.hover-tooltip > .game-description:last-child {
 		--at-apply: 'b-b-0 pb-0 mb-0';
 	}

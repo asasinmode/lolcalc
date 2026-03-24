@@ -250,24 +250,24 @@ export function replaceGameDescriptionVariables(
 
 		if (variable === undefined) {
 			unknownVariables.push([name, actualVariableName]);
-			return `${tagWrapStart}<unknown>@${name}@</unknown>${tagWrapEnd}`;
+			return `${tagWrapStart}<unknown>@${options.replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}`;
 		}
 
 		if (typeof variable === 'string') {
-			return `${tagWrapStart}${options.replaceWithName ? name : variable}${tagWrapEnd}`;
+			return `${tagWrapStart}${options.replaceWithName ? variableName : variable}${tagWrapEnd}`;
 		}
 
 		if (Array.isArray(variable)) {
 			if (variable[0] === undefined || variable[1] === undefined) {
 				unknownVariables.push([name, actualVariableName]);
-				return `${tagWrapStart}<unknown>@${name}@</unknown>${tagWrapEnd}`;
+				return `${tagWrapStart}<unknown>@${options.replaceWithName ? variableName : name}@</unknown>${tagWrapEnd}`;
 			}
 
 			variable[0] = roundVariable(variable[0] * multiplier);
 			variable[1] = roundVariable(variable[1] * multiplier);
 			variables.set(variableName, variable as [number, number]);
 
-			return `%i:meleeactive%${tagWrapStart}${options.replaceWithName ? name : variable[0]}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${options.replaceWithName ? name : variable[1]}${tagWrapEnd}`;
+			return `%i:meleeactive%${tagWrapStart}${options.replaceWithName ? variableName : variable[0]}${tagWrapEnd} | %i:rangedactive%${tagWrapStart}${options.replaceWithName ? variableName : variable[1]}${tagWrapEnd}`;
 		}
 
 		variable = roundVariable(variable * multiplier);
@@ -278,8 +278,8 @@ export function replaceGameDescriptionVariables(
 			: 'melee';
 
 		return isMeleeRanged
-			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? name : variable}${tagWrapEnd}`
-			: `${tagWrapStart}${options.replaceWithName ? name : variable.toString()}${tagWrapEnd}`;
+			? `%i:${meleeRangedIconPath}active% ${tagWrapStart}${options.replaceWithName ? variableName : variable}${tagWrapEnd}`
+			: `${tagWrapStart}${options.replaceWithName ? variableName : variable.toString()}${tagWrapEnd}`;
 	});
 
 	return { replaced, variables, unknownVariables };
