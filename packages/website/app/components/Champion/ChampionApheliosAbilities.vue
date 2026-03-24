@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type Aphelios from '../../../../public/data/champion/Aphelios.json';
+import type Aphelios from '../../../public/data/champion/Aphelios.json';
 
 type IAphelios = typeof Aphelios;
 
@@ -79,7 +79,7 @@ const { minorVersion } = usePatchVersion();
 @layer overrides {
 	#scoreboard > div > ul > [data-scoreboard-item='Aphelios'] > details > [data-abilities] {
 		--at-apply: 'gap-x-0';
-		--ui-button-border-clr: theme('colors.slate.300');
+		--aphelios-border-clr: theme('colors.slate.300');
 		/* radius of the funny border */
 		--funny-rounded: 20% / 50%;
 		/* radius of the image inside of the funny border, its overflow is not clipped in any way so it needs to be the smallest it can be to still not go outside of the border around it */
@@ -88,6 +88,7 @@ const { minorVersion } = usePatchVersion();
 
 		> [data-passive] {
 			--at-apply: 'b-none size-auto pe-2';
+			--ui-button-border-clr: var(--aphelios-border-clr);
 
 			> h5 {
 				--at-apply: 'sr-only';
@@ -106,6 +107,7 @@ const { minorVersion } = usePatchVersion();
 		> [data-aphelios-q],
 		> [data-aphelios-w],
 		> [data-aphelios-r] {
+			--ui-button-border-clr: var(--aphelios-border-clr);
 			--at-apply: 'relative h-[--ability-size]';
 
 			> h5 {
