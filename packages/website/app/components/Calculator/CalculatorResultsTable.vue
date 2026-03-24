@@ -286,6 +286,11 @@ async function addResultsSection(event: SubmitEvent) {
 		const champion = await useChampion(option.optionId);
 		section.additionalId = champion.id;
 		section.rows = championAbilityVariantListedVariables(champion, ability.abilityKey as IChampionAbilityKey, 0);
+		section.hoverTooltipData = {
+			championId: champion.id,
+			abilityKey: ability.abilityKey as IChampionAbilityKey,
+			abilityVariant: 0,
+		};
 	} else {
 		section.additionalId = 'item';
 		section.rows = itemAbilityListedVariables(text, minorVersion, items[ability.championOrItemId]!);
@@ -967,6 +972,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 								aria-hidden="true"
 							>
 							{{ section.name }}
+							<LolChampionAbilityHoverTooltip
+								v-if="section.hoverTooltipData && section.additionalId !== 'all' && section.additionalId !== 'item'"
+								v-bind="section.hoverTooltipData"
+							/>
 							<template v-if="section.selectOptions?.length">
 								<label :for="`results-table-header-select-${section.id}`">
 									{{ section.selectLabel }}

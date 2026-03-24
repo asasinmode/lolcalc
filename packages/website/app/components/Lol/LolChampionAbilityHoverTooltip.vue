@@ -1,10 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
-	championId?: IChampionId;
-	abilityKey?: IChampionAbilityKey;
-	abilityVariant?: number;
-	abilityLevel?: number;
-}>();
+import type { IChampionAbilityHoverTooltipProps } from '~/utils/types';
+
+const props = defineProps<IChampionAbilityHoverTooltipProps>();
 
 const { minorVersion } = usePatchVersion();
 const globalKeyModifiers = useGlobalKeyModifiers();

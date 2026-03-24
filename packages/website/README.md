@@ -86,6 +86,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
   - [ ] one select to switch between sources/targets?
+  - [ ] ability variants sections
   - [x] per damage results row unknown variables style
   - [x] moving columns left/right
   - [x] moving sections up/down
@@ -136,7 +137,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] right click to sell items
   - [ ] right click to clear ability level/soul/role quest/others
 - [ ] keyboard navigation
-  - [ ] show tooltips when navigated to with keyboard
+  - [ ] show hover tooltips when navigated to with keyboard
   - [ ] skip links around busy areas (scoreboard, item shop?)
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)
 - [ ] update browser alert to make sure everything works properly alert, add [browserslist](https://github.com/browserslist/browserslist) to nuxt/lightningcss targets
