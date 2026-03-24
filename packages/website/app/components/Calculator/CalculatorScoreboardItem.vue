@@ -1411,26 +1411,6 @@ defineExpose({ el });
 				}
 			}
 
-			.hover-tooltip.champion-stat,
-			.hover-tooltip.champion-rune,
-			.hover-tooltip.champion-ability,
-			.hover-tooltip.dragon-thing,
-			.hover-tooltip.role-quest {
-				--at-apply: 'p-2';
-
-				> h5 {
-					--at-apply: 'text-lg/6 font-500 text-white';
-				}
-
-				> :where(:is(div, p).game-description) {
-					--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
-				}
-			}
-
-			.hover-tooltip > .game-description:last-child {
-				--at-apply: 'b-b-0 pb-0 mb-0';
-			}
-
 			> [data-runes-stats] {
 				--at-apply: 'row-span-3 grid grid-cols-2 grid-rows-2';
 				anchor-name: --scoreboard-item-runes-stats;
@@ -1680,6 +1660,10 @@ defineExpose({ el });
 					> h5 {
 						--at-apply: 'sr-only';
 					}
+				}
+
+				.hover-tooltip.champion-ability {
+					position-anchor: --scoreboard-item-abilities;
 				}
 			}
 

@@ -10,7 +10,7 @@
 	}
 
 	[popover] {
-		inset: unset;
+		inset: auto;
 	}
 }
 

@@ -984,7 +984,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 								height="64"
 								aria-hidden="true"
 							>
-							{{ section.name }}
+							<span>{{ section.name }}</span>
 							<LolChampionAbilityHoverTooltip
 								v-if="section.hoverTooltipData"
 								v-bind="section.hoverTooltipData"
@@ -1255,10 +1255,14 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 		}
 
 		> tbody {
+			anchor-scope: all;
+
 			&:not([aria-labelledby]) {
 				--at-apply: 'sticky top-[--header-row-h] z-4 bg-[--bg-clr]';
 
 				> tr {
+					anchor-name: --section-header-row;
+
 					> td {
 						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2';
 
@@ -1284,10 +1288,21 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 					}
 
 					> th > div {
-						--at-apply: 'text-lg font-medium whitespace-nowrap w-max';
+						--at-apply: 'w-max';
+
+						> span,
+						> select {
+							--at-apply: 'text-lg font-medium whitespace-nowrap';
+						}
 
 						> img {
 							--at-apply: 'size-6 ms-2 me-1 inline-block';
+						}
+
+						> [popover] {
+							position-anchor: --section-header-row;
+							inset-block-start: auto;
+							inset-block-end: calc(anchor(start) - 1px);
 						}
 
 						> label {
@@ -1295,7 +1310,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 						}
 
 						> select {
-							--at-apply: 'px-1';
+							--at-apply: 'px-1 ms-[0.5ch]';
 						}
 					}
 				}

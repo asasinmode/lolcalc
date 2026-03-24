@@ -31,8 +31,8 @@ export default defineNuxtConfig({
 					samsung: 27,
 					ios_saf: 26,
 				},
-				/* nesting, might not be safe to exclude if I were to use @scope since [opera/samsung](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/Nesting_selector#browser_compatibility) have partial support */
-				exclude: 1,
+				/* nesting, logical properties https://github.com/parcel-bundler/lightningcss/blob/master/node/flags.js */
+				exclude: 1 + 2 ** 19,
 			},
 		},
 	},
