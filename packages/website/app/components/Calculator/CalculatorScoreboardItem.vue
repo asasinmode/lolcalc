@@ -1354,11 +1354,8 @@ defineExpose({ el });
 		}
 
 		.hover-tooltip.champion-item {
-			--at-apply: 'w-160 max-w-screen';
-			justify-self: anchor-center;
 			position-anchor: --scoreboard-item-items;
-			position-try: flip-block;
-			top: calc(anchor(bottom) + 4 * var(--spacing));
+			inset-block-start: calc(anchor(end) + 4 * var(--spacing));
 		}
 
 		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */

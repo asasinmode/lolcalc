@@ -25,7 +25,7 @@ _setupGlobalKeyModifiers();
 // TMP as unknown as..., can't put it in v-model or it doesn't build atm
 const damageSources = ref<DamageSource<any>[]>(import.meta.dev
 	? [
-			markRaw(new DamageSource({ champion: useChampions().Aatrox })),
+			markRaw(new DamageSource({ champion: useChampions().Aatrox, items: [useItems()['3155']] })),
 			markRaw(new DamageSource({ champion: useChampions().Ambessa })),
 			markRaw(new DamageSource({ champion: useChampions().Annie })),
 			markRaw(new DamageSource({ champion: useChampions().AurelionSol })),

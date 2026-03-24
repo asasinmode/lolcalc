@@ -292,9 +292,11 @@ async function addResultsSection(event: SubmitEvent) {
 			abilityVariant: 0,
 		};
 	} else {
+		const item = items[ability.championOrItemId]!;
 		section.additionalId = 'item';
-		section.rows = itemAbilityListedVariables(text, minorVersion, items[ability.championOrItemId]!);
+		section.rows = itemAbilityListedVariables(text, minorVersion, item);
 		section.getCellValue = itemVariableCellValue;
+		section.hoverTooltipData = { item };
 	}
 
 	resultSections.value.push(section);
@@ -985,11 +987,16 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 								aria-hidden="true"
 							>
 							<span>{{ section.name }}</span>
-							<LolChampionAbilityHoverTooltip
-								v-if="section.hoverTooltipData"
-								v-bind="section.hoverTooltipData"
-								replace-variables-with-names
-							/>
+							<template v-if="section.hoverTooltipData">
+								<div v-if="section.additionalId === 'item'" popover="hint" class="hover-tooltip champion-item">
+									<ItemDescription v-bind="section.hoverTooltipData" replace-variables-with-names />
+								</div>
+								<LolChampionAbilityHoverTooltip
+									v-else-if="section.additionalId !== 'all'"
+									v-bind="section.hoverTooltipData"
+									replace-variables-with-names
+								/>
+							</template>
 							<template v-if="section.selectOptions?.length">
 								<label :for="`results-table-header-select-${section.id}`">
 									{{ section.selectLabel }}

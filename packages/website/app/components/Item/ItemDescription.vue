@@ -302,5 +302,11 @@ defineExpose({ header });
 			--at-apply: 'font-500 text-orange-200';
 		}
 	}
+
+	.hover-tooltip.champion-item {
+		--at-apply: 'w-160 max-w-screen';
+		justify-self: anchor-center;
+		position-try: flip-block;
+	}
 }
 </style>
