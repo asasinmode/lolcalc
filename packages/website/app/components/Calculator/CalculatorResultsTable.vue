@@ -674,6 +674,19 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 	return new DOMRect(left, top, right - left, bottom - top);
 }
+
+function showSectionHoverTooltip(event: MouseEvent) {
+	const popover = (event.target as HTMLElement).querySelector('[popover]');
+	if (popover) {
+		(popover as HTMLElement).showPopover();
+		(event.target as HTMLElement).addEventListener('mouseleave', hideSectionHoverTooltip);
+	}
+}
+
+function hideSectionHoverTooltip(event: MouseEvent) {
+	const popover = (event.target as HTMLElement).querySelector('[popover]');
+	(popover as HTMLElement)?.hidePopover();
+}
 </script>
 
 <template>
@@ -964,7 +977,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 						scope="colgroup"
 						:colspan="resultColumns.length + 2"
 					>
-						<div>
+						<div @mouseenter="section.hoverTooltipData && showSectionHoverTooltip($event)">
 							<img
 								:src="section.image"
 								width="64"
@@ -973,7 +986,7 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 							>
 							{{ section.name }}
 							<LolChampionAbilityHoverTooltip
-								v-if="section.hoverTooltipData && section.additionalId !== 'all' && section.additionalId !== 'item'"
+								v-if="section.hoverTooltipData"
 								v-bind="section.hoverTooltipData"
 							/>
 							<template v-if="section.selectOptions?.length">
