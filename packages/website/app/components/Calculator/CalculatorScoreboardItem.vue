@@ -1422,7 +1422,7 @@ defineExpose({ el });
 					--at-apply: 'text-lg/6 font-500 text-white';
 				}
 
-				> :is(div, p).game-description {
+				> :where(:is(div, p).game-description) {
 					--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
 				}
 			}

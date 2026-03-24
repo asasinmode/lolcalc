@@ -13,13 +13,21 @@ const champion = shallowRef<IChampion>();
 const isLoading = ref(false);
 
 watch(() => props.championId, async (id) => {
-	isLoading.value = true;
-	champion.value = id && await useChampion(id);
-	isLoading.value = false;
+	if (id) {
+		isLoading.value = true;
+		useChampion(id).then((usedChampion) => {
+			if (props.championId === usedChampion.id) {
+				champion.value = usedChampion;
+			}
+			isLoading.value = false;
+		});
+	} else {
+		champion.value = undefined;
+	}
 }, { immediate: true });
 
 const hoveredAbility = computed(() => {
-	if (props.abilityKey && props.abilityVariant !== undefined && champion.value) {
+	if (!isLoading.value && props.abilityKey && props.abilityVariant !== undefined && champion.value) {
 		return champion.value.abilities[props.abilityKey];
 	}
 	return undefined;
@@ -106,16 +114,20 @@ defineExpose({ el });
 	<div ref="el" popover="hint" class="hover-tooltip champion-ability">
 		<img
 			v-show="!isLoading"
-			:src="!isLoading && hoveredAbilityVariant ? `https://raw.communitydragon.org/${minorVersion}/game/${hoveredAbilityVariant?.image}` : undefined"
+			:src="!isLoading && hoveredAbilityVariant ? `https://raw.communitydragon.org/${minorVersion}/game/${hoveredAbilityVariant.image}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"
 		>
 		<h5
 			class="game-description"
-			v-html="`${!abilityKey || abilityKey === 'passive' || (championId === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey.toUpperCase()}] `} ${hoveredAbilityTooltipText?.name}`"
+			v-html="isLoading
+				? 'loading...'
+				: `${
+					!abilityKey || abilityKey === 'passive' || (championId === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey.toUpperCase()}] `
+				} ${hoveredAbilityTooltipText?.name}`"
 		/>
-		<span>
+		<span v-show="!isLoading">
 			<template v-if="abilityKey !== 'passive'">
 				<template v-if="hoveredAbilityTooltipText?.cooldown">
 					{{ hoveredAbilityTooltipText?.cooldown }}s
@@ -129,11 +141,11 @@ defineExpose({ el });
 				>
 			</template>
 		</span>
-		<span>
+		<span v-show="!isLoading">
 			{{ abilityKey === 'passive' ? '' : hoveredAbilityTooltipText?.cost ? `${hoveredAbilityTooltipText.cost} ${champion?.partype}` : 'No Cost' }}
 		</span>
-		<div class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
-		<UnresolvedVariablesAlert v-if="hoveredAbilityTooltipText?.anyUnknownVariables" class="col-span-full" />
+		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
+		<UnresolvedVariablesAlert v-if="hoveredAbilityTooltipText?.anyUnknownVariables" />
 		<footer v-if="hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariableInfo.length">
 			<div
 				v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
@@ -199,10 +211,6 @@ defineExpose({ el });
 
 			&:first-of-type {
 				--at-apply: 'flex gap-[0.5ch] justify-end items-center text-yellow-100';
-
-				img {
-					--at-apply: '';
-				}
 			}
 
 			&:nth-of-type(2) {
@@ -216,6 +224,10 @@ defineExpose({ el });
 			rules {
 				--at-apply: 'italic';
 			}
+		}
+
+		> p.alert {
+			--at-apply: 'col-span-full';
 		}
 
 		> footer {
