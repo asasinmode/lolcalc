@@ -37,6 +37,23 @@
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_q.png",
 					"tooltip": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}",
 					"tooltipExtended": "{{Spell_GangplankQWrapper_Tooltip_@GameModeInteger@}}<br><br>Total Gold plundered: <statTracking>@f1@ Gold</statTracking><br>Total SS plundered: <statTracking>@f3@ Silver Serpents</statTracking>",
+					"extendedVariables": [
+						{
+							"type": "SpellDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_gangplankqplundergold"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_gangplankqplundersilverserpents"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 45, 40, 35, 30, 30],
 					"cooldownTime": [4.5, 4.5, 4.5, 4.5, 4.5, 4.5, 4.5],
 					"dataValues": {
@@ -105,6 +122,15 @@
 					"objectName": "GangplankW",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_w.png",
 					"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @Effect2Amount@% missing Health</healing>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"spellCalculations": {
@@ -141,6 +167,23 @@
 					"objectName": "GangplankE",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_e.png",
 					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @Effect5Amount@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @Effect2Amount@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @Effect10Amount@% Armor. Champions take an additional <physicalDamage>@Effect3Amount@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_bonusdamageagainstchampions"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_taricmaxcharges"
+						},
+						{
+							"type": "BarrelSlow",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "AmmoRechargeTime"
+						}
+					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"BarrelSlow": [30, 40, 50, 60, 70, 80, 90]
@@ -199,6 +242,12 @@
 					"objectName": "GangplankR",
 					"image": "assets/characters/gangplank/hud/icons2d/gangplank_r.png",
 					"tooltip": "Gangplank signals his ship to fire @TotalWavesTooltip@ waves of cannonballs anywhere on the map over @ZoneDuration@ seconds. Each wave <status>Slows</status> by @SlowPercent@% for @SlowDuration@ seconds and deals <magicDamage>@OneWaveDamage@ magic damage</magicDamage>. Maximum damage: @TotalDamageTooltip@<br><br>This Ability can be upgraded in the shop via <spellName>{{Spell_GangplankQWrapper_Name}}</spellName>.<br><br><spellName>Fire at Will</spellName>: Fires 6 additional waves of cannonballs.<br><spellName>Death's Daughter</spellName>: Fires a Mega-Cannonball that deals <trueDamage>@DeathsDaughterDamage@ true damage</trueDamage> and <status>Slows</status> by @DeathsDaughterSlow@% for @DeathsDaughterSlowDuration@ second.<br><spellName>Raise Morale</spellName>: Allies inside Cannon Barrage gain <speed>@RaiseMoraleHaste@% Move Speed</speed> for @RaiseMoraleHasteDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "DamagePerWave",
+							"nameOverride": "spell_listtype_gangplankrdamageperwave"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"dataValues": {
@@ -308,6 +357,14 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_gangplankqplundergold": "Plunder Gold",
+		"spell_listtype_gangplankqplundersilverserpents": "Plunder Silver Serpents",
+		"spell_listtype_healing": "Healing",
+		"spell_listtype_bonusdamageagainstchampions": "Bonus Damage Against Champions",
+		"spell_listtype_taricmaxcharges": "Max Charges",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_gangplankrdamageperwave": "Damage Per Wave",
 		"spell_gangplankpassive_tooltip": "Gangplank's melee Attacks ignite the target, dealing an additional <trueDamage>@TotalDamage@ true damage</trueDamage> over @DoTDuration@ seconds and granting Gangplank <speed>@MoveSpeed@ Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Destroying a <keywordMajor>Powder Keg</keywordMajor> refreshes this Cooldown and grants Gangplank the same <speed>Move Speed</speed>.",
 		"spell_gangplankqwrapper_name": "Parrrley"
 	}

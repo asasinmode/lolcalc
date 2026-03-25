@@ -36,6 +36,16 @@
 					"objectName": "IreliaQ",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_q.png",
 					"tooltip": "Irelia dashes to an enemy, dealing <physicalDamage>@ChampionDamage@ physical damage</physicalDamage> and restoring <healing>@HealAmount@ Health</healing> to herself. If the enemy dies or was <keywordMajor>Unsteady</keywordMajor>, the Cooldown is refreshed.<br><br>Deals @MinionDamage@ damage to minions.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "HealTADCoefficient",
+							"nameOverride": "spell_ireliaq_healadratio"
+						}
+					],
 					"mana": [15, 15, 15, 15, 15, 15],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 5],
 					"dataValues": {
@@ -100,6 +110,16 @@
 					"objectName": "IreliaW",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_w.png",
 					"tooltip": "<charge>Begin Charging:</charge> Irelia enters a defensive stance for up to @MaxDuration@ seconds, becoming unable to act but reducing physical damage taken by @FinalPhysicalDR@% and magic damage taken by @FinalMagicDR@%.<br><br><release>Release:</release> Irelia lashes out with her blades, dealing <physicalDamage>@MinDamageCalc@ physical damage</physicalDamage> increased up to <physicalDamage>@MaxDamageCalc@</physicalDamage> based on charge time.",
+					"extendedVariables": [
+						{
+							"type": "MinDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 10],
 					"dataValues": {
@@ -182,6 +202,12 @@
 					"objectName": "IreliaE",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_e.png",
 					"tooltip": "Irelia throws a blade into the ground and can <recast>Recast</recast> for up to @BuffDuration@ seconds. <br><br><recast>Recast:</recast> Irelia throws a second blade, then they fly towards each other <status>Stunning</status> for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Champions and large jungle monsters become <keywordMajor>Unsteady</keywordMajor> for @MarkDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [16, 16, 14.5, 13, 11.5, 10, 10],
 					"dataValues": {
@@ -222,6 +248,16 @@
 					"objectName": "IreliaR",
 					"image": "assets/characters/irelia/hud/icons2d/irelia_r.png",
 					"tooltip": "Irelia launches a barrage of blades, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> and making champions and large jungle monsters <keywordMajor>Unsteady</keywordMajor> for @MarkDuration@ seconds. The barrage explodes into a cage around the first champion hit for @ZoneDuration@ seconds. The cage deals <magicDamage>@ZoneDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount@% for @CCDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseMissileDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseZoneDamage",
+							"nameOverride": "spell_ireliar_walldamage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [125, 125, 105, 85, 0, 0, 0],
 					"dataValues": {
@@ -317,5 +353,10 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_ireliaq_healadratio": "Heal Ratio",
+		"spell_listtype_manacost": "Mana Cost",
+		"spell_ireliar_walldamage": "Wall Damage"
+	}
 }

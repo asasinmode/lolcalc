@@ -36,6 +36,16 @@
 					"objectName": "IvernQ",
 					"image": "assets/characters/ivern/hud/icons2d/ivernq.png",
 					"tooltip": "Ivern conjures a vine dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Rooting</status> the first enemy hit for @RootDuration@ seconds. Allies that Attack a <status>Rooted</status> enemy dash into Attack Range. <br><br><recast>Recast:</recast> Ivern dashes directly onto the <status>Rooted</status> enemy.<br><br><rules>Hitting non-epic monsters reduces <spellName>{{ Spell_IvernQ_Name }}'s</spellName> cooldown by 50%.</rules>",
+					"extendedVariables": [
+						{
+							"type": "RootDuration",
+							"nameOverride": "spell_listtype_rootduration"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
@@ -70,6 +80,16 @@
 					"objectName": "IvernW",
 					"image": "assets/characters/ivern/hud/icons2d/ivernw.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_bonusmagicdamage"
+						},
+						{
+							"type": "AllyBaseDamage",
+							"nameOverride": "spell_ivernw_levelup_allydamage"
+						}
+					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
@@ -120,6 +140,20 @@
 					"objectName": "IvernE",
 					"image": "assets/characters/ivern/hud/icons2d/iverne.png",
 					"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseShield",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 6],
 					"dataValues": {
@@ -169,6 +203,20 @@
 					"objectName": "IvernR",
 					"image": "assets/characters/ivern/hud/icons2d/ivernr.png",
 					"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move.",
+					"extendedVariables": [
+						{
+							"type": "DaisyAD",
+							"nameOverride": "spell_listtype_attackdamagebonus"
+						},
+						{
+							"type": "ShockwaveBaseDamage",
+							"nameOverride": "spell_ivernr_shockwavedamage"
+						},
+						{
+							"type": "DaisyAS",
+							"nameOverride": "spell_listtype_ivernrbonusattackspeed"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [150, 140, 130, 120, 110, 100, 90],
 					"dataValues": {
@@ -338,6 +386,15 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_rootduration": "Root Duration",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_bonusmagicdamage": "Magic Damage",
+		"spell_ivernw_levelup_allydamage": "Ally Magic Damage",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_attackdamagebonus": "Attack Damage",
+		"spell_ivernr_shockwavedamage": "Shockwave Damage",
+		"spell_listtype_ivernrbonusattackspeed": "Daisy Bonus Attack Speed",
 		"spell_ivernp_tooltip": "Ivern will not hurt non-epic monsters. Instead, Ivern can right click a monster to grow a <font color='#55FF00'>Grove</font> that costs <healing>@HealthTooltip@ Health</healing> and <scaleMana>@ManaTooltip@ Mana</scaleMana>.<br><br><font color='#55FF00'>Groves</font>:<li> Grow over @HarvestDuration@ second(s)<li> Once fully grown, Ivern can harvest them, freeing the camp and earning gold and experience<li> Ivern can also <spellName>Smite</spellName> the <font color='#55FF00'>Groves</font> to instantly grow and free the camp, earning gold and experience@SpellModifierDescriptionAppend@"
 	}
 }

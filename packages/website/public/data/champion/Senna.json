@@ -36,6 +36,23 @@
 					"objectName": "SennaQ",
 					"image": "assets/characters/senna/hud/icons2d/senna_q.png",
 					"tooltip": "Senna shoots a bolt of piercing shadow through an ally or enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies and <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ second(s). Restores <healing>@TotalHeal@ Health</healing> to allied champions. <br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ second.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseHeal",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"type": "SlowDuration",
+							"nameOverride": "spell_listtype_slowduration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 80, 90, 100, 110, 110],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
@@ -117,6 +134,19 @@
 					"objectName": "SennaW",
 					"image": "assets/characters/senna/hud/icons2d/senna_w.png",
 					"tooltip": "Senna sends forth the Black Mist, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After a @DelayTime@ second delay the target and other nearby enemies are <status>Rooted</status> for @RootDuration@ second(s).",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "RootDuration",
+							"nameOverride": "spell_listtype_rootduration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [11, 11, 11, 11, 11, 11, 11],
 					"dataValues": {
@@ -152,6 +182,12 @@
 					"objectName": "SennaE",
 					"image": "assets/characters/senna/hud/icons2d/senna_e.png",
 					"tooltip": "Senna dissolves into a cloud of Black Mist for @BuffDuration@ seconds, becoming a Wraith. Allied champions who enter the Mist are <keywordStealth>Camouflaged</keywordStealth> and become Wraiths when they leave. Wraiths gain <speed>@TotalMS@ Move Speed</speed>, are Unselectable, and hide their identities as long as no enemy champions are nearby.",
+					"extendedVariables": [
+						{
+							"type": "BuffDuration",
+							"nameOverride": "spell_listtype_duration"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [26, 26, 24.5, 23, 21.5, 20, 20],
 					"dataValues": {
@@ -192,6 +228,16 @@
 					"objectName": "SennaR",
 					"image": "assets/characters/senna/hud/icons2d/senna_r.png",
 					"tooltip": "Senna fires a beam of light that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemy champions hit. Allied champions hit in a wider area receive <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Shield",
+							"nameOverride": "spell_listtype_shield"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
@@ -366,6 +412,12 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_healing": "Healing",
+		"spell_listtype_slowduration": "Slow Duration",
+		"spell_listtype_rootduration": "Root Duration",
+		"spell_listtype_duration": "Duration",
+		"spell_listtype_shield": "Shield Amount",
 		"spell_sennapassive_tooltip": "Senna can attack souls that spawn from dead enemies to absorb their <keywordMajor>Mist</keywordMajor>. She can also siphon <keywordMajor>Mist</keywordMajor> from enemy champions she hits with Attacks or Abilities twice, dealing an additional <physicalDamage>@BonusCurentHealthDamage@% current Health physical damage</physicalDamage>.<br><br>Each stack of <keywordMajor>Mist</keywordMajor> grants <physicalDamage>@ADPerStack@ Attack Damage</physicalDamage>. Every @StacksForBonus@ stacks grant @BonusRange@ Attack Range and @BonusCritChance@% Critical Strike Chance but she only has @CriticalDamage@ Critical Strike Damage. @CritToLifestealConversionPercent*100@% of excess Critical Strike Chance is converted into Lifesteal.<br><br>Senna's Attacks take extra time to fire, deal an additional <physicalDamage>@BonusOnHitDamage@ physical damage</physicalDamage>, and briefly grant her <speed>@MSSteal@ of the target's Move Speed</speed>."
 	}
 }

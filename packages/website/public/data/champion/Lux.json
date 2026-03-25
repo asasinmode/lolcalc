@@ -36,6 +36,12 @@
 					"objectName": "LuxLightBinding",
 					"image": "assets/characters/lux/hud/icons2d/luxcrashingblitz2.png",
 					"tooltip": "Lux fires a ball of light, <status>Rooting</status> the first two enemies for @Effect3Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> to each.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"dataValues": {
 						"BaseDamage": [40, 80, 120, 160, 200, 240, 280],
@@ -71,6 +77,15 @@
 					"objectName": "LuxPrismaticWave",
 					"image": "assets/characters/lux/hud/icons2d/luxprismawrap.png",
 					"tooltip": "Lux throws her wand, granting <shield>@TotalShieldTT@ Shield</shield> for @Effect3Amount@ seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.",
+					"extendedVariables": [
+						{
+							"type": "BaseShieldAmount",
+							"nameOverride": "spell_listtype_shield"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 9.5],
 					"dataValues": {
@@ -110,6 +125,19 @@
 					"objectName": "LuxLightStrikeKugel",
 					"image": "assets/characters/lux/hud/icons2d/luxlightstrikekugel.png",
 					"tooltip": "Lux creates a light zone that <status>Slows</status> by @Effect1Amount@% and reveals the area. After @Effect3Amount@ seconds or on <recast>Recasting</recast> this Ability, it detonates, dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage> and <status>Slowing</status> for an additional @SlowLingerDuration@ second.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowPercent",
+							"nameOverride": "spell_listtype_movementslow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 80, 90, 100, 110, 110],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
@@ -162,6 +190,12 @@
 					"objectName": "LuxR",
 					"image": "assets/characters/lux/hud/icons2d/luxfinalefunkeln.png",
 					"tooltip": "Lux fires a dazzling ray of light, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to all enemies in a line.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [60, 60, 50, 40, 40, 40, 30],
 					"dataValues": {
@@ -221,5 +255,9 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_movementslow": "Movement Slow"
+	}
 }

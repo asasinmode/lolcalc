@@ -36,6 +36,19 @@
 					"objectName": "LissandraQ",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_q.png",
 					"tooltip": "Lissandra throws a spear of ice that shatters on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @Effect3Amount*-100@% for @Effect2Amount@ seconds, and also damaging and slowing the enemies behind them.",
+					"extendedVariables": [
+						{
+							"type": "damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [55, 60, 65, 70, 75, 80],
 					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"dataValues": {
@@ -73,6 +86,16 @@
 					"objectName": "LissandraW",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_w.png",
 					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_rootduration"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"spellCalculations": {
@@ -107,6 +130,15 @@
 					"objectName": "LissandraE",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_e.png",
 					"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [80, 85, 90, 95, 100, 105],
 					"cooldownTime": [27, 24, 21, 18, 15, 12, 12],
 					"spellCalculations": {
@@ -141,6 +173,20 @@
 					"objectName": "LissandraR",
 					"image": "assets/characters/lissandra/hud/icons2d/lissandra_r.png",
 					"tooltip": "Lissandra encases herself or an enemy champion in ice. Enemies are <status>Stunned</status> for @EnemyCastDuration@ seconds. When self cast, Lissandra enters Stasis for @SelfCastDuration@ seconds and restores <healing>@HealAmount@ Health</healing>, increased by @SelfCastMissingHPRatio@% for each @SelfCastMissingHPPerAbove@% missing Health.<br><br>In either case, dark ice eminates from the target, dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>. The ice persists for @SlowDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*-100@%.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "SelfCastFlatHeal",
+							"nameOverride": "spell_listtype_healing"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 120, 100, 80, 10, 10, 10],
 					"dataValues": {
@@ -226,5 +272,10 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_rootduration": "Root Duration",
+		"spell_listtype_healing": "Healing"
+	}
 }

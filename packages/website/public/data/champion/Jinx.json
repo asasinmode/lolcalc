@@ -36,6 +36,16 @@
 					"objectName": "JinxQ",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_q1.png",
 					"tooltip": "Jinx swaps weapons between Fishbones the rocket launcher and Pow-Pow the minigun.<br><br>While using the rocket launcher, Jinx's Attacks deal <physicalDamage>@RocketDamage@ physical damage</physicalDamage> to the target and nearby enemies, gain @RocketBonusRange@ range, cost Mana, and scale @RocketASPDPenalty*100@% less with bonus Attack Speed.<br><br>While using the minigun, Jinx's Attacks grant <attackSpeed>Attack Speed</attackSpeed> for @MinigunAttackSpeedDuration@ seconds, stacking up to @MinigunAttackSpeedStacks@ times (<attackSpeed>+@MinigunAttackSpeedMax@% %i:scaleAS% max</attackSpeed>).",
+					"extendedVariables": [
+						{
+							"type": "RocketBonusRange",
+							"nameOverride": "spell_listtype_jinxrocketbonusrange"
+						},
+						{
+							"type": "MinigunAttackSpeedMax",
+							"nameOverride": "spell_listtype_jinxminiguntotalattackspeed"
+						}
+					],
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9],
 					"dataValues": {
@@ -70,6 +80,19 @@
 					"objectName": "JinxW",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_w.png",
 					"tooltip": "Jinx fires a shock blast that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, <status>Slows</status> them by @SlowPercent@%, and reveals them for @SlowDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowPercent",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [9, 8, 7, 6, 5, 4, 3],
 					"dataValues": {
@@ -107,6 +130,12 @@
 					"objectName": "JinxE",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_e.png",
 					"tooltip": "Jinx tosses out 3 chompers that last for @GrenadeDuration@ seconds. They explode on contact with enemy champions, <status>Rooting</status> them for @RootDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [90, 90, 90, 90, 90, 90],
 					"cooldownTime": [27.5, 24, 20.5, 17, 13.5, 10, 10],
 					"dataValues": {
@@ -141,6 +170,20 @@
 					"objectName": "JinxR",
 					"image": "assets/characters/jinx/hud/icons2d/jinx_r.png",
 					"tooltip": "Jinx fires a rocket that explodes on the first enemy champion hit, dealing <physicalDamage>@DamageFloor@ to @DamageMax@ + @PercentDamage@% missing Health physical damage</physicalDamage>, gaining damage over the first second of travel time. Nearby enemies take @AoEDamageMult*100@% Damage.<br><br><rules>Missing Health damage cannot exceed @MonsterExecuteMax@ against Monsters.</rules>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_minimumdamage"
+						},
+						{
+							"type": "MaxDamage",
+							"nameOverride": "spell_listtype_maximumdamage"
+						},
+						{
+							"type": "PercentDamage",
+							"nameOverride": "spell_listtype_percentmissinghealthdamage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [85, 85, 65, 45, 45, 45, 45],
 					"dataValues": {
@@ -207,6 +250,13 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_jinxrocketbonusrange": "Rocket Bonus Range",
+		"spell_listtype_jinxminiguntotalattackspeed": "Minigun Total Attack Speed",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_minimumdamage": "Minimum Damage",
+		"spell_listtype_maximumdamage": "Maximum Damage",
+		"spell_listtype_percentmissinghealthdamage": "Percent Missing Health Damage",
 		"spell_jinxpassivemarker_tooltip": "Whenever a champion, epic monster, or structure that Jinx has dealt damage to within the last @AssistMarkerDuration@ seconds is killed or destroyed, she gains <speed>@MSBuff@% decaying Move Speed</speed> and <attackSpeed>@ASBuff@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.<br><br>Champion takedowns stack the <attackSpeed>Attack Speed</attackSpeed> up to 5 times."
 	}
 }

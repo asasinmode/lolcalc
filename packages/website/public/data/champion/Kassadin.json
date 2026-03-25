@@ -36,6 +36,19 @@
 					"objectName": "NullLance",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_q.png",
 					"tooltip": "Kassadin fires an orb of void energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and interrupting channels. Kassadin also gains <shield>@TotalShield@ Magic Shield</shield> for 1.5 seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ShieldAmount",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
@@ -86,6 +99,20 @@
 					"objectName": "NetherBlade",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kassadin's Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kassadin charges his blade, causing his next Attack to deal <magicDamage>@ActiveDamage@ magic damage</magicDamage> and restore <scaleMana>@MissingManaRatio@% missing Mana</scaleMana>, increased to <scaleMana>@ChampionMissingManaRatio@%</scaleMana> against champions.",
+					"extendedVariables": [
+						{
+							"type": "ActiveBaseDamage",
+							"nameOverride": "spell_listtype_activedamage"
+						},
+						{
+							"type": "MissingManaRatio",
+							"nameOverride": "spell_listtype_kassadinbasemanarestore"
+						},
+						{
+							"type": "ChampionMissingManaRatio",
+							"nameOverride": "spell_listtype_kassadinchampionmanarestore"
+						}
+					],
 					"mana": [1, 1, 1, 1, 1, 1],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
@@ -138,6 +165,19 @@
 					"objectName": "ForcePulse",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> <spellName>{{Spell_ForcePulse_Name}}'s</spellName> Cooldown is reduced by @ReductionPerSpellCast@ second whenever any Ability is used near Kassadin.<br><br><spellActive>Active:</spellActive> Kassadin unleashes a void pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [22, 21, 20, 19, 18, 17, 16],
 					"dataValues": {
@@ -175,6 +215,16 @@
 					"objectName": "RiftWalk",
 					"image": "assets/characters/kassadin/hud/icons2d/kassadin_r.png",
 					"tooltip": "Kassadin teleports to a nearby location, dealing <magicDamage>@BaseDamage@ magic damage</magicDamage>.<br><br>Each subsequent use of this Ability within the next @RStackDuration@ seconds doubles the Mana cost and deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>. The cost and damage increases can stack up to @MaxStacks@ times.",
+					"extendedVariables": [
+						{
+							"type": "RBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "StackDamage",
+							"nameOverride": "spell_listtype_kassadindamageperstack"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [5, 5, 3.5, 2, 2, 2, 2],
 					"dataValues": {
@@ -247,6 +297,13 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_activedamage": "Active Damage",
+		"spell_listtype_kassadinbasemanarestore": "Base Mana Restore",
+		"spell_listtype_kassadinchampionmanarestore": "Champion Mana Restore",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_kassadindamageperstack": "Damage Per Stack",
 		"spell_voidstone_tooltip": "Kassadin takes @DamageReductionPercent*100@% reduced magic damage and is Ghosted.",
 		"reminder_ghosted": "Ghosted units can pass through other units."
 	}

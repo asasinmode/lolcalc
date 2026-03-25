@@ -36,6 +36,12 @@
 					"objectName": "XayahQ",
 					"image": "assets/characters/xayah/hud/icons2d/xayahq.png",
 					"tooltip": "Xayah throws two daggers, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> each and leaving two <keywordMajor>Feathers</keywordMajor>. Targets hit after the first take <physicalDamage>@MultiHitDamage@ damage</physicalDamage> from each dagger.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 6],
 					"dataValues": {
@@ -87,6 +93,15 @@
 					"objectName": "XayahW",
 					"image": "assets/characters/xayah/hud/icons2d/xayahw.png",
 					"tooltip": "Xayah creates a storm of blades for @Effect2Amount@ seconds that grants her <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed> and cause her Attacks to fire a secondary blade that deals @BonusDamagePercent@% damage.<br><br>When the secondary blade hits a champion, she grants herself <speed>@Effect3Amount@% Move Speed</speed> for @Effect4Amount@ seconds.<br><br>If Rakan is nearby he will also gain the effects of this Ability, except he gains <speed>Move Speed</speed> when <i>Xayah</i> strikes a target.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 55, 50, 45, 40, 35],
 					"cooldownTime": [20, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
@@ -112,6 +127,12 @@
 					"objectName": "XayahE",
 					"image": "assets/characters/xayah/hud/icons2d/xayahe.png",
 					"tooltip": "Xayah calls all <keywordMajor>Feathers</keywordMajor> back to her, dealing <physicalDamage>@FeatherDamage@ physical damage</physicalDamage> each. If @FeatherThreshold@ or more <keywordMajor>Feathers</keywordMajor> hit an enemy, they are <status>Rooted</status> for @RootDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
@@ -182,6 +203,12 @@
 					"objectName": "XayahR",
 					"image": "assets/characters/xayah/hud/icons2d/xayahr.png",
 					"tooltip": "Xayah leaps into the air becoming Untargetable and Ghosted for 1.5 seconds before raining down daggers that deal <physicalDamage>@Damage@ physical damage</physicalDamage> and leave behind a line of <keywordMajor>Feathers</keywordMajor>.",
+					"extendedVariables": [
+						{
+							"type": "RBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [160, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
@@ -236,6 +263,8 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_attackspeed": "Attack Speed",
 		"spell_xayahpassive_tooltip": "After using an Ability, Xayah's next @f14@ Attacks will deal @f16*100@% damage to all other targets along their path and leave a <keywordMajor>Feather</keywordMajor> for @f12@ seconds.<br><br><spellName>Lover's Leap:</spellName> Xayah and Rakan can recall together."
 	}
 }

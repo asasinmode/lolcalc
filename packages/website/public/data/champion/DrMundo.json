@@ -36,6 +36,24 @@
 					"objectName": "DrMundoQ",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_q.png",
 					"tooltip": "Dr. Mundo hurls his bonesaw, dealing <magicDamage>@CurrentHealthDamage*100@% current Health magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the bonesaw hits a champion or monster, Dr. Mundo restores <healing>@HealthRestoreOnHitChampionMonster@ Health</healing>. If it hits a non-champion or non-monster, Dr. Mundo instead restores <healing>@HealthRestoreOnHitMinion@ Health</healing>.",
+					"extendedVariables": [
+						{
+							"type": "CurrentHealthDamage",
+							"nameOverride": "spell_drmundoq_listtype_currenthealthdamage"
+						},
+						{
+							"type": "MinimumDamage",
+							"nameOverride": "spell_listtype_minimumdamage"
+						},
+						{
+							"type": "MaximumMonsterDamage",
+							"nameOverride": "spell_listtype_maxdamagetomonsters"
+						},
+						{
+							"type": "HealthCost",
+							"nameOverride": "spell_listtype_healthcost"
+						}
+					],
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
 						"SlowDuration": [2, 2, 2, 2, 2, 2, 2],
@@ -91,6 +109,16 @@
 					"objectName": "DrMundoW",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_w.png",
 					"tooltip": "Dr. Mundo charges up a defibrilator, dealing <magicDamage>@DamagePerTick*4@ magic damage</magicDamage> each second for up to @Duration@ seconds to nearby enemies. Additionally he stores @GrayHealthStorageInitial@ of damage taken for the first @GrayHealthInitialDuration@ seconds and @GrayHealthStorage*100@% for the remaining duration as gray health and can <recast>Recast</recast>.<br><br><recast>Recast:</recast> Detonate the defibrilator, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. If this hits at least one champion, Dr. Mundo restores <healing>@GrayHealthBigMod*100@% of gray health</healing>, otherwise he instead restores <healing>@GrayHealthSmallMod*100@% of gray health</healing>.",
+					"extendedVariables": [
+						{
+							"type": "DamagePerTick",
+							"nameOverride": "spell_listtype_damagepertick"
+						},
+						{
+							"type": "RecastBaseDamage",
+							"nameOverride": "spell_listtype_recastdamage"
+						}
+					],
 					"cooldownTime": [17, 17, 16.5, 16, 15.5, 15, 15],
 					"dataValues": {
 						"Duration": [3, 3, 3, 3, 3, 3, 3],
@@ -142,6 +170,20 @@
 					"objectName": "DrMundoE",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Dr Mundo gains <physicalDamage>@PassiveBonusAD@ Attack Damage</physicalDamage>.<br><br><spellActive>Active:</spellActive> Dr Mundo violently swings his \"medical\" bag, causing his next Attack to deal an additional <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage>, increased by up to @MaxDamageAmpTooltip@ based on his missing Health. If the enemy is killed, Mundo swats them away, dealing <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> to enemies they pass through.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						},
+						{
+							"type": "FlatHealthCost",
+							"nameOverride": "spell_listtype_healthcost"
+						},
+						{
+							"type": "HealthToADRatio",
+							"nameOverride": "spell_drmundor_listtype_healthintoattackdamage"
+						}
+					],
 					"cooldownTime": [9, 9, 8.25, 7.5, 6.75, 6, 6],
 					"dataValues": {
 						"AttackOverrideDuration": [4, 4, 4, 4, 4, 4, 4],
@@ -210,6 +252,20 @@
 					"objectName": "DrMundoR",
 					"image": "assets/characters/drmundo/hud/icons2d/drmundo_r.png",
 					"tooltip": "Dr. Mundo pumps himself with chemicals, gaining <healing>@MissingHealthHeal*100@% of his missing Health as max Health</healing>, <speed>@SpeedBoostAmount*100@% Move Speed</speed>, and regenerating <healing>@MaxHealthHoT*100@% max Health</healing> over @Duration@ seconds.<br><br>At Rank 3, both healing effects are increased by an additional @BonusPerNearbyChampion*100@% per nearby enemy champion.",
+					"extendedVariables": [
+						{
+							"type": "MissingHealthHeal",
+							"nameOverride": "spell_listtype_bonushealth"
+						},
+						{
+							"type": "SpeedBoostAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "MaxHealthHoT",
+							"nameOverride": "spell_listtype_maxhealthpercent"
+						}
+					],
 					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"dataValues": {
 						"Duration": [10, 10, 10, 10, 10, 10, 10],
@@ -308,5 +364,17 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_drmundoq_listtype_currenthealthdamage": "Current Health Damage",
+		"spell_listtype_minimumdamage": "Minimum Damage",
+		"spell_listtype_maxdamagetomonsters": "Monster Damage Cap",
+		"spell_listtype_healthcost": "Health Cost",
+		"spell_listtype_damagepertick": "Damage per Tick",
+		"spell_listtype_recastdamage": "Recast Damage",
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_drmundor_listtype_healthintoattackdamage": "Health Into Attack Damage",
+		"spell_listtype_bonushealth": "Bonus Health",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_maxhealthpercent": "Max Health %"
+	}
 }

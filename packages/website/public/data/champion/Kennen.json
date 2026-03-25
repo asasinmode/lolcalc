@@ -36,6 +36,15 @@
 					"objectName": "KennenShurikenHurlMissile1",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_q.png",
 					"tooltip": "Kennen throws a shuriken, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [60, 55, 50, 45, 40, 35],
 					"cooldownTime": [9, 7, 6.25, 5.5, 4.75, 4, 4],
 					"spellCalculations": {
@@ -69,6 +78,20 @@
 					"objectName": "KennenBringTheLight",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.<br>",
+					"extendedVariables": [
+						{
+							"type": "bADRatio",
+							"nameOverride": "spell_listtype_bonusadratio"
+						},
+						{
+							"type": "BaseOnHitDamage",
+							"nameOverride": "spell_listtype_kennendamage(passive)"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_kennendamage(active)"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [13, 13, 11.25, 9.5, 7.75, 6, 6],
 					"dataValues": {
@@ -130,6 +153,16 @@
 					"objectName": "KennenLightningRush",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_e.png",
 					"tooltip": "Kennen turns into a ball of lightning, gaining <speed>@MovementSpeed*100@% Move Speed</speed>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through, and becoming Ghosted for @DurationAsBall@ seconds. If Kennen damages at least one enemy, he gains @EnergyRefund@ Energy. <br><br>After this ability ends, Kennen gains <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @DurationAfterBall@ seconds. Kennen can <recast>Recast</recast> to end this Ability early.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "AttackSpeed",
+							"nameOverride": "spell_listtype_attackspeed"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
@@ -179,6 +212,20 @@
 					"objectName": "KennenShurikenStorm",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_r.png",
 					"tooltip": "Kennen unleashes a magical storm, dealing <magicDamage>@PerTickDamageCalculated@ magic damage</magicDamage> to all nearby enemies every @KennenRTickRate@ seconds, and gaining <scaleArmor>@KennenRDefenses@ Armor</scaleArmor> and <scaleMR>@KennenRDefenses@ Magic Resist</scaleMR> for @KennenRDuration@ seconds. Successive hits deal @DamageAmp*100@% increased damage for each hit the enemy has already suffered.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "KennenRDefenses",
+							"nameOverride": "spell_listtype_armorbonus"
+						},
+						{
+							"type": "KennenRDefenses",
+							"nameOverride": "spell_listtype_magicresistbonus"
+						}
+					],
 					"cooldownTime": [120, 120, 120, 120, 120, 120, 120],
 					"dataValues": {
 						"BaseDamage": [5, 40, 75, 110, 145, 180, 215],
@@ -229,6 +276,13 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_bonusadratio": "Bonus AD Ratio",
+		"spell_listtype_kennendamage(passive)": "Damage (passive)",
+		"spell_listtype_kennendamage(active)": "Damage (active)",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_armorbonus": "Armor Bonus",
+		"spell_listtype_magicresistbonus": "Magic Resist Bonus",
 		"spell_kennenpassive_tooltip": "Kennen's abilities apply a stack for @MarkDuration@ seconds. At 3 stacks, enemies are <status>Stunned</status> for @StunDuration@ seconds and Kennen gains <keywordMajor>@EnergyRestore@ Energy</keywordMajor>."
 	}
 }

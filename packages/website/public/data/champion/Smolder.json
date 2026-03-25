@@ -36,6 +36,12 @@
 					"objectName": "SmolderQ",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_q1.png",
 					"tooltip": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds <scaleMana>@ManaRestore@ Mana</scaleMana>, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						}
+					],
 					"mana": [25, 25, 25, 25, 25, 25],
 					"cooldownTime": [5.5, 5.5, 5, 4.5, 4, 3.5, 3.5],
 					"dataValues": {
@@ -158,6 +164,19 @@
 					"objectName": "SmolderW",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_w.png",
 					"tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ExplosionBaseDamage",
+							"nameOverride": "spell_listtype_explosiondamage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
@@ -217,6 +236,12 @@
 					"objectName": "SmolderE",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_e.png",
 					"tooltip": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						}
+					],
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [24, 24, 22, 20, 18, 16, 16],
 					"dataValues": {
@@ -270,6 +295,16 @@
 					"objectName": "SmolderR",
 					"image": "assets/characters/smolder/hud/icons2d/icons_smolder_r.png",
 					"tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "MomHeal",
+							"nameOverride": "spell_smolderr_momheal"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 110, 100, 100, 100, 100],
 					"dataValues": {
@@ -443,6 +478,10 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_explosiondamage": "Explosion Damage",
+		"spell_smolderr_momheal": "Heal",
 		"spell_smolderq_name": "Super Scorcher Breath",
 		"spell_smolderp_name": "Dragon Practice",
 		"spell_smolderw_name": "Achooo!",

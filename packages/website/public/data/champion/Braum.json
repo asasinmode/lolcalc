@@ -36,6 +36,15 @@
 					"objectName": "BraumQ",
 					"image": "assets/characters/braum/hud/icons2d/braum_q.png",
 					"tooltip": "Braum propels freezing ice from his shield, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slowing</status> them by @Effect2Amount@% decaying over @Effect5Amount@ seconds.<br><br>Applies a stack of <keywordMajor>Concussive Blows</keywordMajor>. ",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [45, 50, 55, 60, 65, 70],
 					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 5.5],
 					"dataValues": {
@@ -79,6 +88,12 @@
 					"objectName": "BraumW",
 					"image": "assets/characters/braum/hud/icons2d/braum_w.png",
 					"tooltip": "Braum leaps to an allied champion or minion. On arrival, Braum grants the target <scaleArmor>@GrantedAllyArmor@ Armor</scaleArmor> and <scaleMR>@GrantedAllyMR@ Magic Resist</scaleMR> for @Effect1Amount@ seconds. Braum grants himself <scaleArmor>@GrantedBraumArmor@ Armor</scaleArmor> and <scaleMR>@GrantedBraumMR@ Magic Resist</scaleMR> for the same duration.",
+					"extendedVariables": [
+						{
+							"type": "BaseResists",
+							"nameOverride": "spell_braumw_baseresists_levelup"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [13, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
@@ -162,6 +177,19 @@
 					"objectName": "BraumE",
 					"image": "assets/characters/braum/hud/icons2d/braum_e.png",
 					"tooltip": "Braum raises his shield for @Effect2Amount@ seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal @Effect3Amount@% reduced damage.<br><br>Braum gains <speed>@Effect4Amount@% Move Speed</speed> while his shield is raised.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_duration"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damagereduction"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [30, 35, 40, 45, 50, 55],
 					"cooldownTime": [18, 16, 14, 12, 10, 8, 8],
 					"dataValues": {
@@ -184,6 +212,20 @@
 					"objectName": "BraumRWrapper",
 					"image": "assets/characters/braum/hud/icons2d/braum_r.png",
 					"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.<br>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "FirstKnockupDuration",
+							"nameOverride": "spell_listtype_knockupduration"
+						},
+						{
+							"type": "MoveSpeedMod",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [130, 130, 115, 100, 85, 85, 85],
 					"dataValues": {
@@ -288,5 +330,12 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_braumw_baseresists_levelup": "Base Resists",
+		"spell_listtype_duration": "Duration",
+		"spell_listtype_damagereduction": "Damage Reduction",
+		"spell_listtype_knockupduration": "Knockup Duration",
+		"spell_listtype_slow": "Slow"
+	}
 }

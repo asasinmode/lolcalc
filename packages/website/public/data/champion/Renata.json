@@ -36,6 +36,12 @@
 					"objectName": "RenataQ",
 					"image": "assets/characters/renata/hud/icons2d/renata_q.png",
 					"tooltip": "Renata sends out a missile from her arm, <status>Rooting</status> the first enemy hit for @RootDuration@ second and dealing <magicDamage>@TotalDamage@</magicDamage> <magicDamage>magic damage</magicDamage>.<br><br><recast>Recast:</recast> Renata <status>Pulls</status> the enemy in a direction, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they are thrown into and <status>Stunning</status> for @StunDuration@ seconds if the thrown enemy is a champion.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
@@ -73,6 +79,16 @@
 					"objectName": "RenataW",
 					"image": "assets/characters/renata/hud/icons2d/renata_w.png",
 					"tooltip": "Renata infuses an ally champion, granting <attackSpeed>@ASCalc@ Attack Speed</attackSpeed> and <speed>@MSCalc@ Move Speed</speed> towards enemies, increasing to <attackSpeed>@FinalASCalc@ Attack Speed</attackSpeed> and <speed>@FinalMSCalc@ Move Speed</speed> over @Duration@ seconds. Takedowns refresh the duration of the buff.<br><br>If the ally would die, they instead return to full Health, which then decays over 3 seconds.<br><br>If they get a Takedown while decaying, they will be set to <healing>@TriumphPercent@% max Health</healing> and stop decaying.<br><br><rules>The Champion's death can be delayed by healing or similar effects while in the decaying state, but cannot be prevented unless the Champion gets a Takedown. Champions can only delay their death once.</rules>",
+					"extendedVariables": [
+						{
+							"type": "BonusAttackSpeed",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"type": "BonusMoveSpeed",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [24, 28, 27, 26, 25, 24, 10],
 					"dataValues": {
@@ -175,6 +191,19 @@
 					"objectName": "RenataE",
 					"image": "assets/characters/renata/hud/icons2d/renata_e.png",
 					"tooltip": "Renata sends out a pair of chemtech missiles, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> surrounding enemies and enemies hit by 30% for @SlowDuration@ seconds. Allies hit gain <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ShieldValue",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "BaseCost"
+						}
+					],
 					"mana": [70, 80, 90, 100, 110, 120],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
@@ -238,6 +267,12 @@
 					"objectName": "RenataR",
 					"image": "assets/characters/renata/hud/icons2d/renata_r.png",
 					"tooltip": "Renata sends out a wave of chemicals, <status>Berserking</status> enemies for @BerserkDuration@ seconds, causing them to Attack the nearest unit, prioritizing their allies.<br><br>While <status>Berserk</status>, enemies gain <attackSpeed>@BonusAttackSpeed*100@% Attack Speed</attackSpeed>.",
+					"extendedVariables": [
+						{
+							"type": "BerserkDuration",
+							"nameOverride": "spell_listtype_duration"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [150, 150, 130, 110, 10, 10, 10],
 					"dataValues": {
@@ -320,5 +355,11 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_duration": "Duration"
+	}
 }

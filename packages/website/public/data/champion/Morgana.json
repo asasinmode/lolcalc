@@ -36,6 +36,19 @@
 					"objectName": "MorganaQ",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_darkbinding.png",
 					"tooltip": "Morgana hurls a blast of starfire that <status>Roots</status> the first enemy hit for @RootDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "RootDuration",
+							"nameOverride": "spell_listtype_rootduration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"dataValues": {
 						"Damage": [25, 80, 135, 190, 245, 300, 355],
@@ -68,6 +81,15 @@
 					"objectName": "MorganaW",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png",
 					"tooltip": "Morgana ignites the ground for @WDuration@ seconds, dealing <magicDamage>@TotalMinDamage@ magic damage</magicDamage> per second, increased by up to <magicDamage>@TotalMaxDamage@</magicDamage> based on the targets' missing Health.<br><br>This Ability's Cooldown is reduced by @CDRefundPercent*100@% every time Morgana is healed by <spellName>{{Spell_MorganaPassive_Name}}</spellName>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 80, 90, 100, 110, 120],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -119,6 +141,12 @@
 					"objectName": "MorganaE",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_blackshield.png",
 					"tooltip": "Morgana grants an ally champion <shield>@TotalShieldStrength@ Magic Shield</shield> for @ShieldDuration@ seconds. The shield prevents <status>Disabling</status> and <status>Immobilizing</status> effects until it breaks.",
+					"extendedVariables": [
+						{
+							"type": "ShieldStrength",
+							"nameOverride": "spell_listtype_shieldamount"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [26, 26, 23.5, 21, 18.5, 16, 16],
 					"dataValues": {
@@ -152,6 +180,20 @@
 					"objectName": "MorganaR",
 					"image": "assets/characters/morgana/hud/icons2d/fallenangel_purgatory.png",
 					"tooltip": "Morgana chains herself to nearby enemy Champions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowPercent@%. After @ChainDuration@ seconds, enemies unable to break the chains take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage> and are <status>Stunned</status> for @StunDuration@ seconds.<br><br>While casting this Ability, Morgana gains <speed>@HastePercent@% Move Speed</speed>.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "HastePercent",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 120, 110, 100, 10, 10, 10],
 					"dataValues": {
@@ -197,5 +239,12 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_rootduration": "Root Duration",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_stunduration": "Stun Duration:"
+	}
 }

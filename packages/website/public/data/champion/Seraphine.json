@@ -36,6 +36,15 @@
 					"objectName": "SeraphineQ",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_q1.png",
 					"tooltip": "Seraphine projects a pure note, dealing <magicDamage>@ExplosionDamage@ magic damage</magicDamage>, increased against champions and monsters by the target's missing Health percentage up to <magicDamage>@TotalEmpoweredDamage@ damage</magicDamage> below @ExecuteThreshold*100@% Health.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 100],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
@@ -79,6 +88,19 @@
 					"objectName": "SeraphineW",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_w1.png",
 					"tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>@HasteValueAllies@ Move Speed</speed>, herself <speed>@WMSBonusTotal@ decaying Move Speed</speed> and both <shield>@ShieldValueSeraphine@ Shield</shield> for @ShieldDuration@ seconds.<br><br>If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>@WMissingHPHeal@% missing Health</healing> to them after a @WHealSplitDelay@ second delay.",
+					"extendedVariables": [
+						{
+							"type": "ShieldStrength",
+							"nameOverride": "spell_listtype_shield"
+						},
+						{
+							"type": "WMissingHPBase",
+							"nameOverride": "spell_listtype_healpercentofdamagedealt"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [22, 22, 22, 22, 22, 22, 22],
 					"dataValues": {
@@ -156,6 +178,16 @@
 					"objectName": "SeraphineE",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_e1.png",
 					"tooltip": "Seraphine unleashes a heavy soundwave, dealing <magicDamage>@FinalDamage@ magic damage</magicDamage> to enemies in a line and <status>Slowing</status> them by @SlowValue@% for @SlowDuration@ seconds.<br><br>Enemies that are already <status>Slowed</status> are <status>Rooted</status> instead, and <status>Immobilized</status> enemies are <status>Stunned</status>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowDuration",
+							"nameOverride": "spell_listtype_slowduration"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
 					"dataValues": {
@@ -191,6 +223,16 @@
 					"objectName": "SeraphineR",
 					"image": "assets/characters/seraphine/hud/icons2d/seraphine_r.png",
 					"tooltip": "Seraphine takes the stage, projecting a captivating force that <status>Charms</status> for @RChannelDuration@ seconds and deals <magicDamage>@R1TotalDamage@ magic damage</magicDamage>.<br><br>Any champions struck (including allies) become part of the performance, extending the range of this Ability. Allied champions gain maximum <keywordMajor>Notes</keywordMajor>.",
+					"extendedVariables": [
+						{
+							"type": "R1BaseDamage",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"type": "RChannelDuration",
+							"nameOverride": "spell_listtype_charmduration"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [160, 160, 140, 120, 120, 120, 120],
 					"dataValues": {
@@ -262,5 +304,12 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_initialdamage": "Initial Damage",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_healpercentofdamagedealt": "Percent Healed",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slowduration": "Slow Duration",
+		"spell_listtype_charmduration": "Charm Duration"
+	}
 }

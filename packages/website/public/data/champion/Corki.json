@@ -36,6 +36,15 @@
 					"objectName": "PhosphorusBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_phosphorusbomb.png",
 					"tooltip": "Corki lobs a bomb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The area and champions hit are revealed for @RevealDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 80],
 					"cooldownTime": [8, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
@@ -76,6 +85,15 @@
 					"objectName": "CarpetBomb",
 					"image": "assets/characters/corki/hud/icons2d/corki_valkyrie.png",
 					"tooltip": "Corki flies over and scorches a path, burning it for @TrailDuration@ seconds. Enemies in the fire take up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> over the duration.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damageovertime"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [80, 85, 90, 95, 100, 100],
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"dataValues": {
@@ -136,6 +154,19 @@
 					"objectName": "GGun",
 					"image": "assets/characters/corki/hud/icons2d/corki_gatlinggun.png",
 					"tooltip": "Corki fires a gatling gun in front of him, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> over @SprayDuration@ seconds and shredding up to <scaleArmor>@ShredMax*-1@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ShredMax",
+							"nameOverride": "spell_listtype_corkidefensereduction"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -175,6 +206,12 @@
 					"objectName": "MissileBarrage",
 					"image": "assets/characters/corki/hud/icons2d/corki_missilebarrage.png",
 					"tooltip": "Corki fires a missile that explodes on the first enemy hit, dealing <physicalDamage>@RSmallMissileDamage@ physical damage</physicalDamage> to surrounding enemies. Every third missile instead deals <physicalDamage>@RBigMissileDamage@ physical damage</physicalDamage>.<br><br>This Ability has up to @MaxAmmoTOOLTIP@ charges. Basic attacks against champions reduce the time between charges by <attention>@AttackRefund@</attention> seconds on hit.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [2, 2, 2, 2, 2, 2, 2],
 					"dataValues": {
@@ -268,5 +305,9 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_damageovertime": "Damage Over Time",
+		"spell_listtype_corkidefensereduction": "Defense Reduction"
+	}
 }

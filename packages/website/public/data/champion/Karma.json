@@ -37,6 +37,15 @@
 					"image": "assets/characters/karma/hud/icons2d/karma_q1.png",
 					"tooltip": "{{Spell_KarmaQ_Tooltip_@IsEmpowered@}}",
 					"tooltipExtended": "{{Spell_KarmaQ_Tooltip_0}}<br><br>{{Spell_KarmaQ_Tooltip_1}}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 50, 60, 70, 80, 80],
 					"cooldownTime": [9, 9, 8, 7, 6, 5, 5],
 					"dataValues": {
@@ -94,6 +103,19 @@
 					"image": "assets/characters/karma/hud/icons2d/karma_w1.png",
 					"tooltip": "{{Spell_KarmaW_Tooltip_@spell.KarmaQ:IsEmpowered@}}",
 					"tooltipExtended": "{{Spell_KarmaW_Tooltip_0}}<br><br>{{Spell_KarmaW_Tooltip_1}}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "RootDuration",
+							"nameOverride": "spell_listtype_rootduration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -130,6 +152,15 @@
 					"image": "assets/characters/karma/hud/icons2d/karma_e1.png",
 					"tooltip": "{{Spell_KarmaE_Tooltip_@spell.KarmaQ:IsEmpowered@}}",
 					"tooltipExtended": "{{Spell_KarmaE_Tooltip_0}}<br><br>{{Spell_KarmaE_Tooltip_1}}",
+					"extendedVariables": [
+						{
+							"type": "BaseShield",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
@@ -165,6 +196,24 @@
 					"objectName": "KarmaMantra",
 					"image": "assets/characters/karma/hud/icons2d/karma_r.png",
 					"tooltip": "Karma empowers her next Ability used within 8 seconds.<br><li><spellName>{{Spell_KarmaQ_Name}}</spellName>: Deals an additional <magicDamage>@RQImpactDamage@ magic damage</magicDamage> and leaves behind a circle of flame, <status>Slowing</status> enemies and dealing an additional <magicDamage>@RQFieldDamage@ magic damage</magicDamage>.<li><spellName>{{Spell_KarmaSpiritBind_Name}}</spellName>: Karma will restore <healing>@RWHealAmount@ missing Health</healing> at the beginning and end of the tether, and <status>Root</status> for @RWBonusRoot@s longer.<li><spellName>{{Spell_KarmaSolKimShield_Name}}</spellName>: Karma shields her target for <shield>@REBonusShield@ more Shield</shield>, and also shields allies near her target, granting them <shield>@REBonusShieldArea@ Shield</shield> and <speed>@REMoveSpeed*100@% Move Speed</speed>.",
+					"extendedVariables": [
+						{
+							"type": "QBonusDamage",
+							"nameOverride": "spell_listtype_karmasoulflareimpact"
+						},
+						{
+							"type": "QDetonationDamage",
+							"nameOverride": "spell_listtype_karmasoulflarecircledamage"
+						},
+						{
+							"type": "RWBonusRoot",
+							"nameOverride": "spell_listtype_karmarenewalrootextension"
+						},
+						{
+							"type": "EBonusShield",
+							"nameOverride": "spell_listtype_karmadefianceshield"
+						}
+					],
 					"cooldownTime": [40, 40, 38, 36, 34, 34, 34],
 					"dataValues": {
 						"QBonusDamage": [-20, 40, 100, 160, 220, 280, 340],
@@ -272,6 +321,13 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_rootduration": "Root Duration",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_karmasoulflareimpact": "Soulflare Impact",
+		"spell_listtype_karmasoulflarecircledamage": "Soulflare Circle Damage",
+		"spell_listtype_karmarenewalrootextension": "Renewal Root Extension",
+		"spell_listtype_karmadefianceshield": "Defiance Shield",
 		"spell_karmamantra_name": "Mantra"
 	}
 }

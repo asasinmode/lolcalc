@@ -36,6 +36,19 @@
 					"objectName": "DariusCleave",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_decimate.png",
 					"tooltip": "Darius hefts his axe then swings it around, dealing <physicalDamage>@BladeDamage@ physical damage</physicalDamage> with the edge and <physicalDamage>@HandleDamage@ damage</physicalDamage> with the handle. Enemies hit with the handle do not take a <keywordMajor>Hemorrhage</keywordMajor> stack.<br><br>Darius restores <healing>@Effect5Amount@% missing Health</healing> per enemy champion and large jungle monster hit with the edge, up to a max of <healing>@Effect7Amount@%</healing>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_totaladscalar"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [25, 30, 35, 40, 45, 50],
 					"cooldownTime": [10, 9, 8, 7, 6, 5, 5],
 					"dataValues": {
@@ -93,6 +106,12 @@
 					"objectName": "DariusNoxianTacticsONH",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_hamstring.png",
 					"tooltip": "Darius' next Attack deals <physicalDamage>@EmpoweredAttackDamage@ physical damage</physicalDamage> and <status>Slows</status> by @Effect2Amount@% for @Effect5Amount@ second.<br><br>This Ability refunds its Mana cost and reduces its Cooldown by @Effect3Amount@% if it kills the target.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_totaladscalar"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"spellCalculations": {
@@ -127,6 +146,15 @@
 					"objectName": "DariusAxeGrabCone",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Darius gains @Effect1Amount@% Armor Penetration.<br><br><spellActive>Active:</spellActive> Darius hooks with his axe, <status>Pulling</status>, and <status>Knocking Up</status> and <status>Slowing</status> by @Effect2Amount@% for @Effect3Amount@ second.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_dariuse_percentagearmorpenetration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 60, 50, 40, 30, 20],
 					"cooldownTime": [26, 26, 23.5, 21, 18.5, 16, 16],
 					"effectAmount": {
@@ -146,6 +174,12 @@
 					"objectName": "DariusExecute",
 					"image": "assets/characters/darius/hud/icons2d/darius_icon_sudden_death.png",
 					"tooltip": "Darius leaps to an enemy and strikes a lethal blow, dealing <trueDamage>@Damage@ true damage</trueDamage>. For each <keywordMajor>Hemorrhage</keywordMajor> on the target, this Ability deals an additional @RDamagePercentPerHemoStack*100@% damage, up to a max of <trueDamage>@MaximumDamage@ damage</trueDamage>.<br><br>If this kills the target, Darius may <recast>Recast</recast> this Ability once within @RRecastDuration@ seconds. At rank 3, this Ability has no Mana cost and kills refresh the Cooldown completely.",
+					"extendedVariables": [
+						{
+							"type": "RBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 0, 0, 0, 0],
 					"cooldownTime": [120, 120, 100, 80, 6, 6, 6],
 					"dataValues": {
@@ -237,6 +271,9 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_totaladscalar": "Total AD Ratio",
+		"spell_dariuse_percentagearmorpenetration": "Percent Armor Penetration",
 		"spell_dariusr_name": "Noxian Guillotine",
 		"spell_dariushemomarker_tooltip": "Darius' Attacks and damaging Abilities cause the target to <keywordMajor>Hemorrhage</keywordMajor>, dealing <physicalDamage>@BleedDamagePerStack@ physical damage</physicalDamage> over @BleedDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>When an enemy reaches max stacks or is killed by <spellName>Noxian Guillotine</spellName>, Darius gains an additional <scaleAD>@NoxianMightBonusAD@ Attack Damage</scaleAD> and applies @MaxStacks@ <keywordMajor>Hemorrhage</keywordMajor> stacks on all Attack or damaging Ability hits for @BleedDuration@ seconds."
 	}

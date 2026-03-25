@@ -36,6 +36,20 @@
 					"objectName": "MilioQ",
 					"image": "assets/characters/milio/hud/icons2d/milio_q.png",
 					"tooltip": "Milio kicks a fireball, <status>Knocking Back</status> the first enemy hit. If it hits, the ball bounces past them and explodes, dealing <magicDamage>@Damage@ magic damage</magicDamage> to surrounding enemies and <status>Slowing</status> them by @SlowAmountPercent@ for @SlowDuration@ seconds.<br><br>Hitting at least one enemy champion with <spellName>{{Spell_MilioKickballQ_Name}}</spellName> refunds @RefundRatio*100@% of it's Mana cost.",
+					"extendedVariables": [
+						{
+							"type": "FallDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"dataValues": {
 						"SlowAmount": [0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65],
@@ -90,6 +104,20 @@
 					"objectName": "MilioW",
 					"image": "assets/characters/milio/hud/icons2d/milio_w.png",
 					"tooltip": "Milio creates a hearth that follows ally champions for @ZoneDuration@ seconds. Ally champions nearby gain @RangePercent@ Attack Range and restore <healing>@HealingOverTime@ Health</healing> over the duration. The hearth also applies <spellName>{{Spell_MilioPassive_Name}}</spellName> every @HealFrequencySeconds@ seconds.<br><br><recast>Recast:</recast> Change the hearth's follow ally.",
+					"extendedVariables": [
+						{
+							"type": "RangePctIncrease",
+							"nameOverride": "spell_listtype_range"
+						},
+						{
+							"type": "TotalHealingOverTime",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [90, 100, 110, 120, 130, 140],
 					"cooldownTime": [29, 29, 27, 25, 23, 21, 19],
 					"dataValues": {
@@ -138,6 +166,23 @@
 					"objectName": "MilioE",
 					"image": "assets/characters/milio/hud/icons2d/milio_e.png",
 					"tooltip": "Milio wraps an ally champion in protective flames, granting <shield>@ShieldCalc@ Shield</shield> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>This ability has 2 charges and the effects stack on repeat targets.",
+					"extendedVariables": [
+						{
+							"type": "ShieldBase",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "MoveSpeedAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						},
+						{
+							"type": "AmmoRechargeTime"
+						}
+					],
 					"mana": [50, 60, 70, 80, 90, 100],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
@@ -172,6 +217,12 @@
 					"objectName": "MilioR",
 					"image": "assets/characters/milio/hud/icons2d/milio_r.png",
 					"tooltip": "Milio unleashes a wave of soothing flames on nearby ally champions, cleansing <status>Disabling</status> and <status>Immobilizing</status> effects, restoring <healing>@HealCalc@ Health</healing>, and granting @TenacityAmount*100@% Tenacity for @TenacityDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "HealBase",
+							"nameOverride": "spell_listtype_healing"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [160, 160, 145, 130, 70, 40, 10],
 					"dataValues": {
@@ -254,6 +305,13 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_manacost": "Mana Cost",
+		"spell_listtype_range": "Range",
+		"spell_listtype_healing": "Healing",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_movementspeed": "Move Speed",
 		"spell_miliopassive_tooltip": "When Milio's Abilities touch ally champions, their next Attack or Ability deals <physicalDamage>@ADBurstRatio@ ally Attack Damage</physicalDamage> as additional <magicDamage>magic damage</magicDamage>, plus <magicDamage>@BurnDamage@ magic damage</magicDamage> over @BurnDuration@ seconds."
 	}
 }

@@ -37,6 +37,24 @@
 					"image": "assets/characters/elise/hud/icons2d/elisehumanq.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise injects neurotoxin, dealing <magicDamage>@BaseDamage@ plus @HumanPercentHealth@ current Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_EliseHumanQ_Tooltip}}<br><br>{{Spell_EliseSpiderQ_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_eliseqneurotoxindamage"
+						},
+						{
+							"type": "SpiderBaseDamage",
+							"nameOverride": "spell_listtype_eliseqvenemousbitedamage"
+						},
+						{
+							"type": "MonsterCapDamage",
+							"nameOverride": "spell_listtype_maxdamagetomonsters"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_elisehumanq_"
+						}
+					],
 					"mana": [80, 85, 90, 95, 100, 105],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
@@ -100,6 +118,15 @@
 					"image": "assets/characters/elise/hud/icons2d/elisehumanw.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise summons an explosive spider that moves to a location and explodes when it nears an enemy or after 3 seconds. The spider deals <magicDamage>@spell.EliseHumanW:TotalDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_EliseHumanW_Tooltip}}<br><br>{{Spell_EliseSpiderW_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -137,6 +164,16 @@
 					"image": "assets/characters/elise/hud/icons2d/elisespiderw.png",
 					"tooltip": "<keywordMajor>Spider Form</keywordMajor> <spellPassive>Passive</spellPassive>: <keywordMajor>Spiderlings</keywordMajor> gain <attackSpeed>@spell.EliseSpiderW:PassiveAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><keywordMajor>Spider Form</keywordMajor> <spellActive>Active:</spellActive> Elise grants herself and her <keywordMajor>Spiderlings</keywordMajor> <attackSpeed>@spell.EliseSpiderW:ActiveAttackSpeed*100@% Attack Speed</attackSpeed> for @spell.EliseSpiderW:BuffDuration@ seconds.",
 					"tooltipExtended": "{{Spell_EliseSpiderW_Tooltip}}<br><br>{{Spell_EliseHumanW_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "PassiveAttackSpeed",
+							"nameOverride": "spell_listtype_elisewpassiveattackspeed"
+						},
+						{
+							"type": "ActiveAttackSpeed",
+							"nameOverride": "spell_listtype_activeattackspeed"
+						}
+					],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"PassiveAttackSpeed": [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3],
@@ -162,6 +199,20 @@
 					"image": "assets/characters/elise/hud/icons2d/elisehumane.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise fires a cocoon, <status>Stunning</status> and revealing the first enemy hit for @StunDuration@ seconds.",
 					"tooltipExtended": "{{Spell_EliseHumanE_Tooltip}}<br><br>{{Spell_EliseSpiderE_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_stunduration"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_elisehumane_rappel"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_elisehumane_dmgheal"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [12, 12, 11.5, 11, 10.5, 10, 10],
 					"dataValues": {
@@ -212,6 +263,28 @@
 					"image": "assets/characters/elise/hud/icons2d/eliser.png",
 					"tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise transforms into a menacing spider, becoming melee, gaining access to <keywordMajor>Spider Form</keywordMajor> Abilities and summons all dormant <keywordMajor>Spiderlings</keywordMajor>.",
 					"tooltipExtended": "{{Spell_EliseR_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseRSpider_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "PassiveBonusDamage",
+							"nameOverride": "spell_listtype_eliserbitedamage"
+						},
+						{
+							"type": "SpiderlingBaseDamage",
+							"nameOverride": "spell_listtype_eliserspiderlingbonusdamage"
+						},
+						{
+							"type": "SpiderlingsStored",
+							"nameOverride": "spell_listtype_eliserspiderlingcount"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_eliserspiderlingarmor"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_eliserspiderlingmr"
+						}
+					],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
 						"PassiveBonusDamage": [2, 12, 22, 32, 42, 52, 62],
@@ -279,6 +352,28 @@
 					"image": "assets/characters/elise/hud/icons2d/eliser.png",
 					"tooltip": "<keywordMajor>Spider Form</keywordMajor>: Elise returns to <keywordMajor>Human Form</keywordMajor> and all remaining <keywordMajor>Spiderlings</keywordMajor> become dormant.",
 					"tooltipExtended": "{{Spell_EliseRSpider_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseR_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_eliserbitedamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_eliserspiderlingbonusdamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_eliserspiderlingcount"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_eliserspiderlingarmor"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_eliserspiderlingmr"
+						}
+					],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"effectAmount": {
 						"0": [0, 10, 20, 30, 40, 0, 0],
@@ -343,5 +438,21 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_eliseqneurotoxindamage": "Neurotoxin Damage",
+		"spell_listtype_eliseqvenemousbitedamage": "Venomous Bite Damage",
+		"spell_listtype_maxdamagetomonsters": "Monster Damage Cap",
+		"spell_elisehumanq_": "Mana Cost (Neurotoxin)",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_elisewpassiveattackspeed": "Spiderling Passive Attack Speed",
+		"spell_listtype_activeattackspeed": "Active Attack Speed",
+		"spell_listtype_stunduration": "Stun Duration:",
+		"spell_elisehumane_rappel": "Cooldown (Rappel)",
+		"spell_elisehumane_dmgheal": "Damage and Healing Increase",
+		"spell_listtype_eliserbitedamage": "Spider Form Bite Damage",
+		"spell_listtype_eliserspiderlingbonusdamage": "Spiderling Bonus Damage",
+		"spell_listtype_eliserspiderlingcount": "Maximum Number of Spiderlings",
+		"spell_listtype_eliserspiderlingarmor": "Spiderling Armor",
+		"spell_listtype_eliserspiderlingmr": "Spiderling Magic Resist"
+	}
 }

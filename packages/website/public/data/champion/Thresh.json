@@ -36,6 +36,12 @@
 					"objectName": "ThreshQ",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_q.png",
 					"tooltip": "Thresh throws out his scythe, <status>Stunning</status> the first unit hit and <status>Pulling</status> them towards Thresh for @TauntLength@ seconds. The scythe does <magicDamage>@TotalDamage@ magic damage</magicDamage> and also grants <keywordStealth>True Sight</keywordStealth> for the duration.<br><br>Thresh can <recast>Recast</recast> this Ability to pull himself to the enemy.<br><br>If this Ability hits, its Cooldown is reduced by @HitBonusCooldown@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [19, 19, 16.5, 14, 11.5, 9, 9],
 					"dataValues": {
@@ -78,6 +84,15 @@
 					"objectName": "ThreshW",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_w.png",
 					"tooltip": "Thresh throws his lantern, allowing an ally to click on it to dash to Thresh.<br><br>The lantern also grants <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds to Thresh and the first ally champion to come in contact with it.",
+					"extendedVariables": [
+						{
+							"type": "BaseShieldValue",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [21, 21, 20, 19, 18, 17, 16],
 					"dataValues": {
@@ -120,6 +135,23 @@
 					"objectName": "ThreshE",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Thresh's Attacks deal additional damage based on how long since he last Attacked. They deal between <magicDamage>@PAttackDamageMin@</magicDamage> and <magicDamage>@PAttackDamageMax@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Thresh whips his chains, <status>Pulling</status> or <status>Pushing</status> enemies in the direction of the swing. Enemies hit are also <status>Slowed</status> by @Effect2Amount@% for @Effect4Amount@ second and take <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "PassiveADRatio",
+							"nameOverride": "spell_listtype_passivedamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_activedamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [13, 13, 12.25, 11.5, 10.75, 10, 9.25],
 					"dataValues": {
@@ -188,6 +220,12 @@
 					"objectName": "ThreshRPenta",
 					"image": "assets/characters/thresh/hud/icons2d/thresh_r.png",
 					"tooltip": "Thresh creates a prison of spectral walls, <status>Slowing</status> champions by @Effect3Amount@% for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Walls break after one collision, and after one is broken, the rest deal no damage and <status>Slow</status> for half duration.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 0],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
@@ -253,6 +291,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_passivedamage": "Passive Damage",
+		"spell_listtype_activedamage": "Active Damage",
+		"spell_listtype_slow": "Slow",
 		"spell_threshpassivesouls_tooltip": "Thresh collects the <keywordMajor>Souls</keywordMajor> of dead enemies by walking near them. Each <keywordMajor>Soul</keywordMajor> grants him <scaleArmor>@StatValuePerSoul@ Armor</scaleArmor> and <scaleAP>@StatValuePerSoul@ Ability Power</scaleAP>."
 	}
 }

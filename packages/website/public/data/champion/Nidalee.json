@@ -37,6 +37,20 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_q1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee throws her javelin, dealing <magicDamage>@HumanMinimumDamage@ magic damage</magicDamage>, increased up to <magicDamage>@HumanMaximumDamage@ magic damage</magicDamage> based on distance flown.",
 					"tooltipExtended": "{{Spell_JavelinToss_Tooltip}}<br><br>{{Spell_Takedown_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "SpearMinimumDamage",
+							"nameOverride": "spell_listtype_nidaleejavelinminimumdamage"
+						},
+						{
+							"type": "SpearMaximumDamage",
+							"nameOverride": "spell_listtype_nidaleejavelinmaximumdamage"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_javelintoss_javelincost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
@@ -116,6 +130,16 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_w1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee places an invisible trap for 2 minutes. When an enemy walks over it, they are dealt <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second for @Effect3Amount@ seconds.<br><br>@MaxTraps@ traps may be active at once.",
 					"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_nidaleetrapdamage"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_bushwhack_trapcost"
+						}
+					],
 					"mana": [30, 35, 40, 45, 50, 55],
 					"cooldownTime": [14, 13, 12, 11, 10, 9, 9],
 					"dataValues": {},
@@ -198,6 +222,20 @@
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_e1.png",
 					"tooltip": "<keywordMajor>Human Form:</keywordMajor> Nidalee restores <healing>@TotalHealing@ Health</healing> increased up to <healing>@MaxHealing@</healing> based on missing Health and grants them <attackSpeed>@BonusAS*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 					"tooltipExtended": "{{Spell_PrimalSurge_Tooltip}}<br><br>{{Spell_Swipe_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "BaseHeal",
+							"nameOverride": "spell_listtype_nidaleeprimalsurgeheal"
+						},
+						{
+							"type": "BonusAS",
+							"nameOverride": "spell_listtype_nidaleeprimalsurgeattackspeed"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_primalsurge_manacost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -259,6 +297,28 @@
 					"objectName": "AspectOfTheCougar",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
+					"extendedVariables": [
+						{
+							"type": "TakedownBaseDamage",
+							"nameOverride": "spell_aspectofthecougar_takedowndamage"
+						},
+						{
+							"type": "TakedownDamageAmp",
+							"nameOverride": "spell_aspectofthecougar_takedowndamageamp"
+						},
+						{
+							"type": "PounceDamage",
+							"nameOverride": "spell_aspectofthecougar_pouncedamage"
+						},
+						{
+							"type": "SwipeDamage",
+							"nameOverride": "spell_aspectofthecougar_swipedamage"
+						},
+						{
+							"type": "PounceCooldown",
+							"nameOverride": "spell_aspectofthecougar_enhancedpouncecooldown"
+						}
+					],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
 						"PassivePercentMS": [10, 10, 10, 10, 10, 10, 10],
@@ -339,6 +399,28 @@
 					"objectName": "AspectOfTheCougar",
 					"image": "assets/characters/nidalee/hud/icons2d/nidalee_r1.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
+					"extendedVariables": [
+						{
+							"type": "TakedownBaseDamage",
+							"nameOverride": "spell_aspectofthecougar_takedowndamage"
+						},
+						{
+							"type": "TakedownDamageAmp",
+							"nameOverride": "spell_aspectofthecougar_takedowndamageamp"
+						},
+						{
+							"type": "PounceDamage",
+							"nameOverride": "spell_aspectofthecougar_pouncedamage"
+						},
+						{
+							"type": "SwipeDamage",
+							"nameOverride": "spell_aspectofthecougar_swipedamage"
+						},
+						{
+							"type": "PounceCooldown",
+							"nameOverride": "spell_aspectofthecougar_enhancedpouncecooldown"
+						}
+					],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
 						"PassivePercentMS": [10, 10, 10, 10, 10, 10, 10],
@@ -431,6 +513,19 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_nidaleejavelinminimumdamage": "Javelin Minimum Damage",
+		"spell_listtype_nidaleejavelinmaximumdamage": "Javelin Maximum Damage",
+		"spell_javelintoss_javelincost": "Javelin Mana Cost",
+		"spell_listtype_nidaleetrapdamage": "Trap Damage",
+		"spell_bushwhack_trapcost": "Trap Mana Cost",
+		"spell_listtype_nidaleeprimalsurgeheal": "Primal Surge Heal",
+		"spell_listtype_nidaleeprimalsurgeattackspeed": "Primal Surge Attack Speed",
+		"spell_primalsurge_manacost": "Primal Surge Mana Cost",
+		"spell_aspectofthecougar_takedowndamage": "Takedown Damage",
+		"spell_aspectofthecougar_takedowndamageamp": "Takedown Damage Amp",
+		"spell_aspectofthecougar_pouncedamage": "Pounce Damage",
+		"spell_aspectofthecougar_swipedamage": "Swipe Damage",
+		"spell_aspectofthecougar_enhancedpouncecooldown": "Enhanced Pounce Cooldown",
 		"spell_nidaleepassivehunt_tooltip": "Nidalee starts with a rank in <spellName>Aspect of the Cougar</spellName>. <br><br>Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed> for 2 seconds when entering Brush, increased to <speed>@spell.AspectOfTheCougar:PassivePercentMS*3@% Move Speed</speed> while moving toward enemy champions.<br><br>Hitting champions or jungle monsters with <spellName>Javelin Toss</spellName> or <spellName>Bushwhack</spellName> marks them as <keywordMajor>Hunted</keywordMajor> for 4 seconds. While an enemy is <keywordMajor>Hunted</keywordMajor>, they are revealed with <keywordStealth>True Sight</keywordStealth> and Nidalee gains <speed>@spell.AspectOfTheCougar:PassivePercentMS@% Move Speed</speed>, increased to <speed>@spell.AspectOfTheCougar:PassivePercentMS*3@% Move Speed</speed> toward the <keywordMajor>Hunted</keywordMajor> enemy. "
 	}
 }

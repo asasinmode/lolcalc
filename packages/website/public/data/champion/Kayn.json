@@ -36,6 +36,12 @@
 					"objectName": "KaynQ",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_q_primary.png",
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_basedamage"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [7.5, 7, 6.5, 6, 5.5, 5, 4.5],
 					"dataValues": {
@@ -112,6 +118,15 @@
 					"objectName": "KaynW",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_w_primary.png",
 					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"spellCalculations": {
@@ -151,6 +166,16 @@
 					"objectName": "KaynE",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_e_primary.png",
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_duration"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_healing"
+						}
+					],
 					"mana": [90, 90, 90, 90, 90, 90],
 					"cooldownTime": [21, 21, 19, 17, 15, 13, 11],
 					"dataValues": {
@@ -196,6 +221,12 @@
 					"objectName": "KaynR",
 					"image": "assets/characters/kayn/hud/icons2d/kayn_r1_primary.png",
 					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [120, 120, 100, 80, 0, 0, 0],
 					"dataValues": {
@@ -320,6 +351,10 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_duration": "Duration",
+		"spell_listtype_healing": "Healing",
 		"game_spell_kayn_p_main_0": "Kayn the <keywordMajor>Shadow Assassin</keywordMajor> fights Rhaast the <keywordMajor>Darkin Slayer</keywordMajor> for control. One will win, the other will die.<br><br>Damaging ranged champions charges the <keywordMajor>Shadow Assassin</keywordMajor>, and damaging melee champions charges the <keywordMajor>Darkin Slayer</keywordMajor>. At full charge, Kayn can permanently transform at his fountain.<br><br><keywordMajor>Shadow Assassin:</keywordMajor> After entering combat Kayn's Attacks and Abilities deal an additional <magicDamage>@KaynAssBonusDamage@ damage dealt magic damage</magicDamage> for 3 seconds. This only occurs if Kayn has been out of combat for @PAmpCooldownAss@ seconds or used <spellName>Umbral Trespass</spellName>.<br><br><keywordMajor>Darkin Slayer:</keywordMajor> Kayn heals for @KaynSlayerHealing@ of physical damage dealt to champions.",
 		"game_spell_kayn_p_main_1": "The <keywordMajor>Shadow Assassin</keywordMajor> has won.<br><br><keywordMajor>Shadow Assassin:</keywordMajor> After entering combat Kayn's Attacks and Abilities deal an additional <magicDamage>@KaynAssBonusDamage@ damage dealt magic damage</magicDamage> for 3 seconds. This only occurs if Kayn has been out of combat for @PAmpCooldownAss@ seconds or used <spellName>Umbral Trespass</spellName>.",
 		"game_spell_kayn_p_main_2": "The <keywordMajor>Darkin Slayer</keywordMajor> has won.<br><br><keywordMajor>Darkin Slayer:</keywordMajor> Kayn heals for @KaynSlayerHealing@ of physical damage dealt to champions.",

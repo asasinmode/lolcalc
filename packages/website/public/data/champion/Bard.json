@@ -36,6 +36,20 @@
 					"objectName": "BardQ",
 					"image": "assets/characters/bard/hud/icons2d/bard_q.png",
 					"tooltip": "Bard fires an energy bolt, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit. The first target hit is <status>Slowed</status> by @SlowAmountPercentage@% for @SlowDuration@s.<br><br>If the bolt hits a second enemy or a wall, any enemies hit are <status>Stunned</status> for @StunDuration@s.<br>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowDuration",
+							"nameOverride": "spell_listtype_slowduration"
+						},
+						{
+							"type": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
@@ -71,6 +85,20 @@
 					"objectName": "BardW",
 					"image": "assets/characters/bard/hud/icons2d/bard_w.png",
 					"tooltip": "Bard creates a Health shrine that grants <speed>@Calc_MoveSpeed@ Move Speed</speed> decaying over @MoveSpeed_Duration@ seconds and restores at least <healing>@InitialHeal@ Health</healing> to the first ally to enter. The shrine grows to restore <healing>@MaxHeal@ Health</healing> after existing for @ChargeupTime@ seconds.<br><br>Bard can have up to @MaxPacks@ shrines at once. If an enemy champion enters a shrine, it is destroyed.<br><br>This ability has @Ammo_Limit@ charges.<br><br>Current Active Shrines: @f1@ / @f2@",
+					"extendedVariables": [
+						{
+							"type": "MinimumHeal",
+							"nameOverride": "spell_listtype_baseheal"
+						},
+						{
+							"type": "MaximumHeal",
+							"nameOverride": "spell_listtype_maxheal"
+						},
+						{
+							"type": "MoveSpeed_Base",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
@@ -148,6 +176,7 @@
 					"objectName": "BardE",
 					"image": "assets/characters/bard/hud/icons2d/bard_e.png",
 					"tooltip": "Bard opens a one-way portal through Terrain for @Effect1Amount@ seconds. Any champion can enter the portal by moving onto it while near the entrance.",
+					"extendedVariables": [],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [22, 22, 20.5, 19, 17.5, 16, 16],
 					"dataValues": {
@@ -170,6 +199,7 @@
 					"objectName": "BardR",
 					"image": "assets/characters/bard/hud/icons2d/bard_r.png",
 					"tooltip": "Bard hurls magical protective energy to an area, placing all units and structures hit into Stasis for @RStasisDuration@ seconds.",
+					"extendedVariables": [],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 110, 95, 80, 10, 10, 10],
 					"dataValues": {
@@ -265,6 +295,12 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slowduration": "Slow Duration",
+		"spell_listtype_stunduration": "Stun Duration:",
+		"spell_listtype_baseheal": "Base Heal",
+		"spell_listtype_maxheal": "Max Heal",
+		"spell_listtype_movementspeed": "Move Speed",
 		"spell_bardptooltip_d_ns_tooltip": "Bard attracts <font color='#cccc00'>Chimes</font> randomly around the map. When Bard moves near a <font color='#cccc00'>Chime</font> he collects it, gaining <speed>@TooltipMSPerStack@% Move Speed</speed> (stacking up to @MaxSpeedStacks@ times) while out of combat for @SpeedStackDuration@ seconds, @f1@ Experience, and restoring <scaleMana>@TooltipManaRestore@% max Mana</scaleMana>.<br><br>Bard attracts a <font color='#FF9900'>Meep</font> every @f5@ seconds (max: @f4@). Bard's Attacks consume a <font color='#FF9900'>Meep</font> to deal an additional <magicDamage>@MeepDamageNoChime@ plus @DamagePerCheckpoint@ per @TooltipChimeDamageCheckpoint@ <font color='#cccc00'>Chimes</font> magic damage</magicDamage>, plus additional effects based on <font color='#cccc00'>Chimes</font> collected."
 	}
 }

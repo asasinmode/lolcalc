@@ -36,6 +36,12 @@
 					"objectName": "Rupture",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_spikeslam.png",
 					"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
@@ -75,6 +81,19 @@
 					"objectName": "FeralScream",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_feralscream.png",
 					"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_silenceduration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [11, 11, 10.5, 10, 9.5, 9, 9],
 					"spellCalculations": {
@@ -108,6 +127,24 @@
 					"objectName": "VorpalSpikes",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_chitinousexoplates.png",
 					"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "PercentHealthDamage",
+							"nameOverride": "spell_listtype_maxhealthdamage"
+						},
+						{
+							"type": "ModifiedMonsterCap",
+							"nameOverride": "spell_listtype_monsterdamage"
+						},
+						{
+							"type": "SlowAmountPercentage",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"dataValues": {
@@ -168,6 +205,20 @@
 					"objectName": "Feast",
 					"image": "assets/characters/chogath/hud/icons2d/greenterror_feast.png",
 					"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. ",
+					"extendedVariables": [
+						{
+							"type": "RBaseDamage",
+							"nameOverride": "spell_listtype_championdamage"
+						},
+						{
+							"type": "RHealthPerStack",
+							"nameOverride": "spell_listtype_chogathrhealthperstack"
+						},
+						{
+							"type": "AttackRangePerStack",
+							"nameOverride": "spell_listtype_chogathrrangeperstack"
+						}
+					],
 					"mana": [100, 100, 100, 60, 60, 0],
 					"cooldownTime": [70, 80, 70, 60, 10, 10, 70],
 					"dataValues": {
@@ -283,5 +334,14 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_silenceduration": "Silence Duration",
+		"spell_listtype_maxhealthdamage": "Maximum Health Damage",
+		"spell_listtype_monsterdamage": "Monster Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_championdamage": "Champion Damage",
+		"spell_listtype_chogathrhealthperstack": "Health per Stack",
+		"spell_listtype_chogathrrangeperstack": "Attack Range per Stack"
+	}
 }

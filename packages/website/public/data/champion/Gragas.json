@@ -36,6 +36,16 @@
 					"objectName": "GragasQ",
 					"image": "assets/characters/gragas/hud/icons2d/gragasbarrelroll.png",
 					"tooltip": "Gragas rolls a cask that explodes after @Effect4Amount@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @Effect2Amount@ and @Effect2Amount*1.5@% for @Effect3Amount@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
@@ -83,6 +93,16 @@
 					"objectName": "GragasW",
 					"image": "assets/characters/gragas/hud/icons2d/gragasdrunkenrage.png",
 					"tooltip": "Gragas samples his brew, reducing incoming damage by @DamageReduction@ for @DefenseDuration@ seconds and empowering his next Attack to deal an additional <magicDamage>@TotalDamage@</magicDamage> plus <magicDamage>@MaxHPPercentDamage@% max Health magic damage</magicDamage> to the target and surrounding enemies.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamageReduction",
+							"nameOverride": "spell_listtype_damagereduction"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
@@ -139,6 +159,12 @@
 					"objectName": "GragasE",
 					"image": "assets/characters/gragas/hud/icons2d/gragasbodyslam.png",
 					"tooltip": "Gragas charges forward, colliding with the first enemy, <status>Knocking Up</status> nearby enemies for @StunDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to them.<br><br>This Ability's Cooldown is reduced by @CooldownRefund*100@% if Gragas collides with an enemy.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [14, 14, 13.5, 13, 12.5, 12, 12],
 					"dataValues": {
@@ -179,6 +205,12 @@
 					"objectName": "GragasR",
 					"image": "assets/characters/gragas/hud/icons2d/gragasexplosivecask.png",
 					"tooltip": "Gragas hurls his cask, dealing <magicDamage>@DamageDone@ magic damage</magicDamage> and <status>Knocking Away</status> enemies from the impact zone.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"dataValues": {
@@ -255,5 +287,9 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_damagereduction": "Damage Reduction"
+	}
 }

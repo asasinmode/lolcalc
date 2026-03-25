@@ -36,6 +36,19 @@
 					"objectName": "ZileanQ",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_q.png",
 					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "BombBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
@@ -76,6 +89,7 @@
 					"objectName": "ZileanW",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_w.png",
 					"tooltip": "Zilean turns time, reducing his other basic Ability Cooldowns by @Effect2Amount@ seconds.",
+					"extendedVariables": [],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [16, 14, 12, 10, 8, 6, 6],
 					"effectAmount": {
@@ -95,6 +109,16 @@
 					"objectName": "TimeWarp",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_e.png",
 					"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"effectAmount": {
@@ -115,6 +139,15 @@
 					"objectName": "ChronoShift",
 					"image": "assets/characters/zilean/hud/icons2d/zilean_r.png",
 					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "RBaseHeal",
+							"nameOverride": "spell_listtype_healing"
+						}
+					],
 					"mana": [125, 150, 175, 0, 0, 0],
 					"cooldownTime": [10, 120, 90, 60, 0, 0, 10],
 					"dataValues": {
@@ -214,6 +247,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_stunduration": "Stun Duration:",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_healing": "Healing",
 		"spell_heightenedlearning_tooltip": "{{Spell_HeightenedLearning_Tooltip_@GameModeInteger@}}"
 	}
 }

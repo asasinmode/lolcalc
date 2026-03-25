@@ -36,6 +36,19 @@
 					"objectName": "EvelynnQ",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_q1.png",
 					"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit.",
+					"extendedVariables": [
+						{
+							"type": "HateSpikeBaseDamage",
+							"nameOverride": "spell_listtype_evelynnqdamage"
+						},
+						{
+							"type": "BonusDamageBase",
+							"nameOverride": "spell_listtype_bonusdamage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
@@ -96,6 +109,27 @@
 					"objectName": "EvelynnW",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_w.png",
 					"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_charmduration"
+						},
+						{
+							"type": "MonsterCharm",
+							"nameOverride": "spell_evelynnw_monstercharm_levelup"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_magicresistshred"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_monsterdamage"
+						},
+						{
+							"type": "CastRange"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [15, 15, 14, 13, 12, 11, 11],
 					"dataValues": {
@@ -145,6 +179,23 @@
 					"objectName": "EvelynnE",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_e1.png",
 					"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "EmpoweredDamage",
+							"nameOverride": "spell_listtype_evelynnempowereddamage"
+						},
+						{
+							"type": "SpeedAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 45, 50, 55, 60, 60],
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
@@ -216,6 +267,16 @@
 					"objectName": "EvelynnR",
 					"image": "assets/characters/evelynn/hud/icons2d/evelynn_r.png",
 					"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_evelynnempowereddamage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 100, 80, 70, 80, 80],
 					"dataValues": {
@@ -301,5 +362,15 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_evelynnqdamage": "Lasher and Spike Damage",
+		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_charmduration": "Charm Duration",
+		"spell_evelynnw_monstercharm_levelup": "Monster Charm Duration",
+		"spell_listtype_magicresistshred": "Magic Resist Shred",
+		"spell_listtype_monsterdamage": "Monster Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_evelynnempowereddamage": "Empowered Damage",
+		"spell_listtype_movementspeed": "Move Speed"
+	}
 }

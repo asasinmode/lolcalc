@@ -36,6 +36,12 @@
 					"objectName": "RakanQ",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_q.png",
 					"tooltip": "Rakan flings a magical feather that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the feather hits a champion or epic jungle monster, Rakan restores <healing>@TotalHeal@ Health</healing> to himself and nearby allies after @HealDelay@ seconds or when he touches an allied champion.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [45, 45, 45, 45, 45, 45],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 6],
 					"dataValues": {
@@ -94,6 +100,16 @@
 					"objectName": "RakanW",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_w.png",
 					"tooltip": "Rakan dashes, then spirals into the air, <status>Knocking Up</status> for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseCost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [50, 60, 70, 80, 90, 100],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
@@ -131,6 +147,20 @@
 					"objectName": "RakanE",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_e.png",
 					"tooltip": "Rakan dashes to an allied champion, granting them <shield>@TotalShield@ Shield</shield> for @Effect3Amount@ seconds.<br><br>Rakan can <recast>Recast</recast> this Ability once within @Effect2Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseShield",
+							"nameOverride": "spell_listtype_shieldhealth"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_cooldown"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_cost"
+						}
+					],
 					"mana": [40, 45, 50, 55, 60, 65],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
@@ -172,6 +202,16 @@
 					"objectName": "RakanR",
 					"image": "assets/characters/rakan/hud/icons2d/rakan_r.png",
 					"tooltip": "Rakan gains <speed>@Effect5Amount@% Move Speed</speed> for @Effect2Amount@ seconds. Rakan deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Charms</status> enemies for @Effect3Amount@ second(s) the first time he touches them. The first champion touched grants Rakan <speed>@Effect6Amount@% decaying Move Speed</speed>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_charmduration"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [130, 130, 110, 90, 0, 0, 0],
 					"spellCalculations": {
@@ -250,5 +290,12 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_manacost": "Mana Cost",
+		"spell_listtype_shieldhealth": "Shield Health",
+		"spell_listtype_cooldown": "Cooldown",
+		"spell_listtype_cost": "@AbilityResourceName@ Cost",
+		"spell_listtype_charmduration": "Charm Duration"
+	}
 }

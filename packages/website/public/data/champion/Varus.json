@@ -36,6 +36,20 @@
 					"objectName": "VarusQ",
 					"image": "assets/characters/varus/hud/icons2d/varusq.png",
 					"tooltip": "<attention>Begin Charging:</attention> Varus draws back his next shot, <status>Slowing</status> himself by @Effect7Amount*-100@%. After @Effect5Amount@ seconds, if not fired, Varus will cancel the Ability and refund @Effect4Amount*100@% of its Mana cost.<br><br><attention>Release:</attention> Varus releases the arrow, dealing <physicalDamage>@TotalDamageMinTooltip@ physical damage</physicalDamage>, reduced by @Effect3Amount*100@% per enemy hit (minimum @Effect9Amount*100@%). Damage and <keywordMajor>Blight</keywordMajor> detonation effects are increased by up to @MaxChargeAmp*100@% based on charge time (maximum <physicalDamage>@TotalDamageMax@</physicalDamage>) .",
+					"extendedVariables": [
+						{
+							"type": "BaseDamageMax",
+							"nameOverride": "spell_listtype_maximumdamage"
+						},
+						{
+							"type": "tADRatioMax",
+							"nameOverride": "spell_listtype_bonusadratio"
+						},
+						{
+							"type": "BaseCost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
@@ -92,6 +106,20 @@
 					"objectName": "VarusW",
 					"image": "assets/characters/varus/hud/icons2d/varusw.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Varus' Attacks deal an additional <magicDamage>@OnHitDamage@ magic damage</magicDamage> and apply a <keywordMajor>Blight</keywordMajor> stack for @Effect3Amount@ seconds (max @Effect4Amount@ stacks).<br><br>Varus' other Abilities detonate <keywordMajor>Blight</keywordMajor> stacks dealing <magicDamage>@PercentHPPerStack@ max Health magic damage</magicDamage> per stack (max <magicDamage>@MaxPercentHPPerStack@ max Health damage</magicDamage>). Detonating <keywordMajor>Blight</keywordMajor> on champions and epic monsters also reduces his basic Abilities' Cooldowns by @CDRPerBlightStack*100@% of their Maximum per stack.<br><br><spellActive>Active:</spellActive> Varus' next <spellName>{{Spell_VarusQ_Name}}</spellName> deals an additional <magicDamage>@QEmpowerPercentHP@ missing Health magic damage</magicDamage>, increased up to <magicDamage>@MaxQEmpowerPercentHP@ missing Health damage</magicDamage> based on charge time.",
+					"extendedVariables": [
+						{
+							"type": "VarusWOnHitDamage",
+							"nameOverride": "spell_listtype_varuswdamageonattack"
+						},
+						{
+							"type": "BasePercentHPPerStack",
+							"nameOverride": "spell_listtype_maxhealthdamage"
+						},
+						{
+							"type": "WQHealthDamage",
+							"nameOverride": "spell_listtype_missinghealthdamage"
+						}
+					],
 					"cooldownTime": [40, 40, 40, 40, 40, 40, 40],
 					"dataValues": {
 						"VarusWDebuffDuration": [6, 6, 6, 6, 6, 6, 6],
@@ -180,6 +208,16 @@
 					"objectName": "VarusE",
 					"image": "assets/characters/varus/hud/icons2d/varuse.png",
 					"tooltip": "Varus fires a hail of arrows that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and desecrates the ground for @Effect3Amount@ seconds, <status>Slowing</status> enemies by @SlowPercent*-100@% and applying @GrievousAmount*100@% Grievous Wounds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowPercent",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [90, 90, 90, 90, 90, 90],
 					"cooldownTime": [18, 18, 16, 14, 12, 10, 10],
 					"dataValues": {
@@ -223,6 +261,12 @@
 					"objectName": "VarusR",
 					"image": "assets/characters/varus/hud/icons2d/varusr.png",
 					"tooltip": "Varus flings out a tendril of corruption, <status>Rooting</status> the first champion hit for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. <status>Rooted</status> enemies gain @Effect4Amount@ <keywordMajor>Blight</keywordMajor> stacks over the duration.<br><br>The corruption spreads from its target to uninfected enemy champions. If it reaches them, they take the same damage and <status>Root</status>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"dataValues": {
@@ -387,5 +431,14 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_maximumdamage": "Maximum Damage",
+		"spell_listtype_bonusadratio": "Bonus AD Ratio",
+		"spell_listtype_manacost": "Mana Cost",
+		"spell_listtype_varuswdamageonattack": "Damage on Attack",
+		"spell_listtype_maxhealthdamage": "Maximum Health Damage",
+		"spell_listtype_missinghealthdamage": "Missing Health Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow"
+	}
 }

@@ -36,6 +36,19 @@
 					"objectName": "VeigarBalefulStrike",
 					"image": "assets/characters/veigar/hud/icons2d/veigarbalefulstrike.png",
 					"tooltip": "Veigar unleashes a bolt of dark energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit.<br><br>If Veigar kills an enemy with this Ability, he gains @Spell.VeigarPassive:dQKillStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor>. Large minions and large monsters grant @Spell.VeigarPassive:dQKillStacksLarge@ stacks instead.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "APRatio",
+							"nameOverride": "spell_listtype_apratio"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [6.5, 6, 5.5, 5, 4.5, 4, 3.5],
 					"dataValues": {
@@ -73,6 +86,19 @@
 					"image": "assets/characters/veigar/hud/icons2d/veigardarkmatter.png",
 					"tooltip": "Veigar summons dark matter from the sky, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Every @Spell.VeigarPassive:PStacksPerDarkMatterCDR@ stacks of <keywordMajor>Phenomenal Evil</keywordMajor> reduce this Ability's Cooldown by @Spell.VeigarPassive:DarkMatterCDRIncrement*100@%.",
 					"tooltipExtended": "{{Spell_VeigarDarkMatter_Tooltip}}<br><br>Cooldown currently reduced by <statTracking>@f2.0*100@%</statTracking>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "APRatio",
+							"nameOverride": "spell_listtype_apratio"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
@@ -109,6 +135,15 @@
 					"objectName": "VeigarEventHorizon",
 					"image": "assets/characters/veigar/hud/icons2d/veigareventhorizon.png",
 					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @Effect1Amount@ seconds. The cage lasts for 3 seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_stunduration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [20, 20, 18.5, 17, 15.5, 14, 14],
 					"effectAmount": {
@@ -127,6 +162,16 @@
 					"objectName": "VeigarR",
 					"image": "assets/characters/veigar/hud/icons2d/veigarprimordialburst.png",
 					"tooltip": "Veigar blasts an enemy champion with primal magic to deal between <magicDamage>@MinDamage@ and @MaxDamage@ magic damage</magicDamage>, increasing with the target's missing Health. Damage is maximized against enemies below 33% Health.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "APRatio",
+							"nameOverride": "spell_listtype_apratio"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"dataValues": {
@@ -191,6 +236,9 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_apratio": "Total AP Ratio",
+		"spell_listtype_stunduration": "Stun Duration:",
 		"spell_veigarpassive_tooltip": "Veigar's Abilities grant him @dAbilityStacks@ stack of <keywordMajor>Phenomenal Evil</keywordMajor> when they strike enemy champions. Takedowns on champions grant an additional @dTakedownStacks@ stacks.<br><br>Each stack of <keywordMajor>Phenomenal Evil</keywordMajor> grants Veigar <scaleAP>@APPerStack@ Ability Power</scaleAP>."
 	}
 }

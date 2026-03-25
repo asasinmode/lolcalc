@@ -36,6 +36,19 @@
 					"objectName": "QuinnQ",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_q.png",
 					"tooltip": "Quinn orders Valor to dive, making the first enemy hit <keywordMajor>Vulnerable</keywordMajor>, reducing their vision radius for @Effect3Amount@ seconds and dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all surrounding enemies.<br><br>If the first enemy struck is not a champion, it is <status>Disarmed</status> for @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ADRatio",
+							"nameOverride": "spell_listtype_bonusadratio"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [11.5, 11, 10.5, 10, 9.5, 9, 9],
 					"dataValues": {
@@ -79,6 +92,16 @@
 					"objectName": "QuinnW",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Attacking a <keywordMajor>Vulnerable</keywordMajor> target grants Quinn <attackSpeed>@AttackSpeedBonus*100@% Attack Speed</attackSpeed> and <speed>@Effect3Amount*100@% Move Speed</speed> for @Effect1Amount@ seconds.<br><br><spellActive>Active:</spellActive> Valor reveals a large area nearby for @Effect5Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "AttackSpeedBonus",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"cooldownTime": [55, 50, 45, 40, 35, 30, 30],
 					"dataValues": {
 						"AttackSpeedBonus": [0.15, 0.28, 0.41, 0.54, 0.67, 0.8, 0.93],
@@ -102,6 +125,12 @@
 					"objectName": "QuinnE",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_e.png",
 					"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them <keywordMajor>Vulnerable</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @Effect1Amount*100@%, decaying over @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
 					"spellCalculations": {
@@ -137,6 +166,20 @@
 					"objectName": "QuinnR",
 					"image": "assets/characters/quinn/hud/icons2d/quinn_r1.png",
 					"tooltip": "Quinn calls to Valor, pairing up after channeling for 2 seconds gaining <speed>@MovementSpeedMod*100@% Move Speed</speed> and allowing her to <recast>Recast</recast> this Ability. Attacking or using <spellName>{{Spell_QuinnQ_Name}}</spellName> or <spellName>{{Spell_QuinnE_Name}}</spellName> automatically <recast>Recasts</recast> this Ability.<br><br><recast>Recast</recast>: Quinn and Valor perform an aerial maneuver, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, marking champions as <keywordMajor>Vulnerable</keywordMajor>, and ending this Ability.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "MovementSpeedMod",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "BaseCost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [100, 50, 0, 0, 0, 0],
 					"cooldownTime": [3, 3, 3, 3, 3, 3, 3],
 					"dataValues": {
@@ -207,6 +250,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_bonusadratio": "Bonus AD Ratio",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_manacost": "Mana Cost",
 		"spell_quinnpassive_tooltip": "Every @f1@ seconds, Valor marks a nearby enemy as <keywordMajor>Vulnerable</keywordMajor>, revealing it for @RevealDuration@ seconds and causing Quinn's next Attack against them to deal <physicalDamage>@BonusDamage@ bonus physical damage</physicalDamage>."
 	}
 }

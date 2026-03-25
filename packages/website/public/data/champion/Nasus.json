@@ -36,6 +36,12 @@
 					"objectName": "NasusQ",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_q.png",
 					"tooltip": "Nasus' next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Killing an enemy with this Attack permanently increases its damage by @BasicStacks@, increased to @BigStacks@ against champions, large minions and large jungle monsters.",
+					"extendedVariables": [
+						{
+							"type": "BonusDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						}
+					],
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [8.5, 7.5, 6.5, 5.5, 4.5, 3.5, 2.5],
 					"dataValues": {
@@ -108,6 +114,12 @@
 					"objectName": "NasusW",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_w.png",
 					"tooltip": "Nasus ages a champion, <status>Slowing</status> them by @SlowBase@%, increasing to @MaxSlowTooltipOnly@% over @Duration@ seconds. Their <attackSpeed>Attack Speed</attackSpeed> is also reduced by @AttackSpeedSlowMult*100@% of the <status>Slow</status>.",
+					"extendedVariables": [
+						{
+							"type": "MaxSlowTooltipOnly",
+							"nameOverride": "spell_listtype_maxslow"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [16, 15, 14, 13, 12, 11, 11],
 					"dataValues": {
@@ -129,6 +141,23 @@
 					"objectName": "NasusE",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_e.png",
 					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@Effect2Amount*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_armorreductionpercent"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 100],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"spellCalculations": {
@@ -182,6 +211,20 @@
 					"objectName": "NasusR",
 					"image": "assets/characters/nasus/hud/icons2d/nasus_r.png",
 					"tooltip": "Nasus becomes empowered in the sandstorm for 15 seconds, increasing his <healing>maximum Health by @BonusHealth@</healing> and <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resistance</scaleMR> by @InitialResistGain@.<br><br>While the storm rages, nearby enemies take <magicDamage>@DamageCalc@ of their maximum Health as magic damage</magicDamage> each second and <spellName>Siphoning Strike</spellName> has a @QCDR*100@% reduced Cooldown.",
+					"extendedVariables": [
+						{
+							"type": "BonusHealth",
+							"nameOverride": "spell_listtype_bonushealth"
+						},
+						{
+							"type": "AOEDamagePercent",
+							"nameOverride": "spell_listtype_maxhealthpercent"
+						},
+						{
+							"type": "InitialResistGain",
+							"nameOverride": "spell_nasusr_bonusresistances"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 0],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
@@ -249,5 +292,14 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_listtype_maxslow": "Max Slow",
+		"spell_listtype_initialdamage": "Initial Damage",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_armorreductionpercent": "Armor Reduction %",
+		"spell_listtype_bonushealth": "Bonus Health",
+		"spell_listtype_maxhealthpercent": "Max Health %",
+		"spell_nasusr_bonusresistances": "Bonus Armor and Magic Resistance"
+	}
 }

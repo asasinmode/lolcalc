@@ -36,6 +36,16 @@
 					"objectName": "MordekaiserQ",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserq.png",
 					"tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>@QDamage@ magic damage</magicDamage>, increased to <magicDamage>@EmpoweredDamageTooltip@</magicDamage> if it hits only a single enemy.",
+					"extendedVariables": [
+						{
+							"type": "QBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "IsolationScalar",
+							"nameOverride": "spell_mordekaiserq_isolation"
+						}
+					],
 					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"dataValues": {
 						"QBaseDamage": [45, 80, 115, 150, 185, 220, 255],
@@ -96,6 +106,12 @@
 					"objectName": "MordekaiserW",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserw.png",
 					"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>",
+					"extendedVariables": [
+						{
+							"type": "HealingPercent",
+							"nameOverride": "spell_mordekaiserw_damageconversion"
+						}
+					],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"Duration": [5, 5, 5, 5, 5, 5, 5],
@@ -152,6 +168,16 @@
 					"objectName": "MordekaiserE",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaisere.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains @MagicPen*100@% Magic Penetration.<br><br><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
+					"extendedVariables": [
+						{
+							"type": "MagicPen",
+							"nameOverride": "spell_mordekaisere_penetration"
+						},
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"cooldownTime": [18, 18, 16, 14, 12, 10, 10],
 					"dataValues": {
 						"Damage": [45, 60, 75, 90, 105, 120, 135],
@@ -188,6 +214,7 @@
 					"objectName": "MordekaiserR",
 					"image": "assets/characters/mordekaiser/hud/icons2d/mordekaiserr.png",
 					"tooltip": "Mordekaiser banishes a champion to the Death Realm with him for @SpiritRealmDuration@s, stealing @StatStealPercentScalar*100@% of their core stats for the duration.<br><br>If Mordekaiser kills that enemy in the Death Realm he consumes their soul, keeping the stats he stole until the target respawns.",
+					"extendedVariables": [],
 					"cooldownTime": [140, 140, 120, 100, 90, 80, 8],
 					"dataValues": {
 						"SpiritRealmDuration": [7, 7, 7, 7, 7, 7, 7],
@@ -299,6 +326,10 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_mordekaiserq_isolation": "Isolation Damage",
+		"spell_mordekaiserw_damageconversion": "Healing Percent",
+		"spell_mordekaisere_penetration": "Percent Magic Penetration",
 		"spell_mordekaiserpassive_tooltip": "Mordekaiser's Attacks deal an additional <magicDamage>@BonusAPAuto@ magic damage</magicDamage>.<br><br>Mordekaiser cloaks himself in negative energy after hitting 3 basic Abilities or Attacks against champions or jungle monsters. This cloak deals <magicDamage>@AuraDamagePerStack@ plus @PercentHealthForAura@% max Health magic damage per second</magicDamage> and grants him <speed>@PassiveMovementSpeed@ Move Speed</speed>."
 	}
 }

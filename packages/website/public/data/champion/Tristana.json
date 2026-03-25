@@ -36,6 +36,15 @@
 					"objectName": "TristanaQ",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_q.png",
 					"tooltip": "Tristana goes full-auto, gaining <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "AttackSpeedMod",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [21, 20, 19, 18, 17, 16, 16],
 					"dataValues": {
@@ -54,6 +63,15 @@
 					"objectName": "TristanaW",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_w.png",
 					"tooltip": "Tristana launches herself, dealing <magicDamage>@LandingDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowMod*-100@% for @SlowDuration@ seconds upon landing.<br><br>Champion takedowns and max stack <spellName>{{Spell_TristanaE_Name}}</spellName> detonations on champions refresh this Ability's Cooldown.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"dataValues": {
@@ -96,6 +114,19 @@
 					"objectName": "TristanaE",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>@PassiveDamage@ magic damage</magicDamage> to surrounding enemies.<br><br><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>@ActiveDamage@ physical damage</physicalDamage> to surrounding enemies after @ActiveDuration@ seconds. The damage is increased by @ActivePerStackAmp*100@% each time Tristana hits an Attack or Ability (max 4 stacks).<br><br>At @ActiveMaxStacks@ stacks, the bomb explodes immediately (max <physicalDamage>@ActiveMaxDamage@ physical damage</physicalDamage>).",
+					"extendedVariables": [
+						{
+							"type": "PassiveBaseDamage",
+							"nameOverride": "spell_listtype_tristanapassiveexplosiondamage"
+						},
+						{
+							"type": "ActiveBaseDamage",
+							"nameOverride": "spell_listtype_tristanabasechargedamage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 14],
 					"dataValues": {
@@ -198,6 +229,20 @@
 					"objectName": "TristanaR",
 					"image": "assets/characters/tristana/hud/icons2d/tristana_r.png",
 					"tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for @StunDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "KnockbackDistance",
+							"nameOverride": "spell_listtype_tristanaknockbackdistance"
+						},
+						{
+							"type": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 100, 100, 100, 100, 100],
 					"dataValues": {
@@ -255,6 +300,12 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_tristanapassiveexplosiondamage": "Passive Explosion Damage",
+		"spell_listtype_tristanabasechargedamage": "Base Charge Damage",
+		"spell_listtype_tristanaknockbackdistance": "Knockback Distance",
+		"spell_listtype_stunduration": "Stun Duration:",
 		"spell_tristanae_name": "Explosive Charge",
 		"spell_tristanar_name": "Buster Shot"
 	}

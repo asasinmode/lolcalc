@@ -36,6 +36,15 @@
 					"objectName": "AzirQWrapper",
 					"image": "assets/characters/azir/hud/icons2d/azir_q.png",
 					"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @Effect2Amount*-100@% for 1 second.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 80, 90, 100, 110, 110],
 					"cooldownTime": [14, 14, 12, 10, 8, 6, 6],
 					"dataValues": {
@@ -79,6 +88,22 @@
 					"objectName": "AzirW",
 					"image": "assets/characters/azir/hud/icons2d/azir_w.png",
 					"tooltip": "Azir summons a <keywordMajor>Sand Soldier</keywordMajor> for @Effect1Amount@ seconds. When Azir Attacks an enemy near a <keywordMajor>Sand Soldier</keywordMajor>, he instead orders the soldiers to stab, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> in their direction.<br><br>This Ability has @MaxAmmo@ charges.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_azirw_solderdamage"
+						},
+						{
+							"type": "APRatio",
+							"nameOverride": "spell_listtype_apratio"
+						},
+						{
+							"type": "AmmoRechargeTime"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 35, 30, 25, 20, 20],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"dataValues": {
@@ -146,6 +171,16 @@
 					"objectName": "AzirEWrapper",
 					"image": "assets/characters/azir/hud/icons2d/azir_e.png",
 					"tooltip": "Azir grants himself <shield>@TotalShield@ Shield</shield> for @Effect6Amount@ seconds and dashes to one of his <keywordMajor>Sand Soldiers</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through.<br><br>If Azir hits an enemy champion, he stops and gains a <keywordMajor>Sand Soldier</keywordMajor> charge.",
+					"extendedVariables": [
+						{
+							"type": "BaseShield",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [22, 22, 20.5, 19, 17.5, 16, 16],
 					"dataValues": {
@@ -200,6 +235,16 @@
 					"objectName": "AzirR",
 					"image": "assets/characters/azir/hud/icons2d/azir_r.png",
 					"tooltip": "Azir summons a wall of armored soldiers that charges forward, <status>Knocking Back</status> enemies and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The soldiers remain, blocking enemy paths for @Effect4Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "NumberOfSoldiers",
+							"nameOverride": "spell_listtype_azirrnumberofsoldiers"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [120, 120, 105, 90, 90, 90, 90],
 					"dataValues": {
@@ -286,6 +331,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_azirw_solderdamage": "Solder Attack Damage",
+		"spell_listtype_apratio": "Total AP Ratio",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_azirrnumberofsoldiers": "Number of Soldiers",
 		"spell_azirpassive_tooltip": "Azir can summon the <keywordMajor>Sun Disc</keywordMajor> from the rubble of a turret. The <keywordMajor>Sun Disc</keywordMajor> deals <magicDamage>@TowerDamage@ magic damage</magicDamage> and has @BonusResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> but disintegrates over @TowerDisintegrationTime@ seconds."
 	}
 }

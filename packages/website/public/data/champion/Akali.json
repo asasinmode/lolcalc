@@ -36,6 +36,16 @@
 					"objectName": "AkaliQ",
 					"image": "assets/characters/akali/hud/icons2d/akali_q.png",
 					"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_cost"
+						},
+						{
+							"type": "BaseDamageNamed",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [110, 100, 90, 80, 70, 60],
 					"cooldownTime": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 					"dataValues": {
@@ -86,6 +96,16 @@
 					"objectName": "AkaliW",
 					"image": "assets/characters/akali/hud/icons2d/akali_w.png",
 					"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
+					"extendedVariables": [
+						{
+							"type": "MovementSpeed",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "BaseDuration",
+							"nameOverride": "spell_listtype_duration"
+						}
+					],
 					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
 					"dataValues": {
 						"MovementSpeed": [25, 30, 35, 40, 45, 50, 55],
@@ -117,6 +137,12 @@
 					"objectName": "AkaliE",
 					"image": "assets/characters/akali/hud/icons2d/akali_e.png",
 					"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_akalie_basedamage1"
+						}
+					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [16, 16, 14.5, 13, 11.5, 10, 8.5],
 					"dataValues": {
@@ -183,6 +209,20 @@
 					"objectName": "AkaliR",
 					"image": "assets/characters/akali/hud/icons2d/akali_r.png",
 					"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"type": "R2BaseDamage",
+							"nameOverride": "spell_listtype_minimumdamage"
+						},
+						{
+							"type": "R2BaseDamage",
+							"nameOverride": "spell_listtype_maximumdamage"
+						}
+					],
 					"cooldownTime": [120, 120, 90, 60, 60, 60, 60],
 					"dataValues": {
 						"BaseDamage": [0, 110, 220, 330, 440, 550, 660],
@@ -341,6 +381,14 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_cost": "@AbilityResourceName@ Cost",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_duration": "Duration",
+		"spell_akalie_basedamage1": "Base Damage",
+		"spell_listtype_initialdamage": "Initial Damage",
+		"spell_listtype_minimumdamage": "Minimum Damage",
+		"spell_listtype_maximumdamage": "Maximum Damage",
 		"spell_akalip_tooltip": "When Akali hits an enemy champion with an Ability, she reveals a ring around them for 4 seconds and gains <speed>@PassiveSpeedBonus@ Move Speed</speed> towards the ring. Crossing the ring causes Akali's next Attack to have doubled range and deal an additional <magicDamage>@Damage@ magic damage</magicDamage>."
 	}
 }

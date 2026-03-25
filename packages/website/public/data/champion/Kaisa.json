@@ -36,6 +36,12 @@
 					"objectName": "KaisaQ",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_q.png",
 					"tooltip": "Kai'Sa launches @Effect2Amount@ missiles that split among nearby enemies, each dealing <physicalDamage>@TotalIndividualMissileDamage@ physical damage</physicalDamage>, up to a maximum of @MaxDamageDisplay@. Additional missile hits on champions or monsters deal @ExtraHitReduction*100@% damage.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead fires @Effect7Amount@ missiles.<br>Current: <physicalDamage>@f11.1@/@Effect6Amount@ Bonus Attack Damage</physicalDamage>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_kaisadamagepermissile"
+						}
+					],
 					"mana": [55, 55, 55, 55, 55, 55],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
@@ -207,6 +213,16 @@
 					"objectName": "KaisaW",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_w.png",
 					"tooltip": "Kai'Sa fires a void blast that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>, applies @Effect4Amount@ stacks of <keywordMajor>Plasma</keywordMajor>, and grants <keywordStealth>True Sight</keywordStealth> of the first enemy hit for @spell.KaisaPassive:PDuration@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead applies @Effect5Amount@ stacks of <keywordMajor>Plasma</keywordMajor> and hitting a champion reduces the Cooldown by @Effect3Amount@%.<br>Current: <scaleAP>@f2.1@/@Effect2Amount@ Ability Power</scaleAP>",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [55, 60, 65, 70, 75, 85],
 					"cooldownTime": [26, 22, 20, 18, 16, 14, 14],
 					"spellCalculations": {
@@ -248,6 +264,16 @@
 					"objectName": "KaisaE",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_e.png",
 					"tooltip": "Kai'Sa supercharges her void energy, gaining <speed>@TotalMoveSpeed@ Move Speed</speed> and becoming Ghosted while charging, then gaining <attackSpeed>@Effect5Amount*100@% Attack Speed</attackSpeed> for @Effect2Amount@ seconds.<br><br>Attacks reduce this Ability's Cooldown by @Effect4Amount@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa also becomes <keywordStealth>Invisible</keywordStealth> for @Effect7Amount@ seconds.<br>Current: <attackSpeed>@f10.1@%/@Effect6Amount@% Bonus Attack Speed</attackSpeed>",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_attackspeed"
+						}
+					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [17, 16, 14.5, 13, 11.5, 10, 11],
 					"spellCalculations": {
@@ -318,6 +344,20 @@
 					"objectName": "KaisaR",
 					"image": "assets/characters/kaisa/hud/icons2d/kaisa_r.png",
 					"tooltip": "Kai'Sa warps near an enemy champion affected by <keywordMajor>Plasma</keywordMajor> and gains <shield>@RCalculatedShieldValue@ Shield</shield> for @RShieldDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "RRange",
+							"nameOverride": "spell_listtype_range"
+						},
+						{
+							"type": "RBaseValue",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "RTotalADRatio",
+							"nameOverride": "spelllisttype_attackdamageratio"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [130, 130, 100, 70, 70, 70, 70],
 					"dataValues": {
@@ -424,6 +464,14 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_kaisadamagepermissile": "Damage Per Missile",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_manacost": "Mana Cost",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_range": "Range",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spelllisttype_attackdamageratio": "Attack Damage Ratio",
 		"spell_kaisapassive_tooltip": "Kai'Sa's Attacks stack <keywordMajor>Plasma</keywordMajor> for @PDuration@ seconds and deal an additional <magicDamage>@PBaseDamage@ plus @PCurrentPerStackDamage@ per stack magic damage</magicDamage>. Attacking an enemy with @PMaxStacks@ stacks consumes the <keywordMajor>Plasma</keywordMajor>, dealing <magicDamage>@PExecutePercentage@ missing Health magic damage</magicDamage>. Nearby allies apply @PAllyStacks@ stack to champions they <status>Immobilize</status>.<br><br>Kai'Sa's suit evolves her basic Abilities based on her stats.<br><spellName>Icathian Rain</spellName>: <physicalDamage>@f1.1@/@spell.KaisaQ:Effect6Amount@ Bonus Attack Damage</physicalDamage><br><spellName>Void Seeker</spellName>: <scaleAP>@f2.1@/@spell.KaisaW:Effect2Amount@ Ability Power</scaleAP><br><spellName>Supercharge</spellName>: <attackSpeed>@f3.1@%/@spell.KaisaE:Effect6Amount@% Bonus Attack Speed</attackSpeed>"
 	}
 }

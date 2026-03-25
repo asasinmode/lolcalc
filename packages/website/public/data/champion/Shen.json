@@ -36,6 +36,27 @@
 					"objectName": "ShenQ",
 					"image": "assets/characters/shen/hud/icons2d/shen_q.png",
 					"tooltip": "Shen recalls his <keywordMajor>Spirit Blade</keywordMajor>. Enemies hit by the pull are <status>Slowed</status> by @Effect4Amount@% while moving away from Shen for the next @Effect5Amount@ seconds.<br><br>Additionally, Shen's next @Effect3Amount@ Attacks deal an additional <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@BasePercentHealth@ max Health magic damage</magicDamage>. If Shen hit an enemy champion with the <keywordMajor>Spirit Blade</keywordMajor>, the damage is increased to <magicDamage>@BaseFlatDamage@</magicDamage> plus <magicDamage>@EmpPercentHealth@ max Health magic damage</magicDamage> and he gains <attackSpeed>@Effect9Amount@% Attack Speed</attackSpeed> for those Attacks.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_shenqbasepercentdamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_shenqenhancedpercentdamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_maxdamagetomonsters"
+						}
+					],
 					"mana": [140, 130, 120, 110, 100, 90],
 					"cooldownTime": [8.75, 8, 7.25, 6.5, 5.75, 5, 5],
 					"dataValues": {
@@ -141,6 +162,7 @@
 					"objectName": "ShenW",
 					"image": "assets/characters/shen/hud/icons2d/shen_w.png",
 					"tooltip": "Shen creates a defensive zone at his <keywordMajor>Spirit Blade</keywordMajor> for @Effect1Amount@ seconds. Attacks against allied champions in the zone are blocked. <br><br>If there are no champions to protect in the zone when it starts, it will wait for up to @Effect2Amount@ seconds.",
+					"extendedVariables": [],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [18.5, 16, 14.5, 13, 11.5, 10, 10],
 					"effectAmount": {
@@ -159,6 +181,12 @@
 					"objectName": "ShenE",
 					"image": "assets/characters/shen/hud/icons2d/shen_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Dealing damage with <spellName>Twilight Assault</spellName> or this Ability recovers <keywordMajor>@EnergyRefund@ Energy</keywordMajor>.<br><br><spellActive>Active:</spellActive> Shen dashes, <status>Taunting</status> champions and jungle monsters for @CCDuration@ seconds and dealing <physicalDamage>@TauntDamage@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [150, 150, 150, 150, 150, 150],
 					"cooldownTime": [20, 18, 16, 14, 12, 10, 10],
 					"dataValues": {
@@ -217,6 +245,16 @@
 					"objectName": "ShenR",
 					"image": "assets/characters/shen/hud/icons2d/shen_r.png",
 					"tooltip": "Shen grants an allied champion anywhere on the map between <shield>@Shield@</shield> and <shield>@MaxShield@ Shield</shield> based on their missing Health for @ShieldDuration@ seconds (max Shield at 60% missing Health). After channeling for @ChannelDuration@ seconds, Shen teleports to his ally's location with his <keywordMajor>Spirit Blade</keywordMajor>.",
+					"extendedVariables": [
+						{
+							"type": "BaseShieldAmount",
+							"nameOverride": "spell_listtype_minimumshield"
+						},
+						{
+							"type": "BaseShieldAmount",
+							"nameOverride": "spell_listtype_maximumshield"
+						}
+					],
 					"cooldownTime": [200, 200, 180, 160, 160, 160, 160],
 					"dataValues": {
 						"ArrivalPersonalSpace": [175, 175, 175, 175, 175, 175, 175],
@@ -366,5 +404,13 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_shenqbasepercentdamage": "Base Percent Damage",
+		"spell_listtype_shenqenhancedpercentdamage": "Enhanced Percent Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_maxdamagetomonsters": "Monster Damage Cap",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_minimumshield": "Minimum Shield Health",
+		"spell_listtype_maximumshield": "Maximum Shield Health"
+	}
 }

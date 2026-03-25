@@ -36,6 +36,16 @@
 					"objectName": "VolibearQ",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_q.png",
 					"tooltip": "Volibear gains <speed>@MinSpeedCalc@ Move Speed</speed>, doubled to <speed>@MaxSpeedCalc@</speed> towards enemy champions for the next @Duration@ seconds. While active, Volibear's next Attack deals <physicalDamage>@CalculatedDamage@ physical damage</physicalDamage> and <status>Stuns</status> the target for @StunDuration@ second.<br><br>Volibear becomes enraged if an enemy <status>Immobilizes</status> him before he <status>Stuns</status> a target, ending the Ability early but refreshing its Cooldown.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "MinSpeed",
+							"nameOverride": "spell_volibearq_rankup_speed"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [0, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
@@ -124,6 +134,23 @@
 					"objectName": "VolibearW",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_w.png",
 					"tooltip": "Volibear mauls an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them for @MarkDuration@ seconds.<br><br>If this Ability is used on a marked target, its damage is increased to <physicalDamage>@EmpoweredDamage@</physicalDamage> and Volibear restores <healing>@BaseHeal@ plus @PercentMissingHealthHealingRatio@ missing Health</healing>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseHeal",
+							"nameOverride": "spell_listtype_baseheal"
+						},
+						{
+							"type": "HealPercent",
+							"nameOverride": "spell_volibearw_rankup_percentheal"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
@@ -193,6 +220,20 @@
 					"objectName": "VolibearE",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_e.png",
 					"tooltip": "Volibear summons a thundercloud that fires a lightning bolt, dealing <magicDamage>@TotalDamageTooltip@ plus @PercentDamage*100@% max Health magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If Volibear is inside the blast zone, he gains a <shield>@ShieldAPRatioTooltip@ plus @ShieldAmount*100@% max Health Shield</shield> for @ShieldDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "PercentDamage",
+							"nameOverride": "spell_listtype_percentagedamage"
+						},
+						{
+							"type": "MonsterDamageCapBase",
+							"nameOverride": "spell_listtype_maxdamagetomonsters"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
@@ -287,6 +328,20 @@
 					"objectName": "VolibearR",
 					"image": "assets/characters/volibear/hud/icons2d/volibear_icon_r.png",
 					"tooltip": "Volibear transforms and leaps, gaining <healing>@HealthAmount@ Health</healing> and @BonusAttackRange@ Attack Range for the next @TransformDuration@ seconds.<br><br>Upon landing, Volibear cracks the earth, <status>Disabling</status> nearby towers for @TowerDisableDuration@ seconds and dealing <physicalDamage>@TowerDamageTooltip@ physical damage to them</physicalDamage>. Nearby enemies are <status>Slowed</status> by @SlowAmount*100@%, decaying over 1 second. Enemies directly underneath Volibear suffer <physicalDamage>@SweetSpotDamageTooltip@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "SweetSpotDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "HealthAmount",
+							"nameOverride": "spell_listtype_bonushealth"
+						},
+						{
+							"type": "TowerDisableDuration",
+							"nameOverride": "spell_volibearr_rankup_towerdisable"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [160, 160, 135, 110, 110, 110, 110],
 					"dataValues": {
@@ -471,5 +526,14 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_volibearq_rankup_speed": "Move Speed",
+		"spell_listtype_baseheal": "Base Heal",
+		"spell_volibearw_rankup_percentheal": "Missing Health Percent",
+		"spell_listtype_percentagedamage": "Percentage Damage",
+		"spell_listtype_maxdamagetomonsters": "Monster Damage Cap",
+		"spell_listtype_bonushealth": "Bonus Health",
+		"spell_volibearr_rankup_towerdisable": "Tower Disable Duration"
+	}
 }

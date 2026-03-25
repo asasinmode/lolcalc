@@ -36,6 +36,15 @@
 					"objectName": "VexQ",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_q01.png",
 					"tooltip": "Vex launches a wave of mist that deals <magicDamage>@QDamageCalc@ magic damage</magicDamage>. After a delay, the wave becomes smaller and faster.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [45, 50, 55, 60, 65, 65],
 					"cooldownTime": [8, 8, 7, 6, 5, 4, 4],
 					"dataValues": {
@@ -83,6 +92,16 @@
 					"objectName": "VexW",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_w01.png",
 					"tooltip": "Vex gains <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds and emits a shockwave that deals <magicDamage>@WDamageCalc@ magic damage</magicDamage>.<br><br>Consumes <keywordMajor>Gloom</keywordMajor> on enemies hit.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ShieldAmount",
+							"nameOverride": "spell_listtype_shield"
+						}
+					],
 					"mana": [75, 75, 75, 75, 75, 75],
 					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
@@ -132,6 +151,20 @@
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_e01.png",
 					"tooltip": "Vex commands Shadow to fly to a location, increasing in size as it travels. Upon arriving, it deals <magicDamage>@EDamageCalc@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Killing an enemy with this ability reduces <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown by @GloomCDNonChampTooltip*100@%.<br><br>Applies <keywordMajor>Gloom</keywordMajor> to enemies hit.",
 					"tooltipExtended": "{{Spell_VexE_Tooltip}}<br><br><rules>Killing a champion refunds @GloomCDChampTooltip*100@% of <keywordMajor>Doom'n Gloom's</keywordMajor> Cooldown instead.<br>Enemies <status>Feared</status> by this Ability move away from the center rather than from Vex.</rules>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "APRatio",
+							"nameOverride": "spell_listtype_apratio"
+						}
+					],
 					"mana": [70, 80, 90, 100, 110, 110],
 					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"dataValues": {
@@ -171,6 +204,20 @@
 					"objectName": "VexR",
 					"image": "assets/characters/vex/hud/icons2d/icons_vex_r01.png",
 					"tooltip": "Shadow excitedly surges forward, dealing <magicDamage>@spell.VexR:RDamageCalc@ magic damage</magicDamage> and marking the first enemy champion hit for 4 seconds.<br><br><recast>Recast</recast>: Dash to the marked champion, dealing <magicDamage>@spell.VexR:RecastDamageCalc@ magic damage</magicDamage> on arrival.<br><br>If the marked champion dies within @spell.VexR:TakedownWindow@ seconds of taking damage from this Ability, its Cooldown is temporarily reset.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "RecastDamage",
+							"nameOverride": "spell_listtype_recastdamage"
+						},
+						{
+							"type": "CastRange",
+							"nameOverride": "spell_listtype_range"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
@@ -336,6 +383,12 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_apratio": "Total AP Ratio",
+		"spell_listtype_recastdamage": "Recast Damage",
+		"spell_listtype_range": "Range",
 		"spell_vexp_tooltip": "Every @DoomCD@ seconds Vex becomes afflicted with Doom, causing her next basic Ability to <status>Knock Down</status> and <status>Fear</status> enemies for @FearDuration@ seconds.<br><br>Whenever a nearby enemy dashes or blinks, Vex marks them with <keywordMajor>Gloom</keywordMajor> for @GloomDuration@ seconds. Vex's next Attack against a <keywordMajor>Gloomed</keywordMajor> enemy deals an additional <magicDamage>@GloomProcCalc@ magic damage</magicDamage> and reduces this Ability's Cooldown by @GloomCDChamp*100@%."
 	}
 }

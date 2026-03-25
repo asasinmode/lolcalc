@@ -36,6 +36,23 @@
 					"objectName": "FlashFrost",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_q.png",
 					"tooltip": "Anivia fires a massive chunk of ice, dealing <magicDamage>@TotalPassthroughDamage@ magic damage</magicDamage> and <keywordMajor>Chilling</keywordMajor> enemies for @SlowDuration@ seconds, <status>Slowing</status> them by @Spell.GlacialStorm:SlowAmount@%. At the end of its range, the ice detonates, <status>Stunning</status> enemies for @StunDuration@ seconds and dealing <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>.<br><br>Anivia can <recast>Recast</recast> this ability while the ice flies to detonate it early.",
+					"extendedVariables": [
+						{
+							"type": "PassthroughBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ExplosionBaseDamage",
+							"nameOverride": "spell_listtype_aniviaflashfrostdetonationdamage"
+						},
+						{
+							"type": "StunDuration",
+							"nameOverride": "spell_listtype_stunduration"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [80, 85, 90, 95, 100, 100],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
@@ -82,6 +99,12 @@
 					"objectName": "Crystallize",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_w.png",
 					"tooltip": "Anivia summons a wall of ice @Effect2Amount@ units wide. The wall lasts for @Effect1Amount@ seconds before it melts.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_width"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [17, 17, 17, 17, 17, 17, 17],
 					"dataValues": {
@@ -107,6 +130,12 @@
 					"objectName": "Frostbite",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_e.png",
 					"tooltip": "Anivia blasts an enemy with a freezing wind, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Against <keywordMajor>Chilled</keywordMajor> enemies, Anivia deals <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
@@ -146,6 +175,24 @@
 					"objectName": "GlacialStorm",
 					"image": "assets/characters/anivia/hud/icons2d/anivia_r.png",
 					"tooltip": "<toggle>Toggle:</toggle> Anivia calls forth a driving rain of ice and hail that <status>Slows</status> enemies by @SlowAmount@% and deals <magicDamage>@TotalDamagePerSecond@ magic damage per second</magicDamage>. The storm increases in size over @GrowthTime@ seconds.<br><br>When the storm is fully formed, it <keywordMajor>Chills</keywordMajor>, <status>Slows</status> by @SlowPercentEmpoweredTT@%, and does <magicDamage>@EmpoweredDamagePerSecondTooltipOnly@ magic damage per second</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"type": "DamagePerSecond",
+							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "SlowPercentEmpoweredTT",
+							"nameOverride": "spell_listtype_aniviachilledslowamount"
+						},
+						{
+							"type": "ManaCostPerSecond",
+							"nameOverride": "spell_listtype_manacostpersecond"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [4, 4, 3, 2, 2, 2, 2],
 					"dataValues": {
@@ -266,5 +313,14 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_aniviaflashfrostdetonationdamage": "Detonation Damage",
+		"spell_listtype_stunduration": "Stun Duration:",
+		"spell_listtype_width": "Width",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_aniviachilledslowamount": "Chilled Slow Amount",
+		"spell_listtype_manacostpersecond": "Mana Cost Per Second"
+	}
 }

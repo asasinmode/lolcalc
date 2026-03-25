@@ -36,6 +36,20 @@
 					"objectName": "SylasQ",
 					"image": "assets/characters/sylas/hud/icons2d/sylasq.png",
 					"tooltip": "Sylas lashes his chains out, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmountCalc@ for @SlowDuration@ seconds. The place where the chains intersect explodes, dealing a further <magicDamage>@ExplosionDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ExplosionBaseDamage",
+							"nameOverride": "spell_listtype_explosiondamage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [55, 55, 55, 55, 55, 55],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
@@ -97,6 +111,19 @@
 					"objectName": "SylasW",
 					"image": "assets/characters/sylas/hud/icons2d/sylasw.png",
 					"tooltip": "Sylas lunges at an enemy with magical force dealing <magicDamage>@MinDamage@ magic damage</magicDamage>. Against champions, Sylas restores between <healing>@MinHealing@</healing> and <healing>@MaxHealing@ Health</healing> based on his missing Health (max healing at or below @MaxExecuteThreshold*100@% Health).",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Healing",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 60, 70, 80, 90, 100],
 					"cooldownTime": [12, 12, 10.5, 9, 7.5, 6, 5.25],
 					"dataValues": {
@@ -158,6 +185,12 @@
 					"objectName": "SylasE",
 					"image": "assets/characters/sylas/hud/icons2d/sylase.png",
 					"tooltip": "Sylas quickly dashes, and prepares a <recast>Recast</recast> for 3.5 seconds.<br><br><recast>Recast:</recast> Sylas throws his chains, pulling himself to the first enemy hit, dealing <magicDamage>@Damage@ magic damage</magicDamage>, and <status>Knocking Up</status> for @KnockUpDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "PullDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"dataValues": {
@@ -191,6 +224,7 @@
 					"objectName": "SylasR",
 					"image": "assets/characters/sylas/hud/icons2d/sylasr.png",
 					"tooltip": "Sylas hijacks an enemy champion, allowing him to cast a copy of their ultimate Ability, based on his Ultimate level and using his stats.<br><br>Hijacking an enemy places a Cooldown on them for @PerTargetCooldown@% (modified by Sylas' Ability Haste) of the enemy's ultimate's Cooldown, with a minimum of @MinimumEnemyCooldown@ seconds, during which time Sylas cannot hijack them again.",
+					"extendedVariables": [],
 					"mana": [75, 75, 75, 75, 75, 75],
 					"cooldownTime": [80, 80, 55, 30, 10, 10, 10],
 					"dataValues": {
@@ -269,5 +303,10 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_explosiondamage": "Explosion Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_healing": "Healing"
+	}
 }

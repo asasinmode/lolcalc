@@ -36,6 +36,12 @@
 					"objectName": "OrianaIzunaCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaq.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [35, 35, 35, 35, 35, 35],
 					"cooldownTime": [6.75, 6, 5.25, 4.5, 3.75, 3, 3],
 					"spellCalculations": {
@@ -81,6 +87,23 @@
 					"objectName": "OrianaDissonanceCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannaw.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to release an electric pulse, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to surrounding enemies.<br><br>The pulse leaves behind an energy field for @FieldDuration@ seconds, <status>Slowing</status> enemies by @SlowAmount*100@% and granting allies <speed>@HasteAmount*100@% Move Speed</speed>, decaying over @SlowAndHasteDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "HasteAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
@@ -118,6 +141,24 @@
 					"objectName": "OrianaRedactCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannae.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_armorbonus"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_magicresistbonus"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_shieldamount"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"spellCalculations": {
@@ -167,6 +208,12 @@
 					"objectName": "OrianaDetonateCommand",
 					"image": "assets/characters/orianna/hud/icons2d/oriannar.png",
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to unleash a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and <status>Knocking</status> them in the direction of the <keywordMajor>Ball</keywordMajor>.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 95, 80, 80, 80, 80],
 					"dataValues": {
@@ -247,5 +294,12 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_armorbonus": "Armor Bonus",
+		"spell_listtype_magicresistbonus": "Magic Resist Bonus",
+		"spell_listtype_shieldamount": "Shield Amount"
+	}
 }

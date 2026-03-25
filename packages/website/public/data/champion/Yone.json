@@ -36,6 +36,12 @@
 					"objectName": "YoneQ",
 					"image": "assets/characters/yone/hud/icons2d/yoneq.png",
 					"tooltip": "Yone thrusts forward, dealing <physicalDamage>@QDamage@ physical damage</physicalDamage>.<br><br>On hit, grants a stack for @BuffDuration@ seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for @Q3KnockupDuration@ seconds and deals <physicalDamage>@QDamage@ physical damage</physicalDamage>. ",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						}
+					],
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
 						"BaseDamage": [0, 25, 50, 75, 100, 125, 150],
@@ -97,6 +103,16 @@
 					"objectName": "YoneW",
 					"image": "assets/characters/yone/hud/icons2d/yonew.png",
 					"tooltip": "Yone cleaves forward, dealing <physicalDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health physical damage</physicalDamage> and <magicDamage>@BaseDamage*0.5@ + @MaxHealthDamage*50@% max Health magic damage</magicDamage>.<br><br>If Yone hits, he gains <shield>@WShield@ Shield</shield> for @ShieldDuration@ seconds. The amount of <shield>Shield</shield> increases for each champion struck. ",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						},
+						{
+							"type": "MaxHealthDamage",
+							"nameOverride": "spell_yonew_maxhealthdamage"
+						}
+					],
 					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
 						"BaseDamage": [0, 10, 20, 30, 40, 50, 60],
@@ -202,6 +218,12 @@
 					"objectName": "YoneE",
 					"image": "assets/characters/yone/hud/icons2d/yonee.png",
 					"tooltip": "Yone enters a spirit form for @ReturnTimer@ seconds, leaving his body behind for the duration and gaining <speed>@StartingMS*100@%</speed> to <speed>@MovementSpeed*100@% ramping Move Speed</speed>. <br><br>When the spirit form ends, Yone snaps back to his body and repeats @DeathmarkPercent*100@% of all Attack and Ability damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br><br><recast>Recast: </recast>End spirit form early.",
+					"extendedVariables": [
+						{
+							"type": "DeathmarkPercent",
+							"nameOverride": "spell_yonee_repeatdamage"
+						}
+					],
 					"cooldownTime": [22, 22, 19, 16, 13, 10, 10],
 					"dataValues": {
 						"ReturnTimer": [5, 5, 5, 5, 5, 5, 5],
@@ -242,6 +264,12 @@
 					"objectName": "YoneR",
 					"image": "assets/characters/yone/hud/icons2d/yoner.png",
 					"tooltip": "Yone strikes all enemies along a path for <physicalDamage>@TooltipDamage@ physical damage</physicalDamage> and <magicDamage>@TooltipDamage@ magic damage</magicDamage>, teleporting behind the last champion hit and <status>Knocking Up</status> victims towards Yone.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						}
+					],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
 						"BaseDamage": [0, 200, 400, 600, 800, 1000, 1200],
@@ -314,6 +342,9 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_yonew_maxhealthdamage": "Total Max Health Damage",
+		"spell_yonee_repeatdamage": "Repeated Damage",
 		"spell_yonepassive_tooltip": "<spellPassive>Steel and Spirit:</spellPassive> Yone uses two blades, causing every second Attack to deal <magicDamage>@MagicDamageSplit*100@% magic damage</magicDamage>.<br><br><spellPassive>Intent:</spellPassive> Yone's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YoneCritToAD*.01@ Bonus AD</physicalDamage> for every 1% Critical Strike Chance above 100%."
 	}
 }

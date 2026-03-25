@@ -36,6 +36,19 @@
 					"objectName": "ZiggsQ",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsq.png",
 					"tooltip": "Ziggs throws a bouncing bomb that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "APRatio",
+							"nameOverride": "spell_listtype_apratio"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [6.5, 6, 5.5, 5, 4.5, 4, 4],
 					"dataValues": {
@@ -79,6 +92,16 @@
 					"objectName": "ZiggsW",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsw.png",
 					"tooltip": "Ziggs flings an explosive charge that detonates after @BombDuration@ seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br><br>Satchel Charge will automatically destroy towers below @TurretDestroyPercent*100@% of their Health.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "TurretDestroyPercent",
+							"nameOverride": "spell_ziggsw_towerdestructionthreshold"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 12],
 					"dataValues": {
@@ -123,6 +146,23 @@
 					"objectName": "ZiggsE",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggse.png",
 					"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @Effect4Amount@ seconds. Mines last @MineDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "DamagePerMine",
+							"nameOverride": "spell_listtype_ziggseminedamage"
+						},
+						{
+							"type": "APRatioPerMine",
+							"nameOverride": "spell_listtype_apratio"
+						},
+						{
+							"type": "Slow",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 80, 90, 100, 110, 120],
 					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
@@ -173,6 +213,16 @@
 					"objectName": "ZiggsR",
 					"image": "assets/characters/ziggs/hud/icons2d/ziggsr.png",
 					"tooltip": "Ziggs hurls his ultimate creation, dealing <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> in the center of the blast radius, or <magicDamage>@BlastDamage@ magic damage</magicDamage> at the edge.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_ziggsrdamage"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [120, 120, 95, 70, 70, 70, 70],
 					"dataValues": {
@@ -279,5 +329,12 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_apratio": "Total AP Ratio",
+		"spell_ziggsw_towerdestructionthreshold": "Tower Destruction Threshold",
+		"spell_listtype_ziggseminedamage": "Mine Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_ziggsrdamage": "Blast Zone Damage"
+	}
 }

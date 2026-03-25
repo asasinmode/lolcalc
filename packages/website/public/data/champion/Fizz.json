@@ -36,6 +36,12 @@
 					"objectName": "FizzQ",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_q.png",
 					"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 6],
 					"spellCalculations": {
@@ -83,6 +89,28 @@
 					"objectName": "FizzW",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_w.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: Fizz's Attacks cause his enemies to bleed, dealing <magicDamage>@DoTDamage@ magic damage</magicDamage> over @BleedDuration@ seconds. <br><br><spellActive>Active</spellActive>: Fizz's next Attack deals an additional <magicDamage>@ActiveDamage@ magic damage</magicDamage>. If this Attack kills its target, Fizz refunds <scaleMana>@OnKillManaRefund@ Mana</scaleMana> and reduces the cooldown of this Ability to @OnKillNewCooldown@ second. If it does not kill, Fizz's Attacks deal an additional <magicDamage>@OnHitBuffDamage@ magic damage</magicDamage> for @OnHitBuffDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "DoTBaseDamage",
+							"nameOverride": "spell_listtype_passivedamage"
+						},
+						{
+							"type": "ActiveBaseDamage",
+							"nameOverride": "spell_listtype_activedamage"
+						},
+						{
+							"type": "OnHitBuffBaseDamage",
+							"nameOverride": "spell_listtype_onhitdamage"
+						},
+						{
+							"type": "OnKillManaRefund",
+							"nameOverride": "spell_listtype_manarefund"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_cost"
+						}
+					],
 					"mana": [30, 40, 50, 60, 70, 80],
 					"cooldownTime": [7, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
@@ -152,6 +180,20 @@
 					"objectName": "FizzE",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_e1.png",
 					"tooltip": "Fizz hops onto his trident, becoming Untargetable for 0.75 seconds, after which he deals <magicDamage>@EDamage@ magic damage</magicDamage> to nearby enemies and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>Fizz can <recast>Recast</recast> this Ability while Untargetable to dash again, which ends the effect early, deals damage in a smaller area, and doesn't <status>Slow</status>.",
+					"extendedVariables": [
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_cost"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [75, 80, 85, 90, 95, 100],
 					"cooldownTime": [16, 16, 14, 12, 10, 8, 6],
 					"dataValues": {
@@ -187,6 +229,20 @@
 					"objectName": "FizzR",
 					"image": "assets/characters/fizz/hud/icons2d/fizz_r.png",
 					"tooltip": "Fizz launches a fish that attaches to the first champion hit. The victim is afflicted with <keywordStealth>True Sight</keywordStealth> and <status>Slowed</status> by between 40% to 80% based on how far the fish travelled before attaching. <br><br>After @DetonationTime@ seconds a shark erupts on the target, <status>Knocking Up</status> the target with the fish for 1 second, <status>Knocking Back</status> everything else, and dealing between <magicDamage>@SmallSharkDamage@ to @BigSharkDamage@ magic damage</magicDamage> based on how far the fish travelled before attaching.",
+					"extendedVariables": [
+						{
+							"type": "SmallDamage",
+							"nameOverride": "spell_fizzr_smallfishdamage"
+						},
+						{
+							"type": "SmallDamage",
+							"nameOverride": "spell_fizzr_mediumfishdamage"
+						},
+						{
+							"type": "SmallDamage",
+							"nameOverride": "spell_fizzr_largefishdamage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 0],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
@@ -289,6 +345,16 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_passivedamage": "Passive Damage",
+		"spell_listtype_activedamage": "Active Damage",
+		"spell_listtype_onhitdamage": "On-Hit Damage",
+		"spell_listtype_manarefund": "Mana Refund",
+		"spell_listtype_cost": "@AbilityResourceName@ Cost",
+		"spell_listtype_slow": "Slow",
+		"spell_fizzr_smallfishdamage": "Small Shark Damage",
+		"spell_fizzr_mediumfishdamage": "Medium Shark Damage",
+		"spell_fizzr_largefishdamage": "Big Shark Damage",
 		"spell_fizzpassive_tooltip": "Fizz is Ghosted and takes @DamageReductionCalc@ reduced damage from all sources."
 	}
 }

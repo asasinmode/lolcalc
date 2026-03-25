@@ -36,6 +36,12 @@
 					"objectName": "BrandQ",
 					"image": "assets/characters/brand/hud/icons2d/brandq.png",
 					"tooltip": "Brand launches a fireball that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for @StunDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [8.5, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
@@ -71,6 +77,15 @@
 					"objectName": "BrandW",
 					"image": "assets/characters/brand/hud/icons2d/brandw.png",
 					"tooltip": "Brand creates a pillar of pure fire, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Units that are <keywordMajor>Ablaze</keywordMajor> take <magicDamage>@EmpoweredDamage@ damage</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [10.5, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
@@ -115,6 +130,15 @@
 					"objectName": "BrandE",
 					"image": "assets/characters/brand/hud/icons2d/brande.png",
 					"tooltip": "Brand conjures a powerful blast at his target, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> to surrounding units.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, the spread range is doubled.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 9],
 					"dataValues": {
@@ -150,6 +174,16 @@
 					"objectName": "BrandR",
 					"image": "assets/characters/brand/hud/icons2d/brandr.png",
 					"tooltip": "Brand unleashes a devastating torrent of fire that can bounce to Brand or another enemy up to 5 times, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies each bounce. Bounces prioritize stacking <keywordMajor>Blaze</keywordMajor> to max on champions.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they are briefly <status>Slowed</status> by @SlowAmount@%.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_branddamageperbounce"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [100, 100, 90, 80, 80, 80, 80],
 					"dataValues": {
@@ -309,6 +343,9 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_branddamageperbounce": "Damage per Bounce",
+		"spell_listtype_slow": "Slow",
 		"spell_brandpassive_tooltip": "Brand's Abilities light his targets <keywordMajor>Ablaze</keywordMajor>, dealing <magicDamage>@PercentHealthDamage@% max Health magic damage</magicDamage> over 4 seconds. If Brand kills a unit that is <keywordMajor>Ablaze</keywordMajor>, he regains <scaleMana>@ManaRestore@ mana</scaleMana>. <keywordMajor>Blaze</keywordMajor> can stack up to 3 times.<br><br>When a champion or large jungle monster reaches 3 stacks, the <keywordMajor>Blaze</keywordMajor> will detonate after 2 seconds, dealing <magicDamage>@ExplosionDamage@ max Health magic damage</magicDamage> to surrounding enemies."
 	}
 }

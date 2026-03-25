@@ -36,6 +36,20 @@
 					"objectName": "NunuQ",
 					"image": "assets/characters/nunu/hud/icons2d/nunuq.png",
 					"tooltip": "Nunu asks Willump to take a bite of an enemy, dealing <trueDamage>@MonsterMinionDamage@ true damage</trueDamage> and restoring <healing>@MonsterHealing@ Health</healing> when used against a minion or jungle monster. Against a champion, it instead deals <magicDamage>@TotalChampionDamage@ magic damage</magicDamage> and restores <healing>@ChampionHealing@ Health</healing>.<br><br>The <healing>healing</healing> is increased by @LowHealthHealingScalar*100@% when Nunu and Willump are below @LowHealthThreshhold*100@% Health.",
+					"extendedVariables": [
+						{
+							"type": "MonsterMinionDamage",
+							"nameOverride": "spell_nunuq_monsterdamage"
+						},
+						{
+							"type": "ChampionDamage",
+							"nameOverride": "spell_nunuq_championdamage"
+						},
+						{
+							"type": "BaseHealing",
+							"nameOverride": "spell_listtype_heal"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [13, 13, 12, 11, 10, 9, 8],
 					"dataValues": {
@@ -106,6 +120,15 @@
 					"objectName": "NunuW",
 					"image": "assets/characters/nunu/hud/icons2d/nunuw1.png",
 					"tooltip": "Nunu and Willump create a snowball that grows in size and speed as they roll it. They turn slower while rolling it, but can increase turning speed by holding the turn.<br><br>The snowball does between <magicDamage>@NoImpactSnowballDamage@</magicDamage> and <magicDamage>@MaximumSnowballDamage@ magic damage</magicDamage>, and <status>Knocks Up</status> for between @BaseKnockupDuration@ and @MaximumStunDuration@ seconds when it collides with a champion, large monster or wall. These values scale up with distance rolled.<br><br>Nunu and Willump can <recast>Recast</recast> to let the snowball go early.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_basedamage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
@@ -190,6 +213,20 @@
 					"objectName": "NunuE",
 					"image": "assets/characters/nunu/hud/icons2d/nunue.png",
 					"tooltip": "Nunu throws three snowballs, dealing <magicDamage>@TotalSnowballDamage@ magic damage</magicDamage> per snowball and <status>Slowing</status> enemies hit by all three by @SlowAmount*-100@% for @SlowDuration@ second. Nunu can <recast>Recast</recast> this up to twice more.<br><br>After @TotalSpellDuration@ seconds, Nunu <status>Roots</status> all nearby enemies that had been <status>Slowed</status> by the snowballs for @RootDuration@ seconds and deals an additional <magicDamage>@TotalRootDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_movementslow"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 70],
 					"cooldownTime": [14, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
@@ -250,6 +287,16 @@
 					"objectName": "NunuR",
 					"image": "assets/characters/nunu/hud/icons2d/nunu_r.png",
 					"tooltip": "Nunu and Willump channel a powerful blizzard for up to @ChannelDuration@ seconds. Enemies inside are <status>Slowed</status> by @SlowStartAmount*-100@%, increasing to @MaxSlowAmount*-100@% over the duration. Nunu and Willump also gain <shield>@TotalShieldAmount@ Shield</shield> for the duration before decaying over @ShieldDecayDuration@ seconds afterwards.<br><br>When the blizzard ends, it detonates, dealing up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> based on channel time. Nunu and Willump can <recast>Recast</recast> to end the blizzard early.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseShieldAmount",
+							"nameOverride": "spell_listtype_shieldamount"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 100, 90, 90, 90, 90],
 					"dataValues": {
@@ -342,6 +389,14 @@
 		}
 	},
 	"stringtable": {
+		"spell_nunuq_monsterdamage": "Monster Damage",
+		"spell_nunuq_championdamage": "Champion Damage",
+		"spell_listtype_heal": "Heal",
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_movementslow": "Movement Slow",
+		"spell_listtype_manacost": "Mana Cost",
+		"spell_listtype_shieldamount": "Shield Amount",
 		"spell_nunupassive_tooltip": "When Nunu and Willump deal damage to champions, large jungle monsters, or structures, they and a nearby ally gain <attackSpeed>@ASIncrease*100@% Attack Speed</attackSpeed> and <speed>@MSIncrease*100@% Move Speed</speed> for 4 seconds.<br><br>Willump's Attacks deal an additional <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to other nearby enemies while he has this buff."
 	}
 }

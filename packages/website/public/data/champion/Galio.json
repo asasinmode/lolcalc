@@ -36,6 +36,15 @@
 					"objectName": "GalioQ",
 					"image": "assets/characters/galio/hud/icons2d/galio_q.png",
 					"tooltip": "Galio fires two windblasts that deal <magicDamage>@QMissileDamage@ magic damage</magicDamage> each. When the windblasts meet, they combine into a tornado that deals <magicDamage>@PercentSuperQDamageTT@% max Health magic damage</magicDamage> over @SuperQDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_galioq_windblastdamage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
@@ -103,6 +112,24 @@
 					"objectName": "GalioW",
 					"image": "assets/characters/galio/hud/icons2d/galio_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Galio gains a <shield>@TotalPassiveShield@ Magic Shield</shield> after not taking damage for @PassiveShieldOOCTimer@ seconds.<br><br><charge>Begin Charging:</charge> Galio reduces incoming magic damage by @MagicDamageReduction@ and incoming physical damage by @PhysicalDamageReduction@ and <status>Slows</status> himself by @Effect3Amount@%.<br><br><release>Release:</release> Galio <status>Taunts</status> enemy champions for between @Effect4Amount@ to @Effect7Amount@ seconds, deals between <magicDamage>@MinTotalDamage@</magicDamage> and <magicDamage>@MaxTotalDamage@ magic damage</magicDamage>, and refreshes the damage reduction for @Effect8Amount@ seconds. Taunt duration, damage, and range increase with charge time.",
+					"extendedVariables": [
+						{
+							"type": "PassiveShieldHealthRatio",
+							"nameOverride": "spell_listtype_shieldhealthratio"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_magicdamagereduction"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_physicaldamagereduction"
+						},
+						{
+							"type": "MaximumWBaseDamage",
+							"nameOverride": "spell_listtype_maximumdamage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [18, 18, 17, 16, 15, 14, 14],
 					"dataValues": {
@@ -218,6 +245,12 @@
 					"objectName": "GalioE",
 					"image": "assets/characters/galio/hud/icons2d/galio_e.png",
 					"tooltip": "Galio lunges forward with a mighty blow, <status>Knocking Up</status> for @KnockupDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first champion hit. Other enemies in the way take <magicDamage>@PVEDamage@ magic damage</magicDamage>.<br><br>Galio's dash stops on hitting terrain.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [11, 11, 10, 9, 8, 7, 7],
 					"dataValues": {
@@ -257,6 +290,15 @@
 					"objectName": "GalioR",
 					"image": "assets/characters/galio/hud/icons2d/galio_r.png",
 					"tooltip": "Galio designates an allied champion's position as his landing spot, granting all allied champions in the area <spellName>Shield of Durand's</spellName> passive <shield>Shield</shield> for @TemporaryWShieldDuration@ seconds. Galio then flies to his landing zone.<br><br>When Galio lands, he <status>Knocks Up</status> for @StunDurationOuter@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "CastRange"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [180, 180, 160, 140, 140, 140, 140],
 					"dataValues": {
@@ -338,5 +380,12 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_galioq_windblastdamage": "Windblast Damage",
+		"spell_listtype_shieldhealthratio": "Shield Health Ratio",
+		"spell_listtype_magicdamagereduction": "Magic Damage Reduction",
+		"spell_listtype_physicaldamagereduction": "Physical Damage Reduction",
+		"spell_listtype_maximumdamage": "Maximum Damage",
+		"spell_listtype_damage": "Damage"
+	}
 }

@@ -36,6 +36,12 @@
 					"objectName": "NamiQ",
 					"image": "assets/characters/nami/hud/icons2d/namiq.png",
 					"tooltip": "Nami hurls a bubble, <status>Stunning</status> for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTT@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [60, 60, 60, 60, 60, 60],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
@@ -73,6 +79,19 @@
 					"objectName": "NamiW",
 					"image": "assets/characters/nami/hud/icons2d/namiw.png",
 					"tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to @MaxTargets@ targets.<li>Restores <healing>@TotalHeal@ Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.<br>The damage and healing value is modified by @BounceScaling@ each bounce. ",
+					"extendedVariables": [
+						{
+							"type": "BaseHeal",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 90],
 					"dataValues": {
 						"BaseDamage": [25, 60, 95, 130, 165, 200, 235],
@@ -139,6 +158,19 @@
 					"objectName": "NamiE",
 					"image": "assets/characters/nami/hud/icons2d/namie.png",
 					"tooltip": "Nami empowers an allied champion's next @HitCount@ Attacks and Abilities for @BuffDuration@ seconds, causing them to <status>Slow</status> their targets by @TotalSlow@ for @SlowDuration@s and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseSlow",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [55, 60, 65, 70, 75, 80],
 					"cooldownTime": [11, 11, 11, 11, 11, 11, 11],
 					"dataValues": {
@@ -211,6 +243,12 @@
 					"objectName": "NamiR",
 					"image": "assets/characters/nami/hud/icons2d/namir.png",
 					"tooltip": "Nami summons a tidal wave, <status>Knocking Up</status> for 0.5 seconds, <status>Slowing</status> by @Effect4Amount@%, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The duration of the <status>Slow</status> increases based on distance the wave traveled, up to @Effect5Amount@ seconds.<br><br>Allies hit by the wave gain double the effect of <spellName>Surging Tides</spellName>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [10, 120, 110, 100, 10, 10, 10],
 					"dataValues": {
@@ -276,5 +314,9 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_healing": "Healing",
+		"spell_listtype_slow": "Slow"
+	}
 }

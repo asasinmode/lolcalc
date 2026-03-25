@@ -36,6 +36,12 @@
 					"objectName": "NilahQ",
 					"image": "assets/characters/nilah/hud/icons2d/nilahq.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nilah gains @CritArmorPen@ Armor Penetration, and her Attacks against champions restore <healing>@CritLifesteal@ damage dealt as Health</healing>. Overhealing from this is converted into a <shield>Shield</shield> for @ShieldDuration@ seconds.<br><br><spellActive>Active:</spellActive> Nilah cracks her whip-blade, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage>. If an enemy unit or structure is hit, Nilah gains 125 Attack Range and <attackSpeed>@BonusAttackSpeedCalc@% Attack Speed</attackSpeed>, and her Attacks hit in a cone for @BuffDuration@ seconds.<br>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
@@ -141,6 +147,15 @@
 					"objectName": "NilahW",
 					"image": "assets/characters/nilah/hud/icons2d/nilahw.png",
 					"tooltip": "Nilah envelops herself in mist for @BaseDuration@ seconds, becoming Ghosted, gaining <speed>@MoveSpeedPercent*100@% Move Speed</speed>, dodging Attacks, and reducing <magicDamage>magic damage</magicDamage> taken by @MagicDamageReduction*100@%.<br><br>While active, touching allied champions envelops them in mist, granting the same benefits for @ShareBaseDuration@ seconds.<br>",
+					"extendedVariables": [
+						{
+							"type": "MoveSpeedPercent",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 45, 30, 15, 0, 0],
 					"cooldownTime": [26, 26, 25, 24, 23, 22, 21],
 					"dataValues": {
@@ -163,6 +178,15 @@
 					"objectName": "NilahE",
 					"image": "assets/characters/nilah/hud/icons2d/nilahe.png",
 					"tooltip": "Nilah dashes through a unit, dealing <physicalDamage>@DashDamage@ physical damage</physicalDamage> to any enemies she passes through.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "AmmoRechargeTime"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
@@ -198,6 +222,16 @@
 					"objectName": "NilahR",
 					"image": "assets/characters/nilah/hud/icons2d/nilahr.png",
 					"tooltip": "Nilah whirls her whip-blade, dealing <physicalDamage>@DamagePerTickCalcTooltip@ physical damage</physicalDamage> over 1 second, then finishes with a burst of <physicalDamage>@DamageCalc@ physical damage</physicalDamage> that also <status>Pulls</status> nearby enemies toward her.<br><br>Apotheosis heals Nilah and her nearby allies for <healing>@ChampHealingPercent@ (+@spell.NilahQ:CritLifesteal@ {{ Spell_NilahQ_Name }}) of the damage dealt</healing> to enemy champions, converting any overhealing into a <shield>Shield</shield> for @Duration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "DamageBase",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "DamagePerTick",
+							"nameOverride": "spell_listtype_damageovertime"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 95, 80, 160, 160, 100],
 					"dataValues": {
@@ -300,5 +334,9 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_damageovertime": "Damage Over Time"
+	}
 }

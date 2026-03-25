@@ -36,6 +36,24 @@
 					"objectName": "BelvethQ",
 					"image": "assets/characters/belveth/hud/icons2d/bv_q_1.png",
 					"tooltip": "Bel'Veth dashes, dealing <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to enemies she passes through.<br><br>Each direction has an unique Cooldown of @f1@ seconds that scales down based on her <attackSpeed>Attack Speed</attackSpeed>.<br>",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "PerSideCooldown",
+							"nameOverride": "spell_listtype_cooldownperside"
+						},
+						{
+							"type": "MonsterMod",
+							"nameOverride": "spell_listtype_monsterdamage"
+						},
+						{
+							"type": "MinonMod",
+							"nameOverride": "spell_listtype_miniondamage"
+						}
+					],
 					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"dataValues": {
 						"PerSideCooldown": [16, 16, 15, 14, 13, 12, 11],
@@ -92,6 +110,16 @@
 					"objectName": "BelvethW",
 					"image": "assets/characters/belveth/hud/icons2d/belvethw.png",
 					"tooltip": "Bel'Veth slams her tail, dealing <magicDamage>@Damage@ magic damage</magicDamage>, <status>Knocking Up</status> foes for @Duration@ seconds, and <status>Slowing</status> them by @SlowPercent*100@% for @SlowDuration@ seconds. If a champion is hit, this refreshes the Cooldown of <spellName>Void Surge</spellName> in that direction.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowDuration",
+							"nameOverride": "spell_listtype_slowduration"
+						}
+					],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"Duration": [0.75, 0.75, 0.75, 0.75, 0.75, 0.75, 0.75],
@@ -132,6 +160,16 @@
 					"objectName": "BelvethE",
 					"image": "assets/characters/belveth/hud/icons2d/belvethe.png",
 					"tooltip": "Bel'Veth channels and slashes around herself, gaining @DRPercent*100@% Damage Reduction, @TotalLifesteal@ Life Steal, and Attacking @f2.0@ times over @TotalDuration@ seconds with the number of Attacks increasing based on her <attackSpeed>Attack Speed</attackSpeed>. Each Attack strikes the lowest-health enemy, dealing <physicalDamage>@DamagePerStrike@</physicalDamage> to <physicalDamage>@MaxDamagePerStrikeTooltip@ physical damage</physicalDamage> based on the target's missing Health.<br><br>Using another Ability or <recast>Recasting</recast> ends this Ability early.<br>",
+					"extendedVariables": [
+						{
+							"type": "DamagePerHit",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "DRPercent",
+							"nameOverride": "spell_listtype_damagereduction"
+						}
+					],
 					"cooldownTime": [20, 20, 19, 18, 17, 16, 16],
 					"dataValues": {
 						"TotalDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
@@ -211,6 +249,32 @@
 					"objectName": "BelvethR",
 					"image": "assets/characters/belveth/hud/icons2d/belvethr.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every second Attack against the same target deals an additional <trueDamage>@FinalOnHitDamage@ true damage</trueDamage>, stacking infinitely. Takedowns against champions and epic monsters leave behind a piece of Void Coral.<br><br><spellActive>Active:</spellActive> Consuming Void Coral grants <keywordMajor>@PassiveStacksOnDevour@ Lavender</keywordMajor> stack and activates Bel'Veth's true form for @SteroidDuration@ seconds. Void Coral from Void epic monsters increases the duration to @VoidDuration@ seconds and causes minions that die nearby to become Void Remora. While casting, Bel'Veth <status>Slows</status> nearby enemies before exploding, dealing <trueDamage>@TotalExplosionDamage@ + @MissingHealthDamage*100@% missing-Health true damage</trueDamage>.<br><br>In her true form, Bel'Veth gains <healing>@MaxHealthOnDevour@ max Health</healing>, <speed>@OOCMS@ Move Speed</speed> out of combat, @BonusAARange@ Attack range, <attackSpeed>@TotalASMod*100@% Total Attack Speed</attackSpeed>, and <spellName>Void Surge</spellName> can pass through walls.<br><br><br>",
+					"extendedVariables": [
+						{
+							"type": "OnHitDamage",
+							"nameOverride": "spell_listtype_onhitdamage"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_explosiondamage"
+						},
+						{
+							"type": "BaseMaxHealth",
+							"nameOverride": "spell_listtype_bonushealth"
+						},
+						{
+							"type": "OOCMS",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "TotalASMod",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"type": "VoidlingHPScale",
+							"nameOverride": "spell_belvethr_voidremorahealth"
+						}
+					],
 					"cooldownTime": [1, 1, 1, 1, 1, 1, 1],
 					"dataValues": {
 						"PassiveStacksOnDevour": [1, 1, 1, 1, 1, 1, 1],
@@ -355,6 +419,18 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_cooldownperside": "Cooldown Per Direction",
+		"spell_listtype_monsterdamage": "Monster Damage",
+		"spell_listtype_miniondamage": "Minion Damage",
+		"spell_listtype_slowduration": "Slow Duration",
+		"spell_listtype_damagereduction": "Damage Reduction",
+		"spell_listtype_onhitdamage": "On-Hit Damage",
+		"spell_listtype_explosiondamage": "Explosion Damage",
+		"spell_listtype_bonushealth": "Bonus Health",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_belvethr_voidremorahealth": "Void Remora Health",
 		"spell_belvethpassive_tooltip": "After using an Ability, Bel'Veth becomes Ghosted and her next @SheenNumberOfAttacks@ Attacks gain <attackSpeed>@SheenSpeedPerStack@ Attack Speed</attackSpeed>.<br><br>Bel'veth gains <keywordMajor>@MonsterStacks@ Lavender</keywordMajor> stack for large minion and monster takedowns and <keywordMajor>@ChampionStacks@ Lavender</keywordMajor> stacks for champion and epic monster takedowns. Each stack permanently grants <attackSpeed>@AttackSpeedPerStack@% Attack Speed</attackSpeed>.<br><br>Total bonus <attackSpeed>Attack Speed</attackSpeed>: <attackSpeed>@TotalAttackSpeedFromStacks@%</attackSpeed>",
 		"reminder_ghosted": "Ghosted units can pass through other units."
 	}

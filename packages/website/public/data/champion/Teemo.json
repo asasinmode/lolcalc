@@ -36,6 +36,19 @@
 					"objectName": "TeemoQ",
 					"image": "assets/characters/teemo/hud/icons2d/teemoq.asu_teemo.png",
 					"tooltip": "Teemo fires a dart, <status>Blinding</status> the target for @BlindDuration@ seconds and dealing <magicDamage>@CalculatedDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "BlindDuration",
+							"nameOverride": "spell_listtype_duration"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [7, 7, 7, 7, 7, 7, 7],
 					"dataValues": {
@@ -82,6 +95,16 @@
 					"objectName": "TeemoW",
 					"image": "assets/characters/teemo/hud/icons2d/teemow.asu_teemo.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo gains <speed>@PassiveMoveSpeedBonus*100@% Move Speed</speed> while he hasn't been damaged by a champion or turret in the last @PassiveCooldownOnDamageTaken@ seconds.<br><br><spellActive>Active:</spellActive> Teemo sprints, gaining <speed>@ActiveMoveSpeedBonus*100@% Move Speed</speed> that is not lost when struck for @ActiveMoveSpeedBuffDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "PassiveMoveSpeedBonus",
+							"nameOverride": "spell_teemow_passivemovespeed"
+						},
+						{
+							"type": "ActiveMoveSpeedBonus",
+							"nameOverride": "spell_teemow_activemovespeed"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [14, 14, 14, 14, 14, 14, 14],
 					"dataValues": {
@@ -102,6 +125,16 @@
 					"objectName": "TeemoE",
 					"image": "assets/characters/teemo/hud/icons2d/teemoe.asu_teemo.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Teemo's Attacks apply poison, dealing an additional <magicDamage>@ImpactCalculatedDamage@ magic damage</magicDamage> plus <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @PoisonDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "ImpactBaseDamage",
+							"nameOverride": "spell_listtype_teemoimpactdamage"
+						},
+						{
+							"type": "TickBaseDamage",
+							"nameOverride": "spell_listtype_damagepersecond"
+						}
+					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"TickBaseDamage": [0, 6, 12, 18, 24, 30, 36],
@@ -169,6 +202,32 @@
 					"objectName": "TeemoR",
 					"image": "assets/characters/teemo/hud/icons2d/teemor.asu_teemo.png",
 					"tooltip": "Teemo tosses a mushroom trap that detonates when stepped on. The traps <status>Slow</status> by @SlowAmount@% and deal <magicDamage>@TotalDamage@ magic damage</magicDamage> over @DebuffDuration@ seconds. Enemies are revealed for the same duration.<br><br>Traps last @MushroomDuration@ minutes and are stealthed. A mushroom tossed onto another mushroom bounces before landing at its position. This Ability has @MaxAmmo@ charges (@AmmoRechargeTime@ second refresh).<br>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "CastRange",
+							"nameOverride": "spell_teemor_tossrange"
+						},
+						{
+							"type": "MaxBounceDistance",
+							"nameOverride": "spell_teemor_bouncedistance"
+						},
+						{
+							"type": "MaxAmmo",
+							"nameOverride": "spell_listtype_maximumtraps"
+						},
+						{
+							"type": "Cost",
+							"nameOverride": "spell_listtype_manacost"
+						}
+					],
 					"mana": [75, 55, 35, 35, 35, 35],
 					"cooldownTime": [0.25, 0.25, 0.25, 0.25, 0.25, 0.25, 0.25],
 					"dataValues": {
@@ -248,6 +307,17 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_duration": "Duration",
+		"spell_listtype_damage": "Damage",
+		"spell_teemow_passivemovespeed": "Passive Move Speed",
+		"spell_teemow_activemovespeed": "Active Move Speed",
+		"spell_listtype_teemoimpactdamage": "Impact Damage",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_slow": "Slow",
+		"spell_teemor_tossrange": "Toss Range",
+		"spell_teemor_bouncedistance": "Maximum Bounce Distance",
+		"spell_listtype_maximumtraps": "Maximum Traps",
+		"spell_listtype_manacost": "Mana Cost",
 		"buff_teemopassive_tooltip": "If Teemo stands still for @StealthCooldownDuration@ seconds without being damaged, he becomes <keywordStealth>Invisible</keywordStealth> until he moves. While in a brush, he can maintain <keywordStealth>Invisibility</keywordStealth> while moving.<br><br>Upon exiting this <keywordStealth>Invisibility</keywordStealth>, Teemo gains <attackSpeed>@BonusAttackSpeed@ Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
 		"reminder_invisibility": "<keywordStealth>Invisible</keywordStealth> units cannot be revealed except by turrets or <font color='#ee91d7'>True Sight</font color>."
 	}

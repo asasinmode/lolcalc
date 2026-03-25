@@ -36,6 +36,12 @@
 					"objectName": "MissFortuneRicochetShot",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_q.png",
 					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [8, 7, 6, 5, 4, 3, 3],
 					"dataValues": {
@@ -119,6 +125,20 @@
 					"objectName": "MissFortuneViciousStrikes",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_passive.png",
 					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "ActiveAS",
+							"nameOverride": "spell_listtype_attackspeed"
+						},
+						{
+							"type": "PassiveBaseMS",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "PassiveMaxMS",
+							"nameOverride": "spell_listtype_movementspeedmax"
+						}
+					],
 					"mana": [45, 45, 45, 45, 45, 45],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -153,6 +173,12 @@
 					"objectName": "MissFortuneScattershot",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_e.png",
 					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
+					"extendedVariables": [
+						{
+							"type": "BaseDamagePerSecond",
+							"nameOverride": "spell_listtype_damagepersecond"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [20, 18, 17, 16, 15, 14, 13],
 					"dataValues": {
@@ -210,6 +236,12 @@
 					"objectName": "MissFortuneBulletTime",
 					"image": "assets/characters/missfortune/hud/icons2d/missfortune_r.png",
 					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseWaves",
+							"nameOverride": "spell_missfortuner_bulletbarrages"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [130, 120, 110, 100, 90, 80, 70],
 					"dataValues": {
@@ -347,6 +379,12 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_movementspeedmax": "Max Move Speed",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_missfortuner_bulletbarrages": "Bullet Barrages",
 		"spell_missfortunepassive_name": "Love Tap",
 		"spell_missfortunew_name": "Strut",
 		"spell_missfortunepassive_tooltip": "Miss Fortune's Attacks deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage> when she attacks a new target. <br><br>Triggering <spellName>Love Tap</spellName> reduces the cooldown of <spellName>Strut</spellName> by @Spell.MissFortuneViciousStrikes:LoveTapRefund@ seconds."

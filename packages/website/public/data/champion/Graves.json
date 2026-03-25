@@ -36,6 +36,20 @@
 					"objectName": "GravesQLineSpell",
 					"image": "assets/characters/graves/hud/icons2d/gravesq.png",
 					"tooltip": "Graves fires a powder round dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. After 1 second or after colliding with terrain, it detonates, dealing <physicalDamage>@TotalDetonationDamage@ physical damage</physicalDamage> along the travel path again and to enemies near the blast.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseDetonationDamage",
+							"nameOverride": "spell_gravesqlinespell_damage2"
+						},
+						{
+							"type": "bADDetonationRatio",
+							"nameOverride": "spell_listtype_gravesdetonationadratio"
+						}
+					],
 					"mana": [80, 80, 80, 80, 80, 80],
 					"cooldownTime": [13, 13, 11.25, 9.5, 7.75, 6, 6],
 					"dataValues": {
@@ -87,6 +101,15 @@
 					"objectName": "GravesSmokeGrenade",
 					"image": "assets/characters/graves/hud/icons2d/gravesw.png",
 					"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @Effect2Amount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 95],
 					"cooldownTime": [26, 26, 24, 22, 20, 18, 18],
 					"dataValues": {
@@ -125,6 +148,16 @@
 					"objectName": "GravesMove",
 					"image": "assets/characters/graves/hud/icons2d/gravese.png",
 					"tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for @BuffDuration@ seconds (max @MaxStacks@ stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>@ArmorPerStack@ Armor</scaleArmor> and <scaleMR>@MRGrant@ Magic Resist</scaleMR>. Stacks are refreshed when damaging a non-minion.<br><br>Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by @CooldownPerHit@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "ArmorPerStack",
+							"nameOverride": "spell_listtype_gravestruegritarmor"
+						},
+						{
+							"type": "ArmorPerStack",
+							"nameOverride": "spell_gravese_magicresist"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [17, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
@@ -172,6 +205,16 @@
 					"objectName": "GravesChargeShot",
 					"image": "assets/characters/graves/hud/icons2d/gravesr.png",
 					"tooltip": "Graves fires an explosive cartridge, blasting himself backwards. The cartridge deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After hitting an enemy champion or reaching the end of its range, the cartridge explodes outward, dealing <physicalDamage>@FalloffDamage@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "RBaseDamage",
+							"nameOverride": "spell_listtype_gravesprimarydamage"
+						},
+						{
+							"type": "RFalloffDamage",
+							"nameOverride": "spell_listtype_gravesconedamage"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"dataValues": {
@@ -284,5 +327,13 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_gravesqlinespell_damage2": "Detonation Damage",
+		"spell_listtype_gravesdetonationadratio": "Detonation AD Ratio",
+		"spell_listtype_gravestruegritarmor": "Armor",
+		"spell_gravese_magicresist": "Magic Resist",
+		"spell_listtype_gravesprimarydamage": "Primary Damage",
+		"spell_listtype_gravesconedamage": "Cone Damage"
+	}
 }

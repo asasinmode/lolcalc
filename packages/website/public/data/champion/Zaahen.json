@@ -36,6 +36,24 @@
 					"objectName": "ZaahenQ",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenq.zaahen.png",
 					"tooltip": "Zaahen slashes twice on his next Attack, dealing <physicalDamage>@InitialDamage@ bonus physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of his max Health</healing>.<br><br><recast>Recast:</recast> Zaahen's next Attack deals <physicalDamage>@SecondHitDamage@ bonus physical damage</physicalDamage> and <status>Knocks</status> the target Up for @KnockUpDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Q1BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Q2BaseDamage",
+							"nameOverride": "spell_listtype_recastdamage"
+						},
+						{
+							"type": "HealPercent",
+							"nameOverride": "spell_listtype_healpercentofdamagedealt"
+						},
+						{
+							"type": "QCoeff",
+							"nameOverride": "spell_listtype_bonusadratio"
+						}
+					],
 					"mana": [25, 25, 25, 25, 25, 25],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 5],
 					"dataValues": {
@@ -92,6 +110,12 @@
 					"objectName": "ZaahenW",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenw.zaahen.png",
 					"tooltip": "Zaahen stabs in a direction, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to enemies hit, then <status>Pulls</status> them toward him, dealing <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "InitialBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [16, 16, 15, 14, 13, 12, 11],
 					"dataValues": {
@@ -142,6 +166,20 @@
 					"objectName": "ZaahenE",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahene.zaahen.png",
 					"tooltip": "Zaahen dashes then slices around himself, dealing <physicalDamage>@BaseDamageCalc@ physical damage</physicalDamage> to nearby enemies.<br><br>Enemies at the edge of the slice take <physicalDamage>@BonusDamageCalc@ physical damage</physicalDamage> <magicDamage>+@PercentHPDamage*100@% of their maximum Health as magic damage</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"type": "Damage_Base",
+							"nameOverride": "spell_listtype_basedamage"
+						},
+						{
+							"type": "DamageBonusBase",
+							"nameOverride": "spell_zaahene_sweetspotdamage"
+						},
+						{
+							"type": "PercentHPDamage",
+							"nameOverride": "spell_listtype_percenthealthdamage"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 8],
 					"dataValues": {
@@ -190,6 +228,16 @@
 					"objectName": "ZaahenR",
 					"image": "assets/characters/zaahen/hud/icons2d/zaahenr.zaahen.png",
 					"tooltip": "<spellPassive>Passive</spellPassive>: Zaahen gains <armorPen>@ArmorPen*100@% %i:scaleAPen% Armor Penetration</armorPen>.<br><br><spellActive>Active</spellActive>: Zaahen rises, gaining @DamageReduction*100@% Damage Reduction while casting.<br><br>Zaahen then stabs downward, dealing <physicalDamage>@DamageEndCalc@ physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of the damage dealt to enemy champions as Health</healing>.",
+					"extendedVariables": [
+						{
+							"type": "EndDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ArmorPen",
+							"nameOverride": "spell_listtype_armorpenetration"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [110, 110, 95, 80, 65, 60, 20],
 					"dataValues": {
@@ -314,6 +362,14 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_recastdamage": "Recast Damage",
+		"spell_listtype_healpercentofdamagedealt": "Percent Healed",
+		"spell_listtype_bonusadratio": "Bonus AD Ratio",
+		"spell_listtype_basedamage": "Base Damage",
+		"spell_zaahene_sweetspotdamage": "Edge Damage",
+		"spell_listtype_percenthealthdamage": "% Health damage",
+		"spell_listtype_armorpenetration": "Armor Penetration",
 		"reminder_stasis": "Units in Stasis cannot move or act, and are invulnerable and Untargetable."
 	}
 }

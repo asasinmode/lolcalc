@@ -36,6 +36,15 @@
 					"objectName": "Pulverize",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_q.png",
 					"tooltip": "Alistar smashes the ground, <status>Knocking Up</status> enemies for @KnockupDuration@ second and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
@@ -71,6 +80,15 @@
 					"objectName": "Headbutt",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_w.png",
 					"tooltip": "Alistar rams into an enemy, <status>Knocking</status> them <status>Back</status> and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [15, 14, 13, 12, 11, 10, 10],
 					"dataValues": {
@@ -111,6 +129,15 @@
 					"objectName": "AlistarE",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_passive.png",
 					"tooltip": "Alistar begins trampling the ground, becoming Ghosted and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds to nearby enemies. Each pulse that damages a champion grants a stack.<br><br>At @Effect5Amount@ stacks, Alistar's next Attack against champions <status>Stuns</status> for @Effect6Amount@ second and deals an additional <magicDamage>@AttackBonusDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [12.5, 12, 11.5, 11, 10.5, 10, 9.5],
 					"dataValues": {
@@ -165,6 +192,12 @@
 					"objectName": "FerociousHowl",
 					"image": "assets/characters/alistar/hud/icons2d/alistar_r.png",
 					"tooltip": "Alistar immediately cleanses all <status>Disabling</status> effects and takes @RDamageReduction@% reduced damage for @RDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "RDamageReduction",
+							"nameOverride": "spell_listtype_damagereduction"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [120, 120, 100, 80, 120, 120, 120],
 					"dataValues": {
@@ -216,5 +249,8 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_damagereduction": "Damage Reduction"
+	}
 }

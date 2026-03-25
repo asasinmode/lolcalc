@@ -36,6 +36,15 @@
 					"objectName": "WildCards",
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_powercard.png",
 					"tooltip": "Twisted Fate throws three cards that deal <magicDamage>@TotalDamage@ magic damage</magicDamage> each.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [6, 6, 5.75, 5.5, 5.25, 5, 5],
 					"dataValues": {
@@ -76,6 +85,35 @@
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_fatesgambit.png",
 					"tooltip": "Twisted Fate begins shuffling his deck, allowing him to <recast>Recast</recast> to lock in one of three cards and enhance his next Attack.<br><li>The Blue Card deals <magicDamage>@BlueDamage@ magic damage</magicDamage> and restores <scaleMana>@Effect6Amount@ Mana</scaleMana>.<li>The Red Card deals <magicDamage>@RedDamage@</magicDamage> to nearby enemies and <status>Slows</status> by @Effect2Amount@% for 2.5 seconds.<li>The Gold Card deals <magicDamage>@GoldDamage@</magicDamage> and <status>Stuns</status> for @Effect3Amount@ seconds.",
 					"tooltipExtended": "Twisted Fate begins shuffling his deck, allowing him to <recast>Recast</recast> to lock in one of three cards and enhance his next Attack.<br><li>The Blue Card deals <magicDamage>@ttBlueDamage@ = (</magicDamage><trueDamage>@BlueBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttBlueAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @BlueCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and restores <scaleMana>@Effect6Amount@ Mana</scaleMana>.<li>The Red Card deals <magicDamage>@ttRedDamage@ = (</magicDamage><trueDamage>@RedBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttRedAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @RedCritMultiplier*100@%<magicDamage> magic damage</magicDamage> to nearby enemies and <status>Slows</status> by @Effect2Amount@% for 2.5 seconds.<li>The Gold Card deals <magicDamage>@ttGoldDamage@ = (</magicDamage><trueDamage>@GoldBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttGoldAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @GoldCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and <status>Stuns</status> for @Effect3Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_twistedfatewbluedamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_twistedfatewbluemana"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_twistedfatewreddamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_twistedfatewredslow"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_twistedfatewgolddamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_twistedfatewgoldstun"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
@@ -262,6 +300,16 @@
 					"objectName": "CardmasterStack",
 					"image": "assets/characters/twistedfate/hud/icons2d/cardmaster_rapidtoss.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Twisted Fate gains <attackSpeed>@AttackSpeedBonus@% Attack Speed</attackSpeed> and every 4th Attack deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_bonusdamage"
+						},
+						{
+							"type": "AttackSpeedBonus",
+							"nameOverride": "spell_listtype_attackspeed"
+						}
+					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"AttackSpeedBonus": [5, 15, 25, 35, 45, 55, 65],
@@ -305,6 +353,12 @@
 					"objectName": "Destiny",
 					"image": "assets/characters/twistedfate/hud/icons2d/destiny_temp.png",
 					"tooltip": "Twisted Fate focuses on his cards, granting <keywordStealth>True Sight</keywordStealth> of all enemy champions on the map for @Effect1Amount@ seconds and allowing him to <recast>Recast</recast>.<br><br><recast>Recast</recast>: Twisted Fate teleports up to @Effect4Amount@ units away.",
+					"extendedVariables": [
+						{
+							"type": "RecastDuration",
+							"nameOverride": "spell_listtype_duration"
+						}
+					],
 					"mana": [100, 100, 100, 115, 130, 0],
 					"cooldownTime": [170, 170, 140, 110, 110, 110, 110],
 					"dataValues": {
@@ -338,6 +392,16 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_twistedfatewbluedamage": "Blue Card Damage",
+		"spell_listtype_twistedfatewbluemana": "Blue Card Mana Restore",
+		"spell_listtype_twistedfatewreddamage": "Red Card Damage",
+		"spell_listtype_twistedfatewredslow": "Red Card Slow %",
+		"spell_listtype_twistedfatewgolddamage": "Gold Card Damage",
+		"spell_listtype_twistedfatewgoldstun": "Gold Card Stun Duration",
+		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_duration": "Duration",
 		"spell_secondsight_tooltip_1": "Upon killing a unit, Twisted Fate rolls his 'lucky' dice receiving 1 to 6 bonus gold.",
 		"spell_secondsight_tooltipextended_1": "{{Spell_SecondSight_Tooltip_@GameModeInteger@}}<br><br>Total Gold Hustled: <statTracking>@f1@</statTracking><br>Total Gold Critically Hustled: <statTracking>@f2@</statTracking><br><br><rules>This ability can strike critically.</rules>"
 	}

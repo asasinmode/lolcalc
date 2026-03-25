@@ -36,6 +36,16 @@
 					"objectName": "ZeriQ",
 					"image": "assets/characters/zeri/hud/icons2d/zeriq.png",
 					"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. ",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ActiveADRatio",
+							"nameOverride": "spell_listtype_totaladratio"
+						}
+					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"MinCooldown": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
@@ -138,6 +148,19 @@
 					"objectName": "ZeriW",
 					"image": "assets/characters/zeri/hud/icons2d/zeriw.png",
 					"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowPercent",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [50, 60, 70, 80, 90, 100],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
@@ -210,6 +233,19 @@
 					"objectName": "ZeriE",
 					"image": "assets/characters/zeri/hud/icons2d/zerie.png",
 					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
+					"extendedVariables": [
+						{
+							"type": "PenDamagePercent",
+							"nameOverride": "spell_listtype_percentagedamage"
+						},
+						{
+							"type": "BonusDamageBase",
+							"nameOverride": "spell_listtype_basedamage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [90, 85, 80, 75, 70, 70],
 					"cooldownTime": [22, 22, 21, 20, 19, 18, 18],
 					"dataValues": {
@@ -311,6 +347,12 @@
 					"objectName": "ZeriR",
 					"image": "assets/characters/zeri/hud/icons2d/zerir.png",
 					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>",
+					"extendedVariables": [
+						{
+							"type": "ActiveDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [80, 80, 75, 70, 70, 70, 70],
 					"dataValues": {
@@ -415,6 +457,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_totaladratio": "Total AD Ratio",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_percentagedamage": "Percentage Damage",
+		"spell_listtype_basedamage": "Base Damage",
 		"spell_zeriq_name": "Burst Fire",
 		"spell_zeripassive_tooltip": "Zeri's Attacks are treated as Abilities instead of Attacks and can be charged up by moving and casting <spellName>Burst Fire</spellName>. Uncharged Attacks consume a small amount of charge, deal <magicDamage>@Spell.ZeriQ:MinDamage@ magic damage</magicDamage> and <danger>execute</danger> enemies below <attention>@Spell.ZeriQ:PassiveExecuteThreshold@ Health</attention>. A fully charged Attack deals <magicDamage>@Spell.ZeriQ:PassiveMaxDamage@ + @Spell.ZeriQ:PassiveMaxChargePercentHealth@ max Health magic damage</magicDamage> and consumes all charge."
 	}

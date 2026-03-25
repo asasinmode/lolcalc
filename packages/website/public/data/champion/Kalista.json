@@ -36,6 +36,15 @@
 					"objectName": "KalistaMysticShot",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_q.png",
 					"tooltip": "Kalista hurls a spear, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first target hit. If this kills the target, the spear continues onward, carrying any <spellName>{{Spell_KalistaExpungeWrapper_Name}}</spellName> stacks to the next target hit.<br><br>Kalista can dash after using this Ability using <spellName>{{Spell_KalistaPassiveBuff_Name}}</spellName>.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [60, 65, 70, 75, 80, 85],
 					"cooldownTime": [9, 9, 9, 9, 9, 9, 9],
 					"dataValues": {
@@ -69,6 +78,20 @@
 					"objectName": "KalistaW",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>@MaxHealthDamage*100@% max Health magic damage</magicDamage>. This effect has a @PerTargetCooldown@ second Cooldown per target and a cap of @MaximumMonsterDamage@ to non-champions.<br><br><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges (@AmmoRechargeTooltip@ second refresh).",
+					"extendedVariables": [
+						{
+							"type": "MaxHealthDamage",
+							"nameOverride": "spell_listtype_maxhealthdamage"
+						},
+						{
+							"type": "AmmoRechargeTooltip",
+							"nameOverride": "spell_listtype_ammorecharge"
+						},
+						{
+							"type": "MaximumMonsterDamage",
+							"nameOverride": "spell_listtype_maxdamagetomonsters"
+						}
+					],
 					"cooldownTime": [30, 30, 30, 30, 30, 30, 30],
 					"dataValues": {
 						"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
@@ -96,6 +119,32 @@
 					"objectName": "KalistaExpungeWrapper",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Kalista's spears linger in their target for 4 seconds, stacking any number of times.<br><br><spellActive>Active:</spellActive> Kalista rips the spears from nearby enemies, dealing <physicalDamage>@NormalDamage@</physicalDamage> plus <physicalDamage>@AdditionalDamage@ physical damage</physicalDamage> per spear beyond the first. <status>Slows</status> enemies hit by <attention>@TotalSlowAmount@</attention> for @SlowDuration@ seconds.<br><br>If this Ability kills at least one target, its Cooldown is refreshed and it refunds <scaleMana>@ManaRefund@ Mana</scaleMana>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "AdditionalBaseDamage",
+							"nameOverride": "spell_listtype_damageperstack"
+						},
+						{
+							"type": "AdditionalADRatio",
+							"nameOverride": "spell_kalistaexpungewrapper_ratioperstack"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_movementspeedslow"
+						},
+						{
+							"type": "ManaRefund",
+							"nameOverride": "spell_listtype_manarefund"
+						},
+						{
+							"type": "FakedCooldown",
+							"nameOverride": "spell_listtype_cooldown"
+						}
+					],
 					"mana": [30, 30, 30, 30, 30, 30],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
@@ -177,6 +226,12 @@
 					"objectName": "KalistaRx",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_r.png",
 					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_knockupduration"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [160, 160, 140, 120, 100, 80, 60],
 					"effectAmount": {
@@ -278,6 +333,16 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_maxhealthdamage": "Maximum Health Damage",
+		"spell_listtype_ammorecharge": "Ammo Recharge",
+		"spell_listtype_maxdamagetomonsters": "Monster Damage Cap",
+		"spell_listtype_damageperstack": "Damage per Stack",
+		"spell_kalistaexpungewrapper_ratioperstack": "AD Ratio per Stack",
+		"spell_listtype_movementspeedslow": "Move Speed Slow",
+		"spell_listtype_manarefund": "Mana Refund",
+		"spell_listtype_cooldown": "Cooldown",
+		"spell_listtype_knockupduration": "Knockup Duration",
 		"spell_kalistapassivebuff_tooltip": "{{Spell_KalistaP_Tooltip_@GameModeInteger@}}"
 	}
 }

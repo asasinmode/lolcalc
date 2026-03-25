@@ -36,6 +36,24 @@
 					"objectName": "TrundleTrollSmash",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_q.png",
 					"tooltip": "Trundle's next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @SlowAmount*100@%, then Trundle gains <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> for @SapDebuffDuration@ seconds and the enemy loses <physicalDamage>@SappedAD*-1@ Attack Damage</physicalDamage> for the same duration.",
+					"extendedVariables": [
+						{
+							"type": "BonusDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ADScaling",
+							"nameOverride": "spelllisttype_attackdamageratio"
+						},
+						{
+							"type": "BonusAD",
+							"nameOverride": "spell_listtype_attackdamagebonus"
+						},
+						{
+							"type": "SappedAD",
+							"nameOverride": "spell_trundletrollsmash_sappedad"
+						}
+					],
 					"mana": [20, 20, 20, 20, 20, 20],
 					"cooldownTime": [3.5, 3.5, 3.5, 3.5, 3.5, 3.5, 3.5],
 					"dataValues": {
@@ -77,6 +95,16 @@
 					"objectName": "trundledesecrate",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_w.png",
 					"tooltip": "Trundle freezes an area for @Effect4Amount@ seconds. While inside he gains <speed>@Effect1Amount*100@% Move Speed</speed>, <attackSpeed>@Effect2Amount*100@% Attack Speed</attackSpeed>, and @Effect3Amount*100@% increased healing.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_attackspeed"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [18, 18, 17, 16, 15, 14, 13],
 					"effectAmount": {
@@ -98,6 +126,12 @@
 					"objectName": "TrundleCircle",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_e.png",
 					"tooltip": "Trundle creates an icy pillar for @Effect1Amount@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @Effect2Amount@%.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [75, 75, 75, 75, 75, 75],
 					"cooldownTime": [21, 21, 19.5, 18, 16.5, 15, 15],
 					"effectAmount": {
@@ -122,6 +156,12 @@
 					"objectName": "TrundlePain",
 					"image": "assets/characters/trundle/hud/icons2d/trundle_r.png",
 					"tooltip": "Trundle drains the lifeforce of an enemy champion, dealing <magicDamage>@TotalPercentHPDamage@ max Health magic damage</magicDamage> and stealing <scaleArmor>@ArmorMRShred*100@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> over @ActualDurationOfDrainBuff@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "PercentHPDamage",
+							"nameOverride": "spell_listtype_trundlehealthdrain"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [120, 120, 100, 80, 80, 80, 80],
 					"dataValues": {
@@ -180,5 +220,14 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spelllisttype_attackdamageratio": "Attack Damage Ratio",
+		"spell_listtype_attackdamagebonus": "Attack Damage",
+		"spell_trundletrollsmash_sappedad": "Attack Damage Removed",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_trundlehealthdrain": "Health Drain"
+	}
 }

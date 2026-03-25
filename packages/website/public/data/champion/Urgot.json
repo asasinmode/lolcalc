@@ -36,6 +36,16 @@
 					"objectName": "UrgotQ",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_q.png",
 					"tooltip": "Urgot fires an explosive charge, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [10, 10, 9.5, 9, 8.5, 8, 7.5],
 					"dataValues": {
@@ -74,6 +84,15 @@
 					"objectName": "UrgotW",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Urgot's other Abilities mark the last champion hit for 5 seconds.<br><br><spellActive>Active:</spellActive> Urgot begins firing his chain gun at the closest enemy, prioritizing marked enemies. He Attacks them @Effect8Amount@ times a second dealing <physicalDamage>@DamagePerShot@ physical damage</physicalDamage> per shot. Urgot can move while firing and has @Effect2Amount@% <status>Slow</status> resistance, but loses <speed>@Effect5Amount@ Move Speed</speed>.<br><br>At max rank, this Ability lasts indefinitely and can be <toggle>Toggled</toggle> on and off.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_attackdamagepershot"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 30, 20, 10, 0, 0],
 					"cooldownTime": [12, 12, 9, 6, 3, 0, 0],
 					"dataValues": {
@@ -136,6 +155,19 @@
 					"objectName": "UrgotE",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_e.png",
 					"tooltip": "Urgot charges forward, gaining <shield>@ETotalShieldHealth@ Shield</shield> for @EShieldDuration@ seconds. The first champion hit is <status>Stunned</status> for @StunDuration@ seconds and thrown behind Urgot. All enemies Urgot collides with take <physicalDamage>@EDamage@ physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "EBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "EShieldBaseHealth",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 110],
 					"cooldownTime": [16, 16, 15.5, 15, 14.5, 14, 13.5],
 					"dataValues": {
@@ -198,6 +230,12 @@
 					"objectName": "UrgotR",
 					"image": "assets/characters/urgot/hud/icons2d/urgot_r.png",
 					"tooltip": "Urgot fires a chem-drill, impaling the first champion hit, dealing <physicalDamage>@RCalculatedDamage@ physical damage</physicalDamage> and <status>Slowing</status> for @RSlowDuration@ seconds by 1% per 1% missing Health, up to @RMoveSpeedMod@%.<br><br>If the impaled victim falls below @RHealthThreshold@% Health, Urgot can <recast>Recast</recast> this Ability, <status>Suppressing</status> the victim and dragging them to himself. On reaching Urgot, they are killed and nearby enemies are <status>Feared</status> for @RFearDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "RBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 85, 70, 70, 70, 70],
 					"dataValues": {
@@ -375,6 +413,10 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_attackdamagepershot": "Attack Damage Per Shot",
+		"spell_listtype_shieldamount": "Shield Amount",
 		"spell_urgotw_name": "Purge",
 		"spell_urgotpassive_tooltip": "Urgot has a cannon on each of his 6 legs. Attacks and <spellName>Purge</spellName> will fire the leg cannon that is facing his target for <physicalDamage>@ADDamage@ plus @PercentHPRatio@ max Health physical damage</physicalDamage>. This effect has a @PerLegCD@ second Cooldown per leg."
 	}

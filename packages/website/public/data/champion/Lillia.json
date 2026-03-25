@@ -36,6 +36,20 @@
 					"objectName": "LilliaQ",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_q.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge.",
+					"extendedVariables": [
+						{
+							"type": "PranceBonusPerStack",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "FlatDamageBase",
+							"nameOverride": "spell_lilliaq_basemagicdamage"
+						},
+						{
+							"type": "FlatDamageTrue",
+							"nameOverride": "spell_lilliaq_basetruedamage"
+						}
+					],
 					"mana": [65, 65, 65, 65, 65, 65],
 					"cooldownTime": [4, 6, 5.5, 5, 4.5, 4, 4],
 					"dataValues": {
@@ -104,6 +118,12 @@
 					"objectName": "LilliaW",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_w.png",
 					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
+					"extendedVariables": [
+						{
+							"type": "FlatDamageBase",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [18, 14, 13, 12, 11, 10, 9],
 					"dataValues": {
@@ -163,6 +183,12 @@
 					"objectName": "LilliaE",
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_e.png",
 					"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain.",
+					"extendedVariables": [
+						{
+							"type": "ImpactDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -204,6 +230,12 @@
 					"image": "assets/characters/lillia/hud/icons2d/lillia_icon_r.png",
 					"tooltip": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for @SleepDuration@ seconds.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BreakDamageBase",
+							"nameOverride": "spell_lilliar_breakdamage_level"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [140, 140, 120, 100, 100, 100, 100],
 					"dataValues": {
@@ -348,6 +380,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_lilliaq_basemagicdamage": "Magic Damage",
+		"spell_lilliaq_basetruedamage": "True Damage",
+		"spell_listtype_damage": "Damage",
+		"spell_lilliar_breakdamage_level": "Break Damage",
 		"spell_lilliap_tooltip": "Lillia's Abilities apply <keywordMajor>Dream Dust</keywordMajor>, dealing <magicDamage>@DotPercentTooltip@ max Health magic damage</magicDamage> over @Duration@ seconds. Lillia restores <healing>@MonsterHealTT@ Health</healing> over the duration against large jungle monsters, and restores <healing>@ChampionHealTT@ Health</healing> against champions."
 	}
 }

@@ -36,6 +36,15 @@
 					"objectName": "KarthusLayWasteA1",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_q.png",
 					"tooltip": "Karthus creates a blast of magic, dealing <magicDamage>@QDamage@ magic damage</magicDamage>. If the blast hits only one enemy, it instead deals <magicDamage>@QSingleTargetDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [20, 25, 30, 35, 40, 45],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
@@ -79,6 +88,16 @@
 					"objectName": "KarthusWallOfPain",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_w.png",
 					"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_karthuswallwidth"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_movementspeedslow"
+						}
+					],
 					"mana": [70, 70, 70, 70, 70, 70],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"effectAmount": {
@@ -100,6 +119,19 @@
 					"objectName": "KarthusDefile",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_e.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damagepersecond"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_manareturn"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [30, 42, 54, 66, 78, 90],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
@@ -144,6 +176,12 @@
 					"objectName": "KarthusFallenOne",
 					"image": "assets/characters/karthus/hud/icons2d/karthus_r.png",
 					"tooltip": "Karthus channels for 3 seconds, then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemy champions, regardless of distance.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [200, 200, 180, 160, 180, 180, 200],
 					"dataValues": {
@@ -184,5 +222,11 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_karthuswallwidth": "Wall Width",
+		"spell_listtype_movementspeedslow": "Move Speed Slow",
+		"spell_listtype_damagepersecond": "Damage Per Second",
+		"spell_listtype_manareturn": "Mana Restore"
+	}
 }

@@ -36,6 +36,16 @@
 					"objectName": "ShyvanaDoubleAttack",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanatwinbite.png",
 					"tooltip": "Shyvana's next Attack strikes twice, dealing <physicalDamage>@FirstHitDamageCalc@</physicalDamage> then <physicalDamage>@SecondHitDamageCalc@ physical damage</physicalDamage>. Her next 2 Attacks gain<speed> @BonusAS@% Attack Speed</speed>.<br><br>Attacks reduce this Ability's Cooldown by @CDReductionOnHit@ seconds.<br><br><keywordMajor>Dragon Form:</keywordMajor> The empowered Attacks hit all units in front of Shyvana.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
+					"extendedVariables": [
+						{
+							"type": "SecondHitDamage",
+							"nameOverride": "spell_listtype_bonusdamage"
+						},
+						{
+							"type": "BonusAS",
+							"nameOverride": "spell_listtype_attackspeed"
+						}
+					],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 5.5],
 					"dataValues": {
 						"SecondHitDamage": [0, 0.2, 0.4, 0.6, 0.8, 1, 1.2],
@@ -84,6 +94,20 @@
 					"objectName": "ShyvanaImmolationAura",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanascorchedearth.png",
 					"tooltip": "Shyvana summons a flame storm around her, gaining <speed>@FinalMSPerc@ decaying Move Speed</speed> and dealing <magicDamage>@DamagePerTickCalc@ magic damage per second</magicDamage> for @BaseDuration@ seconds. <br><br>The flame storm also causes Shyvana's Attacks to deal an additional <magicDamage>@DamageOnHitCalc@ magic damage</magicDamage> to surrounding enemies and extend this Ability's duration by @BonusDurationOnHit@ second.<br><br><keywordMajor>Dragon Form:</keywordMajor> The size of the flame storm is increased.",
+					"extendedVariables": [
+						{
+							"type": "DamagePerTick",
+							"nameOverride": "spell_listtype_shyvanadamageaura"
+						},
+						{
+							"type": "OnHitDamage",
+							"nameOverride": "spell_listtype_shyvanadamageonhit"
+						},
+						{
+							"type": "MSPercent",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
 						"DamagePerTick": [10, 20, 30, 40, 50, 60, 70],
@@ -154,6 +178,12 @@
 					"objectName": "ShyvanaFireball",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanaflamebreath.png",
 					"tooltip": "Shyvana unleashes a fireball that deals <magicDamage>@DamageCalc@ magic damage</magicDamage> and marks for @MarkDuration@ seconds. The fireball stops on the first champion hit.<br><br>Shyvana's Attacks against marked targets deal an additional <magicDamage>@PercentHPDamageOnHit@% max Health magic damage</magicDamage>.<br><br><keywordMajor>Dragon Form:</keywordMajor> The fireball explodes once it ends, dealing an additional <magicDamage>@DragonExplosionCalc@ magic damage</magicDamage> and scorching the earth, dealing <magicDamage>@DragonDamageTotalCalc@ magic damage</magicDamage> over 4 seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"cooldownTime": [13, 12, 11, 10, 9, 8, 8],
 					"dataValues": {
 						"BaseDamage": [45, 85, 125, 165, 205, 245, 285],
@@ -280,6 +310,20 @@
 					"objectName": "ShyvanaTransformCast",
 					"image": "assets/characters/shyvana/hud/icons2d/shyvanadragonsdescent.png",
 					"tooltip": "<spellPassive>Passive: </spellPassive>Shyvana generates <keywordMajor>@FuryGainPerTick@ Fury</keywordMajor> every second, and Attacks generate an extra <keywordMajor>@FuryGainOnHit@ Fury</keywordMajor>.<br><br><spellActive>Active: </spellActive>Shyvana transforms into <keywordMajor>Dragon Form</keywordMajor>, gaining <healing>@BonusHP@ max Health</healing> and flying forward, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> and <status>Knocking</status> enemies toward her target location.",
+					"extendedVariables": [
+						{
+							"type": "FuryGainPerTick",
+							"nameOverride": "spell_listtype_shyvanapassivefurygain"
+						},
+						{
+							"type": "BonusHP",
+							"nameOverride": "spell_listtype_bonushealth"
+						},
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_shyvanaflightdamage"
+						}
+					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"Damage": [50, 150, 250, 350, 450, 550, 650],
@@ -333,5 +377,15 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_bonusdamage": "Bonus Damage:",
+		"spell_listtype_attackspeed": "Attack Speed",
+		"spell_listtype_shyvanadamageaura": "Damage (aura)",
+		"spell_listtype_shyvanadamageonhit": "Damage (on hit)",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_shyvanapassivefurygain": "Passive Fury Gain",
+		"spell_listtype_bonushealth": "Bonus Health",
+		"spell_listtype_shyvanaflightdamage": "Flight Damage"
+	}
 }

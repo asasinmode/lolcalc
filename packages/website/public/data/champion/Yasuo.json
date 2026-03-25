@@ -36,6 +36,12 @@
 					"objectName": "YasuoQ1Wrapper",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_q1.png",
 					"tooltip": "Yasuo thrusts, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If he hits, he gains a stack for @GatheringStormDuration@ seconds. While he has 2 stacks, his next use of this Ability fires a whirlwind from range, dealing the same damage and <status>Knocking Up</status> for @KnockUpDurationTOOLTIPONLY@ second.<br><br>If used while dashing, this Ability strikes in a circle rather than a stab.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"cooldownTime": [4, 4, 4, 4, 4, 4, 4],
 					"dataValues": {
 						"BaseDamage": [-5, 20, 45, 70, 95, 120, 145],
@@ -92,6 +98,12 @@
 					"objectName": "YasuoW",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_w.png",
 					"tooltip": "Yasuo creates a drifting wall of wind that blocks all enemy projectiles for 4 seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_width"
+						}
+					],
 					"cooldownTime": [27, 25, 23, 21, 19, 17, 15],
 					"dataValues": {
 						"WallLife": [4, 4, 4, 4, 4, 4, 4],
@@ -119,6 +131,20 @@
 					"objectName": "YasuoE",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_e.png",
 					"tooltip": "Yasuo dashes through a target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Each use of this Ability grants <magicDamage>@BonusDamagePerStack@</magicDamage> bonus damage to subsequent uses for @StackDuration@ seconds, stacking up to @MaxStacks@ times.<br><br>This Ability has a @Effect2Amount@ second per-target Cooldown.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_perunitcooldown"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_cooldown"
+						}
+					],
 					"cooldownTime": [0.5, 0.5, 0.4, 0.3, 0.2, 0.1, 0.1],
 					"dataValues": {
 						"MaxStacks": [4, 4, 4, 4, 4, 4, 4],
@@ -170,6 +196,12 @@
 					"objectName": "YasuoR",
 					"image": "assets/characters/yasuo/hud/icons2d/yasuo_r.png",
 					"tooltip": "Yasuo teleports to an <status>Airborne</status> enemy champion, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> and holding all nearby <status>Airborne</status> enemies up for an additional @RKnockupDuration@ second. Yasuo also gains maximum <keywordMajor>Flow</keywordMajor>, but loses all <spellName>{{Spell_YasuoQ1Wrapper_Name}}</spellName> stacks.<br><br>Afterwards, Yasuo's critical strikes ignore <scaleArmor>@RPercentArmorPen@% bonus Armor</scaleArmor> for @RBuffDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "RBaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"cooldownTime": [105, 70, 50, 30, 30, 30, 30],
 					"dataValues": {
 						"RBaseDamage": [50, 200, 350, 500, 650, 800, 950],
@@ -268,6 +300,10 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_width": "Width",
+		"spell_listtype_perunitcooldown": "Per Unit Cooldown",
+		"spell_listtype_cooldown": "Cooldown",
 		"spell_yasuopassive_tooltip": "<spellPassive>Resolve:</spellPassive> Moving grants <keywordMajor>Flow</keywordMajor>, which is tracked on Yasuo's resource bar. Moving faster grants more <keywordMajor>Flow</keywordMajor>. At maximum <keywordMajor>Flow</keywordMajor>, damage from a champion or monster briefly grants <shield>@ShieldValue@ Shield</shield>.<br><br><spellPassive>Intent:</spellPassive> Yasuo's Critical Strike Chance is increased by @CritChanceMultiplier*100@% but his Critical Strike Damage is reduced to @CurrentCritDamage@. Gain <physicalDamage>@YasuoCritToAD*.01@ Bonus Attack Damage</physicalDamage> for every 1% Critical Strike Chance above 100%."
 	}
 }

@@ -36,6 +36,16 @@
 					"objectName": "RumbleFlameThrower",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_flamespitter.png",
 					"tooltip": "Rumble ignites his flamethrower, dealing <magicDamage>@FlatDamage@ plus @HealthDamage*100@% max Health magic damage</magicDamage> over @FlamespitterDuration@ seconds, reduced to <attention>@MinionMod*100@%</attention> against minions.<br><br><keywordMajor>Danger Zone:</keywordMajor> Damage is increased to <magicDamage>@EmpoweredDamage@ plus @EmpoweredHealth@ max Health</magicDamage>.<br><br><rules>Percent damage is limited to @MonsterCap@ damage on Monsters. </rules>",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "HealthDamage",
+							"nameOverride": "spell_listtype_percentmaxhealth"
+						}
+					],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
 						"BaseDamage": [35, 60, 85, 110, 135, 160, 185],
@@ -113,6 +123,16 @@
 					"objectName": "RumbleShield",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_scrapshield.png",
 					"tooltip": "Rumble tosses up a barrier, gaining <shield>@TotalShield@ Shield</shield> for @ShieldDuration.1@ seconds and <speed>@MoveSpeed*100@% Move Speed</speed> for @MoveSpeedDuration@ second.<br><br><keywordMajor>Danger Zone:</keywordMajor> The barrier grants <shield>@EmpoweredShield@ Shield</shield> and <speed>@EmpoweredMS@ Move Speed</speed> instead.",
+					"extendedVariables": [
+						{
+							"type": "BaseShield",
+							"nameOverride": "spell_listtype_shield"
+						},
+						{
+							"type": "MoveSpeed",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataValues": {
 						"HeatCost": [20, 20, 20, 20, 20, 20, 20],
@@ -182,6 +202,20 @@
 					"objectName": "RumbleGrenade",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_electroharpoon.png",
 					"tooltip": "Rumble launches an electrified harpoon, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @BaseSlowAmount@% for @SlowDuration@ seconds, and reducing the enemy's <scaleMR>Magic Resist</scaleMR> by @PercMagicPen*100@% for @ShredDuration@ seconds.<br><br>Hitting an enemy who's already <status>Slowed</status> by this Ability increases the <status>Slow</status> to @EmpoweredSlowAmount@% and reduces the enemy's <scaleMR>Magic Resist</scaleMR> by @EnhancedMagicPen*100@%<br><br><keywordMajor>Danger Zone:</keywordMajor> The harpoon deals <magicDamage>@EmpDamage@ magic damage</magicDamage> instead and the <status>Slow</status> and reduced <scaleMR>Magic Resist</scaleMR> are increased by 50%.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "BaseSlowAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "PercMagicPen",
+							"nameOverride": "spell_rumblegrenade_mrshred"
+						}
+					],
 					"cooldownTime": [0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
 					"dataValues": {
 						"BaseDamage": [30, 55, 80, 105, 130, 155, 180],
@@ -225,6 +259,12 @@
 					"objectName": "RumbleCarpetBomb",
 					"image": "assets/characters/rumble/hud/icons2d/rumble_r.png",
 					"tooltip": "Rumble launches a line of rockets, creating a burning trail that lasts @TrailDuration@ seconds, <status>Slowing</status> by @SlowAmount@% and dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.<br><br>Rumble can control the direction of the trail by clicking and dragging while casting this Ability.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamagePerSecond",
+							"nameOverride": "spell_listtype_damagepersecond"
+						}
+					],
 					"cooldownTime": [130, 130, 105, 80, 80, 80, 80],
 					"dataValues": {
 						"NumMissiles": [6, 6, 6, 6, 6, 6, 6],
@@ -320,5 +360,13 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_percentmaxhealth": "% Max Health",
+		"spell_listtype_shield": "Shield Amount",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_slow": "Slow",
+		"spell_rumblegrenade_mrshred": "Magic Resist Shred",
+		"spell_listtype_damagepersecond": "Damage Per Second"
+	}
 }

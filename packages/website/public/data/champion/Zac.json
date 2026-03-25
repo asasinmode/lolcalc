@@ -36,6 +36,12 @@
 					"objectName": "ZacQ",
 					"image": "assets/characters/zac/hud/icons2d/zacq.png",
 					"tooltip": "Zac stretches his arm out, attaching it to the first enemy hit to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and briefly <status>Slow</status> them. Zac's next Attack gains increased range and applies the same damage and <status>Slow</status>. <br><br>If Zac hits a <i>different</i> enemy with this Attack, he <status>Knocks Up</status> both towards each other. If they collide, they and surrounding enemies take <magicDamage>@TotalDamage@ magic damage</magicDamage> and are briefly <status>Slowed</status>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"cooldownTime": [14, 14, 12.5, 11, 9.5, 8, 8],
 					"dataValues": {
 						"BaseDamage": [30, 60, 90, 120, 150, 180, 210],
@@ -121,6 +127,16 @@
 					"objectName": "ZacW",
 					"image": "assets/characters/zac/hud/icons2d/zacw.png",
 					"tooltip": "Zac's body erupts, dealing <magicDamage>@BaseDamage@ + @DisplayPercentDamage@ max Health magic damage</magicDamage> to nearby enemies.<br><br>Absorbing <keywordMajor>Goo</keywordMajor> reduces this Ability's Cooldown by 1 second.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_flatdamage"
+						},
+						{
+							"type": "BaseMaxHealthDamage",
+							"nameOverride": "spell_listtype_maxhealthdamage"
+						}
+					],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
 					"dataValues": {
 						"BaseDamage": [30, 40, 50, 60, 70, 80, 90],
@@ -189,6 +205,16 @@
 					"objectName": "ZacE",
 					"image": "assets/characters/zac/hud/icons2d/zace.png",
 					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_range"
+						}
+					],
 					"cooldownTime": [25, 22, 19, 16, 13, 10, 10],
 					"spellCalculations": {
 						"MaxStun": {
@@ -264,6 +290,12 @@
 					"objectName": "ZacR",
 					"image": "assets/characters/zac/hud/icons2d/zacr.png",
 					"tooltip": "Zac bounces @Bounces@ times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>@DamagePerBounce@ magic damage</magicDamage>. Subsequent bounces deal <magicDamage>@DamagePerSubsequentBounce@ magic damage</magicDamage> and <status>Slow</status> by @SlowAmount*100@% for @SlowDuration@ second.<br><br>Zac gains up to <speed>@EndingMS*100@% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamageBounce",
+							"nameOverride": "spell_zacr_levelup_damage"
+						}
+					],
 					"cooldownTime": [120, 120, 105, 90, 90, 90, 90],
 					"dataValues": {
 						"Bounces": [4, 4, 4, 4, 4, 4, 4],
@@ -443,6 +475,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_flatdamage": "Flat Damage",
+		"spell_listtype_maxhealthdamage": "Maximum Health Damage",
+		"spell_listtype_range": "Range",
+		"spell_zacr_levelup_damage": "Base Bounce Damage",
 		"spell_zacpassivechunkdrop_tooltip": "Each time Zac hits an enemy with an Ability, he sheds a chunk of <keywordMajor>Goo</keywordMajor> that can be reabsorbed to restore <healing>@HealPercent@ Max Health</healing>.<br><br>Upon dying, Zac splits into 4 bloblets that attempt to recombine. If any bloblets remain after <scaleLevel>@ReviveBlobletDuration@</scaleLevel> seconds, he will revive with 10-50% Health based on the surviving bloblet's Health. This has a @ReviveCooldown@ second Cooldown."
 	}
 }

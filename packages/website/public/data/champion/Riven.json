@@ -36,6 +36,16 @@
 					"objectName": "RivenTriCleave",
 					"image": "assets/characters/riven/hud/icons2d/rivenbrokenwings.png",
 					"tooltip": "Riven dashes forward, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage>. She can <recast>Recast</recast> this Ability twice. The first <recast>Recast</recast> is the same as the original, but the second has a different effect:<br><br><recast>Recast</recast>: Riven leaps forward and slams, dealing <physicalDamage>@FirstSlashDamage@ physical damage</physicalDamage> and <status>Knocks Up</status> nearby enemies for 0.75 seconds.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ADRatio",
+							"nameOverride": "spelllisttype_attackdamageratio"
+						}
+					],
 					"cooldownTime": [13, 13, 13, 13, 13, 13, 13],
 					"dataValues": {
 						"BaseDamage": [15, 45, 75, 105, 135, 165, 195],
@@ -76,6 +86,12 @@
 					"objectName": "RivenMartyr",
 					"image": "assets/characters/riven/hud/icons2d/rivenkishout.png",
 					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"cooldownTime": [12, 11, 10, 9, 8, 7, 7],
 					"spellCalculations": {
 						"TotalDamage": {
@@ -113,6 +129,12 @@
 					"objectName": "RivenFeint",
 					"image": "assets/characters/riven/hud/icons2d/rivenpathoftheexile.png",
 					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_shieldamount"
+						}
+					],
 					"cooldownTime": [10, 10, 9, 8, 7, 6, 6],
 					"spellCalculations": {
 						"TotalShield": {
@@ -149,6 +171,16 @@
 					"objectName": "RivenFengShuiEngine",
 					"image": "assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png",
 					"tooltip": "Riven's weapon surges with spiritual energy, granting her <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and increased range on damaging Abilities and Attacks for @Duration@ seconds. While active, she can <recast>Recast.</recast><br><br><recast>Recast:</recast> Riven fires a wind slash that deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>, based on their missing Health.",
+					"extendedVariables": [
+						{
+							"type": "MinBase",
+							"nameOverride": "spell_listtype_rivenshockwavedamage"
+						},
+						{
+							"type": "MaxBase",
+							"nameOverride": "spell_listtype_rivenshockwavemaxdamage"
+						}
+					],
 					"cooldownTime": [10, 120, 90, 60, 60, 10, 10],
 					"dataValues": {
 						"MinBase": [50, 100, 150, 200, 250, 300, 350],
@@ -241,6 +273,11 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spelllisttype_attackdamageratio": "Attack Damage Ratio",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_rivenshockwavedamage": "Minimum Shockwave Damage",
+		"spell_listtype_rivenshockwavemaxdamage": "Maximum Shockwave Damage",
 		"spell_rivenpassive_tooltip": "Using an Ability grants Riven a charge for 6 seconds (max @Charges@). Her Attacks spend a charge to deal an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>."
 	}
 }

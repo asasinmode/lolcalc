@@ -36,6 +36,23 @@
 					"objectName": "EkkoQ",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_q.png",
 					"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @Effect2Amount*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "OutgoingDamage",
+							"nameOverride": "spell_listtype_outgoingdamage"
+						},
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "ReturnDamage",
+							"nameOverride": "spell_listtype_returndamage"
+						}
+					],
 					"mana": [50, 60, 70, 80, 90, 100],
 					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
@@ -90,6 +107,15 @@
 					"objectName": "EkkoW",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_w.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_shieldamount"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [30, 35, 40, 45, 50, 50],
 					"cooldownTime": [24, 22, 20, 18, 16, 14, 14],
 					"dataValues": {
@@ -151,6 +177,15 @@
 					"objectName": "EkkoE",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_e.png",
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
+					"extendedVariables": [
+						{
+							"type": "Effect%dAmount",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [40, 45, 50, 55, 60, 60],
 					"cooldownTime": [9.5, 9, 8.5, 8, 7.5, 7, 7],
 					"spellCalculations": {
@@ -186,6 +221,16 @@
 					"objectName": "EkkoR",
 					"image": "assets/characters/ekko/hud/icons2d/ekko_r.png",
 					"tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>@TotalBaseHeal@ Health</healing>, increased by @PercentHealAmpPerPercentMissingHealth@% for each 1% Health he lost in last 4 seconds.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "FlatHeal",
+							"nameOverride": "spell_listtype_healing"
+						}
+					],
 					"mana": [100, 100, 100, 0, 0, 0],
 					"cooldownTime": [110, 110, 80, 50, 50, 50, 50],
 					"dataValues": {
@@ -313,6 +358,12 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_outgoingdamage": "Outgoing Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_returndamage": "Return Damage",
+		"spell_listtype_shieldamount": "Shield Amount",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_healing": "Healing",
 		"spell_ekkopassive_tooltip": "Every third Attack or damaging Ability on the same target deals an additional <magicDamage>@ThreeHitDamage@ magic damage</magicDamage>. If the target is a champion, Ekko gains <speed>@BonusMS@ Move Speed</speed> for @SpeedDuration@ seconds. This effect can't trigger on the same enemy more than once every 5 seconds."
 	}
 }

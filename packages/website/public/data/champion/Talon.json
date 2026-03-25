@@ -36,6 +36,12 @@
 					"objectName": "TalonQ",
 					"image": "assets/characters/talon/hud/icons2d/talonq.png",
 					"tooltip": "Talon leaps to a target and deals <physicalDamage>@LeapDamage@ physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.<br><br>If this Ability kills the target, Talon restores <healing>@TotalHealing@ Health</healing> and refunds @CooldownRefund*100@% of its Cooldown.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 6],
 					"dataValues": {
@@ -96,6 +102,23 @@
 					"objectName": "TalonW",
 					"image": "assets/characters/talon/hud/icons2d/talonw.png",
 					"tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>@TotalInitialDamage@ physical damage</physicalDamage>. The blades then return to him, dealing <physicalDamage>@TotalReturnDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @MovespeedSlow*100@% for @SlowDuration@ second.",
+					"extendedVariables": [
+						{
+							"type": "Cost"
+						},
+						{
+							"type": "InitialBaseDamage",
+							"nameOverride": "spell_listtype_initialdamage"
+						},
+						{
+							"type": "ReturnBaseDamage",
+							"nameOverride": "spell_listtype_returndamage"
+						},
+						{
+							"type": "MovespeedSlow",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [50, 55, 60, 65, 70, 75],
 					"cooldownTime": [9, 9, 8.5, 8, 7.5, 7, 7],
 					"dataValues": {
@@ -150,6 +173,12 @@
 					"objectName": "TalonE",
 					"image": "assets/characters/talon/hud/icons2d/talone.png",
 					"tooltip": "Talon vaults over the nearest terrain or structure. Talon cannot dash over the same terrain more than once every @WallCD@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "WallCD",
+							"nameOverride": "spell_talone_wallcooldown"
+						}
+					],
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"WallCD": [185, 160, 135, 110, 85, 60, 35]
@@ -172,6 +201,16 @@
 					"objectName": "TalonR",
 					"image": "assets/characters/talon/hud/icons2d/talonr.png",
 					"tooltip": "Talon disperses a ring of blades that deal <physicalDamage>@Damage@ physical damage</physicalDamage>, gains <speed>@MoveSpeed*100@% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for @Duration@ seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> again.<br><br>If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>{{Spell_TalonQ_Name}}</spellName>, the blades return to the target instead.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "MoveSpeed",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"mana": [100, 100, 100, 100, 100, 100],
 					"cooldownTime": [100, 100, 80, 60, 60, 60, 60],
 					"dataValues": {
@@ -242,6 +281,12 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_initialdamage": "Initial Damage",
+		"spell_listtype_returndamage": "Return Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_talone_wallcooldown": "Terrain Cooldown",
+		"spell_listtype_movementspeed": "Move Speed",
 		"game_buff_tooltip_talonpassive": "Talon's Abilities apply a stack to champions and large jungle monsters they damage for @StackDuration@ seconds (max 3 stacks).<br><br>When Talon Attacks a target with 3 stacks, he deals an additional <physicalDamage>@BleedDamage@ physical damage</physicalDamage> over @BleedDuration@ seconds."
 	}
 }

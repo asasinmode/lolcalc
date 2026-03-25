@@ -163,6 +163,7 @@ if (true || !championData || championData?.version !== latestVersion) {
 	}
 
 	await fs.writeFile(championFilePath, stringifyObject(championData));
+	await fs.writeFile(textFilePath, stringifyObject(textData));
 }
 
 const itemFilePath = `${import.meta.dirname}/../app/assets/item.json`;
@@ -944,11 +945,12 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 		for (const [stringtableKey, value] of stringtableVariables.entries()) {
 			((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
 		}
-		// TODO try hashed stringtable variables, cant figure out what the hashing algorithm is atm
+		// TODO try hashed stringtable variables, cant figure out what the hashing algorithm is atm (below uses `xxh3.Xxh3.withSeed(0n)`)
 		// in passives only Zilean and Kalista have their tooltips hashed using xxh3 but the hashes my version outputs are 1 letter different from what's in the stringtable
 		// for Kalista `74fdc9540b` instead of `34fdc9540b`
 		// for Zilean `7ce6b5f53c` instead of `3ce6b5f53c`
 		// so when implementing trying hash variable either make some workaround with checking if 9 match or find the cause of the problem
+		// same for Hecarim in extended variables has `spell_listtype_hecarimw: resist amount`, which hashes to `ad503eb14e` but in stringtable there's `2d503eb14e`
 		if (unknownStringtableVariables.size) {
 			debug[category].stringtableVariables.set(key, unknownStringtableVariables);
 		}
@@ -1045,7 +1047,11 @@ function championAbilityData(
 	return { maxLevel, variants };
 }
 
-function adjustApheliosAbilityData(championData: any, characterRootKey: string, abilities: IChampion['abilities']) {
+function adjustApheliosAbilityData(
+	championData: any,
+	characterRootKey: string,
+	abilities: IChampion['abilities'],
+) {
 	const { mAbilities } = championData[characterRootKey];
 	const handledAbilities = Object.values(abilities).flatMap(ability => ability.variants.map(variant => variant.dataKey));
 
@@ -1182,6 +1188,11 @@ function championAbilityVariants(
 			throw new Error(`${debugPrefix} expected mLocKeys in variant "${variantDataKey}"`);
 		}
 
+		const extendedVariableNameOverrides = new Set<string>();
+		for (const nameOverride of extendedVariableNameOverrides.values()) {
+			(textData.data.stringtable as any)[nameOverride] = getStringtableValue(nameOverride, 'extended variables name overrides');
+		}
+
 		const variant = {
 			name: undefined!,
 			objectName: variantData.ObjectName,
@@ -1189,6 +1200,21 @@ function championAbilityVariants(
 			tooltip: undefined,
 			tooltipExtended: undefined,
 			tooltipExtendedBelowLine: undefined,
+			extendedVariables: mClientData.mTooltipData?.mLists?.LevelUp?.Elements
+				?.filter((variable: any) => variable.type !== 'Cooldown')
+				.map((variable: any) => {
+					const { type } = variable;
+					if (!type) {
+						console.warn(`${debugPrefix} extended variable no type`, variable);
+					}
+
+					// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
+					// TODO replace %d on type with `.typeIndex`?
+					return {
+						type,
+						nameOverride: variable.nameOverride?.toLowerCase(),
+					};
+				}),
 			mana,
 			cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 			dataValues: DataValues?.length
@@ -1283,6 +1309,12 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 					variant.tooltipExtendedBelowLine,
 					{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
 				);
+			}
+
+			for (const extendedVariable of variant.extendedVariables || []) {
+				if (extendedVariable.nameOverride) {
+					(champion.stringtable as any)[extendedVariable.nameOverride] = getStringtableValue(extendedVariable.nameOverride, abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} extendedVariables` } : `${debugPrefix} extendedVariables`);
+				}
 			}
 
 			/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */

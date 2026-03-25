@@ -36,6 +36,20 @@
 					"objectName": "LeeSinQOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinq1.png",
 					"tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to the first enemy hit, granting <keywordStealth>True Sight</keywordStealth> of them, and allows Lee Sin to <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>@RecastDamage@ to @EmpoweredDamage@ physical damage</physicalDamage> scaling with the target's missing Health. ",
+					"extendedVariables": [
+						{
+							"type": "Q1BaseDamage",
+							"nameOverride": "spell_listtype_leesinqsonicwavedamage"
+						},
+						{
+							"type": "Q2BaseDamage",
+							"nameOverride": "spell_listtype_leesinresonatingstrikeminimumbasedamage"
+						},
+						{
+							"type": "Q2BaseDamage",
+							"nameOverride": "spell_listtype_leesinresonatingstrikemaximumbasedamage"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [11, 10, 9, 8, 7, 6, 6],
 					"dataValues": {
@@ -99,6 +113,16 @@
 					"objectName": "LeeSinWOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesinw1.png",
 					"tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>@ShieldAmount@ Shield</shield> for @ShieldDuration@ seconds and reduces this Ability's Cooldown by @W1CooldownRecovered*100@%. Lee Sin may <recast>Recast</recast> for the next @W1ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin gains @LifestealAndSpellVamp@% Omnivamp for @LifestealAndSpellVampTime@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "ShieldValue",
+							"nameOverride": "spell_listtype_leesinwshield"
+						},
+						{
+							"type": "LifestealAndSpellVamp",
+							"nameOverride": "spell_listtype_leesinwlifesteal"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [12, 12, 12, 12, 12, 12, 12],
 					"dataValues": {
@@ -137,6 +161,16 @@
 					"objectName": "LeeSinEOne",
 					"image": "assets/characters/leesin/hud/icons2d/leesine1.png",
 					"tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>@InitialDamage@ magic damage</magicDamage> and reveals them for @SlowDuration@ seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next @ReactivateTime@ seconds.<br><br><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by @SlowAmount@% decaying over @SlowDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "E1Damage",
+							"nameOverride": "spell_listtype_leesinedamage"
+						},
+						{
+							"type": "SlowAmount",
+							"nameOverride": "spell_listtype_leesineslow"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
@@ -172,6 +206,16 @@
 					"objectName": "LeeSinR",
 					"image": "assets/characters/leesin/hud/icons2d/leesinr.png",
 					"tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>@Damage@ plus @PercentHPCarryThrough@% of the kicked enemy's bonus Health as physical damage</physicalDamage>.",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "PercentHPCarryThrough",
+							"nameOverride": "spell_listtype_leesinrdamage"
+						}
+					],
 					"cooldownTime": [100, 110, 85, 60, 60, 60, 60],
 					"dataValues": {
 						"BaseDamage": [-50, 175, 400, 625, 850, 1075, 1300],
@@ -244,5 +288,15 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_leesinqsonicwavedamage": "Sonic Wave Damage",
+		"spell_listtype_leesinresonatingstrikeminimumbasedamage": "Resonating Strike Minimum Base Damage",
+		"spell_listtype_leesinresonatingstrikemaximumbasedamage": "Resonating Strike Maximum Base Damage",
+		"spell_listtype_leesinwshield": "Safeguard Shield Absorption",
+		"spell_listtype_leesinwlifesteal": "Iron Will Omnivamp %",
+		"spell_listtype_leesinedamage": "Tempest Damage",
+		"spell_listtype_leesineslow": "Cripple Slow",
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_leesinrdamage": "Bonus Health Damage"
+	}
 }

@@ -36,6 +36,19 @@
 					"objectName": "KayleQ",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_q.png",
 					"tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ seconds, and removing <scaleArmor>@ShredPercent@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds from the target and enemies behind them.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "SlowPercent",
+							"nameOverride": "spell_listtype_slow"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [60, 70, 80, 90, 100, 100],
 					"cooldownTime": [12, 12, 11, 10, 9, 8, 7],
 					"dataValues": {
@@ -86,6 +99,19 @@
 					"objectName": "KayleW",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_w.png",
 					"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds.",
+					"extendedVariables": [
+						{
+							"type": "Heal",
+							"nameOverride": "spell_listtype_healing"
+						},
+						{
+							"type": "Haste",
+							"nameOverride": "spell_listtype_movementspeed"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [70, 75, 80, 85, 90, 90],
 					"cooldownTime": [15, 15, 15, 15, 15, 15, 15],
 					"dataValues": {
@@ -132,6 +158,16 @@
 					"objectName": "KayleE",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_e.png",
 					"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
+					"extendedVariables": [
+						{
+							"type": "PassiveDamage",
+							"nameOverride": "spell_listtype_passivedamage"
+						},
+						{
+							"type": "ActiveExecutePercent",
+							"nameOverride": "spell_listtype_missinghealthdamage"
+						}
+					],
 					"cooldownTime": [8, 8, 7.5, 7, 6.5, 6, 8],
 					"dataValues": {
 						"PassiveDamage": [15, 15, 20, 25, 30, 35, 40],
@@ -199,6 +235,19 @@
 					"objectName": "KayleR",
 					"image": "assets/characters/kayle/hud/icons2d/kayle_r.png",
 					"tooltip": "Kayle makes an allied champion Invulnerable for @InvulnDuration@ seconds and then purifies the area around them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
+					"extendedVariables": [
+						{
+							"type": "Damage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "AoERadius",
+							"nameOverride": "spell_kayler_damageradius"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [100, 50, 0, 0, 0, 0],
 					"cooldownTime": [160, 160, 120, 80, 80, 80, 80],
 					"dataValues": {
@@ -295,6 +344,13 @@
 		}
 	},
 	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_healing": "Healing",
+		"spell_listtype_movementspeed": "Move Speed",
+		"spell_listtype_passivedamage": "Passive Damage",
+		"spell_listtype_missinghealthdamage": "Missing Health Damage",
+		"spell_kayler_damageradius": "Area Size",
 		"spell_kaylepassive_tooltip": "Kayle's attacks rank up as she gains levels and spends skill points.<br><br><ul><li><scaleLevel>Level @LevelForPassiveRank0@ - Zealous:</scaleLevel> Attacks grant <attackSpeed>@EnrageTotalASPerStack@% Attack Speed</attackSpeed> for @EnrageDuration@ seconds (max 5 stacks). At max stacks Kayle becomes Exalted, gaining <speed>@MSTowardsEnemy*100@% Move Speed</speed>.<br></li><li><scaleLevel>Level @LevelForPassiveRank1@ - Arisen: </scaleLevel>Attack range is increased to @UpgradedAttackRange@.<br></li><li><scaleLevel>Level @LevelForPassiveRank2@ - Aflame:</scaleLevel> Exalted attacks launch fire waves that deal <magicDamage>@PassiveWaveDamage@ magic damage</magicDamage>.<br></li><li><scaleLevel>Level @LevelForPassiveRank3@ - Transcendent:</scaleLevel> Become permanently Exalted. Attack range is increased to @FinalAttackRange@.</li></ul>"
 	}
 }

@@ -37,6 +37,16 @@
 					"image": "assets/characters/jayce/hud/icons2d/jayceq_melee.png",
 					"tooltip": "<keywordMajor>Mercury Hammer:</keywordMajor> Jayce leaps to an enemy, dealing <physicalDamage>@spell.JayceToTheSkies:Damage@ physical damage</physicalDamage> to surrounding enemies and <status>Slowing</status> them by @spell.JayceToTheSkies:Slow*-100@% for @spell.JayceToTheSkies:SlowDuration@ seconds.",
 					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Slow",
+							"nameOverride": "spell_listtype_slow"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [18, 16, 14, 12, 10, 8, 6],
 					"dataValues": {
@@ -69,6 +79,15 @@
 					"image": "assets/characters/jayce/hud/icons2d/jayceq_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Cannon</keywordMajor>: Jayce fires an orb of electricity, dealing <physicalDamage>@spell.JayceShockBlast:Damage@ physical damage</physicalDamage> to the first enemy hit and all surrounding enemies. Firing this orb through <spellName>{{Spell_JayceAccelerationGate_Name}}</spellName> increases the range, speed and raises the damage to <physicalDamage>@spell.JayceShockBlast:EmpoweredDamage@</physicalDamage>.",
 					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "Cost"
+						}
+					],
 					"mana": [55, 60, 65, 70, 75, 80],
 					"cooldownTime": [8, 8, 8, 8, 8, 8, 8],
 					"dataValues": {
@@ -116,6 +135,16 @@
 					"image": "assets/characters/jayce/hud/icons2d/jaycew_melee.png",
 					"tooltip": "<keywordMajor>Mercury Hammer - Passive:</keywordMajor> Jayce's <keywordMajor>Hammer</keywordMajor> Attacks grant <scaleMana>@spell.JayceStaticField:ManaGain@ Mana</scaleMana>.<br><br><keywordMajor>Mercury Hammer - Active:</keywordMajor> Jayce creates an electric aura dealing <magicDamage>@spell.JayceStaticField:Damage@ magic damage</magicDamage> over @spell.JayceStaticField:Duration@ seconds.",
 					"tooltipExtended": "{{Spell_JayceStaticField_Tooltip}}<br><br>{{Spell_JayceHyperCharge_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "BaseDamage",
+							"nameOverride": "spell_listtype_damage"
+						},
+						{
+							"type": "ManaGain",
+							"nameOverride": "spell_listtype_manareturn"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"dataValues": {
 						"ManaGain": [13, 15, 17, 19, 21, 23, 25],
@@ -144,6 +173,12 @@
 					"image": "assets/characters/jayce/hud/icons2d/jaycew_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Cannon:</keywordMajor> Jayce overcharges his cannon, gaining maximum <attackSpeed>Attack Speed</attackSpeed> for his next @spell.JayceHyperCharge:NumAttacks@ Attacks. These Attacks deal <physicalDamage>@spell.JayceHyperCharge:ActualDamage@ physical damage</physicalDamage>.",
 					"tooltipExtended": "{{Spell_JayceHyperCharge_Tooltip}}<br><br>{{Spell_JayceStaticField_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "DamagePerc",
+							"nameOverride": "spell_listtype_jaycedamagepershot"
+						}
+					],
 					"mana": [40, 40, 40, 40, 40, 40],
 					"cooldownTime": [14.6, 13, 11.4, 9.8, 8.2, 6.6, 5],
 					"dataValues": {
@@ -182,6 +217,16 @@
 					"image": "assets/characters/jayce/hud/icons2d/jaycee_melee.png",
 					"tooltip": "<keywordMajor>Hammer Form</keywordMajor>: Jayce swings his hammer, <status>Knocking Back</status> his target and dealing <magicDamage>@spell.JayceThunderingBlow:FlatDamage@ plus @spell.JayceThunderingBlow:PercHPDamage*100@% max Health magic damage</magicDamage>.",
 					"tooltipExtended": "{{Spell_JayceThunderingBlow_Tooltip}}<br><br>{{Spell_JayceAccelerationGate_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "PercHPDamage",
+							"nameOverride": "spell_listtype_maxhealthpercent"
+						},
+						{
+							"type": "MonsterCap",
+							"nameOverride": "spell_listtype_maxdamagetomonsters"
+						}
+					],
 					"mana": [55, 55, 55, 55, 55, 55],
 					"cooldownTime": [20, 20, 18, 16, 14, 12, 10],
 					"dataValues": {
@@ -210,6 +255,12 @@
 					"image": "assets/characters/jayce/hud/icons2d/jaycee_ranged.png",
 					"tooltip": "<keywordMajor>Mercury Cannon</keywordMajor>: Jayce deploys an acceleration gate for @spell.JayceAccelerationGate:Duration@ seconds that grants <speed>@spell.JayceAccelerationGate:MovementSpeed*100@% Move Speed</speed> decaying over @spell.JayceAccelerationGate:HasteDuration@ seconds to allied champions that pass through it.",
 					"tooltipExtended": "{{Spell_JayceAccelerationGate_Tooltip}}<br><br>{{Spell_JayceThunderingBlow_Tooltip}}",
+					"extendedVariables": [
+						{
+							"type": "MovementSpeed",
+							"nameOverride": "spell_listtype_movementspeed"
+						}
+					],
 					"mana": [50, 50, 50, 50, 50, 50],
 					"cooldownTime": [16, 16, 16, 16, 16, 16, 16],
 					"dataValues": {
@@ -358,5 +409,13 @@
 			]
 		}
 	},
-	"stringtable": {}
+	"stringtable": {
+		"spell_listtype_damage": "Damage",
+		"spell_listtype_slow": "Slow",
+		"spell_listtype_manareturn": "Mana Restore",
+		"spell_listtype_jaycedamagepershot": "Damage per Shot",
+		"spell_listtype_maxhealthpercent": "Max Health %",
+		"spell_listtype_maxdamagetomonsters": "Monster Damage Cap",
+		"spell_listtype_movementspeed": "Move Speed"
+	}
 }
