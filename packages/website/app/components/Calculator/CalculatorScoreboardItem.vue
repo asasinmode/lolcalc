@@ -392,7 +392,7 @@ const majorStats = computed<IChampionStat[]>(() => {
 		},
 		{
 			name: CHAMPION_STAT_NAMES.armor,
-			description: 'Reduces the amount of <physicaldamage>magic damage</physicaldamage> you take.',
+			description: 'Reduces the amount of <physicaldamage>physical damage</physicaldamage> you take.',
 			iconTextureKey: 'armor',
 			values: [
 				{
