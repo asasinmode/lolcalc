@@ -502,9 +502,17 @@ const updateChampionHealth = useNumberInput(props.value.currentHealth, true, max
 const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource);
 
 const healthBarEl = useTemplateRef('healthBar');
-const { onMousedown: startHealthBarDrag, cleanup: healthBarCleanup } = healthResourceSliderEvents(props.value.currentHealth, maxHealth, healthBarEl);
+const {
+	onMousedown: startHealthBarDrag,
+	cleanup: healthBarCleanup,
+	dragValueRef: healthDragValueRef,
+} = healthResourceSliderEvents(props.value.currentHealth, maxHealth, healthBarEl);
 const resourceBarEl = useTemplateRef('resourceBar');
-const { onMousedown: startAbilityResourceBarDrag, cleanup: abilityResourceBarCleanup } = healthResourceSliderEvents(props.value.currentAbilityResource, props.value.maxAbilityResource, resourceBarEl);
+const {
+	onMousedown: startAbilityResourceBarDrag,
+	cleanup: abilityResourceBarCleanup,
+	dragValueRef: abilityResourceDragValueRef,
+} = healthResourceSliderEvents(props.value.currentAbilityResource, props.value.maxAbilityResource, resourceBarEl);
 
 function healthResourceSliderEvents(target: Ref<number>, max: Ref<number>, element: Ref<HTMLElement | null>) {
 	function onMousedown(event: MouseEvent) {
@@ -531,14 +539,37 @@ function healthResourceSliderEvents(target: Ref<number>, max: Ref<number>, eleme
 		document.removeEventListener('mouseup', onMouseup);
 	}
 
+	const dragValueRef = ref(target.value);
+	let debounceTimeout: ReturnType<typeof setTimeout> | undefined;
+
 	function updateValue(mousePosition: number) {
+		if (debounceTimeout) {
+			clearTimeout(debounceTimeout);
+		}
+
 		const { left, right } = element.value!.getBoundingClientRect();
 		mousePosition = Math.max(left, Math.min(right, mousePosition));
 		const fillPercentage = (mousePosition - left) / (right - left);
-		target.value = Math.max(0, Math.min(max.value, Math.round(fillPercentage * max.value)));
+		const value = Math.max(0, Math.min(max.value, Math.round(fillPercentage * max.value)));
+		dragValueRef.value = value;
+
+		debounceTimeout = setTimeout(() => {
+			target.value = value;
+			debounceTimeout = undefined;
+		}, 500);
 	}
 
-	return { onMousedown, cleanup };
+	const watchHandle = watch(target, (value) => {
+		if (debounceTimeout) {
+			clearTimeout(debounceTimeout);
+			debounceTimeout = undefined;
+		}
+		dragValueRef.value = value;
+	});
+
+	onBeforeUnmount(() => watchHandle());
+
+	return { onMousedown, cleanup, dragValueRef };
 }
 
 function resetAbilityLevel(event: MouseEvent, ability: Exclude<IChampionAbilityKey, 'passive'>) {
@@ -999,7 +1030,7 @@ defineExpose({ el });
 				<div
 					ref="healthBar"
 					data-current-health=""
-					:style="`--fill-percentage: ${value.champion.value ? Math.min(value.currentHealth.value / maxHealth, 1) : 1}`"
+					:style="`--fill-percentage: ${value.champion.value ? Math.min(healthDragValueRef / maxHealth, 1) : 1}`"
 					@mousedown="startHealthBarDrag"
 				>
 					<template v-if="value.champion.value">
@@ -1008,7 +1039,7 @@ defineExpose({ el });
 						</label>
 						<input
 							:id="`${group}-${index}-current-ability-health`"
-							:value="Math.round(value.currentHealth.value)"
+							:value="Math.round(healthDragValueRef)"
 							min="0"
 							:max="maxHealth"
 							type="number"
@@ -1020,7 +1051,7 @@ defineExpose({ el });
 				<div
 					ref="resourceBar"
 					data-current-ability-resource=""
-					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(value.currentAbilityResource.value / value.maxAbilityResource.value, 1)}` : undefined"
+					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(abilityResourceDragValueRef / value.maxAbilityResource.value, 1)}` : undefined"
 					@mousedown="startAbilityResourceBarDrag"
 				>
 					<template v-if="value.maxAbilityResource.value">
@@ -1029,7 +1060,7 @@ defineExpose({ el });
 						</label>
 						<input
 							:id="`${group}-${index}-current-ability-resource`"
-							:value="Math.round(value.currentAbilityResource.value)"
+							:value="Math.round(abilityResourceDragValueRef)"
 							min="0"
 							:max="value.maxAbilityResource.value"
 							type="number"

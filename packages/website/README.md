@@ -45,7 +45,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] passive with tooltip
     - [x] abilities ui (only passive implemented)
     - [ ] ability tooltip shift variables
-    - [ ] debounce health change recalculation?
+    - [x] debounce updating health/ability resource value on drag
     - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest

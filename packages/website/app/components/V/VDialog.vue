@@ -24,6 +24,10 @@ function closeOnClickOutside(event: MouseEvent) {
 	}
 }
 
+onBeforeUnmount(() => {
+	document.removeEventListener('click', closeOnClickOutside);
+});
+
 defineExpose({
 	open() {
 		dialogEl.value?.showModal();
