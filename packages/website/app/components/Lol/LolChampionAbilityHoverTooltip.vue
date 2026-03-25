@@ -41,7 +41,7 @@ const hoveredAbilityTooltipText = computed(() => {
 		return undefined;
 	}
 
-	const abilityLevel = props.abilityKey !== 'passive' ? props.abilityLevel : undefined;
+	const abilityLevel = props.abilityKey !== 'passive' ? props.abilityLevel || 1 : undefined;
 
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
 		hoveredAbilityVariant.value.name,
@@ -70,7 +70,17 @@ const hoveredAbilityTooltipText = computed(() => {
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
-	const extendedVariables: [string, (string | number)[]][] = [];
+	let extendedVariables: [string, (string | number)[]][] | undefined = hoveredAbilityVariant.value.extendedVariables?.map(variable =>
+		// TODO actual variable values
+		[
+			(variable.nameOverride && champion.value?.stringtable[variable.nameOverride]) || variable.type,
+			Array.from({ length: hoveredAbility.value!.maxLevel }, (_, i) => Math.round((Math.random() + i) * 100)),
+		]);
+
+	if (cooldown) {
+		extendedVariables ||= [];
+		extendedVariables.push(['Cooldown', hoveredAbilityVariant.value.cooldownTime!.slice(1, hoveredAbility.value!.maxLevel + 1)]);
+	}
 
 	// TODO detect unknown cost/cooldown
 	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
@@ -146,7 +156,7 @@ defineExpose({ el });
 		</span>
 		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
 		<UnresolvedVariablesAlert v-if="hoveredAbilityTooltipText?.anyUnknownVariables" />
-		<footer v-if="hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariables.length">
+		<footer v-if="hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariables?.length">
 			<div
 				v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
 				v-show="globalKeyModifiers.shift"
@@ -272,6 +282,8 @@ defineExpose({ el });
 				}
 
 				> dd {
+					--at-apply: 'text-end';
+
 					> span {
 						--at-apply: 'text-neutral-400';
 					}

@@ -44,7 +44,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [x] abilities ui (only passive implemented)
-    - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`? Use them in results
+    - [x] list of variable values when holding shift
     - [x] debounce updating health/ability resource value on drag
     - [x] runes (only shards implemented)
     - [x] dragons/souls
@@ -166,7 +166,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
-  - [ ] flesh out hover extendedVariables
+  - [ ] extendedVariable values
+  - [ ] result row variable values
   - [ ] result variant sections
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] explicit calculation formulas you can look at
