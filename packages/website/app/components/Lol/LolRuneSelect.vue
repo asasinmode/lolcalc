@@ -211,6 +211,7 @@ function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredR
 	runeDescriptionTooltip.value?.showPopover();
 	runeDescriptionTooltipAnchor = target;
 	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
+	runeDescriptionTooltipAnchor?.addEventListener('focusout', leaveTooltipableElement, { passive: true, once: true });
 	window.addEventListener('resize', updateTooltipPosition, { passive: true });
 	hoveredRune.value = 'tooltipLong' in rune
 		? { title: rune.title, description: rune.tooltipShort, expandedDescription: rune.tooltipLong, rune: rune.rune }
@@ -221,6 +222,7 @@ function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredR
 function leaveTooltipableElement() {
 	runeDescriptionTooltip.value?.hidePopover();
 	runeDescriptionTooltipAnchor?.removeEventListener('mouseleave', leaveTooltipableElement);
+	runeDescriptionTooltipAnchor?.removeEventListener('focusout', leaveTooltipableElement);
 	window.removeEventListener('resize', updateTooltipPosition);
 	runeDescriptionTooltipAnchor = undefined;
 }
