@@ -128,4 +128,5 @@ export const KNOWN_GAME_DESCRIPTION_TAGS = [
 	'li',
 	'titleleft', // dragon stack descriptions
 	'maintext', // dragon stack descriptions
+	'stattracking', // veigar passive, draven passive
 ];

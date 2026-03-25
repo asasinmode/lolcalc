@@ -303,6 +303,10 @@ defineExpose({ header });
 		active {
 			--at-apply: 'font-500 text-orange-200';
 		}
+
+		stattracking {
+			--at-apply: 'text-orange-400';
+		}
 	}
 
 	.hover-tooltip.champion-item {

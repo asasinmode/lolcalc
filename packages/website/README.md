@@ -44,7 +44,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [x] abilities ui (only passive implemented)
-    - [ ] ability tooltip shift variables
+    - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`? Use them in results
     - [x] debounce updating health/ability resource value on drag
     - [x] runes (only shards implemented)
     - [x] dragons/souls
@@ -95,6 +95,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] hover tooltips
   - [x] rune paths not implemented alert
   - [ ] save button? Changes are saved instantly so it doesn't really make sense
+  - [ ] alert that configuration is incorrect
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
@@ -112,7 +113,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] target dummy damage source
 - [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query
-- [ ] calculations [check out](https://github.com/OsOmE1/leaguebuilder)
+- [ ] calculations
   - [ ] stats from rune shards
   - [ ] dragons/souls
   - [ ] implement role quests
@@ -162,7 +163,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] graph results in style of post game ones, table data but graph?
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
-  - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`? Use them in results
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
   - [ ] result variant sections
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
@@ -170,6 +170,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
   - [ ] components for stuff like manaflow band or precision legends for setting values
   - [ ] results section, hover tooltip, extract variables
+- [ ] overriding stats like target dummy
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
 - [ ] per patch versions = see stats/features from older patches
