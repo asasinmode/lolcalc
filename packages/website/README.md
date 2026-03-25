@@ -81,7 +81,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] cell have number values, then color them red/green depending on if higher or lower than others
   - [x] stats section show for source/target
   - [x] compare item variables
-  - [ ] section image appropriate ability/item hover tooltip with variable names instead of values
+  - [x] section image appropriate ability/item hover tooltip with variable names instead of values
   - [ ] ability rows not implemented yet, coming soon. Inert header cell and body, keep controls to delete
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
@@ -95,6 +95,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] secondary path unset layout
   - [x] hover tooltips
   - [x] rune paths not implemented alert
+  - [ ] save button
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
@@ -146,7 +147,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] github readme
 - [ ] confirm removing/clearing row/scoreboard item, ideally undo + dismiss
 - [ ] submit feedback on page / report issues
-  - [ ] probably a rust server
+  - [ ] rust/go server
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
 - [ ] build github actions CI/CD
@@ -170,6 +171,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
   - [ ] components for stuff like manaflow band or precision legends for setting values
+  - [ ] results section, hover tooltip, extract variables
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
 - [ ] per patch versions = see stats/features from older patches
@@ -177,7 +179,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 #### very future
 
-- [ ] combo damage, choose spells/aas in order, apply them to target, show damage
+- [ ] combo damage / sequence of things, choose spells/aas in order, apply them to target, show damage
 - [ ] aram
   - item overrides - `DataValuesModeOverride`
 - [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
@@ -189,7 +191,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] wave gold/xp at minute
 - [ ] champion & build guess recaptcha
 - [ ] chess like puzzles, guess from screenshot what to do, choose option
-- [ ] scorch vs gathering storm damage shower, pick champion, show 10, 20, 30... minutes
+- [ ] scorch vs gathering storm damage comparison, pick champion, show 10, 20, 30... minutes
 
 ## misc
 

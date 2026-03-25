@@ -954,11 +954,13 @@ defineExpose({ el });
 							@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
 						>
 					</div>
+					<ComingSoonCover feature="abilities" class="text-white pt-1 inset-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] absolute items-start!" />
 					<div
 						v-for="ability in ['q', 'w', 'e', 'r'] as const"
 						v-bind="{ [`data-${ability}`]: '' }"
 						:key="ability"
 						:data-level="value.abilityLevels.value[ability]"
+						:inert="!enableUnimplementedUi"
 					>
 						<h5>{{ ability.toUpperCase() }}</h5>
 						<img
@@ -1569,7 +1571,7 @@ defineExpose({ el });
 			}
 
 			> [data-abilities] {
-				--at-apply: 'gap-x-[--abilities-gap] col-span-2 flex';
+				--at-apply: 'relative gap-x-[--abilities-gap] col-span-2 flex';
 				anchor-name: --scoreboard-item-abilities;
 				width: var(--abilities-width);
 				height: var(--abilities-height);
