@@ -82,11 +82,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] stats section show for source/target
   - [x] compare item variables
   - [x] section image appropriate ability/item hover tooltip with variable names instead of values
-  - [ ] ability rows not implemented yet, coming soon. Inert header cell and body, keep controls to delete
+  - [x] ability rows not implemented yet, coming soon
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
   - [ ] one select to switch between sources/targets?
-  - [ ] ability variants sections
   - [x] per damage results row unknown variables style
   - [x] moving columns left/right
   - [x] moving sections up/down
@@ -109,6 +108,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] item groups, only one from group
   - [ ] show inventory total value
   - [ ] try not to intercept all right clicks
+- [ ] close dialogs on click outside
 - [ ] target dummy damage source
 - [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query
@@ -154,19 +154,17 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] service worker for caching cdragon images
 - [ ] future features in github project page thingy?
-- [ ] result graphs, probably future feature, maybe in style of post match graphs?
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
 ### future features
 
+- [ ] graph results in style of post game ones, table data but graph?
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] list of variable values when holding shift, maybe is `mClientData`.`mTooltipData`.`mLists`.`LevelUp`.`Elements`? Use them in results
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
-- [ ] results
-  - [ ] aphelios q variants
-  - [ ] compare runes, same as item?
+  - [ ] result variant sections
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)

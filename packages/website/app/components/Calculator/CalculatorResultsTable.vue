@@ -13,6 +13,7 @@ const resultSections = defineModel<IDamageResultTableSection[]>('sections', { re
 
 const text = useText();
 const items = useItems();
+const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
@@ -56,6 +57,9 @@ interface IDamageSectionOption {
 		abilityKey: string;
 	}[];
 }
+
+/** array containing `boolean` of whether a section is implemented or not */
+const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || section.additionalId === 'all' || section.additionalId === 'item'));
 
 const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 	const options: IDamageSectionOption[] = props.damageSources
@@ -269,7 +273,12 @@ const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (sectio
 };
 
 async function addResultsSection(event: SubmitEvent) {
-	const [rawOptionIndex, rawAbilityIndex] = (new FormData(event.target as HTMLFormElement).get('sectionOptionIndex')! as string).split('-');
+	const value = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex')! as string;
+	if (!value) {
+		return;
+	}
+
+	const [rawOptionIndex, rawAbilityIndex] = value.split('-');
 
 	const option = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!;
 	const ability = option.abilities[Number.parseInt(rawAbilityIndex!)]!;
@@ -681,7 +690,7 @@ function showSectionHoverTooltip(event: MouseEvent) {
 	const popover = (event.target as HTMLElement).querySelector('[popover]');
 	if (popover) {
 		(popover as HTMLElement).showPopover();
-		(event.target as HTMLElement).addEventListener('mouseleave', hideSectionHoverTooltip);
+		(event.target as HTMLElement).addEventListener('mouseleave', hideSectionHoverTooltip, { once: true });
 	}
 }
 
@@ -979,7 +988,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 						scope="colgroup"
 						:colspan="resultColumns.length + 2"
 					>
-						<div @mouseenter="section.hoverTooltipData && showSectionHoverTooltip($event)">
+						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event)">
 							<img
 								:src="section.image"
 								width="64"
@@ -987,7 +996,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 								aria-hidden="true"
 							>
 							<span>{{ section.name }}</span>
-							<template v-if="section.hoverTooltipData">
+							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
 								<div v-if="section.additionalId === 'item'" popover="hint" class="hover-tooltip champion-item">
 									<ItemDescription v-bind="section.hoverTooltipData" replace-variables-with-names />
 								</div>
@@ -1025,7 +1034,16 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 				@dragleave="onResultSectionDragleave"
 				@drop="onResultSectionDrop($event, index, false)"
 			>
-				<tr v-for="row in section.rows" :key="`${section.id}-${row.id}`" :class="{ unknown: row.isUnknown }">
+				<tr v-if="!implementedDamageSectionsMap[index]" class="unimplemented-row">
+					<td :colspan="3 + resultColumns.length">
+						<ComingSoonCover feature="champion abilities" class="text-neutral-400" />
+					</td>
+				</tr>
+				<tr
+					v-for="row in implementedDamageSectionsMap[index] ? section.rows : []"
+					:key="`${section.id}-${row.id}`"
+					:class="{ unknown: row.isUnknown }"
+				>
 					<th :id="`results-table-section-row-${section.id}-${row.id}`" scope="row" colspan="2" headers="results-table-header-damage-type">
 						<img
 							v-if="row.icon"
@@ -1085,13 +1103,22 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 							name="sectionOptionIndex"
 							required
 						>
-							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="option.optionName">
-								<option v-for="(ability, abilityIndex) in option.abilities" :key="ability.id" :value="`${optionIndex}-${abilityIndex}`">
+							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
+								<option
+									v-for="(ability, abilityIndex) in option.abilities"
+									:key="ability.id"
+									:value="`${optionIndex}-${abilityIndex}`"
+									:disabled="enableUnimplementedUi ? undefined : option.optionId !== 'items'"
+								>
 									{{ ability.name }}
 								</option>
 							</optgroup>
 						</select>
-						<button class="pretend-ui-button" type="submit">
+						<button
+							class="pretend-ui-button"
+							type="submit"
+							:disabled="!enableUnimplementedUi && !damageSectionOptions.some(option => option.type === 'item')"
+						>
 							add
 						</button>
 					</form>
@@ -1328,7 +1355,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 				--at-apply: 'text-neutral-200';
 
 				> tr {
-					&:hover {
+					&:where(:not(.unimplemented-row)):hover {
 						--at-apply: 'text-white';
 
 						> * {

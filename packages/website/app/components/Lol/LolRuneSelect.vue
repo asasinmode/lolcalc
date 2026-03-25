@@ -210,7 +210,7 @@ function enterTooltipableElement(event: MouseEvent | FocusEvent, rune: IHoveredR
 	const { target } = event as unknown as { target: HTMLElement };
 	runeDescriptionTooltip.value?.showPopover();
 	runeDescriptionTooltipAnchor = target;
-	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true });
+	runeDescriptionTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
 	window.addEventListener('resize', updateTooltipPosition, { passive: true });
 	hoveredRune.value = 'tooltipLong' in rune
 		? { title: rune.title, description: rune.tooltipShort, expandedDescription: rune.tooltipLong, rune: rune.rune }
