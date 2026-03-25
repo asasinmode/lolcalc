@@ -151,6 +151,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] rust/go server
   - [ ] github issue template
   - [ ] champion stats/damage is off (make sure to check no passives, runes, and so on...)
+- [ ] cleanup code
+  - [ ] try not to use global/composables in calculations related stuff (`onHitIcon`)
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] service worker for caching cdragon images

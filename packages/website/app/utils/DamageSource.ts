@@ -482,7 +482,7 @@ export function computedItemDescription(
 			replaceGameDescriptionIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
 				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
-					paragraph!.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon} <onhit>On-Hit</onhit>`),
+					paragraph!,
 					'item',
 					[item, damageSource?.itemDamageCalculationTarget.value],
 					replaceOptions,
@@ -492,7 +492,7 @@ export function computedItemDescription(
 				unknownVariables.push(...paragraphUnknown);
 				mergeMapsWithWarnDuplicate(variables, paragraphVariables, `[computedItemDescription] item ${item.id}`);
 
-				return replaceGameDescriptionIcons(replacedParagraph);
+				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
 			},
 			),
 		];

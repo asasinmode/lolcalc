@@ -70,7 +70,7 @@ const hoveredAbilityTooltipText = computed(() => {
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
-	const extendedVariableInfo: [string, number[]][] = [];
+	const extendedVariables: [string, (string | number)[]][] = [];
 
 	// TODO detect unknown cost/cooldown
 	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
@@ -83,9 +83,11 @@ const hoveredAbilityTooltipText = computed(() => {
 		anyUnknownVariables,
 		cooldown,
 		cost,
-		extendedVariableInfo,
+		extendedVariables,
 	};
 });
+
+const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 function abilityText(value: string, variant: IChampionAbilityVariant, stringtable?: Record<string, string>, level?: number) {
 	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(
@@ -100,7 +102,7 @@ function abilityText(value: string, variant: IChampionAbilityVariant, stringtabl
 		{ replaceWithName: props.replaceVariablesWithNames },
 	);
 
-	return { replaced: replaceGameDescriptionIcons(replaced), unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
+	return { replaced: replaceGameDescriptionIcons(replaced, onHitIcon), unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
 }
 
 const el = useTemplateRef('el');
@@ -144,14 +146,14 @@ defineExpose({ el });
 		</span>
 		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
 		<UnresolvedVariablesAlert v-if="hoveredAbilityTooltipText?.anyUnknownVariables" />
-		<footer v-if="hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariableInfo.length">
+		<footer v-if="hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariables.length">
 			<div
 				v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
 				v-show="globalKeyModifiers.shift"
 				v-html="hoveredAbilityTooltipText.tooltipExtendedBelowLine"
 			/>
-			<dl v-show="globalKeyModifiers.shift && hoveredAbilityTooltipText?.extendedVariableInfo">
-				<template v-for="[variableName, variableValues] in hoveredAbilityTooltipText?.extendedVariableInfo" :key="variableName">
+			<dl v-show="globalKeyModifiers.shift && hoveredAbilityTooltipText?.extendedVariables">
+				<template v-for="[variableName, variableValues] in hoveredAbilityTooltipText?.extendedVariables" :key="variableName">
 					<dt>
 						{{ variableName }}
 					</dt>

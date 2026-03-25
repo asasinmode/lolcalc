@@ -26,8 +26,8 @@ _setupGlobalKeyModifiers();
 const damageSources = ref<DamageSource<any>[]>(import.meta.dev
 	? [
 			markRaw(new DamageSource({ champion: useChampions().Aatrox, items: [useItems()['3155']] })),
-			markRaw(new DamageSource({ champion: useChampions().Ambessa })),
-			markRaw(new DamageSource({ champion: useChampions().Annie })),
+			markRaw(new DamageSource({ champion: useChampions().Veigar })),
+			markRaw(new DamageSource({ champion: useChampions().Kalista })),
 			markRaw(new DamageSource({ champion: useChampions().AurelionSol })),
 		]
 	: [
@@ -36,7 +36,7 @@ const damageSources = ref<DamageSource<any>[]>(import.meta.dev
 ) as unknown as DamageSource[];
 const damageTargets = ref<DamageSource<any>[]>(import.meta.dev
 	? [
-			markRaw(new DamageSource({ champion: useChampions().Zaahen })),
+			markRaw(new DamageSource({ champion: useChampions().Hecarim })),
 			markRaw(new DamageSource({ champion: useChampions().Aphelios })),
 			markRaw(new DamageSource({ champion: useChampions().Zac })),
 		]
