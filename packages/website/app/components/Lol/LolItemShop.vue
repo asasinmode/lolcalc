@@ -425,7 +425,7 @@ defineExpose({
 					<span class="sr-only">
 						Clear
 					</span>
-					<Icon class="i-ph:x size-4" />
+					<Icon class="i-ph:x-bold size-4" />
 				</button>
 				<div
 					v-show="searchExpanded"

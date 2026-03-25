@@ -245,9 +245,12 @@ defineExpose({
 	<VDialog id="dialog-rune-select" ref="vDialog">
 		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20">
 			<h1>Runes</h1>
-			<form method="dialog" class="ms-auto">
+			<form method="dialog">
 				<button autofocus value="cancel">
-					close
+					<span>
+						close
+					</span>
+					<Icon class="i-ph:x-bold" />
 				</button>
 			</form>
 		</header>
@@ -407,8 +410,24 @@ defineExpose({
 			'primary secondary'
 			'primary shards';
 
-		header {
+		> header {
 			grid-area: header;
+
+			> form {
+				--at-apply: 'ms-auto';
+
+				> button:last-child {
+					--at-apply: 'grid place-items-center size-7 rounded-1/2 b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800';
+
+					> span:first-child {
+						--at-apply: 'sr-only';
+					}
+
+					> .icon {
+						--at-apply: 'size-4';
+					}
+				}
+			}
 		}
 	}
 
