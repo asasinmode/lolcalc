@@ -12,6 +12,7 @@ defineEmits<{
 	abilityHover: [event: MouseEvent, ability: IChampionAbilityKey, variant?: number];
 }>();
 
+const enableUnimplementedUi = useEnableUnimplementedUi();
 const { minorVersion } = usePatchVersion();
 </script>
 
@@ -26,7 +27,8 @@ const { minorVersion } = usePatchVersion();
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'passive')"
 		>
 	</div>
-	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined">
+	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-2 absolute -top-2" />
+	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
 		<h5>main weapon</h5>
 		<img
 			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${(value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.q]?.image}` : undefined"
@@ -44,7 +46,7 @@ const { minorVersion } = usePatchVersion();
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'q')"
 		>
 	</div>
-	<div data-aphelios-w="">
+	<div data-aphelios-w="" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
 		<h5>offhand weapon</h5>
 		<img
@@ -63,7 +65,7 @@ const { minorVersion } = usePatchVersion();
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.e)"
 		>
 	</div>
-	<div data-aphelios-r="" :data-level="value.level.value >= 6 ? 1 : undefined">
+	<div data-aphelios-r="" :data-level="value.level.value >= 6 ? 1 : undefined" :inert="!enableUnimplementedUi">
 		<h5>R</h5>
 		<img
 			:src="!isLoading && value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.r.variants[value.abilityVariants.value.r]?.image}` : undefined"

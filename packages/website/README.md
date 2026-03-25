@@ -43,7 +43,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] slider drag health/mana
     - [x] champion data loading indicator
     - [x] passive with tooltip
-    - [ ] abilities ui (only passive implemented)
+    - [x] abilities ui (only passive implemented)
     - [ ] ability tooltip shift variables
     - [ ] debounce health change recalculation?
     - [x] runes (only shards implemented)
