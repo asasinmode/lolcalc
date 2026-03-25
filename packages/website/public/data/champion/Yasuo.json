@@ -100,7 +100,7 @@
 					"tooltip": "Yasuo creates a drifting wall of wind that blocks all enemy projectiles for 4 seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_width"
 						}
 					],
@@ -137,11 +137,11 @@
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_perunitcooldown"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_cooldown"
 						}
 					],

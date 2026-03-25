@@ -101,7 +101,7 @@
 					"tooltip": "Anivia summons a wall of ice @Effect2Amount@ units wide. The wall lasts for @Effect1Amount@ seconds before it melts.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_width"
 						}
 					],

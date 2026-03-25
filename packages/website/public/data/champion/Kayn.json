@@ -38,7 +38,7 @@
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_basedamage"
 						}
 					],
@@ -120,7 +120,7 @@
 					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -168,11 +168,11 @@
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_duration"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect7Amount",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],

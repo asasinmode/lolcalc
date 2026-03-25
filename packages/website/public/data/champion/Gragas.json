@@ -38,11 +38,11 @@
 					"tooltip": "Gragas rolls a cask that explodes after @Effect4Amount@ seconds, dealing between <magicDamage>@MinDamage@ magic damage</magicDamage> and <magicDamage>@MaxDamage@ magic damage</magicDamage> and <status>Slowing</status> for between @Effect2Amount@ and @Effect2Amount*1.5@% for @Effect3Amount@ seconds. The damage and <status>Slow</status> increase with time the cask spent before exploding. <br><br>Gragas can <recast>Recast</recast> to detonate the cask early.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],

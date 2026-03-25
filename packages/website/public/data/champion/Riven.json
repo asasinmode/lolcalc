@@ -88,7 +88,7 @@
 					"tooltip": "Riven's sword emits a burst of runic energy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Stunning</status> for @Effect5Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -131,7 +131,7 @@
 					"tooltip": "Riven quickly dashes and gains <shield>@TotalShield@ Shield</shield> for 1.5 seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_shieldamount"
 						}
 					],

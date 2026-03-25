@@ -81,7 +81,7 @@
 					"tooltip": "Katarina tosses a <keywordMajor>Dagger</keywordMajor> into the air and gains <speed>@Effect4Amount@% Move Speed</speed> decaying over @Effect2Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect4Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

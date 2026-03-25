@@ -228,7 +228,7 @@
 					"tooltip": "Kalista puts her <keywordMajor>Oathsworn</keywordMajor> into Stasis and draws them to herself for up to 4 seconds. The <keywordMajor>Oathsworn</keywordMajor> can click to launch themselves, stopping at the first champion hit and <status>Knocking Back</status> all nearby enemies. If the <keywordMajor>Oathsworn</keywordMajor> hits a champion, they are placed at their maximum attack range from it.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_knockupduration"
 						}
 					],

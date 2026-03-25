@@ -90,11 +90,11 @@
 					"tooltip": "Karthus creates a wall that lasts for @Effect4Amount@ seconds. Enemies that pass through lose <scaleMR>@Effect1Amount@% Magic Resist</scaleMR> for @Effect5Amount@ seconds and are <status>Slowed</status> by @Effect3Amount@% decaying over the duration.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_karthuswallwidth"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_movementspeedslow"
 						}
 					],
@@ -121,11 +121,11 @@
 					"tooltip": "<spellPassive>Passive: </spellPassive>When Karthus kills a unit, he restores <scaleMana>@Effect2Amount@ Mana</scaleMana>.<br><br><toggle>Toggle: </toggle>Karthus creates a necrotic aura, dealing <magicDamage>@TotalDPS@ magic damage</magicDamage> per second to nearby enemies.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damagepersecond"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_manareturn"
 						},
 						{

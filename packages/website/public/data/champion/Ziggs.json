@@ -94,7 +94,7 @@
 					"tooltip": "Ziggs flings an explosive charge that detonates after @BombDuration@ seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br><br>Satchel Charge will automatically destroy towers below @TurretDestroyPercent*100@% of their Health.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

@@ -45,7 +45,7 @@
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -246,7 +246,7 @@
 					"tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for @KnockupDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

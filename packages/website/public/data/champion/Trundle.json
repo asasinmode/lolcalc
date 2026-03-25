@@ -97,11 +97,11 @@
 					"tooltip": "Trundle freezes an area for @Effect4Amount@ seconds. While inside he gains <speed>@Effect1Amount*100@% Move Speed</speed>, <attackSpeed>@Effect2Amount*100@% Attack Speed</attackSpeed>, and @Effect3Amount*100@% increased healing.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
@@ -128,7 +128,7 @@
 					"tooltip": "Trundle creates an icy pillar for @Effect1Amount@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @Effect2Amount@%.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],

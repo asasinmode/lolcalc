@@ -45,7 +45,7 @@
 							"nameOverride": "spell_listtype_outgoingdamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
@@ -109,7 +109,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect4Amount",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
@@ -179,7 +179,7 @@
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

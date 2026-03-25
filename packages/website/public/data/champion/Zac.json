@@ -207,11 +207,11 @@
 					"tooltip": "<charge>Begin Charging:</charge> Zac pulls himself taut, charging up a dash over @Effect4Amount@ seconds.<br><br><release>Release:</release> Zac launches himself and <status>Knocks Up</status> enemies where he lands for up to @MaxStun@ second (based on charge time), dealing them <magicDamage>@Damage@ magic damage</magicDamage>. Zac spawns an extra chunk of <keywordMajor>Goo</keywordMajor> for each enemy champion hit.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_range"
 						}
 					],

@@ -38,11 +38,11 @@
 					"tooltip": "Cassiopeia blasts noxious gas, <keywordMajor>Poisoning</keywordMajor> enemies and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage> over @Effect2Amount@ seconds. Hitting a champion grants Cassiopeia <speed>@Effect3Amount@% Move Speed</speed> decaying over @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
@@ -87,11 +87,11 @@
 					"tooltip": "Cassiopeia spews venom, leaving toxic clouds for @Effect4Amount@ seconds. Enemies in the clouds take <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second, are <keywordMajor>Poisoned</keywordMajor>, <status>Grounded</status>, and <status>Slowed</status> by @Effect2Amount@%.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{

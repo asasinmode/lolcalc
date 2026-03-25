@@ -149,7 +149,7 @@
 					"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. ",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -198,11 +198,11 @@
 					"tooltip": "Xerath ascends to his true form and channels for @Effect1Amount@ seconds. During this time he may <recast>Recast</recast> up to @Effect2Amount@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_xerathnumberofshots"
 						},
 						{

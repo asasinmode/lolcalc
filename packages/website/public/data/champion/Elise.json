@@ -201,15 +201,15 @@
 					"tooltipExtended": "{{Spell_EliseHumanE_Tooltip}}<br><br>{{Spell_EliseSpiderE_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_stunduration"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_elisehumane_rappel"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect6Amount",
 							"nameOverride": "spell_elisehumane_dmgheal"
 						}
 					],
@@ -277,11 +277,11 @@
 							"nameOverride": "spell_listtype_eliserspiderlingcount"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect6Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingarmor"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect7Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingmr"
 						}
 					],
@@ -354,23 +354,23 @@
 					"tooltipExtended": "{{Spell_EliseRSpider_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseR_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_eliserbitedamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingbonusdamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingcount"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect6Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingarmor"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect7Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingmr"
 						}
 					],

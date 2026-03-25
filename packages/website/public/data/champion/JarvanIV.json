@@ -42,7 +42,7 @@
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_armorreduction"
 						},
 						{
@@ -90,11 +90,11 @@
 					"tooltip": "Jarvan summons an aegis, <status>Slowing</status> nearby enemies by @Effect2Amount@% for @Effect5Amount@ seconds and granting him a <shield>@BaseShield@ Shield</shield>, increased by <shield>@BonusShield@</shield> for each enemy champion hit.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -147,7 +147,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Jarvan gains <attackSpeed>@PermanentAttackSpeed*100@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Jarvan throws a standard into the ground, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and granting allies near the standard <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -155,7 +155,7 @@
 							"nameOverride": "spell_listtype_passiveattackspeed"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_activeattackspeed"
 						}
 					],

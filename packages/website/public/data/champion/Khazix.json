@@ -39,7 +39,7 @@
 					"tooltipExtended": "{{Spell_KhazixQ_Tooltip_0}}<br><br>{{Spell_KhazixQ_Tooltip_1}}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -113,7 +113,7 @@
 					"tooltipExtended": "{{Spell_KhazixW_Tooltip_0}}<br><br>{{Spell_KhazixW_Tooltip_1}}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

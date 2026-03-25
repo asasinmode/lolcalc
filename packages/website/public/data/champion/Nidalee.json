@@ -132,7 +132,7 @@
 					"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect7Amount",
 							"nameOverride": "spell_listtype_nidaleetrapdamage"
 						},
 						{

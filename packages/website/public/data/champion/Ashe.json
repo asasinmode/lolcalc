@@ -38,11 +38,11 @@
 					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect4Amount",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect6Amount",
 							"nameOverride": "spell_listtype_asheflurryattackdamageratio"
 						}
 					],

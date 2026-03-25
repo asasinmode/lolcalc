@@ -137,7 +137,7 @@
 					"tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for @Effect1Amount@ seconds. The cage lasts for 3 seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_stunduration"
 						},
 						{

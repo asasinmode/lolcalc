@@ -1203,7 +1203,7 @@ function championAbilityVariants(
 			extendedVariables: mClientData.mTooltipData?.mLists?.LevelUp?.Elements
 				?.filter((variable: any) => variable.type !== 'Cooldown')
 				.map((variable: any) => {
-					const { type } = variable;
+					const { type, typeIndex } = variable;
 					if (!type) {
 						console.warn(`${debugPrefix} extended variable no type`, variable);
 					}
@@ -1211,7 +1211,7 @@ function championAbilityVariants(
 					// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
 					// TODO replace %d on type with `.typeIndex`?
 					return {
-						type,
+						type: type.replace('%d', typeIndex),
 						nameOverride: variable.nameOverride?.toLowerCase(),
 					};
 				}),

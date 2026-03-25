@@ -199,7 +199,7 @@
 					"tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>@TotalDamage@ true damage</trueDamage>. If the enemy dies, the cost is refunded.<br><br>Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

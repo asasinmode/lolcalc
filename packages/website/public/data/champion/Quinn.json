@@ -98,7 +98,7 @@
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
@@ -127,7 +127,7 @@
 					"tooltip": "Quinn dashes to an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and marking them <keywordMajor>Vulnerable</keywordMajor>. Quinn then leaps backwards from the target, slightly <status>Knocking</status> them <status>Back</status> and <status>Slowing</status> them by @Effect1Amount*100@%, decaying over @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

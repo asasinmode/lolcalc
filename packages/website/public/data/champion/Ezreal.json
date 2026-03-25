@@ -138,7 +138,7 @@
 					"tooltip": "Ezreal teleports then fires a bolt at the nearest enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage>. The bolt prioritizes enemies affected by <spellName>Essence Flux</spellName>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

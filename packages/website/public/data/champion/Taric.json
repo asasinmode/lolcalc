@@ -38,11 +38,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Gain a stack (max @Effect6Amount@) every @StackCooldown@ seconds and when hitting a <spellName>Bravado</spellName> Attack.<br><br><spellActive>Active:</spellActive> Consume all stacks to restore <healing>@HealingPerStack@ Health</healing> per stack to nearby ally champions (<healing>@MaxStackHealing@</healing> at @Effect6Amount@ stacks).",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect6Amount",
 							"nameOverride": "spell_listtype_taricmaxcharges"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_taricmaxhealing"
 						}
 					],
@@ -128,7 +128,7 @@
 							"nameOverride": "spell_listtype_taricpassivearmor"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_taricshieldratio"
 						}
 					],
@@ -168,7 +168,7 @@
 					"tooltip": "Taric projects a beam of starlight, bursting after @Effect3Amount@ second to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stun</status> enemies for @Effect2Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

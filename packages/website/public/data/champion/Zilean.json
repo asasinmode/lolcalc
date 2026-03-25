@@ -111,11 +111,11 @@
 					"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

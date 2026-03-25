@@ -204,11 +204,11 @@
 					"tooltip": "Sejuani throws her True Ice bola, <status>Stunning</status> and revealing the first enemy champion hit for @Effect2Amount@ second and dealing <magicDamage>@MinorDamageTooltip@ magic damage</magicDamage>.<br><br>If the bola travels at least 25% of its range, it <status>Stuns</status> and reveals for @Effect6Amount@ seconds instead. It then also creates an ice storm that <status>Slows</status> surrounding enemies by @Effect4Amount@% for @Effect3Amount@ seconds. All affected enemies take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_minimumdamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect7Amount",
 							"nameOverride": "spell_listtype_maximumdamage"
 						}
 					],

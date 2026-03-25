@@ -38,7 +38,7 @@
 					"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @Effect2Amount@ seconds.<br>",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_bonusdamage"
 						}
 					],
@@ -184,11 +184,11 @@
 					"tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>@ChargeDamage@ magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by @BaseSlowAmount@% for @Effect6Amount@ seconds.<br><br>Xin Zhao also grants himself <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.<br><br>This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>. <br>",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],

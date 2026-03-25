@@ -209,11 +209,11 @@
 					"tooltip": "Tryndamere becomes completely immune to death for @Effect3Amount@ seconds, refusing to be reduced below @Effect2Amount@ Health, and instantly gains <keywordMajor>@Effect1Amount@ Fury</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_minimumhealth"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_tryndamerefurygained"
 						}
 					],

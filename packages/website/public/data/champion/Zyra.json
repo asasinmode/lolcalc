@@ -38,7 +38,7 @@
 					"tooltip": "Zyra causes thick vines to spread and explode into spines, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>.<br><br>If this Ability is cast near a <keywordMajor>Seed</keywordMajor>, the <keywordMajor>Seed</keywordMajor> grows into a Thorn Spitter that deals <magicDamage>@spell.ZyraP:PlantDamage@ magic damage</magicDamage> and lasts @spell.ZyraP:PlantDuration@ seconds. Thorn Spitters have 575 range.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -159,7 +159,7 @@
 					"tooltip": "Zyra summons the fury of nature, growing a twisted thicket that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. After 2 seconds, the vines snap upwards, <status>Knocking Up</status> for @Effect1Amount@ second.<br><br>Zyra's plants within the thicket become enraged, resetting their duration, gaining <healing>@Effect2Amount*100@% Health</healing> and Attacking for @PlantDamageBonus@% bonus damage.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

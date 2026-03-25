@@ -43,11 +43,11 @@
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_gangplankqplundergold"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_gangplankqplundersilverserpents"
 						},
 						{
@@ -124,7 +124,7 @@
 					"tooltip": "Gangplank consumes a large amount of citrus fruit, removing all <status>Disabling</status> effects and restoring <healing>@BaseHealth@ plus @Effect2Amount@% missing Health</healing>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
@@ -169,11 +169,11 @@
 					"tooltip": "Gangplank places a powder keg that can be attacked by Gangplank and enemy champions for @Effect5Amount@ seconds. When an enemy destroys it, the keg is defused. When Gangplank destroys it, it explodes, <status>Slowing</status> by @FinalSlowAmount@% for @Effect2Amount@ seconds and dealing the <physicalDamage>Attack's damage</physicalDamage>, ignoring @Effect10Amount@% Armor. Champions take an additional <physicalDamage>@Effect3Amount@ physical damage</physicalDamage>.<br><br>Keg health decays every @BarrelDecayTime@ seconds. Keg explosions detonate other kegs with overlapping blast zones, but don't deal damage to the same target more than once. Keg explosions triggered by <spellName>{{Spell_GangplankQWrapper_Name}}</spellName> will grant the bonus gold for targets killed.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_bonusdamageagainstchampions"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_taricmaxcharges"
 						},
 						{

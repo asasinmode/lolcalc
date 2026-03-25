@@ -38,7 +38,7 @@
 					"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @Effect2Amount*-100@% for 1 second.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

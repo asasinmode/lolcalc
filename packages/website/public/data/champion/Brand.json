@@ -38,7 +38,7 @@
 					"tooltip": "Brand launches a fireball that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

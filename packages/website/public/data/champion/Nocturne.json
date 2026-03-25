@@ -96,7 +96,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <attackSpeed>@Effect1Amount@% Attack Speed</attackSpeed>.<br><br><spellActive>Active:</spellActive> Nocturne creates a shadow barrier for 1.5 seconds that blocks the next enemy Ability. If an Ability is blocked, this Ability's passive effect is increased to <attackSpeed>@Effect1Amount*2@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_statbonusattackspeed"
 						}
 					],
@@ -122,11 +122,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Nocturne gains <speed>@TooltipFearMS*100@% Move Speed</speed> toward <status>Feared</status> enemies.<br><br><spellActive>Active:</spellActive> Nocturne plants a nightmare tether into his target, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds. If the tether remains unbroken, the target is <status>Feared</status> for @Effect2Amount@ second(s).",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_fearduration"
 						},
 						{

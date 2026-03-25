@@ -38,7 +38,7 @@
 					"tooltip": "Leona's next Attack <status>Stuns</status> for @Effect1Amount@ seconds and deals an additional <magicDamage>@TotalDamageTooltip@</magicDamage> magic damage.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -80,11 +80,11 @@
 					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @Effect3Amount@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @Effect3Amount@ seconds.<br>",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect4Amount",
 							"nameOverride": "spell_listtype_armorandmagicresist"
 						},
 						{
@@ -164,7 +164,7 @@
 					"tooltip": "Leona thrusts with a sword of light, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>. The last champion struck will be <status>Rooted</status> for @Effect2Amount@ seconds and Leona will dash to them.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

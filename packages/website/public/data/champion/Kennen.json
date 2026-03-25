@@ -41,7 +41,7 @@
 							"type": "Cost"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -88,7 +88,7 @@
 							"nameOverride": "spell_listtype_kennendamage(passive)"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_kennendamage(active)"
 						}
 					],

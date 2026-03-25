@@ -38,11 +38,11 @@
 					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @Effect2Amount@ second(s).",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_silenceduration"
 						},
 						{

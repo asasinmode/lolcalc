@@ -116,11 +116,11 @@
 					"tooltipExtended": "{{Spell_SionW_Tooltip}}<br><br>Current Bonus Health: <statTracking>@f1@</statTracking>",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
@@ -197,7 +197,7 @@
 					"tooltip": "Sion fires a shockwave, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> them by @SlowAmount@% for @SlowDuration@ seconds and removing <scaleArmor>@ArmorShred@% Armor</scaleArmor> for @ArmorShredDuration@ seconds. Non-champions hit are <status>Knocked Back</status>. Enemies hit by a <status>Knocked Back</status> unit take the same damage and effects.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

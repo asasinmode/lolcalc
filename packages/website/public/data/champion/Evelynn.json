@@ -111,7 +111,7 @@
 					"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_charmduration"
 						},
 						{
@@ -119,11 +119,11 @@
 							"nameOverride": "spell_evelynnw_monstercharm_levelup"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect9Amount",
 							"nameOverride": "spell_listtype_magicresistshred"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect7Amount",
 							"nameOverride": "spell_listtype_monsterdamage"
 						},
 						{
@@ -269,11 +269,11 @@
 					"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_evelynnempowereddamage"
 						}
 					],

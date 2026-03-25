@@ -179,11 +179,11 @@
 					"tooltip": "Braum raises his shield for @Effect2Amount@ seconds, intercepting enemy missiles from the chosen direction, causing them to hit Braum and then be destroyed. The first missile Braum blocks deals no damage, and subsequent projectiles deal @Effect3Amount@% reduced damage.<br><br>Braum gains <speed>@Effect4Amount@% Move Speed</speed> while his shield is raised.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_duration"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_damagereduction"
 						},
 						{

@@ -153,11 +153,11 @@
 							"nameOverride": "spell_listtype_shieldhealth"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect4Amount",
 							"nameOverride": "spell_listtype_cooldown"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_cost"
 						}
 					],
@@ -204,11 +204,11 @@
 					"tooltip": "Rakan gains <speed>@Effect5Amount@% Move Speed</speed> for @Effect2Amount@ seconds. Rakan deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Charms</status> enemies for @Effect3Amount@ second(s) the first time he touches them. The first champion touched grants Rakan <speed>@Effect6Amount@% decaying Move Speed</speed>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_charmduration"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

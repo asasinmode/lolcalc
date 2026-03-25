@@ -117,15 +117,15 @@
 					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_rootduration"
 						},
 						{

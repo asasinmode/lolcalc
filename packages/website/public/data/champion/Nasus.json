@@ -143,15 +143,15 @@
 					"tooltip": "Nasus ignites a spirit flame, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. Enemies in the area lose <scaleArmor>@Effect2Amount*-100@% Armor</scaleArmor> and take <magicDamage>@TotalDotDamage@ magic damage</magicDamage> over @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect4Amount",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damagepersecond"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_armorreductionpercent"
 						},
 						{

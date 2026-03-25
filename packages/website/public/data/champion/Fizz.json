@@ -38,7 +38,7 @@
 					"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

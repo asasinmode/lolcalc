@@ -204,7 +204,7 @@
 					"tooltip": "Vel'Koz channels a ray of energy that follows the cursor, dealing a total of <magicDamage>@TotalDamage@ magic damage</magicDamage> over 2.5 seconds and <status>Slowing</status> by @Effect3Amount@%. Deals <trueDamage>true damage</trueDamage> instead to enemies recently damaged by <spellName>{{Spell_VelkozPassive_Name}}</spellName>.<br><br>Enemies gain stacks of <keywordMajor>Deconstruction</keywordMajor> periodically while in the beam.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_totaldamage"
 						}
 					],

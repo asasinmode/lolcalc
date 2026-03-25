@@ -263,7 +263,7 @@
 					"tooltip": "Varus flings out a tendril of corruption, <status>Rooting</status> the first champion hit for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. <status>Rooted</status> enemies gain @Effect4Amount@ <keywordMajor>Blight</keywordMajor> stacks over the duration.<br><br>The corruption spreads from its target to uninfected enemy champions. If it reaches them, they take the same damage and <status>Root</status>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

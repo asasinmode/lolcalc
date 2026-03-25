@@ -87,7 +87,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Zed gains <keywordMajor>@Effect3Amount@ Energy</keywordMajor> whenever he and his <keywordMajor>Shadows</keywordMajor> strike an enemy with the same Ability.<br><br><spellActive>Active:</spellActive> Zed's <keywordMajor>Shadow</keywordMajor> dashes forward, remaining in place for @Effect5Amount@ seconds. <recast>Recasting</recast> this Ability will cause Zed to switch positions with this <keywordMajor>Shadow</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_zedw_energyreturn"
 						},
 						{

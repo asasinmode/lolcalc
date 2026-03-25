@@ -42,7 +42,7 @@
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
@@ -88,11 +88,11 @@
 					"tooltip": "Lissandra creates an ice field, <status>Rooting</status> nearby enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_rootduration"
 						}
 					],
@@ -132,7 +132,7 @@
 					"tooltip": "Lissandra casts forth an ice claw that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. Lissandra can <recast>Recast</recast> while the claw travels to teleport to its location.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

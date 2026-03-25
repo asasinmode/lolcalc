@@ -38,18 +38,18 @@
 					"tooltip": "Poppy smashes the ground, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> and making the ground unstable. <br><br>The unstable area <status>Slows</status> enemies by @Effect3Amount@% and erupts after @Effect4Amount@ second, dealing <physicalDamage>@BaseDamage@</physicalDamage> plus <physicalDamage>@HealthDamagePercent@% max Health physical damage</physicalDamage> again.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
 							"type": "Cost"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect6Amount",
 							"nameOverride": "spell_poppyq_monstercap"
 						}
 					],
@@ -97,7 +97,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Poppy gains <scaleArmor>@BonusArmor@ Armor</scaleArmor> and <scaleMR>@BonusMR@ Magic Resist</scaleMR>. This bonus is doubled if Poppy is below @PassiveEmpoweredHealthPercent*100@% Health.<br><br><spellActive>Active:</spellActive> Poppy gains <speed>@Effect2Amount@% Move Speed</speed> and projects a field around her for @Effect1Amount@ seconds that stops enemy dashes. Enemies who are stopped by the field are <status>Grounded</status> and <status>Slowed</status> by @SlowAmount*-100@% for @GroundingDuration@ seconds and take <magicDamage>@InterruptDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -162,15 +162,15 @@
 					"tooltip": "Poppy tackles an enemy, dealing <physicalDamage>@TackleDamage@ physical damage</physicalDamage> and carrying them forward. If Poppy tackles them into terrain, the enemy is <status>Stunned</status> for @Effect3Amount@ seconds and take an additional <physicalDamage>@TackleDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_poppyewalldamage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_stunduration"
 						}
 					],

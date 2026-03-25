@@ -99,15 +99,15 @@
 					"tooltip": "When used on an ally, Lulu grants <speed>@TotalMS@ Move Speed</speed> and <attackSpeed>@Effect7Amount*100@% Attack Speed</attackSpeed> for @Effect5Amount@ seconds.<br><br>When used on an enemy, Lulu <status>Polymorphs</status> them for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect5Amount",
 							"nameOverride": "spell_listtype_lulumovementandattackspeedduration"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect7Amount",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_luluwpolymorphduration"
 						}
 					],

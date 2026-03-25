@@ -83,11 +83,11 @@
 					"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_silenceduration"
 						},
 						{

@@ -103,7 +103,7 @@
 					"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @Effect2Amount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{

@@ -38,7 +38,7 @@
 					"tooltip": "Orianna commands her <keywordMajor>Ball</keywordMajor> to move to an area, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to surrounding enemies and to enemies it passes through. Deals @Effect2Amount@% less damage to all enemies after the first.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -143,19 +143,19 @@
 					"tooltip": "<spellPassive>Passive: </spellPassive>The <keywordMajor>Ball</keywordMajor> adds <scaleArmor>@Effect2Amount@ Armor</scaleArmor> and <scaleMR>@Effect2Amount@ Magic Resist</scaleMR> to the allied champion it is attached to.<br><br><spellActive>Active: </spellActive>Orianna commands her <keywordMajor>Ball</keywordMajor> to attach to an allied champion, granting them <shield>@TotalShieldTooltip@ Shield</shield> for @Effect5Amount@ seconds. Enemies the <keywordMajor>Ball</keywordMajor> passes through take <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect3Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_armorbonus"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect2Amount",
 							"nameOverride": "spell_listtype_magicresistbonus"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_shieldamount"
 						}
 					],

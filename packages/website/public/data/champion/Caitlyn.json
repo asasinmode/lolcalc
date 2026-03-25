@@ -157,7 +157,7 @@
 					"tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by @Effect3Amount@% for @Effect2Amount@ second and deals <magicDamage>@NetDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

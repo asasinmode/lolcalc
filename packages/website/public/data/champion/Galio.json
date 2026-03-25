@@ -118,11 +118,11 @@
 							"nameOverride": "spell_listtype_shieldhealthratio"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_magicdamagereduction"
 						},
 						{
-							"type": "Effect%dAmount",
+							"type": "Effect1Amount",
 							"nameOverride": "spell_listtype_physicaldamagereduction"
 						},
 						{
