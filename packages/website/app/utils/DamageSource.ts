@@ -521,3 +521,27 @@ function mergeMapsWithWarnDuplicate<T, U>(map1: Map<T, U>, map2: Map<T, U>, warn
 export function allChampionAbilityVariants(champion?: IChampion) {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
+
+export function abilityVariantText(
+	onHitIcon: string,
+	allAbilityVariants: IChampionAbilityVariant[],
+	value: string,
+	variant: IChampionAbilityVariant,
+	level?: number,
+	stringtable?: Record<string, string>,
+	replaceVariablesWithNames?: boolean,
+) {
+	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(
+		value,
+		stringtable,
+	);
+
+	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
+		stringtableReplaced,
+		'championAbility',
+		[variant, level, allAbilityVariants],
+		{ replaceWithName: replaceVariablesWithNames },
+	);
+
+	return { replaced: replaceGameDescriptionIcons(replaced, onHitIcon), unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
+}

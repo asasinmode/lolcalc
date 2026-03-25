@@ -36,6 +36,8 @@ const hoveredAbilityVariant = computed(() =>
 
 const championAllAbilityVariants = computed(() => allChampionAbilityVariants(champion.value));
 
+const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+
 const hoveredAbilityTooltipText = computed(() => {
 	if (!hoveredAbilityVariant.value) {
 		return undefined;
@@ -48,23 +50,29 @@ const hoveredAbilityTooltipText = computed(() => {
 		champion.value?.stringtable,
 	);
 
-	const { replaced: tooltipReplaced, unknownSV: tooltipUnknownSV, unknownV: tooltipUnknownV } = abilityText(
+	const { replaced: tooltipReplaced, unknownSV: tooltipUnknownSV, unknownV: tooltipUnknownV } = abilityVariantText(
+		onHitIcon,
+		championAllAbilityVariants.value,
 		hoveredAbilityVariant.value.tooltip || '<unknown>UNKNOWN</unknown>',
 		hoveredAbilityVariant.value,
-		champion.value?.stringtable,
 		abilityLevel,
+		champion.value?.stringtable,
 	);
-	const { replaced: tooltipExtendedReplaced, unknownSV: tooltipExtendedUnknownSV, unknownV: tooltipExtendedUnknownV } = abilityText(
+	const { replaced: tooltipExtendedReplaced, unknownSV: tooltipExtendedUnknownSV, unknownV: tooltipExtendedUnknownV } = abilityVariantText(
+		onHitIcon,
+		championAllAbilityVariants.value,
 		hoveredAbilityVariant.value.tooltipExtended || '',
 		hoveredAbilityVariant.value,
-		champion.value?.stringtable,
 		abilityLevel,
+		champion.value?.stringtable,
 	);
-	const { replaced: tooltipExtendedBelowLineReplaced, unknownSV: tooltipExtendedBelowLineUnknownSV, unknownV: tooltipExtendedBelowLineUnknownV } = abilityText(
+	const { replaced: tooltipExtendedBelowLineReplaced, unknownSV: tooltipExtendedBelowLineUnknownSV, unknownV: tooltipExtendedBelowLineUnknownV } = abilityVariantText(
+		onHitIcon,
+		championAllAbilityVariants.value,
 		hoveredAbilityVariant.value.tooltipExtendedBelowLine || '',
 		hoveredAbilityVariant.value,
-		champion.value?.stringtable,
 		abilityLevel,
+		champion.value?.stringtable,
 	);
 
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
@@ -96,24 +104,6 @@ const hoveredAbilityTooltipText = computed(() => {
 		extendedVariables,
 	};
 });
-
-const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
-
-function abilityText(value: string, variant: IChampionAbilityVariant, stringtable?: Record<string, string>, level?: number) {
-	const { replaced: stringtableReplaced, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(
-		value,
-		stringtable,
-	);
-
-	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
-		stringtableReplaced,
-		'championAbility',
-		[variant, level, championAllAbilityVariants.value],
-		{ replaceWithName: props.replaceVariablesWithNames },
-	);
-
-	return { replaced: replaceGameDescriptionIcons(replaced, onHitIcon), unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
-}
 
 const el = useTemplateRef('el');
 
