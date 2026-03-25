@@ -11,12 +11,27 @@ function closeDialog() {
 	dialogEl.value!.returnValue = '';
 }
 
+function closeOnClickOutside(event: MouseEvent) {
+	const rect = dialogEl.value!.getBoundingClientRect();
+	const clickedOutside = event.clientX < rect.left
+		|| event.clientX > rect.right
+		|| event.clientY < rect.top
+		|| event.clientY > rect.bottom;
+
+	if (clickedOutside && event.target === dialogEl.value) {
+		dialogEl.value?.close();
+		document.removeEventListener('click', closeOnClickOutside);
+	}
+}
+
 defineExpose({
 	open() {
 		dialogEl.value?.showModal();
+		setTimeout(() => document.addEventListener('click', closeOnClickOutside), 0);
 	},
 	close(returnValue?: string) {
 		dialogEl.value?.close(returnValue);
+		document.removeEventListener('click', closeOnClickOutside);
 	},
 });
 // TODO add aria-labelledby and title to all dialogs

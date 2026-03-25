@@ -94,7 +94,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] secondary path unset layout
   - [x] hover tooltips
   - [x] rune paths not implemented alert
-  - [ ] save button
+  - [ ] save button? Changes are saved instantly so it doesn't really make sense
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
@@ -108,7 +108,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] item groups, only one from group
   - [ ] show inventory total value
   - [ ] try not to intercept all right clicks
-- [ ] close dialogs on click outside
+- [x] close dialogs on click outside
 - [ ] target dummy damage source
 - [ ] mobile version and make look better
 - [ ] sharing, saving/reading data in query
