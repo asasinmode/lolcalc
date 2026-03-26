@@ -272,16 +272,20 @@ const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (sectio
 	};
 };
 
-async function addResultsSection(event: SubmitEvent) {
+function submitResultsSection(event: SubmitEvent) {
 	const value = new FormData(event.target as HTMLFormElement).get('sectionOptionIndex')! as string;
 	if (!value) {
 		return;
 	}
 
 	const [rawOptionIndex, rawAbilityIndex] = value.split('-');
+	(event.target as HTMLFormElement).reset();
+	addResultsSection(Number.parseInt(rawOptionIndex!), Number.parseInt(rawAbilityIndex!));
+}
 
-	const option = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!;
-	const ability = option.abilities[Number.parseInt(rawAbilityIndex!)]!;
+async function addResultsSection(optionIndex: number, abilityIndex: number) {
+	const option = damageSectionOptions.value[optionIndex]!;
+	const ability = option.abilities[abilityIndex]!;
 
 	const section: IDamageResultTableSection = {
 		id: ability.id,
@@ -311,7 +315,6 @@ async function addResultsSection(event: SubmitEvent) {
 	resultSections.value.push(section);
 	expandedSections.value.push(section.id);
 	addComputedSection(section.id);
-	(event.target as HTMLFormElement).reset();
 }
 
 function removeDamageSection(index: number) {
@@ -710,21 +713,39 @@ const columnAddableOptions = computed<IColumnAddableOption[]>(() => resultColumn
 		itemOptionsIndexes: [],
 	};
 
-	if (!column.source?.champion.value) {
-		return rv;
-	}
+	if (column.source?.champion.value) {
+		rv.championOptionIndex = damageSectionOptions.value.findIndex(option => option.type === 'champion' && option.optionId === column.source!.champion.value!.id);
+		if (rv.championOptionIndex === -1) {
+			rv.championOptionIndex = undefined;
+		}
 
-	rv.championOptionIndex = damageSectionOptions.value.findIndex(option => option.type === 'champion' && option.optionId === column.source!.champion.value!.id);
-	if (rv.championOptionIndex === -1) {
-		rv.championOptionIndex = undefined;
+		rv.itemOptionsIndexes = damageSectionOptions.value.at(-1)?.type === 'item'
+			? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => column.source!.items.value.some(item => item && item.id === ability.championOrItemId) ? index : undefined).filter(index => index !== undefined).reverse()
+			: [];
 	}
-
-	rv.itemOptionsIndexes = damageSectionOptions.value.at(-1)?.type === 'item'
-		? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => column.source!.items.value.some(item => item && item.id === ability.championOrItemId) ? index : undefined).filter(index => index !== undefined)
-		: [];
 
 	return rv;
 }));
+
+async function addColumnAbilities(columnIndex: number) {
+	const { championOptionIndex } = columnAddableOptions.value[columnIndex]!;
+	const option = damageSectionOptions.value[championOptionIndex!];
+	if (option) {
+		for (let i = 0; i < option.abilities.length; i++) {
+			addResultsSection(championOptionIndex!, i);
+		}
+	}
+}
+
+function addColumnItems(columnIndex: number) {
+	const { itemOptionsIndexes } = columnAddableOptions.value[columnIndex]!;
+	const option = damageSectionOptions.value.at(-1);
+	if (option?.type === 'item') {
+		for (const i of itemOptionsIndexes) {
+			addResultsSection(damageSectionOptions.value.length - 1, i);
+		}
+	}
+}
 </script>
 
 <template>
@@ -939,10 +960,18 @@ const columnAddableOptions = computed<IColumnAddableOption[]>(() => resultColumn
 							<span>move right, alt+click to duplicate to the right</span>
 							<Icon class="i-ph:arrow-right" />
 						</button>
-						<button class="pretend-ui-button" :disabled="columnAddableOptions[index]?.championOptionIndex === undefined">
+						<button
+							class="pretend-ui-button"
+							:disabled="columnAddableOptions[index]?.championOptionIndex === undefined"
+							@click="addColumnAbilities(index)"
+						>
 							add abilities
 						</button>
-						<button class="pretend-ui-button" :disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length">
+						<button
+							class="pretend-ui-button"
+							:disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length"
+							@click="addColumnItems(index)"
+						>
 							add items
 						</button>
 					</div>
@@ -1120,7 +1149,6 @@ const columnAddableOptions = computed<IColumnAddableOption[]>(() => resultColumn
 			</tbody>
 		</template>
 		<tfoot
-			v-show="damageSectionOptions.length"
 			:data-drop-direction="sectionDragDropIndex === resultSections.length ? 'before' : undefined"
 			@dragenter="onResultSectionDragenter($event, resultSections.length)"
 			@dragover="onResultSectionDragover($event, resultSections.length)"
@@ -1129,7 +1157,7 @@ const columnAddableOptions = computed<IColumnAddableOption[]>(() => resultColumn
 		>
 			<tr>
 				<td :colspan="resultColumns.length + 2">
-					<form @submit.prevent="addResultsSection">
+					<form @submit.prevent="submitResultsSection">
 						<label for="results-table-row-new-section-ability"> section ability </label>
 						<select
 							id="results-table-row-new-section-ability"
@@ -1150,7 +1178,7 @@ const columnAddableOptions = computed<IColumnAddableOption[]>(() => resultColumn
 						<button
 							class="pretend-ui-button"
 							type="submit"
-							:disabled="!enableUnimplementedUi && !damageSectionOptions.some(option => option.type === 'item')"
+							:disabled="!damageSectionOptions.length || !enableUnimplementedUi && !damageSectionOptions.some(option => option.type === 'item')"
 						>
 							add
 						</button>

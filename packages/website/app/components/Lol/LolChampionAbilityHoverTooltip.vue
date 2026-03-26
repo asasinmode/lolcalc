@@ -62,6 +62,7 @@ const hoveredAbilityTooltipText = computed(() => {
 		hoveredAbilityVariant.value,
 		abilityLevel,
 		champion.value?.stringtable,
+		props.replaceVariablesWithNames,
 	);
 	const {
 		replaced: tooltipExtendedReplaced,
@@ -75,6 +76,7 @@ const hoveredAbilityTooltipText = computed(() => {
 		hoveredAbilityVariant.value,
 		abilityLevel,
 		champion.value?.stringtable,
+		props.replaceVariablesWithNames,
 	);
 	const {
 		replaced: tooltipExtendedBelowLineReplaced,
@@ -87,6 +89,7 @@ const hoveredAbilityTooltipText = computed(() => {
 		hoveredAbilityVariant.value,
 		abilityLevel,
 		champion.value?.stringtable,
+		props.replaceVariablesWithNames,
 	);
 
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
@@ -95,7 +98,7 @@ const hoveredAbilityTooltipText = computed(() => {
 
 	let extendedVariables: {
 		name: string;
-		values?: number[];
+		values?: (string | number)[];
 		isNameUnknown?: boolean;
 	}[] | undefined = hoveredAbilityVariant.value.extendedVariables?.map((variable) => {
 		let isNameUnknown = false;

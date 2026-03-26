@@ -68,7 +68,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] dark seal
       - [ ] kraken slayer
       - [ ] yun tal wildarrows
-    - [ ] add all of champion's items/abilities to damage results
     - [ ] shapeshifting champions choose shape, switch abilities since it can affect stats
   - [ ] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
@@ -78,7 +77,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] compare stats section
   - [x] column header functionality - choose source/target, remove
   - [x] section header functionality - add new, expand/collapse, remove
-  - [x] cleanup results when source/target is moved/deleted or champion changes
+  - [?] cleanup results when source/target is moved/deleted or champion changes
   - [x] color coded/matching results with scoreboard
   - [x] row/column hover/focus style
   - [x] cell have number values, then color them red/green depending on if higher or lower than others
@@ -86,10 +85,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] compare item variables
   - [x] section image appropriate ability/item hover tooltip with variable names instead of values
   - [x] ability rows not implemented yet, coming soon
-  - [ ] ability rows actual description variables (random values)
+  - [x] add all of source's items/abilities to damage results
+  - [?] ability rows actual description variables (random values)
+  - [?] one select to switch between sources/targets?
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
-  - [ ] one select to switch between sources/targets?
   - [x] per damage results row unknown variables style
   - [x] moving columns left/right
   - [x] moving sections up/down
