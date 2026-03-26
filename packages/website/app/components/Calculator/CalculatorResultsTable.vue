@@ -443,9 +443,12 @@ const cleanableColumnsSections = computed<[
 
 	const sections = (resultSections.value
 		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
-		.filter(([,section]) => section.additionalId !== 'all' && !resultColumns.value.some(column =>
-			column.source?.listedChampion.value?.id === section.additionalId || column.target?.listedChampion.value?.id === section.additionalId,
-		));
+		.filter(([, section]) =>
+			section.additionalId === 'item'
+				? !resultColumns.value.some(column => column.source?.items.value.some(item => item?.id === section.id) || column.target?.items.value.some(item => item?.id === section.id))
+				: section.additionalId !== 'all' && !resultColumns.value.some(column =>
+					column.source?.listedChampion.value?.id === section.additionalId || column.target?.listedChampion.value?.id === section.additionalId,
+				));
 
 	return [columns, sections];
 });
@@ -756,13 +759,6 @@ function addColumnItems(columnIndex: number) {
 	>
 		<caption>
 			comparison table
-			<button
-				class="pretend-ui-button"
-				:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
-				@click="cleanupUnused"
-			>
-				remove unused
-			</button>
 			<span>
 				Columns, except the first and last, contain the corresponding damage source's (left) value applied (if applicable) vs the specified damage target (right, can be empty)
 			</span>
@@ -853,10 +849,19 @@ function addColumnItems(columnIndex: number) {
 			</tr>
 			<tr>
 				<td width="240px" colspan="2">
-					<span aria-hidden="true">damage type</span>
-					<a href="#results-table-section-header-basicAttack" class="skip-link">
-						skip column controls
-					</a>
+					<div>
+						<a href="#results-table-section-header-basicAttack" class="skip-link">
+							skip column controls
+						</a>
+						<button
+							class="pretend-ui-button"
+							:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
+							@click="cleanupUnused"
+						>
+							remove unused
+						</button>
+						<span aria-hidden="true">damage type</span>
+					</div>
 				</td>
 				<td
 					v-for="(column, index) in resultColumns"
@@ -1198,12 +1203,16 @@ function addColumnItems(columnIndex: number) {
 		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr]';
 		--bg-clr: theme('colors.neutral.950');
 		--control-button-size: calc(6 * var(--spacing));
+		--header-row-gap-y: calc(3 * var(--spacing));
+		--header-champion-select-size: calc(10 * var(--spacing));
+		--header-row-pb: calc(3 * var(--spacing));
+		--header-row-h: calc(
+			3 * var(--control-button-size) + 2 * var(--header-row-gap-y) + var(--header-champion-select-size) +
+				var(--header-row-pb)
+		);
 		--section-header-row-h: calc(22 * var(--spacing));
 		--section-header-row-py: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
-		/* --section-header-row-h: calc( */
-		/* 	2 * var(--control-button-size) + var(--section-header-row-pt) + var(--section-header-row-pb) */
-		/* ); */
 
 		&[inert] {
 			--at-apply: 'blur-3';
@@ -1211,10 +1220,6 @@ function addColumnItems(columnIndex: number) {
 
 		> caption {
 			--at-apply: 'text-start text-lg';
-
-			> button {
-				--at-apply: 'px-1 leading-5 h-[--control-button-size] float-end text-base';
-			}
 
 			> span {
 				--at-apply: 'block text-neutral-300 text-base';
@@ -1239,12 +1244,20 @@ function addColumnItems(columnIndex: number) {
 			}
 
 			> tr:nth-child(2) > td:first-child {
-				--at-apply: 'align-bottom text-start ps-3';
+				--at-apply: 'ps-3 pb-3 bg-[--bg-clr] text-start align-top';
+
+				> div {
+					--at-apply: 'flex flex-col h-[calc(var(--header-row-h)-var(--header-row-pb))] items-start';
+
+					> button {
+						--at-apply: 'px-1 leading-5 h-[--control-button-size] text-base mb-auto';
+					}
+				}
 			}
 
 			> tr:nth-child(1) > td,
-			> tr:nth-child(2) > * {
-				--at-apply: 'pb-3 bg-[--bg-clr] align-top';
+			> tr:nth-child(2) > *:not(:first-child) {
+				--at-apply: 'pb-[--header-row-pb] bg-[--bg-clr] align-top';
 
 				&[data-drop-direction]::after {
 					--at-apply: 'content-empty absolute z-3 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
@@ -1258,7 +1271,6 @@ function addColumnItems(columnIndex: number) {
 				> form,
 				> div {
 					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--control-button-size)_1fr]';
-					--select-size: calc(10 * var(--spacing));
 					grid-template-areas:
 						'move-left remove move-right'
 						'source vs target'
@@ -1266,7 +1278,7 @@ function addColumnItems(columnIndex: number) {
 						'add-items add-items add-items';
 
 					> .v-select {
-						--at-apply: 'size-[--select-size] my-3';
+						--at-apply: 'size-[--header-champion-select-size] my-[--header-row-gap-y]';
 						--b-width: 2px;
 
 						&[style] {

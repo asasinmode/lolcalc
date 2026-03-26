@@ -77,7 +77,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] compare stats section
   - [x] column header functionality - choose source/target, remove
   - [x] section header functionality - add new, expand/collapse, remove
-  - [?] cleanup results when source/target is moved/deleted or champion changes
+  - [x] cleanup results when source/target is moved/deleted or champion changes
   - [x] color coded/matching results with scoreboard
   - [x] row/column hover/focus style
   - [x] cell have number values, then color them red/green depending on if higher or lower than others
