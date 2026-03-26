@@ -175,7 +175,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		isUnknown: false,
 	};
 
-	if (!column.source) {
+	if (!column.source || (!column.source.listedChampion.value && section.additionalId !== 'item')) {
 		rv.value = '-';
 	} else if (column.source.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id) {
 		rv.value = 'loading...';
