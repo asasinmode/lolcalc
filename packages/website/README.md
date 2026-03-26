@@ -36,7 +36,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] drag between inventories
     - [x] hover tooltip
     - [ ] move with keyboard, shift + arrows?
-  - [ ] toggle button aria-controls, aria-expanded
+  - [x] toggle button aria-controls, aria-expanded
   - [ ] expanded
     - [x] stats
     - [x] current health/mana
@@ -63,6 +63,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] guinsoo
       - [ ] terminus
       - [ ] heartsteel
+      - [ ] hubris
+      - [ ] mejai's
+      - [ ] dark seal
       - [ ] kraken slayer
       - [ ] yun tal wildarrows
     - [ ] add all of champion's items/abilities to damage results

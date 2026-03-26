@@ -296,7 +296,7 @@ defineExpose({ el });
 			--at-apply: 'col-span-full';
 
 			> p {
-				--at-apply: 'text-end';
+				--at-apply: 'text-end leading-5';
 			}
 
 			> div {

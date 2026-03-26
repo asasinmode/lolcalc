@@ -100,6 +100,7 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 		}));
 
 const detailsContainer = useTemplateRef('details');
+const isExpanded = ref(false);
 
 function toggleExpanded() {
 	if (detailsContainer.value!.getAttribute('open') === null) {
@@ -108,6 +109,10 @@ function toggleExpanded() {
 		detailsContainer.value!.removeAttribute('open');
 	}
 }
+
+onMounted(() => {
+	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
+});
 
 const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
 const hoveredItem = shallowRef<IItem>();
@@ -882,14 +887,22 @@ defineExpose({ el });
 			<Icon class="i-ph:trash size-5" />
 		</button>
 		<button
-			title="expand"
+			:title="isExpanded ? 'collapse' : 'expand'"
 			class="pretend-ui-button"
+			:aria-controls="`${group}-${index}-details`"
+			:aria-expanded="isExpanded"
 			@click="toggleExpanded"
 		>
-			<span class="sr-only">expand</span>
+			<span class="sr-only">{{ isExpanded ? 'collapse' : 'expand' }}</span>
 			<Icon class="i-ph:caret-down size-5" />
 		</button>
-		<details ref="details" :aria-busy="isLoading" :data-empty="!value.champion.value ? '' : undefined">
+		<details
+			:id="`${group}-${index}-details`"
+			ref="details"
+			:aria-busy="isLoading"
+			:data-empty="!value.champion.value ? '' : undefined"
+			@toggle="isExpanded = $event.newState === 'open'"
+		>
 			<summary>
 				details
 			</summary>
