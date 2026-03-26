@@ -374,6 +374,21 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			};
 		}),
 		),
+		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
+			const { minorVersion } = usePatchVersion();
+
+			return Object.fromEntries(Object.keys(this.abilityVariants.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
+				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
+				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computedAbilityDescription(
+					minorVersion,
+					this.champion.value!,
+					key as IChampionAbilityKey,
+					variantIndex,
+					(this.abilityLevels.value as any)[key],
+					this,
+				)) || []];
+			})) as Record<IChampionAbilityKey, IComputedAbilityDescription[]>;
+		}),
 	};
 }
 

@@ -584,16 +584,14 @@ function resetAbilityLevel(event: MouseEvent, ability: Exclude<IChampionAbilityK
 }
 
 const hoveredAbilityKey = ref<IChampionAbilityKey>();
-const hoveredAbilityVariantIndex = shallowRef<number>();
+const hoveredAbilityVariantIndex = ref<number>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 
 function showAbilityTooltip(event: MouseEvent, ability: IChampionAbilityKey, variant = 0) {
-	if (props.value.champion.value) {
-		hoveredAbilityKey.value = ability;
-		hoveredAbilityVariantIndex.value = variant;
-		event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
-		abilityHoverTooltipEl.value?.el?.showPopover();
-	}
+	hoveredAbilityKey.value = ability;
+	hoveredAbilityVariantIndex.value = variant;
+	event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
+	abilityHoverTooltipEl.value?.el?.showPopover();
 }
 
 function hideAbilityTooltip() {
@@ -1038,7 +1036,7 @@ defineExpose({ el });
 					:champion-id="value.champion.value?.id"
 					:ability-key="hoveredAbilityKey"
 					:ability-variant="hoveredAbilityVariantIndex"
-					:ability-level="hoveredAbilityKey === 'passive' ? 1 : hoveredAbilityKey ? value.abilityLevels.value[hoveredAbilityKey] : undefined"
+					:precomputed-description="hoveredAbilityKey && value.computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
 			<section data-health-ability-resource="">

@@ -1089,7 +1089,6 @@ function addColumnItems(columnIndex: number) {
 								<LolChampionAbilityHoverTooltip
 									v-else-if="section.additionalId !== 'all'"
 									v-bind="section.hoverTooltipData as any"
-									replace-variables-with-names
 								/>
 							</template>
 							<template v-if="section.selectOptions?.length">
