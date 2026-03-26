@@ -34,7 +34,7 @@ const variant = computed(() =>
 	props.abilityVariant !== undefined ? ability.value?.variants[props.abilityVariant] : undefined,
 );
 
-const tooltipData = computed(() =>
+const computedDescription = computed<IComputedAbilityDescription | undefined>(() =>
 	champion.value && props.abilityKey && props.abilityVariant !== undefined
 		? computedAbilityDescription(
 				minorVersion,
@@ -68,11 +68,11 @@ defineExpose({ el });
 				? 'loading...'
 				: `${
 					!abilityKey || abilityKey === 'passive' || (championId === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey.toUpperCase()}] `
-				} ${tooltipData?.name}`"
+				} ${computedDescription?.name}`"
 		/>
-		<span v-show="!isLoading" :class="{ unknown: abilityKey !== 'passive' && !tooltipData?.cooldown }">
+		<span v-show="!isLoading" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">
 			<template v-if="abilityKey !== 'passive'">
-				{{ tooltipData?.cooldown ? `${tooltipData.cooldown}s` : 'unknown' }}
+				{{ computedDescription?.cooldown ? `${computedDescription.cooldown}s` : 'unknown' }}
 				<img
 					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`"
 					width="20"
@@ -82,18 +82,18 @@ defineExpose({ el });
 			</template>
 		</span>
 		<span v-show="!isLoading">
-			{{ abilityKey === 'passive' ? '' : tooltipData?.cost ? `${tooltipData.cost} ${champion?.partype}` : 'No Cost' }}
+			{{ abilityKey === 'passive' ? '' : computedDescription?.cost ? `${computedDescription.cost} ${champion?.partype}` : 'No Cost' }}
 		</span>
-		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && tooltipData?.tooltipExtended || tooltipData?.tooltip" />
-		<UnresolvedVariablesAlert v-if="tooltipData?.anyUnknownVariables" />
-		<footer v-if="tooltipData?.tooltipExtended || tooltipData?.tooltipExtendedBelowLine || tooltipData?.extendedVariables?.length">
+		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && computedDescription?.tooltipExtended || computedDescription?.tooltip" />
+		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
+		<footer v-if="computedDescription?.tooltipExtended || computedDescription?.tooltipExtendedBelowLine || computedDescription?.extendedVariables?.length">
 			<div
-				v-if="tooltipData?.tooltipExtendedBelowLine"
+				v-if="computedDescription?.tooltipExtendedBelowLine"
 				v-show="globalKeyModifiers.shift"
-				v-html="tooltipData.tooltipExtendedBelowLine"
+				v-html="computedDescription.tooltipExtendedBelowLine"
 			/>
-			<dl v-show="globalKeyModifiers.shift && tooltipData?.extendedVariables">
-				<template v-for="{ name, values, isNameUnknown } in tooltipData?.extendedVariables" :key="name">
+			<dl v-show="globalKeyModifiers.shift && computedDescription?.extendedVariables">
+				<template v-for="{ name, values, isNameUnknown } in computedDescription?.extendedVariables" :key="name">
 					<dt :class="{ unknown: isNameUnknown }">
 						{{ name }}
 					</dt>

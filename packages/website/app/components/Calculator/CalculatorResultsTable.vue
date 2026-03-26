@@ -306,10 +306,22 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 		};
 	} else {
 		const item = items[ability.championOrItemId]!;
+		// TODO friendlier names, if value is calculated in item.ts maybe that can help
+		// TODO try to filter out non simple variables? Like ones that aren't 5 flat damage to BonusDamageToMinions? only ones that are calculated?
+		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true });
+
 		section.additionalId = 'item';
-		section.rows = itemAbilityListedVariables(text, minorVersion, item);
+		section.rows = precomputedDescription.variables
+			.keys()
+			.toArray()
+			.map(name => ({ id: name, name }))
+			.concat(precomputedDescription.unknownVariables.map(([rawName, actualName]) => ({
+				id: rawName,
+				name: actualName || rawName,
+				isUnknown: true,
+			})));
 		section.getCellValue = itemVariableCellValue;
-		section.hoverTooltipData = { item };
+		section.hoverTooltipData = { item, precomputedDescription };
 	}
 
 	resultSections.value.push(section);
@@ -1065,7 +1077,7 @@ function addColumnItems(columnIndex: number) {
 							<span>{{ section.name }}</span>
 							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
 								<div v-if="section.additionalId === 'item'" popover="hint" class="hover-tooltip champion-item">
-									<ItemDescription v-bind="section.hoverTooltipData" replace-variables-with-names />
+									<ItemDescription v-bind="section.hoverTooltipData" />
 								</div>
 								<LolChampionAbilityHoverTooltip
 									v-else-if="section.additionalId !== 'all'"

@@ -115,12 +115,12 @@ onMounted(() => {
 });
 
 const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
-const hoveredItem = shallowRef<IItem>();
+const hoveredItemIndex = ref<number>();
 
-function showItemHoverTooltip(event: MouseEvent, item: IItem) {
+function showItemHoverTooltip(event: MouseEvent, index: number) {
 	itemHoverTooltip.value?.showPopover();
 	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, { passive: true, once: true });
-	hoveredItem.value = item;
+	hoveredItemIndex.value = index;
 }
 
 function leaveTooltipableItemElement() {
@@ -133,7 +133,7 @@ function removeItem(event: MouseEvent, index: number) {
 		// eslint-disable-next-line vue/no-mutating-props
 		props.value.items.value.splice(index, 1);
 		if (props.value.items.value[index]) {
-			showItemHoverTooltip(event, props.value.items.value[index]);
+			showItemHoverTooltip(event, index);
 		} else {
 			itemHoverTooltip.value?.hidePopover();
 		}
@@ -859,7 +859,7 @@ defineExpose({ el });
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
-					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, value.items.value[i - 1]!)"
+					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
 					@click.right="removeItem($event, i - 1)"
 					@dragstart="startItemDrag($event, i - 1)"
 				>
@@ -875,7 +875,10 @@ defineExpose({ el });
 			</li>
 		</ul>
 		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item">
-			<ItemDescription :item="hoveredItem" :damage-source="value" />
+			<ItemDescription
+				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex]?.descriptionContents : undefined"
+				:item="hoveredItemIndex !== undefined ? value.items.value[hoveredItemIndex] : undefined"
+			/>
 		</div>
 		<button
 			:title="removeButtonAttrs.title"

@@ -522,6 +522,21 @@ export function allChampionAbilityVariants(champion?: IChampion) {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
 
+export interface IComputedAbilityDescription {
+	name: string;
+	tooltip: string;
+	tooltipExtended: string;
+	tooltipExtendedBelowLine: string;
+	anyUnknownVariables: number;
+	cooldown?: number;
+	cost?: number;
+	extendedVariables?: {
+		name: string;
+		values?: (string | number)[];
+		isNameUnknown?: boolean;
+	}[];
+}
+
 export function computedAbilityDescription(
 	minorVersion: string,
 	champion: IChampion,
@@ -530,7 +545,7 @@ export function computedAbilityDescription(
 	abilityLevel?: number,
 	_damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
-) {
+): IComputedAbilityDescription {
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 	abilityLevel = abilityKey !== 'passive' ? abilityLevel || 1 : undefined;
@@ -589,11 +604,7 @@ export function computedAbilityDescription(
 	const cost = variant.mana?.[abilityLevel ?? 1];
 	const lastExtendedVariableIndex = ability.maxLevel + 1;
 
-	let extendedVariables: {
-		name: string;
-		values?: (string | number)[];
-		isNameUnknown?: boolean;
-	}[] | undefined = variant.extendedVariables?.map((variable) => {
+	let extendedVariables: IComputedAbilityDescription['extendedVariables'] | undefined = variant.extendedVariables?.map((variable) => {
 		let isNameUnknown = false;
 		let name;
 

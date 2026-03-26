@@ -9,6 +9,7 @@ const props = defineProps<{
 	headerSubtitles?: boolean;
 	damageSource?: DamageSource;
 	replaceVariablesWithNames?: boolean;
+	precomputedDescription?: IComputedItemDescription;
 }>();
 
 defineEmits<{
@@ -18,8 +19,7 @@ defineEmits<{
 const text = useText();
 const { version, minorVersion } = usePatchVersion();
 
-const contents = computed<IComputedItemDescription>(() =>
-	(props.item && props.damageSource?.computed.items.value.find(item => item && item.itemId === props.item?.id))?.descriptionContents
+const computedDescription = computed<IComputedItemDescription>(() => props.precomputedDescription
 	|| computedItemDescription(
 		text,
 		minorVersion,
@@ -63,13 +63,13 @@ defineExpose({ header });
 			>
 			{{ gold ?? item?.gold.total }}
 		</span>
-		<span>{{ contents.subtitleLeft }}</span>
-		<span>{{ contents.subtitleRight }}</span>
+		<span>{{ computedDescription.subtitleLeft }}</span>
+		<span>{{ computedDescription.subtitleRight }}</span>
 	</component>
 	<div class="item-description" :class="descriptionClass">
-		<UnresolvedVariablesAlert v-if="contents.anyUnknownExtraVariables" />
+		<UnresolvedVariablesAlert v-if="computedDescription.anyUnknownExtraVariables" />
 		<ul>
-			<li v-for="([icon, value, name], i) in contents.stats" :key="i">
+			<li v-for="([icon, value, name], i) in computedDescription.stats" :key="i">
 				<img
 					:src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
 					width="20"
@@ -80,7 +80,7 @@ defineExpose({ header });
 				<span>{{ name }}</span>
 			</li>
 		</ul>
-		<template v-for="([heading, ...paragraphs], i) in contents.extra" :key="i">
+		<template v-for="([heading, ...paragraphs], i) in computedDescription.extra" :key="i">
 			<h4 v-html="heading" />
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>

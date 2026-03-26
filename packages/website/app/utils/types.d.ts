@@ -63,7 +63,10 @@ export interface IDamageResultTableSection {
 	selectValue?: string;
 	/** use with selectOptions */
 	selectLabel?: string;
-	hoverTooltipData?: IChampionAbilityHoverTooltipProps | { item: IItem };
+	hoverTooltipData?: IChampionAbilityHoverTooltipProps | {
+		item: IItem;
+		precomputedDescription: IComputedItemDescription;
+	};
 	rows: {
 		name: string;
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
