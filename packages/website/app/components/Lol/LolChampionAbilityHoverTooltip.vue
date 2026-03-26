@@ -23,125 +23,30 @@ watch(() => props.championId, async (id) => {
 	}
 }, { immediate: true });
 
-const hoveredAbility = computed(() => {
+const ability = computed(() => {
 	if (!isLoading.value && props.abilityKey && props.abilityVariant !== undefined && champion.value) {
 		return champion.value.abilities[props.abilityKey];
 	}
 	return undefined;
 });
 
-const hoveredAbilityVariant = computed(() =>
-	props.abilityVariant !== undefined ? hoveredAbility.value?.variants[props.abilityVariant] : undefined,
+const variant = computed(() =>
+	props.abilityVariant !== undefined ? ability.value?.variants[props.abilityVariant] : undefined,
 );
 
-const championAllAbilityVariants = computed(() => allChampionAbilityVariants(champion.value));
-
-const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
-
-const hoveredAbilityTooltipText = computed(() => {
-	if (!hoveredAbilityVariant.value) {
-		return undefined;
-	}
-
-	const abilityLevel = props.abilityKey !== 'passive' ? props.abilityLevel || 1 : undefined;
-
-	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
-		hoveredAbilityVariant.value.name,
-		champion.value?.stringtable,
-	);
-
-	const {
-		replaced: tooltipReplaced,
-		unknownSV: tooltipUnknownSV,
-		unknownV: tooltipUnknownV,
-		variablesAllValues: tooltipVariablesAV,
-	} = abilityVariantText(
-		onHitIcon,
-		championAllAbilityVariants.value,
-		hoveredAbilityVariant.value.tooltip || '<unknown>UNKNOWN</unknown>',
-		hoveredAbilityVariant.value,
-		abilityLevel,
-		champion.value?.stringtable,
-		props.replaceVariablesWithNames,
-	);
-	const {
-		replaced: tooltipExtendedReplaced,
-		unknownSV: tooltipExtendedUnknownSV,
-		unknownV: tooltipExtendedUnknownV,
-		variablesAllValues: tooltipExtendedVariablesAV,
-	} = abilityVariantText(
-		onHitIcon,
-		championAllAbilityVariants.value,
-		hoveredAbilityVariant.value.tooltipExtended || '',
-		hoveredAbilityVariant.value,
-		abilityLevel,
-		champion.value?.stringtable,
-		props.replaceVariablesWithNames,
-	);
-	const {
-		replaced: tooltipExtendedBelowLineReplaced,
-		unknownSV: tooltipExtendedBelowLineUnknownSV,
-		unknownV: tooltipExtendedBelowLineUnknownV,
-	} = abilityVariantText(
-		onHitIcon,
-		championAllAbilityVariants.value,
-		hoveredAbilityVariant.value.tooltipExtendedBelowLine || '',
-		hoveredAbilityVariant.value,
-		abilityLevel,
-		champion.value?.stringtable,
-		props.replaceVariablesWithNames,
-	);
-
-	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
-	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
-	const lastExtendedVariableIndex = hoveredAbility.value!.maxLevel + 1;
-
-	let extendedVariables: {
-		name: string;
-		values?: (string | number)[];
-		isNameUnknown?: boolean;
-	}[] | undefined = hoveredAbilityVariant.value.extendedVariables?.map((variable) => {
-		let isNameUnknown = false;
-		let name;
-
-		if (variable.nameOverride) {
-			name = champion.value?.stringtable[variable.nameOverride];
-			if (!name) {
-				isNameUnknown = true;
-			}
-		}
-
-		name ||= variable.type;
-
-		return {
-			name,
-			values: (tooltipVariablesAV.get(variable.type) || tooltipExtendedVariablesAV.get(variable.type))?.slice(1, lastExtendedVariableIndex),
-			isNameUnknown,
-		};
-	});
-
-	if (cooldown) {
-		extendedVariables ||= [];
-		extendedVariables.push({
-			name: 'Cooldown',
-			values: hoveredAbilityVariant.value.cooldownTime!.slice(1, lastExtendedVariableIndex),
-		});
-	}
-
-	// TODO detect unknown cost/cooldown
-	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
-
-	return {
-		name: nameReplaced,
-		tooltip: tooltipReplaced,
-		tooltipExtended: tooltipExtendedReplaced,
-		tooltipExtendedBelowLine: tooltipExtendedBelowLineReplaced,
-		anyUnknownVariables,
-		cooldown,
-		cost,
-		extendedVariables,
-	};
-});
+const tooltipData = computed(() =>
+	champion.value && props.abilityKey && props.abilityVariant !== undefined
+		? computedAbilityDescription(
+				minorVersion,
+				champion.value!,
+				props.abilityKey,
+				props.abilityVariant,
+				props.abilityLevel,
+				undefined,
+				{ replaceWithName: props.replaceVariablesWithNames },
+			)
+		: undefined,
+);
 
 const el = useTemplateRef('el');
 
@@ -152,7 +57,7 @@ defineExpose({ el });
 	<div ref="el" popover="hint" class="hover-tooltip champion-ability">
 		<img
 			v-show="!isLoading"
-			:src="!isLoading && hoveredAbilityVariant ? `https://raw.communitydragon.org/${minorVersion}/game/${hoveredAbilityVariant.image}` : undefined"
+			:src="!isLoading && variant ? `https://raw.communitydragon.org/${minorVersion}/game/${variant.image}` : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"
@@ -163,11 +68,11 @@ defineExpose({ el });
 				? 'loading...'
 				: `${
 					!abilityKey || abilityKey === 'passive' || (championId === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey.toUpperCase()}] `
-				} ${hoveredAbilityTooltipText?.name}`"
+				} ${tooltipData?.name}`"
 		/>
-		<span v-show="!isLoading" :class="{ unknown: abilityKey !== 'passive' && !hoveredAbilityTooltipText?.cooldown }">
+		<span v-show="!isLoading" :class="{ unknown: abilityKey !== 'passive' && !tooltipData?.cooldown }">
 			<template v-if="abilityKey !== 'passive'">
-				{{ hoveredAbilityTooltipText?.cooldown ? `${hoveredAbilityTooltipText.cooldown}s` : 'unknown' }}
+				{{ tooltipData?.cooldown ? `${tooltipData.cooldown}s` : 'unknown' }}
 				<img
 					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`"
 					width="20"
@@ -177,18 +82,18 @@ defineExpose({ el });
 			</template>
 		</span>
 		<span v-show="!isLoading">
-			{{ abilityKey === 'passive' ? '' : hoveredAbilityTooltipText?.cost ? `${hoveredAbilityTooltipText.cost} ${champion?.partype}` : 'No Cost' }}
+			{{ abilityKey === 'passive' ? '' : tooltipData?.cost ? `${tooltipData.cost} ${champion?.partype}` : 'No Cost' }}
 		</span>
-		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltip" />
-		<UnresolvedVariablesAlert v-if="hoveredAbilityTooltipText?.anyUnknownVariables" />
-		<footer v-if="hoveredAbilityTooltipText?.tooltipExtended || hoveredAbilityTooltipText?.tooltipExtendedBelowLine || hoveredAbilityTooltipText?.extendedVariables?.length">
+		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && tooltipData?.tooltipExtended || tooltipData?.tooltip" />
+		<UnresolvedVariablesAlert v-if="tooltipData?.anyUnknownVariables" />
+		<footer v-if="tooltipData?.tooltipExtended || tooltipData?.tooltipExtendedBelowLine || tooltipData?.extendedVariables?.length">
 			<div
-				v-if="hoveredAbilityTooltipText?.tooltipExtendedBelowLine"
+				v-if="tooltipData?.tooltipExtendedBelowLine"
 				v-show="globalKeyModifiers.shift"
-				v-html="hoveredAbilityTooltipText.tooltipExtendedBelowLine"
+				v-html="tooltipData.tooltipExtendedBelowLine"
 			/>
-			<dl v-show="globalKeyModifiers.shift && hoveredAbilityTooltipText?.extendedVariables">
-				<template v-for="{ name, values, isNameUnknown } in hoveredAbilityTooltipText?.extendedVariables" :key="name">
+			<dl v-show="globalKeyModifiers.shift && tooltipData?.extendedVariables">
+				<template v-for="{ name, values, isNameUnknown } in tooltipData?.extendedVariables" :key="name">
 					<dt :class="{ unknown: isNameUnknown }">
 						{{ name }}
 					</dt>

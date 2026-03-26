@@ -522,7 +522,121 @@ export function allChampionAbilityVariants(champion?: IChampion) {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
 
-export function abilityVariantText(
+export function computedAbilityDescription(
+	minorVersion: string,
+	champion: IChampion,
+	abilityKey: IChampionAbilityKey,
+	abilityVariant: number,
+	abilityLevel?: number,
+	_damageSource?: DamageSource<any>,
+	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+) {
+	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+
+	abilityLevel = abilityKey !== 'passive' ? abilityLevel || 1 : undefined;
+	const ability = champion.abilities[abilityKey];
+	const variant = ability.variants[abilityVariant]!;
+	const allVariants = allChampionAbilityVariants(champion);
+
+	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
+		variant.name,
+		champion.stringtable,
+	);
+
+	const {
+		replaced: tooltipReplaced,
+		unknownSV: tooltipUnknownSV,
+		unknownV: tooltipUnknownV,
+		variablesAllValues: tooltipVariablesAV,
+	} = abilityVariantText(
+		onHitIcon,
+		allVariants,
+		variant.tooltip || '<unknown>UNKNOWN</unknown>',
+		variant,
+		abilityLevel,
+		champion.stringtable,
+		replaceOptions?.replaceWithName,
+	);
+	const {
+		replaced: tooltipExtendedReplaced,
+		unknownSV: tooltipExtendedUnknownSV,
+		unknownV: tooltipExtendedUnknownV,
+		variablesAllValues: tooltipExtendedVariablesAV,
+	} = abilityVariantText(
+		onHitIcon,
+		allVariants,
+		variant.tooltipExtended || '',
+		variant,
+		abilityLevel,
+		champion.stringtable,
+		replaceOptions?.replaceWithName,
+	);
+	const {
+		replaced: tooltipExtendedBelowLineReplaced,
+		unknownSV: tooltipExtendedBelowLineUnknownSV,
+		unknownV: tooltipExtendedBelowLineUnknownV,
+	} = abilityVariantText(
+		onHitIcon,
+		allVariants,
+		variant.tooltipExtendedBelowLine || '',
+		variant,
+		abilityLevel,
+		champion.stringtable,
+		replaceOptions?.replaceWithName,
+	);
+
+	const cooldown = variant.cooldownTime?.[abilityLevel ?? 1];
+	const cost = variant.mana?.[abilityLevel ?? 1];
+	const lastExtendedVariableIndex = ability.maxLevel + 1;
+
+	let extendedVariables: {
+		name: string;
+		values?: (string | number)[];
+		isNameUnknown?: boolean;
+	}[] | undefined = variant.extendedVariables?.map((variable) => {
+		let isNameUnknown = false;
+		let name;
+
+		if (variable.nameOverride) {
+			name = champion.stringtable[variable.nameOverride];
+			if (!name) {
+				isNameUnknown = true;
+			}
+		}
+
+		name ||= variable.type;
+
+		return {
+			name,
+			values: (tooltipVariablesAV.get(variable.type) || tooltipExtendedVariablesAV.get(variable.type))?.slice(1, lastExtendedVariableIndex),
+			isNameUnknown,
+		};
+	});
+
+	if (cooldown) {
+		extendedVariables ||= [];
+		extendedVariables.push({
+			name: 'Cooldown',
+			values: variant.cooldownTime!.slice(1, lastExtendedVariableIndex),
+		});
+	}
+
+	// TODO detect unknown cost/cooldown
+	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
+
+	return {
+		name: nameReplaced,
+		tooltip: tooltipReplaced,
+		tooltipExtended: tooltipExtendedReplaced,
+		tooltipExtendedBelowLine: tooltipExtendedBelowLineReplaced,
+		anyUnknownVariables,
+		cooldown,
+		cost,
+		extendedVariables,
+	};
+}
+
+function abilityVariantText(
 	onHitIcon: string,
 	allAbilityVariants: IChampionAbilityVariant[],
 	value: string,
