@@ -698,6 +698,33 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 	const popover = (event.target as HTMLElement).querySelector('[popover]');
 	(popover as HTMLElement)?.hidePopover();
 }
+
+interface IColumnAddableOption {
+	championOptionIndex?: number;
+	itemOptionsIndexes: number[];
+}
+
+const columnAddableOptions = computed<IColumnAddableOption[]>(() => resultColumns.value.map((column) => {
+	const rv: IColumnAddableOption = {
+		championOptionIndex: undefined,
+		itemOptionsIndexes: [],
+	};
+
+	if (!column.source?.champion.value) {
+		return rv;
+	}
+
+	rv.championOptionIndex = damageSectionOptions.value.findIndex(option => option.type === 'champion' && option.optionId === column.source!.champion.value!.id);
+	if (rv.championOptionIndex === -1) {
+		rv.championOptionIndex = undefined;
+	}
+
+	rv.itemOptionsIndexes = damageSectionOptions.value.at(-1)?.type === 'item'
+		? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => column.source!.items.value.some(item => item && item.id === ability.championOrItemId) ? index : undefined).filter(index => index !== undefined)
+		: [];
+
+	return rv;
+}));
 </script>
 
 <template>
@@ -911,6 +938,12 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 						>
 							<span>move right, alt+click to duplicate to the right</span>
 							<Icon class="i-ph:arrow-right" />
+						</button>
+						<button class="pretend-ui-button" :disabled="columnAddableOptions[index]?.championOptionIndex === undefined">
+							add abilities
+						</button>
+						<button class="pretend-ui-button" :disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length">
+							add items
 						</button>
 					</div>
 				</td>
@@ -1137,7 +1170,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr]';
 		--bg-clr: theme('colors.neutral.950');
 		--control-button-size: calc(6 * var(--spacing));
-		--header-row-h: calc(22 * var(--spacing));
+		--section-header-row-h: calc(22 * var(--spacing));
 		--section-header-row-py: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
 		/* --section-header-row-h: calc( */
@@ -1183,7 +1216,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 
 			> tr:nth-child(1) > td,
 			> tr:nth-child(2) > * {
-				--at-apply: 'pb-3 bg-[--bg-clr]';
+				--at-apply: 'pb-3 bg-[--bg-clr] align-top';
 
 				&[data-drop-direction]::after {
 					--at-apply: 'content-empty absolute z-3 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
@@ -1196,14 +1229,16 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 
 				> form,
 				> div {
-					--at-apply: 'grid grid-rows-[auto_1fr] gap-y-3 relative grid-cols-[1fr_var(--control-button-size)_1fr]';
+					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--control-button-size)_1fr]';
 					--select-size: calc(10 * var(--spacing));
 					grid-template-areas:
 						'move-left remove move-right'
-						'source vs target';
+						'source vs target'
+						'add-abilities add-abilities add-abilities'
+						'add-items add-items add-items';
 
 					> .v-select {
-						--at-apply: 'size-[--select-size]';
+						--at-apply: 'size-[--select-size] my-3';
 						--b-width: 2px;
 
 						&[style] {
@@ -1247,7 +1282,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 						grid-area: vs;
 					}
 
-					> button {
+					> button:nth-of-type(-n + 3):not(:last-child) {
 						--at-apply: 'size-[--control-button-size]';
 
 						> span:nth-child(2) {
@@ -1274,6 +1309,18 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 							grid-area: move-right;
 						}
 
+						&:nth-of-type(n + 4) {
+							--at-apply: 'mx-2 h-[--control-button-size] leading-5';
+						}
+
+						&:nth-of-type(4) {
+							grid-area: add-abilities;
+						}
+
+						&:nth-of-type(5) {
+							grid-area: add-items;
+						}
+
 						> span:nth-child(1) {
 							--at-apply: 'sr-only';
 						}
@@ -1282,7 +1329,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 
 				> form {
 					> button {
-						--at-apply: 'w-auto px-1 justify-self-center leading-5';
+						--at-apply: 'w-auto px-1 justify-self-center h-[--control-button-size] leading-5';
 						grid-area: 1 / 1 / 2 / 4;
 					}
 				}
@@ -1293,7 +1340,7 @@ function hideSectionHoverTooltip(event: MouseEvent) {
 			anchor-scope: all;
 
 			&:not([aria-labelledby]) {
-				--at-apply: 'sticky top-[--header-row-h] z-4 bg-[--bg-clr]';
+				--at-apply: 'sticky top-[--section-header-row-h] z-4 bg-[--bg-clr]';
 
 				> tr {
 					anchor-name: --section-header-row;
