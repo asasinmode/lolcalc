@@ -110,6 +110,13 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 				id: 'dps',
 			},
 		],
+		// TODO
+		getCellValue() {
+			const value = Math.round(Math.random() * 500);
+			const numberValue = value;
+
+			return { value, numberValue };
+		},
 		selectValue: 'normal',
 		selectOptions: [['normal', 'normal'], ['critical', 'critical'], ['average', 'average']],
 		selectLabel: 'attack type',

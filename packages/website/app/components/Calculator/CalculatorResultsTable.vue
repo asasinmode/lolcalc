@@ -185,18 +185,12 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 	) {
 		rv.value = 'n/a';
 	} else {
-		if (section.getCellValue) {
-			const cellValue = section.getCellValue(section, row.id, column.source, column.target);
-			if (cellValue) {
-				({ value: rv.value, numberValue: rv.numberValue, isUnknown: rv.isUnknown } = cellValue);
-				rv.isIrrelevant = false;
-			} else {
-				rv.value = 'n/a';
-			}
-		} else {
-			rv.value = Math.round(Math.random() * 500);
-			rv.numberValue = rv.value;
+		const cellValue = section.getCellValue(section, row.id, column.source, column.target);
+		if (cellValue) {
+			({ value: rv.value, numberValue: rv.numberValue, isUnknown: rv.isUnknown } = cellValue);
 			rv.isIrrelevant = false;
+		} else {
+			rv.value = 'n/a';
 		}
 	}
 
@@ -248,28 +242,52 @@ function toggleResultsSection(sectionId: string) {
 
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
 	const computedItem = source.computed.items.value.find(item => item?.itemId === section.id);
-	if (!computedItem) {
-		return undefined;
+	if (computedItem) {
+		let numberValue = computedItem.descriptionContents.variables.get(rowId);
+		let value: string | number = numberValue as unknown as string;
+		let isUnknown = false;
+
+		if (numberValue === undefined) {
+			numberValue = 0;
+			value = '?';
+			isUnknown = true;
+		} else if (typeof numberValue !== 'number') {
+			value = `${numberValue[0]} | ${numberValue[1]}`;
+			numberValue = undefined;
+		}
+
+		return {
+			numberValue,
+			value,
+			isUnknown,
+		};
 	}
+};
 
-	let numberValue = computedItem.descriptionContents.variables.get(rowId);
-	let value: string | number = numberValue as unknown as string;
-	let isUnknown = false;
+const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
+	const { abilityKey, abilityVariant } = section.hoverTooltipData as Extract<IDamageResultTableSection['hoverTooltipData'], { championId: any }>;
 
-	if (numberValue === undefined) {
-		numberValue = 0;
-		value = '?';
-		isUnknown = true;
-	} else if (typeof numberValue !== 'number') {
-		value = `${numberValue[0]} | ${numberValue[1]}`;
-		numberValue = undefined;
+	const computedDescription = source.computed.abilities.value[abilityKey!][abilityVariant!];
+	if (computedDescription) {
+		const rv: ReturnType<IDamageResultTableSection['getCellValue']> = {
+			value: '?',
+			isUnknown: false,
+		};
+		const value = computedDescription.variables.get(rowId);
+
+		if (value === undefined) {
+			rv.numberValue = 0;
+			rv.value = '?';
+			rv.isUnknown = true;
+		} else if (typeof value !== 'number') {
+			rv.value = `${value[0]} | ${value[1]}`;
+		} else {
+			rv.value = value;
+			rv.numberValue = value;
+		}
+
+		return rv;
 	}
-
-	return {
-		numberValue,
-		value,
-		isUnknown,
-	};
 };
 
 function submitResultsSection(event: SubmitEvent) {
@@ -287,13 +305,13 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 	const option = damageSectionOptions.value[optionIndex]!;
 	const ability = option.abilities[abilityIndex]!;
 
-	const section: IDamageResultTableSection = {
+	const section = {
 		id: ability.id,
 		additionalId: 'all',
 		name: ability.name,
 		image: ability.image,
 		rows: [],
-	};
+	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
 	if (option.type === 'champion') {
 		const champion = await useChampion(option.optionId);
@@ -307,6 +325,7 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 			abilityVariant: 0,
 			precomputedDescription,
 		};
+		section.getCellValue = abilityVariableCellValue;
 	} else {
 		const item = items[ability.championOrItemId]!;
 		// TODO friendlier names, if value is calculated in item.ts maybe that can help
