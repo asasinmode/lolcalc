@@ -57,6 +57,7 @@ export interface IChampionAbilityVariant {
 	tooltip?: string;
 	tooltipExtended?: string;
 	tooltipExtendedBelowLine?: string;
+	/** the variables shown below the description when holding shift. Cooldown excluded, it's added manually */
 	extendedVariables?: {
 		type: string;
 		nameOverride?: string;

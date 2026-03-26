@@ -78,16 +78,37 @@ const hoveredAbilityTooltipText = computed(() => {
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
 
-	let extendedVariables: [string, (string | number)[]][] | undefined = hoveredAbilityVariant.value.extendedVariables?.map(variable =>
-		// TODO actual variable values
-		[
-			(variable.nameOverride && champion.value?.stringtable[variable.nameOverride]) || variable.type,
-			Array.from({ length: hoveredAbility.value!.maxLevel }, (_, i) => Math.round((Math.random() + i) * 100)),
-		]);
+	let extendedVariables: {
+		name: string;
+		values: number[];
+		isNameUnknown?: boolean;
+		isValuesUnknown?: boolean;
+	}[] | undefined = hoveredAbilityVariant.value.extendedVariables?.map((variable) => {
+		let isNameUnknown = false;
+		let name;
+
+		if (variable.nameOverride) {
+			name = champion.value?.stringtable[variable.nameOverride];
+			if (!name) {
+				isNameUnknown = true;
+			}
+		}
+
+		name ||= variable.type;
+
+		return {
+			name,
+			values: Array.from({ length: hoveredAbility.value!.maxLevel }, (_, i) => Math.round((Math.random() + i) * 100)),
+			isNameUnknown,
+		};
+	});
 
 	if (cooldown) {
 		extendedVariables ||= [];
-		extendedVariables.push(['Cooldown', hoveredAbilityVariant.value.cooldownTime!.slice(1, hoveredAbility.value!.maxLevel + 1)]);
+		extendedVariables.push({
+			name: 'Cooldown',
+			values: hoveredAbilityVariant.value.cooldownTime!.slice(1, hoveredAbility.value!.maxLevel + 1),
+		});
 	}
 
 	// TODO detect unknown cost/cooldown
@@ -153,15 +174,15 @@ defineExpose({ el });
 				v-html="hoveredAbilityTooltipText.tooltipExtendedBelowLine"
 			/>
 			<dl v-show="globalKeyModifiers.shift && hoveredAbilityTooltipText?.extendedVariables">
-				<template v-for="[variableName, variableValues] in hoveredAbilityTooltipText?.extendedVariables" :key="variableName">
-					<dt>
-						{{ variableName }}
+				<template v-for="{ name, values, isNameUnknown } in hoveredAbilityTooltipText?.extendedVariables" :key="name">
+					<dt :class="{ unknown: isNameUnknown }">
+						{{ name }}
 					</dt>
 					<dd>
 						[
 						<template
-							v-for="(variable, variableIndex) in variableValues"
-							:key="`${variableName}-${variableIndex}`"
+							v-for="(variable, variableIndex) in values"
+							:key="`${name}-${variableIndex}`"
 						>
 							<span
 								:data-current="abilityKey
@@ -172,7 +193,7 @@ defineExpose({ el });
 							>
 								{{ variable }}
 							</span>
-							{{ variableIndex === (variableValues.length - 1) ? '' : ' / ' }}
+							{{ variableIndex === (values.length - 1) ? '' : ' / ' }}
 						</template>
 						]
 					</dd>
@@ -269,6 +290,11 @@ defineExpose({ el });
 
 				&:not(:first-child) {
 					--at-apply: 'mt-1.5';
+				}
+
+				> dt.unknown {
+					color: #ff00ff;
+					font-weight: 700;
 				}
 
 				> dd {
