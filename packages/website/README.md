@@ -167,7 +167,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
-  - [ ] extendedVariable values, try to mark unknown?
+  - [ ] extendedVariable values, resolve cooldown & cost
   - [ ] result row variable values
   - [ ] result variant sections
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD

@@ -536,12 +536,17 @@ export function abilityVariantText(
 		stringtable,
 	);
 
-	const { replaced, unknownVariables } = replaceGameDescriptionVariables(
+	const { replaced, unknownVariables, variablesAllValues } = replaceGameDescriptionVariables(
 		stringtableReplaced,
 		'championAbility',
 		[variant, level, allAbilityVariants],
 		{ replaceWithName: replaceVariablesWithNames },
 	);
 
-	return { replaced: replaceGameDescriptionIcons(replaced, onHitIcon), unknownSV: unknownStringtableVariables, unknownV: unknownVariables };
+	return {
+		replaced: replaceGameDescriptionIcons(replaced, onHitIcon),
+		unknownSV: unknownStringtableVariables,
+		unknownV: unknownVariables,
+		variablesAllValues,
+	};
 }

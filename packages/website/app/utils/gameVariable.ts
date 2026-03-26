@@ -17,6 +17,8 @@ interface IVariableValueResult {
 	isMeleeRanged?: boolean;
 	/** returns the variable name stripped of any dot path (`AdditionalUltAH.0` -> `AdditionalUltAH`) or `undefined` if same as provided */
 	actualVariableName?: string;
+	/** all values the variable lists, like champion Q levels 0-6 */
+	allValues?: number[];
 }
 
 // TODO maybe `ItemCalculations` could be saved in calculate champion stats, then passed here and results could just be displayed
@@ -113,6 +115,7 @@ export function championAbilityVariableValue(
 ): IVariableValueResult {
 	let value: IVariableValueResult['value'];
 	let actualVariableName: IVariableValueResult['actualVariableName'];
+	let allValues: IVariableValueResult['allValues'];
 
 	const colonIndex = variable.indexOf(':');
 	if (~colonIndex) {
@@ -181,10 +184,11 @@ export function championAbilityVariableValue(
 	}
 
 	if (Array.isArray(value)) {
+		allValues = value as number[];
 		value = value[abilityLevel];
 	}
 
-	return { value, actualVariableName };
+	return { value, actualVariableName, allValues };
 }
 
 export type IGameVariableType = 'item' | 'rune' | 'championAbility';
@@ -200,6 +204,8 @@ export interface IGameVariableValueParameters {
 interface IReplaceGameDescriptionVariablesRV {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
+	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
+	variablesAllValues: Map<string, (string | number)[]>;
 	unknownVariables: [rawName: string, actualName: string | undefined][];
 }
 
@@ -218,6 +224,7 @@ export function replaceGameDescriptionVariables(
 ): IReplaceGameDescriptionVariablesRV {
 	const unknownVariables: [string, string | undefined][] = [];
 	const variables = new Map<string, number | [number, number]>();
+	const variablesAllValues = new Map<string, (string | number)[]>();
 
 	const tagWrapStart = options.replaceWithName ? '<variablename>' : '';
 	const tagWrapEnd = options.replaceWithName ? '</variablename>' : '';
@@ -232,12 +239,22 @@ export function replaceGameDescriptionVariables(
 			variableName = name.slice(0, multiplierIndex);
 		}
 
-		let { value: variable, isMeleeRanged, actualVariableName } = (variableType === 'item'
+		let { value: variable, isMeleeRanged, actualVariableName, allValues } = (variableType === 'item'
 			? itemVariableValue
 			: variableType === 'championAbility'
 				? championAbilityVariableValue
 				// @ts-expect-error spread is fine
 				: runeVariableValue)(variableName, ...variableValueFunctionArguments);
+
+		if (allValues) {
+			variablesAllValues.set(actualVariableName || variableName, allValues.map((value) => {
+				let parsedValue: string | number = roundVariable(value * multiplier);
+				if (multiplier !== 1) {
+					parsedValue = `${parsedValue}%`;
+				}
+				return parsedValue;
+			}));
+		}
 
 		if (typeof variable !== 'string' && (
 			Array.isArray(variable)
@@ -282,7 +299,7 @@ export function replaceGameDescriptionVariables(
 			: `${tagWrapStart}${options.replaceWithName ? variableName : variable.toString()}${tagWrapEnd}`;
 	});
 
-	return { replaced, variables, unknownVariables };
+	return { replaced, variables, unknownVariables, variablesAllValues };
 }
 
 const statIconNameValues = Object.values(STAT_ICON_NAMES);

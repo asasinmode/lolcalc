@@ -50,7 +50,12 @@ const hoveredAbilityTooltipText = computed(() => {
 		champion.value?.stringtable,
 	);
 
-	const { replaced: tooltipReplaced, unknownSV: tooltipUnknownSV, unknownV: tooltipUnknownV } = abilityVariantText(
+	const {
+		replaced: tooltipReplaced,
+		unknownSV: tooltipUnknownSV,
+		unknownV: tooltipUnknownV,
+		variablesAllValues: tooltipVariablesAV,
+	} = abilityVariantText(
 		onHitIcon,
 		championAllAbilityVariants.value,
 		hoveredAbilityVariant.value.tooltip || '<unknown>UNKNOWN</unknown>',
@@ -58,7 +63,12 @@ const hoveredAbilityTooltipText = computed(() => {
 		abilityLevel,
 		champion.value?.stringtable,
 	);
-	const { replaced: tooltipExtendedReplaced, unknownSV: tooltipExtendedUnknownSV, unknownV: tooltipExtendedUnknownV } = abilityVariantText(
+	const {
+		replaced: tooltipExtendedReplaced,
+		unknownSV: tooltipExtendedUnknownSV,
+		unknownV: tooltipExtendedUnknownV,
+		variablesAllValues: tooltipExtendedVariablesAV,
+	} = abilityVariantText(
 		onHitIcon,
 		championAllAbilityVariants.value,
 		hoveredAbilityVariant.value.tooltipExtended || '',
@@ -66,7 +76,11 @@ const hoveredAbilityTooltipText = computed(() => {
 		abilityLevel,
 		champion.value?.stringtable,
 	);
-	const { replaced: tooltipExtendedBelowLineReplaced, unknownSV: tooltipExtendedBelowLineUnknownSV, unknownV: tooltipExtendedBelowLineUnknownV } = abilityVariantText(
+	const {
+		replaced: tooltipExtendedBelowLineReplaced,
+		unknownSV: tooltipExtendedBelowLineUnknownSV,
+		unknownV: tooltipExtendedBelowLineUnknownV,
+	} = abilityVariantText(
 		onHitIcon,
 		championAllAbilityVariants.value,
 		hoveredAbilityVariant.value.tooltipExtendedBelowLine || '',
@@ -77,12 +91,12 @@ const hoveredAbilityTooltipText = computed(() => {
 
 	const cooldown = hoveredAbilityVariant.value.cooldownTime?.[abilityLevel ?? 1];
 	const cost = hoveredAbilityVariant.value.mana?.[abilityLevel ?? 1];
+	const lastExtendedVariableIndex = hoveredAbility.value!.maxLevel + 1;
 
 	let extendedVariables: {
 		name: string;
-		values: number[];
+		values?: number[];
 		isNameUnknown?: boolean;
-		isValuesUnknown?: boolean;
 	}[] | undefined = hoveredAbilityVariant.value.extendedVariables?.map((variable) => {
 		let isNameUnknown = false;
 		let name;
@@ -98,7 +112,7 @@ const hoveredAbilityTooltipText = computed(() => {
 
 		return {
 			name,
-			values: Array.from({ length: hoveredAbility.value!.maxLevel }, (_, i) => Math.round((Math.random() + i) * 100)),
+			values: (tooltipVariablesAV.get(variable.type) || tooltipExtendedVariablesAV.get(variable.type))?.slice(1, lastExtendedVariableIndex),
 			isNameUnknown,
 		};
 	});
@@ -107,7 +121,7 @@ const hoveredAbilityTooltipText = computed(() => {
 		extendedVariables ||= [];
 		extendedVariables.push({
 			name: 'Cooldown',
-			values: hoveredAbilityVariant.value.cooldownTime!.slice(1, hoveredAbility.value!.maxLevel + 1),
+			values: hoveredAbilityVariant.value.cooldownTime!.slice(1, lastExtendedVariableIndex),
 		});
 	}
 
@@ -148,12 +162,9 @@ defineExpose({ el });
 					!abilityKey || abilityKey === 'passive' || (championId === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey.toUpperCase()}] `
 				} ${hoveredAbilityTooltipText?.name}`"
 		/>
-		<span v-show="!isLoading">
+		<span v-show="!isLoading" :class="{ unknown: abilityKey !== 'passive' && !hoveredAbilityTooltipText?.cooldown }">
 			<template v-if="abilityKey !== 'passive'">
-				<template v-if="hoveredAbilityTooltipText?.cooldown">
-					{{ hoveredAbilityTooltipText?.cooldown }}s
-				</template>
-				<Unknown v-else>UNKNOWN</Unknown>
+				{{ hoveredAbilityTooltipText?.cooldown ? `${hoveredAbilityTooltipText.cooldown}s` : 'unknown' }}
 				<img
 					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png`"
 					width="20"
@@ -178,8 +189,9 @@ defineExpose({ el });
 					<dt :class="{ unknown: isNameUnknown }">
 						{{ name }}
 					</dt>
-					<dd>
+					<dd :class="{ unknown: !values?.length }">
 						[
+						{{ !values?.length ? 'unknown' : '' }}
 						<template
 							v-for="(variable, variableIndex) in values"
 							:key="`${name}-${variableIndex}`"
@@ -193,7 +205,7 @@ defineExpose({ el });
 							>
 								{{ variable }}
 							</span>
-							{{ variableIndex === (values.length - 1) ? '' : ' / ' }}
+							{{ !values || variableIndex === (values.length - 1) ? '' : ' / ' }}
 						</template>
 						]
 					</dd>
@@ -247,7 +259,7 @@ defineExpose({ el });
 		}
 
 		> h5 {
-			--at-apply: 'row-span-2';
+			--at-apply: 'row-span-2 leading-7';
 		}
 
 		> span {
@@ -274,6 +286,12 @@ defineExpose({ el });
 			--at-apply: 'col-span-full';
 		}
 
+		> span.unknown,
+		> footer > dl > :where(dt, dd).unknown {
+			color: #ff00ff;
+			font-weight: 700;
+		}
+
 		> footer {
 			--at-apply: 'col-span-full';
 
@@ -290,11 +308,6 @@ defineExpose({ el });
 
 				&:not(:first-child) {
 					--at-apply: 'mt-1.5';
-				}
-
-				> dt.unknown {
-					color: #ff00ff;
-					font-weight: 700;
 				}
 
 				> dd {
