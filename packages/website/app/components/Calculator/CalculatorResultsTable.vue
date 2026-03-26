@@ -416,7 +416,7 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 	});
 }
 
-function columnDamageSourcesColorStyles(column: IDamageResultTableColumn) {
+function columnDamageSourcesColorStyles(column: Pick<IDamageResultTableColumn, 'source' | 'target'>) {
 	return {
 		'--col-damage-source-clr': column.source?.color,
 		'--col-damage-target-clr': column.target?.color,
@@ -825,6 +825,7 @@ function addColumnItems(columnIndex: number) {
 					width="120px"
 					rowspan="2"
 					:data-drop-direction="columnDragDropIndex === resultColumns.length ? 'before' : undefined"
+					:style="columnDamageSourcesColorStyles({ source: columnNewSource, target: columnNewTarget })"
 					@dragenter="onResultColumnDragenter($event, resultColumns.length)"
 					@dragover="onResultColumnDragover($event, resultColumns.length)"
 					@dragleave="onResultColumnDragleave"
@@ -924,7 +925,6 @@ function addColumnItems(columnIndex: number) {
 							label="column's damage source"
 							:options="sourceOptions"
 							required
-							:style="resultColumns[index]!.source ? `--damage-source-clr: ${resultColumns[index]!.source.color}` : undefined"
 							@update:model-value="setColumnChampion(column, damageSources, $event)"
 						>
 							<img
@@ -950,7 +950,6 @@ function addColumnItems(columnIndex: number) {
 							label="column's damage target"
 							:options="targetOptions"
 							clearable
-							:style="resultColumns[index]!.target ? `--damage-source-clr: ${resultColumns[index]!.target.color}` : undefined"
 							@update:model-value="setColumnChampion(column, damageTargets, $event)"
 						>
 							<img
@@ -1318,7 +1317,7 @@ function addColumnItems(columnIndex: number) {
 						--at-apply: 'size-[--header-champion-select-size] my-[--header-row-gap-y]';
 						--b-width: 2px;
 
-						&[style] {
+						&:has(> select[value]) {
 							--b-width: 2.5px;
 						}
 
@@ -1336,7 +1335,7 @@ function addColumnItems(columnIndex: number) {
 						}
 
 						> label {
-							--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--damage-source-clr,var(--ui-button-border-clr)]';
+							--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--col-damage-source-clr,var(--ui-button-border-clr)]';
 
 							> img {
 								--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -1349,6 +1348,10 @@ function addColumnItems(columnIndex: number) {
 							> img {
 								--at-apply: 'brightness-[--focus-brightness]';
 							}
+						}
+
+						&:nth-of-type(2) > label {
+							--at-apply: 'b-[--col-damage-target-clr,var(--ui-button-border-clr)]';
 						}
 					}
 
