@@ -175,9 +175,9 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		isUnknown: false,
 	};
 
-	if (!column.source?.listedChampion.value) {
+	if (!column.source) {
 		rv.value = '-';
-	} else if (column.source.listedChampion.value.id !== column.source.champion.value?.id) {
+	} else if (column.source.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id) {
 		rv.value = 'loading...';
 	} else if (
 		(section.additionalId !== 'all' && section.additionalId !== 'item' && column.source.champion.value?.id !== section.additionalId)
@@ -928,8 +928,8 @@ function addColumnItems(columnIndex: number) {
 							@update:model-value="setColumnChampion(column, damageSources, $event)"
 						>
 							<img
-								v-if="column.source"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.source.listedChampion.value!.image}`"
+								v-if="column.source?.listedChampion.value"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.source.listedChampion.value.image}`"
 								loading="lazy"
 								width="128"
 								height="128"
@@ -953,8 +953,8 @@ function addColumnItems(columnIndex: number) {
 							@update:model-value="setColumnChampion(column, damageTargets, $event)"
 						>
 							<img
-								v-if="column.target"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.target.listedChampion.value!.image}`"
+								v-if="column.target?.listedChampion.value"
+								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.target.listedChampion.value.image}`"
 								loading="lazy"
 								width="128"
 								height="128"

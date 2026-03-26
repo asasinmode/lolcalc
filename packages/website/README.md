@@ -86,7 +86,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] section image appropriate ability/item hover tooltip with variable names instead of values
   - [x] ability rows not implemented yet, coming soon
   - [x] add all of source's items/abilities to damage results
-  - [?] ability rows actual description variables (random values)
+  - [x] ability rows actual description variables
   - [?] one select to switch between sources/targets?
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average

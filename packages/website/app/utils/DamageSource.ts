@@ -181,6 +181,38 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		});
 	}
 
+	clear() {
+		this.listedChampion.value = undefined;
+		this.champion.value = undefined;
+		this.level.value = 1;
+		for (let i = 0; i < this.items.value.length; i++) {
+			this.items.value[i] = undefined;
+		}
+		this.runes.value.paths.primary = 'Precision';
+		this.runes.value.paths.primarySlots = [];
+		this.runes.value.paths.secondary = undefined;
+		this.runes.value.paths.secondarySlots = [];
+		this.runes.value.shards.offensive = 'adaptive';
+		this.runes.value.shards.flex = 'adaptive';
+		this.runes.value.shards.defensive = 'health';
+		this.currentHealth.value = this.stats.value?.stats.total.hp ?? 0;
+		this.currentAbilityResource.value = this.stats.value?.stats.total.mana ?? 0;
+		this.abilityLevels.value.q = 0;
+		this.abilityLevels.value.w = 0;
+		this.abilityLevels.value.e = 0;
+		this.abilityLevels.value.r = 0;
+		this.abilityVariants.value.passive = 0;
+		this.abilityVariants.value.q = 0;
+		this.abilityVariants.value.w = 0;
+		this.abilityVariants.value.e = 0;
+		this.abilityVariants.value.r = 0;
+		for (let i = 0; i < this.dragonStacks.value.length; i++) {
+			this.dragonStacks.value[i] = undefined;
+		}
+		this.dragonSoul.value = undefined;
+		this.roleQuest.value = undefined;
+	}
+
 	getWatchable(): MaybeRefOrGetter[] {
 		return [
 			this.champion,

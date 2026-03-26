@@ -218,7 +218,7 @@ onBeforeUnmount(() => {
 });
 
 function clear(index: number, target: DamageSource[]) {
-	target[index] = markRaw(new DamageSource());
+	target[index]!.clear();
 }
 
 function remove(index: number, target: DamageSource[]) {
