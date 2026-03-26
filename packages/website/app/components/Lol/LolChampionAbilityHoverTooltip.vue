@@ -35,7 +35,7 @@ const variant = computed(() =>
 );
 
 const computedDescription = computed<IComputedAbilityDescription | undefined>(() =>
-	champion.value && props.abilityKey && props.abilityVariant !== undefined
+	props.precomputedDescription || (champion.value && props.abilityKey && props.abilityVariant !== undefined
 		? computedAbilityDescription(
 				minorVersion,
 				champion.value!,
@@ -45,7 +45,7 @@ const computedDescription = computed<IComputedAbilityDescription | undefined>(()
 				undefined,
 				{ replaceWithName: props.replaceVariablesWithNames },
 			)
-		: undefined,
+		: undefined),
 );
 
 const el = useTemplateRef('el');

@@ -476,7 +476,7 @@ export function computedItemDescription(
 
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
 		unknownVariables.push(...headingUnknown);
-		mergeMapsWithWarnDuplicate(variables, headingVariables, `[computedItemDescription] item ${item.id}`);
+		mergeMaps(variables, headingVariables, `[computedItemDescription] item ${item.id}`);
 
 		return [
 			replaceGameDescriptionIcons(replacedHeading),
@@ -490,7 +490,7 @@ export function computedItemDescription(
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
 				unknownVariables.push(...paragraphUnknown);
-				mergeMapsWithWarnDuplicate(variables, paragraphVariables, `[computedItemDescription] item ${item.id}`);
+				mergeMaps(variables, paragraphVariables, `[computedItemDescription] item ${item.id}`);
 
 				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
 			},
@@ -509,9 +509,9 @@ export function computedItemDescription(
 	};
 }
 
-function mergeMapsWithWarnDuplicate<T, U>(map1: Map<T, U>, map2: Map<T, U>, warnPrefix: string) {
+function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>, warnPrefix?: string) {
 	for (const [variableKey, variableValue] of map2.entries()) {
-		if (map1.has(variableKey)) {
+		if (warnPrefix && map1.has(variableKey)) {
 			console.warn(`${warnPrefix} variable "${variableKey}" resolves multiple times`);
 		}
 		map1.set(variableKey, variableValue);
@@ -535,6 +535,8 @@ export interface IComputedAbilityDescription {
 		values?: (string | number)[];
 		isNameUnknown?: boolean;
 	}[];
+	variables: IReplaceGameDescriptionVariablesRV['variables'];
+	unknownVariables: IReplaceGameDescriptionVariablesRV['unknownVariables'];
 }
 
 export function computedAbilityDescription(
@@ -558,11 +560,15 @@ export function computedAbilityDescription(
 		champion.stringtable,
 	);
 
+	const variables: IComputedAbilityDescription['variables'] = new Map();
+	const unknownVariables: IComputedAbilityDescription['unknownVariables'] = [];
+
 	const {
 		replaced: tooltipReplaced,
 		unknownSV: tooltipUnknownSV,
 		unknownV: tooltipUnknownV,
 		variablesAllValues: tooltipVariablesAV,
+		variables: tooltipVariables,
 	} = abilityVariantText(
 		onHitIcon,
 		allVariants,
@@ -577,6 +583,7 @@ export function computedAbilityDescription(
 		unknownSV: tooltipExtendedUnknownSV,
 		unknownV: tooltipExtendedUnknownV,
 		variablesAllValues: tooltipExtendedVariablesAV,
+		variables: tooltipExtendedVariables,
 	} = abilityVariantText(
 		onHitIcon,
 		allVariants,
@@ -590,6 +597,7 @@ export function computedAbilityDescription(
 		replaced: tooltipExtendedBelowLineReplaced,
 		unknownSV: tooltipExtendedBelowLineUnknownSV,
 		unknownV: tooltipExtendedBelowLineUnknownV,
+		variables: tooltipExtendedBelowLineVariables,
 	} = abilityVariantText(
 		onHitIcon,
 		allVariants,
@@ -599,6 +607,18 @@ export function computedAbilityDescription(
 		champion.stringtable,
 		replaceOptions?.replaceWithName,
 	);
+
+	mergeMaps(variables, tooltipVariables);
+	mergeMaps(variables, tooltipExtendedVariables);
+	mergeMaps(variables, tooltipExtendedBelowLineVariables);
+
+	for (const unknownVariablesGroup of [tooltipUnknownV, tooltipExtendedUnknownV, tooltipExtendedBelowLineUnknownV]) {
+		for (const unknownVariable of unknownVariablesGroup) {
+			if (!unknownVariables.some(unknownV => unknownV[0] === unknownVariable[0])) {
+				unknownVariables.push(unknownVariable);
+			}
+		}
+	}
 
 	const cooldown = variant.cooldownTime?.[abilityLevel ?? 1];
 	const cost = variant.mana?.[abilityLevel ?? 1];
@@ -644,6 +664,8 @@ export function computedAbilityDescription(
 		cooldown,
 		cost,
 		extendedVariables,
+		variables,
+		unknownVariables,
 	};
 }
 
@@ -661,7 +683,7 @@ function abilityVariantText(
 		stringtable,
 	);
 
-	const { replaced, unknownVariables, variablesAllValues } = replaceGameDescriptionVariables(
+	const { replaced, unknownVariables, variablesAllValues, variables } = replaceGameDescriptionVariables(
 		stringtableReplaced,
 		'championAbility',
 		[variant, level, allAbilityVariants],
@@ -673,5 +695,6 @@ function abilityVariantText(
 		unknownSV: unknownStringtableVariables,
 		unknownV: unknownVariables,
 		variablesAllValues,
+		variables,
 	};
 }

@@ -92,4 +92,5 @@ export interface IChampionAbilityHoverTooltipProps {
 	abilityVariant?: number;
 	abilityLevel?: number;
 	replaceVariablesWithNames?: boolean;
+	precomputedDescription?: IComputedAbilityDescription;
 }

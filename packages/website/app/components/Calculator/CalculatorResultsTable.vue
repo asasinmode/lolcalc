@@ -297,12 +297,15 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 
 	if (option.type === 'champion') {
 		const champion = await useChampion(option.optionId);
+		const precomputedDescription = computedAbilityDescription(minorVersion, champion, ability.abilityKey as IChampionAbilityKey, 0, undefined, undefined, { replaceWithName: true });
+
 		section.additionalId = champion.id;
-		section.rows = championAbilityVariantListedVariables(champion, ability.abilityKey as IChampionAbilityKey, 0);
+		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.hoverTooltipData = {
 			championId: champion.id,
 			abilityKey: ability.abilityKey as IChampionAbilityKey,
 			abilityVariant: 0,
+			precomputedDescription,
 		};
 	} else {
 		const item = items[ability.championOrItemId]!;
@@ -311,15 +314,7 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true });
 
 		section.additionalId = 'item';
-		section.rows = precomputedDescription.variables
-			.keys()
-			.toArray()
-			.map(name => ({ id: name, name }))
-			.concat(precomputedDescription.unknownVariables.map(([rawName, actualName]) => ({
-				id: rawName,
-				name: actualName || rawName,
-				isUnknown: true,
-			})));
+		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { item, precomputedDescription };
 	}
@@ -327,6 +322,18 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 	resultSections.value.push(section);
 	expandedSections.value.push(section.id);
 	addComputedSection(section.id);
+}
+
+function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameDescriptionVariablesRV, 'variables' | 'unknownVariables'>): IDamageResultTableSection['rows'] {
+	return variables
+		.keys()
+		.toArray()
+		.map(name => ({ id: name, name }))
+		.concat(unknownVariables.map(([rawName, actualName]) => ({
+			id: rawName,
+			name: actualName || rawName,
+			isUnknown: true,
+		})));
 }
 
 function removeDamageSection(index: number) {
@@ -1077,11 +1084,11 @@ function addColumnItems(columnIndex: number) {
 							<span>{{ section.name }}</span>
 							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
 								<div v-if="section.additionalId === 'item'" popover="hint" class="hover-tooltip champion-item">
-									<ItemDescription v-bind="section.hoverTooltipData" />
+									<ItemDescription v-bind="section.hoverTooltipData as any" />
 								</div>
 								<LolChampionAbilityHoverTooltip
 									v-else-if="section.additionalId !== 'all'"
-									v-bind="section.hoverTooltipData"
+									v-bind="section.hoverTooltipData as any"
 									replace-variables-with-names
 								/>
 							</template>

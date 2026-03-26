@@ -201,7 +201,7 @@ export interface IGameVariableValueParameters {
 	championAbility: ParametersExceptFirst<typeof championAbilityVariableValue>;
 };
 
-interface IReplaceGameDescriptionVariablesRV {
+export interface IReplaceGameDescriptionVariablesRV {
 	replaced: string;
 	variables: Map<string, number | [number, number]>;
 	/** all found variables' listed values, expected on champion variables like values for Q level 0-6 */
