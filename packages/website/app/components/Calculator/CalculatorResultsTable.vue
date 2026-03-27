@@ -1268,10 +1268,6 @@ function addColumnItems(columnIndex: number) {
 		--header-row-gap-y: calc(3 * var(--spacing));
 		--header-champion-select-size: calc(10 * var(--spacing));
 		--header-row-pb: calc(3 * var(--spacing));
-		--header-row-h: calc(
-			3 * var(--control-button-size) + 2 * var(--header-row-gap-y) + var(--header-champion-select-size) +
-				var(--header-row-pb)
-		);
 		--section-header-row-h: calc(22 * var(--spacing));
 		--section-header-row-py: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
@@ -1302,10 +1298,10 @@ function addColumnItems(columnIndex: number) {
 			}
 
 			> tr:nth-child(2) > td:first-child {
-				--at-apply: 'ps-3 pb-3 bg-[--bg-clr] text-start align-top';
+				--at-apply: 'ps-3 pb-3 bg-[--bg-clr] min-h-px text-start align-top';
 
 				> div {
-					--at-apply: 'flex flex-col h-[calc(var(--header-row-h)-var(--header-row-pb))] items-start';
+					--at-apply: 'inline-flex flex-col items-start';
 
 					> label {
 						--at-apply: '';
@@ -1547,7 +1543,7 @@ function addColumnItems(columnIndex: number) {
 					}
 
 					> th {
-						--at-apply: 'ps-[--ps]';
+						--at-apply: 'ps-[--ps] hyphens-auto wrap-anywhere';
 						--ps: calc(2 * var(--control-button-size));
 
 						> img {
