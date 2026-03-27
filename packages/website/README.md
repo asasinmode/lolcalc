@@ -69,7 +69,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] kraken slayer
       - [ ] yun tal wildarrows
     - [ ] shapeshifting champions choose shape, switch abilities since it can affect stats
-  - [ ] mirror layout
+  - [?] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
   - [x] source vs target column headers
@@ -87,7 +87,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] ability rows not implemented yet, coming soon
   - [x] add all of source's items/abilities to damage results
   - [x] ability rows actual description variables
-  - [?] one select to switch between sources/targets?
+  - [x] one select to switch between sources/targets?
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
   - [x] per damage results row unknown variables style

@@ -91,6 +91,10 @@
 	input {
 		background-color: black;
 	}
+
+	label > input[type='checkbox'] {
+		vertical-align: -0.0625em;
+	}
 }
 
 @layer components {

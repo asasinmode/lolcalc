@@ -317,13 +317,27 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 	}
 	itemDragData = undefined;
 }
+
+const mirrorLayout = ref(false);
+
+onMounted(() => {
+	mirrorLayout.value = localStorage.getItem('mirror-scoreboard-layout') === 'true';
+});
+
+function setLocalMirrorLayout() {
+	localStorage.setItem('mirror-scoreboard-layout', mirrorLayout.value.toString());
+}
 </script>
 
 <template>
-	<section id="scoreboard">
+	<section id="scoreboard" :data-mirrored="mirrorLayout || undefined">
 		<h2 id="scoreboard-header">
 			configuration scoreboard
 		</h2>
+		<label for="scoreboard-mirror-layout">
+			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout">
+			mirror layout
+		</label>
 		<div>
 			<h3>
 				damage sources
@@ -451,6 +465,10 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 	#scoreboard {
 		> #scoreboard-header {
 			--at-apply: 'mx-auto text-center';
+		}
+
+		> label {
+			--at-apply: 'mx-auto block w-min whitespace-nowrap';
 		}
 
 		> div {

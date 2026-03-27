@@ -1906,4 +1906,9 @@ defineExpose({ el });
 		}
 	}
 }
+
+@layer overrides {
+	#scoreboard[data-mirrored] > div > ul:nth-of-type(1) > [data-scoreboard-item] {
+	}
+}
 </style>
