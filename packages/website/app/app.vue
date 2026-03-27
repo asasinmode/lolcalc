@@ -180,6 +180,9 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 			/>
 		</section>
 	</main>
+	<footer>
+		<b>lolcalc</b> was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
+	</footer>
 	<ChampSelect />
 	<ItemShop />
 	<RuneSelect />
@@ -200,6 +203,12 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 		--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
 		-webkit-text-stroke: black 0.2em;
 		paint-order: stroke fill;
+	}
+
+	#__nuxt {
+		footer {
+			--at-apply: 'pt-8 text-neutral-300';
+		}
 	}
 }
 </style>

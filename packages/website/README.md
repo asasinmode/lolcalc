@@ -99,7 +99,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] hover tooltips
   - [x] rune paths not implemented alert
   - [ ] save button? Changes are saved instantly so it doesn't really make sense
-  - [ ] alert that configuration is incorrect
+  - [?] alert that configuration is incorrect
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
@@ -111,12 +111,13 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] inventory panel or list in the footer
   - [x] buying mechanism, components into item and so on
   - [x] item groups, only one from group
-  - [ ] show inventory total value
-  - [ ] try not to intercept all right clicks
+  - [?] show inventory total value
+  - [?] try not to intercept all right clicks
+  - [?] footer
 - [x] close dialogs on click outside
-- [ ] target dummy damage source
+- [?] target dummy damage source
+- [?] sharing, saving/reading data in query
 - [ ] mobile version and make look better
-- [ ] sharing, saving/reading data in query
 - [ ] calculations
   - [ ] stats from rune shards
   - [ ] dragons/souls
@@ -135,7 +136,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champ select roles
   - [ ] role quests
   - [ ] dragons
-- [ ] disclaimer not endorsed by riot
+- [x] disclaimer not endorsed by riot
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups with helpful info
   - [ ] dragging scoreboard elements
