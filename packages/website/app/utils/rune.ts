@@ -4,6 +4,16 @@ import runeData from '../assets/rune.json' with { type: 'json' };
 
 const { data } = runeData;
 
+export function runePathsEmpty(runes: IChampionRunes) {
+	const { primarySlots, secondary, secondarySlots } = runes.paths;
+	return !(primarySlots.length || secondary || secondarySlots.length);
+};
+
+export function runesInvalid(runes: IChampionRunes, areEmpty = runePathsEmpty(runes)) {
+	const { primarySlots, secondary, secondarySlots } = runes.paths;
+	return !areEmpty && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
+};
+
 export const RUNE_SPECIFICS = {
 	shards: {
 		adaptive: {

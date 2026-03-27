@@ -1239,8 +1239,8 @@ defineExpose({
 		}
 
 		&::after {
-			mask: var(--lock-icon-url) center / 100% 100% no-repeat;
 			--at-apply: 'content-empty absolute size-3.5 bg-amber-100 saturate-60 brightness-80';
+			mask: var(--lock-icon-url) center / 100% 100% no-repeat;
 		}
 	}
 

@@ -32,14 +32,8 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	}));
 
 	runes: Ref<IChampionRunes>;
-	runePathsEmpty = computed(() => {
-		const { primarySlots, secondary, secondarySlots } = this.runes.value.paths;
-		return !(primarySlots.length || secondary || secondarySlots.length);
-	});
-	runesInvalid = computed(() => {
-		const { primarySlots, secondary, secondarySlots } = this.runes.value.paths;
-		return !this.runePathsEmpty.value && !(secondary && primarySlots.length === 4 && secondarySlots.length === 2);
-	});
+	runePathsEmpty = computed(() => runePathsEmpty(this.runes.value));
+	runesInvalid = computed(() => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	currentHealth: Ref<number>;
 	currentAbilityResource: Ref<number>;

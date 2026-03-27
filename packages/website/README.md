@@ -98,8 +98,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] secondary path unset layout
   - [x] hover tooltips
   - [x] rune paths not implemented alert
-  - [ ] save button? Changes are saved instantly so it doesn't really make sense
-  - [?] alert that configuration is incorrect
+  - [x] save button? Changes are saved instantly so it doesn't really make sense
+  - [x] alert that configuration is incorrect
 - [ ] champ select dialog
 - [ ] item shop dialog
   - [x] sorting
@@ -144,6 +144,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] right click to sell items
   - [ ] right click to clear ability level/soul/role quest/others
 - [ ] keyboard navigation
+  - [ ] somehow right clicks, like clearing selects/removing items
   - [ ] show hover tooltips when navigated to with keyboard
   - [ ] skip links around busy areas (scoreboard, item shop?)
 - [ ] check with screenreader (check if tooltips are read when navigated to even when not visible)

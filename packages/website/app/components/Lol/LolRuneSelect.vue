@@ -238,17 +238,25 @@ onBeforeUnmount(() => {
 	window.removeEventListener('resize', updateTooltipPosition);
 });
 
+const configurationInvalid = computed(() => value.value && runesInvalid(value.value));
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
 </script>
 
 <template>
-	<VDialog id="dialog-rune-select" ref="vDialog">
+	<VDialog id="dialog-rune-select" ref="vDialog" :data-invalid="configurationInvalid ? '' : undefined">
 		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20">
 			<h1>Runes</h1>
+			<p aria-live="polite">
+				{{ configurationInvalid ? 'configuration invalid' : '' }}
+			</p>
 			<form method="dialog">
 				<button autofocus value="cancel">
+					save
+				</button>
+				<button value="cancel">
 					<span>
 						close
 					</span>
@@ -415,19 +423,54 @@ defineExpose({
 		> header {
 			grid-area: header;
 
+			> p {
+				--at-apply: 'sr-only';
+			}
+
 			> form {
-				--at-apply: 'ms-auto';
+				--at-apply: 'ms-auto flex gap-2';
 
-				> button:last-child {
-					--at-apply: 'grid place-items-center size-7 rounded-1/2 b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800';
+				> button {
+					--at-apply: 'grid place-items-center h-7 b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800';
 
-					> span:first-child {
-						--at-apply: 'sr-only';
+					&:first-child {
+						--at-apply: 'px-2 relative';
+
+						&::before,
+						&::after {
+							--at-apply: 'absolute block z-1 -end-0.5 -top-0.5 -translate-y-0.5 translate-x-0.5';
+						}
+
+						&::before {
+							--at-apply: 'outline-2 outline-red-600 outline-offset-1 rounded-1/2 bg-red-600 size-3.5';
+						}
+
+						&::after {
+							--at-apply: 'bg-white size-3.5';
+							mask: icon('i-ph:exclamation-mark-bold') center / 100% 100% no-repeat;
+						}
 					}
 
-					> .icon {
-						--at-apply: 'size-4';
+					&:last-child {
+						--at-apply: 'w-7 rounded-1/2';
+
+						> span:first-child {
+							--at-apply: 'sr-only';
+						}
+
+						> .icon {
+							--at-apply: 'size-4';
+						}
 					}
+				}
+			}
+		}
+
+		&[data-invalid] {
+			> header > form > button:first-child {
+				&::before,
+				&::after {
+					--at-apply: 'content-empty';
 				}
 			}
 		}
