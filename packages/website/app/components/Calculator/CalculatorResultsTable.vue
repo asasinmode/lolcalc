@@ -18,8 +18,9 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
-const sourceProperty = ref<'source' | 'target'>('source');
-const targetProperty = computed(() => sourceProperty.value === 'source' ? 'target' : 'source');
+const flipResults = ref(false);
+const sourceProperty = computed(() => flipResults.value ? 'target' : 'source');
+const targetProperty = computed(() => flipResults.value ? 'source' : 'target');
 
 const highlightedColumnId = ref<string>();
 
@@ -817,6 +818,7 @@ function addColumnItems(columnIndex: number) {
 		id="results-table"
 		:inert="!showResults"
 		:aria-busy="resultColumns.some(column => column.source?.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id)"
+		:data-flip-results="flipResults || undefined"
 	>
 		<caption>
 			comparison table
@@ -913,16 +915,9 @@ function addColumnItems(columnIndex: number) {
 							skip column controls
 						</a>
 						<label for="results-table-values-for">
-							show values for
+							<input id="results-table-values-for" v-model="flipResults" type="checkbox" @update:model-value="recalculateAllColumns">
+							flip results (target vs source)
 						</label>
-						<select id="results-table-values-for" v-model="sourceProperty" @update:model-value="recalculateAllColumns">
-							<option value="source">
-								source (left) vs target (right)
-							</option>
-							<option value="target">
-								target (right) vs source (left)
-							</option>
-						</select>
 						<button
 							class="pretend-ui-button"
 							:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
@@ -1327,7 +1322,7 @@ function addColumnItems(columnIndex: number) {
 			}
 
 			> tr:nth-child(1) > td,
-			> tr:nth-child(2) > *:not(:first-child) {
+			> tr:nth-child(2) > td:not(:first-child) {
 				--at-apply: 'pb-[--header-row-pb] bg-[--bg-clr] align-top';
 
 				&[data-drop-direction]::after {
@@ -1357,7 +1352,7 @@ function addColumnItems(columnIndex: number) {
 						}
 
 						&:nth-of-type(1) {
-							--at-apply: 'ms-auto';
+							--at-apply: 'justify-self-end';
 							grid-area: source;
 						}
 
@@ -1597,8 +1592,8 @@ function addColumnItems(columnIndex: number) {
 		> tbody[aria-labelledby] > tr > td:not(:last-child).highlighted {
 			background-image: linear-gradient(
 				to right,
-				oklch(from var(--col-damage-source-clr, white) l c h / 0.1),
-				oklch(from var(--col-damage-target-clr, white) l c h / 0.1)
+				oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.1),
+				oklch(from var(--target-clr, var(--col-damage-target-clr, white)) l c h / 0.1)
 			);
 		}
 
@@ -1666,6 +1661,29 @@ function addColumnItems(columnIndex: number) {
 
 @layer overrides {
 	#results-table {
+		&[data-flip-results] {
+			> thead {
+				> tr:nth-child(1) > td > form,
+				> tr:nth-child(2) > td:not(:first-child) > div {
+					.v-select {
+						--at-apply: 'justify-self-start';
+						grid-area: target;
+
+						&:nth-of-type(2) {
+							--at-apply: 'justify-self-end';
+							grid-area: source;
+						}
+					}
+				}
+			}
+
+			> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
+			> tbody[aria-labelledby] > tr > td:not(:last-child).highlighted {
+				--source-clr: var(--col-damage-target-clr, white);
+				--target-clr: var(--col-damage-source-clr, white);
+			}
+		}
+
 		> tbody,
 		> tfoot {
 			&[data-drop-direction] {
