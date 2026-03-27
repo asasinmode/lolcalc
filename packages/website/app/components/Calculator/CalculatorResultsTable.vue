@@ -30,9 +30,7 @@ const columnNewSource = computed(() => columnNewSourceId.value ? props.damageSou
 const columnNewTarget = computed(() => columnNewTargetId.value ? props.damageTargets.find(source => source.id === columnNewTargetId.value) : undefined);
 
 function columnOptions(from: DamageSource[]): [string, string][] {
-	return from
-		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
-		.map((source, i) => [source.id, `(${i + 1}) ${source.listedChampion.value?.name!}`]);
+	return from.map((source, i) => [source.id, `(${i + 1}) ${source.listedChampion.value?.name || '<empty>'}`]);
 }
 const sourceOptions = computed(() => columnOptions(props.damageSources));
 const targetOptions = computed(() => columnOptions(props.damageTargets));
@@ -41,12 +39,14 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 	const oldDamageSourceId = column[damageSources === props.damageSources ? 'source' : 'target']?.id;
 	oldDamageSourceId && highlightedDamageSources.remove(oldDamageSourceId);
 
-	column[damageSources === props.damageSources ? 'source' : 'target'] = championId
+	const property = damageSources === props.damageSources ? 'source' : 'target';
+
+	column[property] = championId
 		? damageSources.find(damageSource => damageSource.id === championId)
 		: undefined;
 	recalculateColumn(column);
 
-	highlightedDamageSources.add(column[damageSources === props.damageSources ? 'source' : 'target']!.id);
+	column[property] && highlightedDamageSources.add(column[property].id);
 }
 
 interface IDamageSectionOption {
@@ -860,7 +860,7 @@ function addColumnItems(columnIndex: number) {
 							v-model="columnNewSourceId"
 							label="column's damage source"
 							:options="sourceOptions"
-							required
+							clearable
 						>
 							<img
 								v-if="columnNewSource"
@@ -950,7 +950,7 @@ function addColumnItems(columnIndex: number) {
 							:model-value="resultColumns[index]!.source?.id"
 							label="column's damage source"
 							:options="sourceOptions"
-							required
+							clearable
 							@update:model-value="setColumnChampion(column, damageSources, $event)"
 						>
 							<img
