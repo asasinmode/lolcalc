@@ -1034,8 +1034,8 @@ defineExpose({ el });
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
 					:champion-id="value.champion.value?.id"
-					:ability-key="hoveredAbilityKey!"
-					:ability-variant="hoveredAbilityVariantIndex!"
+					:ability-key="hoveredAbilityKey"
+					:ability-variant="hoveredAbilityVariantIndex"
 					:precomputed-description="hoveredAbilityKey && value.computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>

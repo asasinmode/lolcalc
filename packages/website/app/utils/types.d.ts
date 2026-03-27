@@ -51,7 +51,7 @@ export interface IDamageResultTableSection {
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
 	image: string;
-	getCellValue: (section: IDamageResultTableSection, rowId: string, source: DamageSource, target?: DamageTarget) => {
+	getCellValue: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
 		value: string | number;
 		numberValue?: number;
 		isUnknown?: boolean;
@@ -86,9 +86,12 @@ export interface IDamageResultTableColumn {
 }
 
 export interface IChampionAbilityHoverTooltipProps {
-	championId: IChampionId | null;
-	abilityKey: IChampionAbilityKey | null;
-	abilityVariant: number | null;
+	/** required for tooltip component to work really TODO try to make it make sense */
+	championId?: IChampionId;
+	/** required for tooltip component to work really TODO try to make it make sense */
+	abilityKey?: IChampionAbilityKey;
+	/** required for tooltip component to work really TODO try to make it make sense */
+	abilityVariant?: number;
 	abilityLevel?: number;
 	replaceVariablesWithNames?: boolean;
 	precomputedDescription?: IComputedAbilityDescription;

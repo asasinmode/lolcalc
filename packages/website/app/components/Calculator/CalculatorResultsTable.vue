@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { WatchHandle } from 'vue';
-import type { IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 const props = defineProps<{
 	damageSources: DamageSource[];
@@ -17,6 +17,9 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
+
+const sourceProperty = ref<'source' | 'target'>('source');
+const targetProperty = computed(() => sourceProperty.value === 'source' ? 'target' : 'source');
 
 const highlightedColumnId = ref<string>();
 
@@ -167,6 +170,8 @@ function computeSectionRow(section: IDamageResultTableSection, row: IDamageResul
 }
 
 function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number], column: IDamageResultTableColumn): IComputedSectionRowColumn {
+	const source = column[sourceProperty.value];
+	const target = column[targetProperty.value];
 	const rv: IComputedSectionRowColumn = {
 		columnId: column.id,
 		isIrrelevant: true,
@@ -175,17 +180,17 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		isUnknown: false,
 	};
 
-	if (!column.source || (!column.source.listedChampion.value && section.additionalId !== 'item')) {
+	if (!source || (!source.listedChampion.value && section.additionalId !== 'item')) {
 		rv.value = '-';
-	} else if (column.source.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id) {
+	} else if (source.listedChampion.value && source.listedChampion.value.id !== source.champion.value?.id) {
 		rv.value = 'loading...';
 	} else if (
-		(section.additionalId !== 'all' && section.additionalId !== 'item' && column.source.champion.value?.id !== section.additionalId)
-		|| (column.source.champion.value?.id === 'Zeri' && section.id === 'basicAttack')
+		(section.additionalId !== 'all' && section.additionalId !== 'item' && source.champion.value?.id !== section.additionalId)
+		|| (source.champion.value?.id === 'Zeri' && section.id === 'basicAttack')
 	) {
 		rv.value = 'n/a';
 	} else {
-		const cellValue = section.getCellValue(section, row.id, column.source, column.target);
+		const cellValue = section.getCellValue(section, row.id, source, target);
 		if (cellValue) {
 			({ value: rv.value, numberValue: rv.numberValue, isUnknown: rv.isUnknown } = cellValue);
 			rv.isIrrelevant = false;
@@ -241,7 +246,7 @@ function toggleResultsSection(sectionId: string) {
 }
 
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	const computedItem = source.computed.items.value.find(item => item?.itemId === section.id);
+	const computedItem = source?.computed.items.value.find(item => item?.itemId === section.id);
 	if (computedItem) {
 		let numberValue = computedItem.descriptionContents.variables.get(rowId);
 		let value: string | number = numberValue as unknown as string;
@@ -265,7 +270,11 @@ const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (sectio
 };
 
 const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	const { abilityKey, abilityVariant } = section.hoverTooltipData as Extract<IDamageResultTableSection['hoverTooltipData'], { championId: any }>;
+	if (!source) {
+		return;
+	}
+
+	const { abilityKey, abilityVariant } = section.hoverTooltipData as IChampionAbilityHoverTooltipProps;
 
 	const computedDescription = source.computed.abilities.value[abilityKey!][abilityVariant!];
 	if (computedDescription) {
@@ -424,6 +433,20 @@ function columnDamageSourcesColorStyles(column: Pick<IDamageResultTableColumn, '
 }
 
 const columnDamageSourceColors = computed(() => resultColumns.value.map(column => columnDamageSourcesColorStyles(column)));
+
+function recalculateAllColumns() {
+	for (const column of resultColumns.value) {
+		for (const section of resultSections.value) {
+			for (const row of section.rows) {
+				computedResults.value.get(section.id)!.rows.get(row.id)!.columns.set(
+					column.id,
+					computeSectionRowColumn(section, row, column),
+				);
+			}
+		}
+	}
+	recalculateResultCellComparisonNumbers();
+}
 
 function recalculateColumn(column: IDamageResultTableColumn) {
 	for (const section of resultSections.value) {
@@ -797,9 +820,6 @@ function addColumnItems(columnIndex: number) {
 	>
 		<caption>
 			comparison table
-			<span>
-				Columns, except the first and last, contain the corresponding damage source's (left) value applied (if applicable) vs the specified damage target (right, can be empty)
-			</span>
 		</caption>
 		<thead>
 			<tr>
@@ -892,6 +912,17 @@ function addColumnItems(columnIndex: number) {
 						<a href="#results-table-section-header-basicAttack" class="skip-link">
 							skip column controls
 						</a>
+						<label for="results-table-values-for">
+							show values for
+						</label>
+						<select id="results-table-values-for" v-model="sourceProperty" @update:model-value="recalculateAllColumns">
+							<option value="source">
+								source (left) vs target (right)
+							</option>
+							<option value="target">
+								target (right) vs source (left)
+							</option>
+						</select>
 						<button
 							class="pretend-ui-button"
 							:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
@@ -1256,10 +1287,6 @@ function addColumnItems(columnIndex: number) {
 
 		> caption {
 			--at-apply: 'text-start text-lg';
-
-			> span {
-				--at-apply: 'block text-neutral-300 text-base';
-			}
 		}
 
 		th {
@@ -1285,8 +1312,16 @@ function addColumnItems(columnIndex: number) {
 				> div {
 					--at-apply: 'flex flex-col h-[calc(var(--header-row-h)-var(--header-row-pb))] items-start';
 
+					> label {
+						--at-apply: '';
+					}
+
+					> select {
+						--at-apply: '';
+					}
+
 					> button {
-						--at-apply: 'px-1 leading-5 h-[--control-button-size] text-base mb-auto';
+						--at-apply: 'px-1 leading-5 h-[--control-button-size] text-base mb-auto mt-2';
 					}
 				}
 			}

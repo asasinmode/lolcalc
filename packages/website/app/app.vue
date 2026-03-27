@@ -51,7 +51,7 @@ const showResults = computed(() => (damageSources as unknown as Ref<DamageSource
 const tableResultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'stats',
-		name: 'stats of',
+		name: 'stats',
 		additionalId: 'all',
 		permanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
@@ -66,21 +66,17 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 				},
 			};
 		}),
-		getCellValue(section, rowId, source, target) {
-			const damageSource = (section.selectValue === 'source' ? source : target);
-			if (!damageSource) {
+		getCellValue(_section, rowId, source, _target) {
+			if (!source) {
 				return;
 			}
 
-			const stat = damageSource.computed.stats.value[rowId as IChampionStatName];
+			const stat = source.computed.stats.value[rowId as IChampionStatName];
 			return {
 				numberValue: stat.total,
 				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
 			};
 		},
-		selectOptions: [['source', 'source'], ['target', 'target']],
-		selectValue: 'source',
-		selectLabel: 'show stats for column\'s',
 	},
 	{
 		id: 'basicAttack',
