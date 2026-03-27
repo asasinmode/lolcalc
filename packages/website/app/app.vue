@@ -206,7 +206,7 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 	}
 
 	#__nuxt {
-		footer {
+		> footer {
 			--at-apply: 'pt-8 text-neutral-300';
 		}
 	}
