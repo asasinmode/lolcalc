@@ -101,7 +101,7 @@ defineExpose({ header });
 		}
 
 		span:nth-of-type(2) {
-			--at-apply: 'text-amber text-start flex items-center justify-start text-lg gap-[0.5ch]';
+			--at-apply: 'text-amber-200 text-start flex items-center justify-start text-lg gap-[0.5ch]';
 
 			img {
 				--at-apply: 'h-4 w-auto';

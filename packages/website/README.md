@@ -111,9 +111,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] inventory panel or list in the footer
   - [x] buying mechanism, components into item and so on
   - [x] item groups, only one from group
-  - [?] show inventory total value
+  - [x] show inventory total value
   - [?] try not to intercept all right clicks
-  - [?] footer
 - [x] close dialogs on click outside
 - [?] target dummy damage source
 - [?] sharing, saving/reading data in query

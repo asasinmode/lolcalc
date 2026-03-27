@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { IShopItem } from '~/utils/types';
 
-const target = defineModel<DamageSource>();
+const damageSource = defineModel<DamageSource>();
 
 type IAllItemCategory = IItemCategory | 'all';
 
@@ -9,6 +9,8 @@ const { version, minorVersion } = usePatchVersion();
 const items = useItems();
 const maps = useMaps();
 const ui = useUi();
+
+const inventoryValue = computed(() => damageSource.value?.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0) ?? 0);
 
 const vDialog = useTemplateRef('vDialog');
 const mapMask = ref<number>(maps.sr.mask);
@@ -43,9 +45,9 @@ const sortedByPriceForMap = computed(() => Object
 	.filter(item => (item.mapMask & mapMask.value) !== 0));
 
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
-	const discount = target.value ? calculateItemDiscount(item.id, target.value.items.value, items) : 0;
-	const buyability = itemBuyability(item, target.value, items);
-	const isBought = target.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id);
+	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value, items) : 0;
+	const buyability = itemBuyability(item, damageSource.value, items);
+	const isBought = damageSource.value?.items.value.some(inventoryItem => inventoryItem?.id === item.id);
 
 	const statuses: string[] = [];
 	if (isBought && item.epicness === ITEM_EPICNESS_LEGENDARY) {
@@ -121,8 +123,8 @@ function clearStatFilters() {
 }
 
 const targetShopItems = computed<(IShopItem | undefined)[]>(() => Array.from(
-	{ length: target.value?.items.value.length ?? 0 },
-	(_, i) => target.value!.items.value[i] && shopItemsMap.value.get(target.value!.items.value[i].id)!,
+	{ length: damageSource.value?.items.value.length ?? 0 },
+	(_, i) => damageSource.value!.items.value[i] && shopItemsMap.value.get(damageSource.value!.items.value[i].id)!,
 ),
 );
 
@@ -139,16 +141,16 @@ function selectItem(item: IShopItem, overwriteDisplayed: boolean) {
 }
 
 function buyItem(item: IItem, buyability: IShopItem['buyability']) {
-	if (target.value && buyability === 1) {
-		target.value.addItem(item, items);
+	if (damageSource.value && buyability === 1) {
+		damageSource.value.addItem(item, items);
 	}
 }
 
 function sellItem(event: MouseEvent, index: number) {
-	target.value?.removeItem(index);
+	damageSource.value?.removeItem(index);
 	leaveTooltipableElement();
-	if (target.value?.items.value[index]) {
-		enterTooltipableElement(event, shopItemsMap.value.get(target.value.items.value[index].id)!);
+	if (damageSource.value?.items.value[index]) {
+		enterTooltipableElement(event, shopItemsMap.value.get(damageSource.value.items.value[index].id)!);
 	}
 }
 
@@ -476,7 +478,7 @@ defineExpose({
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem?.item"
 							:gold="searchCursoredOverItem?.calculatedPrice"
-							:damage-source="target"
+							:damage-source="damageSource"
 							header-class="hoverable:bg-white/10"
 							header-tag="button"
 							@header-click="onSearchHeaderClick"
@@ -638,7 +640,7 @@ defineExpose({
 			<ItemDescription
 				:item="selectedItem?.item"
 				:gold="selectedItem?.calculatedPrice"
-				:damage-source="target"
+				:damage-source="damageSource"
 				header-class="order-5"
 				header-tag="h2"
 				description-class="order-6"
@@ -783,8 +785,7 @@ defineExpose({
 			</div>
 		</section>
 		<footer style="grid-area: footer">
-			<button>Sell</button>
-			<button>Undo</button>
+			<button>sell</button>
 			<section id="item-shop-panel-eq" :data-pinned="inventoryPanelPinned || undefined">
 				<h2>inventory</h2>
 				<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
@@ -828,9 +829,20 @@ defineExpose({
 					>
 				</div>
 			</section>
+			<p>
+				<img
+					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
+					width="32"
+					height="28"
+					alt="gold coins"
+					loading="lazy"
+				>
+				<span> {{ inventoryValue }}</span>
+				inventory value
+			</p>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
-			<ItemDescription :item="hoveredItem?.item" :damage-source="target" header-subtitles />
+			<ItemDescription :item="hoveredItem?.item" :damage-source="damageSource" header-subtitles />
 		</div>
 	</VDialog>
 </template>
@@ -862,422 +874,443 @@ defineExpose({
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns: auto 1fr 32rem;
-	}
 
-	#item-shop-swap-sort-order:hover,
-	#item-shop-swap-sort-order:focus-visible,
-	#item-shop-clear-stat-filters:hover,
-	#item-shop-clear-stat-filters:focus-visible {
-		img {
-			--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
-			--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
-		}
-	}
-
-	#item-shop-stat-filters {
-		label {
-			--at-apply: cursor-pointer hover: brightness-200;
-		}
-
-		input,
-		label > span {
-			--at-apply: sr-only;
-		}
-
-		input {
-			&:disabled + label,
-			&:checked + label {
-				--at-apply: hover: brightness-100;
-			}
-
-			&:focus-visible + label {
-				--at-apply: brightness-200;
-				outline: auto;
-			}
-
-			&:disabled + label {
-				--at-apply: cursor-default;
-
-				img {
-					--at-apply: brightness-50;
-				}
-			}
-
-			&:checked + label img {
-				--txt-uv-start-x: var(--txt-selected-uv-start-x) !important;
-				--txt-uv-start-y: var(--txt-selected-uv-start-y) !important;
-			}
-		}
-	}
-
-	#item-shop-search[data-empty='true'] ~ button {
-		display: none;
-	}
-
-	#item-shop-panel-boots,
-	#item-shop-panel-eq {
-		--at-apply: 'bg-[--bg-clr]';
-
-		--side-panel-gap: calc(2 * var(--spacing));
-		--side-panel-py: calc(4 * var(--spacing));
-		--side-panel-gap: calc(var(--spacing) * 3);
-		--side-panel-row-h: calc(var(--item-img-size) + 1.5rem);
-		--side-panel-p: calc(var(--spacing) * 4);
-		--side-panel-inner-p: calc(var(--spacing) * 1.25);
-		--side-panel-w: calc(var(--item-img-size) + 2 * var(--side-panel-inner-p));
-
-		--side-panel-eq-gap: calc(1 * var(--spacing));
-		--side-panel-eq-button-size: calc(
-			(var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-gap)) / 3
-		);
-		--side-panel-eq-h: calc(var(--side-panel-eq-button-size) * 2 + var(--side-panel-eq-gap));
-
-		:where(&[data-pinned]) {
-			> .pin-button img {
+		#item-shop-swap-sort-order:hover,
+		#item-shop-swap-sort-order:focus-visible,
+		#item-shop-clear-stat-filters:hover,
+		#item-shop-clear-stat-filters:focus-visible {
+			img {
 				--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
 				--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
 			}
 		}
-	}
 
-	#item-shop-panel-boots {
-		--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-[calc(var(--side-panel-eq-h)+2*var(--side-panel-p)+14*var(--spacing))] absolute z-10 -translate-x-full';
-		--side-panel-h: calc(var(--side-panel-row-h) * 3 + 2 * var(--side-panel-gap) + 2 * var(--side-panel-inner-p));
+		#item-shop-stat-filters {
+			label {
+				--at-apply: cursor-pointer hover: brightness-200;
+			}
 
-		> div {
-			--at-apply: 'relative w-(--side-panel-w) h-(--side-panel-h) box-content of-hidden';
+			input,
+			label > span {
+				--at-apply: sr-only;
+			}
 
-			> ul {
-				--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
+			input {
+				&:disabled + label,
+				&:checked + label {
+					--at-apply: hover: brightness-100;
+				}
 
-				direction: rtl;
+				&:focus-visible + label {
+					--at-apply: brightness-200;
+					outline: auto;
+				}
+
+				&:disabled + label {
+					--at-apply: cursor-default;
+
+					img {
+						--at-apply: brightness-50;
+					}
+				}
+
+				&:checked + label img {
+					--txt-uv-start-x: var(--txt-selected-uv-start-x) !important;
+					--txt-uv-start-y: var(--txt-selected-uv-start-y) !important;
+				}
 			}
 		}
-	}
 
-	#item-shop-panel-eq {
-		--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-8 absolute z-10 -translate-x-full';
+		#item-shop-search[data-empty='true'] ~ button {
+			display: none;
+		}
 
-		> div {
-			--at-apply: 'relative pe-[calc(var(--side-panel-w)-var(--side-panel-inner-p)-var(--item-button-img-b-w))] h-(--side-panel-eq-h) box-content of-hidden';
+		#item-shop-panel-boots,
+		#item-shop-panel-eq {
+			--at-apply: 'bg-[--bg-clr]';
 
-			> ul {
-				--at-apply: 'absolute ps-[calc(var(--side-panel-inner-p)+var(--item-button-img-b-w))] end-[--side-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--side-panel-eq-gap] z-0';
+			--side-panel-gap: calc(2 * var(--spacing));
+			--side-panel-py: calc(4 * var(--spacing));
+			--side-panel-gap: calc(var(--spacing) * 3);
+			--side-panel-row-h: calc(var(--item-img-size) + 1.5rem);
+			--side-panel-p: calc(var(--spacing) * 4);
+			--side-panel-inner-p: calc(var(--spacing) * 1.25);
+			--side-panel-w: calc(var(--item-img-size) + 2 * var(--side-panel-inner-p));
 
-				> li {
-					--at-apply: 'size-[--side-panel-eq-button-size]';
+			--side-panel-eq-gap: calc(1 * var(--spacing));
+			--side-panel-eq-button-size: calc(
+				(var(--side-panel-inner-p) + 2 * var(--item-img-size) + var(--side-panel-gap)) / 3
+			);
+			--side-panel-eq-h: calc(var(--side-panel-eq-button-size) * 2 + var(--side-panel-eq-gap));
 
-					> * {
-						--at-apply: 'bg-black m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)]';
+			:where(&[data-pinned]) {
+				> .pin-button img {
+					--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
+					--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
+				}
+			}
+		}
 
-						> span {
-							--at-apply: 'sr-only';
+		#item-shop-panel-boots {
+			--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-[calc(var(--side-panel-eq-h)+2*var(--side-panel-p)+14*var(--spacing))] absolute z-10 -translate-x-full';
+			--side-panel-h: calc(var(--side-panel-row-h) * 3 + 2 * var(--side-panel-gap) + 2 * var(--side-panel-inner-p));
+
+			> div {
+				--at-apply: 'relative w-(--side-panel-w) h-(--side-panel-h) box-content of-hidden';
+
+				> ul {
+					--at-apply: 'absolute start-0 top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(3,_max-content)] grid-flow-col gap-3 p-1.25';
+
+					direction: rtl;
+				}
+			}
+		}
+
+		#item-shop-panel-eq {
+			--at-apply: 'p-[--side-panel-p] ps-6 start-0 bottom-8 absolute z-10 -translate-x-full';
+
+			> div {
+				--at-apply: 'relative pe-[calc(var(--side-panel-w)-var(--side-panel-inner-p)-var(--item-button-img-b-w))] h-(--side-panel-eq-h) box-content of-hidden';
+
+				> ul {
+					--at-apply: 'absolute ps-[calc(var(--side-panel-inner-p)+var(--item-button-img-b-w))] end-[--side-panel-w] top-0 grid grid-cols-[repeat(3,_max-content)] grid-rows-[repeat(2,_max-content)] gap-[--side-panel-eq-gap] z-0';
+
+					> li {
+						--at-apply: 'size-[--side-panel-eq-button-size]';
+
+						> * {
+							--at-apply: 'bg-black m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)]';
+
+							> span {
+								--at-apply: 'sr-only';
+							}
 						}
+					}
+				}
+
+				> img {
+					--at-apply: 'absolute size-[--side-panel-eq-button-size] top-1/2 -translate-y-1/2 end-[--side-panel-inner-p]';
+				}
+
+				> div {
+					--at-apply: 'hidden absolute end-[--side-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)] bg-black cursor-not-allowed';
+
+					> span {
+						--at-apply: 'sr-only';
+					}
+
+					&::before {
+						--at-apply: 'block size-full brightness-80 content-empty';
+						background-image: url('https://raw.communitydragon.org/latest/game/assets/ux/minimap/pings/need_ward_gray.png');
+						background-repeat: no-repeat;
+						background-size: 60%;
+						background-position: center;
 					}
 				}
 			}
 
-			> img {
-				--at-apply: 'absolute size-[--side-panel-eq-button-size] top-1/2 -translate-y-1/2 end-[--side-panel-inner-p]';
+			&[data-pinned],
+			&:hover,
+			&:has(li > button:focus-visible) {
+				> div {
+					> img {
+						--at-apply: 'hidden';
+					}
+
+					> div {
+						--at-apply: 'block';
+					}
+				}
+			}
+		}
+
+		#item-shop-panel-boots,
+		#item-shop-panel-eq {
+			> h2 {
+				--at-apply: 'sr-only';
 			}
 
-			> div {
-				--at-apply: 'hidden absolute end-[--side-panel-inner-p] top-1/2 -translate-y-1/2 m-[--item-button-img-b-w] size-[calc(var(--side-panel-eq-button-size)-6px)] bg-black cursor-not-allowed';
+			> .pin-button {
+				--at-apply: 'op-0 start-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5';
+
+				&:hover img,
+				&:focus-visible img {
+					--txt-uv-start-x: var(--txt-slcHover-uv-start-x) !important;
+					--txt-uv-start-y: var(--txt-slcHover-uv-start-y) !important;
+				}
 
 				> span {
 					--at-apply: 'sr-only';
 				}
+			}
 
-				&::before {
-					--at-apply: 'block size-full brightness-80 content-empty';
-					background-image: url('https://raw.communitydragon.org/latest/game/assets/ux/minimap/pings/need_ward_gray.png');
-					background-repeat: no-repeat;
-					background-size: 60%;
-					background-position: center;
+			> .icon.caret {
+				--at-apply: 'size-5 bg-cyan-400 start-1 top-1/2 absolute -translate-y-1/2';
+			}
+
+			&[data-pinned],
+			&:hover,
+			&:focus-within {
+				> .pin-button {
+					--at-apply: 'op-100';
 				}
 			}
-		}
 
-		&[data-pinned],
-		&:hover,
-		&:has(li > button:focus-visible) {
-			> div {
-				> img {
+			&[data-pinned],
+			&:hover,
+			&:has(li > button:focus-visible) {
+				--at-apply: 'ps-4';
+
+				> .icon.caret {
 					--at-apply: 'hidden';
 				}
 
 				> div {
-					--at-apply: 'block';
+					--at-apply: 'w-auto of-visible';
+
+					ul {
+						--at-apply: 'static w-auto';
+					}
 				}
 			}
 		}
-	}
 
-	#item-shop-panel-boots,
-	#item-shop-panel-eq {
-		> h2 {
-			--at-apply: 'sr-only';
-		}
+		.item-shop-item-btn {
+			--at-apply: 'p-[--p] -m-1';
+			--p: calc(1 * var(--spacing));
+			direction: ltr;
 
-		> .pin-button {
-			--at-apply: 'op-0 start-0 top-0 absolute z-10 -translate-x-1/2 -translate-y-1/5';
-
-			&:hover img,
-			&:focus-visible img {
-				--txt-uv-start-x: var(--txt-slcHover-uv-start-x) !important;
-				--txt-uv-start-y: var(--txt-slcHover-uv-start-y) !important;
-			}
-
-			> span {
+			> span:first-child {
 				--at-apply: 'sr-only';
 			}
-		}
 
-		> .icon.caret {
-			--at-apply: 'size-5 bg-cyan-400 start-1 top-1/2 absolute -translate-y-1/2';
-		}
+			> span:last-of-type {
+				--at-apply: 'block leading-5 pt-0.5 text-center font-medium';
+			}
 
-		&[data-pinned],
-		&:hover,
-		&:focus-within {
-			> .pin-button {
-				--at-apply: 'op-100';
+			&:hover,
+			&:focus-visible {
+				--at-apply: 'bg-blue/10';
+			}
+
+			&.selected {
+				box-shadow: 0 0 0 1px theme('colors.blue');
+				background-image: linear-gradient(0deg, theme('colors.blue/0.1'), transparent);
 			}
 		}
 
-		&[data-pinned],
-		&:hover,
-		&:has(li > button:focus-visible) {
-			--at-apply: 'ps-4';
+		.item-shop-item-btn > img,
+		.item-shop-item-img {
+			--size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
+			--at-apply: 'size-[--size] min-w-[--size] m-[--item-button-img-b-w] text-xs text-center break-words';
+		}
 
-			> .icon.caret {
-				--at-apply: 'hidden';
-			}
+		#item-shop-panel-eq > div > ul > li > *,
+		#item-shop-panel-eq > div > div,
+		.item-shop-item-btn img,
+		.item-shop-item-img {
+			box-shadow:
+				0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
+				0 0 0 var(--item-button-img-b-w) black;
+		}
 
-			> div {
-				--at-apply: 'w-auto of-visible';
+		#item-shop-builds-into-list > li > button[popovertarget]:is(:hover, :focus-visible, :has(+ [popover]:popover-open)),
+		#builds-into-more-list > li > button:is(:hover, :focus-visible),
+		#item-shop-panel-eq > div > ul > li > button:is(:hover, :focus-visible, .selected),
+		.item-shop-item-btn:is(:hover, :focus-visible, .selected) img,
+		#item-shop-search-listbox > li:is(:hover, :focus-visible, .selected) img,
+		.item-shop-item-img:hover {
+			--inner-border: white;
+		}
 
-				ul {
-					--at-apply: 'static w-auto';
+		#item-shop-builds-into-list {
+			> li {
+				--at-apply: 'bg-black size-(--item-img-size)';
+
+				> button {
+					--at-apply: 'size-full';
+
+					&:disabled,
+					&[popovertarget] {
+						--at-apply: 'm-[--item-button-img-b-w] size-(--item-img-borderless-size)';
+						box-shadow:
+							0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
+							0 0 0 var(--item-button-img-b-w) black;
+					}
+
+					&[popovertarget]:is(:hover, :focus-visible),
+					&[popovertarget]:has(+ [popover]:popover-open) {
+						background-image: linear-gradient(0deg, theme('colors.white/0.2'), transparent);
+					}
+				}
+
+				&:last-child {
+					--at-apply: 'relative';
+					anchor-name: --last-builds-into-button;
 				}
 			}
 		}
-	}
 
-	.item-shop-item-btn {
-		--at-apply: 'p-[--p] -m-1';
-		--p: calc(1 * var(--spacing));
-		direction: ltr;
+		#builds-into-more-list {
+			--at-apply: 'h-max max-h-[60vh] max-w-screen w-66 of-y-auto z-10 py-1';
+			position-anchor: --last-builds-into-button;
+			inset-block-start: calc(anchor(bottom) + 2px);
+			inset-inline-end: anchor(right);
 
-		> span:first-child {
-			--at-apply: 'sr-only';
-		}
+			> li {
+				> button {
+					--at-apply: 'text-start flex w-full items-center py-[--py] px-[--px] gap-2 hoverable:bg-white/10';
+					--px: calc(var(--spacing) * 5);
+					--py: calc(var(--spacing) * 2);
 
-		> span:last-of-type {
-			--at-apply: 'block leading-5 pt-0.5 text-center font-medium';
-		}
+					&[data-bought] {
+						--at-apply: 'bg-black/20';
+					}
 
-		&:hover,
-		&:focus-visible {
-			--at-apply: 'bg-blue/10';
-		}
-
-		&.selected {
-			box-shadow: 0 0 0 1px theme('colors.blue');
-			background-image: linear-gradient(0deg, theme('colors.blue/0.1'), transparent);
-		}
-	}
-
-	.item-shop-item-btn > img,
-	.item-shop-item-img {
-		--size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
-		--at-apply: 'size-[--size] min-w-[--size] m-[--item-button-img-b-w] text-xs text-center break-words';
-	}
-
-	#item-shop-panel-eq > div > ul > li > *,
-	#item-shop-panel-eq > div > div,
-	.item-shop-item-btn img,
-	.item-shop-item-img {
-		box-shadow:
-			0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
-			0 0 0 var(--item-button-img-b-w) black;
-	}
-
-	#item-shop-builds-into-list > li > button[popovertarget]:is(:hover, :focus-visible, :has(+ [popover]:popover-open)),
-	#builds-into-more-list > li > button:is(:hover, :focus-visible),
-	#item-shop-panel-eq > div > ul > li > button:is(:hover, :focus-visible, .selected),
-	.item-shop-item-btn:is(:hover, :focus-visible, .selected) img,
-	#item-shop-search-listbox > li:is(:hover, :focus-visible, .selected) img,
-	.item-shop-item-img:hover {
-		--inner-border: white;
-	}
-
-	#item-shop-builds-into-list {
-		> li {
-			--at-apply: 'bg-black size-(--item-img-size)';
-
-			> button {
-				--at-apply: 'size-full';
-
-				&:disabled,
-				&[popovertarget] {
-					--at-apply: 'm-[--item-button-img-b-w] size-(--item-img-borderless-size)';
-					box-shadow:
-						0 0 0 2px var(--inner-border, theme('colors.neutral.600')),
-						0 0 0 var(--item-button-img-b-w) black;
-				}
-
-				&[popovertarget]:is(:hover, :focus-visible),
-				&[popovertarget]:has(+ [popover]:popover-open) {
-					background-image: linear-gradient(0deg, theme('colors.white/0.2'), transparent);
-				}
-			}
-
-			&:last-child {
-				--at-apply: 'relative';
-				anchor-name: --last-builds-into-button;
-			}
-		}
-	}
-
-	#builds-into-more-list {
-		--at-apply: 'h-max max-h-[60vh] max-w-screen w-66 of-y-auto z-10 py-1';
-		position-anchor: --last-builds-into-button;
-		inset-block-start: calc(anchor(bottom) + 2px);
-		inset-inline-end: anchor(right);
-
-		> li {
-			> button {
-				--at-apply: 'text-start flex w-full items-center py-[--py] px-[--px] gap-2 hoverable:bg-white/10';
-				--px: calc(var(--spacing) * 5);
-				--py: calc(var(--spacing) * 2);
-
-				&[data-bought] {
-					--at-apply: 'bg-black/20';
-				}
-
-				> span {
-					--at-apply: 'truncate font-medium';
+					> span {
+						--at-apply: 'truncate font-medium';
+					}
 				}
 			}
 		}
-	}
 
-	#item-shop-hover-tooltip {
-		--at-apply: 'w-(--width) fixed p-2';
-		--width: 36rem;
-		inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
-		inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
-	}
-
-	#item-shop-search-listbox > li,
-	#builds-into-more-list > li > button,
-	#item-shop-builds-into-list > li > button,
-	.item-shop-item-btn {
-		--at-apply: 'relative';
-
-		> .sr-status {
-			--at-apply: 'block text-transparent tracking-[-1em] absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
-		}
-	}
-
-	:is(
-			#item-shop-search-listbox > li,
-			#builds-into-more-list > li > button,
-			#item-shop-builds-into-list > li > button,
-			.item-shop-item-btn
-		):where([data-bought], [data-buyability='0'], [data-buyability='-1'])
-		> img,
-	#item-shop-build-path ul .item-shop-item-btn[data-bought] > img,
-	#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > img {
-		--at-apply: 'brightness-60';
-	}
-
-	:is(
-			#item-shop-search-listbox > li,
-			#builds-into-more-list > li > button,
-			#item-shop-builds-into-list > li > button,
-			.item-shop-item-btn
-		)[data-bought][data-legendary]
-		> .sr-status,
-	#item-shop-build-path ul .item-shop-item-btn[data-bought] > .sr-status,
-	#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > .sr-status {
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3C!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --%3E%3Cg%3E%3Cpath fill='oklch(78.9%25 0.154 211.53)' d='m237.66 85.26l-128.4 128.4a8 8 0 0 1-11.32 0l-71.6-72a8 8 0 0 1 0-11.31l24-24a8 8 0 0 1 11.32 0L104 147.43l98.34-97.09a8 8 0 0 1 11.32 0l24 23.6a8 8 0 0 1 0 11.32'/%3E%3Cpath fill='%23000' d='m243.28 68.24l-24-23.56a16 16 0 0 0-22.59 0L104 136.23l-36.69-35.6a16 16 0 0 0-22.58.05l-24 24a16 16 0 0 0 0 22.61l71.62 72a16 16 0 0 0 22.63 0L243.33 90.91a16 16 0 0 0-.05-22.67M103.62 208L32 136l24-24a.6.6 0 0 1 .08.08l42.35 41.09a8 8 0 0 0 11.19 0L208.06 56L232 79.6Z'/%3E%3C/g%3E%3C/svg%3E"); /* cyan-400 fill */
-		background-size: 100% 100%;
-		background-position: center;
-		background-repeat: no-repeat;
-	}
-
-	.item-shop-item-btn {
-		--check-icon-start: var(--p);
-		--check-icon-top: var(--p);
-	}
-
-	#builds-into-more-list > li > button {
-		--check-icon-start: var(--px);
-		--check-icon-top: var(--py);
-	}
-
-	:is(#builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where(
-		&[data-bought],
-		&[data-buyability='0'],
-		&[data-buyability='-1']
-	),
-	#item-shop-search-listbox
-		> li:where([data-bought], [data-buyability='0'], [data-buyability='-1'])
-		> span:last-of-type {
-		--at-apply: 'text-neutral-400';
-	}
-
-	:where(#builds-into-more-list > li > button[data-buyability='-1']),
-	:where(.item-shop-item-btn[data-buyability='-1'] > span:last-of-type) {
-		--at-apply: 'relative';
-
-		&::before {
-			--at-apply: 'content-empty absolute rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
-			box-shadow: 0 2px var(--item-button-img-b-w) 2px theme('colors.black/0.45');
+		#item-shop-hover-tooltip {
+			--at-apply: 'w-(--width) fixed p-2';
+			--width: 36rem;
+			inset-inline-start: clamp(0px, var(--left), calc(100vw - min(100vw, var(--width))));
+			inset-block-start: clamp(0px, var(--top), calc(100vh - min(100vh, var(--height))));
 		}
 
-		&::after {
-			--at-apply: 'content-empty absolute size-3.5 bg-amber-100 saturate-60 brightness-80';
-			mask: var(--lock-icon-url) center / 100% 100% no-repeat;
-		}
-	}
+		#item-shop-search-listbox > li,
+		#builds-into-more-list > li > button,
+		#item-shop-builds-into-list > li > button,
+		.item-shop-item-btn {
+			--at-apply: 'relative';
 
-	.item-shop-item-btn[data-buyability='-1'] {
-		> span:last-of-type {
-			--at-apply: 'text-transparent tracking-[-1em]';
+			> .sr-status {
+				--at-apply: 'block text-transparent tracking-[-1em] absolute size-[calc(0.6*var(--item-img-size))] z-2 translate-center start-[calc(var(--check-icon-start,0px)+0.5*var(--item-img-size))] top-[calc(var(--check-icon-top,0px)+0.5*var(--item-img-size))] pointer-events-none';
+			}
+		}
+
+		:is(
+				#item-shop-search-listbox > li,
+				#builds-into-more-list > li > button,
+				#item-shop-builds-into-list > li > button,
+				.item-shop-item-btn
+			):where([data-bought], [data-buyability='0'], [data-buyability='-1'])
+			> img,
+		#item-shop-build-path ul .item-shop-item-btn[data-bought] > img,
+		#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > img {
+			--at-apply: 'brightness-60';
+		}
+
+		:is(
+				#item-shop-search-listbox > li,
+				#builds-into-more-list > li > button,
+				#item-shop-builds-into-list > li > button,
+				.item-shop-item-btn
+			)[data-bought][data-legendary]
+			> .sr-status,
+		#item-shop-build-path ul .item-shop-item-btn[data-bought] > .sr-status,
+		#item-shop-build-path .item-shop-item-btn[data-bought] + ul .item-shop-item-btn > .sr-status {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' viewBox='0 0 256 256'%3E%3C!-- Icon from Phosphor by Phosphor Icons - https://github.com/phosphor-icons/core/blob/main/LICENSE --%3E%3Cg%3E%3Cpath fill='oklch(78.9%25 0.154 211.53)' d='m237.66 85.26l-128.4 128.4a8 8 0 0 1-11.32 0l-71.6-72a8 8 0 0 1 0-11.31l24-24a8 8 0 0 1 11.32 0L104 147.43l98.34-97.09a8 8 0 0 1 11.32 0l24 23.6a8 8 0 0 1 0 11.32'/%3E%3Cpath fill='%23000' d='m243.28 68.24l-24-23.56a16 16 0 0 0-22.59 0L104 136.23l-36.69-35.6a16 16 0 0 0-22.58.05l-24 24a16 16 0 0 0 0 22.61l71.62 72a16 16 0 0 0 22.63 0L243.33 90.91a16 16 0 0 0-.05-22.67M103.62 208L32 136l24-24a.6.6 0 0 1 .08.08l42.35 41.09a8 8 0 0 0 11.19 0L208.06 56L232 79.6Z'/%3E%3C/g%3E%3C/svg%3E"); /* cyan-400 fill */
+			background-size: 100% 100%;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		.item-shop-item-btn {
+			--check-icon-start: var(--p);
+			--check-icon-top: var(--p);
+		}
+
+		#builds-into-more-list > li > button {
+			--check-icon-start: var(--px);
+			--check-icon-top: var(--py);
+		}
+
+		:is(#builds-into-more-list > li > button, #item-shop-builds-into-list > li > button, .item-shop-item-btn):where(
+			&[data-bought],
+			&[data-buyability='0'],
+			&[data-buyability='-1']
+		),
+		#item-shop-search-listbox
+			> li:where([data-bought], [data-buyability='0'], [data-buyability='-1'])
+			> span:last-of-type {
+			--at-apply: 'text-neutral-400';
+		}
+
+		:where(#builds-into-more-list > li > button[data-buyability='-1']),
+		:where(.item-shop-item-btn[data-buyability='-1'] > span:last-of-type) {
+			--at-apply: 'relative';
 
 			&::before {
-				--at-apply: '-bottom-0.25 start-1/2 -translate-x-1/2';
+				--at-apply: 'content-empty absolute rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
+				box-shadow: 0 2px var(--item-button-img-b-w) 2px theme('colors.black/0.45');
 			}
 
 			&::after {
-				--at-apply: 'bottom-0.5 start-1/2 -translate-x-1/2';
+				--at-apply: 'content-empty absolute size-3.5 bg-amber-100 saturate-60 brightness-80';
+				mask: var(--lock-icon-url) center / 100% 100% no-repeat;
 			}
 		}
-	}
 
-	#builds-into-more-list > li > button[data-buyability='-1'] {
-		--lock-inline-start: calc(var(--px) + 0.5 * (var(--item-img-size) + var(--item-button-img-b-w)));
+		.item-shop-item-btn[data-buyability='-1'] {
+			> span:last-of-type {
+				--at-apply: 'text-transparent tracking-[-1em]';
 
-		&::before {
-			--at-apply: 'bottom-[--py] start-[--lock-inline-start] -translate-x-1/2 z-1 translate-y-1';
+				&::before {
+					--at-apply: '-bottom-0.25 start-1/2 -translate-x-1/2';
+				}
+
+				&::after {
+					--at-apply: 'bottom-0.5 start-1/2 -translate-x-1/2';
+				}
+			}
 		}
 
-		&::after {
-			--at-apply: 'bottom-[calc(var(--py)+0.75*var(--spacing))] start-[--lock-inline-start] -translate-x-1/2 z-1 translate-y-1';
-		}
-	}
+		#builds-into-more-list > li > button[data-buyability='-1'] {
+			--lock-inline-start: calc(var(--px) + 0.5 * (var(--item-img-size) + var(--item-button-img-b-w)));
 
-	#builds-into-more-list > li > button[data-buyability='-1']:where(:hover, :focus-visible),
-	.item-shop-item-btn[data-buyability='-1']:where(:hover, :focus-visible) > span:last-of-type {
-		&::before {
-			--at-apply: 'brightness-100';
+			&::before {
+				--at-apply: 'bottom-[--py] start-[--lock-inline-start] -translate-x-1/2 z-1 translate-y-1';
+			}
+
+			&::after {
+				--at-apply: 'bottom-[calc(var(--py)+0.75*var(--spacing))] start-[--lock-inline-start] -translate-x-1/2 z-1 translate-y-1';
+			}
 		}
 
-		&::after {
-			--at-apply: 'bg-white saturate-100 brightness-100';
+		#builds-into-more-list > li > button[data-buyability='-1']:where(:hover, :focus-visible),
+		.item-shop-item-btn[data-buyability='-1']:where(:hover, :focus-visible) > span:last-of-type {
+			&::before {
+				--at-apply: 'brightness-100';
+			}
+
+			&::after {
+				--at-apply: 'bg-white saturate-100 brightness-100';
+			}
+		}
+
+		> footer {
+			--at-apply: 'flex items-center gap-5 py-2 px-3 b-t b-neutral-500';
+
+			> button {
+				--at-apply: 'bg-[--placeholder-champion-bg-clr] b-2 b-[--ui-button-border-clr] py-0.5 px-2 hoverable:bg-neutral-800 uppercase text-center w-24';
+			}
+
+			> p {
+				--at-apply: 'text-neutral-400 font-medium flex items-center';
+
+				> img {
+					--at-apply: 'inline-block h-3.5 w-auto';
+					vertical-align: -0.0625em;
+				}
+
+				> span {
+					--at-apply: 'text-amber-200 font-medium text-lg mx-1.5';
+				}
+			}
 		}
 	}
 }
