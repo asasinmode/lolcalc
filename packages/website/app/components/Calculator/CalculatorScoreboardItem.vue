@@ -111,6 +111,9 @@ function toggleExpanded() {
 }
 
 onMounted(() => {
+	if (props.index === 1) {
+		toggleExpanded();
+	}
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
 });
 
@@ -1309,7 +1312,8 @@ defineExpose({ el });
 			}
 
 			> [data-select-champion-level] {
-				--at-apply: 'absolute -bottom-0.5 -end-0.5';
+				--at-apply: 'absolute -bottom-0.5 end-[--inset-end]';
+				--inset-end: calc(-0.5 * var(--spacing));
 
 				> select {
 					--at-apply: 'rounded-full';
@@ -1323,16 +1327,17 @@ defineExpose({ el });
 
 		> [data-select-runes] {
 			--at-apply: 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
-			--secondary-path-icon-size: calc(var(--spacing) * 3);
+			--secondary-path-icon-size: calc(3 * var(--spacing));
+			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
 			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-runes;
 
 			[data-secondary-path-icon] {
-				--at-apply: 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 -end-0.5 absolute';
+				--at-apply: 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 end-[--secondary-path-inset-end] absolute';
 			}
 
 			&:has([data-secondary-path-icon]):before {
-				--at-apply: 'content-empty z-10 absolute -end-0.5 -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
+				--at-apply: 'content-empty z-10 absolute end-[--secondary-path-inset-end] -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
 			}
 		}
 
@@ -1427,6 +1432,10 @@ defineExpose({ el });
 
 			&::details-content {
 				--at-apply: 'pt-4 -mt-6 grid grid-cols-[auto_1fr_auto] grid-rows-[auto_auto_1fr]';
+				grid-template-areas:
+					'stats abilities abilities'
+					'stats resources resources'
+					'stats role-quest dragons';
 			}
 
 			[data-loading] {
@@ -1456,8 +1465,12 @@ defineExpose({ el });
 			}
 
 			> [data-runes-stats] {
-				--at-apply: 'row-span-3 grid grid-cols-2 grid-rows-2';
+				--at-apply: 'grid grid-cols-2 grid-rows-2';
+				grid-template-areas:
+					'. minor-stats'
+					'runes major-stats';
 				anchor-name: --scoreboard-item-runes-stats;
+				grid-area: stats;
 
 				> dl {
 					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
@@ -1465,7 +1478,8 @@ defineExpose({ el });
 					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
 
 					&:nth-of-type(1) {
-						--at-apply: 'row-span-2 b-e-0 self-end relative';
+						--at-apply: 'b-e-0 self-end relative';
+						grid-area: runes;
 
 						&:has(> .coming-soon-cover)::before {
 							--at-apply: 'content-empty absolute end-0 start-1/2 top-0 bottom-1/2 bg-neutral-950/30';
@@ -1543,6 +1557,11 @@ defineExpose({ el });
 
 					&:nth-of-type(2) {
 						--at-apply: 'b-b-0';
+						grid-area: minor-stats;
+					}
+
+					&:nth-of-type(3) {
+						grid-area: major-stats;
 					}
 
 					> dt {
@@ -1616,7 +1635,8 @@ defineExpose({ el });
 			}
 
 			> [data-abilities] {
-				--at-apply: 'relative gap-x-[--abilities-gap] col-span-2 flex';
+				--at-apply: 'relative gap-x-[--abilities-gap] flex';
+				grid-area: abilities;
 				anchor-name: --scoreboard-item-abilities;
 				width: var(--abilities-width);
 				height: var(--abilities-height);
@@ -1712,7 +1732,8 @@ defineExpose({ el });
 			}
 
 			> [data-health-ability-resource] {
-				--at-apply: 'col-span-2 pt-1.375';
+				--at-apply: 'pt-1.375';
+				grid-area: resources;
 
 				[data-current-health],
 				[data-current-ability-resource] {
@@ -1755,6 +1776,7 @@ defineExpose({ el });
 
 			> [data-role-quest] {
 				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))]';
+				grid-area: role-quest;
 				anchor-name: --scoreboard-item-role-quest;
 
 				> .v-select {
@@ -1811,6 +1833,7 @@ defineExpose({ el });
 			> [data-dragons] {
 				--at-apply: 'flex-center mx-auto h-max relative items-center gap-[--gap]';
 				--gap: calc(2 * var(--spacing));
+				grid-area: dragons;
 				anchor-name: --scoreboard-item-dragons;
 
 				&::before {
@@ -1877,7 +1900,7 @@ defineExpose({ el });
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full';
+				--at-apply: 'col-span-full flex flex-wrap';
 
 				> article {
 					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] p-2 w-fit rounded-md';
@@ -1909,6 +1932,72 @@ defineExpose({ el });
 
 @layer overrides {
 	#scoreboard[data-mirrored] > div > ul:nth-of-type(1) > [data-scoreboard-item] {
+		grid-template-columns: max-content 1fr repeat(5, max-content);
+		grid-template-areas:
+			'clear			items				select-items		select-runes	select-champion move-column move-up'
+			'expand			items				select-items		select-runes	select-champion	duplicate		move-down'
+			'expanded		expanded		expanded				expanded			expanded				expanded		expanded';
+
+		> button {
+			&:nth-of-type(1),
+			&:nth-of-type(2) {
+				--at-apply: 'me-auto ms-0.5';
+			}
+
+			&:nth-of-type(3),
+			&:nth-of-type(4) {
+				--at-apply: 'ms-auto me-0.5';
+			}
+		}
+
+		> [data-select-champion] {
+			> [data-select-champion-level] {
+				--at-apply: 'end-auto start-[--inset-end]';
+			}
+		}
+
+		> [data-select-runes] {
+			[data-secondary-path-icon] {
+				--at-apply: 'end-auto start-[--secondary-path-inset-end]';
+			}
+
+			&:has([data-secondary-path-icon]):before {
+				--at-apply: 'end-auto start-[--secondary-path-inset-end] -translate-x-0.5';
+			}
+		}
+
+		> ul {
+			--at-apply: 'ms-3 justify-self-end';
+		}
+
+		> details {
+			> [data-extras] {
+				--at-apply: 'flex-row-reverse';
+			}
+		}
+	}
+
+	#scoreboard[data-mirrored] > div > ul:nth-of-type(2) > [data-scoreboard-item] {
+		> details {
+			&::details-content {
+				grid-template-areas:
+					'abilities abilities stats'
+					'resources resources stats'
+					'dragons role-quest stats';
+			}
+
+			> [data-runes-stats] {
+				grid-template-areas:
+					'minor-stats .'
+					'major-stats runes';
+
+				> dl {
+					&:nth-of-type(1) {
+						--at-apply: 'b-e b-s-0';
+					}
+				}
+			}
+		}
 	}
 }
 </style>
