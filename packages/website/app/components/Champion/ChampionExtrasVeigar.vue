@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { IScoreboardItemShowAbilityTooltipArgs } from '~/utils/types';
+
 const props = defineProps<{
 	value: DamageSource<'Veigar'>;
 	idPrefix: string;
 }>();
 
 defineEmits<{
-	abilityHover: [event: MouseEvent, ability: IChampionAbilityKey, variant?: number];
+	abilityHover: IScoreboardItemShowAbilityTooltipArgs;
 }>();
 
 const { minorVersion } = usePatchVersion();
@@ -21,7 +23,7 @@ const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomen
 			width="64"
 			height="64"
 			aria-hidden="true"
-			@mouseenter="$emit('abilityHover', $event, 'passive')"
+			@mouseenter="$emit('abilityHover', $event, 'passive', 0)"
 		>
 		<label :for="`${idPrefix}-passive-stacks`">
 			Phenomenal Evil stacks

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IComputedDamageSourceChampionStat } from '~/utils/DamageSource';
-import type { IWithCalculateDynamicValues } from '~/utils/types';
+import type { IScoreboardItemShowAbilityTooltipArgs, IWithCalculateDynamicValues } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 
 const props = defineProps<{
@@ -590,15 +590,28 @@ const hoveredAbilityKey = ref<IChampionAbilityKey>();
 const hoveredAbilityVariantIndex = ref<number>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 
-function showAbilityTooltip(event: MouseEvent, ability: IChampionAbilityKey, variant = 0) {
+function showAbilityTooltip(
+	event: IScoreboardItemShowAbilityTooltipArgs[0],
+	ability: IScoreboardItemShowAbilityTooltipArgs[1],
+	variant: IScoreboardItemShowAbilityTooltipArgs[2] = 0,
+	fromExtras = false,
+) {
 	hoveredAbilityKey.value = ability;
 	hoveredAbilityVariantIndex.value = variant;
 	event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
+
+	if (fromExtras) {
+		detailsContainer.value!.setAttribute('data-ability-tooltip-extras', '');
+	} else {
+		detailsContainer.value!.removeAttribute('data-ability-tooltip-extras');
+	}
+
 	abilityHoverTooltipEl.value?.el?.showPopover();
 }
 
 function hideAbilityTooltip() {
 	abilityHoverTooltipEl.value?.el?.hidePopover();
+	detailsContainer.value!.removeAttribute('data-ability-tooltip-extras');
 }
 
 const roleQuestHoverTooltipEl = useTemplateRef('roleQuestHoverTooltip');
@@ -1178,7 +1191,7 @@ defineExpose({ el });
 					:is="CHAMPION_COMPONENTS[value.champion.value.id as IChampionId]!.extras"
 					:value
 					:id-prefix="`${group}-${index}`"
-					@ability-hover="showAbilityTooltip"
+					@ability-hover="(...args: IScoreboardItemShowAbilityTooltipArgs) => showAbilityTooltip(...args, true)"
 				/>
 			</section>
 		</details>
@@ -1731,6 +1744,12 @@ defineExpose({ el });
 				}
 			}
 
+			&[data-ability-tooltip-extras] > [data-abilities] > .hover-tooltip.champion-ability {
+				position-anchor: --scoreboard-item-extras;
+				inset-block-start: auto;
+				inset-block-end: calc(anchor(top) + 1px);
+			}
+
 			> [data-health-ability-resource] {
 				--at-apply: 'pt-1.375';
 				grid-area: resources;
@@ -1901,6 +1920,7 @@ defineExpose({ el });
 
 			> [data-extras] {
 				--at-apply: 'col-span-full flex flex-wrap';
+				anchor-name: --scoreboard-item-extras;
 
 				> article {
 					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] p-2 w-fit rounded-md';

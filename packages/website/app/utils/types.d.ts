@@ -96,3 +96,5 @@ export interface IChampionAbilityHoverTooltipProps {
 	replaceVariablesWithNames?: boolean;
 	precomputedDescription?: IComputedAbilityDescription;
 }
+
+export type IScoreboardItemShowAbilityTooltipArgs = [event: MouseEvent, ability: IChampionAbilityKey, variant: number];
