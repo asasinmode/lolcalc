@@ -145,6 +145,22 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 	: [],
 	// TMP
 ) as unknown as IDamageResultTableColumn[];
+
+const hasCopiedShareLink = ref(false);
+const shareTextPopover = useTemplateRef('shareTextPopover');
+
+function copyShareLink() {
+	hasCopiedShareLink.value = true;
+}
+
+function showSharePopover() {
+	shareTextPopover.value?.showPopover();
+}
+
+function hideSharePopover() {
+	hasCopiedShareLink.value = false;
+	shareTextPopover.value?.hidePopover();
+}
 </script>
 
 <template>
@@ -181,6 +197,21 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 				:show-results
 			/>
 		</section>
+		<button
+			id="share-configuration"
+			class="pretend-ui-button"
+			@click="copyShareLink"
+			@mouseenter="showSharePopover"
+			@focus="showSharePopover"
+			@mouseleave="hideSharePopover"
+			@blur="hideSharePopover"
+		>
+			<Icon class="i-ph:share-fat" />
+			share
+			<p ref="shareTextPopover" popover="hint">
+				{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
+			</p>
+		</button>
 	</main>
 	<footer>
 		<b>lolcalc</b> was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
@@ -208,6 +239,26 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 	}
 
 	#__nuxt {
+		> main {
+			--at-apply: 'relative';
+
+			> #share-configuration {
+				--at-apply: 'px-2 py-0.5 absolute top-0 end-0';
+				anchor-name: --share-configuration;
+
+				> span {
+					--at-apply: 'size-4.5 text-white align-middle';
+				}
+
+				> [popover] {
+					--at-apply: 'bg-black py-0.5 px-1 rounded-md text-center w-28';
+					position-anchor: --share-configuration;
+					inset-block-end: calc(anchor(start) + 0.25rem);
+					justify-self: anchor-center;
+				}
+			}
+		}
+
 		> footer {
 			--at-apply: 'pt-8 text-neutral-300';
 		}
