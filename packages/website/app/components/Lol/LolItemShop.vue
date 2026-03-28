@@ -652,7 +652,7 @@ defineExpose({
 				</ul>
 			</template>
 		</section>
-		<section style="grid-area: builds-into" class="flex flex-col">
+		<section>
 			<ItemDescription
 				:item="selectedItem?.item"
 				:gold="selectedItem?.calculatedPrice"
@@ -663,10 +663,9 @@ defineExpose({
 			/>
 			<button
 				:disabled="selectedItem?.buyability !== 1"
-				class="text-lg py-0.5 b-2 b-[gold] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 disabled:bg-neutral-950"
 				@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
 			>
-				{{ selectedItem?.buyability === 1 ? "Purchase item" : 'Item unavailable' }}
+				{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
 			</button>
 			<h3 class="order-1">
 				Builds into
@@ -800,7 +799,7 @@ defineExpose({
 				</ul>
 			</div>
 		</section>
-		<footer style="grid-area: footer">
+		<footer>
 			<button
 				:disabled="selectedItemInventoryIndex === undefined"
 				@click="sellItem($event, selectedItemInventoryIndex!)"
@@ -1319,8 +1318,20 @@ defineExpose({
 			}
 		}
 
+		> section {
+			&:nth-of-type(3) {
+				--at-apply: 'flex flex-col';
+				grid-area: builds-into;
+
+				> button {
+					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-button-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-semibold text-cyan-300';
+				}
+			}
+		}
+
 		> footer {
 			--at-apply: 'flex items-center py-2 px-3 b-t b-neutral-500';
+			grid-area: footer;
 
 			> button {
 				--at-apply: 'b-2 b-[--ui-button-border-clr] text-amber-100 font-medium py-0.5 px-2 uppercase text-center w-24';
@@ -1331,10 +1342,6 @@ defineExpose({
 
 				&:nth-of-type(2) {
 					--at-apply: 'bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800 ms-2.5 me-5';
-				}
-
-				&:disabled {
-					--at-apply: 'b-neutral-500 text-neutral-400 bg-neutral-800 hoverable:bg-neutral-800';
 				}
 			}
 
@@ -1349,6 +1356,13 @@ defineExpose({
 				> span {
 					--at-apply: 'text-amber-200 font-medium text-lg mx-1.5';
 				}
+			}
+		}
+
+		> section:nth-of-type(3) > button,
+		> footer > button {
+			&:disabled {
+					--at-apply: 'b-neutral-500 text-neutral-400 bg-neutral-800 hoverable:bg-neutral-800';
 			}
 		}
 	}
