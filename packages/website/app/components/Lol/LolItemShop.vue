@@ -147,6 +147,7 @@ function buyItem(item: IItem, buyability: IShopItem['buyability']) {
 }
 
 function sellItem(event: MouseEvent, index: number) {
+	event.preventDefault();
 	damageSource.value?.removeItem(index);
 	leaveTooltipableElement();
 	if (damageSource.value?.items.value[index]) {
@@ -155,6 +156,7 @@ function sellItem(event: MouseEvent, index: number) {
 }
 
 function rightClickItem(event: MouseEvent, item: IItem, buyability: IShopItem['buyability']) {
+	event.preventDefault();
 	!event.shiftKey && buyItem(item, buyability);
 }
 
@@ -198,9 +200,10 @@ function clearSearch() {
 	searchSelectedIndex.value = undefined;
 }
 
-function selectSearchResult(event: MouseEvent, index: number) {
+function selectSearchResult(event: MouseEvent, index: number, isRightClick: boolean) {
+	event.preventDefault();
 	const shopItem = searchResults.value[index]!;
-	if (event.button === 2) {
+	if (isRightClick) {
 		selectedItemId.value = shopItem.item.id;
 		searchCursoredOverIndex.value = undefined;
 		selectItem(shopItem, true);
@@ -281,7 +284,8 @@ function onSearchKeydown(event: KeyboardEvent) {
 	event.preventDefault();
 }
 
-function onSearchHeaderClick(isRightClick: boolean) {
+function onSearchHeaderClick(event: MouseEvent, isRightClick: boolean) {
+	event.preventDefault();
 	if (isRightClick) {
 		buyItem(searchCursoredOverItem.value!.item, searchCursoredOverItem.value!.buyability);
 	} else {
@@ -346,8 +350,9 @@ function closeBuildsIntoMoreListIfOutside(event: FocusEvent) {
 }
 
 function selectBuildsIntoMoreItem(item: IShopItem) {
-	selectOrBuyIfDouble(item, true);
+	selectItem(item, true);
 	leaveTooltipableElement();
+	buildsIntoMoreList.value?.hidePopover();
 }
 
 const displayedItemBuildPath2ndLevelItemCount = computed(() => displayedItem.value?.item.from?.length || 0);
@@ -386,7 +391,6 @@ defineExpose({
 		ref="vDialog"
 		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg)`"
 		@close="closeSearch"
-		@contextmenu.prevent=""
 	>
 		<header style="grid-area: header;" class="grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center">
 			<h1 class="col-span-full">
@@ -458,7 +462,8 @@ defineExpose({
 								'selected': searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
 							}"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
-							@mousedown.stop.prevent="selectSearchResult($event, index)"
+							@click="selectSearchResult($event, index, false)"
+							@click.right="selectSearchResult($event, index, true)"
 						>
 							<img
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
@@ -616,8 +621,8 @@ defineExpose({
 							:data-bought="shopItem.isBought ? '' : undefined"
 							:data-legendary="shopItem.isLegendary ? '' : undefined"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
-							@mousedown.left="selectOrBuyIfDouble(shopItem, true)"
-							@mousedown.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
+							@click="selectOrBuyIfDouble(shopItem, true)"
+							@click.right="rightClickItem($event, shopItem.item, shopItem.buyability)"
 							@keydown.space="selectItem(shopItem, true)"
 							@keydown.enter="buyItem(shopItem.item, shopItem.buyability)"
 						>
@@ -746,7 +751,7 @@ defineExpose({
 					v-if="displayedItem"
 					:shop-item="displayedItem"
 					:data-legendary="displayedItem.isLegendary ? '' : undefined"
-					@click="selectItem(displayedItem, false)"
+					@click="selectOrBuyIfDouble(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem.item, displayedItem.buyability)"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
 				/>
@@ -762,7 +767,7 @@ defineExpose({
 						<ItemBuildPathButton
 							component
 							:shop-item="secondLevelBuildsFromItem"
-							@click="selectItem(secondLevelBuildsFromItem, false)"
+							@click="selectOrBuyIfDouble(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
 						/>
@@ -774,7 +779,7 @@ defineExpose({
 								<ItemBuildPathButton
 									component
 									:shop-item="thirdLevelBuildsFromItem"
-									@click="selectItem(thirdLevelBuildsFromItem, false)"
+									@click="selectOrBuyIfDouble(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
 								/>

@@ -13,7 +13,7 @@ const props = defineProps<{
 }>();
 
 defineEmits<{
-	headerClick: [isRightClick: boolean];
+	headerClick: [event: MouseEvent, isRightClick: boolean];
 }>();
 
 const text = useText();
@@ -40,8 +40,8 @@ defineExpose({ header });
 		class="item-description-header"
 		:class="headerClass"
 		:data-show-subtitles="headerSubtitles || undefined"
-		@click="$emit('headerClick', false)"
-		@click.right="$emit('headerClick', true)"
+		@click="$emit('headerClick', $event, false)"
+		@click.right="$emit('headerClick', $event, true)"
 	>
 		<img
 			v-if="item"

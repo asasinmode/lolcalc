@@ -112,7 +112,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] buying mechanism, components into item and so on
   - [x] item groups, only one from group
   - [x] show inventory total value
-  - [?] try not to intercept all right clicks
+  - [x] try not to intercept all right clicks
 - [x] close dialogs on click outside
 - [?] target dummy damage source
 - [?] sharing, saving/reading data in query
@@ -162,6 +162,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] check if can use cdragon cdn instead of raw
 - [ ] service worker for caching cdragon images
 - [ ] future features in github project page thingy?
+- [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
@@ -183,7 +184,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
 - [ ] per patch versions = see stats/features from older patches
-- [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
+- [ ] kr/cn translations
 
 #### very future
 

@@ -111,9 +111,6 @@ function toggleExpanded() {
 }
 
 onMounted(() => {
-	if (props.index === 1) {
-		toggleExpanded();
-	}
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
 });
 
