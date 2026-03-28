@@ -128,13 +128,21 @@ const targetShopItems = computed<(IShopItem | undefined)[]>(() => Array.from(
 ),
 );
 
+function undo() {
+	if (damageSource.value) {
+		damageSource.value.items.value = damageSource.value.itemsUndoSnapshots.value.pop()!;
+	}
+}
+
 const selectedItemId = ref<string>();
+const selectedItemInventoryIndex = ref<number>();
 const displayedItemId = ref<string>();
 const selectedItem = computed(() => selectedItemId.value ? shopItemsMap.value.get(selectedItemId.value) : undefined);
 const displayedItem = computed(() => displayedItemId.value ? shopItemsMap.value.get(displayedItemId.value) : undefined);
 
-function selectItem(item: IShopItem, overwriteDisplayed: boolean) {
+function selectItem(item: IShopItem, overwriteDisplayed: boolean, inventoryIndex?: number) {
 	selectedItemId.value = item.item.id;
+	selectedItemInventoryIndex.value = inventoryIndex;
 	if (overwriteDisplayed) {
 		displayedItemId.value = item.item.id;
 	}
@@ -148,6 +156,9 @@ function buyItem(item: IItem, buyability: IShopItem['buyability']) {
 
 function sellItem(event: MouseEvent, index: number) {
 	event.preventDefault();
+	if (selectedItemInventoryIndex.value === index) {
+		selectedItemInventoryIndex.value = undefined;
+	}
 	damageSource.value?.removeItem(index);
 	leaveTooltipableElement();
 	if (damageSource.value?.items.value[index]) {
@@ -790,7 +801,18 @@ defineExpose({
 			</div>
 		</section>
 		<footer style="grid-area: footer">
-			<button>sell</button>
+			<button
+				:disabled="selectedItemInventoryIndex === undefined"
+				@click="sellItem($event, selectedItemInventoryIndex!)"
+			>
+				sell
+			</button>
+			<button
+				:disabled="!damageSource?.itemsUndoSnapshots.value.length"
+				@click="undo"
+			>
+				undo
+			</button>
 			<section id="item-shop-panel-eq" :data-pinned="inventoryPanelPinned || undefined">
 				<h2>inventory</h2>
 				<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
@@ -808,7 +830,7 @@ defineExpose({
 								:is="targetShopItems[i - 1] ? 'button' : 'div'"
 								:class="targetShopItems[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
 								@mouseenter="targetShopItems[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
-								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true)"
+								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true, i - 1)"
 								@click.right="targetShopItems[i - 1] && sellItem($event, i - 1)"
 							>
 								<span>{{ targetShopItems[i - 1]?.item.name }}</span>
@@ -1298,10 +1320,22 @@ defineExpose({
 		}
 
 		> footer {
-			--at-apply: 'flex items-center gap-5 py-2 px-3 b-t b-neutral-500';
+			--at-apply: 'flex items-center py-2 px-3 b-t b-neutral-500';
 
 			> button {
-				--at-apply: 'bg-[--placeholder-champion-bg-clr] b-2 b-[--ui-button-border-clr] py-0.5 px-2 hoverable:bg-neutral-800 uppercase text-center w-24';
+				--at-apply: 'b-2 b-[--ui-button-border-clr] text-amber-100 font-medium py-0.5 px-2 uppercase text-center w-24';
+
+				&:nth-of-type(1) {
+					--at-apply: 'bg-yellow-950 hoverable:bg-yellow-900';
+				}
+
+				&:nth-of-type(2) {
+					--at-apply: 'bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800 ms-2.5 me-5';
+				}
+
+				&:disabled {
+					--at-apply: 'b-neutral-500 text-neutral-400 bg-neutral-800 hoverable:bg-neutral-800';
+				}
 			}
 
 			> p {

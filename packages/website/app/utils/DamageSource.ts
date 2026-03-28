@@ -41,6 +41,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
 	items: Ref<(IItem | undefined)[]>;
+	itemsUndoSnapshots: Ref<(IItem | undefined)[][]>;
 
 	abilityLevels: Ref<Record<Exclude<IChampionAbilityKey, 'passive'>, number>>;
 	abilityVariants: Ref<Record<IChampionAbilityKey, number>>;
@@ -100,6 +101,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		this.champion = shallowRef();
 		this.level = ref(overrides.level ?? 1);
 		this.items = ref(Array.from({ length: 7 }, (_, i) => overrides.items?.[i]));
+		this.itemsUndoSnapshots = ref([]);
 		this.runes = ref<IChampionRunes>(overrides.runes ?? {
 			paths: {
 				primary: 'Precision',
@@ -182,6 +184,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		for (let i = 0; i < this.items.value.length; i++) {
 			this.items.value[i] = undefined;
 		}
+		this.itemsUndoSnapshots.value = [];
 		this.runes.value.paths.primary = 'Precision';
 		this.runes.value.paths.primarySlots = [];
 		this.runes.value.paths.secondary = undefined;
@@ -228,6 +231,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 	// TODO role quest handle boots?
 	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {
+		this.itemsUndoSnapshots.value.push([...this.items.value]);
 		if (consumeComponents) {
 			const consumedInventoryIndexes = consumeItemComponents(item.id, this.items.value, allItems);
 			for (const index of consumedInventoryIndexes) {
@@ -248,6 +252,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 	removeItem(index: number): IItem | undefined {
 		const item = this.items.value[index];
 		if (item) {
+			this.itemsUndoSnapshots.value.push([...this.items.value]);
 			this.items.value[index] = undefined;
 			cleanupItems(this.items.value);
 			return item;
