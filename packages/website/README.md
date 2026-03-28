@@ -59,6 +59,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] senna
       - [ ] thresh
       - [ ] jax
+      - [ ] target dummy stats
     - [ ] extras ui items
       - [ ] guinsoo
       - [ ] terminus
@@ -114,7 +115,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] show inventory total value
   - [x] try not to intercept all right clicks
 - [x] close dialogs on click outside
-- [?] target dummy damage source
+- [x] target dummy damage source
 - [?] sharing, saving/reading data in query
 - [ ] mobile version and make look better
 - [ ] calculations
@@ -182,6 +183,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] components for stuff like manaflow band or precision legends for setting values
   - [ ] results section, hover tooltip, extract variables
 - [ ] overriding stats like target dummy
+- [ ] apply effects like black cleaver, abyssal mask
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
 - [ ] per patch versions = see stats/features from older patches

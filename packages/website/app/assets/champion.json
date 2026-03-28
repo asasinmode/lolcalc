@@ -1,6 +1,19 @@
 {
 	"version": "16.4.1",
 	"data": {
+		"TargetDummy": {
+			"id": "TargetDummy",
+			"key": "-1",
+			"name": "Target Dummy",
+			"image": "assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png",
+			"roles": {
+				"top": true,
+				"jungle": true,
+				"mid": true,
+				"bot": true,
+				"support": true
+			}
+		},
 		"Aatrox": {
 			"id": "Aatrox",
 			"key": "266",
@@ -1572,19 +1585,6 @@
 			"name": "Zyra",
 			"image": "Zyra.png",
 			"roles": {
-				"support": true
-			}
-		},
-		"TargetDummy": {
-			"id": "TargetDummy",
-			"key": "-1",
-			"name": "Target Dummy",
-			"image": "assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png",
-			"roles": {
-				"top": true,
-				"jungle": true,
-				"mid": true,
-				"bot": true,
 				"support": true
 			}
 		}

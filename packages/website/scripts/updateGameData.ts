@@ -83,85 +83,6 @@ if (!championData || championData?.version !== latestVersion) {
 	await loadStringTable();
 	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/champion.json`, 'ddragon/champion.json');
 
-	championData = {
-		version,
-		data: Object.fromEntries(
-			await Promise.all((Object.entries(data) as [string, (IChampion & { image: string })][])
-				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
-				.map(async ([championId, championData]) => {
-					const { id, key, name, image, partype, stats } = championData;
-
-					const additionalData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`);
-
-					const characterRootKey = `Characters/${id === 'Fiddlesticks' ? 'FiddleSticks' : id}/CharacterRecords/Root`;
-					const rootData = additionalData[characterRootKey];
-					if (!rootData) {
-						console.log(Object.keys(additionalData));
-						throw new Error(`no root character data for ${name}`);
-					}
-
-					const { attackSpeedRatio } = rootData;
-
-					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
-
-					const dedicatedChampionFilePath = `${import.meta.dirname}/../public/data/champion/${id}.json`;
-					const championFileDataStringtable: IChampion['stringtable'] = {};
-
-					const dedicatedChampionFileData: IChampion = {
-						version: latestVersion,
-						id,
-						key,
-						name,
-						partype,
-						stats,
-						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
-							const { maxLevel, variants } = championAbilityData(
-								[abilityName, index],
-								championId,
-								additionalData,
-								characterRootKey,
-							);
-
-							return [abilityName, {
-								maxLevel,
-								variants,
-							} satisfies IChampionAbility];
-						})) as IChampion['abilities'],
-						stringtable: championFileDataStringtable,
-					};
-
-					if (championId === 'Aphelios') {
-						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
-					}
-
-					setChampionAbilityVariantsText(dedicatedChampionFileData);
-
-					await fs.writeFile(dedicatedChampionFilePath, stringifyObject(dedicatedChampionFileData));
-
-					return [championId, {
-						id,
-						key,
-						name,
-						image: (image as unknown as { full: string }).full,
-						roles: {},
-					}];
-				}),
-			),
-		) as NonNullable<typeof championData>['data'],
-	};
-
-	const roleScript = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`, 'plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js', 'text');
-	const roleScriptData: Record<'TOP' | 'JUNGLE' | 'MIDDLE' | 'BOTTOM' | 'SUPPORT', Record<string, number>> = JSON.parse(roleScript.match(/JSON\.parse\('([^']+)'/)?.[1] || '{}');
-
-	const allChampions = Object.values(championData!.data);
-
-	for (const [role, playrates] of Object.entries(roleScriptData)) {
-		for (const championKey of Object.keys(playrates)) {
-			const champion = allChampions.find(champion => champion.key === championKey);
-			(champion!.roles as Record<string, boolean>)[role === 'MIDDLE' ? 'mid' : role === 'BOTTOM' ? 'bot' : role.toLowerCase()] = true;
-		}
-	}
-
 	const TargetDummy: IChampion = {
 		version,
 		id: 'TargetDummy',
@@ -260,13 +181,92 @@ if (!championData || championData?.version !== latestVersion) {
 		stringtable: {},
 	};
 
-	(championData.data as any)[TargetDummy.id] = {
-		id: TargetDummy.id,
-		key: TargetDummy.key,
-		name: TargetDummy.name,
-		image: 'assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png',
-		roles: { top: true, jungle: true, mid: true, bot: true, support: true },
-	} satisfies IListedChampion;
+	championData = {
+		version,
+		data: Object.assign({
+			[TargetDummy.id]: {
+				id: TargetDummy.id,
+				key: TargetDummy.key,
+				name: TargetDummy.name,
+				image: 'assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png',
+				roles: { top: true, jungle: true, mid: true, bot: true, support: true },
+			} satisfies IListedChampion,
+		}, Object.fromEntries(
+			await Promise.all((Object.entries(data) as [string, (IChampion & { image: string })][])
+				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
+				.map(async ([championId, championData]) => {
+					const { id, key, name, image, partype, stats } = championData;
+
+					const additionalData = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`);
+
+					const characterRootKey = `Characters/${id === 'Fiddlesticks' ? 'FiddleSticks' : id}/CharacterRecords/Root`;
+					const rootData = additionalData[characterRootKey];
+					if (!rootData) {
+						console.log(Object.keys(additionalData));
+						throw new Error(`no root character data for ${name}`);
+					}
+
+					const { attackSpeedRatio } = rootData;
+
+					stats.attackspeedratio = formatNumber(attackSpeedRatio, 3);
+
+					const dedicatedChampionFilePath = `${import.meta.dirname}/../public/data/champion/${id}.json`;
+					const championFileDataStringtable: IChampion['stringtable'] = {};
+
+					const dedicatedChampionFileData: IChampion = {
+						version: latestVersion,
+						id,
+						key,
+						name,
+						partype,
+						stats,
+						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
+							const { maxLevel, variants } = championAbilityData(
+								[abilityName, index],
+								championId,
+								additionalData,
+								characterRootKey,
+							);
+
+							return [abilityName, {
+								maxLevel,
+								variants,
+							} satisfies IChampionAbility];
+						})) as IChampion['abilities'],
+						stringtable: championFileDataStringtable,
+					};
+
+					if (championId === 'Aphelios') {
+						Object.assign(championFileDataStringtable, adjustApheliosAbilityData(additionalData, characterRootKey, dedicatedChampionFileData.abilities));
+					}
+
+					setChampionAbilityVariantsText(dedicatedChampionFileData);
+
+					await fs.writeFile(dedicatedChampionFilePath, stringifyObject(dedicatedChampionFileData));
+
+					return [championId, {
+						id,
+						key,
+						name,
+						image: (image as unknown as { full: string }).full,
+						roles: {},
+					}];
+				}),
+			),
+		)) as NonNullable<typeof championData>['data'],
+	};
+
+	const roleScript = await fetchCached(`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js`, 'plugins/rcp-fe-lol-champion-statistics/global/default/rcp-fe-lol-champion-statistics.js', 'text');
+	const roleScriptData: Record<'TOP' | 'JUNGLE' | 'MIDDLE' | 'BOTTOM' | 'SUPPORT', Record<string, number>> = JSON.parse(roleScript.match(/JSON\.parse\('([^']+)'/)?.[1] || '{}');
+
+	const allChampions = Object.values(championData!.data);
+
+	for (const [role, playrates] of Object.entries(roleScriptData)) {
+		for (const championKey of Object.keys(playrates)) {
+			const champion = allChampions.find(champion => champion.key === championKey);
+			(champion!.roles as Record<string, boolean>)[role === 'MIDDLE' ? 'mid' : role === 'BOTTOM' ? 'bot' : role.toLowerCase()] = true;
+		}
+	}
 
 	await fs.writeFile(`${import.meta.dirname}/../public/data/champion/${TargetDummy.id}.json`, stringifyObject(TargetDummy));
 
