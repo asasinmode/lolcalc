@@ -41,7 +41,7 @@ export interface IChampion<T extends IChampionId = any> {
 	stringtable: Record<string, string>;
 }
 
-export interface IListedChampion<T extends IChampionId = any> extends Pick<IChampion<T>, 'id' | 'name'> {
+export interface IListedChampion<T extends IChampionId = any> extends Pick<IChampion<T>, 'id' | 'key' | 'name'> {
 	image: string;
 	roles: Partial<Record<IChampionRole, boolean>>;
 }

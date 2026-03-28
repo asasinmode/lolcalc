@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const value = defineModel<IListedChampion>();
+
 const champions = useChampions();
-const { version, minorVersion } = usePatchVersion();
+const { minorVersion } = usePatchVersion();
+const { championImage } = useChampionImages();
 
 const ALL_ROLES: [ IChampionRole, string ][] = [
 	['top', 'top'],
@@ -102,8 +104,8 @@ defineExpose({
 			>
 				<img
 					:title="champion.name"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image}`"
-					:style="`background-image: url(https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${champion.image})`"
+					:src="championImage(champion.image, champion.id)"
+					:style="`background-image: url(${championImage(champion.image, champion.id)})`"
 					width="128"
 					height="128"
 					aria-hidden="true"

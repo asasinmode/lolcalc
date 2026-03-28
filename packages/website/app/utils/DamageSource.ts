@@ -690,7 +690,7 @@ export function computedAbilityDescription(
 		};
 	});
 
-	if (cooldown) {
+	if (champion.id !== 'TargetDummy' && cooldown) {
 		extendedVariables ||= [];
 		extendedVariables.push({
 			name: 'Cooldown',

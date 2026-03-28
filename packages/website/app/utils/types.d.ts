@@ -86,6 +86,8 @@ export interface IDamageResultTableColumn {
 }
 
 export interface IChampionAbilityHoverTooltipProps {
+	/** used for target dummy's abilities */
+	group: 'sources' | 'targets';
 	/** required for tooltip component to work really TODO try to make it make sense */
 	championId?: IChampionId;
 	/** required for tooltip component to work really TODO try to make it make sense */

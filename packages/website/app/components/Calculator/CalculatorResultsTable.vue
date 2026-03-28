@@ -8,15 +8,16 @@ const props = defineProps<{
 	showResults: boolean;
 }>();
 
-const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
-const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
-
 const text = useText();
 const items = useItems();
+const { championImage, abilityImage } = useChampionImages();
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
+
+const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
+const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
 
 const flipResults = ref(false);
 const sourceProperty = computed(() => flipResults.value ? 'target' : 'source');
@@ -67,7 +68,7 @@ const implementedDamageSectionsMap = computed(() => resultSections.value.map(sec
 
 const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 	const options: IDamageSectionOption[] = props.damageSources
-		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id))
+		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id) && source.champion.value.id !== 'TargetDummy')
 		.map((source) => {
 			const championId = source.champion.value!.id;
 			let abilityEntries = Object.entries(source.champion.value!.abilities);
@@ -92,7 +93,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 							id: `${source.champion.value!.id}-${abilityKey}`,
 							championOrItemId: source.champion.value!.id,
 							abilityKey: abilityKey as IChampionAbilityKey,
-							image: `https://raw.communitydragon.org/${minorVersion}/game/${abilityVariant.image}`,
+							image: abilityImage(abilityVariant.image, championId, `${sourceProperty.value}s`),
 							name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
 						};
 					})
@@ -330,6 +331,7 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 		section.additionalId = champion.id;
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.hoverTooltipData = {
+			group: `${sourceProperty.value}s`,
 			championId: champion.id,
 			abilityKey: ability.abilityKey as IChampionAbilityKey,
 			abilityVariant: 0,
@@ -864,7 +866,7 @@ function addColumnItems(columnIndex: number) {
 						>
 							<img
 								v-if="columnNewSource"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewSource.listedChampion.value!.image}`"
+								:src="championImage(columnNewSource.listedChampion.value!.image, columnNewSource.listedChampion.value!.id)"
 								loading="lazy"
 								width="128"
 								height="128"
@@ -888,7 +890,7 @@ function addColumnItems(columnIndex: number) {
 						>
 							<img
 								v-if="columnNewTarget"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${columnNewTarget.listedChampion.value!.image}`"
+								:src="championImage(columnNewTarget.listedChampion.value!.image, columnNewTarget.listedChampion.value!.id)"
 								loading="lazy"
 								width="128"
 								height="128"
@@ -955,7 +957,7 @@ function addColumnItems(columnIndex: number) {
 						>
 							<img
 								v-if="column.source?.listedChampion.value"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.source.listedChampion.value.image}`"
+								:src="championImage(column.source.listedChampion.value!.image, column.source.listedChampion.value!.id)"
 								loading="lazy"
 								width="128"
 								height="128"
@@ -980,7 +982,7 @@ function addColumnItems(columnIndex: number) {
 						>
 							<img
 								v-if="column.target?.listedChampion.value"
-								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${column.target.listedChampion.value.image}`"
+								:src="championImage(column.target.listedChampion.value!.image, column.target.listedChampion.value!.id)"
 								loading="lazy"
 								width="128"
 								height="128"

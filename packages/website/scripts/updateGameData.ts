@@ -1,4 +1,4 @@
-import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant } from '../app/composables/useChampions';
+import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IListedChampion } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
@@ -161,6 +161,114 @@ if (!championData || championData?.version !== latestVersion) {
 			(champion!.roles as Record<string, boolean>)[role === 'MIDDLE' ? 'mid' : role === 'BOTTOM' ? 'bot' : role.toLowerCase()] = true;
 		}
 	}
+
+	const TargetDummy: IChampion = {
+		version,
+		id: 'TargetDummy',
+		key: '-1',
+		name: 'Target Dummy',
+		partype: 'Mana',
+		stats: {
+			hp: 1000,
+			hpperlevel: 0,
+			mp: 0,
+			mpperlevel: 0,
+			movespeed: 0,
+			armor: 0,
+			armorperlevel: 0,
+			spellblock: 0,
+			spellblockperlevel: 0,
+			attackrange: 0,
+			hpregen: 0,
+			hpregenperlevel: 0,
+			mpregen: 0,
+			mpregenperlevel: 0,
+			crit: 0,
+			critperlevel: 0,
+			attackdamage: 0,
+			attackdamageperlevel: 0,
+			attackspeedperlevel: 0,
+			attackspeed: 1,
+			attackspeedratio: 1,
+		},
+		abilities: {
+			q: {
+				maxLevel: 0,
+				variants: [
+					{
+						name: 'Target Dummy Q',
+						objectName: 'TargetDummyQ',
+						image: 'assets/characters/ha_%sminionmelee/hud/%smelee_square.png',
+						tooltip: 'Does nothing',
+						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
+						dataKey: 'TargetDummy/Q',
+					},
+				],
+			},
+			w: {
+				maxLevel: 0,
+				variants: [
+					{
+						name: 'Target Dummy W',
+						objectName: 'TargetDummyW',
+						image: 'assets/characters/ha_%sminionranged/hud/%srange_square.png',
+						tooltip: 'Does nothing',
+						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
+						dataKey: 'TargetDummy/W',
+					},
+				],
+			},
+			e: {
+				maxLevel: 0,
+				variants: [
+					{
+						name: 'Target Dummy E',
+						objectName: 'TargetDummyE',
+						image: 'assets/characters/ha_%sminionsiege/hud/%smechcannon_square.png',
+						tooltip: 'Does nothing',
+						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
+						dataKey: 'TargetDummy/E',
+					},
+				],
+			},
+			r: {
+				maxLevel: 0,
+				variants: [
+					{
+						name: 'Target Dummy R',
+						objectName: 'TargetDummyR',
+						image: 'assets/characters/ha_%sminionsuper/hud/%smechmelee_square.png',
+						tooltip: 'Does nothing',
+						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
+						dataKey: 'TargetDummy/R',
+					},
+				],
+			},
+			passive: {
+				maxLevel: 0,
+				variants: [
+					{
+						name: 'Target Dummy Passive',
+						objectName: 'TargetDummyPassive',
+						image: 'assets/characters/tft_trainingdummy/hud/icons2d/tftdebug_dummy_donothing.png',
+						tooltip: 'Does nothing',
+						dataKey: 'TargetDummy/Passive',
+					},
+				],
+			},
+		},
+		stringtable: {},
+	};
+
+	(championData.data as any)[TargetDummy.id] = {
+		id: TargetDummy.id,
+		key: TargetDummy.key,
+		name: TargetDummy.name,
+		image: 'assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png',
+		roles: { top: true, jungle: true, mid: true, bot: true, support: true },
+	} satisfies IListedChampion;
+
+	await fs.writeFile(`${import.meta.dirname}/../public/data/champion/${TargetDummy.id}.json`, stringifyObject(TargetDummy));
 
 	await fs.writeFile(championFilePath, stringifyObject(championData));
 	await fs.writeFile(textFilePath, stringifyObject(textData));

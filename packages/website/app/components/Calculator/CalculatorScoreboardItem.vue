@@ -28,6 +28,7 @@ const emit = defineEmits<{
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const highlightedDamageSources = useHighlightedDamageSources();
+const { championImage, abilityImage } = useChampionImages();
 const runes = useRunes();
 const ui = useUi();
 const misc = useMisc();
@@ -777,7 +778,7 @@ defineExpose({ el });
 				</span>
 				<img
 					v-if="value.listedChampion.value"
-					:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${value.listedChampion.value.image}`"
+					:src="championImage(value.listedChampion.value.image, value.listedChampion.value.id)"
 					loading="lazy"
 					width="128"
 					height="128"
@@ -1005,7 +1006,7 @@ defineExpose({ el });
 						<h5>passive</h5>
 						<img
 							v-show="!isLoading"
-							:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]?.image}` : undefined"
+							:src="value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]!.image, value.champion.value.id, group) : undefined"
 							width="64"
 							height="64"
 							aria-hidden="true"
@@ -1023,7 +1024,7 @@ defineExpose({ el });
 						<h5>{{ ability.toUpperCase() }}</h5>
 						<img
 							v-show="!isLoading"
-							:src="value.champion.value ? `https://raw.communitydragon.org/${minorVersion}/game/${value.champion.value.abilities[ability].variants[value.abilityVariants.value[ability]]?.image}` : undefined"
+							:src="value.champion.value ? abilityImage(value.champion.value.abilities[ability].variants[value.abilityVariants.value[ability]]!.image, value.champion.value.id, group) : undefined"
 							width="64"
 							height="64"
 							aria-hidden="true"
@@ -1046,6 +1047,7 @@ defineExpose({ el });
 				</template>
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
+					:group
 					:champion-id="value.champion.value?.id"
 					:ability-key="hoveredAbilityKey"
 					:ability-variant="hoveredAbilityVariantIndex"
@@ -1984,7 +1986,7 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'ms-3 justify-self-end';
+			--at-apply: 'ms-3 me-0 justify-self-end';
 		}
 
 		> details {

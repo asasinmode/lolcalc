@@ -1574,6 +1574,19 @@
 			"roles": {
 				"support": true
 			}
+		},
+		"TargetDummy": {
+			"id": "TargetDummy",
+			"key": "-1",
+			"name": "Target Dummy",
+			"image": "assets/maps/particles/tft/item_icons/consumables/tft_item_consumable_dummy.png",
+			"roles": {
+				"top": true,
+				"jungle": true,
+				"mid": true,
+				"bot": true,
+				"support": true
+			}
 		}
 	}
 }

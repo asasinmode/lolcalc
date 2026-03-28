@@ -4,6 +4,7 @@ import type { IChampionAbilityHoverTooltipProps } from '~/utils/types';
 const props = defineProps<IChampionAbilityHoverTooltipProps>();
 
 const { minorVersion } = usePatchVersion();
+const { abilityImage } = useChampionImages();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const champion = shallowRef<IChampion>();
@@ -57,7 +58,7 @@ defineExpose({ el });
 	<div ref="el" popover="hint" class="hover-tooltip champion-ability">
 		<img
 			v-show="!isLoading"
-			:src="!isLoading && variant ? `https://raw.communitydragon.org/${minorVersion}/game/${variant.image}` : undefined"
+			:src="!isLoading && variant ? abilityImage(variant.image, championId!, group) : undefined"
 			width="64"
 			height="64"
 			aria-hidden="true"

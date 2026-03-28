@@ -10,7 +10,7 @@ defineEmits<{
 	abilityHover: IScoreboardItemShowAbilityTooltipArgs;
 }>();
 
-const { minorVersion } = usePatchVersion();
+const { abilityImage } = useChampionImages();
 
 const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomenalEvilStacks']);
 </script>
@@ -19,7 +19,7 @@ const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomen
 <template>
 	<article class="number-extra" data-passive-stacks="">
 		<img
-			:src="`https://raw.communitydragon.org/${minorVersion}/game/${props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image}`"
+			:src="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image, 'Veigar')"
 			width="64"
 			height="64"
 			aria-hidden="true"

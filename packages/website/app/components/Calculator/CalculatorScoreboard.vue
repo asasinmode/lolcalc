@@ -2,6 +2,7 @@
 const runes = useRunes();
 const text = useText();
 const items = useItems();
+const { championImage } = useChampionImages();
 const { version, minorVersion } = usePatchVersion();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
@@ -416,7 +417,7 @@ function setLocalMirrorLayout() {
 				<span>
 					<img
 						v-if="dragging?.value.listedChampion.value"
-						:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${dragging.value.listedChampion.value.image}`"
+						:src="championImage(dragging.value.listedChampion.value!.image, dragging.value.listedChampion.value!.id)"
 						loading="lazy"
 						width="128"
 						height="128"
