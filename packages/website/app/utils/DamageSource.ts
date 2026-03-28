@@ -128,8 +128,6 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		this.watchHandles = [
 			watch(this.listedChampion, async (c) => {
 				this.champion.value = undefined;
-				this.abilityLevels.value = { q: 0, w: 0, e: 0, r: 0 };
-				this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 
 				const champion = c && await useChampion(c.id);
 				if (this.listedChampion.value?.id === champion?.id) {
@@ -137,10 +135,14 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 				}
 			}, { immediate: true }),
 
-			watch(this.champion, () => {
+			watch(this.champion, (c) => {
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 				this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
 				this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
+
+				const level = c?.id === 'TargetDummy' ? 1 : 0;
+				this.abilityLevels.value = { q: level, w: level, e: level, r: level };
+				this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 			}),
 
 			watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {

@@ -114,7 +114,7 @@ if (!championData || championData?.version !== latestVersion) {
 		},
 		abilities: {
 			q: {
-				maxLevel: 0,
+				maxLevel: 1,
 				variants: [
 					{
 						name: 'Target Dummy Q',
@@ -127,7 +127,7 @@ if (!championData || championData?.version !== latestVersion) {
 				],
 			},
 			w: {
-				maxLevel: 0,
+				maxLevel: 1,
 				variants: [
 					{
 						name: 'Target Dummy W',
@@ -140,7 +140,7 @@ if (!championData || championData?.version !== latestVersion) {
 				],
 			},
 			e: {
-				maxLevel: 0,
+				maxLevel: 1,
 				variants: [
 					{
 						name: 'Target Dummy E',
@@ -153,7 +153,7 @@ if (!championData || championData?.version !== latestVersion) {
 				],
 			},
 			r: {
-				maxLevel: 0,
+				maxLevel: 1,
 				variants: [
 					{
 						name: 'Target Dummy R',

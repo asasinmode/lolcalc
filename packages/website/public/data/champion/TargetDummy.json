@@ -29,7 +29,7 @@
 	},
 	"abilities": {
 		"q": {
-			"maxLevel": 0,
+			"maxLevel": 1,
 			"variants": [
 				{
 					"name": "Target Dummy Q",
@@ -42,7 +42,7 @@
 			]
 		},
 		"w": {
-			"maxLevel": 0,
+			"maxLevel": 1,
 			"variants": [
 				{
 					"name": "Target Dummy W",
@@ -55,7 +55,7 @@
 			]
 		},
 		"e": {
-			"maxLevel": 0,
+			"maxLevel": 1,
 			"variants": [
 				{
 					"name": "Target Dummy E",
@@ -68,7 +68,7 @@
 			]
 		},
 		"r": {
-			"maxLevel": 0,
+			"maxLevel": 1,
 			"variants": [
 				{
 					"name": "Target Dummy R",
