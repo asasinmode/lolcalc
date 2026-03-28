@@ -232,6 +232,49 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		];
 	}
 
+	getStringifiedData(): string {
+		const runes = useRunes();
+		const text = useText();
+
+		const primarySlots = Array.from({ length: 3 }, (_, i) => {
+			const slotOptions = runes.paths[this.runes.value.paths.primary].slots[i]!;
+			return `${i}${objectKeyIndex(this.runes.value.paths.primarySlots[i], slotOptions)}`;
+		});
+		const secondarySlots = this.runes.value.paths.secondary
+			? Array.from({ length: 2 }, (_, i) => {
+					if (!this.runes.value.paths.secondarySlots[i]) {
+						return '';
+					}
+
+					const slotIndex = RUNE_SLOT_NAME_TO_NUMBER[this.runes.value.paths.secondarySlots[i]];
+					const slotOptions = runes.paths[this.runes.value.paths.secondary!].slots[slotIndex]!;
+					return `${i}${objectKeyIndex(this.runes.value.paths.secondarySlots[i], slotOptions)}`;
+				})
+			: [];
+		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, runes.shards[key as IRuneShardSlotName]));
+
+		const data = [
+			this.champion.value?.key,
+			this.level.value,
+			this.items.value.map(item => item?.id).filter(Boolean).join('-'),
+			objectKeyIndex(this.runes.value.paths.primary, runes.paths),
+			primarySlots.join('-'),
+			objectKeyIndex(this.runes.value.paths.secondary, runes.paths),
+			secondarySlots.join('-'),
+			shards.join('-'),
+			this.currentHealth.value,
+			this.currentAbilityResource.value,
+			Object.values(this.abilityLevels.value).join('-'),
+			Object.values(this.abilityVariants.value).join('-'),
+			objectKeyIndex(this.roleQuest.value, text.roleQuests),
+			this.dragonStacks.value.filter(Boolean).map(stack => objectKeyIndex(stack, text.dragons)).join('-'),
+			objectKeyIndex(this.dragonSoul.value, text.dragons),
+			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
+		];
+
+		return data.join('_');
+	}
+
 	// TODO role quest handle boots?
 	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {
 		this.itemsUndoSnapshots.value.push([...this.items.value]);
@@ -525,7 +568,7 @@ export function computedItemDescription(
 
 		anyUnknownExtraVariables ||= !!headingUnknown.length;
 		unknownVariables.push(...headingUnknown);
-		mergeMaps(variables, headingVariables, `[computedItemDescription] item ${item.id}`);
+		mergeMaps(variables, headingVariables);
 
 		return [
 			replaceGameDescriptionIcons(replacedHeading),
@@ -539,7 +582,7 @@ export function computedItemDescription(
 
 				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
 				unknownVariables.push(...paragraphUnknown);
-				mergeMaps(variables, paragraphVariables, `[computedItemDescription] item ${item.id}`);
+				mergeMaps(variables, paragraphVariables);
 
 				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
 			},
@@ -558,11 +601,8 @@ export function computedItemDescription(
 	};
 }
 
-function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>, warnPrefix?: string) {
+function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {
 	for (const [variableKey, variableValue] of map2.entries()) {
-		if (warnPrefix && map1.has(variableKey)) {
-			console.warn(`${warnPrefix} variable "${variableKey}" resolves multiple times`);
-		}
 		map1.set(variableKey, variableValue);
 	}
 }
@@ -746,4 +786,8 @@ function abilityVariantText(
 		variablesAllValues,
 		variables,
 	};
+}
+
+function objectKeyIndex<T extends object>(key: keyof T | undefined, object: T): string | number {
+	return key ? Object.keys(object).indexOf(key as string) : '';
 }
