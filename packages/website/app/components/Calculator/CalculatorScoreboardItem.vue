@@ -763,7 +763,7 @@ defineExpose({ el });
 		<button
 			:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
 			class="pretend-ui-button"
-			:disabled="!value.anythingFilled.value"
+			:disabled="!canRemove && !value.anythingFilled.value"
 			@click="$emit('changeGroup', globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
@@ -773,7 +773,7 @@ defineExpose({ el });
 		<button
 			:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
 			class="pretend-ui-button"
-			:disabled="!value.anythingFilled.value"
+			:disabled="!canRemove && !value.anythingFilled.value"
 			@click="$emit('duplicate', globalKeyModifiers.shift)"
 			@mousedown.left="$emit('startDrag', $event, true)"
 		>

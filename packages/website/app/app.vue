@@ -182,10 +182,10 @@ onBeforeUnmount(() => {
 function appStateQueryString() {
 	const params = new URLSearchParams();
 	for (const damageSource of damageSources.value) {
-		params.append('damageSource', damageSource.getStringifiedData());
+		(damageSource.anythingFilled as any as Ref<boolean>).value && params.append('damageSource', damageSource.getStringifiedData());
 	}
 	for (const damageSource of damageTargets.value) {
-		params.append('damageTarget', damageSource.getStringifiedData());
+		(damageSource.anythingFilled as any as Ref<boolean>).value && params.append('damageTarget', damageSource.getStringifiedData());
 	}
 	return params.toString();
 }
