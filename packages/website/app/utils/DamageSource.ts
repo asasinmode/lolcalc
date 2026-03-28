@@ -228,6 +228,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			this.roleQuest,
 			() => this.dragonStacks.value.join('-'),
 			this.dragonSoul,
+			() => Object.values(this.internalData.value || {}).join('-'),
 		];
 	}
 
