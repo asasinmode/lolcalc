@@ -28,7 +28,7 @@ const emit = defineEmits<{
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const highlightedDamageSources = useHighlightedDamageSources();
-const { championImage, abilityImage } = useChampionImages();
+const { championImage, abilityImage, abilityImageSize, championImageSize } = useChampionImages();
 const runes = useRunes();
 const ui = useUi();
 const misc = useMisc();
@@ -42,6 +42,18 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
 const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
+
+const imageSizes = computed(() => {
+	let champion = 128;
+	let ability = 64;
+
+	if (props.value.champion.value?.id) {
+		champion = championImageSize(props.value.champion.value.id);
+		ability = abilityImageSize(props.value.champion.value.id);
+	}
+
+	return { champion, ability };
+});
 
 const runeIconImgSrc = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
 
@@ -780,8 +792,8 @@ defineExpose({ el });
 					v-if="value.listedChampion.value"
 					:src="championImage(value.listedChampion.value.image, value.listedChampion.value.id)"
 					loading="lazy"
-					width="128"
-					height="128"
+					:width="imageSizes.champion"
+					:height="imageSizes.champion"
 					style="--focus-brightness: 1.2"
 				>
 				<img
@@ -1007,8 +1019,8 @@ defineExpose({ el });
 						<img
 							v-show="!isLoading"
 							:src="value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]!.image, value.champion.value.id, group) : undefined"
-							width="64"
-							height="64"
+							:width="imageSizes.ability"
+							:height="imageSizes.ability"
 							aria-hidden="true"
 							@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
 						>
@@ -1025,8 +1037,8 @@ defineExpose({ el });
 						<img
 							v-show="!isLoading"
 							:src="value.champion.value ? abilityImage(value.champion.value.abilities[ability].variants[value.abilityVariants.value[ability]]!.image, value.champion.value.id, group) : undefined"
-							width="64"
-							height="64"
+							:width="imageSizes.ability"
+							:height="imageSizes.ability"
 							aria-hidden="true"
 							@mouseenter="value.champion.value && showAbilityTooltip($event, ability)"
 						>

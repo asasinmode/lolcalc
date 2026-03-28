@@ -51,6 +51,7 @@ export interface IDamageResultTableSection {
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
 	image: string;
+	imageSize: number;
 	getCellValue: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
 		value: string | number;
 		numberValue?: number;

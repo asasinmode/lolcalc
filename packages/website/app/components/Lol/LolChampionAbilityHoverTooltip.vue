@@ -4,7 +4,7 @@ import type { IChampionAbilityHoverTooltipProps } from '~/utils/types';
 const props = defineProps<IChampionAbilityHoverTooltipProps>();
 
 const { minorVersion } = usePatchVersion();
-const { abilityImage } = useChampionImages();
+const { abilityImage, abilityImageSize } = useChampionImages();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const champion = shallowRef<IChampion>();
@@ -49,6 +49,8 @@ const computedDescription = computed<IComputedAbilityDescription | undefined>(()
 		: undefined),
 );
 
+const abilitySize = computed(() => props.championId ? abilityImageSize(props.championId) : 64);
+
 const el = useTemplateRef('el');
 
 defineExpose({ el });
@@ -59,8 +61,8 @@ defineExpose({ el });
 		<img
 			v-show="!isLoading"
 			:src="!isLoading && variant ? abilityImage(variant.image, championId!, group) : undefined"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 		>
 		<h5

@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const text = useText();
 const items = useItems();
-const { championImage, abilityImage } = useChampionImages();
+const { championImage, abilityImage, championImageSize, abilityImageSize } = useChampionImages();
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
@@ -321,6 +321,7 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 		additionalId: 'all',
 		name: ability.name,
 		image: ability.image,
+		imageSize: 64,
 		rows: [],
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
@@ -329,6 +330,7 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 		const precomputedDescription = computedAbilityDescription(minorVersion, champion, ability.abilityKey as IChampionAbilityKey, 0, undefined, undefined, { replaceWithName: true });
 
 		section.additionalId = champion.id;
+		section.imageSize = abilityImageSize(champion.id);
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.hoverTooltipData = {
 			group: `${sourceProperty.value}s`,
@@ -868,8 +870,8 @@ function addColumnItems(columnIndex: number) {
 								v-if="columnNewSource"
 								:src="championImage(columnNewSource.listedChampion.value!.image, columnNewSource.listedChampion.value!.id)"
 								loading="lazy"
-								width="128"
-								height="128"
+								:width="championImageSize(columnNewSource.listedChampion.value!.id)"
+								:height="championImageSize(columnNewSource.listedChampion.value!.id)"
 								style="--focus-brightness: 1.2"
 							>
 							<img
@@ -892,8 +894,8 @@ function addColumnItems(columnIndex: number) {
 								v-if="columnNewTarget"
 								:src="championImage(columnNewTarget.listedChampion.value!.image, columnNewTarget.listedChampion.value!.id)"
 								loading="lazy"
-								width="128"
-								height="128"
+								:width="championImageSize(columnNewTarget.listedChampion.value!.id)"
+								:height="championImageSize(columnNewTarget.listedChampion.value!.id)"
 								style="--focus-brightness: 1.2"
 							>
 							<img
@@ -959,8 +961,8 @@ function addColumnItems(columnIndex: number) {
 								v-if="column.source?.listedChampion.value"
 								:src="championImage(column.source.listedChampion.value!.image, column.source.listedChampion.value!.id)"
 								loading="lazy"
-								width="128"
-								height="128"
+								:width="championImageSize(column.source.listedChampion.value!.id)"
+								:height="championImageSize(column.source.listedChampion.value!.id)"
 								style="--focus-brightness: 1.2"
 							>
 							<img
@@ -984,8 +986,8 @@ function addColumnItems(columnIndex: number) {
 								v-if="column.target?.listedChampion.value"
 								:src="championImage(column.target.listedChampion.value!.image, column.target.listedChampion.value!.id)"
 								loading="lazy"
-								width="128"
-								height="128"
+								:width="championImageSize(column.target.listedChampion.value!.id)"
+								:height="championImageSize(column.target.listedChampion.value!.id)"
 								style="--focus-brightness: 1.2"
 							>
 							<img
@@ -1123,8 +1125,8 @@ function addColumnItems(columnIndex: number) {
 						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event)">
 							<img
 								:src="section.image"
-								width="64"
-								height="64"
+								:width="section.imageSize"
+								:height="section.imageSize"
 								aria-hidden="true"
 							>
 							<span>{{ section.name }}</span>

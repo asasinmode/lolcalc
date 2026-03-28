@@ -171,7 +171,7 @@ if (!championData || championData?.version !== latestVersion) {
 		stats: {
 			hp: 1000,
 			hpperlevel: 0,
-			mp: 0,
+			mp: 500,
 			mpperlevel: 0,
 			movespeed: 0,
 			armor: 0,
@@ -188,8 +188,8 @@ if (!championData || championData?.version !== latestVersion) {
 			attackdamage: 0,
 			attackdamageperlevel: 0,
 			attackspeedperlevel: 0,
-			attackspeed: 1,
-			attackspeedratio: 1,
+			attackspeed: 0,
+			attackspeedratio: 0,
 		},
 		abilities: {
 			q: {
@@ -198,7 +198,7 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy Q',
 						objectName: 'TargetDummyQ',
-						image: 'assets/characters/ha_%sminionmelee/hud/%smelee_square.png',
+						image: 'assets/characters/ha_%s1minionmelee/hud/%s2melee_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
 						dataKey: 'TargetDummy/Q',
@@ -211,7 +211,7 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy W',
 						objectName: 'TargetDummyW',
-						image: 'assets/characters/ha_%sminionranged/hud/%srange_square.png',
+						image: 'assets/characters/ha_%s1minionranged/hud/%s2range_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
 						dataKey: 'TargetDummy/W',
@@ -224,7 +224,7 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy E',
 						objectName: 'TargetDummyE',
-						image: 'assets/characters/ha_%sminionsiege/hud/%smechcannon_square.png',
+						image: 'assets/characters/ha_%s1minionsiege/hud/%s2mechcannon_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
 						dataKey: 'TargetDummy/E',
@@ -237,7 +237,7 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy R',
 						objectName: 'TargetDummyR',
-						image: 'assets/characters/ha_%sminionsuper/hud/%smechmelee_square.png',
+						image: 'assets/characters/ha_%s1minionsuper/hud/%s2mechmelee_square.png',
 						tooltip: 'Does nothing',
 						cooldownTime: [1, 1, 1, 1, 1, 1, 1],
 						dataKey: 'TargetDummy/R',
@@ -250,7 +250,7 @@ if (!championData || championData?.version !== latestVersion) {
 					{
 						name: 'Target Dummy Passive',
 						objectName: 'TargetDummyPassive',
-						image: 'assets/characters/tft_trainingdummy/hud/icons2d/tftdebug_dummy_donothing.png',
+						image: 'assets/characters/nexus/hud/nexus_%s2_square.png',
 						tooltip: 'Does nothing',
 						dataKey: 'TargetDummy/Passive',
 					},

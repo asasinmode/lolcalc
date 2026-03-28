@@ -55,6 +55,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		additionalId: 'all',
 		permanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
+		imageSize: 32,
 		rows: Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
 			return {
 				id: championStat,
@@ -84,6 +85,7 @@ const tableResultSections = ref<IDamageResultTableSection[]>([
 		additionalId: 'all',
 		permanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
+		imageSize: 32,
 		rows: [
 			{
 				name: 'total',

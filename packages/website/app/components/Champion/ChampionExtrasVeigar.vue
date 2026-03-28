@@ -10,7 +10,9 @@ defineEmits<{
 	abilityHover: IScoreboardItemShowAbilityTooltipArgs;
 }>();
 
-const { abilityImage } = useChampionImages();
+const { abilityImage, abilityImageSize } = useChampionImages();
+
+const abilitySize = abilityImageSize('Veigar');
 
 const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomenalEvilStacks']);
 </script>
@@ -20,8 +22,8 @@ const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomen
 	<article class="number-extra" data-passive-stacks="">
 		<img
 			:src="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image, 'Veigar')"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="$emit('abilityHover', $event, 'passive', 0)"
 		>

@@ -13,7 +13,9 @@ defineEmits<{
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
-const { abilityImage } = useChampionImages();
+const { abilityImage, abilityImageSize } = useChampionImages();
+
+const abilitySize = abilityImageSize('Aphelios');
 </script>
 
 <template>
@@ -21,8 +23,8 @@ const { abilityImage } = useChampionImages();
 		<h5>passive</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]!.image, 'Aphelios') : undefined"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'passive')"
 		>
@@ -32,16 +34,16 @@ const { abilityImage } = useChampionImages();
 		<h5>main weapon</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.q]!.image, 'Aphelios') : undefined"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e')"
 		>
 		<h5>Q</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.q.variants[value.abilityVariants.value.q]!.image, 'Aphelios') : undefined"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'q')"
 		>
@@ -51,16 +53,16 @@ const { abilityImage } = useChampionImages();
 		<h5>offhand weapon</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.w]!.imageAlt, 'Aphelios') : undefined"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.w)"
 		>
 		<h5>next weapon</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.e]!.imageAlt, 'Aphelios') : undefined"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.e)"
 		>
@@ -69,8 +71,8 @@ const { abilityImage } = useChampionImages();
 		<h5>R</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.r.variants[value.abilityVariants.value.r]!.image, 'Aphelios') : undefined"
-			width="64"
-			height="64"
+			:width="abilitySize"
+			:height="abilitySize"
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'r')"
 		>
