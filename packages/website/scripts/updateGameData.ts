@@ -77,7 +77,7 @@ try {
 	championData = JSON.parse(await fs.readFile(championFilePath, 'utf8'));
 } catch {}
 
-if (true || !championData || championData?.version !== latestVersion) {
+if (!championData || championData?.version !== latestVersion) {
 	console.log('champion data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -839,7 +839,7 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
 	// 	debug.item.tags[1] = debug.item.tags[1].union(unknownTags);
 	// }
 
-	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')) : undefined;
+	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')).filter(text => text.some(Boolean)) : undefined;
 	for (let i = 0; i < (extra?.length || 0); i++) {
 		const replaced: string[] = [];
 		let [heading] = extra![i] as [string];

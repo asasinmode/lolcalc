@@ -170,9 +170,6 @@
 						[
 							"<passive>Magebane</passive>",
 							"After not taking magic damage for @OutOfCombatDuration@ seconds, gain a <shield>@ShieldCalc@ magic shield</shield>. "
-						],
-						[
-							""
 						]
 					]
 				}
@@ -320,9 +317,6 @@
 							"<passive>Lead the Way</passive>",
 							"While moving, build up to <speed>@MaxMovementSpeed@ bonus Move Speed</speed>. ",
 							"At max speed:<li>Create a trail that grants allied champions <speed>Move Speed equal to @MovespeedDonation*100@%</speed> of yours. <li>If you are %i:meleeActive%Melee, your next Attack <keyword>Slows</keyword> the target by @MaxStackSlowAmount*100@% for @MaxStackSlowDuration@ second."
-						],
-						[
-							""
 						]
 					]
 				}
@@ -1012,9 +1006,6 @@
 						[
 							"<passive>Life from Death</passive> {{ Item_Cooldown }}",
 							"When a champion that you damaged within @TakedownWindow@ seconds dies, a nova spreads from their corpse that <healing>heals for @TotalHealAmount@</healing>."
-						],
-						[
-							""
 						]
 					]
 				}
@@ -1177,9 +1168,6 @@
 						[
 							"<passive>Ionian Insight</passive>",
 							"Gain @SummonerHaste@ Summoner Spell Haste."
-						],
-						[
-							""
 						]
 					]
 				}
@@ -1384,9 +1372,6 @@
 						[
 							"<passive>Unsinkable</passive>",
 							"Reduce the effectiveness of <keyword>Slows</keyword> by @SlowResistTooltip*100@%."
-						],
-						[
-							""
 						]
 					]
 				}
@@ -1825,10 +1810,6 @@
 						[
 							"<passive>Desolate</passive>",
 							"Killing an enemy deals <magicDamage>@ProcDamageTOOLTIPONLY@ magic damage</magicDamage> around them."
-						],
-						[
-							"",
-							""
 						]
 					]
 				}
@@ -1840,9 +1821,6 @@
 						[
 							"<passive>Voidborn Resilience</passive>",
 							"After @MaxStacks@ seconds of champion combat, increase your bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> by @BonusResistPercentage*100@% until end of combat."
-						],
-						[
-							""
 						]
 					]
 				}
@@ -1991,9 +1969,6 @@
 						[
 							"<passive>Extraction</passive>",
 							"When a champion that you damaged within @DamageWindowDuration@ seconds dies, gain <speed>@SpeedKill@ decaying Move Speed</speed> for @MSDuration@ seconds."
-						],
-						[
-							""
 						]
 					]
 				}
