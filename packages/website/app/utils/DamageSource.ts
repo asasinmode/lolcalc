@@ -232,7 +232,7 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		];
 	}
 
-	getStringifiedData(): string {
+	stringifiedData = computed<string>(() => {
 		const runes = useRunes();
 		const text = useText();
 
@@ -253,27 +253,31 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 			: [];
 		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, runes.shards[key as IRuneShardSlotName]));
 
+		const runePathKeys = Object.keys(runes.paths);
+		const roleQuestKeys = Object.keys(text.roleQuests);
+		const dragonKeys = Object.keys(text.dragons);
+
 		const data = [
 			this.champion.value?.key,
 			this.level.value,
 			this.items.value.map(item => item?.id).filter(Boolean).join('-'),
-			objectKeyIndex(this.runes.value.paths.primary, runes.paths),
+			runePathKeys.indexOf(this.runes.value.paths.primary),
 			primarySlots.join('-'),
-			objectKeyIndex(this.runes.value.paths.secondary, runes.paths),
+			this.runes.value.paths.secondary && runePathKeys.indexOf(this.runes.value.paths.secondary),
 			secondarySlots.join('-'),
 			shards.join('-'),
 			this.currentHealth.value,
 			this.currentAbilityResource.value,
 			Object.values(this.abilityLevels.value).join('-'),
 			Object.values(this.abilityVariants.value).join('-'),
-			objectKeyIndex(this.roleQuest.value, text.roleQuests),
-			this.dragonStacks.value.filter(Boolean).map(stack => objectKeyIndex(stack, text.dragons)).join('-'),
-			objectKeyIndex(this.dragonSoul.value, text.dragons),
+			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
+			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
+			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
 		];
 
 		return data.join('_');
-	}
+	});
 
 	// TODO role quest handle boots?
 	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {

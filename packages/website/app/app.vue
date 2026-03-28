@@ -150,9 +150,9 @@ const shareTextPopover = useTemplateRef('shareTextPopover');
 
 function copyShareLink() {
 	hasCopiedShareLink.value = true;
-	const query = appStateQueryString();
-	console.log(query.length, query);
-	(damageSources as unknown as Ref<DamageSource[]>).value[0]?.getStringifiedData();
+	const state = appStateString();
+	history.replaceState(null, '', `${location.pathname}?${state}`);
+	navigator.clipboard.writeText(location.href);
 }
 
 function showSharePopover() {
@@ -165,29 +165,54 @@ function hideSharePopover() {
 }
 
 function saveStateInUrl() {
-	if (document.hidden) {
-		const query = appStateQueryString();
-		console.log('saving state', window.location.href, query.length);
-	}
+	history.replaceState(null, '', `${location.pathname}?${appStateString()}`);
+}
+
+function saveStateOnVisibilitychange() {
+	document.hidden && saveStateInUrl();
 }
 
 onMounted(() => {
-	document.addEventListener('visibilitychange', saveStateInUrl);
+	document.addEventListener('visibilitychange', saveStateOnVisibilitychange);
 });
 
 onBeforeUnmount(() => {
-	document.removeEventListener('visibilitychange', saveStateInUrl);
+	document.removeEventListener('visibilitychange', saveStateOnVisibilitychange);
 });
 
-function appStateQueryString() {
-	const params = new URLSearchParams();
+/* assuming browsers take up to ~2000 */
+const STATE_STRING_LENGTH_LIMIT = 1920;
+// TODO save results
+// TODO clip properly
+// TODO alert data is clipped
+// update with debounce on data change
+// const STATE_STRING_LENGTH_LIMIT = 200;
+function appStateString() {
+	let rv = '';
 	for (const damageSource of damageSources.value) {
-		(damageSource.anythingFilled as any as Ref<boolean>).value && params.append('damageSource', damageSource.getStringifiedData());
+		if ((damageSource.anythingFilled as any as Ref<boolean>).value) {
+			const params = new URLSearchParams();
+			params.append('damageSource', damageSource.stringifiedData.value);
+			const str = params.toString();
+			if (rv.length + str.length > STATE_STRING_LENGTH_LIMIT) {
+				break;
+			}
+			rv += `&${str}`;
+		}
 	}
 	for (const damageSource of damageTargets.value) {
-		(damageSource.anythingFilled as any as Ref<boolean>).value && params.append('damageTarget', damageSource.getStringifiedData());
+		if ((damageSource.anythingFilled as any as Ref<boolean>).value) {
+			const params = new URLSearchParams();
+			params.append('damageTarget', damageSource.stringifiedData.value);
+			const str = params.toString();
+			if (rv.length + str.length > STATE_STRING_LENGTH_LIMIT) {
+				break;
+			}
+			rv += `&${str}`;
+		}
 	}
-	return params.toString();
+	console.log('state', rv.length);
+	return rv;
 }
 </script>
 
