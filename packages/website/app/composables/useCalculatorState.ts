@@ -7,13 +7,12 @@ export function useCalculatorState(
 	resultsTable: ShallowRef<InstanceType<typeof CalculatorResultsTable>>,
 ) {
 	const damageSourcesState = computed<[state: string, sourceIndex: number][]>(() => {
-		console.log('computing sources state');
 		const rv: [string, number][] = [];
 		for (let i = 0; i < damageSources.value.length; i++) {
 			const damageSource = damageSources.value[i]!;
 			if (damageSource.anythingFilled.value) {
 				const params = new URLSearchParams();
-				params.append('damageSource', (damageSource.stringifiedData as unknown as Ref<string>).value);
+				params.append('src', (damageSource.stringifiedData as unknown as Ref<string>).value);
 				rv.push([params.toString(), i]);
 			}
 		}
@@ -21,13 +20,12 @@ export function useCalculatorState(
 	});
 
 	const damageTargetsState = computed<[state: string, sourceIndex: number][]>(() => {
-		console.log('computing targets state');
 		const rv: [string, number][] = [];
 		for (let i = 0; i < damageTargets.value.length; i++) {
 			const damageSource = damageTargets.value[i]!;
 			if (damageSource.anythingFilled.value) {
 				const params = new URLSearchParams();
-				params.append('damageSource', (damageSource.stringifiedData as unknown as Ref<string>).value);
+				params.append('tgt', (damageSource.stringifiedData as unknown as Ref<string>).value);
 				rv.push([params.toString(), i]);
 			}
 		}
@@ -35,12 +33,9 @@ export function useCalculatorState(
 	});
 
 	/* assuming browsers take up to ~2000 */
-	// const STATE_STRING_LENGTH_LIMIT = 1920;
-	// TODO save results
-	// TODO clip properly
+	const MAX_QUERY_STATE_STRING_LENGTH = 1920;
 	// TODO alert data is clipped
 	// update with debounce on data change
-	const STATE_STRING_LENGTH_LIMIT = 200;
 	function calculatorStateString(): [wholeState: string, queryState: string] {
 		let wholeState = '';
 		let queryState = '';
@@ -48,8 +43,7 @@ export function useCalculatorState(
 		let querySavedHighestSourceIndex = -1;
 		for (const [str, i] of damageSourcesState.value) {
 			wholeState += `&${str}`;
-			if (queryState.length + str.length > STATE_STRING_LENGTH_LIMIT) {
-				console.log('breaking source', i);
+			if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
 				break;
 			}
 			queryState += `&${str}`;
@@ -59,17 +53,16 @@ export function useCalculatorState(
 		let querySavedHighestTargetIndex = -1;
 		for (const [str, i] of damageTargetsState.value) {
 			wholeState += `&${str}`;
-			if (queryState.length + str.length > STATE_STRING_LENGTH_LIMIT) {
-				console.log('breaking target', i);
+			if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
 				break;
 			}
 			queryState += `&${str}`;
 			querySavedHighestTargetIndex = i;
 		}
 
-		const tableResultsStr = `&flipTableResults=${resultsTable.value.flipResults}`;
+		const tableResultsStr = `&flpTbl=${resultsTable.value.flipResults}`;
 		wholeState += tableResultsStr;
-		if (queryState.length + tableResultsStr.length <= STATE_STRING_LENGTH_LIMIT) {
+		if (queryState.length + tableResultsStr.length <= MAX_QUERY_STATE_STRING_LENGTH) {
 			queryState += tableResultsStr;
 		}
 
@@ -81,18 +74,16 @@ export function useCalculatorState(
 			if ((~columnSourceIndex && columnSourceIndex <= querySavedHighestSourceIndex)
 				|| (~columnTargetIndex && columnTargetIndex <= querySavedHighestTargetIndex)) {
 				const params = new URLSearchParams();
-				params.append('tableResultColumn', `${
+				params.append('tblCol', `${
 					columnSourceIndex === -1 || columnSourceIndex > querySavedHighestSourceIndex ? '' : columnSourceIndex
 				}-${
 					columnTargetIndex === -1 || columnTargetIndex > querySavedHighestTargetIndex ? '' : columnTargetIndex
 				}`);
 				const str = params.toString();
 				wholeState += `&${str}`;
-				if (queryState.length + str.length > STATE_STRING_LENGTH_LIMIT) {
-					console.log('breaking col', column.source?.champion.value?.name, column.target?.champion.value?.name, str);
+				if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
 					break;
 				}
-				console.log('saving col', column.source?.champion.value?.name, columnSourceIndex, column.target?.champion.value?.name, columnTargetIndex, str);
 				queryState += `&${str}`;
 
 				column.source?.champion.value?.id && querySavedChampionIds.add(column.source.champion.value!.id);
@@ -111,9 +102,25 @@ export function useCalculatorState(
 			}
 		}
 
-		console.log('saved', { querySavedHighestSourceIndex, querySavedHighestTargetIndex }, querySavedChampionIds, querySavedItemIds);
+		for (const section of resultsTable.value.resultSections) {
+			if (section.isPermanent) {
+				continue;
+			}
+			const [championOrItemId] = section.id.split('-');
+			if (section.type === 'all' || !(section.type === 'item' ? querySavedItemIds.has(championOrItemId!) : querySavedChampionIds.has(championOrItemId!))) {
+				continue;
+			}
 
-		console.log('state', queryState.length);
+			const params = new URLSearchParams();
+			params.append('tblSct', `${section.type}_${section.id}`);
+			const str = params.toString();
+			wholeState += `&${str}`;
+			if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
+				break;
+			}
+			queryState += `&${str}`;
+		}
+
 		return [wholeState, queryState];
 	}
 

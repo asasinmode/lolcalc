@@ -172,14 +172,14 @@ onBeforeUnmount(() => {
 				> [popover] {
 					--at-apply: 'bg-black py-0.5 px-1 rounded-md text-center w-28';
 					position-anchor: --share-configuration;
-					inset-block-end: calc(anchor(start) + 0.25rem);
+					inset-block-start: calc(anchor(end) + 0.25rem);
 					justify-self: anchor-center;
 				}
 			}
 		}
 
 		> footer {
-			--at-apply: 'pt-8 text-neutral-300';
+			--at-apply: 'pt-8 text-neutral-400';
 		}
 	}
 }
