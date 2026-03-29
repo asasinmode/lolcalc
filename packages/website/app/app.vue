@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { ShallowRef } from 'vue';
 import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 
@@ -32,7 +33,7 @@ const damageSources = ref<DamageSource<any>[]>(import.meta.dev
 	: [
 			markRaw(new DamageSource()),
 		],
-);
+) as unknown as ShallowRef<DamageSource<any>[]>;
 const damageTargets = ref<DamageSource<any>[]>(import.meta.dev
 	? [
 			markRaw(new DamageSource({ champion: useChampions().Hecarim })),
@@ -40,86 +41,14 @@ const damageTargets = ref<DamageSource<any>[]>(import.meta.dev
 			markRaw(new DamageSource({ champion: useChampions().Aphelios })),
 		]
 	: [markRaw(new DamageSource())],
-);
+) as unknown as ShallowRef<DamageSource<any>[]>;
 
 const showResults = computed(() => (damageSources as unknown as Ref<DamageSource[]>).value.some(
 	source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id),
 ),
 );
 
-const tableResultSections = ref<IDamageResultTableSection[]>([
-	{
-		id: 'stats',
-		name: 'stats',
-		additionalId: 'all',
-		permanent: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
-		imageSize: 32,
-		rows: Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
-			return {
-				id: championStat,
-				name: statName,
-				icon: {
-					path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
-					width: 20,
-					height: 20,
-				},
-			};
-		}),
-		getCellValue(_section, rowId, source, _target) {
-			if (!source) {
-				return;
-			}
-
-			const stat = source.computed.stats.value[rowId as IChampionStatName];
-			return {
-				numberValue: stat.total,
-				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
-			};
-		},
-	},
-	{
-		id: 'basicAttack',
-		name: 'basic attack',
-		additionalId: 'all',
-		permanent: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
-		imageSize: 32,
-		rows: [
-			{
-				name: 'total',
-				id: 'total',
-			},
-			{
-				name: 'physical damage',
-				id: 'physicalDamage',
-			},
-			{
-				name: 'magic damage',
-				id: 'magicDamage',
-			},
-			{
-				name: 'true damage',
-				id: 'trueDamage',
-			},
-			{
-				name: 'DPS',
-				id: 'dps',
-			},
-		],
-		// TODO
-		getCellValue() {
-			const value = Math.round(Math.random() * 500);
-			const numberValue = value;
-
-			return { value, numberValue };
-		},
-		selectValue: 'normal',
-		selectOptions: [['normal', 'normal'], ['critical', 'critical'], ['average', 'average']],
-		selectLabel: 'attack type',
-	},
-]);
-const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
+const resultTableColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 	? [
 			{
 				id: useId(),
@@ -142,16 +71,89 @@ const tableResultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 			},
 		]
 	: [],
-	// TMP
-) as unknown as IDamageResultTableColumn[];
+) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+const resultTableSections = ref<IDamageResultTableSection[]>([
+	{
+		id: 'stats',
+		name: 'stats',
+		additionalId: 'all',
+		permanent: true,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
+		imageSize: 32,
+		rows: markRaw(Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
+			return {
+				id: championStat,
+				name: statName,
+				icon: {
+					path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
+					width: 20,
+					height: 20,
+				},
+			};
+		})),
+		getCellValue(_section, rowId, source, _target) {
+			if (!source) {
+				return;
+			}
+
+			const stat = source.computed.stats.value[rowId as IChampionStatName];
+			return {
+				numberValue: stat.total,
+				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
+			};
+		},
+	},
+	{
+		id: 'basicAttack',
+		name: 'basic attack',
+		additionalId: 'all',
+		permanent: true,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
+		imageSize: 32,
+		rows: markRaw([
+			{
+				name: 'total',
+				id: 'total',
+			},
+			{
+				name: 'physical damage',
+				id: 'physicalDamage',
+			},
+			{
+				name: 'magic damage',
+				id: 'magicDamage',
+			},
+			{
+				name: 'true damage',
+				id: 'trueDamage',
+			},
+			{
+				name: 'DPS',
+				id: 'dps',
+			},
+		]),
+		// TODO
+		getCellValue() {
+			const value = Math.round(Math.random() * 500);
+			const numberValue = value;
+
+			return { value, numberValue };
+		},
+		selectValue: 'normal',
+		selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
+		selectLabel: 'attack type',
+	},
+]);
+
+const { calculatorStateString } = useCalculatorState(damageSources, damageTargets, resultTableColumns, resultTableSections);
 
 const hasCopiedShareLink = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
 
 function copyShareLink() {
 	hasCopiedShareLink.value = true;
-	const state = appStateString();
-	history.replaceState(null, '', `${location.pathname}?${state}`);
+	const state = calculatorStateString();
+	history.replaceState(null, '', `${location.pathname}?${state[1]}`);
 	navigator.clipboard.writeText(location.href);
 }
 
@@ -165,7 +167,7 @@ function hideSharePopover() {
 }
 
 function saveStateInUrl() {
-	history.replaceState(null, '', `${location.pathname}?${appStateString()}`);
+	history.replaceState(null, '', `${location.pathname}?${calculatorStateString()[1]}`);
 }
 
 function saveStateOnVisibilitychange() {
@@ -179,41 +181,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
 	document.removeEventListener('visibilitychange', saveStateOnVisibilitychange);
 });
-
-/* assuming browsers take up to ~2000 */
-const STATE_STRING_LENGTH_LIMIT = 1920;
-// TODO save results
-// TODO clip properly
-// TODO alert data is clipped
-// update with debounce on data change
-// const STATE_STRING_LENGTH_LIMIT = 200;
-function appStateString() {
-	let rv = '';
-	for (const damageSource of damageSources.value) {
-		if ((damageSource.anythingFilled as any as Ref<boolean>).value) {
-			const params = new URLSearchParams();
-			params.append('damageSource', damageSource.stringifiedData.value);
-			const str = params.toString();
-			if (rv.length + str.length > STATE_STRING_LENGTH_LIMIT) {
-				break;
-			}
-			rv += `&${str}`;
-		}
-	}
-	for (const damageSource of damageTargets.value) {
-		if ((damageSource.anythingFilled as any as Ref<boolean>).value) {
-			const params = new URLSearchParams();
-			params.append('damageTarget', damageSource.stringifiedData.value);
-			const str = params.toString();
-			if (rv.length + str.length > STATE_STRING_LENGTH_LIMIT) {
-				break;
-			}
-			rv += `&${str}`;
-		}
-	}
-	console.log('state', rv.length);
-	return rv;
-}
 </script>
 
 <template>
@@ -243,8 +210,8 @@ function appStateString() {
 				configure a damage source champion to view results
 			</p>
 			<CalculatorResultsTable
-				v-model:sections="tableResultSections"
-				v-model:columns="tableResultColumns"
+				v-model:sections="resultTableSections"
+				v-model:columns="resultTableColumns"
 				:damage-sources
 				:damage-targets
 				:show-results

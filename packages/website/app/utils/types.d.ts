@@ -58,7 +58,7 @@ export interface IDamageResultTableSection {
 		isUnknown?: boolean;
 	} | undefined;
 	/** when present, the row will have a select to choose from provided options used for setting `selectValue` */
-	selectOptions?: [value: string, text: string][];
+	selectOptions?: Raw<[value: string, text: string][]>;
 	/** use with selectOptions */
 	selectValue?: string;
 	/** use with selectOptions */

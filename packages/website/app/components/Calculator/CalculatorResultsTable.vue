@@ -358,7 +358,7 @@ async function addResultsSection(optionIndex: number, abilityIndex: number) {
 }
 
 function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameDescriptionVariablesRV, 'variables' | 'unknownVariables'>): IDamageResultTableSection['rows'] {
-	return variables
+	return markRaw(variables
 		.keys()
 		.toArray()
 		.map(name => ({ id: name, name }))
@@ -366,7 +366,7 @@ function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGam
 			id: rawName,
 			name: actualName || rawName,
 			isUnknown: true,
-		})));
+		}))));
 }
 
 function removeDamageSection(index: number) {
