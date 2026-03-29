@@ -16,30 +16,7 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
-const resultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
-	? [
-			{
-				id: useId(),
-				source: props.damageSources[0],
-				target: props.damageTargets[2],
-			},
-			{
-				id: useId(),
-				source: props.damageSources[3],
-				target: props.damageTargets[0],
-			},
-			{
-				id: useId(),
-				source: props.damageSources[2],
-				target: props.damageTargets[1],
-			},
-			{
-				id: useId(),
-				source: props.damageSources[1],
-			},
-		]
-	: [],
-) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+const resultColumns = ref<IDamageResultTableColumn[]>([]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
 const resultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'stats',

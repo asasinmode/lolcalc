@@ -75,14 +75,14 @@
 	#__nuxt {
 		min-height: 100vh;
 		display: grid;
-		grid-auto-rows: min-content;
 		grid-template-columns:
 			[page-start] minmax(var(--size-page-px), 1fr)
 			[content-start] minmax(min(calc(100vw - 2 * var(--size-page-px)), var(--size-page-max-w)), 1fr)
 			[content-end] minmax(var(--size-page-px), 1fr)
 			[page-end];
+		grid-template-rows: auto max-content 1fr;
 
-		& > * {
+		> * {
 			grid-column: content;
 		}
 	}

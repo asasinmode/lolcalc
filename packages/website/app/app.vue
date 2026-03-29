@@ -23,42 +23,28 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 
 _setupGlobalKeyModifiers();
 
-const damageSources = ref<DamageSource<any>[]>(import.meta.dev
-	? [
-			markRaw(new DamageSource({ champion: useChampions().Aatrox, items: [useItems()['3155']] })),
-			markRaw(new DamageSource({ champion: useChampions().Veigar })),
-			markRaw(new DamageSource({ champion: useChampions().Kalista })),
-			markRaw(new DamageSource({ champion: useChampions().AurelionSol })),
-		]
-	: [
-			markRaw(new DamageSource()),
-		],
-) as unknown as ShallowRef<DamageSource<any>[]>;
-const damageTargets = ref<DamageSource<any>[]>(import.meta.dev
-	? [
-			markRaw(new DamageSource({ champion: useChampions().Hecarim })),
-			markRaw(new DamageSource({ champion: useChampions().Veigar })),
-			markRaw(new DamageSource({ champion: useChampions().Aphelios })),
-		]
-	: [markRaw(new DamageSource())],
-) as unknown as ShallowRef<DamageSource<any>[]>;
+const damageSources = ref<DamageSource<any>[]>([
+	markRaw(new DamageSource()),
+]) as unknown as ShallowRef<DamageSource<any>[]>;
+const damageTargets = ref<DamageSource<any>[]>([
+	markRaw(new DamageSource()),
+]) as unknown as ShallowRef<DamageSource<any>[]>;
 
-const showResults = computed(() => (damageSources as unknown as Ref<DamageSource[]>).value.some(
-	source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id),
-),
-);
-
+const showResults = computed(() => damageSources.value.some(source => source.listedChampion.value));
 const resultsTable = useTemplateRef('resultsTable');
 
+// TODO update with debounce on data change
+// TODO read data from query/local storage
 const { calculatorStateString } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
 const hasCopiedShareLink = ref(false);
 const isStateTooLargeForQuery = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
+let saveStateDebounceTimer: ReturnType<typeof setTimeout> | undefined;
 
 function copyShareLink() {
 	hasCopiedShareLink.value = true;
-	saveStateInUrl(calculatorStateString());
+	saveState();
 	navigator.clipboard.writeText(location.href);
 }
 
@@ -71,20 +57,18 @@ function hideSharePopover() {
 	shareTextPopover.value?.hidePopover();
 }
 
-function saveStateInUrl(data: ReturnType<typeof calculatorStateString>) {
+function saveState() {
+	const data = calculatorStateString();
+	if (saveStateDebounceTimer) {
+		clearTimeout(saveStateDebounceTimer);
+		saveStateDebounceTimer = undefined;
+	}
+	sessionStorage.setItem('localc-calculator-state', data[0]);
 	history.replaceState(null, '', `${location.pathname}?${data[1]}`);
 }
 
-function saveStateInLocalStorage(data: ReturnType<typeof calculatorStateString>) {
-	localStorage.setItem('localc-calculator-state', data[0]);
-}
-
 function saveStateOnVisibilitychange() {
-	if (document.hidden) {
-		const state = calculatorStateString();
-		saveStateInUrl(state);
-		saveStateInLocalStorage(state);
-	};
+	document.hidden && saveState();
 }
 
 onMounted(() => {
@@ -199,7 +183,7 @@ onBeforeUnmount(() => {
 		}
 
 		> footer {
-			--at-apply: 'pt-8 text-neutral-400';
+			--at-apply: 'pt-8 text-neutral-400 mt-auto text-center';
 		}
 	}
 }

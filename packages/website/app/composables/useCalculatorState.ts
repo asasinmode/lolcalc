@@ -34,8 +34,6 @@ export function useCalculatorState(
 
 	/* assuming browsers take up to ~2000 */
 	const MAX_QUERY_STATE_STRING_LENGTH = 1920;
-	// TODO alert data is clipped
-	// update with debounce on data change
 	function calculatorStateString(): [wholeState: string, queryState: string] {
 		let wholeState = '';
 		let queryState = '';
