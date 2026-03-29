@@ -322,11 +322,11 @@ function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number)
 const mirrorLayout = ref(false);
 
 onMounted(() => {
-	mirrorLayout.value = localStorage.getItem('mirror-scoreboard-layout') === 'true';
+	mirrorLayout.value = localStorage.getItem('lolcalc-mirror-scoreboard-layout') === 'true';
 });
 
 function setLocalMirrorLayout() {
-	localStorage.setItem('mirror-scoreboard-layout', mirrorLayout.value.toString());
+	localStorage.setItem('localc-mirror-scoreboard-layout', mirrorLayout.value.toString());
 }
 </script>
 

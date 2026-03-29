@@ -57,8 +57,7 @@ const shareTextPopover = useTemplateRef('shareTextPopover');
 
 function copyShareLink() {
 	hasCopiedShareLink.value = true;
-	const state = calculatorStateString();
-	history.replaceState(null, '', `${location.pathname}?${state[1]}`);
+	saveStateInUrl(calculatorStateString());
 	navigator.clipboard.writeText(location.href);
 }
 
@@ -71,12 +70,20 @@ function hideSharePopover() {
 	shareTextPopover.value?.hidePopover();
 }
 
-function saveStateInUrl() {
-	history.replaceState(null, '', `${location.pathname}?${calculatorStateString()[1]}`);
+function saveStateInUrl(data: ReturnType<typeof calculatorStateString>) {
+	history.replaceState(null, '', `${location.pathname}?${data[1]}`);
+}
+
+function saveStateInLocalStorage(data: ReturnType<typeof calculatorStateString>) {
+	localStorage.setItem('localc-calculator-state', data[0]);
 }
 
 function saveStateOnVisibilitychange() {
-	document.hidden && saveStateInUrl();
+	if (document.hidden) {
+		const state = calculatorStateString();
+		saveStateInUrl(state);
+		saveStateInLocalStorage(state);
+	};
 }
 
 onMounted(() => {
