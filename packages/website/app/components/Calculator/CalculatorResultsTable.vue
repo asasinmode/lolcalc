@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { WatchHandle } from 'vue';
+import type { ShallowRef, WatchHandle } from 'vue';
 import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 const props = defineProps<{
@@ -16,8 +16,102 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
-const resultColumns = defineModel<IDamageResultTableColumn[]>('columns', { required: true });
-const resultSections = defineModel<IDamageResultTableSection[]>('sections', { required: true });
+const resultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
+	? [
+			{
+				id: useId(),
+				source: props.damageSources[0],
+				target: props.damageTargets[2],
+			},
+			{
+				id: useId(),
+				source: props.damageSources[3],
+				target: props.damageTargets[0],
+			},
+			{
+				id: useId(),
+				source: props.damageSources[2],
+				target: props.damageTargets[1],
+			},
+			{
+				id: useId(),
+				source: props.damageSources[1],
+			},
+		]
+	: [],
+) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+const resultSections = ref<IDamageResultTableSection[]>([
+	{
+		id: 'stats',
+		name: 'stats',
+		additionalId: 'all',
+		isPermanent: true,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
+		imageSize: 32,
+		rows: markRaw(Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
+			return {
+				id: championStat,
+				name: statName,
+				icon: {
+					path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
+					width: 20,
+					height: 20,
+				},
+			};
+		})),
+		getCellValue(_section, rowId, source, _target) {
+			if (!source) {
+				return;
+			}
+
+			const stat = source.computed.stats.value[rowId as IChampionStatName];
+			return {
+				numberValue: stat.total,
+				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
+			};
+		},
+	},
+	{
+		id: 'basicAttack',
+		name: 'basic attack',
+		additionalId: 'all',
+		isPermanent: true,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
+		imageSize: 32,
+		rows: markRaw([
+			{
+				name: 'total',
+				id: 'total',
+			},
+			{
+				name: 'physical damage',
+				id: 'physicalDamage',
+			},
+			{
+				name: 'magic damage',
+				id: 'magicDamage',
+			},
+			{
+				name: 'true damage',
+				id: 'trueDamage',
+			},
+			{
+				name: 'DPS',
+				id: 'dps',
+			},
+		]),
+		// TODO
+		getCellValue() {
+			const value = Math.round(Math.random() * 500);
+			const numberValue = value;
+
+			return { value, numberValue };
+		},
+		selectValue: 'normal',
+		selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
+		selectLabel: 'attack type',
+	},
+]);
 
 const flipResults = ref(false);
 const sourceProperty = computed(() => flipResults.value ? 'target' : 'source');
@@ -52,14 +146,14 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 
 interface IDamageSectionOption {
 	type: 'champion' | 'item';
+	/** champion or item id */
 	optionId: string;
 	optionName: string;
 	abilities: {
 		id: string;
 		championOrItemId: string;
 		name: string;
-		image: string;
-		abilityKey: string;
+		abilityKey?: IChampionAbilityKey;
 	}[];
 }
 
@@ -93,8 +187,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 							id: `${source.champion.value!.id}-${abilityKey}`,
 							championOrItemId: source.champion.value!.id,
 							abilityKey: abilityKey as IChampionAbilityKey,
-							image: abilityImage(abilityVariant.image, championId, `${sourceProperty.value}s`),
-							name: `${source.champion.value!.name} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${nameReplaced}`,
+							name: championAbilitySectionName(source.champion.value!.name, abilityKey as IChampionAbilityKey, nameReplaced),
 						};
 					})
 					.filter(ability => !resultSections.value.some(section => section.id === ability.id)),
@@ -119,14 +212,16 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 				id: itemId!,
 				championOrItemId: itemId!,
 				name: item.name,
-				abilityKey: '',
-				image: `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`,
 			};
 		}).filter(ability => !resultSections.value.some(section => section.id === ability.id)).toArray(),
 	});
 
 	return options.filter(option => option.abilities.length);
 });
+
+function championAbilitySectionName(championName: string, abilityKey: IChampionAbilityKey, abilityName: string) {
+	return `${championName} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${abilityName}`;
+}
 
 interface IComputedSection {
 	sectionId: string;
@@ -309,45 +404,57 @@ function submitResultsSection(event: SubmitEvent) {
 
 	const [rawOptionIndex, rawAbilityIndex] = value.split('-');
 	(event.target as HTMLFormElement).reset();
-	addResultsSection(Number.parseInt(rawOptionIndex!), Number.parseInt(rawAbilityIndex!));
+	addResultSectionOption(Number.parseInt(rawOptionIndex!), Number.parseInt(rawAbilityIndex!));
 }
 
-async function addResultsSection(optionIndex: number, abilityIndex: number) {
+function addResultSectionOption(optionIndex: number, abilityIndex: number) {
 	const option = damageSectionOptions.value[optionIndex]!;
 	const ability = option.abilities[abilityIndex]!;
+	return addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey);
+}
 
+async function addResultsSection(
+	type: IDamageSectionOption['type'],
+	championOrItemId: string,
+	abilityKey?: IChampionAbilityKey,
+	name = '',
+) {
 	const section = {
-		id: ability.id,
+		id: `${championOrItemId}${abilityKey}`,
 		additionalId: 'all',
-		name: ability.name,
-		image: ability.image,
+		name,
+		image: '',
 		imageSize: 64,
 		rows: [],
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
-	if (option.type === 'champion') {
-		const champion = await useChampion(option.optionId);
-		const precomputedDescription = computedAbilityDescription(minorVersion, champion, ability.abilityKey as IChampionAbilityKey, 0, undefined, undefined, { replaceWithName: true });
+	if (type === 'champion') {
+		const champion = await useChampion(championOrItemId);
+		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, 0, undefined, undefined, { replaceWithName: true });
 
 		section.additionalId = champion.id;
+		section.name ||= championAbilitySectionName(champion.name, abilityKey!, precomputedDescription.name);
+		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
 		section.imageSize = abilityImageSize(champion.id);
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.hoverTooltipData = {
 			group: `${sourceProperty.value}s`,
 			championId: champion.id,
-			abilityKey: ability.abilityKey as IChampionAbilityKey,
+			abilityKey,
 			abilityVariant: 0,
 			precomputedDescription,
 		};
 		section.getCellValue = abilityVariableCellValue;
 	} else {
-		const item = items[ability.championOrItemId]!;
+		const item = items[championOrItemId]!;
 		// TODO friendlier names, if value is calculated in item.ts maybe that can help
 		// TODO try to filter out non simple variables? Like ones that aren't 5 flat damage to BonusDamageToMinions? only ones that are calculated?
 		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true });
 
 		section.additionalId = 'item';
+		section.name ||= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);
+		section.image = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`;
 		section.getCellValue = itemVariableCellValue;
 		section.hoverTooltipData = { item, precomputedDescription };
 	}
@@ -801,7 +908,7 @@ async function addColumnAbilities(columnIndex: number) {
 	const option = damageSectionOptions.value[championOptionIndex!];
 	if (option) {
 		for (let i = 0; i < option.abilities.length; i++) {
-			addResultsSection(championOptionIndex!, i);
+			addResultSectionOption(championOptionIndex!, i);
 		}
 	}
 }
@@ -811,10 +918,12 @@ function addColumnItems(columnIndex: number) {
 	const option = damageSectionOptions.value.at(-1);
 	if (option?.type === 'item') {
 		for (const i of itemOptionsIndexes) {
-			addResultsSection(damageSectionOptions.value.length - 1, i);
+			addResultSectionOption(damageSectionOptions.value.length - 1, i);
 		}
 	}
 }
+
+defineExpose({ resultColumns, resultSections, flipResults });
 </script>
 
 <template>
@@ -1096,7 +1205,7 @@ function addColumnItems(columnIndex: number) {
 						<button
 							title="remove"
 							class="pretend-ui-button"
-							:disabled="section.permanent"
+							:disabled="section.isPermanent"
 							@click="removeDamageSection(index)"
 						>
 							<span>
@@ -1229,7 +1338,7 @@ function addColumnItems(columnIndex: number) {
 			<tr>
 				<td :colspan="resultColumns.length + 2">
 					<form @submit.prevent="submitResultsSection">
-						<label for="results-table-row-new-section-ability"> section ability </label>
+						<label for="results-table-row-new-section-ability">add section</label>
 						<select
 							id="results-table-row-new-section-ability"
 							name="sectionOptionIndex"
@@ -1641,7 +1750,7 @@ function addColumnItems(columnIndex: number) {
 
 		> tfoot {
 			> tr > td > form {
-				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
+				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2 pt-5 px-3 pb-2';
 
 				> label {
 					--at-apply: 'col-span-full text-start text-lg';

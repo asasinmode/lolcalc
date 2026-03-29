@@ -1,11 +1,10 @@
+import type { CalculatorResultsTable } from '#components';
 import type { ShallowRef } from 'vue';
-import type { IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
 
 export function useCalculatorState(
 	damageSources: ShallowRef<DamageSource[]>,
 	damageTargets: ShallowRef<DamageSource[]>,
-	resultTableColumns: Ref<IDamageResultTableColumn[]>,
-	resultTableSections: Ref<IDamageResultTableSection[]>,
+	resultsTable: ShallowRef<InstanceType<typeof CalculatorResultsTable>>,
 ) {
 	const damageSourcesState = computed<[state: string, sourceIndex: number][]>(() => {
 		console.log('computing sources state');
@@ -68,9 +67,15 @@ export function useCalculatorState(
 			querySavedHighestTargetIndex = i;
 		}
 
+		const tableResultsStr = `&flipTableResults=${resultsTable.value.flipResults}`;
+		wholeState += tableResultsStr;
+		if (queryState.length + tableResultsStr.length <= STATE_STRING_LENGTH_LIMIT) {
+			queryState += tableResultsStr;
+		}
+
 		const querySavedChampionIds = new Set<string>();
 		const querySavedItemIds = new Set<string>();
-		for (const column of resultTableColumns.value) {
+		for (const column of resultsTable.value.resultColumns) {
 			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
 			const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
 			if ((~columnSourceIndex && columnSourceIndex <= querySavedHighestSourceIndex)

@@ -47,7 +47,7 @@ export interface IDamageResultTableSection {
 	id: string;
 	additionalId: IChampionId | 'all' | 'item';
 	/** stats and basic attack cannot be removed */
-	permanent?: boolean;
+	isPermanent?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
 	image: string;

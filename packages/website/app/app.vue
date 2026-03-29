@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import type { CalculatorResultsTable } from '#components';
 import type { ShallowRef } from 'vue';
-import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 
 useHead({
@@ -15,7 +15,7 @@ useSeoMeta({
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
 
-const { version, minorVersion } = usePatchVersion();
+const { version } = usePatchVersion();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
@@ -48,104 +48,9 @@ const showResults = computed(() => (damageSources as unknown as Ref<DamageSource
 ),
 );
 
-const resultTableColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
-	? [
-			{
-				id: useId(),
-				source: (damageSources as unknown as Ref).value[0],
-				target: (damageTargets as unknown as Ref).value[2],
-			},
-			{
-				id: useId(),
-				source: (damageSources as unknown as Ref).value[3],
-				target: (damageTargets as unknown as Ref).value[0],
-			},
-			{
-				id: useId(),
-				source: (damageSources as unknown as Ref).value[2],
-				target: (damageTargets as unknown as Ref).value[1],
-			},
-			{
-				id: useId(),
-				source: (damageSources as unknown as Ref).value[1],
-			},
-		]
-	: [],
-) as unknown as ShallowRef<IDamageResultTableColumn[]>;
-const resultTableSections = ref<IDamageResultTableSection[]>([
-	{
-		id: 'stats',
-		name: 'stats',
-		additionalId: 'all',
-		permanent: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
-		imageSize: 32,
-		rows: markRaw(Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
-			return {
-				id: championStat,
-				name: statName,
-				icon: {
-					path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
-					width: 20,
-					height: 20,
-				},
-			};
-		})),
-		getCellValue(_section, rowId, source, _target) {
-			if (!source) {
-				return;
-			}
+const resultsTable = useTemplateRef('resultsTable');
 
-			const stat = source.computed.stats.value[rowId as IChampionStatName];
-			return {
-				numberValue: stat.total,
-				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
-			};
-		},
-	},
-	{
-		id: 'basicAttack',
-		name: 'basic attack',
-		additionalId: 'all',
-		permanent: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
-		imageSize: 32,
-		rows: markRaw([
-			{
-				name: 'total',
-				id: 'total',
-			},
-			{
-				name: 'physical damage',
-				id: 'physicalDamage',
-			},
-			{
-				name: 'magic damage',
-				id: 'magicDamage',
-			},
-			{
-				name: 'true damage',
-				id: 'trueDamage',
-			},
-			{
-				name: 'DPS',
-				id: 'dps',
-			},
-		]),
-		// TODO
-		getCellValue() {
-			const value = Math.round(Math.random() * 500);
-			const numberValue = value;
-
-			return { value, numberValue };
-		},
-		selectValue: 'normal',
-		selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
-		selectLabel: 'attack type',
-	},
-]);
-
-const { calculatorStateString } = useCalculatorState(damageSources, damageTargets, resultTableColumns, resultTableSections);
+const { calculatorStateString } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
 const hasCopiedShareLink = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
@@ -210,8 +115,7 @@ onBeforeUnmount(() => {
 				configure a damage source champion to view results
 			</p>
 			<CalculatorResultsTable
-				v-model:sections="resultTableSections"
-				v-model:columns="resultTableColumns"
+				ref="resultsTable"
 				:damage-sources
 				:damage-targets
 				:show-results

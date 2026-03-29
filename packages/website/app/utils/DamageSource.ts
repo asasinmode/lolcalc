@@ -510,6 +510,7 @@ export interface IComputedDamageSourceItem {
 	descriptionContents: IComputedItemDescription;
 }
 
+// TODO maybe try to include all stuff <itemdescription> uses so it doesn't need additional props when it's passed
 export interface IComputedItemDescription {
 	subtitleLeft?: string;
 	subtitleRight?: string;
@@ -615,6 +616,7 @@ export function allChampionAbilityVariants(champion?: IChampion) {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
 
+// TODO maybe try to include all stuff <lolchampionabilityhovertooltip> uses so it doesn't need additional props when it's passed
 export interface IComputedAbilityDescription {
 	name: string;
 	tooltip: string;
@@ -630,6 +632,7 @@ export interface IComputedAbilityDescription {
 	}[];
 	variables: IReplaceGameDescriptionVariablesRV['variables'];
 	unknownVariables: IReplaceGameDescriptionVariablesRV['unknownVariables'];
+	variant: IChampionAbilityVariant;
 }
 
 export function computedAbilityDescription(
@@ -759,6 +762,7 @@ export function computedAbilityDescription(
 		extendedVariables,
 		variables,
 		unknownVariables,
+		variant,
 	};
 }
 
