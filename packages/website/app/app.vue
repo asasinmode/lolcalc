@@ -53,6 +53,7 @@ const resultsTable = useTemplateRef('resultsTable');
 const { calculatorStateString } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
 const hasCopiedShareLink = ref(false);
+const isStateTooLargeForQuery = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
 
 function copyShareLink() {
@@ -138,9 +139,13 @@ onBeforeUnmount(() => {
 			@blur="hideSharePopover"
 		>
 			share
-			<p ref="shareTextPopover" popover="hint">
+			<div ref="shareTextPopover" popover="hint">
 				{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
-			</p>
+				<p v-show="isStateTooLargeForQuery" class="alert warning">
+					configuration too large for url, some will data will be trimmed
+					<Icon class="i-ph:warning-light" />
+				</p>
+			</div>
 		</button>
 	</main>
 	<footer>
@@ -177,10 +182,18 @@ onBeforeUnmount(() => {
 				anchor-name: --share-configuration;
 
 				> [popover] {
-					--at-apply: 'bg-black py-0.5 px-1 rounded-md text-center w-28';
+					--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-button-border-clr]';
 					position-anchor: --share-configuration;
 					inset-block-start: calc(anchor(end) + 0.25rem);
-					justify-self: anchor-center;
+					inset-inline-end: calc(anchor(end));
+
+					> .alert {
+						--at-apply: 'py-1 text-sm mb-1';
+
+						&::after {
+							--at-apply: '-mt-1';
+						}
+					}
 				}
 			}
 		}

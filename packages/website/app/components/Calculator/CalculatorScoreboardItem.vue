@@ -1192,8 +1192,8 @@ defineExpose({ el });
 					<p class="game-description" v-html="hoveredDragonThingText?.description" />
 					<UnresolvedVariablesAlert v-if="hoveredDragonThingText?.anyUnknown" />
 					<p v-if="hoveredDragonThingText?.invalid" class="alert error">
-						<Icon class="i-ph:warning-circle-light" />
 						{{ hoveredDragonThingText.invalid }}
+						<Icon class="i-ph:warning-circle-light" />
 					</p>
 				</div>
 			</section>

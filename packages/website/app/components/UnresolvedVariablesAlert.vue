@@ -14,7 +14,7 @@
 			--at-apply: 'inline font-600';
 		}
 
-		&::before {
+		&::after {
 			--at-apply: 'block float-end -mt-2 ms-[0.5ch] content-empty z-0 size-4 rounded-es-sm';
 		}
 
@@ -25,7 +25,7 @@
 		&.warning {
 			--at-apply: 'b-amber-600 bg-amber-900/10 text-amber-400';
 
-			&::before {
+			&::after {
 				--at-apply: 'bg-amber-400';
 			}
 
@@ -37,7 +37,7 @@
 		&.error {
 			--at-apply: 'b-red-600 bg-red-900/10 text-red-400';
 
-			&::before {
+			&::after {
 				--at-apply: 'bg-red-400';
 			}
 
