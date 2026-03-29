@@ -133,7 +133,7 @@ onBeforeUnmount(() => {
 		</button>
 	</main>
 	<footer>
-		<b>lolcalc</b> was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
+		<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 	</footer>
 	<ChampSelect />
 	<ItemShop />
@@ -183,7 +183,15 @@ onBeforeUnmount(() => {
 		}
 
 		> footer {
-			--at-apply: 'pt-8 text-neutral-400 mt-auto text-center';
+			--at-apply: 'pt-8 pb-3 text-neutral-400 mt-auto text-center';
+
+			> a {
+				--at-apply: 'hoverable:text-white';
+
+				> span {
+					--at-apply: 'underline';
+				}
+			}
 		}
 	}
 }
