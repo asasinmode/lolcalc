@@ -58,7 +58,7 @@ export function useCalculatorState(
 			querySavedHighestTargetIndex = i;
 		}
 
-		const tableResultsStr = `&flpTbl=${resultsTable.value.flipResults}`;
+		const tableResultsStr = resultsTable.value.flipResults ? `&flpTbl=` : '';
 		wholeState += tableResultsStr;
 		if (queryState.length + tableResultsStr.length <= MAX_QUERY_STATE_STRING_LENGTH) {
 			queryState += tableResultsStr;

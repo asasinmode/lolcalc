@@ -64,7 +64,7 @@ function saveState() {
 		saveStateDebounceTimer = undefined;
 	}
 	sessionStorage.setItem('localc-calculator-state', data[0]);
-	history.replaceState(null, '', `${location.pathname}?${data[1]}`);
+	history.replaceState(null, '', `${location.pathname}${data[1] ? `?${data[1]}` : ''}`);
 }
 
 function saveStateOnVisibilitychange() {

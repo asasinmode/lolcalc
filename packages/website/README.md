@@ -198,6 +198,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 #### misc pages
 
+https://nuxt.com/docs/4.x/guide/going-further/features#multiapp
+
 - [ ] ornnaments stats + gold value
 - [ ] migrate senna souls
 - [ ] wave gold/xp at minute
