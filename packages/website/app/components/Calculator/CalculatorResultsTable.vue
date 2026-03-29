@@ -43,8 +43,9 @@ const resultColumns = ref<IDamageResultTableColumn[]>(import.meta.dev
 const resultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'stats',
+		championOrItemId: 'stats',
 		name: 'stats',
-		additionalId: 'all',
+		type: 'all',
 		isPermanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
 		imageSize: 32,
@@ -73,8 +74,9 @@ const resultSections = ref<IDamageResultTableSection[]>([
 	},
 	{
 		id: 'basicAttack',
+		championOrItemId: 'basicAttack',
 		name: 'basic attack',
-		additionalId: 'all',
+		type: 'all',
 		isPermanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
 		imageSize: 32,
@@ -150,15 +152,15 @@ interface IDamageSectionOption {
 	optionId: string;
 	optionName: string;
 	abilities: {
-		id: string;
-		championOrItemId: string;
 		name: string;
+		championOrItemId: string;
 		abilityKey?: IChampionAbilityKey;
+		abilityVariant?: number;
 	}[];
 }
 
-/** array containing `boolean` of whether a section is implemented or not */
-const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || section.additionalId === 'all' || section.additionalId === 'item'));
+/** array containing `boolean` of whether a section is implemented or not, used for `enableUnimplementedUi` */
+const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || section.type === 'all' || section.type === 'item'));
 
 const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 	const options: IDamageSectionOption[] = props.damageSources
@@ -184,13 +186,15 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 						);
 
 						return {
-							id: `${source.champion.value!.id}-${abilityKey}`,
 							championOrItemId: source.champion.value!.id,
 							abilityKey: abilityKey as IChampionAbilityKey,
+							abilityVariant: 0,
 							name: championAbilitySectionName(source.champion.value!.name, abilityKey as IChampionAbilityKey, nameReplaced),
 						};
 					})
-					.filter(ability => !resultSections.value.some(section => section.id === ability.id)),
+					.filter(ability => !resultSections.value.some(section =>
+						section.championOrItemId === ability.championOrItemId && section.abilityKey === ability.abilityKey && section.abilityVariant === ability.abilityVariant),
+					),
 			} satisfies IDamageSectionOption;
 		})
 		.concat();
@@ -209,11 +213,10 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 			const item = items[itemId!]!;
 
 			return {
-				id: itemId!,
-				championOrItemId: itemId!,
 				name: item.name,
+				championOrItemId: itemId!,
 			};
-		}).filter(ability => !resultSections.value.some(section => section.id === ability.id)).toArray(),
+		}).filter(ability => !resultSections.value.some(section => section.championOrItemId === ability.championOrItemId)).toArray(),
 	});
 
 	return options.filter(option => option.abilities.length);
@@ -277,13 +280,13 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		isUnknown: false,
 	};
 
-	if (!source || (!source.listedChampion.value && section.additionalId !== 'item')) {
+	if (!source || (!source.listedChampion.value && section.type !== 'item')) {
 		rv.value = '-';
 	} else if (source.listedChampion.value && source.listedChampion.value.id !== source.champion.value?.id) {
 		rv.value = 'loading...';
 	} else if (
-		(section.additionalId !== 'all' && section.additionalId !== 'item' && source.champion.value?.id !== section.additionalId)
-		|| (source.champion.value?.id === 'Zeri' && section.id === 'basicAttack')
+		(section.type === 'champion' && source.champion.value?.id !== section.championOrItemId)
+		|| (section.id === 'basicAttack' && source.champion.value?.id === 'Zeri')
 	) {
 		rv.value = 'n/a';
 	} else {
@@ -410,18 +413,22 @@ function submitResultsSection(event: SubmitEvent) {
 function addResultSectionOption(optionIndex: number, abilityIndex: number) {
 	const option = damageSectionOptions.value[optionIndex]!;
 	const ability = option.abilities[abilityIndex]!;
-	return addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey);
+	return addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey, ability.abilityVariant, ability.name);
 }
 
 async function addResultsSection(
 	type: IDamageSectionOption['type'],
 	championOrItemId: string,
 	abilityKey?: IChampionAbilityKey,
+	abilityVariant?: number,
 	name = '',
 ) {
 	const section = {
-		id: `${championOrItemId}${abilityKey}`,
-		additionalId: 'all',
+		id: `${championOrItemId}-${abilityKey ?? ''}-${abilityVariant ?? ''}`,
+		championOrItemId,
+		abilityKey,
+		abilityVariant,
+		type,
 		name,
 		image: '',
 		imageSize: 64,
@@ -430,9 +437,8 @@ async function addResultsSection(
 
 	if (type === 'champion') {
 		const champion = await useChampion(championOrItemId);
-		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, 0, undefined, undefined, { replaceWithName: true });
+		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariant!, undefined, undefined, { replaceWithName: true });
 
-		section.additionalId = champion.id;
 		section.name ||= championAbilitySectionName(champion.name, abilityKey!, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
 		section.imageSize = abilityImageSize(champion.id);
@@ -441,7 +447,7 @@ async function addResultsSection(
 			group: `${sourceProperty.value}s`,
 			championId: champion.id,
 			abilityKey,
-			abilityVariant: 0,
+			abilityVariant,
 			precomputedDescription,
 		};
 		section.getCellValue = abilityVariableCellValue;
@@ -451,7 +457,6 @@ async function addResultsSection(
 		// TODO try to filter out non simple variables? Like ones that aren't 5 flat damage to BonusDamageToMinions? only ones that are calculated?
 		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true });
 
-		section.additionalId = 'item';
 		section.name ||= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.image = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`;
@@ -617,10 +622,10 @@ const cleanableColumnsSections = computed<[
 	const sections = (resultSections.value
 		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
 		.filter(([, section]) =>
-			section.additionalId === 'item'
+			section.type === 'item'
 				? !resultColumns.value.some(column => column.source?.items.value.some(item => item?.id === section.id) || column.target?.items.value.some(item => item?.id === section.id))
-				: section.additionalId !== 'all' && !resultColumns.value.some(column =>
-					column.source?.listedChampion.value?.id === section.additionalId || column.target?.listedChampion.value?.id === section.additionalId,
+				: section.type === 'champion' && !resultColumns.value.some(column =>
+					column.source?.listedChampion.value?.id === section.championOrItemId || column.target?.listedChampion.value?.id === section.championOrItemId,
 				));
 
 	return [columns, sections];
@@ -1240,11 +1245,11 @@ defineExpose({ resultColumns, resultSections, flipResults });
 							>
 							<span>{{ section.name }}</span>
 							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
-								<div v-if="section.additionalId === 'item'" popover="hint" class="hover-tooltip champion-item">
+								<div v-if="section.type === 'item'" popover="hint" class="hover-tooltip champion-item">
 									<ItemDescription v-bind="section.hoverTooltipData as any" />
 								</div>
 								<LolChampionAbilityHoverTooltip
-									v-else-if="section.additionalId !== 'all'"
+									v-else-if="section.type !== 'all'"
 									v-bind="section.hoverTooltipData as any"
 								/>
 							</template>
@@ -1347,7 +1352,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
 								<option
 									v-for="(ability, abilityIndex) in option.abilities"
-									:key="ability.id"
+									:key="`${ability.championOrItemId}-${ability.abilityKey}-${ability.abilityVariant}`"
 									:value="`${optionIndex}-${abilityIndex}`"
 									:disabled="enableUnimplementedUi ? undefined : option.optionId !== 'items'"
 								>

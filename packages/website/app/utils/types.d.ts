@@ -44,8 +44,13 @@ export type IPossibleDynamicValues = Partial<Record<'all' | IChampionAbilityKey,
 export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVariables?: (damageSource: DamageSource) => any }>;
 
 export interface IDamageResultTableSection {
+	/** `${championOrItemId}-${abilityKey}-${abilityVariant}` */
 	id: string;
-	additionalId: IChampionId | 'all' | 'item';
+	/** freestyled for `type: 'all'` sections */
+	championOrItemId: string;
+	abilityKey?: IChampionAbilityKey;
+	abilityVariant?: number;
+	type: 'all' | 'champion' | 'item';
 	/** stats and basic attack cannot be removed */
 	isPermanent?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
