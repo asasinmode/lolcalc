@@ -484,7 +484,7 @@ function setLocalMirrorLayout() {
 					--at-apply: 'grid-center h-18';
 
 					> button {
-						--at-apply: 'p-1';
+						--at-apply: 'py-1 px-2';
 					}
 				}
 			}

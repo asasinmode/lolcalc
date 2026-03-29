@@ -16,7 +16,7 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
-const resultColumns = ref<IDamageResultTableColumn[]>([]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
 const resultSections = ref<IDamageResultTableSection[]>([
 	{
 		id: 'stats',
@@ -97,11 +97,6 @@ const sourceProperty = computed(() => flipResults.value ? 'target' : 'source');
 const targetProperty = computed(() => flipResults.value ? 'source' : 'target');
 
 const highlightedColumnId = ref<string>();
-
-const columnNewSourceId = ref<string>();
-const columnNewTargetId = ref<string>();
-const columnNewSource = computed(() => columnNewSourceId.value ? props.damageSources.find(source => source.id === columnNewSourceId.value) : undefined);
-const columnNewTarget = computed(() => columnNewTargetId.value ? props.damageTargets.find(source => source.id === columnNewTargetId.value) : undefined);
 
 function columnOptions(from: DamageSource[]): [string, string][] {
 	return from.map((source, i) => [source.id, `(${i + 1}) ${source.listedChampion.value?.name || '<empty>'}`]);
@@ -282,12 +277,8 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 function addResultsColumn() {
 	const column: IDamageResultTableColumn = {
 		id: crypto.randomUUID(),
-		source: props.damageSources.find(damageSource => damageSource.id === columnNewSourceId.value!),
-		target: props.damageTargets.find(damageSource => damageSource.id === columnNewTargetId.value),
 	};
 	resultColumns.value.push(column);
-	columnNewSourceId.value = undefined;
-	columnNewTargetId.value = undefined;
 	addComputedColumn(column);
 }
 
@@ -592,9 +583,10 @@ const cleanableColumnsSections = computed<[
 	[index: number, column: IDamageResultTableColumn][],
 	[index: number, section: IDamageResultTableSection][],
 ]>(() => {
+	const anyColumnFilled = resultColumns.value.some(column => column.source || column.target);
 	const columns = (resultColumns.value
 		.map((column, index) => [index, column]) as [number, IDamageResultTableColumn][])
-		.filter(([, column]) => !column.source && !column.target);
+		.filter(([index, column]) => (anyColumnFilled || index !== resultColumns.value.length - 1) && !column.source && !column.target);
 
 	const sections = (resultSections.value
 		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
@@ -938,70 +930,6 @@ defineExpose({ resultColumns, resultSections, flipResults });
 						{{ column.target && targetOptions.find(option => option[0] === column.target!.id)?.[1] || 'undefined target' }}
 					</span>
 				</th>
-				<td
-					width="120px"
-					rowspan="2"
-					:data-drop-direction="columnDragDropIndex === resultColumns.length ? 'before' : undefined"
-					:style="columnDamageSourcesColorStyles({ source: columnNewSource, target: columnNewTarget })"
-					@dragenter="onResultColumnDragenter($event, resultColumns.length)"
-					@dragover="onResultColumnDragover($event, resultColumns.length)"
-					@dragleave="onResultColumnDragleave"
-					@drop="onResultColumnDrop($event, resultColumns.length)"
-				>
-					<span>configure new column</span>
-					<form @submit.prevent="addResultsColumn">
-						<VSelect
-							id="results-table-column-source"
-							v-model="columnNewSourceId"
-							label="column's damage source"
-							:options="sourceOptions"
-							clearable
-						>
-							<img
-								v-if="columnNewSource"
-								:src="championImage(columnNewSource.listedChampion.value!.image, columnNewSource.listedChampion.value!.id)"
-								loading="lazy"
-								:width="championImageSize(columnNewSource.listedChampion.value!.id)"
-								:height="championImageSize(columnNewSource.listedChampion.value!.id)"
-								style="--focus-brightness: 1.2"
-							>
-							<img
-								v-else
-								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-								width="256"
-								height="256"
-								style="--focus-brightness: 1.5"
-							>
-						</VSelect>
-						<span>vs</span>
-						<VSelect
-							id="results-table-column-target"
-							v-model="columnNewTargetId"
-							label="column's damage target"
-							:options="targetOptions"
-							clearable
-						>
-							<img
-								v-if="columnNewTarget"
-								:src="championImage(columnNewTarget.listedChampion.value!.image, columnNewTarget.listedChampion.value!.id)"
-								loading="lazy"
-								:width="championImageSize(columnNewTarget.listedChampion.value!.id)"
-								:height="championImageSize(columnNewTarget.listedChampion.value!.id)"
-								style="--focus-brightness: 1.2"
-							>
-							<img
-								v-else
-								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-								width="256"
-								height="256"
-								style="--focus-brightness: 1.5"
-							>
-						</VSelect>
-						<button class="pretend-ui-button" type="submit">
-							add
-						</button>
-					</form>
-				</td>
 			</tr>
 			<tr>
 				<td width="240px" colspan="2">
@@ -1089,40 +1017,45 @@ defineExpose({ resultColumns, resultSections, flipResults });
 								style="--focus-brightness: 1.5"
 							>
 						</VSelect>
-						<button
-							title="move left, alt+click to duplicate to the left"
-							class="pretend-ui-button"
-							:disabled="index === 0"
-							draggable="true"
-							@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
-							@dragstart="startResultColumnDrag(index, $event)"
-							@dragend="endResultColumnDrag"
-						>
-							<span>move left, alt+click to duplicate to the left</span>
-							<Icon class="i-ph:arrow-left" />
+						<button v-if="index === resultColumns.length - 1" class="pretend-ui-button" @click="addResultsColumn">
+							add another
 						</button>
-						<button
-							title="remove"
-							class="pretend-ui-button"
-							@click="removeResultsColumn(index)"
-						>
-							<span>
-								remove
-							</span>
-							<Icon class="i-ph:trash" />
-						</button>
-						<button
-							title="move right, alt+click to duplicate to the right"
-							class="pretend-ui-button"
-							draggable="true"
-							:disabled="index === (resultColumns.length - 1)"
-							@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
-							@dragstart="startResultColumnDrag(index, $event)"
-							@dragend="endResultColumnDrag"
-						>
-							<span>move right, alt+click to duplicate to the right</span>
-							<Icon class="i-ph:arrow-right" />
-						</button>
+						<template v-else>
+							<button
+								title="move left, alt+click to duplicate to the left"
+								class="pretend-ui-button"
+								:disabled="index === 0"
+								draggable="true"
+								@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+								@dragstart="startResultColumnDrag(index, $event)"
+								@dragend="endResultColumnDrag"
+							>
+								<span>move left, alt+click to duplicate to the left</span>
+								<Icon class="i-ph:arrow-left" />
+							</button>
+							<button
+								title="remove"
+								class="pretend-ui-button"
+								@click="removeResultsColumn(index)"
+							>
+								<span>
+									remove
+								</span>
+								<Icon class="i-ph:trash" />
+							</button>
+							<button
+								title="move right, alt+click to duplicate to the right"
+								class="pretend-ui-button"
+								draggable="true"
+								:disabled="index === (resultColumns.length - 1)"
+								@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
+								@dragstart="startResultColumnDrag(index, $event)"
+								@dragend="endResultColumnDrag"
+							>
+								<span>move right, alt+click to duplicate to the right</span>
+								<Icon class="i-ph:arrow-right" />
+							</button>
+						</template>
 						<button
 							class="pretend-ui-button"
 							:disabled="columnAddableOptions[index]?.championOptionIndex === undefined"
@@ -1211,7 +1144,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 					<th
 						:id="`results-table-section-header-${section.id}`"
 						scope="colgroup"
-						:colspan="resultColumns.length + 2"
+						:colspan="1 + resultColumns.length"
 					>
 						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event)">
 							<img
@@ -1259,7 +1192,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 				@drop="onResultSectionDrop($event, index, false)"
 			>
 				<tr v-if="!implementedDamageSectionsMap[index]" class="unimplemented-row">
-					<td :colspan="3 + resultColumns.length">
+					<td :colspan="2 + resultColumns.length">
 						<ComingSoonCover feature="champion abilities" class="text-neutral-400" />
 					</td>
 				</tr>
@@ -1298,15 +1231,6 @@ defineExpose({ resultColumns, resultSections, flipResults });
 					>
 						<span>{{ cell.computedColumn.value }}</span>
 					</td>
-					<td
-						:data-drop-direction="columnDragDropIndex === resultColumns.length ? 'before' : undefined"
-						@dragenter="onResultColumnDragenter($event, resultColumns.length)"
-						@dragover="onResultColumnDragover($event, resultColumns.length)"
-						@dragleave="onResultColumnDragleave"
-						@drop="onResultColumnDrop($event, resultColumns.length)"
-					>
-						-
-					</td>
 				</tr>
 			</tbody>
 		</template>
@@ -1318,7 +1242,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 			@drop="onResultSectionDrop($event, resultSections.length)"
 		>
 			<tr>
-				<td :colspan="resultColumns.length + 2">
+				<td :colspan="1 + resultColumns.length">
 					<form @submit.prevent="submitResultsSection">
 						<label for="results-table-row-new-section-ability">add section</label>
 						<select
@@ -1386,21 +1310,19 @@ defineExpose({ resultColumns, resultSections, flipResults });
 		> thead {
 			--at-apply: 'sticky top-0 z-5';
 
-			> tr:nth-child(1) {
-				> th > * {
-					--at-apply: 'sr-only';
-				}
+			> tr:nth-child(1) > th > * {
+				--at-apply: 'sr-only';
+			}
 
-				> td > span:first-child {
-					--at-apply: 'sr-only';
-				}
+			> tr:nth-child(2) {
+				--at-apply: 'min-h-px h-full';
 			}
 
 			> tr:nth-child(2) > td:first-child {
-				--at-apply: 'ps-3 pb-3 bg-[--bg-clr] min-h-px text-start align-top';
+				--at-apply: 'ps-3 pb-3 bg-[--bg-clr] min-h-px h-inherit text-start align-top';
 
 				> div {
-					--at-apply: 'inline-flex flex-col items-start';
+					--at-apply: 'flex flex-col items-start h-full';
 
 					> label {
 						--at-apply: '';
@@ -1416,7 +1338,6 @@ defineExpose({ resultColumns, resultSections, flipResults });
 				}
 			}
 
-			> tr:nth-child(1) > td,
 			> tr:nth-child(2) > td:not(:first-child) {
 				--at-apply: 'pb-[--header-row-pb] bg-[--bg-clr] align-top';
 
@@ -1429,7 +1350,6 @@ defineExpose({ resultColumns, resultSections, flipResults });
 					--at-apply: 'end-0.25 start-auto rotate-90';
 				}
 
-				> form,
 				> div {
 					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--control-button-size)_1fr]';
 					grid-template-areas:
@@ -1487,18 +1407,32 @@ defineExpose({ resultColumns, resultSections, flipResults });
 						grid-area: vs;
 					}
 
-					> button:nth-of-type(-n + 3):not(:last-child) {
-						--at-apply: 'size-[--control-button-size]';
+					> button {
+						&:nth-last-of-type(2) {
+							grid-area: add-abilities;
+						}
 
-						> span:nth-child(2) {
-							--at-apply: 'size-5';
+						&:nth-last-of-type(1) {
+							grid-area: add-items;
+						}
+
+						&:nth-last-of-type(-n + 2) {
+							--at-apply: 'mx-2 h-[--control-button-size] leading-5';
 						}
 					}
 				}
 
-				> div {
+				&:not(:last-child) > div {
 					> button {
 						--at-apply: 'grid place-items-center self-center';
+
+						&:nth-of-type(-n + 3):not(:last-child) {
+							--at-apply: 'size-[--control-button-size]';
+
+							> span:nth-child(2) {
+								--at-apply: 'size-5';
+							}
+						}
 
 						&:nth-of-type(1) {
 							--at-apply: 'justify-self-end';
@@ -1514,26 +1448,14 @@ defineExpose({ resultColumns, resultSections, flipResults });
 							grid-area: move-right;
 						}
 
-						&:nth-of-type(n + 4) {
-							--at-apply: 'mx-2 h-[--control-button-size] leading-5';
-						}
-
-						&:nth-of-type(4) {
-							grid-area: add-abilities;
-						}
-
-						&:nth-of-type(5) {
-							grid-area: add-items;
-						}
-
 						> span:nth-child(1) {
 							--at-apply: 'sr-only';
 						}
 					}
 				}
 
-				> form {
-					> button {
+				&:last-child > div {
+					> button:first-of-type {
 						--at-apply: 'w-auto px-1 justify-self-center h-[--control-button-size] leading-5';
 						grid-area: 1 / 1 / 2 / 4;
 					}
@@ -1614,7 +1536,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 							--at-apply: 'b-[--ui-button-border-clr]';
 						}
 
-						> td:not(.irrelevant, :last-child) {
+						> td:not(.irrelevant) {
 							&.higher {
 								--at-apply: 'text-green-400';
 
@@ -1659,7 +1581,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 					> td {
 						--at-apply: 'px-3';
 
-						&:is(.irrelevant, :last-child) {
+						&.irrelevant {
 							--at-apply: 'text-neutral-500';
 						}
 
@@ -1684,7 +1606,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 		}
 
 		> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
-		> tbody[aria-labelledby] > tr > td:not(:last-child).highlighted {
+		> tbody[aria-labelledby] > tr > td.highlighted {
 			background-image: linear-gradient(
 				to right,
 				oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.1),
@@ -1761,23 +1683,20 @@ defineExpose({ resultColumns, resultSections, flipResults });
 @layer overrides {
 	#results-table {
 		&[data-flip-results] {
-			> thead {
-				> tr:nth-child(1) > td > form,
-				> tr:nth-child(2) > td:not(:first-child) > div {
-					.v-select {
-						--at-apply: 'justify-self-start';
-						grid-area: target;
+			> thead > tr:nth-child(2) > td:not(:first-child) > div {
+				.v-select {
+					--at-apply: 'justify-self-start';
+					grid-area: target;
 
-						&:nth-of-type(2) {
-							--at-apply: 'justify-self-end';
-							grid-area: source;
-						}
+					&:nth-of-type(2) {
+						--at-apply: 'justify-self-end';
+						grid-area: source;
 					}
 				}
 			}
 
 			> thead > tr:nth-child(2) > td:nth-child(n + 2).highlighted,
-			> tbody[aria-labelledby] > tr > td:not(:last-child).highlighted {
+			> tbody[aria-labelledby] > tr > td.highlighted {
 				--source-clr: var(--col-damage-target-clr, white);
 				--target-clr: var(--col-damage-source-clr, white);
 			}
