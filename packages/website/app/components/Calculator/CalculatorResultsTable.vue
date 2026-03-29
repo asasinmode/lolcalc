@@ -1325,7 +1325,11 @@ defineExpose({ resultColumns, resultSections, flipResults });
 							id="results-table-row-new-section-ability"
 							name="sectionOptionIndex"
 							required
+							:disabled="!damageSectionOptions.length"
 						>
+							<option v-if="!damageSectionOptions.length">
+								no options left
+							</option>
 							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
 								<option
 									v-for="(ability, abilityIndex) in option.abilities"
@@ -1739,7 +1743,11 @@ defineExpose({ resultColumns, resultSections, flipResults });
 				}
 
 				> select {
-					--at-apply: 'w-64';
+					--at-apply: 'w-64 px-1';
+
+					&:disabled {
+						--at-apply: 'text-neutral-400';
+					}
 				}
 
 				> button {
