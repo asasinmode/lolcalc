@@ -92,11 +92,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
-	}) | string = {}) {
-		if (typeof overrides === 'string') {
-			overrides = DamageSource.parseStringifiedData(overrides);
-		}
-
+	}) = {}) {
 		const counter = useState<number>('damageSourceCounter', () => 0);
 		/* + 1 because it's a nicer color */
 		const hue = ((counter.value++ + 1) * 137.508) % 360;
@@ -167,6 +163,16 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			watch(this.roleQuest, (value) => {
 				if (value !== 'top' && this.level.value > 18) {
 					this.level.value = 18;
+				}
+
+			watch(this.isRanged, (value) => {
+				if (!value) {
+					for (let i = 0; i < this.items.value.length; i++) {
+						const item = this.items.value[i];
+						if (item && RANGED_ONLY_ITEM_IDS.includes(item.id)) {
+							this.items.value[i] = undefined;
+						}
+					}
 				}
 			}),
 		];
@@ -254,13 +260,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		});
 		const secondarySlots = this.runes.value.paths.secondary
 			? Array.from({ length: 2 }, (_, i) => {
-					if (!this.runes.value.paths.secondarySlots[i]) {
-						return '';
+					if (this.runes.value.paths.secondarySlots[i]) {
+						const slotIndex = RUNE_SLOT_NAME_TO_NUMBER[this.runes.value.paths.secondarySlots[i]];
+						const slotOptions = runes.paths[this.runes.value.paths.secondary!].slots[slotIndex]!;
+						return `${i}${objectKeyIndex(this.runes.value.paths.secondarySlots[i], slotOptions)}`;
 					}
 
-					const slotIndex = RUNE_SLOT_NAME_TO_NUMBER[this.runes.value.paths.secondarySlots[i]];
-					const slotOptions = runes.paths[this.runes.value.paths.secondary!].slots[slotIndex]!;
-					return `${i}${objectKeyIndex(this.runes.value.paths.secondarySlots[i], slotOptions)}`;
+					return '';
 				})
 			: [];
 		const shards = Object.entries(this.runes.value.shards).map(([key, shard]) => objectKeyIndex(shard as any, runes.shards[key as IRuneShardSlotName]));

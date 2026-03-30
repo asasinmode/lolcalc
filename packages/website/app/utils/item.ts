@@ -173,7 +173,7 @@ export function consumeItemComponents(
 	return consumedInventoryIndexes;
 }
 
-const RANGED_ONLY_ITEM_IDS = [
+export const RANGED_ONLY_ITEM_IDS = [
 	'3085',	/* runaan's hurricane, has `mRequiredPurchaseIdentities	[ "Ranged" ]` but it's the only item like that so this should be fine */
 ];
 
