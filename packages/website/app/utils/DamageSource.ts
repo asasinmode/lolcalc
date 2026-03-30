@@ -17,7 +17,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
 }
 
-export class DamageSource<Id extends IChampionId | undefined = undefined> {
+export class DamageSource<Id extends IChampionId | undefined = any> {
 	id: string;
 	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
@@ -88,9 +88,14 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 		: undefined>;
 	watchHandles: WatchHandle[];
 
-	constructor(overrides: Partial<Omit<IOverrides<Id>, 'champion'>> & {
+	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
-	} = {}) {
+	}) | string = {}) {
+		if (typeof overrides === 'string') {
+			overrides = DamageSource.parseStringifiedData(overrides);
+		}
+		console.log('constructoring', overrides);
+
 		const counter = useState<number>('damageSourceCounter', () => 0);
 		/* + 1 because it's a nicer color */
 		const hue = ((counter.value++ + 1) * 137.508) % 360;
@@ -278,6 +283,14 @@ export class DamageSource<Id extends IChampionId | undefined = undefined> {
 
 		return data.join('_');
 	});
+
+	static parseStringifiedData(data: string): Partial<IOverrides> {
+		const overrides: Partial<IOverrides> = {};
+
+		console.log('parsing', data);
+
+		return overrides;
+	}
 
 	// TODO role quest handle boots?
 	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {

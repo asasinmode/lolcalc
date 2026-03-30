@@ -5,7 +5,7 @@ import { CHAMPION_COMPONENTS } from '~/components/Champion';
 
 const props = defineProps<{
 	index: number;
-	value: DamageSource<any>;
+	value: DamageSource;
 	/** side of the scoreboard it's on, left (damage sources) by default */
 	isRight?: boolean;
 	canRemove?: boolean;

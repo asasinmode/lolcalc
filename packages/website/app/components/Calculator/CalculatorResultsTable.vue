@@ -10,7 +10,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
 	configurationChanged: [];
-}>()
+}>();
 
 const text = useText();
 const items = useItems();

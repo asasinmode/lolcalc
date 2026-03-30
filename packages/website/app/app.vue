@@ -23,12 +23,12 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 
 _setupGlobalKeyModifiers();
 
-const damageSources = ref<DamageSource<any>[]>([
+const damageSources = ref<DamageSource[]>([
 	markRaw(new DamageSource()),
-]) as unknown as ShallowRef<DamageSource<any>[]>;
-const damageTargets = ref<DamageSource<any>[]>([
+]) as unknown as ShallowRef<DamageSource[]>;
+const damageTargets = ref<DamageSource[]>([
 	markRaw(new DamageSource()),
-]) as unknown as ShallowRef<DamageSource<any>[]>;
+]) as unknown as ShallowRef<DamageSource[]>;
 
 const showResults = ref(false);
 const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
@@ -40,13 +40,17 @@ const unwatchShowResults = watch(() => damageSources.value.some(source => source
 
 const resultsTable = useTemplateRef('resultsTable');
 
-// TODO read data from query/local storage
-const { calculatorStateString } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
+const {
+	saveState,
+	restoreState,
+	debouncedSaveState,
+	isStateTooLargeForQuery,
+} = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
+
+restoreState();
 
 const hasCopiedShareLink = ref(false);
-const isStateTooLargeForQuery = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
-let saveStateDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
 function copyShareLink() {
 	hasCopiedShareLink.value = true;
@@ -61,24 +65,6 @@ function showSharePopover() {
 function hideSharePopover() {
 	hasCopiedShareLink.value = false;
 	shareTextPopover.value?.hidePopover();
-}
-
-function saveState() {
-	if (saveStateDebounceTimeout) {
-		clearTimeout(saveStateDebounceTimeout);
-		saveStateDebounceTimeout = undefined;
-	}
-	const data = calculatorStateString();
-	sessionStorage.setItem('localc-calculator-state', data[0]);
-	history.replaceState(null, '', `${location.pathname}${data[1] ? `?${data[1]}` : ''}`);
-}
-
-function debouncedSaveState() {
-	if (saveStateDebounceTimeout) {
-		clearTimeout(saveStateDebounceTimeout);
-		saveStateDebounceTimeout = undefined;
-	}
-	saveStateDebounceTimeout = setTimeout(saveState, 500);
 }
 
 function saveStateOnVisibilitychange() {

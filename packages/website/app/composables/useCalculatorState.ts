@@ -1,11 +1,36 @@
 import type { CalculatorResultsTable } from '#components';
 import type { ShallowRef } from 'vue';
 
+const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
+
 export function useCalculatorState(
 	damageSources: ShallowRef<DamageSource[]>,
 	damageTargets: ShallowRef<DamageSource[]>,
-	resultsTable: ShallowRef<InstanceType<typeof CalculatorResultsTable>>,
+	resultsTable: ShallowRef<InstanceType<typeof CalculatorResultsTable> | undefined>,
 ) {
+	const isStateTooLargeForQuery = ref(false);
+	let saveStateDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
+
+	function saveState() {
+		console.log('saving state');
+		if (saveStateDebounceTimeout) {
+			clearTimeout(saveStateDebounceTimeout);
+			saveStateDebounceTimeout = undefined;
+		}
+		const data = calculatorStateString();
+		sessionStorage.setItem(STATE_SESSION_STORAGE_KEY, data[0]);
+		window?.history.replaceState(null, '', `${location.pathname}${data[1] ? `?${data[1]}` : ''}`);
+		isStateTooLargeForQuery.value = data[1].length !== data[0].length;
+	}
+
+	function debouncedSaveState() {
+		if (saveStateDebounceTimeout) {
+			clearTimeout(saveStateDebounceTimeout);
+			saveStateDebounceTimeout = undefined;
+		}
+		saveStateDebounceTimeout = setTimeout(saveState, 500);
+	}
+
 	const damageSourcesState = computed<[state: string, sourceIndex: number][]>(() => {
 		const rv: [string, number][] = [];
 		for (let i = 0; i < damageSources.value.length; i++) {
@@ -58,7 +83,7 @@ export function useCalculatorState(
 			querySavedHighestTargetIndex = i;
 		}
 
-		const tableResultsStr = resultsTable.value.flipResults ? `&flpTbl=` : '';
+		const tableResultsStr = resultsTable.value?.flipResults ? `&flpTbl=` : '';
 		wholeState += tableResultsStr;
 		if (queryState.length + tableResultsStr.length <= MAX_QUERY_STATE_STRING_LENGTH) {
 			queryState += tableResultsStr;
@@ -66,7 +91,7 @@ export function useCalculatorState(
 
 		const querySavedChampionIds = new Set<string>();
 		const querySavedItemIds = new Set<string>();
-		for (const column of resultsTable.value.resultColumns) {
+		for (const column of resultsTable.value?.resultColumns || []) {
 			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
 			const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
 			if ((~columnSourceIndex && columnSourceIndex <= querySavedHighestSourceIndex)
@@ -100,7 +125,7 @@ export function useCalculatorState(
 			}
 		}
 
-		for (const section of resultsTable.value.resultSections) {
+		for (const section of resultsTable.value?.resultSections || []) {
 			if (section.isPermanent) {
 				continue;
 			}
@@ -122,5 +147,21 @@ export function useCalculatorState(
 		return [wholeState, queryState];
 	}
 
-	return { calculatorStateString };
+	function restoreState() {
+		if (!import.meta.client) {
+			return;
+		}
+		console.log('restoring state');
+
+		const stateString: string | undefined = sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || window?.location.search;
+		const params = new URLSearchParams(stateString);
+
+		const savedSources = params.getAll('src');
+
+		if (savedSources.length) {
+			damageSources.value = savedSources.map(data => new DamageSource(data));
+		}
+	}
+
+	return { saveState, debouncedSaveState, restoreState, isStateTooLargeForQuery };
 }
