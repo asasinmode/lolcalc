@@ -165,6 +165,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] service worker for caching cdragon images
 - [ ] future features in github project page thingy?
 - [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
+- [ ] consider used images "locally"
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 

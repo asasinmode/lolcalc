@@ -661,12 +661,17 @@ defineExpose({
 				header-tag="h2"
 				description-class="order-6"
 			/>
-			<button
-				:disabled="selectedItem?.buyability !== 1"
-				@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
-			>
-				{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
-			</button>
+			<ClientOnly>
+				<button
+					:disabled="selectedItem?.buyability !== 1"
+					@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
+				>
+					{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
+				</button>
+				<template #fallback>
+					<button>purchase</button>
+				</template>
+			</ClientOnly>
 			<h3 class="order-1">
 				Builds into
 			</h3>
@@ -1374,7 +1379,7 @@ defineExpose({
 		> section:nth-of-type(3) > button,
 		> footer > button {
 			&:disabled {
-					--at-apply: 'b-neutral-500 text-neutral-400 bg-neutral-800 hoverable:bg-neutral-800';
+				--at-apply: 'b-neutral-500 text-neutral-400 bg-neutral-800 hoverable:bg-neutral-800';
 			}
 		}
 	}

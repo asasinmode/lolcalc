@@ -36,7 +36,11 @@ const {
 	isStateTooLargeForQuery,
 } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
-restoreState();
+if (import.meta.dev) {
+	onMounted(restoreState);
+} else {
+	restoreState();
+}
 
 const showResults = ref(damageSources.value.some(source => source.anythingFilled.value));
 if (!showResults.value) {

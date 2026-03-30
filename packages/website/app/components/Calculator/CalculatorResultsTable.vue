@@ -1258,33 +1258,49 @@ defineExpose({ resultColumns, resultSections, flipResults });
 				<td :colspan="1 + resultColumns.length">
 					<form @submit.prevent="submitResultsSection">
 						<label for="results-table-row-new-section-ability">add section</label>
-						<select
-							id="results-table-row-new-section-ability"
-							name="sectionOptionIndex"
-							required
-							:disabled="!damageSectionOptions.length"
-						>
-							<option v-if="!damageSectionOptions.length">
-								no options left
-							</option>
-							<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
-								<option
-									v-for="(ability, abilityIndex) in option.abilities"
-									:key="`${ability.championOrItemId}-${ability.abilityKey}-${ability.abilityVariant}`"
-									:value="`${optionIndex}-${abilityIndex}`"
-									:disabled="enableUnimplementedUi ? undefined : option.optionId !== 'items'"
-								>
-									{{ ability.name }}
+						<ClientOnly>
+							<select
+								id="results-table-row-new-section-ability"
+								name="sectionOptionIndex"
+								required
+								:disabled="!damageSectionOptions.length"
+							>
+								<option v-if="!damageSectionOptions.length">
+									no options left
 								</option>
-							</optgroup>
-						</select>
-						<button
-							class="pretend-ui-button"
-							type="submit"
-							:disabled="!damageSectionOptions.length || !enableUnimplementedUi && !damageSectionOptions.some(option => option.type === 'item')"
-						>
-							add
-						</button>
+								<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
+									<option
+										v-for="(ability, abilityIndex) in option.abilities"
+										:key="`${ability.championOrItemId}-${ability.abilityKey}-${ability.abilityVariant}`"
+										:value="`${optionIndex}-${abilityIndex}`"
+										:disabled="enableUnimplementedUi ? undefined : option.optionId !== 'items'"
+									>
+										{{ ability.name }}
+									</option>
+								</optgroup>
+							</select>
+							<button
+								class="pretend-ui-button"
+								type="submit"
+								:disabled="!damageSectionOptions.length || !enableUnimplementedUi && !damageSectionOptions.some(option => option.type === 'item')"
+							>
+								add
+							</button>
+							<template #fallback>
+								<select
+									id="results-table-row-new-section-ability"
+									name="sectionOptionIndex"
+									required
+								>
+									<option>
+										no options left
+									</option>
+								</select>
+								<button class="pretend-ui-button" type="submit">
+									add
+								</button>
+							</template>
+						</ClientOnly>
 					</form>
 					<a href="#results-table-skip-rows" class="skip-link">
 						skip back to column headers
