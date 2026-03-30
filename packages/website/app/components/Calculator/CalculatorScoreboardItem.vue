@@ -874,12 +874,13 @@ defineExpose({ el });
 			>
 		</button>
 		<ul
+			:data-role-quest="value.roleQuest.value"
 			@dragenter="$emit('itemListDragenter', $event)"
 			@dragover="$emit('itemListDragover', $event)"
 			@dragleave="$emit('itemListDragleave', $event)"
 			@drop="$emit('itemListDrop', $event)"
 		>
-			<li v-for="i in 6" :key="i">
+			<li v-for="i in 7" :key="i">
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
@@ -1376,19 +1377,35 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'flex h-8 self-center relative me-3 w-min';
+			--at-apply: 'flex gap-0.5 h-[--item-size] self-center relative me-[--me] w-min';
 			grid-area: items;
 			anchor-name: --scoreboard-item-items;
+			--item-size: calc(8 * var(--spacing));
+			--me: calc(3 * var(--spacing));
 
 			> li {
-				--at-apply: 'me-0.5 last:me-0';
-
 				> * {
-					--at-apply: 'bg-black size-8 inline-block cursor-default';
+					--at-apply: 'bg-black size-[--item-size] inline-block cursor-default';
 
 					> span {
 						--at-apply: 'sr-only';
 					}
+
+					> img {
+						border-radius: inherit;
+					}
+				}
+
+				&:last-child > * {
+					--at-apply: 'rounded-1/2 size-7 m-0.5';
+				}
+			}
+
+			&:not([data-role-quest='bot']) {
+				--at-apply: 'me-[calc(var(--item-size)+var(--me))]';
+
+				> li:last-child {
+					--at-apply: 'hidden';
 				}
 			}
 

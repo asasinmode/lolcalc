@@ -158,7 +158,7 @@ export function useCalculatorState(
 		const savedSources = params.getAll('src');
 		if (savedSources.length) {
 			for (const data of savedSources) {
-				damageSources.value.push(markRaw(new DamageSource(data)));
+				damageSources.value.push(markRaw(DamageSource.fromStringifiedData(data)));
 			}
 		} else {
 			damageSources.value.push(markRaw(new DamageSource()));
@@ -167,7 +167,7 @@ export function useCalculatorState(
 		const savedTargets = params.getAll('tgt');
 		if (savedTargets.length) {
 			for (const data of savedTargets) {
-				damageTargets.value.push(markRaw(new DamageSource(data)));
+				damageTargets.value.push(markRaw(DamageSource.fromStringifiedData(data)));
 			}
 		} else {
 			damageTargets.value.push(markRaw(new DamageSource()));

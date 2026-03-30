@@ -824,7 +824,7 @@ defineExpose({
 				<Icon class="i-ph:caret-left-bold caret" />
 				<div>
 					<ul>
-						<li v-for="i in 6" :key="i">
+						<li v-for="i in damageSource?.roleQuest.value === 'bot' ? 7 : 6" :key="i">
 							<component
 								:is="targetShopItems[i - 1] ? 'button' : 'div'"
 								:class="targetShopItems[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
@@ -844,7 +844,7 @@ defineExpose({
 							</component>
 						</li>
 					</ul>
-					<div>
+					<div v-if="damageSource?.roleQuest.value !== 'bot'">
 						<span>ward slot (n/a)</span>
 					</div>
 					<img
@@ -1009,6 +1009,18 @@ defineExpose({
 
 							> span {
 								--at-apply: 'sr-only';
+							}
+						}
+
+						&:nth-child(7) {
+							--at-apply: 'absolute end-[--side-panel-inner-p] top-1/2 -translate-y-[calc(50%-var(--item-button-img-b-w))]';
+
+							> button {
+								--at-apply: 'rounded-1/2';
+
+								> img {
+									--at-apply: 'rounded-inherit';
+								}
 							}
 						}
 					}

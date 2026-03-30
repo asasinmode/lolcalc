@@ -160,10 +160,25 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				}
 			}),
 
-			watch(this.roleQuest, (value) => {
+			watch(this.roleQuest, (value, oldValue) => {
 				if (value !== 'top' && this.level.value > 18) {
 					this.level.value = 18;
 				}
+				if (value === 'bot') {
+					const bootsIndex = this.items.value.findIndex(item => item?.isBoots);
+					if (~bootsIndex) {
+						const boots = this.items.value[bootsIndex]!;
+						this.items.value[bootsIndex] = undefined;
+						this.items.value[6] = boots;
+					}
+				} else if (oldValue === 'bot' && this.items.value[6]?.isBoots) {
+					const firstEmptyIndex = this.items.value.indexOf(undefined);
+					if (~firstEmptyIndex) {
+						this.items.value[firstEmptyIndex] = this.items.value[6];
+						this.items.value[6] = undefined;
+					}
+				}
+			}),
 
 			watch(this.isRanged, (value) => {
 				if (!value) {
@@ -305,7 +320,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return overrides;
 	}
 
-	// TODO role quest handle boots?
 	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {
 		this.itemsUndoSnapshots.value.push([...this.items.value]);
 		if (consumeComponents) {
@@ -315,10 +329,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 		}
 
-		for (let i = 0; i < 6; i++) {
-			if (!this.items.value[i]) {
-				this.items.value[i] = markRaw(item);
-				break;
+		if (this.roleQuest.value === 'bot' && item.isBoots) {
+			this.items.value[6] = markRaw(item);
+		} else {
+			for (let i = 0; i < 6; i++) {
+				if (!this.items.value[i]) {
+					this.items.value[i] = markRaw(item);
+					break;
+				}
 			}
 		}
 
