@@ -38,13 +38,15 @@ const {
 
 restoreState();
 
-const showResults = ref(false);
-const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
-	if (anythingFilled) {
-		unwatchShowResults();
-		showResults.value = true;
-	}
-}, { immediate: true });
+const showResults = ref(damageSources.value.some(source => source.anythingFilled.value));
+if (!showResults.value) {
+	const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
+		if (anythingFilled) {
+			unwatchShowResults();
+			showResults.value = true;
+		}
+	}, { immediate: true });
+}
 
 const hasCopiedShareLink = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
