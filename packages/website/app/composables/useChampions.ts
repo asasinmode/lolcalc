@@ -5,6 +5,10 @@ export function useChampions(): IChampionData {
 	return data satisfies Record<IChampionId, IListedChampion<any>> as IChampionData;
 }
 
+export const CHAMPION_KEY_TO_ID: Record<string, IChampionId> = Object.fromEntries(
+	Object.entries(data).map(([id, { key }]) => [key, id as IChampionId]),
+);
+
 const championCache = new Map<IChampionId, IChampion>();
 
 export async function useChampion(id: string): Promise<IChampion> {

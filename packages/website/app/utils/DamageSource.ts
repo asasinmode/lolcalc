@@ -160,7 +160,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				}
 			}),
 
-			watch(this.roleQuest, (value, oldValue) => {
+			watch(this.roleQuest, (value) => {
 				if (value !== 'top' && this.level.value > 18) {
 					this.level.value = 18;
 				}
@@ -171,7 +171,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						this.items.value[bootsIndex] = undefined;
 						this.items.value[6] = boots;
 					}
-				} else if (oldValue === 'bot' && this.items.value[6]?.isBoots) {
+				} else if (this.items.value[6]?.isBoots) {
 					const firstEmptyIndex = this.items.value.indexOf(undefined);
 					if (~firstEmptyIndex) {
 						this.items.value[firstEmptyIndex] = this.items.value[6];
@@ -291,7 +291,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		const dragonKeys = Object.keys(text.dragons);
 
 		const data = [
-			this.champion.value?.key,
+			this.listedChampion.value?.key,
 			this.level.value,
 			this.items.value.map(item => item?.id).filter(Boolean).join('-'),
 			runePathKeys.indexOf(this.runes.value.paths.primary),
@@ -312,12 +312,56 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return data.join('_');
 	});
 
-	static parseStringifiedData(data: string): Partial<IOverrides> {
-		const overrides: Partial<IOverrides> = {};
+	static fromStringifiedData(data: string): DamageSource {
+		const champions = useChampions();
+		const items = useItems();
+		const runes = useRunes();
+		const text = useText();
 
-		console.log('parsing', data);
+		const rv = new DamageSource();
 
-		return overrides;
+		const	[
+			championKey,
+			rawLevel,
+			rawItemIds,
+
+			// runePathKeys.indexOf(this.runes.value.paths.primary),
+			// primarySlots.join('-'),
+			// this.runes.value.paths.secondary && runePathKeys.indexOf(this.runes.value.paths.secondary),
+			// secondarySlots.join('-'),
+			// shards.join('-'),
+			// this.currentHealth.value,
+			// this.currentAbilityResource.value,
+			// Object.values(this.abilityLevels.value).join('-'),
+			// Object.values(this.abilityVariants.value).join('-'),
+			// this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
+			// this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
+			// this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
+			// Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
+		] = data.split('_');
+
+		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
+			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
+		}
+
+		if (rawLevel) {
+			const level = Number.parseInt(rawLevel);
+			if (!Number.isNaN(level)) {
+				rv.level.value = Math.max(1, Math.min(rv.maxLevel.value, level));
+			}
+		}
+
+		const itemIds = rawItemIds?.split('-');
+		if (itemIds?.length) {
+			for (let i = 0; i < rv.items.value.length; i++) {
+				const item = items[itemIds[i]!];
+				if (item && itemBuyability(item, rv, items, false) === 1) {
+					rv.items.value[i] = markRaw(item);
+				}
+			}
+		}
+
+		return rv;
 	}
 
 	addItem(item: IItem, allItems: Record<string, IItem>, consumeComponents = true): undefined {
