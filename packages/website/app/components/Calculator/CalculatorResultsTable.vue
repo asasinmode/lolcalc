@@ -8,6 +8,10 @@ const props = defineProps<{
 	showResults: boolean;
 }>();
 
+const emit = defineEmits<{
+	configurationChanged: [];
+}>()
+
 const text = useText();
 const items = useItems();
 const { championImage, abilityImage, championImageSize, abilityImageSize } = useChampionImages();
@@ -116,6 +120,7 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 	recalculateColumn(column);
 
 	column[property] && highlightedDamageSources.add(column[property].id);
+	emit('configurationChanged');
 }
 
 interface IDamageSectionOption {
@@ -280,6 +285,7 @@ function addResultsColumn() {
 	};
 	resultColumns.value.push(column);
 	addComputedColumn(column);
+	emit('configurationChanged');
 }
 
 function addComputedColumn(column: IDamageResultTableColumn) {
@@ -376,6 +382,7 @@ function submitResultsSection(event: SubmitEvent) {
 	const [rawOptionIndex, rawAbilityIndex] = value.split('-');
 	(event.target as HTMLFormElement).reset();
 	addResultSectionOption(Number.parseInt(rawOptionIndex!), Number.parseInt(rawAbilityIndex!));
+	emit('configurationChanged');
 }
 
 function addResultSectionOption(optionIndex: number, abilityIndex: number) {
@@ -468,6 +475,7 @@ watch(
 );
 
 function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: string[] = []) {
+	emit('configurationChanged');
 	const addedIds = currIds.filter(id => !prevIds.includes(id));
 	const removedIds = prevIds.filter(id => !currIds.includes(id));
 
@@ -487,6 +495,7 @@ function handleSourceUpdate(target: DamageSource[], currIds: string[], prevIds: 
 	for (const id of addedIds) {
 		const source = (target.find(damageSource => damageSource.id === id))!;
 		damageSourceWatchers.set(source.id, watch(source.getWatchable(), () => {
+			emit('configurationChanged');
 			const columns = resultColumns.value.filter(column => column.source?.id === source.id || column.target?.id === source.id);
 			for (const column of columns) {
 				recalculateColumn(column);
@@ -520,6 +529,8 @@ function columnDamageSourcesColorStyles(column: Pick<IDamageResultTableColumn, '
 const columnDamageSourceColors = computed(() => resultColumns.value.map(column => columnDamageSourcesColorStyles(column)));
 
 function recalculateAllColumns() {
+	/* for now it's only called when `flipResults` is flipped */
+	emit('configurationChanged');
 	for (const column of resultColumns.value) {
 		for (const section of resultSections.value) {
 			for (const row of section.rows) {
@@ -885,6 +896,7 @@ async function addColumnAbilities(columnIndex: number) {
 			addResultSectionOption(championOptionIndex!, i);
 		}
 	}
+	emit('configurationChanged');
 }
 
 function addColumnItems(columnIndex: number) {
@@ -895,6 +907,7 @@ function addColumnItems(columnIndex: number) {
 			addResultSectionOption(damageSectionOptions.value.length - 1, i);
 		}
 	}
+	emit('configurationChanged');
 }
 
 defineExpose({ resultColumns, resultSections, flipResults });

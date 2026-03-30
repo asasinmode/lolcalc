@@ -40,14 +40,13 @@ const unwatchShowResults = watch(() => damageSources.value.some(source => source
 
 const resultsTable = useTemplateRef('resultsTable');
 
-// TODO update with debounce on data change
 // TODO read data from query/local storage
 const { calculatorStateString } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
 const hasCopiedShareLink = ref(false);
 const isStateTooLargeForQuery = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');
-let saveStateDebounceTimer: ReturnType<typeof setTimeout> | undefined;
+let saveStateDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
 function copyShareLink() {
 	hasCopiedShareLink.value = true;
@@ -65,13 +64,21 @@ function hideSharePopover() {
 }
 
 function saveState() {
-	const data = calculatorStateString();
-	if (saveStateDebounceTimer) {
-		clearTimeout(saveStateDebounceTimer);
-		saveStateDebounceTimer = undefined;
+	if (saveStateDebounceTimeout) {
+		clearTimeout(saveStateDebounceTimeout);
+		saveStateDebounceTimeout = undefined;
 	}
+	const data = calculatorStateString();
 	sessionStorage.setItem('localc-calculator-state', data[0]);
 	history.replaceState(null, '', `${location.pathname}${data[1] ? `?${data[1]}` : ''}`);
+}
+
+function debouncedSaveState() {
+	if (saveStateDebounceTimeout) {
+		clearTimeout(saveStateDebounceTimeout);
+		saveStateDebounceTimeout = undefined;
+	}
+	saveStateDebounceTimeout = setTimeout(saveState, 500);
 }
 
 function saveStateOnVisibilitychange() {
@@ -118,6 +125,7 @@ onBeforeUnmount(() => {
 				:damage-sources
 				:damage-targets
 				:show-results
+				@configuration-changed="debouncedSaveState"
 			/>
 		</section>
 		<button
