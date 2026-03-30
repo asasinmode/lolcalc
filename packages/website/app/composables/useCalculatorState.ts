@@ -12,7 +12,6 @@ export function useCalculatorState(
 	let saveStateDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
 	function saveState() {
-		console.log('saving state');
 		if (saveStateDebounceTimeout) {
 			clearTimeout(saveStateDebounceTimeout);
 			saveStateDebounceTimeout = undefined;
@@ -157,9 +156,21 @@ export function useCalculatorState(
 		const params = new URLSearchParams(stateString);
 
 		const savedSources = params.getAll('src');
-
 		if (savedSources.length) {
-			damageSources.value = savedSources.map(data => new DamageSource(data));
+			for (const data of savedSources) {
+				damageSources.value.push(markRaw(new DamageSource(data)));
+			}
+		} else {
+			damageSources.value.push(markRaw(new DamageSource()));
+		}
+
+		const savedTargets = params.getAll('tgt');
+		if (savedTargets.length) {
+			for (const data of savedTargets) {
+				damageTargets.value.push(markRaw(new DamageSource(data)));
+			}
+		} else {
+			damageTargets.value.push(markRaw(new DamageSource()));
 		}
 	}
 

@@ -23,20 +23,9 @@ const enableUnimplementedUi = useEnableUnimplementedUi();
 
 _setupGlobalKeyModifiers();
 
-const damageSources = ref<DamageSource[]>([
-	markRaw(new DamageSource()),
-]) as unknown as ShallowRef<DamageSource[]>;
-const damageTargets = ref<DamageSource[]>([
-	markRaw(new DamageSource()),
-]) as unknown as ShallowRef<DamageSource[]>;
-
-const showResults = ref(false);
-const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
-	if (anythingFilled) {
-		unwatchShowResults();
-		showResults.value = true;
-	}
-}, { immediate: true });
+/* expected to have DamageSources added in `restoreState` */
+const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
+const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 
 const resultsTable = useTemplateRef('resultsTable');
 
@@ -48,6 +37,14 @@ const {
 } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
 restoreState();
+
+const showResults = ref(false);
+const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
+	if (anythingFilled) {
+		unwatchShowResults();
+		showResults.value = true;
+	}
+}, { immediate: true });
 
 const hasCopiedShareLink = ref(false);
 const shareTextPopover = useTemplateRef('shareTextPopover');

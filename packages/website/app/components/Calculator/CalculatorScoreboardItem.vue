@@ -809,7 +809,7 @@ defineExpose({ el });
 				label="level"
 				:model-value="value.level.value"
 				data-select-champion-level=""
-				:options="Array.from({ length: 18 }, (_, i) => [i + 1, (i + 1).toString()])"
+				:options="Array.from({ length: value.maxLevel.value }, (_, i) => [i + 1, (i + 1).toString()])"
 				@update:model-value="value.level.value = $event!"
 			>
 				<span>{{ value.level.value }}</span>

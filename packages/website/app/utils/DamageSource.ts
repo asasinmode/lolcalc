@@ -22,7 +22,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	color: string;
 	listedChampion: ShallowRef<IListedChampion | undefined>;
 	champion: ShallowRef<IChampion | undefined>;
+
 	level: Ref<number>;
+	maxLevel = computed(() => this.roleQuest.value === 'top' ? 20 : 18);
 
 	isRanged = computed(() => this.champion.value && ((this.champion.value.stats.attackrange || 0) > 325));
 	stats = computed(() => calculateChampionStats(this));
@@ -94,7 +96,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		if (typeof overrides === 'string') {
 			overrides = DamageSource.parseStringifiedData(overrides);
 		}
-		console.log('constructoring', overrides);
 
 		const counter = useState<number>('damageSourceCounter', () => 0);
 		/* + 1 because it's a nicer color */
@@ -160,6 +161,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
 				} else {
 					this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
+				}
+			}),
+
+			watch(this.roleQuest, (value) => {
+				if (value !== 'top' && this.level.value > 18) {
+					this.level.value = 18;
 				}
 			}),
 		];
