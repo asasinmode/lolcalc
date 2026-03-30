@@ -1018,7 +1018,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 							>
 						</VSelect>
 						<button v-if="index === resultColumns.length - 1" class="pretend-ui-button" @click="addResultsColumn">
-							add another
+							add column
 						</button>
 						<template v-else>
 							<button

@@ -30,7 +30,14 @@ const damageTargets = ref<DamageSource<any>[]>([
 	markRaw(new DamageSource()),
 ]) as unknown as ShallowRef<DamageSource<any>[]>;
 
-const showResults = computed(() => damageSources.value.some(source => source.listedChampion.value));
+const showResults = ref(false);
+const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
+	if (anythingFilled) {
+		unwatchShowResults();
+		showResults.value = true;
+	}
+}, { immediate: true });
+
 const resultsTable = useTemplateRef('resultsTable');
 
 // TODO update with debounce on data change
@@ -104,7 +111,7 @@ onBeforeUnmount(() => {
 				results
 			</h2>
 			<p v-show="!showResults">
-				configure a damage source champion to view results
+				configure a damage source to view results
 			</p>
 			<CalculatorResultsTable
 				ref="resultsTable"
@@ -148,13 +155,13 @@ onBeforeUnmount(() => {
 	}
 
 	#results {
-		--at-apply: 'mx-auto text-center';
-	}
+		--at-apply: 'mx-auto text-center relative';
 
-	#results + p {
-		--at-apply: 'sticky z-10 top-12 -mb-11 py-2 text-center text-xl font-medium backdrop-blur-2';
-		-webkit-text-stroke: black 0.2em;
-		paint-order: stroke fill;
+		> p {
+			--at-apply: 'absolute z-10 top-16 py-2 start-1/2 -translate-x-1/2 text-center text-xl font-medium';
+			-webkit-text-stroke: black 0.2em;
+			paint-order: stroke fill;
+		}
 	}
 
 	#__nuxt {
