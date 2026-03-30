@@ -2,6 +2,7 @@ import type { CalculatorResultsTable } from '#components';
 import type { ShallowRef } from 'vue';
 
 const STATE_SESSION_STORAGE_KEY = 'lolcalc-calculator-state';
+const STATE_VERSION = '1';
 
 export function useCalculatorState(
 	damageSources: ShallowRef<DamageSource[]>,
@@ -59,8 +60,8 @@ export function useCalculatorState(
 	/* assuming browsers take up to ~2000 */
 	const MAX_QUERY_STATE_STRING_LENGTH = 1920;
 	function calculatorStateString(): [wholeState: string, queryState: string] {
-		let wholeState = '';
-		let queryState = '';
+		let wholeState = `v=${STATE_VERSION}`;
+		let queryState = wholeState;
 
 		let querySavedHighestSourceIndex = -1;
 		for (const [str, i] of damageSourcesState.value) {
@@ -150,10 +151,16 @@ export function useCalculatorState(
 		if (!import.meta.client) {
 			return;
 		}
-		console.log('restoring state');
 
 		const stateString: string | undefined = sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || window?.location.search;
 		const params = new URLSearchParams(stateString);
+
+		const version = params.get('v');
+		if (version !== STATE_VERSION) {
+			return;
+		}
+
+		console.log('restoring state');
 
 		const savedSources = params.getAll('src');
 		if (savedSources.length) {
