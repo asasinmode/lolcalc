@@ -270,29 +270,27 @@ function move(index: number, target: DamageSource[], toIndex: number, alt: boole
 
 let itemDragData: {
 	source: DamageSource;
-	sourceIndex: number;
 	itemIndex: number;
 	item: IItem;
 } | undefined;
 
-function startItemDrag(event: DragEvent, source: DamageSource, sourceIndex: number, itemIndex: number) {
+function startItemDrag(event: DragEvent, source: DamageSource, itemIndex: number) {
 	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
 	itemDragData = {
 		source,
-		sourceIndex,
 		itemIndex,
 		item: source.items.value[itemIndex]!,
 	};
 }
 
-function onItemDragEnter(event: DragEvent, sourceIndex: number, target: DamageSource) {
-	if (itemDragData && itemDragData.sourceIndex !== sourceIndex) {
+function onItemDragEnter(event: DragEvent, target: DamageSource) {
+	if (itemDragData && target !== itemDragData.source) {
 		(event.currentTarget as HTMLElement).dataset.dropBuyability = itemBuyability(itemDragData.item, target, items, false).toString();
 	}
 }
 
-function onItemDragover(event: DragEvent, sourceIndex: number, target: DamageSource) {
-	if (itemDragData && itemDragData.sourceIndex !== sourceIndex && itemBuyability(itemDragData.item, target, items, false) === 1) {
+function onItemDragover(event: DragEvent, target: DamageSource) {
+	if (itemDragData && itemDragData.source !== target && itemBuyability(itemDragData.item, target, items, false) === 1) {
 		event.preventDefault();
 	}
 }
@@ -306,15 +304,15 @@ function onItemDragLeave(event: DragEvent) {
 	}
 }
 
-function dropItem(event: DragEvent, target: DamageSource[], targetIndex: number) {
+function dropItem(event: DragEvent, target: DamageSource) {
 	if (event.target) {
 		delete (event.target as HTMLElement).dataset.dropBuyability;
 	}
 
-	if (target[targetIndex] && itemDragData && itemBuyability(itemDragData.item, target[targetIndex], items, false) === 1) {
+	if (itemDragData && itemBuyability(itemDragData.item, target, items, false) === 1) {
 		const { source, itemIndex } = itemDragData;
 		const item = globalKeyModifiers.value.alt ? source.items.value[itemIndex]! : source.removeItem(itemIndex)!;
-		target[targetIndex].addItem(item, items, false);
+		target.addItem(item, items, false);
 	}
 	itemDragData = undefined;
 }
@@ -360,11 +358,11 @@ function setLocalMirrorLayout() {
 					@change-group="changeGroup(index, damageSources, $event)"
 					@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
 					@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
-					@item-dragstart="(event, itemIndex) => startItemDrag(event, value, index, itemIndex)"
-					@item-list-dragenter="onItemDragEnter($event, index, value)"
-					@item-list-dragover="onItemDragover($event, index, value)"
+					@item-dragstart="(event, itemIndex) => startItemDrag(event, value, itemIndex)"
+					@item-list-dragenter="onItemDragEnter($event, value)"
+					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
-					@item-list-drop="dropItem($event, damageSources, index)"
+					@item-list-drop="dropItem($event, value)"
 				/>
 				<li>
 					<button
@@ -397,11 +395,11 @@ function setLocalMirrorLayout() {
 					@change-group="changeGroup(index, damageTargets, $event)"
 					@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
 					@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
-					@item-dragstart="(event, itemIndex) => startItemDrag(event, value, index, itemIndex)"
-					@item-list-dragenter="onItemDragEnter($event, index, value)"
-					@item-list-dragover="onItemDragover($event, index, value)"
+					@item-dragstart="(event, itemIndex) => startItemDrag(event, value, itemIndex)"
+					@item-list-dragenter="onItemDragEnter($event, value)"
+					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
-					@item-list-drop="dropItem($event, damageTargets, index)"
+					@item-list-drop="dropItem($event, value)"
 				/>
 				<li>
 					<button
