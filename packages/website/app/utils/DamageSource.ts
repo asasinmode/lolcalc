@@ -339,10 +339,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.currentAbilityResource.value,
 			Object.values(this.abilityLevels.value).join('-'),
 			Object.values(this.abilityVariants.value).join('-'),
-			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
+			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
 		return data.join('_');
@@ -369,12 +369,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			rawCurrentAbilityResource,
 			rawAbilityLevels,
 			rawAbilityVariants,
+			rawDragonStacks,
+			rawDragonSoulIndex,
 
+			// Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
 			// TODO set role quest after champion
 			// this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
-			// this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
-			// this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
-			// Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
 		] = data.split('_');
 
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
@@ -501,6 +501,26 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 							= Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityVariants.value[abilityKey], parsedVariant) : parsedVariant);
 					}
 				}
+			}
+		}
+
+		const dragonKeys = Object.keys(text.dragons) as IDragonName[];
+
+		if (rawDragonStacks?.length) {
+			const dragonStacks = rawDragonStacks.split('-');
+			for (let i = 0; i < rv.dragonStacks.value.length; i++) {
+				const parsedIndex = dragonStacks[i] ? Number.parseInt(dragonStacks[i]!) : undefined;
+				if (parsedIndex !== undefined && !Number.isNaN(parsedIndex) && ~parsedIndex) {
+					rv.dragonStacks.value[i] = dragonKeys[parsedIndex];
+				}
+			}
+		}
+
+		if (rawDragonSoulIndex?.length) {
+			const parsedIndex = Number.parseInt(rawDragonSoulIndex);
+
+			if (!Number.isNaN(parsedIndex)) {
+				rv.dragonSoul.value = dragonKeys[parsedIndex];
 			}
 		}
 
