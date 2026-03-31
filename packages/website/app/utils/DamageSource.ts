@@ -38,9 +38,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	runesInvalid = computed(() => runesInvalid(this.runes.value, this.runePathsEmpty.value));
 
 	currentHealth: Ref<number>;
+	maxHealth = computed<number>(() => Math.round(this.stats.value?.stats.total.hp || 1));
 	currentAbilityResource: Ref<number>;
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
-	maxAbilityResource = computed(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
+	maxAbilityResource = computed<number>(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
 
 	items: Ref<(IItem | undefined)[]>;
 	itemsUndoSnapshots: Ref<(IItem | undefined)[][]>;
@@ -90,6 +91,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		: undefined>;
 	watchHandles: WatchHandle[];
 
+	/** if true, first call of champion watch will not set anything, used when parsing stringified data */
+	skipChampionOverrides: boolean;
+
 	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
 	}) = {}) {
@@ -126,6 +130,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.roleQuest = ref(overrides.roleQuest);
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
+		this.skipChampionOverrides = false;
 
 		this.watchHandles = [
 			watch(this.listedChampion, async (c) => {
@@ -139,6 +144,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 			watch(this.champion, (c) => {
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
+
+				if(this.skipChampionOverrides){
+					this.skipChampionOverrides = false;
+					return;
+				}
+
 				this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
 				this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
 
@@ -330,9 +341,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			secondaryRunePathIndex,
 			rawSecondarySlots,
 			rawShards,
+			rawCurrentHealth,
+			rawCurrentAbilityResource,
 
-			// this.currentHealth.value,
-			// this.currentAbilityResource.value,
 			// Object.values(this.abilityLevels.value).join('-'),
 			// Object.values(this.abilityVariants.value).join('-'),
 			// this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
@@ -343,6 +354,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
 			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
+			rv.skipChampionOverrides = true;
 		}
 
 		if (rawLevel) {
@@ -420,6 +432,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					}
 				}
 				i++;
+			}
+		}
+
+		if (rawCurrentHealth) {
+			const parsedValue = Number.parseInt(rawCurrentHealth);
+			if (!Number.isNaN(parsedValue)) {
+				rv.currentHealth.value = Math.max(0, rv.champion.value ? Math.min(rv.maxHealth.value, parsedValue) : parsedValue);
+			}
+		}
+
+		if (rawCurrentAbilityResource) {
+			const parsedValue = Number.parseInt(rawCurrentAbilityResource);
+			if (!Number.isNaN(parsedValue)) {
+				rv.currentAbilityResource.value = Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityResource.value, parsedValue) : parsedValue);
 			}
 		}
 

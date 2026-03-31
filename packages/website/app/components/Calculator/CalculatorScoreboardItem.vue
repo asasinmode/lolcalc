@@ -514,9 +514,7 @@ function updateComputedStats(stats: IChampionStat[]) {
 	}
 }
 
-const maxHealth = computed(() => Math.round(props.value.stats.value?.stats.total.hp || 1));
-
-const updateChampionHealth = useNumberInput(props.value.currentHealth, true, maxHealth);
+const updateChampionHealth = useNumberInput(props.value.currentHealth, true, props.value.maxHealth);
 const updateChampionAbilityResource = useNumberInput(props.value.currentAbilityResource, true, props.value.maxAbilityResource);
 
 const healthBarEl = useTemplateRef('healthBar');
@@ -524,7 +522,7 @@ const {
 	onMousedown: startHealthBarDrag,
 	cleanup: healthBarCleanup,
 	dragValueRef: healthDragValueRef,
-} = healthResourceSliderEvents(props.value.currentHealth, maxHealth, healthBarEl);
+} = healthResourceSliderEvents(props.value.currentHealth, props.value.maxHealth, healthBarEl);
 const resourceBarEl = useTemplateRef('resourceBar');
 const {
 	onMousedown: startAbilityResourceBarDrag,
@@ -1072,7 +1070,7 @@ defineExpose({ el });
 				<div
 					ref="healthBar"
 					data-current-health=""
-					:style="`--fill-percentage: ${value.champion.value ? Math.min(healthDragValueRef / maxHealth, 1) : 1}`"
+					:style="`--fill-percentage: ${value.champion.value ? Math.min(healthDragValueRef / value.maxHealth.value, 1) : 1}`"
 					@mousedown="startHealthBarDrag"
 				>
 					<template v-if="value.champion.value">
@@ -1083,11 +1081,11 @@ defineExpose({ el });
 							:id="`${group}-${index}-current-ability-health`"
 							:value="Math.round(healthDragValueRef)"
 							min="0"
-							:max="maxHealth"
+							:max="value.maxHealth.value"
 							type="number"
 							@input="updateChampionHealth"
 						>
-						<span>/ {{ maxHealth }}</span>
+						<span>/ {{ value.maxHealth.value }}</span>
 					</template>
 				</div>
 				<div
