@@ -86,7 +86,7 @@ export const CHAMPION_SPECIFICS = {
 			phenomenalEvilStacks: number;
 		} {
 			return {
-				phenomenalEvilStacks: self.internalData.value.phenomenalEvilStacks ?? 0,
+				phenomenalEvilStacks: Math.max(0, self.internalData.value.phenomenalEvilStacks ?? 0),
 			};
 		},
 	},

@@ -205,12 +205,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						const boots = this.items.value[bootsIndex]!;
 						this.items.value[bootsIndex] = undefined;
 						this.items.value[6] = boots;
+						cleanupItems(this.items.value);
 					}
 				} else if (this.items.value[6]?.isBoots) {
 					const firstEmptyIndex = this.items.value.indexOf(undefined);
 					if (~firstEmptyIndex) {
 						this.items.value[firstEmptyIndex] = this.items.value[6];
 						this.items.value[6] = undefined;
+						cleanupItems(this.items.value);
 					}
 				}
 			}),
@@ -371,15 +373,22 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			rawAbilityVariants,
 			rawDragonStacks,
 			rawDragonSoulIndex,
-
-			// Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
-			// TODO set role quest after champion
-			// this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
+			rawInternalData,
+			rawRoleQuestIndex,
 		] = data.split('_');
 
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
 			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
 			rv.skipInitialChampionOverrides = true;
+		}
+
+		if (rawRoleQuestIndex?.length) {
+			const parsedIndex = Number.parseInt(rawRoleQuestIndex);
+			const roleQuestKeys = Object.keys(text.roleQuests) as IChampionRole[];
+
+			if (!Number.isNaN(parsedIndex)) {
+				rv.roleQuest.value = roleQuestKeys[parsedIndex];
+			}
 		}
 
 		if (rawLevel) {
@@ -397,6 +406,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					rv.items.value[i] = markRaw(item);
 				}
 			}
+			cleanupItems(rv.items.value);
 		}
 
 		const runePaths = Object.keys(runes.paths);
@@ -522,6 +532,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			if (!Number.isNaN(parsedIndex)) {
 				rv.dragonSoul.value = dragonKeys[parsedIndex];
 			}
+		}
+
+		if (rawInternalData?.length) {
+			try {
+				rv.internalData.value = JSON.parse(rawInternalData);
+			} catch {}
 		}
 
 		return rv;
