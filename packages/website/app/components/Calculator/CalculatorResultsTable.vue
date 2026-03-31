@@ -1230,15 +1230,19 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				@dragleave="onResultSectionDragleave"
 				@drop="onResultSectionDrop($event, index, false)"
 			>
-				<tr v-if="!implementedDamageSectionsMap[index]" class="unimplemented-row">
+				<tr v-if="!implementedDamageSectionsMap[index]" class="info-row">
 					<td :colspan="2 + resultColumns.length">
 						<ComingSoonCover feature="champion abilities" class="text-neutral-400" />
 					</td>
 				</tr>
-				<tr v-else-if="!section.image" class="unimplemented-row">
+				<tr v-else-if="!section.image" class="info-row">
 					<td :colspan="2 + resultColumns.length">
 						loading...
-						{{ section.rows }}
+					</td>
+				</tr>
+				<tr v-else-if="!section.rows.length" class="info-row">
+					<td :colspan="2 + resultColumns.length">
+						no variables detected
 					</td>
 				</tr>
 				<tr
@@ -1590,11 +1594,11 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				--at-apply: 'text-neutral-200';
 
 				> tr {
-					&.unimplemented-row {
+					&.info-row {
 						--at-apply: 'text-neutral-400 font-600';
 					}
 
-					&:where(:not(.unimplemented-row)):hover {
+					&:where(:not(.info-row)):hover {
 						--at-apply: 'text-white';
 
 						> * {

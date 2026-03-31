@@ -118,7 +118,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] try not to intercept all right clicks
 - [x] close dialogs on click outside
 - [x] target dummy damage source
-- [?] sharing, saving/reading data in query
+- [x] sharing, saving/reading data in query
 - [ ] mobile version and make look better
 - [ ] calculations
   - [ ] stats from rune shards
