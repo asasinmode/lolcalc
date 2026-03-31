@@ -157,6 +157,8 @@ export function useCalculatorState(
 
 		const version = params.get('v');
 		if (version !== STATE_VERSION) {
+			damageSources.value.push(markRaw(new DamageSource()));
+			damageTargets.value.push(markRaw(new DamageSource()));
 			return;
 		}
 

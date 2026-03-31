@@ -41,7 +41,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] stats
     - [x] current health/mana
     - [x] slider drag health/mana
-    - [ ] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) like energy, zaahen, fury
+    - [?] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) like energy, zaahen, fury
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [x] abilities ui (only passive implemented)
@@ -65,7 +65,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] guinsoo
       - [ ] terminus
       - [ ] heartsteel
-      - [ ] hubris
+      - [?] hubris
       - [ ] mejai's
       - [ ] dark seal
       - [ ] kraken slayer
@@ -119,14 +119,16 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
+- [?] implement role quests
+- [?] header, footer, contact info
 - [ ] mobile version and make look better
 - [ ] calculations
   - [ ] stats from rune shards
   - [ ] dragons/souls
-  - [ ] implement role quests
   - [ ] resolve game variables
   - [ ] items
   - [ ] champion passives
+  - [ ] basic attack damage
   - [ ] use everything that has extra ui (and internalData on source)
   - [ ] level breakpoint calculations
   - [x] DamageSource.internalData set from utils/champion.ts
@@ -138,7 +140,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champ select roles
   - [ ] role quests
   - [ ] dragons
-- [ ] extended item hover tooltips, like swiftmarch showing adaptive force gained
+- [?] extended item hover tooltips, like swiftmarch showing adaptive force gained
 - [x] disclaimer not endorsed by riot
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups with helpful info
@@ -155,7 +157,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
   - [ ] github readme
-- [ ] confirm removing/clearing row/scoreboard item, ideally undo + dismiss
+- [?] confirm removing/clearing row/scoreboard item, ideally undo + dismiss
 - [ ] submit feedback on page / report issues
   - [ ] rust/go server
   - [ ] github issue template
