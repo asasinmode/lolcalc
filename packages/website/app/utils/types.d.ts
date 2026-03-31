@@ -55,9 +55,10 @@ export interface IDamageResultTableSection {
 	isPermanent?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
-	image: string;
+	image?: string;
 	imageSize: number;
-	getCellValue: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
+	/** expected to be undefined only when loading */
+	getCellValue?: (section: IDamageResultTableSection, rowId: string, source?: DamageSource, target?: DamageTarget) => {
 		value: string | number;
 		numberValue?: number;
 		isUnknown?: boolean;

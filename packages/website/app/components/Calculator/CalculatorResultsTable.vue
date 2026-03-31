@@ -267,7 +267,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 	) {
 		rv.value = 'n/a';
 	} else {
-		const cellValue = section.getCellValue(section, row.id, source, target);
+		const cellValue = section.getCellValue?.(section, row.id, source, target);
 		if (cellValue) {
 			({ value: rv.value, numberValue: rv.numberValue, isUnknown: rv.isUnknown } = cellValue);
 			rv.isIrrelevant = false;
@@ -352,7 +352,7 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 
 	const computedDescription = source.computed.abilities.value[abilityKey!][abilityVariant!];
 	if (computedDescription) {
-		const rv: ReturnType<IDamageResultTableSection['getCellValue']> = {
+		const rv: ReturnType<NonNullable<IDamageResultTableSection['getCellValue']>> = {
 			value: '?',
 			isUnknown: false,
 		};
@@ -398,21 +398,35 @@ async function addResultsSection(
 	abilityVariant?: number,
 	name = '',
 ) {
+	const id = `${championOrItemId}-${abilityKey ?? ''}-${abilityVariant ?? ''}`;
+	if (resultSections.value.some(section => section.id === id) || (type === 'champion' && championOrItemId === 'TargetDummy')) {
+		return;
+	}
+
 	const section = {
-		id: `${championOrItemId}-${abilityKey ?? ''}-${abilityVariant ?? ''}`,
+		id,
 		championOrItemId,
 		abilityKey,
 		abilityVariant,
 		type,
 		name,
-		image: '',
+		image: undefined,
 		imageSize: 64,
 		rows: [],
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
+	resultSections.value.push(section);
+	expandedSections.value.push(section.id);
+
 	if (type === 'champion') {
 		const champion = await useChampion(championOrItemId);
 		if (!champion?.abilities[abilityKey!].variants[abilityVariant!]) {
+			const index = resultSections.value.indexOf(section);
+			~index && resultSections.value.splice(index, 1);
+			const expandedIndex = expandedSections.value.indexOf(section.id);
+			~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
+			triggerRef(resultSections);
+
 			return;
 		}
 
@@ -433,11 +447,15 @@ async function addResultsSection(
 	} else {
 		const item = items[championOrItemId];
 		if (!item) {
+			const index = resultSections.value.indexOf(section);
+			~index && resultSections.value.splice(index, 1);
+			const expandedIndex = expandedSections.value.indexOf(section.id);
+			~expandedIndex && expandedSections.value.splice(expandedIndex, 1);
+			triggerRef(resultSections);
+
 			return;
 		}
 
-		// TODO friendlier names, if value is calculated in item.ts maybe that can help
-		// TODO try to filter out non simple variables? Like ones that aren't 5 flat damage to BonusDamageToMinions? only ones that are calculated?
 		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true });
 
 		section.name ||= item.name;
@@ -447,9 +465,8 @@ async function addResultsSection(
 		section.hoverTooltipData = { item, precomputedDescription };
 	}
 
-	resultSections.value.push(section);
-	expandedSections.value.push(section.id);
 	addComputedSection(section.id);
+	triggerRef(resultSections);
 }
 
 function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGameDescriptionVariablesRV, 'variables' | 'unknownVariables'>): IDamageResultTableSection['rows'] {
@@ -1106,6 +1123,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				:data-drop-direction="sectionDragDropIndex === index
 					? 'before'
 					: (!expandedSections.includes(section.id) && sectionDragDropIndex === index + 1) ? 'after' : undefined"
+				:aria-busy="!section.image"
 				@dragenter="onResultSectionDragenter($event, index, true)"
 				@dragover="onResultSectionDragover($event, index, true)"
 				@dragleave="onResultSectionDragleave"
@@ -1173,7 +1191,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 								:height="section.imageSize"
 								aria-hidden="true"
 							>
-							<span>{{ section.name }}</span>
+							<span>{{ section.image ? section.name : 'loading...' }}</span>
 							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
 								<div v-if="section.type === 'item'" popover="hint" class="hover-tooltip champion-item">
 									<ItemDescription v-bind="section.hoverTooltipData as any" />
@@ -1206,6 +1224,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				:aria-labelledby="`results-table-section-header-${section.id}`"
 				:hidden="!expandedSections.includes(section.id)"
 				:data-drop-direction="sectionDragDropIndex === index + 1 ? 'after' : undefined"
+				:aria-busy="!section.image"
 				@dragenter="onResultSectionDragenter($event, index, false)"
 				@dragover="onResultSectionDragover($event, index, false)"
 				@dragleave="onResultSectionDragleave"
@@ -1214,6 +1233,12 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				<tr v-if="!implementedDamageSectionsMap[index]" class="unimplemented-row">
 					<td :colspan="2 + resultColumns.length">
 						<ComingSoonCover feature="champion abilities" class="text-neutral-400" />
+					</td>
+				</tr>
+				<tr v-else-if="!section.image" class="unimplemented-row">
+					<td :colspan="2 + resultColumns.length">
+						loading...
+						{{ section.rows }}
 					</td>
 				</tr>
 				<tr
@@ -1541,7 +1566,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 						}
 
 						> img {
-							--at-apply: 'size-6 ms-2 me-1 inline-block';
+							--at-apply: 'size-6 ms-2 me-1.5 inline-block';
 						}
 
 						> [popover] {
@@ -1565,6 +1590,10 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				--at-apply: 'text-neutral-200';
 
 				> tr {
+					&.unimplemented-row {
+						--at-apply: 'text-neutral-400 font-600';
+					}
+
 					&:where(:not(.unimplemented-row)):hover {
 						--at-apply: 'text-white';
 
