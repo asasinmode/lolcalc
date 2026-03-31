@@ -139,9 +139,11 @@ onBeforeUnmount(() => {
 	<footer>
 		<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 	</footer>
-	<ChampSelect />
-	<ItemShop />
-	<RuneSelect />
+	<ClientOnly>
+		<ChampSelect />
+		<ItemShop />
+		<RuneSelect />
+	</ClientOnly>
 </template>
 
 <style>

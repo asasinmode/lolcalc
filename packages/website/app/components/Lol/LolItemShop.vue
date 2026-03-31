@@ -661,17 +661,12 @@ defineExpose({
 				header-tag="h2"
 				description-class="order-6"
 			/>
-			<ClientOnly>
-				<button
-					:disabled="selectedItem?.buyability !== 1"
-					@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
-				>
-					{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
-				</button>
-				<template #fallback>
-					<button>purchase</button>
-				</template>
-			</ClientOnly>
+			<button
+				:disabled="selectedItem?.buyability !== 1"
+				@click="buyItem(selectedItem!.item, selectedItem!.buyability)"
+			>
+				{{ !selectedItem ? 'purchase' : selectedItem?.buyability === 1 ? 'purchase item' : 'item unavailable' }}
+			</button>
 			<h3 class="order-1">
 				Builds into
 			</h3>
