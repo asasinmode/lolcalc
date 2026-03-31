@@ -160,8 +160,6 @@ export function useCalculatorState(
 			return;
 		}
 
-		console.log('restoring state');
-
 		const savedSources = params.getAll('src');
 		if (savedSources.length) {
 			for (const data of savedSources) {
@@ -214,6 +212,31 @@ export function useCalculatorState(
 				i && resultsTable.value.addResultsColumn();
 				resultsTable.value.resultColumns.at(-1)!.target = target;
 				resultsTable.value.resultColumns.at(-1)!.source = source;
+			}
+		}
+
+		const savedSections = params.getAll('tblSct');
+		for (const section of savedSections) {
+			const [type, id] = section.split('_');
+			if (!type || !['all', 'champion', 'item'].includes(type) || !id) {
+				continue;
+			}
+
+			const [championOrItemId, abilityKey, abilityVariant] = (id ?? '')?.split('-');
+			if (championOrItemId) {
+				if (type === 'champion') {
+					if (!abilityKey || !['passive', 'q', 'w', 'e', 'r'].includes(abilityKey)) {
+						continue;
+					}
+					const parsedAbilityVariant = abilityVariant ? Number.parseInt(abilityVariant) : undefined;
+					if (parsedAbilityVariant === undefined || Number.isNaN(parsedAbilityVariant)) {
+						continue;
+					}
+
+					resultsTable.value.addResultsSection(type, championOrItemId, abilityKey as IChampionAbilityKey, parsedAbilityVariant);
+				} else if (type === 'item') {
+					resultsTable.value.addResultsSection(type as 'item', championOrItemId);
+				}
 			}
 		}
 	}

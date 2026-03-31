@@ -92,6 +92,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] one select to switch between sources/targets?
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
+  - [ ] ability variants without any variables in description, nidalee R has only in extendedVariables
   - [x] per damage results row unknown variables style
   - [x] moving columns left/right
   - [x] moving sections up/down

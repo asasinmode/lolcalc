@@ -320,7 +320,7 @@ function toggleResultsSection(sectionId: string) {
 }
 
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	const computedItem = source?.computed.items.value.find(item => item?.itemId === section.id);
+	const computedItem = source?.computed.items.value.find(item => item?.itemId === section.championOrItemId);
 	if (computedItem) {
 		let numberValue = computedItem.descriptionContents.variables.get(rowId);
 		let value: string | number = numberValue as unknown as string;
@@ -412,6 +412,10 @@ async function addResultsSection(
 
 	if (type === 'champion') {
 		const champion = await useChampion(championOrItemId);
+		if (!champion?.abilities[abilityKey!].variants[abilityVariant!]) {
+			return;
+		}
+
 		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariant!, undefined, undefined, { replaceWithName: true });
 
 		section.name ||= championAbilitySectionName(champion.name, abilityKey!, precomputedDescription.name);
@@ -427,7 +431,11 @@ async function addResultsSection(
 		};
 		section.getCellValue = abilityVariableCellValue;
 	} else {
-		const item = items[championOrItemId]!;
+		const item = items[championOrItemId];
+		if (!item) {
+			return;
+		}
+
 		// TODO friendlier names, if value is calculated in item.ts maybe that can help
 		// TODO try to filter out non simple variables? Like ones that aren't 5 flat damage to BonusDamageToMinions? only ones that are calculated?
 		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true });
