@@ -928,7 +928,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				<th width="48px" scope="col">
 					<span>section controls</span>
 				</th>
-				<th id="results-table-header-damage-type" scope="col" width="240px">
+				<th id="results-table-header-damage-type" scope="col" width="192px">
 					<span>damage type</span>
 				</th>
 				<th
@@ -1060,7 +1060,6 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 								title="move right, alt+click to duplicate to the right"
 								class="pretend-ui-button"
 								draggable="true"
-								:disabled="index === (resultColumns.length - 1)"
 								@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
 								@dragstart="startResultColumnDrag(index, $event)"
 								@dragend="endResultColumnDrag"
@@ -1255,7 +1254,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 			@drop="onResultSectionDrop($event, resultSections.length)"
 		>
 			<tr>
-				<td :colspan="1 + resultColumns.length">
+				<td :colspan="2 + resultColumns.length">
 					<form @submit.prevent="submitResultsSection">
 						<label for="results-table-row-new-section-ability">add section</label>
 						<ClientOnly>
@@ -1643,7 +1642,6 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 			);
 		}
 
-		> thead > tr:nth-child(1) > td,
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
 		> tbody[aria-labelledby],
@@ -1651,21 +1649,21 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 			--at-apply: 'relative isolate';
 		}
 
-		> thead > tr:nth-child(1) > td,
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
 		> tbody,
 		> tfoot {
 			&[data-drop-direction] {
 				--drop-indicator-bg-direction: 90deg;
+				--drop-indicator-b-w: 1px;
 
 				&::before {
 					--at-apply: 'content-empty absolute z-3 start-0 -end-[0.5px] -top-px -bottom-px';
 					background-image: linear-gradient(
 						var(--drop-indicator-bg-direction),
 						hsl(0 100% 100%) 0px,
-						hsl(0 100% 100%) 1px,
-						hsl(0 100% 100% / 0.2) 1px,
+						hsl(0 100% 100%) var(--drop-indicator-b-w),
+						hsl(0 100% 100% / 0.2) var(--drop-indicator-b-w),
 						transparent 1rem
 					);
 				}
@@ -1673,14 +1671,10 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 
 			&[data-drop-direction='after'] {
 				--drop-indicator-bg-direction: 270deg;
+				--drop-indicator-b-w: 0px;
 
 				&::before {
 					--at-apply: 'start-[0.5px] end-0';
-					background-image: linear-gradient(
-						var(--drop-indicator-bg-direction),
-						hsl(0 100% 100% / 0.2) 0px,
-						transparent 1rem
-					);
 				}
 			}
 		}
@@ -1756,6 +1750,15 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 				&::after {
 					--at-apply: 'bottom-0.5 top-auto rotate-180';
 				}
+			}
+		}
+
+		> thead > tr:nth-child(2) > td,
+		> tbody[aria-labelledby] > tr > td {
+			&:last-child[data-drop-direction='after']::before {
+				--drop-indicator-b-w: 1px;
+
+				--at-apply: '-end-[0.5px]';
 			}
 		}
 
