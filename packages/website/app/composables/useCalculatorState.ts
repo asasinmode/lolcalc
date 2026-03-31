@@ -188,6 +188,34 @@ export function useCalculatorState(
 		if (flipResults) {
 			resultsTable.value.flipResults = true;
 		}
+
+		const savedColumns = params.getAll('tblCol');
+		for (let i = 0; i < savedColumns.length; i++) {
+			const [rawSourceIndex, rawTargetIndex] = savedColumns[i]!.split('-');
+
+			if (!rawSourceIndex && !rawTargetIndex) {
+				continue;
+			}
+
+			let sourceIndex = rawSourceIndex ? Number.parseInt(rawSourceIndex) : undefined;
+			let targetIndex = rawTargetIndex ? Number.parseInt(rawTargetIndex) : undefined;
+
+			if (Number.isNaN(sourceIndex)) {
+				sourceIndex = undefined;
+			}
+			if (Number.isNaN(targetIndex)) {
+				targetIndex = undefined;
+			}
+
+			const source = sourceIndex !== undefined ? damageSources.value[sourceIndex] : undefined;
+			const target = targetIndex !== undefined ? damageTargets.value[targetIndex] : undefined;
+
+			if (source || target) {
+				i && resultsTable.value.addResultsColumn();
+				resultsTable.value.resultColumns.at(-1)!.target = target;
+				resultsTable.value.resultColumns.at(-1)!.source = source;
+			}
+		}
 	}
 
 	return { saveState, debouncedSaveState, restoreState, isStateTooLargeForQuery };

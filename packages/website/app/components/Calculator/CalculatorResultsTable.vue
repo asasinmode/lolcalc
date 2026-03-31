@@ -910,7 +910,7 @@ function addColumnItems(columnIndex: number) {
 	emit('configurationChanged');
 }
 
-defineExpose({ resultColumns, resultSections, flipResults });
+defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, recalculateAllColumns, addResultsSection });
 </script>
 
 <template>
@@ -1030,7 +1030,7 @@ defineExpose({ resultColumns, resultSections, flipResults });
 								style="--focus-brightness: 1.5"
 							>
 						</VSelect>
-						<button v-if="index === resultColumns.length - 1" class="pretend-ui-button" @click="addResultsColumn">
+						<button v-if="index === resultColumns.length - 1" class="pretend-ui-button" @click="addResultsColumn()">
 							add column
 						</button>
 						<template v-else>
