@@ -183,6 +183,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}),
 
 			watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
+				if (!this.champion.value) {
+					return;
+				}
 				if (previousTotalHp && this.currentHealth.value === previousTotalHp) {
 					this.currentHealth.value = this.stats.value?.stats.total.hp || 0;
 				} else {
@@ -337,8 +340,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.runes.value.paths.secondary && runePathKeys.indexOf(this.runes.value.paths.secondary),
 			secondarySlots.join('-'),
 			shards.join('-'),
-			this.currentHealth.value,
-			this.currentAbilityResource.value,
+			roundVariable(this.currentHealth.value, 3),
+			roundVariable(this.currentAbilityResource.value, 3),
 			Object.values(this.abilityLevels.value).join('-'),
 			Object.values(this.abilityVariants.value).join('-'),
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),

@@ -179,6 +179,15 @@ export function useCalculatorState(
 		} else {
 			damageTargets.value.push(markRaw(new DamageSource()));
 		}
+
+		if (!resultsTable.value) {
+			return;
+		}
+
+		const flipResults = params.has('flpTbl');
+		if (flipResults) {
+			resultsTable.value.flipResults = true;
+		}
 	}
 
 	return { saveState, debouncedSaveState, restoreState, isStateTooLargeForQuery };
