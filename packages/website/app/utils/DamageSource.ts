@@ -17,6 +17,8 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
 }
 
+type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
+
 export class DamageSource<Id extends IChampionId | undefined = any> {
 	id: string;
 	color: string;
@@ -46,10 +48,17 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	items: Ref<(IItem | undefined)[]>;
 	itemsUndoSnapshots: Ref<(IItem | undefined)[][]>;
 
-	abilityLevels: Ref<Record<Exclude<IChampionAbilityKey, 'passive'>, number>>;
+	abilityLevels: Ref<Record<INonPassiveAbilityKey, number>>;
+	maxAbilityLevels = computed(() => Object.fromEntries(Object.keys(this.abilityLevels.value).map(key => [
+		key as INonPassiveAbilityKey,
+		this.champion.value?.abilities[key as IChampionAbilityKey].maxLevel ?? 5,
+	])) as Record<INonPassiveAbilityKey, number>);
+
 	abilityVariants: Ref<Record<IChampionAbilityKey, number>>;
-	// TODO unused
-	allAbilityVariants = computed(() => allChampionAbilityVariants(this.champion.value));
+	maxAbilityVariants = computed(() => Object.fromEntries(Object.keys(this.abilityVariants.value).map(key => [
+		key as IChampionAbilityKey,
+		(this.champion.value?.abilities[key as IChampionAbilityKey].variants.length ?? 1) - 1,
+	])) as Record<IChampionAbilityKey, number>);
 
 	dragonStacks: Ref<(IDragonName | undefined)[]>;
 	dragonSoul: Ref<IDragonName | undefined>;
@@ -92,14 +101,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	watchHandles: WatchHandle[];
 
 	/** if true, first call of champion watch will not set anything, used when parsing stringified data */
-	skipChampionOverrides: boolean;
+	skipInitialChampionOverrides: boolean;
 
 	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
 	}) = {}) {
-		const counter = useState<number>('damageSourceCounter', () => 0);
 		/* + 1 because it's a nicer color */
-		const hue = ((counter.value++ + 1) * 137.508) % 360;
+		const counter = useState<number>('damageSourceCounter', () => 1);
+		const hue = (counter.value++ * 137.508) % 360;
 		this.color = `oklch(0.7 0.15 ${hue.toFixed(4)})`;
 
 		this.id = counter.value.toString();
@@ -130,7 +139,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.roleQuest = ref(overrides.roleQuest);
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
-		this.skipChampionOverrides = false;
+		this.skipInitialChampionOverrides = false;
 
 		this.watchHandles = [
 			watch(this.listedChampion, async (c) => {
@@ -145,8 +154,23 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			watch(this.champion, (c) => {
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 
-				if(this.skipChampionOverrides){
-					this.skipChampionOverrides = false;
+				if (this.skipInitialChampionOverrides) {
+					this.skipInitialChampionOverrides = false;
+
+					for (const abilityKey in this.abilityLevels.value) {
+						this.abilityLevels.value[abilityKey as INonPassiveAbilityKey] = Math.min(
+							this.abilityLevels.value[abilityKey as INonPassiveAbilityKey],
+							this.maxAbilityLevels.value[abilityKey as INonPassiveAbilityKey],
+						);
+					}
+
+					for (const abilityKey in this.abilityVariants.value) {
+						this.abilityVariants.value[abilityKey as IChampionAbilityKey] = Math.min(
+							this.abilityVariants.value[abilityKey as IChampionAbilityKey],
+							this.maxAbilityVariants.value[abilityKey as IChampionAbilityKey],
+						);
+					}
+
 					return;
 				}
 
@@ -343,9 +367,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			rawShards,
 			rawCurrentHealth,
 			rawCurrentAbilityResource,
+			rawAbilityLevels,
+			rawAbilityVariants,
 
-			// Object.values(this.abilityLevels.value).join('-'),
-			// Object.values(this.abilityVariants.value).join('-'),
+			// TODO set role quest after champion
 			// this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 			// this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
 			// this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
@@ -354,7 +379,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
 			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
-			rv.skipChampionOverrides = true;
+			rv.skipInitialChampionOverrides = true;
 		}
 
 		if (rawLevel) {
@@ -446,6 +471,36 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const parsedValue = Number.parseInt(rawCurrentAbilityResource);
 			if (!Number.isNaN(parsedValue)) {
 				rv.currentAbilityResource.value = Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityResource.value, parsedValue) : parsedValue);
+			}
+		}
+
+		if (rawAbilityLevels?.length) {
+			const abilityLevels = rawAbilityLevels.split('-');
+			const abilityKeys = Object.keys(rv.abilityLevels.value);
+			for (let i = 0; i < abilityKeys.length; i++) {
+				if (abilityLevels[i]) {
+					const parsedLevel = Number.parseInt(abilityLevels[i]!);
+					if (!Number.isNaN(parsedLevel)) {
+						const abilityKey = abilityKeys[i] as INonPassiveAbilityKey;
+						rv.abilityLevels.value[abilityKey]
+							= Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityLevels.value[abilityKey], parsedLevel) : parsedLevel);
+					}
+				}
+			}
+		}
+
+		if (rawAbilityVariants?.length) {
+			const abilityVariants = rawAbilityVariants.split('-');
+			const abilityKeys = Object.keys(rv.abilityVariants.value);
+			for (let i = 0; i < abilityKeys.length; i++) {
+				if (abilityVariants[i]) {
+					const parsedVariant = Number.parseInt(abilityVariants[i]!);
+					if (!Number.isNaN(parsedVariant)) {
+						const abilityKey = abilityKeys[i] as IChampionAbilityKey;
+						rv.abilityVariants.value[abilityKey]
+							= Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityVariants.value[abilityKey], parsedVariant) : parsedVariant);
+					}
+				}
 			}
 		}
 

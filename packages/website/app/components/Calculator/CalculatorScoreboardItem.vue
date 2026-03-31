@@ -1046,7 +1046,7 @@ defineExpose({ el });
 							:id="`${group}-${index}-ability-${ability}`"
 							v-model="value.abilityLevels.value[ability]"
 							:label="`${ability} level`"
-							:options="Array.from({ length: value.champion.value.abilities[ability].maxLevel }, (_, index) => ({ level: index + 1 }))"
+							:options="Array.from({ length: value.maxAbilityLevels.value[ability] }, (_, index) => ({ level: index + 1 }))"
 							value-key="level"
 							@option-right-click="(event) => resetAbilityLevel(event, ability)"
 						>
