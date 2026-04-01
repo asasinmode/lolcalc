@@ -271,6 +271,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			roleQuest: this.roleQuest.value,
 			/* not cloned because the `setupInternalData` should handle safely using previous values to create new ones */
 			internalData: this.internalData.value,
+			internalItemData: structuredClone(toRaw(this.internalItemData.value)),
 			...overrides,
 		});
 	}

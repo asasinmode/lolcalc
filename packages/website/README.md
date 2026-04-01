@@ -41,7 +41,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] stats
     - [x] current health/mana
     - [x] slider drag health/mana
-    - [?] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) like energy, zaahen, fury
+    - [ ] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) when adding passives, like energy, zaahen, fury
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [x] abilities ui (only passive implemented)
@@ -65,7 +65,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] guinsoo
       - [ ] terminus
       - [ ] heartsteel
-      - [?] hubris
+      - [x] hubris
       - [ ] mejai's
       - [ ] dark seal
       - [ ] kraken slayer

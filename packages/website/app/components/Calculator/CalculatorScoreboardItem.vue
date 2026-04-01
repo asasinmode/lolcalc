@@ -159,10 +159,12 @@ function startItemDrag(event: DragEvent, index: number) {
 	emit('itemDragstart', event, index);
 }
 
+const championExtra = computed(() => props.value.champion.value && CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras && markRaw(CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]!.extras!));
+
 type IItemComponent = [is: Component, itemId: string, itemIndex: number];
 const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.map((item, index) => {
 	const component = item && ITEM_COMPONENTS[item.id]?.extras;
-	return component && [component, item.id, index];
+	return component && [markRaw(component), item.id, index];
 }).filter(Boolean) as [is: Component, itemId: string, itemIndex: number][]);
 
 const hoveredRune = shallowRef<IChampionRune>();
@@ -1203,9 +1205,9 @@ defineExpose({ el });
 					</p>
 				</div>
 			</section>
-			<section v-if="value.champion.value && CHAMPION_COMPONENTS[value.champion.value.id as IChampionId]?.extras" data-extras="">
+			<section v-if="itemExtras.length || championExtra" data-extras="">
 				<component
-					:is="CHAMPION_COMPONENTS[value.champion.value.id as IChampionId]!.extras"
+					:is="championExtra"
 					:value
 					:id-prefix="`${group}-${index}`"
 					@ability-hover="(...args: IScoreboardItemShowAbilityTooltipArgs) => showAbilityTooltip(...args, true)"
