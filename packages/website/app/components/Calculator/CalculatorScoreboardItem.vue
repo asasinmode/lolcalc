@@ -1951,26 +1951,6 @@ defineExpose({ el });
 				> article {
 					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] p-2 w-fit rounded-md';
 				}
-
-				> .number-extra {
-					--at-apply: 'grid grid-cols-[auto_auto_min-content_1fr] grid-rows-[min-content_min-content]';
-
-					> img {
-						--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size] me-2';
-					}
-
-					> label {
-						--at-apply: 'col-span-3';
-					}
-
-					> input {
-						--at-apply: 'box-content h-min w-[6ch] px-1 py-0.5 row-span-2 bg-white text-black me-2';
-					}
-
-					> button {
-						--at-apply: 'w-12 h-7';
-					}
-				}
 			}
 		}
 	}

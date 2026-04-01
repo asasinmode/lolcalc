@@ -11,37 +11,17 @@ defineEmits<{
 }>();
 
 const { abilityImage, abilityImageSize } = useChampionImages();
-
-const abilitySize = abilityImageSize('Veigar');
-
-const onPassiveStacksInput = useNumberInput([props.value.internalData, 'phenomenalEvilStacks']);
 </script>
 
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
-	<article class="number-extra" data-passive-stacks="">
-		<img
-			:src="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image, 'Veigar')"
-			:width="abilitySize"
-			:height="abilitySize"
-			aria-hidden="true"
-			@mouseenter="$emit('abilityHover', $event, 'passive', 0)"
-		>
-		<label :for="`${idPrefix}-passive-stacks`">
-			Phenomenal Evil stacks
-		</label>
-		<input
-			:id="`${idPrefix}-passive-stacks`"
-			:value="value.internalData.value.phenomenalEvilStacks"
-			min="0"
-			type="number"
-			@input="onPassiveStacksInput"
-		>
-		<button class="pretend-ui-button" @click="value.internalData.value.phenomenalEvilStacks = 0">
-			min
-		</button>
-		<button class="pretend-ui-button" disabled>
-			max
-		</button>
-	</article>
+	<VExtrasNumber
+		v-model="value.internalData.value.phenomenalEvilStacks"
+		:id-prefix
+		:img="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image, 'Veigar')"
+		:img-size="abilityImageSize('Veigar')"
+		label="Phenomenal Evil stacks"
+		:used-number-input="useNumberInput([value.internalData, 'phenomenalEvilStacks'])"
+		@img-mouseenter="$emit('abilityHover', $event, 'passive', 0)"
+	/>
 </template>
