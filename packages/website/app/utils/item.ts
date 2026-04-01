@@ -1,12 +1,21 @@
 import type { IShopItem } from './types';
 
-export const ITEM_CALCULATIONS: Record<string, Record<string, (target?: IItemVariableCalculationTarget) => number>> = {
-	3004: {	// manamune
-		// TODO
-		// BonusADFromMana(_source) {
-		// 	const { mFormulaParts } = useItems()['3004']!.itemCalculations!.BonusADFromMana!;
-		// 	return mFormulaParts![0].mCoefficient;
-		// },
+/** colloquial names to id */
+export const ITEM_NAME_TO_ID = {
+	hubris: 6697,
+};
+
+export const ITEM_SPECIFICS: Record<string, {
+	/** the properties `setupInternalData` uses, needed for cleanup */
+	internalDataProperties?: string[];
+	setupInternalData?: (self: DamageSource) => void;
+}> = {
+	[ITEM_NAME_TO_ID.hubris]: {
+		internalDataProperties: ['hubrisStacks'],
+		setupInternalData(self: DamageSource) {
+			console.log('setting up hubris stacks')
+			self.internalItemData.value.hubrisStacks = Math.max(0, self.internalItemData.value.hubrisStacks ?? 0);
+		},
 	},
 };
 

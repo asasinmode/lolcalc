@@ -15,6 +15,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	dragonSoul: UnwrapRef<IDamageSource['dragonSoul']>;
 	roleQuest: UnwrapRef<IDamageSource['roleQuest']>;
 	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
+	internalItemData: UnwrapRef<IDamageSource<Id>['internalItemData']>;
 }
 
 type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
@@ -98,6 +99,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	internalData: Ref<Id extends IInternalDataSetupChampions
 		? ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
 		: undefined>;
+	/* object containing the internal data of champion items, similar to `internalData` but untyped */
+	internalItemData: Ref<any>;
+
 	watchHandles: WatchHandle[];
 
 	/** if true, first call of champion watch will not set anything, used when parsing stringified data */
@@ -139,6 +143,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.roleQuest = ref(overrides.roleQuest);
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
+		this.internalItemData = ref(overrides.internalItemData ?? {});
 		this.skipInitialChampionOverrides = false;
 
 		this.watchHandles = [
@@ -230,6 +235,24 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					}
 				}
 			}),
+
+			watch(() => this.items.value.map(i => i?.id), (newIds, oldIds) => {
+				const removedItems = oldIds?.filter(id => !newIds.includes(id)) ?? [];
+				for (const removedId of removedItems) {
+					if (removedId && ITEM_SPECIFICS[removedId]?.internalDataProperties?.length) {
+						for (const key of ITEM_SPECIFICS[removedId].internalDataProperties) {
+							this.internalItemData.value[key] = undefined;
+						}
+					}
+				}
+
+				const addedItems = newIds.filter(id => !oldIds?.includes(id));
+				for (const addedId of addedItems) {
+					if (addedId && ITEM_SPECIFICS[addedId]?.setupInternalData) {
+						ITEM_SPECIFICS[addedId].setupInternalData(this);
+					}
+				}
+			}, { immediate: true, deep: true }),
 		];
 	}
 
@@ -302,6 +325,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			() => this.dragonStacks.value.join('-'),
 			this.dragonSoul,
 			() => Object.values(this.internalData.value || {}).join('-'),
+			() => Object.values(this.internalItemData.value || {}).join('-'),
 		];
 	}
 

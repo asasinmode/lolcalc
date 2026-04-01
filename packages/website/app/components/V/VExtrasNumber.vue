@@ -28,7 +28,7 @@ const value = defineModel<number>({ required: true });
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
 		<label :for="`${idPrefix}-passive-stacks`">
-			Phenomenal Evil stacks
+			{{ label }}
 		</label>
 		<input
 			:id="`${idPrefix}-passive-stacks`"

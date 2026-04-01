@@ -2,6 +2,7 @@
 import type { IComputedDamageSourceChampionStat } from '~/utils/DamageSource';
 import type { IScoreboardItemShowAbilityTooltipArgs, IWithCalculateDynamicValues } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
+import { ITEM_COMPONENTS } from '~/components/Item';
 
 const props = defineProps<{
 	index: number;
@@ -157,6 +158,12 @@ function startItemDrag(event: DragEvent, index: number) {
 	itemHoverTooltip.value?.hidePopover();
 	emit('itemDragstart', event, index);
 }
+
+type IItemComponent = [is: Component, itemId: string, itemIndex: number];
+const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.map((item, index) => {
+	const component = item && ITEM_COMPONENTS[item.id]?.extras;
+	return component && [component, item.id, index];
+}).filter(Boolean) as [is: Component, itemId: string, itemIndex: number][]);
 
 const hoveredRune = shallowRef<IChampionRune>();
 const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
@@ -1202,6 +1209,14 @@ defineExpose({ el });
 					:value
 					:id-prefix="`${group}-${index}`"
 					@ability-hover="(...args: IScoreboardItemShowAbilityTooltipArgs) => showAbilityTooltip(...args, true)"
+				/>
+				<component
+					:is
+					v-for="[is, itemId, itemIndex] in itemExtras"
+					:key="itemId"
+					:value
+					:id-prefix="`${group}-${index}`"
+					@item-hover="showItemHoverTooltip($event, itemIndex)"
 				/>
 			</section>
 		</details>

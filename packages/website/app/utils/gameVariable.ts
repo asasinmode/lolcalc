@@ -50,8 +50,9 @@ export function itemVariableValue(variable: string, item: IItem, target?: IItemV
 			value = itemVariableValue(item.stringCalculations[variable][key].slice(1, -1), item, target).value;
 		}
 	} else if (item.itemCalculations?.[variable]) {
-		const result = ITEM_CALCULATIONS[item.id]?.[variable]?.(target);
-		value = result;
+		// TODO
+		// const result = ITEM_SPECIFICS[item.id]?.[variable]?.(target);
+		// value = result;
 	} else if (variable.startsWith('Effect')) {
 		value = item.effectAmount?.[Number.parseInt(variable.slice(6)) - 1];
 	}
