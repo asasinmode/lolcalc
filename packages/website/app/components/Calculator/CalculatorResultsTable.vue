@@ -225,6 +225,39 @@ function addComputedColumn(column: IDamageResultTableColumn) {
 	}
 }
 
+function startRemovingColumn(event: MouseEvent, index: number) {
+	const removeButton = (event.target as HTMLElement).closest('button');
+	const undoRemoveButton = removeButton?.nextElementSibling?.nextElementSibling as HTMLButtonElement | undefined;
+	if (!undoRemoveButton) {
+		removeResultsColumn(index);
+		return;
+	}
+
+	const container = removeButton?.closest('td');
+
+	function removeAndFocusNext() {
+		const nextElement = container?.nextElementSibling;
+		removeResultsColumn(index);
+		nextTick(() => {
+			nextElement?.querySelector('button')?.focus();
+		});
+	}
+
+	function undoRemove() {
+		undoRemoveButton!.removeEventListener('click', undoRemove);
+		undoRemoveButton!.removeEventListener('focusout', removeAndFocusNext);
+		container?.removeEventListener('mouseleave', removeAndFocusNext);
+		undoRemoveButton!.style.display = 'none';
+		removeButton?.focus();
+	}
+
+	undoRemoveButton.addEventListener('click', undoRemove);
+	undoRemoveButton.addEventListener('focusout', removeAndFocusNext);
+	container?.addEventListener('mouseleave', removeAndFocusNext);
+	undoRemoveButton.style.display = 'grid';
+	undoRemoveButton.focus();
+}
+
 function removeResultsColumn(index: number) {
 	const [column] = resultColumns.value.splice(index, 1);
 
@@ -1008,7 +1041,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 							<button
 								title="remove"
 								class="pretend-ui-button"
-								@click="removeResultsColumn(index)"
+								@click="startRemovingColumn($event, index)"
 							>
 								<span>
 									remove
@@ -1025,6 +1058,9 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 							>
 								<span>move right, alt+click to duplicate to the right</span>
 								<Icon class="i-ph:arrow-right" />
+							</button>
+							<button style="display: none">
+								restore
 							</button>
 						</template>
 						<button
@@ -1455,12 +1491,30 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 						}
 
 						&:nth-of-type(2) {
+							--at-apply: 'hoverable:bg-red-500';
 							grid-area: remove;
+
+							&:hover,
+							&:focus-visible {
+								> .icon {
+									--at-apply: 'text-white';
+								}
+							}
 						}
 
 						&:nth-of-type(3) {
 							--at-apply: 'justify-self-start';
 							grid-area: move-right;
+						}
+
+						&:nth-of-type(4) {
+							--at-apply: 'absolute inset-0 h-full grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
+							-webkit-text-stroke: black 0.15em;
+							paint-order: stroke fill;
+
+							&::before {
+								--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
+							}
 						}
 
 						> span:nth-child(1) {
@@ -1499,6 +1553,17 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 
 							> span:nth-child(1) {
 								--at-apply: 'sr-only';
+							}
+
+							&:nth-child(3):not(:disabled) {
+								--at-apply: 'hoverable:bg-red-500';
+
+								&:hover,
+								&:focus-visible {
+									> .icon {
+										--at-apply: 'text-white';
+									}
+								}
 							}
 
 							&[aria-expanded='true'] > span {

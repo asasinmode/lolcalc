@@ -108,8 +108,8 @@ const undoRemoveButton = useTemplateRef('undoRemoveButton');
 function secondStepRemove() {
 	undoRemoveButton.value!.style.display = 'grid';
 	undoRemoveButton.value!.focus();
-	undoRemoveButton.value!.addEventListener('focusout', removeAndFocusNext, { once: true });
-	el.value!.addEventListener('mouseleave', removeAndFocusNext, { once: true });
+	undoRemoveButton.value!.addEventListener('focusout', removeAndFocusNext);
+	el.value!.addEventListener('mouseleave', removeAndFocusNext);
 }
 
 function undoRemove() {
@@ -1350,13 +1350,17 @@ defineExpose({ el });
 			}
 
 			&:nth-last-of-type(2) {
-				--at-apply: 'self-end mb-0.5 hoverable:bg-red-500';
+				--at-apply: 'self-end mb-0.5';
 				grid-area: clear;
 
-				&:hover,
-				&:focus-visible {
-					> .icon {
-						--at-apply: 'text-white';
+				&:not(:disabled) {
+					--at-apply: 'hoverable:bg-red-500';
+
+					&:hover,
+					&:focus-visible {
+						> .icon {
+							--at-apply: 'text-white';
+						}
 					}
 				}
 			}

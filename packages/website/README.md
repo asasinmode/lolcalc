@@ -119,7 +119,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
-- [?] confirm removing/clearing row/scoreboard item, ideally undo + dismiss
+- [x] confirm removing/clearing row/scoreboard item, ideally undo
 - [?] header, footer, contact info
 - [?] extended item hover tooltips, like swiftmarch showing adaptive force gained
 - [?] implement role quests
