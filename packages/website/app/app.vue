@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { CalculatorResultsTable } from '#components';
 import type { ShallowRef } from 'vue';
+import type { IDamageResultTableColumn, IDamageResultTableSection } from './utils/types';
 import { _setupGlobalKeyModifiers } from './composables/useGlobalKeyModifiers';
 
 useHead({
@@ -15,7 +16,7 @@ useSeoMeta({
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
 
-const { version } = usePatchVersion();
+const { version, minorVersion } = usePatchVersion();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
@@ -26,6 +27,82 @@ _setupGlobalKeyModifiers();
 /* expected to have DamageSources added in `restoreState` */
 const damageSources = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
 const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSource[]>;
+
+const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
+const resultSections = ref<IDamageResultTableSection[]>([
+	{
+		id: 'stats',
+		championOrItemId: 'stats',
+		name: 'stats',
+		type: 'all',
+		isPermanent: true,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
+		imageSize: 32,
+		rows: markRaw(Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
+			return {
+				id: championStat,
+				name: statName,
+				icon: {
+					path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
+					width: 20,
+					height: 20,
+				},
+			};
+		})),
+		getCellValue(_section, rowId, source, _target) {
+			if (!source) {
+				return;
+			}
+
+			const stat = source.computed.stats.value[rowId as IChampionStatName];
+			return {
+				numberValue: stat.total,
+				value: `${stat.formattedTotal}${stat.isPercentage ? '%' : ''}`,
+			};
+		},
+	},
+	{
+		id: 'basicAttack',
+		championOrItemId: 'basicAttack',
+		name: 'basic attack',
+		type: 'all',
+		isPermanent: true,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
+		imageSize: 32,
+		rows: markRaw([
+			{
+				name: 'total',
+				id: 'total',
+			},
+			{
+				name: 'physical damage',
+				id: 'physicalDamage',
+			},
+			{
+				name: 'magic damage',
+				id: 'magicDamage',
+			},
+			{
+				name: 'true damage',
+				id: 'trueDamage',
+			},
+			{
+				name: 'DPS',
+				id: 'dps',
+			},
+		]),
+		// TODO
+		getCellValue() {
+			const value = Math.round(Math.random() * 500);
+			const numberValue = value;
+
+			return { value, numberValue };
+		},
+		selectValue: 'normal',
+		selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
+		selectLabel: 'attack type',
+	},
+]);
 
 const resultsTable = useTemplateRef('resultsTable');
 
@@ -111,6 +188,8 @@ onBeforeUnmount(() => {
 			</p>
 			<CalculatorResultsTable
 				ref="resultsTable"
+				v-model:sections="resultSections"
+				v-model:columns="resultColumns"
 				:damage-sources
 				:damage-targets
 				:show-results

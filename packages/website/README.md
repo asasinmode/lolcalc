@@ -119,8 +119,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
-- [?] implement role quests
+- [?] confirm removing/clearing row/scoreboard item, ideally undo + dismiss
 - [?] header, footer, contact info
+- [?] extended item hover tooltips, like swiftmarch showing adaptive force gained
+- [?] implement role quests
 - [ ] mobile version and make look better
 - [ ] calculations
   - [ ] stats from rune shards
@@ -141,7 +143,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] champ select roles
   - [ ] role quests
   - [ ] dragons
-- [?] extended item hover tooltips, like swiftmarch showing adaptive force gained
 - [x] disclaimer not endorsed by riot
 - [ ] alerts and info texts for stuff not implemented yet
 - [ ] tutorial popups with helpful info
@@ -158,7 +159,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] [wiki](https://github.com/asasinmode/lolcalc/wiki)
   - [ ] help/faq page
   - [ ] github readme
-- [?] confirm removing/clearing row/scoreboard item, ideally undo + dismiss
 - [ ] submit feedback on page / report issues
   - [ ] rust/go server
   - [ ] github issue template
