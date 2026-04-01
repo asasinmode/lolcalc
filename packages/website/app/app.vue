@@ -157,7 +157,7 @@ onBeforeUnmount(() => {
 		--at-apply: 'mx-auto text-center relative';
 
 		> p {
-			--at-apply: 'absolute z-10 top-16 py-2 start-1/2 -translate-x-1/2 text-center text-xl font-medium';
+			--at-apply: 'absolute z-10 top-16 py-2 start-1/2 -translate-x-1/2 text-center text-xl font-500';
 			-webkit-text-stroke: black 0.2em;
 			paint-order: stroke fill;
 		}

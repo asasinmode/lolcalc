@@ -1444,7 +1444,7 @@ defineExpose({ el });
 					}
 
 					&::after {
-						--at-apply: 'tracking-wide bg-transparent size-auto text-white font-semibold';
+						--at-apply: 'tracking-wide bg-transparent size-auto text-white font-600';
 						mask: unset;
 						-webkit-text-stroke: black 0.15em;
 						paint-order: stroke fill;
@@ -1957,7 +1957,7 @@ defineExpose({ el });
 				--at-apply: 'self-center';
 
 				> h4 {
-					--at-apply: 'absolute top-0 start-0 text-xs uppercase font-medium text-neutral-300 leading-3';
+					--at-apply: 'absolute top-0 start-0 text-xs uppercase font-500 text-neutral-300 leading-3';
 				}
 			}
 

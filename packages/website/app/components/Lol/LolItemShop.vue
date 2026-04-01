@@ -1123,7 +1123,7 @@ defineExpose({
 			}
 
 			> span:last-of-type {
-				--at-apply: 'block leading-5 pt-0.5 text-center font-medium';
+				--at-apply: 'block leading-5 pt-0.5 text-center font-500';
 			}
 
 			&:hover,
@@ -1206,7 +1206,7 @@ defineExpose({
 					}
 
 					> span {
-						--at-apply: 'truncate font-medium';
+						--at-apply: 'truncate font-500';
 					}
 				}
 			}
@@ -1336,7 +1336,7 @@ defineExpose({
 				grid-area: builds-into;
 
 				> button {
-					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-button-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-semibold text-cyan-300';
+					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-button-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300';
 				}
 			}
 		}
@@ -1346,7 +1346,7 @@ defineExpose({
 			grid-area: footer;
 
 			> button {
-				--at-apply: 'b-2 b-[--ui-button-border-clr] text-amber-100 font-medium py-0.5 px-2 uppercase text-center w-24';
+				--at-apply: 'b-2 b-[--ui-button-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-24';
 
 				&:nth-of-type(1) {
 					--at-apply: 'bg-yellow-950 hoverable:bg-yellow-900';
@@ -1358,7 +1358,7 @@ defineExpose({
 			}
 
 			> p {
-				--at-apply: 'text-neutral-400 font-medium flex items-center';
+				--at-apply: 'text-neutral-400 font-500 flex items-center';
 
 				> img {
 					--at-apply: 'inline-block h-3.5 w-auto';
@@ -1366,7 +1366,7 @@ defineExpose({
 				}
 
 				> span {
-					--at-apply: 'text-amber-200 font-medium text-lg mx-1.5';
+					--at-apply: 'text-amber-200 font-500 text-lg mx-1.5';
 				}
 			}
 		}

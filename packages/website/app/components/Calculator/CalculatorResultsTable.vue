@@ -1466,7 +1466,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 					}
 
 					> span {
-						--at-apply: 'pointer-events-none text-center self-center text-lg font-semibold z-1';
+						--at-apply: 'pointer-events-none text-center self-center text-lg font-600 z-1';
 						-webkit-text-stroke: black 0.15em;
 						paint-order: stroke fill;
 						grid-area: vs;
@@ -1566,7 +1566,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 
 						> span,
 						> select {
-							--at-apply: 'text-lg font-medium whitespace-nowrap';
+							--at-apply: 'text-lg font-500 whitespace-nowrap';
 						}
 
 						> img {

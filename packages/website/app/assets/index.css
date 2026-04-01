@@ -128,6 +128,6 @@
 	}
 
 	.skip-link {
-		--at-apply: 'absolute -start-2500 bg-white text-black p-1 font-semibold focus-visible:start-0';
+		--at-apply: 'absolute -start-2500 bg-white text-black p-1 font-600 focus-visible:start-0';
 	}
 }

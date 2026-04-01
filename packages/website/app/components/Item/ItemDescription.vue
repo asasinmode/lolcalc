@@ -182,7 +182,7 @@ defineExpose({ header });
 		}
 
 		variablename {
-			--at-apply: 'font-medium';
+			--at-apply: 'font-500';
 			text-decoration-line: underline;
 			text-decoration-thickness: 0.1em;
 			text-decoration-color: #ff00ff;

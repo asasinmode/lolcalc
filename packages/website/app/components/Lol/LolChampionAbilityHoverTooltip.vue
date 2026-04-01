@@ -229,7 +229,7 @@ defineExpose({ el });
 					}
 
 					[data-current] {
-						--at-apply: 'text-white font-medium';
+						--at-apply: 'text-white font-500';
 					}
 				}
 			}
