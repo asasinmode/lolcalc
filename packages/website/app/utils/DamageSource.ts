@@ -104,8 +104,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	watchHandles: WatchHandle[];
 
-	/** if true, first call of champion watch will not set anything, used when parsing stringified data */
-	skipInitialChampionOverrides: boolean;
+	dataFromStringifiedData: boolean;
 
 	constructor(overrides: (Partial<Omit<IOverrides<Id>, 'champion'>> & {
 		champion?: { id: Id } & IListedChampion;
@@ -144,7 +143,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
-		this.skipInitialChampionOverrides = false;
+		this.dataFromStringifiedData = false;
 
 		this.watchHandles = [
 			watch(this.listedChampion, async (c) => {
@@ -159,21 +158,21 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			watch(this.champion, (c) => {
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 
-				if (this.skipInitialChampionOverrides) {
-					this.skipInitialChampionOverrides = false;
+				if (this.dataFromStringifiedData) {
+					this.dataFromStringifiedData = false;
 
 					for (const abilityKey in this.abilityLevels.value) {
-						this.abilityLevels.value[abilityKey as INonPassiveAbilityKey] = Math.min(
+						this.abilityLevels.value[abilityKey as INonPassiveAbilityKey] = Math.max(0, Math.min(
 							this.abilityLevels.value[abilityKey as INonPassiveAbilityKey],
 							this.maxAbilityLevels.value[abilityKey as INonPassiveAbilityKey],
-						);
+						));
 					}
 
 					for (const abilityKey in this.abilityVariants.value) {
-						this.abilityVariants.value[abilityKey as IChampionAbilityKey] = Math.min(
+						this.abilityVariants.value[abilityKey as IChampionAbilityKey] = Math.max(0, Math.min(
 							this.abilityVariants.value[abilityKey as IChampionAbilityKey],
 							this.maxAbilityVariants.value[abilityKey as IChampionAbilityKey],
-						);
+						));
 					}
 
 					return;
@@ -372,6 +371,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
+			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value) : undefined,
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
@@ -402,13 +402,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			rawDragonStacks,
 			rawDragonSoulIndex,
 			rawInternalData,
+			rawInternalItemData,
 			rawRoleQuestIndex,
 		] = data.split('_');
-
-		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
-			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
-			rv.skipInitialChampionOverrides = true;
-		}
 
 		if (rawRoleQuestIndex?.length) {
 			const parsedIndex = Number.parseInt(rawRoleQuestIndex);
@@ -424,6 +420,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			if (!Number.isNaN(level)) {
 				rv.level.value = Math.max(1, Math.min(rv.maxLevel.value, level));
 			}
+		}
+
+		if (rawInternalItemData?.length) {
+			try {
+				const data = JSON.parse(rawInternalItemData);
+				if (typeof data === 'object' && data && !Array.isArray(data)) {
+					for (const [key, value] of Object.entries(data)) {
+						if (typeof value === 'number') {
+							// TODO not sure if all should be rounded
+							rv.internalItemData.value[key] = Math.round(value);
+						}
+					}
+				}
+			} catch {}
 		}
 
 		const itemIds = rawItemIds?.split('-');
@@ -499,14 +509,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawCurrentHealth) {
-			const parsedValue = Number.parseInt(rawCurrentHealth);
+			const parsedValue = Number.parseFloat(rawCurrentHealth);
 			if (!Number.isNaN(parsedValue)) {
 				rv.currentHealth.value = Math.max(0, rv.champion.value ? Math.min(rv.maxHealth.value, parsedValue) : parsedValue);
 			}
 		}
 
 		if (rawCurrentAbilityResource) {
-			const parsedValue = Number.parseInt(rawCurrentAbilityResource);
+			const parsedValue = Number.parseFloat(rawCurrentAbilityResource);
 			if (!Number.isNaN(parsedValue)) {
 				rv.currentAbilityResource.value = Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityResource.value, parsedValue) : parsedValue);
 			}
@@ -521,7 +531,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					if (!Number.isNaN(parsedLevel)) {
 						const abilityKey = abilityKeys[i] as INonPassiveAbilityKey;
 						rv.abilityLevels.value[abilityKey]
-							= Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityLevels.value[abilityKey], parsedLevel) : parsedLevel);
+							= Math.max(0, parsedLevel);
 					}
 				}
 			}
@@ -536,7 +546,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					if (!Number.isNaN(parsedVariant)) {
 						const abilityKey = abilityKeys[i] as IChampionAbilityKey;
 						rv.abilityVariants.value[abilityKey]
-							= Math.max(0, rv.champion.value ? Math.min(rv.maxAbilityVariants.value[abilityKey], parsedVariant) : parsedVariant);
+							= Math.max(0, parsedVariant);
 					}
 				}
 			}
@@ -564,8 +574,21 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (rawInternalData?.length) {
 			try {
-				rv.internalData.value = JSON.parse(rawInternalData);
+				const data = JSON.parse(rawInternalData);
+				if (typeof data === 'object' && data && !Array.isArray(data)) {
+					for (const [key, value] of Object.entries(data)) {
+						if (typeof value === 'number') {
+							// TODO not sure if all should be rounded
+							rv.internalData.value[key] = Math.round(value);
+						}
+					}
+				}
 			} catch {}
+		}
+
+		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
+			rv.dataFromStringifiedData = true;
+			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
 		}
 
 		return rv;

@@ -13,7 +13,6 @@ export const ITEM_SPECIFICS: Record<string, {
 	[ITEM_NAME_TO_ID.hubris]: {
 		internalDataProperties: ['hubrisStacks'],
 		setupInternalData(self: DamageSource) {
-			console.log('setting up hubris stacks')
 			self.internalItemData.value.hubrisStacks = Math.max(0, self.internalItemData.value.hubrisStacks ?? 0);
 		},
 	},

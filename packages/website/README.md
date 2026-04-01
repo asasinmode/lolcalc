@@ -136,6 +136,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
   - [ ] check if can save only gold cost, not whole object
+  - [ ] are health/ability resource floats?
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
