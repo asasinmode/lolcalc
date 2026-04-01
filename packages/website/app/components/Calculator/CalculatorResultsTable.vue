@@ -979,13 +979,20 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 							<input id="results-table-values-for" v-model="flipResults" type="checkbox" @update:model-value="recalculateAllColumns">
 							flip results (target vs source)
 						</label>
-						<button
-							class="pretend-ui-button"
-							:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
-							@click="cleanupUnused"
-						>
-							remove unused
-						</button>
+						<ClientOnly>
+							<button
+								class="pretend-ui-button"
+								:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
+								@click="cleanupUnused"
+							>
+								remove unused
+							</button>
+							<template #fallback>
+								<button class="prewtend-ui-button">
+									remove unused
+								</button>
+							</template>
+						</ClientOnly>
 						<span aria-hidden="true">damage type</span>
 					</div>
 				</td>
@@ -1131,53 +1138,69 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 			>
 				<tr>
 					<td :headers="`results-table-section-header-${section.id}`">
-						<button
-							title="move up"
-							class="pretend-ui-button"
-							:disabled="index === 0"
-							draggable="true"
-							@click="moveResultSection(index, index - 1)"
-							@dragstart="startResultSectionDrag($event, index)"
-							@dragend="endResultSectionDrag"
-						>
-							<span>move up</span>
-							<Icon class="i-ph:arrow-up" />
-						</button>
-						<button
-							title="move down"
-							class="pretend-ui-button"
-							draggable="true"
-							:disabled="index === (resultSections.length - 1)"
-							@click="moveResultSection(index, index + 1)"
-							@dragstart="startResultSectionDrag($event, index)"
-							@dragend="endResultSectionDrag"
-						>
-							<span>move down</span>
-							<Icon class="i-ph:arrow-down" />
-						</button>
-						<button
-							title="remove"
-							class="pretend-ui-button"
-							:disabled="section.isPermanent"
-							@click="removeDamageSection(index)"
-						>
-							<span>
-								remove
-							</span>
-							<Icon class="i-ph:trash" />
-						</button>
-						<button
-							:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
-							class="pretend-ui-button"
-							:aria-expanded="expandedSections.includes(section.id)"
-							:aria-controls="`results-table-section-body-${section.id}`"
-							@click="toggleResultsSection(section.id)"
-						>
-							<span>
-								{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
-							</span>
-							<Icon class="i-ph:caret-down" />
-						</button>
+						<ClientOnly>
+							<button
+								title="move up"
+								class="pretend-ui-button"
+								:disabled="index === 0"
+								draggable="true"
+								@click="moveResultSection(index, index - 1)"
+								@dragstart="startResultSectionDrag($event, index)"
+								@dragend="endResultSectionDrag"
+							>
+								<span>move up</span>
+								<Icon class="i-ph:arrow-up" />
+							</button>
+							<button
+								title="move down"
+								class="pretend-ui-button"
+								draggable="true"
+								:disabled="index === (resultSections.length - 1)"
+								@click="moveResultSection(index, index + 1)"
+								@dragstart="startResultSectionDrag($event, index)"
+								@dragend="endResultSectionDrag"
+							>
+								<span>move down</span>
+								<Icon class="i-ph:arrow-down" />
+							</button>
+							<button
+								title="remove"
+								class="pretend-ui-button"
+								:disabled="section.isPermanent"
+								@click="removeDamageSection(index)"
+							>
+								<span>
+									remove
+								</span>
+								<Icon class="i-ph:trash" />
+							</button>
+							<button
+								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
+								class="pretend-ui-button"
+								:aria-expanded="expandedSections.includes(section.id)"
+								:aria-controls="`results-table-section-body-${section.id}`"
+								@click="toggleResultsSection(section.id)"
+							>
+								<span>
+									{{ expandedSections.includes(section.id) ? 'collapse' : 'expand' }}
+								</span>
+								<Icon class="i-ph:caret-down" />
+							</button>
+							<template #fallback>
+								<button class="pretend-ui-button">
+									move up
+								</button>
+								<button class="pretend-ui-button">
+									move down
+								</button>
+								<button class="pretend-ui-button">
+									move remove
+								</button>
+								<button class="pretend-ui-button">
+									move expand
+								</button>
+							</template>
+						</ClientOnly>
 					</td>
 					<th
 						:id="`results-table-section-header-${section.id}`"
