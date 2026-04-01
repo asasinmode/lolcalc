@@ -40,6 +40,8 @@ const { selectItems } = useItemShop();
 const text = useText();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
+const el = useTemplateRef('el');
+
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
 const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
@@ -97,8 +99,32 @@ function emitRemove() {
 	if (globalKeyModifiers.value.shift) {
 		emit('clear');
 	} else {
-		emit('remove');
+		secondStepRemove();
 	}
+}
+
+const undoRemoveButton = useTemplateRef('undoRemoveButton');
+
+function secondStepRemove() {
+	undoRemoveButton.value!.style.display = 'grid';
+	undoRemoveButton.value!.focus();
+	undoRemoveButton.value!.addEventListener('focusout', removeAndFocusNext, { once: true });
+	el.value!.addEventListener('mouseleave', removeAndFocusNext, { once: true });
+}
+
+function undoRemove() {
+	el.value!.removeEventListener('mouseleave', removeAndFocusNext);
+	undoRemoveButton.value!.removeEventListener('focusout', removeAndFocusNext);
+	undoRemoveButton.value!.style.display = 'none';
+	(undoRemoveButton.value!.nextElementSibling as HTMLButtonElement)?.focus();
+}
+
+function removeAndFocusNext() {
+	const nextElement = el.value!.nextElementSibling;
+	emit('remove');
+	nextTick(() => {
+		nextElement?.querySelector('button')?.focus();
+	});
 }
 
 const removeButtonAttrs = computed(() => (isFirstAndOnly.value
@@ -722,8 +748,6 @@ const hoveredDragonThingText = computed(() => {
 	};
 });
 
-const el = useTemplateRef('el');
-
 onBeforeUnmount(() => {
 	healthBarCleanup();
 	abilityResourceBarCleanup();
@@ -912,6 +936,9 @@ defineExpose({ el });
 				:item="hoveredItemIndex !== undefined ? value.items.value[hoveredItemIndex] : undefined"
 			/>
 		</div>
+		<button ref="undoRemoveButton" style="display: none" @click="undoRemove">
+			restore
+		</button>
 		<button
 			:title="removeButtonAttrs.title"
 			class="pretend-ui-button"
@@ -1237,7 +1264,7 @@ defineExpose({ el });
 	}
 
 	#scoreboard > div > ul > [data-scoreboard-item] {
-		--at-apply: 'grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
+		--at-apply: 'relative grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
 
 		--select-champion-size: calc(var(--spacing) * 14);
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
@@ -1312,14 +1339,31 @@ defineExpose({ el });
 				grid-area: duplicate;
 			}
 
-			&:nth-last-of-type(1) {
-				--at-apply: 'self-start mt-0.5';
-				grid-area: expand;
+			&:nth-last-of-type(3) {
+				--at-apply: 'absolute inset-0 grid place-items-center text-center text-xl font-600 backdrop-blur-2 z-10 tracking-wide focus-visible:outline-none bg-black/20';
+				-webkit-text-stroke: black 0.15em;
+				paint-order: stroke fill;
+
+				&::before {
+					--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
+				}
 			}
 
 			&:nth-last-of-type(2) {
-				--at-apply: 'self-end mb-0.5';
+				--at-apply: 'self-end mb-0.5 hoverable:bg-red-500';
 				grid-area: clear;
+
+				&:hover,
+				&:focus-visible {
+					> .icon {
+						--at-apply: 'text-white';
+					}
+				}
+			}
+
+			&:nth-last-of-type(1) {
+				--at-apply: 'self-start mt-0.5';
+				grid-area: expand;
 			}
 
 			&:nth-of-type(-n + 4),
