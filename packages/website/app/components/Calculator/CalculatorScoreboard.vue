@@ -103,7 +103,7 @@ function finishDrag(event: MouseEvent) {
 	if (droppedAt && dragging.value) {
 		const duplicate = dragging.value.duplicate || event.altKey || globalKeyModifiers.value.alt;
 		const item = duplicate
-			? markRaw(dragging.value.source[dragging.value.index]!.clone())
+			? dragging.value.source[dragging.value.index]!.clone()
 			: dragging.value.source.splice(dragging.value.index, 1)[0]!;
 
 		if (droppedAt.target.length === 1 && droppedAt.index === 0 && !droppedAt.target[droppedAt.index]?.anythingFilled.value) {
@@ -230,11 +230,11 @@ function remove(index: number, target: DamageSource[]) {
 }
 
 function add(target: DamageSource[]) {
-	target.push(markRaw(new DamageSource()));
+	target.push(new DamageSource());
 }
 
 function duplicate(index: number, target: DamageSource[], shift: boolean) {
-	const newItem = markRaw(target[index]!.clone());
+	const newItem = target[index]!.clone();
 	if (shift) {
 		const into = target === damageSources.value ? damageTargets.value : damageSources.value;
 		if (into.length > 1 || into[0]?.anythingFilled.value) {
@@ -251,10 +251,10 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 	const into = target === damageSources.value ? damageTargets.value : damageSources.value;
 	let newItem: DamageSource;
 	if (alt) {
-		newItem = markRaw(target[index]!.clone());
+		newItem = target[index]!.clone();
 	} else {
 		newItem = target.splice(index, 1)[0]!;
-		!target.length && target.push(markRaw(new DamageSource()));
+		!target.length && target.push(new DamageSource());
 	}
 	if (into.length > 1 || into[0]?.anythingFilled.value) {
 		into.push(newItem);
@@ -264,7 +264,7 @@ function changeGroup(index: number, target: DamageSource[], alt: boolean) {
 }
 
 function move(index: number, target: DamageSource[], toIndex: number, alt: boolean) {
-	const newItem = alt ? markRaw(target[index]!.clone()) : target.splice(index, 1)[0]!;
+	const newItem = alt ? target[index]!.clone() : target.splice(index, 1)[0]!;
 	target.splice(toIndex, 0, newItem);
 }
 

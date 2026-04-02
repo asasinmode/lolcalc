@@ -253,6 +253,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				}
 			}, { immediate: true, deep: true }),
 		];
+
+		markRaw(this);
 	}
 
 	clone(overrides: Partial<IOverrides> = {}): DamageSource<Id> {
@@ -441,7 +443,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			for (let i = 0; i < rv.items.value.length; i++) {
 				const item = items[itemIds[i]!];
 				if (item && itemBuyability(item, rv, items, false) === 1) {
-					rv.items.value[i] = markRaw(item);
+					rv.items.value[i] = item;
 				}
 			}
 			cleanupItems(rv.items.value);
@@ -604,11 +606,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (this.roleQuest.value === 'bot' && item.isBoots) {
-			this.items.value[6] = markRaw(item);
+			this.items.value[6] = item;
 		} else {
 			for (let i = 0; i < 6; i++) {
 				if (!this.items.value[i]) {
-					this.items.value[i] = markRaw(item);
+					this.items.value[i] = item;
 					break;
 				}
 			}

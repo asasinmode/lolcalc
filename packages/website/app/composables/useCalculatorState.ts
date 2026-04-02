@@ -157,27 +157,27 @@ export function useCalculatorState(
 
 		const version = params.get('v');
 		if (version !== STATE_VERSION) {
-			damageSources.value.push(markRaw(new DamageSource()));
-			damageTargets.value.push(markRaw(new DamageSource()));
+			damageSources.value.push(new DamageSource());
+			damageTargets.value.push(new DamageSource());
 			return;
 		}
 
 		const savedSources = params.getAll('src');
 		if (savedSources.length) {
 			for (const data of savedSources) {
-				damageSources.value.push(markRaw(DamageSource.fromStringifiedData(data)));
+				damageSources.value.push(DamageSource.fromStringifiedData(data));
 			}
 		} else {
-			damageSources.value.push(markRaw(new DamageSource()));
+			damageSources.value.push(new DamageSource());
 		}
 
 		const savedTargets = params.getAll('tgt');
 		if (savedTargets.length) {
 			for (const data of savedTargets) {
-				damageTargets.value.push(markRaw(DamageSource.fromStringifiedData(data)));
+				damageTargets.value.push(DamageSource.fromStringifiedData(data));
 			}
 		} else {
-			damageTargets.value.push(markRaw(new DamageSource()));
+			damageTargets.value.push(new DamageSource());
 		}
 
 		if (!resultsTable.value) {
