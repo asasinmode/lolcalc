@@ -2,7 +2,11 @@ import type { IShopItem } from './types';
 
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {
-	hubris: 6697,
+	hubris: '6697',
+	slightlyMagicalFootwear: '2422',
+	seraphsEmbrace: '3040',
+	muramana: '3042',
+	fimbulwinter: '3121',
 };
 
 export const ITEM_SPECIFICS: Record<string, {
@@ -17,6 +21,13 @@ export const ITEM_SPECIFICS: Record<string, {
 		},
 	},
 };
+
+export const UNPURCHASABLES_TO_KEEP = [
+	ITEM_NAME_TO_ID.slightlyMagicalFootwear,
+	ITEM_NAME_TO_ID.seraphsEmbrace,
+	ITEM_NAME_TO_ID.muramana,
+	ITEM_NAME_TO_ID.fimbulwinter,
+];
 
 /** paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAME}.png` */
 export const STAT_ICON_NAMES: Record<IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown', string> = {

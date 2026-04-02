@@ -12,7 +12,7 @@ import { useMaps } from '../app/composables/useMaps.ts';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
 import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
-import { ITEM_STAT_META } from '../app/utils/item.ts';
+import { ITEM_STAT_META, UNPURCHASABLES_TO_KEEP } from '../app/utils/item.ts';
 import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
 
 let latestVersion = process.argv[2];
@@ -287,13 +287,6 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 
 	await loadStringTable();
 	const { version, data } = await fetchCached(`https://ddragon.leagueoflegends.com/cdn/${latestVersion}/data/en_US/item.json`, 'ddragon/item.json');
-
-	const UNPURCHASABLES_TO_KEEP = [
-		'2422', // slightly magical footwear
-		'3040',	// seraph's embrace
-		'3042',	// muramana
-		'3121', // fimbulwinter
-	];
 
 	const UNINTERESTING_ITEMS = [
 		'3340',	// stealth ward
