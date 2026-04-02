@@ -116,13 +116,15 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] item groups, only one from group
   - [x] show inventory total value
   - [x] try not to intercept all right clicks
+  - [?] shift show item shop extras
+  - [?] ctrl show inventory extras
+  - [?] extended item hover tooltips, like swiftmarch showing adaptive force gained (\<rules\>)
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
 - [x] confirm removing/clearing row/scoreboard item, ideally undo
 - [?] header, footer, contact info
-- [?] extended item hover tooltips, like swiftmarch showing adaptive force gained
-- [?] implement role quests
+- [?] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
 - [ ] mobile version and make look better
 - [ ] calculations
   - [ ] stats from rune shards
@@ -139,6 +141,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] check if can always lowercase match variables
   - [ ] check if can save only gold cost, not whole object
   - [ ] are health/ability resource floats?
+- [ ] update hover tooltips with more calculation info (`= X - Y`) when holding shift
 - [ ] try to prefetch images for buttons
   - [ ] champ select roles
   - [ ] role quests
