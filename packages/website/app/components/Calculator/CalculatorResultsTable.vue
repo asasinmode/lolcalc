@@ -588,7 +588,9 @@ const cleanableColumnsSections = computed<[
 		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
 		.filter(([, section]) =>
 			section.type === 'item'
-				? !resultColumns.value.some(column => column.source?.items.value.some(item => item?.id === section.id) || column.target?.items.value.some(item => item?.id === section.id))
+				? !resultColumns.value.some(column =>
+						column.source?.items.value.some(item => item?.id === section.championOrItemId) || column.target?.items.value.some(item => item?.id === section.championOrItemId),
+					)
 				: section.type === 'champion' && !resultColumns.value.some(column =>
 					column.source?.listedChampion.value?.id === section.championOrItemId || column.target?.listedChampion.value?.id === section.championOrItemId,
 				));
