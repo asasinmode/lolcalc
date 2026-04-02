@@ -990,6 +990,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 								:width="championImageSize(column.source.listedChampion.value!.id)"
 								:height="championImageSize(column.source.listedChampion.value!.id)"
 								style="--focus-brightness: 1.2"
+								aria-hidden="true"
 							>
 							<img
 								v-else
@@ -997,6 +998,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 								width="256"
 								height="256"
 								style="--focus-brightness: 1.5"
+								aria-hidden="true"
 							>
 						</VSelect>
 						<span>vs</span>
@@ -1015,6 +1017,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 								:width="championImageSize(column.target.listedChampion.value!.id)"
 								:height="championImageSize(column.target.listedChampion.value!.id)"
 								style="--focus-brightness: 1.2"
+								aria-hidden="true"
 							>
 							<img
 								v-else
@@ -1022,6 +1025,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 								width="256"
 								height="256"
 								style="--focus-brightness: 1.5"
+								aria-hidden="true"
 							>
 						</VSelect>
 						<button v-if="index === resultColumns.length - 1" class="pretend-ui-button" @click="addResultsColumn()">
@@ -1065,20 +1069,30 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 								restore
 							</button>
 						</template>
-						<button
-							class="pretend-ui-button"
-							:disabled="columnAddableOptions[index]?.championOptionIndex === undefined"
-							@click="addColumnAbilities(index)"
-						>
-							add abilities
-						</button>
-						<button
-							class="pretend-ui-button"
-							:disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length"
-							@click="addColumnItems(index)"
-						>
-							add items
-						</button>
+						<ClientOnly>
+							<button
+								class="pretend-ui-button"
+								:disabled="columnAddableOptions[index]?.championOptionIndex === undefined"
+								@click="addColumnAbilities(index)"
+							>
+								add abilities
+							</button>
+							<button
+								class="pretend-ui-button"
+								:disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length"
+								@click="addColumnItems(index)"
+							>
+								add items
+							</button>
+							<template #fallback>
+								<button class="pretend-ui-button">
+									add abilities
+								</button>
+								<button class="pretend-ui-button">
+									add items
+								</button>
+							</template>
+						</ClientOnly>
 					</div>
 				</td>
 				<!-- TODO figure out where to put these -->

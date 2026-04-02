@@ -1163,12 +1163,14 @@ defineExpose({ el });
 							width="64"
 							height="64"
 							loading="lazy"
+							aria-hidden="true"
 						>
 						<img
 							:src="`https://raw.communitydragon.org/latest/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
 							width="32"
 							height="32"
 							loading="lazy"
+							aria-hidden="true"
 						>
 					</template>
 				</VSelect>
