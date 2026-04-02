@@ -69,10 +69,7 @@ export interface IDamageResultTableSection {
 	selectValue?: string;
 	/** use with selectOptions */
 	selectLabel?: string;
-	hoverTooltipData?: IChampionAbilityHoverTooltipProps | {
-		item: IItem;
-		precomputedDescription: IComputedItemDescription;
-	};
+	hoverTooltipData?: IChampionAbilityHoverTooltipProps | IItemDescriptionProps;
 	rows: {
 		name: string;
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
@@ -107,3 +104,18 @@ export interface IChampionAbilityHoverTooltipProps {
 }
 
 export type IScoreboardItemShowAbilityTooltipArgs = [event: MouseEvent, ability: IChampionAbilityKey, variant: number];
+
+export interface IItemDescriptionProps {
+	gold?: number;
+	headerTag?: string;
+	headerButton?: boolean;
+	headerClass?: string;
+	descriptionClass?: string;
+	headerSubtitles?: boolean;
+	damageSource?: DamageSource;
+	replaceVariablesWithNames?: boolean;
+	/** either this or `item` should be provided */
+	precomputedDescription?: IComputedItemDescription;
+	/** either this or `item` should be provided */
+	item?: IItem;
+}

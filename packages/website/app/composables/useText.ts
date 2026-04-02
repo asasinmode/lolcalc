@@ -6,12 +6,18 @@ export function useText(): ITextData {
 
 export interface ITextData {
 	items: Record<string, {
-		tooltipShop: {
-			subtitleLeft?: string;
-			subtitleRight?: string;
-			/** the extra text that's below the stats */
-			extra?: string[][];
-		};
+		subtitleLeft?: string;
+		subtitleRight?: string;
+		/** the <rules> tag shown below the extras when holding shift */
+		rules?: string;
+		/** the extra text that's below the stats when hovering item in shop */
+		tooltipShop?: string[][];
+		/**
+		 * same as `extrasShop` but in inventory
+		 * present if source has it and is different from the shop one
+		 * differs in for example using the computed variables for the champion like AD gained from Overlord's Bloodmail
+		 */
+		tooltipInventory?: string[][];
 	}>;
 	runes: {
 		paths: Record<string, { name: string; tooltip: string }>;

@@ -116,8 +116,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] item groups, only one from group
   - [x] show inventory total value
   - [x] try not to intercept all right clicks
-  - [?] shift show item shop extras
-  - [?] ctrl show inventory extras
+  - [?] ctrl toggle between shop/inventory extras & sell value
   - [?] extended item hover tooltips, like swiftmarch showing adaptive force gained (\<rules\>)
 - [x] close dialogs on click outside
 - [x] target dummy damage source

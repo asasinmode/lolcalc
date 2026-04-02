@@ -80,10 +80,9 @@ export interface IItem {
 	searchString: string;
 	stats: Partial<Record<IItemStat, number>>;
 	gold: {
-		base: number;
-		purchasable: boolean;
 		total: number;
 		sell: number;
+		sellBackModifier?: number;
 	};
 	image: string;
 	/** the mask of maps item is enabled on, see `useMaps.ts` */

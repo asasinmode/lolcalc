@@ -759,20 +759,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 			return rv as Record<IChampionStatName, IComputedDamageSourceChampionStat>;
 		}),
-		items: computed<(IComputedDamageSourceItem | undefined)[]>(() => this.items.value.map((item): IComputedDamageSourceItem | undefined => {
-			if (!item) {
-				return undefined;
-			}
-
+		items: computed<(IComputedItemDescription | undefined)[]>(() => {
 			const text = useText();
 			const { minorVersion } = usePatchVersion();
 
-			return {
-				itemId: item.id,
-				descriptionContents: computedItemDescription(text, minorVersion, item, this),
-			};
+			return this.items.value.map((item): IComputedItemDescription | undefined =>
+				item && computedItemDescription(text, minorVersion, item, this),
+			);
 		}),
-		),
 		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
 			const { minorVersion } = usePatchVersion();
 
@@ -823,17 +817,15 @@ export function formatChampionStatValue(
 		: Math.round(value[key] as number * multiplier);
 }
 
-export interface IComputedDamageSourceItem {
-	itemId: string;
-	descriptionContents: IComputedItemDescription;
-}
-
-// TODO maybe try to include all stuff <itemdescription> uses so it doesn't need additional props when it's passed
 export interface IComputedItemDescription {
+	item: IItem;
 	subtitleLeft?: string;
 	subtitleRight?: string;
 	stats: [iconName: string, value: number, name: string][];
-	extra?: string[][];
+	/** text shown below the stats when hovering in item shop */
+	extrasShop?: string[][];
+	/** text shown below the stats when hovering in inventory */
+	extrasInventory?: string[][];
 	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 	anyUnknownExtraVariables?: boolean;
@@ -845,22 +837,18 @@ export function computedItemDescription(
 	item?: IItem,
 	damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
-): IComputedItemDescription {
+): IComputedItemDescription | undefined {
 	const variables: IComputedItemDescription['variables'] = new Map();
 	const unknownVariables: IComputedItemDescription['unknownVariables'] = [];
 
 	if (!item) {
-		return {
-			stats: [],
-			variables,
-			unknownVariables,
-		};
+		return;
 	}
 
 	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-	const { subtitleLeft = '', subtitleRight = '', extra = [] } = text.items[item.id]?.tooltipShop || {};
+	const { subtitleLeft = '', subtitleRight = '', tooltipShop = [] } = text.items[item.id] || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -874,7 +862,7 @@ export function computedItemDescription(
 		});
 
 	let anyUnknownExtraVariables = false;
-	const extraFormatted = extra?.map(([heading, ...paragraphs]) => {
+	const extraFormatted = tooltipShop?.map(([heading, ...paragraphs]) => {
 		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
 			heading!
 				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
@@ -914,13 +902,14 @@ export function computedItemDescription(
 	});
 
 	return {
+		item,
 		variables,
 		unknownVariables,
 		anyUnknownExtraVariables,
 		subtitleLeft,
 		subtitleRight,
 		stats,
-		extra: extraFormatted,
+		extrasShop: extraFormatted,
 	};
 }
 

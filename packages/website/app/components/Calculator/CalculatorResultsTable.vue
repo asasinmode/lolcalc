@@ -105,7 +105,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 
 	const itemIds = new Set(props.damageSources
 		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
-			item?.descriptionContents.variables.size || item?.descriptionContents.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
+			item?.variables.size || item?.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
 		))
 		.filter(Boolean));
 
@@ -280,9 +280,9 @@ function toggleResultsSection(sectionId: string) {
 }
 
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	const computedItem = source?.computed.items.value.find(item => item?.itemId === section.championOrItemId);
+	const computedItem = source?.computed.items.value.find(item => item?.item!.id === section.championOrItemId);
 	if (computedItem) {
-		let numberValue = computedItem.descriptionContents.variables.get(rowId);
+		let numberValue = computedItem.variables.get(rowId);
 		let value: string | number = numberValue as unknown as string;
 		let isUnknown = false;
 
@@ -416,13 +416,13 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true });
+		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
 
 		section.name ||= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.image = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`;
 		section.getCellValue = itemVariableCellValue;
-		section.hoverTooltipData = { item, precomputedDescription };
+		section.hoverTooltipData = { precomputedDescription };
 	}
 
 	addComputedSection(section.id);

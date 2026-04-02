@@ -1,16 +1,7 @@
 <script setup lang="ts">
-const props = defineProps<{
-	item?: IItem;
-	gold?: number;
-	headerTag?: string;
-	headerButton?: boolean;
-	headerClass?: string;
-	descriptionClass?: string;
-	headerSubtitles?: boolean;
-	damageSource?: DamageSource;
-	replaceVariablesWithNames?: boolean;
-	precomputedDescription?: IComputedItemDescription;
-}>();
+import type { IItemDescriptionProps } from '~/utils/types';
+
+const props = defineProps<IItemDescriptionProps>();
 
 defineEmits<{
 	headerClick: [event: MouseEvent, isRightClick: boolean];
@@ -19,7 +10,7 @@ defineEmits<{
 const text = useText();
 const { version, minorVersion } = usePatchVersion();
 
-const computedDescription = computed<IComputedItemDescription>(() => props.precomputedDescription
+const computedDescription = computed<IComputedItemDescription | undefined>(() => props.precomputedDescription
 	|| computedItemDescription(
 		text,
 		minorVersion,
@@ -44,32 +35,32 @@ defineExpose({ header });
 		@click.right="$emit('headerClick', $event, true)"
 	>
 		<img
-			v-if="item"
-			:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`"
+			v-show="computedDescription?.item"
+			:src="computedDescription?.item.image ? `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${computedDescription.item.image}` : ''"
 			width="64"
 			height="64"
 			aria-hidden="true"
 			loading="lazy"
 		>
-		<span>{{ item?.name }}</span>
+		<span>{{ computedDescription?.item.name }}</span>
 		<span>
 			<img
-				v-show="item"
+				v-show="computedDescription?.item"
 				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
 				width="32"
 				height="28"
 				alt="gold coins"
 				loading="lazy"
 			>
-			{{ gold ?? item?.gold.total }}
+			{{ gold ?? computedDescription?.item.gold.total }}
 		</span>
-		<span>{{ computedDescription.subtitleLeft }}</span>
-		<span>{{ computedDescription.subtitleRight }}</span>
+		<span>{{ computedDescription?.subtitleLeft }}</span>
+		<span>{{ computedDescription?.subtitleRight }}</span>
 	</component>
 	<div class="item-description" :class="descriptionClass">
-		<UnresolvedVariablesAlert v-if="computedDescription.anyUnknownExtraVariables" />
+		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownExtraVariables" />
 		<ul>
-			<li v-for="([icon, value, name], i) in computedDescription.stats" :key="i">
+			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
 				<img
 					:src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
 					width="20"
@@ -80,7 +71,7 @@ defineExpose({ header });
 				<span>{{ name }}</span>
 			</li>
 		</ul>
-		<template v-for="([heading, ...paragraphs], i) in computedDescription.extra" :key="i">
+		<template v-for="([heading, ...paragraphs], i) in computedDescription?.extrasShop" :key="i">
 			<h4 v-html="heading" />
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
@@ -183,6 +174,7 @@ defineExpose({ header });
 
 		var {
 			--at-apply: 'font-500';
+			font-style: normal;
 			text-decoration-line: underline;
 			text-decoration-thickness: 0.1em;
 			text-decoration-color: #ff00ff;

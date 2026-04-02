@@ -932,8 +932,7 @@ defineExpose({ el });
 		</ul>
 		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item">
 			<ItemDescription
-				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex]?.descriptionContents : undefined"
-				:item="hoveredItemIndex !== undefined ? value.items.value[hoveredItemIndex] : undefined"
+				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
 			/>
 		</div>
 		<button ref="undoRemoveButton" style="display: none" @click="undoRemove">
