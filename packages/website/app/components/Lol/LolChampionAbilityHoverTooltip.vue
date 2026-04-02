@@ -123,7 +123,7 @@ defineExpose({ el });
 				</template>
 			</dl>
 			<p v-show="!globalKeyModifiers.shift">
-				Press [Shift] to show more info
+				Hold <kbd>[Shift]</kbd> to show more info
 			</p>
 		</footer>
 	</div>
@@ -208,6 +208,10 @@ defineExpose({ el });
 
 			> p {
 				--at-apply: 'text-end leading-5';
+
+				> kbd {
+					--at-apply: 'font-inherit';
+				}
 			}
 
 			> div {

@@ -227,8 +227,8 @@ export function replaceGameDescriptionVariables(
 	const variables = new Map<string, number | [number, number]>();
 	const variablesAllValues = new Map<string, (string | number)[]>();
 
-	const tagWrapStart = options.replaceWithName ? '<variablename>' : '';
-	const tagWrapEnd = options.replaceWithName ? '</variablename>' : '';
+	const tagWrapStart = options.replaceWithName ? '<var>' : '';
+	const tagWrapEnd = options.replaceWithName ? '</var>' : '';
 
 	const replaced = text.replace(/@(.+?)@/g, (_, name) => {
 		let variableName = name;

@@ -181,7 +181,7 @@ defineExpose({ header });
 			--at-apply: 'inline-block align-middle size-4';
 		}
 
-		variablename {
+		var {
 			--at-apply: 'font-500';
 			text-decoration-line: underline;
 			text-decoration-thickness: 0.1em;
