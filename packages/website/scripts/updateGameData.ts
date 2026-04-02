@@ -409,10 +409,11 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		}
 
 		/*
-		 * `mShopTooltip` looks like `generatedtip_item_3170_tooltipinventory`
+		 * `mShopTooltip` looks like `generatedtip_item_3170_tooltipshop`
+		 * `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
 		 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
 		 */
-		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules);
+		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules);
 
 		if (SPECIAL_EPICNESS_ITEMS[itemId]) {
 			item.epicness = SPECIAL_EPICNESS_ITEMS[itemId];
@@ -913,23 +914,8 @@ for (const category in debug) {
 	}
 }
 
-function updateItemShopItemTooltipText(item: IItem, mDynamicTooltip: string, keyTooltipExtendedRules?: string) {
-	// TODO add debug
-	const text = getStringtableValue(mDynamicTooltip, 'item shop tooltip');
-	if (!text) {
-		throw new Error('[updateItemShopItemTooltipText] no string');
-	}
-
-	const subtitleLeftStartIndex = text.indexOf('<subtitleLeft>');
-	const subtitleLeftEndIndex = text.indexOf('</subtitleLeft>');
-	/* move start by tag length + unused {{ Item_BriefIcon... }} */
-	const subtitleLeft = text.slice(subtitleLeftStartIndex + 51, subtitleLeftEndIndex);
-
-	const subtitleRightStartIndex = text.indexOf('<subtitleRight>');
-	const subtitleRightEndIndex = text.indexOf('</subtitleRight>');
-	const subtitleRight = text.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
-
-	const statsStartIndex = text.indexOf('</section><section>');
+function itemDescriptionExtras(text: string, extrasStart: string): string[][] | undefined {
+	const statsStartIndex = text.indexOf(extrasStart);
 	const statsToEnd = text.slice(statsStartIndex + 19);
 	const statsEndIndex = statsToEnd.indexOf('</section>');
 	let extraToEnd = statsToEnd.slice(statsEndIndex + 19);
@@ -963,21 +949,51 @@ function updateItemShopItemTooltipText(item: IItem, mDynamicTooltip: string, key
 		}
 	}
 
-	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item shop tooltip rules', true);
-	while(rules?.startsWith('<br>')){
-		rules = rules.slice(4).trim();
-	}
-	while(rules?.endsWith('<br>')){
-		rules = rules.slice(0, -4).trim()
+	return extra;
+}
+
+function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynamicTooltip: string, keyTooltipExtendedRules?: string) {
+	// TODO add debug
+	const textShop = getStringtableValue(mShopTooltip, 'item tooltipShop');
+	const textInventory = getStringtableValue(mDynamicTooltip, 'item tooltipInventory');
+	if (!textShop) {
+		throw new Error('[updateItemShopItemTooltipText] no string');
 	}
 
-	if (subtitleLeft.length || subtitleRight.length || extra?.length || rules?.length) {
-		(textData.data.items as any)[item.id] = { tooltipShop: {
+	const subtitleLeftStartIndex = textShop.indexOf('<subtitleLeft>');
+	const subtitleLeftEndIndex = textShop.indexOf('</subtitleLeft>');
+	/* move start by tag length + unused {{ Item_BriefIcon... }} */
+	const subtitleLeft = textShop.slice(subtitleLeftStartIndex + 51, subtitleLeftEndIndex);
+
+	const subtitleRightStartIndex = textShop.indexOf('<subtitleRight>');
+	const subtitleRightEndIndex = textShop.indexOf('</subtitleRight>');
+	const subtitleRight = textShop.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
+
+	const tooltipShop = itemDescriptionExtras(textShop, '</section><section>');
+	let tooltipInventory = textInventory ? itemDescriptionExtras(textInventory, '<mainText><section>') : undefined;
+
+	if (tooltipShop && tooltipInventory?.every((extra, extraIndex) => extra.every((line, lineIndex) =>
+		tooltipShop[extraIndex]?.[lineIndex] === line,
+	))) {
+		tooltipInventory = undefined;
+	}
+
+	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true);
+	while (rules?.startsWith('<br>')) {
+		rules = rules.slice(4).trim();
+	}
+	while (rules?.endsWith('<br>')) {
+		rules = rules.slice(0, -4).trim();
+	}
+
+	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || rules?.length) {
+		(textData.data.items as any)[item.id] = {
 			subtitleLeft: subtitleLeft || undefined,
 			subtitleRight: subtitleRight || undefined,
-			extra,
 			rules: rules || undefined,
-		} };
+			tooltipShop,
+			tooltipInventory,
+		};
 	}
 }
 

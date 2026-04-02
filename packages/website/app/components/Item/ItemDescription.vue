@@ -97,7 +97,7 @@ defineExpose({ header });
 		}
 
 		span:first-of-type {
-			--at-apply: 'text-xl';
+			--at-apply: 'text-xl text-white';
 		}
 
 		span:nth-of-type(2) {
