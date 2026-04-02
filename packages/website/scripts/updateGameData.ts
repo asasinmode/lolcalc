@@ -408,7 +408,11 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			continue;
 		}
 
-		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip);
+		/*
+		 * `mShopTooltip` looks like `generatedtip_item_3170_tooltipinventory`
+		 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
+		 */
+		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules);
 
 		if (SPECIAL_EPICNESS_ITEMS[itemId]) {
 			item.epicness = SPECIAL_EPICNESS_ITEMS[itemId];
@@ -909,8 +913,9 @@ for (const category in debug) {
 	}
 }
 
-function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
-	const text = getStringtableValue(mShopTooltip, 'item shop tooltip');
+function updateItemShopItemTooltipText(item: IItem, mDynamicTooltip: string, keyTooltipExtendedRules?: string) {
+	// TODO add debug
+	const text = getStringtableValue(mDynamicTooltip, 'item shop tooltip');
 	if (!text) {
 		throw new Error('[updateItemShopItemTooltipText] no string');
 	}
@@ -936,17 +941,6 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
 	}
 	const rawExtra = extraToEnd.slice(0, extraEndIndex).replace(/\{\{ ?Item_Passive_List ?\}\}/g, '').replaceAll(':</passive>', '</passive>');
 
-	// TODO uncomment
-	// const { unknownVariables } = replaceGameDescriptionVariables(rawExtra, 'item', item);
-	// if (unknownVariables.length) {
-	// 	debug.item.variables.set(item.name, unknownVariables);
-	// }
-	// const unknownTags = getUnknownTags(rawExtra);
-	// if (unknownTags.size) {
-	// 	debug.item.tags[0].push(item.name);
-	// 	debug.item.tags[1] = debug.item.tags[1].union(unknownTags);
-	// }
-
 	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')).filter(text => text.some(Boolean)) : undefined;
 	for (let i = 0; i < (extra?.length || 0); i++) {
 		const replaced: string[] = [];
@@ -969,11 +963,20 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string) {
 		}
 	}
 
-	if (subtitleLeft.length || subtitleRight.length || extra?.length) {
+	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item shop tooltip rules', true);
+	while(rules?.startsWith('<br>')){
+		rules = rules.slice(4).trim();
+	}
+	while(rules?.endsWith('<br>')){
+		rules = rules.slice(0, -4).trim()
+	}
+
+	if (subtitleLeft.length || subtitleRight.length || extra?.length || rules?.length) {
 		(textData.data.items as any)[item.id] = { tooltipShop: {
 			subtitleLeft: subtitleLeft || undefined,
 			subtitleRight: subtitleRight || undefined,
 			extra,
+			rules: rules || undefined,
 		} };
 	}
 }
@@ -1036,9 +1039,9 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType, P extends I
 	stringtableVariableSaveUnder?: { stringtable?: Record<string, string> };
 }
 
-function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug) {
+function getStringtableValue(path: string, variableDebug: string | IStringtableVariableDebug, optional?: boolean) {
 	const value = stringtable[path.toLowerCase()];
-	if (!value) {
+	if (!optional && !value) {
 		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
 	if (value && typeof variableDebug === 'object') {
