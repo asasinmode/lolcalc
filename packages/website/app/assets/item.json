@@ -9,8 +9,6 @@
 				"FlatMovementSpeedMod": 25
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 300,
 				"sell": 210
 			},
@@ -42,8 +40,6 @@
 				"PercentBaseMPRegenMod": 0.5
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 200,
 				"sell": 140
 			},
@@ -65,10 +61,9 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 300,
-				"sell": 120
+				"sell": 120,
+				"sellBackModifier": 0.4
 			},
 			"image": "1006.png",
 			"mapMask": 3,
@@ -89,8 +84,6 @@
 				"FlatHPPoolMod": 350
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -125,8 +118,6 @@
 				"FlatCritChanceMod": 0.15
 			},
 			"gold": {
-				"base": 600,
-				"purchasable": true,
 				"total": 600,
 				"sell": 420
 			},
@@ -153,8 +144,6 @@
 				"FlatMagicDamageMod": 45
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 850,
 				"sell": 595
 			},
@@ -184,8 +173,6 @@
 				"FlatMPPoolMod": 300
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 300,
 				"sell": 210
 			},
@@ -209,8 +196,6 @@
 				"FlatHPPoolMod": 150
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 400,
 				"sell": 280
 			},
@@ -255,8 +240,6 @@
 				"FlatArmorMod": 15
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 300,
 				"sell": 210
 			},
@@ -291,8 +274,6 @@
 				"FlatArmorMod": 40
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 800,
 				"sell": 560
 			},
@@ -325,8 +306,6 @@
 				"FlatSpellBlockMod": 20
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 400,
 				"sell": 280
 			},
@@ -360,8 +339,6 @@
 				"FlatPhysicalDamageMod": 10
 			},
 			"gold": {
-				"base": 350,
-				"purchasable": true,
 				"total": 350,
 				"sell": 245
 			},
@@ -405,8 +382,6 @@
 				"FlatPhysicalDamageMod": 25
 			},
 			"gold": {
-				"base": 875,
-				"purchasable": true,
 				"total": 875,
 				"sell": 613
 			},
@@ -447,8 +422,6 @@
 				"FlatPhysicalDamageMod": 40
 			},
 			"gold": {
-				"base": 1300,
-				"purchasable": true,
 				"total": 1300,
 				"sell": 910
 			},
@@ -475,8 +448,6 @@
 				"PercentAttackSpeedMod": 0.1
 			},
 			"gold": {
-				"base": 250,
-				"purchasable": true,
 				"total": 250,
 				"sell": 175
 			},
@@ -508,8 +479,6 @@
 				"PercentAttackSpeedMod": 0.15
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 700,
 				"sell": 490
 			},
@@ -544,8 +513,6 @@
 				"FlatMagicDamageMod": 20
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 400,
 				"sell": 280
 			},
@@ -582,8 +549,6 @@
 				"PercentLifeStealMod": 0.07
 			},
 			"gold": {
-				"base": 550,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -614,10 +579,9 @@
 				"FlatHPRegenMod": 0.8
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 450,
-				"sell": 180
+				"sell": 180,
+				"sellBackModifier": 0.4
 			},
 			"image": "1054.png",
 			"mapMask": 3,
@@ -658,10 +622,9 @@
 				"PercentOmnivampMod": 0.025
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 450,
-				"sell": 180
+				"sell": 180,
+				"sellBackModifier": 0.4
 			},
 			"image": "1055.png",
 			"mapMask": 3,
@@ -684,10 +647,9 @@
 				"FlatMagicDamageMod": 18
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 400,
-				"sell": 160
+				"sell": 160,
+				"sellBackModifier": 0.4
 			},
 			"image": "1056.png",
 			"mapMask": 3,
@@ -715,8 +677,6 @@
 				"FlatSpellBlockMod": 45
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 850,
 				"sell": 595
 			},
@@ -747,8 +707,6 @@
 				"FlatMagicDamageMod": 65
 			},
 			"gold": {
-				"base": 1200,
-				"purchasable": true,
 				"total": 1200,
 				"sell": 840
 			},
@@ -773,10 +731,9 @@
 				"FlatMagicDamageMod": 15
 			},
 			"gold": {
-				"base": 350,
-				"purchasable": true,
 				"total": 350,
-				"sell": 140
+				"sell": 140,
+				"sellBackModifier": 0.4
 			},
 			"image": "1082.png",
 			"mapMask": 1,
@@ -817,10 +774,9 @@
 				"FlatPhysicalDamageMod": 7
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 450,
-				"sell": 180
+				"sell": 180,
+				"sellBackModifier": 0.4
 			},
 			"image": "1083.png",
 			"mapMask": 1,
@@ -847,8 +803,6 @@
 				"FlatPhysicalDamageMod": 15
 			},
 			"gold": {
-				"base": 150,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -883,8 +837,6 @@
 				"PhysicalLethality": 5
 			},
 			"gold": {
-				"base": 212,
-				"purchasable": true,
 				"total": 1337,
 				"sell": 936
 			},
@@ -917,8 +869,6 @@
 				"FlatPhysicalDamageMod": 15
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 1150,
 				"sell": 805
 			},
@@ -953,8 +903,6 @@
 				"AbilityHasteMod": 5
 			},
 			"gold": {
-				"base": 250,
-				"purchasable": true,
 				"total": 250,
 				"sell": 175
 			},
@@ -990,8 +938,6 @@
 				"FlatHPRegenMod": 4
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 950,
 				"sell": 665
 			},
@@ -1019,8 +965,6 @@
 				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 2200,
 				"sell": 1540
 			},
@@ -1055,10 +999,9 @@
 				"FlatArmorMod": 25
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 1600,
-				"sell": 640
+				"sell": 640,
+				"sellBackModifier": 0.4
 			},
 			"image": "2420.png",
 			"mapMask": 3,
@@ -1090,10 +1033,9 @@
 				"FlatMovementSpeedMod": 25
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": false,
 				"total": 300,
-				"sell": 90
+				"sell": 90,
+				"sellBackModifier": 0.3
 			},
 			"image": "2422.png",
 			"mapMask": 3,
@@ -1124,8 +1066,6 @@
 				"FlatPhysicalDamageMod": 30
 			},
 			"gold": {
-				"base": 1000,
-				"purchasable": true,
 				"total": 3300,
 				"sell": 2310
 			},
@@ -1178,8 +1118,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -1237,8 +1175,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 700,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -1316,8 +1252,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -1358,8 +1292,6 @@
 				"FlatMagicDamageMod": 30
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -1394,8 +1326,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -1464,8 +1394,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 2650,
 				"sell": 1855
 			},
@@ -1502,8 +1430,6 @@
 				"PercentTenacityMod": 0.2
 			},
 			"gold": {
-				"base": 825,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -1553,8 +1479,6 @@
 				"PhysicalLethality": 22
 			},
 			"gold": {
-				"base": 863,
-				"purchasable": true,
 				"total": 3200,
 				"sell": 2240
 			},
@@ -1625,8 +1549,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 750,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -1681,8 +1603,6 @@
 				"FlatPhysicalDamageMod": 55
 			},
 			"gold": {
-				"base": 275,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -1719,8 +1639,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2300,
 				"sell": 1610
 			},
@@ -1783,8 +1701,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2500,
 				"sell": 1750
 			},
@@ -1854,8 +1770,6 @@
 				"PercentHealingAmountMod": 0.08
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 2250,
 				"sell": 1575
 			},
@@ -1905,8 +1819,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2400,
 				"sell": 1680
 			},
@@ -1944,8 +1856,6 @@
 				"AbilityHasteMod": 25
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -1984,8 +1894,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 1100,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -2034,8 +1942,6 @@
 				"PercentAttackSpeedMod": 0.25
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -2071,8 +1977,6 @@
 				"FlatMovementSpeedMod": 55
 			},
 			"gold": {
-				"base": 700,
-				"purchasable": true,
 				"total": 1000,
 				"sell": 700
 			},
@@ -2109,8 +2013,6 @@
 				"FlatMagicPenetrationMod": 12
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -2145,8 +2047,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 50,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -2175,10 +2075,9 @@
 				"FlatPhysicalDamageMod": 55
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 3200,
-				"sell": 1280
+				"sell": 1280,
+				"sellBackModifier": 0.4
 			},
 			"image": "3026.png",
 			"mapMask": 1,
@@ -2210,8 +2109,6 @@
 				"FlatCritDamageMod": 0.3
 			},
 			"gold": {
-				"base": 725,
-				"purchasable": true,
 				"total": 3500,
 				"sell": 2450
 			},
@@ -2240,8 +2137,6 @@
 				"PercentAttackSpeedMod": 0.4
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -2294,8 +2189,6 @@
 				"PercentArmorPenetrationMod": 0.3
 			},
 			"gold": {
-				"base": 150,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -2328,8 +2221,6 @@
 				"PercentArmorPenetrationMod": 0.18
 			},
 			"gold": {
-				"base": 750,
-				"purchasable": true,
 				"total": 1450,
 				"sell": 1015
 			},
@@ -2363,8 +2254,6 @@
 				"PercentArmorPenetrationMod": 0.35
 			},
 			"gold": {
-				"base": 550,
-				"purchasable": true,
 				"total": 3300,
 				"sell": 2310
 			},
@@ -2396,8 +2285,6 @@
 				"AbilityHasteMod": 25
 			},
 			"gold": {
-				"base": 2900,
-				"purchasable": false,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -2448,8 +2335,6 @@
 				"FlatMagicDamageMod": 20
 			},
 			"gold": {
-				"base": 1150,
-				"purchasable": true,
 				"total": 1500,
 				"sell": 1050
 			},
@@ -2496,8 +2381,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 2900,
-				"purchasable": false,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -2586,8 +2469,6 @@
 				"FlatPhysicalDamageMod": 15
 			},
 			"gold": {
-				"base": 350,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -2638,8 +2519,6 @@
 				"PercentMovementSpeedMod": 0.1
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 2650,
 				"sell": 1855
 			},
@@ -2667,8 +2546,6 @@
 				"FlatArmorMod": 25
 			},
 			"gold": {
-				"base": 600,
-				"purchasable": true,
 				"total": 1200,
 				"sell": 840
 			},
@@ -2708,8 +2585,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 700,
-				"purchasable": true,
 				"total": 2200,
 				"sell": 1540
 			},
@@ -2746,8 +2621,6 @@
 				"PercentAttackSpeedMod": 0.2
 			},
 			"gold": {
-				"base": 250,
-				"purchasable": true,
 				"total": 1200,
 				"sell": 840
 			},
@@ -2778,8 +2651,6 @@
 				"PercentTenacityMod": 0.2
 			},
 			"gold": {
-				"base": 775,
-				"purchasable": true,
 				"total": 3200,
 				"sell": 2240
 			},
@@ -2906,8 +2777,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 650,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -2962,8 +2831,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 650,
-				"purchasable": true,
 				"total": 2700,
 				"sell": 1890
 			},
@@ -2994,8 +2861,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 800,
 				"sell": 560
 			},
@@ -3026,8 +2891,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 150,
-				"purchasable": true,
 				"total": 800,
 				"sell": 560
 			},
@@ -3073,8 +2936,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 1000,
-				"purchasable": true,
 				"total": 2700,
 				"sell": 1890
 			},
@@ -3139,8 +3000,6 @@
 				"FlatMPPoolMod": 240
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 400,
 				"sell": 280
 			},
@@ -3183,8 +3042,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 225,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -3220,8 +3077,6 @@
 				"PercentLifeStealMod": 0.15
 			},
 			"gold": {
-				"base": 325,
-				"purchasable": true,
 				"total": 3400,
 				"sell": 2380
 			},
@@ -3271,8 +3126,6 @@
 				"PercentAttackSpeedMod": 0.2
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -3308,8 +3161,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 150,
-				"purchasable": true,
 				"total": 3300,
 				"sell": 2310
 			},
@@ -3399,8 +3250,6 @@
 				"FlatArmorMod": 75
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 2450,
 				"sell": 1715
 			},
@@ -3451,8 +3300,6 @@
 				"FlatArmorMod": 30
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 800,
 				"sell": 560
 			},
@@ -3494,8 +3341,6 @@
 				"FlatPhysicalDamageMod": 20
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 1200,
 				"sell": 840
 			},
@@ -3595,8 +3440,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 133,
-				"purchasable": true,
 				"total": 3333,
 				"sell": 2333
 			},
@@ -3653,8 +3496,6 @@
 				"FlatArmorMod": 40
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 1000,
 				"sell": 700
 			},
@@ -3688,8 +3529,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -3742,8 +3581,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -3834,8 +3671,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 2650,
 				"sell": 1855
 			},
@@ -3913,8 +3748,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 350,
-				"purchasable": true,
 				"total": 1200,
 				"sell": 840
 			},
@@ -3946,8 +3779,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 2700,
 				"sell": 1890
 			},
@@ -4025,8 +3856,6 @@
 				"FlatMagicDamageMod": 130
 			},
 			"gold": {
-				"base": 1100,
-				"purchasable": true,
 				"total": 3500,
 				"sell": 2450
 			},
@@ -4058,8 +3887,6 @@
 				"PercentTenacityMod": 0.2
 			},
 			"gold": {
-				"base": 550,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -4100,8 +3927,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 2650,
 				"sell": 1855
 			},
@@ -4134,8 +3959,6 @@
 				"PercentAttackSpeedMod": 0.2
 			},
 			"gold": {
-				"base": 700,
-				"purchasable": true,
 				"total": 3200,
 				"sell": 2240
 			},
@@ -4178,8 +4001,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 250,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -4233,8 +4054,6 @@
 				"FlatMagicDamageMod": 105
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -4268,8 +4087,6 @@
 				"PercentHealingAmountMod": 0.1
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 2300,
 				"sell": 1610
 			},
@@ -4346,8 +4163,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 850,
 				"sell": 595
 			},
@@ -4388,8 +4203,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 2300,
 				"sell": 1610
 			},
@@ -4427,8 +4240,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 600,
-				"purchasable": true,
 				"total": 2500,
 				"sell": 1750
 			},
@@ -4461,8 +4272,6 @@
 				"PercentTenacityMod": 0.3
 			},
 			"gold": {
-				"base": 550,
-				"purchasable": true,
 				"total": 1250,
 				"sell": 875
 			},
@@ -4499,8 +4308,6 @@
 				"FlatMagicDamageMod": 50
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 950,
 				"sell": 665
 			},
@@ -4526,8 +4333,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -4558,8 +4363,6 @@
 				"PercentHealingAmountMod": 0.08
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 600,
 				"sell": 420
 			},
@@ -4591,8 +4394,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -4640,8 +4441,6 @@
 				"FlatMagicDamageMod": 65
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 2600,
 				"sell": 1820
 			},
@@ -4675,8 +4474,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 650,
-				"purchasable": true,
 				"total": 2700,
 				"sell": 1890
 			},
@@ -4751,8 +4548,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 2400,
 				"sell": 1680
 			},
@@ -4801,8 +4596,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 2400,
-				"purchasable": false,
 				"total": 2400,
 				"sell": 1680
 			},
@@ -4849,8 +4642,6 @@
 				"FlatPhysicalDamageMod": 15
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 800,
 				"sell": 560
 			},
@@ -4885,8 +4676,6 @@
 				"PercentAttackSpeedMod": 0.25
 			},
 			"gold": {
-				"base": 1025,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -4963,8 +4752,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 100,
-				"purchasable": true,
 				"total": 1050,
 				"sell": 735
 			},
@@ -5006,8 +4793,6 @@
 				"PhysicalLethality": 10
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 1000,
 				"sell": 700
 			},
@@ -5049,8 +4834,6 @@
 				"PercentMagicPenetrationMod": 0.4
 			},
 			"gold": {
-				"base": 1050,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -5078,8 +4861,6 @@
 				"PercentMagicPenetrationMod": 0.3
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -5129,8 +4910,6 @@
 				"PercentLifeStealMod": 0.1
 			},
 			"gold": {
-				"base": 125,
-				"purchasable": true,
 				"total": 3200,
 				"sell": 2240
 			},
@@ -5164,8 +4943,6 @@
 				"FlatSpellBlockMod": 30
 			},
 			"gold": {
-				"base": 900,
-				"purchasable": true,
 				"total": 1300,
 				"sell": 910
 			},
@@ -5198,8 +4975,6 @@
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 675,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -5283,8 +5058,6 @@
 				"FlatArmorMod": 75
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2700,
 				"sell": 1890
 			},
@@ -5317,8 +5090,6 @@
 				"PercentAttackSpeedMod": 0.2
 			},
 			"gold": {
-				"base": 100,
-				"purchasable": true,
 				"total": 600,
 				"sell": 420
 			},
@@ -5362,8 +5133,6 @@
 				"FlatMagicDamageMod": 45
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -5408,8 +5177,6 @@
 				"PercentOmnivampMod": 0.1
 			},
 			"gold": {
-				"base": 600,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -5458,8 +5225,6 @@
 				"FlatMagicDamageMod": 30
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 1300,
 				"sell": 910
 			},
@@ -5498,8 +5263,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 300,
-				"purchasable": true,
 				"total": 2650,
 				"sell": 1855
 			},
@@ -5547,8 +5310,6 @@
 				"PercentLifeStealMod": 0.1
 			},
 			"gold": {
-				"base": 725,
-				"purchasable": true,
 				"total": 3200,
 				"sell": 2240
 			},
@@ -5684,8 +5445,6 @@
 				"FlatPhysicalDamageMod": 25
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 1300,
 				"sell": 910
 			},
@@ -5748,8 +5507,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 750,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -5833,8 +5590,6 @@
 				"FlatArmorMod": 50
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 3250,
 				"sell": 2275
 			},
@@ -5867,8 +5622,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 350,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -5906,8 +5659,6 @@
 				"FlatPhysicalDamageMod": 45
 			},
 			"gold": {
-				"base": 675,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -5983,8 +5734,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 2850,
 				"sell": 1995
 			},
@@ -6016,8 +5765,6 @@
 				"FlatMovementSpeedMod": 65
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 1000,
 				"sell": 700
 			},
@@ -6067,8 +5814,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -6123,8 +5868,6 @@
 				"PercentLifeStealMod": 0.05
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -6177,8 +5920,6 @@
 				"PercentTenacityMod": 0.3
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 1250,
 				"sell": 875
 			},
@@ -6239,8 +5980,6 @@
 				"FlatArmorMod": 35
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 1200,
 				"sell": 840
 			},
@@ -6303,8 +6042,6 @@
 				"PercentMagicPenetrationMod": 0.08
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -6341,8 +6078,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 950,
 				"sell": 665
 			},
@@ -6370,8 +6105,6 @@
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 750,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -6476,8 +6209,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 175,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -6588,8 +6319,6 @@
 				"PercentLifeStealMod": 0.05
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 950,
 				"sell": 665
 			},
@@ -6616,8 +6345,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 700,
-				"purchasable": true,
 				"total": 2200,
 				"sell": 1540
 			},
@@ -6684,8 +6411,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 150,
-				"purchasable": true,
 				"total": 1250,
 				"sell": 875
 			},
@@ -6721,8 +6446,6 @@
 				"PercentHealingAmountMod": 0.12
 			},
 			"gold": {
-				"base": 900,
-				"purchasable": true,
 				"total": 2300,
 				"sell": 1610
 			},
@@ -6793,8 +6516,6 @@
 				"PercentAttackSpeedMod": 0.35
 			},
 			"gold": {
-				"base": 1100,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -6860,8 +6581,6 @@
 				"PercentHealingAmountMod": 0.1
 			},
 			"gold": {
-				"base": 700,
-				"purchasable": true,
 				"total": 2200,
 				"sell": 1540
 			},
@@ -6894,8 +6613,6 @@
 				"AbilityHasteMod": 20
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 3050,
 				"sell": 2135
 			},
@@ -6959,8 +6676,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 900,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -7019,8 +6734,6 @@
 				"FlatPhysicalDamageMod": 40
 			},
 			"gold": {
-				"base": 50,
-				"purchasable": true,
 				"total": 3300,
 				"sell": 2310
 			},
@@ -7137,8 +6850,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 100,
-				"purchasable": true,
 				"total": 800,
 				"sell": 560
 			},
@@ -7167,8 +6878,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 250,
-				"purchasable": true,
 				"total": 1200,
 				"sell": 840
 			},
@@ -7207,8 +6916,6 @@
 				"FlatHPPoolMod": 300
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 1300,
 				"sell": 910
 			},
@@ -7247,8 +6954,6 @@
 				"PhysicalLethality": 15
 			},
 			"gold": {
-				"base": 850,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -7282,10 +6987,9 @@
 				"PercentBaseMPRegenMod": 0.25
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 400,
-				"sell": 160
+				"sell": 160,
+				"sellBackModifier": 0.4
 			},
 			"image": "3865.png",
 			"mapMask": 1,
@@ -7368,10 +7072,9 @@
 				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 400,
-				"sell": 160
+				"sell": 160,
+				"sellBackModifier": 0.4
 			},
 			"image": "3869.png",
 			"mapMask": 1,
@@ -7407,10 +7110,9 @@
 				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 400,
-				"sell": 160
+				"sell": 160,
+				"sellBackModifier": 0.4
 			},
 			"image": "3870.png",
 			"mapMask": 1,
@@ -7477,10 +7179,9 @@
 				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 400,
-				"sell": 160
+				"sell": 160,
+				"sellBackModifier": 0.4
 			},
 			"image": "3871.png",
 			"mapMask": 1,
@@ -7543,10 +7244,9 @@
 				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 400,
-				"sell": 160
+				"sell": 160,
+				"sellBackModifier": 0.4
 			},
 			"image": "3876.png",
 			"mapMask": 1,
@@ -7596,10 +7296,9 @@
 				"PercentBaseMPRegenMod": 0.75
 			},
 			"gold": {
-				"base": 0,
-				"purchasable": true,
 				"total": 400,
-				"sell": 160
+				"sell": 160,
+				"sellBackModifier": 0.4
 			},
 			"image": "3877.png",
 			"mapMask": 1,
@@ -7678,8 +7377,6 @@
 				"FlatMagicDamageMod": 25
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 800,
 				"sell": 560
 			},
@@ -7710,8 +7407,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 475,
-				"purchasable": true,
 				"total": 1600,
 				"sell": 1120
 			},
@@ -7747,8 +7442,6 @@
 				"PhysicalLethality": 15
 			},
 			"gold": {
-				"base": 200,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -7781,8 +7474,6 @@
 				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 2250,
 				"sell": 1575
 			},
@@ -7818,8 +7509,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 750,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -7855,8 +7544,6 @@
 				"AbilityHasteMod": 25
 			},
 			"gold": {
-				"base": 600,
-				"purchasable": true,
 				"total": 2700,
 				"sell": 1890
 			},
@@ -7896,8 +7583,6 @@
 				"AbilityHasteMod": 25
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -7942,8 +7627,6 @@
 				"PercentMagicPenetrationMod": 0.13
 			},
 			"gold": {
-				"base": 700,
-				"purchasable": true,
 				"total": 1100,
 				"sell": 770
 			},
@@ -7973,8 +7656,6 @@
 				"FlatMagicDamageMod": 40
 			},
 			"gold": {
-				"base": 400,
-				"purchasable": true,
 				"total": 1600,
 				"sell": 1120
 			},
@@ -8014,8 +7695,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -8105,8 +7784,6 @@
 				"PercentBaseMPRegenMod": 1
 			},
 			"gold": {
-				"base": 50,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -8137,8 +7814,6 @@
 				"FlatMagicPenetrationMod": 15
 			},
 			"gold": {
-				"base": 900,
-				"purchasable": true,
 				"total": 3200,
 				"sell": 2240
 			},
@@ -8171,8 +7846,6 @@
 				"FlatMagicPenetrationMod": 15
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -8264,8 +7937,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 275,
-				"purchasable": true,
 				"total": 3300,
 				"sell": 2310
 			},
@@ -8353,8 +8024,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 350,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -8388,8 +8057,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 3100,
 				"sell": 2170
 			},
@@ -8477,8 +8144,6 @@
 				"PercentHealingAmountMod": 0.1
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2250,
 				"sell": 1575
 			},
@@ -8514,8 +8179,6 @@
 				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 2200,
 				"sell": 1540
 			},
@@ -8593,8 +8256,6 @@
 				"PercentBaseMPRegenMod": 1.25
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 2200,
 				"sell": 1540
 			},
@@ -8638,8 +8299,6 @@
 				"PercentHealingAmountMod": 0.16
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 2500,
 				"sell": 1750
 			},
@@ -8672,8 +8331,6 @@
 				"PercentAttackSpeedMod": 0.25
 			},
 			"gold": {
-				"base": 750,
-				"purchasable": true,
 				"total": 3300,
 				"sell": 2310
 			},
@@ -8769,8 +8426,6 @@
 				"FlatMagicDamageMod": 60
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -8809,8 +8464,6 @@
 				"AbilityHasteMod": 10
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 2750,
 				"sell": 1925
 			},
@@ -8866,8 +8519,6 @@
 				"FlatMagicDamageMod": 45
 			},
 			"gold": {
-				"base": 450,
-				"purchasable": true,
 				"total": 2600,
 				"sell": 1820
 			},
@@ -8906,8 +8557,6 @@
 				"AbilityHasteMod": 5
 			},
 			"gold": {
-				"base": 250,
-				"purchasable": true,
 				"total": 900,
 				"sell": 630
 			},
@@ -8963,8 +8612,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 800,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -9045,8 +8692,6 @@
 				"PercentBaseHPRegenMod": 1
 			},
 			"gold": {
-				"base": 650,
-				"purchasable": true,
 				"total": 2800,
 				"sell": 1960
 			},
@@ -9131,8 +8776,6 @@
 				"FlatArmorMod": 45
 			},
 			"gold": {
-				"base": 650,
-				"purchasable": true,
 				"total": 3200,
 				"sell": 2240
 			},
@@ -9164,8 +8807,6 @@
 				"FlatPhysicalDamageMod": 15
 			},
 			"gold": {
-				"base": 350,
-				"purchasable": true,
 				"total": 1300,
 				"sell": 910
 			},
@@ -9195,8 +8836,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 325,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -9256,8 +8895,6 @@
 				"FlatPhysicalDamageMod": 55
 			},
 			"gold": {
-				"base": 825,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -9311,8 +8948,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 2650,
 				"sell": 1855
 			},
@@ -9345,8 +8980,6 @@
 				"PhysicalLethality": 10
 			},
 			"gold": {
-				"base": 525,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -9380,8 +9013,6 @@
 				"PercentMovementSpeedMod": 0.04
 			},
 			"gold": {
-				"base": 425,
-				"purchasable": true,
 				"total": 775,
 				"sell": 543
 			},
@@ -9412,8 +9043,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 625,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -9523,8 +9152,6 @@
 				"PercentArmorPenetrationMod": 0.35
 			},
 			"gold": {
-				"base": 500,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -9571,8 +9198,6 @@
 				"PhysicalLethality": 15
 			},
 			"gold": {
-				"base": 625,
-				"purchasable": true,
 				"total": 2500,
 				"sell": 1750
 			},
@@ -9620,8 +9245,6 @@
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 363,
-				"purchasable": true,
 				"total": 2750,
 				"sell": 1925
 			},
@@ -9669,8 +9292,6 @@
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 950,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -9720,8 +9341,6 @@
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 313,
-				"purchasable": true,
 				"total": 2850,
 				"sell": 1995
 			},
@@ -9833,8 +9452,6 @@
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 963,
-				"purchasable": true,
 				"total": 3000,
 				"sell": 2100
 			},
@@ -9923,8 +9540,6 @@
 				"PhysicalLethality": 18
 			},
 			"gold": {
-				"base": 475,
-				"purchasable": true,
 				"total": 2700,
 				"sell": 1890
 			},
@@ -9976,8 +9591,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 750,
-				"purchasable": true,
 				"total": 2900,
 				"sell": 2030
 			},
@@ -10013,8 +9626,6 @@
 				"AbilityHasteMod": 15
 			},
 			"gold": {
-				"base": 1000,
-				"purchasable": true,
 				"total": 2650,
 				"sell": 1855
 			},

@@ -376,7 +376,10 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 					name,
 					searchString: searchTerms.join(';'),
 					stats,
-					gold,
+					gold: {
+						total: gold.total,
+						sell: gold.sell,
+					},
 					image: image.full,
 					mapMask,
 					into,
@@ -428,6 +431,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			: undefined;
 		item.itemCalculations = cleanupObject(itemMoreData.mItemCalculations);
 		item.stringCalculations = cleanupObject(itemMoreData.StringCalculations);
+		item.gold.sellBackModifier = itemMoreData.sellBackModifier && formatNumber(itemMoreData.sellBackModifier);
 		item.effectAmount = itemMoreData.mEffectAmount?.some((amount: number) => amount !== 0) ? itemMoreData.mEffectAmount?.map((amount: number) => formatNumber(amount)) : undefined;
 
 		const itemGroups = itemMoreData.mItemGroups.filter((group: string) => group !== 'Items/ItemGroups/Default');
