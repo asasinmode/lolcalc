@@ -1196,7 +1196,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 							<span>{{ section.image ? section.name : 'loading...' }}</span>
 							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
 								<div v-if="section.type === 'item'" popover="hint" class="hover-tooltip champion-item">
-									<ItemDescription v-bind="section.hoverTooltipData as any" />
+									<LolItemDescription v-bind="section.hoverTooltipData as any" />
 								</div>
 								<LolChampionAbilityHoverTooltip
 									v-else-if="section.type !== 'all'"

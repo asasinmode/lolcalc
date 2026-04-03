@@ -490,7 +490,7 @@ defineExpose({
 						</li>
 					</ul>
 					<section aria-live="polite" aria-atomic="true" class="row-span-full">
-						<ItemDescription
+						<LolItemDescription
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem?.item"
 							:gold="searchCursoredOverItem?.calculatedPrice"
@@ -653,7 +653,7 @@ defineExpose({
 			</template>
 		</section>
 		<section>
-			<ItemDescription
+			<LolItemDescription
 				:item="selectedItem?.item"
 				:gold="selectedItem?.calculatedPrice"
 				:damage-source="damageSource"
@@ -757,7 +757,7 @@ defineExpose({
 				{{ displayedItem?.item.name }} build path
 			</h3>
 			<div id="item-shop-build-path" class="text-center flex basis-[40%] flex-col items-center justify-center order-3">
-				<ItemBuildPathButton
+				<LolItemBuildPathButton
 					v-if="displayedItem"
 					:shop-item="displayedItem"
 					:data-legendary="displayedItem.isLegendary ? '' : undefined"
@@ -774,7 +774,7 @@ defineExpose({
 						v-for="(secondLevelBuildsFromItem, secondLevelIndex) in displayedItemBuildsFrom"
 						:key="secondLevelIndex"
 					>
-						<ItemBuildPathButton
+						<LolItemBuildPathButton
 							component
 							:shop-item="secondLevelBuildsFromItem"
 							@click="selectOrBuyIfDouble(secondLevelBuildsFromItem, false)"
@@ -786,7 +786,7 @@ defineExpose({
 								v-for="(thirdLevelBuildsFromItem, thirdLevelIndex) in secondLevelBuildsFromItem.from"
 								:key="`${secondLevelIndex}-${thirdLevelIndex}`"
 							>
-								<ItemBuildPathButton
+								<LolItemBuildPathButton
 									component
 									:shop-item="thirdLevelBuildsFromItem"
 									@click="selectOrBuyIfDouble(thirdLevelBuildsFromItem, false)"
@@ -868,7 +868,7 @@ defineExpose({
 			</p>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
-			<ItemDescription :item="hoveredItem?.item" :damage-source="damageSource" header-subtitles />
+			<LolItemDescription :item="hoveredItem?.item" :damage-source="damageSource" header-subtitles />
 		</div>
 	</VDialog>
 </template>

@@ -931,7 +931,7 @@ defineExpose({ el });
 			</li>
 		</ul>
 		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item">
-			<ItemDescription
+			<LolItemDescription
 				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
 			/>
 		</div>
