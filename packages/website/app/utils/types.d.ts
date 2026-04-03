@@ -69,7 +69,7 @@ export interface IDamageResultTableSection {
 	selectValue?: string;
 	/** use with selectOptions */
 	selectLabel?: string;
-	hoverTooltipData?: IChampionAbilityHoverTooltipProps | IItemDescriptionProps;
+	hoverTooltipData?: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'>;
 	rows: {
 		name: string;
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
@@ -118,4 +118,6 @@ export interface IItemDescriptionProps {
 	precomputedDescription?: IComputedItemDescription;
 	/** either this or `item` should be provided */
 	item?: IItem;
+	hoverTooltip?: boolean;
+	source: IItemHoverTooltipView;
 }

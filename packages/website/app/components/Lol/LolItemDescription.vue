@@ -9,6 +9,7 @@ defineEmits<{
 
 const text = useText();
 const { version, minorVersion } = usePatchVersion();
+const globalKeyModifiers = useGlobalKeyModifiers();
 
 const computedDescription = computed<IComputedItemDescription | undefined>(() => props.precomputedDescription
 	|| computedItemDescription(
@@ -18,6 +19,12 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 		props.damageSource,
 		{ replaceWithName: props.replaceVariablesWithNames },
 	));
+
+const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
+const otherView = computed(() => view.value === 'Shop' ? 'inventory' : 'shop');
+
+const hasMoreInfo = computed(() => computedDescription.value?.extended && !globalKeyModifiers.value.shift);
+const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.textInventory);
 
 const header = useTemplateRef<HTMLButtonElement>('header');
 
@@ -71,10 +78,23 @@ defineExpose({ header });
 				<span>{{ name }}</span>
 			</li>
 		</ul>
-		<template v-for="([heading, ...paragraphs], i) in computedDescription?.extrasShop" :key="i">
+		<template v-for="([heading, ...paragraphs], i) in hasOtherView && hoverTooltip ? computedDescription?.[`text${view}`] : computedDescription?.textShop" :key="i">
 			<h4 v-html="heading" />
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
+		<p
+			v-if="computedDescription?.extended"
+			v-show="!hoverTooltip || globalKeyModifiers.shift"
+			v-html="computedDescription.extended"
+		/>
+		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView)">
+			<p v-show="hasMoreInfo">
+				Hold <kbd>[Shift]</kbd> to show more info
+			</p>
+			<p v-show="hasOtherView">
+				Press <kbd>[Ctrl]</kbd> to toggle to <b>{{ otherView }}</b> view
+			</p>
+		</footer>
 	</div>
 </template>
 
@@ -153,7 +173,7 @@ defineExpose({ header });
 			}
 		}
 
-		div {
+		> div {
 			--at-apply: 'text-neutral-300';
 
 			img {
@@ -162,6 +182,22 @@ defineExpose({ header });
 
 			li {
 				--at-apply: 'ms-5';
+			}
+		}
+
+		> p:not(.alert) {
+			--at-apply: 'mt-3.25';
+		}
+
+		> footer {
+			--at-apply: 'b-t b-[--ui-button-border-clr] pt-1 mt-2';
+
+			> p {
+				--at-apply: 'text-end';
+
+				> kbd {
+					--at-apply: 'font-inherit';
+				}
 			}
 		}
 	}

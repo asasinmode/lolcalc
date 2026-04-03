@@ -319,6 +319,7 @@ function selectOrBuyIfDouble(item: IShopItem, overwriteDisplayed: boolean): bool
 	return false;
 }
 
+const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Shop');
 let itemTooltipAnchor: undefined | HTMLElement;
 const itemTooltip = useTemplateRef('itemTooltip');
 const hoveredItem = shallowRef<IShopItem>();
@@ -329,6 +330,7 @@ function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent
 	itemTooltipAnchor = target;
 	itemTooltipAnchor?.addEventListener('mouseleave', leaveTooltipableElement, { passive: true, once: true });
 	itemTooltipAnchor?.addEventListener('mousemove', updateTooltipPosition, { passive: true });
+	addItemTooltipViewListeners();
 	hoveredItem.value = item;
 	'clientX' in eventLike && updateTooltipPosition(eventLike);
 }
@@ -336,6 +338,7 @@ function enterTooltipableElement(eventLike: { target: HTMLElement } | MouseEvent
 function leaveTooltipableElement() {
 	itemTooltip.value?.hidePopover();
 	itemTooltipAnchor?.removeEventListener('mousemove', updateTooltipPosition);
+	removeItemTooltipViewListeners();
 	itemTooltipAnchor = undefined;
 }
 
@@ -497,6 +500,7 @@ defineExpose({
 							:damage-source="damageSource"
 							header-class="hoverable:bg-white/10"
 							header-tag="button"
+							source="Shop"
 							@header-click="onSearchHeaderClick"
 						/>
 					</section>
@@ -660,6 +664,7 @@ defineExpose({
 				header-class="order-5"
 				header-tag="h2"
 				description-class="order-6"
+				source="Shop"
 			/>
 			<button
 				:disabled="selectedItem?.buyability !== 1"
@@ -868,7 +873,13 @@ defineExpose({
 			</p>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
-			<LolItemDescription :item="hoveredItem?.item" :damage-source="damageSource" header-subtitles />
+			<LolItemDescription
+				:item="hoveredItem?.item"
+				:damage-source="damageSource"
+				header-subtitles
+				hover-tooltip
+				source="Shop"
+			/>
 		</div>
 	</VDialog>
 </template>

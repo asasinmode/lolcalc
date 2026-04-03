@@ -825,9 +825,11 @@ export interface IComputedItemDescription {
 	subtitleRight?: string;
 	stats: [iconName: string, value: number, name: string][];
 	/** text shown below the stats when hovering in item shop */
-	extrasShop?: string[][];
+	textShop?: string[][];
 	/** text shown below the stats when hovering in inventory */
-	extrasInventory?: string[][];
+	textInventory?: string[][];
+	/** the extra gray text shown when holding shift */
+	extended?: string;
 	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 	anyUnknownExtraVariables?: boolean;
@@ -850,7 +852,7 @@ export function computedItemDescription(
 	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-	const { subtitleLeft = '', subtitleRight = '', tooltipShop = [] } = text.items[item.id] || {};
+	const { subtitleLeft = '', subtitleRight = '', tooltipShop, tooltipInventory, rules } = text.items[item.id] || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -864,7 +866,7 @@ export function computedItemDescription(
 		});
 
 	let anyUnknownExtraVariables = false;
-	const extraFormatted = tooltipShop?.map(([heading, ...paragraphs]) => {
+	const shopFormatted = tooltipShop?.map(([heading, ...paragraphs]) => {
 		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
 			heading!
 				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
@@ -903,15 +905,69 @@ export function computedItemDescription(
 		];
 	});
 
+	const inventoryFormatted = tooltipInventory?.map(([heading, ...paragraphs]) => {
+		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
+			heading!
+				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
+					const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
+					anyUnknownExtraVariables ||= !value;
+					return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+				})
+				.replace('(', '<span>(')
+				.replace(')', ')</span>'),
+			'item',
+			[item, damageSource?.itemDamageCalculationTarget.value],
+			replaceOptions,
+		);
+
+		anyUnknownExtraVariables ||= !!headingUnknown.length;
+		unknownVariables.push(...headingUnknown);
+		mergeMaps(variables, headingVariables);
+
+		return [
+			replaceGameDescriptionIcons(replacedHeading),
+			...paragraphs.map((paragraph) => {
+				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
+					paragraph!,
+					'item',
+					[item, damageSource?.itemDamageCalculationTarget.value],
+					replaceOptions,
+				);
+
+				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
+				unknownVariables.push(...paragraphUnknown);
+				mergeMaps(variables, paragraphVariables);
+
+				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
+			},
+			),
+		];
+	});
+
+	const { variables: rulesVariables, replaced: replacedRules, unknownVariables: rulesUnknown } = rules
+		? replaceGameDescriptionVariables(
+				rules,
+				'item',
+				[item, damageSource?.itemDamageCalculationTarget.value],
+				replaceOptions,
+			)
+		: {};
+
+	anyUnknownExtraVariables ||= !!rulesUnknown?.length;
+	rulesUnknown && unknownVariables.push(...rulesUnknown);
+	rulesVariables && mergeMaps(variables, rulesVariables);
+
 	return {
 		item,
 		variables,
 		unknownVariables,
+		extended: replacedRules,
 		anyUnknownExtraVariables,
 		subtitleLeft,
 		subtitleRight,
 		stats,
-		extrasShop: extraFormatted,
+		textShop: shopFormatted,
+		textInventory: inventoryFormatted,
 	};
 }
 

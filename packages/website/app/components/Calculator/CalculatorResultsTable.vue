@@ -837,17 +837,29 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 	return new DOMRect(left, top, right - left, bottom - top);
 }
 
-function showSectionHoverTooltip(event: MouseEvent) {
+const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
+
+let hoveredSectionType: undefined | IDamageResultTableSection['type'];
+
+function showSectionHoverTooltip(event: MouseEvent, type: IDamageResultTableSection['type']) {
+	hoveredSectionType = type;
 	const popover = (event.target as HTMLElement).querySelector('[popover]');
 	if (popover) {
 		(popover as HTMLElement).showPopover();
 		(event.target as HTMLElement).addEventListener('mouseleave', hideSectionHoverTooltip, { once: true });
+		if (hoveredSectionType === 'item') {
+			addItemTooltipViewListeners();
+		}
 	}
 }
 
 function hideSectionHoverTooltip(event: MouseEvent) {
 	const popover = (event.target as HTMLElement).querySelector('[popover]');
 	(popover as HTMLElement)?.hidePopover();
+	if (hoveredSectionType === 'item') {
+		removeItemTooltipViewListeners();
+	}
+	hoveredSectionType = undefined;
 }
 
 interface IColumnAddableOption {
@@ -1186,7 +1198,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 						scope="colgroup"
 						:colspan="1 + resultColumns.length"
 					>
-						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event)">
+						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event, section.type)">
 							<img
 								:src="section.image"
 								:width="section.imageSize"
@@ -1196,7 +1208,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 							<span>{{ section.image ? section.name : 'loading...' }}</span>
 							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
 								<div v-if="section.type === 'item'" popover="hint" class="hover-tooltip champion-item">
-									<LolItemDescription v-bind="section.hoverTooltipData as any" />
+									<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 								</div>
 								<LolChampionAbilityHoverTooltip
 									v-else-if="section.type !== 'all'"

@@ -154,6 +154,7 @@ onMounted(() => {
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
 });
 
+const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
 const hoveredItemIndex = ref<number>();
 
@@ -161,10 +162,12 @@ function showItemHoverTooltip(event: MouseEvent, index: number) {
 	itemHoverTooltip.value?.showPopover();
 	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, { passive: true, once: true });
 	hoveredItemIndex.value = index;
+	addItemTooltipViewListeners();
 }
 
 function leaveTooltipableItemElement() {
 	itemHoverTooltip.value?.hidePopover();
+	removeItemTooltipViewListeners();
 }
 
 function removeItem(event: MouseEvent, index: number) {
@@ -933,6 +936,8 @@ defineExpose({ el });
 		<div ref="itemHoverTooltip" popover="hint" class="hover-tooltip champion-item">
 			<LolItemDescription
 				:precomputed-description="hoveredItemIndex !== undefined ? value.computed.items.value[hoveredItemIndex] : undefined"
+				source="Inventory"
+				hover-tooltip
 			/>
 		</div>
 		<button ref="undoRemoveButton" style="display: none" @click="undoRemove">
