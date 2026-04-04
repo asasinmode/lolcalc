@@ -65,7 +65,7 @@ defineExpose({ header });
 		<span>{{ computedDescription?.subtitleRight }}</span>
 	</component>
 	<div class="item-description" :class="descriptionClass">
-		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownExtraVariables" />
+		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<ul>
 			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
 				<img

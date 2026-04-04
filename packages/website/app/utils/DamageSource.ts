@@ -832,7 +832,6 @@ export interface IComputedItemDescription {
 	extended?: string;
 	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
-	anyUnknownExtraVariables?: boolean;
 }
 
 export function computedItemDescription(
@@ -865,84 +864,8 @@ export function computedItemDescription(
 			] as [string, number, string];
 		});
 
-	let anyUnknownExtraVariables = false;
-	const shopFormatted = tooltipShop?.map(([heading, ...paragraphs]) => {
-		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
-			heading!
-				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-					const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
-					anyUnknownExtraVariables ||= !value;
-					return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
-				})
-				.replace('(', '<span>(')
-				.replace(')', ')</span>'),
-			'item',
-			[item, damageSource?.itemDamageCalculationTarget.value],
-			replaceOptions,
-		);
-
-		anyUnknownExtraVariables ||= !!headingUnknown.length;
-		unknownVariables.push(...headingUnknown);
-		mergeMaps(variables, headingVariables);
-
-		return [
-			replaceGameDescriptionIcons(replacedHeading),
-			...paragraphs.map((paragraph) => {
-				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
-					paragraph!,
-					'item',
-					[item, damageSource?.itemDamageCalculationTarget.value],
-					replaceOptions,
-				);
-
-				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
-				unknownVariables.push(...paragraphUnknown);
-				mergeMaps(variables, paragraphVariables);
-
-				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
-			},
-			),
-		];
-	});
-
-	const inventoryFormatted = tooltipInventory?.map(([heading, ...paragraphs]) => {
-		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
-			heading!
-				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-					const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
-					anyUnknownExtraVariables ||= !value;
-					return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
-				})
-				.replace('(', '<span>(')
-				.replace(')', ')</span>'),
-			'item',
-			[item, damageSource?.itemDamageCalculationTarget.value],
-			replaceOptions,
-		);
-
-		anyUnknownExtraVariables ||= !!headingUnknown.length;
-		unknownVariables.push(...headingUnknown);
-		mergeMaps(variables, headingVariables);
-
-		return [
-			replaceGameDescriptionIcons(replacedHeading),
-			...paragraphs.map((paragraph) => {
-				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
-					paragraph!,
-					'item',
-					[item, damageSource?.itemDamageCalculationTarget.value],
-					replaceOptions,
-				);
-
-				anyUnknownExtraVariables ||= !!paragraphUnknown.length;
-				unknownVariables.push(...paragraphUnknown);
-				mergeMaps(variables, paragraphVariables);
-
-				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
-			},
-			),
-		];
-	});
+	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, cooldownIcon, onHitIcon, replaceOptions);
+	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, cooldownIcon, onHitIcon, replaceOptions);
 
 	const { variables: rulesVariables, replaced: replacedRules, unknownVariables: rulesUnknown } = rules
 		? replaceGameDescriptionVariables(
@@ -953,8 +876,11 @@ export function computedItemDescription(
 			)
 		: {};
 
-	anyUnknownExtraVariables ||= !!rulesUnknown?.length;
-	rulesUnknown && unknownVariables.push(...rulesUnknown);
+	for (const unknownVariable of rulesUnknown || []) {
+		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
+			unknownVariables.push(unknownVariable);
+		}
+	}
 	rulesVariables && mergeMaps(variables, rulesVariables);
 
 	return {
@@ -962,7 +888,6 @@ export function computedItemDescription(
 		variables,
 		unknownVariables,
 		extended: replacedRules,
-		anyUnknownExtraVariables,
 		subtitleLeft,
 		subtitleRight,
 		stats,
@@ -1181,5 +1106,60 @@ function parseStringifiedRunePathSlots(data: string): ([slotIndex: number, slotO
 		}
 
 		return [parsedSlotIndex, parsedOptionIndex];
+	});
+}
+
+function formatItemDescriptionText(
+	text: ITextData['items'][keyof ITextData['items']]['tooltipShop'],
+	item: IItem,
+	damageSource: DamageSource | undefined,
+	variables: IComputedItemDescription['variables'],
+	unknownVariables: IComputedItemDescription['unknownVariables'],
+	cooldownIcon: string,
+	onHitIcon: string,
+	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+): [string, ...string[]][] | undefined {
+	return text?.map(([heading, ...paragraphs]) => {
+		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
+			heading!
+				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
+					const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
+					return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+				})
+				.replace('(', '<span>(')
+				.replace(')', ')</span>'),
+			'item',
+			[item, damageSource?.itemDamageCalculationTarget.value],
+			replaceOptions,
+		);
+
+		for (const unknownVariable of headingUnknown || []) {
+			if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
+				unknownVariables.push(unknownVariable);
+			}
+		}
+		mergeMaps(variables, headingVariables);
+
+		return [
+			replaceGameDescriptionIcons(replacedHeading),
+			...paragraphs.map((paragraph) => {
+				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
+					paragraph!,
+					'item',
+					[item, damageSource?.itemDamageCalculationTarget.value],
+					replaceOptions,
+				);
+
+				for (const unknownVariable of paragraphUnknown || []) {
+					if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
+						unknownVariables.push(unknownVariable);
+					}
+				}
+				mergeMaps(variables, paragraphVariables);
+
+				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
+			},
+			),
+		];
 	});
 }

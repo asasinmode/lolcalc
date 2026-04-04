@@ -104,6 +104,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		.concat();
 
 	const itemIds = new Set(props.damageSources
+		.concat(props.damageTargets)
 		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
 			item?.variables.size || item?.unknownVariables.length ? damageSource.items.value[index]!.id : undefined,
 		))
