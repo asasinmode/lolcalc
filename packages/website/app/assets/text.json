@@ -2247,7 +2247,11 @@
 			"item_onactivation": "<br><br>%i:activeEffect% <active>ACTIVE</active>",
 			"item_support_minion_warning": "This item grants reduced gold from minions if anyone on your team with this item kill excessive numbers of them.",
 			"item_active_named": "%i:activeEffect% <active>Active -</active>",
-			"item_melee_ranged_rules": "Item performance differs for %i:meleeInactive% melee and %i:rangedInactive% ranged users."
+			"item_melee_ranged_rules": "Item performance differs for %i:meleeInactive% melee and %i:rangedInactive% ranged users.",
+			"item_range_type_melee": "(%i:meleeActive%@MeleeItemCalcValue@ | %i:rangedInactive%<if0is0>@RangedItemCalcValue@</if0is0>)",
+			"item_range_mod_1": "(%i:meleeActive%@MeleeItemCalcValue@ | %i:rangedInactive%<if0is0>@RangedItemCalcValue@</if0is0>)",
+			"item_range_type_ranged": "(%i:meleeInactive%<if0is0>@MeleeItemCalcValue@</if0is0> | %i:rangedActive%@RangedItemCalcValue@)",
+			"item_range_mod_2": "(%i:meleeInactive%<if0is0>@MeleeItemCalcValue@</if0is0> | %i:rangedActive%@RangedItemCalcValue@)"
 		},
 		"dragons": {
 			"Cloud": {

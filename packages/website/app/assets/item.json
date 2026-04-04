@@ -2427,28 +2427,6 @@
 							"__type": "AbilityResourceByCoefficientCalculationPart"
 						}
 					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
 				}
 			},
 			"itemGroups": [
@@ -3182,30 +3160,6 @@
 				"MaxProcPerAuto": 10
 			},
 			"itemCalculations": {
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
@@ -3381,32 +3335,6 @@
 							"mStat": 2,
 							"mCoefficient": 0.2,
 							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -3703,28 +3631,6 @@
 					"mFormulaParts": [
 						{
 							"mNumber": 0.55,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
 							"__type": "NumberCalculationPart"
 						}
 					]
@@ -4997,28 +4903,6 @@
 				"BaseOOCMS": 20
 			},
 			"itemCalculations": {
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
 				"Duration": {
 					"mFormulaParts": [
 						{
@@ -5333,12 +5217,6 @@
 				"RangedMoveSpeedMod": -0.15
 			},
 			"itemCalculations": {
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
 				"SiphonDamage": {
 					"mFormulaParts": [
 						{
@@ -5370,22 +5248,6 @@
 						}
 					],
 					"mDisplayAsPercent": true
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
 				},
 				"{c0b34d7a}": {
 					"mFormulaParts": [
@@ -5548,28 +5410,6 @@
 						"mDataValue": "RangedShieldMod"
 					},
 					"mModifiedGameCalculation": "MeleeItemCalcValue"
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
 				}
 			},
 			"itemGroups": [
@@ -5680,28 +5520,6 @@
 				"CastIDLockout": 1
 			},
 			"itemCalculations": {
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
@@ -6141,28 +5959,6 @@
 						{
 							"mDataValue": "RangedDamage",
 							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -7027,28 +6823,6 @@
 							"__type": "NamedDataValueCalculationPart"
 						}
 					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
 				}
 			},
 			"effectAmount": [3],
@@ -7317,28 +7091,6 @@
 				"Cooldown": 1.5
 			},
 			"itemCalculations": {
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
 				"{ce8aadac}": {
 					"mFormulaParts": [
 						{
@@ -7743,28 +7495,6 @@
 						}
 					],
 					"mDisplayAsPercent": true
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
 				}
 			},
 			"itemGroups": [
@@ -7885,28 +7615,6 @@
 					},
 					"mModifiedGameCalculation": "MeleeItemCalcValue"
 				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
 				"SquallDamage": {
 					"mFormulaParts": [
 						{
@@ -7966,12 +7674,6 @@
 						}
 					]
 				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
@@ -7989,22 +7691,6 @@
 						}
 					],
 					"mDisplayAsPercent": true
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
 				}
 			},
 			"itemGroups": [
@@ -8084,28 +7770,6 @@
 							"mStatFormula": 1,
 							"mDataValue": "HealRatio",
 							"__type": "StatByNamedDataValueCalculationPart"
-						}
-					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
 						}
 					]
 				},
@@ -8379,32 +8043,6 @@
 							"mStat": 2,
 							"mCoefficient": 0.2,
 							"__type": "StatByCoefficientCalculationPart"
-						}
-					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
 						}
 					]
 				}
@@ -9094,28 +8732,6 @@
 						}
 					]
 				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
 				"MaxHealthDamageCalc": {
 					"mFormulaParts": [
 						{
@@ -9378,32 +8994,6 @@
 						}
 					]
 				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
 				"MeleeItemCalcValue": {
 					"mFormulaParts": [
 						{
@@ -9498,28 +9088,6 @@
 						{
 							"mDataValue": "SlowAmountRangeMod",
 							"__type": "NamedDataValueCalculationPart"
-						}
-					]
-				},
-				"ChampRange": {
-					"mSimpleTooltipCalculationDisplay": 5,
-					"mExpandedTooltipCalculationDisplay": 5,
-					"mDefaultGameCalculation": "{792cf56b}",
-					"mConditionalGameCalculation": "{06387172}"
-				},
-				"{792cf56b}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 1,
-							"__type": "NumberCalculationPart"
-						}
-					]
-				},
-				"{06387172}": {
-					"mFormulaParts": [
-						{
-							"mNumber": 2,
-							"__type": "NumberCalculationPart"
 						}
 					]
 				}

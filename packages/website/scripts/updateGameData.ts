@@ -282,7 +282,7 @@ try {
 	itemData = JSON.parse(await fs.readFile(itemFilePath, 'utf8'));
 } catch {}
 
-if (true || !itemData || itemData?.version !== latestVersion || !textData.data.items) {
+if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	console.log('item data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -419,6 +419,17 @@ if (true || !itemData || itemData?.version !== latestVersion || !textData.data.i
 		item.stringCalculations = cleanupObject(itemMoreData.StringCalculations);
 		item.gold.sellBackModifier = itemMoreData.sellBackModifier && formatNumber(itemMoreData.sellBackModifier);
 		item.effectAmount = itemMoreData.mEffectAmount?.some((amount: number) => amount !== 0) ? itemMoreData.mEffectAmount?.map((amount: number) => formatNumber(amount)) : undefined;
+
+		/* remove unused ChampRange, it's TODO resolved more or less manually in `util/gameVariable.ts`, with some more info in this file's `updateItemShopItemTooltipText` */
+		if (item.itemCalculations?.ChampRange) {
+			const { mDefaultGameCalculation, mConditionalGameCalculation } = item.itemCalculations.ChampRange;
+
+			if (mDefaultGameCalculation && mConditionalGameCalculation) {
+				(item.itemCalculations as any)[mDefaultGameCalculation] = undefined;
+				(item.itemCalculations as any)[mConditionalGameCalculation] = undefined;
+				(item.itemCalculations as any).ChampRange = undefined;
+			}
+		}
 
 		const itemGroups = itemMoreData.mItemGroups.filter((group: string) => group !== 'Items/ItemGroups/Default');
 		if (itemGroups.length) {
@@ -984,7 +995,8 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 		category: 'item',
 		variableSourceKeys: [],
 		variableType: 'item',
-		variableValueParameters: [item],
+		/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
+		variableValueParameters: [{ ...item, dynamicValues: { ChampRange: [1, 2] } } as IItem],
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
 	const combinedDescriptions = tooltipShop?.flatMap(tooltip => tooltip).concat(tooltipInventory?.flatMap(tooltip => tooltip) || []).join(' ');
