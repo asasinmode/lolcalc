@@ -126,16 +126,16 @@ export function useCalculatorState(
 		}
 
 		for (const section of resultsTable.value?.resultSections || []) {
-			if (section.isPermanent) {
-				continue;
-			}
 			const [championOrItemId] = section.id.split('-');
-			if (section.type === 'all' || !(section.type === 'item' ? querySavedItemIds.has(championOrItemId!) : querySavedChampionIds.has(championOrItemId!))) {
+			if (section.type !== 'all'
+				&& !(section.type === 'item' ? querySavedItemIds.has(championOrItemId!) : querySavedChampionIds.has(championOrItemId!))) {
 				continue;
 			}
 
+			const isExpanded = resultsTable.value?.expandedSections.includes(section.id);
+
 			const params = new URLSearchParams();
-			params.append('tblSct', `${section.type}_${section.id}`);
+			params.append('tblSct', `${section.type}_${section.id}_${isExpanded ? 1 : ''}`);
 			const str = params.toString();
 			wholeState += `&${str}`;
 			if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
@@ -219,7 +219,7 @@ export function useCalculatorState(
 
 		const savedSections = params.getAll('tblSct');
 		for (const section of savedSections) {
-			const [type, id] = section.split('_');
+			const [type, id, isExpanded] = section.split('_');
 			if (!type || !['all', 'champion', 'item'].includes(type) || !id) {
 				continue;
 			}
@@ -235,9 +235,18 @@ export function useCalculatorState(
 						continue;
 					}
 
-					resultsTable.value.addResultsSection(type, championOrItemId, abilityKey as IChampionAbilityKey, parsedAbilityVariant);
+					resultsTable.value.addResultsSection(type, championOrItemId, abilityKey as IChampionAbilityKey, parsedAbilityVariant, undefined, !!isExpanded);
 				} else if (type === 'item') {
-					resultsTable.value.addResultsSection(type as 'item', championOrItemId);
+					resultsTable.value.addResultsSection(type as 'item', championOrItemId, undefined, undefined, undefined, !!isExpanded);
+				} else {
+					if (resultsTable.value.resultSections.some(section => section.id === id)) {
+						const expandedIndex = resultsTable.value.expandedSections.indexOf(id);
+						if (isExpanded) {
+							expandedIndex === -1 && resultsTable.value.expandedSections.push(id);
+						} else {
+							~expandedIndex && resultsTable.value.expandedSections.splice(expandedIndex, 1);
+						}
+					}
 				}
 			}
 		}

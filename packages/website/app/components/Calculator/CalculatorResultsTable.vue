@@ -190,7 +190,7 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		rv.value = 'loading...';
 	} else if (
 		(section.type === 'champion' && source.champion.value?.id !== section.championOrItemId)
-		|| (section.id === 'basicAttack' && source.champion.value?.id === 'Zeri')
+		|| (section.id === 'aa' && source.champion.value?.id === 'Zeri')
 	) {
 		rv.value = 'n/a';
 	} else {
@@ -277,6 +277,7 @@ function toggleResultsSection(sectionId: string) {
 	} else {
 		expandedSections.value.push(sectionId);
 	}
+	emit('configurationChanged');
 }
 
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
@@ -357,6 +358,7 @@ async function addResultsSection(
 	abilityKey?: IChampionAbilityKey,
 	abilityVariant?: number,
 	name = '',
+	expand = true,
 ) {
 	const id = `${championOrItemId}-${abilityKey ?? ''}-${abilityVariant ?? ''}`;
 	if (resultSections.value.some(section => section.id === id) || (type === 'champion' && championOrItemId === 'TargetDummy')) {
@@ -376,7 +378,7 @@ async function addResultsSection(
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
 	resultSections.value.push(section);
-	expandedSections.value.push(section.id);
+	expand && expandedSections.value.push(section.id);
 
 	if (type === 'champion') {
 		const champion = await useChampion(championOrItemId);
@@ -909,7 +911,15 @@ function addColumnItems(columnIndex: number) {
 	emit('configurationChanged');
 }
 
-defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, recalculateAllColumns, addResultsSection });
+defineExpose({
+	resultColumns,
+	resultSections,
+	flipResults,
+	addResultsColumn,
+	recalculateAllColumns,
+	addResultsSection,
+	expandedSections,
+});
 </script>
 
 <template>
@@ -946,7 +956,7 @@ defineExpose({ resultColumns, resultSections, flipResults, addResultsColumn, rec
 			<tr>
 				<td width="240px" colspan="2">
 					<div>
-						<a href="#results-table-section-header-basicAttack" class="skip-link">
+						<a href="#results-table-section-header-aa" class="skip-link">
 							skip column controls
 						</a>
 						<label for="results-table-values-for">
