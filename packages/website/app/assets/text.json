@@ -436,7 +436,7 @@
 					[
 						"<passive>Shock</passive>",
 						"Attacks against champions deal an additional <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. ",
-						"Damaging Abilities against champions deal an additional <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }} physical damage</physicalDamage>."
+						"Damaging Abilities against champions deal an additional <physicalDamage>@ChampRange@ physical damage</physicalDamage>."
 					]
 				]
 			},
@@ -586,7 +586,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
-						"Attacks deal <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }} physical damage</physicalDamage> to nearby enemies."
+						"Attacks deal <physicalDamage>@ChampRange@ physical damage</physicalDamage> to nearby enemies."
 					]
 				],
 				"rules": "<rules><passive>Cleave</passive> will benefit from Life Steal.<br><passive>Cleave</passive> does not trigger on structures.</rules>"
@@ -614,7 +614,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
-						"Attacks deal <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }} physical damage</physicalDamage> to nearby enemies."
+						"Attacks deal <physicalDamage>@ChampRange@ physical damage</physicalDamage> to nearby enemies."
 					]
 				],
 				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
@@ -999,7 +999,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Mist's Edge</passive>",
-						"Attacks deal <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }}</physicalDamage> of enemy's current Health as <physicalDamage>bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}."
+						"Attacks deal <physicalDamage>@ChampRange@</physicalDamage> of enemy's current Health as <physicalDamage>bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}."
 					],
 					[
 						"<passive>Clawing Shadows</passive> {{Item_Cooldown}}",
@@ -1023,7 +1023,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Lifeline</passive> {{ Item_Cooldown }}",
-						"Taking magic damage that would reduce your Health below @LowHealthThreshold*100@% grants a <shield>{{ Item_Melee_Ranged_Split_Dynamic }} magic damage Shield</shield> for @ShieldDuration@ seconds and <lifeSteal>@BuffVamp*100@% Omnivamp</lifeSteal> until end of combat."
+						"Taking magic damage that would reduce your Health below @LowHealthThreshold*100@% grants a <shield>@ChampRange@ magic damage Shield</shield> for @ShieldDuration@ seconds and <lifeSteal>@BuffVamp*100@% Omnivamp</lifeSteal> until end of combat."
 					]
 				]
 			},
@@ -1412,7 +1412,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Void Corruption</passive>",
-						"For each second in combat with enemy champions, deal @EternityDamageIncreasePerSecond*100@% bonus damage, up to @EternityDamageIncreaseMax*100@%. At maximum strength, gain <omnivamp>{{ Item_Melee_Ranged_Split_Dynamic }} Omnivamp</omnivamp>."
+						"For each second in combat with enemy champions, deal @EternityDamageIncreasePerSecond*100@% bonus damage, up to @EternityDamageIncreaseMax*100@%. At maximum strength, gain <omnivamp>@ChampRange@ Omnivamp</omnivamp>."
 					],
 					[
 						"<passive>Void Infusion</passive>",
@@ -1422,7 +1422,7 @@
 				"tooltipInventory": [
 					[
 						"<passive>Void Corruption</passive>",
-						"For each second in combat with enemy champions, deal @EternityDamageIncreasePerSecond*100@% bonus damage, up to @EternityDamageIncreaseMax*100@%. At maximum strength, gain <omnivamp>{{ Item_Melee_Ranged_Split_Dynamic }} Omnivamp</omnivamp>."
+						"For each second in combat with enemy champions, deal @EternityDamageIncreasePerSecond*100@% bonus damage, up to @EternityDamageIncreaseMax*100@%. At maximum strength, gain <omnivamp>@ChampRange@ Omnivamp</omnivamp>."
 					],
 					[
 						"<passive>Void Infusion</passive>",
@@ -1458,7 +1458,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Ignore Pain</passive>",
-						"{{ Item_Melee_Ranged_Split_Dynamic }} of damage taken is dealt to you over @BleedDurationWorst@ seconds instead."
+						"@ChampRange@ of damage taken is dealt to you over @BleedDurationWorst@ seconds instead."
 					],
 					[
 						"<passive>Defy</passive>",
@@ -1468,7 +1468,7 @@
 				"tooltipInventory": [
 					[
 						"<passive>Ignore Pain</passive>",
-						"{{ Item_Melee_Ranged_Split_Dynamic }} of damage taken is dealt to you over @BleedDurationWorst@ seconds instead."
+						"@ChampRange@ of damage taken is dealt to you over @BleedDurationWorst@ seconds instead."
 					],
 					[
 						"<passive>Defy</passive>",
@@ -1490,7 +1490,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Lightshield Strike</passive> {{ Item_Cooldown }} per target",
-						"Your first Attack against a champion <attention>Critically Strikes</attention> for @CritModifier*100@% of your normal Critical Strike damage and <healing>restores {{ Item_Melee_Ranged_Split_Dynamic }} plus @MissingHealthHeal*100@%</healing> of missing Health."
+						"Your first Attack against a champion <attention>Critically Strikes</attention> for @CritModifier*100@% of your normal Critical Strike damage and <healing>restores @ChampRange@ plus @MissingHealthHeal*100@%</healing> of missing Health."
 					]
 				],
 				"rules": "<rules>Excess healing is granted as temporary bonus Health.</rules>"
@@ -1544,7 +1544,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
-						"Attacks deal <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }} physical damage</physicalDamage> to nearby enemies."
+						"Attacks deal <physicalDamage>@ChampRange@ physical damage</physicalDamage> to nearby enemies."
 					]
 				],
 				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.<br>You can move while casting <passive>Breaking Shockwave</passive>.</rules>"
@@ -1677,14 +1677,14 @@
 				"tooltipShop": [
 					[
 						"<passive>Ever Rising Moon</passive> {{ Item_Cooldown }}",
-						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@% max health physical damage</physicalDamage> and grants you a <shield>{{ Item_Melee_Ranged_Split_Dynamic }} Shield</shield> for @ShieldDuration@ seconds."
+						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@% max health physical damage</physicalDamage> and grants you a <shield>@ChampRange@ Shield</shield> for @ShieldDuration@ seconds."
 					]
 				],
 				"tooltipInventory": [
 					[
 						"",
 						"<passive>Ever Rising Moon</passive> {{ Item_Cooldown }}",
-						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@% max health physical damage</physicalDamage> and grants you a <shield>{{ Item_Melee_Ranged_Split_Dynamic }} Shield</shield> for @ShieldDuration@ seconds."
+						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@% max health physical damage</physicalDamage> and grants you a <shield>@ChampRange@ Shield</shield> for @ShieldDuration@ seconds."
 					],
 					[
 						"<rules>{{ Item_Melee_Ranged_Rules }}</rules>"
@@ -1750,7 +1750,7 @@
 					],
 					[
 						"<passive>Firmament</passive>",
-						"Your <keyword>Energized Attack</keyword> deals <physicalDamage>@DamageCalc@ bonus physical damage</physicalDamage> and <keyword>Slows</keyword> by <slow>{{ Item_Melee_Ranged_Split_Dynamic }}%</slow> for @SlowDuration@ seconds."
+						"Your <keyword>Energized Attack</keyword> deals <physicalDamage>@DamageCalc@ bonus physical damage</physicalDamage> and <keyword>Slows</keyword> by <slow>@ChampRange@%</slow> for @SlowDuration@ seconds."
 					]
 				]
 			},
@@ -2239,7 +2239,15 @@
 			"item_2422_name": "Slightly Magical Footwear",
 			"game_item_displayname_2010": "Total Biscuit of Everlasting Will",
 			"perk_tooltip_dynamic_statmodadaptive_0": "<scaleAD>+@f2@ Attack Damage</scaleAD>",
-			"perk_tooltip_dynamic_statmodadaptive_1": "<scaleAP>+@f2@ Ability Power</scaleAP>"
+			"perk_tooltip_dynamic_statmodadaptive_1": "<scaleAP>+@f2@ Ability Power</scaleAP>",
+			"item_keyword_onhit": "%i:OnHit% <OnHit>On-Hit</OnHit>",
+			"item_cooldown": "%i:cooldown% (@Cooldown@s)",
+			"item_melee_ranged_split": "{{Item_Range_Mod_@ChampRange@}}",
+			"item_energized": "<passive>Energized</passive><br>Moving and Attacking generates an <keyword>Energized Attack</keyword>.",
+			"item_onactivation": "<br><br>%i:activeEffect% <active>ACTIVE</active>",
+			"item_support_minion_warning": "This item grants reduced gold from minions if anyone on your team with this item kill excessive numbers of them.",
+			"item_active_named": "%i:activeEffect% <active>Active -</active>",
+			"item_melee_ranged_rules": "Item performance differs for %i:meleeInactive% melee and %i:rangedInactive% ranged users."
 		},
 		"dragons": {
 			"Cloud": {

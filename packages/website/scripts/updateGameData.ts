@@ -282,7 +282,7 @@ try {
 	itemData = JSON.parse(await fs.readFile(itemFilePath, 'utf8'));
 } catch {}
 
-if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
+if (true || !itemData || itemData?.version !== latestVersion || !textData.data.items) {
 	console.log('item data not present or outdated, fetching...');
 
 	await loadStringTable();
@@ -404,13 +404,6 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			continue;
 		}
 
-		/*
-		 * `mShopTooltip` looks like `generatedtip_item_3170_tooltipshop`
-		 * `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
-		 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
-		 */
-		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules);
-
 		if (SPECIAL_EPICNESS_ITEMS[itemId]) {
 			item.epicness = SPECIAL_EPICNESS_ITEMS[itemId];
 		} else if (itemMoreData.epicness) {
@@ -459,6 +452,13 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				stats[statKey] = formatNumber(itemMoreData[key]);
 			}
 		}
+
+		/*
+		 * `mShopTooltip` looks like `generatedtip_item_3170_tooltipshop`
+		 * `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
+		 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
+		 */
+		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules);
 
 		const SPECIAL_CATEGORY_ITEMS: Record<string, IItemCategory[]> = {
 			3869: ['support'],	// celestial opposition
@@ -911,7 +911,6 @@ for (const category in debug) {
 	}
 }
 
-function itemDescriptionExtras(text: string, extrasStart: string): string[][] | undefined {
 function itemDescriptionText(text: string, extrasStart: string): string[][] | undefined {
 	const statsStartIndex = text.indexOf(extrasStart);
 	const statsToEnd = text.slice(statsStartIndex + 19);
@@ -923,7 +922,10 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 		extraToEnd = extraToEnd.slice(19);
 		extraEndIndex = extraToEnd.indexOf('</section>');
 	}
-	const rawExtra = extraToEnd.slice(0, extraEndIndex).replace(/\{\{ ?Item_Passive_List ?\}\}/g, '').replaceAll(':</passive>', '</passive>');
+	const rawExtra = extraToEnd.slice(0, extraEndIndex)
+		.replace(/\{\{ ?Item_Passive_List ?\}\}/g, '')
+		.replace(/\{\{ ?Item_Melee_Ranged_Split_Dynamic ?\}\}/g, '@ChampRange@')
+		.replaceAll(':</passive>', '</passive>');
 
 	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')).filter(text => text.some(Boolean)) : undefined;
 	for (let i = 0; i < (extra?.length || 0); i++) {
@@ -950,8 +952,10 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 	return extra;
 }
 
+/**
+ * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@ChampRange@` TODO figur out if makese sense
+ */
 function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynamicTooltip: string, keyTooltipExtendedRules?: string) {
-	// TODO add debug
 	const textShop = getStringtableValue(mShopTooltip, 'item tooltipShop');
 	const textInventory = getStringtableValue(mDynamicTooltip, 'item tooltipInventory');
 	if (!textShop) {
@@ -976,13 +980,24 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 		tooltipInventory = undefined;
 	}
 
-	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true);
+	const variableDebug = {
+		category: 'item',
+		variableSourceKeys: [],
+		variableType: 'item',
+		variableValueParameters: [item],
+	} satisfies Omit<IStringtableVariableDebug, 'key'>;
+
+	const combinedDescriptions = tooltipShop?.flatMap(tooltip => tooltip).concat(tooltipInventory?.flatMap(tooltip => tooltip) || []).join(' ');
+	combinedDescriptions && debugStringVariables(combinedDescriptions, { ...variableDebug, key: `${item.id} ${item.name} text` });
+
+	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true)?.replace(/\{\{ ?Item_Melee_Ranged_Split_Dynamic ?\}\}/g, '@ChampRange@');
 	while (rules?.startsWith('<br>')) {
 		rules = rules.slice(4).trim();
 	}
 	while (rules?.endsWith('<br>')) {
 		rules = rules.slice(0, -4).trim();
 	}
+	rules && debugStringVariables(rules, { ...variableDebug, key: `${item.id} ${item.name} rules` });
 
 	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || rules?.length) {
 		(textData.data.items as any)[item.id] = {
@@ -1059,72 +1074,76 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 		console.warn(`[${typeof variableDebug === 'string' ? variableDebug : variableDebug.key}] string "${path.toLowerCase()}" not found in the stringtable`);
 	}
 	if (value && typeof variableDebug === 'object') {
-		const { category, key, stringtableVariableSaveUnder, variableType, variableValueParameters, variableSourceKeys } = variableDebug;
-
-		const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, (variableValueParameters[0] as any)?.dynamicValues, false);
-
-		if (stringtableVariables.size && stringtableVariableSaveUnder) {
-			stringtableVariableSaveUnder.stringtable ||= {};
-		}
-
-		for (const [stringtableKey, value] of stringtableVariables.entries()) {
-			((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
-		}
-		// TODO try hashed stringtable variables, cant figure out what the hashing algorithm is atm (below uses `xxh3.Xxh3.withSeed(0n)`)
-		// in passives only Zilean and Kalista have their tooltips hashed using xxh3 but the hashes my version outputs are 1 letter different from what's in the stringtable
-		// for Kalista `74fdc9540b` instead of `34fdc9540b`
-		// for Zilean `7ce6b5f53c` instead of `3ce6b5f53c`
-		// so when implementing trying hash variable either make some workaround with checking if 9 match or find the cause of the problem
-		// same for Hecarim in extended variables has `spell_listtype_hecarimw: resist amount`, which hashes to `ad503eb14e` but in stringtable there's `2d503eb14e`
-		if (unknownStringtableVariables.size) {
-			debug[category].stringtableVariables.set(key, unknownStringtableVariables);
-		}
-
-		const variableSource = variableValueParameters[0];
-
-		const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
-
-		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
-			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
-			const hash = hashRuneVariable(variableName);
-			for (const sourceKey of variableSourceKeys as (keyof typeof variableSource)[]) {
-				let rename: [from: string, to: string] | undefined;
-
-				if (variableSource[sourceKey]?.[hash]) {
-					rename = [hash, variableName];
-				}
-
-				// TODO not sure if legal for variables other than the rune ones, they might be case sensitive
-				if (!rename) {
-					const lowercaseKeys = Object.keys(variableSource[sourceKey] || {});
-					for (const key of lowercaseKeys) {
-						if (variableName !== key && variableName.toLowerCase() === key.toLowerCase()) {
-							rename = [key, variableName];
-						}
-					}
-				}
-
-				if (rename) {
-					const [from, to] = rename;
-					variableSource[sourceKey][to] = variableSource[sourceKey][from];
-					variableSource[sourceKey].__renamedVariables ||= {};
-					variableSource[sourceKey].__renamedVariables[from] = to;
-					variableSource[sourceKey][from] = undefined;
-					unknownVariables.splice(i, 1);
-					continue outer;
-				}
-			}
-		}
-		if (unknownVariables.length) {
-			debug[category].variables.set(key, unknownVariables.map(v => v[0]));
-		}
-		const unknownTags = getUnknownTags(value);
-		if (unknownTags.size) {
-			debug[category].tags[0].push(key);
-			debug[category].tags[1] = debug[category].tags[1].union(unknownTags);
-		}
+		debugStringVariables(value, variableDebug);
 	}
 	return value;
+}
+
+function debugStringVariables(value: string, variableDebug: IStringtableVariableDebug) {
+	const { category, key, stringtableVariableSaveUnder, variableType, variableValueParameters, variableSourceKeys } = variableDebug;
+
+	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, (variableValueParameters[0] as any)?.dynamicValues, false);
+
+	if (stringtableVariables.size && stringtableVariableSaveUnder) {
+		stringtableVariableSaveUnder.stringtable ||= {};
+	}
+
+	for (const [stringtableKey, value] of stringtableVariables.entries()) {
+		((stringtableVariableSaveUnder ?? textData.data).stringtable as any)[stringtableKey] = value;
+	}
+	// TODO try hashed stringtable variables, cant figure out what the hashing algorithm is atm (below uses `xxh3.Xxh3.withSeed(0n)`)
+	// in passives only Zilean and Kalista have their tooltips hashed using xxh3 but the hashes my version outputs are 1 letter different from what's in the stringtable
+	// for Kalista `74fdc9540b` instead of `34fdc9540b`
+	// for Zilean `7ce6b5f53c` instead of `3ce6b5f53c`
+	// so when implementing trying hash variable either make some workaround with checking if 9 match or find the cause of the problem
+	// same for Hecarim in extended variables has `spell_listtype_hecarimw: resist amount`, which hashes to `ad503eb14e` but in stringtable there's `2d503eb14e`
+	if (unknownStringtableVariables.size) {
+		debug[category].stringtableVariables.set(key, unknownStringtableVariables);
+	}
+
+	const variableSource = variableValueParameters[0];
+
+	const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
+
+	outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
+		const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
+		const hash = hashRuneVariable(variableName);
+		for (const sourceKey of variableSourceKeys as (keyof typeof variableSource)[]) {
+			let rename: [from: string, to: string] | undefined;
+
+			if (variableSource[sourceKey]?.[hash]) {
+				rename = [hash, variableName];
+			}
+
+			// TODO not sure if legal for variables other than the rune ones, they might be case sensitive
+			if (!rename) {
+				const lowercaseKeys = Object.keys(variableSource[sourceKey] || {});
+				for (const key of lowercaseKeys) {
+					if (variableName !== key && variableName.toLowerCase() === key.toLowerCase()) {
+						rename = [key, variableName];
+					}
+				}
+			}
+
+			if (rename) {
+				const [from, to] = rename;
+				variableSource[sourceKey][to] = variableSource[sourceKey][from];
+				variableSource[sourceKey].__renamedVariables ||= {};
+				variableSource[sourceKey].__renamedVariables[from] = to;
+				variableSource[sourceKey][from] = undefined;
+				unknownVariables.splice(i, 1);
+				continue outer;
+			}
+		}
+	}
+	if (unknownVariables.length) {
+		debug[category].variables.set(key, unknownVariables.map(v => v[0]));
+	}
+	const unknownTags = getUnknownTags(value);
+	if (unknownTags.size) {
+		debug[category].tags[0].push(key);
+		debug[category].tags[1] = debug[category].tags[1].union(unknownTags);
+	}
 }
 
 function possibleDynamicValues(value?: IPossibleDynamicValues, abilityKey?: Exclude<keyof IPossibleDynamicValues, 'all'>) {

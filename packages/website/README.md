@@ -135,6 +135,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] use everything that has extra ui (and internalData on source)
   - [ ] level breakpoint calculations
   - [x] DamageSource.internalData set from utils/champion.ts
+  - [ ] `{{ Item_Melee_Ranged_Split_Dynamic }}` and `@ChampRange@` try to do what doran's shield does
   - [ ] maybe dynamic variables can be cached on damage source under a key then reused
   - [ ] think of something other than spread copying `{...champion, dynamicValues: ...}`
   - [ ] check if can always lowercase match variables
