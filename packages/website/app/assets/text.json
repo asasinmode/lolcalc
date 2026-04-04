@@ -13,7 +13,6 @@
 			"1054": {
 				"subtitleLeft": "Defense",
 				"subtitleRight": "Unique: Starter",
-				"rules": "<rules>Healing after taking damage is based on your missing Health.<br>Healing is @RangeRegenMult*100@% effective on taking area of effect or periodic damage.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Enduring Focus</passive>",
@@ -24,7 +23,8 @@
 						"<passive>Helping Hand</passive>",
 						"Attacks deal <physicalDamage>@BonusDamageToMinions@ bonus physical damage</physicalDamage> to minions."
 					]
-				]
+				],
+				"rules": "<rules>Healing after taking damage is based on your missing Health.<br>Healing is @RangeRegenMult*100@% effective on taking area of effect or periodic damage.</rules>"
 			},
 			"1055": {
 				"subtitleLeft": "Physical Offense",
@@ -105,7 +105,6 @@
 			},
 			"2501": {
 				"subtitleLeft": "Damage from Health",
-				"rules": "<rules>Maximum <passive>Retribution</passive> bonus while below @RemainingHealthThreshold@ Health</rules>.",
 				"tooltipShop": [
 					[
 						"<passive>Tyranny</passive>",
@@ -125,7 +124,8 @@
 						"<passive>Retribution</passive>",
 						"Gain up to <scaleAD>@MissingHealthAD*100@% Attack Damage</scaleAD> based on your percent missing Health <scaleAD>(%i:scaleAD%@f2@)</scaleAD>."
 					]
-				]
+				],
+				"rules": "<rules>Maximum <passive>Retribution</passive> bonus while below @RemainingHealthThreshold@ Health</rules>."
 			},
 			"2502": {
 				"subtitleLeft": "Sustained Healing",
@@ -138,7 +138,6 @@
 			},
 			"2503": {
 				"subtitleLeft": "Sustained Damage",
-				"rules": "<rules><passive>Baleful Blaze</passive> deals <magicDamage>@MinionBurnCalc@</magicDamage> magic damage per second to minions and <magicDamage>@MonsterBurnCalc@</magicDamage> magic damage per second to monsters.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Baleful Blaze</passive>",
@@ -148,7 +147,8 @@
 						"<passive>Blackfire</passive>",
 						"For each enemy champion, epic and large monster affected by your <passive>Baleful Blaze</passive>, gain <scaleAP>@APPerStack*100@% Ability Power</scaleAP>. "
 					]
-				]
+				],
+				"rules": "<rules><passive>Baleful Blaze</passive> deals <magicDamage>@MinionBurnCalc@</magicDamage> magic damage per second to minions and <magicDamage>@MonsterBurnCalc@</magicDamage> magic damage per second to monsters.</rules>"
 			},
 			"2504": {
 				"subtitleLeft": "Anti-Magic",
@@ -521,13 +521,13 @@
 			"3068": {
 				"subtitleLeft": "Sustained Damage",
 				"subtitleRight": "Unique: Immolate",
-				"rules": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Immolate</passive>",
 						"After taking or dealing damage, deal <magicDamage>@DPS@ magic damage</magicDamage> per second to nearby enemies for @AuraDuration@ seconds. "
 					]
-				]
+				],
+				"rules": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>"
 			},
 			"3070": {
 				"subtitleLeft": "Mana Scaling",
@@ -583,13 +583,13 @@
 			"3074": {
 				"subtitleLeft": "Area Lifesteal",
 				"subtitleRight": "Unique: Hydra",
-				"rules": "<rules><passive>Cleave</passive> will benefit from Life Steal.<br><passive>Cleave</passive> does not trigger on structures.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }} physical damage</physicalDamage> to nearby enemies."
 					]
-				]
+				],
+				"rules": "<rules><passive>Cleave</passive> will benefit from Life Steal.<br><passive>Cleave</passive> does not trigger on structures.</rules>"
 			},
 			"3075": {
 				"subtitleLeft": "Anti-Attacks",
@@ -611,13 +611,13 @@
 			},
 			"3077": {
 				"subtitleRight": "Unique: Hydra",
-				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }} physical damage</physicalDamage> to nearby enemies."
 					]
-				]
+				],
+				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
 			},
 			"3078": {
 				"subtitleLeft": "Dueling",
@@ -642,7 +642,6 @@
 			},
 			"3083": {
 				"subtitleLeft": "Health Regen",
-				"rules": "<rules>Non-champion damage disables <passive>Warmog's Heart</passive> for @OOCTimer@ seconds instead.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Warmog's Heart</passive> ",
@@ -652,7 +651,8 @@
 						"<passive>Warmog's Vitality</passive>",
 						"Gain bonus Health equal to @HPAmp*100@% of your Item Health (<healing>@f2@</healing>)."
 					]
-				]
+				],
+				"rules": "<rules>Non-champion damage disables <passive>Warmog's Heart</passive> for @OOCTimer@ seconds instead.</rules>"
 			},
 			"3084": {
 				"subtitleLeft": "Health Scaling",
@@ -679,14 +679,14 @@
 			},
 			"3085": {
 				"subtitleLeft": "Multishot",
-				"rules": "<rules><passive>Wind's Fury</passive> can <attention>Critically Strike</attention>.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Wind's Fury</passive>",
 						"Attacks fire bolts at @Effect3Amount@ additional enemies near the target.",
 						"Each bolt deals <physicalDamage>@BoltDamage@ physical damage</physicalDamage> and applies {{ Item_Keyword_OnHit }} effects."
 					]
-				]
+				],
+				"rules": "<rules><passive>Wind's Fury</passive> can <attention>Critically Strike</attention>.</rules>"
 			},
 			"3087": {
 				"subtitleLeft": "Waveclear",
@@ -769,13 +769,13 @@
 			},
 			"3107": {
 				"subtitleLeft": "Team Heal",
-				"rules": "<rules>Can be activated while dead. <br>Subsequent <active>Intervention</active> effects on targets are reduced by @DiminishedEffect*100@%.</rules>",
 				"tooltipShop": [
 					[
 						"%i:activeEffect% <active>Intervention</active> {{ Item_Cooldown }}",
 						"Restore <healing>@HealMin@ - @HealMax@ (ally %i:scaleLevel%) Health</healing> to allied units and deal <trueDamage>@DamageToChampions*100@% max Health true damage</trueDamage> to enemy champions after 2.5 seconds."
 					]
-				]
+				],
+				"rules": "<rules>Can be activated while dead. <br>Subsequent <active>Intervention</active> effects on targets are reduced by @DiminishedEffect*100@%.</rules>"
 			},
 			"3109": {
 				"subtitleLeft": "Protect Ally",
@@ -827,7 +827,6 @@
 			},
 			"3118": {
 				"subtitleLeft": "Enhance Ultimate",
-				"rules": "<rules>Radius increases based on the damage done.<br>Basic Attacks cannot trigger <passive>Hatefog</passive>.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Scorn</passive>",
@@ -838,7 +837,8 @@
 						"Damaging a champion with your Ultimate burns the ground beneath them for @GroundDuration@s, dealing <magicDamage>@GroundBurnDamagePerTickTooltipOnly@ magic damage</magicDamage> per second and reducing their <scaleMR>Magic Resist by @MagicResistanceShred@</scaleMR>. ",
 						""
 					]
-				]
+				],
+				"rules": "<rules>Radius increases based on the damage done.<br>Basic Attacks cannot trigger <passive>Hatefog</passive>.</rules>"
 			},
 			"3119": {
 				"subtitleLeft": "Mana Scaling",
@@ -903,13 +903,13 @@
 			"3137": {
 				"subtitleLeft": "Magic Penetration",
 				"subtitleRight": "Unique: Blight",
-				"rules": "<rules><passive>Life From Death</passive> cannot trigger while you are dead.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Life from Death</passive> {{ Item_Cooldown }}",
 						"When a champion that you damaged within @TakedownWindow@ seconds dies, a nova spreads from their corpse that <healing>heals for @TotalHealAmount@</healing>."
 					]
-				]
+				],
+				"rules": "<rules><passive>Life From Death</passive> cannot trigger while you are dead.</rules>"
 			},
 			"3139": {
 				"subtitleLeft": "Remove Disables",
@@ -986,13 +986,13 @@
 			},
 			"3152": {
 				"subtitleLeft": "Dash",
-				"rules": "<rules><active>Supersonic's</active> dash cannot pass through terrain.</rules>",
 				"tooltipShop": [
 					[
 						"%i:activeEffect% <active>Supersonic</active> {{ Item_Cooldown }}",
 						"Dash in target direction, unleashing missiles that deal <magicDamage>@FireboltDamage@ magic damage</magicDamage>."
 					]
-				]
+				],
+				"rules": "<rules><active>Supersonic's</active> dash cannot pass through terrain.</rules>"
 			},
 			"3153": {
 				"subtitleLeft": "Anti-Tank",
@@ -1048,7 +1048,6 @@
 			},
 			"3161": {
 				"subtitleLeft": "Ability Amp",
-				"rules": "<rules>Focused Will bonus damage dealt to champions: @f1@<br>Focused Will stacking has a @CastIDLockout@ second lock out per spell cast instance.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Dragonforce</passive> ",
@@ -1058,7 +1057,8 @@
 						"<passive>Focused Will</passive> ",
 						"Dealing damage with Abilities increases your Champion's Ability and Passive damage by @TooltipValue@% for @StackDuration@ seconds. (stacks @StackCount@ times)."
 					]
-				]
+				],
+				"rules": "<rules>Focused Will bonus damage dealt to champions: @f1@<br>Focused Will stacking has a @CastIDLockout@ second lock out per spell cast instance.</rules>"
 			},
 			"3165": {
 				"subtitleLeft": "Anti-Healing",
@@ -1124,7 +1124,6 @@
 			},
 			"3179": {
 				"subtitleLeft": "Anti-Vision",
-				"rules": "<rules>Revealed Stealth Wards are disabled while revealed</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Nightstalker</passive>",
@@ -1134,7 +1133,8 @@
 						"<passive>Blackout</passive> {{ Item_Cooldown}}",
 						"When you are near enemy Stealth Wards and traps, reveal them for @Effect2Amount@ seconds. While revealing wards, your attacks deal @TotalWardDamage@ damage to them."
 					]
-				]
+				],
+				"rules": "<rules>Revealed Stealth Wards are disabled while revealed</rules>"
 			},
 			"3181": {
 				"subtitleLeft": "Anti-Structures",
@@ -1154,13 +1154,13 @@
 			},
 			"3190": {
 				"subtitleLeft": "Team Shield",
-				"rules": "<rules>Subsequent <active>Devotion</active> shields within @DiminishedTimer@ seconds have @DiminishedEffectMulitplier*100@% effect.</rules>",
 				"tooltipShop": [
 					[
 						"%i:activeEffect% <active>Devotion</active> {{ Item_Cooldown }}",
 						"Grant nearby allies a <shield>@ShieldMinTOOLTIP@ - @ShieldMaxTOOLTIP@ (ally %i:scaleLevel%) Shield</shield> that decays over @ShieldDuration@ seconds. "
 					]
-				]
+				],
+				"rules": "<rules>Subsequent <active>Devotion</active> shields within @DiminishedTimer@ seconds have @DiminishedEffectMulitplier*100@% effect.</rules>"
 			},
 			"3222": {
 				"subtitleLeft": "Remove Disables",
@@ -1222,13 +1222,13 @@
 			"3748": {
 				"subtitleLeft": "Area Attacks",
 				"subtitleRight": "Unique: Hydra",
-				"rules": "<rules><passive>Cleave's</passive> shockwave does not trigger on structures.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>@OnHitDamageCalc@ physical damage</physicalDamage> on hit and <physicalDamage>@ConeDamageCalc@ physical damage</physicalDamage> to enemies behind the target."
 					]
-				]
+				],
+				"rules": "<rules><passive>Cleave's</passive> shockwave does not trigger on structures.</rules>"
 			},
 			"3802": {
 				"subtitleRight": "Unique: Enlighten",
@@ -1276,57 +1276,57 @@
 			"3869": {
 				"subtitleLeft": "Anti-Burst",
 				"subtitleRight": "Unique: Support",
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}<br>Item cooldown is restarted when damage is taken from champions.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Blessing of the Mountain</passive> {{ Item_Cooldown }}",
 						"Reduce incoming champion damage by %i:meleeActive% @MeleeShieldDRPercentage*100@% / %i:rangedActive% @RangedShieldDRPercentage*100@% for @ShieldLingerAfterInitiallyPopped@ seconds after taking damage from a champion. When the effect ends, slow nearby enemies by @SlowAmount*100@% for @SlowDuration@ seconds."
 					]
-				]
+				],
+				"rules": "<rules>{{ Item_Support_Minion_Warning }}<br>Item cooldown is restarted when damage is taken from champions.</rules>"
 			},
 			"3870": {
 				"subtitleLeft": "Buff Attackers",
 				"subtitleRight": "Unique: Support",
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Dream Maker</passive> {{ Item_Cooldown }}",
 						"Healing or Shielding another ally blows Dream Bubbles to them for 3 seconds. Their next Attack deals <magicDamage>@BonusDamageCalc@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and the next damage they take is reduced by @DamageBlockCalc@."
 					]
-				]
+				],
+				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>"
 			},
 			"3871": {
 				"subtitleLeft": "Magic Offense",
 				"subtitleRight": "Unique: Support",
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}<br>Damage is capped at @MonsterDamageCap@ against monsters.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Void Explosion</passive> {{ Item_Cooldown }}",
 						"Dealing Ability damage to a champion causes an explosion that deals<magicDamage> @TooltipDamage@ + @PercentHPDamage*100@% max Health magic damage</magicDamage>."
 					]
-				]
+				],
+				"rules": "<rules>{{ Item_Support_Minion_Warning }}<br>Damage is capped at @MonsterDamageCap@ against monsters.</rules>"
 			},
 			"3876": {
 				"subtitleLeft": "Ally Mobility",
 				"subtitleRight": "Unique: Support",
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Going Sledding</passive> {{ Item_Cooldown }}",
 						"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion near allies restores <healing>@BonusHealthBuff@ Health</healing> and grants <speed>@MoveSpeedBuff*100@% decaying Move Speed</speed> for @BuffDuration@ seconds to you and a nearby ally. "
 					]
-				]
+				],
+				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>"
 			},
 			"3877": {
 				"subtitleLeft": "Mark Enemies",
 				"subtitleRight": "Unique: Support",
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
 						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. If the target is a champion, they take %i:meleeActive% @MeleeDamageAmp*100@ % / %i:rangedActive% @RangedDamageAmp*100@% increased damage for @DebuffDuration@ seconds."
 					]
-				]
+				],
+				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>"
 			},
 			"3916": {
 				"subtitleLeft": "Anti-Healing",
@@ -1373,7 +1373,6 @@
 			},
 			"4628": {
 				"subtitleLeft": "Magic Artillery",
-				"rules": "<rules>Damage from Pets and traps do not trigger <passive>Hypershot</passive>. <br>Only the initial placement of zone Abilities trigger <passive>Hypershot</passive>. <br>Distance is calculated from Ability cast position.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Hypershot</passive>",
@@ -1383,7 +1382,8 @@
 						"<passive>Focus</passive> {{ Item_Cooldown }}",
 						"When <passive>Hypershot</passive> is triggered, <keywordStealth>Reveal</keywordStealth> all other enemy champions within @VisionRadius@ range of them for @SecondaryBuffDuration@ seconds."
 					]
-				]
+				],
+				"rules": "<rules>Damage from Pets and traps do not trigger <passive>Hypershot</passive>. <br>Only the initial placement of zone Abilities trigger <passive>Hypershot</passive>. <br>Distance is calculated from Ability cast position.</rules>"
 			},
 			"4629": {
 				"subtitleLeft": "Combat Mobility",
@@ -1432,13 +1432,13 @@
 			},
 			"4645": {
 				"subtitleLeft": "Ability Crit",
-				"rules": "<rules>Critical damage modifiers only affect <passive>Cinderbloom</passive>'s bonus damage.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Cinderbloom</passive>",
 						"<magicDamage>Magic</magicDamage> and <trueDamage>true damage</trueDamage> <attention>Critically Strikes</attention> enemies below @HealthThreshold*100@% Health, dealing @SpellItemDamageAmp*100@% increased damage. "
 					]
-				]
+				],
+				"rules": "<rules>Critical damage modifiers only affect <passive>Cinderbloom</passive>'s bonus damage.</rules>"
 			},
 			"4646": {
 				"subtitleLeft": "Burst Damage",
@@ -1487,13 +1487,13 @@
 			},
 			"6610": {
 				"subtitleLeft": "Sustained Combat",
-				"rules": "<rules>Excess healing is granted as temporary bonus Health.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Lightshield Strike</passive> {{ Item_Cooldown }} per target",
 						"Your first Attack against a champion <attention>Critically Strikes</attention> for @CritModifier*100@% of your normal Critical Strike damage and <healing>restores {{ Item_Melee_Ranged_Split_Dynamic }} plus @MissingHealthHeal*100@%</healing> of missing Health."
 					]
-				]
+				],
+				"rules": "<rules>Excess healing is granted as temporary bonus Health.</rules>"
 			},
 			"6616": {
 				"subtitleLeft": "Buff Casters",
@@ -1541,13 +1541,13 @@
 			"6631": {
 				"subtitleLeft": "Combat Mobility",
 				"subtitleRight": "Unique: Hydra",
-				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.<br>You can move while casting <passive>Breaking Shockwave</passive>.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>{{ Item_Melee_Ranged_Split_Dynamic }} physical damage</physicalDamage> to nearby enemies."
 					]
-				]
+				],
+				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.<br>You can move while casting <passive>Breaking Shockwave</passive>.</rules>"
 			},
 			"6653": {
 				"subtitleLeft": "Anti-Tank",
@@ -1610,7 +1610,6 @@
 			"6664": {
 				"subtitleLeft": "Sustained Damage",
 				"subtitleRight": "Unique: Immolate",
-				"rules": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Immolate</passive>",
@@ -1620,7 +1619,8 @@
 						"<passive>Desolate</passive>",
 						"Killing an enemy deals <magicDamage>@ProcDamageTOOLTIPONLY@ magic damage</magicDamage> around them."
 					]
-				]
+				],
+				"rules": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>"
 			},
 			"6665": {
 				"subtitleLeft": "Sustained Defense",
@@ -1703,14 +1703,14 @@
 			},
 			"6695": {
 				"subtitleLeft": "Anti-Shielding",
-				"rules": "<rules>Magic shields are not reduced.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Shield Reaver</passive>",
 						"Damaging an enemy champion reduces Shields they gain by @ShieldShredMeleeRangedSplit@% for @DebuffDuration@ seconds. ",
 						"If they were not already affected by <passive>Shield Reaver</passive>, reduce Shields on them by @ShieldWoundMeleeRangedSplit@%."
 					]
-				]
+				],
+				"rules": "<rules>Magic shields are not reduced.</rules>"
 			},
 			"6696": {
 				"subtitleLeft": "Refresh Ultimate",
@@ -1733,13 +1733,13 @@
 			"6698": {
 				"subtitleLeft": "Area Attacks",
 				"subtitleRight": "Unique: Hydra",
-				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to nearby enemies."
 					]
-				]
+				],
+				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
 			},
 			"6699": {
 				"subtitleLeft": "Burst Slow",
@@ -1770,13 +1770,13 @@
 			"8010": {
 				"subtitleLeft": "Magic Penetration",
 				"subtitleRight": "Unique: Blight",
-				"rules": "<rules>The same ability cast can only apply stacks to each champion every 0.3 seconds.</rules>",
 				"tooltipShop": [
 					[
 						"<passive>Vile Decay</passive>",
 						"Dealing <magicDamage>magic damage</magicDamage> with abilities or passives to champions reduces their <scaleMR>Magic Resist by @MRPerStack*100@%</scaleMR> for @Duration@ seconds, up to @MaxMRReduction*100@%."
 					]
-				]
+				],
+				"rules": "<rules>The same ability cast can only apply stacks to each champion every 0.3 seconds.</rules>"
 			},
 			"8020": {
 				"subtitleLeft": "Debuff Enemies",

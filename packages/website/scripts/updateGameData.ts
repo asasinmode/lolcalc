@@ -912,6 +912,7 @@ for (const category in debug) {
 }
 
 function itemDescriptionExtras(text: string, extrasStart: string): string[][] | undefined {
+function itemDescriptionText(text: string, extrasStart: string): string[][] | undefined {
 	const statsStartIndex = text.indexOf(extrasStart);
 	const statsToEnd = text.slice(statsStartIndex + 19);
 	const statsEndIndex = statsToEnd.indexOf('</section>');
@@ -966,8 +967,8 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 	const subtitleRightEndIndex = textShop.indexOf('</subtitleRight>');
 	const subtitleRight = textShop.slice(subtitleRightStartIndex + 15, subtitleRightEndIndex);
 
-	const tooltipShop = itemDescriptionExtras(textShop, '</section><section>');
-	let tooltipInventory = textInventory ? itemDescriptionExtras(textInventory, '<mainText><section>') : undefined;
+	const tooltipShop = itemDescriptionText(textShop, '</section><section>');
+	let tooltipInventory = textInventory ? itemDescriptionText(textInventory, '<mainText><section>') : undefined;
 
 	if (tooltipShop && tooltipInventory?.every((extra, extraIndex) => extra.every((line, lineIndex) =>
 		tooltipShop[extraIndex]?.[lineIndex] === line,
@@ -987,9 +988,9 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 		(textData.data.items as any)[item.id] = {
 			subtitleLeft: subtitleLeft || undefined,
 			subtitleRight: subtitleRight || undefined,
-			rules: rules || undefined,
 			tooltipShop,
 			tooltipInventory,
+			rules: rules || undefined,
 		};
 	}
 }
