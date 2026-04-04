@@ -114,14 +114,19 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		optionId: 'items',
 		optionName: 'Items',
 		type: 'item',
-		abilities: itemIds.values().map((itemId): IDamageSectionOption['abilities'][number] => {
-			const item = items[itemId!]!;
+		abilities: itemIds.values()
+			.map((itemId): IDamageSectionOption['abilities'][number] => {
+				const item = items[itemId!]!;
 
-			return {
-				name: item.name,
-				championOrItemId: itemId!,
-			};
-		}).filter(ability => !resultSections.value.some(section => section.championOrItemId === ability.championOrItemId)).toArray(),
+				return {
+					name: item.name,
+					championOrItemId: itemId!,
+				};
+			})
+			.filter(ability => !resultSections.value
+				.some(section => section.championOrItemId === ability.championOrItemId))
+			.toArray()
+			.sort((a, b) => a.name.localeCompare(b.name)),
 	});
 
 	return options.filter(option => option.abilities.length);
