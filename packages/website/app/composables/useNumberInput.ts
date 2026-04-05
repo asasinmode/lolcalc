@@ -7,7 +7,7 @@ type NumberKey<T> = {
 export function useNumberInput<T extends Ref>(
 	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>],
 	isInt = true,
-	max?: Ref<number>,
+	max?: MaybeRefOrGetter<number>,
 ): (event: Event) => void {
 	return function onChange(event: Event) {
 		let value = Number((event.target as HTMLInputElement).value || '');
@@ -18,7 +18,7 @@ export function useNumberInput<T extends Ref>(
 			value = Math.round(value);
 		}
 		if (max) {
-			value = Math.min(value, max.value);
+			value = Math.min(value, toValue(max));
 		}
 		(event.target as HTMLInputElement).value = value.toString();
 		if (Array.isArray(targetRef)) {

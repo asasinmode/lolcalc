@@ -1,26 +1,44 @@
 import type { IShopItem } from './types';
 
+export type IInternalItemData<Item extends keyof typeof ITEM_NAME_TO_ID, Id = typeof ITEM_NAME_TO_ID[Item]> = Id extends keyof typeof ITEM_SPECIFICS
+	? ReturnType<typeof ITEM_SPECIFICS[Id]['setupInternalData']> : never;
+
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {
-	hubris: '6697',
 	slightlyMagicalFootwear: '2422',
 	seraphsEmbrace: '3040',
 	muramana: '3042',
 	fimbulwinter: '3121',
-};
+	hubris: '6697',
+	darkSeal: '1082',
+} as const;
 
-export const ITEM_SPECIFICS: Record<string, {
-	/** the properties `setupInternalData` uses, needed for cleanup */
-	internalDataProperties?: string[];
-	setupInternalData?: (self: DamageSource) => void;
-}> = {
+export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
-		internalDataProperties: ['hubrisStacks'],
-		setupInternalData(self: DamageSource) {
-			self.internalItemData.value.hubrisStacks = Math.max(0, self.internalItemData.value.hubrisStacks ?? 0);
+		internalDataProperties: ['hubris'],
+		setupInternalData(self) {
+			self.internalItemData.value.hubris = Math.max(0, self.internalItemData.value.hubris ?? 0);
+			return { hubris: 0 };
 		},
 	},
-};
+	[ITEM_NAME_TO_ID.darkSeal]: {
+		internalDataProperties: ['dSeal'],
+		setupInternalData(self) {
+			self.internalItemData.value.dSeal = Math.max(0, Math.min(10, self.internalItemData.value.dSeal ?? 0));
+			return { dSeal: 0 };
+		},
+	},
+} satisfies Record<string, {
+	/**
+	 * similar to `utils/champion.ts` `CHAMPION_SPECIFICS.setupInternalData` for `DamageSource.internalItemData`
+	 * except the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
+	 *
+	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
+	 */
+	setupInternalData?: (self: DamageSource) => any;
+	/** the properties `setupInternalData` uses, needed for cleanup */
+	internalDataProperties?: string[];
+}>;
 
 export const UNPURCHASABLES_TO_KEEP = [
 	ITEM_NAME_TO_ID.slightlyMagicalFootwear,

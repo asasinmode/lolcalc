@@ -236,7 +236,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}),
 
 			watch(() => this.items.value.map(i => i?.id), (newIds, oldIds) => {
-				const removedItems = oldIds?.filter(id => !newIds.includes(id)) ?? [];
+				const removedItems = (oldIds?.filter(id => !newIds.includes(id)) ?? []) as (keyof typeof ITEM_SPECIFICS | undefined)[];
 				for (const removedId of removedItems) {
 					if (removedId && ITEM_SPECIFICS[removedId]?.internalDataProperties?.length) {
 						for (const key of ITEM_SPECIFICS[removedId].internalDataProperties) {
@@ -245,11 +245,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					}
 				}
 
-				const addedItems = newIds.filter(id => !oldIds?.includes(id));
+				const addedItems = newIds.filter(id => !oldIds?.includes(id)) as (keyof typeof ITEM_SPECIFICS | undefined)[];
 				for (const addedId of addedItems) {
-					if (addedId && ITEM_SPECIFICS[addedId]?.setupInternalData) {
-						ITEM_SPECIFICS[addedId].setupInternalData(this);
-					}
+					addedId && ITEM_SPECIFICS[addedId]?.setupInternalData(this);
 				}
 			}, { immediate: true, deep: true }),
 		];
@@ -430,7 +428,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (typeof data === 'object' && data && !Array.isArray(data)) {
 					for (const [key, value] of Object.entries(data)) {
 						if (typeof value === 'number') {
-							// TODO not sure if all should be rounded
+							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constraint it to their min/max)
 							rv.internalItemData.value[key] = Math.round(value);
 						}
 					}
@@ -580,7 +578,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (typeof data === 'object' && data && !Array.isArray(data)) {
 					for (const [key, value] of Object.entries(data)) {
 						if (typeof value === 'number') {
-							// TODO not sure if all should be rounded
+							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constraint it to their min/max)
 							rv.internalData.value[key] = Math.round(value);
 						}
 					}

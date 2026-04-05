@@ -27,20 +27,20 @@ const value = defineModel<number>({ required: true });
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<label :for="`${idPrefix}-passive-stacks`">
+		<label :for="`ven-${idPrefix}-input`">
 			{{ label }}
 		</label>
 		<input
-			:id="`${idPrefix}-passive-stacks`"
+			:id="`ven-${idPrefix}-input`"
 			:value="value"
 			min="0"
 			type="number"
 			@input="usedNumberInput"
 		>
-		<button class="pretend-ui-button" @click="value = min">
+		<button class="pretend-ui-button" :disabled="value === min" @click="value = min">
 			min
 		</button>
-		<button class="pretend-ui-button" :disabled="max === undefined">
+		<button class="pretend-ui-button" :disabled="max === undefined || value === max" @click="value = max!">
 			max
 		</button>
 	</article>

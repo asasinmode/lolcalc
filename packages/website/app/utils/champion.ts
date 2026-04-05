@@ -61,8 +61,8 @@ export const CHAMPION_SPECIFICS = {
 			e: {
 				f1: [1, 2, 3],
 			},
-		} satisfies IPossibleDynamicValues,
-		setupInternalData(self: DamageSource<'Aphelios'>): {
+		},
+		setupInternalData(self): {
 			mainHand: IApheliosWeapon;
 			offHand: IApheliosWeapon;
 		} {
@@ -79,15 +79,27 @@ export const CHAMPION_SPECIFICS = {
 			all: {
 				f1: [0, 1, 2],
 			},
-		} satisfies IPossibleDynamicValues,
+		},
 	},
 	Veigar: {
-		setupInternalData(self: DamageSource<'Veigar'>): {
-			phenomenalEvilStacks: number;
+		setupInternalData(self): {
+			veigarP: number;
 		} {
 			return {
-				phenomenalEvilStacks: Math.max(0, self.internalData.value.phenomenalEvilStacks ?? 0),
+				veigarP: Math.max(0, self.internalData.value.veigarP ?? 0),
 			};
 		},
 	},
-};
+} satisfies Partial<{
+	[Id in IChampionId]: {
+		/**
+		 * returns an `internalData` for specific `DamageSource`'s champion
+		 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
+		 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed
+		 * the property names should be fairly short for storing in state string
+		 */
+		setupInternalData?: (self: DamageSource<Id>) => any;
+		POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+		[key: string]: any;
+	}
+}>;

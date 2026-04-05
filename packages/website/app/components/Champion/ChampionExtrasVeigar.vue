@@ -16,12 +16,12 @@ const { abilityImage, abilityImageSize } = useChampionImages();
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<VExtrasNumber
-		v-model="value.internalData.value.phenomenalEvilStacks"
+		v-model="value.internalData.value.veigarP"
 		:id-prefix
 		:img="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image, 'Veigar')"
 		:img-size="abilityImageSize('Veigar')"
 		label="Phenomenal Evil stacks"
-		:used-number-input="useNumberInput([value.internalData, 'phenomenalEvilStacks'])"
+		:used-number-input="useNumberInput([value.internalData, 'veigarP'])"
 		@img-mouseenter="$emit('abilityHover', $event, 'passive', 0)"
 	/>
 </template>
