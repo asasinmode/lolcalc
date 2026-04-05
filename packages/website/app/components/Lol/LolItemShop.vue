@@ -39,10 +39,17 @@ const BOOT_ITEM_IDS = [
 	'3158', /* ionian boots of lucidity */
 ];
 
+const TRANSFORMED_TEAR_ITEM_IDS = [
+	ITEM_NAME_TO_ID.diademOfSongs,
+	ITEM_NAME_TO_ID.seraphsEmbrace,
+	ITEM_NAME_TO_ID.muramana,
+	ITEM_NAME_TO_ID.fimbulwinter,
+] as string[];
+
 const sortedByPriceForMap = computed(() => Object
 	.values(items)
 	.sort((a, b) => a.gold.total - b.gold.total)
-	.filter(item => (item.mapMask & mapMask.value) !== 0));
+	.filter(item => (item.mapMask & mapMask.value) !== 0 && !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id)));
 
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
 	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value, items) : 0;

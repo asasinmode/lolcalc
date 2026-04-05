@@ -1259,6 +1259,7 @@ defineExpose({ el });
 					:key="itemId"
 					:value
 					:id-prefix="`${group}-${index}`"
+					:item-id
 					@item-hover="showItemHoverTooltip($event, itemIndex, true)"
 				/>
 			</section>

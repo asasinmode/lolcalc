@@ -6,9 +6,14 @@ export type IInternalItemData<Item extends keyof TItemNameToId, Id = typeof ITEM
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {
 	slightlyMagicalFootwear: '2422',
+	tear: '3070',
+	whisperingCirclet: '2526',
 	diademOfSongs: '2530',
+	archangelsStaff: '3003',
 	seraphsEmbrace: '3040',
+	manamune: '3004',
 	muramana: '3042',
+	wintersApproach: '3119',
 	fimbulwinter: '3121',
 	hubris: '6697',
 	darkSeal: '1082',
@@ -27,6 +32,14 @@ export const ITEM_NAME_TO_ID = {
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
+
+const tearItemSpecifics = {
+	internalDataProperties: ['manaflow'],
+	setupInternalData(self) {
+		self.internalItemData.value.manaflow = Math.max(0, Math.min(360, self.internalItemData.value.manaflow ?? 0));
+		return { manaflow: 0 };
+	},
+};
 
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -121,6 +134,11 @@ export const ITEM_SPECIFICS = {
 			return { corruption: 0 };
 		},
 	},
+	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.whisperingCirclet]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.archangelsStaff]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
 } satisfies Record<string, {
 	/**
 	 * similar to `utils/champion.ts` `CHAMPION_SPECIFICS.setupInternalData` for `DamageSource.internalItemData`

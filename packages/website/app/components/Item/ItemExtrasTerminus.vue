@@ -2,6 +2,7 @@
 defineProps<{
 	value: DamageSource;
 	idPrefix: string;
+	itemId: string;
 }>();
 
 defineEmits<{
@@ -13,6 +14,6 @@ const DarkComponent = numberExtra(ITEM_NAME_TO_ID.terminus, 'jxtpD', 'Juxtaposit
 </script>
 
 <template>
-	<LightComponent :value :id-prefix @item-hover="$emit('itemHover', $event)" />
-	<DarkComponent :value :id-prefix @item-hover="$emit('itemHover', $event)" />
+	<LightComponent :value :id-prefix :item-id @item-hover="$emit('itemHover', $event)" />
+	<DarkComponent :value :id-prefix :item-id @item-hover="$emit('itemHover', $event)" />
 </template>

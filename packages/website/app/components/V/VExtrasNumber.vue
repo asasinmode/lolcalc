@@ -7,6 +7,8 @@ withDefaults(defineProps<{
 	usedNumberInput: ReturnType<typeof useNumberInput>;
 	min?: number;
 	max?: number;
+	step?: number;
+	disabled?: boolean;
 }>(), {
 	min: 0,
 });
@@ -30,17 +32,29 @@ const value = defineModel<number>({ required: true });
 		<label :for="`ven-${idPrefix}-input`">
 			{{ label }}
 		</label>
+		<slot />
 		<input
 			:id="`ven-${idPrefix}-input`"
 			:value="value"
-			min="0"
 			type="number"
+			:min
+			:max
+			:step
+			:disabled
 			@input="usedNumberInput"
 		>
-		<button class="pretend-ui-button" :disabled="value === min" @click="value = min">
+		<button
+			class="pretend-ui-button"
+			:disabled="disabled || value === min"
+			@click="value = min"
+		>
 			min
 		</button>
-		<button class="pretend-ui-button" :disabled="max === undefined || value === max" @click="value = max!">
+		<button
+			class="pretend-ui-button"
+			:disabled="disabled || max === undefined || value === max"
+			@click="value = max!"
+		>
 			max
 		</button>
 	</article>
@@ -61,6 +75,10 @@ const value = defineModel<number>({ required: true });
 
 		> input {
 			--at-apply: 'box-content h-min w-[6ch] px-1 py-0.5 row-span-2 bg-white text-black me-2';
+
+			&:disabled {
+				--at-apply: 'bg-neutral-200 text-neutral-600';
+			}
 		}
 
 		> button {

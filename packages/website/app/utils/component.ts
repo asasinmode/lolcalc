@@ -6,10 +6,12 @@ export function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(
 	label: string,
 	min?: number,
 	max?: number,
+	step?: number,
 ) {
 	return defineComponent<{
 		value: DamageSource;
 		idPrefix: string;
+		itemId: string;
 	}, {
 		itemHover: (event: MouseEvent) => void;
 	}>((props, ctx) => {
@@ -23,6 +25,7 @@ export function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(
 			label,
 			min,
 			max,
+			step,
 			'usedNumberInput': useNumberInput([props.value.internalItemData, property as string], true, max),
 			onImgMouseenter(event) {
 				ctx.emit('itemHover', event);
@@ -31,5 +34,5 @@ export function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(
 				props.value.internalItemData.value[property] = value;
 			},
 		});
-	}, { props: ['value', 'idPrefix'] });
+	}, { props: ['value', 'idPrefix', 'itemId'] });
 }

@@ -1,4 +1,4 @@
-import { ItemExtrasTerminus } from '#components';
+import { ItemExtrasTerminus, ItemExtraTearItem } from '#components';
 
 /**
  * any item-related components
@@ -42,5 +42,32 @@ export const ITEM_COMPONENTS: Record<string, { extras?: Component }> = {
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
 		extras: numberExtra(ITEM_NAME_TO_ID.riftmaker, 'corruption', 'Corruption stacks', 0, 4),
+	},
+	[ITEM_NAME_TO_ID.tear]: {
+		extras: numberExtra(ITEM_NAME_TO_ID.tear, 'manaflow', 'Manaflow stacks', 0, 360, 3),
+	},
+	[ITEM_NAME_TO_ID.whisperingCirclet]: {
+		extras: ItemExtraTearItem,
+	},
+	[ITEM_NAME_TO_ID.diademOfSongs]: {
+		extras: ItemExtraTearItem,
+	},
+	[ITEM_NAME_TO_ID.archangelsStaff]: {
+		extras: ItemExtraTearItem,
+	},
+	[ITEM_NAME_TO_ID.seraphsEmbrace]: {
+		extras: ItemExtraTearItem,
+	},
+	[ITEM_NAME_TO_ID.manamune]: {
+		extras: ItemExtraTearItem,
+	},
+	[ITEM_NAME_TO_ID.muramana]: {
+		extras: ItemExtraTearItem,
+	},
+	[ITEM_NAME_TO_ID.wintersApproach]: {
+		extras: ItemExtraTearItem,
+	},
+	[ITEM_NAME_TO_ID.fimbulwinter]: {
+		extras: ItemExtraTearItem,
 	},
 };
