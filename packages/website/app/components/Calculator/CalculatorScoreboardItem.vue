@@ -1683,7 +1683,7 @@ defineExpose({ el });
 					}
 
 					> dd {
-						--at-apply: 'leading-5 h-full w-max ps-1.5 py-0.5 pe-0.5';
+						--at-apply: 'leading-5 h-full w-full ps-1.5 py-0.5 pe-0.5';
 
 						&[data-has-bonus] {
 							--at-apply: 'text-yellow-200';
@@ -2016,7 +2016,7 @@ defineExpose({ el });
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full flex flex-wrap';
+				--at-apply: 'col-span-full w-full flex flex-wrap max-w-[40vw]';
 				anchor-name: --scoreboard-item-extras;
 
 				> article {

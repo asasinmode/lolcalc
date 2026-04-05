@@ -8,13 +8,16 @@ export const ITEM_COMPONENTS: Record<string, { extras?: Component }> = {
 		extras: numberExtra(ITEM_NAME_TO_ID.hubris, 'hubris', 'Eminence stacks'),
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
-		extras: numberExtra(ITEM_NAME_TO_ID.darkSeal, 'dSeal', 'Glory stacks', 0, 10),
+		extras: numberExtra(ITEM_NAME_TO_ID.darkSeal, 'glory', 'Glory stacks', 0, 10),
+	},
+	[ITEM_NAME_TO_ID.mejai]: {
+		extras: numberExtra(ITEM_NAME_TO_ID.mejai, 'glory', 'Glory stacks', 0, 25),
 	},
 };
 
-function numberExtra<T extends (typeof ITEM_NAME_TO_ID)[keyof typeof ITEM_NAME_TO_ID]>(
+function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(
 	itemId: T,
-	property: keyof IInternalItemData<any, T>,
+	property: T extends keyof TItemSpecifics ? keyof IInternalItemData<any, T> : never,
 	label: string,
 	min?: number,
 	max?: number,

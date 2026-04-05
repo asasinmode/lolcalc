@@ -237,17 +237,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 			watch(() => this.items.value.map(i => i?.id), (newIds, oldIds) => {
 				const removedItems = (oldIds?.filter(id => !newIds.includes(id)) ?? []) as (keyof typeof ITEM_SPECIFICS | undefined)[];
-				for (const removedId of removedItems) {
-					if (removedId && ITEM_SPECIFICS[removedId]?.internalDataProperties?.length) {
-						for (const key of ITEM_SPECIFICS[removedId].internalDataProperties) {
-							this.internalItemData.value[key] = undefined;
-						}
-					}
-				}
-
 				const addedItems = newIds.filter(id => !oldIds?.includes(id)) as (keyof typeof ITEM_SPECIFICS | undefined)[];
 				for (const addedId of addedItems) {
 					addedId && ITEM_SPECIFICS[addedId]?.setupInternalData(this);
+				}
+
+				const usedProperties = newIds.flatMap(id => (id && ITEM_SPECIFICS[id as keyof TItemSpecifics]?.internalDataProperties) || []);
+				for (const removedId of removedItems) {
+					if (removedId && ITEM_SPECIFICS[removedId]?.internalDataProperties?.length) {
+						for (const key of ITEM_SPECIFICS[removedId].internalDataProperties) {
+							if (!usedProperties.includes(key)) {
+								this.internalItemData.value[key] = undefined;
+							}
+						}
+					}
 				}
 			}, { immediate: true, deep: true }),
 		];

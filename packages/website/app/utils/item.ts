@@ -1,6 +1,6 @@
 import type { IShopItem } from './types';
 
-export type IInternalItemData<Item extends keyof typeof ITEM_NAME_TO_ID, Id = typeof ITEM_NAME_TO_ID[Item]> = Id extends keyof typeof ITEM_SPECIFICS
+export type IInternalItemData<Item extends keyof TItemNameToId, Id = typeof ITEM_NAME_TO_ID[Item]> = Id extends keyof TItemSpecifics
 	? ReturnType<typeof ITEM_SPECIFICS[Id]['setupInternalData']> : never;
 
 /** colloquial names to id */
@@ -11,7 +11,11 @@ export const ITEM_NAME_TO_ID = {
 	fimbulwinter: '3121',
 	hubris: '6697',
 	darkSeal: '1082',
+	mejai: '3041',
 } as const;
+
+export type TItemNameToId = typeof ITEM_NAME_TO_ID;
+export type TItemSpecifics = typeof ITEM_SPECIFICS;
 
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -22,10 +26,17 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
-		internalDataProperties: ['dSeal'],
+		internalDataProperties: ['glory'],
 		setupInternalData(self) {
-			self.internalItemData.value.dSeal = Math.max(0, Math.min(10, self.internalItemData.value.dSeal ?? 0));
-			return { dSeal: 0 };
+			self.internalItemData.value.glory = Math.max(0, Math.min(10, self.internalItemData.value.glory ?? 0));
+			return { glory: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.mejai]: {
+		internalDataProperties: ['glory'],
+		setupInternalData(self) {
+			self.internalItemData.value.glory = Math.max(0, Math.min(25, self.internalItemData.value.glory ?? 0));
+			return { glory: 0 };
 		},
 	},
 } satisfies Record<string, {
