@@ -865,8 +865,8 @@ export function computedItemDescription(
 			] as [string, number, string];
 		});
 
-	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, cooldownIcon, onHitIcon, replaceOptions);
-	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, cooldownIcon, onHitIcon, replaceOptions);
+	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
+	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
 
 	const { variables: rulesVariables, replaced: replacedRules, unknownVariables: rulesUnknown } = rules
 		? replaceGameDescriptionVariables(
@@ -1111,24 +1111,27 @@ function parseStringifiedRunePathSlots(data: string): ([slotIndex: number, slotO
 }
 
 function formatItemDescriptionText(
-	text: ITextData['items'][keyof ITextData['items']]['tooltipShop'],
+	value: ITextData['items'][keyof ITextData['items']]['tooltipShop'],
 	item: IItem,
 	damageSource: DamageSource | undefined,
 	variables: IComputedItemDescription['variables'],
 	unknownVariables: IComputedItemDescription['unknownVariables'],
+	text: ITextData,
 	cooldownIcon: string,
 	onHitIcon: string,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
 ): [string, ...string[]][] | undefined {
-	return text?.map(([heading, ...paragraphs]) => {
+	return value?.map(([heading, ...paragraphs]) => {
+		const { replaced: headingStringtableReplaced } = replaceGameDescriptionStringtableVariables(heading!
+			.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
+				const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
+				return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
+			})
+			.replace('(', '<span>(')
+			.replace(')', ')</span>'), text.stringtable);
+
 		const { variables: headingVariables, replaced: replacedHeading, unknownVariables: headingUnknown } = replaceGameDescriptionVariables(
-			heading!
-				.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
-					const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);
-					return `${cooldownIcon}(${value || '<unknown>UNKNOWN</unknown>'}s<span> cooldown</span>)`;
-				})
-				.replace('(', '<span>(')
-				.replace(')', ')</span>'),
+			headingStringtableReplaced,
 			'item',
 			[item, damageSource?.itemDamageCalculationTarget.value],
 			replaceOptions,
@@ -1144,8 +1147,9 @@ function formatItemDescriptionText(
 		return [
 			replaceGameDescriptionIcons(replacedHeading),
 			...paragraphs.map((paragraph) => {
+				const { replaced: paragraphStringtableReplaced } = replaceGameDescriptionStringtableVariables(paragraph, text.stringtable);
 				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
-					paragraph!,
+					paragraphStringtableReplaced,
 					'item',
 					[item, damageSource?.itemDamageCalculationTarget.value],
 					replaceOptions,

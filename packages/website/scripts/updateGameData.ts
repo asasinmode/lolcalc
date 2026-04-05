@@ -327,7 +327,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				&& gold.inStore !== false
 				&& gold.hideFromAll !== false
 				&& !requiredChampion
-				&& (gold.purchasable || UNPURCHASABLES_TO_KEEP.includes(itemId));
+				&& (gold.purchasable || (UNPURCHASABLES_TO_KEEP as string[]).includes(itemId));
 		});
 
 	const filteredItemIds = filteredItems.map(([itemId]) => itemId);
@@ -935,7 +935,7 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 	}
 	const rawExtra = extraToEnd.slice(0, extraEndIndex)
 		.replace(/\{\{ ?Item_Passive_List ?\}\}/g, '')
-		.replace(/\{\{ ?Item_Melee_Ranged_Split_Dynamic ?\}\}/g, '@ChampRange@')
+		.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@')
 		.replaceAll(':</passive>', '</passive>');
 
 	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')).filter(text => text.some(Boolean)) : undefined;
@@ -964,7 +964,7 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 }
 
 /**
- * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@ChampRange@` TODO figur out if makese sense
+ * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that's TODO supposed to be handled manually, figure out if makese sense
  */
 function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynamicTooltip: string, keyTooltipExtendedRules?: string) {
 	const textShop = getStringtableValue(mShopTooltip, 'item tooltipShop');
@@ -1002,7 +1002,7 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 	const combinedDescriptions = tooltipShop?.flatMap(tooltip => tooltip).concat(tooltipInventory?.flatMap(tooltip => tooltip) || []).join(' ');
 	combinedDescriptions && debugStringVariables(combinedDescriptions, { ...variableDebug, key: `${item.id} ${item.name} text` });
 
-	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true)?.replace(/\{\{ ?Item_Melee_Ranged_Split_Dynamic ?\}\}/g, '@ChampRange@');
+	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true)?.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@');
 	while (rules?.startsWith('<br>')) {
 		rules = rules.slice(4).trim();
 	}

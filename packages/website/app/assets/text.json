@@ -439,7 +439,7 @@
 					[
 						"<passive>Shock</passive>",
 						"Attacks against champions deal <physicalDamage>@OnHitDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. ",
-						"Damaging Abilities against champions deal <physicalDamage>{{ Item_Melee_Ranged_Split }} bonus physical damage</physicalDamage>."
+						"Damaging Abilities against champions deal <physicalDamage>@ChampRange@ bonus physical damage</physicalDamage>."
 					]
 				],
 				"tooltipInventory": [
