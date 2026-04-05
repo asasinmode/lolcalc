@@ -1122,6 +1122,7 @@ function formatItemDescriptionText(
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
 ): [string, ...string[]][] | undefined {
 	return value?.map(([heading, ...paragraphs]) => {
+		/* technically unknown here and for paragraphs should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
 		const { replaced: headingStringtableReplaced } = replaceGameDescriptionStringtableVariables(heading!
 			.replace(/\{\{ ?Item_Cooldown ?\}\}/g, () => {
 				const { value } = itemVariableValue('Cooldown', item, damageSource?.itemDamageCalculationTarget.value);

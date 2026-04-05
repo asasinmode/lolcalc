@@ -14,6 +14,15 @@ export const ITEM_NAME_TO_ID = {
 	darkSeal: '1082',
 	mejai: '3041',
 	hauntingGuise: '3147',
+	roa: '6657',
+	blackfireTorch: '2503',
+	heartsteel: '3084',
+	guinsoo: '3124',
+	terminus: '3302',
+	liandry: '6653',
+	yunTal: '3032',
+	shojin: '3161',
+	riftmaker: '4633',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -21,10 +30,10 @@ export type TItemSpecifics = typeof ITEM_SPECIFICS;
 
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
-		internalDataProperties: ['hubris'],
+		internalDataProperties: ['eminence'],
 		setupInternalData(self) {
-			self.internalItemData.value.hubris = Math.max(0, self.internalItemData.value.hubris ?? 0);
-			return { hubris: 0 };
+			self.internalItemData.value.eminence = Math.max(0, self.internalItemData.value.eminence ?? 0);
+			return { eminence: 0 };
 		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
@@ -46,6 +55,70 @@ export const ITEM_SPECIFICS = {
 		setupInternalData(self) {
 			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
 			return { madness: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.roa]: {
+		internalDataProperties: ['eternity'],
+		setupInternalData(self) {
+			self.internalItemData.value.eternity = Math.max(0, Math.min(10, self.internalItemData.value.eternity ?? 0));
+			return { eternity: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.blackfireTorch]: {
+		internalDataProperties: ['bBlaze'],
+		setupInternalData(self) {
+			self.internalItemData.value.bBlaze = Math.max(0, self.internalItemData.value.bBlaze ?? 0);
+			return { bBlaze: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.heartsteel]: {
+		internalDataProperties: ['cConsumption'],
+		setupInternalData(self) {
+			self.internalItemData.value.cConsumption = Math.max(0, self.internalItemData.value.cConsumption ?? 0);
+			return { cConsumption: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.guinsoo]: {
+		internalDataProperties: ['seething'],
+		setupInternalData(self) {
+			self.internalItemData.value.seething = Math.max(0, Math.min(4, self.internalItemData.value.seething ?? 0));
+			return { seething: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.terminus]: {
+		internalDataProperties: ['jxtpL', 'jxtpD'],
+		setupInternalData(self) {
+			self.internalItemData.value.jxtpL = Math.max(0, Math.min(3, self.internalItemData.value.jxtpL ?? 0));
+			self.internalItemData.value.jxtpD = Math.max(0, Math.min(3, self.internalItemData.value.jxtpD ?? 0));
+			return { jxtpL: 0, jxtpD: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.liandry]: {
+		internalDataProperties: ['madness'],
+		setupInternalData(self) {
+			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
+			return { madness: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.yunTal]: {
+		internalDataProperties: ['practice'],
+		setupInternalData(self) {
+			self.internalItemData.value.practice = Math.max(0, Math.min(25, self.internalItemData.value.practice ?? 0));
+			return { practice: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.shojin]: {
+		internalDataProperties: ['fWill'],
+		setupInternalData(self) {
+			self.internalItemData.value.fWill = Math.max(0, Math.min(4, self.internalItemData.value.fWill ?? 0));
+			return { fWill: 0 };
+		},
+	},
+	[ITEM_NAME_TO_ID.riftmaker]: {
+		internalDataProperties: ['corruption'],
+		setupInternalData(self) {
+			self.internalItemData.value.corruption = Math.max(0, Math.min(4, self.internalItemData.value.corruption ?? 0));
+			return { corruption: 0 };
 		},
 	},
 } satisfies Record<string, {
