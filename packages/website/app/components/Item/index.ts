@@ -13,6 +13,9 @@ export const ITEM_COMPONENTS: Record<string, { extras?: Component }> = {
 	[ITEM_NAME_TO_ID.mejai]: {
 		extras: numberExtra(ITEM_NAME_TO_ID.mejai, 'glory', 'Glory stacks', 0, 25),
 	},
+	[ITEM_NAME_TO_ID.hauntingGuise]: {
+		extras: numberExtra(ITEM_NAME_TO_ID.hauntingGuise, 'madness', 'Madness seconds in combat', 0, 3),
+	},
 };
 
 function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(

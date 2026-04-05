@@ -1775,7 +1775,9 @@
 			},
 			"image": "2526.png",
 			"mapMask": 3,
-			"into": [],
+			"into": [
+				"2530"
+			],
 			"from": [
 				"3114",
 				"1028",
@@ -1803,6 +1805,54 @@
 			"itemGroups": [
 				"{f4405fb4}",
 				"Items/ItemGroups/TearItems",
+				"{f842a497}"
+			],
+			"categories": {
+				"support": true
+			}
+		},
+		"2530": {
+			"id": "2530",
+			"name": "Diadem of Songs",
+			"searchString": "diademofsongs;health;mana;manaregen;abilityhaste",
+			"stats": {
+				"FlatMPPoolMod": 1000,
+				"FlatHPPoolMod": 200,
+				"PercentBaseMPRegenMod": 1,
+				"PercentHealingAmountMod": 0.08
+			},
+			"gold": {
+				"total": 2250,
+				"sell": 1575
+			},
+			"image": "2530.png",
+			"mapMask": 3,
+			"epicness": 5,
+			"dataValues": {
+				"PercentManaToHeal": 0.01,
+				"AllyRangeCheck": 900,
+				"AllyCombatDuration": 3
+			},
+			"itemCalculations": {
+				"BonusHSPCalc": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.005,
+							"mStatFormula": 2,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				},
+				"ManaToHeal": {
+					"mFormulaParts": [
+						{
+							"mCoefficient": 0.008,
+							"__type": "AbilityResourceByCoefficientCalculationPart"
+						}
+					]
+				}
+			},
+			"itemGroups": [
 				"{f842a497}"
 			],
 			"categories": {

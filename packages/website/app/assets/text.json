@@ -273,6 +273,20 @@
 					]
 				]
 			},
+			"2530": {
+				"subtitleLeft": "Mana Scaling",
+				"subtitleRight": "Semi-Unique: Manaflow",
+				"tooltipShop": [
+					[
+						"<passive>Harmony</passive>",
+						"Gain @BonusHSPCalc@% Heal and Shield Power."
+					],
+					[
+						"<passive>Consonance</passive>",
+						"While you or any ally you've healed or shielded in the last @AllyCombatDuration@ seconds is in combat with champions, each second, heal the lowest health nearby ally champion for @ManaToHeal@."
+					]
+				]
+			},
 			"3002": {
 				"subtitleLeft": "Team Mobility",
 				"subtitleRight": "Unique: Momentum",

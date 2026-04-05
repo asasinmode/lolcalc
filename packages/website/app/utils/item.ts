@@ -6,12 +6,14 @@ export type IInternalItemData<Item extends keyof TItemNameToId, Id = typeof ITEM
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {
 	slightlyMagicalFootwear: '2422',
+	diademOfSongs: '2530',
 	seraphsEmbrace: '3040',
 	muramana: '3042',
 	fimbulwinter: '3121',
 	hubris: '6697',
 	darkSeal: '1082',
 	mejai: '3041',
+	hauntingGuise: '3147',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -39,6 +41,13 @@ export const ITEM_SPECIFICS = {
 			return { glory: 0 };
 		},
 	},
+	[ITEM_NAME_TO_ID.hauntingGuise]: {
+		internalDataProperties: ['madness'],
+		setupInternalData(self) {
+			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
+			return { madness: 0 };
+		},
+	},
 } satisfies Record<string, {
 	/**
 	 * similar to `utils/champion.ts` `CHAMPION_SPECIFICS.setupInternalData` for `DamageSource.internalItemData`
@@ -52,6 +61,7 @@ export const ITEM_SPECIFICS = {
 }>;
 
 export const UNPURCHASABLES_TO_KEEP = [
+	ITEM_NAME_TO_ID.diademOfSongs,
 	ITEM_NAME_TO_ID.slightlyMagicalFootwear,
 	ITEM_NAME_TO_ID.seraphsEmbrace,
 	ITEM_NAME_TO_ID.muramana,
