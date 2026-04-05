@@ -158,15 +158,23 @@ const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemH
 const itemHoverTooltip = useTemplateRef('itemHoverTooltip');
 const hoveredItemIndex = ref<number>();
 
-function showItemHoverTooltip(event: MouseEvent, index: number) {
-	itemHoverTooltip.value?.showPopover();
-	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, { passive: true, once: true });
+function showItemHoverTooltip(event: MouseEvent, index: number, fromExtras = false) {
 	hoveredItemIndex.value = index;
+	event.target?.addEventListener('mouseleave', leaveTooltipableItemElement, { passive: true, once: true });
 	addItemTooltipViewListeners();
+
+	if (fromExtras) {
+		el.value!.setAttribute('data-item-tooltip-extras', '');
+	} else {
+		detailsContainer.value!.removeAttribute('data-item-tooltip-extras');
+	}
+
+	itemHoverTooltip.value?.showPopover();
 }
 
 function leaveTooltipableItemElement() {
 	itemHoverTooltip.value?.hidePopover();
+	detailsContainer.value!.removeAttribute('data-ability-tooltip-extras');
 	removeItemTooltipViewListeners();
 }
 
@@ -1251,7 +1259,7 @@ defineExpose({ el });
 					:key="itemId"
 					:value
 					:id-prefix="`${group}-${index}`"
-					@item-hover="showItemHoverTooltip($event, itemIndex)"
+					@item-hover="showItemHoverTooltip($event, itemIndex, true)"
 				/>
 			</section>
 		</details>
@@ -1515,9 +1523,15 @@ defineExpose({ el });
 			}
 		}
 
-		.hover-tooltip.champion-item {
+		> .hover-tooltip.champion-item {
 			position-anchor: --scoreboard-item-items;
 			inset-block-start: calc(anchor(end) + 4 * var(--spacing));
+		}
+
+		&[data-item-tooltip-extras] > .hover-tooltip.champion-item {
+			position-anchor: --scoreboard-item-extras;
+			inset-block-start: auto;
+			inset-block-end: calc(anchor(top) + 1px);
 		}
 
 		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */
