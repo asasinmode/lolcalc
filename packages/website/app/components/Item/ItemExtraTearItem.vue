@@ -57,6 +57,9 @@ function transform() {
 			if (item && i !== itemIndex.value && (UNTRANSFORMED_IDS as string[]).includes(item.id)) {
 				// eslint-disable-next-line vue/no-mutating-props
 				props.value.items.value[i] = items[(ALTERNATE_ITEM_FORMS as Record<string, string>)[item.id]!];
+			} else if (item?.id === ITEM_NAME_TO_ID.tear) {
+				// eslint-disable-next-line vue/no-mutating-props
+				props.value.items.value[i] = undefined;
 			}
 		}
 	}
