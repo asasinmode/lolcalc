@@ -49,7 +49,7 @@ const TRANSFORMED_TEAR_ITEM_IDS = [
 const sortedByPriceForMap = computed(() => Object
 	.values(items)
 	.sort((a, b) => a.gold.total - b.gold.total)
-	.filter(item => (item.mapMask & mapMask.value) !== 0 && !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id)));
+	.filter(item => (item.mapMask & mapMask.value) !== 0));
 
 const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((item) => {
 	const discount = damageSource.value ? calculateItemDiscount(item.id, damageSource.value.items.value, items) : 0;
@@ -78,8 +78,8 @@ const shopItems = computed<IShopItem[]>(() => sortedByPriceForMap.value.map((ite
 const shopItemsMap = computed(() => new Map<string, IShopItem>(Object.values(shopItems.value).map(v => [v.item.id, v])));
 const filteredByCategory = computed(() =>
 	selectedCategory.value === 'all'
-		? shopItems.value
-		: shopItems.value.filter(({ item }) => item.categories?.[selectedCategory.value as IItemCategory]),
+		? shopItems.value.filter(({ item }) => !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id))
+		: shopItems.value.filter(({ item }) => !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id) && item.categories?.[selectedCategory.value as IItemCategory]),
 );
 const filteredByStats = computed(() => {
 	const filterFunctions = Object.entries(appliedStatFilters.value).filter(([, isEnabled]) => isEnabled).map(([filter]) => ITEM_SHOP_STAT_FILTERS[filter as IItemShopStatFilter].filter);
@@ -202,7 +202,11 @@ const searchResults = computed(() => {
 	}
 
 	const splitSearch = search.value.toLocaleLowerCase().replaceAll(/[^a-z ]/g, '').split(' ').filter(v => v);
-	return shopItems.value.filter(({ item }) => splitSearch.every(word => item.searchString.includes(word)));
+	return shopItems.value.filter(({ item }) =>
+		item.id !== ITEM_NAME_TO_ID.slightlyMagicalFootwear
+		&& !TRANSFORMED_TEAR_ITEM_IDS.includes(item.id)
+		&& splitSearch.every(word => item.searchString.includes(word)),
+	);
 });
 
 const searchCursoredOverItem = computed(() => searchCursoredOverIndex.value !== undefined ? searchResults.value[searchCursoredOverIndex.value] : undefined);
