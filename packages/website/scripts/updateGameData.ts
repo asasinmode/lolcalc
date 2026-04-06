@@ -1012,7 +1012,13 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 	}
 	rules && debugStringVariables(rules, { ...variableDebug, key: `${item.id} ${item.name} rules` });
 
-	const dynamicValueFooter = keyInventoryOnlyText && getStringtableValue(keyInventoryOnlyText, 'item keyInventoryOnlyText');
+	let dynamicValueFooter = keyInventoryOnlyText && getStringtableValue(keyInventoryOnlyText, 'item keyInventoryOnlyText');
+	while (dynamicValueFooter?.startsWith('<br>')) {
+		dynamicValueFooter = dynamicValueFooter.slice(4).trim();
+	}
+	while (dynamicValueFooter?.endsWith('<br>')) {
+		dynamicValueFooter = dynamicValueFooter.slice(0, -4).trim();
+	}
 	dynamicValueFooter && debugStringVariables(dynamicValueFooter, { ...variableDebug, key: `${item.id} ${item.name} dynamicValueFooter` });
 
 	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || rules?.length) {

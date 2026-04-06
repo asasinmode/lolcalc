@@ -23,8 +23,9 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
 const otherView = computed(() => view.value === 'Shop' ? 'inventory' : 'shop');
 
-const hasMoreInfo = computed(() => computedDescription.value?.extended && !globalKeyModifiers.value.shift);
+const hasMoreInfo = computed(() => computedDescription.value?.rules && !globalKeyModifiers.value.shift);
 const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.textInventory);
+const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.dynamicValueFooter);
 
 const header = useTemplateRef<HTMLButtonElement>('header');
 
@@ -83,15 +84,16 @@ defineExpose({ header });
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
 		<p
-			v-if="computedDescription?.extended"
+			v-if="computedDescription?.rules"
 			v-show="!hoverTooltip || globalKeyModifiers.shift"
-			v-html="computedDescription.extended"
+			v-html="computedDescription.rules"
 		/>
-		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView)">
+		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.dynamicValueFooter)">
+			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="computedDescription!.dynamicValueFooter" />
 			<p v-show="hasMoreInfo">
 				Hold <kbd>[Shift]</kbd> to show more info
 			</p>
-			<p v-show="hasOtherView">
+			<p v-show="hasOtherView || computedDescription?.dynamicValueFooter">
 				Press <kbd>[Ctrl]</kbd> to toggle to <b>{{ otherView }}</b> view
 			</p>
 		</footer>
@@ -193,7 +195,15 @@ defineExpose({ header });
 			--at-apply: 'b-t b-[--ui-button-border-clr] pt-1 mt-2';
 
 			> p {
-				--at-apply: 'text-end';
+				--at-apply: 'text-end float-end';
+
+				&.dynamic-value {
+					--at-apply: 'text-start float-start';
+				}
+
+				&:not(.dynamic-value):has(+ p) {
+					--at-apply: 'float-none';
+				}
 
 				> kbd {
 					--at-apply: 'font-inherit';

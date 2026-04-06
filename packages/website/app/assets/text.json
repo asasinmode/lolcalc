@@ -510,7 +510,7 @@
 						"Casting your Ultimate summons a storm around you for @Duration@ seconds. The storm deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second to enemy champions and <keyword>Slows</keyword> them by @SlowAmount*100@%."
 					]
 				],
-				"dynamicValueFooter": "Damage Dealt: <attention>@f1@</attention><br>"
+				"dynamicValueFooter": "Damage Dealt: <attention>@f1@</attention>"
 			},
 			"3053": {
 				"subtitleLeft": "Anti-Burst",
@@ -824,7 +824,7 @@
 						"While near your <attention>Worthy</attention> ally, take @DamageRedirection*100@% of the damage they receive and <healing>heal for @AllyHealingConversion*100@%</healing> of the damage they deal to champions."
 					]
 				],
-				"dynamicValueFooter": "Damage Redirected: <attention>@f1@</attention><br>Healing Received: <attention>@f3@</attention><br>"
+				"dynamicValueFooter": "Damage Redirected: <attention>@f1@</attention><br>Healing Received: <attention>@f3@</attention>"
 			},
 			"3110": {
 				"subtitleLeft": "Anti-Attacker",
@@ -993,7 +993,7 @@
 						""
 					]
 				],
-				"dynamicValueFooter": "Critical Strike Damage Blocked: <attention>@f2@</attention><br>"
+				"dynamicValueFooter": "Critical Strike Damage Blocked: <attention>@f2@</attention>"
 			},
 			"3144": {
 				"tooltipShop": [
@@ -1202,7 +1202,7 @@
 						"Nearby allied siege and super minions gain @BonusMinionResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>."
 					]
 				],
-				"dynamicValueFooter": "Damage to Champions: <attention>@f1@</attention><br>Damage to Structures: <attention>@f2@</attention><br>"
+				"dynamicValueFooter": "Damage to Champions: <attention>@f1@</attention><br>Damage to Structures: <attention>@f2@</attention>"
 			},
 			"3184": {
 				"subtitleRight": "Unique: Starter"
@@ -1216,7 +1216,7 @@
 					]
 				],
 				"rules": "<rules>Subsequent <active>Devotion</active> shields within @DiminishedTimer@ seconds have @DiminishedEffectMulitplier*100@% effect.</rules>",
-				"dynamicValueFooter": "Damage blocked: <attention>@f3@</attention><br>"
+				"dynamicValueFooter": "Damage blocked: <attention>@f3@</attention>"
 			},
 			"3222": {
 				"subtitleLeft": "Remove Disables",
@@ -1594,7 +1594,7 @@
 						""
 					]
 				],
-				"dynamicValueFooter": "Total healing: <attention>@f1@</attention><br><br>"
+				"dynamicValueFooter": "Total healing: <attention>@f1@</attention>"
 			},
 			"6621": {
 				"subtitleLeft": "Scaling",
@@ -1683,7 +1683,7 @@
 						""
 					]
 				],
-				"dynamicValueFooter": "Damage to champions: <attention>@f1@</attention><br>"
+				"dynamicValueFooter": "Damage to champions: <attention>@f1@</attention>"
 			},
 			"6664": {
 				"subtitleLeft": "Sustained Damage",

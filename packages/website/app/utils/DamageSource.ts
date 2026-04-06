@@ -830,7 +830,9 @@ export interface IComputedItemDescription {
 	/** text shown below the stats when hovering in inventory */
 	textInventory?: string[][];
 	/** the extra gray text shown when holding shift */
-	extended?: string;
+	rules?: string;
+	/** text in the footer, same spot as `Press [Shift] to...`, usually showing a variable value like `Giant Slayer Bonus Damage: \@f1\@` */
+	dynamicValueFooter?: string;
 	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 }
@@ -852,7 +854,7 @@ export function computedItemDescription(
 	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-	const { subtitleLeft = '', subtitleRight = '', tooltipShop, tooltipInventory, rules } = text.items[item.id] || {};
+	const { subtitleLeft = '', subtitleRight = '', tooltipShop, tooltipInventory, rules, dynamicValueFooter } = text.items[item.id] || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -876,6 +878,14 @@ export function computedItemDescription(
 				replaceOptions,
 			)
 		: {};
+	const { variables: dynamicValueFooterVariables, replaced: replacedDynamicValueFooter, unknownVariables: dynamicValueFooterUnknown } = dynamicValueFooter
+		? replaceGameDescriptionVariables(
+				dynamicValueFooter,
+				'item',
+				[item, damageSource?.itemDamageCalculationTarget.value],
+				replaceOptions,
+			)
+		: {};
 
 	for (const unknownVariable of rulesUnknown || []) {
 		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
@@ -883,12 +893,19 @@ export function computedItemDescription(
 		}
 	}
 	rulesVariables && mergeMaps(variables, rulesVariables);
+	for (const unknownVariable of dynamicValueFooterUnknown || []) {
+		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
+			unknownVariables.push(unknownVariable);
+		}
+	}
+	dynamicValueFooterVariables && mergeMaps(variables, dynamicValueFooterVariables);
 
 	return {
 		item,
 		variables,
 		unknownVariables,
-		extended: replacedRules,
+		rules: replacedRules,
+		dynamicValueFooter: replacedDynamicValueFooter,
 		subtitleLeft,
 		subtitleRight,
 		stats,
