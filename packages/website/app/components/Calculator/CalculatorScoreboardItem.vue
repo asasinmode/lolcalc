@@ -166,7 +166,7 @@ function showItemHoverTooltip(event: MouseEvent, index: number, fromExtras = fal
 	if (fromExtras) {
 		el.value!.setAttribute('data-item-tooltip-extras', '');
 	} else {
-		detailsContainer.value!.removeAttribute('data-item-tooltip-extras');
+		el.value!.removeAttribute('data-item-tooltip-extras');
 	}
 
 	itemHoverTooltip.value?.showPopover();
@@ -174,7 +174,7 @@ function showItemHoverTooltip(event: MouseEvent, index: number, fromExtras = fal
 
 function leaveTooltipableItemElement() {
 	itemHoverTooltip.value?.hidePopover();
-	detailsContainer.value!.removeAttribute('data-ability-tooltip-extras');
+	el.value!.removeAttribute('data-item-tooltip-extras');
 	removeItemTooltipViewListeners();
 }
 
