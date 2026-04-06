@@ -34,6 +34,13 @@ const TRANSFORMED_IDS = [
 	ITEM_NAME_TO_ID.fimbulwinter,
 ];
 
+const UNTRANSFORMED_IDS = [
+	ITEM_NAME_TO_ID.whisperingCirclet,
+	ITEM_NAME_TO_ID.archangelsStaff,
+	ITEM_NAME_TO_ID.manamune,
+	ITEM_NAME_TO_ID.wintersApproach,
+];
+
 const itemIndex = computed(() => props.value.items.value.findIndex(item => item?.id === props.itemId || item?.id === ALTERNATE_ITEM_FORMS[props.itemId]));
 const transformedItem = computed(() => items[ALTERNATE_ITEM_FORMS[props.itemId]]!);
 
@@ -44,6 +51,15 @@ function transform() {
 	props.value.items.value[itemIndex.value] = transformedItem.value;
 	isTransformed.value = !isTransformed.value;
 	(props.value.internalItemData.value as IData).manaflow = 360;
+	if (!isTransformed.value) {
+		for (let i = 0; i < props.value.items.value.length; i++) {
+			const item = props.value.items.value[i];
+			if (item && i !== itemIndex.value && (UNTRANSFORMED_IDS as string[]).includes(item.id)) {
+				// eslint-disable-next-line vue/no-mutating-props
+				props.value.items.value[i] = items[(ALTERNATE_ITEM_FORMS as Record<string, string>)[item.id]!];
+			}
+		}
+	}
 }
 
 function updateValue(value: number) {
