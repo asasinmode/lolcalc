@@ -131,8 +131,8 @@ function finishDrag(event: MouseEvent) {
 }
 
 function updateDragPreviewPosition(event: MouseEvent) {
-	draggingPopover.value!.style.setProperty('--left', `${event.clientX}px`);
-	draggingPopover.value!.style.setProperty('--top', `${event.clientY}px`);
+	draggingPopover.value!.style.setProperty('--left', `${event.pageX}px`);
+	draggingPopover.value!.style.setProperty('--top', `${event.pageY}px`);
 }
 
 function setCurrentDropTarget(event: MouseEvent) {
