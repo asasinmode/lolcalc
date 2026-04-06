@@ -465,11 +465,12 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		}
 
 		/*
-		 * `mShopTooltip` looks like `generatedtip_item_3170_tooltipshop`
+		 * `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
 		 * `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
 		 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
+		 * `keyInventoryOnlyText` looks like `item_3170_inventoryonlytext`
 		 */
-		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules);
+		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyInventoryOnlyText);
 
 		const SPECIAL_CATEGORY_ITEMS: Record<string, IItemCategory[]> = {
 			3869: ['support'],	// celestial opposition
@@ -966,7 +967,7 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 /**
  * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that's TODO supposed to be handled manually, figure out if makese sense
  */
-function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynamicTooltip: string, keyTooltipExtendedRules?: string) {
+function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynamicTooltip: string, keyTooltipExtendedRules?: string, keyInventoryOnlyText?: string) {
 	const textShop = getStringtableValue(mShopTooltip, 'item tooltipShop');
 	const textInventory = getStringtableValue(mDynamicTooltip, 'item tooltipInventory');
 	if (!textShop) {
@@ -996,7 +997,7 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 		variableSourceKeys: [],
 		variableType: 'item',
 		/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
-		variableValueParameters: [{ ...item, dynamicValues: { ChampRange: [1, 2] } } as IItem],
+		variableValueParameters: [{ ...item, dynamicValues: { lolcalcChampRange: [1, 2] } } as IItem],
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
 	const combinedDescriptions = tooltipShop?.flatMap(tooltip => tooltip).concat(tooltipInventory?.flatMap(tooltip => tooltip) || []).join(' ');
@@ -1011,6 +1012,9 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 	}
 	rules && debugStringVariables(rules, { ...variableDebug, key: `${item.id} ${item.name} rules` });
 
+	const dynamicValueFooter = keyInventoryOnlyText && getStringtableValue(keyInventoryOnlyText, 'item keyInventoryOnlyText');
+	dynamicValueFooter && debugStringVariables(dynamicValueFooter, { ...variableDebug, key: `${item.id} ${item.name} dynamicValueFooter` });
+
 	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || rules?.length) {
 		(textData.data.items as any)[item.id] = {
 			subtitleLeft: subtitleLeft || undefined,
@@ -1018,6 +1022,7 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 			tooltipShop,
 			tooltipInventory,
 			rules: rules || undefined,
+			dynamicValueFooter: dynamicValueFooter || undefined,
 		};
 	}
 }

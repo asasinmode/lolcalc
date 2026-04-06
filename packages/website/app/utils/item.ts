@@ -1,5 +1,7 @@
 import type { IShopItem } from './types';
-import { data as items } from '../assets/item.json';
+import itemsData from '../assets/item.json' with { type: 'json' };
+
+const { data: items } = itemsData;
 
 export type IInternalItemData<Item extends keyof TItemNameToId, Id = typeof ITEM_NAME_TO_ID[Item]> = Id extends keyof TItemSpecifics
 	? ReturnType<typeof ITEM_SPECIFICS[Id]['setupInternalData']> : never;
