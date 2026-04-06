@@ -938,6 +938,10 @@ defineExpose({ el });
 						height="64"
 						loading="lazy"
 					>
+					<span v-if="value.items.value[i - 1] && (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.itemImageText?.(value.internalItemData.value)">
+						<span>{{ (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.itemImageTextLabel }}:</span>
+						{{ (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.itemImageText(value.internalItemData.value) }}
+					</span>
 				</component>
 			</li>
 		</ul>
@@ -1463,10 +1467,20 @@ defineExpose({ el });
 
 			> li {
 				> * {
-					--at-apply: 'bg-black size-[--item-size] inline-block cursor-default';
+					--at-apply: 'bg-black size-[--item-size] inline-block cursor-default relative';
 
-					> span {
+					> span:first-child {
 						--at-apply: 'sr-only';
+					}
+
+					> span:last-child {
+						--at-apply: 'absolute text-xs bottom-0 end-0 leading-[1] pointer-events-none';
+						paint-order: stroke fill;
+						-webkit-text-stroke: black 0.2em;
+
+						> span {
+							--at-apply: 'sr-only';
+						}
 					}
 
 					> img {

@@ -1,4 +1,5 @@
 import type { IShopItem } from './types';
+import { data as items } from '../assets/item.json';
 
 export type IInternalItemData<Item extends keyof TItemNameToId, Id = typeof ITEM_NAME_TO_ID[Item]> = Id extends keyof TItemSpecifics
 	? ReturnType<typeof ITEM_SPECIFICS[Id]['setupInternalData']> : never;
@@ -35,9 +36,13 @@ export type TItemSpecifics = typeof ITEM_SPECIFICS;
 
 const tearItemSpecifics = {
 	internalDataProperties: ['manaflow'],
-	setupInternalData(self) {
+	setupInternalData(self: DamageSource) {
 		self.internalItemData.value.manaflow = Math.max(0, Math.min(360, self.internalItemData.value.manaflow ?? 0));
 		return { manaflow: 0 };
+	},
+	itemImageTextLabel: 'Manaflow stacks',
+	itemImageText(data: { manaflow: number }) {
+		return data.manaflow;
 	},
 };
 
@@ -48,12 +53,20 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.eminence = Math.max(0, self.internalItemData.value.eminence ?? 0);
 			return { eminence: 0 };
 		},
+		itemImageTextLabel: 'Eminence stacks',
+		itemImageText(data: { eminence: 0 }) {
+			return data.eminence && items[ITEM_NAME_TO_ID.hubris].dataValues.BonusLethality + data.eminence * items[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
+		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
 		internalDataProperties: ['glory'],
 		setupInternalData(self) {
 			self.internalItemData.value.glory = Math.max(0, Math.min(10, self.internalItemData.value.glory ?? 0));
 			return { glory: 0 };
+		},
+		itemImageTextLabel: 'Glory stacks',
+		itemImageText(data: { glory: number }) {
+			return data.glory;
 		},
 	},
 	[ITEM_NAME_TO_ID.mejai]: {
@@ -62,12 +75,20 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.glory = Math.max(0, Math.min(25, self.internalItemData.value.glory ?? 0));
 			return { glory: 0 };
 		},
+		itemImageTextLabel: 'Glory stacks',
+		itemImageText(data: { glory: number }) {
+			return data.glory;
+		},
 	},
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
 		internalDataProperties: ['madness'],
 		setupInternalData(self) {
 			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
 			return { madness: 0 };
+		},
+		itemImageTextLabel: 'Madness bonus damage',
+		itemImageText(data: { madness: number }) {
+			return data.madness && `${Math.round(data.madness * items[ITEM_NAME_TO_ID.hauntingGuise].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
@@ -76,12 +97,20 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.eternity = Math.max(0, Math.min(10, self.internalItemData.value.eternity ?? 0));
 			return { eternity: 0 };
 		},
+		itemImageTextLabel: 'Eternity stacks',
+		itemImageText(data: { eternity: number }) {
+			return data.eternity;
+		},
 	},
 	[ITEM_NAME_TO_ID.blackfireTorch]: {
 		internalDataProperties: ['bBlaze'],
 		setupInternalData(self) {
 			self.internalItemData.value.bBlaze = Math.max(0, self.internalItemData.value.bBlaze ?? 0);
 			return { bBlaze: 0 };
+		},
+		itemImageTextLabel: 'Baleful Blaze ap increase',
+		itemImageText(data: { bBlaze: number }) {
+			return data.bBlaze && `${Math.round(data.bBlaze * items[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.heartsteel]: {
@@ -90,12 +119,20 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.cConsumption = Math.max(0, self.internalItemData.value.cConsumption ?? 0);
 			return { cConsumption: 0 };
 		},
+		itemImageTextLabel: 'Colosal Consumption health increase',
+		itemImageText(data: { cConsumption: number }) {
+			return data.cConsumption;
+		},
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		internalDataProperties: ['seething'],
 		setupInternalData(self) {
 			self.internalItemData.value.seething = Math.max(0, Math.min(4, self.internalItemData.value.seething ?? 0));
 			return { seething: 0 };
+		},
+		itemImageTextLabel: 'Seething Strikes stacks',
+		itemImageText(data: { seething: number }) {
+			return data.seething;
 		},
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
@@ -105,12 +142,20 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.jxtpD = Math.max(0, Math.min(3, self.internalItemData.value.jxtpD ?? 0));
 			return { jxtpL: 0, jxtpD: 0 };
 		},
+		itemImageTextLabel: 'Juxtaposition stacks (light | dark)',
+		itemImageText(data: { jxtpL: number; jxtpD: number }) {
+			return (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
+		},
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
 		internalDataProperties: ['madness'],
 		setupInternalData(self) {
 			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
 			return { madness: 0 };
+		},
+		itemImageTextLabel: 'Madness bonus damage',
+		itemImageText(data: { madness: number }) {
+			return data.madness && `${Math.round(data.madness * items[ITEM_NAME_TO_ID.liandry].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
@@ -119,6 +164,10 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.practice = Math.max(0, Math.min(25, self.internalItemData.value.practice ?? 0));
 			return { practice: 0 };
 		},
+		itemImageTextLabel: 'Practice Makes Lethal critical strike chance',
+		itemImageText(data: { practice: number }) {
+			return data.practice && `${data.practice}%`;
+		},
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
 		internalDataProperties: ['fWill'],
@@ -126,12 +175,20 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.fWill = Math.max(0, Math.min(4, self.internalItemData.value.fWill ?? 0));
 			return { fWill: 0 };
 		},
+		itemImageTextLabel: 'Focused Will ability damage increase',
+		itemImageText(data: { fWill: number }) {
+			return data.fWill && `${Math.round(data.fWill * items[ITEM_NAME_TO_ID.shojin].dataValues.SpellDamageIncrease * 100)}%`;
+		},
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
 		internalDataProperties: ['corruption'],
 		setupInternalData(self) {
 			self.internalItemData.value.corruption = Math.max(0, Math.min(4, self.internalItemData.value.corruption ?? 0));
 			return { corruption: 0 };
+		},
+		itemImageTextLabel: 'Corruption bonus damage',
+		itemImageText(data: { corruption: number }) {
+			return data.corruption && `${Math.round(data.corruption * items[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
@@ -149,6 +206,10 @@ export const ITEM_SPECIFICS = {
 	setupInternalData?: (self: DamageSource) => any;
 	/** the properties `setupInternalData` uses, needed for cleanup */
 	internalDataProperties?: string[];
+	/** text on the item's image, like current heartsteel/mejai stacks */
+	itemImageText?: (internalData: any) => string | number;
+	/** sr only label for the shown image text */
+	itemImageTextLabel?: string;
 }>;
 
 export const UNPURCHASABLES_TO_KEEP = [

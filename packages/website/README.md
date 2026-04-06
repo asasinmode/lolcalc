@@ -61,15 +61,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] thresh
       - [ ] jax
       - [ ] target dummy stats
-    - [ ] extras ui items
-      - [ ] guinsoo
-      - [ ] terminus
-      - [ ] heartsteel
-      - [x] hubris
-      - [ ] mejai's
-      - [ ] dark seal
-      - [ ] kraken slayer
-      - [ ] yun tal wildarrows
+    - [x] extras ui items
     - [ ] shapeshifting champions choose shape, switch abilities since it can affect stats
   - [x] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
