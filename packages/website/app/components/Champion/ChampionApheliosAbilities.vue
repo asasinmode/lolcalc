@@ -76,14 +76,18 @@ const abilitySize = abilityImageSize('Aphelios');
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'r')"
 		>
+		<div class="pretend-level-radiogroup">
+			<span>r level: {{ value.abilityLevels.value.r }}</span>
+			<div v-for="i in 3" :key="i" aria-hidden="true" :data-checked="i === value.abilityLevels.value.r" />
+		</div>
 	</div>
 </template>
 
 <style>
 @layer overrides {
 	#scoreboard > div > ul > [data-scoreboard-item='Aphelios'] > details > [data-abilities] {
-		--at-apply: 'gap-x-0';
-		--aphelios-border-clr: theme('colors.slate.300');
+		--at-apply: 'gap-x-0 bg-white/10';
+		--aphelios-ui-clr: theme('colors.slate.300');
 		/* radius of the funny border */
 		--funny-rounded: 20% / 50%;
 		/* radius of the image inside of the funny border, its overflow is not clipped in any way so it needs to be the smallest it can be to still not go outside of the border around it */
@@ -92,14 +96,13 @@ const abilitySize = abilityImageSize('Aphelios');
 
 		> [data-passive] {
 			--at-apply: 'b-none size-auto pe-2';
-			--ui-button-border-clr: var(--aphelios-border-clr);
 
 			> h5 {
 				--at-apply: 'sr-only';
 			}
 
 			> img {
-				--at-apply: 'size-[--ability-size-passive] rounded-1/2 b-2 b-[--ui-button-border-clr]';
+				--at-apply: 'size-[--ability-size-passive] rounded-1/2 b-2 b-[--aphelios-ui-clr]';
 			}
 		}
 
@@ -111,7 +114,6 @@ const abilitySize = abilityImageSize('Aphelios');
 		> [data-aphelios-q],
 		> [data-aphelios-w],
 		> [data-aphelios-r] {
-			--ui-button-border-clr: var(--aphelios-border-clr);
 			--at-apply: 'relative h-[--ability-size]';
 
 			> h5 {
@@ -134,7 +136,7 @@ const abilitySize = abilityImageSize('Aphelios');
 			}
 
 			&::after {
-				--at-apply: 'z-1 b b-2 b-[--ui-button-border-clr]';
+				--at-apply: 'z-1 b b-2 b-[--aphelios-ui-clr]';
 			}
 		}
 
@@ -164,7 +166,7 @@ const abilitySize = abilityImageSize('Aphelios');
 
 			> img {
 				&:nth-of-type(1) {
-					--at-apply: 'b-2 b-[--ui-button-border-clr] size-[calc(var(--ability-size)+1.5*var(--spacing))] -my-0.75 rounded-1/2 z-2 -me-3.5';
+					--at-apply: 'b-2 b-[--aphelios-ui-clr] size-[calc(var(--ability-size)+1.5*var(--spacing))] -my-0.75 rounded-1/2 z-2 -me-3.5';
 				}
 
 				&:nth-of-type(2) {
@@ -177,15 +179,15 @@ const abilitySize = abilityImageSize('Aphelios');
 			--at-apply: 'grid grid-cols-[auto_1fr_auto] place-items-center grid-rows-1';
 
 			&::after {
-				--at-apply: 'z-0 content-empty bg-black col-start-2 row-start-1 b b-[--ui-button-border-clr] size-[calc(var(--ability-size)*0.7)] rounded-1/2';
+				--at-apply: 'z-0 content-empty bg-black col-start-2 row-start-1 b b-[--aphelios-ui-clr] size-[calc(var(--ability-size)*0.7)] rounded-1/2';
 			}
 
 			> h5:first-of-type {
-				--at-apply: 'text-center static -mx-1 h-5.5 w-6 bg-black b-y b-[--ui-button-border-clr] text-sm translate-0 z-0 leading-5 relative';
+				--at-apply: 'text-center static -mx-1 h-5.5 w-6 bg-black b-y b-[--aphelios-ui-clr] text-sm translate-0 z-0 leading-5 relative';
 
 				&::before,
 				&::after {
-					--at-apply: 'absolute content-empty h-1.25 w-1.75 bg-[--ui-button-border-clr]';
+					--at-apply: 'absolute content-empty h-1.25 w-1.75 bg-[--aphelios-ui-clr]';
 				}
 
 				&::before {
@@ -205,7 +207,7 @@ const abilitySize = abilityImageSize('Aphelios');
 				}
 
 				&:nth-of-type(2) {
-					--at-apply: 'size-[calc(var(--ability-size)*0.45)] b b-[--ui-button-border-clr] rounded-1/2 self-start -mt-1/3 -ms-1/3';
+					--at-apply: 'size-[calc(var(--ability-size)*0.45)] b b-[--aphelios-ui-clr] rounded-1/2 self-start -mt-1/3 -ms-1/3';
 				}
 			}
 		}
@@ -219,6 +221,23 @@ const abilitySize = abilityImageSize('Aphelios');
 
 			> img {
 				--at-apply: 'z-1';
+			}
+
+			> .pretend-level-radiogroup {
+				--at-apply: 'flex gap-0.5 py-[--ability-level-button-py]';
+
+				> span {
+					--at-apply: 'sr-only';
+				}
+
+				> div {
+					--at-apply: 'block b b-[--ui-button-border-clr] size-[--ability-level-button-indicator-size] rounded-full bg-black';
+
+					&[data-checked='true'],
+					&:has(~ [data-checked='true']) {
+						--at-apply: 'bg-[--ui-button-border-clr]';
+					}
+				}
 			}
 		}
 	}
