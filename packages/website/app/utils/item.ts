@@ -145,8 +145,8 @@ export const ITEM_SPECIFICS = {
 			return { jxtpL: 0, jxtpD: 0 };
 		},
 		itemImageTextLabel: 'Juxtaposition stacks (light | dark)',
-		itemImageText(data: { jxtpL: number; jxtpD: number }) {
-			return (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
+		itemImageText(data: { jxtpL: number; jxtpD: number }, property?: 'jxtpL' | 'jxtpD') {
+			return property ? data[property] : (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
 		},
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
@@ -209,7 +209,7 @@ export const ITEM_SPECIFICS = {
 	/** the properties `setupInternalData` uses, needed for cleanup */
 	internalDataProperties?: string[];
 	/** text on the item's image, like current heartsteel/mejai stacks */
-	itemImageText?: (internalData: any) => string | number;
+	itemImageText?: (internalData: any, property?: any) => string | number;
 	/** sr only label for the shown image text */
 	itemImageTextLabel?: string;
 }>;

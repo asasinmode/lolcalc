@@ -1,11 +1,8 @@
 <script setup lang="ts">
+import type { IItemExtraProps } from '~/utils/types';
 import { VExtrasNumber } from '#components';
 
-const props = defineProps<{
-	value: DamageSource;
-	idPrefix: string;
-	itemId: keyof typeof ALTERNATE_ITEM_FORMS;
-}>();
+const props = defineProps<IItemExtraProps<keyof typeof ALTERNATE_ITEM_FORMS>>();
 
 defineEmits<{
 	itemHover: [event: MouseEvent];
@@ -78,6 +75,7 @@ function updateValue(value: number) {
 		:model-value="isTransformed ? 1000 : (value.internalItemData.value as IData).manaflow"
 		class="item-extra-tear"
 		:img="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId}.png`"
+		:img-text="ITEM_SPECIFICS[itemId as keyof TItemSpecifics]?.itemImageText?.(props.value.internalItemData.value)"
 		img-size="64"
 		label="Manaflow stacks"
 		:used-number-input="useNumberInput([value.internalItemData as Ref<IData>, 'manaflow'])"

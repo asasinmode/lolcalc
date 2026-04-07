@@ -1,6 +1,7 @@
+import type { IItemExtraProps } from '~/utils/types';
 import { VExtrasNumber } from '#components';
 
-export function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(
+export function numberExtra<T extends keyof TItemSpecifics>(
 	itemId: T,
 	property: T extends keyof TItemSpecifics ? keyof IInternalItemData<any, T> : never,
 	label: string,
@@ -8,11 +9,7 @@ export function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(
 	max?: number,
 	step?: number,
 ) {
-	return defineComponent<{
-		value: DamageSource;
-		idPrefix: string;
-		itemId: string;
-	}, {
+	return defineComponent<IItemExtraProps, {
 		itemHover: (event: MouseEvent) => void;
 	}>((props, ctx) => {
 		const { version } = usePatchVersion();
@@ -26,6 +23,7 @@ export function numberExtra<T extends TItemNameToId[keyof TItemNameToId]>(
 			min,
 			max,
 			step,
+			'imgText': ITEM_SPECIFICS[itemId]?.itemImageText?.(props.value.internalItemData.value, property as any),
 			'usedNumberInput': useNumberInput([props.value.internalItemData, property as string], true, max),
 			onImgMouseenter(event) {
 				ctx.emit('itemHover', event);

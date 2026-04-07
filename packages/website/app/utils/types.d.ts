@@ -1,5 +1,3 @@
-import type { Component } from 'vue';
-
 export type UnionKeys<T> = T extends T ? keyof T : never;
 
 export interface ITexture {
@@ -120,4 +118,10 @@ export interface IItemDescriptionProps {
 	item?: IItem;
 	hoverTooltip?: boolean;
 	source: IItemHoverTooltipView;
+}
+
+export interface IItemExtraProps<T = string> {
+	value: DamageSource;
+	idPrefix: string;
+	itemId: T;
 }

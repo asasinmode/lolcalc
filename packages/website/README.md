@@ -41,7 +41,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] stats
     - [x] current health/mana
     - [x] slider drag health/mana
-    - [ ] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) when adding passives, like energy, zaahen, fury
+    - [?] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) when adding passives, like energy, zaahen, fury
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [x] abilities ui (only passive implemented)
@@ -62,7 +62,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] jax
       - [ ] target dummy stats
     - [x] extras ui items
-    - [ ] shapeshifting champions choose shape, switch abilities since it can affect stats
+    - [?] shapeshifting champions choose shape, switch abilities since it can affect stats
+    - [?] apply effects like black cleaver, abyssal mask
   - [x] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
@@ -184,7 +185,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] components for stuff like manaflow band or precision legends for setting values
   - [ ] results section, hover tooltip, extract variables
 - [ ] overriding stats like target dummy
-- [ ] apply effects like black cleaver, abyssal mask
 - [ ] elixir effects (bring back in updateGameData)
 - [ ] extracting champions and items from screenshots
 - [ ] per patch versions = see stats/features from older patches

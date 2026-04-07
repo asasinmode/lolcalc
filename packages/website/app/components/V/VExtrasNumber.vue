@@ -3,6 +3,7 @@ withDefaults(defineProps<{
 	idPrefix: string;
 	img: string;
 	imgSize: string | number;
+	imgText?: string | number;
 	label: string;
 	usedNumberInput: ReturnType<typeof useNumberInput>;
 	min?: number;
@@ -29,6 +30,7 @@ const value = defineModel<number>({ required: true });
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
+		<span v-if="imgText" aria-hidden="true">{{ imgText }}</span>
 		<label :for="`ven-${idPrefix}-input`">
 			{{ label }}
 		</label>
@@ -63,10 +65,16 @@ const value = defineModel<number>({ required: true });
 <style>
 @layer components {
 	.v-extras-number {
-		--at-apply: 'grid grid-cols-[auto_auto_min-content_1fr] grid-rows-[min-content_min-content]';
+		--at-apply: 'grid grid-cols-[auto_auto_min-content_1fr] grid-rows-[min-content_min-content] relative';
 
 		> img {
 			--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size] me-2';
+		}
+
+		> span {
+			--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute bottom-[--p] start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full pointer-events-none';
+			paint-order: stroke fill;
+			-webkit-text-stroke: 0.15em black;
 		}
 
 		> label {

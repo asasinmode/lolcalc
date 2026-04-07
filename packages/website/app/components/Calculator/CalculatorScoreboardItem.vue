@@ -2049,7 +2049,8 @@ defineExpose({ el });
 				anchor-name: --scoreboard-item-extras;
 
 				> article {
-					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] p-2 w-fit rounded-md';
+					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] p-[--p] w-fit rounded-md';
+					--p: calc(2 * var(--spacing));
 				}
 			}
 		}
