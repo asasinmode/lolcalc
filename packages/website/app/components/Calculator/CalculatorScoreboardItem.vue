@@ -2124,7 +2124,11 @@ defineExpose({ el });
 
 		> details {
 			> [data-extras] {
-				--at-apply: 'flex-row-reverse';
+				direction: rtl;
+
+				> * {
+					direction: ltr;
+				}
 			}
 		}
 	}
