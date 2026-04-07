@@ -65,20 +65,24 @@ const value = defineModel<number>({ required: true });
 <style>
 @layer components {
 	.v-extras-number {
-		--at-apply: 'grid grid-cols-[auto_auto_min-content_1fr] grid-rows-[min-content_min-content] relative';
+		--at-apply: 'grid grid-cols-[auto_auto_1fr_min-content] grid-rows-2 relative';
 
 		> img {
-			--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size] me-2';
+			--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size] me-2 self-center';
 		}
 
 		> span {
-			--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute bottom-[--p] start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full pointer-events-none';
+			--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%)] pointer-events-none';
 			paint-order: stroke fill;
 			-webkit-text-stroke: 0.15em black;
 		}
 
 		> label {
-			--at-apply: 'col-span-3';
+			--at-apply: 'col-span-3 self-center of-hidden leading-[1]';
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			line-clamp: 2;
 		}
 
 		> input {
@@ -90,7 +94,11 @@ const value = defineModel<number>({ required: true });
 		}
 
 		> button {
-			--at-apply: 'w-12 h-7';
+			--at-apply: 'w-10 h-7';
+
+			&:nth-last-of-type(2) {
+				--at-apply: 'justify-self-end';
+			}
 		}
 	}
 }

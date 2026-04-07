@@ -1773,7 +1773,7 @@ defineExpose({ el });
 			}
 
 			> [data-abilities] {
-				--at-apply: 'relative gap-x-[--abilities-gap] flex';
+				--at-apply: 'relative gap-x-[--abilities-gap] flex justify-self-center';
 				grid-area: abilities;
 				anchor-name: --scoreboard-item-abilities;
 				width: var(--abilities-width);
@@ -2044,12 +2044,16 @@ defineExpose({ el });
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full w-full flex flex-wrap max-w-[40vw]';
+				--at-apply: 'col-span-full w-full grid grid-cols-3 auto-rows-min max-w-[40vw] gap-2';
 				anchor-name: --scoreboard-item-extras;
 
 				> article {
-					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] p-[--p] w-fit rounded-md';
+					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
 					--p: calc(2 * var(--spacing));
+
+					> img {
+						--at-apply: 'my-[--p]';
+					}
 				}
 			}
 		}
