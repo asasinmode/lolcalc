@@ -832,19 +832,9 @@ export function formatChampionStatValue(
 		: Math.round(value[key] as number * multiplier);
 }
 
-export interface IComputedItemDescription {
+export interface IComputedItemDescription extends Pick<ITextData['items'][keyof ITextData['items']], 'subtitleLeft' | 'subtitleRight' | 'tooltipShop' | 'tooltipInventory' | 'extended' | 'footerLeft' | 'keywordDefinitions'> {
 	item: IItem;
-	subtitleLeft?: string;
-	subtitleRight?: string;
 	stats: [iconName: string, value: number, name: string][];
-	/** text shown below the stats when hovering in item shop */
-	textShop?: string[][];
-	/** text shown below the stats when hovering in inventory */
-	textInventory?: string[][];
-	/** the extra gray text shown when holding shift */
-	extended?: string;
-	/** text in the footer, same spot as `Press [Shift] to...`, usually showing a variable value like `Giant Slayer Bonus Damage: \@f1\@` or keyword definition */
-	footerLeft?: string;
 	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 }
@@ -866,7 +856,15 @@ export function computedItemDescription(
 	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-	const { subtitleLeft = '', subtitleRight = '', tooltipShop, tooltipInventory, extended, footerLeft } = text.items[item.id] || {};
+	const {
+		subtitleLeft,
+		subtitleRight,
+		tooltipShop,
+		tooltipInventory,
+		extended,
+		footerLeft,
+		keywordDefinitions,
+	} = text.items[item.id] || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -882,48 +880,52 @@ export function computedItemDescription(
 	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
 	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
 
-	const { variables: extendedVariables, replaced: replacedExtended, unknownVariables: extendedUnknown } = extended
-		? replaceGameDescriptionVariables(
-				extended,
-				'item',
-				[item, damageSource?.itemDamageCalculationTarget.value],
-				replaceOptions,
-			)
-		: {};
-	const { variables: leftFooterVariables, replaced: replacedLeftFooter, unknownVariables: leftFooterUnknown } = footerLeft
-		? replaceGameDescriptionVariables(
-				footerLeft,
-				'item',
-				[item, damageSource?.itemDamageCalculationTarget.value],
-				replaceOptions,
-			)
-		: {};
-
-	for (const unknownVariable of extendedUnknown || []) {
-		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
-			unknownVariables.push(unknownVariable);
-		}
-	}
-	extendedVariables && mergeMaps(variables, extendedVariables);
-	for (const unknownVariable of leftFooterUnknown || []) {
-		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
-			unknownVariables.push(unknownVariable);
-		}
-	}
-	leftFooterVariables && mergeMaps(variables, leftFooterVariables);
+	const replacedExtended = additionalItemText(extended, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
+	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
+	const replacedKeywordDefinitions = additionalItemText(keywordDefinitions, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
 
 	return {
 		item,
 		variables,
 		unknownVariables,
 		extended: replacedExtended,
-		footerLeft: replacedLeftFooter,
+		footerLeft: replacedFooterLeft,
+		keywordDefinitions: replacedKeywordDefinitions,
 		subtitleLeft,
 		subtitleRight,
 		stats,
-		textShop: shopFormatted,
-		textInventory: inventoryFormatted,
+		tooltipShop: shopFormatted,
+		tooltipInventory: inventoryFormatted,
 	};
+}
+
+function additionalItemText(
+	value: string | undefined,
+	item: IItem,
+	damageSource: DamageSource | undefined,
+	stringtable: ITextData['stringtable'],
+	variables: IComputedItemDescription['variables'],
+	unknownVariables: IComputedItemDescription['unknownVariables'],
+	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
+): string | undefined {
+	const { replaced, variables: newVariables, unknownVariables: newUnknownVariables } = value
+		? replaceGameDescriptionVariables(
+			/* technically unknown here should be noted and an alert should be shown but for now all of them were resolved and if any unknown occur, `updateGameData` script should report them */
+				replaceGameDescriptionStringtableVariables(value, stringtable).replaced,
+				'item',
+				[item, damageSource?.itemDamageCalculationTarget.value],
+				replaceOptions,
+			)
+		: {};
+
+	for (const unknownVariable of newUnknownVariables || []) {
+		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
+			unknownVariables.push(unknownVariable);
+		}
+	}
+	newVariables && mergeMaps(variables, newVariables);
+
+	return replaced;
 }
 
 function mergeMaps<T, U>(map1: Map<T, U>, map2: Map<T, U>) {

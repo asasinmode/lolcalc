@@ -23,8 +23,8 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
 const otherView = computed(() => view.value === 'Shop' ? 'inventory' : 'shop');
 
-const hasMoreInfo = computed(() => computedDescription.value?.extended && !globalKeyModifiers.value.shift);
-const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.textInventory);
+const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions) && !globalKeyModifiers.value.shift);
+const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.tooltipInventory);
 const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);
 
 const header = useTemplateRef<HTMLButtonElement>('header');
@@ -79,7 +79,7 @@ defineExpose({ header });
 				<span>{{ name }}</span>
 			</li>
 		</ul>
-		<template v-for="([heading, ...paragraphs], i) in hasOtherView && hoverTooltip ? computedDescription?.[`text${view}`] : computedDescription?.textShop" :key="i">
+		<template v-for="([heading, ...paragraphs], i) in hasOtherView && hoverTooltip ? computedDescription?.[`tooltip${view}`] : computedDescription?.tooltipShop" :key="i">
 			<h4 v-html="heading" />
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
@@ -88,8 +88,14 @@ defineExpose({ header });
 			v-show="!hoverTooltip || globalKeyModifiers.shift"
 			v-html="computedDescription.extended"
 		/>
-		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft)">
+		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="computedDescription!.footerLeft" />
+			<p
+				v-if="computedDescription?.keywordDefinitions"
+				v-show="globalKeyModifiers.shift"
+				class="keyword-definitions"
+				v-html="computedDescription.keywordDefinitions"
+			/>
 			<p v-show="hasMoreInfo">
 				Hold <kbd>[Shift]</kbd> to show more info
 			</p>
@@ -197,11 +203,12 @@ defineExpose({ header });
 			> p {
 				--at-apply: 'text-end float-end';
 
-				&.dynamic-value {
+				&.dynamic-value,
+				&.keyword-definitions {
 					--at-apply: 'text-start float-start';
 				}
 
-				&:not(.dynamic-value):has(+ p) {
+				&:not(.dynamic-value, .keyword-definitions):has(+ p) {
 					--at-apply: 'float-none';
 				}
 

@@ -18,8 +18,10 @@ export interface ITextData {
 		tooltipInventory?: string[][];
 		/** the additional, usually gray, text shown below the stats and any descripiton */
 		extended?: string;
-		/** text in the footer, same spot as `Press [Shift] to...`, usually showing the value of a dynamic variable like `Giant Slayer Bonus Damage: \@f1\@` or a keyword definition */
+		/** text in the footer, same spot as `Press [Shift] to...`, usually showing the value of a dynamic variable like `Giant Slayer Bonus Damage: \@f1\@` */
 		footerLeft?: string;
+		/** keyword definition like `Wounds: Reduces the effectiveness...` */
+		keywordDefinitions?: string;
 	}>;
 	runes: {
 		paths: Record<string, { name: string; tooltip: string }>;

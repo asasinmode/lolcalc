@@ -1024,23 +1024,16 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 			extended = tooltipExtended.slice(bracketIndex! + 2);
 		}
 	}
-	extended = extended?.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@');
-	while (extended?.startsWith('<br>')) {
-		extended = extended.slice(4).trim();
-	}
-	while (extended?.endsWith('<br>')) {
-		extended = extended.slice(0, -4).trim();
-	}
-	extended && debugStringVariables(extended, { ...variableDebug, key: `${item.id} ${item.name} extended` });
+	extended = cleanupItemText(extended);
+	extended && debugStringVariables(extended, { ...variableDebug, key: `${item.id} ${item.name} keyTooltipExtendedRules/keyTooltipExtended` });
 
-	let dynamicValueFooter = keyInventoryOnlyText && getStringtableValue(keyInventoryOnlyText, 'item keyInventoryOnlyText');
-	while (dynamicValueFooter?.startsWith('<br>')) {
-		dynamicValueFooter = dynamicValueFooter.slice(4).trim();
-	}
-	while (dynamicValueFooter?.endsWith('<br>')) {
-		dynamicValueFooter = dynamicValueFooter.slice(0, -4).trim();
-	}
-	dynamicValueFooter && debugStringVariables(dynamicValueFooter, { ...variableDebug, key: `${item.id} ${item.name} dynamicValueFooter` });
+	let footerLeft = keyInventoryOnlyText && getStringtableValue(keyInventoryOnlyText, 'item keyInventoryOnlyText');
+	footerLeft = cleanupItemText(footerLeft);
+	footerLeft && debugStringVariables(footerLeft, { ...variableDebug, key: `${item.id} ${item.name} keyInventoryOnlyText` });
+
+	let keywordDefinitions = keyKeywordDefinitions && getStringtableValue(keyKeywordDefinitions, 'item keyKeywordDefinitions');
+	keywordDefinitions = cleanupItemText(keywordDefinitions);
+	keywordDefinitions && debugStringVariables(keywordDefinitions, { ...variableDebug, key: `${item.id} ${item.name} keyKeywordDefinitions` });
 
 	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || extended?.length) {
 		(textData.data.items as any)[item.id] = {
@@ -1049,9 +1042,24 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 			tooltipShop,
 			tooltipInventory,
 			extended: extended || undefined,
-			dynamicValueFooter: dynamicValueFooter || undefined,
+			footerLeft: footerLeft || undefined,
+			keywordDefinitions: keywordDefinitions || undefined,
 		};
 	}
+}
+
+function cleanupItemText(text?: string): string | undefined {
+	if (!text) {
+		return;
+	}
+	text = text.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@');
+	while (text.startsWith('<br>')) {
+		text = text.slice(4).trim();
+	}
+	while (text.endsWith('<br>')) {
+		text = text.slice(0, -4).trim();
+	}
+	return text;
 }
 
 function createRuneSlotData(dataKey: string, data: any) {
