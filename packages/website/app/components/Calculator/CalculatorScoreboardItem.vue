@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IComputedDamageSourceChampionStat } from '~/utils/DamageSource';
+import type { IComputedDamageSourceChampionStat, INonPassiveAbilityKey } from '~/utils/DamageSource';
 import type { IScoreboardItemShowAbilityTooltipArgs, IWithCalculateDynamicValues } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
@@ -633,7 +633,7 @@ function healthResourceSliderEvents(target: Ref<number>, max: Ref<number>, eleme
 	return { onMousedown, cleanup, dragValueRef };
 }
 
-function resetAbilityLevel(event: MouseEvent, ability: Exclude<IChampionAbilityKey, 'passive'>) {
+function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 	event.preventDefault();
 	// eslint-disable-next-line vue/no-mutating-props
 	props.value.abilityLevels.value[ability] = 0;
@@ -783,7 +783,7 @@ defineExpose({ el });
 		</h3>
 		<button
 			title="move up, alt+click to duplicate above"
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:disabled="index === 0"
 			@click="$emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
@@ -793,7 +793,7 @@ defineExpose({ el });
 		</button>
 		<button
 			title="move down, alt+click to duplicate below"
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:disabled="!canMoveDown"
 			@click="$emit('move', index + 1, globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
@@ -803,7 +803,7 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:disabled="!canRemove && !value.anythingFilled.value"
 			@click="$emit('changeGroup', globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
@@ -813,7 +813,7 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:disabled="!canRemove && !value.anythingFilled.value"
 			@click="$emit('duplicate', globalKeyModifiers.shift)"
 			@mousedown.left="$emit('startDrag', $event, true)"
@@ -956,7 +956,7 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="removeButtonAttrs.title"
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:disabled="removeButtonAttrs.disabled"
 			@click="removeButtonAttrs.emit"
 		>
@@ -965,7 +965,7 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="isExpanded ? 'collapse' : 'expand'"
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:aria-controls="`${group}-${index}-details`"
 			:aria-expanded="isExpanded"
 			@click="toggleExpanded"
@@ -1059,6 +1059,7 @@ defineExpose({ el });
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
+					:id-prefix="`${group}-${index}`"
 					:value
 					:is-loading
 					@ability-hover="showAbilityTooltip"
@@ -1077,29 +1078,29 @@ defineExpose({ el });
 					</div>
 					<ComingSoonCover feature="abilities" class="text-white pt-1 inset-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] absolute items-start!" />
 					<div
-						v-for="ability in ['q', 'w', 'e', 'r'] as const"
-						v-bind="{ [`data-${ability}`]: '' }"
-						:key="ability"
-						:data-level="value.abilityLevels.value[ability]"
+						v-for="abilityKey in ['q', 'w', 'e', 'r'] satisfies INonPassiveAbilityKey[]"
+						v-bind="{ [`data-${abilityKey}`]: '' }"
+						:key="abilityKey"
+						:data-level="value.abilityLevels.value[abilityKey]"
 						:inert="!enableUnimplementedUi"
 					>
-						<h5>{{ ability.toUpperCase() }}</h5>
+						<h5>{{ abilityKey.toUpperCase() }}</h5>
 						<img
 							v-show="!isLoading"
-							:src="value.champion.value ? abilityImage(value.champion.value.abilities[ability].variants[value.abilityVariants.value[ability]]!.image, value.champion.value.id, group) : undefined"
+							:src="value.champion.value ? abilityImage(value.champion.value.abilities[abilityKey].variants[value.abilityVariants.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
-							@mouseenter="value.champion.value && showAbilityTooltip($event, ability)"
+							@mouseenter="value.champion.value && showAbilityTooltip($event, abilityKey)"
 						>
 						<VButtonRadiogroup
 							v-if="value.champion.value"
-							:id="`${group}-${index}-ability-${ability}`"
-							v-model="value.abilityLevels.value[ability]"
-							:label="`${ability} level`"
-							:options="Array.from({ length: value.maxAbilityLevels.value[ability] }, (_, index) => ({ level: index + 1 }))"
+							:id="`${group}-${index}-ability-${abilityKey}`"
+							v-model="value.abilityLevels.value[abilityKey]"
+							:label="`${abilityKey} level`"
+							:options="Array.from({ length: value.maxAbilityLevels.value[abilityKey] }, (_, index) => ({ level: index + 1 }))"
 							value-key="level"
-							@option-right-click="(event) => resetAbilityLevel(event, ability)"
+							@option-right-click="(event) => resetAbilityLevel(event, abilityKey)"
 						>
 							<template #default="{ option }">
 								<span>{{ option.level }}</span>
@@ -1290,9 +1291,9 @@ defineExpose({ el });
 
 		--ability-size-passive: calc(var(--spacing) * 10);
 		--ability-size: calc(var(--spacing) * 14);
-		--ability-level-button-indicator-size: calc(2 * var(--spacing));
-		--ability-level-button-py: calc(1 * var(--spacing));
-		--ability-level-buttons-size: calc(var(--ability-level-button-indicator-size) + 2 * var(--ability-level-button-py));
+		--ability-level-btn-indicator-size: calc(2 * var(--spacing));
+		--ability-level-btn-py: calc(1 * var(--spacing));
+		--ability-level-buttons-size: calc(var(--ability-level-btn-indicator-size) + 2 * var(--ability-level-btn-py));
 		--abilities-gap: calc(var(--spacing) * 2);
 		--abilities-width: calc(4 * var(--ability-size) + var(--ability-size-passive) + 4 * var(--abilities-gap));
 		--abilities-height: calc(var(--ability-size) + var(--ability-level-buttons-size));
@@ -1403,7 +1404,7 @@ defineExpose({ el });
 			grid-area: select-champion;
 
 			> button {
-				--at-apply: 'group b b-2 b-[--ui-button-border-clr] rounded-full size-full of-hidden';
+				--at-apply: 'group b b-2 b-[--ui-btn-border-clr] rounded-full size-full of-hidden';
 
 				img {
 					--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -1426,13 +1427,13 @@ defineExpose({ el });
 				}
 
 				> label > span:last-child {
-					--at-apply: 'size-5 bg-black text-white b b-[--ui-button-border-clr] text-center text-sm/4 rounded-full grid-center';
+					--at-apply: 'size-5 bg-black text-white b b-[--ui-btn-border-clr] text-center text-sm/4 rounded-full grid-center';
 				}
 			}
 		}
 
 		> [data-select-runes] {
-			--at-apply: 'b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
+			--at-apply: 'b b-[--ui-btn-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
 			--secondary-path-icon-size: calc(3 * var(--spacing));
 			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
 			background-color: var(--placeholder-champion-bg-clr);
@@ -1443,12 +1444,12 @@ defineExpose({ el });
 			}
 
 			&:has([data-secondary-path-icon]):before {
-				--at-apply: 'content-empty z-10 absolute end-[--secondary-path-inset-end] -bottom-0.5 bg-inherit b b-[--ui-button-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
+				--at-apply: 'content-empty z-10 absolute end-[--secondary-path-inset-end] -bottom-0.5 bg-inherit b b-[--ui-btn-border-clr] size-[calc(var(--secondary-path-icon-size)_+_var(--spacing))] rounded-full translate-x-0.5 translate-y-0.5';
 			}
 		}
 
 		> [data-select-items] {
-			--at-apply: 'mx-2 b b-[--ui-button-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 self-center w-max whitespace-nowrap';
+			--at-apply: 'mx-2 b b-[--ui-btn-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 self-center w-max whitespace-nowrap';
 			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-items;
 
@@ -1611,7 +1612,7 @@ defineExpose({ el });
 				grid-area: stats;
 
 				> dl {
-					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-button-border-clr] p-0.5 w-fit';
+					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-btn-border-clr] p-0.5 w-fit';
 
 					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
 
@@ -1784,7 +1785,7 @@ defineExpose({ el });
 				[data-w],
 				[data-e],
 				[data-r] {
-					--at-apply: 'relative size-[--ability-size] b b-[--ui-button-border-clr]';
+					--at-apply: 'relative size-[--ability-size] b b-[--ui-btn-border-clr]';
 
 					> h5 {
 						--at-apply: 'absolute bottom-0 start-0 leading-[1] -translate-x-1/2 translate-y-1/3 pointer-events-none z-1';
@@ -1802,7 +1803,7 @@ defineExpose({ el });
 				[data-w],
 				[data-e],
 				[data-r] {
-					--at-apply: 'mb-[calc(var(--ability-level-button-indicator-size)+2*var(--ability-level-button-py))]';
+					--at-apply: 'mb-[calc(var(--ability-level-btn-indicator-size)+2*var(--ability-level-btn-py))]';
 
 					&[data-level='0'],
 					&:not([data-level]) {
@@ -1810,42 +1811,6 @@ defineExpose({ el });
 
 						img {
 							--at-apply: 'grayscale-70 brightness-80';
-						}
-					}
-
-					> [role='radiogroup'] {
-						--at-apply: 'flex justify-center';
-
-						> button {
-							--at-apply: 'py-[--ability-level-button-py] px-0.25';
-
-							&::before {
-								--at-apply: 'content-empty block b b-[--ui-button-border-clr] size-[--ability-level-button-indicator-size] rounded-full bg-black mx-auto';
-							}
-
-							&[aria-checked='true']::before,
-							&:has(~ [aria-checked='true'])::before {
-								--at-apply: 'bg-[--ui-button-border-clr]';
-							}
-
-							&:has(~ :hover)::before,
-							&:has(~ :focus-visible)::before {
-								--at-apply: 'bg-white/50';
-							}
-
-							&:hover ~ *::before,
-							&:focus-visible ~ *::before {
-								--at-apply: 'bg-black';
-							}
-
-							&:hover::before,
-							&:focus-visible::before {
-								--at-apply: 'bg-white';
-							}
-
-							> span {
-								--at-apply: 'sr-only';
-							}
 						}
 					}
 				}
@@ -1945,7 +1910,7 @@ defineExpose({ el });
 
 						> img {
 							&:nth-of-type(1) {
-								--at-apply: 'size-8 absolute start-0 top-0 rounded-full b b-[--ui-button-border-clr]';
+								--at-apply: 'size-8 absolute start-0 top-0 rounded-full b b-[--ui-btn-border-clr]';
 							}
 
 							&:nth-of-type(2) {
@@ -2048,12 +2013,69 @@ defineExpose({ el });
 				anchor-name: --scoreboard-item-extras;
 
 				> article {
-					--at-apply: 'b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
+					--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
 					--p: calc(2 * var(--spacing));
 
 					> img {
-						--at-apply: 'my-[--p]';
+						--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
 					}
+
+					> img + span {
+						--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%)] pointer-events-none';
+						paint-order: stroke fill;
+						-webkit-text-stroke: 0.15em black;
+					}
+				}
+			}
+		}
+	}
+
+	#scoreboard
+		> div
+		> ul
+		> [data-scoreboard-item]
+		> details
+		> [data-abilities]
+		> :is([data-q], [data-w], [data-e], [data-r]),
+	#scoreboard
+		> div
+		> ul
+		> [data-scoreboard-item='Aphelios']
+		> details
+		> [data-extras]
+		> .extras-aphelios-ability-levels {
+		> [role='radiogroup'] {
+			--at-apply: 'flex justify-center';
+
+			> button {
+				--at-apply: 'py-[--ability-level-btn-py] px-0.25';
+
+				&::before {
+					--at-apply: 'content-empty block b b-[--ui-btn-border-clr] size-[--ability-level-btn-indicator-size] rounded-full bg-black';
+				}
+
+				&[aria-checked='true']::before,
+				&:has(~ [aria-checked='true'])::before {
+					--at-apply: 'bg-[--ui-btn-border-clr]';
+				}
+
+				&:has(~ :hover)::before,
+				&:has(~ :focus-visible)::before {
+					--at-apply: 'bg-white/50';
+				}
+
+				&:hover ~ *::before,
+				&:focus-visible ~ *::before {
+					--at-apply: 'bg-black';
+				}
+
+				&:hover::before,
+				&:focus-visible::before {
+					--at-apply: 'bg-white';
+				}
+
+				> span {
+					--at-apply: 'sr-only';
 				}
 			}
 		}

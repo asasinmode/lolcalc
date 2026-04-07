@@ -143,7 +143,7 @@ defineExpose({ el });
 		}
 
 		> :where(:is(div, p).game-description) {
-			--at-apply: 'mt-0.5 b-b b-t b-[--ui-button-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+			--at-apply: 'mt-0.5 b-b b-t b-[--ui-btn-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
 		}
 	}
 

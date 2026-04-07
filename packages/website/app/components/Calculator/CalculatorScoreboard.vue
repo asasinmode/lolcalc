@@ -369,7 +369,7 @@ function setLocalMirrorLayout() {
 				/>
 				<li>
 					<button
-						class="pretend-ui-button"
+						class="pretend-ui-btn"
 						:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
 						@click="add(damageSources)"
 					>
@@ -406,7 +406,7 @@ function setLocalMirrorLayout() {
 				/>
 				<li>
 					<button
-						class="pretend-ui-button"
+						class="pretend-ui-btn"
 						:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
 						@click="add(damageTargets)"
 					>
@@ -491,14 +491,14 @@ function setLocalMirrorLayout() {
 			}
 
 			> [data-drag-preview] {
-				--at-apply: 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-button-border-clr] gap-1 absolute start-[--left] top-[--top]';
+				--at-apply: 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-btn-border-clr] gap-1 absolute start-[--left] top-[--top]';
 
 				&:popover-open {
 					--at-apply: 'flex';
 				}
 
 				> :nth-child(1) {
-					--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-button-border-clr]';
+					--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-btn-border-clr]';
 
 					> img {
 						--at-apply: 'size-14 -ms-1 -mt-1 max-w-none';
@@ -506,7 +506,7 @@ function setLocalMirrorLayout() {
 				}
 
 				> :nth-child(2) {
-					--at-apply: 'absolute bg-black rounded-full top-11 start-11.5 translate-center text-xs/3 size-5 text-center grid-center b b-[--ui-button-border-clr]';
+					--at-apply: 'absolute bg-black rounded-full top-11 start-11.5 translate-center text-xs/3 size-5 text-center grid-center b b-[--ui-btn-border-clr]';
 				}
 
 				> :nth-child(3) {

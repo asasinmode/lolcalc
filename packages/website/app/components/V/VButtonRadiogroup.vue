@@ -54,8 +54,15 @@ function selectOption(tab: T[ValueKey]) {
 </script>
 
 <template>
-	<div :id ref="container" role="radiogroup" :aria-labelledby="`${id}-lbl`" @keydown="onKeydown">
-		<span :id="`${id}-lbl`" class="sr-only">{{ label }}</span>
+	<div
+		:id
+		ref="container"
+		class="v-button-radiogroup"
+		role="radiogroup"
+		:aria-labelledby="`${id}-lbl`"
+		@keydown="onKeydown"
+	>
+		<span :id="`${id}-lbl`">{{ label }}</span>
 		<button
 			v-for="(option, index) in options"
 			:key="option[valueKey] as string"
@@ -72,3 +79,13 @@ function selectOption(tab: T[ValueKey]) {
 		</button>
 	</div>
 </template>
+
+<style>
+@layer components {
+	.v-button-radiogroup {
+		> span {
+			--at-apply: 'sr-only';
+		}
+	}
+}
+</style>

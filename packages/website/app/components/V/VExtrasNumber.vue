@@ -46,14 +46,14 @@ const value = defineModel<number>({ required: true });
 			@input="usedNumberInput"
 		>
 		<button
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:disabled="disabled || value === min"
 			@click="value = min"
 		>
 			min
 		</button>
 		<button
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			:disabled="disabled || max === undefined || value === max"
 			@click="value = max!"
 		>
@@ -66,16 +66,6 @@ const value = defineModel<number>({ required: true });
 @layer components {
 	.v-extras-number {
 		--at-apply: 'grid grid-cols-[auto_auto_1fr_min-content] grid-rows-2 relative';
-
-		> img {
-			--at-apply: 'row-span-full b b-[--ui-button-border-clr] size-[--ability-size] me-2 self-center';
-		}
-
-		> span {
-			--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%)] pointer-events-none';
-			paint-order: stroke fill;
-			-webkit-text-stroke: 0.15em black;
-		}
 
 		> label {
 			--at-apply: 'col-span-3 self-center of-hidden leading-[1]';

@@ -971,14 +971,14 @@ defineExpose({
 						</label>
 						<ClientOnly>
 							<button
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
 								@click="cleanupUnused"
 							>
 								remove unused
 							</button>
 							<template #fallback>
-								<button class="prewtend-ui-button">
+								<button class="prewtend-ui-btn">
 									remove unused
 								</button>
 							</template>
@@ -1056,13 +1056,13 @@ defineExpose({
 								aria-hidden="true"
 							>
 						</VSelect>
-						<button v-if="index === resultColumns.length - 1" class="pretend-ui-button" @click="addResultsColumn()">
+						<button v-if="index === resultColumns.length - 1" class="pretend-ui-btn" @click="addResultsColumn()">
 							add column
 						</button>
 						<template v-else>
 							<button
 								title="move left, alt+click to duplicate to the left"
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								:disabled="index === 0"
 								draggable="true"
 								@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
@@ -1074,7 +1074,7 @@ defineExpose({
 							</button>
 							<button
 								title="remove"
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								@click="startRemovingColumn($event, index)"
 							>
 								<span>
@@ -1084,7 +1084,7 @@ defineExpose({
 							</button>
 							<button
 								title="move right, alt+click to duplicate to the right"
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								draggable="true"
 								@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
 								@dragstart="startResultColumnDrag(index, $event)"
@@ -1099,24 +1099,24 @@ defineExpose({
 						</template>
 						<ClientOnly>
 							<button
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								:disabled="columnAddableOptions[index]?.championOptionIndex === undefined"
 								@click="addColumnAbilities(index)"
 							>
 								add abilities
 							</button>
 							<button
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								:disabled="!columnAddableOptions[index]?.itemOptionsIndexes.length"
 								@click="addColumnItems(index)"
 							>
 								add items
 							</button>
 							<template #fallback>
-								<button class="pretend-ui-button">
+								<button class="pretend-ui-btn">
 									add abilities
 								</button>
-								<button class="pretend-ui-button">
+								<button class="pretend-ui-btn">
 									add items
 								</button>
 							</template>
@@ -1148,7 +1148,7 @@ defineExpose({
 						<ClientOnly>
 							<button
 								title="move up"
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								:disabled="index === 0"
 								draggable="true"
 								@click="moveResultSection(index, index - 1)"
@@ -1160,7 +1160,7 @@ defineExpose({
 							</button>
 							<button
 								title="move down"
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								draggable="true"
 								:disabled="index === (resultSections.length - 1)"
 								@click="moveResultSection(index, index + 1)"
@@ -1172,7 +1172,7 @@ defineExpose({
 							</button>
 							<button
 								title="remove"
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								:disabled="section.isPermanent"
 								@click="removeDamageSection(index)"
 							>
@@ -1183,7 +1183,7 @@ defineExpose({
 							</button>
 							<button
 								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								:aria-expanded="expandedSections.includes(section.id)"
 								:aria-controls="`results-table-section-body-${section.id}`"
 								@click="toggleResultsSection(section.id)"
@@ -1194,16 +1194,16 @@ defineExpose({
 								<Icon class="i-ph:caret-down" />
 							</button>
 							<template #fallback>
-								<button class="pretend-ui-button">
+								<button class="pretend-ui-btn">
 									move up
 								</button>
-								<button class="pretend-ui-button">
+								<button class="pretend-ui-btn">
 									move down
 								</button>
-								<button class="pretend-ui-button">
+								<button class="pretend-ui-btn">
 									move remove
 								</button>
-								<button class="pretend-ui-button">
+								<button class="pretend-ui-btn">
 									move expand
 								</button>
 							</template>
@@ -1346,7 +1346,7 @@ defineExpose({
 								</optgroup>
 							</select>
 							<button
-								class="pretend-ui-button"
+								class="pretend-ui-btn"
 								type="submit"
 								:disabled="!damageSectionOptions.length || !enableUnimplementedUi && !damageSectionOptions.some(option => option.type === 'item')"
 							>
@@ -1362,7 +1362,7 @@ defineExpose({
 										no options left
 									</option>
 								</select>
-								<button class="pretend-ui-button" type="submit">
+								<button class="pretend-ui-btn" type="submit">
 									add
 								</button>
 							</template>
@@ -1475,7 +1475,7 @@ defineExpose({
 						}
 
 						> label {
-							--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--col-damage-source-clr,var(--ui-button-border-clr)]';
+							--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--col-damage-source-clr,var(--ui-btn-border-clr)]';
 
 							> img {
 								--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -1491,7 +1491,7 @@ defineExpose({
 						}
 
 						&:nth-of-type(2) > label {
-							--at-apply: 'b-[--col-damage-target-clr,var(--ui-button-border-clr)]';
+							--at-apply: 'b-[--col-damage-target-clr,var(--ui-btn-border-clr)]';
 						}
 					}
 
@@ -1661,7 +1661,7 @@ defineExpose({
 						--at-apply: 'text-white';
 
 						> * {
-							--at-apply: 'b-[--ui-button-border-clr]';
+							--at-apply: 'b-[--ui-btn-border-clr]';
 						}
 
 						> td:not(.irrelevant) {

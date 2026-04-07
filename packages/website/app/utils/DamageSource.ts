@@ -18,7 +18,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	internalItemData: UnwrapRef<IDamageSource<Id>['internalItemData']>;
 }
 
-type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
+export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
 
 export interface IDamageSourceInternalDataBase {
 	_watchHandles: WatchHandle[];
@@ -1060,7 +1060,7 @@ export function computedAbilityDescription(
 		};
 	});
 
-	if (champion.id !== 'TargetDummy' && cooldown) {
+	if (champion.id !== 'TargetDummy' && cooldown && abilityKey !== 'passive') {
 		extendedVariables ||= [];
 		extendedVariables.push({
 			name: 'Cooldown',

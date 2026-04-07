@@ -88,7 +88,7 @@ function updateValue(value: number) {
 		@update:model-value="updateValue"
 		@img-mouseenter="$emit('itemHover', $event)"
 	>
-		<button class="pretend-ui-button" title="transform" @click="transform">
+		<button class="pretend-ui-btn" title="transform" @click="transform">
 			<span> transform </span>
 			<Icon class="i-ph:arrows-clockwise-bold" />
 		</button>

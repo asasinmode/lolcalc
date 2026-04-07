@@ -1305,7 +1305,7 @@ defineExpose({
 			--at-apply: 'relative';
 
 			&::before {
-				--at-apply: 'content-empty absolute rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-button-border-clr] brightness-80';
+				--at-apply: 'content-empty absolute rounded-1/2 size-5 bg-neutral-900 b b-2 b-[--ui-btn-border-clr] brightness-80';
 				box-shadow: 0 2px var(--item-button-img-b-w) 2px theme('colors.black/0.45');
 			}
 
@@ -1358,7 +1358,7 @@ defineExpose({
 				grid-area: builds-into;
 
 				> button {
-					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-button-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300';
+					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-btn-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300';
 				}
 			}
 		}
@@ -1368,7 +1368,7 @@ defineExpose({
 			grid-area: footer;
 
 			> button {
-				--at-apply: 'b-2 b-[--ui-button-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-24';
+				--at-apply: 'b-2 b-[--ui-btn-border-clr] text-amber-100 font-500 py-0.5 px-2 uppercase text-center w-24';
 
 				&:nth-of-type(1) {
 					--at-apply: 'bg-yellow-950 hoverable:bg-yellow-900';

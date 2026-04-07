@@ -198,7 +198,7 @@ onBeforeUnmount(() => {
 		</section>
 		<button
 			id="share-configuration"
-			class="pretend-ui-button"
+			class="pretend-ui-btn"
 			@click="copyShareLink"
 			@mouseenter="showSharePopover"
 			@focus="showSharePopover"
@@ -251,7 +251,7 @@ onBeforeUnmount(() => {
 				anchor-name: --share-configuration;
 
 				> [popover] {
-					--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-button-border-clr]';
+					--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-btn-border-clr]';
 					position-anchor: --share-configuration;
 					inset-block-start: calc(anchor(end) + 0.25rem);
 					inset-inline-end: calc(anchor(end));

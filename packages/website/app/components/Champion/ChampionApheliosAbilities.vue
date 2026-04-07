@@ -6,6 +6,7 @@ type IAphelios = typeof Aphelios;
 defineProps<{
 	value: DamageSource<'Aphelios'>;
 	isLoading: boolean;
+	idPrefix: string;
 }>();
 
 defineEmits<{
@@ -85,9 +86,12 @@ const abilitySize = abilityImageSize('Aphelios');
 
 <style>
 @layer overrides {
-	#scoreboard > div > ul > [data-scoreboard-item='Aphelios'] > details > [data-abilities] {
-		--at-apply: 'gap-x-0 bg-white/10';
+	#scoreboard > div > ul > [data-scoreboard-item='Aphelios'] {
 		--aphelios-ui-clr: theme('colors.slate.300');
+	}
+
+	#scoreboard > div > ul > [data-scoreboard-item='Aphelios'] > details > [data-abilities] {
+		--at-apply: 'gap-x-0';
 		/* radius of the funny border */
 		--funny-rounded: 20% / 50%;
 		/* radius of the image inside of the funny border, its overflow is not clipped in any way so it needs to be the smallest it can be to still not go outside of the border around it */
@@ -224,18 +228,18 @@ const abilitySize = abilityImageSize('Aphelios');
 			}
 
 			> .pretend-level-radiogroup {
-				--at-apply: 'flex gap-0.5 py-[--ability-level-button-py]';
+				--at-apply: 'flex gap-0.5 py-[--ability-level-btn-py]';
 
 				> span {
 					--at-apply: 'sr-only';
 				}
 
 				> div {
-					--at-apply: 'block b b-[--ui-button-border-clr] size-[--ability-level-button-indicator-size] rounded-full bg-black';
+					--at-apply: 'block b b-[--ui-btn-border-clr] size-[--ability-level-btn-indicator-size] rounded-full bg-black';
 
 					&[data-checked='true'],
 					&:has(~ [data-checked='true']) {
-						--at-apply: 'bg-[--ui-button-border-clr]';
+						--at-apply: 'bg-[--ui-btn-border-clr]';
 					}
 				}
 			}

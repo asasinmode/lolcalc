@@ -431,7 +431,7 @@ defineExpose({
 				--at-apply: 'ms-auto flex gap-2';
 
 				> button {
-					--at-apply: 'grid place-items-center h-7 b b-[--ui-button-border-clr] bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800';
+					--at-apply: 'grid place-items-center h-7 b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800';
 
 					&:first-child {
 						--at-apply: 'px-2 relative';
