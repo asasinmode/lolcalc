@@ -24,7 +24,7 @@
 						"Attacks deal <physicalDamage>@BonusDamageToMinions@ bonus physical damage</physicalDamage> to minions."
 					]
 				],
-				"rules": "<rules>Healing after taking damage is based on your missing Health.<br>Healing is @RangeRegenMult*100@% effective on taking area of effect or periodic damage.</rules>"
+				"extended": "<rules>Healing after taking damage is based on your missing Health.<br>Healing is @RangeRegenMult*100@% effective on taking area of effect or periodic damage.</rules>"
 			},
 			"1055": {
 				"subtitleLeft": "Physical Offense",
@@ -53,7 +53,8 @@
 						"<keyword>Takedowns</keyword> grant <passive>Glory</passive>, up to @MaxGloryStacks@. @GloryLossOnDeath@ <passive>Glory</passive> is lost on death.",
 						"Gain <scaleAP>@APPerGlory@ Ability Power</scaleAP> per <passive>Glory</passive>."
 					]
-				]
+				],
+				"extended": "<rules>Kills grant @GloryOnKill@ <passive>Glory</passive> and Assists grant @GloryOnAssist@.</rules>"
 			},
 			"1083": {
 				"subtitleLeft": "Gold",
@@ -126,7 +127,7 @@
 						"Gain up to <scaleAD>@MissingHealthAD*100@% Attack Damage</scaleAD> based on your percent missing Health <scaleAD>(%i:scaleAD%@f2@)</scaleAD>."
 					]
 				],
-				"rules": "<rules>Maximum <passive>Retribution</passive> bonus while below @RemainingHealthThreshold@ Health</rules>."
+				"extended": "<rules>Maximum <passive>Retribution</passive> bonus while below @RemainingHealthThreshold@ Health</rules>."
 			},
 			"2502": {
 				"subtitleLeft": "Sustained Healing",
@@ -150,7 +151,7 @@
 						"For each enemy champion, epic and large monster affected by your <passive>Baleful Blaze</passive>, gain <scaleAP>@APPerStack*100@% Ability Power</scaleAP>. "
 					]
 				],
-				"rules": "<rules><passive>Baleful Blaze</passive> deals <magicDamage>@MinionBurnCalc@</magicDamage> magic damage per second to minions and <magicDamage>@MonsterBurnCalc@</magicDamage> magic damage per second to monsters.</rules>",
+				"extended": "<rules><passive>Baleful Blaze</passive> deals <magicDamage>@MinionBurnCalc@</magicDamage> magic damage per second to minions and <magicDamage>@MonsterBurnCalc@</magicDamage> magic damage per second to monsters.</rules>",
 				"dynamicValueFooter": "Damage dealt to champions: <attention>@f2@</attention>"
 			},
 			"2504": {
@@ -437,7 +438,8 @@
 						"<keyword>Takedowns</keyword> grant <passive>Glory</passive>, up to @MaxGloryStacks@. @GloryLossOnDeath@ <passive>Glory</passive> is lost on death.",
 						"Gain <scaleAP>@APPerGlory@ Ability Power</scaleAP> per <passive>Glory</passive> and <speed>@MoveSpeedMod*100@% Move Speed</speed> at @GloryThreshold@ or higher <passive>Glory</passive>."
 					]
-				]
+				],
+				"extended": "<rules>Kills grant @GloryOnKill@ <passive>Glory</passive> and Assists grant @GloryOnAssist@.</rules>"
 			},
 			"3042": {
 				"subtitleLeft": "Mana Scaling",
@@ -556,7 +558,7 @@
 						"After taking or dealing damage, deal <magicDamage>@DPS@ magic damage</magicDamage> per second to nearby enemies for @AuraDuration@ seconds. "
 					]
 				],
-				"rules": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
+				"extended": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
 				"dynamicValueFooter": "Immolate Damage to champions: <attention>@f1@</attention>"
 			},
 			"3070": {
@@ -619,7 +621,7 @@
 						"Attacks deal <physicalDamage>@lolcalcChampRange@ physical damage</physicalDamage> to nearby enemies."
 					]
 				],
-				"rules": "<rules><passive>Cleave</passive> will benefit from Life Steal.<br><passive>Cleave</passive> does not trigger on structures.</rules>"
+				"extended": "<rules><passive>Cleave</passive> will benefit from Life Steal.<br><passive>Cleave</passive> does not trigger on structures.</rules>"
 			},
 			"3075": {
 				"subtitleLeft": "Anti-Attacks",
@@ -649,7 +651,7 @@
 						"Attacks deal <physicalDamage>@lolcalcChampRange@ physical damage</physicalDamage> to nearby enemies."
 					]
 				],
-				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
+				"extended": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
 			},
 			"3078": {
 				"subtitleLeft": "Dueling",
@@ -672,6 +674,7 @@
 						"Reduce incoming damage from champion Attacks by @BlockBase@."
 					]
 				],
+				"extended": "<rules>Cannot block more than @WardenDamageMax*100@% of the Attack's damage.</rules>",
 				"dynamicValueFooter": "Champion Damage Blocked: <attention>@f1@</attention>"
 			},
 			"3083": {
@@ -686,7 +689,7 @@
 						"Gain bonus Health equal to @HPAmp*100@% of your Item Health (<healing>@f2@</healing>)."
 					]
 				],
-				"rules": "<rules>Non-champion damage disables <passive>Warmog's Heart</passive> for @OOCTimer@ seconds instead.</rules>",
+				"extended": "<rules>Non-champion damage disables <passive>Warmog's Heart</passive> for @OOCTimer@ seconds instead.</rules>",
 				"dynamicValueFooter": "Current bonus Health: <attention>@f1@</attention>"
 			},
 			"3084": {
@@ -721,7 +724,7 @@
 						"Each bolt deals <physicalDamage>@BoltDamage@ physical damage</physicalDamage> and applies {{ Item_Keyword_OnHit }} effects."
 					]
 				],
-				"rules": "<rules><passive>Wind's Fury</passive> can <attention>Critically Strike</attention>.</rules>"
+				"extended": "<rules><passive>Wind's Fury</passive> can <attention>Critically Strike</attention>.</rules>"
 			},
 			"3087": {
 				"subtitleLeft": "Waveclear",
@@ -813,7 +816,7 @@
 						"Restore <healing>@HealMin@ - @HealMax@ (ally %i:scaleLevel%) Health</healing> to allied units and deal <trueDamage>@DamageToChampions*100@% max Health true damage</trueDamage> to enemy champions after 2.5 seconds."
 					]
 				],
-				"rules": "<rules>Can be activated while dead. <br>Subsequent <active>Intervention</active> effects on targets are reduced by @DiminishedEffect*100@%.</rules>",
+				"extended": "<rules>Can be activated while dead. <br>Subsequent <active>Intervention</active> effects on targets are reduced by @DiminishedEffect*100@%.</rules>",
 				"dynamicValueFooter": "Healing Done: <attention>@f1@</attention>"
 			},
 			"3109": {
@@ -879,7 +882,7 @@
 						""
 					]
 				],
-				"rules": "<rules>Radius increases based on the damage done.<br>Basic Attacks cannot trigger <passive>Hatefog</passive>.</rules>",
+				"extended": "<rules>Radius increases based on the damage done.<br>Basic Attacks cannot trigger <passive>Hatefog</passive>.</rules>",
 				"dynamicValueFooter": "Damage to Champions: <attention>@f4@</attention>"
 			},
 			"3119": {
@@ -953,7 +956,7 @@
 						"When a champion that you damaged within @TakedownWindow@ seconds dies, a nova spreads from their corpse that <healing>heals for @TotalHealAmount@</healing>."
 					]
 				],
-				"rules": "<rules><passive>Life From Death</passive> cannot trigger while you are dead.</rules>",
+				"extended": "<rules><passive>Life From Death</passive> cannot trigger while you are dead.</rules>",
 				"dynamicValueFooter": "Self healing done: <attention>@f5@</attention><br>Ally healing done: <attention>@f6@</attention>"
 			},
 			"3139": {
@@ -1038,7 +1041,7 @@
 						"Dash in target direction, unleashing missiles that deal <magicDamage>@FireboltDamage@ magic damage</magicDamage>."
 					]
 				],
-				"rules": "<rules><active>Supersonic's</active> dash cannot pass through terrain.</rules>",
+				"extended": "<rules><active>Supersonic's</active> dash cannot pass through terrain.</rules>",
 				"dynamicValueFooter": "Damage dealt to champions: <attention>@f5@</attention>"
 			},
 			"3153": {
@@ -1107,7 +1110,7 @@
 						"Dealing damage with Abilities increases your Champion's Ability and Passive damage by @TooltipValue@% for @StackDuration@ seconds. (stacks @StackCount@ times)."
 					]
 				],
-				"rules": "<rules>Focused Will bonus damage dealt to champions: @f1@<br>Focused Will stacking has a @CastIDLockout@ second lock out per spell cast instance.</rules>"
+				"extended": "<rules>Focused Will bonus damage dealt to champions: @f1@<br>Focused Will stacking has a @CastIDLockout@ second lock out per spell cast instance.</rules>"
 			},
 			"3165": {
 				"subtitleLeft": "Anti-Healing",
@@ -1187,7 +1190,7 @@
 						"When you are near enemy Stealth Wards and traps, reveal them for @Effect2Amount@ seconds. While revealing wards, your attacks deal @TotalWardDamage@ damage to them."
 					]
 				],
-				"rules": "<rules>Revealed Stealth Wards are disabled while revealed</rules>",
+				"extended": "<rules>Revealed Stealth Wards are disabled while revealed</rules>",
 				"dynamicValueFooter": "Wards Killed: <attention>@f1@</attention>"
 			},
 			"3181": {
@@ -1215,7 +1218,7 @@
 						"Grant nearby allies a <shield>@ShieldMinTOOLTIP@ - @ShieldMaxTOOLTIP@ (ally %i:scaleLevel%) Shield</shield> that decays over @ShieldDuration@ seconds. "
 					]
 				],
-				"rules": "<rules>Subsequent <active>Devotion</active> shields within @DiminishedTimer@ seconds have @DiminishedEffectMulitplier*100@% effect.</rules>",
+				"extended": "<rules>Subsequent <active>Devotion</active> shields within @DiminishedTimer@ seconds have @DiminishedEffectMulitplier*100@% effect.</rules>",
 				"dynamicValueFooter": "Damage blocked: <attention>@f3@</attention>"
 			},
 			"3222": {
@@ -1288,7 +1291,7 @@
 						"Attacks deal <physicalDamage>@OnHitDamageCalc@ physical damage</physicalDamage> on hit and <physicalDamage>@ConeDamageCalc@ physical damage</physicalDamage> to enemies behind the target."
 					]
 				],
-				"rules": "<rules><passive>Cleave's</passive> shockwave does not trigger on structures.</rules>"
+				"extended": "<rules><passive>Cleave's</passive> shockwave does not trigger on structures.</rules>"
 			},
 			"3802": {
 				"subtitleRight": "Unique: Enlighten",
@@ -1307,7 +1310,8 @@
 						"Restores <scaleMana>@EternityManaRestore*100@% of the damage taken</scaleMana> from champions as <scaleMana>Mana</scaleMana>. ",
 						"Casting an Ability <healing>heals for @EternityHealthRestore*100@% of Mana</healing> spent."
 					]
-				]
+				],
+				"extended": "<rules>Mana from <passive>Eternity</passive> calculates from premitigation damage.<br>Heal from <passive>Eternity</passive> is capped at <healing>@EternityMaxHealPerCast@ Health</healing> per cast, or per second for toggle spells.</rules>"
 			},
 			"3814": {
 				"subtitleLeft": "Spellshield",
@@ -1332,6 +1336,7 @@
 						"While near an ally champion, damage enemy champions or kill minions to gain <gold>gold</gold>."
 					]
 				],
+				"extended": "<li>Damaging Abilities and Attacks against champions or structures grant <gold>@lolcalcChampRange@ gold</gold>;<li>Killing a minion grants you <gold>@ExecuteMinionGold@ gold</gold> and the nearest allied champion the kill gold.<br><br><rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"dynamicValueFooter": "Quest gold: <attention>@f4@</attention>/@QuestGoldRequirement@"
 			},
 			"3869": {
@@ -1343,7 +1348,7 @@
 						"Reduce incoming champion damage by %i:meleeActive% @MeleeShieldDRPercentage*100@% / %i:rangedActive% @RangedShieldDRPercentage*100@% for @ShieldLingerAfterInitiallyPopped@ seconds after taking damage from a champion. When the effect ends, slow nearby enemies by @SlowAmount*100@% for @SlowDuration@ seconds."
 					]
 				],
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}<br>Item cooldown is restarted when damage is taken from champions.</rules>",
+				"extended": "<rules>{{ Item_Support_Minion_Warning }}<br>Item cooldown is restarted when damage is taken from champions.</rules>",
 				"dynamicValueFooter": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Damage Blocked: <attention>@f3@</attention>"
 			},
 			"3870": {
@@ -1355,7 +1360,7 @@
 						"Healing or Shielding another ally blows Dream Bubbles to them for 3 seconds. Their next Attack deals <magicDamage>@BonusDamageCalc@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and the next damage they take is reduced by @DamageBlockCalc@."
 					]
 				],
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
+				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"dynamicValueFooter": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Damage blocked: <attention>@f3@</attention><br>Damage dealt: <attention>@f2@</attention>"
 			},
 			"3871": {
@@ -1367,7 +1372,7 @@
 						"Dealing Ability damage to a champion causes an explosion that deals<magicDamage> @TooltipDamage@ + @PercentHPDamage*100@% max Health magic damage</magicDamage>."
 					]
 				],
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}<br>Damage is capped at @MonsterDamageCap@ against monsters.</rules>",
+				"extended": "<rules>{{ Item_Support_Minion_Warning }}<br>Damage is capped at @MonsterDamageCap@ against monsters.</rules>",
 				"dynamicValueFooter": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Total Damage to champions: <attention>@f4@</attention>"
 			},
 			"3876": {
@@ -1379,7 +1384,7 @@
 						"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion near allies restores <healing>@BonusHealthBuff@ Health</healing> and grants <speed>@MoveSpeedBuff*100@% decaying Move Speed</speed> for @BuffDuration@ seconds to you and a nearby ally. "
 					]
 				],
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
+				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"dynamicValueFooter": "Sleigh rides: <attention>@f3@</attention><br>Current Stealth Wards placed: <attention>@f5@/@f6@</attention>"
 			},
 			"3877": {
@@ -1391,7 +1396,7 @@
 						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. If the target is a champion, they take %i:meleeActive% @MeleeDamageAmp*100@ % / %i:rangedActive% @RangedDamageAmp*100@% increased damage for @DebuffDuration@ seconds."
 					]
 				],
-				"rules": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
+				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
 				"dynamicValueFooter": "Current Stealth Wards placed: <attention>@f5@/@f6@</attention><br>Spellblade Damage to champions: <attention>@f4@</attention><br>Bonus Damage from Damage Amp: <attention>@f3@</attention>"
 			},
 			"3916": {
@@ -1437,7 +1442,8 @@
 						"<passive>Steadfast</passive>",
 						"Gain <scaleMR>@BonusMagicResist@ Magic Resist</scaleMR> and <speed>@MoveSpeed*100@% bonus Move Speed</speed> after taking magic damage from Champions @MaxStacks@ times."
 					]
-				]
+				],
+				"extended": "<rules><status>Immobilizing</status> effects count as @ImmobilizeStacks@ instances of damage.<br><passive>Steadfast</passive> resets after @BuffDuration@ seconds.</rules>"
 			},
 			"4628": {
 				"subtitleLeft": "Magic Artillery",
@@ -1451,7 +1457,7 @@
 						"When <passive>Hypershot</passive> is triggered, <keywordStealth>Reveal</keywordStealth> all other enemy champions within @VisionRadius@ range of them for @SecondaryBuffDuration@ seconds."
 					]
 				],
-				"rules": "<rules>Damage from Pets and traps do not trigger <passive>Hypershot</passive>. <br>Only the initial placement of zone Abilities trigger <passive>Hypershot</passive>. <br>Distance is calculated from Ability cast position.</rules>"
+				"extended": "<rules>Damage from Pets and traps do not trigger <passive>Hypershot</passive>. <br>Only the initial placement of zone Abilities trigger <passive>Hypershot</passive>. <br>Distance is calculated from Ability cast position.</rules>"
 			},
 			"4629": {
 				"subtitleLeft": "Combat Mobility",
@@ -1506,7 +1512,7 @@
 						"<magicDamage>Magic</magicDamage> and <trueDamage>true damage</trueDamage> <attention>Critically Strikes</attention> enemies below @HealthThreshold*100@% Health, dealing @SpellItemDamageAmp*100@% increased damage. "
 					]
 				],
-				"rules": "<rules>Critical damage modifiers only affect <passive>Cinderbloom</passive>'s bonus damage.</rules>"
+				"extended": "<rules>Critical damage modifiers only affect <passive>Cinderbloom</passive>'s bonus damage.</rules>"
 			},
 			"4646": {
 				"subtitleLeft": "Burst Damage",
@@ -1563,7 +1569,7 @@
 						"Your first Attack against a champion <attention>Critically Strikes</attention> for @CritModifier*100@% of your normal Critical Strike damage and <healing>restores @lolcalcChampRange@ plus @MissingHealthHeal*100@%</healing> of missing Health."
 					]
 				],
-				"rules": "<rules>Excess healing is granted as temporary bonus Health.</rules>",
+				"extended": "<rules>Excess healing is granted as temporary bonus Health.</rules>",
 				"dynamicValueFooter": "Healing Done: <attention>@f2@</attention>"
 			},
 			"6616": {
@@ -1583,6 +1589,7 @@
 						"Healing or shielding an ally chains the effect to another ally (excluding yourself), <healing>healing @ChainHeal*100@%</healing> or <shield>shielding @ChainShield*100@%</shield> of the original amount."
 					]
 				],
+				"extended": "<rules>If there are no other allies nearby, heal <healing>@SingleHeal*100@%</healing> or shield <shield>@SingleShield*100@%</shield> of the original amount to the same target.</rules>",
 				"dynamicValueFooter": "Healing done: <attention>@f1@</attention><br>Damage blocked: <attention>@f2@</attention>"
 			},
 			"6620": {
@@ -1620,7 +1627,7 @@
 						"Attacks deal <physicalDamage>@lolcalcChampRange@ physical damage</physicalDamage> to nearby enemies."
 					]
 				],
-				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.<br>You can move while casting <passive>Breaking Shockwave</passive>.</rules>"
+				"extended": "<rules><passive>Cleave</passive> does not trigger on structures.<br>You can move while casting <passive>Breaking Shockwave</passive>.</rules>"
 			},
 			"6653": {
 				"subtitleLeft": "Anti-Tank",
@@ -1661,6 +1668,7 @@
 						"Casting an ability <healing>heals for @EternityHealthRestore*100@%</healing> of Mana spent."
 					]
 				],
+				"extended": "<rules>Mana from <passive>Eternity</passive> calculates from premitigation damage.<br>Heal from <passive>Eternity</passive> is capped at <healing>@EternityMaxHealPerCast@ Health</healing> per cast, or per second for toggle spells.</rules>",
 				"dynamicValueFooter": "Healing Done: <attention>@f4@</attention><br>Mana Restored: <attention>@f5@</attention>"
 			},
 			"6660": {
@@ -1671,6 +1679,7 @@
 						"After taking or dealing damage, deal <magicDamage>@DPS@ magic damage</magicDamage> per second to nearby enemies for @AuraDuration@ seconds."
 					]
 				],
+				"extended": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
 				"dynamicValueFooter": "Immolate Damage to Champions: <attention>@f1@</attention>"
 			},
 			"6662": {
@@ -1698,7 +1707,7 @@
 						"Killing an enemy deals <magicDamage>@ProcDamageTOOLTIPONLY@ magic damage</magicDamage> around them."
 					]
 				],
-				"rules": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
+				"extended": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
 				"dynamicValueFooter": "Immolate Damage to Champions: <attention>@f1@</attention><br>Desolate Damage to Champions: <attention>@f2@</attention>"
 			},
 			"6665": {
@@ -1792,7 +1801,7 @@
 						"If they were not already affected by <passive>Shield Reaver</passive>, reduce Shields on them by @ShieldWoundMeleeRangedSplit@%."
 					]
 				],
-				"rules": "<rules>Magic shields are not reduced.</rules>",
+				"extended": "<rules>Magic shields are not reduced.</rules>",
 				"dynamicValueFooter": "Shielding Reduced: <attention>@f1@</attention>"
 			},
 			"6696": {
@@ -1822,7 +1831,7 @@
 						"Attacks deal <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to nearby enemies."
 					]
 				],
-				"rules": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
+				"extended": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
 			},
 			"6699": {
 				"subtitleLeft": "Burst Slow",
@@ -1859,7 +1868,7 @@
 						"Dealing <magicDamage>magic damage</magicDamage> with abilities or passives to champions reduces their <scaleMR>Magic Resist by @MRPerStack*100@%</scaleMR> for @Duration@ seconds, up to @MaxMRReduction*100@%."
 					]
 				],
-				"rules": "<rules>The same ability cast can only apply stacks to each champion every 0.3 seconds.</rules>"
+				"extended": "<rules>The same ability cast can only apply stacks to each champion every 0.3 seconds.</rules>"
 			},
 			"8020": {
 				"subtitleLeft": "Debuff Enemies",
@@ -1868,7 +1877,8 @@
 						"<passive>Unmake</passive>",
 						"Nearby enemy champions take @DamageAmp*100@% more <magicDamage>magic damage</magicDamage>."
 					]
-				]
+				],
+				"extended": "<rules>A Champion can only be affected by one <passive>Unmake</passive> effect at a time.</rules>"
 			}
 		},
 		"runes": {

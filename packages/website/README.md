@@ -51,7 +51,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] dragons/souls
     - [x] choose role quest
     - [ ] extras ui champions
-      - [ ] aphelios ability levels
+      - [x] aphelios ability levels
       - [x] veigar
       - [ ] volibear
       - [ ] zaahen
@@ -64,6 +64,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] extras ui items
     - [?] shapeshifting champions choose shape, switch abilities since it can affect stats
     - [?] apply effects like black cleaver, abyssal mask
+  - [?] detect invalid ability levels
   - [x] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?

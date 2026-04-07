@@ -464,13 +464,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 			}
 		}
 
-		/*
-		 * `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
-		 * `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
-		 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
-		 * `keyInventoryOnlyText` looks like `item_3170_inventoryonlytext`
-		 */
-		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient.mShopTooltip, itemMoreData.mItemDataClient.mDynamicTooltip, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyTooltipExtendedRules, itemMoreData.mItemDataClient.mTooltipData?.mLocKeys?.keyInventoryOnlyText);
+		updateItemShopItemTooltipText(item, itemMoreData.mItemDataClient);
 
 		const SPECIAL_CATEGORY_ITEMS: Record<string, IItemCategory[]> = {
 			3869: ['support'],	// celestial opposition
@@ -967,7 +961,22 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 /**
  * also replaces `{{ Item_Melee_Ranged_Split_Dynamic }}` with `@lolcalcChampRange@` that's TODO supposed to be handled manually, figure out if makese sense
  */
-function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynamicTooltip: string, keyTooltipExtendedRules?: string, keyInventoryOnlyText?: string) {
+function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
+	/* for more info about where these are used/what they turn into check `app/composables/useText.ts` */
+	/**
+		* `mShopTooltip` looks like `generatedtip_item_3176_tooltipshop`
+		* `mDynamicTooltip` looks like `generatedtip_item_3161_tooltipinventory`
+		*/
+	const { mShopTooltip, mDynamicTooltip, mTooltipData } = mItemDataClient;
+	/**
+	 * `keyTooltipExtendedRules` looks like `item_1054_tooltipextendedrules`
+	 * `keyInventoryOnlyText` looks like `item_3170_inventoryonlytext`
+	 * `keyKeywordDefinitions` looks like `item_6699_keyworddefinitions`
+	 * `keyTooltip` looks like `item_6617_tooltip`
+	 * `keyTooltipExtended` looks like `item_6617_tooltipextended`
+	 */
+	const { keyTooltipExtendedRules, keyInventoryOnlyText, keyKeywordDefinitions, keyTooltip, keyTooltipExtended } = mTooltipData?.mLocKeys || {};
+
 	const textShop = getStringtableValue(mShopTooltip, 'item tooltipShop');
 	const textInventory = getStringtableValue(mDynamicTooltip, 'item tooltipInventory');
 	if (!textShop) {
@@ -1003,14 +1012,26 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 	const combinedDescriptions = tooltipShop?.flatMap(tooltip => tooltip).concat(tooltipInventory?.flatMap(tooltip => tooltip) || []).join(' ');
 	combinedDescriptions && debugStringVariables(combinedDescriptions, { ...variableDebug, key: `${item.id} ${item.name} text` });
 
-	let rules = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true)?.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@');
-	while (rules?.startsWith('<br>')) {
-		rules = rules.slice(4).trim();
+	let extended = keyTooltipExtendedRules && getStringtableValue(keyTooltipExtendedRules, 'item tooltip extendedRules', true);
+	if (keyTooltip && keyTooltipExtended) {
+		const tooltipExtended = getStringtableValue(keyTooltipExtended, 'item tooltip tooltipExtended', true);
+		const bracketIndex = tooltipExtended?.indexOf('}');
+		if (tooltipExtended && ~bracketIndex! && tooltipExtended.slice(2, bracketIndex).toLowerCase() === keyTooltip?.toLowerCase()) {
+			if (extended) {
+				/* at the moment none of the items seem to have both, but if any do then maybe combine `extendedRules` and `tooltipExtended` with `<br>`? */
+				console.warn(`[updateItemShopItemTooltipText] ${item.name} has both 'keyTooltipExtendedRules' & 'keyTooltipExtended'`);
+			}
+			extended = tooltipExtended.slice(bracketIndex! + 2);
+		}
 	}
-	while (rules?.endsWith('<br>')) {
-		rules = rules.slice(0, -4).trim();
+	extended = extended?.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@');
+	while (extended?.startsWith('<br>')) {
+		extended = extended.slice(4).trim();
 	}
-	rules && debugStringVariables(rules, { ...variableDebug, key: `${item.id} ${item.name} rules` });
+	while (extended?.endsWith('<br>')) {
+		extended = extended.slice(0, -4).trim();
+	}
+	extended && debugStringVariables(extended, { ...variableDebug, key: `${item.id} ${item.name} extended` });
 
 	let dynamicValueFooter = keyInventoryOnlyText && getStringtableValue(keyInventoryOnlyText, 'item keyInventoryOnlyText');
 	while (dynamicValueFooter?.startsWith('<br>')) {
@@ -1021,13 +1042,13 @@ function updateItemShopItemTooltipText(item: IItem, mShopTooltip: string, mDynam
 	}
 	dynamicValueFooter && debugStringVariables(dynamicValueFooter, { ...variableDebug, key: `${item.id} ${item.name} dynamicValueFooter` });
 
-	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || rules?.length) {
+	if (subtitleLeft.length || subtitleRight.length || tooltipShop?.length || tooltipInventory?.length || extended?.length) {
 		(textData.data.items as any)[item.id] = {
 			subtitleLeft: subtitleLeft || undefined,
 			subtitleRight: subtitleRight || undefined,
 			tooltipShop,
 			tooltipInventory,
-			rules: rules || undefined,
+			extended: extended || undefined,
 			dynamicValueFooter: dynamicValueFooter || undefined,
 		};
 	}

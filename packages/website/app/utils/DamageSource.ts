@@ -842,9 +842,9 @@ export interface IComputedItemDescription {
 	/** text shown below the stats when hovering in inventory */
 	textInventory?: string[][];
 	/** the extra gray text shown when holding shift */
-	rules?: string;
-	/** text in the footer, same spot as `Press [Shift] to...`, usually showing a variable value like `Giant Slayer Bonus Damage: \@f1\@` */
-	dynamicValueFooter?: string;
+	extended?: string;
+	/** text in the footer, same spot as `Press [Shift] to...`, usually showing a variable value like `Giant Slayer Bonus Damage: \@f1\@` or keyword definition */
+	footerLeft?: string;
 	variables: ReturnType<typeof replaceGameDescriptionVariables>['variables'];
 	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 }
@@ -866,7 +866,7 @@ export function computedItemDescription(
 	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-	const { subtitleLeft = '', subtitleRight = '', tooltipShop, tooltipInventory, rules, dynamicValueFooter } = text.items[item.id] || {};
+	const { subtitleLeft = '', subtitleRight = '', tooltipShop, tooltipInventory, extended, footerLeft } = text.items[item.id] || {};
 	const stats = Object.entries(item.stats)
 		.filter(([statName]) => (statName as IItemStat) !== 'FlatHPRegenMod')
 		.sort((a, b) => ITEM_STAT_META[b[0] as IItemStat].order - ITEM_STAT_META[a[0] as IItemStat].order)
@@ -882,42 +882,42 @@ export function computedItemDescription(
 	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
 	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
 
-	const { variables: rulesVariables, replaced: replacedRules, unknownVariables: rulesUnknown } = rules
+	const { variables: extendedVariables, replaced: replacedExtended, unknownVariables: extendedUnknown } = extended
 		? replaceGameDescriptionVariables(
-				rules,
+				extended,
 				'item',
 				[item, damageSource?.itemDamageCalculationTarget.value],
 				replaceOptions,
 			)
 		: {};
-	const { variables: dynamicValueFooterVariables, replaced: replacedDynamicValueFooter, unknownVariables: dynamicValueFooterUnknown } = dynamicValueFooter
+	const { variables: leftFooterVariables, replaced: replacedLeftFooter, unknownVariables: leftFooterUnknown } = footerLeft
 		? replaceGameDescriptionVariables(
-				dynamicValueFooter,
+				footerLeft,
 				'item',
 				[item, damageSource?.itemDamageCalculationTarget.value],
 				replaceOptions,
 			)
 		: {};
 
-	for (const unknownVariable of rulesUnknown || []) {
+	for (const unknownVariable of extendedUnknown || []) {
 		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
 			unknownVariables.push(unknownVariable);
 		}
 	}
-	rulesVariables && mergeMaps(variables, rulesVariables);
-	for (const unknownVariable of dynamicValueFooterUnknown || []) {
+	extendedVariables && mergeMaps(variables, extendedVariables);
+	for (const unknownVariable of leftFooterUnknown || []) {
 		if (!unknownVariables.some(v => v[0] === unknownVariable[0])) {
 			unknownVariables.push(unknownVariable);
 		}
 	}
-	dynamicValueFooterVariables && mergeMaps(variables, dynamicValueFooterVariables);
+	leftFooterVariables && mergeMaps(variables, leftFooterVariables);
 
 	return {
 		item,
 		variables,
 		unknownVariables,
-		rules: replacedRules,
-		dynamicValueFooter: replacedDynamicValueFooter,
+		extended: replacedExtended,
+		footerLeft: replacedLeftFooter,
 		subtitleLeft,
 		subtitleRight,
 		stats,

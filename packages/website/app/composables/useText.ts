@@ -16,10 +16,10 @@ export interface ITextData {
 		 * differs in for example using the computed variables for the champion like AD gained from Overlord's Bloodmail
 		 */
 		tooltipInventory?: string[][];
-		/** the <rules> tag shown below the extras when holding shift */
-		rules?: string;
-		/** text in the footer, same spot as `Press [Shift] to...`, usually showing the value of a dynamic variable like `Giant Slayer Bonus Damage: \@f1\@` */
-		dynamicValueFooter?: string;
+		/** the additional, usually gray, text shown below the stats and any descripiton */
+		extended?: string;
+		/** text in the footer, same spot as `Press [Shift] to...`, usually showing the value of a dynamic variable like `Giant Slayer Bonus Damage: \@f1\@` or a keyword definition */
+		footerLeft?: string;
 	}>;
 	runes: {
 		paths: Record<string, { name: string; tooltip: string }>;

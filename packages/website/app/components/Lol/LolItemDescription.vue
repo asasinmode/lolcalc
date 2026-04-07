@@ -23,9 +23,9 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
 const otherView = computed(() => view.value === 'Shop' ? 'inventory' : 'shop');
 
-const hasMoreInfo = computed(() => computedDescription.value?.rules && !globalKeyModifiers.value.shift);
+const hasMoreInfo = computed(() => computedDescription.value?.extended && !globalKeyModifiers.value.shift);
 const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.textInventory);
-const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.dynamicValueFooter);
+const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);
 
 const header = useTemplateRef<HTMLButtonElement>('header');
 
@@ -84,16 +84,16 @@ defineExpose({ header });
 			<div v-for="(paragraph, paragraphIndex) in paragraphs" :key="`${i}-${paragraphIndex}`" v-html="paragraph" />
 		</template>
 		<p
-			v-if="computedDescription?.rules"
+			v-if="computedDescription?.extended"
 			v-show="!hoverTooltip || globalKeyModifiers.shift"
-			v-html="computedDescription.rules"
+			v-html="computedDescription.extended"
 		/>
-		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.dynamicValueFooter)">
-			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="computedDescription!.dynamicValueFooter" />
+		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft)">
+			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="computedDescription!.footerLeft" />
 			<p v-show="hasMoreInfo">
 				Hold <kbd>[Shift]</kbd> to show more info
 			</p>
-			<p v-show="hasOtherView || computedDescription?.dynamicValueFooter">
+			<p v-show="hasOtherView || computedDescription?.footerLeft">
 				Press <kbd>[Ctrl]</kbd> to toggle to <b>{{ otherView }}</b> view
 			</p>
 		</footer>
