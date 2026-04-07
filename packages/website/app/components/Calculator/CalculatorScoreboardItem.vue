@@ -181,8 +181,7 @@ function leaveTooltipableItemElement() {
 function removeItem(event: MouseEvent, index: number) {
 	if (props.value.items.value[index]) {
 		event.preventDefault();
-		// eslint-disable-next-line vue/no-mutating-props
-		props.value.items.value.splice(index, 1);
+		props.value.removeItem(index);
 		if (props.value.items.value[index]) {
 			showItemHoverTooltip(event, index);
 		} else {
