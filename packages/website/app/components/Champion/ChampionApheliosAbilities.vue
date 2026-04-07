@@ -67,7 +67,7 @@ const abilitySize = abilityImageSize('Aphelios');
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.e)"
 		>
 	</div>
-	<div data-aphelios-r="" :data-level="value.level.value >= 6 ? 1 : undefined" :inert="!enableUnimplementedUi">
+	<div data-aphelios-r="" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
 		<h5>R</h5>
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.r.variants[value.abilityVariants.value.r]!.image, 'Aphelios') : undefined"

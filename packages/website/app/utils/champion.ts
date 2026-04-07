@@ -62,15 +62,19 @@ export const CHAMPION_SPECIFICS = {
 				f1: [1, 2, 3],
 			},
 		},
-		setupInternalData(self): {
+		setupInternalData(self): IDamageSourceInternalDataBase & {
 			mainHand: IApheliosWeapon;
 			offHand: IApheliosWeapon;
 		} {
 			self.abilityVariants.value.w = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.severum;
 			self.abilityVariants.value.e = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.gravitum;
+
 			return {
 				mainHand: 'calibrum',
 				offHand: 'severum',
+				_watchHandles: markRaw([watch(() => `${self.champion.value?.id}${self.level.value}`, () => {
+					self.abilityLevels.value.r = Math.floor((self.level.value - 1) / 5);
+				}, { immediate: true })]),
 			};
 		},
 	},

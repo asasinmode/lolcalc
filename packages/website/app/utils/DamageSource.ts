@@ -20,6 +20,10 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 
 type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
 
+export interface IDamageSourceInternalDataBase {
+	_watchHandles: WatchHandle[];
+}
+
 export class DamageSource<Id extends IChampionId | undefined = any> {
 	id: string;
 	color: string;
@@ -96,8 +100,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
 	});
 
+	/** keys prefixed with `_` will not be stringified */
 	internalData: Ref<Id extends IInternalDataSetupChampions
-		? ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
+		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
 		: undefined>;
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
@@ -156,7 +161,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}, { immediate: true }),
 
 			watch(this.champion, (c) => {
-				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
+				for (const unwatch of this.internalData.value?._watchHandles || []) {
+					unwatch();
+				}
 
 				if (this.dataFromStringifiedData) {
 					this.dataFromStringifiedData = false;
@@ -175,6 +182,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						));
 					}
 
+					this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
+
 					return;
 				}
 
@@ -184,6 +193,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				const level = c?.id === 'TargetDummy' ? 1 : 0;
 				this.abilityLevels.value = { q: level, w: level, e: level, r: level };
 				this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+
+				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 			}),
 
 			watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
@@ -373,8 +384,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			Object.values(this.abilityVariants.value).join('-'),
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
-			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value) : undefined,
-			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value) : undefined,
+			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
+			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
@@ -631,6 +642,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	}
 
 	computed = {
+		/** the stats shown in the "panel" on extended scoreboard item & results table */
 		stats: computed<Record<IChampionStatName, IComputedDamageSourceChampionStat>>(() => {
 			const { stats } = this.stats.value;
 

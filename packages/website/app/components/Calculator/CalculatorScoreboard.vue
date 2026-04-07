@@ -227,6 +227,9 @@ function remove(index: number, target: DamageSource[]) {
 	for (const unwatch of damageSource!.watchHandles) {
 		unwatch();
 	}
+	for (const unwatch of damageSource!.internalData.value._watchHandles || []) {
+		unwatch();
+	}
 }
 
 function add(target: DamageSource[]) {
