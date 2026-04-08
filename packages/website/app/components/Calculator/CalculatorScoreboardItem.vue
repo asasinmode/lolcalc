@@ -37,6 +37,7 @@ const { version, minorVersion } = usePatchVersion();
 const { selectChampion } = useChampSelect();
 const { selectRunes } = useRuneSelect();
 const { selectItems } = useItemShop();
+const { selectEffects } = useEffectsDialog();
 const text = useText();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
@@ -903,7 +904,7 @@ defineExpose({ el });
 				/>
 			</template>
 		</button>
-		<button data-select-items="" @click="selectItems(value)">
+		<button data-select-items="" class="other-ui-btn" @click="selectItems(value)">
 			items
 			<img
 				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
@@ -1059,7 +1060,7 @@ defineExpose({ el });
 			</section>
 			<section data-effects="" :inert="isLoading">
 				<h4>effects</h4>
-				<button>
+				<button class="other-ui-btn" @click="selectEffects(value)">
 					effects
 					<img v-bind="textureBgImageAttrs(ui.practiceTool.statusEffect, 24)">
 				</button>
@@ -1465,7 +1466,7 @@ defineExpose({ el });
 		}
 
 		> [data-select-items] {
-			--at-apply: 'self-center';
+			--at-apply: 'self-center relative';
 			grid-area: select-items;
 
 			> img {
@@ -2116,8 +2117,7 @@ defineExpose({ el });
 
 		> [data-select-items],
 		> details > [data-effects] > button {
-			--at-apply: 'mx-2 b b-[--ui-btn-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 w-max whitespace-nowrap';
-			background-color: var(--placeholder-champion-bg-clr);
+			--at-apply: 'mx-2 rounded-full h-8 ps-2.5 pe-2 w-max whitespace-nowrap';
 
 			img {
 				--at-apply: 'inline-block align-middle -mt-0.5';

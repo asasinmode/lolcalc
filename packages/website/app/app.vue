@@ -20,6 +20,7 @@ const { version, minorVersion } = usePatchVersion();
 const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
+const { _component: EffectsDialog } = useEffectsDialog();
 const enableUnimplementedUi = useEnableUnimplementedUi();
 
 _setupGlobalKeyModifiers();
@@ -222,6 +223,7 @@ onBeforeUnmount(() => {
 		<ChampSelect />
 		<ItemShop />
 		<RuneSelect />
+		<EffectsDialog />
 	</ClientOnly>
 </template>
 

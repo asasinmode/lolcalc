@@ -248,15 +248,15 @@ defineExpose({
 <template>
 	<VDialog id="dialog-rune-select" ref="vDialog" :data-invalid="configurationInvalid ? '' : undefined">
 		<header class="py-2 pb-2 bg-inherit flex col-span-full col-span-full items-center top-0 sticky z-20">
-			<h1>Runes</h1>
+			<h1>runes</h1>
 			<p aria-live="polite">
 				{{ configurationInvalid ? 'configuration invalid' : '' }}
 			</p>
 			<form method="dialog">
-				<button autofocus value="cancel">
+				<button autofocus value="cancel" class="other-ui-btn">
 					save
 				</button>
-				<button value="cancel">
+				<button value="cancel" class="other-ui-btn">
 					<span>
 						close
 					</span>
@@ -431,7 +431,7 @@ defineExpose({
 				--at-apply: 'ms-auto flex gap-2';
 
 				> button {
-					--at-apply: 'grid place-items-center h-7 b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800';
+					--at-apply: 'grid place-items-center h-7';
 
 					&:first-child {
 						--at-apply: 'px-2 relative';

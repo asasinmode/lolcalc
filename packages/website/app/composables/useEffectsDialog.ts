@@ -1,10 +1,10 @@
-import LolItemShop from '~/components/Lol/LolItemShop.vue';
+import CalculatorEffectsDialog from '~/components/Calculator/CalculatorEffectsDialog.vue';
 
 let resolve: (() => void) | undefined;
 const damageSourceRef = ref<DamageSource>();
-const dialogRef = ref<InstanceType<typeof LolItemShop>>();
+const dialogRef = ref<InstanceType<typeof CalculatorEffectsDialog>>();
 
-async function selectItems(damageSource: DamageSource): Promise<void> {
+async function selectEffects(damageSource: DamageSource): Promise<void> {
 	damageSourceRef.value = damageSource;
 	return new Promise<void>((_resolve) => {
 		dialogRef.value?.open();
@@ -16,7 +16,7 @@ async function selectItems(damageSource: DamageSource): Promise<void> {
 }
 
 const _component = defineComponent(() =>
-	() => h(LolItemShop, {
+	() => h(CalculatorEffectsDialog, {
 		ref: dialogRef,
 		modelValue: damageSourceRef.value,
 		onClose() {
@@ -24,9 +24,9 @@ const _component = defineComponent(() =>
 		},
 	}));
 
-export function useItemShop() {
+export function useEffectsDialog() {
 	return {
 		_component,
-		selectItems,
+		selectEffects,
 	};
 }

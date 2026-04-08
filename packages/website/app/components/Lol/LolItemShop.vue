@@ -419,7 +419,7 @@ defineExpose({
 	>
 		<header style="grid-area: header;" class="grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center">
 			<h1 class="col-span-full">
-				Item shop
+				item shop
 			</h1>
 			<form method="dialog" class="end-0 top-0 absolute" autofocus>
 				<button value="cancel" title="Close">

@@ -53,6 +53,9 @@ defineExpose({
 		@close="closeCleanup"
 	>
 		<header class="bg-inherit flex col-span-full items-center">
+			<h1 class="sr-only">
+				champ select
+			</h1>
 			<VButtonRadiogroup
 				id="champ-select-role"
 				v-model="selectedRole"
