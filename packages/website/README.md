@@ -164,10 +164,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] try not to use global/composables in calculations related stuff (`onHitIcon`)
 - [ ] build github actions CI/CD
 - [ ] check if can use cdragon cdn instead of raw
-- [ ] service worker for caching cdragon images
 - [ ] future features in github project page thingy?
 - [ ] rewrite css classes to selectors with `@apply` (probably will have to change to tailwind since [unocss is iffy](https://github.com/eslint/csstree/pull/104))
-- [ ] consider used images "locally"
+- [ ] consider used images "locally" / service worker for caching stuff
+- [ ] kind of a code documentation where yap about
+  - [ ] how to use game texture `textureBgImageAttrs`
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 

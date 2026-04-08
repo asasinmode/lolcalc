@@ -55,4 +55,11 @@ interface IUiData {
 		};
 	};
 	playerStats: Record<string, ITexture>;
+	dragons: Record<IDragonName, {
+		stack: ITexture;
+		soulActive: ITexture;
+	}>;
+	practiceTool: {
+		statusEffect: ITexture;
+	};
 }

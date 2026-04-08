@@ -14,6 +14,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	dragonStacks: UnwrapRef<IDamageSource['dragonStacks']>;
 	dragonSoul: UnwrapRef<IDamageSource['dragonSoul']>;
 	roleQuest: UnwrapRef<IDamageSource['roleQuest']>;
+	effects: UnwrapRef<IDamageSource<Id>['effects']>;
 	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
 	internalItemData: UnwrapRef<IDamageSource<Id>['internalItemData']>;
 }
@@ -22,6 +23,11 @@ export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
 
 export interface IDamageSourceInternalDataBase {
 	_watchHandles: WatchHandle[];
+}
+
+export interface IDamageSourceEffect {
+	type: 'item' | 'champion';
+	championOrItemId: string;
 }
 
 export class DamageSource<Id extends IChampionId | undefined = any> {
@@ -100,6 +106,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
 	});
 
+	effects: Ref<IDamageSourceEffect[]>;
+
 	/** keys prefixed with `_` will not be stringified */
 	internalData: Ref<Id extends IInternalDataSetupChampions
 		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
@@ -148,6 +156,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
+		this.effects = ref([]);
 		this.dataFromStringifiedData = false;
 
 		this.watchHandles = [
@@ -285,6 +294,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			/* not cloned because the `setupInternalData` should handle safely using previous values to create new ones */
 			internalData: this.internalData.value,
 			internalItemData: structuredClone(toRaw(this.internalItemData.value)),
+			effects: structuredClone(toRaw(this.effects.value)),
 			...overrides,
 		});
 	}
@@ -296,11 +306,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		for (let i = 0; i < this.items.value.length; i++) {
 			this.items.value[i] = undefined;
 		}
-		this.itemsUndoSnapshots.value = [];
+		this.itemsUndoSnapshots.value.length = 0;
 		this.runes.value.paths.primary = 'Precision';
-		this.runes.value.paths.primarySlots = [];
+		this.runes.value.paths.primarySlots.length = 0;
 		this.runes.value.paths.secondary = undefined;
-		this.runes.value.paths.secondarySlots = [];
+		this.runes.value.paths.secondarySlots.length = 0;
 		this.runes.value.shards.offensive = 'adaptive';
 		this.runes.value.shards.flex = 'adaptive';
 		this.runes.value.shards.defensive = 'health';
@@ -320,6 +330,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 		this.dragonSoul.value = undefined;
 		this.roleQuest.value = undefined;
+		this.effects.value.length = 0;
 	}
 
 	getWatchable(): MaybeRefOrGetter[] {

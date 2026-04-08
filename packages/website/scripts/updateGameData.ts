@@ -3,6 +3,7 @@ import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composabl
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
 import type { IPossibleDynamicValues, ITexture, IWithPossibleDynamicValues } from '../app/utils/types';
+import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
@@ -760,10 +761,11 @@ const autoAtlasImages: Record<string, {
 if (!uiData || uiData?.version !== latestVersion) {
 	console.log('ui data not present or outdated, fetching...');
 
-	const [itemshopUiBase, playerstatsUiBase, dragonUiPrototype] = await Promise.all([
+	const [itemshopUiBase, playerstatsUiBase, dragonUiPrototype, practiceToolUiBase] = await Promise.all([
 		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/itemshop/uibase.cdtb.bin.json'),
 		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/lol/playerstats/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/lol/playerstats/uibase.cdtb.bin.json'),
 		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json`, 'game/clientstates/gameplay/ux/scoreboard/scores_dragon_srx.cdtb.bin.json'),
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/lol/practicetool/uibase.cdtb.bin.json`, 'game/clientstates/gameplay/ux/lol/practicetool/uibase.cdtb.bin.json'),
 		/* auto atlas data for playerstat icons, prefetch since it can be called multiple times */
 		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/clientstates/gameplay/ux/lol/playerstats.cdtb.json`, 'game/clientstates/gameplay/ux/lol/playerstats.cdtb.json'),
 	]);
@@ -894,10 +896,12 @@ if (!uiData || uiData?.version !== latestVersion) {
 			dragons: Object.fromEntries(await Promise.all(DRAGONS.map(async ([name]) => {
 				return [name, {
 					stack: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_Source_${name}Icon`], `dragon stack ${name}`),
-					soulInactive: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_CSrceKnwn_${name}Icon`], `dragon soul inactive ${name}`),
 					soulActive: await getTexture(dragonUiPrototype[`ClientStates/Gameplay/UX/Scoreboard/Scores_Dragon_SRX/SB_MD_CSrceAct_${name}Icon`], `dragon soul active ${name}`),
 				}];
 			}))),
+			practiceTool: {
+				statusEffect: await getTexture(practiceToolUiBase['ClientStates/Gameplay/UX/LoL/PracticeTool/UIBase/CheatMenu/Icons/CheatStatusEffect_Icon'], 'practice tool status effect', 'game/clientstates/gameplay/ux/lol/practicetool.cdtb.json'),
+			},
 		} as unknown as NonNullable<(typeof uiData)>['data'],
 	};
 
@@ -1599,7 +1603,7 @@ async function fetchCached(url: string, filename: string, responseMethod: 'text'
 			throw err;
 		});
 		await fs.mkdir(path.dirname(cacheFilePath), { recursive: true });
-		await fs.writeFile(cacheFilePath, responseMethod === 'json' ? stringifyObject(data) : data);
+		await fs.writeFile(cacheFilePath, responseMethod === 'json' ? stringifyObject(data) : responseMethod === 'arrayBuffer' ? buffer.Buffer.from(data) : data);
 	}
 	cacheHits[filename] = data;
 	return data;

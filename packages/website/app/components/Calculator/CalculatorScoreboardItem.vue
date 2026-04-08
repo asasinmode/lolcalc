@@ -911,7 +911,6 @@ defineExpose({ el });
 				height="28"
 				aria-hidden="true"
 				loading="lazy"
-				class="w-4"
 			>
 		</button>
 		<ul
@@ -1062,7 +1061,13 @@ defineExpose({ el });
 				<h4>effects</h4>
 				<button>
 					effects
+					<img v-bind="textureBgImageAttrs(ui.practiceTool.statusEffect, 24)">
 				</button>
+				<ul>
+					<li v-for="effect in value.effects.value" :key="`${effect.type}-${effect.championOrItemId}`">
+						{{ effect.type }} - {{ effect.championOrItemId }}
+					</li>
+				</ul>
 			</section>
 			<section data-abilities="" :inert="isLoading">
 				<h4>abilties</h4>
@@ -1459,12 +1464,11 @@ defineExpose({ el });
 		}
 
 		> [data-select-items] {
-			--at-apply: 'mx-2 b b-[--ui-btn-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 self-center w-max whitespace-nowrap';
-			background-color: var(--placeholder-champion-bg-clr);
+			--at-apply: 'self-center';
 			grid-area: select-items;
 
-			img {
-				--at-apply: 'inline-block align-middle -mt-0.5';
+			> img {
+				--at-apply: 'w-4';
 			}
 		}
 
@@ -1788,8 +1792,20 @@ defineExpose({ el });
 			}
 
 			> [data-effects] {
-				--at-apply: 'bg-pink-400';
+				--at-apply: 'size-full relative flex flex-col items-center';
 				grid-area: effects;
+
+				> button {
+					--at-apply: 'mt-auto';
+
+					> img {
+						--at-apply: '-mx-1';
+					}
+				}
+
+				> ul {
+					--at-apply: 'mt-auto w-full';
+				}
 			}
 
 			> [data-abilities] {
@@ -2054,6 +2070,16 @@ defineExpose({ el });
 						-webkit-text-stroke: 0.15em black;
 					}
 				}
+			}
+		}
+
+		> [data-select-items],
+		> details > [data-effects] > button {
+			--at-apply: 'mx-2 b b-[--ui-btn-border-clr] rounded-full hoverable:bg-neutral-800 relative h-8 ps-2.5 pe-2 w-max whitespace-nowrap';
+			background-color: var(--placeholder-champion-bg-clr);
+
+			img {
+				--at-apply: 'inline-block align-middle -mt-0.5';
 			}
 		}
 	}
