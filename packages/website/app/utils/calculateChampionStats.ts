@@ -150,7 +150,8 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 
 	// TODO figure out if its ok to do it
 	if (champion.partype !== 'Mana') {
-		totalStats.mana = champion.stats.mp ?? 0;
+		// TODO should be done by CHAMPION_SPECIFICS like `.postTotal()`
+		totalStats.mana = champion.id === 'Viego' ? 0 : champion.stats.mp ?? 0;
 	}
 
 	return {

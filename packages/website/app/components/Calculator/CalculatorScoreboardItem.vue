@@ -1915,10 +1915,46 @@ defineExpose({ el });
 				}
 
 				[data-current-ability-resource] {
-					--fill-bg: theme('colors.blue.500');
+					--fill-bg: #ff00ff;
+
+					&[data-partype='mana'],
+					&[data-partype='ferocity'] {
+						--fill-bg: theme('colors.blue.500');
+					}
 
 					&[data-partype='energy'] {
 						--fill-bg: theme('colors.yellow.400');
+
+						> span {
+							mix-blend-mode: difference;
+						}
+					}
+
+					&[data-partype='fury'],
+					&[data-partype='rage'],
+					&[data-partype='courage'],
+					&[data-partype='heat'],
+					&[data-partype='crimson rush'] {
+						--mix1: color-mix(
+							in oklch,
+							theme('colors.white') calc((1 - var(--fill-percentage)) * 100%),
+							theme('colors.yellow.400')
+						);
+						--mix2: color-mix(
+							in oklch,
+							theme('colors.yellow.400') calc((1 - var(--fill-percentage)) * 100%),
+							theme('colors.red.600')
+						);
+						--fill-bg: color-mix(in oklch, var(--mix1) calc((1 - var(--fill-percentage)) * 100%), var(--mix2));
+					}
+
+					&[data-partype='shield'],
+					&[data-partype='flow'] {
+						--fill-bg: theme('colors.white');
+
+						> * {
+							mix-blend-mode: difference;
+						}
 					}
 				}
 			}
@@ -2148,6 +2184,22 @@ defineExpose({ el });
 }
 
 @layer overrides {
+	#scoreboard > div > ul > [data-scoreboard-item='Yone'] {
+		> details {
+			> [data-health-ability-resource] {
+				> [data-current-ability-resource] {
+					&[data-partype='flow'] {
+						--fill-bg: theme('colors.orange.500');
+
+						> * {
+							mix-blend-mode: normal;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	#scoreboard[data-mirrored] > div > ul:nth-of-type(1) > [data-scoreboard-item] {
 		grid-template-columns: max-content 1fr repeat(5, max-content);
 		grid-template-areas:
