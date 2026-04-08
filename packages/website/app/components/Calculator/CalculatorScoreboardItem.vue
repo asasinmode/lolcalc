@@ -986,7 +986,7 @@ defineExpose({ el });
 			<h4 data-loading="">
 				loading...
 			</h4>
-			<section data-runes="" :inert="isLoading || undefined">
+			<section data-runes="" :inert="isLoading">
 				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
@@ -1020,7 +1020,7 @@ defineExpose({ el });
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</div>
 			</section>
-			<section data-stats="" :inert="isLoading || undefined">
+			<section data-stats="" :inert="isLoading">
 				<h4>stats</h4>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
@@ -1064,7 +1064,7 @@ defineExpose({ el });
 					effects
 				</button>
 			</section>
-			<section data-abilities="" :inert="isLoading || undefined">
+			<section data-abilities="" :inert="isLoading">
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
@@ -1860,7 +1860,7 @@ defineExpose({ el });
 			}
 
 			> [data-health-ability-resource] {
-				--at-apply: 'pt-1.5 grid grid-rows-subgrid grid-cols-subgrid';
+				--at-apply: 'pt-1.5 pb-2 grid grid-rows-subgrid grid-cols-subgrid';
 				grid-area: resources;
 
 				[data-current-health],
@@ -1903,11 +1903,13 @@ defineExpose({ el });
 			}
 
 			> [data-role-quest] {
-				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))]';
+				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))] mx-[--scoreboard-item-gap-x]';
 				grid-area: role-quest;
 				anchor-name: --scoreboard-item-role-quest;
 
 				> .v-select {
+					--at-apply: 'w-max';
+
 					> select {
 						--at-apply: 'rounded-full size-8';
 					}
@@ -1965,7 +1967,9 @@ defineExpose({ el });
 				anchor-name: --scoreboard-item-dragons;
 
 				&::before {
-					--at-apply: 'absolute top-1/2 -translate-y-1/2 content-empty start-[calc(var(--stack-size)/2)] bg-black h-[calc(var(--stack-size)*0.2)] end-[calc(var(--soul-size)+2*var(--soul-rotation-size-diff)+var(--gap)+var(--stack-size)/2)]';
+					--end: calc(var(--soul-size) + 2 * var(--soul-rotation-size-diff) + var(--gap) + var(--stack-size) / 2);
+					--start: calc(var(--stack-size) / 2);
+					--at-apply: 'absolute top-1/2 -translate-y-1/2 content-empty start-[--start] bg-black h-[calc(var(--stack-size)*0.2)] end-[--end]';
 				}
 
 				> [data-dragon-stack] {
@@ -2023,18 +2027,17 @@ defineExpose({ el });
 				--at-apply: 'self-center';
 
 				> h4 {
-					--at-apply: 'absolute top-0 start-0 text-xs uppercase font-500 text-neutral-300 leading-3';
+					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3';
 				}
 			}
 
 			> [data-abilities],
-			> [data-health-ability-resource],
-			> [data-role-quest] {
+			> [data-health-ability-resource] {
 				--at-apply: 'ms-[--scoreboard-item-gap-x]';
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full w-full grid grid-cols-3 auto-rows-min max-w-[40vw] gap-2';
+				--at-apply: 'col-span-full w-full grid grid-cols-3 auto-rows-min max-w-[40vw] gap-2 pt-3';
 				anchor-name: --scoreboard-item-extras;
 
 				> article {
@@ -2052,6 +2055,12 @@ defineExpose({ el });
 					}
 				}
 			}
+		}
+	}
+
+	#scoreboard > div > ul > [data-scoreboard-item]:has(+ [data-scoreboard-item]) {
+		> details[open] {
+			--at-apply: 'pb-4';
 		}
 	}
 
@@ -2161,21 +2170,57 @@ defineExpose({ el });
 	#scoreboard[data-mirrored] > div > ul:nth-of-type(2) > [data-scoreboard-item] {
 		> details {
 			&::details-content {
+				--at-apply: 'grid-cols-[auto_1fr_min-content_min-content]';
 				grid-template-areas:
-					'abilities abilities stats'
-					'resources resources stats'
-					'dragons role-quest stats';
+					'abilities abilities stats effects'
+					'resources resources stats effects'
+					'resources resources stats runes'
+					'dragons role-quest stats runes';
 			}
 
-			> [data-runes-stats] {
-				grid-template-areas:
-					'minor-stats .'
-					'major-stats runes';
-
+			> [data-runes] {
 				> dl {
 					&:nth-of-type(1) {
 						--at-apply: 'b-e b-s-0';
 					}
+				}
+			}
+
+			> [data-abilities],
+			> [data-health-ability-resource] {
+				--at-apply: 'ms-0 me-[--scoreboard-item-gap-x]';
+			}
+
+			> [data-role-quest],
+			> [data-dragons] {
+				> h4 {
+					--at-apply: 'start-auto end-0';
+				}
+			}
+
+			> [data-role-quest] {
+				> .v-select {
+					--at-apply: 'ms-auto';
+
+					> select {
+						--at-apply: 'start-auto end-0';
+					}
+
+					> label {
+						--at-apply: 'flex-row-reverse';
+
+						> img:first-of-type {
+							--at-apply: 'start-auto end-0';
+						}
+					}
+				}
+			}
+
+			> [data-dragons] {
+				--at-apply: 'flex-row-reverse';
+
+				&::before {
+					--at-apply: 'start-[--end] end-[--start]';
 				}
 			}
 		}

@@ -1390,7 +1390,8 @@ defineExpose({
 		--section-header-row-py: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
 
-		&[inert] {
+		&[inert],
+		&[inert] > caption {
 			--at-apply: 'blur-3';
 		}
 
