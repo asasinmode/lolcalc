@@ -54,7 +54,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	maxHealth = computed<number>(() => Math.round(this.stats.value?.stats.total.hp || 1));
 	currentAbilityResource: Ref<number>;
 	abilityResourceName = computed(() => this.champion.value ? (this.champion.value?.partype || '<unknown>') : 'mana');
-	maxAbilityResource = computed<number>(() => Math.round(this.champion.value?.partype === 'Mana' ? this.stats.value?.stats.total.mana! : 0));
+	maxAbilityResource = computed<number>(() => this.champion.value?.partype === 'mana' ? Math.round(this.stats.value?.stats.total.mana) : this.champion.value?.stats.mp ?? 0);
 
 	items: Ref<(IItem | undefined)[]>;
 	itemsUndoSnapshots: Ref<(IItem | undefined)[][]>;
@@ -218,7 +218,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (previousTotalAbilityResource && this.currentAbilityResource.value === previousTotalAbilityResource) {
 					this.currentAbilityResource.value = this.stats.value?.stats.total.mana || 0;
 				} else {
-					this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.stats.value?.stats.total.mana || 0);
+					this.currentAbilityResource.value = Math.min(this.currentAbilityResource.value, this.maxAbilityResource.value);
 				}
 			}),
 

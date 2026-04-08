@@ -1157,6 +1157,7 @@ defineExpose({ el });
 				<div
 					ref="resourceBar"
 					data-current-ability-resource=""
+					:data-partype="value.champion.value?.partype?.toLowerCase()"
 					:style="value.maxAbilityResource.value ? `--fill-percentage: ${Math.min(abilityResourceDragValueRef / value.maxAbilityResource.value, 1)}` : undefined"
 					@mousedown="startAbilityResourceBarDrag"
 				>
@@ -1915,6 +1916,10 @@ defineExpose({ el });
 
 				[data-current-ability-resource] {
 					--fill-bg: theme('colors.blue.500');
+
+					&[data-partype='energy'] {
+						--fill-bg: theme('colors.yellow.400');
+					}
 				}
 			}
 

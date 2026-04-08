@@ -30,7 +30,7 @@ const abilitySize = abilityImageSize('Aphelios');
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'passive')"
 		>
 	</div>
-	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-2 absolute -top-2" />
+	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
 	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
 		<h5>main weapon</h5>
 		<img

@@ -148,6 +148,11 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		+ (itemStats[statName as keyof typeof itemStats] || 0)],
 	)) as IChampionStats;
 
+	// TODO figure out if its ok to do it
+	if (champion.partype !== 'Mana') {
+		totalStats.mana = champion.stats.mp ?? 0;
+	}
+
 	return {
 		stats: {
 			base: baseStats,
