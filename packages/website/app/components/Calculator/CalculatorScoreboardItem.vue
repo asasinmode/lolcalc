@@ -986,8 +986,8 @@ defineExpose({ el });
 			<h4 data-loading="">
 				loading...
 			</h4>
-			<section data-runes-stats="" :inert="isLoading || undefined">
-				<h4>runes and stats</h4>
+			<section data-runes="" :inert="isLoading || undefined">
+				<h4>runes</h4>
 				<dl>
 					<template v-for="(championRune, runeIndex) in championRunes" :key="championRune?.name || runeIndex">
 						<dt
@@ -1019,6 +1019,9 @@ defineExpose({ el });
 					<p class="game-description" v-html="hoveredRune?.description" />
 					<UnresolvedVariablesAlert v-if="hoveredRune?.anyUnknownVariables" />
 				</div>
+			</section>
+			<section data-stats="" :inert="isLoading || undefined">
+				<h4>stats</h4>
 				<dl
 					v-for="(stats, statKindIndex) in [minorStats, majorStats]"
 					:key="statKindIndex"
@@ -1055,6 +1058,12 @@ defineExpose({ el });
 					<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
 				</div>
 			</section>
+			<section data-effects="" :inert="isLoading">
+				<h4>effects</h4>
+				<button>
+					effects
+				</button>
+			</section>
 			<section data-abilities="" :inert="isLoading || undefined">
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
@@ -1068,7 +1077,7 @@ defineExpose({ el });
 					<div data-passive="">
 						<h5>passive</h5>
 						<img
-							v-show="!isLoading"
+							v-show="!isLoading && value.champion.value"
 							:src="value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
@@ -1086,7 +1095,7 @@ defineExpose({ el });
 					>
 						<h5>{{ abilityKey.toUpperCase() }}</h5>
 						<img
-							v-show="!isLoading"
+							v-show="!isLoading && value.champion.value"
 							:src="value.champion.value ? abilityImage(value.champion.value.abilities[abilityKey].variants[value.abilityVariants.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
@@ -1300,6 +1309,7 @@ defineExpose({ el });
 		--soul-size: calc(10 * var(--spacing));
 		--stack-size: calc(8 * var(--spacing));
 		--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
+		--scoreboard-item-gap-x: calc(4 * var(--spacing));
 
 		grid-template-areas:
 			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
@@ -1570,11 +1580,12 @@ defineExpose({ el });
 			grid-area: expanded;
 
 			&::details-content {
-				--at-apply: 'pt-4 -mt-6 grid grid-cols-[auto_1fr_auto] grid-rows-[auto_auto_1fr]';
+				--at-apply: 'pt-4 -mt-6 grid grid-cols-[min-content_min-content_1fr_auto] grid-rows-[auto_min-content_min-content_1fr]';
 				grid-template-areas:
-					'stats abilities abilities'
-					'stats resources resources'
-					'stats role-quest dragons';
+					'effects stats abilities abilities'
+					'effects stats resources resources'
+					'runes stats resources resources'
+					'runes stats role-quest dragons';
 			}
 
 			[data-loading] {
@@ -1595,7 +1606,9 @@ defineExpose({ el });
 				--at-apply: 'h-min';
 			}
 
-			> [data-runes-stats],
+			> [data-runes],
+			> [data-stats],
+			> [data-effects],
 			> [data-abilities],
 			> [data-health-ability-resource] {
 				> h4 {
@@ -1603,105 +1616,13 @@ defineExpose({ el });
 				}
 			}
 
-			> [data-runes-stats] {
-				--at-apply: 'grid grid-cols-2 grid-rows-2';
-				grid-template-areas:
-					'. minor-stats'
-					'runes major-stats';
-				anchor-name: --scoreboard-item-runes-stats;
-				grid-area: stats;
+			> [data-runes],
+			> [data-stats] {
+				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid';
 
 				> dl {
-					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-btn-border-clr] p-0.5 w-fit';
-
+					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-btn-border-clr] p-0.5 w-fit row-span-2';
 					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
-
-					&:nth-of-type(1) {
-						--at-apply: 'b-e-0 self-end relative';
-						grid-area: runes;
-
-						&:has(> .coming-soon-cover)::before {
-							--at-apply: 'content-empty absolute end-0 start-1/2 top-0 bottom-1/2 bg-neutral-950/30';
-						}
-
-						> dt:nth-of-type(1) {
-							grid-column: 1;
-							grid-row: 1;
-						}
-						> dd:nth-of-type(1) {
-							grid-column: 2;
-							grid-row: 1;
-						}
-
-						> dt:nth-of-type(2) {
-							grid-column: 1;
-							grid-row: 2;
-						}
-						> dd:nth-of-type(2) {
-							grid-column: 2;
-							grid-row: 2;
-						}
-
-						> dt:nth-of-type(3) {
-							grid-column: 1;
-							grid-row: 3;
-						}
-						> dd:nth-of-type(3) {
-							grid-column: 2;
-							grid-row: 3;
-						}
-
-						> dt:nth-of-type(4) {
-							grid-column: 1;
-							grid-row: 4;
-						}
-						> dd:nth-of-type(4) {
-							grid-column: 2;
-							grid-row: 4;
-						}
-
-						> dt:nth-of-type(5) {
-							grid-column: 3;
-							grid-row: 1;
-						}
-						> dd:nth-of-type(5) {
-							grid-column: 4;
-							grid-row: 1;
-						}
-
-						> dt:nth-of-type(6) {
-							grid-column: 3;
-							grid-row: 2;
-						}
-						> dd:nth-of-type(6) {
-							grid-column: 4;
-							grid-row: 2;
-						}
-
-						> dt:nth-of-type(7) {
-							grid-column: 3;
-							grid-row: 3;
-						}
-						> dd:nth-of-type(7) {
-							grid-column: 4;
-							grid-row: 3;
-						}
-
-						> dt:has(> span:last-child) {
-							&::before {
-								--at-apply: 'content-empty block size-4.5 rounded-full bg-black';
-							}
-						}
-					}
-
-					&:nth-of-type(2) {
-						--at-apply: 'b-b-0';
-						grid-area: minor-stats;
-					}
-
-					&:nth-of-type(3) {
-						grid-area: major-stats;
-					}
 
 					> dt {
 						--at-apply: 'py-0.5 ps-0.5';
@@ -1724,10 +1645,94 @@ defineExpose({ el });
 				.hover-tooltip.champion-stat {
 					--at-apply: 'max-w-156';
 
-					position-anchor: --scoreboard-item-runes-stats;
+					position-anchor: --scoreboard-item-stats;
 					position-try: flip-block;
-					top: calc(anchor(bottom) - 1px);
-					justify-self: anchor-center;
+					inset-block-start: calc(anchor(end) - 1px);
+					inset-inline-start: calc(anchor(start));
+					justify-self: anchor-start;
+					translate: -50% 0%;
+				}
+			}
+
+			> [data-runes] {
+				grid-area: runes;
+
+				> dl {
+					--at-apply: 'b-e-0 self-end relative';
+					grid-area: runes;
+
+					&:has(> .coming-soon-cover)::before {
+						--at-apply: 'content-empty absolute end-0 start-1/2 top-0 bottom-1/2 bg-neutral-950/30';
+					}
+
+					> dt:nth-of-type(1) {
+						grid-column: 1;
+						grid-row: 1;
+					}
+					> dd:nth-of-type(1) {
+						grid-column: 2;
+						grid-row: 1;
+					}
+
+					> dt:nth-of-type(2) {
+						grid-column: 1;
+						grid-row: 2;
+					}
+					> dd:nth-of-type(2) {
+						grid-column: 2;
+						grid-row: 2;
+					}
+
+					> dt:nth-of-type(3) {
+						grid-column: 1;
+						grid-row: 3;
+					}
+					> dd:nth-of-type(3) {
+						grid-column: 2;
+						grid-row: 3;
+					}
+
+					> dt:nth-of-type(4) {
+						grid-column: 1;
+						grid-row: 4;
+					}
+					> dd:nth-of-type(4) {
+						grid-column: 2;
+						grid-row: 4;
+					}
+
+					> dt:nth-of-type(5) {
+						grid-column: 3;
+						grid-row: 1;
+					}
+					> dd:nth-of-type(5) {
+						grid-column: 4;
+						grid-row: 1;
+					}
+
+					> dt:nth-of-type(6) {
+						grid-column: 3;
+						grid-row: 2;
+					}
+					> dd:nth-of-type(6) {
+						grid-column: 4;
+						grid-row: 2;
+					}
+
+					> dt:nth-of-type(7) {
+						grid-column: 3;
+						grid-row: 3;
+					}
+					> dd:nth-of-type(7) {
+						grid-column: 4;
+						grid-row: 3;
+					}
+
+					> dt:has(> span:last-child) {
+						&::before {
+							--at-apply: 'content-empty block size-4.5 rounded-full bg-black';
+						}
+					}
 				}
 
 				.hover-tooltip.champion-rune {
@@ -1736,6 +1741,15 @@ defineExpose({ el });
 							--at-apply: 'italic';
 						}
 					}
+				}
+			}
+
+			> [data-stats] {
+				grid-area: stats;
+				anchor-name: --scoreboard-item-stats;
+
+				> dl:nth-of-type(1) {
+					--at-apply: 'b-b-0';
 				}
 
 				.hover-tooltip.champion-stat {
@@ -1771,6 +1785,11 @@ defineExpose({ el });
 						--at-apply: 'mt-1';
 					}
 				}
+			}
+
+			> [data-effects] {
+				--at-apply: 'bg-pink-400';
+				grid-area: effects;
 			}
 
 			> [data-abilities] {
@@ -1841,12 +1860,12 @@ defineExpose({ el });
 			}
 
 			> [data-health-ability-resource] {
-				--at-apply: 'pt-1.375';
+				--at-apply: 'pt-1.5 grid grid-rows-subgrid grid-cols-subgrid';
 				grid-area: resources;
 
 				[data-current-health],
 				[data-current-ability-resource] {
-					--at-apply: 'relative bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
+					--at-apply: 'relative col-span-full bg-black h-6 flex flex-center gap-x-2 whitespace-nowrap';
 
 					&:before {
 						--at-apply: 'content-empty block absolute z-0 inset-0 origin-left bg-[--fill-bg] scale-x-[var(--fill-percentage,0)]';
@@ -2006,6 +2025,12 @@ defineExpose({ el });
 				> h4 {
 					--at-apply: 'absolute top-0 start-0 text-xs uppercase font-500 text-neutral-300 leading-3';
 				}
+			}
+
+			> [data-abilities],
+			> [data-health-ability-resource],
+			> [data-role-quest] {
+				--at-apply: 'ms-[--scoreboard-item-gap-x]';
 			}
 
 			> [data-extras] {
