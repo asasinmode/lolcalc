@@ -81,9 +81,7 @@ function updateValue(value: number) {
 		:used-number-input="useNumberInput([value.internalItemData as Ref<IData>, 'manaflow'])"
 		:max="360"
 		:step="4"
-		:value
 		:id-prefix="`${idPrefix}-${itemId}`"
-		:item-id
 		:disabled="isTransformed"
 		@update:model-value="updateValue"
 		@img-mouseenter="$emit('itemHover', $event)"

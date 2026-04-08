@@ -1489,7 +1489,7 @@ defineExpose({ el });
 					}
 
 					> span:last-child {
-						--at-apply: 'absolute text-xs bottom-0 end-0 leading-[1] pointer-events-none';
+						--at-apply: 'absolute text-xs bottom-0.5 end-0.25 leading-[1] pointer-events-none';
 						paint-order: stroke fill;
 						-webkit-text-stroke: black 0.2em;
 
@@ -2106,7 +2106,7 @@ defineExpose({ el });
 					}
 
 					> img + span {
-						--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%)] pointer-events-none';
+						--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%-0.5*var(--spacing))] pointer-events-none';
 						paint-order: stroke fill;
 						-webkit-text-stroke: 0.15em black;
 					}
