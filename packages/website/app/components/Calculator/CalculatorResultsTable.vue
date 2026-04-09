@@ -281,12 +281,12 @@ function startRemovingColumn(event: MouseEvent, index: number) {
 
 function removeResultsColumn(index: number) {
 	const [column] = resultColumns.value.splice(index, 1);
-
 	for (const section of computedResults.value.values()) {
 		for (const row of section.rows.values()) {
 			row.columns.delete(column!.id);
 		}
 	}
+	emit('configurationChanged');
 }
 
 const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== 'stats').map(section => section.id));
@@ -464,9 +464,10 @@ function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGam
 		}))));
 }
 
-function removeDamageSection(index: number) {
+function removeResultsSection(index: number) {
 	const [section] = resultSections.value.splice(index, 1);
 	computedResults.value.delete(section!.id);
+	emit('configurationChanged');
 }
 
 const damageSourceWatchers = new Map<string, WatchHandle>();
@@ -674,6 +675,7 @@ function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
 
 	resultColumns.value.splice(toIndex, 0, column);
 	copy && addComputedColumn(column);
+	emit('configurationChanged');
 }
 
 const columnDragDropIndex = ref<number>();
@@ -737,6 +739,7 @@ function onResultColumnDrop(event: DragEvent, index: number) {
 	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
 
 	resultColumns.value.splice(adjustedIndex, 0, column!);
+	emit('configurationChanged');
 }
 
 function endResultColumnDrag() {
@@ -779,6 +782,7 @@ function getDropTargetIndex(
 function moveResultSection(fromIndex: number, toIndex: number) {
 	const [section] = resultSections.value.splice(fromIndex, 1);
 	resultSections.value.splice(toIndex, 0, section!);
+	emit('configurationChanged');
 }
 
 const sectionDragDropIndex = ref<number>();
@@ -832,6 +836,7 @@ function onResultSectionDrop(event: DragEvent, index: number, isHeader?: boolean
 	const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
 
 	resultSections.value.splice(adjustedIndex, 0, section!);
+	emit('configurationChanged');
 }
 
 function endResultSectionDrag() {
@@ -1197,7 +1202,7 @@ defineExpose({
 								title="remove"
 								class="pretend-ui-btn"
 								:disabled="section.isPermanent"
-								@click="removeDamageSection(index)"
+								@click="removeResultsSection(index)"
 							>
 								<span>
 									remove
