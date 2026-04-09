@@ -1,5 +1,5 @@
 import type { IShopItem } from './types';
-import itemsData from '../assets/item.json' with { type: 'json' };
+import itemsData from '../assets/item.json';
 
 const { data: items } = itemsData;
 
@@ -15,36 +15,6 @@ export type IItemEffectData<Item extends keyof TItemNameToId, Id = TItemNameToId
 		: never
 	: never;
 
-/** colloquial names to id */
-export const ITEM_NAME_TO_ID = {
-	slightlyMagicalFootwear: '2422',
-	tear: '3070',
-	whisperingCirclet: '2526',
-	diademOfSongs: '2530',
-	archangelsStaff: '3003',
-	seraphsEmbrace: '3040',
-	manamune: '3004',
-	muramana: '3042',
-	wintersApproach: '3119',
-	fimbulwinter: '3121',
-	hubris: '6697',
-	darkSeal: '1082',
-	mejai: '3041',
-	hauntingGuise: '3147',
-	roa: '6657',
-	blackfireTorch: '2503',
-	heartsteel: '3084',
-	guinsoo: '3124',
-	terminus: '3302',
-	liandry: '6653',
-	yunTal: '3032',
-	shojin: '3161',
-	riftmaker: '4633',
-	blackCleaver: '3071',
-	shurelya: '2065',
-} as const;
-
-export type TItemNameToId = typeof ITEM_NAME_TO_ID;
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
 
 const tearItemSpecifics = {
@@ -242,136 +212,6 @@ export const ITEM_SPECIFICS = {
 	setupEffectData?: (self: DamageSource, effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
 }>;
 
-export const UNPURCHASABLES_TO_KEEP = [
-	ITEM_NAME_TO_ID.diademOfSongs,
-	ITEM_NAME_TO_ID.slightlyMagicalFootwear,
-	ITEM_NAME_TO_ID.seraphsEmbrace,
-	ITEM_NAME_TO_ID.muramana,
-	ITEM_NAME_TO_ID.fimbulwinter,
-];
-
-/** paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAME}.png` */
-export const STAT_ICON_NAMES: Record<IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown', string> = {
-	OnHit: 'onhit',
-	attackDamage: 'scalead',
-	FlatPhysicalDamageMod: 'scalead',
-	adaptiveForce: 'adaptiveforce',
-	AbilityHasteMod: 'scaleah',
-	abilityHaste: 'scaleah',
-	cooldown: 'scalecooldown',
-	FlatMagicDamageMod: 'scaleap',
-	abilityPower: 'scaleap',
-	PhysicalLethality: 'scaleapen',
-	lethality: 'scaleapen',
-	PercentArmorPenetrationMod: 'scaleapen',
-	percentArmorPen: 'scaleapen',
-	FlatArmorMod: 'scalearmor',
-	armor: 'scalearmor',
-	PercentAttackSpeedMod: 'scaleas',
-	attackSpeed: 'scaleas',
-	bonusAttackSpeedPercent: 'scaleas',
-	attackSpeedRatio: 'scaleas',
-	FlatCritChanceMod: 'scalecrit',
-	critChance: 'scalecrit',
-	FlatCritDamageMod: 'scalecritmult',
-	critDamageMultiplier: 'scalecritmult',
-	PercentHealingAmountMod: 'scalehealshield',
-	healShieldPower: 'scalehealshield',
-	FlatHPPoolMod: 'scalehealth',
-	hp: 'scalehealth',
-	FlatHPRegenMod: 'scalehpregen',
-	PercentBaseHPRegenMod: 'scalehpregen',
-	hpRegen: 'scalehpregen',
-	level: 'scalelevel',
-	PercentLifeStealMod: 'scalels',
-	lifeSteal: 'scalels',
-	FlatMPPoolMod: 'scalemana',
-	mana: 'scalemana',
-	PercentBaseMPRegenMod: 'scalemanaregen',
-	manaRegen: 'scalemanaregen',
-	FlatMagicPenetrationMod: 'scalempen',
-	flatMagicPen: 'scalempen',
-	PercentMagicPenetrationMod: 'scalempen',
-	percentMagicPen: 'scalempen',
-	FlatSpellBlockMod: 'scalemr',
-	magicResist: 'scalemr',
-	FlatMovementSpeedMod: 'scalems',
-	PercentMovementSpeedMod: 'scalems',
-	moveSpeed: 'scalems',
-	attackRange: 'scalerange',
-	PercentOmnivampMod: 'scalesv',
-	omnivamp: 'scalesv',
-	PercentTenacityMod: 'scaletenacity',
-	tenacity: 'scaletenacity',
-};
-
-export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
-	IItemStat,
-'PercentBaseHPRegenMod' | 'PercentBaseMPRegenMod' | 'PercentMovementSpeedMod'
->, IChampionStatName> = {
-	AbilityHasteMod: 'abilityHaste',
-	FlatArmorMod: 'armor',
-	FlatCritChanceMod: 'critChance',
-	FlatHPPoolMod: 'hp',
-	FlatHPRegenMod: 'hpRegen',
-	FlatMPPoolMod: 'mana',
-	FlatCritDamageMod: 'critDamageMultiplier',
-	FlatMagicDamageMod: 'abilityPower',
-	FlatMagicPenetrationMod: 'flatMagicPen',
-	FlatMovementSpeedMod: 'moveSpeed',
-	FlatPhysicalDamageMod: 'attackDamage',
-	FlatSpellBlockMod: 'magicResist',
-	PercentArmorPenetrationMod: 'percentArmorPen',
-	PercentAttackSpeedMod: 'bonusAttackSpeedPercent',
-	PercentHealingAmountMod: 'healShieldPower',
-	PercentLifeStealMod: 'lifeSteal',
-	PercentMagicPenetrationMod: 'percentMagicPen',
-	PercentTenacityMod: 'tenacity',
-	PhysicalLethality: 'lethality',
-	PercentOmnivampMod: 'omnivamp',
-};
-
-export const ITEM_STAT_META: Record<IItemStat, {
-	name: string;
-	/** value by which the stat is sorted in the item hover tooltip */
-	order: number;
-	displayMultiplier?: number;
-	isPercentage?: boolean;
-}> = {
-	FlatPhysicalDamageMod: { name: 'Attack damage', order: 95 },
-	FlatMagicDamageMod: { name: 'Ability power', order: 90 },
-
-	PercentAttackSpeedMod: { name: 'Attack speed', order: 80, isPercentage: true },
-
-	FlatHPPoolMod: { name: 'Health', order: 75 },
-	FlatMPPoolMod: { name: 'Mana', order: 70 },
-
-	FlatArmorMod: { name: 'Armor', order: 65 },
-	FlatSpellBlockMod: { name: 'Magic resist', order: 60 },
-
-	PhysicalLethality: { name: 'Lethality', order: 59 },
-	PercentArmorPenetrationMod: { name: 'Armor penetration', order: 56, isPercentage: true },
-	FlatMagicPenetrationMod: { name: 'Magic penetration', order: 53 },
-	PercentMagicPenetrationMod: { name: 'Magic penetration', order: 50, isPercentage: true },
-
-	FlatCritChanceMod: { name: 'Critical strike chance', order: 45, isPercentage: true },
-	FlatCritDamageMod: { name: 'Critical strike damage', order: 40, isPercentage: true },
-
-	AbilityHasteMod: { name: 'Ability haste', order: 39 },
-	FlatMovementSpeedMod: { name: 'Move speed', order: 36 },
-	PercentMovementSpeedMod: { name: 'Move speed', order: 33, isPercentage: true },
-	PercentTenacityMod: { name: 'Tenacity', order: 30, isPercentage: true },
-
-	FlatHPRegenMod: { name: 'Health every 5 seconds', order: 28, displayMultiplier: 5 },
-	PercentBaseHPRegenMod: { name: 'Base health regen', order: 24, isPercentage: true },
-	PercentBaseMPRegenMod: { name: 'Base mana regen', order: 20, isPercentage: true },
-
-	PercentHealingAmountMod: { name: 'Heal and shield power', order: 10, isPercentage: true },
-
-	PercentLifeStealMod: { name: 'Life steal', order: 5, isPercentage: true },
-	PercentOmnivampMod: { name: 'Omnivamp', order: 0, isPercentage: true },
-};
-
 export function calculateItemDiscount(
 	itemId: string,
 	inventory: (IItem | undefined)[],
@@ -413,10 +253,6 @@ export function consumeItemComponents(
 	return consumedInventoryIndexes;
 }
 
-export const RANGED_ONLY_ITEM_IDS = [
-	'3085',	/* runaan's hurricane, has `mRequiredPurchaseIdentities	[ "Ranged" ]` but it's the only item like that so this should be fine */
-];
-
 export function itemBuyability(
 	item: IItem,
 	target: DamageSource | undefined,
@@ -437,7 +273,7 @@ export function itemBuyability(
 	}
 
 	if (
-		(!target.isRanged.value && RANGED_ONLY_ITEM_IDS.includes(item.id))
+		(!target.isRanged.value && (RANGED_ONLY_ITEM_IDS as string[]).includes(item.id))
 		|| inventoryAfterBuying.some(boughtItem => boughtItem && boughtItem.itemGroups?.some(group => item.itemGroups?.includes(group)))
 	) {
 		buyability = -1;

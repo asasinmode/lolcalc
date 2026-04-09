@@ -4,37 +4,6 @@ export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
 }
 
-export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent'] as const;
-
-export type IChampionStatName = (typeof CHAMPION_STATS)[number];
-
-export const CHAMPION_STAT_NAMES: Record<IChampionStatName, string> = {
-	hp: 'Health',
-	mana: 'Mana',
-	attackDamage: 'Attack Damage',
-	abilityPower: 'Ability Power',
-	armor: 'Armor',
-	magicResist: 'Magic Resist',
-	abilityHaste: 'Ability Haste',
-	attackSpeed: 'Attack Speed',
-	attackSpeedRatio: 'Attack Speed Ratio',
-	bonusAttackSpeedPercent: 'Bonus Attack Speed',
-	critChance: 'Critical Strike Chance',
-	critDamageMultiplier: 'Critical Strike Damage',
-	lethality: 'Lethality',
-	percentArmorPen: 'Percentage Armor Penetration',
-	flatMagicPen: 'Magic penetration',
-	percentMagicPen: 'Percentage Magic Penetration',
-	lifeSteal: 'Life Steal',
-	omnivamp: 'Omnivamp',
-	moveSpeed: 'Move Speed',
-	tenacity: 'Tenacity',
-	healShieldPower: 'Heal and Shield power',
-	attackRange: 'Attack Range',
-	hpRegen: 'Health every 5 seconds',
-	manaRegen: 'Mana/Resource every 5 seconds',
-};
-
 const aph1to5 = [1, 2, 3, 4, 5];
 
 export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';

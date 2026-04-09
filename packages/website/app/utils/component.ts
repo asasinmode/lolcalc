@@ -23,7 +23,7 @@ export function numberExtra<T extends keyof TItemSpecifics>(
 			min,
 			max,
 			step,
-			'imgText': ITEM_SPECIFICS[itemId]?.itemImageText?.(props.value.internalItemData.value, property as any),
+			'imgText': (ITEM_SPECIFICS[itemId] as any)?.itemImageText?.(props.value.internalItemData.value, property as any),
 			'usedNumberInput': useNumberInput([props.value.internalItemData, property as string], true, max),
 			onImgMouseenter(event) {
 				ctx.emit('itemHover', event);

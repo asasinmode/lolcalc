@@ -11,18 +11,16 @@ import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps.ts';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
-import { KNOWN_GAME_DESCRIPTION_TAGS, replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
+import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
-import { ITEM_STAT_META, UNPURCHASABLES_TO_KEEP } from '../app/utils/item.ts';
+import { ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '../app/utils/meta.ts';
 import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
 
 let latestVersion = process.argv[2];
 
 if (!latestVersion) {
 	const versions: string[] = await fetch('https://ddragon.leagueoflegends.com/api/versions.json').then(res => res.json());
-
 	([latestVersion] = versions as [string]);
-
 	console.log('latest version', latestVersion);
 } else {
 	console.log('using version override', latestVersion);
@@ -328,7 +326,7 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 				&& gold.inStore !== false
 				&& gold.hideFromAll !== false
 				&& !requiredChampion
-				&& (gold.purchasable || (UNPURCHASABLES_TO_KEEP as string[]).includes(itemId));
+				&& (gold.purchasable || (KEPT_UNPURCHASABLE_ITEMS as string[]).includes(itemId));
 		});
 
 	const filteredItemIds = filteredItems.map(([itemId]) => itemId);

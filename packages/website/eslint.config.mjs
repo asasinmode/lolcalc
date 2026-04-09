@@ -22,5 +22,6 @@ export default withNuxt(
 		},
 		formatters: true,
 		ignores: ['app/assets/*.json', 'public/data/**/*.json'],
+		// @ts-expect-error https://github.com/unocss/unocss/issues/4919
 	}, unocss),
 );
