@@ -31,12 +31,12 @@ const value = defineModel<number>({ required: true });
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
 		<span v-if="imgText" aria-hidden="true">{{ imgText }}</span>
-		<label :for="`venmbr-${idPrefix}-input`">
+		<label :for="`venmbr-${idPrefix}`">
 			{{ label }}
 		</label>
 		<slot />
 		<input
-			:id="`venmbr-${idPrefix}-input`"
+			:id="`venmbr-${idPrefix}`"
 			:value="value"
 			type="number"
 			:min

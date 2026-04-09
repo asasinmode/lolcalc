@@ -190,16 +190,15 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
-		setupEffectData(self, effect): [carve: number, fervor: 0 | 1] {
+		setupEffectData(self, effect): [carve: number] {
 			console.log('setting up black cleaver effect', effect, self.appliedEffects.value);
 			return [
 				Math.max(0, Math.min(5, effect?.data[0] ?? 0)),
-				Math.max(0, Math.min(1, effect?.data[1] ?? 0)) as 0 | 1,
 			];
 		},
 		isEffectActive(data) {
-			const [carve, fervor] = data as [carve: number, fervor: 0 | 1];
-			return carve || fervor;
+			const [carve] = data as [carve: number];
+			return carve;
 		},
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
@@ -222,7 +221,12 @@ export const ITEM_SPECIFICS = {
 	setupInternalData?: (self: DamageSource) => any;
 	/** the properties `setupInternalData` uses, needed for cleanup */
 	internalDataProperties?: string[];
-	/** text on the item's image, like current heartsteel/mejai stacks */
+	/**
+	 * text on the item's image, like current heartsteel/mejai stacks
+	 * `property` can be `string | IDamageSourceEffectId`, depending on what's passed to `numberExtra` in `components/Item/index.ts`
+	 * if the `numberExtra` is for `internalItemData`, it's expected to be a `string`
+	 * if it's for an applied effect, it must be `IDamageSourceEffectId`
+	 */
 	itemImageText?: (internalData: any, property?: any) => string | number;
 	/** whether to show the green dot that the item is active in the top right corner of the image */
 	isItemImageActive?: (internalData: any) => number | boolean;

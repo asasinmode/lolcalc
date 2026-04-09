@@ -23,13 +23,13 @@ const value = defineModel<number>({ required: true });
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
 		<input
-			:id="`vebln-${idPrefix}-input`"
+			:id="`vebln-${idPrefix}`"
 			v-model="value"
 			type="checkbox"
 			:true-value="1"
 			:false-value="0"
 		>
-		<label :for="`vebln-${idPrefix}-input`">
+		<label :for="`vebln-${idPrefix}`">
 			activate {{ label }}
 		</label>
 	</article>

@@ -5,7 +5,7 @@ type NumberKey<T> = {
 }[keyof T];
 
 export function useNumberInput<T extends Ref>(
-	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>],
+	targetRef: Ref<number> | Ref<number | undefined> | [targetObject: T, targetKey: NumberKey<UnwrapRef<T>>] | [targetObject: any[], targetIndex: number],
 	isInt = true,
 	max?: MaybeRefOrGetter<number>,
 ): (event: Event) => void {
@@ -22,7 +22,11 @@ export function useNumberInput<T extends Ref>(
 		}
 		(event.target as HTMLInputElement).value = value.toString();
 		if (Array.isArray(targetRef)) {
-			(targetRef[0].value[targetRef[1]] as number) = value;
+			if (isRef(targetRef[0])) {
+				(targetRef[0].value[targetRef[1]] as number) = value;
+			} else {
+				((targetRef[0] as any[])[targetRef[1] as number] as number) = value;
+			}
 		} else {
 			targetRef.value = value;
 		}

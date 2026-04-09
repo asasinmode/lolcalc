@@ -3,7 +3,7 @@ import { ItemExtrasTerminus, ItemExtraTearItem } from '#components';
 /**
  * any item-related components
  */
-export const ITEM_COMPONENTS: Record<string, { extras?: Component }> = {
+export const ITEM_COMPONENTS: Record<string, { extras?: Component; effects?: Component }> = {
 	[ITEM_NAME_TO_ID.hubris]: {
 		extras: numberExtra(ITEM_NAME_TO_ID.hubris, 'eminence', 'Eminence stacks'),
 	},
@@ -72,5 +72,11 @@ export const ITEM_COMPONENTS: Record<string, { extras?: Component }> = {
 	},
 	[ITEM_NAME_TO_ID.trinity]: {
 		extras: booleanExtra(ITEM_NAME_TO_ID.trinity, 'quicken', 'Quicken'),
+	},
+	[ITEM_NAME_TO_ID.blackCleaver]: {
+		effects: numberExtra(ITEM_NAME_TO_ID.blackCleaver, [{ type: 'item', championOrItemId: ITEM_NAME_TO_ID.blackCleaver }, 0], 'Carve stacks', 0, 5),
+	},
+	[ITEM_NAME_TO_ID.shurelya]: {
+		extras: booleanExtra(ITEM_NAME_TO_ID.shurelya, [{ type: 'item', championOrItemId: ITEM_NAME_TO_ID.shurelya }, 0], 'Inspiring speech'),
 	},
 };

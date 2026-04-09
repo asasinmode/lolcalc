@@ -132,3 +132,5 @@ export interface IDamageSourceEffectApplier {
 	/** checks if effect's data is not the default value */
 	isEffectActive?: (data: any) => number | boolean;
 }
+
+export type IDamageSourceEffectAccessPath = [IDamageSourceEffectId, valueIndex: number];

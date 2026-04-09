@@ -26,13 +26,16 @@ export interface IDamageSourceInternalDataBase {
 	_watchHandles: WatchHandle[];
 }
 
-export interface IDamageSourceEffect<T extends any[] = any[]> {
-	/** `${type}-${championOrItemId}-${abilityKey}-${abilityVariant}` */
-	id: string;
+export interface IDamageSourceEffectId {
 	type: 'champion' | 'item';
 	championOrItemId: string;
 	abilityKey?: string;
 	abilityVariantIndex?: number;
+}
+
+export interface IDamageSourceEffect<T extends any[] = any[]> extends IDamageSourceEffectId {
+	/** `${type}-${championOrItemId}-${abilityKey}-${abilityVariant}` */
+	id: string;
 	/** any effect data, stored in array like `[carve: number, fervor: boolean]` for easier stringifying/parsing */
 	data: T;
 	isActive: (data: T) => number | boolean;
@@ -662,13 +665,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	getEffect({ type, championOrItemId, abilityKey, abilityVariantIndex }: Pick<IDamageSourceEffect, 'type' | 'championOrItemId' | 'abilityKey' | 'abilityVariantIndex'>): [IDamageSourceEffect, index: number] | undefined {
+	getEffect({ type, championOrItemId, abilityKey, abilityVariantIndex }: IDamageSourceEffectId): [IDamageSourceEffect, index: number] | undefined {
 		const index = this.appliedEffects.value.findIndex(effect => effect.type === type && effect.championOrItemId === championOrItemId && effect.abilityKey === abilityKey && effect.abilityVariantIndex === abilityVariantIndex);
 
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	addEffect({ type, championOrItemId, abilityKey, abilityVariantIndex }: Pick<IDamageSourceEffect, 'type' | 'championOrItemId' | 'abilityKey' | 'abilityVariantIndex'>) {
+	addEffect({ type, championOrItemId, abilityKey, abilityVariantIndex }: IDamageSourceEffectId) {
 		const specific = resolveEffectSpecific(type, championOrItemId, abilityKey, abilityVariantIndex);
 		if (!specific) {
 			console.warn(`[DamageSource.addEffect] tried to add effect for ${type} ${championOrItemId} without 'setupEffectData'`);
