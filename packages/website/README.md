@@ -170,6 +170,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] consider used images "locally" / service worker for caching stuff
 - [ ] kind of a code documentation where yap about
   - [ ] how to use game texture `textureBgImageAttrs`
+- [ ] CONTRIBUTING.md
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
