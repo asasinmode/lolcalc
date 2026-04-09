@@ -9,7 +9,7 @@ export const CHAMPION_KEY_TO_ID: Record<string, IChampionId> = Object.fromEntrie
 	Object.entries(data).map(([id, { key }]) => [key, id as IChampionId]),
 );
 
-const championCache = new Map<IChampionId, IChampion>();
+const championCache = new Map<IChampionId, Promise<IChampion>>();
 
 export async function useChampion(id: string): Promise<IChampion> {
 	const cacheHit = championCache.get(id as IChampionId);
@@ -18,11 +18,10 @@ export async function useChampion(id: string): Promise<IChampion> {
 	}
 	/*
 	 * if this runs on server, for example a DamageSource with champion id is present during `nuxt generate`, the build will fail with out of memory error because it rerequests itself over and over or something
-	 * atm just generate app with empty DamageSource to work around this
 	 */
-	const champion = await $fetch<IChampion>(`/data/champion/${id}.json`);
-	championCache.set(id as IChampionId, champion);
-	return champion;
+	const promise = $fetch<IChampion>(`/data/champion/${id}.json`);
+	championCache.set(id as IChampionId, promise);
+	return promise;
 }
 
 export type IChampionId = keyof typeof data;
