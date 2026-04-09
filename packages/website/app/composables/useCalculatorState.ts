@@ -218,6 +218,7 @@ export function useCalculatorState(
 		}
 
 		const savedSections = params.getAll('tblSct');
+		let currentSectionIndex = 0;
 		for (const section of savedSections) {
 			const [type, id, isExpanded] = section.split('_');
 			if (!type || !['all', 'champion', 'item'].includes(type) || !id) {
@@ -225,30 +226,34 @@ export function useCalculatorState(
 			}
 
 			const [championOrItemId, abilityKey, abilityVariant] = (id ?? '')?.split('-');
-			if (championOrItemId) {
-				if (type === 'champion') {
-					if (!abilityKey || !['passive', 'q', 'w', 'e', 'r'].includes(abilityKey)) {
-						continue;
-					}
-					const parsedAbilityVariant = abilityVariant ? Number.parseInt(abilityVariant) : undefined;
-					if (parsedAbilityVariant === undefined || Number.isNaN(parsedAbilityVariant)) {
-						continue;
-					}
+			if (type === 'champion' && championOrItemId) {
+				if (!abilityKey || !['passive', 'q', 'w', 'e', 'r'].includes(abilityKey)) {
+					continue;
+				}
+				const parsedAbilityVariant = abilityVariant ? Number.parseInt(abilityVariant) : undefined;
+				if (parsedAbilityVariant === undefined || Number.isNaN(parsedAbilityVariant)) {
+					continue;
+				}
 
-					resultsTable.value.addResultsSection(type, championOrItemId, abilityKey as IChampionAbilityKey, parsedAbilityVariant, undefined, !!isExpanded);
-				} else if (type === 'item') {
-					resultsTable.value.addResultsSection(type as 'item', championOrItemId, undefined, undefined, undefined, !!isExpanded);
-				} else {
-					if (resultsTable.value.resultSections.some(section => section.id === id)) {
-						const expandedIndex = resultsTable.value.expandedSections.indexOf(id);
-						if (isExpanded) {
-							expandedIndex === -1 && resultsTable.value.expandedSections.push(id);
-						} else {
-							~expandedIndex && resultsTable.value.expandedSections.splice(expandedIndex, 1);
-						}
+				resultsTable.value.addResultsSection(type, championOrItemId, abilityKey as IChampionAbilityKey, parsedAbilityVariant, undefined, !!isExpanded);
+			} else if (type === 'item' && championOrItemId) {
+				resultsTable.value.addResultsSection(type as 'item', championOrItemId, undefined, undefined, undefined, !!isExpanded);
+			} else {
+				const sectionIndex = resultsTable.value.resultSections.findIndex(section => section.id === id);
+				if (~sectionIndex) {
+					if (sectionIndex !== currentSectionIndex) {
+						resultsTable.value.resultSections.push(resultsTable.value.resultSections.splice(sectionIndex, 1)[0]!);
+					}
+					const expandedIndex = resultsTable.value.expandedSections.indexOf(id);
+					if (isExpanded) {
+						expandedIndex === -1 && resultsTable.value.expandedSections.push(id);
+					} else {
+						~expandedIndex && resultsTable.value.expandedSections.splice(expandedIndex, 1);
 					}
 				}
 			}
+
+			currentSectionIndex += 1;
 		}
 	}
 
