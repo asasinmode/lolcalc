@@ -1,4 +1,4 @@
-import { STAT_ICON_NAMES } from './item.ts';
+import { STAT_ICON_NAMES } from './meta.ts';
 import { roundVariable } from './misc.ts';
 
 export interface IItemVariableCalculationTarget {

@@ -1,4 +1,4 @@
-import { ITEM_TO_CHAMPION_STATS } from './item';
+import { ITEM_TO_CHAMPION_STATS } from './meta';
 
 interface IStatsCalculationResult {
 	stats: {
