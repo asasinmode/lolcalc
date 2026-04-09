@@ -89,20 +89,21 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 			optionId: championId,
 			optionName: champion.name,
 			abilities: abilityEntries
-				.map(([abilityKey, ability]) => {
-					const abilityVariant = ability.variants[0]!;
-					const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-						abilityVariant.name,
-						champion.stringtable,
-					);
+				.flatMap(([abilityKey, ability]): IDamageSectionOption['abilities'] =>
+					ability.variants.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
+						const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+							variant.name,
+							champion.stringtable,
+						);
 
-					return {
-						championOrItemId: champion.id,
-						abilityKey: abilityKey as IChampionAbilityKey,
-						abilityVariantIndex: 0,
-						name: championAbilitySectionName(champion.name, abilityKey as IChampionAbilityKey, nameReplaced),
-					};
-				}),
+						return {
+							championOrItemId: champion.id,
+							abilityKey: abilityKey as IChampionAbilityKey,
+							abilityVariantIndex,
+							name: championAbilitySectionName(champion.name, abilityKey as IChampionAbilityKey, nameReplaced),
+						};
+					}),
+				),
 		} satisfies IDamageSectionOption;
 	})
 	.toArray());
