@@ -59,7 +59,7 @@ interface IDamageSectionOption {
 		name: string;
 		championOrItemId: string;
 		abilityKey?: IChampionAbilityKey;
-		abilityVariant?: number;
+		abilityVariantIndex?: number;
 	}[];
 }
 
@@ -83,7 +83,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 				optionName: source.champion.value!.name,
 				abilities: abilityEntries
 					.map(([abilityKey, ability]) => {
-						const abilityVariant = ability.variants[source.abilityVariants.value[abilityKey as IChampionAbilityKey]]!;
+						const abilityVariant = ability.variants[source.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey]]!;
 						const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
 							abilityVariant.name,
 							source.champion.value!.stringtable,
@@ -92,12 +92,12 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 						return {
 							championOrItemId: source.champion.value!.id,
 							abilityKey: abilityKey as IChampionAbilityKey,
-							abilityVariant: 0,
+							abilityVariantIndex: 0,
 							name: championAbilitySectionName(source.champion.value!.name, abilityKey as IChampionAbilityKey, nameReplaced),
 						};
 					})
 					.filter(ability => !resultSections.value.some(section =>
-						section.championOrItemId === ability.championOrItemId && section.abilityKey === ability.abilityKey && section.abilityVariant === ability.abilityVariant),
+						section.championOrItemId === ability.championOrItemId && section.abilityKey === ability.abilityKey && section.abilityVariantIndex === ability.abilityVariantIndex),
 					),
 			} satisfies IDamageSectionOption;
 		})
@@ -133,7 +133,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 });
 
 function championAbilitySectionName(championName: string, abilityKey: IChampionAbilityKey, abilityName: string) {
-	return `${championName} ${abilityKey === 'passive' ? abilityKey : abilityKey.toUpperCase()} - ${abilityName}`;
+	return `${championName} ${abilityKey === 'passive' ? 'P' : abilityKey.toUpperCase()} - ${abilityName}`;
 }
 
 interface IComputedSection {
@@ -315,7 +315,7 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 		return;
 	}
 
-	const { abilityKey, abilityVariant } = section.hoverTooltipData as IChampionAbilityHoverTooltipProps;
+	const { abilityKey, abilityVariantIndex: abilityVariant } = section.hoverTooltipData as IChampionAbilityHoverTooltipProps;
 
 	const computedDescription = source.computed.abilities.value[abilityKey!][abilityVariant!];
 	if (computedDescription) {
@@ -355,18 +355,18 @@ function submitResultsSection(event: SubmitEvent) {
 function addResultSectionOption(optionIndex: number, abilityIndex: number) {
 	const option = damageSectionOptions.value[optionIndex]!;
 	const ability = option.abilities[abilityIndex]!;
-	return addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey, ability.abilityVariant, ability.name);
+	return addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey, ability.abilityVariantIndex, ability.name);
 }
 
 async function addResultsSection(
 	type: IDamageSectionOption['type'],
 	championOrItemId: string,
 	abilityKey?: IChampionAbilityKey,
-	abilityVariant?: number,
+	abilityVariantIndex?: number,
 	name = '',
 	expand = true,
 ) {
-	const id = `${championOrItemId}-${abilityKey ?? ''}-${abilityVariant ?? ''}`;
+	const id = `${championOrItemId}-${abilityKey ?? ''}-${abilityVariantIndex ?? ''}`;
 	if (resultSections.value.some(section => section.id === id) || (type === 'champion' && championOrItemId === 'TargetDummy')) {
 		return;
 	}
@@ -375,7 +375,7 @@ async function addResultsSection(
 		id,
 		championOrItemId,
 		abilityKey,
-		abilityVariant,
+		abilityVariantIndex,
 		type,
 		name,
 		image: undefined,
@@ -388,7 +388,7 @@ async function addResultsSection(
 
 	if (type === 'champion') {
 		const champion = await useChampion(championOrItemId);
-		if (!champion?.abilities[abilityKey!].variants[abilityVariant!]) {
+		if (!champion?.abilities[abilityKey!].variants[abilityVariantIndex!]) {
 			const index = resultSections.value.indexOf(section);
 			~index && resultSections.value.splice(index, 1);
 			const expandedIndex = expandedSections.value.indexOf(section.id);
@@ -398,7 +398,7 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariant!, undefined, undefined, { replaceWithName: true });
+		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex!, undefined, undefined, { replaceWithName: true });
 
 		section.name ||= championAbilitySectionName(champion.name, abilityKey!, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
@@ -408,7 +408,7 @@ async function addResultsSection(
 			group: `${sourceProperty.value}s`,
 			championId: champion.id,
 			abilityKey,
-			abilityVariant,
+			abilityVariantIndex,
 			precomputedDescription,
 		};
 		section.getCellValue = abilityVariableCellValue;
@@ -1337,7 +1337,7 @@ defineExpose({
 								<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
 									<option
 										v-for="(ability, abilityIndex) in option.abilities"
-										:key="`${ability.championOrItemId}-${ability.abilityKey}-${ability.abilityVariant}`"
+										:key="`${ability.championOrItemId}-${ability.abilityKey ?? ''}-${ability.abilityVariantIndex ?? ''}`"
 										:value="`${optionIndex}-${abilityIndex}`"
 										:disabled="enableUnimplementedUi ? undefined : option.optionId !== 'items'"
 									>

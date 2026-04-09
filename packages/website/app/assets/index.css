@@ -106,7 +106,7 @@
 	.pretend-ui-btn {
 		--at-apply: 'b b-[--ui-btn-border-clr] bg-cyan-950 disabled:brightness-60';
 
-		&:not(:disabled){
+		&:not(:disabled) {
 			--at-apply: 'hoverable:bg-cyan-900';
 		}
 
@@ -118,7 +118,7 @@
 	.other-ui-btn {
 		--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] disabled:brightness-60';
 
-		&:not(:disabled){
+		&:not(:disabled) {
 			--at-apply: 'hoverable:bg-neutral-800';
 		}
 	}

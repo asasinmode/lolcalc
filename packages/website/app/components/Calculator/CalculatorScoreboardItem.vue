@@ -1084,7 +1084,7 @@ defineExpose({ el });
 						<h5>passive</h5>
 						<img
 							v-show="!isLoading && value.champion.value"
-							:src="value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]!.image, value.champion.value.id, group) : undefined"
+							:src="value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariantsIndexes.value.passive]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
@@ -1102,7 +1102,7 @@ defineExpose({ el });
 						<h5>{{ abilityKey.toUpperCase() }}</h5>
 						<img
 							v-show="!isLoading && value.champion.value"
-							:src="value.champion.value ? abilityImage(value.champion.value.abilities[abilityKey].variants[value.abilityVariants.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
+							:src="value.champion.value ? abilityImage(value.champion.value.abilities[abilityKey].variants[value.abilityVariantsIndexes.value[abilityKey]]!.image, value.champion.value.id, group) : undefined"
 							:width="imageSizes.ability"
 							:height="imageSizes.ability"
 							aria-hidden="true"
@@ -1128,7 +1128,7 @@ defineExpose({ el });
 					:group
 					:champion-id="value.champion.value?.id"
 					:ability-key="hoveredAbilityKey"
-					:ability-variant="hoveredAbilityVariantIndex"
+					:ability-variant-index="hoveredAbilityVariantIndex"
 					:precomputed-description="hoveredAbilityKey && value.computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>

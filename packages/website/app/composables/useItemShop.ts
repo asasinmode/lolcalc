@@ -1,8 +1,8 @@
 import LolItemShop from '~/components/Lol/LolItemShop.vue';
 
 let resolve: (() => void) | undefined;
-const damageSourceRef = ref<DamageSource>();
-const dialogRef = ref<InstanceType<typeof LolItemShop>>();
+const damageSourceRef = shallowRef<DamageSource>();
+const dialogRef = shallowRef<InstanceType<typeof LolItemShop>>();
 
 async function selectItems(damageSource: DamageSource): Promise<void> {
 	damageSourceRef.value = damageSource;

@@ -15,13 +15,16 @@ export default withNuxt(
 			'curly': ['error', 'all'],
 			'no-labels': 'off',
 			'no-undef': 'off',
-			'vue/component-name-in-template-casing': ['warn', 'PascalCase', { registeredComponentsOnly: false }],
+			// stopped working after updating dependencies with
+			// Error while loading rule 'vue/component-name-in-template-casing': Cannot read properties of undefined (reading 'getTemplateBodyTokenStore')
+			// Occurred while linting D:\projects\lolcalc\packages\website\README.md
+			// 'vue/component-name-in-template-casing': ['warn', 'PascalCase', { registeredComponentsOnly: false }],
 			'style/lines-between-class-members': 'off',
 			'ts/no-non-null-asserted-optional-chain': 'off',
 			'test/no-import-node-test': 'off',
 		},
 		formatters: true,
 		ignores: ['app/assets/*.json', 'public/data/**/*.json'],
-		// @ts-expect-error https://github.com/unocss/unocss/issues/4919
+		// @ts-expect-error not sure what the issue is
 	}, unocss),
 );

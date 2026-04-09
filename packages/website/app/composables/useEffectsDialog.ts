@@ -2,7 +2,7 @@ import CalculatorEffectsDialog from '~/components/Calculator/CalculatorEffectsDi
 
 let resolve: (() => void) | undefined;
 const damageSourceRef = ref<DamageSource>();
-const dialogRef = ref<InstanceType<typeof CalculatorEffectsDialog>>();
+const dialogRef = shallowRef<InstanceType<typeof CalculatorEffectsDialog>>();
 
 async function selectEffects(damageSource: DamageSource): Promise<void> {
 	damageSourceRef.value = damageSource;

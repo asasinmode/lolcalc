@@ -18,7 +18,7 @@ const { abilityImage, abilityImageSize } = useChampionImages();
 	<VExtrasNumber
 		v-model="value.internalData.value.veigarP"
 		:id-prefix
-		:img="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image, 'Veigar')"
+		:img="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariantsIndexes.value.passive]!.image, 'Veigar')"
 		:img-size="abilityImageSize('Veigar')"
 		label="Phenomenal Evil stacks"
 		:used-number-input="useNumberInput([value.internalData, 'veigarP'])"

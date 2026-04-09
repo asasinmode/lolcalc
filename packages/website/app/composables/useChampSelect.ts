@@ -1,8 +1,8 @@
 import LolChampSelect from '~/components/Lol/LolChampSelect.vue';
 
 let resolve: (() => void) | undefined;
-const valueRef = ref<Ref<IListedChampion | undefined>>();
-const dialogRef = ref<InstanceType<typeof LolChampSelect>>();
+const valueRef = shallowRef<Ref<IListedChampion | undefined>>();
+const dialogRef = shallowRef<InstanceType<typeof LolChampSelect>>();
 
 async function selectChampion(champion: Ref<IListedChampion | undefined>): Promise<void> {
 	valueRef.value = champion;

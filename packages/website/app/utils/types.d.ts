@@ -42,12 +42,12 @@ export type IPossibleDynamicValues = Partial<Record<'all' | IChampionAbilityKey,
 export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVariables?: (damageSource: DamageSource) => any }>;
 
 export interface IDamageResultTableSection {
-	/** `${championOrItemId}-${abilityKey}-${abilityVariant}` */
+	/** `${championOrItemId}-${abilityKey}-${abilityVariantIndex}` */
 	id: string;
 	/** freestyled for `type: 'all'` sections */
 	championOrItemId: string;
 	abilityKey?: IChampionAbilityKey;
-	abilityVariant?: number;
+	abilityVariantIndex?: number;
 	type: 'all' | 'champion' | 'item';
 	/** stats and basic attack cannot be removed */
 	isPermanent?: boolean;
@@ -89,13 +89,13 @@ export interface IDamageResultTableColumn {
 
 export interface IChampionAbilityHoverTooltipProps {
 	/** used for target dummy's abilities */
-	group: 'sources' | 'targets';
+	group?: 'sources' | 'targets';
 	/** required for tooltip component to work really TODO try to make it make sense */
 	championId?: IChampionId;
 	/** required for tooltip component to work really TODO try to make it make sense */
 	abilityKey?: IChampionAbilityKey;
 	/** required for tooltip component to work really TODO try to make it make sense */
-	abilityVariant?: number;
+	abilityVariantIndex?: number;
 	abilityLevel?: number;
 	replaceVariablesWithNames?: boolean;
 	precomputedDescription?: IComputedAbilityDescription;
@@ -124,4 +124,11 @@ export interface IItemExtraProps<T = string> {
 	value: DamageSource;
 	idPrefix: string;
 	itemId: T;
+}
+
+export interface IDamageSourceEffectApplier {
+	/** same as `setupInternalData` for `DamageSource.appliedEffects[number].data` */
+	setupEffectData?: (self: DamageSource, effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
+	/** checks if effect's data is not the default value */
+	isEffectActive?: (data: any) => number | boolean;
 }

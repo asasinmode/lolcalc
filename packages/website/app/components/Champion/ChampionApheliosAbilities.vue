@@ -23,7 +23,7 @@ const abilitySize = abilityImageSize('Aphelios');
 	<div data-passive="">
 		<h5>passive</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariants.value.passive]!.image, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.passive.variants[value.abilityVariantsIndexes.value.passive]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
@@ -34,7 +34,7 @@ const abilitySize = abilityImageSize('Aphelios');
 	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
 		<h5>main weapon</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.q]!.image, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
@@ -42,7 +42,7 @@ const abilitySize = abilityImageSize('Aphelios');
 		>
 		<h5>Q</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.q.variants[value.abilityVariants.value.q]!.image, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.q.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
@@ -53,25 +53,25 @@ const abilitySize = abilityImageSize('Aphelios');
 		<h5>W</h5>
 		<h5>offhand weapon</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.w]!.imageAlt, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.w]!.imageAlt, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.w)"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariantsIndexes.value.w)"
 		>
 		<h5>next weapon</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariants.value.e]!.imageAlt, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.e]!.imageAlt, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariants.value.e)"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, 'e', value.abilityVariantsIndexes.value.e)"
 		>
 	</div>
 	<div data-aphelios-r="" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">
 		<h5>R</h5>
 		<img
-			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.r.variants[value.abilityVariants.value.r]!.image, 'Aphelios') : undefined"
+			:src="!isLoading && value.champion.value ? abilityImage(value.champion.value.abilities.r.variants[value.abilityVariantsIndexes.value.r]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"

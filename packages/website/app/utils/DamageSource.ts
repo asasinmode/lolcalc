@@ -8,7 +8,7 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	items: UnwrapRef<IDamageSource['items']>;
 	runes: UnwrapRef<IDamageSource['runes']>;
 	abilityLevels: Partial<UnwrapRef<IDamageSource['abilityLevels']>>;
-	abilityVariants: Partial<UnwrapRef<IDamageSource['abilityVariants']>>;
+	abilityVariants: Partial<UnwrapRef<IDamageSource['abilityVariantsIndexes']>>;
 	currentHealth: UnwrapRef<IDamageSource['currentHealth']>;
 	currentAbilityResource: UnwrapRef<IDamageSource['currentAbilityResource']>;
 	dragonStacks: UnwrapRef<IDamageSource['dragonStacks']>;
@@ -31,9 +31,10 @@ export interface IDamageSourceEffect<T extends any[] = any[]> {
 	type: 'champion' | 'item';
 	championOrItemId: string;
 	abilityKey?: string;
-	abilityVariant?: number;
+	abilityVariantIndex?: number;
 	/** any effect data, stored in array like `[carve: number, fervor: boolean]` for easier stringifying/parsing */
 	data: T;
+	isActive: (data: T) => number | boolean;
 }
 
 export class DamageSource<Id extends IChampionId | undefined = any> {
@@ -71,8 +72,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.champion.value?.abilities[key as IChampionAbilityKey].maxLevel ?? 5,
 	])) as Record<INonPassiveAbilityKey, number>);
 
-	abilityVariants: Ref<Record<IChampionAbilityKey, number>>;
-	maxAbilityVariants = computed(() => Object.fromEntries(Object.keys(this.abilityVariants.value).map(key => [
+	abilityVariantsIndexes: Ref<Record<IChampionAbilityKey, number>>;
+	maxAbilityVariantsIndexes = computed(() => Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map(key => [
 		key as IChampionAbilityKey,
 		(this.champion.value?.abilities[key as IChampionAbilityKey].variants.length ?? 1) - 1,
 	])) as Record<IChampionAbilityKey, number>);
@@ -155,7 +156,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.currentHealth = ref(overrides.currentHealth ?? (this.stats.value?.stats.total.hp ?? 0));
 		this.currentAbilityResource = ref(overrides.currentAbilityResource ?? (this.stats.value?.stats.total.mana ?? 0));
 		this.abilityLevels = ref({ q: 0, w: 0, e: 0, r: 0, ...overrides.abilityLevels });
-		this.abilityVariants = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...overrides.abilityVariants });
+		this.abilityVariantsIndexes = ref({ passive: 0, q: 0, w: 0, e: 0, r: 0, ...overrides.abilityVariants });
 		this.dragonStacks = ref(overrides.dragonStacks ?? Array.from({ length: 4 }));
 		this.dragonSoul = ref(overrides.dragonSoul);
 		this.roleQuest = ref(overrides.roleQuest);
@@ -190,10 +191,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						));
 					}
 
-					for (const abilityKey in this.abilityVariants.value) {
-						this.abilityVariants.value[abilityKey as IChampionAbilityKey] = Math.max(0, Math.min(
-							this.abilityVariants.value[abilityKey as IChampionAbilityKey],
-							this.maxAbilityVariants.value[abilityKey as IChampionAbilityKey],
+					for (const abilityKey in this.abilityVariantsIndexes.value) {
+						this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey] = Math.max(0, Math.min(
+							this.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey],
+							this.maxAbilityVariantsIndexes.value[abilityKey as IChampionAbilityKey],
 						));
 					}
 
@@ -207,7 +208,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 				const level = c?.id === 'TargetDummy' ? 1 : 0;
 				this.abilityLevels.value = { q: level, w: level, e: level, r: level };
-				this.abilityVariants.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
+				this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 
 				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 			}),
@@ -293,7 +294,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			currentHealth: this.currentHealth.value,
 			currentAbilityResource: this.currentAbilityResource.value,
 			abilityLevels: structuredClone(toRaw(this.abilityLevels.value)),
-			abilityVariants: structuredClone(toRaw(this.abilityVariants.value)),
+			abilityVariants: structuredClone(toRaw(this.abilityVariantsIndexes.value)),
 			dragonStacks: structuredClone(toRaw(this.dragonStacks.value)),
 			dragonSoul: this.dragonSoul.value,
 			roleQuest: this.roleQuest.value,
@@ -328,11 +329,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.abilityLevels.value.w = 0;
 		this.abilityLevels.value.e = 0;
 		this.abilityLevels.value.r = 0;
-		this.abilityVariants.value.passive = 0;
-		this.abilityVariants.value.q = 0;
-		this.abilityVariants.value.w = 0;
-		this.abilityVariants.value.e = 0;
-		this.abilityVariants.value.r = 0;
+		this.abilityVariantsIndexes.value.passive = 0;
+		this.abilityVariantsIndexes.value.q = 0;
+		this.abilityVariantsIndexes.value.w = 0;
+		this.abilityVariantsIndexes.value.e = 0;
+		this.abilityVariantsIndexes.value.r = 0;
 		for (let i = 0; i < this.dragonStacks.value.length; i++) {
 			this.dragonStacks.value[i] = undefined;
 		}
@@ -353,7 +354,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.currentHealth,
 			this.currentAbilityResource,
 			() => Object.values(this.abilityLevels.value).join('-'),
-			() => Object.values(this.abilityVariants.value).join('-'),
+			() => Object.values(this.abilityVariantsIndexes.value).join('-'),
 			this.roleQuest,
 			() => this.dragonStacks.value.join('-'),
 			this.dragonSoul,
@@ -400,7 +401,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			roundVariable(this.currentHealth.value, 3),
 			roundVariable(this.currentAbilityResource.value, 3),
 			Object.values(this.abilityLevels.value).join('-'),
-			Object.values(this.abilityVariants.value).join('-'),
+			Object.values(this.abilityVariantsIndexes.value).join('-'),
 			this.dragonStacks.value.filter(Boolean).map(stack => dragonKeys.indexOf(stack!)).join('-'),
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
@@ -572,13 +573,13 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		if (rawAbilityVariants?.length) {
 			const abilityVariants = rawAbilityVariants.split('-');
-			const abilityKeys = Object.keys(rv.abilityVariants.value);
+			const abilityKeys = Object.keys(rv.abilityVariantsIndexes.value);
 			for (let i = 0; i < abilityKeys.length; i++) {
 				if (abilityVariants[i]) {
 					const parsedVariant = Number.parseInt(abilityVariants[i]!);
 					if (!Number.isNaN(parsedVariant)) {
 						const abilityKey = abilityKeys[i] as IChampionAbilityKey;
-						rv.abilityVariants.value[abilityKey]
+						rv.abilityVariantsIndexes.value[abilityKey]
 							= Math.max(0, parsedVariant);
 					}
 				}
@@ -660,33 +661,37 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	getEffect({ type, championOrItemId, abilityKey, abilityVariant }: Omit<IDamageSourceEffect, 'id' | 'data'>): [IDamageSourceEffect, index: number] | undefined {
-		const index = this.appliedEffects.value.findIndex(effect => effect.type === type && effect.championOrItemId === championOrItemId && effect.abilityKey === abilityKey && effect.abilityVariant === abilityVariant);
+	getEffect({ type, championOrItemId, abilityKey, abilityVariantIndex }: Pick<IDamageSourceEffect, 'type' | 'championOrItemId' | 'abilityKey' | 'abilityVariantIndex'>): [IDamageSourceEffect, index: number] | undefined {
+		const index = this.appliedEffects.value.findIndex(effect => effect.type === type && effect.championOrItemId === championOrItemId && effect.abilityKey === abilityKey && effect.abilityVariantIndex === abilityVariantIndex);
 
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	addEffect({type, championOrItemId, abilityKey, abilityVariant}: Omit<IDamageSourceEffect, 'id' | 'data'>) {
-		// TODO champion
-		const specific = type === 'item' ? ITEM_SPECIFICS[championOrItemId as keyof TItemSpecifics] : undefined;
-		if(!specific || !('setupEffectData' in specific)){
+	addEffect({ type, championOrItemId, abilityKey, abilityVariantIndex }: Pick<IDamageSourceEffect, 'type' | 'championOrItemId' | 'abilityKey' | 'abilityVariantIndex'>) {
+		const specific = type === 'item'
+			? ITEM_SPECIFICS[championOrItemId as keyof TItemSpecifics]
+			: type === 'champion'
+				? (CHAMPION_SPECIFICS[championOrItemId as keyof TChampionSpecifics] as IChampionSpecificsWithAbilities)?.[abilityKey as IChampionAbilityKey]?.[abilityVariantIndex!]
+				: undefined;
+		if (!specific || !('setupEffectData' in specific)) {
 			console.warn(`[DamageSource.addEffect] tried to add effect for ${type} ${championOrItemId} without 'setupEffectData'`);
 			return;
 		}
 
 		this.appliedEffects.value.push({
-			id: `${type}-${championOrItemId}-${abilityKey ?? ''}-${abilityVariant ?? ''}`,
+			id: `${type}-${championOrItemId}-${abilityKey ?? ''}-${abilityVariantIndex ?? ''}`,
 			type,
 			championOrItemId,
 			abilityKey,
-			abilityVariant,
-			data: specific.setupEffectData(this, undefined)
-		})
+			abilityVariantIndex,
+			data: specific.setupEffectData!(this, undefined),
+			isActive: specific.isEffectActive!,
+		});
 	}
 
 	removeEffect(id: string) {
 		const index = this.appliedEffects.value.findIndex(effect => effect.id === id);
-		if(~index){
+		if (~index) {
 			this.appliedEffects.value.splice(index, 1);
 		}
 	}
@@ -835,7 +840,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
 			const { minorVersion } = usePatchVersion();
 
-			return Object.fromEntries(Object.keys(this.abilityVariants.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
+			return Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
 				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computedAbilityDescription(
 					minorVersion,
@@ -1011,7 +1016,7 @@ export function computedAbilityDescription(
 	minorVersion: string,
 	champion: IChampion,
 	abilityKey: IChampionAbilityKey,
-	abilityVariant: number,
+	abilityVariantIndex: number,
 	abilityLevel?: number,
 	_damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
@@ -1020,7 +1025,7 @@ export function computedAbilityDescription(
 
 	abilityLevel = abilityKey !== 'passive' ? abilityLevel || 1 : undefined;
 	const ability = champion.abilities[abilityKey];
-	const variant = ability.variants[abilityVariant]!;
+	const variant = ability.variants[abilityVariantIndex]!;
 	const allVariants = allChampionAbilityVariants(champion);
 
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(

@@ -62,8 +62,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] jax
       - [ ] target dummy stats
     - [x] extras ui items
+    - [?] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [?] shapeshifting champions choose shape, switch abilities since it can affect stats
-    - [?] apply effects like black cleaver, abyssal mask
   - [?] detect invalid ability levels
   - [x] mirror layout
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
@@ -113,6 +113,13 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] try not to intercept all right clicks
   - [x] ctrl toggle between shop/inventory extras & sell value
   - [x] extended item hover tooltips, like swiftmarch showing adaptive force gained (\<rules\>)
+- [ ] effects dialog
+  - [?] apply effects like black cleaver, abyssal mask, amumu passive
+  - [ ] item effects options ui
+  - [ ] champion passive effects options ui
+  - [ ] hover tooltips
+  - [ ] something like `useEffects` and create list of them in `updateGameData`, then during runtime only generate tooltips, possibly future feature
+- [ ] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
@@ -124,8 +131,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] stats from rune shards
   - [ ] dragons/souls
   - [ ] resolve game variables
-  - [ ] items
+  - [ ] items passives
   - [ ] champion passives
+  - [ ] item effects
+  - [ ] champion effects
   - [ ] basic attack damage
   - [ ] use everything that has extra ui (and internalData on source)
   - [ ] level breakpoint calculations
@@ -148,6 +157,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] dragging items
   - [ ] right click to sell items
   - [ ] right click to clear ability level/soul/role quest/others
+  - [ ] difference between "internal effects" (item extras) and "applied effects" (effects dialog)
+  - [ ] "tutorial library" to review info
 - [ ] keyboard navigation
   - [ ] somehow right clicks, like clearing selects/removing items
   - [ ] show hover tooltips when navigated to with keyboard

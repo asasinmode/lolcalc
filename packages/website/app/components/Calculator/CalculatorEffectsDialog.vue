@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import type { IChampionAbilityHoverTooltipProps, IItemDescriptionProps } from '~/utils/types';
+
 const damageSource = defineModel<DamageSource>();
 
+const text = useText();
 const items = useItems();
+const { minorVersion } = usePatchVersion();
 
 const vDialog = useTemplateRef('vDialog');
-
-const itemsWithEffects = Object.entries(ITEM_SPECIFICS).filter(([,specific]) => 'setupEffectData' in specific).map(([itemId]) => items[itemId]!).sort((itemA, itemB) => itemA.name.localeCompare(itemB.name));
 
 interface IEffectOptionGroup {
 	type: 'champion' | 'item';
@@ -14,26 +16,95 @@ interface IEffectOptionGroup {
 		championOrItemId: string;
 		name: string;
 		abilityKey?: IChampionAbilityKey;
-		abilityVariant?: number;
+		abilityVariantIndex?: number;
+		hoverTooltipData: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'>;
 	}[];
 }
 
-const effectOptionGroups = computed(() => {
-	const groups: IEffectOptionGroup[] = [];
+const itemEffects: IEffectOptionGroup['options'] = Object
+	.entries(ITEM_SPECIFICS)
+	.filter(([, specific]) => 'setupEffectData' in specific)
+	.map(([itemId]): IEffectOptionGroup['options'][number] => {
+		const item = items[itemId]!;
+		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
 
-	groups.push({
-		type: 'item',
-		label: 'items',
-		options: itemsWithEffects.map((item): IEffectOptionGroup['options'][number] => ({
+		return {
 			championOrItemId: item.id,
 			name: item.name,
-		})).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-			appliedEffect.type === 'item' && appliedEffect.championOrItemId === effect.championOrItemId
-		)),
-	});
+			hoverTooltipData: {
+				precomputedDescription,
+			},
+		};
+	})
+	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
+
+const championEffects = shallowRef<IEffectOptionGroup['options']>();
+
+const isLoading = ref(false);
+
+const effectOptionGroups = computed((): IEffectOptionGroup[] => {
+	const groups: IEffectOptionGroup[] = [
+		{
+			type: 'champion',
+			label: 'champions',
+			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
+				appliedEffect.type === 'champion' && appliedEffect.championOrItemId === effect.championOrItemId && appliedEffect.abilityKey === effect.abilityKey && appliedEffect.abilityVariantIndex === effect.abilityVariantIndex,
+			)),
+		},
+		{
+			type: 'item',
+			label: 'items',
+			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
+				appliedEffect.type === 'item' && appliedEffect.championOrItemId === effect.championOrItemId,
+			)),
+		},
+	];
 
 	return groups.filter(group => group.options.length);
 });
+
+async function loadChampionEffects() {
+	if (championEffects.value || isLoading.value) {
+		return;
+	}
+	isLoading.value = true;
+
+	championEffects.value = (await Promise.all(Object.entries(CHAMPION_SPECIFICS)
+		.map(async ([championId, specific]): Promise<IEffectOptionGroup['options']> => {
+			const effects: IEffectOptionGroup['options'] = [];
+			let champion: IChampion;
+
+			for (const abilityKey of ALL_CHAMPION_ABILITY_KEYS) {
+				const abilitySpecific = (specific as IChampionSpecificsWithAbilities)[abilityKey];
+				if (abilitySpecific) {
+					for (const [abilityVariantIndex, variantSpecific] of Object.entries(abilitySpecific) as unknown as [number, IChampionAbilityVariantSpecific][]) {
+						if ('setupEffectData' in variantSpecific) {
+							champion ||= await useChampion(championId);
+
+							const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex as unknown as number);
+
+							effects.push({
+								championOrItemId: championId,
+								abilityVariantIndex,
+								abilityKey,
+								name: `${champion.name} ${abilityKey === 'passive' ? 'P' : abilityKey.toUpperCase()} - ${champion.abilities[abilityKey]!.variants[abilityVariantIndex as unknown as number]!.name}`,
+								hoverTooltipData: {
+									precomputedDescription,
+									championId: championId as IChampionId,
+									abilityKey,
+									abilityVariantIndex: abilityVariantIndex as unknown as number,
+								},
+							});
+						}
+					}
+				}
+			}
+
+			return effects;
+		}))).filter(effects => effects.length).flatMap(effects => effects);
+
+	isLoading.value = false;
+}
 
 function submitAnotherEffect(event: SubmitEvent) {
 	const value = new FormData(event.target as HTMLFormElement).get('optionIndexes')! as string;
@@ -48,7 +119,7 @@ function submitAnotherEffect(event: SubmitEvent) {
 		type: group.type,
 		championOrItemId: option.championOrItemId,
 		abilityKey: option.abilityKey,
-		abilityVariant: option.abilityVariant
+		abilityVariantIndex: option.abilityVariantIndex,
 	});
 	(event.target as HTMLFormElement).reset();
 }
@@ -59,7 +130,7 @@ defineExpose({
 </script>
 
 <template>
-	<VDialog id="dialog-effects" ref="vDialog">
+	<VDialog id="dialog-effects" ref="vDialog" :aria-busy="isLoading" @open="loadChampionEffects">
 		<header>
 			<h1>
 				effects
@@ -73,7 +144,8 @@ defineExpose({
 				</button>
 			</form>
 		</header>
-		<ul>
+		<h2>loading...</h2>
+		<ul :inert="isLoading">
 			<li v-for="effect in damageSource?.appliedEffects.value" :key="effect.id">
 				{{ effect.id }}
 				<button @click="damageSource?.removeEffect(effect.id)">
@@ -81,7 +153,7 @@ defineExpose({
 				</button>
 			</li>
 		</ul>
-		<form @submit.prevent="submitAnotherEffect">
+		<form :inert="isLoading" @submit.prevent="submitAnotherEffect">
 			<label for="dialog-effects-add-new-effect">
 				add effect
 			</label>
@@ -97,7 +169,7 @@ defineExpose({
 				<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label">
 					<option
 						v-for="(option, optionIndex) in group.options"
-						:key="`${group.type}-${option.championOrItemId}-${option.abilityKey}-${option.abilityVariant}`"
+						:key="`${group.type}-${option.championOrItemId}-${option.abilityKey ?? ''}-${option.abilityVariantIndex ?? ''}`"
 						:value="`${groupIndex}-${optionIndex}`"
 					>
 						{{ option.name }}
@@ -122,6 +194,16 @@ defineExpose({
 
 		&[open] {
 			--at-apply: 'grid';
+		}
+
+		> h2 {
+			--at-apply: 'hidden z-10 text-center absolute inset-0 inset-t-10 font-600 text-2xl backdrop-blur-2';
+			-webkit-text-stroke: black 0.1em;
+			paint-order: stroke fill;
+		}
+
+		&[aria-busy='true'] > h2 {
+			--at-apply: 'block';
 		}
 
 		> header {

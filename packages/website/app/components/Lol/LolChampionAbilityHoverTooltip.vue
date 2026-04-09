@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import type { IChampionAbilityHoverTooltipProps } from '~/utils/types';
 
-const props = defineProps<IChampionAbilityHoverTooltipProps>();
+const props = withDefaults(
+	defineProps<IChampionAbilityHoverTooltipProps>(),
+	{
+		group: 'sources',
+	},
+);
 
 const { minorVersion } = usePatchVersion();
 const { abilityImage, abilityImageSize } = useChampionImages();
@@ -25,23 +30,23 @@ watch(() => props.championId, async (id) => {
 }, { immediate: true });
 
 const ability = computed(() => {
-	if (!isLoading.value && props.abilityKey && props.abilityVariant !== undefined && champion.value) {
+	if (!isLoading.value && props.abilityKey && props.abilityVariantIndex !== undefined && champion.value) {
 		return champion.value.abilities[props.abilityKey];
 	}
 	return undefined;
 });
 
 const variant = computed(() =>
-	props.abilityVariant !== undefined ? ability.value?.variants[props.abilityVariant] : undefined,
+	props.abilityVariantIndex !== undefined ? ability.value?.variants[props.abilityVariantIndex] : undefined,
 );
 
 const computedDescription = computed<IComputedAbilityDescription | undefined>(() =>
-	props.precomputedDescription || (champion.value && props.abilityKey && props.abilityVariant !== undefined
+	props.precomputedDescription || (champion.value && props.abilityKey && props.abilityVariantIndex !== undefined
 		? computedAbilityDescription(
 				minorVersion,
 				champion.value!,
 				props.abilityKey,
-				props.abilityVariant,
+				props.abilityVariantIndex,
 				props.abilityLevel,
 				undefined,
 				{ replaceWithName: props.replaceVariablesWithNames },

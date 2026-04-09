@@ -25,7 +25,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 <template>
 	<article class="extras-aphelios-ability-levels">
 		<img
-			:src="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariants.value.passive]!.image, 'Veigar')"
+			:src="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariantsIndexes.value.passive]!.image, 'Veigar')"
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"

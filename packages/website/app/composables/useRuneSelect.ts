@@ -1,8 +1,8 @@
 import LolRuneSelect from '~/components/Lol/LolRuneSelect.vue';
 
 let resolve: (() => void) | undefined;
-const valueRef = ref<Ref<IChampionRunes>>();
-const dialogRef = ref<InstanceType<typeof LolRuneSelect>>();
+const valueRef = shallowRef<Ref<IChampionRunes>>();
+const dialogRef = shallowRef<InstanceType<typeof LolRuneSelect>>();
 
 async function selectRunes(targetRef: Ref<IChampionRunes>): Promise<void> {
 	valueRef.value = targetRef;

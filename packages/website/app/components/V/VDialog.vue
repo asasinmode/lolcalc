@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const emit = defineEmits<{
+	open: [];
 	close: [isCancelled: boolean];
 }>();
 
@@ -31,6 +32,7 @@ onBeforeUnmount(() => {
 defineExpose({
 	open() {
 		dialogEl.value?.showModal();
+		emit('open');
 		setTimeout(() => document.addEventListener('click', closeOnClickOutside), 0);
 	},
 	close(returnValue?: string) {

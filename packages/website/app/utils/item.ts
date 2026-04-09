@@ -1,4 +1,4 @@
-import type { IShopItem } from './types';
+import type { IDamageSourceEffectApplier, IShopItem } from './types';
 import itemsData from '../assets/item.json';
 
 const { data: items } = itemsData;
@@ -180,21 +180,29 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.blackCleaver]: {
-		setupEffectData(self, effect): [carve: number, fervor: boolean] {
+		setupEffectData(self, effect): [carve: number, fervor: 0 | 1] {
 			console.log('setting up black cleaver effect', effect, self.appliedEffects.value);
 			return [
 				Math.max(0, Math.min(5, effect?.data[0] ?? 0)),
-				Boolean(effect?.data[1]),
+				Math.max(0, Math.min(1, effect?.data[1])) as 0 | 1,
 			];
+		},
+		isEffectActive(data) {
+			const [carve, fervor] = data as [carve: number, fervor: 0 | 1];
+			return carve || fervor;
 		},
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
-		setupEffectData(self, effect): [inspiringSpeech: boolean] {
+		setupEffectData(self, effect): [inspiringSpeech: 0 | 1] {
 			console.log('setting up shurelya effect', effect, self.appliedEffects.value);
-			return [Boolean(effect?.data[0])];
+			return [Math.max(0, Math.min(1, effect?.data[0])) as 0 | 1];
+		},
+		isEffectActive(data) {
+			const [inspiringSpeech] = data as [inspiringSpeech: 0 | 1];
+			return inspiringSpeech;
 		},
 	},
-} satisfies Record<string, {
+} satisfies Record<string, IDamageSourceEffectApplier & {
 	/**
 	 * similar to `utils/champion.ts` `CHAMPION_SPECIFICS.setupInternalData` for `DamageSource.internalItemData`
 	 * except the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
@@ -208,8 +216,6 @@ export const ITEM_SPECIFICS = {
 	itemImageText?: (internalData: any, property?: any) => string | number;
 	/** sr only label for the shown image text */
 	itemImageTextLabel?: string;
-	/** same as `setupInternalData` for `DamageSource.internalEffectsData` */
-	setupEffectData?: (self: DamageSource, effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
 }>;
 
 export function calculateItemDiscount(

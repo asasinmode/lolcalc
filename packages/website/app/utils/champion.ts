@@ -1,4 +1,4 @@
-import type { IPossibleDynamicValues } from './types';
+import type { IDamageSourceEffectApplier, IPossibleDynamicValues } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
@@ -8,11 +8,46 @@ const aph1to5 = [1, 2, 3, 4, 5];
 
 export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';
 
+export type TChampionSpecifics = typeof CHAMPION_SPECIFICS;
+
+/**
+	* `IChampionAbilityKey` are arrays which objects containing per variant specifics
+	* so something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be all specifics for variant 0 of Amumu's passive
+	*
+	*/
+export type IChampionSpecificsWithAbilities = {
+	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
+};
+
+export interface IChampionAbilitySpecific {
+	/**
+	 * ability's variant specific
+	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be all specific for variant 0 of Amumu's passive
+	 */
+	[key: number]: IChampionAbilityVariantSpecific;
+}
+
+export interface IChampionAbilityVariantSpecific extends IDamageSourceEffectApplier {
+}
+
 /**
  * object containing specific champion's helpers, utils and calculations
  * for `POSSIBLE_DYNAMIC_VALUES` see `./types.d.ts`
  */
 export const CHAMPION_SPECIFICS = {
+	Amumu: {
+		passive: {
+			0: {
+				setupEffectData(self, effect): [cursedTouch: boolean] {
+					console.log('setting up amumu passive effect', effect, self);
+					return [Boolean(effect?.data[0])];
+				},
+				isEffectActive(data) {
+					return (data as [cursedTouch: boolean])[0];
+				},
+			},
+		},
+	},
 	Aphelios: {
 		WEAPON_ORDER_MAP: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>,
 		/* stringtable variants are different from order. `apheliosgun_name_1` is for calibrum and so on */
@@ -35,8 +70,8 @@ export const CHAMPION_SPECIFICS = {
 			mainHand: IApheliosWeapon;
 			offHand: IApheliosWeapon;
 		} {
-			self.abilityVariants.value.w = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.severum;
-			self.abilityVariants.value.e = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.gravitum;
+			self.abilityVariantsIndexes.value.w = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.severum;
+			self.abilityVariantsIndexes.value.e = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.gravitum;
 
 			return {
 				mainHand: 'calibrum',
@@ -73,6 +108,11 @@ export const CHAMPION_SPECIFICS = {
 		 */
 		setupInternalData?: (self: DamageSource<Id>) => any;
 		POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+		passive?: IChampionAbilitySpecific;
+		q?: IChampionAbilitySpecific;
+		w?: IChampionAbilitySpecific;
+		e?: IChampionAbilitySpecific;
+		r?: IChampionAbilitySpecific;
 		[key: string]: any;
 	}
 }>;
