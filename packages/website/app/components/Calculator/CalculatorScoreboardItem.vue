@@ -2085,7 +2085,7 @@ defineExpose({ el });
 				--at-apply: 'self-center';
 
 				> h4 {
-					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3';
+					--at-apply: 'absolute -top-0.5 start-0 text-xs uppercase font-500 text-neutral-300 leading-3 whitespace-nowrap';
 				}
 			}
 

@@ -1476,7 +1476,8 @@ defineExpose({
 						}
 
 						> label {
-							--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width] b-[--col-damage-source-clr,var(--ui-btn-border-clr)]';
+							--at-apply: 'rounded-1/2 size-full of-hidden bg-[--placeholder-champion-bg-clr] b-[length:--b-width]';
+							border-color: var(--col-damage-source-clr, var(--ui-btn-border-clr));
 
 							> img {
 								--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -1492,7 +1493,7 @@ defineExpose({
 						}
 
 						&:nth-of-type(2) > label {
-							--at-apply: 'b-[--col-damage-target-clr,var(--ui-btn-border-clr)]';
+							border-color: var(--col-damage-target-clr, var(--ui-btn-border-clr));
 						}
 					}
 

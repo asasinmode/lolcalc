@@ -5,7 +5,7 @@ const items = useItems();
 
 const vDialog = useTemplateRef('vDialog');
 
-const itemsWithEffects = Object.entries(ITEM_SPECIFICS).filter(([,specific]) => 'setupEffectData' in specific).map(([itemId]) => items[itemId]!);
+const itemsWithEffects = Object.entries(ITEM_SPECIFICS).filter(([,specific]) => 'setupEffectData' in specific).map(([itemId]) => items[itemId]!).sort((itemA, itemB) => itemA.name.localeCompare(itemB.name));
 
 interface IEffectOptionGroup {
 	type: 'champion' | 'item';
@@ -27,7 +27,9 @@ const effectOptionGroups = computed(() => {
 		options: itemsWithEffects.map((item): IEffectOptionGroup['options'][number] => ({
 			championOrItemId: item.id,
 			name: item.name,
-		})),
+		})).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
+			appliedEffect.type === 'item' && appliedEffect.championOrItemId === effect.championOrItemId
+		)),
 	});
 
 	return groups.filter(group => group.options.length);
@@ -39,10 +41,16 @@ function submitAnotherEffect(event: SubmitEvent) {
 		return;
 	}
 
-	// const [rawGroupIndex, rawOptionIndex] = value.split('-');
-	console.log('adding', value);
-	// (event.target as HTMLFormElement).reset();
-	// addResultSectionOption(Number.parseInt(rawOptionIndex!), Number.parseInt(rawAbilityIndex!));
+	const [rawGroupIndex, rawOptionIndex] = value.split('-');
+	const group = effectOptionGroups.value[Number.parseInt(rawGroupIndex!)]!;
+	const option = group.options[Number.parseInt(rawOptionIndex!)]!;
+	damageSource.value?.addEffect({
+		type: group.type,
+		championOrItemId: option.championOrItemId,
+		abilityKey: option.abilityKey,
+		abilityVariant: option.abilityVariant
+	});
+	(event.target as HTMLFormElement).reset();
 }
 
 defineExpose({
@@ -66,8 +74,9 @@ defineExpose({
 			</form>
 		</header>
 		<ul>
-			<li>
-				<button>
+			<li v-for="effect in damageSource?.appliedEffects.value" :key="effect.id">
+				{{ effect.id }}
+				<button @click="damageSource?.removeEffect(effect.id)">
 					remove
 				</button>
 			</li>
@@ -76,7 +85,15 @@ defineExpose({
 			<label for="dialog-effects-add-new-effect">
 				add effect
 			</label>
-			<select id="dialog-effects-add-new-effect" name="optionIndexes" required>
+			<select
+				id="dialog-effects-add-new-effect"
+				name="optionIndexes"
+				required
+				:disabled="!effectOptionGroups.length"
+			>
+				<option v-if="!effectOptionGroups.length">
+					no options left
+				</option>
 				<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label">
 					<option
 						v-for="(option, optionIndex) in group.options"
@@ -87,7 +104,11 @@ defineExpose({
 					</option>
 				</optgroup>
 			</select>
-			<button type="submit" class="other-ui-btn">
+			<button
+				type="submit"
+				class="other-ui-btn"
+				:disabled="!effectOptionGroups.length"
+			>
 				add
 			</button>
 		</form>

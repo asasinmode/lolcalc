@@ -104,7 +104,11 @@
 	}
 
 	.pretend-ui-btn {
-		--at-apply: 'b b-[--ui-btn-border-clr] bg-cyan-950 hoverable:bg-cyan-900 disabled:hoverable:bg-cyan-950 disabled:brightness-60';
+		--at-apply: 'b b-[--ui-btn-border-clr] bg-cyan-950 disabled:brightness-60';
+
+		&:not(:disabled){
+			--at-apply: 'hoverable:bg-cyan-900';
+		}
 
 		.icon {
 			--at-apply: 'text-[--ui-pretend-button-icon-clr]';
@@ -112,7 +116,11 @@
 	}
 
 	.other-ui-btn {
-		--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800';
+		--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] disabled:brightness-60';
+
+		&:not(:disabled){
+			--at-apply: 'hoverable:bg-neutral-800';
+		}
 	}
 
 	.inline-search-label {

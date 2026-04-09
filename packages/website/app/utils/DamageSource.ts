@@ -109,7 +109,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	roleQuest: Ref<IChampionRole | undefined>;
 
 	anythingFilled = computed(() => {
-		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
+		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value || this.appliedEffects.value.length);
 	});
 
 	/** keys prefixed with `_` will not be stringified */
@@ -254,7 +254,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (!value) {
 					for (let i = 0; i < this.items.value.length; i++) {
 						const item = this.items.value[i];
-						if (item && RANGED_ONLY_ITEM_IDS.includes(item.id)) {
+						if (item && (RANGED_ONLY_ITEM_IDS as string[]).includes(item.id)) {
 							this.items.value[i] = undefined;
 						}
 					}
@@ -660,10 +660,35 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	getEffect({ type, championOrItemId, abilityKey, abilityVariant }: Omit<IDamageSourceEffect, 'data'>): [IDamageSourceEffect, index: number] | undefined {
+	getEffect({ type, championOrItemId, abilityKey, abilityVariant }: Omit<IDamageSourceEffect, 'id' | 'data'>): [IDamageSourceEffect, index: number] | undefined {
 		const index = this.appliedEffects.value.findIndex(effect => effect.type === type && effect.championOrItemId === championOrItemId && effect.abilityKey === abilityKey && effect.abilityVariant === abilityVariant);
 
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
+	}
+
+	addEffect({type, championOrItemId, abilityKey, abilityVariant}: Omit<IDamageSourceEffect, 'id' | 'data'>) {
+		// TODO champion
+		const specific = type === 'item' ? ITEM_SPECIFICS[championOrItemId as keyof TItemSpecifics] : undefined;
+		if(!specific || !('setupEffectData' in specific)){
+			console.warn(`[DamageSource.addEffect] tried to add effect for ${type} ${championOrItemId} without 'setupEffectData'`);
+			return;
+		}
+
+		this.appliedEffects.value.push({
+			id: `${type}-${championOrItemId}-${abilityKey ?? ''}-${abilityVariant ?? ''}`,
+			type,
+			championOrItemId,
+			abilityKey,
+			abilityVariant,
+			data: specific.setupEffectData(this, undefined)
+		})
+	}
+
+	removeEffect(id: string) {
+		const index = this.appliedEffects.value.findIndex(effect => effect.id === id);
+		if(~index){
+			this.appliedEffects.value.splice(index, 1);
+		}
 	}
 
 	computed = {
