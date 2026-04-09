@@ -1,15 +1,45 @@
 <script setup lang="ts">
 const damageSource = defineModel<DamageSource>();
 
+const items = useItems();
+
 const vDialog = useTemplateRef('vDialog');
 
+const itemsWithEffects = Object.entries(ITEM_SPECIFICS).filter(([,specific]) => 'setupEffectData' in specific).map(([itemId]) => items[itemId]!);
+
+interface IEffectOptionGroup {
+	type: 'champion' | 'item';
+	label: string;
+	options: {
+		championOrItemId: string;
+		name: string;
+		abilityKey?: IChampionAbilityKey;
+		abilityVariant?: number;
+	}[];
+}
+
+const effectOptionGroups = computed(() => {
+	const groups: IEffectOptionGroup[] = [];
+
+	groups.push({
+		type: 'item',
+		label: 'items',
+		options: itemsWithEffects.map((item): IEffectOptionGroup['options'][number] => ({
+			championOrItemId: item.id,
+			name: item.name,
+		})),
+	});
+
+	return groups.filter(group => group.options.length);
+});
+
 function submitAnotherEffect(event: SubmitEvent) {
-	const value = new FormData(event.target as HTMLFormElement).get('effectOptionIndex')! as string;
+	const value = new FormData(event.target as HTMLFormElement).get('optionIndexes')! as string;
 	if (!value) {
 		return;
 	}
 
-	// const [rawOptionIndex, rawAbilityIndex] = value.split('-');
+	// const [rawGroupIndex, rawOptionIndex] = value.split('-');
 	console.log('adding', value);
 	// (event.target as HTMLFormElement).reset();
 	// addResultSectionOption(Number.parseInt(rawOptionIndex!), Number.parseInt(rawAbilityIndex!));
@@ -44,12 +74,20 @@ defineExpose({
 		</ul>
 		<form @submit.prevent="submitAnotherEffect">
 			<label for="dialog-effects-add-new-effect">
-				effect
+				add effect
 			</label>
-			<select id="dialog-effects-add-new-effect" name="effectOptionIndex" required>
-				<option>option 1</option>
+			<select id="dialog-effects-add-new-effect" name="optionIndexes" required>
+				<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label">
+					<option
+						v-for="(option, optionIndex) in group.options"
+						:key="`${group.type}-${option.championOrItemId}-${option.abilityKey}-${option.abilityVariant}`"
+						:value="`${groupIndex}-${optionIndex}`"
+					>
+						{{ option.name }}
+					</option>
+				</optgroup>
 			</select>
-			<button type="submit" class="">
+			<button type="submit" class="other-ui-btn">
 				add
 			</button>
 		</form>
@@ -70,25 +108,38 @@ defineExpose({
 
 			> form {
 				--at-apply: 'ms-auto';
-			> button {
-				--at-apply: 'grid place-items-center size-7 rounded-1/2';
 
-						> span:first-child {
-							--at-apply: 'sr-only';
-						}
+				> button {
+					--at-apply: 'grid place-items-center size-7 rounded-1/2';
 
-						> .icon {
-							--at-apply: 'size-4';
-						}
-			}
+					> span:first-child {
+						--at-apply: 'sr-only';
+					}
+
+					> .icon {
+						--at-apply: 'size-4';
+					}
+				}
 			}
 		}
 
 		> form {
-			--at-apply: '';
-			
+			--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
+
+			> label {
+				--at-apply: 'col-span-full text-start text-lg';
+			}
+
+			> select {
+				--at-apply: 'w-64 px-1';
+
+				&:disabled {
+					--at-apply: 'text-neutral-400';
+				}
+			}
+
 			> button {
-				--at-apply: ''
+				--at-apply: 'w-fit px-1 h-6';
 			}
 		}
 	}

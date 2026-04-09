@@ -41,7 +41,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] stats
     - [x] current health/mana
     - [x] slider drag health/mana
-    - [?] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) when adding passives, like energy, zaahen, fury
+    - [x] [alternate ability resources](https://wiki.leagueoflegends.com/en-us/Ability_resource) when adding passives, like energy, zaahen, fury
     - [x] champion data loading indicator
     - [x] passive with tooltip
     - [x] abilities ui (only passive implemented)
@@ -84,12 +84,13 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] add all of source's items/abilities to damage results
   - [x] ability rows actual description variables
   - [x] one select to switch between sources/targets?
-  - [ ] damage type row, use the actual calculated value in the cells
-  - [ ] basic attack section normal/crit/average
-  - [ ] friendlier variable names? Try to filter out simple variables like 5 more dmg to minions?
   - [x] per damage results row unknown variables style
   - [x] moving columns left/right
   - [x] moving sections up/down
+  - [?] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
+  - [ ] damage type row, use the actual calculated value in the cells
+  - [ ] basic attack section normal/crit/average
+  - [ ] friendlier variable names? Try to filter out simple variables like 5 more dmg to minions?
 - [ ] rune dialog
   - [x] layout
   - [x] secondary path unset layout
@@ -182,6 +183,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] result row variable values
   - [ ] result variant sections
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
+- [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
   - [ ] components for stuff like manaflow band or precision legends for setting values

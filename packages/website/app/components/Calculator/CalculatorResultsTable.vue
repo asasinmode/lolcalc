@@ -112,7 +112,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 
 	options.push({
 		optionId: 'items',
-		optionName: 'Items',
+		optionName: 'items',
 		type: 'item',
 		abilities: itemIds.values()
 			.map((itemId): IDamageSectionOption['abilities'][number] => {
@@ -1797,7 +1797,7 @@ defineExpose({
 				}
 
 				> button {
-					--at-apply: 'w-fit px-1 h-6 whitespace-nowrap';
+					--at-apply: 'w-fit px-1 h-6';
 				}
 			}
 		}

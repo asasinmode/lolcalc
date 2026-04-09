@@ -3,8 +3,17 @@ import itemsData from '../assets/item.json' with { type: 'json' };
 
 const { data: items } = itemsData;
 
-export type IInternalItemData<Item extends keyof TItemNameToId, Id = typeof ITEM_NAME_TO_ID[Item]> = Id extends keyof TItemSpecifics
-	? ReturnType<typeof ITEM_SPECIFICS[Id]['setupInternalData']> : never;
+export type IInternalItemData<Item extends keyof TItemNameToId, Id = TItemNameToId[Item]> = Id extends keyof TItemSpecifics
+	? TItemSpecifics[Id] extends { setupInternalData: (...args: any) => any }
+		? ReturnType<TItemSpecifics[Id]['setupInternalData']>
+		: never
+	: never;
+
+export type IItemEffectData<Item extends keyof TItemNameToId, Id = TItemNameToId[Item]> = Id extends keyof TItemSpecifics
+	? TItemSpecifics[Id] extends { setupEffectData: (...args: any) => any }
+		? ReturnType<TItemSpecifics[Id]['setupEffectData']>
+		: never
+	: never;
 
 /** colloquial names to id */
 export const ITEM_NAME_TO_ID = {
@@ -31,6 +40,8 @@ export const ITEM_NAME_TO_ID = {
 	yunTal: '3032',
 	shojin: '3161',
 	riftmaker: '4633',
+	blackCleaver: '3071',
+	shurelya: '2065',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -198,6 +209,21 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.archangelsStaff]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.blackCleaver]: {
+		setupEffectData(self, effect): [carve: number, fervor: boolean] {
+			console.log('setting up black cleaver effect', effect, self.appliedEffects.value);
+			return [
+				Math.max(0, Math.min(5, effect?.data[0] ?? 0)),
+				Boolean(effect?.data[1]),
+			];
+		},
+	},
+	[ITEM_NAME_TO_ID.shurelya]: {
+		setupEffectData(self, effect): [inspiringSpeech: boolean] {
+			console.log('setting up shurelya effect', effect, self.appliedEffects.value);
+			return [Boolean(effect?.data[0])];
+		},
+	},
 } satisfies Record<string, {
 	/**
 	 * similar to `utils/champion.ts` `CHAMPION_SPECIFICS.setupInternalData` for `DamageSource.internalItemData`
@@ -212,6 +238,8 @@ export const ITEM_SPECIFICS = {
 	itemImageText?: (internalData: any, property?: any) => string | number;
 	/** sr only label for the shown image text */
 	itemImageTextLabel?: string;
+	/** same as `setupInternalData` for `DamageSource.internalEffectsData` */
+	setupEffectData?: (self: DamageSource, effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
 }>;
 
 export const UNPURCHASABLES_TO_KEEP = [

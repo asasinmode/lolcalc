@@ -14,9 +14,9 @@ interface IOverrides<Id extends IChampionId | undefined = undefined> {
 	dragonStacks: UnwrapRef<IDamageSource['dragonStacks']>;
 	dragonSoul: UnwrapRef<IDamageSource['dragonSoul']>;
 	roleQuest: UnwrapRef<IDamageSource['roleQuest']>;
-	effects: UnwrapRef<IDamageSource<Id>['effects']>;
 	internalData: UnwrapRef<IDamageSource<Id>['internalData']>;
 	internalItemData: UnwrapRef<IDamageSource<Id>['internalItemData']>;
+	appliedEffects: UnwrapRef<IDamageSource<Id>['appliedEffects']>;
 }
 
 export type INonPassiveAbilityKey = Exclude<IChampionAbilityKey, 'passive'>;
@@ -25,9 +25,15 @@ export interface IDamageSourceInternalDataBase {
 	_watchHandles: WatchHandle[];
 }
 
-export interface IDamageSourceEffect {
-	type: 'item' | 'champion';
+export interface IDamageSourceEffect<T extends any[] = any[]> {
+	/** `${type}-${championOrItemId}-${abilityKey}-${abilityVariant}` */
+	id: string;
+	type: 'champion' | 'item';
 	championOrItemId: string;
+	abilityKey?: string;
+	abilityVariant?: number;
+	/** any effect data, stored in array like `[carve: number, fervor: boolean]` for easier stringifying/parsing */
+	data: T;
 }
 
 export class DamageSource<Id extends IChampionId | undefined = any> {
@@ -106,14 +112,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value);
 	});
 
-	effects: Ref<IDamageSourceEffect[]>;
-
 	/** keys prefixed with `_` will not be stringified */
 	internalData: Ref<Id extends IInternalDataSetupChampions
 		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
 		: undefined>;
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
+	/* object containing the internal data of applied effects, like item passives or champion abilities */
+	appliedEffects: Ref<IDamageSourceEffect[]>;
 
 	watchHandles: WatchHandle[];
 
@@ -156,7 +162,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
-		this.effects = ref([]);
+		this.appliedEffects = ref(overrides.appliedEffects ?? []);
 		this.dataFromStringifiedData = false;
 
 		this.watchHandles = [
@@ -256,16 +262,16 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}),
 
 			watch(() => this.items.value.map(i => i?.id), (newIds, oldIds) => {
-				const removedItems = (oldIds?.filter(id => !newIds.includes(id)) ?? []) as (keyof typeof ITEM_SPECIFICS | undefined)[];
-				const addedItems = newIds.filter(id => !oldIds?.includes(id)) as (keyof typeof ITEM_SPECIFICS | undefined)[];
+				const removedItems = (oldIds?.filter(id => !newIds.includes(id)) ?? []) as (keyof TItemSpecifics | undefined)[];
+				const addedItems = newIds.filter(id => !oldIds?.includes(id)) as (keyof TItemSpecifics | undefined)[];
 				for (const addedId of addedItems) {
-					addedId && ITEM_SPECIFICS[addedId]?.setupInternalData(this);
+					(addedId && ITEM_SPECIFICS[addedId] as any)?.setupInternalData?.(this);
 				}
 
-				const usedProperties = newIds.flatMap(id => (id && ITEM_SPECIFICS[id as keyof TItemSpecifics]?.internalDataProperties) || []);
+				const usedProperties = newIds.flatMap(id => (id && 'internalDataProperties' in ITEM_SPECIFICS[id as keyof TItemSpecifics]) || []);
 				for (const removedId of removedItems) {
-					if (removedId && ITEM_SPECIFICS[removedId]?.internalDataProperties?.length) {
-						for (const key of ITEM_SPECIFICS[removedId].internalDataProperties) {
+					if (removedId && (ITEM_SPECIFICS[removedId] as any)?.internalDataProperties?.length) {
+						for (const key of (ITEM_SPECIFICS[removedId] as any).internalDataProperties) {
 							if (!usedProperties.includes(key)) {
 								this.internalItemData.value[key] = undefined;
 							}
@@ -293,8 +299,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			roleQuest: this.roleQuest.value,
 			/* not cloned because the `setupInternalData` should handle safely using previous values to create new ones */
 			internalData: this.internalData.value,
+			/* has to be cloned because multiple items use the same object and only set its properties */
 			internalItemData: structuredClone(toRaw(this.internalItemData.value)),
-			effects: structuredClone(toRaw(this.effects.value)),
+			/* not cloned, same as `internalData` */
+			appliedEffects: this.appliedEffects.value,
 			...overrides,
 		});
 	}
@@ -330,7 +338,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 		this.dragonSoul.value = undefined;
 		this.roleQuest.value = undefined;
-		this.effects.value.length = 0;
+		this.appliedEffects.value.length = 0;
 	}
 
 	getWatchable(): MaybeRefOrGetter[] {
@@ -650,6 +658,12 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			cleanupItems(this.items.value);
 			return item;
 		}
+	}
+
+	getEffect({ type, championOrItemId, abilityKey, abilityVariant }: Omit<IDamageSourceEffect, 'data'>): [IDamageSourceEffect, index: number] | undefined {
+		const index = this.appliedEffects.value.findIndex(effect => effect.type === type && effect.championOrItemId === championOrItemId && effect.abilityKey === abilityKey && effect.abilityVariant === abilityVariant);
+
+		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
 	computed = {
