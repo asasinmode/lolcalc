@@ -890,32 +890,40 @@ interface IColumnAddableOption {
 	itemOptionsIndexes: number[];
 }
 
-const columnAddableOptions = computed<IColumnAddableOption[]>(() => resultColumns.value.map((column) => {
+const columnAddableSourceOptions = computed<IColumnAddableOption[]>(() =>
+	resultColumns.value.map(column => columnAddableOption(column.source)),
+);
+const columnAddableTargetOptions = computed<IColumnAddableOption[]>(() =>
+	resultColumns.value.map(column => columnAddableOption(column.target)),
+);
+const columnAddableOptions = computed(() => sourceProperty.value === 'source' ? columnAddableSourceOptions.value : columnAddableTargetOptions.value);
+
+function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption {
 	const rv: IColumnAddableOption = {
 		championOptionIndex: undefined,
 		itemOptionsIndexes: [],
 	};
 
-	if (column.source?.champion.value) {
-		rv.championOptionIndex = damageSectionOptions.value.findIndex(option => option.type === 'champion' && option.optionId === column.source!.champion.value!.id);
+	if (damageSource?.champion.value) {
+		rv.championOptionIndex = damageSectionOptions.value.findIndex(option => option.type === 'champion' && option.optionId === damageSource!.champion.value!.id);
 		if (rv.championOptionIndex === -1) {
 			rv.championOptionIndex = undefined;
 		}
-
-		rv.itemOptionsIndexes = damageSectionOptions.value.at(-1)?.type === 'item'
-			? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => column.source!.items.value.some(item => item && item.id === ability.championOrItemId) ? index : undefined).filter(index => index !== undefined).reverse()
-			: [];
 	}
 
+	rv.itemOptionsIndexes = damageSource && damageSectionOptions.value.at(-1)?.type === 'item'
+		? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => damageSource!.items.value.some(item => item && item.id === ability.championOrItemId) ? index : undefined).filter(index => index !== undefined).reverse()
+		: [];
+
 	return rv;
-}));
+}
 
 async function addColumnAbilities(columnIndex: number) {
 	const { championOptionIndex } = columnAddableOptions.value[columnIndex]!;
 	const option = damageSectionOptions.value[championOptionIndex!];
 	if (option) {
-		for (let i = 0; i < option.abilities.length; i++) {
-			addResultSectionOption(championOptionIndex!, i);
+		for (const ability of option.abilities) {
+			addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey, ability.abilityVariantIndex, ability.name);
 		}
 	}
 	emit('configurationChanged');
