@@ -59,6 +59,7 @@ export const ITEM_NAME_TO_ID = {
 	blackCleaver: '3071',
 	shurelya: '2065',
 	runaan: '3085',
+	trinity: '3078',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

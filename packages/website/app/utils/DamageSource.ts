@@ -1,4 +1,5 @@
 import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
+import type { IDamageSourceEffectApplier } from './types';
 
 type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -668,12 +669,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	}
 
 	addEffect({ type, championOrItemId, abilityKey, abilityVariantIndex }: Pick<IDamageSourceEffect, 'type' | 'championOrItemId' | 'abilityKey' | 'abilityVariantIndex'>) {
-		const specific = type === 'item'
-			? ITEM_SPECIFICS[championOrItemId as keyof TItemSpecifics]
-			: type === 'champion'
-				? (CHAMPION_SPECIFICS[championOrItemId as keyof TChampionSpecifics] as IChampionSpecificsWithAbilities)?.[abilityKey as IChampionAbilityKey]?.[abilityVariantIndex!]
-				: undefined;
-		if (!specific || !('setupEffectData' in specific)) {
+		const specific = resolveEffectSpecific(type, championOrItemId, abilityKey, abilityVariantIndex);
+		if (!specific) {
 			console.warn(`[DamageSource.addEffect] tried to add effect for ${type} ${championOrItemId} without 'setupEffectData'`);
 			return;
 		}
@@ -1254,4 +1251,23 @@ function formatItemDescriptionText(
 			),
 		];
 	});
+}
+
+export function resolveEffectSpecific(
+	type: IDamageSourceEffect['type'],
+	championOrItemId: IDamageSourceEffect['championOrItemId'],
+	abilityKey: IDamageSourceEffect['abilityKey'],
+	abilityVariantIndex: IDamageSourceEffect['abilityVariantIndex'],
+): IDamageSourceEffectApplier | undefined {
+	const specific = type === 'item'
+		? ITEM_SPECIFICS[championOrItemId as keyof TItemSpecifics]
+		: type === 'champion'
+			? (CHAMPION_SPECIFICS[championOrItemId as keyof TChampionSpecifics] as IChampionSpecificsWithAbilities)?.[abilityKey as IChampionAbilityKey]?.[abilityVariantIndex!]
+			: undefined;
+
+	if (specific && 'setupEffectData' in specific) {
+		return specific;
+	}
+
+	return undefined;
 }

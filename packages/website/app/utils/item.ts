@@ -179,12 +179,22 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.archangelsStaff]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.manamune]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
+	[ITEM_NAME_TO_ID.trinity]: {
+		internalDataProperties: ['quicken'],
+		setupInternalData(self) {
+			self.internalItemData.value.quicken = Math.max(0, Math.min(1, self.internalItemData.value.quicken ?? 0));
+			return { quicken: 0 };
+		},
+		isItemImageActive(internalData: { quicken: number }) {
+			return internalData.quicken;
+		},
+	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
 		setupEffectData(self, effect): [carve: number, fervor: 0 | 1] {
 			console.log('setting up black cleaver effect', effect, self.appliedEffects.value);
 			return [
 				Math.max(0, Math.min(5, effect?.data[0] ?? 0)),
-				Math.max(0, Math.min(1, effect?.data[1])) as 0 | 1,
+				Math.max(0, Math.min(1, effect?.data[1] ?? 0)) as 0 | 1,
 			];
 		},
 		isEffectActive(data) {
@@ -195,7 +205,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.shurelya]: {
 		setupEffectData(self, effect): [inspiringSpeech: 0 | 1] {
 			console.log('setting up shurelya effect', effect, self.appliedEffects.value);
-			return [Math.max(0, Math.min(1, effect?.data[0])) as 0 | 1];
+			return [Math.max(0, Math.min(1, effect?.data[0] ?? 0)) as 0 | 1];
 		},
 		isEffectActive(data) {
 			const [inspiringSpeech] = data as [inspiringSpeech: 0 | 1];
@@ -214,6 +224,8 @@ export const ITEM_SPECIFICS = {
 	internalDataProperties?: string[];
 	/** text on the item's image, like current heartsteel/mejai stacks */
 	itemImageText?: (internalData: any, property?: any) => string | number;
+	/** whether to show the green dot that the item is active in the top right corner of the image */
+	isItemImageActive?: (internalData: any) => number | boolean;
 	/** sr only label for the shown image text */
 	itemImageTextLabel?: string;
 }>;

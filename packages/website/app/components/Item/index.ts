@@ -70,4 +70,7 @@ export const ITEM_COMPONENTS: Record<string, { extras?: Component }> = {
 	[ITEM_NAME_TO_ID.fimbulwinter]: {
 		extras: ItemExtraTearItem,
 	},
+	[ITEM_NAME_TO_ID.trinity]: {
+		extras: booleanExtra(ITEM_NAME_TO_ID.trinity, 'quicken', 'Quicken'),
+	},
 };

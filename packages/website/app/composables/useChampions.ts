@@ -9,6 +9,10 @@ export const CHAMPION_KEY_TO_ID: Record<string, IChampionId> = Object.fromEntrie
 	Object.entries(data).map(([id, { key }]) => [key, id as IChampionId]),
 );
 
+export const CHAMPION_ID_TO_KEY: Record<IChampionId, string> = Object.fromEntries(
+	Object.entries(CHAMPION_KEY_TO_ID).map(([key, id]) => [id as IChampionId, key]),
+) as Record<IChampionId, string>;
+
 const championCache = new Map<IChampionId, Promise<IChampion>>();
 
 export async function useChampion(id: string): Promise<IChampion> {

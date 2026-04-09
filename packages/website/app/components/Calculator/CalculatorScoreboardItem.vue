@@ -925,6 +925,7 @@ defineExpose({ el });
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
+					:class="{ active: value.items.value[i - 1] && (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.isItemImageActive?.(value.internalItemData.value) }"
 					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
 					@click.right="removeItem($event, i - 1)"
 					@dragstart="startItemDrag($event, i - 1)"
@@ -1484,6 +1485,14 @@ defineExpose({ el });
 			> li {
 				> * {
 					--at-apply: 'bg-black size-[--item-size] inline-block cursor-default relative';
+
+					&:before {
+						--at-apply: 'size-1.5 rounded-1/2 bg-green-400 outline outline-black z-1 absolute top-0.5 end-0.5 pointer-events-none';
+					}
+
+					&.active::before {
+						content: '';
+					}
 
 					> span:first-child {
 						--at-apply: 'sr-only';
