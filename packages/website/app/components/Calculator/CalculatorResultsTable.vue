@@ -66,43 +66,39 @@ interface IDamageSectionOption {
 /** array containing `boolean` of whether a section is implemented or not, used for `enableUnimplementedUi` */
 const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || section.type === 'all' || section.type === 'item'));
 
-const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
-	const options: IDamageSectionOption[] = props.damageSources
-		.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id) && source.champion.value.id !== 'TargetDummy')
-		.map((source) => {
-			const championId = source.champion.value!.id;
-			let abilityEntries = Object.entries(source.champion.value!.abilities);
+const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>((): IDamageSectionOption[] => props.damageSources
+	.filter(source => source.champion.value && (source.listedChampion.value?.id === source.champion.value.id) && source.champion.value.id !== 'TargetDummy')
+	.map((source): IDamageSectionOption => {
+		const championId = source.champion.value!.id;
+		let abilityEntries = Object.entries(source.champion.value!.abilities);
 
-			if (championId === 'Aphelios') {
-				abilityEntries = abilityEntries.filter(([abilityKey]) => abilityKey === 'q' || abilityKey === 'r');
-			}
+		if (championId === 'Aphelios') {
+			abilityEntries = abilityEntries.filter(([abilityKey]) => abilityKey === 'q' || abilityKey === 'r');
+		}
 
-			return {
-				type: 'champion',
-				optionId: championId,
-				optionName: source.champion.value!.name,
-				abilities: abilityEntries
-					.map(([abilityKey, ability]) => {
-						const abilityVariant = ability.variants[source.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey]]!;
-						const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-							abilityVariant.name,
-							source.champion.value!.stringtable,
-						);
+		return {
+			type: 'champion',
+			optionId: championId,
+			optionName: source.champion.value!.name,
+			abilities: abilityEntries
+				.map(([abilityKey, ability]) => {
+					const abilityVariant = ability.variants[source.abilityVariantsIndexes.value[abilityKey as IChampionAbilityKey]]!;
+					const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+						abilityVariant.name,
+						source.champion.value!.stringtable,
+					);
 
-						return {
-							championOrItemId: source.champion.value!.id,
-							abilityKey: abilityKey as IChampionAbilityKey,
-							abilityVariantIndex: 0,
-							name: championAbilitySectionName(source.champion.value!.name, abilityKey as IChampionAbilityKey, nameReplaced),
-						};
-					})
-					.filter(ability => !resultSections.value.some(section =>
-						section.championOrItemId === ability.championOrItemId && section.abilityKey === ability.abilityKey && section.abilityVariantIndex === ability.abilityVariantIndex),
-					),
-			} satisfies IDamageSectionOption;
-		})
-		.concat();
+					return {
+						championOrItemId: source.champion.value!.id,
+						abilityKey: abilityKey as IChampionAbilityKey,
+						abilityVariantIndex: 0,
+						name: championAbilitySectionName(source.champion.value!.name, abilityKey as IChampionAbilityKey, nameReplaced),
+					};
+				}),
+		} satisfies IDamageSectionOption;
+	}));
 
+const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((): IDamageSectionOption['abilities'] => {
 	const itemIds = new Set(props.damageSources
 		.concat(props.damageTargets)
 		.flatMap(damageSource => damageSource.computed.items.value.map((item, index) =>
@@ -110,23 +106,32 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		))
 		.filter(Boolean));
 
+	return itemIds.values()
+		.map((itemId): IDamageSectionOption['abilities'][number] => ({
+			name: items[itemId!]!.name,
+			championOrItemId: itemId!,
+		}))
+		.toArray()
+		.sort((a, b) => a.name.localeCompare(b.name));
+});
+
+const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
+	const options: IDamageSectionOption[] = damageSectionChampionAbilityOptions.value.map((option): IDamageSectionOption => ({
+		type: option.type,
+		optionId: option.optionId,
+		optionName: option.optionName,
+		abilities: option.abilities.filter(ability => !resultSections.value.some(section =>
+			section.championOrItemId === ability.championOrItemId && section.abilityKey === ability.abilityKey && section.abilityVariantIndex === ability.abilityVariantIndex),
+		),
+	}));
+
 	options.push({
 		optionId: 'items',
 		optionName: 'items',
 		type: 'item',
-		abilities: itemIds.values()
-			.map((itemId): IDamageSectionOption['abilities'][number] => {
-				const item = items[itemId!]!;
-
-				return {
-					name: item.name,
-					championOrItemId: itemId!,
-				};
-			})
-			.filter(ability => !resultSections.value
-				.some(section => section.championOrItemId === ability.championOrItemId))
-			.toArray()
-			.sort((a, b) => a.name.localeCompare(b.name)),
+		abilities: damageSectionItemAbilities.value.filter(ability =>
+			!resultSections.value.some(section => section.championOrItemId === ability.championOrItemId),
+		),
 	});
 
 	return options.filter(option => option.abilities.length);
