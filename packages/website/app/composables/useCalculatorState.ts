@@ -125,26 +125,28 @@ export function useCalculatorState(
 			}
 		}
 
-		for (const section of resultsTable.value?.resultSections || []) {
-			const [championOrItemId] = section.id.split('-');
-			if (section.type !== 'all'
-				&& !(section.type === 'item' ? querySavedItemIds.has(championOrItemId!) : querySavedChampionIds.has(championOrItemId!))) {
-				continue;
-			}
+		if (resultsTable.value && resultsTable.value?.resultSections.length !== 2) {
+			for (const section of resultsTable.value.resultSections) {
+				const [championOrItemId] = section.id.split('-');
+				if (section.type !== 'all'
+					&& !(section.type === 'item' ? querySavedItemIds.has(championOrItemId!) : querySavedChampionIds.has(championOrItemId!))) {
+					continue;
+				}
 
-			const isExpanded = resultsTable.value?.expandedSections.includes(section.id);
+				const isExpanded = resultsTable.value?.expandedSections.includes(section.id);
 
-			const params = new URLSearchParams();
-			params.append('tblSct', `${section.type}_${section.id}_${isExpanded ? 1 : ''}`);
-			const str = params.toString();
-			wholeState += `&${str}`;
-			if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
-				break;
+				const params = new URLSearchParams();
+				params.append('tblSct', `${section.type}_${section.id}_${isExpanded ? 1 : ''}`);
+				const str = params.toString();
+				wholeState += `&${str}`;
+				if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
+					break;
+				}
+				queryState += `&${str}`;
 			}
-			queryState += `&${str}`;
 		}
 
-		return [wholeState, queryState];
+		return wholeState.length === 3 ? ['', ''] : [wholeState, queryState];
 	}
 
 	function restoreState() {
