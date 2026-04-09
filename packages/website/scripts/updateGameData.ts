@@ -1352,6 +1352,11 @@ function championAbilityVariants(
 		const variantDataKey = variantKeys[i];
 		const variantData = championData[variantDataKey!];
 		const variantMSpell = variantData?.mSpell;
+
+		if (variants.some(v => v.objectName === variantData.ObjectName)) {
+			continue;
+		}
+
 		if (!variantData || !variantMSpell) {
 			throw new Error(`${debugPrefix} with key "${variantDataKey}" not found in championData`);
 		}
