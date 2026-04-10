@@ -1,21 +1,18 @@
 <script setup lang="ts">
-import type { IExtraComponentEmits } from '~/utils/types';
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 
-const props = defineProps<{
-	value: DamageSource<'Aphelios'>;
-	idPrefix: string;
-}>();
+const props = defineProps<IExtraComponentProps<'champion'>>();
 
 defineEmits<IExtraComponentEmits>();
 
 const { abilityImage, abilityImageSize } = useChampionImages();
 
-const imgSize = abilityImageSize('Veigar');
+const imgSize = abilityImageSize('Aphelios');
 
 function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 	event.preventDefault();
 	// eslint-disable-next-line vue/no-mutating-props
-	props.value.abilityLevels.value[ability] = 0;
+	props.damageSource.abilityLevels.value[ability] = 0;
 }
 </script>
 
@@ -23,7 +20,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 <template>
 	<article class="extras-aphelios-ability-levels">
 		<img
-			:src="abilityImage(props.value.champion.value!.abilities.passive.variants[props.value.abilityVariantsIndexes.value.passive]!.image, 'Veigar')"
+			:src="abilityImage(props.damageSource.champion.value!.abilities.passive.variants[props.damageSource.abilityVariantsIndexes.value.passive]!.image, 'Aphelios')"
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"
@@ -34,12 +31,12 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 			v-for="abilityKey in ['q', 'w', 'e'] satisfies IChampionAbilityKey[]"
 			:id="`${idPrefix}-ability-${abilityKey}`"
 			:key="abilityKey"
-			v-model="value.abilityLevels.value[abilityKey]"
+			v-model="damageSource.abilityLevels.value[abilityKey]"
 			:label="`&quot;${abilityKey}&quot; level`"
-			:options="Array.from({ length: value.maxAbilityLevels.value[abilityKey] }, (_, index) => ({ level: index + 1 }))"
+			:options="Array.from({ length: damageSource.maxAbilityLevels.value[abilityKey] }, (_, index) => ({ level: index + 1 }))"
 			value-key="level"
 			:data-ability-key="abilityKey"
-			:style="`--btns-count: ${value.maxAbilityLevels.value[abilityKey]}`"
+			:style="`--btns-count: ${damageSource.maxAbilityLevels.value[abilityKey]}`"
 			@option-right-click="(event) => resetAbilityLevel(event, abilityKey)"
 		>
 			<template #default="{ option }">

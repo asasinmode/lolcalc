@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { IComputedDamageSourceChampionStat, INonPassiveAbilityKey } from '~/utils/DamageSource';
-import type { IScoreboardItemShowAbilityTooltipArgs, IWithCalculateDynamicValues } from '~/utils/types';
+import type { IExtraComponentEmits, IGameAbilityId, IWithCalculateDynamicValues } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
+
+type IShowTooltipEventArgs = IExtraComponentEmits['imgMouseenter'];
 
 const props = defineProps<{
 	index: number;
@@ -46,6 +48,8 @@ const el = useTemplateRef('el');
 const group = computed(() => props.isRight ? 'targets' : 'sources');
 const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
 const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
+
+const idPrefix = computed(() => `${group.value}-${props.index}`);
 
 const imageSizes = computed(() => {
 	let champion = 128;
@@ -196,7 +200,15 @@ function startItemDrag(event: DragEvent, index: number) {
 	emit('itemDragstart', event, index);
 }
 
-const championExtra = computed(() => props.value.champion.value && CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras && markRaw(CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]!.extras!));
+const championExtra = computed<[Component, IGameAbilityId] | undefined>((): [Component, IGameAbilityId] | undefined => {
+	if (props.value.champion.value) {
+		const component = CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras;
+		if (component) {
+			return [markRaw(component), GameAbilityId.build(ABILITY_TYPE.champion, 'internal', props.value.champion.value.id, 'passive', props.value.abilityVariantsIndexes.value.passive)];
+		}
+	}
+	return undefined;
+});
 
 type IItemComponent = [is: Component, itemId: string, itemIndex: number];
 const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.map((item, index) => {
@@ -640,18 +652,29 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 	props.value.abilityLevels.value[ability] = 0;
 }
 
+type ITooltipSource = '' | 'extras' | 'effects';
+
+// TODO handle effects
+function showGameAbilityTooltip(source: ITooltipSource, ...[event, abilityId]: IShowTooltipEventArgs) {
+	if (abilityId.type === 'champion') {
+		showAbilityTooltip(event, abilityId.abilityKey, abilityId.abilityVariantIndex, source === 'extras');
+	} else {
+		console.warn('[showGameAbilityTooltip] did not expect it to be used for item?');
+	}
+}
+
 const hoveredAbilityKey = ref<IChampionAbilityKey>();
 const hoveredAbilityVariantIndex = ref<number>();
 const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 
 function showAbilityTooltip(
-	event: IScoreboardItemShowAbilityTooltipArgs[0],
-	ability: IScoreboardItemShowAbilityTooltipArgs[1],
-	variant: IScoreboardItemShowAbilityTooltipArgs[2] = 0,
+	event: MouseEvent,
+	key: IChampionAbilityKey,
+	variantIndex: number = 0,
 	fromExtras = false,
 ) {
-	hoveredAbilityKey.value = ability;
-	hoveredAbilityVariantIndex.value = variant;
+	hoveredAbilityKey.value = key;
+	hoveredAbilityVariantIndex.value = variantIndex;
 	event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
 
 	if (fromExtras) {
@@ -847,7 +870,7 @@ defineExpose({ el });
 				>
 			</button>
 			<VSelect
-				:id="`${group}-${index}-level-select`"
+				:id="`${idPrefix}-level-select`"
 				label="level"
 				:model-value="value.level.value"
 				data-select-champion-level=""
@@ -967,7 +990,7 @@ defineExpose({ el });
 		<button
 			:title="isExpanded ? 'collapse' : 'expand'"
 			class="pretend-ui-btn"
-			:aria-controls="`${group}-${index}-details`"
+			:aria-controls="`${idPrefix}-details`"
 			:aria-expanded="isExpanded"
 			@click="toggleExpanded"
 		>
@@ -975,7 +998,7 @@ defineExpose({ el });
 			<Icon class="i-ph:caret-down size-5" />
 		</button>
 		<details
-			:id="`${group}-${index}-details`"
+			:id="`${idPrefix}-details`"
 			ref="details"
 			:aria-busy="isLoading"
 			:data-empty="!value.champion.value ? '' : undefined"
@@ -1076,10 +1099,10 @@ defineExpose({ el });
 				<h4>abilties</h4>
 				<ChampionApheliosAbilities
 					v-if="value.listedChampion.value?.id === 'Aphelios'"
-					:id-prefix="`${group}-${index}`"
+					:id-prefix
 					:value
 					:is-loading
-					@ability-hover="showAbilityTooltip"
+					@ability-hover="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('', ...args)"
 				/>
 				<template v-else>
 					<div data-passive="">
@@ -1112,7 +1135,7 @@ defineExpose({ el });
 						>
 						<VButtonRadiogroup
 							v-if="value.champion.value"
-							:id="`${group}-${index}-ability-${abilityKey}`"
+							:id="`${idPrefix}-ability-${abilityKey}`"
 							v-model="value.abilityLevels.value[abilityKey]"
 							:label="`${abilityKey} level`"
 							:options="Array.from({ length: value.maxAbilityLevels.value[abilityKey] }, (_, index) => ({ level: index + 1 }))"
@@ -1143,11 +1166,11 @@ defineExpose({ el });
 					@mousedown="startHealthBarDrag"
 				>
 					<template v-if="value.champion.value">
-						<label :for="`${group}-${index}-current-ability-health`">
+						<label :for="`${idPrefix}-current-ability-health`">
 							health
 						</label>
 						<input
-							:id="`${group}-${index}-current-ability-health`"
+							:id="`${idPrefix}-current-ability-health`"
 							:value="Math.round(healthDragValueRef)"
 							min="0"
 							:max="value.maxHealth.value"
@@ -1165,11 +1188,11 @@ defineExpose({ el });
 					@mousedown="startAbilityResourceBarDrag"
 				>
 					<template v-if="value.maxAbilityResource.value">
-						<label :for="`${group}-${index}-current-ability-resource`">
+						<label :for="`${idPrefix}-current-ability-resource`">
 							{{ value.abilityResourceName.value }}
 						</label>
 						<input
-							:id="`${group}-${index}-current-ability-resource`"
+							:id="`${idPrefix}-current-ability-resource`"
 							:value="Math.round(abilityResourceDragValueRef)"
 							min="0"
 							:max="value.maxAbilityResource.value"
@@ -1183,7 +1206,7 @@ defineExpose({ el });
 			<section data-role-quest="">
 				<h4>role quest</h4>
 				<VSelect
-					:id="`${group}-${index}-role-quest`"
+					:id="`${idPrefix}-role-quest`"
 					:model-value="value.roleQuest.value"
 					:options="Object.keys(text.roleQuests).map(role => [role, role]) as [IChampionRole, string][]"
 					label="role quest"
@@ -1222,7 +1245,7 @@ defineExpose({ el });
 				<h4>dragons</h4>
 				<VSelect
 					v-for="i in 4"
-					:id="`${group}-${index}-dragon-stack-${i}`"
+					:id="`${idPrefix}-dragon-stack-${i}`"
 					:key="i"
 					:model-value="value.dragonStacks.value[i - 1]"
 					:options="dragonOptions"
@@ -1241,7 +1264,7 @@ defineExpose({ el });
 					</template>
 				</VSelect>
 				<VSelect
-					:id="`${group}-${index}-dragon-soul`"
+					:id="`${idPrefix}-dragon-soul`"
 					:model-value="value.dragonSoul.value"
 					:options="dragonOptions"
 					data-dragon-soul=""
@@ -1270,19 +1293,21 @@ defineExpose({ el });
 			</section>
 			<section v-if="itemExtras.length || championExtra" data-extras="">
 				<component
-					:is="championExtra"
-					:value
-					:id-prefix="`${group}-${index}`"
-					@ability-hover="(...args: IScoreboardItemShowAbilityTooltipArgs) => showAbilityTooltip(...args, true)"
+					:is="championExtra[0]"
+					v-if="championExtra"
+					:id-prefix
+					:damage-source="value"
+					:ability-id="championExtra[1]"
+					@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
 				/>
 				<component
 					:is
 					v-for="[is, itemId, itemIndex] in itemExtras"
 					:key="itemId"
-					:value
-					:id-prefix="`${group}-${index}`"
-					:item-id
-					@item-hover="showItemHoverTooltip($event, itemIndex, true)"
+					:id-prefix
+					:damage-source="value"
+					:ability-id="GameAbilityId.build(ABILITY_TYPE.item, 'internal', itemId)"
+					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showItemHoverTooltip(mouseEvent, itemIndex, true)"
 				/>
 			</section>
 		</details>
