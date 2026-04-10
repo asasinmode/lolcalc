@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { IChampionAbilityHoverTooltipProps, IGameAbilityId, IItemDescriptionProps } from '~/utils/types';
+import { CHAMPION_COMPONENTS } from '~/components/Champion';
+import { ITEM_COMPONENTS } from '~/components/Item';
 
 const damageSource = defineModel<DamageSource>();
 
@@ -80,20 +82,21 @@ async function loadChampionEffects() {
 			for (const abilityKey of ALL_CHAMPION_ABILITY_KEYS) {
 				const abilitySpecific = (specific as IChampionSpecific)[abilityKey];
 				if (abilitySpecific) {
-					for (const [abilityVariantIndex, variantSpecific] of Object.entries(abilitySpecific) as unknown as [number, IChampionAbilityVariantSpecific][]) {
+					for (const [rawAbilityVariantIndex, variantSpecific] of Object.entries(abilitySpecific) as unknown as [number, IChampionAbilityVariantSpecific][]) {
 						if ('setupEffectData' in variantSpecific) {
+							const abilityVariantIndex = Number(rawAbilityVariantIndex);
 							champion ||= await useChampion(championId);
 
 							const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex as unknown as number);
 
 							effects.push({
 								abilityId: GameAbilityId.build(ABILITY_TYPE.champion, 'effects', championId as IChampionId, abilityKey, abilityVariantIndex),
-								name: `${champion.name} ${abilityKey === 'passive' ? 'P' : abilityKey.toUpperCase()} - ${champion.abilities[abilityKey]!.variants[abilityVariantIndex as unknown as number]!.name}`,
+								name: `${champion.name} ${abilityKey === 'passive' ? 'P' : abilityKey.toUpperCase()} - ${champion.abilities[abilityKey]!.variants[abilityVariantIndex]!.name}`,
 								hoverTooltipData: {
 									precomputedDescription,
 									championId: championId as IChampionId,
 									abilityKey,
-									abilityVariantIndex: abilityVariantIndex as unknown as number,
+									abilityVariantIndex: Number(abilityVariantIndex),
 								},
 							});
 						}
@@ -120,6 +123,13 @@ function submitAnotherEffect(event: SubmitEvent) {
 	(event.target as HTMLFormElement).reset();
 }
 
+function effectComponent(effect: IDamageSourceEffect): Component | undefined {
+	if (effect.abilityId.type === 'item') {
+		return ITEM_COMPONENTS[effect.abilityId.id]?.effects;
+	}
+	return CHAMPION_COMPONENTS[effect.abilityId.id]?.effects;
+}
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -143,6 +153,12 @@ defineExpose({
 		<h2>loading...</h2>
 		<ul :inert="isLoading">
 			<li v-for="effect in damageSource?.appliedEffects.value" :key="effect.id">
+				<component
+					:is="effectComponent(effect)"
+					:ability-id="effect.abilityId"
+					:damage-source
+					id-prefix="effects-dialog"
+				/>
 				{{ effect.id }}
 				<button @click="damageSource?.removeEffect(effect.id)">
 					remove

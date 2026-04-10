@@ -111,6 +111,11 @@ export interface IExtraComponentProps<Type extends TAbilityType> {
 	damageSource: DamageSource;
 	idPrefix: string;
 	abilityId: Type extends 'champion' ? IChampionAbilityId : IItemAbilityId;
+	/*
+	 * declared both here and in emits to override the listener attaching onto actual extra component
+	 * as in without it 2 `@img-mouseenter` events happen, one from something like `VExtraBoolean.vue`, other from `booleanExtra()` wrapper
+	 */
+	onImgMouseenter?: (...args: IExtraComponentEmits['imgMouseenter']) => void;
 }
 
 export interface IExtraComponentEmits {

@@ -75,6 +75,6 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		effects: numberExtra(GameAbilityId.build(ABILITY_TYPE.item, 'effects', ITEM_NAME_TO_ID.blackCleaver), 0, 'Carve stacks', 0, 5),
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
-		extras: booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, 'effects', ITEM_NAME_TO_ID.shurelya), 0, 'Inspiring speech'),
+		effects: booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, 'effects', ITEM_NAME_TO_ID.shurelya), 0, 'Inspiring speech'),
 	},
 };

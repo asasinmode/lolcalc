@@ -3,7 +3,7 @@ import { ChampionExtrasAphelios } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	Amumu: {
-		extras: booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'internal', 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch'),
+		extras: booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'internal', 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch', true),
 		effects: booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'effects', 'Amumu', 'passive', 0), 0, 'Cursed Touch'),
 	},
 	Aphelios: {
