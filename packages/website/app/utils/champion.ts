@@ -101,5 +101,7 @@ export interface IChampionAbilitySpecific {
 }
 
 export type IChampionAbilityVariantSpecific = IProviderGroupEffect & IProviderGroupImageText & {
+	// TODO unused at the moment, possibly no need for it and just the one on ability level is fine
+	// if used, `updateGameData` script should also merge it in `possibleChampionDynamicVariableValues`
 	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
 };

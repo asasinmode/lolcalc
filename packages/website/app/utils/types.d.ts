@@ -23,14 +23,6 @@ export interface IShopItem {
 }
 
 /**
- * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value
- * possible values for these can be specified in `champion.ts` and `rune.ts` under proper key, these are then used for saving needed stringtable variables when getting game data
- */
-export type IWithPossibleDynamicValues = Record<string, {
-	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
-}>;
-
-/**
  * record containing possible dynamic values for a variable (all values the variable is expected to resolve to)
  * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
  */

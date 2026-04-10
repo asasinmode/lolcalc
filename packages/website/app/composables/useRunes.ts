@@ -15,6 +15,9 @@ type IDataShards = typeof data.shards;
 type IDataPaths = typeof data.paths;
 
 export type IRuneShardSlotName = keyof IDataShards;
+export type IRuneShardSlotValue = {
+	[K in keyof IDataShards]: keyof IDataShards[K]
+}[keyof IDataShards];
 export type IRunePathName = keyof IDataPaths;
 export type IRuneSlotName = UnionKeys<IDataPaths[IRunePathName]['slots'][number]>;
 

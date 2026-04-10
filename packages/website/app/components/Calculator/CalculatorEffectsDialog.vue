@@ -27,10 +27,7 @@ const itemEffects: IEffectOptionGroup['options'] = Object
 		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
 
 		return {
-			abilityId: {
-				type: ABILITY_TYPE.item,
-				id: item.id,
-			},
+			abilityId: GameAbilityId.build(ABILITY_TYPE.item, 'effects', itemId),
 			name: item.name,
 			hoverTooltipData: {
 				precomputedDescription,
@@ -90,12 +87,7 @@ async function loadChampionEffects() {
 							const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex as unknown as number);
 
 							effects.push({
-								abilityId: {
-									type: 'champion',
-									id: championId as IChampionId,
-									abilityVariantIndex,
-									abilityKey,
-								},
+								abilityId: GameAbilityId.build(ABILITY_TYPE.champion, 'effects', championId as IChampionId, abilityKey, abilityVariantIndex),
 								name: `${champion.name} ${abilityKey === 'passive' ? 'P' : abilityKey.toUpperCase()} - ${champion.abilities[abilityKey]!.variants[abilityVariantIndex as unknown as number]!.name}`,
 								hoverTooltipData: {
 									precomputedDescription,

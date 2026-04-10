@@ -1,8 +1,10 @@
 import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IListedChampion } from '../app/composables/useChampions';
 import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
+import type { IChampionSpecific } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
-import type { IPossibleDynamicValues, ITexture, IWithPossibleDynamicValues } from '../app/utils/types';
+import type { IRuneSpecific } from '../app/utils/rune';
+import type { ITexture } from '../app/utils/types';
 import buffer from 'node:buffer';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -606,10 +608,10 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
 							variableType: 'rune',
 							variableValueParameters: [
-								(RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName]?.POSSIBLE_DYNAMIC_VALUES
+								(RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]?.POSSIBLE_DYNAMIC_VALUES
 									? {
 											...slotValue,
-											dynamicValues: possibleDynamicValues((RUNE_SPECIFICS.shards as IWithPossibleDynamicValues)[perkName]!.POSSIBLE_DYNAMIC_VALUES),
+											dynamicValues: (RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]!.POSSIBLE_DYNAMIC_VALUES,
 										}
 									: slotValue,
 							],
@@ -1200,8 +1202,13 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 	}
 }
 
-function possibleDynamicValues(value?: IPossibleDynamicValues, abilityKey?: Exclude<keyof IPossibleDynamicValues, 'all'>) {
-	return value && (abilityKey ? { ...value.all, ...value[abilityKey] } : value.all);
+function possibleChampionDynamicVariableValues(specific?: IChampionSpecific, abilityKey?: IChampionAbilityKey) {
+	return specific && (abilityKey
+		? {
+				...specific.POSSIBLE_DYNAMIC_VALUES,
+				...specific[abilityKey]?.POSSIBLE_DYNAMIC_VALUES,
+			}
+		: specific.POSSIBLE_DYNAMIC_VALUES);
 }
 
 function championAbilityData(
@@ -1486,7 +1493,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 					...variant,
 					dynamicValues: {
 						...variant.dataValues,
-						...possibleDynamicValues((CHAMPION_SPECIFICS as IWithPossibleDynamicValues)[champion.id]?.POSSIBLE_DYNAMIC_VALUES, abilityName),
+						...possibleChampionDynamicVariableValues((CHAMPION_SPECIFICS as Record<string, IChampionSpecific>)[champion.id], abilityName),
 					},
 				}, undefined, allVariants],
 				variableSourceKeys: ['effectAmount'],
