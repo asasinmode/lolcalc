@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { WatchHandle } from 'vue';
-import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection, IGameAbilityId, IItemAbilityId } from '~/utils/types';
 
 const props = defineProps<{
 	damageSources: DamageSource[];
@@ -51,20 +51,18 @@ function setColumnChampion(column: IDamageResultTableColumn, damageSources: Dama
 }
 
 interface IDamageSectionOption {
-	type: 'champion' | 'item';
+	type: TAbilityType;
 	/** champion or item id */
 	optionId: string;
 	optionName: string;
 	abilities: {
+		id: IGameAbilityId;
 		name: string;
-		championOrItemId: string;
-		abilityKey?: IChampionAbilityKey;
-		abilityVariantIndex?: number;
 	}[];
 }
 
 /** array containing `boolean` of whether a section is implemented or not, used for `enableUnimplementedUi` */
-const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || section.type === 'all' || section.type === 'item'));
+const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || section.abilityId.type === 'all' || section.abilityId.type === 'item'));
 
 const uniqueDamageSourceChampions = computed<Set<IChampion>>(() => new Set(
 	props.damageSources
@@ -85,7 +83,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 		}
 
 		return {
-			type: 'champion',
+			type: ABILITY_TYPE.champion,
 			optionId: championId,
 			optionName: champion.name,
 			abilities: abilityEntries
@@ -97,9 +95,12 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 						);
 
 						return {
-							championOrItemId: champion.id,
-							abilityKey: abilityKey as IChampionAbilityKey,
-							abilityVariantIndex,
+							id: {
+								type: ABILITY_TYPE.champion,
+								id: champion.id,
+								abilityKey: abilityKey as IChampionAbilityKey,
+								abilityVariantIndex,
+							},
 							name: championAbilitySectionName(champion.name, abilityKey as IChampionAbilityKey, nameReplaced),
 						};
 					}),
@@ -119,7 +120,10 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 	return itemIds.values()
 		.map((itemId): IDamageSectionOption['abilities'][number] => ({
 			name: items[itemId!]!.name,
-			championOrItemId: itemId!,
+			id: {
+				type: ABILITY_TYPE.item,
+				id: itemId!,
+			},
 		}))
 		.toArray()
 		.sort((a, b) => a.name.localeCompare(b.name));
@@ -131,8 +135,8 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		optionId: option.optionId,
 		optionName: option.optionName,
 		abilities: option.abilities.filter(ability => !resultSections.value.some(section =>
-			section.championOrItemId === ability.championOrItemId && section.abilityKey === ability.abilityKey && section.abilityVariantIndex === ability.abilityVariantIndex),
-		),
+			section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id),
+		)),
 	}));
 
 	options.push({
@@ -140,7 +144,7 @@ const damageSectionOptions = computed<IDamageSectionOption[]>(() => {
 		optionName: 'items',
 		type: 'item',
 		abilities: damageSectionItemAbilities.value.filter(ability =>
-			!resultSections.value.some(section => section.championOrItemId === ability.championOrItemId),
+			!resultSections.value.some(section => section.abilityId.type !== 'all' && GameAbilityId.isSame(section.abilityId, ability.id)),
 		),
 	});
 
@@ -205,12 +209,12 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		isUnknown: false,
 	};
 
-	if (!source || (!source.listedChampion.value && section.type !== 'item')) {
+	if (!source || (!source.listedChampion.value && section.abilityId.type !== 'item')) {
 		rv.value = '-';
 	} else if (source.listedChampion.value && source.listedChampion.value.id !== source.champion.value?.id) {
 		rv.value = 'loading...';
 	} else if (
-		(section.type === 'champion' && source.champion.value?.id !== section.championOrItemId)
+		(section.abilityId.type === 'champion' && source.champion.value?.id !== section.abilityId.id)
 		|| (section.id === 'aa' && source.champion.value?.id === 'Zeri')
 	) {
 		rv.value = 'n/a';
@@ -302,7 +306,11 @@ function toggleResultsSection(sectionId: string) {
 }
 
 const itemVariableCellValue: IDamageResultTableSection['getCellValue'] = (section, rowId, source, _target) => {
-	const computedItem = source?.computed.items.value.find(item => item?.item!.id === section.championOrItemId);
+	const computedItem = section.abilityId.type === 'item'
+		? source?.computed.items.value.find(item =>
+				item?.item!.id === (section.abilityId as IItemAbilityId).id,
+			)
+		: undefined;
 	if (computedItem) {
 		let numberValue = computedItem.variables.get(rowId);
 		let value: string | number = numberValue as unknown as string;
@@ -368,30 +376,23 @@ function submitResultsSection(event: SubmitEvent) {
 }
 
 function addResultSectionOption(optionIndex: number, abilityIndex: number) {
-	const option = damageSectionOptions.value[optionIndex]!;
-	const ability = option.abilities[abilityIndex]!;
-	return addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey, ability.abilityVariantIndex, ability.name);
+	const ability = damageSectionOptions.value[optionIndex]!.abilities[abilityIndex]!;
+	return addResultsSection(ability.id, ability.name);
 }
 
 async function addResultsSection(
-	type: IDamageSectionOption['type'],
-	championOrItemId: string,
-	abilityKey?: IChampionAbilityKey,
-	abilityVariantIndex?: number,
+	abilityId: IGameAbilityId,
 	name = '',
 	expand = true,
 ) {
-	const id = `${championOrItemId}-${abilityKey ?? ''}-${abilityVariantIndex ?? ''}`;
-	if (resultSections.value.some(section => section.id === id) || (type === 'champion' && championOrItemId === 'TargetDummy')) {
+	const id = GameAbilityId.stringify(abilityId);
+	if (resultSections.value.some(section => section.id === id) || (abilityId.type === 'champion' && abilityId.id === 'TargetDummy')) {
 		return;
 	}
 
 	const section = {
 		id,
-		championOrItemId,
-		abilityKey,
-		abilityVariantIndex,
-		type,
+		abilityId,
 		name,
 		image: undefined,
 		imageSize: 64,
@@ -401,9 +402,9 @@ async function addResultsSection(
 	resultSections.value.push(section);
 	expand && expandedSections.value.push(section.id);
 
-	if (type === 'champion') {
-		const champion = await useChampion(championOrItemId);
-		if (!champion?.abilities[abilityKey!].variants[abilityVariantIndex!]) {
+	if (abilityId.type === 'champion') {
+		const champion = await useChampion(abilityId.id);
+		if (!champion?.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]) {
 			const index = resultSections.value.indexOf(section);
 			~index && resultSections.value.splice(index, 1);
 			const expandedIndex = expandedSections.value.indexOf(section.id);
@@ -413,22 +414,22 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex!, undefined, undefined, { replaceWithName: true });
+		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityId.abilityKey, abilityId.abilityVariantIndex, undefined, undefined, { replaceWithName: true });
 
-		section.name ||= championAbilitySectionName(champion.name, abilityKey!, precomputedDescription.name);
+		section.name ||= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
 		section.imageSize = abilityImageSize(champion.id);
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.hoverTooltipData = {
 			group: `${sourceProperty.value}s`,
 			championId: champion.id,
-			abilityKey,
-			abilityVariantIndex,
+			abilityKey: abilityId.abilityKey,
+			abilityVariantIndex: abilityId.abilityVariantIndex,
 			precomputedDescription,
 		};
 		section.getCellValue = abilityVariableCellValue;
 	} else {
-		const item = items[championOrItemId];
+		const item = items[abilityId.id];
 		if (!item) {
 			const index = resultSections.value.indexOf(section);
 			~index && resultSections.value.splice(index, 1);
@@ -611,12 +612,12 @@ const cleanableColumnsSections = computed<[
 	const sections = (resultSections.value
 		.map((section, index) => [index, section]) as [number, IDamageResultTableSection][])
 		.filter(([, section]) =>
-			section.type === 'item'
+			section.abilityId.type === 'item'
 				? !resultColumns.value.some(column =>
-						column.source?.items.value.some(item => item?.id === section.championOrItemId) || column.target?.items.value.some(item => item?.id === section.championOrItemId),
+						column.source?.items.value.some(item => item?.id === section.abilityId.id) || column.target?.items.value.some(item => item?.id === section.abilityId.id),
 					)
-				: section.type === 'champion' && !resultColumns.value.some(column =>
-					column.source?.listedChampion.value?.id === section.championOrItemId || column.target?.listedChampion.value?.id === section.championOrItemId,
+				: section.abilityId.type === 'champion' && !resultColumns.value.some(column =>
+					column.source?.listedChampion.value?.id === section.abilityId.id || column.target?.listedChampion.value?.id === section.abilityId.id,
 				));
 
 	return [columns, sections];
@@ -867,10 +868,10 @@ function combinedSiblingsRect(el: HTMLElement, isNext: boolean): DOMRect {
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
 
-let hoveredSectionType: undefined | IDamageResultTableSection['type'];
+let hoveredSectionType: undefined | IDamageResultTableSection['abilityId']['type'];
 
-function showSectionHoverTooltip(event: MouseEvent, type: IDamageResultTableSection['type']) {
-	hoveredSectionType = type;
+function showSectionHoverTooltip(event: MouseEvent, abilityId: IDamageResultTableSection['abilityId']['type']) {
+	hoveredSectionType = abilityId;
 	const popover = (event.target as HTMLElement).querySelector('[popover]');
 	if (popover) {
 		(popover as HTMLElement).showPopover();
@@ -917,7 +918,7 @@ function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption 
 	}
 
 	rv.itemOptionsIndexes = damageSource && damageSectionOptions.value.at(-1)?.type === 'item'
-		? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => damageSource!.items.value.some(item => item && item.id === ability.championOrItemId) ? index : undefined).filter(index => index !== undefined).reverse()
+		? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => damageSource!.items.value.some(item => item && item.id === ability.id.id) ? index : undefined).filter(index => index !== undefined).reverse()
 		: [];
 
 	return rv;
@@ -928,7 +929,7 @@ async function addColumnAbilities(columnIndex: number) {
 	const option = damageSectionOptions.value[championOptionIndex!];
 	if (option) {
 		for (const ability of option.abilities) {
-			addResultsSection(option.type, ability.championOrItemId, ability.abilityKey as IChampionAbilityKey, ability.abilityVariantIndex, ability.name);
+			addResultsSection(ability.id);
 		}
 	}
 	emit('configurationChanged');
@@ -1242,7 +1243,7 @@ defineExpose({
 						scope="colgroup"
 						:colspan="1 + resultColumns.length"
 					>
-						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event, section.type)">
+						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event, section.abilityId.type)">
 							<img
 								:src="section.image"
 								:width="section.imageSize"
@@ -1251,11 +1252,11 @@ defineExpose({
 							>
 							<span>{{ section.image ? section.name : 'loading...' }}</span>
 							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
-								<div v-if="section.type === 'item'" popover="hint" class="hover-tooltip champion-item">
+								<div v-if="section.abilityId.type === 'item'" popover="hint" class="hover-tooltip champion-item">
 									<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
 								</div>
 								<LolChampionAbilityHoverTooltip
-									v-else-if="section.type !== 'all'"
+									v-else-if="section.abilityId.type === 'champion'"
 									v-bind="section.hoverTooltipData as any"
 								/>
 							</template>
@@ -1365,7 +1366,7 @@ defineExpose({
 								<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
 									<option
 										v-for="(ability, abilityIndex) in option.abilities"
-										:key="`${ability.championOrItemId}-${ability.abilityKey ?? ''}-${ability.abilityVariantIndex ?? ''}`"
+										:key="GameAbilityId.stringify(ability.id)"
 										:value="`${optionIndex}-${abilityIndex}`"
 										:disabled="enableUnimplementedUi ? undefined : option.optionId !== 'items'"
 									>

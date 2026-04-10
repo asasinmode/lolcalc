@@ -1,34 +1,10 @@
-import type { IDamageSourceEffectApplier, IPossibleDynamicValues } from './types';
+import type { IPossibleDynamicValues, IProviderGroupEffect, IProviderGroupInternalData } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
 }
 
-const aph1to5 = [1, 2, 3, 4, 5];
-
 export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' | 'crescendum';
-
-export type TChampionSpecifics = typeof CHAMPION_SPECIFICS;
-
-/**
-	* `IChampionAbilityKey` are arrays which objects containing per variant specifics
-	* so something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be all specifics for variant 0 of Amumu's passive
-	*
-	*/
-export type IChampionSpecificsWithAbilities = {
-	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
-};
-
-export interface IChampionAbilitySpecific {
-	/**
-	 * ability's variant specific
-	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be all specific for variant 0 of Amumu's passive
-	 */
-	[key: number]: IChampionAbilityVariantSpecific;
-}
-
-export interface IChampionAbilityVariantSpecific extends IDamageSourceEffectApplier {
-}
 
 /**
  * object containing specific champion's helpers, utils and calculations
@@ -50,21 +26,17 @@ export const CHAMPION_SPECIFICS = {
 	},
 	Aphelios: {
 		WEAPON_ORDER_MAP: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>,
-		/* stringtable variants are different from order. `apheliosgun_name_1` is for calibrum and so on */
+		/* stringtable variants are different from order actual weapon order - `apheliosgun_name_1` is for calibrum and so on */
 		WEAPON_VARIANT_MAP: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
 		POSSIBLE_DYNAMIC_VALUES: {
-			all: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
-				f1: aph1to5,
-				f2: [],
-				f3: [],
-				f4: [],
-				f5: [],
-				f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
-			},
-			e: {
-				f1: [1, 2, 3],
-			},
+			f1: [1, 2, 3, 4, 5],
+			f2: [],
+			f3: [],
+			f4: [],
+			f5: [],
+			/* array of 12, 13, ..., 21, 23, ..., 53, 53 - no 2 repeated numbers like 11, 22 */
+			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
 		},
 		setupInternalData(self): IDamageSourceInternalDataBase & {
 			mainHand: IApheliosWeapon;
@@ -81,12 +53,15 @@ export const CHAMPION_SPECIFICS = {
 				}, { immediate: true })]),
 			};
 		},
+		e: {
+			POSSIBLE_DYNAMIC_VALUES: {
+				f1: [1, 2, 3],
+			},
+		},
 	},
 	Kayn: {
 		POSSIBLE_DYNAMIC_VALUES: {
-			all: {
-				f1: [0, 1, 2],
-			},
+			f1: [0, 1, 2],
 		},
 	},
 	Veigar: {
@@ -99,20 +74,29 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 } satisfies Partial<{
-	[Id in IChampionId]: {
-		/**
-		 * returns an `internalData` for specific `DamageSource`'s champion
-		 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
-		 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed
-		 * the property names should be fairly short for storing in state string
-		 */
-		setupInternalData?: (self: DamageSource<Id>) => any;
-		POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
-		passive?: IChampionAbilitySpecific;
-		q?: IChampionAbilitySpecific;
-		w?: IChampionAbilitySpecific;
-		e?: IChampionAbilitySpecific;
-		r?: IChampionAbilitySpecific;
-		[key: string]: any;
-	}
+	[Id in IChampionId]: IChampionSpecific
 }>;
+
+export type TChampionSpecifics = typeof CHAMPION_SPECIFICS;
+
+export type IChampionSpecific = IProviderGroupInternalData & {
+	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
+} & {
+	/** champion's possible dynamic values, can be overriden per ability and ability variant */
+	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+	[key: string]: any;
+};
+
+export interface IChampionAbilitySpecific {
+	/** ability's possible dynamic values, variant can override */
+	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+	/**
+	 * ability's variant specific
+	 * something like `CHAMPION_SPECIFICS.Amumu.passive[0]` would be for variant 0 of Amumu's passive
+	 */
+	[key: number]: IChampionAbilityVariantSpecific;
+}
+
+export type IChampionAbilityVariantSpecific = IProviderGroupEffect & {
+	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
+};

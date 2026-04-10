@@ -32,10 +32,9 @@ const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSou
 const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
 const resultSections = ref<IDamageResultTableSection[]>([
 	{
-		id: 'stats',
-		championOrItemId: 'stats',
+		id: 'a_stats',
+		abilityId: { type: 'all', id: 'stats' },
 		name: 'stats',
-		type: 'all',
 		isPermanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
 		imageSize: 32,
@@ -63,10 +62,9 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		},
 	},
 	{
-		id: 'basicAttack',
-		championOrItemId: 'basicAttack',
+		id: 'a_basicAttack',
+		abilityId: { type: 'all', id: 'basicAttack' },
 		name: 'basic attack',
-		type: 'all',
 		isPermanent: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/autoattack.png`,
 		imageSize: 32,

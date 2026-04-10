@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { IItemExtraProps } from '~/utils/types';
+import type { IExtraComponentProps } from '~/utils/types';
 import { VExtrasNumber } from '#components';
 
-const props = defineProps<IItemExtraProps<keyof typeof ALTERNATE_ITEM_FORMS>>();
+const props = defineProps<IExtraComponentProps<'item'>>();
 
 defineEmits<{
 	itemHover: [event: MouseEvent];
@@ -11,9 +11,9 @@ defineEmits<{
 const items = useItems();
 const { version } = usePatchVersion();
 
-type IData = IInternalItemData<'tear'>;
+type IData = ReturnType<TItemSpecifics[typeof ITEM_NAME_TO_ID.tear]['setupInternalData']>;
 
-const ALTERNATE_ITEM_FORMS = {
+const ALTERNATE_ITEM_FORMS: Record<string, string> = {
 	[ITEM_NAME_TO_ID.whisperingCirclet]: ITEM_NAME_TO_ID.diademOfSongs,
 	[ITEM_NAME_TO_ID.archangelsStaff]: ITEM_NAME_TO_ID.seraphsEmbrace,
 	[ITEM_NAME_TO_ID.manamune]: ITEM_NAME_TO_ID.muramana,
@@ -24,24 +24,24 @@ const ALTERNATE_ITEM_FORMS = {
 	[ITEM_NAME_TO_ID.fimbulwinter]: ITEM_NAME_TO_ID.wintersApproach,
 };
 
-const TRANSFORMED_IDS = [
+const TRANSFORMED_IDS: string[] = [
 	ITEM_NAME_TO_ID.diademOfSongs,
 	ITEM_NAME_TO_ID.seraphsEmbrace,
 	ITEM_NAME_TO_ID.muramana,
 	ITEM_NAME_TO_ID.fimbulwinter,
 ];
 
-const UNTRANSFORMED_IDS = [
+const UNTRANSFORMED_IDS: string[] = [
 	ITEM_NAME_TO_ID.whisperingCirclet,
 	ITEM_NAME_TO_ID.archangelsStaff,
 	ITEM_NAME_TO_ID.manamune,
 	ITEM_NAME_TO_ID.wintersApproach,
 ];
 
-const itemIndex = computed(() => props.value.items.value.findIndex(item => item?.id === props.itemId || item?.id === ALTERNATE_ITEM_FORMS[props.itemId]));
-const transformedItem = computed(() => items[ALTERNATE_ITEM_FORMS[props.itemId]]!);
+const itemIndex = computed(() => props.value.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === ALTERNATE_ITEM_FORMS[props.abilityId.id]));
+const transformedItem = computed(() => items[ALTERNATE_ITEM_FORMS[props.abilityId.id]!]!);
 
-const isTransformed = ref((TRANSFORMED_IDS as string[]).includes(props.itemId));
+const isTransformed = ref((TRANSFORMED_IDS as string[]).includes(props.abilityId.id));
 
 function transform() {
 	// eslint-disable-next-line vue/no-mutating-props
@@ -74,14 +74,14 @@ function updateValue(value: number) {
 	<VExtrasNumber
 		:model-value="isTransformed ? 1000 : (value.internalItemData.value as IData).manaflow"
 		class="item-extra-tear"
-		:img="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${itemId}.png`"
-		:img-text="(ITEM_SPECIFICS[itemId as keyof TItemSpecifics] as any)?.itemImageText?.(props.value.internalItemData.value)"
+		:img="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`"
+		:img-text="(ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as any)?.itemImageText?.(props.value.internalItemData.value)"
 		img-size="64"
 		label="Manaflow stacks"
 		:used-number-input="useNumberInput([value.internalItemData as Ref<IData>, 'manaflow'])"
 		:max="360"
 		:step="4"
-		:id-prefix="`${idPrefix}-${itemId}`"
+		:id-prefix="`${idPrefix}-${abilityId.id}`"
 		:disabled="isTransformed"
 		@update:model-value="updateValue"
 		@img-mouseenter="$emit('itemHover', $event)"

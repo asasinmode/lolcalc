@@ -31,9 +31,10 @@ export type IWithPossibleDynamicValues = Record<string, {
 }>;
 
 /**
- * record containing possible values for a champion/rune-specific variable. The ones under `all` are used first, then overriden by ability specific ones (if they exist)
+ * record containing possible dynamic values for a variable (all values the variable is expected to resolve to)
+ * used for stringtable variables like `{{ Spell_ApheliosQ_Tooltip_@f3@ }}`
  */
-export type IPossibleDynamicValues = Partial<Record<'all' | IChampionAbilityKey, Record<string, (string | number)[]>>>;
+export type IPossibleDynamicValues = Record<string, (string | number)[]>;
 
 /**
  * champions/runes can have dynamic variables, like veigar stacks, current aphelios gun rotation or scaling health rune shard current value
@@ -42,13 +43,9 @@ export type IPossibleDynamicValues = Partial<Record<'all' | IChampionAbilityKey,
 export type IWithCalculateDynamicValues = Record<string, { calculateDynamicVariables?: (damageSource: DamageSource) => any }>;
 
 export interface IDamageResultTableSection {
-	/** `${championOrItemId}-${abilityKey}-${abilityVariantIndex}` */
+	/** stringified `GameAbilityId` or freestyled for `all` */
 	id: string;
-	/** freestyled for `type: 'all'` sections */
-	championOrItemId: string;
-	abilityKey?: IChampionAbilityKey;
-	abilityVariantIndex?: number;
-	type: 'all' | 'champion' | 'item';
+	abilityId: { id: string; type: 'all' } | IGameAbilityId;
 	/** stats and basic attack cannot be removed */
 	isPermanent?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
@@ -120,17 +117,43 @@ export interface IItemDescriptionProps {
 	source: IItemHoverTooltipView;
 }
 
-export interface IItemExtraProps<T = string> {
+export interface IExtraComponentProps<Type extends TAbilityType> {
 	value: DamageSource;
 	idPrefix: string;
-	itemId: T;
+	abilityId: Type extends 'champion' ? IChampionAbilityId : IItemAbilityId;
 }
 
-export interface IDamageSourceEffectApplier {
-	/** same as `setupInternalData` for `DamageSource.appliedEffects[number].data` */
-	setupEffectData?: (self: DamageSource, effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
-	/** checks if effect's data is not the default value */
-	isEffectActive?: (data: any) => number | boolean;
+export interface ISpecificComponents {
+	extras?: Component;
+	effects?: Component;
 }
 
-export type IDamageSourceEffectAccessPath = [IDamageSourceEffectId, valueIndex: number];
+export interface IChampionAbilityId {
+	type: typeof ABILITY_TYPE['champion'];
+	id: IChampionId;
+	abilityKey: IChampionAbilityKey;
+	abilityVariantIndex: number;
+}
+
+export interface IItemAbilityId {
+	type: typeof ABILITY_TYPE['item'];
+	/** item id */
+	id: string;
+}
+
+export type IGameAbilityId = IChampionAbilityId | IItemAbilityId;
+
+/** where the data of the ability lives, TODO maybe should be on `IGameAbilityId` */
+export type IGameAbilitySource = 'internal' | 'effect';
+
+export type IProviderGroupEffect = {
+	setupEffectData?: never;
+	isEffectActive?: never;
+} | IDamageSourceEffectProvider;
+
+export type IProviderGroupInternalData = { setupInternalData?: never } | IDamageSourceInternalDataProvider;
+
+export type IProviderGroupInternalItemData = {
+	setupInternalData?: never;
+	internalDataProperties?: never;
+} | IDamageSourceInternalItemDataProvider;

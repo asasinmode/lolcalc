@@ -1,21 +1,7 @@
-import type { IDamageSourceEffectApplier, IShopItem } from './types';
+import type { IProviderGroupEffect, IProviderGroupInternalItemData, IShopItem } from './types';
 import itemsData from '../assets/item.json';
 
 const { data: items } = itemsData;
-
-export type IInternalItemData<Item extends keyof TItemNameToId, Id = TItemNameToId[Item]> = Id extends keyof TItemSpecifics
-	? TItemSpecifics[Id] extends { setupInternalData: (...args: any) => any }
-		? ReturnType<TItemSpecifics[Id]['setupInternalData']>
-		: never
-	: never;
-
-export type IItemEffectData<Item extends keyof TItemNameToId, Id = TItemNameToId[Item]> = Id extends keyof TItemSpecifics
-	? TItemSpecifics[Id] extends { setupEffectData: (...args: any) => any }
-		? ReturnType<TItemSpecifics[Id]['setupEffectData']>
-		: never
-	: never;
-
-export type TItemSpecifics = typeof ITEM_SPECIFICS;
 
 const tearItemSpecifics = {
 	internalDataProperties: ['manaflow'],
@@ -211,28 +197,29 @@ export const ITEM_SPECIFICS = {
 			return inspiringSpeech;
 		},
 	},
-} satisfies Record<string, IDamageSourceEffectApplier & {
-	/**
-	 * similar to `utils/champion.ts` `CHAMPION_SPECIFICS.setupInternalData` for `DamageSource.internalItemData`
-	 * except the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
-	 *
-	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
-	 */
-	setupInternalData?: (self: DamageSource) => any;
-	/** the properties `setupInternalData` uses, needed for cleanup */
-	internalDataProperties?: string[];
+} satisfies Record<string, IItemSpecific>;
+
+export type TItemSpecifics = typeof ITEM_SPECIFICS;
+
+type IProviderGroupItemImage = {
+	itemImageText?: never;
+	itemImageTextLabel?: string;
+} | {
 	/**
 	 * text on the item's image, like current heartsteel/mejai stacks
-	 * `property` can be `string | IDamageSourceEffectId`, depending on what's passed to `numberExtra` in `components/Item/index.ts`
+	 * `property` can be `string | IGameAbilityId`, depending on what's passed to `numberExtra` in `components/Item/index.ts`
 	 * if the `numberExtra` is for `internalItemData`, it's expected to be a `string`
 	 * if it's for an applied effect, it must be `IDamageSourceEffectId`
 	 */
 	itemImageText?: (internalData: any, property?: any) => string | number;
-	/** whether to show the green dot that the item is active in the top right corner of the image */
-	isItemImageActive?: (internalData: any) => number | boolean;
 	/** sr only label for the shown image text */
 	itemImageTextLabel?: string;
-}>;
+};
+
+export type IItemSpecific = IProviderGroupInternalItemData & IProviderGroupEffect & IProviderGroupItemImage & {
+	/** whether to show the green dot that the item is active in the top right corner of the image */
+	isItemImageActive?: (internalData: any) => number | boolean;
+};
 
 export function calculateItemDiscount(
 	itemId: string,

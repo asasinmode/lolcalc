@@ -127,16 +127,16 @@ export function useCalculatorState(
 
 		if (resultsTable.value && resultsTable.value?.resultSections.length !== 2) {
 			for (const section of resultsTable.value.resultSections) {
-				const [championOrItemId] = section.id.split('-');
-				if (section.type !== 'all'
-					&& !(section.type === 'item' ? querySavedItemIds.has(championOrItemId!) : querySavedChampionIds.has(championOrItemId!))) {
+				if (section.abilityId.type !== 'all'
+					&& !(section.abilityId.type === ABILITY_TYPE.item ? querySavedItemIds.has(section.abilityId.id) : querySavedChampionIds.has(section.abilityId.id))) {
 					continue;
 				}
 
 				const isExpanded = resultsTable.value?.expandedSections.includes(section.id);
 
 				const params = new URLSearchParams();
-				params.append('tblSct', `${section.type}_${section.id}_${isExpanded ? 1 : ''}`);
+
+				params.append('tblSct', `${section.id}_${isExpanded ? 1 : ''}`);
 				const str = params.toString();
 				wholeState += `&${str}`;
 				if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
@@ -222,25 +222,13 @@ export function useCalculatorState(
 		const savedSections = params.getAll('tblSct');
 		let currentSectionIndex = 0;
 		for (const section of savedSections) {
-			const [type, id, isExpanded] = section.split('_');
-			if (!type || !['all', 'champion', 'item'].includes(type) || !id) {
+			const [id, isExpanded] = section.split('_');
+			if (!id) {
 				continue;
 			}
 
-			const [championOrItemId, abilityKey, abilityVariant] = (id ?? '')?.split('-');
-			if (type === 'champion' && championOrItemId) {
-				if (!abilityKey || !['passive', 'q', 'w', 'e', 'r'].includes(abilityKey)) {
-					continue;
-				}
-				const parsedAbilityVariant = abilityVariant ? Number.parseInt(abilityVariant) : undefined;
-				if (parsedAbilityVariant === undefined || Number.isNaN(parsedAbilityVariant)) {
-					continue;
-				}
-
-				resultsTable.value.addResultsSection(type, championOrItemId, abilityKey as IChampionAbilityKey, parsedAbilityVariant, undefined, !!isExpanded);
-			} else if (type === 'item' && championOrItemId) {
-				resultsTable.value.addResultsSection(type as 'item', championOrItemId, undefined, undefined, undefined, !!isExpanded);
-			} else {
+			/* `all` sections start with 'a_' */
+			if (id.startsWith('a_')) {
 				const sectionIndex = resultsTable.value.resultSections.findIndex(section => section.id === id);
 				if (~sectionIndex) {
 					if (sectionIndex !== currentSectionIndex) {
@@ -253,9 +241,15 @@ export function useCalculatorState(
 						~expandedIndex && resultsTable.value.expandedSections.splice(expandedIndex, 1);
 					}
 				}
+				currentSectionIndex += 1;
+				continue;
 			}
 
-			currentSectionIndex += 1;
+			const abilityId = GameAbilityId.parse(id);
+			if (abilityId) {
+				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded);
+				currentSectionIndex += 1;
+			}
 		}
 	}
 

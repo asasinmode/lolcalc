@@ -1,3 +1,12 @@
+export const ABILITY_TYPE = {
+	champion: 'champion',
+	item: 'item',
+} as const;
+
+export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
+
+export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
+
 export const ALL_CHAMPION_ABILITY_KEYS: IChampionAbilityKey[] = ['passive', 'q', 'w', 'e', 'r'];
 
 export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShieldPower', 'lethality', 'percentArmorPen', 'flatMagicPen', 'percentMagicPen', 'lifeSteal', 'omnivamp', 'attackRange', 'tenacity', 'attackDamage', 'abilityPower', 'armor', 'magicResist', 'attackSpeed', 'attackSpeedRatio', 'abilityHaste', 'critChance', 'critDamageMultiplier', 'moveSpeed', 'bonusAttackSpeedPercent'] as const;

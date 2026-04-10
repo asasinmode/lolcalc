@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IChampionAbilityHoverTooltipProps, IItemDescriptionProps } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, IGameAbilityId, IItemDescriptionProps } from '~/utils/types';
 
 const damageSource = defineModel<DamageSource>();
 
@@ -13,10 +13,8 @@ interface IEffectOptionGroup {
 	type: 'champion' | 'item';
 	label: string;
 	options: {
-		championOrItemId: string;
+		abilityId: IGameAbilityId;
 		name: string;
-		abilityKey?: IChampionAbilityKey;
-		abilityVariantIndex?: number;
 		hoverTooltipData: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'>;
 	}[];
 }
@@ -29,7 +27,10 @@ const itemEffects: IEffectOptionGroup['options'] = Object
 		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
 
 		return {
-			championOrItemId: item.id,
+			abilityId: {
+				type: ABILITY_TYPE.item,
+				id: item.id,
+			},
 			name: item.name,
 			hoverTooltipData: {
 				precomputedDescription,
@@ -48,14 +49,19 @@ const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 			type: 'champion',
 			label: 'champions',
 			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-				appliedEffect.type === 'champion' && appliedEffect.championOrItemId === effect.championOrItemId && appliedEffect.abilityKey === effect.abilityKey && appliedEffect.abilityVariantIndex === effect.abilityVariantIndex,
+				appliedEffect.abilityId.type === 'champion'
+				&& appliedEffect.abilityId.type === effect.abilityId.type
+				&& appliedEffect.abilityId.abilityKey === effect.abilityId.abilityKey
+				&& appliedEffect.abilityId.abilityVariantIndex === effect.abilityId.abilityVariantIndex,
 			)),
 		},
 		{
 			type: 'item',
 			label: 'items',
 			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-				appliedEffect.type === 'item' && appliedEffect.championOrItemId === effect.championOrItemId,
+				appliedEffect.abilityId.type === 'item'
+				&& appliedEffect.abilityId.type === effect.abilityId.type
+				&& appliedEffect.abilityId.id === effect.abilityId.id,
 			)),
 		},
 	];
@@ -75,7 +81,7 @@ async function loadChampionEffects() {
 			let champion: IChampion;
 
 			for (const abilityKey of ALL_CHAMPION_ABILITY_KEYS) {
-				const abilitySpecific = (specific as IChampionSpecificsWithAbilities)[abilityKey];
+				const abilitySpecific = (specific as IChampionSpecific)[abilityKey];
 				if (abilitySpecific) {
 					for (const [abilityVariantIndex, variantSpecific] of Object.entries(abilitySpecific) as unknown as [number, IChampionAbilityVariantSpecific][]) {
 						if ('setupEffectData' in variantSpecific) {
@@ -84,9 +90,12 @@ async function loadChampionEffects() {
 							const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex as unknown as number);
 
 							effects.push({
-								championOrItemId: championId,
-								abilityVariantIndex,
-								abilityKey,
+								abilityId: {
+									type: 'champion',
+									id: championId as IChampionId,
+									abilityVariantIndex,
+									abilityKey,
+								},
 								name: `${champion.name} ${abilityKey === 'passive' ? 'P' : abilityKey.toUpperCase()} - ${champion.abilities[abilityKey]!.variants[abilityVariantIndex as unknown as number]!.name}`,
 								hoverTooltipData: {
 									precomputedDescription,
@@ -115,12 +124,7 @@ function submitAnotherEffect(event: SubmitEvent) {
 	const [rawGroupIndex, rawOptionIndex] = value.split('-');
 	const group = effectOptionGroups.value[Number.parseInt(rawGroupIndex!)]!;
 	const option = group.options[Number.parseInt(rawOptionIndex!)]!;
-	damageSource.value?.addEffect({
-		type: group.type,
-		championOrItemId: option.championOrItemId,
-		abilityKey: option.abilityKey,
-		abilityVariantIndex: option.abilityVariantIndex,
-	});
+	damageSource.value?.addEffect(option.abilityId);
 	(event.target as HTMLFormElement).reset();
 }
 
@@ -169,7 +173,7 @@ defineExpose({
 				<optgroup v-for="(group, groupIndex) in effectOptionGroups" :key="group.type" :label="group.label">
 					<option
 						v-for="(option, optionIndex) in group.options"
-						:key="`${group.type}-${option.championOrItemId}-${option.abilityKey ?? ''}-${option.abilityVariantIndex ?? ''}`"
+						:key="GameAbilityId.stringify(option.abilityId)"
 						:value="`${groupIndex}-${optionIndex}`"
 					>
 						{{ option.name }}

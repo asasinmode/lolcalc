@@ -1066,8 +1066,9 @@ defineExpose({ el });
 					<img v-bind="textureBgImageAttrs(ui.practiceTool.statusEffect, 24)">
 				</button>
 				<ul>
-					<li v-for="effect in value.appliedEffects.value" :key="`${effect.type}-${effect.championOrItemId}`">
-						{{ effect.type }} - {{ effect.championOrItemId }}
+					<li v-for="effect in value.appliedEffects.value" :key="effect.id">
+						<!-- TODO remove with right click -->
+						{{ effect.id }} - {{ effect.data }}
 					</li>
 				</ul>
 			</section>

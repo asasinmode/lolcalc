@@ -25,7 +25,7 @@ export function useNumberInput<T extends Ref>(
 			if (isRef(targetRef[0])) {
 				(targetRef[0].value[targetRef[1]] as number) = value;
 			} else {
-				((targetRef[0] as any[])[targetRef[1] as number] as number) = value;
+				(targetRef[0] as any[])[targetRef[1] as number] = value;
 			}
 		} else {
 			targetRef.value = value;

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { IItemExtraProps } from '~/utils/types';
+import type { IExtraComponentProps } from '~/utils/types';
 
-defineProps<IItemExtraProps>();
+defineProps<IExtraComponentProps<'item'>>();
 
 defineEmits<{
 	itemHover: [event: MouseEvent];
@@ -9,22 +9,22 @@ defineEmits<{
 
 const { itemImageText } = ITEM_SPECIFICS[ITEM_NAME_TO_ID.terminus];
 
-const LightComponent = numberExtra(ITEM_NAME_TO_ID.terminus, 'jxtpL', 'Juxtaposition light stacks', 0, 3);
-const DarkComponent = numberExtra(ITEM_NAME_TO_ID.terminus, 'jxtpD', 'Juxtaposition dark stacks', 0, 3);
+const LightComponent = numberExtra({ type: ABILITY_TYPE.item, id: ITEM_NAME_TO_ID.terminus }, 'jxtpL', 'Juxtaposition light stacks', 0, 3);
+const DarkComponent = numberExtra({ type: ABILITY_TYPE.item, id: ITEM_NAME_TO_ID.terminus }, 'jxtpD', 'Juxtaposition dark stacks', 0, 3);
 </script>
 
 <template>
 	<LightComponent
+		:ability-id
 		:value
 		:id-prefix
-		:item-id
 		:img-text="itemImageText(value.internalItemData.value)"
 		@item-hover="$emit('itemHover', $event)"
 	/>
 	<DarkComponent
+		:ability-id
 		:value
 		:id-prefix
-		:item-id
 		:img-text="itemImageText(value.internalItemData.value)"
 		@item-hover="$emit('itemHover', $event)"
 	/>
