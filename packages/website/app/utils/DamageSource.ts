@@ -1,5 +1,5 @@
 import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IGameAbilityId } from './types';
+import type { IGameAbilityId, IItemAbilityId } from './types';
 
 type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -858,6 +858,20 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				item && computedItemDescription(text, minorVersion, item, this),
 			);
 		}),
+		itemSpecifics: computed<({
+			specific: IItemSpecific;
+			abilityId: IItemAbilityId;
+		} | undefined)[]>(() => this.items.value.map((item) => {
+			if (item) {
+				const abilityId = GameAbilityId.build(ABILITY_TYPE.item, 'internal', item.id);
+				const specific = resolveAbilitySpecific<any>(abilityId) as IItemSpecific;
+				return {
+					specific,
+					abilityId,
+				};
+			}
+			return undefined;
+		})),
 		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
 			const { minorVersion } = usePatchVersion();
 
@@ -873,6 +887,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				)) || []];
 			})) as Record<IChampionAbilityKey, IComputedAbilityDescription[]>;
 		}),
+	};
+
+	/** like computed but can depend on the computed */
+	coComputed = {
+		itemImage: computed<({ text?: string | number; isActive?: boolean | number } | undefined)[]>(() => this.computed.itemSpecifics.value.map(computedSpecific => computedSpecific && ({
+			text: computedSpecific.specific?.itemImageText?.(this, computedSpecific.abilityId),
+			isActive: computedSpecific.specific?.isItemImageActive?.(this.internalItemData.value),
+		}))),
 	};
 }
 

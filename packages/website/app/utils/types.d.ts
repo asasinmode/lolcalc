@@ -165,7 +165,7 @@ export type IProviderGroupImageText = {
 	 * must return data for `internalItemData` or `appliedEffects` based on the passed `abilitySource`
 	 * `property` is the key/index based the text is expected for
 	 */
-	itemImageText: (damageSource: DamageSource, abilityId: IGameAbilityId, stringifiedAbilityId: string, property?: any) => string | number;
+	itemImageText: (damageSource: DamageSource, abilityId: IGameAbilityId, property?: any) => string | number;
 	/** sr only label for the shown image text */
 	itemImageTextLabel: string;
 };

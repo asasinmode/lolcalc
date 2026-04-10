@@ -57,7 +57,7 @@ export function numberExtra<T extends IGameAbilityId>(
 			min,
 			max,
 			step,
-			'imgText': (specific as IProviderGroupImageText)?.itemImageText?.(props.damageSource.internalItemData.value, abilityId, stringifiedAbilityId, property),
+			'imgText': (specific as IProviderGroupImageText)?.itemImageText?.(props.damageSource.internalItemData.value, abilityId, property),
 			'usedNumberInput': useNumberInput(
 				isEffect
 					? [appliedEffect!.data, property as number]

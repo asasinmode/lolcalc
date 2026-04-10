@@ -10,7 +10,7 @@ const tearItemSpecifics = {
 		return { manaflow: 0 };
 	},
 	itemImageTextLabel: 'Manaflow stacks',
-	itemImageText(self: DamageSource, _abilitySource) {
+	itemImageText(self) {
 		return (self.internalItemData.value as { manaflow: number }).manaflow;
 	},
 } satisfies IItemSpecific;
@@ -201,11 +201,11 @@ export const ITEM_SPECIFICS = {
 			return carve;
 		},
 		itemImageTextLabel: 'Carve stacks',
-		itemImageText(self, abilityId, stringifiedId) {
+		itemImageText(self, abilityId) {
 			if (abilityId.dataSource === ABILITY_DATA_SOURCE.internal) {
 				return self.internalItemData.value.carve;
 			}
-			return self.appliedEffects.value.find(effect => effect.id === stringifiedId)?.data[0];
+			return self.appliedEffects.value.find(effect => GameAbilityId.isSame(effect.abilityId, abilityId))?.data[0];
 		},
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {

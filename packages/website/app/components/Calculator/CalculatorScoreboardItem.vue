@@ -948,7 +948,7 @@ defineExpose({ el });
 				<component
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
-					:class="{ active: value.items.value[i - 1] && (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.isItemImageActive?.(value.internalItemData.value) }"
+					:class="{ active: value.coComputed.itemImage.value[i - 1]?.isActive }"
 					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
 					@click.right="removeItem($event, i - 1)"
 					@dragstart="startItemDrag($event, i - 1)"
@@ -961,9 +961,9 @@ defineExpose({ el });
 						height="64"
 						loading="lazy"
 					>
-					<span v-if="value.items.value[i - 1] && (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.itemImageText?.(value.internalItemData.value)">
-						<span>{{ (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.itemImageTextLabel }}:</span>
-						{{ (ITEM_SPECIFICS as any)[value.items.value[i - 1]!.id]?.itemImageText(value.internalItemData.value) }}
+					<span v-if="value.coComputed.itemImage.value[i - 1]?.text">
+						<span>{{ value.computed.itemSpecifics.value[i - 1]!.specific.itemImageTextLabel }}:</span>
+						{{ value.coComputed.itemImage.value[i - 1]!.text }}
 					</span>
 				</component>
 			</li>

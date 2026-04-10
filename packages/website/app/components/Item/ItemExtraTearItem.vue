@@ -73,7 +73,7 @@ function updateValue(value: number) {
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
 		class="item-extra-tear"
 		:img-src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`"
-		:img-text="(ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as any)?.itemImageText?.(damageSource.internalItemData.value)"
+		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.itemImageText?.(damageSource, abilityId)"
 		img-size="64"
 		label="Manaflow stacks"
 		:used-number-input="useNumberInput([damageSource.internalItemData as Ref<IData>, 'manaflow'])"
