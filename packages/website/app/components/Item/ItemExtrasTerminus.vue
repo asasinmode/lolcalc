@@ -1,31 +1,27 @@
 <script setup lang="ts">
-import type { IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentEmits, IExtraComponentProps, IItemAbilityId } from '~/utils/types';
 
-defineProps<IExtraComponentProps<'item'>>();
+const props = defineProps<IExtraComponentProps<'item'>>();
 
-defineEmits<{
-	itemHover: [event: MouseEvent];
-}>();
+defineEmits<IExtraComponentEmits>();
 
-const { itemImageText } = ITEM_SPECIFICS[ITEM_NAME_TO_ID.terminus];
+type IId = IItemAbilityId<typeof ITEM_NAME_TO_ID.terminus, 'internal'>;
 
-const LightComponent = numberExtra({ type: ABILITY_TYPE.item, id: ITEM_NAME_TO_ID.terminus }, 'jxtpL', 'Juxtaposition light stacks', 0, 3);
-const DarkComponent = numberExtra({ type: ABILITY_TYPE.item, id: ITEM_NAME_TO_ID.terminus }, 'jxtpD', 'Juxtaposition dark stacks', 0, 3);
+const LightComponent = numberExtra(props.abilityId as IId, 'jxtpL', 'Juxtaposition light stacks', 0, 3);
+const DarkComponent = numberExtra(props.abilityId as IId, 'jxtpD', 'Juxtaposition dark stacks', 0, 3);
 </script>
 
 <template>
 	<LightComponent
 		:ability-id
-		:value
+		:damage-source
 		:id-prefix
-		:img-text="itemImageText(value.internalItemData.value)"
-		@item-hover="$emit('itemHover', $event)"
+		@item-hover="$emit('imgMouseenter', $event, abilityId)"
 	/>
 	<DarkComponent
 		:ability-id
-		:value
+		:damage-source
 		:id-prefix
-		:img-text="itemImageText(value.internalItemData.value)"
-		@item-hover="$emit('itemHover', $event)"
+		@item-hover="$emit('imgMouseenter', $event, abilityId)"
 	/>
 </template>

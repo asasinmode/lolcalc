@@ -1,14 +1,12 @@
 <script setup lang="ts">
-import type { IScoreboardItemShowAbilityTooltipArgs } from '~/utils/types';
+import type { IExtraComponentEmits } from '~/utils/types';
 
 const props = defineProps<{
 	value: DamageSource<'Aphelios'>;
 	idPrefix: string;
 }>();
 
-defineEmits<{
-	abilityHover: IScoreboardItemShowAbilityTooltipArgs;
-}>();
+defineEmits<IExtraComponentEmits>();
 
 const { abilityImage, abilityImageSize } = useChampionImages();
 
@@ -29,7 +27,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"
-			@mouseenter="$emit('abilityHover', $event, 'passive', 0)"
+			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(ABILITY_TYPE.champion, 'internal', 'Aphelios', 'passive', 0))"
 		>
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup

@@ -1,4 +1,4 @@
-import type { IPossibleDynamicValues, IProviderGroupEffect, IProviderGroupInternalData } from './types';
+import type { IPossibleDynamicValues, IProviderGroupEffect, IProviderGroupImageText, IProviderGroupInternalData } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
@@ -12,6 +12,11 @@ export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' |
  */
 export const CHAMPION_SPECIFICS = {
 	Amumu: {
+		setupInternalData(self): { applyPassive: number } {
+			return {
+				applyPassive: Math.max(0, Math.min(1, self.internalData.value.applyPassive ?? 0)),
+			};
+		},
 		passive: {
 			0: {
 				setupEffectData(self, effect): [cursedTouch: boolean] {
@@ -65,11 +70,9 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Veigar: {
-		setupInternalData(self): {
-			veigarP: number;
-		} {
+		setupInternalData(self): { passiveStacks: number } {
 			return {
-				veigarP: Math.max(0, self.internalData.value.veigarP ?? 0),
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
 			};
 		},
 	},
@@ -97,6 +100,6 @@ export interface IChampionAbilitySpecific {
 	[key: number]: IChampionAbilityVariantSpecific;
 }
 
-export type IChampionAbilityVariantSpecific = IProviderGroupEffect & {
+export type IChampionAbilityVariantSpecific = IProviderGroupEffect & IProviderGroupImageText & {
 	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;
 };

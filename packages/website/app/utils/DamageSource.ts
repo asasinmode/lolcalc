@@ -1,5 +1,5 @@
 import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IDamageSourceEffectApplier, IGameAbilityId } from './types';
+import type { IGameAbilityId } from './types';
 
 type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -1277,15 +1277,21 @@ function formatItemDescriptionText(
 	});
 }
 
-export function resolveAbilitySpecific(abilityId: IGameAbilityId): IAbilitySpecific | undefined {
-	return abilityId.type === 'item'
-		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics]
+export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
+	const specific = abilityId.type === 'item'
+		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
 		: abilityId.type === 'champion'
-			? (CHAMPION_SPECIFICS[abilityId.id as keyof TChampionSpecifics] as IChampionSpecificsWithAbilities)?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex]
+			? (CHAMPION_SPECIFICS[abilityId.id as keyof TChampionSpecifics] as IChampionSpecific)?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
 			: undefined;
+
+	if (!specific && warnPrefix) {
+		console.warn(`[${warnPrefix}] failed to resolve specific for`, abilityId);
+	}
+
+	return specific;
 }
 
-export function resolveEffectSpecific(abilityId: IGameAbilityId): IDamageSourceEffectApplier | undefined {
+export function resolveEffectSpecific(abilityId: IGameAbilityId): IDamageSourceEffectProvider | undefined {
 	const specific = resolveAbilitySpecific(abilityId);
 	if (specific && 'setupEffectData' in specific) {
 		return specific;

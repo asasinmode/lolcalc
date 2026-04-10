@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import type { IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
 import { VExtrasNumber } from '#components';
 
 const props = defineProps<IExtraComponentProps<'item'>>();
 
-defineEmits<{
-	itemHover: [event: MouseEvent];
-}>();
+defineEmits<IExtraComponentEmits>();
 
 const items = useItems();
 const { version } = usePatchVersion();
@@ -38,25 +36,25 @@ const UNTRANSFORMED_IDS: string[] = [
 	ITEM_NAME_TO_ID.wintersApproach,
 ];
 
-const itemIndex = computed(() => props.value.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === ALTERNATE_ITEM_FORMS[props.abilityId.id]));
+const itemIndex = computed(() => props.damageSource.items.value.findIndex(item => item?.id === props.abilityId.id || item?.id === ALTERNATE_ITEM_FORMS[props.abilityId.id]));
 const transformedItem = computed(() => items[ALTERNATE_ITEM_FORMS[props.abilityId.id]!]!);
 
 const isTransformed = ref((TRANSFORMED_IDS as string[]).includes(props.abilityId.id));
 
 function transform() {
 	// eslint-disable-next-line vue/no-mutating-props
-	props.value.items.value[itemIndex.value] = transformedItem.value;
+	props.damageSource.items.value[itemIndex.value] = transformedItem.value;
 	isTransformed.value = !isTransformed.value;
-	(props.value.internalItemData.value as IData).manaflow = 360;
+	(props.damageSource.internalItemData.value as IData).manaflow = 360;
 	if (!isTransformed.value) {
-		for (let i = 0; i < props.value.items.value.length; i++) {
-			const item = props.value.items.value[i];
+		for (let i = 0; i < props.damageSource.items.value.length; i++) {
+			const item = props.damageSource.items.value[i];
 			if (item && i !== itemIndex.value && (UNTRANSFORMED_IDS as string[]).includes(item.id)) {
 				// eslint-disable-next-line vue/no-mutating-props
-				props.value.items.value[i] = items[(ALTERNATE_ITEM_FORMS as Record<string, string>)[item.id]!];
+				props.damageSource.items.value[i] = items[(ALTERNATE_ITEM_FORMS as Record<string, string>)[item.id]!];
 			} else if (item?.id === ITEM_NAME_TO_ID.tear) {
 				// eslint-disable-next-line vue/no-mutating-props
-				props.value.items.value[i] = undefined;
+				props.damageSource.items.value[i] = undefined;
 			}
 		}
 	}
@@ -64,7 +62,7 @@ function transform() {
 
 function updateValue(value: number) {
 	if (!isTransformed.value) {
-		(props.value.internalItemData.value as IData).manaflow = value;
+		(props.damageSource.internalItemData.value as IData).manaflow = value;
 	}
 }
 </script>
@@ -72,19 +70,19 @@ function updateValue(value: number) {
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
 	<VExtrasNumber
-		:model-value="isTransformed ? 1000 : (value.internalItemData.value as IData).manaflow"
+		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
 		class="item-extra-tear"
-		:img="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`"
-		:img-text="(ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as any)?.itemImageText?.(props.value.internalItemData.value)"
+		:img-src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`"
+		:img-text="(ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as any)?.itemImageText?.(damageSource.internalItemData.value)"
 		img-size="64"
 		label="Manaflow stacks"
-		:used-number-input="useNumberInput([value.internalItemData as Ref<IData>, 'manaflow'])"
+		:used-number-input="useNumberInput([damageSource.internalItemData as Ref<IData>, 'manaflow'])"
 		:max="360"
 		:step="4"
 		:id-prefix="`${idPrefix}-${abilityId.id}`"
 		:disabled="isTransformed"
 		@update:model-value="updateValue"
-		@img-mouseenter="$emit('itemHover', $event)"
+		@img-mouseenter="$emit('imgMouseenter', $event, props.abilityId)"
 	>
 		<button class="pretend-ui-btn" title="transform" @click="transform">
 			<span> transform </span>

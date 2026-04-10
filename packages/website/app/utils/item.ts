@@ -1,4 +1,4 @@
-import type { IProviderGroupEffect, IProviderGroupInternalItemData, IShopItem } from './types';
+import type { IProviderGroupEffect, IProviderGroupImageText, IProviderGroupInternalItemData, IShopItem } from './types';
 import itemsData from '../assets/item.json';
 
 const { data: items } = itemsData;
@@ -10,10 +10,10 @@ const tearItemSpecifics = {
 		return { manaflow: 0 };
 	},
 	itemImageTextLabel: 'Manaflow stacks',
-	itemImageText(data: { manaflow: number }) {
-		return data.manaflow;
+	itemImageText(self: DamageSource, _abilitySource) {
+		return (self.internalItemData.value as { manaflow: number }).manaflow;
 	},
-};
+} satisfies IItemSpecific;
 
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -23,8 +23,9 @@ export const ITEM_SPECIFICS = {
 			return { eminence: 0 };
 		},
 		itemImageTextLabel: 'Eminence stacks',
-		itemImageText(data: { eminence: 0 }) {
-			return data.eminence && items[ITEM_NAME_TO_ID.hubris].dataValues.BonusLethality + data.eminence * items[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
+		itemImageText(self) {
+			const { eminence } = self.internalItemData.value as { eminence: number };
+			return eminence && items[ITEM_NAME_TO_ID.hubris].dataValues.BonusLethality + eminence * items[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
 		},
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
@@ -34,8 +35,8 @@ export const ITEM_SPECIFICS = {
 			return { glory: 0 };
 		},
 		itemImageTextLabel: 'Glory stacks',
-		itemImageText(data: { glory: number }) {
-			return data.glory;
+		itemImageText(self) {
+			return (self.internalItemData.value as { glory: number }).glory;
 		},
 	},
 	[ITEM_NAME_TO_ID.mejai]: {
@@ -45,8 +46,8 @@ export const ITEM_SPECIFICS = {
 			return { glory: 0 };
 		},
 		itemImageTextLabel: 'Glory stacks',
-		itemImageText(data: { glory: number }) {
-			return data.glory;
+		itemImageText(self) {
+			return (self.internalItemData.value as { glory: number }).glory;
 		},
 	},
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
@@ -56,8 +57,9 @@ export const ITEM_SPECIFICS = {
 			return { madness: 0 };
 		},
 		itemImageTextLabel: 'Madness bonus damage',
-		itemImageText(data: { madness: number }) {
-			return data.madness && `${Math.round(data.madness * items[ITEM_NAME_TO_ID.hauntingGuise].dataValues.DamageIncreasePerSecond * 100)}%`;
+		itemImageText(self) {
+			const { madness } = self.internalItemData.value as { madness: number };
+			return madness && `${Math.round(madness * items[ITEM_NAME_TO_ID.hauntingGuise].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.roa]: {
@@ -67,8 +69,8 @@ export const ITEM_SPECIFICS = {
 			return { eternity: 0 };
 		},
 		itemImageTextLabel: 'Eternity stacks',
-		itemImageText(data: { eternity: number }) {
-			return data.eternity;
+		itemImageText(self) {
+			return (self.internalItemData.value as { eternity: number }).eternity;
 		},
 	},
 	[ITEM_NAME_TO_ID.blackfireTorch]: {
@@ -78,8 +80,9 @@ export const ITEM_SPECIFICS = {
 			return { bBlaze: 0 };
 		},
 		itemImageTextLabel: 'Baleful Blaze ap increase',
-		itemImageText(data: { bBlaze: number }) {
-			return data.bBlaze && `${Math.round(data.bBlaze * items[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
+		itemImageText(self) {
+			const { bBlaze } = self.internalItemData.value as { bBlaze: number };
+			return bBlaze && `${Math.round(bBlaze * items[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.heartsteel]: {
@@ -89,8 +92,8 @@ export const ITEM_SPECIFICS = {
 			return { cConsumption: 0 };
 		},
 		itemImageTextLabel: 'Colosal Consumption health increase',
-		itemImageText(data: { cConsumption: number }) {
-			return data.cConsumption;
+		itemImageText(self) {
+			return (self.internalItemData.value as { cConsumption: number }).cConsumption;
 		},
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
@@ -100,8 +103,8 @@ export const ITEM_SPECIFICS = {
 			return { seething: 0 };
 		},
 		itemImageTextLabel: 'Seething Strikes stacks',
-		itemImageText(data: { seething: number }) {
-			return data.seething;
+		itemImageText(self) {
+			return (self.internalItemData.value as { seething: number }).seething;
 		},
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
@@ -112,7 +115,8 @@ export const ITEM_SPECIFICS = {
 			return { jxtpL: 0, jxtpD: 0 };
 		},
 		itemImageTextLabel: 'Juxtaposition stacks (light | dark)',
-		itemImageText(data: { jxtpL: number; jxtpD: number }, property?: 'jxtpL' | 'jxtpD') {
+		itemImageText(self, _abilityId, _stringifiedAbilityId, property?: 'jxtpL' | 'jxtpD') {
+			const data = self.internalItemData.value as { jxtpL: number; jxtpD: number };
 			return property ? data[property] : (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
 		},
 	},
@@ -123,8 +127,9 @@ export const ITEM_SPECIFICS = {
 			return { madness: 0 };
 		},
 		itemImageTextLabel: 'Madness bonus damage',
-		itemImageText(data: { madness: number }) {
-			return data.madness && `${Math.round(data.madness * items[ITEM_NAME_TO_ID.liandry].dataValues.DamageIncreasePerSecond * 100)}%`;
+		itemImageText(self) {
+			const { madness } = self.internalItemData.value as { madness: number };
+			return madness && `${Math.round(madness * items[ITEM_NAME_TO_ID.liandry].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
@@ -134,8 +139,9 @@ export const ITEM_SPECIFICS = {
 			return { practice: 0 };
 		},
 		itemImageTextLabel: 'Practice Makes Lethal critical strike chance',
-		itemImageText(data: { practice: number }) {
-			return data.practice && `${data.practice}%`;
+		itemImageText(self) {
+			const { practice } = self.internalItemData.value as { practice: number };
+			return practice && `${practice}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
@@ -145,8 +151,9 @@ export const ITEM_SPECIFICS = {
 			return { fWill: 0 };
 		},
 		itemImageTextLabel: 'Focused Will ability damage increase',
-		itemImageText(data: { fWill: number }) {
-			return data.fWill && `${Math.round(data.fWill * items[ITEM_NAME_TO_ID.shojin].dataValues.SpellDamageIncrease * 100)}%`;
+		itemImageText(self) {
+			const { fWill } = self.internalItemData.value as { fWill: number };
+			return fWill && `${Math.round(fWill * items[ITEM_NAME_TO_ID.shojin].dataValues.SpellDamageIncrease * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
@@ -156,8 +163,9 @@ export const ITEM_SPECIFICS = {
 			return { corruption: 0 };
 		},
 		itemImageTextLabel: 'Corruption bonus damage',
-		itemImageText(data: { corruption: number }) {
-			return data.corruption && `${Math.round(data.corruption * items[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
+		itemImageText(self) {
+			const { corruption } = self.internalItemData.value as { corruption: number };
+			return corruption && `${Math.round(corruption * items[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.tear]: tearItemSpecifics,
@@ -176,6 +184,12 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
+		internalDataProperties: ['carve', 'fervor'],
+		setupInternalData(self) {
+			self.internalItemData.value.carve = Math.max(0, Math.min(5, self.internalItemData.value.carve ?? 0));
+			self.internalItemData.value.fervor = Math.max(0, Math.min(1, self.internalItemData.value.carve ?? 0));
+			return { carve: 0, fervor: 0 };
+		},
 		setupEffectData(self, effect): [carve: number] {
 			console.log('setting up black cleaver effect', effect, self.appliedEffects.value);
 			return [
@@ -185,6 +199,13 @@ export const ITEM_SPECIFICS = {
 		isEffectActive(data) {
 			const [carve] = data as [carve: number];
 			return carve;
+		},
+		itemImageTextLabel: 'Carve stacks',
+		itemImageText(self, abilityId, stringifiedId) {
+			if (abilityId.dataSource === ABILITY_DATA_SOURCE.internal) {
+				return self.internalItemData.value.carve;
+			}
+			return self.appliedEffects.value.find(effect => effect.id === stringifiedId)?.data[0];
 		},
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
@@ -201,22 +222,7 @@ export const ITEM_SPECIFICS = {
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
 
-type IProviderGroupItemImage = {
-	itemImageText?: never;
-	itemImageTextLabel?: string;
-} | {
-	/**
-	 * text on the item's image, like current heartsteel/mejai stacks
-	 * `property` can be `string | IGameAbilityId`, depending on what's passed to `numberExtra` in `components/Item/index.ts`
-	 * if the `numberExtra` is for `internalItemData`, it's expected to be a `string`
-	 * if it's for an applied effect, it must be `IDamageSourceEffectId`
-	 */
-	itemImageText?: (internalData: any, property?: any) => string | number;
-	/** sr only label for the shown image text */
-	itemImageTextLabel?: string;
-};
-
-export type IItemSpecific = IProviderGroupInternalItemData & IProviderGroupEffect & IProviderGroupItemImage & {
+export type IItemSpecific = IProviderGroupInternalItemData & IProviderGroupEffect & IProviderGroupImageText & {
 	/** whether to show the green dot that the item is active in the top right corner of the image */
 	isItemImageActive?: (internalData: any) => number | boolean;
 };

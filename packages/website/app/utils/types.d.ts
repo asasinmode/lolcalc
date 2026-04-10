@@ -98,8 +98,6 @@ export interface IChampionAbilityHoverTooltipProps {
 	precomputedDescription?: IComputedAbilityDescription;
 }
 
-export type IScoreboardItemShowAbilityTooltipArgs = [event: MouseEvent, ability: IChampionAbilityKey, variant: number];
-
 export interface IItemDescriptionProps {
 	gold?: number;
 	headerTag?: string;
@@ -118,9 +116,13 @@ export interface IItemDescriptionProps {
 }
 
 export interface IExtraComponentProps<Type extends TAbilityType> {
-	value: DamageSource;
+	damageSource: DamageSource;
 	idPrefix: string;
 	abilityId: Type extends 'champion' ? IChampionAbilityId : IItemAbilityId;
+}
+
+export interface IExtraComponentEmits {
+	imgMouseenter: [event: MouseEvent, abilityId: IGameAbilityId];
 }
 
 export interface ISpecificComponents {
@@ -128,23 +130,27 @@ export interface ISpecificComponents {
 	effects?: Component;
 }
 
-export interface IChampionAbilityId {
+export interface IChampionAbilityId<
+	Id extends IChampionId = IChampionId,
+	Source extends TAbilityDataSource = TAbilityDataSource,
+	AbilityKey extends IChampionAbilityKey = IChampionAbilityKey,
+	AbilityVariantIndex extends number = number,
+> {
 	type: typeof ABILITY_TYPE['champion'];
-	id: IChampionId;
-	abilityKey: IChampionAbilityKey;
-	abilityVariantIndex: number;
+	id: Id;
+	dataSource: Source;
+	abilityKey: AbilityKey;
+	abilityVariantIndex: AbilityVariantIndex;
 }
 
-export interface IItemAbilityId {
+export interface IItemAbilityId<Id extends string = string, Source extends TAbilityDataSource = TAbilityDataSource> {
 	type: typeof ABILITY_TYPE['item'];
 	/** item id */
-	id: string;
+	id: Id;
+	dataSource: Source;
 }
 
 export type IGameAbilityId = IChampionAbilityId | IItemAbilityId;
-
-/** where the data of the ability lives, TODO maybe should be on `IGameAbilityId` */
-export type IGameAbilitySource = 'internal' | 'effect';
 
 export type IProviderGroupEffect = {
 	setupEffectData?: never;
@@ -157,3 +163,17 @@ export type IProviderGroupInternalItemData = {
 	setupInternalData?: never;
 	internalDataProperties?: never;
 } | IDamageSourceInternalItemDataProvider;
+
+export type IProviderGroupImageText = {
+	itemImageText?: never;
+	itemImageTextLabel?: string;
+} | {
+	/**
+	 * text on the item's image, like current heartsteel/mejai stacks
+	 * must return data for `internalItemData` or `appliedEffects` based on the passed `abilitySource`
+	 * `property` is the key/index based the text is expected for
+	 */
+	itemImageText: (damageSource: DamageSource, abilityId: IGameAbilityId, stringifiedAbilityId: string, property?: any) => string | number;
+	/** sr only label for the shown image text */
+	itemImageTextLabel: string;
+};

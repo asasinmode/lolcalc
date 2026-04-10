@@ -1,7 +1,7 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
 	idPrefix: string;
-	img: string;
+	imgSrc: string;
 	imgSize: string | number;
 	imgText?: string | number;
 	label: string;
@@ -24,7 +24,7 @@ const value = defineModel<number>({ required: true });
 <template>
 	<article class="v-extras-number">
 		<img
-			:src="img"
+			:src="imgSrc"
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"

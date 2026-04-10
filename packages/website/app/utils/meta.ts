@@ -3,9 +3,16 @@ export const ABILITY_TYPE = {
 	item: 'item',
 } as const;
 
+export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
+
 export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
 
-export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
+export const ABILITY_DATA_SOURCE = {
+	internal: 'internal',
+	effects: 'effects',
+} as const;
+
+export type TAbilityDataSource = typeof ABILITY_DATA_SOURCE[keyof typeof ABILITY_DATA_SOURCE];
 
 export const ALL_CHAMPION_ABILITY_KEYS: IChampionAbilityKey[] = ['passive', 'q', 'w', 'e', 'r'];
 

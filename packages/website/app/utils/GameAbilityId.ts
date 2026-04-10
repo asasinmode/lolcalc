@@ -1,10 +1,25 @@
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from './types';
 
 export class GameAbilityId {
-	static build(type: 'champion', id: IChampionId, abilityKey: IChampionAbilityKey, abilityVariantIndex: number): IChampionAbilityId;
-	static build(type: 'item', id: string): IItemAbilityId;
+	static build<
+		Id extends IChampionId,
+		Source extends TAbilityDataSource,
+		AbilityKey extends IChampionAbilityKey,
+		AbilityVariantIndex extends number,
+	>(
+		type: 'champion',
+		dataSource: Source,
+		id: Id,
+		abilityKey: AbilityKey,
+		abilityVariantIndex: AbilityVariantIndex
+	): IChampionAbilityId<Id, Source, AbilityKey, AbilityVariantIndex>;
+	static build<Id extends string, Source extends TAbilityDataSource>(
+		type: 'item',
+		dataSource: Source,
+		id: Id): IItemAbilityId<Id, Source>;
 	static build(
 		type: TAbilityType,
+		dataSource: TAbilityDataSource,
 		id: string,
 		abilityKey?: IChampionAbilityKey,
 		abilityVariantIndex?: number,
@@ -12,13 +27,14 @@ export class GameAbilityId {
 		if (type === 'champion') {
 			return markRaw({
 				type,
+				dataSource,
 				id: id as IChampionId,
 				abilityKey: abilityKey!,
 				abilityVariantIndex: abilityVariantIndex!,
 			});
 		}
 
-		return markRaw({ type, id });
+		return markRaw({ type, dataSource, id });
 	}
 
 	/**
@@ -41,7 +57,7 @@ export class GameAbilityId {
 		return [ALL_ABILITY_TYPES.indexOf(id.type), id.id].join('-');
 	}
 
-	static parse(value: string): IGameAbilityId | undefined {
+	static parse(value: string, dataSource: TAbilityDataSource): IGameAbilityId | undefined {
 		const [rawType, id, rawAbilityKeyIndex, rawAbilityVariantIndex] = value.split('-');
 		if (!id) {
 			return;
@@ -67,7 +83,7 @@ export class GameAbilityId {
 
 			const abilityKey = ALL_CHAMPION_ABILITY_KEYS[abilityKeyIndex];
 
-			return GameAbilityId.build(type, id as IChampionId, abilityKey, abilityVariantIndex);
+			return GameAbilityId.build(type, dataSource, id as IChampionId, abilityKey, abilityVariantIndex);
 		}
 
 		if (type === ABILITY_TYPE.item) {
@@ -76,7 +92,7 @@ export class GameAbilityId {
 				return;
 			}
 
-			return GameAbilityId.build(type, id);
+			return GameAbilityId.build(type, dataSource, id);
 		}
 
 		return undefined;
