@@ -192,6 +192,10 @@ defineExpose({ header });
 			}
 		}
 
+		> ul + * {
+			--at-apply: 'mt-2';
+		}
+
 		> h4 {
 			--at-apply: 'text-neutral-300';
 
@@ -218,7 +222,7 @@ defineExpose({ header });
 			}
 
 			> li {
-				--at-apply: 'ms-5';
+				--at-apply: 'ms-5 list-item list-disc';
 			}
 		}
 
