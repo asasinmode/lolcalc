@@ -62,7 +62,7 @@ interface IDamageSectionOption {
 }
 
 /** array containing `boolean` of whether a section is implemented or not, used for `enableUnimplementedUi` */
-const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || section.abilityId.type === 'all' || section.abilityId.type === 'item'));
+const implementedDamageSectionsMap = computed(() => resultSections.value.map(section => enableUnimplementedUi.value || !(section.abilityId.type === 'champion' && section.abilityId.abilityKey !== 'passive')));
 
 const uniqueDamageSourceChampions = computed<Set<IChampion>>(() => new Set(
 	props.damageSources
@@ -285,7 +285,7 @@ function removeResultsColumn(index: number) {
 	emit('configurationChanged');
 }
 
-const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== 'stats').map(section => section.id));
+const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== 'a-stats' && !section.isCustomTotal).map(section => section.id));
 
 function toggleResultsSection(sectionId: string) {
 	const index = expandedSections.value.indexOf(sectionId);
@@ -515,7 +515,7 @@ onBeforeUnmount(() => {
 function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number]) {
 	return resultColumns.value.map((column) => {
 		return {
-			key: `${section.id}-${row.id}-${column.id || 'new'}`,
+			key: `${section.id}-${row.id}-${column.id}`,
 			computedColumn: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
 		};
 	});
@@ -938,6 +938,13 @@ function addColumnItems(columnIndex: number) {
 	emit('configurationChanged');
 }
 
+interface ICustomTotalRow {
+	sectionId: string;
+	variableName: string;
+}
+
+const customTotalRows = ref<ICustomTotalRow[]>([]);
+
 defineExpose({
 	resultColumns,
 	resultSections,
@@ -962,7 +969,7 @@ defineExpose({
 		<thead>
 			<tr>
 				<th width="48px" scope="col">
-					<span>section controls</span>
+					<span>row controls</span>
 				</th>
 				<th id="results-table-header-damage-type" scope="col" width="192px">
 					<span>damage type</span>
@@ -1289,7 +1296,7 @@ defineExpose({
 				</tr>
 				<tr v-else-if="!section.rows.length" class="info-row">
 					<td :colspan="2 + resultColumns.length">
-						no variables detected
+						{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 					</td>
 				</tr>
 				<tr
@@ -1297,7 +1304,12 @@ defineExpose({
 					:key="`${section.id}-${row.id}`"
 					:class="{ unknown: row.isUnknown }"
 				>
-					<th :id="`results-table-section-row-${section.id}-${row.id}`" scope="row" colspan="2" headers="results-table-header-damage-type">
+					<th
+						:id="`results-table-section-row-${section.id}-${row.id}`"
+						scope="row"
+						colspan="2"
+						headers="results-table-header-damage-type"
+					>
 						<img
 							v-if="row.icon"
 							:src="`https://raw.communitydragon.org/${minorVersion}/${row.icon.path}`"
@@ -1356,7 +1368,7 @@ defineExpose({
 										v-for="(ability, abilityIndex) in option.abilities"
 										:key="GameAbilityId.stringify(ability.id)"
 										:value="`${optionIndex}-${abilityIndex}`"
-										:disabled="enableUnimplementedUi ? undefined : option.optionId !== 'items'"
+										:disabled="enableUnimplementedUi ? undefined : ability.id.type !== ABILITY_TYPE.item && ability.id.abilityKey !== 'passive'"
 									>
 										{{ ability.name }}
 									</option>

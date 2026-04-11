@@ -40,6 +40,7 @@ export interface IDamageResultTableSection {
 	abilityId: { id: string; type: 'all' } | IGameAbilityId;
 	/** stats and basic attack cannot be removed */
 	isPermanent?: boolean;
+	isCustomTotal?: boolean;
 	/** `${champion.name} [${abilityHotkey}] - ${abilityVariant.name}` */
 	name: string;
 	image?: string;

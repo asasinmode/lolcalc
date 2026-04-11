@@ -32,11 +32,11 @@ const damageTargets = ref<DamageSource[]>([]) as unknown as ShallowRef<DamageSou
 const resultColumns = ref<IDamageResultTableColumn[]>([{ id: useId() }]) as unknown as ShallowRef<IDamageResultTableColumn[]>;
 const resultSections = ref<IDamageResultTableSection[]>([
 	{
-		id: 'a_stats',
+		id: 'a-stats',
 		abilityId: { type: 'all', id: 'stats' },
 		name: 'stats',
 		isPermanent: true,
-		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/itemdamage.png`,
 		imageSize: 32,
 		rows: markRaw(Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
 			return {
@@ -75,7 +75,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		},
 	},
 	{
-		id: 'a_basicAttack',
+		id: 'a-aa',
 		abilityId: { type: 'all', id: 'basicAttack' },
 		name: 'basic attack',
 		isPermanent: true,
@@ -113,6 +113,23 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		selectValue: 'normal',
 		selectOptions: markRaw([['normal', 'normal'], ['critical', 'critical'], ['average', 'average']]),
 		selectLabel: 'attack type',
+	},
+	{
+		id: 'a-cTtl',
+		abilityId: { type: 'all', id: 'customTotal' },
+		name: 'custom total',
+		isPermanent: true,
+		isCustomTotal: true,
+		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
+		imageSize: 32,
+		rows: markRaw([]),
+		// TODO
+		getCellValue() {
+			const value = Math.round(Math.random() * 500);
+			const numberValue = value;
+
+			return { value, numberValue };
+		},
 	},
 ]);
 

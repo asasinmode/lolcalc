@@ -125,7 +125,7 @@ export function useCalculatorState(
 			}
 		}
 
-		if (resultsTable.value && resultsTable.value?.resultSections.length !== 2) {
+		if (resultsTable.value && resultsTable.value?.resultSections.length !== 3) {
 			for (const section of resultsTable.value.resultSections) {
 				if (section.abilityId.type !== 'all'
 					&& !(section.abilityId.type === ABILITY_TYPE.item ? querySavedItemIds.has(section.abilityId.id) : querySavedChampionIds.has(section.abilityId.id))) {
@@ -227,12 +227,12 @@ export function useCalculatorState(
 				continue;
 			}
 
-			/* `all` sections start with 'a_' */
-			if (id.startsWith('a_')) {
+			/* `all` sections start with 'a-' */
+			if (id.startsWith('a-')) {
 				const sectionIndex = resultsTable.value.resultSections.findIndex(section => section.id === id);
 				if (~sectionIndex) {
 					if (sectionIndex !== currentSectionIndex) {
-						resultsTable.value.resultSections.push(resultsTable.value.resultSections.splice(sectionIndex, 1)[0]!);
+						resultsTable.value.resultSections.splice(currentSectionIndex, 0, resultsTable.value.resultSections.splice(sectionIndex, 1)[0]!);
 					}
 					const expandedIndex = resultsTable.value.expandedSections.indexOf(id);
 					if (isExpanded) {
