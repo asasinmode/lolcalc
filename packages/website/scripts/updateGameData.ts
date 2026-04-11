@@ -1,8 +1,9 @@
 import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IListedChampion } from '../app/composables/useChampions';
-import type { IItem, IItemCategory, IItemShopStatFilter } from '../app/composables/useItems';
+import type { IItem } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IChampionSpecific } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
+import type { IItemCategory, IItemShopStatFilter } from '../app/utils/meta';
 import type { IRuneSpecific } from '../app/utils/rune';
 import type { ITexture } from '../app/utils/types';
 import buffer from 'node:buffer';

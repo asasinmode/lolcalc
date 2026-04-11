@@ -1597,7 +1597,7 @@ defineExpose({ el });
 		&[data-item-tooltip-extras] > .hover-tooltip.champion-item {
 			position-anchor: --scoreboard-item-extras;
 			inset-block-start: auto;
-			inset-block-end: calc(anchor(top) + 1px);
+			inset-block-end: calc(anchor(top));
 		}
 
 		/* TODO either accept partial animation or use js for animating the height/check if https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/interpolate-size#browser_compatibility is implemented yet and do the below */
@@ -1909,7 +1909,7 @@ defineExpose({ el });
 			&[data-ability-tooltip-extras] > [data-abilities] > .hover-tooltip.champion-ability {
 				position-anchor: --scoreboard-item-extras;
 				inset-block-start: auto;
-				inset-block-end: calc(anchor(top) + 1px);
+				inset-block-end: calc(anchor(top));
 			}
 
 			> [data-health-ability-resource] {

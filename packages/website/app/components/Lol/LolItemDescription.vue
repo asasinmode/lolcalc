@@ -21,10 +21,13 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 	));
 
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
-const otherView = computed(() => view.value === 'Shop' ? 'inventory' : 'shop');
+const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
+
+const isInventoryView = computed(() => props.hoverTooltip && view.value === 'Inventory');
 
 const hasMoreInfo = computed(() => (computedDescription.value?.extended || computedDescription.value?.keywordDefinitions) && !globalKeyModifiers.value.shift);
 const hasOtherView = computed(() => props.hoverTooltip && computedDescription.value?.tooltipInventory);
+const showHeaderSubtitles = computed(() => props.headerSubtitles || isInventoryView.value);
 const showDynamicValueFooter = computed(() => view.value === 'Inventory' && computedDescription.value?.footerLeft);
 
 const header = useTemplateRef<HTMLButtonElement>('header');
@@ -38,7 +41,8 @@ defineExpose({ header });
 		ref="header"
 		class="item-description-header"
 		:class="headerClass"
-		:data-show-subtitles="headerSubtitles || undefined"
+		:data-show-subtitles="showHeaderSubtitles || undefined"
+		:data-inventory-view="isInventoryView || undefined"
 		@click="$emit('headerClick', $event, false)"
 		@click.right="$emit('headerClick', $event, true)"
 	>
@@ -52,6 +56,7 @@ defineExpose({ header });
 		>
 		<span>{{ computedDescription?.item.name }}</span>
 		<span>
+			<span>Sells for:</span>
 			<img
 				v-show="computedDescription?.item"
 				:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`"
@@ -60,7 +65,8 @@ defineExpose({ header });
 				alt="gold coins"
 				loading="lazy"
 			>
-			{{ gold ?? computedDescription?.item.gold.total }}
+			{{ isInventoryView ? computedDescription?.item.gold.sell : (gold ?? computedDescription?.item.gold.total) }}
+			<span>({{ Math.round((computedDescription?.item.gold.sellBackModifier ?? 0.7) * 100) }}%)</span>
 		</span>
 		<span>{{ computedDescription?.subtitleLeft }}</span>
 		<span>{{ computedDescription?.subtitleRight }}</span>
@@ -109,30 +115,47 @@ defineExpose({ header });
 <style>
 @layer components {
 	.item-description-header {
-		--at-apply: 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full';
+		--at-apply: 'grid text-start gap-x-2 text-xl grid-rows-2 items-center font-500 grid-cols-[auto_1fr] w-full mb-2';
 
 		> img {
 			--at-apply: 'row-span-full size-(--item-img-size)';
 		}
 
-		span:first-of-type {
+		> span:first-of-type {
 			--at-apply: 'text-xl text-white';
 		}
 
-		span:nth-of-type(2) {
+		> span:nth-of-type(2) {
 			--at-apply: 'text-amber-200 text-start flex items-center justify-start text-lg gap-[0.5ch]';
 
 			img {
 				--at-apply: 'h-4 w-auto';
 			}
+
+			> span:first-child {
+				--at-apply: 'hidden text-yellow-100';
+			}
+
+			> span:last-child {
+				--at-apply: 'hidden italic text-neutral-400';
+			}
 		}
 
-		span:nth-of-type(3),
-		span:nth-of-type(4) {
+		&[data-inventory-view] {
+			> span:nth-of-type(2) {
+				> span:first-child,
+				> span:last-child {
+					--at-apply: 'inline';
+				}
+			}
+		}
+
+		> span:nth-of-type(3),
+		> span:nth-of-type(4) {
 			--at-apply: 'hidden text-lg';
 		}
 
-		span:nth-of-type(4) {
+		> span:nth-of-type(4) {
 			--at-apply: 'text-end text-neutral-300';
 		}
 
@@ -151,30 +174,36 @@ defineExpose({ header });
 	}
 
 	.item-description {
-		ul li {
-			--at-apply: 'flex items-center gap-[0.5ch]';
+		> p.alert {
+			--at-apply: 'mb-2';
+		}
 
-			img {
-				--at-apply: 'size-4.5';
-			}
+		> ul {
+			> li {
+				--at-apply: 'flex items-center gap-[0.5ch]';
 
-			span:last-child {
-				--at-apply: 'capitalize text-neutral-300';
+				> img {
+					--at-apply: 'size-4.5';
+				}
+
+				> span:last-child {
+					--at-apply: 'capitalize text-neutral-300';
+				}
 			}
 		}
 
-		h4 {
+		> h4 {
 			--at-apply: 'text-neutral-300';
 
 			&:has(img) {
 				--at-apply: 'flex items-center gap-[0.5ch]';
 			}
 
-			img {
+			> img {
 				--at-apply: 'size-4';
 			}
 
-			span {
+			> span {
 				> span {
 					--at-apply: 'sr-only';
 				}
@@ -184,11 +213,11 @@ defineExpose({ header });
 		> div {
 			--at-apply: 'text-neutral-300';
 
-			img {
+			> img {
 				--at-apply: 'inline-block size-4 align-middle';
 			}
 
-			li {
+			> li {
 				--at-apply: 'ms-5';
 			}
 		}

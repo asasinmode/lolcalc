@@ -88,6 +88,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] moving columns left/right
   - [x] moving sections up/down
   - [?] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
+  - [ ] stats inventory value row
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
   - [ ] friendlier variable names? Try to filter out simple variables like 5 more dmg to minions?
@@ -113,6 +114,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] try not to intercept all right clicks
   - [x] ctrl toggle between shop/inventory extras & sell value
   - [x] extended item hover tooltips, like swiftmarch showing adaptive force gained (\<rules\>)
+  - [x] item hover tooltip sell value when inventory
 - [ ] effects dialog
   - [?] apply effects like black cleaver, abyssal mask, amumu passive
   - [ ] item effects options ui
@@ -187,6 +189,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 ### future features
 
+- [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
 - [ ] graph results in style of post game ones, table data but graph?
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)

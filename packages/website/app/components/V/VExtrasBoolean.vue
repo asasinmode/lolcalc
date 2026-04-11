@@ -40,14 +40,6 @@ const value = defineModel<number>({ required: true });
 	.v-extras-boolean {
 		--at-apply: 'grid grid-cols-[auto_max-content_1fr] grid-rows-1 items-center relative';
 
-		&:before {
-			--at-apply: 'size-2.5 rounded-1/2 bg-green-400 outline outline-black z-1 absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-0.75*var(--spacing))] -translate-x-full -translate-y-[calc(0.5*var(--ability-size)-1*var(--spacing))] pointer-events-none';
-		}
-
-		/* &:has(input:checked)::before { */
-		/* 	content: ''; */
-		/* } */
-
 		> input {
 			--at-apply: 'me-[0.5ch] mt-px';
 		}
