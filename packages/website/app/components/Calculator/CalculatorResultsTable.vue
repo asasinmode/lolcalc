@@ -23,6 +23,15 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const highlightedDamageSources = useHighlightedDamageSources();
 const { version, minorVersion } = usePatchVersion();
 
+const STATS_SECTION_ID = 'a-stats';
+const CUSTOM_TOTAL_SECTION_ID = 'a-cTtl';
+
+const computedCustomTotalTotalRow: ICustomTotalSectionRow = {
+	id: 'total',
+	sectionId: CUSTOM_TOTAL_SECTION_ID,
+	name: 'total'
+}
+
 const flipResults = ref(false);
 const sourceProperty = computed(() => flipResults.value ? 'target' : 'source');
 const targetProperty = computed(() => flipResults.value ? 'source' : 'target');
@@ -285,8 +294,6 @@ function removeResultsColumn(index: number) {
 	emit('configurationChanged');
 }
 
-const STATS_SECTION_ID = 'a-stats';
-
 const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== STATS_SECTION_ID && !section.isCustomTotal).map(section => section.id));
 
 function toggleResultsSection(sectionId: string) {
@@ -519,7 +526,7 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 		return {
 			key: `${section.id}-${row.id}-${column.id}`,
 			computedColumn: computedResults.value
-				.get(section.isCustomTotal ? (row as ICustomTotalRow).sectionId : section.id)!
+				.get(section.isCustomTotal ? (row as ICustomTotalSectionRow).sectionId : section.id)!
 				.rows
 				.get(row.id)!
 				.columns
@@ -946,14 +953,14 @@ function addColumnItems(columnIndex: number) {
 }
 
 type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
-interface ICustomTotalRow extends IDamageResultTableSectionRow {
+interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 	sectionId: string;
 }
 
 const customTotalRows = ref<string[]>([]);
 
-const computedCustomTotalRows = computed<ICustomTotalRow[]>(() => {
-	const rows: ICustomTotalRow[] = customTotalRows.value.map((combinedId) => {
+const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
+	const rows: ICustomTotalSectionRow[] = customTotalRows.value.map((combinedId) => {
 		const [sectionId, rowId] = combinedId.split('_');
 
 		const section = resultSections.value.find(section => section.id === sectionId)!;
@@ -965,6 +972,10 @@ const computedCustomTotalRows = computed<ICustomTotalRow[]>(() => {
 			image: section.image ? { src: section.image, width: section.imageSize, height: section.imageSize } : undefined,
 		};
 	});
+
+	// if(rows.length){
+	// 	rows.unshift(computedCustomTotalTotalRow)
+	// }
 
 	return rows;
 });
