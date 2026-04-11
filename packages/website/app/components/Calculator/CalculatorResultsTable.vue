@@ -1717,7 +1717,7 @@ defineExpose({
 							--at-apply: 'text-[#f0f]';
 						}
 
-						&:not(.irrelevant, :last-child) > span {
+						&:not(.irrelevant) > span {
 							--at-apply: 'relative';
 
 							&::after {

@@ -88,7 +88,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] moving columns left/right
   - [x] moving sections up/down
   - [?] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
-  - [ ] stats inventory value row
+  - [x] stats inventory value row
   - [ ] damage type row, use the actual calculated value in the cells
   - [ ] basic attack section normal/crit/average
   - [ ] friendlier variable names? Try to filter out simple variables like 5 more dmg to minions?

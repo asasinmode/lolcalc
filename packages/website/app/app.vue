@@ -48,10 +48,23 @@ const resultSections = ref<IDamageResultTableSection[]>([
 					height: 20,
 				},
 			};
-		})),
+		}).concat([{
+			id: 'eqValue',
+			name: 'Inventory value',
+			icon: {
+				path: `/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
+				width: 32,
+				height: 28,
+			},
+		}])),
 		getCellValue(_section, rowId, source, _target) {
 			if (!source) {
 				return;
+			}
+
+			if (rowId === 'eqValue') {
+				const numberValue = source.items.value.reduce((acc, item) => acc + (item?.gold.total ?? 0), 0);
+				return { numberValue, value: numberValue };
 			}
 
 			const stat = source.computed.stats.value[rowId as IChampionStatName];
