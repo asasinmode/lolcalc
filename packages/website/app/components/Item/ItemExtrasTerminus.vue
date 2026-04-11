@@ -16,12 +16,12 @@ const DarkComponent = numberExtra(props.abilityId as IId, 'jxtpD', 'Juxtapositio
 		:ability-id
 		:damage-source
 		:id-prefix
-		@item-hover="$emit('imgMouseenter', $event, abilityId)"
+		@img-mouseenter="$emit('imgMouseenter', $event, abilityId)"
 	/>
 	<DarkComponent
 		:ability-id
 		:damage-source
 		:id-prefix
-		@item-hover="$emit('imgMouseenter', $event, abilityId)"
+		@img-mouseenter="$emit('imgMouseenter', $event, abilityId)"
 	/>
 </template>

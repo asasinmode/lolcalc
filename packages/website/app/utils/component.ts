@@ -42,11 +42,10 @@ export function numberExtra<T extends IGameAbilityId>(
 	step?: number,
 ) {
 	const isEffect = abilityId.dataSource === 'effects';
+	const isSpecificExpected = abilityId.type !== ABILITY_TYPE.champion && abilityId.dataSource !== 'internal';
 
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>((props, ctx) => {
-		/* `abilityId` paths to specific ability variant, like `Amumu.passive[0]`, but one which type is 'champion' and `dataSource` is 'internal' actually means it's a champion-level `setupInternalData`
-		 * no specific needed as it's not expected to have `imgText` */
-		const specific = abilityId.type !== ABILITY_TYPE.champion && abilityId.dataSource !== 'internal' ? resolveAbilitySpecific(abilityId, 'numberExtra') : undefined;
+		const specific = resolveAbilitySpecific(abilityId, isSpecificExpected ? 'numberExtra' : undefined);
 		const [imgSrc, imgSize] = gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, isEffect, property, props.damageSource);
 
@@ -63,7 +62,7 @@ export function numberExtra<T extends IGameAbilityId>(
 			'usedNumberInput': useNumberInput(
 				isEffect
 					? [appliedEffect!.data, property as number]
-					: [props.damageSource[abilityId.type === 'champion' ? 'internalData' : 'internalItemData'], property as string],
+					: [props.damageSource[abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData'], property as string],
 				true,
 				max,
 			),
@@ -113,7 +112,7 @@ function gameAbilityImage(abilityId: IGameAbilityId): [
 ] {
 	const { version } = usePatchVersion();
 
-	if (abilityId.type === 'item') {
+	if (abilityId.type === ABILITY_TYPE.item) {
 		return [
 			`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`,
 			64,
