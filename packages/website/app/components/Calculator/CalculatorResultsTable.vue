@@ -26,12 +26,6 @@ const { version, minorVersion } = usePatchVersion();
 const STATS_SECTION_ID = 'a-stats';
 const CUSTOM_TOTAL_SECTION_ID = 'a-cTtl';
 
-const computedCustomTotalTotalRow: ICustomTotalSectionRow = {
-	id: 'total',
-	sectionId: CUSTOM_TOTAL_SECTION_ID,
-	name: 'total'
-}
-
 const flipResults = ref(false);
 const sourceProperty = computed(() => flipResults.value ? 'target' : 'source');
 const targetProperty = computed(() => flipResults.value ? 'source' : 'target');
@@ -526,7 +520,7 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 		return {
 			key: `${section.id}-${row.id}-${column.id}`,
 			computedColumn: computedResults.value
-				.get(section.isCustomTotal ? (row as ICustomTotalSectionRow).sectionId : section.id)!
+				.get((row as ICustomTotalSectionRow).sectionId ?? section.id)!
 				.rows
 				.get(row.id)!
 				.columns
@@ -954,13 +948,14 @@ function addColumnItems(columnIndex: number) {
 
 type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
 interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
-	sectionId: string;
+	sectionId?: string;
 }
 
 const customTotalRows = ref<string[]>([]);
+const customTotalSection = resultSections.value.find(section => section.isCustomTotal)!;
 
 const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
-	const rows: ICustomTotalSectionRow[] = customTotalRows.value.map((combinedId) => {
+	const rows: ICustomTotalSectionRow[] = customTotalSection.rows.concat(customTotalRows.value.map((combinedId) => {
 		const [sectionId, rowId] = combinedId.split('_');
 
 		const section = resultSections.value.find(section => section.id === sectionId)!;
@@ -971,11 +966,7 @@ const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 			sectionId: section.id,
 			image: section.image ? { src: section.image, width: section.imageSize, height: section.imageSize } : undefined,
 		};
-	});
-
-	// if(rows.length){
-	// 	rows.unshift(computedCustomTotalTotalRow)
-	// }
+	}));
 
 	return rows;
 });
@@ -1329,13 +1320,15 @@ defineExpose({
 						loading...
 					</td>
 				</tr>
-				<tr v-else-if="!(section.isCustomTotal ? computedCustomTotalRows : section.rows).length" class="info-row">
+				<tr v-else-if="section.isCustomTotal ? computedCustomTotalRows.length < 2 : !section.rows.length" class="info-row">
 					<td :colspan="2 + resultColumns.length">
 						{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 					</td>
 				</tr>
 				<tr
-					v-for="row in section.isCustomTotal ? computedCustomTotalRows : implementedDamageSectionsMap[index] ? section.rows : []"
+					v-for="row in section.isCustomTotal
+						? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : [])
+						: implementedDamageSectionsMap[index] ? section.rows : []"
 					:key="`${section.id}_${row.id}`"
 					:class="{ unknown: row.isUnknown }"
 				>

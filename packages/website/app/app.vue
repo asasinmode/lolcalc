@@ -122,13 +122,19 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		isCustomTotal: true,
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/unknowndamage.png`,
 		imageSize: 32,
-		rows: markRaw([]),
-		// TODO
+		rows: markRaw([
+			{
+				id: 'total',
+				name: 'total',
+			},
+		]),
 		getCellValue() {
+			// TODO return 0
+			console.warn('results section custom total \'getCellValue\' called, should be handled manually');
 			const value = Math.round(Math.random() * 500);
 			const numberValue = value;
 
-			return { value, numberValue };
+			return { value: numberValue, numberValue };
 		},
 	},
 ]);
