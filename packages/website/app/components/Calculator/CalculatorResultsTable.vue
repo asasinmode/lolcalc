@@ -285,7 +285,9 @@ function removeResultsColumn(index: number) {
 	emit('configurationChanged');
 }
 
-const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== 'a-stats' && !section.isCustomTotal).map(section => section.id));
+const STATS_SECTION_ID = 'a-stats';
+
+const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== STATS_SECTION_ID && !section.isCustomTotal).map(section => section.id));
 
 function toggleResultsSection(sectionId: string) {
 	const index = expandedSections.value.indexOf(sectionId);
@@ -516,7 +518,12 @@ function sectionRowCells(section: IDamageResultTableSection, row: IDamageResultT
 	return resultColumns.value.map((column) => {
 		return {
 			key: `${section.id}-${row.id}-${column.id}`,
-			computedColumn: computedResults.value.get(section.id)!.rows.get(row.id)!.columns.get(column!.id)!,
+			computedColumn: computedResults.value
+				.get(section.isCustomTotal ? (row as ICustomTotalRow).sectionId : section.id)!
+				.rows
+				.get(row.id)!
+				.columns
+				.get(column!.id)!,
 		};
 	});
 }
@@ -938,12 +945,29 @@ function addColumnItems(columnIndex: number) {
 	emit('configurationChanged');
 }
 
-interface ICustomTotalRow {
+type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
+interface ICustomTotalRow extends IDamageResultTableSectionRow {
 	sectionId: string;
-	variableName: string;
 }
 
-const customTotalRows = ref<ICustomTotalRow[]>([]);
+const customTotalRows = ref<string[]>([]);
+
+const computedCustomTotalRows = computed<ICustomTotalRow[]>(() => {
+	const rows: ICustomTotalRow[] = customTotalRows.value.map((combinedId) => {
+		const [sectionId, rowId] = combinedId.split('_');
+
+		const section = resultSections.value.find(section => section.id === sectionId)!;
+		const row = section.rows.find(row => row.id === rowId)!;
+
+		return {
+			...row,
+			sectionId: section.id,
+			image: section.image ? { src: section.image, width: section.imageSize, height: section.imageSize } : undefined,
+		};
+	});
+
+	return rows;
+});
 
 defineExpose({
 	resultColumns,
@@ -1294,27 +1318,32 @@ defineExpose({
 						loading...
 					</td>
 				</tr>
-				<tr v-else-if="!section.rows.length" class="info-row">
+				<tr v-else-if="!(section.isCustomTotal ? computedCustomTotalRows : section.rows).length" class="info-row">
 					<td :colspan="2 + resultColumns.length">
 						{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
 					</td>
 				</tr>
 				<tr
-					v-for="row in implementedDamageSectionsMap[index] ? section.rows : []"
-					:key="`${section.id}-${row.id}`"
+					v-for="row in section.isCustomTotal ? computedCustomTotalRows : implementedDamageSectionsMap[index] ? section.rows : []"
+					:key="`${section.id}_${row.id}`"
 					:class="{ unknown: row.isUnknown }"
 				>
+					<td v-if="!section.isCustomTotal && section.id !== STATS_SECTION_ID">
+						<label>
+							<span>include in custom total</span>
+							<input v-model="customTotalRows" type="checkbox" :value="`${section.id}_${row.id}`">
+						</label>
+					</td>
 					<th
-						:id="`results-table-section-row-${section.id}-${row.id}`"
 						scope="row"
-						colspan="2"
+						:colspan="section.isCustomTotal || section.id === STATS_SECTION_ID ? 2 : undefined"
 						headers="results-table-header-damage-type"
 					>
 						<img
-							v-if="row.icon"
-							:src="`https://raw.communitydragon.org/${minorVersion}/${row.icon.path}`"
-							:width="row.icon.width"
-							:height="row.icon.height"
+							v-if="row.image"
+							:src="row.image.src"
+							:width="row.image.width"
+							:height="row.image.height"
 							aria-hidden="true"
 						>
 						<span v-if="row.isUnknown">unknown</span>
@@ -1704,8 +1733,12 @@ defineExpose({
 					}
 
 					> th {
-						--at-apply: 'ps-[--ps] hyphens-auto wrap-anywhere';
+						--at-apply: 'hyphens-auto wrap-anywhere';
 						--ps: calc(2 * var(--control-button-size));
+
+						&[colspan] {
+							--at-apply: 'ps-[--ps]';
+						}
 
 						> img {
 							--at-apply: 'inline-block size-[--size] align-middle -ms-[--ms] me-[calc(0.5*var(--size))]';
@@ -1720,6 +1753,18 @@ defineExpose({
 
 					> td {
 						--at-apply: 'px-3';
+
+						&:first-child {
+							--at-apply: '';
+
+							> label {
+								--at-apply: 'absolute inset-0 grid-center';
+
+								> span {
+									--at-apply: 'sr-only';
+								}
+							}
+						}
 
 						&.irrelevant {
 							--at-apply: 'text-neutral-500';

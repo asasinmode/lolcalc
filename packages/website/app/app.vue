@@ -42,8 +42,8 @@ const resultSections = ref<IDamageResultTableSection[]>([
 			return {
 				id: championStat,
 				name: statName,
-				icon: {
-					path: `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
+				image: {
+					src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
 					width: 20,
 					height: 20,
 				},
@@ -51,8 +51,8 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		}).concat([{
 			id: 'eqValue',
 			name: 'Inventory value',
-			icon: {
-				path: `/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
+			image: {
+				src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
 				width: 32,
 				height: 28,
 			},

@@ -63,8 +63,8 @@ export interface IDamageResultTableSection {
 		/** ability variable, like `physicalDamage` for `basicAttack` or `QDamage` */
 		id: string;
 		isUnknown?: boolean;
-		icon?: {
-			path: string;
+		image?: {
+			src: string;
 			width: number;
 			height: number;
 		};
