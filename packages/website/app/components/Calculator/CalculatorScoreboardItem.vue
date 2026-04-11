@@ -883,6 +883,7 @@ defineExpose({ el });
 		<button
 			:title="value.runesInvalid.value ? 'runes (invalid)' : 'runes'"
 			data-select-runes=""
+			class="other-ui-btn"
 			@click="selectRunes(value.runes)"
 		>
 			<span class="sr-only">{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
@@ -1466,10 +1467,9 @@ defineExpose({ el });
 		}
 
 		> [data-select-runes] {
-			--at-apply: 'b b-[--ui-btn-border-clr] rounded-full hoverable:bg-neutral-800 grid-center size-8 relative self-center';
+			--at-apply: 'rounded-full grid-center size-8 relative self-center';
 			--secondary-path-icon-size: calc(3 * var(--spacing));
 			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
-			background-color: var(--placeholder-champion-bg-clr);
 			grid-area: select-runes;
 
 			[data-secondary-path-icon] {
