@@ -70,7 +70,7 @@ export function numberExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
-		});
+		}, ctx.slots);
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
 
@@ -102,7 +102,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 				ctx.emit('imgMouseenter', event, abilityId);
 			},
 			'onUpdate:modelValue': updateValue,
-		});
+		}, ctx.slots);
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
 

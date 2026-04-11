@@ -158,11 +158,16 @@ defineExpose({
 					:ability-id="effect.abilityId"
 					:damage-source
 					id-prefix="effects-dialog"
-				/>
-				{{ effect.id }}
-				<button @click="damageSource?.removeEffect(effect.id)">
-					remove
-				</button>
+				>
+					<button
+						class="pretend-ui-btn remove"
+						title="remove"
+						@click="damageSource?.removeEffect(effect.id)"
+					>
+						<span>remove</span>
+						<Icon class="i-ph:trash" />
+					</button>
+				</component>
 			</li>
 		</ul>
 		<form :inert="isLoading" @submit.prevent="submitAnotherEffect">
@@ -234,6 +239,18 @@ defineExpose({
 					> .icon {
 						--at-apply: 'size-4';
 					}
+				}
+			}
+		}
+
+		> ul {
+			--ability-size: calc(14 * var(--spacing));
+
+			> li {
+				--at-apply: 'relative w-fit';
+
+				> article {
+					--at-apply: 'w-max';
 				}
 			}
 		}

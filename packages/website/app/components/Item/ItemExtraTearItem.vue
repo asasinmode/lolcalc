@@ -71,7 +71,6 @@ function updateValue(value: number) {
 <template>
 	<VExtrasNumber
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
-		class="item-extra-tear"
 		:img-src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`"
 		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.itemImageText?.(damageSource, abilityId)"
 		img-size="64"
@@ -90,23 +89,3 @@ function updateValue(value: number) {
 		</button>
 	</VExtrasNumber>
 </template>
-
-<style>
-@layer components {
-	.v-extras-number.item-extra-tear {
-		--at-apply: 'relative';
-
-		> label + button {
-			--at-apply: 'absolute end-2 top-2 grid-center size-6 z-1';
-
-			> span:first-child {
-				--at-apply: 'sr-only';
-			}
-
-			> span.icon {
-				--at-apply: 'size-4';
-			}
-		}
-	}
-}
-</style>

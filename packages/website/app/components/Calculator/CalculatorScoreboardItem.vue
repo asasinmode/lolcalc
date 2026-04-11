@@ -980,7 +980,7 @@ defineExpose({ el });
 		</button>
 		<button
 			:title="removeButtonAttrs.title"
-			class="pretend-ui-btn"
+			class="pretend-ui-btn remove"
 			:disabled="removeButtonAttrs.disabled"
 			@click="removeButtonAttrs.emit"
 		>
@@ -1415,17 +1415,6 @@ defineExpose({ el });
 			&:nth-last-of-type(2) {
 				--at-apply: 'self-end mb-0.5';
 				grid-area: clear;
-
-				&:not(:disabled) {
-					--at-apply: 'hoverable:bg-red-500';
-
-					&:hover,
-					&:focus-visible {
-						> .icon {
-							--at-apply: 'text-white';
-						}
-					}
-				}
 			}
 
 			&:nth-last-of-type(1) {
@@ -2132,21 +2121,6 @@ defineExpose({ el });
 			> [data-extras] {
 				--at-apply: 'col-span-full w-full grid grid-cols-3 auto-rows-min max-w-[40vw] gap-2 pt-3';
 				anchor-name: --scoreboard-item-extras;
-
-				> article {
-					--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
-					--p: calc(2 * var(--spacing));
-
-					> img {
-						--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
-					}
-
-					> img + span {
-						--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%-0.5*var(--spacing))] pointer-events-none';
-						paint-order: stroke fill;
-						-webkit-text-stroke: 0.15em black;
-					}
-				}
 			}
 		}
 
@@ -2213,6 +2187,40 @@ defineExpose({ el });
 				> span {
 					--at-apply: 'sr-only';
 				}
+			}
+		}
+	}
+
+	#dialog-effects > ul > li,
+	#scoreboard > div > ul > [data-scoreboard-item] > details > [data-extras] {
+		> article {
+			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
+			--p: calc(2 * var(--spacing));
+
+			> img {
+				--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
+			}
+
+			> img + span {
+				--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%-0.5*var(--spacing))] pointer-events-none';
+				paint-order: stroke fill;
+				-webkit-text-stroke: 0.15em black;
+			}
+
+			> label + button {
+				--at-apply: 'absolute end-[--p] top-[--p] grid-center size-5.5 z-1';
+
+				> span:first-child {
+					--at-apply: 'sr-only';
+				}
+
+				> span.icon {
+					--at-apply: 'size-4';
+				}
+			}
+
+			> label:has(+ button) {
+				--at-apply: 'pe-6';
 			}
 		}
 	}

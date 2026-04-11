@@ -113,6 +113,19 @@
 		.icon {
 			--at-apply: 'text-[--ui-pretend-button-icon-clr]';
 		}
+
+		&.remove {
+			&:not(:disabled) {
+				--at-apply: 'hoverable-bg-red-500';
+
+				&:hover,
+				&:focus-visible {
+					> .icon {
+						--at-apply: 'text-white';
+					}
+				}
+			}
+		}
 	}
 
 	.other-ui-btn {

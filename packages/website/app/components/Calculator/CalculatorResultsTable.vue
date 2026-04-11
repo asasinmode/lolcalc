@@ -1095,12 +1095,10 @@ defineExpose({
 							</button>
 							<button
 								title="remove"
-								class="pretend-ui-btn"
+								class="pretend-ui-btn remove"
 								@click="startRemovingColumn($event, index)"
 							>
-								<span>
-									remove
-								</span>
+								<span>remove</span>
 								<Icon class="i-ph:trash" />
 							</button>
 							<button
@@ -1193,13 +1191,11 @@ defineExpose({
 							</button>
 							<button
 								title="remove"
-								class="pretend-ui-btn"
+								class="pretend-ui-btn remove"
 								:disabled="section.isPermanent"
 								@click="removeResultsSection(index)"
 							>
-								<span>
-									remove
-								</span>
+								<span>remove</span>
 								<Icon class="i-ph:trash" />
 							</button>
 							<button
@@ -1558,15 +1554,7 @@ defineExpose({
 						}
 
 						&:nth-of-type(2) {
-							--at-apply: 'hoverable:bg-red-500';
 							grid-area: remove;
-
-							&:hover,
-							&:focus-visible {
-								> .icon {
-									--at-apply: 'text-white';
-								}
-							}
 						}
 
 						&:nth-of-type(3) {
@@ -1620,17 +1608,6 @@ defineExpose({
 
 							> span:nth-child(1) {
 								--at-apply: 'sr-only';
-							}
-
-							&:nth-child(3):not(:disabled) {
-								--at-apply: 'hoverable:bg-red-500';
-
-								&:hover,
-								&:focus-visible {
-									> .icon {
-										--at-apply: 'text-white';
-									}
-								}
 							}
 
 							&[aria-expanded='true'] > span {

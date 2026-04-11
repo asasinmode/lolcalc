@@ -32,6 +32,7 @@ const value = defineModel<number>({ required: true });
 		<label :for="`vebln-${idPrefix}`">
 			apply {{ label }}
 		</label>
+		<slot />
 	</article>
 </template>
 
