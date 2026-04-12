@@ -516,8 +516,13 @@ function getAbilitySectionRows({ variables, unknownVariables }: Pick<IReplaceGam
 }
 
 function removeResultsSection(index: number) {
-	const [section] = resultSections.value.splice(index, 1);
-	computedResults.value.delete(section!.id);
+	const section = resultSections.value[index];
+	if (section!.isCustomTotal) {
+		customTotalRows.value.length = 0;
+	} else {
+		const [section] = resultSections.value.splice(index, 1);
+		computedResults.value.delete(section!.id);
+	}
 	emit('configurationChanged');
 }
 
@@ -1277,13 +1282,13 @@ defineExpose({
 								<Icon class="i-ph:arrow-down" />
 							</button>
 							<button
-								title="remove"
 								class="pretend-ui-btn remove"
-								:disabled="section.isPermanent"
+								:title="section.isCustomTotal ? 'clear' : 'remove'"
+								:disabled="section.isCustomTotal ? !customTotalRows.length : section.isPermanent"
 								@click="removeResultsSection(index)"
 							>
-								<span>remove</span>
-								<Icon class="i-ph:trash" />
+								<span>{{ section.isCustomTotal ? 'clear' : 'remove' }}</span>
+								<Icon :class="section.isCustomTotal ? 'i-ph:eraser' : 'i-ph:trash'" />
 							</button>
 							<button
 								:title="expandedSections.includes(section.id) ? 'collapse' : 'expand'"
