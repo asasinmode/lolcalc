@@ -125,7 +125,13 @@ export function useCalculatorState(
 			}
 		}
 
-		if (resultsTable.value && resultsTable.value?.resultSections.length !== 3) {
+		const nonAllKeptSections = resultsTable.value?.resultSections.filter(section => section.abilityId.type !== 'all'
+			&& (section.abilityId.type === ABILITY_TYPE.item ? querySavedItemIds.has(section.abilityId.id) : querySavedChampionIds.has(section.abilityId.id)));
+		if (resultsTable.value && (nonAllKeptSections?.length
+			/* check if default order was changed */
+			|| resultsTable.value.resultSections[0]!.id !== 'a-stats'
+			|| resultsTable.value.resultSections[1]!.id !== 'a-aa'
+			|| resultsTable.value.resultSections[2]!.id !== 'a-cTtl')) {
 			for (const section of resultsTable.value.resultSections) {
 				if (section.abilityId.type !== 'all'
 					&& !(section.abilityId.type === ABILITY_TYPE.item ? querySavedItemIds.has(section.abilityId.id) : querySavedChampionIds.has(section.abilityId.id))) {
