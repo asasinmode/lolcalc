@@ -388,6 +388,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonSoul,
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
+			() => this.appliedEffects.value.map(effect => `${effect.id}-${effect.data.join('-')}`).join('_'),
 		];
 	}
 
