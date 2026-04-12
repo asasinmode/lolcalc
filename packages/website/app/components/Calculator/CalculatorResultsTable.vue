@@ -169,7 +169,35 @@ interface IComputedSectionRowColumn {
 	comparisonMap: Record<string, 'higher' | 'lower'>;
 }
 
-const computedResults = ref(new Map<string, IComputedSection>(resultSections.value.map(section => [section.id, computeSection(section)] as [string, IComputedSection])));
+const customTotalRows = ref<string[]>([]);
+const customTotalSection = resultSections.value.find(section => section.isCustomTotal)!;
+const customTotalSectionTotalRow = customTotalSection.rows[0]!;
+
+const computedResults = ref(new Map<string, IComputedSection>(
+	[[customTotalSection.id, computeSection(customTotalSection)] as [ string, IComputedSection ]]
+		.concat(resultSections.value.map(section => [section.id, computeSection(section)] as [string, IComputedSection])),
+));
+
+const customTotalComputedSection = computedResults.value.get(CUSTOM_TOTAL_SECTION_ID)!;
+const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('total')!;
+
+const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
+	/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
+	const rows: ICustomTotalSectionRow[] = (customTotalSection.rows as ICustomTotalSectionRow[]).concat(customTotalRows.value.map((combinedId) => {
+		const [sectionId, rowId] = combinedId.split('_');
+
+		const section = resultSections.value.find(section => section.id === sectionId)!;
+		const row = section.rows.find(row => row.id === rowId)!;
+
+		return {
+			...row,
+			sectionId: section.id,
+			image: section.image ? { src: section.image, width: section.imageSize, height: section.imageSize } : undefined,
+		};
+	}));
+
+	return rows;
+});
 
 recalculateResultCellComparisonNumbers();
 
@@ -193,7 +221,11 @@ function computeSectionRow(section: IDamageResultTableSection, row: IDamageResul
 	};
 }
 
-function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamageResultTableSection['rows'][number], column: IDamageResultTableColumn): IComputedSectionRowColumn {
+function computeSectionRowColumn(
+	section: IDamageResultTableSection,
+	row: IDamageResultTableSection['rows'][number],
+	column: IDamageResultTableColumn,
+): IComputedSectionRowColumn {
 	const source = column[sourceProperty.value];
 	const target = column[targetProperty.value];
 	const rv: IComputedSectionRowColumn = {
@@ -213,6 +245,29 @@ function computeSectionRowColumn(section: IDamageResultTableSection, row: IDamag
 		|| (section.id === 'aa' && source.champion.value?.id === 'Zeri')
 	) {
 		rv.value = 'n/a';
+	} else if (section.id === CUSTOM_TOTAL_SECTION_ID) { /* expected to be called only for the total row */
+		if (!customTotalRows.value.length) {
+			return rv;
+		}
+
+		const sum = computedCustomTotalRows.value.slice(1).reduce((acc, curr) => {
+			if (curr.id === row.id) {
+				return acc;
+			}
+
+			const computedColumn = computedResults.value
+				.get(curr.sectionId)!
+				.rows
+				.get(curr.id)!
+				.columns
+				.get(column!.id)!;
+
+			return acc + (computedColumn.numberValue ?? 0);
+		}, 0) ?? 0;
+
+		rv.isIrrelevant = false;
+		rv.numberValue = sum;
+		rv.value = sum;
 	} else {
 		const cellValue = section.getCellValue?.(section, row.id, source, target);
 		if (cellValue) {
@@ -574,29 +629,33 @@ function recalculateResultCellComparisonNumbers() {
 
 function calculateComputedSectionComparisonMaps(section: IComputedSection) {
 	for (const row of section.rows.values()) {
-		const columns = Array.from(row.columns.entries());
+		calculateComputedRowComparisonMap(row);
+	}
+}
 
-		for (const [idA, colA] of columns) {
-			const map: IComputedSectionRowColumn['comparisonMap'] = {};
+function calculateComputedRowComparisonMap(row: IComputedSectionRow) {
+	const columns = Array.from(row.columns.entries());
 
-			for (const [idB, colB] of columns) {
-				if (idA === idB) {
-					continue;
-				}
+	for (const [idA, colA] of columns) {
+		const map: IComputedSectionRowColumn['comparisonMap'] = {};
 
-				const a = colA.numberValue;
-				const b = colB.numberValue;
-				if (a !== undefined && b !== undefined) {
-					if (a > b) {
-						map[idB] = 'higher';
-					} else if (a < b) {
-						map[idB] = 'lower';
-					}
-				}
+		for (const [idB, colB] of columns) {
+			if (idA === idB) {
+				continue;
 			}
 
-			colA.comparisonMap = map;
+			const a = colA.numberValue;
+			const b = colB.numberValue;
+			if (a !== undefined && b !== undefined) {
+				if (a > b) {
+					map[idB] = 'higher';
+				} else if (a < b) {
+					map[idB] = 'lower';
+				}
+			}
 		}
+
+		colA.comparisonMap = map;
 	}
 }
 
@@ -948,28 +1007,18 @@ function addColumnItems(columnIndex: number) {
 
 type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
 interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
-	sectionId?: string;
+	sectionId: string;
 }
 
-const customTotalRows = ref<string[]>([]);
-const customTotalSection = resultSections.value.find(section => section.isCustomTotal)!;
-
-const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
-	const rows: ICustomTotalSectionRow[] = customTotalSection.rows.concat(customTotalRows.value.map((combinedId) => {
-		const [sectionId, rowId] = combinedId.split('_');
-
-		const section = resultSections.value.find(section => section.id === sectionId)!;
-		const row = section.rows.find(row => row.id === rowId)!;
-
-		return {
-			...row,
-			sectionId: section.id,
-			image: section.image ? { src: section.image, width: section.imageSize, height: section.imageSize } : undefined,
-		};
-	}));
-
-	return rows;
-});
+function recomputeCustomTotalRow() {
+	for (const column of resultColumns.value) {
+		customTotalComputedSectionTotalRow.columns.set(
+			column.id,
+			computeSectionRowColumn(customTotalSection, customTotalSectionTotalRow, column),
+		);
+	}
+	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow);
+}
 
 defineExpose({
 	resultColumns,
@@ -1020,7 +1069,12 @@ defineExpose({
 							skip column controls
 						</a>
 						<label for="results-table-values-for">
-							<input id="results-table-values-for" v-model="flipResults" type="checkbox" @update:model-value="recalculateAllColumns">
+							<input
+								id="results-table-values-for"
+								v-model="flipResults"
+								type="checkbox"
+								@update:model-value="recalculateAllColumns"
+							>
 							flip results (target vs source)
 						</label>
 						<ClientOnly>
@@ -1335,7 +1389,12 @@ defineExpose({
 					<td v-if="!section.isCustomTotal && section.id !== STATS_SECTION_ID">
 						<label>
 							<span>include in custom total</span>
-							<input v-model="customTotalRows" type="checkbox" :value="`${section.id}_${row.id}`">
+							<input
+								v-model="customTotalRows"
+								type="checkbox"
+								:value="`${section.id}_${row.id}`"
+								@update:model-value="recomputeCustomTotalRow"
+							>
 						</label>
 					</td>
 					<th
