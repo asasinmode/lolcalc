@@ -124,7 +124,7 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		imageSize: 32,
 		rows: markRaw([
 			{
-				id: 'total',
+				id: 'cTtl-total',
 				name: 'total',
 			},
 		]),

@@ -179,7 +179,7 @@ const computedResults = ref(new Map<string, IComputedSection>(
 ));
 
 const customTotalComputedSection = computedResults.value.get(CUSTOM_TOTAL_SECTION_ID)!;
-const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('total')!;
+const customTotalComputedSectionTotalRow = customTotalComputedSection.rows.get('cTtl-total')!;
 
 const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 	/** `customTotalSection` is expected contain only the `total` row which technically doesn't have `sectionId` but it's not expected to be used */
