@@ -449,7 +449,12 @@ async function addResultsSection(
 		rows: [],
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
-	resultSections.value.push(section);
+	/* section has name = was added by user and customTotal is at the bottom so keep it there */
+	if (name && resultSections.value.at(-1) === customTotalSection) {
+		resultSections.value.splice(resultSections.value.length - 1, 0, section);
+	} else {
+		resultSections.value.push(section);
+	}
 	expand && expandedSections.value.push(section.id);
 
 	if (abilityId.type === 'champion') {
