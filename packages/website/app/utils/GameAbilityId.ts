@@ -48,7 +48,7 @@ export class GameAbilityId {
 		if (id.type === 'champion') {
 			return [
 				ALL_ABILITY_TYPES.indexOf(id.type),
-				id.id,
+				CHAMPION_ID_TO_KEY[id.id],
 				ALL_CHAMPION_ABILITY_KEYS.indexOf(id.abilityKey),
 				id.abilityVariantIndex,
 			].join('-');
@@ -67,7 +67,8 @@ export class GameAbilityId {
 
 		if (type === ABILITY_TYPE.champion) {
 			const champions = useChampions();
-			if (!(id in champions)) {
+			const championId = CHAMPION_KEY_TO_ID[id];
+			if (!championId || !(championId in champions)) {
 				return;
 			}
 
@@ -83,7 +84,7 @@ export class GameAbilityId {
 
 			const abilityKey = ALL_CHAMPION_ABILITY_KEYS[abilityKeyIndex];
 
-			return GameAbilityId.build(type, dataSource, id as IChampionId, abilityKey, abilityVariantIndex);
+			return GameAbilityId.build(type, dataSource, championId, abilityKey, abilityVariantIndex);
 		}
 
 		if (type === ABILITY_TYPE.item) {
