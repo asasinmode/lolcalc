@@ -1,5 +1,5 @@
 import type { ISpecificComponents } from '~/utils/types';
-import { ItemExtrasTerminus, ItemExtraTearItem } from '#components';
+import { ItemExtraTearItem } from '#components';
 
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -27,7 +27,10 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, 'internal', ITEM_NAME_TO_ID.guinsoo), 'seething', 'Seething strikes stacks', 0, 4),
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
-		extras: ItemExtrasTerminus,
+		extras: [
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, 'internal', ITEM_NAME_TO_ID.terminus), 'jxtpL', 'Juxtaposition light stacks', 0, 3),
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, 'internal', ITEM_NAME_TO_ID.terminus), 'jxtpD', 'Juxtaposition dark stacks', 0, 3),
+		],
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, 'internal', ITEM_NAME_TO_ID.liandry), 'madness', 'Suffering stacks', 0, 3),
@@ -70,6 +73,12 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.trinity]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, 'internal', ITEM_NAME_TO_ID.trinity), 'quicken', 'Quicken'),
+	},
+	[ITEM_NAME_TO_ID.blackCleaver]: {
+		extras: [
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, 'internal', ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].effectMax),
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, 'internal', ITEM_NAME_TO_ID.blackCleaver), 'fervor', 'Fervor'),
+		],
 	},
 };
 

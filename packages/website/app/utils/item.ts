@@ -190,6 +190,9 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.fervor = Math.max(0, Math.min(1, self.internalItemData.value.carve ?? 0));
 			return { carve: 0, fervor: 0 };
 		},
+		isItemImageActive(internalData: { fervor: number }) {
+			return internalData.fervor;
+		},
 		effectLabel: 'Carve stacks',
 		effectMax: 5,
 		setupEffectData(data): [carve: number] {

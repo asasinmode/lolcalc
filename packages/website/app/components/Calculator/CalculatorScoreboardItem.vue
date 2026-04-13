@@ -213,8 +213,14 @@ const championExtra = computed<[Component, IGameAbilityId] | undefined>((): [Com
 type IItemComponent = [is: Component, itemId: string, itemIndex: number];
 const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.map((item, index) => {
 	const component = item && ITEM_COMPONENTS[item.id]?.extras;
-	return component && [markRaw(component), item.id, index];
-}).filter(Boolean) as [is: Component, itemId: string, itemIndex: number][]);
+	return component && (Array.isArray(component)
+		? component.map(c => [markRaw(c), item.id, index])
+		: [[markRaw(component), item.id, index]]);
+})
+	.filter(Boolean)
+	.flatMap((component) => {
+		return component;
+	}) as [is: Component, itemId: string, itemIndex: number][]);
 
 const hoveredRune = shallowRef<IChampionRune>();
 const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
@@ -1303,8 +1309,8 @@ defineExpose({ el });
 				/>
 				<component
 					:is
-					v-for="[is, itemId, itemIndex] in itemExtras"
-					:key="itemId"
+					v-for="([is, itemId, itemIndex], extraIndex) in itemExtras"
+					:key="`${itemId}-${extraIndex}`"
 					:id-prefix
 					:damage-source="value"
 					:ability-id="GameAbilityId.build(ABILITY_TYPE.item, 'internal', itemId)"

@@ -124,8 +124,8 @@ export interface IExtraComponentEmits {
 }
 
 export interface ISpecificComponents {
-	extras?: Component;
-	effects?: Component;
+	extras?: Component | Component[];
+	effects?: Component | Component[];
 }
 
 export interface IChampionAbilityId<
