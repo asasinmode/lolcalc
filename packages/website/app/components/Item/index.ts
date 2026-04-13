@@ -88,6 +88,7 @@ for (const [itemId, itemSpecific] of Object.entries(ITEM_SPECIFICS) as [string, 
 		const { effectMin, effectMax, effectLabel } = itemSpecific as IDamageSourceEffectProvider;
 
 		ITEM_COMPONENTS[itemId] ??= {};
+		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with `DamageSource.computeAppliedEffect`, it works only on first value
 		ITEM_COMPONENTS[itemId].effects ??= ((itemSpecific as IDamageSourceEffectProvider).effectMax ?? 1) > 1
 			? await numberExtra(abilityId, 0 as never, effectLabel, effectMin ?? 0, effectMax)
 			: await booleanExtra(abilityId, 0 as never, effectLabel);

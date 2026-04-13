@@ -1,5 +1,5 @@
-import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IGameAbilityId, IItemAbilityId } from './types';
+import type { ComputedGetter, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
+import type { IAbilityImageTextProvider, IGameAbilityId, IItemAbilityId, IProviderGroupImageText } from './types';
 
 type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -743,12 +743,14 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			data: specific.setupEffectData(data),
 			isActive: specific.isEffectActive!,
 		});
+		(this.computed.effects as unknown as ShallowRef<IComputedAppliedEffect[]>).value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
 	}
 
 	removeEffect(id: string) {
 		const index = this.appliedEffects.value.findIndex(effect => effect.id === id);
 		if (~index) {
 			this.appliedEffects.value.splice(index, 1);
+			this.computed.effects.value.splice(index, 1);
 		}
 	}
 
@@ -922,6 +924,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				)) || []];
 			})) as Record<IChampionAbilityKey, IComputedAbilityDescription[]>;
 		}),
+		effects: ref<IComputedAppliedEffect[]>([]),
 	};
 
 	/** like computed but can depend on the computed */
@@ -1355,4 +1358,34 @@ export function resolveEffectSpecific(abilityId: IGameAbilityId, warnPrefix?: st
 	}
 
 	return undefined;
+}
+
+interface IComputedAppliedEffect {
+	id: string;
+	imgSrc: string;
+	imgSize: number;
+	imgTextLabel?: string;
+	imgText: ComputedRef<ReturnType<IAbilityImageTextProvider['itemImageText']> | undefined>;
+	isActive: ComputedRef<ReturnType<IDamageSourceEffectProvider['isEffectActive']>>;
+	specific: IDamageSourceEffectProvider;
+}
+
+function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
+	const specific = resolveEffectSpecific(effect.abilityId, 'computedAppliedEffects')!;
+	const rv: IComputedAppliedEffect = {
+		id: effect.id,
+		imgSrc: '',
+		imgSize: 0,
+		imgTextLabel: (specific as IProviderGroupImageText)?.itemImageTextLabel,
+		imgText: computed(() => (specific as IProviderGroupImageText)?.itemImageText?.(self, effect.abilityId, 0)),
+		isActive: computed(() => effect.isActive(effect.data)),
+		specific,
+	};
+
+	gameAbilityImage(effect.abilityId).then(([imgSrc, imgSize]) => {
+		rv.imgSrc = imgSrc;
+		rv.imgSize = imgSize;
+	});
+
+	return rv;
 }

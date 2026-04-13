@@ -211,16 +211,14 @@ const championExtra = computed<[Component, IGameAbilityId] | undefined>((): [Com
 });
 
 type IItemComponent = [is: Component, itemId: string, itemIndex: number];
-const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.map((item, index) => {
+const itemExtras = computed<IItemComponent[]>(() => props.value.items.value.flatMap((item, index) => {
 	const component = item && ITEM_COMPONENTS[item.id]?.extras;
-	return component && (Array.isArray(component)
-		? component.map(c => [markRaw(c), item.id, index])
-		: [[markRaw(component), item.id, index]]);
-})
-	.filter(Boolean)
-	.flatMap((component) => {
-		return component;
-	}) as [is: Component, itemId: string, itemIndex: number][]);
+	if (component) {
+		const components = Array.isArray(component) ? component : [component];
+		return components.map(c => [markRaw(c), item.id, index]);
+	}
+	return [];
+}) as [is: Component, itemId: string, itemIndex: number][]);
 
 const hoveredRune = shallowRef<IChampionRune>();
 const hoveredRuneTooltip = useTemplateRef('championRuneTooltip');
@@ -1096,9 +1094,19 @@ defineExpose({ el });
 					<img v-bind="textureBgImageAttrs(ui.practiceTool.statusEffect, 24)">
 				</button>
 				<ul>
-					<li v-for="effect in value.appliedEffects.value" :key="effect.id">
-						<!-- TODO remove with right click -->
-						{{ effect.id }} - {{ effect.data }}
+					<li v-for="effect in value.computed.effects.value.filter(effect => effect.isActive)" :key="effect.id">
+						<button>
+							<img
+								:src="effect.imgSrc"
+								:width="effect.imgSize"
+								:height="effect.imgSize"
+								loading="lazy"
+							>
+							<span v-show="effect.imgText">
+								<span>{{ effect.imgTextLabel }}</span>
+								{{ effect.imgText }}
+							</span>
+						</button>
 					</li>
 				</ul>
 			</section>

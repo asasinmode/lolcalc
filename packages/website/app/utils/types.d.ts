@@ -165,10 +165,7 @@ export type IProviderGroupInternalItemData = {
 	internalDataProperties?: never;
 } | IDamageSourceInternalItemDataProvider;
 
-export type IProviderGroupImageText = {
-	itemImageText?: never;
-	itemImageTextLabel?: string;
-} | {
+export interface IAbilityImageTextProvider {
 	/**
 	 * text on the item's image, like current heartsteel/mejai stacks
 	 * must return data for `internalItemData` or `appliedEffects` based on the passed `abilitySource`
@@ -177,4 +174,9 @@ export type IProviderGroupImageText = {
 	itemImageText: (damageSource: DamageSource, abilityId: IGameAbilityId, property?: any) => string | number;
 	/** sr only label for the shown image text */
 	itemImageTextLabel: string;
-};
+}
+
+export type IProviderGroupImageText = {
+	itemImageText?: never;
+	itemImageTextLabel?: never;
+} | IAbilityImageTextProvider;
