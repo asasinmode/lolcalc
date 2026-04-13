@@ -151,7 +151,7 @@ defineExpose({
 			</form>
 		</header>
 		<h2>loading...</h2>
-		<ul :inert="isLoading">
+		<ul v-show="damageSource?.appliedEffects.value.length" :inert="isLoading">
 			<li v-for="effect in damageSource?.appliedEffects.value" :key="effect.id">
 				<component
 					:is="effectComponent(effect)"
@@ -207,10 +207,18 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-effects {
-		--at-apply: 'bg-cyan-950 grid-rows-[auto_1fr] max-h-[80vh] w-[min(90vw,_600px)] shadow-lg px-3 pb-2';
+		--at-apply: 'bg-cyan-950 grid-rows-[auto_1fr] max-h-[80vh] w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2';
 
 		&[open] {
 			--at-apply: 'grid';
+		}
+
+		> header {
+			--at-apply: 'mb-2';
+
+			> h1 {
+				--at-apply: 'leading-7';
+			}
 		}
 
 		> h2 {
@@ -244,26 +252,25 @@ defineExpose({
 		}
 
 		> ul {
+			--at-apply: 'grid grid-cols-[repeat(3,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 justify-items-center mb-3';
 			--ability-size: calc(14 * var(--spacing));
 
 			> li {
-				--at-apply: 'relative w-fit';
-
 				> article {
-					--at-apply: 'w-max';
+					--at-apply: '';
 				}
 			}
 		}
 
 		> form {
-			--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
+			--at-apply: 'grid grid-cols-[auto_1fr] grids-rows-[auto_1fr] gap-x-2';
 
 			> label {
 				--at-apply: 'col-span-full text-start text-lg';
 			}
 
 			> select {
-				--at-apply: 'w-64 px-1';
+				--at-apply: 'w-64 px-1 py-1';
 
 				&:disabled {
 					--at-apply: 'text-neutral-400';
@@ -271,7 +278,7 @@ defineExpose({
 			}
 
 			> button {
-				--at-apply: 'w-fit px-1 h-6';
+				--at-apply: 'w-fit px-2 h-full';
 			}
 		}
 	}
