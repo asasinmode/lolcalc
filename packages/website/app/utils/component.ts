@@ -31,7 +31,7 @@ export type IGameAbilityEffectData<T extends IGameAbilityId, Specific = IGameAbi
 type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
 type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
 
-export function numberExtra<T extends IGameAbilityId>(
+export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
 	property: T['dataSource'] extends 'internal'
 		? keyof IGameAbilityInternalData<T>
@@ -44,15 +44,15 @@ export function numberExtra<T extends IGameAbilityId>(
 	const isEffect = abilityId.dataSource === 'effects';
 	const isSpecificExpected = abilityId.type !== ABILITY_TYPE.champion && abilityId.dataSource !== 'internal';
 
-	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>((props, ctx) => {
+	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const specific = resolveAbilitySpecific(abilityId, isSpecificExpected ? 'numberExtra' : undefined);
-		const [imgSrc, imgSize] = gameAbilityImage(abilityId);
+		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, isEffect, property, props.damageSource);
 
 		return () => h(VExtrasNumber, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}`,
-			'imgSrc': toValue(imgSrc),
+			imgSrc,
 			imgSize,
 			label,
 			min,
@@ -74,7 +74,7 @@ export function numberExtra<T extends IGameAbilityId>(
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
 
-export function booleanExtra<T extends IGameAbilityId>(
+export async function booleanExtra<T extends IGameAbilityId>(
 	abilityId: T,
 	property: T['dataSource'] extends 'internal'
 		? IGameAbilityInternalData<T> extends never
@@ -88,14 +88,14 @@ export function booleanExtra<T extends IGameAbilityId>(
 ) {
 	const isEffect = abilityId.dataSource === 'effects';
 
-	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>((props, ctx) => {
-		const [imgSrc, imgSize] = gameAbilityImage(abilityId);
+	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
+		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue] = extraAppliedEffect(abilityId, isEffect, property, props.damageSource);
 
 		return () => h(VExtrasBoolean, {
 			'modelValue': modelValue.value,
 			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}`,
-			'imgSrc': toValue(imgSrc),
+			imgSrc,
 			imgSize,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
 			onImgMouseenter(event) {
@@ -106,10 +106,7 @@ export function booleanExtra<T extends IGameAbilityId>(
 	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
 }
 
-function gameAbilityImage(abilityId: IGameAbilityId): [
-	src: MaybeRef<string>,
-	size: number,
-] {
+export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src: string, size: number]> {
 	const { version } = usePatchVersion();
 
 	if (abilityId.type === ABILITY_TYPE.item) {
@@ -121,12 +118,12 @@ function gameAbilityImage(abilityId: IGameAbilityId): [
 
 	const { abilityImage, abilityImageSize } = useChampionImages();
 
-	const src = ref('');
-	useChampion(abilityId.id).then((champion) => {
-		src.value = abilityImage(champion.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]!.image, abilityId.id);
-	});
+	const champion = await useChampion(abilityId.id);
 
-	return [src, abilityImageSize(abilityId.id)];
+	return [
+		abilityImage(champion.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]!.image, abilityId.id),
+		abilityImageSize(abilityId.id),
+	];
 }
 
 function extraAppliedEffect(abilityId: IGameAbilityId, isEffect: boolean, property: PropertyKey, damageSource: DamageSource): [

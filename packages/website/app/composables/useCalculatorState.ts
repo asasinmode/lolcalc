@@ -119,11 +119,11 @@ export function useCalculatorState(
 			|| (section.abilityId.type === ABILITY_TYPE.item ? savedItemIds.has(section.abilityId.id) : savedChampionIds.has(section.abilityId.id))) ?? [];
 		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
 		const savedSectionIds: string[] = [];
-		const isSectionsChanged = keptSections.length > 3
+		const isSectionsChanged = keptSections?.[0] && (keptSections.length > 3
 			/* check if default order was changed */
 			|| (keptSections[0]!.id !== 'a-stats'
 				|| keptSections[1]!.id !== 'a-aa'
-				|| keptSections.at(-1)!.id !== 'a-cTtl');
+				|| keptSections.at(-1)!.id !== 'a-cTtl'));
 
 		if (computedCustomTotalRows?.length || isSectionsChanged) {
 			for (const section of keptSections) {

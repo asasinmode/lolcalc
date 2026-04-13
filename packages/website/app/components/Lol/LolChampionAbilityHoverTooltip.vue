@@ -42,7 +42,7 @@ const variant = computed(() =>
 
 const computedDescription = computed<IComputedAbilityDescription | undefined>(() =>
 	props.precomputedDescription || (champion.value && props.abilityKey && props.abilityVariantIndex !== undefined
-		? computedAbilityDescription(
+		? computeAbilityDescription(
 				minorVersion,
 				champion.value!,
 				props.abilityKey,

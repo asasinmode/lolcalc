@@ -151,6 +151,9 @@ export interface IItemAbilityId<Id extends string = string, Source extends TAbil
 export type IGameAbilityId = IChampionAbilityId | IItemAbilityId;
 
 export type IProviderGroupEffect = {
+	effectLabel?: never;
+	effectMin?: never;
+	effectMax?: never;
 	setupEffectData?: never;
 	isEffectActive?: never;
 } | IDamageSourceEffectProvider;

@@ -12,7 +12,7 @@ const { version, minorVersion } = usePatchVersion();
 const globalKeyModifiers = useGlobalKeyModifiers();
 
 const computedDescription = computed<IComputedItemDescription | undefined>(() => props.precomputedDescription
-	|| computedItemDescription(
+	|| computeItemDescription(
 		text,
 		minorVersion,
 		props.item,

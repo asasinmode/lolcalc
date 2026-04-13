@@ -26,7 +26,7 @@ const itemEffects: IEffectOptionGroup['options'] = Object
 	.filter(([, specific]) => 'setupEffectData' in specific)
 	.map(([itemId]): IEffectOptionGroup['options'][number] => {
 		const item = items[itemId]!;
-		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
+		const precomputedDescription = computeItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
 
 		return {
 			abilityId: GameAbilityId.build(ABILITY_TYPE.item, 'effects', itemId),
@@ -87,7 +87,7 @@ async function loadChampionEffects() {
 							const abilityVariantIndex = Number(rawAbilityVariantIndex);
 							champion ||= await useChampion(championId);
 
-							const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex as unknown as number);
+							const precomputedDescription = computeAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex as unknown as number);
 
 							effects.push({
 								abilityId: GameAbilityId.build(ABILITY_TYPE.champion, 'effects', championId as IChampionId, abilityKey, abilityVariantIndex),

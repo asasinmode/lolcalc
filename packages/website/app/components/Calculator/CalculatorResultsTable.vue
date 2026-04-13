@@ -471,7 +471,7 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computedAbilityDescription(minorVersion, champion, abilityId.abilityKey, abilityId.abilityVariantIndex, undefined, undefined, { replaceWithName: true });
+		const precomputedDescription = computeAbilityDescription(minorVersion, champion, abilityId.abilityKey, abilityId.abilityVariantIndex, undefined, undefined, { replaceWithName: true });
 
 		section.name ||= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
@@ -497,7 +497,7 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computedItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
+		const precomputedDescription = computeItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
 
 		section.name ||= item.name;
 		section.rows = getAbilitySectionRows(precomputedDescription);

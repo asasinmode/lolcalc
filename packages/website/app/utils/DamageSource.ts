@@ -27,6 +27,7 @@ export interface IDamageSourceInternalDataBase {
 }
 
 export interface IDamageSourceEffectProvider {
+	effectLabel: string;
 	/**
 	 * same as `setupInternalData` for `DamageSource.appliedEffects[number].data`
 	 * `data` is the existing effect's data for cloning
@@ -34,6 +35,10 @@ export interface IDamageSourceEffectProvider {
 	setupEffectData: (data?: IDamageSourceEffect['data']) => IDamageSourceEffect['data'];
 	/** checks if effect's data is not the default value */
 	isEffectActive: (data: any) => number | boolean;
+	/** @default 0 */
+	effectMin?: number;
+	/** @default 1 */
+	effectMax?: number;
 }
 
 export interface IDamageSourceInternalDataProvider {
@@ -885,7 +890,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			const { minorVersion } = usePatchVersion();
 
 			return this.items.value.map((item): IComputedItemDescription | undefined =>
-				item && computedItemDescription(text, minorVersion, item, this),
+				item && computeItemDescription(text, minorVersion, item, this),
 			);
 		}),
 		itemSpecifics: computed<({
@@ -907,7 +912,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 			return Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map((key): [IChampionAbilityKey, IComputedAbilityDescription[]] => {
 				const ability = this.champion.value?.abilities[key as IChampionAbilityKey];
-				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computedAbilityDescription(
+				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
 					minorVersion,
 					this.champion.value!,
 					key as IChampionAbilityKey,
@@ -967,7 +972,7 @@ export interface IComputedItemDescription extends Pick<ITextData['items'][keyof 
 	unknownVariables: ReturnType<typeof replaceGameDescriptionVariables>['unknownVariables'];
 }
 
-export function computedItemDescription(
+export function computeItemDescription(
 	text: ITextData,
 	minorVersion: string,
 	item?: IItem,
@@ -1085,7 +1090,7 @@ export interface IComputedAbilityDescription {
 	variant: IChampionAbilityVariant;
 }
 
-export function computedAbilityDescription(
+export function computeAbilityDescription(
 	minorVersion: string,
 	champion: IChampion,
 	abilityKey: IChampionAbilityKey,
