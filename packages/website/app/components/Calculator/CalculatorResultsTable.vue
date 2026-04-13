@@ -187,11 +187,13 @@ const computedCustomTotalRows = computed<ICustomTotalSectionRow[]>(() => {
 		const [sectionId, rowId] = combinedId.split('_');
 
 		const section = resultSections.value.find(section => section.id === sectionId)!;
-		const row = section.rows.find(row => row.id === rowId)!;
+		const rowIndex = section.rows.findIndex(row => row.id === rowId)!;
+		const row = section.rows[rowIndex]!;
 
 		return {
 			...row,
 			sectionId: section.id,
+			rowIndex,
 			image: section.image ? { src: section.image, width: section.imageSize, height: section.imageSize } : undefined,
 		};
 	}));
@@ -1018,6 +1020,13 @@ function addColumnItems(columnIndex: number) {
 type IDamageResultTableSectionRow = IDamageResultTableSection['rows'][number];
 interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 	sectionId: string;
+	/** the index the target row is at in its section */
+	rowIndex: number;
+}
+
+function onCustomTotalRowsChange() {
+	recomputeCustomTotalRow();
+	emit('configurationChanged');
 }
 
 function recomputeCustomTotalRow() {
@@ -1038,6 +1047,8 @@ defineExpose({
 	recalculateAllColumns,
 	addResultsSection,
 	expandedSections,
+	computedCustomTotalRows,
+	recomputeCustomTotalRow,
 });
 </script>
 
@@ -1403,7 +1414,7 @@ defineExpose({
 								v-model="customTotalRows"
 								type="checkbox"
 								:value="`${section.id}_${row.id}`"
-								@update:model-value="recomputeCustomTotalRow"
+								@update:model-value="onCustomTotalRowsChange"
 							>
 						</label>
 					</td>

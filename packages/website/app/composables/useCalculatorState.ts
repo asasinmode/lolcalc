@@ -63,24 +63,20 @@ export function useCalculatorState(
 		let wholeState = `v=${STATE_VERSION}`;
 		let queryState = wholeState;
 
-		let querySavedHighestSourceIndex = -1;
-		for (const [str, i] of damageSourcesState.value) {
+		for (const [str] of damageSourcesState.value) {
 			wholeState += `&${str}`;
 			if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
 				break;
 			}
 			queryState += `&${str}`;
-			querySavedHighestSourceIndex = i;
 		}
 
-		let querySavedHighestTargetIndex = -1;
-		for (const [str, i] of damageTargetsState.value) {
+		for (const [str] of damageTargetsState.value) {
 			wholeState += `&${str}`;
 			if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
 				break;
 			}
 			queryState += `&${str}`;
-			querySavedHighestTargetIndex = i;
 		}
 
 		const tableResultsStr = resultsTable.value?.flipResults ? `&flpTbl=` : '';
@@ -89,66 +85,81 @@ export function useCalculatorState(
 			queryState += tableResultsStr;
 		}
 
-		const querySavedChampionIds = new Set<string>();
-		const querySavedItemIds = new Set<string>();
+		const savedChampionIds = new Set<string>();
+		const savedItemIds = new Set<string>();
 		for (const column of resultsTable.value?.resultColumns || []) {
 			const columnSourceIndex = column.source ? damageSources.value.indexOf(column.source) : -1;
 			const columnTargetIndex = column.target ? damageTargets.value.indexOf(column.target) : -1;
-			if ((~columnSourceIndex && columnSourceIndex <= querySavedHighestSourceIndex)
-				|| (~columnTargetIndex && columnTargetIndex <= querySavedHighestTargetIndex)) {
-				const params = new URLSearchParams();
-				params.append('tblCol', `${
-					columnSourceIndex === -1 || columnSourceIndex > querySavedHighestSourceIndex ? '' : columnSourceIndex
-				}-${
-					columnTargetIndex === -1 || columnTargetIndex > querySavedHighestTargetIndex ? '' : columnTargetIndex
-				}`);
-				const str = params.toString();
-				wholeState += `&${str}`;
-				if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
-					break;
-				}
-				queryState += `&${str}`;
-
-				column.source?.champion.value?.id && querySavedChampionIds.add(column.source.champion.value!.id);
-				column.target?.champion.value?.id && querySavedChampionIds.add(column.target.champion.value!.id);
-
+			if (~columnSourceIndex || ~columnTargetIndex) {
+				column.source?.champion.value?.id && savedChampionIds.add(column.source.champion.value!.id);
+				column.target?.champion.value?.id && savedChampionIds.add(column.target.champion.value!.id);
 				if (column.source) {
 					for (const item of (column.source as unknown as DamageSource).items.value) {
-						item && querySavedItemIds.add(item.id);
+						item && savedItemIds.add(item.id);
 					}
 				}
 				if (column.target) {
 					for (const item of (column.target as unknown as DamageSource).items.value) {
-						item && querySavedItemIds.add(item.id);
+						item && savedItemIds.add(item.id);
 					}
 				}
-			}
-		}
-
-		const nonAllKeptSections = resultsTable.value?.resultSections.filter(section => section.abilityId.type !== 'all'
-			&& (section.abilityId.type === ABILITY_TYPE.item ? querySavedItemIds.has(section.abilityId.id) : querySavedChampionIds.has(section.abilityId.id)));
-		if (resultsTable.value && (nonAllKeptSections?.length
-			/* check if default order was changed */
-			|| resultsTable.value.resultSections[0]!.id !== 'a-stats'
-			|| resultsTable.value.resultSections[1]!.id !== 'a-aa'
-			|| resultsTable.value.resultSections[2]!.id !== 'a-cTtl')) {
-			for (const section of resultsTable.value.resultSections) {
-				if (section.abilityId.type !== 'all'
-					&& !(section.abilityId.type === ABILITY_TYPE.item ? querySavedItemIds.has(section.abilityId.id) : querySavedChampionIds.has(section.abilityId.id))) {
-					continue;
-				}
-
-				const isExpanded = resultsTable.value?.expandedSections.includes(section.id);
 
 				const params = new URLSearchParams();
-
-				params.append('tblSct', `${section.id}_${isExpanded ? 1 : ''}`);
+				params.append('tblCol', `${~columnSourceIndex ? columnSourceIndex : ''}-${~columnTargetIndex ? columnTargetIndex : ''}`);
 				const str = params.toString();
 				wholeState += `&${str}`;
 				if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
 					break;
 				}
 				queryState += `&${str}`;
+			}
+		}
+
+		const keptSections = resultsTable.value?.resultSections.filter(section => section.abilityId.type === 'all'
+			|| (section.abilityId.type === ABILITY_TYPE.item ? savedItemIds.has(section.abilityId.id) : savedChampionIds.has(section.abilityId.id))) ?? [];
+		const computedCustomTotalRows = resultsTable.value?.computedCustomTotalRows.slice(1);
+		const savedSectionIds: string[] = [];
+		const isSectionsChanged = keptSections.length > 3
+			/* check if default order was changed */
+			|| (keptSections[0]!.id !== 'a-stats'
+				|| keptSections[1]!.id !== 'a-aa'
+				|| keptSections.at(-1)!.id !== 'a-cTtl');
+
+		if (computedCustomTotalRows?.length || isSectionsChanged) {
+			for (const section of keptSections) {
+				savedSectionIds.push(section.id);
+
+				if (isSectionsChanged) {
+					const params = new URLSearchParams();
+					params.append('tblSct', `${section.id}_${resultsTable.value!.expandedSections.includes(section.id) ? 1 : ''}`);
+					const str = params.toString();
+					wholeState += `&${str}`;
+					if (queryState.length + str.length > MAX_QUERY_STATE_STRING_LENGTH) {
+						break;
+					}
+					queryState += `&${str}`;
+				}
+			}
+
+			if (computedCustomTotalRows?.length) {
+				const params = new URLSearchParams();
+
+				const value: string[] = [];
+				for (const row of computedCustomTotalRows) {
+					const savedSectionIndex = savedSectionIds.indexOf(row.sectionId);
+					if (~savedSectionIndex) {
+						value.push(`${savedSectionIndex}|${row.rowIndex}`);
+					}
+				}
+
+				if (value.length) {
+					params.append('tblCTtl', value.join('~'));
+					const str = params.toString();
+					wholeState += `&${str}`;
+					if (queryState.length + str.length < MAX_QUERY_STATE_STRING_LENGTH) {
+						queryState += `&${str}`;
+					}
+				}
 			}
 		}
 
