@@ -129,6 +129,9 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
+  - [ ] `internalData` only values, same as effects
+  - [ ] `internalItemData` like `${key}~${value1}~${value2}|${otherKey}-${value1}-...`
+  - [ ] remove dividing `-` where possible like abilityLevels that are 1 digit only
 - [x] confirm removing/clearing row/scoreboard item, ideally undo
 - [?] header, footer, contact info
 - [?] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)

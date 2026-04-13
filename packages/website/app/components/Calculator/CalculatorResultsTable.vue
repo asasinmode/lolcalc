@@ -1047,6 +1047,7 @@ defineExpose({
 	recalculateAllColumns,
 	addResultsSection,
 	expandedSections,
+	customTotalRows,
 	computedCustomTotalRows,
 	recomputeCustomTotalRow,
 });

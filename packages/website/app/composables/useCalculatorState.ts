@@ -148,12 +148,12 @@ export function useCalculatorState(
 				for (const row of computedCustomTotalRows) {
 					const savedSectionIndex = savedSectionIds.indexOf(row.sectionId);
 					if (~savedSectionIndex) {
-						value.push(`${savedSectionIndex}|${row.rowIndex}`);
+						value.push(`${savedSectionIndex}-${row.rowIndex}`);
 					}
 				}
 
 				if (value.length) {
-					params.append('tblCTtl', value.join('~'));
+					params.append('tblCTtl', value.join('_'));
 					const str = params.toString();
 					wholeState += `&${str}`;
 					if (queryState.length + str.length < MAX_QUERY_STATE_STRING_LENGTH) {
@@ -266,6 +266,22 @@ export function useCalculatorState(
 			if (abilityId) {
 				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded);
 				currentSectionIndex += 1;
+			}
+		}
+
+		const savedCustomTotalRows = params.get('tblCTtl');
+		if (savedCustomTotalRows?.length) {
+			for (const totalRow of savedCustomTotalRows.split('_')) {
+				const [rawSectionIndex, rawRowIndex] = totalRow.split('-');
+				const sectionIndex = rawSectionIndex ? Number.parseInt(rawSectionIndex) : undefined;
+				const rowIndex = rawRowIndex ? Number.parseInt(rawRowIndex) : undefined;
+				if (sectionIndex !== undefined && !Number.isNaN(sectionIndex) && rowIndex !== undefined && !Number.isNaN(rawRowIndex)) {
+					const section = resultsTable.value.resultSections[sectionIndex];
+					const row = section?.rows[rowIndex];
+					if (section && row && section.id !== 'a-cTtl') {
+						resultsTable.value.customTotalRows.push(`${section.id}_${row.id}`);
+					}
+				}
 			}
 		}
 	}
