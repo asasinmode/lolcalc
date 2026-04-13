@@ -190,8 +190,7 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.fervor = Math.max(0, Math.min(1, self.internalItemData.value.carve ?? 0));
 			return { carve: 0, fervor: 0 };
 		},
-		setupEffectData(self, effect): [carve: number] {
-			console.log('setting up black cleaver effect', effect, self.appliedEffects.value);
+		setupEffectData(effect): [carve: number] {
 			return [
 				Math.max(0, Math.min(5, effect?.data[0] ?? 0)),
 			];
@@ -209,8 +208,7 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
-		setupEffectData(self, effect): [inspiringSpeech: 0 | 1] {
-			console.log('setting up shurelya effect', effect, self.appliedEffects.value);
+		setupEffectData(effect): [inspiringSpeech: 0 | 1] {
 			return [Math.max(0, Math.min(1, effect?.data[0] ?? 0)) as 0 | 1];
 		},
 		isEffectActive(data) {

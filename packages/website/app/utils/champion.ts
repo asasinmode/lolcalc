@@ -19,8 +19,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 		passive: {
 			0: {
-				setupEffectData(self, effect): [cursedTouch: number] {
-					console.log('setting up amumu passive effect', effect, self.appliedEffects.value);
+				setupEffectData(effect): [cursedTouch: number] {
 					return [Math.min(0, Math.max(1, effect?.data[0] ?? 0))];
 				},
 				isEffectActive(data) {

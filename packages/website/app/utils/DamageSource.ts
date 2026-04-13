@@ -27,8 +27,11 @@ export interface IDamageSourceInternalDataBase {
 }
 
 export interface IDamageSourceEffectProvider {
-	/** same as `setupInternalData` for `DamageSource.appliedEffects[number].data` */
-	setupEffectData: (self: DamageSource, effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
+	/**
+	 * same as `setupInternalData` for `DamageSource.appliedEffects[number].data`
+	 * `effect` is the existing same effect for cloning data
+	 */
+	setupEffectData: (effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
 	/** checks if effect's data is not the default value */
 	isEffectActive: (data: any) => number | boolean;
 }
@@ -41,7 +44,6 @@ export interface IDamageSourceInternalDataProvider {
 	 * the property names should be fairly short for storing in state string
 	 */
 	setupInternalData: (self: DamageSource) => any;
-	// ^ TODO maybe take also current `internalData.value` that could be an array from stringified data then parse that in order into properties
 }
 
 export interface IDamageSourceInternalItemDataProvider {
@@ -191,8 +193,21 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		/* expected to be overriden by freshly setup data in `this.champion` watch below */
 		this.internalData = ref<any>(overrides.internalData ?? {});
 		this.internalItemData = ref(overrides.internalItemData ?? {});
-		this.appliedEffects = ref(overrides.appliedEffects ?? []);
+		this.appliedEffects = ref([]);
 		this.dataFromStringifiedData = false;
+
+		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
+			const effect = overrides.appliedEffects![i]!;
+			const specific = resolveEffectSpecific(effect.abilityId, `DamageSource constructor`);
+			if (specific) {
+				this.appliedEffects.value[i] = {
+					id: effect.id,
+					abilityId: effect.abilityId,
+					data: specific.setupEffectData!(effect),
+					isActive: specific.isEffectActive!,
+				};
+			}
+		}
 
 		this.watchHandles = [
 			watch(this.listedChampion, async (c) => {
@@ -491,7 +506,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (typeof data === 'object' && data && !Array.isArray(data)) {
 					for (const [key, value] of Object.entries(data)) {
 						if (typeof value === 'number') {
-							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constraint it to their min/max)
+							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constrain it to their min/max)
 							rv.internalItemData.value[key] = Math.round(value);
 						}
 					}
@@ -641,7 +656,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				if (typeof data === 'object' && data && !Array.isArray(data)) {
 					for (const [key, value] of Object.entries(data)) {
 						if (typeof value === 'number') {
-							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constraint it to their min/max)
+							// TODO not sure if all should be rounded, atm setup functions expect a number (don't parse it themselves, but do constrain it to their min/max)
 							rv.internalData.value[key] = Math.round(value);
 						}
 					}
@@ -706,7 +721,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.appliedEffects.value.push({
 			id: GameAbilityId.stringify(abilityId),
 			abilityId,
-			data: specific.setupEffectData!(this, undefined),
+			data: specific.setupEffectData(),
 			isActive: specific.isEffectActive!,
 		});
 	}
@@ -1314,8 +1329,8 @@ export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, w
 	return specific;
 }
 
-export function resolveEffectSpecific(abilityId: IGameAbilityId): IDamageSourceEffectProvider | undefined {
-	const specific = resolveAbilitySpecific(abilityId);
+export function resolveEffectSpecific(abilityId: IGameAbilityId, warnPrefix?: string): IDamageSourceEffectProvider | undefined {
+	const specific = resolveAbilitySpecific(abilityId, warnPrefix);
 	if (specific && 'setupEffectData' in specific) {
 		return specific;
 	}
