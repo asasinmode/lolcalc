@@ -19,8 +19,8 @@ export const CHAMPION_SPECIFICS = {
 		},
 		passive: {
 			0: {
-				setupEffectData(effect): [cursedTouch: number] {
-					return [Math.min(0, Math.max(1, effect?.data[0] ?? 0))];
+				setupEffectData(data): [cursedTouch: number] {
+					return [Math.min(0, Math.max(1, data?.[0] ?? 0))];
 				},
 				isEffectActive(data) {
 					return (data as [cursedTouch: number])[0];

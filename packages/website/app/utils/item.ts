@@ -190,9 +190,9 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.fervor = Math.max(0, Math.min(1, self.internalItemData.value.carve ?? 0));
 			return { carve: 0, fervor: 0 };
 		},
-		setupEffectData(effect): [carve: number] {
+		setupEffectData(data): [carve: number] {
 			return [
-				Math.max(0, Math.min(5, effect?.data[0] ?? 0)),
+				Math.max(0, Math.min(5, data?.[0] ?? 0)),
 			];
 		},
 		isEffectActive(data) {
@@ -208,8 +208,8 @@ export const ITEM_SPECIFICS = {
 		},
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
-		setupEffectData(effect): [inspiringSpeech: 0 | 1] {
-			return [Math.max(0, Math.min(1, effect?.data[0] ?? 0)) as 0 | 1];
+		setupEffectData(data): [inspiringSpeech: 0 | 1] {
+			return [Math.max(0, Math.min(1, data?.[0] ?? 0)) as 0 | 1];
 		},
 		isEffectActive(data) {
 			const [inspiringSpeech] = data as [inspiringSpeech: 0 | 1];

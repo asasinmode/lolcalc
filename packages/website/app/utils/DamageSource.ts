@@ -29,9 +29,9 @@ export interface IDamageSourceInternalDataBase {
 export interface IDamageSourceEffectProvider {
 	/**
 	 * same as `setupInternalData` for `DamageSource.appliedEffects[number].data`
-	 * `effect` is the existing same effect for cloning data
+	 * `data` is the existing effect's data for cloning
 	 */
-	setupEffectData: (effect?: IDamageSourceEffect) => IDamageSourceEffect['data'];
+	setupEffectData: (data?: IDamageSourceEffect['data']) => IDamageSourceEffect['data'];
 	/** checks if effect's data is not the default value */
 	isEffectActive: (data: any) => number | boolean;
 }
@@ -198,15 +198,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
 			const effect = overrides.appliedEffects![i]!;
-			const specific = resolveEffectSpecific(effect.abilityId, `DamageSource constructor`);
-			if (specific) {
-				this.appliedEffects.value[i] = {
-					id: effect.id,
-					abilityId: effect.abilityId,
-					data: specific.setupEffectData!(effect),
-					isActive: specific.isEffectActive!,
-				};
-			}
+			this.addEffect(effect.abilityId, effect.data);
 		}
 
 		this.watchHandles = [
@@ -450,6 +442,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonSoul.value && dragonKeys.indexOf(this.dragonSoul.value),
 			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
 			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
+			this.appliedEffects.value
+				.filter(effect => effect.isActive(effect.data))
+				.map(effect => `${effect.id}~${effect.data.join('~')}`)
+				.join('|'),
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
 
@@ -481,6 +477,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			rawDragonSoulIndex,
 			rawInternalData,
 			rawInternalItemData,
+			rawEffectsData,
 			rawRoleQuestIndex,
 		] = data.split('_');
 
@@ -664,6 +661,23 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			} catch {}
 		}
 
+		if (rawEffectsData?.length) {
+			for (const rawEffect of rawEffectsData.split('|')) {
+				const [rawAbilityId, ...rawData] = rawEffect.split('~');
+				const abilityId = rawAbilityId && GameAbilityId.parse(rawAbilityId, 'effects');
+				if (abilityId) {
+					const data = rawData.map((rawValue) => {
+						const value = rawValue ? Number.parseInt(rawValue) : undefined;
+						if (value && !Number.isNaN(value)) {
+							return value;
+						}
+						return undefined;
+					}).filter(v => v !== undefined) as number[];
+					rv.addEffect(abilityId, data);
+				}
+			}
+		}
+
 		if (championKey && CHAMPION_KEY_TO_ID[championKey]) {
 			rv.dataFromStringifiedData = true;
 			rv.listedChampion.value = champions[CHAMPION_KEY_TO_ID[championKey]];
@@ -711,7 +725,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	addEffect(abilityId: IGameAbilityId) {
+	addEffect(abilityId: IGameAbilityId, data?: IDamageSourceEffect['data']) {
 		const specific = resolveEffectSpecific(abilityId);
 		if (!specific) {
 			console.warn('[DamageSource.addEffect] tried to add effect for', abilityId, 'without \'setupEffectData\'');
@@ -721,7 +735,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.appliedEffects.value.push({
 			id: GameAbilityId.stringify(abilityId),
 			abilityId,
-			data: specific.setupEffectData(),
+			data: specific.setupEffectData(data),
 			isActive: specific.isEffectActive!,
 		});
 	}
