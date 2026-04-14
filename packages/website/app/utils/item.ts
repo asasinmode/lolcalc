@@ -193,6 +193,7 @@ export const ITEM_SPECIFICS = {
 		isItemImageActive(internalData: { fervor: number }) {
 			return internalData.fervor;
 		},
+		effectName: 'blackCleaverCarve',
 		effectLabel: 'Carve stacks',
 		effectMax: 5,
 		effectImageText(data: [carve: number]) {
@@ -217,6 +218,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.shurelya]: {
 		effectLabel: 'Inspiring speech',
+		effectName: 'shurelyaInspiringSpeech',
 		setupEffectData(data): [inspiringSpeech: 0 | 1] {
 			return [Math.max(0, Math.min(1, data?.[0] ?? 0)) as 0 | 1];
 		},

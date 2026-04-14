@@ -331,3 +331,5 @@ export const EFFECT_NAME_TO_OBJECTNAME = {
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
 };
+
+export type TEffectNameToObjectName = typeof EFFECT_NAME_TO_OBJECTNAME;

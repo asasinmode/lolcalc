@@ -1,5 +1,5 @@
-import type { ComputedGetter, ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IAbilityImageTextProvider, IGameAbilityId, IItemAbilityId, IProviderGroupImageText } from './types';
+import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
+import type { IAbilityImageTextProvider, IChampionAbilityId, IGameAbilityId, IItemAbilityId } from './types';
 
 type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -28,6 +28,7 @@ export interface IDamageSourceInternalDataBase {
 
 export interface IDamageSourceEffectProvider {
 	effectLabel: string;
+	effectName: keyof TEffectNameToObjectName;
 	/**
 	 * same as `setupInternalData` for `DamageSource.appliedEffects[number].data`
 	 * `data` is the existing effect's data for cloning
@@ -918,8 +919,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
 					minorVersion,
 					this.champion.value!,
-					key as IChampionAbilityKey,
-					variantIndex,
+					GameAbilityId.build(ABILITY_TYPE.champion, 'internal', this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
 					(this.abilityLevels.value as any)[key],
 					this,
 				)) || []];
@@ -1075,8 +1075,8 @@ export function allChampionAbilityVariants(champion?: IChampion) {
 	return champion ? Object.values(champion.abilities).flatMap(ability => ability.variants) : [];
 }
 
-// TODO maybe try to include all stuff <lolchampionabilityhovertooltip> uses so it doesn't need additional props when it's passed
 export interface IComputedAbilityDescription {
+	gameAbilityId: IChampionAbilityId;
 	name: string;
 	tooltip: string;
 	tooltipExtended: string;
@@ -1097,17 +1097,16 @@ export interface IComputedAbilityDescription {
 export function computeAbilityDescription(
 	minorVersion: string,
 	champion: IChampion,
-	abilityKey: IChampionAbilityKey,
-	abilityVariantIndex: number,
+	gameAbilityId: IChampionAbilityId,
 	abilityLevel?: number,
 	_damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
 ): IComputedAbilityDescription {
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-	abilityLevel = abilityKey !== 'passive' ? abilityLevel || 1 : undefined;
-	const ability = champion.abilities[abilityKey];
-	const variant = ability.variants[abilityVariantIndex]!;
+	abilityLevel = gameAbilityId.abilityKey !== 'passive' ? abilityLevel || 1 : undefined;
+	const ability = champion.abilities[gameAbilityId.abilityKey];
+	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
 	const allVariants = allChampionAbilityVariants(champion);
 
 	const { replaced: nameReplaced, unknownStringtableVariables: nameUnknownSV } = replaceGameDescriptionStringtableVariables(
@@ -1199,7 +1198,7 @@ export function computeAbilityDescription(
 		};
 	});
 
-	if (champion.id !== 'TargetDummy' && cooldown && abilityKey !== 'passive') {
+	if (champion.id !== 'TargetDummy' && cooldown && gameAbilityId.abilityKey !== 'passive') {
 		extendedVariables ||= [];
 		extendedVariables.push({
 			name: 'Cooldown',

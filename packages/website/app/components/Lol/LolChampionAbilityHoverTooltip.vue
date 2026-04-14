@@ -15,11 +15,11 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 const champion = shallowRef<IChampion>();
 const isLoading = ref(false);
 
-watch(() => props.championId, async (id) => {
-	if (id) {
+watch(() => props.gameAbilityId, async (abilityId) => {
+	if (abilityId) {
 		isLoading.value = true;
-		useChampion(id).then((usedChampion) => {
-			if (props.championId === usedChampion.id) {
+		useChampion(abilityId.id).then((usedChampion) => {
+			if (props.gameAbilityId?.id === usedChampion.id) {
 				champion.value = usedChampion;
 			}
 			isLoading.value = false;
@@ -29,24 +29,12 @@ watch(() => props.championId, async (id) => {
 	}
 }, { immediate: true });
 
-const ability = computed(() => {
-	if (!isLoading.value && props.abilityKey && props.abilityVariantIndex !== undefined && champion.value) {
-		return champion.value.abilities[props.abilityKey];
-	}
-	return undefined;
-});
-
-const variant = computed(() =>
-	props.abilityVariantIndex !== undefined ? ability.value?.variants[props.abilityVariantIndex] : undefined,
-);
-
 const computedDescription = computed<IComputedAbilityDescription | undefined>(() =>
-	props.precomputedDescription || (champion.value && props.abilityKey && props.abilityVariantIndex !== undefined
+	props.precomputedDescription || (champion.value && props.gameAbilityId
 		? computeAbilityDescription(
 				minorVersion,
 				champion.value!,
-				props.abilityKey,
-				props.abilityVariantIndex,
+				props.gameAbilityId,
 				props.abilityLevel,
 				undefined,
 				{ replaceWithName: props.replaceVariablesWithNames },
@@ -54,7 +42,8 @@ const computedDescription = computed<IComputedAbilityDescription | undefined>(()
 		: undefined),
 );
 
-const abilitySize = computed(() => props.championId ? abilityImageSize(props.championId) : 64);
+const abilityKey = computed(() => computedDescription.value?.gameAbilityId.abilityKey);
+const abilitySize = computed(() => props.gameAbilityId ? abilityImageSize(props.gameAbilityId.id) : 64);
 
 const el = useTemplateRef('el');
 
@@ -65,7 +54,7 @@ defineExpose({ el });
 	<div ref="el" popover="hint" class="hover-tooltip champion-ability">
 		<img
 			v-show="!isLoading"
-			:src="!isLoading && variant ? abilityImage(variant.image, championId!, group) : undefined"
+			:src="!isLoading && computedDescription ? abilityImage(computedDescription.variant.image, computedDescription.gameAbilityId.id, group) : undefined"
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
@@ -75,7 +64,7 @@ defineExpose({ el });
 			v-html="isLoading
 				? 'loading...'
 				: `${
-					!abilityKey || abilityKey === 'passive' || (championId === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey.toUpperCase()}] `
+					!computedDescription || abilityKey === 'passive' || (computedDescription.gameAbilityId.id === 'Aphelios' && abilityKey !== 'q' && abilityKey !== 'r') ? '' : `[${abilityKey?.toUpperCase()}] `
 				} ${computedDescription?.name}`"
 		/>
 		<span v-show="!isLoading" :class="{ unknown: abilityKey !== 'passive' && !computedDescription?.cooldown }">

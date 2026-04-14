@@ -390,9 +390,9 @@ const abilityVariableCellValue: IDamageResultTableSection['getCellValue'] = (sec
 		return;
 	}
 
-	const { abilityKey, abilityVariantIndex: abilityVariant } = section.hoverTooltipData as IChampionAbilityHoverTooltipProps;
+	const { gameAbilityId } = (section.hoverTooltipData as IChampionAbilityHoverTooltipProps).precomputedDescription!;
 
-	const computedDescription = source.computed.abilities.value[abilityKey!][abilityVariant!];
+	const computedDescription = source.computed.abilities.value[gameAbilityId.abilityKey!][gameAbilityId.abilityVariantIndex!];
 	if (computedDescription) {
 		const rv: ReturnType<NonNullable<IDamageResultTableSection['getCellValue']>> = {
 			value: '?',
@@ -471,17 +471,13 @@ async function addResultsSection(
 			return;
 		}
 
-		const precomputedDescription = computeAbilityDescription(minorVersion, champion, abilityId.abilityKey, abilityId.abilityVariantIndex, undefined, undefined, { replaceWithName: true });
+		const precomputedDescription = computeAbilityDescription(minorVersion, champion, abilityId, undefined, undefined, { replaceWithName: true });
 
 		section.name ||= championAbilitySectionName(champion.name, abilityId.abilityKey, precomputedDescription.name);
 		section.image = abilityImage(precomputedDescription.variant.image, champion.id, `${sourceProperty.value}s`);
 		section.imageSize = abilityImageSize(champion.id);
 		section.rows = getAbilitySectionRows(precomputedDescription);
 		section.hoverTooltipData = {
-			group: `${sourceProperty.value}s`,
-			championId: champion.id,
-			abilityKey: abilityId.abilityKey,
-			abilityVariantIndex: abilityId.abilityVariantIndex,
 			precomputedDescription,
 		};
 		section.getCellValue = abilityVariableCellValue;

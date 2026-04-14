@@ -80,15 +80,17 @@ export interface IDamageResultTableColumn {
 export interface IChampionAbilityHoverTooltipProps {
 	/** used for target dummy's abilities */
 	group?: 'sources' | 'targets';
-	/** required for tooltip component to work really TODO try to make it make sense */
-	championId?: IChampionId;
-	/** required for tooltip component to work really TODO try to make it make sense */
-	abilityKey?: IChampionAbilityKey;
-	/** required for tooltip component to work really TODO try to make it make sense */
-	abilityVariantIndex?: number;
-	abilityLevel?: number;
 	replaceVariablesWithNames?: boolean;
+	abilityLevel?: number;
+	/** either this or `precomputedDescription` should be provided */
+	gameAbilityId?: IChampionAbilityId;
+	/** either this or `gameAbilityId` should be provided */
 	precomputedDescription?: IComputedAbilityDescription;
+}
+
+export interface IEffectHoverTooltip {
+	abilityKey: IChampionAbilityKey;
+	effectName: keyof TEffectNameToObjectName;
 }
 
 export interface IItemDescriptionProps {
@@ -102,7 +104,7 @@ export interface IItemDescriptionProps {
 	replaceVariablesWithNames?: boolean;
 	/** either this or `item` should be provided */
 	precomputedDescription?: IComputedItemDescription;
-	/** either this or `item` should be provided */
+	/** either this or `precomputedDescription` should be provided */
 	item?: IItem;
 	hoverTooltip?: boolean;
 	source: IItemHoverTooltipView;
