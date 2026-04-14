@@ -796,7 +796,14 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	const effect = props.value.appliedEffects.value[effectIndex]!;
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
 
-	effect.data[0] = Math.max(computedEffect.specific.effectMin ?? 0, Math.min(computedEffect.specific.effectMax ?? 1, effect.data[0] + by));
+	const min = computedEffect.specific.effectMin ?? 0;
+	const max = computedEffect.specific.effectMax ?? 1;
+
+	if (globalKeyModifiers.value.ctrl) {
+		effect.data[0] = by < 0 ? min : max;
+	} else {
+		effect.data[0] = Math.max(min, Math.min(max, effect.data[0] + by));
+	}
 }
 
 onBeforeUnmount(() => {
@@ -1881,7 +1888,7 @@ defineExpose({ el });
 					> li {
 						--at-apply: 'size-[--img-w] rotate-180';
 						direction: ltr;
-						
+
 						> span {
 							--at-apply: 'sr-only';
 						}
