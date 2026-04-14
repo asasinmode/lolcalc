@@ -329,4 +329,5 @@ export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 export const EFFECT_NAME_TO_OBJECTNAME = {
 	amumuPCursedTouch: 'AmumuPDebuff',
 	blackCleaverCarve: '3071BlackCleaverShred',
+	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
 };

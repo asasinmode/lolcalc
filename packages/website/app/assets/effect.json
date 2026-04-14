@@ -2,10 +2,16 @@
 	"version": "16.4.1",
 	"data": {
 		"AmumuPDebuff": {
-			"description": "This unit takes bonus true damage whenever it is hit by magic damage."
+			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
+			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"
 		},
 		"3071BlackCleaverShred": {
-			"description": "This unit's Armor is reduced by a percentage."
+			"description": "This unit's Armor is reduced by a percentage.",
+			"dataKey": "Items/3071/Spells/3071BlackCleaverShred"
+		},
+		"2065ActiveMoveSpeed": {
+			"description": "This unit is moving faster.",
+			"dataKey": "Items/2065/Spells/2065ActiveMoveSpeed"
 		}
 	},
 	"stringtable": {}

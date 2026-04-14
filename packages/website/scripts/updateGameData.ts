@@ -925,7 +925,7 @@ try {
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch {}
 
-if (!effectData || effectData?.version !== latestVersion) {
+if (!effectData || effectData?.version !== latestVersion || Object.keys(EFFECT_SPECIFICS).some(key => !(key in effectData!.data))) {
 	console.log('effect data not present or outdated, fetching...');
 
 	const [itemMoreData] = await Promise.all([
@@ -949,7 +949,13 @@ if (!effectData || effectData?.version !== latestVersion) {
 				throw new Error(`[effectData] no effect data ${effectObjectName}`);
 			}
 
-			const descriptionKey = type === ABILITY_TYPE.champion ? data[1].mBuff?.mTooltipData?.mLocKeys?.keyTooltip : data[1].mBuff.mDescription;
+			let descriptionKey = data[1].mBuff.mDescription;
+			let extractMainText = true;
+
+			if (!descriptionKey) {
+				descriptionKey = data[1].mBuff?.mTooltipData?.mLocKeys?.keyTooltip;
+				extractMainText = false;
+			}
 
 			if (!descriptionKey) {
 				throw new Error(`[effectData] no description key ${effectObjectName}`);
@@ -961,7 +967,7 @@ if (!effectData || effectData?.version !== latestVersion) {
 				throw new Error(`[effectData] no description for key ${descriptionKey} ${effectObjectName}`);
 			}
 
-			if (description && type === ABILITY_TYPE.item) {
+			if (description && extractMainText) {
 				const startIndex = description.indexOf('<mainText>');
 				const endIndex = description.indexOf('</mainText>');
 				if (~startIndex && ~endIndex) {
@@ -969,6 +975,7 @@ if (!effectData || effectData?.version !== latestVersion) {
 				}
 			}
 
+			description &&= description.trim();
 			description && debugStringVariables(description, {
 				category: 'effect',
 				key: `effect-${effectObjectName}-descriptionKey`,
@@ -977,6 +984,7 @@ if (!effectData || effectData?.version !== latestVersion) {
 
 			return [effectObjectName, {
 				description,
+				dataKey: data[0],
 			}];
 		}))) as unknown as NonNullable<(typeof effectData)>['data'],
 		stringtable: effectDataStringtable.stringtable,
