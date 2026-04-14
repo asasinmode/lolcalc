@@ -1087,16 +1087,25 @@ defineExpose({ el });
 					<p v-if="hoveredStat?.bottomText" :data-has-bonus="hoveredStat?.values.some(v => v.bonus) || undefined" v-html="hoveredStat?.bottomText" />
 				</div>
 			</section>
-			<section data-effects="" :inert="isLoading">
+			<section
+				data-effects=""
+				:inert="isLoading"
+				:style="`--effects-number: ${value.computed.effects.value.filter(effect => effect.isActive).length}`"
+			>
 				<h4>effects</h4>
 				<button class="other-ui-btn" @click="selectEffects(value)">
 					effects
 					<img v-bind="textureBgImageAttrs(ui.practiceTool.statusEffect, 24)">
 				</button>
 				<ul>
-					<li v-for="effect in value.computed.effects.value.filter(effect => effect.isActive)" :key="effect.id">
+					<li
+						v-for="effect in value.computed.effects.value.filter(effect => effect.isActive)"
+						:key="effect.id"
+						:aria-busy="!effect.imgSrc"
+					>
 						<button>
 							<img
+								v-show="effect.imgSrc"
 								:src="effect.imgSrc"
 								:width="effect.imgSize"
 								:height="effect.imgSize"
@@ -1346,6 +1355,13 @@ defineExpose({ el });
 		--select-champion-size: calc(var(--spacing) * 14);
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
+
+		--runes-stats-img-w: calc(5 * var(--spacing));
+		--runes-stats-text-w: calc(20 * var(--spacing));
+		--runes-stats-px: calc(0.5 * var(--spacing));
+		--runes-stats-section-w: calc(
+			2 * var(--runes-stats-px) + 2 * (var(--runes-stats-img-w) + var(--runes-stats-text-w)) + 1px /* 1px is border */
+		);
 
 		--ability-size-passive: calc(var(--spacing) * 10);
 		--ability-size: calc(var(--spacing) * 14);
@@ -1665,8 +1681,8 @@ defineExpose({ el });
 				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid';
 
 				> dl {
-					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-btn-border-clr] p-0.5 w-fit row-span-2';
-					grid-template-columns: 1.25rem 5rem 1.25rem 5rem;
+					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-btn-border-clr] py-0.5 px-[--runes-stats-px] w-fit row-span-2';
+					grid-template-columns: repeat(2, var(--runes-stats-img-w) var(--runes-stats-text-w));
 
 					> dt {
 						--at-apply: 'py-0.5 ps-0.5';
@@ -1832,11 +1848,14 @@ defineExpose({ el });
 			}
 
 			> [data-effects] {
-				--at-apply: 'size-full relative flex flex-col items-center';
+				--at-apply: 'size-full relative flex flex-col items-center pb-[--pb]';
+				--gap: calc(0.5 * var(--spacing));
+				--img-w: calc((var(--runes-stats-section-w) - 8 * var(--gap)) / 8);
+				--pb: calc(round(up, var(--effects-number, 0) / 8) * (var(--img-w) + var(--gap)) + var(--gap));
 				grid-area: effects;
 
 				> button {
-					--at-apply: 'mt-auto';
+					--at-apply: 'my-auto hoverable:z-2';
 
 					> img {
 						--at-apply: '-mx-1';
@@ -1844,7 +1863,31 @@ defineExpose({ el });
 				}
 
 				> ul {
-					--at-apply: 'mt-auto w-full';
+					--at-apply: 'grid grid-cols-8 gap-[--gap] absolute bottom-[--gap] inset-x-0 rotate-180';
+					direction: rtl;
+
+					> li {
+						--at-apply: 'size-[--img-w] rotate-180';
+						direction: ltr;
+
+						> button {
+							--at-apply: 'relative b b-[--ui-btn-border-clr] size-full';
+
+							> img {
+								--at-apply: 'size-full';
+							}
+
+							> img + span {
+								--at-apply: 'absolute bottom-0.25 end-0.25 leading-[1] text-xs z-1';
+								-webkit-text-stroke: black 0.2em;
+								paint-order: stroke fill;
+
+								> span {
+									--at-apply: 'sr-only';
+								}
+							}
+						}
+					}
 				}
 			}
 
