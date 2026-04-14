@@ -1,0 +1,12 @@
+{
+	"version": "16.4.1",
+	"data": {
+		"AmumuPDebuff": {
+			"description": "This unit takes bonus true damage whenever it is hit by magic damage."
+		},
+		"3071BlackCleaverShred": {
+			"description": "This unit's Armor is reduced by a percentage."
+		}
+	},
+	"stringtable": {}
+}

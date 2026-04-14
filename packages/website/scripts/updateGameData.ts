@@ -14,9 +14,10 @@ import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps.ts';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
+import { EFFECT_SPECIFICS } from '../app/utils/effect.ts';
 import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
-import { ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '../app/utils/meta.ts';
+import { ABILITY_TYPE, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '../app/utils/meta.ts';
 import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
 
 let latestVersion = process.argv[2];
@@ -50,6 +51,7 @@ const debug = {
 	item: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 	rune: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 	champion: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
+	effect: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 	misc: { variables: new Map(), stringtableVariables: new Map(), tags: [[], new Set()] } as IDebugCategory,
 };
 
@@ -603,20 +605,22 @@ if (!runeData || runeData?.version !== latestVersion || !textData.data.runes) {
 
 					(textData.data.runes.shards.slotValues as any)[perkName] = {
 						name: getStringtableValue(mDisplayNameLocalizationKey, `rune shards ${slotKey} ${perkKey} name`),
-						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `rune shards ${slotKey} ${perkKey} tooltip`, variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] }),
+						tooltip: getStringtableValue(mShortDescLocalizationKey, { category: 'rune', key: `rune shards ${slotKey} ${perkKey} tooltip`, variables: { variableType: 'rune', variableValueParameters: [slotValue], variableSourceKeys: ['effectAmount'] } }),
 						tooltipStats: getStringtableValue(mTooltipNameLocalizationKey, {
 							category: 'rune',
 							key: `rune shards ${slotKey} ${perkKey} tooltip stats`,
-							variableType: 'rune',
-							variableValueParameters: [
-								(RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]?.POSSIBLE_DYNAMIC_VALUES
-									? {
-											...slotValue,
-											dynamicValues: (RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]!.POSSIBLE_DYNAMIC_VALUES,
-										}
-									: slotValue,
-							],
-							variableSourceKeys: ['effectAmount'],
+							variables: {
+								variableType: 'rune',
+								variableValueParameters: [
+									(RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]?.POSSIBLE_DYNAMIC_VALUES
+										? {
+												...slotValue,
+												dynamicValues: (RUNE_SPECIFICS.shards as Record<string, IRuneSpecific>)[perkName]!.POSSIBLE_DYNAMIC_VALUES,
+											}
+										: slotValue,
+								],
+								variableSourceKeys: ['effectAmount'],
+							},
 						}),
 					};
 
@@ -712,16 +716,20 @@ if (!miscData || miscData?.version !== latestVersion) {
 		let stack = getStringtableValue(stackDescriptionKey, {
 			category: 'misc',
 			key: `dragon stack ${name}`,
-			variableSourceKeys: ['DataValues'],
-			variableType: 'championAbility',
-			variableValueParameters: [stackAbility, undefined, allSpells],
+			variables: {
+				variableSourceKeys: ['DataValues'],
+				variableType: 'championAbility',
+				variableValueParameters: [stackAbility, undefined, allSpells],
+			},
 		});
 		const soul = getStringtableValue(soulTooltipKey, {
 			category: 'misc',
 			key: `dragon soul ${name}`,
-			variableSourceKeys: ['DataValues'],
-			variableType: 'championAbility',
-			variableValueParameters: [soulAbility, undefined, allSpells],
+			variables: {
+				variableSourceKeys: ['DataValues'],
+				variableType: 'championAbility',
+				variableValueParameters: [soulAbility, undefined, allSpells],
+			},
 		});
 
 		if (!stack) {
@@ -909,6 +917,74 @@ if (!uiData || uiData?.version !== latestVersion) {
 	await fs.writeFile(uiFilePath, stringifyObject(uiData));
 }
 
+const effectFilePath = `${import.meta.dirname}/../app/assets/effect.json`;
+let effectData: typeof import('../app/assets/effect.json') | undefined;
+
+try {
+	await fs.access(effectFilePath);
+	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
+} catch {}
+
+if (!effectData || effectData?.version !== latestVersion) {
+	console.log('effect data not present or outdated, fetching...');
+
+	const [itemMoreData] = await Promise.all([
+		fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/items.cdtb.bin.json`, 'game/items.cdtb.bin.json'),
+		loadStringTable(),
+	]);
+
+	const effectDataStringtable = { stringtable: {} };
+
+	effectData = {
+		version: latestVersion,
+		data: Object.fromEntries(await Promise.all(Object.entries(EFFECT_SPECIFICS).map(async ([effectObjectName, effectSpecific]) => {
+			const { id, type } = effectSpecific.gameAbilityId;
+			const dataSource = type === ABILITY_TYPE.champion
+				? await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`)
+				: itemMoreData;
+
+			const data = Object.entries(dataSource).find(([, abilityObject]) => (abilityObject as any).ObjectName === effectObjectName) as [string, any] | undefined;
+
+			if (!data) {
+				throw new Error(`[effectData] no effect data ${effectObjectName}`);
+			}
+
+			const descriptionKey = type === ABILITY_TYPE.champion ? data[1].mBuff?.mTooltipData?.mLocKeys?.keyTooltip : data[1].mBuff.mDescription;
+
+			if (!descriptionKey) {
+				throw new Error(`[effectData] no description key ${effectObjectName}`);
+			}
+
+			let description = getStringtableValue(descriptionKey, `effectData`);
+
+			if (!description) {
+				throw new Error(`[effectData] no description for key ${descriptionKey} ${effectObjectName}`);
+			}
+
+			if (description && type === ABILITY_TYPE.item) {
+				const startIndex = description.indexOf('<mainText>');
+				const endIndex = description.indexOf('</mainText>');
+				if (~startIndex && ~endIndex) {
+					description = description.slice(startIndex + 10, endIndex);
+				}
+			}
+
+			description && debugStringVariables(description, {
+				category: 'effect',
+				key: `effect-${effectObjectName}-descriptionKey`,
+				stringtableVariableSaveUnder: effectDataStringtable,
+			});
+
+			return [effectObjectName, {
+				description,
+			}];
+		}))) as unknown as NonNullable<(typeof effectData)>['data'],
+		stringtable: effectDataStringtable.stringtable,
+	};
+
+	await fs.writeFile(effectFilePath, stringifyObject(effectData));
+}
+
 for (const category in debug) {
 	const { variables, stringtableVariables, tags } = debug[category as keyof typeof debug];
 	if (variables.size) {
@@ -1008,10 +1084,12 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 
 	const variableDebug = {
 		category: 'item',
-		variableSourceKeys: [],
-		variableType: 'item',
-		/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
-		variableValueParameters: [{ ...item, dynamicValues: { lolcalcChampRange: [1, 2] } } as IItem],
+		variables: {
+			variableSourceKeys: [],
+			variableType: 'item',
+			/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
+			variableValueParameters: [{ ...item, dynamicValues: { lolcalcChampRange: [1, 2] } } as IItem],
+		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
 	const combinedDescriptions = tooltipShop?.flatMap(tooltip => tooltip).concat(tooltipInventory?.flatMap(tooltip => tooltip) || []).join(' ');
@@ -1079,7 +1157,14 @@ function createRuneSlotData(dataKey: string, data: any) {
 		effectAmount: cleanupObject(mSpellScriptData.mEffectAmount),
 	};
 
-	const variableDebug = { category: 'rune' as const, variableType: 'rune', variableValueParameters: [value], variableSourceKeys: ['calculations', 'effectAmount'] } satisfies Omit<IStringtableVariableDebug, 'key'>;
+	const variableDebug = {
+		category: 'rune' as const,
+		variables: {
+			variableType: 'rune',
+			variableValueParameters: [value],
+			variableSourceKeys: ['calculations', 'effectAmount'],
+		},
+	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
 	(textData.data.runes.slots as any)[mPerkName] = {
 		name: getStringtableValue(mDisplayNameLocalizationKey, 'rune slot'),
@@ -1115,12 +1200,14 @@ interface IBaseStringtableVariableDebug<T extends IGameVariableType, P extends I
 	category: keyof typeof debug;
 	/** identifier of the variable, like rune-X-tooltipShort */
 	key: string;
-	/** type of the game variable being resolved */
-	variableType: T;
-	/** parameters of the function used for resolving game variables */
-	variableValueParameters: P;
-	/** the keys under which variables can be found on the target of the replacement. They will be used to replace recognized variables with their resolved names if they are hashed */
-	variableSourceKeys: string[];
+	variables?: {
+		/** type of the game variable being resolved */
+		variableType: T;
+		/** parameters of the function used for resolving game variables */
+		variableValueParameters: P;
+		/** the keys under which variables can be found on the target of the replacement. They will be used to replace recognized variables with their resolved names if they are hashed */
+		variableSourceKeys: string[];
+	};
 	/** the object under which to save the stringtable variables. `textData` by default */
 	stringtableVariableSaveUnder?: { stringtable?: Record<string, string> };
 }
@@ -1137,9 +1224,9 @@ function getStringtableValue(path: string, variableDebug: string | IStringtableV
 }
 
 function debugStringVariables(value: string, variableDebug: IStringtableVariableDebug) {
-	const { category, key, stringtableVariableSaveUnder, variableType, variableValueParameters, variableSourceKeys } = variableDebug;
+	const { category, key, stringtableVariableSaveUnder, variables } = variableDebug;
 
-	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, (variableValueParameters[0] as any)?.dynamicValues, false);
+	const { replaced: stringtableReplaced, stringtableVariables, unknownStringtableVariables } = replaceGameDescriptionStringtableVariables(value, stringtable, (variables?.variableValueParameters[0] as any)?.dynamicValues, false);
 
 	if (stringtableVariables.size && stringtableVariableSaveUnder) {
 		stringtableVariableSaveUnder.stringtable ||= {};
@@ -1158,44 +1245,48 @@ function debugStringVariables(value: string, variableDebug: IStringtableVariable
 		debug[category].stringtableVariables.set(key, unknownStringtableVariables);
 	}
 
-	const variableSource = variableValueParameters[0];
+	if (variables) {
+		const { variableType, variableValueParameters, variableSourceKeys } = variables;
+		const variableSource = variableValueParameters[0];
 
-	const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
+		const { unknownVariables } = replaceGameDescriptionVariables(stringtableReplaced, variableType as any, variableValueParameters as any);
 
-	outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
-		const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
-		const hash = hashRuneVariable(variableName);
-		for (const sourceKey of variableSourceKeys as (keyof typeof variableSource)[]) {
-			let rename: [from: string, to: string] | undefined;
+		outer: for (let i = unknownVariables.length - 1; i >= 0; i--) {
+			const variableName = unknownVariables[i]![1] || unknownVariables[i]![0];
+			const hash = hashRuneVariable(variableName);
+			for (const sourceKey of variableSourceKeys as (keyof typeof variableSource)[]) {
+				let rename: [from: string, to: string] | undefined;
 
-			if (variableSource[sourceKey]?.[hash]) {
-				rename = [hash, variableName];
-			}
+				if (variableSource[sourceKey]?.[hash]) {
+					rename = [hash, variableName];
+				}
 
-			// TODO not sure if legal for variables other than the rune ones, they might be case sensitive
-			if (!rename) {
-				const lowercaseKeys = Object.keys(variableSource[sourceKey] || {});
-				for (const key of lowercaseKeys) {
-					if (variableName !== key && variableName.toLowerCase() === key.toLowerCase()) {
-						rename = [key, variableName];
+				// TODO not sure if legal for variables other than the rune ones, they might be case sensitive
+				if (!rename) {
+					const lowercaseKeys = Object.keys(variableSource[sourceKey] || {});
+					for (const key of lowercaseKeys) {
+						if (variableName !== key && variableName.toLowerCase() === key.toLowerCase()) {
+							rename = [key, variableName];
+						}
 					}
 				}
-			}
 
-			if (rename) {
-				const [from, to] = rename;
-				variableSource[sourceKey][to] = variableSource[sourceKey][from];
-				variableSource[sourceKey].__renamedVariables ||= {};
-				variableSource[sourceKey].__renamedVariables[from] = to;
-				variableSource[sourceKey][from] = undefined;
-				unknownVariables.splice(i, 1);
-				continue outer;
+				if (rename) {
+					const [from, to] = rename;
+					variableSource[sourceKey][to] = variableSource[sourceKey][from];
+					variableSource[sourceKey].__renamedVariables ||= {};
+					variableSource[sourceKey].__renamedVariables[from] = to;
+					variableSource[sourceKey][from] = undefined;
+					unknownVariables.splice(i, 1);
+					continue outer;
+				}
 			}
 		}
+		if (unknownVariables.length) {
+			debug[category].variables.set(key, unknownVariables.map(v => v[0]));
+		}
 	}
-	if (unknownVariables.length) {
-		debug[category].variables.set(key, unknownVariables.map(v => v[0]));
-	}
+
 	const unknownTags = getUnknownTags(value);
 	if (unknownTags.size) {
 		debug[category].tags[0].push(key);
@@ -1489,15 +1580,17 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			const debugPrefix = `${champion.id} ${abilityName}[${i}]`;
 			const variableDebug = {
 				category: 'champion',
-				variableType: 'championAbility',
-				variableValueParameters: [{
-					...variant,
-					dynamicValues: {
-						...variant.dataValues,
-						...possibleChampionDynamicVariableValues((CHAMPION_SPECIFICS as Record<string, IChampionSpecific>)[champion.id], abilityName),
-					},
-				}, undefined, allVariants],
-				variableSourceKeys: ['effectAmount'],
+				variables: {
+					variableType: 'championAbility',
+					variableValueParameters: [{
+						...variant,
+						dynamicValues: {
+							...variant.dataValues,
+							...possibleChampionDynamicVariableValues((CHAMPION_SPECIFICS as Record<string, IChampionSpecific>)[champion.id], abilityName),
+						},
+					}, undefined, allVariants],
+					variableSourceKeys: ['effectAmount'],
+				},
 				stringtableVariableSaveUnder: champion,
 			} satisfies Omit<IStringtableVariableDebug, 'key'>;
 

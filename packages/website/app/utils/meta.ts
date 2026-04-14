@@ -325,3 +325,8 @@ export const ITEM_SHOP_STAT_FILTERS = {
 } satisfies Record<string, { name: string; filter: (item: IItem) => boolean }>;
 
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
+
+export const EFFECT_NAME_TO_OBJECTNAME = {
+	amumuPCursedTouch: 'AmumuPDebuff',
+	blackCleaverCarve: '3071BlackCleaverShred',
+};

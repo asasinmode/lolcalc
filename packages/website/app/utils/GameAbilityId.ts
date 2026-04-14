@@ -1,4 +1,5 @@
 import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from './types';
+import { markRaw } from 'vue';
 
 export class GameAbilityId {
 	static build<
