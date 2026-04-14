@@ -154,6 +154,7 @@ export type IProviderGroupEffect = {
 	effectLabel?: never;
 	effectMin?: never;
 	effectMax?: never;
+	effectImageText?: never;
 	setupEffectData?: never;
 	isEffectActive?: never;
 } | IDamageSourceEffectProvider;

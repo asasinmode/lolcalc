@@ -30,7 +30,6 @@ const value = defineModel<number>({ required: true });
 			aria-hidden="true"
 			@mouseenter="$emit('imgMouseenter', $event)"
 		>
-		<span v-if="imgText" aria-hidden="true">{{ imgText }}</span>
 		<label :for="`venmbr-${idPrefix}`">
 			{{ label }}
 		</label>

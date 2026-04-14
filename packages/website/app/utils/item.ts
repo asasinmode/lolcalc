@@ -195,6 +195,9 @@ export const ITEM_SPECIFICS = {
 		},
 		effectLabel: 'Carve stacks',
 		effectMax: 5,
+		effectImageText(data: [carve: number]) {
+			return data[0];
+		},
 		setupEffectData(data): [carve: number] {
 			return [
 				Math.max(0, Math.min(5, data?.[0] ?? 0)),

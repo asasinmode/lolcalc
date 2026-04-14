@@ -786,6 +786,19 @@ const hoveredDragonThingText = computed(() => {
 	};
 });
 
+const activeEffects = computed<[IComputedAppliedEffect, number][]>(() =>
+	props.value.computed.effects.value
+		.map((effect, index) => [effect, index] as unknown as [IComputedAppliedEffect, number])
+		.filter(([effect]) => effect.isActive),
+);
+
+function modifyEffectValue(effectIndex: number, by: 1 | -1) {
+	const effect = props.value.appliedEffects.value[effectIndex]!;
+	const computedEffect = props.value.computed.effects.value[effectIndex]!;
+
+	effect.data[0] = Math.max(computedEffect.specific.effectMin ?? 0, Math.min(computedEffect.specific.effectMax ?? 1, effect.data[0] + by));
+}
+
 onBeforeUnmount(() => {
 	healthBarCleanup();
 	abilityResourceBarCleanup();
@@ -1099,11 +1112,11 @@ defineExpose({ el });
 				</button>
 				<ul>
 					<li
-						v-for="effect in value.computed.effects.value.filter(effect => effect.isActive)"
+						v-for="[effect, effectIndex] in activeEffects"
 						:key="effect.id"
-						:aria-busy="!effect.imgSrc"
 					>
-						<button>
+						<span>{{ effect.specific.effectLabel }}</span>
+						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)">
 							<img
 								v-show="effect.imgSrc"
 								:src="effect.imgSrc"
@@ -1111,8 +1124,7 @@ defineExpose({ el });
 								:height="effect.imgSize"
 								loading="lazy"
 							>
-							<span v-show="effect.imgText">
-								<span>{{ effect.imgTextLabel }}</span>
+							<span v-if="effect.specific.effectImageText" v-show="effect.imgText">
 								{{ effect.imgText }}
 							</span>
 						</button>
@@ -1869,6 +1881,10 @@ defineExpose({ el });
 					> li {
 						--at-apply: 'size-[--img-w] rotate-180';
 						direction: ltr;
+						
+						> span {
+							--at-apply: 'sr-only';
+						}
 
 						> button {
 							--at-apply: 'relative b b-[--ui-btn-border-clr] size-full';
@@ -1881,10 +1897,6 @@ defineExpose({ el });
 								--at-apply: 'absolute bottom-0.25 end-0.25 leading-[1] text-xs z-1';
 								-webkit-text-stroke: black 0.2em;
 								paint-order: stroke fill;
-
-								> span {
-									--at-apply: 'sr-only';
-								}
 							}
 						}
 					}
@@ -2256,12 +2268,6 @@ defineExpose({ el });
 
 			> img {
 				--at-apply: 'row-span-full b b-[--ui-btn-border-clr] size-[--ability-size] my-[--p] me-[--p] self-center';
-			}
-
-			> img + span {
-				--at-apply: 'text-sm z-1 text-white leading-[1.1] absolute top-1/2 start-[calc(var(--p)+var(--ability-size)-var(--spacing))] -translate-x-full translate-y-[calc(0.5*var(--ability-size)-100%-0.5*var(--spacing))] pointer-events-none';
-				paint-order: stroke fill;
-				-webkit-text-stroke: 0.15em black;
 			}
 
 			> label + button {

@@ -35,6 +35,7 @@ export interface IDamageSourceEffectProvider {
 	setupEffectData: (data?: IDamageSourceEffect['data']) => IDamageSourceEffect['data'];
 	/** checks if effect's data is not the default value */
 	isEffectActive: (data: any) => number | boolean;
+	effectImageText?: (data: any) => number | string;
 	/** @default 0 */
 	effectMin?: number;
 	/** @default 1 */
@@ -1360,24 +1361,22 @@ export function resolveEffectSpecific(abilityId: IGameAbilityId, warnPrefix?: st
 	return undefined;
 }
 
-interface IComputedAppliedEffect {
+export interface IComputedAppliedEffect {
 	id: string;
 	imgSrc: string;
 	imgSize: number;
-	imgTextLabel?: string;
 	imgText: ComputedRef<ReturnType<IAbilityImageTextProvider['itemImageText']> | undefined>;
 	isActive: ComputedRef<ReturnType<IDamageSourceEffectProvider['isEffectActive']>>;
 	specific: IDamageSourceEffectProvider;
 }
 
-function computeAppliedEffect(self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
+function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
 	const specific = resolveEffectSpecific(effect.abilityId, 'computedAppliedEffects')!;
 	const rv: IComputedAppliedEffect = {
 		id: effect.id,
 		imgSrc: '',
 		imgSize: 0,
-		imgTextLabel: (specific as IProviderGroupImageText)?.itemImageTextLabel,
-		imgText: computed(() => (specific as IProviderGroupImageText)?.itemImageText?.(self, effect.abilityId, 0)),
+		imgText: computed(() => specific.effectImageText?.(effect.data)),
 		isActive: computed(() => effect.isActive(effect.data)),
 		specific,
 	};
