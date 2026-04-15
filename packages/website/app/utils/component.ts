@@ -1,4 +1,4 @@
-import type { IChampionAbilityId, IExtraComponentEmits, IExtraComponentProps, IGameAbilityId, IProviderGroupImageText } from '~/utils/types';
+import type { IChampionAbilityId, IEffectAbilityId, IExtraComponentEmits, IExtraComponentProps, IGameAbilityId, IProviderGroupImageText } from '~/utils/types';
 import { VExtrasBoolean, VExtrasNumber } from '#components';
 
 // eslint-disable-next-line ts/consistent-type-definitions
@@ -6,46 +6,46 @@ type IDefineExtraComponentEmits = {
 	imgMouseenter: (...args: IExtraComponentEmits['imgMouseenter']) => void;
 };
 
+// for getting specific ability's specific, maybe will be useful
+// ? T['id'] extends keyof TChampionSpecifics
+// 	? T['abilityKey'] extends keyof TChampionSpecifics[T['id']]
+// 		? T['abilityVariantIndex'] extends keyof TChampionSpecifics[T['id']][T['abilityKey']]
+// 			? TChampionSpecifics[T['id']][T['abilityKey']][T['abilityVariantIndex']]
+// 			: never
+// 		: never
+// 	: never
+
 export type IGameAbilitySpecific<T extends IGameAbilityId> = T extends IChampionAbilityId
 	? T['id'] extends keyof TChampionSpecifics
-		? T['dataSource'] extends 'internal'
-			? TChampionSpecifics[T['id']]
-			: T['abilityKey'] extends keyof TChampionSpecifics[T['id']]
-				? T['abilityVariantIndex'] extends keyof TChampionSpecifics[T['id']][T['abilityKey']]
-					? TChampionSpecifics[T['id']][T['abilityKey']][T['abilityVariantIndex']]
-					: never
-				: never
+		? TChampionSpecifics[T['id']]
 		: never
-	: T['id'] extends keyof TItemSpecifics ? TItemSpecifics[T['id']] : never;
+	: T extends IEffectAbilityId
+		? T['id'] extends keyof TEffectSpecifics
+			? TEffectSpecifics[T['id']]
+			: never
+		: T['id'] extends keyof TItemSpecifics
+			? TItemSpecifics[T['id']]
+			: never;
 
-export type IGameAbilityInternalData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>
-	= Specific extends { setupInternalData: (...args: any) => any }
-		? ReturnType<Specific['setupInternalData']>
-		: never;
-
-export type IGameAbilityEffectData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>
-	= Specific extends { setupEffectData: (...args: any) => any }
-		? ReturnType<Specific['setupEffectData']>
+export type IGameAbilityData<T extends IGameAbilityId, Specific = IGameAbilitySpecific<T>>
+	= Specific extends { setupData: (...args: any) => any }
+		? ReturnType<Specific['setupData']>
 		: never;
 
 type TupleKeys<T extends readonly unknown[]> = Exclude<keyof T, keyof any[]>;
 type TupleIndexes<T extends readonly unknown[]> = TupleKeys<T> extends `${infer N extends number}` ? N : never;
+type DataKeys<T> = T extends any[] ? TupleIndexes<T> : keyof T;
 
 export async function numberExtra<T extends IGameAbilityId>(
 	abilityId: T,
-	property: T['dataSource'] extends 'internal'
-		? keyof IGameAbilityInternalData<T>
-		: TupleIndexes<IGameAbilityEffectData<T>>,
+	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	min?: number,
 	max?: number,
 	step?: number,
 ) {
-	const isEffect = abilityId.dataSource === 'effects';
-	const isSpecificExpected = abilityId.type !== ABILITY_TYPE.champion && abilityId.dataSource !== 'internal';
-
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
-		const specific = resolveAbilitySpecific(abilityId, isSpecificExpected ? 'numberExtra' : undefined);
+		const specific = resolveAbilitySpecific(abilityId, 'numberExtra');
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, isEffect, property, props.damageSource);
 
@@ -109,24 +109,33 @@ export async function booleanExtra<T extends IGameAbilityId>(
 export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src: string, size: number]> {
 	const { version } = usePatchVersion();
 
-	if (abilityId.type === ABILITY_TYPE.item) {
+	const imageAbilityId = abilityId.type === ABILITY_TYPE.effect
+		? EFFECT_SPECIFICS[abilityId.id].sourceAbility
+		: abilityId;
+
+	if (!imageAbilityId) {
+		console.warn('[gameAbilityId] failed to resolve imageAbilityId for', abilityId);
+		return ['', 0];
+	}
+
+	if (imageAbilityId.type === ABILITY_TYPE.item) {
 		return [
-			`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`,
+			`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${imageAbilityId.id}.png`,
 			64,
 		];
 	}
 
 	const { abilityImage, abilityImageSize } = useChampionImages();
 
-	const champion = await useChampion(abilityId.id);
+	const champion = await useChampion(imageAbilityId.id);
 
 	return [
-		abilityImage(champion.abilities[abilityId.abilityKey].variants[abilityId.abilityVariantIndex]!.image, abilityId.id),
-		abilityImageSize(abilityId.id),
+		abilityImage(champion.abilities[imageAbilityId.abilityKey].variants[imageAbilityId.abilityVariantIndex]!.image, imageAbilityId.id),
+		abilityImageSize(imageAbilityId.id),
 	];
 }
 
-function extraAppliedEffect(abilityId: IGameAbilityId, isEffect: boolean, property: PropertyKey, damageSource: DamageSource): [
+function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, damageSource: DamageSource): [
 	stringifiedAbilityId: string,
 	value: ComputedRef<any>,
 	updateValue: (value: any) => void,

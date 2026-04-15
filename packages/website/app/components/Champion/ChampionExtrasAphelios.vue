@@ -24,7 +24,7 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 			:width="imgSize"
 			:height="imgSize"
 			aria-hidden="true"
-			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(ABILITY_TYPE.champion, 'internal', 'Aphelios', 'passive', 0))"
+			@mouseenter="$emit('imgMouseenter', $event, GameAbilityId.build(ABILITY_TYPE.champion, 'Aphelios', 'passive', 0))"
 		>
 		<h5>"ability" levels</h5>
 		<VButtonRadiogroup

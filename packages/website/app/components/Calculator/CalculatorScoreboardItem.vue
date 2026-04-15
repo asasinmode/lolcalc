@@ -204,7 +204,7 @@ const championExtra = computed<[Component, IGameAbilityId] | undefined>((): [Com
 	if (props.value.champion.value) {
 		const component = CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras;
 		if (component) {
-			return [markRaw(component), GameAbilityId.build(ABILITY_TYPE.champion, 'internal', props.value.champion.value.id, 'passive', props.value.abilityVariantsIndexes.value.passive)];
+			return [markRaw(component), GameAbilityId.build(ABILITY_TYPE.champion, props.value.champion.value.id, 'passive', props.value.abilityVariantsIndexes.value.passive)];
 		}
 	}
 	return undefined;
@@ -1349,7 +1349,7 @@ defineExpose({ el });
 					:key="`${itemId}-${extraIndex}`"
 					:id-prefix
 					:damage-source="value"
-					:ability-id="GameAbilityId.build(ABILITY_TYPE.item, 'internal', itemId)"
+					:ability-id="GameAbilityId.build(ABILITY_TYPE.item, itemId)"
 					@img-mouseenter="(mouseEvent: IShowTooltipEventArgs[0]) => showItemHoverTooltip(mouseEvent, itemIndex, true)"
 				/>
 			</section>

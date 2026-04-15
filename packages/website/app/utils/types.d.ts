@@ -88,9 +88,8 @@ export interface IChampionAbilityHoverTooltipProps {
 	precomputedDescription?: IComputedAbilityDescription;
 }
 
-export interface IEffectHoverTooltip {
-	abilityKey: IChampionAbilityKey;
-	effectName: keyof TEffectNameToObjectName;
+export interface IEffectHoverTooltipProps {
+	effectName: IEffectObjectName;
 }
 
 export interface IItemDescriptionProps {
@@ -132,39 +131,36 @@ export interface ISpecificComponents {
 
 export interface IChampionAbilityId<
 	Id extends IChampionId = IChampionId,
-	Source extends TAbilityDataSource = TAbilityDataSource,
 	AbilityKey extends IChampionAbilityKey = IChampionAbilityKey,
 	AbilityVariantIndex extends number = number,
 > {
 	type: typeof ABILITY_TYPE['champion'];
 	id: Id;
-	dataSource: Source;
 	abilityKey: AbilityKey;
 	abilityVariantIndex: AbilityVariantIndex;
 }
 
-export interface IItemAbilityId<Id extends string = string, Source extends TAbilityDataSource = TAbilityDataSource> {
+export interface IItemAbilityId<Id extends string = string> {
 	type: typeof ABILITY_TYPE['item'];
 	/** item id */
 	id: Id;
-	dataSource: Source;
 }
 
-export type IGameAbilityId = IChampionAbilityId | IItemAbilityId;
+export interface IEffectAbilityId<Id extends IEffectObjectName = IEffectObjectName> {
+	type: typeof ABILITY_TYPE['effect'];
+	id: Id;
+}
+
+export type IGameAbilityId = IChampionAbilityId | IItemAbilityId | IEffectAbilityId;
 
 export type IProviderGroupEffect = {
-	effectLabel?: never;
-	effectMin?: never;
-	effectMax?: never;
-	effectImageText?: never;
-	setupEffectData?: never;
-	isEffectActive?: never;
+	effectObjectName?: never;
 } | IDamageSourceEffectProvider;
 
-export type IProviderGroupInternalData = { setupInternalData?: never } | IDamageSourceInternalDataProvider;
+export type IProviderGroupDataSetup = { setupData?: never } | IDamageSourceInternalDataProvider;
 
 export type IProviderGroupInternalItemData = {
-	setupInternalData?: never;
+	setupData?: never;
 	internalDataProperties?: never;
 } | IDamageSourceInternalItemDataProvider;
 

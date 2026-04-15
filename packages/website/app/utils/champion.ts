@@ -1,4 +1,4 @@
-import type { IPossibleDynamicValues, IProviderGroupEffect, IProviderGroupImageText, IProviderGroupInternalData } from './types';
+import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
 	return haste / (haste + 100) * 100;
@@ -12,22 +12,10 @@ export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' |
  */
 export const CHAMPION_SPECIFICS = {
 	Amumu: {
-		setupInternalData(self): { applyPassive: number } {
+		setupData(self): { applyPassive: number } {
 			return {
 				applyPassive: Math.max(0, Math.min(1, self.internalData.value.applyPassive ?? 0)),
 			};
-		},
-		passive: {
-			0: {
-				effectName: 'amumuPCursedTouch',
-				effectLabel: 'Cursed touch',
-				setupEffectData(data): [cursedTouch: number] {
-					return [Math.min(0, Math.max(1, data?.[0] ?? 0))];
-				},
-				isEffectActive(data) {
-					return (data as [cursedTouch: number])[0];
-				},
-			},
 		},
 	},
 	Aphelios: {
@@ -44,7 +32,7 @@ export const CHAMPION_SPECIFICS = {
 			/* array of 12, 13, ..., 21, 23, ..., 53, 53 - no 2 repeated numbers like 11, 22 */
 			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
 		},
-		setupInternalData(self): IDamageSourceInternalDataBase & {
+		setupData(self): IDamageSourceInternalDataBase & {
 			mainHand: IApheliosWeapon;
 			offHand: IApheliosWeapon;
 		} {
@@ -71,19 +59,18 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Veigar: {
-		setupInternalData(self): { passiveStacks: number } {
+		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
 			};
 		},
 	},
-} satisfies Partial<{
-	[Id in IChampionId]: IChampionSpecific
-}>;
+} satisfies IHypotheticalChampionSpecifics;
 
 export type TChampionSpecifics = typeof CHAMPION_SPECIFICS;
+export type IHypotheticalChampionSpecifics = Partial<Record<IChampionId, IChampionSpecific>>;
 
-export type IChampionSpecific = IProviderGroupInternalData & {
+export type IChampionSpecific = IProviderGroupDataSetup & {
 	[AbilityKey in IChampionAbilityKey]?: IChampionAbilitySpecific;
 } & {
 	/** champion's possible dynamic values, can be overriden per ability and ability variant */
@@ -101,7 +88,7 @@ export interface IChampionAbilitySpecific {
 	[key: number]: IChampionAbilityVariantSpecific;
 }
 
-export type IChampionAbilityVariantSpecific = IProviderGroupEffect & IProviderGroupImageText & {
+export type IChampionAbilityVariantSpecific = IProviderGroupImageText & {
 	// TODO unused at the moment, possibly no need for it and just the one on ability level is fine
 	// if used, `updateGameData` script should also merge it in `possibleChampionDynamicVariableValues`
 	POSSIBLE_DYNAMIC_VALUES?: IPossibleDynamicValues;

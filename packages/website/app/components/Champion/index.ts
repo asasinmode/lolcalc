@@ -3,13 +3,13 @@ import { ChampionExtrasAphelios } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	Amumu: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'internal', 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch', true),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch', true),
 	},
 	Aphelios: {
 		extras: ChampionExtrasAphelios,
 	},
 	Veigar: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'internal', 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
 	},
 };
 
@@ -21,7 +21,7 @@ for (const [championId, championSpecific] of Object.entries(CHAMPION_SPECIFICS) 
 				if ('setupEffectData' in variantSpecific) {
 					const abilityVariantIndex = Number(rawVariantIndex);
 
-					const abilityId = GameAbilityId.build(ABILITY_TYPE.champion, 'effects', championId, abilityKey, abilityVariantIndex);
+					const abilityId = GameAbilityId.build(ABILITY_TYPE.champion, championId, abilityKey, abilityVariantIndex);
 					const { effectMin, effectMax, effectLabel } = variantSpecific as IDamageSourceEffectProvider;
 
 					CHAMPION_COMPONENTS[championId] ??= {};

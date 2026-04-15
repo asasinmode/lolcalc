@@ -1,11 +1,11 @@
-import type { IProviderGroupEffect, IProviderGroupImageText, IProviderGroupInternalItemData, IShopItem } from './types';
+import type { IProviderGroupImageText, IProviderGroupInternalItemData, IShopItem } from './types';
 import itemsData from '../assets/item.json';
 
 const { data: items } = itemsData;
 
 const tearItemSpecifics = {
 	internalDataProperties: ['manaflow'],
-	setupInternalData(self: DamageSource) {
+	setupData(self: DamageSource) {
 		self.internalItemData.value.manaflow = Math.max(0, Math.min(360, self.internalItemData.value.manaflow ?? 0));
 		return { manaflow: 0 };
 	},
@@ -18,7 +18,7 @@ const tearItemSpecifics = {
 export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hubris]: {
 		internalDataProperties: ['eminence'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.eminence = Math.max(0, self.internalItemData.value.eminence ?? 0);
 			return { eminence: 0 };
 		},
@@ -30,7 +30,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.darkSeal]: {
 		internalDataProperties: ['glory'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.glory = Math.max(0, Math.min(10, self.internalItemData.value.glory ?? 0));
 			return { glory: 0 };
 		},
@@ -41,7 +41,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.mejai]: {
 		internalDataProperties: ['glory'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.glory = Math.max(0, Math.min(25, self.internalItemData.value.glory ?? 0));
 			return { glory: 0 };
 		},
@@ -52,7 +52,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
 		internalDataProperties: ['madness'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
 			return { madness: 0 };
 		},
@@ -64,7 +64,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.roa]: {
 		internalDataProperties: ['eternity'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.eternity = Math.max(0, Math.min(10, self.internalItemData.value.eternity ?? 0));
 			return { eternity: 0 };
 		},
@@ -75,7 +75,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.blackfireTorch]: {
 		internalDataProperties: ['bBlaze'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.bBlaze = Math.max(0, self.internalItemData.value.bBlaze ?? 0);
 			return { bBlaze: 0 };
 		},
@@ -87,7 +87,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.heartsteel]: {
 		internalDataProperties: ['cConsumption'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.cConsumption = Math.max(0, self.internalItemData.value.cConsumption ?? 0);
 			return { cConsumption: 0 };
 		},
@@ -98,7 +98,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		internalDataProperties: ['seething'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.seething = Math.max(0, Math.min(4, self.internalItemData.value.seething ?? 0));
 			return { seething: 0 };
 		},
@@ -109,7 +109,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.terminus]: {
 		internalDataProperties: ['jxtpL', 'jxtpD'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.jxtpL = Math.max(0, Math.min(3, self.internalItemData.value.jxtpL ?? 0));
 			self.internalItemData.value.jxtpD = Math.max(0, Math.min(3, self.internalItemData.value.jxtpD ?? 0));
 			return { jxtpL: 0, jxtpD: 0 };
@@ -122,7 +122,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.liandry]: {
 		internalDataProperties: ['madness'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
 			return { madness: 0 };
 		},
@@ -134,7 +134,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		internalDataProperties: ['practice'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.practice = Math.max(0, Math.min(25, self.internalItemData.value.practice ?? 0));
 			return { practice: 0 };
 		},
@@ -146,7 +146,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.shojin]: {
 		internalDataProperties: ['fWill'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.fWill = Math.max(0, Math.min(4, self.internalItemData.value.fWill ?? 0));
 			return { fWill: 0 };
 		},
@@ -158,7 +158,7 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.riftmaker]: {
 		internalDataProperties: ['corruption'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.corruption = Math.max(0, Math.min(4, self.internalItemData.value.corruption ?? 0));
 			return { corruption: 0 };
 		},
@@ -175,7 +175,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.wintersApproach]: tearItemSpecifics,
 	[ITEM_NAME_TO_ID.trinity]: {
 		internalDataProperties: ['quicken'],
-		setupInternalData(self) {
+		setupData(self) {
 			self.internalItemData.value.quicken = Math.max(0, Math.min(1, self.internalItemData.value.quicken ?? 0));
 			return { quicken: 0 };
 		},
@@ -185,53 +185,28 @@ export const ITEM_SPECIFICS = {
 	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
 		internalDataProperties: ['carve', 'fervor'],
-		setupInternalData(self) {
-			self.internalItemData.value.carve = Math.max(0, Math.min(5, self.internalItemData.value.carve ?? 0));
+		setupData(self) {
+			self.internalItemData.value.carve = Math.max(0, Math.min(
+				EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue,
+				self.internalItemData.value.carve ?? 0,
+			));
 			self.internalItemData.value.fervor = Math.max(0, Math.min(1, self.internalItemData.value.carve ?? 0));
 			return { carve: 0, fervor: 0 };
 		},
 		isItemImageActive(internalData: { fervor: number }) {
 			return internalData.fervor;
 		},
-		effectName: 'blackCleaverCarve',
-		effectLabel: 'Carve stacks',
-		effectMax: 5,
-		effectImageText(data: [carve: number]) {
-			return data[0];
-		},
-		setupEffectData(data): [carve: number] {
-			return [
-				Math.max(0, Math.min(5, data?.[0] ?? 0)),
-			];
-		},
-		isEffectActive(data) {
-			const [carve] = data as [carve: number];
-			return carve;
-		},
 		itemImageTextLabel: 'Carve stacks',
-		itemImageText(self, abilityId) {
-			if (abilityId.dataSource === ABILITY_DATA_SOURCE.internal) {
-				return self.internalItemData.value.carve;
-			}
-			return self.appliedEffects.value.find(effect => GameAbilityId.isSame(effect.abilityId, abilityId))?.data[0];
+		itemImageText(self) {
+			return self.internalItemData.value.carve;
 		},
 	},
-	[ITEM_NAME_TO_ID.shurelya]: {
-		effectLabel: 'Inspiring speech',
-		effectName: 'shurelyaInspiringSpeech',
-		setupEffectData(data): [inspiringSpeech: 0 | 1] {
-			return [Math.max(0, Math.min(1, data?.[0] ?? 0)) as 0 | 1];
-		},
-		isEffectActive(data) {
-			const [inspiringSpeech] = data as [inspiringSpeech: 0 | 1];
-			return inspiringSpeech;
-		},
-	},
-} satisfies Record<string, IItemSpecific>;
+} satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
+export type IHypotheticalItemSpecifics = Record<string, IItemSpecific>;
 
-export type IItemSpecific = IProviderGroupInternalItemData & IProviderGroupEffect & IProviderGroupImageText & {
+export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItemData & {
 	/** whether to show the green dot that the item is active in the top right corner of the image */
 	isItemImageActive?: (internalData: any) => number | boolean;
 };

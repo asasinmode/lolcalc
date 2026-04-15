@@ -1,41 +1,43 @@
-import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from './types';
+import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './types';
 import { markRaw } from 'vue';
 
 export class GameAbilityId {
 	static build<
 		Id extends IChampionId,
-		Source extends TAbilityDataSource,
 		AbilityKey extends IChampionAbilityKey,
 		AbilityVariantIndex extends number,
 	>(
 		type: 'champion',
-		dataSource: Source,
 		id: Id,
 		abilityKey: AbilityKey,
 		abilityVariantIndex: AbilityVariantIndex
-	): IChampionAbilityId<Id, Source, AbilityKey, AbilityVariantIndex>;
-	static build<Id extends string, Source extends TAbilityDataSource>(
+	): IChampionAbilityId<Id, AbilityKey, AbilityVariantIndex>;
+	static build<Id extends string>(
 		type: 'item',
-		dataSource: Source,
-		id: Id): IItemAbilityId<Id, Source>;
+		id: Id): IItemAbilityId<Id>;
+	static build<Id extends IEffectObjectName>(
+		type: 'effect',
+		id: IEffectObjectName): IEffectAbilityId<Id>;
 	static build(
 		type: TAbilityType,
-		dataSource: TAbilityDataSource,
 		id: string,
 		abilityKey?: IChampionAbilityKey,
 		abilityVariantIndex?: number,
 	): IGameAbilityId {
-		if (type === 'champion') {
+		if (type === ABILITY_TYPE.champion) {
 			return markRaw({
 				type,
-				dataSource,
 				id: id as IChampionId,
 				abilityKey: abilityKey!,
 				abilityVariantIndex: abilityVariantIndex!,
 			});
 		}
 
-		return markRaw({ type, dataSource, id });
+		if (type === ABILITY_TYPE.effect) {
+			return markRaw({ type, id: id as IEffectObjectName });
+		}
+
+		return markRaw({ type, id });
 	}
 
 	/**
@@ -46,19 +48,27 @@ export class GameAbilityId {
 	 * `abilityKeyIndex` is `ALL_CHAMPION_ABILITY_KEYS.indexOf(type)`
 	 */
 	static stringify(id: IGameAbilityId): string {
-		if (id.type === 'champion') {
+		const typeIndex = ALL_ABILITY_TYPES.indexOf(id.type);
+		if (id.type === ABILITY_TYPE.champion) {
 			return [
-				ALL_ABILITY_TYPES.indexOf(id.type),
+				typeIndex,
 				CHAMPION_ID_TO_KEY[id.id],
 				ALL_CHAMPION_ABILITY_KEYS.indexOf(id.abilityKey),
 				id.abilityVariantIndex,
 			].join('-');
 		}
 
-		return [ALL_ABILITY_TYPES.indexOf(id.type), id.id].join('-');
+		if (id.type === ABILITY_TYPE.effect) {
+			return [
+				typeIndex,
+				EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(entry => entry[0] === id.id),
+			].join('-');
+		}
+
+		return [typeIndex, id.id].join('-');
 	}
 
-	static parse(value: string, dataSource: TAbilityDataSource): IGameAbilityId | undefined {
+	static parse(value: string): IGameAbilityId | undefined {
 		const [rawType, id, rawAbilityKeyIndex, rawAbilityVariantIndex] = value.split('-');
 		if (!id) {
 			return;
@@ -85,7 +95,7 @@ export class GameAbilityId {
 
 			const abilityKey = ALL_CHAMPION_ABILITY_KEYS[abilityKeyIndex];
 
-			return GameAbilityId.build(type, dataSource, championId, abilityKey, abilityVariantIndex);
+			return GameAbilityId.build(type, championId, abilityKey, abilityVariantIndex);
 		}
 
 		if (type === ABILITY_TYPE.item) {
@@ -94,7 +104,16 @@ export class GameAbilityId {
 				return;
 			}
 
-			return GameAbilityId.build(type, dataSource, id);
+			return GameAbilityId.build(type, id);
+		}
+
+		if (type === ABILITY_TYPE.effect) {
+			const specificEntry = EFFECT_SPECIFICS_OBJECT_ENTRIES.find(entry => entry[0] === id);
+			if (!specificEntry) {
+				return;
+			}
+
+			return GameAbilityId.build(type, specificEntry[0]);
 		}
 
 		return undefined;

@@ -98,7 +98,7 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 						);
 
 						return {
-							id: GameAbilityId.build(ABILITY_TYPE.champion, 'internal', champion.id, abilityKey as IChampionAbilityKey, abilityVariantIndex),
+							id: GameAbilityId.build(ABILITY_TYPE.champion, champion.id, abilityKey as IChampionAbilityKey, abilityVariantIndex),
 							name: championAbilitySectionName(champion.name, abilityKey as IChampionAbilityKey, nameReplaced),
 						};
 					}),
@@ -118,7 +118,7 @@ const damageSectionItemAbilities = computed<IDamageSectionOption['abilities']>((
 	return itemIds.values()
 		.map((itemId): IDamageSectionOption['abilities'][number] => ({
 			name: items[itemId!]!.name,
-			id: GameAbilityId.build(ABILITY_TYPE.item, 'internal', itemId!),
+			id: GameAbilityId.build(ABILITY_TYPE.item, itemId!),
 		}))
 		.toArray()
 		.sort((a, b) => a.name.localeCompare(b.name));

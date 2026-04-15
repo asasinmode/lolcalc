@@ -925,7 +925,7 @@ try {
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch {}
 
-if (!effectData || effectData?.version !== latestVersion || Object.keys(EFFECT_SPECIFICS).some(key => !(key in effectData!.data))) {
+if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {
 	console.log('effect data not present or outdated, fetching...');
 
 	const [itemMoreData] = await Promise.all([
@@ -937,8 +937,8 @@ if (!effectData || effectData?.version !== latestVersion || Object.keys(EFFECT_S
 
 	effectData = {
 		version: latestVersion,
-		data: Object.fromEntries(await Promise.all(Object.entries(EFFECT_SPECIFICS).map(async ([effectObjectName, effectSpecific]) => {
-			const { id, type } = effectSpecific.gameAbilityId;
+		data: Object.fromEntries(await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES.map(async ([effectObjectName, effectSpecific]) => {
+			const { id, type } = effectSpecific.sourceAbility;
 			const dataSource = type === ABILITY_TYPE.champion
 				? await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`)
 				: itemMoreData;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IExtraComponentEmits, IExtraComponentProps } from '~/utils/types';
+import type { IExtraComponentEmits, IExtraComponentProps, IItemAbilityId } from '~/utils/types';
 import { VExtrasNumber } from '#components';
 
 const props = defineProps<IExtraComponentProps<'item'>>();
@@ -9,7 +9,7 @@ defineEmits<IExtraComponentEmits>();
 const items = useItems();
 const { version } = usePatchVersion();
 
-type IData = ReturnType<TItemSpecifics[typeof ITEM_NAME_TO_ID.tear]['setupInternalData']>;
+type IData = IGameAbilityData<IItemAbilityId<typeof ITEM_NAME_TO_ID.tear>>;
 
 const ALTERNATE_ITEM_FORMS: Record<string, string> = {
 	[ITEM_NAME_TO_ID.whisperingCirclet]: ITEM_NAME_TO_ID.diademOfSongs,

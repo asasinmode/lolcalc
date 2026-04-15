@@ -17,8 +17,8 @@ defineEmits<{
 const enableUnimplementedUi = useEnableUnimplementedUi();
 const { abilityImage, abilityImageSize } = useChampionImages();
 
-const passiveAbilityId = GameAbilityId.build('champion', 'internal', 'Aphelios', 'passive', 0);
-const rAbilityId = GameAbilityId.build('champion', 'internal', 'Aphelios', 'r', 0);
+const passiveAbilityId = GameAbilityId.build('champion', 'Aphelios', 'passive', 0);
+const rAbilityId = GameAbilityId.build('champion', 'Aphelios', 'r', 0);
 
 const abilitySize = abilityImageSize('Aphelios');
 </script>
@@ -42,7 +42,7 @@ const abilitySize = abilityImageSize('Aphelios');
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'internal', 'Aphelios', 'e', 0))"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', 0))"
 		>
 		<h5>Q</h5>
 		<img
@@ -50,7 +50,7 @@ const abilitySize = abilityImageSize('Aphelios');
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'internal', 'Aphelios', 'q', value.abilityVariantsIndexes.value.q))"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'q', value.abilityVariantsIndexes.value.q))"
 		>
 	</div>
 	<div data-aphelios-w="" :inert="!enableUnimplementedUi">
@@ -61,7 +61,7 @@ const abilitySize = abilityImageSize('Aphelios');
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'internal', 'Aphelios', 'e', value.abilityVariantsIndexes.value.w))"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.w))"
 		>
 		<h5>next weapon</h5>
 		<img
@@ -69,7 +69,7 @@ const abilitySize = abilityImageSize('Aphelios');
 			:width="abilitySize"
 			:height="abilitySize"
 			aria-hidden="true"
-			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'internal', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))"
+			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))"
 		>
 	</div>
 	<div data-aphelios-r="" :data-level="value.abilityLevels.value.r || undefined" :inert="!enableUnimplementedUi">

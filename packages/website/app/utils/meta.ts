@@ -1,18 +1,12 @@
 export const ABILITY_TYPE = {
 	champion: 'champion',
 	item: 'item',
+	effect: 'effect',
 } as const;
 
 export const ALL_ABILITY_TYPES = Object.values(ABILITY_TYPE);
 
 export type TAbilityType = typeof ABILITY_TYPE[keyof typeof ABILITY_TYPE];
-
-export const ABILITY_DATA_SOURCE = {
-	internal: 'internal',
-	effects: 'effects',
-} as const;
-
-export type TAbilityDataSource = typeof ABILITY_DATA_SOURCE[keyof typeof ABILITY_DATA_SOURCE];
 
 export const ALL_CHAMPION_ABILITY_KEYS: IChampionAbilityKey[] = ['passive', 'q', 'w', 'e', 'r'];
 
@@ -326,10 +320,10 @@ export const ITEM_SHOP_STAT_FILTERS = {
 
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 
-export const EFFECT_NAME_TO_OBJECTNAME = {
+export const EFFECT_OBJECT_NAME = {
 	amumuPCursedTouch: 'AmumuPDebuff',
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
-};
+} as const;
 
-export type TEffectNameToObjectName = typeof EFFECT_NAME_TO_OBJECTNAME;
+export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

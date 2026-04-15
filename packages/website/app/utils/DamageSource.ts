@@ -26,52 +26,32 @@ export interface IDamageSourceInternalDataBase {
 	_watchHandles: WatchHandle[];
 }
 
-export interface IDamageSourceEffectProvider {
-	effectLabel: string;
-	effectName: keyof TEffectNameToObjectName;
-	/**
-	 * same as `setupInternalData` for `DamageSource.appliedEffects[number].data`
-	 * `data` is the existing effect's data for cloning
-	 */
-	setupEffectData: (data?: IDamageSourceEffect['data']) => IDamageSourceEffect['data'];
-	/** checks if effect's data is not the default value */
-	isEffectActive: (data: any) => number | boolean;
-	effectImageText?: (data: any) => number | string;
-	/** @default 0 */
-	effectMin?: number;
-	/** @default 1 */
-	effectMax?: number;
-}
-
 export interface IDamageSourceInternalDataProvider {
 	/**
-	 * returns an `internalData` for specific `DamageSource`'s champion
+	 * returns the `internalData.value` for specific `DamageSource`'s champion
 	 * should reuse the existing `DamageSource.internalData` to set the values (for cloning)
 	 * and expects the previous `internalData` values to be of correct type (from parsing stringified state), as in `DamageSource.fromStringifiedData` should ensure the values are parsed
 	 * the property names should be fairly short for storing in state string
 	 */
-	setupInternalData: (self: DamageSource) => any;
+	setupData: (self: DamageSource) => any;
 }
 
 export interface IDamageSourceInternalItemDataProvider {
 	/**
-	 * similar to `IDamageSourceInternalDataProvider.setupInternalData` for `DamageSource.internalItemData`
+	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.internalItemData`
 	 * the return value is used only for types, function updates the `internalItemData` properties directly (multiple items need to be able to set it)
 	 *
 	 * `internalDataProperties` should contain all of the properties set up by this for cleanup by a watcher in `DamageSource` when item is removed
 	 */
-	setupInternalData: (self: DamageSource) => any;
-	/** the properties `setupInternalData` uses, needed for cleanup */
+	setupData: (self: DamageSource) => any;
+	/** the properties `setupData` uses, needed for cleanup */
 	internalDataProperties: string[];
 }
 
 export interface IDamageSourceEffect<T extends any[] = any[]> {
-	/** stringified `GameAbilityId` */
-	id: string;
-	abilityId: IGameAbilityId;
+	objectName: IEffectObjectName;
 	/** any effect data, stored in array like `[carve: number]` for easier stringifying/parsing */
 	data: T;
-	isActive: (data: T) => number | boolean;
 }
 
 export class DamageSource<Id extends IChampionId | undefined = any> {
@@ -152,7 +132,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	/** keys prefixed with `_` will not be stringified */
 	internalData: Ref<Id extends IInternalDataSetupChampions
-		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupInternalData']>
+		? IDamageSourceInternalDataBase & ReturnType<(typeof CHAMPION_SPECIFICS)[Id]['setupData']>
 		: undefined>;
 	/* object containing the internal data of champion items, similar to `internalData` but untyped */
 	internalItemData: Ref<any>;
@@ -205,7 +185,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 		for (let i = 0; i < (overrides.appliedEffects?.length ?? 0); i++) {
 			const effect = overrides.appliedEffects![i]!;
-			this.addEffect(effect.abilityId, effect.data);
+			this.addEffect(effect.objectName, effect.data);
 		}
 
 		this.watchHandles = [
@@ -240,7 +220,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						));
 					}
 
-					this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
+					this.internalData.value = (c?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[c.id]?.setupData?.(this)) || {};
 
 					return;
 				}
@@ -252,7 +232,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				this.abilityLevels.value = { q: level, w: level, e: level, r: level };
 				this.abilityVariantsIndexes.value = { passive: 0, q: 0, w: 0, e: 0, r: 0 };
 
-				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as any)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
+				this.internalData.value = (this.champion.value?.id && (CHAMPION_SPECIFICS as IHypotheticalChampionSpecifics)[this.champion.value?.id]?.setupInternalData?.(this)) || {};
 			}),
 
 			watch(() => [this.stats.value?.stats.total.hp, this.stats.value?.stats.total.mana], (_, [previousTotalHp, previousTotalAbilityResource]) => {
@@ -308,7 +288,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				const removedItems = (oldIds?.filter(id => !newIds.includes(id)) ?? []) as (keyof TItemSpecifics | undefined)[];
 				const addedItems = newIds.filter(id => !oldIds?.includes(id)) as (keyof TItemSpecifics | undefined)[];
 				for (const addedId of addedItems) {
-					(addedId && ITEM_SPECIFICS[addedId] as any)?.setupInternalData?.(this);
+					(addedId && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[addedId])?.setupData?.(this);
 				}
 
 				const usedProperties = newIds.flatMap(id => (id && id in ITEM_SPECIFICS && 'internalDataProperties' in ITEM_SPECIFICS[id as keyof TItemSpecifics]) || []);
@@ -340,7 +320,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			dragonStacks: structuredClone(toRaw(this.dragonStacks.value)),
 			dragonSoul: this.dragonSoul.value,
 			roleQuest: this.roleQuest.value,
-			/* not cloned because the `setupInternalData` should handle safely using previous values to create new ones */
+			/* not cloned because the `IChampionSpecific.setupData` should handle safely using previous values to create new ones */
 			internalData: this.internalData.value,
 			/* has to be cloned because multiple items use the same object and only set its properties */
 			internalItemData: structuredClone(toRaw(this.internalItemData.value)),
@@ -402,7 +382,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			this.dragonSoul,
 			() => Object.values(this.internalData.value || {}).join('-'),
 			() => Object.values(this.internalItemData.value || {}).join('-'),
-			() => this.appliedEffects.value.map(effect => `${effect.id}-${effect.data.join('-')}`).join('_'),
+			() => this.appliedEffects.value.map(effect => `${effect.objectName}-${effect.data.join('-')}`).join('|'),
 		];
 	}
 
@@ -450,8 +430,8 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			Object.keys(this.internalData.value || {}).length ? JSON.stringify(this.internalData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
 			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
 			this.appliedEffects.value
-				.filter(effect => effect.isActive(effect.data))
-				.map(effect => `${effect.id}~${effect.data.join('~')}`)
+				.filter((_, index) => this.computed.effects.value[index]?.isActive)
+				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.objectName)}-${effect.data.join('-')}`)
 				.join('|'),
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
@@ -669,10 +649,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		if (rawEffectsData?.length) {
+			const effectSpecificKeys = Object.keys(EFFECT_SPECIFICS);
 			for (const rawEffect of rawEffectsData.split('|')) {
-				const [rawAbilityId, ...rawData] = rawEffect.split('~');
-				const abilityId = rawAbilityId && GameAbilityId.parse(rawAbilityId, 'effects');
-				if (abilityId) {
+				const [effectObjectNameIndex, ...rawData] = rawEffect.split('-');
+				const effectObjectName = effectObjectNameIndex && effectSpecificKeys[Number.parseInt(effectObjectNameIndex)];
+				if (effectObjectName) {
 					const data = rawData.map((rawValue) => {
 						const value = rawValue ? Number.parseInt(rawValue) : undefined;
 						if (value && !Number.isNaN(value)) {
@@ -680,7 +661,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						}
 						return undefined;
 					}).filter(v => v !== undefined) as number[];
-					rv.addEffect(abilityId, data);
+					rv.addEffect(effectObjectName as IEffectObjectName, data);
 				}
 			}
 		}
@@ -726,30 +707,24 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	getEffect(abilityId: IGameAbilityId): [IDamageSourceEffect, index: number] | undefined {
-		const index = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
+	getEffect(objectName: IEffectObjectName): [IDamageSourceEffect, index: number] | undefined {
+		const index = this.appliedEffects.value.findIndex(effect => effect.objectName === objectName);
 
 		return ~index ? [this.appliedEffects.value[index]!, index] : undefined;
 	}
 
-	addEffect(abilityId: IGameAbilityId, data?: IDamageSourceEffect['data']) {
-		const specific = resolveEffectSpecific(abilityId);
-		if (!specific) {
-			console.warn('[DamageSource.addEffect] tried to add effect for', abilityId, 'without \'setupEffectData\'');
-			return;
-		}
+	addEffect(objectName: IEffectObjectName, data?: IDamageSourceEffect['data']) {
+		const specific = EFFECT_SPECIFICS[objectName];
 
 		this.appliedEffects.value.push({
-			id: GameAbilityId.stringify(abilityId),
-			abilityId,
-			data: specific.setupEffectData(data),
-			isActive: specific.isEffectActive!,
+			objectName,
+			data: specific.setupData(data),
 		});
 		(this.computed.effects as unknown as ShallowRef<IComputedAppliedEffect[]>).value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
 	}
 
-	removeEffect(id: string) {
-		const index = this.appliedEffects.value.findIndex(effect => effect.id === id);
+	removeEffect(objectName: IEffectObjectName) {
+		const index = this.appliedEffects.value.findIndex(effect => effect.objectName === objectName);
 		if (~index) {
 			this.appliedEffects.value.splice(index, 1);
 			this.computed.effects.value.splice(index, 1);
@@ -902,7 +877,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			abilityId: IItemAbilityId;
 		} | undefined)[]>(() => this.items.value.map((item) => {
 			if (item) {
-				const abilityId = GameAbilityId.build(ABILITY_TYPE.item, 'internal', item.id);
+				const abilityId = GameAbilityId.build(ABILITY_TYPE.item, item.id);
 				const specific = resolveAbilitySpecific<any>(abilityId) as IItemSpecific;
 				return {
 					specific,
@@ -919,7 +894,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				return [key as IChampionAbilityKey, ability?.variants.map((_, variantIndex) => computeAbilityDescription(
 					minorVersion,
 					this.champion.value!,
-					GameAbilityId.build(ABILITY_TYPE.champion, 'internal', this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
+					GameAbilityId.build(ABILITY_TYPE.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
 					(this.abilityLevels.value as any)[key],
 					this,
 				)) || []];
@@ -945,7 +920,7 @@ function cleanupItems(items: (IItem | undefined)[]): void {
 }
 
 type IInternalDataSetupChampions = {
-	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupInternalData: (...args: any) => any }
+	[K in keyof typeof CHAMPION_SPECIFICS]: (typeof CHAMPION_SPECIFICS)[K] extends { setupData: (...args: any) => any }
 		? K
 		: never;
 }[keyof typeof CHAMPION_SPECIFICS];
@@ -1210,6 +1185,7 @@ export function computeAbilityDescription(
 	const anyUnknownVariables = nameUnknownSV.size || tooltipUnknownSV.size || tooltipUnknownV.length || tooltipExtendedUnknownSV.size || tooltipExtendedUnknownV.length || tooltipExtendedBelowLineUnknownSV.size || tooltipExtendedBelowLineUnknownV.length;
 
 	return {
+		gameAbilityId,
 		name: nameReplaced,
 		tooltip: tooltipReplaced,
 		tooltipExtended: tooltipExtendedReplaced,
@@ -1338,11 +1314,13 @@ function formatItemDescriptionText(
 }
 
 export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, warnPrefix?: string): IGameAbilitySpecific<T> | undefined {
-	const specific = abilityId.type === 'item'
+	const specific = abilityId.type === ABILITY_TYPE.item
 		? ITEM_SPECIFICS[abilityId.id as keyof TItemSpecifics] as IGameAbilitySpecific<T>
-		: abilityId.type === 'champion'
-			? (CHAMPION_SPECIFICS[abilityId.id as keyof TChampionSpecifics] as IChampionSpecific)?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
-			: undefined;
+		: abilityId.type === ABILITY_TYPE.champion
+			? (CHAMPION_SPECIFICS as Partial<Record<IChampionId, IChampionSpecific>>)[abilityId.id]?.[abilityId.abilityKey]?.[abilityId.abilityVariantIndex] as IGameAbilitySpecific<T>
+			: abilityId.type === ABILITY_TYPE.effect
+				? EFFECT_SPECIFICS[abilityId.id] as IGameAbilitySpecific<T>
+				: undefined;
 
 	if (!specific && warnPrefix) {
 		console.warn(`[${warnPrefix}] failed to resolve specific for`, abilityId);
@@ -1351,36 +1329,27 @@ export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, w
 	return specific;
 }
 
-export function resolveEffectSpecific(abilityId: IGameAbilityId, warnPrefix?: string): IDamageSourceEffectProvider | undefined {
-	const specific = resolveAbilitySpecific(abilityId, warnPrefix);
-	if (specific && 'setupEffectData' in specific) {
-		return specific;
-	}
-
-	return undefined;
-}
-
 export interface IComputedAppliedEffect {
-	id: string;
+	objectName: IEffectObjectName;
 	imgSrc: string;
 	imgSize: number;
-	imgText: ComputedRef<ReturnType<IAbilityImageTextProvider['itemImageText']> | undefined>;
-	isActive: ComputedRef<ReturnType<IDamageSourceEffectProvider['isEffectActive']>>;
-	specific: IDamageSourceEffectProvider;
+	imgText: ComputedRef<ReturnType<NonNullable<IEffectSpecific['imgText']>> | undefined>;
+	isActive: ComputedRef<ReturnType<IEffectSpecific['isActive']>>;
+	specific: IEffectSpecific;
 }
 
 function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
-	const specific = resolveEffectSpecific(effect.abilityId, 'computedAppliedEffects')!;
+	const specific = EFFECT_SPECIFICS[effect.objectName] as IEffectSpecific;
 	const rv: IComputedAppliedEffect = {
-		id: effect.id,
+		objectName: effect.objectName,
 		imgSrc: '',
 		imgSize: 0,
-		imgText: computed(() => specific.effectImageText?.(effect.data)),
-		isActive: computed(() => effect.isActive(effect.data)),
+		imgText: computed(() => specific.imgText?.(effect.data)),
+		isActive: computed(() => specific.isActive(effect.data)),
 		specific,
 	};
 
-	gameAbilityImage(effect.abilityId).then(([imgSrc, imgSize]) => {
+	gameAbilityImage(specific.sourceAbility).then(([imgSrc, imgSize]) => {
 		rv.imgSrc = imgSrc;
 		rv.imgSize = imgSize;
 	});
