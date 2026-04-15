@@ -1134,7 +1134,7 @@ defineExpose({ el });
 					<li
 						v-for="[effect, effectIndex] in activeEffects"
 						:key="effect.id"
-						@mouseenter="value.champion.value && showEffectTooltip($event, effect)"
+						@mouseenter="showEffectTooltip($event, effect)"
 					>
 						<span>{{ effect.specific.label }}</span>
 						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)">
@@ -1929,6 +1929,7 @@ defineExpose({ el });
 				> .effect-hover-tooltip-container {
 					position-anchor: --scoreboard-item-effects;
 					inset-block-start: calc(anchor(end));
+					inset-inline-start: calc(anchor(start));
 				}
 			}
 

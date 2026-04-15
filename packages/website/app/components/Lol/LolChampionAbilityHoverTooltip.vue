@@ -133,7 +133,7 @@ defineExpose({ el });
 		--at-apply: 'p-2';
 		--description-pt: calc(1.5 * var(--spacing));
 		--description-mt: calc(2 * var(--spacing));
-		--description-pb: calc(1 * var(--spacing));
+		--description-pb: calc(2 * var(--spacing));
 		--description-mb: calc(1.25 * var(--spacing));
 
 		> h5 {

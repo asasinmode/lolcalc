@@ -121,11 +121,19 @@ defineExpose({ el });
 		}
 
 		> footer {
-			--at-apply: 'col-span-full text-end leading-5 b-t b-[--ui-btn-border-clr] pt-[--description-pb] mt-[--description-mb]';
+			--at-apply: 'col-span-full text-end leading-5 b-t b-[--ui-btn-border-clr] pt-[--description-mb] mt-[--description-pb]';
 
 			> kbd {
 				--at-apply: 'font-inherit';
 			}
+		}
+	}
+}
+
+@layer overrides {
+	.effect-hover-tooltip-container {
+		> .champion-ability {
+			--at-apply: 'grid';
 		}
 	}
 }
