@@ -129,7 +129,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	roleQuest: Ref<IChampionRole | undefined>;
 
 	anythingFilled = computed(() => {
-		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value || this.appliedEffects.value.length);
+		return Boolean(this.listedChampion.value || this.level.value !== 1 || this.items.value.some(Boolean) || !this.runePathsEmpty.value || this.dragonStacks.value.some(Boolean) || this.dragonSoul.value || this.roleQuest.value || this.computed.effects.value.some(effect => effect.isActive));
 	});
 
 	/** keys prefixed with `_` will not be stringified */
