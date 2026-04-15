@@ -2397,6 +2397,18 @@ defineExpose({ el });
 					'dragons role-quest stats runes';
 			}
 
+			> [data-effects] {
+				> ul {
+					direction: ltr;
+				}
+
+				> .effect-hover-tooltip-container {
+					--at-apply: 'items-end';
+					inset-inline-start: auto;
+					inset-inline-end: calc(anchor(end));
+				}
+			}
+
 			> [data-runes] {
 				> dl {
 					&:nth-of-type(1) {
