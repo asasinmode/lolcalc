@@ -135,7 +135,7 @@ function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, da
 ] {
 	const isEffect = abilityId.type === ABILITY_TYPE.effect;
 	const appliedEffect = isEffect
-		? damageSource.appliedEffects.value.find(effect => effect.objectName === abilityId.id)
+		? damageSource.appliedEffects.value.find(effect => effect.abilityId.id === abilityId.id)
 		: undefined;
 
 	if (isEffect && !appliedEffect) {

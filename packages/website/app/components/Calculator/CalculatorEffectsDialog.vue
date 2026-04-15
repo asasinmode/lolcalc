@@ -46,7 +46,8 @@ const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 		{
 			type: 'champion',
 			label: 'champions',
-			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect => GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
+			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
+				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
 		{

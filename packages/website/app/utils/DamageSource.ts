@@ -433,7 +433,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			Object.keys(this.internalItemData.value || {}).length ? JSON.stringify(this.internalItemData.value, (key, value) => key.startsWith('_') ? undefined : value) : undefined,
 			this.appliedEffects.value
 				.filter((_, index) => this.computed.effects.value[index]?.isActive)
-				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.id)}-${effect.data.join('-')}`)
+				.map(effect => `${EFFECT_SPECIFICS_OBJECT_ENTRIES.findIndex(([objectName]) => objectName === effect.abilityId.id)}-${effect.data.join('-')}`)
 				.join('|'),
 			this.roleQuest.value && roleQuestKeys.indexOf(this.roleQuest.value),
 		];
@@ -717,13 +717,19 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	addEffect(abilityId: IEffectAbilityId, data?: IDamageSourceEffect['data']) {
 		const specific = EFFECT_SPECIFICS[abilityId.id];
+		const existingEffectIndex = this.appliedEffects.value.findIndex(effect => GameAbilityId.isSame(effect.abilityId, abilityId));
 
-		this.appliedEffects.value.push({
-			id: GameAbilityId.stringify(abilityId),
-			abilityId,
-			data: specific.setupData(data),
-		});
-		(this.computed.effects as unknown as ShallowRef<IComputedAppliedEffect[]>).value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
+		if (~existingEffectIndex) {
+			console.warn(`[DamageSource addEffect] adding existing effect`, abilityId);
+			this.appliedEffects.value[existingEffectIndex]!.data = specific.setupData(data);
+		} else {
+			this.appliedEffects.value.push({
+				id: GameAbilityId.stringify(abilityId),
+				abilityId,
+				data: specific.setupData(data),
+			});
+			(this.computed.effects as unknown as ShallowRef<IComputedAppliedEffect[]>).value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
+		}
 	}
 
 	removeEffect(abilityId: IEffectAbilityId) {

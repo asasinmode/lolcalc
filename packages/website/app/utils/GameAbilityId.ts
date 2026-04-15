@@ -129,6 +129,6 @@ export class GameAbilityId {
 				&& id1.abilityVariantIndex === (id2 as IChampionAbilityId).abilityVariantIndex;
 		}
 
-		return false;
+		return true;
 	}
 }
