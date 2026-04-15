@@ -89,7 +89,7 @@ export interface IChampionAbilityHoverTooltipProps {
 }
 
 export interface IEffectHoverTooltipProps {
-	abilityId: IEffectAbilityId;
+	abilityId?: IEffectAbilityId;
 	damageSource?: DamageSource;
 }
 

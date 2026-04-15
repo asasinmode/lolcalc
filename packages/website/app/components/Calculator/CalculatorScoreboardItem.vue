@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { IComputedDamageSourceChampionStat, INonPassiveAbilityKey } from '~/utils/DamageSource';
-import type { IExtraComponentEmits, IGameAbilityId, IWithCalculateDynamicValues } from '~/utils/types';
+import type { IEffectAbilityId, IExtraComponentEmits, IGameAbilityId, IWithCalculateDynamicValues } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
@@ -658,7 +657,6 @@ function resetAbilityLevel(event: MouseEvent, ability: INonPassiveAbilityKey) {
 
 type ITooltipSource = '' | 'extras' | 'effects';
 
-// TODO handle effects
 function showGameAbilityTooltip(source: ITooltipSource, ...[event, abilityId]: IShowTooltipEventArgs) {
 	if (abilityId.type === 'champion') {
 		showAbilityTooltip(event, abilityId.abilityKey, abilityId.abilityVariantIndex, source === 'extras');
@@ -804,6 +802,19 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	} else {
 		effect.data[0] = Math.max(min, Math.min(max, effect.data[0] + by));
 	}
+}
+
+const hoveredEffectId = shallowRef<IEffectAbilityId>();
+const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
+
+function showEffectTooltip(event: MouseEvent, effect: IComputedAppliedEffect) {
+	hoveredEffectId.value = effect.abilityId;
+	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
+	effectHoverTooltipEl.value?.el?.showPopover();
+}
+
+function hideEffectTooltip() {
+	effectHoverTooltipEl.value?.el?.hidePopover();
 }
 
 onBeforeUnmount(() => {
@@ -1120,7 +1131,8 @@ defineExpose({ el });
 				<ul>
 					<li
 						v-for="[effect, effectIndex] in activeEffects"
-						:key="effect.objectName"
+						:key="effect.id"
+						@mouseenter="value.champion.value && showEffectTooltip($event, effect)"
 					>
 						<span>{{ effect.specific.label }}</span>
 						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)">
@@ -1137,6 +1149,11 @@ defineExpose({ el });
 						</button>
 					</li>
 				</ul>
+				<LolEffectHoverTooltip
+					ref="effectHoverTooltip"
+					:ability-id="hoveredEffectId"
+					:damage-source="value"
+				/>
 			</section>
 			<section data-abilities="" :inert="isLoading">
 				<h4>abilties</h4>
@@ -1194,9 +1211,6 @@ defineExpose({ el });
 				<LolChampionAbilityHoverTooltip
 					ref="championAbilityHoverTooltip"
 					:group
-					:champion-id="value.champion.value?.id"
-					:ability-key="hoveredAbilityKey"
-					:ability-variant-index="hoveredAbilityVariantIndex"
 					:precomputed-description="hoveredAbilityKey && value.computed.abilities.value[hoveredAbilityKey][hoveredAbilityVariantIndex!]"
 				/>
 			</section>
@@ -1872,6 +1886,7 @@ defineExpose({ el });
 				--img-w: calc((var(--runes-stats-section-w) - 8 * var(--gap)) / 8);
 				--pb: calc(round(up, var(--effects-number, 0) / 8) * (var(--img-w) + var(--gap)) + var(--gap));
 				grid-area: effects;
+				anchor-name: --scoreboard-item-effects;
 
 				> button {
 					--at-apply: 'my-auto hoverable:z-2';
@@ -1907,6 +1922,11 @@ defineExpose({ el });
 							}
 						}
 					}
+				}
+
+				> .effect-hover-tooltip-container {
+					position-anchor: --scoreboard-item-effects;
+					inset-block-start: calc(anchor(end));
 				}
 			}
 

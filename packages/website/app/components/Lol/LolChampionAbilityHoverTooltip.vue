@@ -128,15 +128,20 @@ defineExpose({ el });
 	.hover-tooltip.champion-rune,
 	.hover-tooltip.champion-ability,
 	.hover-tooltip.dragon-thing,
-	.hover-tooltip.role-quest {
+	.hover-tooltip.role-quest,
+	.hover-tooltip.effect {
 		--at-apply: 'p-2';
+		--description-pt: calc(1.5 * var(--spacing));
+		--description-mt: calc(2 * var(--spacing));
+		--description-pb: calc(1 * var(--spacing));
+		--description-mb: calc(1.25 * var(--spacing));
 
 		> h5 {
 			--at-apply: 'text-lg/6 font-500 text-white';
 		}
 
 		> :where(:is(div, p).game-description) {
-			--at-apply: 'mt-0.5 b-b b-t b-[--ui-btn-border-clr] pt-1.5 pb-1 mb-1.25 leading-4.5';
+			--at-apply: 'mt-0.5 b-b b-t b-[--ui-btn-border-clr] pt-[--description-pt] pb-[--description-pb] mb-[--description-mb] leading-4.5';
 		}
 	}
 
@@ -144,12 +149,17 @@ defineExpose({ el });
 		--at-apply: 'p-2';
 	}
 
+	.hover-tooltip.champion-ability,
+	.hover-tooltip.effect {
+		--gap-x: calc(2 * var(--spacing));
+	}
+
 	.hover-tooltip > .game-description:last-child {
 		--at-apply: 'b-b-0 pb-0 mb-0';
 	}
 
 	.hover-tooltip.champion-ability {
-		--at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min';
+		--at-apply: 'max-w-160 relative grid-cols-[auto_1fr_auto] auto-rows-min gap-x-[--gap-x]';
 		justify-self: anchor-center;
 		position-try: flip-block;
 		inset-block-start: calc(anchor(end) - 1px);
@@ -179,7 +189,7 @@ defineExpose({ el });
 		}
 
 		> div {
-			--at-apply: 'col-span-full mt-2';
+			--at-apply: 'col-span-full mt-[--description-mt]';
 
 			rules {
 				--at-apply: 'italic';

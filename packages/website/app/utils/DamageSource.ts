@@ -1337,6 +1337,7 @@ export function resolveAbilitySpecific<T extends IGameAbilityId>(abilityId: T, w
 }
 
 export interface IComputedAppliedEffect {
+	id: string;
 	abilityId: IEffectAbilityId;
 	imgSrc: string;
 	imgSize: number;
@@ -1348,6 +1349,7 @@ export interface IComputedAppliedEffect {
 function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect): IComputedAppliedEffect {
 	const specific = EFFECT_SPECIFICS[effect.abilityId.id] as IEffectSpecific;
 	const rv: IComputedAppliedEffect = {
+		id: effect.id,
 		abilityId: effect.abilityId,
 		imgSrc: '',
 		imgSize: 0,

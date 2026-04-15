@@ -14,7 +14,7 @@ const abilityImage = shallowRef<Awaited<ReturnType<typeof gameAbilityImage>>>(['
 const champion = shallowRef<IChampion>();
 const isLoading = ref(false);
 
-const effectSpecific = computed<IEffectSpecific | undefined>(() => EFFECT_SPECIFICS[props.abilityId.id] as IEffectSpecific);
+const effectSpecific = computed<IEffectSpecific | undefined>(() => props.abilityId && EFFECT_SPECIFICS[props.abilityId.id] as IEffectSpecific);
 
 const sourceAbilityId = computed(() => effectSpecific.value?.sourceAbility);
 
@@ -46,12 +46,6 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 
 	const { type, id } = sourceAbilityId.value;
 
-	if (props.damageSource) {
-		return type === ABILITY_TYPE.item
-			? props.damageSource.computed.items.value.find(item => item?.item.id === id)
-			: props.damageSource.computed.abilities.value[sourceAbilityId.value.abilityKey][sourceAbilityId.value.abilityVariantIndex];
-	}
-
 	if (type === ABILITY_TYPE.champion && champion.value && champion.value.id === id) {
 		return computeAbilityDescription(
 			minorVersion,
@@ -65,7 +59,7 @@ const precomputedDescription = computed<IComputedAbilityDescription | IComputedI
 	return computeItemDescription(text, minorVersion, item, props.damageSource);
 });
 
-const computedDescription = computed(() => effects.data[props.abilityId.id].description);
+const computedDescription = computed(() => props.abilityId && effects.data[props.abilityId.id].description);
 
 const el = useTemplateRef('el');
 
@@ -87,6 +81,9 @@ defineExpose({ el });
 				v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'"
 			/>
 			<div class="game-description" v-html="computedDescription" />
+			<footer v-show="!globalKeyModifiers.shift">
+				Hold <kbd>[Shift]</kbd> to show source
+			</footer>
 		</div>
 		<template v-if="precomputedDescription">
 			<LolChampionAbilityHoverTooltip
@@ -94,9 +91,8 @@ defineExpose({ el });
 				v-show="globalKeyModifiers.shift"
 				:precomputed-description="precomputedDescription as IComputedAbilityDescription"
 			/>
-			<div v-else-if="sourceAbilityId" class="hover-tooltip champion-item">
+			<div v-else-if="sourceAbilityId" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
 				<LolItemDescription
-					v-show="globalKeyModifiers.shift"
 					:precomputed-description="precomputedDescription as IComputedItemDescription"
 					source="Inventory"
 					hover-tooltip
@@ -109,10 +105,27 @@ defineExpose({ el });
 <style>
 @layer components {
 	.effect-hover-tooltip-container {
-		--at-apply: 'flex-col gap-3';
+		--at-apply: 'flex-col gap-3 pointer-events-none bg-transparent';
+		position-try: flip-block;
 
 		&:popover-open {
 			--at-apply: 'flex';
+		}
+	}
+
+	.hover-tooltip.effect {
+		--at-apply: 'grid grid-cols-[auto_1fr] w-[min(90vw,30rem)] gap-x-[--gap-x]';
+
+		> div {
+			--at-apply: 'col-span-full b-b-0 pb-0 mb-0 mt-[--description-mt]';
+		}
+
+		> footer {
+			--at-apply: 'col-span-full text-end leading-5 b-t b-[--ui-btn-border-clr] pt-[--description-pb] mt-[--description-mb]';
+
+			> kbd {
+				--at-apply: 'font-inherit';
+			}
 		}
 	}
 }
