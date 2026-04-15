@@ -364,6 +364,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		this.dragonSoul.value = undefined;
 		this.roleQuest.value = undefined;
 		this.appliedEffects.value.length = 0;
+		this.computed.effects.value.length = 0;
 	}
 
 	getWatchable(): MaybeRefOrGetter[] {
