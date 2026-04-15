@@ -89,7 +89,8 @@ export interface IChampionAbilityHoverTooltipProps {
 }
 
 export interface IEffectHoverTooltipProps {
-	effectName: IEffectObjectName;
+	abilityId: IEffectAbilityId;
+	damageSource?: DamageSource;
 }
 
 export interface IItemDescriptionProps {

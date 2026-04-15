@@ -35,7 +35,6 @@ const computedDescription = computed<IComputedAbilityDescription | undefined>(()
 				minorVersion,
 				champion.value!,
 				props.gameAbilityId,
-				props.abilityLevel,
 				undefined,
 				{ replaceWithName: props.replaceVariablesWithNames },
 			)

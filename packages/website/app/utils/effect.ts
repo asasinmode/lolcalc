@@ -1,4 +1,4 @@
-import type { IGameAbilityId } from './types';
+import type { IChampionAbilityId, IItemAbilityId } from './types';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
 
@@ -45,7 +45,7 @@ export type TEffectSpecifics = typeof EFFECT_SPECIFICS;
 export type IHypotheticalEffectSpecifics = Record<string, IEffectSpecific>;
 
 export interface IEffectSpecific {
-	sourceAbility: IGameAbilityId;
+	sourceAbility: IChampionAbilityId | IItemAbilityId;
 	label: string;
 	/**
 	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.appliedEffects[number].data`

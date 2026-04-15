@@ -904,7 +904,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					minorVersion,
 					this.champion.value!,
 					GameAbilityId.build(ABILITY_TYPE.champion, this.champion.value!.id, key as IChampionAbilityKey, variantIndex),
-					(this.abilityLevels.value as any)[key],
 					this,
 				)) || []];
 			})) as Record<IChampionAbilityKey, IComputedAbilityDescription[]>;
@@ -1082,13 +1081,12 @@ export function computeAbilityDescription(
 	minorVersion: string,
 	champion: IChampion,
 	gameAbilityId: IChampionAbilityId,
-	abilityLevel?: number,
-	_damageSource?: DamageSource<any>,
+	damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
 ): IComputedAbilityDescription {
 	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
-	abilityLevel = gameAbilityId.abilityKey !== 'passive' ? abilityLevel || 1 : undefined;
+	const abilityLevel = gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];
 	const variant = ability.variants[gameAbilityId.abilityVariantIndex]!;
 	const allVariants = allChampionAbilityVariants(champion);
