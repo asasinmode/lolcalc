@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IChampionAbilityHoverTooltipProps, IGameAbilityId, IItemDescriptionProps } from '~/utils/types';
+import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
@@ -15,25 +15,24 @@ interface IEffectOptionGroup {
 	type: 'champion' | 'item';
 	label: string;
 	options: {
-		abilityId: IGameAbilityId;
+		abilityId: IEffectAbilityId;
+		sourceAbilityId: IGameAbilityId;
 		name: string;
-		hoverTooltipData: IChampionAbilityHoverTooltipProps | Pick<IItemDescriptionProps, 'precomputedDescription'>;
+		precomputedSourceAbilityDesc: IComputedAbilityDescription | IComputedItemDescription;
 	}[];
 }
 
-const itemEffects: IEffectOptionGroup['options'] = Object
-	.entries(ITEM_SPECIFICS)
-	.filter(([, specific]) => 'setupEffectData' in specific)
-	.map(([itemId]): IEffectOptionGroup['options'][number] => {
-		const item = items[itemId]!;
-		const precomputedDescription = computeItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!;
+const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
+	.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.item)
+	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
+		const sourceAbilityId = effectSpecific.sourceAbility as IItemAbilityId;
+		const item = items[sourceAbilityId.id]!;
 
 		return {
-			abilityId: GameAbilityId.build(ABILITY_TYPE.item, 'effects', itemId),
+			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
+			sourceAbilityId,
 			name: item.name,
-			hoverTooltipData: {
-				precomputedDescription,
-			},
+			precomputedSourceAbilityDesc: computeItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!,
 		};
 	})
 	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
@@ -47,20 +46,14 @@ const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 		{
 			type: 'champion',
 			label: 'champions',
-			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-				appliedEffect.abilityId.type === 'champion'
-				&& appliedEffect.abilityId.type === effect.abilityId.type
-				&& appliedEffect.abilityId.abilityKey === effect.abilityId.abilityKey
-				&& appliedEffect.abilityId.abilityVariantIndex === effect.abilityId.abilityVariantIndex,
+			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect => GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
 		{
 			type: 'item',
 			label: 'items',
 			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
-				appliedEffect.abilityId.type === 'item'
-				&& appliedEffect.abilityId.type === effect.abilityId.type
-				&& appliedEffect.abilityId.id === effect.abilityId.id,
+				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
 	];
@@ -74,38 +67,20 @@ async function loadChampionEffects() {
 	}
 	isLoading.value = true;
 
-	championEffects.value = (await Promise.all(Object.entries(CHAMPION_SPECIFICS)
-		.map(async ([championId, specific]): Promise<IEffectOptionGroup['options']> => {
-			const effects: IEffectOptionGroup['options'] = [];
-			let champion: IChampion;
+	championEffects.value = (await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES
+		.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.champion)
+		.map(async ([effectObjectName, effectSpecific]): Promise<IEffectOptionGroup['options'][number]> => {
+			const sourceAbilityId = effectSpecific.sourceAbility as IChampionAbilityId;
+			const champion = await useChampion(sourceAbilityId.id);
+			const precomputedSourceAbilityDesc = computeAbilityDescription(minorVersion, champion, sourceAbilityId);
 
-			for (const abilityKey of ALL_CHAMPION_ABILITY_KEYS) {
-				const abilitySpecific = (specific as IChampionSpecific)[abilityKey];
-				if (abilitySpecific) {
-					for (const [rawAbilityVariantIndex, variantSpecific] of Object.entries(abilitySpecific) as unknown as [number, IChampionAbilityVariantSpecific][]) {
-						if ('setupEffectData' in variantSpecific) {
-							const abilityVariantIndex = Number(rawAbilityVariantIndex);
-							champion ||= await useChampion(championId);
-
-							const precomputedDescription = computeAbilityDescription(minorVersion, champion, abilityKey!, abilityVariantIndex as unknown as number);
-
-							effects.push({
-								abilityId: GameAbilityId.build(ABILITY_TYPE.champion, 'effects', championId as IChampionId, abilityKey, abilityVariantIndex),
-								name: `${champion.name} ${abilityKey === 'passive' ? 'P' : abilityKey.toUpperCase()} - ${champion.abilities[abilityKey]!.variants[abilityVariantIndex]!.name}`,
-								hoverTooltipData: {
-									precomputedDescription,
-									championId: championId as IChampionId,
-									abilityKey,
-									abilityVariantIndex: Number(abilityVariantIndex),
-								},
-							});
-						}
-					}
-				}
-			}
-
-			return effects;
-		}))).filter(effects => effects.length).flatMap(effects => effects);
+			return {
+				abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
+				sourceAbilityId,
+				name: `${champion.name} ${sourceAbilityId.abilityKey === 'passive' ? 'P' : sourceAbilityId.abilityKey.toUpperCase()} - ${precomputedSourceAbilityDesc.name}`,
+				precomputedSourceAbilityDesc,
+			};
+		})));
 
 	isLoading.value = false;
 }
@@ -123,11 +98,18 @@ function submitAnotherEffect(event: SubmitEvent) {
 	(event.target as HTMLFormElement).reset();
 }
 
+const UnknownComponent = () => h('article', { class: 'unknown' }, ['UNKNOWN']);
+
 function effectComponent(effect: IDamageSourceEffect): Component | undefined {
-	if (effect.abilityId.type === 'item') {
-		return ITEM_COMPONENTS[effect.abilityId.id]?.effects;
+	const effectSpecific = EFFECT_SPECIFICS[effect.abilityId.id];
+	if (!effectSpecific) {
+		console.warn(`[CalculatorEffectsDialog effectComponent] failed to find specific for`, effect.abilityId);
+		return;
 	}
-	return CHAMPION_COMPONENTS[effect.abilityId.id]?.effects;
+
+	return effectSpecific.sourceAbility.type === 'item'
+		? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+		: CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
 }
 
 defineExpose({
@@ -154,7 +136,7 @@ defineExpose({
 		<ul v-show="damageSource?.appliedEffects.value.length" :inert="isLoading">
 			<li v-for="effect in damageSource?.appliedEffects.value" :key="effect.id">
 				<component
-					:is="effectComponent(effect)"
+					:is="effectComponent(effect) ?? UnknownComponent"
 					:ability-id="effect.abilityId"
 					:damage-source
 					id-prefix="effects-dialog"
@@ -162,7 +144,7 @@ defineExpose({
 					<button
 						class="pretend-ui-btn remove"
 						title="remove"
-						@click="damageSource?.removeEffect(effect.id)"
+						@click="damageSource?.removeEffect(effect.abilityId)"
 					>
 						<span>remove</span>
 						<Icon class="i-ph:trash" />

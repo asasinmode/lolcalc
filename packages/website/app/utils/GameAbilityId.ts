@@ -119,9 +119,16 @@ export class GameAbilityId {
 		return undefined;
 	}
 
-	static isSame(id1: IGameAbilityId, id2: IGameAbilityId) {
-		return id1.type === id2.type && id1.id === id2.id
-			&& (id1 as IChampionAbilityId).abilityKey === (id2 as IChampionAbilityId).abilityKey
-			&& (id1 as IChampionAbilityId).abilityVariantIndex === (id2 as IChampionAbilityId).abilityVariantIndex;
+	static isSame(id1: IGameAbilityId, id2: IGameAbilityId): boolean {
+		if (id1.type !== id2.type || id1.id !== id2.id) {
+			return false;
+		}
+
+		if (id1.type === ABILITY_TYPE.champion) {
+			return id1.abilityKey === (id2 as IChampionAbilityId).abilityKey
+				&& id1.abilityVariantIndex === (id2 as IChampionAbilityId).abilityVariantIndex;
+		}
+
+		return false;
 	}
 }
