@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { WatchHandle } from 'vue';
-import type { IChampionAbilityHoverTooltipProps, IDamageResultTableColumn, IDamageResultTableSection, IGameAbilityId, IItemAbilityId } from '~/utils/types';
+import type { IChampionAbilityHoverTooltipProps, IChampionAbilityId, IDamageResultTableColumn, IDamageResultTableSection, IGameAbilityId, IItemAbilityId } from '~/utils/types';
 
 const props = defineProps<{
 	damageSources: DamageSource[];
@@ -1478,7 +1478,7 @@ defineExpose({
 										v-for="(ability, abilityIndex) in option.abilities"
 										:key="GameAbilityId.stringify(ability.id)"
 										:value="`${optionIndex}-${abilityIndex}`"
-										:disabled="enableUnimplementedUi ? undefined : ability.id.type !== ABILITY_TYPE.item && ability.id.abilityKey !== 'passive'"
+										:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== ABILITY_TYPE.champion || ability.id.abilityKey === 'passive')"
 									>
 										{{ ability.name }}
 									</option>
@@ -1487,7 +1487,9 @@ defineExpose({
 							<button
 								class="pretend-ui-btn"
 								type="submit"
-								:disabled="!damageSectionOptions.length || !enableUnimplementedUi && !damageSectionOptions.some(option => option.type === 'item')"
+								:disabled="!damageSectionOptions.length
+									|| !enableUnimplementedUi
+									&& !damageSectionOptions.some(option => option.type !== ABILITY_TYPE.champion || option.abilities.some(ability => (ability.id as IChampionAbilityId).abilityKey === 'passive'))"
 							>
 								add
 							</button>

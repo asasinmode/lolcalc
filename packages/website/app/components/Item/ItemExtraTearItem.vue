@@ -72,7 +72,7 @@ function updateValue(value: number) {
 	<VExtrasNumber
 		:model-value="isTransformed ? 1000 : (damageSource.internalItemData.value as IData).manaflow"
 		:img-src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${abilityId.id}.png`"
-		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.itemImageText?.(damageSource, abilityId)"
+		:img-text="(resolveAbilitySpecific<any>(abilityId) as IItemSpecific)?.imgText?.(damageSource, abilityId)"
 		img-size="64"
 		label="Manaflow stacks"
 		:used-number-input="useNumberInput([damageSource.internalItemData as Ref<IData>, 'manaflow'])"

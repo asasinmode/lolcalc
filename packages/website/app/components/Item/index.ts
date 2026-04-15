@@ -76,21 +76,20 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
 		extras: [
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, ITEM_SPECIFICS[ITEM_NAME_TO_ID.blackCleaver].effectMax),
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue),
 			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'fervor', 'Fervor'),
 		],
 	},
 };
 
-for (const [itemId, itemSpecific] of Object.entries(ITEM_SPECIFICS) as [string, IItemSpecific][]) {
-	if ('setupEffectData' in itemSpecific) {
-		const abilityId = GameAbilityId.build(ABILITY_TYPE.effect, itemId);
-		const { effectMin, effectMax, effectLabel } = itemSpecific as IDamageSourceEffectProvider;
+for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
+	if (effectSpecific.sourceAbility.type === ABILITY_TYPE.item) {
+		const abilityId = GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName);
+		const { label, maxValue, minValue } = effectSpecific;
 
-		ITEM_COMPONENTS[itemId] ??= {};
-		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with `DamageSource.computeAppliedEffect`, it works only on first value
-		ITEM_COMPONENTS[itemId].effects ??= ((itemSpecific as IDamageSourceEffectProvider).effectMax ?? 1) > 1
-			? await numberExtra(abilityId, 0 as never, effectLabel, effectMin ?? 0, effectMax)
-			: await booleanExtra(abilityId, 0 as never, effectLabel);
-	};
+		ITEM_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
+		ITEM_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= (maxValue ?? 1) > 1
+			? await numberExtra(abilityId, 0, label, maxValue ?? 0, minValue)
+			: await booleanExtra(abilityId, 0, label);
+	}
 }

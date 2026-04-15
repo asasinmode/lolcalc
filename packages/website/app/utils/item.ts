@@ -9,8 +9,8 @@ const tearItemSpecifics = {
 		self.internalItemData.value.manaflow = Math.max(0, Math.min(360, self.internalItemData.value.manaflow ?? 0));
 		return { manaflow: 0 };
 	},
-	itemImageTextLabel: 'Manaflow stacks',
-	itemImageText(self) {
+	imgTextLabel: 'Manaflow stacks',
+	imgText(self) {
 		return (self.internalItemData.value as { manaflow: number }).manaflow;
 	},
 } satisfies IItemSpecific;
@@ -22,8 +22,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.eminence = Math.max(0, self.internalItemData.value.eminence ?? 0);
 			return { eminence: 0 };
 		},
-		itemImageTextLabel: 'Eminence stacks',
-		itemImageText(self) {
+		imgTextLabel: 'Eminence stacks',
+		imgText(self) {
 			const { eminence } = self.internalItemData.value as { eminence: number };
 			return eminence && items[ITEM_NAME_TO_ID.hubris].dataValues.BonusLethality + eminence * items[ITEM_NAME_TO_ID.hubris].dataValues.ADPerStatue;
 		},
@@ -34,8 +34,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.glory = Math.max(0, Math.min(10, self.internalItemData.value.glory ?? 0));
 			return { glory: 0 };
 		},
-		itemImageTextLabel: 'Glory stacks',
-		itemImageText(self) {
+		imgTextLabel: 'Glory stacks',
+		imgText(self) {
 			return (self.internalItemData.value as { glory: number }).glory;
 		},
 	},
@@ -45,8 +45,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.glory = Math.max(0, Math.min(25, self.internalItemData.value.glory ?? 0));
 			return { glory: 0 };
 		},
-		itemImageTextLabel: 'Glory stacks',
-		itemImageText(self) {
+		imgTextLabel: 'Glory stacks',
+		imgText(self) {
 			return (self.internalItemData.value as { glory: number }).glory;
 		},
 	},
@@ -56,8 +56,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
 			return { madness: 0 };
 		},
-		itemImageTextLabel: 'Madness bonus damage',
-		itemImageText(self) {
+		imgTextLabel: 'Madness bonus damage',
+		imgText(self) {
 			const { madness } = self.internalItemData.value as { madness: number };
 			return madness && `${Math.round(madness * items[ITEM_NAME_TO_ID.hauntingGuise].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
@@ -68,8 +68,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.eternity = Math.max(0, Math.min(10, self.internalItemData.value.eternity ?? 0));
 			return { eternity: 0 };
 		},
-		itemImageTextLabel: 'Eternity stacks',
-		itemImageText(self) {
+		imgTextLabel: 'Eternity stacks',
+		imgText(self) {
 			return (self.internalItemData.value as { eternity: number }).eternity;
 		},
 	},
@@ -79,8 +79,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.bBlaze = Math.max(0, self.internalItemData.value.bBlaze ?? 0);
 			return { bBlaze: 0 };
 		},
-		itemImageTextLabel: 'Baleful Blaze ap increase',
-		itemImageText(self) {
+		imgTextLabel: 'Baleful Blaze ap increase',
+		imgText(self) {
 			const { bBlaze } = self.internalItemData.value as { bBlaze: number };
 			return bBlaze && `${Math.round(bBlaze * items[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
 		},
@@ -91,8 +91,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.cConsumption = Math.max(0, self.internalItemData.value.cConsumption ?? 0);
 			return { cConsumption: 0 };
 		},
-		itemImageTextLabel: 'Colosal Consumption health increase',
-		itemImageText(self) {
+		imgTextLabel: 'Colosal Consumption health increase',
+		imgText(self) {
 			return (self.internalItemData.value as { cConsumption: number }).cConsumption;
 		},
 	},
@@ -102,8 +102,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.seething = Math.max(0, Math.min(4, self.internalItemData.value.seething ?? 0));
 			return { seething: 0 };
 		},
-		itemImageTextLabel: 'Seething Strikes stacks',
-		itemImageText(self) {
+		imgTextLabel: 'Seething Strikes stacks',
+		imgText(self) {
 			return (self.internalItemData.value as { seething: number }).seething;
 		},
 	},
@@ -114,8 +114,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.jxtpD = Math.max(0, Math.min(3, self.internalItemData.value.jxtpD ?? 0));
 			return { jxtpL: 0, jxtpD: 0 };
 		},
-		itemImageTextLabel: 'Juxtaposition stacks (light | dark)',
-		itemImageText(self, _abilityId, _stringifiedAbilityId, property?: 'jxtpL' | 'jxtpD') {
+		imgTextLabel: 'Juxtaposition stacks (light | dark)',
+		imgText(self, property?: 'jxtpL' | 'jxtpD') {
 			const data = self.internalItemData.value as { jxtpL: number; jxtpD: number };
 			return property ? data[property] : (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
 		},
@@ -126,8 +126,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
 			return { madness: 0 };
 		},
-		itemImageTextLabel: 'Madness bonus damage',
-		itemImageText(self) {
+		imgTextLabel: 'Madness bonus damage',
+		imgText(self) {
 			const { madness } = self.internalItemData.value as { madness: number };
 			return madness && `${Math.round(madness * items[ITEM_NAME_TO_ID.liandry].dataValues.DamageIncreasePerSecond * 100)}%`;
 		},
@@ -138,8 +138,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.practice = Math.max(0, Math.min(25, self.internalItemData.value.practice ?? 0));
 			return { practice: 0 };
 		},
-		itemImageTextLabel: 'Practice Makes Lethal critical strike chance',
-		itemImageText(self) {
+		imgTextLabel: 'Practice Makes Lethal critical strike chance',
+		imgText(self) {
 			const { practice } = self.internalItemData.value as { practice: number };
 			return practice && `${practice}%`;
 		},
@@ -150,8 +150,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.fWill = Math.max(0, Math.min(4, self.internalItemData.value.fWill ?? 0));
 			return { fWill: 0 };
 		},
-		itemImageTextLabel: 'Focused Will ability damage increase',
-		itemImageText(self) {
+		imgTextLabel: 'Focused Will ability damage increase',
+		imgText(self) {
 			const { fWill } = self.internalItemData.value as { fWill: number };
 			return fWill && `${Math.round(fWill * items[ITEM_NAME_TO_ID.shojin].dataValues.SpellDamageIncrease * 100)}%`;
 		},
@@ -162,8 +162,8 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.corruption = Math.max(0, Math.min(4, self.internalItemData.value.corruption ?? 0));
 			return { corruption: 0 };
 		},
-		itemImageTextLabel: 'Corruption bonus damage',
-		itemImageText(self) {
+		imgTextLabel: 'Corruption bonus damage',
+		imgText(self) {
 			const { corruption } = self.internalItemData.value as { corruption: number };
 			return corruption && `${Math.round(corruption * items[ITEM_NAME_TO_ID.riftmaker].dataValues.EternityDamageIncreasePerSecond * 100)}%`;
 		},
@@ -196,8 +196,8 @@ export const ITEM_SPECIFICS = {
 		isItemImageActive(internalData: { fervor: number }) {
 			return internalData.fervor;
 		},
-		itemImageTextLabel: 'Carve stacks',
-		itemImageText(self) {
+		imgTextLabel: 'Carve stacks',
+		imgText(self) {
 			return self.internalItemData.value.carve;
 		},
 	},

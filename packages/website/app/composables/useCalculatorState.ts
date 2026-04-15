@@ -262,7 +262,7 @@ export function useCalculatorState(
 				continue;
 			}
 
-			const abilityId = GameAbilityId.parse(id, 'internal');
+			const abilityId = GameAbilityId.parse(id);
 			if (abilityId) {
 				resultsTable.value.addResultsSection(abilityId, undefined, !!isExpanded);
 				currentSectionIndex += 1;

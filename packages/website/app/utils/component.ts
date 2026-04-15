@@ -47,7 +47,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const specific = resolveAbilitySpecific(abilityId, 'numberExtra');
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, isEffect, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, property, props.damageSource);
 
 		return () => h(VExtrasNumber, {
 			'modelValue': modelValue.value,
@@ -58,9 +58,9 @@ export async function numberExtra<T extends IGameAbilityId>(
 			min,
 			max,
 			step,
-			'imgText': (specific as IProviderGroupImageText)?.itemImageText?.(props.damageSource, abilityId, property),
+			'imgText': (specific as IProviderGroupImageText)?.imgText?.(props.damageSource, property),
 			'usedNumberInput': useNumberInput(
-				isEffect
+				abilityId.type === ABILITY_TYPE.effect
 					? [appliedEffect!.data, property as number]
 					: [props.damageSource[abilityId.type === ABILITY_TYPE.champion ? 'internalData' : 'internalItemData'], property as string],
 				true,
@@ -76,21 +76,13 @@ export async function numberExtra<T extends IGameAbilityId>(
 
 export async function booleanExtra<T extends IGameAbilityId>(
 	abilityId: T,
-	property: T['dataSource'] extends 'internal'
-		? IGameAbilityInternalData<T> extends never
-			? never
-			: keyof IGameAbilityInternalData<T>
-		: IGameAbilityEffectData<T> extends never
-			? never
-			: TupleIndexes<IGameAbilityEffectData<T>>,
+	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	labelAppendOnTarget = false,
 ) {
-	const isEffect = abilityId.dataSource === 'effects';
-
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
-		const [stringifiedAbilityId, modelValue, updateValue] = extraAppliedEffect(abilityId, isEffect, property, props.damageSource);
+		const [stringifiedAbilityId, modelValue, updateValue] = extraAppliedEffect(abilityId, property, props.damageSource);
 
 		return () => h(VExtrasBoolean, {
 			'modelValue': modelValue.value,
@@ -141,8 +133,9 @@ function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, da
 	updateValue: (value: any) => void,
 	appliedEffect: IDamageSourceEffect | undefined,
 ] {
+	const isEffect = abilityId.type === ABILITY_TYPE.effect;
 	const appliedEffect = isEffect
-		? damageSource.appliedEffects.value.find(effect => GameAbilityId.isSame(effect.abilityId, abilityId))
+		? damageSource.appliedEffects.value.find(effect => effect.objectName === abilityId.id)
 		: undefined;
 
 	if (isEffect && !appliedEffect) {

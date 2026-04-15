@@ -13,23 +13,15 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	},
 };
 
-for (const [championId, championSpecific] of Object.entries(CHAMPION_SPECIFICS) as [IChampionId, IChampionSpecific][]) {
-	for (const abilityKey of ALL_CHAMPION_ABILITY_KEYS) {
-		if (abilityKey in championSpecific) {
-			const abilitySpecific = championSpecific[abilityKey]!;
-			for (const [rawVariantIndex, variantSpecific] of Object.entries(abilitySpecific) as [PropertyKey, IChampionAbilityVariantSpecific][]) {
-				if ('setupEffectData' in variantSpecific) {
-					const abilityVariantIndex = Number(rawVariantIndex);
+for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
+	if (effectSpecific.sourceAbility.type === ABILITY_TYPE.champion) {
+		const abilityId = GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName);
+		const { label, maxValue, minValue } = effectSpecific;
 
-					const abilityId = GameAbilityId.build(ABILITY_TYPE.champion, championId, abilityKey, abilityVariantIndex);
-					const { effectMin, effectMax, effectLabel } = variantSpecific as IDamageSourceEffectProvider;
-
-					CHAMPION_COMPONENTS[championId] ??= {};
-					CHAMPION_COMPONENTS[championId].effects ??= (variantSpecific.effectMax ?? 1) > 1
-						? await numberExtra(abilityId, 0 as never, effectLabel, effectMin ?? 0, effectMax)
-						: await booleanExtra(abilityId, 0 as never, effectLabel);
-				}
-			}
-		}
+		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
+		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with `DamageSource.computeAppliedEffect`, it works only on first value
+		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= (maxValue ?? 1) > 1
+			? await numberExtra(abilityId, 0, label, maxValue ?? 0, minValue)
+			: await booleanExtra(abilityId, 0, label);
 	}
 }

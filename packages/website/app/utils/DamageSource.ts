@@ -1,5 +1,5 @@
 import type { ShallowRef, UnwrapRef, WatchHandle } from 'vue';
-import type { IAbilityImageTextProvider, IChampionAbilityId, IGameAbilityId, IItemAbilityId } from './types';
+import type { IChampionAbilityId, IGameAbilityId, IItemAbilityId } from './types';
 
 type IDamageSource<T extends IChampionId | undefined = undefined> = InstanceType<typeof DamageSource<T>>;
 
@@ -906,7 +906,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	/** like computed but can depend on the computed */
 	coComputed = {
 		itemImage: computed<({ text?: string | number; isActive?: boolean | number } | undefined)[]>(() => this.computed.itemSpecifics.value.map(computedSpecific => computedSpecific && ({
-			text: computedSpecific.specific?.itemImageText?.(this, computedSpecific.abilityId),
+			text: computedSpecific.specific?.imgText?.(this, computedSpecific.abilityId),
 			isActive: computedSpecific.specific?.isItemImageActive?.(this.internalItemData.value),
 		}))),
 	};

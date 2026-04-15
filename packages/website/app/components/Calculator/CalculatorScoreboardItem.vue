@@ -796,8 +796,8 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	const effect = props.value.appliedEffects.value[effectIndex]!;
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
 
-	const min = computedEffect.specific.effectMin ?? 0;
-	const max = computedEffect.specific.effectMax ?? 1;
+	const min = computedEffect.specific.minValue ?? 0;
+	const max = computedEffect.specific.maxValue ?? 1;
 
 	if (globalKeyModifiers.value.ctrl) {
 		effect.data[0] = by < 0 ? min : max;
@@ -987,7 +987,7 @@ defineExpose({ el });
 						loading="lazy"
 					>
 					<span v-if="value.coComputed.itemImage.value[i - 1]?.text">
-						<span>{{ value.computed.itemSpecifics.value[i - 1]!.specific.itemImageTextLabel }}:</span>
+						<span>{{ value.computed.itemSpecifics.value[i - 1]!.specific.imgTextLabel }}:</span>
 						{{ value.coComputed.itemImage.value[i - 1]!.text }}
 					</span>
 				</component>
@@ -1120,9 +1120,9 @@ defineExpose({ el });
 				<ul>
 					<li
 						v-for="[effect, effectIndex] in activeEffects"
-						:key="effect.id"
+						:key="effect.objectName"
 					>
-						<span>{{ effect.specific.effectLabel }}</span>
+						<span>{{ effect.specific.label }}</span>
 						<button @click="modifyEffectValue(effectIndex, 1)" @click.right.prevent="modifyEffectValue(effectIndex, -1)">
 							<img
 								v-show="effect.imgSrc"
@@ -1131,7 +1131,7 @@ defineExpose({ el });
 								:height="effect.imgSize"
 								loading="lazy"
 							>
-							<span v-if="effect.specific.effectImageText" v-show="effect.imgText">
+							<span v-if="effect.specific.imgText" v-show="effect.imgText">
 								{{ effect.imgText }}
 							</span>
 						</button>
