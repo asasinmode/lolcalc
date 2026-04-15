@@ -828,7 +828,11 @@ defineExpose({
 			>
 				undo
 			</button>
-			<section id="item-shop-panel-eq" :data-pinned="inventoryPanelPinned || undefined">
+			<section
+				id="item-shop-panel-eq"
+				:data-pinned="inventoryPanelPinned || undefined"
+				:style="`--inventory-ward-icon: url('https://raw.communitydragon.org/${minorVersion}/game/assets/ux/minimap/pings/need_ward_gray.png')`"
+			>
 				<h2>inventory</h2>
 				<button class="pin-button" @click="inventoryPanelPinned = !inventoryPanelPinned">
 					<span>Pin inventory panel</span>
@@ -1061,7 +1065,7 @@ defineExpose({
 
 					&::before {
 						--at-apply: 'block size-full brightness-80 content-empty';
-						background-image: url('https://raw.communitydragon.org/latest/game/assets/ux/minimap/pings/need_ward_gray.png');
+						background-image: var(--inventory-ward-icon);
 						background-repeat: no-repeat;
 						background-size: 60%;
 						background-position: center;

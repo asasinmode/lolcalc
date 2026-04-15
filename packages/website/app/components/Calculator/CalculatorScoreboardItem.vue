@@ -778,7 +778,7 @@ const hoveredDragonThingText = computed(() => {
 
 	return {
 		title: `${dragonName} ${isStack ? 'Dragon' : 'Soul'}`,
-		description: replaceGameDescriptionIcons(replaced),
+		description: replaceGameDescriptionIcons(minorVersion, replaced),
 		anyUnknown: unknownStringtableVariables.size || unknownVariables.length,
 		invalid,
 	};
@@ -810,11 +810,13 @@ const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
 function showEffectTooltip(event: MouseEvent, effect: IComputedAppliedEffect) {
 	hoveredEffectId.value = effect.abilityId;
 	event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
+	effect.specific.sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
 	effectHoverTooltipEl.value?.el?.showPopover();
 }
 
 function hideEffectTooltip() {
 	effectHoverTooltipEl.value?.el?.hidePopover();
+	removeItemTooltipViewListeners();
 }
 
 onBeforeUnmount(() => {
@@ -1274,14 +1276,14 @@ defineExpose({ el });
 					<template v-if="value.roleQuest.value">
 						<img
 
-							:src="`https://raw.communitydragon.org/latest/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
+							:src="`https://raw.communitydragon.org/${minorVersion}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}_complete.png`"
 							width="64"
 							height="64"
 							loading="lazy"
 							aria-hidden="true"
 						>
 						<img
-							:src="`https://raw.communitydragon.org/latest/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
+							:src="`https://raw.communitydragon.org/${minorVersion}/game/assets/ux/lol/rolequest_icon${value.roleQuest.value}32.png`"
 							width="32"
 							height="32"
 							loading="lazy"

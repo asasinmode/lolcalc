@@ -76,7 +76,7 @@ defineExpose({ header });
 		<ul>
 			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
 				<img
-					:src="`https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
+					:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`"
 					width="20"
 					height="20"
 					aria-hidden="true"

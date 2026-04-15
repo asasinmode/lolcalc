@@ -997,8 +997,8 @@ export function computeItemDescription(
 			] as [string, number, string];
 		});
 
-	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
-	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, replaceOptions);
+	const shopFormatted = formatItemDescriptionText(tooltipShop, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, minorVersion, replaceOptions);
+	const inventoryFormatted = formatItemDescriptionText(tooltipInventory, item, damageSource, variables, unknownVariables, text, cooldownIcon, onHitIcon, minorVersion, replaceOptions);
 
 	const replacedExtended = additionalItemText(extended, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
 	const replacedFooterLeft = additionalItemText(footerLeft, item, damageSource, text.stringtable, variables, unknownVariables, replaceOptions);
@@ -1106,6 +1106,7 @@ export function computeAbilityDescription(
 		variablesAllValues: tooltipVariablesAV,
 		variables: tooltipVariables,
 	} = abilityVariantText(
+		minorVersion,
 		onHitIcon,
 		allVariants,
 		variant.tooltip || '<unknown>UNKNOWN</unknown>',
@@ -1121,6 +1122,7 @@ export function computeAbilityDescription(
 		variablesAllValues: tooltipExtendedVariablesAV,
 		variables: tooltipExtendedVariables,
 	} = abilityVariantText(
+		minorVersion,
 		onHitIcon,
 		allVariants,
 		variant.tooltipExtended || '',
@@ -1135,6 +1137,7 @@ export function computeAbilityDescription(
 		unknownV: tooltipExtendedBelowLineUnknownV,
 		variables: tooltipExtendedBelowLineVariables,
 	} = abilityVariantText(
+		minorVersion,
 		onHitIcon,
 		allVariants,
 		variant.tooltipExtendedBelowLine || '',
@@ -1208,6 +1211,7 @@ export function computeAbilityDescription(
 }
 
 function abilityVariantText(
+	minorVersion: string,
 	onHitIcon: string,
 	allAbilityVariants: IChampionAbilityVariant[],
 	value: string,
@@ -1229,7 +1233,7 @@ function abilityVariantText(
 	);
 
 	return {
-		replaced: replaceGameDescriptionIcons(replaced, onHitIcon),
+		replaced: replaceGameDescriptionIcons(minorVersion, replaced, onHitIcon),
 		unknownSV: unknownStringtableVariables,
 		unknownV: unknownVariables,
 		variablesAllValues,
@@ -1269,6 +1273,7 @@ function formatItemDescriptionText(
 	text: ITextData,
 	cooldownIcon: string,
 	onHitIcon: string,
+	minorVersion: string,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
 ): [string, ...string[]][] | undefined {
 	return value?.map(([heading, ...paragraphs]) => {
@@ -1296,7 +1301,7 @@ function formatItemDescriptionText(
 		mergeMaps(variables, headingVariables);
 
 		return [
-			replaceGameDescriptionIcons(replacedHeading),
+			replaceGameDescriptionIcons(minorVersion, replacedHeading),
 			...paragraphs.map((paragraph) => {
 				const { replaced: paragraphStringtableReplaced } = replaceGameDescriptionStringtableVariables(paragraph, text.stringtable);
 				const { variables: paragraphVariables, replaced: replacedParagraph, unknownVariables: paragraphUnknown } = replaceGameDescriptionVariables(
@@ -1313,7 +1318,7 @@ function formatItemDescriptionText(
 				}
 				mergeMaps(variables, paragraphVariables);
 
-				return replaceGameDescriptionIcons(replacedParagraph, onHitIcon);
+				return replaceGameDescriptionIcons(minorVersion, replacedParagraph, onHitIcon);
 			},
 			),
 		];

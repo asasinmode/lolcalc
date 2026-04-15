@@ -305,11 +305,11 @@ export function replaceGameDescriptionVariables(
 
 const statIconNameValues = Object.values(STAT_ICON_NAMES);
 
-export function replaceGameDescriptionIcons(text: string, onHitIcon?: string) {
+export function replaceGameDescriptionIcons(minorVersion: string, text: string, onHitIcon?: string) {
 	return text
 		.replace(/%i:(\w+)%/g, (_, name: string) => {
 			name = name.toLocaleLowerCase();
-			return `<img src="https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
+			return `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/${statIconNameValues.includes(name) ? 'statsicon' : 'gameplay'}/${name}.png" width="20" height="20" aria-hidden="true">`;
 		})
 		.replace(/\{\{ ?Item_Keyword_OnHit ?\}\}/g, `${onHitIcon || '{{ Item_Keyword_OnHit }}'} <onhit>On-Hit</onhit>`);
 }
