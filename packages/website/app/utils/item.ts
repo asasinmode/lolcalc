@@ -6,7 +6,7 @@ const { data: items } = itemsData;
 const tearItemSpecifics = {
 	internalDataProperties: ['manaflow'],
 	setupData(self: DamageSource) {
-		self.internalItemData.value.manaflow = Math.max(0, Math.min(360, self.internalItemData.value.manaflow ?? 0));
+		self.internalItemData.value.manaflow = clamp(0, self.internalItemData.value.manaflow ?? 0, items[ITEM_NAME_TO_ID.tear].dataValues.MaxMana);
 		return { manaflow: 0 };
 	},
 	imgTextLabel: 'Manaflow stacks',
@@ -31,7 +31,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.darkSeal]: {
 		internalDataProperties: ['glory'],
 		setupData(self) {
-			self.internalItemData.value.glory = Math.max(0, Math.min(10, self.internalItemData.value.glory ?? 0));
+			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, items[ITEM_NAME_TO_ID.darkSeal].dataValues.MaxGloryStacks);
 			return { glory: 0 };
 		},
 		imgTextLabel: 'Glory stacks',
@@ -42,7 +42,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.mejai]: {
 		internalDataProperties: ['glory'],
 		setupData(self) {
-			self.internalItemData.value.glory = Math.max(0, Math.min(25, self.internalItemData.value.glory ?? 0));
+			self.internalItemData.value.glory = clamp(0, self.internalItemData.value.glory ?? 0, items[ITEM_NAME_TO_ID.mejai].dataValues.MaxGloryStacks);
 			return { glory: 0 };
 		},
 		imgTextLabel: 'Glory stacks',
@@ -53,7 +53,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
 		internalDataProperties: ['madness'],
 		setupData(self) {
-			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
+			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, items[ITEM_NAME_TO_ID.hauntingGuise].dataValues.SecondsInCombat);
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
@@ -65,7 +65,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.roa]: {
 		internalDataProperties: ['eternity'],
 		setupData(self) {
-			self.internalItemData.value.eternity = Math.max(0, Math.min(10, self.internalItemData.value.eternity ?? 0));
+			self.internalItemData.value.eternity = clamp(0, self.internalItemData.value.eternity ?? 0, items[ITEM_NAME_TO_ID.roa].dataValues.MaxStacks);
 			return { eternity: 0 };
 		},
 		imgTextLabel: 'Eternity stacks',
@@ -99,7 +99,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		internalDataProperties: ['seething'],
 		setupData(self) {
-			self.internalItemData.value.seething = Math.max(0, Math.min(4, self.internalItemData.value.seething ?? 0));
+			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, items[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks);
 			return { seething: 0 };
 		},
 		imgTextLabel: 'Seething Strikes stacks',
@@ -110,8 +110,10 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.terminus]: {
 		internalDataProperties: ['jxtpL', 'jxtpD'],
 		setupData(self) {
-			self.internalItemData.value.jxtpL = Math.max(0, Math.min(3, self.internalItemData.value.jxtpL ?? 0));
-			self.internalItemData.value.jxtpD = Math.max(0, Math.min(3, self.internalItemData.value.jxtpD ?? 0));
+			const { PenPerHit, PenMax } = items[ITEM_NAME_TO_ID.terminus].dataValues;
+			const maxStacks = Math.round(PenPerHit / PenMax);
+			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, maxStacks);
+			self.internalItemData.value.jxtpD = clamp(0, self.internalItemData.value.jxtpD ?? 0, maxStacks);
 			return { jxtpL: 0, jxtpD: 0 };
 		},
 		imgTextLabel: 'Juxtaposition stacks (light | dark)',
@@ -123,7 +125,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.liandry]: {
 		internalDataProperties: ['madness'],
 		setupData(self) {
-			self.internalItemData.value.madness = Math.max(0, Math.min(3, self.internalItemData.value.madness ?? 0));
+			self.internalItemData.value.madness = clamp(0, self.internalItemData.value.madness ?? 0, items[ITEM_NAME_TO_ID.liandry].dataValues.MaxStackNumber);
 			return { madness: 0 };
 		},
 		imgTextLabel: 'Madness bonus damage',
@@ -135,7 +137,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.yunTal]: {
 		internalDataProperties: ['practice'],
 		setupData(self) {
-			self.internalItemData.value.practice = Math.max(0, Math.min(25, self.internalItemData.value.practice ?? 0));
+			self.internalItemData.value.practice = clamp(0, self.internalItemData.value.practice ?? 0, items[ITEM_NAME_TO_ID.yunTal].dataValues.CritMax);
 			return { practice: 0 };
 		},
 		imgTextLabel: 'Practice Makes Lethal critical strike chance',
@@ -147,7 +149,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.shojin]: {
 		internalDataProperties: ['fWill'],
 		setupData(self) {
-			self.internalItemData.value.fWill = Math.max(0, Math.min(4, self.internalItemData.value.fWill ?? 0));
+			self.internalItemData.value.fWill = clamp(0, self.internalItemData.value.fWill ?? 0, items[ITEM_NAME_TO_ID.shojin].dataValues.StackCount);
 			return { fWill: 0 };
 		},
 		imgTextLabel: 'Focused Will ability damage increase',
@@ -159,7 +161,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.riftmaker]: {
 		internalDataProperties: ['corruption'],
 		setupData(self) {
-			self.internalItemData.value.corruption = Math.max(0, Math.min(4, self.internalItemData.value.corruption ?? 0));
+			self.internalItemData.value.corruption = clamp(0, self.internalItemData.value.corruption ?? 0, items[ITEM_NAME_TO_ID.riftmaker].dataValues.SecondsInCombat);
 			return { corruption: 0 };
 		},
 		imgTextLabel: 'Corruption bonus damage',
@@ -176,7 +178,7 @@ export const ITEM_SPECIFICS = {
 	[ITEM_NAME_TO_ID.trinity]: {
 		internalDataProperties: ['quicken'],
 		setupData(self) {
-			self.internalItemData.value.quicken = Math.max(0, Math.min(1, self.internalItemData.value.quicken ?? 0));
+			self.internalItemData.value.quicken = clamp(0, self.internalItemData.value.quicken ?? 0, 1);
 			return { quicken: 0 };
 		},
 		isItemImageActive(internalData: { quicken: number }) {
@@ -190,7 +192,7 @@ export const ITEM_SPECIFICS = {
 				EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue,
 				self.internalItemData.value.carve ?? 0,
 			));
-			self.internalItemData.value.fervor = Math.max(0, Math.min(1, self.internalItemData.value.carve ?? 0));
+			self.internalItemData.value.fervor = clamp(0, self.internalItemData.value.carve ?? 0, 1);
 			return { carve: 0, fervor: 0 };
 		},
 		isItemImageActive(internalData: { fervor: number }) {

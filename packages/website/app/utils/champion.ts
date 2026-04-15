@@ -14,7 +14,7 @@ export const CHAMPION_SPECIFICS = {
 	Amumu: {
 		setupData(self): { applyPassive: number } {
 			return {
-				applyPassive: Math.max(0, Math.min(1, self.internalData.value.applyPassive ?? 0)),
+				applyPassive: clamp(0, self.internalData.value.applyPassive ?? 0, 1),
 			};
 		},
 	},

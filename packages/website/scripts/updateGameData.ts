@@ -14,7 +14,7 @@ import fnv1a from '@sindresorhus/fnv1a';
 import { imageSize } from 'image-size';
 import { useMaps } from '../app/composables/useMaps.ts';
 import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
-import { EFFECT_SPECIFICS } from '../app/utils/effect.ts';
+import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../app/utils/effect.ts';
 import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
 import { ABILITY_TYPE, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '../app/utils/meta.ts';

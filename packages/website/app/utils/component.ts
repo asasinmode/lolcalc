@@ -146,9 +146,10 @@ function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, da
 
 	return [
 		GameAbilityId.stringify(abilityId),
-		computed(() => isEffect
-			? appliedEffect?.data[property as number]
-			: damageSource[dataProperty].value?.[property as string]),
+		computed(() =>
+			isEffect
+				? appliedEffect?.data[property as number]
+				: damageSource[dataProperty].value?.[property as string]),
 		function updateValue(value: any) {
 			if (isEffect) {
 				appliedEffect!.data[property as number] = value;

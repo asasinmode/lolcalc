@@ -7,7 +7,7 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
 		label: 'Cursed touch',
 		setupData(data): [cursedTouch: number] {
-			return [Math.min(0, Math.max(1, data?.[0] ?? 0))];
+			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [cursedTouch: number]) {
 			return data[0];
@@ -21,10 +21,8 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 		setupData(data): [carve: number] {
-			console.log('setting up bc', data, this);
 			return [
-				// Math.max(0, Math.min(EFFECT_SPECIFICS[EFFECT_NAME_TO_OBJECTNAME.blackCleaverCarve].maxValue, data?.[0] ?? 0)),
-				Math.max(0, Math.min(this.maxValue!, data?.[0] ?? 0)),
+				clamp(0, data?.[0] ?? 0, this.maxValue!),
 			];
 		},
 		isActive(data: [carve: number]) {
@@ -35,7 +33,7 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya),
 		label: 'Inspiring speech',
 		setupData(data): [inspiringSpeech: number] {
-			return [Math.max(0, Math.min(1, data?.[0] ?? 0))];
+			return [clamp(0, data?.[0], 1)];
 		},
 		isActive(data: [inspiringSpeech: number]) {
 			return data[0];
