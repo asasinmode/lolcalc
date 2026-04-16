@@ -1171,10 +1171,6 @@ defineExpose({
 			}
 		}
 
-		#item-shop-search[data-empty='true'] ~ button {
-			display: none;
-		}
-
 		#item-shop-panel-boots,
 		#item-shop-panel-eq {
 			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr]';

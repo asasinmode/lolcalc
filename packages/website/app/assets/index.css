@@ -151,6 +151,10 @@
 		input:is(:focus, :focus-visible, :not([data-empty='true'])) + label {
 			color: transparent;
 		}
+
+		input[data-empty='true'] ~ button {
+			--at-apply: 'hidden';
+		}
 	}
 
 	.hover-tooltip {
