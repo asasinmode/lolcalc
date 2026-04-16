@@ -110,6 +110,7 @@ defineExpose({
 			>
 				<button
 					class="leading-tight text-center min-w-0 block hyphens-auto"
+					:class="{ selected: value === champion }"
 					@click="value = champion"
 				>
 					<img
@@ -207,7 +208,7 @@ defineExpose({
 				--at-apply: 'flex justify-center h-min';
 
 				> button {
-					--at-apply: 'whitespace-nowrap flex flex-col items-center text-neutral-200 text-center h-min';
+					--at-apply: 'whitespace-nowrap flex flex-col items-center text-neutral-200 text-center h-min relative';
 
 					> img {
 						--at-apply: 'b b-neutral-600 aspect-1 size-[--img-size] mx-3 mb-1';
@@ -222,6 +223,40 @@ defineExpose({
 					&:focus-visible {
 						> img {
 							--at-apply: 'brightness-115';
+						}
+					}
+
+					&.selected {
+						--at-apply: 'of-visible';
+
+						> img {
+							--at-apply: 'saturate-0';
+						}
+
+						&::before,
+						&::after {
+							--at-apply: 'absolute size-[--img-size] top-0 start-1/2 -translate-x-1/2 content-empty z-1';
+						}
+
+						&::before {
+							--at-apply: 'size-[calc(var(--img-size)+2*var(--b-w))] -top-[--b-w]';
+							--b-w: calc(0.5 * var(--spacing));
+							--corner-size: calc(3 * var(--spacing));
+							--clr: var(--ui-btn-border-clr);
+
+							background:
+								linear-gradient(var(--clr) 0 0) top left / var(--corner-size) var(--b-w) no-repeat,
+								linear-gradient(var(--clr) 0 0) top left / var(--b-w) var(--corner-size) no-repeat,
+								linear-gradient(var(--clr) 0 0) top right / var(--corner-size) var(--b-w) no-repeat,
+								linear-gradient(var(--clr) 0 0) top right / var(--b-w) var(--corner-size) no-repeat,
+								linear-gradient(var(--clr) 0 0) bottom left / var(--corner-size) var(--b-w) no-repeat,
+								linear-gradient(var(--clr) 0 0) bottom left / var(--b-w) var(--corner-size) no-repeat,
+								linear-gradient(var(--clr) 0 0) bottom right / var(--corner-size) var(--b-w) no-repeat,
+								linear-gradient(var(--clr) 0 0) bottom right / var(--b-w) var(--corner-size) no-repeat;
+						}
+
+						&::after {
+							--at-apply: 'rounded-1/2 b-3 b-[--ui-btn-border-clr] outline -outline-offset-3.5 outline-black';
 						}
 					}
 				}
