@@ -139,21 +139,41 @@
 
 	.inline-search-label {
 		--at-apply: 'relative';
+		--icon-size: calc(4 * var(--spacing));
+		--gap: calc(2 * var(--spacing));
+		--py: calc(0.75 * var(--spacing));
+		--px: calc(2 * var(--spacing));
 
-		label {
-			--at-apply: 'absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis color-neutral-400';
+		> label {
+			--at-apply: 'absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis color-neutral-400 px-[--px] b b-transparent';
 
-			> span {
-				--at-apply: 'text-neutral-300';
+			> .icon {
+				--at-apply: 'me-[--gap] size-4 text-neutral-300';
 			}
 		}
 
-		input:is(:focus, :focus-visible, :not([data-empty='true'])) + label {
+		> input {
+			--at-apply: 'w-full pe-[--px] py-[--py] ps-[calc(var(--icon-size)+var(--px)+var(--gap))] b b-[--ui-btn-border-clr] bg-black bg-neutral-950';
+		}
+
+		> input:is(:focus, :focus-visible, :not([data-empty='true'])) + label {
 			color: transparent;
 		}
 
-		input[data-empty='true'] ~ button {
+		> input[data-empty='true'] ~ button {
 			--at-apply: 'hidden';
+		}
+
+		> button {
+			--at-apply: 'px-2 grid-center h-full end-0 top-0 absolute text-neutral-200 hoverable:text-white';
+
+			> span:first-of-type {
+				--at-apply: 'sr-only';
+			}
+
+			> span.icon {
+				--at-apply: 'size-4';
+			}
 		}
 	}
 

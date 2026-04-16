@@ -422,7 +422,7 @@ defineExpose({
 				all items
 			</h1>
 			<form method="dialog">
-				<button value="cancel" title="Close" autofocus>
+				<button value="cancel" title="close" autofocus>
 					<Icon class="i-ph:x-bold" />
 					<span>
 						close
@@ -449,9 +449,9 @@ defineExpose({
 					<Icon class="i-ph:magnifying-glass-bold" />
 					Click Here to Search
 				</label>
-				<button @mousedown.prevent="clearSearch">
+				<button title="clear" @mousedown.prevent="clearSearch">
 					<span>
-						Clear
+						clear
 					</span>
 					<Icon class="i-ph:x-bold" />
 				</button>
@@ -956,30 +956,6 @@ defineExpose({
 
 			> div.inline-search-label {
 				--at-apply: 'col-span-full mx-[--header-px]';
-
-				> input {
-					--at-apply: 'py-0.75 pe-2 ps-8 bg-black w-full b b-[--ui-btn-border-clr] bg-neutral-950';
-				}
-
-				> label {
-					--at-apply: 'px-2 py-0.5 b b-transparent';
-
-					> .icon {
-						--at-apply: 'me-2 size-4';
-					}
-				}
-
-				> button {
-					--at-apply: 'px-2 grid h-full end-0 top-0 place-items-center absolute text-neutral-200 hoverable:text-white';
-
-					> span:first-of-type {
-						--at-apply: 'sr-only';
-					}
-
-					> span.icon {
-						--at-apply: 'size-4';
-					}
-				}
 
 				> div {
 					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0';

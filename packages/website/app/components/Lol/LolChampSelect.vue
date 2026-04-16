@@ -40,6 +40,8 @@ function closeCleanup() {
 	search.value = '';
 }
 
+const longestName = Object.values(champions).reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -51,8 +53,8 @@ defineExpose({
 		ref="vDialog"
 		@close="closeCleanup"
 	>
-		<header class="bg-inherit flex col-span-full items-center">
-			<h1 class="sr-only">
+		<header>
+			<h1>
 				champ select
 			</h1>
 			<VButtonRadiogroup
@@ -62,15 +64,14 @@ defineExpose({
 				:options="ALL_ROLES.map(([role, icon]) => ({ role, icon }))"
 				value-key="role"
 			>
-				<template #default="{ option: { role, icon }, isSelected }">
+				<template #default="{ option: { role, icon } }">
 					<img
-						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${icon}${isSelected ? '' : '-light'}.svg`"
+						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-static-assets/global/default/svg/position-${icon}-light.svg`"
 						aria-hidden="true"
 						width="34"
 						height="34"
-						class="size-5"
 					>
-					<span class="sr-only">{{ role }}</span>
+					<span>{{ role }}</span>
 				</template>
 			</VButtonRadiogroup>
 			<div class="inline-search-label">
@@ -79,63 +80,156 @@ defineExpose({
 					v-model="search"
 					autofocus
 					type="text"
-					placeholder=" "
-					class="py-0.75 pe-2 ps-8 b b-[--ui-btn-border-clr] bg-black bg-neutral-950"
 					:data-empty="!search"
 					@update:model-value="selectedRole = undefined"
 				>
-				<label for="item-shop-search" class="px-2 py-0.5 b b-transparent">
-					<Icon class="i-ph:magnifying-glass-bold me-2 size-4" />
+				<label for="item-shop-search">
+					<Icon class="i-ph:magnifying-glass-bold" />
 					Search
 				</label>
+				<button title="clear" @mousedown.prevent="search = ''">
+					<span>
+						clear
+					</span>
+					<Icon class="i-ph:x-bold" />
+				</button>
 			</div>
-			<form method="dialog" class="ms-auto">
-				<button value="cancel">
-					close
+			<form method="dialog">
+				<button value="cancel" title="Close" autofocus>
+					<Icon class="i-ph:x-bold" />
+					<span>
+						close
+					</span>
 				</button>
 			</form>
 		</header>
-		<section class="grid grid-cols-[repeat(auto-fit,_minmax(var(--fluid-48-90),_1fr))] of-y-auto">
-			<button
+		<ul :data-longest-name="longestName">
+			<li
 				v-for="champion in computedChampions"
 				:key="champion.id"
-				class="leading-tight text-center min-w-0 block hyphens-auto"
-				@click="value = champion"
 			>
-				<img
-					:title="champion.name"
-					:src="championImage(champion.image, champion.id)"
-					:style="`background-image: url(${championImage(champion.image, champion.id)})`"
-					width="128"
-					height="128"
-					aria-hidden="true"
-					loading="lazy"
+				<button
+					class="leading-tight text-center min-w-0 block hyphens-auto"
+					@click="value = champion"
 				>
-				{{ champion.name }}
-			</button>
-		</section>
+					<img
+						:title="champion.name"
+						:src="championImage(champion.image, champion.id)"
+						:style="`background-image: url(${championImage(champion.image, champion.id)})`"
+						width="128"
+						height="128"
+						aria-hidden="true"
+						loading="lazy"
+					>
+					{{ champion.name }}
+				</button>
+			</li>
+		</ul>
 	</VDialog>
 </template>
 
 <style>
 @layer components {
 	#dialog-champ-select {
-		--at-apply: 'bg-[--cyan-bg] b b-[--ui-btn-border-clr] grid-rows-[auto_1fr] max-h-[80vh] w-[min(90vw,_600px)] shadow-lg of-visible';
+		--at-apply: 'bg-[--cyan-bg] b b-[--ui-btn-border-clr] grid-rows-[auto_1fr] h-200 shadow-lg of-visible relative';
+		--px: calc(8 * var(--spacing));
 
 		&[open] {
 			--at-apply: 'grid';
 		}
 
-		> section {
-			> button {
-				> img {
-					--at-apply: 'b aspect-1';
-					object-fit: none;
-					object-position: 100px 100px;
-					background-repeat: no-repeat;
-					background-size: 108%;
-					background-position: center;
+		> header {
+			--at-apply: 'bg-inherit flex col-span-full items-end b-b b-[--ui-btn-border-clr] mx-[--px] mt-4';
+
+			> h1 {
+				--at-apply: 'sr-only';
+			}
+
+			> form {
+				--at-apply: 'end-0 top-0 absolute';
+
+				> button {
+					--at-apply: 'p-1 text-neutral-200 hoverable:text-white';
+
+					> span:first-child {
+						--at-apply: 'size-6';
+					}
+
+					> span:last-child {
+						--at-apply: 'sr-only';
+					}
 				}
+			}
+
+			#champ-select-role {
+				height: calc(var(--btn-size) + var(--btn-pb) + var(--btn-b-b));
+				--btn-size: calc(7 * var(--spacing));
+				--btn-pb: calc(0.25 * var(--spacing));
+				--btn-b-b: 3px;
+
+				> button {
+					--at-apply: 'me-3 last:me-0 pb-[--btn-pb] relative b-b-[length:--btn-b-b] b-transparent';
+
+					> img {
+						--at-apply: 'brightness-50 size-[--btn-size]';
+					}
+
+					> span {
+						--at-apply: 'sr-only';
+					}
+
+					&[aria-checked='true'],
+					&:focus-visible,
+					&:hover {
+						> img {
+							--at-apply: 'brightness-100';
+						}
+					}
+
+					&[aria-checked='true'] {
+						--at-apply: 'b-b-[--ui-btn-border-clr]';
+					}
+				}
+			}
+
+			> .inline-search-label {
+				--at-apply: 'ms-auto mb-1';
+				--py: calc(0.25 * var(--spacing));
+			}
+		}
+
+		> ul {
+			--at-apply: 'grid grid-cols-[repeat(6,minmax(max-content,1fr))] auto-rows-min of-y-auto py-3 px-[--px] gap-x-2 gap-y-[--gap-y] w-max min-w-full';
+			--img-size: calc(20 * var(--spacing));
+			--gap-y: calc(3 * var(--spacing));
+
+			> li {
+				--at-apply: 'flex justify-center h-min';
+
+				> button {
+					--at-apply: 'whitespace-nowrap flex flex-col items-center text-neutral-200 text-center h-min';
+
+					> img {
+						--at-apply: 'b b-neutral-600 aspect-1 size-[--img-size] mx-3 mb-1';
+						object-fit: none;
+						object-position: 100px 100px;
+						background-repeat: no-repeat;
+						background-size: 108%;
+						background-position: center;
+					}
+
+					&:hover,
+					&:focus-visible {
+						> img {
+							--at-apply: 'brightness-115';
+						}
+					}
+				}
+			}
+
+			&::after {
+				--at-apply: 'invisible whitespace-nowrap h-0 select-none';
+				content: attr(data-longest-name);
 			}
 		}
 	}
