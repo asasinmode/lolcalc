@@ -34,7 +34,7 @@ const { version } = usePatchVersion();
 
 <style>
 #item-shop-build-path {
-	--build-path-clr: theme('colors.amber.100');
+	--build-path-clr: theme('colors.neutral.500');
 
 	button[data-has-components] {
 		--at-apply: 'mb-1.5 relative';

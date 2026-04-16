@@ -417,19 +417,19 @@ defineExpose({
 		:style="`--lock-icon-url: url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champion-details/global/default/mastery/lock-icon-closed.svg)`"
 		@close="closeSearch"
 	>
-		<header style="grid-area: header;" class="grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center">
-			<h1 class="col-span-full">
-				item shop
+		<header>
+			<h1>
+				all items
 			</h1>
-			<form method="dialog" class="end-0 top-0 absolute" autofocus>
-				<button value="cancel" title="Close">
-					<Icon class="i-ph:x size-6" />
-					<span class="sr-only">
+			<form method="dialog">
+				<button value="cancel" title="Close" autofocus>
+					<Icon class="i-ph:x-bold" />
+					<span>
 						close
 					</span>
 				</button>
 			</form>
-			<div class="inline-search-label col-span-full" @focusout="closeSearchIfOutside">
+			<div class="inline-search-label" @focusout="closeSearchIfOutside">
 				<input
 					id="item-shop-search"
 					ref="searchInput"
@@ -562,19 +562,19 @@ defineExpose({
 				>
 			</button>
 		</header>
-		<aside style="grid-area: aside;" class="row-start-2">
+		<aside>
 			<button id="item-shop-clear-stat-filters" title="Clear stat filters" @click="clearStatFilters">
-				<span class="sr-only">Clear stat filters</span>
+				<span>Clear stat filters</span>
 				<img
 					v-bind="textureBgImageAttrs(ui.shop.clearFilters.default, 28)"
 					:style="`--txt-hover-uv-start-x: -${ui.shop.clearFilters.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.clearFilters.hover.uv[1]}px`"
 				>
 			</button>
 			<fieldset id="item-shop-stat-filters">
-				<legend class="sr-only">
+				<legend>
 					Stat filters
 				</legend>
-				<template v-for="({ name, texture, selectedUvStartX, selectedUvStartY }, filter) in computedStatFilters" :key="filter">
+				<template v-for="({ name, texture, selectedUvStartX, selectedUvStartY }, filter, i) in computedStatFilters" :key="filter">
 					<input :id="`item-shop-stat-${filter}`" v-model="appliedStatFilters[filter]" type="checkbox" :disabled="!availableStatFilters[filter]">
 					<label :for="`item-shop-stat-${filter}`" :title="name">
 						<span>{{ name }}</span>
@@ -583,6 +583,7 @@ defineExpose({
 							:style="`--txt-selected-uv-start-x: -${selectedUvStartX}px; --txt-selected-uv-start-y: -${selectedUvStartY}px`"
 						>
 					</label>
+					<hr v-if="i === 4 || i === 7 || i === 10" />
 				</template>
 			</fieldset>
 		</aside>
@@ -686,7 +687,7 @@ defineExpose({
 			<h3 class="order-1">
 				Builds into
 			</h3>
-			<ul id="item-shop-builds-into-list" class="flex gap-3 h-(--item-img-size) justify-around order-2 relative *:shrink-0">
+			<ul id="item-shop-builds-into-list">
 				<li v-for="i in 6" :key="i">
 					<button
 						:disabled="!buildsIntoItems[i - 1]"
@@ -769,14 +770,15 @@ defineExpose({
 					</ul>
 				</li>
 			</ul>
-			<h3 v-show="displayedItem" class="sr-only">
+			<h3 v-show="displayedItem">
 				{{ displayedItem?.item.name }} build path
 			</h3>
-			<div id="item-shop-build-path" class="text-center flex basis-[40%] flex-col items-center justify-center order-3">
+			<div id="item-shop-build-path">
 				<LolItemBuildPathButton
 					v-if="displayedItem"
 					:shop-item="displayedItem"
 					:data-legendary="displayedItem.isLegendary ? '' : undefined"
+					:class="{selected: selectedItem?.item.id === displayedItem.item.id}"
 					@click="selectOrBuyIfDouble(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem.item, displayedItem.buyability)"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
@@ -793,6 +795,7 @@ defineExpose({
 						<LolItemBuildPathButton
 							component
 							:shop-item="secondLevelBuildsFromItem"
+							:class="{selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id}"
 							@click="selectOrBuyIfDouble(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
@@ -805,6 +808,7 @@ defineExpose({
 								<LolItemBuildPathButton
 									component
 									:shop-item="thirdLevelBuildsFromItem"
+							:class="{selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id}"
 									@click="selectOrBuyIfDouble(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
@@ -911,7 +915,7 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
-		--at-apply: 'bg-[--bg-clr] max-h-[80vh] max-w-[90vw] shadow-lg relative of-visible';
+		--at-apply: 'bg-[--bg-clr] h-200 max-w-[90vw] shadow-lg relative of-visible b b-[--ui-btn-border-clr]';
 		--bg-clr: theme('colors.cyan.950');
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
@@ -926,6 +930,103 @@ defineExpose({
 			'footer footer builds-into';
 		grid-template-rows: auto 1fr auto;
 		grid-template-columns: auto 1fr 32rem;
+
+		> header {
+			--at-apply: 'grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center';
+			grid-area: header;
+
+				> h1 {
+					--at-apply: 'col-span-full font-bold text-xl uppercase text-neutral-200 px-3 pt-3 pb-2 mb-5 text-center b-b-2 b-cyan-300/50';
+
+					border-image: linear-gradient(
+							90deg,
+							transparent 0%,
+							theme('colors.cyan.300/0.7') 30%,
+							theme('colors.cyan.300') 50%,
+							theme('colors.cyan.300/0.7') 70%,
+							transparent 100%
+						)
+						1;
+				}
+
+			> form {
+				--at-apply: 'end-0 top-0 absolute';
+				
+				> button {
+					--at-apply: 'p-1 text-neutral-200 hoverable:text-white';
+
+					> span:first-child {
+						--at-apply: 'size-6';
+					}
+
+					> span:last-child {
+						--at-apply: 'sr-only';
+					}
+				}
+			}
+
+			> div:first-of-type {
+				--at-apply: 'col-span-full mx-3';
+			}
+		}
+
+		> aside {
+			--at-apply: 'row-start-2 b-e b-neutral-500 flex flex-col items-center py-2 of-y-auto';
+			grid-area: aside;
+
+			> button {
+				--at-apply: 'mx-3 mb-2';
+
+				> span {
+					--at-apply: 'sr-only';
+				}
+			}
+
+			> fieldset {
+				--at-apply: 'flex flex-col gap-px w-full';
+
+				> legend {
+					--at-apply: 'sr-only';
+				}
+
+				> hr {
+					--at-apply: 'b-[--ui-btn-border-clr] my-0.5 mx-3';
+				}
+
+				> label {
+					--at-apply: 'relative';
+
+					&::after {
+						--at-apply: 'inset-y-0 absolute end-0 w-0.5 bg-cyan-400';
+					}
+
+					> img {
+						--at-apply: 'mx-auto my-1.5';
+					}
+				}
+
+				> input:not(:disabled) + label > img {
+					--at-apply: 'brightness-70';
+				}
+
+				> input:checked + label {
+					--at-apply: '';
+				}
+
+				> input:not(:disabled):is(:focus-visible, :checked) + label,
+				> input:not(:disabled) + label:hover {
+					background: linear-gradient(90deg, transparent 55%, theme('colors.cyan.400/0.2') 80%, theme('colors.cyan.400/0.7') 100%);
+
+					&::after {
+						--at-apply: 'content-empty';
+					}
+
+					> img {
+						--at-apply: 'brightness-100';
+					}
+				}
+			}
+		}
 
 		#item-shop-swap-sort-order:hover,
 		#item-shop-swap-sort-order:focus-visible,
@@ -979,7 +1080,7 @@ defineExpose({
 
 		#item-shop-panel-boots,
 		#item-shop-panel-eq {
-			--at-apply: 'bg-[--bg-clr]';
+			--at-apply: 'bg-[--bg-clr] b b-[--ui-btn-border-clr]';
 
 			--side-panel-gap: calc(2 * var(--spacing));
 			--side-panel-py: calc(4 * var(--spacing));
@@ -1358,17 +1459,50 @@ defineExpose({
 
 		> section {
 			&:nth-of-type(3) {
-				--at-apply: 'flex flex-col';
+				--at-apply: 'flex flex-col p-3 pt-4 of-y-auto b-s b-[--ui-btn-border-clr]';
 				grid-area: builds-into;
+
+				> h3 {
+					--at-apply: 'font-bold text-lg uppercase mb-1 text-neutral-200';
+
+					&:nth-of-type(2){
+						--at-apply: 'sr-only';
+					}
+				}
 
 				> button {
 					--at-apply: 'text-lg py-0.5 b-2 b-[--ui-btn-border-clr] bg-cyan-900 hoverable:bg-cyan-800 uppercase order-4 font-600 text-cyan-300';
+				}
+
+				> .item-description-header {
+					--at-apply: 'pt-2 mt-3 b-t';
+				}
+
+				#item-shop-builds-into-list {
+					--at-apply: 'flex gap-3 min-h-(--item-img-size) justify-around order-2 relative *:shrink-0';
+				}
+
+				#item-shop-build-path {
+--at-apply: 'b-t py-3 mt-3 text-center flex basis-[40%] flex-col items-center justify-center order-3';
+				}
+
+				> .item-description-header,
+				> .item-description > ul:not(:empty),
+				> #item-shop-build-path {
+					border-image: linear-gradient(
+							90deg,
+							transparent 10%,
+							theme('colors.cyan.300/0.5') 30%,
+							theme('colors.cyan.300/0.5') 70%,
+							transparent 90%
+						)
+						1;
 				}
 			}
 		}
 
 		> footer {
-			--at-apply: 'flex items-center py-2 px-3 b-t b-neutral-500';
+			--at-apply: 'flex items-center py-2 px-3 b-t b-[--ui-btn-border-clr]';
 			grid-area: footer;
 
 			> button {

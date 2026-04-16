@@ -179,7 +179,9 @@ defineExpose({ header });
 		}
 
 		> ul {
-			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-2';
+			&:not(:empty) {
+				--at-apply: 'b-t b-[--ui-btn-border-clr] pt-2';
+			}
 
 			> li {
 				--at-apply: 'flex items-center gap-[0.5ch]';
