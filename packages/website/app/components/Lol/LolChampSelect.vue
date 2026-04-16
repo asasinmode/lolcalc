@@ -1,5 +1,10 @@
 <script setup lang="ts">
 const value = defineModel<IListedChampion>();
+const selectedChampion = shallowRef<IListedChampion | undefined>();
+
+watch(value, (c) => {
+	selectedChampion.value = c;
+}, { immediate: true });
 
 const champions = useChampions();
 const { minorVersion } = usePatchVersion();
@@ -38,6 +43,7 @@ const computedChampions = computed(() => {
 
 function closeCleanup() {
 	search.value = '';
+	value.value = selectedChampion.value;
 }
 
 const longestName = Object.values(champions).reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
@@ -110,8 +116,8 @@ defineExpose({
 			>
 				<button
 					class="leading-tight text-center min-w-0 block hyphens-auto"
-					:class="{ selected: value === champion }"
-					@click="value = champion"
+					:class="{ selected: selectedChampion === champion }"
+					@click="selectedChampion = champion"
 				>
 					<img
 						:title="champion.name"
