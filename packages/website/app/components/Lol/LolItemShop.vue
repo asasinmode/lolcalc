@@ -512,17 +512,13 @@ defineExpose({
 			<VButtonRadiogroup
 				id="item-shop-category-filter"
 				v-model="selectedCategory"
-				class="row-start-3"
 				label="Category"
 				:options="['all', ...ALL_ITEM_CATEGORIES].map((category) => ({ category: category as IAllItemCategory, texture: ui.shop.categories[category as IAllItemCategory] }))"
 				value-key="category"
 				required
 			>
-				<template #default="{ option: { category, texture }, isSelected }">
-					<img
-						v-bind="textureBgImageAttrs(texture, 20)"
-						:class="{ 'bg-pink': isSelected }"
-					>
+				<template #default="{ option: { category, texture } }">
+					<img v-bind="textureBgImageAttrs(texture, 24)">
 					<span class="sr-only">{{ category }}</span>
 				</template>
 			</VButtonRadiogroup>
@@ -547,7 +543,7 @@ defineExpose({
 			<!-- 	</template> -->
 			<!-- </VButtonRadiogroup> -->
 			<button id="item-shop-swap-sort-order" title="Swap item order" @click="sortOrderSwapped = !sortOrderSwapped">
-				<span class="sr-only">Swap item order</span>
+				<span>Swap item order</span>
 				<img
 					v-bind="textureBgImageAttrs(ui.shop.swapItemOrder.default, 32)"
 					:style="`--txt-hover-uv-start-x: -${ui.shop.swapItemOrder.hover.uv[0]}px; --txt-hover-uv-start-y: -${ui.shop.swapItemOrder.hover.uv[1]}px`"
@@ -908,9 +904,10 @@ defineExpose({
 
 	#dialog-item-shop {
 		--at-apply: 'bg-[--bg-clr] h-200 max-w-[90vw] shadow-lg relative of-visible b b-[--ui-btn-border-clr]';
-		--bg-clr: theme('colors.cyan.950');
+		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
+		--header-px: calc(3 * var(--spacing));
 
 		&[open] {
 			--at-apply: 'grid';
@@ -928,14 +925,14 @@ defineExpose({
 			grid-area: header;
 
 			> h1 {
-				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-3 pt-3 pb-2 mb-5 text-center b-b-2 b-cyan-300/50';
+				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-[--header-px] pt-3 pb-2 mb-5 text-center b-b-2 b-cyan-400/70';
 
 				border-image: linear-gradient(
 						90deg,
 						transparent 0%,
-						theme('colors.cyan.300/0.7') 30%,
-						theme('colors.cyan.300') 50%,
-						theme('colors.cyan.300/0.7') 70%,
+						theme('colors.cyan.400/0.7') 40%,
+						theme('colors.cyan.400') 50%,
+						theme('colors.cyan.400/0.7') 60%,
 						transparent 100%
 					)
 					1;
@@ -958,7 +955,7 @@ defineExpose({
 			}
 
 			> div.inline-search-label {
-				--at-apply: 'col-span-full mx-3 mb-2';
+				--at-apply: 'col-span-full mx-[--header-px]';
 
 				> input {
 					--at-apply: 'py-0.75 pe-2 ps-8 bg-black w-full b b-[--ui-btn-border-clr] bg-neutral-950';
@@ -985,8 +982,9 @@ defineExpose({
 				}
 
 				> div {
-					--at-apply: 'bg-blue-950 grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0';
+					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0';
 					--px: calc(3 * var(--spacing));
+					--hover-bg: theme('colors.cyan.400/0.2');
 
 					> p {
 						--at-apply: 'uppercase px-[--px] font-700 text-neutral-200 py-2';
@@ -996,10 +994,10 @@ defineExpose({
 						--at-apply: 'h-full of-y-auto';
 
 						> li {
-							--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-2 ps-[--px] pe-1 py-2 hover:bg-cyan-300/10 gap-x-2 mb-1 last:mb-0';
+							--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-2 ps-[--px] pe-1 py-2 hover:bg-[--hover-bg] gap-x-2 mb-1 last:mb-0';
 
 							&.selected {
-								--at-apply: 'bg-cyan-300/10';
+								--at-apply: 'bg-[--hover-bg]';
 							}
 
 							> img {
@@ -1020,7 +1018,7 @@ defineExpose({
 						--at-apply: 'row-span-full px-3 py-2 b-s b-neutral-400 of-y-auto';
 
 						> .item-description-header {
-							--at-apply: 'hoverable:bg-cyan-300/10 py-2';
+							--at-apply: 'hoverable:bg-[--hover-bg] py-2';
 						}
 
 						> .item-description > ul {
@@ -1038,16 +1036,58 @@ defineExpose({
 			}
 
 			> #item-shop-category-filter {
-				--at-apply: '';
+				--at-apply: 'row-start-3 h-12 flex items-start';
+
+				> button {
+					--at-apply: 'h-12 w-10 grid-center relative';
+
+					&::after {
+						--at-apply: 'absolute bottom-0 h-1 bg-amber-300 inset-x-1.75';
+					}
+
+					&:first-of-type {
+						--at-apply: 'mx-1.5';
+					}
+
+					&[aria-checked='true'] {
+						background: linear-gradient(
+							180deg,
+							theme('colors.amber.100/0.02') 0%,
+							theme('colors.amber.100/0.1') 15%,
+							theme('colors.amber.100/0.1') 65%,
+							theme('colors.amber.100/0.3') 100%
+						);
+
+						&::after {
+							--at-apply: 'content-empty';
+						}
+					}
+
+					&[aria-checked='true'],
+					&:hover,
+					&:focus-visible {
+						> img {
+							--at-apply: 'brightness-150';
+						}
+					}
+				}
+			}
+
+			> #item-shop-swap-sort-order {
+				--at-apply: 'self-center me-[--header-px]';
+
+				> span {
+					--at-apply: 'sr-only';
+				}
 			}
 		}
 
 		> aside {
-			--at-apply: 'row-start-2 b-e b-neutral-500 flex flex-col items-center py-2 of-y-auto';
+			--at-apply: 'row-start-2 b-e b-e-neutral-500 flex flex-col items-center py-2 of-y-auto b-t b-t-[--ui-btn-border-clr]';
 			grid-area: aside;
 
 			> button {
-				--at-apply: 'mx-3 mb-2';
+				--at-apply: 'mx-[--header-px] mb-2';
 
 				> span {
 					--at-apply: 'sr-only';
@@ -1062,7 +1102,7 @@ defineExpose({
 				}
 
 				> hr {
-					--at-apply: 'b-[--ui-btn-border-clr] my-0.5 mx-3';
+					--at-apply: 'b-[--ui-btn-border-clr] my-0.5 mx-[--header-px]';
 				}
 
 				> label {
@@ -1072,17 +1112,37 @@ defineExpose({
 						--at-apply: 'inset-y-0 absolute end-0 w-0.5 bg-cyan-400';
 					}
 
+					> span {
+						--at-apply: 'sr-only';
+					}
+
 					> img {
 						--at-apply: 'mx-auto my-1.5';
 					}
 				}
 
-				> input:not(:disabled) + label > img {
-					--at-apply: 'brightness-70';
+				> input {
+					--at-apply: 'sr-only';
+
+					&:focus-visible + label {
+						outline: auto;
+					}
+
+					&:checked + label > img {
+						--txt-uv-start-x: var(--txt-selected-uv-start-x) !important;
+						--txt-uv-start-y: var(--txt-selected-uv-start-y) !important;
+					}
 				}
 
-				> input:checked + label {
-					--at-apply: '';
+				> input:disabled + label > img {
+					--at-apply: 'brightness-40';
+				}
+
+				> input:not(:checked):focus-visible + label,
+				> input:not(:checked, :disabled) + label:hover {
+					> img {
+						--at-apply: 'brightness-200';
+					}
 				}
 
 				> input:not(:disabled):is(:focus-visible, :checked) + label,
@@ -1097,10 +1157,6 @@ defineExpose({
 					&::after {
 						--at-apply: 'content-empty';
 					}
-
-					> img {
-						--at-apply: 'brightness-100';
-					}
 				}
 			}
 		}
@@ -1112,42 +1168,6 @@ defineExpose({
 			img {
 				--txt-uv-start-x: var(--txt-hover-uv-start-x) !important;
 				--txt-uv-start-y: var(--txt-hover-uv-start-y) !important;
-			}
-		}
-
-		#item-shop-stat-filters {
-			label {
-				--at-apply: cursor-pointer hover: brightness-200;
-			}
-
-			input,
-			label > span {
-				--at-apply: sr-only;
-			}
-
-			input {
-				&:disabled + label,
-				&:checked + label {
-					--at-apply: hover: brightness-100;
-				}
-
-				&:focus-visible + label {
-					--at-apply: brightness-200;
-					outline: auto;
-				}
-
-				&:disabled + label {
-					--at-apply: cursor-default;
-
-					img {
-						--at-apply: brightness-50;
-					}
-				}
-
-				&:checked + label img {
-					--txt-uv-start-x: var(--txt-selected-uv-start-x) !important;
-					--txt-uv-start-y: var(--txt-selected-uv-start-y) !important;
-				}
 			}
 		}
 
@@ -1535,6 +1555,10 @@ defineExpose({
 		}
 
 		> section {
+			&:nth-of-type(2) {
+				--at-apply: 'b-t b-[--ui-btn-border-clr]';
+			}
+
 			&:nth-of-type(3) {
 				--at-apply: 'flex flex-col p-3 pt-4 of-y-auto b-s b-[--ui-btn-border-clr]';
 				grid-area: builds-into;
@@ -1569,8 +1593,8 @@ defineExpose({
 					border-image: linear-gradient(
 							90deg,
 							transparent 10%,
-							theme('colors.cyan.300/0.5') 30%,
-							theme('colors.cyan.300/0.5') 70%,
+							theme('colors.cyan.400/0.7') 30%,
+							theme('colors.cyan.400/0.7') 70%,
 							transparent 90%
 						)
 						1;
@@ -1579,7 +1603,7 @@ defineExpose({
 		}
 
 		> footer {
-			--at-apply: 'flex items-center py-2 px-3 b-t b-[--ui-btn-border-clr]';
+			--at-apply: 'flex items-center py-2.5 px-3 b-t b-[--ui-btn-border-clr]';
 			grid-area: footer;
 
 			> button {

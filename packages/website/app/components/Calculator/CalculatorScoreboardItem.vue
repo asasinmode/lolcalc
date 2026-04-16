@@ -1716,7 +1716,7 @@ defineExpose({ el });
 				--at-apply: 'grid grid-cols-subgrid grid-rows-subgrid';
 
 				> dl {
-					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-cyan-950 b b-[--ui-btn-border-clr] py-0.5 px-[--runes-stats-px] w-fit row-span-2';
+					--at-apply: 'grid grid-rows-[repeat(4,1.5rem)] items-center whitespace-nowrap bg-[--cyan-bg] b b-[--ui-btn-border-clr] py-0.5 px-[--runes-stats-px] w-fit row-span-2';
 					grid-template-columns: repeat(2, var(--runes-stats-img-w) var(--runes-stats-text-w));
 
 					> dt {

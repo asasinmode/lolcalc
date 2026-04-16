@@ -47,9 +47,8 @@ defineExpose({
 
 <template>
 	<VDialog
-		id="dialog-champion-select"
+		id="dialog-champ-select"
 		ref="vDialog"
-		class="bg-cyan-950 grid-rows-[auto_1fr] max-h-[80vh] w-[min(90vw,_600px)] shadow-lg of-visible [&[open]]-grid"
 		@close="closeCleanup"
 	>
 		<header class="bg-inherit flex col-span-full items-center">
@@ -120,13 +119,25 @@ defineExpose({
 
 <style>
 @layer components {
-	#dialog-champion-select > section button img {
-		--at-apply: 'b aspect-1';
-		object-fit: none;
-		object-position: 100px 100px;
-		background-repeat: no-repeat;
-		background-size: 108%;
-		background-position: center;
+	#dialog-champ-select {
+		--at-apply: 'bg-[--cyan-bg] b b-[--ui-btn-border-clr] grid-rows-[auto_1fr] max-h-[80vh] w-[min(90vw,_600px)] shadow-lg of-visible';
+
+		&[open] {
+			--at-apply: 'grid';
+		}
+
+		> section {
+			> button {
+				> img {
+					--at-apply: 'b aspect-1';
+					object-fit: none;
+					object-position: 100px 100px;
+					background-repeat: no-repeat;
+					background-size: 108%;
+					background-position: center;
+				}
+			}
+		}
 	}
 }
 </style>

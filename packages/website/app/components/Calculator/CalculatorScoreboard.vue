@@ -491,7 +491,7 @@ function setLocalMirrorLayout() {
 			}
 
 			> [data-drag-preview] {
-				--at-apply: 'pointer-events-none bg-cyan-950 items-center p-1 b b-[--ui-btn-border-clr] gap-1 absolute start-[--left] top-[--top]';
+				--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 absolute start-[--left] top-[--top]';
 
 				&:popover-open {
 					--at-apply: 'flex';

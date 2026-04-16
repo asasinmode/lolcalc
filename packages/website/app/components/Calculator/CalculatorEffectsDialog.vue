@@ -220,7 +220,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-effects {
-		--at-apply: 'bg-cyan-950 grid-rows-[auto_1fr] max-h-[80vh] w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2';
+		--at-apply: 'bg-[--cyan-bg] grid-rows-[auto_1fr] max-h-[80vh] w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr]';
 		anchor-scope: all;
 
 		&[open] {

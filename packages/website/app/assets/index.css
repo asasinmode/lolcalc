@@ -61,6 +61,7 @@
 		--size-page-computed-px: calc(
 			var(--size-page-px) + max(0px, calc((100vw - var(--size-page-max-w)) / 2) - var(--size-page-px))
 		);
+		--cyan-bg: oklch(0.249 0.0608 229.695);
 	}
 
 	body {
