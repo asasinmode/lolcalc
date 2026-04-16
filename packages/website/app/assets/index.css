@@ -137,14 +137,18 @@
 	}
 
 	.inline-search-label {
-		--at-apply: relative;
+		--at-apply: 'relative';
 
 		label {
-			--at-apply: absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis;
+			--at-apply: 'absolute inset-0 pointer-events-none whitespace-nowrap items-center flex overflow-ellipsis color-neutral-400';
+
+			> span {
+				--at-apply: 'text-neutral-300';
+			}
 		}
 
-		input:is(:focus, :focus-visible, :not([data-empty='true'])) + label span:nth-child(2) {
-			opacity: 0;
+		input:is(:focus, :focus-visible, :not([data-empty='true'])) + label {
+			color: transparent;
 		}
 	}
 

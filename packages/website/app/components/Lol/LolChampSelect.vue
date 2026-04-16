@@ -81,15 +81,13 @@ defineExpose({
 					autofocus
 					type="text"
 					placeholder=" "
-					class="py-0.5 pe-2 ps-8 b bg-black"
+					class="py-0.75 pe-2 ps-8 b b-[--ui-btn-border-clr] bg-black bg-neutral-950"
 					:data-empty="!search"
 					@update:model-value="selectedRole = undefined"
 				>
 				<label for="item-shop-search" class="px-2 py-0.5 b b-transparent">
 					<Icon class="i-ph:magnifying-glass-bold me-2 size-4" />
-					<span>
-						Search
-					</span>
+					Search
 				</label>
 			</div>
 			<form method="dialog" class="ms-auto">

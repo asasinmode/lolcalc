@@ -435,7 +435,6 @@ defineExpose({
 					ref="searchInput"
 					v-model="search"
 					type="text"
-					class="py-0.5 pe-2 ps-8 b bg-black w-full"
 					role="combobox"
 					autocomplete="list"
 					:aria-expanded="searchExpanded"
@@ -446,22 +445,19 @@ defineExpose({
 					@update:model-value="searchCursorOver(searchResults.length ? 0 : undefined)"
 					@keydown="onSearchKeydown"
 				>
-				<label id="item-shop-search-lbl" for="item-shop-search" class="px-2 py-0.5 b b-transparent">
-					<Icon class="i-ph:magnifying-glass-bold me-2 size-4" />
-					<span>
-						Click Here to Search
-					</span>
+				<label id="item-shop-search-lbl" for="item-shop-search">
+					<Icon class="i-ph:magnifying-glass-bold" />
+					Click Here to Search
 				</label>
-				<button class="px-2 grid h-full end-0 top-0 place-items-center absolute" @mousedown.prevent="clearSearch">
-					<span class="sr-only">
+				<button @mousedown.prevent="clearSearch">
+					<span>
 						Clear
 					</span>
-					<Icon class="i-ph:x-bold size-4" />
+					<Icon class="i-ph:x-bold" />
 				</button>
 				<div
 					v-show="searchExpanded"
 					ref="searchResultsContainer"
-					class="bg-blue-950 grid grid-flow-col grid-cols-[auto_1fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10"
 					@mousedown.prevent=""
 				>
 					<p id="item-shop-results-lbl">
@@ -471,20 +467,17 @@ defineExpose({
 						id="item-shop-search-listbox"
 						role="listbox"
 						aria-labelledby="item-shop-results-lbl"
-						class="h-full of-y-auto *:grid *:grid-cols-[auto_1fr] *:grid-rows-2"
 					>
 						<li
 							v-for="(shopItem, index) in searchResults"
 							:id="`item-shop-search-result-${index}`"
 							:key="shopItem.item.id"
 							role="option"
-							class="hover:bg-white/10"
 							:data-buyability="shopItem.buyability"
 							:data-bought="shopItem.isBought ? '' : undefined"
 							:data-legendary="shopItem.isLegendary ? '' : undefined"
 							:class="{
-								'bg-white/10': searchSelectedIndex === index,
-								'selected': searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
+								selected: searchSelectedIndex === index || (searchCursoredOverIndex !== undefined ? searchCursoredOverIndex === index : false),
 							}"
 							@mouseenter="enterTooltipableElement($event, shopItem)"
 							@click="selectSearchResult($event, index, false)"
@@ -494,22 +487,21 @@ defineExpose({
 								:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${shopItem.item.image}`"
 								width="64"
 								height="64"
-								class="item-shop-item-img row-span-full"
+								class="item-shop-item-img"
 								aria-hidden="true"
 								loading="lazy"
 							>
-							{{ shopItem.item.name }}
+							<span>{{ shopItem.item.name }}</span>
 							<span class="sr-status">{{ shopItem.srStatus }}</span>
 							<span>{{ shopItem.isBought && shopItem.buyability === -1 ? '' : shopItem.calculatedPrice }}</span>
 						</li>
 					</ul>
-					<section aria-live="polite" aria-atomic="true" class="row-span-full">
+					<section aria-live="polite" aria-atomic="true">
 						<LolItemDescription
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem?.item"
 							:gold="searchCursoredOverItem?.calculatedPrice"
 							:damage-source="damageSource"
-							header-class="hoverable:bg-white/10"
 							header-tag="button"
 							source="Shop"
 							@header-click="onSearchHeaderClick"
@@ -583,7 +575,7 @@ defineExpose({
 							:style="`--txt-selected-uv-start-x: -${selectedUvStartX}px; --txt-selected-uv-start-y: -${selectedUvStartY}px`"
 						>
 					</label>
-					<hr v-if="i === 4 || i === 7 || i === 10" />
+					<hr v-if="i === 4 || i === 7 || i === 10">
 				</template>
 			</fieldset>
 		</aside>
@@ -778,7 +770,7 @@ defineExpose({
 					v-if="displayedItem"
 					:shop-item="displayedItem"
 					:data-legendary="displayedItem.isLegendary ? '' : undefined"
-					:class="{selected: selectedItem?.item.id === displayedItem.item.id}"
+					:class="{ selected: selectedItem?.item.id === displayedItem.item.id }"
 					@click="selectOrBuyIfDouble(displayedItem, false)"
 					@click.right="rightClickItem($event, displayedItem.item, displayedItem.buyability)"
 					@mouseenter="enterTooltipableElement($event, displayedItem)"
@@ -795,7 +787,7 @@ defineExpose({
 						<LolItemBuildPathButton
 							component
 							:shop-item="secondLevelBuildsFromItem"
-							:class="{selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id}"
+							:class="{ selected: selectedItem?.item.id === secondLevelBuildsFromItem.item.id }"
 							@click="selectOrBuyIfDouble(secondLevelBuildsFromItem, false)"
 							@click.right="rightClickItem($event, secondLevelBuildsFromItem.item, secondLevelBuildsFromItem.buyability)"
 							@mouseenter="enterTooltipableElement($event, secondLevelBuildsFromItem)"
@@ -808,7 +800,7 @@ defineExpose({
 								<LolItemBuildPathButton
 									component
 									:shop-item="thirdLevelBuildsFromItem"
-							:class="{selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id}"
+									:class="{ selected: selectedItem?.item.id === thirdLevelBuildsFromItem.item.id }"
 									@click="selectOrBuyIfDouble(thirdLevelBuildsFromItem, false)"
 									@click.right="rightClickItem($event, thirdLevelBuildsFromItem.item, thirdLevelBuildsFromItem.buyability)"
 									@mouseenter="enterTooltipableElement($event, thirdLevelBuildsFromItem)"
@@ -935,23 +927,23 @@ defineExpose({
 			--at-apply: 'grid col-span-2 auto-rows-min grid-cols-[1fr_auto] items-center';
 			grid-area: header;
 
-				> h1 {
-					--at-apply: 'col-span-full font-bold text-xl uppercase text-neutral-200 px-3 pt-3 pb-2 mb-5 text-center b-b-2 b-cyan-300/50';
+			> h1 {
+				--at-apply: 'col-span-full font-700 text-xl uppercase text-neutral-200 px-3 pt-3 pb-2 mb-5 text-center b-b-2 b-cyan-300/50';
 
-					border-image: linear-gradient(
-							90deg,
-							transparent 0%,
-							theme('colors.cyan.300/0.7') 30%,
-							theme('colors.cyan.300') 50%,
-							theme('colors.cyan.300/0.7') 70%,
-							transparent 100%
-						)
-						1;
-				}
+				border-image: linear-gradient(
+						90deg,
+						transparent 0%,
+						theme('colors.cyan.300/0.7') 30%,
+						theme('colors.cyan.300') 50%,
+						theme('colors.cyan.300/0.7') 70%,
+						transparent 100%
+					)
+					1;
+			}
 
 			> form {
 				--at-apply: 'end-0 top-0 absolute';
-				
+
 				> button {
 					--at-apply: 'p-1 text-neutral-200 hoverable:text-white';
 
@@ -965,8 +957,88 @@ defineExpose({
 				}
 			}
 
-			> div:first-of-type {
-				--at-apply: 'col-span-full mx-3';
+			> div.inline-search-label {
+				--at-apply: 'col-span-full mx-3 mb-2';
+
+				> input {
+					--at-apply: 'py-0.75 pe-2 ps-8 bg-black w-full b b-[--ui-btn-border-clr] bg-neutral-950';
+				}
+
+				> label {
+					--at-apply: 'px-2 py-0.5 b b-transparent';
+
+					> .icon {
+						--at-apply: 'me-2 size-4';
+					}
+				}
+
+				> button {
+					--at-apply: 'px-2 grid h-full end-0 top-0 place-items-center absolute text-neutral-200 hoverable:text-white';
+
+					> span:first-of-type {
+						--at-apply: 'sr-only';
+					}
+
+					> span.icon {
+						--at-apply: 'size-4';
+					}
+				}
+
+				> div {
+					--at-apply: 'bg-blue-950 grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0';
+					--px: calc(3 * var(--spacing));
+
+					> p {
+						--at-apply: 'uppercase px-[--px] font-700 text-neutral-200 py-2';
+					}
+
+					> ul {
+						--at-apply: 'h-full of-y-auto';
+
+						> li {
+							--at-apply: 'grid grid-cols-[auto_1fr] grid-rows-2 ps-[--px] pe-1 py-2 hover:bg-cyan-300/10 gap-x-2 mb-1 last:mb-0';
+
+							&.selected {
+								--at-apply: 'bg-cyan-300/10';
+							}
+
+							> img {
+								--at-apply: 'row-span-full';
+							}
+
+							> span:first-of-type {
+								--at-apply: 'w-full block truncate text-ellipsis font-500 text-lg';
+							}
+
+							> span:last-of-type {
+								--at-apply: 'text-neutral-300 font-500';
+							}
+						}
+					}
+
+					> section {
+						--at-apply: 'row-span-full px-3 py-2 b-s b-neutral-400 of-y-auto';
+
+						> .item-description-header {
+							--at-apply: 'hoverable:bg-cyan-300/10 py-2';
+						}
+
+						> .item-description > ul {
+							border-image: linear-gradient(
+									90deg,
+									transparent 0%,
+									var(--ui-btn-border-clr) 30%,
+									var(--ui-btn-border-clr) 70%,
+									transparent 100%
+								)
+								1;
+						}
+					}
+				}
+			}
+
+			> #item-shop-category-filter {
+				--at-apply: '';
 			}
 		}
 
@@ -1015,7 +1087,12 @@ defineExpose({
 
 				> input:not(:disabled):is(:focus-visible, :checked) + label,
 				> input:not(:disabled) + label:hover {
-					background: linear-gradient(90deg, transparent 55%, theme('colors.cyan.400/0.2') 80%, theme('colors.cyan.400/0.7') 100%);
+					background: linear-gradient(
+						90deg,
+						transparent 55%,
+						theme('colors.cyan.400/0.2') 80%,
+						theme('colors.cyan.400/0.7') 100%
+					);
 
 					&::after {
 						--at-apply: 'content-empty';
@@ -1463,9 +1540,9 @@ defineExpose({
 				grid-area: builds-into;
 
 				> h3 {
-					--at-apply: 'font-bold text-lg uppercase mb-1 text-neutral-200';
+					--at-apply: 'font-700 text-lg uppercase mb-1 text-neutral-200';
 
-					&:nth-of-type(2){
+					&:nth-of-type(2) {
 						--at-apply: 'sr-only';
 					}
 				}
@@ -1483,7 +1560,7 @@ defineExpose({
 				}
 
 				#item-shop-build-path {
---at-apply: 'b-t py-3 mt-3 text-center flex basis-[40%] flex-col items-center justify-center order-3';
+					--at-apply: 'b-t py-3 mt-3 text-center flex basis-[40%] flex-col items-center justify-center order-3';
 				}
 
 				> .item-description-header,
