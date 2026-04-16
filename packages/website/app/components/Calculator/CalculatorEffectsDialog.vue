@@ -231,7 +231,7 @@ defineExpose({
 			--at-apply: 'mb-2';
 
 			> h1 {
-				--at-apply: 'leading-7';
+				--at-apply: 'leading-7 text-neutral-200 font-700 uppercase text-lg';
 			}
 		}
 

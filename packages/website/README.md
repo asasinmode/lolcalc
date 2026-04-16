@@ -87,7 +87,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] per damage results row unknown variables style
   - [x] moving columns left/right
   - [x] moving sections up/down
-  - [?] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
+  - [x] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
   - [x] stats inventory value row

@@ -427,6 +427,10 @@ defineExpose({
 		> header {
 			grid-area: header;
 
+			> h1 {
+				--at-apply: 'leading-7 text-neutral-200 font-700 uppercase text-lg';
+			}
+
 			> p {
 				--at-apply: 'sr-only';
 			}
