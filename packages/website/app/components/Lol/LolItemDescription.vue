@@ -72,7 +72,6 @@ defineExpose({ header });
 		<span>{{ computedDescription?.subtitleRight }}</span>
 	</component>
 	<div class="item-description" :class="descriptionClass">
-		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<ul>
 			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
 				<img
@@ -94,6 +93,7 @@ defineExpose({ header });
 			v-show="!hoverTooltip || globalKeyModifiers.shift"
 			v-html="computedDescription.extended"
 		/>
+		<UnresolvedVariablesAlert v-if="computedDescription?.unknownVariables.length" />
 		<footer v-show="hoverTooltip && (hasMoreInfo || hasOtherView || computedDescription?.footerLeft || computedDescription?.keywordDefinitions)">
 			<p v-if="showDynamicValueFooter" class="dynamic-value" v-html="computedDescription!.footerLeft" />
 			<p
@@ -175,10 +175,12 @@ defineExpose({ header });
 
 	.item-description {
 		> p.alert {
-			--at-apply: 'mb-2';
+			--at-apply: 'mt-2';
 		}
 
 		> ul {
+			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-2';
+
 			> li {
 				--at-apply: 'flex items-center gap-[0.5ch]';
 
@@ -192,8 +194,12 @@ defineExpose({ header });
 			}
 		}
 
-		> ul + * {
-			--at-apply: 'mt-2';
+		> * + h4 {
+			--at-apply: 'mt-4';
+		}
+
+		> ul + h4 {
+			--at-apply: 'mt-3';
 		}
 
 		> h4 {

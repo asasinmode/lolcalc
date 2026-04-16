@@ -15,7 +15,11 @@
 		}
 
 		&::after {
-			--at-apply: 'block float-end -mt-2 ms-[0.5ch] content-empty z-0 size-4 rounded-es-sm';
+			--at-apply: 'block absolute top-0 end-0 content-empty z-0 size-4 rounded-es-sm';
+		}
+
+		&::before {
+			--at-apply: 'block float-end ms-[0.5ch] content-empty z-0 size-4 rounded-es-sm';
 		}
 
 		.icon {
