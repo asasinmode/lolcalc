@@ -113,6 +113,25 @@ function effectComponent(effect: IDamageSourceEffect): Component | undefined {
 		: CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
 }
 
+const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');
+const hoveredEffectId = shallowRef<[ IEffectAbilityId, number ]>();
+const effectHoverTooltipEl = useTemplateRef('effectHoverTooltip');
+
+function showEffectTooltip(event: MouseEvent, appliedEffectIndex: number) {
+	if (damageSource.value) {
+		const effect = damageSource.value.computed.effects.value[appliedEffectIndex]!;
+		hoveredEffectId.value = [effect.abilityId, appliedEffectIndex];
+		event.target?.addEventListener('mouseleave', hideEffectTooltip, { passive: true, once: true });
+		effect.specific.sourceAbility.type === ABILITY_TYPE.item && addItemTooltipViewListeners();
+		effectHoverTooltipEl.value?.el?.showPopover();
+	}
+}
+
+function hideEffectTooltip() {
+	effectHoverTooltipEl.value?.el?.hidePopover();
+	removeItemTooltipViewListeners();
+}
+
 defineExpose({
 	open: () => vDialog.value?.open(),
 });
@@ -135,12 +154,17 @@ defineExpose({
 		</header>
 		<h2>loading...</h2>
 		<ul v-show="damageSource?.appliedEffects.value.length" :inert="isLoading">
-			<li v-for="effect in damageSource?.appliedEffects.value" :key="effect.id">
+			<li
+				v-for="(effect, i) in damageSource?.appliedEffects.value"
+				:key="effect.id"
+				:style="`anchor-name: --effect-${effect.id}`"
+			>
 				<component
 					:is="effectComponent(effect) ?? UnknownComponent"
 					:ability-id="effect.abilityId"
 					:damage-source
 					id-prefix="effects-dialog"
+					@img-mouseenter="(event: MouseEvent) => damageSource && showEffectTooltip(event, i)"
 				>
 					<button
 						class="pretend-ui-btn remove"
@@ -184,6 +208,12 @@ defineExpose({
 				add
 			</button>
 		</form>
+		<LolEffectHoverTooltip
+			ref="effectHoverTooltip"
+			:ability-id="hoveredEffectId?.[0]"
+			:damage-source
+			:style="damageSource && hoveredEffectId && `position-anchor: --effect-${damageSource.appliedEffects.value[hoveredEffectId[1]]?.id}`"
+		/>
 	</VDialog>
 </template>
 
@@ -191,6 +221,7 @@ defineExpose({
 @layer components {
 	#dialog-effects {
 		--at-apply: 'bg-cyan-950 grid-rows-[auto_1fr] max-h-[80vh] w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2';
+		anchor-scope: all;
 
 		&[open] {
 			--at-apply: 'grid';
@@ -263,6 +294,12 @@ defineExpose({
 			> button {
 				--at-apply: 'w-fit px-2 h-full';
 			}
+		}
+
+		> .effect-hover-tooltip-container {
+			--at-apply: 'items-center';
+			inset-block-start: calc(anchor(end) - 1px);
+			justify-self: anchor-center;
 		}
 	}
 }

@@ -729,7 +729,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				abilityId,
 				data: specific.setupData(data),
 			});
-			(this.computed.effects as unknown as ShallowRef<IComputedAppliedEffect[]>).value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
+			this.computed.effects.value.push(computeAppliedEffect(this, this.appliedEffects.value.at(-1)!));
 		}
 	}
 
@@ -909,7 +909,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				)) || []];
 			})) as Record<IChampionAbilityKey, IComputedAbilityDescription[]>;
 		}),
-		effects: ref<IComputedAppliedEffect[]>([]),
+		effects: ref<IComputedAppliedEffect[]>([]) as unknown as ShallowRef<IComputedAppliedEffect[]>,
 	};
 
 	/** like computed but can depend on the computed */

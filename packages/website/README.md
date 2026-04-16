@@ -119,12 +119,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] item hover tooltip sell value when inventory
 - [ ] effects
   - [ ] dialog
-  - [?] apply effects like black cleaver, abyssal mask, amumu passive
+  - [x] apply effects like black cleaver, abyssal mask, amumu passive
   - [ ] item effects options ui
   - [ ] champion passive effects options ui
-  - [ ] hover tooltips
-  - [ ] in extra that applies effect, show both effects and source's tooltip
-  - [ ] something like `useEffects` and create list of them in `updateGameData`, then during runtime only generate tooltips, possibly future feature
+  - [x] hover tooltips
+  - [x] show source ability tooltip on shift
 - [ ] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
 - [x] close dialogs on click outside
 - [x] target dummy damage source
