@@ -286,7 +286,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						this.items.value[bootsIndex] = items[boots.from[0]!];
 					}
 				}
-			}),
+			}, { immediate: true }),
 
 			watch(this.isRanged, (value) => {
 				if (!value) {

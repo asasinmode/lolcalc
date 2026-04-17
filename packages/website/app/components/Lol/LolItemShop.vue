@@ -997,7 +997,7 @@ defineExpose({
 							--at-apply: 'hoverable:bg-[--hover-bg] py-2';
 						}
 
-						> .item-description > ul {
+						> .item-description > :first-child {
 							border-image: linear-gradient(
 									90deg,
 									transparent 0%,
@@ -1560,7 +1560,7 @@ defineExpose({
 				}
 
 				> .item-description-header,
-				> .item-description > ul:not(:empty),
+				> .item-description > :first-child,
 				> #item-shop-build-path {
 					border-image: linear-gradient(
 							90deg,

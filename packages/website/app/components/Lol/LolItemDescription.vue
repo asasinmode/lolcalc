@@ -20,6 +20,15 @@ const computedDescription = computed<IComputedItemDescription | undefined>(() =>
 		{ replaceWithName: props.replaceVariablesWithNames },
 	));
 
+const isMidQuestBoots = computed(() => {
+	if (!computedDescription.value) {
+		return false;
+	}
+	const { item } = computedDescription.value;
+
+	return item.isBoots && item.epicness === 7;
+});
+
 const view = useState<IItemHoverTooltipView>(`itemHoverTooltipView${props.source}`, props.source === 'Shop' ? () => 'Shop' : () => 'Inventory');
 const otherView = computed(() => view.value === 'Shop' ? 'Inventory' : 'Shop');
 
@@ -72,6 +81,9 @@ defineExpose({ header });
 		<span>{{ computedDescription?.subtitleRight }}</span>
 	</component>
 	<div class="item-description" :class="descriptionClass">
+		<p v-if="isMidQuestBoots && damageSource && damageSource.roleQuest.value !== 'mid'">
+			(Only Mid Lane) Locked until Quest is Completed
+		</p>
 		<ul>
 			<li v-for="([icon, value, name], i) in computedDescription?.stats" :key="i">
 				<img
@@ -174,15 +186,7 @@ defineExpose({ header });
 	}
 
 	.item-description {
-		> p.alert {
-			--at-apply: 'mt-2';
-		}
-
 		> ul {
-			&:not(:empty) {
-				--at-apply: 'b-t b-[--ui-btn-border-clr] pt-2';
-			}
-
 			> li {
 				--at-apply: 'flex items-center gap-[0.5ch]';
 
@@ -194,6 +198,14 @@ defineExpose({ header });
 					--at-apply: 'capitalize text-neutral-300';
 				}
 			}
+		}
+
+		> :first-child:not(:empty) {
+			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-2';
+		}
+
+		> p:first-child {
+			--at-apply: 'text-red-600 mb-3 italic';
 		}
 
 		> * + h4 {
@@ -234,7 +246,11 @@ defineExpose({ header });
 			}
 		}
 
-		> p:not(.alert) {
+		> p.alert {
+			--at-apply: 'mt-2';
+		}
+
+		> p:not(.alert):not(:first-child) {
 			--at-apply: 'mt-3.25';
 		}
 

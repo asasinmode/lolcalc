@@ -1,5 +1,6 @@
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from './types';
 import { markRaw } from 'vue';
+import { ABILITY_TYPE } from './meta.ts';
 
 export class GameAbilityId {
 	static build<
