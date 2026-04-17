@@ -21,7 +21,6 @@ const { _component: ChampSelect } = useChampSelect();
 const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
 const { _component: EffectsDialog } = useEffectsDialog();
-const enableUnimplementedUi = useEnableUnimplementedUi();
 
 _setupGlobalKeyModifiers();
 
@@ -218,12 +217,26 @@ onBeforeUnmount(() => {
 			<span>
 				{{ version }}
 			</span>
+			<button
+				id="share-configuration"
+				class="pretend-ui-btn"
+				@click="copyShareLink"
+				@mouseenter="showSharePopover"
+				@focus="showSharePopover"
+				@mouseleave="hideSharePopover"
+				@blur="hideSharePopover"
+			>
+				share
+				<div ref="shareTextPopover" popover="manual">
+					{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
+					<p v-show="isStateTooLargeForQuery" class="alert warning">
+						configuration too large for url, some will data will be trimmed
+						<Icon class="i-ph:warning-light" />
+					</p>
+				</div>
+			</button>
 		</div>
 	</header>
-	<label for="scoreboard-enable-unimplemented-ui">
-		TMP enable unimplemented ui
-		<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
-	</label>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
 		<section id="results">
@@ -243,24 +256,6 @@ onBeforeUnmount(() => {
 				@configuration-changed="debouncedSaveState"
 			/>
 		</section>
-		<button
-			id="share-configuration"
-			class="pretend-ui-btn"
-			@click="copyShareLink"
-			@mouseenter="showSharePopover"
-			@focus="showSharePopover"
-			@mouseleave="hideSharePopover"
-			@blur="hideSharePopover"
-		>
-			share
-			<div ref="shareTextPopover" popover="hint">
-				{{ hasCopiedShareLink ? 'copied' : 'copy link to current configuration' }}
-				<p v-show="isStateTooLargeForQuery" class="alert warning">
-					configuration too large for url, some will data will be trimmed
-					<Icon class="i-ph:warning-light" />
-				</p>
-			</div>
-		</button>
 	</main>
 	<footer>
 		<h2>contact</h2>
@@ -321,7 +316,7 @@ onBeforeUnmount(() => {
 			grid-column: page-start / page-end;
 
 			> div {
-				--at-apply: 'flex items-center relative';
+				--at-apply: 'flex items-center justify-between relative';
 				--logo-size: calc(10 * var(--spacing));
 				grid-column: content-start / content-end;
 
@@ -342,30 +337,39 @@ onBeforeUnmount(() => {
 				> span {
 					--at-apply: 'absolute text-xs text-neutral-400 font-600 font-mono start-[calc(var(--logo-size)+0.6rem)] -bottom-0.5';
 				}
+
+				> #share-configuration {
+					--at-apply: 'px-2 py-0.5';
+					anchor-name: --share-configuration;
+
+					> [popover] {
+						--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-btn-border-clr]';
+						position-anchor: --share-configuration;
+						inset-block-start: calc(anchor(end) + 0.25rem);
+						inset-inline-end: calc(anchor(end));
+
+						> .alert {
+							--at-apply: 'py-1 text-sm mb-1';
+
+							&::after {
+								--at-apply: '-mt-1';
+							}
+						}
+					}
+				}
 			}
 		}
 
 		> main {
 			--at-apply: 'relative';
 
-			> #share-configuration {
-				--at-apply: 'px-2 py-0.5 absolute top-0 end-0';
-				anchor-name: --share-configuration;
+			> label {
+				--at-apply: 'absolute';
+			}
 
-				> [popover] {
-					--at-apply: 'bg-black py-0.5 px-1 text-end b b-[--ui-btn-border-clr]';
-					position-anchor: --share-configuration;
-					inset-block-start: calc(anchor(end) + 0.25rem);
-					inset-inline-end: calc(anchor(end));
-
-					> .alert {
-						--at-apply: 'py-1 text-sm mb-1';
-
-						&::after {
-							--at-apply: '-mt-1';
-						}
-					}
-				}
+			> section > h2,
+			> h2 {
+				--at-apply: 'text-xl font-700';
 			}
 		}
 

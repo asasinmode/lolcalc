@@ -2218,7 +2218,7 @@ defineExpose({ el });
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full w-full grid grid-cols-3 auto-rows-min max-w-[40vw] gap-2 pt-3';
+				--at-apply: 'col-span-full w-full grid grid-cols-3 auto-rows-min max-w-[40vw] gap-2 pt-3.5';
 				anchor-name: --scoreboard-item-extras;
 			}
 		}

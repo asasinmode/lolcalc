@@ -1537,7 +1537,7 @@ defineExpose({
 		}
 
 		> caption {
-			--at-apply: 'text-start text-lg';
+			--at-apply: 'sr-only';
 		}
 
 		th {

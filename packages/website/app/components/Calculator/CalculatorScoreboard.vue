@@ -5,6 +5,7 @@ const items = useItems();
 const { championImage } = useChampionImages();
 const { version, minorVersion } = usePatchVersion();
 const globalKeyModifiers = useGlobalKeyModifiers();
+const enableUnimplementedUi = useEnableUnimplementedUi();
 
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
@@ -333,12 +334,16 @@ function setLocalMirrorLayout() {
 
 <template>
 	<section id="scoreboard" :data-mirrored="mirrorLayout || undefined">
-		<h2 id="scoreboard-header">
+		<h2>
 			configuration scoreboard
 		</h2>
 		<label for="scoreboard-mirror-layout">
 			<input id="scoreboard-mirror-layout" v-model="mirrorLayout" type="checkbox" @update:model-value="setLocalMirrorLayout">
 			mirror layout
+		</label>
+		<label for="scoreboard-enable-unimplemented-ui">
+			enable unimplemented ui
+			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
 		</label>
 		<div>
 			<h3>
@@ -465,19 +470,37 @@ function setLocalMirrorLayout() {
 <style>
 @layer components {
 	#scoreboard {
-		> #scoreboard-header {
-			--at-apply: 'mx-auto text-center';
+		--at-apply: 'b-b b-neutral-500 mt-5 relative w-max mx-auto';
+
+		> h2 {
+			--at-apply: 'mx-auto text-center mb-3';
 		}
 
 		> label {
-			--at-apply: 'mx-auto block w-min whitespace-nowrap';
+			--at-apply: 'whitespace-nowrap absolute top-0.5';
+
+			&:nth-of-type(1) {
+				--at-apply: 'end-0';
+			}
+
+			&:nth-of-type(2) {
+				--at-apply: 'start-0';
+			}
 		}
 
 		> div {
-			--at-apply: 'mx-auto gap-x-10 grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-2 w-max relative after:(bg-neutral-400 w-px content-empty start-1/2 inset-y-0 absolute -translate-x-1/2)';
+			--at-apply: 'mx-auto gap-x-10 grid grid-flow-col grid-rows-[min-content_1fr] grid-cols-2 w-max relative pb-2';
+
+			&::after {
+				--at-apply: 'bg-neutral-500 w-px content-empty start-1/2 top-2 bottom-0 absolute -translate-x-1/2';
+			}
 
 			> h3 {
-				--at-apply: 'text-center';
+				--at-apply: 'text-center text-lg font-500 text-neutral-200 text-start';
+
+				&:nth-of-type(2) {
+					--at-apply: 'text-end';
+				}
 			}
 
 			> ul {
