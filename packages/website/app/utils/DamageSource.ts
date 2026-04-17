@@ -710,6 +710,16 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		cleanupItems(this.items.value);
+
+		if (item.isBoots && item.epicness) {
+			const itemIndex = this.items.value.indexOf(item);
+			const items = useItems();
+			if (this.roleQuest.value === 'mid' && item.into?.length) {
+				this.items.value[itemIndex] = items[item.into[0]!];
+			} else if (this.roleQuest.value !== 'mid' && item.from?.length === 1) {
+				this.items.value[itemIndex] = items[item.from[0]!];
+			}
+		}
 	}
 
 	removeItem(index: number): IItem | undefined {
