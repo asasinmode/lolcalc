@@ -48,3 +48,15 @@ defineExpose({
 		<slot />
 	</dialog>
 </template>
+
+<style>
+@layer components {
+	dialog {
+		--at-apply: 'drop-shadow-xl drop-shadow-black/30';
+
+		&::backdrop {
+			--at-apply: 'bg-neutral-950/25';
+		}
+	}
+}
+</style>

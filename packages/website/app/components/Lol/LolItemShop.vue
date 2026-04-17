@@ -905,7 +905,7 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
-		--at-apply: 'bg-[--bg-clr] h-200 max-w-[90vw] shadow-lg relative of-visible b b-[--ui-btn-border-clr]';
+		--at-apply: 'bg-[--bg-clr] h-200 max-w-[90vw] relative of-visible b b-[--ui-btn-border-clr]';
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
@@ -960,7 +960,7 @@ defineExpose({
 				--at-apply: 'col-span-full mx-[--header-px]';
 
 				> div {
-					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0';
+					--at-apply: 'bg-[--bg-clr] grid grid-flow-col grid-cols-[1fr_2fr] grid-rows-[auto_1fr] h-[50vh] w-full translate-y-full start-0 bottom-0 absolute z-10 b b-[--ui-btn-border-clr] b-t-0 shadow-xl';
 					--px: calc(3 * var(--spacing));
 					--hover-bg: theme('colors.cyan.400/0.2');
 
@@ -1388,7 +1388,7 @@ defineExpose({
 		}
 
 		#builds-into-more-list {
-			--at-apply: 'h-max max-h-[60vh] max-w-screen w-66 of-y-auto z-10 py-1';
+			--at-apply: 'h-max max-h-[max(calc(60*var(--spacing)),60vh)] max-w-screen w-66 of-y-auto z-10 py-1 b b-[--ui-btn-border-clr] bg-[--bg-clr] shadow-lg';
 			position-anchor: --last-builds-into-button;
 			inset-block-start: calc(anchor(bottom) + 2px);
 			inset-inline-end: anchor(right);
