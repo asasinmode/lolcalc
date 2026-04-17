@@ -260,11 +260,6 @@ onBeforeUnmount(() => {
 		<h2>contact</h2>
 		<ul>
 			<li>
-				<a href="https://discord.com/channels/@me" target="_blank">
-					<Icon class="i-logos:discord-icon" /> asasinmode
-				</a>
-			</li>
-			<li>
 				<a href="https://github.com/asasinmode/lolcalc" target="_blank">
 					<Icon class="i-logos:github-icon" /> lolcalc
 				</a>
@@ -272,6 +267,11 @@ onBeforeUnmount(() => {
 			<li>
 				<a ref="emailLink" target="_blank">
 					<Icon class="i-logos:google-gmail" />
+				</a>
+			</li>
+			<li>
+				<a href="https://discord.com/channels/@me" target="_blank">
+					<Icon class="i-logos:discord-icon" /> asasinmode
 				</a>
 			</li>
 			<li>
@@ -355,8 +355,6 @@ onBeforeUnmount(() => {
 				--at-apply: 'flex flex-wrap justify-center gap-x-8 gap-y-2 mb-4';
 
 				> li {
-					--at-apply: '';
-
 					> a {
 						--at-apply: 'hoverable:text-white grid grid-cols-[auto_1fr] gap-x-1.5 items-center';
 
@@ -365,12 +363,8 @@ onBeforeUnmount(() => {
 						}
 					}
 
-					&:nth-child(even) {
-						> a {
-							> .icon {
-								--at-apply: 'invert';
-							}
-						}
+					&:is(:first-child, :last-child) > a > .icon {
+						--at-apply: 'invert';
 					}
 				}
 			}
