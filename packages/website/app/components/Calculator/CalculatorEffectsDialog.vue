@@ -220,7 +220,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-effects {
-		--at-apply: 'bg-[--cyan-bg] grid-rows-[auto_1fr] max-h-[80vh] w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr]';
+		--at-apply: 'bg-[--cyan-bg] grid-rows-[auto_auto_1fr] w-max min-w-[min(90vw,768px)] shadow-lg px-3 pb-2 b b-[--ui-btn-border-clr] h-200 of-y-auto';
 		anchor-scope: all;
 
 		&[open] {
@@ -266,7 +266,7 @@ defineExpose({
 		}
 
 		> ul {
-			--at-apply: 'grid grid-cols-[repeat(3,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 justify-items-center mb-3';
+			--at-apply: 'grid grid-cols-[repeat(4,minmax(0,240px))] auto-rows-min gap-x-3 gap-y-2 justify-items-center mb-3 h-min';
 			--ability-size: calc(14 * var(--spacing));
 
 			> li {
@@ -277,7 +277,7 @@ defineExpose({
 		}
 
 		> form {
-			--at-apply: 'grid grid-cols-[auto_1fr] grids-rows-[auto_1fr] gap-x-2';
+			--at-apply: 'grid grid-cols-[auto_1fr] grids-rows-[auto_1fr] gap-x-2 h-min';
 
 			> label {
 				--at-apply: 'col-span-full text-start text-lg';

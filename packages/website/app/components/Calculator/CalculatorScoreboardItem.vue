@@ -155,6 +155,9 @@ function toggleExpanded() {
 }
 
 onMounted(() => {
+	if (props.index === 0) {
+		toggleExpanded();
+	}
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
 });
 
@@ -849,7 +852,7 @@ defineExpose({ el });
 			@click="$emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
-			<span class="sr-only">move up, alt+click to duplicate above</span>
+			<span>move up, alt+click to duplicate above</span>
 			<Icon class="i-ph:arrow-up" />
 		</button>
 		<button
@@ -859,7 +862,7 @@ defineExpose({ el });
 			@click="$emit('move', index + 1, globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
-			<span class="sr-only">move down, alt+click to duplicate below</span>
+			<span>move down, alt+click to duplicate below</span>
 			<Icon class="i-ph:arrow-down" />
 		</button>
 		<button
@@ -869,7 +872,7 @@ defineExpose({ el });
 			@click="$emit('changeGroup', globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
-			<span class="sr-only">move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
+			<span>move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
 			<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
 		</button>
 		<button
@@ -879,7 +882,7 @@ defineExpose({ el });
 			@click="$emit('duplicate', globalKeyModifiers.shift)"
 			@mousedown.left="$emit('startDrag', $event, true)"
 		>
-			<span class="sr-only">duplicate, shift+click to duplicate into {{ otherGroup }}</span>
+			<span>duplicate, shift+click to duplicate into {{ otherGroup }}</span>
 			<Icon class="i-ph:copy" />
 		</button>
 		<div data-select-champion="">
@@ -887,7 +890,7 @@ defineExpose({ el });
 				title="select champion"
 				@click="selectChampion(value.listedChampion)"
 			>
-				<span class="sr-only">
+				<span>
 					{{ value.listedChampion.value ? `selected champion: ${value.listedChampion.value.name}` : 'select champion' }}
 				</span>
 				<img
@@ -923,7 +926,7 @@ defineExpose({ el });
 			class="other-ui-btn"
 			@click="selectRunes(value.runes)"
 		>
-			<span class="sr-only">{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
+			<span>{{ value.runePathsEmpty ? 'select runes' : 'runes' }}</span>
 			<span
 				v-show="value.runesInvalid.value"
 				class="text-white outline-2 outline-red-600 outline-offset-1 rounded-full bg-red-600 grid-center absolute -end-0.5 -top-0.5"
@@ -1022,7 +1025,7 @@ defineExpose({ el });
 			:disabled="removeButtonAttrs.disabled"
 			@click="removeButtonAttrs.emit"
 		>
-			<span class="sr-only">{{ removeButtonAttrs.title }}</span>
+			<span>{{ removeButtonAttrs.title }}</span>
 			<Icon class="i-ph:trash size-5" />
 		</button>
 		<button
@@ -1032,7 +1035,7 @@ defineExpose({ el });
 			:aria-expanded="isExpanded"
 			@click="toggleExpanded"
 		>
-			<span class="sr-only">{{ isExpanded ? 'collapse' : 'expand' }}</span>
+			<span>{{ isExpanded ? 'collapse' : 'expand' }}</span>
 			<Icon class="i-ph:caret-down size-5" />
 		</button>
 		<details
@@ -1350,7 +1353,7 @@ defineExpose({ el });
 					</p>
 				</div>
 			</section>
-			<section v-if="itemExtras.length || championExtra" data-extras="">
+			<section data-extras="">
 				<component
 					:is="championExtra[0]"
 					v-if="championExtra"
@@ -1385,8 +1388,10 @@ defineExpose({ el });
 	}
 
 	#scoreboard > div > ul > [data-scoreboard-item] {
-		--at-apply: 'relative grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-2 px-4';
+		--at-apply: 'relative grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-4 box-content';
+		min-width: calc(3 * var(--extra-item-w) + 2 * var(--extras-gap));
 
+		--py: calc(3 * var(--spacing));
 		--select-champion-size: calc(var(--spacing) * 14);
 		--non-expanded-row-height: calc(var(--select-champion-size) / 2);
 		--transition-duration: 150ms;
@@ -1409,7 +1414,9 @@ defineExpose({ el });
 		--soul-size: calc(10 * var(--spacing));
 		--stack-size: calc(8 * var(--spacing));
 		--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
-		--scoreboard-item-gap-x: calc(4 * var(--spacing));
+		--gap-x: calc(4 * var(--spacing));
+		--extras-gap: calc(2 * var(--spacing));
+		--extra-item-w: calc(64 * var(--spacing));
 
 		grid-template-areas:
 			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
@@ -1449,23 +1456,36 @@ defineExpose({ el });
 
 		> button {
 			&:nth-of-type(1) {
-				--at-apply: 'self-end mb-0.5 me-0.5';
 				grid-area: move-up;
 			}
 
 			&:nth-of-type(2) {
-				--at-apply: 'self-start mt-0.5 me-0.5';
 				grid-area: move-down;
 			}
 
 			&:nth-of-type(3) {
-				--at-apply: 'self-end mb-0.5 ms-0.5';
 				grid-area: move-column;
 			}
 
 			&:nth-of-type(4) {
-				--at-apply: 'self-start mt-0.5 ms-0.5';
 				grid-area: duplicate;
+			}
+
+			&:nth-of-type(1),
+			&:nth-of-type(3),
+			&:nth-last-of-type(2) {
+				--at-apply: '-mb-[0.5px] self-end';
+			}
+
+			&:nth-of-type(2),
+			&:nth-of-type(4),
+			&:nth-last-of-type(1) {
+				--at-apply: '-mt-[0.5px] self-start';
+			}
+
+			&:nth-of-type(3),
+			&:nth-of-type(4) {
+				--at-apply: '-ms-px z-1';
 			}
 
 			&:nth-last-of-type(3) {
@@ -1479,31 +1499,39 @@ defineExpose({ el });
 			}
 
 			&:nth-last-of-type(2) {
-				--at-apply: 'self-end mb-0.5';
 				grid-area: clear;
 			}
 
 			&:nth-last-of-type(1) {
-				--at-apply: 'self-start mt-0.5';
 				grid-area: expand;
 			}
 
 			&:nth-of-type(-n + 4),
 			&:nth-last-of-type(-n + 2) {
-				--at-apply: 'size-5 grid-center';
+				--at-apply: 'size-6 grid-center';
+
+				> span:first-of-type {
+					--at-apply: 'sr-only';
+				}
 
 				.icon {
-					--at-apply: 'size-4';
+					--at-apply: 'size-5';
 				}
 			}
 		}
 
 		> [data-select-champion] {
-			--at-apply: 'size-[--select-champion-size] mx-3 relative';
+			--at-apply: 'size-[--select-champion-size] ms-[--ms] me-[--me] relative';
+			--ms: calc(3 * var(--spacing));
+			--me: calc(2 * var(--spacing));
 			grid-area: select-champion;
 
 			> button {
 				--at-apply: 'group b b-2 b-[--ui-btn-border-clr] rounded-full size-full of-hidden';
+
+				> span {
+					--at-apply: 'sr-only';
+				}
 
 				img {
 					--at-apply: 'max-w-none size-[115%] -ms-[7.5%] -mt-[7.5%]';
@@ -1537,6 +1565,10 @@ defineExpose({ el });
 			--secondary-path-inset-end: calc(-0.5 * var(--spacing));
 			grid-area: select-runes;
 
+			> span:first-of-type {
+				--at-apply: 'sr-only';
+			}
+
 			[data-secondary-path-icon] {
 				--at-apply: 'size-[--secondary-path-icon-size] block -bottom-0.5 z-11 end-[--secondary-path-inset-end] absolute';
 			}
@@ -1547,7 +1579,8 @@ defineExpose({ el });
 		}
 
 		> [data-select-items] {
-			--at-apply: 'self-center relative';
+			--at-apply: 'self-center relative ms-[--ms]';
+			--ms: calc(2 * var(--spacing));
 			grid-area: select-items;
 
 			> img {
@@ -1556,11 +1589,12 @@ defineExpose({ el });
 		}
 
 		> ul {
-			--at-apply: 'flex gap-0.5 h-[--item-size] self-center relative me-[--me] w-min';
+			--at-apply: 'flex gap-0.5 h-[--item-size] self-center relative me-[--me] ms-[--ms] w-min';
 			grid-area: items;
 			anchor-name: --scoreboard-item-items;
 			--item-size: calc(8 * var(--spacing));
 			--me: calc(3 * var(--spacing));
+			--ms: calc(5 * var(--spacing));
 
 			> li {
 				> * {
@@ -2084,7 +2118,7 @@ defineExpose({ el });
 			}
 
 			> [data-role-quest] {
-				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))] mx-[--scoreboard-item-gap-x]';
+				--at-apply: 'relative py-[calc(0.5*(var(--soul-size)-var(--stack-size))+var(--soul-rotation-size-diff))] mx-[--gap-x] w-max';
 				grid-area: role-quest;
 				anchor-name: --scoreboard-item-role-quest;
 
@@ -2214,18 +2248,22 @@ defineExpose({ el });
 
 			> [data-abilities],
 			> [data-health-ability-resource] {
-				--at-apply: 'ms-[--scoreboard-item-gap-x]';
+				--at-apply: 'ms-[--gap-x]';
 			}
 
 			> [data-extras] {
-				--at-apply: 'col-span-full w-full grid grid-cols-3 auto-rows-min max-w-[40vw] gap-2 pt-3.5';
+				--at-apply: 'col-span-full w-full grid grid-cols-[repeat(3,minmax(0,var(--extra-item-w)))] auto-rows-min gap-[--extras-gap] pt-3';
 				anchor-name: --scoreboard-item-extras;
+
+				&:empty {
+					--at-apply: 'hidden';
+				}
 			}
 		}
 
 		> [data-select-items],
 		> details > [data-effects] > button {
-			--at-apply: 'mx-2 rounded-full h-8 ps-2.5 pe-2 w-max whitespace-nowrap';
+			--at-apply: 'rounded-full h-8 ps-2.5 pe-2 w-max whitespace-nowrap';
 
 			img {
 				--at-apply: 'inline-block align-middle -mt-0.5';
@@ -2233,10 +2271,8 @@ defineExpose({ el });
 		}
 	}
 
-	#scoreboard > div > ul > [data-scoreboard-item]:has(+ [data-scoreboard-item]) {
-		> details[open] {
-			--at-apply: 'pb-4';
-		}
+	#scoreboard > div > ul > [data-scoreboard-item] > details[open]:not(:has(> [data-extras]:not(:empty))) {
+		--at-apply: 'pb-1.5';
 	}
 
 	#scoreboard
@@ -2293,7 +2329,7 @@ defineExpose({ el });
 	#dialog-effects > ul > li,
 	#scoreboard > div > ul > [data-scoreboard-item] > details > [data-extras] {
 		> article {
-			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md';
+			--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] px-[--p] rounded-md w-[--extra-item-w,auto]';
 			--p: calc(2 * var(--spacing));
 
 			> img {
@@ -2344,18 +2380,15 @@ defineExpose({ el });
 			'expanded		expanded		expanded				expanded			expanded				expanded		expanded';
 
 		> button {
-			&:nth-of-type(1),
-			&:nth-of-type(2) {
-				--at-apply: 'me-auto ms-0.5';
-			}
-
 			&:nth-of-type(3),
 			&:nth-of-type(4) {
-				--at-apply: 'ms-auto me-0.5';
+				--at-apply: '-me-px ms-0 z-1';
 			}
 		}
 
 		> [data-select-champion] {
+			--at-apply: 'ms-[--me] me-[--ms]';
+
 			> [data-select-champion-level] {
 				--at-apply: 'end-auto start-[--inset-end]';
 			}
@@ -2371,8 +2404,12 @@ defineExpose({ el });
 			}
 		}
 
+		> [data-select-items] {
+			--at-apply: 'me-[--ms] ms-0';
+		}
+
 		> ul {
-			--at-apply: 'ms-3 me-0 justify-self-end';
+			--at-apply: 'ms-[--me] me-[--ms] justify-self-end flex-row-reverse';
 		}
 
 		> details {
@@ -2419,7 +2456,7 @@ defineExpose({ el });
 
 			> [data-abilities],
 			> [data-health-ability-resource] {
-				--at-apply: 'ms-0 me-[--scoreboard-item-gap-x]';
+				--at-apply: 'ms-0 me-[--gap-x]';
 			}
 
 			> [data-role-quest],
@@ -2430,6 +2467,8 @@ defineExpose({ el });
 			}
 
 			> [data-role-quest] {
+				--at-apply: 'justify-self-end';
+
 				> .v-select {
 					--at-apply: 'ms-auto';
 
