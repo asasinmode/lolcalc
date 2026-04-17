@@ -67,6 +67,7 @@
 	body {
 		font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
 		min-height: 100vh;
+		background-color: theme('colors.mauve.900');
 
 		@supports (font-variation-settings: 'wdth' 800) {
 			font-family: 'Atkinson Hyperlegible Next Variable', system-ui, sans-serif;

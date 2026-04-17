@@ -166,6 +166,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] right click to sell items
   - [ ] right click to clear ability level/soul/role quest/others
   - [ ] difference between "internal effects" (item extras) and "applied effects" (effects dialog)
+  - [ ] in/decrement effects in scoreboard item
   - [ ] "tutorial library" to review info
 - [ ] keyboard navigation
   - [ ] somehow right clicks, like clearing selects/removing items

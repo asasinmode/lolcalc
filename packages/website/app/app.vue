@@ -12,7 +12,7 @@ useHead({
 	],
 });
 useSeoMeta({
-	title: 'Damage Calculator for League of Legends - lolcalc',
+	title: 'lolcalc - Damage Calculator for League of Legends',
 	description: 'Accurate champion stats calculation, damage and build comparison and more',
 });
 
@@ -186,8 +186,14 @@ function saveStateOnVisibilitychange() {
 	document.hidden && saveState();
 }
 
+const cipheredEmail = [115, 117, 112, 111, 114, 116, 109, 111, 100, 101, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109];
+const emailEl = useTemplateRef('emailLink');
+
 onMounted(() => {
 	document.addEventListener('visibilitychange', saveStateOnVisibilitychange);
+	const email = cipheredEmail.map(n => String.fromCharCode(n)).join('');
+	emailEl.value?.append(email);
+	emailEl.value?.setAttribute('href', `mailto:${email}`);
 });
 
 onBeforeUnmount(() => {
@@ -251,7 +257,32 @@ onBeforeUnmount(() => {
 		</button>
 	</main>
 	<footer>
-		<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
+		<h2>contact</h2>
+		<ul>
+			<li>
+				<a href="https://discord.com/channels/@me" target="_blank">
+					<Icon class="i-logos:discord-icon" /> asasinmode
+				</a>
+			</li>
+			<li>
+				<a href="https://github.com/asasinmode/lolcalc" target="_blank">
+					<Icon class="i-logos:github-icon" /> lolcalc
+				</a>
+			</li>
+			<li>
+				<a ref="emailLink" target="_blank">
+					<Icon class="i-logos:google-gmail" />
+				</a>
+			</li>
+			<li>
+				<a href="https://x.com/asasinmode" target="_blank">
+					<Icon class="i-logos:x" /> asasinmode
+				</a>
+			</li>
+		</ul>
+		<p>
+			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
+		</p>
 	</footer>
 	<ClientOnly>
 		<ChampSelect />
@@ -304,13 +335,43 @@ onBeforeUnmount(() => {
 		}
 
 		> footer {
-			--at-apply: 'pt-8 pb-3 text-neutral-400 mt-auto text-center';
+			--at-apply: 'pt-12 pb-3 text-neutral-400 mt-auto text-center';
 
-			> a {
-				--at-apply: 'hoverable:text-white';
+			> p {
+				> a {
+					--at-apply: 'hoverable:text-white';
 
-				> span {
-					--at-apply: 'underline';
+					> span {
+						--at-apply: 'underline';
+					}
+				}
+			}
+
+			> h2 {
+				--at-apply: 'text-lg uppercase font-700 text-neutral-300';
+			}
+
+			> ul {
+				--at-apply: 'flex flex-wrap justify-center gap-x-8 gap-y-2 mb-4';
+
+				> li {
+					--at-apply: '';
+
+					> a {
+						--at-apply: 'hoverable:text-white grid grid-cols-[auto_1fr] gap-x-1.5 items-center';
+
+						> .icon {
+							--at-apply: 'size-4';
+						}
+					}
+
+					&:nth-child(even) {
+						> a {
+							> .icon {
+								--at-apply: 'invert';
+							}
+						}
+					}
 				}
 			}
 		}
