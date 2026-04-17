@@ -377,7 +377,7 @@ onBeforeUnmount(() => {
 		}
 
 		> footer {
-			--at-apply: 'pt-12 pb-3 text-neutral-400 mt-auto text-center';
+			--at-apply: 'pt-3 pb-3 text-neutral-400 mt-auto text-center b-t b-neutral-500';
 
 			> h2 {
 				--at-apply: 'text-lg font-700 text-neutral-300 mb-0.5';

@@ -705,6 +705,14 @@ function cleanupUnused() {
 		const [sectionIndex, section] = cleanableColumnsSections.value[1][i]!;
 		computedResults.value.delete(section.id);
 		resultSections.value.splice(sectionIndex, 1);
+
+		for (let i = customTotalRows.value.length - 1; i >= 0; i--) {
+			const [sectionId] = customTotalRows.value[i]!.split('_');
+
+			if (sectionId === section.id) {
+				customTotalRows.value.splice(i, 1);
+			}
+		}
 	}
 }
 
@@ -1521,7 +1529,7 @@ defineExpose({
 <style>
 @layer components {
 	#results-table {
-		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr]';
+		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr] mb-10';
 		--b-clr: theme('colors.neutral.600');
 		--bg-clr: theme('colors.neutral.950');
 		--table-ps: calc(3 * var(--spacing));
