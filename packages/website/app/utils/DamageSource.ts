@@ -254,16 +254,19 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}),
 
 			watch(this.roleQuest, (value) => {
+				let bootsIndex = this.items.value.findIndex(item => item?.isBoots);
+				const boots = this.items.value[bootsIndex]!;
+
 				if (value !== 'top' && this.level.value > 18) {
 					this.level.value = 18;
 				}
+
 				if (value === 'bot') {
-					const bootsIndex = this.items.value.findIndex(item => item?.isBoots);
 					if (~bootsIndex) {
-						const boots = this.items.value[bootsIndex]!;
 						this.items.value[bootsIndex] = undefined;
 						this.items.value[6] = boots;
 						cleanupItems(this.items.value);
+						bootsIndex = 6;
 					}
 				} else if (this.items.value[6]?.isBoots) {
 					const firstEmptyIndex = this.items.value.indexOf(undefined);
@@ -271,6 +274,16 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						this.items.value[firstEmptyIndex] = this.items.value[6];
 						this.items.value[6] = undefined;
 						cleanupItems(this.items.value);
+						bootsIndex = this.items.value.findIndex(item => item?.isBoots);
+					}
+				}
+
+				if (boots?.epicness) {
+					const items = useItems();
+					if (value === 'mid' && boots.into?.length) {
+						this.items.value[bootsIndex] = items[boots.into[0]!];
+					} else if (boots.from?.length === 1) {
+						this.items.value[bootsIndex] = items[boots.from[0]!];
 					}
 				}
 			}),
