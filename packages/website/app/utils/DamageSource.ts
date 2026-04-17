@@ -254,19 +254,17 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}),
 
 			watch(this.roleQuest, (value) => {
-				let bootsIndex = this.items.value.findIndex(item => item?.isBoots);
-				const boots = this.items.value[bootsIndex]!;
-
 				if (value !== 'top' && this.level.value > 18) {
 					this.level.value = 18;
 				}
 
 				if (value === 'bot') {
+					const bootsIndex = this.items.value.findIndex(item => item?.isBoots);
+					const boots = this.items.value[bootsIndex];
 					if (~bootsIndex) {
 						this.items.value[bootsIndex] = undefined;
 						this.items.value[6] = boots;
 						cleanupItems(this.items.value);
-						bootsIndex = 6;
 					}
 				} else if (this.items.value[6]?.isBoots) {
 					const firstEmptyIndex = this.items.value.indexOf(undefined);
@@ -274,19 +272,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 						this.items.value[firstEmptyIndex] = this.items.value[6];
 						this.items.value[6] = undefined;
 						cleanupItems(this.items.value);
-						bootsIndex = this.items.value.findIndex(item => item?.isBoots);
 					}
 				}
 
-				if (boots?.epicness) {
-					const items = useItems();
-					if (value === 'mid' && boots.into?.length) {
-						this.items.value[bootsIndex] = items[boots.into[0]!];
-					} else if (boots.from?.length === 1) {
-						this.items.value[bootsIndex] = items[boots.from[0]!];
-					}
-				}
-			}, { immediate: true }),
+				handleMidQuestBoots(this.items.value, this.roleQuest.value);
+			}),
 
 			watch(this.isRanged, (value) => {
 				if (!value) {
@@ -523,6 +513,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				}
 			}
 			cleanupItems(rv.items.value);
+			handleMidQuestBoots(rv.items.value, rv.roleQuest.value);
 		}
 
 		const runePaths = Object.keys(runes.paths);
@@ -710,16 +701,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 
 		cleanupItems(this.items.value);
-
-		if (item.isBoots && item.epicness) {
-			const itemIndex = this.items.value.indexOf(item);
-			const items = useItems();
-			if (this.roleQuest.value === 'mid' && item.into?.length) {
-				this.items.value[itemIndex] = items[item.into[0]!];
-			} else if (this.roleQuest.value !== 'mid' && item.from?.length === 1) {
-				this.items.value[itemIndex] = items[item.from[0]!];
-			}
-		}
+		handleMidQuestBoots(this.items.value, this.roleQuest.value);
 	}
 
 	removeItem(index: number): IItem | undefined {
@@ -948,6 +930,20 @@ function cleanupItems(items: (IItem | undefined)[]): void {
 	const filledSlots = items.slice(0, 6).filter(Boolean);
 	for (let i = 0; i < 6; i++) {
 		items[i] = filledSlots[i];
+	}
+}
+
+function handleMidQuestBoots(items: (IItem | undefined)[], roleQuest?: IChampionRole): void {
+	const bootsIndex = items.findIndex(item => item?.isBoots);
+	const boots = items[bootsIndex]!;
+
+	if (boots?.epicness) {
+		const allItems = useItems();
+		if (roleQuest === 'mid' && boots.into?.length) {
+			items[bootsIndex] = allItems[boots.into[0]!];
+		} else if (roleQuest !== 'mid' && boots.from?.length === 1) {
+			items[bootsIndex] = allItems[boots.from[0]!];
+		}
 	}
 }
 
