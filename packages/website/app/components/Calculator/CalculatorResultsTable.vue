@@ -1061,10 +1061,10 @@ defineExpose({
 		</caption>
 		<thead>
 			<tr>
-				<th width="48px" scope="col">
+				<th width="60px" scope="col">
 					<span>row controls</span>
 				</th>
-				<th id="results-table-header-damage-type" scope="col" width="192px">
+				<th id="results-table-header-damage-type" scope="col" width="240px">
 					<span>damage type</span>
 				</th>
 				<th
@@ -1081,7 +1081,7 @@ defineExpose({
 				</th>
 			</tr>
 			<tr>
-				<td width="240px" colspan="2">
+				<td width="300px" colspan="2">
 					<div>
 						<a href="#results-table-section-header-aa" class="skip-link">
 							skip column controls
@@ -1521,14 +1521,21 @@ defineExpose({
 <style>
 @layer components {
 	#results-table {
-		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr]';
+		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr]';
+		--b-clr: theme('colors.neutral.600');
 		--bg-clr: theme('colors.neutral.950');
-		--control-button-size: calc(6 * var(--spacing));
+		--table-ps: calc(3 * var(--spacing));
+		--control-btn-size: calc(6 * var(--spacing));
 		--header-row-gap-y: calc(3 * var(--spacing));
 		--header-champion-select-size: calc(10 * var(--spacing));
 		--header-row-pb: calc(3 * var(--spacing));
-		--section-header-row-h: calc(22 * var(--spacing));
-		--section-header-row-py: calc(1 * var(--spacing));
+		--header-row-pt: calc(2 * var(--spacing));
+		--header-h: calc(
+			var(--header-row-pt) + var(--header-row-pb) + var(--header-champion-select-size) + 2 * var(--header-row-gap-y) +
+				3 * var(--control-btn-size) - 1px
+		); /* offset by 1 px to undouble button borders */
+		--section-header-row-pt: calc(1 * var(--spacing));
+		--section-header-row-pb: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
 
 		&[inert],
@@ -1553,10 +1560,14 @@ defineExpose({
 
 			> tr:nth-child(2) {
 				--at-apply: 'min-h-px h-full';
+
+				> * {
+					--at-apply: 'pt-[--header-row-pt]';
+				}
 			}
 
 			> tr:nth-child(2) > td:first-child {
-				--at-apply: 'ps-3 pb-3 bg-[--bg-clr] min-h-px h-inherit text-start align-top';
+				--at-apply: 'ps-[--table-ps] pb-[--header-row-pb] bg-[--bg-clr] min-h-px h-inherit text-start align-top';
 
 				> div {
 					--at-apply: 'flex flex-col items-start h-full';
@@ -1570,7 +1581,7 @@ defineExpose({
 					}
 
 					> button {
-						--at-apply: 'px-1 leading-5 h-[--control-button-size] text-base mb-auto mt-2';
+						--at-apply: 'px-1 leading-5 h-[--control-btn-size] text-base mb-auto mt-2';
 					}
 				}
 			}
@@ -1579,7 +1590,7 @@ defineExpose({
 				--at-apply: 'pb-[--header-row-pb] bg-[--bg-clr] align-top';
 
 				&[data-drop-direction]::after {
-					--at-apply: 'content-empty absolute z-3 start-0.25 top-0 translate-y-[--control-button-size] size-4 rotate-270 bg-neutral-300';
+					--at-apply: 'content-empty absolute z-3 start-0.25 top-0 translate-y-[--control-btn-size] size-4 rotate-270 bg-neutral-300';
 					mask: icon('i-ph:caret-up-bold') center / 100% 100% no-repeat;
 				}
 
@@ -1588,7 +1599,7 @@ defineExpose({
 				}
 
 				> div {
-					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--control-button-size)_1fr]';
+					--at-apply: 'grid grid-rows-[auto_1fr] relative grid-cols-[1fr_var(--control-btn-size)_1fr]';
 					grid-template-areas:
 						'move-left remove move-right'
 						'source vs target'
@@ -1651,11 +1662,12 @@ defineExpose({
 						}
 
 						&:nth-last-of-type(1) {
+							--at-apply: '-mt-px z-1';
 							grid-area: add-items;
 						}
 
 						&:nth-last-of-type(-n + 2) {
-							--at-apply: 'mx-2 h-[--control-button-size] leading-5';
+							--at-apply: 'mx-2 h-[--control-btn-size] leading-5';
 						}
 					}
 				}
@@ -1665,7 +1677,7 @@ defineExpose({
 						--at-apply: 'grid place-items-center self-center';
 
 						&:nth-of-type(-n + 3):not(:last-child) {
-							--at-apply: 'size-[--control-button-size]';
+							--at-apply: 'size-[--control-btn-size]';
 
 							> span:nth-child(2) {
 								--at-apply: 'size-5';
@@ -1704,7 +1716,7 @@ defineExpose({
 
 				&:last-child > div {
 					> button:first-of-type {
-						--at-apply: 'w-auto px-1 justify-self-center h-[--control-button-size] leading-5';
+						--at-apply: 'w-auto px-1 justify-self-center h-[--control-btn-size] leading-5';
 						grid-area: 1 / 1 / 2 / 4;
 					}
 				}
@@ -1715,13 +1727,13 @@ defineExpose({
 			anchor-scope: all;
 
 			&:not([aria-labelledby]) {
-				--at-apply: 'sticky top-[--section-header-row-h] z-4 bg-[--bg-clr]';
+				--at-apply: 'sticky top-[--header-h] z-4 bg-[--bg-clr]';
 
 				> tr {
 					anchor-name: --section-header-row;
 
 					> td {
-						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2';
+						--at-apply: 'grid grid-flow-col grid-cols-2 grid-rows-2 ps-[--table-ps]';
 
 						> button {
 							--at-apply: 'size-6 grid place-items-center';
@@ -1741,7 +1753,7 @@ defineExpose({
 					}
 
 					> * {
-						--at-apply: 'py-[--section-header-row-py]';
+						--at-apply: 'pt-[--section-header-row-pt] pb-[--section-header-row-pb]';
 					}
 
 					> th > div {
@@ -1753,7 +1765,7 @@ defineExpose({
 						}
 
 						> img {
-							--at-apply: 'size-6 ms-2 me-1.5 inline-block';
+							--at-apply: 'size-6 ms-3 me-1.5 inline-block';
 						}
 
 						> [popover] {
@@ -1769,6 +1781,15 @@ defineExpose({
 						> select {
 							--at-apply: 'px-1 ms-[0.5ch]';
 						}
+					}
+				}
+
+				&:not(:first-of-type) {
+					--at-apply: 'top-[calc(var(--header-h)-var(--pt)+var(--section-header-row-pt))]';
+					--pt: calc(6 * var(--spacing));
+
+					> tr > * {
+						--at-apply: 'pt-[--pt]';
 					}
 				}
 			}
@@ -1817,10 +1838,10 @@ defineExpose({
 
 					> th {
 						--at-apply: 'hyphens-auto wrap-anywhere';
-						--ps: calc(2 * var(--control-button-size));
+						--ps: calc(2 * var(--control-btn-size));
 
 						&[colspan] {
-							--at-apply: 'ps-[--ps]';
+							--at-apply: 'ps-[calc(var(--table-ps)+var(--ps))]';
 						}
 
 						> img {
@@ -1838,10 +1859,8 @@ defineExpose({
 						--at-apply: 'px-3';
 
 						&:first-child {
-							--at-apply: '';
-
 							> label {
-								--at-apply: 'absolute inset-0 grid-center';
+								--at-apply: 'absolute inset-0 grid-center ms-[--table-ps]';
 
 								> span {
 									--at-apply: 'sr-only';
@@ -1920,23 +1939,27 @@ defineExpose({
 		}
 
 		> tfoot {
-			> tr > td > form {
-				--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2 pt-5 px-3 pb-2';
+			> tr > td {
+				--at-apply: 'pt-4 pb-1';
 
-				> label {
-					--at-apply: 'col-span-full text-start text-lg';
-				}
+				> form {
+					--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2 pt-1 px-3 pb-2 b-t b-[--b-clr]';
 
-				> select {
-					--at-apply: 'w-64 px-1';
-
-					&:disabled {
-						--at-apply: 'text-neutral-400';
+					> label {
+						--at-apply: 'col-span-full text-start text-lg';
 					}
-				}
 
-				> button {
-					--at-apply: 'w-fit px-1 h-6';
+					> select {
+						--at-apply: 'w-64 px-1';
+
+						&:disabled {
+							--at-apply: 'text-neutral-400';
+						}
+					}
+
+					> button {
+						--at-apply: 'w-fit px-1 h-6';
+					}
 				}
 			}
 		}
