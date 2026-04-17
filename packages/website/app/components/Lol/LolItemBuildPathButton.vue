@@ -37,7 +37,7 @@ const { version } = usePatchVersion();
 	--build-path-clr: theme('colors.neutral.500');
 
 	button[data-has-components] {
-		--at-apply: 'mb-1.5 relative';
+		--at-apply: 'mb-[--item-mb] relative';
 
 		&:before {
 			--at-apply: 'pointer-events-none content-empty block absolute w-px h-1.25 -bottom-0.5 z-100 translate-y-full -translate-x-1/2 start-1/2 bg-[var(--build-path-clr)]';
@@ -48,7 +48,7 @@ const { version } = usePatchVersion();
 		--at-apply: 'relative';
 
 		button {
-			--at-apply: 'mt-4 relative';
+			--at-apply: 'mt-[--item-mt] relative';
 
 			&:after {
 				--at-apply: 'pointer-events-none content-empty block absolute w-px h-5 top-1 -translate-y-full -translate-x-1/2 start-1/2 bg-[var(--build-path-clr)]';

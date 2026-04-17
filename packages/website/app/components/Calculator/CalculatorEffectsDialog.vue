@@ -153,7 +153,7 @@ defineExpose({
 			</form>
 		</header>
 		<h2>loading...</h2>
-		<ul v-show="damageSource?.appliedEffects.value.length" :inert="isLoading">
+		<ul :inert="isLoading">
 			<li
 				v-for="(effect, i) in damageSource?.appliedEffects.value"
 				:key="effect.id"

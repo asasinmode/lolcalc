@@ -42,11 +42,11 @@ const value = defineModel<number>({ required: true });
 		--at-apply: 'grid grid-cols-[auto_max-content_1fr] grid-rows-1 items-center relative';
 
 		> input {
-			--at-apply: 'me-[0.5ch] mt-px';
+			--at-apply: 'mt-px';
 		}
 
 		> label {
-			--at-apply: 'leading-[1.1]';
+			--at-apply: 'ps-[0.5ch] leading-[1.1]';
 		}
 	}
 }

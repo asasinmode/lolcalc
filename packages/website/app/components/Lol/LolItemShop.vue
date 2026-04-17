@@ -895,6 +895,8 @@ defineExpose({
 @layer components {
 	:root {
 		--item-img-size: 3.5rem;
+		--item-img-text-gap: calc(0.5 * var(--spacing));
+		--item-img-text-h: calc(5 * var(--spacing));
 	}
 
 	[data-sprite-image] {
@@ -1319,7 +1321,7 @@ defineExpose({
 			}
 
 			> span:last-of-type {
-				--at-apply: 'block leading-5 pt-0.5 text-center font-500';
+				--at-apply: 'block leading-[--item-img-text-h] pt-[--item-img-text-gap] text-center font-500';
 			}
 
 			&:hover,
@@ -1556,7 +1558,13 @@ defineExpose({
 				}
 
 				#item-shop-build-path {
-					--at-apply: 'b-t py-3 mt-3 text-center flex basis-[40%] flex-col items-center justify-center order-3';
+					--at-apply: 'b-t box-content py-3 mt-3 text-center flex flex-col items-center justify-center order-3 shrink-0';
+					min-height: calc(
+						3 * (var(--item-img-size) + var(--item-mb) + var(--item-img-text-gap) + var(--item-img-text-h)) + 2 *
+							var(--item-mt)
+					);
+					--item-mb: calc(1.5 * var(--spacing));
+					--item-mt: calc(4 * var(--spacing));
 				}
 
 				> .item-description-header,
