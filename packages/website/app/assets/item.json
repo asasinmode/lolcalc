@@ -5776,7 +5776,8 @@
 			"itemGroups": [
 				"{9e360ad4}",
 				"Items/ItemGroups/Boots"
-			]
+			],
+			"isBoots": true
 		},
 		"3173": {
 			"id": "3173",

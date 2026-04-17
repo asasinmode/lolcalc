@@ -438,6 +438,9 @@ if (!itemData || itemData?.version !== latestVersion || !textData.data.items) {
 		const itemGroups = itemMoreData.mItemGroups.filter((group: string) => group !== 'Items/ItemGroups/Default');
 		if (itemGroups.length) {
 			item.itemGroups = itemGroups;
+			if (itemGroups.includes('Items/ItemGroups/Boots')) {
+				item.isBoots = true;
+			};
 		}
 
 		for (const value of itemMoreData.mDataValues || []) {
