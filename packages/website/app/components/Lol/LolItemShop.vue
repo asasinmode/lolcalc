@@ -1211,7 +1211,7 @@ defineExpose({
 						&:nth-child(7) {
 							--at-apply: 'absolute end-[--side-panel-inner-p] top-1/2 -translate-y-[calc(50%-var(--item-button-img-b-w))]';
 
-							> button {
+							> * {
 								--at-apply: 'rounded-1/2';
 
 								> img {
