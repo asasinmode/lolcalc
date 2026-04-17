@@ -203,21 +203,27 @@ onBeforeUnmount(() => {
 
 <template>
 	<header>
-		<h1>
-			lolcalc
-		</h1>
-		<h2>
-			League of Legends damage calculator
-		</h2>
-		<p>
-			current patch: {{ version }}
-			<br>
-		</p>
-		<label for="scoreboard-enable-unimplemented-ui">
-			TMP enable unimplemented ui
-			<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
-		</label>
+		<div>
+			<h1>
+				<a href="/">
+					<img
+						src="/logo_dark.webp"
+						width="192"
+						height="192"
+					>
+					lolcalc
+				</a>
+				<span>alpha</span>
+			</h1>
+			<span>
+				{{ version }}
+			</span>
+		</div>
 	</header>
+	<label for="scoreboard-enable-unimplemented-ui">
+		TMP enable unimplemented ui
+		<input id="scoreboard-enable-unimplemented-ui" v-model="enableUnimplementedUi" type="checkbox">
+	</label>
 	<main>
 		<CalculatorScoreboard v-model:sources="damageSources" v-model:targets="damageTargets" />
 		<section id="results">
@@ -310,6 +316,35 @@ onBeforeUnmount(() => {
 	}
 
 	#__nuxt {
+		> header {
+			--at-apply: 'flex b-b b-neutral-500 grid grid-cols-subgrid py-2.5';
+			grid-column: page-start / page-end;
+
+			> div {
+				--at-apply: 'flex items-center relative';
+				--logo-size: calc(10 * var(--spacing));
+				grid-column: content-start / content-end;
+
+				> h1 {
+					--at-apply: 'text-3xl leading-[1] font-700 tracking-wide';
+
+					> a {
+						> img {
+							--at-apply: 'inline-block size-[--logo-size]';
+						}
+					}
+
+					> span {
+						--at-apply: 'font-mono text-xs align-top -ms-1.5 text-neutral-300';
+					}
+				}
+
+				> span {
+					--at-apply: 'absolute text-xs text-neutral-400 font-600 font-mono start-[calc(var(--logo-size)+0.6rem)] -bottom-0.5';
+				}
+			}
+		}
+
 		> main {
 			--at-apply: 'relative';
 
