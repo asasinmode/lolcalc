@@ -1877,8 +1877,8 @@ defineExpose({
 		> tbody[aria-labelledby] > tr > td.highlighted {
 			background-image: linear-gradient(
 				to right,
-				oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.1),
-				oklch(from var(--target-clr, var(--col-damage-target-clr, white)) l c h / 0.1)
+				oklch(from var(--source-clr, var(--col-damage-source-clr, white)) l c h / 0.12),
+				oklch(from var(--target-clr, var(--col-damage-target-clr, white)) l c h / 0.12)
 			);
 		}
 

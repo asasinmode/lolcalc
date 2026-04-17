@@ -96,7 +96,7 @@ const runePathSecondary = computed(() => {
 const isFirstAndOnly = computed(() => props.index === 0 && !props.canMoveDown);
 
 function emitClear() {
-	emit('clear');
+	secondStepRemove();
 }
 
 function emitRemove() {
@@ -125,7 +125,12 @@ function undoRemove() {
 
 function removeAndFocusNext() {
 	const nextElement = el.value!.nextElementSibling;
-	emit('remove');
+	if (isFirstAndOnly.value) {
+		emit('clear');
+		undoRemoveButton.value!.style.display = 'none';
+	} else {
+		emit('remove');
+	}
 	nextTick(() => {
 		nextElement?.querySelector('button')?.focus();
 	});
@@ -155,9 +160,6 @@ function toggleExpanded() {
 }
 
 onMounted(() => {
-	if (props.index === 0) {
-		toggleExpanded();
-	}
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
 });
 
@@ -1429,8 +1431,8 @@ defineExpose({ el });
 		anchor-scope: all;
 		background-image: linear-gradient(
 			var(--bg-direction, 90deg),
-			oklch(from var(--damage-source-clr) l c h / 0.08),
-			oklch(from var(--damage-source-clr) l c h / 0.08)
+			oklch(from var(--damage-source-clr) l c h / 0.1),
+			oklch(from var(--damage-source-clr) l c h / 0.1)
 		);
 
 		&.highlighted {

@@ -300,16 +300,6 @@ onBeforeUnmount(() => {
 		--placeholder-champion-bg-clr: #020a13;
 	}
 
-	#results {
-		--at-apply: 'mx-auto text-center relative';
-
-		> p {
-			--at-apply: 'absolute z-10 top-16 py-2 start-1/2 -translate-x-1/2 text-center text-xl font-500';
-			-webkit-text-stroke: black 0.2em;
-			paint-order: stroke fill;
-		}
-	}
-
 	#__nuxt {
 		> header {
 			--at-apply: 'flex b-b b-neutral-500 grid grid-cols-subgrid py-2.5';
@@ -367,31 +357,34 @@ onBeforeUnmount(() => {
 				--at-apply: 'absolute';
 			}
 
-			> section > h2,
-			> h2 {
-				--at-apply: 'text-xl font-700';
+			> section > h2 {
+				--at-apply: 'text-xl font-700 mx-auto text-center';
+			}
+
+			#results {
+				--at-apply: 'mx-auto text-center relative';
+
+				> h2 {
+					--at-apply: 'mb-3 mt-5';
+				}
+
+				> p {
+					--at-apply: 'absolute z-10 top-16 py-2 start-1/2 -translate-x-1/2 text-center text-xl font-500';
+					-webkit-text-stroke: black 0.2em;
+					paint-order: stroke fill;
+				}
 			}
 		}
 
 		> footer {
 			--at-apply: 'pt-12 pb-3 text-neutral-400 mt-auto text-center';
 
-			> p {
-				> a {
-					--at-apply: 'hoverable:text-white';
-
-					> span {
-						--at-apply: 'underline';
-					}
-				}
-			}
-
 			> h2 {
-				--at-apply: 'text-lg uppercase font-700 text-neutral-300';
+				--at-apply: 'text-lg font-700 text-neutral-300 mb-0.5';
 			}
 
 			> ul {
-				--at-apply: 'flex flex-wrap justify-center gap-x-8 gap-y-2 mb-4';
+				--at-apply: 'flex flex-wrap justify-center gap-x-8 gap-y-2 mb-5';
 
 				> li {
 					> a {
@@ -404,6 +397,16 @@ onBeforeUnmount(() => {
 
 					&:is(:first-child, :last-child) > a > .icon {
 						--at-apply: 'invert';
+					}
+				}
+			}
+
+			> p {
+				> a {
+					--at-apply: 'hoverable:text-white';
+
+					> span {
+						--at-apply: 'underline';
 					}
 				}
 			}

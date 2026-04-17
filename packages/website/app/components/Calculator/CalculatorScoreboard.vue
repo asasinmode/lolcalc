@@ -473,7 +473,7 @@ function setLocalMirrorLayout() {
 		--at-apply: 'b-b b-neutral-500 mt-5 relative w-max mx-auto';
 
 		> h2 {
-			--at-apply: 'mx-auto text-center mb-3';
+			--at-apply: 'mb-3';
 		}
 
 		> label {
