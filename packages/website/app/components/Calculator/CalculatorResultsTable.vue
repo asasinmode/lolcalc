@@ -1030,6 +1030,9 @@ interface ICustomTotalSectionRow extends IDamageResultTableSectionRow {
 
 function onCustomTotalRowsChange() {
 	recomputeCustomTotalRow();
+	if (!expandedSections.value.includes(customTotalSection.id) && customTotalRows.value.length) {
+		expandedSections.value.push(customTotalSection.id);
+	}
 	emit('configurationChanged');
 }
 
