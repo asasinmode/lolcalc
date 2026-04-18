@@ -12,6 +12,22 @@
 		"2065ActiveMoveSpeed": {
 			"description": "This unit is moving faster.",
 			"dataKey": "Items/2065/Spells/2065ActiveMoveSpeed"
+		},
+		"3504Buff": {
+			"description": "This unit has increased Attack Speed and magic damage.",
+			"dataKey": "Items/3504/Spells/3504Buff"
+		},
+		"6616Buff": {
+			"description": "This unit has been granted increased Ability Power and Move Speed.",
+			"dataKey": "Items/6616/Spells/6616Buff"
+		},
+		"2524_SecondaryBuff": {
+			"description": "This unit is being granted <attackSpeed>Attack Speed</attackSpeed> by a nearby ally's song.",
+			"dataKey": "Items/2524/Spells/2524_SecondaryBuff"
+		},
+		"lolcalc3109Sacrifice": {
+			"dataKey": "lolcalc3109Sacrifice",
+			"description": "This unit takes reduced damage due to a nearby ally's sacrifice."
 		}
 	},
 	"stringtable": {}

@@ -203,6 +203,36 @@ export const ITEM_SPECIFICS = {
 			return self.internalItemData.value.carve;
 		},
 	},
+	[ITEM_NAME_TO_ID.celestialOpposition]: {
+		internalDataProperties: ['mBlessing'],
+		setupData(self) {
+			self.internalItemData.value.mBlessing = clamp(0, self.internalItemData.value.mBlessing ?? 0, 1);
+			return { mBlessing: 0 };
+		},
+		isItemImageActive(internalData: { mBlessing: number }) {
+			return internalData.mBlessing;
+		},
+	},
+	[ITEM_NAME_TO_ID.phage]: {
+		internalDataProperties: ['rage'],
+		setupData(self) {
+			self.internalItemData.value.rage = clamp(0, self.internalItemData.value.rage ?? 0, 1);
+			return { rage: 0 };
+		},
+		isItemImageActive(internalData: { rage: number }) {
+			return internalData.rage;
+		},
+	},
+	[ITEM_NAME_TO_ID.bandlepipes]: {
+		internalDataProperties: ['fanfare'],
+		setupData(self) {
+			self.internalItemData.value.fanfare = clamp(0, self.internalItemData.value.fanfare ?? 0, 1);
+			return { fanfare: 0 };
+		},
+		isItemImageActive(internalData: { fanfare: number }) {
+			return internalData.fanfare;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

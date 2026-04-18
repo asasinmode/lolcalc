@@ -70,6 +70,12 @@ export const ITEM_NAME_TO_ID = {
 	shurelya: '2065',
 	runaan: '3085',
 	trinity: '3078',
+	celestialOpposition: '3869',
+	phage: '3044',
+	ardentCensor: '3504',
+	staffOfFlowingWater: '6616',
+	bandlepipes: '2524',
+	knightsVow: '3109',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -324,6 +330,10 @@ export const EFFECT_OBJECT_NAME = {
 	amumuPCursedTouch: 'AmumuPDebuff',
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
+	ardentSanctify: '3504Buff',
+	flowingWaterRapids: '6616Buff',
+	bandlepipesFanfare: '2524_SecondaryBuff',
+	knightsVowSacrifice: 'lolcalc3109Sacrifice',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

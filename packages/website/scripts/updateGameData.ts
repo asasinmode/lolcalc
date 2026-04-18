@@ -17,7 +17,7 @@ import { CHAMPION_SPECIFICS } from '../app/utils/champion.ts';
 import { EFFECT_SPECIFICS_OBJECT_ENTRIES } from '../app/utils/effect.ts';
 import { replaceGameDescriptionStringtableVariables } from '../app/utils/gameStringtable.ts';
 import { replaceGameDescriptionVariables } from '../app/utils/gameVariable.ts';
-import { ABILITY_TYPE, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '../app/utils/meta.ts';
+import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_STAT_META, KEPT_UNPURCHASABLE_ITEMS, KNOWN_GAME_DESCRIPTION_TAGS } from '../app/utils/meta.ts';
 import { RUNE_SPECIFICS } from '../app/utils/rune.ts';
 
 let latestVersion = process.argv[2];
@@ -928,6 +928,13 @@ try {
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch {}
 
+const CUSTOM_EFFECTS: IEffectData['data'] = {
+	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
+		dataKey: EFFECT_OBJECT_NAME.knightsVowSacrifice,
+		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
+	},
+};
+
 if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {
 	console.log('effect data not present or outdated, fetching...');
 
@@ -941,6 +948,10 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 	effectData = {
 		version: latestVersion,
 		data: Object.fromEntries(await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES.map(async ([effectObjectName, effectSpecific]) => {
+			if (CUSTOM_EFFECTS[effectObjectName]) {
+				return [effectObjectName, CUSTOM_EFFECTS[effectObjectName]];
+			}
+
 			const { id, type } = effectSpecific.sourceAbility;
 			const dataSource = type === ABILITY_TYPE.champion
 				? await fetchCached(`https://raw.communitydragon.org/${minorVersion}/game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`, `game/data/characters/${id.toLowerCase()}/${id.toLowerCase()}.bin.json`)

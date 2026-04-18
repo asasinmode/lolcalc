@@ -39,6 +39,46 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	},
+	[EFFECT_OBJECT_NAME.ardentSanctify]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCensor),
+		label: 'Sanctify',
+		setupData(data): [sanctify: number] {
+			return [clamp(0, data?.[0], 1)];
+		},
+		isActive(data: [sanctify: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.flowingWaterRapids]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.staffOfFlowingWater),
+		label: 'Rapids',
+		setupData(data): [rapids: number] {
+			return [clamp(0, data?.[0], 1)];
+		},
+		isActive(data: [rapids: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.bandlepipesFanfare]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bandlepipes),
+		label: 'Fanfare',
+		setupData(data): [fanfare: number] {
+			return [clamp(0, data?.[0], 1)];
+		},
+		isActive(data: [fanfare: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.knightsVow),
+		label: 'Sacrifice',
+		setupData(data): [sacrifice: number] {
+			return [clamp(0, data?.[0], 1)];
+		},
+		isActive(data: [sacrifice: number]) {
+			return data[0];
+		},
+	},
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;

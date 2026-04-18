@@ -270,9 +270,7 @@ defineExpose({
 			--ability-size: calc(14 * var(--spacing));
 
 			> li {
-				> article {
-					--at-apply: '';
-				}
+				--at-apply: 'w-full';
 			}
 		}
 
