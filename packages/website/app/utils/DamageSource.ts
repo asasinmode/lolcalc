@@ -1087,6 +1087,7 @@ export interface IComputedAbilityDescription {
 	anyUnknownVariables: number;
 	cooldown?: number;
 	cost?: number;
+	partype?: string;
 	extendedVariables?: {
 		name: string;
 		values?: (string | number)[];
@@ -1223,6 +1224,7 @@ export function computeAbilityDescription(
 		anyUnknownVariables,
 		cooldown,
 		cost,
+		partype: champion.partype,
 		extendedVariables,
 		variables,
 		unknownVariables,

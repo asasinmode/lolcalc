@@ -78,7 +78,7 @@ defineExpose({ el });
 			</template>
 		</span>
 		<span v-show="!isLoading">
-			{{ abilityKey === 'passive' ? '' : computedDescription?.cost ? `${computedDescription.cost} ${champion?.partype}` : 'No Cost' }}
+			{{ abilityKey === 'passive' ? '' : computedDescription?.cost ? `${computedDescription.cost} ${computedDescription.partype}` : 'No Cost' }}
 		</span>
 		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && computedDescription?.tooltipExtended || computedDescription?.tooltip" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
