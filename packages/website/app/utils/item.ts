@@ -244,6 +244,36 @@ export const ITEM_SPECIFICS = {
 			return (self.internalItemData.value as { leadWay: number }).leadWay;
 		},
 	},
+	[ITEM_NAME_TO_ID.protoplasmHarness]: {
+		internalDataProperties: ['pHLifeline'],
+		setupData(self) {
+			self.internalItemData.value.pHLifeline = clamp(0, self.internalItemData.value.pHLifeline ?? 0, 1);
+			return { pHLifeline: 0 };
+		},
+		imgActive(internalData: { pHLifeline: number }) {
+			return internalData.pHLifeline;
+		},
+	},
+	[ITEM_NAME_TO_ID.frozenHeart]: {
+		internalDataProperties: ['wCaress'],
+		setupData(self) {
+			self.internalItemData.value.wCaress = clamp(0, self.internalItemData.value.wCaress ?? 0, 1);
+			return { wCaress: 0 };
+		},
+		imgActive(internalData: { wCaress: number }) {
+			return internalData.wCaress;
+		},
+	},
+	[ITEM_NAME_TO_ID.serpentsFang]: {
+		internalDataProperties: ['sVenom'],
+		setupData(self) {
+			self.internalItemData.value.sVenom = clamp(0, self.internalItemData.value.sVenom ?? 0, 1);
+			return { sVenom: 0 };
+		},
+		imgActive(internalData: { sVenom: number }) {
+			return internalData.sVenom;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

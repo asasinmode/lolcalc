@@ -33,7 +33,7 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya),
 		label: 'Inspiring speech',
 		setupData(data): [inspiringSpeech: number] {
-			return [clamp(0, data?.[0], 1)];
+			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [inspiringSpeech: number]) {
 			return data[0];
@@ -43,7 +43,7 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCensor),
 		label: 'Sanctify',
 		setupData(data): [sanctify: number] {
-			return [clamp(0, data?.[0], 1)];
+			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [sanctify: number]) {
 			return data[0];
@@ -53,7 +53,7 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.staffOfFlowingWater),
 		label: 'Rapids',
 		setupData(data): [rapids: number] {
-			return [clamp(0, data?.[0], 1)];
+			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [rapids: number]) {
 			return data[0];
@@ -63,7 +63,7 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bandlepipes),
 		label: 'Fanfare',
 		setupData(data): [fanfare: number] {
-			return [clamp(0, data?.[0], 1)];
+			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [fanfare: number]) {
 			return data[0];
@@ -73,9 +73,29 @@ export const EFFECT_SPECIFICS = {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.knightsVow),
 		label: 'Sacrifice',
 		setupData(data): [sacrifice: number] {
-			return [clamp(0, data?.[0], 1)];
+			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [sacrifice: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.frozenHeartWintersCaress]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.frozenHeart),
+		label: 'Winter\'s Caress',
+		setupData(data): [wCaress: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [wCaress: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.serpentsFangVenom]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.serpentsFang),
+		label: 'Serpent\'s Venom',
+		setupData(data): [sVenom: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [sVenom: number]) {
 			return data[0];
 		},
 	},

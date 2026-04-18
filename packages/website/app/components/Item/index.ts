@@ -97,6 +97,15 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.trailblazer), 'leadWay', 'Built up movement speed', 0, items[ITEM_NAME_TO_ID.trailblazer].dataValues.MaxMovementSpeed),
 		],
 	},
+	[ITEM_NAME_TO_ID.protoplasmHarness]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.protoplasmHarness), 'pHLifeline', 'Lifeline'),
+	},
+	[ITEM_NAME_TO_ID.frozenHeart]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.frozenHeart), 'wCaress', 'Winter\'s Caress', true),
+	},
+	[ITEM_NAME_TO_ID.serpentsFang]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.serpentsFang), 'sVenom', 'Shield Reave', true),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {

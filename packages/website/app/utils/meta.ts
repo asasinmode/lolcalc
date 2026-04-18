@@ -77,6 +77,9 @@ export const ITEM_NAME_TO_ID = {
 	bandlepipes: '2524',
 	knightsVow: '3109',
 	trailblazer: '3002',
+	protoplasmHarness: '2525',
+	frozenHeart: '3110',
+	serpentsFang: '6695',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -335,6 +338,8 @@ export const EFFECT_OBJECT_NAME = {
 	flowingWaterRapids: '6616Buff',
 	bandlepipesFanfare: '2524_SecondaryBuff',
 	knightsVowSacrifice: 'lolcalc3109Sacrifice',
+	frozenHeartWintersCaress: 'Item3110Aura',
+	serpentsFangVenom: 'SerpentVenom',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

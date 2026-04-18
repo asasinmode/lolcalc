@@ -27,7 +27,15 @@
 		},
 		"lolcalc3109Sacrifice": {
 			"dataKey": "lolcalc3109Sacrifice",
-			"description": "This unit takes reduced damage due to a nearby ally's sacrifice."
+			"description": "This unit takes reduced damage thanks to a nearby ally's sacrifice."
+		},
+		"Item3110Aura": {
+			"description": "This unit's Attack Speed is reduced.",
+			"dataKey": "{5d05c583}"
+		},
+		"SerpentVenom": {
+			"description": "This unit has reduced shielding.",
+			"dataKey": "{67c6adc5}"
 		}
 	},
 	"stringtable": {}
