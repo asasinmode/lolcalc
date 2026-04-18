@@ -181,7 +181,7 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.quicken = clamp(0, self.internalItemData.value.quicken ?? 0, 1);
 			return { quicken: 0 };
 		},
-		isItemImageActive(internalData: { quicken: number }) {
+		imgActive(internalData: { quicken: number }) {
 			return internalData.quicken;
 		},
 	},
@@ -195,7 +195,7 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.fervor = clamp(0, self.internalItemData.value.carve ?? 0, 1);
 			return { carve: 0, fervor: 0 };
 		},
-		isItemImageActive(internalData: { fervor: number }) {
+		imgActive(internalData: { fervor: number }) {
 			return internalData.fervor;
 		},
 		imgTextLabel: 'Carve stacks',
@@ -209,7 +209,7 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.mBlessing = clamp(0, self.internalItemData.value.mBlessing ?? 0, 1);
 			return { mBlessing: 0 };
 		},
-		isItemImageActive(internalData: { mBlessing: number }) {
+		imgActive(internalData: { mBlessing: number }) {
 			return internalData.mBlessing;
 		},
 	},
@@ -219,7 +219,7 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.rage = clamp(0, self.internalItemData.value.rage ?? 0, 1);
 			return { rage: 0 };
 		},
-		isItemImageActive(internalData: { rage: number }) {
+		imgActive(internalData: { rage: number }) {
 			return internalData.rage;
 		},
 	},
@@ -229,7 +229,7 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.fanfare = clamp(0, self.internalItemData.value.fanfare ?? 0, 1);
 			return { fanfare: 0 };
 		},
-		isItemImageActive(internalData: { fanfare: number }) {
+		imgActive(internalData: { fanfare: number }) {
 			return internalData.fanfare;
 		},
 	},
@@ -239,8 +239,9 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.leadWay = clamp(0, self.internalItemData.value.leadWay ?? 0, items[ITEM_NAME_TO_ID.trailblazer].dataValues.MaxMovementSpeed);
 			return { leadWay: 0 };
 		},
-		isItemImageActive(internalData: { leadWay: number }) {
-			return internalData.leadWay;
+		imgTextLabel: 'Lead the Way built up movement speed',
+		imgText(self) {
+			return (self.internalItemData.value as { leadWay: number }).leadWay;
 		},
 	},
 } satisfies IHypotheticalItemSpecifics;
@@ -250,7 +251,7 @@ export type IHypotheticalItemSpecifics = Record<string, IItemSpecific>;
 
 export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItemData & {
 	/** whether to show the green dot that the item is active in the top right corner of the image */
-	isItemImageActive?: (internalData: any) => number | boolean;
+	imgActive?: (internalData: any) => number | boolean;
 };
 
 export function calculateItemDiscount(

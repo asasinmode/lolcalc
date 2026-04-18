@@ -188,14 +188,14 @@ defineExpose({ header });
 	.item-description {
 		> ul {
 			> li {
-				--at-apply: 'flex items-center gap-[0.5ch]';
+				--at-apply: 'flex items-center gap-[0.5ch] text-neutral-200';
 
 				> img {
 					--at-apply: 'size-4.5';
 				}
 
 				> span:last-child {
-					--at-apply: 'capitalize text-neutral-300';
+					--at-apply: 'capitalize';
 				}
 			}
 		}

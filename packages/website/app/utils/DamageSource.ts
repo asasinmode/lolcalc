@@ -921,7 +921,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	coComputed = {
 		itemImage: computed<({ text?: string | number; isActive?: boolean | number } | undefined)[]>(() => this.computed.itemSpecifics.value.map(computedSpecific => computedSpecific && ({
 			text: computedSpecific.specific?.imgText?.(this, computedSpecific.abilityId),
-			isActive: computedSpecific.specific?.isItemImageActive?.(this.internalItemData.value),
+			isActive: computedSpecific.specific?.imgActive?.(this.internalItemData.value),
 		}))),
 	};
 }
