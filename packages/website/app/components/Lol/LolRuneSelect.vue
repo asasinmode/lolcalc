@@ -855,7 +855,6 @@ defineExpose({
 
 	#rune-select-dialog-hover-tooltip {
 		--at-apply: 'b-2 w-(--width) fixed -translate-x-1/2 -translate-y-[calc(var(--height)_+_1rem)] p-7 leading-5.5';
-
 		--width: 21.5rem;
 		inset-inline-start: clamp(calc(var(--width) / 2), var(--left), calc(100vw - min(100vw, var(--width) / 2)));
 		top: clamp(var(--height), var(--top), 100vh);
@@ -884,6 +883,10 @@ defineExpose({
 					--at-apply: '-ms-5 block';
 				}
 			}
+		}
+
+		> p.alert {
+			--at-apply: 'mt-[--unknown-alert-mt]';
 		}
 	}
 }

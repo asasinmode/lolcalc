@@ -247,7 +247,7 @@ defineExpose({ header });
 		}
 
 		> p.alert {
-			--at-apply: 'mt-2';
+			--at-apply: 'mt-[--unknown-alert-mt]';
 		}
 
 		> p:not(.alert):not(:first-child) {

@@ -160,6 +160,9 @@ function toggleExpanded() {
 }
 
 onMounted(() => {
+	if (import.meta.dev) {
+		toggleExpanded();
+	}
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
 });
 
@@ -1870,6 +1873,14 @@ defineExpose({ el });
 					.game-description {
 						rules {
 							--at-apply: 'italic';
+						}
+
+						> hr {
+							--at-apply: 'b-[--ui-btn-border-clr] my-[--description-mt]';
+						}
+
+						> hr + br {
+							--at-apply: 'hidden';
 						}
 					}
 				}

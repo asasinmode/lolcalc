@@ -144,6 +144,10 @@ defineExpose({ el });
 			--at-apply: 'mt-0.5 b-t b-[--ui-btn-border-clr] pt-[--description-pt] leading-4.5';
 		}
 
+		> p.alert {
+			--at-apply: 'mt-[--unknown-alert-mt]';
+		}
+
 		> footer {
 			--at-apply: 'b-t b-[--ui-btn-border-clr] mt-[--footer-mt] pt-[--footer-pt]';
 		}
@@ -201,7 +205,7 @@ defineExpose({ el });
 		}
 
 		> p.alert {
-			--at-apply: 'col-span-full mt-3';
+			--at-apply: 'col-span-full';
 		}
 
 		> span.unknown,
