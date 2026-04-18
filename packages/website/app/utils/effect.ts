@@ -99,6 +99,36 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	},
+	[EFFECT_OBJECT_NAME.rylaisRimefrost]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.rylaisScepter),
+		label: 'Rimefrost',
+		setupData(data): [rimefrost: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [rimefrost: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.abyssalMaskUnmake]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.abyssalMask),
+		label: 'Cursed',
+		setupData(data): [cursed: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [cursed: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.horizonFocusHypershot]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.horizonFocus),
+		label: 'Hypershot',
+		setupData(data): [hypershot: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [hypershot: number]) {
+			return data[0];
+		},
+	},
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;

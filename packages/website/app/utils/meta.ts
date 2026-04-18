@@ -80,6 +80,11 @@ export const ITEM_NAME_TO_ID = {
 	protoplasmHarness: '2525',
 	frozenHeart: '3110',
 	serpentsFang: '6695',
+	rylaisScepter: '3116',
+	fiendhunterBolts: '2512',
+	abyssalMask: '8020',
+	horizonFocus: '4628',
+	opportunity: '6701',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -340,6 +345,9 @@ export const EFFECT_OBJECT_NAME = {
 	knightsVowSacrifice: 'lolcalc3109Sacrifice',
 	frozenHeartWintersCaress: 'Item3110Aura',
 	serpentsFangVenom: 'SerpentVenom',
+	rylaisRimefrost: '3116Slow',
+	abyssalMaskUnmake: '8020VisualDebuff',
+	horizonFocusHypershot: '4628Marker',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

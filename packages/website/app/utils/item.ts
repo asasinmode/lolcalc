@@ -274,6 +274,56 @@ export const ITEM_SPECIFICS = {
 			return internalData.sVenom;
 		},
 	},
+	[ITEM_NAME_TO_ID.rylaisScepter]: {
+		internalDataProperties: ['rimefrost'],
+		setupData(self) {
+			self.internalItemData.value.rimefrost = clamp(0, self.internalItemData.value.rimefrost ?? 0, 1);
+			return { rimefrost: 0 };
+		},
+		imgActive(internalData: { rimefrost: number }) {
+			return internalData.rimefrost;
+		},
+	},
+	[ITEM_NAME_TO_ID.fiendhunterBolts]: {
+		internalDataProperties: ['oBarrage'],
+		setupData(self) {
+			self.internalItemData.value.oBarrage = clamp(0, self.internalItemData.value.oBarrage ?? 0, 1);
+			return { oBarrage: 0 };
+		},
+		imgActive(internalData: { oBarrage: number }) {
+			return internalData.oBarrage;
+		},
+	},
+	[ITEM_NAME_TO_ID.abyssalMask]: {
+		internalDataProperties: ['unmake'],
+		setupData(self) {
+			self.internalItemData.value.unmake = clamp(0, self.internalItemData.value.unmake ?? 0, 1);
+			return { unmake: 0 };
+		},
+		imgActive(internalData: { unmake: number }) {
+			return internalData.unmake;
+		},
+	},
+	[ITEM_NAME_TO_ID.horizonFocus]: {
+		internalDataProperties: ['hypershot'],
+		setupData(self) {
+			self.internalItemData.value.hypershot = clamp(0, self.internalItemData.value.hypershot ?? 0, 1);
+			return { hypershot: 0 };
+		},
+		imgActive(internalData: { hypershot: number }) {
+			return internalData.hypershot;
+		},
+	},
+	[ITEM_NAME_TO_ID.opportunity]: {
+		internalDataProperties: ['preparation'],
+		setupData(self) {
+			self.internalItemData.value.preparation = clamp(0, self.internalItemData.value.preparation ?? 0, 1);
+			return { preparation: 0 };
+		},
+		imgActive(internalData: { preparation: number }) {
+			return internalData.preparation;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

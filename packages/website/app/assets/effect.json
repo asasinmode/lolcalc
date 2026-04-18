@@ -36,6 +36,18 @@
 		"SerpentVenom": {
 			"description": "This unit has reduced shielding.",
 			"dataKey": "{67c6adc5}"
+		},
+		"3116Slow": {
+			"description": "This unit is slowed.",
+			"dataKey": "Items/3116/Spells/3116Slow"
+		},
+		"8020VisualDebuff": {
+			"description": "This unit takes increased magic damage.",
+			"dataKey": "Items/8020/Spells/8020VisualDebuff"
+		},
+		"4628Marker": {
+			"description": "This unit is revealed.",
+			"dataKey": "Items/4628/Spells/4628Marker"
 		}
 	},
 	"stringtable": {}
