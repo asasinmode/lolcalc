@@ -233,6 +233,16 @@ export const ITEM_SPECIFICS = {
 			return internalData.fanfare;
 		},
 	},
+	[ITEM_NAME_TO_ID.trailblazer]: {
+		internalDataProperties: ['leadWay'],
+		setupData(self) {
+			self.internalItemData.value.leadWay = clamp(0, self.internalItemData.value.leadWay ?? 0, items[ITEM_NAME_TO_ID.trailblazer].dataValues.MaxMovementSpeed);
+			return { leadWay: 0 };
+		},
+		isItemImageActive(internalData: { leadWay: number }) {
+			return internalData.leadWay;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

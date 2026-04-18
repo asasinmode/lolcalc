@@ -76,6 +76,7 @@ export const ITEM_NAME_TO_ID = {
 	staffOfFlowingWater: '6616',
 	bandlepipes: '2524',
 	knightsVow: '3109',
+	trailblazer: '3002',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

@@ -1,5 +1,8 @@
 import type { ISpecificComponents } from '~/utils/types';
 import { ItemExtraTearItem } from '#components';
+import itemsData from '~/assets/item.json';
+
+const { data: items } = itemsData;
 
 export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.hubris]: {
@@ -88,6 +91,11 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	},
 	[ITEM_NAME_TO_ID.bandlepipes]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bandlepipes), 'fanfare', 'Fanfare'),
+	},
+	[ITEM_NAME_TO_ID.trailblazer]: {
+		extras: [
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.trailblazer), 'leadWay', 'Built up movement speed', 0, items[ITEM_NAME_TO_ID.trailblazer].dataValues.MaxMovementSpeed),
+		],
 	},
 };
 

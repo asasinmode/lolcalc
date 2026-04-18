@@ -363,7 +363,7 @@ function updateTooltipPosition(event: MouseEvent) {
 const buildsIntoMoreList = useTemplateRef('buildsIntoMoreList');
 
 const buildsIntoItems = computed(() => selectedItem.value?.item.into
-	?.filter(id => (items[id]!.mapMask & mapMask.value) !== 0)
+	?.filter(id => (items[id]!.mapMask & mapMask.value) !== 0 && !TRANSFORMED_TEAR_ITEM_IDS.includes(id))
 	.map(id => shopItemsMap.value.get(id)!)
 	.sort((a, b) => a.item.gold.total - b.item.gold.total) || []);
 
