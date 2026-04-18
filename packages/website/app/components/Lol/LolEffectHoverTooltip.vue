@@ -121,7 +121,7 @@ defineExpose({ el });
 		}
 
 		> footer {
-			--at-apply: 'col-span-full text-end leading-5 b-t b-[--ui-btn-border-clr] pt-[--description-mb] mt-[--description-pb]';
+			--at-apply: 'col-span-full text-end leading-5';
 
 			> kbd {
 				--at-apply: 'font-inherit';

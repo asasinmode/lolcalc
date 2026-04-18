@@ -131,17 +131,21 @@ defineExpose({ el });
 	.hover-tooltip.role-quest,
 	.hover-tooltip.effect {
 		--at-apply: 'p-2';
-		--description-pt: calc(1.5 * var(--spacing));
+		--description-pt: calc(2 * var(--spacing));
 		--description-mt: calc(2 * var(--spacing));
-		--description-pb: calc(2 * var(--spacing));
-		--description-mb: calc(1.25 * var(--spacing));
+		--footer-mt: calc(2 * var(--spacing));
+		--footer-pt: calc(1.25 * var(--spacing));
 
 		> h5 {
 			--at-apply: 'text-lg/6 font-500 text-white';
 		}
 
 		> :where(:is(div, p).game-description) {
-			--at-apply: 'mt-0.5 b-b b-t b-[--ui-btn-border-clr] pt-[--description-pt] pb-[--description-pb] mb-[--description-mb] leading-4.5';
+			--at-apply: 'mt-0.5 b-t b-[--ui-btn-border-clr] pt-[--description-pt] leading-4.5';
+		}
+
+		> footer {
+			--at-apply: 'b-t b-[--ui-btn-border-clr] mt-[--footer-mt] pt-[--footer-pt]';
 		}
 	}
 
@@ -197,7 +201,7 @@ defineExpose({ el });
 		}
 
 		> p.alert {
-			--at-apply: 'col-span-full';
+			--at-apply: 'col-span-full mt-3';
 		}
 
 		> span.unknown,
