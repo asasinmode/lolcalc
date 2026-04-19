@@ -18,7 +18,7 @@ export function useCalculatorState(
 			saveStateDebounceTimeout = undefined;
 		}
 		const data = calculatorStateString();
-		sessionStorage.setItem(STATE_SESSION_STORAGE_KEY, data[0]);
+		window?.sessionStorage.setItem(STATE_SESSION_STORAGE_KEY, data[0]);
 		window?.history.replaceState(null, '', `${location.pathname}${data[1] ? `?${data[1]}` : ''}`);
 		isStateTooLargeForQuery.value = data[1].length !== data[0].length;
 	}
@@ -171,7 +171,7 @@ export function useCalculatorState(
 			return;
 		}
 
-		const stateString: string | undefined = sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || window?.location.search;
+		const stateString: string | undefined = window?.sessionStorage.getItem(STATE_SESSION_STORAGE_KEY) || window?.location.search;
 		const params = new URLSearchParams(stateString);
 
 		const version = params.get('v');
