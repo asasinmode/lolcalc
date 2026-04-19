@@ -17,7 +17,8 @@ export function replaceGameDescriptionStringtableVariables(
 		const subVariableStartIndex = variableName.indexOf('@');
 		if (~subVariableStartIndex) {
 			const subVariablePrefix = variableName.slice(0, subVariableStartIndex);
-			const subVariableName = variableName.slice(subVariableStartIndex + 1, -1);
+			let subVariableName = variableName.slice(subVariableStartIndex + 1);
+			subVariableName = subVariableName.slice(0, subVariableName.indexOf('@'));
 
 			const subVariableValue = subVariableName in dynamicValues ? dynamicValues[subVariableName] : Object.entries(dynamicValues).find(([key]) => key.toLowerCase() === subVariableName)?.[1];
 

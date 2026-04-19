@@ -1091,7 +1091,7 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 		}
 	}
 
-	return extra?.length ? extra : undefined;
+	return extra;
 }
 
 /**
@@ -1143,7 +1143,7 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 			variableSourceKeys: [],
 			variableType: 'item',
 			/* `ChampRange` is originally an object in `itemCalculations` with `mDefaultGameCalculation` and `mConditionalGameCalculation` that point to 2 other item calculations that both seem to resolve to either `1` or `2` hence the below */
-			variableValueParameters: [{ ...item, dynamicValues: { lolcalcChampRange: [1, 2] } } as IItem],
+			variableValueParameters: [{ ...item, dynamicValues: { lolcalcChampRange: [1, 2], ChampRange: [1, 2] } } as IItem],
 		},
 	} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
