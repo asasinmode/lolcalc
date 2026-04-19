@@ -919,7 +919,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	/** like computed but can depend on the computed */
 	coComputed = {
-		itemImage: computed<({ text?: string | number; isActive?: boolean | number } | undefined)[]>(() => this.computed.itemSpecifics.value.map(computedSpecific => computedSpecific && ({
+		itemImage: computed<({ text?: string | number; isActive?: ReturnType<NonNullable<IItemSpecific['imgActive']>> } | undefined)[]>(() => this.computed.itemSpecifics.value.map(computedSpecific => computedSpecific && ({
 			text: computedSpecific.specific?.imgText?.(this, computedSpecific.abilityId),
 			isActive: computedSpecific.specific?.imgActive?.(this.internalItemData.value),
 		}))),

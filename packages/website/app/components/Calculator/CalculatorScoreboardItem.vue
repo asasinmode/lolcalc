@@ -995,6 +995,10 @@ defineExpose({ el });
 					:is="value.items.value[i - 1] ? 'button' : 'div'"
 					:draggable="value.items.value[i - 1] ? 'true' : undefined"
 					:class="{ active: value.coComputed.itemImage.value[i - 1]?.isActive }"
+					v-bind="typeof value.coComputed.itemImage.value[i - 1]?.isActive === 'object' ? {
+						'data-active-0': (value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 'true' : '',
+						'data-active-1': (value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 'true' : '',
+					} : undefined"
 					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
 					@click.right="removeItem($event, i - 1)"
 					@dragstart="startItemDrag($event, i - 1)"
@@ -1611,11 +1615,46 @@ defineExpose({ el });
 					--at-apply: 'bg-black size-[--item-size] inline-block cursor-default relative';
 
 					&:before {
-						--at-apply: 'size-1.5 rounded-1/2 bg-green-400 outline outline-black z-1 absolute top-0.5 end-0.5 pointer-events-none';
+						--at-apply: 'size-1.5 rounded-1/2 outline outline-black z-1 absolute top-0.5 end-0.5 pointer-events-none';
+						background:
+							linear-gradient(var(--left, transparent) 0 0) left / 50% 100% no-repeat,
+							linear-gradient(var(--right, transparent) 0 0) right / 50% 100% no-repeat;
 					}
 
 					&.active::before {
 						content: '';
+					}
+
+					&:not([data-active-0], [data-active-1]) {
+						--left: theme('colors.green.400');
+						--right: var(--left);
+					}
+
+					&[data-active-0],
+					&[data-active-1] {
+						--left: theme('colors.black');
+						--right: theme('colors.black');
+
+						/* unset it like that because `.active` is always applied for array `isActive`, so actually show with css below on `data-active-0/1='true'` */
+						&::before {
+							content: initial;
+						}
+					}
+
+					&[data-active-0='true'] {
+						--left: theme('colors.green.400');
+
+						&::before {
+							content: '';
+						}
+					}
+
+					&[data-active-1='true'] {
+						--right: theme('colors.green.400');
+
+						&::before {
+							content: '';
+						}
 					}
 
 					> span:first-child {

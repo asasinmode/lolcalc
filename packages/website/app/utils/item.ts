@@ -384,7 +384,6 @@ export const ITEM_SPECIFICS = {
 			self.internalItemData.value.wStep = clamp(0, self.internalItemData.value.wStep ?? 0, 1);
 			return { haunt: 0, wStep: 0 };
 		},
-		imgTextLabel: 'Magnification % damage increase',
 		imgActive(internalData: { haunt: number; wStep: number }) {
 			return [internalData.haunt, internalData.wStep];
 		},
@@ -395,8 +394,11 @@ export type TItemSpecifics = typeof ITEM_SPECIFICS;
 export type IHypotheticalItemSpecifics = Record<string, IItemSpecific>;
 
 export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItemData & {
-	/** whether to show the green dot that the item is active in the top right corner of the image */
-	imgActive?: (internalData: any) => (number | boolean)[] | number | boolean;
+	/**
+	 * whether to show the green dot that the item is active in the top right corner of the image
+	 * when array, the indicator dot will be split in half and colored based on the array 1/2 being trueish, useful for youmuu
+	 */
+	imgActive?: (internalData: any) => [(number | boolean), (number | boolean)] | number | boolean;
 };
 
 export function calculateItemDiscount(
