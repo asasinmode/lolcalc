@@ -9,20 +9,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 25
+          cache: "pnpm"
+          cache-dependency-path: packages/website/package-lock.json
       - uses: pnpm/action-setup@v6
         with:
-          cache: true
-          package_json_file: ./packages/website/package.json
-          cache_dependency_path: ./packages/website/pnpm-lock.yaml
+          package_json_file: packages/website/package.json
+          cache_dependency_path: packages/website/pnpm-lock.yaml
       - run: find . -name "pnpm-lock.yaml" -print
       - run: pnpm i --frozen-lockfile
-        working-directory: ./packages/website
+        working-directory: packages/website
       - run: NUXT_APP_BASE_URL=/lolcalc/ pnpx nuxt build --preset github_pages
-        working-directory: ./packages/website
+        working-directory: packages/website
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./packages/website/.output/public
+          path: packages/website/.output/public
   deploy:
     needs: build
     permissions:
