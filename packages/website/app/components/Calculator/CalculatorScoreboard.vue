@@ -373,13 +373,20 @@ function setLocalMirrorLayout() {
 					@item-list-drop="dropItem($event, value)"
 				/>
 				<li>
-					<button
-						class="pretend-ui-btn"
-						:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
-						@click="add(damageSources)"
-					>
-						add damage source
-					</button>
+					<ClientOnly>
+						<button
+							class="pretend-ui-btn"
+							:disabled="damageSources.length === 1 && !damageSources[0]?.anythingFilled.value"
+							@click="add(damageSources)"
+						>
+							add damage source
+						</button>
+						<template #fallback>
+							<button class="pretend-ui-btn">
+								add damage source
+							</button>
+						</template>
+					</ClientOnly>
 				</li>
 			</ul>
 			<h3>
@@ -410,13 +417,20 @@ function setLocalMirrorLayout() {
 					@item-list-drop="dropItem($event, value)"
 				/>
 				<li>
-					<button
-						class="pretend-ui-btn"
-						:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
-						@click="add(damageTargets)"
-					>
-						add damage target
-					</button>
+					<ClientOnly>
+						<button
+							class="pretend-ui-btn"
+							:disabled="damageTargets.length === 1 && !damageTargets[0]?.anythingFilled.value"
+							@click="add(damageTargets)"
+						>
+							add damage target
+						</button>
+						<template #fallback>
+							<button class="pretend-ui-btn">
+								add damage target
+							</button>
+						</template>
+					</ClientOnly>
 				</li>
 			</ul>
 			<div ref="draggingPopover" data-drag-preview="" popover="hint" inert>
