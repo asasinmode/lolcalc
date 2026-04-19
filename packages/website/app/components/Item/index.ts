@@ -17,6 +17,15 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.hauntingGuise]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.hauntingGuise), 'madness', 'Madness stacks', 0, 3),
 	},
+	[ITEM_NAME_TO_ID.shurelya]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya), 'iSpeech', 'Inspiring Speech'),
+	},
+	[ITEM_NAME_TO_ID.ardentCensor]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.ardentCensor), 'sanctify', 'Sanctify'),
+	},
+	[ITEM_NAME_TO_ID.staffOfFlowingWater]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.staffOfFlowingWater), 'rapids', 'Rapids'),
+	},
 	[ITEM_NAME_TO_ID.roa]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.roa), 'eternity', 'Eternity stacks', 0, 10),
 	},
@@ -77,12 +86,6 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.trinity]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.trinity), 'quicken', 'Quicken'),
 	},
-	[ITEM_NAME_TO_ID.blackCleaver]: {
-		extras: [
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue),
-			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'fervor', 'Fervor'),
-		],
-	},
 	[ITEM_NAME_TO_ID.celestialOpposition]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.celestialOpposition), 'mBlessing', 'Blessing of the Mountain'),
 	},
@@ -116,13 +119,19 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.abyssalMask), 'unmake', 'Unmake', true),
 	},
 	[ITEM_NAME_TO_ID.horizonFocus]: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.horizonFocus), 'hypershot', 'Hypershot'),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.horizonFocus), 'hypershot', 'Hypershot', true),
 	},
 	[ITEM_NAME_TO_ID.opportunity]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.opportunity), 'preparation', 'Preparation'),
 	},
 	[ITEM_NAME_TO_ID.actualizer]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.actualizer), 'empowered', 'Mana Made Real'),
+	},
+	[ITEM_NAME_TO_ID.blackCleaver]: {
+		extras: [
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue),
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'fervor', 'Fervor'),
+		],
 	},
 };
 

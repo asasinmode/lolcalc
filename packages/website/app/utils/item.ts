@@ -223,6 +223,36 @@ export const ITEM_SPECIFICS = {
 			return internalData.rage;
 		},
 	},
+	[ITEM_NAME_TO_ID.shurelya]: {
+		internalDataProperties: ['iSpeech'],
+		setupData(self) {
+			self.internalItemData.value.iSpeech = clamp(0, self.internalItemData.value.iSpeech ?? 0, 1);
+			return { iSpeech: 0 };
+		},
+		imgActive(internalData: { iSpeech: number }) {
+			return internalData.iSpeech;
+		},
+	},
+	[ITEM_NAME_TO_ID.ardentCensor]: {
+		internalDataProperties: ['sanctify'],
+		setupData(self) {
+			self.internalItemData.value.sanctify = clamp(0, self.internalItemData.value.sanctify ?? 0, 1);
+			return { sanctify: 0 };
+		},
+		imgActive(internalData: { sanctify: number }) {
+			return internalData.sanctify;
+		},
+	},
+	[ITEM_NAME_TO_ID.staffOfFlowingWater]: {
+		internalDataProperties: ['rapids'],
+		setupData(self) {
+			self.internalItemData.value.rapids = clamp(0, self.internalItemData.value.rapids ?? 0, 1);
+			return { rapids: 0 };
+		},
+		imgActive(internalData: { rapids: number }) {
+			return internalData.rapids;
+		},
+	},
 	[ITEM_NAME_TO_ID.bandlepipes]: {
 		internalDataProperties: ['fanfare'],
 		setupData(self) {

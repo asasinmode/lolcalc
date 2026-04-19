@@ -13,22 +13,6 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	},
-	[EFFECT_OBJECT_NAME.blackCleaverCarve]: {
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver),
-		maxValue: 5,
-		label: 'Carve stacks',
-		imgText(data: [carve: number]) {
-			return data[0];
-		},
-		setupData(data): [carve: number] {
-			return [
-				clamp(0, data?.[0] ?? 0, this.maxValue!),
-			];
-		},
-		isActive(data: [carve: number]) {
-			return data[0];
-		},
-	},
 	[EFFECT_OBJECT_NAME.shurelyaInspiringSpeech]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya),
 		label: 'Inspiring speech',
@@ -126,6 +110,22 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [hypershot: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.blackCleaverCarve]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver),
+		maxValue: 5,
+		label: 'Carve stacks',
+		imgText(data: [carve: number]) {
+			return data[0];
+		},
+		setupData(data): [carve: number] {
+			return [
+				clamp(0, data?.[0] ?? 0, this.maxValue!),
+			];
+		},
+		isActive(data: [carve: number]) {
 			return data[0];
 		},
 	},
