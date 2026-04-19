@@ -1760,6 +1760,16 @@ defineExpose({
 							&[aria-expanded='true'] > span {
 								--at-apply: 'rotate-180';
 							}
+
+							&:nth-of-type(2),
+							&:nth-of-type(4) {
+								--at-apply: '-mt-px z-1';
+							}
+
+							&:nth-of-type(3),
+							&:nth-of-type(4) {
+								--at-apply: '-ms-px z-2';
+							}
 						}
 					}
 

@@ -107,6 +107,7 @@
 
 	.pretend-ui-btn {
 		--at-apply: 'b bg-cyan-950 disabled:brightness-60';
+		/* not with --at-apply because it builds incorrectly and doesn't work on github workflow */
 		border-color: var(--ui-btn-border-clr);
 
 		&:not(:disabled) {
@@ -133,6 +134,7 @@
 
 	.other-ui-btn {
 		--at-apply: 'b disabled:brightness-60';
+		/* not with --at-apply because it builds incorrectly and doesn't work on github workflow */
 		border-color: var(--ui-btn-border-clr);
 		background-color: var(--placeholder-champion-bg-clr);
 

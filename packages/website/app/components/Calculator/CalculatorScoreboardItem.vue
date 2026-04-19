@@ -1494,12 +1494,12 @@ defineExpose({ el });
 			&:nth-of-type(2),
 			&:nth-of-type(4),
 			&:nth-last-of-type(1) {
-				--at-apply: '-mt-[0.5px] self-start';
+				--at-apply: '-mt-[0.5px] self-start z-1';
 			}
 
 			&:nth-of-type(3),
 			&:nth-of-type(4) {
-				--at-apply: '-ms-px z-1';
+				--at-apply: '-ms-px z-2';
 			}
 
 			&:nth-last-of-type(3) {
