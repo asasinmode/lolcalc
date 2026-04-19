@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: packages/website/package.json
+          cache_dependency_path: packages/website/pnpm-lock.yaml
       - uses: actions/setup-node@v6
         with:
           node-version: 25
           cache: "pnpm"
           cache-dependency-path: packages/website/package-lock.json
-      - uses: pnpm/action-setup@v6
-        with:
-          package_json_file: packages/website/package.json
-          cache_dependency_path: packages/website/pnpm-lock.yaml
       - run: find . -name "pnpm-lock.yaml" -print
       - run: pnpm i --frozen-lockfile
         working-directory: packages/website
