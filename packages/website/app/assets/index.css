@@ -106,7 +106,8 @@
 	}
 
 	.pretend-ui-btn {
-		--at-apply: 'b b-[--ui-btn-border-clr] bg-cyan-950 disabled:brightness-60';
+		--at-apply: 'b bg-cyan-950 disabled:brightness-60';
+		border-color: var(--ui-btn-border-clr);
 
 		&:not(:disabled) {
 			--at-apply: 'hoverable:bg-cyan-900';
@@ -131,7 +132,9 @@
 	}
 
 	.other-ui-btn {
-		--at-apply: 'b b-[--ui-btn-border-clr] bg-[--placeholder-champion-bg-clr] disabled:brightness-60';
+		--at-apply: 'b disabled:brightness-60';
+		border-color: var(--ui-btn-border-clr);
+		background-color: var(--placeholder-champion-bg-clr);
 
 		&:not(:disabled) {
 			--at-apply: 'hoverable:bg-neutral-800';
