@@ -14,6 +14,7 @@ jobs:
           cache: true
           package_json_file: ./packages/website/package.json
           cache_dependency_path: ./packages/website/pnpm-lock.yaml
+      - run: find . -name "pnpm-lock.yaml" -print
       - run: pnpm i --frozen-lockfile
         working-directory: ./packages/website
       - run: NUXT_APP_BASE_URL=/lolcalc/ pnpx nuxt build --preset github_pages
