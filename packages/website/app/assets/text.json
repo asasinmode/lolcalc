@@ -16,7 +16,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Enduring Focus</passive>",
-						"Restore <healing>@FlatHPRegenMod*5@ Health</healing> every 5 seconds. ",
+						"Restore <healing>@FlatHPRegenMod*5@ Health</healing> every 5 seconds.",
 						"After taking damage from a champion, restore up to <healing>@MeleeRangeSplitRegen@ Health</healing> over @RegenDuration@ seconds."
 					],
 					[
@@ -63,8 +63,7 @@
 					[
 						"<passive>Reap</passive>",
 						"Restore <healing>@OnHitHeal@ Health</healing> {{ Item_Keyword_OnHit }}.",
-						"Killing minions grants <gold>@MinionKillGold@ gold</gold>, up to <gold>@MinionKillThreshold@</gold>. Reaching the limit grants another <gold>@CompleteGold@ gold</gold>.",
-						""
+						"Killing minions grants <gold>@MinionKillGold@ gold</gold>, up to <gold>@MinionKillThreshold@</gold>. Reaching the limit grants another <gold>@CompleteGold@ gold</gold>."
 					]
 				]
 			},
@@ -112,11 +111,11 @@
 				"tooltipShop": [
 					[
 						"<passive>Tyranny</passive>",
-						"Gain @HPToADPercentage*100@% of your <healing>bonus Health</healing> as <scaleAD>Attack Damage</scaleAD>. "
+						"Gain @HPToADPercentage*100@% of your <healing>bonus Health</healing> as <scaleAD>Attack Damage</scaleAD>."
 					],
 					[
 						"<passive>Retribution</passive>",
-						"Gain up to @MissingHealthAD*100@% increased <scaleAD>Attack Damage</scaleAD> based on your percent missing Health. "
+						"Gain up to @MissingHealthAD*100@% increased <scaleAD>Attack Damage</scaleAD> based on your percent missing Health."
 					]
 				],
 				"tooltipInventory": [
@@ -150,7 +149,7 @@
 					],
 					[
 						"<passive>Blackfire</passive>",
-						"For each enemy champion, epic and large monster affected by your <passive>Baleful Blaze</passive>, gain <scaleAP>@APPerStack*100@% Ability Power</scaleAP>. "
+						"For each enemy champion, epic and large monster affected by your <passive>Baleful Blaze</passive>, gain <scaleAP>@APPerStack*100@% Ability Power</scaleAP>."
 					]
 				],
 				"extended": "<rules><passive>Baleful Blaze</passive> deals <magicDamage>@MinionBurnCalc@</magicDamage> magic damage per second to minions and <magicDamage>@MonsterBurnCalc@</magicDamage> magic damage per second to monsters.</rules>",
@@ -161,7 +160,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Magebane</passive>",
-						"After not taking magic damage for @OutOfCombatDuration@ seconds, gain a <shield>@ShieldCalc@ magic shield</shield>. "
+						"After not taking magic damage for @OutOfCombatDuration@ seconds, gain a <shield>@ShieldCalc@ magic shield</shield>."
 					]
 				]
 			},
@@ -208,7 +207,7 @@
 					],
 					[
 						"<passive>Feast</passive>",
-						"When a champion that you damaged within @TakedownWindow@ seconds dies, gain <omnivamp>@OmnivampOnTakedown*100@% Omnivamp</omnivamp> for @OmnivampDuration@ seconds. "
+						"When a champion that you damaged within @TakedownWindow@ seconds dies, gain <omnivamp>@OmnivampOnTakedown*100@% Omnivamp</omnivamp> for @OmnivampDuration@ seconds."
 					]
 				]
 			},
@@ -221,7 +220,7 @@
 					],
 					[
 						"<passive>Sabotage</passive>",
-						"Taking down a champion within @TakedownWindow@ seconds of damaging them grants Sabotage for @BuffDuration@ seconds. While you have Sabotage, your next Attack against an Epic Monster or Turret deals an additional <trueDamage>@DamageCalc@ true damage</trueDamage> over @DoTDuration@ seconds. "
+						"Taking down a champion within @TakedownWindow@ seconds of damaging them grants Sabotage for @BuffDuration@ seconds. While you have Sabotage, your next Attack against an Epic Monster or Turret deals an additional <trueDamage>@DamageCalc@ true damage</trueDamage> over @DoTDuration@ seconds."
 					]
 				],
 				"footerLeft": "Sabotage Damage Done: <attention>@f1@</attention>"
@@ -244,7 +243,7 @@
 					],
 					[
 						"<passive>Arcane Aim</passive>",
-						"When a champion that you damaged within @TakedownWindow@ seconds dies, gain @ExtraRange@ additional attack range for @Duration@ seconds. "
+						"When a champion that you damaged within @TakedownWindow@ seconds dies, gain @ExtraRange@ additional attack range for @Duration@ seconds."
 					]
 				]
 			},
@@ -264,7 +263,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Lifeline</passive> {{ Item_Cooldown }}",
-						"Taking damage that would reduce your Health below @LowHealthThreshold*100@% causes you to gain <health>@MaxHealthGain@ maximum Health</health> for @Duration@ seconds, then heal <health>@TotalHealthRegen@ Health</health> over the duration. While regenerating Health, you gain @SizeIncrease*100@% increased Size, @MSAmount*100@% Move Speed, and @TenacityAmount*100@% Tenacity. "
+						"Taking damage that would reduce your Health below @LowHealthThreshold*100@% causes you to gain <health>@MaxHealthGain@ maximum Health</health> for @Duration@ seconds, then heal <health>@TotalHealthRegen@ Health</health> over the duration. While regenerating Health, you gain @SizeIncrease*100@% increased Size, @MSAmount*100@% Move Speed, and @TenacityAmount*100@% Tenacity."
 					]
 				],
 				"footerLeft": "Healing Done: <attention>@f1@</attention>"
@@ -305,7 +304,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Lead the Way</passive>",
-						"While moving, build up to <speed>@MaxMovementSpeed@ bonus Move Speed</speed>. ",
+						"While moving, build up to <speed>@MaxMovementSpeed@ bonus Move Speed</speed>.",
 						"At max speed:<li>Create a trail that grants allied champions <speed>Move Speed equal to @MovespeedDonation*100@%</speed> of yours. <li>If you are %i:meleeActive%Melee, your next Attack <keyword>Slows</keyword> the target by @MaxStackSlowAmount*100@% for @MaxStackSlowDuration@ second."
 					]
 				]
@@ -388,7 +387,7 @@
 					],
 					[
 						"<passive>Flurry</passive> {{ Item_Cooldown }}",
-						"On-Attacking an enemy champion, gain <attackSpeed>@ASMod*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds. ",
+						"On-Attacking an enemy champion, gain <attackSpeed>@ASMod*100@% Attack Speed</attackSpeed> for @ASDuration@ seconds.",
 						"Attacks reduce this cooldown by @AACDR@ second, increased to @CritCDR@ seconds for Critical Strikes."
 					]
 				]
@@ -457,7 +456,7 @@
 					],
 					[
 						"<passive>Shock</passive>",
-						"Attacks against champions deal <physicalDamage>@OnHitDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. ",
+						"Attacks against champions deal <physicalDamage>@OnHitDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}.",
 						"Damaging Abilities against champions deal <physicalDamage>@lolcalcChampRange@ bonus physical damage</physicalDamage>."
 					]
 				],
@@ -468,7 +467,7 @@
 					],
 					[
 						"<passive>Shock</passive>",
-						"Attacks against champions deal an additional <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. ",
+						"Attacks against champions deal an additional <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }}.",
 						"Damaging Abilities against champions deal an additional <physicalDamage>@lolcalcChampRange@ physical damage</physicalDamage>."
 					]
 				],
@@ -541,8 +540,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
-						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}.",
-						""
+						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}."
 					]
 				]
 			},
@@ -562,7 +560,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Immolate</passive>",
-						"After taking or dealing damage, deal <magicDamage>@DPS@ magic damage</magicDamage> per second to nearby enemies for @AuraDuration@ seconds. "
+						"After taking or dealing damage, deal <magicDamage>@DPS@ magic damage</magicDamage> per second to nearby enemies for @AuraDuration@ seconds."
 					]
 				],
 				"extended": "<rules><passive>Immolate</passive> deals @MinionMod*100@% increased damage to minions and @MonsterMod*100@% increased damage to monsters.</rules>",
@@ -614,8 +612,7 @@
 					],
 					[
 						"<passive>Overdrive</passive> {{Item_Cooldown}}",
-						"After casting your Ultimate, gain <attackSpeed>@AttackSpeedProc*100@% Attack Speed</attackSpeed> and <speed>@MovementSpeedBonus*100@% Move Speed</speed> for @HasteDuration@ seconds. ",
-						""
+						"After casting your Ultimate, gain <attackSpeed>@AttackSpeedProc*100@% Attack Speed</attackSpeed> and <speed>@MovementSpeedBonus*100@% Move Speed</speed> for @HasteDuration@ seconds."
 					]
 				]
 			},
@@ -626,6 +623,11 @@
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>@lolcalcChampRange@ physical damage</physicalDamage> to nearby enemies."
+					],
+					[
+						"%i:activeEffect% <active>Ravenous Crescent</active> {{Item_Cooldown}}",
+						"Deal <physicalDamage>@PrimaryDamage@ physical damage</physicalDamage> to enemies around you.",
+						"Your Life Steal applies to this damage."
 					]
 				],
 				"extended": "<rules><passive>Cleave</passive> will benefit from Life Steal.<br><passive>Cleave</passive> does not trigger on structures.</rules>"
@@ -658,6 +660,10 @@
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>@lolcalcChampRange@ physical damage</physicalDamage> to nearby enemies."
+					],
+					[
+						"%i:activeEffect% <active>Crescent</active> {{Item_Cooldown}}",
+						"Deal <physicalDamage>@PrimaryDamage@ physical damage</physicalDamage> to enemies around you."
 					]
 				],
 				"extended": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
@@ -668,8 +674,9 @@
 				"tooltipShop": [
 					[
 						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
-						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}.",
-						" ",
+						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}."
+					],
+					[
 						"<passive>Quicken</passive>",
 						"Attacking grants <speed>@MoveSpeedBonus@ Move Speed</speed> for @MSDuration@ seconds."
 					]
@@ -690,7 +697,7 @@
 				"subtitleLeft": "Health Regen",
 				"tooltipShop": [
 					[
-						"<passive>Warmog's Heart</passive> ",
+						"<passive>Warmog's Heart</passive>",
 						"If you have @HealthThreshold@ bonus Health and have not taken damage within @OOCTimerChampion@ seconds, restore <healing>@TotalHealingTooltip@</healing> Health per second."
 					],
 					[
@@ -710,7 +717,7 @@
 					],
 					[
 						"<passive>Goliath</passive>",
-						"For each <scaleHealth>@HealthSizeThreshold@ max Health</scaleHealth>, gain @SizeAmount*100@% increased size, up to @SizeCap*100@%. "
+						"For each <scaleHealth>@HealthSizeThreshold@ max Health</scaleHealth>, gain @SizeAmount*100@% increased size, up to @SizeCap*100@%."
 					]
 				],
 				"tooltipInventory": [
@@ -720,7 +727,7 @@
 					],
 					[
 						"<passive>Goliath</passive>",
-						"For each <scaleHealth>@HealthSizeThreshold@ max Health</scaleHealth>, gain @SizeAmount*100@% increased size, up to @SizeCap*100@%. "
+						"For each <scaleHealth>@HealthSizeThreshold@ max Health</scaleHealth>, gain @SizeAmount*100@% increased size, up to @SizeCap*100@%."
 					]
 				]
 			},
@@ -743,7 +750,7 @@
 						"Your first @ChainCount@ attacks within @Duration@ seconds fire chain lightning %i:OnHit% <OnHit>On-Hit</OnHit>, dealing <magicDamage>@ChainDamage@ magic damage</magicDamage> to up to <attention>@BounceCount@</attention> targets, increased to <magicDamage>@NonChampChainDamage@ magic damage</magicDamage> against Minions and Monsters. Cooldown begins with the first attack."
 					],
 					[
-						"<passive>Electroshock</passive> ",
+						"<passive>Electroshock</passive>",
 						"Champion takedowns within @TakedownWindow@ seconds of damaging the target reset Electrospark's cooldown."
 					]
 				],
@@ -792,8 +799,7 @@
 					],
 					[
 						"<passive>Bolt</passive>",
-						"Your <keyword>Energized Attack</keyword> applies <magicDamage>@TotalProcDamage@ bonus magic damage</magicDamage> and grants <speed>@BuffStrength*100@% Movement Speed</speed> for @BuffDuration@ seconds.",
-						""
+						"Your <keyword>Energized Attack</keyword> applies <magicDamage>@TotalProcDamage@ bonus magic damage</magicDamage> and grants <speed>@BuffStrength*100@% Movement Speed</speed> for @BuffDuration@ seconds."
 					]
 				],
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Energized }}"
@@ -836,6 +842,10 @@
 					[
 						"<passive>Sacrifice</passive>",
 						"While near your <attention>Worthy</attention> ally, take @DamageRedirection*100@% of the damage they receive and <healing>heal for @AllyHealingConversion*100@%</healing> of the damage they deal to champions."
+					],
+					[
+						"%i:activeEffect% <active>Pledge</active> {{ Item_Cooldown }}",
+						"Designate an ally as <attention>Worthy</attention>."
 					]
 				],
 				"footerLeft": "Damage Redirected: <attention>@f1@</attention><br>Healing Received: <attention>@f3@</attention>"
@@ -891,8 +901,7 @@
 					],
 					[
 						"<passive>Hatefog</passive>",
-						"Damaging a champion with your Ultimate burns the ground beneath them for @GroundDuration@s, dealing <magicDamage>@GroundBurnDamagePerTickTooltipOnly@ magic damage</magicDamage> per second and reducing their <scaleMR>Magic Resist by @MagicResistanceShred@</scaleMR>. ",
-						""
+						"Damaging a champion with your Ultimate burns the ground beneath them for @GroundDuration@s, dealing <magicDamage>@GroundBurnDamagePerTickTooltipOnly@ magic damage</magicDamage> per second and reducing their <scaleMR>Magic Resist by @MagicResistanceShred@</scaleMR>."
 					]
 				],
 				"extended": "<rules>Radius increases based on the damage done.<br>Basic Attacks cannot trigger <passive>Hatefog</passive>.</rules>",
@@ -923,7 +932,7 @@
 					],
 					[
 						"<passive>Everlasting</passive> {{ Item_Cooldown}}",
-						"<keyword>Immobilizing</keyword> or <keyword>Slowing</keyword> (%i:meleeActive% Melee only) an enemy champion grants a <shield>Shield</shield> that absorbs <shield>@ShieldBase@ plus @CurrentManaShieldRatio*100@% current Mana</shield> damage for @ShieldDuration@ seconds. ",
+						"<keyword>Immobilizing</keyword> or <keyword>Slowing</keyword> (%i:meleeActive% Melee only) an enemy champion grants a <shield>Shield</shield> that absorbs <shield>@ShieldBase@ plus @CurrentManaShieldRatio*100@% current Mana</shield> damage for @ShieldDuration@ seconds.",
 						"The Shield is increased by @Multiplier*100@% if more than one enemy is nearby."
 					]
 				],
@@ -950,7 +959,7 @@
 					],
 					[
 						"<passive>Seething Strike</passive>",
-						"Attacks grant <attackSpeed>@AttackSpeedPerStack*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds. (stacks @MaxStacks@ times). ",
+						"Attacks grant <attackSpeed>@AttackSpeedPerStack*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds. (stacks @MaxStacks@ times).",
 						"While fully stacked, every third Attack applies {{ Item_Keyword_OnHit }} effects twice."
 					]
 				]
@@ -999,8 +1008,12 @@
 				"subtitleLeft": "Mobility",
 				"tooltipShop": [
 					[
-						"<passive>Haunt</passive> ",
+						"<passive>Haunt</passive>",
 						"Gain <speed>@OOCMS@ Move Speed</speed> while out of combat."
+					],
+					[
+						"%i:activeEffect% <active>Wraith Step</active> {{ Item_Cooldown }}",
+						"Gain <speed>{{Item_Melee_Ranged_Split_Dynamic_B}}% Move Speed</speed> and <keyword>Ghosting</keyword> for @Duration@ seconds."
 					]
 				],
 				"keywordDefinitions": "{{ Item_KeywordDefinition_Ghost }}"
@@ -1010,8 +1023,11 @@
 				"tooltipShop": [
 					[
 						"<passive>Resilience</passive>",
-						"Receive @PercentCritDamageReduction*100@% less damage from Critical Strikes.",
-						""
+						"Receive @PercentCritDamageReduction*100@% less damage from Critical Strikes."
+					],
+					[
+						"%i:activeEffect% <active>Humility</active> {{ Item_Cooldown }}",
+						"<keyword>Slow</keyword> nearby enemies by @SlowAmount*100@% for @SlowDuration@ seconds."
 					]
 				],
 				"footerLeft": "Critical Strike Damage Blocked: <attention>@f2@</attention>"
@@ -1020,7 +1036,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Bullseye</passive> {{ Item_Cooldown }}",
-						"Damaging a champion deals <magicDamage>@DamageAmount@ bonus magic damage</magicDamage>. ",
+						"Damaging a champion deals <magicDamage>@DamageAmount@ bonus magic damage</magicDamage>.",
 						"Attacks reduce this cooldown by 1 second."
 					]
 				]
@@ -1047,7 +1063,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Madness</passive>",
-						"For each second in combat with enemy champions, deal @DamageIncreasePerSecond*100@% bonus damage, up to @DamageIncreaseMax*100@%. "
+						"For each second in combat with enemy champions, deal @DamageIncreasePerSecond*100@% bonus damage, up to @DamageIncreaseMax*100@%."
 					]
 				]
 			},
@@ -1121,11 +1137,11 @@
 				"subtitleLeft": "Ability Amp",
 				"tooltipShop": [
 					[
-						"<passive>Dragonforce</passive> ",
+						"<passive>Dragonforce</passive>",
 						"Gain @AHBase@ Basic Ability Haste."
 					],
 					[
-						"<passive>Focused Will</passive> ",
+						"<passive>Focused Will</passive>",
 						"Dealing damage with Abilities increases your Champion's Ability and Passive damage by @TooltipValue@% for @StackDuration@ seconds. (stacks @StackCount@ times)."
 					]
 				],
@@ -1235,7 +1251,7 @@
 				"tooltipShop": [
 					[
 						"%i:activeEffect% <active>Devotion</active> {{ Item_Cooldown }}",
-						"Grant nearby allies a <shield>@ShieldMinTOOLTIP@ - @ShieldMaxTOOLTIP@ (ally %i:scaleLevel%) Shield</shield> that decays over @ShieldDuration@ seconds. "
+						"Grant nearby allies a <shield>@ShieldMinTOOLTIP@ - @ShieldMaxTOOLTIP@ (ally %i:scaleLevel%) Shield</shield> that decays over @ShieldDuration@ seconds."
 					]
 				],
 				"extended": "<rules>Subsequent <active>Devotion</active> shields within @DiminishedTimer@ seconds have @DiminishedEffectMulitplier*100@% effect.</rules>",
@@ -1261,7 +1277,7 @@
 					],
 					[
 						"<passive>Juxtaposition</passive>",
-						"Alternate between <keywordMajor>Light</keywordMajor> and <keywordMajor>Dark</keywordMajor> Attacks against champions: <li><keywordMajor>Light</keywordMajor> Attacks grant @ARMRPerHitScaling@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> (up to @ARMRMaxScaling@) for @BuffDuration@s. <li><keywordMajor>Dark</keywordMajor> Attacks grant @PenPerHit*100@% <scaleArmor>Armor Penetration</scaleArmor> and <scaleMR>Magic Penetration</scaleMR> (up to @PenMax*100@%) for @BuffDuration@s. "
+						"Alternate between <keywordMajor>Light</keywordMajor> and <keywordMajor>Dark</keywordMajor> Attacks against champions: <li><keywordMajor>Light</keywordMajor> Attacks grant @ARMRPerHitScaling@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> (up to @ARMRMaxScaling@) for @BuffDuration@s. <li><keywordMajor>Dark</keywordMajor> Attacks grant @PenPerHit*100@% <scaleArmor>Armor Penetration</scaleArmor> and <scaleMR>Magic Penetration</scaleMR> (up to @PenMax*100@%) for @BuffDuration@s."
 					]
 				],
 				"footerLeft": "Damage to Champions: <attention>@f1@</attention>"
@@ -1282,8 +1298,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
-						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> and grants <scaleMana>@TotalManaRefund@ Mana</scaleMana> {{ Item_Keyword_OnHit }}.",
-						""
+						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> and grants <scaleMana>@TotalManaRefund@ Mana</scaleMana> {{ Item_Keyword_OnHit }}."
 					]
 				],
 				"footerLeft": "Mana Restored: <attention>@f2@</attention>"
@@ -1309,6 +1324,10 @@
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>@OnHitDamageCalc@ physical damage</physicalDamage> on hit and <physicalDamage>@ConeDamageCalc@ physical damage</physicalDamage> to enemies behind the target."
+					],
+					[
+						"%i:activeEffect% <active>Titanic Crescent</active> {{Item_Cooldown}}",
+						"Empower your next <passive>Cleave</passive> to deal <physicalDamage>@CalcValueC@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }} and deal <physicalDamage>@CalcValueD@ bonus physical damage</physicalDamage> to enemies behind the target."
 					]
 				],
 				"extended": "<rules><passive>Cleave's</passive> shockwave does not trigger on structures.</rules>"
@@ -1327,7 +1346,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Eternity</passive>",
-						"Restores <scaleMana>@EternityManaRestore*100@% of the damage taken</scaleMana> from champions as <scaleMana>Mana</scaleMana>. ",
+						"Restores <scaleMana>@EternityManaRestore*100@% of the damage taken</scaleMana> from champions as <scaleMana>Mana</scaleMana>.",
 						"Casting an Ability <healing>heals for @EternityHealthRestore*100@% of Mana</healing> spent."
 					]
 				],
@@ -1349,7 +1368,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Support Quest</passive>",
-						"Earn <gold>@QuestGoldRequirement@ gold</gold> from this item to transform it into <rarityGeneric>Runic Compass</rarityGeneric>. "
+						"Earn <gold>@QuestGoldRequirement@ gold</gold> from this item to transform it into <rarityGeneric>Runic Compass</rarityGeneric>."
 					],
 					[
 						"<passive>Shared Riches</passive> %i:cooldown% (@ChargeCooldown@s, max @MaxCharges@ charges)",
@@ -1366,6 +1385,10 @@
 					[
 						"<passive>Blessing of the Mountain</passive> {{ Item_Cooldown }}",
 						"Reduce incoming champion damage by %i:meleeActive% @MeleeShieldDRPercentage*100@% / %i:rangedActive% @RangedShieldDRPercentage*100@% for @ShieldLingerAfterInitiallyPopped@ seconds after taking damage from a champion. When the effect ends, slow nearby enemies by @SlowAmount*100@% for @SlowDuration@ seconds."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
 				"extended": "<rules>{{ Item_Support_Minion_Warning }}<br>Item cooldown is restarted when damage is taken from champions.</rules>",
@@ -1378,6 +1401,10 @@
 					[
 						"<passive>Dream Maker</passive> {{ Item_Cooldown }}",
 						"Healing or Shielding another ally blows Dream Bubbles to them for 3 seconds. Their next Attack deals <magicDamage>@BonusDamageCalc@ bonus magic damage</magicDamage> {{ Item_Keyword_OnHit }} and the next damage they take is reduced by @DamageBlockCalc@."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
 				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
@@ -1390,6 +1417,10 @@
 					[
 						"<passive>Void Explosion</passive> {{ Item_Cooldown }}",
 						"Dealing Ability damage to a champion causes an explosion that deals<magicDamage> @TooltipDamage@ + @PercentHPDamage*100@% max Health magic damage</magicDamage>."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
 				"extended": "<rules>{{ Item_Support_Minion_Warning }}<br>Damage is capped at @MonsterDamageCap@ against monsters.</rules>",
@@ -1401,7 +1432,11 @@
 				"tooltipShop": [
 					[
 						"<passive>Going Sledding</passive> {{ Item_Cooldown }}",
-						"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion near allies restores <healing>@BonusHealthBuff@ Health</healing> and grants <speed>@MoveSpeedBuff*100@% decaying Move Speed</speed> for @BuffDuration@ seconds to you and a nearby ally. "
+						"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion near allies restores <healing>@BonusHealthBuff@ Health</healing> and grants <speed>@MoveSpeedBuff*100@% decaying Move Speed</speed> for @BuffDuration@ seconds to you and a nearby ally."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
 				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
@@ -1415,6 +1450,10 @@
 					[
 						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
 						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }}. If the target is a champion, they take %i:meleeActive% @MeleeDamageAmp*100@ % / %i:rangedActive% @RangedDamageAmp*100@% increased damage for @DebuffDuration@ seconds."
+					],
+					[
+						"%i:activeEffect% <active>Active</active> (@StealthWardCap@ charges)",
+						"Places an <keyword>Invisible</keyword> Stealth Ward that grants vision."
 					]
 				],
 				"extended": "<rules>{{ Item_Support_Minion_Warning }}</rules>",
@@ -1452,7 +1491,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Coordinated Fire</passive> {{ Item_Cooldown }} per target",
-						"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion marks them for @BuffDuration@ seconds. Ally champion damage detonates the mark, dealing <magicDamage>magic damage equal to @AllyDamagePerc*100@% of current health</magicDamage>. "
+						"<keyword>Slowing</keyword> or <keyword>Immobilizing</keyword> an enemy champion marks them for @BuffDuration@ seconds. Ally champion damage detonates the mark, dealing <magicDamage>magic damage equal to @AllyDamagePerc*100@% of current health</magicDamage>."
 					]
 				],
 				"footerLeft": "Bonus damage dealt: <attention>@f2@</attention>",
@@ -1532,7 +1571,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Cinderbloom</passive>",
-						"<magicDamage>Magic</magicDamage> and <trueDamage>true damage</trueDamage> <attention>Critically Strikes</attention> enemies below @HealthThreshold*100@% Health, dealing @SpellItemDamageAmp*100@% increased damage. "
+						"<magicDamage>Magic</magicDamage> and <trueDamage>true damage</trueDamage> <attention>Critically Strikes</attention> enemies below @HealthThreshold*100@% Health, dealing @SpellItemDamageAmp*100@% increased damage."
 					]
 				],
 				"extended": "<rules>Critical damage modifiers only affect <passive>Cinderbloom</passive>'s bonus damage.</rules>"
@@ -1621,8 +1660,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Soul Siphon</passive>",
-						"Gain @DamageStorageRate*100@% of pre-mitigation damage dealt to champions as Soul Charges, up to @MaxCharges@ Charges. Healing or Shielding an ally consumes all <passive>Soul Charges</passive> to restore @ChargeToHealConversion*100@% of that value as <healing>Health</healing>.",
-						""
+						"Gain @DamageStorageRate*100@% of pre-mitigation damage dealt to champions as Soul Charges, up to @MaxCharges@ Charges. Healing or Shielding an ally consumes all <passive>Soul Charges</passive> to restore @ChargeToHealConversion*100@% of that value as <healing>Health</healing>."
 					]
 				],
 				"footerLeft": "Total healing: <attention>@f1@</attention>"
@@ -1649,6 +1687,11 @@
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>@lolcalcChampRange@ physical damage</physicalDamage> to nearby enemies."
+					],
+					[
+						"%i:activeEffect% <active>Breaking Shockwave</active> {{Item_Cooldown}}",
+						"Deal <physicalDamage>@SlashDamage@ physical damage</physicalDamage> and <status>Slow</status> nearby enemies by @MSSlow*-100@%.",
+						"Gain <speed>@ActiveMS*100@% decaying Move Speed</speed> per champion hit for @Duration@ seconds."
 					]
 				],
 				"extended": "<rules><passive>Cleave</passive> does not trigger on structures.<br>You can move while casting <passive>Breaking Shockwave</passive>.</rules>"
@@ -1672,8 +1715,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Echo</passive> {{ Item_Cooldown }}",
-						"Damaging Abilities fire @MaxCharges@ Echoes that deal <magicDamage>@Damage@ bonus magic damage</magicDamage> to the target and nearby enemies. Remaining Echoes fire on the primary target, dealing @RepeatDamageReduction*100@% damage. (Maximum: <magicDamage>@SingleTargetMax@</magicDamage>)",
-						""
+						"Damaging Abilities fire @MaxCharges@ Echoes that deal <magicDamage>@Damage@ bonus magic damage</magicDamage> to the target and nearby enemies. Remaining Echoes fire on the primary target, dealing @RepeatDamageReduction*100@% damage. (Maximum: <magicDamage>@SingleTargetMax@</magicDamage>)"
 					]
 				],
 				"footerLeft": "Damage dealt to champions: <attention>@f2@</attention>"
@@ -1688,7 +1730,7 @@
 					],
 					[
 						"<passive>Eternity</passive>",
-						"Taking damage from champions restores <scaleMana>@EternityManaRestore*100@%</scaleMana> of the damage as <scaleMana>Mana</scaleMana>. ",
+						"Taking damage from champions restores <scaleMana>@EternityManaRestore*100@%</scaleMana> of the damage as <scaleMana>Mana</scaleMana>.",
 						"Casting an ability <healing>heals for @EternityHealthRestore*100@%</healing> of Mana spent."
 					]
 				],
@@ -1712,8 +1754,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Spellblade</passive> {{ Item_Cooldown }}",
-						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }} and creates a frost field for @SlowFieldDuration@s that <status>Slows</status> by @SlowAmountMeleeRangedSplit@.",
-						""
+						"After using an Ability, your next Attack deals <physicalDamage>@SpellbladeDamage@ bonus physical damage</physicalDamage> {{ Item_Keyword_OnHit }} and creates a frost field for @SlowFieldDuration@s that <status>Slows</status> by @SlowAmountMeleeRangedSplit@."
 					]
 				],
 				"footerLeft": "Damage to champions: <attention>@f1@</attention>"
@@ -1724,7 +1765,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Immolate</passive>",
-						"After taking or dealing damage, deal <magicDamage>@DPS@ magic damage</magicDamage> per second to nearby enemies for @AuraDuration@ seconds. "
+						"After taking or dealing damage, deal <magicDamage>@DPS@ magic damage</magicDamage> per second to nearby enemies for @AuraDuration@ seconds."
 					],
 					[
 						"<passive>Desolate</passive>",
@@ -1796,7 +1837,6 @@
 				],
 				"tooltipInventory": [
 					[
-						"",
 						"<passive>Ever Rising Moon</passive> {{ Item_Cooldown }}",
 						"Hitting a champion with 2 separate Attacks or Abilities within @WindowDuration@ seconds deals <physicalDamage>@MaxHealthDamageCalc@% max health physical damage</physicalDamage> and grants you a <shield>@lolcalcChampRange@ Shield</shield> for @ShieldDuration@ seconds."
 					],
@@ -1821,7 +1861,7 @@
 				"tooltipShop": [
 					[
 						"<passive>Shield Reaver</passive>",
-						"Damaging an enemy champion reduces Shields they gain by @ShieldShredMeleeRangedSplit@% for @DebuffDuration@ seconds. ",
+						"Damaging an enemy champion reduces Shields they gain by @ShieldShredMeleeRangedSplit@% for @DebuffDuration@ seconds.",
 						"If they were not already affected by <passive>Shield Reaver</passive>, reduce Shields on them by @ShieldWoundMeleeRangedSplit@%."
 					]
 				],
@@ -1853,6 +1893,10 @@
 					[
 						"<passive>Cleave</passive>",
 						"Attacks deal <physicalDamage>@CleaveDamage@ physical damage</physicalDamage> to nearby enemies."
+					],
+					[
+						"%i:activeEffect% <active>Heretical Cleave</active> {{Item_Cooldown}}",
+						"Deal <physicalDamage>@SlashDamageBase@ physical damage</physicalDamage> around you."
 					]
 				],
 				"extended": "<rules><passive>Cleave</passive> does not trigger on structures.</rules>"
@@ -2378,7 +2422,8 @@
 			"item_keyworddefinition_energized": "<keyword>Energized</keyword>: Moving and attacking will generate an <keyword>Energized Attack</keyword>.",
 			"item_keyworddefinition_tenacity": "<keyword>Tenacity</keyword>: Reduces the duration of stuns, slows, taunts, fears, silences, blinds, sleep, polymorphs and immobilizes.",
 			"item_keyworddefinition_airborne": "<keyword>Airborne</keyword>: Launched into the air. Can't move, attack, cast abilities, or use item activates for the duration. ",
-			"item_keyworddefinition_wounds": "<keyword>Wounds</keyword>: Reduces the effectiveness of Healing and Regeneration effects."
+			"item_keyworddefinition_wounds": "<keyword>Wounds</keyword>: Reduces the effectiveness of Healing and Regeneration effects.",
+			"item_melee_ranged_split_dynamic_b": "{{Item_Range_Mod_@ChampRange@_Dynamic_B}}"
 		},
 		"dragons": {
 			"Cloud": {

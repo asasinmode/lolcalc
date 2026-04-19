@@ -1031,13 +1031,46 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 		extraToEnd = extraToEnd.slice(19);
 		extraEndIndex = extraToEnd.indexOf('</section>');
 	}
+	/** some items like ravenous hydra or youmuu's use 2 sections for their description so try to account for that with this abomination */
+	if (!extraToEnd.slice(extraEndIndex).startsWith('</section><section><flavorText>')) {
+		extraEndIndex = extraToEnd.indexOf('</section><section><flavorText>');
+	}
+
 	const rawExtra = extraToEnd.slice(0, extraEndIndex)
 		.replace(/\{\{ ?Item_Passive_List ?\}\}/g, '')
 		.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@')
-		.replaceAll(':</passive>', '</passive>');
+		.replaceAll(':</passive>', '</passive>')
+		.replaceAll('</section><section>', '<br><br>');
 
-	const extra = rawExtra ? rawExtra.split('<br><br>').map(text => text.split('<br>')).filter(text => text.some(Boolean)) : undefined;
-	for (let i = 0; i < (extra?.length || 0); i++) {
+	let extra = rawExtra
+		? rawExtra
+				.split('<br><br>')
+				.map(text => text.split('<br>').map(t => t.trim()))
+				.filter(text => text.some(Boolean))
+		: undefined;
+	/** some item descriptions are split with '' instead so try to handle it */
+	if (extra?.length === 1) {
+		const result = [];
+		let current = [];
+		for (const item of extra[0]!) {
+			if (item) {
+				current.push(item);
+			} else if (current.length) {
+				result.push(current);
+				current = [];
+			}
+		}
+		current.length && result.push(current.filter(Boolean));
+		extra = result;
+	}
+
+	for (let i = 0; i < (extra?.length ?? 0); i++) {
+		/* remove empty items from split text */
+		for (let j = extra![i]!.length - 1; j >= 0; j--) {
+			if (!extra![i]![j]) {
+				extra![i]!.splice(j, 1);
+			}
+		}
 		const replaced: string[] = [];
 		let [heading] = extra![i] as [string];
 		let liStartIndex = heading.indexOf('<li>');
@@ -1058,7 +1091,7 @@ function itemDescriptionText(text: string, extrasStart: string): string[][] | un
 		}
 	}
 
-	return extra;
+	return extra?.length ? extra : undefined;
 }
 
 /**
