@@ -324,6 +324,16 @@ export const ITEM_SPECIFICS = {
 			return internalData.preparation;
 		},
 	},
+	[ITEM_NAME_TO_ID.actualizer]: {
+		internalDataProperties: ['empowered'],
+		setupData(self) {
+			self.internalItemData.value.empowered = clamp(0, self.internalItemData.value.empowered ?? 0, 1);
+			return { empowered: 0 };
+		},
+		imgActive(internalData: { empowered: number }) {
+			return internalData.empowered;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

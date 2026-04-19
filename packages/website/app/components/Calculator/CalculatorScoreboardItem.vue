@@ -1392,6 +1392,13 @@ defineExpose({ el });
 		border-inline-end: 0.25rem solid var(--damage-source-clr);
 	}
 
+	#scoreboard > div > ul {
+		--extras-gap: calc(2 * var(--spacing));
+		--extra-item-w: calc(64 * var(--spacing));
+
+		min-width: calc(3 * var(--extra-item-w) + 2 * var(--extras-gap));
+	}
+
 	#scoreboard > div > ul > [data-scoreboard-item] {
 		--at-apply: 'relative grid auto-cols-max grid-flow-col grid-rows-[var(--non-expanded-row-height)_var(--non-expanded-row-height)_minmax(0,_0fr)] of-hidden py-[--py] px-4 box-content';
 		min-width: calc(3 * var(--extra-item-w) + 2 * var(--extras-gap));
@@ -1420,8 +1427,6 @@ defineExpose({ el });
 		--stack-size: calc(8 * var(--spacing));
 		--soul-rotation-size-diff: calc((var(--soul-size) * sqrt(2) - var(--soul-size)) / 2);
 		--gap-x: calc(4 * var(--spacing));
-		--extras-gap: calc(2 * var(--spacing));
-		--extra-item-w: calc(64 * var(--spacing));
 
 		grid-template-areas:
 			'move-up		move-column	select-champion	select-runes	select-items	items			clear'
