@@ -11,8 +11,9 @@ jobs:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v6
         with:
-          version: 10
           cache: true
+          package_json_file: ./packages/website/package.json
+          cache_dependency_path: ./packages/website/pnpm-lock.yaml
       - run: pnpm i
         working-directory: ./packages/website
       - run: NUXT_APP_BASE_URL=/lolcalc/ pnpx nuxt build --preset github_pages
