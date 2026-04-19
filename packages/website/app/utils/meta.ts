@@ -86,6 +86,8 @@ export const ITEM_NAME_TO_ID = {
 	horizonFocus: '4628',
 	opportunity: '6701',
 	actualizer: '2522',
+	hexoptics: '2523',
+	youmuu: '3142',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

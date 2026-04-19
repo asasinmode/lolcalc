@@ -127,6 +127,17 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.actualizer]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.actualizer), 'empowered', 'Mana Made Real'),
 	},
+	[ITEM_NAME_TO_ID.hexoptics]: {
+		extras: [
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.hexoptics), 'magnification', 'Distance between target', 0, items[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange),
+		],
+	},
+	[ITEM_NAME_TO_ID.youmuu]: {
+		extras: [
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.youmuu), 'haunt', 'Haunt'),
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.youmuu), 'wStep', 'Wraith Step'),
+		],
+	},
 	[ITEM_NAME_TO_ID.blackCleaver]: {
 		extras: [
 			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue),

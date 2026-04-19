@@ -364,6 +364,31 @@ export const ITEM_SPECIFICS = {
 			return internalData.empowered;
 		},
 	},
+	[ITEM_NAME_TO_ID.hexoptics]: {
+		internalDataProperties: ['magnification'],
+		setupData(self) {
+			self.internalItemData.value.magnification = clamp(0, self.internalItemData.value.magnification ?? 0, items[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange);
+			return { magnification: 0 };
+		},
+		imgTextLabel: 'Magnification % damage increase',
+		imgText(self) {
+			const { magnification } = self.internalItemData.value as { magnification: number };
+			const { dataValues: { MaxRange, MaxDamageAmp } } = items[ITEM_NAME_TO_ID.hexoptics];
+			return magnification && `${roundVariable(magnification / MaxRange * 100 * MaxDamageAmp, 2)}%`;
+		},
+	},
+	[ITEM_NAME_TO_ID.youmuu]: {
+		internalDataProperties: ['haunt', 'wStep'],
+		setupData(self) {
+			self.internalItemData.value.haunt = clamp(0, self.internalItemData.value.haunt ?? 0, 1);
+			self.internalItemData.value.wStep = clamp(0, self.internalItemData.value.wStep ?? 0, 1);
+			return { haunt: 0, wStep: 0 };
+		},
+		imgTextLabel: 'Magnification % damage increase',
+		imgActive(internalData: { haunt: number; wStep: number }) {
+			return [internalData.haunt, internalData.wStep];
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
@@ -371,7 +396,7 @@ export type IHypotheticalItemSpecifics = Record<string, IItemSpecific>;
 
 export type IItemSpecific = IProviderGroupImageText & IProviderGroupInternalItemData & {
 	/** whether to show the green dot that the item is active in the top right corner of the image */
-	imgActive?: (internalData: any) => number | boolean;
+	imgActive?: (internalData: any) => (number | boolean)[] | number | boolean;
 };
 
 export function calculateItemDiscount(

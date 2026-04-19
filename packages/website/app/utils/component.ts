@@ -52,7 +52,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 
 		return () => h(VExtrasNumber, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}`,
+			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
 			imgSrc,
 			imgSize,
 			label,
@@ -87,7 +87,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 
 		return () => h(VExtrasBoolean, {
 			'modelValue': modelValue.value,
-			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}`,
+			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
 			imgSrc,
 			imgSize,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
