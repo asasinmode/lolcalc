@@ -18,7 +18,7 @@ export default defineConfig({
 			'flex-center': 'flex justify-center items-center',
 			'translate-center': '-translate-x-1/2 -translate-y-1/2',
 		},
-		[/^hoverable[:-](.+)$/, ([, c]) => `hover:${c} focus-visible:${c}`],
+		[/^hoverable:(.+)$/, ([, body]) => [`hover:${body}`, `focus-visible:${body}`]],
 	],
 	blocklist: ['container'],
 	outputToCssLayers: {

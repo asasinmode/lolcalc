@@ -118,7 +118,7 @@
 
 		&.remove {
 			&:not(:disabled) {
-				--at-apply: 'hoverable-bg-red-500';
+				--at-apply: 'hoverable:bg-red-500';
 
 				&:hover,
 				&:focus-visible {
