@@ -147,8 +147,6 @@ const {
 	isStateTooLargeForQuery,
 } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
-onMounted(restoreState);
-
 const showResults = ref(damageSources.value.some(source => source.anythingFilled.value));
 if (!showResults.value) {
 	const unwatchShowResults = watch(() => damageSources.value.some(source => source.anythingFilled.value), (anythingFilled) => {
@@ -189,6 +187,7 @@ onMounted(() => {
 	const email = cipheredEmail.map(n => String.fromCharCode(n)).join('');
 	emailEl.value?.append(email);
 	emailEl.value?.setAttribute('href', `mailto:${email}`);
+	restoreState();
 });
 
 onBeforeUnmount(() => {
@@ -281,12 +280,10 @@ onBeforeUnmount(() => {
 			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 		</p>
 	</footer>
-	<!-- <ClientOnly> -->
-		<ChampSelect />
-		<ItemShop />
-		<RuneSelect />
-		<EffectsDialog />
-	<!-- </ClientOnly> -->
+	<ChampSelect />
+	<ItemShop />
+	<RuneSelect />
+	<EffectsDialog />
 </template>
 
 <style>
