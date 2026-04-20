@@ -104,6 +104,7 @@
 	:root {
 		--ui-btn-border-clr: hsl(40 59% 61%);
 		--ui-pretend-button-icon-clr: hsl(37 81% 71%);
+		--unknown-alert-mt: calc(3 * var(--spacing));
 	}
 
 	.pretend-ui-btn {
@@ -186,7 +187,6 @@
 
 	.hover-tooltip {
 		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-btn-border-clr] text-neutral-300';
-		--unknown-alert-mt: calc(3 * var(--spacing));
 	}
 
 	.skip-link {

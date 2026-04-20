@@ -337,7 +337,7 @@ export const ITEM_SPECIFICS = {
 		imgText(self) {
 			const { magnification } = self.internalItemData.value as { magnification: number };
 			const { dataValues: { MaxRange, MaxDamageAmp } } = items[ITEM_NAME_TO_ID.hexoptics];
-			return magnification && `${roundVariable(magnification / MaxRange * 100 * MaxDamageAmp, 2)}%`;
+			return magnification && `${roundVariable(Math.round((magnification / MaxRange * 100 * MaxDamageAmp) * 10) / 10)}%`;
 		},
 	},
 	[ITEM_NAME_TO_ID.youmuu]: {

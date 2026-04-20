@@ -3,13 +3,13 @@ import { ChampionExtrasAphelios } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	Ambessa: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'passive stack', false, 'has'),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has passive stack', false),
 	},
 	Amumu: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch', true),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch', undefined, true),
 	},
 	Anivia: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Anivia', 'passive', 0), 'isEgg', 'egg', false, 'is'),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Anivia', 'passive', 0), 'isEgg', 'is egg', false),
 	},
 	Aphelios: {
 		extras: ChampionExtrasAphelios,
@@ -23,8 +23,23 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Belveth: {
 		extras: [
 			await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Belveth', 'passive', 0), 'passiveStacks', 'Lavender stacks'),
-			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Belveth', 'passive', 0), 'hasPassiveStack', 'passive stack (from using ability)', false, 'has'),
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Belveth', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 		],
+	},
+	Darius: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Darius', 'passive', 0), 'isChampionAtMaxBleed', 'is champion at max bleed stacks', false),
+	},
+	Diana: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Diana', 'passive', 0), 'isPassiveEmpowered', 'is passive empowered (from using ability)', false),
+	},
+	Draven: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Draven', 'passive', 0), 'passiveStacks', 'League of Draven stacks'),
+	},
+	Ekko: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ekko', 'passive', 0), 'isPassiveActive', 'is passive active (3 hits)', false),
+	},
+	Ezreal: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks', 0, CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS),
 	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),

@@ -4,7 +4,7 @@ defineProps<{
 	imgSrc: string;
 	imgSize: string | number;
 	label: string;
-	labelPrefix?: string;
+	labelPrefixApply?: boolean;
 }>();
 
 defineEmits<{
@@ -31,7 +31,7 @@ const value = defineModel<number>({ required: true });
 			:false-value="0"
 		>
 		<label :for="`vebln-${idPrefix}`">
-			{{ labelPrefix ?? 'apply' }} {{ label }}
+			{{ labelPrefixApply ? 'apply ' : '' }}{{ label }}
 		</label>
 		<slot />
 	</article>

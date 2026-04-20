@@ -1,3 +1,4 @@
+import type Ezreal from '../../public/data/champion/Ezreal.json';
 import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
@@ -86,6 +87,42 @@ export const CHAMPION_SPECIFICS = {
 			return {
 				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
 				hasPassiveStack: clamp(0, self.internalData.value.passiveStacks ?? 0, 1),
+			};
+		},
+	},
+	Darius: {
+		setupData(self): { isChampionAtMaxBleed: number } {
+			return {
+				isChampionAtMaxBleed: clamp(0, self.internalData.value.isChampionAtMaxBleed ?? 0, 1),
+			};
+		},
+	},
+	Diana: {
+		setupData(self): { isPassiveEmpowered: number } {
+			return {
+				isPassiveEmpowered: clamp(0, self.internalData.value.isPassiveEmpowered ?? 0, 1),
+			};
+		},
+	},
+	Draven: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Ekko: {
+		setupData(self): { isPassiveActive: number } {
+			return {
+				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+			};
+		},
+	},
+	Ezreal: {
+		MAX_PASSIVE_STACKS: 5,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
