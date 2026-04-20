@@ -32,9 +32,6 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.blackfireTorch]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackfireTorch), 'bBlaze', 'Balefully blazing'),
 	},
-	[ITEM_NAME_TO_ID.heartsteel]: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.heartsteel), 'cConsumption', 'Colossal consumption'),
-	},
 	[ITEM_NAME_TO_ID.guinsoo]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.guinsoo), 'seething', 'Seething strikes stacks', 0, 4),
 	},
@@ -43,9 +40,6 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.terminus), 'jxtpL', 'Juxtaposition light stacks', 0, 3),
 			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.terminus), 'jxtpD', 'Juxtaposition dark stacks', 0, 3),
 		],
-	},
-	[ITEM_NAME_TO_ID.liandry]: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.liandry), 'madness', 'Suffering stacks', 0, 3),
 	},
 	[ITEM_NAME_TO_ID.yunTal]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.yunTal), 'practice', 'Practice stacks', 0, 25),
@@ -134,12 +128,6 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.youmuu), 'wStep', 'Wraith Step'),
 		],
 	},
-	[ITEM_NAME_TO_ID.blackCleaver]: {
-		extras: [
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue),
-			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'fervor', 'Fervor'),
-		],
-	},
 	[ITEM_NAME_TO_ID.forceOfNature]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.forceOfNature), 'steadfast', 'Steadfast'),
 	},
@@ -149,8 +137,32 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.bloodlettersCurse]: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodlettersCurse), 'vDecay', 'Vile Decay stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.bloodletterVileDecay].maxValue),
 	},
+	[ITEM_NAME_TO_ID.blackCleaver]: {
+		extras: [
+			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue),
+			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'fervor', 'Fervor'),
+		],
+	},
 	[ITEM_NAME_TO_ID.experimentalHexplate]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.experimentalHexplate), 'overdrive', 'Overdrive'),
+	},
+	[ITEM_NAME_TO_ID.heartsteel]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.heartsteel), 'cConsumption', 'Colossal consumption'),
+	},
+	[ITEM_NAME_TO_ID.cosmicDrive]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.cosmicDrive), 'spelldance', 'Spelldance'),
+	},
+	[ITEM_NAME_TO_ID.liandry]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.liandry), 'madness', 'Suffering stacks', 0, 3),
+	},
+	[ITEM_NAME_TO_ID.endlessHunger]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.endlessHunger), 'feast', 'Feast'),
+	},
+	[ITEM_NAME_TO_ID.mawOfMalmortius]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.mawOfMalmortius), 'mawLifeline', 'Lifeline'),
+	},
+	[ITEM_NAME_TO_ID.jakSho]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.jakSho), 'vbResistance', 'Voidborn Resistance'),
 	},
 };
 

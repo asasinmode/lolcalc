@@ -92,6 +92,10 @@ export const ITEM_NAME_TO_ID = {
 	deadMansPlate: '3742',
 	bloodlettersCurse: '8010',
 	experimentalHexplate: '3073',
+	cosmicDrive: '4629',
+	endlessHunger: '2517',
+	mawOfMalmortius: '3156',
+	jakSho: '6665',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

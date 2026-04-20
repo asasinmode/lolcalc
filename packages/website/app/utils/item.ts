@@ -433,6 +433,46 @@ export const ITEM_SPECIFICS = {
 			return property ? data[property] : (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
 		},
 	},
+	[ITEM_NAME_TO_ID.cosmicDrive]: {
+		internalDataProperties: ['spelldance'],
+		setupData(self) {
+			self.internalItemData.value.spelldance = clamp(0, self.internalItemData.value.spelldance ?? 0, 1);
+			return { spelldance: 0 };
+		},
+		imgActive(internalData: { spelldance: number }) {
+			return internalData.spelldance;
+		},
+	},
+	[ITEM_NAME_TO_ID.endlessHunger]: {
+		internalDataProperties: ['feast'],
+		setupData(self) {
+			self.internalItemData.value.feast = clamp(0, self.internalItemData.value.feast ?? 0, 1);
+			return { feast: 0 };
+		},
+		imgActive(internalData: { feast: number }) {
+			return internalData.feast;
+		},
+	},
+	[ITEM_NAME_TO_ID.mawOfMalmortius]: {
+		internalDataProperties: ['mawLifeline'],
+		setupData(self) {
+			self.internalItemData.value.mawLifeline = clamp(0, self.internalItemData.value.mawLifeline ?? 0, 1);
+			return { mawLifeline: 0 };
+		},
+		imgActive(internalData: { mawLifeline: number }) {
+			return internalData.mawLifeline;
+		},
+	},
+	[ITEM_NAME_TO_ID.jakSho]: {
+		internalDataProperties: ['vbResistance'],
+		setupData(self) {
+			self.internalItemData.value.vbResistance = clamp(0, self.internalItemData.value.vbResistance ?? 0, 1);
+			return { vbResistance: 0 };
+		},
+		imgActive(internalData: { vbResistance: number }) {
+			return internalData.vbResistance;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
