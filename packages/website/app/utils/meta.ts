@@ -347,7 +347,6 @@ export const ITEM_SHOP_STAT_FILTERS = {
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 
 export const EFFECT_OBJECT_NAME = {
-	amumuPCursedTouch: 'AmumuPDebuff',
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
 	ardentSanctify: '3504Buff',
@@ -361,6 +360,8 @@ export const EFFECT_OBJECT_NAME = {
 	horizonFocusHypershot: '4628Marker',
 	grievousWounds: 'lolcalcGrievousWounds',
 	bloodletterVileDecay: '8010VisualDebuff',
+	amumuPCursedTouch: 'AmumuPDebuff',
+	jannaPTailwind: 'Tailwind',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

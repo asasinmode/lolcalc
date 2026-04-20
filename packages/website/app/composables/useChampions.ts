@@ -62,7 +62,9 @@ export interface IChampionAbilityVariant {
 	// /** if present, means the variant uses the tooltip of another variant at the specified index */
 	// tooltipVariantIndex?: number;
 	tooltip?: string;
+	/** tooltip shown when holding shift */
 	tooltipExtended?: string;
+	// TODO unused at the moment? dont remember what it was for
 	tooltipExtendedBelowLine?: string;
 	/** the variables shown below the description when holding shift. Cooldown excluded, it's added manually */
 	extendedVariables?: {

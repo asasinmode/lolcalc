@@ -82,7 +82,12 @@ defineExpose({ el });
 		</span>
 		<div v-show="!isLoading" class="game-description" v-html="globalKeyModifiers.shift && computedDescription?.tooltipExtended || computedDescription?.tooltip" />
 		<UnresolvedVariablesAlert v-if="computedDescription?.anyUnknownVariables" />
-		<footer v-if="computedDescription?.tooltipExtended || computedDescription?.tooltipExtendedBelowLine || computedDescription?.extendedVariables?.length">
+		<footer
+			v-if="(computedDescription?.tooltipExtended && computedDescription.tooltipExtended !== computedDescription.tooltip)
+				|| computedDescription?.tooltipExtendedBelowLine
+				|| computedDescription?.extendedVariables?.length"
+			v-show="!globalKeyModifiers.shift || computedDescription?.tooltipExtendedBelowLine || computedDescription?.extendedVariables"
+		>
 			<div
 				v-if="computedDescription?.tooltipExtendedBelowLine"
 				v-show="globalKeyModifiers.shift"

@@ -126,6 +126,43 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Garen: {
+		setupData(self): { isPassiveActive: number } {
+			return {
+				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+			};
+		},
+	},
+	Heimerdinger: {
+		setupData(self): { isPassiveActive: number } {
+			return {
+				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+			};
+		},
+	},
+	Irelia: {
+		MAX_PASSIVE_STACKS: 4,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Jax: {
+		MAX_PASSIVE_STACKS: 8,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Jhin: {
+		setupData(self): { isPassiveMSActive: number } {
+			return {
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+			};
+		},
+	},
 	Kayn: {
 		POSSIBLE_DYNAMIC_VALUES: {
 			f1: [0, 1, 2],

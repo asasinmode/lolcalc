@@ -39,7 +39,22 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ekko', 'passive', 0), 'isPassiveActive', 'is passive active (3 hits)', false),
 	},
 	Ezreal: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks', 0, CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS),
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Spell Force stacks', 0, CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS),
+	},
+	Garen: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Garen', 'passive', 0), 'isPassiveActive', 'is passive active (not hit recently)', false),
+	},
+	Heimerdinger: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Heimerdinger', 'passive', 0), 'isPassiveActive', 'is passive active (close to turret)', false),
+	},
+	Irelia: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Irelia', 'passive', 0), 'passiveStacks', 'Ionian Fervor stacks', 0, CHAMPION_SPECIFICS.Irelia.MAX_PASSIVE_STACKS),
+	},
+	Jax: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jax', 'passive', 0), 'passiveStacks', 'Ionian Fervor stacks', 0, CHAMPION_SPECIFICS.Jax.MAX_PASSIVE_STACKS),
+	},
+	Jhin: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jhin', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after crit)', false),
 	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),

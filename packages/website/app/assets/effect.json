@@ -1,10 +1,6 @@
 {
 	"version": "16.4.1",
 	"data": {
-		"AmumuPDebuff": {
-			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
-			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"
-		},
 		"2065ActiveMoveSpeed": {
 			"description": "This unit is moving faster.",
 			"dataKey": "Items/2065/Spells/2065ActiveMoveSpeed"
@@ -56,6 +52,14 @@
 		"lolcalcGrievousWounds": {
 			"dataKey": "lolcalcGrievousWounds",
 			"description": "This unit receives reduced healing."
+		},
+		"AmumuPDebuff": {
+			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",
+			"dataKey": "Characters/Amumu/Spells/AmumuPAbility/AmumuPDebuff"
+		},
+		"Tailwind": {
+			"description": "Moving faster toward Janna.",
+			"dataKey": "Characters/Janna/Spells/TailwindSelfAbility/Tailwind"
 		}
 	},
 	"stringtable": {}

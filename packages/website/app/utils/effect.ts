@@ -7,16 +7,6 @@ import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
 const { data: items } = itemsData;
 
 export const EFFECT_SPECIFICS = {
-	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: {
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
-		label: 'Cursed touch',
-		setupData(data): [cursedTouch: number] {
-			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data: [cursedTouch: number]) {
-			return data[0];
-		},
-	},
 	[EFFECT_OBJECT_NAME.shurelyaInspiringSpeech]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya),
 		label: 'Inspiring speech',
@@ -156,6 +146,26 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [gWounds: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
+		label: 'Cursed touch',
+		setupData(data): [cursedTouch: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [cursedTouch: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.jannaPTailwind]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Janna', 'passive', 0),
+		label: 'Tailwind',
+		setupData(data): [tailwind: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [tailwind: number]) {
 			return data[0];
 		},
 	},
