@@ -100,7 +100,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 }
 
 export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src: string, size: number]> {
-	const { version } = usePatchVersion();
+	const { version, minorVersion } = usePatchVersion();
 
 	const imageAbilityId = abilityId.type === ABILITY_TYPE.effect
 		? EFFECT_SPECIFICS[abilityId.id].sourceAbility
@@ -116,6 +116,13 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src:
 			`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${imageAbilityId.id}.png`,
 			64,
 		];
+	} else if (imageAbilityId.type === ABILITY_TYPE.effect) {
+		return CUSTOM_EFFECT_IMAGES[imageAbilityId.id]
+			? [
+					`https://raw.communitydragon.org/${minorVersion}/${CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0]}`,
+					CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
+				]
+			: ['', 0];
 	}
 
 	const { abilityImage, abilityImageSize } = useChampionImages();

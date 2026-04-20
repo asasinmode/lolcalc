@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IChampionAbilityId, IEffectAbilityId, IGameAbilityId, IItemAbilityId } from '~/utils/types';
 import { CHAMPION_COMPONENTS } from '~/components/Champion';
+import { EFFECT_COMPONENTS } from '~/components/Effect';
 import { ITEM_COMPONENTS } from '~/components/Item';
 
 const damageSource = defineModel<DamageSource>();
@@ -12,13 +13,12 @@ const { minorVersion } = usePatchVersion();
 const vDialog = useTemplateRef('vDialog');
 
 interface IEffectOptionGroup {
-	type: 'champion' | 'item';
+	type: TAbilityType;
 	label: string;
 	options: {
 		abilityId: IEffectAbilityId;
 		sourceAbilityId: IGameAbilityId;
 		name: string;
-		precomputedSourceAbilityDesc: IComputedAbilityDescription | IComputedItemDescription;
 	}[];
 }
 
@@ -32,7 +32,20 @@ const itemEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRI
 			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
 			sourceAbilityId,
 			name: item.name,
-			precomputedSourceAbilityDesc: computeItemDescription(text, minorVersion, item, undefined, { replaceWithName: true })!,
+		};
+	})
+	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
+
+const otherEffects: IEffectOptionGroup['options'] = EFFECT_SPECIFICS_OBJECT_ENTRIES
+	.filter(([, specific]) => specific.sourceAbility.type === ABILITY_TYPE.effect)
+	.map(([effectObjectName, effectSpecific]): IEffectOptionGroup['options'][number] => {
+		const sourceAbilityId = effectSpecific.sourceAbility as IEffectAbilityId;
+		const effect = EFFECT_SPECIFICS[sourceAbilityId.id]!;
+
+		return {
+			abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
+			sourceAbilityId,
+			name: effect.label,
 		};
 	})
 	.sort((effectA, effectB) => effectA.name.localeCompare(effectB.name));
@@ -44,16 +57,23 @@ const isLoading = ref(false);
 const effectOptionGroups = computed((): IEffectOptionGroup[] => {
 	const groups: IEffectOptionGroup[] = [
 		{
-			type: 'champion',
+			type: ABILITY_TYPE.champion,
 			label: 'champions',
 			options: (championEffects.value ?? []).filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
 				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
 		{
-			type: 'item',
+			type: ABILITY_TYPE.item,
 			label: 'items',
 			options: itemEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
+				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
+			)),
+		},
+		{
+			type: ABILITY_TYPE.effect,
+			label: 'other',
+			options: otherEffects.filter(effect => !damageSource.value?.appliedEffects.value.some(appliedEffect =>
 				GameAbilityId.isSame(appliedEffect.abilityId, effect.abilityId),
 			)),
 		},
@@ -79,7 +99,6 @@ async function loadChampionEffects() {
 				abilityId: GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName),
 				sourceAbilityId,
 				name: `${champion.name} ${sourceAbilityId.abilityKey === 'passive' ? 'P' : sourceAbilityId.abilityKey.toUpperCase()} - ${precomputedSourceAbilityDesc.name}`,
-				precomputedSourceAbilityDesc,
 			};
 		})));
 
@@ -108,9 +127,11 @@ function effectComponent(effect: IDamageSourceEffect): Component | undefined {
 		return;
 	}
 
-	return effectSpecific.sourceAbility.type === 'item'
+	return effectSpecific.sourceAbility.type === ABILITY_TYPE.item
 		? ITEM_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
-		: CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
+		: effectSpecific.sourceAbility.type === ABILITY_TYPE.champion
+			? CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]?.effects
+			: EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]?.effects;
 }
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');

@@ -96,9 +96,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bandlepipes), 'fanfare', 'Fanfare'),
 	},
 	[ITEM_NAME_TO_ID.trailblazer]: {
-		extras: [
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.trailblazer), 'leadWay', 'Built up movement speed', 0, items[ITEM_NAME_TO_ID.trailblazer].dataValues.MaxMovementSpeed),
-		],
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.trailblazer), 'leadWay', 'Built up movement speed', 0, items[ITEM_NAME_TO_ID.trailblazer].dataValues.MaxMovementSpeed),
 	},
 	[ITEM_NAME_TO_ID.protoplasmHarness]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.protoplasmHarness), 'pHLifeline', 'Lifeline'),
@@ -128,9 +126,7 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.actualizer), 'empowered', 'Mana Made Real'),
 	},
 	[ITEM_NAME_TO_ID.hexoptics]: {
-		extras: [
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.hexoptics), 'magnification', 'Distance between target', 0, items[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange),
-		],
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.hexoptics), 'magnification', 'Distance between target', 0, items[ITEM_NAME_TO_ID.hexoptics].dataValues.MaxRange),
 	},
 	[ITEM_NAME_TO_ID.youmuu]: {
 		extras: [
@@ -143,6 +139,9 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 			await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'carve', 'Carve stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.blackCleaverCarve].maxValue),
 			await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.blackCleaver), 'fervor', 'Fervor'),
 		],
+	},
+	[ITEM_NAME_TO_ID.forceOfNature]: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.forceOfNature), 'steadfast', 'Steadfast'),
 	},
 };
 

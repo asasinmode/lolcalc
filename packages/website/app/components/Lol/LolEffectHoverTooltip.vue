@@ -40,7 +40,7 @@ watch(sourceAbilityId, async (abilityId) => {
 }, { immediate: true });
 
 const precomputedDescription = computed<IComputedAbilityDescription | IComputedItemDescription | undefined>(() => {
-	if (!sourceAbilityId.value) {
+	if (!sourceAbilityId.value || sourceAbilityId.value.type === ABILITY_TYPE.effect) {
 		return undefined;
 	}
 
@@ -91,7 +91,7 @@ defineExpose({ el });
 				v-show="globalKeyModifiers.shift"
 				:precomputed-description="precomputedDescription as IComputedAbilityDescription"
 			/>
-			<div v-else-if="sourceAbilityId" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
+			<div v-else-if="sourceAbilityId?.type === ABILITY_TYPE.item" v-show="globalKeyModifiers.shift" class="hover-tooltip champion-item">
 				<LolItemDescription
 					:precomputed-description="precomputedDescription as IComputedItemDescription"
 					source="Inventory"

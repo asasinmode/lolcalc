@@ -88,6 +88,7 @@ export const ITEM_NAME_TO_ID = {
 	actualizer: '2522',
 	hexoptics: '2523',
 	youmuu: '3142',
+	forceOfNature: '4401',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;
@@ -351,6 +352,7 @@ export const EFFECT_OBJECT_NAME = {
 	rylaisRimefrost: '3116Slow',
 	abyssalMaskUnmake: '8020VisualDebuff',
 	horizonFocusHypershot: '4628Marker',
+	grievousWounds: 'lolcalcGrievousWounds',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

@@ -1,4 +1,5 @@
-import type { IChampionAbilityId, IItemAbilityId } from './types';
+import type { IEffectObjectName } from './meta.ts';
+import type { IGameAbilityId } from './types';
 import { GameAbilityId } from './GameAbilityId.ts';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
 
@@ -129,13 +130,23 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	},
+	[EFFECT_OBJECT_NAME.grievousWounds]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWounds),
+		label: 'Grievous Wounds',
+		setupData(data): [gWounds: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [gWounds: number]) {
+			return data[0];
+		},
+	},
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;
 export type IHypotheticalEffectSpecifics = Record<string, IEffectSpecific>;
 
 export interface IEffectSpecific {
-	sourceAbility: IChampionAbilityId | IItemAbilityId;
+	sourceAbility: IGameAbilityId;
 	label: string;
 	/**
 	 * same as `IDamageSourceInternalDataProvider.setupData` for `DamageSource.appliedEffects[number].data`
@@ -152,3 +163,7 @@ export interface IEffectSpecific {
 }
 
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
+
+export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [ path: string, imgSize: number ]>> = {
+	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/maps/particles/tft/grievouswounds_icon01.png', 64],
+};

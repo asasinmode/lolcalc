@@ -280,10 +280,12 @@ onBeforeUnmount(() => {
 			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 		</p>
 	</footer>
-	<ChampSelect />
-	<ItemShop />
-	<RuneSelect />
-	<EffectsDialog />
+	<ClientOnly>
+		<ChampSelect />
+		<ItemShop />
+		<RuneSelect />
+		<EffectsDialog />
+	</ClientOnly>
 </template>
 
 <style>

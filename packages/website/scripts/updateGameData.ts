@@ -3,7 +3,7 @@ import type { IItem } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IChampionSpecific } from '../app/utils/champion';
 import type { IGameVariableType, IGameVariableValueParameters } from '../app/utils/gameVariable';
-import type { IItemCategory, IItemShopStatFilter } from '../app/utils/meta';
+import type { IEffectObjectName, IItemCategory, IItemShopStatFilter } from '../app/utils/meta';
 import type { IRuneSpecific } from '../app/utils/rune';
 import type { ITexture } from '../app/utils/types';
 import buffer from 'node:buffer';
@@ -928,11 +928,12 @@ try {
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch {}
 
-const CUSTOM_EFFECTS: IEffectData['data'] = {
+const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, IEffectData['data'][string] | string>> = {
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
 		dataKey: EFFECT_OBJECT_NAME.knightsVowSacrifice,
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
 	},
+	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
 };
 
 if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {
@@ -949,7 +950,25 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 		version: latestVersion,
 		data: Object.fromEntries(await Promise.all(EFFECT_SPECIFICS_OBJECT_ENTRIES.map(async ([effectObjectName, effectSpecific]) => {
 			if (CUSTOM_EFFECTS[effectObjectName]) {
-				return [effectObjectName, CUSTOM_EFFECTS[effectObjectName]];
+				if (typeof CUSTOM_EFFECTS[effectObjectName] === 'string') {
+					const description = getStringtableValue(CUSTOM_EFFECTS[effectObjectName], `custom effect ${effectObjectName} description`);
+
+					if (!description) {
+						throw new Error(`[updateGameData effectData] custom effect "${effectObjectName}" stringtable value "${CUSTOM_EFFECTS[effectObjectName]}" not found`);
+					}
+
+					return [effectObjectName, {
+						dataKey: effectObjectName,
+						description: description && extractEffectDescription(description),
+					}];
+				} else {
+					return [effectObjectName, CUSTOM_EFFECTS[effectObjectName]];
+				}
+			}
+
+			/* effects without sourceAbility, for now only grievous wounds, should be handled with `CUSTOM_EFFECTS` above */
+			if (!effectSpecific.sourceAbility) {
+				throw new Error('[updateGameData effectData] unexpected unhandled effect without source ability');
 			}
 
 			const { id, type } = effectSpecific.sourceAbility;
@@ -982,11 +1001,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 			}
 
 			if (description && extractMainText) {
-				const startIndex = description.indexOf('<mainText>');
-				const endIndex = description.indexOf('</mainText>');
-				if (~startIndex && ~endIndex) {
-					description = description.slice(startIndex + 10, endIndex);
-				}
+				description = extractEffectDescription(description);
 			}
 
 			description &&= description.trim();
@@ -1685,6 +1700,15 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			}
 		}
 	}
+}
+
+function extractEffectDescription(description: string) {
+	const startIndex = description.indexOf('<mainText>');
+	const endIndex = description.indexOf('</mainText>');
+	if (~startIndex && ~endIndex) {
+		return description.slice(startIndex + 10, endIndex);
+	}
+	return description;
 }
 
 function getUnknownTags(text: string): Set<string> {

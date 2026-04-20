@@ -388,6 +388,16 @@ export const ITEM_SPECIFICS = {
 			return [internalData.haunt, internalData.wStep];
 		},
 	},
+	[ITEM_NAME_TO_ID.forceOfNature]: {
+		internalDataProperties: ['steadfast'],
+		setupData(self) {
+			self.internalItemData.value.steadfast = clamp(0, self.internalItemData.value.steadfast ?? 0, 1);
+			return { steadfast: 0 };
+		},
+		imgActive(internalData: { steadfast: number }) {
+			return internalData.steadfast;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;
