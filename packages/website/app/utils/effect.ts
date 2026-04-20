@@ -165,5 +165,5 @@ export interface IEffectSpecific {
 export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) as [IEffectObjectName, IEffectSpecific][];
 
 export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [ path: string, imgSize: number ]>> = {
-	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/maps/particles/tft/grievouswounds_icon01.png', 64],
+	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
 };

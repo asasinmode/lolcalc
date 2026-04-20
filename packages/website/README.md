@@ -56,7 +56,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
       - [ ] volibear
       - [ ] zaahen
       - [ ] kai'sa
-      - [ ] ornn
+      - [ ] [ornn](https://raw.communitydragon.org/latest/game/assets/items/itemmodifiers/bordertreatmentornn.png)
       - [ ] senna
       - [ ] thresh
       - [ ] jax
@@ -118,7 +118,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] extended item hover tooltips, like swiftmarch showing adaptive force gained (\<rules\>)
   - [x] item hover tooltip sell value when inventory
 - [ ] effects
-  - [ ] dialog
+  - [x] dialog
   - [x] apply effects like black cleaver, abyssal mask, amumu passive
   - [ ] item effects options ui
   - [ ] champion passive effects options ui
@@ -239,3 +239,9 @@ https://nuxt.com/docs/4.x/guide/going-further/features#multiapp
 
 [useful assets](https://raw.communitydragon.org/latest/)
 https://hextechdocs.dev/resolving-variables-in-spell-textsa/
+
+### effect/spell icons
+
+https://raw.communitydragon.org/latest/game/assets/shared/spells/icons2d/
+https://raw.communitydragon.org/latest/game/assets/spells/icons2d/
+https://raw.communitydragon.org/16.8/game/data/spells/icons2d/

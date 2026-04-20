@@ -81,7 +81,7 @@ defineExpose({ el });
 				v-html="effectSpecific?.label ?? '<unknown>UNKNOWN</unknown>'"
 			/>
 			<div class="game-description" v-html="computedDescription" />
-			<footer v-show="!globalKeyModifiers.shift">
+			<footer v-if="precomputedDescription" v-show="!globalKeyModifiers.shift">
 				Hold <kbd>[Shift]</kbd> to show source
 			</footer>
 		</div>
