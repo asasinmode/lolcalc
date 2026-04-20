@@ -45,6 +45,10 @@
 			"description": "This unit is revealed.",
 			"dataKey": "Items/4628/Spells/4628Marker"
 		},
+		"8010VisualDebuff": {
+			"description": "This unit's Magic Resistance is decreased by a percentage.",
+			"dataKey": "Items/8010/Spells/8010VisualDebuff"
+		},
 		"3071BlackCleaverShred": {
 			"description": "This unit's Armor is reduced by a percentage.",
 			"dataKey": "Items/3071/Spells/3071BlackCleaverShred"

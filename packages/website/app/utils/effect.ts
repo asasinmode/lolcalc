@@ -1,7 +1,10 @@
 import type { IEffectObjectName } from './meta.ts';
 import type { IGameAbilityId } from './types';
+import itemsData from '../assets/item.json' with { type: 'json' };
 import { GameAbilityId } from './GameAbilityId.ts';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
+
+const { data: items } = itemsData;
 
 export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: {
@@ -111,6 +114,22 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(0, data?.[0] ?? 0, 1)];
 		},
 		isActive(data: [hypershot: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.bloodletterVileDecay]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodlettersCurse),
+		maxValue: items[ITEM_NAME_TO_ID.bloodlettersCurse].dataValues.MaxStacks,
+		label: 'Vile Decay stacks',
+		imgText(data: [vDecay: number]) {
+			return data[0];
+		},
+		setupData(data): [vDecay: number] {
+			return [
+				clamp(0, data?.[0] ?? 0, this.maxValue!),
+			];
+		},
+		isActive(data: [vDecay: number]) {
 			return data[0];
 		},
 	},

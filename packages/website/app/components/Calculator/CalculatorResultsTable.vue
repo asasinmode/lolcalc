@@ -1480,7 +1480,7 @@ defineExpose({
 			</tfoot>
 		</table>
 		<template #fallback>
-			<table id="results-table">
+			<table id="results-table" inert>
 				<caption>
 					comparison table
 				</caption>

@@ -398,6 +398,31 @@ export const ITEM_SPECIFICS = {
 			return internalData.steadfast;
 		},
 	},
+	[ITEM_NAME_TO_ID.deadMansPlate]: {
+		internalDataProperties: ['shipwrecker'],
+		setupData(self) {
+			self.internalItemData.value.shipwrecker = clamp(0, self.internalItemData.value.shipwrecker ?? 0, items[ITEM_NAME_TO_ID.deadMansPlate].dataValues.MaxMovementSpeed);
+			return { shipwrecker: 0 };
+		},
+		imgTextLabel: 'Shipwrecker built up movement speed',
+		imgText(self) {
+			return (self.internalItemData.value as { shipwrecker: number }).shipwrecker;
+		},
+	},
+	[ITEM_NAME_TO_ID.bloodlettersCurse]: {
+		internalDataProperties: ['vDecay'],
+		setupData(self) {
+			self.internalItemData.value.vDecay = Math.max(0, Math.min(
+				EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.bloodletterVileDecay].maxValue,
+				self.internalItemData.value.vDecay ?? 0,
+			));
+			return { vDecay: 0 };
+		},
+		imgTextLabel: 'Vile Decay stacks',
+		imgText(self) {
+			return self.internalItemData.value.vDecay;
+		},
+	},
 } satisfies IHypotheticalItemSpecifics;
 
 export type TItemSpecifics = typeof ITEM_SPECIFICS;

@@ -143,6 +143,12 @@ export const ITEM_COMPONENTS: Record<string, ISpecificComponents> = {
 	[ITEM_NAME_TO_ID.forceOfNature]: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.forceOfNature), 'steadfast', 'Steadfast'),
 	},
+	[ITEM_NAME_TO_ID.deadMansPlate]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.deadMansPlate), 'shipwrecker', 'Built up movement speed', 0, items[ITEM_NAME_TO_ID.deadMansPlate].dataValues.MaxMovementSpeed),
+	},
+	[ITEM_NAME_TO_ID.bloodlettersCurse]: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.bloodlettersCurse), 'vDecay', 'Vile Decay stacks on target', 0, EFFECT_SPECIFICS[EFFECT_OBJECT_NAME.bloodletterVileDecay].maxValue),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
