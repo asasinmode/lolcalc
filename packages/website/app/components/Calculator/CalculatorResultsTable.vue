@@ -1322,7 +1322,7 @@ defineExpose({
 									:height="section.imageSize"
 									aria-hidden="true"
 								>
-								<span>{{ section.image ? section.name : 'loading...' }}</span>
+								<span v-html="section.image ? section.name : 'loading...'" />
 								<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
 									<div v-if="section.abilityId.type === 'item'" popover="hint" class="hover-tooltip champion-item">
 										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
@@ -1865,6 +1865,12 @@ defineExpose({
 						> span,
 						> select {
 							--at-apply: 'text-lg font-500 whitespace-nowrap';
+						}
+
+						> span {
+							> unknown {
+								color: var(--unknown-clr);
+							}
 						}
 
 						> img {

@@ -2130,7 +2130,7 @@ defineExpose({ el });
 				}
 
 				[data-current-ability-resource] {
-					--fill-bg: #ff00ff;
+					--fill-bg: var(--unknown-clr);
 
 					&[data-partype='mana'],
 					&[data-partype='ferocity'] {

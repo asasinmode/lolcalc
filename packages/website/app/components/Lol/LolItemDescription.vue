@@ -287,13 +287,13 @@ defineExpose({ header });
 			font-style: normal;
 			text-decoration-line: underline;
 			text-decoration-thickness: 0.1em;
-			text-decoration-color: #ff00ff;
+			text-decoration-color: var(--unknown-clr);
 			text-decoration-skip-ink: auto;
 			text-decoration-style: dashed;
 		}
 
 		unknown {
-			color: #ff00ff;
+			color: var(--unknown-clr);
 			font-weight: 700;
 		}
 
