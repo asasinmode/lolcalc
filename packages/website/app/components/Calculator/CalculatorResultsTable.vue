@@ -1061,52 +1061,52 @@ defineExpose({
 </script>
 
 <template>
-	<table
-		id="results-table"
-		:inert="!showResults"
-		:aria-busy="resultColumns.some(column => column.source?.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id)"
-		:data-flip-results="flipResults || undefined"
-	>
-		<caption>
-			comparison table
-		</caption>
-		<thead>
-			<tr>
-				<th width="60px" scope="col">
-					<span>row controls</span>
-				</th>
-				<th id="results-table-header-damage-type" scope="col" width="240px">
-					<span>damage type</span>
-				</th>
-				<th
-					v-for="(column) in resultColumns"
-					:key="column.id"
-					scope="col"
-					width="120px"
-				>
-					<span>
-						{{ column.source && sourceOptions.find(option => option[0] === column.source!.id)?.[1] || 'undefined source' }}
-						vs
-						{{ column.target && targetOptions.find(option => option[0] === column.target!.id)?.[1] || 'undefined target' }}
-					</span>
-				</th>
-			</tr>
-			<tr>
-				<td width="300px" colspan="2">
-					<div>
-						<a href="#results-table-section-header-aa" class="skip-link">
-							skip column controls
-						</a>
-						<label for="results-table-values-for">
-							<input
-								id="results-table-values-for"
-								v-model="flipResults"
-								type="checkbox"
-								@update:model-value="recalculateAllColumns"
-							>
-							flip results (target vs source)
-						</label>
-						<ClientOnly>
+	<ClientOnly>
+		<table
+			id="results-table"
+			:inert="!showResults"
+			:aria-busy="resultColumns.some(column => column.source?.listedChampion.value && column.source.listedChampion.value.id !== column.source.champion.value?.id)"
+			:data-flip-results="flipResults || undefined"
+		>
+			<caption>
+				comparison table
+			</caption>
+			<thead>
+				<tr>
+					<th width="60px" scope="col">
+						<span>row controls</span>
+					</th>
+					<th id="results-table-header-damage-type" scope="col" width="240px">
+						<span>damage type</span>
+					</th>
+					<th
+						v-for="(column) in resultColumns"
+						:key="column.id"
+						scope="col"
+						width="120px"
+					>
+						<span>
+							{{ column.source && sourceOptions.find(option => option[0] === column.source!.id)?.[1] || 'undefined source' }}
+							vs
+							{{ column.target && targetOptions.find(option => option[0] === column.target!.id)?.[1] || 'undefined target' }}
+						</span>
+					</th>
+				</tr>
+				<tr>
+					<td width="300px" colspan="2">
+						<div>
+							<a href="#results-table-section-header-aa" class="skip-link">
+								skip column controls
+							</a>
+							<label for="results-table-values-for">
+								<input
+									id="results-table-values-for"
+									v-model="flipResults"
+									type="checkbox"
+									@update:model-value="recalculateAllColumns"
+								>
+								flip results (target vs source)
+							</label>
 							<button
 								class="pretend-ui-btn"
 								:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
@@ -1114,125 +1114,118 @@ defineExpose({
 							>
 								remove unused
 							</button>
-							<template #fallback>
-								<button class="prewtend-ui-btn">
-									remove unused
+							<span aria-hidden="true">damage type</span>
+						</div>
+					</td>
+					<td
+						v-for="(column, index) in resultColumns"
+						:key="column.id"
+						width="120px"
+						:data-drop-direction="columnDragDropIndex === index ? 'before' : columnDragDropIndex === index + 1 ? 'after' : undefined"
+						:class="{ highlighted: highlightedColumns[index] }"
+						:style="columnDamageSourcesColorStyles(column)"
+						@mouseenter="highlightColumnSources(column)"
+						@focusin="highlightColumnSources(column)"
+						@mouseleave="lowlightColumnSources(column)"
+						@focusout="lowlightColumnSources(column)"
+						@dragenter="onResultColumnDragenter($event, index)"
+						@dragover="onResultColumnDragover($event, index)"
+						@dragleave="onResultColumnDragleave"
+						@drop="onResultColumnDrop($event, index)"
+					>
+						<div>
+							<VSelect
+								:id="`results-table-column-source-${index}`"
+								:model-value="resultColumns[index]!.source?.id"
+								label="column's damage source"
+								:options="sourceOptions"
+								clearable
+								@update:model-value="setColumnChampion(column, damageSources, $event)"
+							>
+								<img
+									v-if="column.source?.listedChampion.value"
+									:src="championImage(column.source.listedChampion.value!.image, column.source.listedChampion.value!.id)"
+									loading="lazy"
+									:width="championImageSize(column.source.listedChampion.value!.id)"
+									:height="championImageSize(column.source.listedChampion.value!.id)"
+									style="--focus-brightness: 1.2"
+									aria-hidden="true"
+								>
+								<img
+									v-else
+									:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+									width="256"
+									height="256"
+									style="--focus-brightness: 1.5"
+									aria-hidden="true"
+								>
+							</VSelect>
+							<span>vs</span>
+							<VSelect
+								:id="`results-table-column-target-${index}`"
+								:model-value="resultColumns[index]!.target?.id"
+								label="column's damage target"
+								:options="targetOptions"
+								clearable
+								@update:model-value="setColumnChampion(column, damageTargets, $event)"
+							>
+								<img
+									v-if="column.target?.listedChampion.value"
+									:src="championImage(column.target.listedChampion.value!.image, column.target.listedChampion.value!.id)"
+									loading="lazy"
+									:width="championImageSize(column.target.listedChampion.value!.id)"
+									:height="championImageSize(column.target.listedChampion.value!.id)"
+									style="--focus-brightness: 1.2"
+									aria-hidden="true"
+								>
+								<img
+									v-else
+									:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+									width="256"
+									height="256"
+									style="--focus-brightness: 1.5"
+									aria-hidden="true"
+								>
+							</VSelect>
+							<button v-if="index === resultColumns.length - 1" class="pretend-ui-btn" @click="addResultsColumn()">
+								add column
+							</button>
+							<template v-else>
+								<button
+									title="move left, alt+click to duplicate to the left"
+									class="pretend-ui-btn"
+									:disabled="index === 0"
+									draggable="true"
+									@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
+									@dragstart="startResultColumnDrag(index, $event)"
+									@dragend="endResultColumnDrag"
+								>
+									<span>move left, alt+click to duplicate to the left</span>
+									<Icon class="i-ph:arrow-left" />
+								</button>
+								<button
+									title="remove"
+									class="pretend-ui-btn remove"
+									@click="startRemovingColumn($event, index)"
+								>
+									<span>remove</span>
+									<Icon class="i-ph:trash" />
+								</button>
+								<button
+									title="move right, alt+click to duplicate to the right"
+									class="pretend-ui-btn"
+									draggable="true"
+									@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
+									@dragstart="startResultColumnDrag(index, $event)"
+									@dragend="endResultColumnDrag"
+								>
+									<span>move right, alt+click to duplicate to the right</span>
+									<Icon class="i-ph:arrow-right" />
+								</button>
+								<button style="display: none">
+									restore
 								</button>
 							</template>
-						</ClientOnly>
-						<span aria-hidden="true">damage type</span>
-					</div>
-				</td>
-				<td
-					v-for="(column, index) in resultColumns"
-					:key="column.id"
-					width="120px"
-					:data-drop-direction="columnDragDropIndex === index ? 'before' : columnDragDropIndex === index + 1 ? 'after' : undefined"
-					:class="{ highlighted: highlightedColumns[index] }"
-					:style="columnDamageSourcesColorStyles(column)"
-					@mouseenter="highlightColumnSources(column)"
-					@focusin="highlightColumnSources(column)"
-					@mouseleave="lowlightColumnSources(column)"
-					@focusout="lowlightColumnSources(column)"
-					@dragenter="onResultColumnDragenter($event, index)"
-					@dragover="onResultColumnDragover($event, index)"
-					@dragleave="onResultColumnDragleave"
-					@drop="onResultColumnDrop($event, index)"
-				>
-					<div>
-						<VSelect
-							:id="`results-table-column-source-${index}`"
-							:model-value="resultColumns[index]!.source?.id"
-							label="column's damage source"
-							:options="sourceOptions"
-							clearable
-							@update:model-value="setColumnChampion(column, damageSources, $event)"
-						>
-							<img
-								v-if="column.source?.listedChampion.value"
-								:src="championImage(column.source.listedChampion.value!.image, column.source.listedChampion.value!.id)"
-								loading="lazy"
-								:width="championImageSize(column.source.listedChampion.value!.id)"
-								:height="championImageSize(column.source.listedChampion.value!.id)"
-								style="--focus-brightness: 1.2"
-								aria-hidden="true"
-							>
-							<img
-								v-else
-								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-								width="256"
-								height="256"
-								style="--focus-brightness: 1.5"
-								aria-hidden="true"
-							>
-						</VSelect>
-						<span>vs</span>
-						<VSelect
-							:id="`results-table-column-target-${index}`"
-							:model-value="resultColumns[index]!.target?.id"
-							label="column's damage target"
-							:options="targetOptions"
-							clearable
-							@update:model-value="setColumnChampion(column, damageTargets, $event)"
-						>
-							<img
-								v-if="column.target?.listedChampion.value"
-								:src="championImage(column.target.listedChampion.value!.image, column.target.listedChampion.value!.id)"
-								loading="lazy"
-								:width="championImageSize(column.target.listedChampion.value!.id)"
-								:height="championImageSize(column.target.listedChampion.value!.id)"
-								style="--focus-brightness: 1.2"
-								aria-hidden="true"
-							>
-							<img
-								v-else
-								:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-								width="256"
-								height="256"
-								style="--focus-brightness: 1.5"
-								aria-hidden="true"
-							>
-						</VSelect>
-						<button v-if="index === resultColumns.length - 1" class="pretend-ui-btn" @click="addResultsColumn()">
-							add column
-						</button>
-						<template v-else>
-							<button
-								title="move left, alt+click to duplicate to the left"
-								class="pretend-ui-btn"
-								:disabled="index === 0"
-								draggable="true"
-								@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
-								@dragstart="startResultColumnDrag(index, $event)"
-								@dragend="endResultColumnDrag"
-							>
-								<span>move left, alt+click to duplicate to the left</span>
-								<Icon class="i-ph:arrow-left" />
-							</button>
-							<button
-								title="remove"
-								class="pretend-ui-btn remove"
-								@click="startRemovingColumn($event, index)"
-							>
-								<span>remove</span>
-								<Icon class="i-ph:trash" />
-							</button>
-							<button
-								title="move right, alt+click to duplicate to the right"
-								class="pretend-ui-btn"
-								draggable="true"
-								@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
-								@dragstart="startResultColumnDrag(index, $event)"
-								@dragend="endResultColumnDrag"
-							>
-								<span>move right, alt+click to duplicate to the right</span>
-								<Icon class="i-ph:arrow-right" />
-							</button>
-							<button style="display: none">
-								restore
-							</button>
-						</template>
-						<ClientOnly>
 							<button
 								class="pretend-ui-btn"
 								:disabled="columnAddableOptions[index]?.championOptionIndex === undefined"
@@ -1247,17 +1240,8 @@ defineExpose({
 							>
 								add items
 							</button>
-							<template #fallback>
-								<button class="pretend-ui-btn">
-									add abilities
-								</button>
-								<button class="pretend-ui-btn">
-									add items
-								</button>
-							</template>
-						</ClientOnly>
-					</div>
-				</td>
+						</div>
+					</td>
 				<!-- TODO figure out where to put these -->
 				<!-- <a href="#results-header" class="skip-link"> -->
 				<!-- 	skip back to results start -->
@@ -1265,22 +1249,21 @@ defineExpose({
 				<!-- <a id="results-table-skip-rows" href="#results-table-row-new-section-ability" class="skip-link"> -->
 				<!-- 	skip result rows -->
 				<!-- </a> -->
-			</tr>
-		</thead>
-		<template v-for="(section, index) in resultSections" :key="section.id">
-			<tbody
-				:data-drop-direction="sectionDragDropIndex === index
-					? 'before'
-					: (!expandedSections.includes(section.id) && sectionDragDropIndex === index + 1) ? 'after' : undefined"
-				:aria-busy="!section.image"
-				@dragenter="onResultSectionDragenter($event, index, true)"
-				@dragover="onResultSectionDragover($event, index, true)"
-				@dragleave="onResultSectionDragleave"
-				@drop="onResultSectionDrop($event, index, true)"
-			>
-				<tr>
-					<td :headers="`results-table-section-header-${section.id}`">
-						<ClientOnly>
+				</tr>
+			</thead>
+			<template v-for="(section, index) in resultSections" :key="section.id">
+				<tbody
+					:data-drop-direction="sectionDragDropIndex === index
+						? 'before'
+						: (!expandedSections.includes(section.id) && sectionDragDropIndex === index + 1) ? 'after' : undefined"
+					:aria-busy="!section.image"
+					@dragenter="onResultSectionDragenter($event, index, true)"
+					@dragover="onResultSectionDragover($event, index, true)"
+					@dragleave="onResultSectionDragleave"
+					@drop="onResultSectionDrop($event, index, true)"
+				>
+					<tr>
+						<td :headers="`results-table-section-header-${section.id}`">
 							<button
 								title="move up"
 								class="pretend-ui-btn"
@@ -1326,155 +1309,139 @@ defineExpose({
 								</span>
 								<Icon class="i-ph:caret-down" />
 							</button>
-							<template #fallback>
-								<button class="pretend-ui-btn">
-									move up
-								</button>
-								<button class="pretend-ui-btn">
-									move down
-								</button>
-								<button class="pretend-ui-btn">
-									move remove
-								</button>
-								<button class="pretend-ui-btn">
-									move expand
-								</button>
-							</template>
-						</ClientOnly>
-					</td>
-					<th
-						:id="`results-table-section-header-${section.id}`"
-						scope="colgroup"
-						:colspan="1 + resultColumns.length"
+						</td>
+						<th
+							:id="`results-table-section-header-${section.id}`"
+							scope="colgroup"
+							:colspan="1 + resultColumns.length"
+						>
+							<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event, section.abilityId.type)">
+								<img
+									:src="section.image"
+									:width="section.imageSize"
+									:height="section.imageSize"
+									aria-hidden="true"
+								>
+								<span>{{ section.image ? section.name : 'loading...' }}</span>
+								<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
+									<div v-if="section.abilityId.type === 'item'" popover="hint" class="hover-tooltip champion-item">
+										<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
+									</div>
+									<LolChampionAbilityHoverTooltip
+										v-else-if="section.abilityId.type === 'champion'"
+										v-bind="section.hoverTooltipData as any"
+									/>
+								</template>
+								<template v-if="section.selectOptions?.length">
+									<label :for="`results-table-header-select-${section.id}`">
+										{{ section.selectLabel }}
+									</label>
+									<select
+										:id="`results-table-header-select-${section.id}`"
+										v-model="section.selectValue"
+										@update:model-value="addComputedSection(section.id)"
+									>
+										<option v-for="[value, optionText] in section.selectOptions" :key="value" :value>
+											{{ optionText }}
+										</option>
+									</select>
+								</template>
+							</div>
+						</th>
+					</tr>
+				</tbody>
+				<tbody
+					:id="`results-table-section-body-${section.id}`"
+					:aria-labelledby="`results-table-section-header-${section.id}`"
+					:hidden="!expandedSections.includes(section.id)"
+					:data-drop-direction="sectionDragDropIndex === index + 1 ? 'after' : undefined"
+					:aria-busy="!section.image"
+					@dragenter="onResultSectionDragenter($event, index, false)"
+					@dragover="onResultSectionDragover($event, index, false)"
+					@dragleave="onResultSectionDragleave"
+					@drop="onResultSectionDrop($event, index, false)"
+				>
+					<tr v-if="!implementedDamageSectionsMap[index]" class="info-row">
+						<td :colspan="2 + resultColumns.length">
+							<ComingSoonCover feature="champion abilities" class="text-neutral-400" />
+						</td>
+					</tr>
+					<tr v-else-if="!section.image" class="info-row">
+						<td :colspan="2 + resultColumns.length">
+							loading...
+						</td>
+					</tr>
+					<tr v-else-if="section.isCustomTotal ? computedCustomTotalRows.length < 2 : !section.rows.length" class="info-row">
+						<td :colspan="2 + resultColumns.length">
+							{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
+						</td>
+					</tr>
+					<tr
+						v-for="row in section.isCustomTotal
+							? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : [])
+							: implementedDamageSectionsMap[index] ? section.rows : []"
+						:key="`${section.id}_${row.id}`"
+						:class="{ unknown: row.isUnknown }"
 					>
-						<div @mouseenter="implementedDamageSectionsMap[index] && section.hoverTooltipData && showSectionHoverTooltip($event, section.abilityId.type)">
+						<td v-if="!section.isCustomTotal && section.id !== STATS_SECTION_ID">
+							<label>
+								<span>include in custom total</span>
+								<input
+									v-model="customTotalRows"
+									type="checkbox"
+									:value="`${section.id}_${row.id}`"
+									@update:model-value="onCustomTotalRowsChange"
+								>
+							</label>
+						</td>
+						<th
+							scope="row"
+							:colspan="section.isCustomTotal || section.id === STATS_SECTION_ID ? 2 : undefined"
+							headers="results-table-header-damage-type"
+						>
 							<img
-								:src="section.image"
-								:width="section.imageSize"
-								:height="section.imageSize"
+								v-if="row.image"
+								:src="row.image.src"
+								:width="row.image.width"
+								:height="row.image.height"
 								aria-hidden="true"
 							>
-							<span>{{ section.image ? section.name : 'loading...' }}</span>
-							<template v-if="implementedDamageSectionsMap[index] && section.hoverTooltipData">
-								<div v-if="section.abilityId.type === 'item'" popover="hint" class="hover-tooltip champion-item">
-									<LolItemDescription v-bind="section.hoverTooltipData as any" hover-tooltip source="Inventory" />
-								</div>
-								<LolChampionAbilityHoverTooltip
-									v-else-if="section.abilityId.type === 'champion'"
-									v-bind="section.hoverTooltipData as any"
-								/>
-							</template>
-							<template v-if="section.selectOptions?.length">
-								<label :for="`results-table-header-select-${section.id}`">
-									{{ section.selectLabel }}
-								</label>
-								<select
-									:id="`results-table-header-select-${section.id}`"
-									v-model="section.selectValue"
-									@update:model-value="addComputedSection(section.id)"
-								>
-									<option v-for="[value, optionText] in section.selectOptions" :key="value" :value>
-										{{ optionText }}
-									</option>
-								</select>
-							</template>
-						</div>
-					</th>
-				</tr>
-			</tbody>
-			<tbody
-				:id="`results-table-section-body-${section.id}`"
-				:aria-labelledby="`results-table-section-header-${section.id}`"
-				:hidden="!expandedSections.includes(section.id)"
-				:data-drop-direction="sectionDragDropIndex === index + 1 ? 'after' : undefined"
-				:aria-busy="!section.image"
-				@dragenter="onResultSectionDragenter($event, index, false)"
-				@dragover="onResultSectionDragover($event, index, false)"
-				@dragleave="onResultSectionDragleave"
-				@drop="onResultSectionDrop($event, index, false)"
-			>
-				<tr v-if="!implementedDamageSectionsMap[index]" class="info-row">
-					<td :colspan="2 + resultColumns.length">
-						<ComingSoonCover feature="champion abilities" class="text-neutral-400" />
-					</td>
-				</tr>
-				<tr v-else-if="!section.image" class="info-row">
-					<td :colspan="2 + resultColumns.length">
-						loading...
-					</td>
-				</tr>
-				<tr v-else-if="section.isCustomTotal ? computedCustomTotalRows.length < 2 : !section.rows.length" class="info-row">
-					<td :colspan="2 + resultColumns.length">
-						{{ section.isCustomTotal ? 'check boxes next to variable rows to sum them' : 'no variables detected' }}
-					</td>
-				</tr>
-				<tr
-					v-for="row in section.isCustomTotal
-						? (computedCustomTotalRows.length > 1 ? computedCustomTotalRows : [])
-						: implementedDamageSectionsMap[index] ? section.rows : []"
-					:key="`${section.id}_${row.id}`"
-					:class="{ unknown: row.isUnknown }"
-				>
-					<td v-if="!section.isCustomTotal && section.id !== STATS_SECTION_ID">
-						<label>
-							<span>include in custom total</span>
-							<input
-								v-model="customTotalRows"
-								type="checkbox"
-								:value="`${section.id}_${row.id}`"
-								@update:model-value="onCustomTotalRowsChange"
-							>
-						</label>
-					</td>
-					<th
-						scope="row"
-						:colspan="section.isCustomTotal || section.id === STATS_SECTION_ID ? 2 : undefined"
-						headers="results-table-header-damage-type"
-					>
-						<img
-							v-if="row.image"
-							:src="row.image.src"
-							:width="row.image.width"
-							:height="row.image.height"
-							aria-hidden="true"
+							<span v-if="row.isUnknown">unknown</span>
+							{{ row.name }}
+						</th>
+						<td
+							v-for="(cell, cellIndex) in sectionRowCells(section, row)"
+							:key="cell.key"
+							:class="[{
+								unknown: cell.computedColumn.isUnknown,
+								irrelevant: cell.computedColumn.isIrrelevant,
+								highlighted: highlightedColumns[cellIndex],
+							}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
+							:style="columnDamageSourceColors[cellIndex]"
+							:data-drop-direction="columnDragDropIndex === cellIndex ? 'before' : columnDragDropIndex === cellIndex + 1 ? 'after' : undefined"
+							@mouseenter="highlightColumnIdSources(cell.computedColumn.columnId)"
+							@mouseleave="lowlightColumnIdSources(cell.computedColumn.columnId)"
+							@dragenter="onResultColumnDragenter($event, cellIndex)"
+							@dragover="onResultColumnDragover($event, cellIndex)"
+							@dragleave="onResultColumnDragleave"
+							@drop="onResultColumnDrop($event, cellIndex)"
 						>
-						<span v-if="row.isUnknown">unknown</span>
-						{{ row.name }}
-					</th>
-					<td
-						v-for="(cell, cellIndex) in sectionRowCells(section, row)"
-						:key="cell.key"
-						:class="[{
-							unknown: cell.computedColumn.isUnknown,
-							irrelevant: cell.computedColumn.isIrrelevant,
-							highlighted: highlightedColumns[cellIndex],
-						}, highlightedColumnId && cell.computedColumn.comparisonMap[highlightedColumnId]]"
-						:style="columnDamageSourceColors[cellIndex]"
-						:data-drop-direction="columnDragDropIndex === cellIndex ? 'before' : columnDragDropIndex === cellIndex + 1 ? 'after' : undefined"
-						@mouseenter="highlightColumnIdSources(cell.computedColumn.columnId)"
-						@mouseleave="lowlightColumnIdSources(cell.computedColumn.columnId)"
-						@dragenter="onResultColumnDragenter($event, cellIndex)"
-						@dragover="onResultColumnDragover($event, cellIndex)"
-						@dragleave="onResultColumnDragleave"
-						@drop="onResultColumnDrop($event, cellIndex)"
-					>
-						<span>{{ cell.computedColumn.value }}</span>
-					</td>
-				</tr>
-			</tbody>
-		</template>
-		<tfoot
-			:data-drop-direction="sectionDragDropIndex === resultSections.length ? 'before' : undefined"
-			@dragenter="onResultSectionDragenter($event, resultSections.length)"
-			@dragover="onResultSectionDragover($event, resultSections.length)"
-			@dragleave="onResultSectionDragleave"
-			@drop="onResultSectionDrop($event, resultSections.length)"
-		>
-			<tr>
-				<td :colspan="2 + resultColumns.length">
-					<form @submit.prevent="submitResultsSection">
-						<label for="results-table-row-new-section-ability">add section</label>
-						<ClientOnly>
+							<span>{{ cell.computedColumn.value }}</span>
+						</td>
+					</tr>
+				</tbody>
+			</template>
+			<tfoot
+				:data-drop-direction="sectionDragDropIndex === resultSections.length ? 'before' : undefined"
+				@dragenter="onResultSectionDragenter($event, resultSections.length)"
+				@dragover="onResultSectionDragover($event, resultSections.length)"
+				@dragleave="onResultSectionDragleave"
+				@drop="onResultSectionDrop($event, resultSections.length)"
+			>
+				<tr>
+					<td :colspan="2 + resultColumns.length">
+						<form @submit.prevent="submitResultsSection">
+							<label for="results-table-row-new-section-ability">add section</label>
 							<select
 								id="results-table-row-new-section-ability"
 								name="sectionOptionIndex"
@@ -1504,7 +1471,125 @@ defineExpose({
 							>
 								add
 							</button>
-							<template #fallback>
+						</form>
+						<a href="#results-table-skip-rows" class="skip-link">
+							skip back to column headers
+						</a>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+		<template #fallback>
+			<table id="results-table">
+				<caption>
+					comparison table
+				</caption>
+				<thead>
+					<tr>
+						<th width="60px" scope="col">
+							<span>row controls</span>
+						</th>
+						<th id="results-table-header-damage-type" scope="col" width="240px">
+							<span>damage type</span>
+						</th>
+						<th
+							scope="col"
+							width="120px"
+						>
+							<span>
+								undefined source
+								vs
+								undefined target
+							</span>
+						</th>
+					</tr>
+					<tr>
+						<td width="300px" colspan="2">
+							<div>
+								<label for="results-table-values-for">
+									<input
+										id="results-table-values-for"
+										type="checkbox"
+									>
+									flip results (target vs source)
+								</label>
+								<button class="pretend-ui-btn">
+									remove unused
+								</button>
+								<span aria-hidden="true">damage type</span>
+							</div>
+						</td>
+						<td width="120px">
+							<div>
+								<VSelect
+									id="results-table-column-source-0"
+									label="column's damage source"
+									:options="[]"
+									clearable
+								>
+									<img
+										:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+										width="256"
+										height="256"
+										aria-hidden="true"
+									>
+								</VSelect>
+								<span>vs</span>
+								<VSelect
+									id="results-table-column-target-0"
+									label="column's damage target"
+									:options="[]"
+									clearable
+								>
+									<img
+										:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
+										width="256"
+										height="256"
+										aria-hidden="true"
+									>
+								</VSelect>
+								<button class="pretend-ui-btn">
+									add column
+								</button>
+							</div>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<button class="pretend-ui-btn">
+								move up
+							</button>
+							<button class="pretend-ui-btn">
+								move down
+							</button>
+							<button class="pretend-ui-btn">
+								move remove
+							</button>
+							<button class="pretend-ui-btn">
+								move expand
+							</button>
+						</td>
+						<th scope="colgroup" colspan="2">
+							<div>
+								<img
+									src=""
+									width=""
+									height=""
+									aria-hidden="true"
+								>
+								<span>loading...</span>
+							</div>
+						</th>
+					</tr>
+				</tbody>
+				<tbody hidden />
+				<tfoot>
+					<tr>
+						<td colspan="3">
+							<form>
+								<label for="results-table-row-new-section-ability">add section</label>
 								<select
 									id="results-table-row-new-section-ability"
 									name="sectionOptionIndex"
@@ -1517,16 +1602,13 @@ defineExpose({
 								<button class="pretend-ui-btn" type="submit">
 									add
 								</button>
-							</template>
-						</ClientOnly>
-					</form>
-					<a href="#results-table-skip-rows" class="skip-link">
-						skip back to column headers
-					</a>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
+							</form>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</template>
+	</ClientOnly>
 </template>
 
 <style>

@@ -147,11 +147,7 @@ const {
 	isStateTooLargeForQuery,
 } = useCalculatorState(damageSources, damageTargets, resultsTable as ShallowRef<InstanceType<typeof CalculatorResultsTable>>);
 
-if (import.meta.dev) {
-	onMounted(restoreState);
-} else {
-	restoreState();
-}
+onMounted(restoreState);
 
 const showResults = ref(damageSources.value.some(source => source.anythingFilled.value));
 if (!showResults.value) {
@@ -285,12 +281,12 @@ onBeforeUnmount(() => {
 			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 		</p>
 	</footer>
-	<ClientOnly>
+	<!-- <ClientOnly> -->
 		<ChampSelect />
 		<ItemShop />
 		<RuneSelect />
 		<EffectsDialog />
-	</ClientOnly>
+	<!-- </ClientOnly> -->
 </template>
 
 <style>
