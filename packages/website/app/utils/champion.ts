@@ -11,10 +11,24 @@ export type IApheliosWeapon = 'calibrum' | 'severum' | 'gravitum' | 'infernum' |
  * for `POSSIBLE_DYNAMIC_VALUES` see `./types.d.ts`
  */
 export const CHAMPION_SPECIFICS = {
+	Ambessa: {
+		setupData(self): { hasPassiveStack: number } {
+			return {
+				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+			};
+		},
+	},
 	Amumu: {
 		setupData(self): { applyPassive: number } {
 			return {
 				applyPassive: clamp(0, self.internalData.value.applyPassive ?? 0, 1),
+			};
+		},
+	},
+	Anivia: {
+		setupData(self): { isEgg: number } {
+			return {
+				isEgg: clamp(0, self.internalData.value.isEgg ?? 0, 1),
 			};
 		},
 	},
@@ -51,6 +65,28 @@ export const CHAMPION_SPECIFICS = {
 			POSSIBLE_DYNAMIC_VALUES: {
 				f1: [1, 2, 3],
 			},
+		},
+	},
+	AurelionSol: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Bard: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Belveth: {
+		setupData(self): { passiveStacks: number; hasPassiveStack: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+				hasPassiveStack: clamp(0, self.internalData.value.passiveStacks ?? 0, 1),
+			};
 		},
 	},
 	Kayn: {

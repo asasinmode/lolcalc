@@ -1,4 +1,4 @@
-import type { IChampionAbilityId, IEffectAbilityId, IExtraComponentEmits, IExtraComponentProps, IGameAbilityId, IProviderGroupImageText } from '~/utils/types';
+import type { IChampionAbilityId, IEffectAbilityId, IExtraComponentEmits, IExtraComponentProps, IGameAbilityId } from '~/utils/types';
 import { VExtrasBoolean, VExtrasNumber } from '#components';
 
 // eslint-disable-next-line ts/consistent-type-definitions
@@ -77,6 +77,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	labelAppendOnTarget = false,
+	labelPrefix?: string,
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
@@ -88,6 +89,7 @@ export async function booleanExtra<T extends IGameAbilityId>(
 			imgSrc,
 			imgSize,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
+			labelPrefix,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
 			},

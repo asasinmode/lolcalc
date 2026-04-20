@@ -207,14 +207,17 @@ function startItemDrag(event: DragEvent, index: number) {
 	emit('itemDragstart', event, index);
 }
 
-const championExtra = computed<[Component, IGameAbilityId] | undefined>((): [Component, IGameAbilityId] | undefined => {
+const championExtra = computed<[Component, IGameAbilityId][]>((): [Component, IGameAbilityId][] => {
 	if (props.value.champion.value) {
 		const component = CHAMPION_COMPONENTS[props.value.champion.value.id as IChampionId]?.extras;
-		if (component) {
-			return [markRaw(component), GameAbilityId.build(ABILITY_TYPE.champion, props.value.champion.value.id, 'passive', props.value.abilityVariantsIndexes.value.passive)];
-		}
+
+		return component
+			? (Array.isArray(component) ? component : [component]).map(c =>
+					// TODO handle other abilities components, dont hardcode everything to passive
+					[markRaw(c), GameAbilityId.build(ABILITY_TYPE.champion, props.value.champion.value!.id, 'passive', props.value.abilityVariantsIndexes.value.passive)])
+			: [];
 	}
-	return undefined;
+	return [];
 });
 
 type IItemComponent = [is: Component, itemId: string, itemIndex: number];
@@ -1364,11 +1367,12 @@ defineExpose({ el });
 			</section>
 			<section data-extras="">
 				<component
-					:is="championExtra[0]"
-					v-if="championExtra"
+					:is="extra[0]"
+					v-for="(extra, extraIndex) in championExtra"
+					:key="`${extra[1].id}-${extraIndex}`"
 					:id-prefix
 					:damage-source="value"
-					:ability-id="championExtra[1]"
+					:ability-id="extra[1]"
 					@img-mouseenter="(...args: IShowTooltipEventArgs) => showGameAbilityTooltip('extras', ...args)"
 				/>
 				<component
