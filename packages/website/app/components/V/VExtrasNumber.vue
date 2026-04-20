@@ -3,7 +3,6 @@ withDefaults(defineProps<{
 	idPrefix: string;
 	imgSrc: string;
 	imgSize: string | number;
-	imgText?: string | number;
 	label: string;
 	usedNumberInput: ReturnType<typeof useNumberInput>;
 	min?: number;

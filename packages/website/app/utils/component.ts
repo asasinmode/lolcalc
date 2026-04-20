@@ -45,8 +45,6 @@ export async function numberExtra<T extends IGameAbilityId>(
 	step?: number,
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
-		/* for now the champion's specific is irrelevant because data is stored on the `DamageSource.internalData` and no imgText is shown for those values */
-		const specific = resolveAbilitySpecific(abilityId, abilityId.type === ABILITY_TYPE.champion ? undefined : 'numberExtra');
 		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
 		const [stringifiedAbilityId, modelValue, updateValue, appliedEffect] = extraAppliedEffect(abilityId, property, props.damageSource);
 
@@ -59,7 +57,6 @@ export async function numberExtra<T extends IGameAbilityId>(
 			min,
 			max,
 			step,
-			'imgText': (specific as IProviderGroupImageText)?.imgText?.(props.damageSource, property),
 			'usedNumberInput': useNumberInput(
 				abilityId.type === ABILITY_TYPE.effect
 					? [appliedEffect!.data, property as number]

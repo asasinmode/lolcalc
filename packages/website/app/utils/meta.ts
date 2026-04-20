@@ -91,6 +91,7 @@ export const ITEM_NAME_TO_ID = {
 	forceOfNature: '4401',
 	deadMansPlate: '3742',
 	bloodlettersCurse: '8010',
+	experimentalHexplate: '3073',
 } as const;
 
 export type TItemNameToId = typeof ITEM_NAME_TO_ID;

@@ -85,43 +85,6 @@ export const ITEM_SPECIFICS = {
 			return bBlaze && `${Math.round(bBlaze * items[ITEM_NAME_TO_ID.blackfireTorch].dataValues.APPerStack * 100)}%`;
 		},
 	},
-	[ITEM_NAME_TO_ID.heartsteel]: {
-		internalDataProperties: ['cConsumption'],
-		setupData(self) {
-			self.internalItemData.value.cConsumption = Math.max(0, self.internalItemData.value.cConsumption ?? 0);
-			return { cConsumption: 0 };
-		},
-		imgTextLabel: 'Colosal Consumption health increase',
-		imgText(self) {
-			return (self.internalItemData.value as { cConsumption: number }).cConsumption;
-		},
-	},
-	[ITEM_NAME_TO_ID.guinsoo]: {
-		internalDataProperties: ['seething'],
-		setupData(self) {
-			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, items[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks);
-			return { seething: 0 };
-		},
-		imgTextLabel: 'Seething Strikes stacks',
-		imgText(self) {
-			return (self.internalItemData.value as { seething: number }).seething;
-		},
-	},
-	[ITEM_NAME_TO_ID.terminus]: {
-		internalDataProperties: ['jxtpL', 'jxtpD'],
-		setupData(self) {
-			const { PenPerHit, PenMax } = items[ITEM_NAME_TO_ID.terminus].dataValues;
-			const maxStacks = Math.round(PenPerHit / PenMax);
-			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, maxStacks);
-			self.internalItemData.value.jxtpD = clamp(0, self.internalItemData.value.jxtpD ?? 0, maxStacks);
-			return { jxtpL: 0, jxtpD: 0 };
-		},
-		imgTextLabel: 'Juxtaposition stacks (light | dark)',
-		imgText(self, property?: 'jxtpL' | 'jxtpD') {
-			const data = self.internalItemData.value as { jxtpL: number; jxtpD: number };
-			return property ? data[property] : (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
-		},
-	},
 	[ITEM_NAME_TO_ID.liandry]: {
 		internalDataProperties: ['madness'],
 		setupData(self) {
@@ -421,6 +384,53 @@ export const ITEM_SPECIFICS = {
 		imgTextLabel: 'Vile Decay stacks',
 		imgText(self) {
 			return self.internalItemData.value.vDecay;
+		},
+	},
+	[ITEM_NAME_TO_ID.experimentalHexplate]: {
+		internalDataProperties: ['overdrive'],
+		setupData(self) {
+			self.internalItemData.value.overdrive = clamp(0, self.internalItemData.value.overdrive ?? 0, 1);
+			return { overdrive: 0 };
+		},
+		imgActive(internalData: { overdrive: number }) {
+			return internalData.overdrive;
+		},
+	},
+	[ITEM_NAME_TO_ID.heartsteel]: {
+		internalDataProperties: ['cConsumption'],
+		setupData(self) {
+			self.internalItemData.value.cConsumption = Math.max(0, self.internalItemData.value.cConsumption ?? 0);
+			return { cConsumption: 0 };
+		},
+		imgTextLabel: 'Colosal Consumption health increase',
+		imgText(self) {
+			return (self.internalItemData.value as { cConsumption: number }).cConsumption;
+		},
+	},
+	[ITEM_NAME_TO_ID.guinsoo]: {
+		internalDataProperties: ['seething'],
+		setupData(self) {
+			self.internalItemData.value.seething = clamp(0, self.internalItemData.value.seething ?? 0, items[ITEM_NAME_TO_ID.guinsoo].dataValues.MaxStacks);
+			return { seething: 0 };
+		},
+		imgTextLabel: 'Seething Strikes stacks',
+		imgText(self) {
+			return (self.internalItemData.value as { seething: number }).seething;
+		},
+	},
+	[ITEM_NAME_TO_ID.terminus]: {
+		internalDataProperties: ['jxtpL', 'jxtpD'],
+		setupData(self) {
+			const { PenPerHit, PenMax } = items[ITEM_NAME_TO_ID.terminus].dataValues;
+			const maxStacks = Math.round(PenPerHit / PenMax);
+			self.internalItemData.value.jxtpL = clamp(0, self.internalItemData.value.jxtpL ?? 0, maxStacks);
+			self.internalItemData.value.jxtpD = clamp(0, self.internalItemData.value.jxtpD ?? 0, maxStacks);
+			return { jxtpL: 0, jxtpD: 0 };
+		},
+		imgTextLabel: 'Juxtaposition stacks (light | dark)',
+		imgText(self, property?: 'jxtpL' | 'jxtpD') {
+			const data = self.internalItemData.value as { jxtpL: number; jxtpD: number };
+			return property ? data[property] : (data.jxtpD || data.jxtpL) && `${data.jxtpL} | ${data.jxtpD}`;
 		},
 	},
 } satisfies IHypotheticalItemSpecifics;
