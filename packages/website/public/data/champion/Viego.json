@@ -178,7 +178,7 @@
 					"name": "Spectral Maw",
 					"objectName": "ViegoW",
 					"image": "assets/characters/viego/hud/icons2d/viego_w.png",
-					"tooltip": "<charge>Begin Charging:</charge> Viego begins gathering Mist, <status>Slowing</status> himself by @SelfSlowPercent*100@%.<br><br><release>Release:</release> Viego dashes forward and hurls the gathered Mist. Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stuns</status> the first enemy hit for @Stunduration@ to @MaxStunTT@ seconds based on charge time.<br>",
+					"tooltip": "<charge>Begin Charging:</charge> Viego begins gathering Mist, <status>Slowing</status> himself by @SelfSlowPercent*100@%.<br><br><release>Release:</release> Viego dashes forward and hurls the gathered Mist. Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Stuns</status> the first enemy hit for @Stunduration@ to @MaxStunTT@ seconds based on charge time.",
 					"extendedVariables": [
 						{
 							"type": "Damage",

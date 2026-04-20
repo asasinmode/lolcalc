@@ -1202,17 +1202,19 @@ function updateItemShopItemTooltipText(item: IItem, mItemDataClient: any) {
 }
 
 function cleanupItemText(text?: string): string | undefined {
-	if (!text) {
-		return;
+	return text && trimBr(text.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@'));
+}
+
+// TODO maybe dont trim the ability descriptions and instead style the repeated `<br>` and anything followed by it
+// jhin and aatrox passives have extended <rules> but aatrox has <br> that are kept while jhin's were removed, make sure both look good
+function trimBr(value: string) {
+	while (value.startsWith('<br>')) {
+		value = value.slice(4).trim();
 	}
-	text = text.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@');
-	while (text.startsWith('<br>')) {
-		text = text.slice(4).trim();
+	while (value.endsWith('<br>')) {
+		value = value.slice(0, -4).trim();
 	}
-	while (text.endsWith('<br>')) {
-		text = text.slice(0, -4).trim();
-	}
-	return text;
+	return value;
 }
 
 function createRuneSlotData(dataKey: string, data: any) {
@@ -1667,21 +1669,25 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			const variantTooltipStringtableKey = variant.tooltip;
 
 			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` })!;
+			variant.name &&= trimBr(variant.name);
 			// TODO debug tooltips for all abilities, not just passive
 			variant.tooltip = variant.tooltip && getStringtableValue(
 				variant.tooltip,
 				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip` } : `${variant.dataKey} tooltip`,
 			);
+			variant.tooltip &&= trimBr(variant.tooltip);
 			variant.tooltipExtended = variant.tooltipExtended && getStringtableValue(
 				variant.tooltipExtended,
 				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` } : `${variant.dataKey} tooltip extended`,
 			);
-			// TODO TMP some abilities have it but found in stringtable, they're probably hashed so uncomment it when hashed versions are tried and resolved
+			variant.tooltipExtended &&= trimBr(variant.tooltipExtended);
+			// TODO TMP some abilities have it but found in stringtable and probably hashed so uncomment it when hashed stringtable keys are tried and resolved
 			if (abilityName === 'passive') {
 				variant.tooltipExtendedBelowLine = variant.tooltipExtendedBelowLine && getStringtableValue(
 					variant.tooltipExtendedBelowLine,
 					{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
 				);
+				variant.tooltipExtendedBelowLine &&= trimBr(variant.tooltipExtendedBelowLine);
 			}
 
 			for (const extendedVariable of variant.extendedVariables || []) {
@@ -1693,6 +1699,9 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
 			if (variantTooltipStringtableKey && (variantTooltipStringtableKey.toLowerCase() in champion.stringtable)) {
 				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
+
+				/* also trim `<br>` from that reused value */
+				champion.stringtable[variantTooltipStringtableKey.toLowerCase()] = trimBr(champion.stringtable[variantTooltipStringtableKey.toLowerCase()]!);
 			}
 
 			if (!variant.name) {

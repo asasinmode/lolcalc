@@ -259,7 +259,7 @@
 					"name": "Hallucinate",
 					"objectName": "HallucinateFull",
 					"image": "assets/characters/shaco/hud/icons2d/jester_hallucinogenbomb.png",
-					"tooltip": "Shaco briefly disappears, then reappears with a clone that lasts @CloneLifetime@ seconds and detonates when it dies, dealing <magicDamage>@ExplosionTotalDamage@ magic damage</magicDamage> and spawning three mini <spellName>Jack in the Boxes</spellName> that trigger immediately. The clone deals @CloneAADamagePercent*100@% of Shaco's damage and receives @CloneIncomingDamagePercent*100@% increased damage.<br><br>Mini <spellName>Jack in the Boxes</spellName> deal <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ magic damage</magicDamage> if firing at only one enemy, and <status>Fear</status> for @BoxFearDuration@ second.<br>",
+					"tooltip": "Shaco briefly disappears, then reappears with a clone that lasts @CloneLifetime@ seconds and detonates when it dies, dealing <magicDamage>@ExplosionTotalDamage@ magic damage</magicDamage> and spawning three mini <spellName>Jack in the Boxes</spellName> that trigger immediately. The clone deals @CloneAADamagePercent*100@% of Shaco's damage and receives @CloneIncomingDamagePercent*100@% increased damage.<br><br>Mini <spellName>Jack in the Boxes</spellName> deal <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ magic damage</magicDamage> if firing at only one enemy, and <status>Fear</status> for @BoxFearDuration@ second.",
 					"extendedVariables": [
 						{
 							"type": "ExplosionBaseDamage",

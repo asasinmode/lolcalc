@@ -103,7 +103,7 @@
 					"objectName": "EliseSpiderQ",
 					"image": "assets/characters/elise/hud/icons2d/elisespiderq.png",
 					"tooltip": "<keywordMajor>Spider Form:</keywordMajor> Elise lunges with a poisonous bite, dealing <magicDamage>@Spell.EliseSpiderQCast:BaseDamage@ plus @Spell.EliseSpiderQCast:MissingHPDamage@ missing Health magic damage</magicDamage>.",
-					"tooltipExtended": "{{Spell_EliseSpiderQ_Tooltip}}<br><br>{{Spell_EliseHumanQ_Tooltip}}<br>",
+					"tooltipExtended": "{{Spell_EliseSpiderQ_Tooltip}}<br><br>{{Spell_EliseHumanQ_Tooltip}}",
 					"cooldownTime": [6, 6, 6, 6, 6, 6, 6],
 					"dataKey": "Characters/Elise/Spells/EliseSpiderQAbility/EliseSpiderQ"
 				}
@@ -234,7 +234,7 @@
 					"name": "Rappel / Cocoon",
 					"objectName": "EliseSpiderEInitial",
 					"image": "assets/characters/elise/hud/icons2d/elisespidere.png",
-					"tooltip": "<keywordMajor>Spider Form</keywordMajor>: Elise and her <keywordMajor>Spiderlings</keywordMajor> lift into the air, becoming Untargetable for up to 2 seconds and descending on enemies she targets. Upon descending, she increases the bonus damage and healing from <spellName>Spider Queen</spellName> by @spell.EliseSpiderE:PBonusIncrease*100@% for @spell.EliseSpiderE:BuffDuration@ seconds. <br>",
+					"tooltip": "<keywordMajor>Spider Form</keywordMajor>: Elise and her <keywordMajor>Spiderlings</keywordMajor> lift into the air, becoming Untargetable for up to 2 seconds and descending on enemies she targets. Upon descending, she increases the bonus damage and healing from <spellName>Spider Queen</spellName> by @spell.EliseSpiderE:PBonusIncrease*100@% for @spell.EliseSpiderE:BuffDuration@ seconds.",
 					"cooldownTime": [22, 22, 21, 20, 19, 18, 17],
 					"dataValues": {
 						"PBonusIncrease": [0.25, 0.4, 0.55, 0.7, 0.85, 1, 1.15],

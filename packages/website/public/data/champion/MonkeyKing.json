@@ -135,7 +135,7 @@
 					"name": "Nimbus Strike",
 					"objectName": "MonkeyKingNimbus",
 					"image": "assets/characters/monkeyking/hud/icons2d/monkeykingnimbusstrike.png",
-					"tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to @ExtraTargets@ additional enemies nearby. Each enemy struck takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>",
+					"tooltip": "Wukong dashes to an enemy, sending out <keywordMajor>Clones</keywordMajor> that mimic the dash to up to @ExtraTargets@ additional enemies nearby. Each enemy struck takes <magicDamage>@TotalDamage@ magic damage</magicDamage>. He and his <keywordMajor>Clone</keywordMajor> gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",

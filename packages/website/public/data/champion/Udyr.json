@@ -35,7 +35,7 @@
 					"name": "Wilding Claw",
 					"objectName": "UdyrQ",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_q.png",
-					"tooltip": "<spellActive>Claw Stance:</spellActive> Udyr gains <attackSpeed>@AttackSpeedBase*100@% Attack Speed</attackSpeed> and his Attacks deal <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }} for @AttackSpeedDurationBase@ seconds. Additionally, Udyr's next two Attacks in this stance deal a bonus <physicalDamage>@MaxHPOnHit1@ max Health physical damage</physicalDamage> and gain @AttackRange@ range.<br><br><keywordMajor>Awaken:</keywordMajor> Increase bonus <attackSpeed>Attack Speed</attackSpeed> to <attackSpeed>@EmpoweredTotalAS@</attackSpeed> and max Health damage to <physicalDamage>@Q2TotalOnHitHPDamage@</physicalDamage>. Additionally, Udyr's next two Attacks call lightning six times, dealing a total of <magicDamage>@EmpoweredLightningBonusMax@ max Health magic damage</magicDamage> to isolated targets (strikes bounce to other nearby targets when possible).<br>",
+					"tooltip": "<spellActive>Claw Stance:</spellActive> Udyr gains <attackSpeed>@AttackSpeedBase*100@% Attack Speed</attackSpeed> and his Attacks deal <physicalDamage>@OnHitDamage@ physical damage</physicalDamage> {{ Item_Keyword_OnHit }} for @AttackSpeedDurationBase@ seconds. Additionally, Udyr's next two Attacks in this stance deal a bonus <physicalDamage>@MaxHPOnHit1@ max Health physical damage</physicalDamage> and gain @AttackRange@ range.<br><br><keywordMajor>Awaken:</keywordMajor> Increase bonus <attackSpeed>Attack Speed</attackSpeed> to <attackSpeed>@EmpoweredTotalAS@</attackSpeed> and max Health damage to <physicalDamage>@Q2TotalOnHitHPDamage@</physicalDamage>. Additionally, Udyr's next two Attacks call lightning six times, dealing a total of <magicDamage>@EmpoweredLightningBonusMax@ max Health magic damage</magicDamage> to isolated targets (strikes bounce to other nearby targets when possible).",
 					"extendedVariables": [
 						{
 							"type": "AttackSpeedBase",
@@ -271,7 +271,7 @@
 					"name": "Iron Mantle",
 					"objectName": "UdyrW",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_w.png",
-					"tooltip": "<spellPassive>Mantle Stance:</spellPassive> Udyr gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. Additionally, Udyr's next two Attacks gain @LifeSteal*100@% Life Steal and restore <healing>@LifeOnHit@ Health</healing>.<br><br><keywordMajor>Awaken:</keywordMajor> Gain <shield>@RecastShield@ Shield</shield>, restore <healing>@RecastHeal@ Health</healing> over @ShieldDuration@ seconds, and Udyr's next two Attacks instead have @LifeSteal*200@% Life Steal and restore <healing>@LifeOnHitAwakened@ Health</healing>.<br>",
+					"tooltip": "<spellPassive>Mantle Stance:</spellPassive> Udyr gains <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. Additionally, Udyr's next two Attacks gain @LifeSteal*100@% Life Steal and restore <healing>@LifeOnHit@ Health</healing>.<br><br><keywordMajor>Awaken:</keywordMajor> Gain <shield>@RecastShield@ Shield</shield>, restore <healing>@RecastHeal@ Health</healing> over @ShieldDuration@ seconds, and Udyr's next two Attacks instead have @LifeSteal*200@% Life Steal and restore <healing>@LifeOnHitAwakened@ Health</healing>.",
 					"extendedVariables": [
 						{
 							"type": "ShieldBase",
@@ -636,7 +636,7 @@
 					"name": "Bridge Between",
 					"objectName": "UdyrPassive",
 					"image": "assets/characters/udyr/hud/icons2d/udyr_p.png",
-					"tooltip": "<spellPassive>Awakened Spirit:</spellPassive> Udyr has four basic Abilities that swap between <i>Stances</i>. Udyr can <recast>Recast</recast> an Ability that is on Cooldown to gain its bonuses again with Ultimate benefits. (@UltCD@ second Cooldown).<br><br><spellPassive>Monk Training:</spellPassive> After using an Ability, Udyr's next two Attacks within @AttackSpeedDuration@ seconds gain <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and refund @UltCDReduction*100@% of <keywordMajor>Awaken's</keywordMajor> Cooldown.<br>",
+					"tooltip": "<spellPassive>Awakened Spirit:</spellPassive> Udyr has four basic Abilities that swap between <i>Stances</i>. Udyr can <recast>Recast</recast> an Ability that is on Cooldown to gain its bonuses again with Ultimate benefits. (@UltCD@ second Cooldown).<br><br><spellPassive>Monk Training:</spellPassive> After using an Ability, Udyr's next two Attacks within @AttackSpeedDuration@ seconds gain <attackSpeed>@AttackSpeed@ Attack Speed</attackSpeed> and refund @UltCDReduction*100@% of <keywordMajor>Awaken's</keywordMajor> Cooldown.",
 					"dataValues": {
 						"UdyrAHAmountPerCloudDragon": [6, 6, 6, 6, 6, 6, 6],
 						"GlobalCD": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],

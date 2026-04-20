@@ -304,7 +304,7 @@
 					"objectName": "GwenP",
 					"image": "assets/characters/gwen/hud/icons2d/gwen_passive.png",
 					"tooltip": "{{Spell_GwenP_Tooltip}}",
-					"tooltipExtended": "{{ spell_gwenP_tooltip }}<br><rules>Max damage to monsters: @MonsterDamageCap@. Deals @ExecuteDamage@ bonus damage to minions below @ExecuteThreshold*100@% health.</rules><br>",
+					"tooltipExtended": "{{ spell_gwenP_tooltip }}<br><rules>Max damage to monsters: @MonsterDamageCap@. Deals @ExecuteDamage@ bonus damage to minions below @ExecuteThreshold*100@% health.</rules>",
 					"cooldownTime": [0, 0, 0, 0, 0, 0, 0],
 					"dataValues": {
 						"ExecuteThreshold": [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4]
@@ -422,6 +422,6 @@
 		"spell_tahmkenchw_levelupcooldownrefund": "Cooldown Refund",
 		"spell_listtype_basedamage": "Base Damage",
 		"spell_listtype_slow": "Slow",
-		"spell_gwenp_tooltip": "Gwen's Attacks deal an additional <magicDamage>@PercentHealth1000Cuts@ Max Health magic damage</magicDamage> on hit. Gwen recovers Health equal to <healing>@HealingPercent@ of the damage</healing> this Ability deals to champions, up to a maximum of <healing>@healcap@</healing>.<br>"
+		"spell_gwenp_tooltip": "Gwen's Attacks deal an additional <magicDamage>@PercentHealth1000Cuts@ Max Health magic damage</magicDamage> on hit. Gwen recovers Health equal to <healing>@HealingPercent@ of the damage</healing> this Ability deals to champions, up to a maximum of <healing>@healcap@</healing>."
 	}
 }

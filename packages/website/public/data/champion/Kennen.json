@@ -77,7 +77,7 @@
 					"name": "Electrical Surge",
 					"objectName": "KennenBringTheLight",
 					"image": "assets/characters/kennen/hud/icons2d/kennen_w.png",
-					"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.<br>",
+					"tooltip": "<spellPassive>Passive:</spellPassive> Every 5th Attack deals an additional <magicDamage>@TotalDamagePassive@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kennen sends out a blast of electricity, dealing <magicDamage>@TotalDamageActive@ magic damage</magicDamage> to nearby enemies affected by <spellName>Mark of the Storm</spellName>.",
 					"extendedVariables": [
 						{
 							"type": "bADRatio",

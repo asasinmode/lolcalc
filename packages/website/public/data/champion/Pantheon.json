@@ -239,7 +239,7 @@
 					"name": "Aegis Assault",
 					"objectName": "PantheonE",
 					"image": "assets/characters/pantheon/hud/icons2d/pantheon_e1.png",
-					"tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for @ShieldDuration@ seconds, becoming immune to non-tower damage from that direction and dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> over the duration. After channeling Pantheon slams with his shield, dealing <physicalDamage>@ShieldDamageCalc@ physical damage</physicalDamage>.<br><br><font color='#EDDA74'>Mortal Will Bonus:</font> When Pantheon slams his shield he gains <scaleArmor>@ResistsCalc@ Armor</scaleArmor> and <scaleMR>@ResistsCalc@ Magic Resist</scaleMR> for @ResistsDuration@ seconds, and <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds. <br>",
+					"tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for @ShieldDuration@ seconds, becoming immune to non-tower damage from that direction and dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> over the duration. After channeling Pantheon slams with his shield, dealing <physicalDamage>@ShieldDamageCalc@ physical damage</physicalDamage>.<br><br><font color='#EDDA74'>Mortal Will Bonus:</font> When Pantheon slams his shield he gains <scaleArmor>@ResistsCalc@ Armor</scaleArmor> and <scaleMR>@ResistsCalc@ Magic Resist</scaleMR> for @ResistsDuration@ seconds, and <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.",
 					"extendedVariables": [
 						{
 							"type": "ShieldBaseDamage",

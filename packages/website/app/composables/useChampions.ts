@@ -69,6 +69,10 @@ export interface IChampionAbilityVariant {
 	/** the variables shown below the description when holding shift. Cooldown excluded, it's added manually */
 	extendedVariables?: {
 		type: string;
+		/**
+		 * the stringtable key to overrid the default variable name with
+		 * like `QBaseDamage` -> `spell_listtype_damage` -> `Damage`
+		 */
 		nameOverride?: string;
 	}[];
 	dataValues?: any;

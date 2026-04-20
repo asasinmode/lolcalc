@@ -77,7 +77,7 @@
 					"name": "Eclipse",
 					"objectName": "LeonaSolarBarrier",
 					"image": "assets/characters/leona/hud/icons2d/leonaw.png",
-					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @Effect3Amount@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @Effect3Amount@ seconds.<br>",
+					"tooltip": "Leona raises her shield, reducing incoming damage by @FlatDamageReduction@ and gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> for @Effect3Amount@ seconds. Afterwards, her shield detonates, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> to nearby enemies. If she hits at least one, she retains the <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> bonuses for an additional @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
 							"type": "Effect1Amount",

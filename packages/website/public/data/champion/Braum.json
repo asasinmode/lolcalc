@@ -211,7 +211,7 @@
 					"name": "Glacial Fissure",
 					"objectName": "BraumRWrapper",
 					"image": "assets/characters/braum/hud/icons2d/braum_r.png",
-					"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.<br>",
+					"tooltip": "Braum slams the ground sending forth a fissure that <status>Knocks Up</status> enemies in its path and nearby Braum, and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. The first target hit is <status>Knocked Up</status> for between @MinKnockup@ and @MaxKnockup@ seconds, increasing with distance from Braum. All others hit are <status>Knocked Up</status> for @MinKnockup@ seconds.<br><br>The fissure also creates a zone for @SlowZoneDuration@ seconds, that <status>Slows</status> by @MoveSpeedMod@%.",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",

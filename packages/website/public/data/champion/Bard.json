@@ -35,7 +35,7 @@
 					"name": "Cosmic Binding",
 					"objectName": "BardQ",
 					"image": "assets/characters/bard/hud/icons2d/bard_q.png",
-					"tooltip": "Bard fires an energy bolt, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit. The first target hit is <status>Slowed</status> by @SlowAmountPercentage@% for @SlowDuration@s.<br><br>If the bolt hits a second enemy or a wall, any enemies hit are <status>Stunned</status> for @StunDuration@s.<br>",
+					"tooltip": "Bard fires an energy bolt, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit. The first target hit is <status>Slowed</status> by @SlowAmountPercentage@% for @SlowDuration@s.<br><br>If the bolt hits a second enemy or a wall, any enemies hit are <status>Stunned</status> for @StunDuration@s.",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",

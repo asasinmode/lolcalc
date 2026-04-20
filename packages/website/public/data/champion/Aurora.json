@@ -137,7 +137,7 @@
 					"name": "The Weirding",
 					"objectName": "AuroraE",
 					"image": "assets/characters/aurora/hud/icons2d/aurorae.aurora.png",
-					"tooltip": "Converge the realms, sending out a blast of spirit magic dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slowing</status> them by @SlowPercent*-100@% decaying over @SlowDuration@ second.<br><br>Aurora hops backwards a short distance after casting.<br>",
+					"tooltip": "Converge the realms, sending out a blast of spirit magic dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slowing</status> them by @SlowPercent*-100@% decaying over @SlowDuration@ second.<br><br>Aurora hops backwards a short distance after casting.",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",

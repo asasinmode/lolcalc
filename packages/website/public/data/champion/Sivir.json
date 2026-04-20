@@ -306,7 +306,7 @@
 					"name": "Fleet of Foot",
 					"objectName": "SivirPassive",
 					"image": "assets/characters/sivir/hud/icons2d/sivir_passive.png",
-					"tooltip": "Sivir's Attacks and Abilities grant her a burst of <speed>@FlatMS@ Decaying Move Speed</speed> for @HasteDuration@ seconds when they damage enemy champions.<br>",
+					"tooltip": "Sivir's Attacks and Abilities grant her a burst of <speed>@FlatMS@ Decaying Move Speed</speed> for @HasteDuration@ seconds when they damage enemy champions.",
 					"dataValues": {
 						"HasteDuration": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5]
 					},

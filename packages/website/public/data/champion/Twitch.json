@@ -206,7 +206,7 @@
 					"name": "Spray and Pray",
 					"objectName": "TwitchFullAutomatic",
 					"image": "assets/characters/twitch/hud/icons2d/twitch_r.png",
-					"tooltip": "Twitch unleashes his crossbow, gaining @BonusRange@ Attack Range and <scaleAD>@BonusAD@ Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for @Duration@ seconds. These bolts hit all enemies they pass through, but deal @FallOffDamage*100@% less damage to subsequent targets, down to a minimum of @MinimumFallOffDamage*100@% damage.<br>",
+					"tooltip": "Twitch unleashes his crossbow, gaining @BonusRange@ Attack Range and <scaleAD>@BonusAD@ Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for @Duration@ seconds. These bolts hit all enemies they pass through, but deal @FallOffDamage*100@% less damage to subsequent targets, down to a minimum of @MinimumFallOffDamage*100@% damage.",
 					"extendedVariables": [
 						{
 							"type": "BonusAD",

@@ -250,7 +250,7 @@
 					"objectName": "KalistaPassiveBuff",
 					"image": "assets/characters/kalista/hud/icons2d/kalista_passive.png",
 					"tooltip": "{{Spell_KalistaPassiveBuff_Tooltip}}",
-					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules><br>",
+					"tooltipExtended": "{{Spell_KalistaPassiveBuff_Tooltip}}<br><br><rules>Kalista's Attacks cannot be cancelled.<br>Dash distance scales with boot tier.</rules>",
 					"dataValues": {
 						"DashSpeedDivisor": [1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5],
 						"GameModeInteger": [1, 1, 1, 1, 1, 1, 1],

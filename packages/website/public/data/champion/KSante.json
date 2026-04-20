@@ -341,7 +341,7 @@
 					"objectName": "KSanteP",
 					"image": "assets/characters/ksante/hud/icons2d/icons_ksante_p.png",
 					"tooltip": "{{Spell_KSanteP_Tooltip}}",
-					"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules><br>",
+					"tooltipExtended": "{{Spell_KSanteP_Tooltip}}<br><br><rules>Damage against minions has a minimum cap of 15-100 (based on level).<br>Damage against monsters has a maximum cap of 20-105 (based on level).</rules>",
 					"dataValues": {
 						"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
 						"RecoveryPercent": [0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8],

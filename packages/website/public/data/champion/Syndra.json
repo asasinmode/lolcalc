@@ -79,7 +79,7 @@
 					"name": "Force of Will",
 					"objectName": "SyndraW",
 					"image": "assets/characters/syndra/hud/icons2d/syndra_w1.png",
-					"tooltip": "Syndra grabs a <keywordMajor>Dark Sphere</keywordMajor>, enemy minion, or non-epic monster. She drags it with her and can <recast>Recast</recast> for up to 5 seconds.<br><br><recast>Recast</recast>: Syndra hurls the object, dealing {{Spell_SyndraW_Damage@f3@}} and <status>Slowing</status> by @TotalSlowAmount@% for @f2@ seconds.<br><br><evolve>@spell.SyndraPassive:WUpgradeThreshold@ Splinters of Wrath</evolve>: This Ability deals an additional <trueDamage>@TOOLTIPONLYPassiveBonusPercent@ true damage</trueDamage>.<br>",
+					"tooltip": "Syndra grabs a <keywordMajor>Dark Sphere</keywordMajor>, enemy minion, or non-epic monster. She drags it with her and can <recast>Recast</recast> for up to 5 seconds.<br><br><recast>Recast</recast>: Syndra hurls the object, dealing {{Spell_SyndraW_Damage@f3@}} and <status>Slowing</status> by @TotalSlowAmount@% for @f2@ seconds.<br><br><evolve>@spell.SyndraPassive:WUpgradeThreshold@ Splinters of Wrath</evolve>: This Ability deals an additional <trueDamage>@TOOLTIPONLYPassiveBonusPercent@ true damage</trueDamage>.",
 					"extendedVariables": [
 						{
 							"type": "Cost"
@@ -271,7 +271,7 @@
 					"name": "Transcendent",
 					"objectName": "SyndraPassive",
 					"image": "assets/characters/syndra/hud/icons2d/syndra_p1.png",
-					"tooltip": "Syndra can collect up to @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>. These enhance Syndra's Abilities and restore <scaleMana>@ManaPerProc@ Mana</scaleMana> each time she claims one from an enemy. <br><br>Syndra collects <evolve>Splinters of Wrath</evolve> from the following:<li><evolve>@StacksPerProc@ Splinter(s)</evolve> when damaging enemy champions with two Abilities within @MarkDuration@ seconds (@PassiveMarkCooldown@s Cooldown)<li><evolve>@PassiveStacksPerLevel@ Splinters</evolve> upon spending Ability points<li><evolve>@StackPerSiege@ Splinter</evolve> on killing large minions<br><br>At @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>, Syndra increases her <scaleAP>Ability Power by @CapstoneAPPerc*100@%</scaleAP>.<br>",
+					"tooltip": "Syndra can collect up to @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>. These enhance Syndra's Abilities and restore <scaleMana>@ManaPerProc@ Mana</scaleMana> each time she claims one from an enemy. <br><br>Syndra collects <evolve>Splinters of Wrath</evolve> from the following:<li><evolve>@StacksPerProc@ Splinter(s)</evolve> when damaging enemy champions with two Abilities within @MarkDuration@ seconds (@PassiveMarkCooldown@s Cooldown)<li><evolve>@PassiveStacksPerLevel@ Splinters</evolve> upon spending Ability points<li><evolve>@StackPerSiege@ Splinter</evolve> on killing large minions<br><br>At @MaxStackAmount@ <evolve>Splinters of Wrath</evolve>, Syndra increases her <scaleAP>Ability Power by @CapstoneAPPerc*100@%</scaleAP>.",
 					"dataValues": {
 						"MarkDuration": [4, 4, 4, 4, 4, 4, 4],
 						"Q1UpgradeThreshold": [40, 40, 40, 40, 40, 40, 40],

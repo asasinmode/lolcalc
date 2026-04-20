@@ -35,7 +35,7 @@
 					"name": "Three Talon Strike",
 					"objectName": "XinZhaoQ",
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworkq.xinzhaorework.png",
-					"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @Effect2Amount@ seconds.<br>",
+					"tooltip": "Xin Zhao's next 3 Attacks deal an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and reduces his other Ability's Cooldowns by 1 second. The third Attack also <status>Knocks Up</status> for @Effect2Amount@ seconds.",
 					"extendedVariables": [
 						{
 							"type": "Effect1Amount",
@@ -181,7 +181,7 @@
 					"name": "Audacious Charge",
 					"objectName": "XinZhaoE",
 					"image": "assets/characters/xinzhao/hud/icons2d/xinzhaoreworke.xinzhaorework.png",
-					"tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>@ChargeDamage@ magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by @BaseSlowAmount@% for @Effect6Amount@ seconds.<br><br>Xin Zhao also grants himself <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.<br><br>This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>. <br>",
+					"tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>@ChargeDamage@ magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by @BaseSlowAmount@% for @Effect6Amount@ seconds.<br><br>Xin Zhao also grants himself <attackSpeed>@Effect3Amount*100@% Attack Speed</attackSpeed> for @Effect4Amount@ seconds.<br><br>This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>.",
 					"extendedVariables": [
 						{
 							"type": "Effect1Amount",

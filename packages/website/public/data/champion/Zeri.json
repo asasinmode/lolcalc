@@ -346,7 +346,7 @@
 					"name": "Lightning Crash",
 					"objectName": "ZeriR",
 					"image": "assets/characters/zeri/hud/icons2d/zerir.png",
-					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.<br><br>",
+					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.",
 					"extendedVariables": [
 						{
 							"type": "ActiveDamage",

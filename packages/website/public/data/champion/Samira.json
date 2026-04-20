@@ -103,7 +103,7 @@
 					"name": "Blade Whirl",
 					"objectName": "SamiraW",
 					"image": "assets/characters/samira/hud/icons2d/samiraw.png",
-					"tooltip": "Samira slashes around her for @SlashDuration@ seconds, damaging enemies twice for <physicalDamage>@DamageCalc@ physical damage</physicalDamage> each and destroying any enemy missiles that enter the area.<br><br>",
+					"tooltip": "Samira slashes around her for @SlashDuration@ seconds, damaging enemies twice for <physicalDamage>@DamageCalc@ physical damage</physicalDamage> each and destroying any enemy missiles that enter the area.",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",

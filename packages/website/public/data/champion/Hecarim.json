@@ -35,7 +35,7 @@
 					"name": "Rampage",
 					"objectName": "HecarimRapidSlash",
 					"image": "assets/characters/hecarim/hud/icons2d/hecarim_rampage.png",
-					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.<br>",
+					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",

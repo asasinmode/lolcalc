@@ -35,7 +35,7 @@
 					"name": "Piercing Light",
 					"objectName": "LucianQ",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_q.png",
-					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.<br>",
+					"tooltip": "Lucian shoots a bolt of piercing light, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",
@@ -161,7 +161,7 @@
 					"name": "The Culling",
 					"objectName": "LucianR",
 					"image": "assets/characters/lucian/hud/icons2d/lucian_r.png",
-					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage><br>",
+					"tooltip": "Lucian rapidly fires <keywordMajor>@TotalNumShots@</keywordMajor> shots in a direction for @Duration@ seconds or until he <recast>Recasts</recast>. Each shot deals <physicalDamage>@DamagePerBullet@ physical damage</physicalDamage> to the first enemy hit.<br><br>While firing, Lucian may use <spellName>Relentless Pursuit</spellName>.<br><br>Total Damage: <physicalDamage>@TotalDamage@ physical damage</physicalDamage>",
 					"extendedVariables": [
 						{
 							"type": "BaseDamage",
