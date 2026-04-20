@@ -346,6 +346,22 @@ export const ITEM_SHOP_STAT_FILTERS = {
 
 export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 
+/**
+	* `ObjectName` in cdragon of the corresponding effect. Mainly used for hover tooltip text
+	* `lolcalc` prefixed ones are custom, handled in `updateGameData.ts`
+	*
+	* for finding either
+	*		1. in game, when the effect is applied check the its text
+	*		2. find that text in stringtable
+	*		3. in champion's bin file or `items.cdtb.bin.json` search for that stringtable key, then use the `ObjectName` of the object it's under
+	*
+	*	or try to do the mix of the above, usually item effects can be found next to the item key itself
+	*	i.e on patch `16.4`
+	*		1. the black cleaver shred would be somewhere close below the `Items/3071` key
+	*		2. there's `Items/3071/Spells/3071BlackCleaverShred` that has `mBuff.mDescription` with `game_buff_tooltip_Black_Cleaver`
+	*		3. that seems like the likely candidate, check the stringtable - it resolves to `This unit`s Armor is reduced...'
+	*		4. this is the description we are looking for, use the `Items/3071/Spells/3071BlackCleaverShred.ObjectName` of `3071BlackCleaverShred`
+	*/
 export const EFFECT_OBJECT_NAME = {
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
