@@ -163,6 +163,22 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Jinx: {
+		MAX_PASSIVE_STACKS: 5,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Kaisa: {
+		MAX_PASSIVE_STACKS: 4,
+		setupData(self): { passiveStacksOnTarget: number } {
+			return {
+				passiveStacksOnTarget: clamp(0, self.internalData.value.passiveStacksOnTarget ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
 	Kayn: {
 		POSSIBLE_DYNAMIC_VALUES: {
 			f1: [0, 1, 2],

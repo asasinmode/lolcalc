@@ -56,6 +56,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Jhin: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jhin', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (after crit)', false),
 	},
+	Jinx: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Jinx', 'passive', 0), 'passiveStacks', 'Get Excited stacks', 0, CHAMPION_SPECIFICS.Jinx.MAX_PASSIVE_STACKS),
+	},
+	Kaisa: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS),
+	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
 	},
