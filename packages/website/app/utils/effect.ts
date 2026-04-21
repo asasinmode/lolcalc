@@ -2,7 +2,6 @@ import type { IEffectObjectName } from './meta.ts';
 import type { IGameAbilityId } from './types';
 import itemsData from '../assets/item.json' with { type: 'json' };
 import { CHAMPION_SPECIFICS } from './champion.ts';
-// TODO with this import hot reload errors but without it the updateGameData script doesn't work
 import { GameAbilityId } from './GameAbilityId.ts';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
 

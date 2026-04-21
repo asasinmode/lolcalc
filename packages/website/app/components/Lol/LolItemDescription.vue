@@ -297,6 +297,18 @@ defineExpose({ header });
 			--at-apply: 'inline-block align-middle size-4';
 		}
 
+		> li {
+			--at-apply: 'ms-5 list-item list-disc';
+
+			:not(li) + & {
+				--at-apply: 'mt-3';
+			}
+		}
+
+		font[size] {
+			--at-apply: 'text-[length:inherit]';
+		}
+
 		var {
 			--at-apply: 'font-500';
 			font-style: normal;

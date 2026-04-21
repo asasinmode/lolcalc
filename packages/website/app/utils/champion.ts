@@ -112,9 +112,9 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ekko: {
-		setupData(self): { isPassiveActive: number } {
+		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
 			};
 		},
 	},
@@ -134,9 +134,9 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Heimerdinger: {
-		setupData(self): { isPassiveActive: number } {
+		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
 			};
 		},
 	},
@@ -216,9 +216,9 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Mordekaiser: {
-		setupData(self): { isPassiveActive: number } {
+		setupData(self): { isPassiveMSActive: number } {
 			return {
-				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
 			};
 		},
 	},
@@ -250,6 +250,7 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Ornn: {
+		MASTERWORK_LEVEL: 13,
 		MAX_UPGRADED_ALLIES: 4,
 		setupData(self): { masterworkItemSlot: number; passiveUpgradedAllies: number } {
 			return {
@@ -263,6 +264,119 @@ export const CHAMPION_SPECIFICS = {
 		setupData(self): { passiveStacksOnTarget: number } {
 			return {
 				passiveStacksOnTarget: clamp(0, self.internalData.value.passiveStacksOnTarget ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Rengar: {
+		MAX_PASSIVE_STACKS: 5,
+		setupData(self): { passiveStacks: number; isPassiveMSActive: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+			};
+		},
+	},
+	Rumble: {
+		setupData(self): { isOverheated: number } {
+			return {
+				isOverheated: clamp(0, self.internalData.value.isOverheated ?? 0, 1),
+			};
+		},
+	},
+	Samira: {
+		PASSIVE_OPTIONS: {
+			none: 0,
+			e: 1,
+			d: 2,
+			c: 3,
+			b: 4,
+			a: 5,
+			s: 6,
+		},
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.PASSIVE_OPTIONS.s),
+			};
+		},
+	},
+	Sejuani: {
+		setupData(self): { isPassiveActive: number } {
+			return {
+				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+			};
+		},
+	},
+	Senna: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Seraphine: {
+		MAX_PASSIVE_STACKS: 20,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Shyvana: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Singed: {
+		MAX_PASSIVE_STACKS: 9,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Smolder: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Sona: {
+		MAX_PASSIVE_STACKS: 120,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Soraka: {
+		setupData(self): { isPassiveMSActive: number } {
+			return {
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+			};
+		},
+	},
+	Swain: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Sylas: {
+		setupData(self): { hasPassiveStack: number } {
+			return {
+				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+			};
+		},
+	},
+	Syndra: {
+		MAX_PASSIVE_STACKS: 120,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
