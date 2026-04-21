@@ -68,6 +68,10 @@
 		"lolcalcOrnnPassive": {
 			"dataKey": "lolcalcOrnnPassive",
 			"description": "This unit's item is upgraded thanks to ally Ornn."
+		},
+		"RellP_Debuff": {
+			"description": "Rell has stolen Armor and Magic Resist from this unit.",
+			"dataKey": "Characters/Rell/Spells/RellPAbility/RellP_Debuff"
 		}
 	},
 	"stringtable": {}

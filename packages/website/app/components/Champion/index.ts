@@ -100,6 +100,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 			await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'passiveUpgradedAllies', 'Allies with masterwork item', 0, CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES),
 		],
 	},
+	Rell: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS),
+	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
 	},

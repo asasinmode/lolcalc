@@ -380,6 +380,7 @@ export const EFFECT_OBJECT_NAME = {
 	jannaPTailwind: 'Tailwind',
 	nunuPCallOfFreljord: 'localcNunuPassive',
 	ornnPLivingForge: 'lolcalcOrnnPassive',
+	rellPBreakMold: 'RellP_Debuff',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

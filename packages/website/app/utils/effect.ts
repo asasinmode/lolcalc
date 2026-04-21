@@ -1,6 +1,7 @@
 import type { IEffectObjectName } from './meta.ts';
 import type { IGameAbilityId } from './types';
 import itemsData from '../assets/item.json' with { type: 'json' };
+import { CHAMPION_SPECIFICS } from './champion.ts';
 // TODO with this import hot reload errors but without it the updateGameData script doesn't work
 import { GameAbilityId } from './GameAbilityId.ts';
 import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
@@ -190,6 +191,20 @@ export const EFFECT_SPECIFICS = {
 			return [clamp(this.minValue!, data?.[0] ?? 0, this.maxValue!)];
 		},
 		isActive(data: [masterworkSlotIndex: number]) {
+			return data[0];
+		},
+		imgText(data) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.rellPBreakMold]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Rell', 'passive', 0),
+		label: 'Break the Mold stacks',
+		maxValue: CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS,
+		setupData(data): [breakMoldStacks: number] {
+			return [clamp(0, data?.[0] ?? 0, this.maxValue!)];
+		},
+		isActive(data: [breakMoldStacks: number]) {
 			return data[0];
 		},
 		imgText(data) {

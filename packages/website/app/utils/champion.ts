@@ -258,6 +258,14 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Rell: {
+		MAX_PASSIVE_STACKS: 5,
+		setupData(self): { passiveStacksOnTarget: number } {
+			return {
+				passiveStacksOnTarget: clamp(0, self.internalData.value.passiveStacksOnTarget ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
 			return {
