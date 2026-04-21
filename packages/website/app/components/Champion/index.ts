@@ -62,6 +62,13 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Kaisa: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kaisa', 'passive', 0), 'passiveStacksOnTarget', 'Plasma stacks on target', 0, CHAMPION_SPECIFICS.Kaisa.MAX_PASSIVE_STACKS),
 	},
+	Kayn: {
+		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kayn', 'passive', 0), 'form', 'Form', {
+			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.base]: 'base',
+			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.assassin]: 'assassin',
+			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.rhaast]: 'rhaast',
+		}),
+	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
 	},

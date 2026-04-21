@@ -1,5 +1,5 @@
 import type { IChampionAbilityId, IEffectAbilityId, IExtraComponentEmits, IExtraComponentProps, IGameAbilityId } from '~/utils/types';
-import { VExtrasBoolean, VExtrasNumber } from '#components';
+import { VExtrasBoolean, VExtrasEnum, VExtrasNumber } from '#components';
 
 // eslint-disable-next-line ts/consistent-type-definitions
 type IDefineExtraComponentEmits = {
@@ -90,6 +90,39 @@ export async function booleanExtra<T extends IGameAbilityId>(
 			imgSize,
 			labelPrefixApply,
 			'label': labelAppendOnTarget ? `${label} on target` : label,
+			onImgMouseenter(event) {
+				ctx.emit('imgMouseenter', event, abilityId);
+			},
+			'onUpdate:modelValue': updateValue,
+		}, ctx.slots);
+	}, { props: ['damageSource', 'idPrefix', 'abilityId', 'onImgMouseenter'] });
+}
+
+export async function enumExtra<T extends IGameAbilityId>(
+	abilityId: T,
+	property: DataKeys<IGameAbilityData<T>>,
+	label: string,
+	/**
+	 * ```ts
+	 * {
+	 *   [value1]: 'option 1 label',
+	 *   [value2]: 'option 2 label',
+	 * }
+	 * ```
+	 */
+	options: Record<number, string>,
+) {
+	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
+		const [imgSrc, imgSize] = await gameAbilityImage(abilityId);
+		const [stringifiedAbilityId, modelValue, updateValue] = extraAppliedEffect(abilityId, property, props.damageSource);
+
+		return () => h(VExtrasEnum, {
+			'modelValue': modelValue.value,
+			'idPrefix': `${props.idPrefix}-${stringifiedAbilityId}-${property}`,
+			imgSrc,
+			imgSize,
+			label,
+			options,
 			onImgMouseenter(event) {
 				ctx.emit('imgMouseenter', event, abilityId);
 			},

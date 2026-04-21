@@ -183,6 +183,16 @@ export const CHAMPION_SPECIFICS = {
 		POSSIBLE_DYNAMIC_VALUES: {
 			f1: [0, 1, 2],
 		},
+		FORM_OPTIONS: {
+			base: 0,
+			assassin: 1,
+			rhaast: 2,
+		},
+		setupData(self): { form: number } {
+			return {
+				form: clamp(0, self.internalData.value.form ?? 0, this.FORM_OPTIONS.rhaast),
+			};
+		},
 	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
