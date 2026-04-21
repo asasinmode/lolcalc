@@ -904,7 +904,9 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			let index = -1;
 
 			if (this.champion.value?.id === 'Ornn') {
-				index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
+				if (this.level.value >= CHAMPION_SPECIFICS.Ornn.MASTERWORK_LEVEL) {
+					index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
+				}
 			} else {
 				const effectAbilityId = GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.ornnPLivingForge);
 				const effect = this.getEffect(effectAbilityId);
