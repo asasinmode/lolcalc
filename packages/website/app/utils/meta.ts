@@ -379,6 +379,7 @@ export const EFFECT_OBJECT_NAME = {
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
 	nunuPCallOfFreljord: 'localcNunuPassive',
+	ornnPLivingForge: 'lolcalcOrnnPassive',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];

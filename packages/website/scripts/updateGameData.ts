@@ -935,6 +935,10 @@ const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, IEffectData['data'][stri
 	},
 	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
+	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
+		dataKey: EFFECT_OBJECT_NAME.ornnPLivingForge,
+		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
+	},
 };
 
 if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {

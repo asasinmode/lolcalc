@@ -414,7 +414,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-rune-select {
-		--at-apply: 'px-3 pb-2 bg-[--cyan-bg] gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg b b-[--ui-btn-border-clr]';
+		--at-apply: 'px-5 py-3 bg-[--cyan-bg] gap-x-12 grid-flow-col grid-cols-[auto_auto] grid-rows-[auto_max-content_1fr] shadow-lg b b-[--ui-btn-border-clr]';
 		grid-template-areas:
 			'header header'
 			'primary secondary'

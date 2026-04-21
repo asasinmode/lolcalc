@@ -249,6 +249,15 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Ornn: {
+		MAX_UPGRADED_ALLIES: 4,
+		setupData(self): { masterworkItemSlot: number; passiveUpgradedAllies: number } {
+			return {
+				masterworkItemSlot: clamp(1, self.internalData.value.passiveUpgradedAllies ?? 0, 6),
+				passiveUpgradedAllies: clamp(0, self.internalData.value.passiveUpgradedAllies ?? 0, this.MAX_UPGRADED_ALLIES),
+			};
+		},
+	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
 			return {

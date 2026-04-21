@@ -180,6 +180,18 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	},
+	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0),
+		label: 'Masterwork item slot',
+		minValue: 1,
+		maxValue: 6,
+		setupData(data): [livingForge: number] {
+			return [clamp(this.minValue!, data?.[0] ?? 0, this.maxValue!)];
+		},
+		isActive(data: [livingForge: number]) {
+			return data[0];
+		},
+	},
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;

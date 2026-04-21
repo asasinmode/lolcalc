@@ -64,6 +64,10 @@
 		"localcNunuPassive": {
 			"dataKey": "localcNunuPassive",
 			"description": "This unit has increased Attack Speed and Move Speed."
+		},
+		"lolcalcOrnnPassive": {
+			"dataKey": "lolcalcOrnnPassive",
+			"description": "This unit's item is upgraded thanks to ally Ornn."
 		}
 	},
 	"stringtable": {}
