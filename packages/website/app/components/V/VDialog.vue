@@ -30,6 +30,7 @@ onBeforeUnmount(() => {
 });
 
 defineExpose({
+	el: dialogEl,
 	open() {
 		dialogEl.value?.showModal();
 		emit('open');

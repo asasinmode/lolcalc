@@ -49,7 +49,16 @@ function closeCleanup() {
 const longestName = Object.values(champions).reduce((lName, champ) => champ.name.length > lName.length ? champ.name : lName, '');
 
 defineExpose({
-	open: () => vDialog.value?.open(),
+	open: () => {
+		vDialog.value?.open();
+		nextTick(() => {
+			const ul = vDialog.value?.el?.querySelector('ul');
+			const selected = ul?.querySelector('.selected') as HTMLElement;
+			if (ul && selected) {
+				ul.scrollTop = selected.offsetTop - ul.offsetHeight / 2;
+			}
+		});
+	},
 });
 </script>
 
@@ -113,10 +122,10 @@ defineExpose({
 			<li
 				v-for="champion in computedChampions"
 				:key="champion.id"
+				:class="{ selected: selectedChampion === champion }"
 			>
 				<button
 					class="leading-tight text-center min-w-0 block hyphens-auto"
-					:class="{ selected: selectedChampion === champion }"
 					@click="selectedChampion = champion"
 				>
 					<img
@@ -231,39 +240,39 @@ defineExpose({
 							--at-apply: 'brightness-115';
 						}
 					}
+				}
 
-					&.selected {
-						--at-apply: 'of-visible';
+				&.selected > button {
+					--at-apply: 'of-visible';
 
-						> img {
-							--at-apply: 'saturate-0';
-						}
+					> img {
+						--at-apply: 'saturate-0';
+					}
 
-						&::before,
-						&::after {
-							--at-apply: 'absolute size-[--img-size] top-0 start-1/2 -translate-x-1/2 content-empty z-1';
-						}
+					&::before,
+					&::after {
+						--at-apply: 'absolute size-[--img-size] top-0 start-1/2 -translate-x-1/2 content-empty z-1';
+					}
 
-						&::before {
-							--at-apply: 'size-[calc(var(--img-size)+2*var(--b-w))] -top-[--b-w]';
-							--b-w: calc(0.5 * var(--spacing));
-							--corner-size: calc(3 * var(--spacing));
-							--clr: var(--ui-btn-border-clr);
+					&::before {
+						--at-apply: 'size-[calc(var(--img-size)+2*var(--b-w))] -top-[--b-w]';
+						--b-w: calc(0.5 * var(--spacing));
+						--corner-size: calc(3 * var(--spacing));
+						--clr: var(--ui-btn-border-clr);
 
-							background:
-								linear-gradient(var(--clr) 0 0) top left / var(--corner-size) var(--b-w) no-repeat,
-								linear-gradient(var(--clr) 0 0) top left / var(--b-w) var(--corner-size) no-repeat,
-								linear-gradient(var(--clr) 0 0) top right / var(--corner-size) var(--b-w) no-repeat,
-								linear-gradient(var(--clr) 0 0) top right / var(--b-w) var(--corner-size) no-repeat,
-								linear-gradient(var(--clr) 0 0) bottom left / var(--corner-size) var(--b-w) no-repeat,
-								linear-gradient(var(--clr) 0 0) bottom left / var(--b-w) var(--corner-size) no-repeat,
-								linear-gradient(var(--clr) 0 0) bottom right / var(--corner-size) var(--b-w) no-repeat,
-								linear-gradient(var(--clr) 0 0) bottom right / var(--b-w) var(--corner-size) no-repeat;
-						}
+						background:
+							linear-gradient(var(--clr) 0 0) top left / var(--corner-size) var(--b-w) no-repeat,
+							linear-gradient(var(--clr) 0 0) top left / var(--b-w) var(--corner-size) no-repeat,
+							linear-gradient(var(--clr) 0 0) top right / var(--corner-size) var(--b-w) no-repeat,
+							linear-gradient(var(--clr) 0 0) top right / var(--b-w) var(--corner-size) no-repeat,
+							linear-gradient(var(--clr) 0 0) bottom left / var(--corner-size) var(--b-w) no-repeat,
+							linear-gradient(var(--clr) 0 0) bottom left / var(--b-w) var(--corner-size) no-repeat,
+							linear-gradient(var(--clr) 0 0) bottom right / var(--corner-size) var(--b-w) no-repeat,
+							linear-gradient(var(--clr) 0 0) bottom right / var(--b-w) var(--corner-size) no-repeat;
+					}
 
-						&::after {
-							--at-apply: 'rounded-1/2 b-3 b-[--ui-btn-border-clr] outline -outline-offset-3.5 outline-black';
-						}
+					&::after {
+						--at-apply: 'rounded-1/2 b-3 b-[--ui-btn-border-clr] outline -outline-offset-3.5 outline-black';
 					}
 				}
 			}
