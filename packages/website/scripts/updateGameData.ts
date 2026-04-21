@@ -1671,8 +1671,6 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				stringtableVariableSaveUnder: champion,
 			} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
-			const variantTooltipStringtableKey = variant.tooltip;
-
 			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` })!;
 			variant.name = transformAbilityText(variant.name);
 			// TODO debug tooltips for all abilities, not just passive
@@ -1702,11 +1700,12 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			}
 
 			/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
-			if (variantTooltipStringtableKey && (variantTooltipStringtableKey.toLowerCase() in champion.stringtable)) {
+			const variantTooltipStringtableKey = variant.tooltip;
+			const lowercaseVariantTooltipStringtableKey = variantTooltipStringtableKey?.toLowerCase();
+			if (lowercaseVariantTooltipStringtableKey && (lowercaseVariantTooltipStringtableKey in champion.stringtable)) {
 				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
 
-				/* also trim `<br>` from that reused value */
-				champion.stringtable[variantTooltipStringtableKey.toLowerCase()] = transformAbilityText(champion.stringtable[variantTooltipStringtableKey.toLowerCase()]!)!;
+				champion.stringtable[lowercaseVariantTooltipStringtableKey] = transformAbilityText(champion.stringtable[lowercaseVariantTooltipStringtableKey]!, false)!;
 			}
 
 			if (!variant.name) {
@@ -1716,9 +1715,11 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 	}
 }
 
-function transformAbilityText(value: string) {
+function transformAbilityText(value: string, trim = true) {
 	if (value) {
-		value = trimBr(value);
+		if (trim) {
+			value = trimBr(value);
+		}
 
 		const liIndex = value.lastIndexOf('<li>');
 		if (~liIndex) {
