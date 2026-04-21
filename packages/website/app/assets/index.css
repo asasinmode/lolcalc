@@ -194,7 +194,7 @@
 	}
 
 	.wiki-link {
-		--at-apply: 'hoverable:underline text-sm inline-flex text-blue-400';
+		--at-apply: 'hoverable:underline text-sm inline-flex text-blue-400 whitespace-nowrap';
 
 		&::before {
 			content: '[';

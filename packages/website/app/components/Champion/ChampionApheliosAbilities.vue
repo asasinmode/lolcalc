@@ -33,6 +33,14 @@ const abilitySize = abilityImageSize('Aphelios');
 			aria-hidden="true"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, passiveAbilityId)"
 		>
+		<a
+			v-show="value.champion.value"
+			class="wiki-link"
+			:href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`"
+			target="_blank"
+		>
+			wiki
+		</a>
 	</div>
 	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
 	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">

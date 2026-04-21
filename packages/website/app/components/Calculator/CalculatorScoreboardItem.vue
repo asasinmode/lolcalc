@@ -1192,6 +1192,14 @@ defineExpose({ el });
 							aria-hidden="true"
 							@mouseenter="value.champion.value && showAbilityTooltip($event, 'passive')"
 						>
+						<a
+							v-show="value.champion.value"
+							class="wiki-link"
+							:href="`https://wiki.leagueoflegends.com/en-us/${value.champion.value?.name.replaceAll(' ', '_')}`"
+							target="_blank"
+						>
+							wiki
+						</a>
 					</div>
 					<ComingSoonCover feature="abilities" class="text-white pt-1 inset-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] absolute items-start!" />
 					<div
@@ -2077,10 +2085,14 @@ defineExpose({ el });
 				}
 
 				[data-passive] {
-					--at-apply: 'size-[--ability-size-passive]';
+					--at-apply: 'size-[--ability-size-passive] flex flex-col';
 
 					> h5 {
 						--at-apply: 'sr-only';
+					}
+
+					> a {
+						--at-apply: 'inline-flex mx-auto';
 					}
 				}
 
