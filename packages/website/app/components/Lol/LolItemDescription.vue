@@ -305,9 +305,14 @@ defineExpose({ header });
 			}
 		}
 
-
-		> li + br, br + br + br, > br:last-child {
+		> li + br,
+		> br + br + br,
+		> br:last-child {
 			--at-apply: 'hidden';
+		}
+
+		> br:nth-last-child(2):not(br + br) + rules {
+			--at-apply: 'mt-[1em] block';
 		}
 
 		font[size] {
