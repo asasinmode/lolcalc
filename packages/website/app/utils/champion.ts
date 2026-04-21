@@ -234,6 +234,21 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Nunu: {
+		setupData(self): { isPassiveActive: number } {
+			return {
+				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+			};
+		},
+	},
+	Orianna: {
+		MAX_PASSIVE_STACKS: 2,
+		setupData(self): { passiveStacksOnTarget: number } {
+			return {
+				passiveStacksOnTarget: clamp(0, self.internalData.value.passiveStacksOnTarget ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
 			return {

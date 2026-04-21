@@ -170,6 +170,16 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	},
+	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Nunu', 'passive', 0),
+		label: 'Call of the Freljord',
+		setupData(data): [callOfFreljord: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [callOfFreljord: number]) {
+			return data[0];
+		},
+	},
 } satisfies IHypotheticalEffectSpecifics;
 
 export type TEffectSpecifics = typeof EFFECT_SPECIFICS;

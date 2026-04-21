@@ -88,6 +88,12 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.towardsChampion]: 'towards champions',
 		}),
 	},
+	Nunu: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Nunu', 'passive', 0), 'isPassiveActive', 'is passive active (hit champion/structure/monster)', false),
+	},
+	Orianna: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Orianna', 'passive', 0), 'passiveStacksOnTarget', 'Windup stacks on target', 0, CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS),
+	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
 	},
@@ -99,7 +105,7 @@ for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES
 		const { label, minValue = 0, maxValue = 1 } = effectSpecific;
 
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
-		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with `DamageSource.computeAppliedEffect`, it works only on first value
+		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with , it works only on first value
 		CHAMPION_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue > 1
 			? await numberExtra(abilityId, 0, label, minValue, maxValue)
 			: await booleanExtra(abilityId, 0, label);

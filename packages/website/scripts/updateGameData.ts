@@ -934,6 +934,7 @@ const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, IEffectData['data'][stri
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
 	},
 	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
+	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 };
 
 if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJECT_ENTRIES.some(entry => !(entry[0] in effectData!.data))) {

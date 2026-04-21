@@ -50,19 +50,10 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest
-    - [ ] extras ui champions
-      - [x] aphelios ability levels
-      - [x] veigar
-      - [ ] volibear
-      - [ ] zaahen
-      - [ ] kai'sa
-      - [ ] [ornn](https://raw.communitydragon.org/latest/game/assets/items/itemmodifiers/bordertreatmentornn.png)
-      - [ ] senna
-      - [ ] thresh
-      - [ ] jax
-      - [ ] target dummy stats
+    - [?] extras ui champions
     - [x] extras ui items
-    - [?] other "internal" effects like movement speed (bc, trinity, cosmic drive)
+    - [?] extras target dummy
+    - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [?] shapeshifting champions choose shape, switch abilities since it can affect stats
   - [?] detect invalid ability levels
   - [x] mirror layout
@@ -120,11 +111,12 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] effects
   - [x] dialog
   - [x] apply effects like black cleaver, abyssal mask, amumu passive
-  - [ ] item effects options ui
-  - [ ] champion passive effects options ui
+  - [x] item effects options ui
+  - [?] champion passive effects options ui
+  - [?] other effects options ui, like slow, stun, grievous wounds
   - [x] hover tooltips
   - [x] show source ability tooltip on shift
-- [ ] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
+- [x] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
 - [x] close dialogs on click outside
 - [x] target dummy damage source
 - [x] sharing, saving/reading data in query
@@ -132,8 +124,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] `internalItemData` like `${key}~${value1}~${value2}|${otherKey}-${value1}-...`
   - [ ] remove dividing `-` where possible like abilityLevels that are 1 digit only
 - [x] confirm removing/clearing row/scoreboard item, ideally undo
-- [?] header, footer, contact info
-- [?] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
+- [x] header, footer, contact info
+- [x] implement role quests (midlane add red `(Only Mid Lane) Locked until Quest is Completed`)
 - [ ] mobile version and make look better
 - [ ] calculations
   - [ ] try to use values from actual champion ability data (like `Ezreal.abilities.passive[0].dataValues.MaxStacks`)
@@ -194,6 +186,8 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] CONTRIBUTING.md
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
+
+[ornn](https://raw.communitydragon.org/latest/game/assets/items/itemmodifiers/bordertreatmentornn.png)
 
 ### future features
 

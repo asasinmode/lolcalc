@@ -378,6 +378,7 @@ export const EFFECT_OBJECT_NAME = {
 	bloodletterVileDecay: '8010VisualDebuff',
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
+	nunuPCallOfFreljord: 'localcNunuPassive',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
