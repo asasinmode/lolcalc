@@ -36,7 +36,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Draven', 'passive', 0), 'passiveStacks', 'League of Draven stacks'),
 	},
 	Ekko: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ekko', 'passive', 0), 'isPassiveMSActive', 'is passive active (3 hits)', false),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ekko', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (3 hits)', false),
 	},
 	Ezreal: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ezreal', 'passive', 0), 'passiveStacks', 'Spell Force stacks', 0, CHAMPION_SPECIFICS.Ezreal.MAX_PASSIVE_STACKS),
@@ -45,7 +45,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Garen', 'passive', 0), 'isPassiveActive', 'is passive active (not hit recently)', false),
 	},
 	Heimerdinger: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Heimerdinger', 'passive', 0), 'isPassiveMSActive', 'is passive active (close to turret)', false),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Heimerdinger', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (close to turret)', false),
 	},
 	Irelia: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Irelia', 'passive', 0), 'passiveStacks', 'Ionian Fervor stacks', 0, CHAMPION_SPECIFICS.Irelia.MAX_PASSIVE_STACKS),
@@ -149,6 +149,18 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	},
 	Syndra: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Syndra', 'passive', 0), 'passiveStacks', 'Splinters collected', 0, CHAMPION_SPECIFICS.Sona.MAX_PASSIVE_STACKS),
+	},
+	Taliyah: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Taliyah', 'passive', 0), 'isPassiveMSActive', 'is passive MS active (next to wall ooc)', false),
+	},
+	Taric: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Taric', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
+	},
+	Teemo: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Teemo', 'passive', 0), 'isPassiveASActive', 'is passive AS active (exiting invisibility)', false),
+	},
+	Thresh: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Thresh', 'passive', 0), 'passiveStacks', 'Souls collected'),
 	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),

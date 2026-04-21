@@ -305,6 +305,10 @@ defineExpose({ header });
 			}
 		}
 
+		> br + br {
+			--at-apply: 'hidden';
+		}
+
 		font[size] {
 			--at-apply: 'text-[length:inherit]';
 		}

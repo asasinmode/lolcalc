@@ -380,6 +380,34 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Taliyah: {
+		setupData(self): { isPassiveMSActive: number } {
+			return {
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+			};
+		},
+	},
+	Taric: {
+		setupData(self): { hasPassiveStack: number } {
+			return {
+				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+			};
+		},
+	},
+	Teemo: {
+		setupData(self): { isPassiveASActive: number } {
+			return {
+				isPassiveASActive: clamp(0, self.internalData.value.isPassiveASActive ?? 0, 1),
+			};
+		},
+	},
+	Thresh: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
 			return {
