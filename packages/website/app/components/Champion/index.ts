@@ -1,5 +1,5 @@
 import type { ISpecificComponents } from '~/utils/types';
-import { ChampionExtrasAphelios } from '#components';
+import { ChampionExtrasAphelios, ChampionExtrasViktor } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	Ambessa: {
@@ -82,7 +82,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Mordekaiser', 'passive', 0), 'isPassiveMSActive', 'is passive active (3 hits)', false),
 	},
 	Nidalee: {
-		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'Passive bonus MS', {
+		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', {
 			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.none]: 'none',
 			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.justBush]: 'in bush',
 			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.towardsChampion]: 'towards champions',
@@ -162,8 +162,20 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Thresh: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Thresh', 'passive', 0), 'passiveStacks', 'Souls collected'),
 	},
+	Udyr: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Udyr', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
+	},
+	Varus: {
+		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Varus', 'passive', 0), 'passiveVariantActive', 'passive buff from enemy', Object.fromEntries(Object.entries(CHAMPION_SPECIFICS.Varus.PASSIVE_OPTIONS).map(([label, value]) => [value, label]))),
+	},
+	Vayne: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Vayne', 'passive', 0), 'isPassiveMSActive', 'is moving towards enemy', false),
+	},
 	Veigar: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Veigar', 'passive', 0), 'passiveStacks', 'Phenomenal Evil stacks'),
+	},
+	Viktor: {
+		extras: ChampionExtrasViktor,
 	},
 };
 

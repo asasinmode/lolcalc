@@ -408,10 +408,53 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Udyr: {
+		setupData(self): { hasPassiveStack: number } {
+			return {
+				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+			};
+		},
+	},
+	Varus: {
+		PASSIVE_OPTIONS: {
+			none: 0,
+			generic: 1,
+			champion: 2,
+		},
+		setupData(self): { passiveVariantActive: number } {
+			return {
+				passiveVariantActive: clamp(0, self.internalData.value.passiveVariantActive ?? 0, this.PASSIVE_OPTIONS.champion),
+			};
+		},
+	},
+	Vayne: {
+		setupData(self): { isPassiveMSActive: number } {
+			return {
+				isPassiveMSActive: clamp(0, self.internalData.value.isPassiveMSActive ?? 0, 1),
+			};
+		},
+	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
 			return {
 				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Viktor: {
+		MAX_PASSIVE_UPGRADES_MASK: 2 ** 4,
+		setupData(self): { passiveAbilityUpgradesMask: number } {
+			let passiveAbilityUpgradesMask = clamp(0, self.internalData.value.passiveAbilityUpgradesMask ?? 0, this.MAX_PASSIVE_UPGRADES_MASK);
+
+			/* unevolve R if not all basic are evolved */
+			const rBit = 1 << 3;
+			const notAllEvolved = (passiveAbilityUpgradesMask & (rBit - 1)) !== (rBit - 1);
+			if ((passiveAbilityUpgradesMask & rBit) && notAllEvolved) {
+				passiveAbilityUpgradesMask &= ~rBit;
+			}
+
+			return {
+				passiveAbilityUpgradesMask,
 			};
 		},
 	},

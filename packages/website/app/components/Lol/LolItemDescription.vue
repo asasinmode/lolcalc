@@ -306,6 +306,7 @@ defineExpose({ header });
 		}
 
 		> li + br,
+		> rules > br,
 		> br + br + br,
 		> br:last-child {
 			--at-apply: 'hidden';

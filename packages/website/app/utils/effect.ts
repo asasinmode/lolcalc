@@ -183,7 +183,7 @@ export const EFFECT_SPECIFICS = {
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0),
 		label: 'Masterwork item slot',
-		/** this goes from <0-6> as opposed to ornn passive's <1-6> so it can be toggled "off" when decreased to 0 */
+		/** this goes from <0,6> as opposed to ornn passive's <1,6> so it can be toggled "off" when decreased to 0 */
 		minValue: 0,
 		maxValue: 6,
 		setupData(data): [masterworkSlotIndex: number] {
