@@ -914,8 +914,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				}
 			}
 
-			console.log(this.champion.value?.name, index);
-			return -1;
+			return index;
 		}),
 		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
 			const { minorVersion } = usePatchVersion();

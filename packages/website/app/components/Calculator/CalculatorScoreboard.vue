@@ -333,7 +333,11 @@ function setLocalMirrorLayout() {
 </script>
 
 <template>
-	<section id="scoreboard" :data-mirrored="mirrorLayout || undefined">
+	<section
+		id="scoreboard"
+		:data-mirrored="mirrorLayout || undefined"
+		:style="`--masterwork-border-url: url(https://raw.communitydragon.org/${minorVersion}/game/assets/items/itemmodifiers/bordertreatmentornn.png)`"
+	>
 		<h2>
 			configuration scoreboard
 		</h2>

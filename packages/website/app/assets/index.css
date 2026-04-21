@@ -204,4 +204,16 @@
 			content: ']';
 		}
 	}
+
+	[data-masterwork] {
+		--at-apply: 'relative';
+
+		&::after {
+			--at-apply: 'absolute inset-0 content-empty z-1';
+			background-image: var(--masterwork-border-url);
+			background-repeat: no-repeat;
+			background-size: 100%;
+			background-position: center;
+		}
+	}
 }
