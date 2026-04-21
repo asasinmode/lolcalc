@@ -110,10 +110,14 @@ function emitRemove() {
 const undoRemoveButton = useTemplateRef('undoRemoveButton');
 
 function secondStepRemove() {
-	undoRemoveButton.value!.style.display = 'grid';
-	undoRemoveButton.value!.focus();
-	undoRemoveButton.value!.addEventListener('focusout', removeAndFocusNext);
-	el.value!.addEventListener('mouseleave', removeAndFocusNext);
+	if (props.value.anythingFilled.value) {
+		undoRemoveButton.value!.style.display = 'grid';
+		undoRemoveButton.value!.focus();
+		undoRemoveButton.value!.addEventListener('focusout', removeAndFocusNext);
+		el.value!.addEventListener('mouseleave', removeAndFocusNext);
+	} else {
+		removeAndFocusNext();
+	}
 }
 
 function undoRemove() {

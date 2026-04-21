@@ -305,7 +305,7 @@ function addComputedColumn(column: IDamageResultTableColumn) {
 function startRemovingColumn(event: MouseEvent, index: number) {
 	const removeButton = (event.target as HTMLElement).closest('button');
 	const undoRemoveButton = removeButton?.nextElementSibling?.nextElementSibling as HTMLButtonElement | undefined;
-	if (!undoRemoveButton) {
+	if (!undoRemoveButton || !(resultColumns.value[index]?.source || resultColumns.value[index]?.target)) {
 		removeResultsColumn(index);
 		return;
 	}
