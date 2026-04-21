@@ -496,7 +496,7 @@ defineExpose({
 							<span>{{ shopItem.isBought && shopItem.buyability === -1 ? '' : shopItem.calculatedPrice }}</span>
 						</li>
 					</ul>
-					<section aria-live="polite" aria-atomic="true">
+					<section aria-live="polite" aria-atomic="true" :data-empty="!searchCursoredOverItem ? '' : undefined">
 						<LolItemDescription
 							ref="searchItemDescription"
 							:item="searchCursoredOverItem?.item"
@@ -941,7 +941,7 @@ defineExpose({
 			}
 
 			> form {
-				--at-apply: 'end-0 top-0 absolute';
+				--at-apply: 'end-0 top-0 absolute z-10';
 
 				> button {
 					--at-apply: 'p-1 text-neutral-200 hoverable:text-white';
@@ -1008,6 +1008,10 @@ defineExpose({
 									transparent 100%
 								)
 								1;
+						}
+
+						&[data-empty] > * {
+							display: none;
 						}
 					}
 				}

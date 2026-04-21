@@ -79,6 +79,16 @@ defineExpose({ header });
 		</span>
 		<span>{{ computedDescription?.subtitleLeft }}</span>
 		<span>{{ computedDescription?.subtitleRight }}</span>
+		<a
+			v-if="!hoverTooltip"
+			v-show="computedDescription?.item"
+			class="wiki-link"
+			:href="`https://wiki.leagueoflegends.com/en-us/${computedDescription?.item.name.replaceAll(' ', '_')}`"
+			target="_blank"
+			@click.stop=""
+		>
+			wiki
+		</a>
 	</component>
 	<div class="item-description" :class="descriptionClass">
 		<p v-if="isMidQuestBoots && damageSource && damageSource.roleQuest.value !== 'mid'">
@@ -171,17 +181,22 @@ defineExpose({ header });
 			--at-apply: 'text-end text-neutral-300';
 		}
 
-		&[data-show-subtitles] {
+		&[data-show-subtitles],
+		:has(> a) {
 			--at-apply: 'grid-cols-[auto_1fr_auto]';
 		}
 
-		&[data-show-subtitles] span:nth-of-type(2) {
+		&[data-show-subtitles] > span:nth-of-type(2) {
 			--at-apply: 'text-xl text-end justify-end';
 		}
 
-		&[data-show-subtitles] span:nth-of-type(3),
-		&[data-show-subtitles] span:nth-of-type(4) {
+		&[data-show-subtitles] > span:nth-of-type(3),
+		&[data-show-subtitles] > span:nth-of-type(4) {
 			--at-apply: 'inline';
+		}
+
+		> a {
+			--at-apply: 'row-start-1 col-start-3';
 		}
 	}
 

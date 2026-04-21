@@ -192,4 +192,16 @@
 	.skip-link {
 		--at-apply: 'absolute -start-2500 bg-white text-black p-1 font-600 focus-visible:start-0';
 	}
+
+	.wiki-link {
+		--at-apply: 'hoverable:underline text-sm inline-flex text-blue-400';
+
+		&::before {
+			content: '[';
+		}
+
+		&::after {
+			content: ']';
+		}
+	}
 }
