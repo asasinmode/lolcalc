@@ -25,8 +25,8 @@ function toggle(abilityIndex: number) {
 	const bit = 1 << abilityIndex;
 	(props.damageSource as DamageSource<'Viktor'>).internalData.value.passiveAbilityUpgradesMask ^= bit;
 
-	if (notAllBasicEvolved.value && isEvolved(3)) {
-		(props.damageSource as DamageSource<'Viktor'>).internalData.value.passiveAbilityUpgradesMask ^= 1 << 3;
+	if (notAllBasicEvolved.value) {
+		(props.damageSource as DamageSource<'Viktor'>).internalData.value.passiveAbilityUpgradesMask &= ~(1 << 3);
 	}
 }
 </script>

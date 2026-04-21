@@ -449,7 +449,7 @@ export const CHAMPION_SPECIFICS = {
 			/* unevolve R if not all basic are evolved */
 			const rBit = 1 << 3;
 			const notAllEvolved = (passiveAbilityUpgradesMask & (rBit - 1)) !== (rBit - 1);
-			if ((passiveAbilityUpgradesMask & rBit) && notAllEvolved) {
+			if (notAllEvolved) {
 				passiveAbilityUpgradesMask &= ~rBit;
 			}
 
