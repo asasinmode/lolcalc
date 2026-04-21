@@ -221,7 +221,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 #### very future
 
 - [ ] combo damage / sequence of things, choose spells/aas in order, apply them to target, show damage
-- [ ] decaying movement speed stuff like fiora passive, theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
+- [ ] decaying movement speed stuff like fiora/nami passive, theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
 - [ ] aram
   - item overrides - `DataValuesModeOverride`
 - [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)

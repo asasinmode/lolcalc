@@ -194,6 +194,46 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Kindred: {
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: Math.max(0, self.internalData.value.passiveStacks ?? 0),
+			};
+		},
+	},
+	Kled: {
+		setupData(self): { isDismounted: number } {
+			return {
+				isDismounted: clamp(0, self.internalData.value.isDismounted ?? 0, 1),
+			};
+		},
+	},
+	LeeSin: {
+		setupData(self): { hasPassiveStack: number } {
+			return {
+				hasPassiveStack: clamp(0, self.internalData.value.hasPassiveStack ?? 0, 1),
+			};
+		},
+	},
+	Mordekaiser: {
+		setupData(self): { isPassiveActive: number } {
+			return {
+				isPassiveActive: clamp(0, self.internalData.value.isPassiveActive ?? 0, 1),
+			};
+		},
+	},
+	Nidalee: {
+		PASSIVE_OPTIONS: {
+			none: 0,
+			justBush: 1,
+			towardsChampion: 2,
+		},
+		setupData(self): { passiveVariantActive: number } {
+			return {
+				passiveVariantActive: clamp(0, self.internalData.value.passiveVariantActive ?? 0, this.PASSIVE_OPTIONS.towardsChampion),
+			};
+		},
+	},
 	Veigar: {
 		setupData(self): { passiveStacks: number } {
 			return {

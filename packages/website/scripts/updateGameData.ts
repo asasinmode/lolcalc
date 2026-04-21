@@ -1206,7 +1206,7 @@ function cleanupItemText(text?: string): string | undefined {
 }
 
 // TODO maybe dont trim the ability descriptions and instead style the repeated `<br>` and anything followed by it
-// jhin and aatrox passives have extended <rules> but aatrox has <br> that are kept while jhin's were removed, make sure both look good
+// jhin/kassadin and aatrox passives have extended <rules> but aatrox has <br> that are kept while jhin's were removed, make sure both look good
 function trimBr(value: string) {
 	while (value.startsWith('<br>')) {
 		value = value.slice(4).trim();

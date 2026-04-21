@@ -3,7 +3,7 @@ import { ChampionExtrasAphelios } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	Ambessa: {
-		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has passive stack', false),
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ambessa', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
 	},
 	Amumu: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0), 'applyPassive', 'Cursed Touch', undefined, true),
@@ -18,7 +18,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'AurelionSol', 'passive', 0), 'passiveStacks', 'Cosmic Creator stacks'),
 	},
 	Bard: {
-		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Bard', 'passive', 0), 'passiveStacks', 'Chimes'),
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Bard', 'passive', 0), 'passiveStacks', 'Chimes collected'),
 	},
 	Belveth: {
 		extras: [
@@ -67,6 +67,25 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.base]: 'base',
 			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.assassin]: 'assassin',
 			[CHAMPION_SPECIFICS.Kayn.FORM_OPTIONS.rhaast]: 'rhaast',
+		}),
+	},
+	Kindred: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kindred', 'passive', 0), 'passiveStacks', 'Marks collected'),
+	},
+	Kled: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Kled', 'passive', 0), 'isDismounted', 'is dismounted', false),
+	},
+	LeeSin: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'LeeSin', 'passive', 0), 'hasPassiveStack', 'has passive stack (from using ability)', false),
+	},
+	Mordekaiser: {
+		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Mordekaiser', 'passive', 0), 'isPassiveActive', 'is passive active (3 hits)', false),
+	},
+	Nidalee: {
+		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'Passive bonus MS', {
+			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.none]: 'none',
+			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.justBush]: 'in bush',
+			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.towardsChampion]: 'towards champions',
 		}),
 	},
 	Veigar: {
