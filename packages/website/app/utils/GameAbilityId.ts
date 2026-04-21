@@ -18,7 +18,7 @@ export class GameAbilityId {
 		id: Id): IItemAbilityId<Id>;
 	static build<Id extends IEffectObjectName>(
 		type: 'effect',
-		id: IEffectObjectName): IEffectAbilityId<Id>;
+		id: Id): IEffectAbilityId<Id>;
 	static build(
 		type: TAbilityType,
 		id: string,
@@ -44,9 +44,11 @@ export class GameAbilityId {
 	/**
 	 * for champion: `${typeIndex}-${championId}-${abilityKeyIndex}-${abilityVariantIndex}`
 	 * for item: `${typeIndex}-${itemId}`
+	 * for effect: `${effect}-${effectObjectIndex}`
 	 *
 	 * `typeIndex` is `ALL_ABILITY_TYPES.indexOf(type)`
-	 * `abilityKeyIndex` is `ALL_CHAMPION_ABILITY_KEYS.indexOf(type)`
+	 * `abilityKeyIndex` is `ALL_CHAMPION_ABILITY_KEYS.indexOf(abilityKey)`
+	 * `effectObjectIndex` is `Object.keys(EFFECT_OBJECT_NAMES).indexOf(id)`
 	 */
 	static stringify(id: IGameAbilityId): string {
 		const typeIndex = ALL_ABILITY_TYPES.indexOf(id.type);

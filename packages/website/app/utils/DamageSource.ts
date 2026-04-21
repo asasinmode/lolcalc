@@ -714,7 +714,6 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 		}
 	}
 
-	// TODO unused
 	getEffect(abilityId: IGameAbilityId): [IDamageSourceEffect, index: number] | undefined {
 		const index = this.appliedEffects.value.findIndex(effect => effect.abilityId.id === abilityId.id);
 
@@ -901,6 +900,23 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 			}
 			return undefined;
 		})),
+		masterworkItemSlotIndex: computed<number>(() => {
+			let index = -1;
+
+			if (this.champion.value?.id === 'Ornn') {
+				index = (this as DamageSource<'Ornn'>).internalData.value.masterworkItemSlot - 1;
+			} else {
+				const effectAbilityId = GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.ornnPLivingForge);
+				const effect = this.getEffect(effectAbilityId);
+
+				if (effect) {
+					index = (effect[0].data as IGameAbilityData<typeof effectAbilityId>)[0] - 1;
+				}
+			}
+
+			console.log(this.champion.value?.name, index);
+			return -1;
+		}),
 		abilities: computed<Record<IChampionAbilityKey, IComputedAbilityDescription[]>>(() => {
 			const { minorVersion } = usePatchVersion();
 
