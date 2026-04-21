@@ -1674,25 +1674,25 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			const variantTooltipStringtableKey = variant.tooltip;
 
 			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` })!;
-			variant.name &&= trimBr(variant.name);
+			variant.name = transformAbilityText(variant.name);
 			// TODO debug tooltips for all abilities, not just passive
 			variant.tooltip = variant.tooltip && getStringtableValue(
 				variant.tooltip,
 				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip` } : `${variant.dataKey} tooltip`,
 			);
-			variant.tooltip &&= trimBr(variant.tooltip);
+			variant.tooltip &&= transformAbilityText(variant.tooltip);
 			variant.tooltipExtended = variant.tooltipExtended && getStringtableValue(
 				variant.tooltipExtended,
 				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` } : `${variant.dataKey} tooltip extended`,
 			);
-			variant.tooltipExtended &&= trimBr(variant.tooltipExtended);
+			variant.tooltipExtended &&= transformAbilityText(variant.tooltipExtended);
 			// TODO TMP some abilities have it but found in stringtable and probably hashed so uncomment it when hashed stringtable keys are tried and resolved
 			if (abilityName === 'passive') {
 				variant.tooltipExtendedBelowLine = variant.tooltipExtendedBelowLine && getStringtableValue(
 					variant.tooltipExtendedBelowLine,
 					{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
 				);
-				variant.tooltipExtendedBelowLine &&= trimBr(variant.tooltipExtendedBelowLine);
+				variant.tooltipExtendedBelowLine &&= transformAbilityText(variant.tooltipExtendedBelowLine);
 			}
 
 			for (const extendedVariable of variant.extendedVariables || []) {
@@ -1706,7 +1706,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
 
 				/* also trim `<br>` from that reused value */
-				champion.stringtable[variantTooltipStringtableKey.toLowerCase()] = trimBr(champion.stringtable[variantTooltipStringtableKey.toLowerCase()]!);
+				champion.stringtable[variantTooltipStringtableKey.toLowerCase()] = transformAbilityText(champion.stringtable[variantTooltipStringtableKey.toLowerCase()]!)!;
 			}
 
 			if (!variant.name) {
@@ -1714,6 +1714,22 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 			}
 		}
 	}
+}
+
+function transformAbilityText(value: string) {
+	if (value) {
+		value = trimBr(value);
+
+		const liIndex = value.lastIndexOf('<li>');
+		if (~liIndex) {
+			const brIndex = value.indexOf('<br>', liIndex + 4);
+			if (~brIndex && !value.slice(0, brIndex).endsWith('</li>')) {
+				value = `${value.slice(0, brIndex)}</li>${value.slice(brIndex)}`;
+			}
+		}
+	}
+
+	return value;
 }
 
 function extractEffectDescription(description: string) {

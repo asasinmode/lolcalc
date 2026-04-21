@@ -78,7 +78,7 @@
 					"name": "Ebb and Flow",
 					"objectName": "NamiW",
 					"image": "assets/characters/nami/hud/icons2d/namiw.png",
-					"tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to @MaxTargets@ targets.<li>Restores <healing>@TotalHeal@ Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.<br>The damage and healing value is modified by @BounceScaling@ each bounce. ",
+					"tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to @MaxTargets@ targets.<li>Restores <healing>@TotalHeal@ Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.</li><br>The damage and healing value is modified by @BounceScaling@ each bounce. ",
 					"extendedVariables": [
 						{
 							"type": "BaseHeal",

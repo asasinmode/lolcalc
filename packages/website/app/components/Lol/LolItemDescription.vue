@@ -300,7 +300,7 @@ defineExpose({ header });
 		> li {
 			--at-apply: 'ms-5 list-item list-disc';
 
-			:not(li) + & {
+			&:first-of-type {
 				--at-apply: 'mt-3';
 			}
 		}
