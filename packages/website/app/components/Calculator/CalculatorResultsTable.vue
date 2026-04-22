@@ -999,8 +999,8 @@ async function addColumnAbilities(columnIndex: number) {
 	const { championOptionIndex } = columnAddableOptions.value[columnIndex]!;
 	const option = damageSectionOptions.value[championOptionIndex!];
 	if (option) {
-		for (const ability of option.abilities) {
-			addResultsSection(ability.id);
+		for (let i = option.abilities.length - 1; i >= 0; i--) {
+			addResultsSection(option.abilities[i]!.id, '');
 		}
 	}
 	emit('configurationChanged');
