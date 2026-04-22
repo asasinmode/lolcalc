@@ -345,7 +345,7 @@ function removeResultsColumn(index: number) {
 	emit('configurationChanged');
 }
 
-const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== STATS_SECTION_ID && !section.isCustomTotal).map(section => section.id));
+const expandedSections = ref<string[]>(resultSections.value.filter(section => section.id !== STATS_SECTION_ID).map(section => section.id));
 
 function toggleResultsSection(sectionId: string) {
 	const index = expandedSections.value.indexOf(sectionId);
@@ -451,12 +451,8 @@ async function addResultsSection(
 		rows: [],
 	} satisfies Omit<IDamageResultTableSection, 'getCellValue'> as unknown as IDamageResultTableSection;
 
-	/* section has name = was added by user and customTotal is at the bottom so keep it there */
-	if (name && resultSections.value.at(-1) === customTotalSection) {
-		resultSections.value.splice(resultSections.value.length - 1, 0, section);
-	} else {
-		resultSections.value.push(section);
-	}
+	/* when name is undefined it's being restored from state which does so in order */
+	resultSections.value[name === undefined ? 'push' : 'unshift'](section);
 	expand && expandedSections.value.push(section.id);
 
 	if (abilityId.type === 'champion') {
@@ -1154,7 +1150,6 @@ defineExpose({
 									add
 								</button>
 							</form>
-							<!-- <span aria-hidden="true">damage type</span> -->
 						</div>
 					</td>
 					<td
@@ -1609,7 +1604,7 @@ defineExpose({
 			var(--header-row-pt) + var(--header-row-pb) + var(--header-champion-select-size) + 2 * var(--header-row-gap-y) +
 				3 * var(--control-btn-size) - 1px
 		); /* offset by 1 px to undouble button borders */
-		--section-header-row-pt: calc(1 * var(--spacing));
+		--section-header-row-pt: calc(2 * var(--spacing));
 		--section-header-row-pb: calc(1 * var(--spacing));
 		--section-body-pb: 0px;
 
@@ -1637,7 +1632,7 @@ defineExpose({
 				--at-apply: 'min-h-px h-full';
 
 				> * {
-					--at-apply: 'pt-[--header-row-pt]';
+					--at-apply: 'pt-[--header-row-pt] b-b b-[--b-clr]';
 				}
 			}
 
@@ -1656,7 +1651,7 @@ defineExpose({
 					}
 
 					> form {
-						--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2 my-auto';
+						--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2';
 
 						> label {
 							--at-apply: 'col-span-full text-start';
@@ -2100,6 +2095,10 @@ defineExpose({
 
 				&:last-of-type::before {
 					--at-apply: 'bottom-0';
+				}
+
+				&:nth-last-of-type(2):has(+ [hidden])::before {
+					--at-apply: '-bottom-[0.5px]';
 				}
 			}
 		}
