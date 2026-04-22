@@ -1046,6 +1046,12 @@ function recomputeCustomTotalRow() {
 	calculateComputedRowComparisonMap(customTotalComputedSectionTotalRow);
 }
 
+const colW = {
+	controls: 60,
+	header: 280,
+	result: 120,
+};
+
 defineExpose({
 	resultColumns,
 	resultSections,
@@ -1073,17 +1079,17 @@ defineExpose({
 			</caption>
 			<thead>
 				<tr>
-					<th width="60px" scope="col">
+					<th :width="`${colW.controls}px`" scope="col">
 						<span>row controls</span>
 					</th>
-					<th id="results-table-header-damage-type" scope="col" width="240px">
+					<th id="results-table-header-damage-type" scope="col" :width="`${colW.header}px`">
 						<span>damage type</span>
 					</th>
 					<th
 						v-for="(column) in resultColumns"
 						:key="column.id"
 						scope="col"
-						width="120px"
+						:width="`${colW.result}px`"
 					>
 						<span>
 							{{ column.source && sourceOptions.find(option => option[0] === column.source!.id)?.[1] || 'undefined source' }}
@@ -1093,7 +1099,7 @@ defineExpose({
 					</th>
 				</tr>
 				<tr>
-					<td width="300px" colspan="2">
+					<td :width="`${colW.controls + colW.header}px`" colspan="2">
 						<div>
 							<a href="#results-table-section-header-aa" class="skip-link">
 								skip column controls
@@ -1116,13 +1122,45 @@ defineExpose({
 								remove unused
 								<span>(empty columns and sections without corresponding damage source)</span>
 							</button>
-							<span aria-hidden="true">damage type</span>
+							<form @submit.prevent="submitResultsSection">
+								<label for="results-table-row-new-section-ability">add section</label>
+								<select
+									id="results-table-row-new-section-ability"
+									name="sectionOptionIndex"
+									required
+									:disabled="!damageSectionOptions.length"
+								>
+									<option v-if="!damageSectionOptions.length">
+										no options left
+									</option>
+									<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
+										<option
+											v-for="(ability, abilityIndex) in option.abilities"
+											:key="GameAbilityId.stringify(ability.id)"
+											:value="`${optionIndex}-${abilityIndex}`"
+											:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== ABILITY_TYPE.champion || ability.id.abilityKey === 'passive')"
+										>
+											{{ ability.name }}
+										</option>
+									</optgroup>
+								</select>
+								<button
+									class="pretend-ui-btn"
+									type="submit"
+									:disabled="!damageSectionOptions.length
+										|| !enableUnimplementedUi
+										&& !damageSectionOptions.some(option => option.type !== ABILITY_TYPE.champion || option.abilities.some(ability => (ability.id as IChampionAbilityId).abilityKey === 'passive'))"
+								>
+									add
+								</button>
+							</form>
+							<!-- <span aria-hidden="true">damage type</span> -->
 						</div>
 					</td>
 					<td
 						v-for="(column, index) in resultColumns"
 						:key="column.id"
-						width="120px"
+						:width="`${colW.result}px`"
 						:data-drop-direction="columnDragDropIndex === index ? 'before' : columnDragDropIndex === index + 1 ? 'after' : undefined"
 						:class="{ highlighted: highlightedColumns[index] }"
 						:style="columnDamageSourcesColorStyles(column)"
@@ -1433,51 +1471,9 @@ defineExpose({
 					</tr>
 				</tbody>
 			</template>
-			<tfoot
-				:data-drop-direction="sectionDragDropIndex === resultSections.length ? 'before' : undefined"
-				@dragenter="onResultSectionDragenter($event, resultSections.length)"
-				@dragover="onResultSectionDragover($event, resultSections.length)"
-				@dragleave="onResultSectionDragleave"
-				@drop="onResultSectionDrop($event, resultSections.length)"
-			>
+			<tfoot>
 				<tr>
-					<td :colspan="2 + resultColumns.length">
-						<form @submit.prevent="submitResultsSection">
-							<label for="results-table-row-new-section-ability">add section</label>
-							<select
-								id="results-table-row-new-section-ability"
-								name="sectionOptionIndex"
-								required
-								:disabled="!damageSectionOptions.length"
-							>
-								<option v-if="!damageSectionOptions.length">
-									no options left
-								</option>
-								<optgroup v-for="(option, optionIndex) in damageSectionOptions" :key="option.optionId" :label="`${option.optionName}${enableUnimplementedUi || option.optionId === 'items' ? '' : ' NOT IMPLEMENTED, COMING SOON'}`">
-									<option
-										v-for="(ability, abilityIndex) in option.abilities"
-										:key="GameAbilityId.stringify(ability.id)"
-										:value="`${optionIndex}-${abilityIndex}`"
-										:disabled="enableUnimplementedUi ? undefined : !(ability.id.type !== ABILITY_TYPE.champion || ability.id.abilityKey === 'passive')"
-									>
-										{{ ability.name }}
-									</option>
-								</optgroup>
-							</select>
-							<button
-								class="pretend-ui-btn"
-								type="submit"
-								:disabled="!damageSectionOptions.length
-									|| !enableUnimplementedUi
-									&& !damageSectionOptions.some(option => option.type !== ABILITY_TYPE.champion || option.abilities.some(ability => (ability.id as IChampionAbilityId).abilityKey === 'passive'))"
-							>
-								add
-							</button>
-						</form>
-						<a href="#results-table-skip-rows" class="skip-link">
-							skip back to column headers
-						</a>
-					</td>
+					<td colspan="-1" />
 				</tr>
 			</tfoot>
 		</table>
@@ -1488,15 +1484,15 @@ defineExpose({
 				</caption>
 				<thead>
 					<tr>
-						<th width="60px" scope="col">
+						<th :width="`${colW.controls}px`" scope="col">
 							<span>row controls</span>
 						</th>
-						<th id="results-table-header-damage-type" scope="col" width="240px">
+						<th id="results-table-header-damage-type" scope="col" :width="`${colW.header}px`">
 							<span>damage type</span>
 						</th>
 						<th
 							scope="col"
-							width="120px"
+							:width="`${colW.result}px`"
 						>
 							<span>
 								undefined source
@@ -1506,7 +1502,7 @@ defineExpose({
 						</th>
 					</tr>
 					<tr>
-						<td width="300px" colspan="2">
+						<td :width="`${colW.controls + colW.header}px`" colspan="2">
 							<div>
 								<label for="results-table-values-for">
 									<input
@@ -1521,7 +1517,7 @@ defineExpose({
 								<span aria-hidden="true">damage type</span>
 							</div>
 						</td>
-						<td width="120px">
+						<td :width="`${colW.result}px`">
 							<div>
 								<VSelect
 									id="results-table-column-source-0"
@@ -1589,23 +1585,7 @@ defineExpose({
 				<tbody hidden />
 				<tfoot>
 					<tr>
-						<td colspan="3">
-							<form>
-								<label for="results-table-row-new-section-ability">add section</label>
-								<select
-									id="results-table-row-new-section-ability"
-									name="sectionOptionIndex"
-									required
-								>
-									<option>
-										no options left
-									</option>
-								</select>
-								<button class="pretend-ui-btn" type="submit">
-									add
-								</button>
-							</form>
-						</td>
+						<td colspan="-1" />
 					</tr>
 				</tfoot>
 			</table>
@@ -1672,6 +1652,26 @@ defineExpose({
 
 						> span {
 							--at-apply: 'sr-only';
+						}
+					}
+
+					> form {
+						--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2 my-auto';
+
+						> label {
+							--at-apply: 'col-span-full text-start';
+						}
+
+						> select {
+							--at-apply: 'w-64 px-2';
+
+							&:disabled {
+								--at-apply: 'text-neutral-400';
+							}
+						}
+
+						> button {
+							--at-apply: 'w-fit px-2 h-[--control-btn-size]';
 						}
 					}
 				}
@@ -2010,15 +2010,13 @@ defineExpose({
 
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
-		> tbody[aria-labelledby],
-		> tfoot {
+		> tbody[aria-labelledby] {
 			--at-apply: 'relative isolate';
 		}
 
 		> thead > tr:nth-child(2) > td,
 		> tbody[aria-labelledby] > tr > td,
-		> tbody,
-		> tfoot {
+		> tbody {
 			&[data-drop-direction] {
 				--drop-indicator-bg-direction: 90deg;
 				--drop-indicator-b-w: 1px;
@@ -2047,27 +2045,7 @@ defineExpose({
 
 		> tfoot {
 			> tr > td {
-				--at-apply: 'pt-4 pb-1';
-
-				> form {
-					--at-apply: 'grid grid-cols-[auto_1fr] auto-rows-min gap-x-2 pt-1 px-3 pb-2 b-t b-[--b-clr]';
-
-					> label {
-						--at-apply: 'col-span-full text-start text-lg';
-					}
-
-					> select {
-						--at-apply: 'w-64 px-1';
-
-						&:disabled {
-							--at-apply: 'text-neutral-400';
-						}
-					}
-
-					> button {
-						--at-apply: 'w-fit px-1 h-6';
-					}
-				}
+				--at-apply: 'pb-[--header-row-pt]';
 			}
 		}
 	}
@@ -2095,8 +2073,7 @@ defineExpose({
 			}
 		}
 
-		> tbody,
-		> tfoot {
+		> tbody {
 			&[data-drop-direction] {
 				--drop-indicator-bg-direction: 180deg;
 
@@ -2120,6 +2097,10 @@ defineExpose({
 				&::after {
 					--at-apply: 'bottom-0.5 top-auto rotate-180';
 				}
+
+				&:last-of-type::before {
+					--at-apply: 'bottom-0';
+				}
 			}
 		}
 
@@ -2132,7 +2113,6 @@ defineExpose({
 			}
 		}
 
-		> tfoot[data-drop-direction]::before,
 		> tbody:first-of-type[data-drop-direction]::before {
 			--at-apply: 'top-0';
 		}
