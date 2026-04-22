@@ -1616,7 +1616,7 @@ defineExpose({
 <style>
 @layer components {
 	#results-table {
-		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr] mb-10';
+		--at-apply: 'mx-auto border-separate border-spacing-0 bg-[--bg-clr] b b-[--b-clr] mb-10 h-px';
 		--b-clr: theme('colors.neutral.600');
 		--bg-clr: theme('colors.neutral.950');
 		--table-ps: calc(3 * var(--spacing));
