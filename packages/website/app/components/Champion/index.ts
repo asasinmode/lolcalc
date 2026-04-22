@@ -81,6 +81,9 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Mordekaiser: {
 		extras: await booleanExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Mordekaiser', 'passive', 0), 'isPassiveMSActive', 'is passive active (3 hits)', false),
 	},
+	Naafiri: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Naafiri', 'passive', 0), 'passiveStacks', 'Packmates', 0, CHAMPION_SPECIFICS.Naafiri.MAX_PASSIVE_STACKS),
+	},
 	Nidalee: {
 		extras: await enumExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Nidalee', 'passive', 0), 'passiveVariantActive', 'passive bonus MS', {
 			[CHAMPION_SPECIFICS.Nidalee.PASSIVE_OPTIONS.none]: 'none',

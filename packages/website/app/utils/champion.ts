@@ -221,6 +221,14 @@ export const CHAMPION_SPECIFICS = {
 			};
 		},
 	},
+	Naafiri: {
+		MAX_PASSIVE_STACKS: 7,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
 	Nidalee: {
 		PASSIVE_OPTIONS: {
 			none: 0,
