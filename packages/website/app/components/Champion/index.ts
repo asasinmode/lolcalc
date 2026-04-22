@@ -177,6 +177,15 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 	Viktor: {
 		extras: ChampionExtrasViktor,
 	},
+	Volibear: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Volibear', 'passive', 0), 'passiveStacks', 'Relentless Storm stacks', 0, CHAMPION_SPECIFICS.Volibear.MAX_PASSIVE_STACKS),
+	},
+	MonkeyKing: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'MonkeyKing', 'passive', 0), 'passiveStacks', 'Stone Skin stacks', 0, CHAMPION_SPECIFICS.MonkeyKing.MAX_PASSIVE_STACKS),
+	},
+	Zaahen: {
+		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Zaahen', 'passive', 0), 'passiveStacks', 'Determination stacks', 0, CHAMPION_SPECIFICS.Zaahen.MAX_PASSIVE_STACKS),
+	},
 };
 
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {

@@ -1,4 +1,3 @@
-import type Ezreal from '../../public/data/champion/Ezreal.json';
 import type { IPossibleDynamicValues, IProviderGroupDataSetup, IProviderGroupImageText } from './types';
 
 export function cooldownReductionPercentageFromHaste(haste: number) {
@@ -455,6 +454,30 @@ export const CHAMPION_SPECIFICS = {
 
 			return {
 				passiveAbilityUpgradesMask,
+			};
+		},
+	},
+	Volibear: {
+		MAX_PASSIVE_STACKS: 5,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	MonkeyKing: {
+		MAX_PASSIVE_STACKS: 5,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
+			};
+		},
+	},
+	Zaahen: {
+		MAX_PASSIVE_STACKS: 12,
+		setupData(self): { passiveStacks: number } {
+			return {
+				passiveStacks: clamp(0, self.internalData.value.passiveStacks ?? 0, this.MAX_PASSIVE_STACKS),
 			};
 		},
 	},
