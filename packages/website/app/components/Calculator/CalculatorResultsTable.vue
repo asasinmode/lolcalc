@@ -1110,9 +1110,11 @@ defineExpose({
 							<button
 								class="pretend-ui-btn"
 								:disabled="!cleanableColumnsSections[0].length && !cleanableColumnsSections[1].length"
+								title="remove empty columns and sections without corresponding damage source"
 								@click="cleanupUnused"
 							>
 								remove unused
+								<span>(empty columns and sections without corresponding damage source)</span>
 							</button>
 							<span aria-hidden="true">damage type</span>
 						</div>
@@ -1665,16 +1667,12 @@ defineExpose({
 				> div {
 					--at-apply: 'flex flex-col items-start h-full';
 
-					> label {
-						--at-apply: '';
-					}
-
-					> select {
-						--at-apply: '';
-					}
-
 					> button {
 						--at-apply: 'px-1 leading-5 h-[--control-btn-size] text-base mb-auto mt-2';
+
+						> span {
+							--at-apply: 'sr-only';
+						}
 					}
 				}
 			}
