@@ -10,6 +10,7 @@ function closeDialog() {
 	const { returnValue } = dialogEl.value!;
 	emit('close', !returnValue || returnValue === 'cancel');
 	dialogEl.value!.returnValue = '';
+	document.body.style.overflow = '';
 }
 
 function closeOnClickOutside(event: MouseEvent) {
@@ -33,6 +34,7 @@ defineExpose({
 	el: dialogEl,
 	open() {
 		dialogEl.value?.showModal();
+		document.body.style.overflow = 'hidden';
 		emit('open');
 		setTimeout(() => document.addEventListener('click', closeOnClickOutside), 0);
 	},
