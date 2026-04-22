@@ -423,7 +423,7 @@ function setLocalMirrorLayout() {
 					</button>
 				</li>
 			</ul>
-			<div ref="draggingPopover" data-drag-preview="" popover="hint" inert>
+			<div ref="draggingPopover" data-drag-preview="" popover="manual" inert>
 				<span>
 					<img
 						v-if="dragging?.value.listedChampion.value"
