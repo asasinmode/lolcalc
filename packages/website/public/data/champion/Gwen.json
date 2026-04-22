@@ -422,6 +422,6 @@
 		"spell_tahmkenchw_levelupcooldownrefund": "Cooldown Refund",
 		"spell_listtype_basedamage": "Base Damage",
 		"spell_listtype_slow": "Slow",
-		"spell_gwenp_tooltip": "Gwen's Attacks deal an additional <magicDamage>@PercentHealth1000Cuts@ Max Health magic damage</magicDamage> on hit. Gwen recovers Health equal to <healing>@HealingPercent@ of the damage</healing> this Ability deals to champions, up to a maximum of <healing>@healcap@</healing>.<br>"
+		"spell_gwenp_tooltip": "Gwen's Attacks deal an additional <magicDamage>@PercentHealth1000Cuts@ Max Health magic damage</magicDamage> on hit. Gwen recovers Health equal to <healing>@HealingPercent@ of the damage</healing> this Ability deals to champions, up to a maximum of <healing>@healcap@</healing>."
 	}
 }

@@ -1210,8 +1210,6 @@ function cleanupItemText(text?: string): string | undefined {
 	return text && trimBr(text.replace(/\{\{ ?Item_Melee_Ranged_Split(_Dynamic)? ?\}\}/g, '@lolcalcChampRange@'));
 }
 
-// TODO maybe dont trim the ability descriptions and instead style the repeated `<br>` and anything followed by it
-// jhin/kassadin and aatrox passives have extended <rules> but aatrox has <br> that are kept while jhin's were removed, make sure both look good
 function trimBr(value: string) {
 	while (value.startsWith('<br>')) {
 		value = value.slice(4).trim();
@@ -1651,10 +1649,10 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 	const allVariants = abilitiesWithVariants.flatMap(([, variants]) => variants);
 
-	for (const [abilityName, variants] of abilitiesWithVariants) {
+	for (const [abilityKey, variants] of abilitiesWithVariants) {
 		for (let i = 0; i < variants.length; i++) {
 			const variant = variants[i]!;
-			const debugPrefix = `${champion.id} ${abilityName}[${i}]`;
+			const debugPrefix = `${champion.id} ${abilityKey}[${i}]`;
 			const variableDebug = {
 				category: 'champion',
 				variables: {
@@ -1663,7 +1661,7 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 						...variant,
 						dynamicValues: {
 							...variant.dataValues,
-							...possibleChampionDynamicVariableValues((CHAMPION_SPECIFICS as Record<string, IChampionSpecific>)[champion.id], abilityName),
+							...possibleChampionDynamicVariableValues((CHAMPION_SPECIFICS as Record<string, IChampionSpecific>)[champion.id], abilityKey),
 						},
 					}, undefined, allVariants],
 					variableSourceKeys: ['effectAmount'],
@@ -1671,21 +1669,29 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 				stringtableVariableSaveUnder: champion,
 			} satisfies Omit<IStringtableVariableDebug, 'key'>;
 
+			const variantTooltipStringtableKey = variant.tooltip;
+			const lowercaseVariantTooltipStringtableKey = variantTooltipStringtableKey?.toLowerCase();
+
 			variant.name = variant.name && getStringtableValue(variant.name, { ...variableDebug, key: `${debugPrefix} ${variant.objectName} name` })!;
 			variant.name = transformAbilityText(variant.name);
 			// TODO debug tooltips for all abilities, not just passive
 			variant.tooltip = variant.tooltip && getStringtableValue(
 				variant.tooltip,
-				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip` } : `${variant.dataKey} tooltip`,
+				abilityKey === 'passive'
+					? {
+							...variableDebug,
+							key: `${debugPrefix} ${variant.objectName} tooltip`,
+						}
+					: `${variant.dataKey} tooltip`,
 			);
 			variant.tooltip &&= transformAbilityText(variant.tooltip);
 			variant.tooltipExtended = variant.tooltipExtended && getStringtableValue(
 				variant.tooltipExtended,
-				abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` } : `${variant.dataKey} tooltip extended`,
+				abilityKey === 'passive' ? { ...variableDebug, key: `${debugPrefix} ${variant.objectName} tooltip extended` } : `${variant.dataKey} tooltip extended`,
 			);
 			variant.tooltipExtended &&= transformAbilityText(variant.tooltipExtended);
 			// TODO TMP some abilities have it but found in stringtable and probably hashed so uncomment it when hashed stringtable keys are tried and resolved
-			if (abilityName === 'passive') {
+			if (abilityKey === 'passive') {
 				variant.tooltipExtendedBelowLine = variant.tooltipExtendedBelowLine && getStringtableValue(
 					variant.tooltipExtendedBelowLine,
 					{ ...variableDebug, key: `${debugPrefix} ${variant.dataKey} tooltip extended below line` },
@@ -1695,17 +1701,14 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 
 			for (const extendedVariable of variant.extendedVariables || []) {
 				if (extendedVariable.nameOverride) {
-					(champion.stringtable as any)[extendedVariable.nameOverride] = getStringtableValue(extendedVariable.nameOverride, abilityName === 'passive' ? { ...variableDebug, key: `${debugPrefix} extendedVariables` } : `${debugPrefix} extendedVariables`);
+					(champion.stringtable as any)[extendedVariable.nameOverride] = getStringtableValue(extendedVariable.nameOverride, abilityKey === 'passive' ? { ...variableDebug, key: `${debugPrefix} extendedVariables` } : `${debugPrefix} extendedVariables`);
 				}
 			}
 
 			/* many extended tooltips reuse the regular version so save on data by replacing them with something akin to `{{self}}` */
-			const variantTooltipStringtableKey = variant.tooltip;
-			const lowercaseVariantTooltipStringtableKey = variantTooltipStringtableKey?.toLowerCase();
 			if (lowercaseVariantTooltipStringtableKey && (lowercaseVariantTooltipStringtableKey in champion.stringtable)) {
+				champion.stringtable[lowercaseVariantTooltipStringtableKey] = variant.tooltip!;
 				variant.tooltip = `{{${variantTooltipStringtableKey}}}`;
-
-				champion.stringtable[lowercaseVariantTooltipStringtableKey] = transformAbilityText(champion.stringtable[lowercaseVariantTooltipStringtableKey]!, false)!;
 			}
 
 			if (!variant.name) {
@@ -1715,12 +1718,8 @@ function setChampionAbilityVariantsText(champion: IChampion) {
 	}
 }
 
-function transformAbilityText(value: string, trim = true) {
+function transformAbilityText(value: string) {
 	if (value) {
-		if (trim) {
-			value = trimBr(value);
-		}
-
 		const liIndex = value.lastIndexOf('<li>');
 		if (~liIndex) {
 			const brIndex = value.indexOf('<br>', liIndex + 4);
@@ -1728,6 +1727,8 @@ function transformAbilityText(value: string, trim = true) {
 				value = `${value.slice(0, brIndex)}</li>${value.slice(brIndex)}`;
 			}
 		}
+
+		value = trimBr(value);
 	}
 
 	return value;

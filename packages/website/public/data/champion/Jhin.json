@@ -380,6 +380,6 @@
 		"spell_listtype_damage": "Damage",
 		"spell_listtype_totaladratio": "Total AD Ratio",
 		"spell_listtype_rootduration": "Root Duration",
-		"spell_jhinpassive_tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.</li><br><br>"
+		"spell_jhinpassive_tooltip": "Jhin's hand cannon has a fixed Attack Speed and can be fired @MaxAmmo@ times before needing to be reloaded. The @MaxAmmo@th shot always critically strikes, and deals an additional <physicalDamage>@FourthShotExecutePercent@ missing health physical damage</physicalDamage>.<br><br>In addition:<li>Jhin gains <physicalDamage>@TotalADPercent@ bonus Attack Damage</physicalDamage><li>Jhin's critical strikes deal @CritReductionPercent*100@% less damage but grant him <speed>@CritMoveSpeedPercent@ Move Speed</speed> for @HasteDuration@ seconds.</li>"
 	}
 }
