@@ -32,6 +32,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] alt + move = duplicate
     - [x] shift + click remove = clear
     - [x] dragging
+    - [?] drag & drop api for dragging
   - [x] items
     - [x] drag between inventories
     - [x] hover tooltip
@@ -50,7 +51,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] runes (only shards implemented)
     - [x] dragons/souls
     - [x] choose role quest
-    - [?] extras ui champions
+    - [x] extras ui champions
     - [x] extras ui items
     - [?] extras target dummy
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
@@ -79,6 +80,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] moving columns left/right
   - [x] moving sections up/down
   - [x] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
+  - [?] add option to remove stats/basic attack sections
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
   - [x] stats inventory value row
@@ -112,7 +114,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] dialog
   - [x] apply effects like black cleaver, abyssal mask, amumu passive
   - [x] item effects options ui
-  - [?] champion passive effects options ui
+  - [x] champion passive effects options ui
   - [?] other effects options ui, like slow, stun, grievous wounds
   - [x] hover tooltips
   - [x] show source ability tooltip on shift
@@ -185,6 +187,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] kind of a code documentation where yap about
   - [ ] how to use game texture `textureBgImageAttrs`
 - [ ] CONTRIBUTING.md
+- [ ] configuration "profiles" in local storage (multiple saved configurations), when loading new shared config, put it in new profile? maybe future feature
 
 `extras` window with stuff like veigar stacks, gathering storm minutes, manaflow stacks and others. Could have one file with `Record<string, [item functions/slots]>` and insert them somehow with `<component>`
 
@@ -192,6 +195,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
 - [ ] graph results in style of post game ones, table data but graph?
+- [ ] decaying movement speed stuff like fiora/nami/sivir passive, theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
   - [ ] ability variant swapping, shapeshifters + aphelios, jayce has 1 lvl
@@ -202,6 +206,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
+  - [ ] choose shield source to get shield bash value for
   - [ ] components for stuff like manaflow band or precision legends for setting values
   - [ ] results section, hover tooltip, extract variables
 - [ ] overriding stats like target dummy
@@ -210,11 +215,11 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] extracting champions and items from screenshots
 - [ ] per patch versions = see stats/features from older patches
 - [ ] kr/cn translations
+- [ ] color blind mode
 
 #### very future
 
 - [ ] combo damage / sequence of things, choose spells/aas in order, apply them to target, show damage
-- [ ] decaying movement speed stuff like fiora/nami/sivir passive, theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
 - [ ] aram
   - item overrides - `DataValuesModeOverride`
 - [ ] creating a screenshot? [getDisplayMedia](https://github.com/webrtc/samples/tree/gh-pages/src/content/getusermedia/getdisplaymedia)
