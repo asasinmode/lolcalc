@@ -296,7 +296,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					(addedId && (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[addedId])?.setupData?.(this);
 				}
 
-				const usedProperties = newIds.flatMap(id => (id && id in ITEM_SPECIFICS && 'internalDataProperties' in ITEM_SPECIFICS[id as keyof TItemSpecifics]) || []);
+				const usedProperties = newIds.flatMap(id => id ? (ITEM_SPECIFICS as IHypotheticalItemSpecifics)[id]?.internalDataProperties ?? [] : []);
 				for (const removedId of removedItems) {
 					if (removedId && (ITEM_SPECIFICS[removedId] as any)?.internalDataProperties?.length) {
 						for (const key of (ITEM_SPECIFICS[removedId] as any).internalDataProperties) {
