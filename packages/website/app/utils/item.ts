@@ -552,7 +552,7 @@ export function itemBuyability(
 		|| (target && target.roleQuest.value !== 'mid' && item.isBoots && item.epicness === 7)
 	) {
 		buyability = -1;
-	} else if (inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5 && (target.roleQuest.value !== 'bot' || inventoryAfterBuying[7])) {
+	} else if (inventoryAfterBuying.slice(0, 6).filter(Boolean).length > 5 && (target.roleQuest.value !== 'bot' || inventoryAfterBuying[6])) {
 		buyability = 0;
 	}
 
