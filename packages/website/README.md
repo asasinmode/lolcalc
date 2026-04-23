@@ -81,6 +81,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] moving sections up/down
   - [x] mark rows to count towards total and sum them for easier comparison of something like aa + kraken proc or spell + item
   - [?] add option to remove stats/basic attack sections
+  - [?] wider columns initially, shrink slightly as more are added
   - [ ] custom total rows hover tooltips?
   - [ ] choosing column source/target sometimes doesn't happen?
   - [x] stats inventory value row
@@ -202,6 +203,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] extendedVariable values, resolve cooldown & cost
   - [ ] result row variable values
   - [ ] result variant sections
+  - [ ] abilities that give effects like attack speed and scale with champion stats - add possibility to link a source to use for stats
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
 - [ ] explicit calculation formulas you can look at

@@ -423,13 +423,9 @@ function submitResultsSection(event: SubmitEvent) {
 
 	const [rawOptionIndex, rawAbilityIndex] = value.split('-');
 	(event.target as HTMLFormElement).reset();
-	addResultSectionOption(Number.parseInt(rawOptionIndex!), Number.parseInt(rawAbilityIndex!));
+	const ability = damageSectionOptions.value[Number.parseInt(rawOptionIndex!)]!.abilities[Number.parseInt(rawAbilityIndex!)]!;
+	addResultsSection(ability.id, ability.name);
 	emit('configurationChanged');
-}
-
-function addResultSectionOption(optionIndex: number, abilityIndex: number) {
-	const ability = damageSectionOptions.value[optionIndex]!.abilities[abilityIndex]!;
-	return addResultsSection(ability.id, ability.name);
 }
 
 async function addResultsSection(
@@ -989,7 +985,9 @@ function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption 
 	}
 
 	rv.itemOptionsIndexes = damageSource && damageSectionOptions.value.at(-1)?.type === 'item'
-		? damageSectionOptions.value.at(-1)!.abilities.map((ability, index) => damageSource!.items.value.some(item => item && item.id === ability.id.id) ? index : undefined).filter(index => index !== undefined).reverse()
+		? damageSource!.items.value
+			.map(item => item ? itemOptions.abilities.findIndex(ability => ability.id.id === item.id) : undefined)
+			.filter(index => index !== undefined && ~index) as number[]
 		: [];
 
 	return rv;
@@ -1010,8 +1008,14 @@ function addColumnItems(columnIndex: number) {
 	const { itemOptionsIndexes } = columnAddableOptions.value[columnIndex]!;
 	const option = damageSectionOptions.value.at(-1);
 	if (option?.type === 'item') {
-		for (const i of itemOptionsIndexes) {
-			addResultSectionOption(damageSectionOptions.value.length - 1, i);
+		/* `addResultsSection` causes the underlying ability to disappear, which would make indexes not match so first collect the relevant abilities then add them */
+		const abilities = [];
+		for (let i = itemOptionsIndexes.length - 1; i >= 0; i--) {
+			const abilityIndex = itemOptionsIndexes[i]!;
+			abilities.push(option.abilities[abilityIndex]!);
+		}
+		for (const ability of abilities) {
+			addResultsSection(ability.id, ability.name);
 		}
 	}
 	emit('configurationChanged');
