@@ -1409,3 +1409,8 @@ function computeAppliedEffect(_self: DamageSource, effect: IDamageSourceEffect):
 
 	return rv;
 }
+
+export function isMasterworkSlot(self: DamageSource, itemIndex: number): boolean {
+	const item = self.computed.items.value[itemIndex];
+	return self.computed.masterworkItemSlotIndex.value === itemIndex && (!item || item.item.epicness === 5);
+}

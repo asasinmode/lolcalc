@@ -1006,7 +1006,7 @@ defineExpose({ el });
 						'data-active-0': (value.coComputed.itemImage.value[i - 1]!.isActive as number[])[0] ? 'true' : '',
 						'data-active-1': (value.coComputed.itemImage.value[i - 1]!.isActive as number[])[1] ? 'true' : '',
 					} : undefined"
-					:data-masterwork="value.computed.masterworkItemSlotIndex.value === i - 1 ? '' : undefined"
+					:data-masterwork="isMasterworkSlot(value, i - 1) ? '' : undefined"
 					@mouseenter="value.items.value[i - 1] && showItemHoverTooltip($event, i - 1)"
 					@click.right="removeItem($event, i - 1)"
 					@dragstart="startItemDrag($event, i - 1)"

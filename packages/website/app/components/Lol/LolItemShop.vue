@@ -840,7 +840,7 @@ defineExpose({
 							<component
 								:is="targetShopItems[i - 1] ? 'button' : 'div'"
 								:class="targetShopItems[i - 1] && targetShopItems[i - 1]!.item.id === displayedItem?.item.id ? 'selected' : undefined"
-								:data-masterwork="damageSource && damageSource.computed.masterworkItemSlotIndex.value === i - 1 ? '' : undefined"
+								:data-masterwork="damageSource && isMasterworkSlot(damageSource, i - 1) ? '' : undefined"
 								@mouseenter="targetShopItems[i - 1] && enterTooltipableElement($event, targetShopItems[i - 1]!)"
 								@click="targetShopItems[i - 1] && selectItem(targetShopItems[i - 1]!, true, i - 1)"
 								@click.right="targetShopItems[i - 1] && sellItem($event, i - 1)"
