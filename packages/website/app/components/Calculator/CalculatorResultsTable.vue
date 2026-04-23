@@ -314,6 +314,8 @@ function startRemovingColumn(event: MouseEvent, index: number) {
 	const container = removeButton?.closest('td');
 
 	function removeAndFocusNext() {
+		undoRemoveButton!.removeEventListener('focusout', removeAndFocusNext);
+		container?.removeEventListener('mouseleave', removeAndFocusNext);
 		const nextElement = container?.nextElementSibling;
 		removeResultsColumn(index);
 		nextTick(() => {
