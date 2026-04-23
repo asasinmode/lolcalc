@@ -44,8 +44,13 @@ const globalKeyModifiers = useGlobalKeyModifiers();
 
 const el = useTemplateRef('el');
 
+const iconButtonsShowText = useIconButtonsShowText();
+
 const group = computed(() => props.isRight ? 'targets' : 'sources');
-const otherGroup = computed(() => props.isRight ? 'sources' : 'targets');
+const otherGroup = computed(() => props.isRight
+	? iconButtonsShowText.value ? 'left' : 'sources'
+	: iconButtonsShowText.value ? 'right' : 'targets',
+);
 const isLoading = computed(() => Boolean(!props.value.champion.value && props.value.listedChampion.value));
 
 const idPrefix = computed(() => `${group.value}-${props.index}`);
@@ -147,7 +152,8 @@ const removeButtonAttrs = computed(() => (isFirstAndOnly.value
 			emit: emitClear,
 		}
 	: {
-			title: 'remove, shift+click to clear',
+			title: 'remove',
+			subtext: 'shift+click to clear',
 			disabled: !props.canRemove,
 			emit: emitRemove,
 		}));
@@ -858,7 +864,7 @@ defineExpose({ el });
 			{{ group.slice(0, -1) }} {{ index + 1 }}{{ value.listedChampion.value ? ` (${value.listedChampion.value.name})` : '' }}
 		</h3>
 		<button
-			title="move up, alt+click to duplicate above"
+			:title="`${iconButtonsShowText ? '' : 'move up, '}alt+click to duplicate above`"
 			class="pretend-ui-btn"
 			:disabled="index === 0"
 			@click="$emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
@@ -868,7 +874,7 @@ defineExpose({ el });
 			<Icon class="i-ph:arrow-up" />
 		</button>
 		<button
-			title="move down, alt+click to duplicate below"
+			:title="`${iconButtonsShowText ? '' : 'move down, '}alt+click to duplicate below`"
 			class="pretend-ui-btn"
 			:disabled="!canMoveDown"
 			@click="$emit('move', index + 1, globalKeyModifiers.alt)"
@@ -878,23 +884,23 @@ defineExpose({ el });
 			<Icon class="i-ph:arrow-down" />
 		</button>
 		<button
-			:title="`move to ${otherGroup}, alt+click to duplicate into ${otherGroup}`"
+			:title="`${iconButtonsShowText ? '' : `move to ${otherGroup}, `}alt+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
 			class="pretend-ui-btn"
 			:disabled="!canRemove && !value.anythingFilled.value"
 			@click="$emit('changeGroup', globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
-			<span>move to {{ otherGroup }} <span>(alt+click to duplicate into {{ otherGroup }})</span></span>
+			<span>move {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }} <span>(alt+click to duplicate {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }})</span></span>
 			<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
 		</button>
 		<button
-			:title="`duplicate, shift+click to duplicate into ${otherGroup}`"
+			:title="`${iconButtonsShowText ? '' : 'duplicate, '}shift+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
 			class="pretend-ui-btn"
 			:disabled="!canRemove && !value.anythingFilled.value"
 			@click="$emit('duplicate', globalKeyModifiers.shift)"
 			@mousedown.left="$emit('startDrag', $event, true)"
 		>
-			<span>duplicate <span>(shift+click to duplicate into {{ otherGroup }})</span></span>
+			<span>duplicate<span>(shift+click to duplicate {{ iconButtonsShowText ? otherGroup : `into ${otherGroup}` }})</span></span>
 			<Icon class="i-ph:copy" />
 		</button>
 		<div data-select-champion="">
@@ -1037,16 +1043,16 @@ defineExpose({ el });
 			restore
 		</button>
 		<button
-			:title="removeButtonAttrs.title"
+			:title="`${iconButtonsShowText ? '' : `${removeButtonAttrs.title}${removeButtonAttrs.subtext ? ', ' : ''}`}${removeButtonAttrs.subtext ?? ''}`"
 			class="pretend-ui-btn remove"
 			:disabled="removeButtonAttrs.disabled"
 			@click="removeButtonAttrs.emit"
 		>
-			<span>{{ removeButtonAttrs.title }}</span>
+			<span>{{ removeButtonAttrs.title }} <span v-show="removeButtonAttrs.subtext">({{ removeButtonAttrs.subtext }})</span></span>
 			<Icon class="i-ph:trash size-5" />
 		</button>
 		<button
-			:title="isExpanded ? 'collapse' : 'expand'"
+			:title="iconButtonsShowText ? undefined : (isExpanded ? 'collapse' : 'expand')"
 			class="pretend-ui-btn"
 			:aria-controls="`${idPrefix}-details`"
 			:aria-expanded="isExpanded"
@@ -1479,6 +1485,10 @@ defineExpose({ el });
 			> button:nth-last-of-type(1) {
 				--at-apply: 'rotate-180';
 			}
+
+			[data-icon-btns-show-text] & > button:nth-last-of-type(1) {
+				--at-apply: 'rotate-0';
+			}
 		}
 
 		> h3 {
@@ -1541,9 +1551,17 @@ defineExpose({ el });
 			&:nth-last-of-type(-n + 2) {
 				--at-apply: 'size-6 grid-center';
 
+				[data-icon-btns-show-text] & {
+					--at-apply: 'w-auto px-1.5';
+				}
+
 				.icon {
 					--at-apply: 'size-5';
 				}
+			}
+
+			[data-icon-btns-show-text] &:nth-last-of-type(-n + 2) {
+				--at-apply: 'min-w-19';
 			}
 		}
 

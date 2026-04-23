@@ -144,6 +144,22 @@
 		}
 	}
 
+	[data-icon-btns-show-text] {
+		.pretend-ui-btn {
+			> span:first-of-type {
+				--at-apply: 'not-sr-only';
+			}
+
+			> .icon {
+				--at-apply: 'hidden';
+			}
+
+			&:has(> .icon) {
+				--at-apply: 'text-sm';
+			}
+		}
+	}
+
 	.other-ui-btn {
 		--at-apply: 'b disabled:brightness-60';
 		/* not with --at-apply because it builds incorrectly and doesn't work on github workflow */

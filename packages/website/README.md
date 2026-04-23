@@ -58,6 +58,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [?] shapeshifting champions choose shape, switch abilities since it can affect stats
   - [?] detect invalid ability levels
   - [x] mirror layout
+  - [ ] expand scoreboard item on click anywhere when collapsed, maybe if more ppl want it
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
   - [x] cleanup sections/columns button. Remove column with both source/target empty? Remove sections without champions present?
   - [x] source vs target column headers
@@ -165,6 +166,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] difference between "internal effects" (item extras) and "applied effects" (effects dialog)
   - [ ] in/decrement effects in scoreboard item
   - [ ] "tutorial library" to review info
+  - [ ] item/passive extra popped up, look here it is, use it
 - [ ] keyboard navigation
   - [ ] somehow right clicks, like clearing selects/removing items
   - [ ] show hover tooltips when navigated to with keyboard
@@ -219,6 +221,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 - [ ] per patch versions = see stats/features from older patches
 - [ ] kr/cn translations
 - [ ] color blind mode
+- [ ] alternative mode of configuration, step by step choose champion -> runes -> items -> level...
 
 #### very future
 

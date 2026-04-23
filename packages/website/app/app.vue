@@ -22,6 +22,17 @@ const { _component: ItemShop } = useItemShop();
 const { _component: RuneSelect } = useRuneSelect();
 const { _component: EffectsDialog } = useEffectsDialog();
 
+const iconButtonsShowText = useIconButtonsShowText();
+if (import.meta.client) {
+	watch(iconButtonsShowText, (value) => {
+		if (value) {
+			document.body.dataset.iconBtnsShowText = '';
+		} else {
+			document.body.removeAttribute('data-icon-btns-show-text');
+		}
+	}, { immediate: true });
+}
+
 _setupGlobalKeyModifiers();
 
 /* expected to have DamageSources added in `restoreState` */
@@ -279,6 +290,10 @@ onBeforeUnmount(() => {
 		<p>
 			<strong>lolcalc</strong> was created under Riot Games' <a href="https://www.riotgames.com/en/legal" target="_blank" rel="noreferrer noopener">"<span>Legal Jibber Jabber</span>"</a> policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.
 		</p>
+		<label for="TMP-toggle-button-style">
+			<input id="TMP-toggle-button-style" v-model="iconButtonsShowText" type="checkbox">
+			TMP icon buttons show text
+		</label>
 	</footer>
 	<ClientOnly>
 		<ChampSelect />
@@ -372,7 +387,7 @@ onBeforeUnmount(() => {
 		}
 
 		> footer {
-			--at-apply: 'pt-3 pb-3 text-neutral-400 mt-auto text-center b-t b-neutral-500';
+			--at-apply: 'pt-3 pb-3 text-neutral-400 mt-auto text-center b-t b-neutral-500 relative';
 
 			> h2 {
 				--at-apply: 'text-lg font-700 text-neutral-300 mb-0.5';
@@ -403,6 +418,14 @@ onBeforeUnmount(() => {
 					> span {
 						--at-apply: 'underline';
 					}
+				}
+			}
+
+			> label {
+				--at-apply: 'absolute end-0 bottom-0 text-neutral-700';
+
+				> input:not(:checked) {
+					--at-apply: 'op-40';
 				}
 			}
 		}
