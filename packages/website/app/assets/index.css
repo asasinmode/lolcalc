@@ -116,8 +116,18 @@
 			--at-apply: 'hoverable:bg-cyan-900';
 		}
 
-		.icon {
+		> .icon {
 			--at-apply: 'text-[--ui-pretend-button-icon-clr]';
+		}
+
+		> span:first-of-type > span {
+			--at-apply: 'sr-only';
+		}
+
+		&:has(> .icon) {
+			> span:first-of-type {
+				--at-apply: 'sr-only';
+			}
 		}
 
 		&.remove {

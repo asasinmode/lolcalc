@@ -1237,7 +1237,7 @@ defineExpose({
 									@dragstart="startResultColumnDrag(index, $event)"
 									@dragend="endResultColumnDrag"
 								>
-									<span>move left, alt+click to duplicate to the left</span>
+									<span>move left <span>(alt+click to duplicate to the left)</span></span>
 									<Icon class="i-ph:arrow-left" />
 								</button>
 								<button
@@ -1256,7 +1256,7 @@ defineExpose({
 									@dragstart="startResultColumnDrag(index, $event)"
 									@dragend="endResultColumnDrag"
 								>
-									<span>move right, alt+click to duplicate to the right</span>
+									<span>move right <span>(alt+click to duplicate to the right)</span></span>
 									<Icon class="i-ph:arrow-right" />
 								</button>
 								<button style="display: none">
@@ -1795,10 +1795,6 @@ defineExpose({
 								--at-apply: 'content-empty absolute top-1/2 start-1/2 translate-center outline-auto h-7 w-[4.5em]';
 							}
 						}
-
-						> span:nth-child(1) {
-							--at-apply: 'sr-only';
-						}
 					}
 				}
 
@@ -1828,10 +1824,6 @@ defineExpose({
 
 							> span {
 								--at-apply: 'size-5';
-							}
-
-							> span:nth-child(1) {
-								--at-apply: 'sr-only';
 							}
 
 							&[aria-expanded='true'] > span {

@@ -864,7 +864,7 @@ defineExpose({ el });
 			@click="$emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
-			<span>move up, alt+click to duplicate above</span>
+			<span>move up <span>(alt+click to duplicate above)</span></span>
 			<Icon class="i-ph:arrow-up" />
 		</button>
 		<button
@@ -874,7 +874,7 @@ defineExpose({ el });
 			@click="$emit('move', index + 1, globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
-			<span>move down, alt+click to duplicate below</span>
+			<span>move down <span>(alt+click to duplicate below)</span></span>
 			<Icon class="i-ph:arrow-down" />
 		</button>
 		<button
@@ -884,7 +884,7 @@ defineExpose({ el });
 			@click="$emit('changeGroup', globalKeyModifiers.alt)"
 			@mousedown.left="$emit('startDrag', $event)"
 		>
-			<span>move to {{ otherGroup }}, alt+click to duplicate into {{ otherGroup }}</span>
+			<span>move to {{ otherGroup }} <span>(alt+click to duplicate into {{ otherGroup }})</span></span>
 			<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
 		</button>
 		<button
@@ -894,7 +894,7 @@ defineExpose({ el });
 			@click="$emit('duplicate', globalKeyModifiers.shift)"
 			@mousedown.left="$emit('startDrag', $event, true)"
 		>
-			<span>duplicate, shift+click to duplicate into {{ otherGroup }}</span>
+			<span>duplicate <span>(shift+click to duplicate into {{ otherGroup }})</span></span>
 			<Icon class="i-ph:copy" />
 		</button>
 		<div data-select-champion="">
@@ -1540,10 +1540,6 @@ defineExpose({ el });
 			&:nth-of-type(-n + 4),
 			&:nth-last-of-type(-n + 2) {
 				--at-apply: 'size-6 grid-center';
-
-				> span:first-of-type {
-					--at-apply: 'sr-only';
-				}
 
 				.icon {
 					--at-apply: 'size-5';
