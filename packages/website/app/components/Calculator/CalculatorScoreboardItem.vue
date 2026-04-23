@@ -1000,6 +1000,7 @@ defineExpose({ el });
 		</button>
 		<ul
 			:data-role-quest="value.roleQuest.value"
+			@click="selectItems(value)"
 			@dragenter="$emit('itemListDragenter', $event)"
 			@dragover="$emit('itemListDragover', $event)"
 			@dragleave="$emit('itemListDragleave', $event)"
