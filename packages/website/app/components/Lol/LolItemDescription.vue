@@ -270,7 +270,7 @@ defineExpose({ header });
 		}
 
 		> footer {
-			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-1 mt-2';
+			--at-apply: 'b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt]';
 
 			> p {
 				--at-apply: 'text-end float-end';

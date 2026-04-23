@@ -1974,7 +1974,7 @@ defineExpose({ el });
 
 				.hover-tooltip.champion-stat {
 					dl {
-						--at-apply: 'leading-5.5';
+						--at-apply: 'leading-5.5 b-t b-[--ui-btn-border-clr] pt-[--footer-pt] mt-[--footer-mt]';
 
 						dt,
 						dd {

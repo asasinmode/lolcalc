@@ -213,6 +213,8 @@
 
 	.hover-tooltip {
 		--at-apply: 'bg-neutral-950 max-w-screen pointer-events-none b b-[--ui-btn-border-clr] text-neutral-300';
+		--footer-pt: calc(1 * var(--spacing));
+		--footer-mt: calc(2 * var(--spacing));
 	}
 
 	.skip-link {
