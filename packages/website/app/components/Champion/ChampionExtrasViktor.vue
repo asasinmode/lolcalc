@@ -85,21 +85,6 @@ function toggle(abilityIndex: number) {
 				}
 			}
 		}
-
-		/* > [role='radiogroup'] { */
-		/* 	--at-apply: 'grid grid-flow-col grid-cols-[2rem] grid-rows-1 justify-start items-center h-min'; */
-
-		/* 	&::before { */
-		/* 		--at-apply: 'block uppercase leading-[1]'; */
-		/* 		content: '"' attr(data-ability-key) '": '; */
-		/* 		paint-order: stroke fill; */
-		/* 		-webkit-text-stroke: black 0.15em; */
-		/* 	} */
-
-		/* 	&:nth-of-type(1) { */
-		/* 		--at-apply: 'self-end'; */
-		/* 	} */
-		/* } */
 	}
 }
 </style>

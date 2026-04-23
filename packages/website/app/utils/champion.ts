@@ -259,10 +259,21 @@ export const CHAMPION_SPECIFICS = {
 	Ornn: {
 		MASTERWORK_LEVEL: 13,
 		MAX_UPGRADED_ALLIES: 4,
-		setupData(self): { masterworkItemSlot: number; passiveUpgradedAllies: number } {
+		calcMaxUpgradedAllies(self: DamageSource) {
+			return Math.min(this.MAX_UPGRADED_ALLIES, Math.max(0, self.level.value - this.MASTERWORK_LEVEL));
+		},
+		setupData(self): IDamageSourceInternalDataBase & { masterworkItemSlot: number; passiveUpgradedAllies: number } {
 			return {
-				masterworkItemSlot: clamp(1, self.internalData.value.passiveUpgradedAllies ?? 0, 6),
-				passiveUpgradedAllies: clamp(0, self.internalData.value.passiveUpgradedAllies ?? 0, this.MAX_UPGRADED_ALLIES),
+				masterworkItemSlot: self.level.value >= this.MASTERWORK_LEVEL
+					? clamp(1, self.internalData.value.masterworkItemSlot ?? 0, 6)
+					: 0,
+				passiveUpgradedAllies: clamp(0, self.internalData.value.passiveUpgradedAllies ?? 0, this.calcMaxUpgradedAllies(self)),
+				_watchHandles: markRaw([watch(self.level, () => {
+					if (self.level.value < this.MASTERWORK_LEVEL) {
+						self.internalData.value.masterworkItemSlot = 0;
+					}
+					self.internalData.value.passiveUpgradedAllies = Math.min(self.internalData.value.passiveUpgradedAllies, this.calcMaxUpgradedAllies(self));
+				}, { immediate: true })]),
 			};
 		},
 	},
