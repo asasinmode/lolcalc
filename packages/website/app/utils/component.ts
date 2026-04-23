@@ -41,7 +41,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 	property: DataKeys<IGameAbilityData<T>>,
 	label: string,
 	min?: number,
-	max?: number,
+	max?: MaybeRef<number>,
 	step?: number,
 ) {
 	return defineComponent<IExtraComponentProps<T['type']>, IDefineExtraComponentEmits>(async (props, ctx) => {
@@ -55,7 +55,7 @@ export async function numberExtra<T extends IGameAbilityId>(
 			imgSize,
 			label,
 			min,
-			max,
+			'max': toValue(max),
 			step,
 			'usedNumberInput': useNumberInput(
 				abilityId.type === ABILITY_TYPE.effect

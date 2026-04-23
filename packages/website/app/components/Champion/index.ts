@@ -1,5 +1,5 @@
 import type { ISpecificComponents } from '~/utils/types';
-import { ChampionExtrasAphelios, ChampionExtrasViktor } from '#components';
+import { ChampionExtrasAphelios, ChampionExtrasOrnn, ChampionExtrasViktor } from '#components';
 
 export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponents>> = {
 	Ambessa: {
@@ -98,10 +98,7 @@ export const CHAMPION_COMPONENTS: Partial<Record<IChampionId, ISpecificComponent
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Orianna', 'passive', 0), 'passiveStacksOnTarget', 'Windup stacks on target', 0, CHAMPION_SPECIFICS.Orianna.MAX_PASSIVE_STACKS),
 	},
 	Ornn: {
-		extras: [
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'masterworkItemSlot', 'Masterwork item slot', 1, 6),
-			await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Ornn', 'passive', 0), 'passiveUpgradedAllies', 'Allies with masterwork item', 0, CHAMPION_SPECIFICS.Ornn.MAX_UPGRADED_ALLIES),
-		],
+		extras: ChampionExtrasOrnn,
 	},
 	Rell: {
 		extras: await numberExtra(GameAbilityId.build(ABILITY_TYPE.champion, 'Rell', 'passive', 0), 'passiveStacksOnTarget', 'Break the Mold stacks on target', 0, CHAMPION_SPECIFICS.Rell.MAX_PASSIVE_STACKS),
