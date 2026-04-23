@@ -759,13 +759,13 @@ function startResultColumnDrag(index: number, event: DragEvent) {
 
 function onResultColumnDragenter(event: DragEvent, index: number) {
 	if (columnDraggedFromIndex !== undefined) {
-		([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
+		([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, false));
 	}
 }
 
 function onResultColumnDragover(event: DragEvent, index: number) {
 	if (columnDraggedFromIndex !== undefined) {
-		([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false));
+		([columnDragDropIndex.value] = getDropTargetIndex(event, index, columnDraggedFromIndex, false));
 		if (columnDragDropIndex.value !== undefined) {
 			event.preventDefault();
 		}
@@ -786,7 +786,7 @@ function onResultColumnDragleave(event: DragEvent) {
 function onResultColumnDrop(event: DragEvent, index: number) {
 	columnDragDropIndex.value = undefined;
 
-	const [toIndex, fromIndex] = getDropTargetIndex(event, index, columnDraggedFromIndex, resultColumns.value.length, false);
+	const [toIndex, fromIndex] = getDropTargetIndex(event, index, columnDraggedFromIndex, false);
 	if (toIndex === undefined || fromIndex === undefined) {
 		return;
 	}
@@ -818,7 +818,6 @@ function getDropTargetIndex(
 	event: DragEvent,
 	index: number,
 	fromIndex: number | undefined,
-	itemsLength: number,
 	isVertical: boolean,
 	combinedSiblingIsNext?: boolean,
 ): [toIndex: number | undefined, fromIndex: number | undefined] {
@@ -827,9 +826,7 @@ function getDropTargetIndex(
 	}
 
 	let toIndex;
-	if (index === itemsLength) {
-		toIndex = fromIndex === (itemsLength - 1) ? undefined : itemsLength;
-	} else if (index === fromIndex - 1) {
+	if (index === fromIndex - 1) {
 		toIndex = index;
 	} else if (index === fromIndex + 1) {
 		toIndex = index + 1;
@@ -866,13 +863,13 @@ function startResultSectionDrag(event: DragEvent, index: number) {
 
 function onResultSectionDragenter(event: DragEvent, index: number, isHeader?: boolean) {
 	if (sectionDraggedFromIndex !== undefined) {
-		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
+		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, true, isHeader));
 	}
 }
 
 function onResultSectionDragover(event: DragEvent, index: number, isHeader?: boolean) {
 	if (sectionDraggedFromIndex !== undefined) {
-		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader));
+		([sectionDragDropIndex.value] = getDropTargetIndex(event, index, sectionDraggedFromIndex, true, isHeader));
 		if (sectionDragDropIndex.value !== undefined) {
 			event.preventDefault();
 		}
@@ -893,7 +890,7 @@ function onResultSectionDragleave(event: DragEvent) {
 function onResultSectionDrop(event: DragEvent, index: number, isHeader?: boolean) {
 	sectionDragDropIndex.value = undefined;
 
-	const [toIndex, fromIndex] = getDropTargetIndex(event, index, sectionDraggedFromIndex, resultSections.value.length, true, isHeader);
+	const [toIndex, fromIndex] = getDropTargetIndex(event, index, sectionDraggedFromIndex, true, isHeader);
 	if (toIndex === undefined || fromIndex === undefined) {
 		return;
 	}
@@ -984,6 +981,7 @@ function columnAddableOption(damageSource?: DamageSource): IColumnAddableOption 
 		}
 	}
 
+	const itemOptions = damageSectionOptions.value.at(-1)!;
 	rv.itemOptionsIndexes = damageSource && damageSectionOptions.value.at(-1)?.type === 'item'
 		? damageSource!.items.value
 			.map(item => item ? itemOptions.abilities.findIndex(ability => ability.id.id === item.id) : undefined)
@@ -2097,12 +2095,10 @@ defineExpose({
 					--at-apply: 'bottom-0.5 top-auto rotate-180';
 				}
 
-				&:last-of-type::before {
-					--at-apply: 'bottom-0';
-				}
-
+				&:last-of-type::before,
 				&:nth-last-of-type(2):has(+ [hidden])::before {
-					--at-apply: '-bottom-[0.5px]';
+					--at-apply: 'bottom-px';
+					--drop-indicator-b-w: 1px;
 				}
 			}
 		}
