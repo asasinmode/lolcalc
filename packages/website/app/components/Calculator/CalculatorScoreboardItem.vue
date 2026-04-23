@@ -12,6 +12,8 @@ const props = defineProps<{
 	isRight?: boolean;
 	canRemove?: boolean;
 	canMoveDown?: boolean;
+	/** if `true` and is first item, will be expanded */
+	expandOnMounted?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -170,7 +172,7 @@ function toggleExpanded() {
 }
 
 onMounted(() => {
-	if (import.meta.dev) {
+	if ((import.meta.dev || props.expandOnMounted) && !props.index) {
 		toggleExpanded();
 	}
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;

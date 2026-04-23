@@ -321,6 +321,8 @@ function dropItem(event: DragEvent, target: DamageSource) {
 	itemDragData = undefined;
 }
 
+const expandOnMounted = computed(() => damageSources.value.length === 1 && damageTargets.value.length === 1);
+
 const mirrorLayout = ref(false);
 
 onMounted(() => {
@@ -363,6 +365,7 @@ function setLocalMirrorLayout() {
 					:can-remove="damageSources.length > 1"
 					:can-move-down="index !== damageSources.length - 1"
 					:data-index="index"
+					:expand-on-mounted
 					data-group="sources"
 					@clear="clear(index, damageSources)"
 					@remove="remove(index, damageSources)"
@@ -399,6 +402,7 @@ function setLocalMirrorLayout() {
 					:can-remove="damageTargets.length > 1"
 					:can-move-down="index !== damageTargets.length - 1"
 					:data-index="index"
+					:expand-on-mounted
 					data-group="targets"
 					is-right
 					@clear="clear(index, damageTargets)"
