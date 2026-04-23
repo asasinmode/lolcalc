@@ -2145,6 +2145,12 @@ defineExpose({
 			}
 		}
 
+		> tbody:not([aria-labelledby]):has(+ tbody[data-drop-direction='after']) {
+			&::before {
+				--at-apply: 'content-empty absolute inset-0 z-3';
+			}
+		}
+
 		> tfoot {
 			> tr > td {
 				--at-apply: 'pb-[--header-row-pt]';
