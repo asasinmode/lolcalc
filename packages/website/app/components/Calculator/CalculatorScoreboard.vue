@@ -88,21 +88,26 @@ function onDragstart(event: DragEvent, index: number, source: DamageSource[], is
 	}
 
 	dragging.value = { index, source, isDuplicate };
+	event.stopPropagation();
 	event.dataTransfer!.effectAllowed = isDuplicate ? 'copy' : 'move';
 	event.dataTransfer!.setDragImage(dragPreview.value!, 0, 0);
 }
 
-function onDragenter(event: DragEvent, index: number, target: DamageSource[]) {
+function onDragenter(event: DragEvent, index: number, target: DamageSource[], isList = false) {
 	if (dragging.value) {
 		dragDropTarget.value = target;
-		([dragDropIndex.value] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
+		([dragDropIndex.value] = isList
+			? getListDropTargetIndex(target, dragging.value.index, dragging.value.source)
+			: getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
 	}
 }
 
-function onDragover(event: DragEvent, index: number, target: DamageSource[]) {
+function onDragover(event: DragEvent, index: number, target: DamageSource[], isList = false) {
 	if (dragging.value) {
 		dragDropTarget.value = target;
-		([dragDropIndex.value] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
+		([dragDropIndex.value] = isList
+			? getListDropTargetIndex(target, dragging.value.index, dragging.value.source)
+			: getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
 		if (dragDropIndex.value !== undefined) {
 			event.preventDefault();
 		}
@@ -110,7 +115,7 @@ function onDragover(event: DragEvent, index: number, target: DamageSource[]) {
 }
 
 function onDragleave(event: DragEvent) {
-	if (!dragging.value) {
+	if (dragging.value) {
 		if (
 			!event.currentTarget || !event.relatedTarget
 			|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
@@ -121,14 +126,16 @@ function onDragleave(event: DragEvent) {
 	}
 }
 
-function onDrop(event: DragEvent, index: number, target: DamageSource[]) {
+function onDrop(event: DragEvent, index: number, target: DamageSource[], isList = false) {
 	dragDropIndex.value = undefined;
 	dragDropTarget.value = undefined;
 	if (!dragging.value) {
 		return;
 	}
 
-	let [toIndex, fromIndex] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
+	let [toIndex, fromIndex] = isList
+		? getListDropTargetIndex(target, dragging.value.index, dragging.value.source)
+		: getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
 	if (toIndex === undefined || fromIndex === undefined) {
 		return;
 	}
@@ -184,6 +191,10 @@ function getDropTargetIndex(
 	}
 
 	return [toIndex, fromIndex];
+}
+
+function getListDropTargetIndex(target: DamageSource[], fromIndex: number, source: DamageSource[]) {
+	return source === target ? [undefined, undefined] : [target.length, fromIndex];
 }
 
 function remove(index: number, target: DamageSource[]) {
@@ -318,7 +329,12 @@ function setLocalMirrorLayout() {
 			<h3>
 				damage sources
 			</h3>
-			<ul>
+			<ul
+				@dragenter="onDragenter($event, damageSources.length - 1, damageSources, true)"
+				@dragover="onDragover($event, damageSources.length - 1, damageSources, true)"
+				@dragleave="onDragleave"
+				@drop="onDrop($event, damageSources.length - 1, damageSources, true)"
+			>
 				<CalculatorScoreboardItem
 					v-for="(value, index) in damageSources"
 					:key="value.id"
@@ -336,10 +352,10 @@ function setLocalMirrorLayout() {
 					@change-group="changeGroup(index, damageSources, $event)"
 					@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
 					@dragstart="(event, isDuplicate) => onDragstart(event, index, damageSources, isDuplicate)"
-					@dragenter="onDragenter($event, index, damageSources)"
-					@dragover="onDragover($event, index, damageSources)"
-					@dragleave="onDragleave"
-					@drop="onDrop($event, index, damageSources)"
+					@dragenter.stop="onDragenter($event, index, damageSources)"
+					@dragover.stop="onDragover($event, index, damageSources)"
+					@dragleave.stop="onDragleave"
+					@drop.stop="onDrop($event, index, damageSources)"
 					@item-dragstart="(event, itemIndex) => onItemDragstart(event, value, itemIndex)"
 					@item-list-dragenter="onItemDragEnter($event, value)"
 					@item-list-dragover="onItemDragover($event, value)"
@@ -359,7 +375,12 @@ function setLocalMirrorLayout() {
 			<h3>
 				damage targets
 			</h3>
-			<ul>
+			<ul
+				@dragenter="onDragenter($event, damageTargets.length - 1, damageTargets, true)"
+				@dragover="onDragover($event, damageTargets.length - 1, damageTargets, true)"
+				@dragleave="onDragleave"
+				@drop="onDrop($event, damageTargets.length - 1, damageTargets, true)"
+			>
 				<CalculatorScoreboardItem
 					v-for="(value, index) in damageTargets"
 					:key="value.id"
@@ -378,10 +399,10 @@ function setLocalMirrorLayout() {
 					@change-group="changeGroup(index, damageTargets, $event)"
 					@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
 					@dragstart="(event, isDuplicate) => onDragstart(event, index, damageTargets, isDuplicate)"
-					@dragenter="onDragenter($event, index, damageTargets)"
-					@dragover="onDragover($event, index, damageTargets)"
-					@dragleave="onDragleave"
-					@drop="onDrop($event, index, damageTargets)"
+					@dragenter.stop="onDragenter($event, index, damageTargets)"
+					@dragover.stop="onDragover($event, index, damageTargets)"
+					@dragleave.stop="onDragleave"
+					@drop.stop="onDrop($event, index, damageTargets)"
 					@item-dragstart="(event, itemIndex) => onItemDragstart(event, value, itemIndex)"
 					@item-list-dragenter="onItemDragEnter($event, value)"
 					@item-list-dragover="onItemDragover($event, value)"
