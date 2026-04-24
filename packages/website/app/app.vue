@@ -210,7 +210,7 @@ onBeforeUnmount(() => {
 	<header>
 		<div>
 			<h1>
-				<a href="/">
+				<a :href="$config.app.baseURL">
 					<img
 						src="/logo_dark.webp"
 						width="192"
