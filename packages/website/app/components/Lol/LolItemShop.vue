@@ -173,6 +173,15 @@ function sellItem(event: MouseEvent, index: number) {
 	}
 }
 
+function sellAll() {
+	if (damageSource.value) {
+		damageSource.value.itemsUndoSnapshots.value.push([...damageSource.value.items.value]);
+		for (let i = damageSource.value.items.value.length - 1; i >= 0; i--) {
+			damageSource.value.items.value[i] = undefined;
+		}
+	}
+}
+
 function rightClickItem(event: MouseEvent, item: IItem, buyability: IShopItem['buyability']) {
 	event.preventDefault();
 	!event.shiftKey && buyItem(item, buyability);
@@ -879,6 +888,9 @@ defineExpose({
 				<span> {{ inventoryValue }}</span>
 				inventory value
 			</p>
+			<button :disabled="!damageSource || !damageSource.items.value.some(Boolean)" @click="sellAll">
+				sell all
+			</button>
 		</footer>
 		<div id="item-shop-hover-tooltip" ref="itemTooltip" popover="hint" class="hover-tooltip">
 			<LolItemDescription
@@ -1598,8 +1610,13 @@ defineExpose({
 					--at-apply: 'bg-yellow-950 hoverable:bg-yellow-900';
 				}
 
-				&:nth-of-type(2) {
+				&:nth-of-type(2),
+				&:nth-of-type(3) {
 					--at-apply: 'bg-[--placeholder-champion-bg-clr] hoverable:bg-neutral-800 ms-2.5 me-5';
+				}
+
+				&:nth-of-type(3) {
+					--at-apply: 'ms-auto me-0 hoverable:bg-red-500 hoverable:text-black';
 				}
 			}
 
