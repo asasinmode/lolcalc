@@ -147,7 +147,7 @@ defineExpose({
 <style>
 @layer components {
 	#dialog-champ-select {
-		--at-apply: 'bg-[--cyan-bg] b b-[--ui-btn-border-clr] grid-rows-[auto_1fr] h-200 shadow-lg of-visible relative';
+		--at-apply: 'bg-[--cyan-bg] b b-[--ui-btn-border-clr] grid-rows-[auto_1fr] h-200 shadow-lg of-visible';
 		--px: calc(8 * var(--spacing));
 
 		&[open] {
@@ -155,14 +155,15 @@ defineExpose({
 		}
 
 		> header {
-			--at-apply: 'bg-inherit flex col-span-full items-end b-b b-[--ui-btn-border-clr] mx-[--px] mt-4';
+			--at-apply: 'bg-inherit flex col-span-full items-end b-b b-[--ui-btn-border-clr] mx-[--px] mt-[--mt] relative';
+			--mt: calc(4 * var(--spacing));
 
 			> h1 {
 				--at-apply: 'sr-only';
 			}
 
 			> form {
-				--at-apply: 'end-0 top-0 absolute';
+				--at-apply: 'end-0 -top-[--mt] absolute translate-x-full';
 
 				> button {
 					--at-apply: 'p-1 text-neutral-200 hoverable:text-white';

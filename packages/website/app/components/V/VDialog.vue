@@ -33,8 +33,8 @@ onBeforeUnmount(() => {
 defineExpose({
 	el: dialogEl,
 	open() {
-		dialogEl.value?.showModal();
 		document.body.style.overflow = 'hidden';
+		dialogEl.value?.showModal();
 		emit('open');
 		setTimeout(() => document.addEventListener('click', closeOnClickOutside), 0);
 	},
@@ -43,7 +43,6 @@ defineExpose({
 		document.removeEventListener('click', closeOnClickOutside);
 	},
 });
-// TODO add aria-labelledby and title to all dialogs
 </script>
 
 <template>
