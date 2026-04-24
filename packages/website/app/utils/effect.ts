@@ -8,6 +8,54 @@ import { ABILITY_TYPE, EFFECT_OBJECT_NAME, ITEM_NAME_TO_ID } from './meta.ts';
 const { data: items } = itemsData;
 
 export const EFFECT_SPECIFICS = {
+	[EFFECT_OBJECT_NAME.grievousWounds]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWounds),
+		label: 'Grievous Wounds',
+		setupData(data): [gWounds: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [gWounds: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.stun]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.stun),
+		label: 'Stun',
+		setupData(data): [isStunned: number] {
+			return [clamp(0, data?.[0] ?? 0, 1)];
+		},
+		isActive(data: [isStunned: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.slowFlat]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.slowFlat),
+		label: 'Slow (flat)',
+		minValue: 0,
+		setupData(data): [slowedBy: number] {
+			return [Math.min(0, data?.[0] ?? 0)];
+		},
+		isActive(data: [slowedBy: number]) {
+			return data[0];
+		},
+		imgText(data: [slowedBy: number]) {
+			return data[0];
+		},
+	},
+	[EFFECT_OBJECT_NAME.slowPercent]: {
+		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.slowPercent),
+		label: 'Slow (percent)',
+		minValue: 0,
+		setupData(data): [slowedBy: number] {
+			return [Math.min(0, data?.[0] ?? 0)];
+		},
+		isActive(data: [slowedBy: number]) {
+			return data[0];
+		},
+		imgText(data: [slowedBy: number]) {
+			return `${data[0]}%`;
+		},
+	},
 	[EFFECT_OBJECT_NAME.shurelyaInspiringSpeech]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.item, ITEM_NAME_TO_ID.shurelya),
 		label: 'Inspiring speech',
@@ -140,16 +188,6 @@ export const EFFECT_SPECIFICS = {
 			return data[0];
 		},
 	},
-	[EFFECT_OBJECT_NAME.grievousWounds]: {
-		sourceAbility: GameAbilityId.build(ABILITY_TYPE.effect, EFFECT_OBJECT_NAME.grievousWounds),
-		label: 'Grievous Wounds',
-		setupData(data): [gWounds: number] {
-			return [clamp(0, data?.[0] ?? 0, 1)];
-		},
-		isActive(data: [gWounds: number]) {
-			return data[0];
-		},
-	},
 	[EFFECT_OBJECT_NAME.amumuPCursedTouch]: {
 		sourceAbility: GameAbilityId.build(ABILITY_TYPE.champion, 'Amumu', 'passive', 0),
 		label: 'Cursed touch',
@@ -236,4 +274,7 @@ export const EFFECT_SPECIFICS_OBJECT_ENTRIES = Object.entries(EFFECT_SPECIFICS) 
 
 export const CUSTOM_EFFECT_IMAGES: Partial<Record<IEffectObjectName, [ path: string, imgSize: number ]>> = {
 	[EFFECT_OBJECT_NAME.grievousWounds]: ['game/assets/spells/icons2d/gw_debuff.png', 64],
+	[EFFECT_OBJECT_NAME.stun]: ['https://wiki.leagueoflegends.com/en-us/images/Keyword_Stun.svg', 32],
+	[EFFECT_OBJECT_NAME.slowFlat]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
+	[EFFECT_OBJECT_NAME.slowPercent]: ['https://wiki.leagueoflegends.com/en-us/images/Slow_icon.png', 65],
 };

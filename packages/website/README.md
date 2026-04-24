@@ -32,7 +32,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [x] alt + move = duplicate
     - [x] shift + click remove = clear
     - [x] dragging
-    - [?] drag & drop api for dragging
   - [x] items
     - [x] drag between inventories
     - [x] hover tooltip
@@ -56,7 +55,6 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
     - [?] extras target dummy
     - [x] other "internal" effects like movement speed (bc, trinity, cosmic drive)
     - [?] shapeshifting champions choose shape, switch abilities since it can affect stats
-  - [?] detect invalid ability levels
   - [x] mirror layout
   - [ ] expand scoreboard item on click anywhere when collapsed, maybe if more ppl want it
 - [ ] results ui, table like the post game one, grouped by ability type, like AA or selected abilities. So all chosen caitlyn Qs are in the same section and so on
@@ -118,7 +116,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [x] apply effects like black cleaver, abyssal mask, amumu passive
   - [x] item effects options ui
   - [x] champion passive effects options ui
-  - [?] other effects options ui, like slow, stun, grievous wounds
+  - [x] other effects options ui, like slow, stun, grievous wounds
   - [x] hover tooltips
   - [x] show source ability tooltip on shift
 - [x] item/champion extras that apply effect, like every "current" target is affected by amumu passive or has X stacks of bc/is slowed by rylai
@@ -200,6 +198,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
 
 - [ ] kind of data driven champion/item components? Parse specifics in util, based on that create components, overrides with dynamic `import()` to stay compatible with node
 - [ ] graph results in style of post game ones, table data but graph?
+- [ ] detect invalid ability levels
 - [ ] decaying movement speed stuff like fiora/nami/sivir passive, theoretically it affects stuff like swiftmarch passive adaptive force = rest of damage
 - [ ] champion abilities
   - [ ] cooldown/resource cost in tooltip (also aphelios' cooldown shows range X-Y when shift)
@@ -210,6 +209,7 @@ lightningcss getting mad at unocss @property inside of a layer should be resolve
   - [ ] abilities that give effects like attack speed and scale with champion stats - add possibility to link a source to use for stats
 - [ ] aps (ability damage per second) - champions scaling with AH/AP/AD
 - [ ] more visual effects dialog ui, instead of a select with add listed everything with images kind of like item shop looks
+- [ ] more custom/other effects - root, silence, any needed
 - [ ] explicit calculation formulas you can look at
 - [ ] [major runes](https://raw.communitydragon.org/15.24/plugins/rcp-be-lol-game-data/global/default/v1/perks.json) [or](https://raw.communitydragon.org/15.24/game/perks.cdtb.bin.json)
   - [ ] choose shield source to get shield bash value for

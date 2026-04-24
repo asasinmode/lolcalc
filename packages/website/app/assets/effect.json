@@ -1,6 +1,22 @@
 {
 	"version": "16.4.1",
 	"data": {
+		"lolcalcGrievousWounds": {
+			"dataKey": "lolcalcGrievousWounds",
+			"description": "This unit receives reduced healing."
+		},
+		"lolcalcStun": {
+			"dataKey": "lolcalcStun",
+			"description": "This unit is <keyword>stunned</keyword>."
+		},
+		"lolcalcSlowFlat": {
+			"dataKey": "lolcalcSlowFlat",
+			"description": "This unit is <keyword>slowed</keyword> by a flat amount."
+		},
+		"lolcalcSlowPercent": {
+			"dataKey": "lolcalcSlowPercent",
+			"description": "This unit is <keyword>slowed</keyword> by a percentage amount."
+		},
 		"2065ActiveMoveSpeed": {
 			"description": "This unit is moving faster.",
 			"dataKey": "Items/2065/Spells/2065ActiveMoveSpeed"
@@ -48,10 +64,6 @@
 		"3071BlackCleaverShred": {
 			"description": "This unit's Armor is reduced by a percentage.",
 			"dataKey": "Items/3071/Spells/3071BlackCleaverShred"
-		},
-		"lolcalcGrievousWounds": {
-			"dataKey": "lolcalcGrievousWounds",
-			"description": "This unit receives reduced healing."
 		},
 		"AmumuPDebuff": {
 			"description": "This unit takes bonus true damage whenever it is hit by magic damage.",

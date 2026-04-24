@@ -6,11 +6,11 @@ export const EFFECT_COMPONENTS: Partial<Record<IEffectObjectName, ISpecificCompo
 for (const [effectObjectName, effectSpecific] of EFFECT_SPECIFICS_OBJECT_ENTRIES) {
 	if (effectSpecific.sourceAbility.type === ABILITY_TYPE.effect) {
 		const abilityId = GameAbilityId.build(ABILITY_TYPE.effect, effectObjectName);
-		const { label, minValue = 0, maxValue = 1 } = effectSpecific;
+		const { label, minValue, maxValue } = effectSpecific;
 
 		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id] ??= {};
 		// TODO if effect data will have multiple values, this needs to be changed as it only sets the first value. same with `DamageSource.computeAppliedEffect`, it works only on first value
-		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= maxValue > 1
+		EFFECT_COMPONENTS[effectSpecific.sourceAbility.id]!.effects ??= minValue !== undefined || maxValue !== undefined
 			? await numberExtra(abilityId, 0, label, minValue, maxValue)
 			: await booleanExtra(abilityId, 0, label);
 	}

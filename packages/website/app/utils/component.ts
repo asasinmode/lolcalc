@@ -145,13 +145,13 @@ export async function gameAbilityImage(abilityId: IGameAbilityId): Promise<[src:
 
 	if (imageAbilityId.type === ABILITY_TYPE.item) {
 		return [
-			`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${imageAbilityId.id}.png`,
+			imgUrl(`img/item/${imageAbilityId.id}.png`, version, true),
 			64,
 		];
 	} else if (imageAbilityId.type === ABILITY_TYPE.effect) {
 		return CUSTOM_EFFECT_IMAGES[imageAbilityId.id]
 			? [
-					`https://raw.communitydragon.org/${minorVersion}/${CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0]}`,
+					imgUrl(CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![0], minorVersion),
 					CUSTOM_EFFECT_IMAGES[imageAbilityId.id]![1],
 				]
 			: ['', 0];
@@ -199,4 +199,12 @@ function extraAppliedEffect(abilityId: IGameAbilityId, property: PropertyKey, da
 		},
 		appliedEffect,
 	];
+}
+
+function imgUrl(url: string, version: string, isDDragon = false) {
+	return url.startsWith('http')
+		? url
+		: isDDragon
+			? `https://ddragon.leagueoflegends.com/cdn/${version}/${url}`
+			: `https://raw.communitydragon.org/${version}/${url}`;
 }

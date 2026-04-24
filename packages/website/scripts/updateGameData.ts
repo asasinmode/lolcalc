@@ -928,16 +928,26 @@ try {
 	effectData = JSON.parse(await fs.readFile(effectFilePath, 'utf8'));
 } catch {}
 
-const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, IEffectData['data'][string] | string>> = {
+const CUSTOM_EFFECTS: Partial<Record<IEffectObjectName, Omit<IEffectData['data'][string], 'dataKey'> | string>> = {
+	/* items */
 	[EFFECT_OBJECT_NAME.knightsVowSacrifice]: {
-		dataKey: EFFECT_OBJECT_NAME.knightsVowSacrifice,
 		description: 'This unit takes reduced damage thanks to a nearby ally\'s sacrifice.',
 	},
-	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
+	/* champion passives */
 	[EFFECT_OBJECT_NAME.nunuPCallOfFreljord]: 'game_buff_tooltip_nunup',
 	[EFFECT_OBJECT_NAME.ornnPLivingForge]: {
-		dataKey: EFFECT_OBJECT_NAME.ornnPLivingForge,
 		description: 'This unit\'s item is upgraded thanks to ally Ornn.',
+	},
+	/* other */
+	[EFFECT_OBJECT_NAME.grievousWounds]: 'game_buff_tooltip_grievouswound',
+	[EFFECT_OBJECT_NAME.stun]: {
+		description: 'This unit is <keyword>stunned</keyword>.',
+	},
+	[EFFECT_OBJECT_NAME.slowFlat]: {
+		description: 'This unit is <keyword>slowed</keyword> by a flat amount.',
+	},
+	[EFFECT_OBJECT_NAME.slowPercent]: {
+		description: 'This unit is <keyword>slowed</keyword> by a percentage amount.',
 	},
 };
 
@@ -967,7 +977,7 @@ if (!effectData || effectData?.version !== latestVersion || EFFECT_SPECIFICS_OBJ
 						description: description && extractEffectDescription(description),
 					}];
 				} else {
-					return [effectObjectName, CUSTOM_EFFECTS[effectObjectName]];
+					return [effectObjectName, { dataKey: effectObjectName, ...CUSTOM_EFFECTS[effectObjectName] }];
 				}
 			}
 

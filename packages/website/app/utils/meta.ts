@@ -363,6 +363,7 @@ export type IItemShopStatFilter = keyof typeof ITEM_SHOP_STAT_FILTERS;
 	*		4. this is the description we are looking for, use the `Items/3071/Spells/3071BlackCleaverShred.ObjectName` of `3071BlackCleaverShred`
 	*/
 export const EFFECT_OBJECT_NAME = {
+	/* items */
 	blackCleaverCarve: '3071BlackCleaverShred',
 	shurelyaInspiringSpeech: '2065ActiveMoveSpeed',
 	ardentSanctify: '3504Buff',
@@ -374,13 +375,18 @@ export const EFFECT_OBJECT_NAME = {
 	rylaisRimefrost: '3116Slow',
 	abyssalMaskUnmake: '8020VisualDebuff',
 	horizonFocusHypershot: '4628Marker',
-	grievousWounds: 'lolcalcGrievousWounds',
 	bloodletterVileDecay: '8010VisualDebuff',
+	/* champion passives */
 	amumuPCursedTouch: 'AmumuPDebuff',
 	jannaPTailwind: 'Tailwind',
 	nunuPCallOfFreljord: 'localcNunuPassive',
 	ornnPLivingForge: 'lolcalcOrnnPassive',
 	rellPBreakMold: 'RellP_Debuff',
+	/* other */
+	grievousWounds: 'lolcalcGrievousWounds',
+	stun: 'lolcalcStun',
+	slowFlat: 'lolcalcSlowFlat',
+	slowPercent: 'lolcalcSlowPercent',
 } as const;
 
 export type IEffectObjectName = typeof EFFECT_OBJECT_NAME[keyof typeof EFFECT_OBJECT_NAME];
