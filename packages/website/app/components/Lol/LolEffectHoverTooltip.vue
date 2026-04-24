@@ -116,6 +116,10 @@ defineExpose({ el });
 	.hover-tooltip.effect {
 		--at-apply: 'grid grid-cols-[auto_1fr] w-[min(90vw,30rem)] gap-x-[--gap-x]';
 
+		> img {
+			--at-apply: 'size-[--item-img-size]';
+		}
+
 		> div {
 			--at-apply: 'col-span-full b-b-0 pb-0 mb-0 mt-[--description-mt]';
 		}

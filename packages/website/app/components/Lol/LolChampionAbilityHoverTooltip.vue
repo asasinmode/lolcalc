@@ -182,7 +182,7 @@ defineExpose({ el });
 		}
 
 		> img {
-			--at-apply: 'row-span-2 size-16';
+			--at-apply: 'row-span-2 size-[--item-img-size]';
 		}
 
 		> h5 {

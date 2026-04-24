@@ -2044,7 +2044,7 @@ defineExpose({ el });
 						}
 
 						> button {
-							--at-apply: 'relative b b-[--ui-btn-border-clr] size-full';
+							--at-apply: 'relative b b-[--ui-btn-border-clr] size-full bg-[--placeholder-champion-bg-clr]';
 
 							> img {
 								--at-apply: 'size-full';
