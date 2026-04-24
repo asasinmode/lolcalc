@@ -22,7 +22,7 @@ const emit = defineEmits<{
 	duplicate: [shift: boolean];
 	changeGroup: [alt: boolean];
 	move: [toIndex: number, alt: boolean];
-	startDrag: [event: MouseEvent, duplicate?: boolean];
+	dragstart: [event: DragEvent, isDuplicate: boolean];
 	itemListDragenter: [event: DragEvent];
 	itemListDragover: [event: DragEvent];
 	itemListDragleave: [event: DragEvent];
@@ -869,8 +869,9 @@ defineExpose({ el });
 			:title="`${iconButtonsShowText ? '' : 'move up, '}alt+click to duplicate above`"
 			class="pretend-ui-btn"
 			:disabled="index === 0"
+			draggable="true"
 			@click="$emit('move', index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
-			@mousedown.left="$emit('startDrag', $event)"
+			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 		>
 			<span>move up <span>(alt+click to duplicate above)</span></span>
 			<Icon class="i-ph:arrow-up" />
@@ -879,8 +880,9 @@ defineExpose({ el });
 			:title="`${iconButtonsShowText ? '' : 'move down, '}alt+click to duplicate below`"
 			class="pretend-ui-btn"
 			:disabled="!canMoveDown"
+			draggable="true"
 			@click="$emit('move', index + 1, globalKeyModifiers.alt)"
-			@mousedown.left="$emit('startDrag', $event)"
+			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 		>
 			<span>move down <span>(alt+click to duplicate below)</span></span>
 			<Icon class="i-ph:arrow-down" />
@@ -888,9 +890,10 @@ defineExpose({ el });
 		<button
 			:title="`${iconButtonsShowText ? '' : `move to ${otherGroup}, `}alt+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
 			class="pretend-ui-btn"
+			draggable="true"
 			:disabled="!canRemove && !value.anythingFilled.value"
 			@click="$emit('changeGroup', globalKeyModifiers.alt)"
-			@mousedown.left="$emit('startDrag', $event)"
+			@dragstart="$emit('dragstart', $event, globalKeyModifiers.alt)"
 		>
 			<span>move {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }} <span>(alt+click to duplicate {{ iconButtonsShowText ? otherGroup : `to ${otherGroup}` }})</span></span>
 			<Icon :class="isRight ? 'i-ph:arrow-left' : 'i-ph:arrow-right'" />
@@ -899,8 +902,9 @@ defineExpose({ el });
 			:title="`${iconButtonsShowText ? '' : 'duplicate, '}shift+click to duplicate ${iconButtonsShowText ? otherGroup : `into ${otherGroup}`}`"
 			class="pretend-ui-btn"
 			:disabled="!canRemove && !value.anythingFilled.value"
+			draggable="true"
 			@click="$emit('duplicate', globalKeyModifiers.shift)"
-			@mousedown.left="$emit('startDrag', $event, true)"
+			@dragstart="$emit('dragstart', $event, true)"
 		>
 			<span>duplicate<span>(shift+click to duplicate {{ iconButtonsShowText ? otherGroup : `into ${otherGroup}` }})</span></span>
 			<Icon class="i-ph:copy" />

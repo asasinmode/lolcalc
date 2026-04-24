@@ -752,7 +752,7 @@ function moveResultColumn(fromIndex: number, toIndex: number, copy: boolean) {
 const columnDragDropIndex = ref<number>();
 let columnDraggedFromIndex: number | undefined;
 
-function startResultColumnDrag(index: number, event: DragEvent) {
+function onResultColumnDragstart(index: number, event: DragEvent) {
 	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
 	columnDraggedFromIndex = index;
 
@@ -1254,7 +1254,7 @@ defineExpose({
 									:disabled="index === 0"
 									draggable="true"
 									@click="moveResultColumn(index, index + (globalKeyModifiers.alt ? 0 : -1), globalKeyModifiers.alt)"
-									@dragstart="startResultColumnDrag(index, $event)"
+									@dragstart="onResultColumnDragstart(index, $event)"
 									@dragend="endResultColumnDrag"
 								>
 									<span>move left <span>(alt+click to duplicate to the left)</span></span>
@@ -1273,7 +1273,7 @@ defineExpose({
 									class="pretend-ui-btn"
 									draggable="true"
 									@click="moveResultColumn(index, index + 1, globalKeyModifiers.alt)"
-									@dragstart="startResultColumnDrag(index, $event)"
+									@dragstart="onResultColumnDragstart(index, $event)"
 									@dragend="endResultColumnDrag"
 								>
 									<span>move right <span>(alt+click to duplicate to the right)</span></span>

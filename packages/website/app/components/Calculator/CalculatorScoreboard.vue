@@ -1,226 +1,175 @@
 <script setup lang="ts">
-const runes = useRunes();
-const text = useText();
 const items = useItems();
-const { championImage } = useChampionImages();
+const text = useText();
+const runes = useRunes();
 const { version, minorVersion } = usePatchVersion();
 const globalKeyModifiers = useGlobalKeyModifiers();
 const enableUnimplementedUi = useEnableUnimplementedUi();
+const { championImage, championImageSize } = useChampionImages();
 
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
 
-const sourceElements = useTemplateRef('sourceElements');
-const targetElements = useTemplateRef('targetElements');
-
-const draggingPopover = useTemplateRef('draggingPopover');
+const dragDropIndex = ref<number>();
+const dragDropTarget = shallowRef<DamageSource[]>();
+const dragPreview = useTemplateRef('dragPreview');
 const dragging = shallowRef<{
+	isDuplicate: boolean;
 	index: number;
 	source: DamageSource[];
-	value: DamageSource;
-	duplicate?: boolean;
-	runePathPrimaryKeystone?: string;
-	runePathSecondary?: { icon: string; iconColor: string };
-	element: HTMLElement | null;
 }>();
-let dragTimeout: ReturnType<typeof setTimeout> | undefined;
-let disableDragTargetPointerEventsTimeout: ReturnType<typeof setTimeout> | undefined;
-let droppedAt: { target: DamageSource[]; index: number; dropDirection: 'above' | 'below' } | undefined;
 
-// TODO try to see if drag and drop API is easier, especially for mobile?
-function startDrag(event: MouseEvent, source: DamageSource[], index: number, duplicate?: boolean) {
-	const value = source[index]!;
-	let runePathPrimaryKeystone;
-	let runePathSecondary;
-	const { primary, primarySlots, secondary } = value.runes.value.paths;
+function onDragstart(event: DragEvent, index: number, source: DamageSource[], isDuplicate: boolean) {
+	const damageSource = source[index]!;
+
+	const [champImgContainer, lvlSpan, runeContainer, itemList] = dragPreview.value!.children as unknown as [HTMLSpanElement, HTMLSpanElement, HTMLDivElement, HTMLUListElement];
+	const champImg = champImgContainer.firstElementChild as HTMLImageElement;
+	const [runePrimary, runeSecondary] = runeContainer.children as unknown as [HTMLImageElement, HTMLSpanElement];
+
+	const champ = damageSource.listedChampion.value;
+	if (champ) {
+		champImg.src = championImage(champ.image, champ.id);
+		const size = championImageSize(champ.id);
+		champImg.width = size;
+		champImg.height = size;
+	} else {
+		champImg.src = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`;
+		champImg.width = 256;
+		champImg.height = 256;
+	}
+
+	lvlSpan.textContent = damageSource.level.value.toString();
+
+	const { primary, primarySlots, secondary } = damageSource.runes.value.paths;
 	if (primary && primarySlots[0]) {
 		const { icon } = runes.paths[primary].slots[0]![primarySlots[0]]!;
-		runePathPrimaryKeystone = `https://raw.communitydragon.org/${minorVersion}/game/${icon}`;
+		runePrimary.src = `https://raw.communitydragon.org/${minorVersion}/game/${icon}`;
+		runePrimary.width = 256;
+		runePrimary.height = 256;
+	} else {
+		runePrimary.src = `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`;
+		runePrimary.width = 80;
+		runePrimary.height = 80;
 	}
+
 	if (secondary) {
 		const { iconColor } = runes.paths[secondary]!;
 		const { name } = text.runes.paths[secondary]!;
-		runePathSecondary = {
-			icon: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg`,
-			iconColor,
-		};
+		runeSecondary.style.display = '';
+		runeSecondary.style.backgroundColor = iconColor;
+		runeSecondary.style.mask = `url(https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-collections/global/default/perks/images/${name.toLowerCase()}/${name.toLowerCase()}_icon.svg) no-repeat center`;
+	} else {
+		runeSecondary.style.display = 'none';
 	}
 
-	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement | null;
+	for (let i = 0; i < 7; i++) {
+		const li = itemList.children.item(i) as HTMLLIElement;
+		const img = li.firstElementChild as HTMLImageElement;
+		const item = damageSource.items.value[i];
 
-	if (!element) {
-		console.warn('startDrag called but no scoreboard item found in event.target parents');
-	}
-
-	dragging.value = {
-		index,
-		source,
-		duplicate,
-		value,
-		runePathPrimaryKeystone,
-		runePathSecondary,
-		element,
-	};
-	dragTimeout && clearTimeout(dragTimeout);
-	dragTimeout = setTimeout(() => {
-		draggingPopover.value!.showPopover();
-		updateDragPreviewPosition(event);
-		document.addEventListener('mousemove', updateDragPreviewPosition, { passive: true });
-	}, 150);
-	disableDragTargetPointerEventsTimeout = setTimeout(() => {
-		if (element) {
-			element.style.pointerEvents = 'none';
-		}
-	}, 300);
-
-	window.addEventListener('mouseup', finishDrag, { once: true });
-
-	for (const el of (sourceElements.value || []).concat(targetElements.value)) {
-		el?.el?.addEventListener('mouseenter', setCurrentDropTarget);
-		el?.el?.addEventListener('mouseleave', cleanupCurrentDropTarget);
-	}
-}
-
-function finishDrag(event: MouseEvent) {
-	dragTimeout && clearTimeout(dragTimeout);
-	disableDragTargetPointerEventsTimeout && clearTimeout(disableDragTargetPointerEventsTimeout);
-	draggingPopover.value!.hidePopover();
-	document.removeEventListener('mousemove', updateDragPreviewPosition);
-
-	for (const el of (sourceElements.value || []).concat(targetElements.value)) {
-		el?.el?.removeEventListener('mouseenter', setCurrentDropTarget);
-		el?.el?.removeEventListener('mouseleave', cleanupCurrentDropTarget);
-		el?.el?.removeEventListener('mousemove', updateCurrentDropTarget);
-	}
-
-	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement;
-	if (element) {
-		removeDropIndicator(element);
-	}
-	if (dragging.value?.element) {
-		dragging.value.element.style.pointerEvents = '';
-	}
-
-	if (droppedAt && dragging.value) {
-		const duplicate = dragging.value.duplicate || event.altKey || globalKeyModifiers.value.alt;
-		const item = duplicate
-			? dragging.value.source[dragging.value.index]!.clone()
-			: dragging.value.source.splice(dragging.value.index, 1)[0]!;
-
-		if (droppedAt.target.length === 1 && droppedAt.index === 0 && !droppedAt.target[droppedAt.index]?.anythingFilled.value) {
-			droppedAt.target[droppedAt.index] = item;
-		} else if (droppedAt.target === dragging.value.source) {
-			let index = droppedAt.index + (droppedAt.dropDirection === 'above' ? 0 : 1);
-			if (!duplicate && index > dragging.value.index) {
-				index -= 1;
-			}
-			droppedAt.target.splice(index, 0, item);
+		if (item) {
+			img.src = `https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${item.image}`;
+			img.style.display = '';
 		} else {
-			const index = droppedAt.index + (droppedAt.dropDirection === 'above' ? 0 : 1);
-			droppedAt.target.splice(index, 0, item);
-		}
-
-		if (!dragging.value.source.length) {
-			add(dragging.value.source);
+			img.style.display = 'none';
 		}
 	}
 
-	dragTimeout = undefined;
-	disableDragTargetPointerEventsTimeout = undefined;
-	dragging.value = undefined;
-	droppedAt = undefined;
+	const lastLi = itemList.lastElementChild as HTMLLIElement;
+	if (damageSource.roleQuest.value === 'bot') {
+		lastLi.style.display = '';
+		itemList.style.paddingInlineEnd = `calc(6 * var(--spacing))`;
+	} else {
+		lastLi.style.display = 'none';
+		itemList.style.paddingInlineEnd = '';
+	}
+
+	dragging.value = { index, source, isDuplicate };
+	event.dataTransfer!.effectAllowed = isDuplicate ? 'copy' : 'move';
+	event.dataTransfer!.setDragImage(dragPreview.value!, 0, 0);
 }
 
-function updateDragPreviewPosition(event: MouseEvent) {
-	draggingPopover.value!.style.setProperty('--left', `${event.pageX}px`);
-	draggingPopover.value!.style.setProperty('--top', `${event.pageY}px`);
-}
-
-function setCurrentDropTarget(event: MouseEvent) {
-	const target = event.target as HTMLElement;
-	target.addEventListener('mousemove', updateCurrentDropTarget, { passive: true });
-	updateCurrentDropTarget(event);
-}
-
-function cleanupCurrentDropTarget(event: MouseEvent) {
-	const target = event.target as HTMLElement;
-	target.removeEventListener('mousemove', updateCurrentDropTarget);
-	removeDropIndicator(target);
-	droppedAt = undefined;
-}
-
-function removeDropIndicator(element: HTMLElement) {
-	const currentDropDirection = element.dataset.dropDirection;
-	const secondIndicator = currentDropDirection === 'above'
-		? element.previousElementSibling
-		: currentDropDirection === 'below' ? element.nextElementSibling : null;
-	delete element.dataset.dropDirection;
-	if (secondIndicator) {
-		delete (secondIndicator as HTMLElement).dataset.dropDirection;
+function onDragenter(event: DragEvent, index: number, target: DamageSource[]) {
+	if (dragging.value) {
+		dragDropTarget.value = target;
+		([dragDropIndex.value] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
 	}
 }
 
-function updateCurrentDropTarget(event: MouseEvent) {
+function onDragover(event: DragEvent, index: number, target: DamageSource[]) {
+	if (dragging.value) {
+		dragDropTarget.value = target;
+		([dragDropIndex.value] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source));
+		if (dragDropIndex.value !== undefined) {
+			event.preventDefault();
+		}
+	}
+}
+
+function onDragleave(event: DragEvent) {
 	if (!dragging.value) {
-		console.warn('updateCurrentDropTarget called without anything being dragged');
-		return;
-	}
-
-	const element = (event.target as HTMLElement).closest('[data-scoreboard-item]') as HTMLElement;
-	if (!element) {
-		console.warn('updateCurrentDropTarget event no target', event);
-		return;
-	}
-
-	const index = Number.parseInt(element.dataset.index!);
-	const target = element.dataset.group === 'sources' ? damageSources.value : damageTargets.value;
-	if (dragging.value.source === target && index === dragging.value.index) {
-		return;
-	}
-
-	const rect = element.getBoundingClientRect();
-	const currentDropDirection = element.dataset.dropDirection;
-	let dropDirection: 'above' | 'below' = event.clientY < (rect.y + rect.height / 2) ? 'above' : 'below';
-
-	if (currentDropDirection && currentDropDirection !== dropDirection) {
-		const previousSecondIndicator = currentDropDirection === 'above'
-			? element.previousElementSibling
-			: currentDropDirection === 'below' ? element.nextElementSibling : null;
-		if (previousSecondIndicator) {
-			delete (previousSecondIndicator as HTMLElement).dataset.dropDirection;
+		if (
+			!event.currentTarget || !event.relatedTarget
+			|| !(event.currentTarget as HTMLElement).contains(event.relatedTarget as HTMLElement)
+		) {
+			dragDropTarget.value = undefined;
+			dragDropIndex.value = undefined;
 		}
 	}
-
-	if (target === dragging.value.source) {
-		if (index === dragging.value.index - 1) {
-			dropDirection = 'above';
-		} else if (index === dragging.value.index + 1) {
-			dropDirection = 'below';
-		}
-	}
-
-	const secondIndicator = dropDirection === 'above'
-		? element.previousElementSibling
-		: dropDirection === 'below' ? element.nextElementSibling : null;
-
-	element.dataset.dropDirection = dropDirection;
-	if ((secondIndicator as HTMLElement) && 'scoreboardItem' in (secondIndicator as HTMLElement)?.dataset) {
-		(secondIndicator as HTMLElement).dataset.dropDirection = dropDirection === 'below' ? 'above' : 'below';
-	}
-	droppedAt = {
-		index,
-		target,
-		dropDirection,
-	};
 }
 
-onBeforeUnmount(() => {
-	window.removeEventListener('mouseup', finishDrag);
-	document.removeEventListener('mousemove', finishDrag);
-});
+function onDrop(event: DragEvent, index: number, target: DamageSource[]) {
+	dragDropIndex.value = undefined;
+	dragDropTarget.value = undefined;
+	if (!dragging.value) {
+		return;
+	}
 
-function clear(index: number, target: DamageSource[]) {
-	target[index]!.clear();
+	const [toIndex, fromIndex] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
+	if (toIndex === undefined || fromIndex === undefined) {
+		return;
+	}
+
+	if (dragging.value.isDuplicate) {
+		target.splice(toIndex, 0, dragging.value.source[fromIndex]!.clone());
+	} else {
+		const [column] = dragging.value.source.splice(fromIndex, 1);
+		const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
+		target.splice(adjustedIndex, 0, column!);
+	}
+
+	dragging.value = undefined;
+}
+
+function getDropTargetIndex(
+	event: DragEvent,
+	index: number,
+	target: DamageSource[],
+	fromIndex: number,
+	source: DamageSource[],
+): [toIndex: number | undefined, fromIndex: number | undefined] {
+	if (fromIndex === index && source === target) {
+		return [undefined, undefined];
+	}
+
+	let toIndex;
+	if (source === target) {
+		if (index === fromIndex - 1) {
+			toIndex = index;
+		} else if (index === fromIndex + 1) {
+			toIndex = index + 1;
+		}
+	}
+	if (toIndex === undefined) {
+		const el = event.currentTarget as HTMLElement;
+		const rect = el.getBoundingClientRect();
+		const rectSize = rect.height;
+		const posInEl = event.clientY - rect.top;
+
+		toIndex = posInEl < (rectSize / 2) ? index : index + 1;
+	}
+
+	return [toIndex, fromIndex];
 }
 
 function remove(index: number, target: DamageSource[]) {
@@ -278,7 +227,7 @@ let itemDragData: {
 	item: IItem;
 } | undefined;
 
-function startItemDrag(event: DragEvent, source: DamageSource, itemIndex: number) {
+function onItemDragstart(event: DragEvent, source: DamageSource, itemIndex: number) {
 	event.dataTransfer!.effectAllowed = globalKeyModifiers.value.alt ? 'copy' : 'move';
 	itemDragData = {
 		source,
@@ -308,7 +257,7 @@ function onItemDragLeave(event: DragEvent) {
 	}
 }
 
-function dropItem(event: DragEvent, target: DamageSource) {
+function onItemDrop(event: DragEvent, target: DamageSource) {
 	if (event.target) {
 		delete (event.target as HTMLElement).dataset.dropBuyability;
 	}
@@ -358,26 +307,29 @@ function setLocalMirrorLayout() {
 			<ul>
 				<CalculatorScoreboardItem
 					v-for="(value, index) in damageSources"
-					ref="sourceElements"
 					:key="value.id"
 					:value
 					:index
+					:expand-on-mounted
 					:can-remove="damageSources.length > 1"
 					:can-move-down="index !== damageSources.length - 1"
-					:data-index="index"
-					:expand-on-mounted
+					:data-drop-direction="dragDropTarget === damageSources ? dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined : undefined"
 					data-group="sources"
-					@clear="clear(index, damageSources)"
+					@clear="value.clear()"
 					@remove="remove(index, damageSources)"
 					@duplicate="duplicate(index, damageSources, $event)"
 					@change-group="changeGroup(index, damageSources, $event)"
 					@move="(toIndex, alt) => move(index, damageSources, toIndex, alt)"
-					@start-drag="(event, duplicate) => startDrag(event, damageSources, index, duplicate)"
-					@item-dragstart="(event, itemIndex) => startItemDrag(event, value, itemIndex)"
+					@dragstart="(event, isDuplicate) => onDragstart(event, index, damageSources, isDuplicate)"
+					@dragenter="onDragenter($event, index, damageSources)"
+					@dragover="onDragover($event, index, damageSources)"
+					@dragleave="onDragleave"
+					@drop="onDrop($event, index, damageSources)"
+					@item-dragstart="(event, itemIndex) => onItemDragstart(event, value, itemIndex)"
 					@item-list-dragenter="onItemDragEnter($event, value)"
 					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
-					@item-list-drop="dropItem($event, value)"
+					@item-list-drop="onItemDrop($event, value)"
 				/>
 				<li>
 					<button
@@ -395,27 +347,30 @@ function setLocalMirrorLayout() {
 			<ul>
 				<CalculatorScoreboardItem
 					v-for="(value, index) in damageTargets"
-					ref="targetElements"
 					:key="value.id"
 					:value
 					:index
+					:expand-on-mounted
 					:can-remove="damageTargets.length > 1"
 					:can-move-down="index !== damageTargets.length - 1"
-					:data-index="index"
-					:expand-on-mounted
+					:data-drop-direction="dragDropTarget === damageTargets ? dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined : undefined"
 					data-group="targets"
 					is-right
-					@clear="clear(index, damageTargets)"
+					@clear="value.clear()"
 					@remove="remove(index, damageTargets)"
 					@duplicate="duplicate(index, damageTargets, $event)"
 					@change-group="changeGroup(index, damageTargets, $event)"
 					@move="(toIndex, alt) => move(index, damageTargets, toIndex, alt)"
-					@start-drag="(event, duplicate) => startDrag(event, damageTargets, index, duplicate)"
-					@item-dragstart="(event, itemIndex) => startItemDrag(event, value, itemIndex)"
+					@dragstart="(event, isDuplicate) => onDragstart(event, index, damageTargets, isDuplicate)"
+					@dragenter="onDragenter($event, index, damageTargets)"
+					@dragover="onDragover($event, index, damageTargets)"
+					@dragleave="onDragleave"
+					@drop="onDrop($event, index, damageTargets)"
+					@item-dragstart="(event, itemIndex) => onItemDragstart(event, value, itemIndex)"
 					@item-list-dragenter="onItemDragEnter($event, value)"
 					@item-list-dragover="onItemDragover($event, value)"
 					@item-list-dragleave="onItemDragLeave"
-					@item-list-drop="dropItem($event, value)"
+					@item-list-drop="onItemDrop($event, value)"
 				/>
 				<li>
 					<button
@@ -427,47 +382,16 @@ function setLocalMirrorLayout() {
 					</button>
 				</li>
 			</ul>
-			<div ref="draggingPopover" data-drag-preview="" popover="manual" inert>
-				<span>
-					<img
-						v-if="dragging?.value.listedChampion.value"
-						:src="championImage(dragging.value.listedChampion.value!.image, dragging.value.listedChampion.value!.id)"
-						loading="lazy"
-						width="128"
-						height="128"
-					>
-					<img
-						v-else
-						:src="`https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/v1/champion-icons/-1.png`"
-						width="256"
-						height="256"
-					>
-				</span>
-				<span>{{ dragging?.value.level.value }}</span>
+			<div ref="dragPreview" data-drag-preview="" inert aria-hidden="true">
+				<span><img></span>
+				<span />
 				<div>
-					<img
-						:src="dragging?.runePathPrimaryKeystone || `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-fe-lol-champ-select/global/default/images/perks/rune-recommender-icon.png`"
-						aria-hidden="true"
-						:width="dragging?.runePathPrimaryKeystone ? 256 : 80"
-						:height="dragging?.runePathPrimaryKeystone ? 256 : 80"
-						loading="lazy"
-						data-primary-path-keystone=""
-					>
-					<span
-						v-show="dragging?.runePathSecondary"
-						:style="dragging?.runePathSecondary ? `background-color: ${dragging.runePathSecondary.iconColor}; mask: url(${dragging.runePathSecondary.icon}) no-repeat center;` : ''"
-						data-secondary-path=""
-					/>
+					<img data-primary-path-keystone="">
+					<span data-secondary-path="" />
 				</div>
 				<ul>
-					<li v-for="i in 6" :key="i">
-						<img
-							v-if="dragging?.value.items.value[i - 1]"
-							:src="`https://ddragon.leagueoflegends.com/cdn/${version}/img/item/${dragging?.value.items.value[i - 1]!.image}`"
-							width="64"
-							height="64"
-							loading="lazy"
-						>
+					<li v-for="i in 7" :key="i" :style="i === 7 ? 'display: none;' : undefined">
+						<img>
 					</li>
 				</ul>
 			</div>
@@ -522,11 +446,7 @@ function setLocalMirrorLayout() {
 			}
 
 			> [data-drag-preview] {
-				--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 absolute start-[--left] top-[--top]';
-
-				&:popover-open {
-					--at-apply: 'flex';
-				}
+				--at-apply: 'pointer-events-none bg-[--cyan-bg] items-center p-1 b b-[--ui-btn-border-clr] gap-1 absolute flex -z-1 -start-[9999px] -top-[9999px]';
 
 				> :nth-child(1) {
 					--at-apply: 'size-12 of-hidden rounded-full relative b b-[--ui-btn-border-clr]';
@@ -543,20 +463,24 @@ function setLocalMirrorLayout() {
 				> :nth-child(3) {
 					--at-apply: 'flex flex-col items-center self-center gap-1';
 
-					[data-primary-path-keystone] {
+					> :first-child {
 						--at-apply: 'size-5';
 					}
 
-					[data-secondary-path] {
+					> :last-child {
 						--at-apply: 'size-4';
 					}
 				}
 
 				> :nth-child(4) {
-					--at-apply: 'grid grid-cols-3 grid-rows-2 gap-0.5';
+					--at-apply: 'grid grid-cols-3 grid-rows-2 gap-0.5 relative';
 
-					li {
+					> li {
 						--at-apply: 'size-5.5 bg-black';
+
+						&:nth-of-type(7) {
+							--at-apply: 'rounded-full absolute end-0 top-1/2 -translate-y-1/2';
+						}
 					}
 				}
 			}
@@ -572,11 +496,12 @@ function setLocalMirrorLayout() {
 
 				&::before {
 					--at-apply: 'inset-0';
+					--b-w: 0.5px;
 					background-image: linear-gradient(
 						var(--drop-indicator-bg-direction),
 						hsl(0 100% 100%) 0px,
-						hsl(0 100% 100%) 0.5px,
-						hsl(0 100% 100% / 0.2) 0.5px,
+						hsl(0 100% 100%) var(--b-w),
+						hsl(0 100% 100% / 0.2) var(--b-w),
 						transparent 1.5rem
 					);
 				}
@@ -587,11 +512,19 @@ function setLocalMirrorLayout() {
 				}
 			}
 
-			[data-drop-direction='below'] {
+			[data-drop-direction='before']:first-child::before {
+				--b-w: 1px;
+			}
+
+			[data-drop-direction='after'] {
 				--drop-indicator-bg-direction: 0deg;
 
 				&::after {
 					--at-apply: 'bottom-0.5 top-auto rotate-180';
+				}
+
+				&:nth-last-child(2)::before {
+					--b-w: 1px;
 				}
 			}
 		}
