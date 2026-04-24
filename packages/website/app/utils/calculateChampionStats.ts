@@ -44,6 +44,7 @@ export function calculateChampionStats(source: DamageSource): IStatsCalculationR
 		critChance: champion?.stats.crit ?? 0,
 		critDamageMultiplier: 2,
 		moveSpeed: champion?.stats.movespeed ?? 0,
+		slowResist: 0,
 	};
 
 	const bonusStats = Object.fromEntries(Object.entries(baseStats).map(([key]) => [key, 0])) as IChampionStats;
@@ -235,4 +236,4 @@ function getAdaptiveForceStat(championId: string, attackDamage: number, abilityP
 // 	return stats;
 // }
 
-export type IChampionStats = Record<IChampionStatName, number>;
+export type IChampionStats = Record<IChampionStatName | 'slowResist', number>;

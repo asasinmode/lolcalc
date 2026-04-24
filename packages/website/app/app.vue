@@ -49,24 +49,35 @@ const resultSections = ref<IDamageResultTableSection[]>([
 		image: `https://raw.communitydragon.org/${minorVersion}/game/assets/ux/deathrecap/itemdamage.png`,
 		imageSize: 32,
 		rows: markRaw(Object.entries(CHAMPION_STAT_NAMES).map(([championStat, statName]) => {
+			const icon = STAT_ICON[championStat as IChampionStatName];
+			const image = typeof icon === 'string'
+				? {
+						src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${icon}.png`,
+						width: 20,
+						height: 20,
+					}
+				:	{
+						src: icon[0],
+						width: icon[1],
+						height: icon[2] ?? icon[1],
+					};
+
 			return {
 				id: championStat,
 				name: statName,
-				image: {
-					src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES[championStat as IChampionStatName]}.png`,
-					width: 20,
-					height: 20,
-				},
+				image,
 			};
-		}).concat([{
-			id: 'eqValue',
-			name: 'Inventory value',
-			image: {
-				src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
-				width: 32,
-				height: 28,
+		}).concat([
+			{
+				id: 'eqValue',
+				name: 'Inventory Value',
+				image: {
+					src: `https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/tft/goldcoinslarge.png`,
+					width: 32,
+					height: 28,
+				},
 			},
-		}])),
+		])),
 		getCellValue(_section, rowId, source, _target) {
 			if (!source) {
 				return;

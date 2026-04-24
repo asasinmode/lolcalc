@@ -747,10 +747,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 
 	computed = {
 		/** the stats shown in the "panel" on extended scoreboard item & results table */
-		stats: computed<Record<IChampionStatName, IComputedDamageSourceChampionStat>>(() => {
+		stats: computed<Record<keyof IChampionStats, IComputedDamageSourceChampionStat>>(() => {
 			const { stats } = this.stats.value;
 
-			const rv: Record<IChampionStatName, Omit<IComputedDamageSourceChampionStat, 'formattedTotal'> & { formattedTotal?: number }> = {
+			const rv: Record<keyof IChampionStats, Omit<IComputedDamageSourceChampionStat, 'formattedTotal'> & { formattedTotal?: number }> = {
 				hp: {
 					base: stats.baseOnLevel.hp,
 					bonus: stats.bonus.hp,
@@ -869,6 +869,11 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 					bonus: stats.bonus.manaRegen,
 					total: stats.total.manaRegen,
 				},
+				slowResist: {
+					bonus: stats.bonus.slowResist,
+					total: stats.total.slowResist,
+					isPercentage: true,
+				},
 			};
 
 			for (const championStat in rv) {
@@ -876,7 +881,7 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 				stat.formattedTotal = formatChampionStatValue(stat.isPercentage ? 100 : 1, stat, 'total');
 			}
 
-			return rv as Record<IChampionStatName, IComputedDamageSourceChampionStat>;
+			return rv as Record<keyof IChampionStats, IComputedDamageSourceChampionStat>;
 		}),
 		items: computed<(IComputedItemDescription | undefined)[]>(() => {
 			const text = useText();
@@ -1011,7 +1016,7 @@ export function computeItemDescription(
 	}
 
 	const cooldownIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/gameplay/cooldown.png" width="20" height="20" aria-hidden="true">`;
-	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 	const {
 		subtitleLeft,
@@ -1028,7 +1033,7 @@ export function computeItemDescription(
 		.map(([statName, value]) => {
 			const { name, displayMultiplier, isPercentage } = ITEM_STAT_META[statName as IItemStat];
 			return [
-				STAT_ICON_NAMES[statName as IItemStat],
+				STAT_ICON[statName as IItemStat],
 				displayMultiplier ? Math.round(value * displayMultiplier) : isPercentage ? `${Math.round(value * 100)}%` : value,
 				name,
 			] as [string, number, string];
@@ -1122,7 +1127,7 @@ export function computeAbilityDescription(
 	damageSource?: DamageSource<any>,
 	replaceOptions?: Parameters<typeof replaceGameDescriptionVariables>[3],
 ): IComputedAbilityDescription {
-	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAMES.OnHit}.png" width="20" height="20" aria-hidden="true">`;
+	const onHitIcon = `<img src="https://raw.communitydragon.org/${minorVersion}/plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON.OnHit}.png" width="20" height="20" aria-hidden="true">`;
 
 	const abilityLevel = gameAbilityId.abilityKey !== 'passive' ? damageSource?.abilityLevels.value[gameAbilityId.abilityKey] || 1 : undefined;
 	const ability = champion.abilities[gameAbilityId.abilityKey];

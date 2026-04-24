@@ -1,4 +1,4 @@
-import { STAT_ICON_NAMES } from './meta.ts';
+import { STAT_ICON } from './meta.ts';
 import { roundVariable } from './misc.ts';
 
 export interface IItemVariableCalculationTarget {
@@ -303,7 +303,7 @@ export function replaceGameDescriptionVariables(
 	return { replaced, variables, unknownVariables, variablesAllValues };
 }
 
-const statIconNameValues = Object.values(STAT_ICON_NAMES);
+const statIconNameValues = Object.values(STAT_ICON);
 
 export function replaceGameDescriptionIcons(minorVersion: string, text: string, onHitIcon?: string) {
 	return text

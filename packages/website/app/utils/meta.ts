@@ -14,7 +14,7 @@ export const CHAMPION_STATS = ['hp', 'hpRegen', 'mana', 'manaRegen', 'healShield
 
 export type IChampionStatName = (typeof CHAMPION_STATS)[number];
 
-export const CHAMPION_STAT_NAMES: Record<IChampionStatName, string> = {
+export const CHAMPION_STAT_NAMES: Record<keyof IChampionStats, string> = {
 	hp: 'Health',
 	mana: 'Mana',
 	attackDamage: 'Attack Damage',
@@ -39,6 +39,7 @@ export const CHAMPION_STAT_NAMES: Record<IChampionStatName, string> = {
 	attackRange: 'Attack Range',
 	hpRegen: 'Health every 5 seconds',
 	manaRegen: 'Mana/Resource every 5 seconds',
+	slowResist: 'Slow Resist',
 };
 
 /** colloquial names to id */
@@ -110,8 +111,14 @@ export const KEPT_UNPURCHASABLE_ITEMS = [
 
 export const RANGED_ONLY_ITEM_IDS = [ITEM_NAME_TO_ID.runaan];
 
-/** paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON_NAME}.png` */
-export const STAT_ICON_NAMES: Record<IItemStat | IChampionStatName | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown', string> = {
+/**
+ * paths to the stat icons found in `plugins/rcp-be-lol-game-data/global/default/assets/ux/fonts/texticons/lol/statsicon/${STAT_ICON}.png`
+ * or full external ones if starting with `http`
+ */
+export const STAT_ICON: Record<
+	IItemStat | keyof IChampionStats | 'adaptiveForce' | 'OnHit' | 'level' | 'attackRange' | 'cooldown',
+	string | [url: string, size: number] | [url: string, width: number, height: number]
+> = {
 	OnHit: 'onhit',
 	attackDamage: 'scalead',
 	FlatPhysicalDamageMod: 'scalead',
@@ -163,6 +170,7 @@ export const STAT_ICON_NAMES: Record<IItemStat | IChampionStatName | 'adaptiveFo
 	omnivamp: 'scalesv',
 	PercentTenacityMod: 'scaletenacity',
 	tenacity: 'scaletenacity',
+	slowResist: ['https://wiki.leagueoflegends.com/en-us/images/Slow_immune_icon.png', 65],
 };
 
 export const ITEM_TO_CHAMPION_STATS: Record<Exclude<
