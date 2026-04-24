@@ -818,12 +818,16 @@ function modifyEffectValue(effectIndex: number, by: 1 | -1) {
 	const computedEffect = props.value.computed.effects.value[effectIndex]!;
 
 	const min = computedEffect.specific.minValue ?? 0;
-	const max = computedEffect.specific.maxValue ?? 1;
+	const max = computedEffect.specific.maxValue;
 
 	if (globalKeyModifiers.value.ctrl) {
-		effect.data[0] = by < 0 ? min : max;
+		effect.data[0] = by < 0
+			? min
+			: max !== undefined
+				? max
+				: effect.data[0] + 10;
 	} else {
-		effect.data[0] = Math.max(min, Math.min(max, effect.data[0] + by));
+		effect.data[0] = Math.max(min, max !== undefined ? Math.min(max, effect.data[0] + by) : (effect.data[0] + by));
 	}
 }
 
