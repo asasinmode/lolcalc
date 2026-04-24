@@ -1048,11 +1048,21 @@ function recomputeCustomTotalRow() {
 }
 
 const colW = computed(() => {
+	if (iconButtonsShowText.value) {
+		return {
+			controls: 160,
+			header: 280,
+			result: 172,
+		};
+	}
+
+	const growUpToCols = 4;
+	const n = growUpToCols - Math.min(resultColumns.value.length, growUpToCols);
+
 	return {
-		controls: iconButtonsShowText.value ? 160 : 60,
-		header: 280,
-		result: iconButtonsShowText.value ? 172 : 120,
-		lastResult: iconButtonsShowText.value ? 172 : 120,
+		controls: 60,
+		header: Math.round(280 + 140 * n / (growUpToCols + 1)),
+		result: Math.round(120 + 90 * n / (growUpToCols + 1)),
 	};
 });
 
@@ -1090,10 +1100,10 @@ defineExpose({
 						<span>damage type</span>
 					</th>
 					<th
-						v-for="(column, index) in resultColumns"
+						v-for="column in resultColumns"
 						:key="column.id"
 						scope="col"
-						:width="`${index === resultColumns.length - 1 ? colW.lastResult : colW.result}px`"
+						:width="`${colW.result}px`"
 					>
 						<span>
 							{{ column.source && sourceOptions.find(option => option[0] === column.source!.id)?.[1] || 'undefined source' }}
@@ -1163,7 +1173,7 @@ defineExpose({
 					<td
 						v-for="(column, index) in resultColumns"
 						:key="column.id"
-						:width="`${index === resultColumns.length - 1 ? colW.lastResult : colW.result}px`"
+						:width="`${colW.result}px`"
 						:data-drop-direction="columnDragDropIndex === index ? 'before' : columnDragDropIndex === index + 1 ? 'after' : undefined"
 						:class="{ highlighted: highlightedColumns[index] }"
 						:style="columnDamageSourcesColorStyles(column)"

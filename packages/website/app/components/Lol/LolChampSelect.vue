@@ -110,7 +110,7 @@ defineExpose({
 				</button>
 			</div>
 			<form method="dialog">
-				<button value="cancel" title="Close" autofocus>
+				<button value="cancel" title="close" autofocus>
 					<Icon class="i-ph:x-bold" />
 					<span>
 						close
