@@ -918,7 +918,7 @@ defineExpose({
 	}
 
 	#dialog-item-shop {
-		--at-apply: 'bg-[--bg-clr] h-200 max-w-[90vw] relative of-visible b b-[--ui-btn-border-clr]';
+		--at-apply: 'bg-[--bg-clr] h-200 max-w-[90vw] of-visible b b-[--ui-btn-border-clr]';
 		--bg-clr: var(--cyan-bg);
 		--item-button-img-b-w: 3px;
 		--item-img-borderless-size: calc(var(--item-img-size) - 2 * var(--item-button-img-b-w));
