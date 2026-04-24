@@ -28,6 +28,7 @@ const emit = defineEmits<{
 	itemListDragleave: [event: DragEvent];
 	itemListDrop: [event: DragEvent];
 	itemDragstart: [event: DragEvent, itemIndex: number];
+	mounted: [];
 }>();
 
 const enableUnimplementedUi = useEnableUnimplementedUi();
@@ -172,10 +173,9 @@ function toggleExpanded() {
 }
 
 onMounted(() => {
-	if ((import.meta.dev || props.expandOnMounted) && !props.index) {
-		toggleExpanded();
-	}
+	props.expandOnMounted && toggleExpanded();
 	isExpanded.value = detailsContainer.value?.getAttribute('open') !== null;
+	emit('mounted');
 });
 
 const { addItemTooltipViewListeners, removeItemTooltipViewListeners } = useItemHoverTooltipView('Inventory');

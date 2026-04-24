@@ -10,6 +10,9 @@ const { championImage, championImageSize } = useChampionImages();
 const damageSources = defineModel<DamageSource[]>('sources', { required: true });
 const damageTargets = defineModel<DamageSource[]>('targets', { required: true });
 
+const isSourcesMounted = ref(false);
+const isTargetsMounted = ref(false);
+
 const dragDropIndex = ref<number>();
 const dragDropTarget = shallowRef<DamageSource[]>();
 const dragPreview = useTemplateRef('dragPreview');
@@ -310,11 +313,12 @@ function setLocalMirrorLayout() {
 					:key="value.id"
 					:value
 					:index
-					:expand-on-mounted
+					:expand-on-mounted="expandOnMounted && !isSourcesMounted"
 					:can-remove="damageSources.length > 1"
 					:can-move-down="index !== damageSources.length - 1"
 					:data-drop-direction="dragDropTarget === damageSources ? dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined : undefined"
 					data-group="sources"
+					@mounted="isSourcesMounted = true"
 					@clear="value.clear()"
 					@remove="remove(index, damageSources)"
 					@duplicate="duplicate(index, damageSources, $event)"
@@ -350,12 +354,13 @@ function setLocalMirrorLayout() {
 					:key="value.id"
 					:value
 					:index
-					:expand-on-mounted
+					:expand-on-mounted="expandOnMounted && !isTargetsMounted"
 					:can-remove="damageTargets.length > 1"
 					:can-move-down="index !== damageTargets.length - 1"
 					:data-drop-direction="dragDropTarget === damageTargets ? dragDropIndex === index ? 'before' : dragDropIndex === index + 1 ? 'after' : undefined : undefined"
 					data-group="targets"
 					is-right
+					@mounted="isTargetsMounted = true"
 					@clear="value.clear()"
 					@remove="remove(index, damageTargets)"
 					@duplicate="duplicate(index, damageTargets, $event)"
