@@ -148,8 +148,8 @@ function onDrop(event: DragEvent, index: number, target: DamageSource[], isList 
 		toIndex = target === dragging.value.source && fromIndex < toIndex ? toIndex - 1 : toIndex;
 	}
 
-	if (target[toIndex] && !target[toIndex]!.anythingFilled.value) {
-		target[toIndex] = newItem;
+	if (target.length === 1 && !target[0]!.anythingFilled.value) {
+		target[0] = newItem;
 	} else {
 		target.splice(toIndex, 0, newItem);
 	}
