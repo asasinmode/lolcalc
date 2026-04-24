@@ -128,17 +128,27 @@ function onDrop(event: DragEvent, index: number, target: DamageSource[]) {
 		return;
 	}
 
-	const [toIndex, fromIndex] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
+	let [toIndex, fromIndex] = getDropTargetIndex(event, index, target, dragging.value.index, dragging.value.source);
 	if (toIndex === undefined || fromIndex === undefined) {
 		return;
 	}
 
+	let newItem: DamageSource;
 	if (dragging.value.isDuplicate) {
-		target.splice(toIndex, 0, dragging.value.source[fromIndex]!.clone());
+		newItem = dragging.value.source[fromIndex]!.clone();
 	} else {
-		const [column] = dragging.value.source.splice(fromIndex, 1);
-		const adjustedIndex = fromIndex < toIndex ? toIndex - 1 : toIndex;
-		target.splice(adjustedIndex, 0, column!);
+		newItem = dragging.value.source.splice(fromIndex, 1)[0]!;
+		toIndex = target === dragging.value.source && fromIndex < toIndex ? toIndex - 1 : toIndex;
+	}
+
+	if (target[toIndex] && !target[toIndex]!.anythingFilled.value) {
+		target[toIndex] = newItem;
+	} else {
+		target.splice(toIndex, 0, newItem);
+	}
+
+	if (!dragging.value.source.length) {
+		add(dragging.value.source);
 	}
 
 	dragging.value = undefined;
@@ -168,8 +178,9 @@ function getDropTargetIndex(
 		const rect = el.getBoundingClientRect();
 		const rectSize = rect.height;
 		const posInEl = event.clientY - rect.top;
+		const midpoint = (rectSize / 2);
 
-		toIndex = posInEl < (rectSize / 2) ? index : index + 1;
+		toIndex = posInEl < midpoint ? index : index + 1;
 	}
 
 	return [toIndex, fromIndex];
