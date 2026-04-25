@@ -11,7 +11,7 @@ const props = defineProps<{
 	idPrefix: string;
 }>();
 
-defineEmits<{
+const emit = defineEmits<{
 	abilityHover: IExtraComponentEmits['imgMouseenter'];
 }>();
 
@@ -41,13 +41,15 @@ const weaponNames = computed(() => {
 	};
 });
 
-function switchMainOffhand() {
-	props.value.abilityVariantsIndexes.value.q += props.value.abilityVariantsIndexes.value.w;
-	props.value.abilityVariantsIndexes.value.w = props.value.abilityVariantsIndexes.value.q - props.value.abilityVariantsIndexes.value.w;
-	props.value.abilityVariantsIndexes.value.q -= props.value.abilityVariantsIndexes.value.w;
+function switchMainOffhand(event: MouseEvent) {
+	const abilityVariantsIndexes = props.value.abilityVariantsIndexes.value;
+	abilityVariantsIndexes.q += abilityVariantsIndexes.w;
+	abilityVariantsIndexes.w = abilityVariantsIndexes.q - abilityVariantsIndexes.w;
+	abilityVariantsIndexes.q -= abilityVariantsIndexes.w;
+	emit('abilityHover', event, GameAbilityId.build('champion', 'Aphelios', 'e', abilityVariantsIndexes.w));
 }
 
-function replaceMainWithNext() {
+function replaceMainWithNext(event: MouseEvent) {
 	const abilityVariantsIndexes = props.value.abilityVariantsIndexes.value;
 
 	abilityVariantsIndexes.q = abilityVariantsIndexes.e;
@@ -58,6 +60,7 @@ function replaceMainWithNext() {
 	}
 
 	abilityVariantsIndexes.e = next;
+	emit('abilityHover', event, GameAbilityId.build('champion', 'Aphelios', 'e', abilityVariantsIndexes.e));
 }
 </script>
 
