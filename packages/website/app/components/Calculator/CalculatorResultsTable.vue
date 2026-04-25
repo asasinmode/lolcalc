@@ -92,17 +92,23 @@ const damageSectionChampionAbilityOptions = computed<IDamageSectionOption[]>(():
 			optionName: champion.name,
 			abilities: abilityEntries
 				.flatMap(([abilityKey, ability]): IDamageSectionOption['abilities'] =>
-					ability.variants.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
-						const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
-							variant.name,
-							champion.stringtable,
-						);
+					ability.variants
+						/*
+						 * some champions like `Elise` have additional variants saved. These are expected to be used only for resolving the variables in the main variants (first 2)
+						 * only Aphelios has more variants that are expected to be actually shown
+						 */
+						.slice(0, championId === 'Aphelios' ? undefined : 2)
+						.map((variant, abilityVariantIndex): IDamageSectionOption['abilities'][number] => {
+							const { replaced: nameReplaced } = replaceGameDescriptionStringtableVariables(
+								variant.name,
+								champion.stringtable,
+							);
 
-						return {
-							id: GameAbilityId.build(ABILITY_TYPE.champion, champion.id, abilityKey as IChampionAbilityKey, abilityVariantIndex),
-							name: championAbilitySectionName(champion.name, abilityKey as IChampionAbilityKey, nameReplaced),
-						};
-					}),
+							return {
+								id: GameAbilityId.build(ABILITY_TYPE.champion, champion.id, abilityKey as IChampionAbilityKey, abilityVariantIndex),
+								name: championAbilitySectionName(champion.name, abilityKey as IChampionAbilityKey, nameReplaced),
+							};
+						}),
 				),
 		} satisfies IDamageSectionOption;
 	})
