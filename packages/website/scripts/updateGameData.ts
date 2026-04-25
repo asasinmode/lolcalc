@@ -1,4 +1,4 @@
-import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IListedChampion } from '../app/composables/useChampions';
+import type { IChampion, IChampionAbility, IChampionAbilityKey, IChampionAbilityVariant, IChampionId, IListedChampion } from '../app/composables/useChampions';
 import type { IItem } from '../app/composables/useItems';
 import type { IDragonName } from '../app/composables/useMisc';
 import type { IChampionSpecific } from '../app/utils/champion';
@@ -198,7 +198,7 @@ if (!championData || championData?.version !== latestVersion) {
 				roles: { top: true, jungle: true, mid: true, bot: true, support: true },
 			} satisfies IListedChampion,
 		}, Object.fromEntries(
-			await Promise.all((Object.entries(data) as [string, (IChampion & { image: string })][])
+			await Promise.all((Object.entries(data) as [IChampionId, (IChampion & { image: string })][])
 				.sort(([, champA], [, champB]) => champA.name.localeCompare(champB.name))
 				.map(async ([championId, championData]) => {
 					const { id, key, name, image, partype, stats } = championData;
@@ -229,7 +229,7 @@ if (!championData || championData?.version !== latestVersion) {
 						abilities: Object.fromEntries(['q', 'w', 'e', 'r', 'passive'].map((abilityName, index) => {
 							const { maxLevel, variants } = championAbilityData(
 								[abilityName, index],
-								championId,
+								championId as IChampionId,
 								additionalData,
 								characterRootKey,
 							);
@@ -1401,7 +1401,7 @@ function possibleChampionDynamicVariableValues(specific?: IChampionSpecific, abi
 function championAbilityData(
 	/** abilityName - q-w-e-r-passive, abilityIndex 0-1-2-3-4 corresponding to abilityName */
 	abilityInfo: [string, number],
-	championId: string,
+	championId: IChampionId,
 	championData: any,
 	characterRootKey: string,
 ): IChampionAbility {
@@ -1530,10 +1530,19 @@ function adjustApheliosAbilityData(
 	}
 
 	([, abilities.q.variants] = championAbilityVariants('Aphelios', championData, ['q', 0], qVariantKeys));
+	abilities.q.variants.sort((a, b) => {
+		const weaponA = a.image.slice(a.image.lastIndexOf('/') + 3, -4);
+		const weaponB = b.image.slice(b.image.lastIndexOf('/') + 3, -4);
+
+		const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponA] ?? Infinity;
+		const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponB] ?? Infinity;
+
+		return indexA - indexB;
+	});
 }
 
 function championAbilityVariants(
-	championId: string,
+	championId: IChampionId,
 	championData: any,
 	[abilityName]: [string, number],
 	variantKeys: string[],
@@ -1634,16 +1643,6 @@ function championAbilityVariants(
 
 		variants.push(variant);
 	}
-
-	variants.sort((a, b) => {
-		const weaponA = a.image.slice(a.image.lastIndexOf('/') + 3, -4);
-		const weaponB = b.image.slice(b.image.lastIndexOf('/') + 3, -4);
-
-		const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponA] ?? Infinity;
-		const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponB] ?? Infinity;
-
-		return indexA - indexB;
-	});
 
 	return [maxLevel, variants];
 }
