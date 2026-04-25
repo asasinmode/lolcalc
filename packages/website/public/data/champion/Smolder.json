@@ -38,7 +38,7 @@
 					"tooltip": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds <scaleMana>@ManaRestore@ Mana</scaleMana>, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						}
 					],
@@ -166,15 +166,15 @@
 					"tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ExplosionBaseDamage",
+							"name": "ExplosionBaseDamage",
 							"nameOverride": "spell_listtype_explosiondamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -238,7 +238,7 @@
 					"tooltip": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						}
 					],
@@ -297,11 +297,11 @@
 					"tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "MomHeal",
+							"name": "MomHeal",
 							"nameOverride": "spell_smolderr_momheal"
 						}
 					],

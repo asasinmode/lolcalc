@@ -38,11 +38,11 @@
 					"tooltip": "Corki lobs a bomb, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The area and champions hit are revealed for @RevealDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -87,11 +87,11 @@
 					"tooltip": "Corki flies over and scorches a path, burning it for @TrailDuration@ seconds. Enemies in the fire take up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> over the duration.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damageovertime"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [80, 85, 90, 95, 100, 100],
@@ -156,15 +156,15 @@
 					"tooltip": "Corki fires a gatling gun in front of him, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> over @SprayDuration@ seconds and shredding up to <scaleArmor>@ShredMax*-1@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ShredMax",
+							"name": "ShredMax",
 							"nameOverride": "spell_listtype_corkidefensereduction"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -208,7 +208,7 @@
 					"tooltip": "Corki fires a missile that explodes on the first enemy hit, dealing <physicalDamage>@RSmallMissileDamage@ physical damage</physicalDamage> to surrounding enemies. Every third missile instead deals <physicalDamage>@RBigMissileDamage@ physical damage</physicalDamage>.<br><br>This Ability has up to @MaxAmmoTOOLTIP@ charges. Basic attacks against champions reduce the time between charges by <attention>@AttackRefund@</attention> seconds on hit.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

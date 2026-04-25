@@ -38,19 +38,19 @@
 					"tooltip": "Deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>On champion hit, heals Tahm for <healing>@BaseHeal@ +@PercentHealthHealing*100@% of his missing Health</healing> and applies a stack of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> dealing <magicDamage>@Spell.TahmKenchPassive:TotalDamage@ extra magic damage</magicDamage>. If that champion already had 3 stacks of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName>, they will also be <status>Stunned</status> for @StunDuration@ seconds, consuming the stacks.<br><br>Activate <font color='#0bf7de'>Devour</font> while your tongue is in midair to devour enemy champions who already have 3 stacks of <spellName>{{ Spell_TahmKenchPassive_Name }}</spellName> from a distance when you hit them.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"type": "BaseHeal",
+							"name": "BaseHeal",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
-							"type": "PercentHealthHealing",
+							"name": "PercentHealthHealing",
 							"nameOverride": "spell_tahmkenchq_missinghealthhealing"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 46, 42, 38, 34, 30],
@@ -91,17 +91,17 @@
 					"tooltip": "Dive down and then re-appear at target location, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Knock Up</status> all enemies in an area for @KnockupDuration@ second. Hitting at least one enemy champion refunds @ChampRefund*100@% of the Cooldown and <scaleMana>Mana</scaleMana> cost. <br><br><font color='#0bf7de'>Devoured</font> allies can be taken along for the ride (but can always hop out early).",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "CastRange"
+							"name": "CastRange"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "ChampRefund",
+							"name": "ChampRefund",
 							"nameOverride": "spell_tahmkenchw_levelupcooldownrefund"
 						}
 					],
@@ -144,11 +144,11 @@
 					"tooltip": "<passive>Passive:</passive> @GreyHealthRatio*100@% of damage Tahm Kench takes is stored by his <spellName>Thick Skin</spellName>, increased to @GreyHealthRatioEnhanced*100@% if there are at least @EnhancedThreshold@ nearby enemy champions. If Kench has not taken damage within @OOCTimer@ seconds, <spellName>Thick Skin</spellName> will rapidly be consumed to heal Tahm for @GreyHealthHealingRatio@ of its value.<br><br><active>Active:</active> Convert all your stored <spellName>Thick Skin</spellName> into a <shield>Shield</shield>, lasting @ShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "GreyHealthRatio",
+							"name": "GreyHealthRatio",
 							"nameOverride": "spell_tahmkenche_levelupthickskinratio"
 						},
 						{
-							"type": "GreyHealthRatioEnhanced",
+							"name": "GreyHealthRatioEnhanced",
 							"nameOverride": "spell_tahmkenche_levelupthickskinratioenhanced"
 						}
 					],
@@ -197,15 +197,15 @@
 					"tooltip": "Tahm Kench devours a champion for a few seconds. He can <recast>Recast</recast> to spit them out.<br><br><specialRules>Enemy Champions:</specialRules> Require 3 stacks of <spellName>An Acquired Taste</spellName>. Are devoured for up to @EnemyDuration@ seconds and take <magicDamage>@BaseDamage@ (+@PercentHPDamage@ of their Max Health) magic damage</magicDamage>. Tahm Kench is <status>Slowed</status> by @SlowAmount*100@% and <keywordName>Grounded</keywordName> during this effect.<br><br><specialRules>Ally Champions:</specialRules> Are devoured for up to @AllyDuration@ seconds and are granted <shield>@TotalShield@ Shield</shield> which decays gradually after being spit out. Allies can also choose to exit early. Tahm Kench is <status>Grounded</status> during this effect, but can cast <keywordName>{{Spell_TahmKenchW_Name}}</keywordName> and gains <speed>@AllySpeedAmount*100@% Move Speed</speed> for @AllyDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shield"
 						},
 						{
-							"type": "DataCooldown",
+							"name": "DataCooldown",
 							"nameOverride": "spell_listtype_cooldown"
 						}
 					],

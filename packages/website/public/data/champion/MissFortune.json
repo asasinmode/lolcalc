@@ -38,7 +38,7 @@
 					"tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to an enemy and to another one behind them. <br><br>The second shot can critically strike for <physicalDamage>@TotalDamageCrit@ physical damage</physicalDamage>. It always critically strikes if the first shot kills its target.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -127,15 +127,15 @@
 					"tooltip": "<passive>Passive:</passive> After @PassiveBaseMSOOC@ seconds of not taking damage, Miss Fortune gains <speed>@PassiveBaseMS@ Move Speed</speed>. After another @PassiveMaxMSExtraOOC@ seconds, this increases to <speed>@PassiveMaxMS@</speed>.<br><br><active>Active:</active> Gain the passive effect's full <speed>Move Speed</speed> bonus and <attackSpeed>@ActiveAS*100@% Attack Speed</attackSpeed> for @ActiveDuration@ seconds.<br><br><spellName>Love Taps</spellName> reduce the Cooldown of this Ability by @LoveTapRefund@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "ActiveAS",
+							"name": "ActiveAS",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "PassiveBaseMS",
+							"name": "PassiveBaseMS",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "PassiveMaxMS",
+							"name": "PassiveMaxMS",
 							"nameOverride": "spell_listtype_movementspeedmax"
 						}
 					],
@@ -175,7 +175,7 @@
 					"tooltip": "Miss Fortune rains bullets, revealing an area, <status>Slowing</status> by @TotalSlowAmount@ and dealing <magicDamage>@TotalDamagePerSecond@ magic damage</magicDamage> per second for @BaseDuration@ seconds (total <magicDamage>@TotalDamage@ magic damage</magicDamage>).",
 					"extendedVariables": [
 						{
-							"type": "BaseDamagePerSecond",
+							"name": "BaseDamagePerSecond",
 							"nameOverride": "spell_listtype_damagepersecond"
 						}
 					],
@@ -238,7 +238,7 @@
 					"tooltip": "Miss Fortune channels a barrage of bullets, firing @BaseWaves@ waves over @BaseChannelDuration@ seconds, dealing <physicalDamage>@PhysicalDamagePerWave@ physical damage</physicalDamage> per wave (total <physicalDamage>@TotalPhysicalDamage@ physical damage</physicalDamage>).<br><br>Each wave can critically strike for %i:scaleCrit% <physicalDamage>@CritDamagePerWave@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseWaves",
+							"name": "BaseWaves",
 							"nameOverride": "spell_missfortuner_bulletbarrages"
 						}
 					],

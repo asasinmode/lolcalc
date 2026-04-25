@@ -64,13 +64,14 @@ export interface IChampionAbilityVariant {
 	tooltip?: string;
 	/** tooltip shown when holding shift */
 	tooltipExtended?: string;
-	// TODO unused at the moment? dont remember what it was for
+	// TODO unused at the moment? dont remember what it was for, maybe for when all abilities' (not just passive) are fully resolved
 	tooltipExtendedBelowLine?: string;
 	/** the variables shown below the description when holding shift. Cooldown excluded, it's added manually */
 	extendedVariables?: {
-		type: string;
+		/** like `QBaseDamage` */
+		name: string;
 		/**
-		 * the stringtable key to overrid the default variable name with
+		 * the stringtable key to override the default variable name with
 		 * like `QBaseDamage` -> `spell_listtype_damage` -> `Damage`
 		 */
 		nameOverride?: string;
@@ -85,6 +86,11 @@ export interface IChampionAbilityVariant {
 export interface IChampionAbility {
 	maxLevel: number;
 	cooldownTime?: number[];
+	/**
+	 * champion ability can have multiple variants. Most champions abilities have 1 variant, but shapeshifters like Elise/Nidalee/Jayce have a variant for each form and Aphelios has many Q/E variants
+	 * except for Aphelios, only first 2 variants are actually meaningful (used/shown in game as that ability). Abilities can have more variants than just 2 though (for example Elise Q). These additional variants are used for resolving the variables shown in the main 2 variants' tooltips and aren't supposed to be otherwise shown to the user
+	 * for additional information see `scripts/updateGameData.ts` -> `championAbilityVariants`
+	 */
 	variants: IChampionAbilityVariant[];
 }
 

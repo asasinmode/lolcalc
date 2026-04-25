@@ -38,7 +38,7 @@
 					"tooltip": "Vayne rolls a short distance, and deals an additional <physicalDamage>@ADRatioBonus@ physical damage</physicalDamage> on her next Attack.<br><br><rules>{{ buff_desc_SpellEffects }}</rules>",
 					"extendedVariables": [
 						{
-							"type": "TotalADRatio",
+							"name": "TotalADRatio",
 							"nameOverride": "spell_vayneq_ratio"
 						}
 					],
@@ -78,15 +78,15 @@
 					"tooltip": "<spellPassive>Passive</spellPassive>: Every third consecutive Attack or Ability against an enemy deals an additional <trueDamage>@TotalDamage@ max Health true damage</trueDamage>.",
 					"extendedVariables": [
 						{
-							"type": "MaxHealthRatio",
+							"name": "MaxHealthRatio",
 							"nameOverride": "spell_vaynew_percentdamage"
 						},
 						{
-							"type": "DamageFloor",
+							"name": "DamageFloor",
 							"nameOverride": "spell_vaynew_damagefloor"
 						},
 						{
-							"type": "DamageVsMonsters",
+							"name": "DamageVsMonsters",
 							"nameOverride": "spell_listtype_monsterdamage"
 						}
 					],
@@ -122,7 +122,7 @@
 					"tooltip": "Vayne fires a bolt that <status>Knocks Back</status> and deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If the target collides with terrain, they take <physicalDamage>@EmpoweredDamageTT@ bonus physical damage</physicalDamage> and become <status>Stunned</status> for @StunDuration@ seconds. ",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_vaynee_damage"
 						}
 					],
@@ -170,15 +170,15 @@
 					"tooltip": "Vayne gains <physicalDamage>@BonusAttackDamage@ Attack Damage</physicalDamage> for @BaseDuration@ seconds, extended by @DurationToAdd@ seconds whenever a champion damaged by Vayne dies within @DamagedMarkerDuration@ seconds. Additionally, during the duration:<li><spellName>Night Hunter</spellName> instead grants <speed>@MovementSpeed@ Move Speed</speed>.<li>The Cooldown of <spellName>Tumble</spellName> is reduced by @TumbleCDReduction@%, and grants <keywordStealth>Invisibility</keywordStealth> for @TumbleStealthDuration@ second.",
 					"extendedVariables": [
 						{
-							"type": "BaseDuration",
+							"name": "BaseDuration",
 							"nameOverride": "spell_vayner_duration"
 						},
 						{
-							"type": "BonusAttackDamage",
+							"name": "BonusAttackDamage",
 							"nameOverride": "spell_vayner_bonusad"
 						},
 						{
-							"type": "TumbleCDReduction",
+							"name": "TumbleCDReduction",
 							"nameOverride": "spell_vayner_tumblecdr"
 						}
 					],

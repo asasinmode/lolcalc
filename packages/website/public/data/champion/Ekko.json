@@ -38,18 +38,18 @@
 					"tooltip": "Ekko throws a device dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>. On hitting a champion or reaching the end of its range, it expands into a field that <status>Slows</status> enemies inside by @Effect2Amount*-100@%. After it expands, Ekko recalls it, dealing <magicDamage>@RecallDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "OutgoingDamage",
+							"name": "OutgoingDamage",
 							"nameOverride": "spell_listtype_outgoingdamage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "ReturnDamage",
+							"name": "ReturnDamage",
 							"nameOverride": "spell_listtype_returndamage"
 						}
 					],
@@ -109,11 +109,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Ekko's Attacks against enemies below 30% Health deal <magicDamage>@MissingHealthPercent@ missing Health magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ekko launches a chronosphere lasting 1.5 seconds after a delay that <status>Slows</status> enemies inside by @Effect10Amount@%. If Ekko enters the sphere, he detonates it, <status>Stunning</status> for @Effect2Amount@ seconds and gaining <shield>@TotalShield@ Shield</shield>.",
 					"extendedVariables": [
 						{
-							"type": "Effect4Amount",
+							"name": "Effect4Amount",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [30, 35, 40, 45, 50, 50],
@@ -179,11 +179,11 @@
 					"tooltip": "Ekko dashes and empowers his next Attack to have bonus range, teleport him to his target, and deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 45, 50, 55, 60, 60],
@@ -223,11 +223,11 @@
 					"tooltip": "Ekko turns back time, entering Stasis while teleporting to where he was 4 seconds ago and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. In addition, Ekko restores <healing>@TotalBaseHeal@ Health</healing>, increased by @PercentHealAmpPerPercentMissingHealth@% for each 1% Health he lost in last 4 seconds.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "FlatHeal",
+							"name": "FlatHeal",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],

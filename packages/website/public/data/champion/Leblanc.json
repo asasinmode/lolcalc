@@ -38,11 +38,11 @@
 					"tooltip": "LeBlanc projects a sigil to an enemy, dealing <magicDamage>@Damage@ magic damage</magicDamage> and marking them for @MarkDuration@ seconds.<br><br>Damaging the marked enemy with an Ability detonates the sigil, dealing <magicDamage>@MarkDamage@ magic damage</magicDamage>.<br><br>If either part kills the target, Leblanc refunds @ManaRefund*100@% of the Mana cost and @CooldownRefund*100@% of this spell's remaining Cooldown.<br><br><rules>The initial sigil deals an additional @BonusMinionDamage@ damage to minions. </rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_leblancqsigildamage"
 						},
 						{
-							"type": "BaseMarkDamage",
+							"name": "BaseMarkDamage",
 							"nameOverride": "spell_listtype_leblancqdetonationdamage"
 						}
 					],
@@ -110,11 +110,11 @@
 					"tooltip": "LeBlanc dashes then deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies. For @Effect3Amount@ seconds after dashing, LeBlanc can <recast>Recast</recast>.<br><br><recast>Recast:</recast> LeBlanc returns to her starting location.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 120],
@@ -158,11 +158,11 @@
 					"tooltip": "LeBlanc launches a chain that shackles the first enemy hit, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage> and granting <keywordStealth>True Sight</keywordStealth>.<br><br>If they remain shackled for @Effect3Amount@ seconds, LeBlanc <status>Roots</status> them for @Effect4Amount@ seconds and deals an additional <magicDamage>@DelayedDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseInitialDamage",
+							"name": "BaseInitialDamage",
 							"nameOverride": "spell_listtype_leblancechaindamage"
 						},
 						{
-							"type": "BaseDelayedDamage",
+							"name": "BaseDelayedDamage",
 							"nameOverride": "spell_listtype_leblancerootdamage"
 						}
 					],
@@ -220,15 +220,15 @@
 					"tooltip": "LeBlanc mimics her most recent Ability, using it again. The mimicked Ability deals increased damage.<br><br><spellName>Mimicked Sigil of Malice</spellName> deals <magicDamage>@RQ1Damage@ magic damage</magicDamage> when applied, and <magicDamage>@RQ2Damage@ magic damage</magicDamage> when consumed.<br><spellName>Mimicked Distortion</spellName> deals <magicDamage>@RWDamage@ magic damage</magicDamage>.<br><spellName>Mimicked Ethereal Chains</spellName> deals <magicDamage>@RE1Damage@ magic damage</magicDamage> when shackled and <magicDamage>@RE2Damage@ magic damage</magicDamage> when <status>Rooting</status>.",
 					"extendedVariables": [
 						{
-							"type": "RQ1Base",
+							"name": "RQ1Base",
 							"nameOverride": "spell_leblancr_rq1base"
 						},
 						{
-							"type": "RQ2Base",
+							"name": "RQ2Base",
 							"nameOverride": "spell_leblancr_rq2base"
 						},
 						{
-							"type": "RWBase",
+							"name": "RWBase",
 							"nameOverride": "spell_leblancr_rwbase"
 						}
 					],

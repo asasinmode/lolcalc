@@ -38,15 +38,15 @@
 					"tooltip": "<charge>Begin Charging:</charge> Xerath begins charging an arcane beam, <status>Slowing</status> himself gradually up to 50%. <br><br><release>Release:</release> Xerath fires the beam, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. The range increases with time charged.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "AmmoRechargeTime",
+							"name": "AmmoRechargeTime",
 							"nameOverride": "spell_listtype_cooldown"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [80, 90, 100, 110, 120, 120],
@@ -93,15 +93,15 @@
 					"tooltip": "Xerath calls down a blast of arcane energy, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. Enemies in the center take <magicDamage>@SweetSpotTotalDamage@ magic damage</magicDamage> instead and are <status>Slowed</status> by @SweetSpotSlowAmount*100@%, decaying over @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SweetSpotSlowAmount",
+							"name": "SweetSpotSlowAmount",
 							"nameOverride": "spell_listtype_maxslow"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [80, 90, 100, 110, 120, 120],
@@ -149,11 +149,11 @@
 					"tooltip": "Xerath fires an orb of raw magic, <status>Stunning</status> the first enemy hit for up to @MaxStunDuration@ seconds based on distance travelled, and dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. ",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -198,15 +198,15 @@
 					"tooltip": "Xerath ascends to his true form and channels for @Effect1Amount@ seconds. During this time he may <recast>Recast</recast> up to @Effect2Amount@ times.<br><br><recast>Recast:</recast> Xerath launches a magical artillery, dealing <magicDamage>@TooltipTotalDamage@ magic damage</magicDamage>. For each champion hit, the artillery deals an additional <magicDamage>@RampDamageCalc@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect3Amount",
+							"name": "Effect3Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_xerathnumberofshots"
 						},
 						{
-							"type": "RampBaseDamage",
+							"name": "RampBaseDamage",
 							"nameOverride": "spell_xerathlocusofpower2_ampdamage"
 						}
 					],

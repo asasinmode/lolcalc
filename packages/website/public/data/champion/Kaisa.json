@@ -38,7 +38,7 @@
 					"tooltip": "Kai'Sa launches @Effect2Amount@ missiles that split among nearby enemies, each dealing <physicalDamage>@TotalIndividualMissileDamage@ physical damage</physicalDamage>, up to a maximum of @MaxDamageDisplay@. Additional missile hits on champions or monsters deal @ExtraHitReduction*100@% damage.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead fires @Effect7Amount@ missiles.<br>Current: <physicalDamage>@f11.1@/@Effect6Amount@ Bonus Attack Damage</physicalDamage>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_kaisadamagepermissile"
 						}
 					],
@@ -215,11 +215,11 @@
 					"tooltip": "Kai'Sa fires a void blast that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>, applies @Effect4Amount@ stacks of <keywordMajor>Plasma</keywordMajor>, and grants <keywordStealth>True Sight</keywordStealth> of the first enemy hit for @spell.KaisaPassive:PDuration@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa instead applies @Effect5Amount@ stacks of <keywordMajor>Plasma</keywordMajor> and hitting a champion reduces the Cooldown by @Effect3Amount@%.<br>Current: <scaleAP>@f2.1@/@Effect2Amount@ Ability Power</scaleAP>",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -266,11 +266,11 @@
 					"tooltip": "Kai'Sa supercharges her void energy, gaining <speed>@TotalMoveSpeed@ Move Speed</speed> and becoming Ghosted while charging, then gaining <attackSpeed>@Effect5Amount*100@% Attack Speed</attackSpeed> for @Effect2Amount@ seconds.<br><br>Attacks reduce this Ability's Cooldown by @Effect4Amount@ seconds.<br><br><keywordMajor>Evolved</keywordMajor>: Kai'Sa also becomes <keywordStealth>Invisible</keywordStealth> for @Effect7Amount@ seconds.<br>Current: <attackSpeed>@f10.1@%/@Effect6Amount@% Bonus Attack Speed</attackSpeed>",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "Effect5Amount",
+							"name": "Effect5Amount",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
@@ -346,15 +346,15 @@
 					"tooltip": "Kai'Sa warps near an enemy champion affected by <keywordMajor>Plasma</keywordMajor> and gains <shield>@RCalculatedShieldValue@ Shield</shield> for @RShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "RRange",
+							"name": "RRange",
 							"nameOverride": "spell_listtype_range"
 						},
 						{
-							"type": "RBaseValue",
+							"name": "RBaseValue",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "RTotalADRatio",
+							"name": "RTotalADRatio",
 							"nameOverride": "spelllisttype_attackdamageratio"
 						}
 					],

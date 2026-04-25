@@ -38,7 +38,7 @@
 					"tooltip": "Zyra causes thick vines to spread and explode into spines, dealing <magicDamage>@InitialDamage@ magic damage</magicDamage>.<br><br>If this Ability is cast near a <keywordMajor>Seed</keywordMajor>, the <keywordMajor>Seed</keywordMajor> grows into a Thorn Spitter that deals <magicDamage>@spell.ZyraP:PlantDamage@ magic damage</magicDamage> and lasts @spell.ZyraP:PlantDuration@ seconds. Thorn Spitters have 575 range.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -77,7 +77,7 @@
 					"tooltip": "Zyra plants a <keywordMajor>Seed</keywordMajor> that lasts @Effect6Amount@ seconds. These <keywordMajor>Seeds</keywordMajor> grant <keywordStealth>True Sight</keywordStealth> of enemy champions that step on them for @Effect3Amount@ seconds, but are still destroyed.<br><br>This Ability has 2 charges with a @AmmoRechargeTime@ second recharge time. Killing an enemy minion or monster reduces the recharge time by @Effect1Amount*100@%. Champion takedowns reduce the recharge time by @Effect2Amount*100@% instead.",
 					"extendedVariables": [
 						{
-							"type": "AmmoRechargeTime",
+							"name": "AmmoRechargeTime",
 							"nameOverride": "spell_zyraw_ammorecharge"
 						}
 					],
@@ -104,14 +104,14 @@
 					"tooltip": "Zyra sends vines forward, <status>Rooting</status> for @Effect5Amount@ second(s) and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. <br><br>If this Ability passes near a <keywordMajor>Seed</keywordMajor>, the <keywordMajor>Seed</keywordMajor> grows into a Vine Lasher that deals <magicDamage>@spell.ZyraP:PlantDamage@ magic damage</magicDamage> and lasts @spell.ZyraP:PlantDuration@ seconds. Vine Lashers have 400 range, and their Attacks <status>Slow</status> by @Effect2Amount@% for @Effect3Amount@ seconds. The <status>Slow</status> from multiple Vine Lashers stacks up to @MaxSlowStacks@ times.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "RootDuration",
+							"name": "RootDuration",
 							"nameOverride": "spell_listtype_rootduration"
 						}
 					],
@@ -159,7 +159,7 @@
 					"tooltip": "Zyra summons the fury of nature, growing a twisted thicket that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. After 2 seconds, the vines snap upwards, <status>Knocking Up</status> for @Effect1Amount@ second.<br><br>Zyra's plants within the thicket become enraged, resetting their duration, gaining <healing>@Effect2Amount*100@% Health</healing> and Attacking for @PlantDamageBonus@% bonus damage.",
 					"extendedVariables": [
 						{
-							"type": "Effect3Amount",
+							"name": "Effect3Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

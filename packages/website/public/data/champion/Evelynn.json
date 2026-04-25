@@ -38,15 +38,15 @@
 					"tooltip": "Evelynn strikes with her Lasher, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to the first enemy hit and causing Evelynn's next 3 Attacks or Abilities on that unit to deal an additional <magicDamage>@TotalBonusDamage@ magic damage</magicDamage>. Evelynn can <recast>Recast</recast> this Ability up to @QStackCount@ times.<br><br><recast>Recast:</recast> Evelynn fires spikes through the nearest enemy, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> to all enemies hit.",
 					"extendedVariables": [
 						{
-							"type": "HateSpikeBaseDamage",
+							"name": "HateSpikeBaseDamage",
 							"nameOverride": "spell_listtype_evelynnqdamage"
 						},
 						{
-							"type": "BonusDamageBase",
+							"name": "BonusDamageBase",
 							"nameOverride": "spell_listtype_bonusdamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 45, 50, 55, 60, 65],
@@ -111,23 +111,23 @@
 					"tooltip": "Evelynn marks a champion or monster for 5 seconds. If Evelynn hits the target with an Attack or Ability, she will expunge the mark, refund its cost, and <status>Slow</status> the target by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If the mark lasts at least 2.5 seconds, expunging it has extra effects:<li>Against champions: <status>Charms</status> them for @CharmDuration@ second(s) and removes <scaleMR>@MRShred*100@% Magic Resist</scaleMR> for @ShredDuration@ seconds.<li>Against monsters: <status>Charms</status> them for @MonsterCharm@ seconds and deals <magicDamage>@MonsterDamageTotalTOOLTIP@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_charmduration"
 						},
 						{
-							"type": "MonsterCharm",
+							"name": "MonsterCharm",
 							"nameOverride": "spell_evelynnw_monstercharm_levelup"
 						},
 						{
-							"type": "Effect9Amount",
+							"name": "Effect9Amount",
 							"nameOverride": "spell_listtype_magicresistshred"
 						},
 						{
-							"type": "Effect7Amount",
+							"name": "Effect7Amount",
 							"nameOverride": "spell_listtype_monsterdamage"
 						},
 						{
-							"type": "CastRange"
+							"name": "CastRange"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -181,19 +181,19 @@
 					"tooltip": "Evelynn whips an enemy, dealing <magicDamage>@BaseDamage@ plus @PercentHealthBaseTOOLTIP@ max Health magic damage</magicDamage>. Evelynn gains <speed>@SpeedAmount*100@% Move Speed</speed> for @SpeedDuration@ seconds.<br><br>Entering <keywordMajor>Demon Shade</keywordMajor> refreshes this Ability's cooldown and empowers it. When this Ability is empowered, Evelynn dashes to the target and deals <magicDamage>@EmpoweredDamage@ plus @PercentHealthEmpoweredTOOLTIP@ max Health magic damage</magicDamage> to her target and everyone she passes through instead.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "EmpoweredDamage",
+							"name": "EmpoweredDamage",
 							"nameOverride": "spell_listtype_evelynnempowereddamage"
 						},
 						{
-							"type": "SpeedAmount",
+							"name": "SpeedAmount",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 45, 50, 55, 60, 60],
@@ -269,11 +269,11 @@
 					"tooltip": "Evelynn unleashes her demonic energy, dealing heavy damage, becoming Untargetable and teleporting backwards. She deals <magicDamage>@Damage@ magic damage</magicDamage>, increased to <magicDamage>@CritDamage@</magicDamage> against enemies below <healing>30% Health</healing>. Upon cast, set Demon Shade to a 1.25 second cooldown.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_evelynnempowereddamage"
 						}
 					],

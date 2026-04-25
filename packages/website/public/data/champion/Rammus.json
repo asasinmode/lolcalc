@@ -38,11 +38,11 @@
 					"tooltip": "Rammus curls into a ball, gaining <speed>@MinimumMoveSpeed@ Move Speed</speed>, accelerating up to <speed>@MaximumMoveSpeed@ Move Speed</speed> over @RollDuration@ seconds. Rammus stops after colliding with an enemy, dealing <magicDamage>@PowerBallDamage@ magic damage</magicDamage>, <status>Knocking Back</status>, and <status>Slowing</status> nearby enemies by @SlowPercent@% for @SlowDuration@ second.<br><br><recast>Recast</recast>: Rammus ends this Ability early.",
 					"extendedVariables": [
 						{
-							"type": "QBaseDamage",
+							"name": "QBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowPercent",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -110,19 +110,19 @@
 					"tooltip": "Rammus enters a defensive formation for @BuffDuration@ seconds, gaining <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> and <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> and dealing <magicDamage>@ReturnDamageCalc@ magic damage</magicDamage> to enemies that Attack him.<br><br><recast>Recast</recast>: Rammus ends this Ability early.",
 					"extendedVariables": [
 						{
-							"type": "FlatBonusArmor",
+							"name": "FlatBonusArmor",
 							"nameOverride": "spell_listtype_armorbonus"
 						},
 						{
-							"type": "FlatBonusMR",
+							"name": "FlatBonusMR",
 							"nameOverride": "spell_listtype_magicresistbonus"
 						},
 						{
-							"type": "BonusArmorPercent",
+							"name": "BonusArmorPercent",
 							"nameOverride": "spell_listtype_percentarmorbonus"
 						},
 						{
-							"type": "BonusMRPercent",
+							"name": "BonusMRPercent",
 							"nameOverride": "spell_listtype_percentmagicresistbonus"
 						}
 					],
@@ -241,11 +241,11 @@
 					"tooltip": "Rammus <status>Taunts</status> an enemy champion or monster for @Duration@ seconds. Monsters are dealt <magicDamage>@MonsterDamageCalc@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Duration",
+							"name": "Duration",
 							"nameOverride": "spell_listtype_duration"
 						},
 						{
-							"type": "MonsterDamage",
+							"name": "MonsterDamage",
 							"nameOverride": "spell_listtype_monsterdamage"
 						}
 					],
@@ -284,11 +284,11 @@
 					"tooltip": "Rammus hops into the air and slams down in an area, dealing <magicDamage>@InitialDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds. If used during <spellName>Powerball</spellName>, enemies in the center take an additional <magicDamage>@spell.PowerBall:PowerBallDamage@ magic damage</magicDamage> and are <status>Knocked Up</status> for @KnockupDuration@ seconds.<br><br>Rammus then creates @NumberOfPulses@ aftershocks in the area over @BuffDuration@ seconds, repeating the <status>Slow</status>.<br><br>The range of this Ability is increased by Rammus's <speed>Move Speed</speed>.",
 					"extendedVariables": [
 						{
-							"type": "InitialDamage",
+							"name": "InitialDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_tremors2_slowamount"
 						}
 					],

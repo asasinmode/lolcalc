@@ -38,7 +38,7 @@
 					"tooltip": "<spellPassive>Passive</spellPassive>: Gwen gains 1 stack when she hits an enemy with an attack (max 4, lasts @BuffDuration@ seconds).<br><br><spellActive>Active</spellActive>: Consumes stacks. Gwen snips once for <magicDamage>@MiniSwipeDamage@ magic damage</magicDamage>, snips again for each ammo consumed, and then snips a final time for <magicDamage>@FinalSwipeDamage@ magic damage</magicDamage>. <br><br>The center of each strikes converts @TrueDamageConversion*100@% of the damage into <trueDamage>true damage</trueDamage> instead and applies <spellName>A Thousand Cuts</spellName> to enemies hit.<br><rules><br>Deals @MinionMod*100@% damage to minions.<br>Minions below @ExecuteThreshold*100@% health take @ExecuteBonus@% bonus damage instead of reduced damage.</rules>",
 					"extendedVariables": [
 						{
-							"type": "SwipeDamageBase",
+							"name": "SwipeDamageBase",
 							"nameOverride": "spell_listtype_finalstrikedamage"
 						}
 					],
@@ -134,7 +134,7 @@
 					"tooltip": "Gwen summons the Hallowed Mist, making her Untargetable to all enemies (except towers) outside the zone for @ZoneDuration@ seconds or until she leaves it. While in the Mist, Gwen gains @TotalResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>.<br><br>Gwen can <recast>Recast</recast> this Ability once to call the Mist to her. This will automatically <recast>Recast</recast> the first time Gwen attempts to leave the zone.",
 					"extendedVariables": [
 						{
-							"type": "BaseResists",
+							"name": "BaseResists",
 							"nameOverride": "spell_listtype_hecarimw: resist amount"
 						}
 					],
@@ -180,11 +180,11 @@
 					"tooltip": "Gwen dashes and empowers her Attacks for @BuffDuration@ seconds.<br><br>Empowered Attacks gain <attackSpeed>@BonusAttackSpeed@ Attack Speed</attackSpeed>, <magicDamage>@OnHitDamage@ magic damage</magicDamage> %i:OnHit% <OnHit>On-Hit</OnHit>, @BonusAttackRange@ range, and the first one to hit an enemy refunds @CDRefund*100@% of this Ability's Cooldown.",
 					"extendedVariables": [
 						{
-							"type": "BaseAttackSpeed",
+							"name": "BaseAttackSpeed",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "CDRefund",
+							"name": "CDRefund",
 							"nameOverride": "spell_tahmkenchw_levelupcooldownrefund"
 						}
 					],
@@ -242,11 +242,11 @@
 					"tooltip": "<spellActive>First Cast:</spellActive> Hurl a needle that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slows</status> by @InitialSlow*-100@% for @DebuffDuration@ seconds, and applies <spellName>A Thousand Cuts</spellName> to all enemies hit. Gwen can <recast>Recast</recast> this ability up to 2 additional times within 6 seconds (@LockoutTime@s cooldown between casts).<br><br><recast>Second Cast:</recast> Fire three needles to deal <magicDamage>@TotalDamage3@ magic damage</magicDamage><br><recast>Third Cast:</recast> Fire five needles to deal <magicDamage>@TotalDamage5@ magic damage</magicDamage>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"type": "InitialSlow",
+							"name": "InitialSlow",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],

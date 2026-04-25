@@ -38,15 +38,15 @@
 					"tooltip": "Nunu asks Willump to take a bite of an enemy, dealing <trueDamage>@MonsterMinionDamage@ true damage</trueDamage> and restoring <healing>@MonsterHealing@ Health</healing> when used against a minion or jungle monster. Against a champion, it instead deals <magicDamage>@TotalChampionDamage@ magic damage</magicDamage> and restores <healing>@ChampionHealing@ Health</healing>.<br><br>The <healing>healing</healing> is increased by @LowHealthHealingScalar*100@% when Nunu and Willump are below @LowHealthThreshhold*100@% Health.",
 					"extendedVariables": [
 						{
-							"type": "MonsterMinionDamage",
+							"name": "MonsterMinionDamage",
 							"nameOverride": "spell_nunuq_monsterdamage"
 						},
 						{
-							"type": "ChampionDamage",
+							"name": "ChampionDamage",
 							"nameOverride": "spell_nunuq_championdamage"
 						},
 						{
-							"type": "BaseHealing",
+							"name": "BaseHealing",
 							"nameOverride": "spell_listtype_heal"
 						}
 					],
@@ -122,11 +122,11 @@
 					"tooltip": "Nunu and Willump create a snowball that grows in size and speed as they roll it. They turn slower while rolling it, but can increase turning speed by holding the turn.<br><br>The snowball does between <magicDamage>@NoImpactSnowballDamage@</magicDamage> and <magicDamage>@MaximumSnowballDamage@ magic damage</magicDamage>, and <status>Knocks Up</status> for between @BaseKnockupDuration@ and @MaximumStunDuration@ seconds when it collides with a champion, large monster or wall. These values scale up with distance rolled.<br><br>Nunu and Willump can <recast>Recast</recast> to let the snowball go early.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -215,15 +215,15 @@
 					"tooltip": "Nunu throws three snowballs, dealing <magicDamage>@TotalSnowballDamage@ magic damage</magicDamage> per snowball and <status>Slowing</status> enemies hit by all three by @SlowAmount*-100@% for @SlowDuration@ second. Nunu can <recast>Recast</recast> this up to twice more.<br><br>After @TotalSpellDuration@ seconds, Nunu <status>Roots</status> all nearby enemies that had been <status>Slowed</status> by the snowballs for @RootDuration@ seconds and deals an additional <magicDamage>@TotalRootDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_movementslow"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -289,11 +289,11 @@
 					"tooltip": "Nunu and Willump channel a powerful blizzard for up to @ChannelDuration@ seconds. Enemies inside are <status>Slowed</status> by @SlowStartAmount*-100@%, increasing to @MaxSlowAmount*-100@% over the duration. Nunu and Willump also gain <shield>@TotalShieldAmount@ Shield</shield> for the duration before decaying over @ShieldDecayDuration@ seconds afterwards.<br><br>When the blizzard ends, it detonates, dealing up to <magicDamage>@MaximumDamage@ magic damage</magicDamage> based on channel time. Nunu and Willump can <recast>Recast</recast> to end the blizzard early.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseShieldAmount",
+							"name": "BaseShieldAmount",
 							"nameOverride": "spell_listtype_shieldamount"
 						}
 					],

@@ -38,7 +38,7 @@
 					"tooltip": "Talon leaps to a target and deals <physicalDamage>@LeapDamage@ physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>@CriticalDamage@ physical damage</physicalDamage>.<br><br>If this Ability kills the target, Talon restores <healing>@TotalHealing@ Health</healing> and refunds @CooldownRefund*100@% of its Cooldown.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -104,18 +104,18 @@
 					"tooltip": "Talon tosses a volley of blades, dealing <physicalDamage>@TotalInitialDamage@ physical damage</physicalDamage>. The blades then return to him, dealing <physicalDamage>@TotalReturnDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @MovespeedSlow*100@% for @SlowDuration@ second.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "InitialBaseDamage",
+							"name": "InitialBaseDamage",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"type": "ReturnBaseDamage",
+							"name": "ReturnBaseDamage",
 							"nameOverride": "spell_listtype_returndamage"
 						},
 						{
-							"type": "MovespeedSlow",
+							"name": "MovespeedSlow",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -175,7 +175,7 @@
 					"tooltip": "Talon vaults over the nearest terrain or structure. Talon cannot dash over the same terrain more than once every @WallCD@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "WallCD",
+							"name": "WallCD",
 							"nameOverride": "spell_talone_wallcooldown"
 						}
 					],
@@ -203,11 +203,11 @@
 					"tooltip": "Talon disperses a ring of blades that deal <physicalDamage>@Damage@ physical damage</physicalDamage>, gains <speed>@MoveSpeed*100@% Move Speed</speed>, and becomes <keywordStealth>Invisible</keywordStealth> for @Duration@ seconds. When the <keywordStealth>Invisibility</keywordStealth> ends, the blades return to Talon, dealing <physicalDamage>@Damage@ physical damage</physicalDamage> again.<br><br>If Talon cancels the <keywordStealth>Invisibility</keywordStealth> with an Attack or with <spellName>{{Spell_TalonQ_Name}}</spellName>, the blades return to the target instead.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "MoveSpeed",
+							"name": "MoveSpeed",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

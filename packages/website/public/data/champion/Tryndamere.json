@@ -38,15 +38,15 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Tryndamere thirsts for blood, gaining up to <scaleAD>@MaximumBonusAD@ Attack Damage</scaleAD> based on his missing Health.<br><br><spellActive>Active:</spellActive> Tryndamere consumes his <keywordMajor>Fury</keywordMajor>, restoring <healing>@BaseHeal@ plus @HealPerFury@ Health per Fury (max: @MaximumHeal@)</healing>. ",
 					"extendedVariables": [
 						{
-							"type": "MaximumBonusAD",
+							"name": "MaximumBonusAD",
 							"nameOverride": "spell_listtype_maximumdamage"
 						},
 						{
-							"type": "BaseHealing",
+							"name": "BaseHealing",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
-							"type": "BonusHealPerFury",
+							"name": "BonusHealPerFury",
 							"nameOverride": "spell_listtype_tryndamerehealperfury"
 						}
 					],
@@ -131,11 +131,11 @@
 					"tooltip": "Tryndamere hurls insults, reducing champions' Attack Damage by @ADReduction*-1@ for @ReductionDuration@ seconds and <status>Slowing</status> by @SlowPotency*-100@% while cowering from him for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "ADReduction",
+							"name": "ADReduction",
 							"nameOverride": "spell_listtype_physicaldamagereduction"
 						},
 						{
-							"type": "SlowPotency",
+							"name": "SlowPotency",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -160,7 +160,7 @@
 					"tooltip": "Tryndamere spins through his enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and generating <keywordMajor>@NonChampFuryGain@ Fury</keywordMajor> per enemy hit, increased to <keywordMajor>@ChampFuryGain@ Fury</keywordMajor> against enemy champions.<br><br>This Ability's Cooldown is reduced by @NonChampCDRefund@ seconds when Tryndamere critically strikes, and reduced by @ChampCDRefund@ seconds when critically striking a champion.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -209,11 +209,11 @@
 					"tooltip": "Tryndamere becomes completely immune to death for @Effect3Amount@ seconds, refusing to be reduced below @Effect2Amount@ Health, and instantly gains <keywordMajor>@Effect1Amount@ Fury</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_minimumhealth"
 						},
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_tryndamerefurygained"
 						}
 					],

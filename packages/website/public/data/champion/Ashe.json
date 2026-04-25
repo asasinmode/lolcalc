@@ -38,11 +38,11 @@
 					"tooltip": "<spellPassive>Passive: </spellPassive>Ashe's Attacks grant a stack for @Effect1Amount@ seconds. At @Effect2Amount@ stacks, she may activate this Ability.<br><br><spellPassive>Active:</spellPassive> Ashe gains <attackSpeed>@Effect4Amount@% Attack Speed</attackSpeed> and her Attacks deal <physicalDamage>@EmpoweredDamage@ damage</physicalDamage> instead for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect4Amount",
+							"name": "Effect4Amount",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "Effect6Amount",
+							"name": "Effect6Amount",
 							"nameOverride": "spell_listtype_asheflurryattackdamageratio"
 						}
 					],
@@ -89,15 +89,15 @@
 					"tooltip": "Ashe fires a volley of @NumberOfArrowsTooltip@ arrows, each dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies can be hit by multiple arrows, but only take damage from the first.",
 					"extendedVariables": [
 						{
-							"type": "NumberOfArrowsTooltip",
+							"name": "NumberOfArrowsTooltip",
 							"nameOverride": "spell_volley_arrows"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [75, 70, 65, 60, 55, 50],
@@ -141,7 +141,7 @@
 					"tooltip": "Ashe sends forth a hawk to grant vision for 5 seconds anywhere on the map. It also reveals the area around it as it flies.<br><br>This Ability has 2 charges (@ChargeCooldown@ second recharge).",
 					"extendedVariables": [
 						{
-							"type": "AmmoRechargeTime"
+							"name": "AmmoRechargeTime"
 						}
 					],
 					"cooldownTime": [5, 5, 5, 5, 5, 5, 5],
@@ -183,7 +183,7 @@
 					"tooltip": "Ashe launches a crystal arrow of ice that <status>Stuns</status> the first champion hit and deals <magicDamage>@RMainDamage@ magic damage</magicDamage>. The <status>Stun</status> duration increases with distance travelled, up to @MaxStunDuration@ seconds. Surrounding enemies are <status>Slowed</status> by <spellName>Frost Shot</spellName>.",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

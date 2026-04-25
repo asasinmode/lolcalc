@@ -1674,7 +1674,7 @@ function championAbilityVariant(
 
 						// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
 						return {
-							type: type.replace('%d', typeIndex),
+							name: type.replace('%d', typeIndex),
 							nameOverride: variable.nameOverride?.toLowerCase(),
 						};
 					})

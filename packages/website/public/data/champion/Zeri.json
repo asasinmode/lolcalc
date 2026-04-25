@@ -38,11 +38,11 @@
 					"tooltip": "Zeri fires a burst of @NumberOfMissiles@ rounds that deals <physicalDamage>@ActiveDamageThatCanCrit@ physical damage</physicalDamage> to the first enemy hit. This Ability is treated as an Attack. ",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ActiveADRatio",
+							"name": "ActiveADRatio",
 							"nameOverride": "spell_listtype_totaladratio"
 						}
 					],
@@ -150,15 +150,15 @@
 					"tooltip": "Zeri fires an electric pulse that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slows</status> the first enemy hit by @SlowPercent*100@% for @SlowDuration@ seconds.<br><br>If the pulse hits terrain, it expands into a laser that applies the effects in an area and Critically Strikes champions and monsters for <physicalDamage>@WallDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowPercent",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 60, 70, 80, 90, 100],
@@ -235,15 +235,15 @@
 					"tooltip": "Zeri dashes a short distance and vaults over any terrain she touches, greatly extending the dash range. For the next @BuffDuration@ seconds, her shots of <spellName>{{Spell_ZeriQ_Name}}</spellName> pierce dealing @PenDamagePercent*100@% damage to enemies after the first and an additional <magicDamage>@BonusDamageTotal@ magic damage</magicDamage> On-Hit to the first target struck. <br><br>Hitting an enemy champion with an Attack or Ability reduces this Ability's cooldown by @CDReductionPerHit@ seconds. Critical strikes reduce the cooldown by @CritCDReductionPerHit@ seconds instead.",
 					"extendedVariables": [
 						{
-							"type": "PenDamagePercent",
+							"name": "PenDamagePercent",
 							"nameOverride": "spell_listtype_percentagedamage"
 						},
 						{
-							"type": "BonusDamageBase",
+							"name": "BonusDamageBase",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [90, 85, 80, 75, 70, 70],
@@ -349,7 +349,7 @@
 					"tooltip": "Zeri discharges a nova of electricity, dealing <magicDamage>@TotalActiveDamage@ magic damage</magicDamage> to nearby enemies. If she hits an enemy champion, Zeri gains <attackSpeed>@BaseASPercent*100@% Attack Speed</attackSpeed> and <speed>@BaseBonusMS*100@% Move Speed</speed> for @RDuration@ seconds. Hitting an enemy champion with an Attack or Ability extends this ability's duration and adds a stack of Overcharge for @MaxHyperchargeDuration@ seconds. Critical strikes add 2 additional stacks. Each stack grants <speed>@MSPercent*100@% Move Speed</speed>.<br><br>During this time, <spellName>{{Spell_ZeriQ_Name}}</spellName> becomes a faster triple shot that chains <physicalDamage>@ChainPhysicalDamage@ physical damage</physicalDamage> to nearby enemies.",
 					"extendedVariables": [
 						{
-							"type": "ActiveDamage",
+							"name": "ActiveDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

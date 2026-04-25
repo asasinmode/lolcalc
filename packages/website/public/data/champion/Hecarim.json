@@ -38,11 +38,11 @@
 					"tooltip": "Hecarim cleaves nearby enemies for <physicalDamage>@Damage@ physical damage</physicalDamage>. If this Ability hits, he gains a stack that decreases its Cooldown by @RampageCooldownReduction@ seconds and increases its damage by @RampageBonusDamagePerc@% for @Effect6Amount@ seconds. Stacks up to @Effect2Amount@ times.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -115,19 +115,19 @@
 					"tooltip": "Hecarim deals <magicDamage>@TotalDamage@ magic damage</magicDamage> over @BuffDuration@ seconds to nearby enemies. <br><br>Hecarim gains <passive>@ResistAmount@</passive> <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> and heals for <healing>@LeechAmount@% of damage</healing> nearby enemies take from Hecarim and <healing>@AllyTooltipLeachValue@% of damage</healing> taken from his allies.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ResistAmount",
+							"name": "ResistAmount",
 							"nameOverride": "spell_listtype_hecarimw: resist amount"
 						},
 						{
-							"type": "MinionHealCap",
+							"name": "MinionHealCap",
 							"nameOverride": "spell_listtype_healingcap"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -186,11 +186,11 @@
 					"tooltip": "Hecarim becomes Ghosted and gains <speed>@MinMoveSpeed*100@% Move Speed</speed> increasing to <speed>@MaxMoveSpeed*100@%</speed> over @Effect5Amount@ seconds. His next Attack <status>Knocks Back</status> and deals between <physicalDamage>@MinDamage@</physicalDamage> and <physicalDamage>@MaxDamage@ physical damage</physicalDamage>. <status>Knock Back</status> distance and damage scales with distance travelled during this Ability.",
 					"extendedVariables": [
 						{
-							"type": "MinBaseDamage",
+							"name": "MinBaseDamage",
 							"nameOverride": "spell_listtype_minimumdamage"
 						},
 						{
-							"type": "MaxBaseDamage",
+							"name": "MaxBaseDamage",
 							"nameOverride": "spell_listtype_maximumdamage"
 						}
 					],
@@ -251,7 +251,7 @@
 					"tooltip": "Hecarim summons spectral riders and charges forward, dealing <magicDamage>@DamageDone@ magic damage</magicDamage>. Hecarim unleashes a shockwave at the end of the charge that <status>Fears</status> for between @FearDurationMin@ to @FearDurationMax@ seconds, increased by charge distance.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

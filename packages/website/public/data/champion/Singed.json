@@ -38,7 +38,7 @@
 					"tooltip": "<toggle>Toggle:</toggle> Singed lays a poisonous trail that deals <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamagePerSecond",
+							"name": "BaseDamagePerSecond",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -88,11 +88,11 @@
 					"tooltip": "Singed hurls a cask of sticky liquid, <status>Grounding</status> and <status>Slowing</status> enemies in the area by @SlowPercent@% for @WDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "SlowPercent",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 100],
@@ -117,19 +117,19 @@
 					"tooltip": "Singed flings an enemy over his shoulder, dealing <magicDamage>@BaseDamage@ plus @Effect3Amount@% max Health magic damage</magicDamage>.<br><br>If Singed flings a target into his <spellName>{{Spell_MegaAdhesive_Name}}</spellName>, they are <status>Rooted</status> for @Effect2Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect3Amount",
+							"name": "Effect3Amount",
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_rootduration"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -170,7 +170,7 @@
 					"tooltip": "Singed drinks a potent brew of chemicals, granting him @StatAmount@ <scaleAP>Ability Power</scaleAP>, <scaleArmor>Armor</scaleArmor>, <scaleMR>Magic Resist</scaleMR>, <speed>Move Speed</speed>, <healing>Health Regen</healing>, and <scaleMana>Mana Regen</scaleMana> for @Duration@ seconds. During this effect, Singed's <spellName>Poison Trail</spellName> also applies @GrievousAmount*100@% Grievous Wounds for @GrievousDuration@ second.",
 					"extendedVariables": [
 						{
-							"type": "StatAmount",
+							"name": "StatAmount",
 							"nameOverride": "spell_listtype_singedbonusstats"
 						}
 					],

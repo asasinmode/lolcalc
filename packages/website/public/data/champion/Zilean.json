@@ -38,14 +38,14 @@
 					"tooltip": "Zilean tosses a time-delayed bomb that sticks to the first unit which comes within a small area around it. After @Effect2Amount@ seconds it detonates, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Placing a second bomb on a unit that already has one detonates the first bomb immediately and <status>Stuns</status> enemies in the blast for @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "BombBaseDamage",
+							"name": "BombBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "StunDuration",
+							"name": "StunDuration",
 							"nameOverride": "spell_listtype_stunduration"
 						}
 					],
@@ -111,11 +111,11 @@
 					"tooltip": "Zilean <status>Slows</status> an enemy champion by @Effect2Amount@% or grants an allied champion <speed>@Effect2Amount@% Move Speed</speed> for @Effect1Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
@@ -141,10 +141,10 @@
 					"tooltip": "Zilean grants a protective time rune to an allied champion for @RDuration@ seconds. If the target would die, the rune rewinds their timeline, putting them into Stasis for @ReviveStateDuration@ seconds, then reviving them and restoring <healing>@RTotalHeal@ Health</healing>.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "RBaseHeal",
+							"name": "RBaseHeal",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],

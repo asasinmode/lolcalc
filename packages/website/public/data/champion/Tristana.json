@@ -38,11 +38,11 @@
 					"tooltip": "Tristana goes full-auto, gaining <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @BuffDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "AttackSpeedMod",
+							"name": "AttackSpeedMod",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [30, 35, 40, 45, 50, 50],
@@ -65,11 +65,11 @@
 					"tooltip": "Tristana launches herself, dealing <magicDamage>@LandingDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowMod*-100@% for @SlowDuration@ seconds upon landing.<br><br>Champion takedowns and max stack <spellName>{{Spell_TristanaE_Name}}</spellName> detonations on champions refresh this Ability's Cooldown.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [30, 35, 40, 45, 50, 50],
@@ -116,15 +116,15 @@
 					"tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>@PassiveDamage@ magic damage</magicDamage> to surrounding enemies.<br><br><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>@ActiveDamage@ physical damage</physicalDamage> to surrounding enemies after @ActiveDuration@ seconds. The damage is increased by @ActivePerStackAmp*100@% each time Tristana hits an Attack or Ability (max 4 stacks).<br><br>At @ActiveMaxStacks@ stacks, the bomb explodes immediately (max <physicalDamage>@ActiveMaxDamage@ physical damage</physicalDamage>).",
 					"extendedVariables": [
 						{
-							"type": "PassiveBaseDamage",
+							"name": "PassiveBaseDamage",
 							"nameOverride": "spell_listtype_tristanapassiveexplosiondamage"
 						},
 						{
-							"type": "ActiveBaseDamage",
+							"name": "ActiveBaseDamage",
 							"nameOverride": "spell_listtype_tristanabasechargedamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -231,15 +231,15 @@
 					"tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "KnockbackDistance",
+							"name": "KnockbackDistance",
 							"nameOverride": "spell_listtype_tristanaknockbackdistance"
 						},
 						{
-							"type": "StunDuration",
+							"name": "StunDuration",
 							"nameOverride": "spell_listtype_stunduration"
 						}
 					],

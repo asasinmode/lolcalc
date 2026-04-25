@@ -38,23 +38,23 @@
 					"tooltip": "Yuumi summons an errant missile that deals <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> to the first enemy and <status>Slows</status> the target for @SlowAmount@%.<br><br>If cast while <keywordMajor>Attached</keywordMajor>, Yuumi can control the missile using her mouse for a short period before it accelerates in a straight line. The accelerated missile deals <magicDamage>@TotalMissileDamageEmpowered@ magic damage</magicDamage> and <status>Slows</status> the target for @EmpoweredSlowAmount@% for @EmpoweredSlowDuration@ seconds, instead.<br><br><keywordMajor>Best Friend Bonus:</keywordMajor> <spellName>Prowling Projectile's</spellName> <status>Slow</status> will always be enhanced and hitting an enemy champion also grants them <magicDamage>@OnHitDamageCalc@ magic damage</magicDamage> <OnHit>On-Hit %i:OnHit%</OnHit> for @BuffDuration@ seconds.<br><br><rules>The bonus On-Hit damage can be increased by @AllyCritChanceMaxAmp*100@% based her ally's Critical Strike Chance.</rules>",
 					"extendedVariables": [
 						{
-							"type": "MissileDamage",
+							"name": "MissileDamage",
 							"nameOverride": "spell_yuumimagicmissile_levelup_missiledamage"
 						},
 						{
-							"type": "EmpoweredMissileDamage",
+							"name": "EmpoweredMissileDamage",
 							"nameOverride": "spell_yuumiq_empowereddamage"
 						},
 						{
-							"type": "EmpoweredSlowAmount",
+							"name": "EmpoweredSlowAmount",
 							"nameOverride": "spell_yuumiq_empoweredslowamount"
 						},
 						{
-							"type": "OnHitBase",
+							"name": "OnHitBase",
 							"nameOverride": "spell_listtype_onhitdamage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -131,11 +131,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> While on her <keywordMajor>Best Friend</keywordMajor>, Yuumi gains an additional <keywordMajor>@HealAndShieldPower*100@% Heal & Shield Power</keywordMajor> and her ally also restores <healing>@HealthOnHit@ health</healing> <OnHit>On-Hit %i:OnHit%</OnHit>.<br><br><spellActive>Active:</spellActive> Yuumi dashes to an ally champion and <keywordMajor>Attaches</keywordMajor> to them. While Yuumi is <keywordMajor>Attached</keywordMajor>, she follows her partner's movement and is Untargetable except from towers.<br><br><status>Immobilizing</status> effects on Yuumi place this Ability on a @CCAttachLockout@ second Cooldown.",
 					"extendedVariables": [
 						{
-							"type": "BaseHealthOnHit",
+							"name": "BaseHealthOnHit",
 							"nameOverride": "spell_listtype_onhithealing"
 						},
 						{
-							"type": "HealAndShieldPower",
+							"name": "HealAndShieldPower",
 							"nameOverride": "spell_yuumiw_healshield"
 						}
 					],
@@ -206,19 +206,19 @@
 					"tooltip": "Yuumi shields herself, blocking <shield>@TotalShielding@ damage</shield> and gains <attackSpeed>@TotalAttackSpeed@% Attack Speed</attackSpeed> for @MSDuration@ seconds. While the shield persists, the target also gains <speed>@MSAmount@% Move Speed</speed>.<br><br>If Yuumi is <keywordMajor>Attached</keywordMajor>, this Ability affects her ally instead and also restores <magicDamage>@ManaRestore@ Mana</magicDamage> to them, increased by up to @MaxManaPercIncrease*100@% based on the target's missing Mana.",
 					"extendedVariables": [
 						{
-							"type": "BaseShielding",
+							"name": "BaseShielding",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "AttackSpeedAmount",
+							"name": "AttackSpeedAmount",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "ManaRestore",
+							"name": "ManaRestore",
 							"nameOverride": "spell_listtype_manareturn"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -272,11 +272,11 @@
 					"tooltip": "Yuumi channels for @UltDuration@ seconds, launching @NumberOfWaves@ magical waves affecting both teams. If initially cast while <keywordMajor>Attached</keywordMajor>, Yuumi can steer the waves to follow her mouse.<br><br>Enemies struck are dealt <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and <status>Slowed</status> by @BaseSlow*-100@% for @CCDuration@ seconds, increased by @BonusSlowPerWave*-100@% per wave hit.<br><br>Ally champions are healed for <healing>@TotalHealPerWave@ health</healing> per wave. Excess healing is converted to a <shield>Shield</shield> instead.<br><br><keywordMajor>Best Friend Bonus:</keywordMajor> For her <keywordMajor>Best Friend</keywordMajor>, the heal is increased to <healing>@EnhancedHealPerWave@ health</healing>.<br><br><rules>Casting <spellName>You and Me!</spellName> will locks the waves in the current direction.<br>Yuumi can move and cast <spellName>Zoomies</spellName> while channeling.</rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseMissileDamage",
+							"name": "BaseMissileDamage",
 							"nameOverride": "spell_yuumidamagebeam_levelupmissiledamage"
 						},
 						{
-							"type": "BaseHealPerWave",
+							"name": "BaseHealPerWave",
 							"nameOverride": "spell_yuumir_healperwave"
 						}
 					],

@@ -38,15 +38,15 @@
 					"tooltip": "Bard fires an energy bolt, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first two enemies hit. The first target hit is <status>Slowed</status> by @SlowAmountPercentage@% for @SlowDuration@s.<br><br>If the bolt hits a second enemy or a wall, any enemies hit are <status>Stunned</status> for @StunDuration@s.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowDuration",
+							"name": "SlowDuration",
 							"nameOverride": "spell_listtype_slowduration"
 						},
 						{
-							"type": "StunDuration",
+							"name": "StunDuration",
 							"nameOverride": "spell_listtype_stunduration"
 						}
 					],
@@ -87,15 +87,15 @@
 					"tooltip": "Bard creates a Health shrine that grants <speed>@Calc_MoveSpeed@ Move Speed</speed> decaying over @MoveSpeed_Duration@ seconds and restores at least <healing>@InitialHeal@ Health</healing> to the first ally to enter. The shrine grows to restore <healing>@MaxHeal@ Health</healing> after existing for @ChargeupTime@ seconds.<br><br>Bard can have up to @MaxPacks@ shrines at once. If an enemy champion enters a shrine, it is destroyed.<br><br>This ability has @Ammo_Limit@ charges.<br><br>Current Active Shrines: @f1@ / @f2@",
 					"extendedVariables": [
 						{
-							"type": "MinimumHeal",
+							"name": "MinimumHeal",
 							"nameOverride": "spell_listtype_baseheal"
 						},
 						{
-							"type": "MaximumHeal",
+							"name": "MaximumHeal",
 							"nameOverride": "spell_listtype_maxheal"
 						},
 						{
-							"type": "MoveSpeed_Base",
+							"name": "MoveSpeed_Base",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

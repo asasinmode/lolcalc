@@ -38,11 +38,11 @@
 					"tooltip": "Briar leaps to a target, <status>Stunning</status> it for @StunDuration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and reducing @ShredPercent*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds.<br><br><rules>Briar will stop prioritizing champions if she casts this Ability on a minion or monster during <keywordMajor>Blood Frenzy</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ShredPercent",
+							"name": "ShredPercent",
 							"nameOverride": "spell_listtype_armorandmagicresistshred"
 						}
 					],
@@ -89,23 +89,23 @@
 					"tooltip": "Briar leaps and enters a <keywordMajor>Blood Frenzy</keywordMajor>, self-taunting to the nearest enemy for @BerserkDuration@ seconds, prioritizing Champions. While in <keywordMajor>Blood Frenzy</keywordMajor> she gains <attackSpeed>@BerserkAS*100@% Attack Speed</attackSpeed> and <speed>@BerserkMS*100@% Move Speed</speed>, and her Attacks deal <physicalDamage>@TotalAoEDamage@ physical damage</physicalDamage> to enemies surrounding her target.<br><br>Briar can <recast>Recast</recast> this Ability to empower her next Attack. It deals <physicalDamage>@TotalAttackBonusDamage@ + @TotalAttackPercentMissingHealth@% missing Health physical damage</physicalDamage> and <healing>heals Briar for @AttackMaxHPHeal@ + @AttackHealPercent*100@% of the damage dealt</healing>.",
 					"extendedVariables": [
 						{
-							"type": "BerserkAS",
+							"name": "BerserkAS",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "BerserkMS",
+							"name": "BerserkMS",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "AoEAttackDamagePercent",
+							"name": "AoEAttackDamagePercent",
 							"nameOverride": "spell_briarw_areadamage"
 						},
 						{
-							"type": "AttackBonusDamage",
+							"name": "AttackBonusDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "AttackHealPercent",
+							"name": "AttackHealPercent",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
@@ -188,15 +188,15 @@
 					"tooltip": "<charge>Begin Charging:</charge> Briar removes <keywordMajor>Blood Frenzy</keywordMajor> and gathers energy, gaining @DRPercent@% damage reduction and restoring <healing>@PercentMaxHPHeal@ Health</healing> over 1 second.<br><br><release>Release:</release> Briar unleashes a scream that deals up to <magicDamage>@Damage@ magic damage</magicDamage> based on time charged, and <status>Slows</status> by @SlowPercent*100@% for @SlowDuration@ seconds. When fully charged, the scream <status>Knocks Back</status> enemies, dealing <magicDamage>@WallHitDamage@ magic damage</magicDamage> to those who hit a wall and <status>Stunning</status> them for @WallStunDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "MaxBaseDamage",
+							"name": "MaxBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "WallHitBaseDamage",
+							"name": "WallHitBaseDamage",
 							"nameOverride": "spell_briare_"
 						},
 						{
-							"type": "HealHPPercent",
+							"name": "HealHPPercent",
 							"nameOverride": "spell_briare_healratio"
 						}
 					],
@@ -280,15 +280,15 @@
 					"tooltip": "Briar kicks her pillory's hemolith gemstone and flies to the location of the first champion it hits, marking them as her prey. On landing, she deals <magicDamage>@Damage@ magic damage</magicDamage> to everything nearby and causes enemies who are not her prey to <status>Flee</status> for @FearDuration@ seconds. She then enters an empowered <keywordMajor>Blood Frenzy</keywordMajor> and will pursue her prey until death. During this time, she gains @TotalResists@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @LifeStealPercent*100@% Lifesteal, and an additional <speed>@ExtraMoveSpeedPercent*100@% Move Speed</speed>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "LifestealPercent",
+							"name": "LifestealPercent",
 							"nameOverride": "spell_listtype_lifesteal"
 						},
 						{
-							"type": "ExtraMoveSpeedPercent",
+							"name": "ExtraMoveSpeedPercent",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

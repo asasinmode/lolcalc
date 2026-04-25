@@ -38,23 +38,23 @@
 					"tooltip": "Naafiri hurls Darkin-tainted blades, dealing <physicalDamage>@spell.NaafiriQ:TotalDamageFirstCast@ physical damage</physicalDamage> and inflicting a bleed, dealing <physicalDamage>@spell.NaafiriQ:TotalBleedDamage@ physical damage</physicalDamage> over @spell.NaafiriQ:BleedDuration@ seconds.<br><br>Naafiri can <recast>Recast</recast> this Ability. If enemies hit are already bleeding from this Ability, it instead deals the remaining bleed damage plus between <physicalDamage>@spell.NaafiriQ:TotalMinDamageSecondCast@</physicalDamage> and <physicalDamage>@spell.NaafiriQ:TotalMaxDamageSecondCast@ physical damage</physicalDamage>, based on their missing Health. If that target was a champion or large monster, Naafiri restores <healing>@spell.NaafiriQ:TotalHealSecondCast@ Health</healing>.<br><br><keywordMajor>Packmates</keywordMajor> will leap at the first champion or monster hit and attack them for @spell.NaafiriP:PackmateTauntDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamageFirstCast",
+							"name": "BaseDamageFirstCast",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"type": "BaseDamageSecondCast",
+							"name": "BaseDamageSecondCast",
 							"nameOverride": "spell_listtype_secondcastdamage"
 						},
 						{
-							"type": "BleedBaseDamage",
+							"name": "BleedBaseDamage",
 							"nameOverride": "spell_listtype_bleeddamage"
 						},
 						{
-							"type": "BaseHealSecondCast",
+							"name": "BaseHealSecondCast",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 60, 70, 80, 90, 90],
@@ -179,7 +179,7 @@
 					"tooltip": "Naafiri becomes Untargetable for @UntargetableDuration@ second and prepares to hunt, spawning <keywordMajor>@PackmatesToAdd@ additional Packmates</keywordMajor> and gaining <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @Duration@ seconds.<br><br><keywordMajor>Packmates</keywordMajor> become Untargetable and are recalled to Naafiri.",
 					"extendedVariables": [
 						{
-							"type": "MoveSpeedAmount",
+							"name": "MoveSpeedAmount",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
@@ -219,11 +219,11 @@
 					"tooltip": "Naafiri surges forward, dealing <physicalDamage>@TotalDamageFirstSlash@ physical damage</physicalDamage>, then explodes in a flurry of blades, dealing <physicalDamage>@TotalDamageSecondSlash@ physical damage.</physicalDamage><br><br><keywordMajor>Packmates</keywordMajor> become Untargetable and are recalled to Naafiri <healing>restoring 100% Health</healing>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamageFirstSlash",
+							"name": "BaseDamageFirstSlash",
 							"nameOverride": "spell_listtype_firstslashdamage"
 						},
 						{
-							"type": "BaseDamageSecondHit",
+							"name": "BaseDamageSecondHit",
 							"nameOverride": "spell_listtype_secondslashdamage"
 						}
 					],
@@ -284,11 +284,11 @@
 					"tooltip": "Naafiri dashes at an enemy champion, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slowing</status> them. <keywordMajor>Packmates</keywordMajor> become Untargetable and dash alongside Naafiri, dealing <physicalDamage>@PackmateDamage@ physical damage</physicalDamage> per <keywordMajor>Packmate</keywordMajor>.<br><br>If Naafiri scores a Takedown within @TakedownWindow@ seconds she reveals nearby enemies and can recast this Ability once. The second cast grants <shield>@ShieldTotal@ Shield</shield> for @ShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ShieldSize",
+							"name": "ShieldSize",
 							"nameOverride": "spell_listtype_shield"
 						}
 					],

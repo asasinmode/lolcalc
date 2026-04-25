@@ -39,11 +39,11 @@
 					"tooltipExtended": "{{Spell_RekSaiQ_Tooltip}}<br><br>{{Spell_RekSaiQBurrowed_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "UnburrowedADRatio",
+							"name": "UnburrowedADRatio",
 							"nameOverride": "spell_listtype_reksaiqratio"
 						},
 						{
-							"type": "BurrowedBaseDamage",
+							"name": "BurrowedBaseDamage",
 							"nameOverride": "spell_listtype_reksaiqburroweddamage"
 						}
 					],
@@ -111,15 +111,15 @@
 					"tooltipExtended": "{{Spell_RekSaiW_Tooltip}}<br><br>{{Spell_ReksaiWBurrowed_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_reksaiwburroweddamage"
 						},
 						{
-							"type": "KnockupImmunity",
+							"name": "KnockupImmunity",
 							"nameOverride": "spell_listtype_reksaiwburrowedknockupimmunity"
 						},
 						{
-							"type": "BurrowedMoveSpeed",
+							"name": "BurrowedMoveSpeed",
 							"nameOverride": "spell_listtype_reksaiwburrowedspeed"
 						}
 					],
@@ -181,19 +181,19 @@
 					"tooltipExtended": "{{Spell_RekSaiE_Tooltip}}<br><br>{{Spell_RekSaiEBurrowed_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "EmpoweredBaseDamage",
+							"name": "EmpoweredBaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"type": "EmpoweredBaseDamage",
+							"name": "EmpoweredBaseDamage",
 							"nameOverride": "spell_listtype_empowereddamage"
 						},
 						{
-							"type": "DashCooldown",
+							"name": "DashCooldown",
 							"nameOverride": "spell_listtype_reksaieburrowedcastcooldown"
 						},
 						{
-							"type": "TunnelReuseCooldown",
+							"name": "TunnelReuseCooldown",
 							"nameOverride": "spell_listtype_reksaieburrowedusecooldown"
 						}
 					],
@@ -278,11 +278,11 @@
 					"tooltip": "Rek'Sai targets an enemy damaged by her in the last @PreyMarkDuration@ seconds and then dives underground, becoming Untargetable. Moments later, she leaps unstoppably at her target, dealing <physicalDamage>@RBaseDamageCalc@ plus @PercentHealthDamage@% max Health physical damage</physicalDamage> and resets the cooldown of <keywordMajor>{{Spell_RekSaiW_Name}}</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "PercentHealthDamage",
+							"name": "PercentHealthDamage",
 							"nameOverride": "spell_listtype_percenthealthdamage"
 						}
 					],

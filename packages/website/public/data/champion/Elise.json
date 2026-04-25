@@ -39,19 +39,19 @@
 					"tooltipExtended": "{{Spell_EliseHumanQ_Tooltip}}<br><br>{{Spell_EliseSpiderQ_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_eliseqneurotoxindamage"
 						},
 						{
-							"type": "SpiderBaseDamage",
+							"name": "SpiderBaseDamage",
 							"nameOverride": "spell_listtype_eliseqvenemousbitedamage"
 						},
 						{
-							"type": "MonsterCapDamage",
+							"name": "MonsterCapDamage",
 							"nameOverride": "spell_listtype_maxdamagetomonsters"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_elisehumanq_"
 						}
 					],
@@ -166,11 +166,11 @@
 					"tooltipExtended": "{{Spell_EliseHumanW_Tooltip}}<br><br>{{Spell_EliseSpiderW_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -212,11 +212,11 @@
 					"tooltipExtended": "{{Spell_EliseSpiderW_Tooltip}}<br><br>{{Spell_EliseHumanW_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "PassiveAttackSpeed",
+							"name": "PassiveAttackSpeed",
 							"nameOverride": "spell_listtype_elisewpassiveattackspeed"
 						},
 						{
-							"type": "ActiveAttackSpeed",
+							"name": "ActiveAttackSpeed",
 							"nameOverride": "spell_listtype_activeattackspeed"
 						}
 					],
@@ -247,15 +247,15 @@
 					"tooltipExtended": "{{Spell_EliseHumanE_Tooltip}}<br><br>{{Spell_EliseSpiderE_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Effect5Amount",
+							"name": "Effect5Amount",
 							"nameOverride": "spell_listtype_stunduration"
 						},
 						{
-							"type": "Effect3Amount",
+							"name": "Effect3Amount",
 							"nameOverride": "spell_elisehumane_rappel"
 						},
 						{
-							"type": "Effect6Amount",
+							"name": "Effect6Amount",
 							"nameOverride": "spell_elisehumane_dmgheal"
 						}
 					],
@@ -331,23 +331,23 @@
 					"tooltipExtended": "{{Spell_EliseR_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseRSpider_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "PassiveBonusDamage",
+							"name": "PassiveBonusDamage",
 							"nameOverride": "spell_listtype_eliserbitedamage"
 						},
 						{
-							"type": "SpiderlingBaseDamage",
+							"name": "SpiderlingBaseDamage",
 							"nameOverride": "spell_listtype_eliserspiderlingbonusdamage"
 						},
 						{
-							"type": "SpiderlingsStored",
+							"name": "SpiderlingsStored",
 							"nameOverride": "spell_listtype_eliserspiderlingcount"
 						},
 						{
-							"type": "Effect6Amount",
+							"name": "Effect6Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingarmor"
 						},
 						{
-							"type": "Effect7Amount",
+							"name": "Effect7Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingmr"
 						}
 					],
@@ -420,23 +420,23 @@
 					"tooltipExtended": "{{Spell_EliseRSpider_Tooltip}}<br><br>{{Elise_Spiderling_Text_Description}}<br><br>{{Spell_EliseR_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_eliserbitedamage"
 						},
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingbonusdamage"
 						},
 						{
-							"type": "Effect5Amount",
+							"name": "Effect5Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingcount"
 						},
 						{
-							"type": "Effect6Amount",
+							"name": "Effect6Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingarmor"
 						},
 						{
-							"type": "Effect7Amount",
+							"name": "Effect7Amount",
 							"nameOverride": "spell_listtype_eliserspiderlingmr"
 						}
 					],

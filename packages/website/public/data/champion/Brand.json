@@ -38,7 +38,7 @@
 					"tooltip": "Brand launches a fireball that deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the first enemy hit.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they will be <status>Stunned</status> for @StunDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -79,11 +79,11 @@
 					"tooltip": "Brand creates a pillar of pure fire, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.<br><br>Units that are <keywordMajor>Ablaze</keywordMajor> take <magicDamage>@EmpoweredDamage@ damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -132,11 +132,11 @@
 					"tooltip": "Brand conjures a powerful blast at his target, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> to surrounding units.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, the spread range is doubled.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 75, 80, 85, 90, 95],
@@ -176,11 +176,11 @@
 					"tooltip": "Brand unleashes a devastating torrent of fire that can bounce to Brand or another enemy up to 5 times, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies each bounce. Bounces prioritize stacking <keywordMajor>Blaze</keywordMajor> to max on champions.<br><br>If the target is <keywordMajor>Ablaze</keywordMajor>, they are briefly <status>Slowed</status> by @SlowAmount@%.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_branddamageperbounce"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],

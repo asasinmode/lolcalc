@@ -38,11 +38,11 @@
 					"tooltip": "Rumble ignites his flamethrower, dealing <magicDamage>@FlatDamage@ plus @HealthDamage*100@% max Health magic damage</magicDamage> over @FlamespitterDuration@ seconds, reduced to <attention>@MinionMod*100@%</attention> against minions.<br><br><keywordMajor>Danger Zone:</keywordMajor> Damage is increased to <magicDamage>@EmpoweredDamage@ plus @EmpoweredHealth@ max Health</magicDamage>.<br><br><rules>Percent damage is limited to @MonsterCap@ damage on Monsters. </rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "HealthDamage",
+							"name": "HealthDamage",
 							"nameOverride": "spell_listtype_percentmaxhealth"
 						}
 					],
@@ -125,11 +125,11 @@
 					"tooltip": "Rumble tosses up a barrier, gaining <shield>@TotalShield@ Shield</shield> for @ShieldDuration.1@ seconds and <speed>@MoveSpeed*100@% Move Speed</speed> for @MoveSpeedDuration@ second.<br><br><keywordMajor>Danger Zone:</keywordMajor> The barrier grants <shield>@EmpoweredShield@ Shield</shield> and <speed>@EmpoweredMS@ Move Speed</speed> instead.",
 					"extendedVariables": [
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shield"
 						},
 						{
-							"type": "MoveSpeed",
+							"name": "MoveSpeed",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
@@ -204,15 +204,15 @@
 					"tooltip": "Rumble launches an electrified harpoon, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @BaseSlowAmount@% for @SlowDuration@ seconds, and reducing the enemy's <scaleMR>Magic Resist</scaleMR> by @PercMagicPen*100@% for @ShredDuration@ seconds.<br><br>Hitting an enemy who's already <status>Slowed</status> by this Ability increases the <status>Slow</status> to @EmpoweredSlowAmount@% and reduces the enemy's <scaleMR>Magic Resist</scaleMR> by @EnhancedMagicPen*100@%<br><br><keywordMajor>Danger Zone:</keywordMajor> The harpoon deals <magicDamage>@EmpDamage@ magic damage</magicDamage> instead and the <status>Slow</status> and reduced <scaleMR>Magic Resist</scaleMR> are increased by 50%.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseSlowAmount",
+							"name": "BaseSlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "PercMagicPen",
+							"name": "PercMagicPen",
 							"nameOverride": "spell_rumblegrenade_mrshred"
 						}
 					],
@@ -261,7 +261,7 @@
 					"tooltip": "Rumble launches a line of rockets, creating a burning trail that lasts @TrailDuration@ seconds, <status>Slowing</status> by @SlowAmount@% and dealing <magicDamage>@DamagePerSecond@ magic damage</magicDamage> per second.<br><br>Rumble can control the direction of the trail by clicking and dragging while casting this Ability.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamagePerSecond",
+							"name": "BaseDamagePerSecond",
 							"nameOverride": "spell_listtype_damagepersecond"
 						}
 					],

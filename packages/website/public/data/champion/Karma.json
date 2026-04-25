@@ -39,11 +39,11 @@
 					"tooltipExtended": "{{Spell_KarmaQ_Tooltip_0}}<br><br>{{Spell_KarmaQ_Tooltip_1}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 50, 60, 70, 80, 80],
@@ -105,15 +105,15 @@
 					"tooltipExtended": "{{Spell_KarmaW_Tooltip_0}}<br><br>{{Spell_KarmaW_Tooltip_1}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "RootDuration",
+							"name": "RootDuration",
 							"nameOverride": "spell_listtype_rootduration"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -154,11 +154,11 @@
 					"tooltipExtended": "{{Spell_KarmaE_Tooltip_0}}<br><br>{{Spell_KarmaE_Tooltip_1}}",
 					"extendedVariables": [
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -198,19 +198,19 @@
 					"tooltip": "Karma empowers her next Ability used within 8 seconds.<br><li><spellName>{{Spell_KarmaQ_Name}}</spellName>: Deals an additional <magicDamage>@RQImpactDamage@ magic damage</magicDamage> and leaves behind a circle of flame, <status>Slowing</status> enemies and dealing an additional <magicDamage>@RQFieldDamage@ magic damage</magicDamage>.<li><spellName>{{Spell_KarmaSpiritBind_Name}}</spellName>: Karma will restore <healing>@RWHealAmount@ missing Health</healing> at the beginning and end of the tether, and <status>Root</status> for @RWBonusRoot@s longer.<li><spellName>{{Spell_KarmaSolKimShield_Name}}</spellName>: Karma shields her target for <shield>@REBonusShield@ more Shield</shield>, and also shields allies near her target, granting them <shield>@REBonusShieldArea@ Shield</shield> and <speed>@REMoveSpeed*100@% Move Speed</speed>.",
 					"extendedVariables": [
 						{
-							"type": "QBonusDamage",
+							"name": "QBonusDamage",
 							"nameOverride": "spell_listtype_karmasoulflareimpact"
 						},
 						{
-							"type": "QDetonationDamage",
+							"name": "QDetonationDamage",
 							"nameOverride": "spell_listtype_karmasoulflarecircledamage"
 						},
 						{
-							"type": "RWBonusRoot",
+							"name": "RWBonusRoot",
 							"nameOverride": "spell_listtype_karmarenewalrootextension"
 						},
 						{
-							"type": "EBonusShield",
+							"name": "EBonusShield",
 							"nameOverride": "spell_listtype_karmadefianceshield"
 						}
 					],

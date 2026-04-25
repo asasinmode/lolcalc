@@ -38,19 +38,19 @@
 					"tooltip": "Anivia fires a massive chunk of ice, dealing <magicDamage>@TotalPassthroughDamage@ magic damage</magicDamage> and <keywordMajor>Chilling</keywordMajor> enemies for @SlowDuration@ seconds, <status>Slowing</status> them by @Spell.GlacialStorm:SlowAmount@%. At the end of its range, the ice detonates, <status>Stunning</status> enemies for @StunDuration@ seconds and dealing <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>.<br><br>Anivia can <recast>Recast</recast> this ability while the ice flies to detonate it early.",
 					"extendedVariables": [
 						{
-							"type": "PassthroughBaseDamage",
+							"name": "PassthroughBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ExplosionBaseDamage",
+							"name": "ExplosionBaseDamage",
 							"nameOverride": "spell_listtype_aniviaflashfrostdetonationdamage"
 						},
 						{
-							"type": "StunDuration",
+							"name": "StunDuration",
 							"nameOverride": "spell_listtype_stunduration"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [80, 85, 90, 95, 100, 100],
@@ -101,7 +101,7 @@
 					"tooltip": "Anivia summons a wall of ice @Effect2Amount@ units wide. The wall lasts for @Effect1Amount@ seconds before it melts.",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_width"
 						}
 					],
@@ -132,7 +132,7 @@
 					"tooltip": "Anivia blasts an enemy with a freezing wind, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Against <keywordMajor>Chilled</keywordMajor> enemies, Anivia deals <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -177,19 +177,19 @@
 					"tooltip": "<toggle>Toggle:</toggle> Anivia calls forth a driving rain of ice and hail that <status>Slows</status> enemies by @SlowAmount@% and deals <magicDamage>@TotalDamagePerSecond@ magic damage per second</magicDamage>. The storm increases in size over @GrowthTime@ seconds.<br><br>When the storm is fully formed, it <keywordMajor>Chills</keywordMajor>, <status>Slows</status> by @SlowPercentEmpoweredTT@%, and does <magicDamage>@EmpoweredDamagePerSecondTooltipOnly@ magic damage per second</magicDamage> instead.",
 					"extendedVariables": [
 						{
-							"type": "DamagePerSecond",
+							"name": "DamagePerSecond",
 							"nameOverride": "spell_listtype_damagepersecond"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "SlowPercentEmpoweredTT",
+							"name": "SlowPercentEmpoweredTT",
 							"nameOverride": "spell_listtype_aniviachilledslowamount"
 						},
 						{
-							"type": "ManaCostPerSecond",
+							"name": "ManaCostPerSecond",
 							"nameOverride": "spell_listtype_manacostpersecond"
 						}
 					],

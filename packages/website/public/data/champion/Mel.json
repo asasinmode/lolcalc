@@ -38,19 +38,19 @@
 					"tooltip": "Mel unleashes a barrage of @ExplosionCount@ projectiles that explode in the area around a target location.<br><br>The first explosion hit deals <magicDamage>@InitialExplosionDamage@ magic damage</magicDamage> and each subsequent explosion deals <magicDamage>@TotalExplosionDamage@ magic damage</magicDamage>, adding up to <magicDamage>@AllDamageHit@ magic damage</magicDamage> total.",
 					"extendedVariables": [
 						{
-							"type": "InitialDamage",
+							"name": "InitialDamage",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"type": "ExplosionDamage",
+							"name": "ExplosionDamage",
 							"nameOverride": "spell_listtype_explosiondamage"
 						},
 						{
-							"type": "ExplosionCount",
+							"name": "ExplosionCount",
 							"nameOverride": "spell_listtype_explosioncount"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -154,15 +154,15 @@
 					"tooltip": "Mel forms a barrier around herself that reflects projectiles from enemy champions, gaining <shield>@ShieldAmount@ Shields</shield> for @Duration@ seconds and <speed>@MoveSpeed*100@% decaying Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>Reflected projectiles deal <magicDamage>@DamagePercent@ original damage as magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamagePercent",
+							"name": "BaseDamagePercent",
 							"nameOverride": "spell_melw_reflecteddamage"
 						},
 						{
-							"type": "BaseShieldAmount",
+							"name": "BaseShieldAmount",
 							"nameOverride": "spell_listtype_shield"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -218,15 +218,15 @@
 					"tooltip": "Mel fires a radiating orb, <status>Rooting</status> enemies at its center for @RootDuration@ seconds and dealing <magicDamage>@Damage@ magic damage</magicDamage>.<br><br>The orb builds up a hostile area around it that <status>Slows</status> enemies by @AreaSlowAmount*100@% and deals <magicDamage>@AreaDamagePerSecond@ magic damage per second</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseAreaDamage",
+							"name": "BaseAreaDamage",
 							"nameOverride": "spell_listtype_damagepersecond"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -309,19 +309,19 @@
 					"tooltip": "<spellPassive>Passive</spellPassive>: <keywordMajor>Overwhelm</keywordMajor> damage is increased to <magicDamage>@PassiveFlatDamage@ magic damage plus @PassiveStackDamage@ magic damage per stack</magicDamage>.<br><br><spellActive>Active</spellActive>: Mel unleashes her power on all enemies affected by <keywordMajor>Overwhelm</keywordMajor>, dealing <magicDamage>@UltFlatDamage@ magic damage plus @UltStackDamage@ magic damage per <keywordMajor>Overwhelm</keywordMajor> stack</magicDamage>.<br><br><rules>Can only be cast when an enemy champion is affected by <keywordMajor>Overwhelm</keywordMajor>.</rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseUltFlatDamage",
+							"name": "BaseUltFlatDamage",
 							"nameOverride": "spell_melr_ultflatdamage"
 						},
 						{
-							"type": "BaseUltStackDamage",
+							"name": "BaseUltStackDamage",
 							"nameOverride": "spell_melr_ultstackdamage"
 						},
 						{
-							"type": "BasePassiveFlatDamage",
+							"name": "BasePassiveFlatDamage",
 							"nameOverride": "spell_melrunleash_passiveflatdamage"
 						},
 						{
-							"type": "BasePassiveStackDamage",
+							"name": "BasePassiveStackDamage",
 							"nameOverride": "spell_melr_passivestackdamage"
 						}
 					],

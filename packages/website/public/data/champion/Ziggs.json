@@ -38,15 +38,15 @@
 					"tooltip": "Ziggs throws a bouncing bomb that deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "APRatio",
+							"name": "APRatio",
 							"nameOverride": "spell_listtype_apratio"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -94,11 +94,11 @@
 					"tooltip": "Ziggs flings an explosive charge that detonates after @BombDuration@ seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br><br>Satchel Charge will automatically destroy towers below @TurretDestroyPercent*100@% of their Health.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "TurretDestroyPercent",
+							"name": "TurretDestroyPercent",
 							"nameOverride": "spell_ziggsw_towerdestructionthreshold"
 						}
 					],
@@ -148,19 +148,19 @@
 					"tooltip": "Ziggs scatters proximity mines that detonate on enemy contact, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slows</status> by @Slow*-100@% for @Effect4Amount@ seconds. Mines last @MineDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "DamagePerMine",
+							"name": "DamagePerMine",
 							"nameOverride": "spell_listtype_ziggseminedamage"
 						},
 						{
-							"type": "APRatioPerMine",
+							"name": "APRatioPerMine",
 							"nameOverride": "spell_listtype_apratio"
 						},
 						{
-							"type": "Slow",
+							"name": "Slow",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 80, 90, 100, 110, 120],
@@ -215,11 +215,11 @@
 					"tooltip": "Ziggs hurls his ultimate creation, dealing <magicDamage>@EmpoweredDamage@ magic damage</magicDamage> in the center of the blast radius, or <magicDamage>@BlastDamage@ magic damage</magicDamage> at the edge.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_ziggsrdamage"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

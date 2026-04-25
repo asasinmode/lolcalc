@@ -38,15 +38,15 @@
 					"tooltip": "Master Yi becomes Untargetable and teleports to rapidly strike enemies near his target, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to all enemies hit after @AlphaStrikeBounces@ hits. <br><br>This Ability can strike the same enemy repeatedly if there are no other targets, dealing @SubsequentHitMultiplier*100@% damage for subsequent hits (<physicalDamage>@SubesquentDamage@</physicalDamage>), for a maximum single target total of <physicalDamage>@SingleTotalDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BonusMonsterDamage",
+							"name": "BonusMonsterDamage",
 							"nameOverride": "spell_alphastrike_bonusminionmonsterdamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -232,11 +232,11 @@
 					"tooltip": "Master Yi channels, restoring <healing>@TotalHeal@ Health</healing> over @HealDuration@ seconds. This healing is increased by up to @MaxMissingHealthPercent*100@% based on Master Yi's missing Health.<br><br>While channeling and for @DRLinger@ seconds afterwards, he takes @InitialDR@ reduced damage, decreased to @DamageReduction*100@% after the first @InitialExtraDRDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseHeal",
+							"name": "BaseHeal",
 							"nameOverride": "spell_meditate_healthrestored"
 						},
 						{
-							"type": "DamageReduction",
+							"name": "DamageReduction",
 							"nameOverride": "spell_listtype_damagereduction"
 						}
 					],
@@ -299,7 +299,7 @@
 					"tooltip": "Master Yi's Attacks deal an additional <trueDamage>@TotalDamage@ true damage</trueDamage> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_wujustyle_activedamage"
 						}
 					],
@@ -341,11 +341,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Champion takedowns reduce the remaining Cooldown of Master Yi's basic Abilities by @RCooldownRefund*100@%.<br><br><spellActive>Active:</spellActive> Master Yi enters a trance, gaining <speed>@RMSBonus@% Move Speed</speed>, <attackSpeed>@RASBonus@% Attack Speed</attackSpeed>, and immunity to <status>Slows</status> for @RDuration@ seconds. Champion takedowns extend the duration of this Ability by @RKillAssistExtension@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "RASBonus",
+							"name": "RASBonus",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "RMSBonus",
+							"name": "RMSBonus",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

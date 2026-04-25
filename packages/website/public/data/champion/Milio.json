@@ -38,15 +38,15 @@
 					"tooltip": "Milio kicks a fireball, <status>Knocking Back</status> the first enemy hit. If it hits, the ball bounces past them and explodes, dealing <magicDamage>@Damage@ magic damage</magicDamage> to surrounding enemies and <status>Slowing</status> them by @SlowAmountPercent@ for @SlowDuration@ seconds.<br><br>Hitting at least one enemy champion with <spellName>{{Spell_MilioKickballQ_Name}}</spellName> refunds @RefundRatio*100@% of it's Mana cost.",
 					"extendedVariables": [
 						{
-							"type": "FallDamage",
+							"name": "FallDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -106,15 +106,15 @@
 					"tooltip": "Milio creates a hearth that follows ally champions for @ZoneDuration@ seconds. Ally champions nearby gain @RangePercent@ Attack Range and restore <healing>@HealingOverTime@ Health</healing> over the duration. The hearth also applies <spellName>{{Spell_MilioPassive_Name}}</spellName> every @HealFrequencySeconds@ seconds.<br><br><recast>Recast:</recast> Change the hearth's follow ally.",
 					"extendedVariables": [
 						{
-							"type": "RangePctIncrease",
+							"name": "RangePctIncrease",
 							"nameOverride": "spell_listtype_range"
 						},
 						{
-							"type": "TotalHealingOverTime",
+							"name": "TotalHealingOverTime",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -168,19 +168,19 @@
 					"tooltip": "Milio wraps an ally champion in protective flames, granting <shield>@ShieldCalc@ Shield</shield> and <speed>@MoveSpeedAmount*100@% Move Speed</speed> for @MoveSpeedDuration@ seconds.<br><br>This ability has 2 charges and the effects stack on repeat targets.",
 					"extendedVariables": [
 						{
-							"type": "ShieldBase",
+							"name": "ShieldBase",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "MoveSpeedAmount",
+							"name": "MoveSpeedAmount",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						},
 						{
-							"type": "AmmoRechargeTime"
+							"name": "AmmoRechargeTime"
 						}
 					],
 					"mana": [50, 60, 70, 80, 90, 100],
@@ -219,7 +219,7 @@
 					"tooltip": "Milio unleashes a wave of soothing flames on nearby ally champions, cleansing <status>Disabling</status> and <status>Immobilizing</status> effects, restoring <healing>@HealCalc@ Health</healing>, and granting @TenacityAmount*100@% Tenacity for @TenacityDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "HealBase",
+							"name": "HealBase",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],

@@ -38,11 +38,11 @@
 					"tooltip": "Kindred vaults, firing an arrow at up to 3 enemies, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and gaining <attackSpeed>@TotalQAttackSpeed@ Attack Speed</attackSpeed> for @Effect8Amount@ seconds.<br><br>While inside of <spellName>{{Spell_KindredW_Name}}</spellName>, this Ability's Cooldown is reduced to @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect4Amount",
+							"name": "Effect4Amount",
 							"nameOverride": "spell_listtype_kindredqcooldowninw"
 						}
 					],
@@ -109,7 +109,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kindred gains stacks as they move and attack. At 100 stacks, Kindred's next Attack restores up to <healing>@AttackHeal@ Health</healing> based on their missing Health.<br><br><spellActive>Active:</spellActive> Kindred claims a territory, ordering Wolf to bite at the last enemy Lamb Attacked. Wolf's bites deal <magicDamage>@BaseWolfDamage@</magicDamage> plus <magicDamage>@PercentWolfDamage@ current Health magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect5Amount",
+							"name": "Effect5Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -194,7 +194,7 @@
 					"tooltip": "Kindred weakens an enemy, <status>Slowing</status> them by @TotalSlow@% for @SlowDuration@ second.<br><br>Kindred's third Attack against the target within @TotalDuration@ seconds of each other directs Wolf to pounce on the enemy, dealing an additional <physicalDamage>@BaseBiteDamage@</physicalDamage> plus <physicalDamage>@PercentBiteDamage@ missing Health physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -332,7 +332,7 @@
 					"tooltip": "Kindred blesses the ground for @Effect2Amount@ seconds, allowing no unit, ally, enemy, or neutral to die while inside. Upon reaching 10% Health, units can't be damaged or healed while still inside the zone.<br><br>When the blessing ends, all units inside heal for <healing>@Effect1Amount@ Health</healing>.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],

@@ -38,15 +38,15 @@
 					"tooltip": "Kayle fires a celestial sword that stops on the first enemy hit, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, <status>Slowing</status> by @SlowPercent@% for @SlowDuration@ seconds, and removing <scaleArmor>@ShredPercent@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@ seconds from the target and enemies behind them.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowPercent",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 100],
@@ -101,15 +101,15 @@
 					"tooltip": "Kayle infuses herself and an allied champion with light, restoring <healing>@TotalHeal@ Health</healing> and granting <speed>@TotalHaste@ Move Speed</speed> for @HasteDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Heal",
+							"name": "Heal",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
-							"type": "Haste",
+							"name": "Haste",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -160,11 +160,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Attacks deal an additional <magicDamage>@EPassiveTotalDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Kayle's next attack becomes ranged and deals an additional <magicDamage>@ActiveTotalExecuteDamage@ missing Health magic damage</magicDamage>. This attack upgrades when Kayle reaches <scaleLevel>Level @Spell.KaylePassive:LevelForPassiveRank2@</scaleLevel>, causing it to explode when it hits the target, dealing damage to nearby enemies.",
 					"extendedVariables": [
 						{
-							"type": "PassiveDamage",
+							"name": "PassiveDamage",
 							"nameOverride": "spell_listtype_passivedamage"
 						},
 						{
-							"type": "ActiveExecutePercent",
+							"name": "ActiveExecutePercent",
 							"nameOverride": "spell_listtype_missinghealthdamage"
 						}
 					],
@@ -237,15 +237,15 @@
 					"tooltip": "Kayle makes an allied champion Invulnerable for @InvulnDuration@ seconds and then purifies the area around them, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "AoERadius",
+							"name": "AoERadius",
 							"nameOverride": "spell_kayler_damageradius"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [100, 50, 0, 0, 0, 0],

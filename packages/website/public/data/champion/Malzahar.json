@@ -38,15 +38,15 @@
 					"tooltip": "Malzahar opens two portals to the Void that fire projectiles inward, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> and <status>Silencing</status> for @Effect2Amount@ second(s).",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_silenceduration"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -85,15 +85,15 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Malzahar's other Abilities give him a stack when cast (max @StackCap@).<br><br><spellActive>Active:</spellActive> Malzahar summons a Voidling plus an additional Voidling per stack. Voidlings last @VoidlingDuration@ seconds and deal <magicDamage>@VoidlingBonusDamageTooltip@ magic damage</magicDamage> each hit.",
 					"extendedVariables": [
 						{
-							"type": "VoidlingBaseDamage",
+							"name": "VoidlingBaseDamage",
 							"nameOverride": "spell_listtype_malzaharvoidlingbonusdamage"
 						},
 						{
-							"type": "VoidlingDuration",
+							"name": "VoidlingDuration",
 							"nameOverride": "spell_listtype_malzaharvoidlingduration"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 45, 50, 55, 60, 60],
@@ -163,11 +163,11 @@
 					"tooltip": "Malzahar inflicts terrible visions, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> over @Duration@ seconds. Applying <spellName>Call of the Void</spellName> or <spellName>Nether Grasp</spellName> to the victim during this time refreshes the visions.<br><br>If the victim dies, Malzahar gains <scaleMana>@ManaRestore@ Mana</scaleMana> and the visions spread to the nearest enemy.<br><br><rules>Malefic Visions executes minions below @MinionExecuteThreshold@ Health.</rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -233,11 +233,11 @@
 					"tooltip": "Malzahar <status>Suppresses</status> an enemy champion and deals <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage> over @Effect4Amount@ seconds. A zone of negative energy is created around his target dealing <magicDamage>@ZoneDamageTooltip@ max Health magic damage</magicDamage> over @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BeamDamage",
+							"name": "BeamDamage",
 							"nameOverride": "spell_listtype_malzaharnethergraspdamage"
 						},
 						{
-							"type": "MaxHealthDamage",
+							"name": "MaxHealthDamage",
 							"nameOverride": "spell_listtype_malzaharnullzonedamage"
 						}
 					],

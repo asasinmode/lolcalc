@@ -39,15 +39,15 @@
 					"tooltipExtended": "{{Spell_JavelinToss_Tooltip}}<br><br>{{Spell_Takedown_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "SpearMinimumDamage",
+							"name": "SpearMinimumDamage",
 							"nameOverride": "spell_listtype_nidaleejavelinminimumdamage"
 						},
 						{
-							"type": "SpearMaximumDamage",
+							"name": "SpearMaximumDamage",
 							"nameOverride": "spell_listtype_nidaleejavelinmaximumdamage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_javelintoss_javelincost"
 						}
 					],
@@ -132,11 +132,11 @@
 					"tooltipExtended": "{{Spell_Bushwhack_Tooltip}}<br><br>{{Spell_Pounce_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Effect7Amount",
+							"name": "Effect7Amount",
 							"nameOverride": "spell_listtype_nidaleetrapdamage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_bushwhack_trapcost"
 						}
 					],
@@ -224,15 +224,15 @@
 					"tooltipExtended": "{{Spell_PrimalSurge_Tooltip}}<br><br>{{Spell_Swipe_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "BaseHeal",
+							"name": "BaseHeal",
 							"nameOverride": "spell_listtype_nidaleeprimalsurgeheal"
 						},
 						{
-							"type": "BonusAS",
+							"name": "BonusAS",
 							"nameOverride": "spell_listtype_nidaleeprimalsurgeattackspeed"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_primalsurge_manacost"
 						}
 					],
@@ -299,23 +299,23 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in <keywordMajor>Human Form</keywordMajor>, applying <keywordMajor>Hunted</keywordMajor> refreshes this Ability's Cooldown.<br><br><keywordMajor>Human Form:</keywordMajor> Nidalee transforms into <keywordMajor>Cougar Form</keywordMajor>, gaining melee Attacks and replacing her Active Abilities.<br><br><keywordMajor>Cougar Form:</keywordMajor> Nidalee transforms into <keywordMajor>Human Form</keywordMajor>, gaining ranged Attacks and replacing her Active Abilities.",
 					"extendedVariables": [
 						{
-							"type": "TakedownBaseDamage",
+							"name": "TakedownBaseDamage",
 							"nameOverride": "spell_aspectofthecougar_takedowndamage"
 						},
 						{
-							"type": "TakedownDamageAmp",
+							"name": "TakedownDamageAmp",
 							"nameOverride": "spell_aspectofthecougar_takedowndamageamp"
 						},
 						{
-							"type": "PounceDamage",
+							"name": "PounceDamage",
 							"nameOverride": "spell_aspectofthecougar_pouncedamage"
 						},
 						{
-							"type": "SwipeDamage",
+							"name": "SwipeDamage",
 							"nameOverride": "spell_aspectofthecougar_swipedamage"
 						},
 						{
-							"type": "PounceCooldown",
+							"name": "PounceCooldown",
 							"nameOverride": "spell_aspectofthecougar_enhancedpouncecooldown"
 						}
 					],

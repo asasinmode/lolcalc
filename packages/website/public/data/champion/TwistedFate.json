@@ -38,11 +38,11 @@
 					"tooltip": "Twisted Fate throws three cards that deal <magicDamage>@TotalDamage@ magic damage</magicDamage> each.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 110],
@@ -87,31 +87,31 @@
 					"tooltipExtended": "Twisted Fate begins shuffling his deck, allowing him to <recast>Recast</recast> to lock in one of three cards and enhance his next Attack.<br><li>The Blue Card deals <magicDamage>@ttBlueDamage@ = (</magicDamage><trueDamage>@BlueBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttBlueAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @BlueCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and restores <scaleMana>@Effect6Amount@ Mana</scaleMana>.<li>The Red Card deals <magicDamage>@ttRedDamage@ = (</magicDamage><trueDamage>@RedBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttRedAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @RedCritMultiplier*100@%<magicDamage> magic damage</magicDamage> to nearby enemies and <status>Slows</status> by @Effect2Amount@% for 2.5 seconds.<li>The Gold Card deals <magicDamage>@ttGoldDamage@ = (</magicDamage><trueDamage>@GoldBase@</trueDamage><scaleAD> +@ttAD*100@% %i:scaleAD%</scaleAD><scaleAP> +@ttGoldAP*100@%%i:scaleAP%</scaleAP><magicDamage>)</magicDamage> increased by %i:scaleCrit% up to @GoldCritMultiplier*100@%<magicDamage> magic damage</magicDamage> and <status>Stuns</status> for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_twistedfatewbluedamage"
 						},
 						{
-							"type": "Effect6Amount",
+							"name": "Effect6Amount",
 							"nameOverride": "spell_listtype_twistedfatewbluemana"
 						},
 						{
-							"type": "Effect4Amount",
+							"name": "Effect4Amount",
 							"nameOverride": "spell_listtype_twistedfatewreddamage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_twistedfatewredslow"
 						},
 						{
-							"type": "Effect5Amount",
+							"name": "Effect5Amount",
 							"nameOverride": "spell_listtype_twistedfatewgolddamage"
 						},
 						{
-							"type": "Effect3Amount",
+							"name": "Effect3Amount",
 							"nameOverride": "spell_listtype_twistedfatewgoldstun"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -302,11 +302,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Twisted Fate gains <attackSpeed>@AttackSpeedBonus@% Attack Speed</attackSpeed> and every 4th Attack deals an additional <magicDamage>@BonusDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_bonusdamage"
 						},
 						{
-							"type": "AttackSpeedBonus",
+							"name": "AttackSpeedBonus",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
@@ -355,7 +355,7 @@
 					"tooltip": "Twisted Fate focuses on his cards, granting <keywordStealth>True Sight</keywordStealth> of all enemy champions on the map for @Effect1Amount@ seconds and allowing him to <recast>Recast</recast>.<br><br><recast>Recast</recast>: Twisted Fate teleports up to @Effect4Amount@ units away.",
 					"extendedVariables": [
 						{
-							"type": "RecastDuration",
+							"name": "RecastDuration",
 							"nameOverride": "spell_listtype_duration"
 						}
 					],

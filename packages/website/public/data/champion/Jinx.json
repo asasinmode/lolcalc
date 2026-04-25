@@ -38,11 +38,11 @@
 					"tooltip": "Jinx swaps weapons between Fishbones the rocket launcher and Pow-Pow the minigun.<br><br>While using the rocket launcher, Jinx's Attacks deal <physicalDamage>@RocketDamage@ physical damage</physicalDamage> to the target and nearby enemies, gain @RocketBonusRange@ range, cost Mana, and scale @RocketASPDPenalty*100@% less with bonus Attack Speed.<br><br>While using the minigun, Jinx's Attacks grant <attackSpeed>Attack Speed</attackSpeed> for @MinigunAttackSpeedDuration@ seconds, stacking up to @MinigunAttackSpeedStacks@ times (<attackSpeed>+@MinigunAttackSpeedMax@% %i:scaleAS% max</attackSpeed>).",
 					"extendedVariables": [
 						{
-							"type": "RocketBonusRange",
+							"name": "RocketBonusRange",
 							"nameOverride": "spell_listtype_jinxrocketbonusrange"
 						},
 						{
-							"type": "MinigunAttackSpeedMax",
+							"name": "MinigunAttackSpeedMax",
 							"nameOverride": "spell_listtype_jinxminiguntotalattackspeed"
 						}
 					],
@@ -82,15 +82,15 @@
 					"tooltip": "Jinx fires a shock blast that deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, <status>Slows</status> them by @SlowPercent@%, and reveals them for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowPercent",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 45, 50, 55, 60, 65],
@@ -132,7 +132,7 @@
 					"tooltip": "Jinx tosses out 3 chompers that last for @GrenadeDuration@ seconds. They explode on contact with enemy champions, <status>Rooting</status> them for @RootDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies.",
 					"extendedVariables": [
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -172,15 +172,15 @@
 					"tooltip": "Jinx fires a rocket that explodes on the first enemy champion hit, dealing <physicalDamage>@DamageFloor@ to @DamageMax@ + @PercentDamage@% missing Health physical damage</physicalDamage>, gaining damage over the first second of travel time. Nearby enemies take @AoEDamageMult*100@% Damage.<br><br><rules>Missing Health damage cannot exceed @MonsterExecuteMax@ against Monsters.</rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_minimumdamage"
 						},
 						{
-							"type": "MaxDamage",
+							"name": "MaxDamage",
 							"nameOverride": "spell_listtype_maximumdamage"
 						},
 						{
-							"type": "PercentDamage",
+							"name": "PercentDamage",
 							"nameOverride": "spell_listtype_percentmissinghealthdamage"
 						}
 					],

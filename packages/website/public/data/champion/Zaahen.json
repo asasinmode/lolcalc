@@ -38,19 +38,19 @@
 					"tooltip": "Zaahen slashes twice on his next Attack, dealing <physicalDamage>@InitialDamage@ bonus physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of his max Health</healing>.<br><br><recast>Recast:</recast> Zaahen's next Attack deals <physicalDamage>@SecondHitDamage@ bonus physical damage</physicalDamage> and <status>Knocks</status> the target Up for @KnockUpDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Q1BaseDamage",
+							"name": "Q1BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Q2BaseDamage",
+							"name": "Q2BaseDamage",
 							"nameOverride": "spell_listtype_recastdamage"
 						},
 						{
-							"type": "HealPercent",
+							"name": "HealPercent",
 							"nameOverride": "spell_listtype_healpercentofdamagedealt"
 						},
 						{
-							"type": "QCoeff",
+							"name": "QCoeff",
 							"nameOverride": "spell_listtype_bonusadratio"
 						}
 					],
@@ -112,7 +112,7 @@
 					"tooltip": "Zaahen stabs in a direction, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> to enemies hit, then <status>Pulls</status> them toward him, dealing <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "InitialBaseDamage",
+							"name": "InitialBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -168,15 +168,15 @@
 					"tooltip": "Zaahen dashes then slices around himself, dealing <physicalDamage>@BaseDamageCalc@ physical damage</physicalDamage> to nearby enemies.<br><br>Enemies at the edge of the slice take <physicalDamage>@BonusDamageCalc@ physical damage</physicalDamage> <magicDamage>+@PercentHPDamage*100@% of their maximum Health as magic damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
-							"type": "Damage_Base",
+							"name": "Damage_Base",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"type": "DamageBonusBase",
+							"name": "DamageBonusBase",
 							"nameOverride": "spell_zaahene_sweetspotdamage"
 						},
 						{
-							"type": "PercentHPDamage",
+							"name": "PercentHPDamage",
 							"nameOverride": "spell_listtype_percenthealthdamage"
 						}
 					],
@@ -230,11 +230,11 @@
 					"tooltip": "<spellPassive>Passive</spellPassive>: Zaahen gains <armorPen>@ArmorPen*100@% %i:scaleAPen% Armor Penetration</armorPen>.<br><br><spellActive>Active</spellActive>: Zaahen rises, gaining @DamageReduction*100@% Damage Reduction while casting.<br><br>Zaahen then stabs downward, dealing <physicalDamage>@DamageEndCalc@ physical damage</physicalDamage> and restoring <healing>@HealPercent*100@% of the damage dealt to enemy champions as Health</healing>.",
 					"extendedVariables": [
 						{
-							"type": "EndDamage",
+							"name": "EndDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ArmorPen",
+							"name": "ArmorPen",
 							"nameOverride": "spell_listtype_armorpenetration"
 						}
 					],

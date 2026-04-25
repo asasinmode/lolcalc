@@ -38,7 +38,7 @@
 					"tooltip": "{{ game_spell_Kayn_Q_main_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_basedamage"
 						}
 					],
@@ -120,11 +120,11 @@
 					"tooltip": "{{ game_spell_Kayn_W_maintext_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 45, 50, 55, 60, 65],
@@ -168,11 +168,11 @@
 					"tooltip": "{{ game_spell_Kayn_E_main_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_duration"
 						},
 						{
-							"type": "Effect7Amount",
+							"name": "Effect7Amount",
 							"nameOverride": "spell_listtype_healing"
 						}
 					],
@@ -223,7 +223,7 @@
 					"tooltip": "{{ spell_Kayn_R_main_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

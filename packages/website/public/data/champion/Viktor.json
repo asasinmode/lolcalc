@@ -38,14 +38,14 @@
 					"tooltip": "Viktor blasts an enemy, dealing <magicDamage>@TotalMissileDamage@ magic damage</magicDamage> and granting Viktor <shield>@ShieldLevelScaling@ Shield</shield> for @BuffDuration@ seconds.<br><br>Viktor's next Attack within 4 seconds deals <magicDamage>@AttackTotalDMG@ magic damage</magicDamage>.<br><br><keywordMajor>Upgraded:</keywordMajor> Grants <shield>@TotalAugmentedShieldValue@ Shield</shield> and Viktor additionally gains <speed>@AugmentMoveSpeedBonus@% Move Speed</speed> for @BuffDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "MissileDamage",
+							"name": "MissileDamage",
 							"nameOverride": "spell_viktorpowertransfer_missiledamage"
 						},
 						{
-							"type": "AABonusDamage",
+							"name": "AABonusDamage",
 							"nameOverride": "spell_viktorpowertransfer_attackdamage"
 						}
 					],
@@ -140,7 +140,7 @@
 					"tooltip": "Viktor deploys a gravitational imprisonment device for @FieldDuration@ seconds, <status>Slowing</status> enemies inside it by @SlowPotency*-1@%. Enemies who remain within its radius for 1.25 seconds are <status>Stunned</status> for @StunDuration@ seconds.<br><br><keywordMajor>Upgraded Passive:</keywordMajor> Viktor's Abilities <status>Slow</status> by @AugmentSlow@% for 1 second.",
 					"extendedVariables": [
 						{
-							"type": "SlowPotency",
+							"name": "SlowPotency",
 							"nameOverride": "spell_listtype_movementslow"
 						}
 					],
@@ -170,15 +170,15 @@
 					"tooltip": "Viktor fires a hextech ray in a chosen direction, dealing <magicDamage>@LaserDamage@ magic damage</magicDamage> to any enemies it hits.<br><br><keywordMajor>Upgraded:</keywordMajor> An aftershock follows Hextech Ray, dealing <magicDamage>@AftershockDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamageLaser",
+							"name": "BaseDamageLaser",
 							"nameOverride": "spell_listtype_viktordamagedeathray"
 						},
 						{
-							"type": "BaseDamageAftershock",
+							"name": "BaseDamageAftershock",
 							"nameOverride": "spell_listtype_viktordamageaftershock"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 70, 80, 90, 100, 100],
@@ -252,11 +252,11 @@
 					"tooltip": "Viktor conjures an Arcane Storm in an area for @StormDuration@ seconds, which instantly deals <magicDamage>@InitialBurstDamage@ magic damage</magicDamage> followed by <magicDamage>@SubsequentBurstDamage@ magic damage</magicDamage> per second to surrounding enemies. The storm automatically follows champions it has recently damaged.<br><br><recast>Recast:</recast> Viktor can manually move the storm.<br><br><keywordMajor>Upgraded:</keywordMajor> The storm moves @AugmentBoost*100@% faster. If a champion that the storm has damaged dies, the storm increases its size and its duration by @Tooltip_DurationExtension@ seconds (up to @MaxGrowths@ times).",
 					"extendedVariables": [
 						{
-							"type": "InitialBurstBaseDamage",
+							"name": "InitialBurstBaseDamage",
 							"nameOverride": "spell_viktorchaosstorm_initialburst"
 						},
 						{
-							"type": "SubsequentBurstBaseDamage",
+							"name": "SubsequentBurstBaseDamage",
 							"nameOverride": "spell_viktorchaosstorm_ticks"
 						}
 					],

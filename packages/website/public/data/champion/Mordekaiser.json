@@ -38,11 +38,11 @@
 					"tooltip": "Mordekaiser smashes the ground with Nightfall dealing <magicDamage>@QDamage@ magic damage</magicDamage>, increased to <magicDamage>@EmpoweredDamageTooltip@</magicDamage> if it hits only a single enemy.",
 					"extendedVariables": [
 						{
-							"type": "QBaseDamage",
+							"name": "QBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "IsolationScalar",
+							"name": "IsolationScalar",
 							"nameOverride": "spell_mordekaiserq_isolation"
 						}
 					],
@@ -108,7 +108,7 @@
 					"tooltip": "<passive>Passive:</passive> Mordekaiser stores @DamageConversion*100@% of the damage he deals and @DamageTakenConversion*100@% of the damage he takes.<br><br><active>Active:</active> Mordekaiser gains the stored damage as <shield>Shield</shield>. He may <recast>Recast</recast> this Ability to restore <healing>@HealingPercent*100@% of the remaining Shield as Health</healing>.<br><br>Minimum Shield: <shield>@MinHealthTooltip@</shield><br>Maximum Shield: <shield>@MaxHealthTooltip@</shield>",
 					"extendedVariables": [
 						{
-							"type": "HealingPercent",
+							"name": "HealingPercent",
 							"nameOverride": "spell_mordekaiserw_damageconversion"
 						}
 					],
@@ -170,11 +170,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Mordekaiser gains @MagicPen*100@% Magic Penetration.<br><br><spellActive>Active:</spellActive> Mordekaiser pulls enemies in his direction, dealing <magicDamage>@TotalDamage@ magic damage.</magicDamage>",
 					"extendedVariables": [
 						{
-							"type": "MagicPen",
+							"name": "MagicPen",
 							"nameOverride": "spell_mordekaisere_penetration"
 						},
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

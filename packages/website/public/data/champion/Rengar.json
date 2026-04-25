@@ -39,15 +39,15 @@
 					"tooltipExtended": "Rengar's next 2 Attacks gain <attackSpeed>@ASBonus@% Attack Speed</attackSpeed>. The first Attack deals <physicalDamage>@QTotalDamage@ physical damage</physicalDamage>.<br><br><keywordMajor>Max Ferocity:</keywordMajor> The first Attack deals  <physicalDamage>@EmpoweredQTotalDamage@ physical damage</physicalDamage> and grants Rengar <attackSpeed>@EmpoweredQAS@ Attack Speed</attackSpeed> for @ASDuration@ seconds.<br><br><rules>This Ability's bonus damage is reduced to @TowerMod*100@% against structures.</rules>",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseADRatio",
+							"name": "BaseADRatio",
 							"nameOverride": "spell_listtype_bonusadratio"
 						},
 						{
-							"type": "AmmoRechargeTime",
+							"name": "AmmoRechargeTime",
 							"nameOverride": "spell_listtype_cooldown"
 						}
 					],
@@ -210,11 +210,11 @@
 					"tooltip": "Rengar roars, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to nearby enemies and restoring <healing>@DamagePercentageHealed@%</healing> of the damage taken in the last @HealingWindow@ seconds as Health.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <magicDamage>@TotalDamageEmpowered@ magic damage</magicDamage> and additionally cleanses Rengar of crowd control.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "AmmoRechargeTime",
+							"name": "AmmoRechargeTime",
 							"nameOverride": "spell_listtype_cooldown"
 						}
 					],
@@ -277,11 +277,11 @@
 					"tooltip": "Rengar throws a bola, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to the first enemy hit, revealing and <status>Slowing</status> them by @SlowAmount@% for @CCDuration@ seconds.<br><br><keywordMajor>Max Ferocity:</keywordMajor> Deals <physicalDamage>@TotalEmpoweredDamage@ physical damage</physicalDamage> and <status>Roots</status> for @CCDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -338,19 +338,19 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Rengar will also leap Attack when <keywordStealth>Camouflaged</keywordStealth>.<br><br><spellActive>Active:</spellActive> Rengar gains <speed>@StealthMS@% Move Speed</speed> and <keywordStealth>True Sight</keywordStealth> in a small area around the nearest enemy champion for @StealthDuration@ seconds.<br><br>After @FadeTime@ seconds, Rengar becomes <keywordStealth>Camouflaged</keywordStealth> and can leap without being in Brush. Leaping to the nearest champion deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage>, shreds <scaleArmor>@ArmorShred@ Armor</scaleArmor> for @ArmorShredDuration@ seconds, and ends this Ability.",
 					"extendedVariables": [
 						{
-							"type": "ArmorShred",
+							"name": "ArmorShred",
 							"nameOverride": "spell_listtype_armorreduction"
 						},
 						{
-							"type": "StealthDuration",
+							"name": "StealthDuration",
 							"nameOverride": "spell_listtype_duration"
 						},
 						{
-							"type": "StealthMS",
+							"name": "StealthMS",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "SelfVisionRange",
+							"name": "SelfVisionRange",
 							"nameOverride": "spell_listtype_rengartrackingrange"
 						}
 					],

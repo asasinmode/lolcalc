@@ -38,11 +38,11 @@
 					"tooltip": "Akali slings kunai in an arc, dealing <magicDamage>@Damage@ magic damage</magicDamage> and <status>Slowing</status> enemies at the tip by @SlowPercentage*100@% for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
 						},
 						{
-							"type": "BaseDamageNamed",
+							"name": "BaseDamageNamed",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -98,11 +98,11 @@
 					"tooltip": "Akali drops a smoke bomb, unleashing a spreading cover of smoke lasting @BaseDuration@ seconds and granting herself <speed>@MovementSpeed@% Move Speed</speed> decaying over @MovementSpeedDuration@ seconds.<br><br>Akali increases her max Energy by @EnergyRestore@ while the shroud is active. <br><br>While inside the smoke, Akali is <keywordStealth>Invisible</keywordStealth>.",
 					"extendedVariables": [
 						{
-							"type": "MovementSpeed",
+							"name": "MovementSpeed",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "BaseDuration",
+							"name": "BaseDuration",
 							"nameOverride": "spell_listtype_duration"
 						}
 					],
@@ -139,7 +139,7 @@
 					"tooltip": "Akali flips backwards as she throws a shuriken, dealing <magicDamage>@E1Damage@ magic damage</magicDamage> and marking the first enemy or smoke cloud hit. Akali can <recast>Recast</recast> this once to dash to the marked target, dealing <magicDamage>@E2DamageCalc@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_akalie_basedamage1"
 						}
 					],
@@ -211,15 +211,15 @@
 					"tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>@Cast1Damage@ magic damage</magicDamage> to all enemies in her path. <br><br>Akali can <recast>Recast</recast> after @CooldownBetweenCasts@ seconds to execute a piercing thrust, dashing and dealing <magicDamage>@Cast2DamageMin@</magicDamage> to <magicDamage>@Cast2DamageMax@ magic damage</magicDamage> based on missing Health.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_initialdamage"
 						},
 						{
-							"type": "R2BaseDamage",
+							"name": "R2BaseDamage",
 							"nameOverride": "spell_listtype_minimumdamage"
 						},
 						{
-							"type": "R2BaseDamage",
+							"name": "R2BaseDamage",
 							"nameOverride": "spell_listtype_maximumdamage"
 						}
 					],

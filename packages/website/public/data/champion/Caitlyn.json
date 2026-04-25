@@ -38,15 +38,15 @@
 					"tooltip": "Caitlyn revs her rifle to fire a piercing shot dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage>. After the bolt strikes the first target, it opens into a wider shot that deals <physicalDamage>@SecondaryDamage@ physical damage</physicalDamage>.<br><br>Enemies revealed by <spellName>{{Spell_CaitlynYordleTrap_Name}}</spellName> always take full damage.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "tADRatio",
+							"name": "tADRatio",
 							"nameOverride": "spell_listtype_totaladratio"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [55, 60, 65, 70, 75, 80],
@@ -98,18 +98,18 @@
 					"tooltip": "Caitlyn sets a trap that <status>Roots</status> the first champion that steps on it for @RootDuration@ seconds and granting <keywordStealth>True Sight</keywordStealth> of them for 3 seconds. Traps last for @TrapDuration@ seconds, and @MaximumTraps@ traps may be active at once. This Ability has @MaximumCharges@ charges (@AmmoRechargeTime@ second refresh).<br><br>Targets rooted by this Ability take an additional <physicalDamage>@HeadshotBonusDamage@ physical damage</physicalDamage> from <keywordMajor>Headshot</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_caitlynbonusheadshotdamageontrappedtargets"
 						},
 						{
-							"type": "AmmoRechargeTime"
+							"name": "AmmoRechargeTime"
 						},
 						{
-							"type": "MaximumTraps",
+							"name": "MaximumTraps",
 							"nameOverride": "spell_listtype_maximumtraps"
 						},
 						{
-							"type": "TrapDuration",
+							"name": "TrapDuration",
 							"nameOverride": "spell_listtype_trapduration"
 						}
 					],
@@ -157,7 +157,7 @@
 					"tooltip": "Caitlyn fires a net, pushing her backwards. The net <status>Slows</status> the first target hit by @Effect3Amount@% for @Effect2Amount@ second and deals <magicDamage>@NetDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -199,7 +199,7 @@
 					"tooltip": "Caitlyn takes a moment to channel and line up the perfect shot, then she fires, dealing <physicalDamage>@RTotalDamage@ physical damage</physicalDamage>, but other enemy champions can intercept it. This Ability grants <keywordStealth>True Sight</keywordStealth> of the target during the channel.<br><br><rules>Damage scales with Caitlyn's Critical Strike chance and Critical Strike Damage.</rules>",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

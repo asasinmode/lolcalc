@@ -39,31 +39,31 @@
 					"tooltipExtended": "Hwei paints visions of disaster that deal large damage to enemies.<br><br><spellName>{{Spell_HweiQQ_Name}}</spellName><br>{{Spell_HweiQQ_Tooltip}}<br><br><spellName>{{Spell_HweiQW_Name}}</spellName><br>{{Spell_HweiQW_Tooltip}}<br><br><spellName>{{Spell_HweiQE_Name}}</spellName><br>{{Spell_HweiQE_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Tooltip_QQBaseDamage",
+							"name": "Tooltip_QQBaseDamage",
 							"nameOverride": "spell_hweiq_qqrankup1"
 						},
 						{
-							"type": "Tooltip_QQBonusDamage",
+							"name": "Tooltip_QQBonusDamage",
 							"nameOverride": "spell_hweiq_qqrankup2"
 						},
 						{
-							"type": "Tooltip_QWBaseDamage",
+							"name": "Tooltip_QWBaseDamage",
 							"nameOverride": "spell_hweiq_qwrankup1"
 						},
 						{
-							"type": "Tooltip_QWBonusDamageMult",
+							"name": "Tooltip_QWBonusDamageMult",
 							"nameOverride": "spell_hweiq_qwrankup2"
 						},
 						{
-							"type": "Tooltip_QEBaseDamage",
+							"name": "Tooltip_QEBaseDamage",
 							"nameOverride": "spell_hweiq_qerankup1"
 						},
 						{
-							"type": "Tooltip_QEBaseDPS",
+							"name": "Tooltip_QEBaseDPS",
 							"nameOverride": "spell_hweiq_qerankup2"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
 						}
 					],
@@ -153,27 +153,27 @@
 					"tooltipExtended": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br><br><spellName>{{Spell_HweiWQ_Name}}</spellName><br>{{Spell_HweiWQ_Tooltip}}<br><br><spellName>{{Spell_HweiWW_Name}}</spellName><br>{{Spell_HweiWW_Tooltip}}<br><br><spellName>{{Spell_HweiWE_Name}}</spellName><br>{{Spell_HweiWE_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Tooltip_WQBaseMoveSpeed",
+							"name": "Tooltip_WQBaseMoveSpeed",
 							"nameOverride": "spell_hweiw_wqrankup1"
 						},
 						{
-							"type": "Tooltip_WQAreaDuration",
+							"name": "Tooltip_WQAreaDuration",
 							"nameOverride": "spell_hweiw_wqrankup2"
 						},
 						{
-							"type": "Tooltip_WWShieldAmountBase",
+							"name": "Tooltip_WWShieldAmountBase",
 							"nameOverride": "spell_hweiw_wwrankup1"
 						},
 						{
-							"type": "Tooltip_WEBaseOnHitDamage",
+							"name": "Tooltip_WEBaseOnHitDamage",
 							"nameOverride": "spell_hweiw_werankup1"
 						},
 						{
-							"type": "Tooltip_WEOnHitManaRestore",
+							"name": "Tooltip_WEOnHitManaRestore",
 							"nameOverride": "spell_hweiw_werankup2"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -262,31 +262,31 @@
 					"tooltipExtended": "Hwei paints visions of torment that control enemies.<br><br><spellName>{{Spell_HweiEQ_Name}}</spellName><br>{{Spell_HweiEQ_Tooltip}}<br><br><spellName>{{Spell_HweiEW_Name}}</spellName><br>{{Spell_HweiEW_Tooltip}}<br><br><spellName>{{Spell_HweiEE_Name}}</spellName><br>{{Spell_HweiEE_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "Tooltip_EQBaseDamage",
+							"name": "Tooltip_EQBaseDamage",
 							"nameOverride": "spell_hweie_eqrankup1"
 						},
 						{
-							"type": "Tooltip_EQFleeDuration",
+							"name": "Tooltip_EQFleeDuration",
 							"nameOverride": "spell_hweie_eqrankup2"
 						},
 						{
-							"type": "Tooltip_EWBaseDamage",
+							"name": "Tooltip_EWBaseDamage",
 							"nameOverride": "spell_hweie_ewrankup1"
 						},
 						{
-							"type": "Tooltip_EWRootDuration",
+							"name": "Tooltip_EWRootDuration",
 							"nameOverride": "spell_hweie_ewrankup2"
 						},
 						{
-							"type": "Tooltip_EEBaseDamage",
+							"name": "Tooltip_EEBaseDamage",
 							"nameOverride": "spell_hweie_eerankup1"
 						},
 						{
-							"type": "Tooltip_EESlowAmount",
+							"name": "Tooltip_EESlowAmount",
 							"nameOverride": "spell_hweie_eerankup2"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -355,11 +355,11 @@
 					"tooltip": "Hwei launches a vision of pure despair that sticks to an enemy champion for @Duration@ seconds. The vision expands over time applying a <status>Slow</status> to enemies for @SlowPercentPerStack@% stacking every 0.25 seconds, and dealing <magicDamage>@DamageOverTime@ magic damage per second</magicDamage>.<br><br>Upon completion, the vision shatters, dealing <magicDamage>@Damage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseDamageOverTime",
+							"name": "BaseDamageOverTime",
 							"nameOverride": "spell_listtype_damagepersecond"
 						}
 					],

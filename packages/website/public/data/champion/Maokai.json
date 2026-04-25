@@ -38,15 +38,15 @@
 					"tooltip": "Maokai smashes his fist into the ground, dealing <magicDamage>@TotalDamage@ plus @BasePercentHealth*100@% max Health magic damage</magicDamage> and briefly <status>Slowing</status>. Nearby enemies are also <status>Knocked Back</status>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BasePercentHealth",
+							"name": "BasePercentHealth",
 							"nameOverride": "game_effect_description_percenthppoolmod"
 						},
 						{
-							"type": "BonusMonsterDamage",
+							"name": "BonusMonsterDamage",
 							"nameOverride": "spell_listtype_monsterdamage"
 						}
 					],
@@ -103,11 +103,11 @@
 					"tooltip": "Maokai transforms into a moving mass of roots, becoming Untargetable and dashing to an enemy. Upon arrival, he <status>Roots</status> the enemy for @Effect2Amount@ second(s) and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>. ",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_rootduration"
 						}
 					],
@@ -150,15 +150,15 @@
 					"tooltip": "Maokai flings a sapling, which stands watch for @SaplingDuration@ seconds. Saplings chase nearby enemies, detonating on arrival to deal <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slow</status> surrounding enemies by @SlowAmount*100@% for @SlowDuration@ seconds. <keywordMajor>Sap Magic's</keywordMajor> Cooldown is reduced by an additional 4 seconds if the sapling hits an enemy champion or epic monster.<br><br>If placed in brush, Saplings instead last for @EmpoweredSaplingDuration@ seconds and cause a larger explosion, dealing <magicDamage>@TotalEmpoweredDamage@ magic damage</magicDamage> over @EmpoweredDoTDuration@ seconds and <status>Slowing</status> enemies by @EmpoweredSlowAmount@.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "EmpoweredBaseDamage",
+							"name": "EmpoweredBaseDamage",
 							"nameOverride": "spell_listtype_empowereddamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -283,11 +283,11 @@
 					"tooltip": "Maokai summons a colossal wave of brambles and thorns, <status>Rooting</status> enemies for @MinRootDuration@ to @MaxRootDuration@ seconds, increasing with distance travelled, and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Hitting a champion gives Maokai <speed>@MoveHaste*100@% Move Speed</speed>, decaying over @HasteDuration@ seconds. ",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "MoveHaste",
+							"name": "MoveHaste",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

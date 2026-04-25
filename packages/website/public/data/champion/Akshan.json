@@ -38,15 +38,15 @@
 					"tooltip": "Akshan throws a boomerang that deals <physicalDamage>@FinalDamage@ physical damage</physicalDamage>, extending the range each time an enemy is hit.<br><br>Champion hits grant Akshan <speed>@TotalHaste@ Move Speed</speed> decaying over @HasteDuration@ second.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SecondaryTargetDamage",
+							"name": "SecondaryTargetDamage",
 							"nameOverride": "spell_akshanq_miniondamagemod"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 65, 70, 75, 80, 80],
@@ -104,10 +104,10 @@
 					"tooltip": "{{ Spell_AkshanW_Tooltip_@GameModeInteger@ }}",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "MSValue",
+							"name": "MSValue",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
@@ -154,7 +154,7 @@
 					"tooltip": "<spellActive>First Cast:</spellActive> Akshan fires a grappling hook, attaching to the first terrain hit.<br><br><spellActive>Second Cast:</spellActive> Akshan swings around the terrain, repeatedly firing at the nearest enemy for <physicalDamage>@DamageToDeal@ physical damage</physicalDamage> per shot.<br><br><spellActive>Third Cast:</spellActive> Akshan dives off the rope, firing a final shot.<br><br>Colliding with an enemy Champion or terrain ends the swing early.<br><br>Champion takedowns refresh this Ability's Cooldown.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -252,11 +252,11 @@
 					"tooltip": "Akshan locks onto a champion and begins overcharging his gun for up to @ChannelDuration@ seconds, storing up to @NumberOfBullets@ bullets.<br><br><recast>Recast:</recast> Akshan unleashes the stored bullets, each dealing at least <physicalDamage>@DamagePerBulletWithCrit@ physical damage</physicalDamage> to the first enemy or structure hit, increased up to <physicalDamage>@MaxDamagePerBullet@ physical damage</physicalDamage> based on missing Health.",
 					"extendedVariables": [
 						{
-							"type": "NumberOfBullets",
+							"name": "NumberOfBullets",
 							"nameOverride": "spell_akshanr_numberofbullets"
 						},
 						{
-							"type": "BonusDamage",
+							"name": "BonusDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

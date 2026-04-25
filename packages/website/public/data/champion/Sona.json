@@ -38,15 +38,15 @@
 					"tooltip": "Sona deals <magicDamage>@TotalDamage@ magic damage</magicDamage> to the nearest two enemies, prioritizing champions. She then begins a new <keywordMajor>Melody</keywordMajor>. Gain a stack of <keywordMajor>Accelerando</keywordMajor> for every champion you damage with this.<br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds, granting allied champions an additional <magicDamage>@TotalOnHitDamage@ magic damage</magicDamage> %i:OnHit% on their next Attack within @OnHitDuration@ seconds.<br><br><keywordMajor>Power Chord - Staccato:</keywordMajor> Power Chord bonus damage (<magicDamage>@TotalStaccatoDamage@ total magic damage</magicDamage>).",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_sonaqdamageactive"
 						},
 						{
-							"type": "BaseOnHitDamage",
+							"name": "BaseOnHitDamage",
 							"nameOverride": "spell_listtype_sonaqdamagemelody"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -121,15 +121,15 @@
 					"tooltip": "<spellPassive>Active:</spellPassive> Sona restores <healing>@TotalHeal@ Health</healing> to herself and a nearby allied champion, prioritizing the most wounded. She then begins a new <keywordMajor>Melody</keywordMajor>.<br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds, granting allied champions <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds.<br><br>Gain a stack of <keywordMajor>Accelerando</keywordMajor> whenever you heal another injured ally and every time you protect another ally from at least @AccelerandoShieldBreakpoint@ damage with this shield.<br><br><keywordMajor>Power Chord - Diminuendo:</keywordMajor> Power Chord also reduces physical and magic damage dealt by the target by @TotalDiminuendoWeakenPercent@ for @DiminuendoDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseHeal",
+							"name": "BaseHeal",
 							"nameOverride": "spell_listtype_sonawhealactive"
 						},
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_sonawshieldmelody"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [80, 85, 90, 95, 100, 105],
@@ -199,7 +199,7 @@
 					"tooltip": "<spellPassive>Active:</spellPassive> She begins a new <keywordMajor>Melody</keywordMajor> and grants herself <speed>@TotalSelfMovementSpeed@ Move Speed</speed> for @SelfMovementSpeedDurationMin@ seconds, extended to up to @SelfMovementSpeedDurationMax@ seconds if she doesn't take damage. <br><br><keywordMajor>Melody:</keywordMajor> Sona gains an aura for @AuraDuration@ seconds that grants allied champions <speed>@TotalAllyMovementSpeed@ Move Speed</speed> for @AllyMovementSpeedDuration@ seconds.<br><br><keywordMajor>Power Chord - Tempo:</keywordMajor> Power Chord also <status>Slows</status> the target by @TotalTempoMoveSpeedSlow@ for @TempoDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "AllyBaseMovementSpeed",
+							"name": "AllyBaseMovementSpeed",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],
@@ -271,7 +271,7 @@
 					"tooltip": "Sona strikes an irresistible chord, <status>Stunning</status> enemy for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

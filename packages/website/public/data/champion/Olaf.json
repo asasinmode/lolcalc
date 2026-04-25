@@ -38,19 +38,19 @@
 					"tooltip": "Olaf throws an axe, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for up to @Effect3Amount@ seconds (based on distance travelled). Champions hit lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @DebuffDuration@ seconds.<br><br>If Olaf picks up the axe, this Ability's Cooldown is reduced to @TooltipCDRefund@ seconds, or fully refunded if @TooltipCDRefund@ seconds has elapsed.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "MonsterDamage",
+							"name": "MonsterDamage",
 							"nameOverride": "spell_listtype_monsterdamage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -113,11 +113,11 @@
 					"tooltip": "Olaf gains <attackSpeed>@Attackspeed*100@% Attack Speed</attackSpeed> for @Duration@ seconds, and <shield>@BaseShield@ plus @ShieldPercMissingHP*100@% missing Health Shield (up to a maximum of @MaxShieldCalc@ Shield below @ThresholdForMax*100@% Health)</shield> for @ShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Attackspeed",
+							"name": "Attackspeed",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_olaffrenziedstrikes_baseshield"
 						}
 					],
@@ -199,7 +199,7 @@
 					"tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>@TotalDamage@ true damage</trueDamage>. If the enemy dies, the cost is refunded.<br><br>Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -243,15 +243,15 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Olaf gains <scaleArmor>@Resists@ Armor</scaleArmor> and <scaleMR>@Resists@ Magic Resist</scaleMR>.<br><br><spellActive>Active: </spellActive>Olaf cleanses all <status>Immobilizing</status> and <status>Disabling</status> effects on himself and becomes immune to them for @Duration@ seconds. While active, Olaf gains <scaleAD>@AD@ Attack Damage</scaleAD>. Hitting a champion with an Attack or <spellName>Reckless Swing</spellName> extends the duration by @DurationExtension@ seconds.<br><br>Additionally, Olaf gains <speed>@Haste*100@% Move Speed</speed> towards enemy champions for @HasteDuration@ second.",
 					"extendedVariables": [
 						{
-							"type": "Resists",
+							"name": "Resists",
 							"nameOverride": "spell_listtype_armorandmagicresist"
 						},
 						{
-							"type": "FlatAD",
+							"name": "FlatAD",
 							"nameOverride": "spell_listtype_attackdamagebonus"
 						},
 						{
-							"type": "Haste",
+							"name": "Haste",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

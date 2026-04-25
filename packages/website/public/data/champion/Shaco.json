@@ -38,11 +38,11 @@
 					"tooltip": "Shaco teleports and becomes <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ seconds. Using <spellName>{{Spell_JackInTheBox_Name}}</spellName> or <spellName>{{Spell_HallucinateFull_Name}}</spellName> does not break <keywordStealth>Invisibility</keywordStealth>.<br><br>Shaco's next Attack while <keywordStealth>Invisible</keywordStealth> deals an additional <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If striking from behind, this Attack critically strikes for @QCritDamageMod@ damage.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "StealthDuration",
+							"name": "StealthDuration",
 							"nameOverride": "spell_listtype_stealthduration"
 						}
 					],
@@ -116,19 +116,19 @@
 					"tooltip": "Shaco creates a trap that stealths itself after @Effect5Amount@ seconds and lasts for @TrapDuration@ seconds. It activates when an enemy comes near or when revealed, <status>Fearing</status> nearby enemy Champions for @FearDuration@ seconds, or @MinionFearDuration@ seconds for minions and jungle monsters.<br><br>Once activated, the trap fires at all nearby enemies for 5 seconds, dealing <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ damage</magicDamage> if focused on a single target.<br><br>Jack in the Box's attacks deal an additional <magicDamage>@MonsterBonusDamage@</magicDamage> damage to monsters.",
 					"extendedVariables": [
 						{
-							"type": "STBaseDamage",
+							"name": "STBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "FearDuration",
+							"name": "FearDuration",
 							"nameOverride": "spell_listtype_fearduration"
 						},
 						{
-							"type": "MonsterBonusDamage",
+							"name": "MonsterBonusDamage",
 							"nameOverride": "spell_alphastrike_bonusminionmonsterdamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 65, 60, 55, 50, 50],
@@ -202,11 +202,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> While this Ability is off Cooldown, Shaco's Attacks <status>Slow</status> the target by @SlowAmount*-100@% for @SlowDurationPassive@ seconds.<br><br><spellActive>Active:</spellActive> Shaco throws a shiv, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> by @SlowAmount*-100@% for @SlowDurationActive@ seconds. If the target has less than @ExecuteHealthThreshold*100@% Health, the shiv deals <magicDamage>@TotalExecuteDamage@ damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -262,11 +262,11 @@
 					"tooltip": "Shaco briefly disappears, then reappears with a clone that lasts @CloneLifetime@ seconds and detonates when it dies, dealing <magicDamage>@ExplosionTotalDamage@ magic damage</magicDamage> and spawning three mini <spellName>Jack in the Boxes</spellName> that trigger immediately. The clone deals @CloneAADamagePercent*100@% of Shaco's damage and receives @CloneIncomingDamagePercent*100@% increased damage.<br><br>Mini <spellName>Jack in the Boxes</spellName> deal <magicDamage>@AoEDamage@ magic damage</magicDamage>, or <magicDamage>@STDamage@ magic damage</magicDamage> if firing at only one enemy, and <status>Fear</status> for @BoxFearDuration@ second.",
 					"extendedVariables": [
 						{
-							"type": "ExplosionBaseDamage",
+							"name": "ExplosionBaseDamage",
 							"nameOverride": "spell_listtype_shacorondeathdamage"
 						},
 						{
-							"type": "STBaseDamage",
+							"name": "STBaseDamage",
 							"nameOverride": "spell_listtype_shacorminiboxdamage"
 						}
 					],

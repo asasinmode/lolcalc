@@ -38,11 +38,11 @@
 					"tooltip": "Ivern conjures a vine dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Rooting</status> the first enemy hit for @RootDuration@ seconds. Allies that Attack a <status>Rooted</status> enemy dash into Attack Range. <br><br><recast>Recast:</recast> Ivern dashes directly onto the <status>Rooted</status> enemy.<br><br><rules>Hitting non-epic monsters reduces <spellName>{{ Spell_IvernQ_Name }}'s</spellName> cooldown by 50%.</rules>",
 					"extendedVariables": [
 						{
-							"type": "RootDuration",
+							"name": "RootDuration",
 							"nameOverride": "spell_listtype_rootduration"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -82,11 +82,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> While in brush and for @BuffDuration@ seconds after leaving, Ivern's Attacks deal an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>. Nearby allies will gain this effect for @AllyBuffDuration@ seconds and deal <magicDamage>@TotalAllyDamage@ magic damage</magicDamage>.<br><br><spellActive>Active:</spellActive> Ivern grows a patch of Brush, revealing the area for @RevealDuration@ seconds. The Brush persists until Ivern's team loses vision within it, or up to @MaxBrushDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_bonusmagicdamage"
 						},
 						{
-							"type": "AllyBaseDamage",
+							"name": "AllyBaseDamage",
 							"nameOverride": "spell_ivernw_levelup_allydamage"
 						}
 					],
@@ -142,15 +142,15 @@
 					"tooltip": "Ivern grants <shield>@TotalShield@ Shield</shield> to an ally champion or Daisy. After @ShieldDuration@ seconds, it bursts, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> and <status>Slowing</status> enemies by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>If <spellName>Triggerseed</spellName> detonates and no enemy champions are hit while the shield still persists, the ally will be shielded for <shield>@TotalShield@ </shield>for @ShieldDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -205,15 +205,15 @@
 					"tooltip": "Ivern summons his sentinel friend Daisy to leap into the fray for @DaisyDuration@ seconds.<br><br><spellActive>Daisy, Slam!:</spellActive> Daisy's 3rd consecutive Attack on the same champion or epic monster will launch a shockwave, dealing<magicDamage> @TotalShockwaveDamage@ magic damage</magicDamage> to all enemies hit as well as <status>Knocking Up</status> for @ShockwaveCCDuration@ second. This effect can only occur once every @ShockwaveCD@ seconds.<br><br><recast>Recast:</recast> Instruct Daisy to Attack or move.",
 					"extendedVariables": [
 						{
-							"type": "DaisyAD",
+							"name": "DaisyAD",
 							"nameOverride": "spell_listtype_attackdamagebonus"
 						},
 						{
-							"type": "ShockwaveBaseDamage",
+							"name": "ShockwaveBaseDamage",
 							"nameOverride": "spell_ivernr_shockwavedamage"
 						},
 						{
-							"type": "DaisyAS",
+							"name": "DaisyAS",
 							"nameOverride": "spell_listtype_ivernrbonusattackspeed"
 						}
 					],

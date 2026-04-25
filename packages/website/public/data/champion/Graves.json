@@ -38,15 +38,15 @@
 					"tooltip": "Graves fires a powder round dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. After 1 second or after colliding with terrain, it detonates, dealing <physicalDamage>@TotalDetonationDamage@ physical damage</physicalDamage> along the travel path again and to enemies near the blast.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseDetonationDamage",
+							"name": "BaseDetonationDamage",
 							"nameOverride": "spell_gravesqlinespell_damage2"
 						},
 						{
-							"type": "bADDetonationRatio",
+							"name": "bADDetonationRatio",
 							"nameOverride": "spell_listtype_gravesdetonationadratio"
 						}
 					],
@@ -103,11 +103,11 @@
 					"tooltip": "Graves creates a cloud of black smoke for 4 seconds, <status>Slowing</status> enemies inside by @Effect2Amount@% and blocking their vision outside the area. The initial impact deals <magicDamage>@ImpactDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 75, 80, 85, 90, 95],
@@ -150,11 +150,11 @@
 					"tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for @BuffDuration@ seconds (max @MaxStacks@ stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>@ArmorPerStack@ Armor</scaleArmor> and <scaleMR>@MRGrant@ Magic Resist</scaleMR>. Stacks are refreshed when damaging a non-minion.<br><br>Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by @CooldownPerHit@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "ArmorPerStack",
+							"name": "ArmorPerStack",
 							"nameOverride": "spell_listtype_gravestruegritarmor"
 						},
 						{
-							"type": "ArmorPerStack",
+							"name": "ArmorPerStack",
 							"nameOverride": "spell_gravese_magicresist"
 						}
 					],
@@ -207,11 +207,11 @@
 					"tooltip": "Graves fires an explosive cartridge, blasting himself backwards. The cartridge deals <physicalDamage>@Damage@ physical damage</physicalDamage> to the first enemy hit. After hitting an enemy champion or reaching the end of its range, the cartridge explodes outward, dealing <physicalDamage>@FalloffDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_gravesprimarydamage"
 						},
 						{
-							"type": "RFalloffDamage",
+							"name": "RFalloffDamage",
 							"nameOverride": "spell_listtype_gravesconedamage"
 						}
 					],

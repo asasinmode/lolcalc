@@ -38,11 +38,11 @@
 					"tooltip": "Irelia dashes to an enemy, dealing <physicalDamage>@ChampionDamage@ physical damage</physicalDamage> and restoring <healing>@HealAmount@ Health</healing> to herself. If the enemy dies or was <keywordMajor>Unsteady</keywordMajor>, the Cooldown is refreshed.<br><br>Deals @MinionDamage@ damage to minions.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "HealTADCoefficient",
+							"name": "HealTADCoefficient",
 							"nameOverride": "spell_ireliaq_healadratio"
 						}
 					],
@@ -112,11 +112,11 @@
 					"tooltip": "<charge>Begin Charging:</charge> Irelia enters a defensive stance for up to @MaxDuration@ seconds, becoming unable to act but reducing physical damage taken by @FinalPhysicalDR@% and magic damage taken by @FinalMagicDR@%.<br><br><release>Release:</release> Irelia lashes out with her blades, dealing <physicalDamage>@MinDamageCalc@ physical damage</physicalDamage> increased up to <physicalDamage>@MaxDamageCalc@</physicalDamage> based on charge time.",
 					"extendedVariables": [
 						{
-							"type": "MinDamage",
+							"name": "MinDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -204,7 +204,7 @@
 					"tooltip": "Irelia throws a blade into the ground and can <recast>Recast</recast> for up to @BuffDuration@ seconds. <br><br><recast>Recast:</recast> Irelia throws a second blade, then they fly towards each other <status>Stunning</status> for @StunDuration@ seconds and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. Champions and large jungle monsters become <keywordMajor>Unsteady</keywordMajor> for @MarkDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -250,11 +250,11 @@
 					"tooltip": "Irelia launches a barrage of blades, dealing <magicDamage>@MissileDamage@ magic damage</magicDamage> and making champions and large jungle monsters <keywordMajor>Unsteady</keywordMajor> for @MarkDuration@ seconds. The barrage explodes into a cage around the first champion hit for @ZoneDuration@ seconds. The cage deals <magicDamage>@ZoneDamage@ magic damage</magicDamage> and <status>Slows</status> by @SlowAmount@% for @CCDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseMissileDamage",
+							"name": "BaseMissileDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BaseZoneDamage",
+							"name": "BaseZoneDamage",
 							"nameOverride": "spell_ireliar_walldamage"
 						}
 					],

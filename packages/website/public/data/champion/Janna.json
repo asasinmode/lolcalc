@@ -38,15 +38,15 @@
 					"tooltip": "Janna summons a tornado that grows stronger over @MaxDuration@ seconds then blows along its path. It deals <magicDamage>@MinimumDamage@ - @MaxDamage@ magic damage</magicDamage> and <status>Knocks Up</status> for @BaseKnockup@ - @MaxKnockup@ seconds. The distance, damage, and <status>Knock Up</status> duration increase based on how much the tornado grew. Janna can <recast>Recast</recast> to send the tornado early.",
 					"extendedVariables": [
 						{
-							"type": "MinDamage",
+							"name": "MinDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BonusDamage",
+							"name": "BonusDamage",
 							"nameOverride": "spell_listtype_jannaqdamagepersecondcharged"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [90, 95, 100, 105, 110, 110],
@@ -154,19 +154,19 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Janna gains <speed>@TotalMS@ Move Speed</speed> and is Ghosted.<br><br><spellActive>Active:</spellActive> Janna's elemental strikes an enemy, <status>Slowing</status> them by @TotalSlow@ for @SlowDuration@ seconds, and dealing <magicDamage>@TotalDamage@ + @spell.TailwindSelf:BonusDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowPercent",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "MSPercent",
+							"name": "MSPercent",
 							"nameOverride": "spell_listtype_passivemovementspeed"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 70],
@@ -238,15 +238,15 @@
 					"tooltip": "Janna grants an ally champion or turret <shield>@TotalShield@ Shield</shield> for @ShieldDuration@ seconds. While shielded, they gain <scaleAD>@TotalAD@ Attack Damage</scaleAD>.<br><br>Janna refunds @ECDRefundforCC*100@% of the cooldown whenever she impairs an enemy champion's movement with an Ability.",
 					"extendedVariables": [
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shieldhealth"
 						},
 						{
-							"type": "BonusAD",
+							"name": "BonusAD",
 							"nameOverride": "spell_listtype_attackdamagebonus"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 75, 80, 85, 90, 90],
@@ -302,7 +302,7 @@
 					"tooltip": "Janna summons a magical monsoon, <status>Knocking Back</status> nearby enemies then healing nearby allies for <healing>@TotalHeal@ Health</healing> over @Effect3Amount@ seconds. Moving or using an Ability ends the monsoon early.",
 					"extendedVariables": [
 						{
-							"type": "HealBasePerSecond",
+							"name": "HealBasePerSecond",
 							"nameOverride": "spell_listtype_healpersecond"
 						}
 					],

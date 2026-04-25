@@ -38,7 +38,7 @@
 					"tooltip": "Fizz dashes through an enemy, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> plus <magicDamage>@QDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -91,23 +91,23 @@
 					"tooltip": "<spellPassive>Passive</spellPassive>: Fizz's Attacks cause his enemies to bleed, dealing <magicDamage>@DoTDamage@ magic damage</magicDamage> over @BleedDuration@ seconds. <br><br><spellActive>Active</spellActive>: Fizz's next Attack deals an additional <magicDamage>@ActiveDamage@ magic damage</magicDamage>. If this Attack kills its target, Fizz refunds <scaleMana>@OnKillManaRefund@ Mana</scaleMana> and reduces the cooldown of this Ability to @OnKillNewCooldown@ second. If it does not kill, Fizz's Attacks deal an additional <magicDamage>@OnHitBuffDamage@ magic damage</magicDamage> for @OnHitBuffDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "DoTBaseDamage",
+							"name": "DoTBaseDamage",
 							"nameOverride": "spell_listtype_passivedamage"
 						},
 						{
-							"type": "ActiveBaseDamage",
+							"name": "ActiveBaseDamage",
 							"nameOverride": "spell_listtype_activedamage"
 						},
 						{
-							"type": "OnHitBuffBaseDamage",
+							"name": "OnHitBuffBaseDamage",
 							"nameOverride": "spell_listtype_onhitdamage"
 						},
 						{
-							"type": "OnKillManaRefund",
+							"name": "OnKillManaRefund",
 							"nameOverride": "spell_listtype_manarefund"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
 						}
 					],
@@ -182,15 +182,15 @@
 					"tooltip": "Fizz hops onto his trident, becoming Untargetable for 0.75 seconds, after which he deals <magicDamage>@EDamage@ magic damage</magicDamage> to nearby enemies and <status>Slows</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. <br><br>Fizz can <recast>Recast</recast> this Ability while Untargetable to dash again, which ends the effect early, deals damage in a smaller area, and doesn't <status>Slow</status>.",
 					"extendedVariables": [
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -231,15 +231,15 @@
 					"tooltip": "Fizz launches a fish that attaches to the first champion hit. The victim is afflicted with <keywordStealth>True Sight</keywordStealth> and <status>Slowed</status> by between 40% to 80% based on how far the fish travelled before attaching. <br><br>After @DetonationTime@ seconds a shark erupts on the target, <status>Knocking Up</status> the target with the fish for 1 second, <status>Knocking Back</status> everything else, and dealing between <magicDamage>@SmallSharkDamage@ to @BigSharkDamage@ magic damage</magicDamage> based on how far the fish travelled before attaching.",
 					"extendedVariables": [
 						{
-							"type": "SmallDamage",
+							"name": "SmallDamage",
 							"nameOverride": "spell_fizzr_smallfishdamage"
 						},
 						{
-							"type": "SmallDamage",
+							"name": "SmallDamage",
 							"nameOverride": "spell_fizzr_mediumfishdamage"
 						},
 						{
-							"type": "SmallDamage",
+							"name": "SmallDamage",
 							"nameOverride": "spell_fizzr_largefishdamage"
 						}
 					],

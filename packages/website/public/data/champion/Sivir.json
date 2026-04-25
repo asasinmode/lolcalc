@@ -38,11 +38,11 @@
 					"tooltip": "Sivir hurls her crossblade like a boomerang, dealing <physicalDamage>@TotalDamage@</physicalDamage> to all enemies it cuts through. Hitting non-champions reduces the damage to subsequent targets, down to a minimum of @FallOffMinimum*100@%.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_manacost"
 						}
 					],
@@ -145,11 +145,11 @@
 					"tooltip": "For the next @BuffDuration@ seconds, Sivir gains <attackSpeed>@RicochetAttackSpeed*100@% Attack Speed</attackSpeed> and her auto attacks are empowered to bounce to additional surrounding enemies dealing <physicalDamage>@BounceDamage@ physical damage</physicalDamage> each bounce for up to @MaxBounces@ bounces.<br><br>These bounces critically strike if the attack generating them does.",
 					"extendedVariables": [
 						{
-							"type": "RicochetAttackSpeed",
+							"name": "RicochetAttackSpeed",
 							"nameOverride": "spell_listtype_attackspeed"
 						},
 						{
-							"type": "BounceADRatio",
+							"name": "BounceADRatio",
 							"nameOverride": "spell_listtype_totaladratio"
 						}
 					],
@@ -219,7 +219,7 @@
 					"tooltip": "Sivir creates a magical barrier for @Effect1Amount@ seconds that blocks the next incoming enemy Ability. If an ability is blocked, Sivir restores <healing>@TotalHeal@ health</healing> and triggers Fleet of Foot.",
 					"extendedVariables": [
 						{
-							"type": "HealRatio",
+							"name": "HealRatio",
 							"nameOverride": "spell_listtype_totaladratio"
 						}
 					],
@@ -261,11 +261,11 @@
 					"tooltip": "Sivir rallies her nearby allies, granting them <speed>@MaxMS*100@% Move Speed</speed> for @UltDuration@ seconds.<br><br>Sivir's attacks against champions while On The Hunt reduce the cooldown of her basic abilities by 0.5 seconds.<br><br>Takedowns on recently damaged enemies refreshes the duration of the hunt.",
 					"extendedVariables": [
 						{
-							"type": "MaxMS",
+							"name": "MaxMS",
 							"nameOverride": "spell_listtype_movementspeedmax"
 						},
 						{
-							"type": "UltDuration",
+							"name": "UltDuration",
 							"nameOverride": "spell_listtype_duration"
 						}
 					],

@@ -38,7 +38,7 @@
 					"tooltip": "Blitzcrank fires their right hand, <status>Pulling</status> the first enemy hit towards them and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -81,11 +81,11 @@
 					"tooltip": "Blitzcrank supercharges themself, gaining <speed>@MoveSpeedMod*100@% decaying Move Speed</speed> and <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @Duration@ seconds.<br><br>Afterwards, Blitzcrank is <status>Slowed</status> by @MoveSpeedModReduction*100@% for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "MoveSpeedMod",
+							"name": "MoveSpeedMod",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "AttackSpeedMod",
+							"name": "AttackSpeedMod",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
@@ -179,15 +179,15 @@
 					"tooltip": "<spellPassive>Passive: </spellPassive>While this ability is available, lightning charges Blitzcrank's fists, marking those  Attacked. After 1 second, they are shocked for <magicDamage>@PassiveDamage@ magic damage</magicDamage>.<br><br><spellActive>Active: </spellActive>Blitzcrank overcharges, dealing <magicDamage>@ActiveDamage@ magic damage</magicDamage> and <status>Silencing</status> nearby enemies for @SilenceDuration@ seconds. Their shields are also destroyed.",
 					"extendedVariables": [
 						{
-							"type": "PassiveBaseDamage",
+							"name": "PassiveBaseDamage",
 							"nameOverride": "spell_staticfield_passivebase_levelup"
 						},
 						{
-							"type": "PassiveAPRatio",
+							"name": "PassiveAPRatio",
 							"nameOverride": "spell_staticfield_passiveapratio_levelup"
 						},
 						{
-							"type": "ActiveBaseDamage",
+							"name": "ActiveBaseDamage",
 							"nameOverride": "spell_staticfield_activedamage_levelup"
 						}
 					],

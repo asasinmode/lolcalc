@@ -38,7 +38,7 @@
 					"tooltip": "Nautilus hurls his anchor forward. If it hits an enemy, Nautilus drags himself and the target together, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Stunning</status> them briefly. If the anchor hits terrain, Nautilus will drag himself towards it.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -82,15 +82,15 @@
 					"tooltip": "Nautilus gains a <shield>@ShieldCalc@ Shield</shield> for @ShieldDuration@ seconds. While the <shield>Shield</shield> persists, Nautilus' Attacks deal an additional <magicDamage>@DotDamageCalc@ magic damage</magicDamage> over 2 seconds to his target and all surrounding enemies.",
 					"extendedVariables": [
 						{
-							"type": "ShieldBase",
+							"name": "ShieldBase",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "DotDamageBase",
+							"name": "DotDamageBase",
 							"nameOverride": "spell_listtype_bonusmagicdamage"
 						},
 						{
-							"type": "ShieldHealthRatio",
+							"name": "ShieldHealthRatio",
 							"nameOverride": "spell_listtype_percentmaxhealth"
 						}
 					],
@@ -144,18 +144,18 @@
 					"tooltip": "Nautilus creates three exploding waves around himself, each dealing <magicDamage>@DamageCalc@ magic damage</magicDamage> to enemies in the area and <status>Slows</status> them by @SlowPercent*100@% decaying over @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "DamageBase",
+							"name": "DamageBase",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "MonsterBonusDamage",
+							"name": "MonsterBonusDamage",
 							"nameOverride": "spell_listtype_monsterdamage"
 						},
 						{
-							"type": "SlowPercent",
+							"name": "SlowPercent",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -212,15 +212,15 @@
 					"tooltip": "Nautilus fires a shockwave that chases an enemy champion, dealing <magicDamage>@PrimaryTargetDamage@ magic damage</magicDamage>, <status>Knocking</status> them <status>Up</status> and <status>Stunning</status> them for @StunDuration@ seconds. Other enemies hit by the shockwave are also <status>Knocked Up</status> and <status>Stunned</status> and take <magicDamage>@SecondaryTargetDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "PrimaryDamage",
+							"name": "PrimaryDamage",
 							"nameOverride": "spell_listtype_passthroughdamage"
 						},
 						{
-							"type": "StunDuration",
+							"name": "StunDuration",
 							"nameOverride": "spell_listtype_stunduration"
 						},
 						{
-							"type": "SecondaryDamage",
+							"name": "SecondaryDamage",
 							"nameOverride": "spell_listtype_explosiondamage"
 						}
 					],

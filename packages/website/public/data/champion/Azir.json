@@ -38,11 +38,11 @@
 					"tooltip": "Azir orders all <keywordMajor>Sand Soldiers</keywordMajor> to an area, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies they pass through and <status>Slowing</status> them by @Effect2Amount*-100@% for 1 second.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 80, 90, 100, 110, 110],
@@ -90,18 +90,18 @@
 					"tooltip": "Azir summons a <keywordMajor>Sand Soldier</keywordMajor> for @Effect1Amount@ seconds. When Azir Attacks an enemy near a <keywordMajor>Sand Soldier</keywordMajor>, he instead orders the soldiers to stab, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> in their direction.<br><br>This Ability has @MaxAmmo@ charges.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_azirw_solderdamage"
 						},
 						{
-							"type": "APRatio",
+							"name": "APRatio",
 							"nameOverride": "spell_listtype_apratio"
 						},
 						{
-							"type": "AmmoRechargeTime"
+							"name": "AmmoRechargeTime"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [40, 35, 30, 25, 20, 20],
@@ -173,11 +173,11 @@
 					"tooltip": "Azir grants himself <shield>@TotalShield@ Shield</shield> for @Effect6Amount@ seconds and dashes to one of his <keywordMajor>Sand Soldiers</keywordMajor>, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage> to enemies he passes through.<br><br>If Azir hits an enemy champion, he stops and gains a <keywordMajor>Sand Soldier</keywordMajor> charge.",
 					"extendedVariables": [
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shieldamount"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -237,11 +237,11 @@
 					"tooltip": "Azir summons a wall of armored soldiers that charges forward, <status>Knocking Back</status> enemies and dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. The soldiers remain, blocking enemy paths for @Effect4Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "NumberOfSoldiers",
+							"name": "NumberOfSoldiers",
 							"nameOverride": "spell_listtype_azirrnumberofsoldiers"
 						}
 					],

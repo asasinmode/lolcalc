@@ -38,7 +38,7 @@
 					"tooltip": "Ornn slams the ground, creating a fissure dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @Effect5Amount@% for @Effect6Amount@ seconds. A pillar of rock forms at the fissure's end for @Effect3Amount@ seconds. ",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -83,19 +83,19 @@
 					"tooltip": "Ornn stomps forward Unstoppably while breathing fire, dealing <magicDamage>@MaxPercentHPPerTickTooltip@% max Health magic damage</magicDamage> over @BreathDuration@ seconds. Enemies hit by the final bout of flame become <keywordMajor>Brittle</keywordMajor> for @BrittleDuration@ seconds.<br><br><status>Immobilizing</status> effects on <keywordMajor>Brittle</keywordMajor> targets have their duration increased by 30% and deal an additional <magicDamage>@BrittlePercentMaxHPCalc@ max Health magic damage</magicDamage>. Ornn's Attacks against <keywordMajor>Brittle</keywordMajor> targets <status>Knock</status> them <status>Back</status>, dealing the additional damage.",
 					"extendedVariables": [
 						{
-							"type": "MaxPercentHPPerTickTooltip",
+							"name": "MaxPercentHPPerTickTooltip",
 							"nameOverride": "spell_listtype_percenthealthdamage"
 						},
 						{
-							"type": "MinimumDamagePerTick",
+							"name": "MinimumDamagePerTick",
 							"nameOverride": "spell_listtype_minimumdamage"
 						},
 						{
-							"type": "MonsterDamagePerTickCap",
+							"name": "MonsterDamagePerTickCap",
 							"nameOverride": "spell_listtype_maximumdamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [45, 50, 55, 60, 65, 70],
@@ -167,11 +167,11 @@
 					"tooltip": "Ornn charges, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. If Ornn rams into terrain, he creates a shockwave that <status>Knocks Up</status> enemies for @KnockupDuration@ seconds and applies the same damage to those not hit by the charge.<br><br>Ornn's charge destroys magma pillars and terrain created by enemies.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_ornnedashdamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [35, 40, 45, 50, 55, 60],
@@ -223,11 +223,11 @@
 					"tooltip": "Ornn summons a massive lava elemental, which stampedes towards him, dealing <magicDamage>@RDamageCalc@ magic damage</magicDamage>, applying <keywordMajor>Brittle</keywordMajor> to, and <status>Slowing</status> enemies hit by @RSlowPercentBasePreMath@% for @BrittleDurationTOOLTIPONLY@ seconds.<br><br>Ornn can <recast>Recast</recast> to dash with a headbutt. If he dashes into the elemental, he redirects and empowers it, causing it to <status>Knock Up</status> the first champion for @RStunDuration@ second and subsequent champions for @MinStun@ seconds. The elemental also deals <magicDamage>@RDamageCalc@ magic damage</magicDamage> and reapplies <keywordMajor>Brittle</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "RSlowPercentBasePreMath",
+							"name": "RSlowPercentBasePreMath",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],

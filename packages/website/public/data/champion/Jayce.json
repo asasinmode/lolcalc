@@ -39,11 +39,11 @@
 					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Slow",
+							"name": "Slow",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -81,11 +81,11 @@
 					"tooltipExtended": "{{Spell_JayceToTheSkies_Tooltip}}<br><br>{{Spell_JayceShockBlast_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [55, 60, 65, 70, 75, 80],
@@ -137,11 +137,11 @@
 					"tooltipExtended": "{{Spell_JayceStaticField_Tooltip}}<br><br>{{Spell_JayceHyperCharge_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ManaGain",
+							"name": "ManaGain",
 							"nameOverride": "spell_listtype_manareturn"
 						}
 					],
@@ -175,7 +175,7 @@
 					"tooltipExtended": "{{Spell_JayceHyperCharge_Tooltip}}<br><br>{{Spell_JayceStaticField_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "DamagePerc",
+							"name": "DamagePerc",
 							"nameOverride": "spell_listtype_jaycedamagepershot"
 						}
 					],
@@ -219,11 +219,11 @@
 					"tooltipExtended": "{{Spell_JayceThunderingBlow_Tooltip}}<br><br>{{Spell_JayceAccelerationGate_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "PercHPDamage",
+							"name": "PercHPDamage",
 							"nameOverride": "spell_listtype_maxhealthpercent"
 						},
 						{
-							"type": "MonsterCap",
+							"name": "MonsterCap",
 							"nameOverride": "spell_listtype_maxdamagetomonsters"
 						}
 					],
@@ -257,7 +257,7 @@
 					"tooltipExtended": "{{Spell_JayceAccelerationGate_Tooltip}}<br><br>{{Spell_JayceThunderingBlow_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "MovementSpeed",
+							"name": "MovementSpeed",
 							"nameOverride": "spell_listtype_movementspeed"
 						}
 					],

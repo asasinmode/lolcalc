@@ -38,19 +38,19 @@
 					"tooltip": "Trundle's next Attack deals <physicalDamage>@TotalDamage@ physical damage</physicalDamage> and briefly <status>Slows</status> by @SlowAmount*100@%, then Trundle gains <physicalDamage>@BonusAD@ Attack Damage</physicalDamage> for @SapDebuffDuration@ seconds and the enemy loses <physicalDamage>@SappedAD*-1@ Attack Damage</physicalDamage> for the same duration.",
 					"extendedVariables": [
 						{
-							"type": "BonusDamage",
+							"name": "BonusDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ADScaling",
+							"name": "ADScaling",
 							"nameOverride": "spelllisttype_attackdamageratio"
 						},
 						{
-							"type": "BonusAD",
+							"name": "BonusAD",
 							"nameOverride": "spell_listtype_attackdamagebonus"
 						},
 						{
-							"type": "SappedAD",
+							"name": "SappedAD",
 							"nameOverride": "spell_trundletrollsmash_sappedad"
 						}
 					],
@@ -97,11 +97,11 @@
 					"tooltip": "Trundle freezes an area for @Effect4Amount@ seconds. While inside he gains <speed>@Effect1Amount*100@% Move Speed</speed>, <attackSpeed>@Effect2Amount*100@% Attack Speed</attackSpeed>, and @Effect3Amount*100@% increased healing.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
@@ -128,7 +128,7 @@
 					"tooltip": "Trundle creates an icy pillar for @Effect1Amount@ seconds, briefly <status>Knocking Back</status> enemies directly over it and <status>Slowing</status> nearby enemies by @Effect2Amount@%.",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -158,7 +158,7 @@
 					"tooltip": "Trundle drains the lifeforce of an enemy champion, dealing <magicDamage>@TotalPercentHPDamage@ max Health magic damage</magicDamage> and stealing <scaleArmor>@ArmorMRShred*100@% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> over @ActualDurationOfDrainBuff@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "PercentHPDamage",
+							"name": "PercentHPDamage",
 							"nameOverride": "spell_listtype_trundlehealthdrain"
 						}
 					],

@@ -38,19 +38,19 @@
 					"tooltip": "<spellActive>Cunning Sweep</spellActive>: Ambessa sweeps her blades forward, dealing <physicalDamage>@Calc_Damage_1_Max@ + @Calc_Damage_1_Percent_Max@ max Health physical damage</physicalDamage> to enemies at the edge of the strike. All other enemies take @Calc_Damage_1_Min_Ratio@ damage. Striking an enemy readies a <spellActive>Sundering Slam</spellActive>.<br><br><spellActive>Sundering Slam</spellActive>: Ambessa slams her blades down, dealing <physicalDamage>@Calc_Damage_2_Max@ + @Calc_Damage_2_Percent_Max@ max Health physical damage</physicalDamage> against the first enemy hit. All other enemies take @Calc_Damage_2_Min_Ratio@ damage.",
 					"extendedVariables": [
 						{
-							"type": "Damage_1_Base",
+							"name": "Damage_1_Base",
 							"nameOverride": "spell_ambessaq_rankup_cunningsweep_damage"
 						},
 						{
-							"type": "Damage_1_Percent",
+							"name": "Damage_1_Percent",
 							"nameOverride": "spell_ambessaq_rankup_cunningsweep_maxhealthdamage"
 						},
 						{
-							"type": "Damage_2_Base",
+							"name": "Damage_2_Base",
 							"nameOverride": "spell_ambessaq_rankup_sunderingslam_damage"
 						},
 						{
-							"type": "Damage_1_Percent",
+							"name": "Damage_1_Percent",
 							"nameOverride": "spell_ambessaq_rankup_sunderingslam_maxhealthdamage"
 						}
 					],
@@ -206,7 +206,7 @@
 					"tooltip": "Ambessa gains <shield>@Calc_Shield@ Shield</shield> for @Shield_Duration@ seconds and braces herself for @Buff_Duration@ seconds. She then slams the ground, dealing <physicalDamage>@Calc_Damage_Low@ physical damage</physicalDamage> to nearby enemies, which increases to <physicalDamage>@Calc_Damage_High@ physical damage</physicalDamage> if she braced herself from damage from an enemy champion, large monster, or structure.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -271,7 +271,7 @@
 					"tooltip": "Ambessa whips her chains around, dealing <physicalDamage>@Calc_Damage_Flat@ physical damage</physicalDamage> and <status>Slowing</status> enemies by <status>@Slow_Amount*100@%</status>, which decays over @Slow_Duration@ second. Initiating <spellName>{{Spell_AmbessaP_Name}}</spellName> from this Ability will trigger an additional strike.",
 					"extendedVariables": [
 						{
-							"type": "Damage_Flat_Base",
+							"name": "Damage_Flat_Base",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -313,15 +313,15 @@
 					"tooltip": "<spellPassive>Passive</spellPassive>: Ambessa gains <armorPen>@Armor_Penetration*100@% %i:scaleAPen% Armor Penetration</armorPen> and her Abilities <healing>heal her for @Calc_Omnivamp@ of the damage she dealt</healing>.<br><br><spellActive>Active</spellActive>: Ambessa becomes <attention>Unstoppable</attention> and blinks to the farthest enemy champion in a line, <status>Suppressing</status> the target for @Suppress_Duration@ seconds and then slamming them into the ground, dealing <physicalDamage>@Calc_Damage@ physical damage</physicalDamage> and <status>Stunning</status> them for @Stun_Duration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Armor_Penetration",
+							"name": "Armor_Penetration",
 							"nameOverride": "spell_listtype_armorpenetration"
 						},
 						{
-							"type": "Omnivamp",
+							"name": "Omnivamp",
 							"nameOverride": "spell_listtype_healing"
 						},
 						{
-							"type": "Damage",
+							"name": "Damage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

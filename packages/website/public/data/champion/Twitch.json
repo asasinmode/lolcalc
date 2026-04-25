@@ -38,11 +38,11 @@
 					"tooltip": "Twitch <keywordStealth>Camouflages</keywordStealth> and gains <speed>@MoveSpeedMod@% Move Speed</speed> for @StealthDuration@ seconds. The Move Speed increases to @HiddenSpeed@% while near an enemy champion that can't see him. After exiting <keywordStealth>Camouflage</keywordStealth>, Twitch gains <attackSpeed>@AttackSpeedMod*100@% Attack Speed</attackSpeed> for @AttackSpeedDuration@ seconds.<br><br>When an enemy champion dies while afflicted with <keywordMajor>Venom</keywordMajor>, this Ability's Cooldown is refreshed.",
 					"extendedVariables": [
 						{
-							"type": "StealthDuration",
+							"name": "StealthDuration",
 							"nameOverride": "spell_listtype_camouflageduration"
 						},
 						{
-							"type": "AttackSpeedMod",
+							"name": "AttackSpeedMod",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
@@ -75,7 +75,7 @@
 					"tooltip": "Twitch hurls a cask that adds a stack of <spellName>Deadly Venom</spellName> to all enemies struck and leaves behind a toxic cloud that persists for @Duration@ seconds.<br><br>Enemies that remain within the cloud are <status>Slowed</status> by @TotalSlowAmount@% and receive an additional stack of <spellName>Deadly Venom</spellName> each second.",
 					"extendedVariables": [
 						{
-							"type": "BaseSlowAmount",
+							"name": "BaseSlowAmount",
 							"nameOverride": "spell_listtype_movementspeedslow"
 						}
 					],
@@ -115,15 +115,15 @@
 					"tooltip": "Deals <physicalDamage>@BaseDamage@ physical damage</physicalDamage> to all nearby enemies affected by <spellName>Deadly Venom</spellName>, plus an additional <physicalDamage>@PhysicalDamagePerStack@ physical damage</physicalDamage> and <magicDamage>@MagicDamagePerStack@ magical damage</magicDamage> per stack of <spellName>Deadly Venom</spellName>.<br><br>Max Damage: <physicalDamage>@MaxPhysicalDamage@ physical damage</physicalDamage> and <magicDamage>@MaxMagicDamage@ magical damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "BasePhysicalDamagePerStack",
+							"name": "BasePhysicalDamagePerStack",
 							"nameOverride": "spell_listtype_damageperstack"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 60, 70, 80, 90, 100],
@@ -209,7 +209,7 @@
 					"tooltip": "Twitch unleashes his crossbow, gaining @BonusRange@ Attack Range and <scaleAD>@BonusAD@ Attack Damage</scaleAD>, and causing his Attacks to become piercing bolts for @Duration@ seconds. These bolts hit all enemies they pass through, but deal @FallOffDamage*100@% less damage to subsequent targets, down to a minimum of @MinimumFallOffDamage*100@% damage.",
 					"extendedVariables": [
 						{
-							"type": "BonusAD",
+							"name": "BonusAD",
 							"nameOverride": "spell_listtype_attackdamagebonus"
 						}
 					],

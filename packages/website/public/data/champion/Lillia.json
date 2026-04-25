@@ -38,15 +38,15 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Lillia's Ability hits grant <speed>@PranceSpeed@ Move Speed</speed> for @PranceDuration@ seconds, stacking up to @PranceMaxStacks@ times.<br><br><spellActive>Active:</spellActive> Lillia whirls her censer, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>, plus an additional <trueDamage>@BonusTrueDamage@ true damage</trueDamage> at the outer edge.",
 					"extendedVariables": [
 						{
-							"type": "PranceBonusPerStack",
+							"name": "PranceBonusPerStack",
 							"nameOverride": "spell_listtype_movementspeed"
 						},
 						{
-							"type": "FlatDamageBase",
+							"name": "FlatDamageBase",
 							"nameOverride": "spell_lilliaq_basemagicdamage"
 						},
 						{
-							"type": "FlatDamageTrue",
+							"name": "FlatDamageTrue",
 							"nameOverride": "spell_lilliaq_basetruedamage"
 						}
 					],
@@ -120,7 +120,7 @@
 					"tooltip": "Lillia winds up a huge strike, dealing <magicDamage>@FlatDamage@ magic damage</magicDamage>. Enemies in the center take <magicDamage>@FlatDamageSweetSpot@ damage</magicDamage> instead.",
 					"extendedVariables": [
 						{
-							"type": "FlatDamageBase",
+							"name": "FlatDamageBase",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -185,7 +185,7 @@
 					"tooltip": "Lillia lobs a swirlseed overhead, dealing <magicDamage>@ImpactDamageTotal@ magic damage</magicDamage> where it lands and revealing and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If no enemies are hit, the seed rolls until it hits an enemy or collides with terrain.",
 					"extendedVariables": [
 						{
-							"type": "ImpactDamage",
+							"name": "ImpactDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -232,7 +232,7 @@
 					"tooltipExtended": "Lillia causes all enemy champions with <keywordMajor>Dream Dust</keywordMajor> to become <status>Drowsy</status> for @DrowsyDuration@ seconds. Afterward, they fall <status>Asleep</status> for <activeRank>@SleepDuration@ seconds</activeRank>.<br><br>When awakened by damage, they take an additional <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BreakDamageBase",
+							"name": "BreakDamageBase",
 							"nameOverride": "spell_lilliar_breakdamage_level"
 						}
 					],

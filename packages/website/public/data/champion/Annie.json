@@ -38,11 +38,11 @@
 					"tooltip": "Annie hurls a fireball, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>. If the target dies, Annie refunds the Mana cost and reduces the Cooldown by 50%.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -79,11 +79,11 @@
 					"tooltip": "Annie projects a wave of fire, dealing <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 75, 80, 85, 90, 95],
@@ -120,15 +120,15 @@
 					"tooltip": "Annie grants an ally champion <shield>@ShieldBlockTotal@ Shield</shield> for @ShieldDuration@ seconds and <speed>@MoveSpeedCalc@ Decaying Move Speed</speed> for @MovementSpeedDuration@ seconds. While the shield holds, enemies who hit the shielded ally with an Attack or Ability receive <magicDamage>@DamageReturn@ magic damage</magicDamage> once per shield.<br><br>Tibbers always gains the effects of <spellName>Molten Shield</spellName> when summoned.",
 					"extendedVariables": [
 						{
-							"type": "ShieldAmount",
+							"name": "ShieldAmount",
 							"nameOverride": "spell_listtype_shieldhealth"
 						},
 						{
-							"type": "DamageReflection",
+							"name": "DamageReflection",
 							"nameOverride": "spell_anniee_levelup_damagereflection"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [60, 65, 70, 75, 80, 85],
@@ -192,23 +192,23 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Annie gains @RPercentPenBuff*100@% Magic Penetration.<br><br>Annie summons her bear Tibbers, dealing <magicDamage>@InitialBurstDamage@ magic damage</magicDamage>. For the next @TibbersLifetime@ seconds, Tibbers burns nearby enemies for <magicDamage>@TibbersAuraDamage@ magic damage per second</magicDamage>.<br><br>Tibbers becomes enraged when summoned, if Annie stuns an enemy champion, and if Annie dies. When enraged, Tibbers gains <attackSpeed>275% Attack Speed</attackSpeed> and <speed>100% Move Speed</speed> decaying over 3 seconds.<br><br><recast>Recast:</recast> Manually issue orders to Tibbers.",
 					"extendedVariables": [
 						{
-							"type": "InitialDamage",
+							"name": "InitialDamage",
 							"nameOverride": "spell_annier_levelup_initialdamage"
 						},
 						{
-							"type": "AuraDamage",
+							"name": "AuraDamage",
 							"nameOverride": "spell_annier_levelup_auradamage"
 						},
 						{
-							"type": "TibbersAttackDamage",
+							"name": "TibbersAttackDamage",
 							"nameOverride": "spell_listtype_attackdamagebonus"
 						},
 						{
-							"type": "TibbersBonusMS",
+							"name": "TibbersBonusMS",
 							"nameOverride": "spell_annier_bonusms"
 						},
 						{
-							"type": "RPercentPenBuff",
+							"name": "RPercentPenBuff",
 							"nameOverride": "spell_annier_percpen"
 						}
 					],

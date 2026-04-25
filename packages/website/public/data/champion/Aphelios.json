@@ -987,19 +987,19 @@
 					"tooltip": "Aphelios fires a concentrated blast of moonlight that explodes when it hits a champion, dealing <physicalDamage>@MaxDamage@ physical damage</physicalDamage> to surrounding enemies.<br><br>Then, Aphelios attacks all champions hit with his main-hand weapon. {{ Spell_ApheliosR_WeaponMod_@f1@ }}",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "CalibrumRMarkBonusDamage",
+							"name": "CalibrumRMarkBonusDamage",
 							"nameOverride": "spell_apheliosr_calibrum_rankup"
 						},
 						{
-							"type": "SeverumRHealBonus",
+							"name": "SeverumRHealBonus",
 							"nameOverride": "spell_apheliosr_severum_rankup"
 						},
 						{
-							"type": "InfernumRBonusDamageBase",
+							"name": "InfernumRBonusDamageBase",
 							"nameOverride": "spell_apheliosr_infernum_rankup"
 						}
 					],

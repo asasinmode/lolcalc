@@ -38,7 +38,7 @@
 					"tooltip": "Cho'Gath ruptures the ground, <status>Knocking Up</status> enemies for @Effect5Amount@ second, dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>, and <status>Slowing</status> them by @Effect2Amount@% for @Effect3Amount@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -83,15 +83,15 @@
 					"tooltip": "Cho'Gath roars, <status>Silencing</status> enemies for @Effect2Amount@ seconds and dealing <magicDamage>@TotalDamageTooltip@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect1Amount",
+							"name": "Effect1Amount",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_silenceduration"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [70, 75, 80, 85, 90, 95],
@@ -129,19 +129,19 @@
 					"tooltip": "Cho'Gath's next 3 Attacks launch spikes that deal <magicDamage>@FlatDamageCalc@ plus @MaxHealthPercentCalc@ of the target's max Health magic damage</magicDamage> and <status>Slow</status> by @SlowAmountPercentage@%, decaying over @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "PercentHealthDamage",
+							"name": "PercentHealthDamage",
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						},
 						{
-							"type": "ModifiedMonsterCap",
+							"name": "ModifiedMonsterCap",
 							"nameOverride": "spell_listtype_monsterdamage"
 						},
 						{
-							"type": "SlowAmountPercentage",
+							"name": "SlowAmountPercentage",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -207,15 +207,15 @@
 					"tooltip": "Cho'Gath ravenously feeds on an enemy, dealing <trueDamage>@RDamage@ true damage</trueDamage> to champions or <trueDamage>@RMonsterDamage@</trueDamage> to minions or jungle monsters. If this kills the target, Cho'Gath gains a stack, which causes him to grow in size and gain <healing>@RHealthPerStack@ max Health</healing>. Only @RMinionMaxStacks@ stacks can be gained from minions and non-epic jungle monsters. ",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_championdamage"
 						},
 						{
-							"type": "RHealthPerStack",
+							"name": "RHealthPerStack",
 							"nameOverride": "spell_listtype_chogathrhealthperstack"
 						},
 						{
-							"type": "AttackRangePerStack",
+							"name": "AttackRangePerStack",
 							"nameOverride": "spell_listtype_chogathrrangeperstack"
 						}
 					],

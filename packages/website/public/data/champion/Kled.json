@@ -39,15 +39,15 @@
 					"tooltipExtended": "{{spell_KledQ_Tooltip}}<br><br><keywordMajor>Dismounted:</keywordMajor> Kled fires a shotgun, dealing <physicalDamage>@DismountedQDamage@ physical damage</physicalDamage> and blasting Kled backward. Pellets beyond the first deal reduced damage.<br><br>Each pellet that hits an enemy champion or epic monster restores <keywordMajor>Courage</keywordMajor>.",
 					"extendedVariables": [
 						{
-							"type": "FirstHitBaseDamage",
+							"name": "FirstHitBaseDamage",
 							"nameOverride": "spell_listtype_kledqthrowdamage"
 						},
 						{
-							"type": "FirstHitBaseDamage",
+							"name": "FirstHitBaseDamage",
 							"nameOverride": "spell_listtype_kledqripdamage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -116,11 +116,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Kled's next Attack grants <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed> for four Attacks or @ActiveDuration@ seconds.<br><br>The fourth hit deals an additional <physicalDamage>@BaseFlatDamage@ plus @PercentDamage@ max Health physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseFlatDamage",
+							"name": "BaseFlatDamage",
 							"nameOverride": "spell_listtype_flatdamage"
 						},
 						{
-							"type": "4HitMaxHealthDamage",
+							"name": "4HitMaxHealthDamage",
 							"nameOverride": "spell_listtype_percentagedamage"
 						}
 					],
@@ -176,7 +176,7 @@
 					"tooltip": "Kled dashes, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> to enemies he passes through, pulling minions and small monsters towards him.<br><br>If this Ability hits an enemy champion or large jungle monster, Kled gains <speed>@MoveSpeed*100@% Move Speed</speed> for @MoveSpeedDuration@ second(s) and can <recast>Recast</recast> within @RecastWindow@ seconds to dash back through the same target.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],
@@ -220,15 +220,15 @@
 					"tooltip": "Kled charges toward an area, leaving a trail that grants allies increasing <speed>Move Speed</speed>. While charging and for 2 seconds after Kled gains up to <shield>@MaximumShield@ Shield</shield>. Skaarl rams the first enemy champion encountered, dealing <magicDamage>@MinimumDamageTooltip@</magicDamage> to <magicDamage>@MaximumChargeDamage@ max Health magic damage</magicDamage> (based on distance travelled) and briefly <status>Knocking Back</status>.",
 					"extendedVariables": [
 						{
-							"type": "PercentHPBase",
+							"name": "PercentHPBase",
 							"nameOverride": "spell_listtype_maximumdamage"
 						},
 						{
-							"type": "ShieldCapBase",
+							"name": "ShieldCapBase",
 							"nameOverride": "spell_listtype_maximumshield"
 						},
 						{
-							"type": "TOOLTIPRange",
+							"name": "TOOLTIPRange",
 							"nameOverride": "spell_listtype_range"
 						}
 					],

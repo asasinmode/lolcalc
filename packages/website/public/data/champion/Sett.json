@@ -38,11 +38,11 @@
 					"tooltip": "Sett itches for a fight, gaining <speed>@MSAmount*100@% Move Speed</speed> towards enemy champions for @MSDuration@ seconds.<br><br>Additionally Sett's next two Attacks deal an additional <physicalDamage>@BaseDamage@ plus @MaxHealthDamageCalc@ max Health physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_settq_damage"
 						},
 						{
-							"type": "MaxHealthTADRatioTOOLTIP",
+							"name": "MaxHealthTADRatioTOOLTIP",
 							"nameOverride": "spell_listtype_percenthpper100ad"
 						}
 					],
@@ -110,7 +110,7 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Sett stores @DamageStored*100@% of damage taken as <keywordMajor>Grit</keywordMajor>, up to <keywordMajor>@MaxGrit@</keywordMajor>. <keywordMajor>Grit</keywordMajor> decays quickly @AdrenalineStorageWindow@ seconds after the damage was taken.<br><br><spellActive>Active:</spellActive> Sett consumes all <keywordMajor>Grit</keywordMajor>, gaining a <shield>@ShieldConversion*100@% Grit consumed Shield</shield> decaying over @ShieldMaxDuration@ seconds. Sett then delivers a massive punch, dealing <trueDamage>@DamageCalc@ plus @DamageConversion@ Grit consumed true damage</trueDamage> to enemies in the center (max <trueDamage>@f1@ damage</trueDamage>). Enemies not in the center instead take <physicalDamage>physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_settw_damage"
 						}
 					],
@@ -200,7 +200,7 @@
 					"tooltip": "Sett smashes enemies on either side of him into each other, dealing <physicalDamage>@DamageCalc@ physical damage</physicalDamage> and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ seconds. If Sett grabbed at least one enemy on each side, all enemies are <status>Stunned</status> for @StunDuration@ second.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_sette_basedamagelevelup"
 						}
 					],
@@ -264,11 +264,11 @@
 					"tooltip": "Sett grabs an enemy champion and <status>Suppresses</status> them as he carries them forward, then slams them into the ground, dealing <physicalDamage>@DamageCalc@ plus @MaxHealthDamage*100@% of the grabbed enemy's bonus Health physical damage</physicalDamage> to surrounding enemies and <status>Slowing</status> them by @SlowAmount*100@% for @SlowDuration@ second. Enemies take less damage the further they are from where Sett lands.",
 					"extendedVariables": [
 						{
-							"type": "MaxHealthDamage",
+							"name": "MaxHealthDamage",
 							"nameOverride": "spell_settr_maxhealthdamage"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_settr_basedamage"
 						}
 					],

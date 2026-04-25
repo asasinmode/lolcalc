@@ -38,14 +38,14 @@
 					"tooltip": "Malphite launches a shard of earth at an enemy, dealing <magicDamage>@QDamageCalc@ magic damage</magicDamage> and <status>Slowing</status> them by @Effect2Amount@% for @SlowDuration@ seconds. Malphite also steals the amount <status>Slowed</status>, gaining it as <speed>Move Speed</speed> for @SlowDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Cost"
+							"name": "Cost"
 						},
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_slow"
 						}
 					],
@@ -90,19 +90,19 @@
 					"tooltip": "<spellPassive>Passive: </spellPassive>Malphite gains <scaleArmor>@BonusArmorPassive*100@% Armor (%i:scaleArmor%@f1@)</scaleArmor>. This effect is increased to <scaleArmor>@BonusArmorPassive*300@% (%i:scaleArmor%@f2@)</scaleArmor> while <spellName>Granite Shield</spellName> is active.<br><br><spellPassive>Active: </spellPassive>Malphite's next Attack deals an additional <physicalDamage>@TotalBonusDamage@ physical damage</physicalDamage> and creates an aftershock which deals <physicalDamage>@ThunderclapSplash@ physical damage</physicalDamage> in their direction. His Attacks continue to create aftershocks for the next @ThunderclapBuffDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "Cost",
+							"name": "Cost",
 							"nameOverride": "spell_listtype_cost"
 						},
 						{
-							"type": "BonusArmorPassive",
+							"name": "BonusArmorPassive",
 							"nameOverride": "spell_listtype_armor"
 						},
 						{
-							"type": "ThunderclapBaseDamage",
+							"name": "ThunderclapBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ThunderclapSplashDamage",
+							"name": "ThunderclapSplashDamage",
 							"nameOverride": "spell_obduracy_splash_damage"
 						}
 					],
@@ -195,15 +195,15 @@
 					"tooltip": "Malphite slams the ground, dealing <magicDamage>@EDamageCalc@ magic damage</magicDamage> and reducing <attackSpeed>Attack Speed by @ASReduction@%</attackSpeed> for @Duration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ASReduction",
+							"name": "ASReduction",
 							"nameOverride": "spell_listtype_attackspeedreduction"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 55, 60, 65, 70, 75],
@@ -246,7 +246,7 @@
 					"tooltip": "Malphite charges with the force of a landslide, dashing Unstoppably. At the end of the dash, Malphite <status>Knocks Up</status> for @KnockupDuration@ seconds and deals <magicDamage>@TotalDamage@ magic damage</magicDamage>.",
 					"extendedVariables": [
 						{
-							"type": "Effect2Amount",
+							"name": "Effect2Amount",
 							"nameOverride": "spell_listtype_damage"
 						}
 					],

@@ -38,11 +38,11 @@
 					"tooltip": "Garen removes all <status>Slowing</status> effects on him and gains <speed>@MovementSpeedAmount*100@% Move Speed</speed> for @MovementSpeedDuration@ second(s).<br><br>His next Attack <status>Silences</status> for @SilenceDuration@ seconds and does <physicalDamage>@TotalDamage@ physical damage</physicalDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "MovementSpeedDuration",
+							"name": "MovementSpeedDuration",
 							"nameOverride": "spell_listtype_movementspeedduration"
 						}
 					],
@@ -84,11 +84,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Garen has <scaleArmor>@ResistsForTooltip@ bonus Armor</scaleArmor> and <scaleMR>@ResistsForTooltip@ bonus Magic Resist</scaleMR>. Killing units permanently grants <attention>@ResistGainOnKillTooltip@ resists</attention>, up to a max of <attention>@ResistMax@</attention>.<br><br><spellActive>Active:</spellActive> Garen steels his courage for @DRDuration@ seconds, reducing incoming damage by @DRPercent*100@%. He also gains <shield>@TotalShield@ Shield</shield> and <slow>@UpfrontTenacity*100@% Tenacity</slow> for @UpfrontDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "BaseShield",
+							"name": "BaseShield",
 							"nameOverride": "spell_listtype_shield"
 						},
 						{
-							"type": "DRPercent",
+							"name": "DRPercent",
 							"nameOverride": "spell_listtype_damagereduction"
 						}
 					],
@@ -147,11 +147,11 @@
 					"tooltip": "Garen rapidly spins his sword for @Duration@ seconds, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> @f1@ times over the duration. The nearest enemy takes <physicalDamage>@NearestEnemyBonus*100@% increased damage</physicalDamage>. Champions hit by @StacksToShred@ strikes lose <scaleArmor>@ShredAmount*100@% Armor</scaleArmor> for @ShredDuration@ seconds.<br><br><recast>Recast</recast>: Garen ends this Ability early.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamagePerTick",
+							"name": "BaseDamagePerTick",
 							"nameOverride": "spell_garene_basedamageperspin"
 						},
 						{
-							"type": "ADRatioPerTick",
+							"name": "ADRatioPerTick",
 							"nameOverride": "spell_garene_adratioperspin"
 						}
 					],
@@ -231,11 +231,11 @@
 					"tooltip": "Garen calls upon the might of Demacia to slay his enemy, dealing <trueDamage>@BaseDamage@ plus @ExecuteDamage*100@% missing Health true damage</trueDamage>.",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "ExecuteDamage",
+							"name": "ExecuteDamage",
 							"nameOverride": "spell_listtype_percentmissinghealthdamage"
 						}
 					],

@@ -39,19 +39,19 @@
 					"tooltipExtended": "{{spell_GnarQ_Tooltip}}<br><br>{{spell_GnarBigQ_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "MiniBaseDamage",
+							"name": "MiniBaseDamage",
 							"nameOverride": "spell_listtype_gnarqboomerangdamage"
 						},
 						{
-							"type": "MegaBaseDamage",
+							"name": "MegaBaseDamage",
 							"nameOverride": "spell_listtype_gnarqboulderdamage"
 						},
 						{
-							"type": "SlowAmount",
+							"name": "SlowAmount",
 							"nameOverride": "spell_listtype_slow"
 						},
 						{
-							"type": "MegaSlowAmount",
+							"name": "MegaSlowAmount",
 							"nameOverride": "spell_gnarq_megaq_slowlevelup"
 						}
 					],
@@ -120,15 +120,15 @@
 					"tooltipExtended": "{{spell_GnarW_Tooltip}}<br><br>{{spell_GnarBigW_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "MiniBaseDamage",
+							"name": "MiniBaseDamage",
 							"nameOverride": "spell_listtype_gnarwhyperdamage"
 						},
 						{
-							"type": "MiniPercentHPDamage",
+							"name": "MiniPercentHPDamage",
 							"nameOverride": "spell_listtype_gnarwhyperpercentdamage"
 						},
 						{
-							"type": "MegaBaseDamage",
+							"name": "MegaBaseDamage",
 							"nameOverride": "spell_listtype_gnarwallopdamage"
 						}
 					],
@@ -187,15 +187,15 @@
 					"tooltipExtended": "{{spell_GnarE_Tooltip}}<br><br>{{spell_GnarBigE_Tooltip}}",
 					"extendedVariables": [
 						{
-							"type": "MiniDamage",
+							"name": "MiniDamage",
 							"nameOverride": "spell_gnare_minidamage"
 						},
 						{
-							"type": "MegaDamage",
+							"name": "MegaDamage",
 							"nameOverride": "spell_gnare_megadamage"
 						},
 						{
-							"type": "MinibAS",
+							"name": "MinibAS",
 							"nameOverride": "spell_listtype_statbonusattackspeed"
 						}
 					],
@@ -256,15 +256,15 @@
 					"tooltip": "<keywordMajor>Mini Gnar Passive:</keywordMajor> Increase <spellName>Hyper's</spellName> <speed>Move Speed</speed>.<br><br><keywordMajor>Mega Gnar:</keywordMajor> Gnar tosses nearby enemies, dealing <physicalDamage>@Damage@ physical damage</physicalDamage>, <status>Knocking Back</status>, and <status>Slowing</status> them by @RSlowPercent@% for @RCCDuration@ seconds. Enemies that hit a wall instead take <physicalDamage>@WallDamage@ physical damage</physicalDamage> and are <status>Stunned</status>.",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_damage"
 						},
 						{
-							"type": "RCCDuration",
+							"name": "RCCDuration",
 							"nameOverride": "spell_listtype_gnarrslowstunduration"
 						},
 						{
-							"type": "RHyperMovementSpeedPercent",
+							"name": "RHyperMovementSpeedPercent",
 							"nameOverride": "spell_listtype_gnarrhypemovementspeed"
 						}
 					],

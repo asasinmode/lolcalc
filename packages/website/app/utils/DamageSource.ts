@@ -1222,19 +1222,17 @@ export function computeAbilityDescription(
 	let extendedVariables: IComputedAbilityDescription['extendedVariables'] | undefined = variant.extendedVariables?.map((variable) => {
 		let isNameUnknown = false;
 		let name;
-
 		if (variable.nameOverride) {
 			name = champion.stringtable[variable.nameOverride];
 			if (!name) {
 				isNameUnknown = true;
 			}
 		}
-
-		name ||= variable.type;
+		name ||= variable.name;
 
 		return {
 			name,
-			values: (tooltipVariablesAV.get(variable.type) || tooltipExtendedVariablesAV.get(variable.type))?.slice(1, lastExtendedVariableIndex),
+			values: (tooltipVariablesAV.get(variable.name) || tooltipExtendedVariablesAV.get(variable.name))?.slice(1, lastExtendedVariableIndex),
 			isNameUnknown,
 		};
 	});

@@ -38,15 +38,15 @@
 					"tooltip": "<charge>Begin Charging:</charge> Vi begins charging a powerful punch, <status>Slowing</status> herself by @Effect4Amount@%.<br><br><release>Release:</release> Vi dashes forward dealing between <physicalDamage>@TotalDamage@ and @MaxDamageTooltip@ physical damage</physicalDamage> based on charge time and applying <spellName>Denting Blows</spellName> to all enemies hit. Vi stops upon colliding with an enemy champion, and <status>Knocks</status> them <status>Back</status>.",
 					"extendedVariables": [
 						{
-							"type": "MinDamage",
+							"name": "MinDamage",
 							"nameOverride": "spell_listtype_minimumdamage"
 						},
 						{
-							"type": "MinDamage",
+							"name": "MinDamage",
 							"nameOverride": "spell_listtype_maximumdamage"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [50, 60, 70, 80, 90, 80],
@@ -104,11 +104,11 @@
 					"tooltip": "<spellPassive>Passive:</spellPassive> Every 3rd Attack on the same target deals an additional <physicalDamage>@TotalDamageTooltip@ max Health physical damage</physicalDamage>, removes <scaleArmor>@ShredAmount@% Armor</scaleArmor> and grants Vi <attackSpeed>@AttackSpeed@% Attack Speed</attackSpeed> for @SharedBuffsDuration@ seconds. It also reduces the remaining Cooldown of <spellName>Blast Shield</spellName> by @spell.ViPassive:CDReductionOn3Hit@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "MaxHealthDamage",
+							"name": "MaxHealthDamage",
 							"nameOverride": "spell_listtype_maxhealthdamage"
 						},
 						{
-							"type": "AttackSpeed",
+							"name": "AttackSpeed",
 							"nameOverride": "spell_listtype_attackspeed"
 						}
 					],
@@ -157,15 +157,15 @@
 					"tooltip": "Vi's next Attack deals <physicalDamage>@TotalDamageTooltip@ physical damage</physicalDamage> to the target and enemies behind them.<br><br>This Ability has 2 charges (@AmmoRechargeTime@ second refresh).",
 					"extendedVariables": [
 						{
-							"type": "BaseDamage",
+							"name": "BaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						},
 						{
-							"type": "AmmoRechargeTime",
+							"name": "AmmoRechargeTime",
 							"nameOverride": "spell_vie_chargetime"
 						},
 						{
-							"type": "Cost"
+							"name": "Cost"
 						}
 					],
 					"mana": [26, 32, 38, 44, 50, 50],
@@ -226,7 +226,7 @@
 					"tooltip": "Vi singles out an enemy champion, revealing them and dashing unstoppably towards them. Upon reaching them, Vi <status>Knocks</status> them <status>Up</status> for @RStunDuration@ seconds and deals <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Any other enemies Vi collides with are dealt damage, knocked aside, and <status>Stunned</status> for @SecondaryTargetStunDuration@ seconds.",
 					"extendedVariables": [
 						{
-							"type": "RBaseDamage",
+							"name": "RBaseDamage",
 							"nameOverride": "spell_listtype_basedamage"
 						}
 					],
