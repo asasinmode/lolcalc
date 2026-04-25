@@ -1410,7 +1410,6 @@ function championAbilityData(
 	const abilityDataKey = abilityInfo[1] === 4 ? mCharacterPassiveSpell : spells[abilityInfo[1]];
 
 	const variantKeys = [abilityDataKey];
-
 	if (abilityInfo[1] !== 4 && characterToolData?.alternateForms?.length) {
 		const championDataEntries = Object.entries(championData);
 		for (const form of characterToolData.alternateForms) {
@@ -1546,29 +1545,52 @@ function championAbilityVariants(
 	championId: IChampionId,
 	championData: any,
 	[abilityKey]: [IChampionAbilityKey, number],
-	variantKeys: string[],
+	variantDataKeys: string[],
 ): [maxLevel: number | undefined, IChampionAbility['variants']] {
 	let maxLevel: number | undefined;
 	const variants: IChampionAbility['variants'] = [];
-	const otherAbilityTooltipVariantObjectNames: string[] = [];
+	const otherAbilityTooltipVariantDataKeys: string[] = [];
 
-	for (let i = 0; i < variantKeys.length; i++) {
+	for (let i = 0; i < variantDataKeys.length; i++) {
 		const [variant, variantMaxLevel] = championAbilityVariant(
 			championId,
 			abilityKey,
 			championData,
 			i,
-			variantKeys[i]!,
+			variantDataKeys[i]!,
 			variants,
-			otherAbilityTooltipVariantObjectNames,
+			otherAbilityTooltipVariantDataKeys,
 		);
 		variant && variants.push(variant);
 		maxLevel ??= variantMaxLevel;
 	}
 
-	const unresolvedUsedVariantObjectNames = otherAbilityTooltipVariantObjectNames.filter(objectName => !variants.some(v => v.objectName === objectName || v.objectName.toLowerCase() === objectName.toLowerCase()));
+	const unresolvedUsedVariantObjectNames = otherAbilityTooltipVariantDataKeys.filter(objectName => !variants.some(v => v.objectName === objectName || v.objectName.toLowerCase() === objectName.toLowerCase()));
 
-	// console.log({ championId, abilityName: abilityKey, unresolvedUsedVariantObjectNames });
+	/*
+	 * some ability tooltips use variables from ability variants that aren't extracted by `championAbilityData`
+	 *
+	 * i.e, while Elise's Spider Q has the `ObjectName` of `EliseSpiderQ`, in its tooltip it uses `Spell.EliseSpiderQCast:BaseDamage@`
+	 * `EliseSpiderQCast` is another Q variant that from what I can tell seems almost identical to the `EliseSpiderQ` except it has different variables
+	 *
+	 * so while going through the default expected variants (ones `championAbilityData` finds), any other variants detected through `mClientData.mUseTooltipFromAnotherSpell` are saved and resolved here
+	 * at the moment this seems to be only used for Elise (Aphelios also has `mUseTooltipFromAnotherSpell` already has dedicated treatment `adjustApheliosAbilityData`)
+	 */
+	let unresolvedVariantDataKey = unresolvedUsedVariantObjectNames.shift();
+	while (unresolvedVariantDataKey) {
+		const [variant] = championAbilityVariant(
+			championId,
+			abilityKey,
+			championData,
+			variants.length,
+			unresolvedVariantDataKey,
+			variants,
+			otherAbilityTooltipVariantDataKeys,
+			false,
+		);
+		variant && variants.push(variant);
+		unresolvedVariantDataKey = unresolvedUsedVariantObjectNames.shift();
+	}
 
 	return [maxLevel, variants];
 }
@@ -1580,7 +1602,9 @@ function championAbilityVariant(
 	variantIndex: number,
 	variantDataKey: string,
 	variants: IChampionAbilityVariant[],
-	otherAbilityTooltipVariantObjectNames: string[],
+	otherAbilityTooltipVariantDataKeys: string[],
+	/** expected to be `false` only for additional ability variants (`unresolvedUsedVariantObjectNames`) which variables are used in shown variants' tooltips */
+	saveTooltips = true,
 ): [IChampionAbilityVariant | undefined, maxLevel: number | undefined] {
 	let maxLevel: number | undefined;
 	const debugPrefix = `${championId} ${abilityKey}[${variantIndex}]`;
@@ -1601,21 +1625,22 @@ function championAbilityVariant(
 		if (!mClientData) {
 			throw new Error(`${debugPrefix} expected mClientData in variant "${variantDataKey}"`);
 		}
-		if (!mImgIconName) {
-			throw new Error(`${debugPrefix} expected mImgIconName in variant "${variantDataKey}"`);
-		}
 		if (!mClientData.mTooltipData) {
 			throw new Error(`${debugPrefix} expected mTooltipData in variant "${variantDataKey}"`);
+		}
+		if (!mImgIconName) {
+			throw new Error(`${debugPrefix} expected mImgIconName in variant "${variantDataKey}"`);
 		}
 
 		maxLevel = abilityKey === 'passive' ? 0 : mClientData.mTooltipData.mLists?.LevelUp?.levelCount;
 	}
 
 	let mLocKeys;
+	/* further utilized with `unresolvedVariantDataKey` in `championAbilityVariants` */
 	if (mClientData.mUseTooltipFromAnotherSpell) {
 		const tooltipSourceSpell = championData[mClientData.mUseTooltipFromAnotherSpell];
 		if (tooltipSourceSpell?.mSpell?.mClientData) {
-			otherAbilityTooltipVariantObjectNames.push(mClientData.mUseTooltipFromAnotherSpell);
+			otherAbilityTooltipVariantDataKeys.push(mClientData.mUseTooltipFromAnotherSpell);
 			({ mLocKeys } = tooltipSourceSpell.mSpell.mClientData.mTooltipData);
 		}
 	} else {
@@ -1638,20 +1663,22 @@ function championAbilityVariant(
 		tooltip: undefined,
 		tooltipExtended: undefined,
 		tooltipExtendedBelowLine: undefined,
-		extendedVariables: mClientData.mTooltipData?.mLists?.LevelUp?.Elements
-			?.filter((variable: any) => variable.type !== 'Cooldown')
-			.map((variable: any) => {
-				const { type, typeIndex } = variable;
-				if (!type) {
-					console.warn(`${debugPrefix} extended variable no type`, variable);
-				}
+		extendedVariables: saveTooltips
+			? mClientData.mTooltipData?.mLists?.LevelUp?.Elements
+					?.filter((variable: any) => variable.type !== 'Cooldown')
+					.map((variable: any) => {
+						const { type, typeIndex } = variable;
+						if (!type) {
+							console.warn(`${debugPrefix} extended variable no type`, variable);
+						}
 
-				// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
-				return {
-					type: type.replace('%d', typeIndex),
-					nameOverride: variable.nameOverride?.toLowerCase(),
-				};
-			}),
+						// TODO maybe save `.multiplier` not sure if needed since it extracts from calculated variables that should handle that?
+						return {
+							type: type.replace('%d', typeIndex),
+							nameOverride: variable.nameOverride?.toLowerCase(),
+						};
+					})
+			: undefined,
 		mana,
 		cooldownTime: cooldownTime && cooldownTime.map((v: number) => formatNumber(v)),
 		dataValues: DataValues?.length
@@ -1666,11 +1693,13 @@ function championAbilityVariant(
 
 	/* these are later set to proper stringtable values in `setChampionAbilityVariantsText` */
 	variant.name = mLocKeys.keyName;
-	variant.tooltip = mLocKeys.keyTooltip;
-	variant.tooltipExtended = mLocKeys.keyTooltipExtended;
-	// TODO should be done for all abilities
-	if (abilityKey === 'passive') {
-		variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
+	if (saveTooltips) {
+		variant.tooltip = mLocKeys.keyTooltip;
+		variant.tooltipExtended = mLocKeys.keyTooltipExtended;
+		// TODO should be done for all abilities
+		if (abilityKey === 'passive') {
+			variant.tooltipExtendedBelowLine = mLocKeys.keyTooltipExtendedBelowLine;
+		}
 	}
 
 	return [variant, maxLevel];
