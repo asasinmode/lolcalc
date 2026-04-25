@@ -695,11 +695,11 @@ const abilityHoverTooltipEl = useTemplateRef('championAbilityHoverTooltip');
 function showAbilityTooltip(
 	event: MouseEvent,
 	key: IChampionAbilityKey,
-	variantIndex: number = 0,
+	variantIndex?: number,
 	fromExtras = false,
 ) {
 	hoveredAbilityKey.value = key;
-	hoveredAbilityVariantIndex.value = variantIndex;
+	hoveredAbilityVariantIndex.value = variantIndex ?? props.value.abilityVariantsIndexes.value[key];
 	event.target?.addEventListener('mouseleave', hideAbilityTooltip, { passive: true, once: true });
 
 	if (fromExtras) {
