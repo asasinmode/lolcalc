@@ -23,11 +23,21 @@ const rAbilityId = GameAbilityId.build('champion', 'Aphelios', 'r', 0);
 
 const abilitySize = abilityImageSize('Aphelios');
 
+const { WEAPON_VARIANT_INDEX_TO_NAME, WEAPON_NAME_TO_STRINGTABLE_INDEX } = CHAMPION_SPECIFICS.Aphelios;
+
 const weaponNames = computed(() => {
+	if (!props.value.champion.value) {
+		return {};
+	}
+
+	const { q, w, e } = props.value.abilityVariantsIndexes.value;
+	const { stringtable } = props.value.champion.value as IAphelios;
+	const stringtableKeyPrefix = 'apheliosgun_name_';
+
 	return {
-		main: 'Calibrum',
-		offhand: 'Severum',
-		next: 'Gravitum',
+		main: stringtable[`${stringtableKeyPrefix}${WEAPON_NAME_TO_STRINGTABLE_INDEX[WEAPON_VARIANT_INDEX_TO_NAME[q]!]}` as keyof typeof stringtable],
+		offhand: stringtable[`${stringtableKeyPrefix}${WEAPON_NAME_TO_STRINGTABLE_INDEX[WEAPON_VARIANT_INDEX_TO_NAME[w]!]}` as keyof typeof stringtable],
+		next: stringtable[`${stringtableKeyPrefix}${WEAPON_NAME_TO_STRINGTABLE_INDEX[WEAPON_VARIANT_INDEX_TO_NAME[e]!]}` as keyof typeof stringtable],
 	};
 });
 
@@ -59,7 +69,7 @@ function switchMainOffhand() {
 	</div>
 	<ComingSoonCover feature="abilities" class="text-white end-0 start-[calc(var(--ability-size-passive)+0.25*var(--abilities-gap))] bottom-0 absolute -top-2" />
 	<div data-aphelios-q="" :data-level="value.level.value >= 2 ? 1 : undefined" :inert="!enableUnimplementedUi">
-		<h5>main weapon: {{ weaponNames.main }}</h5>
+		<h5 v-html="`main weapon: ${weaponNames.main}`" />
 		<img
 			:src="!isLoading && value.champion.value ? abilityImage((value.champion.value as unknown as IAphelios).abilities.e.variants[value.abilityVariantsIndexes.value.q]!.image, 'Aphelios') : undefined"
 			:width="abilitySize"
@@ -78,7 +88,7 @@ function switchMainOffhand() {
 	</div>
 	<div data-aphelios-w="" :inert="!enableUnimplementedUi">
 		<h5>W</h5>
-		<h5>offhand weapon: {{ weaponNames.offhand }}</h5>
+		<h5 v-html="`offhand weapon: ${weaponNames.offhand}`" />
 		<button
 			title="switch with main"
 			@click="switchMainOffhand"
@@ -92,7 +102,7 @@ function switchMainOffhand() {
 				aria-hidden="true"
 			>
 		</button>
-		<h5>next weapon: {{ weaponNames.next }}</h5>
+		<h5 v-html="`next weapon: ${weaponNames.next}`" />
 		<button
 			title="replace offhand"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.e))"
