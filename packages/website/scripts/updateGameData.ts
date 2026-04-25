@@ -1507,8 +1507,8 @@ function adjustApheliosAbilityData(
 				const weaponA = a.image.slice(a.image.lastIndexOf('/') + 1, -6);
 				const weaponB = b.image.slice(b.image.lastIndexOf('/') + 1, -6);
 
-				const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponA] ?? Infinity;
-				const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponB] ?? Infinity;
+				const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponA] ?? Infinity;
+				const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponB] ?? Infinity;
 
 				return indexA - indexB;
 			});
@@ -1534,8 +1534,8 @@ function adjustApheliosAbilityData(
 		const weaponA = a.image.slice(a.image.lastIndexOf('/') + 3, -4);
 		const weaponB = b.image.slice(b.image.lastIndexOf('/') + 3, -4);
 
-		const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponA] ?? Infinity;
-		const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP as Record<string, number>)[weaponB] ?? Infinity;
+		const indexA = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponA] ?? Infinity;
+		const indexB = (CHAMPION_SPECIFICS.Aphelios.WEAPON_NAME_TO_VARIANT_INDEX as Record<string, number>)[weaponB] ?? Infinity;
 
 		return indexA - indexB;
 	});

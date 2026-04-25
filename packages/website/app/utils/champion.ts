@@ -33,9 +33,10 @@ export const CHAMPION_SPECIFICS = {
 		},
 	},
 	Aphelios: {
-		WEAPON_ORDER_MAP: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>,
-		/* stringtable variants are different from order actual weapon order - `apheliosgun_name_1` is for calibrum and so on */
-		WEAPON_VARIANT_MAP: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
+		WEAPON_NAME_TO_VARIANT_INDEX: { calibrum: 0, severum: 1, gravitum: 2, infernum: 3, crescendum: 4 } satisfies Record<IApheliosWeapon, number>,
+		WEAPON_VARIANT_INDEX_TO_NAME: ['calibrum', 'severum', 'gravitum', 'infernum', 'crescendum'] satisfies IApheliosWeapon[],
+		/** stringtable indexes are different from the actual weapon order - `apheliosgun_name_1` is for calibrum and so */
+		WEAPON_NAME_TO_STRINGTABLE_INDEX: { calibrum: 1, severum: 2, infernum: 3, crescendum: 4, gravitum: 5 } satisfies Record<IApheliosWeapon, number>,
 		POSSIBLE_DYNAMIC_VALUES: {
 			/* f2-f5 variants are covered by f1, they seem to be intended for different guns but resolve to the same values */
 			f1: [1, 2, 3, 4, 5],
@@ -46,16 +47,26 @@ export const CHAMPION_SPECIFICS = {
 			/* array of 12, 13, ..., 21, 23, ..., 53, 53 - no 2 repeated numbers like 11, 22 */
 			f7: Array.from({ length: 5 }, (_, i) => i + 1).flatMap(i => Array.from({ length: 5 }, (_, j) => i === (j + 1) ? undefined : `${i}${j + 1}`).filter(Boolean)) as string[],
 		},
-		setupData(self): IDamageSourceInternalDataBase & {
-			mainHand: IApheliosWeapon;
-			offHand: IApheliosWeapon;
-		} {
-			self.abilityVariantsIndexes.value.w = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.severum;
-			self.abilityVariantsIndexes.value.e = CHAMPION_SPECIFICS.Aphelios.WEAPON_ORDER_MAP.gravitum;
+		setupData(self): IDamageSourceInternalDataBase & {} {
+			const abilityVariantsIndexes = self.abilityVariantsIndexes.value;
+			const { WEAPON_NAME_TO_VARIANT_INDEX, WEAPON_VARIANT_INDEX_TO_NAME } = CHAMPION_SPECIFICS.Aphelios;
+
+			abilityVariantsIndexes.q ??= WEAPON_NAME_TO_VARIANT_INDEX.calibrum;
+
+			abilityVariantsIndexes.w ??= WEAPON_NAME_TO_VARIANT_INDEX.severum;
+			if (abilityVariantsIndexes.w === abilityVariantsIndexes.q) {
+				abilityVariantsIndexes.w = (abilityVariantsIndexes.q + 1) % WEAPON_VARIANT_INDEX_TO_NAME.length;
+			}
+
+			abilityVariantsIndexes.e ??= WEAPON_NAME_TO_VARIANT_INDEX.gravitum;
+			while (
+				abilityVariantsIndexes.e === abilityVariantsIndexes.q
+				|| abilityVariantsIndexes.e === abilityVariantsIndexes.w
+			) {
+				abilityVariantsIndexes.e = (abilityVariantsIndexes.e + 1) % WEAPON_VARIANT_INDEX_TO_NAME.length;
+			}
 
 			return {
-				mainHand: 'calibrum',
-				offHand: 'severum',
 				_watchHandles: markRaw([watch(() => `${self.champion.value?.id}${self.level.value}`, () => {
 					self.abilityLevels.value.r = Math.floor((self.level.value - 1) / 5);
 				}, { immediate: true })]),

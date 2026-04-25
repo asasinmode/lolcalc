@@ -94,7 +94,10 @@ export class DamageSource<Id extends IChampionId | undefined = any> {
 	abilityVariantsIndexes: Ref<Record<IChampionAbilityKey, number>>;
 	maxAbilityVariantsIndexes = computed(() => Object.fromEntries(Object.keys(this.abilityVariantsIndexes.value).map(key => [
 		key as IChampionAbilityKey,
-		(this.champion.value?.abilities[key as IChampionAbilityKey].variants.length ?? 1) - 1,
+		/* Aphelios' `W` index is used for the offhand weapon tooltip which itself is based on his `E` ability */
+		this.champion.value?.id === 'Aphelios' && key as IChampionAbilityKey === 'w'
+			? (this.champion.value?.abilities.e.variants.length ?? 1) - 1
+			: (this.champion.value?.abilities[key as IChampionAbilityKey].variants.length ?? 1) - 1,
 	])) as Record<IChampionAbilityKey, number>);
 
 	dragonStacks: Ref<(IDragonName | undefined)[]>;

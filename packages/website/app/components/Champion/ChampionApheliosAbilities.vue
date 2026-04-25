@@ -1,10 +1,11 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <script setup lang="ts">
 import type Aphelios from '../../../public/data/champion/Aphelios.json';
 import type { IExtraComponentEmits } from '~/utils/types';
 
 type IAphelios = typeof Aphelios;
 
-defineProps<{
+const props = defineProps<{
 	value: DamageSource<'Aphelios'>;
 	isLoading: boolean;
 	idPrefix: string;
@@ -29,6 +30,12 @@ const weaponNames = computed(() => {
 		next: 'Gravitum',
 	};
 });
+
+function switchMainOffhand() {
+	props.value.abilityVariantsIndexes.value.q += props.value.abilityVariantsIndexes.value.w;
+	props.value.abilityVariantsIndexes.value.w = props.value.abilityVariantsIndexes.value.q - props.value.abilityVariantsIndexes.value.w;
+	props.value.abilityVariantsIndexes.value.q -= props.value.abilityVariantsIndexes.value.w;
+}
 </script>
 
 <template>
@@ -74,6 +81,7 @@ const weaponNames = computed(() => {
 		<h5>offhand weapon: {{ weaponNames.offhand }}</h5>
 		<button
 			title="switch with main"
+			@click="switchMainOffhand"
 			@mouseenter="value.champion.value && $emit('abilityHover', $event, GameAbilityId.build('champion', 'Aphelios', 'e', value.abilityVariantsIndexes.value.w))"
 		>
 			<span>switch with main</span>
